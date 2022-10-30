@@ -9,15 +9,15 @@
 	%%
 */
 
+// defaults
 if (!isset($options['title']))		$options['title']	= null;
 if (!isset($options['open']))		$options['open']	= 0;
+
+$options['tpl'] = true;
 
 $title	= $options['title'] ?? $this->_t('ShowHideDetails');
 $open	= $options['open'] ? ' open' : '';
 
-echo	'<ignore><details' . $open . '>' . "\n";
-echo	($title
-			? '<summary>' . Ut::html($title) . '</summary>' . "\n"
-			: '');
-include Ut::join_path(FORMATTER_DIR, 'wiki.php');
-echo	'</details></ignore>' . "\n";
+$tpl->open		= $open;
+$tpl->s_title	= $title;
+$tpl->include	= include Ut::join_path(FORMATTER_DIR, 'wiki.php');

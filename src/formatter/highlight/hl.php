@@ -6,7 +6,7 @@ if ($options['_default'])
 {
 	$language	= $options['_default'];
 	$numbers	= false;
-	$start		= (int)($options['start'] ?? 1);
+	$start		= (int) ($options['start'] ?? 1);
 
 	if (!empty($options['numbers']))
 	{
@@ -25,25 +25,27 @@ if ($options['_default'])
 		}
 	}
 
-	$table = $numbers == HL_NUMBERS_TABLE;
+	$table = ($numbers == HL_NUMBERS_TABLE);
 
 	$hl =& Text_Highlighter::factory(strtoupper($language), ['numbers' => $numbers, 'numbers_start' => $start]);
 
 	if (!is_object($hl))
 	{
 		$error = '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>Highlighter/' . $hl . '</code>') . '</em>';
-		echo $this->show_message($error, 'error', false);
+		$tpl->error = $this->show_message($error, 'error', false);
 	}
 	else
 	{
-		echo '<ignore><!--notypo-->';
-		echo $table ? '<div class="hl-numbers-table">' : '';
-		echo $hl->highlight($text);
-		echo $table ? '</div>' : '';
-		echo '<!--/notypo--></ignore>';
+		if ($table)
+		{
+			$tpl->num	= true;
+			$tpl->enum	= true;
+		}
+
+		$tpl->text = $hl->highlight($text);
 	}
 }
 else
 {
-	echo Ut::html($text);
+	$tpl->text = Ut::html($text);
 }

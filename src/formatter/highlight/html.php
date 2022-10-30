@@ -21,14 +21,14 @@ $html_tags = [
 	'address',
 	'applet',
 	'area',
-	'article', // HTML5
-	'aside', // HTML5
-	'audio', // HTML5
+	'article',
+	'aside',
+	'audio',
 	'b',
 	'base',
 	'basefont',
 	'bgsound',
-	'bdi', // HTML5
+	'bdi',
 	'bdo',
 	'big',
 	'blink',
@@ -36,7 +36,7 @@ $html_tags = [
 	'body',
 	'br',
 	'button',
-	'canvas', // HTML5
+	'canvas',
 	'caption',
 	'center',
 	'cite',
@@ -44,10 +44,10 @@ $html_tags = [
 	'col',
 	'colgroup',
 	'comment',
-	'datalist', // HTML5
+	'datalist',
 	'dd',
 	'del',
-	'details', // HTML5
+	'details',
 	'dfn',
 	'dir',
 	'div',
@@ -56,10 +56,10 @@ $html_tags = [
 	'em',
 	'embed',
 	'fieldset',
-	'figcaption', // HTML5
-	'figure', // HTML5
+	'figcaption',
+	'figure',
 	'font',
-	'footer', // HTML5
+	'footer',
 	'form',
 	'frame',
 	'frameset',
@@ -71,8 +71,8 @@ $html_tags = [
 	'h5',
 	'h6',
 	'head',
-	'header', // HTML5
-	'hgroup', // HTML5
+	'header',
+	'hgroup',
 	'hr',
 	'hta:application',
 	'html',
@@ -83,21 +83,21 @@ $html_tags = [
 	'ins',
 	'isindex',
 	'kbd',
-	'keygen', // HTML5
+	'keygen',
 	'label',
 	'legend',
 	'li',
 	'link',
 	'listing',
-	'main', // HTML5
+	'main',
 	'map',
 	'mark',
 	'marquee',
 	'menu',
 	'meta',
-	'meter', // HTML5
+	'meter',
 	'multicol',
-	'nav', // HTML5
+	'nav',
 	'nextid',
 	'nobr',
 	'noframes',
@@ -106,20 +106,20 @@ $html_tags = [
 	'ol',
 	'optgroup',
 	'option',
-	'output', // HTML5
+	'output',
 	'p',
 	'param',
 	'plaintext',
 	'pre',
-	'progress', // HTML5
+	'progress',
 	'q',
-	'ruby', // HTML5
-	'rp', // HTML5
-	'rt', // HTML5
+	'ruby',
+	'rp',
+	'rt',
 	's',
 	'samp',
 	'script',
-	'section', // HTML5
+	'section',
 	'select',
 	'server',
 	'small',
@@ -130,103 +130,100 @@ $html_tags = [
 	'strong',
 	'style',
 	'sub',
-	'summary', // HTML5
+	'summary',
 	'sup',
-	'svg', // HTML5
+	'svg',
 	'table',
 	'tbody',
 	'td',
-	'template', // HTML5
+	'template',
 	'textarea',
 	'textflow',
 	'tfoot',
 	'th',
 	'thead',
-	'time', // HTML5
+	'time',
 	'title',
 	'tr',
-	'track', // HTML5
+	'track',
 	'tt',
 	'u',
 	'ul',
 	'var',
-	'video', // HTML5
+	'video',
 	'wbr',
 	'xmp'
 	];
 
-	$source = Ut::html($text);
+$source = Ut::html($text);
 
-	$source = preg_replace_callback(
-			'/&lt;!--(.*?)--&gt;/us',
-			function ($matches) use ($options)
-			{
-				return
-				'<span style="color: ' . $options['color']['comment'] . ';">&lt;!--' .
-				str_replace('&lt;',	'&lt;<!-- -->',
-				str_replace('=',	'=<!-- -->',
-				$matches[1])) .
-				'--&gt;</span>';
-			},
-		$source);
+$source = preg_replace_callback(
+		'/&lt;!--(.*?)--&gt;/us',
+		function ($matches) use ($options)
+		{
+			return
+			'<span style="color: ' . $options['color']['comment'] . ';">&lt;!--' .
+			str_replace('&lt;',	'&lt;<!-- -->',
+			str_replace('=',	'=<!-- -->',
+			$matches[1])) .
+			'--&gt;</span>';
+		},
+	$source);
 
-	$source = preg_replace_callback(
-			'/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/us',
-			function ($matches)
-			{
-				return
-				$matches[1] .
-				$this->format($matches[2], 'highlight/css', ['nopre' => true, 'notypo' => false]) .
-				'&lt;/style&gt;';
-			},
-		$source);
+$source = preg_replace_callback(
+		'/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/us',
+		function ($matches)
+		{
+			return
+			$matches[1] .
+			$this->format($matches[2], 'highlight/css', ['nopre' => true, 'notypo' => false]) .
+			'&lt;/style&gt;';
+		},
+	$source);
 
-	foreach ($html_tags as $i)
-	{
-		$source = preg_replace(
-				'/&lt;' . $i . '(&gt;|[[:space:]])/u',
-				'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;' . $i . '\\1</span>',
-				$source);
-
-		$source = str_replace(
-				'&lt;/' . $i . '&gt;',
-				'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;/' . $i . '&gt;</span>',
-				$source);
-	}
+foreach ($html_tags as $i)
+{
+	$source = preg_replace(
+			'/&lt;' . $i . '(&gt;|[[:space:]])/u',
+			'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;' . $i . '\\1</span>',
+			$source);
 
 	$source = str_replace(
-			'/&gt;',
-			'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">/&gt;</span>',
+			'&lt;/' . $i . '&gt;',
+			'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;/' . $i . '&gt;</span>',
 			$source);
+}
 
-	$source = preg_replace(
-			'/([[:space:]]|&quot;|\'|\?)&gt;/u',
-			'\\1<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&gt;</span>',
-			$source);
+$source = str_replace(
+		'/&gt;',
+		'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">/&gt;</span>',
+		$source);
 
-	$source = preg_replace(
-			'/([a-z-]+)=(&quot;|\')(.*?)\\2/ui',
-			'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: ' .
-			$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
-			$source = preg_replace("/&amp;([a-z\d]*?;)/ui", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
+$source = preg_replace(
+		'/([[:space:]]|&quot;|\'|\?)&gt;/u',
+		'\\1<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&gt;</span>',
+		$source);
 
-	if ($options['line_numbers'])
+$source = preg_replace(
+		'/([a-z-]+)=(&quot;|\')(.*?)\\2/ui',
+		'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: ' .
+		$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
+		$source = preg_replace("/&amp;([a-z\d]*?;)/ui", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
+
+if ($options['line_numbers'])
+{
+	$lines		= preg_split("/(\n|<br \/>)/us", $source);
+	$source		= '<ol>';
+	$i			= 0;
+
+	foreach ($lines as $line)
 	{
-		$lines		= preg_split("/(\n|<br \/>)/us", $source);
-		$source		= '<ol>';
-		$i			= 0;
-
-		foreach ($lines as $line)
-		{
-			$i += 1;
-			$source .= '<li id="l' . $i . '">' . rtrim($line) . "</li>";
-		}
-
-		$source .= '</ol>';
+		$i += 1;
+		$source .= '<li id="l' . $i . '">' . rtrim($line) . "</li>";
 	}
 
-	echo '<!--notypo-->';
-	echo '<pre class="code">';
-	echo str_replace("\t", "  ", $source);
-	echo "</pre>";
-	echo '<!--/notypo-->';
+	$source .= '</ol>';
+}
+
+// output source
+$tpl->text = str_replace("\t", "  ", $source);

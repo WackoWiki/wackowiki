@@ -11,12 +11,12 @@
 	%%
  */
 
+// defaults
 if (!isset($options['type']))		$options['type']	= 'div';
 if (!isset($options['user']))		$options['user']	= 0;
 
 // sanitize $text
 $text		= htmlspecialchars($text);
-$output		= '';
 
 // replace text links to HMTL
 $text		= preg_replace('/\b(https?|ftp|file|nntp|telnet):\/\/\S+/u', '<a href="\\0" target="_blank">\\0</a>', $text);
@@ -37,31 +37,28 @@ foreach($matches as $match)
 	}
 }
 
-// HTML output:
-foreach($matches as $log)
+if ($options['type'] == 'div')
 {
-	if ($options['type'] == 'div')
-	{
-		$output .=
-			'<div class="chat-u'. $names[$log[3]] .'">' .
-				'<span class="chat-time">[' . $log[1] . ']</span> ' .
-				'<span class="chat-user">' . $log[3] . '</span> ' .
-				'<span class="chat-text">' . $log[5] . '</span>' .
-			'</div>';
-	}
-	else if ($options['type'] == 'table')
-	{
-		$output .=
-			'<tr class="chat-u'. $names[$log[3]] .'">' .
-				'<td class="chat-user">' . $log[3] . '</td>' .
-				'<td class="chat-text">' . $log[5] . '</td>' .
-				'<td class="chat-time">' . $log[1] . '</td>' .
-			'</tr>';
-	}
+	$type = 'd';
+}
+else if ($options['type'] == 'table')
+{
+	$type = 't';
 }
 
-// replace \n to <br> to keep multiline messages
-$output = str_replace("\n", '<br>', $output);
+// HTML output:
+$tpl->enter($type . '_n_');
+
+foreach($matches as $log)
+{
+	$tpl->name	= $names[$log[3]];
+	$tpl->time	= $log[1];
+	$tpl->user	= $log[3];
+	// replace \n to <br> to keep multiline messages
+	$tpl->text	= str_replace("\n", '<br>', $log[5]);
+}
+
+$tpl->leave(); // d_ / t_
 
 // show chat participants
 if ($options['user'])
@@ -74,15 +71,6 @@ if ($options['user'])
 		$people .= $name . ', ';
 	}
 
-	echo '<p><b>' . trim($people, ', ') . ':</b></p>';
-}
-
-if ($options['type'] == 'div')
-{
-	echo '<div class="chat">' . $output . '</div>';
-}
-else if ($options['type'] == 'table')
-{
-	echo '<div><table class="chat">' . $output . '</table></div>';
+	$tpl->u_people = trim($people, ', ');
 }
 

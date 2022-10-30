@@ -11,28 +11,28 @@
 	%%
 */
 
-$style_class	= 'info';
-$type_class		= '';
 $types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quote', 'success', 'warning'];
 
+// defaults
 if (!isset($options['type']))		$options['type']	= 'default';
 if (!isset($options['title']))		$options['title']	= '';
 if (!isset($options['icon']))		$options['icon']	= 1;
 if (!isset($options['style']))		$options['style']	= false;
 
+$options['tpl']		= true;
+
 if (in_array($options['type'], $types))
 {
 	// info type-* in wacko.css
-	$type_class = ' type-' . $options['type'];
+	$tpl->type = ' type-' . $options['type'];
 }
 
-$title = $options['title'] ?? null;
+if ($options['icon'])
+{
+	$tpl->icon	= true;
+	$tpl->eicon	= true;
+}
 
-echo	'<ignore><div class="' . $style_class . $type_class . '">' . "\n";
-echo	($options['icon'] ? '<div class="info-content">' : '') . "\n" .
-		($title
-			? '<p class="info-title">' . Ut::html($title) . '</p>' . "\n"
-			: '');
-include Ut::join_path(FORMATTER_DIR, 'wiki.php');
-echo	($options['icon'] ? '</div>' : '') . "\n";
-echo	'</div></ignore>' . "\n";
+$tpl->style		= 'info';
+$tpl->t_title	= $options['title'] ?? null;
+$tpl->include	= include Ut::join_path(FORMATTER_DIR, 'wiki.php');
