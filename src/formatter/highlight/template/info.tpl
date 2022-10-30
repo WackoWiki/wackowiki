@@ -1,15 +1,17 @@
 [ === main === ]
-	<ignore>
+<ignore>
 	<div class="[ ' style ' ][ ' type ' ]">
-	[= icon =
+	[= icon _ =
+		[ ' nonstatic ' ]
 		<div class="info-content">
 	=]
 	[= t _ =
 		<p class="info-title">[ ' title | e ' ]</p>
-	=]	
+	=]
 	[ ' include ' ]
-	[= eicon =
+	[= eicon _ =
+		[ ' nonstatic ' ]
 		</div>
 	=]
 	</div>
-	</ignore>
+</ignore>

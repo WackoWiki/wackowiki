@@ -1,9 +1,9 @@
 [ === main === ]
-	<ignore>
+<ignore>
 	<details[ ' open ' ]>
-	[= s =
+	[= s _ =
 		<summary>[ ' title | e ' ]</summary>
 	=]
 	[ ' include ' ]
 	</details>
-	</ignore>
+</ignore>

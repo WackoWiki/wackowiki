@@ -11,12 +11,12 @@
 	%%
  */
 
+// defaults
 $options['type']	??= 'div';
 $options['user']	??= 0;
 
 // sanitize $text
 $text		= htmlspecialchars($text);
-$output		= '';
 
 // replace text links to HMTL
 $text		= preg_replace('/\b(https?|ftp|file|nntp|telnet):\/\/\S+/u', '<a href="\\0" target="_blank">\\0</a>', $text);
@@ -47,15 +47,13 @@ $tpl->enter($type . '_n_');
 foreach($matches as $log)
 {
 	$tpl->name	= $names[$log[3]];
-	$tpl->log1	= $log[1];
-	$tpl->log3	= $log[3];
-	$tpl->log5	= $log[5];
+	$tpl->time	= $log[1];
+	$tpl->user	= $log[3];
+	// replace \n to <br> to keep multiline messages
+	$tpl->text	= str_replace("\n", '<br>', $log[5]);
 }
 
 $tpl->leave(); // d_ / t_
-
-// replace \n to <br> to keep multiline messages
-$output = str_replace("\n", '<br>', $output);
 
 // show chat participants
 if ($options['user'])

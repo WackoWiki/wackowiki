@@ -13,6 +13,7 @@
 $type_class		= '';
 $types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quote', 'success', 'warning'];
 
+// defaults
 $options['wrapper_type']	??= 'default';
 $options['wrapper_title']	??= null;
 $options['col']				??= false;
@@ -24,14 +25,9 @@ if (in_array($options['wrapper_type'], $types))
 }
 
 $col_class	= $options['col'] ? ' wrapper-col' . (int) $options['col'] : '';
-$title		= $options['wrapper_title'] ?? null;
 
 // output wrapper
-echo	'<ignore><div class="wrapper' . $type_class . '">' . "\n" .
-			($title
-				? '<p class="wrapper-title">' . Ut::html($title) . '</p>' . "\n"
-				: '') .
-			'<div class="wrapper-content' . $col_class . '">' . "\n" .
-				$text .
-			'</div>' . "\n" .
-		'</div></ignore>' . "\n";
+$tpl->type		= $type_class;
+$tpl->col		= $col_class;
+$tpl->t_title	= $options['wrapper_title'] ?? null;
+$tpl->text		= $text;

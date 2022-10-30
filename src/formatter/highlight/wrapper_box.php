@@ -17,6 +17,7 @@ $align_class	= '';
 $type_class		= '';
 $types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quote', 'success', 'warning'];
 
+// defaults
 $options['wrapper_type']	??= 'default';
 $options['wrapper_title']	??= null;
 $options['wrapper_align']	??= 'right';
@@ -37,19 +38,12 @@ if (in_array($options['wrapper_type'], $types))
 }
 
 $col_class	= $options['col'] ? ' wrapper-col' . (int) $options['col'] : '';
-$title		= $options['wrapper_title'] ?? null;
 
 // output wrapper
-echo	'<ignore><aside class="wrapper' . $type_class . $align_class . $col_class . '" style="width: ' . (int) $options['wrapper_width'] . 'px;">' . "\n" .
-			($title
-				? '<p class="wrapper-title">' . Ut::html($title) . '</p>' . "\n"
-				: '') .
-			'<div class="wrapper-content">' . "\n" .
-				$text.
-			'</div>' . "\n" .
-		'</aside></ignore>' . "\n";
-
-if ($options['clear'])
-{
-	echo '<span class="clearfix"></span>';
-}
+$tpl->type		= $type_class;
+$tpl->align		= $align_class;
+$tpl->col		= $col_class;
+$tpl->width		= (int) $options['wrapper_width'];
+$tpl->t_title	= $options['wrapper_title'] ?? null;
+$tpl->text		= $text;
+$tpl->clear		= $options['clear'];

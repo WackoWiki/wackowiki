@@ -30,17 +30,18 @@ $text = preg_replace("#\002#us","<br>", $text );	// newline
 // Highlighting
 
 // String constants
-$text = preg_replace("#\".*?\"#us", '<span style="color:#006666;">$0</span>', $text );
+$text = preg_replace("#\".*?\"#us", '<span style="color: #006666;">$0</span>', $text );
 
 // Keywords & functions
-$text = preg_replace("#\001($functions)\001#usi", '<span style="color:#770055;">$1</span>', $text );
-$text = preg_replace("#\001($skipwords)\001#usi", '<span style="color:green;"><strong>$1</strong></span>', $text );
-$text = preg_replace("#\001($keywords)\001#usi" , '<span style="color:blue;">$1</span>', $text );
+$text = preg_replace("#\001($functions)\001#usi", '<span style="color: #770055;">$1</span>', $text );
+$text = preg_replace("#\001($skipwords)\001#usi", '<span style="color: green;"><strong>$1</strong></span>', $text );
+$text = preg_replace("#\001($keywords)\001#usi" , '<span style="color: blue;">$1</span>', $text );
 
 // Comments
-$text = preg_replace('#(\-\-.*)$#um', '<span style="color:#888888;"><em>$1</em></span>', $text );
+$text = preg_replace('#(\-\-.*)$#um', '<span style="color: #888888;"><em>$1</em></span>', $text );
 
 // Remove lexeme delimiter
 $text = preg_replace("#\001#us",'', $text );
 
-echo '<!--notypo--><pre class="code">' . $text . '</pre><!--/notypo-->';
+// output source
+$tpl->text = $text;

@@ -14,8 +14,6 @@ $options['color']['entities']			= 'orange';
 $options['color']['digits']				= 'green';
 $options['line_numbers']				= $options['numbers'] ?? false;
 
-if (isset($options['notypo']) && $options['notypo'] !== false) $options['notypo'] = true;
-
 $css = Ut::html($text);
 $keywords = [
 	'azimuth',
@@ -209,10 +207,5 @@ if ($options['line_numbers'])
 	$source .= '</ol>';
 }
 
-if (isset($options['notypo'])) echo '<!--notypo-->';
-if (!isset($options['nopre'])) echo '<pre class="code">';
-
-echo preg_replace('/\&nbsp\;/u', '', str_replace("\t", "	", $css), 1);
-
-if (!isset($options['nopre'])) echo '</pre>';
-if (isset($options['notypo'])) echo '<!--/notypo-->';
+// output source
+$tpl->text = preg_replace('/\&nbsp\;/u', '', str_replace("\t", "	", $css), 1);

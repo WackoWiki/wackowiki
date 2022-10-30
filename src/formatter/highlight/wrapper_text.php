@@ -12,6 +12,7 @@
 
 $align_class = '';
 
+// defaults
 $options['wrapper_align']	??= 'left';
 $options['clear']			??= false;
 $options['col']				??= false;
@@ -30,11 +31,8 @@ if (in_array($options['wrapper_align'], ['center', 'justify', 'left', 'right']))
 $col_class	= $options['col'] ? ' wrapper-col' . (int) $options['col'] : '';
 
 // output wrapper
-echo	'<ignore><div class="' . $align_class . $col_class . '"' . $text_align . '>' . "\n" .
-			$text .
-		'</div></ignore>' . "\n";
-
-if ($options['clear'])
-{
-	echo '<span class="clearfix"></span>';
-}
+$tpl->align		= $align_class;
+$tpl->txtalign	= $text_align;
+$tpl->col		= $col_class;
+$tpl->text		= $text;
+$tpl->clear		= $options['clear'];

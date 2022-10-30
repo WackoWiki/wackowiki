@@ -1,28 +1,28 @@
 [ === main === ]
-	<ignore>
+<ignore>
 	[= u People =
 	<p><b>[ ' people ' ]:</b></p>
 	=]
-	[= d =
+	[= d _ =
 	<div class="chat">
 		[= n _ =
 		<div class="chat-u[ ' name ' ]">
-			<span class="chat-time">[[ ' log1 ' ]]</span>
-			<span class="chat-user">[ ' log3 ' ]</span>
-			<span class="chat-text">[ ' log5 ' ]</span>
+			<span class="chat-time">[[ ' time ' ]]</span>
+			<span class="chat-user">[ ' user ' ]</span>
+			<span class="chat-text">[ ' text ' ]</span>
 		</div>
 		=]
 	</div>
 	=]
-	[= t =
+	[= t _ =
 	<div><table class="chat">
 		[= n _ =
 		<tr class="chat-u[ ' name ' ]">
-			<td class="chat-user">[ ' log3 ' ]</td>
-			<td class="chat-text">[ ' log5 ' ]</td>
-			<td class="chat-time">[ ' log1 ' ]</td>
+			<td class="chat-user">[ ' user ' ]</td>
+			<td class="chat-text">[ ' text ' ]</td>
+			<td class="chat-time">[ ' time ' ]</td>
 		</tr>
 		=]
 	</table></div>
 	=]
-	</ignore>
+</ignore>
