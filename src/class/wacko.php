@@ -4036,28 +4036,28 @@ class Wacko
 			{
 				$icon		= $this->_t('ChildIcon');
 				$page0		= mb_substr($tag, 2);
-				$page		= $this->add_spaces($page0);
+				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'childpage';
 			}
 			else if (mb_substr($tag, 0, 3) == '../')
 			{
 				$icon		= $this->_t('ParentIcon');
 				$page0		= mb_substr($tag, 3);
-				$page		= $this->add_spaces($page0);
+				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'parentpage';
 			}
 			else if (mb_substr($tag, 0, 1) == '/')
 			{
 				$icon		= $this->_t('RootIcon');
 				$page0		= mb_substr($tag, 1);
-				$page		= $this->add_spaces($page0);
+				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'rootpage';
 			}
 			else
 			{
 				$icon		= $this->_t('EqualIcon');
 				$page0		= $tag;
-				$page		= $this->add_spaces($page0);
+				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'equalpage';
 			}
 
@@ -4466,27 +4466,31 @@ class Wacko
 	* relative  path (/ !/ ../) to icons RootLinkIcon, SubLinkIcon, UpLinkIcon
 	*
 	* @param	string		$text Text with WikiWords
+	* @param	bool		$icon adds Link icon as prefix
 	*
 	* @return	string		Text with Wiki Words
 	*/
-	function add_spaces($text): ?string
+	function add_spaces($text, $icon = false): ?string
 	{
 		if (($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces)
 		{
 			$text = $this->add_nbsps($text);
 		}
 
-		if (!strncmp($text, '/', 1))
+		if ($icon)
 		{
-			$text = $this->_t('RootLinkIcon') . mb_substr($text, 1);
-		}
-		else if (!strncmp($text, '!/', 2))
-		{
-			$text = $this->_t('SubLinkIcon') . mb_substr($text, 2);
-		}
-		else if (!strncmp($text, '../', 3))
-		{
-			$text = $this->_t('UpLinkIcon') . mb_substr($text, 3);
+			if (!strncmp($text, '/', 1))
+			{
+				$text = $this->_t('RootLinkIcon') . mb_substr($text, 1);
+			}
+			else if (!strncmp($text, '!/', 2))
+			{
+				$text = $this->_t('SubLinkIcon') . mb_substr($text, 2);
+			}
+			else if (!strncmp($text, '../', 3))
+			{
+				$text = $this->_t('UpLinkIcon') . mb_substr($text, 3);
+			}
 		}
 
 		return $text;
@@ -4654,7 +4658,7 @@ class Wacko
 	function sanitize_username($user_name): string
 	{
 		$user_name = Ut::strip_spaces($user_name);
-		// strip \-\_\'\.\/\\
+		// strip -_'./\
 		$user_name = str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
 
 		return Ut::normalize($user_name);
@@ -7090,7 +7094,7 @@ class Wacko
 		$this->hide_revisions =
 			($this->page
 			&& !$this->is_admin()
-			&& ((   $this->db->hide_revisions == 1 && !$this->get_user())
+			&& (   ($this->db->hide_revisions == 1 && !$this->get_user())
 				|| ($this->db->hide_revisions == 2 && !$this->is_owner())));
 
 		// forum page
@@ -7340,7 +7344,7 @@ class Wacko
 					continue;
 				}
 
-				$item = $titles? $this->get_page_title($link) : $step;
+				$item = $titles? $this->get_page_title($link) : $this->add_spaces($step);
 
 				if ($linking
 					&& (    $link != $this->tag
