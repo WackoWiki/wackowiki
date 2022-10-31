@@ -20,35 +20,52 @@ $text = preg_replace('/(http:|https:|ftp:|nntp:)\/\//u',	'\\1@@@@',				$text);
 $text = preg_replace('/-{5}([A-Z ]+?)-{5}/u',				'&&&&&\\1&&&&&',		$text);
 
 // Cut a simple counting
-$text = str_replace('**',		'',  $text);
-$text = str_replace('//',		'',  $text);
-$text = str_replace('__',		'',  $text);
-$text = str_replace('----',		'',  $text);
-$text = str_replace('---',		'',  $text);
-$text = str_replace('##',		'',  $text);
-$text = str_replace('¹¹',		'',  $text);
-$text = str_replace('++',		'',  $text);
-$text = str_replace('??',		'',  $text);
-$text = str_replace('""',		'',  $text);
-$text = str_replace('~',		'',  $text);
-$text = str_replace('>>>',		'',  $text);
-$text = str_replace('>>',		'',  $text);
-$text = str_replace('<<<',		'',  $text);
-$text = str_replace('<<',		'',  $text);
-$text = str_replace('%%',		'',  $text);
-$text = str_replace('======',	'',  $text);
-$text = str_replace('=====',	'',  $text);
-$text = str_replace('====',		'',  $text);
-$text = str_replace('===',		'',  $text);
-$text = str_replace('<[',		'"', $text);
-$text = str_replace(']>',		'"', $text);
-$text = str_replace('#||',		'"', $text);
-$text = str_replace('||#',		'"', $text);
-$text = str_replace('#|',		'"', $text);
-$text = str_replace('|#',		'"', $text);
-$text = str_replace('||',		'',  $text);
-$text = str_replace('*|',		'',  $text);
-$text = str_replace('|*',		'',  $text);
+$text = str_replace(
+	[
+		'**',
+		'//',
+		'__',
+		'----',
+		'---',
+		'##',
+		'¹¹',
+		'++',
+		'??',
+		'""',
+		'~',
+		'>>>',
+		'>>',
+		'<<<',
+		'<<',
+		'%%',
+		'======',
+		'=====',
+		'====',
+		'===',
+	],
+	'',
+	$text);
+
+$text = str_replace(
+	[
+		'<[',
+		']>',
+		'#||',
+		'||#',
+		'#|',
+		'|#',
+	],
+	'"',
+	$text);
+
+$text = str_replace(
+	[
+		'||',
+		'*|',
+		'|*',
+	],
+	'',
+	$text);
 
 // Cut headlines h1
 $text = preg_replace('/==.+?==[\s]*/', '', $text);

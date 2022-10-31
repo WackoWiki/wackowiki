@@ -106,7 +106,7 @@ class Paragrafica
 	// within constructions like <t->(*).....<-t>
 	// & vice versa -- paragraphs should be placed
 	// but within <t->(*)....(*)<-t> -- shouldn't
-	public string $mark4			= '{:typo:markup:1:}<:-:>'; // (!) ultimate wronginator mark:
+	public string $mark4		= '{:typo:markup:1:}<:-:>'; // (!) ultimate wronginator mark:
 	// paragraphs shouldn't be placed regardless to <t->(!).....<-t>
 
 	public string $prefix1		= '<p id="p';
@@ -260,13 +260,19 @@ class Paragrafica
 		}
 
 		$what = implode('', $pieces);
-		// 4. remove unused <t-> & <-t>
-		$what = str_replace($this->mark1, '', $what);
-		$what = str_replace($this->mark2, '', $what);
-		$what = str_replace($this->mark3, '', $what);
-		$what = str_replace($this->mark4, '', $what);
-		// remove obsolete <ignore> tags
-		$what = str_replace(['<ignore>', '</ignore>'], '', $what);
+
+		// 4. remove unused <t-> & <-t> and <ignore> tags
+		$what = str_replace(
+			[
+				$this->mark1,
+				$this->mark2,
+				$this->mark3,
+				$this->mark4,
+				'<ignore>',
+				'</ignore>'
+			],
+			'',
+			$what);
 
 		// -. done with P
 
