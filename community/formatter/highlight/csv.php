@@ -29,7 +29,7 @@ $csv_lines	= preg_split('/[\n]/', $text);
 $regex_split	= '/(?<!\\\\)' . $delim . '(?=(?:[^\"]*([\"])[^\"]*\\1)*[^\"]*$)/';
 $regex_escaped	= '/\\\\' . $delim . '/';
 
-echo '<table class="usertable"><tbody>' . "\n";
+$tpl->enter('r_');
 
 foreach ($csv_lines as $i => $line)
 {
@@ -39,10 +39,14 @@ foreach ($csv_lines as $i => $line)
 		continue;
 	}
 
-	echo "\t" . '<tr>' . "\n";
+	$tpl->commit = true; // alternation hack
+
+	$tpl->enter('c_');
 
 	foreach (preg_split($regex_split, $line) as $r => $field)
 	{
+		$tpl->commit = true; // alternation hack
+
 		if ($i == $blanks)
 		{
 			$class[$r] = ''; // 'padding: 1px 10px 1px 10px; ';
@@ -63,14 +67,16 @@ foreach ($csv_lines as $i => $line)
 				$title[$r] = $align[2];
 			}
 
-			echo "\t\t" . '<th class="' . $class[$r] . '">' . Ut::html($title[$r]) . '</th>' . "\n";
+			$tpl->h_class	= $class[$r];
+			$tpl->h_title	= $title[$r];
 			continue;
 		}
 
 		// if a cell is blank, echo &nbsp;
 		if (preg_match('/^\s*$/', $field))
 		{
-			echo "\t\t" . '<td class="' . $class[$r] . '">&nbsp;</td>' . "\n";
+			$tpl->t_class	= $class[$r];
+			$tpl->t_cell	= '&nbsp;';
 			continue;
 		}
 		// extract the cell out of it's quotes
@@ -116,14 +122,16 @@ foreach ($csv_lines as $i => $line)
 				$linked = Ut::html($cell);
 			}
 
-			echo "\t\t" . '<td class="' . $class[$r] . '">' . $linked . '</td>' . "\n";
+			$tpl->t_class	= $class[$r];
+			$tpl->t_cell	= $linked;
 			continue;
 		}
 
-		echo "\t\t" . '<td class="' . $class[$r] . '">ERROR!</td>'; // Ut::html($csv_cell)
+		$tpl->t_class	= $class[$r];
+		$tpl->t_cell	= 'ERROR!';
 	}
 
-	echo "\t" . '</tr>' . "\n";
+	$tpl->leave();	// c_
 }
 
-echo '</tbody></table>' . "\n";
+$tpl->leave();	// r_
