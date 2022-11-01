@@ -1,7 +1,7 @@
 [ === main === ]
 <ignore>
 	<div class="[ ' align ' ][ ' col ' ]"[ ' txtalign ' ]>
-		[ ' text ' ]
+[ ' text  // <-- no indention for embeded pre ']
 	</div>
 	[= clear _ =
 		[ ' nonstatic ' ]
