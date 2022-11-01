@@ -1,6 +1,6 @@
 [ === main === ]
 <ignore>
-	<div class="wrapper[ ' align ' ][ ' col ' ]"[ ' txtalign ' ]>
+	<div class="[ ' align ' ][ ' col ' ]"[ ' txtalign ' ]>
 		[ ' text ' ]
 	</div>
 	[= clear _ =
