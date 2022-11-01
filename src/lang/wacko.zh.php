@@ -221,8 +221,8 @@ $wacko_translation = [
 	'SearchText'				=> '搜索： ',
 
 	'AclUpdated'				=> '权限设置已更新',
-	'AclGaveOwnership'			=> ' 并赋予所有权给 ',
-	'AclNoNewOwner'				=> ', 但所有权未转移，因为未找到用户 %1。',
+	'AclGaveOwnership'			=> ' 并赋予所有权给 %1。',
+	'AclNoNewOwner'				=> '但所有权未转移，因为未找到用户 %1。',
 	'NewPageOwnership'			=> '页面所有权已转让',
 	'YouAreNewOwner'			=> '前所有者 %1 转让了所有权 ' . "\n" . '的下一页给你',
 	'PageOwnershipInfo'			=> '',

@@ -221,8 +221,8 @@ $wacko_translation = [
 	'SearchText'				=> 'Keresés: ',
 
 	'AclUpdated'				=> 'A hozzáférés-ellenőrzési listák frissültek',
-	'AclGaveOwnership'			=> ' and gave ownership to ',
-	'AclNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
+	'AclGaveOwnership'			=> ' and gave ownership to %1.',
+	'AclNoNewOwner'				=> 'Page ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'A lap tulajdonjogát átadták',
 	'YouAreNewOwner'			=> 'former owner %1 transferred ownership ' . "\n" . 'of following page to you',
 	'PageOwnershipInfo'			=> '',

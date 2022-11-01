@@ -41,7 +41,7 @@ if ($action === 'set_permissions')
 
 		if (!$new_owner)
 		{
-			$this->set_message(Ut::perc_replace($this->_t('AclNoNewOwner'), $user_id), 'error');
+			$this->set_message(Ut::perc_replace($this->_t('AclNoNewOwner'), '<code>' . $user_id . '</code>'), 'error');
 			$this->reload_me();
 		}
 
@@ -103,25 +103,25 @@ if ($action === 'set_permissions')
 
 		// change owner?
 		if ($new_owner
-			&& ($new_id = (int) $new_owner['user_id']) != ($former_id = (int) $page['owner_id']))
+			&& ($new_owner_id = (int) $new_owner['user_id']) != ($old_owner_id = (int) $page['owner_id']))
 		{
 			// update user statistics
 			$this->db->sql_query(
 				"UPDATE " . $prefix . "user SET " .
 					"total_pages	= total_pages - 1 " .
-				"WHERE user_id		= " . (int) $former_id . " " .
+				"WHERE user_id		= " . (int) $old_owner_id . " " .
 				"LIMIT 1");
 
 			$this->db->sql_query(
 				"UPDATE " . $prefix . "user SET " .
 					"total_pages	= total_pages + 1 " .
-				"WHERE user_id		= " . (int) $new_id." " .
+				"WHERE user_id		= " . (int) $new_owner_id . " " .
 				"LIMIT 1");
 
 			// set new owner
 			$this->db->sql_query(
 				"UPDATE " . $prefix . "page SET " .
-					"owner_id		= " . (int) $new_id . " " .
+					"owner_id		= " . (int) $new_owner_id . " " .
 				"WHERE page_id		= " . (int) $page_id . " " .
 				"LIMIT 1");
 
@@ -170,7 +170,7 @@ if ($action === 'set_permissions')
 			$this->notify_new_owner($new_owner);
 		}
 
-		$message .= $this->_t('AclGaveOwnership') . '<code>' . $new_owner['user_name'] . '</code>';
+		$message .= Ut::perc_replace($this->_t('AclGaveOwnership'), '<code>' . $new_owner['user_name'] . '</code>');
 	}
 
 	// purge SQL queries cache

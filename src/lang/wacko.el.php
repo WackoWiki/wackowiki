@@ -221,8 +221,8 @@ $wacko_translation = [
 	'SearchText'				=> 'Αναζήτηση: ',
 
 	'AclUpdated'				=> 'Η λίστα δικαιωμάτων πρόσβασης ανανεώθηκε',
-	'AclGaveOwnership'			=> ' και δόθηκε ιδιοκτησία στον ',
-	'AclNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
+	'AclGaveOwnership'			=> ' και δόθηκε ιδιοκτησία στον %1.',
+	'AclNoNewOwner'				=> 'Page ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Η ιδιοκτησία της σελίδας μεταβιβάστηκε',
 	'YouAreNewOwner'			=> 'former owner %1 transferred ownership ' . "\n" . 'of following page to you',
 	'PageOwnershipInfo'			=> '',
