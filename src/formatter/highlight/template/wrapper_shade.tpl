@@ -5,7 +5,7 @@
 			<p class="wrapper-title">[ ' title | e ' ]</p>
 		=]
 		<div class="wrapper-content[ ' col ' ]">
-			[ ' text ' ]
+[ ' text  // <-- no indention for embeded pre ']
 		</div>
 	</div>
 </ignore>
