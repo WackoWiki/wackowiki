@@ -62,7 +62,7 @@ if ($action === 'set_permissions')
 
 	$user_id = $this->get_user_id();
 
-	$update_page_acls = function ($page) use (&$new_owner, $upload_allowed, $user_id)
+	$update_page_acls = function ($page) use (&$new_owner, $prefix, $upload_allowed, $user_id)
 	{
 		$page_id = $page['page_id'];
 
