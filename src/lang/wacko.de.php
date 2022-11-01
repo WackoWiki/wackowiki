@@ -221,8 +221,8 @@ $wacko_translation = [
 	'SearchText'				=> 'Suchen: ',
 
 	'AclUpdated'				=> 'Berechtigungen aktualisiert',
-	'AclGaveOwnership'			=> ' und Besitzer geändert zu ',
-	'AclNoNewOwner'				=> ', jedoch wurde der Besitz nicht übertragen, da der Nutzer %1 nicht exsistiert.',
+	'AclGaveOwnership'			=> ' und Besitzer geändert zu %1.',
+	'AclNoNewOwner'				=> 'Der Besitz der Seite wurde nicht übertragen, da der Nutzer %1 nicht exsistiert.',
 	'NewPageOwnership'			=> 'Seiten-Besitz übertragen',
 	'YouAreNewOwner'			=> 'der frühere Besitzer %1 hat die folgende Seite ' . "\n" . ' auf dich übertragen',
 	'PageOwnershipInfo'			=> '',

@@ -221,8 +221,8 @@ $wacko_translation = [
 	'SearchText'				=> 'Søg: ',
 
 	'AclUpdated'				=> 'Tilladelsesliste opdateret',
-	'AclGaveOwnership'			=> ' og har overgivet ejeskab til ',
-	'AclNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
+	'AclGaveOwnership'			=> ' og har overgivet ejeskab til %1.',
+	'AclNoNewOwner'				=> 'Page ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Overført sideejerskab',
 	'YouAreNewOwner'			=> 'den tidligere ejer %1 har følgende side ' . "\n" . ' overført til dig',
 	'PageOwnershipInfo'			=> '',

@@ -221,8 +221,8 @@ $wacko_translation = [
 	'SearchText'				=> 'Otsi: ',
 
 	'AclUpdated'				=> 'Kasutaja õiguste loend uuendatud',
-	'AclGaveOwnership'			=> ' ja anna oma õigused ',
-	'AclNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
+	'AclGaveOwnership'			=> ' ja anna oma õigused %1.',
+	'AclNoNewOwner'				=> 'Page ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Lehekülje omandiõigus anti üle',
 	'YouAreNewOwner'			=> 'former owner %1 transferred ownership ' . "\n" . 'of following page to you',
 	'PageOwnershipInfo'			=> '',
