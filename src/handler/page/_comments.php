@@ -197,7 +197,7 @@ if ($this->has_access('read'))
 				$this->href('', $this->db->login_page),
 				$this->href('', $this->db->registration_page)
 			);
-			$tpl->h_hint = $this->show_message($message, 'notice', false);
+			$tpl->h_hint = $this->show_message($message, 'disabled', false);
 		}
 	}
 	else

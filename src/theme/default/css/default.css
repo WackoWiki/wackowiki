@@ -317,6 +317,15 @@ form input.submitinput {
 	content: url('./../icon/comment.svg') " ";
 }
 
+.disabled {
+	background: #ededed;
+	border: 1px solid #cdcdcd;
+	font-style: italic;
+}
+.msg.disabled::after {
+	content: url('./../icon/info.svg') " ";
+}
+
 .revision-info {
 	background: #f4fbff;
 	border: 1px solid #d5d9e6;
@@ -375,6 +384,10 @@ form input.submitinput {
 }
 .msg.hint::after {
 	content: url('./../icon/important.svg') " ";
+}
+
+.rev-overflow {
+	overflow: visible;
 }
 
 /* Debugging information */
@@ -2628,6 +2641,7 @@ table.diff td {
 .diffdown {
 	position: relative;
 	margin-right: 20px;
+	z-index: 1000;
 }
 
 .diffdown-content {
