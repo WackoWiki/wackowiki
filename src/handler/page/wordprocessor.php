@@ -22,6 +22,8 @@ if (!$this->page['latest'])
 		$this->user_link($this->page['user_name'], true, false));
 }
 
+$tpl->title	= $this->page['title'];
+
 // build html body
 $this->context[++$this->current_context] = $this->tag;
 $data = $this->format($this->page['body'], 'wordprocessor');

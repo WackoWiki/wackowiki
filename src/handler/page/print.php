@@ -31,11 +31,11 @@ if (($user = $this->get_user())? $user['numerate_links'] : $this->db->numerate_l
 // set absolute URL
 $this->canonical = true;
 
+$tpl->title	= $this->page['title'];
+
 // build html body
 #$this->context[++$this->current_context] = $this->tag;
 $data = $this->format($this->page['body'], 'wiki', ['post_wacko' => true]);
-// remove obsolete <ignore> tags
-$data = str_replace(['<ignore>', '</ignore>'], '', $data);
 
 // display page
 $tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
