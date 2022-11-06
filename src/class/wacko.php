@@ -7304,7 +7304,7 @@ class Wacko
 		$is_root	= false;
 
 		// check if current page is home page
-		if ($this->config['root_page'] == $this->tag)
+		if ($this->db->root_page == $this->tag)
 		{
 			$is_root = true;
 		}

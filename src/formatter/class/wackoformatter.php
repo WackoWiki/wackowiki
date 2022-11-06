@@ -716,7 +716,7 @@ class WackoFormatter
 					'<a class="self-link" href="#' . $header_id . '"></a>' .
 					// non-static section edit link via action for <h2> headings
 					($this->object->db->section_edit && $h_level == 2
-						? '<!--notypo--><!--action:begin-->editsection section=' . $wacko->header_count . '<!--action:end--><!--/notypo-->'
+						? '<!--notypo--><!--action:begin-->editsection page=' . '/' . $wacko->page['tag'] . ' section=' . $wacko->header_count . '<!--action:end--><!--/notypo-->'
 						: '') .
 				'</h' . $h_level . '>';
 		}

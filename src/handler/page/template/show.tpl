@@ -67,7 +67,7 @@
 </div>
 
 [= revmeta =]
-<div class="msg notice">
+<div class="msg notice rev-overflow">
 [= prev _ =
 	(<a href="[ ' diff ' ]">[ ' _t: Diff ' ]</a>) 
 	<a href="[ ' href ' ]">← [ ' _t: PreviousVersion ' ]</a> 
