@@ -111,7 +111,7 @@ class Paragrafica
 
 	public string $prefix1		= '<p id="p';
 	public string $prefix2		= '" class="auto">';
-	public string $postfix		= '</p>';
+	public string $postfix		= '</p>' . "\n";
 
 	function __construct(&$wacko)
 	{
@@ -304,7 +304,7 @@ class Paragrafica
 				// [2] = depth,
 				// [3] = h-id,
 				// [4] = name
-				"(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h\d+-\d+\"></a></h\\2>)" .
+				"(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h\d+-\d+\"></a>.*?</h\\2>)" .
 					"|" .
 				// [6] = p-id
 				"(<p id=\"(p\d+-\d+)\" class=\"auto\">)" .

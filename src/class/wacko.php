@@ -7153,7 +7153,7 @@ class Wacko
 		}
 
 		// the last <h-end> ensures there is no empty body_toc in database
-		$this->body_toc = implode('<h-end>', $toc) . '<h-end>';
+		$this->body_toc = implode('<h-end>' . "\n", $toc) . '<h-end>';
 	}
 
 	function build_toc($tag, $from, $to, $link = -1)
@@ -7178,7 +7178,7 @@ class Wacko
 
 		$page['body_toc']	= $page['body_toc'] ?? '';
 		#$toc				= unserialize($page['body_toc']); //json_decode
-		$toc				= explode('<h-end>', $page['body_toc']);
+		$toc				= explode('<h-end>' . "\n", $page['body_toc']);
 
 		foreach ($toc as $k => $toc_item)
 		{
@@ -7249,7 +7249,9 @@ class Wacko
 		{
 			// #2. find all <hX id="h1249-1" class="heading"></hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h\d+-\d+\"></a></h\\2>)!i",
+			$what = preg_replace_callback(
+				"!(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)" .
+					"<a class=\"self-link\" href=\"#h\d+-\d+\"></a>)!i",
 				[&$this, 'numerate_toc_callback_toc'], $what);
 		}
 
@@ -7268,8 +7270,7 @@ class Wacko
 	{
 		return '<h' . $matches[2] . ' id="' . $matches[3] . '" class="heading">' .
 			($this->post_wacko_toc_hash[$matches[3]][1] ?? $matches[4]) .
-			'<a class="self-link" href="#' . $matches[3] . '"></a>' .
-			'</h' . $matches[2] . '>';
+			'<a class="self-link" href="#' . $matches[3] . '"></a>';
 	}
 
 	function numerate_toc_callback_p($matches): string
