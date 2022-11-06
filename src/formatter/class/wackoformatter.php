@@ -714,8 +714,8 @@ class WackoFormatter
 				'<h' . $h_level . ' id="' . $header_id . '" class="heading">' .
 					preg_replace_callback($this->LONG_REGEX, $callback, $matches[2]) .
 					'<a class="self-link" href="#' . $header_id . '"></a>' .
-					// non-static edit link via action
-					($this->object->db->section_edit
+					// non-static section edit link via action for <h2> headings
+					($this->object->db->section_edit && $h_level == 2
 						? '<!--notypo--><!--action:begin-->editsection section=' . $wacko->header_count . '<!--action:end--><!--/notypo-->'
 						: '') .
 				'</h' . $h_level . '>';
