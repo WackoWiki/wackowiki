@@ -109,6 +109,7 @@ $upgrade['6.1.2'][]		= ['alter',		'page',				$alter_page_r6_0_1];
 
 $upgrade['6.1.9'][]		= ['update',	'page',				$update_page_r6_0_1];
 $upgrade['6.1.9'][]		= ['update',	'page',				$update_page_r6_0_2];
+$upgrade['6.1.14'][]	= ['update',	'page',				$update_page_r6_x_0];
 
 // page link
 

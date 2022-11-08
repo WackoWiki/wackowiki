@@ -7153,7 +7153,7 @@ class Wacko
 		}
 
 		// the last <h-end> ensures there is no empty body_toc in database
-		$this->body_toc = implode('<h-end>' . "\n", $toc) . '<h-end>';
+		$this->body_toc = implode('<h-end>' . "\n", $toc) . '<h-end>' . "\n";
 	}
 
 	function build_toc($tag, $from, $to, $link = -1)

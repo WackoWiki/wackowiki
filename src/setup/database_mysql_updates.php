@@ -50,7 +50,7 @@ $alter_menu_r6_0_4 = "ALTER TABLE {$pref}menu ADD INDEX idx_lang (menu_lang)";
 // PAGE
 $alter_page_r6_0_1 = "ALTER TABLE {$pref}page DROP footer_rating";
 
-#$update_page_r6_x_0 = "UPDATE {$pref}page SET body_toc = ''";
+$update_page_r6_x_0 = "UPDATE {$pref}page SET body_toc = ''";
 #$update_page_r6_x_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r6_0_1 = "UPDATE {$pref}page SET body = REPLACE(body, '[[fn ', '[[^ ');";
 $update_page_r6_0_2 = "UPDATE {$pref}page SET body = REPLACE(body, '((fn ', '((^ ');";
