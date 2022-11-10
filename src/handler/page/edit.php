@@ -32,7 +32,8 @@ if ($this->has_access('read')
 		return;
 	}
 
-	$user	= $this->get_user();
+	$user		= $this->get_user();
+	$page_id	= $this->page['page_id'];
 
 	// is comment?
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'])
@@ -83,7 +84,8 @@ if ($this->has_access('read')
 
 	if (isset($_POST))
 	{
-		$_body	= $_POST['body'] ?? '';
+		$_body		= $_POST['body'] ?? '';
+		$section	= (int) ($_POST['section'] ?? 0);
 
 		// watch page
 		if ($this->page
@@ -102,7 +104,16 @@ if ($this->has_access('read')
 			$edit_note	= trim(	($_POST['edit_note']	?? ''));
 			$minor_edit	= (int)	($_POST['minor_edit']	?? 0);
 			$reviewed	= (int)	($_POST['reviewed']		?? 0);
-			$title		= trim(	($_POST['title']		?? $this->page['title']));
+
+			if ($section)
+			{
+				$title		= trim($this->page['title']);
+				$sec_title	= trim(	($_POST['title']	?? $this->page['title']));
+			}
+			else
+			{
+				$title		= trim(	($_POST['title']	?? $this->page['title']));
+			}
 
 			// check for reserved word
 			if ($result = $this->validate_reserved_words($this->tag))
@@ -121,9 +132,9 @@ if ($this->has_access('read')
 			}
 
 			// check text length
-			/* if ($textchars > $maxchars)
+			/* if ($text_chars > $max_chars)
 			{
-				$message = Ut::perc_replace($this->_t('TextDBOversize'), $textchars - $maxchars) . ' ';
+				$message = Ut::perc_replace($this->_t('TextDBOversize'), $text_chars - $max_chars) . ' ';
 				$this->set_message($message , 'error');
 				$error = true;
 			} */
@@ -178,6 +189,40 @@ if ($this->has_access('read')
 					$this->set_user_setting('user_name', null);
 				}
 
+				// merge section
+				if ($this->db->section_edit && $section)
+				{
+					$p = $this->extract_sections($this->page['body'], $section, 'replace');
+
+					// update changed section body & title
+					$p[$section] = [
+						'h'		=> $p[$section]['h'],
+						'title'	=> $sec_title,
+						'body'	=> "\n" . $body,
+					];
+
+					$_body	= [];
+
+					foreach ($p as $i => $part)
+					{
+						// get original line break for first header, if section 0 is empty it's none
+						$nl = ($i == 1 && $p[0]['body'] == '' ? '' : "\n");
+
+						if ($part['title'])
+						{
+							$_body[]	= $nl . $part['h'] . $part['title'] . $part['h'];
+						}
+
+						$_body[]	= $part['body'];
+					}
+
+					unset($p);
+
+					$body = implode('', $_body);
+
+					unset($_body);
+				}
+
 				// add page (revisions)
 				$body_r = $this->save_page($this->tag, $body, $title, $edit_note, $minor_edit, $reviewed, ($this->page['comment_on_id'] ?? null));
 
@@ -226,18 +271,44 @@ if ($this->has_access('read')
 		}
 	}
 
+	// is section?
+	if ($this->db->section_edit && isset($_GET['section']))
+	{
+		$section = (int) ($_GET['section'] ?? 0);
+	}
+
+	// section header
+	if ($this->db->section_edit && $section)
+	{
+		$this->set_message(
+			Ut::perc_replace(
+				$this->_t('EditSectionHint'),
+				$section,
+				$this->compose_link_to_page($this->tag, '', $this->page['title'], $this->tag)
+			), 'section-info');
+	}
+
+	// section edit
+	if ($this->db->section_edit && isset($_GET['section']))
+	{
+		$p	= $this->extract_sections($this->page['body'], $section, 'get');
+
+		// assign section as page body
+		$this->page['body']		= $p['body'];
+		$this->page['title']	= $p['title'];
+	}
+
 	// fetch fields
 	$previous	= $_POST['previous']	?? ($this->page['modified']	?? null);
 	$body		= $_POST['body']		?? ($this->page['body']		?? null);
 	$title		= $_POST['title']
 					?? $this->page['title']
-						?? (isset($this->sess->title)
-							? (empty($this->sess->title)
-								? $this->get_page_title($this->tag)
-								: $this->sess->title)
+						?? (!empty($this->sess->title)
+							? $this->sess->title
 							: $this->get_page_title($this->tag)
 						);
 
+	$section	= (int)		($_POST['section']		?? $section);
 	$edit_note	= (string)	($_POST['edit_note']	?? '');
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
 
@@ -323,11 +394,9 @@ if ($this->has_access('read')
 		$tpl->r_title = $this->page['title'];
 	}
 
-	$tpl->previous	= $previous; // -> [ ' previous | e attr ' ]
-
-	// FIXME: \n gets stripped by assign() function in TemplatestSetter class, see line 117
-	// -> workaround: [ ' body | pre ' ]
-	$tpl->body		= Ut::html($body);  // -> [ ' body | pre ' ]
+	$tpl->section	= $section;
+	$tpl->previous	= $previous;		// -> [ ' previous | e attr ' ]
+	$tpl->body		= Ut::html($body);	// -> [ ' body | pre ' ]
 
 	if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 	{

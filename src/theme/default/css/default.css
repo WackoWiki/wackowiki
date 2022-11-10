@@ -198,17 +198,24 @@ a:target {
 	background-color: var(--ww-a-target-bg);
 }
 
+.heading {
+	clear: both;
+}
 .heading > a.self-link::before {
 	content: "§";
 	visibility: hidden;
 }
-
-.heading{
-	clear: both;
-}
-
 .heading:hover > a.self-link::before {
 	content: "§";
+	visibility: visible;
+	text-decoration: none;
+}
+
+.heading > a.edit-section
+{
+	visibility: hidden;
+}
+.heading:hover > a.edit-section {
 	visibility: visible;
 	text-decoration: none;
 }
@@ -235,6 +242,14 @@ a.self-link:hover {
 /* a.self-link::before {
 	content: "¶"; 
 } */
+
+a.edit-section {
+	float: right;
+	font-size: small;
+}
+[dir="rtl"] a.edit-section {
+	float: left;
+}
 
 .clearfix::after,
 #mainwrapper::after {
@@ -357,6 +372,14 @@ form input.submitinput {
 }
 .msg.notice::after {
 	content: url('./../icon/info.svg') " ";
+}
+
+.section-info {
+	border: 1px solid #cdcdcd;
+	color: gray;
+}
+.msg.section-info::after {
+	content: url('./../icon/section.svg') " ";
 }
 
 .success {

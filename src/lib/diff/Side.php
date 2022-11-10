@@ -4,13 +4,13 @@
 
 class Side
 {
-	var $position;
-	var $cursor;
-	var $content;
-	var $character;
-	var $directive;
-	var $argument;
-	var $length;
+	public $position;
+	public $cursor;
+	public $content;
+	public $character;
+	public $directive;
+	public $argument;
+	public $length;
 
 	function __construct($content)
 	{

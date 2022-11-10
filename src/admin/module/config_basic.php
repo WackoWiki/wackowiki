@@ -80,6 +80,7 @@ function admin_config_basic(&$engine, $module)
 		$config['menu_items']					= (int) $_POST['menu_items'];
 		$config['edit_summary']					= (int) $_POST['edit_summary'];
 		$config['minor_edit']					= (int) $_POST['minor_edit'];
+		$config['section_edit']					= (int) $_POST['section_edit'];
 		$config['review']						= (int) $_POST['review'];
 		$config['publish_anonymously']			= (int) $_POST['publish_anonymously'];
 		$config['default_rename_redirect']		= (int) ($_POST['default_rename_redirect'] ?? 0);
@@ -650,6 +651,19 @@ function admin_config_basic(&$engine, $module)
 				<td>
 					<input type="radio" id="minor_edit_on" name="minor_edit" value="1"<?php echo ($engine->db->minor_edit ? ' checked' : '');?>><label for="minor_edit_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="minor_edit_off" name="minor_edit" value="0"<?php echo (!$engine->db->minor_edit ? ' checked' : '');?>><label for="minor_edit_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for=""><strong><?php echo $engine->_t('SectionEdit');?></strong><br>
+					<small><?php echo $engine->_t('SectionEditInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="section_edit_on" name="section_edit" value="1"<?php echo ($engine->db->section_edit == 1 ? ' checked' : '');?>><label for="section_edit_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="section_edit_off" name="section_edit" value="0"<?php echo (!$engine->db->section_edit ? ' checked' : '');?>><label for="section_edit_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">

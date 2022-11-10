@@ -2,7 +2,7 @@
 
 class DiffOp_Delete extends DiffOp
 {
-	var $type = 'delete';
+	public $type = 'delete';
 
 	function __construct($lines)
 	{

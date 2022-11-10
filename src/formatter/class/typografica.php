@@ -273,7 +273,7 @@ class Typografica
 			{
 				$_data	= $data;
 				$data	= preg_replace('/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([A-Za-z\d\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|\u{0094}))/ui', "\\1\u{0093}\\2", $data);			// \u{0093} <Set Transmit State>
-				$data	= preg_replace('/(\u{0093}([A-Za-z\d\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z\d][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/ui', "\\1\u{0094}", $data);	// \u{0094} <Cancel Character>
+				$data	= preg_replace('/(\u{0093}([A-Za-z\d\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z\d][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/ui', "\\1\u{0094}", $data);		// \u{0094} <Cancel Character>
 			}
 		}
 
@@ -321,39 +321,39 @@ class Typografica
 		// 4. (c)
 		if ($this->settings['(c)'])
 		{
-			$data = preg_replace('/\([cCñÑ]\)/ui', '©', $data);			// \u{00A9}
+			$data = preg_replace('/\([cCñÑ]\)/ui', '©', $data);					// \u{00A9}
 		}
 
 		// 4a. (r)
 		if ($this->settings['(r)'])
 		{
-			$data = preg_replace('/\(r\)/ui', '<sup>®</sup>', $data);	// \u{00AE}
+			$data = preg_replace('/\(r\)/ui', '<sup>®</sup>', $data);			// \u{00AE}
 		}
 
 		// 4b. (tm)
 		if ($this->settings['(tm)'])
 		{
-			$data = preg_replace('/\(tm\)|\(тм\)/ui', '™', $data);		// \u{2122}
+			$data = preg_replace('/\(tm\)|\(тм\)/ui', '™', $data);				// \u{2122}
 		}
 
 		// 4c. (p)
 		if ($this->settings['(p)'])
 		{
-			$data = preg_replace('/\(p\)/ui', '§', $data);				// \u{00A7}
+			$data = preg_replace('/\(p\)/ui', '§', $data);						// \u{00A7}
 		}
 
 		// 5. +/-
 		if ($this->settings['+-'])
 		{
-			$data = preg_replace('/\+\-/u', '±', $data);				// \u{00B1}
+			$data = preg_replace('/\+\-/u', '±', $data);						// \u{00B1}
 		}
 
 		// 5a. 12°C
 		if ($this->settings['degrees'])
 		{
-			$data = preg_replace('/-(\d)+\^([FCÑK])/u', "-\\1°\\2", $data);	// \u{00B0} Degree Sign
-			$data = preg_replace('/\+(\d)+\^([FCÑK])/u', "+\\1°\\2", $data);	// \u{00B0}
-			$data = preg_replace('/\^([FCÑK])/u', "°\\1", $data);				// \u{00B0}
+			$data = preg_replace('/-(\d)+\^([FCÑK])/u',		"-\\1°\\2",	$data);	// \u{00B0} Degree Sign
+			$data = preg_replace('/\+(\d)+\^([FCÑK])/u',	"+\\1°\\2",	$data);	// \u{00B0}
+			$data = preg_replace('/\^([FCÑK])/u',			"°\\1",		$data);	// \u{00B0}
 		}
 
 		// 6. phones

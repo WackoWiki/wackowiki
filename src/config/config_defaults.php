@@ -100,6 +100,7 @@ $wacko_config_defaults = [
 
 	'edit_summary'					=> 0,
 	'minor_edit'					=> 0,
+	'section_edit'					=> 0,
 	'review'						=> 0,
 
 	'enable_comments'				=> 1,

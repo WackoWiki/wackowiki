@@ -2,9 +2,9 @@
 
 class DiffOp
 {
-	var $type;
-	var $orig;
-	var $final;
+	public $type;
+	public $orig;
+	public $final;
 
 	function norig()
 	{

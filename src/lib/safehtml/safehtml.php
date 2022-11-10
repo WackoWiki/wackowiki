@@ -17,7 +17,7 @@
 /**
  * This package requires HTMLSax3 package
  */
-require_once(XML_HTMLSAX3 . 'HTMLSax3.php');
+require_once XML_HTMLSAX3 . 'HTMLSax3.php';
 
 /**
  * HTML_Safe Parser
@@ -310,7 +310,7 @@ class SafeHTML
 					continue;
 				}
 
-				if (!preg_match('/^[a-z0-9]+$/i', $name))
+				if (!preg_match('/^[a-z\d]+$/i', $name))
 				{
 					if (!in_array($name, $this->attributesNS))
 					{
@@ -364,7 +364,7 @@ class SafeHTML
 
 				$tempval = preg_replace_callback('/&#(\d+);?/m', function ($matches) { return chr($matches[1]); }, $value); //"'
 				$tempval = preg_replace_callback(
-					'/&#x([0-9a-f]+);?/mi',
+					'/&#x([a-f\d]+);?/mi',
 					function ($matches) { return chr(hexdec($matches[1])); },
 					$tempval
 				);
@@ -436,7 +436,7 @@ class SafeHTML
 			return true;
 		}
 
-		if (!preg_match('/^[a-z0-9]+$/i', $name))
+		if (!preg_match('/^[a-z\d]+$/i', $name))
 		{
 			if (preg_match('!(?:\@|://)!i', $name))
 			{
@@ -718,7 +718,7 @@ class SafeHTML
 	 */
 	function repackUTF7($str)
 	{
-		return preg_replace_callback('!\+([0-9a-zA-Z/]+)\-!', [$this, 'repackUTF7Callback'], $str);
+		return preg_replace_callback('!\+([a-zA-Z\d/]+)\-!', [$this, 'repackUTF7Callback'], $str);
 	}
 
 	/**

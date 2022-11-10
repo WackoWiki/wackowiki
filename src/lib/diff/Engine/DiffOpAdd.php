@@ -2,7 +2,7 @@
 
 class DiffOp_Add extends DiffOp
 {
-	var $type = 'add';
+	public $type = 'add';
 
 	function __construct($lines)
 	{
