@@ -18,6 +18,8 @@
 			=]
 			<form action="[ ' href: edit ' ]" method="post" id="edit_page" name="edit_page" cf="true">
 				[ ' csrf: edit_page ' ]
+				<input type="hidden" name="section" value="[ ' section ' ]">
+				<input type="hidden" name="previous" value="[ ' previous | e attr ' ]">
 				[= new _ =
 					<input type="hidden" name="page_lang" value="[ ' lang | e attr ' ]">
 					<input type="hidden" name="tag" value="[ ' tag | e attr ' ]">
@@ -26,18 +28,17 @@
 				[ '' buttons '' ]
 				<br>
 				<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
+				[= r _ =
+					<br>
+					<h1>[ ' title | e ' ]</h1>
+				=]
 				[= e _ =
 					<br>
 					<label for="page_title">[ ' label ' ]</label><br>
 					<input type="text" id="page_title" name="title" class="input-title" maxlength="250" value="[ ' title | e attr ' ]" size="100">
 					<br>
 				=]
-				[= r _ =
-					<br>
-					<h1>[ ' title | e ' ]</h1>
-				=]
 
-				<input type="hidden" name="previous" value="[ ' previous | e attr ' ]"><br>
 				<label for="postText" class="visuallyhidden">[ ' _t: PageBody ' ]</label>
 				<textarea id="postText" name="body" class="textarea-page" rows="40" cols="60" required>[ ' body | pre ' ]</textarea>
 				<br>
@@ -64,7 +65,7 @@
 				=]
 				[= w _ =
 					<input type="checkbox" id="watchpage" name="watchpage" value="1" [ ' checked ' ]>
-					<label for="watchpage">[ ' _t: NotifyMe ' ]</label>
+					<label for="watchpage" title="[ ' _t: NotifyMe ' ]">[ ' _t: SetWatch ' ]</label>
 					<br>
 				=]
 				[= c _ =

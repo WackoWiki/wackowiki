@@ -328,7 +328,11 @@ class Paragrafica
 			// notoc=0 (default)
 			if ($matches[8] == '')
 			{
-				$this->toc[] = [$this->wacko->unwrap_link(trim($matches[7], '"')), '(include)', 99999];
+				$this->toc[] = [
+					$this->wacko->unwrap_link(trim($matches[7], '"')),
+					'(include)',
+					99999
+				];
 			}
 		}
 		else
@@ -336,11 +340,19 @@ class Paragrafica
 			// id, text, depth
 			if ($matches[6] != '')
 			{
-				$this->toc[] = [$matches[6], '(p)', 77777];
+				$this->toc[] = [
+					$matches[6],
+					'(p)',
+					77777
+				];
 			}
 			else
 			{
-				$this->toc[] = [$matches[3], $matches[4], $matches[2]];
+				$this->toc[] = [
+					$matches[3],
+					$matches[4],		// strip_tags()
+					$matches[2]
+				];
 			}
 		}
 

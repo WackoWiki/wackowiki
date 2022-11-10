@@ -245,6 +245,7 @@ a.self-link:hover {
 
 a.edit-section {
 	float: right;
+	font-size: small;
 }
 [dir="rtl"] a.edit-section {
 	float: left;
@@ -370,6 +371,14 @@ form input.submitinput {
 }
 .msg.notice::after {
 	content: url('./../icon/info.svg') " ";
+}
+
+.section-info {
+	border: 1px solid #cdcdcd;
+	color: gray;
+}
+.msg.section-info::after {
+	content: url('./../icon/section.svg') " ";
 }
 
 .success {

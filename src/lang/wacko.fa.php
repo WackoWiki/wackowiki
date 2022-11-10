@@ -204,6 +204,8 @@ $wacko_translation = [
 	'PropertiesTip'				=> 'Edit Page Properties',
 	'EditTip'					=> 'Edit this page.',
 	'EditText'					=> 'ویرایش',
+	'EditSection'				=> 'ویرایش بخش %1',
+	'EditSectionHint'			=> 'Section %1 of %2',
 	'EditCommentTip'			=> 'Edit comment',
 	'EditComment'				=> 'Edit this comment',
 	'ReplyComment'				=> 'پاسخ',
@@ -493,7 +495,7 @@ $wacko_translation = [
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Records per page',
 	'DoShowComments'			=> 'Show comments by default',
-	'DoubleclickEditing'		=> 'Doubleclick Editing',
+	'DoubleclickEditing'		=> 'ویرایش صفحه‌ها با دو کلیک',
 	'UpdateSettingsButton'		=> 'تنظیمات را ذخیره کن',
 
 	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
@@ -596,7 +598,7 @@ $wacko_translation = [
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
 	'UserSpace'					=> 'فضای کاربری',
-	'ChooseTheme'				=> 'Choose theme',
+	'ChooseTheme'				=> 'پوسته',
 
 	'CreatePage'				=> 'Create this page',
 	'CreateNewPage'				=> 'Create a new page',

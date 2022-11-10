@@ -5274,6 +5274,120 @@ class Wacko
 		return $body_r;
 	}
 
+	/**
+	 * Parses wikitext into sections
+	 *
+	 * Extracts body sections and optionaly merges all nested sections with the selected $section
+	 * The section number 0 pulls the text before the first heading; other numbers will
+	 * pull the given section along with its lower-level subsections.
+	 *
+	 * Section 0 is always considered to exist, even if it only contains the empty
+	 * string.
+	 *
+	 * @param string		$body			wikitext
+	 * @param int			$section_id		section number
+	 * @param bool			$mode			'get' or 'replace'
+	 * @param string|false	$new_section	replacement text for section data
+	 *
+	 * @return array		section array with level, title and body
+	 */
+	function extract_sections($body, $section_id, $mode, $new_section = ''): ?array
+	{
+		/**
+		 * [0] start
+		 * -----------------
+		 * [1] === (header level)
+		 * [2] title
+		 * [3] body
+		 * -----------------
+		 * ...
+		 */
+		$_body = preg_split("/\n?[ \t]*(={2,7})(.*?)={2,7}/u", $body, 0, PREG_SPLIT_DELIM_CAPTURE);
+
+		$a = 0;	// value [0|1|2]
+		$s = 0;	// section_id
+		$n = 0;
+
+		foreach ($_body as $i => $value)
+		{
+			if ($i == 0)
+			{
+				$p[] = [
+					'h'		=> 0,
+					'body'	=> $value,
+					'title'	=> '',
+				];
+			}
+			else
+			{
+				// reset after every third loop
+				if ($n % 3 == 0)
+				{
+					$a = 0;
+					$s++;
+				}
+
+				$name = match($a){
+					0 => 'h',
+					1 => 'title',
+					2 => 'body',
+				};
+
+				$p[$s][$name]	= $value;
+
+				$a++;
+				$n++;
+			}
+		}
+
+		unset($_body);
+
+		// get body section with nested sections (smaller headers),
+		$__body = [];
+
+		foreach ($p as $sec => $value)
+		{
+			if ($sec < $section_id)
+			{
+				continue;
+			}
+
+			if ($sec == $section_id)
+			{
+				// get section level (smaller value means bigger header)
+				$h_level	= substr_count($value['h'], '=');
+				$__body[]	= $new_section ?: $value['body'];
+			}
+			else if ($h_level < substr_count($value['h'], '='))
+			{
+				// merge nested sections
+				if (!$new_section)
+				{
+					$__body[]	= "\n" . $value['h'] . $value['title'] . $value['h'];
+					$__body[]	= $value['body'];
+				}
+
+				unset($p[$sec]);
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		// merge selected section with nested sections
+		$p[$section_id]['body'] = implode('', $__body);
+
+		// pull section
+		if ($mode === 'get')
+		{
+			return $p[$section_id];
+		}
+
+		// replace section
+		return $p;
+	}
+
 	// GROUPS
 	function load_usergroup($group_name, $group_id = 0)
 	{

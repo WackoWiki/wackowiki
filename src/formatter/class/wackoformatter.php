@@ -391,7 +391,7 @@ class WackoFormatter
 		// escaped html
 		else if (preg_match('/^\<\#(.*)\#\>$/us', $thing, $matches))
 		{
-			if ($this->object->db->disable_safehtml)
+			if ($wacko->db->disable_safehtml)
 			{
 				return '<!--notypo-->' . $matches[1] . '<!--/notypo-->';
 			}
@@ -609,7 +609,7 @@ class WackoFormatter
 			$this->br = 1;
 
 			if (isset($matches[3])
-				&& $color = in_array($matches[3], ($this->object->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
+				&& $color = in_array($matches[3], ($wacko->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
 			{
 				return '<span class="cl-' . $color . '">' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[4]) . '</span>';
 			}
@@ -622,7 +622,7 @@ class WackoFormatter
 			$this->br = 1;
 
 			if (isset($matches[3])
-				&& $color = in_array($matches[3], ($this->object->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
+				&& $color = in_array($matches[3], ($wacko->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
 			{
 				return '<mark class="mark-' . $color . '">' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[4]) . '</mark>';
 			}
@@ -714,10 +714,18 @@ class WackoFormatter
 				'<h' . $h_level . ' id="' . $header_id . '" class="heading">' .
 					preg_replace_callback($this->LONG_REGEX, $callback, $matches[2]) .
 					'<a class="self-link" href="#' . $header_id . '"></a>' .
-					// non-static section edit link via action for <h2> headings
-					($this->object->db->section_edit && $h_level == 2
-						? '<!--notypo--><!--action:begin-->editsection page=' . '/' . $wacko->page['tag'] . ' section=' . $wacko->header_count . '<!--action:end--><!--/notypo-->'
+
+					// non-static section edit link via action
+					($wacko->db->section_edit
+						&& in_array($wacko->method, ['show', 'edit'])
+						&& $h_level > 1
+						? '<!--notypo--><!--action:begin-->' .
+							'editsection ' .
+								'page=' . '/' . $wacko->page['tag'] . ' ' .
+								'section=' . $wacko->header_count .
+							'<!--action:end--><!--/notypo-->'
 						: '') .
+
 				'</h' . $h_level . '>';
 		}
 		// separators

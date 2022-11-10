@@ -204,6 +204,8 @@ $wacko_translation = [
 	'PropertiesTip'				=> 'Edit Page Properties',
 	'EditTip'					=> 'इस पृष्ठ को संपादित करें',
 	'EditText'					=> 'सम्पादन',
+	'EditSection'				=> 'अनुभाग सम्पादित करें %1',
+	'EditSectionHint'			=> 'Section %1 of %2',
 	'EditCommentTip'			=> 'Edit comment',
 	'EditComment'				=> 'Edit this comment',
 	'ReplyComment'				=> 'जवाब दें',
@@ -493,7 +495,7 @@ $wacko_translation = [
 	'MenuItemsShown'			=> 'मेनू आइटम दिखाए गए',
 	'RecordsPerPage'			=> 'प्रति पृष्ठ अभिलेखॉ',
 	'DoShowComments'			=> 'Show comments by default',
-	'DoubleclickEditing'		=> 'Doubleclick Editing',
+	'DoubleclickEditing'		=> 'डबल क्लिक पर पृष्ठ संपादित करें',
 	'UpdateSettingsButton'		=> 'विन्यासों को सहेजें',
 
 	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
