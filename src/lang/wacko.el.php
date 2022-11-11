@@ -206,6 +206,7 @@ $wacko_translation = [
 	'EditText'					=> 'Επεξεργασία σελίδας',
 	'EditSection'				=> 'Επεξεργασία ενότητας %1',
 	'EditSectionHint'			=> 'Section %1 of %2',
+	'SectionHeadline'			=> 'Ενότητας',
 	'EditCommentTip'			=> 'Κάντε κλικ για να επεξεργαστείτε αυτό το σχόλιο.',
 	'EditComment'				=> 'Επεξεργασία αυτό το σχόλιο',
 	'ReplyComment'				=> 'Απάντηση',

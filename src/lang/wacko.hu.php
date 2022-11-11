@@ -206,6 +206,7 @@ $wacko_translation = [
 	'EditText'					=> 'Szerkesztés',
 	'EditSection'				=> 'Szakasz %1 szerkesztése',
 	'EditSectionHint'			=> 'Section %1 of %2',
+	'SectionHeadline'			=> 'Szakasz',
 	'EditCommentTip'			=> 'Megjegyzés szerkesztése',
 	'EditComment'				=> 'Szerkessze ezt a megjegyzést',
 	'ReplyComment'				=> 'Válasz',

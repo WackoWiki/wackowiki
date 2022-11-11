@@ -206,6 +206,7 @@ $wacko_translation = [
 	'EditText'					=> 'Bewerk deze pagina',
 	'EditSection'				=> 'Deelpagina %1 bewerken',
 	'EditSectionHint'			=> 'Section %1 of %2',
+	'SectionHeadline'			=> 'Deelpagina',
 	'EditCommentTip'			=> 'Reactie bewerken',
 	'EditComment'				=> 'Bewerk deze reactie',
 	'ReplyComment'				=> 'Antwoord',

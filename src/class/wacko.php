@@ -5280,6 +5280,8 @@ class Wacko
 		return $body_r;
 	}
 
+	// SECTIONS
+
 	/**
 	 * Parses wikitext into sections
 	 *
@@ -5292,10 +5294,10 @@ class Wacko
 	 *
 	 * @param string		$body			wikitext
 	 * @param int			$section_id		section number
-	 * @param bool			$mode			'get' or 'replace'
-	 * @param string|false	$new_section	replacement text for section data
+	 * @param string		$mode			'get' or 'replace'
+	 * @param array|false	$new_section	replacement array with [title, body] for section data
 	 *
-	 * @return array		section array with level, title and body
+	 * @return array		section array with [level, title, body]
 	 */
 	function extract_sections($body, $section_id, $mode, $new_section = ''): ?array
 	{
@@ -5308,8 +5310,11 @@ class Wacko
 		 * -----------------
 		 * ...
 		 */
-		$_body = preg_split("/\n?[ \t]*(={2,7})(.*?)={2,7}/u", $body, 0, PREG_SPLIT_DELIM_CAPTURE);
+		// adds dummy \n before $body for regex to ensure section 0 before the first heading, strips it afterwards;
+		// \n? would break matches with the delimiter inside the text itself
+		$_body = preg_split("/\n[ \t]*(={2,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
 
+		#Ut::debug_print_r($_body);
 		$a = 0;	// value [0|1|2]
 		$s = 0;	// section_id
 		$n = 0;
@@ -5320,7 +5325,7 @@ class Wacko
 			{
 				$p[] = [
 					'h'		=> 0,
-					'body'	=> $value,
+					'body'	=> preg_replace("/^\n/", '', $value),	// strip dummy \n
 					'title'	=> '',
 				];
 			}
@@ -5348,7 +5353,7 @@ class Wacko
 
 		unset($_body);
 
-		// get body section with nested sections (smaller headers),
+		// get body section with nested sections (smaller headers)
 		$__body = [];
 
 		foreach ($p as $sec => $value)
@@ -5362,7 +5367,7 @@ class Wacko
 			{
 				// get section level (smaller value means bigger header)
 				$h_level	= substr_count($value['h'], '=');
-				$__body[]	= $new_section ?: $value['body'];
+				$__body[]	= $value['body'];
 			}
 			else if ($h_level < substr_count($value['h'], '='))
 			{
@@ -5381,8 +5386,20 @@ class Wacko
 			}
 		}
 
-		// merge selected section with nested sections
-		$p[$section_id]['body'] = implode('', $__body);
+		if ($mode === 'replace' && $new_section)
+		{
+			// replace section
+			$p[$section_id] = [
+				'h'		=> $p[$section_id]['h'],
+				'title'	=> $new_section['title'],
+				'body'	=> "\n" . $new_section['body'],
+			];
+		}
+		else
+		{
+			// merge selected section with nested sections
+			$p[$section_id]['body'] = implode('', $__body);
+		}
 
 		// pull section
 		if ($mode === 'get')
@@ -5390,8 +5407,50 @@ class Wacko
 			return $p[$section_id];
 		}
 
-		// replace section
 		return $p;
+	}
+
+	/**
+	 * Merges sections into wikitext
+	 *
+	 * Section number 0 contains the text before the first heading.
+	 *
+	 * @param array		$sections		array with section data [level, title, body]
+	 *
+	 * @return string					wikitext body
+	 */
+	function merge_sections($sections): string
+	{
+		$body	= [];
+
+		foreach ($sections as $i => $section)
+		{
+			// set original line break
+			// for first header, if section 0 is empty there is none
+			$nl = ($i == 1 && $sections[0]['body'] == '' ? '' : "\n");
+
+			if ($section['title'])
+			{
+				$body[]	= $nl . $section['h'] . $section['title'] . $section['h'];
+			}
+
+			$body[]	= $section['body'];
+		}
+
+		unset($sections);
+
+		return implode('', $body);
+	}
+
+	function replace_section($body, $section_id, $new_section)
+	{
+		return $this->merge_sections(
+			$this->extract_sections(
+				$body,						// $this->page['body']
+				$section_id,
+				'replace',
+				$new_section)
+			);
 	}
 
 	// GROUPS
