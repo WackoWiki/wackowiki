@@ -206,6 +206,7 @@ $wacko_translation = [
 	'EditText'					=> 'Muuda lehte',
 	'EditSection'				=> 'Muuda alaosa %1',
 	'EditSectionHint'			=> 'Section %1 of %2',
+	'SectionHeadline'			=> 'Alaosa',
 	'EditCommentTip'			=> 'Muuda kommentaari',
 	'EditComment'				=> 'Muuda seda kommentaari',
 	'ReplyComment'				=> 'Reply',

@@ -108,11 +108,11 @@ if ($this->has_access('read')
 			if ($section)
 			{
 				$title		= trim($this->page['title']);
-				$sec_title	= trim(	($_POST['title']	?? $this->page['title']));
+				$sec_title	= trim(($_POST['title']	?? $this->page['title']));
 			}
 			else
 			{
-				$title		= trim(	($_POST['title']	?? $this->page['title']));
+				$title		= trim(($_POST['title']	?? $this->page['title']));
 			}
 
 			// check for reserved word
@@ -189,38 +189,10 @@ if ($this->has_access('read')
 					$this->set_user_setting('user_name', null);
 				}
 
-				// merge section
+				// update section
 				if ($this->db->section_edit && $section)
 				{
-					$p = $this->extract_sections($this->page['body'], $section, 'replace');
-
-					// update changed section body & title
-					$p[$section] = [
-						'h'		=> $p[$section]['h'],
-						'title'	=> $sec_title,
-						'body'	=> "\n" . $body,
-					];
-
-					$_body	= [];
-
-					foreach ($p as $i => $part)
-					{
-						// get original line break for first header, if section 0 is empty it's none
-						$nl = ($i == 1 && $p[0]['body'] == '' ? '' : "\n");
-
-						if ($part['title'])
-						{
-							$_body[]	= $nl . $part['h'] . $part['title'] . $part['h'];
-						}
-
-						$_body[]	= $part['body'];
-					}
-
-					unset($p);
-
-					$body = implode('', $_body);
-
-					unset($_body);
+					$body = $this->replace_section($this->page['body'], $section, ['title' => $sec_title, 'body' => $body]);
 				}
 
 				// add page (revisions)
@@ -386,7 +358,9 @@ if ($this->has_access('read')
 	{
 		// edit page title
 		$tpl->e_title = $title;
-		$tpl->e_label = $this->_t('MetaTitle');
+		$tpl->e_label = $section
+			? $this->_t('SectionHeadline')			// Headline (section) or $section_title
+			: $this->_t('MetaTitle');
 	}
 	else
 	{

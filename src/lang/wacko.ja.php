@@ -206,6 +206,7 @@ $wacko_translation = [
 	'EditText'					=> '編集',
 	'EditSection'				=> '節を編集 %1',
 	'EditSectionHint'			=> 'Section %1 of %2',
+	'SectionHeadline'			=> '節を',
 	'EditCommentTip'			=> 'Edit comment',
 	'EditComment'				=> 'Edit this comment',
 	'ReplyComment'				=> 'Reply',

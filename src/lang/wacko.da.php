@@ -206,6 +206,7 @@ $wacko_translation = [
 	'EditText'					=> 'Rediger siden',
 	'EditSection'				=> 'Redigér afsnit %1',
 	'EditSectionHint'			=> 'Section %1 of %2',
+	'SectionHeadline'			=> 'Afsnit',
 	'EditCommentTip'			=> 'Rediger kommentar',
 	'EditComment'				=> 'Rediger denne kommentar',
 	'ReplyComment'				=> 'Svar',

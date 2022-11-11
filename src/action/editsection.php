@@ -26,5 +26,4 @@ if ($this->has_access('write'))
 	$tpl->l_href	= $href;
 	$tpl->l_title	= Ut::perc_replace($this->_t('EditSection'), $section);
 	$tpl->l_text	= $text;
-	$tpl->l_section	= $section;
 }
