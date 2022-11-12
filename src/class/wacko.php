@@ -2106,37 +2106,7 @@ class Wacko
 		}
 
 		// writing xmls
-		if (!$mute)
-		{
-			if ($this->db->enable_feeds)
-			{
-				$xml = new Feed($this);
-
-				// comment it is
-				// TODO: if (!isset($old_page['comment_on_id']) && $comment_on_id)
-				// - takes 20 (hard coded) last (created not modified) comments
-				// - comments might be edited, then write comments feed again
-				if ($comment_on_id)
-				{
-					$xml->comments();
-				}
-				else
-				{
-					$xml->changes();
-
-					// write news feed
-					if ($this->db->news_cluster)
-					{
-						if (mb_substr($this->tag, 0, mb_strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
-						{
-							$xml->feed();
-						}
-					}
-				}
-
-				$this->update_sitemap();
-			}
-		}
+		$this->write_feeds($mute, $comment_on_id);
 
 		return $body_r;
 	}
@@ -2177,6 +2147,48 @@ class Wacko
 		// update user statistics for revisions made
 		$user = $this->get_user();
 		$this->update_revisions_count($page['page_id'], $user['user_id'] ?? null);
+	}
+
+	/**
+	 * Write feeds and update sitemap
+	 *
+	 * @param bool $mute
+	 * @param int $comment_on_id
+	 * @return void
+	 */
+	function write_feeds(bool $mute, int $comment_on_id): void
+	{
+		if (!$mute)
+		{
+			if ($this->db->enable_feeds)
+			{
+				$xml = new Feed($this);
+
+				// comment it is
+				// TODO: if (!isset($old_page['comment_on_id']) && $comment_on_id)
+				// - takes 20 (hard coded) last (created not modified) comments
+				// - comments might be edited, then write comments feed again
+				if ($comment_on_id)
+				{
+					$xml->comments();
+				}
+				else
+				{
+					$xml->changes();
+
+					// write news feed
+					if ($this->db->news_cluster)
+					{
+						if (mb_substr($this->tag, 0, mb_strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
+						{
+							$xml->feed();
+						}
+					}
+				}
+
+				$this->update_sitemap();
+			}
+		}
 	}
 
 	function update_sitemap(): void
