@@ -79,6 +79,7 @@ function admin_system_info(&$engine, $module)
 	$sysinfo['db_version']			= [$engine->_t('DbVersion'), $db_version];
 	$sysinfo['sql_mode_global']		= [$engine->_t('SqlModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
 	$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
+	$sysinfo['icu_version']			= [$engine->_t('IcuVersion'), INTL_ICU_VERSION];
 	$sysinfo['php_version']			= [$engine->_t('PhpVersion'), PHP_VERSION];
 	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->binary_multiples($memory * 1024 * 1024, false, true, true)];
 	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
