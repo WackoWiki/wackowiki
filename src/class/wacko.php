@@ -1886,71 +1886,6 @@ class Wacko
 					}
 				}
 
-				$acl	= [];
-
-				// create appropriate acls
-				if (mb_strstr($this->context[$this->current_context], '/') && !$comment_on_id)
-				{
-					$root			= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context]);
-					$root_id		= $this->get_page_id($root);
-					$write_acl		= $this->load_acl($root_id, 'write');
-
-					while (!empty($write_acl['default']) && $write_acl['default'] == 1)
-					{
-						$_root		= $root;
-						$root		= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $root);
-
-						if ($root == $_root)
-						{
-							break;
-						}
-
-						$root_id	= $this->get_page_id($root); // do we need this?
-						$write_acl	= $this->load_acl($root_id, 'write');
-					}
-
-					$acl['write']	= $write_acl['list'];
-
-					$read_acl		= $this->load_acl($root_id, 'read');
-					$acl['read']	= $read_acl['list'];
-
-					$comment_acl	= $this->load_acl($root_id, 'comment');
-					$acl['comment']	= $comment_acl['list'];
-
-					$create_acl		= $this->load_acl($root_id, 'create');
-					$acl['create']	= $create_acl['list'];
-
-					$upload_acl		= $this->load_acl($root_id, 'upload');
-					$acl['upload']	= $upload_acl['list'];
-
-					// forum topic privileges
-					if ($this->forum)
-					{
-						$acl['write']	= $user_name;
-						$acl['comment']	= $this->db->default_comment_acl;
-						$acl['create']	= '';
-						$acl['upload']	= '';
-					}
-				}
-				else if ($comment_on_id)
-				{
-					// give comments the same read rights as their parent page
-					$read_acl		= $this->load_acl($comment_on_id, 'read');
-					$acl['read']	= $read_acl['list'];
-					$acl['write']	= '';
-					$acl['comment']	= '';
-					$acl['create']	= '';
-					$acl['upload']	= '';
-				}
-				else
-				{
-					$acl['read']	= $this->db->default_read_acl;
-					$acl['write']	= $this->db->default_write_acl;
-					$acl['comment']	= $this->db->default_comment_acl;
-					$acl['create']	= $this->db->default_create_acl;
-					$acl['upload']	= $this->db->default_upload_acl;
-				}
-
 				if ($comment_on_id)
 				{
 					$depth = 1;
@@ -1999,6 +1934,9 @@ class Wacko
 
 				// IMPORTANT! lookup newly created page_id
 				$page_id = $this->get_page_id($tag);
+
+				// create appropriate acls
+				$acl = $this->get_acl_defaults($user_name, $comment_on_id);
 
 				// saving acls
 				$this->save_acl($page_id, 'read',		$acl['read']);
@@ -6066,6 +6004,83 @@ class Wacko
 		{
 			return true;
 		}
+	}
+
+	/**
+	 * get default page permissions
+	 *
+	 * @param string|null	$user_name
+	 * @param int			$comment_on_id
+	 *
+	 * @return array		['read', 'write', 'comment', 'create', 'upload']
+	 */
+	function get_acl_defaults($user_name, $comment_on_id): array
+	{
+		$acl	= [];
+
+		if (mb_strstr($this->context[$this->current_context], '/') && !$comment_on_id)
+		{
+			$root			= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context]);
+			$root_id		= $this->get_page_id($root);
+			$write_acl		= $this->load_acl($root_id, 'write');
+
+			while (!empty($write_acl['default']) && $write_acl['default'] == 1)
+			{
+				$_root		= $root;
+				$root		= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $root);
+
+				if ($root == $_root)
+				{
+					break;
+				}
+
+				$root_id	= $this->get_page_id($root); // do we need this?
+				$write_acl	= $this->load_acl($root_id, 'write');
+			}
+
+			$acl['write']	= $write_acl['list'];
+
+			$read_acl		= $this->load_acl($root_id, 'read');
+			$acl['read']	= $read_acl['list'];
+
+			$comment_acl	= $this->load_acl($root_id, 'comment');
+			$acl['comment']	= $comment_acl['list'];
+
+			$create_acl		= $this->load_acl($root_id, 'create');
+			$acl['create']	= $create_acl['list'];
+
+			$upload_acl		= $this->load_acl($root_id, 'upload');
+			$acl['upload']	= $upload_acl['list'];
+
+			// forum topic privileges
+			if ($this->forum)
+			{
+				$acl['write']	= $user_name;
+				$acl['comment']	= $this->db->default_comment_acl;
+				$acl['create']	= '';
+				$acl['upload']	= '';
+			}
+		}
+		else if ($comment_on_id)
+		{
+			// give comments the same read rights as their parent page
+			$read_acl		= $this->load_acl($comment_on_id, 'read');
+			$acl['read']	= $read_acl['list'];
+			$acl['write']	= '';
+			$acl['comment']	= '';
+			$acl['create']	= '';
+			$acl['upload']	= '';
+		}
+		else
+		{
+			$acl['read']	= $this->db->default_read_acl;
+			$acl['write']	= $this->db->default_write_acl;
+			$acl['comment']	= $this->db->default_comment_acl;
+			$acl['create']	= $this->db->default_create_acl;
+			$acl['upload']	= $this->db->default_upload_acl;
+		}
+
+		return $acl;
 	}
 
 	function save_acl($page_id, $privilege, $list): void
