@@ -1129,6 +1129,7 @@ $ap_translation = [
 	'DbVersion'					=> 'MariaDB / MySQL',
 	'SqlModesGlobal'			=> 'SQL 模式全局',
 	'SqlModesSession'			=> 'SQL 模式会话',
+	'IcuVersion'				=> 'ICU',
 	'PhpVersion'				=> 'PHP',
 	'MemoryLimit'				=> '内存',
 	'UploadFilesizeMax'			=> '上传最大文件大小',

@@ -1128,6 +1128,7 @@ $ap_translation = [
 	'DbVersion'					=> 'СУБД MariaDB / MySQL',
 	'SqlModesGlobal'			=> 'Глобальные настройки SQL',
 	'SqlModesSession'			=> 'Настройки SQL сеанса',
+	'IcuVersion'				=> 'ICU',
 	'PhpVersion'				=> 'Версия PHP',
 	'MemoryLimit'				=> 'Лимит памяти',
 	'UploadFilesizeMax'			=> 'Максимальный размер загружаемого файла',
