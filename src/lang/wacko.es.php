@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Publicar de manera anónima, sin dar su nombre',
 	'NotifyMe'					=> 'Notificarme sobre nuevos comentarios y cambios de la página',
 	'OverwriteAlert'			=> 'ALERTA DE CAMBIO: Esta página ha sido modificada por otra persona cuando estuviste cambiándola.<br>Copia tus cambios y vuelve a editar la página.',
+	'TextDbOversize'			=> 'Atención: Su texto excede el límite de longitud en %1 caracteres. Por favor, reduzca su texto a un número razonable de caracteres. Consejo: Puede colocar el texto restante en una página aparte.',
 	'EditingRevisionWarning'	=> 'Está editando una revisión antigua de esta página. Si lo publica, cualquier cambio hecho desde entonces será eliminado. Puede que desee editar la revisión actual en su lugar.',
 	'WriteAccessDenied'			=> 'No tienes derecho de escribir en esta página.',
 	'EmptyPage'					=> 'Página sin contenido - no guardado!',

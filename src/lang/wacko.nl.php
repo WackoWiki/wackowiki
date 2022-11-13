@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Hou mij op de hoogte van nieuwe opmerkingen en wijzigingen van de pagina',
 	'OverwriteAlert'			=> 'OVERSCHRIJF-WAARSCHUWING: Deze pagina is gewijzigd door iemand anders terwijl u deze aan het wijzigen was.<br>Maak een kopie van uw wijzigingen en bewerk de pagina opnieuw.',
+	'TextDbOversize'			=> 'Attentie: Uw tekst overschrijdt de lengtegrens met %1 tekens. Gelieve uw tekst in te korten tot een aanvaardbaar aantal karakters. Tip: U kunt de resterende tekst op een aparte pagina plaatsen.',
 	'EditingRevisionWarning'	=> 'U bewerkt een oude versie van deze pagina. Als u uw bewerking opslaat, gaan alle wijzigingen verloren die na deze versie zijn gemaakt. Het is mogelijk dat u de huidige revisie wilt bewerken. ',
 	'WriteAccessDenied'			=> 'U heeft geen schrijf rechten op deze pagina.',
 	'EmptyPage'					=> 'Page was leeg en is dus niet bewaard!',

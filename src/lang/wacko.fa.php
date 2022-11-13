@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
 	'OverwriteAlert'			=> 'OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br>Please copy your changes and re-edit this page.',
+	'TextDbOversize'			=> 'اخطار: طول متن شما از حداکثر مجاز توسط % 1 کاراکتر بیشتر است. لطفا متن را به تعداد کاراکتر قابل قبول کوتاه کنید. نکته: می توانید بقیه متن را در یک صفحه جداگانه قرار دهید.',
 	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
 	'WriteAccessDenied'			=> 'You don\'t have write access to this page.',
 	'EmptyPage'					=> 'Page body was empty - not saved!',

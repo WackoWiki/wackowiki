@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> '匿名发布，不透露姓名',
 	'NotifyMe'					=> '通知我有关页面的新评论和更改',
 	'OverwriteAlert'			=> '覆盖警报：此页面在您编辑时被其他人修改。<br>请复制您的更改并重新编辑此页面。',
+	'TextDbOversize'			=> '注意：你的文本超过了长度限制的%1个字符。请将您的文本缩短到可接受的字符数。提示：你可以将剩余的文本放在单独的一页。',
 	'EditingRevisionWarning'	=> '您正在编辑此页面的旧版本。 如果您发布它，此后所做的任何更改都将被删除。 <br>您可能希望改为编辑当前版本。',
 	'WriteAccessDenied'			=> '您没有编辑该页的权限。',
 	'EmptyPage'					=> '页面正文为空 - 未保存！',

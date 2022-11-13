@@ -104,6 +104,7 @@ if ($this->has_access('read')
 			$edit_note	= trim(	($_POST['edit_note']	?? ''));
 			$minor_edit	= (int)	($_POST['minor_edit']	?? 0);
 			$reviewed	= (int)	($_POST['reviewed']		?? 0);
+			$text_size	= strlen($_body);
 
 			if ($section)
 			{
@@ -132,12 +133,13 @@ if ($this->has_access('read')
 			}
 
 			// check text length
-			/* if ($text_chars > $max_chars)
+			if ($text_size > $this->db->max_page_size)
 			{
-				$message = Ut::perc_replace($this->_t('TextDBOversize'), $text_chars - $max_chars) . ' ';
+				$message = Ut::perc_replace($this->_t('TextDbOversize'),
+						'<code>' . number_format($text_size - $this->db->max_page_size, 0, ',', '.') . '</code>');
 				$this->set_message($message , 'error');
 				$error = true;
-			} */
+			}
 
 			// check for edit note
 			if (($this->db->edit_summary == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)

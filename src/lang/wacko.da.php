@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Send anonymt uden at give dit navn',
 	'NotifyMe'					=> 'Advisér mig om nye kommentarer og ændringer af siden',
 	'OverwriteAlert'			=> 'OVERSKRIVNING ADVARSEL: Denne side blev ændret af en anden mens du redigerede den.<br>Kopier venligst dine ændringer, og rediger forfra.',
+	'TextDbOversize'			=> 'Opmærksomhed: Din tekst overskrider længdegrænsen med %1 tegn. Du bedes forkorte din tekst til et rimeligt antal tegn. Tip: Du kan placere den resterende tekst på en separat side.',
 	'EditingRevisionWarning'	=> 'Du redigerer en gammel version af denne side. Hvis du gemmer den, vil alle ændringer foretaget siden denne revision blive overskrevet. Du kan eventuelt redigere den nuværende revision i stedet.',
 	'WriteAccessDenied'			=> 'Du har ikke tilladelse til at skrive denne side.',
 	'EmptyPage'					=> 'Sidekroppen var tom - ikke gemt!',

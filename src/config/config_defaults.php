@@ -98,7 +98,7 @@ $wacko_config_defaults = [
 	'logo_width'					=> 108,
 	'site_favicon'					=> '',
 
-	'max_page_size'					=> 2048,
+	'max_page_size'					=> 2048 * 1024,
 	'edit_summary'					=> 0,
 	'minor_edit'					=> 0,
 	'section_edit'					=> 0,

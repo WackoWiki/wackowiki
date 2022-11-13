@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Speichere anonym, ohne Angabe deines Benutzernamens',
 	'NotifyMe'					=> 'Benachrichtige mich bei neuen Kommentaren und Änderungen auf der Seite',
 	'OverwriteAlert'			=> 'ACHTUNG: Diese Seite wurde von jemandem geändert während du Sie selbst geändert hast.<br>Bitte kopiere deine Änderungen und ändere diese Seite erneut.',
+	'TextDbOversize'			=> 'Achtung: Der Text überschreitet die Längenbegrenzung um %1 Zeichen. Bitte kürze den Text auf eine akzeptable Anzahl von Zeichen. Tipp: Den restlichen Text kann man auf einer separaten Seite unterbringen.',
 	'EditingRevisionWarning'	=> 'Du bearbeitest nicht die aktuelle, sondern eine ältere Version dieser Seite. Wenn du speicherst, wird diese als aktuelle Version neu gespeichert. Eventuell später hinzugekommene Änderungen werden damit gelöscht.',
 	'WriteAccessDenied'			=> 'Du hast kein Schreibrecht auf diese Seite.',
 	'EmptyPage'					=> 'Die Seite ist leer - nicht gespeichert!',
