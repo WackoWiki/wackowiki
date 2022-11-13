@@ -12,13 +12,14 @@ $gv_settings['bindir']	= '';
 $gv_settings['filedir']	= UPLOAD_PER_PAGE_DIR;
 
 // check, if there should be another tool than dot used
-if (isset($options['neato']))		$bin = 'neato';
-else if (isset($options['circo']))	$bin = 'circo';
-else if (isset($options['twopi']))	$bin = 'twopi';
-else if (isset($options['fdp']))	$bin = 'sfdp';
-else if (isset($options['sfdp']))	$bin = 'sfdp';
-else if (isset($options['osage']))	$bin = 'osage';
-else								$bin = 'dot';
+$bin = match(key($options)){
+	'neato'			=> 'neato',
+	'circo'			=> 'circo',
+	'twopi'			=> 'twopi',
+	'fdp', 'sfdp'	=> 'sfdp',
+	'osage'			=> 'osage',
+	default			=> 'dot'
+}
 
 $gv_settings['bin'] = $gv_settings['bindir'] . $bin;
 

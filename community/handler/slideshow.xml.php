@@ -75,7 +75,7 @@ if ($this->has_access('read'))
 		}
 		else
 		{
-			#echo '<link rel="stylesheet" href="'.$this->config['theme_url'].'css/slideshow.css">';
+			#echo '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/slideshow.css">';
 		}
 
 		// display navigation menu
