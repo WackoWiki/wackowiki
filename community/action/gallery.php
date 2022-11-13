@@ -78,7 +78,7 @@ if ($target == 2)
 {
 	$script = <<<EOD
 import PhotoSwipeLightbox from '{$this->db->base_path}js/photoswipe/photoswipe-lightbox.esm.min.js';
-import PhotoSwipeDynamicCaption from '{$this->db->base_path}js/photoswipe/photoswipe-dynamic-caption-plugin.esm.js';
+import PhotoSwipeDynamicCaption from '{$this->db->base_path}js/photoswipe/photoswipe-dynamic-caption-plugin.esm.min.js';
 
 const lightbox = new PhotoSwipeLightbox({
 	gallery: '#gallery--$param_token',
