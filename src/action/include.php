@@ -50,6 +50,7 @@ if ($tag == $this->tag)
 }
 
 $page_id = $this->get_page_id($tag);
+$this->preload_acl([$page_id], ['read', 'write']);
 
 if (!$this->has_access('read', $page_id))
 {

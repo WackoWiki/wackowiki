@@ -349,7 +349,7 @@ $wacko_translation = [
 	'CommentAccessDenied'		=> 'Du hast keine Berechtigung diese Seite zu kommentieren.',
 	'CommentFlooded'			=> 'Der Abstand zwischen der Veröffentlichung der Beiträge darf nicht weniger als %1 Sekunden betragen.',
 	'CommentAdded'				=> 'Kommentar hinzugefügt.',
-	'YouAreNowTheOwner'			=> 'Du bist nicht der Besitzer dieser Seite.',
+	'YouAreNowTheOwner'			=> 'Du bist jetzt der Besitzer dieser Seite.',
 	'PageSaved'					=> 'Version %1 der Seite gespeichert.',
 	'CommentSaved'				=> 'Kommentar gespeichert.',
 

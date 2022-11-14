@@ -226,7 +226,7 @@ if ($can_view)
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);
 
-	$page_ids			= [];
+	$page_ids = [];
 
 	foreach ($files as $file)
 	{
