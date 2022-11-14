@@ -1254,13 +1254,14 @@ class Wacko
 					$q_spages[]		= $this->db->q($page);
 				}
 			}
+
+			sort($q_spages);
 		}
 
 		$p_ids		= array_unique($p_ids);
-		$_page_ids	= [];
-
 		sort($p_ids);
-		sort($q_spages);
+
+		$_page_ids	= [];
 
 		// cache page data
 		if ($links = $this->db->load_all(
