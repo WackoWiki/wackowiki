@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
 	'OverwriteAlert'			=> 'चेतावनी अधिलेखित करें: जब आप इसे संपादित कर रहे थे तब इस पृष्ठ को किसी अन्य व्यक्ति द्वारा संशोधित किया गया था।<br>कृपया अपने परिवर्तनों की प्रतिलिपि बनाएँ और इस पृष्ठ को पुनः संपादित करें।',
+	'TextDbOversize'			=> 'चेतावनी: आपके पाठ की लंबाई अधिकतम अनुमत% 1 वर्णों से अधिक है। कृपया पाठ को वर्णों की स्वीकार्य संख्या में छोटा करें। युक्ति: आप शेष पाठ को एक अलग पृष्ठ पर रख सकते हैं।',
 	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
 	'WriteAccessDenied'			=> 'आप इस  पृष्ठ का संपादन नहीं कर सकते |',
 	'EmptyPage'					=> 'Page body was empty - not saved!',

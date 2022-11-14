@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
 	'OverwriteAlert'			=> 'OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br>Please copy your changes and re-edit this page.',
+	'TextDbOversize'			=> '警告：您的文本長度超過了 %1 個字符所允許的最大值。 請將文本縮短到可接受的字符數。 提示：您可以將其余文本放在單獨的頁面上。',
 	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
 	'WriteAccessDenied'			=> '您沒有編輯該頁的權限。',
 	'EmptyPage'					=> 'Page body was empty - not saved!',

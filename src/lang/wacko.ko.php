@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> '페이지의 새 댓글 및 변경 사항에 대해 알림',
 	'OverwriteAlert'			=> '덮어쓰기 경고: 이 페이지를 수정하는 동안 다른 사람이 수정했습니다.<br>변경 사항을 복사하고 이 페이지를 다시 수정하십시오.',
+	'TextDbOversize'			=> '경고: 텍스트 길이가 허용된 최대 %1자를 초과합니다. 텍스트를 허용 가능한 문자 수로 줄이십시오. 팁: 나머지 텍스트를 별도의 페이지에 배치할 수 있습니다.',
 	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
 	'WriteAccessDenied'			=> '이 페이지에 대한 쓰기 권한이 없습니다.',
 	'EmptyPage'					=> '페이지 본문이 비어 있어 저장되지 않았습니다!',

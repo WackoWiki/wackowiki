@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Értesítsen az új megjegyzésekről és az oldal változásairól',
 	'OverwriteAlert'			=> 'TÖBBÍRÓ figyelmeztetés: Ezt az oldalt valaki más módosította, amíg szerkesztette. <br> Kérjük, másolja át a módosításokat, és szerkessze újra az oldalt.',
+	'TextDbOversize'			=> 'Figyelem: A szöveg hossza %1 karakterrel meghaladja a korlátot. Kérjük, rövidítse le a szöveget elfogadható karakterszámra. Tipp: A fennmaradó szöveget külön lapon is elhelyezheti.',
 	'EditingRevisionWarning'	=> 'Az oldal elavult verzióját szerkeszti. Mentés esetén a változat után elvégzett összes változás elveszik. Lehet, hogy helyette szeretné szerkeszteni az aktuális verziót.',
 	'WriteAccessDenied'			=> 'Nincs írásbeli hozzáférési hozzáférése ezen az oldalon.',
 	'EmptyPage'					=> 'Az oldal teste üres volt - nem mentették meg!',

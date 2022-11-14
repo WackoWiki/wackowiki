@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Postitage anonüümselt ilma oma nime andmata',
 	'NotifyMe'					=> 'Teavitage mind lehe kommentaaridest ja muudatustest',
 	'OverwriteAlert'			=> 'Ülekirjutuse hoiatus: kuni sina seda lehte muutsid, muutis seda lehte veel keegi teine.<br>Kopeeri oma muudatused ja nimeta leht ümber.',
+	'TextDbOversize'			=> 'Tähelepanu: Teie tekst ületab pikkusepiirangut %1 tähemärgi võrra. Palun lühendage oma teksti mõistliku arvu tähemärkideni. Vihje: Te võite ülejäänud teksti paigutada eraldi leheküljele.',
 	'EditingRevisionWarning'	=> 'Te redigeerite selle lehe vana versiooni. Kui selle avaldate, eemaldatakse kõik sellest ajast tehtud muudatused. Võib-olla soovite muuta praegust ülevaatust.',
 	'WriteAccessDenied'			=> 'Sul ei ole sellele lehe kirjutamise õigusi.',
 	'EmptyPage'					=> 'Lehe sisu oli tühi - ei salvestatud!',

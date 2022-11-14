@@ -341,6 +341,7 @@ $wacko_translation = [
 	'PostAnonymously'			=> 'Publikuj anonimowo, nie podając swojego nazwiska',
 	'NotifyMe'					=> 'Powiadamiaj mnie o nowych komentarzach i zmianach na stronie',
 	'OverwriteAlert'			=> 'UWAGA STRONA NADPISANA: Podczas wprowadzania zmian, zawartość strony została zmodyfikowana przez kogoś innego.<br>Należy skopiować wprowadzone zmiany do innego programu i ponownie rozpocząć edycję strony.',
+	'TextDbOversize'			=> 'Uwaga: Twój tekst przekracza limit długości o %1 znaków. Prosimy o skrócenie tekstu do akceptowalnej liczby znaków. Wskazówka: Pozostały tekst możesz umieścić na osobnej stronie.',
 	'EditingRevisionWarning'	=> 'Edytujesz starą wersję tej strony. Jeśli ją opublikujesz, wszelkie zmiany dokonane od tego czasu zostaną usunięte. Zamiast tego możesz chcieć edytować bieżącą wersję.',
 	'WriteAccessDenied'			=> 'Przepraszamy. Nie masz prawa zapisu na tej stronie.',
 	'EmptyPage'					=> 'Ciało strony było puste - nie uratowane!',
