@@ -1214,9 +1214,13 @@ class Wacko
 					$q_spages[]		= $this->db->q($page);
 				}
 			}
+
+			sort($q_spages);
 		}
 
 		$p_ids		= array_unique($p_ids);
+		sort($p_ids);
+
 		$_page_ids	= [];
 
 		// cache page data
@@ -6177,6 +6181,8 @@ class Wacko
 				}
 			}
 		}
+
+		sort($page_ids);
 
 		if ($acls = $this->db->load_all(
 			"SELECT page_id, privilege, list " .

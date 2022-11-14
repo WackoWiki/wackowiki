@@ -82,10 +82,11 @@ if ($this->has_access('read')
 		$tpl->message = $this->show_message($message, 'notice', false);
 	}
 
+	// TODO: $_POST['body'] removes first empty line feed from body! Keep it as is. (???)
 	if (isset($_POST))
 	{
 		$_body		= $_POST['body'] ?? '';
-		$section	= (int) ($_POST['section'] ?? 0);
+		$section_id	= (int) ($_POST['section'] ?? 0);
 
 		// watch page
 		if ($this->page
@@ -99,13 +100,14 @@ if ($this->has_access('read')
 		}
 
 		// only if saving:
-		if (isset($_POST['save']) && !empty($_POST['body']))
+		if (isset($_POST['save']) && $_body)
 		{
 			$edit_note	= trim(	($_POST['edit_note']	?? ''));
 			$minor_edit	= (int)	($_POST['minor_edit']	?? 0);
 			$reviewed	= (int)	($_POST['reviewed']		?? 0);
+			$text_size	= strlen($_body);
 
-			if ($section)
+			if ($section_id)
 			{
 				$title		= trim($this->page['title']);
 				$sec_title	= trim(($_POST['title']	?? $this->page['title']));
@@ -132,12 +134,13 @@ if ($this->has_access('read')
 			}
 
 			// check text length
-			/* if ($text_chars > $max_chars)
+			if ($text_size > $this->db->max_page_size)
 			{
-				$message = Ut::perc_replace($this->_t('TextDBOversize'), $text_chars - $max_chars) . ' ';
+				$message = Ut::perc_replace($this->_t('TextDbOversize'),
+						'<code>' . number_format($text_size - $this->db->max_page_size, 0, ',', '.') . '</code>');
 				$this->set_message($message , 'error');
 				$error = true;
-			} */
+			}
 
 			// check for edit note
 			if (($this->db->edit_summary == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
@@ -162,7 +165,7 @@ if ($this->has_access('read')
 				$error = true;
 			}
 
-			$body = str_replace("\r", '', $_POST['body']);
+			$body = str_replace("\r", '', $_body);
 
 			// You're not allowed to have empty comments as they would be kinda pointless.
 			if (!$body && $this->page['comment_on_id'])
@@ -190,9 +193,9 @@ if ($this->has_access('read')
 				}
 
 				// update section
-				if ($this->db->section_edit && $section)
+				if ($this->db->section_edit && $section_id)
 				{
-					$body = $this->replace_section($this->page['body'], $section, ['title' => $sec_title, 'body' => $body]);
+					$body = $this->replace_section($this->page['body'], $section_id, ['title' => $sec_title, 'body' => $body]);
 				}
 
 				// add page (revisions)
@@ -236,7 +239,7 @@ if ($this->has_access('read')
 			}
 		}
 		// saving blank document
-		else if (isset($_POST['body']) && $_POST['body'] == '')
+		else if (isset($_POST['body']) && $_body == '')
 		{
 			$this->set_message($this->_t('EmptyPage'), 'error');
 			$this->http->redirect($this->href());
@@ -246,16 +249,16 @@ if ($this->has_access('read')
 	// is section?
 	if ($this->db->section_edit && isset($_GET['section']))
 	{
-		$section = (int) ($_GET['section'] ?? 0);
+		$section_id = (int) ($_GET['section'] ?? 0);
 	}
 
 	// section header
-	if ($this->db->section_edit && $section)
+	if ($this->db->section_edit && $section_id)
 	{
 		$this->set_message(
 			Ut::perc_replace(
 				$this->_t('EditSectionHint'),
-				$section,
+				$section_id,
 				$this->compose_link_to_page($this->tag, '', $this->page['title'], $this->tag)
 			), 'section-info');
 	}
@@ -263,7 +266,7 @@ if ($this->has_access('read')
 	// section edit
 	if ($this->db->section_edit && isset($_GET['section']))
 	{
-		$p	= $this->extract_sections($this->page['body'], $section, 'get');
+		$p	= $this->extract_sections($this->page['body'], $section_id, 'get');
 
 		// assign section as page body
 		$this->page['body']		= $p['body'];
@@ -272,7 +275,9 @@ if ($this->has_access('read')
 
 	// fetch fields
 	$previous	= $_POST['previous']	?? ($this->page['modified']	?? null);
-	$body		= $_POST['body']		?? ($this->page['body']		?? null);
+	$body		= isset($_POST['body'])
+					? "\n" . $_POST['body']					// hack! : adds \n again, it strips the first empty line feed from body
+					: ($this->page['body']		?? null);
 	$title		= $_POST['title']
 					?? $this->page['title']
 						?? (!empty($this->sess->title)
@@ -280,7 +285,7 @@ if ($this->has_access('read')
 							: $this->get_page_title($this->tag)
 						);
 
-	$section	= (int)		($_POST['section']		?? $section);
+	$section_id	= (int)		($_POST['section']		?? $section_id);
 	$edit_note	= (string)	($_POST['edit_note']	?? '');
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
 
@@ -358,7 +363,7 @@ if ($this->has_access('read')
 	{
 		// edit page title
 		$tpl->e_title = $title;
-		$tpl->e_label = $section
+		$tpl->e_label = $section_id
 			? $this->_t('SectionHeadline')			// Headline (section) or $section_title
 			: $this->_t('MetaTitle');
 	}
@@ -368,7 +373,7 @@ if ($this->has_access('read')
 		$tpl->r_title = $this->page['title'];
 	}
 
-	$tpl->section	= $section;
+	$tpl->sectionid	= $section_id;
 	$tpl->previous	= $previous;		// -> [ ' previous | e attr ' ]
 	$tpl->body		= Ut::html($body);	// -> [ ' body | pre ' ]
 

@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 
 if (!isset($nomark)) $nomark = 0;
 
-$my_groups = function ($user_id, $groups)
+$my_groups = function ($user_id, $groups) use ($tpl)
 {
 	$my_groups_count = 0;
 
@@ -17,13 +17,9 @@ $my_groups = function ($user_id, $groups)
 	{
 		if (in_array ($user_id, $members))
 		{
-			echo $this->group_link($group_name, true, false) . '<br>';
-
-			$my_groups_count++;
+			$tpl->n_group = $this->group_link($group_name, true, false);
 		}
 	}
-
-	return $my_groups_count;
 };
 
 
@@ -31,13 +27,10 @@ if ($user = $this->get_user())
 {
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p><span>' . $user['user_name'] . ": " . $this->_t('MyGroups') . "</span></p>\n";
+		$tpl->mark			= true;
+		$tpl->mark_username	= $user['user_name'];
+		$tpl->emark			= true;
 	}
 
-	$groups_count = $my_groups($user['user_id'], $this->db->groups);
-
-	if (!$nomark)
-	{
-		echo "</div>\n";
-	}
+	$my_groups($user['user_id'], $this->db->groups);
 }
