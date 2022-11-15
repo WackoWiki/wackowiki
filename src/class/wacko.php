@@ -5365,7 +5365,7 @@ class Wacko
 	}
 
 	/**
-	 * Merges sections into wikitext
+	 * Merges sections to wikitext
 	 *
 	 * Section number 0 contains the text before the first heading.
 	 *
@@ -5380,7 +5380,7 @@ class Wacko
 		foreach ($sections as $i => $section)
 		{
 			// set original line break
-			// for first header, if section 0 is empty there is none
+			// for first header, if section 0 is empty, there is none
 			$nl = ($i == 1 && $sections[0]['body'] == '' ? '' : "\n");
 
 			if ($section['title'])
@@ -5394,6 +5394,23 @@ class Wacko
 		unset($sections);
 
 		return implode('', $body);
+	}
+
+	/**
+	 * Returns the text of a section, specified by a number ($section_id).
+	 * A section is text under a heading like === Heading ===, or
+	 * the first section before any such heading (section 0).
+	 *
+	 * If a section contains subsections, these are also returned.
+	 *
+	 * @param string	$body			Wikitext to look in
+	 * @param int		$section_id		Section identifier
+	 *
+	 * @return string					Text of the requested section
+	 */
+	function get_section($body, $section_id)
+	{
+		return $this->extract_sections($body, $section_id, 'get');
 	}
 
 	function replace_section($body, $section_id, $new_section)

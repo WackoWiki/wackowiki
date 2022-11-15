@@ -266,7 +266,7 @@ if ($this->has_access('read')
 	// section edit
 	if ($this->db->section_edit && isset($_GET['section']))
 	{
-		$p	= $this->extract_sections($this->page['body'], $section_id, 'get');
+		$p	= $this->get_section($this->page['body'], $section_id);
 
 		// assign section as page body
 		$this->page['body']		= $p['body'];
