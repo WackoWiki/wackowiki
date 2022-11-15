@@ -9,11 +9,11 @@
 	=]
 
 	[= div _ =
-		<div class="gallery">
+		<div class="gallery" id="gallery--[ ' token ' ]">
 		[ ' nonstatic ' ]
 	=]
 	[= table _ =
-		<table class="gallery">
+		<table class="gallery" id="gallery--[ ' token ' ]">
 		[ ' nonstatic ' ]
 	=]
 	[= items _ =
@@ -22,11 +22,16 @@
 			<td>
 			[ ' nonstatic ' ]
 		=]
-		<figure class="zoom">
-			<a href="[ ' href ' ]"[ ' datafancybox ' ][ ' datacaption ' ] alt="[ ' alt ' ]" title="[ ' description ' ]">[ ' img ' ]</a>
+		<figure>
+			<a href="[ ' href ' ]"[ ' datawidth ' ][ ' dataheight ' ][ ' target ' ]>
+				[ ' img ' ]
+				[= data _ =
+				<span class="pswp-caption-content">[ ' caption ' ]</span>
+				=]
+			</a>
 			[= caption _ =
 				<figcaption>
-					<span>[ ' description ' ]</span>
+					<span>[ ' caption | truncate 80 ' ]</span>
 				</figcaption>
 			=]
 		</figure>
@@ -50,7 +55,7 @@
 			[ ' img ' ]
 			<figcaption>
 				<span>
-					[ ' description ' ]
+					[ ' caption ' ]
 				</span>
 			</figcaption>
 			<br>

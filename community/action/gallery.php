@@ -5,28 +5,27 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* gallery action:
- * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
- * modify the script for your needs, please conribute your improvements
+/* Shows image gallery
  *
- * requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
- * optional jQuery <https://jquery.com/>
- * optional fancyBox <http://fancyapps.com/fancybox/3/>
+ * gallery action:
+ * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
+ * modify the script for your needs, please contribute your improvements
+ *
+ * requires PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
+ * optional PhotoSwipe <https://photoswipe.com/>
  *
  * {{gallery
 
-	Shows image gallery
-
 	[page		= "page_tag"] - call image from another page
 	[global		= 0|1] - call global images
-	[perrow		= <Number of images per rows> (default = 3)]
+	[perrow		= <Number of images per rows> (default = 5)]
 	[caption	= 1|2] - 1 show file description, 2 show file caption
 	[title		= "Gallery"] - album title
 	[target		= 1|2] - show large images without page (if = 2 in new browser window)
 	[nomark		= 1] - hide external border
 	[table		= 1] - pictures in table
 
-	[order		= "time|name_desc|size|size_desc|ext"]
+	[order		= "ext|name_desc|size|size_desc|time|time_desc"]
 	[owner		= "UserName"]
 	[max		= number]
 }}
@@ -41,55 +40,68 @@ TODO: config settings
 	- fall back if no JS or Image manipulation library is available or disabled
 */
 
-// include PHP Thumbnailer
-require_once 'lib/phpthumb/PHPThumb.php';
-require_once 'lib/phpthumb/GD.php';
+// include PHP Thumbnailer (see autoload.conf)
+#require_once 'lib/phpthumb/PHPThumb.php';
+#require_once 'lib/phpthumb/GD.php';
 
-// add jQuery library
-$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/jquery-3.6.0.min.js" defer></script>');
-// add fancyBox
-$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.js" defer></script>');
-$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.css">');
-
-// Loading parameters
+// loading parameters
 $file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
 $thumb_prefix	= 'tn_';
 $imgclass		= '';
 $width			= $this->db->img_max_thumb_width; // default: 150
 
+// set defaults
 if (!isset($page))		$page		= '';
-if (!isset($title))		$nomark		= 1;
+if (!isset($nomark))	$nomark		= 0;
 if (!isset($target))	$target		= 0;
 if (!isset($table))		$table		= 1;
 if (!isset($caption))	$caption	= 1;
-if (!isset($nomark))	$nomark		= 0;
+if (!isset($title))		$nomark		= 1;
 
 if (!isset($order))		$order		= '';
+if (!isset($perrow))		$perrow		= 5;
 if (!isset($global))	$global		= 0;
 if (!isset($owner))		$owner		= '';
-if (!isset($max))		$max		= '';
+if (!isset($max))		$max		= 50;
+if (!isset($nav_offset))	$nav_offset	= 1;
 
 if ($max)
 {
-	$limit = $max;
+	$limit = (int) $max;
 }
-else
-{
-	$limit	= 50;
-}
-
-if (!isset($perrow))
-{
-	$images_row = 5;
-}
-else
-{
-	$images_row = $perrow;
-}
+$images_row		= (int) $perrow;
 
 // we using a parameter token here to sort out multiple instances
 $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
+
+// add PhotoSwipe
+if ($target == 2)
+{
+	$script = <<<EOD
+import PhotoSwipeLightbox from '{$this->db->base_path}js/photoswipe/photoswipe-lightbox.esm.min.js';
+import PhotoSwipeDynamicCaption from '{$this->db->base_path}js/photoswipe/photoswipe-dynamic-caption-plugin.esm.min.js';
+
+const lightbox = new PhotoSwipeLightbox({
+	gallery: '#gallery--$param_token',
+	children: 'a',
+	pswpModule: () => import('{$this->db->base_path}js/photoswipe/photoswipe.esm.min.js')
+});
+
+const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+	type: 'auto',
+	captionContent: '.pswp-caption-content',
+});
+
+lightbox.init();
+EOD;
+
+	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe.css">');
+	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe-dynamic-caption-plugin.css">');
+	$this->add_html('footer', '<script type="module">' . $script . '</script>');
+}
+
+$nav_offset		= (int) ($_GET[$param_token] ?? 1);
 
 $nav_offset		= (int) ($_GET[$param_token] ?? '');
 
@@ -98,7 +110,8 @@ if ($order == 'ext')		$order_by = "file_ext ASC";
 if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+if ($order == 'time')		$order_by = "uploaded_dt ASC";
+if ($order == 'time_desc')	$order_by = "uploaded_dt DESC";
 
 // do we allowed to see?
 if (!$global)
@@ -185,17 +198,19 @@ if ($can_view)
 		if (!empty($files))
 		{
 			// pagination
-			$tpl->pagination_text = $pagination['text'];
+			$tpl->pagination_text	= $pagination['text'];
 
 			if ($table)
 			{
-				$tpl->table		= true;
-				$tpl->etable	= true;
+				$tpl->table			= true;
+				$tpl->table_token	= $param_token;
+				$tpl->etable		= true;
 			}
 			else
 			{
-				$tpl->div		= true;
-				$tpl->ediv		= true;
+				$tpl->div			= true;
+				$tpl->div_token		= $param_token;
+				$tpl->ediv			= true;
 			}
 
 			$tpl->enter('items_');
@@ -212,14 +227,15 @@ if ($can_view)
 
 				if ($caption == 1)
 				{
-					$file_description	= $file['file_description'];
+					$file_caption	= $file['file_description'];
 				}
 				else if ($caption == 2)
 				{
-					$file_description	= $file['caption'];
+					$file_caption	= $file['caption'];
 				}
 
-				$file_description	= $this->format($file_description, 'typografica' );
+				$file_description	= $this->format(Ut::html($file['file_description']), 'typografica' );
+				$file_caption		= $this->format(Ut::html($file_caption), 'typografica' );
 
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
@@ -296,19 +312,23 @@ if ($can_view)
 
 				if (!$target)
 				{
-					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], $param_token => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 				}
 				else
 				{
-					// show file via JS with data-attributes
 					$tpl->href			= $url;
 
+					// show file in lightbox via JS with data-attributes
 					if ($target == 2)
 					{
-						$tpl->description	= $file_description;
-						$tpl->alt			= $file_description;
-						$tpl->datafancybox	= ' data-fancybox="' . $param_token . '"';
-						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
+						$tpl->datawidth		= ' data-pswp-width="' . $file['picture_w'] . '"';
+						$tpl->dataheight	= ' data-pswp-height="' . $file['picture_h'] . '"';
+						$tpl->target		= ' target="_blank"';
+
+						if ($file_caption)
+						{
+							$tpl->data_caption	= $file_caption;
+						}
 					}
 				}
 
@@ -317,7 +337,7 @@ if ($can_view)
 				{
 					$tpl->enter('caption_');
 
-					$tpl->description	= $file_description;
+					$tpl->caption		= $file_caption;
 					#$tpl->user			= $file['user'];
 					#$tpl->dimension	= $file['picture_w'] . 'x' . $file['picture_h'];
 
@@ -347,17 +367,15 @@ if ($can_view)
 
 			if ($caption == 1)
 			{
-				$file_description	= $file['file_description'];
+				$file_caption	= $file['file_description'];
 			}
 			else if ($caption == 2)
 			{
-				$file_description	= $file['caption'];
+				$file_caption	= $file['caption'];
 			}
 
-			$file_description	= $this->format($file_description, 'typografica' );
-
 			$tpl->token			= $param_token;
-			$tpl->description	= $file_description;
+			$tpl->caption		= $this->format(Ut::html($file_caption), 'typografica' );
 
 			if ($file['page_id'])
 			{
@@ -371,17 +389,17 @@ if ($can_view)
 			// show image
 			if ($file['picture_w'] || $file['file_ext'] == 'svg')
 			{
-				$tpl->img		=  $this->link($path . $file['file_name']);
+				$tpl->img		= $this->link($path . $file['file_name']);
 			}
 
 			// backlink
-			$tpl->href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
+			$tpl->href		= $this->href('', $this->tag, [$param_token => $nav_offset, '#' => 'gallery--' . $param_token]);
 
 			$tpl->enter('navigation_');
 
 			if (array_key_exists($key - 1, $files))
 			{
-				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key - 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key - 1]['file_id'], $param_token => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			if (array_key_exists($key - 1, $files) && array_key_exists($key + 1, $files))
@@ -391,7 +409,7 @@ if ($can_view)
 
 			if (array_key_exists($key + 1, $files))
 			{
-				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key + 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key + 1]['file_id'], $param_token => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			$tpl->leave();	// navigation
