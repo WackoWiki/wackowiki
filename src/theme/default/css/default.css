@@ -927,6 +927,7 @@ td.file- {
 
 .file td.tool- {
 	padding-right: 0;
+	white-space: nowrap;
 	width: 9%;
 }
 

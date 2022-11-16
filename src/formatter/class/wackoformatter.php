@@ -718,6 +718,7 @@ class WackoFormatter
 					// non-static section edit link via action
 					($wacko->db->section_edit
 						&& in_array($wacko->method, ['show', 'edit'])
+						&& !isset($_POST['preview'])
 						&& $h_level > 1
 						? '<!--notypo--><!--action:begin-->' .
 							'editsection ' .
