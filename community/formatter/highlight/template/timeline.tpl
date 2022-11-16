@@ -1,9 +1,7 @@
 [ === main === ]
 <ignore>
 	<!--notypo-->
-	<style>
 	[ ' style ' ]
-	</style>
 	<ul class="timeline">
 		[= n _ =
 		<li>
@@ -22,8 +20,11 @@
 	<!--/notypo-->
 </ignore>
 
-
 [ === style === ]
+<style>[ ' n css ' ]</style>
+
+[ === css === ]
+[ ' nonstatic ' ]
 /* ================ The Timeline ================ */
 
 .timeline {
@@ -60,6 +61,10 @@
 	height: 0;
 	clear: both;
 	visibility: hidden;
+}
+
+.timeline div:hover {
+	background: var(--ww-hover-secondary);
 }
 
 .direction-l {

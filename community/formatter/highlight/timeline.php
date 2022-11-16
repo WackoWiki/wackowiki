@@ -31,6 +31,14 @@ $delim	= match($options['delim']) {
 	default		=> '|',
 };
 
+// set CSS styles once
+if (!isset($this->timline))
+{
+	$this->timline	= true;
+	$tpl->style_n	= true;
+}
+
+// get data
 $lines	= preg_split('/[\n]/u', $text);
 
 if ($options['order'] == 'desc')
