@@ -22,7 +22,7 @@ if ($user_id = $this->get_user_id())
 
 	$count	= $this->db->load_single(
 			"SELECT COUNT(p.page_id) AS n " .
-			"FROM {$prefix}page AS p, {$pref}watch AS w " .
+			"FROM {$prefix}page AS p, {$prefix}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .
 				"AND w.user_id = " . (int) $user_id . " " .
@@ -33,7 +33,7 @@ if ($user_id = $this->get_user_id())
 
 	$pages = $this->db->load_all(
 			"SELECT p.page_id, p.tag, p.modified, w.user_id " .
-			"FROM {$prefix}page AS p, {$pref}watch AS w " .
+			"FROM {$prefix}page AS p, {$prefix}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .
 				"AND w.user_id = " . (int) $user_id . " " .

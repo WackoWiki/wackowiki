@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 visualize color sets as boxes
 
 {{colorbox background_color="#FDFEB8" border_color="#FFBB00"}}
-	$background_color	- background color
+	$bg_color			- background color
 	$border_color		- border color
 	$text				- description
 	$text_color			- text color
@@ -22,7 +22,7 @@ visualize color sets as boxes
 // set defaults
 $text				??= null;
 $border_width		??= '1px';
-$background_color	??= '#ffa';
+$bg_color			??= '#ffa';
 $border_color		??= '#000000';
 $text_color			??= '#000000';
 $width				??= '200px';
@@ -55,20 +55,25 @@ $sanitize = function($value, $filter)
 	}
 };
 
-echo '<div style="
-	background-color: '	. $sanitize($background_color, 'color') . ';
-	border: '			. $sanitize($border_width, 'width') . ' solid ' . $sanitize($border_color, 'color') . ';
-	width: ' 			. $sanitize($width, 'width') . ';
-	clear: both;
-	margin: 10px 0;
-	padding: 10px;
-	color: ' . $sanitize($text_color, 'color') . ';
-	float: left;">' .
-	$this->format($text) . ''.
-	($spec
-		? '<br>' .
-		  'background: '	. $sanitize($background_color, 'color') . '<br>' .
-		  'border: '		. $sanitize($border_color, 'color') . '<br>' .
-		  'color: '			. $sanitize($text_color, 'color') . ''
-		: ''
-	) . "</div>\n";
+$bgcolor			=
+$tpl->s_bgcolor		= $sanitize($bg_color, 'color');
+$tpl->s_bdwidth		= $sanitize($border_width, 'width');
+$bdcolor			=
+$tpl->s_bdcolor		= $sanitize($border_color, 'color');
+$tpl->s_width		= $sanitize($width, 'width');
+$color				=
+$tpl->s_color		= $sanitize($text_color, 'color');
+$tpl->text			= $this->format($text);
+
+if ($spec)
+{
+	$css['background']	= $bgcolor;
+	$css['border']		= $bdcolor;
+	$css['color']		= $color;
+
+	foreach ($css as $style => $value)
+	{
+		$tpl->spec_n_style		= $style;
+		$tpl->spec_n_value		= $value;
+	}
+}
