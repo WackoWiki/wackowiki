@@ -198,7 +198,7 @@ if ($this->has_access('read')
 				}
 
 				// add page (revisions)
-				$body_r = $this->save_page($this->tag, $body, $title, $edit_note, $minor_edit, $reviewed, ($this->page['comment_on_id'] ?? null));
+				$body_r = $this->save_page($this->tag, $body, $title, $edit_note, $minor_edit, $reviewed, ($this->page['comment_on_id'] ?? 0));
 
 				// new page created
 				if (!$this->page)
