@@ -22,6 +22,7 @@ if (!defined('IN_WACKO'))
  toc is generated in paragrafica format
 */
 
+// set defaults
 if (!isset($page))		$page		= '';
 if (!isset($nomark))	$nomark		= 0;
 if (!isset($numerate))	$numerate	= 0;
@@ -50,7 +51,6 @@ else
 }
 
 if ($start)		$start	= (int) $start;
-
 if (!$from)		$from	= 'h2';
 if (!$to)		$to		= 'h9';
 
@@ -60,15 +60,16 @@ $end_depth		= $to[1];
 // 3. output
 if (!$nomark)
 {
-	echo '<nav class="layout-box">' .
-			'<p><span> ' . $this->_t('TocTitle') . ' ' . $this->link($ppage, '', $legend) . ' </span></p>';
+	$tpl->mark			= true;
+	$tpl->mark_cluster	= $this->link($ppage, '', $legend);
+	$tpl->emark			= true;
 }
 
 if ($_page)
 {
 	if (!$this->has_access('read', $_page['page_id']))
 	{
-		echo $this->_t('ReadAccessDenied');
+		$tpl->message = $this->_t('ReadAccessDenied');
 	}
 	else
 	{
@@ -172,30 +173,10 @@ if ($_page)
 
 		// display!
 		// begin list
-		echo "\n" . '<ul id="toc">' . "\n";
 
 		$i				= 0;
 		$ul				= 1;
-		$tab			= "\t";
-		$tabs			= [];
-		$ident_level	= [];
 		$prev_level		= 0;
-
-		// TODO: properly indent list elements
-		$tabs[0]		= "";
-		$tabs[1]		= "";
-		$tabs[2]		= "\t";
-		$tabs[3]		= "\t\t";
-		$tabs[4]		= "\t\t\t";
-		$tabs[5]		= "\t\t\t\t";
-		$tabs[6]		= "\t\t\t\t\t";
-		$tabs[7]		= "\t\t\t\t\t\t";
-		$tabs[8]		= "\t\t\t\t\t\t\t";
-		$tabs[9]		= "\t\t\t\t\t\t\t\t";
-		$tabs[10]		= "\t\t\t\t\t\t\t\t\t";
-
-		$ident_level['li'] = 1;
-		$ident_level['ul'] = 1;
 
 		foreach ($toc as $toc_item)
 		{
@@ -221,20 +202,13 @@ if ($_page)
 							if (($diff !== 1 && $j !== 0) || ($j == 0 && $i == 0) || $j > 0)
 							{
 								// open nested <li> tag
-								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $tab .
-									'<li>' .
-									#"<!--ONE: [" . $ul . "]: (" . $j . ") open nested list item-->" .
-									"\n";
-
-									$ident_level['li']++;
+								$tpl->enter('li_'); // (one)
+								$tpl->commit = true;
 							}
 
-							echo $tabs[($ident_level['ul'] + $ul - 1)] . $tab . "\t" .
-								"<ul>" .
-								#"<!--ONE: [" . $ul . ']: ' . $diff . '->(' . $j . ") open nested list-->" .
-								"\n";
-
-								$ident_level['ul']++;
+							// open nested list
+							$tpl->enter('ul_'); // (one)
+							$tpl->commit = true;
 
 							$diff--;
 							$ul++;
@@ -252,25 +226,11 @@ if ($_page)
 							if (($diff < 0 || $ul != 1) && $k == 0)
 							{
 								// close nested <li> tag
-								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] .
-									'</li>' .
-									#"<!--TWO: close list item-->" .
-									"\n";
-
-									$ident_level['li']--;
+								$tpl->leave(); // li_ (two nested)
 							}
 
-							echo $tabs[($ident_level['ul'] + $ul - 1)] .
-								'</ul>' .
-								#"<!--TWO: [" . $ul . ']: ' . $diff . '->(' . $k . ") close nested list-->" .
-								"\n";
-
-								$ident_level['ul']--;
-
-							echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] .
-								"</li>\n";
-
-								$ident_level['li']--;
+							$tpl->leave(); // ul_ (two)
+							$tpl->leave(); // li_ (two)
 
 							$diff++;
 							$ul--;
@@ -281,29 +241,26 @@ if ($_page)
 					{
 						# THREE
 						// close opened <li> tag
-						echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] .
-							'</li>' .
-							#"<!--THREE: [" . $ul . ']: ' . "-->" .
-							"\n";
-
-							$ident_level['li']--;
+						$tpl->leave(); // li_ (three)
 					}
 				}
 
 				# FOUR
 				// open list item element
-				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $tab .
-					'<li>' .
-					#"<!--FOUR: [" . $ul . "]: (" . $i . ")" . $ident_level['li'] . " begin element-->" .
-					"\n";
-				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $tab . "\t" .
-					'<a href="' . $toc_item[3] . '#' . $toc_item[0] . '">' .
-						(!empty($numerate)
-							?	'<span class="tocnumber">' . $toc_item[5] . '</span>'
-							:	'') .
-						'<span class="toctext">' . strip_tags($toc_item[6]) . '</span></a>' . "\n";
+				$tpl->enter('li_'); // (four)
+				$tpl->commit = true;
 
-					$ident_level['li']++;
+				$tpl->enter('toc_');
+
+				$tpl->href = $toc_item[3] . '#' . $toc_item[0];
+				$tpl->item = strip_tags($toc_item[6]);
+
+				if (!empty($numerate))
+				{
+					$tpl->n_number = $toc_item[5];
+				}
+
+				$tpl->leave(); // toc_
 
 				// re-check page level
 				$prev_level	= $toc_item[4];
@@ -323,27 +280,14 @@ if ($_page)
 				if ($m == 0)
 				{
 					// close nested <li> tag
-					echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] .
-						'</li>' .
-						#"<!--FIVE: [" . $ul . ']: (' . $m . ") close nested <li> tag-->" .
-						"\n";
-
-						$ident_level['li']--;
+					$tpl->leave(); // li_ (five nested)
 				}
 
-				echo $tabs[($ident_level['ul'] + $ul - 1)] .
-					'</ul>' .
-					#"<!--FIVE: [" . $ul . ']: (' . $m . ") close nested <ul> tag-->" .
-					"\n";
+				// close nested <ul> tag
+				$tpl->leave(); // ul_ (five)
 
-					$ident_level['ul']--;
-
-				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] .
-					'</li>' .
-					#"<!--FIVE: [" . $ul . ']: (' . $m . ") close nested <li> tag-->" .
-					"\n";
-
-					$ident_level['li']--;
+				// close nested <li> tag
+				$tpl->leave(); // li_ (five)
 
 				$ul--;
 				$m++;
@@ -353,25 +297,14 @@ if ($_page)
 		{
 			# SIX
 			// close open <li> tag
-			echo $tabs[$ident_level['li']] .
-				'</li>' .
-				#"<!--SIX:  [" . $ul . ']: ' . "-->" .
-				"\n";
-
-				$ident_level['li']--;
+			$tpl->leave(); // li_ (six)
 		}
 
 		// end list
-		echo "</ul>\n";
 	}
 }
 else
 {
-	echo $this->_t('DoesNotExists');
-}
-
-if (!$nomark)
-{
-	echo "</nav>\n";
+	$tpl->message = $this->_t('DoesNotExists');
 }
 
