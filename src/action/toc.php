@@ -122,7 +122,7 @@ if ($_page)
 
 							while ($_depth > 0)
 							{
-								if (!isset($numbers[$_depth]) || (isset($numbers[$_depth]) && $numbers[$_depth] == 0))
+								if (!isset($numbers[$_depth]) || ($numbers[$_depth] == 0))
 								{
 									$numbers[$_depth]		= 1;
 									$this->_depth[$_depth]	= 1;
@@ -223,7 +223,7 @@ if ($_page)
 						{
 							# TWO
 							// close nested list
-							if (($diff < 0 || $ul != 1) && $k == 0)
+							if ($k == 0)
 							{
 								// close nested <li> tag
 								$tpl->leave(); // li_ (two nested)
