@@ -5,6 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// redirect to show method if page doesn't exists
+if (!$this->page || $this->page['comment_on_id'])
+{
+	$this->http->redirect($this->href());
+}
+
 // TODO: purge old SQL query cache
 
 $tpl->title = ($this->forum
@@ -309,12 +315,6 @@ $write_comment_feed = function()
 };
 
 // END FUNCTIONS
-
-// redirect to show method if page doesn't exists
-if (!$this->page || $this->page['comment_on_id'])
-{
-	$this->http->redirect($this->href());
-}
 
 $forum_cluster	= '';
 $prefix			= $this->prefix;
@@ -1324,7 +1324,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 }
 else
 {
-	$this->show_message($this->_t('NotModerator'));
+	$this->set_message($this->_t('NotModerator'));
+	$this->http->redirect($this->href());
 }
 
 // set forum context

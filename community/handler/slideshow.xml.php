@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 // redirect to show method if page don't exists
 if (!$this->page)
 {
-	$this->http->redirect($this->href('show'));
+	$this->http->redirect($this->href());
 }
 
 if ($this->has_access('read'))
@@ -31,26 +31,24 @@ if ($this->has_access('read'))
 
 	#Ut::debug_print_r($body);
 
-	// If the first slide starts with a level 1 heading
-	if (preg_match('#^<h[2-6] .*?>.*?</h[2-6]>#u', $body_f))
-	{
-		$first_slide = 0;
-	}
-	else
-	{
-		$first_slide = 1;
-	}
-
-	// we test all the parameters of the handler 'slideshow',
-	// if there is none, this is the "slide = 1" parameter is invoked by default
 	if (!$body)
 	{
 		return;
 	}
 	else
 	{
+		// first slide starts with a level 1 heading
+		if (preg_match('#^<h[2-6] .*?>.*?</h[2-6]>#u', $body[0]))
+		{
+			$first_slide = 0;
+		}
+		else
+		{
+			$first_slide = 1;
+		}
+
 		// If you do not specify a parameter, it defaults to the first slide
-		$slide = (int) ($_GET['slide'] ?? 1);
+		$slide = (int) (($_GET['slide'] ?? 1) ?: 1);
 
 		// HTTP header with right Charset settings
 		header('Content-Type: text/html; charset=' . $this->get_charset());
@@ -76,7 +74,8 @@ if ($this->has_access('read'))
 		$c_slide = ($slide * 2) - ($first_slide * 2);
 
 		// display navigation menu
-		if (preg_match('#<h\d id=\"h\d+-(\d+)\" class=\"heading\">#', $body[$c_slide - 1], $match))
+		if (!$first_slide
+			&& preg_match('#<h\d id=\"h\d+-(\d+)\" class=\"heading\">#', $body[$c_slide - 1], $match))
 		{
 			$section = ['section' => $match[1]];
 		}
@@ -94,8 +93,6 @@ if ($this->has_access('read'))
 		{
 			$tpl->nav_n_hrefnext	=	$this->href('slideshow.xml', '', 'slide='.($slide + 1));
 		}
-
-
 
 		// first slide
 		if ($slide == 1 && $first_slide == 1)
@@ -115,6 +112,5 @@ if ($this->has_access('read'))
 }
 else
 {
-	$message = $this->_t('ReadAccessDenied');
-	$this->show_message($message, 'info');
+	$this->http->redirect($this->href());
 }
