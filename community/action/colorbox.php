@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 
 visualize color sets as boxes
 
-{{colorbox background_color="#FDFEB8" border_color="#FFBB00"}}
+{{colorbox bg_color="#FDFEB8" border_color="#FFBB00"}}
 	$bg_color			- background color
 	$border_color		- border color
 	$text				- description

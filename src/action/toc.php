@@ -91,22 +91,22 @@ if ($_page)
 
 					if ($numerate)
 					{
-						$_level = $toc[$i][2];
+						$level = $toc[$i][2];
 
 						// if dive deeper, reset the meter for new depths
-						while ($_level > $depth)
+						while ($level > $depth)
 						{
 							// uses $start for numbering
-							if ($start && $numbers[$_level] == $numbers[1])
+							if ($start && $numbers[$level] == $numbers[1])
 							{
-								$numbers[$_level] = $start - 1;
+								$numbers[$level] = $start - 1;
 							}
 							else
 							{
-								$numbers[$_level] = 0;
+								$numbers[$level] = 0;
 							}
 
-							$_level--;
+							$level--;
 						}
 
 						// if left lower level, nothing else to do
@@ -146,15 +146,15 @@ if ($_page)
 						}
 
 						// human content TOC
-						$toc[$i][5] = $num;					// toc number, e.g. 2.4.1
-						$toc[$i][6] = $toc[$i][1];			// toc title
+						$toc[$i][5] = $num;						// toc number, e.g. 2.4.1
+						$toc[$i][6] = $toc[$i][1];				// toc title
 
-						$toc[$i][1] = $num . ' ' . $toc[$i][1]; // toc number + toc title
+						$toc[$i][1] = $num . ' ' . $toc[$i][1];	// toc number + toc title
 
 					}
 					else
 					{
-						$toc[$i][6] = $toc[$i][1];			// toc title
+						$toc[$i][6] = $toc[$i][1];				// toc title
 					}
 				}
 			}

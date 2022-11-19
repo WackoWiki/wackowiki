@@ -17,20 +17,22 @@ if (!$this->page)
 
 if ($this->has_access('read'))
 {
-	// TODO: define more options for splitting the page body
+	// TODO: define more options for splitting the page body, e.g. smallest splitting header
 	// split the page
-	$body_f	= $this->format($this->page['body_r'], 'post_wacko', ['strip_notypo' => true]);
-	$body	= preg_split('/(<h2 .*>.*<\/h2>)/u', $body_f, -1, PREG_SPLIT_DELIM_CAPTURE);
+	$this->context[++$this->current_context] = $this->page['tag'];
 
-	if (isset($_GET['debug']) && $_GET['debug'] == 1)
-	{
-		# echo "<div style=\"display: none\">\n";
-		$tpl->debug =  Ut::debug_print_r($body);
-		# echo "</div>\n\n";
-	}
+	#$body_f	= $this->format($this->page['body'], 'wiki', ['post_wacko' => true]);
+	$body_f	= $this->format($this->page['body'], 'wordprocessor');
+
+	$this->context[$this->current_context] = '~~'; // clean stack
+	$this->current_context--;
+
+	$body	= preg_split('#(<h[2-6] .*?>.*?</h[2-6]>)#u', $body_f, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+	#Ut::debug_print_r($body);
 
 	// If the first slide starts with a level 1 heading
-	if (preg_match('/^<h2 .*>.*<\/h2>/u', $body_f))
+	if (preg_match('#^<h[2-6] .*?>.*?</h[2-6]>#u', $body_f))
 	{
 		$first_slide = 0;
 	}
@@ -41,7 +43,6 @@ if ($this->has_access('read'))
 
 	// we test all the parameters of the handler 'slideshow',
 	// if there is none, this is the "slide = 1" parameter is invoked by default
-
 	if (!$body)
 	{
 		return;
@@ -49,14 +50,7 @@ if ($this->has_access('read'))
 	else
 	{
 		// If you do not specify a parameter, it defaults to the first slide
-		if (!isset($_GET['slide']) || $_GET['slide'] == 1)
-		{
-			$slide = 1;
-		}
-		else
-		{
-			$slide = (int) ($_GET['slide'] ?? '');
-		}
+		$slide = (int) ($_GET['slide'] ?? 1);
 
 		// HTTP header with right Charset settings
 		header('Content-Type: text/html; charset=' . $this->get_charset());
@@ -69,16 +63,25 @@ if ($this->has_access('read'))
 		!Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);
 		$tpl->favicon	= $this->get_favicon();
 
-		if (!file_exists($this->db->theme_url . 'css/slideshow.css'))
-		{
+		#if (!file_exists($this->db->theme_url . 'css/slideshow.css'))
+		#{
 			#$tpl->css	= false;
-		}
-		else
-		{
-			#echo '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/slideshow.css">';
-		}
+		#}
+		#else
+		#{
+			#$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/slideshow.css">');
+		#}
+
+		// current slide
+		$c_slide = ($slide * 2) - ($first_slide * 2);
 
 		// display navigation menu
+		if (preg_match('#<h\d id=\"h\d+-(\d+)\" class=\"heading\">#', $body[$c_slide - 1], $match))
+		{
+			$section = ['section' => $match[1]];
+		}
+
+		$tpl->nav_href = $this->href('edit', '', $section ?? []);
 
 		// If this is not the first slide, we display links "<< previous" and "[start]"
 		if ($slide !== 1)
@@ -87,22 +90,26 @@ if ($this->has_access('read'))
 			$tpl->nav_p_hrefstart	= $this->href('slideshow.xml', '', 'slide=1');
 		}
 
-		if (isset($body[($slide) * 2 - ($first_slide * 2) + 2]) || $slide == 1)
+		if (isset($body[$c_slide + 2]) || $slide == 1)
 		{
 			$tpl->nav_n_hrefnext	=	$this->href('slideshow.xml', '', 'slide='.($slide + 1));
 		}
 
-		// showing content
 
-		// if this is the first slide
+
+		// first slide
 		if ($slide == 1 && $first_slide == 1)
 		{
-			$tpl->body = $body[0];
+			$tpl->body =
+				'<h1>' . $this->page['title'] . '</h1>' . "\n" .
+				$body[0];
 		}
-		// from the second slide
+		// other slides (header + section)
 		else
 		{
-			$tpl->body =  $body[($slide * 2) - ($first_slide * 2) - 1] . $body[($slide * 2) - ($first_slide * 2)];
+			$tpl->body =
+				$body[$c_slide - 1] .
+				$body[$c_slide];
 		}
 	}
 }
