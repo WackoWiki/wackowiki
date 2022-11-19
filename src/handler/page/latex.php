@@ -50,8 +50,5 @@ if ($this->has_access('read'))
 }
 else
 {
-	$this->http->status(403);
-
-	$message = $this->_t('ReadAccessDenied');
-	$this->show_message($message);
+	$this->http->redirect($this->href());
 }
