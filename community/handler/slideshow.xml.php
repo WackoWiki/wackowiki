@@ -74,7 +74,7 @@ if ($this->has_access('read'))
 		$c_slide = ($slide * 2) - ($first_slide * 2);
 
 		// display navigation menu
-		if (!$first_slide
+		if ($slide !== 1
 			&& preg_match('#<h\d id=\"h\d+-(\d+)\" class=\"heading\">#', $body[$c_slide - 1], $match))
 		{
 			$section = ['section' => $match[1]];

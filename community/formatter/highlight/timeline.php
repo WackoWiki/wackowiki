@@ -56,20 +56,21 @@ foreach ($lines as $line)
 
 	$tpl->enter('n_');
 
-	$item = explode('|', $line);
+	$_item = explode('|', $line);
 	{
+		$item			= array_map('trim', $_item);
 		// debug
 		#Ut::debug_print_r($item);
 
-		$direction	= match(trim($item[0])) {
+		$direction	= match($item[0]) {
 			'r'			=> 'r',
 			default		=> 'l',
 		};
 
 		// further string processing here (links, filter, ...)
-		$flag			= trim($item[1] ?? '');
-		$time			= trim($item[2] ?? '');
-		$description	= trim($item[3] ?? '');
+		$flag			= $item[1] ?? '';
+		$time			= $item[2] ?? '';
+		$description	= $item[3] ?? '';
 
 		if ($flag)
 		{
