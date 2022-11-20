@@ -85,7 +85,7 @@ if ($this->has_access('read'))
 		// If this is not the first slide, we display links "<< previous" and "[start]"
 		if ($slide !== 1)
 		{
-			$tpl->nav_p_hrefprev	= $this->href('slideshow.xml', '', 'slide=' . ($_GET['slide'] - 1));
+			$tpl->nav_p_hrefprev	= $this->href('slideshow.xml', '', 'slide=' . ($slide - 1));
 			$tpl->nav_p_hrefstart	= $this->href('slideshow.xml', '', 'slide=1');
 		}
 

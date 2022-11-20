@@ -126,9 +126,10 @@ if ($pages = $this->db->load_all(
 		$this->preload_acl($page_ids);
 
 		// header
-		if ($tag)
+
+		if (!$nomark)
 		{
-			if (!$nomark)
+			if ($tag)
 			{
 				if ($legend)
 				{
@@ -138,16 +139,13 @@ if ($pages = $this->db->load_all(
 				{
 					$legend = Ut::perc_replace($this->_t('TreeClusterTitle'), $this->link('/' . $root, '', $tag)) . ':';
 				}
-
-				echo '<nav class="layout-box"><p><span>' . $legend . "</span></p>\n";
 			}
-		}
-		else
-		{
-			if (!$nomark)
+			else
 			{
-				echo '<nav class="layout-box"><p><span>' . $this->_t('TreeSiteTitle') . "</span></p>\n";
+				$legend =  $this->_t('TreeSiteTitle');
 			}
+
+			echo '<nav class="layout-box"><p><span>' . $legend . "</span></p>\n";
 		}
 
 		// tree

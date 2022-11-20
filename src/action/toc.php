@@ -52,7 +52,7 @@ else
 
 if ($start)		$start	= (int) $start;
 if (!$from)		$from	= 'h2';
-if (!$to)		$to		= 'h9';
+if (!$to)		$to		= 'h6';
 
 $start_depth	= $from[1];
 $end_depth		= $to[1];
