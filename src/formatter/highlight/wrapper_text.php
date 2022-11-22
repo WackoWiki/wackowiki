@@ -35,4 +35,8 @@ $tpl->align		= $align_class;
 $tpl->txtalign	= $text_align;
 $tpl->col		= $col_class;
 $tpl->text		= $text;
-$tpl->clear		= $options['clear'];
+
+if ($options['clear'])
+{
+	$tpl->clear = true;
+}
