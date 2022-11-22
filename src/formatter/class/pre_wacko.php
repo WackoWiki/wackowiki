@@ -7,12 +7,12 @@
 class PreFormatter
 {
 	public $object;
-	public string $PREREGEXP;
+	public string $PRE_REGEX;
 
 	function __construct(&$object)
 	{
 		$this->object		= &$object;
-		$this->PREREGEXP	=
+		$this->PRE_REGEX	=
 			'/(' .
 			// formatter  %%...%% and ``...``
 			'``.*?``|' .
