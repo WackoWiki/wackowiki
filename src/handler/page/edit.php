@@ -84,6 +84,7 @@ if ($this->has_access('read')
 	// TODO: $_POST['body'] removes first empty line feed from body! Keep it as is. (???)
 	if (isset($_POST))
 	{
+		$anchor		= [];
 		$_body		= $_POST['body'] ?? '';
 		$section_id	= (int) ($_POST['section'] ?? 0);
 
@@ -194,7 +195,8 @@ if ($this->has_access('read')
 				// update section
 				if ($this->db->section_edit && $section_id)
 				{
-					$body = $this->replace_section($this->page['body'], $section_id, ['title' => $sec_title, 'body' => $body]);
+					$body	= $this->replace_section($this->page['body'], $section_id, ['title' => $sec_title, 'body' => $body]);
+					$anchor	= ['#' => 'h' . $this->page['page_id'] . '-' . $section_id];
 				}
 
 				// add page (revisions)
@@ -233,8 +235,9 @@ if ($this->has_access('read')
 					: Ut::perc_replace($this->_t('PageSaved'), ($this->page['version_id'] + 1));
 				$this->set_message($message, 'success'); */
 
+
 				// forward to show handler
-				$this->http->redirect($this->href());
+				$this->http->redirect($this->href('', '' , $anchor));
 			}
 		}
 		// saving blank document
