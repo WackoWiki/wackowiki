@@ -6,14 +6,16 @@
 
 class PreFormatter
 {
-	var $object;
+	public $object;
+	public string $PRE_REGEX;
 
 	function __construct(&$object)
 	{
 		$this->object		= &$object;
-		$this->PREREGEXP	=
+		$this->PRE_REGEX	=
 			'/(' .
-			// formatter  %%...%%
+			// formatter  %%...%% and ``...``
+			'``.*?``|' .
 			'\%\%.*?\%\%|' .
 			// escaped  ""...""
 			'\"\".*?\"\"|' .
@@ -28,8 +30,13 @@ class PreFormatter
 
 		$thing = $things[1];
 
+		// formatter text  ``...``
+		if (  preg_match('/^``(.*)``$/us', $thing, $matches))
+		{
+			return '``' . $matches[1] . '``';
+		}
 		// formatter text  %%...%%
-		if (preg_match('/^\%\%(.*)\%\%$/us', $thing, $matches))
+		else if (preg_match('/^\%\%(.*)\%\%$/us', $thing, $matches))
 		{
 			return '%%' . $matches[1] . '%%';
 		}

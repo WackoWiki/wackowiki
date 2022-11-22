@@ -152,10 +152,11 @@ class WackoFormatter
 
 		$this->PRE_REGEX =
 			"/(" .
-			// formatter  %%...%%
+			// formatter  %%...%% and ``...``
 			($this->object->db->disable_formatters
 				? ''
-				: "\%\%.*?\%\%|") .
+				: "``.*?``|" .
+				  "\%\%.*?\%\%|") .
 			// escaped  ~...
 			"~([^ \t\n]+)|" .
 			// escaped  ""...""
@@ -168,7 +169,7 @@ class WackoFormatter
 
 		$this->MIDDLE_REGEX =
 			"/(" .
-			// centered text  >>...<< (depreciated)
+			// centered text  >>...<< (deprecated)
 			">>.*?<<|" .
 			// escaped  ~...
 			"~([^ \t\n]+)|" .
@@ -238,11 +239,12 @@ class WackoFormatter
 					str_replace("\n", '<br>', Ut::html($matches[1])) .
 				'<!--/notypo--><!--escaped-->';
 		}
-		// formatter text  %%...%%
-		else if (preg_match('/^\%\%(.*)\%\%$/us', $thing, $matches))
+		// formatter text  %%...%% and ``...``
+		else if ( preg_match('/^``(.*)``$/us',		$thing, $matches1)
+				| preg_match('/^\%\%(.*)\%\%$/us',	$thing, $matches2))
 		{
 			// check if a formatter has been specified
-			$code = $matches[1];
+			$code = $matches1[1] ?? $matches2[1];
 
 			if (preg_match('/^\(([^\n]+?)\)(.*)$/us', $code, $matches))
 			{
@@ -294,7 +296,7 @@ class WackoFormatter
 
 			// TODO: Trim empty, whitespace only lines at the beginning
 			// disabled trim($code), whitespace (or other characters) might be intentional in code examples
-			$code = ltrim($code, "\n\r\0");		// TODO: utf8_ltrim($code, "\n\r\0") won't work, why?
+			$code = ltrim($code, "\n\r\0");
 			$code = rtrim($code);
 
 			$result = $wacko->_format($code, 'highlight/' . $formatter, $params);
@@ -344,7 +346,7 @@ class WackoFormatter
 		{
 			return $matches[1];
 		}
-		// centered text (depreciated)
+		// centered text (deprecated)
 		else if (preg_match('/^>>(.*)<<$/us', $thing, $matches))
 		{
 			return
@@ -482,7 +484,6 @@ class WackoFormatter
 
 			$output	.= $this->indent_close();
 			$output	.= '</th>';
-
 			$output .= '</tr>';
 
 			if ($this->cols == 0)
@@ -549,7 +550,6 @@ class WackoFormatter
 
 			$output	.= $this->indent_close();
 			$output	.= '</td>';
-
 			$output	.= '</tr>';
 
 			if ($this->cols == 0)
