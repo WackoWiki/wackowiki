@@ -46,4 +46,8 @@ $tpl->col		= $col_class;
 $tpl->width		= (int) $options['wrapper_width'];
 $tpl->t_title	= $options['wrapper_title'] ?? null;
 $tpl->text		= $text;
-$tpl->clear		= $options['clear'];
+
+if ($options['clear'])
+{
+	$tpl->clear = true;
+}
