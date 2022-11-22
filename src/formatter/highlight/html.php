@@ -219,11 +219,11 @@ if ($options['line_numbers'])
 	foreach ($lines as $line)
 	{
 		$i += 1;
-		$source .= '<li id="l' . $i . '">' . rtrim($line) . "</li>";
+		$source .= '<li id="l' . $i . '">' . rtrim($line) . '</li>';
 	}
 
 	$source .= '</ol>';
 }
 
 // output source
-$tpl->text = str_replace("\t", "  ", $source);
+$tpl->text = str_replace("\t", '  ', $source);

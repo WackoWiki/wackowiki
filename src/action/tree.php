@@ -26,12 +26,15 @@ if (!defined('IN_WACKO'))
 // constants
 $limit	= 500;
 
-// input
+// set defaults
+if (!isset($depth))		$depth	= '';
+if (!isset($lang))		$lang	= '';
+if (!isset($legend))	$legend	= '';
+if (!isset($nomark))	$nomark	= 0;
 if (!isset($page))		$page	= '/' . $this->page['tag'];
-if (!isset($title))		$title	= 1;
 if (!isset($sort))		$sort	= '';
 if (!isset($system))	$system	= 0;
-if (!isset($lang))		$lang	= '';
+if (!isset($title))		$title	= 1;
 
 $system
 	? $user_id		= $this->db->system_user_id
@@ -47,7 +50,6 @@ if ($page == '/')		$page	= '';
 $tag	= $this->unwrap_link($page);
 $root	= $tag . '/';
 
-if (!isset($depth)) $depth = '';
 // TODO: set default depth level via config
 // TODO: show missing sublevels
 // TODO: add paging
@@ -59,9 +61,6 @@ else
 {
 	$depth	= (int) $depth;
 }
-
-if (!isset($nomark)) $nomark = 0;
-if (!isset($legend)) $legend = '';
 
 // collect pages
 if ($pages = $this->db->load_all(
@@ -127,9 +126,9 @@ if ($pages = $this->db->load_all(
 		$this->preload_acl($page_ids);
 
 		// header
-		if ($tag)
+		if (!$nomark)
 		{
-			if (!$nomark)
+			if ($tag)
 			{
 				if ($legend)
 				{
@@ -139,16 +138,13 @@ if ($pages = $this->db->load_all(
 				{
 					$legend = Ut::perc_replace($this->_t('TreeClusterTitle'), $this->link('/' . $root, '', $tag)) . ':';
 				}
-
-				echo '<nav class="layout-box"><p><span>' . $legend . "</span></p>\n";
 			}
-		}
-		else
-		{
-			if (!$nomark)
+			else
 			{
-				echo '<nav class="layout-box"><p><span>' . $this->_t('TreeSiteTitle') . "</span></p>\n";
+				$legend =  $this->_t('TreeSiteTitle');
 			}
+
+			echo '<nav class="layout-box"><p><span>' . $legend . "</span></p>\n";
 		}
 
 		// tree
