@@ -126,7 +126,6 @@ if ($pages = $this->db->load_all(
 		$this->preload_acl($page_ids);
 
 		// header
-
 		if (!$nomark)
 		{
 			if ($tag)

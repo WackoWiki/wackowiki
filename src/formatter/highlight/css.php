@@ -208,4 +208,4 @@ if ($options['line_numbers'])
 }
 
 // output source
-$tpl->text = preg_replace('/\&nbsp\;/u', '', str_replace("\t", "	", $css), 1);
+$tpl->text = preg_replace('/\&nbsp\;/u', '', str_replace("\t", '	', $css), 1);

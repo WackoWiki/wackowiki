@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 	}}
 */
 
-$name		??= ''; // depreciated, legacy support
+$name		??= ''; // deprecated, legacy support
 if ($name)	$href	= $name;
 
 // set defaults
