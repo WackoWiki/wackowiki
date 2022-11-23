@@ -60,10 +60,10 @@
 	=]
 
 [ == toc == ]
-<a href="[ ' href ' ]">
-	[ ' n numerate ' ]
-	<span class="toctext">[ ' item ' ]</span>
-</a>
+<a href="[ ' href ' ]">[ ' n numerate ' ][ ' i text ' ]</a>
 
 [ == numerate == ]
 <span class="tocnumber">[ ' number ' ]</span>
+
+[ == text == ]
+<span class="toctext">[ ' item ' ]</span>

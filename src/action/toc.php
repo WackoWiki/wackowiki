@@ -253,7 +253,7 @@ if ($_page)
 				$tpl->enter('toc_');
 
 				$tpl->href = $toc_item[3] . '#' . $toc_item[0];
-				$tpl->item = strip_tags($toc_item[6]);
+				$tpl->i_item = strip_tags($toc_item[6]);
 
 				if (!empty($numerate))
 				{
