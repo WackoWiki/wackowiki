@@ -1,6 +1,6 @@
 [ === main === ]
 <ignore>
-	<!--notypo-->
+<!--notypo-->
 	<table class="usertable">
 		<tbody>
 		[= r _ =
@@ -19,5 +19,5 @@
 		=]
 		</tbody>
 	</table>
-	<!--/notypo-->
+<!--/notypo-->
 </ignore>

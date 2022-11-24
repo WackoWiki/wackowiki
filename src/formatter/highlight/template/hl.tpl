@@ -1,7 +1,7 @@
 [ === main === ]
 <ignore>
+<!--notypo-->
 	[ ' error ' ]
-	<!--notypo-->
 	[= num _ =
 		[ ' nonstatic ' ]
 		<div class="hl-numbers-table">
@@ -11,5 +11,5 @@
 		[ ' nonstatic ' ]
 		</div>
 	=]
-	<!--/notypo-->
+<!--/notypo-->
 </ignore>

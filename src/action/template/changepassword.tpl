@@ -1,6 +1,6 @@
 
 [ === main === ]
-	<!--notypo-->
+<!--notypo-->
 	[= c ChangePassword =
 		<form action="[ ' form ' ]" method="post" name="change_password">
 			[ ' csrf: change_password ' ]
@@ -51,4 +51,4 @@
 			</div>
 		</form>
 	=]
-	<!--/notypo-->
+<!--/notypo-->

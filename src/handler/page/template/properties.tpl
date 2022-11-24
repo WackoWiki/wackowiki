@@ -216,6 +216,10 @@
 					<td>[ ' page.title | e ' ]</td>
 				</tr>
 				<tr>
+					<th scope="row">[ ' _t: MetaTag ' ]</th>
+					<td><code>[ ' page.tag | e ' ]</code></td>
+				</tr>
+				<tr>
 					<th scope="row">[ ' _t: MetaKeywords ' ]</th>
 					<td>[ ' page.keywords | e ' ]</td>
 				</tr>
@@ -297,7 +301,9 @@
 			<li class="m-upload"><a href="[ ' href: upload ' ]">[ ' i Icon ' ][ ' _t: SettingsUpload ' ]</a></li>
 			<li class="m-referrers"><a href="[ ' href: referrers ' ]">[ ' i Icon ' ][ ' _t: SettingsReferrers ' ]</a></li>
 			<li class="[ ' watched | list watch-on watch-off ' ]"><a href="[ ' href: watch ' ]">[ ' i Icon ' ][ ' watched | list WatchText UnwatchText | _t ' ]</a></li>
+			<li>&nbsp;</li>
 			<li class="m-print"><a href="[ ' href: print ' ]">[ ' i Icon ' ][ ' _t: SettingsPrint ' ]</a></li>
+			<li class="m-word"><a href="[ ' href: wordprocessor ' ]">[ ' i Icon ' ][ ' _t: SettingsWordprocessor ' ]</a></li>
 			[= export _ =
 				<li class="m-xml"><a href="[ ' href: export.xml ' ]">[ ' i Icon ' ][ ' _t: SettingsXML ' ]</a></li>
 			=]

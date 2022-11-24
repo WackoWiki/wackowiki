@@ -279,12 +279,14 @@
 		[ ' forbidden ' ]
 		<table border="1" bordercolor="#666699" width="600">
 			<tr>
-				<th width="350"> [ ' _t: Subject ' ]: </th><td>[ ' subject ' ]</td>
-				<td></td>
-				<th><strong> [ ' _t: From ' ]: </th><td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+				<th width="350"> [ ' _t: Subject ' ]: </th>
+				<td>[ ' subject ' ]</td>
+				
+				<th><strong> [ ' _t: From ' ]: </th>
+				<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 			</tr>
 			<tr>
-				<td colspan="3"><strong> [ ' _t: Message ' ]:</strong><br>[ ' message ' ]</td>
+				<td colspan="4"><strong> [ ' _t: Message ' ]:</strong><br>[ ' message ' ]</td>
 			</tr>
 			<tr>
 				<td>

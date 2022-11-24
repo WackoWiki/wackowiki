@@ -1,6 +1,6 @@
 [ === main === ]
 <ignore>
-	<!--notypo-->
+<!--notypo-->
 	[ ' style ' ]
 	<ul class="timeline">
 		[= n _ =
@@ -17,7 +17,7 @@
 		</li>
 		=]
 	</ul>	
-	<!--/notypo-->
+<!--/notypo-->
 </ignore>
 
 [ === style === ]
