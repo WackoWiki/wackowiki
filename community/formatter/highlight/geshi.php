@@ -3,7 +3,9 @@
 // WackoWiki Wrapper for GeSHi - Generic Syntax Highlighter
 // https://wackowiki.org/doc/Dev/PatchesHacks/GeSHi
 
-# require_once 'lib/geshi/geshi.php'; // -> autoload.conf
+// GeSHi uses constants outside its class, so autoload will default with:
+// PHP Fatal error:  Uncaught Error: Undefined constant "GESHI_NO_LINE_NUMBERS"
+require_once 'lib/geshi/geshi.php'; // -> autoload.conf
 
 if ($options['_default'])
 {
@@ -37,24 +39,25 @@ if ($options['_default'])
 	$geshi->set_overall_class('code');	// enables using a single stylesheet for multiple code fragments
 	$geshi->set_tab_width(4);			// default: 8
 
-	$geshi->set_header_type($header);	// GESHI_HEADER_DIV GESHI_HEADER_PRE_VALID GESHI_HEADER_PRE_TABLE GESHI_HEADER_NONE
+	$geshi->set_header_type($header);	// GESHI_HEADER_DIV, GESHI_HEADER_PRE_VALID, GESHI_HEADER_PRE_TABLE, GESHI_HEADER_NONE
 
-	$geshi->enable_line_numbers((bool) $numbers); // GESHI_NORMAL_LINE_NUMBERS GESHI_FANCY_LINE_NUMBERS, 2 GESHI_NO_LINE_NUMBERS
+	$geshi->enable_line_numbers((bool) $numbers); // GESHI_NORMAL_LINE_NUMBERS, GESHI_FANCY_LINE_NUMBERS, 2 GESHI_NO_LINE_NUMBERS
 	$geshi->start_line_numbers_at((int) abs($start));
 	$geshi->highlight_lines_extra($lines);
 
-	#/*
-	// get the stylesheet -> geshi.css
-	echo '<style>';
-	echo $geshi->get_stylesheet(false);
-	echo '</style>';
-	#*/
+	// get the stylesheet
+	if (!file_exists($this->db->base_path . Ut::join_path(THEME_DIR, '_common/geshi.css')))
+	{
+		$tpl->css_styles	= $geshi->get_stylesheet(false);
+	}
+	else
+	{
+		$this->geshi = true;
+	}
 
-	echo '<!--notypo-->' . "\n";
-	echo $geshi->parse_code();
-	echo '<!--/notypo-->' . "\n";
+	$tpl->text			= $geshi->parse_code();
 }
 else
 {
-	echo Ut::html($text);
+	$tpl->text			= Ut::html($text);
 }
