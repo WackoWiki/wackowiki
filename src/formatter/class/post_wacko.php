@@ -34,7 +34,7 @@ class PostWacko
 				$url	= str_replace(' ', '%20', trim($url));
 				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $text));
 
-				return $wacko->link($url, '', $text, '', 1, 1);
+				return $wacko->link($url, '', $text, '', true, true);
 			}
 			else
 			{
@@ -49,7 +49,7 @@ class PostWacko
 			if ($url && $img)
 			{
 				$url	= str_replace(' ', '', $url);
-				$url	= $wacko->link($url, '', '', '', 1, 1);
+				$url	= $wacko->link($url, '', '', '', true, true);
 
 				if (!$url = preg_replace('/.*href="(.*?)".*|.*src="(.*?)".*/u', '\\1\\2', $url))
 				{

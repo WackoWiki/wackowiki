@@ -46,7 +46,7 @@ if ($options['_default'])
 	$geshi->highlight_lines_extra($lines);
 
 	// get the stylesheet
-	if (!file_exists($this->db->base_path . Ut::join_path(THEME_DIR, '_common/geshi.css')))
+	if (!file_exists(Ut::join_path(THEME_DIR, '_common/geshi.css')))
 	{
 		$tpl->css_styles	= $geshi->get_stylesheet(false);
 	}

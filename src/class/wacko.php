@@ -5231,9 +5231,11 @@ class Wacko
 	// SECTIONS
 
 	/**
-	 * Parses wikitext into sections
+	 * Parses wikitext into sections, and either pull or replace some particular section's text.
 	 *
-	 * Extracts body sections and optionaly merges all nested sections with the selected $section
+	 * External callers should use the get_section and replace_section methods.
+	 *
+	 * Extracts body sections and optionaly merges all nested sections with the selected section.
 	 * The section number 0 pulls the text before the first heading; other numbers will
 	 * pull the given section along with its lower-level subsections.
 	 *
