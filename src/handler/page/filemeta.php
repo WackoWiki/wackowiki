@@ -69,7 +69,8 @@ $this->ensure_page(true);
 
 $action			= $_POST['_action'] ?? null;
 $can_upload		= $this->can_upload();
-$file			= $get_file((int) ($_POST['file_id'] ?? @$_GET['file_id']));
+$file_id		= (int) ($_POST['file_id'] ?? @$_GET['file_id']);
+$file			= $get_file($file_id);
 
 $mod_selector	= 'm';
 // tab navigation
@@ -111,7 +112,7 @@ if ($action && !empty($file))
 			$author			= $this->sanitize_text_field(mb_substr($_POST['author'], 0, 250), true);
 			$source			= $this->sanitize_text_field(mb_substr($_POST['source'], 0, 250), true);
 			$source_url		= filter_var($_POST['source_url'], FILTER_VALIDATE_URL);
-			$license_id		= $_POST['license'] ?? 0;
+			$license_id		= (int) ($_POST['license'] ?? 0);
 			$file_lang		= $this->validate_language($_POST['file_lang'] ?? $file['file_lang']);
 
 			// update file metadata

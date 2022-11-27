@@ -1,5 +1,5 @@
 [ === main === ]
-	<!--notypo-->
+<!--notypo-->
 	<h3>[ ' _t: UserSettings ' ] » [ ' header ' ] </h3>
 	[ ' tabs ' ]
 	<br><br>
@@ -376,4 +376,4 @@
 			</table>
 		</aside>
 	=]
-	<!--/notypo-->
+<!--/notypo-->
