@@ -5294,11 +5294,17 @@ class Wacko
 					$s++;
 				}
 
-				$name = match($a){
-					0 => 'h',
-					1 => 'title',
-					2 => 'body',
-				};
+				switch ($a) {
+					case 0:
+						$name = 'h';
+						break;
+					case 1:
+						$name = 'title';
+						break;
+					case 2:
+						$name = 'body';
+						break;
+				}
 
 				$p[$s][$name]	= $value;
 
