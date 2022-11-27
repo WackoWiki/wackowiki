@@ -9,7 +9,7 @@
 	%%
 
 	requires Highlight.js script <https://highlightjs.org/>
-	The Highlight.js script must be loaded once either via the {{math}} action or the theme header.
+	The Highlight.js script must be loaded once either via the {{hljs}} action or the theme header.
 */
 
 // comment this out when you've set this statically in the theme header
