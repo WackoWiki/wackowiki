@@ -56,7 +56,10 @@ if ($this->page && $this->has_access('read'))
 	}
 
 	// permalink
-	$tpl->perma_link = $this->action('hashid');
+	if ($this->method == 'show')
+	{
+		$tpl->perma_link = $this->action('hashid');
+	}
 }
 
 $tpl->enter('credits_');

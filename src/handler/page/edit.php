@@ -269,6 +269,8 @@ if ($this->has_access('read')
 	{
 		$section = $this->get_section($this->page['body'], $section_id);
 
+		$h_level				= substr_count($section['h'], '=') - 1;
+
 		// assign section as page body
 		$this->page['body']		= $section['body'];
 		$this->page['title']	= $section['title'];
@@ -365,7 +367,7 @@ if ($this->has_access('read')
 		// edit page title
 		$tpl->e_title = $title;
 		$tpl->e_label = $section_id
-			? $this->_t('SectionHeadline')			// Headline (section) or $section_title
+			? $this->_t('SectionHeadline') . ' <span class="section-level">(h' . $h_level . ')</span>'
 			: $this->_t('MetaTitle');
 	}
 	else

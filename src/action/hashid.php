@@ -5,10 +5,15 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{hashid version=0|1}}
+/* USAGE:
+	{{hashid [version=0|1]}}
+	version:
+		0 - link to the page
+		1 - link to the current page version (default)
+*/
 
 // set defaults
-$version ??= 1;
+if (!$version)	$version	= 1;
 
 // import the Hashids class into the global namespace
 use Hashids\Hashids;
