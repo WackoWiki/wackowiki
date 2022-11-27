@@ -22,7 +22,7 @@ if (!defined('IN_WACKO'))
 if ($this->is_admin())
 {
 	// set defaults
-	$mute		??= 1;
+	if (!isset($mute))	$mute	= 1;
 
 	$cluster	= $_POST['_to'] ?? '';
 

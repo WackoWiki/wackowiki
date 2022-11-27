@@ -352,7 +352,7 @@ class Ut
 	 */
 	static function html($string, $double_encode = true, $charset = HTML_ENTITIES_CHARSET): string
 	{
-		$string ??= '';
+		if (!isset($string))	$string	= '';
 
 		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, $charset, $double_encode);
 	}

@@ -63,7 +63,7 @@ function utf8_ltrim($str, $charlist = false)
 */
 function utf8_rtrim($str, $charlist = false)
 {
-	$str ??= '';
+	if (!isset($str))	$str	= '';
 
 	if ($charlist === false)
 	{

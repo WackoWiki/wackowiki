@@ -9,9 +9,9 @@ if (!defined('IN_WACKO'))
 // {{editsection [page="yourPage"] [text="your text"]}}
 
 // set defaults
-$page		??= '';
-$section	??= 0;
-$text		??= '';
+if (!isset($page))		$page		= '';
+if (!isset($section))	$section	= 0;
+if (!isset($text))		$text		= '';
 
 if ($this->has_access('write'))
 {

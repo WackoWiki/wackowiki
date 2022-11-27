@@ -13,7 +13,11 @@ if ($this->has_access('read'))
 {
 	// 'show comments' status are stored in session
 	$show_comments		= &$this->sess->show_comments[$this->page['page_id']];
-	$show_comments		??= (bool) $this->get_user_setting('show_comments');
+
+	if (!isset($show_comments))
+	{
+		$show_comments	= (bool) $this->get_user_setting('show_comments');;
+	}
 
 	if (isset($_GET['show_comments']))
 	{
@@ -23,7 +27,11 @@ if ($this->has_access('read'))
 	// sorting comments ASC / DESC
 	$sort_comment	= null;
 	$sort_comment	= $this->get_user_setting('sorting_comments');
-	$sort_comment	??= $this->db->sorting_comments;
+
+	if (!isset($sort_comment))
+	{
+		$sort_comment	= $this->db->sorting_comments;
+	}
 
 	$tpl->enter('cp_s_');
 

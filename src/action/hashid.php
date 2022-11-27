@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 */
 
 // set defaults
-if (!$version)	$version	= 1;
+if (!isset($version))	$version	= 1;
 
 // import the Hashids class into the global namespace
 use Hashids\Hashids;

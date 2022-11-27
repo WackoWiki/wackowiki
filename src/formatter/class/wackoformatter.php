@@ -870,7 +870,7 @@ class WackoFormatter
 					}
 					else
 					{
-						$this->auto_fn['count'] ??= 0;
+						if (!isset($this->auto_fn['count'])) $this->auto_fn['count'] = 0;
 						$this->auto_fn['count']++;
 
 						$fn_count = $this->auto_fn['count'];
@@ -878,7 +878,7 @@ class WackoFormatter
 
 					if ($text)
 					{
-						$this->auto_fn['content'] ??= null;
+						if (!isset($this->auto_fn['content'])) $this->auto_fn['content'] = null;
 						$this->auto_fn['content'][$fn_count] = trim($text);
 					}
 
