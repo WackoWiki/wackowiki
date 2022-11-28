@@ -54,8 +54,8 @@ if ($start)		$start	= (int) $start;
 if (!$from)		$from	= 'h2';
 if (!$to)		$to		= 'h6';
 
-$start_depth	= $from[1];
-$end_depth		= $to[1];
+$start_depth	= (int) $from[1];
+$end_depth		= (int) $to[1];
 
 // 3. output
 if (!$nomark)

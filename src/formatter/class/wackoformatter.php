@@ -710,22 +710,28 @@ class WackoFormatter
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
+			if ($wacko->db->section_edit
+				&& $h_level > 1
+				&& !isset($_POST['preview'])
+				&& in_array($wacko->method, ['addcomment', 'edit', 'show']))
+			{
+				$wacko->section_count++;
+
+				// non-static section edit link via action
+				$section_edit =
+					'<!--notypo--><!--action:begin-->' .
+						'editsection ' .
+							'page=' . '/' . ($wacko->page['tag'] ?? '') . ' ' .
+							'section=' . $wacko->section_count .
+					'<!--action:end--><!--/notypo-->';
+			}
+
 			return $result .
 				'<h' . $h_level . ' id="' . $header_id . '" class="heading">' .
 					preg_replace_callback($this->LONG_REGEX, $callback, $matches[2]) .
 					'<a class="self-link" href="#' . $header_id . '"></a>' .
 
-					// non-static section edit link via action
-					($wacko->db->section_edit
-						&& in_array($wacko->method, ['show', 'edit'])
-						&& !isset($_POST['preview'])
-						&& $h_level > 1
-						? '<!--notypo--><!--action:begin-->' .
-							'editsection ' .
-								'page=' . '/' . $wacko->page['tag'] . ' ' .
-								'section=' . $wacko->header_count .
-							'<!--action:end--><!--/notypo-->'
-						: '') .
+					($section_edit ?? '') .
 
 				'</h' . $h_level . '>';
 		}

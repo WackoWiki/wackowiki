@@ -36,6 +36,7 @@ class Wacko
 	public array $context			= [];		// page context, used for correct processing of inclusions
 	public $current_context			= 0;		// current context level
 	public $header_count			= 0;
+	public $section_count			= 0;
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
