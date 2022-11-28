@@ -92,6 +92,12 @@ if ($this->has_access('read'))
 					$tpl->b_source_href = $this->href('source', $comment['tag']);
 				}
 
+				// for access validation in editsection action
+				if ($this->db->section_edit)
+				{
+					$this->comment_id = $comment['page_id'];
+				}
+
 				// recompile if necessary
 				if (!$comment['body_r'])
 				{

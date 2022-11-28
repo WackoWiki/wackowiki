@@ -261,7 +261,7 @@ if ($this->has_access('read'))
 			if ($this->db->section_edit && $this->has_access('write'))
 			{
 				// show edit link
-				$tpl->h_n_edit = true;
+				$tpl->h_edit = true;
 			}
 		}
 
