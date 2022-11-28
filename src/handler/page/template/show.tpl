@@ -8,14 +8,14 @@
 			[ ' message ' ]
 		=]
 		[= nav _ =
-			[ ' a revmeta ' ]
+			[ '' a revmeta '' ]
 		=]
-		[ ' restore ' ]
-		[ ' tools ' ]
+		[ '' restore '' ]
+		[ '' tools '' ]
 
 		[= h _ =
 			<header>
-				<h1>[ ' title | e ' ]</h1>
+				<h1>[ ' title | e ' ][ '' n edit '' ]</h1>
 			</header>
 		=]
 		<section id="section-content" class="page" data-dbclick="page">
@@ -25,12 +25,12 @@
 			<nav class="category">[ ' category ' ]</nav>
 		=]
 
-		[''' fp FilePanel ''']
-		[''' cp CommentPanel ''']
+		[ ''' fp FilePanel ''' ]
+		[ ''' cp CommentPanel ''' ]
 
 	</article>
 
-[= tools =]
+[ == tools == ]
 <div class="msg revision-info">
 	[ ' message ' ]
 	<br><br>
@@ -54,7 +54,7 @@
 	</a>
 </div>
 
-[= restore =]
+[ == restore == ]
 <div class="msg warning">
 	[ ' message ' ]
 	<br><br>
@@ -66,7 +66,7 @@
 	</form>
 </div>
 
-[= revmeta =]
+[ == revmeta == ]
 <div class="msg notice rev-overflow">
 [= prev _ =
 	(<a href="[ ' diff ' ]">[ ' _t: Diff ' ]</a>) 
@@ -108,3 +108,6 @@
 		=]
 	</div>
 </div>
+
+[ == edit == ]
+<a href="[ ' href: edit ' ]" class="edit-section" title="[ ' _t: EditTip ' ]">[ ' _t: EditText' ]</a>
