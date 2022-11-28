@@ -211,10 +211,12 @@ a:target {
 	text-decoration: none;
 }
 
+header h1 > a.edit-section,
 .heading > a.edit-section
 {
 	visibility: hidden;
 }
+header h1:hover > a.edit-section,
 .heading:hover > a.edit-section {
 	visibility: visible;
 	text-decoration: none;
@@ -324,9 +326,8 @@ form input.submitinput {
 }
 
 .comment-info {
-	color: #aaa;
+	color: gray;
 	border: 1px solid #d5d9e6;
-	font-weight: bold;
 }
 .msg.comment-info::after {
 	content: url('./../icon/comment.svg') " ";
@@ -459,6 +460,10 @@ form input.submitinput {
 header {
 	padding: 0;
 	width: 96%;
+}
+
+article header {
+	width: 100%;
 }
 
 #header-main {

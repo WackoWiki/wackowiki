@@ -257,6 +257,12 @@ if ($this->has_access('read'))
 			$tpl->h_title = isset($this->page['title']) && $this->has_access('read')
 				? $this->page['title']
 				: $this->get_page_path();
+
+			if ($this->db->section_edit && $this->has_access('write'))
+			{
+				// show edit link
+				$tpl->h_n_edit = true;
+			}
 		}
 
 		// display page body

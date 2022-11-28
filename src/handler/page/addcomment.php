@@ -30,7 +30,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->http->redirect($this->href('', '', ['show_comments' => 1, 'p' => 'last']));
 	}
 
-	// find number
+	// find last comment number
 	if ($latest_comment = $this->db->load_single(
 		"SELECT tag, page_id
 		FROM " . $this->prefix . "page
@@ -144,13 +144,16 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		if (!$error)
 		{
 			// find number
-			$comment_on_id = $this->page['page_id'];
+			$comment_on_id		= $this->page['page_id'];
+			$tag				= 'Comment' . $num;
+			$this->section_tag	= $tag;
+			$this->new_comment	= true;
 
 			// store new comment
-			$body_r = $this->save_page('Comment' . $num, $body, $title, '', 0, 0, $comment_on_id, $parent_id);
+			$body_r = $this->save_page($tag, $body, $title, '', 0, 0, $comment_on_id, $parent_id);
 
 			// log event
-			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag . ' ' . $this->page['title']));
+			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), $tag, $this->tag . ' ' . $this->page['title']));
 
 			// restore username after anonymous publication
 			if ($noid_publication == $this->page['page_id'])
@@ -165,7 +168,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			}
 
 			// now we render it internally so we can write the updated page_link table.
-			$this->update_link_table($this->get_page_id('Comment' . $num), $body_r);
+			$this->update_link_table($this->get_page_id($tag), $body_r);
 
 			$this->set_message($this->_t('CommentAdded'), 'success');
 		}

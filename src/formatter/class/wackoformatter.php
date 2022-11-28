@@ -371,8 +371,10 @@ class WackoFormatter
 			$this->page_id = $wacko->page['page_id'];
 		}
 
-		if (!$this->page_id)
+		if (!$this->page_id || isset($wacko->new_comment))
 		{
+			// for new page or comment with not yet created db record
+			// temporary random hashid for paragrafica (toc, p)
 			$this->page_id = trim(substr(crc32(time()), 0, 5), '-');
 		}
 
@@ -716,12 +718,13 @@ class WackoFormatter
 				&& in_array($wacko->method, ['addcomment', 'edit', 'show']))
 			{
 				$wacko->section_count++;
+				$section_tag = $wacko->section_tag ?? ($wacko->page['tag'] ?? '');
 
 				// non-static section edit link via action
 				$section_edit =
 					'<!--notypo--><!--action:begin-->' .
 						'editsection ' .
-							'page=' . '/' . ($wacko->page['tag'] ?? '') . ' ' .
+							'page=' . '/' . $section_tag . ' ' .
 							'section=' . $wacko->section_count .
 					'<!--action:end--><!--/notypo-->';
 			}
