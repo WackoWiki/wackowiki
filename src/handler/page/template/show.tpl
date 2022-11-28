@@ -16,7 +16,7 @@
 
 		[= h _ =
 			<header>
-				<h1>[ ' title | e ' ][ '' n edit '' ]</h1>
+				<h1>[ ' title | e ' ][ '' edit '' ]</h1>
 			</header>
 		=]
 		<section id="section-content" class="page" data-dbclick="page">
