@@ -36,6 +36,7 @@ class Wacko
 	public array $context			= [];		// page context, used for correct processing of inclusions
 	public $current_context			= 0;		// current context level
 	public $header_count			= 0;
+	public $section_count			= 0;
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
@@ -5260,9 +5261,10 @@ class Wacko
 		 * -----------------
 		 * ...
 		 */
+		// h2 - h6, syntax accepts also only two == closing signs
 		// adds dummy \n before $body for regex to ensure section 0 before the first heading, strips it afterwards;
 		// \n? would break matches with the delimiter inside the text itself
-		$_body = preg_split("/\n[ \t]*(={2,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
+		$_body = preg_split("/\n[ \t]*(={3,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
 
 		#Ut::debug_print_r($_body);
 		$a = 0;	// value [0|1|2]
@@ -5394,7 +5396,7 @@ class Wacko
 
 	/**
 	 * Returns the text of a section, specified by a number ($section_id).
-	 * A section is text under a heading like === Heading ===, or
+	 * A section is text under a heading like == Heading ==, or
 	 * the first section before any such heading (section 0).
 	 *
 	 * If a section contains subsections, these are also returned.
