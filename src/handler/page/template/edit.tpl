@@ -11,7 +11,7 @@
 				[ '' buttons '' ]
 				<section id="preview" class="preview">
 					<p class="preview"><span>[ ' _t: Preview ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
-					<h1>[ ' title | e ' ]</h1>
+					<h[ ' level ' ]>[ ' title | e ' ]</h[ ' level ' ]>
 					[ ' preview | pre ' ]
 				</section>
 				<br>
