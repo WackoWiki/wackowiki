@@ -276,7 +276,7 @@ if ($this->has_access('read')
 	if ($this->db->section_edit && isset($_GET['section']))
 	{
 		$section = $this->get_section($this->page['body'], $section_id);
-		$h_level = substr_count($section['h'], '=') - 1;
+		$s_level = substr_count($section['h'], '=') - 1;
 
 		// assign section as page body
 		$this->page['body']		= $section['body'];
@@ -296,9 +296,12 @@ if ($this->has_access('read')
 						);
 
 	$section_id	= (int)		($_POST['section']		?? $section_id);
-	$h_level	= (int)		($_POST['h_level']		?? ($h_level ?? 0));
 	$edit_note	= (string)	($_POST['edit_note']	?? '');
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
+	$level		= (int)		($_POST['h_level']		?? ($s_level ?? 1));
+
+	// page h1, sections h2 - h6
+	$h_level	= in_array($level, range(1, 6)) ? $level : 1;
 
 	// display form
 	$tpl->enter('f_');
@@ -337,6 +340,7 @@ if ($this->has_access('read')
 		$preview			= $this->format($preview,	'post_wacko', ['strip_notypo' => true, 'strip_ignore' => true]);
 
 		$tpl->p_chars		= $text_chars;
+		$tpl->p_level		= $h_level;
 		$tpl->p_title		= $title;
 		$tpl->p_preview		= $preview;
 		$tpl->p_buttons		= true;
