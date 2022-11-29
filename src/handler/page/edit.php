@@ -37,7 +37,8 @@ if ($this->has_access('read')
 	// is comment?
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'])
 	{
-		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL); // TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
+		// TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
+		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL);
 
 		// formatter needs these values from parent page
 		$this->db->allow_rawhtml	= $comment_on['allow_rawhtml'];
@@ -288,7 +289,7 @@ if ($this->has_access('read')
 						);
 
 	$section_id	= (int)		($_POST['section']		?? $section_id);
-	$h_level	= (int)		($_POST['h_level']		?? $h_level);
+	$h_level	= (int)		($_POST['h_level']		?? ($h_level ?? 0));
 	$edit_note	= (string)	($_POST['edit_note']	?? '');
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
 
@@ -324,7 +325,7 @@ if ($this->has_access('read')
 	if (isset($_POST['preview']))
 	{
 		$text_chars			= number_format(mb_strlen($_body), 0, ',', '.');
-		$preview			= $this->format($body,		'pre_wacko');
+		$preview			= $this->format(preg_replace("/^\n/u", '', $body),		'pre_wacko'); // hack! : we're cutting the first \n again
 		$preview			= $this->format($preview,	'wacko');
 		$preview			= $this->format($preview,	'post_wacko', ['strip_notypo' => true, 'strip_ignore' => true]);
 
