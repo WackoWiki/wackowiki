@@ -80,7 +80,7 @@
 					</th>
 					<td>
 						<select id="new_owner_id" name="new_owner_id">
-							<option value="">[ ' _t: OwnerDontChange ' ]</option>
+							<option value="">[ ' owner | e ' ] ([ ' _t: OwnerDontChange ' ])</option>
 							[= l _ =
 								<option value="[ ' user.user_id | e attr ' ]">[ ' user.user_name | e ' ]</option>
 							=]
