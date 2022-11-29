@@ -19,6 +19,7 @@
 			<form action="[ ' href: edit ' ]" method="post" id="edit_page" name="edit_page" cf="true">
 				[ ' csrf: edit_page ' ]
 				<input type="hidden" name="section" value="[ ' sectionid ' ]">
+				<input type="hidden" name="h_level" value="[ ' hlevel ' ]">
 				<input type="hidden" name="previous" value="[ ' previous | e attr ' ]">
 				[= new _ =
 					<input type="hidden" name="page_lang" value="[ ' lang | e attr ' ]">

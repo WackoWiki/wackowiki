@@ -1052,6 +1052,10 @@ p.preview {
 	margin-left: -3px;
 }
 
+.preview h1 {
+	clear: both;
+}
+
 .layout-box {
 	margin: .8em 2px 2px;
 	padding: 10px;
