@@ -61,6 +61,10 @@ const LOAD_CACHE					= 1;
 const LOAD_ALL						= 0;
 const LOAD_META						= 1;
 
+const IS_PARAGRAPH					= 77777;
+const IS_INCLUDE					= 99999;
+const IS_HEADING					= 66666;
+
 const MENU_AUTO						= 0;
 const MENU_USER						= 1;
 const MENU_DEFAULT					= 2;

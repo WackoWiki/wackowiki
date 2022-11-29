@@ -84,7 +84,7 @@ if ($_page)
 			for ($i = 0; $i < $toc_len; $i++)
 			{
 				// neither '(p)' nor '(include)'
-				if ($toc[$i][2] < 66666)
+				if ($toc[$i][2] < IS_HEADING)
 				{
 					// normalized depth immersion
 					$toc[$i][4] = $toc[$i][2] - $start_depth + 1;

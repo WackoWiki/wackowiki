@@ -331,7 +331,7 @@ class Paragrafica
 				$this->toc[] = [
 					$this->wacko->unwrap_link(trim($matches[7], '"')),
 					'(include)',
-					99999
+					IS_INCLUDE
 				];
 			}
 		}
@@ -343,7 +343,7 @@ class Paragrafica
 				$this->toc[] = [
 					$matches[6],
 					'(p)',
-					77777
+					IS_PARAGRAPH
 				];
 			}
 			else

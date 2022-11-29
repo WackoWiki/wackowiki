@@ -5407,7 +5407,7 @@ class Wacko
 
 	/**
 	 * Returns the text of a section, specified by a number ($section_id).
-	 * A section is text under a heading like === Heading ===, or
+	 * A section is text under a heading like == Heading ==, or
 	 * the first section before any such heading (section 0).
 	 *
 	 * If a section contains subsections, these are also returned.
@@ -7429,7 +7429,7 @@ class Wacko
 			if (isset($toc_item[2]))
 			{
 				// '(include)' - included toc
-				if ($toc_item[2] == 99999)
+				if ($toc_item[2] == IS_INCLUDE)
 				{
 					if (!in_array($toc_item[0], $this->toc_context))
 					{
@@ -7444,7 +7444,7 @@ class Wacko
 				else
 				{
 					// '(p)' - paragraph
-					if ($toc_item[2] == 77777)
+					if ($toc_item[2] == IS_PARAGRAPH)
 					{
 						$toc[$k][3]	= $_link;
 						$_toc[]		= &$toc[$k];
