@@ -16,12 +16,12 @@ if ($this->languages[$this->page_lang]['dir'] != $this->user_lang_dir)
 }
 
 // if user has rights to edit page, show Edit link
-if ($this->has_access('write') && $this->method != 'edit')
+if ($this->has_access('write') && $this->method == 'show')
 {
 	$tpl->edit_href = $this->href('edit');
 }
 
-if ($this->page && $this->has_access('read'))
+if ($this->page && $this->has_access('read') && $this->method == 'show')
 {
 	if ($mtime = $this->page['modified'])
 	{
@@ -62,10 +62,7 @@ if ($this->page && $this->has_access('read'))
 	}
 
 	// permalink
-	if ($this->method == 'show')
-	{
-		$tpl->perma_link = $this->action('hashid');
-	}
+	$tpl->perma_link = $this->action('hashid');
 }
 
 $tpl->enter('credits_');
