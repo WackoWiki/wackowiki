@@ -268,8 +268,7 @@ if ($this->has_access('read')
 	if ($this->db->section_edit && isset($_GET['section']))
 	{
 		$section = $this->get_section($this->page['body'], $section_id);
-
-		$h_level				= substr_count($section['h'], '=') - 1;
+		$h_level = substr_count($section['h'], '=') - 1;
 
 		// assign section as page body
 		$this->page['body']		= $section['body'];
@@ -289,6 +288,7 @@ if ($this->has_access('read')
 						);
 
 	$section_id	= (int)		($_POST['section']		?? $section_id);
+	$h_level	= (int)		($_POST['h_level']		?? $h_level);
 	$edit_note	= (string)	($_POST['edit_note']	?? '');
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
 
@@ -377,6 +377,7 @@ if ($this->has_access('read')
 	}
 
 	$tpl->sectionid	= $section_id;
+	$tpl->hlevel	= $h_level;
 	$tpl->previous	= $previous;		// -> [ ' previous | e attr ' ]
 	$tpl->body		= Ut::html($body);	// -> [ ' body | pre ' ]
 
