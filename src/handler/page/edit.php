@@ -20,7 +20,9 @@ if ($this->has_access('read')
 	if ($result = $this->validate_reserved_words($this->tag))
 	{
 		// $this->tag is reserved word
-		$message = Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>');
+		$message = Ut::perc_replace(
+			$this->_t('PageReservedWord'),
+			'<code>' . $result . '</code>');
 		$this->set_message($message);
 		$this->http->redirect($this->href('new', $this->db->root_page));
 	}
@@ -56,7 +58,8 @@ if ($this->has_access('read')
 	// revision header
 	if (isset($this->page['latest']) && $this->page['latest'] == 0 && (bool) $this->page)
 	{
-		$message = Ut::perc_replace($this->_t('RevisionHint'),
+		$message = Ut::perc_replace(
+			$this->_t('RevisionHint'),
 			$this->href(),
 			$this->tag,
 			$this->sql_time_formatted($this->page['modified']),
@@ -78,7 +81,10 @@ if ($this->has_access('read')
 			}
 		}
 
-		$message = Ut::perc_replace($this->_t('SimilarPagesExists'), '<code>' . $this->tag . '</code>') . '<br>' . $log;
+		$message = Ut::perc_replace(
+			$this->_t('SimilarPagesExists'),
+			'<code>' . $this->tag . '</code>') .
+			'<br>' . $log;
 		$tpl->message = $this->show_message($message, 'notice', false);
 	}
 
@@ -137,8 +143,9 @@ if ($this->has_access('read')
 			// check text length
 			if ($text_size > $this->db->max_page_size)
 			{
-				$message = Ut::perc_replace($this->_t('TextDbOversize'),
-						'<code>' . number_format($text_size - $this->db->max_page_size, 0, ',', '.') . '</code>');
+				$message = Ut::perc_replace(
+					$this->_t('TextDbOversize'),
+					'<code>' . number_format($text_size - $this->db->max_page_size, 0, ',', '.') . '</code>');
 				$this->set_message($message , 'error');
 				$error = true;
 			}

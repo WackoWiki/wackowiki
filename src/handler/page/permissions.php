@@ -135,7 +135,6 @@ if ($action === 'set_permissions')
 		}
 	};
 
-
 	if (!isset($_POST['massacls']))
 	{
 		$update_page_acls($this->page);
@@ -211,9 +210,16 @@ if ($upload_allowed)
 
 if ($users = $this->load_users())
 {
+	$tpl->owner = $this->get_page_owner();
+
 	// TODO and if there're TONS of users? maybe simple text entry, not menu?
 	foreach ($users as $user)
 	{
+		if ($user['user_id'] == $this->page['owner_id'])
+		{
+			continue;
+		}
+
 		$tpl->l_user = $user;
 	}
 }
