@@ -35,7 +35,7 @@ $context		= $this->tag;
 
 	for ($i = 0; $i < $toc_len; $i++)
 	{
-		if ($toc[$i][2] > 66666)
+		if ($toc[$i][2] > IS_HEADING)
 		{
 			// normalizing submersion depth
 			$p_num++;

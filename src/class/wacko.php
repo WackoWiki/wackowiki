@@ -7417,7 +7417,7 @@ class Wacko
 			if (isset($toc_item[2]))
 			{
 				// '(include)' - included toc
-				if ($toc_item[2] == 99999)
+				if ($toc_item[2] == IS_INCLUDE)
 				{
 					if (!in_array($toc_item[0], $this->toc_context))
 					{
@@ -7432,7 +7432,7 @@ class Wacko
 				else
 				{
 					// '(p)' - paragraph
-					if ($toc_item[2] == 77777)
+					if ($toc_item[2] == IS_PARAGRAPH)
 					{
 						$toc[$k][3]	= $_link;
 						$_toc[]		= &$toc[$k];
