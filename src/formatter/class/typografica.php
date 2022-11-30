@@ -11,28 +11,24 @@ class Typografica
 {
 	public $wacko;
 	public $skip_tags	= true;
-	public $p_prefix	= '<p class="typo">';
-	public $p_postfix	= '</p>';
-	public $asoft		= true;
 	public $indent1		= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
 	public $indent2		= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
-	public $fixed_size	= 80; // maximum width
 	public $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
 	public $de_nobr		= true;
 
 	public $phonemasks	= [
 							[
-								"/(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})/",
-								"/(\d{4})\-(\d{2})\-(\d{2})/",
-								"/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})\-(\d{2})/",
-								"/(\([\d\+\-]+\)) ?(\d{2})\-(\d{2})\-(\d{2})/",
-								"/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})/",
-								"/(\([\d\+\-]+\)) ?(\d{2})\-(\d{3})/",
-								"/(\d{3})\-(\d{2})\-(\d{2})/",
-								"/(\d{2})\-(\d{2})\-(\d{2})/",
-								"/(\d{1})\-(\d{2})\-(\d{2})/",
-								"/(\d{2})\-(\d{3})/",
-								"/(\d+)\-(\d+)/",
+								'/(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})/',
+								'/(\d{4})\-(\d{2})\-(\d{2})/',
+								'/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})\-(\d{2})/',
+								'/(\([\d\+\-]+\)) ?(\d{2})\-(\d{2})\-(\d{2})/',
+								'/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})/',
+								'/(\([\d\+\-]+\)) ?(\d{2})\-(\d{3})/',
+								'/(\d{3})\-(\d{2})\-(\d{2})/',
+								'/(\d{2})\-(\d{2})\-(\d{2})/',
+								'/(\d{1})\-(\d{2})\-(\d{2})/',
+								'/(\d{2})\-(\d{3})/',
+								'/(\d+)\-(\d+)/',
 							],
 							[
 								"<nobr>\\1–\\2–\\3\u{00A0}\\4:\\5:\\6</nobr>",
@@ -49,12 +45,12 @@ class Typografica
 							]
 						];
 
-	public $glueleft	= ["рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\."]; // contains some Russian abberviations, also see below
-	public $glueright	= ["руб\.", "коп\.", "у\.е\.", "мин\."];
+	public $glueleft	= ['рис\.', 'табл\.', 'см\.', 'им\.', 'ул\.', 'пер\.', 'кв\.', 'офис', 'оф\.', 'г\.']; // contains some Russian abbreviations, also see below
+	public $glueright	= ['руб\.', 'коп\.', 'у\.е\.', 'мин\.'];
 
 	public $settings	= [
 							'inches'	=> 1, // convert inches into &quot;
-							'apostroph'	=> 1, // apostroph converter
+							'apostroph'	=> 1, // apostrophe converter
 							'laquo'		=> 0, // angle quotes
 							'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
 							'quotes'	=> 0, // English quotes
@@ -105,7 +101,7 @@ class Typografica
 		}
 
 		// 0. Stripping tags
-		// actulally, tag similarity is a problem.
+		// actually, tag similarity is a problem.
 		//   case 1, simple (ending tag) </abcz>
 		//   case 2, simple (just a tag) <abcz>
 		//   case 3, a bit difficult     <abcz href="abcz">
@@ -265,8 +261,8 @@ class Typografica
 		// 1. English quotes
 		if ($this->settings['quotes'])
 		{
-			$data	= preg_replace('/\"\"/u', '&quot;&quot;', $data);
-			$data	= preg_replace('/\"\.\"/u', '&quot;.&quot;', $data);
+			$data	= str_replace('""', '&quot;&quot;', $data);
+			$data	= str_replace('"."', '&quot;.&quot;', $data);
 			$_data	= "\"\"";
 
 			while ($_data != $data)
@@ -280,7 +276,7 @@ class Typografica
 		// 2. angle quotes
 		if ($this->settings['laquo'])
 		{
-			$data	= preg_replace('/\"\"/u', '&quot;&quot;', $data);
+			$data	= str_replace('""', '&quot;&quot;', $data);
 			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~\d¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
 			// nb: wacko only regexp follows:
 			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/\u{00A0}|\/|\!)*[~\d¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
@@ -321,13 +317,13 @@ class Typografica
 		// 4. (c)
 		if ($this->settings['(c)'])
 		{
-			$data = preg_replace('/\([cCñÑ]\)/ui', '©', $data);					// \u{00A9}
+			$data = preg_replace('/\([cCсС]\)/ui', '©', $data);					// \u{00A9}
 		}
 
 		// 4a. (r)
 		if ($this->settings['(r)'])
 		{
-			$data = preg_replace('/\(r\)/ui', '<sup>®</sup>', $data);			// \u{00AE}
+			$data = str_replace('(r)', '<sup>®</sup>', $data);					// \u{00AE}
 		}
 
 		// 4b. (tm)
@@ -339,21 +335,21 @@ class Typografica
 		// 4c. (p)
 		if ($this->settings['(p)'])
 		{
-			$data = preg_replace('/\(p\)/ui', '§', $data);						// \u{00A7}
+			$data = str_replace('(p)', '§', $data);								// \u{00A7}
 		}
 
 		// 5. +/-
 		if ($this->settings['+-'])
 		{
-			$data = preg_replace('/\+\-/u', '±', $data);						// \u{00B1}
+			$data = str_replace('+-', '±', $data);								// \u{00B1}
 		}
 
 		// 5a. 12°C
 		if ($this->settings['degrees'])
 		{
-			$data = preg_replace('/-(\d)+\^([FCÑK])/u',		"-\\1°\\2",	$data);	// \u{00B0} Degree Sign
-			$data = preg_replace('/\+(\d)+\^([FCÑK])/u',	"+\\1°\\2",	$data);	// \u{00B0}
-			$data = preg_replace('/\^([FCÑK])/u',			"°\\1",		$data);	// \u{00B0}
+			$data = preg_replace('/-(\d)+\^([FCСK])/u',		"-\\1°\\2",	$data);	// \u{00B0} Degree Sign
+			$data = preg_replace('/\+(\d)+\^([FCСK])/u',	"+\\1°\\2",	$data);	// \u{00B0}
+			$data = preg_replace('/\^([FCСK])/u',			"°\\1",		$data);	// \u{00B0}
 		}
 
 		// 6. phones
@@ -375,11 +371,11 @@ class Typografica
 		// 1. Paragraphs
 		// --- not ported to wacko ---
 
-		// 2. Paragpaph indent (indented line)
+		// 2. Paragraph indent (indented line)
 		if ($this->settings['[--]'])
 		{
-			$data = preg_replace('/\[--\]/u', $this->indent1, $data);
-			$data = preg_replace('/\[---\]/u', $this->indent2, $data);
+			$data = str_replace('[--]',  $this->indent1, $data);
+			$data = str_replace('[---]', $this->indent2, $data);
 		}
 
 		// 3. mailto:

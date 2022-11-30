@@ -157,14 +157,6 @@ if ($this->has_access('read')
 				$error = true;
 			}
 
-			// check categories
-			/* if (!$this->page && $this->get_categories_list($this->page_lang, true) && $this->save_categories_list($this->page['page_id'], OBJECT_PAGE, 1) !== true)
-			{
-				$message = 'Select at least one referring category (field) to the page. ';
-				$this->set_message($message , 'error');
-				$error = true;
-			} */
-
 			// captcha validation
 			if (($this->page? $this->db->captcha_edit_page : $this->db->captcha_new_page)
 				&& !$this->validate_captcha())
