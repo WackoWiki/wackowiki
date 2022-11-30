@@ -317,7 +317,7 @@ class Typografica
 		// 4. (c)
 		if ($this->settings['(c)'])
 		{
-			$data = preg_replace('/\([cCñÑ]\)/ui', '©', $data);					// \u{00A9}
+			$data = preg_replace('/\([cCсС]\)/ui', '©', $data);					// \u{00A9}
 		}
 
 		// 4a. (r)
@@ -347,9 +347,9 @@ class Typografica
 		// 5a. 12°C
 		if ($this->settings['degrees'])
 		{
-			$data = preg_replace('/-(\d)+\^([FCÑK])/u',		"-\\1°\\2",	$data);	// \u{00B0} Degree Sign
-			$data = preg_replace('/\+(\d)+\^([FCÑK])/u',	"+\\1°\\2",	$data);	// \u{00B0}
-			$data = preg_replace('/\^([FCÑK])/u',			"°\\1",		$data);	// \u{00B0}
+			$data = preg_replace('/-(\d)+\^([FCСK])/u',		"-\\1°\\2",	$data);	// \u{00B0} Degree Sign
+			$data = preg_replace('/\+(\d)+\^([FCСK])/u',	"+\\1°\\2",	$data);	// \u{00B0}
+			$data = preg_replace('/\^([FCСK])/u',			"°\\1",		$data);	// \u{00B0}
 		}
 
 		// 6. phones
