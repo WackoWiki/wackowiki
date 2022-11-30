@@ -148,7 +148,7 @@ if ($can_view)
 	}
 	else
 	{
-		$file_page = $this->load_page($tag);
+		$file_page = $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META);
 	}
 
 	if (!$global && !isset($file_page['page_id']))

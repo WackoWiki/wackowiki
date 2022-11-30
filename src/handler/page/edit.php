@@ -40,8 +40,7 @@ if ($this->has_access('read')
 	// is comment?
 	if ($is_comment)
 	{
-		// TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
-		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL);
+		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
 
 		// formatter needs these values from parent page
 		$this->db->allow_rawhtml	= $comment_on['allow_rawhtml'];
