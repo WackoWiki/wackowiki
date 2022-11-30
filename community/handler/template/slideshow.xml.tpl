@@ -13,6 +13,7 @@
 		=]
 		<link rel="icon" href="[ ' favicon ' ]" type="image/x-icon">
 		[= css _ =
+		[ '  nonstatic ' ]
 		<style>
 			.slide { font-size: 160%; margin: 1% 3%; background-color: #fff; padding: 30px; border: 1px inset; line-height: 1.5; min-height: 500px;}
 			.slide ul, li, .slide p { font-size: 100%; }

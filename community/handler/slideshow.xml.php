@@ -61,14 +61,14 @@ if ($this->has_access('read'))
 		!Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);
 		$tpl->favicon	= $this->get_favicon();
 
-		#if (!file_exists($this->db->theme_url . 'css/slideshow.css'))
-		#{
-			#$tpl->css	= false;
-		#}
-		#else
-		#{
-			#$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/slideshow.css">');
-		#}
+		if (!file_exists(Ut::join_path(THEME_DIR, $this->db->theme . 'css/slideshow.css')))
+		{
+			$tpl->css	= true;
+		}
+		else
+		{
+			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/slideshow.css">');
+		}
 
 		// current slide
 		$c_slide = ($slide * 2) - ($first_slide * 2);
