@@ -11,14 +11,14 @@ Default is a theme (a.k.a. template) for WackoWiki.
 
 The theme has been designed for all options you got by the wacko markup. It
 contains a small main navigation including the input field for the keyword
-search. At the header you find the link to the login or registration page 
-or if logged in links to the user page, account settings and logout. 
+search. At the header you find the link to the login or registration page
+or if logged in links to the user page, account settings and logout.
 
 * RTL support
 
 ## Customization
 
-First copy the theme to a new folder, e.g. `theme/default_customized`, to not accidentally 
+First copy the theme to a new folder, e.g. `theme/default_customized`, to not accidentally
 overwrite your changes during a update or rollback.
 
 To alternate the HTML just edit `header.tpl` and `footer.tpl` at the `appearance/template/`
@@ -36,8 +36,8 @@ $theme_translation = [
 
 ```
 
-The theme config file `wacko.all.php` overrides the default values, 
-it enables you to set your own config-options as well as overwriting existing ones. 
+The theme config file `wacko.all.php` overrides the default values,
+it enables you to set your own config-options as well as overwriting existing ones.
 
 ```PHP
 // theme options ==============
@@ -59,10 +59,10 @@ For bug reports and feature requests you can write to [Bugtracker](https://wacko
 
 ## License
 
-The [Default Theme](https://wackowiki.org/doc/Dev/Themes/Default) is part of the WackoWiki package.  
+The [Default Theme](https://wackowiki.org/doc/Dev/Themes/Default) is part of the WackoWiki package.
 BSD licence.
 
-Icons were taken from the [Breeze Icons](https://github.com/KDE/breeze-icons) set.  
+Icons were taken from the [Breeze Icons](https://github.com/KDE/breeze-icons) set.
 Icons are licensed under the LGPLv3.
 
 

@@ -10,10 +10,11 @@ $error			= '';
 $minor_edit		= 0;
 $reviewed		= 0;
 $title			= '';
+$is_comment		= isset($this->page['comment_on_id']) && $this->page['comment_on_id'];
 
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
-	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && ($this->is_owner() || $this->is_admin()))
+	|| ($is_comment && ($this->is_owner() || $this->is_admin()))
 	|| (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word
@@ -37,7 +38,7 @@ if ($this->has_access('read')
 	$user		= $this->get_user();
 
 	// is comment?
-	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'])
+	if ($is_comment)
 	{
 		// TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
 		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL);
@@ -88,7 +89,6 @@ if ($this->has_access('read')
 		$tpl->message = $this->show_message($message, 'notice', false);
 	}
 
-	// TODO: $_POST['body'] removes first empty line feed from body! Keep it as is. (???)
 	if (isset($_POST))
 	{
 		$anchor		= [];
@@ -113,15 +113,16 @@ if ($this->has_access('read')
 			$minor_edit	= (int)	($_POST['minor_edit']	?? 0);
 			$reviewed	= (int)	($_POST['reviewed']		?? 0);
 			$text_size	= strlen($_body);
+			$_title		= trim(	($_POST['title']		?? $this->page['title']));
 
 			if ($section_id)
 			{
 				$title		= trim($this->page['title']);
-				$sec_title	= trim(($_POST['title']	?? $this->page['title']));
+				$sec_title	= $_title;
 			}
 			else
 			{
-				$title		= trim(($_POST['title']	?? $this->page['title']));
+				$title		= $_title;
 			}
 
 			// check for reserved word
@@ -192,8 +193,10 @@ if ($this->has_access('read')
 			// store
 			if (!$error)
 			{
+				$anonymous = isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'];
+
 				// publish anonymously
-				if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
+				if ($anonymous)
 				{
 					// undefine username
 					$remember_name = $this->get_user_name();
@@ -221,7 +224,7 @@ if ($this->has_access('read')
 				}
 
 				// restore username after anonymous publication
-				if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
+				if ($anonymous)
 				{
 					$this->set_user_setting('user_name', $remember_name);
 					unset($remember_name);
@@ -306,11 +309,13 @@ if ($this->has_access('read')
 	// display form
 	$tpl->enter('f_');
 
-	// "cf" attribute: it is for so called "critical fields" in the form.
-	// It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
-	// "You are going to leave this page, but there are some changes you made but not saved yet."
-	// Is used by this script to determine which changes it needs to monitor.
-	// e.g. $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
+	/**
+	 * "cf" attribute: it is for so called "critical fields" in the form.
+	 * It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
+	 * "You are going to leave this page, but there are some changes you made but not saved yet."
+	 * Is used by this script to determine which changes it needs to monitor.
+	 * e.g. $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
+	 */
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
@@ -335,7 +340,7 @@ if ($this->has_access('read')
 	if (isset($_POST['preview']))
 	{
 		$text_chars			= number_format(mb_strlen($_body), 0, ',', '.');
-		$preview			= $this->format(preg_replace("/^\n/u", '', $body),		'pre_wacko'); // hack! : we're cutting the first \n again
+		$preview			= $this->format($_body,		'pre_wacko');
 		$preview			= $this->format($preview,	'wacko');
 		$preview			= $this->format($preview,	'post_wacko', ['strip_notypo' => true, 'strip_ignore' => true]);
 
@@ -368,7 +373,7 @@ if ($this->has_access('read')
 
 	$tpl->buttons = true;
 
-	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'])
+	if ($is_comment)
 	{
 		// comment title
 		$tpl->e_title = $title;
