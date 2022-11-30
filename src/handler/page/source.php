@@ -27,7 +27,7 @@ if ($this->has_access('read')
 	// is comment?
 	if ($this->page['comment_on_id'])
 	{
-		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL); // TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
+		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
 
 		// comment header
 		$message = $this->msg_is_comment_on(

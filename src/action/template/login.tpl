@@ -1,6 +1,6 @@
 
 [ === main === ]
-	<!--notypo-->
+<!--notypo-->
 	[= u LogoutForm =
 		<form action="[ ' href ' ]" method="get" name="logout">
 			[ ' href | hide_page ' ]
@@ -54,4 +54,4 @@
 		</form>
 		</div>
 	=]
-	<!--/notypo-->
+<!--/notypo-->

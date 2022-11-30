@@ -1,5 +1,5 @@
 [ === main === ]
-	<!--notypo-->
+<!--notypo-->
 	[= closed _ =
 		<div class="msg hint">[ ' _t: RegistrationClosed ' ]</div>
 	=]
@@ -50,4 +50,4 @@
 		</form>
 		</div>
 	=]
-	<!--/notypo-->
+<!--/notypo-->

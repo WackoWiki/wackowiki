@@ -8,15 +8,13 @@ if (!defined('IN_WACKO'))
 // If user has rights to edit page, show Edit link
 // {{edit [page="yourPage"] [text="your text"]}}
 
+// set defaults
 if (!isset($page))		$page = '';
 if (!isset($text))		$text = '';
 
-$href = $this->href('edit', $page);
+$tag	= $page ? $this->unwrap_link($page) : $this->tag;
 
-if (!$page)
-{
-	$href = $this->href('edit');
-}
+$href	= $this->href('edit', $tag);
 
 if (!$text)
 {

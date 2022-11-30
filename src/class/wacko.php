@@ -888,10 +888,12 @@ class Wacko
 			{
 				$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
-							'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+							'p.page_lang, p.keywords, p.description, p.allow_rawhtml, p.disable_safehtml, p.noindex, p.deleted, ' .
+							'u.user_name, o.user_name AS owner_name';
 				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
-							'p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+							'p.page_lang, p.keywords, p.description, s.allow_rawhtml, s.disable_safehtml, s.noindex, p.deleted, ' .
+							'u.user_name, o.user_name AS owner_name';
 			}
 			else
 			{
