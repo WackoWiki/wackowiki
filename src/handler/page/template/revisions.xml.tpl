@@ -4,10 +4,10 @@
 		<channel>
 			<title>[ ' db: site_name ' ] - [ ' tag ' ]</title>
 			<link>[ ' db: base_url ' ][ ' tag ' ]</link>
-			<description>[ ' _t: PageRevisionsXML ' ] [ ' db: site_name ' ]: [ ' tag ' ]</description>
+			<description>[ ' _t: RevisionsXML ' ] [ ' db: site_name ' ]: [ ' tag ' ]</description>
 			<lastBuildDate>[ ' date ' ]</lastBuildDate>
 			<image>
-				<title>[ ' db: site_name ' ][ ' _t: CommentsTitleXML ' ]</title>
+				<title>[ ' db: site_name ' ][ ' _t: ChangesXMLTitle ' ]</title>
 				<link>[ ' db: base_url ' ]</link>
 				<url>[ ' db: base_url ' ][ ' logo ' ]</url>
 				<width>[ ' db: logo_width ' ]</width>

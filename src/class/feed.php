@@ -41,6 +41,30 @@ class Feed
 		return $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml';
 	}
 
+	function feed_header($name, $title, $link = '')
+	{
+		$link = $this->engine->db->base_url . $link;
+
+		return
+			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
+			'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
+			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">' . "\n" .
+			'<channel>' . "\n" .
+				'<title>' . $this->engine->db->site_name . $this->engine->_t($title) . '</title>' . "\n" .
+				'<link>' . $link . '</link>' . "\n" .
+				'<description>' . $this->engine->_t($name) . $this->engine->db->site_name . '</description>' . "\n" .
+				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
+				'<language>' . $this->lang . '</language>' . "\n" .
+				'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n" .
+				'<image>' . "\n" .
+					'<title>' . $this->engine->db->site_name . $this->engine->_t($title) . '</title>' . "\n" .
+					'<link>' . $link . '</link>' . "\n" .
+					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . '</url>' . "\n" .
+					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
+					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
+				'</image>' . "\n";
+	}
+
 	function changes(): void
 	{
 		$limit	= 30;
@@ -49,23 +73,7 @@ class Feed
 
 		$this->engine->canonical = true;
 
-		$xml =
-			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
-			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n" .
-			'<channel>' . "\n" .
-				'<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n" .
-				'<link>' . $this->engine->db->base_url . '</link>' . "\n" .
-				'<description>' . $this->engine->_t('ChangesXML') . $this->engine->db->site_name . '</description>' . "\n" .
-				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
-				'<language>' . $this->lang . '</language>' . "\n" .
-				'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n" .
-				'<image>' . "\n" .
-					'<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n" .
-					'<link>' . $this->engine->db->base_url . '</link>' . "\n" .
-					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . '</url>' . "\n" .
-					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
-					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
-				'</image>' . "\n";
+		$xml = $this->feed_header('ChangesXML', 'ChangesXMLTitle');
 
 		if ([$pages, ] = $this->engine->load_changed())
 		{
@@ -144,25 +152,7 @@ class Feed
 		}
 
 		// build output
-		$xml =
-			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
-			'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
-			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> ' . "\n" .
-			'<channel>' . "\n" .
-				'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
-				'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
-				'<description>' . $this->engine->_t('NewsXML') . $this->engine->db->site_name . '</description>' . "\n" .
-				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
-				'<language>' . $this->lang . '</language>' . "\n" .
-				'<pubDate>' . date('r') . '</pubDate>' . "\n" .
-				'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n" .
-				'<image>' . "\n" .
-					'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
-					'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
-					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n" .
-					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
-					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
-				'</image>' . "\n";
+		$xml = $this->feed_header('NewsXML', 'NewsXMLTitle', str_replace('%2F', '/', rawurlencode($news_cluster)));
 
 		$i = 0;
 
@@ -232,24 +222,7 @@ class Feed
 		$this->engine->canonical = true;
 
 		// build output
-		$xml =
-			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
-			'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
-			'<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n" .
-			'<channel>' . "\n" .
-				'<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . "</title>\n" .
-				'<link>' . $this->engine->db->base_url . "</link>\n" .
-				'<description>' . $this->engine->_t('CommentsXML') . $this->engine->db->site_name . "</description>\n" .
-				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
-				'<language>' . $this->lang . '</language>' . "\n" .
-				'<lastBuildDate>' . date('r') . "</lastBuildDate>\n" .
-				'<image>' . "\n" .
-					'<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . '</title>' . "\n" .
-					'<link>' . $this->engine->db->base_url . '</link>' . "\n" .
-					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n" .
-					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
-					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
-				'</image>' . "\n";
+		$xml = $this->feed_header('CommentsXML', 'CommentsXMLTitle');
 
 		if ($comments = $this->engine->load_comment())
 		{
