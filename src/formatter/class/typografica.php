@@ -146,7 +146,7 @@ class Typografica
 		if ($this->settings['spacing'])
 		{
 			$data = preg_replace('/(\s*)([,]*)/ui', "\\2\\1", $data);
-			$data = preg_replace('/(\s*)([\.?!]*)(\s*[\p{Lu}])/u', "\\2\\1\\3", $data);
+			$data = preg_replace('/(\s*)([\.?!]*)(\s*\p{Lu})/u', "\\2\\1\\3", $data);
 		}
 
 		// 2. Splitting to strings with length no more than XX characters
@@ -165,8 +165,8 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace('/(\s+)([\p{L}]{1,2})(\s+)([^\\s$])/ui', "\\1\\2\u{00A0}\\4", $data);	// \u{00A0} No-Break Space (NBSP)
-				$data	= preg_replace('/(\s+)([\p{L}]{3})(\s+)([^\\s$])/ui',   "\\1\\2\u{00A0}\\4", $data);
+				$data	= preg_replace('/(\s+)(\p{L}{1,2})(\s+)([^\\s$])/ui', "\\1\\2\u{00A0}\\4", $data);	// \u{00A0} No-Break Space (NBSP)
+				$data	= preg_replace('/(\s+)(\p{L}{3})(\s+)([^\\s$])/ui',   "\\1\\2\u{00A0}\\4", $data);
 			}
 
 			foreach ($this->glueleft as $i)
@@ -269,7 +269,7 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>)\"(({:typo:markup:2:}|{:typo:markup:1:})*[\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]+(\"|”))/ui", "\\1“\\2", $data);				// \u{201C} <Left Double Quotation Mark>
+				$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>)\"(({:typo:markup:2:}|{:typo:markup:1:})*[\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]+([\"”]))/ui", "\\1“\\2", $data);				// \u{201C} <Left Double Quotation Mark>
 				$data	= preg_replace("/(“([\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]*({:typo:markup:2:}|{:typo:markup:1:})*).*[\p{Latin}\d][\?\.\!\,]*({:typo:markup:2:}|{:typo:markup:1:})*)\"/ui", "\\1”", $data);	// \u{201D} <Right Double Quotation Mark>
 			}
 		}
