@@ -990,13 +990,13 @@ $wacko_translation = [
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
-	'ChangesTitleXML'			=> ' - Recent changes',
+	'ChangesXMLTitle'			=> ' - Recent changes',
 	'ChangesXML'				=> 'Recent changes to the ',
-	'CommentsTitleXML'			=> ' - Recent comments',
+	'CommentsXMLTitle'			=> ' - Recent comments',
 	'CommentsXML'				=> 'Recent comments to the ',
-	'NewsTitleXML'				=> ' - Recent news',
+	'NewsXMLTitle'				=> ' - Recent news',
 	'NewsXML'					=> 'Recent news to the ',
-	'PageRevisionsXML'			=> 'Revisions of ',
+	'RevisionsXML'				=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'Du har ikke adgang til disse oplysninger.',
 
