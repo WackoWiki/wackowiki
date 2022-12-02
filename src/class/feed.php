@@ -41,9 +41,13 @@ class Feed
 		return $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml';
 	}
 
-	function feed_header($name, $title, $link = '')
+	function feed_header($name, $title, $link = null)
 	{
-		$link = $this->engine->db->base_url . $link;
+		$link ??= $this->engine->db->base_url;
+
+		#xmlns:dc="http://purl.org/dc/elements/1.1/"					-> <dc:creator>
+		#xmlns:content="http://purl.org/rss/1.0/modules/content/"
+		#xmlns:slash="http://purl.org/rss/1.0/modules/slash/"			-> <slash:comments>
 
 		return
 			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
@@ -53,16 +57,20 @@ class Feed
 				'<title>' . $this->engine->db->site_name . $this->engine->_t($title) . '</title>' . "\n" .
 				'<link>' . $link . '</link>' . "\n" .
 				'<description>' . $this->engine->_t($name) . $this->engine->db->site_name . '</description>' . "\n" .
-				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
+				($this->engine->db->terms_page
+					? '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n"
+					: '') .
 				'<language>' . $this->lang . '</language>' . "\n" .
 				'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n" .
-				'<image>' . "\n" .
-					'<title>' . $this->engine->db->site_name . $this->engine->_t($title) . '</title>' . "\n" .
-					'<link>' . $link . '</link>' . "\n" .
-					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . '</url>' . "\n" .
-					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
-					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
-				'</image>' . "\n";
+				($this->engine->db->site_logo
+					?	'<image>' . "\n" .
+							'<title>' . $this->engine->db->site_name . $this->engine->_t($title) . '</title>' . "\n" .
+							'<link>' . $link . '</link>' . "\n" .
+							'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . '</url>' . "\n" .
+							'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
+							'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
+						'</image>' . "\n"
+					:	'');
 	}
 
 	function changes(): void
@@ -71,7 +79,7 @@ class Feed
 		$name	= $this->xml_name('changes');
 		$count	= '';
 
-		$this->engine->canonical = true;
+		$this->engine->canonical	= true;
 
 		$xml = $this->feed_header('ChangesXML', 'ChangesXMLTitle');
 
@@ -112,7 +120,7 @@ class Feed
 		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
-		$this->engine->canonical = false;
+		$this->engine->canonical	= false;
 	}
 
 	function feed($feed_cluster = ''): void
@@ -123,7 +131,8 @@ class Feed
 		$news_levels	= $this->engine->db->news_levels;
 		$prefix			= $this->engine->db->table_prefix;
 
-		$this->engine->canonical = true;
+		$this->engine->canonical	= true;
+		$this->engine->static_feed	= true;
 
 		// collect data
 		$pages = $this->engine->db->load_all(
@@ -152,7 +161,7 @@ class Feed
 		}
 
 		// build output
-		$xml = $this->feed_header('NewsXML', 'NewsXMLTitle', str_replace('%2F', '/', rawurlencode($news_cluster)));
+		$xml = $this->feed_header('NewsXML', 'NewsXMLTitle', $this->engine->href('', $news_cluster));
 
 		$i = 0;
 
@@ -168,12 +177,12 @@ class Feed
 				$title	= $page['title'];
 				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['created']));
-				$coms	= $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments']);
+				$coms	= $page['comments'];
 
 				// recompile if necessary
 				if ($page['body_r'] == '')
 				{
-					# $page['body_r'] = $this->engine->compile_body($page['body'], $page['page_id'], true, true); // requiers 'body'
+					$page['body_r'] = $this->engine->compile_body($page['body'], $page['page_id'], true, true);
 				}
 
 				// TODO: format -> add ['feed' => true]
@@ -194,8 +203,12 @@ class Feed
 					$xml .= '<category>' . $category['category'] . '</category>' . "\n";
 				}
 
-				$xml .= 	($coms != '' ? '<comments>' . $coms . '</comments>' . "\n" : '');
-				$xml .= 	($coms != '' ? '<slash:comments>' . $page['comments'] . '</slash:comments>' . "\n" : '');
+				if ($coms)
+				{
+					$xml .=	'<comments>' . $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments']) . '</comments>' . "\n";
+					$xml .=	'<slash:comments>' . $page['comments'] . '</slash:comments>' . "\n";
+				}
+
 				$xml .=  '</item>' . "\n";
 
 				if ($i >= $limit)
@@ -209,7 +222,8 @@ class Feed
 		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
-		$this->engine->canonical = false;
+		$this->engine->canonical	= false;
+		$this->engine->static_feed	= false;
 	}
 
 	function comments(): void
@@ -219,7 +233,8 @@ class Feed
 		$count	= '';
 		$access	= '';
 
-		$this->engine->canonical = true;
+		$this->engine->canonical	= true;
+		$this->engine->static_feed	= true;
 
 		// build output
 		$xml = $this->feed_header('CommentsXML', 'CommentsXMLTitle');
@@ -269,7 +284,8 @@ class Feed
 		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
-		$this->engine->canonical = false;
+		$this->engine->canonical	= false;
+		$this->engine->static_feed	= false;
 	}
 
 	// Sitemaps XML file: http://www.sitemaps.org
