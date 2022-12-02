@@ -17,59 +17,59 @@ class Typografica
 	public $de_nobr		= true;
 
 	public $phonemasks	= [
-							[
-								'/(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})/',
-								'/(\d{4})\-(\d{2})\-(\d{2})/',
-								'/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})\-(\d{2})/',
-								'/(\([\d\+\-]+\)) ?(\d{2})\-(\d{2})\-(\d{2})/',
-								'/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})/',
-								'/(\([\d\+\-]+\)) ?(\d{2})\-(\d{3})/',
-								'/(\d{3})\-(\d{2})\-(\d{2})/',
-								'/(\d{2})\-(\d{2})\-(\d{2})/',
-								'/(\d{1})\-(\d{2})\-(\d{2})/',
-								'/(\d{2})\-(\d{3})/',
-								'/(\d+)\-(\d+)/',
-							],
-							[
-								"<nobr>\\1–\\2–\\3\u{00A0}\\4:\\5:\\6</nobr>",
-								"<nobr>\\1–\\2–\\3</nobr>",
-								"<nobr>\\1\u{00A0}\\2–\\3–\\4</nobr>",
-								"<nobr>\\1\u{00A0}\\2–\\3–\\4</nobr>",
-								"<nobr>\\1\u{00A0}\\2–\\3</nobr>",
-								"<nobr>\\1\u{00A0}\\2–\\3</nobr>",
-								"<nobr>\\1–\\2–\\3</nobr>",
-								"<nobr>\\1–\\2–\\3</nobr>",
-								"<nobr>\\1–\\2–\\3</nobr>",
-								"<nobr>\\1–\\2</nobr>",
-								"<nobr>\\1–\\2</nobr>",
-							]
-						];
+		[
+			'/(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})/',
+			'/(\d{4})\-(\d{2})\-(\d{2})/',
+			'/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})\-(\d{2})/',
+			'/(\([\d\+\-]+\)) ?(\d{2})\-(\d{2})\-(\d{2})/',
+			'/(\([\d\+\-]+\)) ?(\d{3})\-(\d{2})/',
+			'/(\([\d\+\-]+\)) ?(\d{2})\-(\d{3})/',
+			'/(\d{3})\-(\d{2})\-(\d{2})/',
+			'/(\d{2})\-(\d{2})\-(\d{2})/',
+			'/(\d{1})\-(\d{2})\-(\d{2})/',
+			'/(\d{2})\-(\d{3})/',
+			'/(\d+)\-(\d+)/',
+		],
+		[
+			"<nobr>\\1–\\2–\\3\u{00A0}\\4:\\5:\\6</nobr>",
+			"<nobr>\\1–\\2–\\3</nobr>",
+			"<nobr>\\1\u{00A0}\\2–\\3–\\4</nobr>",
+			"<nobr>\\1\u{00A0}\\2–\\3–\\4</nobr>",
+			"<nobr>\\1\u{00A0}\\2–\\3</nobr>",
+			"<nobr>\\1\u{00A0}\\2–\\3</nobr>",
+			"<nobr>\\1–\\2–\\3</nobr>",
+			"<nobr>\\1–\\2–\\3</nobr>",
+			"<nobr>\\1–\\2–\\3</nobr>",
+			"<nobr>\\1–\\2</nobr>",
+			"<nobr>\\1–\\2</nobr>",
+		]
+	];
 
 	// contains some Russian abbreviations, also see below
 	public $glueleft	= ['рис\.', 'табл\.', 'см\.', 'им\.', 'ул\.', 'пер\.', 'кв\.', 'офис', 'оф\.', 'г\.'];
 	public $glueright	= ['руб\.', 'коп\.', 'у\.е\.', 'мин\.'];
 
 	public $settings	= [
-							'inches'	=> 1, // convert inches into &quot;
-							'apostroph'	=> 0, // apostrophe converter
-							'laquo'		=> 1, // angle quotes
-							'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
-							'quotes'	=> 1, // English quotes
-							'dash'		=> 1, // (150) - middle dash
-							'emdash'	=> 1, // (151) - long dash by two minus
-							'(c)'		=> 1, // special characters, as you know
-							'(r)'		=> 1,
-							'(tm)'		=> 1,
-							'(p)'		=> 1,
-							'+-'		=> 1,
-							'degrees'	=> 1, // degree character
-							'[--]'		=> 1, // indents like $Indent*
-							'dashglue'	=> 1, // dash glue
-							'wordglue'	=> 1, // word glue
-							'spacing'	=> 1, // comma and spacing, exchange
-							'phones'	=> 1, // phone number processing
-							'fixed'		=> 0, // fit to fixed width
-							'html'		=> 0  // HTML tags ban
+		'inches'	=> 1, // convert inches into &quot;
+		'apostroph'	=> 0, // apostrophe converter
+		'laquo'		=> 1, // angle quotes
+		'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
+		'quotes'	=> 1, // English quotes
+		'dash'		=> 1, // (150) - middle dash
+		'emdash'	=> 1, // (151) - long dash by two minus
+		'(c)'		=> 1, // special characters, as you know
+		'(r)'		=> 1,
+		'(tm)'		=> 1,
+		'(p)'		=> 1,
+		'+-'		=> 1,
+		'degrees'	=> 1, // degree character
+		'[--]'		=> 1, // indents like $Indent*
+		'dashglue'	=> 1, // dash glue
+		'wordglue'	=> 1, // word glue
+		'spacing'	=> 1, // comma and spacing, exchange
+		'phones'	=> 1, // phone number processing
+		'fixed'		=> 0, // fit to fixed width
+		'html'		=> 0  // HTML tags ban
 	];
 
 	function __construct(&$wacko)

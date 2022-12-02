@@ -3649,6 +3649,7 @@ class Wacko
 			// 1 -> file:/some.zip (global)
 			if (count($file_array) == 2 && $file_array[0] == '')
 			{
+				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // FIXME: prevents that tag is set as admin.php in href()
 				$file_name	= $file_array[1];
 				$param		= $this->parse_media_param($file_name);
 
