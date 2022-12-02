@@ -28,6 +28,7 @@ class Wacko
 	public $method					= '';
 	public bool $forum				= false;
 	public bool $canonical			= false;
+	public bool $static_feed		= false;	// disables section edit link in post_wacko
 	public $categories;
 	public $watch					= [];
 	public $notify_lang				= null;

@@ -13,6 +13,12 @@ if (!isset($page))		$page		= '';
 if (!isset($section))	$section	= 0;
 if (!isset($text))		$text		= '';
 
+// ignore static feeds
+if ($this->static_feed)
+{
+	return;
+}
+
 if (   ($this->has_access('write') && !isset($this->comment_id))
 	|| $this->is_admin()
 	|| (isset($this->comment_id) && $this->is_owner($this->comment_id)))
