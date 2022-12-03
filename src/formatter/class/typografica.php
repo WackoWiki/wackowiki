@@ -53,7 +53,6 @@ class Typografica
 		'inches'	=> 1, // convert inches into &quot;
 		'apostroph'	=> 0, // apostrophe converter
 		'laquo'		=> 1, // angle quotes
-		'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
 		'quotes'	=> 1, // English quotes
 		'dash'		=> 1, // (150) - middle dash
 		'emdash'	=> 1, // (151) - long dash by two minus
@@ -68,7 +67,6 @@ class Typografica
 		'wordglue'	=> 1, // word glue
 		'spacing'	=> 1, // comma and spacing, exchange
 		'phones'	=> 1, // phone number processing
-		'fixed'		=> 0, // fit to fixed width
 		'html'		=> 0  // HTML tags ban
 	];
 
@@ -149,14 +147,10 @@ class Typografica
 			$data = preg_replace('/(\s*)([\.?!]*)(\s*\p{Lu})/u', "\\2\\1\\3", $data);
 		}
 
-		// 2. Splitting to strings with length no more than XX characters
-		// --- not ported to wacko ---
-		// --- not ported to wacko ---
-
-		// 3. Special characters
+		// 2. Special characters
 		$data = $this->replace_specials($data);
 
-		// 4. Short words and &nbsp;
+		// 3. Short words and &nbsp;
 		if ($this->settings['wordglue'])
 		{
 			$data	= ' ' . $data . ' ';
@@ -180,57 +174,25 @@ class Typografica
 			}
 		}
 
-		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
+		// 4. Sticking flippers together. Psaw! Concatenation of hyphens
 		if ($this->settings['dashglue'])
 		{
 			$data = preg_replace('/([\p{L}\d]+(\-[\p{L}\d]+)+)/ui', "<nobr>\\1</nobr>", $data);
 		}
 
-		// 6. Macros
+		// 5. Macros
 		$data = $this->replace_macros($data);
-
-		// 7. Line feeds
-		// --- not ported to wacko ---
-		// --- not ported to wacko ---
 
 		// INFINITY. Inserting tags back.
 		if ($this->skip_tags)
 		{
-			$data .= ' ';
-			$a = explode('{:typo:markup:1:}', $data);
-
-			if ($a)
-			{
-				$data = $a[0];
-				$size = count($a);
-
-				for ($i = 1; $i < $size; $i++)
-				{
-					$data = $data . $tags[$i - 1] . $a[$i];
-				}
-			}
+			$data = $this->insert_data($data, $tags, '{:typo:markup:1:}');
 		}
 
 		// INFINITY-2. inserting a (next?) ignored regexp
 		{
-			$data .= ' ';
-			$a = explode('{:typo:markup:2:}', $data);
-
-			if ($a)
-			{
-				$data = $a[0];
-				$size = count($a);
-
-				for ($i = 1; $i < $size; $i++)
-				{
-					$data = $data . $ignored[$i - 1] . $a[$i];
-				}
-			}
+			$data = $this->insert_data($data, $ignored, '{:typo:markup:2:}');
 		}
-
-		// BONUS: link scrolling via A(...)
-		// --- not ported to wacko ---
-		// --- not ported to wacko ---
 
 		// ooh, finished
 		if ($this->de_nobr)
@@ -243,7 +205,7 @@ class Typografica
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// -----------------------------------------------------------------------------------
-	// Method is only for internal use. Checks only special characters
+	// Checks only special characters
 	function replace_specials($data)
 	{
 		// print "(($data))";
@@ -264,7 +226,7 @@ class Typografica
 		{
 			$data	= str_replace('""',  '&quot;&quot;',  $data);
 			$data	= str_replace('"."', '&quot;.&quot;', $data);
-			$_data	= "\"\"";
+			$_data	= '""';
 
 			while ($_data != $data)
 			{
@@ -282,7 +244,7 @@ class Typografica
 
 			// nb: wacko only regexp follows:
 			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/\u{00A0}|\/|\!)*[~\p{L}\d\-:\/\.])/ui", "\\1«\\2", $data);
-			$_data	= "\"\"";
+			$_data	= '""';
 
 			while ($_data != $data)
 			{
@@ -294,12 +256,8 @@ class Typografica
 			}
 		}
 
-		// 2a. angle quotes for FAR manager
-		// --- not ported to wacko ---
-		// --- not ported to wacko ---
-
-		// 2b. angle and English quotes together
-		if (($this->settings['quotes']) && (($this->settings['laquo']) || ($this->settings['farlaquo'])))
+		// 2a. angle and English quotes together
+		if (($this->settings['quotes']) && (($this->settings['laquo'])))
 		{
 			$data = preg_replace("/(“(([\p{L}\d'!\.?,\-&;:]|\s|{:typo:markup:1:}|{:typo:markup:2:})*)«(.*)»)»/ui", "\\1”", $data);		// \u{0094} <Cancel Character>
 		}
@@ -367,24 +325,34 @@ class Typografica
 	}
 
 	// -----------------------------------------------------------------------------------
-	// Method is only for internal use. Checks only macros
+	// Checks only macros
 	function replace_macros($data)
 	{
-		// 1. Paragraphs
-		// --- not ported to wacko ---
-
-		// 2. Paragraph indent (indented line)
+		// 1. Paragraph indent (indented line)
 		if ($this->settings['[--]'])
 		{
 			$data = str_replace('[--]',  $this->indent1, $data);
 			$data = str_replace('[---]', $this->indent2, $data);
 		}
 
-		// 3. mailto:
-		// --- not ported to wacko ---
+		return $data;
+	}
 
-		// 4. http://
-		// --- not ported to wacko ---
+	function insert_data($data, $insert, $delimiter)
+	{
+		$data .= ' ';
+		$a = explode($delimiter, $data);
+
+		if ($a)
+		{
+			$data = $a[0];
+			$size = count($a);
+
+			for ($i = 1; $i < $size; $i++)
+			{
+				$data = $data . $insert[$i - 1] . $a[$i];
+			}
+		}
 
 		return $data;
 	}
