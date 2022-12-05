@@ -1,9 +1,9 @@
 <?php
 /************************************************************\
 *
-*     freeCap v1.4.4 Copyright
+*     freeCap v1.4.5 Copyright
 *     2005 Howard Yeend (solidred.co.uk),
-*     2008 - 2021 WackoWiki Team
+*     2008 - 2022 WackoWiki Team
 *
 *    This file is part of freeCap.
 *
@@ -53,10 +53,10 @@ $tag_pos = 1;
 $rand_func = function ($mi, $ma) {return Ut::rand($mi, $ma);};
 
 // which type of hash to use?
-// possible values: 'sha1', 'md5', 'crc32'
-$hash_func = 'sha1';
+// possible values: 'sha1', 'sha256', 'SHA512'
+$algo = 'sha1';
 // store in session so can validate in form processor
-$sess['hash_func'] = $hash_func;
+$sess['hash_algo'] = $algo;
 
 // image type:
 // possible values: 'jpg', 'png', 'gif'
@@ -410,7 +410,7 @@ else
 // so even if your site is 100% secure, someone else's site on your server might not be
 // hence, even if attackers can read the session file, they can't get the freeCap word
 // (though most hashes are easy to brute force for simple strings)
-$sess['freecap_word_hash'] = $hash_func($word);
+$sess['freecap_word_hash'] = hash($algo, $word);
 
 $sess->write_close();
 

@@ -9,7 +9,7 @@ The version and status of each is summarized below:
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
 | bad_behavior		| Bad Behavior		| 2.2.24	| patched: various, see repo |
-| captcha			| freeCap			| 1.4.4		| patched: various, see repo |
+| captcha			| freeCap			| 1.4.5		| patched: various, see repo |
 | hashids			| Hashids			| 4.1.0		| unpatched |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
 | php-diff			| php-diff			| 2.4.0		| patched, see subdir |
