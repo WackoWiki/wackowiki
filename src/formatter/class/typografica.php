@@ -212,7 +212,7 @@ class Typografica
 		// 0. inches with digits
 		if ($this->settings['inches'])
 		{
-			$data = preg_replace('/(?<=\s)((\d{1,2}([\.,]\d{1,2})?))\"/ui', '\\1"', $data);	// \u{0022}
+			$data = preg_replace('/(?<=\s)(\d{1,2}([\.,]\d{1,2})?)\"/ui', '\\1"', $data);	// \u{0022}
 		}
 
 		// 0a. apostroph

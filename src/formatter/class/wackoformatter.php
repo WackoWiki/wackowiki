@@ -3,7 +3,7 @@
 * WackoFormatter.
 *
 * Formats text with wacko-formatting.
-* Links and actions aren't processed. Its processed by PostWacko formatter
+* Links and actions aren't processed. It's processed by PostWacko formatter
 */
 
 class WackoFormatter
@@ -129,7 +129,7 @@ class WackoFormatter
 			// headers
 			"\n[ \t]*={2,7}.*?={2,7}|" .
 			// separator
-			"[-]{4,}|" .
+			"-{4,}|" .
 			// line break
 			"---\n?\s*|" .
 			// strikethrough

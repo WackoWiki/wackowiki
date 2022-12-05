@@ -8328,7 +8328,7 @@ class Wacko
 				if (   !preg_match('/\p{N}+/',					$pwd)
 					|| !preg_match('/\p{Lu}+/u',				$pwd)
 					|| !preg_match('/\p{Ll}+/u',				$pwd)
-					|| !preg_match('/[\p{Z}|\p{S}|\p{P}]+/',	$pwd))
+					|| !preg_match('/[\p{Z}\p{S}\p{P}]+/',		$pwd))
 				{
 					++$error;
 				}
