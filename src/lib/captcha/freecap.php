@@ -87,7 +87,7 @@ $max_word_length = 6;
 $col_type = 1;
 
 // maximum times a user can refresh the image
-// on a 6500 word dictionary, I think 15-50 is enough to not annoy users and make BF unfeasble.
+// on a 6500 word dictionary, I think 15-50 is enough to not annoy users and make BF unfeasible.
 // further notes re: BF attacks in "avoid brute force attacks" section, below
 // on the other hand, those attempting OCR will find the ability to request new images
 // very useful; if they can't crack one, just grab an easier target...
@@ -403,7 +403,7 @@ else
 }
 
 // save hash of word for comparison
-// using hash so that if there's an insecurity elsewhere (eg on the form processor),
+// using hash so that if there's an insecurity elsewhere (e.g. on the form processor),
 // an attacker could only get the hash
 // also, shared servers usually give all users access to the session files
 // echo `ls /tmp`; and echo `more /tmp/someone_elses_session_file`; usually work
@@ -581,7 +581,7 @@ if ($bg_type)
 		// morph_chunk 1 looks better but takes longer
 
 		// this is a different and less perfect morph than the one we do on the CAPTCHA
-		// occasonally you get some dark background showing through around the edges
+		// occasionally you get some dark background showing through around the edges
 		// it doesn't need to be perfect as it's only the bg.
 		$morph_chunk	= $rand_func(1, 5);
 		$morph_y		= 0;
@@ -861,10 +861,10 @@ if ($bg_type)
 // feel free to remove/change
 // but if it's not essential I'd appreciate you leaving it
 // after all, I've put a lot of work into this and am giving it away for free
-// the least you could do is give me credit (or buy me stuff from amazon!)
+// the least you could do is give me credit
 // but I understand that in professional environments, your boss might not like this tag
 // so that's cool.
-// $tag_str = 'freeCap v1.4.4 - puremango.co.uk';
+// $tag_str = 'freeCap v1.4.5';
 $tag_str = '';
 // for debug:
 # $tag_str = '[' . $word . ']';
@@ -874,7 +874,7 @@ $tag_width = strlen($tag_str) * 6;
 // write tag
 ImageString($im, 2, $width - $tag_width, $height - 13, $tag_str, $tag_col);
 
-// unset all sensetive vars
+// unset all sensitive vars
 // in case someone include()s this file on a shared server
 // you might think this unnecessary, as it exit()s
 // but by using register_shutdown_function
