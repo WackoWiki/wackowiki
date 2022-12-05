@@ -370,7 +370,7 @@ if ($this->has_access('read')
 		$tpl->e_title = $title;
 		$tpl->e_label = $this->_t('AddCommentTitle');
 	}
-	else if (!$this->page || $this->is_owner() || $this->is_admin())
+	else if (!$this->page || $this->is_owner() || $this->is_admin() || $section_id)
 	{
 		// edit page title
 		$tpl->e_title = $title;
