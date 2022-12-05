@@ -8571,7 +8571,7 @@ class Wacko
 			unset($this->sess->freecap_shown);
 
 			if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha'])
-				&& $this->sess['hash_func'](strtolower($_POST['captcha'])) === $this->sess->freecap_word_hash)
+				&& hash($this->sess['hash_algo'], strtolower($_POST['captcha'])) === $this->sess->freecap_word_hash)
 			{
 				unset($this->sess->freecap_attempts);
 				$word_ok = true;
