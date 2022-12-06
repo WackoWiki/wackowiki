@@ -45,9 +45,9 @@ $meta_navigation = function ($can_upload)
 		 "</ul>\n";
 };
 
-$format_desc = function($text)
+$format_desc = function($text, $lang)
 {
-	return $this->format($text, 'typografica');
+	return $this->format($text, 'typografica', ['lang' => $lang]);
 };
 
 $clean_text = function ($string)
@@ -69,7 +69,8 @@ $this->ensure_page(true);
 
 $action			= $_POST['_action'] ?? null;
 $can_upload		= $this->can_upload();
-$file			= $get_file((int) ($_POST['file_id'] ?? @$_GET['file_id']));
+$file_id		= (int) ($_POST['file_id'] ?? @$_GET['file_id']);
+$file			= $get_file($file_id);
 
 $mod_selector	= 'm';
 // tab navigation
@@ -111,7 +112,7 @@ if ($action && !empty($file))
 			$author			= $this->sanitize_text_field(mb_substr($_POST['author'], 0, 250), true);
 			$source			= $this->sanitize_text_field(mb_substr($_POST['source'], 0, 250), true);
 			$source_url		= filter_var($_POST['source_url'], FILTER_VALIDATE_URL);
-			$license_id		= $_POST['license'] ?? 0;
+			$license_id		= (int) ($_POST['license'] ?? 0);
 			$file_lang		= $this->validate_language($_POST['file_lang'] ?? $file['file_lang']);
 
 			// update file metadata
@@ -234,8 +235,8 @@ else if ($mode && !empty($file))
 				$tpl->s_syntax		= $path . $file['file_name'];
 			}
 
-			$tpl->desc			= $format_desc($file['file_description']);
-			$tpl->caption		= $format_desc($file['caption']);
+			$tpl->desc			= $format_desc($file['file_description'], $file['file_lang']);
+			$tpl->caption		= $format_desc($file['caption'], $file['file_lang']);
 			$tpl->size			= $this->binary_multiples($file['file_size'], false, true, true);
 
 			// image dimension

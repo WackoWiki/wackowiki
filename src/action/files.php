@@ -251,7 +251,7 @@ if ($can_view)
 			}
 
 			$dt			= $this->sql_time_formatted($file['uploaded_dt']);
-			$desc		= $this->format($file['file_description'], 'typografica' );
+			$desc		= $this->format($file['file_description'], 'typografica', ['lang' => $file['file_lang']]);
 
 			if ($desc == '')
 			{
