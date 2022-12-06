@@ -70,8 +70,9 @@ class Typografica
 		'html'		=> 0  // HTML tags ban
 	];
 
-	function __construct(&$wacko)
+	function __construct(&$wacko, &$options)
 	{
+		$this->options	= &$options;
 		$this->wacko	= &$wacko;
 		$this->indent1	= '<img src="' . $wacko->db->base_path . $this->indent1;
 		$this->indent2	= '<img src="' . $wacko->db->base_path . $this->indent2;
@@ -208,7 +209,7 @@ class Typografica
 	// Checks only special characters
 	function replace_specials($data)
 	{
-		// print "(($data))";
+		# print "(($data))";
 		// 0. inches with digits
 		if ($this->settings['inches'])
 		{
@@ -222,7 +223,7 @@ class Typografica
 		}
 
 		// 1. English quotes (\p{Latin} only)
-		if ($this->settings['quotes'])
+		if ($this->settings['quotes'] && $this->options['lang'] == 'en')
 		{
 			$data	= str_replace('""',  '&quot;&quot;',  $data);
 			$data	= str_replace('"."', '&quot;.&quot;', $data);

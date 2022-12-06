@@ -406,7 +406,7 @@ if ($can_view)
 			}
 
 			$created	= $this->sql_time_formatted($file['created']);
-			$desc		= $this->format($file['file_description'], 'typografica' );
+			$desc		= $this->format($file['file_description'], 'typografica', ['lang' => $file['file_lang']]);
 
 			if ($desc == '')
 			{

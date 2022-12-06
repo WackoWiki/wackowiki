@@ -45,9 +45,9 @@ $meta_navigation = function ($can_upload)
 		 "</ul>\n";
 };
 
-$format_desc = function($text)
+$format_desc = function($text, $lang)
 {
-	return $this->format($text, 'typografica');
+	return $this->format($text, 'typografica', ['lang' => $lang]);
 };
 
 $clean_text = function ($string)
@@ -235,8 +235,8 @@ else if ($mode && !empty($file))
 				$tpl->s_syntax		= $path . $file['file_name'];
 			}
 
-			$tpl->desc			= $format_desc($file['file_description']);
-			$tpl->caption		= $format_desc($file['caption']);
+			$tpl->desc			= $format_desc($file['file_description'], $file['file_lang']);
+			$tpl->caption		= $format_desc($file['caption'], $file['file_lang']);
 			$tpl->size			= $this->binary_multiples($file['file_size'], false, true, true);
 
 			// image dimension

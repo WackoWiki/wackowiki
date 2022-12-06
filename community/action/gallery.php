@@ -232,8 +232,8 @@ if ($can_view)
 					$file_caption	= $file['caption'];
 				}
 
-				$file_description	= $this->format(Ut::html($file['file_description']), 'typografica' );
-				$file_caption		= $this->format(Ut::html($file_caption), 'typografica' );
+				$file_description	= $this->format(Ut::html($file['file_description']), 'typografica', ['lang' => $file['file_lang']]);
+				$file_caption		= $this->format(Ut::html($file_caption), 'typografica', ['lang' => $file['file_lang']]);
 
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
@@ -373,7 +373,7 @@ if ($can_view)
 			}
 
 			$tpl->token			= $param_token;
-			$tpl->caption		= $this->format(Ut::html($file_caption), 'typografica' );
+			$tpl->caption		= $this->format(Ut::html($file_caption), 'typografica', ['lang' => $file['file_lang']]);
 
 			if ($file['page_id'])
 			{
