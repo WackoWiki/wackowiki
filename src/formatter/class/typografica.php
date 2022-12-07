@@ -14,6 +14,8 @@ class Typografica
 	public $indent1		= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
 	public $indent2		= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
 	public $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
+	public $mark1		= '{:typo:markup:1:}';
+	public $mark2		= '{:typo:markup:2:}';
 	public $de_nobr		= true;
 
 	public $phonemasks	= [
@@ -86,7 +88,7 @@ class Typografica
 		$ignored = [];
 		{
 			$total	= preg_match_all($this->ignore, $data, $matches);
-			$data	= preg_replace($this->ignore, '{:typo:markup:2:}', $data);
+			$data	= preg_replace($this->ignore, $this->mark2, $data);
 
 			for ($i = 0; $i < $total; $i++)
 			{
@@ -128,7 +130,7 @@ class Typografica
 						'<\!--imglink:begin-->[^\n]*?==' .
 					'/ui';
 			$total	= preg_match_all($re, $data, $matches);
-			$data	= preg_replace($re, '{:typo:markup:1:}', $data);
+			$data	= preg_replace($re, $this->mark1, $data);
 
 			for ($i = 0; $i < $total; $i++)
 			{
@@ -187,12 +189,12 @@ class Typografica
 		// INFINITY. Inserting tags back.
 		if ($this->skip_tags)
 		{
-			$data = $this->insert_data($data, $tags, '{:typo:markup:1:}');
+			$data = $this->insert_data($data, $tags, $this->mark1);
 		}
 
 		// INFINITY-2. inserting a (next?) ignored regexp
 		{
-			$data = $this->insert_data($data, $ignored, '{:typo:markup:2:}');
+			$data = $this->insert_data($data, $ignored, $this->mark2);
 		}
 
 		// ooh, finished
@@ -209,7 +211,8 @@ class Typografica
 	// Checks only special characters
 	function replace_specials($data)
 	{
-		# print "(($data))";
+		$mark = $this->mark1 . '|' . $this->mark2;
+
 		// 0. inches with digits
 		if ($this->settings['inches'])
 		{
@@ -232,8 +235,8 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>)\"(({:typo:markup:2:}|{:typo:markup:1:})*[\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]+([\"”]))/ui", "\\1“\\2", $data);				// \u{201C} <Left Double Quotation Mark>
-				$data	= preg_replace("/(“([\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]*({:typo:markup:2:}|{:typo:markup:1:})*).*[\p{Latin}\d][\?\.\!\,]*({:typo:markup:2:}|{:typo:markup:1:})*)\"/ui", "\\1”", $data);	// \u{201D} <Right Double Quotation Mark>
+				$data	= preg_replace("/(^|\s|" . $mark . "|>)\"((" . $mark . ")*[\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]+([\"”]))/ui", "\\1“\\2", $data);				// \u{201C} <Left Double Quotation Mark>
+				$data	= preg_replace("/(“([\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]*(" . $mark . ")*).*[\p{Latin}\d][\?\.\!\,]*(" . $mark . ")*)\"/ui", "\\1”", $data);	// \u{201D} <Right Double Quotation Mark>
 			}
 		}
 
@@ -241,26 +244,26 @@ class Typografica
 		if ($this->settings['laquo'])
 		{
 			$data	= str_replace('""', '&quot;&quot;', $data);
-			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~\p{L}\d\-:\/\.])/ui", "\\1«\\2", $data);
+			$data	= preg_replace("/(^|\s|" . $mark . "|>|\()\"((" . $mark . ")*[~\p{L}\d\-:\/\.])/ui", "\\1«\\2", $data);
 
 			// nb: wacko only regexp follows:
-			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/\u{00A0}|\/|\!)*[~\p{L}\d\-:\/\.])/ui", "\\1«\\2", $data);
+			$data	= preg_replace("/(^|\s|" . $mark . "|>|\()\"((" . $mark . "|\/\u{00A0}|\/|\!)*[~\p{L}\d\-:\/\.])/ui", "\\1«\\2", $data);
 			$_data	= '""';
 
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/]({:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1»", $data);
+				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . ")*)\"/usi", "\\1»", $data);
 				// nb: wacko only regexps follows:
-				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/]({:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1»", $data);
-				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/]({:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/usi", "\\1»", $data);
+				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . ")*\?(" . $mark . ")*)\"/usi", "\\1»", $data);
+				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . "|\/|\!)*)\"/usi", "\\1»", $data);
 			}
 		}
 
 		// 2a. angle and English quotes together
 		if (($this->settings['quotes']) && (($this->settings['laquo'])))
 		{
-			$data = preg_replace("/(“(([\p{L}\d'!\.?,\-&;:]|\s|{:typo:markup:1:}|{:typo:markup:2:})*)«(.*)»)»/ui", "\\1”", $data);		// \u{0094} <Cancel Character>
+			$data = preg_replace("/(“(([\p{L}\d'!\.?,\-&;:]|\s|" . $mark . ")*)«(.*)»)»/ui", "\\1”", $data);		// \u{0094} <Cancel Character>
 		}
 
 		// 3. dash
