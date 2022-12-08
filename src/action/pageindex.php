@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 	[max=50]			// number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
 	[letter="a"]		// only display pages whose name starts with this letter
 	[title=0|1]			// takes title inplace of tag
-	[system=0|1]		// excludes system pages
+	[system=0|1]		// includes or excludes system pages
 	[lang="ru"]			// show pages only in specified language
  }}
  */
@@ -22,12 +22,12 @@ $lang		??= '';
 $letter		??= '';
 $max		??= null;
 $page		??= '';
-$system		??= 0;
+$system		??= 1;
 $title		??= 0;
 
 $system
-	? $user_id		= $this->db->system_user_id
-	: $user_id		= null;
+	? $user_id		= null
+	: $user_id		= $this->db->system_user_id;
 
 if ($lang && !$this->known_language($lang))
 {
