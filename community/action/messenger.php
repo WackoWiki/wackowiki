@@ -49,9 +49,36 @@ $create_table = function() use ($prefix)
 	);");
 };
 
+$user_select = function($user_id) use ($prefix, &$tpl)
+{
+	$users = $this->db->load_all(
+		"SELECT user_id, user_name
+		FROM {$prefix}user
+		ORDER BY user_name ASC");
+
+	foreach ($users as $user)
+	{
+		if ($user['user_id'] == $user_id)
+		{
+			continue;
+		}
+
+		$tpl->o_userid		= $user['user_id'];
+		$tpl->o_username	= $user['user_name'];
+
+		if ($to == $user['user_id'])
+		{
+			$tpl->o_selected	= ' selected';
+		}
+	}
+};
+
 if ($user_id = $this->get_user_id())
 {
 	# $create_table();
+
+	//needed for pagination
+	$limit = 10;
 
 	$folder			= $_GET['folder'] ?? null;
 	$r_msg_folder	= $_REQUEST['msg_folder'] ?? null;
@@ -152,9 +179,6 @@ if ($user_id = $this->get_user_id())
 	{
 		$search = '';
 
-		//needed for pagination of sent box
-		$limit = 10;
-
 		$selector =
 			"FROM {$prefix}messenger m
 				LEFT JOIN {$prefix}user u ON (m.user_from_id = u.user_id)
@@ -236,11 +260,6 @@ if ($user_id = $this->get_user_id())
 	// [C] send a new message to a user
 	else if ($action == 'compose')
 	{
-		$users = $this->db->load_all(
-			"SELECT user_id, user_name
-			FROM {$prefix}user
-			ORDER BY user_name ASC");
-
 		$tpl->enter('c_');
 
 		$tpl->hrefform		= $this->href('', '', ['action' => 'store']);
@@ -248,21 +267,7 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->textarea		= true;
 
-		foreach ($users as $user)
-		{
-			if ($user['user_id'] == $user_id)
-			{
-				continue;
-			}
-
-			$tpl->o_userid		= $user['user_id'];
-			$tpl->o_username	= $user['user_name'];
-
-			if ($to == $user['user_id'])
-			{
-				$tpl->o_selected	= ' selected';
-			}
-		}
+		$user_select($user_id);
 
 		$contacts = $this->db->load_all(
 			"SELECT i.info, u.user_name
@@ -318,11 +323,6 @@ if ($user_id = $this->get_user_id())
 			WHERE user_to_id = " . (int) $user_id . "
 				AND message_id = " . (int) $message_id);
 
-		$users = $this->db->load_all(
-			"SELECT user_id, user_name
-			FROM {$prefix}user
-			ORDER BY user_name ASC");
-
 		$tpl->enter('e_');
 
 		$tpl->subject			= $this->_t('Fwd') . ' ' . $row['subject'];
@@ -332,27 +332,13 @@ if ($user_id = $this->get_user_id())
 									strip_tags($row['message']) .
 									"\n+++++++++++++++++++++++++++++++++\n";
 
-		foreach ($users as $user)
-		{
-			if ($user['user_id'] == $user_id)
-			{
-				continue;
-			}
-
-			$tpl->o_userid		= $user['user_id'];
-			$tpl->o_username	= $user['user_name'];
-
-			if ($to == $user['user_id'])
-			{
-				$tpl->o_selected	= ' selected';
-			}
-		}
+		$user_select($user_id);
 
 		$contacts = $this->db->load_all(
 			"SELECT i.info, u.user_name
 			FROM {$prefix}messenger_info i
 				LEFT JOIN {$prefix}user u ON (i.info = u.user_id)
-			WHERE i.type='contact'
+			WHERE i.type = 'contact'
 				AND i.owner_id = " . (int) $user_id . "
 			ORDER BY i.info ASC");
 
@@ -411,7 +397,7 @@ if ($user_id = $this->get_user_id())
 						$this->db->q($subject) . ", " .
 						$this->db->q($message) . ", " .
 						$this->db->q($date) . ", " .
-						$this->db->q('pending') . ", " .
+						'1' . ", " .
 						(int) $urgent . "
 					)");
 
@@ -435,9 +421,6 @@ if ($user_id = $this->get_user_id())
 	// [G] shows the "sent messages" folder
 	else if ($action == 'sent')
 	{
-		// needed for pagination of sent box
-		$limit = 10;
-
 		$selector =
 			"FROM {$prefix}messenger m
 				LEFT JOIN {$prefix}user u ON (m.user_to_id = u.user_id)
@@ -500,9 +483,6 @@ if ($user_id = $this->get_user_id())
 				AND folder = " . $this->db->q($folder) . "
 				AND viewrecipient = '1'
 			ORDER BY datesent DESC");
-
-		// needed for pagination of sent box
-		$limit = 10;
 
 		$selector =
 			"FROM {$prefix}messenger m
@@ -616,7 +596,7 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			$tpl->forbidden = $this->_t('NotYourPost');
+			$tpl->forbidden		= $this->_t('NotYourPost');
 		}
 
 		$tpl->leave(); // i_
@@ -671,8 +651,7 @@ if ($user_id = $this->get_user_id())
 		$add_contact	= $_GET['contact'] ?? '';
 		$delete_contact	= $_GET['delete_contact'] ?? null;
 		$field1_value	= $_POST['field1_value'] ?? null;
-		if ($field1_value)	{$insert = '1';}
-		else				{$insert = '';}
+		$insert			= $field1_value ? 1 : 0;
 		$field2_value	= $_POST['field2_value'] ?? null;
 		$category		= 'contact';
 		$in_list		= [];

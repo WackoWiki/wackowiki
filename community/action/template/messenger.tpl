@@ -243,7 +243,7 @@
 			[= n _ =
 				<tr>
 					<td>
-						[ ' status ' ][ ' urgent ' ][ ' replied ' ]<a href="[ ' hrefview ' ]">[ ' subject ' ]</a>
+						[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a>
 					</td>
 					<td>[ ' time | time_formatted ' ]</td>
 					<td width="125">[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
