@@ -43,7 +43,7 @@
 					[ '' pagination '' ]
 				</td>
 			</tr>
-			<tr bgcolor=#93B2DD>
+			<tr>
 				<th width="400">[ ' _t: Subject ' ]</th>
 				<th width="">[ ' _t: Date ' ]</th>
 				<th width="100">[ ' _t: Sender ' ]</th>
@@ -59,6 +59,7 @@
 						<form action="[ ' hrefform ' ]" method="post" name="move_folder">
 							[ ' csrf: move_folder ' ]
 							<select name="move2folder">
+								<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
 							[= o _ =
 								<option value="[ ' info ' ]">[ ' info ' ]</option>
 							=]
@@ -208,7 +209,7 @@
 					[ '' pagination '' ]
 				</td>
 			</tr>
-			<tr bgcolor=#93B2DD>
+			<tr>
 				<th width="400">[ ' _t: Subject ' ]</th>
 				<th width="">[ ' _t: Date ' ]</th>
 				<th width="100">[ ' _t: Recipient ' ]</th>
@@ -226,14 +227,15 @@
 		[ ' // <br><br>Löscht der Empfänger eine Nachricht, wird sie auch hier automatisch entfernt! ' ]
 	=]
 	[= h _ =
-		<table class="usertable" cellpadding="2" cellspacing="3" width="800">
+		<table class="usertable" cellpadding="2" cellspacing="3">
 			<tr>
 				<td colspan="5">
 					[ '' pagination '' ]
 				</td>
 			</tr>
-			<tr bgcolor="#93B2DD">
+			<tr>
 				<th width="400"> [ ' _t: Subject ' ]:</th>
+				<th width="">[ ' _t: Date ' ]</th>
 				<th width="100"> [ ' _t: Sender ' ]</th>
 				<th width="250"> [ ' _t: MoveToFolder ' ]</th>
 				<th width="80"> [ ' _t: Delete ' ]</th>
@@ -241,13 +243,15 @@
 			[= n _ =
 				<tr>
 					<td>
-						[ ' status ' ][ ' urgent ' ]<a href="[ ' hrefview ' ]">[ ' subject ' ]</a>[ ' replied ' ]<small>([ ' time | time_formatted ' ])</small>
+						[ ' status ' ][ ' urgent ' ][ ' replied ' ]<a href="[ ' hrefview ' ]">[ ' subject ' ]</a>
 					</td>
+					<td>[ ' time | time_formatted ' ]</td>
 					<td width="125">[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 					<td>
 						<form action="[ ' hrefform ' ]" method="post" name="move_folder">
 							[ ' csrf: move_folder ' ]
 							<select name="move2folder">
+								<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
 							[= o _ =
 								<option value="[ ' info ' ]">[ ' info ' ]</option>
 							=]
