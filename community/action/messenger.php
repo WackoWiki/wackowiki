@@ -54,8 +54,8 @@ if ($user_id = $this->get_user_id())
 	# $create_table();
 
 	$folder			= $_GET['folder'] ?? null;
-	$which			= $_REQUEST['whichfolder'] ?? null;
-	if (!$folder) {$folder = $which;}
+	$r_msg_folder	= $_REQUEST['msg_folder'] ?? null;
+	if (!$folder) {$folder = $r_msg_folder;}
 	$message_id		= (int) ($_GET['message_id'] ?? null);
 	$move2folder	= $_REQUEST['move2folder'] ?? null;
 	$action			= $_GET['action'] ?? null;
@@ -63,14 +63,34 @@ if ($user_id = $this->get_user_id())
 
 	$tpl->enter('x_');
 
-	// table
-	$tpl->hrefinbox		= $this->href('', '', ['action' => 'inbox']);
-	$tpl->hrefcompose	= $this->href('', '', ['action' => 'compose']);
-	$tpl->hrefsend		= $this->href('', '', ['action' => 'sent']);
-	$tpl->hreffolders	= $this->href('', '', ['action' => 'folders']);
-	$tpl->hrefcontacts	= $this->href('', '', ['action' => 'contacts']);
-	$tpl->hrefusers		= $this->href('', '', ['action' => 'users']);
-	$tpl->hrefhelp		= $this->href('', '', ['action' => 'help']);
+	$mod_selector	= 'action';
+	$modes			= [
+						'inbox'		=> 'Inbox',
+						'compose'	=> 'Compose',
+						'sent'		=> 'SentItems',
+						'folders'	=> 'Folders',
+						'contacts'	=> 'Contacts',
+						#'users'		=> 'Users',
+						#'help'		=> 'Help',
+					];
+	$mode			= @$_GET[$mod_selector];
+
+	if (!array_key_exists($mode, $modes))
+	{
+		$mode = '';
+	}
+
+	foreach ($modes as $i => $text)
+	{
+		if ($mode == $i)
+		{
+			$tpl->h_header = $this->_t($text);
+			break;
+		}
+	}
+
+	// print navigation
+	$tpl->menu = $this->tab_menu($modes, $mode, '', [], $mod_selector);
 
 	$results = $this->db->load_all(
 		"SELECT DISTINCT info
@@ -83,30 +103,31 @@ if ($user_id = $this->get_user_id())
 	{
 		$tpl->o_info	= $row['info'];
 
-		if ($_REQUEST['whichfolder'] == $row['info'])
+		if ($r_msg_folder == $row['info'])
 		{
 			$tpl->o_selected = ' selected';
 		}
 	}
 
-	if (! in_array($action, ['compose', 'forward', 'contacts', 'folders', 'users', 'help', 'reply', 'delete', 'store']))
+	if (! in_array($action, ['compose', 'contacts', 'delete', 'folders', 'forward', 'help', 'inbox', 'reply', 'sent', 'store', 'users']))
 	{
-		if ($action == 'inbox' || (($action == '' || $action == 'view')
-			&& @$_REQUEST['whichfolder'] == '' && $folder == ''))
+		if ((  $action == ''
+			|| $action == 'view')
+			&& $r_msg_folder == '' && $folder == '')
 		{
-			$which2 = '<b>' . $this->_t('Inbox') . '</b>';
+			$msg_folder2 = $this->_t('Inbox');
 		}
-		else if ($action == 'sent' || $action == 'view2')
+		else if ($action == 'view2')
 		{
-			$which2 = '<b>' . $this->_t('SentItems') . '</b>';
+			$msg_folder2 = $this->_t('SentItems');
 		}
 		else if ($folder != '')
 		{
-			$which	= $folder;
-			$which2	= '<a href="' . $this->href('', '', ['folder' => $folder]) . '">' . $which . '</a>';
+			$msg_folder		= $folder;
+			$msg_folder2	= $this->_t('Folder') . ': <a href="' . $this->href('', '', ['folder' => $folder]) . '">' . Ut::html($msg_folder) . '</a>';
 		}
 
-		$tpl->folder = '<br><b>' . $this->_t('Folder') . ': </b>' . $which2;
+		$tpl->h_header = $msg_folder2;
 	}
 
 	$tpl->leave(); // x_
@@ -121,13 +142,13 @@ if ($user_id = $this->get_user_id())
 				AND user_to_id = " . (int) $user_id);
 
 		$tpl->a_message = $rs
-			? '<br>' . Ut::perc_replace($this->_t('MessageMoved'), '<b>' . $move2folder . '</b>')
+			? '<br>' . Ut::perc_replace($this->_t('MessageMoved'), '<b>' . Ut::html($move2folder) . '</b>')
 			: $this->_t('MessageNotMoved');
 	}
 
 	// [B] shows inbox
 	else if (($action == '' || $action == 'inbox')
-		&& @$_REQUEST['whichfolder'] == '' && (!$folder))
+		&& @$_REQUEST['msg_folder'] == '' && (!$folder))
 	{
 		$search = '';
 
@@ -186,7 +207,7 @@ if ($user_id = $this->get_user_id())
 
 			if ($row['repliedto'] == 1)
 			{
-				$replied = '<span title="' . $this->_t('MessageReplied') . '" style="color: grey;"><strong>' . $this->_t('RepliedTo') . '</strong></span>';
+				$replied = '<span title="' . $this->_t('MessageReplied') . '" style="color: grey;"> <strong>' . $this->_t('RepliedTo') . '</strong></span>';
 			}
 			else
 			{
@@ -463,13 +484,13 @@ if ($user_id = $this->get_user_id())
 	}
 
 	// [H] show selected folder
-	else if (((@$_REQUEST['whichfolder'] != '') || ($folder)) && ($action != 'view'))
+	else if ((($r_msg_folder != '') || ($folder)) && ($action != 'view'))
 	{
 		$search = '';
 
-		if (isset($_REQUEST['whichfolder']) && $_REQUEST['whichfolder'] != '')
+		if ($r_msg_folder != '')
 		{
-			$showfolder = $_REQUEST['whichfolder'];
+			$showfolder = $r_msg_folder;
 		}
 		else
 		{
@@ -501,7 +522,7 @@ if ($user_id = $this->get_user_id())
 			$selector
 			, true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'm' , ['action' => 'message_folder', 'whichfolder' => $showfolder]);
+		$pagination = $this->pagination($count['n'], $limit, 'm' , ['action' => 'message_folder', 'msg_folder' => $showfolder]);
 
 		$result = $this->db->load_all(
 			"SELECT m.*, u.user_name " .
@@ -551,10 +572,10 @@ if ($user_id = $this->get_user_id())
 			$tpl->replied		= $replied;
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->format($row['user_name']);
-			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'folder' => $which]);
+			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'folder' => $msg_folder]);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
-			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $which]);
+			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $msg_folder]);
 
 			// code to put in drop down box to move to a new folder
 			$resultdrop2 = $this->db->load_all(
@@ -591,7 +612,7 @@ if ($user_id = $this->get_user_id())
 
 		if ($row['repliedto'] == 1)
 		{
-			$replied = '<span title="' . $this->_t('MessageReplied') . '"><small>' . $this->_t('RepliedTo') . '<small></span>';
+			$replied = '<span title="' . $this->_t('MessageReplied') . '"> <small>' . $this->_t('RepliedTo') . '</small></span>';
 		}
 		else
 		{

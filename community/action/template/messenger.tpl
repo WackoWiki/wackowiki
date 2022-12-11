@@ -11,13 +11,16 @@
 		}
 		// End -->
 		</script>
-	
+
+		[ ' menu ' ]
+		[= h _ =
+		<br><h3>[ ' header ' ]</h3>
+		=]
 		<ul class="menu">
-			<li> <a href="[ ' hrefinbox ' ]">[ ' _t: Inbox ' ]</a> </li>
-			<li> <a href="[ ' hrefcompose ' ]">[ ' _t: Compose ' ]</a> </li>
-			<li> <b>[ ' _t: Folder ' ]</b><form action="[ ' href: ' ]" method="post" name="message_folder">
+			<li><b>[ ' _t: Folder ' ]</b><form action="[ ' href: ' ]" method="post" name="message_folder" style="display: inline;">
 					[ ' csrf: message_folder ' ]
-					<select name="whichfolder">
+					<select name="msg_folder">
+						<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
 					[= o _ =
 						<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>
 					=]
@@ -25,23 +28,18 @@
 					<button type="submit">[ ' _t: View ' ]</button>
 				</form>
 			</li>
-			<li> <a href="[ ' hrefsend ' ]">[ ' _t: SentItems ' ]</a> </li>
-			<li> <b>[ ' _t: Manage ' ]: </b><a href="[ ' hreffolders ' ]">[ ' _t: Folders ' ]</a> </li>
-			<li><a href="[ ' hrefcontacts ' ]">[ ' _t: Contacts ' ]</a> </li>
-			<li> <a href="[ ' hrefusers ' ]">[ ' _t: Users ' ]</a></li>
-			<li> <a href="[ ' hrefhelp ' ]">[ ' _t: Help ' ]</a></li>
 		</ul>
 
-		[ ' folder ' ]<br>
+		[ ' // folder ' ]<br><br>
 	=]
 	[ ' forbidden ' ]
 	[= a _ =
 		[ ' message ' ]
 	=]
 	[= b _ =
-		<table class="hl-line" cellpadding="2" cellspacing="3">
+		<table class="usertable" cellpadding="2" cellspacing="3">
 			<tr>
-				<td colspan="5" align="center">
+				<td colspan="5">
 					[ '' pagination '' ]
 				</td>
 			</tr>
@@ -81,56 +79,51 @@
 		</table>
 	=]
 	[= c _ =
-		<br><b>[ ' _t: ComposeMessage ' ]</b><br><br>
-		<table width="675">
-			<tr>
-				<td>
-					<form action="[ ' hrefform ' ]" method="post" name="message_store">
-						[ ' csrf: message_store ' ]
-						<table>
-							<tr>
-								<th>[ ' _t: Subject ' ]:</th>
-								<td><input type="text" name="subject" maxlength="65" size="30" value="" required></td>
-							</tr>
-							<tr>
-								<th>[ ' _t: Recipient ' ]:</th>
-								<td>
-									<select name="to" required>
-										<option value="">[ ' _t: ChooseRecipient ' ]</option>
-										[= o _ =
-											<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
-										=]
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<th>[ ' _t: Message ' ]:</th>
-								<td>
-									[ '' textarea '' ]
-								</td>
-							</tr>
-							<tr>
-								<td><button type="submit">[ ' _t: Send ' ]</button></td>
-								<td align="right">[ ' _t: Urgent ' ] <input type="checkbox" name="urgent" value="1"></td>
-							</tr>
-						</table>
-					</form>
-				</td>
-				<td width="200">
-					<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
-					<b>[ ' _t: ContactList ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
-					[= u _ =
-						<a href="[ ' hrefcompose ' ]">[ ' username ' ]</a><br>
-					=]
-				</td>
-			</tr>
-		</table>
+		<br><strong>[ ' // _t: ComposeMessage ' ]</strong>
+		<form action="[ ' hrefform ' ]" method="post" name="message_store">
+			[ ' csrf: message_store ' ]
+			<table width="675" class="usertable" style="float: left;">
+				<tr>
+					<th>[ ' _t: Subject ' ]:</th>
+					<td><input type="text" name="subject" maxlength="65" size="30" value="" required></td>
+				</tr>
+				<tr>
+					<th>[ ' _t: Recipient ' ]:</th>
+					<td>
+						<select name="to" required>
+							<option value="">[ ' _t: ChooseRecipient ' ]</option>
+							[= o _ =
+								<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
+							=]
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>[ ' _t: Message ' ]:</th>
+					<td>
+						[ '' textarea '' ]
+					</td>
+				</tr>
+				<tr>
+					<td><button type="submit">[ ' _t: Send ' ]</button></td>
+					<td align="right">[ ' _t: Urgent ' ] <input type="checkbox" name="urgent" value="1"></td>
+				</tr>
+			</table>
+		</form>
+
+		<aside style="width: 200px; padding-left: 25px; float: right;">
+			<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
+			<b>[ ' _t: Contacts ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
+			[= u _ =
+				<a href="[ ' hrefcompose ' ]">[ ' username ' ]</a><br>
+			=]
+		</aside>
 	=]
 	[= d _ =
-		<br><b>[ ' _t: ReplyToMessage ' ]</b><br><br>
+		<br><h3>[ ' _t: ReplyToMessage ' ]</h3>
 		<form action="[ ' hrefform ' ]" method="post" name="message_reply">
 			[ ' csrf: message_reply ' ]
-			<table width="400">
+			<table width="400" class="usertable">
 				<tr>
 					<th>[ ' _t: Subject ' ]:</th>
 					<td><input readonly type="text" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
@@ -157,50 +150,45 @@
 		</form>
 	=]
 	[= e _ =
-		<br><b>[ ' _t: ForwardMessage ' ]</b><br><br>
-		<table width="675">
-			<tr>
-				<td>
-					<form action="[ ' hrefform ' ]" method="post" name="message_forward">
-						[ ' csrf: message_forward ' ]
-						<table>
-							<tr>
-								<th>[ ' _t: Subject ' ]:</th>
-								<td><input type="text" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
-							</tr>
-							<tr>
-								<th>[ ' _t: Recipient ' ]:</th>
-								<td>
-									<select name="to" required>
-										<option value="">[ ' _t: ChooseRecipient ' ]</option>
-										[= o _ =
-											<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
-										=]
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>[ ' _t: Message ' ]:</td>
-								<td>
-									[ '' textarea '' ]
-								</td>
-							</tr>
-							<tr>
-								<td><button type="submit">[ ' _t: Send ' ]</button></td>
-								<td align="right">[ ' _t: Urgent ' ] <input type="checkbox" name="urgent" value="1"></td>
-							</tr>
-						</table>
-					</form>
-				</td>
-				<td width="200">
-					<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
-					<b>[ ' _t: ContactList ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
-					[= u _ =
-						<a href="[ ' hrefforward ' ]">[ ' username ' ]</a><br>
-					=]
-				</td>
-			</tr>
-		</table>
+		<br><h3>[ ' _t: ForwardMessage ' ]</h3>
+		<form action="[ ' hrefform ' ]" method="post" name="message_forward">
+			[ ' csrf: message_forward ' ]
+			<table width="675" class="usertable" style="float: left;">
+				<tr>
+					<th>[ ' _t: Subject ' ]:</th>
+					<td><input type="text" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
+				</tr>
+				<tr>
+					<th>[ ' _t: Recipient ' ]:</th>
+					<td>
+						<select name="to" required>
+							<option value="">[ ' _t: ChooseRecipient ' ]</option>
+							[= o _ =
+								<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
+							=]
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>[ ' _t: Message ' ]:</td>
+					<td>
+						[ '' textarea '' ]
+					</td>
+				</tr>
+				<tr>
+					<td><button type="submit">[ ' _t: Send ' ]</button></td>
+					<td align="right">[ ' _t: Urgent ' ] <input type="checkbox" name="urgent" value="1"></td>
+				</tr>
+			</table>
+		</form>
+
+		<aside style="width: 200px; padding-left: 25px; float: right;">
+			<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
+			<b>[ ' _t: Contacts ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
+			[= u _ =
+				<a href="[ ' hrefforward ' ]">[ ' username ' ]</a><br>
+			=]
+		</aside>
 	=]
 	[= f _ =
 		[= x _ =
@@ -214,9 +202,9 @@
 		[ ' sendto ' ]
 	=]
 	[= g _ =
-		<table class="hl-line" cellpadding="2" cellspacing="3" width="100%">
+		<table class="usertable" cellpadding="2" cellspacing="3" width="100%">
 			<tr>
-				<td colspan="4" align="center">
+				<td colspan="4">
 					[ '' pagination '' ]
 				</td>
 			</tr>
@@ -238,9 +226,9 @@
 		[ ' // <br><br>Löscht der Empfänger eine Nachricht, wird sie auch hier automatisch entfernt! ' ]
 	=]
 	[= h _ =
-		<table class="hl-line" cellpadding="2" cellspacing="3" width="800">
+		<table class="usertable" cellpadding="2" cellspacing="3" width="800">
 			<tr>
-				<td colspan="5" align="center">
+				<td colspan="5">
 					[ '' pagination '' ]
 				</td>
 			</tr>
@@ -277,30 +265,34 @@
 	=]
 	[= i _ =
 		[ ' forbidden ' ]
-		<table border="1" bordercolor="#666699" width="600">
+		<table border="1" bordercolor="#666699" width="600" class="usertable">
 			<tr>
-				<th width="350"> [ ' _t: Subject ' ]: </th>
+				<th> [ ' _t: Subject ' ]: </th>
 				<td>[ ' subject ' ]</td>
-				
-				<th><strong> [ ' _t: From ' ]: </th>
+			</tr>
+			<tr>
+				<th>[ ' _t: From ' ]: </th>
 				<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 			</tr>
 			<tr>
-				<td colspan="4"><strong> [ ' _t: Message ' ]:</strong><br>[ ' message ' ]</td>
+				<th>[ ' _t: Message ' ]: </th>
+				<td>[ ' message ' ]</td>
 			</tr>
 			<tr>
-				<td>
+				<th>[ ' _t: Date ' ]: </th>
+				<td>[ ' replied ' ] [ ' time | time_formatted ' ]</td>
+			</tr>
+			<tr>
+				<td colspan="2">
 					<a href="[ ' hrefreply ' ]"> [ ' _t: Reply ' ]</a>
 					/ <a href="[ ' hrefforward ' ]">[ ' _t: Forward ' ]</a>
 					/ <a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a>
 				</td>
-				<td>[ ' replied ' ]</td>
-				<td><small><strong>[ ' _t: Date ' ]:</strong> [ ' time | time_formatted ' ]</small></td>
 			</tr>
 		</table><br>
 	=]
 	[= j _ =
-		<table border="1" width="600">
+		<table border="1" width="600" class="usertable">
 			<tr>
 				<th>[ ' _t: Subject ' ]: </th><td>[ ' subject ' ]</td>
 			</tr>
@@ -324,11 +316,11 @@
 		[ ' message ' ]
 	=]
 	[= l _ =
-		<br><b>[ ' _t: ContactList ' ]:</b><br><br>
+		<br>
 		<form action="[ ' hrefform ' ]" method="post" name="edit_contacts">
 			[ ' csrf: edit_contacts ' ]
 			<input type="hidden" name="insert" value="1">
-			<table border="1" cellspacing="0" width="70%" align="left">
+			<table border="1" cellspacing="0" width="70%" class="usertable" style="float: left;">
 				<tr>
 					<th>[ ' _t: ContactNames ' ]</th>
 					<th>[ ' _t: Notes ' ]</th>
@@ -346,7 +338,7 @@
 					<td>
 						<input type="text" size="35" maxlength="65" name="field2_value">
 					</td>
-					<td colspan="2" align="center">
+					<td colspan="2">
 						<button type="submit">[ ' _t: Add ' ]</button>
 					</td>
 				</tr>
@@ -358,21 +350,19 @@
 					</tr>
 				=]
 			</table>
-			<table>
-				<td width="25"></td>
-				<td width="150">
-					<span class="cite">[ ' _t: ClickContact ' ]</span><br><br>
-					<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
-				</td>
-			</table>
+
+			<aside style="width: 150px; padding-left: 25px; float: right;">
+				<span class="cite">[ ' _t: ClickContact ' ]</span><br><br>
+				<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
+			</aside>
 		</form>
 	=]
 	[= m _ =
-		<br><b>[ ' _t: FolderList ' ]:</b><br><br>
+		<br>
 		<form action="[ ' hrefform ' ]" method="post" name="message_folders">
 			[ ' csrf: message_folders ' ]
 			<input type="hidden" name="insert" value="1">
-			<table border="1" cellspacing='0' width="65%" align="left">
+			<table border="1" cellspacing='0' width="65%" class="usertable" style="float: left;">
 				<tr>
 					<th>[ ' _t: Folder ' ]</th>
 					<th>[ ' _t: Notes ' ]</th>
@@ -384,7 +374,7 @@
 					<td>
 						<input type="text" size="35" maxlength="65" name="field2_value">
 					</td>
-					<td colspan="2" align="center">
+					<td colspan="2">
 						<button type="submit">[ ' _t: Add ' ]</button>
 					</td>
 				</tr>
@@ -398,31 +388,35 @@
 					</tr>
 				=]
 			</table>
-			<table>
-				<tr>
-					<td width="25"></td>
-					<td width="200">
-						<span class="cite">[ ' _t: ClickFolder ' ]</span><br><br><b>[ ' _t: CreateFolder ' ]</b><br><br>
-						[ ' _t: CreateFolderHelp ' ]
-					</td>
-				</tr>
-			</table>
+
+			<aside style="width: 200px; padding-left: 25px; float: right;">
+				<span class="cite">[ ' _t: ClickFolder ' ]</span><br><br><b>[ ' _t: CreateFolder ' ]</b><br><br>
+				[ ' _t: CreateFolderHelp ' ]
+			</aside>
 		</form>
 	=]
 	[= n _ =
+		<br>
 		['' pagination '']
-		<table width="650">
+		<table width="650" class="usertable" style="float: left;">
+			<tr>
+				<th>[ ' _t: ContactNames ' ]</th>
+			</tr>
+			[= u _ =
 			<tr>
 				<td>
-					<br><b>[ ' _t: Users ' ]:</b><br><br>
-					[= u _ =
+					
 						<a href="[ ' hrefcontact ' ]">[ ' username ' ]</a><br>
-					=]
+					
 				</td>
 			</tr>
+			=]
 		</table>
 		['' pagination '']
-		<span class="cite"><br><br>[ ' _t: ClickContact2 ' ]</span><br><br>
+
+		<aside class="cite" style="width: 200px; padding-left: 25px; float: right;">
+			[ ' _t: ClickContact2 ' ]
+		</aside>
 	=]
 
 	[ ' z help ' ]
