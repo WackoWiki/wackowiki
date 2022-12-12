@@ -45,16 +45,16 @@
 			</tr>
 			<tr>
 				<th width="400">[ ' _t: Subject ' ]</th>
-				<th width="">[ ' _t: Date ' ]</th>
 				<th width="100">[ ' _t: Sender ' ]</th>
+				<th width="">[ ' _t: Date ' ]</th>
 				<th width="250">[ ' _t: MoveToFolder ' ]</th>
 				<th width="80">[ ' _t: Delete ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
 					<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
-					<td>[ ' time | time_formatted ' ]</td>
 					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+					<td>[ ' time | time_formatted ' ]</td>
 					<td width="155">
 						<form action="[ ' hrefform ' ]" method="post" name="move_folder">
 							[ ' csrf: move_folder ' ]
@@ -211,15 +211,15 @@
 			</tr>
 			<tr>
 				<th width="400">[ ' _t: Subject ' ]</th>
-				<th width="">[ ' _t: Date ' ]</th>
 				<th width="100">[ ' _t: Recipient ' ]</th>
+				<th width="">[ ' _t: Date ' ]</th>
 				<th width="75">[ ' _t: Read ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
 					<td><a href="[ ' hrefview2 ' ]">[ ' subject ' ]</a></td>
-					<td>[ ' time | time_formatted ' ]</td>
 					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+					<td>[ ' time | time_formatted ' ]</td>
 					<td width="50">[ ' status ' ]<br></td>
 				</tr>
 			=]
@@ -235,8 +235,8 @@
 			</tr>
 			<tr>
 				<th width="400"> [ ' _t: Subject ' ]:</th>
-				<th width="">[ ' _t: Date ' ]</th>
 				<th width="100"> [ ' _t: Sender ' ]</th>
+				<th width="">[ ' _t: Date ' ]</th>
 				<th width="250"> [ ' _t: MoveToFolder ' ]</th>
 				<th width="80"> [ ' _t: Delete ' ]</th>
 			</tr>
@@ -245,8 +245,8 @@
 					<td>
 						[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a>
 					</td>
-					<td>[ ' time | time_formatted ' ]</td>
 					<td width="125">[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+					<td>[ ' time | time_formatted ' ]</td>
 					<td>
 						<form action="[ ' hrefform ' ]" method="post" name="move_folder">
 							[ ' csrf: move_folder ' ]

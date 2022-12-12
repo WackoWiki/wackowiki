@@ -187,7 +187,6 @@ if ($user_id = $this->get_user_id())
 				AND m.folder = 'inbox'
 				AND m.viewrecipient = '1' ";
 
-		// count pages
 		$count = $this->db->load_single(
 			"SELECT COUNT(message_id) AS n " .
 			$selector
@@ -203,7 +202,6 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('b_');
 
-		// to paginate the "inbox" page messeges
 		$tpl->pagination_text = $pagination['text'];
 
 		$tpl->enter('n_');
@@ -228,17 +226,17 @@ if ($user_id = $this->get_user_id())
 
 			$tpl->time			= $row['datesent'];
 			$tpl->subject		= strip_tags($row['subject']);
-			$tpl->username		= $this->format($row['user_name']);
+			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'page' => 'viewmessage']);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id']]);
 
-			// code to put in drop down box to move to a new folder
+			// drop down box to move to a new folder
 			$resultdrop2 = $this->db->load_all(
 				"SELECT DISTINCT info
 				FROM {$prefix}messenger_info
-				WHERE type='folder'
+				WHERE type = 'folder'
 					AND owner_id = " . (int) $user_id . "
 				ORDER BY info ASC");
 
@@ -403,7 +401,6 @@ if ($user_id = $this->get_user_id())
 
 				$tpl->sendto	= Ut::perc_replace($this->_t('MessageSentTo'), $user['user_name']);
 
-				// to set the database so that the message has been replied to
 				$this->db->sql_query(
 					"UPDATE {$prefix}messenger SET
 						repliedto = '1'
@@ -442,7 +439,6 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('g_');
 
-		// to paginate the "sent" page messages
 		$tpl->pagination_text = $pagination['text'];
 
 		$tpl->enter('n_');
@@ -452,7 +448,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->time			= $row['datesent'];
 			$tpl->status		= $this->_t('MessageStatus')[$row['status']];
 			$tpl->subject		= strip_tags($row['subject']);
-			$tpl->username		= $this->format($row['user_name']);
+			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview2		= $this->href('', '', ['action' => 'view2', 'message_id' => $row['message_id'], 'page' => 'view2']);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_to_id']]);
 		}
@@ -507,7 +503,6 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('h_');
 
-		// to paginate the "inbox" page messeges
 		$tpl->pagination_text = $pagination['text'];
 
 		$tpl->enter('n_');
@@ -531,13 +526,13 @@ if ($user_id = $this->get_user_id())
 
 			$tpl->time			= $row['datesent'];
 			$tpl->subject		= strip_tags($row['subject']);
-			$tpl->username		= $this->format($row['user_name']);
+			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'folder' => $msg_folder]);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $msg_folder]);
 
-			// code to put in drop down box to move to a new folder
+			// drop down box to move to a new folder
 			$resultdrop2 = $this->db->load_all(
 				"SELECT DISTINCT info
 				FROM {$prefix}messenger_info
@@ -577,12 +572,11 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('i_');
 
-		// code to set filter in database
 		if ($row['user_to_id'] == $user_id)
 		{
 			$tpl->time			= $row['datesent'];
 			$tpl->subject		= strip_tags($row['subject']);
-			$tpl->username		= $this->format($row['user_name']);
+			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->message		= strip_tags($row['message']);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefreply		= $this->href('', '', ['action' => 'reply', 'to' => $row['user_from_id'], 'message_id' => $row['message_id']]);
@@ -618,7 +612,7 @@ if ($user_id = $this->get_user_id())
 		{
 			$tpl->time			= $row['datesent'];
 			$tpl->subject		= strip_tags($row['subject']);
-			$tpl->username		= $this->format($row['user_name']);
+			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->message		= strip_tags($row['message']);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_to_id']]);
 		}
@@ -626,7 +620,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // j_
 	}
 
-	// [K] Delete messages (changed - messages are now completely removed from database)
+	// [K] Delete messages
 	else if ($action == 'delete')
 	{
 		if ($_POST['_action'] == 'delete_message')
@@ -641,7 +635,7 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			$tpl->k_hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
+			$tpl->k_hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $message_id]);
 		}
 	}
 
@@ -734,8 +728,7 @@ if ($user_id = $this->get_user_id())
 		$delete_folder	= $_GET['delete_folder'] ?? null;
 		$folder			= $_GET['folder'] ?? null;
 		$field1_value	= $_POST['field1_value'] ?? null;
-		if ($field1_value) {$insert = '1';}
-		else {$insert = '';}
+		$insert			= $field1_value ? 1 : 0;
 		$field2_value	= $_POST['field2_value'] ?? null;
 		$category		= 'folder';
 
@@ -761,7 +754,7 @@ if ($user_id = $this->get_user_id())
 			// delete folder name from messenger_info
 			$this->db->sql_query(
 				"DELETE FROM {$prefix}messenger_info
-				WHERE msg_info_id = '$delete_folder'
+				WHERE msg_info_id = " . (int) $delete_folder . "
 					AND owner_id = " . (int) $user_id . "
 					AND type = 'folder'");
 
@@ -818,8 +811,6 @@ if ($user_id = $this->get_user_id())
 			$sql_where . "
 			ORDER BY user_name ASC " .
 			$pagination['limit']);
-
-
 
 		foreach ($users as $user)
 		{
