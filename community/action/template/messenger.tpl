@@ -30,7 +30,7 @@
 			</li>
 		</ul>
 
-		[ ' // folder ' ]<br><br>
+		<br><br>
 	=]
 	[ ' forbidden ' ]
 	[= a _ =
@@ -55,10 +55,8 @@
 					<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
 					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 					<td>[ ' time | time_formatted ' ]</td>
-					<td width="155">[ '' d selectfolder '' ]</td>
-					<td>
-						<a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a><br>
-					</td>
+					<td>[ '' d selectfolder '' ]</td>
+					<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
 				</tr>
 			=]
 			[= none _ =
@@ -106,7 +104,8 @@
 
 		<aside style="width: 200px; padding-left: 25px; float: right;">
 			<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
-			<b>[ ' _t: Contacts ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
+			<b>[ ' _t: Contacts ' ]:</b><br>
+			<small>([ ' _t: ClickName ' ])</small><br><br>
 			[= u _ =
 				<a href="[ ' hrefcompose ' ]">[ ' username ' ]</a><br>
 			=]
@@ -180,7 +179,8 @@
 
 		<aside style="width: 200px; padding-left: 25px; float: right;">
 			<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
-			<b>[ ' _t: Contacts ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
+			<b>[ ' _t: Contacts ' ]:</b><br>
+			<small>([ ' _t: ClickName ' ])</small><br><br>
 			[= u _ =
 				<a href="[ ' hrefforward ' ]">[ ' username ' ]</a><br>
 			=]
@@ -188,7 +188,7 @@
 	=]
 	[= f _ =
 		[= x _ =
-			<br><center><span class="cite">Ein Feld wurde nicht ausgefüllt. Es müssen alle Felder ausgefüllt sein!</span></center><br><br>
+			<br><span class="cite">Ein Feld wurde nicht ausgefüllt. Es müssen alle Felder ausgefüllt sein!</span><br><br>
 			<a href="[ ' hrefcompose ' ]">[ ' _t: Back ' ]</a>
 		=]
 		[= e _ =
@@ -215,7 +215,7 @@
 					<td><a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
 					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 					<td>[ ' time | time_formatted ' ]</td>
-					<td width="50">[ ' status ' ]<br></td>
+					<td>[ ' status ' ]</td>
 				</tr>
 			=]
 		</table>
@@ -237,15 +237,11 @@
 			</tr>
 			[= n _ =
 				<tr>
-					<td>
-						[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a>
-					</td>
-					<td width="125">[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+					<td>[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
+					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 					<td>[ ' time | time_formatted ' ]</td>
 					<td>[ '' d selectfolder '' ]</td>
-					<td>
-						<a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a><br>
-					</td>
+					<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
 				</tr>
 			=]
 		</table>
@@ -277,7 +273,7 @@
 					/ <a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a>
 				</td>
 			</tr>
-		</table><br>
+		</table>
 	=]
 	[= j _ =
 		<table width="600" class="usertable">
@@ -345,7 +341,7 @@
 
 			<aside style="width: 150px; padding-left: 25px; float: right;">
 				<span class="cite">[ ' _t: ClickContact ' ]</span><br><br>
-				<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
+				<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a>
 			</aside>
 		</form>
 	=]
@@ -381,7 +377,8 @@
 			</table>
 
 			<aside style="width: 200px; padding-left: 25px; float: right;">
-				<span class="cite">[ ' _t: ClickFolder ' ]</span><br><br><b>[ ' _t: CreateFolder ' ]</b><br><br>
+				<span class="cite">[ ' _t: ClickFolder ' ]</span><br><br>
+				<b>[ ' _t: CreateFolder ' ]</b><br><br>
 				[ ' _t: CreateFolderHelp ' ]
 			</aside>
 		</form>
@@ -436,28 +433,28 @@
 					<th width="80">Löschen</th>
 				</tr>
 				<tr>
-					<td width="400"><span class="cite">!*</span><a href=#test>Testnachricht</a> (03Jun06 2:57 pm)</td>
-					<td width="100"><a href=#testuser>Testuser</a> [<a href=#pfeil>-></a>]</td>
-					<td width="250">
+					<td><span class="cite">!*</span><a href=#test>Testnachricht</a> (03Jun06 2:57 pm)</td>
+					<td><a href=#testuser>Testuser</a> [<a href=#pfeil>-></a>]</td>
+					<td>
 						<form method=post>
 							<select name="move2folder"></select>
 							<button type="submit">Verschieben</button>
 						</form>
 					</td>
-					<td width="80"><a href=#loeschen>Löschen</a></td>
+					<td><a href=#loeschen>Löschen</a></td>
 				</tr>
 				<tr>
-					<td width="400">
-						<span class="cite">!</span><a href=#test1>Testnachricht1</a><font color= #808080><small><b> beantwortet am:</b> (01Jun06 1:02 pm)</small></font>
+					<td>
+						<span class="cite">!</span><a href=#test1>Testnachricht1</a><span style="color: grey;"><small><b> beantwortet am:</b> (01Jun06 1:02 pm)</small></span>
 					</td>
-					<td width="100"><a href=#testuser>Testuser16</a> [<a href=#pfeil>-></a>]</td>
-					<td width="250"><right>
+					<td><a href=#testuser>Testuser16</a> [<a href=#pfeil>-></a>]</td>
+					<td><right>
 						<form method=post>
 							<select name="move2folder"></select>
 							<button type="submit">Verschieben</button>
 						</form></right>
 					</td>
-					<td width="80"><a href=#loeschen>Löschen</a></td>
+					<td><a href=#loeschen>Löschen</a></td>
 				</tr>
 			</table><br>
 			<a href=#anfang>Seitenanfang</a><br><br>

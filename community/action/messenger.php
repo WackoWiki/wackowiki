@@ -169,21 +169,21 @@ if ($user_id = $this->get_user_id())
 			|| $action == 'view_inbox')
 			&& $r_msg_folder == '' && $folder == '')
 		{
-			$msg_folder2 = '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' . ' » ' . $this->_t('Message');
+			$nav_folder		= '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' . ' » ' . $this->_t('Message');
 		}
 		else if ($action == 'view_sent')
 		{
-			$msg_folder2 = '<a href="' . $this->href('', '', ['action' => 'sent']) . '">' . $this->_t('SentItems') . '</a>' . ' » ' . $this->_t('Message');
+			$nav_folder		= '<a href="' . $this->href('', '', ['action' => 'sent']) . '">' . $this->_t('SentItems') . '</a>' . ' » ' . $this->_t('Message');
 		}
 		else if ($folder != '')
 		{
 			$msg_folder		= $folder;
-			$msg_folder2	= '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' .
+			$nav_folder		= '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' .
 								' » <a href="' . $this->href('', '', ['folder' => $folder]) . '" title="' . $this->_t('Folder') . '">' . Ut::html($msg_folder) . '</a>' .
 								($action == 'view_inbox' ? ' » ' . $this->_t('Message') : '');
 		}
 
-		$tpl->h_header = $msg_folder2;
+		$tpl->h_header = $nav_folder;
 	}
 
 	$tpl->leave(); // x_
