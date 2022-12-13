@@ -37,9 +37,9 @@
 		[ ' message ' ]
 	=]
 	[= b _ =
-		<table class="usertable" cellpadding="2" cellspacing="3">
+		<table class="usertable">
 			<tr>
-				<td colspan="5">
+				<td colspan="5" style="border: 0;">
 					[ '' pagination '' ]
 				</td>
 			</tr>
@@ -198,9 +198,9 @@
 		[ ' sendto ' ]
 	=]
 	[= g _ =
-		<table class="usertable" cellpadding="2" cellspacing="3" width="100%">
+		<table class="usertable" width="100%">
 			<tr>
-				<td colspan="4">
+				<td colspan="4" style="border: 0;">
 					[ '' pagination '' ]
 				</td>
 			</tr>
@@ -222,9 +222,9 @@
 		[ ' // <br><br>Löscht der Empfänger eine Nachricht, wird sie auch hier automatisch entfernt! ' ]
 	=]
 	[= h _ =
-		<table class="usertable" cellpadding="2" cellspacing="3">
+		<table class="usertable">
 			<tr>
-				<td colspan="5">
+				<td colspan="5" style="border: 0;">
 					[ '' pagination '' ]
 				</td>
 			</tr>
@@ -253,7 +253,7 @@
 	=]
 	[= i _ =
 		[ ' forbidden ' ]
-		<table border="1" bordercolor="#666699" width="600" class="usertable">
+		<table width="600" class="usertable">
 			<tr>
 				<th> [ ' _t: Subject ' ]: </th>
 				<td>[ ' subject ' ]</td>
@@ -280,7 +280,7 @@
 		</table><br>
 	=]
 	[= j _ =
-		<table border="1" width="600" class="usertable">
+		<table width="600" class="usertable">
 			<tr>
 				<th>[ ' _t: Subject ' ]: </th>
 				<td>[ ' subject ' ]</td>
@@ -312,7 +312,7 @@
 		<form action="[ ' hrefform ' ]" method="post" name="edit_contacts">
 			[ ' csrf: edit_contacts ' ]
 			<input type="hidden" name="insert" value="1">
-			<table border="1" cellspacing="0" width="70%" class="usertable" style="float: left;">
+			<table width="70%" class="usertable" style="float: left;">
 				<tr>
 					<th><label for="field1_value">[ ' _t: ContactNames ' ]</label></th>
 					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
@@ -354,7 +354,7 @@
 		<form action="[ ' hrefform ' ]" method="post" name="message_folders">
 			[ ' csrf: message_folders ' ]
 			<input type="hidden" name="insert" value="1">
-			<table border="1" cellspacing='0' width="65%" class="usertable" style="float: left;">
+			<table width="65%" class="usertable" style="float: left;">
 				<tr>
 					<th><label for="field1_value">[ ' _t: Folder ' ]</label></th>
 					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
@@ -428,25 +428,15 @@
 			<a name= post><h3>Posteingang</h3></a><br><br>
 			Im Posteing werden alle eingetroffenen Nachrichten angezeigt, sowie einige zusätzliche Info`s zu den einzelnen Nachrichten.<br><br>
 			In der folgenden Darstellung siehst Du ein Beispiel, wie der Posteingangsordner aussehen kann:<br><br><br>
-			<table>
-				<tr bgcolor="#93B2DD">
-					<td width="400">
-						<table border="0" cellspacing="0" cellpadding="0" width="100%">
-							<tr><td width="100"><b> Betreff</b></td></tr>
-						</table>
-					</td>
-					<td width="100"><b> Absender</b></td>
-					<td width="250"><b> Verschieben in Ordner</b></td>
-					<td width="80"><b> Löschen</b></td>
-				</tr>
-			</table>
-			<table>
+			<table class="usertable">
 				<tr>
-					<td width="400">
-						<table border="0" cellspacing="0" cellpadding="0" width="100%">
-							<tr><td width="100"><span class="cite">!*</span><a href=#test>Testnachricht</a> (03Jun06 2:57 pm)</td></tr>
-						</table>
-					</td>
+					<th width="400"> Betreff</th>
+					<th width="100">Absender</th>
+					<th width="250">Verschieben in Ordner</th>
+					<th width="80">Löschen</th>
+				</tr>
+				<tr>
+					<td width="400"><span class="cite">!*</span><a href=#test>Testnachricht</a> (03Jun06 2:57 pm)</td>
 					<td width="100"><a href=#testuser>Testuser</a> [<a href=#pfeil>-></a>]</td>
 					<td width="250">
 						<form method=post>
@@ -456,17 +446,9 @@
 					</td>
 					<td width="80"><a href=#loeschen>Löschen</a></td>
 				</tr>
-			</table>
-			<table>
 				<tr>
 					<td width="400">
-						<table border="0" cellspacing="0" cellpadding="0" width="100%">
-							<tr>
-								<td width="100">
-									<span class="cite">!</span><a href=#test1>Testnachricht1</a><font color= #808080><small><b> beantwortet am:</b> (01Jun06 1:02 pm)</small></font>
-								</td>
-							</tr>
-						</table>
+						<span class="cite">!</span><a href=#test1>Testnachricht1</a><font color= #808080><small><b> beantwortet am:</b> (01Jun06 1:02 pm)</small></font>
 					</td>
 					<td width="100"><a href=#testuser>Testuser16</a> [<a href=#pfeil>-></a>]</td>
 					<td width="250"><right>
