@@ -74,13 +74,13 @@
 			[ ' csrf: message_store ' ]
 			<table width="675" class="usertable" style="float: left;">
 				<tr>
-					<th>[ ' _t: Subject ' ]:</th>
-					<td><input type="text" name="subject" maxlength="65" size="30" value="" required></td>
+					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
+					<td><input type="text" id="subject" name="subject" maxlength="65" size="30" value="" required></td>
 				</tr>
 				<tr>
-					<th>[ ' _t: Recipient ' ]:</th>
+					<th><label for="to">[ ' _t: Recipient ' ]</label></th>
 					<td>
-						<select name="to" required>
+						<select id="to" name="to" required>
 							<option value="">[ ' _t: ChooseRecipient ' ]</option>
 							[= o _ =
 								<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
@@ -89,14 +89,17 @@
 					</td>
 				</tr>
 				<tr>
-					<th>[ ' _t: Message ' ]:</th>
+					<th><label for="message">[ ' _t: Message ' ]</label></th>
 					<td>
 						[ '' textarea '' ]
 					</td>
 				</tr>
 				<tr>
 					<td><button type="submit">[ ' _t: Send ' ]</button></td>
-					<td align="right">[ ' _t: Urgent ' ] <input type="checkbox" name="urgent" value="1"></td>
+					<td align="right">
+						<label for="urgent">[ ' _t: Urgent ' ]</label>
+						<input type="checkbox" id="urgent" name="urgent" value="1">
+					</td>
 				</tr>
 			</table>
 		</form>
@@ -115,19 +118,19 @@
 			[ ' csrf: message_reply ' ]
 			<table width="400" class="usertable">
 				<tr>
-					<th>[ ' _t: Subject ' ]:</th>
-					<td><input readonly type="text" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
+					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
+					<td><input readonly type="text" id="subject" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
 				</tr>
 				<tr>
-					<th>[ ' _t: Recipient ' ]:</th>
+					<th><label for="to">[ ' _t: Recipient ' ]</label></th>
 					<td>
-						<select name="to" readonly required>
+						<select id="to" name="to" readonly required>
 							<option value="[ ' userid ' ]">[ ' username ' ]</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<th>[ ' _t: Message ' ]:</th>
+					<th><label for="message">[ ' _t: Message ' ]</label></th>
 					<td>
 						[ '' textarea '' ]
 					</td>
@@ -145,13 +148,13 @@
 			[ ' csrf: message_forward ' ]
 			<table width="675" class="usertable" style="float: left;">
 				<tr>
-					<th>[ ' _t: Subject ' ]:</th>
-					<td><input type="text" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
+					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
+					<td><input type="text" id="subject" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
 				</tr>
 				<tr>
-					<th>[ ' _t: Recipient ' ]:</th>
+					<th><label for="to">[ ' _t: Recipient ' ]</label></th>
 					<td>
-						<select name="to" required>
+						<select id="to" name="to" required>
 							<option value="">[ ' _t: ChooseRecipient ' ]</option>
 							[= o _ =
 								<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
@@ -160,14 +163,17 @@
 					</td>
 				</tr>
 				<tr>
-					<td>[ ' _t: Message ' ]:</td>
+					<th><label for="message">[ ' _t: Message ' ]</label></th>
 					<td>
 						[ '' textarea '' ]
 					</td>
 				</tr>
 				<tr>
 					<td><button type="submit">[ ' _t: Send ' ]</button></td>
-					<td align="right">[ ' _t: Urgent ' ] <input type="checkbox" name="urgent" value="1"></td>
+					<td align="right">
+						<label for="urgent">[ ' _t: Urgent ' ]</label>
+						<input type="checkbox" id="urgent" name="urgent" value="1">
+					</td>
 				</tr>
 			</table>
 		</form>
@@ -223,11 +229,11 @@
 				</td>
 			</tr>
 			<tr>
-				<th width="400"> [ ' _t: Subject ' ]:</th>
-				<th width="100"> [ ' _t: Sender ' ]</th>
+				<th width="400">[ ' _t: Subject ' ]:</th>
+				<th width="100">[ ' _t: Sender ' ]</th>
 				<th width="">[ ' _t: Date ' ]</th>
-				<th width="250"> [ ' _t: MoveToFolder ' ]</th>
-				<th width="80"> [ ' _t: Delete ' ]</th>
+				<th width="250">[ ' _t: MoveToFolder ' ]</th>
+				<th width="80">[ ' _t: Delete ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
@@ -276,16 +282,20 @@
 	[= j _ =
 		<table border="1" width="600" class="usertable">
 			<tr>
-				<th>[ ' _t: Subject ' ]: </th><td>[ ' subject ' ]</td>
+				<th>[ ' _t: Subject ' ]: </th>
+				<td>[ ' subject ' ]</td>
 			</tr>
 			<tr>
-				<th>[ ' _t: Recipient ' ]: </th><td> [ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+				<th>[ ' _t: Recipient ' ]: </th>
+				<td> [ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 			</tr>
 			<tr>
-				<th>[ ' _t: Message ' ]: </th><td>[ ' message ' ]</td>
+				<th>[ ' _t: Message ' ]: </th>
+				<td>[ ' message ' ]</td>
 			</tr>
 			<tr>
-				<th>[ ' _t: Date ' ]: </th><td>[ ' time | time_formatted ' ]</td>
+				<th>[ ' _t: Date ' ]: </th>
+				<td>[ ' time | time_formatted ' ]</td>
 			</tr>
 		</table>
 	=]
@@ -304,13 +314,13 @@
 			<input type="hidden" name="insert" value="1">
 			<table border="1" cellspacing="0" width="70%" class="usertable" style="float: left;">
 				<tr>
-					<th>[ ' _t: ContactNames ' ]</th>
-					<th>[ ' _t: Notes ' ]</th>
+					<th><label for="field1_value">[ ' _t: ContactNames ' ]</label></th>
+					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
 					<td> </td>
 				</tr>
 				<tr>
 					<td>
-						<select name="field1_value" required>
+						<select id="field1_value" name="field1_value" required>
 							<option value="">[ ' _t: ChooseRecipient ' ]</option>
 							[= o _ =
 								<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
@@ -318,7 +328,7 @@
 						</select>
 					</td>
 					<td>
-						<input type="text" size="35" maxlength="65" name="field2_value">
+						<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
 					</td>
 					<td colspan="2">
 						<button type="submit">[ ' _t: Add ' ]</button>
@@ -346,15 +356,16 @@
 			<input type="hidden" name="insert" value="1">
 			<table border="1" cellspacing='0' width="65%" class="usertable" style="float: left;">
 				<tr>
-					<th>[ ' _t: Folder ' ]</th>
-					<th>[ ' _t: Notes ' ]</th>
+					<th><label for="field1_value">[ ' _t: Folder ' ]</label></th>
+					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
 					<td> </td>
 				</tr>
 				<tr>
 					<td>
-						<input type="text" size="25" maxlength="65" name="field1_value"></td>
+						<input type="text" id="field1_value" name="field1_value" size="25" maxlength="65">
+					</td>
 					<td>
-						<input type="text" size="35" maxlength="65" name="field2_value">
+						<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
 					</td>
 					<td colspan="2">
 						<button type="submit">[ ' _t: Add ' ]</button>
@@ -364,9 +375,7 @@
 					<tr>
 						<td><a href="[ ' hreffolder ' ]">[ ' info ' ]</a></td>
 						<td>[ ' notes ' ]</td>
-						<td>
-							<a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a>
-						</td>
+						<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
 					</tr>
 				=]
 			</table>
@@ -386,11 +395,7 @@
 			</tr>
 			[= u _ =
 			<tr>
-				<td>
-					
-						<a href="[ ' hrefcontact ' ]">[ ' username ' ]</a><br>
-					
-				</td>
+				<td><a href="[ ' hrefcontact ' ]">[ ' username ' ]</a><br></td>
 			</tr>
 			=]
 		</table>
@@ -492,7 +497,7 @@
 <nav class="pagination">[ ' text ' ]</nav>
 
 [= textarea =]
-<textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
+<textarea rows="16" cols="45" id="message" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
 <input readonly type="text" name="remLen" size="4" maxlength="4" value="2500"> [ ' _t: CharactersLeft ' ]
 
 [= selectfolder =]

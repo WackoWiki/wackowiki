@@ -614,9 +614,11 @@ if ($user_id = $this->get_user_id())
 				"DELETE FROM {$prefix}messenger
 				WHERE message_id = " . (int) $message_id);
 
-			$tpl->k_message	= ($rs
+			$this->set_message($rs
 				? $this->_t('MessageDeleted')
 				: $this->_t('MessageNotDeleted'));
+
+			$this->http->redirect($this->href('', '', ['action' => 'inbox', 'folder' => $msg_folder]));
 		}
 		else
 		{
