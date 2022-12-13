@@ -212,7 +212,7 @@
 			</tr>
 			[= n _ =
 				<tr>
-					<td><a href="[ ' hrefview2 ' ]">[ ' subject ' ]</a></td>
+					<td><a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
 					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 					<td>[ ' time | time_formatted ' ]</td>
 					<td width="50">[ ' status ' ]<br></td>
@@ -395,7 +395,7 @@
 			</tr>
 			[= u _ =
 			<tr>
-				<td><a href="[ ' hrefcontact ' ]">[ ' username ' ]</a><br></td>
+				<td><a href="[ ' hrefcontact ' ]">[ ' username ' ]</a></td>
 			</tr>
 			=]
 		</table>

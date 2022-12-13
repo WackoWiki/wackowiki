@@ -94,6 +94,26 @@ $select_folder = function($user_id, $folder = '') use ($prefix, &$tpl)
 	}
 };
 
+$get_message = function($user_id, $message_id) use ($prefix)
+{
+	return $this->db->load_single(
+		"SELECT *
+		FROM {$prefix}messenger
+		WHERE user_to_id = " . (int) $user_id . "
+			AND message_id = " . (int) $message_id);
+};
+
+$get_contacts = function($user_id) use ($prefix)
+{
+	return $contacts = $this->db->load_all(
+		"SELECT i.info, u.user_name
+		FROM {$prefix}messenger_info i
+			LEFT JOIN {$prefix}user u ON (i.info = u.user_id)
+		WHERE i.type = 'contact'
+			AND i.owner_id = " . (int) $user_id . "
+		ORDER BY i.info ASC");
+};
+
 if ($user_id = $this->get_user_id())
 {
 	# $create_table();
@@ -146,12 +166,12 @@ if ($user_id = $this->get_user_id())
 	if (! in_array($action, ['compose', 'contacts', 'delete', 'folders', 'forward', 'help', 'inbox', 'reply', 'sent', 'store', 'users']))
 	{
 		if ((  $action == ''
-			|| $action == 'view')
+			|| $action == 'view_inbox')
 			&& $r_msg_folder == '' && $folder == '')
 		{
 			$msg_folder2 = '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' . ' » ' . $this->_t('Message');
 		}
-		else if ($action == 'view2')
+		else if ($action == 'view_sent')
 		{
 			$msg_folder2 = '<a href="' . $this->href('', '', ['action' => 'sent']) . '">' . $this->_t('SentItems') . '</a>' . ' » ' . $this->_t('Message');
 		}
@@ -160,7 +180,7 @@ if ($user_id = $this->get_user_id())
 			$msg_folder		= $folder;
 			$msg_folder2	= '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' .
 								' » <a href="' . $this->href('', '', ['folder' => $folder]) . '" title="' . $this->_t('Folder') . '">' . Ut::html($msg_folder) . '</a>' .
-								($action == 'view' ? ' » ' . $this->_t('Message') : '');
+								($action == 'view_inbox' ? ' » ' . $this->_t('Message') : '');
 		}
 
 		$tpl->h_header = $msg_folder2;
@@ -236,7 +256,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->time			= $row['datesent'];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
-			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'page' => 'viewmessage']);
+			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id'], 'page' => 'viewmessage']);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
@@ -268,13 +288,7 @@ if ($user_id = $this->get_user_id())
 
 		$select_user($user_id, $to);
 
-		$contacts = $this->db->load_all(
-			"SELECT i.info, u.user_name
-			FROM {$prefix}messenger_info i
-				LEFT JOIN {$prefix}user u ON (i.info = u.user_id)
-			WHERE i.type = 'contact'
-				AND i.owner_id = " . (int) $user_id . "
-			ORDER BY i.info ASC");
+		$contacts = $get_contacts($user_id);
 
 		foreach ($contacts as $row)
 		{
@@ -288,11 +302,7 @@ if ($user_id = $this->get_user_id())
 	// [D] Send reply to the sender of a message
 	else if ($action == 'reply')
 	{
-		$row = $this->db->load_single(
-			"SELECT *
-			FROM {$prefix}messenger
-			WHERE user_to_id = " . (int) $user_id . "
-				AND message_id = " . (int) $message_id);
+		$row = $get_message($user_id, $message_id);
 
 		$user = $this->db->load_single(
 			"SELECT user_id, user_name
@@ -316,11 +326,7 @@ if ($user_id = $this->get_user_id())
 	// [E] Forward message
 	else if ($action == 'forward' && $message_id != '')
 	{
-		$row = $this->db->load_single(
-			"SELECT *
-			FROM {$prefix}messenger
-			WHERE user_to_id = " . (int) $user_id . "
-				AND message_id = " . (int) $message_id);
+		$row = $get_message($user_id, $message_id);
 
 		$tpl->enter('e_');
 
@@ -333,13 +339,7 @@ if ($user_id = $this->get_user_id())
 
 		$select_user($user_id, $to);
 
-		$contacts = $this->db->load_all(
-			"SELECT i.info, u.user_name
-			FROM {$prefix}messenger_info i
-				LEFT JOIN {$prefix}user u ON (i.info = u.user_id)
-			WHERE i.type = 'contact'
-				AND i.owner_id = " . (int) $user_id . "
-			ORDER BY i.info ASC");
+		$contacts = $get_contacts($user_id);
 
 		foreach ($contacts as $row)
 		{
@@ -450,7 +450,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->status		= $this->_t('MessageStatus')[$row['status']];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
-			$tpl->hrefview2		= $this->href('', '', ['action' => 'view2', 'message_id' => $row['message_id'], 'page' => 'view2']);
+			$tpl->hrefview		= $this->href('', '', ['action' => 'view_sent', 'message_id' => $row['message_id'], 'page' => 'view_sent']);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_to_id']]);
 		}
 
@@ -459,7 +459,7 @@ if ($user_id = $this->get_user_id())
 	}
 
 	// [H] show selected folder
-	else if ((($r_msg_folder != '') || ($folder)) && ($action != 'view'))
+	else if (($r_msg_folder != '' || $folder) && ($action != 'view_inbox'))
 	{
 		$search = '';
 
@@ -519,7 +519,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->time			= $row['datesent'];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
-			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'folder' => $msg_folder]);
+			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id'], 'folder' => $msg_folder]);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
@@ -540,7 +540,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // h_
 	}
 	// [I] view individual messages
-	else if ($action == 'view')
+	else if ($action == 'view_inbox')
 	{
 		$row = $this->db->load_single(
 			"SELECT m.*, u.user_name
@@ -582,7 +582,7 @@ if ($user_id = $this->get_user_id())
 	}
 
 	// [J] added filter for viewing "folder sorted" messages
-	else if ($action == 'view2')
+	else if ($action == 'view_sent')
 	{
 		$row = $this->db->load_single(
 			"SELECT m.*, u.user_name
