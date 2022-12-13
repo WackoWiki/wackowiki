@@ -33,6 +33,7 @@ foreach ($modes as $i => $text)
 	if ($mode == $i)
 	{
 		$tpl->header = $this->_t($text);
+		break;
 	}
 }
 

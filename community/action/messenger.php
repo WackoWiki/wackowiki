@@ -49,7 +49,7 @@ $create_table = function() use ($prefix)
 	);");
 };
 
-$user_select = function($user_id) use ($prefix, &$tpl)
+$select_user = function($user_id, $to) use ($prefix, &$tpl)
 {
 	$users = $this->db->load_all(
 		"SELECT user_id, user_name
@@ -69,6 +69,27 @@ $user_select = function($user_id) use ($prefix, &$tpl)
 		if ($to == $user['user_id'])
 		{
 			$tpl->o_selected	= ' selected';
+		}
+	}
+};
+
+$select_folder = function($user_id, $folder = '') use ($prefix, &$tpl)
+{
+	// drop down box to move to a new folder
+	$result = $this->db->load_all(
+		"SELECT DISTINCT info
+		FROM {$prefix}messenger_info
+		WHERE type = 'folder'
+			AND owner_id = " . (int) $user_id . "
+		ORDER BY info ASC");
+
+	foreach ($result as $row)
+	{
+		$tpl->o_info = $row['info'];
+
+		if ($folder == $row['info'])
+		{
+			$tpl->o_selected = ' selected';
 		}
 	}
 };
@@ -119,22 +140,8 @@ if ($user_id = $this->get_user_id())
 	// print navigation
 	$tpl->menu = $this->tab_menu($modes, $mode, '', [], $mod_selector);
 
-	$results = $this->db->load_all(
-		"SELECT DISTINCT info
-		FROM {$prefix}messenger_info
-		WHERE type = 'folder'
-			AND owner_id = " . (int) $user_id . "
-		ORDER BY info ASC");
-
-	foreach ($results as $row)
-	{
-		$tpl->o_info	= $row['info'];
-
-		if ($r_msg_folder == $row['info'])
-		{
-			$tpl->o_selected = ' selected';
-		}
-	}
+	// drop down box to select a specific folder
+	$select_folder($user_id, $r_msg_folder);
 
 	if (! in_array($action, ['compose', 'contacts', 'delete', 'folders', 'forward', 'help', 'inbox', 'reply', 'sent', 'store', 'users']))
 	{
@@ -142,16 +149,18 @@ if ($user_id = $this->get_user_id())
 			|| $action == 'view')
 			&& $r_msg_folder == '' && $folder == '')
 		{
-			$msg_folder2 = $this->_t('Inbox');
+			$msg_folder2 = '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' . ' » ' . $this->_t('Message');
 		}
 		else if ($action == 'view2')
 		{
-			$msg_folder2 = $this->_t('SentItems');
+			$msg_folder2 = '<a href="' . $this->href('', '', ['action' => 'sent']) . '">' . $this->_t('SentItems') . '</a>' . ' » ' . $this->_t('Message');
 		}
 		else if ($folder != '')
 		{
 			$msg_folder		= $folder;
-			$msg_folder2	= $this->_t('Folder') . ': <a href="' . $this->href('', '', ['folder' => $folder]) . '">' . Ut::html($msg_folder) . '</a>';
+			$msg_folder2	= '<a href="' . $this->href('', '', ['action' => 'inbox']) . '">' . $this->_t('Inbox') . '</a>' .
+								' » <a href="' . $this->href('', '', ['folder' => $folder]) . '" title="' . $this->_t('Folder') . '">' . Ut::html($msg_folder) . '</a>' .
+								($action == 'view' ? ' » ' . $this->_t('Message') : '');
 		}
 
 		$tpl->h_header = $msg_folder2;
@@ -230,20 +239,12 @@ if ($user_id = $this->get_user_id())
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'page' => 'viewmessage']);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
-			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id']]);
 
 			// drop down box to move to a new folder
-			$resultdrop2 = $this->db->load_all(
-				"SELECT DISTINCT info
-				FROM {$prefix}messenger_info
-				WHERE type = 'folder'
-					AND owner_id = " . (int) $user_id . "
-				ORDER BY info ASC");
-
-			foreach ($resultdrop2 as $row2)
-			{
-				$tpl->o_info = $row2['info'];
-			}
+			$tpl->enter('d_');
+			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id']]);
+			$select_folder($user_id);
+			$tpl->leave(); // d_
 		}
 
 		$tpl->leave(); // n_
@@ -265,7 +266,7 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->textarea		= true;
 
-		$user_select($user_id);
+		$select_user($user_id, $to);
 
 		$contacts = $this->db->load_all(
 			"SELECT i.info, u.user_name
@@ -330,7 +331,7 @@ if ($user_id = $this->get_user_id())
 									strip_tags($row['message']) .
 									"\n+++++++++++++++++++++++++++++++++\n";
 
-		$user_select($user_id);
+		$select_user($user_id, $to);
 
 		$contacts = $this->db->load_all(
 			"SELECT i.info, u.user_name
@@ -471,15 +472,6 @@ if ($user_id = $this->get_user_id())
 			$show_folder = $folder;
 		}
 
-		$result = $this->db->load_all(
-			"SELECT message_id
-			FROM {$prefix}messenger
-			WHERE user_to_id = " . (int) $user_id . " " .
-			$search . "
-				AND folder = " . $this->db->q($folder) . "
-				AND viewrecipient = '1'
-			ORDER BY datesent DESC");
-
 		$selector =
 			"FROM {$prefix}messenger m
 				LEFT JOIN {$prefix}user u ON (m.user_from_id = u.user_id)
@@ -530,20 +522,12 @@ if ($user_id = $this->get_user_id())
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view', 'message_id' => $row['message_id'], 'folder' => $msg_folder]);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
-			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $msg_folder]);
 
 			// drop down box to move to a new folder
-			$resultdrop2 = $this->db->load_all(
-				"SELECT DISTINCT info
-				FROM {$prefix}messenger_info
-				WHERE type = 'folder'
-					AND owner_id = " . (int) $user_id . "
-				ORDER BY info ASC");
-
-			foreach ($resultdrop2 as $row2)
-			{
-				$tpl->o_info = $row2['info'];
-			}
+			$tpl->enter('d_');
+			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $msg_folder]);
+			$select_folder($user_id);
+			$tpl->leave(); // d_
 		}
 
 		$tpl->leave(); // n_
@@ -578,6 +562,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->message		= strip_tags($row['message']);
+
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefreply		= $this->href('', '', ['action' => 'reply', 'to' => $row['user_from_id'], 'message_id' => $row['message_id']]);
 			$tpl->hrefforward	= $this->href('', '', ['action' => 'forward', 'message_id' => $row['message_id']]);

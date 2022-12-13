@@ -55,18 +55,7 @@
 					<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
 					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 					<td>[ ' time | time_formatted ' ]</td>
-					<td width="155">
-						<form action="[ ' hrefform ' ]" method="post" name="move_folder">
-							[ ' csrf: move_folder ' ]
-							<select name="move2folder">
-								<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
-							[= o _ =
-								<option value="[ ' info ' ]">[ ' info ' ]</option>
-							=]
-							</select>
-							<button type="submit">[ ' _t: Move ' ]</button>
-						</form>
-					</td>
+					<td width="155">[ '' d selectfolder '' ]</td>
 					<td>
 						<a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a><br>
 					</td>
@@ -247,18 +236,7 @@
 					</td>
 					<td width="125">[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 					<td>[ ' time | time_formatted ' ]</td>
-					<td>
-						<form action="[ ' hrefform ' ]" method="post" name="move_folder">
-							[ ' csrf: move_folder ' ]
-							<select name="move2folder">
-								<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
-							[= o _ =
-								<option value="[ ' info ' ]">[ ' info ' ]</option>
-							=]
-							</select>
-							<button type="submit">[ ' _t: Move ' ]</button>
-						</form>
-					</td>
+					<td>[ '' d selectfolder '' ]</td>
 					<td>
 						<a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a><br>
 					</td>
@@ -517,3 +495,14 @@
 <textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
 <input readonly type="text" name="remLen" size="4" maxlength="4" value="2500"> [ ' _t: CharactersLeft ' ]
 
+[= selectfolder =]
+<form action="[ ' hrefform ' ]" method="post" name="move_folder">
+	[ ' csrf: move_folder ' ]
+	<select name="move2folder">
+		<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
+	[= o _ =
+		<option value="[ ' info ' ][ ' selected ' ]">[ ' info ' ]</option>
+	=]
+	</select>
+	<button type="submit">[ ' _t: Move ' ]</button>
+</form>
