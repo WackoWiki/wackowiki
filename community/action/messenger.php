@@ -13,6 +13,8 @@ if (!defined('IN_WACKO'))
  * {{messenger}} (without parameters)
  *
  * requires messenger & messenger_info table in MySQL-Database
+ *
+ * TODO: add sorting, filters, search
  */
 
 $prefix = $this->prefix;
@@ -133,7 +135,7 @@ if ($user_id = $this->get_user_id())
 
 	$mod_selector	= 'action';
 	$modes			= [
-		'inbox'		=> 'Inbox',
+		''			=> 'Inbox',
 		'compose'	=> 'Compose',
 		'sent'		=> 'SentItems',
 		'folders'	=> 'Folders',
@@ -256,7 +258,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->time			= $row['datesent'];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
-			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id'], 'page' => 'viewmessage']);
+			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id']]);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
@@ -450,7 +452,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->status		= $this->_t('MessageStatus')[$row['status']];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
-			$tpl->hrefview		= $this->href('', '', ['action' => 'view_sent', 'message_id' => $row['message_id'], 'page' => 'view_sent']);
+			$tpl->hrefview		= $this->href('', '', ['action' => 'view_sent', 'message_id' => $row['message_id']]);
 			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_to_id']]);
 		}
 
@@ -634,7 +636,7 @@ if ($user_id = $this->get_user_id())
 		$field1_value	= $_POST['field1_value'] ?? null;
 		$insert			= $field1_value ? 1 : 0;
 		$field2_value	= $_POST['field2_value'] ?? null;
-		$category		= 'contact';
+		$type			= 'contact';
 		$in_list		= [];
 
 		if ($insert)
@@ -652,7 +654,7 @@ if ($user_id = $this->get_user_id())
 						(int) $user_id . ", " .
 						$this->db->q($field1_value) . ", " .
 						$this->db->q($field2_value) . ", " .
-						$this->db->q($category) . "
+						$this->db->q($type) . "
 					)");
 			}
 		}
@@ -675,7 +677,7 @@ if ($user_id = $this->get_user_id())
 			FROM {$prefix}messenger_info i
 				LEFT JOIN {$prefix}user u ON (i.info = u.user_id)
 			WHERE i.owner_id = " . (int) $user_id . "
-				AND i.type = " . $this->db->q($category) . "
+				AND i.type = " . $this->db->q($type) . "
 			ORDER BY i.info ASC");
 
 		$tpl->enter('l_');
@@ -717,7 +719,7 @@ if ($user_id = $this->get_user_id())
 		$field1_value	= $_POST['field1_value'] ?? null;
 		$insert			= $field1_value ? 1 : 0;
 		$field2_value	= $_POST['field2_value'] ?? null;
-		$category		= 'folder';
+		$type			= 'folder';
 
 		if ($insert)
 		{
@@ -732,7 +734,7 @@ if ($user_id = $this->get_user_id())
 					(int) $user_id . ", " .
 					$this->db->q($field1_value) . ", " .
 					$this->db->q($field2_value) . ", " .
-					$this->db->q($category) . "
+					$this->db->q($type) . "
 				)");
 		}
 
@@ -757,7 +759,7 @@ if ($user_id = $this->get_user_id())
 			"SELECT msg_info_id, owner_id, type, info, notes
 			FROM {$prefix}messenger_info
 			WHERE owner_id = " . (int) $user_id . "
-				AND type = " . $this->db->q($category) . "
+				AND type = " . $this->db->q($type) . "
 			ORDER BY info ASC");
 
 		$tpl->enter('m_');

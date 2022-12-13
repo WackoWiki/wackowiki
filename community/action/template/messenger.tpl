@@ -46,7 +46,7 @@
 			<tr>
 				<th width="400">[ ' _t: Subject ' ]</th>
 				<th width="100">[ ' _t: Sender ' ]</th>
-				<th width="">[ ' _t: Date ' ]</th>
+				<th width="100">[ ' _t: Date ' ]</th>
 				<th width="250">[ ' _t: MoveToFolder ' ]</th>
 				<th width="80">[ ' _t: Delete ' ]</th>
 			</tr>
@@ -207,7 +207,7 @@
 			<tr>
 				<th width="400">[ ' _t: Subject ' ]</th>
 				<th width="100">[ ' _t: Recipient ' ]</th>
-				<th width="">[ ' _t: Date ' ]</th>
+				<th width="100">[ ' _t: Date ' ]</th>
 				<th width="75">[ ' _t: Read ' ]</th>
 			</tr>
 			[= n _ =
@@ -231,7 +231,7 @@
 			<tr>
 				<th width="400">[ ' _t: Subject ' ]:</th>
 				<th width="100">[ ' _t: Sender ' ]</th>
-				<th width="">[ ' _t: Date ' ]</th>
+				<th width="100">[ ' _t: Date ' ]</th>
 				<th width="250">[ ' _t: MoveToFolder ' ]</th>
 				<th width="80">[ ' _t: Delete ' ]</th>
 			</tr>
