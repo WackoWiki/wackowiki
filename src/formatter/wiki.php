@@ -7,10 +7,11 @@ if (!defined('IN_WACKO'))
 
 $text = $this->format($text, 'wacko');
 
-// by default links and actions are parsed dynamically via show handler
+// by default links and actions are parsed dynamically via 'show' handler
 if (isset($options['post_wacko']))
 {
 	$options['strip_ignore'] = true;
+	$options['strip_notypo'] = true;
 
 	// parsing links and actions
 	include Ut::join_path(FORMATTER_DIR, 'post_wacko.php');

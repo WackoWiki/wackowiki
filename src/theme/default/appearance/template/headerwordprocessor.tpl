@@ -19,4 +19,3 @@
 		<header>
 			<h1>[ ' db: site_name | e ' ]: [ ' title | e ' ]</h1>
 		</header>
-<!-- End of header //-->

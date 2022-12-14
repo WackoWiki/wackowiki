@@ -27,4 +27,3 @@
 				[ ' path ' ]
 			</div>
 		</header>
-<!-- End of header //-->
