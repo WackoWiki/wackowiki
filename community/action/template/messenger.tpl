@@ -53,7 +53,7 @@
 			[= n _ =
 				<tr>
 					<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
-					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+					<td>[ ' username ' ]</td>
 					<td>[ ' time | time_formatted ' ]</td>
 					<td>[ '' d selectfolder '' ]</td>
 					<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
@@ -213,7 +213,7 @@
 			[= n _ =
 				<tr>
 					<td><a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
-					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+					<td>[ ' username ' ]</td>
 					<td>[ ' time | time_formatted ' ]</td>
 					<td>[ ' status ' ]</td>
 				</tr>
@@ -238,7 +238,7 @@
 			[= n _ =
 				<tr>
 					<td>[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
-					<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+					<td>[ ' username ' ]</td>
 					<td>[ ' time | time_formatted ' ]</td>
 					<td>[ '' d selectfolder '' ]</td>
 					<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
@@ -256,11 +256,11 @@
 			</tr>
 			<tr>
 				<th>[ ' _t: From ' ]: </th>
-				<td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+				<td>[ ' username ' ]</td>
 			</tr>
 			<tr>
 				<th>[ ' _t: Message ' ]: </th>
-				<td>[ ' message ' ]</td>
+				<td>[ ' message | nl2br ' ]</td>
 			</tr>
 			<tr>
 				<th>[ ' _t: Date ' ]: </th>
@@ -287,7 +287,7 @@
 			</tr>
 			<tr>
 				<th>[ ' _t: Message ' ]: </th>
-				<td>[ ' message ' ]</td>
+				<td>[ ' message | nl2br ' ]</td>
 			</tr>
 			<tr>
 				<th>[ ' _t: Date ' ]: </th>

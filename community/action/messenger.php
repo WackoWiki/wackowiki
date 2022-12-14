@@ -56,7 +56,7 @@ $select_user = function($user_id, $to) use ($prefix, &$tpl)
 	$users = $this->db->load_all(
 		"SELECT user_id, user_name
 		FROM {$prefix}user
-		ORDER BY user_name ASC");
+		ORDER BY user_name ASC", true);
 
 	foreach ($users as $user)
 	{
@@ -75,15 +75,15 @@ $select_user = function($user_id, $to) use ($prefix, &$tpl)
 	}
 };
 
+// TODO: load only once, same for every record
 $select_folder = function($user_id, $folder = '') use ($prefix, &$tpl)
 {
-	// drop down box to move to a new folder
 	$result = $this->db->load_all(
 		"SELECT DISTINCT info
 		FROM {$prefix}messenger_info
 		WHERE type = 'folder'
 			AND owner_id = " . (int) $user_id . "
-		ORDER BY info ASC");
+		ORDER BY info ASC", true);
 
 	foreach ($result as $row)
 	{
@@ -120,7 +120,7 @@ if ($user_id = $this->get_user_id())
 {
 	# $create_table();
 
-	//needed for pagination
+	// needed for pagination
 	$limit = 10;
 
 	$folder			= $_GET['folder'] ?? null;
@@ -135,7 +135,7 @@ if ($user_id = $this->get_user_id())
 
 	$mod_selector	= 'action';
 	$modes			= [
-		''			=> 'Inbox',
+		'inbox'		=> 'Inbox',
 		'compose'	=> 'Compose',
 		'sent'		=> 'SentItems',
 		'folders'	=> 'Folders',
@@ -259,7 +259,6 @@ if ($user_id = $this->get_user_id())
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id']]);
-			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
 			// drop down box to move to a new folder
@@ -318,9 +317,9 @@ if ($user_id = $this->get_user_id())
 		$tpl->userid			= $user['user_id'];
 		$tpl->username			= $user['user_name'];
 		$tpl->hrefform			= $this->href('', '', ['action' => 'store', 'replyto' => $message_id]);
-		$tpl->textarea_origmsg	=	"\n\n++++++++++ " . $this->_t('OriginalMessage') . " ++++++++++\n" .
+		$tpl->textarea_origmsg	=	"\n\n-------- " . $this->_t('OriginalMessage') . " --------\n" .
 									strip_tags($row['message']) .
-									"\n+++++++++++++++++++++++++++++++++\n";
+									"\n--------------------------------\n";
 
 		$tpl->leave(); // d_
 	}
@@ -335,9 +334,9 @@ if ($user_id = $this->get_user_id())
 		$tpl->subject			= $this->_t('Fwd') . ' ' . $row['subject'];
 		$tpl->hrefusers			= $this->href('', '', ['action' => 'users']);
 		$tpl->hrefform			= $this->href('', '', ['action' => 'store']);
-		$tpl->textarea_origmsg	=	"\n\n++++++++++++ " . $this->_t('Forward') . " ++++++++++++++\n" .
+		$tpl->textarea_origmsg	=	"\n\n-------- " . $this->_t('ForwardedMessage') . " --------\n" .
 									strip_tags($row['message']) .
-									"\n+++++++++++++++++++++++++++++++++\n";
+									"\n--------------------------------\n";
 
 		$select_user($user_id, $to);
 
@@ -453,7 +452,6 @@ if ($user_id = $this->get_user_id())
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view_sent', 'message_id' => $row['message_id']]);
-			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_to_id']]);
 		}
 
 		$tpl->leave(); // n_
@@ -522,7 +520,6 @@ if ($user_id = $this->get_user_id())
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id'], 'folder' => $msg_folder]);
-			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
 			// drop down box to move to a new folder
@@ -634,7 +631,7 @@ if ($user_id = $this->get_user_id())
 		$add_contact	= $_GET['contact'] ?? '';
 		$delete_contact	= $_GET['delete_contact'] ?? null;
 		$field1_value	= $_POST['field1_value'] ?? null;
-		$insert			= $field1_value ? 1 : 0;
+		$insert			= $field1_value ? true : false;
 		$field2_value	= $_POST['field2_value'] ?? null;
 		$type			= 'contact';
 		$in_list		= [];
@@ -717,7 +714,7 @@ if ($user_id = $this->get_user_id())
 		$delete_folder	= $_GET['delete_folder'] ?? null;
 		$folder			= $_GET['folder'] ?? null;
 		$field1_value	= $_POST['field1_value'] ?? null;
-		$insert			= $field1_value ? 1 : 0;
+		$insert			= $field1_value ? true : false;
 		$field2_value	= $_POST['field2_value'] ?? null;
 		$type			= 'folder';
 
