@@ -37,12 +37,12 @@ $lang				= array_merge ($lang, $lang_all);
 $lang[$install_action] ??= '';
 
 // HTTP header with right Charset settings
-header('Content-Type: text/html; charset=' . $lang['Charset']);
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html dir="<?php echo $lang['LangDir']; ?>" lang="<?php echo $config['language']; ?>">
 	<head>
-		<meta charset="<?php echo $lang['Charset']; ?>">
+		<meta charset="utf-8">
 		<title><?php echo $lang['Title'] . ': ' . WACKO_VERSION . ' - ' . $lang[$install_action]; ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">

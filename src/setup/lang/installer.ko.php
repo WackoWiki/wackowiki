@@ -4,7 +4,6 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'		=> 'utf-8',
 'LangISO'		=> 'ko',
 'LangLocale'	=> 'ko_KR',
 'LangName'		=> '한국어',

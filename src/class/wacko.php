@@ -530,7 +530,7 @@ class Wacko
 			setlocale(LC_CTYPE, $this->lang['locale']);
 			setlocale(LC_TIME, $this->lang['locale']);	// sql_time_formatted()
 
-			mb_internal_encoding($this->lang['charset']);
+			mb_internal_encoding('utf-8');
 
 			$this->lang['locale'] = setlocale(LC_CTYPE, 0);
 		}

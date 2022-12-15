@@ -4,7 +4,6 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'		=> 'utf-8',
 'LangISO'		=> 'fr',
 'LangLocale'	=> 'fr_FR',
 'LangName'		=> 'French',

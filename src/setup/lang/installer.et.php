@@ -4,7 +4,6 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'		=> 'utf-8',
 'LangISO'		=> 'et',
 'LangLocale'	=> 'et_EE',
 'LangName'		=> 'Estonian',
