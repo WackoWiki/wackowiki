@@ -572,7 +572,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Du ejer ikke siden og kan ikke omdøbe den',
 	'NeedRedirect'				=> 'Lav automatisk omstilling for siden',
 	'RedirectCreated'			=> 'Siden %1 omstiller den den nye',
-	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
 	'UserSettings'				=> 'Brugerindstillinger',
 	'UserSettingsGeneral'		=> 'General',

@@ -572,7 +572,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Δεν είστε ο ιδιοκτήτης αυτής της σελίδα και λόγο αυτού δεν μπορείτε να την μετονομάστε',
 	'NeedRedirect'				=> 'Δημιουργία συνδέσμου για την νέα σελίδα στην παλιά σελίδα',
 	'RedirectCreated'			=> 'Στην σελίδα %1 δημιουργήθηκε σύνδεσμος στην νέο σελίδα',
-	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset <strong>%2</strong>.',
 
 	'UserSettings'				=> 'Ρυθμίσεις χρήστη',
 	'UserSettingsGeneral'		=> 'Γενικά',

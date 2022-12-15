@@ -572,7 +572,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Ön nem az oldal tulajdonosa, ezért nem tudja átnevezni.',
 	'NeedRedirect'				=> 'Create redirect to the new page on the old page',
 	'RedirectCreated'			=> 'In the page %1 created redirect to the new one',
-	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
 	'UserSettings'				=> 'Felhasználói beállítások',
 	'UserSettingsGeneral'		=> 'Általános',

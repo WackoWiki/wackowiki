@@ -26,7 +26,7 @@ class Feed
 		$this->engine	= & $engine;
 		$this->lang		= $this->engine->db->language;
 		$this->engine->set_language($this->lang, true, true);
-		$this->charset	= $this->engine->get_charset($this->lang);
+		$this->charset	= $this->engine->get_charset();
 	}
 
 	function write_file($name, $body): void

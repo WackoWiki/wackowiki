@@ -182,14 +182,6 @@ function recursive_move(&$engine, $root, $new_root, $log)
 	{
 		$log->log_n_h	= $page['tag'];
 
-		// avoid charset conflict
-		if ($engine->get_charset($page['page_lang']) != $engine->get_charset($user_lang))
-		{
-			$log->log_n_l_message =  Ut::perc_replace($engine->_t('SkipCharsetConflict'), $engine->link('/' . $page['tag']), '<code>' . $page['page_lang'] . ' (' . $engine->get_charset($page['page_lang']) . ')</code>');
-
-			continue;
-		}
-
 		// $new_tag = str_replace( $root, $new_root, $page['tag'] );
 		$new_tag = preg_replace('/' . preg_quote($root, '/') . '/', preg_quote($new_root), $page['tag'], 1);
 

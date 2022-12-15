@@ -789,16 +789,10 @@ class Wacko
 		return true;
 	}
 
-	function get_charset($lang = ''): string
+	// utf-8 it is
+	function get_charset(): string
 	{
-		if (!$lang)
-		{
-			$lang = $this->determine_lang();
-		}
-
-		$this->load_lang($lang);
-
-		return $this->languages[$lang]['charset'] ?? '';
+		return 'utf-8';
 	}
 
 	// shortcut for getting 'dir' for not loaded language
@@ -2487,12 +2481,10 @@ class Wacko
 					$this->db->site_name . "\n" .
 					$this->db->base_url;
 
-		$charset	= $this->get_charset($user['user_lang']);
-
 		$this->set_language($save, true);
 
 		$email = new Email($this);
-		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset, $xtra_headers);
+		$email->send_mail($email_to, $name_to, $subject, $body, null, $xtra_headers);
 	}
 
 	function notify_approved_account($user): void
@@ -7122,7 +7114,7 @@ class Wacko
 			$this->http->ensure_tls($this->href($method, $tag));
 		}
 
-		// clean _POST if no csrf token
+		// clean _POST without csrf token
 		$this->validate_post_token($tag);
 
 		$user	= [];

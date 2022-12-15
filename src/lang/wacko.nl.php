@@ -572,7 +572,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'U bent niet de eigenaar van deze pagina en kunt deze niet verwijderen.',
 	'NeedRedirect'				=> 'Maak een verwijzing naar de nieuwe pagina vanaf de oude pagina',
 	'RedirectCreated'			=> 'In pagina %1 verwijzing naar de nieuwe pagina gemaakt.',
-	'SkipCharsetConflict'		=> 'Pagina %1 niet hernoemd, andere karakterset %2.',
 
 	'UserSettings'				=> 'Gebruikersinstellingen',
 	'UserSettingsGeneral'		=> 'Algemeen',

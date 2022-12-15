@@ -572,7 +572,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> '您不是此页面的所有者，因此无法重命名它',
 	'NeedRedirect'				=> '在旧页面上创建重定向到新页面',
 	'RedirectCreated'			=> '在页面 %1 中创建重定向到新页面',
-	'SkipCharsetConflict'		=> '页面 %1 未重命名，其他字符集 %2。',
 
 	'UserSettings'				=> '用户设置',
 	'UserSettingsGeneral'		=> '常规设置',
