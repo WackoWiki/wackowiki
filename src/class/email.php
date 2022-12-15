@@ -35,18 +35,12 @@ class Email
 	// $name_to				- recipient name
 	// $subject, $message	- self-explaining
 	// $email_from			- place specific address into the 'From:' field
-	// $charset				- send message in specific charset (w/o actual re-encoding)
 	// $xtra_headers		- (array) insert additional mail headers
-	function send_mail($email_to, $name_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = []): void
+	function send_mail($email_to, $name_to, $subject, $body, $email_from = '', $xtra_headers = []): void
 	{
 		if (!$this->engine->db->enable_email || ( !$email_to || !$subject || !$body) )
 		{
 			return;
-		}
-
-		if (empty($charset))
-		{
-			$charset = $this->engine->get_charset();
 		}
 
 		if (!$email_from)
@@ -57,10 +51,10 @@ class Email
 		$name_from		= $this->engine->db->email_from;
 
 		// use PHPMailer class
-		$this->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);
+		$this->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $xtra_headers);
 	}
 
-	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset = '', $xtra_headers = ''): bool
+	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $xtra_headers = ''): bool
 	{
 		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
 
@@ -130,7 +124,7 @@ class Email
 			$mail->ContentType	= 'text/plain';
 			$mail->WordWrap		= 80;
 			$mail->Priority		= $this->engine->db->email_priority;	// Urgent = 1, Not Urgent = 5, Disable = 0
-			$mail->CharSet		= $charset;
+			$mail->CharSet		= $this->engine->get_charset();
 
 			$mail->Subject		= $subject;
 			$mail->Body			= $body;

@@ -4,7 +4,6 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'		=> 'utf-8',
 'LangISO'		=> 'ja',
 'LangLocale'	=> 'ja_JP',
 'LangName'		=> '日本語 ',

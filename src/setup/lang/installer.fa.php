@@ -4,7 +4,6 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'		=> 'utf-8',
 'LangISO'		=> 'fa',
 'LangLocale'	=> 'fa_IR',
 'LangName'		=> 'Farsi',

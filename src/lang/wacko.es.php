@@ -573,7 +573,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'No eres el propietario de esta página y no la puedes eliminar',
 	'NeedRedirect'				=> 'Crear una redirección hacia la nueva página en la página antigua',
 	'RedirectCreated'			=> 'En la página %1 he hecho una redirección hacia la nueva página',
-	'SkipCharsetConflict'		=> 'Página %1 no renombrada, diferente charset %2.',
 
 	'UserSettings'				=> 'Configuración de usuario',
 	'UserSettingsGeneral'		=> 'General',

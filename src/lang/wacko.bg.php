@@ -573,7 +573,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Вие не сте собственика на тази страница и не можете да я преименувате',
 	'NeedRedirect'				=> 'Създай редирект до тази от старата страница',
 	'RedirectCreated'			=> 'На страница %1 е създаден редирект към новата',
-	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
 	'UserSettings'				=> 'Потребителски настройки',
 	'UserSettingsGeneral'		=> 'General',

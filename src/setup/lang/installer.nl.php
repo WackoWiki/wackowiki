@@ -4,7 +4,6 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'		=> 'utf-8',
 'LangISO'		=> 'nl',
 'LangLocale'	=> 'nl_NL',
 'LangName'		=> 'Dutch',

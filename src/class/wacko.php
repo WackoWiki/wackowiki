@@ -490,7 +490,7 @@ class Wacko
 			setlocale(LC_CTYPE, $this->lang['locale']);
 			setlocale(LC_TIME, $this->lang['locale']);	// sql_time_formatted()
 
-			mb_internal_encoding($this->lang['charset']);
+			mb_internal_encoding('utf-8');
 
 			$this->lang['locale'] = setlocale(LC_CTYPE, 0);
 		}
@@ -749,16 +749,10 @@ class Wacko
 		return true;
 	}
 
-	function get_charset($lang = ''): string
+	// utf-8 it is
+	function get_charset(): string
 	{
-		if (!$lang)
-		{
-			$lang = $this->determine_lang();
-		}
-
-		$this->load_lang($lang);
-
-		return $this->languages[$lang]['charset'] ?? '';
+		return 'utf-8';
 	}
 
 	// shortcut for getting 'dir' for not loaded language
@@ -2449,12 +2443,10 @@ class Wacko
 					$this->db->site_name . "\n" .
 					$this->db->base_url;
 
-		$charset	= $this->get_charset($user['user_lang']);
-
 		$this->set_language($save, true);
 
 		$email = new Email($this);
-		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset, $xtra_headers);
+		$email->send_mail($email_to, $name_to, $subject, $body, null, $xtra_headers);
 	}
 
 	function notify_approved_account($user): void
@@ -5271,9 +5263,10 @@ class Wacko
 		 * -----------------
 		 * ...
 		 */
+		// h2 - h6, syntax accepts also only two == closing signs
 		// adds dummy \n before $body for regex to ensure section 0 before the first heading, strips it afterwards;
 		// \n? would break matches with the delimiter inside the text itself
-		$_body = preg_split("/\n[ \t]*(={2,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
+		$_body = preg_split("/\n[ \t]*(={3,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
 
 		#Ut::debug_print_r($_body);
 		$a = 0;	// value [0|1|2]
@@ -7133,7 +7126,7 @@ class Wacko
 			$this->http->ensure_tls($this->href($method, $tag));
 		}
 
-		// clean _POST if no csrf token
+		// clean _POST without csrf token
 		$this->validate_post_token($tag);
 
 		$user	= [];
@@ -8362,7 +8355,7 @@ class Wacko
 				if (   !preg_match('/\p{N}+/',					$pwd)
 					|| !preg_match('/\p{Lu}+/u',				$pwd)
 					|| !preg_match('/\p{Ll}+/u',				$pwd)
-					|| !preg_match('/[\p{Z}|\p{S}|\p{P}]+/',	$pwd))
+					|| !preg_match('/[\p{Z}\p{S}\p{P}]+/',		$pwd))
 				{
 					++$error;
 				}

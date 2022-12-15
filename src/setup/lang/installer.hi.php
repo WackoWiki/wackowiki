@@ -4,7 +4,6 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'		=> 'utf-8',
 'LangISO'		=> 'hi',
 'LangLocale'	=> 'hi_IN',
 'LangName'		=> 'हिन्दी',
