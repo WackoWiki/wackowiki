@@ -8,12 +8,12 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
-	private array $acl				= [];
-	private array $acl_cache		= [];
-	private array $file_cache		= [];
-	private array $page_cache		= [];
-	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
-	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
+	private $acl					= [];
+	private $acl_cache				= [];
+	private $file_cache				= [];
+	private $page_cache				= [];
+	private $format_safe			= true;		// for htmlspecialchars() in pre_link
+	private $search_engines			= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
 	public $charset;
 	public $config;								// @deprecated, but will live for a looong time
@@ -26,26 +26,26 @@ class Wacko
 	public $tag;
 	public $module;
 	public $method					= '';
-	public bool $forum				= false;
-	public bool $canonical			= false;
-	public bool $static_feed		= false;	// disables section edit link in post_wacko
+	public $forum					= false;
+	public $canonical				= false;
+	public $static_feed				= false;	// disables section edit link in post_wacko
 	public $categories;
 	public $watch					= [];
 	public $notify_lang				= null;
-	public bool $is_watched			= false;
-	public bool $hide_revisions		= false;
-	public array $context			= [];		// page context, used for correct processing of inclusions
+	public $is_watched				= false;
+	public $hide_revisions			= false;
+	public $context					= [];		// page context, used for correct processing of inclusions
 	public $current_context			= 0;		// current context level
 	public $header_count			= 0;
 	public $section_count			= 0;
-	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
-	public array $first_inclusion	= [];		// for backlinks
-	public array $toc_context		= [];
+	public $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
+	public $first_inclusion			= [];		// for backlinks
+	public $toc_context				= [];
 
-	public array $category_cache	= [];
-	public array $page_id_cache		= [];
-	public array $page_tag_cache	= [];
-	public array $wanted_cache		= [];
+	public $category_cache			= [];
+	public $page_id_cache			= [];
+	public $page_tag_cache			= [];
+	public $wanted_cache			= [];
 
 	public $lang					= null;
 	public $languages				= null;
@@ -55,10 +55,10 @@ class Wacko
 	public $numerate_links			= null;
 	public $post_wacko_action		= null;
 	public $page_lang				= null;
-	public array $html_addition			= [];
-	public bool $hide_article_header	= false;
-	public bool $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
-	public array $paragrafica_styles	= [
+	public $html_addition			= [];
+	public $hide_article_header		= false;
+	public $no_way_back				= false;	// set to true to prevent saving page as the goback-after-login
+	public $paragrafica_styles		= [
 		'before'	=> [
 						'_before'	=> '',
 						'_after'	=> '',
@@ -80,7 +80,7 @@ class Wacko
 						'before'	=> '',
 						'after'		=> ''],
 	];
-	public array $paragrafica_patches = [
+	public $paragrafica_patches		= [
 		'before'	=> ['before'],
 		'after'		=> ['after'],
 		'right'		=> ['_before'],

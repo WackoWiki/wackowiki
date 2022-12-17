@@ -14,24 +14,24 @@ class WackoFormatter
 	public $old_indent_level	= 0;
 	public $indent_closers		= [];
 	public $tdold_indent_level	= 0;
-	public array $auto_fn			= [];
-	public array $tdindent_closers	= [];
+	public $auto_fn			= [];
+	public $tdindent_closers	= [];
 	public $br					= 1;
 	public $intable			= 0;
 	public $intable_br			= 0;
 	public $cols				= 0;
-	public string $LONG_REGEX;
-	public string $MIDDLE_REGEX;
-	public string $PRE_REGEX;
+	public $LONG_REGEX;
+	public $MIDDLE_REGEX;
+	public $PRE_REGEX;
 	private $tdold_indent_type;
 	private $old_indent_type;
-	public array $colors			= [
+	public $colors			= [
 		'blue',
 		'green',
 		'red',
 		'yellow',
 	];
-	public array $x11_colors		= [
+	public $x11_colors		= [
 		'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque',
 		'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue',
 		'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan',

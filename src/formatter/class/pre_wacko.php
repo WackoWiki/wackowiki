@@ -7,7 +7,7 @@
 class PreFormatter
 {
 	public $object;
-	public string $PRE_REGEX;
+	public $PRE_REGEX;
 
 	function __construct(&$object)
 	{
