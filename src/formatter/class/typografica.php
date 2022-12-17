@@ -225,7 +225,7 @@ class Typografica
 			$data = preg_replace("/([\s\"][~\d’'\p{L}\-:\/\.]+)'([~єЄіІїЇаАеЕиИоОуУюЮяЯ][~\d’'\p{L}\-:\/\.]+[\s\.,:;\)<=\"])/ui", "\\1’\\2", $data );
 		}
 
-		// 1. English quotes (\p{Latin} only)
+		// 1. English quotes: (\p{Latin} and English only)
 		if ($this->settings['quotes'] && $this->options['lang'] == 'en')
 		{
 			$data	= str_replace('""',  '&quot;&quot;',  $data);
@@ -240,7 +240,7 @@ class Typografica
 			}
 		}
 
-		// 2. angle quotes (TODO: \p{Cyrillic} only?)
+		// 2. angle quotes: (TODO: \p{Cyrillic} and \p{Latin} only?)
 		if ($this->settings['laquo'])
 		{
 			$data	= str_replace('""', '&quot;&quot;', $data);
