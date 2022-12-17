@@ -561,7 +561,6 @@ class Wacko
 	 *
 	 * @return void
 	 */
-	// TODO: refactor / normalize # better load_message_set() ?
 	function load_translation($lang, $update = false): void
 	{
 		if ($lang && (!isset($this->translations[$lang]) || $update))
@@ -670,7 +669,6 @@ class Wacko
 			$wacko_language['ALPHA']		= '[\p{L}\_\-\/]';
 			$wacko_language['ALPHANUM']		= '[\p{L}\p{M}\p{Nd}\_\-\/]';
 			$wacko_language['ALPHANUM_P']	= '\p{L}\p{M}\p{Nd}\_\-\/';
-			#$wacko_language['ALPHANUM_Q']	= '\p{L}\p{M}*+\p{Nd}\_\-\/';	// Grapheme Quantifier
 
 			$this->languages[$lang]			= $wacko_language;
 		}
@@ -7892,7 +7890,6 @@ class Wacko
 	}
 
 	// removes all associated page links
-	// TODO: use page_id reference for single delete (?)
 	function remove_links($tag, $cluster = false)
 	{
 		if (!$tag)
@@ -8680,7 +8677,7 @@ class Wacko
 		// check event level: do we have to log it?
 		if (    (int) $this->db->log_level === 0
 			|| ((int) $this->db->log_level !== 7
-				&& $level > (int) $this->db->log_level))
+					&& $level > (int) $this->db->log_level))
 		{
 			return true;
 		}

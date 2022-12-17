@@ -145,7 +145,6 @@ if ($registered
 			$tpl->tree		= $this->action('tree', ['depth' => 3]);
 
 			$tpl->leave();	// f_
-
 		}
 	}
 }

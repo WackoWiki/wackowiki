@@ -40,7 +40,10 @@ if ($this->has_access('read'))
 	{
 		$this->http->status(404);
 
-		$message = $this->_t('DoesNotExists') . ' ' . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', true)) : '');
+		$message = $this->_t('DoesNotExists') . ' ' .
+			($this->has_access('create')
+				?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', true))
+				: '');
 		$tpl->n_message = $this->show_message($message, 'notice', false);
 	}
 	else
@@ -75,7 +78,9 @@ if ($this->has_access('read'))
 			{
 				// TODO: it never reaches this point, currently only admins can see pages/comments marked as deleted
 				// TODO: add description: to restore the page you ...
-				$message = $this->page['comment_on_id'] ? $this->_t('CommentDeletedInfo') : $this->_t('PageDeletedInfo');
+				$message = $this->page['comment_on_id']
+					? $this->_t('CommentDeletedInfo')
+					: $this->_t('PageDeletedInfo');
 				$message .= '<br>';
 				$tpl->n_message = $this->show_message($message, 'warning', false);
 
