@@ -121,7 +121,7 @@
 			[= n _ =
 				<tr class="lined">
 					<td>
-						<input type="checkbox" name="[ ' pageid ' ]" value="id" [ ' set | checkbox ' ]>
+						<input type="checkbox" name="id[[ ' n ' ]]" value="[ ' pageid ' ]" [ ' set | checkbox ' ]>
 					</td>
 					<td>
 						[= locked _ =
@@ -319,7 +319,7 @@
 			[= n _ =
 				<tr class="lined">
 					<td>
-						<input type="checkbox" name="[ ' comment.page_id ' ]" value="id" [ ' set | checkbox ' ]>
+						<input type="checkbox" name="id[[ ' n ' ]]" value="[ ' comment.page_id ' ]" [ ' set | checkbox ' ]>
 					</td>
 					<td>
 						<strong>[ ' clink ' ]</strong>

@@ -73,10 +73,6 @@ function admin_db_restore(&$engine, $module, $tables, $directories)
 						<table class="restore-meta">
 							<tr>
 								<td class="label">' .
-								#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . (in_array($log['pack'], $set) ? ' checked' : '') . '>
-								#</td>' .
-								#'<td>' .
-								#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 								'</td>
 								<th class="t-left nowrap">' .
 									$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
