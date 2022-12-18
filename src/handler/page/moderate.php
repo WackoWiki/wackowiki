@@ -334,12 +334,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$forum_cluster = false;
 	}
 
-	// simple and rude input sanitization
-	foreach ($_POST as $key => $val)
-	{
-		$_POST[$key] = Ut::html($val);
-	}
-
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = [];
 
@@ -360,9 +354,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	}
 
 	// keep currently selected list items
-	foreach ($_POST as $val => $key)
+	foreach ($_POST['id'] as $key => $val)
 	{
-		if ($key == 'id' && !in_array($val, $set) && !empty($val))
+		if (!in_array($val, $set) && !empty($val))
 		{
 			$set[] = (int) $val;
 		}
@@ -375,9 +369,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	{
 		$set = [];
 
-		foreach ($_POST as $val => $key)
+		foreach ($_POST['id'] as $key => $val)
 		{
-			if ($key == 'id'  && !empty($val))
+			if (!empty($val))
 			{
 				$set[] = (int) $val;
 			}
@@ -739,10 +733,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$tpl->enter('n_');
 
 		// ...and topics list itself
-		foreach ($topics as $topic)
+		foreach ($topics as $n => $topic)
 		{
 			if ($this->has_access('read', $topic['page_id']))
 			{
+				$tpl->n			= $n;
 				$tpl->pageid	= $topic['page_id'];
 				$tpl->created	= $topic['created'];
 				$tpl->comments	= $topic['comments'];
@@ -1301,12 +1296,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->enter('n_');
 
 			// ...and comments list
-			foreach ($comments as $comment)
+			foreach ($comments as $n => $comment)
 			{
 				$desc = $this->format($comment['body'], 'cleanwacko');
 				$desc = (mb_strlen($desc) > 300 ? mb_substr($desc, 0, 300) . '[...]' : $desc);
 				$desc = Ut::html($desc);
 
+				$tpl->n			= $n;
 				$tpl->comment	= $comment;
 				$tpl->desc		= $desc;
 				$tpl->ip		= $this->is_admin() ? $comment['ip'] : '';

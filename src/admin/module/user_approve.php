@@ -33,13 +33,6 @@ function admin_user_approve(&$engine, $module)
 	<br>
 <?php
 
-
-	// simple and rude input sanitization
-	foreach ($_POST as $key => $val)
-	{
-		$_POST[$key] = Ut::html($val);
-	}
-
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = [];
 
@@ -60,9 +53,9 @@ function admin_user_approve(&$engine, $module)
 	}
 
 	// keep currently selected list items
-	foreach ($_POST as $val => $key)
+	foreach ($_POST['id'] as $key => $val)
 	{
-		if ($key == 'id' && !in_array($val, $set) && !empty($val))
+		if (!in_array($val, $set) && !empty($val))
 		{
 			$set[] = $val;
 		}
@@ -75,9 +68,9 @@ function admin_user_approve(&$engine, $module)
 	{
 		$set = [];
 
-		foreach ($_POST as $val => $key)
+		foreach ($_POST['id'] as $key => $val)
 		{
-			if ($key == 'id' && !empty($val))
+			if (!empty($val))
 			{
 				$set[] = $val;
 			}
@@ -369,11 +362,11 @@ function admin_user_approve(&$engine, $module)
 			'<tr>' . "\n" .
 				#'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
 				#'<td class="label">' .
-				#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
+				#	'<input type="checkbox" name="id" value="' . $row['user_id'] . '" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
 				#'</td>' .
 				#'<td>' .
 				#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
-				#'</td>' . <a href="' . $engine->href() . '&amp;mode=db_restore">Restore database</a>
+				#'</td>' .
 				'<td>' . $row['user_id'] . '</td>' .
 				'<td><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
 				'<td>' . $row['email'] . '</td>' .

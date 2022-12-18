@@ -73,10 +73,6 @@ function admin_db_restore(&$engine, $module, $tables, $directories)
 						<table class="restore-meta">
 							<tr>
 								<td class="label">' .
-								#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . (in_array($log['pack'], $set) ? ' checked' : '') . '>
-								#</td>' .
-								#'<td>' .
-								#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 								'</td>
 								<th class="t-left nowrap">' .
 									date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
@@ -253,9 +249,9 @@ function admin_db_restore(&$engine, $module, $tables, $directories)
 				$list = explode(';', $log[4]);
 
 				// sql mode
-				if		($log[2] == false)						$mode = 'INSERT';
-				else if	($log[2] == true && $ikeys === true)	$mode = 'INSERT IGNORE';
-				else if	($log[2] == true && $ikeys == false)	$mode = 'REPLACE';
+				if		(!$log[2])			$mode = 'INSERT';
+				else if	($ikeys === true)	$mode = 'INSERT IGNORE';
+				else if	($ikeys == false)	$mode = 'REPLACE';
 
 				$results .= '<strong>' . $engine->_t('ProcessTablesDump') . "\n" .
 					'(' . $engine->_t('Instruction') . ' ' . $mode . '):</strong>' . "\n\n";

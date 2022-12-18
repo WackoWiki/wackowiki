@@ -32,12 +32,6 @@ function admin_user_users(&$engine, $module)
 	<br>
 <?php
 
-	// simple and rude input sanitization
-	foreach ($_POST as $key => $val)
-	{
-		$_POST[$key] = Ut::html($val);
-	}
-
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = [];
 
@@ -58,9 +52,9 @@ function admin_user_users(&$engine, $module)
 	}
 
 	// keep currently selected list items
-	foreach ($_POST as $val => $key)
+	foreach ($_POST['id'] as $key => $val)
 	{
-		if ($key == 'id' && !in_array($val, $set) && !empty($val))
+		if (!in_array($val, $set) && !empty($val))
 		{
 			$set[] = $val;
 		}
@@ -73,9 +67,9 @@ function admin_user_users(&$engine, $module)
 	{
 		$set = [];
 
-		foreach ($_POST as $val => $key)
+		foreach ($_POST['id'] as $key => $val)
 		{
-			if ($key == 'id' && !empty($val))
+			if (!empty($val))
 			{
 				$set[] = $val;
 			}
@@ -924,11 +918,11 @@ function admin_user_users(&$engine, $module)
 <?php
 		if ($users)
 		{
-			foreach ($users as $row)
+			foreach ($users as $n => $row)
 			{
 				echo '<tr>
 						<td class="label">
-							<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . (in_array($row['user_id'], $set) ? ' checked' : '') . '/>
+							<input type="checkbox" name="id[' . $n . ']" value="' . $row['user_id'] . '" ' . (in_array($row['user_id'], $set) ? ' checked' : '') . '/>
 						</td>
 						<td>
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '">
