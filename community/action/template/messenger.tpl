@@ -37,6 +37,8 @@
 		[ ' message ' ]
 	=]
 	[= b _ =
+		<form action="[ ' href: ' ]" method="post" name="folder_inbox">
+			[ ' csrf: folder_inbox ' ]
 		<table class="usertable">
 			<tr>
 				<td colspan="5" style="border: 0;">
@@ -44,19 +46,19 @@
 				</td>
 			</tr>
 			<tr>
-				<th width="400">[ ' _t: Subject ' ]</th>
-				<th width="100">[ ' _t: Sender ' ]</th>
+				<th width="10"></th>
+				<th width="600">[ ' _t: Subject ' ]</th>
+				<th width="140">[ ' _t: Sender ' ]</th>
 				<th width="100">[ ' _t: Date ' ]</th>
-				<th width="250">[ ' _t: MoveToFolder ' ]</th>
-				<th width="80">[ ' _t: Delete ' ]</th>
+				<th width="80">[ ' // _t: Delete ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
+					<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
 					<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
 					<td>[ ' username ' ]</td>
 					<td>[ ' time | time_formatted ' ]</td>
-					<td>[ '' d selectfolder '' ]</td>
-					<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
+					<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
 				</tr>
 			=]
 			[= none _ =
@@ -64,7 +66,11 @@
 					<td colspan="5"><br>[ ' _t: NoMessagesInbox ' ]<br><br></td>
 				</tr>
 			=]
+			<tr>
+				<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
+			</tr>
 		</table>
+		</form>
 	=]
 	[= c _ =
 		<br><strong>[ ' // _t: ComposeMessage ' ]</strong>
@@ -222,6 +228,8 @@
 		[ ' // <br><br>Löscht der Empfänger eine Nachricht, wird sie auch hier automatisch entfernt! ' ]
 	=]
 	[= h _ =
+		<form action="[ ' href: ' ]" method="post" name="selected_folder">
+			[ ' csrf: selected_folder ' ]
 		<table class="usertable">
 			<tr>
 				<td colspan="5" style="border: 0;">
@@ -229,22 +237,26 @@
 				</td>
 			</tr>
 			<tr>
-				<th width="400">[ ' _t: Subject ' ]:</th>
-				<th width="100">[ ' _t: Sender ' ]</th>
+				<th width="10"></th>
+				<th width="600">[ ' _t: Subject ' ]</th>
+				<th width="150">[ ' _t: Sender ' ]</th>
 				<th width="100">[ ' _t: Date ' ]</th>
-				<th width="250">[ ' _t: MoveToFolder ' ]</th>
-				<th width="80">[ ' _t: Delete ' ]</th>
+				<th width="80">[ ' // _t: Delete ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
+					<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
 					<td>[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
 					<td>[ ' username ' ]</td>
 					<td>[ ' time | time_formatted ' ]</td>
-					<td>[ '' d selectfolder '' ]</td>
-					<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
+					<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
 				</tr>
 			=]
+			<tr>
+				<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
+			</tr>
 		</table>
+		</form>
 		[ ' nomessages ' ]
 	=]
 	[= i _ =
@@ -490,3 +502,6 @@
 	</select>
 	<button type="submit">[ ' _t: Move ' ]</button>
 </form>
+
+[= icon =]
+<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ]"></a>

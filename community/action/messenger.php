@@ -75,7 +75,6 @@ $select_user = function($user_id, $to) use ($prefix, &$tpl)
 	}
 };
 
-// TODO: load only once, same for every record
 $select_folder = function($user_id, $folder = '') use ($prefix, &$tpl)
 {
 	$result = $this->db->load_all(
@@ -190,14 +189,34 @@ if ($user_id = $this->get_user_id())
 
 	$tpl->leave(); // x_
 
-	// [A] code for moving messages to folders
-	if ($move2folder)
+	// IDs PROCESSING (COMMON PROCEDURES)
+	$set = [];
+
+	if (isset($_POST['id']))
 	{
-		$rs = $this->db->sql_query(
+		// keep currently selected list items
+		foreach ($_POST['id'] as $key => $val)
+		{
+			if (!in_array($val, $set) && !empty($val))
+			{
+				$set[] = (int) $val;
+			}
+		}
+
+		unset($key, $val);
+	}
+
+	// [A] code for moving messages to folders
+	if ($move2folder && $set)
+	{
+		foreach ($set as $msg_id)
+		{
+			$rs = $this->db->sql_query(
 			"UPDATE {$prefix}messenger SET
 				folder = " . $this->db->q($move2folder) . "
-			WHERE message_id = " . (int) $message_id . "
+			WHERE message_id = " . (int) $msg_id . "
 				AND user_to_id = " . (int) $user_id);
+		}
 
 		$tpl->a_message = $rs
 			? '<br>' . Ut::perc_replace($this->_t('MessageMoved'), '<b>' . Ut::html($move2folder) . '</b>')
@@ -237,7 +256,7 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('n_');
 
-		foreach ($result as $row )
+		foreach ($result as $n => $row)
 		{
 			// sets mark for status of message (important/read/answered)
 			if ($row['status'] == 1)
@@ -245,30 +264,35 @@ if ($user_id = $this->get_user_id())
 				$tpl->status = '<span class="cite" title="' . $this->_t('MessageNotRead') . '">*</span>';
 			}
 
-			if ($row['urgent'] == 1)
+			if ($row['urgent'])
 			{
 				$tpl->urgent = '<span class="cite" title="' . $this->_t('UrgentMessage') . '"><strong>!</strong></span>';
 			}
 
-			if ($row['repliedto'] == 1)
+			if ($row['repliedto'])
 			{
 				$tpl->replied = '<span title="' . $this->_t('MessageReplied') . '" style="color: grey;"> <strong>' . $this->_t('RepliedTo') . '</strong></span>';
 			}
 
+			$tpl->n				= $n;
 			$tpl->time			= $row['datesent'];
+			$tpl->msgid			= $row['message_id'];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id']]);
-			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
-			// drop down box to move to a new folder
-			$tpl->enter('d_');
-			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id']]);
-			$select_folder($user_id);
-			$tpl->leave(); // d_
+			$tpl->i_info		= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
+			$tpl->i_title		= $this->_t('Delete');
+			$tpl->i_class		= 'delete';
 		}
 
 		$tpl->leave(); // n_
+
+		// drop down box to move to a new folder
+		$tpl->enter('d_');
+		$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id']]);
+		$select_folder($user_id);
+		$tpl->leave(); // d_
 
 		if ($count['n'] == 0)
 		{
@@ -284,7 +308,6 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->hrefform		= $this->href('', '', ['action' => 'store']);
 		$tpl->hrefusers		= $this->href('', '', ['action' => 'users']);
-
 		$tpl->textarea		= true;
 
 		$select_user($user_id, $to);
@@ -499,37 +522,42 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('n_');
 
-		foreach ($result as $row)
+		foreach ($result as $n => $row)
 		{
 			if ($row['status'] == 1)
 			{
 				$tpl->status = '<span class="cite" title="' . $this->_t('MessageNotRead') . '">*</span>';
 			}
 
-			if ($row['urgent'] == 1)
+			if ($row['urgent'])
 			{
 				$tpl->urgent = '<span class="cite" title="' . $this->_t('UrgentMessage') . '"><strong>!</strong></span>';
 			}
 
-			if ($row['repliedto'] == 1)
+			if ($row['repliedto'])
 			{
 				$tpl->replied = '<span class="cl-green" title="' . $this->_t('MessageReplied') . '"><strong>↶</strong></span>';
 			}
 
+			$tpl->n				= $n;
 			$tpl->time			= $row['datesent'];
+			$tpl->msgid			= $row['message_id'];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->hrefview		= $this->href('', '', ['action' => 'view_inbox', 'message_id' => $row['message_id'], 'folder' => $msg_folder]);
-			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
-			// drop down box to move to a new folder
-			$tpl->enter('d_');
-			$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $msg_folder]);
-			$select_folder($user_id);
-			$tpl->leave(); // d_
+			$tpl->i_info		= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
+			$tpl->i_title		= $this->_t('Delete');
+			$tpl->i_class		= 'delete';
 		}
 
 		$tpl->leave(); // n_
+
+		// drop down box to move to a new folder
+		$tpl->enter('d_');
+		$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $msg_folder]);
+		$select_folder($user_id);
+		$tpl->leave(); // d_
 
 		if ($count['n'] == 0)
 		{
@@ -548,7 +576,7 @@ if ($user_id = $this->get_user_id())
 			WHERE m.user_to_id = " . (int) $user_id . "
 				AND m.message_id = " . (int) $message_id);
 
-		if ($row['repliedto'] == 1)
+		if ($row['repliedto'])
 		{
 			$tpl->replied = '<span title="' . $this->_t('MessageReplied') . '"> <small>' . $this->_t('RepliedTo') . '</small></span>';
 		}
@@ -562,7 +590,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->message		= strip_tags($row['message']);
 
-			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
+			#$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
 			$tpl->hrefreply		= $this->href('', '', ['action' => 'reply', 'to' => $row['user_from_id'], 'message_id' => $row['message_id']]);
 			$tpl->hrefforward	= $this->href('', '', ['action' => 'forward', 'message_id' => $row['message_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
@@ -580,7 +608,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // i_
 	}
 
-	// [J] added filter for viewing "folder sorted" messages
+	// [J] viewing folder sent messages
 	else if ($action == 'view_sent')
 	{
 		$row = $this->db->load_single(
@@ -679,8 +707,8 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('l_');
 
-		$tpl->hrefform			= $this->href('', '', ['action' => 'contacts']);
-		$tpl->hrefusers			= $this->href('', '', ['action' => 'users']);
+		$tpl->hrefform		= $this->href('', '', ['action' => 'contacts']);
+		$tpl->hrefusers		= $this->href('', '', ['action' => 'users']);
 
 		foreach ($contacts as $contact)
 		{
