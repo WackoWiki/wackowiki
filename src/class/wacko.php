@@ -2410,7 +2410,7 @@ class Wacko
 		if (!$this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 		{
 			// profile title = user_name
-			$this->save_page($tag, $user_page_template, $user_name, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
+			$this->save_page($tag, $user_page_template, $user_name, $change_summary, 0, 0, 0, 0, $user_lang, $mute, $user_name, true);
 		}
 	}
 
