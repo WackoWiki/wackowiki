@@ -411,7 +411,7 @@ class Ut
 			fclose($fp);
 		}
 
-		$sha .= microtime(1);
+		$sha .= microtime(true);
 
 		$rnd = '';
 		for ($i = 0; $i < $length; $i++)

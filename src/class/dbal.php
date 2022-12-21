@@ -80,7 +80,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 		if ($this->debug >= 2)
 		{
-			$start = microtime(1);
+			$start = microtime(true);
 		}
 
 		$result = $this->db->query($query);
@@ -89,7 +89,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 		if ($this->debug >= 2)
 		{
-			$time = microtime(1) - $start;
+			$time = microtime(true) - $start;
 			$this->query_time += $time;
 
 			if ($this->debug >= 3)
