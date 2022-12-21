@@ -416,7 +416,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $page_id)
 				{
-					$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 					$moderate_delete_page($page['tag']);
 					$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', SYSTEM_LANG), $page['tag'], $page['user_id']));
 				}
@@ -555,7 +555,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $page_id)
 			{
-				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 				$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($page_id, 'comment', '!*');
@@ -573,7 +573,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $page_id)
 			{
-				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 				$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 				$this->save_acl($page_id, 'comment', $this->db->default_comment_acl);
 			}
@@ -936,7 +936,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					foreach ($set as $page_id)
 					{
-						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+						$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 						$moderate_delete_page($page['tag']);
 						$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
 								$this->get_page_tag($page['comment_on_id']) . ' ' . $this->get_page_title('', $page['comment_on_id']),

@@ -66,7 +66,7 @@ if (@$_POST['_action'] === 'clone_page')
 			for ($pos = 0, $i = $slashes; ($pos = mb_strpos($src, '/', $pos)) !== false && $i--; ++$pos);
 			$dst = $to . ($pos? mb_substr($src, $pos) : '');
 
-			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
+			if ($this->load_page($dst, 0, null, LOAD_CACHE, LOAD_META))
 			{
 				$log->err_a_error = Ut::perc_replace($this->_t('AlreadyExists'), '<strong>' . $this->compose_link_to_page($dst, '', '') . '</strong>');
 			}

@@ -39,7 +39,7 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 		$this->set_message(Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>'));
 	}
 	// check target page existence
-	else if ($page = $this->load_page($prefix . $new_tag, 0, '', LOAD_CACHE, LOAD_META))
+	else if ($page = $this->load_page($prefix . $new_tag, 0, null, LOAD_CACHE, LOAD_META))
 	{
 		$message = Ut::perc_replace($this->_t('PageAlreadyExists'), '<code>' . $page['tag'] . '</code>') . ' ';
 

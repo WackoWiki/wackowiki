@@ -51,7 +51,7 @@ if ($this->has_access('read'))
 		if ($this->page['latest'] == 0)
 		{
 			// load also deleted pages
-			$latest = $this->load_page($this->tag, '', '', '', '', true);
+			$latest = $this->load_page($this->tag, null, null, null, null, true);
 		}
 
 		if ($this->page['deleted'] || !empty($latest['deleted']))

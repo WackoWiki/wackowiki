@@ -22,7 +22,7 @@ if ($this->has_access('read'))
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
-			$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
+			$comment_on = $this->load_page('', $this->page['comment_on_id'], null, null, LOAD_META);
 			$message = $this->msg_is_comment_on(
 				$comment_on['tag'],
 				$comment_on['title'],
