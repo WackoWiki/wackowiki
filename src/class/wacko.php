@@ -1015,7 +1015,7 @@ class Wacko
 			);
 
 		}
-		else if ($this->_load_page($tag, $page_id, '', 1, 1) == '')
+		else if ($this->_load_page($tag, $page_id, null, LOAD_CACHE, LOAD_META) == '')
 		{
 			($page_id
 				? $this->wanted_cache['page_id'][$page_id] = 1
@@ -1850,7 +1850,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!($old_page = $this->load_page('', $page_id, '', '', '', 1)))
+			if (!($old_page = $this->load_page('', $page_id, null, null, null, 1)))
 			{
 				if (empty($lang))
 				{
@@ -2365,10 +2365,10 @@ class Wacko
 		$change_summary		= $this->_t('NewUserAccount');
 
 		// add user page
-		if (!$this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
+		if (!$this->load_page($tag, 0, null, LOAD_CACHE, LOAD_META))
 		{
 			// profile title = user_name
-			$this->save_page($tag, $user_page_template, $user_name, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
+			$this->save_page($tag, $user_page_template, $user_name, $change_summary, 0, 0, 0, 0, $user_lang, $mute, $user_name, true);
 		}
 	}
 
@@ -3975,7 +3975,7 @@ class Wacko
 				$method		= $handler;
 			}
 
-			$this_page		= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
+			$this_page		= $this->load_page($unwtag, 0, null, LOAD_CACHE, LOAD_META);
 
 			if (mb_substr($tag, 0, 2) == '!/')
 			{
@@ -4578,7 +4578,7 @@ class Wacko
 				return Ut::perc_replace($this->_t('AlreadyNamed'), '<strong>' . $this->compose_link_to_page($tag, '', '') . '</strong>');
 			}
 
-			if ($this->tag != $tag && $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
+			if ($this->tag != $tag && $this->load_page($tag, 0, null, LOAD_CACHE, LOAD_META))
 			{
 				return Ut::perc_replace($this->_t('AlreadyExists'), '<strong>' . $this->compose_link_to_page($tag, '', '') . '</strong>');
 			}
@@ -5774,7 +5774,7 @@ class Wacko
 		$exec_limit = ini_get('max_execution_time');
 		set_time_limit(0);
 
-		while (($sleep = round($login_delay - (microtime(1) - WACKO_STARTED))) > 0)
+		while (($sleep = round($login_delay - (microtime(true) - WACKO_STARTED))) > 0)
 		{
 			// Stall next login for a bit.
 			// This will considerably slow down brute force attackers.
@@ -6314,7 +6314,7 @@ class Wacko
 	 *
 	 * @return bool
 	 */
-	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1, $new_tag = ''): bool
+	function has_access($privilege, $page_id = null, $user_name = '', $use_parent = 1, $new_tag = ''): bool
 	{
 		if (!$user_name)
 		{

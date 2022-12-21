@@ -16,7 +16,7 @@ $permanent = $temporary ? 0 : 1;
 
 if ($page = $this->unwrap_link($to))
 {
-	if ($this->load_page($page, 0, '', LOAD_CACHE, LOAD_META))
+	if ($this->load_page($page, 0, null, LOAD_CACHE, LOAD_META))
 	{
 		if (($user = $this->get_user()) && ($user['dont_redirect'] || @$_REQUEST['redirect'] == 'no'))
 		{

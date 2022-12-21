@@ -83,7 +83,7 @@ $moderate_rename_topic = function($old_tag, $new_tag, $title = '')
 	if ($title != '')
 	{
 		// resave modified page
-		$this->save_page($new_tag, $page['body'], $title, '', '', '', '', '', '', true, false);
+		$this->save_page($new_tag, $page['body'], $title, '', null, null, null, null, '', true, false);
 	}
 
 	// restore forum context
@@ -135,7 +135,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 				// resave topic body as comment
 				$page = $this->load_page($topic);
 
-				$this->save_page('Comment' . $num, $page['body'], $page['title'], '', '', '', $base_id, '', '', true);
+				$this->save_page('Comment' . $num, $page['body'], $page['title'], '', null, null, $base_id, null, '', true);
 
 				// restore creation date
 				$this->db->sql_query(
@@ -223,7 +223,7 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 
 	// TODO: pass user, else save_page might fail due missing write privilege
 	// resave modified body
-	$this->save_page($new_tag, $page['body'], $title, '', '', '', 0, '', '', true);
+	$this->save_page($new_tag, $page['body'], $title, '', null, null, 0, null, '', true);
 
 	// set page context back
 	$this->page	= $old_page;
@@ -416,7 +416,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $page_id)
 				{
-					$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 					$moderate_delete_page($page['tag']);
 					$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', SYSTEM_LANG), $page['tag'], $page['user_id']));
 				}
@@ -555,7 +555,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $page_id)
 			{
-				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 				$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($page_id, 'comment', '!*');
@@ -573,7 +573,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $page_id)
 			{
-				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 				$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 				$this->save_acl($page_id, 'comment', $this->db->default_comment_acl);
 			}
@@ -936,7 +936,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					foreach ($set as $page_id)
 					{
-						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
+						$page = $this->load_page('', $page_id, null, LOAD_NOCACHE, LOAD_META);
 						$moderate_delete_page($page['tag']);
 						$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
 								$this->get_page_tag($page['comment_on_id']) . ' ' . $this->get_page_title('', $page['comment_on_id']),

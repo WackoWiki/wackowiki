@@ -40,7 +40,7 @@ if ($this->has_access('read')
 	// is comment?
 	if ($is_comment)
 	{
-		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
+		$comment_on = $this->load_page('', $this->page['comment_on_id'], null, null, LOAD_META);
 
 		// formatter needs these values from parent page
 		$this->db->allow_rawhtml	= $comment_on['allow_rawhtml'];

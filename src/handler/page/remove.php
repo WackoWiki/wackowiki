@@ -45,7 +45,7 @@ if ($this->is_admin()
 	if ($this->page['comment_on_id'])
 	{
 		$comment_on_id	= $this->page['comment_on_id'];
-		$comment_on		= $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
+		$comment_on		= $this->load_page('', $this->page['comment_on_id'], null, null, LOAD_META);
 	}
 
 	if ($action === 'remove_revision')

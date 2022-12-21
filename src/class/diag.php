@@ -24,7 +24,7 @@ class Diag
 		{
 			if (($config['debug_admin_only'] && $engine->is_admin()) || !$config['debug_admin_only'])
 			{
-				$overall_time = microtime(1) - WACKO_STARTED;
+				$overall_time = microtime(true) - WACKO_STARTED;
 
 				echo '<div id="debug">' .
 					 '<p class="debug">Program execution statistics</p>' . "\n<ul>\n";
@@ -242,7 +242,7 @@ class Diag
 			}
 
 			static::$log[] = [
-				microtime(1),
+				microtime(true),
 				$type,
 				implode(' ', $args),
 				$callee,
