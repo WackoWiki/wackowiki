@@ -6306,7 +6306,7 @@ class Wacko
 	 *
 	 * @return bool
 	 */
-	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1, $new_tag = ''): bool
+	function has_access($privilege, $page_id = null, $user_name = '', $use_parent = 1, $new_tag = ''): bool
 	{
 		if (!$user_name)
 		{

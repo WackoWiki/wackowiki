@@ -83,7 +83,7 @@ $moderate_rename_topic = function($old_tag, $new_tag, $title = '')
 	if ($title != '')
 	{
 		// resave modified page
-		$this->save_page($new_tag, $page['body'], $title, '', '', '', '', '', '', true, false);
+		$this->save_page($new_tag, $page['body'], $title, '', null, null, null, null, '', true, false);
 	}
 
 	// restore forum context
@@ -135,7 +135,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 				// resave topic body as comment
 				$page = $this->load_page($topic);
 
-				$this->save_page('Comment' . $num, $page['body'], $page['title'], '', '', '', $base_id, '', '', true);
+				$this->save_page('Comment' . $num, $page['body'], $page['title'], '', null, null, $base_id, null, '', true);
 
 				// restore creation date
 				$this->db->sql_query(
@@ -223,7 +223,7 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 
 	// TODO: pass user, else save_page might fail due missing write privilege
 	// resave modified body
-	$this->save_page($new_tag, $page['body'], $title, '', '', '', 0, '', '', true);
+	$this->save_page($new_tag, $page['body'], $title, '', null, null, 0, null, '', true);
 
 	// set page context back
 	$this->page	= $old_page;

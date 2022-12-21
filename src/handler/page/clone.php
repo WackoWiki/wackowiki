@@ -83,7 +83,7 @@ if (@$_POST['_action'] === 'clone_page')
 
 				continue;
 			}
-			else if (!$this->has_access('create', '', '', 1, $dst))
+			else if (!$this->has_access('create', null, '', 1, $dst))
 			{
 				$log->err_a_error = Ut::perc_replace($this->_t('CloneCannotCreate'), '<strong>' . $this->compose_link_to_page($dst, '', '') . '</strong>');
 			}
