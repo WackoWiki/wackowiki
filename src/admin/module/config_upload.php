@@ -97,7 +97,7 @@ function admin_config_upload(&$engine, $module)
 					<small><?php echo $engine->_t('UploadMaxFilesizeInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_max_size, false, true, true, false);?>">
+					<input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples((int) $engine->db->upload_max_size, false, true, true, false);?>">
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_max_size, false); ?>
 					<select name="upload_max_size_factor" id="upload_max_size_factor">
 						<option value="0" <?php echo ($x == 0 ? ' selected' : '');?> ><?php echo $engine->_t('BinaryPrefixShort')[0];?></option>
@@ -115,7 +115,7 @@ function admin_config_upload(&$engine, $module)
 					<small><?php echo $engine->_t('UploadQuotaInfo');?><strong> <?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota, false, true, true, false);?>">
+					<input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples((int) $engine->db->upload_quota, false, true, true, false);?>">
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota, false); ?>
 					<select name="upload_quota_factor" id="upload_quota_factor">
 						<option value="0" <?php echo ($x == 0 ? ' selected' : '');?> ><?php echo $engine->_t('BinaryPrefixShort')[0];?></option>
@@ -134,7 +134,7 @@ function admin_config_upload(&$engine, $module)
 					<small><?php echo $engine->_t('UploadQuotaUserInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota_per_user, false, true, true, false);?>">
+					<input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples((int) $engine->db->upload_quota_per_user, false, true, true, false);?>">
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota_per_user, false); ?>
 					<select name="upload_quota_per_user_factor" id="upload_quota_per_user_factor">
 						<option value="0" <?php echo ($x == 0 ? ' selected' : '');?> ><?php echo $engine->_t('BinaryPrefixShort')[0];?></option>
