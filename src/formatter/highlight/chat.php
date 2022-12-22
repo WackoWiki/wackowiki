@@ -2,7 +2,6 @@
 /*
 	Chat highlighter
 	Supports various date-username-message chat log formats
-	Installation: copy to /wacko/formatter/highlight/chat.php
 
 	Usage:
 
@@ -46,7 +45,6 @@ else if ($options['type'] == 'table')
 	$type = 't';
 }
 
-// HTML output:
 $tpl->enter($type . '_n_');
 
 foreach($matches as $log)
