@@ -45,7 +45,7 @@ class TemplatestEscaper
 
 	function escapeHtml($string)
 	{
-		return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE, $this->sc_encoding);
+		return htmlspecialchars((string) $string, ENT_QUOTES | ENT_SUBSTITUTE, $this->sc_encoding);
 	}
 
 	function escapeHtmlAttr($string)
@@ -109,7 +109,7 @@ class TemplatestEscaper
 				}
 
 				return sprintf('&#x%02X;', $ord);
-			}, $string);
+			}, (string) $string);
 
 		return $this->fromUtf8($result);
 	}
@@ -213,7 +213,7 @@ class TemplatestEscaper
 
 	protected function isUtf8($string)
 	{
-		return ($string === '' || preg_match('/^./su', $string));
+		return ($string === '' || preg_match('/^./su', (string) $string));
 	}
 
 	protected function convertEncoding($string, $to, $from)

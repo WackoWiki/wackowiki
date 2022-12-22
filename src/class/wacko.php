@@ -7502,7 +7502,7 @@ class Wacko
 			$style = $this->paragrafica_styles['before'];
 		}
 
-		$len	= strlen($this->post_wacko_maxp);
+		$len	= strlen((string) $this->post_wacko_maxp);
 		$link	= '<a href="#' . $matches[2] . '">' .
 			utf8_str_pad($this->post_wacko_toc_hash[$matches[2]][66], $len, '0', STR_PAD_LEFT) .
 			'</a>';

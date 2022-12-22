@@ -129,7 +129,7 @@ class UriRouter
 
 				foreach ($env['match'] as $var => $val)
 				{
-					if (preg_match('#\D#', $var))
+					if (preg_match('#\D#', (string) $var))
 					{
 						[$varname, $varidx] = $this->parse_var($var);
 						$env[$varname][$varidx] = $val;
@@ -156,7 +156,7 @@ class UriRouter
 					}
 
 					// substitute vars into value
-					if (str_contains($val, '$'))
+					if (str_contains((string) $val, '$'))
 					{
 						$val = preg_replace_callback('#@?(\$[a-j\d])|@?\$\{([\w&]+)\}|\$\$|\$\@#',
 							function ($x) use (&$env)

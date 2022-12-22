@@ -594,7 +594,7 @@ class Ut
 				if (is_array($ch)) $ch = $ch[0];
 				if (strlen($ch) == 1) return '%' . bin2hex($ch);
 			},
-			$text);
+			(string) $text);
 	}
 
 	// query uri part assignment encoder, strictly on rfc3986 3.4 charset, without = and & and + (possible space) and ' (possible quote:)

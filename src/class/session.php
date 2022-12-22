@@ -393,7 +393,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	private static function nonce_index($action, $code)
 	{
-		return (string) $action . '.' . substr(base64_encode(hash('sha1', (string) $code, 1)), 1, 11);
+		return (string) $action . '.' . substr(base64_encode(hash('sha1', (string) $code, true)), 1, 11);
 	}
 
 	public function create_nonce($action, $expires = null)
@@ -617,7 +617,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		foreach (headers_list() as $name => $value)
 		{
-			if (!strcasecmp($name, $set))
+			if (!strcasecmp((string) $name, $set))
 			{
 				if (!strncmp($value, $cookie, $clen) && substr($value, $clen, 1) == '=')
 				{

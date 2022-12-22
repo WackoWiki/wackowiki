@@ -88,7 +88,7 @@ class DbPDO implements DbInterface
 		// Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
 		// Got this from: http://www.gamedev.net/community/forums/topic.asp?topic_id=448909
 		// More reading: http://www.sitepoint.com/forums/showthread.php?t=337881
-		return strtr($string, [
+		return strtr((string) $string, [
 			"\x00"	=> '\x00',
 			"\n"	=> '\n',
 			"\r"	=> '\r',

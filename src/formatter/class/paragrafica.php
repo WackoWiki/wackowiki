@@ -1,4 +1,5 @@
 <?php
+
 /*
 
 Typografica library: Paragrafica class.
@@ -144,7 +145,7 @@ class Paragrafica
 		}
 		else
 		{
-			$page_id = substr(crc32(time()), 0, 5);
+			$page_id = substr((string) crc32((string) time()), 0, 5);
 		}
 
 		// 1. insert terminators appropriately

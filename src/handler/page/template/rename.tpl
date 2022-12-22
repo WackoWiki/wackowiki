@@ -32,7 +32,7 @@
 		</form>
 	=]
 	[= denied _ =
-		<div class="msg info">
+		<div class="msg note">
 			[ ' _t: NotOwnerCantRename ' ]
 		</div>
 	=]
