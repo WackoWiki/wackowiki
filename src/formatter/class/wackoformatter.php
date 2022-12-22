@@ -1,9 +1,10 @@
 <?php
+
 /*
 * WackoFormatter.
 *
 * Formats text with wacko-formatting.
-* Links and actions aren't processed. Its processed by PostWacko formatter
+* Links and actions aren't processed. It's processed by PostWacko formatter
 */
 
 class WackoFormatter
@@ -16,9 +17,9 @@ class WackoFormatter
 	public $tdold_indent_level	= 0;
 	public $auto_fn			= [];
 	public $tdindent_closers	= [];
-	public $br					= 1;
-	public $intable			= 0;
-	public $intable_br			= 0;
+	public $br					= true;
+	public $intable			= false;
+	public $intable_br			= false;
 	public $cols				= 0;
 	public $LONG_REGEX;
 	public $MIDDLE_REGEX;
@@ -129,7 +130,7 @@ class WackoFormatter
 			// headers
 			"\n[ \t]*={2,7}.*?={2,7}|" .
 			// separator
-			"[-]{4,}|" .
+			"-{4,}|" .
 			// line break
 			"---\n?\s*|" .
 			// strikethrough
@@ -407,7 +408,7 @@ class WackoFormatter
 		// table begin
 		else if ($thing == '#||')
 		{
-			$this->br			= 0;
+			$this->br			= false;
 			$this->cols			= 0;
 			$this->intable_br	= true;
 			$this->table_scope	= true;
@@ -416,7 +417,7 @@ class WackoFormatter
 		}
 		else if ($thing == '#|')
 		{
-			$this->br			= 0;
+			$this->br			= false;
 			$this->cols			= 0;
 			$this->intable_br	= true;
 			$this->table_scope	= true;
@@ -426,7 +427,7 @@ class WackoFormatter
 		// table end
 		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)
 		{
-			$this->br			= 0;
+			$this->br			= false;
 			$this->intable_br	= false;
 			$this->table_scope	= false;
 
@@ -435,7 +436,7 @@ class WackoFormatter
 		// table head
 		else if (preg_match('/^\*\|(.*?)\|\*$/us', $thing, $matches) && $this->table_scope)
 		{
-			$this->br			= 1;
+			$this->br			= true;
 			$this->intable		= true;
 			$this->intable_br	= false;
 
@@ -501,7 +502,7 @@ class WackoFormatter
 		// table row and cells
 		else if (preg_match('/^\|\|(.*?)\|\|$/us', $thing, $matches) && $this->table_scope)
 		{
-			$this->br			= 1;
+			$this->br			= true;
 			$this->intable		= true;
 			$this->intable_br	= false;
 
@@ -567,14 +568,14 @@ class WackoFormatter
 		// deleted
 		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/us', $thing, $matches))
 		{
-			$this->br = 0;
+			$this->br = false;
 
 			return '<del class="diff">' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</del>';
 		}
 		// inserted
 		else if (preg_match('/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/us', $thing, $matches))
 		{
-			$this->br = 0;
+			$this->br = false;
 
 			return '<ins class="diff">' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</ins>';
 		}
@@ -608,7 +609,7 @@ class WackoFormatter
 		else if (  preg_match('/^\'\'(.*?)\'\'$/us', $thing, $matches)
 				|| preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/us', $thing, $matches))
 		{
-			$this->br = 1;
+			$this->br = true;
 
 			if (isset($matches[3])
 				&& $color = in_array($matches[3], ($wacko->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
@@ -621,7 +622,7 @@ class WackoFormatter
 		// mark
 		else if (preg_match('/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/us', $thing, $matches))
 		{
-			$this->br = 1;
+			$this->br = true;
 
 			if (isset($matches[3])
 				&& $color = in_array($matches[3], ($wacko->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
@@ -708,7 +709,7 @@ class WackoFormatter
 		{
 			$h_level	= substr_count($matches[1], '=') - 1;
 			$result		= $this->indent_close();
-			$this->br	= 0;
+			$this->br	= false;
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
@@ -741,7 +742,7 @@ class WackoFormatter
 		// separators
 		else if (preg_match('/^-{4,}$/u', $thing))
 		{
-			$this->br = 0;
+			$this->br = false;
 
 			return "<hr>\n";
 		}
@@ -954,7 +955,7 @@ class WackoFormatter
 			}
 
 			// we definitely want no line break in this one.
-			$this->br = 0;
+			$this->br = false;
 
 			// #18 syntax support
 			if ($matches[5])
@@ -1003,7 +1004,7 @@ class WackoFormatter
 			{
 				$opener		= '<div class="indent">';
 				$closer		= '</div>' . "\n";
-				$this->br	= 1;
+				$this->br	= true;
 				$new_type	= 'i';
 			}
 			else if ($new_indent_type == '*')
@@ -1073,12 +1074,12 @@ class WackoFormatter
 
 			if ($result)
 			{
-				$this->br = 0;
+				$this->br = false;
 			}
 
 			$result .= $this->br ? "<br>\n" : "\n";
 
-			$this->br = 1;
+			$this->br = true;
 
 			return $result;
 		}

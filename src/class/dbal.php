@@ -213,7 +213,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 				return $x[0];
 			}, $query);
 
-		return Ut::join_path(CACHE_SQL_DIR, Ut::http64_encode(hash('sha1', $query, 1)));
+		return Ut::join_path(CACHE_SQL_DIR, Ut::http64_encode(hash('sha1', $query, true)));
 	}
 
 	// low level stuff:

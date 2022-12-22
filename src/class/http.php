@@ -154,7 +154,7 @@ class Http
 
 	private function construct_id($page, $method, $query, $lang)
 	{
-		return Ut::join_path(CACHE_PAGE_DIR, Ut::http64_encode(hash('sha1', ($page . '_' . $method . '_' . $query . '_' . $lang), 1)));
+		return Ut::join_path(CACHE_PAGE_DIR, Ut::http64_encode(hash('sha1', ($page . '_' . $method . '_' . $query . '_' . $lang), true)));
 	}
 
 	// Check http-request. May be, output cached version.
