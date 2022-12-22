@@ -2,7 +2,6 @@
 /*
 	Chat highlighter
 	Supports various date-username-message chat log formats
-	Installation: copy to /wacko/formatter/highlight/chat.php
 
 	Usage:
 

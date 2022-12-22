@@ -24,7 +24,7 @@ $text = preg_replace("#&#us","&amp;", $text );
 $text = preg_replace("#<#us","&lt;", $text );
 $text = preg_replace("#>#us","&gt;", $text );
 $text = preg_replace("#\n#us","\002", $text );		// newline
-$text = preg_replace("#\s#us","&nbsp;", $text );		// spaces
+$text = preg_replace("#\s#us","&nbsp;", $text );	// spaces
 $text = preg_replace("#\002#us","<br>", $text );	// newline
 
 // Highlighting
