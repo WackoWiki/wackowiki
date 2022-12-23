@@ -3,7 +3,7 @@
  INI formatter
  */
 
-$text = htmlspecialchars($text, ENT_QUOTES, HTML_ENTITIES_CHARSET);
+$text = Ut::html($text);
 
 $text = preg_replace('/([=,\|]+)/um',				'<span class="ini-1">\\1</span>', $text);
 $text = preg_replace('/^([;#].+)$/um',				'<span class="ini-2">\\1</span>', $text);

@@ -1,4 +1,5 @@
 [ === main === ]
+[= pre _ =
 <ignore>
 <!--notypo-->
 	<pre class="code">
@@ -6,3 +7,7 @@
 	</pre>
 <!--/notypo-->
 </ignore>
+=]
+[= include _ =
+	[ ' text | pre ' ]
+=]
