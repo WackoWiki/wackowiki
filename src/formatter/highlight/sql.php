@@ -34,7 +34,7 @@ $text = preg_replace("#\".*?\"#us", '<span class="sql-1">$0</span>', $text );
 
 // Keywords & functions
 $text = preg_replace("#\001($functions)\001#usi", '<span class="sql-2">$1</span>', $text );
-$text = preg_replace("#\001($skipwords)\001#usi", '<span class="sql-3"><strong>$1</strong></span>', $text );
+$text = preg_replace("#\001($skipwords)\001#usi", '<span class="sql-3">$1</span>', $text );
 $text = preg_replace("#\001($keywords)\001#usi",  '<span class="sql-4">$1</span>', $text );
 
 // Comments

@@ -1,18 +1,18 @@
 <?php
+
 /**
  * Highlight CSS Code
- *
- * @author Davey Shafik <davey@php.net>
- * @copyright Copyright 2003 Davey Shafik and Synaptic Media. All Rights Reserved.
  */
-$options['color']['tags']				= 'red';
-$options['color']['attributes']			= '#800000';
-$options['color']['other']				= '#A6A6A6';
-$options['color']['comment']			= 'gray';
-$options['color']['attributevalues']	= 'blue';
-$options['color']['entities']			= 'orange';
-$options['color']['digits']				= 'green';
+
+$options['color']['attribute']			= 'css-attr';
+$options['color']['attributevalue']		= 'css-attrval';
+$options['color']['comment']			= 'css-comment';
+$options['color']['digit']				= 'css-digit';
+$options['color']['entity']				= 'css-entity';
+$options['color']['tag']				= 'css-tag';
 $options['line_numbers']				= $options['numbers'] ?? false;
+
+if(!isset($options['nopre'])) $options['nopre'] = false;
 
 $css = Ut::html($text);
 $keywords = [
@@ -157,55 +157,60 @@ $css = str_replace(':', '\:', $css);
 
 foreach ($keywords as $i)
 {
-	$css = str_replace($i, '<span style="color: ##oct##;">' . $i . '</span>', $css);
+	$css = str_replace($i, '<span class="##oct##">' . $i . '</span>', $css);
 }
 
 foreach ($special_keywords as $i)
 {
-	$css = str_replace($i . '\:', '<span style="color: ##oct##;">' . $i . '</span>\:', $css);
+	$css = str_replace($i . '\:', '<span class="##oct##">' . $i . '</span>\:', $css);
 }
 
 foreach ($special_keyword2 as $i)
 {
-	$css = preg_replace('/[^-y]' . $i . '/u', '<span style="color: ##oct##;">' . $i . '</span>', $css);
+	$css = preg_replace('/[^-y]' . $i . '/u', '<span class="##oct##">' . $i . '</span>', $css);
 }
 
-$css = preg_replace('/(\.?)(.*)(\s?\{?)/us', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
+$css = preg_replace('/(\.?)(.*)(\s?\{?)/us', '&nbsp;<span class="##ocv##">$1$2</span>$3', $css);
 
-$css = preg_replace("/(\#[a-fA-F\d]+|\d+(px))/u", "<span style=\"color: " . $options['color']['digits'] . ";\">$1</span>", $css);
+$css = preg_replace("/(\#[a-fA-F\d]+|\d+(px))/u", '<span class="' . $options['color']['digit'] . '">$1</span>', $css);
 
-$css = str_replace('\:', '<span style="color: ' . $options['color']['attributes'] . '; font-weight: bold;">:</span>', $css);
-$css = str_replace('{', '<span style="color: ' . $options['color']['attributes'] . '; font-weight: bold;">{</span>', $css);
-$css = str_replace('}', '<span style="color: ' . $options['color']['attributes'] . '; font-weight: bold;">}</span>', $css);
+$css = str_replace('\:', '<span class="' . $options['color']['attribute'] . '">:</span>', $css);
+$css = str_replace('{',  '<span class="' . $options['color']['attribute'] . '">{</span>', $css);
+$css = str_replace('}',  '<span class="' . $options['color']['attribute'] . '">}</span>', $css);
 
 $css = preg_replace_callback(
 		'!/\*(.*?)\*/!us',
 		function ($matches) use ($options)
 		{
 			return
-			'<span style="color: ' . $options['color']['comment'] . ';">/*' .
+			'<span class="' . $options['color']['comment'] . '">/*' .
 			strip_tags($matches[1]) .
 			'*/</span>';
 		},
 		$css);
 
-$css = str_replace('##oct##', $options['color']['tags'], $css);
-$css = str_replace('##ocv##', $options['color']['attributevalues'], $css);
+$css = str_replace('##oct##', $options['color']['tag'], $css);
+$css = str_replace('##ocv##', $options['color']['attributevalue'], $css);
 
 if ($options['line_numbers'])
 {
-	$lines		= preg_split("/(\n|<br \/>)/us", $css);
-	$source		= '<ol>';
+	$lines		= preg_split("/(\n|<br>)/us", $css);
+	$css		= '<ol>';
 	$i			= 0;
 
 	foreach ($lines as $line)
 	{
 		$i += 1;
-		$source .= '<li id="l' . $i . '">' . trim($line) . '</li>';
+		$css .= '<li id="l' . $i . '">' . trim($line) . '</li>';
 	}
 
-	$source .= '</ol>';
+	$css .= '</ol>';
 }
+
+// uses nopre option inside html formatter
+$tpl->enter($options['nopre'] ? 'include_' : 'pre_');
 
 // output source
 $tpl->text = preg_replace('/\&nbsp\;/u', '', str_replace("\t", '	', $css), 1);
+
+$tpl->leave(); // include_ / pre_

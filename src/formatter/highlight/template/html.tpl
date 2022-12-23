@@ -1,8 +1,8 @@
 [ === main === ]
 <ignore>
-	<!--notypo-->
+<!--notypo-->
 	<pre class="code">
 		[ ' text | pre ' ]
 	</pre>
-	<!--/notypo-->
+<!--/notypo-->
 </ignore>

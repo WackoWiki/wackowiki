@@ -1,16 +1,14 @@
 <?php
+
 /**
  * Highlight HTML Markup
- *
- * @author Davey Shafik <davey@php.net>
- * @copyright Copyright 2003 Davey Shafik and Synaptic Media. All Rights Reserved.
  */
-$options['color']['tags']				= '#000080';
-$options['color']['attributes']			= '#800000';
-$options['color']['other']				= '#A6A6A6';
-$options['color']['comment']			= 'gray';
-$options['color']['attributevalues']	= 'blue';
-$options['color']['entities']			= 'orange';
+
+$options['color']['attribute']			= 'html-attr';
+$options['color']['attributevalue']		= 'html-attrval';
+$options['color']['comment']			= 'html-comment';
+$options['color']['entity']				= 'html-entity';
+$options['color']['tag']				= 'html-tag';
 $options['line_numbers']				= $options['numbers'] ?? false;
 
 $html_tags = [
@@ -162,7 +160,7 @@ $source = preg_replace_callback(
 		function ($matches) use ($options)
 		{
 			return
-			'<span style="color: ' . $options['color']['comment'] . ';">&lt;!--' .
+			'<span class="' . $options['color']['comment'] . '">&lt;!--' .
 			str_replace('&lt;',	'&lt;<!-- -->',
 			str_replace('=',	'=<!-- -->',
 			$matches[1])) .
@@ -185,34 +183,39 @@ foreach ($html_tags as $i)
 {
 	$source = preg_replace(
 			'/&lt;' . $i . '(&gt;|[[:space:]])/u',
-			'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;' . $i . '\\1</span>',
+			'<span class="' . $options['color']['tag'] . '">&lt;' . $i . '\\1</span>',
 			$source);
 
 	$source = str_replace(
 			'&lt;/' . $i . '&gt;',
-			'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;/' . $i . '&gt;</span>',
+			'<span class="' . $options['color']['tag'] . '">&lt;/' . $i . '&gt;</span>',
 			$source);
 }
 
 $source = str_replace(
 		'/&gt;',
-		'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">/&gt;</span>',
+		'<span class="' . $options['color']['tag'] . '">/&gt;</span>',
 		$source);
 
 $source = preg_replace(
 		'/([[:space:]]|&quot;|\'|\?)&gt;/u',
-		'\\1<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&gt;</span>',
+		'\\1<span class="' . $options['color']['tag'] . '">&gt;</span>',
 		$source);
 
 $source = preg_replace(
 		'/([a-z-]+)=(&quot;|\')(.*?)\\2/ui',
-		'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: ' .
-		$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
-		$source = preg_replace("/&amp;([a-z\d]*?;)/ui", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
+		'<span class="' . $options['color']['attribute'] . '">$1=</span>' .
+		'<span class="' . $options['color']['attributevalue'] . '">$2$3$2</span>',
+		$source);
+
+$source = preg_replace(
+		'/&amp;([a-z\d]*?;)/ui',
+		'&amp;<span class="' . $options['color']['entity'] . '">$1</span>',
+		$source);
 
 if ($options['line_numbers'])
 {
-	$lines		= preg_split("/(\n|<br \/>)/us", $source);
+	$lines		= preg_split("/(\n|<br>)/us", $source);
 	$source		= '<ol>';
 	$i			= 0;
 
