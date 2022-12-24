@@ -4,12 +4,12 @@
  * Highlight HTML Markup
  */
 
-$options['color']['attribute']			= 'html-attr';
-$options['color']['attributevalue']		= 'html-attrval';
-$options['color']['comment']			= 'html-comment';
-$options['color']['entity']				= 'html-entity';
-$options['color']['tag']				= 'html-tag';
-$options['line_numbers']				= $options['numbers'] ?? false;
+$options['color']['attr']		= 'html-attr';
+$options['color']['attrval']	= 'html-attrval';
+$options['color']['comment']	= 'html-comment';
+$options['color']['entity']		= 'html-entity';
+$options['color']['tag']		= 'html-tag';
+$options['line_numbers']		= $options['numbers'] ?? false;
 
 $html_tags = [
 	'!DOCTYPE',
@@ -204,8 +204,8 @@ $source = preg_replace(
 
 $source = preg_replace(
 		'/([a-z-]+)=(&quot;|\')(.*?)\\2/ui',
-		'<span class="' . $options['color']['attribute'] . '">$1=</span>' .
-		'<span class="' . $options['color']['attributevalue'] . '">$2$3$2</span>',
+		'<span class="' . $options['color']['attr'] . '">$1=</span>' .
+		'<span class="' . $options['color']['attrval'] . '">$2$3$2</span>',
 		$source);
 
 $source = preg_replace(

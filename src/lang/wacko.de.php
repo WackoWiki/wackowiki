@@ -120,7 +120,7 @@ $wacko_translation = [
 	'Guest'						=> 'Gast',
 	'Help'						=> 'Hilfe',
 	'TopicSearchText'			=> 'Nur in Seitentiteln suchen',
-	'WordprocessorVersion'		=> 'Textverarbeitungs-Version',
+	'WordprocessorVersion'		=> 'Textverarbeitungsversion',
 
 	// notifications
 	'EmailHello'				=> 'Hallo ',
@@ -796,11 +796,9 @@ $wacko_translation = [
 	'SettingsLanguages'			=> 'Sprachen',
 	'SettingsReferrers'			=> 'Verweise',
 	'SettingsWatch'				=> 'Beobachten',
-	'SettingsPrint'				=> 'Druckversion',
-	'SettingsWordprocessor'		=> 'Textverarbeitungs-Version',
 	'SettingsLatex'				=> 'LaTeX Version',
 	'SettingsXML'				=> 'Export als XML',
-	'NeedToChangeLang'			=> 'Die gewählte Seitengprache %1 wird nicht unterstützt und muss geändert werden.',
+	'NeedToChangeLang'			=> 'Die gewählte Seitensprache %1 wird nicht unterstützt und muss geändert werden.',
 	'SetLang'					=> 'Sprache dieser Seite',
 	'SetMenuLabel'				=> 'Menü-Label',
 	'SetShowMenuLabel'			=> 'Zeige in der Navigation',
