@@ -8,7 +8,7 @@
 			[= options _ =
 				[= l _ =
 					<label for="language">[ ' _t: AccountLanguage ' ]</label><br>
-					<select name="lang">
+					<select id="language" name="lang">
 						<option value=""[ ' selected ' ]>[ ' _t: Any ' ]</option>
 						[= o _ =
 							<option value="[ ' iso ' ]"[ ' selected ' ]>[ ' lang ' ] ([ ' iso ' ])</option>

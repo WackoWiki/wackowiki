@@ -19,8 +19,8 @@
 							<tr>
 								[= l _ =
 								<td colspan=2>
-									<label for="order">[ ' _t: SortBy ' ]</label><br>
-									<select name="order">
+									<label for="file-order">[ ' _t: SortBy ' ]</label><br>
+									<select id="file-order" name="order">
 										[= o _ =
 											<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
 										=]
@@ -46,8 +46,8 @@
 									</td>
 								=]
 								<td>
-									<label for="owner">[ ' _t: Owner ' ]</label><br>
-									<select id="owner" name="user_id">
+									<label for="file-owner">[ ' _t: Owner ' ]</label><br>
+									<select id="file-owner" name="user_id">
 										<option value="">[ ' _t: Any ' ]</option>
 										[= u _ =
 											<option value="[ ' user.user_id | e attr ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' user.user_name | e ' ]</option>
@@ -64,8 +64,8 @@
 									</select>
 								</td>
 								<td>
-									<label for="category">[ ' _t: Category ' ]</label><br>
-									<select id="category" name="category_id">
+									<label for="file-category">[ ' _t: Category ' ]</label><br>
+									<select id="file-category" name="category_id">
 										<option value="">[ ' _t: Any ' ]</option>
 										[= c _ =
 											<option value="[ ' category.category_id | e attr ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category.category | e ' ]</option>

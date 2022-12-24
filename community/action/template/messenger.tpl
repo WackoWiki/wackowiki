@@ -17,9 +17,10 @@
 		<br><h3>[ ' header ' ]</h3>
 		=]
 		<ul class="menu">
-			<li><b>[ ' _t: Folder ' ]</b><form action="[ ' href: ' ]" method="post" name="message_folder" style="display: inline;">
+			<li><form action="[ ' href: ' ]" method="post" name="message_folder" style="display: inline;">
 					[ ' csrf: message_folder ' ]
-					<select name="msg_folder">
+					<label for="msg_folder"><b>[ ' _t: Folder ' ]</b></label>
+					<select name="msg_folder" id="msg_folder">
 						<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
 					[= o _ =
 						<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>

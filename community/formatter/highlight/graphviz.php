@@ -19,7 +19,7 @@ $bin = match(key($options)){
 	'fdp', 'sfdp'	=> 'sfdp',
 	'osage'			=> 'osage',
 	default			=> 'dot'
-}
+};
 
 $gv_settings['bin'] = $gv_settings['bindir'] . $bin;
 

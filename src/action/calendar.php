@@ -143,14 +143,14 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	{
 		if (isset($days[$day]) && is_array($days[$day]))
 		{
-			[$link, $classes, $content] = $days[$day];
+			[$link, $class, $content] = $days[$day];
 
 			if (is_null($content))
 			{
 				$content = $day;
 			}
 
-			$tpl->class		= $classes	? ' class="' . Ut::html($classes) . '"' : '';
+			$tpl->class		= $class	? ' class="' . Ut::html($class) . '"' : '';
 			$content		= $link		? '<a href="' . Ut::html($link) . '">' . $content . '</a>' : $content;
 			$tpl->content	= '<span class="calendar-hl">' . $content . '</span>';
 		}
