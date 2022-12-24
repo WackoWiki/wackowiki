@@ -217,12 +217,10 @@ if ($options['line_numbers'])
 {
 	$lines		= preg_split("/(\n|<br>)/us", $source);
 	$source		= '<ol>';
-	$i			= 0;
 
 	foreach ($lines as $line)
 	{
-		$i += 1;
-		$source .= '<li id="l' . $i . '">' . rtrim($line) . '</li>';
+		$source .= '<li>' . rtrim($line) . '</li>';
 	}
 
 	$source .= '</ol>';

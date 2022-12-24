@@ -196,12 +196,10 @@ if ($options['line_numbers'])
 {
 	$lines		= preg_split("/(\n|<br>)/us", $css);
 	$css		= '<ol>';
-	$i			= 0;
 
 	foreach ($lines as $line)
 	{
-		$i += 1;
-		$css .= '<li id="l' . $i . '">' . trim($line) . '</li>';
+		$css .= '<li>' . trim($line) . '</li>';
 	}
 
 	$css .= '</ol>';
