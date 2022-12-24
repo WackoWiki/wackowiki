@@ -408,7 +408,7 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 /* SYNTAX %%(ini)%% */
 .ini-1 { color: #4400dd; }
 .ini-2 { color: #226622; }
-.ini-3 { color: #aa0000; background: #eee0cc; }
+.ini-3 { color: #aa0000; font-weight: bold; background: #eee0cc; }
 
 /* SYNTAX %%(sql)%% */
 .sql-1 { color: #006666; }
