@@ -83,8 +83,6 @@ function admin_user_users(&$engine, $module)
 		$set = [];
 	}
 
-	reset($set);
-
 	/////////////////////////////////////////////
 	//   list change/update processing
 	/////////////////////////////////////////////

@@ -251,7 +251,7 @@ function admin_db_restore(&$engine, $module, $tables, $directories)
 				// sql mode
 				if		(!$log[2])			$mode = 'INSERT';
 				else if	($ikeys === true)	$mode = 'INSERT IGNORE';
-				else if	($ikeys == false)	$mode = 'REPLACE';
+				else if	(!$ikeys)			$mode = 'REPLACE';
 
 				$results .= '<strong>' . $engine->_t('ProcessTablesDump') . "\n" .
 					'(' . $engine->_t('Instruction') . ' ' . $mode . '):</strong>' . "\n\n";

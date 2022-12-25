@@ -3,13 +3,13 @@
 class SessionDbalStore extends Session
 {
 	// config options:
-	public $cf_dbal_table_name		= 'sessions_pool';
-	public $cf_dbal_lock_timeout	= 60;
+	public string	$cf_dbal_table_name		= 'sessions_pool';
+	public int		$cf_dbal_lock_timeout	= 60;
 
-	private $db;
-	private $created	= false;
-	private $lock		= null;
-	private $id;
+	private 		$db;
+	private bool	$created	= false;
+	private 		$lock		= null;
+	private 		$id;
 
 	public function __construct(&$db)
 	{
@@ -17,7 +17,7 @@ class SessionDbalStore extends Session
 		$this->db = & $db;
 	}
 
-	protected function store_open($prefix)
+	protected function store_open($prefix): bool
 	{
 		if (!$this->created)
 		{
@@ -35,7 +35,7 @@ class SessionDbalStore extends Session
 		return true;
 	}
 
-	protected function store_close()
+	protected function store_close(): bool
 	{
 		if ($this->lock)
 		{
@@ -45,7 +45,7 @@ class SessionDbalStore extends Session
 		return true;
 	}
 
-	protected function store_destroy()
+	protected function store_destroy(): bool
 	{
 		if ($this->lock)
 		{
@@ -76,7 +76,7 @@ class SessionDbalStore extends Session
 		return $res? $res['session_data'] : ($create? '' : false);
 	}
 
-	protected function store_write($id, $text)
+	protected function store_write($id, $text): bool
 	{
 		if (!$this->lock($id))
 		{
@@ -119,7 +119,7 @@ class SessionDbalStore extends Session
 		return $this->db->affected_rows;
 	}
 
-	private function lock(&$id)
+	private function lock(&$id): bool
 	{
 		if ($this->lock && $this->id == $id)
 		{

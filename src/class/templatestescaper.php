@@ -4,8 +4,8 @@
 
 class TemplatestEscaper
 {
-	private $encoding = 'utf-8';
-	private $sc_encoding = 'utf-8';
+	private string $encoding = 'utf-8';
+	private string $sc_encoding = 'utf-8';
 
 	function setEncoding($encoding)
 	{
@@ -38,12 +38,12 @@ class TemplatestEscaper
 		}
 	}
 
-	function getEncoding()
+	function getEncoding(): string
 	{
 		return $this->encoding;
 	}
 
-	function escapeHtml($string)
+	function escapeHtml($string): string
 	{
 		return htmlspecialchars((string) $string, ENT_QUOTES | ENT_SUBSTITUTE, $this->sc_encoding);
 	}
@@ -147,7 +147,7 @@ class TemplatestEscaper
 		return $this->fromUtf8($result);
 	}
 
-	function escapeUrl($string)
+	function escapeUrl($string): string
 	{
 		return rawurlencode($string);
 	}
@@ -211,7 +211,7 @@ class TemplatestEscaper
 		return $this->convertEncoding($string, $this->getEncoding(), 'UTF-8');
 	}
 
-	protected function isUtf8($string)
+	protected function isUtf8($string): bool
 	{
 		return ($string === '' || preg_match('/^./su', (string) $string));
 	}

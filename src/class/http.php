@@ -42,7 +42,7 @@ class Http
 		}
 	}
 
-	public function secure_base_url()
+	public function secure_base_url(): void
 	{
 		if (!isset($this->db->open_url) && $this->db->tls)
 		{
@@ -52,7 +52,7 @@ class Http
 		}
 	}
 
-	public function ensure_tls($url)
+	public function ensure_tls($url): void
 	{
 		if ($this->db->tls && !$this->tls_session)
 		{
@@ -92,7 +92,7 @@ class Http
 	}
 
 	// Store page content to cache
-	private function save_page($data)
+	private function save_page($data): void
 	{
 		file_put_contents($this->file, $data);
 		chmod($this->file, CHMOD_SAFE);
@@ -108,7 +108,7 @@ class Http
 	}
 
 	// Invalidate the page cache
-	public function invalidate_page($page)
+	public function invalidate_page($page): int
 	{
 		$n = 0;
 
@@ -146,7 +146,7 @@ class Http
 		return $n;
 	}
 
-	private function normalize_page($page)
+	private function normalize_page($page): array
 	{
 		$page = str_replace(['\\', "'", '_'], '', $page);
 		return [$page, hash('sha1', $page)];
@@ -158,7 +158,7 @@ class Http
 	}
 
 	// Check http-request. May be, output cached version.
-	private function check_http_request()
+	private function check_http_request(): bool
 	{
 		if (!$this->page)
 		{
@@ -246,7 +246,7 @@ class Http
 		return true;
 	}
 
-	public function check_cache($page, $method)
+	public function check_cache($page, $method): void
 	{
 		$this->method	= $method;
 
@@ -261,7 +261,7 @@ class Http
 		}
 	}
 
-	public function store_cache()
+	public function store_cache(): void
 	{
 		if ($this->caching)
 		{
@@ -278,7 +278,7 @@ class Http
 		}
 	}
 
-	public function session($route)
+	public function session($route): void
 	{
 		if ($this->db->session_store == 1)
 		{
@@ -332,7 +332,7 @@ class Http
 	//		4. Strict-Transport-Security:
 	//		5. X-Frame-Options:
 	//		6. X-Content-Type-Options:
-	public function http_security_headers()
+	public function http_security_headers(): void
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
@@ -411,7 +411,7 @@ class Http
 	*
 	* @param string $url Target URL
 	*/
-	function redirect($url, $permanent = false)
+	function redirect($url, $permanent = false): void
 	{
 		if (!headers_sent())
 		{
@@ -442,7 +442,7 @@ class Http
 	 *
 	 * @param bool $client_only - Disables only client-side caching. Optional, default is TRUE
 	 */
-	function no_cache($client_only = true)
+	function no_cache($client_only = true): void
 	{
 		// disable browser cache for page
 		if (!headers_sent())
@@ -462,7 +462,7 @@ class Http
 		}
 	}
 
-	function cache_promisc()
+	function cache_promisc(): void
 	{
 		// to be replaced then by no_cache or what
 		header('Cache-Control: public');
@@ -520,7 +520,7 @@ class Http
 	*
 	* @return array Array of language codes
 	*/
-	function available_languages($subset = true)
+	function available_languages($subset = true): array
 	{
 		$lang_list = &$this->sess->available_languages;
 
@@ -590,7 +590,7 @@ class Http
 		return '0.0.0.0';
 	}
 
-	private function tls_session()
+	private function tls_session(): bool
 	{
 		return ((@$_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' && $_SERVER['HTTPS'] != '0')
 			|| $_SERVER['SERVER_PORT'] == 443
@@ -599,7 +599,7 @@ class Http
 			|| @$_SERVER['HTTP_X_FORWARDED_PORT'] == 443);
 	}
 
-	function status($code)
+	function status($code): void
 	{
 		static $text = [
 			200 => 'OK',
@@ -681,7 +681,7 @@ class Http
 		return $types[$ext] ?? 'application/octet-stream';
 	}
 
-	public function sendfile($path, $filename = null, $age = null)
+	public function sendfile($path, $filename = null, $age = null): void
 	{
 		header_remove();
 		set_time_limit(0);
@@ -840,7 +840,7 @@ class Http
 	// $_POST   = parse_str(file_get_contents('php://input'));
 	// $_GET    = parse_str($_SERVER['QUERY_STRING']);
 	// $_COOKIE = parse_str($_SERVER['HTTP_COOKIE']);
-	function parse_str($str)
+	function parse_str($str): array
 	{
 		$str = preg_replace_callback('/(^|(?<=&))[^=[&]+/', function($key) { return bin2hex(urldecode($key[0])); }, $str);
 		parse_str($str, $post);
@@ -886,7 +886,7 @@ class Http
 	}
 
 	// gzip http stream ourselves (not by zlib output compression or ob_gzhandler), to produce Content-Length header
-	function gzip()
+	function gzip(): void
 	{
 		if (headers_sent() || connection_aborted())
 		{

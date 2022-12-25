@@ -331,7 +331,7 @@ class UriRouter
 		$env['vars']['_ok'] = false;
 	}
 
-	private function read_config($file, $re_place)
+	private function read_config($file, $re_place): array
 	{
 		$lineno = 0;
 
@@ -429,7 +429,7 @@ class UriRouter
 		return $config;
 	}
 
-	private function parse_var($var)
+	private function parse_var($var): array
 	{
 		if ($var[0] == '$' && ctype_digit($var[1]))
 		{

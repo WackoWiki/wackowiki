@@ -9,39 +9,39 @@
 
 abstract class Session extends ArrayObject // for concretization extend by some SessionStoreInterface'd class
 {
-	private $active					= false;
-	private $regenerated			= 0;
-	private $name					= '';		// NB [0-9a-zA-Z]+ -- should be short and descriptive (i.e. for users with enabled cookie warnings)
-	private $id						= null;		// NB [0-9a-zA-Z,-]+
-	private $user_agent;
-	private $message				= null;
+	private bool	$active					= false;
+	private int		$regenerated			= 0;
+	private string	$name					= '';		// NB [0-9a-zA-Z]+ -- should be short and descriptive (i.e. for users with enabled cookie warnings)
+	private $id								= null;		// NB [0-9a-zA-Z,-]+
+	private			$user_agent;
+	private			$message				= null;
 
-	public $cf_ip;								// set by http class... STS must decide on bad coupling between session & http class
-	public $cf_tls;								// if !isset - must not act on this values (i.e. from freecap)
+	public			$cf_ip;								// set by http class... STS must decide on bad coupling between session & http class
+	public			$cf_tls;							// if !isset - must not act on these values (i.e. from freecap)
 
-	public $cf_static				= 0;		// for use in e.g. captcha: do no regenerations
-	public $cf_secret				= 'adyaiD9+255JeiskPybgisby'; // just for lulz. supply from above!
-	public $cf_nonce_lifetime		= 7200;
-	public $cf_prevent_replay		= 1;
-	public $cf_gc_probability		= 2;
-	public $cf_gc_maxlifetime		= 1440;
-	public $cf_max_idle				= 1440;
-	public $cf_max_session			= 7200;		// time to unconditionally destroy active session
-	public $cf_regen_time			= 500;		// seconds between forced id regen
-	public $cf_regen_probability	= 2;		// percentile probability of forced id regen
-	public $cf_cookie_prefix		= '';
-	public $cf_cookie_persistent	= false;
-	public $cf_cookie_lifetime		= 0;		// lifetime of the cookie in seconds which is sent to the browser. The value 0 means "until the browser is closed."
-	public $cf_cookie_path			= '/';		// path to set in the session cookie
-	public $cf_cookie_domain		= '';		// domain to set in the session cookie. '' for host name of the server which generated the cookie, according to cookies specification
+	public int		$cf_static				= 0;		// for use in e.g. captcha: do no regenerations
+	public string	$cf_secret				= 'adyaiD9+255JeiskPybgisby'; // just for lulz. supply from above!
+	public int		$cf_nonce_lifetime		= 7200;
+	public int		$cf_prevent_replay		= 1;
+	public int		$cf_gc_probability		= 2;
+	public int		$cf_gc_maxlifetime		= 1440;
+	public int		$cf_max_idle			= 1440;
+	public int		$cf_max_session			= 7200;		// time to unconditionally destroy active session
+	public int		$cf_regen_time			= 500;		// seconds between forced id regen
+	public int		$cf_regen_probability	= 2;		// percentile probability of forced id regen
+	public string	$cf_cookie_prefix		= '';
+	public bool		$cf_cookie_persistent	= false;
+	public int		$cf_cookie_lifetime		= 0;		// lifetime of the cookie in seconds which is sent to the browser. The value 0 means "until the browser is closed."
+	public string	$cf_cookie_path			= '/';		// path to set in the session cookie
+	public string	$cf_cookie_domain		= '';		// domain to set in the session cookie. '' for host name of the server which generated the cookie, according to cookies specification
 												// .php.net - to make cookies visible on all subdomains
-	public $cf_cookie_secure		= false;	// cookie should only be sent over secure connections.
-	public $cf_cookie_httponly		= true;		// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
-	public $cf_cookie_samesite		= 'Strict';	// asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
-	public $cf_referer_check		= '';
-	public $cf_cache_limiter		= 'none';
-	public $cf_cache_expire			= 180*60;	// ttl for cached session pages in seconds
-	public $cf_cache_mtime			= 0;		// should be set before start() for cache limiters
+	public bool		$cf_cookie_secure		= false;	// cookie should only be sent over secure connections.
+	public bool		$cf_cookie_httponly		= true;		// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
+	public string	$cf_cookie_samesite		= 'Strict';	// asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
+	public string	$cf_referer_check		= '';
+	public string	$cf_cache_limiter		= 'none';
+	public			$cf_cache_expire		= 180*60;	// ttl for cached session pages in seconds
+	public int		$cf_cache_mtime			= 0;		// should be set before start() for cache limiters
 
 
 	public function __construct()
@@ -67,7 +67,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	// effectively destroy(true) + start()
 	// or... regenerate + filter!
-	public function restart()
+	public function restart(): bool
 	{
 		if (!$this->regenerate_id(true, 'restart'))
 		{
@@ -82,7 +82,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	// replace the current session id with a newly generated
 	// one, create and lock new file, and keep the current session information
-	protected function regenerate_id($delete_old = false, $message = '')
+	protected function regenerate_id($delete_old = false, $message = ''): bool
 	{
 		if (headers_sent($file, $line))
 		{
@@ -136,7 +136,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return false;
 	}
 
-	public function start($name = null, $id = null)
+	public function start($name = null, $id = null): bool
 	{
 		if ($this->active)
 		{
@@ -303,7 +303,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $this->message;
 	}
 
-	public function active()
+	public function active(): bool
 	{
 		return $this->active;
 	}
@@ -313,7 +313,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $this->id;
 	}
 
-	public function name()
+	public function name(): string
 	{
 		return $this->name;
 	}
@@ -391,12 +391,12 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 	}
 
-	private static function nonce_index($action, $code)
+	private static function nonce_index($action, $code): string
 	{
-		return (string) $action . '.' . substr(base64_encode(hash('sha1', (string) $code, true)), 1, 11);
+		return $action . '.' . substr(base64_encode(hash('sha1', (string) $code, true)), 1, 11);
 	}
 
-	public function create_nonce($action, $expires = null)
+	public function create_nonce($action, $expires = null): string
 	{
 		$code = Ut::random_token(11);
 		$this->__nonces[static::nonce_index($action, $code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
@@ -448,8 +448,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $ret;
 	}
 
-	// those two is for possible override in store methods
-	protected function store_generate_id()
+	// those two are for possible override in store methods
+	protected function store_generate_id(): string
 	{
 		return Ut::random_token(21);
 	}
