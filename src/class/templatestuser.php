@@ -11,11 +11,11 @@ if (!defined('IN_WACKO'))
 class TemplatestUser extends TemplatestSetter
 {
 	private $main;
-	private array	$pulls = [];
-	private array	$sets = [];
-	private string	$chroot = '';
-	private array	$stack = [];
-	private array	$root;
+	private array		$pulls = [];
+	private array		$sets = [];
+	private string|null	$chroot = '';
+	private array		$stack = [];
+	private array		$root;
 
 	function __construct($template, $main)
 	{
