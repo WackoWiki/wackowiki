@@ -16,7 +16,7 @@ $module['tool_badbehaviour'] = [
 	];
 
 ##########################################################
-function admin_tool_badbehaviour(&$engine, $module)
+function admin_tool_badbehaviour($engine, $module)
 {
 	if (!empty($engine->db->ext_bad_behaviour))
 	{
@@ -25,7 +25,7 @@ function admin_tool_badbehaviour(&$engine, $module)
 
 	$action = $_POST['_action'] ?? null;
 
-	function bb2_httpbl_lookup(&$engine, $ip)
+	function bb2_httpbl_lookup($engine, $ip)
 	{
 		// NB: Many of these are defunct
 		$engines = [
@@ -112,7 +112,7 @@ function admin_tool_badbehaviour(&$engine, $module)
 		return $d;
 	}
 
-	function bb2_summary(&$engine)
+	function bb2_summary($engine)
 	{
 		echo $engine->form_open('bb2_manage', ['form_more' => 'setting=bb2_manage']);
 		?>
@@ -200,7 +200,7 @@ function admin_tool_badbehaviour(&$engine, $module)
 		}
 	}
 
-	function bb2_manage(&$engine)
+	function bb2_manage($engine)
 	{
 		$bb_table		= $engine->prefix . 'bad_behaviour';
 		$settings		= bb2_read_settings();
@@ -389,7 +389,7 @@ function admin_tool_badbehaviour(&$engine, $module)
 		echo $engine->form_close();
 	}
 
-	function bb2_whitelist(&$engine)
+	function bb2_whitelist($engine)
 	{
 		$whitelists = bb2_read_whitelist();
 
@@ -494,7 +494,7 @@ function admin_tool_badbehaviour(&$engine, $module)
 		echo $engine->form_close();
 	}
 
-function bb2_options(&$engine)
+function bb2_options($engine)
 {
 	$settings = bb2_read_settings();
 

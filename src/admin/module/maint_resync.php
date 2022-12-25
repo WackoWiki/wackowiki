@@ -17,7 +17,7 @@ $module['maint_resync'] = [
 
 ##########################################################
 
-function admin_maint_resync(&$engine, $module)
+function admin_maint_resync($engine, $module)
 {
 	$prefix		= $engine->prefix;
 ?>

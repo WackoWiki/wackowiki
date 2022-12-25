@@ -17,7 +17,7 @@ $module['massemail'] = [
 
 ##########################################################
 
-function admin_massemail(&$engine, $module)
+function admin_massemail($engine, $module)
 {
 	$prefix		= $engine->prefix;
 ?>

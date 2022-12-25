@@ -17,7 +17,7 @@ $module['config_formatter'] = [
 
 ##########################################################
 
-function admin_config_formatter(&$engine, $module)
+function admin_config_formatter($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

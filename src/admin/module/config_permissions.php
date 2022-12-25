@@ -17,7 +17,7 @@ $module['config_permissions'] = [
 
 ##########################################################
 
-function admin_config_permissions(&$engine, $module)
+function admin_config_permissions($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

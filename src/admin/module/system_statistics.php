@@ -17,7 +17,7 @@ $module['system_statistics'] = [
 
 ##########################################################
 
-function admin_system_statistics(&$engine, $module, $tables, $directories)
+function admin_system_statistics($engine, $module, $tables, $directories)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

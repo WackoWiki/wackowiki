@@ -17,7 +17,7 @@ $module['config_email'] = [
 
 ##########################################################
 
-function admin_config_email(&$engine, $module)
+function admin_config_email($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

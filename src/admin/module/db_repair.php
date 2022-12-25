@@ -17,7 +17,7 @@ $module['db_repair'] = [
 
 ##########################################################
 
-function admin_db_repair(&$engine, $module, $tables)
+function admin_db_repair($engine, $module, $tables)
 {
 	$check = '';
 ?>

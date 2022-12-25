@@ -17,7 +17,7 @@ $module['config_basic'] = [
 
 ##########################################################
 
-function admin_config_basic(&$engine, $module)
+function admin_config_basic($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

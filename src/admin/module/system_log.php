@@ -17,7 +17,7 @@ $module['system_log'] = [
 
 ##########################################################
 
-function admin_system_log(&$engine, $module)
+function admin_system_log($engine, $module)
 {
 	# $whois = 'https://www.db.ripe.net/whois?searchtext=';
 ?>

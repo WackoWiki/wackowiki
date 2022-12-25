@@ -17,7 +17,7 @@ $module['db_backup'] = [
 
 ##########################################################
 
-function admin_db_backup(&$engine, $module, $tables, $directories)
+function admin_db_backup($engine, $module, $tables, $directories)
 {
 	$scheme			= [];
 

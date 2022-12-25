@@ -17,7 +17,7 @@ $module['config_filter'] = [
 
 ##########################################################
 
-function admin_config_filter(&$engine, $module)
+function admin_config_filter($engine, $module)
 {
 	/*
 	TODO:

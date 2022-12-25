@@ -17,7 +17,7 @@ $module['system_info'] = [
 
 ##########################################################
 
-function admin_system_info(&$engine, $module)
+function admin_system_info($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
