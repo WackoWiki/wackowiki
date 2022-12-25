@@ -17,7 +17,7 @@ $module['maint_inconsistencies'] = [
 
 ##########################################################
 
-function admin_maint_inconsistencies(&$engine, $module)
+function admin_maint_inconsistencies($engine, $module)
 {
 	$prefix		= $engine->prefix;
 ?>

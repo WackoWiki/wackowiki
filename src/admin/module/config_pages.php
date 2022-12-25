@@ -17,7 +17,7 @@ $module['config_pages'] = [
 
 ##########################################################
 
-function admin_config_pages(&$engine, $module)
+function admin_config_pages($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

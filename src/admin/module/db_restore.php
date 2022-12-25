@@ -17,7 +17,7 @@ $module['db_restore'] = [
 
 ##########################################################
 
-function admin_db_restore(&$engine, $module, $tables, $directories)
+function admin_db_restore($engine, $module, $tables, $directories)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

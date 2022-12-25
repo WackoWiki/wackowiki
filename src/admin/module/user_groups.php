@@ -17,7 +17,7 @@ $module['user_groups'] = [
 
 ##########################################################
 
-function admin_user_groups(&$engine, $module)
+function admin_user_groups($engine, $module)
 {
 	$where		= '';
 	$order		= '';

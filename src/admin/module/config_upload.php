@@ -17,7 +17,7 @@ $module['config_upload'] = [
 
 ##########################################################
 
-function admin_config_upload(&$engine, $module)
+function admin_config_upload($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

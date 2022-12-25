@@ -17,7 +17,7 @@ $module['config_appearance'] = [
 
 ##########################################################
 
-function admin_config_appearance(&$engine, $module)
+function admin_config_appearance($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

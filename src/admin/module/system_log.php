@@ -17,7 +17,7 @@ $module['system_log'] = [
 
 ##########################################################
 
-function admin_system_log(&$engine, $module)
+function admin_system_log($engine, $module)
 {
 	# $whois = 'https://www.db.ripe.net/whois?searchtext=';
 ?>
@@ -139,8 +139,8 @@ function admin_system_log(&$engine, $module)
 ?>
 		<div>
 			<h4><?php echo $engine->_t('LogFilterTip'); ?></h4><br>
-			<?php echo $engine->_t('LogLevel'); ?>
-			<select name="level_mod">
+			<label for="level_mod"><?php echo $engine->_t('LogLevel'); ?></label>
+			<select id="level_mod" name="level_mod">
 			<?php
 				$log_filters = $engine->_t('LogLevelFilters');
 

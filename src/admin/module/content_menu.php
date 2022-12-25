@@ -17,7 +17,7 @@ $module['content_menu'] = [
 
 ##########################################################
 
-function admin_content_menu(&$engine, $module)
+function admin_content_menu($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

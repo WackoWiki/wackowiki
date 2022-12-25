@@ -17,7 +17,7 @@ $module['user_users'] = [
 
 ##########################################################
 
-function admin_user_users(&$engine, $module)
+function admin_user_users($engine, $module)
 {
 	$where		= '';
 	$order		= '';

@@ -17,7 +17,7 @@ $module['db_convert'] = [
 
 ##########################################################
 
-function admin_db_convert(&$engine, &$module, &$tables)
+function admin_db_convert($engine, &$module, &$tables)
 {
 	$scheme		= [];
 	$getstr		= '';

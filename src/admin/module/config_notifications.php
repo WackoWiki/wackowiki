@@ -17,7 +17,7 @@ $module['config_notifications'] = [
 
 ##########################################################
 
-function admin_config_notifications(&$engine, $module)
+function admin_config_notifications($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

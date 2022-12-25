@@ -17,7 +17,7 @@ $module['config_security'] = [
 
 ##########################################################
 
-function admin_config_security(&$engine, $module)
+function admin_config_security($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
@@ -312,7 +312,7 @@ function admin_config_security(&$engine, $module)
 
 					?>
 				<th colspan="2">
-					CSP header <?php echo $file_name; ?>
+					<label for="csp_header">CSP header <?php echo $file_name; ?></label>
 				</th>
 			</tr>
 			<tr>
@@ -328,7 +328,7 @@ function admin_config_security(&$engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="csp"><strong><?php echo $engine->_t('PermissionsPolicy');?></strong><br>
+					<label for="permissions_policy"><strong><?php echo $engine->_t('PermissionsPolicy');?></strong><br>
 					<small><?php echo $engine->_t('PermissionsPolicyInfo');?></small></label>
 				</td>
 				<td>
@@ -366,12 +366,12 @@ function admin_config_security(&$engine, $module)
 
 					?>
 				<th colspan="2">
-					Permissions-Policy header <?php echo $file_name; ?>
+					<label for="pp_header">Permissions-Policy header <?php echo $file_name; ?></label>
 				</th>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea class="sec-header" id="csp_header" name="pp_header"><?php echo Ut::html($pp_header);?></textarea>
+					<textarea class="sec-header" id="pp_header" name="pp_header"><?php echo Ut::html($pp_header);?></textarea>
 				</td>
 			</tr>
 			<?php

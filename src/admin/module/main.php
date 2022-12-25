@@ -17,7 +17,7 @@ $module['main'] = [
 
 ##########################################################
 
-function admin_main(&$engine, $module)
+function admin_main($engine, $module)
 {
 	$action = $_POST['_action'] ?? null;
 

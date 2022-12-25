@@ -17,7 +17,7 @@ $module['content_deleted'] = [
 
 ##########################################################
 
-function admin_content_deleted(&$engine, $module)
+function admin_content_deleted($engine, $module)
 {
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

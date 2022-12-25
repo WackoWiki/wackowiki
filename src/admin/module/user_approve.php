@@ -17,7 +17,7 @@ $module['user_approve'] = [
 
 ##########################################################
 
-function admin_user_approve(&$engine, $module)
+function admin_user_approve($engine, $module)
 {
 	$where			= '';
 	$order			= '';

@@ -17,7 +17,7 @@ $module['content_polls'] = [
 
 ##########################################################
 
-function admin_content_polls(&$engine, &$module)
+function admin_content_polls($engine, &$module)
 {
 	$confirmation = '';
 	$moderation = '';
