@@ -5242,7 +5242,7 @@ class Wacko
 	 * @param string		$mode			'get' or 'replace'
 	 * @param array|false	$new_section	replacement array with [title, body] for section data
 	 *
-	 * @return array		section array with [level, title, body]
+	 * @return array|null					section array with [level, title, body]
 	 */
 	function extract_sections($body, $section_id, $mode, $new_section = ''): ?array
 	{
@@ -5377,10 +5377,10 @@ class Wacko
 
 			if ($section['title'])
 			{
-				$body[]	= $nl . $section['h'] . $section['title'] . $section['h'];
+				$body[] = $nl . $section['h'] . $section['title'] . $section['h'];
 			}
 
-			$body[]	= $section['body'];
+			$body[] = $section['body'];
 		}
 
 		unset($sections);
@@ -5398,9 +5398,9 @@ class Wacko
 	 * @param string	$body			Wikitext to look in
 	 * @param int		$section_id		Section identifier
 	 *
-	 * @return string					Text of the requested section
+	 * @return array|null				Section array with [level, title, body] of the requested section
 	 */
-	function get_section($body, $section_id)
+	function get_section($body, $section_id): ?array
 	{
 		return $this->extract_sections($body, $section_id, 'get');
 	}
@@ -6144,11 +6144,11 @@ class Wacko
 	* @param string		$privilege		ACL privilege: read, write, comment, create, upload
 	* @param bool		$use_defaults
 	*
-	* @return array ACL
+	* @return array		ACL
 	*/
-	function get_cached_acl($page_id, $privilege, $use_defaults)
+	function get_cached_acl($page_id, $privilege, $use_defaults): array
 	{
-		return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ?? '';
+		return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ?? [];
 	}
 
 	/**
@@ -6223,7 +6223,7 @@ class Wacko
 	*/
 	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = ''): array
 	{
-		$acl = '';
+		$acl = [];
 
 		if ($use_cache && $use_parent)
 		{
@@ -8664,7 +8664,7 @@ class Wacko
 	 * @param string	$message	may use wiki syntax, however if used before locale translations registration,
 	 * 								will be saved in plain text only
 	 *
-	 * @return array					array with 'text' (navigation) and 'offset' (offset value for SQL queries) elements.
+	 * @return bool|array			array with logged events
 	 */
 	function log($level, $message)
 	{
