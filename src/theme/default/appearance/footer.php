@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 }
 
 // user lang dir
-if ($this->languages[$this->page_lang]['dir'] != $this->user_lang_dir)
+if ($this->get_direction($this->page_lang) != $this->user_lang_dir)
 {
 	$tpl->dir	= ' dir="' . $this->user_lang_dir . '"';
 }

@@ -55,7 +55,7 @@ if ($this->has_access('read'))
 		header_remove('X-Powered-By');
 
 		$tpl->lang		= $this->page_lang;
-		$tpl->dir		= $this->languages[$this->page_lang]['dir'];
+		$tpl->dir		= $this->get_direction($this->page_lang);
 		$tpl->charset	= $this->get_charset();
 		$tpl->method	= $this->method;
 		!Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);

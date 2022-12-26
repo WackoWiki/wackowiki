@@ -1,4 +1,5 @@
 <?php
+
 /*
 
 Typografica library: typografica class.
@@ -235,8 +236,8 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(^|\s|" . $mark . "|>)\"((" . $mark . ")*[\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]+([\"”]))/ui", "\\1“\\2", $data);				// \u{201C} <Left Double Quotation Mark>
-				$data	= preg_replace("/(“([\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]*(" . $mark . ")*).*[\p{Latin}\d][\?\.\!\,]*(" . $mark . ")*)\"/ui", "\\1”", $data);	// \u{201D} <Right Double Quotation Mark>
+				$data	= preg_replace("/(^|\s|" . $mark . "|>)\"((" . $mark . ")*[\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]+([\"”]))/ui",						"\\1“\\2", $data);	// \u{201C} <Left Double Quotation Mark>
+				$data	= preg_replace("/(“([\p{Latin}\d\'\!\s\.\?\,\-\&\;\:\_]*(" . $mark . ")*).*[\p{Latin}\d][\?\.\!\,]*(" . $mark . ")*)\"/ui",		"\\1”",    $data);	// \u{201D} <Right Double Quotation Mark>
 			}
 		}
 
@@ -244,26 +245,23 @@ class Typografica
 		if ($this->settings['laquo'])
 		{
 			$data	= str_replace('""', '&quot;&quot;', $data);
-			$data	= preg_replace("/(^|\s|" . $mark . "|>|\()\"((" . $mark . ")*[~\p{L}\d\-:\/\.])/ui", "\\1«\\2", $data);
-
-			// nb: wacko only regexp follows:
-			$data	= preg_replace("/(^|\s|" . $mark . "|>|\()\"((" . $mark . "|\/\u{00A0}|\/|\!)*[~\p{L}\d\-:\/\.])/ui", "\\1«\\2", $data);
+			$data	= preg_replace("/(^|\s|" . $mark . "|>|\()\"((" . $mark . ")*[~\p{L}\d\-:\/\.])/ui",					"\\1«\\2", $data);
+			$data	= preg_replace("/(^|\s|" . $mark . "|>|\()\"((" . $mark . "|\/\u{00A0}|\/|\!)*[~\p{L}\d\-:\/\.])/ui",	"\\1«\\2", $data);
 			$_data	= '""';
 
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . ")*)\"/usi", "\\1»", $data);
-				// nb: wacko only regexps follows:
-				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . ")*\?(" . $mark . ")*)\"/usi", "\\1»", $data);
-				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . "|\/|\!)*)\"/usi", "\\1»", $data);
+				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . ")*)\"/usi",					"\\1»", $data);
+				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . ")*\?(" . $mark . ")*)\"/usi",	"\\1»", $data);
+				$data	= preg_replace("/(«([^\"]*)[\p{L}\d\.\-:\/](" . $mark . "|\/|\!)*)\"/usi",				"\\1»", $data);
 			}
 		}
 
 		// 2a. angle and English quotes together
 		if (($this->settings['quotes']) && (($this->settings['laquo'])))
 		{
-			$data = preg_replace("/(“(([\p{L}\d'!\.?,\-&;:]|\s|" . $mark . ")*)«(.*)»)»/ui", "\\1”", $data);		// \u{0094} <Cancel Character>
+			$data = preg_replace("/(“(([\p{L}\d'!\.?,\-&;:]|\s|" . $mark . ")*)«(.*)»)»/ui", "\\1”", $data);
 		}
 
 		// 3. dash
