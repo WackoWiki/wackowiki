@@ -84,8 +84,8 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	$day_names = []; // generate all the day names according to the current locale
 
 	$day_pattern = ($day_name_length == 2
-		? "cccccc"	// cccccc - 2-letter textual day name
-		: "ccc");	// ccc    - 3-letter textual day name, see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
+		? 'cccccc'	// cccccc - 2-letter textual day name
+		: 'ccc');	// ccc    - 3-letter textual day name, see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
 
 	$fmt = new IntlDateFormatter($this->lang['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, $day_pattern);
 
@@ -145,15 +145,15 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	{
 		if (isset($days[$day]) && is_array($days[$day]))
 		{
-			[$link, $classes, $content] = $days[$day];
+			[$link, $class, $content] = $days[$day];
 
 			if (is_null($content))
 			{
 				$content = $day;
 			}
 
-			$tpl->class		= $classes ? ' class="' . Ut::html($classes) . '"' : '';
-			$content		= ($link ? '<a href="' . Ut::html($link) . '">' . $content . '</a>' : $content);
+			$tpl->class		= $class	? ' class="' . Ut::html($class) . '"' : '';
+			$content		= $link		? '<a href="' . Ut::html($link) . '">' . $content . '</a>' : $content;
 			$tpl->content	= '<span class="calendar-hl">' . $content . '</span>';
 		}
 		else

@@ -12,7 +12,7 @@ header_remove('X-Powered-By');
 $tpl->enter('h_');
 
 $tpl->lang			= $this->page_lang;
-$tpl->dir			= $this->languages[$this->page_lang]['dir'];
+$tpl->dir			= $this->get_direction($this->page_lang);
 $tpl->charset		= $this->get_charset();
 
 !Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);
