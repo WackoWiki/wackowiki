@@ -129,7 +129,9 @@ if (!array_key_exists($mode, $tabs))
 
 // print navigation
 $tpl->tabs		= $this->tab_menu($tabs, $mode, '', ['date' => $date], $mod_selector);
-$tpl->mode		= $mode;
+$tpl->mode		= $this->_t($tabs[$mode]);
+
+$tpl->style_n	= true;
 
 // $month_name = $month;
 $last_day		= $get_last_day_of_month($month, $year);
@@ -213,9 +215,9 @@ else if ($mode == 'day')
 	$printout		= str_replace("\n", '<hr></td></tr><tr align="left"><td>', $schedule);
 	$print_owner	= $user_name . ' ' . $this->_t('SchedLabel');
 
-	$tpl->prevday	= $href_prev_day;
-	$tpl->nextday	= $href_next_day;
-	$tpl->label		= $print_owner . ' ' . $display_date;
+	$tpl->nav2_prevday	= $href_prev_day;
+	$tpl->nav2_nextday	= $href_next_day;
+	$tpl->nav2_label	= $print_owner . ' ' . $display_date;
 
 	if ($user = $this->get_user())
 	{
@@ -231,9 +233,9 @@ else if ($mode == 'month')
 
 	// get what weekday the first is on
 
-	$tpl->prevmonth	= $href_prev_month;
-	$tpl->nextmonth	= $href_next_month;
-	$tpl->label		= $user_name . ' ' . $this->_t('SchedCalendarLabel') . ' ' . $month_name . ' ' . $year;
+	$tpl->nav_prevmonth	= $href_prev_month;
+	$tpl->nav_nextmonth	= $href_next_month;
+	$tpl->nav_label		= $user_name . ' ' . $this->_t('SchedCalendarLabel') . ' ' . $month_name . ' ' . $year;
 
 	foreach ($weekdays() as $weekday)
 	{
@@ -284,9 +286,9 @@ else if ($mode == 'month')
 		}
 
 		// check for event
-		$tag		= $year . '-' . $month . '-' . $_day;
+		$_date		= $year . '-' . $month . '-' . $_day;
 
-		if ($tag == $today_date)
+		if ($_date == $today_date)
 		{
 			$style1	= '<span style="color: #FF0000"><b>';
 			$style2	= '</b></span>';
@@ -299,7 +301,7 @@ else if ($mode == 'month')
 			$token	= false;
 		}
 
-		$dayoutput	= $result[$tag] ?? '';
+		$dayoutput	= $result[$_date] ?? '';
 		// replace <some text>@...\n with <some text> \n
 		$dayoutput	= preg_replace("/(.*?\w+?.*?)@(.*?)\n+?/", "$1\n", $dayoutput);
 		// replace @...\n with nothing
@@ -310,14 +312,14 @@ else if ($mode == 'month')
 
 		if ($token)
 		{
-			# $printme = '<a href="' . $this->href('', '', ['mode' => $mode_day, 'date' => $date, '#' => 'entry-box']) . '"><small>[Print Day]</small></a>';
+			# $printme = '<a href="' . $this->href('', '', ['mode' => $mode_day, 'date' => $_date, '#' => 'entry-box']) . '"><small>[Print Day]</small></a>';
 		}
 		else
 		{
 			$printme = '';
 		}
 
-		$tpl->href			= $this->href('', '', ['date' => $date, '#' => 'entry-box']);
+		$tpl->href			= $this->href('', '', ['date' => $_date, '#' => 'entry-box']);
 		$tpl->day			= $style1 . $_day . $style2 ;
 		$tpl->print			= $printme;
 		$tpl->schedule		= $dayoutput;
@@ -340,9 +342,9 @@ else if ($mode == 'month')
 
 	$tpl->leave(); // d_
 
-	$tpl->prevday		= $href_prev_day;
-	$tpl->nextday		= $href_next_day;
-	$tpl->dlabel		= $user_name . ' ' . $this->_t('SchedDayLabel') . ' ' . $display_date;
+	$tpl->nav2_prevday	= $href_prev_day;
+	$tpl->nav2_nextday	= $href_next_day;
+	$tpl->nav2_label	= $user_name . ' ' . $this->_t('SchedDayLabel') . ' ' . $display_date;
 
 	$tpl->form_href		= $this->href('', '', ['mode' => $mode_month, 'date' => $date]);
 	$tpl->form_schedule	= $schedule;
@@ -355,9 +357,9 @@ else if ($mode == 'default')
 {
 	$tpl->enter('default_');
 
-	$tpl->month		= $month_name . ' ' . $year;
-	$tpl->prevmonth	= $href_prev_month;
-	$tpl->nextmonth	= $href_next_month;
+	$tpl->nav_label		= $month_name . ' ' . $year;
+	$tpl->nav_prevmonth	= $href_prev_month;
+	$tpl->nav_nextmonth	= $href_next_month;
 
 	foreach ($weekdays('EEEEEE') as $weekday)
 	{
@@ -393,9 +395,9 @@ else if ($mode == 'default')
 		}
 
 		// check for event
-		$tag		= $year . '-' . $month . '-' . $_day;
+		$_date		= $year . '-' . $month . '-' . $_day;
 
-		if ($tag == $today_date)
+		if ($_date == $today_date)
 		{
 			$style1 = '<span style="color: #FF0000"><b>';
 			$style2 = '</b></span>';
@@ -406,7 +408,7 @@ else if ($mode == 'default')
 			$style2 = '';
 		}
 
-		$tpl->href		= $this->href('', '', ['date' => $year . '-' . $month . '-' . $_day]);
+		$tpl->href		= $this->href('', '', ['date' => $_date]);
 		$tpl->day		= $style1 . $_day . $style2;
 
 		// Sunday start week with <tr>
@@ -432,9 +434,9 @@ else if ($mode == 'default')
 	// title over textarea box
 	$print_owner		= $user_name . ' ' . $this->_t('SchedLabel');
 
-	$tpl->label			= $print_owner . ' ' . $display_date;
-	$tpl->prevday		= $href_prev_day;
-	$tpl->nextday		= $href_next_day;
+	$tpl->nav2_label	= $print_owner . ' ' . $display_date;
+	$tpl->nav2_prevday	= $href_prev_day;
+	$tpl->nav2_nextday	= $href_next_day;
 
 	$tpl->form_href		= $this->href('', '', ['mode' => $mode_default, 'date' => $date]);
 	$tpl->form_schedule	= $schedule;

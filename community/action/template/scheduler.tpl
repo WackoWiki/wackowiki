@@ -1,171 +1,116 @@
 [ === main === ]
-
+[ ' style ' ]
 <h2>[ ' mode ' ]</h2>
 [ ' tabs ' ]
 <br><br>
 [= mustlogin _ =
 	<em>[ ' _t: SchedMustLogin ' ]</em>
 =]
-<div class="t-center">
-	<table border=0 width=100%>
-	<tr>
-		<td>
-			<div class="t-center">
 
-		[= day _ =
-			<div class="t-center">
-				<a href="[ ' prevday ' ]"><<</a>
-				<b>[ ' label ' ]</b>
-				<a href="[ ' nextday ' ]">>></a>
-
-				<table class="box media-center" width="600" border="1" cellspacing='1' cellpadding='7' bgcolor='#ddccbb'>
-					<tr>
-						<td>
-							<p></p>
-							<table class='box' width='100%' border='0' cellspacing='0' cellpadding='2' bgcolor='#ffffff'>
-								<tr align='left'>
-									<td>
-										<p>[ ' tasks ' ]</p>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
+	[= day _ =
+		<div class="t-center">
+			[ '' nav2 '' ]
+			<div class="schdl-day media-center">
+				<p>[ ' tasks ' ]</p>
 			</div>
-			</div>
-		=]
-		[= month _ =
-			<table>
-				<tr>
-					<td valign="top">
-						<table cellpadding="2" cellspacing="0" border="1">
+		</div>
+	=]
+	[= month _ =
+		<table class="schdl-month">
+			<tr>
+				<td colspan="7">
+					[ '' nav '' ]
+				</td>
+			</tr>
+			<tr class="schdl-2">
+			[= n _ =
+				<td>[ ' weekday ' ]</td>
+			=]
+			</tr>
+			[= d _ =
+				[= first _ =
+				<tr class="tr1">
+					[= b _ =
+					<td>[ ' n | void ' ]</td>
+					=]
+				=]
+				[= tr2 _ =
+					<tr class="tr2">
+					[ ' nonstatic ' ]
+				=]
+					<td class="tr-entry">
+						<table class="schdl-entry">
+							<tr class="schdl-1">
+								<td><a href="[ ' href ' ]">[ ' day ' ]</a>[ ' print ' ]</td>
+							</tr>
 							<tr>
+								<td><small>[ ' schedule ' ]</small></td>
+							</tr>
+						</table>
+					</td>
+				[= etr _ =
+					</tr>
+					[ ' nonstatic ' ]
+				=]
+			=]
+			</tr>
+		</table>
+		<br>
+		<div class="t-center">
+			<a name="entry-box"></a>
+			[ '' nav2 '' ]
+			<br><em><small>[ ' _t: SchedCommentsNote ' ]</small></em>
+			[ '' form '' ]
+		</div>
+	=]
+		[= default _ =
+			<table class="schdl-default">
+				<tr>
+					<td>
+
+						<table class="schdl-calendar">
+							<tr class="schdl-3">
 								<td colspan="7">
-									<table cellpadding="0" cellspacing="0" border="0" width="100%">
-										<tr>
-											<td width="20"><a href="[ ' prevmonth ' ]"><<<</a></td>
-											<td class="t-center"><strong>[ ' label ' ]</strong></td>
-											<td width="20"><a href="[ ' nextmonth ' ]">>>></a></td>
-										</tr>
-									</table>
+									[ '' nav '' ]
 								</td>
 							</tr>
-							<tr bgcolor="#ddccbb">
-							[= n _ =
-								<td>[ ' weekday ' ]</td>
-							=]
+							<tr class="schdl-2">
+								[= n _ =
+									<td class="schdl-d">[ ' weekday ' ]</td>
+								=]
 							</tr>
 							[= d _ =
 								[= first _ =
-								<tr class="tr1">
+								<tr class="schdl-3">
 									[= b _ =
-									<td>[ ' n | void ' ]</td>
+										<td>[ ' n | void ' ]</td>
 									=]
 								=]
 								[= tr2 _ =
-									<tr class="tr2">
-									[ ' nonstatic ' ]
+								<tr class="schdl-3">
+								[ ' nonstatic ' ]
 								=]
-									<td valign=top align=left width=150 height=70>
-										<table width="100%">
-											<tr bgcolor="#E4DFDA">
-												<td><a href="[ ' href ' ]">[ ' day ' ]</a>[ ' print ' ]</td>
-											</tr>
-											<tr>
-												<td><small>[ ' schedule ' ]</small></td>
-											</tr>
-										</table>
+									<td>
+										<a href="[ ' href ' ]">[ ' day ' ]</a>
 									</td>
 								[= etr _ =
 									</tr>
 									[ ' nonstatic ' ]
 								=]
 							=]
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td widht=500>
-			<p></p>
-
-			<div class="t-center">
-				<a name="entry-box"></a>
-				<a href="[ ' prevday ' ]"><<</a>
-				<b>[ ' dlabel ' ]</b>
-				<a href="[ ' nextday ' ]">>></a>
-				<br><em><small>[ ' _t: SchedCommentsNote ' ]</small></em>
-				[ '' form '' ]
-			</div>
-		=]
-		[= default _ =
-			<table bgcolor="#ddccbb">
-				<tr>
-					<td valign="top">
-
-						<table cellpadding="2" cellspacing="0" border="1">
-							<tr bgcolor="#ffffff">
-								<td colspan="7">
-									<table cellpadding="0" cellspacing="0" border="0" width="100%">
-										<tr bgcolor="#ffffff">
-											<td width="20"><a href="[ ' prevmonth ' ]"><<<</a></td>
-											<td class="t-center">[ ' month ' ]</td>
-											<td width="20"><a href="[ ' nextmonth ' ]">>>></a></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr bgcolor="#ddccbb">
-							[= n _ =
-								<td width="22">[ ' weekday ' ]</td>
-							=]
-							</tr>
-						[= d _ =
-							[= first _ =
-							<tr bgcolor="#ffffff">
-								[= b _ =
-								<td>[ ' n | void ' ]</td>
-								=]
-							=]
-							[= tr2 _ =
-							<tr bgcolor="#ffffff">
-							[ ' nonstatic ' ]
-							=]
-								<td>
-									<a href="[ ' href ' ]">[ ' day ' ]</a>
-								</td>
-							[= etr _ =
-								</tr>
-								[ ' nonstatic ' ]
-							=]
-						=]
 							</tr>
 						</table>
 
 					</td>
+					<td class="t-center">
+					[= f _ =
+						[ '' nav2 '' ]
+						[ '' form '' ]
+					=]
+					</td>
 				</tr>
 			</table>
-			</div>
-		</td>
-		<td width=500>
-		[= f _ =
-			<br>
-			<a href="[ ' prevday ' ]"><<</a>
-			<b>[ ' label ' ]</b>
-			<a href="[ ' nextday ' ]">>></a>
-			[ '' form '' ]
-		=]
 	=]
-
-		</td>
-	</tr>
-</table>
-</div>
 
 [= form =]
 <form action="[ ' href ' ]" method="post" name="day_schedule">
@@ -174,3 +119,83 @@
 	<textarea cols="[ ' cols ' ]" rows="[ ' rows ' ]" name="schedule">[ ' schedule | pre ' ]</textarea><br>
 	<button type="submit">[ ' _t: SubmitButton ' ]</button>
 </form>
+
+[ === nav === ]
+<table class="schdl-nav">
+	<tr>
+		<td><a href="[ ' prevmonth ' ]">&lt;&lt;&lt;</a></td>
+		<td>[ ' label ' ]</td>
+		<td><a href="[ ' nextmonth ' ]">&gt;&gt;&gt;</a></td>
+	</tr>
+</table>
+
+[ === nav2 === ]
+<a href="[ ' prevday ' ]">&lt;&lt;</a>
+<b>[ ' label ' ]</b>
+<a href="[ ' nextday ' ]">&gt;&gt;</a>
+								
+[ === style === ]
+<style>[ ' n css ' ]</style>
+
+[ === css === ]
+[ ' nonstatic ' ]
+.schdl-1 { background: #e4dfda; }
+.schdl-2 { background: #ddccbb; }
+.schdl-3 { background: #ffffff; }
+.schdl-d { width: 22px; }
+
+.schdl-entry,
+.schdl-default,
+.schdl-nav {
+	width: 100%; 
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+.schdl-nav td:nth-child(1),
+.schdl-nav td:nth-child(3) {
+	width: 20px;
+}
+.schdl-nav td:nth-child(2) {
+	text-align: center;
+	font-weight: bold;
+}
+.schdl-entry td,
+.schdl-nav td {
+	border: 0 none !important;
+}
+.schdl-default tr {
+	vertical-align: top;
+}
+
+.schdl-day {
+	width: 600px;
+	border: 2px solid #ddccbb;
+	text-align: center;
+}
+
+.schdl-calendar {
+	border-collapse: separate;
+	border-spacing: 0px;
+	padding: 1px;
+	background: #ddccbb;
+}
+
+.schdl-calendar td {
+	border: 1px solid #ddccbb;
+	text-align: center;
+}
+
+.schdl-month {
+	padding: 2px;
+}
+.schdl-month td {
+	border: 1px solid #ddccbb;
+}
+
+.tr-entry {
+	text-align: left;
+	vertical-align: top;
+	width: 150px;
+	height: 70px;
+}
