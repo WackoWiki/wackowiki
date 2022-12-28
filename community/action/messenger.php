@@ -106,7 +106,7 @@ $get_message = function($user_id, $message_id) use ($prefix)
 
 $get_contacts = function($user_id) use ($prefix)
 {
-	return $contacts = $this->db->load_all(
+	return $this->db->load_all(
 		"SELECT i.info, u.user_name
 		FROM {$prefix}messenger_info i
 			LEFT JOIN {$prefix}user u ON (i.info = u.user_id)

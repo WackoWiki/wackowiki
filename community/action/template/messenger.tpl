@@ -508,14 +508,14 @@
 	</tr>
 </table>
 
-[= pagination =]
+[ == pagination == ]
 <nav class="pagination">[ ' text ' ]</nav>
 
-[= textarea =]
+[ == textarea == ]
 <textarea rows="16" cols="45" id="message" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
 <input readonly type="text" name="remLen" size="4" maxlength="4" value="2500"> [ ' _t: CharactersLeft ' ]
 
-[= selectfolder =]
+[ == selectfolder == ]
 <form action="[ ' hrefform ' ]" method="post" name="move_folder">
 	[ ' csrf: move_folder ' ]
 	<select name="move2folder">
@@ -527,13 +527,13 @@
 	<button type="submit">[ ' _t: Move ' ]</button>
 </form>
 
-[= icon =]
+[ == icon == ]
 <a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ]"></a>
 
-[ === style === ]
+[ == style == ]
 <style>[ ' n css ' ]</style>
 
-[ === css === ]
+[ == css == ]
 [ ' nonstatic ' ]
 .tbl-compose,
 .tbl-types {

@@ -64,12 +64,12 @@ $weekdays = function($pattern = 'EEEE'): array
 
 $months = function($pattern = 'MMMM')
 {
-	$formatter = \IntlDateFormatter::create(
+	$formatter = IntlDateFormatter::create(
 		$this->get_user()['user_lang'] ?? $this->lang['locale'],
-		\IntlDateFormatter::LONG,
-		\IntlDateFormatter::NONE,
+		IntlDateFormatter::LONG,
+		IntlDateFormatter::NONE,
 		'UTC',
-		\IntlDateFormatter::GREGORIAN,
+		IntlDateFormatter::GREGORIAN,
 		$pattern
 	);
 
@@ -181,7 +181,8 @@ $result = $this->db->load_single(
 	"SELECT schedule
 	FROM {$prefix}scheduler
 	WHERE user_id	= '" . (int) $user_id . "'
-		AND date	= " . $this->db->q($date) . "");
+		AND date	= " . $this->db->q($date) . "
+	LIMIT 1");
 
 $schedule	= $result['schedule'] ?? '';
 
@@ -212,7 +213,7 @@ if(!$user_id)
 else if ($mode == 'day')
 {
 	$tpl->enter('day_');
-	$printout		= str_replace("\n", '<hr></td></tr><tr align="left"><td>', $schedule);
+	$printout		= str_replace("\n", '<hr>', $schedule);
 	$print_owner	= $user_name . ' ' . $this->_t('SchedLabel');
 
 	$tpl->nav2_prevday	= $href_prev_day;
@@ -259,7 +260,7 @@ else if ($mode == 'month')
 		FROM {$prefix}scheduler
 		WHERE user_id	= '" . (int) $user_id . "'
 			AND date	>= " . $this->db->q($year . '-' . $month .     '-' . '01') . "
-			AND date	<  " . $this->db->q($year . '-' . $zero_prefix($month + 1) . '-' . '01') . " ");
+			AND date	<  " . $this->db->q($year . '-' . $zero_prefix($month + 1) . '-' . '01'));
 
 	foreach ($results as $record)
 	{
@@ -399,7 +400,7 @@ else if ($mode == 'default')
 
 		if ($_date == $today_date)
 		{
-			$style1 = '<span style="color: #FF0000"><b>';
+			$style1 = '<span class="cite"><b>';
 			$style2 = '</b></span>';
 		}
 		else

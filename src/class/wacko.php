@@ -5795,7 +5795,7 @@ class Wacko
 				($enabled
 					? "WHERE enabled = 1 "
 					: "") .
-			"ORDER BY BINARY user_name");
+			"ORDER BY user_name");
 	}
 
 	function get_user_id($user_name = ''): int
