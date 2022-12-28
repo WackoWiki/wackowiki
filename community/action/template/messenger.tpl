@@ -1,4 +1,5 @@
 [ === main === ]
+[ ' style ' ]
 	[= x _ =
 		<script>
 		<!-- Begin
@@ -21,7 +22,7 @@
 					[ ' csrf: message_folder ' ]
 					<label for="msg_folder"><b>[ ' _t: Folder ' ]</b></label>
 					<select name="msg_folder" id="msg_folder">
-						<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
+						<option value="">--&gt;[ ' // _t: ChooseFolder ' ]</option>
 					[= o _ =
 						<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>
 					=]
@@ -40,44 +41,55 @@
 	[= b _ =
 		<form action="[ ' href: ' ]" method="post" name="folder_inbox">
 			[ ' csrf: folder_inbox ' ]
-		<table class="usertable">
-			<tr>
-				<td colspan="5" style="border: 0;">
-					[ '' pagination '' ]
-				</td>
-			</tr>
-			<tr>
-				<th width="10"></th>
-				<th width="600">[ ' _t: Subject ' ]</th>
-				<th width="140">[ ' _t: Sender ' ]</th>
-				<th width="100">[ ' _t: Date ' ]</th>
-				<th width="80">[ ' // _t: Delete ' ]</th>
-			</tr>
-			[= n _ =
+			<table class="tbl-inbox usertable">
+				<colgroup>
+					<col span="1">
+					<col span="1">
+					<col span="1">
+					<col span="1">
+					<col span="1">
+				</colgroup>
+				<thead>
+					<tr>
+						<td colspan="5" style="border: 0;">
+							[ '' pagination '' ]
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<th>[ ' _t: Subject ' ]</th>
+						<th>[ ' _t: Sender ' ]</th>
+						<th>[ ' _t: Date ' ]</th>
+						<th>[ ' // _t: Delete ' ]</th>
+					</tr>
+				</thead>
+				<tbody>
+				[= n _ =
+					<tr>
+						<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
+						<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
+						<td>[ ' username ' ]</td>
+						<td>[ ' time | time_formatted ' ]</td>
+						<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
+					</tr>
+				=]
+				[= none _ =
+					<tr>
+						<td colspan="5"><br>[ ' _t: NoMessagesInbox ' ]<br><br></td>
+					</tr>
+				=]
 				<tr>
-					<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
-					<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
-					<td>[ ' username ' ]</td>
-					<td>[ ' time | time_formatted ' ]</td>
-					<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
+					<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
 				</tr>
-			=]
-			[= none _ =
-				<tr>
-					<td colspan="5"><br>[ ' _t: NoMessagesInbox ' ]<br><br></td>
-				</tr>
-			=]
-			<tr>
-				<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
-			</tr>
-		</table>
+				</tbody>
+			</table>
 		</form>
 	=]
 	[= c _ =
 		<br><strong>[ ' // _t: ComposeMessage ' ]</strong>
 		<form action="[ ' hrefform ' ]" method="post" name="message_store">
 			[ ' csrf: message_store ' ]
-			<table width="675" class="usertable" style="float: left;">
+			<table class="tbl-compose usertable">
 				<tr>
 					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
 					<td><input type="text" id="subject" name="subject" maxlength="65" size="30" value="" required></td>
@@ -109,7 +121,7 @@
 			</table>
 		</form>
 
-		<aside style="width: 200px; padding-left: 25px; float: right;">
+		<aside class="sidebar">
 			<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
 			<b>[ ' _t: Contacts ' ]:</b><br>
 			<small>([ ' _t: ClickName ' ])</small><br><br>
@@ -119,10 +131,10 @@
 		</aside>
 	=]
 	[= d _ =
-		<br><h3>[ ' _t: ReplyToMessage ' ]</h3>
+		<h3>[ ' _t: ReplyToMessage ' ]</h3>
 		<form action="[ ' hrefform ' ]" method="post" name="message_reply">
 			[ ' csrf: message_reply ' ]
-			<table width="400" class="usertable">
+			<table class="tbl-compose usertable">
 				<tr>
 					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
 					<td><input readonly type="text" id="subject" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
@@ -149,10 +161,10 @@
 		</form>
 	=]
 	[= e _ =
-		<br><h3>[ ' _t: ForwardMessage ' ]</h3>
+		<h3>[ ' _t: ForwardMessage ' ]</h3>
 		<form action="[ ' hrefform ' ]" method="post" name="message_forward">
 			[ ' csrf: message_forward ' ]
-			<table width="675" class="usertable" style="float: left;">
+			<table class="tbl-compose usertable">
 				<tr>
 					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
 					<td><input type="text" id="subject" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
@@ -184,7 +196,7 @@
 			</table>
 		</form>
 
-		<aside style="width: 200px; padding-left: 25px; float: right;">
+		<aside class="sidebar">
 			<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
 			<b>[ ' _t: Contacts ' ]:</b><br>
 			<small>([ ' _t: ClickName ' ])</small><br><br>
@@ -231,38 +243,49 @@
 	[= h _ =
 		<form action="[ ' href: ' ]" method="post" name="selected_folder">
 			[ ' csrf: selected_folder ' ]
-		<table class="usertable">
-			<tr>
-				<td colspan="5" style="border: 0;">
-					[ '' pagination '' ]
-				</td>
-			</tr>
-			<tr>
-				<th width="10"></th>
-				<th width="600">[ ' _t: Subject ' ]</th>
-				<th width="150">[ ' _t: Sender ' ]</th>
-				<th width="100">[ ' _t: Date ' ]</th>
-				<th width="80">[ ' // _t: Delete ' ]</th>
-			</tr>
-			[= n _ =
+			<table class="tbl-inbox usertable">
+				<colgroup>
+					<col span="1">
+					<col span="1">
+					<col span="1">
+					<col span="1">
+					<col span="1">
+				</colgroup>
+				<thead>
+					<tr>
+						<td colspan="5" style="border: 0;">
+							[ '' pagination '' ]
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<th>[ ' _t: Subject ' ]</th>
+						<th>[ ' _t: Sender ' ]</th>
+						<th>[ ' _t: Date ' ]</th>
+						<th>[ ' // _t: Delete ' ]</th>
+					</tr>
+				</thead>
+				<tbody>
+				[= n _ =
+					<tr>
+						<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
+						<td>[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
+						<td>[ ' username ' ]</td>
+						<td>[ ' time | time_formatted ' ]</td>
+						<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
+					</tr>
+				=]
 				<tr>
-					<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
-					<td>[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
-					<td>[ ' username ' ]</td>
-					<td>[ ' time | time_formatted ' ]</td>
-					<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
+					<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
 				</tr>
-			=]
-			<tr>
-				<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
-			</tr>
-		</table>
+				</tbody>
+			</table>
 		</form>
 		[ ' nomessages ' ]
 	=]
 	[= i _ =
 		[ ' forbidden ' ]
-		<table width="600" class="usertable">
+		<table class="tbl-message usertable">
 			<tr>
 				<th> [ ' _t: Subject ' ]: </th>
 				<td>[ ' subject ' ]</td>
@@ -289,14 +312,14 @@
 		</table>
 	=]
 	[= j _ =
-		<table width="600" class="usertable">
+		<table class="tbl-message usertable">
 			<tr>
 				<th>[ ' _t: Subject ' ]: </th>
 				<td>[ ' subject ' ]</td>
 			</tr>
 			<tr>
 				<th>[ ' _t: Recipient ' ]: </th>
-				<td> [ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+				<td> [ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-&gt;</a>]</small></td>
 			</tr>
 			<tr>
 				<th>[ ' _t: Message ' ]: </th>
@@ -321,7 +344,7 @@
 		<form action="[ ' hrefform ' ]" method="post" name="edit_contacts">
 			[ ' csrf: edit_contacts ' ]
 			<input type="hidden" name="insert" value="1">
-			<table width="70%" class="usertable" style="float: left;">
+			<table class="tbl-types usertable">
 				<tr>
 					<th><label for="field1_value">[ ' _t: ContactNames ' ]</label></th>
 					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
@@ -352,7 +375,7 @@
 				=]
 			</table>
 
-			<aside style="width: 150px; padding-left: 25px; float: right;">
+			<aside class="sidebar">
 				<span class="cite">[ ' _t: ClickContact ' ]</span><br><br>
 				<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a>
 			</aside>
@@ -363,7 +386,7 @@
 		<form action="[ ' hrefform ' ]" method="post" name="message_folders">
 			[ ' csrf: message_folders ' ]
 			<input type="hidden" name="insert" value="1">
-			<table width="65%" class="usertable" style="float: left;">
+			<table class="tbl-types usertable">
 				<tr>
 					<th><label for="field1_value">[ ' _t: Folder ' ]</label></th>
 					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
@@ -389,7 +412,7 @@
 				=]
 			</table>
 
-			<aside style="width: 200px; padding-left: 25px; float: right;">
+			<aside class="sidebar">
 				<span class="cite">[ ' _t: ClickFolder ' ]</span><br><br>
 				<b>[ ' _t: CreateFolder ' ]</b><br><br>
 				[ ' _t: CreateFolderHelp ' ]
@@ -399,7 +422,7 @@
 	[= n _ =
 		<br>
 		['' pagination '']
-		<table width="650" class="usertable" style="float: left;">
+		<table class="tbl-types usertable">
 			<tr>
 				<th>[ ' _t: ContactNames ' ]</th>
 			</tr>
@@ -411,7 +434,7 @@
 		</table>
 		['' pagination '']
 
-		<aside class="cite" style="width: 200px; padding-left: 25px; float: right;">
+		<aside class="sidebar cite">
 			[ ' _t: ClickContact2 ' ]
 		</aside>
 	=]
@@ -447,7 +470,7 @@
 				</tr>
 				<tr>
 					<td><span class="cite">!*</span><a href=#test>Testnachricht</a> (03Jun06 2:57 pm)</td>
-					<td><a href=#testuser>Testuser</a> [<a href=#pfeil>-></a>]</td>
+					<td><a href=#testuser>Testuser</a> [<a href=#pfeil>-&gt;</a>]</td>
 					<td>
 						<form method=post>
 							<select name="move2folder"></select>
@@ -460,7 +483,7 @@
 					<td>
 						<span class="cite">!</span><a href=#test1>Testnachricht1</a><span style="color: grey;"><small><b> beantwortet am:</b> (01Jun06 1:02 pm)</small></span>
 					</td>
-					<td><a href=#testuser>Testuser16</a> [<a href=#pfeil>-></a>]</td>
+					<td><a href=#testuser>Testuser16</a> [<a href=#pfeil>-&gt;</a>]</td>
 					<td><right>
 						<form method=post>
 							<select name="move2folder"></select>
@@ -496,7 +519,7 @@
 <form action="[ ' hrefform ' ]" method="post" name="move_folder">
 	[ ' csrf: move_folder ' ]
 	<select name="move2folder">
-		<option value="">-->[ ' // _t: ChooseFolder ' ]</option>
+		<option value="">--&gt;[ ' // _t: ChooseFolder ' ]</option>
 	[= o _ =
 		<option value="[ ' info ' ][ ' selected ' ]">[ ' info ' ]</option>
 	=]
@@ -506,3 +529,39 @@
 
 [= icon =]
 <a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ]"></a>
+
+[ === style === ]
+<style>[ ' n css ' ]</style>
+
+[ === css === ]
+[ ' nonstatic ' ]
+.tbl-compose,
+.tbl-types {
+	width: 675px;
+	float: left;
+}
+.tbl-message {
+	width: 600px;
+}
+
+.tbl-inbox col:nth-child(1) {
+	width: 10px;
+}
+.tbl-inbox col:nth-child(2) {
+	width: 600px;
+}
+.tbl-inbox col:nth-child(3) {
+	width: 140px;
+}
+.tbl-inbox col:nth-child(4) {
+	width: 100px;
+}
+.tbl-inbox col:nth-child(5) {
+	width: 80px;
+}
+
+.sidebar {
+	width: 200px;
+	padding-left: 25px;
+	float: right;
+}

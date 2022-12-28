@@ -63,56 +63,56 @@
 			[ '' form '' ]
 		</div>
 	=]
-		[= default _ =
-			<table class="schdl-default">
-				<tr>
-					<td>
+	[= default _ =
+		<table class="schdl-default">
+			<tr>
+				<td>
 
-						<table class="schdl-calendar">
+					<table class="schdl-calendar">
+						<tr class="schdl-3">
+							<td colspan="7">
+								[ '' nav '' ]
+							</td>
+						</tr>
+						<tr class="schdl-2">
+							[= n _ =
+								<td class="schdl-d">[ ' weekday ' ]</td>
+							=]
+						</tr>
+						[= d _ =
+							[= first _ =
 							<tr class="schdl-3">
-								<td colspan="7">
-									[ '' nav '' ]
-								</td>
-							</tr>
-							<tr class="schdl-2">
-								[= n _ =
-									<td class="schdl-d">[ ' weekday ' ]</td>
-								=]
-							</tr>
-							[= d _ =
-								[= first _ =
-								<tr class="schdl-3">
-									[= b _ =
-										<td>[ ' n | void ' ]</td>
-									=]
-								=]
-								[= tr2 _ =
-								<tr class="schdl-3">
-								[ ' nonstatic ' ]
-								=]
-									<td>
-										<a href="[ ' href ' ]">[ ' day ' ]</a>
-									</td>
-								[= etr _ =
-									</tr>
-									[ ' nonstatic ' ]
+								[= b _ =
+									<td>[ ' n | void ' ]</td>
 								=]
 							=]
-							</tr>
-						</table>
+							[= tr2 _ =
+							<tr class="schdl-3">
+							[ ' nonstatic ' ]
+							=]
+								<td>
+									<a href="[ ' href ' ]">[ ' day ' ]</a>
+								</td>
+							[= etr _ =
+								</tr>
+								[ ' nonstatic ' ]
+							=]
+						=]
+						</tr>
+					</table>
 
-					</td>
-					<td class="t-center">
-					[= f _ =
-						[ '' nav2 '' ]
-						[ '' form '' ]
-					=]
-					</td>
-				</tr>
-			</table>
+				</td>
+				<td class="t-center">
+				[= f _ =
+					[ '' nav2 '' ]
+					[ '' form '' ]
+				=]
+				</td>
+			</tr>
+		</table>
 	=]
 
-[= form =]
+[ == form == ]
 <form action="[ ' href ' ]" method="post" name="day_schedule">
 	[ ' csrf: day_schedule ' ]
 	<input type="hidden" name="save" value="true">
@@ -120,7 +120,7 @@
 	<button type="submit">[ ' _t: SubmitButton ' ]</button>
 </form>
 
-[ === nav === ]
+[ == nav == ]
 <table class="schdl-nav">
 	<tr>
 		<td><a href="[ ' prevmonth ' ]">&lt;&lt;&lt;</a></td>
@@ -129,15 +129,15 @@
 	</tr>
 </table>
 
-[ === nav2 === ]
+[ == nav2 == ]
 <a href="[ ' prevday ' ]">&lt;&lt;</a>
 <b>[ ' label ' ]</b>
 <a href="[ ' nextday ' ]">&gt;&gt;</a>
 								
-[ === style === ]
+[ == style == ]
 <style>[ ' n css ' ]</style>
 
-[ === css === ]
+[ == css == ]
 [ ' nonstatic ' ]
 .schdl-1 { background: #e4dfda; }
 .schdl-2 { background: #ddccbb; }

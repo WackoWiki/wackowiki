@@ -130,6 +130,7 @@ if ($user_id = $this->get_user_id())
 	$action			= $_GET['action'] ?? null;
 	$to				= (int) ($_GET['to'] ?? null);
 
+	$tpl->style_n	= true;
 	$tpl->enter('x_');
 
 	$mod_selector	= 'action';
@@ -148,6 +149,8 @@ if ($user_id = $this->get_user_id())
 	{
 		$mode = '';
 	}
+
+	#$tpl->h_header		= $this->_t($modes[$mode]);
 
 	foreach ($modes as $i => $text)
 	{
