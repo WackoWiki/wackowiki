@@ -62,7 +62,7 @@ $weekdays = function($pattern = 'EEEE'): array
 	);
 };
 
-$months = function($pattern = 'MMMM')
+$months = function($pattern = 'MMMM'): array
 {
 	$formatter = IntlDateFormatter::create(
 		$this->get_user()['user_lang'] ?? $this->lang['locale'],
@@ -135,14 +135,14 @@ $tpl->style_n	= true;
 
 // $month_name = $month;
 $last_day		= $get_last_day_of_month($month, $year);
-$tmpd			= getdate(mktime(0, 0, 0, $month, 1, $year));
-#$month_name		= $tmpd['month'];
-$firstw_day		= $tmpd['wday'];
+$tmp_date		= getdate(mktime(0, 0, 0, $month, 1, $year));
+#$month_name	= $tmp_date['month'];
+$firstw_day		= $tmp_date['wday'];
 
-	$month_loc		= $months();
-	$month_name		= $month_loc[(int) $month - 1];
+$month_loc		= $months();
+$month_name		= $month_loc[(int) $month - 1];
 
-	$display_date	= $day . '. ' . $month_name . ' ' . $year . ':';
+$display_date	= $day . '. ' . $month_name . ' ' . $year . ':';
 
 $user_name		= $this->get_user_name();
 $user_id		= $this->get_user_id();
@@ -213,7 +213,8 @@ if(!$user_id)
 else if ($mode == 'day')
 {
 	$tpl->enter('day_');
-	$printout		= str_replace("\n", '<hr>', $schedule);
+	$printout		= str_replace("\r", '', $schedule);
+	$printout		= preg_replace("/(\n){1,}/", '</p><hr><p>', $printout);
 	$print_owner	= $user_name . ' ' . $this->_t('SchedLabel');
 
 	$tpl->nav2_prevday	= $href_prev_day;
@@ -291,7 +292,7 @@ else if ($mode == 'month')
 
 		if ($_date == $today_date)
 		{
-			$style1	= '<span style="color: #FF0000"><b>';
+			$style1	= '<span class="cite"><b>';
 			$style2	= '</b></span>';
 			$token	= true;
 		}
@@ -302,18 +303,19 @@ else if ($mode == 'month')
 			$token	= false;
 		}
 
-		$dayoutput	= $result[$_date] ?? '';
+		$day_output	= $result[$_date] ?? '';
+		$day_output	= str_replace("\r", '', $day_output);
 		// replace <some text>@...\n with <some text> \n
-		$dayoutput	= preg_replace("/(.*?\w+?.*?)@(.*?)\n+?/", "$1\n", $dayoutput);
+		#$day_output	= preg_replace("/(.*?\w+?.*?)@(.*?)\n+?/", "$1\n", $day_output); // fails: debug!
 		// replace @...\n with nothing
-		$dayoutput	= preg_replace("/(.*?)@(.*?)\n/", "", $dayoutput);
-		$dayoutput	= preg_replace("/(.*?)@(.*)/", "$1", $dayoutput);
+		$day_output	= preg_replace("/(.*?)@(.*?)\n/", '', $day_output);
+		$day_output	= preg_replace("/(.*?)@(.*)/", "$1", $day_output);
 		// replace <newline> with <br>
-		$dayoutput	= str_replace("\n", "<br>", $dayoutput);
+		$day_output	= str_replace("\n", '<br>', $day_output);
 
 		if ($token)
 		{
-			# $printme = '<a href="' . $this->href('', '', ['mode' => $mode_day, 'date' => $_date, '#' => 'entry-box']) . '"><small>[Print Day]</small></a>';
+			#$printme = ' <a href="' . $this->href('', '', ['mode' => $mode_day, 'date' => $_date, '#' => 'entry-box']) . '"><small>[Print Day]</small></a>';
 		}
 		else
 		{
@@ -321,9 +323,10 @@ else if ($mode == 'month')
 		}
 
 		$tpl->href			= $this->href('', '', ['date' => $_date, '#' => 'entry-box']);
+		#$tpl->href2			= $this->href('', '', ['mode' => $mode_month, 'date' => $_date, '#' => 'entry-box']);
 		$tpl->day			= $style1 . $_day . $style2 ;
 		$tpl->print			= $printme;
-		$tpl->schedule		= $dayoutput;
+		$tpl->schedule		= $day_output;
 
 		// nn Monday (0) start a new row
 		if ($wday == 1)

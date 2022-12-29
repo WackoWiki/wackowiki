@@ -17,43 +17,47 @@
 	=]
 	[= month _ =
 		<table class="schdl-month">
-			<tr>
-				<td colspan="7">
-					[ '' nav '' ]
-				</td>
-			</tr>
-			<tr class="schdl-2">
-			[= n _ =
-				<td>[ ' weekday ' ]</td>
-			=]
-			</tr>
-			[= d _ =
-				[= first _ =
-				<tr class="tr1">
-					[= b _ =
-					<td>[ ' n | void ' ]</td>
+			<thead>
+				<tr>
+					<td colspan="7">
+						[ '' nav '' ]
+					</td>
+				</tr>
+				<tr class="schdl-2">
+				[= n _ =
+					<th>[ ' weekday ' ]</th>
+				=]
+				</tr>
+			</thead>
+			<tbody>
+				[= d _ =
+					[= first _ =
+					<tr class="tr1">
+						[= b _ =
+						<td>[ ' n | void ' ]</td>
+						=]
+					=]
+					[= tr2 _ =
+						<tr class="tr2">
+						[ ' nonstatic ' ]
+					=]
+						<td class="tr-entry">
+							<table class="schdl-entry">
+								<tr class="schdl-1">
+									<th><a href="[ ' href ' ]">[ ' day ' ]</a>[ ' print ' ]</th>
+								</tr>
+								<tr>
+									<td><small>[ ' schedule |  truncate 200 ' ]</small></td>
+								</tr>
+							</table>
+						</td>
+					[= etr _ =
+						</tr>
+						[ ' nonstatic ' ]
 					=]
 				=]
-				[= tr2 _ =
-					<tr class="tr2">
-					[ ' nonstatic ' ]
-				=]
-					<td class="tr-entry">
-						<table class="schdl-entry">
-							<tr class="schdl-1">
-								<td><a href="[ ' href ' ]">[ ' day ' ]</a>[ ' print ' ]</td>
-							</tr>
-							<tr>
-								<td><small>[ ' schedule ' ]</small></td>
-							</tr>
-						</table>
-					</td>
-				[= etr _ =
-					</tr>
-					[ ' nonstatic ' ]
-				=]
-			=]
-			</tr>
+				</tr>
+			</tbody>
 		</table>
 		<br>
 		<div class="t-center">
@@ -69,36 +73,40 @@
 				<td>
 
 					<table class="schdl-calendar">
-						<tr class="schdl-3">
-							<td colspan="7">
-								[ '' nav '' ]
-							</td>
-						</tr>
-						<tr class="schdl-2">
-							[= n _ =
-								<td class="schdl-d">[ ' weekday ' ]</td>
-							=]
-						</tr>
-						[= d _ =
-							[= first _ =
+						<thead>
 							<tr class="schdl-3">
-								[= b _ =
-									<td>[ ' n | void ' ]</td>
+								<td colspan="7">
+									[ '' nav '' ]
+								</td>
+							</tr>
+							<tr class="schdl-2">
+								[= n _ =
+									<th class="schdl-d">[ ' weekday ' ]</th>
+								=]
+							</tr>
+						</thead>
+						<tbody>
+							[= d _ =
+								[= first _ =
+								<tr class="schdl-3">
+									[= b _ =
+										<td>[ ' n | void ' ]</td>
+									=]
+								=]
+								[= tr2 _ =
+								<tr class="schdl-3">
+								[ ' nonstatic ' ]
+								=]
+									<td>
+										<a href="[ ' href ' ]">[ ' day ' ]</a>
+									</td>
+								[= etr _ =
+									</tr>
+									[ ' nonstatic ' ]
 								=]
 							=]
-							[= tr2 _ =
-							<tr class="schdl-3">
-							[ ' nonstatic ' ]
-							=]
-								<td>
-									<a href="[ ' href ' ]">[ ' day ' ]</a>
-								</td>
-							[= etr _ =
-								</tr>
-								[ ' nonstatic ' ]
-							=]
-						=]
-						</tr>
+							</tr>
+						</tbody>
 					</table>
 
 				</td>
@@ -185,6 +193,11 @@
 	border: 1px solid #ddccbb;
 	text-align: center;
 }
+.schdl-calendar th {
+	border: 1px solid #ddccbb;
+	text-align: center;
+	font-weight: normal;
+}
 
 .schdl-month {
 	padding: 2px;
@@ -192,10 +205,22 @@
 .schdl-month td {
 	border: 1px solid #ddccbb;
 }
+.schdl-month th {
+	border: 1px solid #ddccbb;
+	text-align: left;
+	font-weight: normal;
+}
 
 .tr-entry {
 	text-align: left;
 	vertical-align: top;
 	width: 150px;
 	height: 70px;
+}
+
+.tr-entry th {
+	font-weight: normal;
+}
+.tr-entry td {
+	/* font-size: smaller; */
 }

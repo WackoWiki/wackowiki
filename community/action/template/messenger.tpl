@@ -78,9 +78,9 @@
 						<td colspan="5"><br>[ ' _t: NoMessagesInbox ' ]<br><br></td>
 					</tr>
 				=]
-				<tr>
-					<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
-				</tr>
+					<tr>
+						<td colspan="5" style="border: 0;">[ ' _t: MoveToFolder ' ] [ '' d selectfolder '' ]</td>
+					</tr>
 				</tbody>
 			</table>
 		</form>
@@ -218,17 +218,20 @@
 	=]
 	[= g _ =
 		<table class="usertable" width="100%">
-			<tr>
-				<td colspan="4" style="border: 0;">
-					[ '' pagination '' ]
-				</td>
-			</tr>
-			<tr>
-				<th width="400">[ ' _t: Subject ' ]</th>
-				<th width="100">[ ' _t: Recipient ' ]</th>
-				<th width="100">[ ' _t: Date ' ]</th>
-				<th width="75">[ ' _t: Read ' ]</th>
-			</tr>
+			<thead>
+				<tr>
+					<td colspan="4" style="border: 0;">
+						[ '' pagination '' ]
+					</td>
+				</tr>
+				<tr>
+					<th width="400">[ ' _t: Subject ' ]</th>
+					<th width="100">[ ' _t: Recipient ' ]</th>
+					<th width="100">[ ' _t: Date ' ]</th>
+					<th width="75">[ ' _t: Read ' ]</th>
+				</tr>
+			</thead>
+			<tbody>
 			[= n _ =
 				<tr>
 					<td><a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
@@ -237,6 +240,7 @@
 					<td>[ ' status ' ]</td>
 				</tr>
 			=]
+			</tbody>
 		</table>
 		[ ' // <br><br>Löscht der Empfänger eine Nachricht, wird sie auch hier automatisch entfernt! ' ]
 	=]
@@ -345,34 +349,38 @@
 			[ ' csrf: edit_contacts ' ]
 			<input type="hidden" name="insert" value="1">
 			<table class="tbl-types usertable">
-				<tr>
-					<th><label for="field1_value">[ ' _t: ContactNames ' ]</label></th>
-					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
-					<td> </td>
-				</tr>
-				<tr>
-					<td>
-						<select id="field1_value" name="field1_value" required>
-							<option value="">[ ' _t: ChooseRecipient ' ]</option>
-							[= o _ =
-								<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
-							=]
-						</select>
-					</td>
-					<td>
-						<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
-					</td>
-					<td colspan="2">
-						<button type="submit">[ ' _t: Add ' ]</button>
-					</td>
-				</tr>
-				[= c _ =
+				<thead>
 					<tr>
-						<td><a href="[ ' hrefcompose ' ]">[ ' username ' ]</a></td>
-						<td>[ ' notes ' ]</td>
-						<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
+						<th><label for="field1_value">[ ' _t: ContactNames ' ]</label></th>
+						<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
+						<td> </td>
 					</tr>
-				=]
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<select id="field1_value" name="field1_value" required>
+								<option value="">[ ' _t: ChooseRecipient ' ]</option>
+								[= o _ =
+									<option value="[ ' userid ' ]"[ ' selected ' ]>[ ' username ' ]</option>
+								=]
+							</select>
+						</td>
+						<td>
+							<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
+						</td>
+						<td colspan="2">
+							<button type="submit">[ ' _t: Add ' ]</button>
+						</td>
+					</tr>
+					[= c _ =
+						<tr>
+							<td><a href="[ ' hrefcompose ' ]">[ ' username ' ]</a></td>
+							<td>[ ' notes ' ]</td>
+							<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
+						</tr>
+					=]
+				</tbody>
 			</table>
 
 			<aside class="sidebar">
@@ -387,29 +395,33 @@
 			[ ' csrf: message_folders ' ]
 			<input type="hidden" name="insert" value="1">
 			<table class="tbl-types usertable">
-				<tr>
-					<th><label for="field1_value">[ ' _t: Folder ' ]</label></th>
-					<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
-					<td> </td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" id="field1_value" name="field1_value" size="25" maxlength="65">
-					</td>
-					<td>
-						<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
-					</td>
-					<td colspan="2">
-						<button type="submit">[ ' _t: Add ' ]</button>
-					</td>
-				</tr>
-				[= f _ =
+				<thead>
 					<tr>
-						<td><a href="[ ' hreffolder ' ]">[ ' info ' ]</a></td>
-						<td>[ ' notes ' ]</td>
-						<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
+						<th><label for="field1_value">[ ' _t: Folder ' ]</label></th>
+						<th><label for="field2_value">[ ' _t: Notes ' ]</label></th>
+						<td> </td>
 					</tr>
-				=]
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" id="field1_value" name="field1_value" size="25" maxlength="65">
+						</td>
+						<td>
+							<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
+						</td>
+						<td colspan="2">
+							<button type="submit">[ ' _t: Add ' ]</button>
+						</td>
+					</tr>
+					[= f _ =
+						<tr>
+							<td><a href="[ ' hreffolder ' ]">[ ' info ' ]</a></td>
+							<td>[ ' notes ' ]</td>
+							<td><a href="[ ' hrefdelete ' ]">[ ' _t: Delete ' ]</a></td>
+						</tr>
+					=]
+				</tbody>
 			</table>
 
 			<aside class="sidebar">
