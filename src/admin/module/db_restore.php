@@ -454,7 +454,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 					// sort 'creation date' descending with custom numeric comparisons function
 					usort($logs, function (array $a, array $b) { return $b[0] - $a[0]; });
 
-					foreach ($logs as $log)
+					foreach ($logs as $i => $log)
 					{
 						// open row
 						echo '<tr class="hl-setting">' . "\n";
@@ -467,10 +467,12 @@ function admin_db_restore($engine, $module, $tables, $directories)
 										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '>
 										#</td>' .
 										#'<td>' .
-											'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
+											'<input type="radio" id="pack_' . $i . '" name="backup_id" value="' . $log['pack'] . '">' .
 										'</td>
 										<th class="t-left nowrap">' .
-											$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
+											'<label for="pack_' . $i . '">' .
+												$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
+												'</label>' .
 										'</th>
 									</tr>
 									<tr>
