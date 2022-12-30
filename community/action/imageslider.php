@@ -307,7 +307,7 @@ if ($can_view)
 				{
 					$n++;
 
-					$this->files_cache[$file['page_id']][$file['file_name']] = $file;
+					$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 
 					$desc		= $this->format($file['file_description'], 'typografica', ['lang' => $file['file_lang']]);
 

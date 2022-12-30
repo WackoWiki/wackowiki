@@ -61,7 +61,7 @@ function bb2_httpbl($settings, $package)
 	bb2_db_query("SET @@session.wait_timeout = 90");
 
 	$find	= implode('.', array_reverse(explode('.', $package['ip'])));
-	$result	= gethostbynamel($settings['httpbl_key'].".${find}.dnsbl.httpbl.org.");
+	$result	= gethostbynamel($settings['httpbl_key'].".{$find}.dnsbl.httpbl.org.");
 
 	if (!empty($result))
 	{
