@@ -36,6 +36,7 @@ if (!isset($license_id))	$license_id	= null;
 if (!isset($cluster))		$cluster	= 0;
 
 $copysign	= '©';
+$output		= null;
 
 // check for license_id
 if (empty($license) && !isset($license_id))

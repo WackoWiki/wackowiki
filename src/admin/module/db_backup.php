@@ -250,7 +250,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 				$i++;
 				$check = false;
 
-				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR || CACHE_TEMPLATE_DIR))
+				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR || CACHE_TEMPLATE_DIR || THUMB_DIR))
 				//{
 					$check = true;
 				//}

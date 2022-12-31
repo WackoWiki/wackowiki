@@ -83,8 +83,6 @@ function admin_user_users($engine, $module)
 		$set = [];
 	}
 
-	reset($set);
-
 	/////////////////////////////////////////////
 	//   list change/update processing
 	/////////////////////////////////////////////
@@ -109,7 +107,7 @@ function admin_user_users($engine, $module)
 	{
 		// passing vars from user input
 		$user_name		= $engine->sanitize_username(($_POST['user_name'] ?? ''));
-		$realname		= (string) ($_POST['realname'] ?? '');
+		$real_name		= (string) $engine->sanitize_text_field(($_POST['realname'] ?? ''), true);
 		$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
 		$password		= (string) ($_POST['password'] ?? '');
 		$conf_password	= (string) ($_POST['conf_password'] ?? '');
@@ -254,7 +252,7 @@ function admin_user_users($engine, $module)
 				"UPDATE " . $prefix . "user SET " .
 					"user_name		= " . $engine->db->q($user_name) . ", " .
 					"email			= " . $engine->db->q($email) . ", " .
-					"real_name		= " . $engine->db->q($realname) . ", " .
+					"real_name		= " . $engine->db->q($real_name) . ", " .
 					"enabled		= " . (int) $enabled . ", " .
 					"account_status	= " . (int) $_POST['account_status'] . " " .
 				"WHERE user_id		= " . (int) $user_id . " " .
@@ -474,7 +472,7 @@ function admin_user_users($engine, $module)
 						<label for="newrealname">' . $engine->_t('RealName') . '</label>
 					</th>
 					<td>
-						<input type="text" id="realname" name="realname" value="' . Ut::html(($realname ?: $user['real_name'])) . '" size="50" maxlength="100">
+						<input type="text" id="realname" name="realname" value="' . Ut::html(($real_name ?: $user['real_name'])) . '" size="50" maxlength="100">
 					</td>
 				</tr>
 				<tr>

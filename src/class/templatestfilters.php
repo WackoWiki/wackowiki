@@ -38,7 +38,7 @@ class TemplatestFilters extends TemplatestEscaper
 		$this->filters[$id] = $func;
 	}
 
-	function getFilters()
+	function getFilters(): array
 	{
 		$list = [];
 
@@ -117,7 +117,7 @@ class TemplatestFilters extends TemplatestEscaper
 		return $value;
 	}
 
-	function filter_format($value, $fmt)
+	function filter_format($value, $fmt): string
 	{
 		return sprintf($fmt, $value);
 	}
@@ -127,30 +127,30 @@ class TemplatestFilters extends TemplatestEscaper
 		return Ut::stringify($value);
 	}
 
-	function filter_date($value, $fmt)
+	function filter_date($value, $fmt): string
 	{
 		return date($fmt, $value);
 	}
 
-	function filter_join($value, $glue = '')
+	function filter_join($value, $glue = ''): string
 	{
 		return implode($glue, $value);
 	}
 
-	function filter_lower($value)
+	function filter_lower($value): string
 	{
 		return mb_strtolower($value);
 	}
 
-	function filter_upper($value)
+	function filter_upper($value): string
 	{
 		return mb_strtoupper($value);
 	}
 
 	// TODO: localize formatting
-	function filter_number($value, $decimals = 0, $dec_point = ',', $thousands_sep = '.')
+	function filter_number($value, $decimals = 0, $dec_point = ',', $thousands_sep = '.'): string
 	{
-		return number_format($value, $decimals, $dec_point, $thousands_sep);
+		return number_format($value, (int) $decimals, $dec_point, $thousands_sep);
 	}
 
 	function filter_void($value)
@@ -249,7 +249,7 @@ class TemplatestFilters extends TemplatestEscaper
 			}, $value);
 	}*/
 
-	function filter_spaceless($value)
+	function filter_spaceless($value): string
 	{
 		if (preg_match_all(
 			'@
@@ -340,7 +340,7 @@ class TemplatestFilters extends TemplatestEscaper
 		return $value;
 	}
 
-	function filter_trim($value, $character_mask = " \t\n\r\0\x0B")
+	function filter_trim($value, $character_mask = " \t\n\r\0\x0B"): string
 	{
 		return trim($value, $character_mask);
 	}
@@ -362,12 +362,12 @@ class TemplatestFilters extends TemplatestEscaper
 		return implode('&', $list);
 	}
 
-	function filter_striptags($value, $allowable_tags = '')
+	function filter_striptags($value, $allowable_tags = ''): string
 	{
 		return strip_tags($value, $allowable_tags);
 	}
 
-	function filter_nl2br($value)
+	function filter_nl2br($value): string
 	{
 		$list = preg_split('/(?:\r\n|\r|\n){2,}/', $value, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -383,7 +383,7 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		if (strlen($value) > $limit)
 		{
-			$split	= explode(' ', substr($value, 0, $limit));
+			$split	= explode(' ', substr($value, 0, (int) $limit));
 			$split1	= array_slice($split, 0, -1);
 			$value	= implode(' ', $split1 ?: $split) . $ellipsis;
 		}
@@ -391,7 +391,7 @@ class TemplatestFilters extends TemplatestEscaper
 		return $value;
 	}
 
-	function filter_split($value, $delimiter, $limit = PHP_INT_MAX)
+	function filter_split($value, $delimiter, $limit = PHP_INT_MAX): array
 	{
 		return Ut::isempty($delimiter)? str_split($value, $limit) : explode($delimiter, $value, $limit);
 	}
@@ -411,22 +411,22 @@ class TemplatestFilters extends TemplatestEscaper
 		return $value;
 	}
 
-	function filter_enclose($value, $pref = '', $post = '')
+	function filter_enclose($value, $pref = '', $post = ''): string
 	{
 		return $pref . $value . $post;
 	}
 
-	function filter_check($value, $on)
+	function filter_check($value, $on): string
 	{
 		return ' value="' . (int) $on . '" ' . (((int) $value == (int) $on)? 'checked ' : '');
 	}
 
-	function filter_checkbox($value)
+	function filter_checkbox($value): string
 	{
 		return (((int) $value)? ' checked ' : '');
 	}
 
-	function filter_select($value, $on)
+	function filter_select($value, $on): string
 	{
 		return (($value == $on)? ' selected ' : '');
 	}

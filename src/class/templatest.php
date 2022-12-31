@@ -144,7 +144,7 @@ class Templatest
 		return new TemplatestUser($cache, $cache[0]);
 	}
 
-	private static function parse_file($file, $level = 0)
+	private static function parse_file($file, $level = 0): array
 	{
 		$store['setup'] = [];
 
@@ -236,7 +236,7 @@ class Templatest
 		return $store;
 	}
 
-	private static function inline_definitions(&$store)
+	private static function inline_definitions(&$store): void
 	{
 		// [ ==== abc def ==
 		//   ....
@@ -302,7 +302,7 @@ class Templatest
 		}
 	}
 
-	private static function compile(&$meta, &$store)
+	private static function compile(&$meta, &$store): void
 	{
 		$text	= '';
 		$eolpos	= 0;
@@ -452,7 +452,7 @@ class Templatest
 		$static && $meta['static'] = 1;
 	}
 
-	private static function inline_static_subs(&$store)
+	private static function inline_static_subs(&$store): void
 	{
 		// inline static subpatterns
 		while (!isset($stable))
@@ -495,7 +495,7 @@ class Templatest
 		}
 	}
 
-	private static function inline_defaults(&$store)
+	private static function inline_defaults(&$store): void
 	{
 		foreach ($store as $name => &$pat)
 		{
@@ -522,9 +522,9 @@ class Templatest
 		}
 	}
 
-	// find largest common whitespace prefix of non-empty lines in pattern, for auto-indent
+	// find the largest common whitespace prefix of non-empty lines in pattern, for auto-indent
 	// NB also used by TemplatestSetter class
-	static function compute_prefix($text)
+	static function compute_prefix($text): int
 	{
 		$result	= 0;
 		$len	= strlen($text);

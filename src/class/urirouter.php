@@ -129,7 +129,7 @@ class UriRouter
 
 				foreach ($env['match'] as $var => $val)
 				{
-					if (preg_match('#\D#', $var))
+					if (preg_match('#\D#', (string) $var))
 					{
 						[$varname, $varidx] = $this->parse_var($var);
 						$env[$varname][$varidx] = $val;
@@ -336,7 +336,7 @@ class UriRouter
 		$env['vars']['_ok'] = false;
 	}
 
-	private function read_config($file, $re_place)
+	private function read_config($file, $re_place): array
 	{
 		$lineno = 0;
 
@@ -434,7 +434,7 @@ class UriRouter
 		return $config;
 	}
 
-	private function parse_var($var)
+	private function parse_var($var): array
 	{
 		if ($var[0] == '$' && ctype_digit($var[1]))
 		{

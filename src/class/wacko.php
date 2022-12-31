@@ -38,11 +38,14 @@ class Wacko
 	public $current_context			= 0;		// current context level
 	public $header_count			= 0;
 	public $section_count			= 0;
+	public $comment_id				= null;
 	public $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public $first_inclusion			= [];		// for backlinks
 	public $toc_context				= [];
+	public $body_toc				= null;
 
 	public $category_cache			= [];
+	public $owner_id_cache			= [];
 	public $page_id_cache			= [];
 	public $page_tag_cache			= [];
 	public $wanted_cache			= [];
@@ -50,11 +53,20 @@ class Wacko
 	public $lang					= null;
 	public $languages				= null;
 	public $user_lang				= null;
+	public $user_lang_dir			= null;
 	public $translations			= null;
+	public $resource				= null;
+	public $page_lang				= null;
+
+	public $linktable				= null;
 	public $noautolinks				= null;		// formatter
 	public $numerate_links			= null;
+	public $tocs					= null;
 	public $post_wacko_action		= null;
-	public $page_lang				= null;
+	public $post_wacko_maxp			= null;
+	public $post_wacko_toc			= null;
+	public $post_wacko_toc_hash		= null;
+
 	public $html_addition			= [];
 	public $hide_article_header		= false;
 	public $no_way_back				= false;	// set to true to prevent saving page as the goback-after-login
@@ -750,7 +762,7 @@ class Wacko
 	}
 
 	// shortcut for getting 'dir' for not loaded language
-	function get_direction($lang = ''): string
+	static function get_direction($lang = ''): string
 	{
 		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
 	}
@@ -5244,7 +5256,7 @@ class Wacko
 	 * @param string		$mode			'get' or 'replace'
 	 * @param array|false	$new_section	replacement array with [title, body] for section data
 	 *
-	 * @return array		section array with [level, title, body]
+	 * @return array|null					section array with [level, title, body]
 	 */
 	function extract_sections($body, $section_id, $mode, $new_section = ''): ?array
 	{
@@ -5385,10 +5397,10 @@ class Wacko
 
 			if ($section['title'])
 			{
-				$body[]	= $nl . $section['h'] . $section['title'] . $section['h'];
+				$body[] = $nl . $section['h'] . $section['title'] . $section['h'];
 			}
 
-			$body[]	= $section['body'];
+			$body[] = $section['body'];
 		}
 
 		unset($sections);
@@ -5406,7 +5418,7 @@ class Wacko
 	 * @param string	$body			Wikitext to look in
 	 * @param int		$section_id		Section identifier
 	 *
-	 * @return string					Text of the requested section
+	 * @return array|null				Section array with [level, title, body] of the requested section
 	 */
 	function get_section($body, $section_id)
 	{
@@ -5803,7 +5815,7 @@ class Wacko
 				($enabled
 					? "WHERE enabled = 1 "
 					: "") .
-			"ORDER BY BINARY user_name");
+			"ORDER BY user_name");
 	}
 
 	function get_user_id($user_name = ''): int
@@ -6152,11 +6164,11 @@ class Wacko
 	* @param string		$privilege		ACL privilege: read, write, comment, create, upload
 	* @param bool		$use_defaults
 	*
-	* @return array ACL
+	* @return array		ACL
 	*/
-	function get_cached_acl($page_id, $privilege, $use_defaults)
+	function get_cached_acl($page_id, $privilege, $use_defaults): array
 	{
-		return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ?? '';
+		return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ?? [];
 	}
 
 	/**
@@ -6231,7 +6243,7 @@ class Wacko
 	*/
 	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = ''): array
 	{
-		$acl = '';
+		$acl = [];
 
 		if ($use_cache && $use_parent)
 		{
@@ -7375,8 +7387,6 @@ class Wacko
 	{
 		$this->body_toc = '';
 
-		#$this->body_toc = serialize($toc); //json_encode
-
 		foreach ($toc as $k => $v)
 		{
 			$toc[$k] = implode('<h-item>', $v);
@@ -7407,7 +7417,6 @@ class Wacko
 		}
 
 		$page['body_toc']	= $page['body_toc'] ?? '';
-		#$toc				= unserialize($page['body_toc']); //json_decode
 		$toc				= explode('<h-end>' . "\n", $page['body_toc']);
 
 		foreach ($toc as $k => $toc_item)
@@ -8695,7 +8704,7 @@ class Wacko
 	 * @param string	$message	may use wiki syntax, however if used before locale translations registration,
 	 * 								will be saved in plain text only
 	 *
-	 * @return array					array with 'text' (navigation) and 'offset' (offset value for SQL queries) elements.
+	 * @return bool|array			array with logged events
 	 */
 	function log($level, $message)
 	{

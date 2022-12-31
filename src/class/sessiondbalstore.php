@@ -17,7 +17,7 @@ class SessionDbalStore extends Session
 		$this->db = & $db;
 	}
 
-	protected function store_open($prefix)
+	protected function store_open($prefix): bool
 	{
 		if (!$this->created)
 		{
@@ -35,7 +35,7 @@ class SessionDbalStore extends Session
 		return true;
 	}
 
-	protected function store_close()
+	protected function store_close(): bool
 	{
 		if ($this->lock)
 		{
@@ -45,7 +45,7 @@ class SessionDbalStore extends Session
 		return true;
 	}
 
-	protected function store_destroy()
+	protected function store_destroy(): bool
 	{
 		if ($this->lock)
 		{
@@ -76,7 +76,7 @@ class SessionDbalStore extends Session
 		return $res? $res['session_data'] : ($create? '' : false);
 	}
 
-	protected function store_write($id, $text)
+	protected function store_write($id, $text): bool
 	{
 		if (!$this->lock($id))
 		{
@@ -119,7 +119,7 @@ class SessionDbalStore extends Session
 		return $this->db->affected_rows;
 	}
 
-	private function lock(&$id)
+	private function lock(&$id): bool
 	{
 		if ($this->lock && $this->id == $id)
 		{

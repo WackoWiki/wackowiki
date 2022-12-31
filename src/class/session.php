@@ -67,7 +67,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	// effectively destroy(true) + start()
 	// or... regenerate + filter!
-	public function restart()
+	public function restart(): bool
 	{
 		if (!$this->regenerate_id(true, 'restart'))
 		{
@@ -82,7 +82,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	// replace the current session id with a newly generated
 	// one, create and lock new file, and keep the current session information
-	protected function regenerate_id($delete_old = false, $message = '')
+	protected function regenerate_id($delete_old = false, $message = ''): bool
 	{
 		if (headers_sent($file, $line))
 		{
@@ -136,7 +136,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return false;
 	}
 
-	public function start($name = null, $id = null)
+	public function start($name = null, $id = null): bool
 	{
 		if ($this->active)
 		{
@@ -303,7 +303,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $this->message;
 	}
 
-	public function active()
+	public function active(): bool
 	{
 		return $this->active;
 	}
@@ -313,7 +313,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $this->id;
 	}
 
-	public function name()
+	public function name(): string
 	{
 		return $this->name;
 	}
@@ -391,12 +391,12 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 	}
 
-	private static function nonce_index($action, $code)
+	private static function nonce_index($action, $code): string
 	{
-		return (string) $action . '.' . substr(base64_encode(hash('sha1', (string) $code, true)), 1, 11);
+		return $action . '.' . substr(base64_encode(hash('sha1', (string) $code, true)), 1, 11);
 	}
 
-	public function create_nonce($action, $expires = null)
+	public function create_nonce($action, $expires = null): string
 	{
 		$code = Ut::random_token(11);
 		$this->__nonces[static::nonce_index($action, $code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
@@ -448,8 +448,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $ret;
 	}
 
-	// those two is for possible override in store methods
-	protected function store_generate_id()
+	// those two are for possible override in store methods
+	protected function store_generate_id(): string
 	{
 		return Ut::random_token(21);
 	}
@@ -617,7 +617,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		foreach (headers_list() as $name => $value)
 		{
-			if (!strcasecmp($name, $set))
+			if (!strcasecmp((string) $name, $set))
 			{
 				if (!strncmp($value, $cookie, $clen) && substr($value, $clen, 1) == '=')
 				{

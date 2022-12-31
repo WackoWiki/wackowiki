@@ -92,7 +92,7 @@ class SessionFileStore extends Session
 		return false;
 	}
 
-	protected function store_write($id, $text)
+	protected function store_write($id, $text): bool
 	{
 		if ($this->open_file($id, true))
 		{
@@ -113,7 +113,7 @@ class SessionFileStore extends Session
 		return false;
 	}
 
-	protected function store_gc()
+	protected function store_gc(): int
 	{
 		$lvl1 = [];
 		$preflen = strlen($this->prefix);
@@ -181,7 +181,7 @@ class SessionFileStore extends Session
 		return $ndels;
 	}
 
-	private function open_file($id, $create)
+	private function open_file($id, $create): bool
 	{
 		// check for already opened session file
 		if ($this->fd && $this->fd_id === $id)

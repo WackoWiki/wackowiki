@@ -394,7 +394,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 	}
 
-	reset($set);
 	unset($n, $page_id);
 
 	////// BEGIN SUBFORUM MODERATION //////

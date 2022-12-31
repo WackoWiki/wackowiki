@@ -4,13 +4,13 @@
  * Highlight CSS Code
  */
 
-$options['color']['attribute']			= 'css-attr';
-$options['color']['attributevalue']		= 'css-attrval';
-$options['color']['comment']			= 'css-comment';
-$options['color']['digit']				= 'css-digit';
-$options['color']['entity']				= 'css-entity';
-$options['color']['tag']				= 'css-tag';
-$options['line_numbers']				= $options['numbers'] ?? false;
+$options['color']['attr']		= 'css-attr';
+$options['color']['attrval']	= 'css-attrval';
+$options['color']['comment']	= 'css-comment';
+$options['color']['digit']		= 'css-digit';
+$options['color']['entity']		= 'css-entity';
+$options['color']['tag']		= 'css-tag';
+$options['line_numbers']		= $options['numbers'] ?? false;
 
 if(!isset($options['nopre'])) $options['nopre'] = false;
 
@@ -174,9 +174,9 @@ $css = preg_replace('/(\.?)(.*)(\s?\{?)/us', '&nbsp;<span class="##ocv##">$1$2</
 
 $css = preg_replace("/(\#[a-fA-F\d]+|\d+(px))/u", '<span class="' . $options['color']['digit'] . '">$1</span>', $css);
 
-$css = str_replace('\:', '<span class="' . $options['color']['attribute'] . '">:</span>', $css);
-$css = str_replace('{',  '<span class="' . $options['color']['attribute'] . '">{</span>', $css);
-$css = str_replace('}',  '<span class="' . $options['color']['attribute'] . '">}</span>', $css);
+$css = str_replace('\:', '<span class="' . $options['color']['attr'] . '">:</span>', $css);
+$css = str_replace('{',  '<span class="' . $options['color']['attr'] . '">{</span>', $css);
+$css = str_replace('}',  '<span class="' . $options['color']['attr'] . '">}</span>', $css);
 
 $css = preg_replace_callback(
 		'!/\*(.*?)\*/!us',
@@ -190,7 +190,7 @@ $css = preg_replace_callback(
 		$css);
 
 $css = str_replace('##oct##', $options['color']['tag'], $css);
-$css = str_replace('##ocv##', $options['color']['attributevalue'], $css);
+$css = str_replace('##ocv##', $options['color']['attrval'], $css);
 
 if ($options['line_numbers'])
 {
