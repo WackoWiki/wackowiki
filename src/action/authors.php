@@ -37,6 +37,7 @@ $license	??= '';
 $license_id	??= null;
 
 $copysign	= '©';
+$output		= null;
 
 // check for license_id
 if (empty($license) && !isset($license_id))

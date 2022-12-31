@@ -38,11 +38,14 @@ class Wacko
 	public $current_context			= 0;		// current context level
 	public $header_count			= 0;
 	public $section_count			= 0;
+	public $comment_id				= null;
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
+	public $body_toc				= null;
 
 	public array $category_cache	= [];
+	public array $owner_id_cache	= [];
 	public array $page_id_cache		= [];
 	public array $page_tag_cache	= [];
 	public array $wanted_cache		= [];
@@ -50,11 +53,20 @@ class Wacko
 	public $lang					= null;
 	public $languages				= null;
 	public $user_lang				= null;
+	public $user_lang_dir			= null;
 	public $translations			= null;
+	public $resource				= null;
+	public $page_lang				= null;
+
+	public $linktable				= null;
 	public $noautolinks				= null;		// formatter
 	public $numerate_links			= null;
+	public $tocs					= null;
 	public $post_wacko_action		= null;
-	public $page_lang				= null;
+	public $post_wacko_maxp			= null;
+	public $post_wacko_toc			= null;
+	public $post_wacko_toc_hash		= null;
+
 	public array $html_addition			= [];
 	public bool $hide_article_header	= false;
 	public bool $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
@@ -794,7 +806,7 @@ class Wacko
 	}
 
 	// shortcut for getting 'dir' for not loaded language
-	function get_direction($lang = ''): string
+	static function get_direction($lang = ''): string
 	{
 		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
 	}
@@ -7366,8 +7378,6 @@ class Wacko
 	{
 		$this->body_toc = '';
 
-		#$this->body_toc = serialize($toc); //json_encode
-
 		foreach ($toc as $k => $v)
 		{
 			$toc[$k] = implode('<h-item>', $v);
@@ -7398,7 +7408,6 @@ class Wacko
 		}
 
 		$page['body_toc']	= $page['body_toc'] ?? '';
-		#$toc				= unserialize($page['body_toc']); //json_decode
 		$toc				= explode('<h-end>' . "\n", $page['body_toc']);
 
 		foreach ($toc as $k => $toc_item)
