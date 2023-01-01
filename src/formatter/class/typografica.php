@@ -18,6 +18,7 @@ class Typografica
 	public string $mark1	= '{:typo:markup:1:}';
 	public string $mark2	= '{:typo:markup:2:}';
 	public bool $de_nobr	= true;
+	public array $options	= [];
 
 	public array $phonemasks	= [
 		[

@@ -135,6 +135,28 @@ class Text_Highlighter
 	 */
 	public $_language = '';
 
+	public array $_counts;
+	public string $_defClass;
+	public array $_delim;
+	public array $_end;
+	public array $_inner;
+	public array $_keywords;
+	public array $_kwmap;
+	public array $_parts;
+	public array $_regs;
+	public array $_states;
+	public array $_subst;
+
+	private int $_state;
+	private mixed $_pos;
+	private array $_stack;
+	private array $_tokenStack;
+	private string $_lastinner;
+	private string $_lastdelim;
+	private string $_endpattern;
+	private string $_str;
+	private int $_len;
+
 	// }}}
 	// {{{ _checkDefines
 

@@ -55,7 +55,7 @@ function admin_tool_badbehaviour($engine, $module)
 		{
 			// Lookup
 			$find		= implode('.', array_reverse(explode('.', $ip)));
-			$result		= gethostbynamel("${httpbl_key}.${find}.dnsbl.httpbl.org.");
+			$result		= gethostbynamel("{$httpbl_key}.{$find}.dnsbl.httpbl.org.");
 
 			if (!empty($result))
 			{
