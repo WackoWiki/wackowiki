@@ -452,50 +452,31 @@ class WackoFormatter
 			$count		= count($cells);
 			$count--;
 
-			for ($i = 0; $i < $count; $i++)
+			foreach ($cells as $i => $cell)
 			{
 				$this->tdold_indent_level	= 0;
 				$this->tdindent_closers		= [];
+				$colspan					= '';
 
-				if ($cells[$i][0] == "\n")
+				if ($cell[0] == "\n")
 				{
-					$cells[$i] = substr($cells[$i], 1);
+					$cell = substr($cell, 1);
+				}
+
+				if (($i == $count) && ($this->cols <> 0) && ($count < $this->cols))
+				{
+					$colspan = ' colspan="' . ($this->cols - $count + 1) . '"';
 				}
 
 				$output	.= $strip_delimiter(
-								'<th>' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$i]));
+								'<th' . $colspan . '>' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell));
 				$output	.= $this->indent_close();
-				$output	.= '</th>';
-			}
 
-			if (($this->cols <> 0) && ($count < $this->cols))
-			{
-				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= [];
-
-				if ($cells[$i][0] == "\n")
+				if ($i != $count)
 				{
-					$cells[$count] = substr($cells[$count], 1);
+					$output	.= '</th>';
 				}
-
-				$output	.= $strip_delimiter(
-								'<th colspan="' . ($this->cols - $count + 1) . '">' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
-			}
-			else
-			{
-				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= [];
-
-				if ($cells[$i][0] == "\n")
-				{
-					$cells[$count] = substr($cells[$count], 1);
-				}
-
-				$output	.= $strip_delimiter(
-								'<th>' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
 			}
 
 			$output	.= $this->indent_close();
@@ -524,50 +505,31 @@ class WackoFormatter
 			$count		= count($cells);
 			$count--;
 
-			for ($i = 0; $i < $count; $i++)
+			foreach ($cells as $i => $cell)
 			{
 				$this->tdold_indent_level	= 0;
 				$this->tdindent_closers		= [];
+				$colspan					= '';
 
-				if ($cells[$i][0] == "\n")
+				if ($cell[0] == "\n")
 				{
-					$cells[$i] = substr($cells[$i], 1);
+					$cell = substr($cell, 1);
+				}
+
+				if (($i == $count) && ($this->cols <> 0) && ($count < $this->cols))
+				{
+					$colspan = ' colspan="' . ($this->cols - $count + 1) . '"';
 				}
 
 				$output	.= $strip_delimiter(
-								'<td>' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$i]));
+								'<td' . $colspan . '>' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell));
 				$output	.= $this->indent_close();
-				$output	.= '</td>';
-			}
 
-			if (($this->cols <> 0) && ($count < $this->cols))
-			{
-				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= [];
-
-				if ($cells[$i][0] == "\n")
+				if ($i != $count)
 				{
-					$cells[$count] = substr($cells[$count], 1);
+					$output	.= '</td>';
 				}
-
-				$output	.= $strip_delimiter(
-								'<td colspan="' . ($this->cols - $count + 1) . '">' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
-			}
-			else
-			{
-				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= [];
-
-				if ($cells[$i][0] == "\n")
-				{
-					$cells[$count] = substr($cells[$count], 1);
-				}
-
-				$output	.= $strip_delimiter(
-								'<td>' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
 			}
 
 			$output	.= $this->indent_close();

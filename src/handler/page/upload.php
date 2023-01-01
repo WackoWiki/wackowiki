@@ -9,18 +9,6 @@ if (!defined('IN_WACKO'))
 // - thumbnails
 
 
-$clean_text = function ($string)
-{
-	$string = utf8_rtrim($string, '\\');
-
-	// Make HTML in the description redundant
-	$string = $this->format($string, 'pre_wacko');
-	$string = $this->format($string, 'wacko');
-	$string = $this->format($string, 'safehtml');
-
-	return $string;
-};
-
 $can_upload		= $this->can_upload();
 $error			= '';
 $is_global		= '';
@@ -234,7 +222,6 @@ if (isset($_POST['upload']) & $can_upload)
 						// replace option: keep old data if new entry is empty
 						$description	= mb_substr($_POST['file_description'], 0, 250);
 						$description	= $this->sanitize_text_field((string) $description, true);
-						# $caption		= $clean_text((string) $_POST['caption']);
 
 						if ($replace)
 						{
