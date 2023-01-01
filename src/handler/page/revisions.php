@@ -70,7 +70,6 @@ if ($this->has_access('read'))
 
 		$tpl->r_pagination_text = $pagination['text'];
 
-		$diff_class			= '';
 		$this->parent_size	= 0;
 
 		// get size diff to parent version
