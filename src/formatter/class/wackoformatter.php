@@ -367,6 +367,13 @@ class WackoFormatter
 		$wacko		= & $this->object;
 		$callback	= [&$this, 'wacko_callback'];
 
+		$strip_delimiter = function ($string): string
+		{
+			return str_replace("\u{2592}", '',
+						str_replace("\u{2592}" . "<br>\n", '',
+							$string));
+		};
+
 		if (isset($wacko->page['page_id']))
 		{
 			$this->page_id = $wacko->page['page_id'];
@@ -440,7 +447,7 @@ class WackoFormatter
 			$this->intable		= true;
 			$this->intable_br	= false;
 
-			$output		= '<tr class="userrow">';
+			$output		= '<tr>';
 			$cells		= preg_split('/\|/', $matches[1]);
 			$count		= count($cells);
 			$count--;
@@ -455,7 +462,9 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 				}
 
-				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$i])));
+				$output	.= $strip_delimiter(
+								'<th>' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$i]));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -470,7 +479,9 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count])));
+				$output	.= $strip_delimiter(
+								'<th colspan="' . ($this->cols - $count + 1) . '">' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
 			}
 			else
 			{
@@ -482,7 +493,9 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count])));
+				$output	.= $strip_delimiter(
+								'<th>' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
 			}
 
 			$output	.= $this->indent_close();
@@ -506,7 +519,7 @@ class WackoFormatter
 			$this->intable		= true;
 			$this->intable_br	= false;
 
-			$output		= '<tr class="userrow">';
+			$output		= '<tr>';
 			$cells		= preg_split('/\|/', $matches[1]);
 			$count		= count($cells);
 			$count--;
@@ -521,7 +534,9 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 				}
 
-				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$i])));
+				$output	.= $strip_delimiter(
+								'<td>' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$i]));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -536,7 +551,9 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count])));
+				$output	.= $strip_delimiter(
+								'<td colspan="' . ($this->cols - $count + 1) . '">' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
 			}
 			else
 			{
@@ -548,7 +565,9 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count])));
+				$output	.= $strip_delimiter(
+								'<td>' .
+								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cells[$count]));
 			}
 
 			$output	.= $this->indent_close();
