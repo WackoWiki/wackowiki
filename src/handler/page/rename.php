@@ -121,8 +121,6 @@ if ($registered
 				$tpl->l_charset		= $this->get_charset();
 			}
 
-			$user_lang			= $user['user_lang'] ?: $this->db->language;
-
 			$tpl->enter('f_');
 
 			// show rename form
@@ -153,11 +151,9 @@ else
 	$tpl->denied = true;
 }
 
-function recursive_move(&$engine, $root, $new_root, $log)
+function recursive_move(&$engine, $root, $new_root, $log): void
 {
 	$new_root	= utf8_trim($new_root, '/');
-	$user		= $engine->get_user();
-	$user_lang	= $user['user_lang'] ?: $engine->db->language;
 
 	if ($root == '/')
 	{
@@ -191,7 +187,7 @@ function recursive_move(&$engine, $root, $new_root, $log)
 	}
 }
 
-function move(&$engine, $old_page, $new_tag, $log)
+function move(&$engine, $old_page, $new_tag, $log): void
 {
 	$user		= $engine->get_user();
 	$user_id	= $engine->get_user_id();

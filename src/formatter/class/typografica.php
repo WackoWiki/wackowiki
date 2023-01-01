@@ -10,6 +10,8 @@ https://wackowiki.org/doc/Dev/Projects/Typografica
 
 class Typografica
 {
+	private $options;
+
 	public $wacko;
 	public bool $skip_tags	= true;
 	public string $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
@@ -18,7 +20,6 @@ class Typografica
 	public string $mark1	= '{:typo:markup:1:}';
 	public string $mark2	= '{:typo:markup:2:}';
 	public bool $de_nobr	= true;
-	public array $options	= [];
 
 	public array $phonemasks	= [
 		[
