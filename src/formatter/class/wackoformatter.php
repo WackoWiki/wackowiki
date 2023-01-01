@@ -367,13 +367,6 @@ class WackoFormatter
 		$wacko		= & $this->object;
 		$callback	= [&$this, 'wacko_callback'];
 
-		$strip_delimiter = function ($string): string
-		{
-			return str_replace("\u{2592}", '',
-						str_replace("\u{2592}" . "<br>\n", '',
-							$string));
-		};
-
 		if (isset($wacko->page['page_id']))
 		{
 			$this->page_id = $wacko->page['page_id'];
@@ -443,108 +436,12 @@ class WackoFormatter
 		// table head
 		else if (preg_match('/^\*\|(.*?)\|\*$/us', $thing, $matches) && $this->table_scope)
 		{
-			$this->br			= true;
-			$this->intable		= true;
-			$this->intable_br	= false;
-
-			$output		= '<tr>';
-			$cells		= preg_split('/\|/', $matches[1]);
-			$count		= count($cells);
-			$count--;
-
-			foreach ($cells as $i => $cell)
-			{
-				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= [];
-				$colspan					= '';
-
-				if ($cell[0] == "\n")
-				{
-					$cell = substr($cell, 1);
-				}
-
-				if (($i == $count) && ($this->cols <> 0) && ($count < $this->cols))
-				{
-					$colspan = ' colspan="' . ($this->cols - $count + 1) . '"';
-				}
-
-				$output	.= $strip_delimiter(
-								'<th' . $colspan . '>' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell));
-				$output	.= $this->indent_close();
-
-				if ($i != $count)
-				{
-					$output	.= '</th>';
-				}
-			}
-
-			$output	.= $this->indent_close();
-			$output	.= '</th>';
-			$output .= '</tr>';
-
-			if ($this->cols == 0)
-			{
-				$this->cols	= $count;
-			}
-
-			$this->intable		= false;
-			$this->intable_br	= true;
-
-			return $output;
+			return $this->table_rows($matches[1], $callback, true);
 		}
 		// table row and cells
 		else if (preg_match('/^\|\|(.*?)\|\|$/us', $thing, $matches) && $this->table_scope)
 		{
-			$this->br			= true;
-			$this->intable		= true;
-			$this->intable_br	= false;
-
-			$output		= '<tr>';
-			$cells		= preg_split('/\|/', $matches[1]);
-			$count		= count($cells);
-			$count--;
-
-			foreach ($cells as $i => $cell)
-			{
-				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= [];
-				$colspan					= '';
-
-				if ($cell[0] == "\n")
-				{
-					$cell = substr($cell, 1);
-				}
-
-				if (($i == $count) && ($this->cols <> 0) && ($count < $this->cols))
-				{
-					$colspan = ' colspan="' . ($this->cols - $count + 1) . '"';
-				}
-
-				$output	.= $strip_delimiter(
-								'<td' . $colspan . '>' .
-								preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell));
-				$output	.= $this->indent_close();
-
-				if ($i != $count)
-				{
-					$output	.= '</td>';
-				}
-			}
-
-			$output	.= $this->indent_close();
-			$output	.= '</td>';
-			$output	.= '</tr>';
-
-			if ($this->cols == 0)
-			{
-				$this->cols = $count;
-			}
-
-			$this->intable		= false;
-			$this->intable_br	= true;
-
-			return $output;
+			return $this->table_rows($matches[1], $callback);
 		}
 		// deleted
 		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/us', $thing, $matches))
@@ -688,37 +585,7 @@ class WackoFormatter
 		// headers (h1 - h6)
 		else if (preg_match('/\n[ \t]*(={2,7})(.*?)={2,7}$/', $thing, $matches))
 		{
-			$h_level	= substr_count($matches[1], '=') - 1;
-			$result		= $this->indent_close();
-			$this->br	= false;
-			$wacko->header_count++;
-			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
-
-			if ($wacko->db->section_edit
-				&& $h_level > 1
-				&& !isset($_POST['preview'])
-				&& in_array($wacko->method, ['addcomment', 'edit', 'show']))
-			{
-				$wacko->section_count++;
-				$section_tag = $wacko->section_tag ?? ($wacko->page['tag'] ?? '');
-
-				// non-static section edit link via action
-				$section_edit =
-					'<!--notypo--><!--action:begin-->' .
-						'editsection ' .
-							'page=' . '/' . $section_tag . ' ' .
-							'section=' . $wacko->section_count .
-					'<!--action:end--><!--/notypo-->';
-			}
-
-			return $result .
-				'<h' . $h_level . ' id="' . $header_id . '" class="heading">' .
-					preg_replace_callback($this->LONG_REGEX, $callback, $matches[2]) .
-					'<a class="self-link" href="#' . $header_id . '"></a>' .
-
-					($section_edit ?? '') .
-
-				'</h' . $h_level . '>';
+			return $this->headers($matches, $wacko, $callback);
 		}
 		// separators
 		else if (preg_match('/^-{4,}$/u', $thing))
@@ -835,50 +702,7 @@ class WackoFormatter
 				// auto-generated footnote [[^ footnote here]]
 				else if ($url[0] == '^')
 				{
-					$anchor = mb_substr($url, 1);
-
-					// #18 syntax support
-					if (preg_match('/^\#\d{1,3}$/u', $anchor))
-					{
-						$this->auto_fn['count'] = mb_substr($anchor, 1) - 1;
-					}
-
-					// validate and sanitize $anchor
-					if (!preg_match('/^([\p{L}\d*†‡§‖¶])*$/u', $anchor))
-					{
-						$anchor = '';
-					}
-					// discard already set denominators, simple and neat
-					else if (isset($this->auto_fn['content'][$anchor]) && $text)
-					{
-						$anchor = '';
-					}
-
-					// set denominator
-					if ($anchor)
-					{
-						$fn_count = $anchor;
-					}
-					else
-					{
-						$this->auto_fn['count'] ??= 0;
-						$this->auto_fn['count']++;
-
-						$fn_count = $this->auto_fn['count'];
-					}
-
-					if ($text)
-					{
-						$this->auto_fn['content'] ??= null;
-						$this->auto_fn['content'][$fn_count] = trim($text);
-					}
-
-					return
-						'<sup class="footnote">' .
-							'<a href="#footnote-' . $fn_count . '" id="footnote-' . $fn_count . '-ref" title="footnote ' . $fn_count . '">' .
-								'[' . $fn_count . ']' .
-							'</a>' .
-						'</sup>';
+					return $this->auto_footnotes($url, $text);
 				}
 				// forced links
 				else
@@ -1088,6 +912,150 @@ class WackoFormatter
 
 		// if we reach this point, it must have been an accident.
 		return Ut::html($thing);
+	}
+
+	public function table_rows($matches, array $callback, bool $header = false): string
+	{
+		$strip_delimiter = function ($string): string
+		{
+			return str_replace("\u{2592}", '',
+				str_replace("\u{2592}" . "<br>\n", '',
+					$string));
+		};
+
+		$this->br			= true;
+		$this->intable		= true;
+		$this->intable_br	= false;
+
+		$tag		= $header ? 'th' : 'td';
+		$output		= '<tr>';
+		$cells		= preg_split('/\|/', $matches);
+		$count		= count($cells);
+		$count--;
+
+		foreach ($cells as $i => $cell)
+		{
+			$this->tdold_indent_level	= 0;
+			$this->tdindent_closers		= [];
+			$colspan					= '';
+
+			if ($cell[0] == "\n")
+			{
+				$cell = substr($cell, 1);
+			}
+
+			if (($i == $count) && ($this->cols <> 0) && ($count < $this->cols))
+			{
+				$colspan = ' colspan="' . ($this->cols - $count + 1) . '"';
+			}
+
+			$output .= $strip_delimiter(
+				'<' . $tag . $colspan . '>' .
+				preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell));
+
+
+			if ($i != $count)
+			{
+				$output .= $this->indent_close();
+				$output .= '</' . $tag . '>';
+			}
+		}
+
+		$output .= $this->indent_close();
+		$output .= '</' . $tag . '>';
+		$output .= '</tr>';
+
+		if ($this->cols == 0) {
+			$this->cols = $count;
+		}
+
+		$this->intable		= false;
+		$this->intable_br	= true;
+
+		return $output;
+	}
+
+	public function auto_footnotes(string $url, string $text): string
+	{
+		$anchor = mb_substr($url, 1);
+
+		// #18 syntax support
+		if (preg_match('/^\#\d{1,3}$/u', $anchor))
+		{
+			$this->auto_fn['count'] = mb_substr($anchor, 1) - 1;
+		}
+
+		// validate and sanitize $anchor
+		if (!preg_match('/^([\p{L}\d*†‡§‖¶])*$/u', $anchor))
+		{
+			$anchor = '';
+		}
+		// discard already set denominators, simple and neat
+		else if (isset($this->auto_fn['content'][$anchor]) && $text)
+		{
+			$anchor = '';
+		}
+
+		// set denominator
+		if ($anchor)
+		{
+			$fn_count = $anchor;
+		}
+		else
+		{
+			$this->auto_fn['count'] ??= 0;
+			$this->auto_fn['count']++;
+
+			$fn_count = $this->auto_fn['count'];
+		}
+
+		if ($text)
+		{
+			$this->auto_fn['content'] ??= null;
+			$this->auto_fn['content'][$fn_count] = trim($text);
+		}
+
+		return
+			'<sup class="footnote">' .
+				'<a href="#footnote-' . $fn_count . '" id="footnote-' . $fn_count . '-ref" title="footnote ' . $fn_count . '">' .
+					'[' . $fn_count . ']' .
+				'</a>' .
+			'</sup>';
+	}
+
+	public function headers(array $matches, $wacko, array $callback): string
+	{
+		$h_level	= substr_count($matches[1], '=') - 1;
+		$result		= $this->indent_close();
+		$this->br	= false;
+		$wacko->header_count++;
+		$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
+
+		if ($wacko->db->section_edit
+			&& $h_level > 1
+			&& !isset($_POST['preview'])
+			&& in_array($wacko->method, ['addcomment', 'edit', 'show']))
+		{
+			$wacko->section_count++;
+			$section_tag = $wacko->section_tag ?? ($wacko->page['tag'] ?? '');
+
+			// non-static section edit link via action
+			$section_edit =
+				'<!--notypo--><!--action:begin-->' .
+					'editsection ' .
+						'page=' . '/' . $section_tag . ' ' .
+						'section=' . $wacko->section_count .
+				'<!--action:end--><!--/notypo-->';
+		}
+
+		return $result .
+			'<h' . $h_level . ' id="' . $header_id . '" class="heading">' .
+				preg_replace_callback($this->LONG_REGEX, $callback, $matches[2]) .
+				'<a class="self-link" href="#' . $header_id . '"></a>' .
+
+				($section_edit ?? '') .
+
+			'</h' . $h_level . '>';
 	}
 
 }
