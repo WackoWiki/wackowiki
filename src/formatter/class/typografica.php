@@ -10,6 +10,8 @@ https://wackowiki.org/doc/Dev/Projects/Typografica
 
 class Typografica
 {
+	private $options;
+
 	public $wacko;
 	public $skip_tags	= true;
 	public $indent1		= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->

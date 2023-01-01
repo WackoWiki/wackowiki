@@ -4486,10 +4486,8 @@ class Wacko
 	{
 		$_data = '/' . $data . '/';
 
-		// Find the word
-		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers . ')\b/ui';
-
-		if (preg_match($this->REGEX_WACKO_HANDLERS, $_data, $match))
+		// find the word
+		if (preg_match('/\b(' . $this->db->standard_handlers . ')\b/ui', $_data, $match))
 		{
 			// message
 			return $match[0];
