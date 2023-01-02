@@ -254,7 +254,7 @@ class Wacko
 	*
 	* @return array File description array
 	*/
-	function check_file_record(string $file_name, int $page_id = 0, $deleted = 0)
+	function check_file_record(string $file_name, int $page_id = 0, $deleted = false)
 	{
 		$file = &$this->file_cache[$page_id][$file_name];
 
@@ -323,7 +323,7 @@ class Wacko
 			}
 		}
 
-		// if the allowed list is note populated then the file must be allowed
+		// if the allowed list is not populated then the file must be allowed
 		if (Ut::is_blank($allowed_list))
 		{
 			return true;
@@ -386,7 +386,7 @@ class Wacko
 	// TIME FUNCTIONS
 	function utc2time($utc): int|false
 	{
-		// strtotime requirers UTC for IntlDateFormatter
+		// strtotime requires UTC for IntlDateFormatter
 		$tz = date_default_timezone_get();
 		date_default_timezone_set('UTC');
 
@@ -598,7 +598,7 @@ class Wacko
 				}
 
 				// stored in object required for merge with all language files,
-				// but not with multilanguages off
+				// but not with multi-languages off
 				$this->translations['all'] = & $wacko_all_resource;
 			}
 
@@ -711,10 +711,10 @@ class Wacko
 	/**
 	 * Get translation of available message set
 	 *
-	 * @param string	$name	Name of message set
-	 * @param string	$lang	Language code
+	 * @param string			$name	Name of message set
+	 * @param string			$lang	Language code
 	 *
-	 * @return string	Message set
+	 * @return array|string|null		Message set
 	 */
 	function _t($name, $lang = '')
 	{
@@ -863,7 +863,7 @@ class Wacko
 	*
 	* @return array Loaded page
 	*/
-	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0): ?array
+	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = false): ?array
 	{
 		$page = [];
 
@@ -2060,7 +2060,7 @@ class Wacko
 				// only if page has been actually changed
 				if ($old_page['body'] != $body || $old_page['title'] != $title)
 				{
-					// Dont save revisions for comments. Personally I think we should.
+					// Don't save revisions for comments. Personally I think we should.
 					if (!$old_page['comment_on_id'])
 					{
 						$this->save_revision($old_page);
@@ -2164,8 +2164,9 @@ class Wacko
 	/**
 	 * Write feeds and update sitemap
 	 *
-	 * @param bool $mute
-	 * @param int $comment_on_id
+	 * @param bool	$mute
+	 * @param int	$comment_on_id
+	 *
 	 * @return void
 	 */
 	function write_feeds(bool $mute, int $comment_on_id): void
@@ -3010,7 +3011,7 @@ class Wacko
 	 *
 	 * @param string $tag
 	 *
-	 * @return string tag with with full path and without leading slash
+	 * @return string tag with full path and without leading slash
 	 */
 	function unwrap_link($tag): string
 	{
@@ -3243,7 +3244,7 @@ class Wacko
 	*
 	* @param string		$tag		Page tag.
 	* @param string		$method		Wacko method. Optional, default 'show' method added in run() function.
-	* @param string		$text 		Href text. Optinonal, default is $tag value
+	* @param string		$text 		Href text. Optional, default is $tag value
 	* @param bool		$track		Track this link. Optional, default is TRUE
 	* @param string		$title		link title. Optional, default is ''
 	* @param string		$params		additional parameters. Optional, default is ''
@@ -3713,7 +3714,7 @@ class Wacko
 			// try to find file in global / local storage and return if success
 			if (is_array($file_data))
 			{
-				// set a anchor once for file link at the first appearance
+				// set an anchor once for file link at the first appearance
 				if ($anchor_link && !isset($this->first_inclusion[OBJECT_FILE][$file_data['file_id']]))
 				{
 					$aname = ' id="a-' . $file_data['file_id'] . '"';
@@ -4062,7 +4063,7 @@ class Wacko
 				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ?: '');
 				$page_id	= $this_page['page_id'];
 
-				// set a anchor once for page link at the first appearance
+				// set an anchor once for page link at the first appearance
 				if ($anchor_link && !isset($this->first_inclusion[OBJECT_PAGE][$page_id]))
 				{
 					$aname = ' id="a-' . $page_id . '"';
@@ -4493,7 +4494,7 @@ class Wacko
 
 		if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 		{
-			// disallow pages with Comment[0-9] and all sub pages, we do not want sub pages on a comment.
+			// disallow pages with Comment[0-9] and all sub-pages, we do not want sub-pages on a comment.
 			if (preg_match( '/\b(Comment(\d+))\b/ui', $_data, $match ))
 			{
 				return 'Comment([0-9]+)';
@@ -4503,7 +4504,7 @@ class Wacko
 		return false;
 	}
 
-	// checks for a accent and case-insensitive version of the tag
+	// checks for an accent and case-insensitive version of the tag
 	function similar_page_exists($tag)
 	{
 		return $this->db->load_all(
@@ -4633,7 +4634,7 @@ class Wacko
 		{
 			return Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . ' ';
 		}
-		// check if valid user name (and disallow '/')
+		// check if valid username (and disallow '/')
 		else if (!preg_match('/^(' . $this->lang['USER_NAME'] . ')$/u', $user_name))
 		{
 			return $this->_t('InvalidUserName') . ' ';
@@ -4643,7 +4644,7 @@ class Wacko
 		{
 			return Ut::perc_replace($this->_t('UserReservedWord'), '<code>' . $result . '</code>');
 		}
-		// if user name already exists
+		// if username already exists
 		else if ($this->user_name_exists($user_name) && $create)
 		{
 			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
@@ -4785,7 +4786,7 @@ class Wacko
 
 	function update_link_table($page_id, $body_r): void
 	{
-		// now we render it internally so we can write the updated link tables.
+		// now we render it internally, so we can write the updated link tables.
 		if (isset($this->linktable))
 		{
 			$this->format($body_r, 'post_wacko');
@@ -4990,8 +4991,9 @@ class Wacko
 
 	/**
 	* Loads all referrers to this page from DB
-	* @param int $page_id
-	* @return array Array of (referer, num)
+	* @param int	$page_id
+	*
+	* @return array	Array of (referer, num)
 	*/
 	function load_referrers($page_ids = null): ?array
 	{
@@ -5415,7 +5417,7 @@ class Wacko
 		return $this->extract_sections($body, $section_id, 'get');
 	}
 
-	function replace_section($body, $section_id, $new_section)
+	function replace_section($body, $section_id, $new_section): string
 	{
 		return $this->merge_sections(
 			$this->extract_sections(
@@ -5450,7 +5452,7 @@ class Wacko
 			return false;
 		}
 
-		// checking for identical name (case insensitive, not BINARY)
+		// checking for identical name (case-insensitive, not BINARY)
 		if ($this->db->load_single(
 			"SELECT user_id " .
 			"FROM " . $this->prefix . "user " .
@@ -5835,7 +5837,7 @@ class Wacko
 	// COMMENTS AND COUNTS
 	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0): ?array
 	{
-		// avoid results if $page_id is 0 (page does not exists)
+		// avoid results if $page_id is 0 (page does not exist)
 		if ($page_id)
 		{
 			return $this->db->load_all(
@@ -5991,7 +5993,7 @@ class Wacko
 			return;
 		}
 
-		// updated latest revision with new owner
+		// updated the latest revision with new owner
 		$this->db->sql_query(
 			"UPDATE " . $this->prefix . "page SET " .
 				"owner_id = " . (int) $user_id . " " .
@@ -6001,7 +6003,7 @@ class Wacko
 
 	// ACLS
 
-	function sanitize_acl_syntax($list)
+	function sanitize_acl_syntax($list): string
 	{
 		$lines	= explode("\n", $list);
 
@@ -6231,7 +6233,7 @@ class Wacko
 	*
 	* @return array		$acl			Access control list
 	*/
-	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = ''): array
+	function load_acl($page_id, $privilege, $use_defaults = true, $use_cache = true, $use_parent = true, $new_tag = ''): array
 	{
 		$acl = [];
 
@@ -6311,12 +6313,12 @@ class Wacko
 	 * @param string	$privilege
 	 * @param string	$page_id
 	 * @param string	$user_name
-	 * @param int		$use_parent
+	 * @param bool		$use_parent
 	 * @param string	$new_tag
 	 *
 	 * @return bool
 	 */
-	function has_access($privilege, $page_id = null, $user_name = '', $use_parent = 1, $new_tag = ''): bool
+	function has_access($privilege, $page_id = null, $user_name = '', $use_parent = true, $new_tag = ''): bool
 	{
 		if (!$user_name)
 		{
@@ -6726,7 +6728,7 @@ class Wacko
 	{
 		$user_menu_formatted = [];
 
-		// avoid results if $user_id is 0 (user does not exists)
+		// avoid results if $user_id is 0 (user does not exist)
 		if ($user_id)
 		{
 			$user_menu = $this->db->load_all(
