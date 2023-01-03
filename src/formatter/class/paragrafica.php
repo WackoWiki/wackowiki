@@ -136,12 +136,9 @@ class Paragrafica
 		// -1. remove t-prefix;
 		$what = str_replace($this->mark_prefix, '', $what);
 
-		if (isset($this->wacko->data))
+		if (isset($this->wacko->page['page_id']))
 		{
-			if (is_array($this->wacko->data) && isset($this->wacko->data['record_id']))
-			{
-				$page_id = $this->wacko->data['record_id'];
-			}
+			$page_id = $this->wacko->page['page_id'];
 		}
 		else
 		{

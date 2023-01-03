@@ -1034,7 +1034,7 @@ class WackoFormatter
 		if ($wacko->db->section_edit
 			&& $h_level > 1
 			&& !isset($_POST['preview'])
-			&& in_array($wacko->method, ['addcomment', 'edit', 'show']))
+			&& (in_array($wacko->method, ['addcomment', 'edit', 'show']) || $wacko->db->ap_mode))
 		{
 			$wacko->section_count++;
 			$section_tag = $wacko->section_tag ?? ($wacko->page['tag'] ?? '');
