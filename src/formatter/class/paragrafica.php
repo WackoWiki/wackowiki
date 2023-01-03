@@ -145,7 +145,7 @@ class Paragrafica
 		}
 		else
 		{
-			$page_id = substr((string) crc32((string) time()), 0, 5);
+			$page_id = substr((string) hash('crc32', (string) time()), 0, 5);
 		}
 
 		// 1. insert terminators appropriately
