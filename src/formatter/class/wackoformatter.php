@@ -371,6 +371,10 @@ class WackoFormatter
 		{
 			$this->page_id = $wacko->page['page_id'];
 		}
+		else if (isset($wacko->resync_page_id))
+		{
+			$this->page_id = $wacko->resync_page_id;
+		}
 
 		if (!$this->page_id || isset($wacko->new_comment))
 		{
