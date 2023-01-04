@@ -266,8 +266,9 @@ function admin_maint_resync($engine, $module)
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-						$paragrafica	= !$page['comment_on_id'];
-						$page['body_r']	= $engine->compile_body($page['body'], $page['page_id'], $paragrafica, true);
+						$engine->resync_page_id	= $page['page_id'];
+						$paragrafica			= !$page['comment_on_id'];
+						$page['body_r']			= $engine->compile_body($page['body'], $page['page_id'], $paragrafica, true);
 					}
 
 					// rendering links
