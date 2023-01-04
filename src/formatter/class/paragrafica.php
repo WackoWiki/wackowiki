@@ -195,15 +195,6 @@ class Paragrafica
 		$pcount = 0;
 		$pieces = explode($this->mark2, $what);
 
-		if (isset($mark1))
-		{
-			$sizeof_mark1 = count($mark1);
-		}
-		else
-		{
-			$sizeof_mark1 = null;
-		}
-
 		foreach ($pieces as $k => $v)
 		{
 			if ($k > 0)
@@ -243,7 +234,7 @@ class Paragrafica
 										  $page_id . '-' . $pcount .
 										  $this->prefix2 .
 										  $inside .
-										  $this->postfix . substr($v, $pos + $sizeof_mark1);
+										  $this->postfix . substr($v, $pos);
 						}
 					}
 				}
