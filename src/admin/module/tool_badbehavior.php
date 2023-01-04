@@ -55,7 +55,7 @@ function admin_tool_badbehavior($engine, $module)
 		{
 			// Lookup
 			$find		= implode('.', array_reverse(explode('.', $ip)));
-			$result		= gethostbynamel("${httpbl_key}.${find}.dnsbl.httpbl.org.");
+			$result		= gethostbynamel("{$httpbl_key}.{$find}.dnsbl.httpbl.org.");
 
 			if (!empty($result))
 			{
@@ -78,7 +78,7 @@ function admin_tool_badbehavior($engine, $module)
 					}
 					else
 					{
-						$d .= "Search engine ${ip[2]}<br>\n";
+						$d .= "Search engine {$ip[2]}<br>\n";
 					}
 				}
 
@@ -99,12 +99,12 @@ function admin_tool_badbehavior($engine, $module)
 
 				if ($ip[3] & 7)
 				{
-					$d .= "Threat level ${ip[2]}<br>\n";
+					$d .= "Threat level {$ip[2]}<br>\n";
 				}
 
 				if ($ip[3] > 0)
 				{
-					$d .= "Age ${ip[1]} days<br>\n";
+					$d .= "Age {$ip[1]} days<br>\n";
 				}
 			}
 		}

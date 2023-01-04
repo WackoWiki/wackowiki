@@ -471,7 +471,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 										'</td>
 										<th class="t-left nowrap">' .
 											'<label for="pack_' . $i . '">' .
-												$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
+												date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
 												'</label>' .
 										'</th>
 									</tr>
