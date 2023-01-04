@@ -1,4 +1,5 @@
 <?php
+
 /*
 
 Typografica library: Paragrafica class.
@@ -135,14 +136,7 @@ class Paragrafica
 		// -1. remove t-prefix;
 		$what = str_replace($this->mark_prefix, '', $what);
 
-		if (isset($this->wacko->page['page_id']))
-		{
-			$page_id = $this->wacko->page['page_id'];
-		}
-		else
-		{
-			$page_id = substr(hash('crc32', time()), 0, 5);
-		}
+		$page_id = $this->wacko->page['page_id'] ?? substr((string) hash('crc32', (string) time()), 0, 5);
 
 		// 1. insert terminators appropriately
 		foreach ($this->t0 as $t)
@@ -201,15 +195,6 @@ class Paragrafica
 		$pcount = 0;
 		$pieces = explode($this->mark2, $what);
 
-		if (isset($mark1))
-		{
-			$sizeof_mark1 = count($mark1);
-		}
-		else
-		{
-			$sizeof_mark1 = null;
-		}
-
 		foreach ($pieces as $k => $v)
 		{
 			if ($k > 0)
@@ -249,7 +234,7 @@ class Paragrafica
 										  $page_id . '-' . $pcount .
 										  $this->prefix2 .
 										  $inside .
-										  $this->postfix . substr($v, $pos + $sizeof_mark1);
+										  $this->postfix . substr($v, $pos);
 						}
 					}
 				}

@@ -376,7 +376,7 @@ class WackoFormatter
 		{
 			// for new page or comment with not yet created db record
 			// temporary random hashid for paragrafica (toc, p)
-			$this->page_id = trim(substr(hash('crc32', time()), 0, 5), '-');
+			$this->page_id = substr(hash('crc32', time()), 0, 5);
 		}
 
 		// convert HTML thingies
