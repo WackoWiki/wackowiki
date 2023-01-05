@@ -190,7 +190,7 @@ class Settings extends Dbal implements ArrayAccess
 		$this->__unset($i);
 	}
 
-	public function offsetGet($i): mixed
+	public function offsetGet($i)
 	{
 		return $this->__get($i);
 	}
