@@ -20,6 +20,7 @@ $module['maint_resync'] = [
 function admin_maint_resync($engine, $module)
 {
 	$prefix		= $engine->prefix;
+	$batches	= [10, 20, 30, 50, 100, 200, 300, 500];
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
@@ -198,7 +199,7 @@ function admin_maint_resync($engine, $module)
 			if (isset($_POST['page_limit']))
 			{
 				$page_limit					= (int) ($_POST['page_limit'] ?? 30);
-				$engine->sess->resync_limit	= (in_array($page_limit, [10, 20, 30, 50, 100, 200, 300, 500])) ? $page_limit : 30;
+				$engine->sess->resync_limit	= (in_array($page_limit, $batches)) ? $page_limit : 30;
 			}
 
 			$limit							= $engine->sess->resync_limit;
@@ -278,13 +279,14 @@ function admin_maint_resync($engine, $module)
 
 				#Diag::dbg('GOLD', $i, $engine->sess->resync_counter);
 
-				// TODO: Fix or workaround, see notice above
+				// redirect limit workaround, see notice above
 				if ($i < ($redirects + ($engine->sess->resync_counter)))
 				{
 					$engine->http->redirect($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)]));
 				}
 				else
 				{
+					// show next » link to compile the following batch
 					$engine->sess->resync_counter	= $i + 1 ;
 					$engine->sess->resync_batch		= $engine->sess->resync_batch + 1;
 					$message = $engine->_t('ParseNextBatch') . ' #' . $engine->sess->resync_batch . ' ' .
@@ -379,14 +381,12 @@ if ($engine->db->xml_sitemap)
 		<br>
 		<strong><small><?php echo $engine->_t('ResyncOptions');?>:</small></strong><br>
 		<select id="page_limit" name="page_limit">
-			<option value="10">10</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-			<option value="50" selected>50</option>
-			<option value="100">100</option>
-			<option value="200">200</option>
-			<option value="300">300</option>
-			<option value="500">500</option>
+		<?php
+		foreach ($batches as $value)
+		{
+			echo '<option value="' . $value . '"' . ($value == 50 ? ' selected' : '') . '>' . $value . '</option>';
+		}
+		?>
 		</select>
 		<label for="page_limit"><small><?php echo $engine->_t('RecompilePageLimit');?></small></label><br><br>
 		<input type="checkbox" id="recompile_page" name="recompile_page" value="1">
