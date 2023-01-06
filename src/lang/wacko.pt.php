@@ -769,6 +769,7 @@ $wacko_translation = [
 	'MetaIndexLower'			=> 'Lower',
 	'MetaHtml'					=> 'Suporte HTML para página',
 	'MetaSafeHtml'				=> 'Filtragem de HTML inseguro',
+	'MetaTypografica'			=> 'Typographical Proofreader',
 	'MetaNoIndex'				=> 'Bloquear motores de busca',
 	'SettingsID'				=> 'ID da página',
 	'SettingsSize'				=> 'Tamanho',
