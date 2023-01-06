@@ -74,6 +74,13 @@
 							</tr>
 						=]
 						<tr>
+							<th scope="row">[ ' _t: MetaTypografica ' ]</th>
+							<td>
+								<input type="radio" id="typograficaOn" name="typografica"[ ' typografica | check 1 ' ]><label for="typograficaOn">[ ' _t: On ' ]</label>
+								<input type="radio" id="typograficaOff" name="typografica"[ ' typografica | check 0 ' ]><label for="typograficaOff">[ ' _t: Off ' ]</label>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row">[ ' _t: MetaNoIndex ' ]</th>
 							<td>
 								<input type="radio" id="noindexOn" name="noindex"[ ' noindex | check 1 ' ]><label for="noindexOn">[ ' _t: On ' ]</label>

@@ -933,11 +933,11 @@ class Wacko
 			{
 				$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
-							'p.page_lang, p.keywords, p.description, p.allow_rawhtml, p.disable_safehtml, p.noindex, p.deleted, ' .
+							'p.page_lang, p.keywords, p.description, p.allow_rawhtml, p.disable_safehtml, p.typografica, p.noindex, p.deleted, ' .
 							'u.user_name, o.user_name AS owner_name';
 				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
-							'p.page_lang, p.keywords, p.description, s.allow_rawhtml, s.disable_safehtml, s.noindex, p.deleted, ' .
+							'p.page_lang, p.keywords, p.description, s.allow_rawhtml, s.disable_safehtml, s.typografica, s.noindex, p.deleted, ' .
 							'u.user_name, o.user_name AS owner_name';
 			}
 			else
@@ -947,7 +947,7 @@ class Wacko
 							'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.reviewed_time, ' .
 							'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, ' .
 							'p.description, p.keywords, s.revisions , s.footer_comments, s.footer_files, s.hide_toc, ' .
-							's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, ' .
+							's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.typografica, s.noindex, s.theme, ' .
 							'u.user_name, o.user_name AS owner_name';
 			}
 
@@ -9105,37 +9105,18 @@ class Wacko
 	{
 		if (is_numeric($size))
 		{
-			if ($prefix === true)
+			if ($prefix)
 			{
 				// decimal prefix
-				if ($short === true)
-				{
-					// ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-					$norm = $this->_t('DecimalPrefixShort');
-				}
-				else
-				{
-					// ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'];
-					$norm = $this->_t('DecimalPrefixLong');
-				}
+				$factor	= 1000;
+				$norm	= $this->_t($short ? 'DecimalPrefixShort' : 'DecimalPrefixLong');
 
-				$factor = 1000;
 			}
 			else
 			{
 				// binary prefix
-				if ($short === true)
-				{
-					// ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-					$norm = $this->_t('BinaryPrefixShort');
-				}
-				else
-				{
-					// ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'];
-					$norm = $this->_t('BinaryPrefixLong');
-				}
-
-				$factor = 1024;
+				$factor	= 1024;
+				$norm	= $this->_t($short ? 'BinaryPrefixShort': 'BinaryPrefixLong');
 			}
 
 			$count	= 8; // count($norm) -1;
@@ -9147,7 +9128,7 @@ class Wacko
 				$x++;
 			}
 
-			if ($rounded === true)
+			if ($rounded)
 			{
 				$size = round($size, 0);
 			}
@@ -9156,7 +9137,7 @@ class Wacko
 				$size = sprintf('%01.2f', $size);
 			}
 
-			if ($suffix === true)
+			if ($suffix)
 			{
 				$size = $size . NBSP . $norm[$x];
 			}
@@ -9167,17 +9148,10 @@ class Wacko
 
 	function binary_multiples_factor ($size, $prefix = true): int
 	{
-		$count	= 9; // count($norm) -1;
+		$count	= 9; // count($norm);
 		$x		= 0;
 
-		if ($prefix === true)
-		{
-			$factor = 1000;
-		}
-		else
-		{
-			$factor = 1024;
-		}
+		$factor = $prefix ? 1000 : 1024;
 
 		while ($size >= $factor && $x < $count)
 		{

@@ -36,7 +36,8 @@ if ($action === 'extended_properties')
 				?	"allow_rawhtml		= " . (int) $_POST['allow_rawhtml'] . ", " .
 					"disable_safehtml	= " . (int) $_POST['disable_safehtml'] . ", "
 				:	"") .
-			"noindex			= " . (int) $_POST['noindex'] . " " .
+			"typografica		= " . (int) $_POST['typografica'] . " " .
+			"noindex			= " . (int) $_POST['noindex'] . ", " .
 		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"LIMIT 1");
 }
@@ -86,8 +87,8 @@ if (isset($_GET['extended']))
 	if ($this->is_owner() || $this->is_admin())
 	{
 		$tpl->enter('e_x_');
-		$tpl->comments	= (int) $this->db->footer_comments;
-		$tpl->files		= (int) $this->db->footer_files;
+		$tpl->comments		= (int) $this->db->footer_comments;
+		$tpl->files			= (int) $this->db->footer_files;
 
 		// hide_toc, hide_index, tree_level: used in custom theme menus
 		if ($custom_menus)
@@ -97,7 +98,8 @@ if (isset($_GET['extended']))
 			$tpl->custom_treelevel	= (int) $this->db->tree_level;
 		}
 
-		$tpl->noindex	= (int) $this->page['noindex'];
+		$tpl->typografica	= (int) $this->page['typografica'];
+		$tpl->noindex		= (int) $this->page['noindex'];
 
 		if ($this->is_admin())
 		{

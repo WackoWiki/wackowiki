@@ -15,7 +15,7 @@ $is_global		= '';
 $is_image		= '';
 $prefix			= $this->prefix;
 
-$this->ensure_page(true); // TODO: upload for forums?
+$this->ensure_page(true);
 
 // check who u are, can u upload?
 if (isset($_POST['upload']) & $can_upload)
