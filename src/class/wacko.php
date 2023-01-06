@@ -9136,37 +9136,17 @@ class Wacko
 	{
 		if (is_numeric($size))
 		{
-			if ($prefix === true)
+			if ($prefix)
 			{
 				// decimal prefix
-				if ($short === true)
-				{
-					// ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-					$norm = $this->_t('DecimalPrefixShort');
-				}
-				else
-				{
-					// ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'];
-					$norm = $this->_t('DecimalPrefixLong');
-				}
-
-				$factor = 1000;
+				$factor	= 1000;
+				$norm	= $this->_t($short ? 'DecimalPrefixShort' : 'DecimalPrefixLong');
 			}
 			else
 			{
 				// binary prefix
-				if ($short === true)
-				{
-					// ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-					$norm = $this->_t('BinaryPrefixShort');
-				}
-				else
-				{
-					// ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'];
-					$norm = $this->_t('BinaryPrefixLong');
-				}
-
-				$factor = 1024;
+				$factor	= 1024;
+				$norm	= $this->_t($short ? 'BinaryPrefixShort': 'BinaryPrefixLong');
 			}
 
 			$count	= 8; // count($norm) -1;
@@ -9178,7 +9158,7 @@ class Wacko
 				$x++;
 			}
 
-			if ($rounded === true)
+			if ($rounded)
 			{
 				$size = round($size, 0);
 			}
@@ -9187,7 +9167,7 @@ class Wacko
 				$size = sprintf('%01.2f', $size);
 			}
 
-			if ($suffix === true)
+			if ($suffix)
 			{
 				$size = $size . NBSP . $norm[$x];
 			}
@@ -9198,17 +9178,10 @@ class Wacko
 
 	function binary_multiples_factor ($size, $prefix = true): int
 	{
-		$count	= 9; // count($norm) -1;
+		$count	= 9; // count($norm);
 		$x		= 0;
 
-		if ($prefix === true)
-		{
-			$factor = 1000;
-		}
-		else
-		{
-			$factor = 1024;
-		}
+		$factor = $prefix ? 1000 : 1024;
 
 		while ($size >= $factor && $x < $count)
 		{
