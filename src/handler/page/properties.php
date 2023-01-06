@@ -36,8 +36,8 @@ if ($action === 'extended_properties')
 				?	"allow_rawhtml		= " . (int) $_POST['allow_rawhtml'] . ", " .
 					"disable_safehtml	= " . (int) $_POST['disable_safehtml'] . ", "
 				:	"") .
-			"typografica		= " . (int) $_POST['typografica'] . " " .
-			"noindex			= " . (int) $_POST['noindex'] . ", " .
+			"typografica		= " . (int) $_POST['typografica'] . ", " .
+			"noindex			= " . (int) $_POST['noindex'] . " " .
 		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"LIMIT 1");
 }

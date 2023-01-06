@@ -6,9 +6,9 @@
 
 echo '<!--notypo-->';
 
-$typo = $this->db->default_typografica;
-$this->db->default_typografica = false;
+$typo = $this->db->typografica;
+$this->db->typografica = false;
 include Ut::join_path(FORMATTER_DIR, 'wiki.php');
-$this->db->default_typografica = $typo;
+$this->db->typografica = $typo;
 
 echo '<!--/notypo-->';

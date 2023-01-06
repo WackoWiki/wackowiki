@@ -35,7 +35,7 @@ function admin_config_formatter($engine, $module)
 		$timezone = $engine->validate_timezone($_POST['timezone']);
 
 		$config['allow_x11colors']			= (int) ($_POST['allow_x11colors'] ?? 0);
-		$config['default_typografica']		= (int) ($_POST['default_typografica'] ?? 0);
+		$config['typografica']				= (int) ($_POST['typografica'] ?? 0);
 		$config['paragrafica']				= (int) ($_POST['paragrafica'] ?? 0);
 		$config['allow_rawhtml']			= (int) ($_POST['allow_rawhtml'] ?? 0);
 		$config['disable_safehtml']			= (int) $_POST['disable_safehtml'];
@@ -78,11 +78,11 @@ function admin_config_formatter($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="default_typografica"><strong><?php echo $engine->_t('Typografica');?></strong><br>
+					<label for="typografica"><strong><?php echo $engine->_t('Typografica');?></strong><br>
 					<small><?php echo $engine->_t('TypograficaInfo');?></small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="default_typografica" name="default_typografica" value="1"<?php echo ($engine->db->default_typografica ? ' checked' : '');?>>
+					<input type="checkbox" id="typografica" name="typografica" value="1"<?php echo ($engine->db->typografica ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">

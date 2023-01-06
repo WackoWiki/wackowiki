@@ -62,25 +62,28 @@ if (!$config['is_update'])
 }
 
 // update config values
-if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.4', '<'))
+if ($config['is_update'])
 {
-	// set timezone and new ICU formats
-	$config['timezone']				= 'UTC';
-	$config['date_format']			= 'dd.MM.yyyy';
-	$config['time_format']			= 'HH:mm';
-	$config['time_format_seconds']	= 'HH:mm:ss';
-}
+	if (version_compare($config['wacko_version'], '6.1.13', '<'))
+	{
+		$config['rename_global_acl']	= $config['rename_globalacl'];
+	}
 
-if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.13', '<'))
-{
-	// renamed option
-	$config['rename_global_acl']	= $config['rename_globalacl'];
-}
+	if (version_compare($config['wacko_version'], '6.1.4', '<'))
+	{
+		// set timezone and new ICU formats
+		$config['timezone']				= 'UTC';
+		$config['date_format']			= 'dd.MM.yyyy';
+		$config['time_format']			= 'HH:mm';
+		$config['time_format_seconds']	= 'HH:mm:ss';
 
-if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.14', '<'))
-{
-	// renamed option
-	$config['ext_bad_behaviour']	= $config['ext_bad_behavior'];
+		$config['ext_bad_behaviour']	= $config['ext_bad_behavior'];
+	}
+
+	if (version_compare($config['wacko_version'], '6.1.17', '<'))
+	{
+		$config['typografica']	= $config['default_typografica'];
+	}
 }
 
 /*

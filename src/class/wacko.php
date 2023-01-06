@@ -5176,7 +5176,7 @@ class Wacko
 		$error	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
 		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $error, compact('text', 'options'));
 
-		if ($formatter == 'wacko' && $this->db->default_typografica)
+		if ($formatter == 'wacko' && $this->db->typografica)
 		{
 			$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, 'typografica.php'), $error, compact('text'));
 		}
@@ -7263,14 +7263,15 @@ class Wacko
 		{
 			// override with perpage settings
 			$page_options = [
-				'footer_comments',
-				'footer_files',
-				'hide_toc',
-				'hide_index',
-				'tree_level',
 				'allow_rawhtml',
 				'disable_safehtml',
+				'footer_comments',
+				'footer_files',
+				'hide_index',
+				'hide_toc',
 				'theme',
+				'tree_level',
+				'typografica',
 			];
 
 			foreach ($page_options as $key)
@@ -9110,7 +9111,6 @@ class Wacko
 				// decimal prefix
 				$factor	= 1000;
 				$norm	= $this->_t($short ? 'DecimalPrefixShort' : 'DecimalPrefixLong');
-
 			}
 			else
 			{

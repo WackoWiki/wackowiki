@@ -89,7 +89,7 @@ $upgrade['6.1.9'][]		= ['alter',		'cache',			$alter_cache_r6_0_1];
 // category
 
 // config
-$upgrade['6.1.13'][]	= ['update',	'config',			$update_config_r6_0_1];
+$upgrade['6.1.16'][]	= ['update',	'config',			$update_config_r6_0_1];
 
 // file
 $upgrade['6.1.5'][]		= ['alter',		'file',				$alter_file_r6_0_1];
