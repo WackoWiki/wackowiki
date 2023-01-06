@@ -240,8 +240,8 @@ function admin_maint_resync($engine, $module)
 			$engine->set_user_setting('dont_redirect', 1, 0);
 
 			if ($pages = $engine->db->load_all(
-			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, a.allow_rawhtml, a.disable_safehtml, " .
-				"b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml " .
+			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, a.page_lang, a.allow_rawhtml, a.disable_safehtml, a.typografica, " .
+				"b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml, b.typografica AS parent_typografica " .
 			"FROM " . $prefix . "page a " .
 				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
 			"ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci " .
@@ -260,6 +260,7 @@ function admin_maint_resync($engine, $module)
 					// formatter needs these values, comment requires settings from parent page
 					$engine->db->allow_rawhtml		= ($page['comment_on_id'] ? $page['parent_allow_rawhtml']		: $page['allow_rawhtml']);
 					$engine->db->disable_safehtml	= ($page['comment_on_id'] ? $page['parent_disable_safehtml']	: $page['disable_safehtml']);
+					$engine->db->typografica		= ($page['comment_on_id'] ? $page['parent_typografica']			: $page['typografica']);
 
 					// setting context
 					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_tag'] : $page['tag']);
@@ -267,9 +268,10 @@ function admin_maint_resync($engine, $module)
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-						$engine->resync_page_id	= $page['page_id'];
-						$paragrafica			= !$page['comment_on_id'];
-						$page['body_r']			= $engine->compile_body($page['body'], $page['page_id'], $paragrafica, true);
+						$engine->resync_page_id		= $page['page_id'];
+						$engine->resync_page_lang	= $page['page_lang'];
+						$paragrafica				= !$page['comment_on_id'];
+						$page['body_r']				= $engine->compile_body($page['body'], $page['page_id'], $paragrafica, true);
 					}
 
 					// rendering links
