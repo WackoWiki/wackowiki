@@ -15,10 +15,10 @@ class WackoFormatter
 	public $old_indent_level	= 0;
 	public $indent_closers		= [];
 	public $tdold_indent_level	= 0;
-	public $auto_fn			= [];
+	public $auto_fn				= [];
 	public $tdindent_closers	= [];
 	public $br					= true;
-	public $intable			= false;
+	public $intable				= false;
 	public $intable_br			= false;
 	public $cols				= 0;
 	public $LONG_REGEX;
@@ -148,7 +148,6 @@ class WackoFormatter
 			($this->object->db->disable_wikilinks
 				? ''
 				: "(~?)(?<=[^\." . $object->lang['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->lang['UPPER'] . $object->lang['LOWER'] . "+" . $object->lang['UPPERNUM'] . $object->lang['ALPHANUM'] . "*)\b|") .
-				# "(~?)(?<=[^\.[[:alpha:]][[:digit:]]\_\-\/]|^)(((\.\.|!)?\/)?[[:upper:][:lower:]\/]+[[:upper:][:digit:]][[:alpha:][:digit:]\_\-\/]*)\b|") .
 			"\n)/usm";
 
 		$this->PRE_REGEX =
