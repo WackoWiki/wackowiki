@@ -148,7 +148,6 @@ class WackoFormatter
 			($this->object->db->disable_wikilinks
 				? ''
 				: "(~?)(?<=[^\." . $object->lang['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->lang['UPPER'] . $object->lang['LOWER'] . "+" . $object->lang['UPPERNUM'] . $object->lang['ALPHANUM'] . "*)\b|") .
-				# "(~?)(?<=[^\.[[:alpha:]][[:digit:]]\_\-\/]|^)(((\.\.|!)?\/)?[[:upper:][:lower:]\/]+[[:upper:][:digit:]][[:alpha:][:digit:]\_\-\/]*)\b|") .
 			"\n)/usm";
 
 		$this->PRE_REGEX =
