@@ -846,5 +846,5 @@ if ($user_id = $this->get_user_id())
 }
 else
 {
-	$tpl->forbidden = $this->_t('MessagingForbidden');
+	$tpl->forbidden = $this->show_message($this->_t('MessagingForbidden'), 'note', false);
 }
