@@ -56,6 +56,7 @@ $select_user = function($user_id, $to) use ($prefix, &$tpl)
 	$users = $this->db->load_all(
 		"SELECT user_id, user_name
 		FROM {$prefix}user
+		WHERE account_type = 0
 		ORDER BY user_name ASC", true);
 
 	foreach ($users as $user)

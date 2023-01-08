@@ -217,7 +217,13 @@
 		[ ' sendto ' ]
 	=]
 	[= g _ =
-		<table class="usertable" width="100%">
+		<table class="tbl-sent usertable" width="100%">
+			<colgroup>
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+			</colgroup>
 			<thead>
 				<tr>
 					<td colspan="4" style="border: 0;">
@@ -225,10 +231,10 @@
 					</td>
 				</tr>
 				<tr>
-					<th width="400">[ ' _t: Subject ' ]</th>
-					<th width="100">[ ' _t: Recipient ' ]</th>
-					<th width="100">[ ' _t: Date ' ]</th>
-					<th width="75">[ ' _t: Read ' ]</th>
+					<th>[ ' _t: Subject ' ]</th>
+					<th>[ ' _t: Recipient ' ]</th>
+					<th>[ ' _t: Date ' ]</th>
+					<th>[ ' _t: Read ' ]</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -569,6 +575,19 @@
 	width: 100px;
 }
 .tbl-inbox col:nth-child(5) {
+	width: 80px;
+}
+
+.tbl-sent col:nth-child(1) {
+	width: 400px;
+}
+.tbl-sent col:nth-child(2) {
+	width: 100px;
+}
+.tbl-sent col:nth-child(3) {
+	width: 100px;
+}
+.tbl-sent col:nth-child(4) {
 	width: 80px;
 }
 
