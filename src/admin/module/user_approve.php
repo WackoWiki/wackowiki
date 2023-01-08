@@ -53,15 +53,18 @@ function admin_user_approve($engine, $module)
 	}
 
 	// keep currently selected list items
-	foreach ($_POST['id'] as $key => $val)
+	if (isset($_POST['id']))
 	{
-		if (!in_array($val, $set) && !empty($val))
+		foreach ($_POST['id'] as $key => $val)
 		{
-			$set[] = $val;
+			if (!in_array($val, $set) && !empty($val))
+			{
+				$set[] = $val;
+			}
 		}
-	}
 
-	unset($key, $val);
+		unset($key, $val);
+	}
 
 	// save user ids for later operations (correct if needed)
 	if (isset($_POST['set']))
