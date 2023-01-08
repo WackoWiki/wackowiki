@@ -20,7 +20,6 @@ class Wacko
 	public $db;									// new config
 	public $http;
 	public $sess;
-	public $dblink;
 	public $prefix;								// alias for table prefix
 	public $page;								// requested page
 	public $tag;
@@ -117,7 +116,6 @@ class Wacko
 	*/
 	function __construct(&$config, &$http)
 	{
-		$this->dblink	=						// for quote() calls
 		$this->db		=
 		$this->config	= & $config;
 		$this->http		= & $http;
