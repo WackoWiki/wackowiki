@@ -1061,9 +1061,9 @@ class Wacko
 		$this->page_id_cache[$page['tag']] = $page['page_id'];
 	}
 
-	function cache_wanted_page($tag, $page_id = 0, $check = 0): void
+	function cache_wanted_page($tag, $page_id = 0, $check = false): void
 	{
-		if ($check == 0)
+		if (!$check)
 		{
 			($page_id
 				? $this->wanted_cache['page_id'][$page_id] = 1
@@ -1297,9 +1297,7 @@ class Wacko
 		{
 			if (isset($pages[array_search($notexist, $spages)]))
 			{
-				// now without check but previous query may be cached
-				#$this->cache_wanted_page($pages[array_search($notexist, $spages)]);
-				$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
+				$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, true);
 			}
 		}
 
@@ -1612,9 +1610,6 @@ class Wacko
 		"ORDER BY c.created DESC " .
 		"LIMIT " . $limit))
 		{
-			#$count			= count($pages['page_id']);
-			#$pagination	= $this->pagination($count, $limit);
-
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, true);
@@ -2384,15 +2379,6 @@ class Wacko
 
 	function update_revisions_count($page_id, $user_id = null): void
 	{
-		/** cases: incremental recount, total recount, purge (total + incremental)
-		 *
-		 * $revisions =
-		 *		'revisions + 1' or 'revisions - 1'
-		 *		(int) $this->count_revisions($page_id)
-		 *		0
-		 *
-		 */
-
 		$this->db->sql_query(
 			"UPDATE " . $this->prefix . "page SET " .
 				"revisions = " . (int) $this->count_revisions($page_id) . " " .
@@ -4515,7 +4501,7 @@ class Wacko
 			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci");
 	}
 
-	function sanitize_page_tag(&$tag, $normalize = false): void
+	function sanitize_page_tag(&$tag): void
 	{
 		if (!$tag)
 		{
@@ -6591,8 +6577,8 @@ class Wacko
 
 	function show_access_mode($page_id = null, $tag = '',  $privilege = 'read'): string
 	{
-		if (!$page_id)	$page_id	= $this->page['page_id']	?? null;
-		if (!$tag)		$tag		= $this->page['tag']		?? null;
+		if (!$page_id)	{$page_id	= $this->page['page_id']	?? null;}
+		if (!$tag)		{$tag		= $this->page['tag']		?? null;}
 
 		$user		= $this->get_user();
 		$link		= $this->href('permissions', $tag);
@@ -9119,7 +9105,7 @@ class Wacko
 				$norm	= $this->_t($short ? 'BinaryPrefixShort': 'BinaryPrefixLong');
 			}
 
-			$count	= 8; // count($norm) -1;
+			$count	= 8;
 			$x		= 0;
 
 			while ($size >= $factor && $x < $count)
@@ -9148,7 +9134,7 @@ class Wacko
 
 	function binary_multiples_factor ($size, $prefix = true): int
 	{
-		$count	= 9; // count($norm);
+		$count	= 9;
 		$x		= 0;
 
 		$factor = $prefix ? 1000 : 1024;
