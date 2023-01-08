@@ -23,17 +23,17 @@ $create_table = function() use ($prefix)
 {
 	$this->db->sql_query(
 		"CREATE TABLE IF NOT EXISTS {$prefix}messenger (
-			message_id INT(10) NOT NULL AUTO_INCREMENT,
+			message_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 			user_to_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-			repliedto TINYINT(1) DEFAULT '0',
-			folder TINYTEXT NOT NULL,
+			repliedto TINYINT(1) UNSIGNED DEFAULT '0',
+			folder VARCHAR(255) NOT NULL DEFAULT '',
 			user_from_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-			urgent TINYINT(1) DEFAULT NULL,
-			subject MEDIUMTEXT NOT NULL,
-			message LONGTEXT NOT NULL,
-			status TINYINT(1) DEFAULT '0',
+			urgent TINYINT(1) UNSIGNED DEFAULT NULL,
+			subject VARCHAR(255) NOT NULL DEFAULT '',
+			message TEXT NOT NULL,
+			status TINYINT(1) UNSIGNED DEFAULT '0',
 			datesent DATETIME NULL DEFAULT NULL,
-			viewrecipient TINYINT(1) DEFAULT '1',
+			viewrecipient TINYINT(1) UNSIGNED DEFAULT '1',
 		PRIMARY KEY (message_id),
 		KEY idx_user_to_id (user_to_id),
 		KEY idx_user_from_id (user_from_id)
@@ -41,11 +41,11 @@ $create_table = function() use ($prefix)
 
 	$this->db->sql_query(
 		"CREATE TABLE IF NOT EXISTS {$prefix}messenger_info (
-			msg_info_id INT(80) NOT NULL AUTO_INCREMENT,
+			msg_info_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 			owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-			type TINYTEXT NOT NULL,
-			info TINYTEXT NOT NULL,
-			notes TINYTEXT,
+			type VARCHAR(255) NOT NULL DEFAULT '',
+			info VARCHAR(255) NOT NULL DEFAULT '',
+			notes VARCHAR(255) NOT NULL DEFAULT '',
 		PRIMARY KEY (msg_info_id),
 		KEY idx_owner_id (owner_id)
 	);");
@@ -294,7 +294,6 @@ if ($user_id = $this->get_user_id())
 
 		// drop down box to move to a new folder
 		$tpl->enter('d_');
-		$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id']]);
 		$select_folder($user_id);
 		$tpl->leave(); // d_
 
@@ -559,7 +558,6 @@ if ($user_id = $this->get_user_id())
 
 		// drop down box to move to a new folder
 		$tpl->enter('d_');
-		$tpl->hrefform		= $this->href('', '', ['message_id' => $row['message_id'], 'folder' => $msg_folder]);
 		$select_folder($user_id);
 		$tpl->leave(); // d_
 
