@@ -627,6 +627,7 @@ if ($user_id = $this->get_user_id())
 		if ($row['user_from_id'] == $user_id)
 		{
 			$tpl->time			= $row['datesent'];
+			$tpl->status		= $this->_t('MessageStatus')[$row['status']];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->user_link($row['user_name'], true, false);
 			$tpl->message		= strip_tags($row['message']);

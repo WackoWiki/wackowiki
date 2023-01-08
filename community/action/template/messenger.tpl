@@ -39,8 +39,8 @@
 		[ ' message ' ]
 	=]
 	[= b _ =
-		<form action="[ ' href: ' ]" method="post" name="folder_inbox">
-			[ ' csrf: folder_inbox ' ]
+		<form action="[ ' href: ' ]" method="post" name="move_folder">
+			[ ' csrf: move_folder ' ]
 			<table class="tbl-inbox usertable">
 				<colgroup>
 					<col span="1">
@@ -234,7 +234,7 @@
 					<th>[ ' _t: Subject ' ]</th>
 					<th>[ ' _t: Recipient ' ]</th>
 					<th>[ ' _t: Date ' ]</th>
-					<th>[ ' _t: Read ' ]</th>
+					<th>[ ' _t: Status ' ]</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -251,8 +251,8 @@
 		[ ' // <br><br>Löscht der Empfänger eine Nachricht, wird sie auch hier automatisch entfernt! ' ]
 	=]
 	[= h _ =
-		<form action="[ ' href: ' ]" method="post" name="selected_folder">
-			[ ' csrf: selected_folder ' ]
+		<form action="[ ' href: ' ]" method="post" name="move_folder">
+			[ ' csrf: move_folder ' ]
 			<table class="tbl-inbox usertable">
 				<colgroup>
 					<col span="1">
@@ -338,6 +338,10 @@
 			<tr>
 				<th>[ ' _t: Date ' ]: </th>
 				<td>[ ' time | time_formatted ' ]</td>
+			</tr>
+			<tr>
+				<th>[ ' _t: Status ' ]: </th>
+				<td>[ ' status ' ]</td>
 			</tr>
 		</table>
 	=]
@@ -534,16 +538,13 @@
 <input readonly type="text" name="remLen" size="4" maxlength="4" value="2500"> [ ' _t: CharactersLeft ' ]
 
 [ == selectfolder == ]
-<form action="[ ' hrefform ' ]" method="post" name="move_folder">
-	[ ' csrf: move_folder ' ]
-	<select name="move2folder">
-		<option value="">--&gt;[ ' // _t: ChooseFolder ' ]</option>
-	[= o _ =
-		<option value="[ ' info ' ][ ' selected ' ]">[ ' info ' ]</option>
-	=]
-	</select>
-	<button type="submit">[ ' _t: Move ' ]</button>
-</form>
+<select name="move2folder">
+	<option value="">--&gt;[ ' // _t: ChooseFolder ' ]</option>
+[= o _ =
+	<option value="[ ' info ' ][ ' selected ' ]">[ ' info ' ]</option>
+=]
+</select>
+<button type="submit">[ ' _t: Move ' ]</button>
 
 [ == icon == ]
 <a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ]"></a>
