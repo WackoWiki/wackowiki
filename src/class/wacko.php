@@ -7171,64 +7171,7 @@ class Wacko
 			}
 		}
 
-		// permalink
-		$page = 0;
-
-		if ($method == 'hashid')
-		{
-			$method			= '';
-			$ids			= explode('x', $tag);
-
-			$revision_id	= $this->db->load_single(
-				"SELECT revision_id " .
-				"FROM " . $this->prefix . "revision " .
-				"WHERE page_id = " . (int) $ids[0] . " " .
-					"AND version_id = " . (int) $ids[1] . " " .
-				"LIMIT 1");
-
-			$revision_id	= $revision_id ? $revision_id['revision_id'] : 0;
-			$page			= $this->load_page('', $ids[0], $revision_id, null, null, $this->is_admin());
-
-			if ($page)
-			{
-				$this->method			= 'show';
-				$this->tag				= $page['tag'];
-				$_GET['revision_id']	= $revision_id;
-			}
-		}
-
-		if (!$page)
-		{
-			if (!($this->method = trim($method)))
-			{
-				$this->method = 'show';
-			}
-
-			// normalize & sanitize tag name
-			$this->sanitize_page_tag($tag);
-
-			$revision_id	= (int) ($_GET['revision_id'] ?? '');
-			$deleted		= $this->is_admin();
-
-			// load page
-			$page			= $this->load_page($tag, 0, $revision_id, null, null, $deleted);
-
-			// no available revision
-			if ($revision_id && empty($page['tag']))
-			{
-				$page		= $this->load_page($tag, 0, 0, null, null, $deleted);
-			}
-
-			// invalid namespace
-			if (empty($page) && !$tag)
-			{
-				$this->http->status(404);
-				$this->set_message($this->_t('InvalidNamespace'), 'error');
-				$this->ensure_page();
-			}
-
-			$this->tag		= $tag;
-		}
+		$page = $this->get_page($tag, $method);
 
 		// create $this->page
 		$this->set_page($page); // the only call
@@ -7358,6 +7301,70 @@ class Wacko
 		$this->write_sitemap();
 	}
 
+	function get_page($tag, $method)
+	{
+		$page = 0;
+
+		// permalink
+		if ($method == 'hashid')
+		{
+			$method			= '';
+			$ids			= explode('x', $tag);
+
+			$revision_id	= $this->db->load_single(
+				"SELECT revision_id " .
+				"FROM " . $this->prefix . "revision " .
+				"WHERE page_id = " . (int) $ids[0] . " " .
+					"AND version_id = " . (int) $ids[1] . " " .
+				"LIMIT 1");
+
+			$revision_id	= $revision_id ? $revision_id['revision_id'] : 0;
+			$page			= $this->load_page('', $ids[0], $revision_id, null, null, $this->is_admin());
+
+			if ($page)
+			{
+				$this->method			= 'show';
+				$this->tag				= $page['tag'];
+				$_GET['revision_id']	= $revision_id;
+			}
+		}
+
+		if (!$page)
+		{
+			if (!($this->method = trim($method)))
+			{
+				$this->method = 'show';
+			}
+
+			// normalize & sanitize tag name
+			$this->sanitize_page_tag($tag);
+
+			$revision_id	= (int) ($_GET['revision_id'] ?? '');
+			$deleted		= $this->is_admin();
+
+			// load page
+			$page			= $this->load_page($tag, 0, $revision_id, null, null, $deleted);
+
+			// no available revision
+			if ($revision_id && empty($page['tag']))
+			{
+				$page		= $this->load_page($tag, 0, 0, null, null, $deleted);
+			}
+
+			// invalid namespace
+			if (empty($page) && !$tag)
+			{
+				$this->http->status(404);
+				$this->set_message($this->_t('InvalidNamespace'), 'error');
+				$this->ensure_page();
+			}
+
+			$this->tag		= $tag;
+		}
+
+		return $page;
+	}
+
 	// TOC MANIPULATIONS
 	function set_toc_array($toc): void
 	{
@@ -7483,9 +7490,10 @@ class Wacko
 
 	function numerate_toc_callback_toc($matches): string
 	{
-		return '<h' . $matches[2] . ' id="' . $matches[3] . '" class="heading">' .
-			($this->post_wacko_toc_hash[$matches[3]][1] ?? $matches[4]) .
-			'<a class="self-link" href="#' . $matches[3] . '"></a>';
+		return
+			'<h' . $matches[2] . ' id="' . $matches[3] . '" class="heading">' .
+				($this->post_wacko_toc_hash[$matches[3]][1] ?? $matches[4]) .
+				'<a class="self-link" href="#' . $matches[3] . '"></a>';
 	}
 
 	function numerate_toc_callback_p($matches): string
@@ -7498,17 +7506,20 @@ class Wacko
 
 		$len	= strlen((string) $this->post_wacko_maxp);
 		$link	= '<a href="#' . $matches[2] . '">' .
-			utf8_str_pad($this->post_wacko_toc_hash[$matches[2]][66], $len, '0', STR_PAD_LEFT) .
-			'</a>';
+					utf8_str_pad($this->post_wacko_toc_hash[$matches[2]][66], $len, '0', STR_PAD_LEFT) .
+				  '</a>';
 
 		foreach ($this->paragrafica_patches[$this->post_wacko_action['p']] as $v)
 		{
 			$style[$v] = str_replace('##', $link, $style[$v]);
 		}
 
-		return $style['_before'] . '<p id=' . $matches[2] . ' class="auto">' .
-			$style['before'] . $matches[3] . $style['after'] .
-			'</p>' . $style['_after'];
+		return
+			$style['_before'] .
+			'<p id=' . $matches[2] . ' class="auto">' .
+				$style['before'] . $matches[3] . $style['after'] .
+			'</p>' .
+			$style['_after'];
 	}
 
 	// BREADCRUMBS -- navigation inside WackoClusters
@@ -7593,9 +7604,7 @@ class Wacko
 
 		// default page title is just page's WikiName
 		return $title
-				?: ($tag
-					? $this->create_title_from_tag($tag)
-					: $this->create_title_from_tag($this->tag));
+				?: $this->create_title_from_tag(($tag ?: $this->tag));
 	}
 
 	// creates page title from tag: /Path/To/WikiName -> Wiki Name
