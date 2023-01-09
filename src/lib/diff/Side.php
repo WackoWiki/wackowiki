@@ -103,7 +103,7 @@ class Side
 
 	function isend()
 	{
-		if (($this->cursor)>=($this->length)) return true;
+		if ($this->cursor >= $this->length) return true;
 		return false;
 	}
 
