@@ -24,6 +24,15 @@ class DiffEngine
 {
 	const USE_ASSERTS = false;
 
+	private array $xchanged;
+	private array $ychanged;
+	private array $xind;
+	private array $yind;
+	private array $xv;
+	private array $yv;
+	private int $lcs;
+	private array $in_seq;
+
 	function diff ($from_lines, $to_lines)
 	{
 		$n_from = count($from_lines);
@@ -312,7 +321,7 @@ class DiffEngine
 	 * Note that XLIM, YLIM are exclusive bounds.
 	 * All line numbers are origin-0 and discarded lines are not counted.
 	 */
-	function _compareseq ($xoff, $xlim, $yoff, $ylim)
+	function _compareseq ($xoff, $xlim, $yoff, $ylim): void
 	{
 		// Slide down the bottom initial diagonal.
 		while ($xoff < $xlim && $yoff < $ylim
@@ -381,7 +390,7 @@ class DiffEngine
 	 *
 	 * This is extracted verbatim from analyze.c (GNU diffutils-2.7).
 	 */
-	function _shift_boundaries ($lines, &$changed, $other_changed)
+	function _shift_boundaries ($lines, &$changed, $other_changed): void
 	{
 		$i = 0;
 		$j = 0;
