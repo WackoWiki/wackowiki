@@ -371,7 +371,7 @@ if ($user_id = $this->get_user_id())
 		foreach ($contacts as $row)
 		{
 			$tpl->u_username	= $row['user_name'];
-			$tpl->u_hrefforward	= $this->href('', '', ['action' => 'forward', 'to' => (int) $row['info'], 'message_id' => $message_id]);
+			$tpl->u_hrefforward	= $this->href('', '', ['action' => 'forward', 'message_id' => $message_id, 'to' => (int) $row['info']]);
 		}
 
 		$tpl->leave(); // e_
@@ -593,7 +593,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->message		= strip_tags($row['message']);
 
 			#$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
-			$tpl->hrefreply		= $this->href('', '', ['action' => 'reply', 'to' => $row['user_from_id'], 'message_id' => $row['message_id']]);
+			$tpl->hrefreply		= $this->href('', '', ['action' => 'reply', 'message_id' => $row['message_id'], 'to' => $row['user_from_id']]);
 			$tpl->hrefforward	= $this->href('', '', ['action' => 'forward', 'message_id' => $row['message_id']]);
 			$tpl->hrefdelete	= $this->href('', '', ['action' => 'delete', 'message_id' => $row['message_id']]);
 
@@ -799,7 +799,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->f_info		= strip_tags($row['info']);
 			$tpl->f_notes		= strip_tags($row['notes']);
 			$tpl->f_hreffolder	= $this->href('', '', ['folder' => strip_tags($row['info'])]);
-			$tpl->f_hrefdelete	= $this->href('', '', ['action' => 'folders', 'delete_folder' => $row['msg_info_id'], 'folder' => $row['info']]);
+			$tpl->f_hrefdelete	= $this->href('', '', ['folder' => strip_tags($row['info']), 'action' => 'folders', 'delete_folder' => $row['msg_info_id']]);
 		}
 
 		$tpl->leave(); // m_

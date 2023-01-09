@@ -38,6 +38,8 @@ class Wacko
 	public $header_count			= 0;
 	public $section_count			= 0;
 	public $comment_id				= null;
+	private int $parent_size;
+	private array $rev_delta;
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];

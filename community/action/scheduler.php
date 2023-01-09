@@ -22,7 +22,7 @@ $create_table = function() use ($prefix)
 {
 	$this->db->sql_query(
 		"CREATE TABLE IF NOT EXISTS {$prefix}scheduler (
-			scheduler_id INT(10) NOT NULL AUTO_INCREMENT,
+			scheduler_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 			user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 			date VARCHAR(10) NOT NULL DEFAULT '',
 			schedule TEXT,
