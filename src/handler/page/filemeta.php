@@ -208,7 +208,7 @@ else if ($mode && !empty($file))
 
 		if ($this->has_access('read', $file['page_id']))
 		{
-			$tpl->link			= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
+			$tpl->link			= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name']));
 
 			// show image
 			if (in_array($file['file_ext'], ['avif', 'gif', 'jpg', 'jpe', 'jpeg', 'jxl', 'png', 'svg', 'webp']))
@@ -288,7 +288,7 @@ else if ($mode && !empty($file))
 
 		if ($file_access($file))
 		{
-			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
+			$tpl->link		= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name'])) . '</h4>';
 			$tpl->desc		= $file['file_description'];
 			$tpl->caption	= Ut::html($file['caption']); // -> [ ' caption | pre ' ]
 
@@ -318,7 +318,7 @@ else if ($mode && !empty($file))
 
 		if ($file_access($file))
 		{
-			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
+			$tpl->link		= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name']));
 			$tpl->category	= $this->show_category_form($file['file_lang'], $file['file_id'], OBJECT_FILE, false);
 			$tpl->fileid	= $file['file_id'];
 		}
@@ -332,7 +332,7 @@ else if ($mode && !empty($file))
 
 		if ($file_access($file))
 		{
-			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
+			$tpl->link		= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name']));
 			$tpl->file		= $file; // array -> [ ' file.field ' ]
 			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
 			$tpl->user		= $this->user_link($file['user_name'], true, false);

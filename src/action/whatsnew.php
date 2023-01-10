@@ -232,7 +232,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				$tpl->i_title		= $page['deleted'] ? $this->_t('FileDeleted') : $this->_t('NewFileAdded');
 				$tpl->i_alt			= 'file';
 				$tpl->i_class		= $page['deleted'] ? 'btn-delete' : 'btn-attachment';
-				$tpl->link			= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1);
+				$tpl->link			= $this->link($path2 . $page['title'], '', Ut::shorten_string($page['title']), '', 0, 1);
 			}
 			// deleted
 			else if ($page['deleted'])

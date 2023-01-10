@@ -8517,11 +8517,6 @@ class Wacko
 		}
 	}
 
-	function shorten_string($string, $maxlen = 80): string
-	{
-		return (mb_strlen($string) > $maxlen)?  mb_substr($string, 0, 30) . '[...]' . mb_substr($string, -20) : $string;
-	}
-
 	// show captcha form on a page. must be incorporated as an input
 	// form component in every page that uses captcha testing
 	//		$inline	= adds <br> between elements

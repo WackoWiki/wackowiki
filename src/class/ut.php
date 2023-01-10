@@ -604,6 +604,11 @@ class Ut
 		return static::urlencode($rfc3986, $name) . '=' . static::urlencode($rfc3986, $value);
 	}
 
+	static function shorten_string($string, $maxlen = 80): string
+	{
+		return (mb_strlen($string) > $maxlen)?  mb_substr($string, 0, 30) . '[...]' . mb_substr($string, -20) : $string;
+	}
+
 	static function normalize($string, $form = Normalizer::FORM_C)
 	{
 		return normalizer_normalize($string, $form);
