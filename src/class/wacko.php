@@ -12,6 +12,8 @@ class Wacko
 	private array $acl_cache		= [];
 	private array $file_cache		= [];
 	private array $page_cache		= [];
+	private int $parent_size;
+	private array $rev_delta;
 	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
 	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
@@ -25,12 +27,12 @@ class Wacko
 	public $tag;
 	public $module;
 	public $method					= '';
+
 	public bool $forum				= false;
 	public bool $canonical			= false;
 	public bool $static_feed		= false;	// disables section edit link in post_wacko
 	public $categories;
 	public $watch					= [];
-	public $notify_lang				= null;
 	public bool $is_watched			= false;
 	public bool $hide_revisions		= false;
 	public array $context			= [];		// page context, used for correct processing of inclusions
@@ -38,8 +40,6 @@ class Wacko
 	public $header_count			= 0;
 	public $section_count			= 0;
 	public $comment_id				= null;
-	private int $parent_size;
-	private array $rev_delta;
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
@@ -53,11 +53,12 @@ class Wacko
 
 	public $lang					= null;
 	public $languages				= null;
+	public $notify_lang				= null;		// sets language in _t() function for notifications
+	public $page_lang				= null;
+	public $resource				= null;
+	public $translations			= null;
 	public $user_lang				= null;
 	public $user_lang_dir			= null;
-	public $translations			= null;
-	public $resource				= null;
-	public $page_lang				= null;
 
 	public $linktable				= null;
 	public $noautolinks				= null;		// formatter
@@ -2173,9 +2174,6 @@ class Wacko
 				$xml = new Feed($this);
 
 				// comment it is
-				// TODO: if (!isset($old_page['comment_on_id']) && $comment_on_id)
-				// - takes 20 (hard coded) last (created not modified) comments
-				// - comments might be edited, then write comments feed again
 				if ($comment_on_id)
 				{
 					$xml->comments();
@@ -2449,7 +2447,6 @@ class Wacko
 
 	// NOTIFICATIONS
 	// TODO: move notification functions in own notification class
-	// $this->notify_lang sets language in _t() function for notifications
 
 	// user email wrapper
 	function send_user_email($user, $subject, $body, $xtra_headers = []): void
@@ -4895,7 +4892,7 @@ class Wacko
 
 		if (!($this->db->rewrite_mode))
 		{
-			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . "\">\n";
+			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . '">' . "\n";
 		}
 
 		// add form token
@@ -5407,7 +5404,7 @@ class Wacko
 	{
 		return $this->merge_sections(
 			$this->extract_sections(
-				$body,						// $this->page['body']
+				$body,
 				$section_id,
 				'replace',
 				$new_section)
@@ -5753,7 +5750,6 @@ class Wacko
 			$this->set_menu(MENU_DEFAULT);
 			$this->set_message($this->_t('LoggedOut'), 'success');
 			$this->log(5, Ut::perc_replace($this->_t('LogUserLoggedOut', SYSTEM_LANG), $user['user_name']));
-			# $this->context[++$this->current_context] = '';   <<=== what's that?! A: This is to determine the context for relative links, e.g. unwrap_link() or included page.
 		}
 	}
 
@@ -8339,26 +8335,28 @@ class Wacko
 
 	function show_password_complexity(): string
 	{
-		$min_chars = $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
+		$min_chars = $this->is_admin()
+						? $this->db->pwd_admin_min_chars
+						: $this->db->pwd_min_chars;
 
 		if ($this->db->pwd_char_classes > 0)
 		{
-			$pwd_cplx_text = $this->_t('PwdCplxDesc4');
+			$text = $this->_t('PwdCplxDesc4');
 
 			if ($this->db->pwd_char_classes == 1)
 			{
-				$pwd_cplx_text .= $this->_t('PwdCplxDesc41');
+				$text .= $this->_t('PwdCplxDesc41');
 			}
 			else if ($this->db->pwd_char_classes == 2)
 			{
-				$pwd_cplx_text .= $this->_t('PwdCplxDesc42');
+				$text .= $this->_t('PwdCplxDesc42');
 			}
 			else if ($this->db->pwd_char_classes == 3)
 			{
-				$pwd_cplx_text .= $this->_t('PwdCplxDesc43');
+				$text .= $this->_t('PwdCplxDesc43');
 			}
 
-			$pwd_cplx_text .= '. ' . $this->_t('PwdCplxDesc5');
+			$text .= '. ' . $this->_t('PwdCplxDesc5');
 		}
 
 		return
@@ -8368,7 +8366,7 @@ class Wacko
 				? ', ' . $this->_t('PwdCplxDesc3')
 				: '') .
 			($this->db->pwd_char_classes > 0
-				? ', ' . $pwd_cplx_text
+				? ', ' . $text
 				: '');
 	}
 
@@ -8468,47 +8466,46 @@ class Wacko
 			};
 
 			$pagination['offset']	= $perpage * ($page - 1);
-			$navigation				= $this->_t('ToThePage') . ' ';
+			$text					= $this->_t('ToThePage') . ' ';
 
 			if ($page > 1)
 			{
-				$navigation .= $make_link($page - 1, ('« ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
+				$text .= $make_link($page - 1, ('« ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
 			}
 
 			// pages range links
 			if ($pages <= 10)	// not so many pages, list all
 			{
-				$navigation .= $make_list(1, $pages);
+				$text .= $make_list(1, $pages);
 			}
 			else if ($page <= 4 || $page > $pages - 4)	// current page is near the beginning or the end
 			{
-				$navigation .= $make_list(1, 5);
-				$navigation .= $span;
-				$navigation .= $make_list($pages - 4, $pages);
+				$text .= $make_list(1, 5);
+				$text .= $span;
+				$text .= $make_list($pages - 4, $pages);
 			}
 			else	// current page is in the middle of the list
 			{
-				$navigation .= $make_list(1, 1);
-				$navigation .= $span;
-				$navigation .= $make_list($page - 2, $page + 2);
-				$navigation .= $span;
-				$navigation .= $make_list($pages, $pages);
+				$text .= $make_list(1, 1);
+				$text .= $span;
+				$text .= $make_list($page - 2, $page + 2);
+				$text .= $span;
+				$text .= $make_list($pages, $pages);
 			}
 
 			// next page shortcut
 			if ($page < $pages)
 			{
-				$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' »'), ' rel="next"');
+				$text .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' »'), ' rel="next"');
 			}
 
-			$pagination['text']		= $navigation;
+			$pagination['text']		= $text;
 			$pagination['limit']	= "LIMIT {$pagination['offset']}, $perpage";
 		}
 
 		return $pagination;
 	}
 
-	// TODO: option for _comments handler, forum action -> CSS small
 	function print_pagination($pagination)
 	{
 		if (@$pagination['text'])
