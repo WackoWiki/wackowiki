@@ -28,8 +28,8 @@ $create_table = function() use ($prefix)
 			schedule TEXT,
 		PRIMARY KEY (scheduler_id),
 		KEY idx_user_id (user_id),
-		KEY idx_date (date)
-		UNIQUE KEY idx_time (user_id, date);
+		KEY idx_date (date),
+		UNIQUE KEY idx_time (user_id, date)
 	);");
 };
 

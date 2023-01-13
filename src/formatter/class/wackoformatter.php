@@ -240,8 +240,8 @@ class WackoFormatter
 				'<!--/notypo--><!--escaped-->';
 		}
 		// formatter text  %%...%% and ``...``
-		else if ( preg_match('/^``(.*)``$/us',		$thing, $matches1)
-				| preg_match('/^\%\%(.*)\%\%$/us',	$thing, $matches2))
+		else if (  preg_match('/^``(.*)``$/us',		$thing, $matches1)
+				|| preg_match('/^\%\%(.*)\%\%$/us',	$thing, $matches2))
 		{
 			// check if a formatter has been specified
 			$code = $matches1[1] ?? $matches2[1];

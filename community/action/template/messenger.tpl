@@ -469,7 +469,7 @@
 <table width="100%">
 	<tr>
 		<td>
-			<a name= anfang></a>
+			<a id="start"></a>
 			<h3>Hilfe für das WackoWiki-Message-System</h3>
 			<br><br>Auf dieser Seite gibt es einige Hilfestellungen zu den Funktionen des WackoWiki-Message-Systems. Die Erklärungen sind kurz gehalten, da die meisten Funktionen selbsterklärend sind.<br>Nachfolgend findest Du ein Inhaltsverzeichnis zu den hier erläuterten Funktionen:
 			<br><br><br>
@@ -480,7 +480,7 @@
 				- <a href=#ordn>Ordner</a><br>
 				- <a href=#kont>Kontaktliste</a><br>
 			<a href=#benu>Benutzer</a><br><br>
-			<a name= post><h3>Posteingang</h3></a><br><br>
+			<a id="inbox"><h3>Posteingang</h3></a><br><br>
 			Im Posteing werden alle eingetroffenen Nachrichten angezeigt, sowie einige zusätzliche Info`s zu den einzelnen Nachrichten.<br><br>
 			In der folgenden Darstellung siehst Du ein Beispiel, wie der Posteingangsordner aussehen kann:<br><br><br>
 			<table class="usertable">

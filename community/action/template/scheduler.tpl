@@ -61,7 +61,7 @@
 		</table>
 		<br>
 		<div class="t-center">
-			<a name="entry-box"></a>
+			<a id="entry-box"></a>
 			[ '' nav2 '' ]
 			<br><em><small>[ ' _t: SchedCommentsNote ' ]</small></em>
 			[ '' form '' ]
