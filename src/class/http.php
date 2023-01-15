@@ -116,31 +116,34 @@ class Http
 		{
 			[$page, $hash] = $this->normalize_page($page);
 
-			$params	= $this->db->load_all(
+			$params = $this->db->load_all(
 				"SELECT method, query, cache_lang " .
 				"FROM " . $this->db->table_prefix . "cache " .
 				"WHERE name = " . $this->db->q($hash));
 
-			// Ut::dbg('invalidate_page', $page);
-
-			$past = time() - $this->db->cache_ttl - 1;
-
-			foreach ($params as $param)
+			if ($params)
 			{
-				$file	= $this->construct_id($page, $param['method'], $param['query'], $param['cache_lang']);
-				$x		= @touch($file, $past); // touching is faster than unlinking
+				// Ut::dbg('invalidate_page', $page);
 
-				if ($x)
+				$past = time() - $this->db->cache_ttl - 1;
+
+				foreach ($params as $param)
 				{
-					++$n;
+					$file	= $this->construct_id($page, $param['method'], $param['query'], $param['cache_lang']);
+					$x		= @touch($file, $past); // touching is faster than unlinking
+
+					if ($x)
+					{
+						++$n;
+					}
+
+					// Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 				}
 
-				// Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
+				$this->db->sql_query(
+					"DELETE FROM " . $this->db->table_prefix . "cache " .
+					"WHERE name = " . $this->db->q($hash));
 			}
-
-			$this->db->sql_query(
-				"DELETE FROM " . $this->db->table_prefix . "cache " .
-				"WHERE name = " . $this->db->q($hash));
 		}
 
 		return $n;

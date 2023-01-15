@@ -806,7 +806,7 @@ class Wacko
 		return 'utf-8';
 	}
 
-	// shortcut for getting 'dir' for not loaded language
+	// shortcut for getting 'dir'
 	static function get_direction($lang = ''): string
 	{
 		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
@@ -826,7 +826,7 @@ class Wacko
 			$name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
-	// PAGES
+	// PAGE FUNCTIONS
 
 	function get_keywords(): string
 	{
@@ -851,9 +851,8 @@ class Wacko
 		return $meta_keywords;
 	}
 
-	// wrapper for _load_page
 	/**
-	* Loads page-data from DB
+	* Loads page-data from DB (wrapper)
 	*
 	* @param string		$tag			Page tag
 	* @param int		$page_id
@@ -1009,9 +1008,9 @@ class Wacko
 	*
 	* @param string		$tag			Page tag
 	* @param int		$page_id
-	* @param bool		$metadata_only	Returns only page with equal metadata_only marker. Default value is 0.
+	* @param bool		$metadata_only	Returns only page with equal metadata_only marker. Default value is false.
 	*
-	* @return mixed Page from cache or FALSE if not found
+	* @return mixed		Page from cache or FALSE if not found
 	*/
 	function get_cached_page($tag, $page_id = 0, $metadata_only = false)
 	{
