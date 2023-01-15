@@ -30,7 +30,6 @@ class Wacko
 	public $static_feed				= false;	// disables section edit link in post_wacko
 	public $categories;
 	public $watch					= [];
-	public $notify_lang				= null;
 	public $is_watched				= false;
 	public $hide_revisions			= false;
 	public $context					= [];		// page context, used for correct processing of inclusions
@@ -51,11 +50,12 @@ class Wacko
 
 	public $lang					= null;
 	public $languages				= null;
+	public $notify_lang				= null;		// sets language in _t() function for notifications
+	public $page_lang				= null;
+	public $resource				= null;
+	public $translations			= null;
 	public $user_lang				= null;
 	public $user_lang_dir			= null;
-	public $translations			= null;
-	public $resource				= null;
-	public $page_lang				= null;
 
 	public $linktable				= null;
 	public $noautolinks				= null;		// formatter
@@ -759,7 +759,7 @@ class Wacko
 		return 'utf-8';
 	}
 
-	// shortcut for getting 'dir' for not loaded language
+	// shortcut for getting 'dir'
 	static function get_direction($lang = ''): string
 	{
 		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
@@ -779,7 +779,7 @@ class Wacko
 			$name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
-	// PAGES
+	// PAGE FUNCTIONS
 
 	function get_keywords(): string
 	{
@@ -804,9 +804,8 @@ class Wacko
 		return $meta_keywords;
 	}
 
-	// wrapper for _load_page
 	/**
-	* Loads page-data from DB
+	* Loads page-data from DB (wrapper)
 	*
 	* @param string		$tag			Page tag
 	* @param int		$page_id
@@ -962,9 +961,9 @@ class Wacko
 	*
 	* @param string		$tag			Page tag
 	* @param int		$page_id
-	* @param bool		$metadata_only	Returns only page with equal metadata_only marker. Default value is 0.
+	* @param bool		$metadata_only	Returns only page with equal metadata_only marker. Default value is false.
 	*
-	* @return mixed Page from cache or FALSE if not found
+	* @return mixed		Page from cache or FALSE if not found
 	*/
 	function get_cached_page($tag, $page_id = 0, $metadata_only = false)
 	{
@@ -2127,9 +2126,6 @@ class Wacko
 				$xml = new Feed($this);
 
 				// comment it is
-				// TODO: if (!isset($old_page['comment_on_id']) && $comment_on_id)
-				// - takes 20 (hard coded) last (created not modified) comments
-				// - comments might be edited, then write comments feed again
 				if ($comment_on_id)
 				{
 					$xml->comments();
@@ -2405,7 +2401,6 @@ class Wacko
 
 	// NOTIFICATIONS
 	// TODO: move notification functions in own notification class
-	// $this->notify_lang sets language in _t() function for notifications
 
 	// user email wrapper
 	function send_user_email($user, $subject, $body, $xtra_headers = []): void
@@ -4895,7 +4890,7 @@ class Wacko
 
 		if (!($this->db->rewrite_mode))
 		{
-			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . "\">\n";
+			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . '">' . "\n";
 		}
 
 		// add form token
@@ -5409,11 +5404,11 @@ class Wacko
 		return $this->extract_sections($body, $section_id, 'get');
 	}
 
-	function replace_section($body, $section_id, $new_section)
+	function replace_section($body, $section_id, $new_section): string
 	{
 		return $this->merge_sections(
 			$this->extract_sections(
-				$body,						// $this->page['body']
+				$body,
 				$section_id,
 				'replace',
 				$new_section)
@@ -5759,7 +5754,6 @@ class Wacko
 			$this->set_menu(MENU_DEFAULT);
 			$this->set_message($this->_t('LoggedOut'), 'success');
 			$this->log(5, Ut::perc_replace($this->_t('LogUserLoggedOut', SYSTEM_LANG), $user['user_name']));
-			# $this->context[++$this->current_context] = '';   <<=== what's that?! A: This is to determine the context for relative links, e.g. unwrap_link() or included page.
 		}
 	}
 
@@ -8367,26 +8361,28 @@ class Wacko
 
 	function show_password_complexity(): string
 	{
-		$min_chars = $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
+		$min_chars = $this->is_admin()
+						? $this->db->pwd_admin_min_chars
+						: $this->db->pwd_min_chars;
 
 		if ($this->db->pwd_char_classes > 0)
 		{
-			$pwd_cplx_text = $this->_t('PwdCplxDesc4');
+			$text = $this->_t('PwdCplxDesc4');
 
 			if ($this->db->pwd_char_classes == 1)
 			{
-				$pwd_cplx_text .= $this->_t('PwdCplxDesc41');
+				$text .= $this->_t('PwdCplxDesc41');
 			}
 			else if ($this->db->pwd_char_classes == 2)
 			{
-				$pwd_cplx_text .= $this->_t('PwdCplxDesc42');
+				$text .= $this->_t('PwdCplxDesc42');
 			}
 			else if ($this->db->pwd_char_classes == 3)
 			{
-				$pwd_cplx_text .= $this->_t('PwdCplxDesc43');
+				$text .= $this->_t('PwdCplxDesc43');
 			}
 
-			$pwd_cplx_text .= '. ' . $this->_t('PwdCplxDesc5');
+			$text .= '. ' . $this->_t('PwdCplxDesc5');
 		}
 
 		return
@@ -8396,7 +8392,7 @@ class Wacko
 				? ', ' . $this->_t('PwdCplxDesc3')
 				: '') .
 			($this->db->pwd_char_classes > 0
-				? ', ' . $pwd_cplx_text
+				? ', ' . $text
 				: '');
 	}
 
@@ -8496,47 +8492,46 @@ class Wacko
 			};
 
 			$pagination['offset']	= $perpage * ($page - 1);
-			$navigation				= $this->_t('ToThePage') . ' ';
+			$text					= $this->_t('ToThePage') . ' ';
 
 			if ($page > 1)
 			{
-				$navigation .= $make_link($page - 1, ('« ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
+				$text .= $make_link($page - 1, ('« ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
 			}
 
 			// pages range links
 			if ($pages <= 10)	// not so many pages, list all
 			{
-				$navigation .= $make_list(1, $pages);
+				$text .= $make_list(1, $pages);
 			}
 			else if ($page <= 4 || $page > $pages - 4)	// current page is near the beginning or the end
 			{
-				$navigation .= $make_list(1, 5);
-				$navigation .= $span;
-				$navigation .= $make_list($pages - 4, $pages);
+				$text .= $make_list(1, 5);
+				$text .= $span;
+				$text .= $make_list($pages - 4, $pages);
 			}
 			else	// current page is in the middle of the list
 			{
-				$navigation .= $make_list(1, 1);
-				$navigation .= $span;
-				$navigation .= $make_list($page - 2, $page + 2);
-				$navigation .= $span;
-				$navigation .= $make_list($pages, $pages);
+				$text .= $make_list(1, 1);
+				$text .= $span;
+				$text .= $make_list($page - 2, $page + 2);
+				$text .= $span;
+				$text .= $make_list($pages, $pages);
 			}
 
 			// next page shortcut
 			if ($page < $pages)
 			{
-				$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' »'), ' rel="next"');
+				$text .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' »'), ' rel="next"');
 			}
 
-			$pagination['text']		= $navigation;
+			$pagination['text']		= $text;
 			$pagination['limit']	= "LIMIT {$pagination['offset']}, $perpage";
 		}
 
 		return $pagination;
 	}
 
-	// TODO: option for _comments handler, forum action -> CSS small
 	function print_pagination($pagination)
 	{
 		if (@$pagination['text'])
