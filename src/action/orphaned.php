@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_orphaned_pages = function ($tag, $limit, $deleted = 0)
+$load_orphaned_pages = function ($tag, $limit, $deleted = false)
 {
 	$pagination	= [];
 	$pref		= $this->prefix;
@@ -19,9 +19,9 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 				: "") .
 			"l.to_page_id IS NULL " .
-			($deleted != 1
-				? "AND p.deleted <> 1 "
-				: "") .
+			($deleted
+				? ""
+				: "AND p.deleted <> 1 ") .
 			"AND p.comment_on_id = 0 ";
 
 	// count pages

@@ -267,9 +267,9 @@ class Wacko
 				"FROM " . $this->prefix . "file " .
 				"WHERE page_id = " . (int) $page_id . " " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
-					($deleted != 1
-						? "AND deleted <> 1 "
-						: "") .
+					($deleted
+						? ""
+						: "AND deleted <> 1 ") .
 				"LIMIT 1");
 		}
 
@@ -910,7 +910,7 @@ class Wacko
 		return $page;
 	}
 
-	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $metadata_only = 0, $deleted = 0): ?array
+	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $metadata_only = false, $deleted = false): ?array
 	{
 		$cached_page	= [];
 		$page			= [];
@@ -962,9 +962,9 @@ class Wacko
 						($page_id
 							? "page_id  = " . (int) $page_id . " "
 							: "tag = " . $this->db->q($tag) . " ") .
-						($deleted != 1
-							? "AND p.deleted <> 1 "
-							: "") .
+						($deleted
+							? ""
+							: "AND p.deleted <> 1 ") .
 					"LIMIT 1");
 
 				$owner_id = $page['owner_id'] ?? 0;
@@ -983,9 +983,9 @@ class Wacko
 							($page_id
 								? "p.page_id	= " . (int) $page_id . " "
 								: "p.tag		= " . $this->db->q($tag) . " ") .
-							($deleted != 1
-								? "AND p.deleted <> 1 "
-								: "") .
+							($deleted
+								? ""
+								: "AND p.deleted <> 1 ") .
 							"AND revision_id = " . (int) $revision_id . " " .
 						"LIMIT 1");
 
@@ -1533,7 +1533,7 @@ class Wacko
 		}
 	}
 
-	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
+	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = false)
 	{
 		$pages		= [];
 		$pagination	= [];
@@ -1553,12 +1553,12 @@ class Wacko
 				($minor_edit
 					? "AND p.minor_edit = 0 "
 					: "") .
-				(!$deleted
-					? "AND p.deleted <> 1 "
-					: "") .
-				(!$default_pages
-					? "AND (u.account_type = 0 OR p.user_id = 0) "
-					: "") .
+				($deleted
+					? ""
+					: "AND p.deleted <> 1 ") .
+				($default_pages
+					? ""
+					: "AND (u.account_type = 0 OR p.user_id = 0) ") .
 				"AND r2.revision_id IS NULL ";
 
 		// count pages
@@ -1589,7 +1589,7 @@ class Wacko
 	}
 
 	// used for comment feed
-	function load_comment($limit = 100, $tag = '', $deleted = 0): ?array
+	function load_comment($limit = 100, $tag = '', $deleted = false): ?array
 	{
 		$pages	= [];
 		$limit	= $this->get_list_count($limit);
@@ -1604,9 +1604,9 @@ class Wacko
 			($tag
 				? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: "") .
-			(!$deleted
-				? "AND p.deleted <> 1 AND c.deleted <> 1 "
-				: "") .
+			($deleted
+				? ""
+				: "AND p.deleted <> 1 AND c.deleted <> 1 ") .
 		"ORDER BY c.created DESC " .
 		"LIMIT " . $limit))
 		{
@@ -2229,7 +2229,7 @@ class Wacko
 
 	// COUNTER
 	// recount all comments for a given page
-	function count_comments($page_id, $user_id = null, $deleted = 0): int
+	function count_comments($page_id, $user_id = null, $deleted = false): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
@@ -2241,15 +2241,15 @@ class Wacko
 				($user_id
 					? "AND owner_id = " . (int) $user_id . " "
 					: "") .
-				($deleted != 1
-					? "AND deleted <> 1 "
-					: "") .
+				($deleted
+					? ""
+					: "AND deleted <> 1 ") .
 			"LIMIT 1");
 
 		return $count? $count['n'] : 0;
 	}
 
-	function count_files($page_id = null, $user_id = null, $deleted = 0): int
+	function count_files($page_id = null, $user_id = null, $deleted = false): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(file_id) AS n " .
@@ -2261,15 +2261,15 @@ class Wacko
 				($user_id
 					? "AND user_id = " . (int) $user_id . " "
 					: "") .
-				(!$deleted
-					? "AND deleted <> 1 "
-					: "") .
+				($deleted
+					? ""
+					: "AND deleted <> 1 ") .
 			"LIMIT 1");
 
 		return $count? $count['n'] : 0;
 	}
 
-	function count_pages($user_id = null, $deleted = 0): int
+	function count_pages($user_id = null, $deleted = false): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
@@ -2278,15 +2278,15 @@ class Wacko
 				($user_id
 					? "AND owner_id = " . (int) $user_id . " "
 					: "") .
-				($deleted != 1
-					? "AND deleted <> 1 "
-					: "") .
+				($deleted
+					? ""
+					: "AND deleted <> 1 ") .
 			"LIMIT 1");
 
 		return $count? $count['n'] : 0;
 	}
 
-	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = 0, $deleted = 0): int
+	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = 0, $deleted = false): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(revision_id) AS n " .
@@ -2301,9 +2301,9 @@ class Wacko
 				($hide_minor_edit
 					? "AND minor_edit = 0 "
 					: "") .
-				(!$deleted
-					? "AND deleted <> 1 "
-					: "") .
+				($deleted
+					? ""
+					: "AND deleted <> 1 ") .
 			"LIMIT 1");
 
 		return $count? $count['n'] : 0;
@@ -5520,7 +5520,7 @@ class Wacko
 		$this->set_user_setting('ip', $this->http->ip);
 
 		$this->user_lang		= $this->get_user_language();
-		$this->user_lang_dir	= $this->get_direction($this->user_lang);
+		$this->user_lang_dir	= static::get_direction($this->user_lang);
 		$this->set_language($this->user_lang, true);
 
 		$this->set_menu(MENU_USER);
@@ -5816,7 +5816,7 @@ class Wacko
 	}
 
 	// COMMENTS AND COUNTS
-	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0): ?array
+	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = false): ?array
 	{
 		// avoid results if $page_id is 0 (page does not exist)
 		if ($page_id)
@@ -5827,9 +5827,9 @@ class Wacko
 					"LEFT JOIN " . $this->prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->prefix . "user o ON (p.owner_id = o.user_id) " .
 				"WHERE p.comment_on_id = " . (int) $page_id . " " .
-					($deleted != 1
-						? "AND p.deleted <> 1 "
-						: "") .
+					($deleted
+						? ""
+						: "AND p.deleted <> 1 ") .
 				"ORDER BY p.created " .
 					($sort
 						? "DESC "
@@ -6292,7 +6292,7 @@ class Wacko
 	 * check access privilege
 	 *
 	 * @param string	$privilege
-	 * @param string	$page_id
+	 * @param int		$page_id
 	 * @param string	$user_name
 	 * @param bool		$use_parent
 	 * @param string	$new_tag
@@ -7151,7 +7151,7 @@ class Wacko
 		}
 
 		$this->user_lang		= $this->get_user_language();
-		$this->user_lang_dir	= $this->get_direction($this->user_lang);
+		$this->user_lang_dir	= static::get_direction($this->user_lang);
 		$this->set_language($this->user_lang, true);
 
 		// SEO

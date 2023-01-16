@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_commented = function ($tag, $limit, $deleted = 0)
+$load_commented = function ($tag, $limit, $deleted = false)
 {
 	$comments	= [];
 	$pagination	= [];
@@ -24,9 +24,9 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 		($tag
 			?	"a2.page_id IS NULL AND b.tag LIKE " . $this->db->q($tag . '/%') . " "
 			:	"a2.page_id IS NULL AND a.comment_on_id <> 0 ") .
-		($deleted != 1
-			? "AND a.deleted <> 1 "
-			: "") .
+		($deleted
+			? ""
+			: "AND a.deleted <> 1 ") .
 		"ORDER BY a.created DESC"
 		, true);
 

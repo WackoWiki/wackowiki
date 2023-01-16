@@ -56,10 +56,10 @@ const AUTH_TOKEN					= 'Auth';
 const GUEST							= 'guest@wacko';
 const INTERCOM_MAX_SIZE				= 262144;
 
-const LOAD_NOCACHE					= 0;
-const LOAD_CACHE					= 1;
-const LOAD_ALL						= 0;
-const LOAD_META						= 1;
+const LOAD_NOCACHE					= false;
+const LOAD_CACHE					= true;
+const LOAD_ALL						= false;
+const LOAD_META						= true;
 
 const IS_PARAGRAPH					= 77777;
 const IS_INCLUDE					= 99999;

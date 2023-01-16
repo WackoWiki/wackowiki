@@ -265,7 +265,7 @@ if (!empty($this->db->news_cluster))
 			$tpl->page		= $page;
 			$tpl->href		= $this->href('', $page['tag'], '');
 			$tpl->user		= $this->user_link($page['owner'], true, false);
-			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1);
+			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], true);
 			$tpl->icon		= !empty($_category);
 			$tpl->category	= $_category;
 			$tpl->comments	= $this->href('', $page['tag'], ['show_comments' => 1]);

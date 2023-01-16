@@ -23,7 +23,7 @@ if (!defined('IN_WACKO'))
 // - too much loose ends, read thoroughly and refactor
 // - search also for attachments
 
-$full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 0)
+$full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = false)
 {
 	$category_id	= null;
 	$lang			= null;
@@ -57,11 +57,11 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 			($category_id
 				? "AND ca.category_id = " . (int) $category_id . " "
 				: "") .
-			(!$deleted
-				? ($tag
+			($deleted
+				? ""
+				: ($tag
 					? "AND (a.deleted <> 1 OR b.deleted <> 1) "
-					: "AND a.deleted <> 1 ")
-				: "") .
+					: "AND a.deleted <> 1 ")) .
 			" )";
 
 	$count = $this->db->load_single(
@@ -100,7 +100,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 	return [$results, $pagination, $count['n']];
 };
 
-$tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 0)
+$tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = false)
 {
 	$category_id	= null;
 	$lang			= null;
@@ -129,11 +129,11 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 		($category_id
 			? "AND ca.category_id = " . (int) $category_id . " "
 			: "") .
-		(!$deleted
-			? ($tag
+		($deleted
+			? ""
+			: ($tag
 				? "AND (a.deleted <> 1 OR b.deleted <> 1) "
-				: "AND a.deleted <> 1 ")
-			: "");
+				: "AND a.deleted <> 1 "));
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(a.page_id) AS n " .

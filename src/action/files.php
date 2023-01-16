@@ -47,7 +47,7 @@ $ppage		= '';
 // set defaults
 $all		??= 0;	// all attachments
 $cluster	??= 0;	// cluster attachments
-$deleted	??= 0;
+$deleted	??= false;
 $dir		??= 'asc';
 $form		??= 0;	// show search form
 $global		??= 0;	// global attachments
@@ -184,9 +184,9 @@ if ($can_view)
 		($lang
 			? "AND f.file_lang = " . $this->db->q($lang) . " "
 			: "") .
-		($deleted != 1
-			? "AND f.deleted <> 1 "
-			: "");
+		($deleted
+			? ""
+			: "AND f.deleted <> 1 ");
 
 	if ($category_id)
 	{

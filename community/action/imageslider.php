@@ -30,7 +30,6 @@ $order		??= '';
 $global		??= 0;
 $owner		??= '';
 $page		??= '';
-$deleted	??= 0;
 $track		??= 0;
 $media		??= 1;
 $max		??= null;
@@ -130,9 +129,7 @@ if ($can_view)
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '') .
-			($deleted != 1
-				? "AND f.deleted <> 1 "
-				: "");
+			"AND f.deleted <> 1 ";
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .

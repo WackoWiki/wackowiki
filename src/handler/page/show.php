@@ -51,7 +51,7 @@ if ($this->has_access('read'))
 		if ($this->page['latest'] == 0)
 		{
 			// load also deleted pages
-			$latest = $this->load_page($this->tag, null, null, null, null, true);
+			$latest = $this->load_page($this->tag, null, null, null, LOAD_ALL, true);
 		}
 
 		if ($this->page['deleted'] || !empty($latest['deleted']))
@@ -297,7 +297,7 @@ if ($this->forum
 		&&  $this->db->footer_tags == 1
 		|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
-	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
+	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], true))
 	{
 		$tpl->p_category		= $categories;
 	}

@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_wanted = function ($cluster, $limit, $deleted = 0)
+$load_wanted = function ($cluster, $limit)
 {
 	$pagination	= [];
 	$pref		= $this->prefix;

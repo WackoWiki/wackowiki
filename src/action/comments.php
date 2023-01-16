@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_recent_comments = function ($tag, $limit, $deleted = 0)
+$load_recent_comments = function ($tag, $limit, $deleted = false)
 {
 	$pagination	= [];
 	$prefix		= $this->prefix;
@@ -15,9 +15,9 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 			($tag
 				? "b.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: "a.comment_on_id <> 0 ") .
-			($deleted != 1
-				? "AND a.deleted <> 1 "
-				: "");
+			($deleted
+				? ""
+				: "AND a.deleted <> 1 ");
 
 	// count pages
 	$count = $this->db->load_single(

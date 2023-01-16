@@ -219,7 +219,7 @@ if ($page_a && $page_b
 					? $tpl->deleted_email	= true
 					: $tpl->deleted_browser	= true;
 				$tpl->deleted_diff  = $source
-					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", 1) . '</pre>'
+					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", true) . '</pre>'
 					: $this->format(implode("\n", $deleted), 'wiki', ['post_wacko' => true]);
 			}
 
