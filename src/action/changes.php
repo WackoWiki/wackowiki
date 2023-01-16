@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // set defaults
 $date				??= $_GET['date'] ?? '';
-$hide_minor_edit	??= (int) ($_GET['minor_edit'] ?? 0);
+$hide_minor_edit	??= (bool) ($_GET['minor_edit'] ?? false);
 $max				??= null;
 $noxml				??= 0;
 $page				??= '';

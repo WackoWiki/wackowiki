@@ -344,7 +344,7 @@ class Wacko
 		return false;
 	}
 
-	function upload_quota($user_id = '')
+	function upload_quota($user_id = null)
 	{
 		// get used upload quota
 		$files	= $this->db->load_single(
@@ -1353,7 +1353,7 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0, $limit = 100): array
+	function load_revisions($page_id, $hide_minor_edit = false, $deleted = false, $limit = 100): array
 	{
 		$revisions	= [];
 		$pagination	= [];
@@ -1369,9 +1369,9 @@ class Wacko
 				($hide_minor_edit
 					? "AND p.minor_edit = 0 "
 					: "") .
-				(!$show_deleted
-					? "AND p.deleted <> 1 "
-					: "");
+				($deleted
+					? ""
+					: "AND p.deleted <> 1 ");
 
 		// count pages
 		$count_revisions = $this->db->load_single(
@@ -1398,9 +1398,9 @@ class Wacko
 					($hide_minor_edit
 						? "AND p.minor_edit = 0 "
 						: "") .
-					(!$show_deleted
-						? "AND p.deleted <> 1 "
-						: "") .
+					($deleted
+						? ""
+						: "AND p.deleted <> 1 ") .
 				"ORDER BY p.modified DESC " .
 				"LIMIT 1"))
 			{
@@ -1415,9 +1415,9 @@ class Wacko
 					"LEFT JOIN " . $this->prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->prefix . "user o ON (p.reviewer_id = o.user_id) " .
 				"WHERE p.page_id = " . (int) $page_id . " " .
-					(!$show_deleted
-						? "AND p.deleted <> 1 "
-						: "") .
+					($deleted
+						? ""
+						: "AND p.deleted <> 1 ") .
 				"ORDER BY p.modified DESC " .
 				"LIMIT 1");
 		}
@@ -1533,7 +1533,7 @@ class Wacko
 		}
 	}
 
-	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = false)
+	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = false, $default_pages = false, $deleted = false)
 	{
 		$pages		= [];
 		$pagination	= [];
@@ -1806,7 +1806,7 @@ class Wacko
 	 *
 	 * @return string	$body_r
 	 */
-	function save_page($tag, $body, $title = '', $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false): ?string
+	function save_page($tag, $body, $title = '', $edit_note = '', $minor_edit = false, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false): ?string
 	{
 		$desc = '';
 
@@ -2286,7 +2286,7 @@ class Wacko
 		return $count? $count['n'] : 0;
 	}
 
-	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = 0, $deleted = false): int
+	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = false, $deleted = false): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(revision_id) AS n " .
@@ -2406,7 +2406,7 @@ class Wacko
 		if (!$this->load_page($tag, 0, null, LOAD_CACHE, LOAD_META))
 		{
 			// profile title = user_name
-			$this->save_page($tag, $user_page_template, $user_name, $change_summary, 0, 0, 0, 0, $user_lang, $mute, $user_name, true);
+			$this->save_page($tag, $user_page_template, $user_name, $change_summary, false, 0, 0, 0, $user_lang, $mute, $user_name, true);
 		}
 	}
 
@@ -5112,7 +5112,7 @@ class Wacko
 	* 											Optional, default value is FALSE.
 	* @return string	Result of action
 	*/
-	function action($action, $params = [], $link_tracking = 0): string
+	function action($action, $params = [], $link_tracking = false): string
 	{
 		$action = mb_strtolower(trim($action));
 		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
@@ -5509,13 +5509,13 @@ class Wacko
 	// extract user data from the session array
 	function get_user()
 	{
-		return $this->sess->userprofile ?? null;
+		return $this->sess->user_profile ?? null;
 	}
 
 	// insert user data into the session array
 	function set_user($user): void
 	{
-		$this->sess->userprofile = $user;
+		$this->sess->user_profile = $user;
 
 		$this->set_user_setting('ip', $this->http->ip);
 
@@ -5527,30 +5527,30 @@ class Wacko
 	}
 
 	// extract specific element from user session array
-	function get_user_setting($setting, $guest = 0)
+	function get_user_setting($setting, $guest = false)
 	{
 		if ($guest)
 		{
-			return @$this->sess->guestprofile[$setting];
+			return @$this->sess->guest_profile[$setting];
 		}
 		else
 		{
-			return @$this->sess->userprofile[$setting];
+			return @$this->sess->user_profile[$setting];
 		}
 	}
 
 	// set/update specific element of user session array
 	// !!! BE CAREFUL NOT TO SAVE GUEST VALUES UNDER REGISTERED USER ARRAY !!!
 	// this poses a potential security threat
-	function set_user_setting($setting, $value, $guest = 0): void
+	function set_user_setting($setting, $value, $guest = false): void
 	{
 		if ($guest)
 		{
-			$this->sess->guestprofile[$setting] = $value;
+			$this->sess->guest_profile[$setting] = $value;
 		}
-		else if (@$this->sess->userprofile)
+		else if (@$this->sess->user_profile)
 		{
-			$this->sess->userprofile[$setting] = $value;
+			$this->sess->user_profile[$setting] = $value;
 		}
 	}
 
@@ -5916,7 +5916,7 @@ class Wacko
 		return ($this->get_page_owner_id($page_id) == $this->get_user_id());
 	}
 
-	function get_page_owner($tag = '', $page_id = 0, $revision_id = '')
+	function get_page_owner($tag = '', $page_id = 0, $revision_id = null)
 	{
 		if (!($tag = trim($tag)))
 		{
@@ -5940,7 +5940,7 @@ class Wacko
 		}
 	}
 
-	function get_page_owner_id($page_id = '', $revision_id = ''): ?int
+	function get_page_owner_id($page_id = null, $revision_id = null): ?int
 	{
 		if (!$page_id)
 		{
@@ -7627,7 +7627,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new_tag, $page['body'], $page['title'], $edit_note, 0, 0, 0, 0, $page['page_lang'], false, false);
+			$this->save_page($new_tag, $page['body'], $page['title'], $edit_note, false, 0, 0, 0, $page['page_lang'], false, false);
 	}
 
 	function rename_page($tag, $new_tag)
@@ -7687,7 +7687,7 @@ class Wacko
 		return true;
 	}
 
-	function delete_acls($page_ids, $dontkeep = 0): void
+	function delete_acls($page_ids, $dontkeep = false): void
 	{
 		if ($dontkeep)
 		{
@@ -7716,7 +7716,7 @@ class Wacko
 			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")");
 	}
 
-	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0): bool
+	function remove_page($page_id, $comment_on_id = 0, $dontkeep = false): bool
 	{
 		if (!$page_id || !($page = $this->load_page('', $page_id)))
 		{
@@ -7784,7 +7784,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_revisions($tag, $cluster = false, $dontkeep = 0): bool
+	function remove_revisions($tag, $cluster = false, $dontkeep = false): bool
 	{
 		if (!$tag)
 		{
@@ -7814,7 +7814,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_comments($tag, $cluster = false, $dontkeep = 0): bool
+	function remove_comments($tag, $cluster = false, $dontkeep = false): bool
 	{
 		if (!$tag)
 		{
@@ -8006,7 +8006,7 @@ class Wacko
 	}
 
 	// removes all files attached to a page
-	function remove_files_perpage($tag, $cluster = false, $dontkeep = 0): bool
+	function remove_files_perpage($tag, $cluster = false, $dontkeep = false): bool
 	{
 		if (!$tag)
 		{
@@ -8075,7 +8075,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_file($file_id, $dontkeep = 0): bool
+	function remove_file($file_id, $dontkeep = false): bool
 	{
 		$message = '';
 
@@ -8846,7 +8846,7 @@ class Wacko
 		}
 	}
 
-	function show_category_form($lang, $object_id = '', $type_id = '', $can_edit = false): string
+	function show_category_form($lang, $object_id = null, $type_id = null, $can_edit = false): string
 	{
 		$assigned	= [];
 		$selected	= [];
@@ -8980,7 +8980,7 @@ class Wacko
 	// passed through POST global array. returns:
 	//	true	- if something was saved
 	//	false	- if list was empty
-	function save_categories_list($object_id, $type_id, $dryrun = 0): bool
+	function save_categories_list($object_id, $type_id, $dryrun = false): bool
 	{
 		$set	= [];
 		$ids	= [];

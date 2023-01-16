@@ -883,7 +883,7 @@ class WackoFormatter
 				$caption = 2;
 			}
 			#Diag::dbg('GOLD', ' ::fileimg:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
-			return $wacko->pre_link($thing, '', 1, $caption);
+			return $wacko->pre_link($thing, '', true, $caption);
 		}
 		// interwiki links
 		else if (preg_match('/^([[:alnum:]]+:[' . $wacko->lang['ALPHANUM_P'] . '\!\.][' . $wacko->lang['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))

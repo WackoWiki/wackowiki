@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $edit_note		= '';
 $error			= '';
-$minor_edit		= 0;
+$minor_edit		= false;
 $reviewed		= 0;
 $title			= '';
 $is_comment		= isset($this->page['comment_on_id']) && $this->page['comment_on_id'];
@@ -108,11 +108,11 @@ if ($this->has_access('read')
 		// only if saving:
 		if (isset($_POST['save']) && $_body)
 		{
-			$edit_note	= trim(	($_POST['edit_note']	?? ''));
-			$minor_edit	= (int)	($_POST['minor_edit']	?? 0);
-			$reviewed	= (int)	($_POST['reviewed']		?? 0);
+			$edit_note	= trim(		($_POST['edit_note']	?? ''));
+			$minor_edit	= (bool)	($_POST['minor_edit']	?? false);
+			$reviewed	= (int)		($_POST['reviewed']		?? 0);
 			$text_size	= strlen($_body);
-			$_title		= trim(	($_POST['title']		?? $this->page['title']));
+			$_title		= trim(		($_POST['title']		?? $this->page['title']));
 
 			if ($section_id)
 			{

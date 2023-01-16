@@ -45,7 +45,7 @@ $a					= (int) $_GET['a'];
 $b					= (int) $_GET['b'];
 $diffmode			= (int) @$_GET['diffmode'];
 $notification		= (int) ($_GET['notification'] ?? 0);
-$hide_minor_edit	= (int) @$_GET['minor_edit'];
+$hide_minor_edit	= (bool) ($_GET['minor_edit'] ?? false);
 
 if ($a < 0) $a = 0;
 if ($b < 0) $b = 0;

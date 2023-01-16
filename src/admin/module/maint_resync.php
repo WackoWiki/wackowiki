@@ -237,7 +237,7 @@ function admin_maint_resync($engine, $module)
 			}
 
 			// do not allow automatic redirection by action {{redirect}}
-			$engine->set_user_setting('dont_redirect', 1, 0);
+			$engine->set_user_setting('dont_redirect', 1, false);
 
 			if ($pages = $engine->db->load_all(
 			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, a.page_lang, a.allow_rawhtml, a.disable_safehtml, a.typografica, " .

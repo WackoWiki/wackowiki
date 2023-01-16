@@ -145,7 +145,7 @@ if ($this->has_access('read'))
 			// revision navigation
 			$tpl->enter('nav_');
 
-			[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], 0, $this->is_admin());
+			[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], false, $this->is_admin());
 
 			$revision_menu = function ($side) use ($revisions, &$tpl)
 			{
