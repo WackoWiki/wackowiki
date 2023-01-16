@@ -181,7 +181,12 @@ function admin_db_backup($engine, $module, $tables, $directories)
 
 		$engine->log(1, Ut::perc_replace($engine->_t('LogSavedBackup', SYSTEM_LANG), trim($pack, '/')));
 
-		$message = '<p>' . Ut::perc_replace($engine->_t('BackupCompleted'), '<code>' . $pack . '</code>', $engine->href('', '', ['mode' => 'db_restore'])) . '</p>';
+		$message = '<p>' .
+			Ut::perc_replace(
+				$engine->_t('BackupCompleted'),
+				'<code>' . $pack . '</code>',
+				$engine->href('', '', ['mode' => 'db_restore'])) .
+			'</p>';
 
 		$engine->show_message($message, 'success');
 	}
@@ -212,7 +217,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 				</tr>
 				<tr>
 					<th><?php echo $engine->_t('BackupTable'); ?></th>
-					<th>  <a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
+					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
 					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1'); ?>"><?php echo $engine->_t('BackupData'); ?></a></th>
 				</tr>
 <?php
@@ -240,7 +245,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 ?>
 				<tr>
 					<th colspan="2"><?php echo $engine->_t('BackupFolder'); ?></th>
-					<th>  <a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
+					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
 				</tr>
 <?php
 			$i = 0;
