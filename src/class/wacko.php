@@ -857,11 +857,11 @@ class Wacko
 	* @param string		$tag			Page tag
 	* @param int		$page_id
 	* @param int		$revision_id
-	* @param int		$cache If		LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
+	* @param int		$cache			If LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
 	* @param int		$metadata_only	If LOAD_ALL loads all page fields including page body, if LOAD_META - only page_meta fields.
 	* @param bool		$deleted
 	*
-	* @return array Loaded page
+	* @return array|null				Loaded page
 	*/
 	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = false): ?array
 	{
@@ -1804,7 +1804,7 @@ class Wacko
 	 * @param string	$user_name		attach guest pseudonym
 	 * @param bool		$user_page		user is page owner
 	 *
-	 * @return string	$body_r
+	 * @return string|null				body_r - pre-rendered wikitext
 	 */
 	function save_page($tag, $body, $title = '', $edit_note = '', $minor_edit = false, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false): ?string
 	{
@@ -4403,10 +4403,10 @@ class Wacko
 	* Add spaces to WikiWords (if config parameter show_spaces = 1) and replace
 	* relative  path (/ !/ ../) to icons RootLinkIcon, SubLinkIcon, UpLinkIcon
 	*
-	* @param	string		$text Text with WikiWords
-	* @param	bool		$icon adds Link icon as prefix
+	* @param	string		$text	Text with WikiWords
+	* @param	bool		$icon	adds Link icon as prefix
 	*
-	* @return	string		Text with Wiki Words
+	* @return	string|null			Text with Wiki Words
 	*/
 	function add_spaces($text, $icon = false): ?string
 	{
@@ -4644,7 +4644,7 @@ class Wacko
 	*
 	* @return bool
 	*/
-	function is_wiki_name($text): string
+	function is_wiki_name($text)
 	{
 		return preg_match('/^' . $this->lang['UPPER'] . $this->lang['LOWER'] . '+' . $this->lang['UPPERNUM'] . $this->lang['ALPHANUM'] . '*$/u', $text);
 	}
@@ -4975,7 +4975,7 @@ class Wacko
 	* Loads all referrers to this page from DB
 	* @param int	$page_id
 	*
-	* @return array	Array of (referer, num)
+	* @return array|null	Array of (referer, num)
 	*/
 	function load_referrers($page_ids = null): ?array
 	{
@@ -7971,7 +7971,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_category_assigments($object_id, $type_id): bool
+	function remove_category_assignments($object_id, $type_id): bool
 	{
 		if (!$object_id && !$type_id)
 		{
@@ -8038,7 +8038,7 @@ class Wacko
 					// moved file to backup folder
 
 					// remove category assignments
-					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+					$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
 				}
 
 				// flag record as deleted in DB
@@ -8058,7 +8058,7 @@ class Wacko
 					@unlink($file_name);
 
 					// remove category assignments
-					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+					$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
 				}
 
 				clearstatcache();
@@ -8134,7 +8134,7 @@ class Wacko
 		}
 
 		$this->remove_file_link($file['file_id']);
-		$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+		$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
 		$this->update_files_count($file['page_id'], $file['user_id']);
 
 		return true;
@@ -8505,7 +8505,7 @@ class Wacko
 		return $pagination;
 	}
 
-	function print_pagination($pagination)
+	function print_pagination($pagination): void
 	{
 		if (@$pagination['text'])
 		{
@@ -8705,7 +8705,7 @@ class Wacko
 	 * @param array		$params
 	 * @param string	$mod_selector
 	 *
-	 * @return string|bool
+	 * @return bool|string
 	 */
 	function tab_menu($tabs, $active, $handler = '', $params = [], $mod_selector = 'm')
 	{

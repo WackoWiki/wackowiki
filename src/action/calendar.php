@@ -170,7 +170,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	if ($weekday != 7)
 	{
-		$tpl->last_colspan	= (7 - $weekday); // remaining "empty" days
+		$tpl->last_colspan	= (7 - $weekday); // remaining 'empty' days
 	}
 };
 

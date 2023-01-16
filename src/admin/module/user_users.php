@@ -323,15 +323,15 @@ function admin_user_users($engine, $module)
 					// remove user space
 					$user_space = $engine->db->users_page . '/' . $user['user_name'];
 
-					$engine->remove_referrers			($user_space, true);
-					$engine->remove_links				($user_space, true);
-					$engine->remove_category_assigments	($user_space, true);
-					$engine->remove_acls				($user_space, true);
-					$engine->remove_menu_items			($user_space, true);
-					$engine->remove_watches				($user_space, true);
-					$engine->remove_comments			($user_space, true, true); // dontkeep
-					$engine->remove_files_perpage		($user_space, true);
-					$engine->remove_revisions			($user_space, true);
+					$engine->remove_referrers				($user_space, true);
+					$engine->remove_links					($user_space, true);
+					$engine->remove_category_assignments	($user_space, true);
+					$engine->remove_acls					($user_space, true);
+					$engine->remove_menu_items				($user_space, true);
+					$engine->remove_watches					($user_space, true);
+					$engine->remove_comments				($user_space, true, true); // dontkeep
+					$engine->remove_files_perpage			($user_space, true);
+					$engine->remove_revisions				($user_space, true);
 
 					$engine->db->sql_query(
 						"DELETE FROM " . $prefix . "page " .
