@@ -1172,100 +1172,100 @@ a:target {
 	background-size: 22px 22px;
 }
 .toolbar li.we-h1 img {
-	background: url('../../../image/wikiedit/h1.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/h1.svg') no-repeat;
 }
 .toolbar li.we-h2 img {
-	background: url('../../../image/wikiedit/h2.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/h2.svg') no-repeat;
 }
 .toolbar li.we-h3 img {
-	background: url('../../../image/wikiedit/h3.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/h3.svg') no-repeat;
 }
 .toolbar li.we-h4 img {
-	background: url('../../../image/wikiedit/h4.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/h4.svg') no-repeat;
 }
 .toolbar li.we-h5 img {
-	background: url('../../../image/wikiedit/h5.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/h5.svg') no-repeat;
 }
 .toolbar li.we-h6 img {
-	background: url('../../../image/wikiedit/h6.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/h6.svg') no-repeat;
 }
 .toolbar li.we-bold img {
-	background: url('../../../image/wikiedit/bold.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/bold.svg') no-repeat;
 }
 .toolbar li.we-italic img {
-	background: url('../../../image/wikiedit/italic.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/italic.svg') no-repeat;
 }
 .toolbar li.we-underline img {
-	background: url('../../../image/wikiedit/underline.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/underline.svg') no-repeat;
 }
 .toolbar li.we-strike img {
-	background: url('../../../image/wikiedit/strike.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/strike.svg') no-repeat;
 }
 .toolbar li.we-small img {
-	background: url('../../../image/wikiedit/small.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/small.svg') no-repeat;
 }
 .toolbar li.we-superscript img {
-	background: url('../../../image/wikiedit/superscript.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/superscript.svg') no-repeat;
 }
 .toolbar li.we-subscript img {
-	background: url('../../../image/wikiedit/subscript.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/subscript.svg') no-repeat;
 }
 .toolbar li.we-ul img {
-	background: url('../../../image/wikiedit/ul.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/ul.svg') no-repeat;
 }
 .toolbar li.we-ol img {
-	background: url('../../../image/wikiedit/ol.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/ol.svg') no-repeat;
 }
 .toolbar li.we-center img {
-	background: url('../../../image/wikiedit/center.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/center.svg') no-repeat;
 }
 .toolbar li.we-justify img {
-	background: url('../../../image/wikiedit/justify.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/justify.svg') no-repeat;
 }
 .toolbar li.we-right img {
-	background: url('../../../image/wikiedit/right.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/right.svg') no-repeat;
 }
 .toolbar li.we-outdent img {
-	background: url('../../../image/wikiedit/outdent.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/outdent.svg') no-repeat;
 }
 .toolbar li.we-indent img {
-	background: url('../../../image/wikiedit/indent.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/indent.svg') no-repeat;
 }
 .toolbar li.we-hr img {
-	background: url('../../../image/wikiedit/hr.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/hr.svg') no-repeat;
 }
 .toolbar li.we-signature img {
-	background: url('../../../image/wikiedit/signature.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/signature.svg') no-repeat;
 }
 .toolbar li.we-quote img {
-	background: url('../../../image/wikiedit/quote.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/quote.svg') no-repeat;
 }
 .toolbar li.we-source img {
-	background: url('../../../image/wikiedit/source.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/source.svg') no-repeat;
 }
 .toolbar li.we-code img {
-	background: url('../../../image/wikiedit/code.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/code.svg') no-repeat;
 }
 .toolbar li.we-footnote img {
-	background: url('../../../image/wikiedit/footnote.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/footnote.svg') no-repeat;
 }
 .toolbar li.we-createlink img {
-	background: url('../../../image/wikiedit/link.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/link.svg') no-repeat;
 }
 .toolbar li.we-createtable img {
-	background: url('../../../image/wikiedit/table.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/table.svg') no-repeat;
 }
 .toolbar li.we-textred img {
-	background: url('../../../image/wikiedit/textcolor.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/textcolor.svg') no-repeat;
 }
 .toolbar li.we-highlight img {
-	background: url('../../../image/wikiedit/highlight.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/highlight.svg') no-repeat;
 }
 .toolbar li.we-about img {
-	background: url('../../../image/wikiedit/about.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/about.svg') no-repeat;
 }
 .toolbar li.we-help img {
-	background: url('../../../image/wikiedit/help.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/help.svg') no-repeat;
 }
 	/* WikiEdit Autocomplete --------------------------------- */
 .autocomplete-inplace {
