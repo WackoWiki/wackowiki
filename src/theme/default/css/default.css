@@ -2461,7 +2461,7 @@ form.add-topic {
 
 /* categories tag ------------- */
 .tag {
-	background: white none repeat scroll 0 0;
+	background-color: var(--ww-bg-secondary);
 	border: 1px solid lightgray;
 	border-radius: 3px;
 	display: inline-block;

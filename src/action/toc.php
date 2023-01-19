@@ -124,8 +124,7 @@ if ($_page)
 							{
 								if (!isset($numbers[$_depth]) || ($numbers[$_depth] == 0))
 								{
-									$numbers[$_depth]		= 1;
-									$this->_depth[$_depth]	= 1;
+									$numbers[$_depth] = 1;
 								}
 
 								ksort($numbers);
@@ -183,7 +182,7 @@ if ($_page)
 			if (isset($toc_item[4]) && $toc_item[4])
 			{
 				// check page level
-				$cur_level	= $toc_item[4];
+				$cur_level = $toc_item[4];
 
 				// indents (sublevels)
 				if ($i >= 0)
@@ -252,8 +251,8 @@ if ($_page)
 
 				$tpl->enter('toc_');
 
-				$tpl->href = $toc_item[3] . '#' . $toc_item[0];
-				$tpl->i_item = strip_tags($toc_item[6]);
+				$tpl->href		= $toc_item[3] . '#' . $toc_item[0];
+				$tpl->i_item	= strip_tags($toc_item[6]);
 
 				if (!empty($numerate))
 				{
@@ -263,7 +262,7 @@ if ($_page)
 				$tpl->leave(); // toc_
 
 				// re-check page level
-				$prev_level	= $toc_item[4];
+				$prev_level = $toc_item[4];
 
 				$i++;
 			}
