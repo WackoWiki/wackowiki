@@ -95,7 +95,7 @@ if ($user_id = $this->get_user_id())
 				"LEFT JOIN {$prefix}page AS p " .
 					"ON (p.page_id = w.page_id) " .
 			$selector .
-			"GROUP BY p.tag ";
+			"GROUP BY p.tag, p.user_id, p.owner_id, p.title, p.page_id ";
 	}
 
 	// print tabs

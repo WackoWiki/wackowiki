@@ -2461,7 +2461,7 @@ form.add-topic {
 
 /* categories tag ------------- */
 .tag {
-	background: white none repeat scroll 0 0;
+	background-color: var(--ww-bg-secondary);
 	border: 1px solid lightgray;
 	border-radius: 3px;
 	display: inline-block;
@@ -2679,7 +2679,7 @@ table.diff td {
 .diffdown {
 	position: relative;
 	margin-right: 20px;
-	z-index: 1000;
+	z-index: 100;
 }
 
 .diffdown-content {

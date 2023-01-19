@@ -9,11 +9,8 @@ if (!defined('IN_WACKO'))
 $max			= (int) @$max;
 $logged_in		= $this->get_user();
 
-$order			= '';
 $param			= [];
 $groups			= '';
-$usergroups		= '';
-$error			= '';
 
 // display usergroup profile
 if ($group = @$_GET['profile'])
@@ -106,7 +103,7 @@ else
 		$where .
 		($where ? 'AND ' : "WHERE ") .
 			"g.active = 1 " .
-		"GROUP BY g.group_id " .
+		"GROUP BY g.group_id, g.group_name, g.description, g.created, u.user_name " .
 		$sql_order .
 		$pagination['limit']);
 
@@ -163,7 +160,7 @@ else
 		foreach ($groups as $usergroup)
 		{
 			$tpl->profile	= $this->href('', '', ['profile' => $usergroup['group_name']]);
-			$tpl->group	= $usergroup;
+			$tpl->group		= $usergroup;
 
 			if ($this->get_user())
 			{

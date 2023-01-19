@@ -53,30 +53,30 @@ if ($mode)
 		$purge_time);
 }
 
-$px = $this->prefix;
+$prefix = $this->prefix;
 
 if ($mode == 'perpage')
 {
 	$query =
 		"SELECT r.page_id, COUNT(r.referrer) AS num, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
-		"FROM " . $px . "referrer r " .
-			"LEFT JOIN " . $px . "page p ON ( p.page_id = r.page_id ) " .
-		"GROUP BY r.page_id " .
+		"FROM " . $prefix . "referrer r " .
+			"LEFT JOIN " . $prefix . "page p ON ( p.page_id = r.page_id ) " .
+		"GROUP BY r.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 		"ORDER BY num DESC, p.tag ASC";
 }
 else if ($mode == 'bytime')
 {
 	$query =
 		"SELECT r.page_id, r.referrer_time, r.referrer, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
-		"FROM " . $px . "referrer r " .
-			"LEFT JOIN " . $px . "page p ON ( p.page_id = r.page_id ) " .
+		"FROM " . $prefix . "referrer r " .
+			"LEFT JOIN " . $prefix . "page p ON ( p.page_id = r.page_id ) " .
 		"ORDER BY r.referrer_time DESC";
 }
 else if ($mode == 'global')
 {
 	$query =
 		"SELECT referrer, COUNT(referrer) AS num " .
-		"FROM " . $px . "referrer " .
+		"FROM " . $prefix . "referrer " .
 		"GROUP BY referrer " .
 		"ORDER BY num DESC, referrer ASC";
 }
@@ -89,7 +89,7 @@ else
 
 	$query =
 		"SELECT referrer, COUNT(referrer) AS num " .
-		"FROM " . $px . "referrer " .
+		"FROM " . $prefix . "referrer " .
 		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"GROUP BY referrer " .
 		"ORDER BY num DESC";
@@ -103,6 +103,7 @@ foreach ($modes as $i => $text)
 	if ($mode == $i)
 	{
 		$tpl->header = $this->_t($text);
+		break;
 	}
 }
 

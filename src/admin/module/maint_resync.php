@@ -257,9 +257,21 @@ function admin_maint_resync($engine, $module)
 					// find last rendered page
 					# Diag::dbg('GOLD', $record, $page['tag']);
 
-					// formatter needs these values, comment requires settings from parent page
-					$engine->db->allow_rawhtml		= ($page['comment_on_id'] ? $page['parent_allow_rawhtml']		: $page['allow_rawhtml']);
-					$engine->db->disable_safehtml	= ($page['comment_on_id'] ? $page['parent_disable_safehtml']	: $page['disable_safehtml']);
+					// override global formatter settings with perpage settings
+					$page_options = [
+						'allow_rawhtml',
+						'disable_safehtml',
+					];
+
+					// comment requires settings from parent page, e.g. 'parent_*'
+					foreach ($page_options as $key)
+					{
+						// ignore perpage page settings with empty / null as value
+						if (!Ut::is_empty($val = $page['comment_on_id'] ? $page['parent_' . $key] : $page[$key]))
+						{
+							$engine->db[$key] = $val;
+						}
+					}
 
 					// setting context
 					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_tag'] : $page['tag']);
