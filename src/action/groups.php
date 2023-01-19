@@ -103,7 +103,7 @@ else
 		$where .
 		($where ? 'AND ' : "WHERE ") .
 			"g.active = 1 " .
-		"GROUP BY g.group_id " .
+		"GROUP BY g.group_id, g.group_name, g.description, g.created, u.user_name " .
 		$sql_order .
 		$pagination['limit']);
 

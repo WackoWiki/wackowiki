@@ -121,7 +121,7 @@ if ($user_id = $this->get_user_id())
 		if ($pages = $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.modified, p.page_lang " .
 			$selector .
-			"GROUP BY tag " .
+			"GROUP BY p.tag, p.page_id, p.owner_id, p.user_id, p.title, p.modified, p.page_lang " .
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true))
 		{

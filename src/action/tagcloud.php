@@ -5,6 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+/* USAGE:
+	{{tagcloud
+		[page="cluster"]	- where to start counting from (defaults to current tag)
+		[lang='fi']			- categories language if necessary (defaults to current page lang)
+		[owner="UserName"]	- page owner
+		[sort="abc|number"]	- order categories alphabetically or by number ('abc'| 'number')
+		[nomark=1]			- display header and fieldset (1) or 0 (default))
+	}}
+*/
+
 $print_tag_cloud = function ($tags, $method = '', $cluster = '') use (&$tpl)
 {
 	// TODO: add name space 'category'
@@ -52,13 +62,6 @@ $print_tag_cloud = function ($tags, $method = '', $cluster = '') use (&$tpl)
 	}
 };
 
-// settings:
-//	page		- where to start counting from (defaults to current tag)
-//	lang		- categories language if necessary (defaults to current page lang)
-//	owner		- page owner
-//	sort		- order categories alphabetically or by number ('abc'| 'number')
-//	nomark		- display header and fieldset (1) or 0 (default))
-
 // set defaults
 $lang		??= $this->page['page_lang'];
 $nomark		??= 0;
@@ -95,7 +98,7 @@ $sql = "SELECT
 				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '' ) .
 		"GROUP BY
-			c.category
+			c.category, c.category_id, c.category_lang
 		ORDER BY {$order}";
 
 $tags = $this->db->load_all($sql, true);
@@ -116,14 +119,14 @@ if ($tags)
 
 	foreach ($tags as $cat)
 	{
-		$this->cloud[$cat['category_id']] = [
+		$cloud[$cat['category_id']] = [
 			'category'	=> $cat['category'],
 			'number'	=> $cat['number']
 		];
 	}
 
-	$print_tag_cloud($this->cloud, null, $tag);
-	unset ($this->cloud);
+	$print_tag_cloud($cloud, null, $tag);
+	unset ($cloud);
 }
 else
 {

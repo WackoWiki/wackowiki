@@ -252,7 +252,7 @@ if ($this->is_admin())
 			FROM
 				{$prefix}page p
 				LEFT JOIN {$prefix}acl a ON (p.page_id = a.page_id)
-			GROUP BY p.page_id
+			GROUP BY p.page_id, p.tag
 			HAVING COUNT(p.page_id) < 5
 			ORDER BY p.page_id ASC");
 

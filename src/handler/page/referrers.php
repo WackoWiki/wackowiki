@@ -61,7 +61,7 @@ if ($mode == 'perpage')
 		"SELECT r.page_id, COUNT(r.referrer) AS num, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 		"FROM " . $prefix . "referrer r " .
 			"LEFT JOIN " . $prefix . "page p ON ( p.page_id = r.page_id ) " .
-		"GROUP BY r.page_id " .
+		"GROUP BY r.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 		"ORDER BY num DESC, p.tag ASC";
 }
 else if ($mode == 'bytime')
