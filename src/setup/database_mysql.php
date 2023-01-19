@@ -113,8 +113,9 @@ $tbl_file =
 		PRIMARY KEY (file_id),
 		UNIQUE idx_page_id (page_id, file_name),
 		KEY idx_page_id_2 (page_id, created),
-		KEY idx_deleted (deleted),
-		KEY idx_user_id (user_id)
+		KEY idx_user_id (user_id),
+		KEY idx_file_name (file_name),
+		KEY idx_deleted (deleted)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_file_link =

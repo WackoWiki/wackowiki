@@ -95,6 +95,7 @@ $upgrade['6.1.16'][]	= ['update',	'config',			$update_config_r6_0_1];
 $upgrade['6.1.5'][]		= ['alter',		'file',				$alter_file_r6_0_1];
 $upgrade['6.1.5'][]		= ['alter',		'file',				$alter_file_r6_0_2];
 $upgrade['6.1.9'][]		= ['alter',		'file',				$alter_file_r6_0_3];
+$upgrade['6.1.17'][]	= ['alter',		'file',				$alter_file_r6_0_4];
 
 // log
 
