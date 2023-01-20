@@ -10,7 +10,7 @@ https://wackowiki.org/doc/Dev/Projects/Typografica
 
 class Paragrafica
 {
-	public string $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
+	public string $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/us'; // regex to be ignored
 	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>
 	public $wacko;
 	public array $toc;

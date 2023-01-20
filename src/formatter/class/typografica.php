@@ -16,7 +16,7 @@ class Typografica
 	public bool $skip_tags	= true;
 	public string $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
 	public string $indent2	= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
-	public string $ignore	= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
+	public string $ignore	= '/(<!--notypo-->.*?<!--\/notypo-->)/us'; // regex to be ignored
 	public string $mark1	= '{:typo:markup:1:}';
 	public string $mark2	= '{:typo:markup:2:}';
 	public bool $de_nobr	= true;

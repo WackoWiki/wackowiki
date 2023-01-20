@@ -52,7 +52,7 @@ if ($this->has_access('read'))
 				$diff			= $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);
 
 				// remove diff type navigation
-				$diff			= preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/usi', '', $diff);
+				$diff			= preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/us', '', $diff);
 
 				$tpl->diff		= str_replace(']]>', ']]&gt;', $diff);
 				$tpl->date		= date ('r', strtotime ($date));

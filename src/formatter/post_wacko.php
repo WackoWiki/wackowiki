@@ -14,17 +14,22 @@ $text = preg_replace_callback(
 	[&$parser, 'postcallback'],
 	($text ?? ''));
 
-$options['strip_ignore'] ??= false;
-$options['strip_notypo'] ??= false;
+$options['strip_marker'] ??= false;
 
-if ($options['strip_notypo'])
+if ($options['strip_marker'])
 {
-	$text = str_replace(['<!--notypo-->', '<!--/notypo-->'], '', $text);
-}
-
-if ($options['strip_ignore'])
-{
-	$text = str_replace(['<ignore>', '</ignore>'], '', $text);
+	// remove formater marker tags
+	$text = str_replace(
+		[
+			'<!--noinclude-->',
+			'<!--/noinclude-->',
+			'<!--notypo-->',
+			'<!--/notypo-->',
+			'<ignore>',
+			'</ignore>',
+		],
+		'',
+		$text);
 }
 
 echo $text;

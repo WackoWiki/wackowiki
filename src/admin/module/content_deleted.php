@@ -46,11 +46,11 @@ function admin_content_deleted($engine, $module)
 	echo '<h2>' . $engine->_t($tabs[$mode]) . "</h2>";
 	echo '<p>' . $engine->tab_menu($tabs, $mode, '', [], $mode_selector) . '</p><br>';
 
-	$type			= (int)		($_GET['type'] ?? 0);
-	$action			= (string)	($_GET['action'] ?? null);
-	$page_id		= (int)		($_GET['page_id'] ?? null);
-	$revision_id	= (int)		($_GET['revision_id'] ?? null);
-	$file_id		= (int)		($_GET['file_id'] ?? null);
+	$type			= (int)		($_GET['type']			?? 0);
+	$action			= (string)	($_GET['action']		?? null);
+	$page_id		= (int)		($_GET['page_id']		?? null);
+	$revision_id	= (int)		($_GET['revision_id']	?? null);
+	$file_id		= (int)		($_GET['file_id']		?? null);
 
 	if ($type == OBJECT_PAGE && $page_id)
 	{
@@ -94,15 +94,15 @@ function admin_content_deleted($engine, $module)
 
 	if ($type == OBJECT_FILE)
 	{
-		[$files, $pagination] = $engine->load_deleted_files(50, false);
+		[$files, $pagination]		= $engine->load_deleted_files(50, false);
 	}
 	else if  ($type == OBJECT_REVISION)
 	{
-		[$revisions, $pagination] = $engine->load_deleted_revisions(50, false);
+		[$revisions, $pagination]	= $engine->load_deleted_revisions(50, false);
 	}
 	else if ($type == OBJECT_PAGE)
 	{
-		[$pages, $pagination] = $engine->load_deleted_pages(50, false);
+		[$pages, $pagination]		= $engine->load_deleted_pages(50, false);
 	}
 
 	// show summary
@@ -184,7 +184,7 @@ function admin_content_deleted($engine, $module)
 						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
-						$engine->compose_link_to_page($page['tag'], 'revisions', '', $page['title']) .
+						$engine->compose_link_to_page($page['tag'], ($page['comment_on_id'] ? '' : 'revisions'), '', $page['title']) .
 					'</td>' .
 				"</tr>\n";
 		}
