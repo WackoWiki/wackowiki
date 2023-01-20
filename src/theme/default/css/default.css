@@ -321,7 +321,7 @@ form input.submitinput {
 	font-weight: bold;
 }
 .error::after {
-	content: url('./../icon/cross.svg') " ";
+	content: url('./../icon/light/cross.svg') " ";
 }
 
 .comment-info {
@@ -329,7 +329,7 @@ form input.submitinput {
 	border: 1px solid #d5d9e6;
 }
 .msg.comment-info::after {
-	content: url('./../icon/comment.svg') " ";
+	content: url('./../icon/light/comment.svg') " ";
 }
 
 .disabled {
@@ -338,7 +338,7 @@ form input.submitinput {
 	font-style: italic;
 }
 .msg.disabled::after {
-	content: url('./../icon/info.svg') " ";
+	content: url('./../icon/light/info.svg') " ";
 }
 
 .revision-info {
@@ -348,7 +348,7 @@ form input.submitinput {
 	font-weight: bold;
 }
 .msg.revision-info::after {
-	content: url('./../icon/revisions.svg') " ";
+	content: url('./../icon/light/revisions.svg') " ";
 }
 
 .revision-info button {
@@ -363,7 +363,7 @@ form input.submitinput {
 	font-weight: bold;
 }
 .msg.note::after {
-	content: url('./../icon/info.svg') " ";
+	content: url('./../icon/light/info.svg') " ";
 }
 
 .notice {
@@ -371,7 +371,7 @@ form input.submitinput {
 	border: 1px dotted #ddddaa;
 }
 .msg.notice::after {
-	content: url('./../icon/info.svg') " ";
+	content: url('./../icon/light/info.svg') " ";
 }
 
 .section-info {
@@ -379,7 +379,7 @@ form input.submitinput {
 	color: gray;
 }
 .msg.section-info::after {
-	content: url('./../icon/section.svg') " ";
+	content: url('./../icon/light/section.svg') " ";
 }
 
 .success {
@@ -388,7 +388,7 @@ form input.submitinput {
 	font-weight: bold;
 }
 .msg.success::after {
-	content: url('./../icon/tick.svg') " ";
+	content: url('./../icon/light/tick.svg') " ";
 }
 
 .warning {
@@ -398,7 +398,7 @@ form input.submitinput {
 	font-weight: bold;
 }
 .msg.warning::after {
-	content: url('./../icon/warning.svg') " ";
+	content: url('./../icon/light/warning.svg') " ";
 }
 
 .hint {
@@ -406,7 +406,7 @@ form input.submitinput {
 	background: #ffffdd;
 }
 .msg.hint::after {
-	content: url('./../icon/important.svg') " ";
+	content: url('./../icon/light/important.svg') " ";
 }
 
 .rev-overflow {
@@ -2067,64 +2067,64 @@ table.formation td {
 }
 
 li.m-new img {
-	background: url('./../icon/page-add.svg') no-repeat;
+	background: url('./../icon/light/page-add.svg') no-repeat;
 }
 li.m-categories img {
-	background: url('./../icon/tag.svg') no-repeat;
+	background: url('./../icon/light/tag.svg') no-repeat;
 }
 li.m-attachments img {
-	background: url('./../icon/attachment.svg') no-repeat;
+	background: url('./../icon/light/attachment.svg') no-repeat;
 }
 li.m-upload img {
-	background: url('./../icon/upload.svg') no-repeat;
+	background: url('./../icon/light/upload.svg') no-repeat;
 }
 li.m-clone img {
-	background: url('./../icon/copy.svg') no-repeat;
+	background: url('./../icon/light/copy.svg') no-repeat;
 }
 li.m-edit img {
-	background: url('./../icon/edit.svg') no-repeat;
+	background: url('./../icon/light/edit.svg') no-repeat;
 }
 li.m-languages img {
-	background: url('./../icon/languages.svg') no-repeat;
+	background: url('./../icon/light/languages.svg') no-repeat;
 }
 li.m-referrers img {
-	background: url('./../icon/link.svg') no-repeat;
+	background: url('./../icon/light/link.svg') no-repeat;
 }
 li.m-revisions img {
-	background: url('./../icon/revisions.svg') no-repeat;
+	background: url('./../icon/light/revisions.svg') no-repeat;
 }
 li.m-remove img {
-	background: url('./../icon/delete.svg') no-repeat;
+	background: url('./../icon/light/delete.svg') no-repeat;
 }
 li.m-purge img {
-	background: url('./../icon/purge.svg') no-repeat;
+	background: url('./../icon/light/purge.svg') no-repeat;
 }
 li.m-rename img {
-	background: url('./../icon/edit.svg') no-repeat;
+	background: url('./../icon/light/edit.svg') no-repeat;
 }
 li.m-properties img {
-	background: url('./../icon/properties.svg') no-repeat;
+	background: url('./../icon/light/properties.svg') no-repeat;
 }
 li.m-permissions img {
-	background: url('./../icon/permission.svg') no-repeat;
+	background: url('./../icon/light/permission.svg') no-repeat;
 }
 li.m-show img {
-	background: url('./../icon/show.svg') no-repeat;
+	background: url('./../icon/light/show.svg') no-repeat;
 }
 li.m-moderate img {
-	background: url('./../icon/comment.svg') no-repeat;
+	background: url('./../icon/light/comment.svg') no-repeat;
 }
 li.m-print img {
-	background: url('./../icon/print.svg') no-repeat;
+	background: url('./../icon/light/print.svg') no-repeat;
 }
 li.m-xml img {
-	background: url('./../icon/xml.svg') no-repeat;
+	background: url('./../icon/light/xml.svg') no-repeat;
 }
 li.m-word img {
-	background: url('./../icon/document.svg') no-repeat;
+	background: url('./../icon/light/document.svg') no-repeat;
 }
 li.m-source img {
-	background: url('./../icon/text.svg') no-repeat;
+	background: url('./../icon/light/text.svg') no-repeat;
 }
 
 .desc-rss-feed {
@@ -2143,28 +2143,28 @@ li.m-source img {
 	width: 16px;
 }
 .watch-off img {
-	background: url('./../icon/watch-off.svg') no-repeat;
+	background: url('./../icon/light/watch-off.svg') no-repeat;
 }
 .watch-on img {
-	background: url('./../icon/watch-on.svg') no-repeat;
+	background: url('./../icon/light/watch-on.svg') no-repeat;
 }
 
 .review1 img {
-	background: url('./../icon/review1.svg') no-repeat;
+	background: url('./../icon/light/review1.svg') no-repeat;
 }
 .review2 img {
-	background: url('./../icon/review2.svg') no-repeat;
+	background: url('./../icon/light/review2.svg') no-repeat;
 }
 
 .btn-reload {
-	background: url('./../icon/reload.svg') no-repeat;
+	background: url('./../icon/light/reload.svg') no-repeat;
 	background-size: 22px 22px;
 	height: 22px;
 	width: 22px;
 	display: inline-block;
 }
 .btn-menu {
-	background: url('./../icon/menu.svg') no-repeat;
+	background: url('./../icon/light/menu.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
@@ -2172,147 +2172,147 @@ li.m-source img {
 }
 
 .btn-overflow-menu {
-	background: url('./../icon/overflow-menu.svg') no-repeat;
+	background: url('./../icon/light/overflow-menu.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-addbookmark {
-	background: url('./../icon/bookmark.svg') no-repeat;
+	background: url('./../icon/light/bookmark.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-removebookmark {
-	background: url('./../icon/bookmark-remove.svg') no-repeat;
+	background: url('./../icon/light/bookmark-remove.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-delete {
-	background: url('./../icon/delete.svg') no-repeat;
+	background: url('./../icon/light/delete.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-edit {
-	background: url('./../icon/edit.svg') no-repeat;
+	background: url('./../icon/light/edit.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-source {
-	background: url('./../icon/text.svg') no-repeat;
+	background: url('./../icon/light/text.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-feed {
-	background: url('./../icon/feed.svg') no-repeat;
+	background: url('./../icon/light/feed.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-info {
-	background: url('./../icon/dialog-info.svg') no-repeat;
+	background: url('./../icon/light/dialog-info.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-tick {
-	background: url('./../icon/tick.svg') no-repeat;
+	background: url('./../icon/light/tick.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-warning {
-	background: url('./../icon/warning.svg') no-repeat;
+	background: url('./../icon/light/warning.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-add-page {
-	background: url('./../icon/page-add.svg') no-repeat;
+	background: url('./../icon/light/page-add.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-page {
-	background: url('./../icon/show.svg') no-repeat;
+	background: url('./../icon/light/show.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-comment {
-	background: url('./../icon/comment.svg') no-repeat;
+	background: url('./../icon/light/comment.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-attachment {
-	background: url('./../icon/attachment.svg') no-repeat;
+	background: url('./../icon/light/attachment.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-upload {
-	background: url('./../icon/upload.svg') no-repeat;
+	background: url('./../icon/light/upload.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-unlocked {
-	background: url('./../icon/unlocked.svg') no-repeat;
+	background: url('./../icon/light/unlocked.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-locked {
-	background: url('./../icon/locked.svg') no-repeat;
+	background: url('./../icon/light/locked.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-search {
-	background: url('./../icon/search.svg') no-repeat;
+	background: url('./../icon/light/search.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-tag {
-	background: url('./../icon/tag.svg') no-repeat;
+	background: url('./../icon/light/tag.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-languages {
-	background: url('./../icon/languages.svg') no-repeat;
+	background: url('./../icon/light/languages.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-revisions {
-	background: url('./../icon/revisions.svg') no-repeat;
+	background: url('./../icon/light/revisions.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
