@@ -333,7 +333,7 @@ if ($this->has_access('read')
 		$text_chars			= number_format(mb_strlen($_body), 0, ',', '.');
 		$preview			= $this->format($_body,		'pre_wacko');
 		$preview			= $this->format($preview,	'wacko');
-		$preview			= $this->format($preview,	'post_wacko', ['strip_notypo' => true, 'strip_ignore' => true]);
+		$preview			= $this->format($preview,	'post_wacko', ['strip_marker' => true]);
 
 		$tpl->p_chars		= $text_chars;
 		$tpl->p_level		= $h_level;

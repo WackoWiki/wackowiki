@@ -77,6 +77,8 @@ else
 		}
 
 		// cleaning up
+		$body = preg_replace('#<!--noinclude-->(.*?)<!--/noinclude-->#us', '', $body);
+
 		$body = preg_replace('/<!--action:begin-->toc(.*?)<!--action:end-->/ui', '', $body);
 		$body = preg_replace('/<!--action:begin-->paragraphs(.*?)<!--action:end-->/ui', '', $body);
 		$body = preg_replace('/<!--action:begin-->redirect(.*?)<!--action:end-->/ui', '', $body);

@@ -260,7 +260,7 @@ class Feed
 					// set page context
 					$this->engine->tag = $comment['page_tag'];
 					$this->engine->context[++$this->engine->current_context] = $comment['page_tag'];
-					$text = $this->engine->format($comment['body_r'], 'post_wacko', ['strip_notypo' => true]);
+					$text = $this->engine->format($comment['body_r'], 'post_wacko', ['strip_marker' => true]);
 					$this->engine->current_context--;
 
 					$xml .=

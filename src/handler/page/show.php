@@ -51,7 +51,7 @@ if ($this->has_access('read'))
 		if ($this->page['latest'] == 0)
 		{
 			// load also deleted pages
-			$latest = $this->load_page($this->tag, null, null, null, null, true);
+			$latest = $this->load_page($this->tag, null, null, null, LOAD_ALL, true);
 		}
 
 		if ($this->page['deleted'] || !empty($latest['deleted']))
@@ -253,7 +253,7 @@ if ($this->has_access('read'))
 		}
 
 		// parse page body
-		$data = $this->format($this->page['body_r'], 'post_wacko', ['strip_notypo' => true]);
+		$data = $this->format($this->page['body_r'], 'post_wacko', ['strip_marker' => true]);
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 
 		// display page title (action & theme wacko.all options)
