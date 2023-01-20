@@ -16,15 +16,15 @@ The version and status of each is summarized below:
 | phpmailer			| PHPMailer			| 6.7		| unpatched |
 | phpthumb			| PhpThumb			| 2.2.1		| patched: various, see repo |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |
-| simplepie			| SimplePie			| 1.7.0		| unpatched |
+| simplepie			| SimplePie			| 1.8.0		| unpatched |
 | text-hl			| Text_Highlighter	| 0.8.0		| patched: various, see repo |
 
 ## JavaScript libraries
 
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
-| js				| clipboard.js		| 2.0.10	| unpatched |
-| js				| WikiEdit			| 3.22		| unpatched |
+| js				| clipboard.js		| 2.0.11	| unpatched |
+| js				| WikiEdit			| 3.23		| unpatched |
 
 Upstream projects
 -----------------
