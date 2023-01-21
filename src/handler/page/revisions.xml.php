@@ -23,7 +23,7 @@ $tpl->logo		= Ut::join_path(IMAGE_DIR, $this->db->site_logo);
 if ($this->has_access('read'))
 {
 	// load revisions for this page except minor edits
-	if ([$revisions, $pagination] = $this->load_revisions($this->page['page_id'], 1))
+	if ([$revisions, $pagination] = $this->load_revisions($this->page['page_id'], true))
 	{
 		$max				= 10;
 		$c					= 0;

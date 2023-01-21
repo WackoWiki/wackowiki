@@ -326,7 +326,7 @@ function admin_user_users($engine, $module)
 
 					$engine->remove_referrers			($user_space, true);
 					$engine->remove_links				($user_space, true);
-					$engine->remove_category_assigments	($user_space, true);
+					$engine->remove_category_assignments	($user_space, true);
 					$engine->remove_acls				($user_space, true);
 					$engine->remove_menu_items			($user_space, true);
 					$engine->remove_watches				($user_space, true);

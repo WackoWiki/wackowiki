@@ -159,7 +159,7 @@ if ($this->is_admin()
 		{
 			$this->remove_referrers				($this->tag, true);
 			$this->remove_links					($this->tag, true);
-			$this->remove_category_assigments	($this->tag, true);
+			$this->remove_category_assignments	($this->tag, true);
 			$this->remove_acls					($this->tag, true);
 			$this->remove_menu_items			($this->tag, true);
 			$this->remove_watches				($this->tag, true);

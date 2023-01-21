@@ -17,12 +17,12 @@ if ($this->has_access('read')
 	// tab navigation
 	$mod_selector	= 'files';
 	$tabs			= [
-				''			=> 'AttachmentsLinked',
-				'local'		=> 'AttachmentsToPage',
-				/* 'cluster'	=> 'AttachmentsToCluster', */
-				'global'	=> 'AttachmentsGlobal',
-				'all'		=> 'AttachmentsAll',
-			];
+		''			=> 'AttachmentsLinked',
+		'local'		=> 'AttachmentsToPage',
+		#'cluster'	=> 'AttachmentsToCluster',
+		'global'	=> 'AttachmentsGlobal',
+		'all'		=> 'AttachmentsAll',
+	];
 	$mode			= (string) ($_GET[$mod_selector] ?? '');
 	$order			= (string) ($_GET['order'] ?? '');
 	$phrase			= (string) ($_GET['phrase'] ?? '');

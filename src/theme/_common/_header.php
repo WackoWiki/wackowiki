@@ -30,7 +30,7 @@ $tpl->norobots = (
 
 if (!$tpl->norobots)
 {
-	$tpl->index_canonical	= $this->href('', $this->tag, null, null, null, null, null, true);
+	$tpl->index_canonical	= $this->href('', $this->tag, null, false, '', true, true, true);
 }
 
 if ($this->has_access('read'))

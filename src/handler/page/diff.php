@@ -45,7 +45,7 @@ $a					= (int) $_GET['a'];
 $b					= (int) $_GET['b'];
 $diffmode			= (int) @$_GET['diffmode'];
 $notification		= (int) ($_GET['notification'] ?? 0);
-$hide_minor_edit	= (int) @$_GET['minor_edit'];
+$hide_minor_edit	= (bool) ($_GET['minor_edit'] ?? false);
 
 if ($a < 0) $a = 0;
 if ($b < 0) $b = 0;
@@ -219,7 +219,7 @@ if ($page_a && $page_b
 					? $tpl->deleted_email	= true
 					: $tpl->deleted_browser	= true;
 				$tpl->deleted_diff  = $source
-					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", 1) . '</pre>'
+					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", true) . '</pre>'
 					: $this->format(implode("\n", $deleted), 'wiki', ['post_wacko' => true]);
 			}
 

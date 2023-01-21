@@ -44,9 +44,14 @@ if ($action === 'extended_properties')
 
 if ($action === 'general_properties')
 {
-	$page_lang	= $this->validate_language($_POST['page_lang']);
+	$page_lang		= $this->validate_language($_POST['page_lang']);
 	// accepts also empty theme (uses then global theme)
-	$theme		= $_POST['theme'] ? $this->validate_theme($_POST['theme']) : '';
+	$theme			= $_POST['theme'] ? $this->validate_theme($_POST['theme']) : '';
+
+	#$menu_tag		= $this->sanitize_text_field($_POST['menu_tag'], true);
+	$title			= $this->sanitize_text_field($_POST['title'], true);
+	$keywords		= $this->sanitize_text_field($_POST['keywords'], true);
+	$description	= $this->sanitize_text_field($_POST['description'], true);
 
 	$this->db->sql_query(
 		"UPDATE " . $this->prefix . "page SET " .
@@ -54,11 +59,11 @@ if ($action === 'general_properties')
 			"theme				= " . $this->db->q($theme) . ", " .
 			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
-			# "menu_tag			= " . $this->db->q($this->sanitize_text_field($_POST['menu_tag'], true)) . ", " .
+			# "menu_tag			= " . $this->db->q($menu_tag) . ", " .
 			# "show_menu_tag	= " . (int) $_POST['show_menu_tag'] . ", " .
-			"title				= " . $this->db->q($this->sanitize_text_field($_POST['title'], true)) . ", " .
-			"keywords			= " . $this->db->q($this->sanitize_text_field($_POST['keywords'], true)) . ", " .
-			"description		= " . $this->db->q($this->sanitize_text_field($_POST['description'], true)) . " " .
+			"title				= " . $this->db->q($title) . ", " .
+			"keywords			= " . $this->db->q($keywords) . ", " .
+			"description		= " . $this->db->q($description) . " " .
 		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"LIMIT 1");
 }
@@ -123,7 +128,7 @@ else
 		$tpl->enter('g_f_');
 		$tpl->page = $this->page;
 
-		if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
+		if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], true))
 		{
 			$tpl->categories_html = $categories;
 		}

@@ -51,7 +51,7 @@ if (   $this->is_owner()
 		if (isset($_POST['save']))
 		{
 			// clear old list
-			$this->remove_category_assigments($this->page['page_id'], OBJECT_PAGE);
+			$this->remove_category_assignments($this->page['page_id'], OBJECT_PAGE);
 
 			// save new list
 			$this->save_categories_list($this->page['page_id'], OBJECT_PAGE);

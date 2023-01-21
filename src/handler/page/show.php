@@ -145,7 +145,7 @@ if ($this->has_access('read'))
 			// revision navigation
 			$tpl->enter('nav_');
 
-			[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], 0, $this->is_admin());
+			[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], false, $this->is_admin());
 
 			$revision_menu = function ($side) use ($revisions, &$tpl)
 			{
@@ -297,7 +297,7 @@ if ($this->forum
 		&&  $this->db->footer_tags == 1
 		|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
-	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
+	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], true))
 	{
 		$tpl->p_category		= $categories;
 	}

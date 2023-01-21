@@ -240,8 +240,8 @@ class WackoFormatter
 				'<!--/notypo--><!--escaped-->';
 		}
 		// formatter text  %%...%% and ``...``
-		else if ( preg_match('/^``(.*)``$/us',		$thing, $matches1)
-				| preg_match('/^\%\%(.*)\%\%$/us',	$thing, $matches2))
+		else if (  preg_match('/^``(.*)``$/us',		$thing, $matches1)
+				|| preg_match('/^\%\%(.*)\%\%$/us',	$thing, $matches2))
 		{
 			// check if a formatter has been specified
 			$code = $matches1[1] ?? $matches2[1];
@@ -900,7 +900,7 @@ class WackoFormatter
 				$caption = 2;
 			}
 			#Diag::dbg('GOLD', ' ::fileimg:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
-			return $wacko->pre_link($thing, '', 1, $caption);
+			return $wacko->pre_link($thing, '', true, $caption);
 		}
 		// interwiki links
 		else if (preg_match('/^([[:alnum:]]+:[' . $wacko->lang['ALPHANUM_P'] . '\!\.][' . $wacko->lang['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))

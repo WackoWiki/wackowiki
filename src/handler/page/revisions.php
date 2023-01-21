@@ -16,11 +16,11 @@ $this->ensure_page(true);
 // show minor edits
 if ($this->db->minor_edit)
 {
-	$hide_minor_edit = (int) ($_GET['minor_edit'] ?? 0);
+	$hide_minor_edit = (bool) ($_GET['minor_edit'] ?? false);
 }
 else
 {
-	$hide_minor_edit = 0;
+	$hide_minor_edit = false;
 }
 
 // show deleted pages

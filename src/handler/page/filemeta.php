@@ -149,7 +149,7 @@ if ($action && !empty($file))
 		// 1.b UPDATE FILE CATEGORIES ASSIGNMENTS
 
 		// clear old list
-		$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+		$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
 
 		// save new list
 		$this->save_categories_list($file['file_id'], OBJECT_FILE);
