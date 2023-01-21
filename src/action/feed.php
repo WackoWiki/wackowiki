@@ -178,7 +178,7 @@ else
 		$tpl->enter('i_');
 
 		// go through all of the items in the feed
-		foreach ($feed->get_items($pagination['offset'], $max) as $item)
+		foreach ($feed->get_items($pagination['offset'], (int) $max) as $item)
 		{
 			if ($item->get_date())
 			{
