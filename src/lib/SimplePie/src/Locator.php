@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * @package SimplePie
  * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
@@ -19,7 +21,7 @@ namespace SimplePie;
  *
  * @package SimplePie
  */
-class Locator
+class Locator implements RegistryAware
 {
     public $useragent;
     public $timeout;
@@ -61,7 +63,7 @@ class Locator
         }
     }
 
-    public function set_registry(\SimplePie\Registry $registry)
+    public function set_registry(\SimplePie\Registry $registry)/* : void */
     {
         $this->registry = $registry;
     }
@@ -73,7 +75,7 @@ class Locator
         }
 
         if ($this->file->method & \SimplePie\SimplePie::FILE_SOURCE_REMOTE) {
-            $sniffer = $this->registry->create('Content_Type_Sniffer', [$this->file]);
+            $sniffer = $this->registry->create(Content\Type\Sniffer::class, [$this->file]);
             if ($sniffer->get_type() !== 'text/html') {
                 return null;
             }
@@ -110,7 +112,7 @@ class Locator
     public function is_feed($file, $check_html = false)
     {
         if ($file->method & \SimplePie\SimplePie::FILE_SOURCE_REMOTE) {
-            $sniffer = $this->registry->create('Content_Type_Sniffer', [$file]);
+            $sniffer = $this->registry->create(Content\Type\Sniffer::class, [$file]);
             $sniffed = $sniffer->get_type();
             $mime_types = ['application/rss+xml', 'application/rdf+xml',
                                 'text/rdf', 'application/atom+xml', 'text/xml',
@@ -137,7 +139,7 @@ class Locator
         $elements = $this->dom->getElementsByTagName('base');
         foreach ($elements as $element) {
             if ($element->hasAttribute('href')) {
-                $base = $this->registry->call('Misc', 'absolutize_url', [trim($element->getAttribute('href')), $this->http_base]);
+                $base = $this->registry->call(Misc::class, 'absolutize_url', [trim($element->getAttribute('href')), $this->http_base]);
                 if ($base === false) {
                     continue;
                 }
@@ -175,24 +177,24 @@ class Locator
                 break;
             }
             if ($link->hasAttribute('href') && $link->hasAttribute('rel')) {
-                $rel = array_unique($this->registry->call('Misc', 'space_separated_tokens', [strtolower($link->getAttribute('rel'))]));
+                $rel = array_unique($this->registry->call(Misc::class, 'space_separated_tokens', [strtolower($link->getAttribute('rel'))]));
                 $line = method_exists($link, 'getLineNo') ? $link->getLineNo() : 1;
 
                 if ($this->base_location < $line) {
-                    $href = $this->registry->call('Misc', 'absolutize_url', [trim($link->getAttribute('href')), $this->base]);
+                    $href = $this->registry->call(Misc::class, 'absolutize_url', [trim($link->getAttribute('href')), $this->base]);
                 } else {
-                    $href = $this->registry->call('Misc', 'absolutize_url', [trim($link->getAttribute('href')), $this->http_base]);
+                    $href = $this->registry->call(Misc::class, 'absolutize_url', [trim($link->getAttribute('href')), $this->http_base]);
                 }
                 if ($href === false) {
                     continue;
                 }
 
-                if (!in_array($href, $done) && in_array('feed', $rel) || (in_array('alternate', $rel) && !in_array('stylesheet', $rel) && $link->hasAttribute('type') && in_array(strtolower($this->registry->call('Misc', 'parse_mime', [$link->getAttribute('type')])), ['text/html', 'application/rss+xml', 'application/atom+xml'])) && !isset($feeds[$href])) {
+                if (!in_array($href, $done) && in_array('feed', $rel) || (in_array('alternate', $rel) && !in_array('stylesheet', $rel) && $link->hasAttribute('type') && in_array(strtolower($this->registry->call(Misc::class, 'parse_mime', [$link->getAttribute('type')])), ['text/html', 'application/rss+xml', 'application/atom+xml'])) && !isset($feeds[$href])) {
                     $this->checked_feeds++;
                     $headers = [
                         'Accept' => 'application/atom+xml, application/rss+xml, application/rdf+xml;q=0.9, application/xml;q=0.8, text/xml;q=0.8, text/html;q=0.7, unknown/unknown;q=0.1, application/unknown;q=0.1, */*;q=0.1',
                     ];
-                    $feed = $this->registry->create('File', [$href, $this->timeout, 5, $headers, $this->useragent, $this->force_fsockopen, $this->curl_options]);
+                    $feed = $this->registry->create(File::class, [$href, $this->timeout, 5, $headers, $this->useragent, $this->force_fsockopen, $this->curl_options]);
                     if ($feed->success && ($feed->method & \SimplePie\SimplePie::FILE_SOURCE_REMOTE === 0 || ($feed->status_code === 200 || $feed->status_code > 206 && $feed->status_code < 300)) && $this->is_feed($feed, true)) {
                         $feeds[$href] = $feed;
                     }
@@ -214,18 +216,18 @@ class Locator
         foreach ($links as $link) {
             if ($link->hasAttribute('href')) {
                 $href = trim($link->getAttribute('href'));
-                $parsed = $this->registry->call('Misc', 'parse_url', [$href]);
+                $parsed = $this->registry->call(Misc::class, 'parse_url', [$href]);
                 if ($parsed['scheme'] === '' || preg_match('/^(https?|feed)?$/i', $parsed['scheme'])) {
                     if (method_exists($link, 'getLineNo') && $this->base_location < $link->getLineNo()) {
-                        $href = $this->registry->call('Misc', 'absolutize_url', [trim($link->getAttribute('href')), $this->base]);
+                        $href = $this->registry->call(Misc::class, 'absolutize_url', [trim($link->getAttribute('href')), $this->base]);
                     } else {
-                        $href = $this->registry->call('Misc', 'absolutize_url', [trim($link->getAttribute('href')), $this->http_base]);
+                        $href = $this->registry->call(Misc::class, 'absolutize_url', [trim($link->getAttribute('href')), $this->http_base]);
                     }
                     if ($href === false) {
                         continue;
                     }
 
-                    $current = $this->registry->call('Misc', 'parse_url', [$this->file->url]);
+                    $current = $this->registry->call(Misc::class, 'parse_url', [$this->file->url]);
 
                     if ($parsed['authority'] === '' || $parsed['authority'] === $current['authority']) {
                         $this->local[] = $href;
@@ -258,26 +260,22 @@ class Locator
         $query = '//a[@rel and @href] | //link[@rel and @href]';
         foreach ($xpath->query($query) as $link) {
             $href = trim($link->getAttribute('href'));
-            $parsed = $this->registry->call('Misc', 'parse_url', [$href]);
+            $parsed = $this->registry->call(Misc::class, 'parse_url', [$href]);
             if ($parsed['scheme'] === '' ||
                 preg_match('/^https?$/i', $parsed['scheme'])) {
                 if (method_exists($link, 'getLineNo') &&
                     $this->base_location < $link->getLineNo()) {
-                    $href =
-                        $this->registry->call(
-                            'Misc',
-                            'absolutize_url',
-                            [trim($link->getAttribute('href')),
-                                                    $this->base]
-                        );
+                    $href = $this->registry->call(
+                        Misc::class,
+                        'absolutize_url',
+                        [trim($link->getAttribute('href')), $this->base]
+                    );
                 } else {
-                    $href =
-                        $this->registry->call(
-                            'Misc',
-                            'absolutize_url',
-                            [trim($link->getAttribute('href')),
-                                                    $this->http_base]
-                        );
+                    $href = $this->registry->call(
+                        Misc::class,
+                        'absolutize_url',
+                        [trim($link->getAttribute('href')), $this->http_base]
+                    );
                 }
                 if ($href === false) {
                     return null;
@@ -303,7 +301,7 @@ class Locator
                 $headers = [
                     'Accept' => 'application/atom+xml, application/rss+xml, application/rdf+xml;q=0.9, application/xml;q=0.8, text/xml;q=0.8, text/html;q=0.7, unknown/unknown;q=0.1, application/unknown;q=0.1, */*;q=0.1',
                 ];
-                $feed = $this->registry->create('File', [$value, $this->timeout, 5, $headers, $this->useragent, $this->force_fsockopen, $this->curl_options]);
+                $feed = $this->registry->create(File::class, [$value, $this->timeout, 5, $headers, $this->useragent, $this->force_fsockopen, $this->curl_options]);
                 if ($feed->success && ($feed->method & \SimplePie\SimplePie::FILE_SOURCE_REMOTE === 0 || ($feed->status_code === 200 || $feed->status_code > 206 && $feed->status_code < 300)) && $this->is_feed($feed)) {
                     return [$feed];
                 } else {
@@ -325,7 +323,7 @@ class Locator
                 $headers = [
                     'Accept' => 'application/atom+xml, application/rss+xml, application/rdf+xml;q=0.9, application/xml;q=0.8, text/xml;q=0.8, text/html;q=0.7, unknown/unknown;q=0.1, application/unknown;q=0.1, */*;q=0.1',
                 ];
-                $feed = $this->registry->create('File', [$value, $this->timeout, 5, null, $this->useragent, $this->force_fsockopen, $this->curl_options]);
+                $feed = $this->registry->create(File::class, [$value, $this->timeout, 5, null, $this->useragent, $this->force_fsockopen, $this->curl_options]);
                 if ($feed->success && ($feed->method & \SimplePie\SimplePie::FILE_SOURCE_REMOTE === 0 || ($feed->status_code === 200 || $feed->status_code > 206 && $feed->status_code < 300)) && $this->is_feed($feed)) {
                     return [$feed];
                 } else {
