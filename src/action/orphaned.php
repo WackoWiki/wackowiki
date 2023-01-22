@@ -74,7 +74,7 @@ if ([$pages, $pagination] = $load_orphaned_pages($tag, $max))
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				$tpl->l_link = $this->link('/' . $page['tag'], '', '', '', 0);
+				$tpl->l_link = $this->link('/' . $page['tag'], '', '', '', false);
 			}
 		}
 	}

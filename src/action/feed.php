@@ -114,7 +114,7 @@ else
 
 				if ($title != '' && $count_feeds == 1)
 				{
-					$tpl->header	= $this->link($feed->get_permalink(), '', $title, '', 0, 1);
+					$tpl->header	= $this->link($feed->get_permalink(), '', $title, '', false, true);
 					$tpl->class		= $class;
 				}
 				if ($title != '' && $count_feeds > 1)
@@ -123,7 +123,7 @@ else
 				}
 				else if (!$title && $count_feeds == 1)
 				{
-					$tpl->header	= $this->link($feed->get_permalink(), '', $feed->get_title(), '', 0, 1);
+					$tpl->header	= $this->link($feed->get_permalink(), '', $feed->get_title(), '', false, true);
 					$tpl->class		= $class;
 				}
 				else if (!$title && $count_feeds > 1)
@@ -139,7 +139,7 @@ else
 				if ($title != '' && $count_feeds == 1)
 				{
 					$tpl->header	= $this->_t('FeedTitle');
-					$tpl->title		= $this->link($feed->get_permalink(), '', $title, '', 0, 1);
+					$tpl->title		= $this->link($feed->get_permalink(), '', $title, '', false, true);
 				}
 
 				if ($title != '' && $count_feeds > 1)
@@ -150,7 +150,7 @@ else
 				else if (!$title && $count_feeds == 1)
 				{
 					$tpl->header	= $this->_t('FeedTitle');
-					$tpl->title		= $this->link($feed->get_permalink(), '', $feed->get_title(), '', 0, 1);
+					$tpl->title		= $this->link($feed->get_permalink(), '', $feed->get_title(), '', false, true);
 				}
 				else if (!$title && $count_feeds > 1)
 				{
@@ -196,7 +196,7 @@ else
 			}
 
 			// headline
-			$tpl->link		= $this->link($item->get_permalink(), '', $item->get_title(), '', 0, 1);
+			$tpl->link		= $this->link($item->get_permalink(), '', $item->get_title(), '', false, true);
 
 			if ($count_feeds > 1)
 			{

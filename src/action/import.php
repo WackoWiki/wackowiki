@@ -89,7 +89,7 @@ if ($this->is_admin())
 					$this->current_context--;
 
 					// summary link
-					$tpl->i_l_page = $this->link('/' . $tag, '', '', '', 0);
+					$tpl->i_l_page = $this->link('/' . $tag, '', '', '', false);
 
 					// log import
 					$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag . ' ' . $title));

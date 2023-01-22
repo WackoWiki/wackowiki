@@ -111,7 +111,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 		if ($tag)
 		{
-			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', 0);
+			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', false);
 			$tpl->mark_cluster	= $this->_t('CategoriesOfCluster');
 		}
 	}
@@ -164,7 +164,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 				}
 				else
 				{
-					$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+					$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
 
 					if ($sort == 'date')
 					{
@@ -208,7 +208,7 @@ if (!$ids)
 
 		if ($tag)
 		{
-			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', 0);
+			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', false);
 			$tpl->mark_cluster	= $this->_t('CategoriesOfCluster');
 		}
 	}

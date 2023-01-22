@@ -112,7 +112,7 @@ if ($tags)
 
 		if ($tag)
 		{
-			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', 0);
+			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', false);
 			$tpl->mark_cluster	= $this->_t('CategoriesOfCluster');
 		}
 	}

@@ -412,7 +412,7 @@ if (mb_strlen($phrase) >= 3)
 						$preview	= $context;
 					}
 
-					$tpl->l_link		= $this->link('/' . $page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '');
+					$tpl->l_link		= $this->link('/' . $page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', false);
 					$tpl->l_userlink	= $this->user_link($page['user_name'], false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);

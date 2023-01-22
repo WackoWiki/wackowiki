@@ -164,7 +164,7 @@ $check_ref = function ($ref)
 	{
 		$this->page_id_cache[$ref['tag']] = $page_id;
 
-		$link = $this->link('/' . $ref['tag'], '', $ref['title'], '', '', 1, 0);
+		$link = $this->link('/' . $ref['tag'], '', $ref['title'], '', false, true, false);
 	}
 
 	return $link;

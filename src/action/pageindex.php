@@ -223,10 +223,10 @@ foreach ($pages_to_display as $page)
 
 	if ($title)
 	{
-		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0);
+		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['title'], '', false, true, false);
 	}
 	else
 	{
-		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0);
+		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], false, true, false);
 	}
 }

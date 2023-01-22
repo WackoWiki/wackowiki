@@ -225,7 +225,7 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-					echo $this->link('/' . $page['tag'], '', $link_text, '', 0, 1, 0);
+					echo $this->link('/' . $page['tag'], '', $link_text, '', false, true, false);
 				}
 
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '</strong>';

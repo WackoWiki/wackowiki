@@ -163,7 +163,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 					$tpl->closed	= true;
 				}
 
-				$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '');
+				$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', false);
 				$tpl->description	= $forum['description'];
 
 				if ($comment)

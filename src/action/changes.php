@@ -67,8 +67,8 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 				);
 			$tpl->l_page =
 				($title == 1
-					? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0)
-					: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0)
+					? $this->link('/' . $page['tag'], '', $page['title'], '', false, true, false)
+					: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], false, true, false)
 				);
 
 			$tpl->l_user = $this->user_link($page['user_name'], true, false);

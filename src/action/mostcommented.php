@@ -149,11 +149,11 @@ if (!empty($pages))
 
 			if ($title == 1)
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0);
+				$_link = $this->link('/' . $page['tag'], '', $page['title'], '', false, true, false);
 			}
 			else
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0);
+				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], false, true, false);
 			}
 
 			$tpl->l_num			= $num;

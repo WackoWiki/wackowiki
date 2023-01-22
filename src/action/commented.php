@@ -135,8 +135,8 @@ if ($this->user_allowed_comments())
 					// print entry
 					$tpl->l_time = $time;
 					$tpl->l_page = ($title
-						? $this->link('/' . $page['comment_tag'], '', $page['page_title'], '', 0, 1, 0)
-						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0)
+						? $this->link('/' . $page['comment_tag'], '', $page['page_title'], '', false, true, false)
+						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], false, false)
 					);
 
 					$tpl->l_user = $this->user_link($page['comment_owner_name'], true, false);
