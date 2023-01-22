@@ -148,7 +148,6 @@ $wacko_config_defaults = [
 	'groups_page'					=> 'Groups',
 	'users_page'					=> 'Users',
 	'category_page'					=> 'Category',
-	'tag_page'						=> 'Tag',
 
 	'help_page'						=> '',	// Help
 	'terms_page'					=> '',	// Terms

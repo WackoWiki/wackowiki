@@ -189,7 +189,6 @@ $config_db['standard_handlers']				= $config['standard_handlers'];
 $config_db['store_deleted_pages']			= $config['store_deleted_pages'];
 $config_db['system_message']				= $config['system_message'];
 $config_db['system_message_type']			= $config['system_message_type'];
-$config_db['tag_page']						= $config['tag_page'];
 $config_db['terms_page']					= $config['terms_page'];
 $config_db['theme']							= $config['theme'];
 $config_db['theme_color']					= $config['theme_color'];
