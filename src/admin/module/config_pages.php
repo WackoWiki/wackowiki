@@ -382,18 +382,6 @@ function admin_config_pages($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="tag_page"><strong><?php echo $engine->_t('TagPage');?></strong><br>
-					<small><?php echo Ut::perc_replace($engine->_t('TagPageInfo'), '<code>{{tag}}</code>');?></small></label>
-				</td>
-				<td>
-					<input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo Ut::html($engine->db->tag_page);?>">
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
 					<label for="groups_page"><strong><?php echo $engine->_t('GroupsPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('GroupsPageInfo'), '<code>{{usergroups}}</code>');?></small></label>
 				</td>
