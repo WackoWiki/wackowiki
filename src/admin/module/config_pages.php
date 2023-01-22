@@ -70,7 +70,6 @@ function admin_config_pages($engine, $module)
 		$config['password_page']			= (string) $sanitize_tag($_POST['password_page']);
 		$config['users_page']				= (string) $sanitize_tag($_POST['users_page']);
 		$config['category_page']			= (string) $sanitize_tag($_POST['category_page']);
-		$config['tag_page']					= (string) $sanitize_tag($_POST['tag_page']);
 		$config['groups_page']				= (string) $sanitize_tag($_POST['groups_page']);
 		$config['changes_page']				= (string) $sanitize_tag($_POST['changes_page']);
 		$config['comments_page']			= (string) $sanitize_tag($_POST['comments_page']);

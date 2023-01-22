@@ -143,11 +143,10 @@ $wacko_config_defaults = [
 	'enable_license'				=> 0,
 	'allow_license_per_page'		=> 0,
 
-	// default pages (replaced by lang value in installer.xy.php)
+	// default pages (replaced by lang value in installer.<lang>.php)
 	'groups_page'					=> 'Groups',
 	'users_page'					=> 'Users',
 	'category_page'					=> 'Category',
-	'tag_page'						=> 'Tag',
 
 	'help_page'						=> '',	// Help
 	'terms_page'					=> '',	// Terms
@@ -166,6 +165,17 @@ $wacko_config_defaults = [
 	'account_page'					=> 'Account',
 	'registration_page'				=> 'Registration',
 	'password_page'					=> 'Password',
+
+	// special namespaces (clusters)
+	'forum_cluster'					=> 'Forum',
+	'forum_topics'					=> 10,
+	'comments_count'				=> 10,
+	'list_count'					=> 50,
+	'menu_items'					=> 5,
+
+	'news_cluster'					=> 'News',
+	'news_levels'					=> '',
+	'news_structure'				=> '',
 
 	'default_write_acl'				=> '$',
 	'default_read_acl'				=> '*',
@@ -204,16 +214,6 @@ $wacko_config_defaults = [
 	'img_max_thumb_width'			=> 150,
 
 	'enable_feeds'					=> 1,
-
-	'forum_cluster'					=> 'Forum',
-	'forum_topics'					=> 10,
-	'comments_count'				=> 10,
-	'list_count'					=> 50,
-	'menu_items'					=> 5,
-
-	'news_cluster'					=> '',
-	'news_levels'					=> '',
-	'news_structure'				=> '',
 
 	'noindex'						=> 0,
 	'opensearch'					=> 0,
