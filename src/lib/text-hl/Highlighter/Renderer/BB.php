@@ -70,7 +70,7 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 	/**
 	 * Line numbering - will use the specified BB tag for listings
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	public bool $_numbers = false;
 
@@ -96,7 +96,7 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 	/**
 	 * Colors map
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	public $_colors = [
 		'default'		=> 'Black',

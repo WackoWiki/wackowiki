@@ -26,7 +26,7 @@ switch ($default)
 {
 	case 'wacko':
 		// strip comments
-		$text = preg_replace('/(\n?)%%\((comment)\).*?%%([\n\r]*)/uims', '', $text);
+		$text = preg_replace('/\n?(%%\(comment\).*?%%|``\(comment\).*?``)([\n\r]*)/uims', '', $text);
 		$text = Ut::html($text, false);
 
 		// prepare a text to the conclusion

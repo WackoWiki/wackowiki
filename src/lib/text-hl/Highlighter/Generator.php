@@ -71,7 +71,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * We have to declare it here, because XML_Parser
 	 * sets case folding in constructor
 	 *
-	 * @var  boolean
+	 * @var  bool
 	 */
 	public $folding = false;
 
@@ -158,7 +158,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	/**
 	 * Flag for comment processing
 	 *
-	 * @var boolean
+	 * @var bool
 	 * @access private
 	 */
 	private $_inComment = false;
@@ -166,7 +166,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	/**
 	 * Sorting order of current block/region
 	 *
-	 * @var integer
+	 * @var int
 	 * @access private
 	 */
 	private $_blockOrder = 0;
@@ -281,7 +281,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * Sets the input xml file to be parsed
 	 *
 	 * @param	string	  Filename (full path)
-	 * @return   boolean
+	 * @return   bool
 	 * @access   public
 	 */
 	function setInputFile($file)
@@ -358,7 +358,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * is located in Text/Highlighter
 	 *
 	 * @param string $filename Name of file to write the code to
-	 * @return boolean true on success, false on failure
+	 * @return bool true on success, false on failure
 	 * @access public
 	 */
 
@@ -385,7 +385,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	/**
 	 * Reports if there were errors
 	 *
-	 * @return boolean
+	 * @return bool
 	 * @access public
 	 */
 
@@ -891,9 +891,9 @@ class Text_Highlighter_Generator extends  XML_Parser
 	/**
 	 * Add an error message
 	 *
-	 * @param integer $code Error code
+	 * @param int $code Error code
 	 * @param mixed   $message Error message or array with error message parameters
-	 * @param integer $lineNo Source code line number
+	 * @param int $lineNo Source code line number
 	 * @access private
 	 */
 	function _error($code, $params = [], $lineNo = 0)

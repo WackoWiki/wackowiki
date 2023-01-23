@@ -3497,7 +3497,7 @@ class Wacko
 
 		if (!$safe)
 		{
-			$text	= htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);	// TODO: Notice: expects parameter 1 to be string, array given
+			$text	= htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 			$title	= htmlspecialchars($title, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 		}
 

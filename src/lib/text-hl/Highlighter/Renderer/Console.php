@@ -54,14 +54,14 @@ class Text_Highlighter_Renderer_Console extends Text_Highlighter_Renderer
 	/**
 	 * Line numbering
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	public $_numbers = false;
 
 	/**
 	 * Tab size
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	public $_tabsize = 4;
 

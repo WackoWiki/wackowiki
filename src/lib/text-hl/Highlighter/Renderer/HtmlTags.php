@@ -63,7 +63,7 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 	/**
 	 * Line numbering - will use 'ol' tag
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	public $_numbers = false;
 
