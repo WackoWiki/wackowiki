@@ -10,7 +10,7 @@
  * More ideas are taken from:
  *   http://www.ics.uci.edu/~eppstein/161/960229.html
  *
- * Some ideas are (and a bit of code) are from from analyze.c, from GNU
+ * Some ideas are (and a bit of code) are from analyze.c, from GNU
  * diffutils-2.7, which can be found at:
  *   ftp://gnudist.gnu.org/pub/gnu/diffutils/diffutils-2.7.tar.gz
  *
@@ -68,7 +68,7 @@ class DiffEngine
 		for ($yi = $skip; $yi < $n_to - $endskip; $yi++)
 		{
 			$line = $to_lines[$yi];
-			if ( ($this->ychanged[$yi] = empty($xhash[$line])) )
+			if ($this->ychanged[$yi] = empty($xhash[$line]))
 			{
 				continue;
 			}
@@ -80,7 +80,7 @@ class DiffEngine
 		for ($xi = $skip; $xi < $n_from - $endskip; $xi++)
 		{
 			$line = $from_lines[$xi];
-			if ( ($this->xchanged[$xi] = empty($yhash[$line])) )
+			if ($this->xchanged[$xi] = empty($yhash[$line]))
 			{
 				continue;
 			}

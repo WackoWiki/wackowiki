@@ -3,7 +3,7 @@
 *
 *     freeCap v1.4.5 Copyright
 *     2005 Howard Yeend (solidred.co.uk),
-*     2008 - 2022 WackoWiki Team
+*     2008 - 2023 WackoWiki Team
 *
 *    This file is part of freeCap.
 *

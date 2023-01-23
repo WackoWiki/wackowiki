@@ -1,3 +1,4 @@
 <?php
-//comments
-# echo "<!--notypo--><!-- " . str_replace('-->', '--&gt;', $text) . " --><!--/notypo-->";
+
+//comment
+# echo '<!--notypo--><!-- ' . str_replace('-->', '--&gt;', $text) . ' --><!--/notypo-->';

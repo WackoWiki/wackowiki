@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 
 	The sole condition is that all the images must be exactly the same size.
 
-	version: 0.7
+	version: 0.8
 
 	{{imageslider
 		[page="PageName" or global=1]
@@ -25,11 +25,11 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
+// set defaults
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;
 if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
-if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
 if (!isset($media))		$media		= 1;
 if (!isset($max))		$max		= null;
@@ -110,7 +110,7 @@ if ($can_view)
 	}
 	else
 	{
-		$filepage = $this->load_page($tag);
+		$filepage = $this->load_page($tag, 0, null, LOAD_CACHE, LOAD_META);
 	}
 
 	if (!$global && !isset($filepage['page_id']))
@@ -126,9 +126,7 @@ if ($can_view)
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '') .
-			($deleted != 1
-				? "AND f.deleted <> 1 "
-				: "");
+			"AND f.deleted <> 1 ";
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .
@@ -330,12 +328,12 @@ if ($can_view)
 	}
 	else
 	{
-		echo '<em>' . $this->_t('FileNotFound') . '</em>';
+		echo $this->_t('FileNotFound');
 	}
 
 	unset($files);
 }
 else
 {
-	echo '<em>' . $this->_t('ActionDenied') . '</em>';
+	echo $this->_t('ActionDenied');
 }

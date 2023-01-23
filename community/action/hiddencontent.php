@@ -1,8 +1,14 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
 	{{Hidden Content Wrapper
 
-	Version 1.3
+	Version 1.4
 	David Millington aka Tann San
 
 	Shows hidden content based on user group or user name
@@ -16,11 +22,8 @@
 	}}
 	*/
 
-if (!defined('IN_WACKO'))
-{
-	exit;
-}
 
+// set defaults
 if (!isset($usergroup))	$usergroup	= '';
 if (!isset($username))	$username	= '';
 if (!isset($text))		$text		= '';

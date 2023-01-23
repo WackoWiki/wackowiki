@@ -14,8 +14,7 @@ $text = preg_replace('/\n\\t+/u', "\n", $text);
 $text = preg_replace('/(?:\\n){2,}/u', "\n", $text);
 
 // remove tags <br>
-#$text = str_replace('<br>', '', $text);
-$text = preg_replace('/<br>/u', "\n", $text);
+$text = str_replace('<br>', "\n", $text);
 
 // HTML email filters (text/html)
 if (isset($options['text_html']))
