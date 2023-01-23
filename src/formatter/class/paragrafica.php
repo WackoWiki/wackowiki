@@ -21,14 +21,13 @@ class Paragrafica
 	public array $t1			= [ // terminators like <-t>$1
 		[
 			// rightinators
-			'!(<(o|u)l)!si',
+			'!(<(d|o|u)l)!si',
 			'!(<address)!si',
 			'!(<article)!si',
 			'!(<aside)!si',
 			'!(<blockquote)!si',
 			'!(<details)!si',
 			'!(<div)!si',
-			'!(<dl)!si',
 			'!(<fieldset)!si',
 			'!(<figcaption)!si',
 			'!(<figure)!si',
@@ -61,14 +60,13 @@ class Paragrafica
 	public array $t2			= [ // terminators like $1<t->
 		[
 			// rightinators
-			'!(</(o|u)l>)!si',
+			'!(</(d|o|u)l>)!si',
 			'!(</address>)!si',
 			'!(</article>)!si',
 			'!(</aside>)!si',
 			'!(</blockquote>)!si',
 			'!(</details>)!si',
 			'!(</div>)!si',
-			'!(</dl>)!si',
 			'!(</fieldset>)!si',
 			'!(</figcaption>)!si',
 			'!(</figure>)!si',
