@@ -814,7 +814,7 @@ class Wacko
 	* @param int		$metadata_only	If LOAD_ALL loads all page fields including page body, if LOAD_META - only page_meta fields.
 	* @param bool		$deleted
 	*
-	* @return array Loaded page
+	* @return array|null				Loaded page
 	*/
 	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = false): ?array
 	{
@@ -3535,7 +3535,7 @@ class Wacko
 		{
 			$href	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
 			$title	= $this->_t('EmailLink');
-			$icon	= $this->_t('OuterIcon');
+			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'email';
 		}
@@ -3544,7 +3544,7 @@ class Wacko
 		{
 			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
 			$title	= $this->_t('JabberLink');
-			$icon	= $this->_t('OuterIcon');
+			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'jabber';
 		}
@@ -3568,7 +3568,7 @@ class Wacko
 			{
 				$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 				$title	= $this->_t('OuterLink2');
-				$icon	= $this->_t('OuterIcon');
+				$icon	= $this->_t('Icon.Outer');
 				$tpl	= 'outerlink';
 			}
 		}
@@ -3577,7 +3577,7 @@ class Wacko
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('FileLink');
-			$icon	= $this->_t('OuterIcon');
+			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3586,7 +3586,7 @@ class Wacko
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('PDFLink');
-			$icon	= $this->_t('OuterIcon');
+			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3595,7 +3595,7 @@ class Wacko
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('RDFLink');
-			$icon	= $this->_t('OuterIcon');
+			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3608,7 +3608,7 @@ class Wacko
 			if (!mb_stristr($tag, $this->db->base_url))
 			{
 				$title	= $this->_t('OuterLink2');
-				$icon	= $this->_t('OuterIcon');
+				$icon	= $this->_t('Icon.Outer');
 			}
 		}
 		// local file -> file:image.png
@@ -3704,7 +3704,7 @@ class Wacko
 					$width		= '';
 					$height		= '';
 					$img_link	= false;
-					$icon		= $this->_t('OuterIcon');
+					$icon		= $this->_t('Icon.Outer');
 					$tpl		= 'localfile';
 
 					// media it is
@@ -3779,7 +3779,7 @@ class Wacko
 									break;
 								case 'linkonly':
 									$href	= $src; // assumes direct link
-									$icon	= $this->_t('OuterIcon');
+									$icon	= $this->_t('Icon.Outer');
 									$tpl	= 'localfile';
 									$text	= $file_data['file_name'];
 									break;
@@ -3855,7 +3855,7 @@ class Wacko
 				else //403
 				{
 					$href		= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_name]);
-					$icon		= $this->_t('OuterIcon');
+					$icon		= $this->_t('Icon.Outer');
 					$img_link	= false;
 					$tpl		= 'localfile';
 					$class		= 'acl-denied';
@@ -3891,7 +3891,7 @@ class Wacko
 			$href	= $this->href('', $this->db->users_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'user-link';
-			$icon	= $this->_t('OuterIcon');
+			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'userlink';
 		}
 		// group link -> group:UserGroup
@@ -3907,7 +3907,7 @@ class Wacko
 			$href	= $this->href('', $this->db->groups_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'group-link';
-			$icon	= $this->_t('OuterIcon');
+			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'grouplink';
 		}
 		// interwiki -> wiki:page
@@ -3922,7 +3922,7 @@ class Wacko
 
 			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
 			$class	= 'iw-' . mb_strtolower($matches[1]);
-			$icon	= $this->_t('OuterIcon'); # $this->_t('IwIcon');
+			$icon	= $this->_t('Icon.Outer'); # $this->_t('Icon.Iw');
 			$tpl	= 'interwiki';
 		}
 		// wiki link
@@ -3971,28 +3971,28 @@ class Wacko
 
 			if (mb_substr($tag, 0, 2) == '!/')
 			{
-				$icon		= $this->_t('ChildIcon');
+				$icon		= $this->_t('Icon.Child');
 				$page0		= mb_substr($tag, 2);
 				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'childpage';
 			}
 			else if (mb_substr($tag, 0, 3) == '../')
 			{
-				$icon		= $this->_t('ParentIcon');
+				$icon		= $this->_t('Icon.Parent');
 				$page0		= mb_substr($tag, 3);
 				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'parentpage';
 			}
 			else if (mb_substr($tag, 0, 1) == '/')
 			{
-				$icon		= $this->_t('RootIcon');
+				$icon		= $this->_t('Icon.Root');
 				$page0		= mb_substr($tag, 1);
 				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'rootpage';
 			}
 			else
 			{
-				$icon		= $this->_t('EqualIcon');
+				$icon		= $this->_t('Icon.Equal');
 				$page0		= $tag;
 				$page		= $this->add_spaces($page0, true);
 				$tpl		= 'equalpage';
@@ -4068,7 +4068,7 @@ class Wacko
 				{
 					$class		= 'acl-denied';
 					$rel		= 'nofollow';
-					$accicon	= $this->_t('OuterIcon');
+					$accicon	= $this->_t('Icon.Outer');
 				}
 				else if (in_array('*', $acl))
 				{
@@ -4079,14 +4079,14 @@ class Wacko
 				{
 					$class		= 'acl-customsec';
 					$rel		= 'nofollow';
-					$accicon	= $this->_t('OuterIcon');
+					$accicon	= $this->_t('Icon.Outer');
 				}
 			}
 			else
 			{
 				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'wordprocessor') ? 'p' : '') . 'w' . $tpl;
 				$page_link	= $this->href('edit', $tag, $lang ? 'lang=' . $lang : '', 1);
-				$accicon	= $this->_t('WantedIcon');
+				$accicon	= $this->_t('Icon.Wanted');
 				$title		= $this->_t('CreatePage');
 			}
 
@@ -4400,7 +4400,7 @@ class Wacko
 
 	/**
 	* Add spaces to WikiWords (if config parameter show_spaces = 1) and replace
-	* relative  path (/ !/ ../) to icons RootLinkIcon, SubLinkIcon, UpLinkIcon
+	* relative  path (/ !/ ../) to icons Icon.RootLink, Icon.SubLink, Icon.UpLink
 	*
 	* @param	string		$text	Text with WikiWords
 	* @param	bool		$icon	adds Link icon as prefix
@@ -4418,15 +4418,15 @@ class Wacko
 		{
 			if (!strncmp($text, '/', 1))
 			{
-				$text = $this->_t('RootLinkIcon') . mb_substr($text, 1);
+				$text = $this->_t('Icon.RootLink') . mb_substr($text, 1);
 			}
 			else if (!strncmp($text, '!/', 2))
 			{
-				$text = $this->_t('SubLinkIcon') . mb_substr($text, 2);
+				$text = $this->_t('Icon.SubLink') . mb_substr($text, 2);
 			}
 			else if (!strncmp($text, '../', 3))
 			{
-				$text = $this->_t('UpLinkIcon') . mb_substr($text, 3);
+				$text = $this->_t('Icon.UpLink') . mb_substr($text, 3);
 			}
 		}
 
@@ -7168,7 +7168,7 @@ class Wacko
 				if (stristr($_SERVER['HTTP_USER_AGENT'], $engine))
 				{
 					$this->resource['OuterLink2']	= '';
-					$this->resource['OuterIcon']	= '';
+					$this->resource['Icon.Outer']	= '';
 				}
 			}
 		}
