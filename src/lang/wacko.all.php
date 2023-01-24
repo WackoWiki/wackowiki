@@ -46,7 +46,6 @@ $wacko_all_resource = [
 	'Icon.Parent'		=> '../',
 	'Icon.Equal'		=> '',
 	'Icon.Root'			=> '/',
-	#'Icon.Iw'			=> '',
 	'Icon.RootLink'		=> '/',
 	'Icon.SubLink'		=> '!/',
 	'Icon.UpLink'		=> '../',

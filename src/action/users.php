@@ -138,9 +138,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 			}
 
 			$allow_intercom = ($this->db->enable_email
-								&& $logged_in && $user['email']
-								&& ($this->is_admin()
-									|| ($user['allow_intercom'] && !$user['email_confirm'])));
+				&& $logged_in && $user['email']
+				&& (($this->is_admin() || $user['allow_intercom'])
+					&& !$user['email_confirm']));
 
 			// prepare and send personal message
 			if (@$_POST['_action'] === 'personal_message' && $allow_intercom && $_POST['mail_body'])
@@ -342,7 +342,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
 					{
 						$tpl->pages_li_created	= $page['created'];
-						$tpl->pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+						$tpl->pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
 					}
 				}
 			}
@@ -404,7 +404,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
 					{
 						$tpl->li_modified	= $page['modified'];
-						$tpl->li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+						$tpl->li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
 
 						if ($page['edit_note'])
 						{
@@ -464,7 +464,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
 						{
 							$tpl->c_li_created	= $comment['created'];
-							$tpl->c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1);
+							$tpl->c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], false, true);
 						}
 					}
 				}
@@ -543,7 +543,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 									$path2		= '_file:/' . $file['file_on_page'] . '/';
 									$on_tag		= $file['file_on_page'];
 									$on_page	= $this->_t('To') . ' ' .
-												  $this->link('/' . $file['file_on_page'], '', $file['file_on_title'], '', 0, 1) .
+												  $this->link('/' . $file['file_on_page'], '', $file['file_on_title'], '', false, true) .
 												  ' ' . NBSP . NBSP . '<span title="' . $this->_t('Cluster') . '">→ ' . $sub_tag[0];
 								}
 								else

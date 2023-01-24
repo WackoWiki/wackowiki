@@ -3922,7 +3922,7 @@ class Wacko
 
 			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
 			$class	= 'iw-' . mb_strtolower($matches[1]);
-			$icon	= $this->_t('Icon.Outer'); # $this->_t('Icon.Iw');
+			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'interwiki';
 		}
 		// wiki link
