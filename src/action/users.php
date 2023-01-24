@@ -138,9 +138,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 			}
 
 			$allow_intercom = ($this->db->enable_email
-								&& $logged_in && $user['email']
-								&& ($this->is_admin()
-									|| ($user['allow_intercom'] && !$user['email_confirm'])));
+				&& $logged_in && $user['email']
+				&& (($this->is_admin() || $user['allow_intercom'])
+					&& !$user['email_confirm']));
 
 			// prepare and send personal message
 			if (@$_POST['_action'] === 'personal_message' && $allow_intercom && $_POST['mail_body'])
