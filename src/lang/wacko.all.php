@@ -41,19 +41,19 @@ $wacko_all_resource = [
 	'Tpl.wlocalfile'	=> '<span class="missingpage" title="{title}">{text}</span>',
 	'Tpl.lan'			=> '<a href="{href}"{target} title="{title}"{class}>{icon}{text}</a>',
 
-	//icons
-	'ChildIcon'			=> '!/',
-	'ParentIcon'		=> '../',
-	'EqualIcon'			=> '',
-	'RootIcon'			=> '/',
-	#'IwIcon'			=> '',
-	'RootLinkIcon'		=> '/',
-	'SubLinkIcon'		=> '!/',
-	'UpLinkIcon'		=> '../',
-	'WantedIcon'		=> '?',
+	// icons
+	'Icon.Child'			=> '!/',
+	'Icon.Parent'		=> '../',
+	'Icon.Equal'			=> '',
+	'Icon.Root'			=> '/',
+	#'Icon.Iw'			=> '',
+	'Icon.RootLink'		=> '/',
+	'Icon.SubLink'		=> '!/',
+	'Icon.UpLink'		=> '../',
+	'Icon.Wanted'		=> '?',
 
 	// see wacko.css in theme folder, e.g. a.fileicon .icon {
-	'OuterIcon'			=> '<span class="icon"></span>',
+	'Icon.Outer'			=> '<span class="icon"></span>',
 
 	'LicenseIds'	=> [
 		1		=> ['CC-BY-ND',		2,	'https://creativecommons.org/licenses/by-nd/4.0/'],
