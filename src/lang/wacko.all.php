@@ -42,18 +42,17 @@ $wacko_all_resource = [
 	'Tpl.lan'			=> '<a href="{href}"{target} title="{title}"{class}>{icon}{text}</a>',
 
 	// icons
-	'Icon.Child'			=> '!/',
+	'Icon.Child'		=> '!/',
 	'Icon.Parent'		=> '../',
-	'Icon.Equal'			=> '',
+	'Icon.Equal'		=> '',
 	'Icon.Root'			=> '/',
-	#'Icon.Iw'			=> '',
 	'Icon.RootLink'		=> '/',
 	'Icon.SubLink'		=> '!/',
 	'Icon.UpLink'		=> '../',
 	'Icon.Wanted'		=> '?',
 
 	// see wacko.css in theme folder, e.g. a.fileicon .icon {
-	'Icon.Outer'			=> '<span class="icon"></span>',
+	'Icon.Outer'		=> '<span class="icon"></span>',
 
 	'LicenseIds'	=> [
 		1		=> ['CC-BY-ND',		2,	'https://creativecommons.org/licenses/by-nd/4.0/'],
