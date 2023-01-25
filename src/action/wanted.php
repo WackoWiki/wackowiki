@@ -5,6 +5,15 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+/*
+ shows pages that do not yet exist and are linked to
+
+	{{wanted
+		[page="cluster"]
+		[max=Number]
+	}}
+*/
+
 $load_wanted = function ($cluster, $limit)
 {
 	$pagination	= [];
@@ -43,8 +52,9 @@ $load_wanted = function ($cluster, $limit)
 
 // set defaults
 $page	??= '';
+$max	??= null;
 
-$tag	= $page ? $this->unwrap_link($page) : $tag;
+$tag	= $this->unwrap_link($page);
 
 if ($linking_to = $_GET['linking_to'] ?? '')
 {
@@ -67,11 +77,6 @@ if ($linking_to = $_GET['linking_to'] ?? '')
 }
 else
 {
-	$cluster	= $tag;
-	$user		= $this->get_user();
-
-	$max		??= null;
-
 	if ([$pages, $pagination] = $load_wanted($tag, $max))
 	{
 		if (is_array($pages))
