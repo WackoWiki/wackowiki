@@ -123,13 +123,14 @@ if ($user_id = $this->get_user_id())
 	// needed for pagination
 	$limit = 10;
 
-	$folder			= $_GET['folder'] ?? null;
-	$r_msg_folder	= $_REQUEST['msg_folder'] ?? null;
+	$folder			= (string)	($_GET['folder']			?? '');
+	$r_msg_folder	= (string)	($_REQUEST['msg_folder']	?? '');
+	$message_id		= (int)		($_GET['message_id']		?? null);
+	$move2folder	= (string)	($_REQUEST['move2folder']	?? '');
+	$action			= (string)	($_GET['action']			?? '');
+	$to				= (int)		($_GET['to']				?? null);
+
 	if (!$folder) {$folder = $r_msg_folder;}
-	$message_id		= (int) ($_GET['message_id'] ?? null);
-	$move2folder	= $_REQUEST['move2folder'] ?? null;
-	$action			= $_GET['action'] ?? null;
-	$to				= (int) ($_GET['to'] ?? null);
 
 	$tpl->style_n	= true;
 	$tpl->enter('x_');
@@ -380,12 +381,14 @@ if ($user_id = $this->get_user_id())
 	// [F] writes sent messages (original/forwarded) to the database
 	if ($action == 'store')
 	{
-		$urgent		= (int) ($_POST['urgent'] ?? null);
-		$to			= (int) ($_POST['to'] ?? null);
-		$subject	= $_POST['subject'] ?? null;
-		$message	= $_POST['message'] ?? null;
+		$urgent		= (int)		($_POST['urgent']	?? null);
+		$to			= (int)		($_POST['to']		?? null);
+		$replyto	= (int)		($_GET['replyto']	?? null);
+		$subject	= (string)	($_POST['subject']	?? '');
+		$message	= (string)	($_POST['message']	?? '');
+
+		$subject	= strip_tags($subject);
 		$message	= strip_tags($message);
-		$replyto	= $_GET['replyto'] ?? null;
 		$date		= date('YmdHis');
 
 		$tpl->enter('f_');
@@ -659,11 +662,12 @@ if ($user_id = $this->get_user_id())
 	// [L] Manage contacts list
 	else if ($action == 'contacts')
 	{
-		$add_contact	= $_GET['contact'] ?? '';
-		$delete_contact	= $_GET['delete_contact'] ?? null;
-		$field1_value	= $_POST['field1_value'] ?? null;
+		$add_contact	= (int)		($_GET['contact']			?? null);
+		$delete_contact	= (int)		($_GET['delete_contact']	?? null);
+		$field1_value	= (string)	($_POST['field1_value']		?? '');
+		$field2_value	= (string)	($_POST['field2_value']		?? '');
+
 		$insert			= $field1_value ? true : false;
-		$field2_value	= $_POST['field2_value'] ?? null;
 		$type			= 'contact';
 		$in_list		= [];
 
@@ -742,11 +746,12 @@ if ($user_id = $this->get_user_id())
 	// [M] Manage folders
 	else if ($action == 'folders')
 	{
-		$delete_folder	= $_GET['delete_folder'] ?? null;
-		$folder			= $_GET['folder'] ?? null;
-		$field1_value	= $_POST['field1_value'] ?? null;
+		$delete_folder	= (int)		($_GET['delete_folder']		?? null);
+		$folder			= (string)	($_GET['folder']			?? '');
+		$field1_value	= (string)	($_POST['field1_value']		?? '');
+		$field2_value	= (string)	($_POST['field2_value']		?? '');
+
 		$insert			= $field1_value ? true : false;
-		$field2_value	= $_POST['field2_value'] ?? null;
 		$type			= 'folder';
 
 		if ($insert)

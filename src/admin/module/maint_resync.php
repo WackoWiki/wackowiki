@@ -59,7 +59,7 @@ function admin_maint_resync($engine, $module)
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id = 0
 							AND p.deleted <> 1
-						GROUP BY p.owner_id) AS s
+						GROUP BY p.owner_id, o.user_id) AS s
 					SET
 						u.total_pages = s.n
 					WHERE u.user_id = s.user_id";

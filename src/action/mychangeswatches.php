@@ -38,7 +38,7 @@ if ($user_id = $this->get_user_id())
 				"AND p.modified > w.watch_time " .
 				"AND w.user_id = " . (int) $user_id . " " .
 				"AND p.user_id <> " . (int) $user_id . " " .
-			"GROUP BY p.tag " .
+			"GROUP BY p.tag, p.page_id, p.modified, w.user_id " .
 			"ORDER BY p.modified DESC, p.tag ASC " .
 			$pagination['limit'], true);
 
