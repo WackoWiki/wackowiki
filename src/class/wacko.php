@@ -7219,7 +7219,7 @@ class Wacko
 				$this->set_language($this->user_lang, true, false, true);
 			}
 
-			// set page categories. this defines $categories (array) object property
+			// set page categories, this defines the $categories object property array
 			$categories = $this->load_categories($this->page['page_id'], OBJECT_PAGE);
 
 			foreach ($categories as $word)
@@ -7280,7 +7280,16 @@ class Wacko
 				$mod = '';
 			}
 
-			$this->preload_links([($this->page['page_id'] ?? null)], true);
+			// preload all links
+			if (in_array($this->method, ['print', 'show', 'wordprocessor']))
+			{
+				$this->preload_links([($this->page['page_id'] ?? null)], true);
+			}
+			// preload only default links
+			else
+			{
+				$this->preload_links([], true);
+			}
 
 			$this->current_context++;
 			$this->context[$this->current_context] = $this->tag;
