@@ -739,5 +739,5 @@ function put_files($pack, $dir, $keep = false)
 // draws a tick or cross next to a result
 function output_image($engine, $ok): string
 {
-	return '<img src="' . $engine->db->base_url . IMAGE_DIR . '/spacer.png" width="20" height="20" alt="' . ($ok ? 'OK' : 'Problem') . '" title="' . ($ok ? 'OK' : 'Problem') . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">' . ' ';
+	return '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" width="20" height="20" alt="' . ($ok ? 'OK' : 'Problem') . '" title="' . ($ok ? 'OK' : 'Problem') . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">' . ' ';
 }
