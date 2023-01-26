@@ -166,7 +166,7 @@ else
 		'common variables: already defined.');
 }
 
-function ensure_dir($dir)
+function ensure_dir($dir): void
 {
 	if (!is_dir($dir))
 	{
@@ -177,7 +177,7 @@ function ensure_dir($dir)
 }
 
 // set backup directory
-function set_pack_dir($time)
+function set_pack_dir($time): string
 {
 	// check dir name and create if not exists
 	$pack	= date('Y_md_His', $time);
@@ -248,10 +248,10 @@ function remove_pack($pack)
 }
 
 // construct sql for table restoration
-function get_table($engine, $table, $drop = true)
+function get_table($engine, $table, $drop = true): string
 {
 	/***************************************************************************
-	*	We will attempt to create a file based backup of all of the data in the
+	*	We will attempt to create a file based backup of all the data in the
 	*	users WackoWiki database. The resulting file should be able to be imported by
 	*	the db_restore.php function, or by using the mysql command_line
 	***************************************************************************/
@@ -362,7 +362,7 @@ function get_table($engine, $table, $drop = true)
 
 // extract and compress table dump into the out file
 // $tables var is a tables definition array
-function get_data($engine, $tables, $pack, $table, $root = '')
+function get_data($engine, $tables, $pack, $table, $root = ''): int
 {
 	$where = '';
 	$tweak = '';
@@ -575,7 +575,7 @@ function get_files($engine, $directories, $pack, $dir, $root)
 }
 
 // restore tables structure
-function put_table($engine, $pack)
+function put_table($engine, $pack): int
 {
 	// read sql data
 	$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE);
@@ -597,7 +597,7 @@ function put_table($engine, $pack)
 
 // insert table dump into the database
 // $mode - sql instruction to be used (i.e. INSERT or REPLACE)
-function put_data($engine, $pack, $table, $mode)
+function put_data($engine, $pack, $table, $mode): int
 {
 	$point		= 0;
 
@@ -749,7 +749,7 @@ function put_files($pack, $dir, $keep = false)
 }
 
 // draws a tick or cross next to a result
-function output_image($engine, $ok)
+function output_image($engine, $ok): string
 {
-	return '<img src="' . $engine->db->base_url . IMAGE_DIR . '/spacer.png" width="20" height="20" alt="' . ($ok ? 'OK' : 'Problem') . '" title="' . ($ok ? 'OK' : 'Problem') . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">' . ' ';
+	return '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" width="20" height="20" alt="' . ($ok ? 'OK' : 'Problem') . '" title="' . ($ok ? 'OK' : 'Problem') . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">' . ' ';
 }

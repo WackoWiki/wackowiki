@@ -320,8 +320,8 @@ function admin_user_approve($engine, $module)
 								: ''
 							); */
 
-	$approve_icon	= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
-	$deny_icon		= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny">';
+	$approve_icon	= '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
+	$deny_icon		= '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny">';
 
 	# echo $control_buttons;
 	echo '<br>';
