@@ -1774,24 +1774,24 @@ class Wacko
 		if ($user_name && $user_name != GUEST)
 		{
 			$owner_id	= $user_id	= $this->get_user_id($user_name);
-			$reg		= true;
+			$registered	= true;
 		}
 		// current user is owner; if user is logged in! otherwise, no owner.
 		else if ($this->get_user_name())
 		{
 			$user_name	= $this->get_user_name();
 			$owner_id	= $user_id	= $this->get_user_id();
-			$reg		= true;
+			$registered	= true;
 		}
 		else if ($this->forum || $comment_on_id)
 		{
 			$owner_id	= $user_id	= 0; // GUEST
-			$reg		= false;
+			$registered	= false;
 		}
 		else
 		{
 			$owner_id	= $user_id	= 0;
-			$reg		= false;
+			$registered	= false;
 		}
 
 		$page_id = $this->get_page_id($tag);
@@ -1966,7 +1966,7 @@ class Wacko
 				if ($this->db->autosubscribe && !$comment_on_id)
 				{
 					// subscribe the author
-					if ($reg === true)
+					if ($registered === true)
 					{
 						$this->set_watch($user_id, $page_id);
 					}
@@ -2002,7 +2002,7 @@ class Wacko
 					}
 				}
 
-				// aha! page isn't new. keep owner!
+				// Aha! Page isn't new, keep owner!
 				$owner_id = $old_page['owner_id'];
 
 				// only if page has been actually changed
@@ -6536,10 +6536,10 @@ class Wacko
 		{
 			if ($global)
 			{
-				if ( $this->db->upload === true
-						|| $this->db->upload == 1
-						|| $this->check_acl($user_name, $this->db->upload)
-						)
+				if (   $this->db->upload === true
+					|| $this->db->upload == 1
+					|| $this->check_acl($user_name, $this->db->upload)
+					)
 				{
 					return true;
 				}
@@ -6550,7 +6550,7 @@ class Wacko
 			}
 			else
 			{
-				if ( ( $this->db->upload === true
+				if ( (     $this->db->upload === true
 						|| $this->db->upload == 1
 						|| $this->check_acl($user_name, $this->db->upload) )
 					&& (   $this->has_access('upload')

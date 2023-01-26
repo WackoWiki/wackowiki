@@ -302,7 +302,7 @@ if ($can_view)
 
 			// display file tools
 			if ($this->is_admin()
-				|| (!isset($is_global)
+				|| (!$global
 					&& $this->get_page_owner_id($page_id) == $this->get_user_id())
 				|| $file['user_id'] == $this->get_user_id())
 			{

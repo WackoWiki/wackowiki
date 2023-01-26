@@ -11,8 +11,8 @@ if (!defined('IN_WACKO'))
 
 $can_upload		= $this->can_upload();
 $error			= '';
-$is_global		= '';
-$is_image		= '';
+$is_global		= null;
+$is_image		= null;
 $prefix			= $this->prefix;
 
 $this->ensure_page(true);
@@ -91,7 +91,7 @@ if (isset($_POST['upload']) & $can_upload)
 			$name	= Ut::normalize($name);
 			$name	= preg_replace('/[^' . $this->lang['ALPHANUM_P'] . '\.]/u', '', $name);
 
-			// here would be place for transliteration
+			// file name transliteration
 			if ($this->db->upload_translit)
 			{
 				$t_name	= Ut::translit($name);
@@ -102,15 +102,15 @@ if (isset($_POST['upload']) & $can_upload)
 				$t_name	= $name;
 			}
 
-			// +write @page_id@ to name
+			// write @page_id@ to file name
 			if (isset($_POST['upload_to']) && $_POST['upload_to'] != 'global')
 			{
-				$is_global	= 0;
+				$is_global	= false;
 				$fs_name	= '@' . $this->page['page_id'] . '@' . $t_name;
 			}
 			else
 			{
-				$is_global	= 1;
+				$is_global	= true;
 				$fs_name	= $t_name;
 			}
 
@@ -180,7 +180,7 @@ if (isset($_POST['upload']) & $can_upload)
 				if (($file_size < $max_filesize) || $this->is_admin())
 				{
 					// check is image, if asked
-					$forbid		= 0;
+					$forbid		= false;
 					$size		= [0, 0];
 
 					if ($is_image === true)
@@ -192,11 +192,11 @@ if (isset($_POST['upload']) & $can_upload)
 					{
 						if ($size[0] == 0)
 						{
-							$forbid = 1;
+							$forbid = true;
 						}
 					}
 
-					if (!$forbid)
+					if (!$forbid || $this->is_admin())
 					{
 						// save to permanent location
 						move_uploaded_file($tmp_name, $dir . $result_name);
@@ -292,12 +292,12 @@ if (isset($_POST['upload']) & $can_upload)
 
 						$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
 					}
-					else //forbid
+					else // forbid
 					{
 						$error = $this->_t('UploadNotAPicture');
 					}
 				}
-				else //maxsize
+				else // maxsize
 				{
 					$error = $this->_t('UploadMaxSizeReached');
 				}

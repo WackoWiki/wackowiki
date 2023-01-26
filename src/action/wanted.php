@@ -5,7 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_wanted = function ($cluster, $limit, $deleted = 0)
+/*
+ shows pages that do not yet exist and are linked to
+
+	{{wanted
+		[page="cluster"]
+		[max=Number]
+	}}
+*/
+
+$load_wanted = function ($cluster, $limit)
 {
 	$pagination	= [];
 	$pref		= $this->prefix;
@@ -28,9 +37,7 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 		FROM ( " .
 			$selector .
 		") AS src"
-		, true));
-
-	if ($count)
+		, true))
 	{
 		$pagination = $this->pagination($count['n'], $limit);
 
@@ -41,9 +48,9 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 
 		return [$wanted, $pagination];
 	}
-
 };
 
+// set defaults
 if (!isset($page))		$page	= '';
 
 if (! $page)
@@ -54,6 +61,8 @@ else
 {
 	$tag = $this->unwrap_link($page);
 }
+
+if (!isset($max))		$max = null;
 
 if ($linking_to = $_GET['linking_to'] ?? '')
 {
@@ -76,11 +85,6 @@ if ($linking_to = $_GET['linking_to'] ?? '')
 }
 else
 {
-	$cluster	= $tag;
-	$user		= $this->get_user();
-
-	if (!isset($max))		$max = null;
-
 	if ([$pages, $pagination] = $load_wanted($tag, $max))
 	{
 		if (is_array($pages))
