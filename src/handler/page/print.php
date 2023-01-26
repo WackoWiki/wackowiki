@@ -31,16 +31,19 @@ if (($user = $this->get_user())? $user['numerate_links'] : $this->db->numerate_l
 // set absolute URL
 $this->canonical = true;
 
-$tpl->title	= $this->page['title'];
-
 // build html body
 #$this->context[++$this->current_context] = $this->tag;
 $data = $this->format($this->page['body'], 'wiki', ['post_wacko' => true]);
 
 // display page
 $tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
-
 #$this->current_context--;
+
+// display page title (action & theme wacko.all options)
+if (!$this->hide_article_header)
+{
+	$tpl->h_title	= $this->page['title'];
+}
 
 // display comments
 if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
