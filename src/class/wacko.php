@@ -7262,18 +7262,11 @@ class Wacko
 		}
 		else
 		{
-			if (str_ends_with($this->method, 'print'))
-			{
-				$mod = 'print';
-			}
-			else if (str_ends_with($this->method, 'wordprocessor'))
-			{
-				$mod = 'wordprocessor';
-			}
-			else
-			{
-				$mod = '';
-			}
+			$mode = match($this->method) {
+				'print'				=> 'print',
+				'wordprocessor'		=> 'wordprocessor',
+				default				=> '',
+			};
 
 			// preload all links
 			if (in_array($this->method, ['print', 'show', 'wordprocessor']))
@@ -7292,9 +7285,9 @@ class Wacko
 			$this->current_context--;
 
 			echo
-				$this->theme_template('header', $mod) .
+				$this->theme_template('header', $mode) .
 				$data .
-				$this->theme_template('footer', $mod);
+				$this->theme_template('footer', $mode);
 		}
 
 		// goback feature
