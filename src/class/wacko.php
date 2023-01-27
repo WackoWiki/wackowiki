@@ -2887,7 +2887,7 @@ class Wacko
 		// get system message
 		if (($message = $this->db->system_message) && !$this->db->ap_mode)
 		{
-			array_unshift($messages, [$message, 'sysmessage ' . $this->db->system_message_type]);
+			array_unshift($messages, [$message, 'sys-message ' . $this->db->system_message_type]);
 		}
 
 		if ($show)
@@ -2902,6 +2902,12 @@ class Wacko
 		}
 		else
 		{
+			// do not cache pages with notices!
+			if ($messages)
+			{
+				$this->http->no_cache(false);
+			}
+
 			return $messages;
 		}
 	}

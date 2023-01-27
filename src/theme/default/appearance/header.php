@@ -300,8 +300,5 @@ if (!isset($this->sess->php_version))
 // here we show messages
 foreach ($this->output_messages(false) as $message)
 {
-	// do not cache pages with notices!
-	$this->http->no_cache(false);
-
 	$tpl->msg_one_data = $message;
 }
