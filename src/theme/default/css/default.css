@@ -2497,7 +2497,7 @@ a.acl-private {
 }
 
 /* system message ------------- */
-.sysmessage {
+.sys-message {
 	font-family: var(--ww-font-monospace);
 	background: rgba(51, 51, 51, 0.9) none repeat scroll 0 0;
 	bottom: 0;
