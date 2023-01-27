@@ -197,7 +197,7 @@ if ($this->has_access('read'))
 
 			$tpl->leave(); // end comment form
 		}
-		else if ($this->forum)
+		else if ($this->forum && !$user)
 		{
 			$message = Ut::perc_replace($this->_t('CommentHint'),
 				$this->href('', $this->db->login_page),

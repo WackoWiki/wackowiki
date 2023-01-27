@@ -220,7 +220,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 }
 else
 {
-	// wrong placed show hint
+	// action placed ouside forum cluster, show hint
 	$message	= (!$this->db->forum_cluster
 		? $this->_t('ForumNoClusterDefined')
 		: Ut::perc_replace($this->_t('ForumOutsideCluster'), '<code>forums</code>')
