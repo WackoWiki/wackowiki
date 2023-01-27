@@ -2948,7 +2948,10 @@ class Wacko
 		else
 		{
 			// do not cache pages with notices!
-			$this->http->no_cache(false);
+			if ($messages)
+			{
+				$this->http->no_cache(false);
+			}
 
 			return $messages;
 		}
