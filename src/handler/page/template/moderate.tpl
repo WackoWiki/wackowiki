@@ -125,7 +125,7 @@
 					</td>
 					<td>
 						[= locked _ =
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ForumLocked ' ]" alt="[ ' _t: ForumLocked ' ]" class="btn-locked">
 						=]
 						[ ' moderate ' ] <strong>[ ' topic ' ]</strong>
 					</td>
@@ -278,7 +278,7 @@
 				<tr class="formation">
 					<th colspan="2">
 						[= locked _ =
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ForumLocked ' ]" alt="[ ' _t: ForumLocked ' ]" class="btn-locked">
 						=]
 						[ ' _t: ForumTopic ' ]
 					</th>

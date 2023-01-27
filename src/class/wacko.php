@@ -6276,7 +6276,7 @@ class Wacko
 						// By letting it fetch defaults, it will automatically recurse
 						// up the tree of parent pages... fetching the ACL on the root
 						// page if necessary.
-						$acl = $this->load_acl($parent_id, $privilege, 1);
+						$acl = $this->load_acl($parent_id, $privilege, true);
 					}
 
 					// if still no acl, use config defaults
@@ -6335,7 +6335,7 @@ class Wacko
 		}
 
 		// load acl
-		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent, $new_tag);
+		$acl		= $this->load_acl($page_id, $privilege, true, true, $use_parent, $new_tag);
 		// cache
 		$this->acl	= $acl;
 
@@ -6349,7 +6349,6 @@ class Wacko
 		if (!in_array($user_name, ['', GUEST])
 			&& ($this->is_owner($page_id) || $this->is_admin()))
 		{
-			#Ut::debug_print_r($this->acl['list']);
 			$acl = explode("\n", $this->acl['list']);
 
 			if (!in_array('*', $acl) && !in_array('$', $acl))

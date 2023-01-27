@@ -25,7 +25,7 @@
 						<tr>
 							<td>
 								[= closed =
-									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">'
+									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ForumLocked ' ]" alt="[ ' _t: ForumLocked ' ]" class="btn-locked">'
 								=]
 								[= updated =
 									<strong class="cite" title="[ ' _t: ForumNewPosts ' ]">[updated]</strong>
