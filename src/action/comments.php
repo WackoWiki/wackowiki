@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_recent_comments = function ($tag, $limit, $deleted = 0)
+$load_recent_comments = function ($tag, $limit, $deleted = false)
 {
 	$pagination	= [];
 	$prefix		= $this->prefix;
@@ -15,9 +15,9 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 			($tag
 				? "b.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: "a.comment_on_id <> 0 ") .
-			($deleted != 1
-				? "AND a.deleted <> 1 "
-				: "");
+			($deleted
+				? ""
+				: "AND a.deleted <> 1 ");
 
 	// count pages
 	$count = $this->db->load_single(
@@ -71,12 +71,7 @@ if ($this->user_allowed_comments())
 		$this->preload_acl($page_ids);
 
 		// process 'mark read' - reset session time
-		if (isset($_GET['markread']) && $user)
-		{
-			$this->update_last_mark($user);
-			$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-			$user = $this->get_user();
-		}
+		$this->mark_read($user);
 
 		if ($user)
 		{
@@ -112,8 +107,8 @@ if ($this->user_allowed_comments())
 				// print entry
 				$tpl->l_time = $time;
 				$tpl->l_page = ($title
-					? $this->link('/' . $page['tag'], '', $page['page_title'], $page['comment_title'], 0, 1, 0)
-					: $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, 0)
+					? $this->link('/' . $page['tag'], '', $page['page_title'], $page['comment_title'], false, true, false)
+					: $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], false, true, false)
 				);
 
 				$tpl->l_user = $this->user_link($page['comment_user'], true, false);

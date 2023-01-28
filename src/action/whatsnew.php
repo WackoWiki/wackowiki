@@ -26,12 +26,7 @@ $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
 // process 'mark read' - reset session time
-if (isset($_GET['markread']) && $user)
-{
-	$this->update_last_mark($user);
-	$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-	$user = $this->get_user();
-}
+$this->mark_read($user);
 
 // loading new pages/comments
 $pages1 = $this->db->load_all(
@@ -222,7 +217,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				if ($page['page_id']) // !$global
 				{
 					$path2				= '_file:/' . $page['tag'] . '/';
-					$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
+					$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', false, true);
 					$tpl->cluster_link	= $get_cluster($page['comment_on_page']);
 				}
 				else
@@ -234,20 +229,20 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				$tpl->i_title		= $page['deleted'] ? $this->_t('FileDeleted') : $this->_t('NewFileAdded');
 				$tpl->i_alt			= 'file';
 				$tpl->i_class		= $page['deleted'] ? 'btn-delete' : 'btn-attachment';
-				$tpl->link			= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1);
+				$tpl->link			= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', false, true);
 			}
 			// deleted
 			else if ($page['deleted'])
 			{
 				if ($page['comment_on_page'])
 				{
-					$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
+					$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', false, true);
 				}
 
 				$tpl->i_title		= $page['comment_on_page'] ? $this->_t('CommentDeleted') : $this->_t('PageDeleted');
 				$tpl->i_alt			= 'deleted';
 				$tpl->i_class		= 'btn-delete';
-				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
 				$tpl->cluster_link	= $get_cluster($page['comment_on_page'] ?? $page['tag']);
 			}
 			// new comment
@@ -256,8 +251,8 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				$tpl->i_title		= $this->_t('NewCommentAdded');
 				$tpl->i_alt			= 'comment';
 				$tpl->i_class		= 'btn-comment';
-				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
-				$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
+				$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', false, true);
 				$tpl->cluster_link	= $get_cluster($page['comment_on_page']);
 			}
 			// new page
@@ -266,7 +261,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				$tpl->i_title		= $this->_t('NewPageCreated');
 				$tpl->i_alt			= 'new';
 				$tpl->i_class		= 'btn-add-page';
-				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
 				$tpl->cluster_link	= $get_cluster($page['tag']);
 			}
 			// new revision
@@ -275,7 +270,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				$tpl->i_title		= $this->_t('NewRevisionAdded');
 				$tpl->i_alt			= 'changed';
 				$tpl->i_class		= 'btn-edit';
-				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
 				$tpl->cluster_link	= $get_cluster($page['tag']);
 			}
 

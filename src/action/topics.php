@@ -34,11 +34,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	$user = $this->get_user();
 
 	// process 'mark read' - reset session time
-	if (isset($_GET['markread']) && $user)
-	{
-		$this->update_last_mark($user);
-		$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-	}
+	$this->mark_read($user);
 
 	// check privilege
 	$create_access = $this->has_access('create');
