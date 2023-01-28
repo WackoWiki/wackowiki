@@ -5572,6 +5572,25 @@ class Wacko
 		}
 	}
 
+	function mark_read(&$user)
+	{
+		if (isset($_GET['markread']) && $user)
+		{
+			$this->update_last_mark($user);
+
+			// requires UTC timestamps
+			$tz = date_default_timezone_get();
+			date_default_timezone_set('UTC');
+
+			$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
+
+			date_default_timezone_set($tz);
+
+			// return updated user settings
+			$user = $this->get_user();
+		}
+	}
+
 	function get_list_count($max): int
 	{
 		$user_max = $this->get_user_setting('list_count');
@@ -7255,7 +7274,7 @@ class Wacko
 
 		// forum page
 		$this->forum =
-			(bool) (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->tag)
+			(bool) (preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->tag)
 			|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id']
 				? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->get_page_tag($this->page['comment_on_id']))
 				: ''));

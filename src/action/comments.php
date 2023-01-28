@@ -72,12 +72,7 @@ if ($this->user_allowed_comments())
 		$this->preload_acl($page_ids);
 
 		// process 'mark read' - reset session time
-		if (isset($_GET['markread']) && $user)
-		{
-			$this->update_last_mark($user);
-			$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-			$user = $this->get_user();
-		}
+		$this->mark_read($user);
 
 		if ($user)
 		{

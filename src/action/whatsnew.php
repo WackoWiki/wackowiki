@@ -27,12 +27,7 @@ $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
 // process 'mark read' - reset session time
-if (isset($_GET['markread']) && $user)
-{
-	$this->update_last_mark($user);
-	$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-	$user = $this->get_user();
-}
+$this->mark_read($user);
 
 // loading new pages/comments
 $pages1 = $this->db->load_all(

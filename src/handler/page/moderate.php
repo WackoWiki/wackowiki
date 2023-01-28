@@ -354,15 +354,18 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	}
 
 	// keep currently selected list items
-	foreach ($_POST['id'] as $key => $val)
+	if (isset($_POST['id']))
 	{
-		if (!in_array($val, $set) && !empty($val))
+		foreach ($_POST['id'] as $key => $val)
 		{
-			$set[] = (int) $val;
+			if (!in_array($val, $set) && !empty($val))
+			{
+				$set[] = (int) $val;
+			}
 		}
-	}
 
-	unset($key, $val);
+		unset($key, $val);
+	}
 
 	// save page ids for later operations (correct if needed)
 	if (isset($_POST['set']))

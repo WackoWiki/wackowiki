@@ -22,11 +22,7 @@ if ($date && !$this->validate_date($date))
 }
 
 // process 'mark read' - reset session time
-if (isset($_GET['markread']) && $user)
-{
-	$this->update_last_mark($user);
-	$this->set_user_setting('last_mark', date('Y-m-d H:i:s'));
-}
+$this->mark_read($user);
 
 if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_edit))
 {
