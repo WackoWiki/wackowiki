@@ -14,8 +14,9 @@ if (!$this->page || $this->page['comment_on_id'])
 // TODO: purge old SQL query cache
 
 $tpl->title = ($this->forum
-	? $this->_t('ForumTopic')
-	: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
+		? $this->_t('ForumTopic')
+		: $this->_t('ModerateSection')) . ' ' .
+	$this->compose_link_to_page($this->tag, '', $this->page['title']);
 
 $tpl->moderate =  ($this->forum
 	? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '« ' . $this->_t('ModerateSection2')) . '<br><br>'
