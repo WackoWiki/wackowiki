@@ -819,6 +819,7 @@ $wacko_translation = [
 	'UploadMaxSizeReached'		=> '文件大小超过了允许的限制！',
 	'UploadDirNotWritable'		=> '文件目录不可写！',
 	'UploadNotAPicture'			=> '只允许上传图片，你想上传什么？',
+	'UploadEmptyExtension'		=> '文件名和扩展名不能为空。',
 	'UploadMaxFileQuota'		=> '您已达到上传限制，无法上传此文件',
 	'UploadDone'				=> '文件上传成功',
 	'UploadFileForbidden'		=> '文件访问被禁止',

@@ -819,6 +819,7 @@ $wacko_translation = [
 	'UploadMaxSizeReached'		=> 'Het bestand is groter dan de maximum toegestane grootte.',
 	'UploadDirNotWritable'		=> 'Bestandsdirectory is niet beschrijfbaar!',
 	'UploadNotAPicture'			=> 'U mag hier alleen plaatjes uploaden, en dit is toch echt geen plaatje.',
+	'UploadEmptyExtension'		=> 'De bestandsnaam en ook de extensie mogen niet leeg zijn.',
 	'UploadMaxFileQuota'		=> 'Uw uploadlimit is bereikt. U kunt dit bestand niet meer uploaden.',
 	'UploadDone'				=> 'Bestand succesvol geupload.',
 	'UploadFileForbidden'		=> 'Geen toegang tot bestand',
