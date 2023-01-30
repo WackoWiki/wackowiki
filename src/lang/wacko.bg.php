@@ -836,6 +836,7 @@ $wacko_translation = [
 	'UploadMaxSizeReached'		=> 'Файлът е много голям!',
 	'UploadDirNotWritable'		=> 'Файловата директория не може да се записва!',
 	'UploadNotAPicture'			=> 'Разрешени са само картинки, а Вие какво опитвате?',
+	'UploadEmptyExtension'		=> 'Името на файла, както и разширението не могат да бъдат празни.',
 	'UploadMaxFileQuota'		=> 'С този файл, квотата Ви се надвишава',
 	'UploadDone'				=> 'Файлът е качен успешно',
 	'UploadFileForbidden'		=> 'Няма достъп до файла',

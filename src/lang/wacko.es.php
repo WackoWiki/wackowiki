@@ -836,6 +836,7 @@ $wacko_translation = [
 	'UploadMaxSizeReached'		=> 'El tamaño del archivo es mayor que el límite !',
 	'UploadDirNotWritable'		=> '¡El directorio de archivos no es escribible!',
 	'UploadNotAPicture'			=> 'Solo se permite subir imágenes !',
+	'UploadEmptyExtension'		=> 'El nombre del archivo y también la extensión no pueden estar vacíos.',
 	'UploadMaxFileQuota'		=> 'Has llegado a tu límite de archivos subidos.',
 	'UploadDone'				=> 'El archivo se ha subido con exito.',
 	'UploadFileForbidden'		=> 'Acceso denegado al archivo',

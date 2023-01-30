@@ -39,13 +39,13 @@ if (isset($_POST['upload']) & $can_upload)
 
 	// Checks
 
-	// upload quota
+	// A. upload quota
 	if ((!$this->db->upload_quota_per_user
 			|| ($user_files['used_user_quota'] < $this->db->upload_quota_per_user))
 		 && (!$this->db->upload_quota
 			|| ($files['used_quota'] < $this->db->upload_quota)))
 	{
-		// file there is
+		// B. file there is
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name']))
 		{
 			// check out $data
@@ -53,21 +53,20 @@ if (isset($_POST['upload']) & $can_upload)
 			$tmp_name	= $_FILES['file']['tmp_name'];
 			$mime_type	= mime_content_type($tmp_name);
 
+			// check file extension
 			$_data		= explode('.', $orig_name);
 			$ext		= $_data[count($_data) - 1];
 			unset($_data[count($_data) - 1]);
 
-			$ext	= mb_strtolower($ext);
-			$banned	= explode('|', $this->db->upload_banned_exts);
+			$ext		= mb_strtolower($ext);
+			$banned		= explode('|', $this->db->upload_banned_exts);
 
 			if (in_array($ext, $banned))
 			{
 				$ext = $ext . '.txt';
 			}
 
-			$image = ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'png', 'webp'];
-
-			if (in_array($ext, $image))
+			if (in_array($ext, ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'png', 'webp']))
 			{
 				$is_image = true;
 			}
@@ -84,7 +83,7 @@ if (isset($_POST['upload']) & $can_upload)
 				$name	= implode('.', $_data);
 			}
 
-			// prepare for translit
+			// prepare file name for translit
 			$name	= str_replace(['@', '%20', '+'], '-', $name);
 			$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
 			$name	= utf8_trim($name, ' .-_');
@@ -102,212 +101,221 @@ if (isset($_POST['upload']) & $can_upload)
 				$t_name	= $name;
 			}
 
-			// write @page_id@ to file name
-			if (isset($_POST['upload_to']) && $_POST['upload_to'] != 'global')
+			// C. the file name and also the extension should not be empty at all
+			if ($t_name && preg_match('/[a-zA-Z0-9]{1,10}/u', $ext))
 			{
-				$is_global	= false;
-				$fs_name	= '@' . $this->page['page_id'] . '@' . $t_name;
-			}
-			else
-			{
-				$is_global	= true;
-				$fs_name	= $t_name;
-			}
-
-			if ($is_global)
-			{
-				$page_id	= 0;
-				$dir		= UPLOAD_GLOBAL_DIR . '/';
-			}
-			else
-			{
-				$page_id	= $this->page['page_id'];
-				$dir		= UPLOAD_PER_PAGE_DIR . '/';
-			}
-
-			// file must be in file table!
-			// TODO: check against file owner, Admin is always allowed
-			// + check for file / page owner
-			if (isset($_POST['file_overwrite'])
-				&& $this->check_file_record($t_name . '.' . $ext, $page_id))
-			{
-				$replace = true;
-			}
-			else
-			{
-				$replace = false;
-			}
-
-			if (is_writable($dir))
-			{
-				$new_fs_name	= $fs_name;
-				$count			= 1;
-
-				if (file_exists($dir . $fs_name . '.' . $ext)
-					&& $replace)
+				// write @page_id@ to file name
+				if (isset($_POST['upload_to']) && $_POST['upload_to'] != 'global')
 				{
-					// TODO:
-					// + do file revision (add config option)
+					$is_global	= false;
+					$fs_name	= '@' . $this->page['page_id'] . '@' . $t_name;
+					$page_id	= $this->page['page_id'];
+					$dir		= UPLOAD_PER_PAGE_DIR . '/';
 				}
 				else
 				{
-					while (file_exists($dir . $fs_name . '.' . $ext))
-					{
-						if ($fs_name === $new_fs_name)
-						{
-							$fs_name = $new_fs_name . $count;
-						}
-						else
-						{
-							$fs_name = $new_fs_name . (++$count);
-						}
-					}
+					$is_global	= true;
+					$fs_name	= $t_name;
+					$page_id	= 0;
+					$dir		= UPLOAD_GLOBAL_DIR . '/';
 				}
 
-				$result_name	= $fs_name . '.' . $ext;
-				$file_size		= $_FILES['file']['size'];
-
-				// check filesize
-				$max_filesize	= $this->db->upload_max_size;
-				$maxsize		= (int) ($_POST['maxsize'] ?? null);
-
-				if ($maxsize && ($max_filesize > 1 * $maxsize))
+				// file must be in file table!
+				// TODO: check against file owner, Admin is always allowed
+				// + check for file / page owner
+				if (isset($_POST['file_overwrite'])
+					&& $this->check_file_record($t_name . '.' . $ext, $page_id))
 				{
-					$max_filesize = 1 * $maxsize;
+					$replace = true;
+				}
+				else
+				{
+					$replace = false;
 				}
 
-				// Admins can upload unlimited
-				if (($file_size < $max_filesize) || $this->is_admin())
+				// D. check if folder is writable
+				if (is_writable($dir))
 				{
-					// check is image, if asked
-					$forbid		= false;
-					$size		= [0, 0];
+					$new_fs_name	= $fs_name;
+					$count			= 1;
 
-					if ($is_image === true)
+					// replace exising file
+					if (file_exists($dir . $fs_name . '.' . $ext)
+						&& $replace)
 					{
-						$size	= @getimagesize($tmp_name);
+						// do nothing
+
+						// TODO:
+						// + do file revision (add config option)
+					}
+					// check for already existing files and add denominator to file name via counter
+					// e.g. file.txt -> file3.txt
+					else
+					{
+						while (file_exists($dir . $fs_name . '.' . $ext))
+						{
+							if ($fs_name === $new_fs_name)
+							{
+								$fs_name = $new_fs_name . $count;
+							}
+							else
+							{
+								$fs_name = $new_fs_name . (++$count);
+							}
+						}
 					}
 
-					if ($this->db->upload_images_only)
+					// join again file name and extension
+					$result_name	= $fs_name . '.' . $ext;
+
+					// get filesize
+					$file_size		= (int) $_FILES['file']['size'];
+					$maxsize		= (int) ($_POST['maxsize'] ?? null);
+					$max_filesize	= $this->db->upload_max_size;
+
+					// form allows only a smaller files size than upload_max_size
+					if ($maxsize && ($max_filesize > $maxsize))
 					{
-						if ($size[0] == 0)
-						{
-							$forbid = true;
-						}
+						$max_filesize = $maxsize;
 					}
 
-					if (!$forbid || $this->is_admin())
+					// E. check filesize (Admins can upload unlimited)
+					if (($file_size < $max_filesize) || $this->is_admin())
 					{
-						// save to permanent location
-						move_uploaded_file($tmp_name, $dir . $result_name);
-						chmod($dir . $result_name, CHMOD_FILE);
+						// check is image, if asked
+						$forbid		= false;
+						$size		= [0, 0];
 
-						// replace
-						# clearstatcache();
-
-						if ($is_global)
+						if ($is_image === true)
 						{
-							$file_name		= $result_name;
-						}
-						else
-						{
-							$small_name		= explode('@', $result_name);
-							$file_name		= $small_name[count($small_name) - 1];
+							$size	= @getimagesize($tmp_name);
 						}
 
-						$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
-						$uploaded_dt	= $this->db->date();
-						$page_id		= $is_global ? 0 : $this->page['page_id'];
-
-						// replace option: keep old data if new entry is empty
-						$description	= mb_substr($_POST['file_description'], 0, 250);
-						$description	= $this->sanitize_text_field((string) $description, true);
-
-						if ($replace)
+						if ($this->db->upload_images_only)
 						{
-							$this->db->sql_query(
-								"UPDATE " . $prefix . "file SET " .
-									"user_id			= " . (int) $user['user_id'] . "," .
-									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
-									(!empty($description)
-										? "file_description	= " . $this->db->q($description) . ", "
-										: "") .
-									# "caption			= " . $this->db->q($caption) . ", " .
-									"file_size			= " . (int) $file_size . "," .
-									"picture_w			= " . (int) $size[0] . "," .
-									"picture_h			= " . (int) $size[1] . "," .
-									"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
-									"mime_type			= " . $this->db->q($mime_type) . "," .
-									"uploaded_dt		= " . $this->db->q($uploaded_dt) . ", " .
-									"modified_dt		= UTC_TIMESTAMP() " .
+							if ($size[0] == 0)
+							{
+								$forbid = true;
+							}
+						}
+
+						// F. check for upload only images
+						if (!$forbid || $this->is_admin())
+						{
+							// save to permanent location
+							move_uploaded_file($tmp_name, $dir . $result_name);
+							chmod($dir . $result_name, CHMOD_FILE);
+
+							// replace
+							# clearstatcache();
+
+							if ($is_global)
+							{
+								$file_name		= $result_name;
+							}
+							else
+							{
+								$small_name		= explode('@', $result_name);
+								$file_name		= $small_name[count($small_name) - 1];
+							}
+
+							$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
+							$page_id		= $is_global ? 0 : $this->page['page_id'];
+
+							// replace option: keep old data if new entry is empty
+							$description	= mb_substr($_POST['file_description'], 0, 250);
+							$description	= $this->sanitize_text_field((string) $description, true);
+
+							if ($replace)
+							{
+								$this->db->sql_query(
+									"UPDATE " . $prefix . "file SET " .
+										"user_id			= " . (int) $user['user_id'] . "," .
+										"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
+										(!empty($description)
+											? "file_description	= " . $this->db->q($description) . ", "
+											: "") .
+										# "caption			= " . $this->db->q($caption) . ", " .
+										"file_size			= " . (int) $file_size . "," .
+										"picture_w			= " . (int) $size[0] . "," .
+										"picture_h			= " . (int) $size[1] . "," .
+										"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
+										"mime_type			= " . $this->db->q($mime_type) . "," .
+										"uploaded_dt		= UTC_TIMESTAMP(), " .
+										"modified_dt		= UTC_TIMESTAMP() " .
+									"WHERE " .
+										"page_id			= " . (int) $page_id . " AND " .
+										"file_name			= " . $this->db->q($file_name) . " " .
+									"LIMIT 1");
+							}
+							else
+							{
+								// insert line into DB
+								$this->db->sql_query(
+									"INSERT INTO " . $prefix . "file SET " .
+										"page_id			= " . (int) $page_id . ", " .
+										"user_id			= " . (int) $user['user_id'] . "," .
+										"file_name			= " . $this->db->q($file_name) . ", " .
+										"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
+										"file_description	= " . $this->db->q($description) . ", " .
+										# "caption			= " . $this->db->q($caption) . ", " .
+										"file_size			= " . (int) $file_size . "," .
+										"picture_w			= " . (int) $size[0] . "," .
+										"picture_h			= " . (int) $size[1] . "," .
+										"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
+										"mime_type			= " . $this->db->q($mime_type) . "," .
+										"uploaded_dt		= UTC_TIMESTAMP()," .
+										"modified_dt		= UTC_TIMESTAMP() ");
+
+								// update user uploads count
+								$this->update_files_count($page_id, $user['user_id']);
+							}
+
+							// get file_id of uploaded file
+							$file = $this->db->load_single(
+								"SELECT file_id " .
+								"FROM " . $prefix . "file " .
 								"WHERE " .
-									"page_id			= " . (int) $page_id . " AND " .
-									"file_name			= " . $this->db->q($file_name) . " " .
+									"file_name		= " . $this->db->q($file_name) . " AND " .
+									"page_id		= " . (int) $page_id . " " .
 								"LIMIT 1");
+
+							$this->set_message($this->_t('UploadDone'), 'success');
+							$this->notify_upload($page_id, $file['file_id'], $this->page['tag'], $file_name, $user['user_id'], $user['user_name'], $replace);
+
+							// log event
+							if ($is_global)
+							{
+								$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedGlobal', SYSTEM_LANG), '', $file_name, $file_size_ft));
+							}
+							else
+							{
+								$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $file_name, $file_size_ft));
+							}
+
+							$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
 						}
-						else
+						else // [F] forbid
 						{
-							// insert line into DB
-							$this->db->sql_query(
-								"INSERT INTO " . $prefix . "file SET " .
-									"page_id			= " . (int) $page_id . ", " .
-									"user_id			= " . (int) $user['user_id'] . "," .
-									"file_name			= " . $this->db->q($file_name) . ", " .
-									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
-									"file_description	= " . $this->db->q($description) . ", " .
-									# "caption			= " . $this->db->q($caption) . ", " .
-									"file_size			= " . (int) $file_size . "," .
-									"picture_w			= " . (int) $size[0] . "," .
-									"picture_h			= " . (int) $size[1] . "," .
-									"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
-									"mime_type			= " . $this->db->q($mime_type) . "," .
-									"uploaded_dt		= " . $this->db->q($uploaded_dt) . "," .
-									"modified_dt		= UTC_TIMESTAMP() ");
-
-							// update user uploads count
-							$this->update_files_count($page_id, $user['user_id']);
+							$error = $this->_t('UploadNotAPicture');
 						}
-
-						// get file_id of uploaded file
-						$file = $this->db->load_single(
-							"SELECT file_id " .
-							"FROM " . $prefix . "file " .
-							"WHERE " .
-								"file_name		= " . $this->db->q($file_name) . " AND " .
-								"page_id		= " . (int) $page_id . " " .
-							"LIMIT 1");
-
-						$this->set_message($this->_t('UploadDone'), 'success');
-						$this->notify_upload($page_id, $file['file_id'], $this->page['tag'], $file_name, $user['user_id'], $user['user_name'], $replace);
-
-						// log event
-						if ($is_global)
-						{
-							$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedGlobal', SYSTEM_LANG), '', $file_name, $file_size_ft));
-						}
-						else
-						{
-							$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $file_name, $file_size_ft));
-						}
-
-						$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
 					}
-					else // forbid
+					else // [E] maxsize
 					{
-						$error = $this->_t('UploadNotAPicture');
+						$error = $this->_t('UploadMaxSizeReached');
 					}
 				}
-				else // maxsize
+				else //[D] is_writable
 				{
-					$error = $this->_t('UploadMaxSizeReached');
+					$error = $this->_t('UploadDirNotWritable');
 				}
 			}
-			else // is_writable
+			else // [C] empty file extension
 			{
-				$error = $this->_t('UploadDirNotWritable');
+				$error = $this->_t('UploadEmptyExtension');
 			}
-		} // !is_uploaded_file
-		else
+		}
+		else // [B] !is_uploaded_file
 		{
 			if (isset($_FILES['file']['error'])
 				&& (   $_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE
@@ -327,7 +335,7 @@ if (isset($_POST['upload']) & $can_upload)
 			}
 		}
 	}
-	else
+	else // [A] upload quota
 	{
 		if ($this->db->upload_quota_per_user > 0)
 		{
@@ -346,6 +354,7 @@ if (isset($_POST['upload']) & $can_upload)
 		}
 	}
 
+	// set error message and reload
 	if ($error)
 	{
 		$this->set_message($error, 'error');

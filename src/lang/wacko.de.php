@@ -120,7 +120,7 @@ $wacko_translation = [
 	'Guest'						=> 'Gast',
 	'Help'						=> 'Hilfe',
 	'TopicSearchText'			=> 'Nur in Seitentiteln suchen',
-	'WordprocessorVersion'		=> 'Textverarbeitungs-Version',
+	'WordprocessorVersion'		=> 'Textverarbeitungsversion',
 
 	// notifications
 	'EmailHello'				=> 'Hallo ',
@@ -816,7 +816,7 @@ $wacko_translation = [
 	'SettingsWatch'				=> 'Beobachten',
 	'SettingsLatex'				=> 'LaTeX Version',
 	'SettingsXML'				=> 'Export als XML',
-	'NeedToChangeLang'			=> 'Die gewählte Seitengprache %1 wird nicht unterstützt und muss geändert werden.',
+	'NeedToChangeLang'			=> 'Die gewählte Seitensprache %1 wird nicht unterstützt und muss geändert werden.',
 	'SetLang'					=> 'Sprache dieser Seite',
 	'SetMenuLabel'				=> 'Menü-Label',
 	'SetShowMenuLabel'			=> 'Zeige in der Navigation',
@@ -836,6 +836,7 @@ $wacko_translation = [
 	'UploadMaxSizeReached'		=> 'Datei ist zu groß!',
 	'UploadDirNotWritable'		=> 'Datei-Verzeichnis ist nicht schreibbar!',
 	'UploadNotAPicture'			=> 'Nur das Hochladen von Bildern ist erlaubt.',
+	'UploadEmptyExtension'		=> 'Der Dateiname und auch die Erweiterung dürfen nicht leer sein.',
 	'UploadMaxFileQuota'		=> 'Dein Speicherplatz ist voll. Du kannst keine weiteren Dateien hochladen.',
 	'UploadDone'				=> 'Datei erfolgreich hochgeladen',
 	'UploadFileForbidden'		=> 'Datei-Zugriff verweigert',

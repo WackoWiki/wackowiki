@@ -836,6 +836,7 @@ $wacko_translation = [
 	'UploadMaxSizeReached'		=> 'La taille du fichier excède celle autorisée !',
 	'UploadDirNotWritable'		=> 'Le répertoire de dépôt n’est pas accessible en écriture!',
 	'UploadNotAPicture'			=> 'Il est seulement permis de déposer des images, que tentez-vous de déposer ?',
+	'UploadEmptyExtension'		=> 'Le nom du fichier ainsi que l\'extension ne peuvent être vides.',
 	'UploadMaxFileQuota'		=> 'Vous avez atteint la taille limite de dépôt autorisée, ce fichier ne peut donc être déposé.',
 	'UploadDone'				=> 'Dépôt du fichier réussi',
 	'UploadFileForbidden'		=> 'Accès interdit au fichier',

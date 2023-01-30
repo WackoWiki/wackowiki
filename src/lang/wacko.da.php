@@ -836,6 +836,7 @@ $wacko_translation = [
 	'UploadMaxSizeReached'		=> 'Filen er for stor!',
 	'UploadDirNotWritable'		=> 'Filmappen kan ikke skrives!',
 	'UploadNotAPicture'			=> 'Kan desværre ikke genkende filformatet, og kan derfor ikke tillade upload',
+	'UploadEmptyExtension'		=> 'Filnavnet og også udvidelsen kan ikke være tomme.',
 	'UploadMaxFileQuota'		=> 'Sikke mange filer du uploader. Snak med administrator.',
 	'UploadDone'				=> 'Filupload lykkedes',
 	'UploadFileForbidden'		=> 'Filadgang nægtet',
