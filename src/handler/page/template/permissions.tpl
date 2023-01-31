@@ -5,7 +5,6 @@
 	<div class="">
 	<form action="[ ' href: permissions ' ]" method="post" name="set_permissions">
 		[ ' csrf: set_permissions ' ]
-		
 		<br>
 		<table class="permissions form-tbl">
 			<colgroup>
@@ -13,7 +12,6 @@
 				<col span="1">
 			</colgroup>
 			<tbody>
-				
 				<tr>
 					<th scope="row">
 						<label for="read_acl">[ ' _t: AclRead ' ]</label>
