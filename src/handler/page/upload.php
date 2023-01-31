@@ -120,7 +120,7 @@ if (isset($_POST['upload']) & $can_upload)
 					$dir		= UPLOAD_GLOBAL_DIR . '/';
 				}
 
-				// file must be in file table!
+				// File must be in file table!
 				// TODO: check against file owner, Admin is always allowed
 				// + check for file / page owner
 				if (isset($_POST['file_overwrite'])
@@ -329,10 +329,6 @@ if (isset($_POST['upload']) & $can_upload)
 			{
 				$error = $this->_t('UploadNoFile');
 			}
-			else
-			{
-				$error = '';
-			}
 		}
 	}
 	else // [A] upload quota
@@ -380,5 +376,4 @@ else
 	{
 		$this->set_message($this->_t('UploadForbidden'));
 	}
-
 }

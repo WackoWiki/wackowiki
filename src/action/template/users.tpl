@@ -91,14 +91,14 @@ first really BIG template written
 					<table class="formation">
 						[= disabled _ =
 							<tr>
-								<td colspan="2" class="t-center">
+								<td class="t-center">
 									<strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong>
 								</td>
 							</tr>
 						=]
 						[= ic _ =
 							<tr>
-								<td colspan="2">
+								<td>
 									<label for="mail_subject">[ ' _t: UsersIntercomSubject ' ]</label><br>
 									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200" required>
 									[= ref _ =
@@ -107,7 +107,7 @@ first really BIG template written
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2">
+								<td>
 									<label for="mail_body" class="visuallyhidden">[ ' _t: UsersIntercomMessage ' ]</label>
 									<textarea id="mail_body" name="mail_body" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
 								</td>
@@ -118,7 +118,7 @@ first really BIG template written
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2">
+								<td>
 									<small>[ ' _t: UsersIntercomDesc ' ]</small>
 								</td>
 							</tr>
