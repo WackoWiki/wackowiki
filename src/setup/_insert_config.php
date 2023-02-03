@@ -123,6 +123,7 @@ $config_db['maint_last_refs']				= 1;
 $config_db['maint_last_session']			= 1;
 $config_db['maint_last_xml_sitemap']		= 1;
 $config_db['max_login_attempts']			= $config['max_login_attempts'];
+$config_db['max_page_size']					= $config['max_page_size'];
 $config_db['menu_items']					= $config['menu_items'];
 $config_db['minor_edit']					= $config['minor_edit'];
 $config_db['multilanguage']					= $config['multilanguage'];
