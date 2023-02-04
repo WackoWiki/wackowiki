@@ -26,7 +26,7 @@ $prefix	= $this->prefix;
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
-// process 'mark read' - reset session time
+// process 'mark read'
 $this->mark_read($user);
 
 // loading new pages/comments

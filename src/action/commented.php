@@ -67,7 +67,7 @@ $user	= $this->get_user();
 
 if ($this->user_allowed_comments())
 {
-	// process 'mark read' - reset session time
+	// process 'mark read'
 	$this->mark_read($user);
 
 	if ([$pages, $pagination] = $load_commented($tag, $max))

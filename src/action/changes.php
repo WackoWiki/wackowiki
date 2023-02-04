@@ -21,7 +21,7 @@ if ($date && !$this->validate_date($date))
 	$date = '';
 }
 
-// process 'mark read' - reset session time
+// process 'mark read'
 $this->mark_read($user);
 
 if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_edit))

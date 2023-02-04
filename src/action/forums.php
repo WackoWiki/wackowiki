@@ -27,7 +27,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	// load user data
 	$user = $this->get_user();
 
-	// process 'mark read' - reset session time
+	// process 'mark read'
 	$this->mark_read($user);
 
 	// parse subforums list if any
