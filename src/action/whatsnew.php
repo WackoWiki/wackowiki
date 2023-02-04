@@ -14,6 +14,7 @@ if (!defined('IN_WACKO'))
  TODO: table layout may suite visual orientation better, RSS feed
 */
 
+// set defaults
 if (!isset($page))		$page = '';
 if (!isset($max))		$max		= null;
 if (!isset($noxml))		$noxml		= 0;
@@ -25,7 +26,7 @@ $prefix	= $this->prefix;
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
-// process 'mark read' - reset session time
+// process 'mark read'
 $this->mark_read($user);
 
 // loading new pages/comments

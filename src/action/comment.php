@@ -6,14 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 // enables you to click comments inside from wikipages
-//{{comment [page="CommentThisPage"] [text="your text"]}}
+// {{comment [page="CommentThisPage"] [text="your text"]}}
 
+// set defaults
 if (!isset($page))		$page	= '';
 if (!isset($text))		$text	= '';
 
-if (!$page) {$page = '';}
+$tag	= $page ? $this->unwrap_link($page) : $this->tag;
 
-$tpl->href	= $this->href('', $page, ['show_comments' => 1, '#' => 'header-comments']);
+$tpl->href	= $this->href('', $tag, ['show_comments' => 1, '#' => 'header-comments']);
 
 if (!$text)
 {

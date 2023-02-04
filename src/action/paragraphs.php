@@ -56,7 +56,7 @@ if (!$style) $style = 'before';
 			}
 			else
 			{
-				$num = str_replace('-', "&#0150;§",
+				$num = str_replace('-', "–§",
 						str_replace('p', '¹', $toc[$i][0] ));
 			}
 

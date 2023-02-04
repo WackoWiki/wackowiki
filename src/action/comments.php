@@ -70,7 +70,7 @@ if ($this->user_allowed_comments())
 
 		$this->preload_acl($page_ids);
 
-		// process 'mark read' - reset session time
+		// process 'mark read'
 		$this->mark_read($user);
 
 		if ($user)

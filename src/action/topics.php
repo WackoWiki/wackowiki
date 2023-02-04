@@ -12,6 +12,7 @@ if (!defined('IN_WACKO'))
 //				  considered subforums, so topics under these cluster subpages
 //				  will not be displayed. tags must be absolute
 
+// set defaults
 if (!isset($pages))		$pages = '';
 
 $prefix		= $this->prefix;
@@ -33,7 +34,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	// load user data
 	$user = $this->get_user();
 
-	// process 'mark read' - reset session time
+	// process 'mark read'
 	$this->mark_read($user);
 
 	// check privilege
