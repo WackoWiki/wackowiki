@@ -84,7 +84,7 @@ $moderate_rename_topic = function($old_tag, $new_tag, $title = '')
 	if ($title != '')
 	{
 		// resave modified page
-		$this->save_page($new_tag, $page['body'], $title, '', null, null, null, null, '', true, false);
+		$this->save_page($new_tag, $page['body'], $title, '', null, null, 0, null, '', true, false);
 	}
 
 	// restore forum context
@@ -219,8 +219,8 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 	$old_page = $this->page;
 	unset($this->page);
 
-	// TODO: build title
-	$title = $page['title'];
+	// build title
+	$title = $this->add_spaces_title($title);
 
 	// TODO: pass user, else save_page might fail due missing write privilege
 	// resave modified body
