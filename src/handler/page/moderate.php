@@ -14,8 +14,9 @@ if (!$this->page || $this->page['comment_on_id'])
 // TODO: purge old SQL query cache
 
 $tpl->title = ($this->forum
-	? $this->_t('ForumTopic')
-	: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
+		? $this->_t('ForumTopic')
+		: $this->_t('ModerateSection')) . ' ' .
+	$this->compose_link_to_page($this->tag, '', $this->page['title']);
 
 $tpl->moderate =  ($this->forum
 	? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '« ' . $this->_t('ModerateSection2')) . '<br><br>'
@@ -83,7 +84,7 @@ $moderate_rename_topic = function($old_tag, $new_tag, $title = '')
 	if ($title != '')
 	{
 		// resave modified page
-		$this->save_page($new_tag, $page['body'], $title, '', null, null, null, null, '', true, false);
+		$this->save_page($new_tag, $page['body'], $title, '', null, null, 0, null, '', true, false);
 	}
 
 	// restore forum context
@@ -218,8 +219,8 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 	$old_page = $this->page;
 	unset($this->page);
 
-	// TODO: build title
-	$title = $page['title'];
+	// build title
+	$title = $this->add_spaces_title($title);
 
 	// TODO: pass user, else save_page might fail due missing write privilege
 	// resave modified body
