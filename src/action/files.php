@@ -157,7 +157,8 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, p.owner_id, p.tag, u.user_name " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext,
+			f.file_lang, f.file_name, f.file_description, f.uploaded_dt, p.owner_id, p.user_id AS puser_id, p.tag, u.user_name " .
 		"FROM " . $this->prefix . "file f " .
 			"LEFT JOIN  " . $this->prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
@@ -165,7 +166,7 @@ if ($can_view)
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);
 
-	$page_ids			= [];
+	$page_ids = [];
 
 	foreach ($files as $file)
 	{
@@ -175,7 +176,12 @@ if ($can_view)
 			$this->page_id_cache[$file['tag']]	= $file['page_id'];
 		}
 
-		$this->cache_page($file, true);
+		$this->cache_page([
+				'page_id'	=> $file['page_id'],
+				'tag'		=> $file['tag'],
+				'user_id'	=> $file['puser_id'],
+				'owner_id'	=> $file['owner_id'],
+		], true);
 
 		$object_ids[]												= $file['file_id'];
 		$this->file_cache[$file['page_id']][$file['file_name']]		= $file;

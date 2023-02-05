@@ -1689,6 +1689,7 @@ class Wacko
 		}
 
 		$cache_ids = [];
+		sort($object_ids);
 
 		if ($categories = $this->db->load_all(
 			"SELECT ca.object_id, ca.object_type_id, c.category_id, c.category, c.category_lang " .
@@ -6214,6 +6215,7 @@ class Wacko
 			}
 		}
 
+		$page_ids = array_unique($page_ids);
 		sort($page_ids);
 
 		if ($acls = $this->db->load_all(
