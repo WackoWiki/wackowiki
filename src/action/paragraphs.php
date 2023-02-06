@@ -29,7 +29,7 @@ $context		= $this->tag;
 	$toc = $this->post_wacko_toc ?? $this->build_toc($context, $start_depth, $end_depth, $link);
 
 	// ---------------------- p numeration ------------------------
-	// clarifying, what numbers where is placed
+	// clarifying, what numbers and where it is placed
 	$toc_len	= count($toc);
 	$p_num		= 0;
 
@@ -58,8 +58,8 @@ $context		= $this->tag;
 	// page was changed a little - writing it to the cache is not a bad idea
 	$this->tocs[$context]			= &$toc;
 
-	// now we need to set up a (small) flag, that's page source should be
-	// twisty-beasty changed in post-wacko and some digits could be added
+	// now we need to set up a (small) flag, that the page source should be
+	// changed in post-wacko and some digits could be added
 	$this->post_wacko_toc			= &$toc;
 	$this->post_wacko_action['p']	= $style;
 	$this->post_wacko_maxp			= $p_num;

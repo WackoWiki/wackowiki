@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{menu system=[0|1] redirect=''}}
+// {{menu system=[0|1]}}
 
 $menu_sorting = function ($a, $b)
 {
@@ -51,7 +51,6 @@ if ($this->is_admin() && $system)
 
 	if (!$this->known_language($menu_lang))
 	{
-		// language doesn't have any language files so use the admin set language instead
 		$menu_lang = $this->db->language;
 	}
 
