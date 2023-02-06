@@ -513,8 +513,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> 'Отменяет обязательное использование ВикиИмени для регистрации. Позволяет зарегистрироваться с обычными никами.',
 	'AllowEmailReuse'			=> 'Разрешить повторное использование email для регистрации:',
 	'AllowEmailReuseInfo'		=> 'Разные пользователи смогут использовать один и тот же e-mail для регистрации.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
+	'AllowedEmailDomains'		=> 'Разрешённые email домены:',
+	'AllowedEmailDomainsInfo'	=> 'Разрешенные домены электронной почты разделены запятой, например <code>example.com, local.lan</code> и т.д., иначе все домены электронной почты будут разрешены.',
 	'UsernameLength'			=> 'Длина имени пользователя:',
 	'UsernameLengthInfo'		=> 'Минимальное и максимальное количество букв в имени пользователя.',
 
@@ -1046,7 +1046,7 @@ $ap_translation = [
 	'UsersRenameInfo'			=> '* Внимание: Изменения затронут все страницы этого пользователя.',
 	'UsersUpdated'				=> 'Пользователь успешно обновлен.',
 
-	'UserIP'					=> 'IP',
+	'UserIP'					=> 'IP-адрес пользователя',
 	'UserSignuptime'			=> 'Дата регистрации',
 	'UserActions'				=> 'Действия',
 	'NoMatchingUser'			=> 'Нет пользователей, соответствующих заданным критериям',
