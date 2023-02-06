@@ -54,6 +54,8 @@ $ap_translation = [
 	'Disabled'					=> 'Απενεργοποιημένο',
 	'Mandatory'					=> 'Υποχρεωτικό',
 	'Admin'						=> 'Διαχειριστής',
+	'Min'						=> 'Min',
+	'Max'						=> 'Max',
 
 	'MiscellaneousSection'		=> 'Διάφορα',
 	'MainSection'				=> 'Basic Parameters',
