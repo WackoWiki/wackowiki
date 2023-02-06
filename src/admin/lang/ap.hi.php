@@ -54,6 +54,8 @@ $ap_translation = [
 	'Disabled'					=> 'निर्योग्य',
 	'Mandatory'					=> 'अनिवार्य ',
 	'Admin'						=> 'प्रशासक',
+	'Min'						=> 'Min',
+	'Max'						=> 'Max',
 
 	'MiscellaneousSection'		=> 'कई तरह का',
 	'MainSection'				=> 'General Options',

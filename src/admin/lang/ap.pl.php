@@ -54,6 +54,8 @@ $ap_translation = [
 	'Disabled'					=> 'Zablokuj',
 	'Mandatory'					=> 'Obowiązkowe',
 	'Admin'						=> 'Admin',
+	'Min'						=> 'Min',
+	'Max'						=> 'Max',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
 	'MainSection'				=> 'Basic Parameters',

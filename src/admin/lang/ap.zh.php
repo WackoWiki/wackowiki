@@ -54,6 +54,8 @@ $ap_translation = [
 	'Disabled'					=> '无效的',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> '管理',
+	'Min'						=> 'Min',
+	'Max'						=> 'Max',
 
 	'MiscellaneousSection'		=> '杂项',
 	'MainSection'				=> '通用选项',

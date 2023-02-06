@@ -54,6 +54,8 @@ $ap_translation = [
 	'Disabled'					=> 'Tiltott',
 	'Mandatory'					=> 'Kötelező',
 	'Admin'						=> 'Admin',
+	'Min'						=> 'Min',
+	'Max'						=> 'Max',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
 	'MainSection'				=> 'Basic Parameters',
