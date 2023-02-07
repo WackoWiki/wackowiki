@@ -112,12 +112,6 @@ if ($this->is_admin()
 			{
 				$message[] = $this->_t('FilesRemoved');
 			}
-
-			// done with remove_page()
-			#if ($this->remove_revisions($this->tag))
-			#{
-			#	$message[] = $this->_t('RevisionsRemoved');
-			#}
 		}
 
 		// purge related page cache
@@ -160,8 +154,6 @@ if ($this->is_admin()
 			$this->remove_watches				($this->tag, true);
 			$this->remove_comments				($this->tag, true, $dontkeep);
 			$this->remove_files_perpage			($this->tag, true);
-			// done with remove_page()
-			# $this->remove_revisions				($this->tag, true);
 
 			// get list of pages in the cluster
 			if ($list = $this->db->load_all(
