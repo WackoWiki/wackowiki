@@ -21,8 +21,6 @@ else
 	$registered	= false;
 }
 
-$message = '';
-
 if ($registered
 	&&
 	($this->check_acl($user_name, $this->db->rename_global_acl)
@@ -31,15 +29,15 @@ if ($registered
 {
 	if (!$this->page)
 	{
-		$message .= Ut::perc_replace($this->_t('DoesNotExists'), $this->href('edit'));
+		$tpl->message = Ut::perc_replace($this->_t('DoesNotExists'), $this->href('edit'));
 	}
 	else
 	{
 		if (@$_POST['_action'] === 'rename_page')
 		{
-			$log			= $tpl->massLog();
-			$new_tag		= $_POST['new_tag'] ?? '';
-			$old_tag		= $this->page['tag'];
+			$log		= $tpl->massLog();
+			$new_tag	= $_POST['new_tag'] ?? '';
+			$old_tag	= $this->page['tag'];
 
 			if ($error = $this->sanitize_new_page_tag($new_tag, $this->tag))
 			{
@@ -47,53 +45,13 @@ if ($registered
 				$this->reload_me();
 			}
 
-			// rename
+			// rename single page
 			if (!isset($_POST['massrename']))
 			{
 				$log->mode		= $this->_t('RenamePage');
 				$log->log_n_h	= $this->tag;
 
-				// rename single page
-				$need_redirect = @$_POST['redirect'] == 'on';
-
-				if (!$need_redirect)
-				{
-					if ($this->remove_referrers($this->tag))
-					{
-						$log->log_n_l_message = $this->_t('ReferrersRemoved');
-					}
-				}
-
-				if ($this->rename_page($this->tag, $new_tag))
-				{
-					$log->log_n_l_message = $this->_t('PageRenamed');
-				}
-
-				// unset object cache
-				$this->page_id_cache[$this->tag] = null;
-
-				$this->clear_cache_wanted_page($new_tag);
-
-				if ($need_redirect && ($old_tag != $new_tag))
-				{
-					$this->cache_wanted_page($this->tag);
-
-					// set redirect on original page
-					if ($this->save_page($this->tag, '{{redirect page="/' . $new_tag . '"}}', '', $this->_t('RedirectedTo') . ' ' . $new_tag))
-					{
-						$log->log_n_l_message = Ut::perc_replace($this->_t('RedirectCreated'), $this->link('/' . $this->tag));
-						// TODO: clone and set ACLs for non-public pages
-						$this->set_noindex($this->get_page_id($this->tag));
-					}
-
-					$this->clear_cache_wanted_page($this->tag);
-				}
-
-				$log->log_n_l_message = $this->_t('NewNameOfPage') . $this->link('/' . $new_tag);
-
-				// log event
-				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $this->tag, $new_tag) .
-					($need_redirect? $this->_t('LogRenamedPage2', SYSTEM_LANG) : '' ));
+				move($this, $this->page, $new_tag, $log);
 			}
 			else
 			{
@@ -107,7 +65,7 @@ if ($registered
 			// update sitemap
 			$this->update_sitemap();
 
-			$this->set_message($log, 'success'); // TODO & error too
+			$this->set_message($log, 'success');
 			$this->http->redirect($this->href('', $new_tag));
 		}
 		else
@@ -126,7 +84,7 @@ if ($registered
 			// show rename form
 			$tpl->tag	= $this->tag;
 
-			if ($this->db->default_rename_redirect == 1)
+			if ($this->db->default_rename_redirect)
 			{
 				$tpl->checked	= ' checked';
 			}
@@ -211,7 +169,7 @@ function move(&$engine, $old_page, $new_tag, $log): void
 			}
 			else
 			{
-				// Rename page
+				// rename page
 				$need_redirect = @$_POST['redirect'] == 'on';
 
 				if (!$need_redirect)
@@ -228,7 +186,7 @@ function move(&$engine, $old_page, $new_tag, $log): void
 				}
 
 				// unset object cache for current page
-				$engine->page_id_cache[$engine->tag] = null;
+				$engine->page_id_cache[$old_page['tag']] = null;
 
 				$engine->clear_cache_wanted_page($new_tag);
 
@@ -250,7 +208,7 @@ function move(&$engine, $old_page, $new_tag, $log): void
 
 				// log event
 				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', SYSTEM_LANG), $old_page['tag'], $new_tag) .
-					($need_redirect? $engine->_t('LogRenamedPage2', SYSTEM_LANG) : '' ));
+					($need_redirect? $engine->_t('LogRenamedPage2', SYSTEM_LANG) : ''));
 			}
 		}
 	}
