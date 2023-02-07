@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' message ' ]
 	[= l _ =
 		<span class="page-properties" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
 	=]
@@ -38,16 +39,16 @@
 	=]
 
 [ === massLog === ]
-<strong>[' mode ']</strong><br><br>
+<strong>[ ' mode ' ]</strong><br><br>
 [' log ']
 
 [ === log === ]
 <ol>
 	[= n _ =
-		<li><strong><code>[' h | e ']: </code></strong>
+		<li><strong><code>[ ' h | e ' ]: </code></strong>
 			<ul>
 				[= l _ =
-					<li>['' message '']</li>
+					<li>[ ' message ' ]</li>
 				=]
 			</ul>
 		</li>
