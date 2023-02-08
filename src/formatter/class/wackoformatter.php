@@ -1040,13 +1040,18 @@ class WackoFormatter
 			&& (in_array($wacko->method, ['addcomment', 'edit', 'show']) || $wacko->db->ap_mode))
 		{
 			$wacko->section_count++;
-			$section_tag = $wacko->section_tag ?? ($wacko->page['tag'] ?? '');
+			$section_tag = $wacko->section_tag
+							?? (isset($wacko->page['comment_on_id']) && $wacko->page['comment_on_id']
+								? $wacko->page['tag']
+								: '');
 
 			// non-static section edit link via action
 			$section_edit =
 				'<!--notypo--><!--action:begin-->' .
 					'editsection ' .
-						'page=' . '/' . $section_tag . ' ' .
+					($section_tag
+						? 'page=' . '/' . $section_tag . ' '
+						: '') .
 						'section=' . $wacko->section_count .
 				'<!--action:end--><!--/notypo-->';
 		}
