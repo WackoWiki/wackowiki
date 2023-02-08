@@ -67,7 +67,7 @@ $moderate_rename_topic = function($old_tag, $new_tag, $title = '')
 
 	$tag = $new_tag;
 
-	$this->rename_page($old_tag, $new_tag, $tag);
+	$this->rename_page($old_tag, $new_tag);
 	$this->remove_referrers($old_tag);
 	$this->remove_links($old_tag);
 	$this->clear_cache_wanted_page($new_tag);
