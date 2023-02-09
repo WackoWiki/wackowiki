@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 // {{editsection [page="yourPage"] [text="your text"]}}
 
 // set defaults
-if (!isset($page))		$page		= $this->context[$this->current_context];
+if (!isset($page))		$page		= '/' . $this->context[$this->current_context];
 if (!isset($section))	$section	= 0;
 if (!isset($text))		$text		= '';
 
