@@ -324,6 +324,9 @@ function admin_maint_resync($engine, $module)
 				$engine->sess->resync_counter	= null;
 				$engine->sess->resync_batch		= null;
 
+				// reset automatic redirection by action {{redirect}}
+				$engine->set_user_setting('dont_redirect', 0, false);
+
 				$engine->log(1, $engine->_t('LogPageBodySynched', SYSTEM_LANG));
 			}
 		}

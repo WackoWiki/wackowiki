@@ -38,7 +38,7 @@ else if (@$_GET['action'] === 'logout')
 else if ($user = $this->get_user())
 {
 	$email_changed	= false;
-	$user			= $this->load_user(0, $user['user_id']);
+	$user			= $this->load_user('', $user['user_id']);
 	$action			= $_POST['_action'] ?? null;
 	$real_name		= $this->sanitize_text_field(($_POST['real_name'] ?? ''), true);
 	$email			= $_POST['email'] ?? '';
@@ -153,7 +153,7 @@ else if ($user = $this->get_user())
 	// reload user data
 	if ($sql || $resend_code)
 	{
-		$user = $this->load_user(0, $user['user_id']);
+		$user = $this->load_user('', $user['user_id']);
 		$this->set_user($user);
 
 		$this->set_message($this->_t('UserSettingsStored', @$_POST['user_lang']), 'success');
