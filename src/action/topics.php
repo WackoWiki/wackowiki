@@ -51,8 +51,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 			$page_title		= $topic_name;
 			$topic_name		= utf8_ucwords($topic_name);
 			$this->sanitize_page_tag($topic_name);
-			$topic_name		= preg_replace('/[^- \\w]/u', '', $topic_name);
-			$topic_name		= str_replace([' ', "\t"], '', $topic_name);
+			$topic_name		= preg_replace('/[^-.\\w]/u', '', $topic_name);
 
 			if (!$topic_name)
 			{

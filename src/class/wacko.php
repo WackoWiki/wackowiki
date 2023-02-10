@@ -34,8 +34,10 @@ class Wacko
 	public $hide_revisions			= false;
 	public $context					= [];		// page context, used for correct processing of inclusions
 	public $current_context			= 0;		// current context level
+
 	public $header_count			= 0;
 	public $section_count			= 0;
+	public $section_tag				= null;
 	public $comment_id				= null;
 	public $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public $first_inclusion			= [];		// for backlinks
@@ -5678,7 +5680,7 @@ class Wacko
 					FROM " . $this->prefix . "auth_token
 					WHERE auth_token_id = " . (int) $token['auth_token_id']);
 
-				if ($user = $this->load_user(0, $token['user_id']))
+				if ($user = $this->load_user('', $token['user_id']))
 				{
 					$this->create_auth_token($user);
 					return $user;
@@ -6000,7 +6002,7 @@ class Wacko
 	function set_page_owner($page_id, $user_id): void
 	{
 		// check if user exists
-		if (!$this->load_user(0, $user_id))
+		if (!$this->load_user('', $user_id))
 		{
 			return;
 		}

@@ -59,7 +59,7 @@ function admin_maint_resync($engine, $module)
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id = 0
 							AND p.deleted <> 1
-						GROUP BY p.owner_id) AS s
+						GROUP BY p.owner_id, o.user_id) AS s
 					SET
 						u.total_pages = s.n
 					WHERE u.user_id = s.user_id";
@@ -190,7 +190,7 @@ function admin_maint_resync($engine, $module)
 			/* TODO:	1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
 						2) Browser will stop after 20 redirects with: ERR_TOO_MANY_REDIRECTS: There were too many redirects. -> load recent url again after error,
 							solution: stop after after 15 redirects and provide a 'contine' button
-							Chrome and Firefox out of the box is 20, Internet Explorer is 10
+							Chrome and Firefox out of the box is 20
 						3) if processing breaks see point 1
 							- fails with page having a broken action using templates
 						4) TIMEOUT or reach of memory limit - try to reduce the value for the $page_limit parameter
@@ -237,7 +237,7 @@ function admin_maint_resync($engine, $module)
 			}
 
 			// do not allow automatic redirection by action {{redirect}}
-			$engine->set_user_setting('dont_redirect', 1, 0);
+			$engine->set_user_setting('dont_redirect', 1, false);
 
 			if ($pages = $engine->db->load_all(
 			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, a.allow_rawhtml, a.disable_safehtml, " .
@@ -321,6 +321,9 @@ function admin_maint_resync($engine, $module)
 				$engine->sess->resync_links		= null;
 				$engine->sess->resync_counter	= null;
 				$engine->sess->resync_batch		= null;
+
+				// reset automatic redirection by action {{redirect}}
+				$engine->set_user_setting('dont_redirect', 0, false);
 
 				$engine->log(1, $engine->_t('LogPageBodySynched', SYSTEM_LANG));
 			}
