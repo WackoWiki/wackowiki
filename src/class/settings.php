@@ -88,7 +88,7 @@ class Settings extends Dbal implements ArrayAccess
 								INNER JOIN {$this->table_prefix}user u ON (gm.user_id = u.user_id)
 								INNER JOIN {$this->table_prefix}usergroup g ON (gm.group_id = g.group_id)")))
 				{
-					die('Error loading WackoWiki usergroups data: database `group` table is empty.');
+					die('Error loading WackoWiki usergroups data: database `usergroup` table is empty.');
 				}
 
 				$this->groups	= [];
