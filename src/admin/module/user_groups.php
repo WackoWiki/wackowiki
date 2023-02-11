@@ -25,7 +25,7 @@ function admin_user_groups($engine, $module)
 	$orderuser	= '';
 	$prefix		= $engine->prefix;
 
-/*	TODO:
+/*
  * Pre-defined groups
  * Pre-defined groups are special groups, they cannot be deleted or directly modified. However you can still add users and alter basic settings.
  *
@@ -48,6 +48,11 @@ function admin_user_groups($engine, $module)
 	$_order		= $_GET['order'] ?? '';
 	$action		= $_POST['_action'] ?? null;
 
+	$group_id	= (int) ($_GET['group_id'] ?? $_POST['group_id'] ?? null);
+	$change_id	= (int) ($_POST['group_id'] ?? null);
+	$open		= (int) ($_POST['open']		?? 0);
+	$active		= (int) ($_POST['active']	?? 0);
+
 	// update groups list
 	if (isset($_POST['save']))
 	{
@@ -56,7 +61,6 @@ function admin_user_groups($engine, $module)
 	}
 	else
 	{
-		$group_id	= (int) ($_GET['group_id'] ?? $_POST['group_id'] ?? null);
 		$p_group_id	= (int) ($_POST['group_id'] ?? null);
 
 		$usergroup = $engine->db->load_single(
@@ -166,18 +170,19 @@ function admin_user_groups($engine, $module)
 			}
 
 			// remove member from group
-			if (isset($_POST['remove_member']) && isset($_POST['change_member']))
+			if (isset($_POST['remove_member']) && isset($_POST['change_member_id']))
 			{
 				if ($member = $engine->db->load_single(
 					"SELECT user_id, user_name " .
 					"FROM " . $prefix . "user " .
-					"WHERE user_id = " . (int) $_POST['change_member'] . " " .
+					"WHERE user_id = " . (int) $_POST['change_member_id'] . " " .
 					"LIMIT 1"))
 				{
 					echo '<h2>' . $engine->_t('GroupRemoveMember') . '</h2>';
 					echo $engine->form_open('remove_group_member');
 
-					echo '<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
+					echo
+						'<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
 						'<input type="hidden" name="member_id" value="' . (int) $member['user_id'] . '">' . "\n" .
 					'<table class="formation">' .
 						'<tr>
@@ -202,7 +207,8 @@ function admin_user_groups($engine, $module)
 		if ($action == 'add_group'
 			&& isset($_POST['new_group_name']))
 		{
-			$group_name	= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$group_name		= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$description	= $engine->sanitize_text_field(($_POST['description'] ?? ''));
 
 			// do we have identical names?
 			if ($engine->db->load_single(
@@ -219,12 +225,12 @@ function admin_user_groups($engine, $module)
 			{
 				$engine->db->sql_query(
 					"INSERT INTO " . $prefix . "usergroup SET " .
-						"created		= UTC_TIMESTAMP(), " .
-						"description	= " . $engine->db->q($_POST['description']) . ", " .
-						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
 						"group_name		= " . $engine->db->q($group_name) . ", " .
-						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
-						"active			= " . (int) ($_POST['active'] ?? 0));
+						"description	= " . $engine->db->q($description) . ", " .
+						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
+						"created		= UTC_TIMESTAMP(), " .
+						"open			= " . (int) $open . ", " .
+						"active			= " . (int) $active);
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('GroupsAdded'), 'success');
@@ -237,7 +243,8 @@ function admin_user_groups($engine, $module)
 			&&  $p_group_id
 			&& (isset($_POST['new_group_name']) || isset($_POST['moderator_id'])))
 		{
-			$group_name	= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$group_name		= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$description	= $engine->sanitize_text_field(($_POST['description'] ?? ''));
 
 			// do we have identical names?
 			if ($engine->db->load_single(
@@ -247,7 +254,7 @@ function admin_user_groups($engine, $module)
 				"LIMIT 1"))
 			{
 				$engine->set_message($engine->_t('GroupsAlreadyExists'));
-				$_POST['change']	= $p_group_id;
+				$_POST['change_id']	= $p_group_id;
 				$_POST['edit']		= 1;
 			}
 			else
@@ -255,10 +262,10 @@ function admin_user_groups($engine, $module)
 				$engine->db->sql_query(
 					"UPDATE " . $prefix . "usergroup SET " .
 						"group_name		= " . $engine->db->q($group_name) . ", " .
-						"description	= " . $engine->db->q($_POST['new_description']) . ", " .
+						"description	= " . $engine->db->q($description) . ", " .
 						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
-						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
-						"active			= " . (int) ($_POST['active'] ?? 0) . " " .
+						"open			= " . (int) $open . ", " .
+						"active			= " . (int) $active . " " .
 					"WHERE group_id = " . (int) $p_group_id . " " .
 					"LIMIT 1");
 
@@ -290,8 +297,7 @@ function admin_user_groups($engine, $module)
 			$engine->show_message(Ut::perc_replace($engine->_t('GroupsDeleted'), '<code>' . $usergroup['group_name'] . '</code>'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRemoved', SYSTEM_LANG), $usergroup['group_name']));
 
-			unset($_GET['group_id']);
-			unset($_POST['group_id']);
+			unset($_GET['group_id'], $_POST['group_id']);
 		}
 	}
 
@@ -346,7 +352,7 @@ function admin_user_groups($engine, $module)
 						<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 					</th>
 					<td>
-						<input type="checkbox" id="open" name="open" value="1" ' . (!isset($_POST['open']) ? ' checked' : '') . '>
+						<input type="checkbox" id="open" name="open" value="1" ' . (!$open ? ' checked' : '') . '>
 					</td>
 				</tr>
 				<tr>
@@ -354,7 +360,7 @@ function admin_user_groups($engine, $module)
 						<label for="active">' . $engine->_t('GroupsActive') . '</label>
 	 				</th>
 					<td>
-	 					<input type="checkbox" id="active" name="active" value="1" ' . (!isset($_POST['active']) ? ' checked' : '') . '>
+	 					<input type="checkbox" id="active" name="active" value="1" ' . (!$active ? ' checked' : '') . '>
 	 				</td>
 				</tr>
 				<tr>
@@ -370,18 +376,18 @@ function admin_user_groups($engine, $module)
 		echo $engine->form_close();
 	}
 	// edit group
-	else if (isset($_POST['edit_group']) && isset($_POST['change']))
+	else if (isset($_POST['edit_group']) && $change_id)
 	{
 		if ($usergroup = $engine->db->load_single(
 			"SELECT group_name, description, moderator_id, open, active
 			FROM " . $prefix . "usergroup
-			WHERE group_id = " . (int) $_POST['change'] . "
+			WHERE group_id = " . (int) $change_id . "
 			LIMIT 1"))
 		{
 			echo '<h2>' . $engine->_t('GroupEdit') . '</h2>';
 			echo $engine->form_open('edit_group');
 
-			echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
+			echo '<input type="hidden" name="group_id" value="' . $change_id . '">' . "\n" .
 				'<table class="formation lined">
 				<tr>
 					<th>
@@ -423,7 +429,7 @@ function admin_user_groups($engine, $module)
 						<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 					</th>
 					<td>
-						<input type="checkbox" id="open" name="open" value="1" ' . (isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '') . '>
+						<input type="checkbox" id="open" name="open" value="1" ' . ($open || $usergroup['open'] == 1 ? ' checked' : '') . '>
 					</td>
 				</tr>
 				<tr>
@@ -431,7 +437,7 @@ function admin_user_groups($engine, $module)
 						<label for="active">' . $engine->_t('GroupsActive') . '</label>
 					</th>
 					<td>
-						<input type="checkbox" id="active" name="active" value="1" ' . (isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '') . '>
+						<input type="checkbox" id="active" name="active" value="1" ' . ($active || $usergroup['active'] == 1 ? ' checked' : '') . '>
 					</td>
 				</tr>
 				<tr>
@@ -448,12 +454,12 @@ function admin_user_groups($engine, $module)
 		}
 	}
 	// delete group
-	else if (isset($_POST['delete_group']) && isset($_POST['change']))
+	else if (isset($_POST['delete_group']) && $change_id)
 	{
 		if ($usergroup = $engine->db->load_single(
 			"SELECT group_name, is_system
 			FROM " . $prefix . "usergroup
-			WHERE group_id = " . (int) $_POST['change'] . "
+			WHERE group_id = " . (int) $change_id . "
 			LIMIT 1"))
 		{
 			if ($usergroup['is_system'])
@@ -465,7 +471,7 @@ function admin_user_groups($engine, $module)
 				echo '<h2>' . $engine->_t('GroupDelete') . '</h2>';
 				echo $engine->form_open('delete_group');
 
-				echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
+				echo '<input type="hidden" name="group_id" value="' . $change_id . '">' . "\n" .
 					'<table class="formation lined">
 						<tr>
 							<td>' .
@@ -488,9 +494,8 @@ function admin_user_groups($engine, $module)
 	/////////////////////////////////////////////
 
 	// get group
-	else if (isset($_GET['group_id']) || isset($_POST['group_id']))
+	else if ($group_id)
 	{
-		$group_id = (int) ($_GET['group_id'] ?? $_POST['group_id'] ?? null);
 		$usergroup = $engine->db->load_single(
 			"SELECT group_id, moderator_id, group_name " .
 			"FROM " . $prefix . "usergroup " .
@@ -530,7 +535,7 @@ function admin_user_groups($engine, $module)
 			echo
 				'<tr>' . "\n" .
 					'<td>
-						<input type="radio" name="change_member" value="' . $member['user_id'] . '"></td>' .
+						<input type="radio" name="change_member_id" value="' . $member['user_id'] . '"></td>' .
 					'<td>' . $member['user_id'] . '</td>' .
 					'<td><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $member['user_id']]) . '">' . $member['user_name'] . '</a></strong></td>' .
 				'</tr>';
@@ -682,7 +687,7 @@ function admin_user_groups($engine, $module)
 			{
 				echo
 					'<tr>' . "\n" .
-						'<td><input type="radio" name="change" value="' . $row['group_id'] . '"></td>' .
+						'<td><input type="radio" name="change_id" value="' . $row['group_id'] . '"></td>' .
 						'<td>' . $row['group_id'] . '</td>' .
 						'<td><a href="' . $engine->href('', '', ['group_id' => $row['group_id']]) . '">' . $row['group_name'] . '</a></td>' .
 						'<td>' . $row['description'] . '</td>' .

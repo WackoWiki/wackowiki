@@ -7,12 +7,11 @@ if (!defined('IN_WACKO'))
 
 // action/mygroups.php
 
+// set defaults
 if (!isset($nomark)) $nomark = 0;
 
 $my_groups = function ($user_id, $groups) use ($tpl)
 {
-	$my_groups_count = 0;
-
 	foreach ($groups as $group_name => $members)
 	{
 		if (in_array ($user_id, $members))
@@ -21,7 +20,6 @@ $my_groups = function ($user_id, $groups) use ($tpl)
 		}
 	}
 };
-
 
 if ($user = $this->get_user())
 {

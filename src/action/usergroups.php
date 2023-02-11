@@ -7,8 +7,10 @@ if (!defined('IN_WACKO'))
 
 // You have to be logged in to use this action
 
-if (!isset($nomark))	$nomark = 0;
+// set defaults
 if (!isset($cols))		$cols = '';
+if (!isset($nomark))	$nomark = 0;
+
 
 if ($user = $this->get_user())
 {
@@ -59,7 +61,7 @@ if ($user = $this->get_user())
 			}
 			/*
 			 If they are an Admin show them all users in all groups
-			 Else they are a normal logged in user so just show them groups they belong to
+			 else they are a normal logged-in user so just show them groups they belong to.
 			 */
 			if ($this->is_admin() || in_array($user['user_id'], $group_members))
 			{

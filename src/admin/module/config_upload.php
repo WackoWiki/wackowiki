@@ -19,6 +19,23 @@ $module['config_upload'] = [
 
 function admin_config_upload($engine, $module)
 {
+	$prefix		= $engine->prefix;
+
+	$user_groups = $engine->db->load_all(
+				"SELECT group_name
+				FROM " . $prefix . "usergroup
+				ORDER BY BINARY group_name");
+
+	foreach ($user_groups as $group)
+	{
+		$lower = mb_strtolower($group['group_name']);
+
+		$_groups[] = $lower;
+		$groups[]  = [
+			'name'	=> $group['group_name'],
+			'value'	=>  $lower
+		];
+	}
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 		<br>
@@ -27,13 +44,26 @@ function admin_config_upload($engine, $module)
 	</p>
 	<br>
 <?php
-	$action = $_POST['_action'] ?? null;
-	$binary_factor = ['0' => 1, '1' => 1024, '2' => (1024 * 1024), '3' => (1024 * 1024 * 1024)];
+	$action			= $_POST['_action'] ?? null;
+	$binary_factor	= ['0' => 1, '1' => 1024, '2' => (1024 * 1024), '3' => (1024 * 1024 * 1024)];
 
 	// update settings
 	if ($action == 'upload')
 	{
-		$config['upload']					= (string) $_POST['upload'];
+		$upload = $_POST['upload'] ?? 0;
+
+		// validate upload parameter (0 | 1 | group_name)
+		if (!in_array($upload, [0, 1]))
+		{
+			$upload		= $engine->sanitize_username($upload);
+
+			if (!in_array($upload, $_groups))
+			{
+				$upload = 0;
+			}
+		}
+
+		$config['upload']					= (string) $upload;
 		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
 		$config['upload_max_size']			= (int) ($_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']]);
 		$config['upload_quota']				= (int) ($_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']]);
@@ -70,7 +100,12 @@ function admin_config_upload($engine, $module)
 				</td>
 				<td>
 					<select id="upload" name="upload">
-						<option value="admins"<?php echo ((string) $engine->db->upload === 'admins' ? ' selected' : '');?>>Admins</option>
+						<?php
+						foreach ($groups as $group)
+						{
+							echo '<option value="' . $group['value'] . '"' . ((string) $engine->db->upload === $group['value'] ? ' selected' : '') . '>' . $group['name'] . '</option>';
+						}
+						?>
 						<option value="1"<?php echo ((string) $engine->db->upload === '1' ? ' selected' : '');?>>registered users</option>
 						<option value="0"<?php echo ((string) $engine->db->upload === '0' ? ' selected' : '');?>>disabled</option>
 					</select>

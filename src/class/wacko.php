@@ -5427,10 +5427,8 @@ class Wacko
 	// GROUPS
 	function load_usergroup($group_name, $group_id = 0)
 	{
-		$fiels_default	= 'g.group_id, g.group_name, g.description, g.moderator_id, g.created, g.is_system, g.open, g.active, u.user_name AS moderator';
-
 		return $this->db->load_single(
-			"SELECT {$fiels_default} " .
+			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.created, g.is_system, g.open, g.active, u.user_name AS moderator " .
 			"FROM " . $this->prefix . "usergroup g " .
 				"LEFT JOIN " . $this->prefix . "user u ON (g.moderator_id = u.user_id) " .
 			"WHERE " . ( $group_id
@@ -6549,52 +6547,40 @@ class Wacko
 	// check if user has the right to upload files
 	function can_upload($global = false): bool
 	{
+		$user_name		= GUEST;
+		$registered		= false;
+
 		if ($this->get_user())
 		{
 			$user_name		= mb_strtolower($this->get_user_name());
 			$registered		= true;
-		}
-		else
-		{
-			$user_name		= GUEST;
-			$registered		= false;
 		}
 
 		if ($registered)
 		{
 			if ($global)
 			{
-				if (   $this->db->upload === true
+				return
+					(  $this->db->upload === true
 					|| $this->db->upload == 1
+					|| ($this->db->upload && $this->is_admin())
 					|| $this->check_acl($user_name, $this->db->upload)
-					)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
+					);
 			}
 			else
 			{
-				if ( (     $this->db->upload === true
-						|| $this->db->upload == 1
-						|| $this->check_acl($user_name, $this->db->upload) )
+				return
+					(  $this->db->upload === true
+					|| $this->db->upload == 1
+					|| ($this->db->upload && $this->is_admin())
+					|| $this->check_acl($user_name, $this->db->upload) )
 					&& (   $this->has_access('upload')
 						&& $this->has_access('write')
 						&& $this->has_access('read')
 						|| $this->is_owner()
 						|| $this->is_admin() )
-						|| (isset($_POST['upload_to']) && $_POST['upload_to'] == 'global') // for action -> upload handler
-					)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
+						|| (isset($_POST['upload_to']) && $_POST['upload_to'] == 'global' // for action -> upload handler
+					);
 			}
 		}
 		else
