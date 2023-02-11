@@ -375,7 +375,7 @@ class WackoFormatter
 			$this->page_id = $wacko->resync_page_id;
 		}
 
-		if (!$this->page_id || isset($wacko->new_comment))
+		if (!$this->page_id || $wacko->new_comment)
 		{
 			// for new page or comment with not yet created db record
 			// temporary random hashid for paragrafica (toc, p)
