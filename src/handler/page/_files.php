@@ -16,14 +16,13 @@ if ($this->has_access('read'))
 		$show_files = (bool) $_GET['show_files'];
 	}
 
+	$registered	= false;
+	$user_name	= GUEST;
+
 	if ($this->get_user_name())
 	{
 		$registered	= true;
 		$user_name	= mb_strtolower($this->get_user_name());
-	}
-	else
-	{
-		$user_name	= GUEST;
 	}
 
 	$tpl->enter('fp_s_');
@@ -39,9 +38,10 @@ if ($this->has_access('read'))
 		$tpl->f_files	= $this->action('files', ['nomark' => 1]);
 
 		// display form
-		if (isset($registered)
+		if ($registered
 			&& (   $this->db->upload === true
 				|| $this->db->upload == 1
+				|| ($this->db->upload && $this->is_admin())
 				|| $this->check_acl($user_name, $this->db->upload)
 				)
 			)
@@ -59,6 +59,7 @@ if ($this->has_access('read'))
 				if ($this->get_user()
 					&& (   $this->db->upload === true
 						|| $this->db->upload == 1
+						|| ($this->db->upload && $this->is_admin())
 						|| $this->check_acl($user_name, $this->db->upload)
 						)
 				)

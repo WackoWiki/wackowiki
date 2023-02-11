@@ -6560,6 +6560,7 @@ class Wacko
 				return
 					(  $this->db->upload === true
 					|| $this->db->upload == 1
+					|| ($this->db->upload && $this->is_admin())
 					|| $this->check_acl($user_name, $this->db->upload)
 					);
 			}
@@ -6568,6 +6569,7 @@ class Wacko
 				return
 					(  $this->db->upload === true
 					|| $this->db->upload == 1
+					|| ($this->db->upload && $this->is_admin())
 					|| $this->check_acl($user_name, $this->db->upload) )
 					&& (   $this->has_access('upload')
 						&& $this->has_access('write')

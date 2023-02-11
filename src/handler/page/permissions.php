@@ -16,8 +16,10 @@ if (!($this->is_owner() || $this->is_admin()))
 
 $action			= $_POST['_action'] ?? null;
 // check if upload is allowed for user
-$upload			= $this->db->upload;
-$upload_allowed	= ($upload === true || $upload == 1 || $this->check_acl($this->get_user_name(), $upload));
+$upload_allowed	= (    $this->db->upload === true
+					|| $this->db->upload == 1
+					|| ($this->db->upload && $this->is_admin())
+					|| $this->check_acl($this->get_user_name(), $this->db->upload));
 $prefix			= $this->prefix;
 
 if ($action === 'set_permissions')
