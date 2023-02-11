@@ -25,6 +25,7 @@ class Wacko
 	public $tag;
 	public $module;
 	public $method					= '';
+
 	public $forum					= false;
 	public $canonical				= false;
 	public $static_feed				= false;	// disables section edit link in post_wacko
@@ -39,6 +40,8 @@ class Wacko
 	public $section_count			= 0;
 	public $section_tag				= null;
 	public $comment_id				= null;
+	public $new_comment				= false;
+
 	public $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public $first_inclusion			= [];		// for backlinks
 	public $toc_context				= [];
