@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Nadpisz istniejące pliki',
 	'FileDesc'					=> 'Opis:',
 	'UploadForbidden'			=> 'Nie masz prawa na wgrywanie tutaj plików.',
+	'UploadOverwriteDenied'		=> 'Tylko właściciel pliku lub administrator może nadpisać plik %1.',
 	'UploadNoFile'				=> 'Z jakiegoś powodu nie było pliku w formularzu.',
 	'UploadMaxSizeReached'		=> 'Rozmiar pliku wykracza poza dozwolony limit!',
 	'UploadDirNotWritable'		=> 'Katalog plików nie nadaje się do zapisu!',

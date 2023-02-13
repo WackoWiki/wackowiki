@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Asenda olemasolevad failid',
 	'FileDesc'					=> 'Kirjeldus:',
 	'UploadForbidden'			=> 'Sul ei ole luba siia faili laadida.',
+	'UploadOverwriteDenied'		=> 'Ainult faili omanik või administraator saab faili %1 üle kirjutada.',
 	'UploadNoFile'				=> 'Mingil põhjusel ei olnud vormil faili.',
 	'UploadMaxSizeReached'		=> 'Faili suurus ületab lubatud piiri!',
 	'UploadDirNotWritable'		=> 'Failide kataloog pole kirjutatav!',

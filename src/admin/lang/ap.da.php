@@ -871,7 +871,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'FileUploadsSection'		=> 'File uploads',
-	'RegisteredUsers'			=> 'registered users',
+	'RegisteredUsers'			=> 'registrerede brugere',
 	'RightToUpload'				=> 'Right to the upload files:',
 	'RightToUploadInfo'			=> '<code>admins</code> means that only users belonging to the admins group can upload  files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
 	'UploadOnlyImages'			=> 'Allow only upload of images:',

@@ -851,7 +851,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> '更新了上传设置',
 
 	'FileUploadsSection'		=> '文件上传',
-	'RegisteredUsers'			=> 'registered users',
+	'RegisteredUsers'			=> '注册用户',
 	'RightToUpload'				=> '上传文件的权限：',
 	'RightToUploadInfo'			=> '<code>admins</code> 表示只有属于 admins 组的用户才能上传文件。 <code>1</code> 表示对注册用户开放上传。 <code>0</code> 表示禁止上传。',
 	'UploadOnlyImages'			=> '只允许上传图片：',

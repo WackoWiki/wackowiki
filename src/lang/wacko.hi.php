@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'मौजूदा फ़ाईलों पर पुनर्लेखन करें',
 	'FileDesc'					=> 'विवरण:',
 	'UploadForbidden'			=> 'आपको यहां फ़ाइलें अपलोड करने की अनुमति नहीं है।',
+	'UploadOverwriteDenied'		=> 'केवल फ़ाइल स्वामी या व्यवस्थापक ही %1 फ़ाइल को अधिलेखित कर सकता है।',
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
 	'UploadDirNotWritable'		=> 'File directory is not writable!',

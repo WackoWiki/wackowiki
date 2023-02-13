@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Overskriv eksisterende filer',
 	'FileDesc'					=> 'Beskrivelse:',
 	'UploadForbidden'			=> 'Du må ikke uploade filer her.',
+	'UploadOverwriteDenied'		=> 'Kun filens ejer eller administrator kan overskrive %1-filen.',
 	'UploadNoFile'				=> 'Hmmm, der var ikke nogen fil.',
 	'UploadMaxSizeReached'		=> 'Filen er for stor!',
 	'UploadDirNotWritable'		=> 'Filmappen kan ikke skrives!',

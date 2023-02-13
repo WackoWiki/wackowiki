@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Overwrite existing files',
 	'FileDesc'					=> 'Description:',
 	'UploadForbidden'			=> 'You are not allowed to upload files here.',
+	'UploadOverwriteDenied'		=> 'Only the file owner or administrator can overwrite the %1 file.',
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
 	'UploadDirNotWritable'		=> 'File directory is not writable!',

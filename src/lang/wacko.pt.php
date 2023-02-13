@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Escrever por cima de ficheiros existentes',
 	'FileDesc'					=> 'Descrição:',
 	'UploadForbidden'			=> 'Não está autorizado a fazer upload de ficheiros aqui.',
+	'UploadOverwriteDenied'		=> 'Apenas o proprietário ou administrador do ficheiro pode sobrescrever o ficheiro %1.',
 	'UploadNoFile'				=> 'Não existe nenhum ficheiro no formulário.',
 	'UploadMaxSizeReached'		=> 'Ficheiro com tamanho excessivo!',
 	'UploadDirNotWritable'		=> 'O directório de ficheiros não se pode escrever!',

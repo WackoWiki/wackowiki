@@ -110,9 +110,10 @@ function admin_config_upload($engine, $module)
 						{
 							echo '<option value="' . $group['value'] . '"' . ((string) $engine->db->upload === $group['value'] ? ' selected' : '') . '>' . $group['name'] . '</option>';
 						}
+
+						echo '<option value="1"' . ((string) $engine->db->upload === '1' ? ' selected' : '') . '>' . $engine->_t('RegisteredUsers') . '</option>';
+						echo '<option value="0"' . ((string) $engine->db->upload === '0' ? ' selected' : '') . '>' . $engine->_t('Disabled') . '</option>';
 						?>
-						<option value="1"<?php echo ((string) $engine->db->upload === '1' ? ' selected' : '');?>><?php echo $engine->_t('RegisteredUsers');?></option>
-						<option value="0"<?php echo ((string) $engine->db->upload === '0' ? ' selected' : '');?>><?php echo $engine->_t('Disabled');?></option>
 					</select>
 				</td>
 			</tr>

@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Écraser les fichiers existants',
 	'FileDesc'					=> 'Description :',
 	'UploadForbidden'			=> 'Vous n’êtes pas autorisé à déposer des fichiers ici.',
+	'UploadOverwriteDenied'		=> 'Seul le propriétaire ou l\'administrateur du fichier peut écraser le fichier %1.',
 	'UploadNoFile'				=> 'Il n’y avait pas de fichier joint au formulaire.',
 	'UploadMaxSizeReached'		=> 'La taille du fichier excède celle autorisée !',
 	'UploadDirNotWritable'		=> 'Le répertoire de dépôt n’est pas accessible en écriture!',

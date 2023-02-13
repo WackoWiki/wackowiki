@@ -832,6 +832,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'بازنویسی فایل های موجود',
 	'FileDesc'					=> 'توضیحات',
 	'UploadForbidden'			=> 'You are not allowed to upload files here.',
+	'UploadOverwriteDenied'		=> 'فقط مالک یا سرپرست فایل می تواند فایل %1 را بازنویسی کند.',
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
 	'UploadDirNotWritable'		=> 'File directory is not writable!',
