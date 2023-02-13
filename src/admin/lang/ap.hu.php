@@ -857,6 +857,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> 'Frissített feltöltési beállítások',
 
 	'FileUploadsSection'		=> 'Fájl feltöltése',
+	'RegisteredUsers'			=> 'regisztrált felhasználók',
 	'RightToUpload'				=> 'Fájlok feltöltési joga:',
 	'RightToUploadInfo'			=> '<code>admins</code> means that only users belonging to the admins group can upload  files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
 	'UploadOnlyImages'			=> 'Csak képek feltöltését engedélyezze:',

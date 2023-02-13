@@ -859,6 +859,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> 'Einstellungen für Dateianhänge aktualisiert',
 
 	'FileUploadsSection'		=> 'Dateien hochladen',
+	'RegisteredUsers'			=> 'registrierte Benutzer',
 	'RightToUpload'				=> 'Berechtigung Dateien hochzuladen:',
 	'RightToUploadInfo'			=> '<code>admins</code> bedeutet nur Nutzer welche der Admins-Gruppe angehören, können Dateien hochladen. <code>1</code> bedeutet jeder registrierte Benutzer kann Dateien hochladen. <code>0</code> das Hochladen von Dateien ist nicht möglich.',
 	'UploadOnlyImages'			=> 'Erlaube nur das Hochladen von Bildern:',

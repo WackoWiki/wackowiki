@@ -40,9 +40,9 @@ if ($this->has_access('write'))
 			$email = new Email($this);
 			$email->send_mail($email_to, $email_to, $subject, $message);
 
-			$this->set_message($this->_t('SendPage').'');
-			#$tpl->message = $email_to;
-			$this->http->redirect($this->href('', $this->tag));
+			$this->set_message($this->_t('SendPage'));
+
+			$this->http->redirect($this->href());
 		}
 	}
 	else

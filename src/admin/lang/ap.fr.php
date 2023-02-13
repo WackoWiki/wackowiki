@@ -856,6 +856,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> 'Mise à jour des paramètres de téléchargement',
 
 	'FileUploadsSection'		=> 'Téléchargements de fichiers',
+	'RegisteredUsers'			=> 'utilisateurs enregistrés',
 	'RightToUpload'				=> 'Droit aux fichiers téléchargés :',
 	'RightToUploadInfo'			=> '<code>admins</code> signifie que seuls les utilisateurs appartenant au groupe admins peuvent télécharger les fichiers. <code>1</code> signifie que le téléchargement est ouvert aux utilisateurs enregistrés. <code>0</code> signifie que le téléchargement est désactivé.',
 	'UploadOnlyImages'			=> 'Autoriser uniquement le téléchargement d\'images :',

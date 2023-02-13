@@ -839,6 +839,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> 'Параметры вложений обновлены',
 
 	'FileUploadsSection'		=> 'Загрузка файлов',
+	'RegisteredUsers'			=> 'зарегистрированных пользователей',
 	'RightToUpload'				=> 'Права на загрузку файлов:',
 	'RightToUploadInfo'			=> 'Дается <code>Admins</code> - Администраторам или залогиненным пользователям или запрещено вообще.',
 	'UploadOnlyImages'			=> 'Загружать только изображения:',

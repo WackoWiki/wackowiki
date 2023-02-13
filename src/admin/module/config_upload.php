@@ -22,9 +22,9 @@ function admin_config_upload($engine, $module)
 	$prefix		= $engine->prefix;
 
 	$user_groups = $engine->db->load_all(
-				"SELECT group_name
-				FROM " . $prefix . "usergroup
-				ORDER BY BINARY group_name");
+		"SELECT group_name
+		FROM " . $prefix . "usergroup
+		ORDER BY BINARY group_name");
 
 	foreach ($user_groups as $group)
 	{
@@ -45,7 +45,12 @@ function admin_config_upload($engine, $module)
 	<br>
 <?php
 	$action			= $_POST['_action'] ?? null;
-	$binary_factor	= ['0' => 1, '1' => 1024, '2' => (1024 * 1024), '3' => (1024 * 1024 * 1024)];
+	$binary_factor	= [
+		'0' => 1,
+		'1' => 1024,
+		'2' => (1024 * 1024),
+		'3' => (1024 * 1024 * 1024)
+	];
 
 	// update settings
 	if ($action == 'upload')
@@ -106,8 +111,8 @@ function admin_config_upload($engine, $module)
 							echo '<option value="' . $group['value'] . '"' . ((string) $engine->db->upload === $group['value'] ? ' selected' : '') . '>' . $group['name'] . '</option>';
 						}
 						?>
-						<option value="1"<?php echo ((string) $engine->db->upload === '1' ? ' selected' : '');?>>registered users</option>
-						<option value="0"<?php echo ((string) $engine->db->upload === '0' ? ' selected' : '');?>>disabled</option>
+						<option value="1"<?php echo ((string) $engine->db->upload === '1' ? ' selected' : '');?>><?php echo $engine->_t('RegisteredUsers');?></option>
+						<option value="0"<?php echo ((string) $engine->db->upload === '0' ? ' selected' : '');?>><?php echo $engine->_t('Disabled');?></option>
 					</select>
 				</td>
 			</tr>
