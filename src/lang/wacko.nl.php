@@ -815,6 +815,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Bestaande bestanden overschrijven',
 	'FileDesc'					=> 'Beschrijving:',
 	'UploadForbidden'			=> 'U mag geen bestanden uploaden op deze pagina.',
+	'UploadOverwriteDenied'		=> 'Alleen de bestandseigenaar of beheerder kan het %1 bestand overschrijven.',
 	'UploadNoFile'				=> 'Het bestand dat u wilde uploaden is niet gevonden. Heeft u het juiste pad ingevuld?',
 	'UploadMaxSizeReached'		=> 'Het bestand is groter dan de maximum toegestane grootte.',
 	'UploadDirNotWritable'		=> 'Bestandsdirectory is niet beschrijfbaar!',

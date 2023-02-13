@@ -815,6 +815,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Презапиши съществуващите файлове',
 	'FileDesc'					=> 'Описание:',
 	'UploadForbidden'			=> 'Не можете да качите файл тук.',
+	'UploadOverwriteDenied'		=> 'Само собственикът на файла или администраторът може да презаписва файла %1.',
 	'UploadNoFile'				=> 'Няма файл.',
 	'UploadMaxSizeReached'		=> 'Файлът е много голям!',
 	'UploadDirNotWritable'		=> 'Файловата директория не може да се записва!',

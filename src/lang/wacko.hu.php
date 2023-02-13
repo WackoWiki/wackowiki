@@ -815,6 +815,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Meglévő fájlok felülírása',
 	'FileDesc'					=> 'Leírás:',
 	'UploadForbidden'			=> 'Ön nem jogosult feltölteni a fájlokat ide.',
+	'UploadOverwriteDenied'		=> 'Csak a fájl tulajdonosa vagy a rendszergazda írhatja felül a %1 fájlt.',
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
 	'UploadDirNotWritable'		=> 'A fájlkönyvtár nem írható!',

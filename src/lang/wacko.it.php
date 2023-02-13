@@ -815,6 +815,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Sovrascrivi i file esistenti',
 	'FileDesc'					=> 'Descrizione:',
 	'UploadForbidden'			=> 'Se non sono autorizzati a caricare i file qui.',
+	'UploadOverwriteDenied'		=> 'Solo il proprietario del file o l\'amministratore può sovrascrivere il file %1.',
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'La dimensione del file supera il limite consentito!',
 	'UploadDirNotWritable'		=> 'La directory del file non è scrivibile!',

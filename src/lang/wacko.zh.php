@@ -815,6 +815,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> '覆盖已存在的同名文件',
 	'FileDesc'					=> '描述：',
 	'UploadForbidden'			=> '您不能在此处上传文件。',
+	'UploadOverwriteDenied'		=> '只有文件所有者或管理员可以覆盖%1的文件。',
 	'UploadNoFile'				=> '由于某种原因，没有表单中的文件。',
 	'UploadMaxSizeReached'		=> '文件大小超过了允许的限制！',
 	'UploadDirNotWritable'		=> '文件目录不可写！',

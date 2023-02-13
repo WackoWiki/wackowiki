@@ -17,6 +17,30 @@ $prefix			= $this->prefix;
 
 $this->ensure_page(true);
 
+$can_replace = function($file_name, $page_id, $user)
+{
+	$result = false;
+
+	if ($file_record = $this->check_file_record($file_name, $page_id))
+	{
+		if ($file_record['user_id'] == $user['user_id'] || $this->is_admin())
+		{
+			$result = true;
+		}
+		else
+		{
+			$result = false;
+			$this->set_message(
+				Ut::perc_replace(
+					$this->_t('UploadOverwriteDenied'),
+					'<code>' . $file_record['file_name'] . '</code>'),
+				'error');
+		}
+	}
+
+	return $result;
+};
+
 // check who u are, can u upload?
 if (isset($_POST['upload']) & $can_upload)
 {
@@ -120,18 +144,10 @@ if (isset($_POST['upload']) & $can_upload)
 					$dir		= UPLOAD_GLOBAL_DIR . '/';
 				}
 
-				// File must be in file table!
-				// TODO: check against file owner, Admin is always allowed
-				// + check for file / page owner
-				if (isset($_POST['file_overwrite'])
-					&& $this->check_file_record($t_name . '.' . $ext, $page_id))
-				{
-					$replace = true;
-				}
-				else
-				{
-					$replace = false;
-				}
+				// overwrite file
+				// + file must be in file table
+				// + allow only file owner or admin
+				$replace = isset($_POST['file_overwrite']) && $can_replace($t_name . '.' . $ext, $page_id, $user);
 
 				// D. check if folder is writable
 				if (is_writable($dir))
