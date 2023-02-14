@@ -6,11 +6,11 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	Showing uploaded by {{upload}} files
+	Showing uploaded files
 
 	{{files
-		[page="PageName" or global=1 or all=1]
-		[order="time|FILENAME|size|size_desc|ext"]
+		[page="PageName" or global=1 or all=1 or linked=1]
+		[order="ext|name_desc|size|size_desc|time|time_desc"]
 		[owner="UserName"]
 		[media=1]
 		[max=number]
@@ -308,7 +308,7 @@ if ($can_view)
 
 			// display file tools
 			if ($this->is_admin()
-				|| (!$global
+				|| (!($global || $all || $linked)
 					&& $this->get_page_owner_id($page_id) == $this->get_user_id())
 				|| $file['user_id'] == $this->get_user_id())
 			{
@@ -325,7 +325,7 @@ if ($can_view)
 
 			$tpl->leave(); // n_
 
-			unset($link, $desc);
+			unset($desc, $icons, $link);
 		}
 
 		$tpl->leave(); // r_
