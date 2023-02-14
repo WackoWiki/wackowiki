@@ -207,16 +207,26 @@ if (isset($_POST['upload']) & $can_upload)
 							$size	= @getimagesize($tmp_name);
 						}
 
-						if ($this->db->upload_images_only)
+						if ($this->db->upload_images_only && !$this->is_admin())
 						{
 							if ($size[0] == 0)
 							{
-								$forbid = true;
+								$forbid	= true;
+								$error	= $this->_t('UploadNotAPicture');
 							}
 						}
 
-						// F. check for upload only images
-						if (!$forbid || $this->is_admin())
+						if ($this->db->check_mimetype)
+						{
+							if (in_array($mime_type, $this->db->mime_type_exclusions))
+							{
+								$forbid	= true;
+								$error	= Ut::perc_replace($this->_t('UploadBadMime'), '<code>' . $mime_type . '</code>');
+							}
+						}
+
+						// F. check for upload only images and forbidden MIME types
+						if (!$forbid)
 						{
 							// save to permanent location
 							move_uploaded_file($tmp_name, $dir . $result_name);
@@ -310,11 +320,7 @@ if (isset($_POST['upload']) & $can_upload)
 							}
 
 							$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
-						}
-						else // [F] forbid
-						{
-							$error = $this->_t('UploadNotAPicture');
-						}
+						} // [F] forbid
 					}
 					else // [E] maxsize
 					{

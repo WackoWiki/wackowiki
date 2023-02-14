@@ -821,6 +821,9 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'O directório de ficheiros não se pode escrever!',
 	'UploadNotAPicture'			=> 'Só há permissões para upload de imagens.',
 	'UploadEmptyExtension'		=> 'O nome do ficheiro e também a sua extensão não podem estar vazios.',
+	'UploadMimeMismatch'		=> 'A extensão %1 não corresponde ao tipo MIME do ficheiro (%2).',
+	'UploadBadMime'				=> 'Não é permitido carregar ficheiros do tipo MIME %1.',
+
 	'UploadMaxFileQuota'		=> 'Atinngiu o seu limite de upload.',
 	'UploadDone'				=> 'Upload do Ficheiro com sucesso',
 	'UploadFileForbidden'		=> 'Acesso ao ficheiro proibido',

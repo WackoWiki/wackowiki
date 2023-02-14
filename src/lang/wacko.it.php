@@ -821,6 +821,9 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'La directory del file non è scrivibile!',
 	'UploadNotAPicture'			=> 'È consentito caricare solo le immagini e cosa stai cercando di caricare?',
 	'UploadEmptyExtension'		=> 'Il nome del file e l\'estensione non possono essere vuoti.',
+	'UploadMimeMismatch'		=> 'L\'estensione del file %1 non corrisponde al tipo MIME rilevato dal file (%2).',
+	'UploadBadMime'				=> 'Non è consentito caricare file di tipo MIME %1.',
+
 	'UploadMaxFileQuota'		=> 'Hai raggiunto il limite di caricamento, questo file non può essere caricato',
 	'UploadDone'				=> 'Caricamento file riuscito',
 	'UploadFileForbidden'		=> 'Vietato l\'accesso ai file',

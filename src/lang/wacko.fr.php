@@ -237,9 +237,9 @@ $wacko_translation = [
 	'AclSyntaxError'			=> 'Erreur de syntaxe dans la liste de contrôle d’accès',
 	'AclHelp'					=> '<code>*</code> - tout le monde est autorisé<br>' .
 									'<code>$</code> - seuls les utilisateurs enregistrés<br>' .
-									'<code>!</code> - un point d\'exclamation précédent nie le droit respectif<br>' .
+									'<code>!</code> - un point d’exclamation précédent nie le droit respectif<br>' .
 									'<code>[UserName]</code> - noms des utilisateurs autorisés<br>' .
-									'<code>[GroupName]</code> - noms des groupes d\'utilisateurs autorisés (alias)<br>' .
+									'<code>[GroupName]</code> - noms des groupes d’utilisateurs autorisés (alias)<br>' .
 									'<code>(une liste vide)</code> - seul le propriétaire de la page a accès',
 
 	'AccessMode'				=> 'Visibilité',
@@ -424,7 +424,7 @@ $wacko_translation = [
 	'PrintVersion'				=> 'Version pour impression',
 	'PrintText'					=> 'Impression',
 	'LinkedPages'				=> 'Pages liées :',
-	'NoLinkedPages'				=> 'Il n\'y a pas de pages liées',
+	'NoLinkedPages'				=> 'Il n’y a pas de pages liées',
 	'ReferringPages'			=> 'Pages qui renvoient à celle-ci :',
 	'NoReferringPages'			=> 'Aucune page ne renvoie à celle-ci',
 	'Footnotes'					=> 'Notes de pied de page :',
@@ -460,7 +460,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Rechercher :',
 	'TopicSearchResults'		=> 'Résultat de la recherche dans les sujets ',
 	'NotFoundInTopics'			=> 'non trouvé dans les sujets',
-	'FilterLangNotAvailable'	=> 'La langue sélectionnée n\'est pas disponible !',
+	'FilterLangNotAvailable'	=> 'La langue sélectionnée n’est pas disponible !',
 
 	'PostedBy'					=> 'posté par',
 	'ThisIsCommentOn'			=> 'Ceci est un commentaire sur',
@@ -470,7 +470,7 @@ $wacko_translation = [
 	'From'						=> 'de',
 	'For'						=> 'pour',
 	'ReturnToCommented'			=> 'Retour vers la page commentée',
-	'AbandonedComment'			=> 'La page à laquelle appartient ce commentaire n\'existe plus !',
+	'AbandonedComment'			=> 'La page à laquelle appartient ce commentaire n’existe plus !',
 
 	'PagesLinkingTo'			=> 'Pages ayant un lien vers',
 	'NoPageLinkingTo'			=> 'Aucune page n’a de lien vers',
@@ -528,9 +528,9 @@ $wacko_translation = [
 	'AccountDeleteConfirm'		=> 'Êtes-vous sûr de vouloir supprimer le compte ?',
 	'AccountDeleted'			=> 'Compte supprimé avec succès',
 	'AccountDeleteHeader'		=> 'Supprimer le compte %1',
-	'AccountDeleteInfo'			=> 'Les données que vous avez créées (e.g. e-mail, préférences, pièces jointes, entrées wiki) seront supprimées autant que possible. Notez toutefois que les données comme les pièces jointes et les entrées wiki ne peuvent pas être supprimées sans impacter le travail des autres utilisateurs. Ces données sont donc réaffectées à un compte appelé %1. Étant donné que les données de chaque compte supprimé sont réaffectées à ce compte, il ne sera plus possible de distinguer les données que vous avez créées de celles d\'un autre compte supprimé.',
-	'AccountDeleteWarning'		=> 'Supprimer votre compte d\'utilisateur est une action irréversible.',
-	'AccountDeleteHint'			=> 'Votre compte sera supprimé du système. Par conséquent, vous ne serez plus en mesure de vous identifier avec vos informations d\'identification actuelles. Vous pourrez choisir de redevenir un utilisateur de cette application en suivant les procédures habituelles.',
+	'AccountDeleteInfo'			=> 'Les données que vous avez créées (e.g. e-mail, préférences, pièces jointes, entrées wiki) seront supprimées autant que possible. Notez toutefois que les données comme les pièces jointes et les entrées wiki ne peuvent pas être supprimées sans impacter le travail des autres utilisateurs. Ces données sont donc réaffectées à un compte appelé %1. Étant donné que les données de chaque compte supprimé sont réaffectées à ce compte, il ne sera plus possible de distinguer les données que vous avez créées de celles d’un autre compte supprimé.',
+	'AccountDeleteWarning'		=> 'Supprimer votre compte d’utilisateur est une action irréversible.',
+	'AccountDeleteHint'			=> 'Votre compte sera supprimé du système. Par conséquent, vous ne serez plus en mesure de vous identifier avec vos informations d’identification actuelles. Vous pourrez choisir de redevenir un utilisateur de cette application en suivant les procédures habituelles.',
 	'AccountDeleteVerify'		=> 'Entrez votre login %1 pour vérifier la suppression. Une fois celui-ci soumis, vous devrez confirmer votre mot de passe.',
 
 	'MarkRead'					=> 'Marquer tout comme lu',
@@ -673,7 +673,7 @@ $wacko_translation = [
 	'ImportButton'				=> 'Importer',
 	'ImportSuccess'				=> 'Importation réussie.',
 	'ImportFailed'				=> 'Importation échouée.',
-	'ImportHint'				=> 'Veuillez fournir un cluster vers lequel vous souhaitez importer, pas d\'adresse relative.',
+	'ImportHint'				=> 'Veuillez fournir un cluster vers lequel vous souhaitez importer, pas d’adresse relative.',
 	'ImportAttention'			=> 'Attention : Remplace les mêmes pages dans le groupe.',
 	'ImportNote'				=> 'Imported page',
 
@@ -741,7 +741,7 @@ $wacko_translation = [
 	'UsersIntercomMessage'		=> 'Message :',
 	'UsersIntercomSubjectN'		=> '[commencer un nouveau sujet]',
 	'UsersIntercomDisabled'		=> 'Désolé, vous ne souhaitez pas ou ne pouvez pas recevoir de messages privés.',
-	'UsersIntercomHint'			=> 'Veuillez d\'abord vous connecter et suivre le lien à nouveau, si vous voulez répondre au message personnel que vous avez reçu.',
+	'UsersIntercomHint'			=> 'Veuillez d’abord vous connecter et suivre le lien à nouveau, si vous voulez répondre au message personnel que vous avez reçu.',
 	'UsersIntercomDesc'			=> 'Note: Envoi de messages personnel à l’adresse courriel du destinataire sans dévoiler votre adresse. Le destinataire pourra vous répondre en utilisant un formulaire similaire sur votre page de profil. ',
 	'UsersPMOversized'			=> 'La longueur du message dépasse la taille maximale autorisée de %1. Merci de raccourcir votre le message et de le soumettre à nouveau.',
 	'UsersPMFlooded'			=> 'L’intervalle séparant l’envoi de messages personnels doit être d’au moins %1 secondes.',
@@ -815,12 +815,15 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Écraser les fichiers existants',
 	'FileDesc'					=> 'Description :',
 	'UploadForbidden'			=> 'Vous n’êtes pas autorisé à déposer des fichiers ici.',
-	'UploadOverwriteDenied'		=> 'Seul le propriétaire ou l\'administrateur du fichier peut écraser le fichier %1.',
+	'UploadOverwriteDenied'		=> 'Seul le propriétaire ou l’administrateur du fichier peut écraser le fichier %1.',
 	'UploadNoFile'				=> 'Il n’y avait pas de fichier joint au formulaire.',
 	'UploadMaxSizeReached'		=> 'La taille du fichier excède celle autorisée !',
 	'UploadDirNotWritable'		=> 'Le répertoire de dépôt n’est pas accessible en écriture!',
 	'UploadNotAPicture'			=> 'Il est seulement permis de déposer des images, que tentez-vous de déposer ?',
-	'UploadEmptyExtension'		=> 'Le nom du fichier ainsi que l\'extension ne peuvent être vides.',
+	'UploadEmptyExtension'		=> 'Le nom du fichier ainsi que l’extension ne peuvent être vides.',
+	'UploadMimeMismatch'		=> 'L’extension du fichier %1 ne correspond pas au type MIME détecté du fichier (%2).',
+	'UploadBadMime'				=> 'Les fichiers de type MIME %1 ne peuvent pas être téléversés.',
+
 	'UploadMaxFileQuota'		=> 'Vous avez atteint la taille limite de dépôt autorisée, ce fichier ne peut donc être déposé.',
 	'UploadDone'				=> 'Dépôt du fichier réussi',
 	'UploadFileForbidden'		=> 'Accès interdit au fichier',
@@ -923,7 +926,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Rediriger des anciennes pages vers les nouvelles',
 
 	// pagination
-	'ToOverview'				=> 'Retour à l\'aperçu',
+	'ToOverview'				=> 'Retour à l’aperçu',
 	'ToThePage'					=> 'Vers la page:',
 	'Next'						=> 'Suivant',
 	'Prev'						=> 'Précédent',
@@ -975,7 +978,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Cache de vignette',
 
 	// Embed
-	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="https://example.com/embed/video.mp4"}} )',
+	'EmbedNoURL'				=> 'Merci de spécifier l’adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Titre du flux',
@@ -1023,7 +1026,7 @@ $wacko_translation = [
 
 	// blog
 	'BlogNewTopic'				=> 'Créer un nouveau poste',
-	'NoPostAvailable'			=> 'Aucun article n\'est encore disponible.',
+	'NoPostAvailable'			=> 'Aucun article n’est encore disponible.',
 
 	// Review
 	'Reviewer'					=> 'Réviseur',
@@ -1201,7 +1204,7 @@ $wacko_translation = [
 	// loading error
 	'UnknownAction'				=> 'Action inconnue',
 	'UnknownMethod'				=> 'Méthode inconnue',
-	'FormatterNotFound'			=> 'Formateur %1 n\'a pas trouvé',
+	'FormatterNotFound'			=> 'Formateur %1 n’a pas trouvé',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Connexion réussie au panneau d’administration',
@@ -1243,7 +1246,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Message personnel ##%1## -> ##%2## envoyé',
 	'LogUserSimilarName'		=> 'Il y a eu des tentatives d’enregistrement sous le même nom d’utilisateur : ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## pas dans la liste des domaines autorisés',
-	'LogRegisterTiming'			=> 'L\'enregistrement a échoué, le seuil de temps du formulaire est de ##%1## secondes (était ##%2##)',
+	'LogRegisterTiming'			=> 'L’enregistrement a échoué, le seuil de temps du formulaire est de ##%1## secondes (était ##%2##)',
 	'LogUserRegistered'			=> 'Enregistrement réussi d’un nouvel utilisateur ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Activation réussie de l’adresse de messagerie ##%1## de l’utilisateur ##%2##',
 	'LogCommentPosted'			=> 'Ajouté [[/%1 nouveau commentaire(s)]] à la page [[/%2]]',

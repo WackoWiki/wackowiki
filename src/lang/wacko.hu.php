@@ -821,6 +821,9 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'A fájlkönyvtár nem írható!',
 	'UploadNotAPicture'			=> 'There is allowed to upload pictures only, and what do you trying to upload?',
 	'UploadEmptyExtension'		=> 'A fájlnév és a kiterjesztés nem lehet üres.',
+	'UploadMimeMismatch'		=> 'A fájl kiterjesztése %1 nem egyezik meg az észlelt MIME-típussal (%2).',
+	'UploadBadMime'				=> '%1 MIME-típusú fájlokat nem lehet feltölteni.',
+
 	'UploadMaxFileQuota'		=> 'Elérte a feltöltési korlátot, ezt a fájlt nem lehet feltölteni',
 	'UploadDone'				=> 'Sikeres feltöltés',
 	'UploadFileForbidden'		=> 'Fájl hozzáférés tiltott',

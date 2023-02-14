@@ -821,6 +821,9 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'Datei-Verzeichnis ist nicht schreibbar!',
 	'UploadNotAPicture'			=> 'Nur das Hochladen von Bildern ist erlaubt.',
 	'UploadEmptyExtension'		=> 'Der Dateiname und auch die Erweiterung dürfen nicht leer sein.',
+	'UploadMimeMismatch'		=> 'Dateierweiterung %1 stimmt nicht mit dem MIME-Typ (%2) überein.',
+	'UploadBadMime'				=> 'Dateien mit dem MIME-Typ %1 dürfen nicht hochgeladen werden.',
+
 	'UploadMaxFileQuota'		=> 'Dein Speicherplatz ist voll. Du kannst keine weiteren Dateien hochladen.',
 	'UploadDone'				=> 'Datei erfolgreich hochgeladen',
 	'UploadFileForbidden'		=> 'Datei-Zugriff verweigert',
