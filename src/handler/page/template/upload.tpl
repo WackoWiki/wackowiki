@@ -5,6 +5,7 @@
 		</ul>
 	=]
 	<h3>[ ' _t: UploadFiles ' ]</h3>
+	<br>
 	[ ' upload ' ]
 	<br><br>
 	<a href="[ ' href: ' ]" class="btn-link">
