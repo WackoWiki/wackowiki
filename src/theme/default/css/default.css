@@ -2349,6 +2349,16 @@ li.m-source img {
 	padding-left: 10px;
 }
 
+/* upload action ------------- */
+.upload-table {
+	border-spacing: 3px; 
+	border-collapse: separate;
+}
+.upload-table td:nth-child(1){
+	text-align: right;
+	padding-right: 10px;
+}
+
 /* users action ------------- */
 .user-profile {
 	border-spacing: 3px; 

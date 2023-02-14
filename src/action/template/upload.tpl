@@ -8,7 +8,7 @@
 				<input type="hidden" name="maxsize" value="[ ' maxsize ' ]">
 			=]
 			<input type="hidden" name="MAX_FILE_SIZE" value="[ ' maxfilesize ' ]">
-			<table>
+			<table class="upload-table hl-line">
 				<tr>
 					<td>
 						<label for="file_upload">[ ' _t: UploadFor ' ]&nbsp;</label>
@@ -19,7 +19,7 @@
 				</tr>
 				[= global _ =
 					<tr>
-						<td>&nbsp;</td>
+						<td></td>
 						<td>
 							<input type="radio" name="_upload_to" disabled checked value="global" id="upload_global_disabled">
 							<input type="hidden" name="upload_to" value="global"> [ ' _t: UploadGlobalText ' ]
@@ -28,11 +28,11 @@
 				=]
 				[= local _ =
 					<tr>
-						<td>&nbsp;</td>
+						<td></td>
 						<td>
-							<input type="radio" name="upload_to" value="global" id="upload_global">
+							<input type="radio" name="upload_to" id="upload_global" value="global">
 							<label for="upload_global">[ ' _t: UploadGlobalText ' ]</label><br>
-							<input type="radio" name="upload_to" value="here" checked id="upload_to_page">
+							<input type="radio" name="upload_to" id="upload_to_page" value="here" checked>
 							<label for="upload_to_page">[ ' _t: UploadLocalText ' ]</label>
 						</td>
 					</tr>
@@ -40,8 +40,8 @@
 				[= rename _ =
 					[ ' // not in use ' ]
 					<tr>
-						<td class="t-right">
-							<label for="upload_dest_file">[ ' _t: UploadAsName ' ]&nbsp;</label>
+						<td>
+							<label for="upload_dest_file">[ ' _t: UploadAsName ' ]</label>
 						</td>
 						<td>
 							<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value="">
@@ -50,8 +50,8 @@
 				=]
 				[= desc _ =
 					<tr>
-						<td class="t-right">
-							<label for="upload_desc">[ ' _t: FileDesc ' ]&nbsp;</label>
+						<td>
+							<label for="upload_desc">[ ' _t: FileDesc ' ]</label>
 						</td>
 						<td>
 							<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250">
@@ -59,7 +59,7 @@
 					</tr>
 				=]
 				<tr>
-					<td class="t-right">
+					<td>
 					</td>
 					<td>
 						<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1">
@@ -67,11 +67,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td>&nbsp;</td>
+					<td></td>
 					<td>
-						<div style="padding-top: 5px;">
-							<button type="submit">[ ' _t: UploadButton ' ]</button>
-						</div>
+						<button type="submit">[ ' _t: UploadButton ' ]</button>
 					</td>
 				</tr>
 			</table>
