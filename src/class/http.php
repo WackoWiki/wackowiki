@@ -633,7 +633,7 @@ class Http
 		}
 	}
 
-	function mime_type($path)
+	function mime_types()
 	{
 		static $types;
 
@@ -680,7 +680,14 @@ class Http
 			}
 		}
 
-		$ext = pathinfo($path, PATHINFO_EXTENSION);
+		return $types;
+	}
+
+	function mime_type($path)
+	{
+		$types	= $this->mime_types();
+		$ext	= pathinfo($path, PATHINFO_EXTENSION);
+
 		return $types[$ext] ?? 'application/octet-stream';
 	}
 

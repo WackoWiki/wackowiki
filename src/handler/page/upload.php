@@ -223,6 +223,14 @@ if (isset($_POST['upload']) & $can_upload)
 								$forbid	= true;
 								$error	= Ut::perc_replace($this->_t('UploadBadMime'), '<code>' . $mime_type . '</code>');
 							}
+							else if (!$this->verify_extension($mime_type, $ext))
+							{
+								$forbid	= true;
+								$error	= Ut::perc_replace(
+									$this->_t('UploadMimeMismatch'),
+									'<code>' . $ext . '</code>',
+									'<code>' . $mime_type . '</code>');
+							}
 						}
 
 						// F. check for upload only images and forbidden MIME types

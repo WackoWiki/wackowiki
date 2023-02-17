@@ -348,6 +348,42 @@ class Wacko
 		return false;
 	}
 
+	function get_extensions_from_mime_type($mime): array
+	{
+		$mime	= strtolower($mime);
+		$exts	= $this->http->mime_types();
+
+		foreach($exts as $ext => $type)
+		{
+			if ($type == $mime)
+			{
+				$_exts[] = $ext;
+			}
+		}
+
+		return $_exts ?? [];
+	}
+
+	/**
+	 * Checks if the MIME type of the uploaded file matches the file extension.
+	 *
+	 * @param string $mime			The MIME type of the uploaded file
+	 * @param string $extension		The filename extension that the file is to be served with
+	 *
+	 * @return bool
+	 */
+	function verify_extension($mime, $extension): ?bool
+	{
+		$exts = $this->get_extensions_from_mime_type($mime);
+
+		if (!$exts)
+		{
+			return null; // unknown MIME type
+		}
+
+		return in_array(strtolower($extension), $exts);
+	}
+
 	function upload_quota($user_id = null)
 	{
 		// get used upload quota
