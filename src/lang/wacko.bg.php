@@ -838,6 +838,9 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'Файловата директория не може да се записва!',
 	'UploadNotAPicture'			=> 'Разрешени са само картинки, а Вие какво опитвате?',
 	'UploadEmptyExtension'		=> 'Името на файла, както и разширението не могат да бъдат празни.',
+	'UploadMimeMismatch'		=> 'Файловото разширение %1 не отговаря на MIME типа на файла (%2).',
+	'UploadBadMime'				=> 'Не е разрешено качването на файлове с MIME-тип %1.',
+
 	'UploadMaxFileQuota'		=> 'С този файл, квотата Ви се надвишава',
 	'UploadDone'				=> 'Файлът е качен успешно',
 	'UploadFileForbidden'		=> 'Няма достъп до файла',

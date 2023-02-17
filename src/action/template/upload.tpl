@@ -8,7 +8,7 @@
 				<input type="hidden" name="maxsize" value="[ ' maxsize ' ]">
 			=]
 			<input type="hidden" name="MAX_FILE_SIZE" value="[ ' maxfilesize ' ]">
-			<table class="upload-table hl-line">
+			<table class="upload-table">
 				<tr>
 					<td>
 						<label for="file_upload">[ ' _t: UploadFor ' ]&nbsp;</label>
@@ -32,8 +32,8 @@
 						<td>
 							<input type="radio" name="upload_to" id="upload_global" value="global">
 							<label for="upload_global">[ ' _t: UploadGlobalText ' ]</label><br>
-							<input type="radio" name="upload_to" id="upload_to_page" value="here" checked>
-							<label for="upload_to_page">[ ' _t: UploadLocalText ' ]</label>
+							<input type="radio" name="upload_to" id="upload_local" value="local" checked>
+							<label for="upload_local">[ ' _t: UploadLocalText ' ]</label>
 						</td>
 					</tr>
 				=]
@@ -59,8 +59,7 @@
 					</tr>
 				=]
 				<tr>
-					<td>
-					</td>
+					<td></td>
 					<td>
 						<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1">
 						<label for="upload_overwrite">[ ' _t: UploadOverwrite ' ]</label>

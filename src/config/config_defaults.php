@@ -144,7 +144,7 @@ $wacko_config_defaults = [
 	'enable_license'				=> 0,
 	'allow_license_per_page'		=> 0,
 
-	// default pages (replaced by lang value in installer.xy.php)
+	// default pages (replaced by lang value in installer.<lang>.php)
 	'groups_page'					=> 'Groups',
 	'users_page'					=> 'Users',
 	'category_page'					=> 'Category',
@@ -166,6 +166,17 @@ $wacko_config_defaults = [
 	'account_page'					=> 'Account',
 	'registration_page'				=> 'Registration',
 	'password_page'					=> 'Password',
+
+	// special namespaces (clusters)
+	'forum_cluster'					=> 'Forum',
+	'forum_topics'					=> 10,
+	'comments_count'				=> 10,
+	'list_count'					=> 50,
+	'menu_items'					=> 5,
+
+	'news_cluster'					=> 'News',
+	'news_levels'					=> '',
+	'news_structure'				=> '',
 
 	'default_write_acl'				=> '$',
 	'default_read_acl'				=> '*',
@@ -199,21 +210,27 @@ $wacko_config_defaults = [
 	'upload_quota_per_user'			=> 104857600,
 	'upload_translit'				=> 1,
 	'upload_banned_exts'			=> 'asax|asa|ascx|ashx|asmx|aspx|asp|axd|cdx|cer|cgi|config|csproj|cs|exe|htr|htw|ida|idc|idq|jsp|js|licx|php3|php4|php5|php7|php|phtml|phtm|pht|pl|printer|py|rem|resources|resx|shtml|shtm|soap|ssi|stm|vbproj|vb|vdisco|webinfo|xap|xhtm|xht',
+
 	'check_mimetype'				=> 1,
+	'mime_type_exclusions'			=> [
+											// HTML may contain cookie-stealing JavaScript and web bugs
+											'text/html',
+											// similarly with JavaScript itself
+											'application/javascript', 'text/javascript', 'text/x-javascript', 'application/x-shellscript',
+											// PHP scripts may execute arbitrary code on the server
+											'application/x-php', 'text/x-php',
+											// other types that may be interpreted by some servers
+											'text/x-python', 'text/x-perl', 'text/x-bash', 'text/x-sh', 'text/x-csh',
+											// client-side hazards on Internet Explorer
+											'text/scriptlet', 'application/x-msdownload',
+											// Windows metafile, client-side vulnerability on some systems
+											'application/x-msmetafile',
+										],
+
 	'img_create_thumbnail'			=> 0,
 	'img_max_thumb_width'			=> 150,
 
 	'enable_feeds'					=> 1,
-
-	'forum_cluster'					=> 'Forum',
-	'forum_topics'					=> 10,
-	'comments_count'				=> 10,
-	'list_count'					=> 50,
-	'menu_items'					=> 5,
-
-	'news_cluster'					=> '',
-	'news_levels'					=> '',
-	'news_structure'				=> '',
 
 	'noindex'						=> 0,
 	'opensearch'					=> 0,

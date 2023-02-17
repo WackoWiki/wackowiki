@@ -31,7 +31,7 @@ if ($this->can_upload(true))
 	if (!(	$this->has_access('read')
 		 && $this->has_access('write')
 		 && $this->has_access('upload'))
-		&& !$this->is_admin())
+		 && !$this->is_admin())
 	{
 		$global = 'global';
 	}

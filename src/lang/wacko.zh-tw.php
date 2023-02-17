@@ -838,6 +838,9 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture'			=> 'There is allowed to upload pictures only, and what do you trying to upload?',
 	'UploadEmptyExtension'		=> '文件名和擴展名不能為空。',
+	'UploadMimeMismatch'		=> '檔案副檔名 %1 不符合偵測到的檔案 MIME 類型 (%2)。',
+	'UploadBadMime'				=> '不允許上傳 MIME 類型為 %1 的檔案。',
+
 	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',
 	'UploadFileForbidden'		=> 'File access prohibited',
