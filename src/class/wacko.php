@@ -8,6 +8,32 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
+	public const EXT = [
+		'audio'			=> ['m4a' , 'mp3', 'ogg', 'opus'],
+		'bitmap'		=> ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'jxl', 'png', 'webp'],
+		'drawing'		=> ['svg'],
+		'video'			=> ['mp4', 'ogv', 'webm'],
+	];
+	public const PATTERN = [
+		'USER_NAME'		=> '[\p{L}\p{Nd}\.\-]+',
+		'USER_NAME_P'	=> '\p{L}\p{Nd}\.\-',
+
+		'TAG'			=> '[\p{L}\p{M}\p{Nd}\.\-\/]',
+		'TAG_P'			=> '\p{L}\p{M}\p{Nd}\.\-\/',
+
+		'UPPER'			=> '[\p{Lu}]',
+		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
+		'LOWER'			=> '[\p{Ll}\/]',
+		'ALPHA'			=> '[\p{L}\_\-\/]',
+		'ALPHANUM'		=> '[\p{L}\p{M}\p{Nd}\_\-\/]',
+		'ALPHANUM_P'	=> '\p{L}\p{M}\p{Nd}\_\-\/',
+
+		'AUDIO'			=> 'm4a|mp3|ogg|opus',
+		'BITMAP'		=> 'avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp',
+		'DRAWING'		=> 'svg',
+		'VIDEO'			=> 'mp4|ogv|webm',
+	];
+
 	private array $acl				= [];
 	private array $acl_cache		= [];
 	private array $file_cache		= [];
@@ -602,12 +628,12 @@ class Wacko
 	/**
 	 * loads translation files
 	 *
-	 * 1. lang/wacko.xy.php
+	 * 1. lang/wacko.<lang>.php
 	 * 2. lang/wacko.all.php
-	 * 3. lang/custom.xy.php
-	 * 4. admin/lang/ap.xy.php
-	 * 5. theme/lang/xyz/wacko.xy.php
-	 * 6. theme/lang/xyz/wacko.all.php
+	 * 3. lang/custom.<lang>.php
+	 * 4. admin/lang/ap.<lang>.php
+	 * 5. theme/<theme>/lang/wacko.<lang>.php
+	 * 6. theme/<theme>/lang/wacko.all.php
 	 *
 	 * @param string	$lang
 	 * @param bool		$update
@@ -618,7 +644,7 @@ class Wacko
 	{
 		if ($lang && (!isset($this->translations[$lang]) || $update))
 		{
-			// 1. wacko.xy.php $wacko_translation[]
+			// 1. wacko.<lang>.php $wacko_translation[]
 			$wacko_translation = [];
 			$lang_file = Ut::join_path(LANG_DIR, 'wacko.' . $lang . '.php');
 
@@ -643,7 +669,7 @@ class Wacko
 				$this->translations['all'] = & $wacko_all_resource;
 			}
 
-			// 3. custom.xy.php $custom_translation[]
+			// 3. custom.<lang>.php $custom_translation[]
 			$custom_translation = [];
 			$lang_file = Ut::join_path(LANG_DIR, 'custom.' . $lang . '.php');
 
@@ -658,7 +684,7 @@ class Wacko
 
 			if ($this->db->ap_mode)
 			{
-				// 4. ap.xy.php $ap_translation[]
+				// 4. ap.<lang>.php $ap_translation[]
 				$lang_file = 'admin/lang/ap.' . $lang . '.php';
 			}
 			else
@@ -709,19 +735,6 @@ class Wacko
 			require $lang_file;
 
 			$wacko_language['LANG']			= $lang;
-
-			$wacko_language['USER_NAME']	= '[\p{L}\p{Nd}\.\-]+';
-			$wacko_language['USER_NAME_P']	= '\p{L}\p{Nd}\.\-';
-
-			$wacko_language['TAG']			= '[\p{L}\p{M}\p{Nd}\.\-\/]';
-			$wacko_language['TAG_P']		= '\p{L}\p{M}\p{Nd}\.\-\/';
-
-			$wacko_language['UPPER']		= '[\p{Lu}]';
-			$wacko_language['UPPERNUM']		= '[\p{Lu}\p{Nd}]';
-			$wacko_language['LOWER']		= '[\p{Ll}\/]';
-			$wacko_language['ALPHA']		= '[\p{L}\_\-\/]';
-			$wacko_language['ALPHANUM']		= '[\p{L}\p{M}\p{Nd}\_\-\/]';
-			$wacko_language['ALPHANUM_P']	= '\p{L}\p{M}\p{Nd}\_\-\/';
 
 			$this->languages[$lang]			= $wacko_language;
 		}
@@ -991,7 +1004,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($page_id || !preg_match('/[^' . $this->lang['TAG_P'] . ']/u', $tag))
+			if ($page_id || !preg_match('/[^' . self::PATTERN['TAG_P'] . ']/u', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .
@@ -3250,12 +3263,12 @@ class Wacko
 		if ($this->db->urls_underscores)
 		{
 			$patterns =[
-				['(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')', 									'\\1¶\\2'],
-				['(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')',									'\\1¶\\2'],
-				['(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶' . $this->lang['UPPERNUM'] . ')',		'\\1'],
-				['(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶\/)',									'\\1'],
-				['(' . $this->lang['UPPERNUM'] . ')¶(' . $this->lang['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
-				['\/¶(' . $this->lang['UPPERNUM'] . ')',																'/\\1'],
+				['(' . self::PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 									'\\1¶\\2'],
+				['(' . self::PATTERN['UPPERNUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')',									'\\1¶\\2'],
+				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶' . self::PATTERN['UPPERNUM'] . ')',		'\\1'],
+				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶\/)',									'\\1'],
+				['(' . self::PATTERN['UPPERNUM'] . ')¶(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
+				['\/¶(' . self::PATTERN['UPPERNUM'] . ')',																'/\\1'],
 				['¶',																									'_'],
 			];
 
@@ -3457,7 +3470,7 @@ class Wacko
 	*/
 	function pre_link($tag, $text = '', $track = true, $media_url = 0): string
 	{
-		if (preg_match('/^[\!\.' . $this->lang['ALPHANUM_P'] . ']+$/u', $tag))
+		if (preg_match('/^[\!\.' . self::PATTERN['ALPHANUM_P'] . ']+$/u', $tag))
 		{
 			if ($track && $this->link_tracking())
 			{
@@ -3549,7 +3562,7 @@ class Wacko
 		}
 
 		// external media file
-		if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(avif|gif|jpg|jpe|jpeg|jxl|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
+		if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((' . self::PATTERN['AUDIO'] . ')|(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')|(' . self::PATTERN['VIDEO'] . '))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			// remove typografica glue
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3610,7 +3623,7 @@ class Wacko
 			$tpl	= 'anchor';
 		}
 		// external image
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(avif|gif|jpg|jpe|jpeg|jxl|png|svg|webp)$/ui', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
 		{
 			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3699,8 +3712,8 @@ class Wacko
 			}
 			else
 			{
-				// 2a -> file:some.zip (local relative)
-				// 2b -> file:/cluster/some.zip (local absolute)
+				// 2a -> file:some.zip				(local relative)
+				// 2b -> file:/cluster/some.zip		(local absolute)
 				$local_file	= $file_array;
 				$_global	= false;
 				$file_name	= $local_file[count($local_file) - 1];
@@ -3763,7 +3776,7 @@ class Wacko
 					$tpl		= 'localfile';
 
 					// media it is
-					if ((in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm', 'm4a', 'mp3', 'ogg', 'opus', 'avif', 'gif', 'jpg', 'jpe', 'jpeg', 'jxl', 'png', 'svg', 'webp'])) && !$noimg)
+					if (in_array($file_data['file_ext'], array_merge(self::EXT['audio'], self::EXT['bitmap'], self::EXT['drawing'], self::EXT['video'])) && !$noimg)
 					{
 						if ($file_data['file_ext'] == 'svg')
 						{
@@ -3796,7 +3809,7 @@ class Wacko
 								$height	= $param['height']	?? $file_data['picture_h'];
 							}
 
-							if(in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
+							if (in_array($file_data['file_ext'], self::EXT['video']))
 							{
 								$width	= $param['width'] ?? 800; // default width
 								$height	= 0;
@@ -3848,12 +3861,12 @@ class Wacko
 								{
 									$text	= $this->image_link($src, $media_class, $aname, $title, $alt, $scale);
 								}
-								else if (in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
+								else if (in_array($file_data['file_ext'], self::EXT['video']))
 								{
 									$tpl	= '';
 									$text	= $this->video_link($src, $media_class, $aname, $title, $scale);
 								}
-								else if (in_array($file_data['file_ext'], ['m4a' , 'mp3', 'ogg', 'opus']))
+								else if (in_array($file_data['file_ext'], self::EXT['audio']))
 								{
 									$tpl	= '';
 									$text	= $this->audio_link($src, $media_class, $aname, $title);
@@ -3934,7 +3947,7 @@ class Wacko
 			unset($file_data);
 		}
 		// user link -> user:UserName
-		else if (preg_match('/^(user):(' . $this->lang['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(user):(' . self::PATTERN['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3950,7 +3963,7 @@ class Wacko
 			$tpl	= 'userlink';
 		}
 		// group link -> group:UserGroup
-		else if (preg_match('/^(group):(' . $this->lang['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(group):(' . self::PATTERN['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3966,7 +3979,7 @@ class Wacko
 			$tpl	= 'grouplink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+):([' . $this->lang['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3981,7 +3994,7 @@ class Wacko
 			$tpl	= 'interwiki';
 		}
 		// wiki link
-		else if (preg_match('/^([\!\.' . $this->lang['ALPHANUM_P'] . ']+)(\#[' . $this->lang['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
+		else if (preg_match('/^([\!\.' . self::PATTERN['ALPHANUM_P'] . ']+)(\#[' . self::PATTERN['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
 		{
 			$aname			= '';
 			$match			= '';
@@ -4484,17 +4497,17 @@ class Wacko
 	function add_nbsps($text): string
 	{
 		$patterns =[
-			['(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')', 												'\\1' . NBSP . '\\2'],
-			['(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')',												'\\1' . NBSP . '\\2'],
-			['(' . $this->lang['ALPHANUM'] . ')\/',																				'\\1' . NBSP . '/'],
-			['(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . $this->lang['UPPERNUM'] . ')',		'\\1'],
-			['(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . '\/)',								'\\1'],
-			['\/(' . $this->lang['ALPHANUM'] . ')',																				'\\1'],
-			['(' . $this->lang['UPPERNUM'] . ')' . NBSP . '(' . $this->lang['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
-			['(\d)(' . $this->lang['ALPHA'] . ')',																				'\\2'],
-			['(' . $this->lang['ALPHA'] . ')(\d)',																				'\\2'],
+			['(' . self::PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 												'\\1' . NBSP . '\\2'],
+			['(' . self::PATTERN['UPPERNUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')',												'\\1' . NBSP . '\\2'],
+			['(' . self::PATTERN['ALPHANUM'] . ')\/',																				'\\1' . NBSP . '/'],
+			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . self::PATTERN['UPPERNUM'] . ')',		'\\1'],
+			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . '\/)',								'\\1'],
+			['\/(' . self::PATTERN['ALPHANUM'] . ')',																				'\\1'],
+			['(' . self::PATTERN['UPPERNUM'] . ')' . NBSP . '(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
+			['(\d)(' . self::PATTERN['ALPHA'] . ')',																				'\\2'],
+			['(' . self::PATTERN['ALPHA'] . ')(\d)',																				'\\2'],
 			# ['(\d)' . NBSP . '(?=\d)',																						'\\1'],
-			['(\d)' . NBSP . '(?!' . $this->lang['ALPHA'] . ')',																'\\1'],
+			['(\d)' . NBSP . '(?!' . self::PATTERN['ALPHA'] . ')',																'\\1'],
 		];
 
 		foreach ($patterns as $pattern)
@@ -4555,7 +4568,7 @@ class Wacko
 		$tag = Ut::normalize($tag);
 
 		// remove invalid characters
-		$tag = preg_replace('/[^' . $this->lang['TAG_P'] . ']/u', '', $tag);
+		$tag = preg_replace('/[^' . self::PATTERN['TAG_P'] . ']/u', '', $tag);
 
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes
 		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
@@ -4599,7 +4612,7 @@ class Wacko
 		$this->sanitize_page_tag($tag);
 
 		// - / ' _ .
-		if (!preg_match('/^([' . $this->lang['TAG_P'] . ']+)$/u', $tag))
+		if (!preg_match('/^([' . self::PATTERN['TAG_P'] . ']+)$/u', $tag))
 		{
 			return $this->_t('InvalidWikiName');
 		}
@@ -4664,7 +4677,7 @@ class Wacko
 			return Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . ' ';
 		}
 		// check if valid username (and disallow '/')
-		else if (!preg_match('/^(' . $this->lang['USER_NAME'] . ')$/u', $user_name))
+		else if (!preg_match('/^(' . self::PATTERN['USER_NAME'] . ')$/u', $user_name))
 		{
 			return $this->_t('InvalidUserName') . ' ';
 		}
@@ -4693,7 +4706,7 @@ class Wacko
 	*/
 	function is_wiki_name($text)
 	{
-		return preg_match('/^' . $this->lang['UPPER'] . $this->lang['LOWER'] . '+' . $this->lang['UPPERNUM'] . $this->lang['ALPHANUM'] . '*$/u', $text);
+		return preg_match('/^' . self::PATTERN['UPPER'] . self::PATTERN['LOWER'] . '+' . self::PATTERN['UPPERNUM'] . self::PATTERN['ALPHANUM'] . '*$/u', $text);
 	}
 
 	// TRACK LINKS
@@ -6070,7 +6083,7 @@ class Wacko
 
 		foreach ($lines as $line)
 		{
-			if (!( preg_match('/^([(\!)?' . $this->lang['USER_NAME_P'] . ']*)$/u', $line)
+			if (!( preg_match('/^([(\!)?' . self::PATTERN['USER_NAME_P'] . ']*)$/u', $line)
 				|| preg_match('/^((\!)?[(\*|\$)])$/u', $line) ))
 			{
 				$error	.= '<code>' . $line . '</code><br>';

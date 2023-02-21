@@ -153,7 +153,7 @@ function move(&$engine, $old_page, $new_tag, $log): void
 	if ($engine->check_acl($user['user_name'], $engine->db->rename_global_acl)
 	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id)
 	{
-		if (!preg_match('/^([' . $engine->lang['TAG_P'] . ']+)$/u', $new_tag))
+		if (!preg_match('/^([' . $engine::PATTERN['TAG_P'] . ']+)$/u', $new_tag))
 		{
 			$log->log_n_l_message = $engine->_t('InvalidWikiName');
 		}

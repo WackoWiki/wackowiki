@@ -24,7 +24,7 @@ $load_categories = function ()
 
 	{{files
 		[page="PageName" or global=1 or all=1 or linked=1]
-		[order="ext|name_desc|size|size_desc|time|time_desc"]
+		[order="ext|ext_desc|name_desc|size|size_desc|time|time_desc"]
 		[form=1]
 		[options=1]
 		[owner="UserName"]
@@ -53,7 +53,7 @@ $form		??= 0;		// show search form
 $global		??= 0;		// global attachments
 $lang		??= '';
 $legend		??= '';
-$linked		??= '';		// file link in page
+$linked		??= 0;		// file link in page
 $max		??= null;
 $media		??= null;
 $method		??= '';		// for use in page handler
@@ -423,7 +423,7 @@ if ($can_view)
 			$file_name	= $file['file_name'];
 			$shown_name	= Ut::shorten_string($file_name, $file_name_maxlen);
 			$text		= ($media
-							? ($file['picture_w'] || in_array($file['file_ext'], ['m4a', 'mp3', 'ogg', 'opus', 'avif', 'gif', 'jpg', 'jpe', 'jpeg', 'jxl', 'png', 'svg', 'webp', 'mp4', 'ogv', 'webm'])
+							? ($file['picture_w'] || in_array($file['file_ext'], array_merge(self::EXT['audio'], self::EXT['bitmap'], self::EXT['drawing'], self::EXT['video']))
 								? ''					// parses image, audio and video links into their media tags
 								: $shown_name)			// shows file link
 							: $shown_name);

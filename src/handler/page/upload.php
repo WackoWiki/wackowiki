@@ -90,7 +90,7 @@ if (isset($_POST['upload']) & $can_upload)
 				$ext = $ext . '.txt';
 			}
 
-			if (in_array($ext, ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'jxl', 'png', 'webp']))
+			if (in_array($ext, self::EXT['bitmap']))
 			{
 				$is_image = true;
 			}
@@ -112,7 +112,7 @@ if (isset($_POST['upload']) & $can_upload)
 			$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
 			$name	= utf8_trim($name, ' .-_');
 			$name	= Ut::normalize($name);
-			$name	= preg_replace('/[^' . $this->lang['ALPHANUM_P'] . '\.]/u', '', $name);
+			$name	= preg_replace('/[^' . self::PATTERN['ALPHANUM_P'] . '\.]/u', '', $name);
 
 			// file name transliteration
 			if ($this->db->upload_translit)

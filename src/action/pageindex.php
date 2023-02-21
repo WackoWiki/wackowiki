@@ -37,7 +37,7 @@ if ($lang && !$this->known_language($lang))
 
 $tag		= $this->unwrap_link($page);
 $title		= (int) $title;
-$_alnum		= '/' . $this->lang['ALPHANUM'] . '/uS';
+$_alnum		= '/' . self::PATTERN['ALPHANUM'] . '/uS';
 
 $get_letter	= function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {

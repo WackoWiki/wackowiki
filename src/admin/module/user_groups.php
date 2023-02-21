@@ -30,7 +30,7 @@ function admin_user_groups($engine, $module)
  * Pre-defined groups are special groups, they cannot be deleted or directly modified. However you can still add users and alter basic settings.
  *
  * User defined groups
- * These are groups created by you or another admin on this board. You can manage memberships as well as edit group properties or even delete the group.
+ * These are groups created by you or another admin on this wiki. You can manage memberships as well as edit group properties or even delete the group.
 */
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
@@ -317,7 +317,7 @@ function admin_user_groups($engine, $module)
 						<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
 					</th>
 					<td>
-						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? '')) . '" pattern="' . $engine->lang['USER_NAME'] . '" size="20" maxlength="100" required autofocus>
+						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? '')) . '" pattern="' . $engine::PATTERN['USER_NAME'] . '" size="20" maxlength="100" required autofocus>
 					</td>
 				</tr>
 				<tr>
@@ -394,7 +394,7 @@ function admin_user_groups($engine, $module)
 						<label for="new_group_name">' . Ut::perc_replace($engine->_t('GroupsRename'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . '</label>
 					</th>
 					<td>
-						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? $usergroup['group_name'])) . '" pattern="' . $engine->lang['USER_NAME'] . '" size="20" maxlength="100">
+						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? $usergroup['group_name'])) . '" pattern="' . $engine::PATTERN['USER_NAME'] . '" size="20" maxlength="100">
 					</td>
 				</tr>
 				<tr>
