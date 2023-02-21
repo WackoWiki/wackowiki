@@ -956,7 +956,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($page_id || !preg_match('/[^' . $this->lang['TAG_P'] . ']/u', $tag))
+			if ($page_id || !preg_match('/[^' . self::PATTERN['TAG_P'] . ']/u', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .
