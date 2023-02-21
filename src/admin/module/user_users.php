@@ -368,7 +368,7 @@ function admin_user_users($engine, $module)
 						<label for="user_name">' . $engine->_t('UserName') . '</label>
 					</th>
 					<td>
-						<input type="text" id="user_name" name="user_name" value="' . Ut::html($user_name) . '" pattern="' . $engine->lang['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required autofocus>
+						<input type="text" id="user_name" name="user_name" value="' . Ut::html($user_name) . '" pattern="' . $engine::PATTERN['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required autofocus>
 						<p>' . Ut::perc_replace($engine->_t($engine->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'), $engine->db->username_chars_min, $engine->db->username_chars_max) . '</p>
 					</td>
 				</tr>
@@ -467,7 +467,7 @@ function admin_user_users($engine, $module)
 						<label for="user_name">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
 					</th>
 					<td>
-						<input type="text" id="user_name" name="user_name" value="' . Ut::html(($user_name ?: $user['user_name'])) . '" pattern="' . $engine->lang['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
+						<input type="text" id="user_name" name="user_name" value="' . Ut::html(($user_name ?: $user['user_name'])) . '" pattern="' . $engine::PATTERN['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
 					</td>
 				</tr>
 				<tr>

@@ -100,7 +100,7 @@ else // login
 		{
 			$error = $this->_t('CaptchaFailed');
 		}
-		else if (!preg_match('/^(' . $this->lang['USER_NAME'] . ')$/u', $user_name))
+		else if (!preg_match('/^(' . self::PATTERN['USER_NAME'] . ')$/u', $user_name))
 		{
 			$error = $this->_t('InvalidUserName');
 		}
@@ -168,7 +168,7 @@ else // login
 	}
 
 	$tpl->l_href		= $this->href();
-	$tpl->l_pattern		= $this->lang['USER_NAME'];
+	$tpl->l_pattern		= self::PATTERN['USER_NAME'];
 	$tpl->l_only		=
 		Ut::perc_replace($this->_t($this->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'),
 			$this->db->username_chars_min,

@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	// language
+	'lang'	=> [
+		'name'		=> 'Korean',
+		'code'		=> 'ko',
+		'dir'		=> 'ltr',
+		'locale'	=> 'ko_KR.UTF-8',
+	],
+
 	// common
 	'CreateButton'				=> '새로 추가',
 	'SaveButton'				=> '저장',

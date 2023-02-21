@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	// language
+	'lang'	=> [
+		'name'		=> 'Japanese',
+		'code'		=> 'ja',
+		'dir'		=> 'ltr',
+		'locale'	=> 'ja_JP.UTF-8',
+	],
+
 	// common
 	'CreateButton'				=> '作成',
 	'SaveButton'				=> '保存',

@@ -93,7 +93,7 @@ class WackoFormatter
 			"\?\?\S\?\?|" .
 			"\?\?(\S.*?\S)\?\?|" .
 			// \\\\...
-			"\\\\\\\\[" . $object->lang['ALPHANUM_P'] . "\-\_\\\!\.]+|" .
+			"\\\\\\\\[" . $object::PATTERN['ALPHANUM_P'] . "\-\_\\\!\.]+|" .
 			// bold text **...**
 			"\*\*[^\n]*?\*\*|" .
 			// code ##...##
@@ -139,15 +139,15 @@ class WackoFormatter
 			// list including multilevel
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]{1,3}|[ivIV]+|(\d{1,3}))[\.\)](\#\d{1,3})?)?|" .
 			// media links
-			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
+			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(" . $object::PATTERN['AUDIO'] . '|' . $object::PATTERN['BITMAP'] . '|' . $object::PATTERN['DRAWING'] . '|' . $object::PATTERN['VIDEO'] . ")(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
-			"\b[[:alnum:]]+:[" . $object->lang['ALPHANUM_P'] . "\!\.][" . $object->lang['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
+			"\b[[:alnum:]]+:[" . $object::PATTERN['ALPHANUM_P'] . "\!\.][" . $object::PATTERN['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// wiki links (beside actions)
 			($this->object->db->disable_wikilinks
 				? ''
-				: "(~?)(?<=[^\." . $object->lang['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->lang['UPPER'] . $object->lang['LOWER'] . "+" . $object->lang['UPPERNUM'] . $object->lang['ALPHANUM'] . "*)\b|") .
+				: "(~?)(?<=[^\." . $object::PATTERN['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object::PATTERN['UPPER'] . $object::PATTERN['LOWER'] . "+" . $object::PATTERN['UPPERNUM'] . $object::PATTERN['ALPHANUM'] . "*)\b|") .
 			"\n)/usm";
 
 		$this->PRE_REGEX =
@@ -519,7 +519,7 @@ class WackoFormatter
 		{
 			$url = mb_strtolower($matches[1]);
 
-			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(avif|gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/u', $url, $media))
+			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((' . $wacko::PATTERN['AUDIO'] . ')|(' . $wacko::PATTERN['BITMAP'] . '|' . $wacko::PATTERN['DRAWING'] . ')|(' . $wacko::PATTERN['VIDEO'] . '))$/u', $url, $media))
 			{
 				// audio
 				if ($media[4])
@@ -550,7 +550,7 @@ class WackoFormatter
 			}
 		}
 		// lan path
-		else if (preg_match('/^\\\\\\\\([' . $wacko->lang['ALPHANUM_P'] . '\\\!\.\-\_]+)$/u', $thing, $matches))
+		else if (preg_match('/^\\\\\\\\([' . $wacko::PATTERN['ALPHANUM_P'] . '\\\!\.\-\_]+)$/u', $thing, $matches))
 		{
 			return '<a href="file://///' . str_replace('\\', '/', $matches[1]) . '">\\\\' . $matches[1] . '</a>';
 		}
@@ -892,7 +892,7 @@ class WackoFormatter
 			return $result;
 		}
 		// media file links
-		else if (preg_match('/^file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
+		else if (preg_match('/^file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(' . $wacko::PATTERN['AUDIO'] . '|' . $wacko::PATTERN['BITMAP'] . '|' . $wacko::PATTERN['DRAWING'] . '|' . $wacko::PATTERN['VIDEO'] . ')(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
 		{
 			$caption = 0;
 			if(!empty($matches[4]) && preg_match('/caption/ui', $matches[4]))
@@ -903,14 +903,14 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', true, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+:[' . $wacko->lang['ALPHANUM_P'] . '\!\.][' . $wacko->lang['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
+		else if (preg_match('/^([[:alnum:]]+:[' . $wacko::PATTERN['ALPHANUM_P'] . '\!\.][' . $wacko::PATTERN['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];
 		}
 		// wacko links!
 		else if ((!$wacko->noautolinks)
-				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->lang['UPPER'] . $wacko->lang['LOWER'] . '+' . $wacko->lang['UPPERNUM'] . $wacko->lang['ALPHANUM'] . '*)$/us', $thing, $matches)))
+				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko::PATTERN['UPPER'] . $wacko::PATTERN['LOWER'] . '+' . $wacko::PATTERN['UPPERNUM'] . $wacko::PATTERN['ALPHANUM'] . '*)$/us', $thing, $matches)))
 		{
 			if ($matches[1] == '~')
 			{

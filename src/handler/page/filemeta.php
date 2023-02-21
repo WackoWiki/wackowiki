@@ -211,13 +211,13 @@ else if ($mode && !empty($file))
 			$tpl->link			= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
 
 			// show image
-			if (in_array($file['file_ext'], ['avif', 'gif', 'jpg', 'jpe', 'jpeg', 'jxl', 'png', 'svg', 'webp']))
+			if (in_array($file['file_ext'], array_merge(self::EXT['bitmap'], self::EXT['drawing'])))
 			{
 				$tpl->i_href		= $href;
 				$tpl->i_image		= $this->link($path . $file['file_name'], '', '', '', null, null, null, false);
 			}
 			// show audio & video
-			else if (in_array($file['file_ext'], ['mp4', 'ogv', 'webm', 'm4a' , 'mp3', 'ogg', 'opus']))
+			else if (in_array($file['file_ext'], array_merge(self::EXT['audio'], self::EXT['video'])))
 			{
 				$tpl->m_image		= $this->link($path . $file['file_name'], '', '', '', null, null, null, false);
 			}

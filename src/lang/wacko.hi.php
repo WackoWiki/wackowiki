@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	// language
+	'lang'	=> [
+		'name'		=> 'Hindi',
+		'code'		=> 'hi',
+		'dir'		=> 'ltr',
+		'locale'	=> 'hi_IN.UTF-8',
+	],
+
 	// common
 	'CreateButton'				=> 'बनाएँ',
 	'SaveButton'				=> 'सहेजें',

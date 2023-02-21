@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	// language
+	'lang'	=> [
+		'name'		=> 'English',
+		'code'		=> 'en',
+		'dir'		=> 'ltr',
+		'locale'	=> 'en_US.UTF-8',
+	],
+
 	// common
 	'CreateButton'				=> 'Create',
 	'SaveButton'				=> 'Save',
