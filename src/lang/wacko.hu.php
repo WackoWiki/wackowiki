@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	//language
+	'lang'	=> [
+		'name'		=> 'Hungarian',
+		'code'		=> 'hu',
+		'dir'		=> 'ltr',
+		'locale'	=> 'hu_HU.UTF-8',
+	],
+
 	// common
 	'CreateButton'				=> 'Létrehozás',
 	'SaveButton'				=> 'Mentés',

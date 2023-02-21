@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	//language
+	'lang'	=> [
+		'name'		=> 'Farsi',
+		'code'		=> 'fa',
+		'dir'		=> 'rtl',
+		'locale'	=> 'fa_IR.utf-8',
+	],
+
 	// common
 	'CreateButton'				=> 'ایجاد',
 	'SaveButton'				=> 'ذخیره',

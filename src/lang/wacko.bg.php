@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	//language
+	'lang'	=> [
+		'name'		=> 'Bulgarian',
+		'code'		=> 'bg',
+		'dir'		=> 'ltr',
+		'locale'	=> 'bg_BG.UTF-8',
+	],
+
 	// common
 	'CreateButton'				=> 'Създаване',
 	'SaveButton'				=> 'Запази',

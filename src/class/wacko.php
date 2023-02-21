@@ -730,13 +730,11 @@ class Wacko
 	{
 		if ($lang && !isset($this->languages[$lang]))
 		{
-			$lang_file = Ut::join_path(LANG_DIR, 'lang.' . $lang . '.php');
-			$wacko_language = [];
-			require $lang_file;
+			$wacko_language				= [];
+			$wacko_language				= $this->translations[$lang]['lang'];
+			$wacko_language['LANG']		= $lang;
 
-			$wacko_language['LANG']			= $lang;
-
-			$this->languages[$lang]			= $wacko_language;
+			$this->languages[$lang]		= $wacko_language;
 		}
 	}
 

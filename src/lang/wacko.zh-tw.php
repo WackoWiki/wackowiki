@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
+	//language
+	'lang'	=> [
+		'name'		=> 'Chinese',
+		'code'		=> 'zh-tw',
+		'dir'		=> 'ltr',
+		'locale'	=> 'zh_TW.UTF-8',
+	],
+
 	// common
 	'CreateButton'				=> '建立',
 	'SaveButton'				=> '儲存',
