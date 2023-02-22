@@ -676,7 +676,7 @@ class Wacko
 	}
 
 	/**
-	* Loads language file from lang/lang.<lang>.php.
+	* Loads language scheme.
 	*
 	* @param string $lang Language code
 	*/
@@ -684,11 +684,11 @@ class Wacko
 	{
 		if ($lang && !isset($this->languages[$lang]))
 		{
-			$wacko_language				= [];
-			$wacko_language				= $this->translations[$lang]['lang'];
-			$wacko_language['LANG']		= $lang;
+			$scheme						= [];
+			$scheme						= $this->translations[$lang]['lang_scheme'];
+			$scheme['LANG']				= $lang;
 
-			$this->languages[$lang]		= $wacko_language;
+			$this->languages[$lang]		= $scheme;
 		}
 	}
 
