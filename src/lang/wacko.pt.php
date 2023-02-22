@@ -7,8 +7,8 @@ if (!defined('IN_WACKO'))
 
 $wacko_translation = [
 
-	//language
-	'lang'	=> [
+	// language
+	'lang_scheme'	=> [
 		'name'		=> 'Portuguese',
 		'code'		=> 'pt',
 		'dir'		=> 'ltr',
