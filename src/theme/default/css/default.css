@@ -1127,32 +1127,32 @@ a:target {
 }
 
 .toolbar li {
-	background: ButtonFace;
+	background: buttonface;
 }
 
 .toolbar .btn-,
 .toolbar .btn-hover,
 .toolbar .btn-active,
 .toolbar .btn-pressed {
-	background: ButtonFace;
+	background: buttonface;
 	color: ButtonText;
-	border: 1px solid ButtonFace;
+	border: 1px solid buttonface;
 	padding: 1px;
 	margin: 0;
 	cursor: pointer;
 }
 
 .toolbar .btn-hover {
-	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+	border-color: buttonhighlight buttonshadow buttonshadow buttonhighlight;
 }
 
 .toolbar .btn-active,
 .toolbar .btn-pressed {
-	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+	border-color: buttonshadow buttonhighlight buttonhighlight buttonshadow;
 }
 
 .toolbar .btn-pressed {
-	background: ButtonHighlight;
+	background: buttonhighlight;
 }
 
 .toolbar .btn-separator {
@@ -1272,8 +1272,8 @@ a:target {
 }
 	/* WikiEdit Autocomplete --------------------------------- */
 .autocomplete-inplace {
-	background: ButtonFace;
-	border: 1px solid ButtonShadow;
+	background: buttonface;
+	border: 1px solid buttonshadow;
 	padding: 2px;
 	font: 12px var(--ww-font-sans-serif);
 }
