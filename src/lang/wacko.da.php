@@ -829,6 +829,8 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'Filmappen kan ikke skrives!',
 	'UploadNotAPicture'			=> 'Kan desværre ikke genkende filformatet, og kan derfor ikke tillade upload',
 	'UploadEmptyExtension'		=> 'Filnavnet og også udvidelsen kan ikke være tomme.',
+	'FilenameTooLong'			=> 'Filnavne må ikke være længere end 240 bytes.',
+	'BannedFiletype'			=> '%1 er en uønsket filtype.',
 	'UploadMimeMismatch'		=> 'Filendelsen %1 svarer ikke til filens MIME-type (%2).',
 	'UploadBadMime'				=> 'Filer med MIME-typen %1 må ikke uploades.',
 

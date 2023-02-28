@@ -829,6 +829,8 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture'			=> 'There is allowed to upload pictures only, and what do you trying to upload?',
 	'UploadEmptyExtension'		=> 'نام فایل و همچنین پسوند نمی تواند خالی باشد.',
+	'FilenameTooLong'			=> 'نام پرونده نباید از ۲۴۰ بایت طولانی‌تر باشد.',
+	'BannedFiletype'			=> '%1این نوع پرونده ممنوع است.',
 	'UploadMimeMismatch'		=> 'پسوند پرونده %1.‎» با نوع MIME آن (%2) مطابقت ندارد.',
 	'UploadBadMime'				=> 'پرونده‌هایی که نوع MIME آن‌ها %1 باشد برای بارگذاری مجاز نیستند.',
 

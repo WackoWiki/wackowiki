@@ -829,6 +829,8 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> '文件目录不可写！',
 	'UploadNotAPicture'			=> '只允许上传图片，你想上传什么？',
 	'UploadEmptyExtension'		=> '文件名和扩展名不能为空。',
+	'FilenameTooLong'			=> '文件名不能超过240字节。',
+	'BannedFiletype'			=> '%1 不是允许的文件类型。',
 	'UploadMimeMismatch'		=> '文件扩展名%1与检测到的文件MIME类型（%2）不匹配。',
 	'UploadBadMime'				=> 'MIME类型为%1的文件已被禁止上传。',
 

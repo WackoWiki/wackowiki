@@ -829,6 +829,8 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'Failide kataloog pole kirjutatav!',
 	'UploadNotAPicture'			=> 'Ainult pilte on lubatud üles laadida. Ja mida sina üritad teha?',
 	'UploadEmptyExtension'		=> 'Faili nimi ja ka laiend ei tohi olla tühi.',
+	'FilenameTooLong'			=> 'Failinimed ei või olla pikemad kui 240 baiti.',
+	'BannedFiletype'			=> '%1 pole lubatud failitüüp.',
 	'UploadMimeMismatch'		=> 'Faililaiend %1 ei vasta faili (%2) MIME tüübile.',
 	'UploadBadMime'				=> 'MIME tüübiga %1 faile ei ole lubatud üles laadida.',
 

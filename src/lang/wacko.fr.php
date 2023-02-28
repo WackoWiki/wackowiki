@@ -829,6 +829,8 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'Le répertoire de dépôt n’est pas accessible en écriture!',
 	'UploadNotAPicture'			=> 'Il est seulement permis de déposer des images, que tentez-vous de déposer ?',
 	'UploadEmptyExtension'		=> 'Le nom du fichier ainsi que l’extension ne peuvent être vides.',
+	'FilenameTooLong'			=> 'Les noms de fichier ne peuvent pas dépasser 240 octets.',
+	'BannedFiletype'			=> '%1 n’est pas un type de fichier autorisé.',
 	'UploadMimeMismatch'		=> 'L’extension du fichier %1 ne correspond pas au type MIME détecté du fichier (%2).',
 	'UploadBadMime'				=> 'Les fichiers de type MIME %1 ne peuvent pas être téléversés.',
 
