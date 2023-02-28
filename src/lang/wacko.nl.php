@@ -846,6 +846,8 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'Bestandsdirectory is niet beschrijfbaar!',
 	'UploadNotAPicture'			=> 'U mag hier alleen plaatjes uploaden, en dit is toch echt geen plaatje.',
 	'UploadEmptyExtension'		=> 'De bestandsnaam en ook de extensie mogen niet leeg zijn.',
+	'FilenameTooLong'			=> 'Bestandsnamen mogen niet langer zijn dan 240 bytes.',
+	'BannedFiletype'			=> 'Het bestandstype %1 wordt niet toegelaten.',
 	'UploadMimeMismatch'		=> 'De bestandsextensie %1 hoort niet bij het MIME-type van het bestand (%2).',
 	'UploadBadMime'				=> 'Het is niet toegestaan om bestanden van MIME-type %1 te uploaden.',
 

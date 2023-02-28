@@ -41,6 +41,29 @@ $can_replace = function($file_name, $page_id, $user)
 	return $result;
 };
 
+$translit_filename = function($name)
+{
+	// prepare for translit
+	$name	= str_replace(['@', '%20', '+'], '-', $name);
+	$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
+	$name	= utf8_trim($name, ' .-_');
+	$name	= Ut::normalize($name);
+	$name	= preg_replace('/[^' . self::PATTERN['ALPHANUM_P'] . '\.]/u', '', $name);
+
+	// file name transliteration
+	if ($this->db->upload_translit)
+	{
+		$t_name	= Ut::translit($name);
+		$t_name	= preg_replace('/[\p{Z}]+/u', '_', $t_name);
+	}
+	else
+	{
+		$t_name	= $name;
+	}
+
+	return $t_name;
+};
+
 // check who u are, can u upload?
 if (isset($_POST['upload']) & $can_upload)
 {
@@ -83,12 +106,6 @@ if (isset($_POST['upload']) & $can_upload)
 			unset($_data[count($_data) - 1]);
 
 			$ext		= mb_strtolower($ext);
-			$banned		= explode('|', $this->db->upload_banned_exts);
-
-			if (in_array($ext, $banned))
-			{
-				$ext = $ext . '.txt';
-			}
 
 			if (in_array($ext, self::EXT['bitmap']))
 			{
@@ -107,23 +124,8 @@ if (isset($_POST['upload']) & $can_upload)
 				$name	= implode('.', $_data);
 			}
 
-			// prepare file name for translit
-			$name	= str_replace(['@', '%20', '+'], '-', $name);
-			$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
-			$name	= utf8_trim($name, ' .-_');
-			$name	= Ut::normalize($name);
-			$name	= preg_replace('/[^' . self::PATTERN['ALPHANUM_P'] . '\.]/u', '', $name);
-
-			// file name transliteration
-			if ($this->db->upload_translit)
-			{
-				$t_name	= Ut::translit($name);
-				$t_name	= preg_replace('/\p{Z}+/u', '_', $t_name);
-			}
-			else
-			{
-				$t_name	= $name;
-			}
+			// sanitize & translit file name
+			$t_name	= $translit_filename($name);
 
 			// C. the file name and also the extension should not be empty at all
 			if ($t_name && preg_match('/[a-zA-Z0-9]{1,10}/u', $ext))
@@ -207,16 +209,25 @@ if (isset($_POST['upload']) & $can_upload)
 							$size	= @getimagesize($tmp_name);
 						}
 
-						if ($this->db->upload_images_only && !$this->is_admin())
+						if ($this->db->upload_images_only
+							&& !$this->is_admin()
+							&& $size[0] == 0)
 						{
-							if ($size[0] == 0)
-							{
-								$forbid	= true;
-								$error	= $this->_t('UploadNotAPicture');
-							}
+							$forbid	= true;
+							$error	= $this->_t('UploadNotAPicture');
 						}
-
-						if ($this->db->check_mimetype)
+						// file_name is max 255 bytes, restrict file name to 240 bytes.
+						else if (strlen($result_name) > 240)
+						{
+							$forbid	= true;
+							$error	= $this->_t('FilenameTooLong');
+						}
+						else if (!$this->file_extension_check($result_name))
+						{
+							$forbid	= true;
+							$error	= Ut::perc_replace($this->_t('BannedFiletype'), '<code>.' . $ext . '</code>');
+						}
+						else if ($this->db->check_mimetype)
 						{
 							if (in_array($mime_type, $this->db->mime_type_exclusions))
 							{

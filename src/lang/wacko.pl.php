@@ -846,6 +846,8 @@ $wacko_translation = [
 	'UploadDirNotWritable'		=> 'Katalog plików nie nadaje się do zapisu!',
 	'UploadNotAPicture'			=> 'Można wgrywać jedynie zdjęcia, a ty co próbujesz wgrać?',
 	'UploadEmptyExtension'		=> 'Nazwa pliku, a także rozszerzenie nie mogą być puste.',
+	'FilenameTooLong'			=> 'Nazwy plików nie mogą być dłuższe niż 240 bajtów.',
+	'BannedFiletype'			=> '%1 nie jest dozwolonym typem pliku.',
 	'UploadMimeMismatch'		=> 'Rozszerzenie pliku %1 nie pasuje do wykrytego typu MIME $2.',
 	'UploadBadMime'				=> 'Przesyłanie plików z typem MIME %1 jest niedozwolone.',
 
