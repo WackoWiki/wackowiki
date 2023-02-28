@@ -813,6 +813,10 @@ class Http
 		{
 			header("Content-Security-Policy: default-src self; script-src 'none'");
 		}
+		else if ($type == 'application/pdf')
+		{
+			header("Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox");
+		}
 
 		// nosniff only applies to "script" and "style" types.
 		if (preg_match('/^text|xml|javascript/i', $type))

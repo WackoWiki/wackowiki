@@ -138,7 +138,7 @@
 							<label for="file_caption">[ ' _t: FileCaption ' ]</label>
 						</th>
 						<td>
-							<textarea id="file_caption" name="caption" rows="6" cols="70">[ ' caption | pre ' ]</textarea>
+							<textarea id="file_caption" name="caption" rows="8" cols="80">[ ' caption | pre ' ]</textarea>
 						</td>
 					</tr>
 					<tr>
