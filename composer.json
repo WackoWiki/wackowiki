@@ -1,7 +1,11 @@
 {
 	"name" : "wackowiki/wackowiki",
-	"type" : "project",
 	"description" : "WackoWiki is a light and handy Wiki-engine.",
+	"type" : "project",
+	"keywords" : [
+		"wackowiki",
+		"wiki"
+	],
 	"homepage" : "https://wackowiki.org",
 	"license" : "BSD-3-Clause",
 	"require" : {

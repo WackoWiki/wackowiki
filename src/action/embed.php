@@ -20,9 +20,9 @@ if (!defined('IN_WACKO'))
 
 // set defaults
 $align		??= null;
-$height		??= 100;
+$height		??= 385;
 $url		??= null;
-$width		??= 550;
+$width		??= 640;
 
 if (!$url)
 {

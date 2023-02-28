@@ -5,20 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_mime = function ()
-{
-	return $this->db->load_all(
-		"SELECT DISTINCT mime_type " .
-		"FROM " . $this->prefix . "file", true);
-};
-
-$load_categories = function ()
-{
-	return $this->db->load_all(
-		"SELECT category_id, category, category_lang " .
-		"FROM " . $this->prefix . "category", true);
-};
-
 /*
 	Showing uploaded files
 
@@ -37,6 +23,22 @@ $load_categories = function ()
 // - add option to filter by facets (user, language, category, type, type class, license)
 // - add reset button
 
+$load_mime = function ()
+{
+	return $this->db->load_all(
+		"SELECT DISTINCT mime_type " .
+		"FROM " . $this->prefix . "file " .
+		"ORDER BY mime_type", true);
+};
+
+$load_categories = function ()
+{
+	return $this->db->load_all(
+		"SELECT category_id, category, category_lang " .
+		"FROM " . $this->prefix . "category " .
+		"ORDER BY category", true);
+};
+
 $file_name_maxlen	= 80;
 $files		= [];
 $object_ids	= [];
@@ -49,6 +51,7 @@ $all		??= 0;		// all attachments
 $cluster	??= 0;		// cluster attachments
 $deleted	??= false;
 $dir		??= 'asc';
+$file_ids	??= null;
 $form		??= 0;		// show search form
 $global		??= 0;		// global attachments
 $lang		??= '';
@@ -160,13 +163,16 @@ if ($can_view)
 			? "INNER JOIN " . $prefix . "file_link AS l ON (f.file_id = l.file_id) "
 			: "") . " " .
 			"WHERE ".
-		($all || $file_link
+		($all || $file_link || $file_ids
 			? "f.page_id IS NOT NULL "
 			: ($cluster
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: "f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " "
 				)
 			) . " " .
+		($file_ids
+			? "AND f.file_id IN (" . $this->ids_string($file_ids) . ") "
+			: '') .
 		($phrase
 			? "AND (f.file_name LIKE " . $this->db->q('%' . $phrase . '%') . " " .
 				"OR f.file_description LIKE " . $this->db->q('%' . $phrase . '%') . " " .
@@ -238,10 +244,10 @@ if ($can_view)
 		}
 
 		$this->cache_page([
-				'page_id'	=> $file['page_id'],
-				'tag'		=> $file['tag'],
-				'user_id'	=> $file['puser_id'],
-				'owner_id'	=> $file['owner_id'],
+			'page_id'	=> $file['page_id'],
+			'tag'		=> $file['tag'],
+			'user_id'	=> $file['puser_id'],
+			'owner_id'	=> $file['owner_id'],
 		], true);
 
 		$object_ids[]												= $file['file_id'];
