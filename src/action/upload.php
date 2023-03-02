@@ -47,9 +47,9 @@ if ($this->can_upload(true))
 
 	// adds 'accept' attribute depending on config settings
 	// https://www.w3.org/TR/html5/forms.html#attr-input-accept
-	if ($this->db->upload_images_only)
+	if ($this->db->upload_images_only && !$this->is_admin())
 	{
-		$tpl->u_accecpt = 'accept=".avif,.gif,.jpg,.png,.svg,.webp,image/avif,image/gif,image/jpeg,image/png,image/svg+xml,image/webp"';
+		$tpl->u_accecpt = 'accept=".avif,.gif,.jpg,.png,.webp,image/avif,image/gif,image/jpeg,image/png,image/webp"';
 	}
 
 	$tpl->u_size = $this->binary_multiples($maxfilesize, false, true, true);
