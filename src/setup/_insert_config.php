@@ -198,6 +198,7 @@ $config_db['tls_implicit']					= $config['tls_implicit'];
 $config_db['tree_level']					= $config['tree_level'];
 $config_db['typografica']					= $config['typografica'];
 $config_db['upload']						= $config['upload'];
+$config_db['upload_allowed_exts']			= $config['upload_allowed_exts'];
 $config_db['upload_banned_exts']			= $config['upload_banned_exts'];
 $config_db['upload_images_only']			= $config['upload_images_only'];
 $config_db['upload_quota']					= $config['upload_quota'];

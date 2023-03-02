@@ -5,6 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// Import the svgSanitize class into the global namespace
+use svgSanitize\Sanitizer;
+
 // TODO:
 // - thumbnails
 
@@ -17,6 +20,7 @@ $prefix			= $this->prefix;
 
 $this->ensure_page(true);
 
+// functions
 $can_replace = function($file_name, $page_id, $user)
 {
 	$result = false;
@@ -62,6 +66,19 @@ $translit_filename = function($name)
 	}
 
 	return $t_name;
+};
+
+$sanitize_svg = function($svg_file)
+{
+	$sanitizer = new Sanitizer();
+
+	// set options
+	$sanitizer->removeRemoteReferences(true);
+	$sanitizer->minify(true);
+
+	$dirty_svg = file_get_contents($svg_file);
+
+	return $sanitizer->sanitize($dirty_svg);
 };
 
 // check who u are, can u upload?
@@ -136,14 +153,14 @@ if (isset($_POST['upload']) & $can_upload)
 					$is_global	= false;
 					$fs_name	= '@' . $this->page['page_id'] . '@' . $t_name;
 					$page_id	= $this->page['page_id'];
-					$dir		= UPLOAD_PER_PAGE_DIR . '/';
+					$dir		= UPLOAD_PER_PAGE_DIR;
 				}
 				else
 				{
 					$is_global	= true;
 					$fs_name	= $t_name;
 					$page_id	= 0;
-					$dir		= UPLOAD_GLOBAL_DIR . '/';
+					$dir		= UPLOAD_GLOBAL_DIR;
 				}
 
 				// overwrite file
@@ -152,13 +169,13 @@ if (isset($_POST['upload']) & $can_upload)
 				$replace = isset($_POST['file_overwrite']) && $can_replace($t_name . '.' . $ext, $page_id, $user);
 
 				// D. check if folder is writable
-				if (is_writable($dir))
+				if (is_writable($dir . '/'))
 				{
 					$new_fs_name	= $fs_name;
 					$count			= 1;
 
 					// replace exising file
-					if (file_exists($dir . $fs_name . '.' . $ext)
+					if (file_exists($dir . '/' . $fs_name . '.' . $ext)
 						&& $replace)
 					{
 						// do nothing
@@ -170,7 +187,7 @@ if (isset($_POST['upload']) & $can_upload)
 					// e.g. file.txt -> file3.txt
 					else
 					{
-						while (file_exists($dir . $fs_name . '.' . $ext))
+						while (file_exists($dir . '/' . $fs_name . '.' . $ext))
 						{
 							if ($fs_name === $new_fs_name)
 							{
@@ -189,7 +206,7 @@ if (isset($_POST['upload']) & $can_upload)
 					// get filesize
 					$file_size		= (int) $_FILES['file']['size'];
 					$maxsize		= (int) ($_POST['maxsize'] ?? null);
-					$max_filesize	= $this->db->upload_max_size;
+					$max_filesize	= (int) $this->db->upload_max_size;
 
 					// form allows only a smaller files size than upload_max_size
 					if ($maxsize && ($max_filesize > $maxsize))
@@ -247,9 +264,23 @@ if (isset($_POST['upload']) & $can_upload)
 						// F. check for upload only images and forbidden MIME types
 						if (!$forbid)
 						{
-							// save to permanent location
-							move_uploaded_file($tmp_name, $dir . $result_name);
-							chmod($dir . $result_name, CHMOD_FILE);
+							$safe_file	= Ut::join_path($dir, $result_name);
+
+							if ($ext == 'svg' || $mime_type == 'image/svg+xml')
+							{
+								if ($clean_svg = $sanitize_svg($tmp_name))
+								{
+									// save clean SVG/XML data
+									@file_put_contents($safe_file, $clean_svg);
+								}
+							}
+							else
+							{
+								// save to permanent location
+								move_uploaded_file($tmp_name, $safe_file);
+							}
+
+							chmod($safe_file, CHMOD_FILE);
 
 							// replace
 							# clearstatcache();
