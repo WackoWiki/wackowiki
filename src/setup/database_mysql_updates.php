@@ -37,6 +37,7 @@ $alter_file_r6_0_1 = "ALTER TABLE {$pref}file CHANGE uploaded_dt created DATETIM
 $alter_file_r6_0_2 = "ALTER TABLE {$pref}file CHANGE modified_dt modified DATETIME NULL DEFAULT NULL";
 $alter_file_r6_0_3 = "ALTER TABLE {$pref}file CHANGE caption caption TEXT NULL DEFAULT NULL";
 $alter_file_r6_0_4 = "ALTER TABLE {$pref}file ADD INDEX idx_file_name (file_name)";
+$alter_file_r6_0_5 = "ALTER TABLE {$pref}file ADD file_hash CHAR(40) NOT NULL DEFAULT '' AFTER mime_type";
 
 // FILE LINK
 
