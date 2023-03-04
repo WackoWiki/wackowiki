@@ -850,6 +850,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> '不允許使用檔案類型 %1。',
 	'UploadMimeMismatch'		=> '檔案副檔名 %1 不符合偵測到的檔案 MIME 類型 (%2)。',
 	'UploadBadMime'				=> '不允許上傳 MIME 類型為 %1 的檔案。',
+	'FileIsDuplicate'			=> '上傳的檔案與目前版本的完全相同。',
+	'FileHasDuplicate'			=> '此檔案與下列多個檔案重複：',
 
 	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',

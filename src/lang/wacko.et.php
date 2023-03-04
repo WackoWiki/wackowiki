@@ -850,6 +850,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> '%1 pole lubatud failitüüp.',
 	'UploadMimeMismatch'		=> 'Faililaiend %1 ei vasta faili (%2) MIME tüübile.',
 	'UploadBadMime'				=> 'MIME tüübiga %1 faile ei ole lubatud üles laadida.',
+	'FileIsDuplicate'			=> 'Üleslaaditav fail on faili praeguse versiooni üksühene duplikaat.',
+	'FileHasDuplicate'			=> 'See fail on järgmiste failide duplikaat:',
 
 	'UploadMaxFileQuota'		=> 'Sa oled ületanud üleslaadimise piiri, seda faili enam kahjuks ei saa üles laadida',
 	'UploadDone'				=> 'Fail on edukalt üles laetud',

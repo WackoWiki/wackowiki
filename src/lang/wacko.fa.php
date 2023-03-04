@@ -850,6 +850,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> '%1این نوع پرونده ممنوع است.',
 	'UploadMimeMismatch'		=> 'پسوند پرونده %1.‎» با نوع MIME آن (%2) مطابقت ندارد.',
 	'UploadBadMime'				=> 'پرونده‌هایی که نوع MIME آن‌ها %1 باشد برای بارگذاری مجاز نیستند.',
+	'FileIsDuplicate'			=> 'آنچه بارگذاری شده دقیقاً نسخه‌ای تکراری از نسخهٔ فعلی است.',
+	'FileHasDuplicate'			=> 'This file is a duplicate of the following files:',
 
 	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',

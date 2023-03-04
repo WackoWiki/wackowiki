@@ -850,6 +850,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> 'फ़ाइल प्रकार की अनुमति नहीं है।',
 	'UploadMimeMismatch'		=> 'फाइल एक्सटेंशन %1 फ़ाइल के खोजे गए MIME प्रकार (%2) से मेल नहीं खाता।',
 	'UploadBadMime'				=> '%1 प्रकार की फ़ाइलें अपलोड करने के लिये अनुमति नहीं है।',
+	'FileIsDuplicate'			=> 'अपलोड वर्तमान संस्करण का सटीक प्रतिलिपि है।',
+	'FileHasDuplicate'			=> 'यह फ़ाइल निम्नलिखित फ़ाइलों की प्रति है:',
 
 	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',

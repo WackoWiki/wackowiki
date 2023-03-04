@@ -850,6 +850,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> '%1 er en uønsket filtype.',
 	'UploadMimeMismatch'		=> 'Filendelsen %1 svarer ikke til filens MIME-type (%2).',
 	'UploadBadMime'				=> 'Filer med MIME-typen %1 må ikke uploades.',
+	'FileIsDuplicate'			=> 'The upload is an exact duplicate of the current version.',
+	'FileHasDuplicate'			=> 'Denne fil er en dublet af de nedenstående filer:',
 
 	'UploadMaxFileQuota'		=> 'Sikke mange filer du uploader. Snak med administrator.',
 	'UploadDone'				=> 'Filupload lykkedes',

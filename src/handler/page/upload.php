@@ -14,6 +14,7 @@ use svgSanitize\Sanitizer;
 
 $can_upload		= $this->can_upload();
 $error			= '';
+$is_duplicate	= false;
 $is_global		= null;
 $is_image		= null;
 $prefix			= $this->prefix;
@@ -67,6 +68,22 @@ $translit_filename = function($name)
 
 	return $t_name;
 };
+
+$duplicate_files = function($file_hash) use ($prefix)
+{
+	$files	= $this->db->load_all(
+		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, created " .
+		"FROM " . $prefix . "file " .
+		"WHERE file_hash = " . $this->db->q($file_hash) . " ");
+
+	foreach($files as $file)
+	{
+		$file_ids[] = $file['file_id'];
+	}
+
+	return $file_ids;
+};
+
 
 $sanitize_svg = function($svg_file)
 {
@@ -166,7 +183,8 @@ if (isset($_POST['upload']) & $can_upload)
 				// overwrite file
 				// + file must be in file table
 				// + allow only file owner or admin
-				$replace = isset($_POST['file_overwrite']) && $can_replace($t_name . '.' . $ext, $page_id, $user);
+				$replace	= isset($_POST['file_overwrite']) && $can_replace($t_name . '.' . $ext, $page_id, $user);
+				$file_hash	= sha1_file($tmp_name);
 
 				// D. check if folder is writable
 				if (is_writable($dir . '/'))
@@ -174,12 +192,24 @@ if (isset($_POST['upload']) & $can_upload)
 					$new_fs_name	= $fs_name;
 					$count			= 1;
 
+					if ($file_ids = $duplicate_files($file_hash))
+					{
+						$this->set_message(
+							$this->_t('FileHasDuplicate') . '<br>' .
+							$this->action('files', ['file_ids' => $file_ids, 'media' => 0, 'nomark' => 1]),
+							'hint');
+					}
+
 					// replace exising file
 					if (file_exists($dir . '/' . $fs_name . '.' . $ext)
 						&& $replace)
 					{
+						$file_hash_exists	= sha1_file($dir . '/' . $fs_name . '.' . $ext);
 						// do nothing
-
+						if ($is_duplicate = $file_hash_exists === $file_hash)
+						{
+							$this->set_message($this->_t('FileIsDuplicate'), 'hint');
+						}
 						// TODO:
 						// + do file revision (add config option)
 					}
@@ -274,7 +304,7 @@ if (isset($_POST['upload']) & $can_upload)
 									@file_put_contents($safe_file, $clean_svg);
 								}
 							}
-							else
+							else if (!$is_duplicate)
 							{
 								// save to permanent location
 								move_uploaded_file($tmp_name, $safe_file);
@@ -318,7 +348,8 @@ if (isset($_POST['upload']) & $can_upload)
 										"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
 										"mime_type			= " . $this->db->q($mime_type) . "," .
 										"uploaded_dt		= UTC_TIMESTAMP(), " .
-										"modified_dt		= UTC_TIMESTAMP() " .
+										"modified_dt		= UTC_TIMESTAMP(), " .
+										"file_hash			= " . $this->db->q($file_hash) . " " .
 									"WHERE " .
 										"page_id			= " . (int) $page_id . " AND " .
 										"file_name			= " . $this->db->q($file_name) . " " .
@@ -341,7 +372,8 @@ if (isset($_POST['upload']) & $can_upload)
 										"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
 										"mime_type			= " . $this->db->q($mime_type) . "," .
 										"uploaded_dt		= UTC_TIMESTAMP()," .
-										"modified_dt		= UTC_TIMESTAMP() ");
+										"modified_dt		= UTC_TIMESTAMP()," .
+										"file_hash			= " . $this->db->q($file_hash) . " ");
 
 								// update user uploads count
 								$this->update_files_count($page_id, $user['user_id']);

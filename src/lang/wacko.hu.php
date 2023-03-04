@@ -850,6 +850,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> 'A következő fájltípus nem engedélyezett %1.',
 	'UploadMimeMismatch'		=> 'A fájl kiterjesztése %1 nem egyezik meg az észlelt MIME-típussal (%2).',
 	'UploadBadMime'				=> '%1 MIME-típusú fájlokat nem lehet feltölteni.',
+	'FileIsDuplicate'			=> 'A feltöltendő fájl pontos másolata a(z) %1 jelenlegi változatának.',
+	'FileHasDuplicate'			=> 'Ez a következő fájlok duplikátuma:',
 
 	'UploadMaxFileQuota'		=> 'Elérte a feltöltési korlátot, ezt a fájlt nem lehet feltölteni',
 	'UploadDone'				=> 'Sikeres feltöltés',
