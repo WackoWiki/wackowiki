@@ -39,6 +39,7 @@ $alter_file_r5_5_2 = "ALTER TABLE {$pref}file CHANGE file_description file_descr
 $alter_file_r5_5_3 = "ALTER TABLE {$pref}file CHANGE author author VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_file_r5_5_4 = "ALTER TABLE {$pref}file CHANGE source source VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_file_r5_5_5 = "ALTER TABLE {$pref}file DROP hits";
+$alter_file_r6_0_5 = "ALTER TABLE {$pref}file ADD file_hash CHAR(40) NOT NULL DEFAULT '' AFTER mime_type";
 
 // FILE LINK
 

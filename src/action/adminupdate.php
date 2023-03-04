@@ -252,7 +252,7 @@ if ($this->is_admin())
 			FROM
 				{$prefix}page p
 				LEFT JOIN {$prefix}acl a ON (p.page_id = a.page_id)
-			GROUP BY p.page_id
+			GROUP BY p.page_id, p.tag
 			HAVING COUNT(p.page_id) < 5
 			ORDER BY p.page_id ASC");
 
@@ -522,7 +522,7 @@ if ($this->is_admin())
 
 			if (isset($_POST['set_mime_type']))
 			{
-				// update database with the new password hash
+				// update database with MIME type
 				$this->db->sql_query(
 					"UPDATE " . $prefix . "file SET " .
 						"mime_type	= " . $this->db->q($mime_type) . " " .
@@ -556,6 +556,87 @@ if ($this->is_admin())
 	else
 	{
 		echo 'All good. No records with missing MIME type found.';
+	}
+
+	########################################################
+	##            Set missing file hash type for files    ##
+	########################################################
+
+	echo '<h4>3. Set missing file hash for legacy records in file table</h4>';
+
+	/* The file hash was added with R6.1 to the file table
+	 *
+	 * This only affects wikis that were already in use before R6.1.19
+	 * This mainly serves the purpose to find dublicates of files.
+	 */
+
+	// load files list
+	$files = $this->db->load_all(
+		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, created " .
+		"FROM " . $prefix . "file " .
+		"WHERE file_hash = '' " .
+		"ORDER BY file_name ASC ");
+
+	if ($files)
+	{
+		echo '<table class="usertable">' . "\n" .
+				'<tr class="userrow">
+					<th>file_id</th>
+					<th>file_name</th>
+					<th>file_path</th>
+					<th>page_id</th>
+					<th>created</th>
+					<th>file_ext</th>
+					<th>file_hash</th>
+				</tr>' . "\n";
+
+		foreach ($files as $file)
+		{
+			$file_path = Ut::join_path(
+					($file['page_id']? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
+					($file['page_id']
+						? '@' . $file['page_id'] . '@'
+						: '') .
+					$file['file_name']);
+
+			$file_hash = sha1_file($file_path);
+
+			if (isset($_POST['set_file_hash']))
+			{
+				// update database with the new file hash
+				$this->db->sql_query(
+					"UPDATE " . $prefix . "file SET " .
+						"file_hash	= " . $this->db->q($file_hash) . " " .
+					"WHERE file_id = " . (int) $file['file_id']);
+			}
+			else
+			{
+				// show affected users
+				echo
+					'<tr class="userrow">
+						<td>' . $file['file_id'] .	'</td>
+						<td>' . $file['file_name'] . '</td>
+						<td>' . $file_path . '</td>
+						<td>' . $file['page_id'] . '</td>
+						<td>' . $file['created'] . '</td>
+						<td>' . $file['file_ext'] . '</td>
+						<td>' . $file_hash . '</td>
+					</tr>' . "\n";
+			}
+		}
+
+		echo '</table>' . "\n";
+
+		if (!isset($_POST['set_file_hash']))
+		{
+			echo $this->form_open('set_file_hash');
+			echo '<button type="submit" name="set_file_hash">' . $this->_t('UpdateButton') . '</button>' . "\n";
+			echo $this->form_close();
+		}
+	}
+	else
+	{
+		echo 'All good. No records with missing file hash found.';
 	}
 
 	########################################################

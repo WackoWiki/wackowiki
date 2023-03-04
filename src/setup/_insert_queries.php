@@ -100,6 +100,8 @@ $upgrade['6.0.17'][]	= ['alter',		'file',				$alter_file_r5_5_2];
 $upgrade['6.0.17'][]	= ['alter',		'file',				$alter_file_r5_5_3];
 $upgrade['6.0.17'][]	= ['alter',		'file',				$alter_file_r5_5_4];
 $upgrade['6.0.20'][]	= ['alter',		'file',				$alter_file_r5_5_5];
+$upgrade['6.0.36'][]	= ['alter',		'file',				$alter_file_r6_0_5];
+
 
 // log
 $upgrade['6.0.8'][]		= ['alter',		'log',				$alter_log_r5_5_0];
