@@ -833,6 +833,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> 'Het bestandstype %1 wordt niet toegelaten.',
 	'UploadMimeMismatch'		=> 'De bestandsextensie %1 hoort niet bij het MIME-type van het bestand (%2).',
 	'UploadBadMime'				=> 'Het is niet toegestaan om bestanden van MIME-type %1 te uploaden.',
+	'FileIsDuplicate'			=> 'De upload is een exacte kopie van de huidige versie.',
+	'FileHasDuplicate'			=> 'Dit bestand is identiek aan de volgende bestanden:',
 
 	'UploadMaxFileQuota'		=> 'Uw uploadlimit is bereikt. U kunt dit bestand niet meer uploaden.',
 	'UploadDone'				=> 'Bestand succesvol geupload.',

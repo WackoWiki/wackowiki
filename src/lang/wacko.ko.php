@@ -833,6 +833,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> '%1 형식의 파일은 올릴 수 없습니다.',
 	'UploadMimeMismatch'		=> '%1 파일 확장자와 이 파일의 MIME 형식(%2)이 일치하지 않습니다.',
 	'UploadBadMime'				=> '%1 MIME 형식을 가진 파일은 올릴 수 없습니다.',
+	'FileIsDuplicate'			=> '업로드한 항목은 현재 판과 완전히 중복입니다.',
+	'FileHasDuplicate'			=> '현재 올리고 있는 파일이 아래 파일과 중복됩니다:',
 
 	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',

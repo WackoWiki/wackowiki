@@ -833,6 +833,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> '%1 不是允许的文件类型。',
 	'UploadMimeMismatch'		=> '文件扩展名%1与检测到的文件MIME类型（%2）不匹配。',
 	'UploadBadMime'				=> 'MIME类型为%1的文件已被禁止上传。',
+	'FileIsDuplicate'			=> '上传的文件与的当前版本完全相同。',
+	'FileHasDuplicate'			=> '本文件是以下文件的副本：',
 
 	'UploadMaxFileQuota'		=> '您已达到上传限制，无法上传此文件',
 	'UploadDone'				=> '文件上传成功',

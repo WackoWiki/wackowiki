@@ -833,6 +833,8 @@ $wacko_translation = [
 	'BannedFiletype'			=> 'El tipo de archivo %1 no está permitido.',
 	'UploadMimeMismatch'		=> 'La extensión de archivo %1 no coincide con el tipo MIME detectado en el archivo (%2).',
 	'UploadBadMime'				=> 'No se permite subir archivos MIME de tipo %1.',
+	'FileIsDuplicate'			=> 'Este es un duplicado exacto de la versión actual.',
+	'FileHasDuplicate'			=> 'Este archivo es un duplicado de los siguientes:',
 
 	'UploadMaxFileQuota'		=> 'Has llegado a tu límite de archivos subidos.',
 	'UploadDone'				=> 'El archivo se ha subido con exito.',
