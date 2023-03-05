@@ -848,6 +848,7 @@ $wacko_translation = [
 	'UploadEmptyExtension'		=> 'ファイル名と拡張子は空白にできません。',
 	'FilenameTooLong'			=> '240バイトを超えるファイル名は禁止されています。',
 	'BannedFiletype'			=> '%1 は許可されていないファイル形式です。',
+	'PermittedFiletype'			=> '許可されているファイル形式: %1。',
 	'UploadMimeMismatch'		=> 'ファイルの拡張子「%1」がMIMEタイプ「%2」と一致しません。',
 	'UploadBadMime'				=> 'MIMEタイプ「%1」のファイルのアップロードは許可されていません。',
 	'FileIsDuplicate'			=> 'アップロードされたものはの現在のバージョンのものと全く同じです。',

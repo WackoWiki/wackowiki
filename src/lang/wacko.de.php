@@ -848,6 +848,7 @@ $wacko_translation = [
 	'UploadEmptyExtension'		=> 'Der Dateiname und auch die Erweiterung dürfen nicht leer sein.',
 	'FilenameTooLong'			=> 'Dateinamen dürfen nicht größer als 240 Bytes sein.',
 	'BannedFiletype'			=> '%1 ist ein nicht erlaubter Dateityp.',
+	'PermittedFiletype'			=> 'Erlaubte Dateitypen: %1.',
 	'UploadMimeMismatch'		=> 'Dateierweiterung %1 stimmt nicht mit dem MIME-Typ (%2) überein.',
 	'UploadBadMime'				=> 'Dateien mit dem MIME-Typ %1 dürfen nicht hochgeladen werden.',
 	'FileIsDuplicate'			=> 'Die hochgeladene Datei ist ein exaktes Duplikat der aktuellen Version.',

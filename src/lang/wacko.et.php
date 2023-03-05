@@ -848,6 +848,7 @@ $wacko_translation = [
 	'UploadEmptyExtension'		=> 'Faili nimi ja ka laiend ei tohi olla tühi.',
 	'FilenameTooLong'			=> 'Failinimed ei või olla pikemad kui 240 baiti.',
 	'BannedFiletype'			=> '%1 pole lubatud failitüüp.',
+	'PermittedFiletype'			=> 'Lubatud failitüübid: %1.',
 	'UploadMimeMismatch'		=> 'Faililaiend %1 ei vasta faili (%2) MIME tüübile.',
 	'UploadBadMime'				=> 'MIME tüübiga %1 faile ei ole lubatud üles laadida.',
 	'FileIsDuplicate'			=> 'Üleslaaditav fail on faili praeguse versiooni üksühene duplikaat.',

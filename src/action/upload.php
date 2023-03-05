@@ -36,7 +36,8 @@ if ($this->can_upload(true))
 		$global = 'global';
 	}
 
-	$maxfilesize = $this->db->upload_max_size;
+	$maxfilesize	= $this->db->upload_max_size;
+	$allowed_types	= $this->db->upload_allowed_exts ?: '';
 
 	if ($maxsize && ($maxfilesize > 1 * $maxsize))
 	{
@@ -49,7 +50,15 @@ if ($this->can_upload(true))
 	// https://www.w3.org/TR/html5/forms.html#attr-input-accept
 	if ($this->db->upload_images_only && !$this->is_admin())
 	{
-		$tpl->u_accecpt = 'accept=".avif,.gif,.jpg,.png,.webp,image/avif,image/gif,image/jpeg,image/png,image/webp"';
+		$allowed_types = implode(', ' , self::EXT['bitmap']);
+
+		$tpl->u_accecpt = 'accept=".avif,.gif,.jpg,.jxl,.png,.webp,image/avif,image/gif,image/jpeg,image/jxl,image/png,image/webp"';
+
+	}
+
+	if ($allowed_types)
+	{
+		$tpl->u_allowed = Ut::perc_replace($this->_t('PermittedFiletype'), $allowed_types);
 	}
 
 	$tpl->u_size = $this->binary_multiples($maxfilesize, false, true, true);
