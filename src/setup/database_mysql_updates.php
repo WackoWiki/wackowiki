@@ -27,7 +27,7 @@ $alter_category_r5_5_0 = "ALTER TABLE {$pref}category CHANGE category_lang categ
 
 // CONFIG
 
-$update_config_r5_5_0 = "UPDATE {$pref}config SET config_value = '" . _quote('addcomment|admin\.php|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch|watchers|wordprocessor') . "' WHERE config_name = 'standard_handlers'";
+$update_config_r5_5_0 = "UPDATE {$pref}config SET config_value = '" . _q('addcomment|admin\.php|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch|watchers|wordprocessor') . "' WHERE config_name = 'standard_handlers'";
 $update_config_r5_5_1 = "DELETE FROM {$pref}config WHERE config_name IN ('antidupe', 'disable_tikilinks', 'outlook_workaround', 'owners_can_change_categories')";
 
 // EXTERNAL LINK
@@ -51,7 +51,7 @@ $alter_log_r5_5_0 = "ALTER TABLE {$pref}log CHANGE log_time log_time DATETIME NU
 $alter_menu_r5_5_0 = "ALTER TABLE {$pref}menu CHANGE menu_lang menu_lang VARCHAR(5) NOT NULL DEFAULT ''";
 $alter_menu_r5_5_1 = "ALTER TABLE {$pref}menu CHANGE menu_title menu_title VARCHAR(255) NOT NULL DEFAULT ''";
 
-$update_menu_r5_5_0 = "DELETE FROM {$pref}menu WHERE user_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT menu_lang = '" . _quote($config['language']) . "'";
+$update_menu_r5_5_0 = "DELETE FROM {$pref}menu WHERE user_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT menu_lang = '" . _q($config['language']) . "'";
 $update_menu_r5_5_1 = "DELETE m.* FROM {$pref}menu m LEFT JOIN {$pref}page p ON (m.page_id = p.page_id) WHERE p.page_id IS NULL";
 
 // PAGE
@@ -66,7 +66,7 @@ $alter_page_r5_5_7 = "ALTER TABLE {$pref}page CHANGE keywords keywords VARCHAR(2
 
 $update_page_r5_5_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_5_1 = "UPDATE {$pref}page SET body_r = ''";
-$update_page_r5_5_2 = "DELETE FROM {$pref}page WHERE owner_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT page_lang = '" . _quote($config['language']) . "'";
+$update_page_r5_5_2 = "DELETE FROM {$pref}page WHERE owner_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT page_lang = '" . _q($config['language']) . "'";
 $update_page_r5_5_3 = "UPDATE {$pref}page SET body = REPLACE(body, '[[fn ', '[[^ ');";
 $update_page_r5_5_4 = "UPDATE {$pref}page SET body = REPLACE(body, '((fn ', '((^ ');";
 
