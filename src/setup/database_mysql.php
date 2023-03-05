@@ -116,6 +116,7 @@ $tbl_file =
 		KEY idx_page_id_2 (page_id, created),
 		KEY idx_user_id (user_id),
 		KEY idx_file_name (file_name),
+		KEY idx_file_hash (file_hash),
 		KEY idx_deleted (deleted)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 

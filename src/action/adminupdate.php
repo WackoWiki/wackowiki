@@ -530,7 +530,6 @@ if ($this->is_admin())
 			}
 			else
 			{
-				// show affected users
 				echo
 					'<tr class="userrow">
 						<td>' . $file['file_id'] .	'</td>
@@ -562,7 +561,7 @@ if ($this->is_admin())
 	##            Set missing file hash type for files    ##
 	########################################################
 
-	echo '<h4>3. Set missing file hash for legacy records in file table</h4>';
+	echo '<h4>4. Set missing file hash for legacy records in file table</h4>';
 
 	/* The file hash was added with R6.1 to the file table
 	 *
@@ -611,7 +610,6 @@ if ($this->is_admin())
 			}
 			else
 			{
-				// show affected users
 				echo
 					'<tr class="userrow">
 						<td>' . $file['file_id'] .	'</td>

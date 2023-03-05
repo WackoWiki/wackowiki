@@ -218,7 +218,7 @@ $config_db['youarehere_text']				= $config['youarehere_text'];
 
 foreach ($config_db as $key => $value)
 {
-	$config_insert .= "(0, '$key', '" . _quote($value) . "'),";
+	$config_insert .= "(0, '$key', '" . _q($value) . "'),";
 }
 
 // to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE

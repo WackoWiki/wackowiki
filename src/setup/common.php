@@ -205,7 +205,7 @@ function array_to_str ($arr, $name = '')
 
 // TODO: same function as in dbpdo class
 // default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
-function _quote($string)
+function _q($string)
 {
 	$string ??= '';
 	global $config_global, $dblink_global;

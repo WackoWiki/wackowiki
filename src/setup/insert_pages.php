@@ -92,9 +92,9 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 	sanitize_page_tag($tag);
 
 	$prefix				= $config_global['table_prefix'];
-	$owner_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
-	$page_id			= "SELECT page_id FROM " . $prefix . "page WHERE tag = '" . _quote($tag) . "' LIMIT 1";
-	$page_select		= $page_id;
+	$q_owner_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
+	$q_page_id			= "SELECT page_id FROM " . $prefix . "page WHERE tag = '" . _q($tag) . "' LIMIT 1";
+	$page_select		= $q_page_id;
 
 	if ($set_menu != SET_MENU_ONLY)
 	{
@@ -102,74 +102,71 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 		// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
 		// the additional parentheses around $owner_id and $page_id are necessary for the sub-select queries
 		$page_insert	=
-			"INSERT INTO " .
-				$prefix . "page (
-					tag,
-					title,
-					body,
-					body_r,
-					body_toc,
-					user_id,
-					owner_id,
-					created,
-					modified,
-					latest,
-					page_size,
-					page_lang,
-					footer_comments,
-					footer_files,
-					noindex
-				)
+			"INSERT INTO " . $prefix . "page (
+				tag,
+				title,
+				body,
+				body_r,
+				body_toc,
+				user_id,
+				owner_id,
+				created,
+				modified,
+				latest,
+				page_size,
+				page_lang,
+				footer_comments,
+				footer_files,
+				noindex
+			)
 			VALUES (
-				'" . _quote($tag) . "',
-				'" . _quote($title) . "' ,
-				'" . _quote($body) . "',
+				'" . _q($tag) . "',
+				'" . _q($title) . "' ,
+				'" . _q($body) . "',
 				'',
 				'',
-				(" . $owner_id . "),
-				(" . $owner_id . "),
+				(" . $q_owner_id . "),
+				(" . $q_owner_id . "),
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				1,
 				" . strlen($body) . ",
-				'" . _quote($lang) . "',
+				'" . _q($lang) . "',
 				0,
 				0,
 				" . (int) $noindex . "
 			)";
 
 		$perm_insert	=
-			"INSERT INTO " .
-				$prefix . "acl (
-					page_id, privilege, list
-				)
+			"INSERT INTO " . $prefix . "acl (
+				page_id, privilege, list
+			)
 			VALUES
-				((" . $page_id . "), 'read',		'*'),
-				((" . $page_id . "), 'write',		'" . _quote($rights) . "'),
-				((" . $page_id . "), 'comment',		'$'),
-				((" . $page_id . "), 'create',		'$'),
-				((" . $page_id . "), 'upload',		'')";
+				((" . $q_page_id . "), 'read',		'*'),
+				((" . $q_page_id . "), 'write',		'" . _q($rights) . "'),
+				((" . $q_page_id . "), 'comment',		'$'),
+				((" . $q_page_id . "), 'create',		'$'),
+				((" . $q_page_id . "), 'upload',		'')";
 
 		$insert_data[]	= [$page_insert,	$lang_global['ErrorInsertPage']];
 		$insert_data[]	= [$perm_insert,	$lang_global['ErrorInsertPagePermission']];
 	}
 
 	$default_menu_item	=
-		"INSERT INTO " .
-			$prefix . "menu (
-				user_id,
-				page_id,
-				menu_lang,
-				menu_title
-			)
+		"INSERT INTO " . $prefix . "menu (
+			user_id,
+			page_id,
+			menu_lang,
+			menu_title
+		)
 		VALUES (
-			(" . $owner_id . "),
-			(" . $page_id . "),
-			'" . _quote($lang) . "',
-			'" . _quote($menu_title) . "'
+			(" . $q_owner_id . "),
+			(" . $q_page_id . "),
+			'" . _q($lang) . "',
+			'" . _q($menu_title) . "'
 		)
 		ON DUPLICATE KEY UPDATE
-			menu_title = '" . _quote($menu_title) . "'";
+			menu_title = '" . _q($menu_title) . "'";
 
 	if ($set_menu)
 	{
