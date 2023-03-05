@@ -72,7 +72,7 @@ $translit_filename = function($name)
 $duplicate_files = function($file_hash) use ($prefix)
 {
 	$files	= $this->db->load_all(
-		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, created " .
+		"SELECT file_id " .
 		"FROM " . $prefix . "file " .
 		"WHERE file_hash = " . $this->db->q($file_hash) . " ");
 
