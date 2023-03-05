@@ -106,7 +106,7 @@ $insert_admin_group_member =
 	)
 	VALUES (
 		(SELECT group_id FROM {$pref}usergroup WHERE group_name = 'Admins' LIMIT 1),
-		(" . $user_id . ")
+		(" . $q_user_id . ")
 	)";
 
 $insert_moderator_group =
@@ -169,9 +169,9 @@ $insert_logo_image =
 		'WackoWiki',
 		UTC_TIMESTAMP(),
 		UTC_TIMESTAMP(),
-		(int) $file_size,
-		(int) $image_size[0],
-		(int) $image_size[1],
+		'" . (int) $file_size . "',
+		'" . (int) $image_size[0] . "',
+		'" . (int) $image_size[1] . "',
 		'png',
 		'image/png',
 		'" . _q($file_hash) . "'
