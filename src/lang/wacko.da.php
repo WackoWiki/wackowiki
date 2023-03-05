@@ -831,6 +831,7 @@ $wacko_translation = [
 	'UploadEmptyExtension'		=> 'Filnavnet og også udvidelsen kan ikke være tomme.',
 	'FilenameTooLong'			=> 'Filnavne må ikke være længere end 240 bytes.',
 	'BannedFiletype'			=> '%1 er en uønsket filtype.',
+	'PermittedFiletype'			=> 'Tilladte filtyper: %1.',
 	'UploadMimeMismatch'		=> 'Filendelsen %1 svarer ikke til filens MIME-type (%2).',
 	'UploadBadMime'				=> 'Filer med MIME-typen %1 må ikke uploades.',
 	'FileIsDuplicate'			=> 'The upload is an exact duplicate of the current version.',

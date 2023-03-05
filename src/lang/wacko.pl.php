@@ -831,6 +831,7 @@ $wacko_translation = [
 	'UploadEmptyExtension'		=> 'Nazwa pliku, a także rozszerzenie nie mogą być puste.',
 	'FilenameTooLong'			=> 'Nazwy plików nie mogą być dłuższe niż 240 bajtów.',
 	'BannedFiletype'			=> '%1 nie jest dozwolonym typem pliku.',
+	'PermittedFiletype'			=> 'Dopuszczalne formaty plików: %1.',
 	'UploadMimeMismatch'		=> 'Rozszerzenie pliku %1 nie pasuje do wykrytego typu MIME $2.',
 	'UploadBadMime'				=> 'Przesyłanie plików z typem MIME %1 jest niedozwolone.',
 	'FileIsDuplicate'			=> 'Przesyłany plik jest identyczny z aktualną wersją.',

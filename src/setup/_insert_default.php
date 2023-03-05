@@ -162,9 +162,9 @@ $insert_logo_image =
 		file_hash
 	)
 	VALUES (
-		'0',
+		0,
 		(" . $q_user_id . "),
-		'wacko_logo.png',
+		'" . _q($config['site_logo']) . "',
 		'" . _q($config['language']) . "',
 		'WackoWiki',
 		UTC_TIMESTAMP(),

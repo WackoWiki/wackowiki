@@ -831,6 +831,7 @@ $wacko_translation = [
 	'UploadEmptyExtension'		=> '파일 이름과 확장자는 비워둘 수 없습니다.',
 	'FilenameTooLong'			=> '파일 이름은 240바이트를 넘을 수 없습니다.',
 	'BannedFiletype'			=> '%1 형식의 파일은 올릴 수 없습니다.',
+	'PermittedFiletype'			=> '허용된 파일 형식: %1.',
 	'UploadMimeMismatch'		=> '%1 파일 확장자와 이 파일의 MIME 형식(%2)이 일치하지 않습니다.',
 	'UploadBadMime'				=> '%1 MIME 형식을 가진 파일은 올릴 수 없습니다.',
 	'FileIsDuplicate'			=> '업로드한 항목은 현재 판과 완전히 중복입니다.',

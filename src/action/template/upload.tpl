@@ -14,7 +14,15 @@
 						<label for="file_upload">[ ' _t: UploadFor ' ]&nbsp;</label>
 					</td>
 					<td class="nowrap">
-						<input type="file" name="file" id="file_upload" [ ' accecpt ' ] required>&nbsp;([ ' _t: UploadMax ' ] [ ' size ' ])
+						<input type="file" name="file" id="file_upload" [ ' accecpt ' ] required>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="msg hint">
+					
+						[ ' _t: UploadMax ' ] [ ' size ' ]<br>
+						[ ' allowed | e ' ]
 					</td>
 				</tr>
 				[= global _ =
