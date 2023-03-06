@@ -438,7 +438,7 @@ class Wacko
 		return false; // unknown file type
 	}
 
-	static function get_max_upload_size()
+	function get_max_upload_size()
 	{
 		return min(
 			$this->db->upload_max_size,

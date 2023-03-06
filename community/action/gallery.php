@@ -295,7 +295,7 @@ if ($can_view)
 					}
 
 					// IDEA: adding an additional field like 'tumbnail' in the 'file' table for tracking,
-					// there might be many derived tumbs from the original image
+					// there might be many derived thumbs from the original image
 				}
 
 				if ($table)
