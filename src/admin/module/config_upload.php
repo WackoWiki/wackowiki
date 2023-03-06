@@ -68,13 +68,39 @@ function admin_config_upload($engine, $module)
 			}
 		}
 
+		$p_allowed_exts	= $_POST['upload_allowed_exts'] ?? '';
+
+		// validate upload_allowed_exts parameter, e.g (png, ogg, mp4)
+		$sanitize_exts = function($extensions) use ($engine)
+		{
+			$banned_exts	= $engine->get_filetype_list($engine->db->upload_banned_exts);
+			$allowed_exts	= $engine->get_filetype_list($extensions);
+
+			foreach ($allowed_exts as $ext)
+			{
+				// file type is not in forbidden and part of MIME map
+				if (!in_array($ext, $banned_exts) && $engine->validate_extension($ext))
+				{
+					$allowed[] = $ext;
+				}
+			}
+
+			sort($allowed);
+
+			return implode(', ', array_unique($allowed));
+		};
+
+		$allowed_exts = $sanitize_exts($p_allowed_exts);
+
+
 		$config['upload']					= (string) $upload;
-		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
 		$config['upload_max_size']			= (int) ($_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']]);
 		$config['upload_quota']				= (int) ($_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']]);
 		$config['upload_quota_per_user']	= (int) $_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
-		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
 		$config['upload_translit']			= (int) $_POST['upload_translit'];
+		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
+		$config['upload_allowed_exts']		= (string) $allowed_exts;
+		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
 		$config['img_create_thumbnail']		= (int) $_POST['img_create_thumbnail'];
 		$config['img_max_thumb_width']		= (int) $_POST['img_max_thumb_width'];
 
@@ -115,18 +141,6 @@ function admin_config_upload($engine, $module)
 						echo '<option value="0"' . ((string) $engine->db->upload === '0' ? ' selected' : '') . '>' . $engine->_t('Disabled') . '</option>';
 						?>
 					</select>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="upload_images_only"><strong><?php echo $engine->_t('UploadOnlyImages');?></strong><br>
-					<small><?php echo $engine->_t('UploadOnlyImagesInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ($engine->db->upload_images_only ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -190,21 +204,6 @@ function admin_config_upload($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<strong><?php echo $engine->_t('CheckMimetype');?></strong><br>
-					<small><?php echo $engine->_t('CheckMimetypeInfo');?></small>
-				</td>
-				<td>
-					<input type="radio" id="check_mimetype_on" name="check_mimetype" value="1"<?php echo ($engine->db->check_mimetype == 1 ? ' checked' : '');?>>
-					<label for="check_mimetype_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="check_mimetype_off" name="check_mimetype" value="0"<?php echo ($engine->db->check_mimetype == 0 ? ' checked' : '');?>>
-					<label for="check_mimetype_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
 					<strong><?php echo $engine->_t('TranslitFileName');?></strong><br>
 					<small><?php echo $engine->_t('TranslitFileNameInfo');?></small>
 				</td>
@@ -213,6 +212,48 @@ function admin_config_upload($engine, $module)
 					<label for="upload_translit_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="upload_translit_off" name="upload_translit" value="0"<?php echo ($engine->db->upload_translit == 0 ? ' checked' : '');?>>
 					<label for="upload_translit_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr>
+			<th colspan="2">
+					<br>
+					<?php echo $engine->_t('FileTypes');?>
+				</th>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="upload_images_only"><strong><?php echo $engine->_t('UploadOnlyImages');?></strong><br>
+					<small><?php echo $engine->_t('UploadOnlyImagesInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ($engine->db->upload_images_only ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="upload_allowed_exts"><strong><?php echo $engine->_t('AllowedUploadExts');?></strong><br>
+					<small><?php echo $engine->_t('AllowedUploadExtsInfo');?></small></label>
+				</td>
+				<td>
+					<textarea type="text" id="upload_allowed_exts" name="upload_allowed_exts"><?php echo Ut::html($engine->db->upload_allowed_exts);?></textarea>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<strong><?php echo $engine->_t('CheckMimetype');?></strong><br>
+					<small><?php echo $engine->_t('CheckMimetypeInfo');?></small>
+				</td>
+				<td>
+					<input type="radio" id="check_mimetype_on" name="check_mimetype" value="1"<?php echo ($engine->db->check_mimetype == 1 ? ' checked' : '');?>>
+					<label for="check_mimetype_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="check_mimetype_off" name="check_mimetype" value="0"<?php echo ($engine->db->check_mimetype == 0 ? ' checked' : '');?>>
+					<label for="check_mimetype_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>

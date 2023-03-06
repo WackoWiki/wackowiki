@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 class Wacko
 {
 	public const EXT = [
-		'audio'			=> ['m4a' , 'mp3', 'ogg', 'opus'],
+		'audio'			=> ['m4a', 'mp3', 'ogg', 'opus'],
 		'bitmap'		=> ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'jxl', 'png', 'webp'],
 		'drawing'		=> ['svg'],
 		'video'			=> ['mp4', 'ogv', 'webm'],
@@ -343,7 +343,7 @@ class Wacko
 		// check against disallowed files
 		if (!Ut::is_blank($banned_list))
 		{
-			$banned_exts = explode('|', $banned_list);
+			$banned_exts = $this->get_filetype_list($banned_list);
 
 			foreach ($banned_exts as $extension)
 			{
@@ -361,7 +361,7 @@ class Wacko
 		}
 
 		// check against allowed files
-		$allowed_exts = explode('|', $allowed_list);
+		$allowed_exts = $this->get_filetype_list($allowed_list);
 
 		foreach ($allowed_exts as $extension)
 		{
@@ -372,6 +372,15 @@ class Wacko
 		}
 
 		return false;
+	}
+
+	function get_filetype_list($filetyp_string)
+	{
+		return array_map(
+			function($types) {
+				return strtolower(trim($types));
+			},
+			explode(',', $filetyp_string));
 	}
 
 	function get_extensions_from_mime_type($mime): array
@@ -408,6 +417,25 @@ class Wacko
 		}
 
 		return in_array(strtolower($extension), $exts);
+	}
+
+	/**
+	 * Checks if the file type is part of MIME map.
+	 *
+	 * @param string $extension
+	 *
+	 * @return bool
+	 */
+	function validate_extension($extension): bool
+	{
+		$exts	= array_keys($this->http->mime_types());
+
+		if (in_array($extension, $exts))
+		{
+			return true;
+		}
+
+		return false; // unknown file type
 	}
 
 	function upload_quota($user_id = null)
