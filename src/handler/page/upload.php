@@ -236,7 +236,7 @@ if (isset($_POST['upload']) & $can_upload)
 					// get filesize
 					$file_size		= (int) $_FILES['file']['size'];
 					$maxsize		= (int) ($_POST['maxsize'] ?? null);
-					$max_filesize	= (int) $this->db->upload_max_size;
+					$max_filesize	= (int) $this->get_max_upload_size();
 
 					// form allows only a smaller files size than upload_max_size
 					if ($maxsize && ($max_filesize > $maxsize))

@@ -609,6 +609,26 @@ class Ut
 		return (mb_strlen($string) > $maxlen)?  mb_substr($string, 0, 30) . '[...]' . mb_substr($string, -20) : $string;
 	}
 
+	// converts shorthand byte notation to integer form
+	static function shorthand_to_integer(?string $string = '', int $default = -1 ): int
+	{
+		$string = trim($string ?? '');
+
+		if ($string === '')
+		{
+			return $default;
+		}
+
+		$last	= $string[strlen($string ) - 1];
+		$val	= intval($string);
+
+		return match($last) {
+			'g', 'G' => $val *= 1024 * 1024 * 1024,
+			'm', 'M' => $val *= 1024 * 1024,
+			'k', 'K' => $val *= 1024,
+		};
+	}
+
 	static function normalize($string, $form = Normalizer::FORM_C)
 	{
 		return normalizer_normalize($string, $form);

@@ -438,6 +438,15 @@ class Wacko
 		return false; // unknown file type
 	}
 
+	static function get_max_upload_size()
+	{
+		return min(
+			$this->db->upload_max_size,
+			Ut::shorthand_to_integer(ini_get('upload_max_filesize')),
+			Ut::shorthand_to_integer(ini_get('post_max_size'))
+		);
+	}
+
 	function upload_quota($user_id = null)
 	{
 		// get used upload quota

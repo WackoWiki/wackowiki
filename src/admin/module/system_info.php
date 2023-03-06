@@ -51,8 +51,8 @@ function admin_system_info($engine, $module)
 
 	// get_cfg_var()		-> returns whatever is in php.ini
 	// ini_get()			-> returns runtime settings
-	$upload_max_filesize	= trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
-	$post_max_size			= trim(str_replace('M', '', get_cfg_var('post_max_size')));
+	$upload_max_filesize	= Ut::shorthand_to_integer(get_cfg_var('upload_max_filesize'));
+	$post_max_size			= Ut::shorthand_to_integer(get_cfg_var('post_max_size'));
 
 	// PHP session.save_path
 	$session_save_path		= current(array_reverse(explode(';', ini_get('session.save_path'))));
@@ -60,12 +60,12 @@ function admin_system_info($engine, $module)
 	// check if gzip compression is enabled // @extension_loaded('zlib')
 	$gzip_compression		= (function_exists('ob_gzhandler') || ini_get('zlib.output_compression') ? $engine->_t('On') : $engine->_t('Off'));
 
-	$memory					= trim(str_replace('M', '', ini_get('memory_limit')));
+	$memory					= Ut::shorthand_to_integer(ini_get('memory_limit'));
 
 	// fallback if ini_get doesn't work
 	if (intval($memory) == 0)
 	{
-		$memory = trim(str_replace('M', '', get_cfg_var('memory_limit')));
+		$memory = Ut::shorthand_to_integer(get_cfg_var('memory_limit'));
 	}
 
 	// Sysinfo in array
@@ -81,9 +81,9 @@ function admin_system_info($engine, $module)
 	$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
 	$sysinfo['icu_version']			= [$engine->_t('IcuVersion'), INTL_ICU_VERSION];
 	$sysinfo['php_version']			= [$engine->_t('PhpVersion'), PHP_VERSION];
-	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->binary_multiples($memory * 1024 * 1024, false, true, true)];
-	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
-	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->binary_multiples($post_max_size * 1024 * 1024, false, true, true)];
+	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->binary_multiples($memory, false, true, true)];
+	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->binary_multiples($upload_max_filesize, false, true, true)];
+	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->binary_multiples($post_max_size, false, true, true)];
 	$sysinfo['max_execution_time']	= [$engine->_t('MaxExecutionTime'), get_cfg_var('max_execution_time') . ' seconds'];
 	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), CACHE_SESSION_DIR . ' (PHP default: ' . $session_save_path . ')'];
 	$sysinfo['default_charset']		= [$engine->_t('PhpDefaultCharset'), ini_get('default_charset')];

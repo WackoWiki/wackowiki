@@ -27,6 +27,7 @@ class Feed
 		$this->lang		= $this->engine->db->language;
 		$this->engine->set_language($this->lang, true, true);
 		$this->charset	= $this->engine->get_charset();
+		$this->prefix	= $this->engine->db->table_prefix;
 	}
 
 	function write_file($name, $body): void
@@ -129,7 +130,6 @@ class Feed
 		$name			= $this->xml_name('news');
 		$news_cluster	= empty($feed_cluster) ? $this->engine->db->news_cluster : $feed_cluster;
 		$news_levels	= $this->engine->db->news_levels;
-		$prefix			= $this->engine->db->table_prefix;
 
 		$this->engine->canonical	= true;
 		$this->engine->static_feed	= true;
@@ -137,8 +137,8 @@ class Feed
 		// collect data
 		$pages = $this->engine->db->load_all(
 			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
-			"FROM {$prefix}page p, " .
-				"{$prefix}acl AS a " .
+			"FROM {$this->prefix}page p, " .
+				"{$this->prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'read' AND a.list = '*' " .
 				"AND p.comment_on_id = 0 " .
@@ -291,13 +291,11 @@ class Feed
 	// Sitemaps XML file: http://www.sitemaps.org
 	function site_map(): void
 	{
-		$prefix		= $this->engine->db->table_prefix;
-
 		// collect data
 		$pages = $this->engine->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.modified, p.page_lang " .
-			"FROM {$prefix}page p, " .
-				"{$prefix}acl AS a " .
+			"FROM {$this->prefix}page p, " .
+				"{$this->prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'read' AND a.list = '*' " .
 				"AND p.comment_on_id = 0 " .
