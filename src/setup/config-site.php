@@ -21,7 +21,7 @@
 	// -->
 </script>
 
-<form action="<?php echo my_location() ?>?installAction=config-database" method="post" name="form1">
+<form action="<?php echo $base_path ?>?installAction=config-database" method="post" name="form1">
 <?php
 write_config_hidden_nodes($config_parameters);
 
