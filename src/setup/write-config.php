@@ -151,7 +151,7 @@ if ($write_file)
 else
 {
 	echo
-		'<form action="' . my_location() . '?installAction=write-config" method="post">' . "\n";
+		'<form action="' . $base_path . '?installAction=write-config" method="post">' . "\n";
 			write_config_hidden_nodes($config_parameters) .
 			'<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n" .
 		'</form>' . "\n" .

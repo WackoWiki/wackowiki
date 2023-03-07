@@ -1,24 +1,6 @@
 <?php
 
 // setup header
-function my_location()
-{
-	global $config;
-
-	// run in tls mode?
-	if ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
-		|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443')
-	)
-	{
-		$config['base_url'] =	str_replace('http://', 'https://', $config['base_url']);
-	}
-
-	[$url, ] = explode('?', $config['base_url']);
-
-	return $url;
-}
-
-// setup header
 function write_config_hidden_nodes($config_parameters)
 {
 	if (is_array($config_parameters))
@@ -45,7 +27,7 @@ function output_image($ok)
 {
 	global $lang;
 
-	return '<img src="' . my_location() . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
+	return '<img src="' . $base_path . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
 }
 
 // TODO: same function as in wacko class

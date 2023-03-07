@@ -1,4 +1,4 @@
-<form action="<?php echo my_location() ?>?installAction=version-check" method="post">
+<form action="<?php echo $base_path ?>?installAction=version-check" method="post">
 <?php
 
 // Check if Upgrade or Fresh Install

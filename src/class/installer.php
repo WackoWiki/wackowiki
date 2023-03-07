@@ -31,7 +31,8 @@ class Installer
 		$install_module = 'setup/' . $install_action . '.php';
 
 		global $config;
-		$config = $db->steal_config();
+		$config		= $db->steal_config();
+		$base_path	= $db->get_base_url();
 
 		include 'setup/header.php';
 

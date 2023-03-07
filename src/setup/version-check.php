@@ -1,4 +1,4 @@
-<form action="<?php echo my_location() ?>?installAction=config-site" method="post">
+<form action="<?php echo $base_path ?>?installAction=config-site" method="post">
 <?php
 write_config_hidden_nodes($config_parameters);
 ?>
