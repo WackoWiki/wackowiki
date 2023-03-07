@@ -20,7 +20,6 @@
 				<tr>
 					<td></td>
 					<td class="msg hint">
-					
 						[ ' _t: UploadMax ' ] [ ' size ' ]<br>
 						[ ' allowed | e ' ]
 					</td>

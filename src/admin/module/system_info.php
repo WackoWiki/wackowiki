@@ -51,8 +51,8 @@ function admin_system_info($engine, $module)
 
 	// get_cfg_var()		-> returns whatever is in php.ini
 	// ini_get()			-> returns runtime settings
-	$upload_max_filesize	= Ut::shorthand_to_integer(get_cfg_var('upload_max_filesize'));
-	$post_max_size			= Ut::shorthand_to_integer(get_cfg_var('post_max_size'));
+	$upload_max_filesize	= Ut::shorthand_to_int(get_cfg_var('upload_max_filesize'));
+	$post_max_size			= Ut::shorthand_to_int(get_cfg_var('post_max_size'));
 
 	// PHP session.save_path
 	$session_save_path		= current(array_reverse(explode(';', ini_get('session.save_path'))));
@@ -60,12 +60,12 @@ function admin_system_info($engine, $module)
 	// check if gzip compression is enabled // @extension_loaded('zlib')
 	$gzip_compression		= (function_exists('ob_gzhandler') || ini_get('zlib.output_compression') ? $engine->_t('On') : $engine->_t('Off'));
 
-	$memory					= Ut::shorthand_to_integer(ini_get('memory_limit'));
+	$memory					= Ut::shorthand_to_int(ini_get('memory_limit'));
 
 	// fallback if ini_get doesn't work
 	if (intval($memory) == 0)
 	{
-		$memory = Ut::shorthand_to_integer(get_cfg_var('memory_limit'));
+		$memory = Ut::shorthand_to_int(get_cfg_var('memory_limit'));
 	}
 
 	// Sysinfo in array

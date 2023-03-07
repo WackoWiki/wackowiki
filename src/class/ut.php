@@ -610,7 +610,7 @@ class Ut
 	}
 
 	// converts shorthand byte notation to integer form
-	static function shorthand_to_integer(?string $string = '', int $default = -1 ): int
+	static function shorthand_to_int(?string $string = '', int $default = -1 ): int
 	{
 		$string = trim($string ?? '');
 

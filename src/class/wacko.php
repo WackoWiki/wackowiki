@@ -442,8 +442,8 @@ class Wacko
 	{
 		return min(
 			$this->db->upload_max_size,
-			Ut::shorthand_to_integer(ini_get('upload_max_filesize')),
-			Ut::shorthand_to_integer(ini_get('post_max_size'))
+			Ut::shorthand_to_int(ini_get('upload_max_filesize')),
+			Ut::shorthand_to_int(ini_get('post_max_size'))
 		);
 	}
 
