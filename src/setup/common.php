@@ -25,7 +25,7 @@ function output_error($error_text = '')
 // Draws a tick or cross next to a result
 function output_image($ok)
 {
-	global $lang;
+	global $lang, $base_path;
 
 	return '<img src="' . $base_path . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
 }
