@@ -19,6 +19,7 @@ class Feed
 	public $engine;
 	public $lang;
 	public $charset;
+	public $prefix;
 
 	// CONSTRUCTOR
 	function __construct(&$engine)
