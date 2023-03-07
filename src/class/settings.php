@@ -154,7 +154,7 @@ class Settings extends Dbal implements ArrayAccess
 
 	public function rebase_url()
 	{
-		$this->theme_url	= $this->base_url . Ut::join_path(THEME_DIR, $this->theme) . '/';
+		$this->theme_url	= $this->base_path . Ut::join_path(THEME_DIR, $this->theme) . '/';
 		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
 	}
 
