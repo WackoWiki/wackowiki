@@ -266,7 +266,7 @@ if ($can_view)
 
 			$file_id	= $file['file_id'];
 			$file_name	= $file['file_name'];
-			$shown_name	= $this->shorten_string($file_name, $file_name_maxlen);
+			$shown_name	= Ut::shorten_string($file_name, $file_name_maxlen);
 			$text		= ($media
 							? ($file['picture_w'] || in_array($file['file_ext'], ['m4a', 'mp3', 'ogg', 'opus', 'avif', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp', 'mp4', 'ogv', 'webm'])
 								? ''					// parses image, audio and video links into their media tags
@@ -285,7 +285,7 @@ if ($can_view)
 			{
 				// display picture meta data
 				#$tpl->p_file		= $file; // result array: [ ' file.file_id ' ]
-				$tpl->p_name		= $this->shorten_string($file['file_name'], $file_name_maxlen);
+				$tpl->p_name		= Ut::shorten_string($file['file_name'], $file_name_maxlen);
 				$tpl->p_desc		= $desc;
 				$tpl->p_meta		= ($file['picture_w']
 										? number_format($file['picture_w'], 0, ',', '.') . ' × ' . number_format($file['picture_h'], 0, ',', '.') . ' px'

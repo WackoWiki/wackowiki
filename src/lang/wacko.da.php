@@ -851,7 +851,7 @@ $wacko_translation = [
 	'PermittedFiletype'			=> 'Tilladte filtyper: %1.',
 	'UploadMimeMismatch'		=> 'Filendelsen %1 svarer ikke til filens MIME-type (%2).',
 	'UploadBadMime'				=> 'Filer med MIME-typen %1 må ikke uploades.',
-	'FileIsDuplicate'			=> 'The upload is an exact duplicate of the current version.',
+	'FileIsDuplicate'			=> 'Uploaden er en nøjagtig kopi af den aktuelle version.',
 	'FileHasDuplicate'			=> 'Denne fil er en dublet af de nedenstående filer:',
 
 	'UploadMaxFileQuota'		=> 'Sikke mange filer du uploader. Snak med administrator.',

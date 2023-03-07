@@ -604,6 +604,37 @@ class Ut
 		return static::urlencode($rfc3986, $name) . '=' . static::urlencode($rfc3986, $value);
 	}
 
+	static function shorten_string($string, $maxlen = 80): string
+	{
+		return (mb_strlen($string) > $maxlen)?  mb_substr($string, 0, 30) . '[...]' . mb_substr($string, -20) : $string;
+	}
+
+	// converts shorthand byte notation to integer form
+	static function shorthand_to_int(?string $string = '', int $default = -1 ): int
+	{
+		$string = trim($string ?? '');
+
+		if ($string === '')
+		{
+			return $default;
+		}
+
+		$last	= $string[strlen($string ) - 1];
+		$val	= intval($string);
+
+		switch ($last) {
+			case 'g':
+			case 'G':
+				return $val *= 1024 * 1024 * 1024;
+			case 'm':
+			case 'M':
+				return $val *= 1024 * 1024;
+			case 'k':
+			case 'K':
+				return $val *= 1024;
+		}
+	}
+
 	static function normalize($string, $form = Normalizer::FORM_C)
 	{
 		return normalizer_normalize($string, $form);

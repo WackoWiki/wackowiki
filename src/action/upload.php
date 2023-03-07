@@ -36,8 +36,8 @@ if ($this->can_upload(true))
 		$global = 'global';
 	}
 
-	$maxfilesize	= $this->db->upload_max_size;
-	$allowed_types	= $this->db->upload_allowed_exts ?: '';
+	$maxfilesize	= $this->get_max_upload_size();
+	$allowed_types	= $this->db->upload_allowed_exts ?? '';
 
 	if ($maxsize && ($maxfilesize > 1 * $maxsize))
 	{

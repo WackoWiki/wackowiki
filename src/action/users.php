@@ -554,8 +554,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 								}
 
 								$tpl->u_u2_li_created	= $file['uploaded_dt'];
-								# $tpl->u_u2_li_link	= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
-								$tpl->u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $file['file_id']]) . '">' . $this->shorten_string($file['file_name']) . '</a>';
+								# $tpl->u_u2_li_link	= $this->link($path2 . $upload['file_name'], '', Ut::shorten_string($upload['file_name']), '', 0, 1);
+								$tpl->u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $file['file_id']]) . '">' . Ut::shorten_string($file['file_name']) . '</a>';
 								$tpl->u_u2_li_onpage	= $on_page;
 								$tpl->u_u2_li_descr		= $file_description;
 							}
