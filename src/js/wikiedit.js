@@ -94,12 +94,12 @@ class WikiEdit extends ProtoEdit
 		this.addButton('footnote',		lang.Footnote,		'\'[[^ \', \']]\', 2');
 		this.addButton('createtable',	lang.InsertTable,	'\'\', \'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\', 2');
 		this.addButton('customhtml',	separator);
-		this.addButton('customhtml',	'<li class="we-help"><button id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
+		this.addButton('customhtml',	'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
 			+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 			+ 'onclick="this.className=\'btn-pressed\';window.open(\'' + this.manual + lang.HelpFormattingPage + '\');" '
 			+ ' title="' + lang.HelpFormattingTip + '">'
 			+ '<img src="' + this.imagesPath + 'spacer.png"' + ' alt="' + lang.HelpFormatting + '" title="' + lang.HelpFormattingTip + '">'
-			+ '</button></li>');
+			+ '</div></li>');
 		this.addButton('about',			lang.HelpAbout,		'', 'document.getElementById(\'' + this.id + '\')._owner.help');
 
 		try {

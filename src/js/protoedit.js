@@ -103,13 +103,13 @@ class ProtoEdit
 			}
 			else
 			{
-				html += ' <li class="we-' + btn.name + '"><button id="' + btn.name + '_' + id + '" '
+				html += ' <li class="we-' + btn.name + '"><div id="' + btn.name + '_' + id + '" '
 					+ 'onmouseover=\'this.className="btn-hover";\' '
 					+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 					+ 'onclick="this.className=\'btn-pressed\';' + btn.actionName + '('
 					+ btn.actionParams + ')"><img src="' + this.imagesPath
 					+ 'spacer.png" ' + wh + ' alt="' + btn.desc + '" title="' + btn.desc
-					+ '"></button></li>\n';
+					+ '"></div></li>\n';
 			}
 		}
 
