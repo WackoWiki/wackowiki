@@ -402,7 +402,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			<?php echo $engine->_t('RestoreInfo'); ?>
 		</p>
 <?php
-		if (!is_executable($dir))
+		if (!(PHP_OS_FAMILY === 'Windows') && !is_executable($dir))
 		{
 			echo substr(sprintf('%o', fileperms($dir)), -4) . "<br>\n";
 			echo output_image($engine, false) .
