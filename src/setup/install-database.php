@@ -179,8 +179,8 @@ switch ($config['db_driver'])
 		if (!$fatal_error)
 		{
 			// mariadb / mysql only
-			require_once 'setup/_insert_default.php';
 			require_once 'setup/_insert_config.php';
+			require_once 'setup/_insert_default.php';
 			require_once 'setup/database_mysql.php';
 			require_once 'setup/database_mysql_updates.php';
 			require_once 'setup/_insert_queries.php';
@@ -360,8 +360,8 @@ switch ($config['db_driver'])
 		if (!$fatal_error)
 		{
 			// mariadb / mysql only
-			require_once 'setup/_insert_default.php';
 			require_once 'setup/_insert_config.php';
+			require_once 'setup/_insert_default.php';
 			require_once 'setup/database_mysql.php';
 			require_once 'setup/database_mysql_updates.php';
 			require_once 'setup/_insert_queries.php';
