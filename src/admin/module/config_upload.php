@@ -68,7 +68,7 @@ function admin_config_upload($engine, $module)
 			}
 		}
 
-		$p_allowed_exts	= $_POST['upload_allowed_exts'] ?? '';
+		$p_allowed_exts	= trim($_POST['upload_allowed_exts'] ?? '');
 
 		// validate upload_allowed_exts parameter, e.g (png, ogg, mp4)
 		$sanitize_exts = function($extensions) use ($engine)
@@ -80,6 +80,7 @@ function admin_config_upload($engine, $module)
 
 			$banned_exts	= $engine->get_filetype_list($engine->db->upload_banned_exts);
 			$allowed_exts	= $engine->get_filetype_list($extensions);
+			$allowed		= [];
 
 			foreach ($allowed_exts as $ext)
 			{
@@ -90,9 +91,16 @@ function admin_config_upload($engine, $module)
 				}
 			}
 
-			sort($allowed);
+			if ($allowed)
+			{
+				sort($allowed);
 
-			return implode(', ', array_unique($allowed));
+				return implode(', ', array_unique($allowed));
+			}
+			else
+			{
+				return '';
+			}
 		};
 
 		$allowed_exts = $sanitize_exts($p_allowed_exts);
