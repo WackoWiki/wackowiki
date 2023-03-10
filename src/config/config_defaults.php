@@ -227,6 +227,8 @@ $wacko_config_defaults = [
 											'application/x-msmetafile',
 										],
 
+	'svg_sanitizer'					=> 1,
+
 	'img_create_thumbnail'			=> 0,
 	'img_max_thumb_width'			=> 150,
 

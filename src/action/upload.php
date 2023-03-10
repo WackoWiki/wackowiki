@@ -20,6 +20,22 @@ $maxsize			??= null;
 
 if ($global) $global = 'global';
 
+// functions
+$accept_types = function($types)
+{
+	$accept_types = array_map('trim', explode(',', $types));
+
+	foreach($accept_types as $type)
+	{
+		if ($this->validate_extension($type))
+		{
+			$result[] = '.' . $type;
+		}
+	}
+
+	return implode(',', $result);
+};
+
 // check who u are, can u upload?
 if ($this->can_upload(true))
 {
@@ -47,18 +63,16 @@ if ($this->can_upload(true))
 
 	$tpl->u_maxfilesize = $maxfilesize;
 
-	// adds 'accept' attribute depending on config settings
-	// https://www.w3.org/TR/html5/forms.html#attr-input-accept
 	if ($this->db->upload_images_only && !$this->is_admin())
 	{
 		$allowed_types = implode(', ' , self::EXT['bitmap']);
-
-		$tpl->u_accecpt = 'accept=".avif,.gif,.jpg,.jxl,.png,.webp,image/avif,image/gif,image/jpeg,image/jxl,image/png,image/webp"';
-
 	}
 
 	if ($allowed_types)
 	{
+		// adds 'accept' attribute depending on config settings
+		// https://www.w3.org/TR/html5/forms.html#attr-input-accept
+		$tpl->u_accecpt = 'accept="' . $accept_types($allowed_types) . '"';
 		$tpl->u_allowed = Ut::perc_replace($this->_t('PermittedFiletype'), $allowed_types);
 	}
 

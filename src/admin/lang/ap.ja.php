@@ -877,6 +877,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'アップロードできるファイルの拡張子は、カンマ区切りで指定します（例：<code>png, ogg, mp4</code>, その他、禁止されていないファイル拡張子はすべて許可されます）。',
 	'CheckMimetype'				=> 'Check MIME type:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

@@ -872,6 +872,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Tilladte filtypenavne til upload af filer, kommasepareret, f.eks. <code>png, ogg, mp4</code>, ellers er alle ikke forbudte filtypenavne tilladt.',
 	'CheckMimetype'				=> 'Kontrol af vedhæftede filer:',
 	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

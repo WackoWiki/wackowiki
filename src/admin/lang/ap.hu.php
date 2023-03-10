@@ -874,6 +874,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'A fájlok feltöltéséhez engedélyezett kiterjesztések, vesszővel elválasztva pl. <code>png, ogg, mp4</code>, egyébként minden nem tiltott kiterjesztés engedélyezett.',
 	'CheckMimetype'				=> 'Csatolt állományok ellenőrzése:',
 	'CheckMimetypeInfo'			=> 'Néhány böngésző rávehető, hogy a feltöltött állományokhoz helytelen MIME típust állapítson meg. Ezzel a beállítással az ennek okozására hajlamos állományok visszautasításra kerülnek.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Ha alkalmazható, és nincs szükség Unicode karakterekre, akkor nagyon ajánlott csak alfa-numerikus karaktereket elfogadni.',
 

@@ -40,6 +40,8 @@ if (isset($route['engine']))
 switch ($route['route'])
 {
 	case 'install':
+		$http->ensure_tls($db->base_url);
+		$http->http_security_headers();
 		Installer::run($db);
 		// NEVER BEEN HERE
 

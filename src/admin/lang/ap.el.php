@@ -874,6 +874,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Επιτρεπόμενες επεκτάσεις για τη μεταφόρτωση αρχείων, με διαχωρισμό με κόμμα, π.χ. <code>png, ogg, mp4</code>, διαφορετικά επιτρέπονται όλες οι μη απαγορευμένες επεκτάσεις αρχείων.',
 	'CheckMimetype'				=> 'Έλεγχος αρχείων συνημμένων:',
 	'CheckMimetypeInfo'			=> 'Ορισμένα προγράμματα περιήγησης μπορεί να εξαπατηθούν και να υποθέσουν ένα ανακριβές είδος κωδικοποίησης για τα φορτώσιμα αρχεία. Αυτή η επιλογή εξασφαλίζει ότι τέτοια αρχεία που είναι πιθανό να προκαλέσουν αυτό, να απορρίπτονται.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

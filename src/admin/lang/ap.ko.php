@@ -877,6 +877,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> '파일 업로드에 허용되는 확장자는 쉼표로 구분된 파일 확장자(예: <code>png, ogg, mp4</code>)이며, 그 외에는 금지된 파일 확장자가 아닌 모든 파일 확장자가 허용됩니다.',
 	'CheckMimetype'				=> 'Check MIME type:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 
