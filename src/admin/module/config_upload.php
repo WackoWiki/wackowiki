@@ -73,6 +73,11 @@ function admin_config_upload($engine, $module)
 		// validate upload_allowed_exts parameter, e.g (png, ogg, mp4)
 		$sanitize_exts = function($extensions) use ($engine)
 		{
+			if (!$extensions)
+			{
+				return '';
+			}
+
 			$banned_exts	= $engine->get_filetype_list($engine->db->upload_banned_exts);
 			$allowed_exts	= $engine->get_filetype_list($extensions);
 
