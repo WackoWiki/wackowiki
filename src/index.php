@@ -11,10 +11,10 @@ if ($db->ext_bad_behavior)
 	include 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
 }
 
-$http = new Http($db);
+$http	= new Http($db);
 
-$router = new UriRouter($db, $http);
-$route = $router->run(['_install' => (int)(!isset($db->wacko_version) || version_compare($db->wacko_version, WACKO_VERSION, '<'))]);
+$router	= new UriRouter($db, $http);
+$route	= $router->run(['_install' => (int)(!isset($db->wacko_version) || version_compare($db->wacko_version, WACKO_VERSION, '<'))]);
 
 $db->ap_mode = ($route['route'] === 'admin');
 
@@ -40,6 +40,8 @@ if (isset($route['engine']))
 switch ($route['route'])
 {
 	case 'install':
+		$http->ensure_tls($db->base_url);
+		$http->http_security_headers();
 		Installer::run($db);
 		// NEVER BEEN HERE
 

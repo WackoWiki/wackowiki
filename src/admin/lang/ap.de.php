@@ -892,6 +892,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Erlaubte Dateierweiterungen für das Hochladen von Dateien, durch Komma getrennt z.B. <code>png, ogg, mp4</code>, anderenfalls sind alle nicht verbotenen Dateierweiterungen erlaubt.',
 	'CheckMimetype'				=> 'Dateianhänge prüfen:',
 	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Translitieren der Dateinamen:',
 	'TranslitFileNameInfo'		=> 'Soweit dies möglich ist und keine Unicode-Zeichen erforderlich sind, wird dringend empfohlen, nur alphanumerische Zeichen zu akzeptieren.',
 

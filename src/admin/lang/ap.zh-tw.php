@@ -893,6 +893,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> '允許上傳文件的擴展名，以逗號分隔，例如 <code>png, ogg, mp4</code>，除此之外所有未禁止的文件擴展名都是允許的。',
 	'CheckMimetype'				=> 'Check MIME type:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

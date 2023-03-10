@@ -888,6 +888,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Extensões permitidas para carregar ficheiros, separadas por vírgula, por exemplo <código>png, ogg, mp4</código>, outras extensões de ficheiros não proibidas são todas permitidas.',
 	'CheckMimetype'				=> 'Verificar ficheiros anexados:',
 	'CheckMimetypeInfo'			=> 'Alguns Ficheiros podem obrigar os navegadores e executar funções incorretas. Esta opção permite recusar esses Ficheiros.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Se for aplicável e não houver necessidade de ter caracteres Unicode, é altamente recomendável aceitar apenas caracteres alfanuméricos.',
 

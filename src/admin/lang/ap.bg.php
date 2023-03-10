@@ -890,6 +890,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Разрешени разширения за качване на файлове, разделени със запетая, например <code>png, ogg, mp4</code>, в противен случай всички незабранени разширения на файлове са разрешени.',
 	'CheckMimetype'				=> 'Провери прикачените файлове:',
 	'CheckMimetypeInfo'			=> 'При някои браузъри може да има проблем с MIME типовете. Тази опция оправя този проблем.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

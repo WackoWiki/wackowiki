@@ -868,6 +868,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> '允许上传文件的扩展名，用逗号分隔，例如：<code>png, ogg, mp4</code>，其他情况下，所有不被禁止的文件扩展名都被允许。',
 	'CheckMimetype'				=> '检查附件文件：',
 	'CheckMimetypeInfo'			=> '某些浏览器可能会被欺骗以为上传文件的 mimetype 不正确。 此选项可确保拒绝可能导致此问题的此类文件。',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> '音译文件名：',
 	'TranslitFileNameInfo'		=> '如果适用且不需要 Unicode 字符，强烈建议只接受 Alpha-Numeric 字符。',
 

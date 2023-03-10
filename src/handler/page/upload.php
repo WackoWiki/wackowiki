@@ -296,7 +296,8 @@ if (isset($_POST['upload']) & $can_upload)
 						{
 							$safe_file	= Ut::join_path($dir, $result_name);
 
-							if ($ext == 'svg' || $mime_type == 'image/svg+xml')
+							if ($this->db->svg_sanitizer
+								&& ($ext == 'svg' || $mime_type == 'image/svg+xml'))
 							{
 								if ($clean_svg = $sanitize_svg($tmp_name))
 								{

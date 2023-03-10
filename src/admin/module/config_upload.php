@@ -101,6 +101,7 @@ function admin_config_upload($engine, $module)
 		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
 		$config['upload_allowed_exts']		= (string) $allowed_exts;
 		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
+		$config['svg_sanitizer']			= (int) $_POST['svg_sanitizer'];
 		$config['img_create_thumbnail']		= (int) $_POST['img_create_thumbnail'];
 		$config['img_max_thumb_width']		= (int) $_POST['img_max_thumb_width'];
 
@@ -254,6 +255,21 @@ function admin_config_upload($engine, $module)
 					<label for="check_mimetype_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="check_mimetype_off" name="check_mimetype" value="0"<?php echo ($engine->db->check_mimetype == 0 ? ' checked' : '');?>>
 					<label for="check_mimetype_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<strong><?php echo $engine->_t('SvgSanitizer');?></strong><br>
+					<small><?php echo $engine->_t('SvgSanitizerInfo');?></small>
+				</td>
+				<td>
+					<input type="radio" id="svg_sanitizer_on" name="svg_sanitizer" value="1"<?php echo ($engine->db->svg_sanitizer == 1 ? ' checked' : '');?>>
+					<label for="svg_sanitizer_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="svg_sanitizer_off" name="svg_sanitizer" value="0"<?php echo ($engine->db->svg_sanitizer == 0 ? ' checked' : '');?>>
+					<label for="svg_sanitizer_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>

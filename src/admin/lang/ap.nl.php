@@ -888,6 +888,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Toegestane extensies voor het uploaden van bestanden, door komma\'s gescheiden bv. <code>png, ogg, mp4</code>, anders zijn alle niet verboden bestandsextensies toegestaan.',
 	'CheckMimetype'				=> 'Controleer bijlage bestanden:',
 	'CheckMimetypeInfo'			=> 'Sommige browsers kunnen een incorrecte mimetype voor geüploade bestanden aannemen. Deze optie verzekerd je er van dat zulke bestanden die dit veroorzaken worden afgewezen.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Als het van toepassing is en er is geen noodzaak om Unicode-tekens te gebruiken, is het sterk aanbevolen om alleen alfanumerieke tekens te accepteren.',
 

@@ -491,7 +491,7 @@ if ($this->is_admin())
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, created " .
+		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, uploaded_dt " .
 		"FROM " . $prefix . "file " .
 		"WHERE mime_type = '' " .
 		"ORDER BY file_name ASC ");
@@ -536,7 +536,7 @@ if ($this->is_admin())
 						<td>' . $file['file_name'] . '</td>
 						<td>' . $file_path . '</td>
 						<td>' . $file['page_id'] . '</td>
-						<td>' . $file['created'] . '</td>
+						<td>' . $file['uploaded_dt'] . '</td>
 						<td>' . $file['file_ext'] . '</td>
 						<td>' . $mime_type . '</td>
 					</tr>' . "\n";
@@ -571,7 +571,7 @@ if ($this->is_admin())
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, created " .
+		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, uploaded_dt " .
 		"FROM " . $prefix . "file " .
 		"WHERE file_hash = '' " .
 		"ORDER BY file_name ASC ");
@@ -616,7 +616,7 @@ if ($this->is_admin())
 						<td>' . $file['file_name'] . '</td>
 						<td>' . $file_path . '</td>
 						<td>' . $file['page_id'] . '</td>
-						<td>' . $file['created'] . '</td>
+						<td>' . $file['uploaded_dt'] . '</td>
 						<td>' . $file['file_ext'] . '</td>
 						<td>' . $file_hash . '</td>
 					</tr>' . "\n";

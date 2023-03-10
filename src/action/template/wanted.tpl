@@ -4,11 +4,11 @@
 	=]
 	[= to =
 		[ ' _t: PagesLinkingTo ' ] [ ' target ' ]:<br>
-		<ul>
+		<ol>
 			[= l _ =
 				<li>[ ' link ' ]</li>
 			=]
-		</ul>
+		</ol>
 		[= none =
 			<em>[ ' _t: NoPageLinkingTo ' ] [ ' target ' ]</em>
 		=]

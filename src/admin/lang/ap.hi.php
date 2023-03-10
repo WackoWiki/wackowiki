@@ -893,6 +893,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'फ़ाइल अपलोड करने के लिए अनुमत एक्सटेंशन, कॉमा से अलग किए गए उदा. <code>png, ogg, mp4</code>, अन्यथा सभी निषिद्ध फ़ाइल एक्सटेंशन की अनुमति नहीं है।',
 	'CheckMimetype'				=> 'Check attachment files:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

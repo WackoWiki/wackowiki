@@ -887,6 +887,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Extensiones permitidas para subir archivos, separadas por comas, por ejemplo <code>png, ogg, mp4</code>, por lo demás se permiten todas las extensiones de archivo no prohibidas.',
 	'CheckMimetype'				=> 'Comprobar archivos adjuntos:',
 	'CheckMimetypeInfo'			=> 'Algunos navegadores pueden ser engañados para que asuman un mimetype de archivos subibles incorrecto. Esta opción previene que tales archivos que puedan causar eso sean rechazados.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterar nombres de archivo:',
 	'TranslitFileNameInfo'		=> 'Si es aplicable y no hay necesidad de tener caracteres Unicode, se recomienda encarecidamente aceptar sólo caracteres alfanuméricos.',
 

@@ -890,6 +890,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Lubatud laiendused failide üleslaadimiseks, komadega eraldatud nt <code>png, ogg, mp4</code>, muidu on lubatud kõik mitte keelatud faililaiendid.',
 	'CheckMimetype'				=> 'Kontrolli manuseid:',
 	'CheckMimetypeInfo'			=> 'Mõndasid veebilehitsejaid saab petta, eeldades, et tegu on vale miimitüübiga. See valik kindlustab, et sellised failid keelatakse.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

@@ -29,6 +29,8 @@ if (!isset($nomark))	$nomark		= 0;
 if (!isset($form))		$form		= 0;	// show search form
 if (!isset($order))		$order		= '';
 if (!isset($cluster))	$cluster	= 0;	// cluster attachments
+if (!isset($deleted))	$deleted	= 0;
+if (!isset($file_ids))	$file_ids	= null;
 if (!isset($global))	$global		= 0;	// global attachments
 if (!isset($all))		$all		= 0;	// all attachments
 if (!isset($linked))	$linked		= '';	// file link in page
@@ -37,7 +39,6 @@ if (!isset($page))		$page		= '';
 if (!isset($legend))	$legend		= '';
 if (!isset($method))	$method		= '';	// for use in page handler
 if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
-if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
 if (!isset($media))		$media		= ($picture ?? null); // replaces depreciated picture with media
 if (!isset($max))		$max		= null;
@@ -116,13 +117,16 @@ if ($can_view)
 			? "INNER JOIN " . $this->prefix . "file_link AS l ON (f.file_id = l.file_id) "
 			: "") . " " .
 			"WHERE ".
-		($all || $file_link
+		($all || $file_link || $file_ids
 			? "f.page_id IS NOT NULL "
 			: ($cluster
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: "f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " "
 				)
 			) . " " .
+		($file_ids
+			? "AND f.file_id IN (" . $this->ids_string($file_ids) . ") "
+			: '') .
 		($phrase
 			? "AND (f.file_name LIKE " . $this->db->q('%' . $phrase . '%') . " " .
 				"OR f.file_description LIKE " . $this->db->q('%' . $phrase . '%') . " " .
@@ -131,9 +135,9 @@ if ($can_view)
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "
 			: '') .
-		($deleted != 1
-			? "AND f.deleted <> 1 "
-			: "");
+		($deleted
+			? ""
+			: "AND f.deleted <> 1 ");
 
 	if ($category_id)
 	{
@@ -177,10 +181,10 @@ if ($can_view)
 		}
 
 		$this->cache_page([
-				'page_id'	=> $file['page_id'],
-				'tag'		=> $file['tag'],
-				'user_id'	=> $file['puser_id'],
-				'owner_id'	=> $file['owner_id'],
+			'page_id'	=> $file['page_id'],
+			'tag'		=> $file['tag'],
+			'user_id'	=> $file['puser_id'],
+			'owner_id'	=> $file['owner_id'],
 		], true);
 
 		$object_ids[]												= $file['file_id'];

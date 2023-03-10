@@ -889,6 +889,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Extensions autorisées pour le téléchargement de fichiers, séparées par des virgules, par exemple <code>png, ogg, mp4</code>, sinon toutes les extensions de fichiers non interdites sont autorisées.',
 	'CheckMimetype'				=> 'Vérifier les pièces jointes :',
 	'CheckMimetypeInfo'			=> 'Certains navigateurs internet peuvent faire erreur en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui présentent un risque de provoquer cette erreur.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names :',
 	'TranslitFileNameInfo'		=> 'Si elle est applicable et qu\'il n\'est pas nécessaire d\'avoir des caractères Unicode, il est fortement recommandé de n\'accepter que des caractères alphanumériques.',
 

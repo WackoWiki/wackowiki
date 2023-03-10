@@ -888,6 +888,8 @@ $ap_translation = [
 	'AllowedUploadExtsInfo'		=> 'Dozwolone rozszerzenia dla przesyłanych plików, oddzielone przecinkami np. <code>png, ogg, mp4</code>, w przeciwnym razie wszystkie nie zabronione rozszerzenia plików są dozwolone.',
 	'CheckMimetype'				=> 'Sprawdzaj pliki załącznika:',
 	'CheckMimetypeInfo'			=> 'Niektóre przeglądarki mogą być zmuszane do przybierania nieprawidłowego typu mediów (mimetype) dla wysyłanych plików. Funkcja ta zabezpiecza takie pliki przed odrzuceniem.',
+	'SvgSanitizer'				=> 'SVG Sanitizer:',
+	'SvgSanitizerInfo'			=> '',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Jeśli ma to zastosowanie i nie ma potrzeby posiadania znaków Unicode, wysoce zalecane jest akceptowanie tylko znaków alfanumerycznych.',
 
