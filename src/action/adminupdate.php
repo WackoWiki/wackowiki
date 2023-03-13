@@ -582,26 +582,22 @@ if ($this->is_admin())
 				'<tr class="userrow">
 					<th>file_id</th>
 					<th>file_name</th>
-					<th>file_path</th>
 					<th>page_id</th>
-					<th>created</th>
-					<th>file_ext</th>
-					<th>file_hash</th>
 				</tr>' . "\n";
 
 		foreach ($files as $file)
 		{
-			$file_path = Ut::join_path(
+			if (isset($_POST['set_file_hash']))
+			{
+				$file_path = Ut::join_path(
 					($file['page_id']? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
 					($file['page_id']
 						? '@' . $file['page_id'] . '@'
 						: '') .
 					$file['file_name']);
 
-			$file_hash = sha1_file($file_path);
+				$file_hash = sha1_file($file_path);
 
-			if (isset($_POST['set_file_hash']))
-			{
 				// update database with the new file hash
 				$this->db->sql_query(
 					"UPDATE " . $prefix . "file SET " .
@@ -614,11 +610,7 @@ if ($this->is_admin())
 					'<tr class="userrow">
 						<td>' . $file['file_id'] .	'</td>
 						<td>' . $file['file_name'] . '</td>
-						<td>' . $file_path . '</td>
 						<td>' . $file['page_id'] . '</td>
-						<td>' . $file['created'] . '</td>
-						<td>' . $file['file_ext'] . '</td>
-						<td>' . $file_hash . '</td>
 					</tr>' . "\n";
 			}
 		}
