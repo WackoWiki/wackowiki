@@ -142,7 +142,7 @@ function admin_maint_resync($engine, $module)
 		else if ($action == 'attachments')
 		{
 			if ($files = $engine->db->load_all(
-				"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, created " .
+				"SELECT file_id, page_id, file_name " .
 				"FROM " . $prefix . "file " .
 					"ORDER BY file_id"))
 			{

@@ -3300,11 +3300,11 @@ class Wacko
 			$patterns =[
 				['(' . self::PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 									'\\1¶\\2'],
 				['(' . self::PATTERN['UPPERNUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')',									'\\1¶\\2'],
-				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶' . self::PATTERN['UPPERNUM'] . ')',		'\\1'],
+				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶' . self::PATTERN['UPPERNUM'] . ')',	'\\1'],
 				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶\/)',									'\\1'],
 				['(' . self::PATTERN['UPPERNUM'] . ')¶(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
-				['\/¶(' . self::PATTERN['UPPERNUM'] . ')',																'/\\1'],
-				['¶',																									'_'],
+				['\/¶(' . self::PATTERN['UPPERNUM'] . ')',																	'/\\1'],
+				['¶',																										'_'],
 			];
 
 			foreach ($patterns as $pattern)
