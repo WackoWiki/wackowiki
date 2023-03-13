@@ -137,9 +137,36 @@ function admin_maint_resync($engine, $module)
 			}
 
 			$engine->log(1, $engine->_t('LogPageStatsSynched', SYSTEM_LANG));
+			$engine->show_message($engine->_t('PageStatsSynched'), 'success');
+		}
+		else if ($action == 'attachments')
+		{
+			if ($files = $engine->db->load_all(
+				"SELECT file_id, page_id, file_name " .
+				"FROM " . $prefix . "file " .
+					"ORDER BY file_id"))
+			{
+				foreach ($files as $file)
+				{
+					$file_path = Ut::join_path(
+						($file['page_id']? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
+						($file['page_id']
+							? '@' . $file['page_id'] . '@'
+							: '') .
+						$file['file_name']);
 
-			$message = $engine->_t('PageStatsSynched');
-			$engine->show_message($message, 'success');
+					$file_hash = sha1_file($file_path);
+
+					// update database with the new file hash
+					$engine->db->sql_query(
+						"UPDATE " . $prefix . "file SET " .
+							"file_hash	= " . $engine->db->q($file_hash) . " " .
+						"WHERE file_id = " . (int) $file['file_id']);
+				}
+
+				$engine->log(1, $engine->_t('LogAttachmentsSynched', SYSTEM_LANG));
+				$engine->show_message($engine->_t('AttachmentsSynched'), 'success');
+			}
 		}
 		else if ($action == 'rssfeeds')
 		{
@@ -347,6 +374,15 @@ function admin_maint_resync($engine, $module)
 ?>
 		<input type="hidden" name="action" value="pagestats">
 		<button type="submit" name="start" id="submit_pagestats"><?php echo $engine->_t('Synchronize');?></button>
+<?php		echo $engine->form_close();?>
+
+	<h2><?php echo $engine->_t('Attachments');?></h2>
+	<p><?php echo $engine->_t('AttachmentsInfo');?></p>
+<?php
+	echo $engine->form_open('attachments');
+?>
+		<input type="hidden" name="action" value="attachments">
+		<button type="submit" name="start" id="submit_attachments"><?php echo $engine->_t('Synchronize');?></button>
 <?php		echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('Feeds');?></h2>
