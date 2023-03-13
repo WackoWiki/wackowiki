@@ -78,7 +78,7 @@ class WikiEdit extends ProtoEdit
 		this.addButton('quote',			lang.Quote,			'\'<[\', \']>\', 2');
 		this.addButton('source',		lang.CodeWrapper,	'\'%% \', \' %%\', 2');
 		//this.addButton('html',		lang.HTML,			"'<# ', ' #>', 2");
-		//this.addButton('action',		lang.Action,		"'{{ ', ' }}', 2");
+		this.addButton('action',		lang.Action,		"'{{', '}}', 2");
 		this.addButton('hr',			lang.Line,			'\'\', \'\\n----\\n\', 2');
 		this.addButton('signature',		lang.Signature,		'\'::@::\', \' \', 1');
 		this.addButton('textred',		lang.MarkedText,	'\'!!\', \'!!\', 2');
