@@ -813,6 +813,11 @@ $ap_translation = [
 	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
 	'PageStats'					=> 'Page statistics',
 	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+
+	'AttachmentsInfo'			=> 'هش فایل را برای همه پیوست های پایگاه داده به روز می کند.',
+	'AttachmentsSynched'		=> 'همه فایل‌های پیوست را دوباره هش کرد',
+	'LogAttachmentsSynched'		=> 'همه فایل‌های پیوست را دوباره هش کرد',
+
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
 	'XmlSiteMap'				=> 'XML-Sitemap',

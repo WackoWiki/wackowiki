@@ -808,6 +808,11 @@ $ap_translation = [
 	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
 	'PageStats'					=> 'Page statistics',
 	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+
+	'AttachmentsInfo'			=> 'Werkt de hash van alle bijlagen in de database bij.',
+	'AttachmentsSynched'		=> 'Alle bestandsbijlagen opnieuw gehasht',
+	'LogAttachmentsSynched'		=> 'Alle bestandsbijlagen opnieuw gehasht',
+
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
