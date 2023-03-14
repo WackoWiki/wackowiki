@@ -49,9 +49,18 @@ $can_replace = function($file_name, $page_id, $user)
 $translit_filename = function($name)
 {
 	// prepare for translit
-	$name	= str_replace(['@', '%20', '+'], '-', $name);
-	$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
+	$name	= str_replace(['@', '%20', '+'], '_', $name);
+	$name	= preg_replace('/[\r\n\t ]+/u', '_', $name);
+
+	// remove multi full stop, spacing underscore and hyphen-minus
+	$name	= preg_replace('/(-{2,})/u', '-', $name);
+	$name	= preg_replace('/(_{2,})/u', '_', $name);
+	$name	= preg_replace('/(\.{2,})/u', '.', $name);
+
+	// remove consecutive occurrences (.- / -.)
+	$name	= str_replace(['.-', '-.'], '', $name);
 	$name	= utf8_trim($name, ' .-_');
+
 	$name	= Ut::normalize($name);
 	$name	= preg_replace('/[^' . self::PATTERN['ALPHANUM_P'] . '\.]/u', '', $name);
 
@@ -67,6 +76,20 @@ $translit_filename = function($name)
 	}
 
 	return $t_name;
+};
+
+$duplicate_file = function($file, $file_hash)
+{
+	$file_hash_exists	= sha1_file($file);
+
+	if ($is_duplicate = $file_hash_exists === $file_hash)
+	{
+		$this->set_message($this->_t('FileIsDuplicate'), 'hint');
+
+		return true;
+	}
+
+	return false;
 };
 
 $duplicate_files = function($file_hash) use ($prefix)
@@ -204,12 +227,9 @@ if (isset($_POST['upload']) & $can_upload)
 					if (file_exists($dir . '/' . $fs_name . '.' . $ext)
 						&& $replace)
 					{
-						$file_hash_exists	= sha1_file($dir . '/' . $fs_name . '.' . $ext);
 						// do nothing
-						if ($is_duplicate = $file_hash_exists === $file_hash)
-						{
-							$this->set_message($this->_t('FileIsDuplicate'), 'hint');
-						}
+						$is_duplicate = $duplicate_file($dir . '/' . $fs_name . '.' . $ext, $file_hash);
+
 						// TODO:
 						// + do file revision (add config option)
 					}
@@ -219,6 +239,11 @@ if (isset($_POST['upload']) & $can_upload)
 					{
 						while (file_exists($dir . '/' . $fs_name . '.' . $ext))
 						{
+							if ($is_duplicate = $duplicate_file($dir . '/' . $fs_name . '.' . $ext, $file_hash))
+							{
+								break;
+							}
+
 							if ($fs_name === $new_fs_name)
 							{
 								$fs_name = $new_fs_name . $count;
@@ -356,9 +381,8 @@ if (isset($_POST['upload']) & $can_upload)
 										"file_name			= " . $this->db->q($file_name) . " " .
 									"LIMIT 1");
 							}
-							else
+							else if (!$is_duplicate)
 							{
-								// insert line into DB
 								$this->db->sql_query(
 									"INSERT INTO " . $prefix . "file SET " .
 										"page_id			= " . (int) $page_id . ", " .
@@ -389,7 +413,11 @@ if (isset($_POST['upload']) & $can_upload)
 									"page_id		= " . (int) $page_id . " " .
 								"LIMIT 1");
 
-							$this->set_message($this->_t('UploadDone'), 'success');
+							if (!$is_duplicate)
+							{
+								$this->set_message($this->_t('UploadDone'), 'success');
+							}
+
 							$this->notify_upload($page_id, $file['file_id'], $this->page['tag'], $file_name, $user['user_id'], $user['user_name'], $replace);
 
 							// log event

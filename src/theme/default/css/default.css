@@ -402,6 +402,7 @@ form input.submitinput {
 }
 
 .hint {
+	color: #000;
 	border: 1px solid #ffee66;
 	background: #ffffdd;
 }
