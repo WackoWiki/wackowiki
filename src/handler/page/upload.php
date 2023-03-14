@@ -82,7 +82,7 @@ $duplicate_file = function($file, $file_hash)
 {
 	$file_hash_exists	= sha1_file($file);
 
-	if ($is_duplicate = $file_hash_exists === $file_hash)
+	if ($file_hash_exists === $file_hash)
 	{
 		$this->set_message($this->_t('FileIsDuplicate'), 'hint');
 
@@ -146,7 +146,7 @@ if (isset($_POST['upload']) & $can_upload)
 	// A. upload quota
 	if ((!$this->db->upload_quota_per_user
 			|| ($user_files['used_user_quota'] < $this->db->upload_quota_per_user))
-		 && (!$this->db->upload_quota
+		&& (!$this->db->upload_quota
 			|| ($files['used_quota'] < $this->db->upload_quota)))
 	{
 		// B. file there is
@@ -367,7 +367,6 @@ if (isset($_POST['upload']) & $can_upload)
 										(!empty($description)
 											? "file_description	= " . $this->db->q($description) . ", "
 											: "") .
-										# "caption			= " . $this->db->q($caption) . ", " .
 										"file_size			= " . (int) $file_size . "," .
 										"picture_w			= " . (int) $size[0] . "," .
 										"picture_h			= " . (int) $size[1] . "," .
@@ -390,7 +389,6 @@ if (isset($_POST['upload']) & $can_upload)
 										"file_name			= " . $this->db->q($file_name) . ", " .
 										"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
 										"file_description	= " . $this->db->q($description) . ", " .
-										# "caption			= " . $this->db->q($caption) . ", " .
 										"file_size			= " . (int) $file_size . "," .
 										"picture_w			= " . (int) $size[0] . "," .
 										"picture_h			= " . (int) $size[1] . "," .
