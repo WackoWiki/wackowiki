@@ -778,6 +778,11 @@ $ap_translation = [
 	'UserStatsInfo'				=> '在某些情况下，用户统计数据（评论数、拥有的页面、修订和文件）可能与实际数据不同。 <br>此操作允许将统计信息更新为数据库的当前实际数据。',
 	'PageStats'					=> '页面统计',
 	'PageStatsInfo'				=> '在某些情况下，页面统计数据（评论、文件和修订的数量）可能与实际数据不同。 <br>此操作允许将统计信息更新为数据库的当前实际数据。',
+
+	'AttachmentsInfo'			=> '更新数据库中所有附件的文件哈希值。',
+	'AttachmentsSynched'		=> '重新对所有文件附件进行散列',
+	'LogAttachmentsSynched'		=> '重新对所有文件附件进行散列',
+
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> '在直接编辑数据库中的页面的情况下，RSS 提要的内容可能不会反映所做的更改。 <br>此功能将 RSS 频道与数据库的当前状态同步。',
 	'XmlSiteMap'				=> 'XML-Sitemap',

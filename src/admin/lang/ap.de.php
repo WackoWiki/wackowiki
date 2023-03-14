@@ -796,6 +796,11 @@ $ap_translation = [
 	'UserStatsInfo'				=> 'Benutzerstatistiken (Anzahl der Kommentare, besessene Seiten, Revisionen und Dateien) können in einigen Situationen von den tatsächlichen Daten abweichen.<br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',
 	'PageStats'					=> 'Seitenstatistiken',
 	'PageStatsInfo'				=> 'Seitenstatistiken (Anzahl der Kommentare, Dateien und Revisionen) können in einigen Situationen von den tatsächlichen Daten abweichen. <br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',
+
+	'AttachmentsInfo'			=> 'Aktualisiert den Datei-Hash für alle Anhänge in der Datenbank.',
+	'AttachmentsSynched'		=> 'Hash für alle Dateianhänge aktualisiert',
+	'LogAttachmentsSynched'		=> 'Hash für alle Dateianhänge aktualisiert',
+
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> 'Im Falle der direkten Bearbeitung von Seiten in der Datenbank spiegelt der Inhalt der RSS-Feeds möglicherweise nicht die vorgenommenen Änderungen wider. <br> Diese Funktion synchronisiert die RSS-Kanäle mit dem aktuellen Zustand der Datenbank.',
 	'XmlSiteMap'				=> 'XML-Sitemap',

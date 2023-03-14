@@ -797,6 +797,11 @@ $ap_translation = [
 	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
 	'PageStats'					=> 'Page statistics',
 	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+
+	'AttachmentsInfo'			=> 'डेटाबेस में सभी अनुलग्नकों के लिए फ़ाइल हैश अद्यतन करता है।',
+	'AttachmentsSynched'		=> 'सभी फाइल अटैचमेंट को फिर से हैश किया',
+	'LogAttachmentsSynched'		=> 'सभी फाइल अटैचमेंट को फिर से हैश किया',
+
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
