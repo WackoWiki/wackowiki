@@ -10,9 +10,9 @@
 			<input type="hidden" name="MAX_FILE_SIZE" value="[ ' maxfilesize ' ]">
 			<table class="upload-table">
 				<tr>
-					<td>
+					<th>
 						<label for="file_upload">[ ' _t: UploadFor ' ]&nbsp;</label>
-					</td>
+					</th>
 					<td class="nowrap">
 						<input type="file" name="file" id="file_upload" [ ' accecpt ' ] required>
 					</td>
@@ -45,23 +45,23 @@
 					</tr>
 				=]
 				[= rename _ =
-					[ ' // not in use ' ]
+					[ ' // optional ' ]
 					<tr>
-						<td>
+						<th>
 							<label for="upload_dest_file">[ ' _t: UploadAsName ' ]</label>
-						</td>
+						</th>
 						<td>
-							<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value="">
+							<input type="text" name="file_dest_name" id="upload_dest_file" size="80" maxlength="250" value="">
 						</td>
 					</tr>
 				=]
 				[= desc _ =
 					<tr>
-						<td>
+						<th>
 							<label for="upload_desc">[ ' _t: FileDesc ' ]</label>
-						</td>
+						</th>
 						<td>
-							<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250">
+							<textarea type="text" name="file_description" id="upload_desc"  cols="80" rows="6" maxlength="250"></textarea>
 						</td>
 					</tr>
 				=]
@@ -81,4 +81,3 @@
 			</table>
 		</form>
 	=]
-	
