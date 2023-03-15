@@ -130,7 +130,7 @@
 							<label for="UploadDesc">[ ' _t: FileDesc ' ]</label>
 						</th>
 						<td>
-							<input type="text" id="UploadDesc" name="file_description" maxlength="250" size="80" value="[ ' desc | e attr ' ]">
+							<textarea type="text" id="UploadDesc" name="file_description" rows="6" cols="80" maxlength="250">[ ' desc | e ' ]</textarea>
 						</td>
 					</tr>
 					<tr>

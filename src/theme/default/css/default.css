@@ -403,6 +403,7 @@ form input.submitinput {
 }
 
 .hint {
+	color: #000;
 	border: 1px solid #ffee66;
 	background: #ffffdd;
 }
@@ -2357,6 +2358,27 @@ li.m-source img {
 	border-spacing: 3px; 
 	border-collapse: separate;
 }
+
+.upload-table tr:hover {
+	background: var(--ww-hover-primary);
+}
+
+.upload-table th {
+	color: #444;
+	font-weight: normal;
+	text-align: left;
+	width: 130px;
+}
+
+[dir=rtl] .upload-table th{
+	text-align: right;
+}
+
+.upload-table td,
+.upload-table th {
+	vertical-align: top;
+}
+
 .upload-table td:nth-child(1){
 	text-align: right;
 	padding-right: 10px;

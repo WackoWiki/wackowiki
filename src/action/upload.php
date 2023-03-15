@@ -16,8 +16,14 @@ if (!defined('IN_WACKO'))
 if (!isset($global))			$global = '';
 if (!isset($maxsize))			$maxsize = '';
 if (!isset($hide_description))	$hide_description = '';
+if (!isset($rename))			$rename = 0;
 
-if ($global) $global = 'global';
+$maxsize	= (int) $maxsize;
+
+if ($global)
+{
+	$global = true;
+}
 
 // functions
 $accept_types = function($types)
@@ -40,7 +46,7 @@ if ($this->can_upload(true))
 {
 	if ($maxsize)
 	{
-		$tpl->u_s_maxsize = floor(1 * $maxsize);
+		$tpl->u_s_maxsize = floor($maxsize);
 	}
 
 	// if you have no write access and you are not admin, you can upload only "global" file
@@ -49,15 +55,15 @@ if ($this->can_upload(true))
 		 && $this->has_access('upload'))
 		 && !$this->is_admin())
 	{
-		$global = 'global';
+		$global = true;
 	}
 
 	$maxfilesize	= $this->get_max_upload_size();
 	$allowed_types	= $this->db->upload_allowed_exts ?? '';
 
-	if ($maxsize && ($maxfilesize > 1 * $maxsize))
+	if ($maxsize && ($maxfilesize > $maxsize))
 	{
-		$maxfilesize = 1 * $maxsize;
+		$maxfilesize = $maxsize;
 	}
 
 	$tpl->u_maxfilesize = $maxfilesize;
@@ -84,6 +90,11 @@ if ($this->can_upload(true))
 	else
 	{
 		$tpl->u_local = true;
+	}
+
+	if ($rename)
+	{
+		$tpl->u_rename = true;
 	}
 
 	if (!$hide_description)
