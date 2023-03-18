@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Grundeinstellungen',
 
 	'DirNotWritable'			=> 'Das Verzeichis %1 ist nicht schreibbar.',
+	'FileNotWritable'			=> 'Die Datei %1 ist nicht schreibbar.',
 
 	/**
 	 * AP MENU
@@ -894,11 +895,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Erlaube nur das Hochladen von Bildern:',
 	'UploadOnlyImagesInfo'		=> 'Nur Bilder können hochgeladen werden.',
 	'AllowedUploadExts'			=> 'Erlaubte Dateitypen:',
-	'AllowedUploadExtsInfo'		=> 'Erlaubte Dateierweiterungen für das Hochladen von Dateien, durch Komma getrennt z.B. <code>png, ogg, mp4</code>, anderenfalls sind alle nicht verbotenen Dateierweiterungen erlaubt.',
+	'AllowedUploadExtsInfo'		=> 'Erlaubte Dateierweiterungen für das Hochladen von Dateien, durch Komma getrennt z.B. <code>png, ogg, mp4</code>, anderenfalls sind alle nicht verbotenen Dateierweiterungen erlaubt.<br>Die Liste der für das Hochladen von Dateien zulässigen Dateitypen sollte auf das für die Funktionalität der Website erforderliche Minimum beschränkt werden.',
 	'CheckMimetype'				=> 'Dateianhänge prüfen:',
 	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Dadurch können hochgeladene SVG-Dateien bereinigt werden, um zu verhindern, dass anfällige SVG/XML-Dateien hochgeladen werden.',
 	'TranslitFileName'			=> 'Translitieren der Dateinamen:',
 	'TranslitFileNameInfo'		=> 'Soweit dies möglich ist und keine Unicode-Zeichen erforderlich sind, wird dringend empfohlen, nur alphanumerische Zeichen zu akzeptieren.',
 

@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Parámetros básicos',
 
 	'DirNotWritable'			=> 'El directorio %1 no es escribible.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -889,11 +890,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Permitir sólo la carga de imágenes:',
 	'UploadOnlyImagesInfo'		=> 'Permitir sólo la carga de archivos de imagen en la página.',
 	'AllowedUploadExts'			=> 'Tipos de archivo permitidos:',
-	'AllowedUploadExtsInfo'		=> 'Extensiones permitidas para subir archivos, separadas por comas, por ejemplo <code>png, ogg, mp4</code>, por lo demás se permiten todas las extensiones de archivo no prohibidas.',
+	'AllowedUploadExtsInfo'		=> 'Extensiones permitidas para subir archivos, separadas por comas, por ejemplo <code>png, ogg, mp4</code>, por lo demás se permiten todas las extensiones de archivo no prohibidas.<br>Debe limitar la lista de tipos de archivos cargados permitidos al mínimo necesario para la funcionalidad del contenido de su sitio.',
 	'CheckMimetype'				=> 'Comprobar archivos adjuntos:',
 	'CheckMimetypeInfo'			=> 'Algunos navegadores pueden ser engañados para que asuman un mimetype de archivos subibles incorrecto. Esta opción previene que tales archivos que puedan causar eso sean rechazados.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Esto permite desinfectar los archivos SVG cargados para evitar que se carguen archivos SVG/XML vulnerables.',
 	'TranslitFileName'			=> 'Transliterar nombres de archivo:',
 	'TranslitFileNameInfo'		=> 'Si es aplicable y no hay necesidad de tener caracteres Unicode, se recomienda encarecidamente aceptar sólo caracteres alfanuméricos.',
 

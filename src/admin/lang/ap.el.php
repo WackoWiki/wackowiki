@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'Ο κατάλογος %1 δεν είναι εγγράψιμος.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -892,11 +893,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Επιτρεπτοί τύποι αρχείων:',
-	'AllowedUploadExtsInfo'		=> 'Επιτρεπόμενες επεκτάσεις για τη μεταφόρτωση αρχείων, με διαχωρισμό με κόμμα, π.χ. <code>png, ogg, mp4</code>, διαφορετικά επιτρέπονται όλες οι μη απαγορευμένες επεκτάσεις αρχείων.',
+	'AllowedUploadExtsInfo'		=> 'Επιτρεπόμενες επεκτάσεις για τη μεταφόρτωση αρχείων, με διαχωρισμό με κόμμα, π.χ. <code>png, ogg, mp4</code>, διαφορετικά επιτρέπονται όλες οι μη απαγορευμένες επεκτάσεις αρχείων.<br>Θα πρέπει να περιορίσετε τη λίστα των επιτρεπόμενων τύπων αρχείων που μεταφορτώνονται στο ελάχιστο που απαιτείται για τη λειτουργικότητα του περιεχομένου του ιστότοπού σας.',
 	'CheckMimetype'				=> 'Έλεγχος αρχείων συνημμένων:',
 	'CheckMimetypeInfo'			=> 'Ορισμένα προγράμματα περιήγησης μπορεί να εξαπατηθούν και να υποθέσουν ένα ανακριβές είδος κωδικοποίησης για τα φορτώσιμα αρχεία. Αυτή η επιλογή εξασφαλίζει ότι τέτοια αρχεία που είναι πιθανό να προκαλέσουν αυτό, να απορρίπτονται.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Αυτό επιτρέπει την εξυγίανση των αρχείων SVG που μεταφορτώνονται για να αποτρέψει τη μεταφόρτωση ευάλωτων αρχείων SVG/XML.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

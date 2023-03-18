@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -890,11 +891,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Tilladte filtyper:',
-	'AllowedUploadExtsInfo'		=> 'Tilladte filtypenavne til upload af filer, kommasepareret, f.eks. <code>png, ogg, mp4</code>, ellers er alle ikke forbudte filtypenavne tilladt.',
+	'AllowedUploadExtsInfo'		=> 'Tilladte filtypenavne til upload af filer, kommasepareret, f.eks. <code>png, ogg, mp4</code>, ellers er alle ikke forbudte filtypenavne tilladt.<br>Du bør begrænse listen over tilladte uploadede filtyper til det nødvendige minimum, der kræves for funktionaliteten af dit websted.',
 	'CheckMimetype'				=> 'Kontrol af vedhæftede filer:',
 	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Dette gør det muligt at rense uploadede SVG-filer for at forhindre, at SVG/XML sårbare filer bliver uploadet.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

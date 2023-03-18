@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'General Options',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -895,11 +896,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'نوع پرونده مجاز:',
-	'AllowedUploadExtsInfo'		=> 'پسوندهای مجاز برای آپلود فایل ها، جدا از ویرگول، به عنوان مثال. <code>png, ogg, mp4</code>، در غیر این صورت همه پسوندهای غیرممنوع فایل مجاز هستند.',
+	'AllowedUploadExtsInfo'		=> 'پسوندهای مجاز برای آپلود فایل ها، جدا از ویرگول، به عنوان مثال. <code>png, ogg, mp4</code>، در غیر این صورت همه پسوندهای غیرممنوع فایل مجاز هستند.<br>شما باید لیست مجاز انواع فایل آپلود شده را به حداقل مورد نیاز برای عملکرد محتوای سایت خود محدود کنید.',
 	'CheckMimetype'				=> 'Check MIME type:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'این امکان پاکسازی فایل های SVG آپلود شده را برای جلوگیری از آپلود فایل های آسیب پذیر SVG/XML فراهم می کند.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

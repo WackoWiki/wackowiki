@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -892,11 +893,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Разрешени файлови формати:',
-	'AllowedUploadExtsInfo'		=> 'Разрешени разширения за качване на файлове, разделени със запетая, например <code>png, ogg, mp4</code>, в противен случай всички незабранени разширения на файлове са разрешени.',
+	'AllowedUploadExtsInfo'		=> 'Разрешени разширения за качване на файлове, разделени със запетая, например <code>png, ogg, mp4</code>, в противен случай всички незабранени разширения на файлове са разрешени.<br>Трябва да ограничите списъка с разрешените типове файлове до необходимия минимум, необходим за функционалността на съдържанието на сайта ви.',
 	'CheckMimetype'				=> 'Провери прикачените файлове:',
 	'CheckMimetypeInfo'			=> 'При някои браузъри може да има проблем с MIME типовете. Тази опция оправя този проблем.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Това дава възможност за обработка на качените SVG файлове, за да се предотврати качването на уязвими SVG/XML файлове.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

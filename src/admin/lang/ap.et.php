@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -892,11 +893,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Lubatud failitüübid:',
-	'AllowedUploadExtsInfo'		=> 'Lubatud laiendused failide üleslaadimiseks, komadega eraldatud nt <code>png, ogg, mp4</code>, muidu on lubatud kõik mitte keelatud faililaiendid.',
+	'AllowedUploadExtsInfo'		=> 'Lubatud laiendused failide üleslaadimiseks, komadega eraldatud nt <code>png, ogg, mp4</code>, muidu on lubatud kõik mitte keelatud faililaiendid.<br>Sa peaksid piirama üleslaaditavate failitüüpide lubatud failide nimekirja vajaliku miinimumini, mis on vajalik teie saidi sisu funktsionaalsuse jaoks.',
 	'CheckMimetype'				=> 'Kontrolli manuseid:',
 	'CheckMimetypeInfo'			=> 'Mõndasid veebilehitsejaid saab petta, eeldades, et tegu on vale miimitüübiga. See valik kindlustab, et sellised failid keelatakse.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'See võimaldab üleslaaditud SVG-failide puhastamist, et vältida SVG/XML-i haavatavate failide üleslaadimist.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 
