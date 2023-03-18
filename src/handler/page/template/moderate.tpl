@@ -16,9 +16,7 @@
 				<tr><td>
 					<em>[ ' text ' ]</em><br>
 					<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
-					<a href="[ ' href: moderate ' ]" class="btn-link">
-						<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-					</a>
+					[ '' cancel '' ]
 				</td></tr>
 			</table><br>
 		=]
@@ -38,9 +36,7 @@
 							=]
 						</select>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
-						<a href="[ ' href: moderate ' ]" class="btn-link">
-							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-						</a>
+						[ '' cancel '' ]
 				</td></tr>
 			</table><br>
 		=]
@@ -55,9 +51,7 @@
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]" required>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
-						<a href="[ ' href: moderate ' ]" class="btn-link">
-							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-						</a>
+						[ '' cancel '' ]
 						[= onlyone _ =
 							<br><small>[ ' _t: ModerateRename1Only ' ]</small>
 						=]
@@ -82,9 +76,7 @@
 							=]
 						</select>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
-						<a href="[ ' href: moderate ' ]" class="btn-link">
-							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-						</a>
+						[ '' cancel '' ]
 					</td>
 				</tr>
 			</table><br>
@@ -153,7 +145,7 @@
 					<td>
 						<em>[ ' text ' ]</em><br>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
-						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+						[ '' cancel '' ]
 					</td>
 				</tr>
 			</table><br>
@@ -176,7 +168,7 @@
 								=]
 							</select> or <input type="text" name="cluster" size="50" maxlength="250"><br>
 							<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
-							<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button"  class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+							[ '' cancel '' ]
 						</td>
 					</tr>
 				</table><br>
@@ -193,7 +185,7 @@
 						<em>[ ' text ' ]</em><br>
 						<input type="text" name="cluster" size="50" maxlength="250" required>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
-						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+						[ '' cancel '' ]
 					</td></tr>
 				</table><br>
 			=]
@@ -209,7 +201,7 @@
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]" required> 
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
-						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+						[ '' cancel '' ]
 					</td>
 				</tr>
 			</table><br>
@@ -225,7 +217,7 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
-						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+						[ '' cancel '' ]
 					</td>
 				</tr>
 			</table><br>
@@ -243,7 +235,7 @@
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value=""> 
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
-						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+						[ '' cancel '' ]
 						<br>
 						<small>
 						<input type="radio" name="scheme" value="after" id="after" [ ' after | checkbox ' ]> 
@@ -338,4 +330,9 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
+
+[= cancel =]
+<a href="[ ' href: moderate ' ]" class="btn-link">
+	<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+</a>
 	
