@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'General Options',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -879,11 +880,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'अनुमतित फ़ाइल प्रकार:',
-	'AllowedUploadExtsInfo'		=> 'फ़ाइल अपलोड करने के लिए अनुमत एक्सटेंशन, कॉमा से अलग किए गए उदा. <code>png, ogg, mp4</code>, अन्यथा सभी निषिद्ध फ़ाइल एक्सटेंशन की अनुमति नहीं है।',
+	'AllowedUploadExtsInfo'		=> 'फ़ाइल अपलोड करने के लिए अनुमत एक्सटेंशन, कॉमा से अलग किए गए उदा. <code>png, ogg, mp4</code>, अन्यथा सभी निषिद्ध फ़ाइल एक्सटेंशन की अनुमति नहीं है।<br>आपको अपलोड की गई फ़ाइल प्रकारों की अनुमत सूची को अपनी साइट की सामग्री कार्यक्षमता के लिए आवश्यक न्यूनतम आवश्यक सीमा तक सीमित करना चाहिए।',
 	'CheckMimetype'				=> 'Check attachment files:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'यह एसवीजी/एक्सएमएल कमजोर फाइलों को अपलोड होने से रोकने के लिए अपलोड की गई एसवीजी फाइलों को साफ करने में सक्षम बनाता है।',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

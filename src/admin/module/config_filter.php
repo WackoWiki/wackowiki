@@ -48,8 +48,20 @@ function admin_config_filter($engine, $module)
 
 		// write antispam.conf file
 		$phrase_list	= (string) $_POST['phrase_list'];
-		file_put_contents($file_name, $phrase_list);
-		chmod($file_name, CHMOD_FILE);
+
+		if (!is_writable($file_name))
+		{
+			$engine->set_message(
+				Ut::perc_replace(
+					$engine->_t('FileNotWritable'),
+					'<code>' . $file_name . '</code>'),
+				'error');
+		}
+		else
+		{
+			file_put_contents($file_name, $phrase_list);
+			chmod($file_name, CHMOD_FILE);
+		}
 
 		$engine->log(1, '!!' . $engine->_t('FilterSettingsUpdated', SYSTEM_LANG) . '!!');
 		$engine->set_message($engine->_t('FilterSettingsUpdated'), 'success');

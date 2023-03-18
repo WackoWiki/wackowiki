@@ -99,6 +99,8 @@ $duplicate_files = function($file_hash) use ($prefix)
 		"FROM " . $prefix . "file " .
 		"WHERE file_hash = " . $this->db->q($file_hash) . " ");
 
+	$file_ids = [];
+
 	foreach($files as $file)
 	{
 		$file_ids[] = $file['file_id'];

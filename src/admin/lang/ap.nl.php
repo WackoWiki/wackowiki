@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -874,11 +875,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Toegelaten bestandstypes:',
-	'AllowedUploadExtsInfo'		=> 'Toegestane extensies voor het uploaden van bestanden, door komma\'s gescheiden bv. <code>png, ogg, mp4</code>, anders zijn alle niet verboden bestandsextensies toegestaan.',
+	'AllowedUploadExtsInfo'		=> 'Toegestane extensies voor het uploaden van bestanden, door komma\'s gescheiden bv. <code>png, ogg, mp4</code>, anders zijn alle niet verboden bestandsextensies toegestaan.<br>U moet de lijst met toegestane bestandstypen beperken tot het minimum dat nodig is voor de inhoud van uw site.',
 	'CheckMimetype'				=> 'Controleer bijlage bestanden:',
 	'CheckMimetypeInfo'			=> 'Sommige browsers kunnen een incorrecte mimetype voor geüploade bestanden aannemen. Deze optie verzekerd je er van dat zulke bestanden die dit veroorzaken worden afgewezen.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Hiermee kunnen geüploade SVG-bestanden worden gezuiverd om te voorkomen dat SVG/XML kwetsbare bestanden worden geüpload.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Als het van toepassing is en er is geen noodzaak om Unicode-tekens te gebruiken, is het sterk aanbevolen om alleen alfanumerieke tekens te accepteren.',
 

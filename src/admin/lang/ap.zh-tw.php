@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'General Options',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -879,11 +880,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> '允許的檔案類型：',
-	'AllowedUploadExtsInfo'		=> '允許上傳文件的擴展名，以逗號分隔，例如 <code>png, ogg, mp4</code>，除此之外所有未禁止的文件擴展名都是允許的。',
+	'AllowedUploadExtsInfo'		=> '允許上傳文件的擴展名，以逗號分隔，例如 <code>png, ogg, mp4</code>，除此之外所有未禁止的文件擴展名都是允許的。<br>您應該將允許的上傳文件類型列表限制為網站內容功能所需的最低限度。',
 	'CheckMimetype'				=> 'Check MIME type:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> '這樣可以對上傳的 SVG 文件進行清理，以防止上傳 SVG/XML 易受攻擊的文件。',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 

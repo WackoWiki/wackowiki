@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -874,11 +875,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Dopuszczalne formaty plików:',
-	'AllowedUploadExtsInfo'		=> 'Dozwolone rozszerzenia dla przesyłanych plików, oddzielone przecinkami np. <code>png, ogg, mp4</code>, w przeciwnym razie wszystkie nie zabronione rozszerzenia plików są dozwolone.',
+	'AllowedUploadExtsInfo'		=> 'Dozwolone rozszerzenia dla przesyłanych plików, oddzielone przecinkami np. <code>png, ogg, mp4</code>, w przeciwnym razie wszystkie nie zabronione rozszerzenia plików są dozwolone.<br>Należy ograniczyć listę dozwolonych typów plików do niezbędnego minimum wymaganego przez funkcjonalność witryny.',
 	'CheckMimetype'				=> 'Sprawdzaj pliki załącznika:',
 	'CheckMimetypeInfo'			=> 'Niektóre przeglądarki mogą być zmuszane do przybierania nieprawidłowego typu mediów (mimetype) dla wysyłanych plików. Funkcja ta zabezpiecza takie pliki przed odrzuceniem.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Umożliwia to sanityzację wgrywanych plików SVG, aby zapobiec wgrywaniu plików SVG/XML podatnych na ataki.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Jeśli ma to zastosowanie i nie ma potrzeby posiadania znaków Unicode, wysoce zalecane jest akceptowanie tylko znaków alfanumerycznych.',
 

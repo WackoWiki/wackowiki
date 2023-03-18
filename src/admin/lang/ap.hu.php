@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -876,11 +877,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Csak képek feltöltését engedélyezze:',
 	'UploadOnlyImagesInfo'		=> 'Csak képfájlok feltöltését engedélyezze az oldalon.',
 	'AllowedUploadExts'			=> 'Engedélyezett fájltípusok:',
-	'AllowedUploadExtsInfo'		=> 'A fájlok feltöltéséhez engedélyezett kiterjesztések, vesszővel elválasztva pl. <code>png, ogg, mp4</code>, egyébként minden nem tiltott kiterjesztés engedélyezett.',
+	'AllowedUploadExtsInfo'		=> 'A fájlok feltöltéséhez engedélyezett kiterjesztések, vesszővel elválasztva pl. <code>png, ogg, mp4</code>, egyébként minden nem tiltott kiterjesztés engedélyezett.<br>A feltöltött fájltípusok engedélyezett listáját a webhely tartalmi funkcionalitásához szükséges minimumra kell korlátozni.',
 	'CheckMimetype'				=> 'Csatolt állományok ellenőrzése:',
 	'CheckMimetypeInfo'			=> 'Néhány böngésző rávehető, hogy a feltöltött állományokhoz helytelen MIME típust állapítson meg. Ezzel a beállítással az ennek okozására hajlamos állományok visszautasításra kerülnek.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'Ez lehetővé teszi a feltöltött SVG fájlok szanálását, hogy megakadályozza az SVG/XML sérülékeny fájlok feltöltését.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Ha alkalmazható, és nincs szükség Unicode karakterekre, akkor nagyon ajánlott csak alfa-numerikus karaktereket elfogadni.',
 

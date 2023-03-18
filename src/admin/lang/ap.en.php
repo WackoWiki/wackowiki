@@ -61,6 +61,7 @@ $ap_translation = [
 	'MainSection'				=> 'General Options',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'FileNotWritable'			=> 'The %1 file is not writable.',
 
 	/**
 	 * AP MENU
@@ -879,11 +880,11 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Alowed file types:',
-	'AllowedUploadExtsInfo'		=> 'Allowed extensions for uploading files, comma separated e.g. <code>png, ogg, mp4</code>, other wise all not prohibited file extensions are allowed.',
+	'AllowedUploadExtsInfo'		=> 'Allowed extensions for uploading files, comma separated e.g. <code>png, ogg, mp4</code>, other wise all not prohibited file extensions are allowed.<br>You should limit the uploaded file types allowed list to the necessary minimum required for you site content functionality.',
 	'CheckMimetype'				=> 'Check MIME type:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> '',
+	'SvgSanitizerInfo'			=> 'This enables sanitizing uploaded SVG files to to prevent SVG/XML vulnerable files being uploaded.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 
@@ -1006,7 +1007,7 @@ $ap_translation = [
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
 	'ConfirmDbRestore'			=> 'Do you want to restore backup %1?',
-	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
+	'ConfirmDbRestoreInfo'		=> 'Please wait, this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
 	'DirectoryNotExecutable'	=> 'The %1 directory is not executable.',
 	'BackupDelete'				=> 'Are you sure you want to remove backup %1?',
