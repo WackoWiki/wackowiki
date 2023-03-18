@@ -228,6 +228,7 @@ if (   $this->is_owner()
 				$tpl->n_header		= true;
 				$tpl->n_parentid	= (int)		$parent_id;
 				$tpl->n_category	= (string)	$category;
+				$tpl->n_cancel		= true;
 
 				if ($parent_id)
 				{
@@ -248,6 +249,7 @@ if (   $this->is_owner()
 					$tpl->r_newname		= Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . Ut::html($word['category']) . '</code>');
 					$tpl->r_category	= ($category ?: $word['category']);
 					$tpl->r_description	= ($category_description ?: $word['category_description']);
+					$tpl->r_cancel		= true;
 				}
 			}
 			// (un)group item
@@ -270,6 +272,7 @@ if (   $this->is_owner()
 					$tpl->g_header		= true;
 					$tpl->g_categoryid	= (int) $category_id;
 					$tpl->g_group		=  Ut::perc_replace($this->_t('CategoriesGroup'), '<code>' . Ut::html($word['category']) . '</code>');
+					$tpl->g_cancel		= true;
 
 					foreach ($parents as $parent)
 					{
@@ -292,6 +295,7 @@ if (   $this->is_owner()
 					$tpl->d_header		= true;
 					$tpl->d_categoryid	= (int) $category_id;
 					$tpl->d_category	= Ut::perc_replace($this->_t('CategoriesDelete'), '<code>' . Ut::html($word['category']) . '</code>');
+					$tpl->d_cancel		= true;
 				}
 			}
 			else if (@$_POST && !$category_id)

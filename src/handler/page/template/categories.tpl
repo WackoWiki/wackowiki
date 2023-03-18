@@ -35,9 +35,7 @@
 							<label for="group0">[ ' _t: CategoriesAddGroupedNo ' ]</label><br><br>
 						=]
 						<button type="submit" id="submit_create" name="create">[ ' _t: SubmitButton ' ]</button>
-						<a href="[ ' href: categories edit ' ]" class="btn-link">
-							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-						</a>
+						[ '' cancel '' ]
 					</td>
 				</tr>
 			</table><br>
@@ -69,9 +67,7 @@
 					<td colspan="2">
 						<small>[ ' _t: CategoriesRenameInfo ' ]</small><br>
 						<button type="submit" id="submit_new_name" name="rename">[ ' _t: SubmitButton ' ]</button>
-						<a href="[ ' href: categories edit ' ]" class="btn-link">
-							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-						</a>
+						[ '' cancel '' ]
 					</td>
 				</tr>
 			</table><br>
@@ -93,9 +89,7 @@
 							=]
 						</select>
 						<button type="submit" id="submit_ungroup" name="ungroup">[ ' _t: SubmitButton ' ]</button>
-						<a href="[ ' href: categories edit ' ]" class="btn-link">
-							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-						</a>
+						[ '' cancel '' ]
 						<br><small>[ ' _t: CategoriesGroupInfo ' ]</small>
 					</td>
 				</tr>
@@ -112,9 +106,7 @@
 					<td>
 						<label for="">[ ' category ' ]</label> 
 						<button type="submit" id="submit_delete" name="delete">[ ' _t: DeleteText ' ]</button>
-						<a href="[ ' href: categories edit ' ]" class="btn-link">
-							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-						</a>
+						[ '' cancel '' ]
 						<br><small>[ ' _t: CategoriesDeleteInfo ' ]</small>
 					</td>
 				</tr>
@@ -146,3 +138,8 @@
 		<li><a href="[ ' href: categories ' ]">[ ' _t: CategoriesAssign ' ]</a></li>
 		<li class="active">[ ' _t: CategoriesEdit ' ]</li>
 	</ul><br>
+
+[ == cancel == ]
+<a href="[ ' href: categories edit ' ]" class="btn-link">
+	<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+</a>

@@ -651,6 +651,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->action	= $accept_action;
 			$tpl->text		= implode('<br>', $accept_text);
+			$tpl->cancel	= true;
 
 			$tpl->leave();	// delete_
 		}
@@ -683,6 +684,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
 			$tpl->text		= implode('<br>', $accept_text);
+			$tpl->cancel	= true;
 
 			$tpl->leave();	// move_
 		}
@@ -695,6 +697,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->e_text	= $error;
 			$tpl->title		= $this->get_page_title('', $set[0]);
 			$tpl->onlyone	= count($set) > 1;
+			$tpl->cancel	= true;
 
 			$tpl->leave();	// rename_
 		}
@@ -723,6 +726,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
 			$tpl->text		= implode('<br>', $accept_text);
+			$tpl->cancel	= true;
 
 			$tpl->leave();	// merge_
 		}
@@ -1173,6 +1177,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->action	= $accept_action;
 			$tpl->text		= '<code>' . $this->page['title'] . '</code>';
+			$tpl->cancel	= true;
 
 			$tpl->leave();
 		}
@@ -1188,6 +1193,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tpl->action	= $accept_action;
 				$tpl->e_text	= $error;
 				$tpl->text		= '<code>' . $this->page['title'] . '</code>';
+				$tpl->cancel	= true;
 
 				$sections = $this->db->load_all(
 					"SELECT p.tag, p.title " .
@@ -1214,6 +1220,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tpl->action	= $accept_action;
 				$tpl->e_text	= $error;
 				$tpl->text		= '<code>' . $this->page['title'] . '</code>';
+				$tpl->cancel	= true;
 
 				$tpl->leave();
 			}
@@ -1228,6 +1235,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
 			$tpl->title		= $this->page['title'];
+			$tpl->cancel	= true;
 
 			$tpl->leave();
 		}
@@ -1238,6 +1246,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
+			$tpl->cancel	= true;
 			$tpl->confirm	= Ut::perc_replace(
 					$this->_t('ModerateComDelConfirm'),
 					count($set),
@@ -1254,6 +1263,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
+			$tpl->cancel	= true;
 			$tpl->split		= $forum_cluster
 								? $this->_t('ModerateSplitNewName')
 								: $this->_t('ModerateSplitPageName');
