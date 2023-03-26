@@ -7,8 +7,7 @@ use svgSanitize\data\AttributeInterface;
 use svgSanitize\data\TagInterface;
 use svgSanitize\data\XPath;
 use svgSanitize\ElementReference\Resolver;
-use HTMLPurifier;
-use HTMLPurifier_Config;
+use SafeHTML;
 
 /**
  * Class Sanitizer
@@ -648,8 +647,8 @@ class Sanitizer
     protected function cleanUnsafeNodes(\DOMNode $currentElement) {
         // Replace CDATA node with encoded text node
         if ($currentElement instanceof \DOMCdataSection) {
-            $purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
-            $clean_html = $purifier->purify($currentElement->nodeValue);
+            $safehtml = new SafeHTML;
+            $clean_html = $safehtml->parse($currentElement->nodeValue);
             $textNode = $currentElement->ownerDocument->createTextNode($clean_html);
             $currentElement->parentNode->replaceChild($textNode, $currentElement);
         // If the element doesn't have a tagname, remove it and continue with next iteration
