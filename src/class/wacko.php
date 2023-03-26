@@ -1886,12 +1886,6 @@ class Wacko
 
 		$page_id = $this->get_page_id($tag);
 
-		// write tag
-		if (isset($_POST['tag']))
-		{
-			$this->tag		= $tag = $_POST['tag'];
-		}
-
 		if (!$tag)
 		{
 			return null;
@@ -8983,7 +8977,7 @@ class Wacko
 		}
 	}
 
-	function show_category_form($lang, $object_id = null, $type_id = null, $can_edit = false): string
+	function show_category_form($lang, $object_id = null, $type_id = null, $can_edit = false, $buttons = true): string
 	{
 		$assigned	= [];
 		$selected	= [];
@@ -9076,7 +9070,7 @@ class Wacko
 			$out .= "</div>\n";
 
 			// control buttons
-			if (!($can_edit || $this->method == 'edit'))
+			if (!($can_edit || !$buttons))
 			{
 				$out .= '<button type="submit" id="submit" name="save">' . $this->_t('CategoriesStoreButton') . '</button> ' .
 						'<a href="' . $this->href('') . '" class="btn-link">' .
@@ -9091,7 +9085,7 @@ class Wacko
 			// additionally you need also the right to create new categories
 			$out .= $this->_t('NoCategoriesForThisLang') . "<br><br><br>\n";
 
-			if (!$this->method == 'edit')
+			if ($buttons)
 			{
 				$out .=
 					'<a href="' . $this->href('') . '" class="btn-link">' .
@@ -9101,7 +9095,7 @@ class Wacko
 		}
 
 		// edit control buttons
-		if ($can_edit || ! $this->method == 'edit')
+		if ($can_edit && $buttons)
 		{
 			$out .= '<button type="submit" id="add-button" name="create">' . $this->_t('AddButton') . '</button> ' .
 					'<button type="submit" id="rename-button" name="rename">' . $this->_t('RenameButton') . '</button> ' .
@@ -9128,7 +9122,6 @@ class Wacko
 		{
 			if (preg_match('/^category(\d+)$/', $key, $ids) && $val == 'set')
 			{
-				// category id
 				$set[] = $ids[1];
 			}
 		}
