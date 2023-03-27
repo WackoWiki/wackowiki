@@ -1677,7 +1677,7 @@ class Wacko
 	}
 
 	// used for comment feed
-	function load_comment($limit = 100, $tag = '', $deleted = false): ?array
+	function load_comment(int $limit = 100, $tag = '', $deleted = false): ?array
 	{
 		$pages	= [];
 		$limit	= $this->get_list_count($limit);
@@ -1984,7 +1984,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!($old_page = $this->load_page('', $page_id, null, null, null, 1)))
+			if (!($old_page = $this->load_page('', $page_id, null, null, null, true)))
 			{
 				if (empty($lang))
 				{
@@ -3586,7 +3586,7 @@ class Wacko
 
 		if (!$safe)
 		{
-			$text	= htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+			$text	= htmlspecialchars($text,  ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 			$title	= htmlspecialchars($title, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 		}
 
@@ -5672,32 +5672,23 @@ class Wacko
 		}
 	}
 
-	function get_list_count($max): int
+	function get_list_count(int $max): int
 	{
-		$user_max = $this->get_user_setting('list_count');
+		$user_max = $this->get_user_setting('list_count') ?? $this->db->list_count;
 
-		if (!isset($user_max))
+		$user_max = match($user_max)
 		{
-			// use default as fallback
-			$user_max = $this->db->list_count;
-		}
-		else if ($user_max <= 0)
-		{
-			$user_max = 10;
-		}
-		else if ($user_max > 100)
-		{
-			$user_max = 100;
-		}
-
-		$max = (int) $max;
+			$user_max <= 0		=> 10,
+			$user_max > 100		=> 100,
+			default				=> $user_max,
+		};
 
 		if ($max <= 0 || $max > $user_max)
 		{
 			$max = $user_max;
 		}
 
-		return (int) $max;
+		return $max;
 	}
 
 	/*
@@ -8477,7 +8468,7 @@ class Wacko
 	 *
 	 * @return array					array with 'text' (navigation) and 'offset' (offset value for SQL queries) elements.
 	 */
-	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = ''): array
+	function pagination($total, $perpage = 10, $_name = 'p', $params = '', $method = '', $tag = ''): array
 	{
 		$total		= (int) $total;
 		$name		= 'p';
@@ -8493,7 +8484,7 @@ class Wacko
 			$name = $_name;
 		}
 
-		$perpage = $this->get_list_count($perpage);
+		$perpage = $this->get_list_count((int) $perpage);
 
 		$pagination['offset']	= 0;
 		$pagination['text']		= false;
