@@ -949,7 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'Πίσω',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'Φίλτρο',
 	'Any'						=> 'Any',
 
 	// My Groups

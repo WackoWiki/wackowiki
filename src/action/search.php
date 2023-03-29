@@ -38,11 +38,11 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 			? "LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "") .
 		"WHERE ((MATCH
-					(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
-					"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
-					"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
-					"OR lower(a.description) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
-					"OR lower(a.keywords) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
+					(a.body) AGAINST("						. $this->db->q($phrase) . " IN BOOLEAN MODE) " .
+					"OR lower(a.title) LIKE lower("			. $this->db->q('%' . $phrase . '%') . ") " .
+					"OR lower(a.tag) LIKE lower("			. $this->db->q('%' . $phrase . '%') . ") " .
+					"OR lower(a.description) LIKE lower("	. $this->db->q('%' . $phrase . '%') . ") " .
+					"OR lower(a.keywords) LIKE lower("		. $this->db->q('%' . $phrase . '%') . ") " .
 				") " .
 			($tag
 				? "AND (a.tag LIKE " . $this->db->q($tag . '/%') . " " .
@@ -114,11 +114,11 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 		($tag
 			? "LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "") .
-		"WHERE ( lower(a.tag) LIKE binary lower(" . $this->db->q('%' . $phrase . '%') . ") " .
-			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
+		"WHERE ( lower(a.tag) LIKE binary lower("	. $this->db->q('%' . $phrase . '%') . ") " .
+			"OR lower(a.title) LIKE lower("			. $this->db->q('%' . $phrase . '%') . ")) " .
 		($tag
-			? "AND (a.tag LIKE " . $this->db->q($tag . '/%') . " " .
-			  "OR b.tag LIKE " . $this->db->q($tag . '/%') . ") "
+			? "AND (a.tag LIKE "	. $this->db->q($tag . '/%') . " " .
+			  "OR b.tag LIKE "		. $this->db->q($tag . '/%') . ") "
 			: "") .
 		($scope
 			? "AND a.comment_on_id = 0 "
@@ -187,9 +187,9 @@ $strpos_array = function($content, $keywords, $offset = 0)
 {
 	if(!is_array($keywords)) $keywords = [$keywords];
 
-	foreach($keywords as $keyword)
+	foreach ($keywords as $keyword)
 	{
-		if(($position = mb_stripos($content, $keyword, $offset)) !== false)
+		if (($position = mb_stripos($content, $keyword, $offset)) !== false)
 		{
 			return $position; // stop on first true result
 		}
@@ -201,7 +201,7 @@ $strpos_array = function($content, $keywords, $offset = 0)
 // return the part of the content where the keyword was matched
 $get_line_with_phrase = function ($content, $phrase, $padding = 75, $insensitive = true) use ($get_context, $strpos_array)
 {
-	$_keywords	= explode(' ', $phrase);
+	$keywords	= explode(' ', $phrase);
 	$lines		= explode("\n", $content);
 	$result		= '';
 	$matches	= 0;
@@ -211,7 +211,7 @@ $get_line_with_phrase = function ($content, $phrase, $padding = 75, $insensitive
 	{
 		if ($matches > 3) break; // enough berries, go home!
 
-		if (($position	= $strpos_array($string, $_keywords)) !== false)
+		if (($position	= $strpos_array($string, $keywords)) !== false)
 		{
 			$result .= $get_context($phrase, $string, $position, $padding);
 

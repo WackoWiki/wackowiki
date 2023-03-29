@@ -485,9 +485,9 @@ $wacko_translation = [
 	'NoPageLinkingTo'			=> 'No page is linking to',
 	'NoWantedPages'				=> 'No wanted pages. Good.',
 	'RemoveWatch'				=> 'Remove watch for this page',
-	'SetWatch'					=> 'Watch this page',
-	'WatchText'					=> 'Watch',
-	'UnwatchText'				=> 'Not follow',
+	'SetWatch'					=> 'پیگیری این صفحه',
+	'WatchText'					=> 'پیگیری',
+	'UnwatchText'				=> 'توقف پیگیری',
 	'UserSettingsStored'		=> 'تنظیمات کاربر ذخیره شد.',
 	'LoggedOut'					=> 'شما از سیستم خارج شدید.',
 	'LoggedOutAuto'				=> 'برای امنیت، جلسه شما به پایان رسیده است. لطفا دوباره وارد شوید.',
@@ -681,7 +681,7 @@ $wacko_translation = [
 	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> 'وارد کردن',
 	'ImportSuccess'				=> 'Imported successfully.',
-	'ImportFailed'				=> 'IMPORT failed.',
+	'ImportFailed'				=> 'درون‌ریزی صفحه‌ها شکست خورد.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
 	'ImportNote'				=> 'Imported page',
@@ -805,7 +805,7 @@ $wacko_translation = [
 	'SettingsCategories'		=> 'رده‌ها',
 	'SettingsLanguages'			=> 'زبان‌ها',
 	'SettingsReferrers'			=> 'Referrers',
-	'SettingsWatch'				=> 'Watch',
+	'SettingsWatch'				=> 'پیگیری',
 	'SettingsLatex'				=> 'LaTeX version',
 	'SettingsXML'				=> 'Export to XML',
 	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
@@ -949,7 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'برگشت',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'پالایه',
 	'Any'						=> 'هر',
 
 	// My Groups

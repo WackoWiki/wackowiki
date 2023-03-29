@@ -19,7 +19,7 @@ $wacko_translation = [
 	'AddButton'					=> 'जोड़ें',
 	'ArchiveButton'				=> 'Archive',
 	'CancelButton'				=> 'रद्द करें',
-	'ContinueButton'			=> 'Continue',
+	'ContinueButton'			=> 'जारी रखें',
 	'ConvertButton'				=> 'Convert',
 	'CreateButton'				=> 'बनाएँ',
 	'DeleteButton'				=> 'मिटाएँ',
@@ -170,7 +170,7 @@ $wacko_translation = [
 	'Version'					=> 'संस्करण',
 
 	// details formatter
-	'ShowHideDetails'			=> 'Details',
+	'ShowHideDetails'			=> 'विवरण',
 
 	'PrivacyPolicy'				=> 'गोपनीयता नीति',
 	'TermsOfUse'				=> 'उपयोग की शर्तें',
@@ -317,7 +317,7 @@ $wacko_translation = [
 	'SourceText'				=> 'Source',
 	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
-	'SourceFor'					=> 'View source for %1',
+	'SourceFor'					=> '%1 का स्रोत देखें',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -340,8 +340,8 @@ $wacko_translation = [
 	'PageBody'					=> 'Page body',
 	'EditNote'					=> 'सारांश',
 	'EditNoteMissing'			=> 'Edit summary missing',
-	'EditMinor'					=> 'Minor edit',
-	'MinorEditHide'				=> 'Hide minor edit',
+	'EditMinor'					=> 'छोटा संपादन',
+	'MinorEditHide'				=> 'छोटे सम्पादन छिपाएँ',
 	'MinorEditShow'				=> 'Show minor edit',
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
@@ -485,9 +485,9 @@ $wacko_translation = [
 	'NoPageLinkingTo'			=> 'No page is linking to',
 	'NoWantedPages'				=> 'No wanted pages. Good.',
 	'RemoveWatch'				=> 'Remove watch for this page',
-	'SetWatch'					=> 'Watch this page',
-	'WatchText'					=> 'Watch',
-	'UnwatchText'				=> 'Not follow',
+	'SetWatch'					=> 'इस पृष्ठ पर ध्यान रखें',
+	'WatchText'					=> 'ध्यान रखें',
+	'UnwatchText'				=> 'ध्यान हटाएँ',
 	'UserSettingsStored'		=> 'User settings saved.',
 	'LoggedOut'					=> 'अब आप लॉग आउट कर रहे हैं।',
 	'LoggedOutAuto'				=> 'सुरक्षा के लिए, आपका सत्र समाप्त हो गया है। कृपया फिर भाग लें।',
@@ -679,9 +679,9 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import in cluster:',
 	'ImportWhat'				=> 'XML-file for import:',
-	'ImportButton'				=> 'Import',
+	'ImportButton'				=> 'आयात',
 	'ImportSuccess'				=> 'Imported successfully.',
-	'ImportFailed'				=> 'IMPORT failed.',
+	'ImportFailed'				=> 'आयात विफल हुआ.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
 	'ImportNote'				=> 'Imported page',
@@ -788,7 +788,7 @@ $wacko_translation = [
 	'SettingsTotalRevs'			=> 'संशोधन',
 	'SettingsTotalComs'			=> 'टिप्पणियाँ',
 	'SettingsWatchers'			=> 'Watchers',
-	'SettingsHits'				=> 'Views',
+	'SettingsHits'				=> 'प्रदर्शन',
 	'SettingsText'				=> 'स्थापनायें',
 	'SettingsEdit'				=> 'सम्पादन',
 	'SettingsRevisions'			=> 'संशोधन',
@@ -805,7 +805,7 @@ $wacko_translation = [
 	'SettingsCategories'		=> 'श्रेणियाँ',
 	'SettingsLanguages'			=> 'भाषायें',
 	'SettingsReferrers'			=> 'Referrers',
-	'SettingsWatch'				=> 'Watch',
+	'SettingsWatch'				=> 'ध्यान रखें',
 	'SettingsLatex'				=> 'LaTeX version',
 	'SettingsXML'				=> 'Export to XML',
 	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
@@ -897,7 +897,7 @@ $wacko_translation = [
 	'FileSortExt'				=> 'extension',
 	'FileSortName'				=> 'name',
 	'FileSortSize'				=> 'size',
-	'FileSortTime'				=> 'created',
+	'FileSortTime'				=> 'बनाया',
 
 	'SortBy'					=> 'Sort by',
 	'Ascending'					=> 'ascending',
@@ -949,7 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'वापस',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'छननी',
 	'Any'						=> 'कोईभी',
 
 	// My Groups
@@ -1114,7 +1114,7 @@ $wacko_translation = [
 	'ForumPosts'				=> 'प्रविष्टियाँ',
 	'ForumReplies'				=> 'जवाब',
 	'ForumAuthor'				=> 'लेखक',
-	'ForumViews'				=> 'Views',
+	'ForumViews'				=> 'प्रदर्शन',
 	'ForumCreated'				=> 'बनाया',
 	'ForumComments'				=> 'टिप्पणियाँ',
 	'ForumLastComment'			=> 'पिछली टिप्पणी',
