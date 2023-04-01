@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[skjult]',
 	'IntercomSubject'			=> 'Emne:',
 	'IntercomMessage'			=> 'Besked:',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> 'Send mig en kopi',
 	'IntercomSubjectN'			=> '[Start et nyt emne]',
 	'IntercomDisabled'			=> 'Beklager, du ønsker ikke eller kan ikke modtage personlige beskeder.',
 	'IntercomHint'				=> 'Du skal først logge ind og følge linket igen, hvis du vil svare på den personlige besked, du har modtaget.',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'Intervallet mellem afsendelse af personlige meddelelser bør ikke være mindre end %1 sekunder.',
 	'PMSent'					=> 'Den personlige meddelelse er blevet sendt til brugeren.',
 	'PMBody'					=> 'Denne meddelelse er blevet sendt til dig af brugeren %1.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> 'Du har sendt følgende besked til brugeren %1.',
 	'PMReply'					=> 'Hvis du vil besvare denne e-mail, skal du klikke på følgende link (du må ikke bruge \'Svar\'-knappen i dit mailprogram):',
 	'PMNotLoggedIn'				=> 'Du er ikke logget ind på systemet og kan ikke sende nogen personlige beskeder til brugerne.',
 

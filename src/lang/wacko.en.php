@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'PMSent'					=> 'Personal message was successfully sent to the user.',
 	'PMBody'					=> 'This message has been sent to you by the user %1.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> 'You sent the following message to the user %1.',
 	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMNotLoggedIn'				=> 'You are not registered in the system and can not send personal messages to users.',
 

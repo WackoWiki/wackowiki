@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[隐藏]',
 	'IntercomSubject'			=> '主题：',
 	'IntercomMessage'			=> '消息：',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> '给我一份副本',
 	'IntercomSubjectN'			=> '[发新贴]',
 	'IntercomDisabled'			=> '抱歉，您不想要或无法接收个人消息。',
 	'IntercomHint'				=> '如果你想回复你收到的个人消息，请先登录并再次点击链接。',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> '发送个人消息之间的间隔不应小于 %1 秒。',
 	'PMSent'					=> '已成功将个人消息发送给用户。',
 	'PMBody'					=> '此消息已由用户 %1 发送给您。',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> '你向用户%1发送了以下信息。',
 	'PMReply'					=> '要回复此电子邮件，请单击以下链接（不要使用回复按钮/邮件回复）：',
 	'PMNotLoggedIn'				=> '您未在系统中注册，无法向用户发送个人消息。',
 

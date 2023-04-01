@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[verborgen]',
 	'IntercomSubject'			=> 'Onderwerp:',
 	'IntercomMessage'			=> 'Bericht:',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> 'Stuur me een kopie',
 	'IntercomSubjectN'			=> '[een nieuw onderwerp starten]',
 	'IntercomDisabled'			=> 'Sorry, u wilt of kunt geen persoonlijke berichten ontvangen.',
 	'IntercomHint'				=> 'Log eerst in en volg de link opnieuw, als je het persoonlijke bericht dat je hebt ontvangen wilt beantwoorden.',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'Het interval tussen het verzenden van persoonlijke berichten mag niet korter zijn dan %1 seconde.',
 	'PMSent'					=> 'Een persoonlijk bericht werd met succes naar de gebruiker verzonden.',
 	'PMBody'					=> 'Dit bericht is door de gebruiker naar u verzonden %1.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> 'Je hebt het volgende bericht verzonden naar de gebruiker %1.',
 	'PMReply'					=> 'Om deze e-mail te beantwoorden, klik op de volgende link (gebruik niet de Reply-knop / Reply in mailer):',
 	'PMNotLoggedIn'				=> 'U bent niet geregistreerd in het systeem en kunt geen persoonlijke berichten naar gebruikers sturen.',
 

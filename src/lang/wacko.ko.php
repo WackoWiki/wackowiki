@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[숨김]',
 	'IntercomSubject'			=> '제목:',
 	'IntercomMessage'			=> '내용:',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> '사본 보내기',
 	'IntercomSubjectN'			=> '[start a new topic]',
 	'IntercomDisabled'			=> 'Sorry, you do not want or can not receive personal messages.',
 	'IntercomHint'				=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'PMSent'					=> 'Personal message was successfully sent to the user.',
 	'PMBody'					=> 'This message has been sent to you by the user %1.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> '사용자 %1에게 다음 메시지를 보냈습니다.',
 	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMNotLoggedIn'				=> 'You are not registered in the system and can not send personal messages to users.',
 

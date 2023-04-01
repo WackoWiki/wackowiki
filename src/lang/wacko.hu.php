@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[rejtett]',
 	'IntercomSubject'			=> 'Téma:',
 	'IntercomMessage'			=> 'Üzenet:',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> 'Küldjön egy példányt',
 	'IntercomSubjectN'			=> '[start a new topic]',
 	'IntercomDisabled'			=> 'Sajnáljuk, de nem akar vagy nem tud személyes üzeneteket fogadni.',
 	'IntercomHint'				=> 'Kérjük, először jelentkezzen be, és kövesse újra a linket, ha válaszolni szeretne a kapott személyes üzenetre.',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'A személyes üzenetek küldése közötti időköz nem lehet kevesebb, mint %1 másodperc.',
 	'PMSent'					=> 'A személyes üzenet sikeresen elküldésre került a felhasználónak.',
 	'PMBody'					=> 'Ezt az üzenetet a %1 felhasználó küldte neked.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> 'Ön a következő üzenetet küldte el a felhasználónak %1.',
 	'PMReply'					=> 'Ha válaszolni szeretne erre az e-mail üzenetre, kattintson az alábbi linkre (ne használja a \'Válasz\' gombot a levelezőprogramjában):',
 	'PMNotLoggedIn'				=> 'Nincs bejelentkezve a rendszerbe, és nem küldhet személyes üzenetet a felhasználóknak.',
 

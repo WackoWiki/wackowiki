@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[ukryty]',
 	'IntercomSubject'			=> 'Temat:',
 	'IntercomMessage'			=> 'Wiadomość:',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> 'Wyślij mi kopię',
 	'IntercomSubjectN'			=> '[rozpocznij nowy temat]',
 	'IntercomDisabled'			=> 'Przepraszamy, nie chcesz lub nie możesz otrzymywać wiadomości osobistych.',
 	'IntercomHint'				=> 'Zaloguj się najpierw i kliknij ponownie na link, jeśli chcesz odpowiedzieć na otrzymaną osobistą wiadomość.',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'Odstęp czasu pomiędzy wysyłaniem wiadomości osobistych nie powinien być mniejszy niż %1 sekund.',
 	'PMSent'					=> 'Wiadomość osobista została pomyślnie wysłana do użytkownika.',
 	'PMBody'					=> 'Ta wiadomość została wysłana do Ciebie przez użytkownika %1.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> 'Wysłałeś następującą wiadomość do użytkownika %1.',
 	'PMReply'					=> 'Aby odpowiedzieć na ten e-mail, kliknij na poniższy link (nie używaj przycisku Odpowiedz / Odpowiadaj w mailerze):',
 	'PMNotLoggedIn'				=> 'Nie jesteś zalogowany do systemu i nie możesz wysyłać osobistych wiadomości do użytkowników.',
 

@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[скрит]',
 	'IntercomSubject'			=> 'Заглавие:',
 	'IntercomMessage'			=> 'Съобщение:',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> 'Изпратете ми копие',
 	'IntercomSubjectN'			=> '[start a new topic]',
 	'IntercomDisabled'			=> 'Съжаляваме, но не искате или не можете да получавате лични съобщения.',
 	'IntercomHint'				=> 'Ако искате да отговорите на полученото лично съобщение, моля, влезте първо в профила си и последвайте връзката отново.',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'Интервалът между изпращането на лични съобщения не трябва да бъде по-малък от %1 секунди.',
 	'PMSent'					=> 'Личното съобщение беше успешно изпратено до потребителя.',
 	'PMBody'					=> 'Това съобщение ви е изпратено от потребителя %1.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> 'Изпратихте следното съобщение до потребителя %1.',
 	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMNotLoggedIn'				=> 'Не сте влезли в системата и не можете да изпращате никакви лични съобщения до потребителите.',
 

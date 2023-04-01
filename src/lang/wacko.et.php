@@ -748,7 +748,7 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[peidetud]',
 	'IntercomSubject'			=> 'Teema:',
 	'IntercomMessage'			=> 'Sõnum:',
-	'IntercomCopy'				=> 'Send me a copy',
+	'IntercomCopy'				=> 'Saada mulle koopia',
 	'IntercomSubjectN'			=> '[alustada uut teemat]',
 	'IntercomDisabled'			=> 'Vabandust, te ei soovi või ei saa saada isiklikke sõnumeid.',
 	'IntercomHint'				=> 'Palun logige kõigepealt sisse ja järgige uuesti linki, kui soovite vastata saadud isiklikule sõnumile.',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'Isiklike sõnumite saatmise intervall ei tohiks olla väiksem kui %1 sekundit.',
 	'PMSent'					=> 'Isiklik sõnum saadeti kasutajale edukalt.',
 	'PMBody'					=> 'Selle teate on teile saatnud kasutaja %1.',
-	'PMBodyCopy'				=> 'You send the following message to the user %1.',
+	'PMBodyCopy'				=> 'Saatsite kasutajale %1 järgmise sõnumi.',
 	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMNotLoggedIn'				=> 'Te pole süsteemi sisse logitud ega saa kasutajatele isiklikke sõnumeid saata.',
 
