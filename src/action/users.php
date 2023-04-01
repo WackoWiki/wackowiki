@@ -152,13 +152,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 				// message is too long
 				if ($pm_size > INTERCOM_MAX_SIZE)
 				{
-					$error = Ut::perc_replace($this->_t('UsersPMOversized'),
+					$error = Ut::perc_replace($this->_t('PMOversized'),
 						$this->binary_multiples(($pm_size - INTERCOM_MAX_SIZE)));
 				}
 				// personal messages flood control
 				else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)
 				{
-					$error = Ut::perc_replace($this->_t('UsersPMFlooded'), $this->db->intercom_delay);
+					$error = Ut::perc_replace($this->_t('PMFlooded'), $this->db->intercom_delay);
 				}
 
 				// proceed if no error encountered
@@ -171,8 +171,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					// compose message
 					$prefix		= utf8_rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
 					$msg_id		= date('ymdHi') . '.' . Ut::rand(100000, 999999) . '@' . $prefix;
-					$subject	= $_POST['mail_subject'];
-					$body		= $_POST['mail_body'];
+					$subject	= (string) ($_POST['mail_subject'] ?? '');
+					$body		= (string) ($_POST['mail_body'] ?? '');
 
 					if ($subject === '')
 					{
@@ -192,7 +192,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					// send notification
 					$this->notify_pm($user, $subject, $body, $headers, $msg_id);
 
-					$this->set_message($this->_t('UsersPMSent'), 'success');
+					// send copy to sender
+					if (isset($_POST['send_copy']))
+					{
+						$this->notify_pm_cc($user, $subject, $body, $headers, $msg_id);
+					}
+
+					$this->set_message($this->_t('PMSent'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogPMSent', SYSTEM_LANG), $this->get_user_name(), $user['user_name']));
 
 					$this->sess->intercom_delay	= time();

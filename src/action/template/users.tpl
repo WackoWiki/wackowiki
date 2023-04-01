@@ -71,13 +71,13 @@ first really BIG template written
 				<table class="formation">
 					<tr>
 						<td colspan="2" class="t-center">
-							<em>[ ' _t: UsersPMNotLoggedIn ' ]</em>
+							<em>[ ' _t: PMNotLoggedIn ' ]</em>
 						</td>
 					</tr>
 				</table>
 			=]
 			[= hint _ =
-				<div class="msg hint">[ ' _t: UsersIntercomHint ' ]</div>
+				<div class="msg hint">[ ' _t: IntercomHint ' ]</div>
 			=]
 			[= pm _ =
 				[ ' // contact form ' ]
@@ -92,24 +92,30 @@ first really BIG template written
 						[= disabled _ =
 							<tr>
 								<td class="t-center">
-									<strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong>
+									<strong><em>[ ' _t: IntercomDisabled ' ]</em></strong>
 								</td>
 							</tr>
 						=]
 						[= ic _ =
 							<tr>
 								<td>
-									<label for="mail_subject">[ ' _t: UsersIntercomSubject ' ]</label><br>
-									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200" required>
+									<label for="mail_subject">[ ' _t: IntercomSubject ' ]</label><br>
+									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="80" maxlength="200" required>
 									[= ref _ =
-										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
+										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: IntercomSubjectN ' ]</a>
 									=]
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="mail_body" class="visuallyhidden">[ ' _t: UsersIntercomMessage ' ]</label>
+									<label for="mail_body" class="visuallyhidden">[ ' _t: IntercomMessage ' ]</label>
 									<textarea id="mail_body" name="mail_body" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="checkbox" id="send_copy" name="send_copy" value="1">
+									<label for="send_copy">[ ' _t: IntercomCopy ' ]</label>
 								</td>
 							</tr>
 							<tr>
@@ -119,7 +125,7 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td>
-									<small>[ ' _t: UsersIntercomDesc ' ]</small>
+									<small>[ ' _t: IntercomDesc ' ]</small>
 								</td>
 							</tr>
 						=]
