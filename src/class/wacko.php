@@ -1938,7 +1938,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!($old_page = $this->load_page('', $page_id, null, null, null, 1)))
+			if (!($old_page = $this->load_page('', $page_id, null, null, null, true)))
 			{
 				if (empty($lang))
 				{
@@ -2611,16 +2611,39 @@ class Wacko
 	{
 		$save		= $this->set_language($user['user_lang'], true, true);
 
-		$body		=	Ut::perc_replace($this->_t('UsersPMBody'),
+		$body		=	Ut::perc_replace($this->_t('PMBody'),
 							$this->get_user_name()) . "\n\n" .
 
 						'----------------------------------------------------------------------' . "\n" .
 						$body . "\n" .
 						'----------------------------------------------------------------------' . "\n\n" .
 
-						$this->_t('UsersPMReply') . "\n\n" .
+						$this->_t('PMReply') . "\n\n" .
 						Ut::amp_decode($this->href('', '',
 							['profile'	=> $this->get_user_name(),
+							'ref'		=> Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
+							'#'			=> 'contacts'],
+							null, null, null, true, true)) . "\n\n";
+
+		$this->send_user_email($user, $subject, $body, $header);
+		$this->set_language($save, true);
+	}
+
+	function notify_pm_cc($to, $subject, $body, $header, $msg_id): void
+	{
+		$user		= $this->get_user();
+		$save		= $this->set_language($user['user_lang'], true, true);
+
+		$body		=	Ut::perc_replace($this->_t('PMBodyCopy'),
+							$to['user_name']) . "\n\n" .
+
+						'----------------------------------------------------------------------' . "\n" .
+						$body . "\n" .
+						'----------------------------------------------------------------------' . "\n\n" .
+
+						$this->_t('PMReply') . "\n\n" .
+						Ut::amp_decode($this->href('', '',
+							['profile'	=> $to['user_name'],
 							'ref'		=> Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
 							'#'			=> 'contacts'],
 							null, null, null, true, true)) . "\n\n";
@@ -2746,120 +2769,118 @@ class Wacko
 			"FROM " . $this->prefix . "watch w " .
 				"LEFT JOIN " . $this->prefix . "user u ON (w.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->prefix . "user_setting s ON (w.user_id = s.user_id) " .
-			"WHERE w.page_id = " . (int) $object_id);
+			"WHERE w.page_id = " . (int) $object_id . " " .
+				"AND w.user_id != " . (int) $user_id);
 
 		foreach ($watchers as $user)
 		{
-			if ($user['user_id'] != $user_id && $user['user_name'] != GUEST)
+			if ($comment_on_id)
 			{
+				// assert that user has no comments pending...
+				if ($user['notify_comment'] > 1)
+				{
+					// ...and add one if so
+					if (!$user['comment_id'])
+					{
+						$this->db->sql_query(
+							"UPDATE " . $this->prefix . "watch SET " .
+								"comment_id	= " . (int) $page_id . " " .
+							"WHERE page_id = " . (int) $comment_on_id . " " .
+								"AND user_id = " . (int) $user['user_id']);
+					}
+					else
+					{
+						continue;	// skip watcher
+					}
+				}
+				else if (!$user['notify_comment'])
+				{
+					continue;	// skip watcher
+				}
+			}
+			else
+			{
+				if (($minor_edit && !$user['notify_minor_edit']) || !$user['notify_page'])
+				{
+					continue;	// skip watcher
+				}
+
+				// assert that user has no comments pending...
+				if ($user['notify_page'] > 1)
+				{
+					// ...and add one if so
+					if (!$user['pending'])
+					{
+						$this->set_watch_pending($user['user_id'], $comment_on_id);
+					}
+					else
+					{
+						continue;	// skip watcher
+					}
+				}
+			}
+
+			// removes user from subscription if access writes were revoked
+			if (!$this->has_access('read', $object_id, $user['user_name']))
+			{
+				$this->clear_watch($user['user_id'], $object_id);
+				continue;
+			}
+
+			if ($this->db->enable_email
+				&& $this->db->enable_email_notification
+				&& $user['enabled']
+				&& !$user['email_confirm']
+				&& $user['send_watchmail'])
+			{
+				$lang = $user['user_lang'];
+				$save = $this->set_language($lang, true, true);
+
+				$body = ($user_name == GUEST ? $this->_t('Guest') : $user_name);
+
 				if ($comment_on_id)
 				{
-					// assert that user has no comments pending...
-					if ($user['notify_comment'] > 1)
+					$subject = $this->_t('CommentForWatchedPage') . "'" . $page_title . "'";
+
+					$body .=
+							$this->_t('SomeoneCommented') . "\n" .
+							$this->href('', $this->get_page_tag($comment_on_id), null, null, null, null, true, true) . "\n\n" .
+							$title . "\n" .
+							"----------------------------------------------------------------------\n\n" .
+							$page_body . "\n\n" .
+							"----------------------------------------------------------------------\n\n";
+
+					if ($user['notify_comment'] == 2)
 					{
-						// ...and add one if so
-						if (!$user['comment_id'])
-						{
-							$this->db->sql_query(
-								"UPDATE " . $this->prefix . "watch SET " .
-									"comment_id	= " . (int) $page_id . " " .
-								"WHERE page_id = " . (int) $comment_on_id . " " .
-									"AND user_id = " . (int) $user['user_id']);
-						}
-						else
-						{
-							continue;	// skip current watcher
-						}
-					}
-					else if (!$user['notify_comment'])
-					{
-						continue;	// skip current watcher
+						$this->set_language($lang, true, true);
+						$body .= $this->_t('FurtherPending') . "\n\n";
 					}
 				}
 				else
 				{
-					if (($minor_edit && !$user['notify_minor_edit']) || !$user['notify_page'])
-					{
-						continue;	// skip current watcher
-					}
+					$subject		= $this->_t('WatchedPageChanged') . "'" . $title . "'";
 
-					// assert that user has no comments pending...
-					if ($user['notify_page'] > 1)
+					$patterns		= ['/%%SimpleDiffAdditions%%/u',		'/%%SimpleDiffDeletions%%/u'];
+					$replacements	= [$this->_t('SimpleDiffAdditions'),	$this->_t('SimpleDiffDeletions')];
+					$diff			= preg_replace($patterns, $replacements, $diff);
+
+					$body .=
+							$this->_t('SomeoneChangedThisPage') . "\n" .
+							$this->href('', $tag, null, null, null, null, true, true) . "\n\n" .
+							$title . "\n" .
+							"======================================================================\n\n" .
+							$diff . "\n\n" .
+							"======================================================================\n\n";
+
+					if ($user['notify_page'] == 2)
 					{
-						// ...and add one if so
-						if (!$user['pending'])
-						{
-							$this->set_watch_pending($user['user_id'], $comment_on_id);
-						}
-						else
-						{
-							continue;	// skip current watcher
-						}
+						$this->set_language($lang, true, true);
+						$body .= $this->_t('FurtherPending') . "\n\n";
 					}
 				}
 
-				// removes user from subscription if access writes were revoked
-				if (!$this->has_access('read', $object_id, $user['user_name']))
-				{
-					$this->clear_watch($user['user_id'], $object_id);
-					continue;
-				}
-
-				if ($this->db->enable_email
-					&& $this->db->enable_email_notification
-					&& $user['enabled']
-					&& !$user['email_confirm']
-					&& $user['send_watchmail'])
-				{
-					$lang = $user['user_lang'];
-					$save = $this->set_language($lang, true, true);
-
-					$body = ($user_name == GUEST ? $this->_t('Guest') : $user_name);
-
-					if ($comment_on_id)
-					{
-						$subject = $this->_t('CommentForWatchedPage') . "'" . $page_title . "'";
-
-						$body .=
-								$this->_t('SomeoneCommented') . "\n" .
-								$this->href('', $this->get_page_tag($comment_on_id), null, null, null, null, true, true) . "\n\n" .
-								$title . "\n" .
-								"----------------------------------------------------------------------\n\n" .
-								$page_body . "\n\n" .
-								"----------------------------------------------------------------------\n\n";
-
-						if ($user['notify_comment'] == 2)
-						{
-							$this->set_language($lang, true, true);
-							$body .= $this->_t('FurtherPending') . "\n\n";
-						}
-					}
-					else
-					{
-						$subject		= $this->_t('WatchedPageChanged') . "'" . $title . "'";
-
-						$patterns		= ['/%%SimpleDiffAdditions%%/u',		'/%%SimpleDiffDeletions%%/u'];
-						$replacements	= [$this->_t('SimpleDiffAdditions'),	$this->_t('SimpleDiffDeletions')];
-						$diff			= preg_replace($patterns, $replacements, $diff);
-
-						$body .=
-								$this->_t('SomeoneChangedThisPage') . "\n" .
-								$this->href('', $tag, null, null, null, null, true, true) . "\n\n" .
-								$title . "\n" .
-								"======================================================================\n\n" .
-								$diff . "\n\n" .
-								"======================================================================\n\n";
-
-						if ($user['notify_page'] == 2)
-						{
-							$this->set_language($lang, true, true);
-							$body .= $this->_t('FurtherPending') . "\n\n";
-						}
-					}
-
-					$this->send_user_email($user, $subject, $body);
-					$this->set_language($save, true);
-				}
+				$this->send_user_email($user, $subject, $body);
+				$this->set_language($save, true);
 			}
 		}
 	}
@@ -8512,7 +8533,7 @@ class Wacko
 	 *
 	 * @return array					array with 'text' (navigation) and 'offset' (offset value for SQL queries) elements.
 	 */
-	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = ''): array
+	function pagination($total, $perpage = 10, $_name = 'p', $params = '', $method = '', $tag = ''): array
 	{
 		$total		= (int) $total;
 		$name		= 'p';

@@ -1047,7 +1047,7 @@ $ap_translation = [
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
 	'ConfirmDbRestore'			=> 'Do you want to restore backup %1?',
-	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
+	'ConfirmDbRestoreInfo'		=> 'Please wait, this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
 	'DirectoryNotExecutable'	=> 'The %1 directory is not executable.',
 	'BackupDelete'				=> 'Are you sure you want to remove backup %1?',

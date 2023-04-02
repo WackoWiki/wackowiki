@@ -181,6 +181,24 @@ function crit_init()
 	}
 }
 
+function invertSelections(eid)
+{
+	var form = document.getElementById(eid),
+		numElements = form.elements.length,
+		i,
+		curElement;
+
+	for ( i = 0; i < numElements; i++ )
+	{
+		curElement = form.elements[ i ];
+
+		if ( curElement.type === 'checkbox')
+		{
+			curElement.checked = !curElement.checked;
+		}
+	}
+}
+
 if (root)
 {
 	if (root.addEventListener) root.addEventListener('load', crit_init, false);
