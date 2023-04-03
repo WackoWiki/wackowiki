@@ -980,6 +980,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'Filtrar',
+	'OptionalFilters'			=> 'Filtros opcionais:',
 	'Any'						=> 'Any',
 
 	// My Groups

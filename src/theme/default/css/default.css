@@ -1354,6 +1354,16 @@ a:target {
 	padding-right: 20px;
 }
 
+.form-options {
+	background-color: #ededed; 
+	border: 1px solid #cdcdcd; 
+	padding: 10px;
+}
+
+.btn-right {
+	float: right;
+}
+
 .permissions col:nth-child(1) {
 	width: 10%;
 }

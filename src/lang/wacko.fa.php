@@ -980,6 +980,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'پالایه',
+	'OptionalFilters'			=> 'پالایه‌های اختیاری:',
 	'Any'						=> 'هر',
 
 	// My Groups

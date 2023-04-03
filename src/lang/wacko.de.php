@@ -979,6 +979,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'Filter',
+	'OptionalFilters'			=> 'Optionale Filter:',
 	'Any'						=> 'Alle',
 
 	// My Groups

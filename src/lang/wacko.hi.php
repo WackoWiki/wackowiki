@@ -980,6 +980,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'छननी',
+	'OptionalFilters'			=> 'वैकल्पिक फ़िल्टर:',
 	'Any'						=> 'कोईभी',
 
 	// My Groups

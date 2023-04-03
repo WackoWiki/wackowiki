@@ -980,6 +980,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'Szűrő',
+	'OptionalFilters'			=> 'Választható szűrők:',
 	'Any'						=> 'Any',
 
 	// My Groups

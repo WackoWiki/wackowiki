@@ -980,6 +980,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'Filtrér',
+	'OptionalFilters'			=> 'Valgfrie filtre:',
 	'Any'						=> 'Nogen',
 
 	// My Groups
