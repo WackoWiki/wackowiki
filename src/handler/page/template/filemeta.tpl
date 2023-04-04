@@ -130,7 +130,7 @@
 							<label for="UploadDesc">[ ' _t: FileDesc ' ]</label>
 						</th>
 						<td>
-							<textarea type="text" id="UploadDesc" name="file_description" rows="6" cols="80" maxlength="250">[ ' desc | e ' ]</textarea>
+							<textarea type="text" id="UploadDesc" name="file_description" class="cols-80" rows="6" cols="80" maxlength="250">[ ' desc | e ' ]</textarea>
 						</td>
 					</tr>
 					<tr>
@@ -138,7 +138,7 @@
 							<label for="file_caption">[ ' _t: FileCaption ' ]</label>
 						</th>
 						<td>
-							<textarea id="file_caption" name="caption" rows="8" cols="80">[ ' caption | pre ' ]</textarea>
+							<textarea id="file_caption" name="caption" class="cols-80" rows="8" cols="80">[ ' caption | pre ' ]</textarea>
 						</td>
 					</tr>
 					<tr>

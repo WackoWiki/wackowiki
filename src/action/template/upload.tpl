@@ -61,7 +61,7 @@
 							<label for="upload_desc">[ ' _t: FileDesc ' ]</label>
 						</th>
 						<td>
-							<textarea type="text" name="file_description" id="upload_desc"  cols="80" rows="6" maxlength="250"></textarea>
+							<textarea type="text" name="file_description" id="upload_desc" class="cols-80" cols="80" rows="6" maxlength="250"></textarea>
 						</td>
 					</tr>
 				=]
