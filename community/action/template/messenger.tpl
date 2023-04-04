@@ -92,7 +92,7 @@
 			<table class="tbl-compose usertable">
 				<tr>
 					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
-					<td><input type="text" id="subject" name="subject" maxlength="65" size="30" value="" required></td>
+					<td><input type="text" id="subject" name="subject" class="cols-50" maxlength="65" size="30" value="" required></td>
 				</tr>
 				<tr>
 					<th><label for="to">[ ' _t: Recipient ' ]</label></th>
@@ -137,7 +137,7 @@
 			<table class="tbl-compose usertable">
 				<tr>
 					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
-					<td><input readonly type="text" id="subject" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
+					<td><input readonly type="text" id="subject" name="subject" class="cols-50" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
 				</tr>
 				<tr>
 					<th><label for="to">[ ' _t: Recipient ' ]</label></th>
@@ -167,7 +167,7 @@
 			<table class="tbl-compose usertable">
 				<tr>
 					<th><label for="subject">[ ' _t: Subject ' ]</label></th>
-					<td><input type="text" id="subject" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
+					<td><input type="text" id="subject" name="subject" class="cols-50" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
 				</tr>
 				<tr>
 					<th><label for="to">[ ' _t: Recipient ' ]</label></th>
@@ -534,7 +534,7 @@
 <nav class="pagination">[ ' text ' ]</nav>
 
 [ == textarea == ]
-<textarea rows="16" cols="45" id="message" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
+<textarea id="message" name="message" class="cols-50" rows="16" cols="50" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
 <input readonly type="text" name="remLen" size="4" maxlength="4" value="2500"> [ ' _t: CharactersLeft ' ]
 
 [ == selectfolder == ]

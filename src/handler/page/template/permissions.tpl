@@ -17,7 +17,7 @@
 						<label for="read_acl">[ ' _t: AclRead ' ]</label>
 					</th>
 					<td>
-						<textarea id="read_acl" name="read_acl" rows="4" cols="20">[ ' read | pre ' ]</textarea>
+						<textarea id="read_acl" name="read_acl" class="cols-20" rows="4" cols="20">[ ' read | pre ' ]</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -25,7 +25,7 @@
 						<label for="write_acl">[ ' _t: AclWrite ' ]</label>
 					</th>
 					<td>
-						<textarea id="write_acl" name="write_acl" rows="4" cols="20">[ ' write | pre ' ]</textarea>
+						<textarea id="write_acl" name="write_acl" class="cols-20" rows="4" cols="20">[ ' write | pre ' ]</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -33,7 +33,7 @@
 						<label for="comment_acl">[ ' _t: AclComment ' ]</label>
 					</th>
 					<td>
-						<textarea id="comment_acl" name="comment_acl" rows="4" cols="20">[ ' comment | pre ' ]</textarea>
+						<textarea id="comment_acl" name="comment_acl" class="cols-20" rows="4" cols="20">[ ' comment | pre ' ]</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -41,7 +41,7 @@
 						<label for="create_acl">[ ' _t: AclCreate ' ]</label>
 					</th>
 					<td>
-						<textarea id="create_acl" name="create_acl" rows="4" cols="20">[ ' create | pre ' ]</textarea>
+						<textarea id="create_acl" name="create_acl" class="cols-20" rows="4" cols="20">[ ' create | pre ' ]</textarea>
 					</td>
 				</tr>
 				[= u _ =
@@ -50,7 +50,7 @@
 							<label for="upload_acl">[ ' _t: AclUpload ' ]</label>
 						</th>
 						<td>
-							<textarea id="upload_acl" name="upload_acl" rows="4" cols="20">[ ' upload | pre ' ]</textarea>
+							<textarea id="upload_acl" name="upload_acl" class="cols-20" rows="4" cols="20">[ ' upload | pre ' ]</textarea>
 						</td>
 					</tr>
 				=]

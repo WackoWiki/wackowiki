@@ -129,7 +129,7 @@
 								<label for="keywords">[ ' _t: MetaKeywords ' ]</label>
 							</th>
 							<td>
-								<textarea id="keywords" name="keywords" rows="4" cols="51" maxlength="250">[ ' page.keywords | e ' ]</textarea>
+								<textarea id="keywords" name="keywords" class="cols-50" rows="4" cols="50" maxlength="250">[ ' page.keywords | e ' ]</textarea>
 								[= categories _ =
 									<br>
 									['' html '']
@@ -141,7 +141,7 @@
 								<label for="description">[ ' _t: MetaDescription ' ]</label>
 							</th>
 							<td>
-								<textarea id="description" name="description" rows="4" cols="51" maxlength="250">[ ' page.description | e ' ]</textarea>
+								<textarea id="description" name="description" class="cols-50" rows="4" cols="50" maxlength="250">[ ' page.description | e ' ]</textarea>
 							</td>
 						</tr>
 						[== Commented _ =

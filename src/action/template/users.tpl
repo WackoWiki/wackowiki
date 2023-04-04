@@ -100,7 +100,7 @@ first really BIG template written
 							<tr>
 								<td>
 									<label for="mail_subject">[ ' _t: IntercomSubject ' ]</label><br>
-									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="80" maxlength="200" required>
+									<input type="text" id="mail_subject" name="mail_subject" class="cols-80" value="[ ' subj | e attr ' ]" size="80" maxlength="200" required>
 									[= ref _ =
 										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: IntercomSubjectN ' ]</a>
 									=]
@@ -109,7 +109,7 @@ first really BIG template written
 							<tr>
 								<td>
 									<label for="mail_body" class="visuallyhidden">[ ' _t: IntercomMessage ' ]</label>
-									<textarea id="mail_body" name="mail_body" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
+									<textarea id="mail_body" name="mail_body" class="cols-80" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
 								</td>
 							</tr>
 							<tr>

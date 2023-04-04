@@ -459,7 +459,7 @@ function admin_tool_badbehaviour($engine, $module)
 					<small><?php echo $engine->_t('BbIpAddressInfo');?></small></label>
 				</td>
 				<td>
-					<textarea cols="24" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea>
+					<textarea cols="30" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -471,7 +471,7 @@ function admin_tool_badbehaviour($engine, $module)
 					<small><?php echo $engine->_t('BbUrlInfo');?></small></label>
 				</td>
 				<td>
-					<textarea cols="48" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea>
+					<textarea cols="50" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -483,7 +483,7 @@ function admin_tool_badbehaviour($engine, $module)
 					<small><?php echo $engine->_t('BbUserAgentInfo');?></small></label>
 				</td>
 				<td>
-					<textarea cols="48" rows="6" id="whitelists_useragent" name="useragent"><?php echo implode("\n", $whitelists['useragent']); ?></textarea>
+					<textarea cols="50" rows="6" id="whitelists_useragent" name="useragent"><?php echo implode("\n", $whitelists['useragent']); ?></textarea>
 				</td>
 			</tr>
 		</table>
@@ -817,7 +817,7 @@ function bb2_options($engine)
 				<label for="reverse_proxy_addresses"><?php echo $engine->_t('BbReverseProxyAddresses');?></label>
 			</td>
 			<td>
-				<textarea cols="24" rows="6" id="reverse_proxy_addresses" name="reverse_proxy_addresses"><?php echo implode("\n", $settings['reverse_proxy_addresses']); ?></textarea>
+				<textarea cols="30" rows="6" id="reverse_proxy_addresses" name="reverse_proxy_addresses"><?php echo implode("\n", $settings['reverse_proxy_addresses']); ?></textarea>
 			</td>
 		</tr>
 	</table>

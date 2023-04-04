@@ -15,7 +15,7 @@
 						<label for="new_category">[ ' _t: CategoriesAdd ' ]</label>
 					</td>
 					<td>
-						<input type="text" name="category" id="new_category" value="[ ' category | e attr ' ]" size="40" maxlength="100" required>
+						<input type="text" id="new_category" name="category" class="cols-50" value="[ ' category | e attr ' ]" size="40" maxlength="100" required>
 					</td>
 				</tr>
 				<tr>
@@ -23,7 +23,7 @@
 						<label for="category_description">[ ' _t: CategoryDescription ' ]</label>
 					</td>
 					<td>
-						<textarea id="category_description" name="category_description" rows="4" cols="51" maxlength="250"></textarea>
+						<textarea id="category_description" name="category_description" class="cols-50" rows="4" cols="50" maxlength="250"></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -60,7 +60,7 @@
 						<label for="category_description">[ ' _t: CategoryDescription ' ]</label>
 					</td>
 					<td>
-						<textarea id="category_description" name="category_description" rows="4" cols="51" maxlength="250">[ ' description | e ' ]</textarea>
+						<textarea id="category_description" name="category_description" class="cols-50" rows="4" cols="50" maxlength="250">[ ' description | e ' ]</textarea>
 					</td>
 				</tr>
 				<tr>
