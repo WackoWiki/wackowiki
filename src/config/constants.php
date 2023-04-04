@@ -12,10 +12,10 @@ const SITE_LOCK						= 'config/lock';
 const AP_LOCK						= 'config/lock_ap';
 
 const ACTION_DIR					= 'action';
-const LANG_DIR						= 'lang';
 const FORMATTER_DIR					= 'formatter';
 const HANDLER_DIR					= 'handler';
 const IMAGE_DIR						= 'image';
+const LANG_DIR						= 'lang';
 const THEME_DIR						= 'theme';
 const THUMB_DIR						= 'file/thumb';
 const UPLOAD_GLOBAL_DIR				= 'file/global';
@@ -88,7 +88,7 @@ const SQL_MODE_STRICT				= 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_B
 const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
 
 // Do not change these three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.1.19';
+const WACKO_VERSION					= '6.1.20';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 

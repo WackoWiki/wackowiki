@@ -12,6 +12,7 @@
 		"php" : "8.0 - 8.2",
 		"ext-bcmath" : "*",
 		"ext-ctype" : "*",
+		"ext-dom" : "*",
 		"ext-fileinfo" : "*",
 		"ext-gd" : "*",
 		"ext-iconv" : "*",

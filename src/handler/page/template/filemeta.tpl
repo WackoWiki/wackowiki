@@ -157,7 +157,7 @@
 							<label for="UploadAuthor">[ ' _t: FileAuthor ' ]</label>
 						</th>
 						<td>
-							<input type="text" id="UploadAuthor" name="author" maxlength="255" size="80" value="[ ' author | e attr ' ]">
+							<input type="text" id="UploadAuthor" name="author" class="cols-80" maxlength="255" size="80" value="[ ' author | e attr ' ]">
 						</td>
 					</tr>
 					<tr>
@@ -165,7 +165,7 @@
 							<label for="UploadSource">[ ' _t: FileSource ' ]</label>
 						</th>
 						<td>
-							<input type="text" id="UploadSource" name="source" maxlength="255" size="80" value="[ ' source | e attr ' ]">
+							<input type="text" id="UploadSource" name="source" class="cols-80" maxlength="255" size="80" value="[ ' source | e attr ' ]">
 						</td>
 					</tr>
 					<tr>
@@ -173,7 +173,7 @@
 							<label for="UploadSourceUrl">[ ' _t: FileSourceUrl ' ]</label>
 						</th>
 						<td>
-							<input type="url" id="UploadSourceUrl" name="source_url" maxlength="255" size="80" value="[ ' url | e attr ' ]">
+							<input type="url" id="UploadSourceUrl" name="source_url" class="cols-80" maxlength="255" size="80" value="[ ' url | e attr ' ]">
 						</td>
 					</tr>
 					<tr>
