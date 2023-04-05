@@ -25,7 +25,7 @@ class JavaHighlighter
 	/****************************************************************/
 	/* The variables that define the behavior of the analyzer       */
 	/****************************************************************/
-	public $case_sensitive	= true;						// case sensitive language or not
+	public $case_sensitive	= true;						// case-sensitive language or not
 	public $tok_delimiters	= " []()=+-/*:;,.\n\t\r  ";	// word delimiters
 
 	/***************************************************/

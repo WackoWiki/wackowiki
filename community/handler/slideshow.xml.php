@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// redirect to show method if page don't exists
+// redirect to show method if page don't exist
 if (!$this->page)
 {
 	$this->http->redirect($this->href());

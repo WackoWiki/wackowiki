@@ -97,7 +97,7 @@ $max_attempts = 15;
 // If you are not successful in displaying an image (but the
 // background is displayed), it's likely you are on a Mac PowerPC,
 // Sun, or other machine that uses "big-endian" byte storage for
-// multi-byte data types.  Switch the flag below for an alternate font
+// multibyte data types.  Switch the flag below for an alternate font
 // set that uses big-endian byte format.
 // Auto-Detect system endian value
 // Modified from: http://www.phpdig.net/ref/rn45re877.html

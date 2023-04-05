@@ -80,7 +80,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
 	// remember that mktime will automatically correct if invalid dates are entered
 	// for instance, mktime(0,0,0,12,32,1997) will be the date for Jan 1, 1998
-	// this provides a built in "rounding" feature to generate_calendar()
+	// this provides a built-in "rounding" feature to generate_calendar()
 
 	$day_names = []; // generate all the day names according to the current locale
 

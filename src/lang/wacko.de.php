@@ -1133,7 +1133,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Thema erfolgreich gesperrt',
 	'ModerateTopicUnlocked'		=> 'Thema erfolgreich entsperrt.',
 	'ModerateCommentsDeleted'	=> 'Ausgewählte Kommentare wurden erfolgreich gelöscht.',
-	'ModerateCommentsSplited'	=> 'Ausgewählte Kommentare wurden erfolgreich einem neuem Thema zugewiesen.',
+	'ModerateCommentsSplit'		=> 'Ausgewählte Kommentare wurden erfolgreich einem neuem Thema zugewiesen.',
 	'ModerateCommentsSplitFailed'	=> 'Hinweis: Aus irgendeinem Grund ist das Abtrennen der ausgewählen Kommentare zu einem neuen Thema gescheiterte.<br>Normalerweise sollte dies nicht geschehen, setze daher den Site-Administrator von dem Ereignis in Kenntnis.<br>Als Vorsichtsmaßnahme hat es die Kommentare in ihrer ursprünglichen Form belassen.',
 	'ModerateCommentsMoved'		=> 'Ausgewählte Kommentare erfolgreich zur angegebenen Seite verschoben.',
 

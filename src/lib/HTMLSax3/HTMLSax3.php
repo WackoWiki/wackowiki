@@ -485,7 +485,7 @@ class XML_HTMLSax3
 	}
 
 	/**
-	 * Sets a parser option. By default all options are switched off.
+	 * Sets a parser option. By default, all options are switched off.
 	 * Returns a PEAR Error if option is invalid<br />
 	 * <b>Available options:</b>
 	 * <ul>

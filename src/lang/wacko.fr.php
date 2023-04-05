@@ -1134,7 +1134,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Sujet effectivement verrouillé',
 	'ModerateTopicUnlocked'		=> 'Sujet effectivement déverrouillé.',
 	'ModerateCommentsDeleted'	=> 'Commentaire sélectionnés effectivement enlevés.',
-	'ModerateCommentsSplited'	=> 'Commentaire sélectionnés effectivement séparés en un nouveau sujet.',
+	'ModerateCommentsSplit'		=> 'Commentaire sélectionnés effectivement séparés en un nouveau sujet.',
 	'ModerateCommentsSplitFailed'	=> 'Note: Pour une certaine raison la séparation des commentaires sélectionnés en un nouveau sujet a échoué.<br>Ceci ne devrait normalement pas arriver, signalez-le donc à l’administrateur du site.<br>Par mesure de précaution, les éléments ont été conservés dans leur forme originelle.',
 	'ModerateCommentsMoved'		=> 'commentaires sélectionnés effectivement déplacés vers une page donnée.',
 

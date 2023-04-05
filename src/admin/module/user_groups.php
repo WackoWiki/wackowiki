@@ -27,7 +27,7 @@ function admin_user_groups($engine, $module)
 
 /*
  * Pre-defined groups
- * Pre-defined groups are special groups, they cannot be deleted or directly modified. However you can still add users and alter basic settings.
+ * Pre-defined groups are special groups, they cannot be deleted or directly modified. However, you can still add users and alter basic settings.
  *
  * User defined groups
  * These are groups created by you or another admin on this wiki. You can manage memberships as well as edit group properties or even delete the group.

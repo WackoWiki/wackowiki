@@ -105,7 +105,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$this->sticky__log = array_slice($this->sticky__log, 0, 1) + ['...'] + array_slice($this->sticky__log, -10, null);
 			}
 
-			// let old page live for some seconds to gather missing requests (ajax etc)
+			// let old page live for some seconds to gather missing requests (ajax etc.)
 			if (!isset($this->__expire))
 			{
 				$this->__expire = ($delete_old? 0 : $now + 5); // STS magic number

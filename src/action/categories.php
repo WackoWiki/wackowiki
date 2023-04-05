@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* shows all categories assigned to an particular object (page, file)
+/* shows all categories assigned to a particular object (page, file)
 	[one], [two], [tree]
    USAGE:
 	{{categories

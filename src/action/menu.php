@@ -179,7 +179,7 @@ if (isset($_POST['_user_menu']))
 			}
 			else
 			{
-				// page does not exits
+				// page does not exit
 				$message .= $this->_t('DoesNotExists');
 			}
 		}

@@ -1134,7 +1134,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Emnet blev blokeret.',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Udvalgte kommentarer fjernet med succes.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 

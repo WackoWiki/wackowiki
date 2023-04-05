@@ -160,7 +160,7 @@ class GPG
 		else						return $this->context = "--no-default-keyring --keyring {$this->homedir}/" . $new;
 	}
 
-	// generate an unique challenge token C as follows:
+	// generate a unique challenge token C as follows:
 	//	C = T,P,H(S,U,T,P)
 	// where T - unix timestamp, P - procedure ID (see below),
 	// S - system secret value, U - user session ID. because
@@ -178,7 +178,7 @@ class GPG
 	// simple identification string. currently defined are:
 	//	'upload_pk'		- uploading a key into the user profile
 	//	'delete_pk'		- removing a key from the profile
-	//	'changepwd'		- changing password for logged in user
+	//	'changepwd'		- changing password for logged-in user
 	//	'changemail'	- changing email address
 	function create_token($procedure)
 	{

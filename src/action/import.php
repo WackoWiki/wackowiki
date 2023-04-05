@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 
 	i.e. no relative addressing
 
-	This is a Admins only action, it requirers always write access and it will overwrite pages indicriminatory.
+	This is an Admins only action, it requires always write access and it will overwrite pages indicriminatory.
 	The old version of the page can be still accessed via revisions, you might ensure revisions are enabled and not purged.
 */
 
@@ -83,7 +83,7 @@ if ($this->is_admin())
 					$page_id	= $this->get_page_id($tag);
 
 					// now we render it internally in the context of imported
-					// page so we can write the updated link tables
+					// page, so we can write the updated link tables
 					$this->context[++$this->current_context] = $tag;
 					$this->update_link_table($page_id, $body_r);
 					$this->current_context--;

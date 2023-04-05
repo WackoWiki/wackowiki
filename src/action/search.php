@@ -390,7 +390,7 @@ if (mb_strlen($phrase) >= 3)
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				// Don't show it if it's a comment and we're hiding comments from this user
+				// Don't show it if it's a comment, and we're hiding comments from this user
 				if (!$page['comment_on_id'] || $this->user_allowed_comments())
 				{
 					$tpl->delim = $n++;

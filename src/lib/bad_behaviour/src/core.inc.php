@@ -106,7 +106,7 @@ function bb2_unpack_php_post_array($key, $value)
 // Let God sort 'em out!
 function bb2_start($settings)
 {
-	// Gather up all the information we need, first of all.
+	// Gather all the information we need, first of all.
 	$headers = bb2_load_headers();
 	// Postprocess the headers to mixed-case
 	// TODO: get the world to stop using PHP as CGI

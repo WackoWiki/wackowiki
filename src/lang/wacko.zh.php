@@ -1134,7 +1134,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> '话题成功屏蔽',
 	'ModerateTopicUnlocked'		=> '话题成功解锁。',
 	'ModerateCommentsDeleted'	=> '所选评论已成功删除。',
-	'ModerateCommentsSplited'	=> '所选评论已成功分离到新主题中。',
+	'ModerateCommentsSplit'		=> '所选评论已成功分离到新主题中。',
 	'ModerateCommentsSplitFailed'	=> '注意：由于某种原因，将所选评论与新主题分开失败。<br>通常这不应该发生，因此请让事件站点管理员处理。<br>作为预防措施，问题已保留为原始形式。',
 	'ModerateCommentsMoved'		=> '所选评论已成功迁移到给定页面。',
 

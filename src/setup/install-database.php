@@ -93,7 +93,7 @@ if ($config['is_update'])
 }
 
 /*
- Setup the tables depending on which database we selected
+ Set up the tables depending on which database we selected
 
  mysqli_legacy which is the default clause
  or pdo

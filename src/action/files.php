@@ -112,7 +112,7 @@ $order_by = match($sql_sort) {
 #	$method = '';
 #}
 
-// do we allowed to see?
+// do we allow to see?
 if (!$global)
 {
 	if ($page == '')

@@ -1134,7 +1134,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Tópico bloqueado con éxito',
 	'ModerateTopicUnlocked'		=> 'Tópico desbloqueado con éxito.',
 	'ModerateCommentsDeleted'	=> 'Comentarios seleccionados eliminados con éxito.',
-	'ModerateCommentsSplited'	=> 'Comentarios seleccionados separados con éxito en nuevo tópico.',
+	'ModerateCommentsSplit'		=> 'Comentarios seleccionados separados con éxito en nuevo tópico.',
 	'ModerateCommentsSplitFailed'	=> 'Observación: Ocurrió un error al intentar separar los comentarios seleccionados a un nuevo tópico.<br>Esto no debería suceder, por favor comunique el incidente al administrador del sitio.<br>Como forma de precaución se preservaron los datos en su forma original.',
 	'ModerateCommentsMoved'		=> 'Comentarios seleccionados migrados con éxito a la página indicada.',
 

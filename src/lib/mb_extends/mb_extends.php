@@ -35,7 +35,7 @@ function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
 /**
 * UTF-8 aware replacement for ltrim()
 * Note: you only need to use this if you are supplying the charlist
-* optional arg and it contains UTF-8 characters. Otherwise ltrim will
+* optional arg and it contains UTF-8 characters. Otherwise, ltrim will
 * work normally on a UTF-8 string
 * @see https://www.php.net/ltrim
 * @return string
@@ -56,7 +56,7 @@ function utf8_ltrim($str, $charlist = false)
 /**
 * UTF-8 aware replacement for rtrim()
 * Note: you only need to use this if you are supplying the charlist
-* optional arg and it contains UTF-8 characters. Otherwise rtrim will
+* optional arg and it contains UTF-8 characters. Otherwise, rtrim will
 * work normally on a UTF-8 string
 * @see https://www.php.net/rtrim
 * @return string
@@ -77,7 +77,7 @@ function utf8_rtrim($str, $charlist = false)
 }
 
 /**
-* Replacement for str_pad. $pad_str may contain multi-byte characters.
+* Replacement for str_pad. $pad_str may contain multibyte characters.
 * @param string $input
 * @param int $length
 * @param string $pad_str
@@ -131,7 +131,7 @@ function utf8_str_pad($input, $length, $pad_str = ' ', $type = STR_PAD_RIGHT)
 /**
 * UTF-8 aware replacement for trim()
 * Note: you only need to use this if you are supplying the charlist
-* optional arg and it contains UTF-8 characters. Otherwise trim will
+* optional arg and it contains UTF-8 characters. Otherwise, trim will
 * work normally on a UTF-8 string
 * @see https://www.php.net/trim
 * @return string

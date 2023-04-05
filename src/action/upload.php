@@ -50,7 +50,7 @@ if ($this->can_upload(true))
 		$tpl->u_s_maxsize = floor($maxsize);
 	}
 
-	// if you have no write access and you are not admin, you can upload only "global" file
+	// if you have no write access, and you are not admin, you can upload only "global" file
 	if (!(	$this->has_access('read')
 		 && $this->has_access('write')
 		 && $this->has_access('upload'))

@@ -167,7 +167,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 				}
 			}
 
-			// now we render it internally so we can write the updated page_link table.
+			// now we render it internally, so we can write the updated page_link table.
 			$this->update_link_table($this->get_page_id($tag), $body_r);
 
 			$this->set_message($this->_t('CommentAdded'), 'success');

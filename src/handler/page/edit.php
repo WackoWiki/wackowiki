@@ -301,7 +301,7 @@ if ($this->has_access('read')
 	$tpl->enter('f_');
 
 	/**
-	 * "cf" attribute: it is for so called "critical fields" in the form.
+	 * "cf" attribute: it is for so-called "critical fields" in the form.
 	 * It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
 	 * "You are going to leave this page, but there are some changes you made but not saved yet."
 	 * Is used by this script to determine which changes it needs to monitor.

@@ -13,7 +13,7 @@
  *
  * no need to sync ALL languages manually - just edit english and push
  * changes to other langs (new messages will be english, though, and if
- * translation is available but you change %1 or other formatting - be
+ * translation is available, but you change %1 or other formatting - be
  * aware: it is better to remove it, resync to other langs, than add
  * new, resync again. translation would be lost, though)
  *

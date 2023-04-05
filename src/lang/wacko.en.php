@@ -1134,7 +1134,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Topic successfully blocked',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
@@ -1274,7 +1274,7 @@ $wacko_translation = [
 	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
 	'LogRenamedPage'			=> 'Page ##%1## renamed to [[/%2]]',
 	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
-	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
+	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
 	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recover his forgotten password',

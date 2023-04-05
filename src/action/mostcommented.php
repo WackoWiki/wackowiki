@@ -70,7 +70,7 @@ else
 	$tag = $this->unwrap_link($page);
 
 	// $recurse
-	//	true	- recurses and includes all the sub pages of sub pages (and so on) in the listing
+	//	true	- recurses and includes all the sub-pages of sub-pages (and so on) in the listing
 	//	false	- display only pages directly under the selected page, not their kids and grandkids
 	(!$dontrecurse || $dontrecurse == 'false')
 		? $recurse = true

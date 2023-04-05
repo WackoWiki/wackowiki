@@ -70,7 +70,7 @@ $nav_offset		??= 1;
 $limit			= (int) $max;
 $images_row		= (int) $perrow;
 
-// we using a parameter token here to sort out multiple instances
+// we're using a parameter token here to sort out multiple instances
 $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
 
 // add PhotoSwipe
@@ -111,7 +111,7 @@ $order_by		= match($order) {
 	default			=> 'file_name ASC',
 };
 
-// do we allowed to see?
+// do we allow to see?
 if (!$global)
 {
 	if ($page == '')
@@ -181,7 +181,7 @@ if ($can_view)
 		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}", true);
 
-	// Making an gallery
+	// Making a gallery
 	$cur = 0;
 
 	if (!$nomark)
@@ -294,7 +294,7 @@ if ($can_view)
 						}
 					}
 
-					// IDEA: adding an additional field like 'tumbnail' in the 'file' table for tracking,
+					// IDEA: adding a field like 'thumbnail' in the 'file' table for tracking,
 					// there might be many derived thumbs from the original image
 				}
 

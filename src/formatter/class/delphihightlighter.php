@@ -23,7 +23,7 @@ class DelphiHightlighter
 	/****************************************************************/
 	/* The variables that define the behavior of the analyzer       */
 	/****************************************************************/
-	public $case_sensitive	= false;                   // case sensitive language or not
+	public $case_sensitive	= false;                   // case-sensitive language or not
 	public $tok_delimiters	= " []()=+-/*:;,.\n\t\r  "; // word delimiters
 
 	/***************************************************/

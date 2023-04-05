@@ -65,7 +65,7 @@ else
 		$gname		= file ("$tmpname.dot");
 		$gname		= explode(' ', $gname[0]);
 		$gname		= strtolower($gname[1]);
-		// the basename is generated in the same way like the upload-handler do this
+		// the basename is generated in the same way as the upload-handler do this
 		$fname		= $gv_settings['filedir'] . '/@' . $this->get_page_id() . '@' . $gname;
 
 		// step 2: prepare and run the image command and put the image in the upload dir and database

@@ -9,7 +9,7 @@ if ($config['tls'] && (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT']
 require_once 'setup/common.php';
 global $config;
 
-// If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.
+// If we have any config data in the _POST then it means they have somehow navigated backwards, so we should preserve their updated values.
 if (isset($_POST['config']))
 {
 	$config_parameters	= $_POST['config'];

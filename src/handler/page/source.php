@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	the source text will be shown with exception of those fragments which are hidden by formatters %%(comment)..%%
+	the source text will be shown with exception to those fragments which are hidden by formatters %%(comment)..%%
 */
 
 # $this->ensure_page(true); // we allow also comments, like we do in edit handler

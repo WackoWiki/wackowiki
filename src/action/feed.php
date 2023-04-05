@@ -161,7 +161,7 @@ else
 			$tpl->leave();
 		}
 
-		// we using a parameter token here to sort out multiple instances
+		// we're using a parameter token here to sort out multiple instances
 		$param_token	= substr(hash('sha1', $url . $nomark . $time . $max), 0, 8);
 		$count			= $feed->get_item_quantity();
 		$pagination		= $this->pagination(($count ?? null), $max, 'p', $p_mode + ['#' => $param_token]);
@@ -177,7 +177,7 @@ else
 
 		$tpl->enter('i_');
 
-		// go through all of the items in the feed
+		// go through all the items in the feed
 		foreach ($feed->get_items($pagination['offset'], (int) $max) as $item)
 		{
 			if ($item->get_date())

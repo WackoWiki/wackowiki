@@ -109,7 +109,7 @@ else // login
 			// let's begin pessimistically ;)
 			$error = $this->_t('LoginIncorrect');
 
-			// if user name already exists, check password
+			// if username already exists, check password
 			// check email dummy field in search for bots
 			if (!$email && ($user = $this->load_user($user_name)))
 			{

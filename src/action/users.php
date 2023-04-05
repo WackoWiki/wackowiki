@@ -598,7 +598,7 @@ else
 
 	if ($_user !== '')
 	{
-		// goto user profile directly if exact user name specified
+		// goto user profile directly if exact username specified
 		if (!$group_id && $this->load_user($_user))
 		{
 			$params['profile'] = $_user;
