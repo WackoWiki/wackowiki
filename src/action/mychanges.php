@@ -140,7 +140,7 @@ if ($user_id = $this->get_user_id())
 				}
 			}
 
-			$tpl->leave();
+			$tpl->leave(); // page_
 		}
 		else
 		{

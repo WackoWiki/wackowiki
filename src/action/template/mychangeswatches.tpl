@@ -14,10 +14,19 @@
 		
 		[ '' pagination '' ]
 		<ul class="ul-list hl-line">
-			[= l _ =
-				<li>
-					<small>([ ' time ' ])</small> [ ' link ' ]
-				</li>
+			[= page _ =
+				<li><strong>[ ' day ' ]</strong>
+					<ul class="hl-line">
+						[= l _ =
+							<li>
+								[= t _ =
+									[ ' time ' ] — 
+								=]
+								[ ' link ' ]
+							</li>
+						=]
+					</ul>
+				<br></li>
 			=]
 		</ul>
 		[ '' pagination '' ]
