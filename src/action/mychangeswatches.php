@@ -5,10 +5,10 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO: add user and change notes
-
-if (!isset($profile))	$profile = ''; // user action
+// set defaults
 if (!isset($max))		$max = null;
+if (!isset($profile))	$profile = ''; // user action
+if (!isset($title))		$title = 0;
 
 if ($user_id = $this->get_user_id())
 {
@@ -19,27 +19,26 @@ if ($user_id = $this->get_user_id())
 
 	$tpl->href	= $this->href('', '', $profile + ['mode' => 'mychangeswatches', 'reset' => 1, '#' => 'list']);
 
+	$selector =
+		"FROM {$prefix}page AS p, {$prefix}watch AS w " .
+		"WHERE p.page_id = w.page_id " .
+			"AND p.modified > w.watch_time " .
+			"AND w.user_id = " . (int) $user_id . " " .
+			"AND p.user_id <> " . (int) $user_id . " ";
+
 	$count	= $this->db->load_single(
-			"SELECT COUNT(p.page_id) AS n " .
-			"FROM {$prefix}page AS p, {$prefix}watch AS w " .
-			"WHERE p.page_id = w.page_id " .
-				"AND p.modified > w.watch_time " .
-				"AND w.user_id = " . (int) $user_id . " " .
-				"AND p.user_id <> " . (int) $user_id . " " .
-			"GROUP BY p.tag ", true);
+		"SELECT COUNT(p.page_id) AS n " .
+		$selector .
+		"GROUP BY p.tag ", true);
 
 	$pagination = $this->pagination($count['n'], $max, 'p', $profile);
 
 	$pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.modified, w.user_id " .
-			"FROM {$prefix}page AS p, {$prefix}watch AS w " .
-			"WHERE p.page_id = w.page_id " .
-				"AND p.modified > w.watch_time " .
-				"AND w.user_id = " . (int) $user_id . " " .
-				"AND p.user_id <> " . (int) $user_id . " " .
-			"GROUP BY p.tag " .
-			"ORDER BY p.modified DESC, p.tag ASC " .
-			$pagination['limit'], true);
+		"SELECT p.page_id, p.tag, p.title, p.modified, p.edit_note, p.user_id " .
+		$selector .
+		"GROUP BY p.tag, p.page_id, p.modified, w.user_id " .
+		"ORDER BY p.modified DESC, p.tag ASC " .
+		$pagination['limit'], true);
 
 	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages)
 	{
@@ -62,14 +61,40 @@ if ($user_id = $this->get_user_id())
 	{
 		foreach ($pages as $page)
 		{
+			$this->cache_page($page, true);
+			$page_ids[]	= $page['page_id'];
+		}
+
+		$this->preload_acl($page_ids);
+
+		$tpl->enter('page_');
+
+		foreach ($pages as $page)
+		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				$text = $page['tag'];
+				$text = $title ? $page['title'] : $page['tag'];
+				$alt  = $title ? $page['tag'] : $page['title'];
 
-				$tpl->l_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->sql_time_formatted($page['modified']), $this->_t('History'));
-				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
+				$this->sql2datetime($page['modified'], $day, $time);
+
+				if ($day != $cur_day)
+				{
+					$tpl->day = $cur_day = $day;
+				}
+
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text, $alt);
+				$tpl->l_user	= $this->user_link($page['user_name'], true, false);
+				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'));
+
+				if ($page['edit_note'])
+				{
+					$tpl->l_edit_note = $page['edit_note'];
+				}
 			}
 		}
+
+		$tpl->leave(); // page_
 	}
 	else
 	{

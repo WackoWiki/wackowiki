@@ -7,10 +7,11 @@ if (!defined('IN_WACKO'))
 
 // {{mychanges [max=Number] [bydate=1]}}
 
-if (!isset($title))		$title = 0;
+// set defaults
 if (!isset($bydate))	$bydate = '';
-if (!isset($profile))	$profile = null; // user action
 if (!isset($max))		$max = null;
+if (!isset($profile))	$profile = null; // user action
+if (!isset($title))		$title = 0;
 
 $title			= (int) $title;
 $profile		= ($profile? ['profile' => $profile] : []);
@@ -139,7 +140,7 @@ if ($user_id = $this->get_user_id())
 				}
 			}
 
-			$tpl->leave();
+			$tpl->leave(); // page_
 		}
 		else
 		{
