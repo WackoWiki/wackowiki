@@ -76,7 +76,7 @@ if ($config['is_update'])
 {
 	if (version_compare($config['wacko_version'], '6.1.37', '<'))
 	{
-		// reset extensions to new default
+		$config['max_page_size']		= 2048 * 1024;
 		$config['upload_banned_exts']	= 'asa, asax, ascx, ashx, asmx, asp, aspx, axd, bat, cdx, cer, cgi, cmd, com, config, cpl, csproj, cs, dll, exe, htm, html, htr, htw, ida, idc, idq, jhtml, js, jsb, jsp, licx, mht, mhtml, msi, phar, php, php3, php4, php5, php7, pht, phtm, phtml, pif, pl, printer, py, rem, resources, resx, scr, shtm, shtml, soap, ssi, stm, vb, vbproj, vbs, vdisco, vxd, webinfo, xap, xht, xhtm, xhtml';
 	}
 }

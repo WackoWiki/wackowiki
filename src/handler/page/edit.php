@@ -141,7 +141,7 @@ if ($this->has_access('read')
 			}
 
 			// check text length
-			if ($text_size > $this->db->max_page_size)
+			if ($this->db->max_page_size && $text_size > $this->db->max_page_size)
 			{
 				$message = Ut::perc_replace(
 					$this->_t('TextDbOversize'),
@@ -301,7 +301,7 @@ if ($this->has_access('read')
 	$tpl->enter('f_');
 
 	/**
-	 * "cf" attribute: it is for so called "critical fields" in the form.
+	 * "cf" attribute: it is for so-called "critical fields" in the form.
 	 * It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
 	 * "You are going to leave this page, but there are some changes you made but not saved yet."
 	 * Is used by this script to determine which changes it needs to monitor.
@@ -432,7 +432,7 @@ if ($this->has_access('read')
 
 	if (!$this->page && $words = $this->get_categories_list($this->page_lang, true))
 	{
-		$tpl->c_categories = $this->show_category_form($this->page_lang, '', OBJECT_PAGE, false, false);
+		$tpl->c_categories = $this->show_category_form($this->page_lang, null, OBJECT_PAGE, false, false);
 	}
 
 	if ($this->page? $this->db->captcha_edit_page : $this->db->captcha_new_page)
