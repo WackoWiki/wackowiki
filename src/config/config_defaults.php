@@ -106,7 +106,7 @@ $wacko_config_defaults = [
 
 	'enable_comments'				=> 1,
 	'hide_revisions'				=> 0,
-	'show_permalink'				=> 1,
+	'show_permalink'				=> 0,
 	'diff_modes'					=> '0,1,2,3,4,5',
 	'default_diff_mode'				=> 3,
 	'notify_diff_mode'				=> 2,
