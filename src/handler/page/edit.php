@@ -141,7 +141,7 @@ if ($this->has_access('read')
 			}
 
 			// check text length
-			if ($text_size > $this->db->max_page_size)
+			if ($this->db->max_page_size && $text_size > $this->db->max_page_size)
 			{
 				$message = Ut::perc_replace(
 					$this->_t('TextDbOversize'),
