@@ -26,7 +26,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 	$logs			= [];
 	$ikeys			= '';
 	$ifiles			= '';
-	$dir			= UPLOAD_BACKUP_DIR . '/';
+	$backup_dir		= UPLOAD_BACKUP_DIR . '/';
 
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = [];
@@ -49,12 +49,13 @@ function admin_db_restore($engine, $module, $tables, $directories)
 		&&  !isset($_POST['start']))
 		{
 			// read backup log
-			$log = file(Ut::join_path($dir, $backup_id, BACKUP_FILE_LOG), FILE_IGNORE_NEW_LINES);
+			$text	= file_get_contents(Ut::join_path($backup_dir, $backup_id, BACKUP_FILE_LOG));
+			$log	= Ut::unserialize($text);
 
 			echo $engine->form_open('restore_backup');
 
 			// check for possible backwards compatibility issues if the version differs
-			if ($log[6] !== WACKO_VERSION)
+			if ($log['wacko_version'] !== WACKO_VERSION)
 			{
 				$engine->show_message($engine->_t('RestoreWrongVersion'), 'error') ;
 			}
@@ -75,19 +76,19 @@ function admin_db_restore($engine, $module, $tables, $directories)
 								<td class="label">' .
 								'</td>
 								<th class="t-left nowrap">' .
-									$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
+									$engine->date_format($log['time'], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
 								'</th>
 							</tr>
 							<tr>
 								<td></td>
 								<td>
-									' . ($log[6] ?? null) . '
+									' . ($log['wacko_version'] ?? null) . '
 								</td>
 							</tr>
 							<tr>
 								<td></td>
 								<td>
-									' . (isset($log[7]) ? $engine->binary_multiples($log[7], false, true, true) : null) . '
+									' . (isset($log['size']) ? $engine->binary_multiples($log['size'], false, true, true) : null) . '
 								</td>
 							</tr>
 						</table>' .
@@ -97,7 +98,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" class="t-left nowrap">' .
-								$engine->_t('BackupCluster') . ' ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+								$engine->_t('BackupCluster') . ' ' . ($log['cluster'] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
 						echo '<tr>' .
@@ -109,7 +110,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						echo '<tr>' .
 								'<td>';
 
-						$list = explode(';', $log[3]);
+						$list = explode(';', $log['structure']);
 
 						foreach ($tables as $table)
 						{
@@ -127,7 +128,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						echo '</td>' . "\n" .
 							'<td>';
 
-						$list = explode(';', $log[4] ?? null);
+						$list = explode(';', $log['data'] ?? null);
 
 						foreach ($tables as $table)
 						{
@@ -145,7 +146,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						echo '</td>' . "\n" .
 							'<td>';
 
-						$list = explode(';', $log[5] ?? null);
+						$list = explode(';', $log['files'] ?? null);
 
 						foreach ($directories as $directory)
 						{
@@ -206,7 +207,8 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			if (isset($_POST['ignore_files']) && $_POST['ignore_files']	== 1) $ifiles	= true;
 
 			// read backup log
-			$log = file(Ut::join_path($dir, $pack, BACKUP_FILE_LOG), FILE_IGNORE_NEW_LINES);
+			$text	= file_get_contents(Ut::join_path($backup_dir, $pack, BACKUP_FILE_LOG));
+			$log	= Ut::unserialize($text);
 
 			// start process logging
 			$results = '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreStarted') . "\n" .
@@ -214,9 +216,9 @@ function admin_db_restore($engine, $module, $tables, $directories)
 				$engine->_t('RestoreParameters') . ':' . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedKeys') . ': ' . ($ikeys === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedFiles') . ': ' . ($ifiles === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n\n" .
-				$engine->_t('SavedCluster') . ': ' . ($log[2] ?: $engine->_t('RestoreNo')) . "\n" .
+				$engine->_t('SavedCluster') . ': ' . ($log['cluster'] ?: $engine->_t('RestoreNo')) . "\n" .
 				"\t" . Ut::perc_replace($engine->_t(
-					($log[2]
+					($log['cluster']
 						? 'DataProtection'
 						: 'AssumeDropTable'), SYSTEM_LANG), 'DROP TABLE') . "\n" .
 				'</strong>' . "\n\n";
@@ -225,10 +227,10 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreTableStructure') . "\n" .
 				'================================================</strong>' . "\n";
 
-			if ($log[3])
+			if ($log['structure'])
 			{
 				$results .= '<strong>' . $engine->_t('RunSqlQueries') . '</strong>' . "\n\n";
-				$results .= file_get_contents($dir . $pack . '/' . BACKUP_FILE_STRUCTURE) . "\n\n";
+				$results .= file_get_contents($backup_dir . $pack . '/' . BACKUP_FILE_STRUCTURE) . "\n\n";
 
 				// run
 				$total = put_table($engine, $pack);
@@ -244,12 +246,12 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreRecords') . "\n" .
 				'================================================</strong>' . "\n";
 
-			if ($log[4])
+			if ($log['data'])
 			{
-				$list = explode(';', $log[4]);
+				$list = explode(';', $log['data']);
 
 				// sql mode
-				if		(!$log[2])			$mode = 'INSERT';
+				if		(!$log['cluster'])	$mode = 'INSERT';
 				else if	($ikeys === true)	$mode = 'INSERT IGNORE';
 				else if	(!$ikeys)			$mode = 'REPLACE';
 
@@ -289,9 +291,9 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoringFiles') . "\n" .
 				'================================================</strong>' . "\n";
 
-			if (isset($log[5]) && $log[5])
+			if (isset($log['files']) && $log['files'])
 			{
-				$list = explode(';', $log[5]);
+				$list = explode(';', $log['files']);
 
 				// rewrite mode
 				if ($ifiles === true)	$keep = 1;
@@ -402,12 +404,12 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			<?php echo $engine->_t('RestoreInfo'); ?>
 		</p>
 <?php
-		if (!(PHP_OS_FAMILY === 'Windows') && !is_executable($dir))
+		if (!(PHP_OS_FAMILY === 'Windows') && !is_executable($backup_dir))
 		{
-			echo substr(sprintf('%o', fileperms($dir)), -4) . "<br>\n";
+			echo substr(sprintf('%o', fileperms($backup_dir)), -4) . "<br>\n";
 			echo output_image($engine, false) .
 				'<strong class="red">' .
-					Ut::perc_replace($engine->_t('DirectoryNotExecutable'), ' <code>' . Ut::html($dir) . '</code>') .
+					Ut::perc_replace($engine->_t('DirectoryNotExecutable'), ' <code>' . Ut::html($backup_dir) . '</code>') .
 				'</strong><br>' . "\n";
 		}
 		else
@@ -419,21 +421,24 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			echo $engine->form_open('restore');
 
 			$control_buttons =
-				'<button type="submit" name="restore" id="restore-submit">' . $engine->_t('BackupRestore') . '</button>' .
+				'<button type="submit" name="restore" id="restore-submit">' . $engine->_t('BackupRestore') . '</button> ' .
 				'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('BackupRemove') . '</button>';
 
 			// open backups dir and run through all subdirs
-			if ($dh = opendir(rtrim($dir, '/')))
+			if ($dh = opendir(rtrim($backup_dir, '/')))
 			{
-				while (false !== ($packname = readdir($dh)))
+				while (false !== ($pack_dir = readdir($dh)))
 				{
+					$file = $backup_dir . $pack_dir . '/' . BACKUP_FILE_LOG;
+
 					// we only need subdirs with appropriate name length
 					// and with backup register contained within
-					if (is_dir($dir . $packname) === true //&& strlen($packname) == 49)
-						&& file_exists($dir . $packname . '/' . BACKUP_FILE_LOG) === true)
+					if (is_dir($backup_dir . $pack_dir) === true //&& strlen($packname) == 49)
+						&& file_exists($file) === true)
 					{
-						$_array1	= str_replace("\n", '', file($dir . $packname . '/' . BACKUP_FILE_LOG)); // TODO: file returns array
-						$_array2	= ['pack' => $packname];
+						$text		= file_get_contents($file);
+						$_array1	= Ut::unserialize($text);
+						$_array2	= ['pack' => $pack_dir];
 						// read log
 						$logs[]		= array_merge($_array1, $_array2);
 					} // end dir check
@@ -471,20 +476,20 @@ function admin_db_restore($engine, $module, $tables, $directories)
 										'</td>
 										<th class="t-left nowrap">' .
 											'<label for="pack_' . $i . '">' .
-												$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
+												$engine->date_format($log['time'], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
 												'</label>' .
 										'</th>
 									</tr>
 									<tr>
 										<td></td>
 										<td>
-											' . ($log[6] ?? null) . '
+											' . ($log['wacko_version'] ?? null) . '
 										</td>
 									</tr>
 									<tr>
 										<td></td>
 										<td>
-											' . (isset($log[7]) ? $engine->binary_multiples($log[7], false, true, true) : null) . '
+											' . (isset($log['size']) ? $engine->binary_multiples($log['size'], false, true, true) : null) . '
 										</td>
 									</tr>
 									<tr>
@@ -500,7 +505,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						echo '<td><table>';
 							// cluster root
 							echo '<tr><th colspan="3" class="t-left nowrap">' .
-									$engine->_t('BackupCluster') . ' ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+									$engine->_t('BackupCluster') . ' ' . ($log['cluster'] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents
 							echo '<tr>' .
@@ -512,7 +517,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 							echo '<tr>' .
 									'<td>';
 
-							$list = explode(';', $log[3]);
+							$list = explode(';', $log['structure']);
 
 							foreach ($tables as $table)
 							{
@@ -530,7 +535,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 							echo '</td>' . "\n" .
 								'<td>';
 
-							$list = explode(';', $log[4] ?? null);
+							$list = explode(';', $log['data'] ?? null);
 
 							foreach ($tables as $table)
 							{
@@ -548,7 +553,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 							echo '</td>' . "\n" .
 								'<td>';
 
-							$list = explode(';', $log[5] ?? null);
+							$list = explode(';', $log['files'] ?? null);
 
 							foreach ($directories as $directory)
 							{
