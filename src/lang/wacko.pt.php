@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'InvalidNamespace'			=> 'Espaço de nomes inválido dado.',
 	'DoesNotExists'				=> 'Esta página ainda não existe.',
-	'PromptCreate'				=> 'Talvez a queira <a href="%1">criar</a> agora?',
+	'PromptCreate'				=> 'Talvez a queira <strong><a href="%1">criar</a></strong> agora?',
 	'RevisionHint'				=> 'Esta é uma revisão antiga de <a href="%1">%2</a> de %3 editado por %4.',
 	'ReadAccessDenied'			=> 'Não está autorizado a ver esta página.',
 	'ReadAccessDeniedHintGuest'	=> 'Para ler esta página, deve iniciar sessão.',

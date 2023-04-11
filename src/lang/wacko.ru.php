@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Тема поломана',
 	'InvalidNamespace'			=> 'Указано неверное пространство имён.',
 	'DoesNotExists'				=> 'Такой страницы не существует.',
-	'PromptCreate'				=> 'Хотите <a href="%1">создать</a>?',
+	'PromptCreate'				=> 'Хотите <strong><a href="%1">создать</a></strong>?',
 	'RevisionHint'				=> 'Это старая версия <a href="%1">%2</a> за %3 под редакцией %4.',
 	'ReadAccessDenied'			=> 'У вас нет прав на чтение этой страницы.',
 	'ReadAccessDeniedHintGuest'	=> 'Чтобы прочитать эту страницу, вы должны войти в систему.',

@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Thema is beschadigd',
 	'InvalidNamespace'			=> 'Ongeldige naamruimte gegeven.',
 	'DoesNotExists'				=> 'Deze pagina bestaat nog niet.',
-	'PromptCreate'				=> 'Wil je deze <a href="%1">aanmaken</a>?',
+	'PromptCreate'				=> 'Wil je deze <strong><a href="%1">aanmaken</a></strong>?',
 	'RevisionHint'				=> 'Dit is een oude revisie van <a href="%1">%2</a> from %3 bewerkt door %4.',
 	'ReadAccessDenied'			=> 'U heeft geen leesrechten op deze pagina.',
 	'ReadAccessDeniedHintGuest'	=> 'Om deze pagina te lezen, moet je inloggen.',
