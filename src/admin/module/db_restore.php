@@ -458,7 +458,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						</tr>
 	<?php
 					// sort 'creation date' descending with custom numeric comparisons function
-					usort($logs, function (array $a, array $b) { return $b[0] - $a[0]; });
+					usort($logs, function (array $a, array $b) { return $b['time'] - $a['time']; });
 
 					foreach ($logs as $i => $log)
 					{
