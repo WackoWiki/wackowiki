@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Tema está defecto',
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Esta página aún no existe.',
-	'PromptCreate'				=> 'Quieres <a href="%1">añadirla</a>?',
+	'PromptCreate'				=> 'Quieres <strong><a href="%1">añadirla</a></strong>?',
 	'RevisionHint'				=> 'Esto es una version antigua de <a href="%1">%2</a> de %3 editado por %4.',
 	'ReadAccessDenied'			=> 'No tienes permiso para leer esta página.',
 	'ReadAccessDeniedHintGuest'	=> 'Para leer esta página, debe iniciar sesión.',
@@ -996,7 +996,8 @@ $wacko_translation = [
 	'Back'						=> 'Anterior',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'Filtro',
+	'OptionalFilters'			=> 'Filtros opcionales:',
 	'Any'						=> 'Todos',
 
 	// My Groups
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Tópico bloqueado con éxito',
 	'ModerateTopicUnlocked'		=> 'Tópico desbloqueado con éxito.',
 	'ModerateCommentsDeleted'	=> 'Comentarios seleccionados eliminados con éxito.',
-	'ModerateCommentsSplited'	=> 'Comentarios seleccionados separados con éxito en nuevo tópico.',
+	'ModerateCommentsSplit'		=> 'Comentarios seleccionados separados con éxito en nuevo tópico.',
 	'ModerateCommentsSplitFailed'	=> 'Observación: Ocurrió un error al intentar separar los comentarios seleccionados a un nuevo tópico.<br>Esto no debería suceder, por favor comunique el incidente al administrador del sitio.<br>Como forma de precaución se preservaron los datos en su forma original.',
 	'ModerateCommentsMoved'		=> 'Comentarios seleccionados migrados con éxito a la página indicada.',
 

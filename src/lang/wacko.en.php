@@ -997,6 +997,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'Filter',
+	'OptionalFilters'			=> 'Optional filters:',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Topic successfully blocked',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
@@ -1172,7 +1173,7 @@ $wacko_translation = [
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',
-	'ForumLocked'				=> 'section blocked',
+	'ForumLocked'				=> 'section locked',
 	'ForumUpdated'				=> 'updated',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',

@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Ta strona jeszcze nie istnieje.',
-	'PromptCreate'				=> 'Możesz ją <a href="%1">utworzyć</a>...',
+	'PromptCreate'				=> 'Możesz ją <strong><a href="%1">utworzyć</a></strong>...',
 	'RevisionHint'				=> 'To jest poprzednia wersja <a href="%1">%2</a> z %3 redagowany przez %4.',
 	'ReadAccessDenied'			=> 'Przepraszamy! Nie masz dostępu do tej strony.',
 	'ReadAccessDeniedHintGuest'	=> 'Aby przeczytać tę stronę, należy się zalogować.',
@@ -997,6 +997,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'Filtr',
+	'OptionalFilters'			=> 'Dodatkowe filtry:',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Topic successfully blocked',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 

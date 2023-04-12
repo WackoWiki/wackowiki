@@ -7308,15 +7308,15 @@ class Wacko
 		{
 			// override with perpage settings
 			$page_options = [
+				'allow_rawhtml',
+				'disable_safehtml',
 				'footer_comments',
 				'footer_files',
 				'footer_rating',
-				'hide_toc',
 				'hide_index',
-				'tree_level',
-				'allow_rawhtml',
-				'disable_safehtml',
+				'hide_toc',
 				'theme',
+				'tree_level',
 			];
 
 			foreach ($page_options as $key)

@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Αυτή η σελίδα δεν υπάρχει ακόμα.',
-	'PromptCreate'				=> 'Ίσως θέλετε να την <a href="%1">δημιουργήσετε</a> ?',
+	'PromptCreate'				=> 'Ίσως θέλετε να την <strong><a href="%1">δημιουργήσετε</a></strong> ?',
 	'RevisionHint'				=> 'Αυτή είναι μία παλαιότερη έκδοση της <a href="%1">%2</a> από %3 επιμελήθηκε ο %4.',
 	'ReadAccessDenied'			=> 'Δεν επιτρέπετε να αναγνώσετε αυτή την σελίδα.',
 	'ReadAccessDeniedHintGuest'	=> 'Για να διαβάσετε αυτήν τη σελίδα, θα πρέπει να συνδεθείτε.',
@@ -996,7 +996,8 @@ $wacko_translation = [
 	'Back'						=> 'Πίσω',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'Φίλτρο',
+	'OptionalFilters'			=> 'Προαιρετικά φίλτρα:',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Topic successfully blocked',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
@@ -1172,7 +1173,7 @@ $wacko_translation = [
 	'ForumTopicSubmit'			=> 'Υποβολή θέματος',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',
-	'ForumLocked'				=> 'section blocked',
+	'ForumLocked'				=> 'section locked',
 	'ForumUpdated'				=> 'ενημερώθηκε',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',

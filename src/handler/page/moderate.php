@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// redirect to show method if page doesn't exists
+// redirect to show method if page doesn't exist
 if (!$this->page || $this->page['comment_on_id'])
 {
 	$this->http->redirect($this->href());
@@ -1053,7 +1053,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 							$write_comment_feed();
 
-							$this->set_message($this->_t('ModerateCommentsSplited'), 'success');
+							$this->set_message($this->_t('ModerateCommentsSplit'), 'success');
 							$this->http->redirect($this->href('moderate', $section . '/' . $tag));
 						}
 						else

@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Такава страница не съществува.',
-	'PromptCreate'				=> 'Искате ли <a href="%1">да я съзадете</a> ?',
+	'PromptCreate'				=> 'Искате ли <strong><a href="%1">да я съзадете</a></strong> ?',
 	'RevisionHint'				=> 'Това е стара версия на <a href="%1">%2</a> от %3 редактиран от %4.',
 	'ReadAccessDenied'			=> 'Вие нямате права за да четете тази страница.',
 	'ReadAccessDeniedHintGuest'	=> 'За да прочетете тази страница, трябва да влезете.',
@@ -996,7 +996,8 @@ $wacko_translation = [
 	'Back'						=> 'Обратно',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'Филтриране',
+	'OptionalFilters'			=> 'Опционални филтри:',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Topic successfully blocked',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
@@ -1172,7 +1173,7 @@ $wacko_translation = [
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',
-	'ForumLocked'				=> 'section blocked',
+	'ForumLocked'				=> 'section locked',
 	'ForumUpdated'				=> 'актуализиран',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',

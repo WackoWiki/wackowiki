@@ -210,13 +210,14 @@ function get_directory_size($path)
 // delete backup pack from the server
 function remove_pack($pack)
 {
-	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
+	$pack_dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	// read log
-	$log = file(Ut::join_path($packdir, BACKUP_FILE_LOG), FILE_IGNORE_NEW_LINES);
+	$text	= file_get_contents(Ut::join_path($pack_dir, BACKUP_FILE_LOG));
+	$log	= Ut::unserialize($text);
 
 	// get subdirs list (in reverse order)
-	$subdirs = explode(';', @$log[5]);
+	$subdirs = explode(';', @$log['files']);
 	rsort($subdirs);
 
 	// remove subdirs contents
@@ -224,7 +225,7 @@ function remove_pack($pack)
 	{
 		if ($subdir)
 		{
-			$dir = Ut::join_path($packdir, $subdir);
+			$dir = Ut::join_path($pack_dir, $subdir);
 			Ut::purge_directory($dir, 0, GLOB_ALL);
 			rmdir($dir);
 
@@ -232,16 +233,16 @@ function remove_pack($pack)
 			while (($i = strrpos($subdir, '/')) !== false)
 			{
 				$subdir = substr($subdir, 0, $i);
-				@rmdir(Ut::join_path($packdir, $subdir)); // @ - coz dir can be non-empty
+				@rmdir(Ut::join_path($pack_dir, $subdir)); // @ - coz dir can be non-empty
 			}
 		}
 	}
 
 	// remove pack contents and directory
-	if (is_dir($packdir))
+	if (is_dir($pack_dir))
 	{
-		Ut::purge_directory($packdir, 0, GLOB_ALL);
-		rmdir($packdir);
+		Ut::purge_directory($pack_dir, 0, GLOB_ALL);
+		rmdir($pack_dir);
 	}
 
 	return true;
@@ -679,7 +680,7 @@ function put_files($pack, $dir, $keep = false)
 	$total[0]	= 0;
 	$total[1]	= 0;
 
-	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
+	$pack_dir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
 
 	// restore files subdir or full path recursively if needed
 	$offset		= 0;
@@ -693,14 +694,14 @@ function put_files($pack, $dir, $keep = false)
 	ensure_dir($dir);
 
 	// open backup dir and run through all files
-	if ($dh = opendir($packdir))
+	if ($dh = opendir($pack_dir))
 	{
 		while (false !== ($file_name = readdir($dh)))
 		{
 			$plainfile = mb_substr($file_name, 0, - (mb_strlen(BACKUP_FILE_GZIP_SUFFIX)));
 
 			// skip subdirs
-			if (!is_dir(Ut::join_path($packdir, $file_name)))
+			if (!is_dir(Ut::join_path($pack_dir, $file_name)))
 			{
 				$fullname = Ut::join_path($dir, $plainfile);
 
@@ -721,7 +722,7 @@ function put_files($pack, $dir, $keep = false)
 				}
 
 				// open input and output files
-				$filez	= gzopen(Ut::join_path($packdir, $file_name), 'rb');
+				$filez	= gzopen(Ut::join_path($pack_dir, $file_name), 'rb');
 				$filep	= fopen($fullname, 'wb');
 				$r		= 0; // round number
 

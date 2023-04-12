@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Denne side eksisterer endnu ikke.',
-	'PromptCreate'				=> 'Vil du <a href="%1">oprette</a> den?',
+	'PromptCreate'				=> 'Vil du <strong><a href="%1">oprette</a></strong> den?',
 	'RevisionHint'				=> 'Dette er en ældre version af <a href="%1">%2</a> fra %3 redigeret af %4.',
 	'ReadAccessDenied'			=> 'Du har ikke lov til at se denne side.',
 	'ReadAccessDeniedHintGuest'	=> 'For at læse denne side skal du logge ind.',
@@ -996,7 +996,8 @@ $wacko_translation = [
 	'Back'						=> 'Tilbage',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'Filtrér',
+	'OptionalFilters'			=> 'Valgfrie filtre:',
 	'Any'						=> 'Nogen',
 
 	// My Groups
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Emnet blev blokeret.',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Udvalgte kommentarer fjernet med succes.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
@@ -1172,7 +1173,7 @@ $wacko_translation = [
 	'ForumTopicSubmit'			=> 'Indsend emne',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',
-	'ForumLocked'				=> 'section blocked',
+	'ForumLocked'				=> 'section locked',
 	'ForumUpdated'				=> 'opdateret',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',

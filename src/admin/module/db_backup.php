@@ -58,7 +58,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 	{
 		@set_time_limit(1800);
 
-		$time		= time();
+		$time		= time();				// backup time (unix format)
 		$pack		= set_pack_dir($time);	// backup directory
 		$root		= $_POST['root'] ?? '';
 		$engine->sanitize_page_tag($root);
@@ -156,32 +156,35 @@ function admin_db_backup($engine, $module, $tables, $directories)
 			unlink($filename);
 		}
 
-		// open file with write access
-		$file	= fopen($filename, 'w');
-
 		// log contents
 		$contents = [
-			$time,						// 0: backup time (unix format)
-			rtrim(substr($pack, strlen(UPLOAD_BACKUP_DIR) + 18), '/'),	// 1: id
-			$root,						// 2: cluster root
-			implode(';', $structure),	// 3: structure
-			implode(';', $data),		// 4: table data
-			implode(';', $files),		// 5: files
-			WACKO_VERSION,				// 6. wacko_version
-			get_directory_size($pack)	// 7: size
+			'time'			=> $time,
+			'cluster'		=> $root,
+			'structure'		=> implode(';', $structure),
+			'data'			=> implode(';', $data),
+			'files'			=> implode(';', $files),
+			'wacko_version'	=> WACKO_VERSION,
+			'size'			=> get_directory_size($pack)
 			// TODO: add metadata to avoid conflicts
-			// 8: unique_instance_key	-> warn / show user if he restores data from another deployment or
-			// 9: hash
+			// unique_instance_key	-> warn / show user if he restores data from another deployment or
+			// hash
 		];
 
+		ksort($contents, SORT_STRING);
+		$text = Ut::serialize($contents, JSON_PRETTY_PRINT);
+
 		// write log file
-		fwrite($file, implode("\n", $contents));
-		fclose($file);
+		file_put_contents($filename, $text);
 		chmod($filename, CHMOD_FILE);
 
 		$engine->log(1, Ut::perc_replace($engine->_t('LogSavedBackup', SYSTEM_LANG), trim($pack, '/')));
 
-		$message = '<p>' . Ut::perc_replace($engine->_t('BackupCompleted'), '<code>' . $pack . '</code>', $engine->href('', '', ['mode' => 'db_restore'])) . '</p>';
+		$message = '<p>' .
+			Ut::perc_replace(
+				$engine->_t('BackupCompleted'),
+				'<code>' . $pack . '</code>',
+				$engine->href('', '', ['mode' => 'db_restore'])) .
+			'</p>';
 
 		$engine->show_message($message, 'success');
 	}
@@ -212,7 +215,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 				</tr>
 				<tr>
 					<th><?php echo $engine->_t('BackupTable'); ?></th>
-					<th>  <a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
+					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
 					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1'); ?>"><?php echo $engine->_t('BackupData'); ?></a></th>
 				</tr>
 <?php
@@ -240,7 +243,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 ?>
 				<tr>
 					<th colspan="2"><?php echo $engine->_t('BackupFolder'); ?></th>
-					<th>  <a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
+					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
 				</tr>
 <?php
 			$i = 0;

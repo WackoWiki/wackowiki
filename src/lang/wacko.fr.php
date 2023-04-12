@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Ce Thème est corrompu',
 	'InvalidNamespace'			=> 'Espace de noms non valide.',
 	'DoesNotExists'				=> 'Cette page n’existe pas encore.',
-	'PromptCreate'				=> 'Peut-être voulez-vous la <a href="%1">créer</a> ?',
+	'PromptCreate'				=> 'Peut-être voulez-vous la <strong><a href="%1">créer</a></strong> ?',
 	'RevisionHint'				=> 'Ceci est une ancienne version de <a href="%1">%2</a> de %3 édité par %4.',
 	'ReadAccessDenied'			=> 'Vous n’êtes pas autorisé(e) à  voir cette page.',
 	'ReadAccessDeniedHintGuest'	=> 'Pour lire cette page, vous devez vous connecter.',
@@ -246,9 +246,9 @@ $wacko_translation = [
 	'AclSyntaxError'			=> 'Erreur de syntaxe dans la liste de contrôle d’accès',
 	'AclHelp'					=> '<code>*</code> - tout le monde est autorisé<br>' .
 									'<code>$</code> - seuls les utilisateurs enregistrés<br>' .
-									'<code>!</code> - un point d\'exclamation précédent nie le droit respectif<br>' .
+									'<code>!</code> - un point d’exclamation précédent nie le droit respectif<br>' .
 									'<code>[UserName]</code> - noms des utilisateurs autorisés<br>' .
-									'<code>[GroupName]</code> - noms des groupes d\'utilisateurs autorisés (alias)<br>' .
+									'<code>[GroupName]</code> - noms des groupes d’utilisateurs autorisés (alias)<br>' .
 									'<code>(une liste vide)</code> - seul le propriétaire de la page a accès',
 
 	'AccessMode'				=> 'Visibilité',
@@ -470,7 +470,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Rechercher :',
 	'TopicSearchResults'		=> 'Résultat de la recherche dans les sujets ',
 	'NotFoundInTopics'			=> 'non trouvé dans les sujets',
-	'FilterLangNotAvailable'	=> 'La langue sélectionnée n\'est pas disponible !',
+	'FilterLangNotAvailable'	=> 'La langue sélectionnée n’est pas disponible !',
 
 	'PostedBy'					=> 'posté par',
 	'ThisIsCommentOn'			=> 'Ceci est un commentaire sur',
@@ -480,7 +480,7 @@ $wacko_translation = [
 	'From'						=> 'de',
 	'For'						=> 'pour',
 	'ReturnToCommented'			=> 'Retour vers la page commentée',
-	'AbandonedComment'			=> 'La page à laquelle appartient ce commentaire n\'existe plus !',
+	'AbandonedComment'			=> 'La page à laquelle appartient ce commentaire n’existe plus !',
 
 	'PagesLinkingTo'			=> 'Pages ayant un lien vers',
 	'NoPageLinkingTo'			=> 'Aucune page n’a de lien vers',
@@ -538,9 +538,9 @@ $wacko_translation = [
 	'AccountDeleteConfirm'		=> 'Êtes-vous sûr de vouloir supprimer le compte ?',
 	'AccountDeleted'			=> 'Compte supprimé avec succès',
 	'AccountDeleteHeader'		=> 'Supprimer le compte %1',
-	'AccountDeleteInfo'			=> 'Les données que vous avez créées (e.g. e-mail, préférences, pièces jointes, entrées wiki) seront supprimées autant que possible. Notez toutefois que les données comme les pièces jointes et les entrées wiki ne peuvent pas être supprimées sans impacter le travail des autres utilisateurs. Ces données sont donc réaffectées à un compte appelé %1. Étant donné que les données de chaque compte supprimé sont réaffectées à ce compte, il ne sera plus possible de distinguer les données que vous avez créées de celles d\'un autre compte supprimé.',
-	'AccountDeleteWarning'		=> 'Supprimer votre compte d\'utilisateur est une action irréversible.',
-	'AccountDeleteHint'			=> 'Votre compte sera supprimé du système. Par conséquent, vous ne serez plus en mesure de vous identifier avec vos informations d\'identification actuelles. Vous pourrez choisir de redevenir un utilisateur de cette application en suivant les procédures habituelles.',
+	'AccountDeleteInfo'			=> 'Les données que vous avez créées (e.g. e-mail, préférences, pièces jointes, entrées wiki) seront supprimées autant que possible. Notez toutefois que les données comme les pièces jointes et les entrées wiki ne peuvent pas être supprimées sans impacter le travail des autres utilisateurs. Ces données sont donc réaffectées à un compte appelé %1. Étant donné que les données de chaque compte supprimé sont réaffectées à ce compte, il ne sera plus possible de distinguer les données que vous avez créées de celles d’un autre compte supprimé.',
+	'AccountDeleteWarning'		=> 'Supprimer votre compte d’utilisateur est une action irréversible.',
+	'AccountDeleteHint'			=> 'Votre compte sera supprimé du système. Par conséquent, vous ne serez plus en mesure de vous identifier avec vos informations d’identification actuelles. Vous pourrez choisir de redevenir un utilisateur de cette application en suivant les procédures habituelles.',
 	'AccountDeleteVerify'		=> 'Entrez votre login %1 pour vérifier la suppression. Une fois celui-ci soumis, vous devrez confirmer votre mot de passe.',
 
 	'MarkRead'					=> 'Marquer tout comme lu',
@@ -871,7 +871,7 @@ $wacko_translation = [
 	'UploadOverwrite'			=> 'Écraser les fichiers existants',
 	'FileDesc'					=> 'Description :',
 	'UploadForbidden'			=> 'Vous n’êtes pas autorisé à déposer des fichiers ici.',
-	'UploadOverwriteDenied'		=> 'Seul le propriétaire ou l\'administrateur du fichier peut écraser le fichier %1.',
+	'UploadOverwriteDenied'		=> 'Seul le propriétaire ou l’administrateur du fichier peut écraser le fichier %1.',
 	'UploadNoFile'				=> 'Il n’y avait pas de fichier joint au formulaire.',
 	'UploadMaxSizeReached'		=> 'La taille du fichier excède celle autorisée !',
 	'UploadDirNotWritable'		=> 'Le répertoire de dépôt n’est pas accessible en écriture!',
@@ -987,7 +987,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Rediriger des anciennes pages vers les nouvelles',
 
 	// pagination
-	'ToOverview'				=> 'Retour à l\'aperçu',
+	'ToOverview'				=> 'Retour à l’aperçu',
 	'ToThePage'					=> 'Vers la page:',
 	'Next'						=> 'Suivant',
 	'Prev'						=> 'Précédent',
@@ -996,7 +996,8 @@ $wacko_translation = [
 	'Back'						=> 'Arrière',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> 'Filtrer',
+	'OptionalFilters'			=> 'Filtres facultatifs :',
 	'Any'						=> 'Tout',
 
 	// My Groups
@@ -1039,7 +1040,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Cache de vignette',
 
 	// Embed
-	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="https://example.com/embed/video.mp4"}} )',
+	'EmbedNoURL'				=> 'Merci de spécifier l’adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Titre du flux',
@@ -1087,7 +1088,7 @@ $wacko_translation = [
 
 	// blog
 	'BlogNewTopic'				=> 'Créer un nouveau poste',
-	'NoPostAvailable'			=> 'Aucun article n\'est encore disponible.',
+	'NoPostAvailable'			=> 'Aucun article n’est encore disponible.',
 
 	// Review
 	'Reviewer'					=> 'Réviseur',
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Sujet effectivement verrouillé',
 	'ModerateTopicUnlocked'		=> 'Sujet effectivement déverrouillé.',
 	'ModerateCommentsDeleted'	=> 'Commentaire sélectionnés effectivement enlevés.',
-	'ModerateCommentsSplited'	=> 'Commentaire sélectionnés effectivement séparés en un nouveau sujet.',
+	'ModerateCommentsSplit'		=> 'Commentaire sélectionnés effectivement séparés en un nouveau sujet.',
 	'ModerateCommentsSplitFailed'	=> 'Note: Pour une certaine raison la séparation des commentaires sélectionnés en un nouveau sujet a échoué.<br>Ceci ne devrait normalement pas arriver, signalez-le donc à l’administrateur du site.<br>Par mesure de précaution, les éléments ont été conservés dans leur forme originelle.',
 	'ModerateCommentsMoved'		=> 'commentaires sélectionnés effectivement déplacés vers une page donnée.',
 

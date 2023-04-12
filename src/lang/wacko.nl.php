@@ -188,7 +188,7 @@ $wacko_translation = [
 	'ThemeCorrupt'				=> 'Thema is beschadigd',
 	'InvalidNamespace'			=> 'Ongeldige naamruimte gegeven.',
 	'DoesNotExists'				=> 'Deze pagina bestaat nog niet.',
-	'PromptCreate'				=> 'Wil je deze <a href="%1">aanmaken</a>?',
+	'PromptCreate'				=> 'Wil je deze <strong><a href="%1">aanmaken</a></strong>?',
 	'RevisionHint'				=> 'Dit is een oude revisie van <a href="%1">%2</a> from %3 bewerkt door %4.',
 	'ReadAccessDenied'			=> 'U heeft geen leesrechten op deze pagina.',
 	'ReadAccessDeniedHintGuest'	=> 'Om deze pagina te lezen, moet je inloggen.',
@@ -997,6 +997,7 @@ $wacko_translation = [
 
 	// filter
 	'Filter'					=> 'Filteren',
+	'OptionalFilters'			=> 'Optionele filters:',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1150,7 +1151,7 @@ $wacko_translation = [
 	'ModerateTopicBlocked'		=> 'Topic successfully blocked',
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
-	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
