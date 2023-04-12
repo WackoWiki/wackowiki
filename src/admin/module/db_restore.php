@@ -49,7 +49,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 		&&  !isset($_POST['start']))
 		{
 			// read backup log
-			$text	= file_get_contents(Ut::join_path($backup_dir, $backup_id, BACKUP_FILE_LOG));
+			$text	= file_get_contents(Ut::join_path(UPLOAD_BACKUP_DIR, $backup_id, BACKUP_FILE_LOG));
 			$log	= Ut::unserialize($text);
 
 			echo $engine->form_open('restore_backup');
@@ -207,7 +207,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			if (isset($_POST['ignore_files']) && $_POST['ignore_files']	== 1) $ifiles	= true;
 
 			// read backup log
-			$text	= file_get_contents(Ut::join_path($backup_dir, $pack, BACKUP_FILE_LOG));
+			$text	= file_get_contents(Ut::join_path(UPLOAD_BACKUP_DIR, $pack, BACKUP_FILE_LOG));
 			$log	= Ut::unserialize($text);
 
 			// start process logging
@@ -230,7 +230,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			if ($log['structure'])
 			{
 				$results .= '<strong>' . $engine->_t('RunSqlQueries') . '</strong>' . "\n\n";
-				$results .= file_get_contents($backup_dir . $pack . '/' . BACKUP_FILE_STRUCTURE) . "\n\n";
+				$results .= file_get_contents(Ut::join_path(UPLOAD_BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE)) . "\n\n";
 
 				// run
 				$total = put_table($engine, $pack);
@@ -429,11 +429,12 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			{
 				while (false !== ($pack_dir = readdir($dh)))
 				{
-					$file = $backup_dir . $pack_dir . '/' . BACKUP_FILE_LOG;
+					$file = Ut::join_path(UPLOAD_BACKUP_DIR, $pack_dir, BACKUP_FILE_LOG);
 
 					// we only need subdirs with appropriate name length
 					// and with backup register contained within
-					if (is_dir($backup_dir . $pack_dir) === true //&& strlen($packname) == 49)
+					if (is_dir(Ut::join_path(UPLOAD_BACKUP_DIR, $pack_dir)) === true
+						#&& strlen($pack_dir) == 16)
 						&& file_exists($file) === true)
 					{
 						$text		= file_get_contents($file);
