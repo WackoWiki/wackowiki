@@ -698,14 +698,14 @@ else
 	$sort_link = function ($sort, $text) use ($params, &$tpl)
 	{
 		$tpl->s_what	= $this->_t($text);
-		$order			= 'asc';
+		$order			= 'desc';
 
 		if (@$params['sort'] == $sort)
 		{
-			if ($params['order'] == 'asc')
-			{
-				$order = 'desc';
-			}
+			$order = match ($params['order']){
+				'asc'		=> 'desc',
+				default		=> 'asc',
+			};
 
 			$tpl->s_arrow_a = $order;
 		}
