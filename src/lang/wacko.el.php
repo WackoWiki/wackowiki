@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Ενημέρωση',
 
 	'FormInvalid'				=> 'Η υποβληθείσα μορφή ήταν άκυρη. Προσπαθήστε πάλι.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'Ο λογαριασμός μου',

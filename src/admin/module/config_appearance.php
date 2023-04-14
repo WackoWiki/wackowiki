@@ -126,7 +126,7 @@ function admin_config_appearance($engine, $module)
 				else if ($file == 'favicon'
 					&& ($size[0] > 64 || $size[1] > 64))
 				{
-					$error = $engine->_t('SiteFaviconTooBig') . ' <code>' . (int) $size[0] . ' × ' . (int) $size[1] .'px</code>';
+					$error = $engine->_t('SiteFaviconTooBig') . ' <code>' . (int) $size[0] . ' × ' . (int) $size[1] . $engine->_t('UnitPixel') . '</code>';
 				}
 
 				if (!$error)
@@ -285,7 +285,7 @@ function admin_config_appearance($engine, $module)
 			<?php	// TODO: add option to reset dimensions to default image size
 					// + option to 'readonly / disable' input fields
 			?>
-				<input type="number" min="16" max="500" maxlength="3" style="width: 50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>"> × <input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height;?>"> pix
+				<input type="number" min="16" max="500" maxlength="3" style="width: 50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>"> × <input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height; ?>"> <?php echo $engine->_t('UnitPixel'); ?>
 			</td>
 		</tr>
 		<?php } ?>

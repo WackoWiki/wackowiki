@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Atualizar',
 
 	'FormInvalid'				=> 'Campo inválido. Tente submeter novamente.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'Conta Pessoal',

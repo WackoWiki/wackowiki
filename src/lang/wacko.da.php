@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Opdatér',
 
 	'FormInvalid'				=> 'Den indsendte formular var ugyldig. Prøv at indsende igen.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'Min konto',

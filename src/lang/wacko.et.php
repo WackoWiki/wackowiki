@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Uuenda',
 
 	'FormInvalid'				=> 'Esitatud avaldus oli ebakorrektne. Proovi see uuesti esitada.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'Minu andmed',

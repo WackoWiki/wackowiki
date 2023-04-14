@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> '更新',
 
 	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+	'UnitPixel'					=> 'ピクセル',
 
 	// logged in panel
 	'AccountText'				=> 'アカウント',

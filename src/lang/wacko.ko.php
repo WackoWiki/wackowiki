@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> '업데이트',
 
 	'FormInvalid'				=> '제출 된 양식이 유효하지 않습니다. 다시 제출하십시오.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> '계정',

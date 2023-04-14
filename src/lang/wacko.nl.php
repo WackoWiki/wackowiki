@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Bijwerken',
 
 	'FormInvalid'				=> 'Het verstuurde formulier is ongeldig. Probeer opnieuw te versturen.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'Mijn gebruiker',

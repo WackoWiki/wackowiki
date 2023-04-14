@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Обновить',
 
 	'FormInvalid'				=> 'Ошибка отправки формы. Попробуйте ещё раз.',
+	'UnitPixel'					=> 'пикс.',
 
 	// logged in panel
 	'AccountText'				=> 'Профиль',

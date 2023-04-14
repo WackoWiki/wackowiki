@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'बदलें',
 
 	'FormInvalid'				=> 'जमा किया गया फॉर्म अमान्य था। पुन: सबमिट करने का प्रयास करें।',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'खाता',

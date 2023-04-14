@@ -310,7 +310,7 @@ function admin_config_upload($engine, $module)
 					<small><?php echo $engine->_t('MaxThumbWidthInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int) $engine->db->img_max_thumb_width;?>">px
+					<input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int) $engine->db->img_max_thumb_width;?>"> <?php echo $engine->_t('UnitPixel'); ?>
 				</td>
 			</tr>
 
@@ -323,4 +323,3 @@ function admin_config_upload($engine, $module)
 <?php
 	echo $engine->form_close();
 }
-

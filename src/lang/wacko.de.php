@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Aktualisieren',
 
 	'FormInvalid'				=> 'Das übermittelte Formular war ungültig. Versuche erneut, das Formular abzusenden.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'Konto',

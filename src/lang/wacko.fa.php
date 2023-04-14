@@ -35,6 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> 'به‌روزرسانی',
 
 	'FormInvalid'				=> 'فرم ارسال شده نامعتبر بود دوباره ارسال را امتحان کنید.',
+	'UnitPixel'					=> 'px',
 
 	// logged in panel
 	'AccountText'				=> 'حساب',
