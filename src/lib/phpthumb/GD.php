@@ -92,26 +92,14 @@ class GD extends PHPThumb
 		$this->determineFormat();
 		$this->verifyFormatCompatiblity();
 
-		switch ($this->format) {
-			case 'AVIF':
-				$this->oldImage = imagecreatefromavif($this->fileName);
-				break;
-			case 'GIF':
-				$this->oldImage = imagecreatefromgif($this->fileName);
-				break;
-			case 'JPEG':
-				$this->oldImage = imagecreatefromjpeg($this->fileName);
-				break;
-			case 'PNG':
-				$this->oldImage = imagecreatefrompng($this->fileName);
-				break;
-			case 'STRING':
-				$this->oldImage = imagecreatefromstring($this->fileName);
-				break;
-			case 'WEBP':
-				$this->oldImage = imagecreatefromwebp($this->fileName);
-				break;
-		}
+		$this->oldImage = match ($this->format) {
+			'AVIF'		=> imagecreatefromavif		($this->fileName),
+			'GIF'		=> imagecreatefromgif		($this->fileName),
+			'JPEG'		=> imagecreatefromjpeg		($this->fileName),
+			'PNG'		=> imagecreatefrompng		($this->fileName),
+			'STRING'	=> imagecreatefromstring	($this->fileName),
+			'WEBP'		=> imagecreatefromwebp		($this->fileName),
+		};
 
 		$this->currentDimensions = [
 			'width'		=> imagesx($this->oldImage),
@@ -897,7 +885,7 @@ class GD extends PHPThumb
 	public function save(string $fileName, string $format = null): GD
 	{
 		$validFormats	= ['AVIF', 'GIF', 'JPEG', 'JPG', 'PNG', 'WEBP'];
-		$format		= ($format !== null) ? strtoupper($format) : $this->format;
+		$format			= ($format !== null) ? strtoupper($format) : $this->format;
 
 		if (!in_array($format, $validFormats))
 		{
