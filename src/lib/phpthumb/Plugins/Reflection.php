@@ -10,7 +10,7 @@ use PHPThumb\PluginInterface;
  *
  * This file contains the plugin definition for the GD Reflection Lib for PHP Thumb
  *
- * PHP Version 7 with GD 2.2+
+ * PHP Version 8 with GD 2.2+
  * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
  *
@@ -216,7 +216,7 @@ class Reflection implements PluginInterface
 	 * Flips the image vertically
 	 *
 	 */
-	protected function imageFlipVertical ()
+	protected function imageFlipVertical (): void
 	{
 		$x_i = imagesx($this->workingImage);
 		$y_i = imagesy($this->workingImage);
@@ -242,11 +242,11 @@ class Reflection implements PluginInterface
 	/**
 	 * Converts a hex color to rgb tuples
 	 *
-	 * @return mixed
 	 * @param  string $hex
-	 * @param  bool   $asString
+	 * @param bool $asString
+	 * @return mixed
 	 */
-	protected function hex2rgb ($hex, $asString = false)
+	protected function hex2rgb (string $hex, bool $asString = false): mixed
 	{
 		// strip off any leading #
 		if (str_starts_with($hex, '#'))

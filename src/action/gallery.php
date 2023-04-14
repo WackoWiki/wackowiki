@@ -34,15 +34,13 @@ TODO: config settings
 	- image_processing (bool)
 	- thumbnails (bool)
 
-	- split local and global tumbs -> read access
+	- split local and global thumbs -> read access
 	- add filter for categories cat="one,two"
 	- remove thumbs with file or page
 	- fall back if no JS or Image manipulation library is available or disabled
 */
 
 // include PHP Thumbnailer (see autoload.conf)
-#require_once 'lib/phpthumb/PHPThumb.php';
-#require_once 'lib/phpthumb/GD.php';
 
 // loading parameters
 $file_id		= (int) ($_GET['file_id'] ?? null);
@@ -271,7 +269,7 @@ if ($can_view)
 						// check for missing source image, we can't trust db record
 						if (!file_exists($thumb_name) && file_exists($src_image))
 						{
-							// create tumbnail
+							// create thumbnail
 							@set_time_limit(0);
 							@ignore_user_abort(true);
 

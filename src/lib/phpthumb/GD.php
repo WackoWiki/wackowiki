@@ -2,6 +2,10 @@
 
 namespace PHPThumb;
 
+use Exception;
+use InvalidArgumentException;
+use RuntimeException;
+
 /**
  * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
@@ -83,7 +87,7 @@ class GD extends PHPThumb
 	 * @param string $fileName
 	 * @param array $options
 	 * @param array $plugins
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function __construct($fileName, array $options = [], array $plugins = [])
 	{
@@ -189,7 +193,7 @@ class GD extends PHPThumb
 	 * @param int $maxWidth
 	 * @param int $maxHeight
 	 */
-	private function checkingMaxSize(int $maxWidth, int $maxHeight)
+	private function checkingMaxSize(int $maxWidth, int $maxHeight): void
 	{
 		if ($this->options['resizeUp'] === false)
 		{
@@ -271,17 +275,17 @@ class GD extends PHPThumb
 		// make sure our arguments are valid
 		if ($width == 0 && $height == 0)
 		{
-			throw new \InvalidArgumentException('$width and $height must be numeric and greater than zero');
+			throw new InvalidArgumentException('$width and $height must be numeric and greater than zero');
 		}
 
 		if ($width == 0)
 		{
-			$width = ($height * $this->currentDimensions['width']) / $this->currentDimensions['height'];
+			$width = intval(($height * $this->currentDimensions['width']) / $this->currentDimensions['height']);
 		}
 
 		if ($height == 0)
 		{
-			$height = ($width * $this->currentDimensions['height']) / $this->currentDimensions['width'];
+			$height = intval(($width * $this->currentDimensions['height']) / $this->currentDimensions['width']);
 		}
 
 		// make sure we're not exceeding our image size if we're not supposed to
@@ -378,12 +382,12 @@ class GD extends PHPThumb
 		// make sure our arguments are valid
 		if ($width == 0)
 		{
-			throw new \InvalidArgumentException('$width must be numeric and greater than zero');
+			throw new InvalidArgumentException('$width must be numeric and greater than zero');
 		}
 
 		if ($height == 0)
 		{
-			throw new \InvalidArgumentException('$height must be numeric and greater than zero');
+			throw new InvalidArgumentException('$height must be numeric and greater than zero');
 		}
 
 		// make sure we're not exceeding our image size if we're not supposed to
@@ -492,12 +496,12 @@ class GD extends PHPThumb
 		// make sure our arguments are valid
 		if ($width == 0)
 		{
-			throw new \InvalidArgumentException('$width must be numeric and greater than zero');
+			throw new InvalidArgumentException('$width must be numeric and greater than zero');
 		}
 
 		if ($height == 0)
 		{
-			throw new \InvalidArgumentException('$height must be numeric and greater than zero');
+			throw new InvalidArgumentException('$height must be numeric and greater than zero');
 		}
 
 		// make sure we're not exceeding our image size if we're not supposed to
@@ -576,7 +580,7 @@ class GD extends PHPThumb
 	 *
 	 * @param int $percent
 	 * @return GD
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function resizePercent(int $percent = 0): GD
 	{
@@ -712,7 +716,7 @@ class GD extends PHPThumb
 	{
 		if (!function_exists('imagerotate'))
 		{
-			throw new \RuntimeException('Your version of GD does not support image rotation');
+			throw new RuntimeException('Your version of GD does not support image rotation');
 		}
 
 		$this->workingImage = imagerotate($this->oldImage, $degrees, 0);
@@ -738,7 +742,7 @@ class GD extends PHPThumb
 	{
 		if (!function_exists('imagefilter'))
 		{
-			throw new \RuntimeException('Your version of GD does not support image filters');
+			throw new RuntimeException('Your version of GD does not support image filters');
 		}
 
 		if ($arg1 === false)
@@ -764,7 +768,7 @@ class GD extends PHPThumb
 
 		if (!$result)
 		{
-			throw new \RuntimeException('GD imagefilter failed');
+			throw new RuntimeException('GD imagefilter failed');
 		}
 
 		$this->workingImage = $this->oldImage;
@@ -796,7 +800,7 @@ class GD extends PHPThumb
 
 		if (headers_sent() && php_sapi_name() != 'cli')
 		{
-			throw new \RuntimeException('Cannot show image, headers have already been sent');
+			throw new RuntimeException('Cannot show image, headers have already been sent');
 		}
 
 		// When the interlace option equals true or false call imageinterlace else leave it to default
@@ -889,7 +893,7 @@ class GD extends PHPThumb
 
 		if (!in_array($format, $validFormats))
 		{
-			throw new \InvalidArgumentException('Invalid format type specified in save function: ' . $format);
+			throw new InvalidArgumentException('Invalid format type specified in save function: ' . $format);
 		}
 
 		// make sure the directory is writeable
@@ -903,12 +907,12 @@ class GD extends PHPThumb
 				// throw an exception if not writeable
 				if (!is_writeable(dirname($fileName)))
 				{
-					throw new \RuntimeException('File is not writeable, and could not correct permissions: ' . $fileName);
+					throw new RuntimeException('File is not writeable, and could not correct permissions: ' . $fileName);
 				}
 			}
 			else
 			{ // throw an exception if not writeable
-				throw new \RuntimeException('File not writeable: ' . $fileName);
+				throw new RuntimeException('File not writeable: ' . $fileName);
 			}
 		}
 
@@ -983,7 +987,7 @@ class GD extends PHPThumb
 	/**
 	 * Returns $currentDimensions.
 	 *
-	 * @see \PHPThumb\GD::$currentDimensions
+	 * @see GD
 	 */
 	public function getCurrentDimensions(): array
 	{
@@ -1042,7 +1046,7 @@ class GD extends PHPThumb
 	/**
 	 * Returns $newDimensions.
 	 *
-	 * @see \PHPThumb\GD::$newDimensions
+	 * @see GD
 	 */
 	public function getNewDimensions(): array
 	{
@@ -1054,7 +1058,7 @@ class GD extends PHPThumb
 	 *
 	 * @param array $newDimensions
 	 * @return GD
-	 * @see \PHPThumb\GD::$newDimensions
+	 * @see GD
 	 */
 	public function setNewDimensions(array $newDimensions): GD
 	{
@@ -1066,7 +1070,7 @@ class GD extends PHPThumb
 	/**
 	 * Returns $options.
 	 *
-	 * @see \PHPThumb\GD::$options
+	 * @see GD
 	 */
 	public function getOptions(): array
 	{
@@ -1076,7 +1080,7 @@ class GD extends PHPThumb
 	/**
 	 * Returns $percent.
 	 *
-	 * @see \PHPThumb\GD::$percent
+	 * @see GD
 	 */
 	public function getPercent(): int
 	{
@@ -1088,7 +1092,7 @@ class GD extends PHPThumb
 	 *
 	 * @param int $percent
 	 * @return GD
-	 * @see \PHPThumb\GD::$percent
+	 * @see GD
 	 */
 	public function setPercent(int $percent): GD
 	{
@@ -1100,7 +1104,7 @@ class GD extends PHPThumb
 	/**
 	 * Returns $oldImage.
 	 *
-	 * @see \PHPThumb\GD::$oldImage
+	 * @see GD
 	 */
 	public function getOldImage()
 	{
@@ -1112,7 +1116,7 @@ class GD extends PHPThumb
 	 *
 	 * @param object $oldImage
 	 * @return GD
-	 * @see \PHPThumb\GD::$oldImage
+	 * @see GD
 	 */
 	public function setOldImage(object $oldImage): GD
 	{
@@ -1124,7 +1128,7 @@ class GD extends PHPThumb
 	/**
 	 * Returns $workingImage.
 	 *
-	 * @see \PHPThumb\GD::$workingImage
+	 * @see GD
 	 */
 	public function getWorkingImage()
 	{
@@ -1136,7 +1140,7 @@ class GD extends PHPThumb
 	 *
 	 * @param object $workingImage
 	 * @return GD
-	 * @see \PHPThumb\GD::$workingImage
+	 * @see GD
 	 */
 	public function setWorkingImage(object $workingImage): GD
 	{
@@ -1212,7 +1216,7 @@ class GD extends PHPThumb
 	 * @param int $width
 	 * @param int $height
 	 */
-	protected function calcImageSize(int $width, int $height)
+	protected function calcImageSize(int $width, int $height): void
 	{
 		$newSize = [
 			'newWidth'	=> $width,
@@ -1248,7 +1252,7 @@ class GD extends PHPThumb
 	 * @param int $width
 	 * @param int $height
 	 */
-	protected function calcImageSizeStrict(int $width, int $height)
+	protected function calcImageSizeStrict(int $width, int $height): void
 	{
 		$newDimensions = $this->getCurrentDimensions();
 
@@ -1306,7 +1310,7 @@ class GD extends PHPThumb
 	 * @param int $width
 	 * @param int $height
 	 */
-	protected function calcImageSizePercent(int $width, int $height)
+	protected function calcImageSizePercent(int $width, int $height): void
 	{
 		if ($this->percent > 0)
 		{
@@ -1319,9 +1323,9 @@ class GD extends PHPThumb
 	 *
 	 * This function will throw exceptions for invalid images / mime-types
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 */
-	protected function determineFormat()
+	protected function determineFormat(): void
 	{
 		$formatInfo = getimagesize($this->fileName);
 
@@ -1330,32 +1334,32 @@ class GD extends PHPThumb
 		{
 			if ($this->remoteImage)
 			{
-				throw new \Exception('Could not determine format of remote image: ' . $this->fileName);
+				throw new Exception('Could not determine format of remote image: ' . $this->fileName);
 			}
 			else
 			{
-				throw new \Exception('File is not a valid image: ' . $this->fileName);
+				throw new Exception('File is not a valid image: ' . $this->fileName);
 			}
 		}
 
 		$mimeType = $formatInfo['mime'] ?? null;
 
 		$this->format = match ($mimeType) {
-			'image/avif' => 'AVIF',
-			'image/gif'  => 'GIF',
-			'image/jpeg' => 'JPEG',
-			'image/png'  => 'PNG',
-			'image/webp' => 'WEBP',
-			default      => throw new \Exception('Image format not supported: ' . $mimeType),
+			'image/avif'	=> 'AVIF',
+			'image/gif'		=> 'GIF',
+			'image/jpeg'	=> 'JPEG',
+			'image/png'		=> 'PNG',
+			'image/webp'	=> 'WEBP',
+			default			=> throw new \Exception('Image format not supported: ' . $mimeType),
 		};
 	}
 
 	/**
 	 * Makes sure the correct GD implementation exists for the file type
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 */
-	protected function verifyFormatCompatiblity()
+	protected function verifyFormatCompatiblity(): void
 	{
 		$gdInfo = gd_info();
 
@@ -1377,7 +1381,7 @@ class GD extends PHPThumb
 
 		if (!$isCompatible)
 		{
-			throw new \Exception('Your GD installation does not support ' . $this->format . ' image types');
+			throw new Exception('Your GD installation does not support ' . $this->format . ' image types');
 		}
 	}
 
@@ -1391,7 +1395,7 @@ class GD extends PHPThumb
 	 * This functionality was originally suggested by commenter Aimi (no links / site provided) - Thanks! :)
 	 *
 	 */
-	protected function preserveAlpha()
+	protected function preserveAlpha(): void
 	{
 		if ($this->format == 'PNG' && $this->options['preserveAlpha'] === true)
 		{
