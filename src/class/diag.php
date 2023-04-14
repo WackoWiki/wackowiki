@@ -13,7 +13,7 @@ class Diag
 	}
 
 	// DEBUG INFO
-	static function full_disclosure(&$config, &$http, &$engine, $cwd): void
+	static function full_disclosure($config, $http, $engine, $cwd): void
 	{
 		chdir($cwd);
 

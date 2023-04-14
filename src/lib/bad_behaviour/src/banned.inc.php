@@ -49,7 +49,7 @@ function bb2_display_denial($settings, $package, $key, $previous_key = false)
 	header('Status: ' . $response['response'] . ' Bad Behaviour');
 	$request_uri = $_SERVER['REQUEST_URI'];
 
-	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
+	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	// IIS
 ?>
 <!DOCTYPE html>
 <html lang="en">

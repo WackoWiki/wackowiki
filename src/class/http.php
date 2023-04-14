@@ -429,7 +429,7 @@ class Http
 	}
 
 	// safe exit/die for wackowiki
-	function terminate()
+	function terminate(): void
 	{
 		if (Diag::$log && isset($this->sess))
 		{

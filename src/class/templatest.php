@@ -609,7 +609,7 @@ class Templatest
 		return str_replace(["\r", "\x0b", "\0"], '', $line);
 	}
 
-	private static function aband($str)
+	private static function aband($str): void
 	{
 		die('templatest: ' . $str . "\n");
 	}

@@ -10,7 +10,7 @@ const BB2_CORE = __DIR__;
 require_once BB2_CORE . '/functions.inc.php';
 
 // Kill 'em all!
-function bb2_banned($settings, $package, $key, $previous_key = false)
+function bb2_banned($settings, $package, $key, $previous_key = false): void
 {
 	// Some spambots hit too hard. Slow them down a bit.
 	sleep(2);
@@ -44,10 +44,10 @@ function bb2_approved($settings, $package)
 	}
 }
 
-# If this is reverse-proxied or load balanced, obtain the actual client IP
+// If this is reverse-proxied or load balanced, obtain the actual client IP
 function bb2_reverse_proxy($settings, $headers_mixed)
 {
-	# Detect if option is on when it should be off
+	// Detect if option is on when it should be off
 	$header = uc_all($settings['reverse_proxy_header']);
 
 	if (!array_key_exists($header, $headers_mixed))
@@ -57,7 +57,7 @@ function bb2_reverse_proxy($settings, $headers_mixed)
 
 	$addrs = @array_reverse(preg_split('/[\s,]+/', $headers_mixed[$header]));
 
-	# Skip our known reverse proxies and private addresses
+	// Skip our known reverse proxies and private addresses
 	if (!empty($settings['reverse_proxy_addresses']))
 	{
 		foreach ($addrs as $addr)
@@ -79,11 +79,11 @@ function bb2_reverse_proxy($settings, $headers_mixed)
 		}
 	}
 
-	# If we got here, someone is playing a trick on us.
+	// If we got here, someone is playing a trick on us.
 	return false;
 }
 
-# FIXME: Bug #12. But this code doesn't currently work.
+// FIXME: Bug #12. But this code doesn't currently work.
 function bb2_unpack_php_post_array($key, $value)
 {
 	$unpacked = [];
@@ -129,7 +129,7 @@ function bb2_start($settings)
 		{
 			if (is_array($v))
 			{
-				# Workaround, see Bug #12
+				// Workaround, see Bug #12
 				$v = 'Array';
 			}
 
@@ -139,7 +139,7 @@ function bb2_start($settings)
 
 	$request_uri = $_SERVER['REQUEST_URI'];
 
-	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
+	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	// IIS
 
 	if ($settings['reverse_proxy'] && $ip = bb2_reverse_proxy($settings, $headers_mixed))
 	{
@@ -203,7 +203,7 @@ function bb2_screen($settings, $package)
 
 		if ($r = bb2_httpbl($settings, $package))
 		{
-			if ($r == 1) return false;	# whitelisted
+			if ($r == 1) return false;	// whitelisted
 
 			return $r;
 		}
@@ -227,7 +227,7 @@ function bb2_screen($settings, $package)
 
 			if ($r = bb2_msnbot($package))
 			{
-				if ($r == 1) return false;	# whitelisted
+				if ($r == 1) return false;	// whitelisted
 
 				return $r;
 			}
@@ -242,7 +242,7 @@ function bb2_screen($settings, $package)
 
 			if ($r = bb2_google($package))
 			{
-				if ($r == 1) return false;	# whitelisted
+				if ($r == 1) return false;	// whitelisted
 
 				return $r;
 			}
@@ -256,7 +256,7 @@ function bb2_screen($settings, $package)
 
 			if ($r = bb2_yahoo($package))
 			{
-				if ($r == 1) return false;	# whitelisted
+				if ($r == 1) return false;	// whitelisted
 
 				return $r;
 			}
@@ -269,7 +269,7 @@ function bb2_screen($settings, $package)
 
 			if ($r = bb2_baidu($package))
 			{
-				if ($r == 1) return false;	# whitelisted
+				if ($r == 1) return false;	// whitelisted
 
 				return $r;
 			}

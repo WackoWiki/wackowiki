@@ -321,7 +321,7 @@ function my_image_blur($im)
 	return $im;
 }
 
-function send_image($pic)
+function send_image($pic): void
 {
 	// output image with appropriate headers
 	global $output, $im, $im2, $im3;
@@ -523,7 +523,7 @@ if ($bg_type)
 			// line terminations and start from there. (I don't think they're that advanced yet..)
 			for ($j = 1; $j < $rand_func(5, 10); $j++)
 			{
-				$points[] = $rand_func(1 * (20 * ($i + 1)), 1 * (50 * ($i + 1)));
+				$points[] = $rand_func(20 * ($i + 1), 50 * ($i + 1));
 				$points[] = $rand_func(30, $height + 30);
 			}
 
