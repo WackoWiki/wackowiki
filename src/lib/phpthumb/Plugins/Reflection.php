@@ -10,7 +10,7 @@ use PHPThumb\PluginInterface;
  *
  * This file contains the plugin definition for the GD Reflection Lib for PHP Thumb
  *
- * PHP Version 8 with GD 2.2+
+ * PHP Version 8 with GD 2.3+
  * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
  *
@@ -21,7 +21,7 @@ use PHPThumb\PluginInterface;
  *
  * @author Ian Selby <ianrselby@gmail.com>
  * @copyright Copyright (c) 2009 Gen X Design
- * @link https://github.com/masterexploder/PHPThumb
+ * @link https://github.com/PHPThumb/PHPThumb
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  * @version 3.0
  * @package PhpThumb

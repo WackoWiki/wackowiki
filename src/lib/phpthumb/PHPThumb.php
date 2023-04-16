@@ -2,6 +2,8 @@
 
 namespace PHPThumb;
 
+use InvalidArgumentException;
+
 /**
  * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
@@ -13,7 +15,7 @@ namespace PHPThumb;
  *
  * @author Ian Selby <ianrselby@gmail.com>
  * @copyright Copyright (c) 2009 Gen X Design
- * @link https://github.com/masterexploder/PHPThumb
+ * @link https://github.com/PHPThumb/PHPThumb
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
@@ -59,7 +61,7 @@ abstract class PHPThumb
 
 		if(!$this->validateRequestedResource($fileName))
 		{
-			throw new \InvalidArgumentException('Image file not found: ' . $fileName);
+			throw new InvalidArgumentException('Image file not found: ' . $fileName);
 		}
 
 		$this->setOptions($options);

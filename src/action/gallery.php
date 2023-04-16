@@ -16,18 +16,18 @@ if (!defined('IN_WACKO'))
  *
  * {{gallery
 
-	[page		= "page_tag"] - call image from another page
-	[global		= 0|1] - call global images
-	[perrow		= <Number of images per rows> (default = 5)]
-	[caption	= 1|2] - 1 show file description, 2 show file caption
-	[title		= "Gallery"] - album title
-	[target		= 1|2] - show large images without page (if = 2 in new browser window)
-	[nomark		= 1] - hide external border
-	[table		= 1] - pictures in table
+	[page		= "page_tag"]	- call image from another page
+	[global		= 0|1]			- call global images
+	[perrow		= Number]		- Number of images per rows(default = 5)
+	[caption	= 1|2]			- 1 show file description, 2 show file caption
+	[title		= "Gallery"]	- album title
+	[target		= 1|2]			- show large images without page (if = 2 in new browser window)
+	[nomark		= 1]			- hide external border
+	[table		= 1]			- pictures in table
 
 	[order		= "ext|name_desc|size|size_desc|time|time_desc"]
 	[owner		= "UserName"]
-	[max		= number]
+	[max		= Number]
 }}
 
 TODO: config settings
@@ -45,25 +45,25 @@ TODO: config settings
 // loading parameters
 $file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
-$thumb_prefix	= 'tn_';
 $imgclass		= '';
-$width			= $this->db->img_max_thumb_width; // default: 150
+
+$width			= (int) $this->db->img_max_thumb_width;
+$thumb_prefix	= $width . 'px-';
 
 // set defaults
-$page			??= '';
-$nomark			??= 1;
-$target			??= 0;
-$table			??= 1;
 $caption		??= 1;
-$title			??= '';
-$nomark			??= 0;
-
-$order			??= '';
-$perrow			??= 5;
 $global			??= 0;
-$owner			??= '';
 $max			??= 50;
 $nav_offset		??= 1;
+$nomark			??= 1;
+$order			??= '';
+
+$owner			??= '';
+$page			??= '';
+$perrow			??= 5;
+$table			??= 1;
+$target			??= 0;
+$title			??= '';
 
 $limit			= (int) $max;
 $images_row		= (int) $perrow;

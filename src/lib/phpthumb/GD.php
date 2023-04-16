@@ -17,7 +17,7 @@ use RuntimeException;
  *
  * @author Ian Selby <ianrselby@gmail.com>
  * @copyright Copyright (c) 2009 Gen X Design
- * @link https://github.com/masterexploder/PHPThumb
+ * @link https://github.com/PHPThumb/PHPThumb
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 

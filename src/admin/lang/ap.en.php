@@ -206,7 +206,7 @@ $ap_translation = [
 
 	// System log module
 	'system_log'		=> [
-		'name'		=> 'System log',
+		'name'		=> 'System Log',
 		'title'		=> 'Log of system events',
 	],
 
