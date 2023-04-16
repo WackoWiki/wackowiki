@@ -218,8 +218,7 @@ if ($can_view)
 				$file_name			= $file['file_name'];
 				$file_width			= ''; // $file['picture_w'];
 				$file_height		= ''; // $file['picture_h'];
-				$prefix_global		= '';
-				$tnb_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
+				$tbn_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
 
 				if ($caption == 1)
 				{
@@ -236,32 +235,34 @@ if ($can_view)
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
 				{
-					$tnb_path		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
+					$tbn_path		= Ut::join_path(THUMB_DIR, $tbn_name);
+					$tbn_src		= $this->db->base_path . $tbn_path;
 					$url			= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
 				else
 				{
-					$tnb_path		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
+					$tbn_path		= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $tbn_name);
+					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $width]);
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 				}
 
-				$tpl->img	= '<img src="' . $this->db->base_path . $tnb_path . '" ' .
+				$tpl->img	= '<img src="' . $tbn_src . '" ' .
 					'loading="lazy" ' .
 					($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') .
 					' width="' . $file_width . '" height="' . $file_height . '" ' .
 					($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
-				if (!file_exists($tnb_path))
+				if (!file_exists($tbn_path))
 				{
 					if ($file['page_id'] == 0)
 					{
 						$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-						$thumb_name		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
+						$thumb_name		= Ut::join_path(THUMB_DIR, $tbn_name);
 					}
 					else
 					{
-						$src_image		= Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
-						$thumb_name		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
+						$src_image		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
+						$thumb_name		= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $tbn_name);
 					}
 
 					if (file_exists($src_image))

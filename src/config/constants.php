@@ -18,6 +18,7 @@ const IMAGE_DIR						= 'image';
 const LANG_DIR						= 'lang';
 const THEME_DIR						= 'theme';
 const THUMB_DIR						= 'file/thumb';
+const THUMB_LOCAL_DIR				= 'file/thumb_local';
 const UPLOAD_GLOBAL_DIR				= 'file/global';
 const UPLOAD_LOCAL_DIR				= 'file/perpage';
 const UPLOAD_BACKUP_DIR				= 'file/backup';

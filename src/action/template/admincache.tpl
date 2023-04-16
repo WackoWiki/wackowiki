@@ -26,7 +26,7 @@
 	</form>
 
 [ === post === ]
-[ ' page ' ][ ' sql ' ][ ' config ' ][ ' feed ' ][ ' template ' ][ ' _t: CacheCleared ' ]
+[ ' page ' ][ ' sql ' ][ ' config ' ][ ' feed ' ][ ' template ' ][ ' tumbnail ' ][ ' _t: CacheCleared ' ]
 
 [ === page === ]
 [ ' _t: PageCache ' ] ([ ' n | e ' ]) ... ['' '']
