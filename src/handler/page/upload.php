@@ -195,7 +195,7 @@ if (isset($_POST['upload']) & $can_upload)
 					$is_global	= false;
 					$fs_name	= '@' . $this->page['page_id'] . '@' . $t_name;
 					$page_id	= $this->page['page_id'];
-					$dir		= UPLOAD_PER_PAGE_DIR;
+					$dir		= UPLOAD_LOCAL_DIR;
 				}
 				else
 				{

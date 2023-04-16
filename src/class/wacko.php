@@ -8160,7 +8160,7 @@ class Wacko
 				foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' .
+					$file_name = Ut::join_path(UPLOAD_LOCAL_DIR, '@' .
 						$page['page_id'] . '@' . $file['file_name']);
 
 					@unlink($file_name);
@@ -8213,7 +8213,7 @@ class Wacko
 		{
 			// remove from FS
 			$file_name = ($file['page_id']
-				? UPLOAD_PER_PAGE_DIR . '/@' . $file['page_id'] . '@'
+				? UPLOAD_LOCAL_DIR . '/@' . $file['page_id'] . '@'
 				: UPLOAD_GLOBAL_DIR . '/') .
 				$file['file_name'];
 

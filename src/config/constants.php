@@ -19,7 +19,7 @@ const LANG_DIR						= 'lang';
 const THEME_DIR						= 'theme';
 const THUMB_DIR						= 'file/thumb';
 const UPLOAD_GLOBAL_DIR				= 'file/global';
-const UPLOAD_PER_PAGE_DIR			= 'file/perpage';
+const UPLOAD_LOCAL_DIR				= 'file/perpage';
 const UPLOAD_BACKUP_DIR				= 'file/backup';
 const XML_DIR						= 'xml';
 

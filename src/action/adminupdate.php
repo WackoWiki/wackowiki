@@ -512,7 +512,7 @@ if ($this->is_admin())
 		foreach ($files as $file)
 		{
 			$file_path = Ut::join_path(
-					($file['page_id']? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
+					($file['page_id']? UPLOAD_LOCAL_DIR : UPLOAD_GLOBAL_DIR),
 					($file['page_id']
 						? '@' . $file['page_id'] . '@'
 						: '') .
@@ -589,7 +589,7 @@ if ($this->is_admin())
 			if (isset($_POST['set_file_hash']))
 			{
 				$file_path = Ut::join_path(
-					($file['page_id']? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
+					($file['page_id']? UPLOAD_LOCAL_DIR : UPLOAD_GLOBAL_DIR),
 					($file['page_id']
 						? '@' . $file['page_id'] . '@'
 						: '') .

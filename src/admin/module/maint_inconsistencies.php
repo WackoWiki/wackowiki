@@ -756,7 +756,7 @@ function admin_maint_inconsistencies($engine, $module)
 			{
 				if ($file['page_id'])
 				{
-					$db_files['local'][]		= UPLOAD_PER_PAGE_DIR . '/' . '@' . $file['page_id'] . '@' . $file['file_name'];
+					$db_files['local'][]		= UPLOAD_LOCAL_DIR . '/' . '@' . $file['page_id'] . '@' . $file['file_name'];
 				}
 				else
 				{
@@ -767,7 +767,7 @@ function admin_maint_inconsistencies($engine, $module)
 			// 2. get dir files
 			$fs_files = [];
 
-			foreach (Ut::file_glob(UPLOAD_PER_PAGE_DIR, '*') as $file)
+			foreach (Ut::file_glob(UPLOAD_LOCAL_DIR, '*') as $file)
 			{
 				$fs_files['local'][] = $file;
 			}

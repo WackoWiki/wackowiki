@@ -145,7 +145,7 @@ if (!isset($tables, $directories))
 		// CACHE_TEMPLATE_DIR,
 		// THUMB_DIR,
 		UPLOAD_GLOBAL_DIR,
-		UPLOAD_PER_PAGE_DIR
+		UPLOAD_LOCAL_DIR
 	];
 }
 else
@@ -484,7 +484,7 @@ function get_files($engine, $directories, $pack, $dir, $root)
 	}
 
 	// set file mask for cluster backup
-	if ($root && $dir == UPLOAD_PER_PAGE_DIR)
+	if ($root && $dir == UPLOAD_LOCAL_DIR)
 	{
 		$cluster = true;
 	}

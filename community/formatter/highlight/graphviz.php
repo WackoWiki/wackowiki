@@ -9,7 +9,7 @@
 
 // if set to "" we test is the file in PATH
 $gv_settings['bindir']	= '';
-$gv_settings['filedir']	= UPLOAD_PER_PAGE_DIR;
+$gv_settings['filedir']	= UPLOAD_LOCAL_DIR;
 
 // check, if there should be another tool than dot used
 $bin = match(key($options)){
