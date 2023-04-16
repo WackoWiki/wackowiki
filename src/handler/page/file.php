@@ -12,7 +12,7 @@ if (!isset($_GET['get']) || (!isset($_GET['global']) && !$this->page))
 
 $file_path		= '';
 $file_name		= $_GET['get'];
-$thumnail		= (int) ($_GET['tbn'] ?? 0);
+$thumbnail		= (int) ($_GET['tbn'] ?? 0);
 
 if (!preg_match('/^([' . self::PATTERN['ALPHANUM_P'] . '\.]+)$/u', $file_name))
 {
@@ -44,14 +44,14 @@ if (   $this->is_admin()
 	|| ($this->has_access('read'))
 	|| ($file['user_id'] == $this->get_user_id()) )
 {
-	if ($thumnail)
+	if ($thumbnail)
 	{
 		$file_path = Ut::join_path(
 		($page_id? THUMB_LOCAL_DIR : THUMB_DIR),
 		($page_id
 			? '@' . $this->page['page_id'] . '@'
 			: '') .
-		$thumnail . 'px-' .
+		$thumbnail . 'px-' .
 		$file['file_id'] . '.' . $file['file_ext']);
 	}
 	else

@@ -44,12 +44,12 @@ if ($this->is_admin())
 
 		if (isset($_POST['thumb_cache']) && ($n = Ut::purge_directory(THUMB_DIR)))
 		{
-			$done->tumbnail_n = $n;
+			$done->thumbnail_n = $n;
 		}
 
 		if (isset($_POST['thumb_cache']) && ($n = Ut::purge_directory(THUMB_LOCAL_DIR)))
 		{
-			$done->tumbnail_n = $n;
+			$done->thumbnail_n = $n;
 		}
 
 		$this->set_message($done, 'success');
