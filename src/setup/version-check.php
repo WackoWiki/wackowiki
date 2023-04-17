@@ -157,8 +157,9 @@ write_config_hidden_nodes($config_parameters);
 		[AP_LOCK,				CHMOD_FILE],
 		[UPLOAD_BACKUP_DIR,		CHMOD_DIR],
 		[UPLOAD_GLOBAL_DIR,		CHMOD_DIR],
-		[UPLOAD_LOCAL_DIR,	CHMOD_DIR],
+		[UPLOAD_LOCAL_DIR,		CHMOD_DIR],
 		[THUMB_DIR,				CHMOD_DIR],
+		[THUMB_LOCAL_DIR,		CHMOD_DIR],
 		[XML_DIR,				CHMOD_DIR],
 	];
 

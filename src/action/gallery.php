@@ -48,7 +48,6 @@ $files			= [];
 $imgclass		= '';
 
 $width			= (int) $this->db->max_thumb_width;
-$thumb_prefix	= $width . 'px-';
 
 // set defaults
 $caption		??= 1;
@@ -218,7 +217,7 @@ if ($can_view)
 				$file_name			= $file['file_name'];
 				$file_width			= ''; // $file['picture_w'];
 				$file_height		= ''; // $file['picture_h'];
-				$tbn_name			= $thumb_prefix . $file['file_name'];
+				$tbn_name			= $width . 'px-' . $file['file_name'];
 
 				if ($caption == 1)
 				{
@@ -235,12 +234,14 @@ if ($can_view)
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
 				{
+					$src_path		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$tbn_path		= Ut::join_path(THUMB_DIR, $tbn_name);
 					$tbn_src		= $this->db->base_path . $tbn_path;
-					$url			= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$url			= $this->db->base_path . $src_path;
 				}
 				else
 				{
+					$src_path		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
 					$tbn_path		= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $tbn_name);
 					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $width]);
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
@@ -252,24 +253,10 @@ if ($can_view)
 					' width="' . $file_width . '" height="' . $file_height . '" ' .
 					($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
-				if (!file_exists($tbn_path))
+				// check for missing source image, we can't trust db record
+				if (!file_exists($tbn_path) && file_exists($src_path))
 				{
-					if ($file['page_id'] == 0)
-					{
-						$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-						$thumb_name		= Ut::join_path(THUMB_DIR, $tbn_name);
-					}
-					else
-					{
-						$src_image		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
-						$thumb_name		= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $tbn_name);
-					}
-
-					// check for missing source image, we can't trust db record
-					if (file_exists($src_image))
-					{
-						$this->create_thumbnail($thumb_name, $src_image, $width, $width);
-					}
+					$this->create_thumbnail($tbn_path, $src_path, $width, $width);
 				}
 
 				if ($table)

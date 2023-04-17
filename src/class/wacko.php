@@ -4442,13 +4442,13 @@ class Wacko
 		{
 			if ($thumb)
 			{
-				$thumb_image	= Ut::join_path(THUMB_DIR, $thumb_name);
-				$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
-				$src_name		= $thumb_image;
+				$tbn_image	= Ut::join_path(THUMB_DIR, $thumb_name);
+				$src_image	= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+				$src_name	= $tbn_image;
 			}
 			else
 			{
-				$src_name		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+				$src_name	= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
 			}
 
 			$src	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . $src_name;
@@ -4458,9 +4458,9 @@ class Wacko
 		{
 			if ($thumb)
 			{
-				$thumb_image	= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $thumb_name);
-				$src_image		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $file_data['file_name']);
-				$src_thumb		= ['tbn' => $param['width']];
+				$tbn_image	= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $thumb_name);
+				$src_image	= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $file_data['file_name']);
+				$src_thumb	= ['tbn' => $param['width']];
 			}
 			else
 			{
@@ -4472,15 +4472,15 @@ class Wacko
 
 		if ($thumb)
 		{
-			$this->create_thumbnail($thumb_image, $src_image, $param['width'], $param['height']);
+			$this->create_thumbnail($tbn_image, $src_image, $param['width'], $param['height']);
 		}
 
 		return $src;
 	}
 
-	function create_thumbnail($thumb_name, $src_image, $width, $height): void
+	function create_thumbnail($tbn_image, $src_image, $width, $height): void
 	{
-		if (!file_exists($thumb_name))
+		if (!file_exists($tbn_image))
 		{
 			// create thumbnail
 			@set_time_limit(0);
@@ -4501,7 +4501,7 @@ class Wacko
 				$thumb->resize($width, $height);
 
 				// requires correct write permissions!
-				$thumb->save($thumb_name);
+				$thumb->save($tbn_image);
 			}
 		}
 	}
