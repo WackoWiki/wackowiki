@@ -47,21 +47,20 @@ if (   $this->is_admin()
 	if ($thumbnail)
 	{
 		$file_path = Ut::join_path(
-		($page_id? THUMB_LOCAL_DIR : THUMB_DIR),
-		($page_id
-			? '@' . $this->page['page_id'] . '@'
-			: '') .
-		$thumbnail . 'px-' .
-		$file['file_id'] . '.' . $file['file_ext']);
+			($page_id ? THUMB_LOCAL_DIR : THUMB_DIR),
+			($page_id
+				? '@' . $this->page['page_id'] . '@'
+				: '') .
+			$thumbnail . 'px-' . $file['file_name']);
 	}
 	else
 	{
 		$file_path = Ut::join_path(
-		($page_id? UPLOAD_LOCAL_DIR : UPLOAD_GLOBAL_DIR),
-		($page_id
-			? '@' . $this->page['page_id'] . '@'
-			: '') .
-		$file['file_name']);
+			($page_id ? UPLOAD_LOCAL_DIR : UPLOAD_GLOBAL_DIR),
+			($page_id
+				? '@' . $this->page['page_id'] . '@'
+				: '') .
+			$file['file_name']);
 	}
 }
 else

@@ -94,6 +94,12 @@ if ($config['is_update'])
 	{
 		$config['max_page_size']		= 2048 * 1024;
 	}
+
+	if (version_compare($config['wacko_version'], '6.1.21', '<'))
+	{
+		$config['create_thumbnail']	= $config['img_create_thumbnail'];
+		$config['max_thumb_width']	= $config['img_max_thumb_width'];
+	}
 }
 
 /*

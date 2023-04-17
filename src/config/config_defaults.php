@@ -229,8 +229,9 @@ $wacko_config_defaults = [
 
 	'svg_sanitizer'					=> 1,
 
-	'img_create_thumbnail'			=> 0,
-	'img_max_thumb_width'			=> 150,
+	'create_thumbnail'				=> 0,
+	'max_thumb_width'				=> 150,
+	'jpeg_quality'					=> 80,
 
 	'enable_feeds'					=> 1,
 

@@ -115,8 +115,9 @@ function admin_config_upload($engine, $module)
 		$config['upload_allowed_exts']		= (string) $allowed_exts;
 		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
 		$config['svg_sanitizer']			= (int) $_POST['svg_sanitizer'];
-		$config['img_create_thumbnail']		= (int) $_POST['img_create_thumbnail'];
-		$config['img_max_thumb_width']		= (int) $_POST['img_max_thumb_width'];
+		$config['create_thumbnail']			= (int) $_POST['create_thumbnail'];
+		$config['jpeg_quality']				= (int) $_POST['jpeg_quality'];
+		$config['max_thumb_width']			= (int) $_POST['max_thumb_width'];
 
 		$engine->config->_set($config);
 
@@ -297,8 +298,8 @@ function admin_config_upload($engine, $module)
 					<small><?php echo $engine->_t('CreateThumbnailInfo');?></small>
 				</td>
 				<td>
-					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ($engine->db->img_create_thumbnail == 1 ? ' checked' : '');?>><label for="img_create_thumbnail_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ($engine->db->img_create_thumbnail == 0 ? ' checked' : '');?>><label for="img_create_thumbnail_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="create_thumbnail_on" name="create_thumbnail" value="1"<?php echo ($engine->db->create_thumbnail == 1 ? ' checked' : '');?>><label for="create_thumbnail_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="create_thumbnail_off" name="create_thumbnail" value="0"<?php echo ($engine->db->create_thumbnail == 0 ? ' checked' : '');?>><label for="create_thumbnail_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -306,11 +307,23 @@ function admin_config_upload($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="img_max_thumb_width"><strong><?php echo $engine->_t('MaxThumbWidth');?></strong><br>
+					<label for="jpeg_quality"><strong><?php echo $engine->_t('JpegQuality');?></strong><br>
+					<small><?php echo $engine->_t('JpegQualityInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" min="1" max="100" maxlength="3" size="3" id="jpeg_quality" name="jpeg_quality" value="<?php echo (int) $engine->db->jpeg_quality;?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="max_thumb_width"><strong><?php echo $engine->_t('MaxThumbWidth');?></strong><br>
 					<small><?php echo $engine->_t('MaxThumbWidthInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int) $engine->db->img_max_thumb_width;?>"> <?php echo $engine->_t('UnitPixel'); ?>
+					<input type="number" min="0" maxlength="15" size="7" id="max_thumb_width" name="max_thumb_width" value="<?php echo (int) $engine->db->max_thumb_width;?>"> <?php echo $engine->_t('UnitPixel'); ?>
 				</td>
 			</tr>
 

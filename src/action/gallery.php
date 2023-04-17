@@ -47,7 +47,7 @@ $file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
 $imgclass		= '';
 
-$width			= (int) $this->db->img_max_thumb_width;
+$width			= (int) $this->db->max_thumb_width;
 $thumb_prefix	= $width . 'px-';
 
 // set defaults
@@ -69,7 +69,7 @@ $limit			= (int) $max;
 $images_row		= (int) $perrow;
 
 // we're using a parameter token here to sort out multiple instances
-$param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
+$param_token	= substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
 
 // add PhotoSwipe
 if ($target == 2)
@@ -218,7 +218,7 @@ if ($can_view)
 				$file_name			= $file['file_name'];
 				$file_width			= ''; // $file['picture_w'];
 				$file_height		= ''; // $file['picture_h'];
-				$tbn_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
+				$tbn_name			= $thumb_prefix . $file['file_name'];
 
 				if ($caption == 1)
 				{
@@ -265,36 +265,11 @@ if ($can_view)
 						$thumb_name		= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $tbn_name);
 					}
 
+					// check for missing source image, we can't trust db record
 					if (file_exists($src_image))
 					{
-						// check for missing source image, we can't trust db record
-						if (!file_exists($thumb_name) && file_exists($src_image))
-						{
-							// create thumbnail
-							@set_time_limit(0);
-							@ignore_user_abort(true);
-
-							try
-							{
-								$thumb = new PHPThumb\GD($src_image);
-							}
-							catch (Exception $e)
-							{
-								// handle error here however you'd like
-							}
-
-							if (is_object($thumb))
-							{
-								$thumb->resize($width, $width);
-
-								// requires correct write permissions!
-								$thumb->save($thumb_name);
-							}
-						}
+						$this->create_thumbnail($thumb_name, $src_image, $width, $width);
 					}
-
-					// IDEA: adding a field like 'thumbnail' in the 'file' table for tracking,
-					// there might be many derived thumbs from the original image
 				}
 
 				if ($table)

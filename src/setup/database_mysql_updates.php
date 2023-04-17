@@ -28,7 +28,7 @@ $alter_cache_r6_0_1 = "ALTER TABLE {$pref}cache CHANGE query query VARCHAR(255) 
 // CATEGORY ASSIGNMENT
 
 // CONFIG
-$update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('default_typografica', 'dst', 'ext_bad_behavior', 'footer_rating', 'rename_globalacl', 'tag_page')";
+$update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('default_typografica', 'dst', 'ext_bad_behavior', 'footer_rating', 'img_create_thumbnail', 'img_max_thumb_width', 'rename_globalacl', 'tag_page')";
 
 // EXTERNAL LINK
 

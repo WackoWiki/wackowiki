@@ -3733,13 +3733,13 @@ class Wacko
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/u', $tag, $matches))
 		{
 			$aname			= '';
-			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
+			$nomedia		= $matches[1]; // files action: matches '_file:' - patched link to not render media in their tags when not needed
 			$_file_name		= $matches[2];
 			$file_array		= explode('/', $_file_name);
 			$param			= [];
 			$page_tag		= '';
 			$class			= 'file-link'; // generic file icon
-			$_global		= true;
+			$global			= true;
 			$file_access	= false;
 
 			// 1 -> file:/some.zip (global)
@@ -3765,7 +3765,7 @@ class Wacko
 				// 2a -> file:some.zip				(local relative)
 				// 2b -> file:/cluster/some.zip		(local absolute)
 				$local_file	= $file_array;
-				$_global	= false;
+				$global		= false;
 				$file_name	= $local_file[count($local_file) - 1];
 
 				unset($local_file[count($local_file) - 1]);
@@ -3814,7 +3814,7 @@ class Wacko
 				}
 
 				// check 403 here!
-				if ($_global || $file_access)
+				if ($global || $file_access)
 				{
 					$title		= Ut::html($file_data['file_description']) . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
 					$alt		= Ut::html($file_data['file_description']);
@@ -3826,7 +3826,7 @@ class Wacko
 					$tpl		= 'localfile';
 
 					// media it is
-					if (in_array($file_data['file_ext'], array_merge(self::EXT['audio'], self::EXT['bitmap'], self::EXT['drawing'], self::EXT['video'])) && !$noimg)
+					if (in_array($file_data['file_ext'], array_merge(self::EXT['audio'], self::EXT['bitmap'], self::EXT['drawing'], self::EXT['video'])) && !$nomedia)
 					{
 						if ($file_data['file_ext'] == 'svg')
 						{
@@ -3874,17 +3874,7 @@ class Wacko
 							$tpl	= 'localimage';
 							$icon	= '';
 
-							// direct file access
-							if ($_global)
-							{
-								$src	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
-							}
-							else
-							{
-								// no direct file access for local files, the file handler checks the access right first
-								$src	= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_data['file_name']]);
-							}
-
+							$src	= $this->media_src($file_data, $param, $page_tag, $global);
 							$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 
 							switch ($param['linking'])
@@ -3903,7 +3893,7 @@ class Wacko
 									break;
 							}
 
-							if($src && !$text)
+							if ($src && !$text)
 							{
 								$media_class = 'media-' . $param['align'];
 
@@ -3984,7 +3974,7 @@ class Wacko
 				$tpl	= 'wlocalfile';
 				$href	= '404';
 
-				if ($_global)
+				if ($global)
 				{
 					$title	= '404: /' . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
@@ -4435,6 +4425,85 @@ class Wacko
 		}
 
 		return $figure;
+	}
+
+	function media_src($file_data, $param, $page_tag, $global): string
+	{
+		// check for thumbnail
+		if ($thumb = $this->db->create_thumbnail
+			&& $file_data['picture_h'] && $param['width']
+			&& $file_data['picture_w'] >  $param['width'])
+		{
+			$thumb_name = $param['width'] . 'px-' . $file_data['file_name'];
+		}
+
+		// [a] direct file access for global file
+		if ($global)
+		{
+			if ($thumb)
+			{
+				$thumb_image	= Ut::join_path(THUMB_DIR, $thumb_name);
+				$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+				$src_name		= $thumb_image;
+			}
+			else
+			{
+				$src_name		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+			}
+
+			$src	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . $src_name;
+		}
+		// [b] no direct file access for local file, the file handler checks the access right first
+		else
+		{
+			if ($thumb)
+			{
+				$thumb_image	= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $thumb_name);
+				$src_image		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $file_data['file_name']);
+				$src_thumb		= ['tbn' => $param['width']];
+			}
+			else
+			{
+				$src_thumb		= [];
+			}
+
+			$src	= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_data['file_name']] + $src_thumb);
+		}
+
+		if ($thumb)
+		{
+			$this->create_thumbnail($thumb_image, $src_image, $param['width'], $param['height']);
+		}
+
+		return $src;
+	}
+
+	function create_thumbnail($thumb_name, $src_image, $width, $height): void
+	{
+		if (!file_exists($thumb_name))
+		{
+			// create thumbnail
+			@set_time_limit(0);
+			@ignore_user_abort(true);
+
+			try
+			{
+				$thumb = new PHPThumb\GD($src_image);
+			}
+			catch (Exception $e)
+			{
+				// handle error here however you'd like
+			}
+
+			if (is_object($thumb))
+			{
+				$thumb->setOptions(['jpegQuality' => (int) $this->db->jpeg_quality]);
+				$thumb->resize($width, $height);
+
+				// requires correct write permissions!
+				$thumb->save($thumb_name);
+			}
+		}
 	}
 
 	function image_link($src, $class, $id, $title, $alt = null, $scale = null): string
