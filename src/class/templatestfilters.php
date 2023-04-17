@@ -381,9 +381,9 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_truncate($value, $limit, $ellipsis = '...')
 	{
-		if (strlen($value) > $limit)
+		if (mb_strlen($value) > $limit)
 		{
-			$split	= explode(' ', substr($value, 0, (int) $limit));
+			$split	= explode(' ', mb_substr($value, 0, (int) $limit));
 			$split1	= array_slice($split, 0, -1);
 			$value	= implode(' ', $split1 ?: $split) . $ellipsis;
 		}
