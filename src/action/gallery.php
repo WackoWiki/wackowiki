@@ -217,7 +217,7 @@ if ($can_view)
 				$file_name			= $file['file_name'];
 				$file_width			= ''; // $file['picture_w'];
 				$file_height		= ''; // $file['picture_h'];
-				$tbn_name			= $width . 'px-' . $file['file_name'];
+				$tbn_name			= $this->thumb_name($file['file_name'], $width, 0, $file['file_ext']);
 
 				if ($caption == 1)
 				{
@@ -243,7 +243,7 @@ if ($can_view)
 				{
 					$src_path		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
 					$tbn_path		= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $tbn_name);
-					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $width]);
+					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $width . 'x' . '0']);
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 				}
 

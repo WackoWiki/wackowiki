@@ -4427,14 +4427,14 @@ class Wacko
 		return $figure;
 	}
 
-	function media_src($file_data, $param, $page_tag, $global): string
+	function media_src($file, $param, $tag, $global): string
 	{
 		// check for thumbnail
 		if ($thumb = $this->db->create_thumbnail
-			&& $file_data['picture_h'] && $param['width']
-			&& $file_data['picture_w'] >  $param['width'])
+			&& $file['picture_h'] && $param['width']
+			&& $file['picture_w'] >  $param['width'])
 		{
-			$thumb_name = $param['width'] . 'px-' . $file_data['file_name'];
+			$thumb_name = $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
 		}
 
 		// [a] direct file access for global file
@@ -4443,12 +4443,12 @@ class Wacko
 			if ($thumb)
 			{
 				$tbn_image	= Ut::join_path(THUMB_DIR, $thumb_name);
-				$src_image	= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+				$src_image	= Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 				$src_name	= $tbn_image;
 			}
 			else
 			{
-				$src_name	= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+				$src_name	= Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
 
 			$src	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . $src_name;
@@ -4458,16 +4458,16 @@ class Wacko
 		{
 			if ($thumb)
 			{
-				$tbn_image	= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $thumb_name);
-				$src_image	= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_data['page_id'] . '@' . $file_data['file_name']);
-				$src_thumb	= ['tbn' => $param['width']];
+				$tbn_image	= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file['page_id'] . '@' . $thumb_name);
+				$src_image	= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file['page_id'] . '@' . $file['file_name']);
+				$src_thumb	= ['tbn' => $param['width'] . 'x' . $param['height']];
 			}
 			else
 			{
 				$src_thumb		= [];
 			}
 
-			$src	= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_data['file_name']] + $src_thumb);
+			$src	= $this->href('file', utf8_trim($tag, '/'), ['get' => $file['file_name']] + $src_thumb);
 		}
 
 		if ($thumb)
@@ -4476,6 +4476,16 @@ class Wacko
 		}
 
 		return $src;
+	}
+
+	function thumb_name($name, $width, $height, $ext)
+	{
+		$suffix = 
+			'.thumb.' . 
+			$width . 'x' . $height . 
+			'.' . $ext;
+
+		return hash('sha1', $name) . $suffix;
 	}
 
 	function create_thumbnail($tbn_image, $src_image, $width, $height): void
