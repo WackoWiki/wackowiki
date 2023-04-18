@@ -37,7 +37,7 @@ $tbl_auth_token =
 $tbl_cache =
 	"CREATE TABLE {$pref}cache (
 		cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-		name CHAR(40) NOT NULL DEFAULT '',
+		hash CHAR(40) NOT NULL DEFAULT '',
 		method VARCHAR(20) NOT NULL DEFAULT '',
 		query VARCHAR(255) NOT NULL DEFAULT '',
 		cache_lang VARCHAR(5) NOT NULL DEFAULT '',

@@ -22,6 +22,7 @@ $delete_bad_behavior_r6_1_0 = "DROP TABLE {$pref}bad_behavior";
 
 // CACHE
 $alter_cache_r6_0_1 = "ALTER TABLE {$pref}cache CHANGE query query VARCHAR(255) NOT NULL DEFAULT ''";
+$alter_cache_r6_0_2 = "ALTER TABLE {$pref}cache CHANGE name hash CHAR(40) NOT NULL DEFAULT ''";
 
 // CATEGORY
 

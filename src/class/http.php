@@ -99,7 +99,7 @@ class Http
 
 		$this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "cache SET " .
-				"name		= " . $this->db->q($this->hash) . ", " .
+				"hash		= " . $this->db->q($this->hash) . ", " .
 				"method		= " . $this->db->q($this->method) . ", " .
 				"query		= " . $this->db->q($this->query) . ", " .
 				"cache_lang	= " . $this->db->q($this->lang) . ", " .	// user lang NOT user agent lang NOR page lang!
@@ -119,7 +119,7 @@ class Http
 			$params = $this->db->load_all(
 				"SELECT method, query, cache_lang " .
 				"FROM " . $this->db->table_prefix . "cache " .
-				"WHERE name = " . $this->db->q($hash));
+				"WHERE hash = " . $this->db->q($hash));
 
 			if ($params)
 			{
@@ -142,7 +142,7 @@ class Http
 
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "cache " .
-					"WHERE name = " . $this->db->q($hash));
+					"WHERE hash = " . $this->db->q($hash));
 			}
 		}
 
