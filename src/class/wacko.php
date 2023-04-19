@@ -4480,9 +4480,9 @@ class Wacko
 
 	function thumb_name($name, $width, $height, $ext)
 	{
-		$suffix = 
-			'.thumb.' . 
-			$width . 'x' . $height . 
+		$suffix =
+			'.thumb.' .
+			$width . 'x' . $height .
 			'.' . $ext;
 
 		return hash('sha1', $name) . $suffix;
@@ -5899,7 +5899,7 @@ class Wacko
 
 	function session_notice($message): void
 	{
-		if (    !$this->db->session_notice == 1
+		if (	!$this->db->session_notice == 1
 			|| !($this->db->session_notice == 2 && $this->is_admin()))
 		{
 			return;
@@ -7151,7 +7151,7 @@ class Wacko
 					$item = $title ? $link[2] : $link[1];
 
 					if ($linking
-						&& (    $this->page['page_id'] != $link[0]
+						&& (	$this->page['page_id'] != $link[0]
 							|| ($this->page['page_id'] == $link[0]) && $this->method != 'show'))
 					{
 						$item = $this->link($link[1], '', $item);
@@ -7654,7 +7654,7 @@ class Wacko
 		if (isset($this->post_wacko_action['toc']))
 		{
 			// #2. find all <hX id="h1249-1" class="heading"></hX> & guide them in subroutine
-			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
+			//	notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
 			$what = preg_replace_callback(
 				"!(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)" .
 					"<a class=\"self-link\" href=\"#h\d+-\d+\"></a>)!i",
@@ -7664,7 +7664,7 @@ class Wacko
 		if (isset($this->post_wacko_action['p']))
 		{
 			// #2. find all <p id="p1249-1" class="auto"> & guide them in subroutine
-			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
+			//	notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
 			$what = preg_replace_callback("!(<p id=\"(p\d+-\d+)\" class=\"auto\">(.+?)</p>)!is",
 				[&$this, 'numerate_toc_callback_p'], $what);
 		}
@@ -7747,7 +7747,7 @@ class Wacko
 				$item = $titles? $this->get_page_title($link) : $this->add_spaces($step);
 
 				if ($linking
-					&& (    $link != $this->tag
+					&& (	$link != $this->tag
 						|| ($link == $this->tag && $this->method != 'show')))
 				{
 					$item = $this->link($link, '', $item);
@@ -8212,7 +8212,7 @@ class Wacko
 		{
 			// get filenames
 			$files = $this->db->load_all(
-				"SELECT file_id, page_id, user_id, file_name " .
+				"SELECT file_id, page_id, user_id, file_name, file_ext " .
 				"FROM " . $this->prefix . "file " .
 				"WHERE page_id = " . (int) $page['page_id']);
 
@@ -8224,8 +8224,7 @@ class Wacko
 				{
 					// moved file to backup folder
 
-					// remove category assignments
-					$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
+					$this->remove_file_meta($file);
 				}
 
 				// flag record as deleted in DB
@@ -8244,8 +8243,7 @@ class Wacko
 
 					@unlink($file_name);
 
-					// remove category assignments
-					$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
+					$this->remove_file_meta($file);
 				}
 
 				clearstatcache();
@@ -8273,7 +8271,7 @@ class Wacko
 
 		// get filenames
 		$file = $this->db->load_single(
-			"SELECT file_id, page_id, user_id, file_name " .
+			"SELECT file_id, page_id, user_id, file_name, file_ext " .
 			"FROM " . $this->prefix . "file " .
 			"WHERE file_id = " . (int) $file_id);
 
@@ -8320,11 +8318,45 @@ class Wacko
 			}
 		}
 
-		$this->remove_file_link($file['file_id']);
-		$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
+		$this->remove_file_meta($file);
 		$this->update_files_count($file['page_id'], $file['user_id']);
 
 		return true;
+	}
+
+	function remove_file_meta($file): bool
+	{
+		if ($this->db->create_thumbnail && in_array($file['file_ext'], self::EXT['bitmap']))
+		{
+			$this->purge_thumbnails($file['file_name'], $file['page_id'], $file['file_ext']);
+		}
+
+		$this->remove_file_link($file['file_id']);
+		$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
+
+		return true;
+	}
+
+	function purge_thumbnails($name, int $page_id, $ext)
+	{
+		$n			= 0;
+		$pattern	= hash('sha1', $name) . '.thumb.*.' . $ext;
+
+		$list		= Ut::file_glob(
+						($page_id
+							? THUMB_LOCAL_DIR . '/@' . $page_id . '@'
+							: THUMB_DIR . '/') .
+						$pattern);
+
+		foreach ($list as $file)
+		{
+			if (unlink($file))
+			{
+				++$n;
+			}
+		}
+
+		return $n;
 	}
 
 	// RESTORE
@@ -8858,7 +8890,7 @@ class Wacko
 		}
 
 		// check event level: do we have to log it?
-		if (    (int) $this->db->log_level === 0
+		if (	(int) $this->db->log_level === 0
 			|| ((int) $this->db->log_level !== 7
 					&& $level > (int) $this->db->log_level))
 		{
