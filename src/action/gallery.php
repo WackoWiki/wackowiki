@@ -47,7 +47,7 @@ $file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
 $imgclass		= '';
 
-$width			= (int) $this->db->max_thumb_width;
+$thumb_width	= (int) $this->db->max_thumb_width;
 
 // set defaults
 $caption		??= 1;
@@ -215,9 +215,9 @@ if ($can_view)
 				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 
 				$file_name			= $file['file_name'];
-				$file_width			= ''; // $file['picture_w'];
-				$file_height		= ''; // $file['picture_h'];
-				$tbn_name			= $this->thumb_name($file['file_name'], $width, 0, $file['file_ext']);
+				$width				= '';
+				$height				= '';
+				$tbn_name			= $this->thumb_name($file['file_name'], $thumb_width, 0, $file['file_ext']);
 
 				if ($caption == 1)
 				{
@@ -228,8 +228,8 @@ if ($can_view)
 					$file_caption	= $file['caption'];
 				}
 
-				$file_description	= $this->format(Ut::html($file['file_description']), 'typografica', ['lang' => $file['file_lang']]);
-				$file_caption		= $this->format(Ut::html($file_caption), 'typografica', ['lang' => $file['file_lang']]);
+				$file_description	= $this->format(Ut::html($file['file_description']),	'typografica', ['lang' => $file['file_lang']]);
+				$file_caption		= $this->format(Ut::html($file_caption),				'typografica', ['lang' => $file['file_lang']]);
 
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
@@ -242,15 +242,22 @@ if ($can_view)
 				else
 				{
 					$src_path		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
-					$tbn_path		= Ut::join_path(THUMB_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $tbn_name);
-					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $width . 'x' . '0']);
+					$tbn_path		= Ut::join_path(THUMB_LOCAL_DIR,  '@' . $file_page['page_id'] . '@' . $tbn_name);
+					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $thumb_width . 'x' . '0']);
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
+				}
+
+				// calculate relative height
+				if ($thumb_width && $file['picture_h'])
+				{
+					$height	= round(($thumb_width * $file['picture_h']) / $file['picture_w']);
+					$width	= $thumb_width;
 				}
 
 				$tpl->img	= '<img src="' . $tbn_src . '" ' .
 					'loading="lazy" ' .
 					($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') .
-					' width="' . $file_width . '" height="' . $file_height . '" ' .
+					' width="' . $width . '" height="' . $height . '" ' .
 					($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
 				// check for missing source image, we can't trust db record
