@@ -79,7 +79,7 @@ if ($this->can_upload(true))
 		// adds 'accept' attribute depending on config settings
 		// https://www.w3.org/TR/html5/forms.html#attr-input-accept
 		$tpl->u_accecpt = 'accept="' . $accept_types($allowed_types) . '"';
-		$tpl->u_allowed = Ut::perc_replace($this->_t('PermittedFiletype'), $allowed_types);
+		$tpl->u_allowed = $allowed_types;
 	}
 
 	$tpl->u_size = $this->binary_multiples($maxfilesize, false, true, true);
