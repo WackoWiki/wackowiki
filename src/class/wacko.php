@@ -3655,16 +3655,16 @@ class Wacko
 			$title	= $this->_t('EmailLink');
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
-			$tpl	= 'email';
+			$tpl	= 'outerlink';
 		}
 		// XMPP address -> xmpp:info@example.com
-		else if (preg_match('/^(xmpp:)?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
+		else if (preg_match('/^xmpp:[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
-			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
+			$href	= $tag;
 			$title	= $this->_t('JabberLink');
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
-			$tpl	= 'jabber';
+			$tpl	= 'outerlink';
 		}
 		// HTML anchor #...
 		else if (str_starts_with($tag, '#'))
@@ -3691,31 +3691,18 @@ class Wacko
 			}
 		}
 		// file link -> http://example.com/file.zip
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/u', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(7z|bz2|doc|exe|gz|odt|pdf|ppt|rar|rdf|rpm|tgz|xls|zip)$/u', $tag, $matches))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->_t('FileLink');
+			$title	= match($matches[3])
+			{
+				'pdf'		=> $this->_t('PDFLink'),
+				'rdf'		=> $this->_t('RDFLink'),
+				default		=> $this->_t('FileLink'),
+			};
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
-			$tpl	= 'file';
-		}
-		// PDF link
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/u', $tag))
-		{
-			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->_t('PDFLink');
-			$icon	= $this->_t('Icon.Outer');
-			$class	= '';
-			$tpl	= 'file';
-		}
-		// RDF link
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/u', $tag))
-		{
-			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->_t('RDFLink');
-			$icon	= $this->_t('Icon.Outer');
-			$class	= '';
-			$tpl	= 'file';
+			$tpl	= 'outerlink';
 		}
 		// external URL
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
@@ -4016,7 +4003,7 @@ class Wacko
 
 			$class	= 'group-link';
 			$icon	= $this->_t('Icon.Outer');
-			$tpl	= 'grouplink';
+			$tpl	= 'userlink';
 		}
 		// interwiki -> wiki:page
 		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
@@ -4031,7 +4018,7 @@ class Wacko
 			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
 			$class	= 'iw-' . mb_strtolower($matches[1]);
 			$icon	= $this->_t('Icon.Outer');
-			$tpl	= 'interwiki';
+			$tpl	= 'outerlink';
 		}
 		// wiki link
 		else if (preg_match('/^([\!\.' . self::PATTERN['ALPHANUM_P'] . ']+)(\#[' . self::PATTERN['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
@@ -4079,28 +4066,28 @@ class Wacko
 				$icon		= $this->_t('Icon.Child');
 				$page0		= mb_substr($tag, 2);
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'childpage';
+				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 3) == '../')
 			{
 				$icon		= $this->_t('Icon.Parent');
 				$page0		= mb_substr($tag, 3);
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'parentpage';
+				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 1) == '/')
 			{
 				$icon		= $this->_t('Icon.Root');
 				$page0		= mb_substr($tag, 1);
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'rootpage';
+				$tpl		= 'page';
 			}
 			else
 			{
 				$icon		= $this->_t('Icon.Equal');
 				$page0		= $tag;
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'equalpage';
+				$tpl		= 'page';
 			}
 
 			if ($img_link)

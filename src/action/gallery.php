@@ -33,10 +33,7 @@ if (!defined('IN_WACKO'))
 TODO: config settings
 	- image_processing (bool)
 	- thumbnails (bool)
-
-	- split local and global thumbs -> read access
 	- add filter for categories cat="one,two"
-	- remove thumbs with file or page
 	- fall back if no JS or Image manipulation library is available or disabled
 */
 
