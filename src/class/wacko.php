@@ -3271,11 +3271,11 @@ class Wacko
 			$patterns =[
 				['(' . self::PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 									'\\1¶\\2'],
 				['(' . self::PATTERN['UPPERNUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')',									'\\1¶\\2'],
-				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶' . self::PATTERN['UPPERNUM'] . ')',		'\\1'],
+				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶' . self::PATTERN['UPPERNUM'] . ')',	'\\1'],
 				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶\/)',									'\\1'],
 				['(' . self::PATTERN['UPPERNUM'] . ')¶(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
-				['\/¶(' . self::PATTERN['UPPERNUM'] . ')',																'/\\1'],
-				['¶',																									'_'],
+				['\/¶(' . self::PATTERN['UPPERNUM'] . ')',																	'/\\1'],
+				['¶',																										'_'],
 			];
 
 			foreach ($patterns as $pattern)
@@ -3648,16 +3648,16 @@ class Wacko
 			$title	= $this->_t('EmailLink');
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
-			$tpl	= 'email';
+			$tpl	= 'outerlink';
 		}
 		// XMPP address -> xmpp:info@example.com
-		else if (preg_match('/^(xmpp:)?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
+		else if (preg_match('/^xmpp:[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
-			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
+			$href	= $tag;
 			$title	= $this->_t('JabberLink');
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
-			$tpl	= 'jabber';
+			$tpl	= 'outerlink';
 		}
 		// HTML anchor #...
 		else if (preg_match('/^#/', $tag))
@@ -3684,31 +3684,18 @@ class Wacko
 			}
 		}
 		// file link -> http://example.com/file.zip
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/u', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(7z|bz2|doc|exe|gz|odt|pdf|ppt|rar|rdf|rpm|tgz|xls|zip)$/u', $tag, $matches))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->_t('FileLink');
+			$title	= match($matches[3])
+			{
+				'pdf'		=> $this->_t('PDFLink'),
+				'rdf'		=> $this->_t('RDFLink'),
+				default		=> $this->_t('FileLink'),
+			};
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
-			$tpl	= 'file';
-		}
-		// PDF link
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/u', $tag))
-		{
-			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->_t('PDFLink');
-			$icon	= $this->_t('Icon.Outer');
-			$class	= '';
-			$tpl	= 'file';
-		}
-		// RDF link
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/u', $tag))
-		{
-			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->_t('RDFLink');
-			$icon	= $this->_t('Icon.Outer');
-			$class	= '';
-			$tpl	= 'file';
+			$tpl	= 'outerlink';
 		}
 		// external URL
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
@@ -3726,13 +3713,13 @@ class Wacko
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/u', $tag, $matches))
 		{
 			$aname			= '';
-			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
+			$nomedia		= $matches[1]; // files action: matches '_file:' - patched link to not render media in their tags when not needed
 			$_file_name		= $matches[2];
 			$file_array		= explode('/', $_file_name);
 			$param			= [];
 			$page_tag		= '';
 			$class			= 'file-link'; // generic file icon
-			$_global		= true;
+			$global			= true;
 			$file_access	= false;
 
 			// 1 -> file:/some.zip (global)
@@ -3758,7 +3745,7 @@ class Wacko
 				// 2a -> file:some.zip				(local relative)
 				// 2b -> file:/cluster/some.zip		(local absolute)
 				$local_file	= $file_array;
-				$_global	= false;
+				$global		= false;
 				$file_name	= $local_file[count($local_file) - 1];
 
 				unset($local_file[count($local_file) - 1]);
@@ -3807,7 +3794,7 @@ class Wacko
 				}
 
 				// check 403 here!
-				if ($_global || $file_access)
+				if ($global || $file_access)
 				{
 					$title		= Ut::html($file_data['file_description']) . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
 					$alt		= Ut::html($file_data['file_description']);
@@ -3819,7 +3806,7 @@ class Wacko
 					$tpl		= 'localfile';
 
 					// media it is
-					if (in_array($file_data['file_ext'], array_merge(self::EXT['audio'], self::EXT['bitmap'], self::EXT['drawing'], self::EXT['video'])) && !$noimg)
+					if (in_array($file_data['file_ext'], array_merge(self::EXT['audio'], self::EXT['bitmap'], self::EXT['drawing'], self::EXT['video'])) && !$nomedia)
 					{
 						if ($file_data['file_ext'] == 'svg')
 						{
@@ -3868,7 +3855,7 @@ class Wacko
 							$icon	= '';
 
 							// direct file access
-							if ($_global)
+							if ($global)
 							{
 								$src	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
 							}
@@ -3896,7 +3883,7 @@ class Wacko
 									break;
 							}
 
-							if($src && !$text)
+							if ($src && !$text)
 							{
 								$media_class = 'media-' . $param['align'];
 
@@ -3977,7 +3964,7 @@ class Wacko
 				$tpl	= 'wlocalfile';
 				$href	= '404';
 
-				if ($_global)
+				if ($global)
 				{
 					$title	= '404: /' . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
@@ -4019,7 +4006,7 @@ class Wacko
 
 			$class	= 'group-link';
 			$icon	= $this->_t('Icon.Outer');
-			$tpl	= 'grouplink';
+			$tpl	= 'userlink';
 		}
 		// interwiki -> wiki:page
 		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
@@ -4034,7 +4021,7 @@ class Wacko
 			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
 			$class	= 'iw-' . mb_strtolower($matches[1]);
 			$icon	= $this->_t('Icon.Outer');
-			$tpl	= 'interwiki';
+			$tpl	= 'outerlink';
 		}
 		// wiki link
 		else if (preg_match('/^([\!\.' . self::PATTERN['ALPHANUM_P'] . ']+)(\#[' . self::PATTERN['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
@@ -4085,28 +4072,28 @@ class Wacko
 				$icon		= $this->_t('Icon.Child');
 				$page0		= mb_substr($tag, 2);
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'childpage';
+				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 3) == '../')
 			{
 				$icon		= $this->_t('Icon.Parent');
 				$page0		= mb_substr($tag, 3);
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'parentpage';
+				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 1) == '/')
 			{
 				$icon		= $this->_t('Icon.Root');
 				$page0		= mb_substr($tag, 1);
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'rootpage';
+				$tpl		= 'page';
 			}
 			else
 			{
 				$icon		= $this->_t('Icon.Equal');
 				$page0		= $tag;
 				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'equalpage';
+				$tpl		= 'page';
 			}
 
 			if ($img_link)

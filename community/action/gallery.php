@@ -16,18 +16,18 @@ if (!defined('IN_WACKO'))
  *
  * {{gallery
 
-	[page		= "page_tag"] - call image from another page
-	[global		= 0|1] - call global images
-	[perrow		= <Number of images per rows> (default = 5)]
-	[caption	= 1|2] - 1 show file description, 2 show file caption
-	[title		= "Gallery"] - album title
-	[target		= 1|2] - show large images without page (if = 2 in new browser window)
-	[nomark		= 1] - hide external border
-	[table		= 1] - pictures in table
+	[page		= "page_tag"]	- call image from another page
+	[global		= 0|1]			- call global images
+	[perrow		= Number]		- Number of images per rows(default = 5)
+	[caption	= 1|2]			- 1 show file description, 2 show file caption
+	[title		= "Gallery"]	- album title
+	[target		= 1|2]			- show large images without page (if = 2 in new browser window)
+	[nomark		= 1]			- hide external border
+	[table		= 1]			- pictures in table
 
 	[order		= "ext|name_desc|size|size_desc|time|time_desc"]
 	[owner		= "UserName"]
-	[max		= number]
+	[max		= Number]
 }}
 
 TODO: config settings
@@ -41,15 +41,13 @@ TODO: config settings
 */
 
 // include PHP Thumbnailer (see autoload.conf)
-#require_once 'lib/phpthumb/PHPThumb.php';
-#require_once 'lib/phpthumb/GD.php';
 
 // loading parameters
 $file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
 $thumb_prefix	= 'tn_';
 $imgclass		= '';
-$width			= $this->db->img_max_thumb_width; // default: 150
+$thumb_width	= (int) $this->db->img_max_thumb_width;
 
 // set defaults
 if (!isset($page))		$page		= '';
@@ -72,8 +70,8 @@ if ($max)
 }
 $images_row		= (int) $perrow;
 
-// we using a parameter token here to sort out multiple instances
-$param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
+// we're using a parameter token here to sort out multiple instances
+$param_token	= substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
 
 // add PhotoSwipe
 if ($target == 2)
@@ -103,8 +101,6 @@ EOD;
 
 $nav_offset		= (int) ($_GET[$param_token] ?? 1);
 
-$nav_offset		= (int) ($_GET[$param_token] ?? '');
-
 							$order_by = "file_name ASC";
 if ($order == 'ext')		$order_by = "file_ext ASC";
 if ($order == 'name_desc')	$order_by = "file_name DESC";
@@ -113,7 +109,7 @@ if ($order == 'size_desc')	$order_by = "file_size DESC";
 if ($order == 'time')		$order_by = "uploaded_dt ASC";
 if ($order == 'time_desc')	$order_by = "uploaded_dt DESC";
 
-// do we allowed to see?
+// do we allow to see?
 if (!$global)
 {
 	if ($page == '')
@@ -183,7 +179,7 @@ if ($can_view)
 		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}", true);
 
-	// Making an gallery
+	// Making a gallery
 	$cur = 0;
 
 	if (!$nomark)
@@ -220,8 +216,8 @@ if ($can_view)
 				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 
 				$file_name			= $file['file_name'];
-				$file_width			= ''; // $file['picture_w'];
-				$file_height		= ''; // $file['picture_h'];
+				$width			= '';
+				$height		= '';
 				$prefix_global		= '';
 				$tnb_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
 
@@ -249,10 +245,17 @@ if ($can_view)
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 				}
 
+				// calculate relative height
+				if ($thumb_width && $file['picture_h'])
+				{
+					$height	= round(($thumb_width * $file['picture_h']) / $file['picture_w']);
+					$width	= $thumb_width;
+				}
+
 				$tpl->img	= '<img src="' . $this->db->base_path . $tnb_path . '" ' .
 					'loading="lazy" ' .
 					($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') .
-					' width="' . $file_width . '" height="' . $file_height . '" ' .
+					' width="' . $width . '" height="' . $height . '" ' .
 					($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
 				if (!file_exists($tnb_path))

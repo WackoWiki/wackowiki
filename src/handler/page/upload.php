@@ -16,7 +16,7 @@ $can_upload		= $this->can_upload();
 $error			= '';
 $is_duplicate	= false;
 $is_global		= null;
-$is_image		= null;
+$is_image		= false;
 $prefix			= $this->prefix;
 
 $this->ensure_page(true);
@@ -278,7 +278,7 @@ if (isset($_POST['upload']) & $can_upload)
 						$forbid		= false;
 						$size		= [0, 0];
 
-						if ($is_image === true)
+						if ($is_image)
 						{
 							$size	= @getimagesize($tmp_name);
 						}
@@ -372,7 +372,7 @@ if (isset($_POST['upload']) & $can_upload)
 										"file_size			= " . (int) $file_size . "," .
 										"picture_w			= " . (int) $size[0] . "," .
 										"picture_h			= " . (int) $size[1] . "," .
-										"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
+										"file_ext			= " . $this->db->q($ext) . "," .
 										"mime_type			= " . $this->db->q($mime_type) . "," .
 										"uploaded_dt		= UTC_TIMESTAMP(), " .
 										"modified_dt		= UTC_TIMESTAMP(), " .
@@ -394,7 +394,7 @@ if (isset($_POST['upload']) & $can_upload)
 										"file_size			= " . (int) $file_size . "," .
 										"picture_w			= " . (int) $size[0] . "," .
 										"picture_h			= " . (int) $size[1] . "," .
-										"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
+										"file_ext			= " . $this->db->q($ext) . "," .
 										"mime_type			= " . $this->db->q($mime_type) . "," .
 										"uploaded_dt		= UTC_TIMESTAMP()," .
 										"modified_dt		= UTC_TIMESTAMP()," .
