@@ -3578,22 +3578,22 @@ class Wacko
 	*/
 	function link($tag, $method = '', $text = '', $title = '', $track = true, $safe = false, $anchor_link = true, $meta_direct = true): string
 	{
-		$aname		= '';
-		$caption	= '';
-		$class		= '';
-		$clear		= '';
-		$media_class = '';
-		$icon		= '';
-		$audio_link	= false;
-		$img_link	= false;
-		$video_link	= false;
-		$scale		= '';
-		$lang		= '';
-		$matches	= [];
-		$rel		= '';
-		$href		= '';
-		$text		= str_replace('"', '&quot;', $text);
-		$title		= str_replace('"', '&quot;', $title);
+		$aname			= '';
+		$audio_link		= false;
+		$caption		= '';
+		$class			= '';
+		$clear			= '';
+		$href			= '';
+		$icon			= '';
+		$img_link		= false;
+		$lang			= '';
+		$matches		= [];
+		$media_class	= '';
+		$rel			= '';
+		$scale			= '';
+		$text			= str_replace('"', '&quot;', $text);
+		$title			= str_replace('"', '&quot;', $title);
+		$video_link		= false;
 
 		if ($text)
 		{
@@ -3603,6 +3603,15 @@ class Wacko
 		if ($track)
 		{
 			$track = $this->link_tracking();
+
+			// tracking external link
+			if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+			{
+				if (!mb_stristr($tag, $this->db->base_url))
+				{
+					$this->track_link($tag, LINK_EXTERNAL);
+				}
+			}
 		}
 
 		if (!$safe)
@@ -3631,20 +3640,6 @@ class Wacko
 			else if ($matches[6])
 			{
 				$video_link = $link;
-			}
-		}
-
-		// TODO: match all external links for tracking: images, mail:, xampp:
-		// TODO: add related code to actions and handlers (currently there is no available use case)
-		if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
-		{
-			if (!mb_stristr($tag, $this->db->base_url))
-			{
-				// tracking external link
-				if ($track)
-				{
-					$this->track_link($tag, LINK_EXTERNAL);
-				}
 			}
 		}
 
@@ -3790,7 +3785,7 @@ class Wacko
 				}
 			}
 
-			// try to find file in global / local storage and return if success
+			// file in global or local namespace
 			if (is_array($file_data))
 			{
 				// set an anchor once for file link at the first appearance
@@ -3947,7 +3942,7 @@ class Wacko
 						}
 					}
 				}
-				else //403
+				else // 403
 				{
 					$href		= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_name]);
 					$icon		= $this->_t('Icon.Outer');
@@ -3956,7 +3951,7 @@ class Wacko
 					$class		= 'acl-denied';
 				}
 			}
-			else	//404
+			else	// 404
 			{
 				$tpl	= 'wlocalfile';
 				$href	= '404';
@@ -3969,7 +3964,7 @@ class Wacko
 				{
 					$title	= '404: /' . utf8_trim($page_tag, '/') . '/file' . ($this->db->rewrite_mode ? '?' : '&amp;') . 'get=' . $file_name;
 				}
-			} //forgot 'bout 403
+			} // forgot 'bout 403
 
 			unset($file_data);
 		}
