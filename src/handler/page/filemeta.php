@@ -56,9 +56,7 @@ $clean_text = function ($string)
 
 	// Make HTML in the description redundant
 	$string = $this->format($string, 'pre_wacko');
-	#$string = $this->format($string, 'wacko'); //
 	$string = $this->format($string, 'safehtml'); //
-	#$string = Ut::html($string, true); // breaks html unicode chars
 
 	return $string;
 };
@@ -155,9 +153,9 @@ if ($action && !empty($file))
 		$this->save_categories_list($file['file_id'], OBJECT_FILE);
 
 		$this->log(4, Ut::perc_replace(
-				$this->_t('LogUpdatedFileCategories', SYSTEM_LANG),
-				$this->tag . ' ' . $this->page['title'],
-				$file['file_name']));
+			$this->_t('LogUpdatedFileCategories', SYSTEM_LANG),
+			$this->tag . ' ' . $this->page['title'],
+			$file['file_name']));
 		$this->set_message($this->_t('CategoriesUpdated'), 'success');
 
 		$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
@@ -201,6 +199,8 @@ else if ($mode && !empty($file))
 		$href	= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 	}
 
+	$file_tag = $path . $file['file_name'];
+
 	if ($mode == 'show')
 	{
 		// 2.a SHOW FILE PROPERTIES
@@ -208,18 +208,18 @@ else if ($mode && !empty($file))
 
 		if ($this->has_access('read', $file['page_id']))
 		{
-			$tpl->link			= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name']));
+			$tpl->link			= $this->link($file_tag, '', Ut::shorten_string($file['file_name']));
 
 			// show image
 			if (in_array($file['file_ext'], array_merge(self::EXT['bitmap'], self::EXT['drawing'])))
 			{
 				$tpl->i_href		= $href;
-				$tpl->i_image		= $this->link($path . $file['file_name'], '', '', '', null, null, null, false);
+				$tpl->i_image		= $this->link($file_tag, '', '', '', null, null, null, false);
 			}
 			// show audio & video
 			else if (in_array($file['file_ext'], array_merge(self::EXT['audio'], self::EXT['video'])))
 			{
-				$tpl->m_image		= $this->link($path . $file['file_name'], '', '', '', null, null, null, false);
+				$tpl->m_image		= $this->link($file_tag, '', '', '', null, null, null, false);
 			}
 
 			if ($file['page_id'])
@@ -227,12 +227,12 @@ else if ($mode && !empty($file))
 				// relative path
 				$tpl->s_syntax		= 'file:' . $file['file_name'];
 				// absolute path (<details>)
-				$tpl->s_d_syntax	= $path . $file['file_name'];
+				$tpl->s_d_syntax	= $file_tag;
 			}
 			else
 			{
 				// absolute path
-				$tpl->s_syntax		= $path . $file['file_name'];
+				$tpl->s_syntax		= $file_tag;
 			}
 
 			$tpl->desc			= $format_desc($file['file_description'], $file['file_lang']);
@@ -288,7 +288,7 @@ else if ($mode && !empty($file))
 
 		if ($file_access($file))
 		{
-			$tpl->link		= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name'])) . '</h4>';
+			$tpl->link		= $this->link($file_tag, '', Ut::shorten_string($file['file_name'])) . '</h4>';
 			$tpl->desc		= $file['file_description'];
 			$tpl->caption	= Ut::html($file['caption']); // -> [ ' caption | pre ' ]
 
@@ -318,7 +318,7 @@ else if ($mode && !empty($file))
 
 		if ($file_access($file))
 		{
-			$tpl->link		= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name']));
+			$tpl->link		= $this->link($file_tag, '', Ut::shorten_string($file['file_name']));
 			$tpl->category	= $this->show_category_form($file['file_lang'], $file['file_id'], OBJECT_FILE, false);
 			$tpl->fileid	= $file['file_id'];
 		}
@@ -332,7 +332,7 @@ else if ($mode && !empty($file))
 
 		if ($file_access($file))
 		{
-			$tpl->link		= $this->link($path . $file['file_name'], '', Ut::shorten_string($file['file_name']));
+			$tpl->link		= $this->link($file_tag, '', Ut::shorten_string($file['file_name']));
 			$tpl->file		= $file; // array -> [ ' file.field ' ]
 			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
 			$tpl->user		= $this->user_link($file['user_name'], true, false);

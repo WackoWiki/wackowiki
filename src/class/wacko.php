@@ -4483,7 +4483,7 @@ class Wacko
 	{
 		$max_image_area = $this->db->max_image_area;
 
-		if ($max_image_area === false)
+		if (!$max_image_area)
 		{
 			return true;
 		}
