@@ -119,6 +119,7 @@ $config_db['maint_last_oldpages']			= 1;
 $config_db['maint_last_refs']				= 1;
 $config_db['maint_last_session']			= 1;
 $config_db['maint_last_xml_sitemap']		= 1;
+$config_db['max_image_area']				= $config['max_image_area'];
 $config_db['max_login_attempts']			= $config['max_login_attempts'];
 $config_db['max_page_size']					= $config['max_page_size'];
 $config_db['max_thumb_width']				= $config['max_thumb_width'];

@@ -323,7 +323,17 @@ function admin_config_upload($engine, $module)
 					<small><?php echo $engine->_t('MaxThumbWidthInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="7" id="max_thumb_width" name="max_thumb_width" value="<?php echo (int) $engine->db->max_thumb_width;?>"> <?php echo $engine->_t('UnitPixel'); ?>
+					<select id="max_thumb_width" name="max_thumb_width">
+					<?php
+					$thumb_width = [120, 150, 180, 200, 250, 300];
+
+					foreach ($thumb_width as $width)
+					{
+						$selected = ($engine->db->max_thumb_width == $width ? ' selected' : '');
+						echo '<option value="' . $width . '"' . $selected . '>' . $width . '</option>';
+					}
+					?>
+					</select> <?php echo $engine->_t('UnitPixel'); ?>
 				</td>
 			</tr>
 

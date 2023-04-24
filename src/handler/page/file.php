@@ -12,6 +12,7 @@ if (!isset($_GET['get']) || (!isset($_GET['global']) && !$this->page))
 
 $file_path		= '';
 $file_name		= $_GET['get'];
+$page_id		= isset($_GET['global'])? 0 : $this->page['page_id'];
 $thumbnail		= $_GET['tbn'] ?? '';
 
 if (!preg_match('/^([' . self::PATTERN['ALPHANUM_P'] . '\.]+)$/u', $file_name))
@@ -22,8 +23,6 @@ if (!preg_match('/^([' . self::PATTERN['ALPHANUM_P'] . '\.]+)$/u', $file_name))
 }
 
 // 1. check existence
-$page_id = isset($_GET['global'])? 0 : $this->page['page_id'];
-
 $file = $this->db->load_single(
 	"SELECT file_id, user_id, file_name, file_ext " .
 	"FROM " . $this->prefix . "file " .
@@ -46,22 +45,21 @@ if (   $this->is_admin()
 {
 	if ($thumbnail)
 	{
-		[$width, $height] = explode('x', $thumbnail);
+		[$width, $height]	= explode('x', $thumbnail);
+		$file_name			= $this->thumb_name($file['file_name'], $width, $height, $file['file_ext']);
+		$directory			= $page_id ? THUMB_LOCAL_DIR : THUMB_DIR;
 
-		$file_path = Ut::join_path(
-			($page_id ? THUMB_LOCAL_DIR : THUMB_DIR),
-			($page_id ? '@' . $this->page['page_id'] . '@' : '') .
-			$this->thumb_name($file['file_name'], $width, $height, $file['file_ext']));
 	}
 	else
 	{
-		$file_path = Ut::join_path(
-			($page_id ? UPLOAD_LOCAL_DIR : UPLOAD_GLOBAL_DIR),
-			($page_id
-				? '@' . $this->page['page_id'] . '@'
-				: '') .
-			$file['file_name']);
+		$file_name			= $file['file_name'];
+		$directory			= $page_id ? UPLOAD_LOCAL_DIR : UPLOAD_GLOBAL_DIR;
 	}
+
+	$file_path = Ut::join_path(
+		$directory,
+		($page_id ? '@' . $this->page['page_id'] . '@' : '') .
+		$file_name);
 }
 else
 {
@@ -71,5 +69,5 @@ else
 }
 
 // 3. passthru
-$this->http->sendfile($file_path, $file['file_name']);
+$this->http->sendfile($file_path, $file_name);
 $this->http->terminate();

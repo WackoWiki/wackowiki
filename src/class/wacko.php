@@ -4411,11 +4411,15 @@ class Wacko
 
 	function media_src($file, $param, $tag, $global): string
 	{
+		$thumb = false;
+
 		// check for thumbnail
-		if ($thumb = $this->db->create_thumbnail
+		if ($this->db->create_thumbnail
+			&& $this->thumbnail_image_area($file['picture_w'], $file['picture_h'])
 			&& $file['picture_h'] && $param['width']
 			&& $file['picture_w'] >  $param['width'])
 		{
+			$thumb		= true;
 			$thumb_name = $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
 		}
 
@@ -4460,7 +4464,7 @@ class Wacko
 		return $src;
 	}
 
-	function thumb_name($name, $width, $height, $ext)
+	function thumb_name($name, int $width, int $height, $ext): string
 	{
 		$suffix =
 			'.thumb.' .
@@ -4468,6 +4472,28 @@ class Wacko
 			'.' . $ext;
 
 		return hash('sha1', $name) . $suffix;
+	}
+
+	/**
+	 * Check if the file is smaller than the maximum image area for thumbnailing.
+	 *
+	 * This provides a limit on memory usage for the decompression side of the image scaler.
+	 */
+	public function thumbnail_image_area($width, $height): bool
+	{
+		$max_image_area = $this->db->max_image_area;
+
+		if ($max_image_area === false)
+		{
+			return true;
+		}
+
+		if ( $width * $height > $max_image_area)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	function create_thumbnail($tbn_image, $src_image, $width, $height): void
