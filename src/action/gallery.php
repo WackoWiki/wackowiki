@@ -245,11 +245,7 @@ if ($can_view)
 				}
 
 				// calculate relative height
-				if ($thumb_width && $file['picture_h'])
-				{
-					$height	= round(($thumb_width * $file['picture_h']) / $file['picture_w']);
-					$width	= $thumb_width;
-				}
+				[$width, $height] = $this->get_img_width_height($thumb_width, 0, $file['picture_w'], $file['picture_h']);
 
 				$tpl->img	= '<img src="' . $tbn_src . '" ' .
 					'loading="lazy" ' .

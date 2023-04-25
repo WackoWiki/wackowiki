@@ -3363,6 +3363,26 @@ class Wacko
 		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text . '</a>';
 	}
 
+
+	// get the width and height to display image at
+	function get_img_width_height($max_width, $max_height, $width, $height)
+	{
+		if ($max_height && !$max_width && $height)
+		{
+			// calculate relative width, e.g. ?0x400
+			$width	= round(($max_height * $width) / $height);
+			$height	= $max_height;
+		}
+		else if ($max_width && !$max_height && $height)
+		{
+			// calculate relative height, e.g. ?600
+			$height	= round(($max_width * $height) / $width);
+			$width	= $max_width;
+		}
+
+		return [$width, $height];
+	}
+
 	// parse off <img> resizing tags from text: height= / width= / align=, e.g. ((http://example.com/image.png width=500))
 	function parse_img_param($text): array
 	{
@@ -3823,16 +3843,11 @@ class Wacko
 						}
 						else
 						{
-							if ($param['height'] && !$param['width'] && $file_data['picture_h'])
-							{
-								// calculate relative width, e.g. ?0x400
-								$param['width'] = round(($param['height'] * $file_data['picture_w']) / $file_data['picture_h']);
-							}
-							else if ($param['width'] && !$param['height'] && $file_data['picture_h'])
-							{
-								// calculate relative height, e.g. ?600
-								$param['height'] = round(($param['width'] * $file_data['picture_h']) / $file_data['picture_w']);
-							}
+							[$param['width'], $param['height']] = $this->get_img_width_height(
+								$param['width'],
+								$param['height'],
+								$file_data['picture_w'],
+								$file_data['picture_h']);
 
 							if ($file_data['picture_w'])
 							{
@@ -3857,6 +3872,8 @@ class Wacko
 							$icon	= '';
 
 							$src	= $this->media_src($file_data, $param, $page_tag, $global);
+							// set new width and height for max_image_width
+							$scale	= ' width="' . $param['width'] . '" height="' . $param['height'] . '"';
 							$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 
 							switch ($param['linking'])
@@ -4409,18 +4426,27 @@ class Wacko
 		return $figure;
 	}
 
-	function media_src($file, $param, $tag, $global): string
+	function media_src($file, &$param, $tag, $global): string
 	{
 		$thumb = false;
 
 		// check for thumbnail
 		if ($this->db->create_thumbnail
-			&& $this->thumbnail_image_area($file['picture_w'], $file['picture_h'])
-			&& $file['picture_h'] && $param['width']
-			&& $file['picture_w'] >  $param['width'])
+			&& $this->thumbnail_image_area($file['picture_w'], $file['picture_h']))
 		{
-			$thumb		= true;
-			$thumb_name = $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
+			if ($file['picture_h'] && $param['width']
+				&& $file['picture_w'] > $param['width'])
+			{
+				$thumb		= true;
+				$thumb_name = $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
+			}
+			else if ($this->db->max_image_width && $file['picture_h']
+				&& $file['picture_w'] > $this->db->max_image_width)
+			{
+				$thumb		= true;
+				[$param['width'], $param['height']] = $this->get_img_width_height($this->db->max_image_width, 0, $file['picture_w'], $file['picture_h']);
+				$thumb_name = $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
+			}
 		}
 
 		// [a] direct file access for global file
@@ -4500,7 +4526,6 @@ class Wacko
 	{
 		if (!file_exists($tbn_image))
 		{
-			// create thumbnail
 			@set_time_limit(0);
 			@ignore_user_abort(true);
 
@@ -4637,14 +4662,14 @@ class Wacko
 			['(' . self::PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 												'\\1' . NBSP . '\\2'],
 			['(' . self::PATTERN['UPPERNUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')',												'\\1' . NBSP . '\\2'],
 			['(' . self::PATTERN['ALPHANUM'] . ')\/',																				'\\1' . NBSP . '/'],
-			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . self::PATTERN['UPPERNUM'] . ')',		'\\1'],
+			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . self::PATTERN['UPPERNUM'] . ')',	'\\1'],
 			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . '\/)',								'\\1'],
 			['\/(' . self::PATTERN['ALPHANUM'] . ')',																				'\\1'],
 			['(' . self::PATTERN['UPPERNUM'] . ')' . NBSP . '(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
 			['(\d)(' . self::PATTERN['ALPHA'] . ')',																				'\\2'],
 			['(' . self::PATTERN['ALPHA'] . ')(\d)',																				'\\2'],
-			# ['(\d)' . NBSP . '(?=\d)',																						'\\1'],
-			['(\d)' . NBSP . '(?!' . self::PATTERN['ALPHA'] . ')',																'\\1'],
+			# ['(\d)' . NBSP . '(?=\d)',																							'\\1'],
+			['(\d)' . NBSP . '(?!' . self::PATTERN['ALPHA'] . ')',																	'\\1'],
 		];
 
 		foreach ($patterns as $pattern)

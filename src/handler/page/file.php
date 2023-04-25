@@ -48,7 +48,6 @@ if (   $this->is_admin()
 		[$width, $height]	= explode('x', $thumbnail);
 		$file_name			= $this->thumb_name($file['file_name'], $width, $height, $file['file_ext']);
 		$directory			= $page_id ? THUMB_LOCAL_DIR : THUMB_DIR;
-
 	}
 	else
 	{

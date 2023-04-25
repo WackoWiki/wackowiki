@@ -118,6 +118,7 @@ function admin_config_upload($engine, $module)
 		$config['create_thumbnail']			= (int) $_POST['create_thumbnail'];
 		$config['jpeg_quality']				= (int) $_POST['jpeg_quality'];
 		$config['max_thumb_width']			= (int) $_POST['max_thumb_width'];
+		$config['max_image_width']			= (int) $_POST['max_image_width'];
 
 		$engine->config->_set($config);
 
@@ -331,6 +332,28 @@ function admin_config_upload($engine, $module)
 					{
 						$selected = ($engine->db->max_thumb_width == $width ? ' selected' : '');
 						echo '<option value="' . $width . '"' . $selected . '>' . $width . '</option>';
+					}
+					?>
+					</select> <?php echo $engine->_t('UnitPixel'); ?>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="max_image_width"><strong><?php echo $engine->_t('MaxImageWidth');?></strong><br>
+					<small><?php echo $engine->_t('MaxImageWidthInfo');?></small></label>
+				</td>
+				<td>
+					<select id="max_image_width" name="max_image_width">
+					<?php
+					$max_width = [0, 320, 640, 800, 1024, 1280, 2560];
+
+					foreach ($max_width as $width)
+					{
+						$selected = ($engine->db->max_image_width == $width ? ' selected' : '');
+						echo '<option value="' . $width . '"' . $selected . '>' . ($width ?: $engine->_t('Off')) . '</option>';
 					}
 					?>
 					</select> <?php echo $engine->_t('UnitPixel'); ?>
