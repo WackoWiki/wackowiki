@@ -14,7 +14,7 @@
 				<td>[ ' num ' ]</td>
 				<td>[ ' link ' ]</td>
 				[= counter _ =
-					<td>[ ' hits | number 0 , . ' ]</td>
+					<td>[ ' hits | number_format ' ]</td>
 				=]
 			</tr>
 		=]

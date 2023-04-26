@@ -5249,8 +5249,8 @@ class Wacko
 
 					// pull
 					$tpl->pull('_t',		function ($block, $loc, $str)						{ return $this->_t($str); });
-					$tpl->pull('format_t',	function ($block, $loc, $str)						{ return $this->format_t($str); });
 					$tpl->pull('db',		function ($block, $loc, $str)						{ return $this->db[$str]; });
+					$tpl->pull('format_t',	function ($block, $loc, $str)						{ return $this->format_t($str); });
 					$tpl->pull('href',		function ($block, $loc, $method = '', $param = '')	{ return $this->href($method, '', $param); });
 					$tpl->pull('csrf',
 						function ($block, $loc, $action)
@@ -5269,11 +5269,7 @@ class Wacko
 					$tpl->setEncoding($this->charset);
 
 					// filter
-					$tpl->filter('time_formatted',
-						function ($value)
-						{
-							return $this->sql_time_formatted($value);
-						});
+					$tpl->filter('_t',				function ($str)						{ return $this->_t($str); });
 					$tpl->filter('hide_page',
 						function ($value)
 						{
@@ -5283,7 +5279,8 @@ class Wacko
 								return '<input type="hidden" name="page" value="' . $match[1] . '">';
 							}
 						});
-					$tpl->filter('_t', function ($str) { return $this->_t($str); });
+					$tpl->filter('number_format',	function ($value, $decimal = 0)		{ return $this->number_format($value, $decimal); });
+					$tpl->filter('time_formatted',	function ($value)					{ return $this->sql_time_formatted($value); });
 
 					// STS lotta goodies must go there..
 				}

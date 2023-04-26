@@ -122,7 +122,7 @@
 						[ ' moderate ' ] <strong>[ ' topic ' ]</strong>
 					</td>
 					<td title="[ ' ip ' ]"><small>[ ' user ' ]</small></td>
-					<td><small>[ ' comments | number 0 , . ' ]</small></td>
+					<td><small>[ ' comments | number_format ' ]</small></td>
 					<td><small>[ ' created | time_formatted ' ]</small></td>
 				</tr>
 			=]

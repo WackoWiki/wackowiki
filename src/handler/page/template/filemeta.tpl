@@ -45,7 +45,7 @@
 				[= p _ =
 					<tr>
 						<th scope="row">[ ' _t: FileDimension ' ]</th>
-						<td>[ ' width | number 0 , . ' ' ] × [ ' height | number 0 , . ' ' ] [ ' _t: UnitPixel ' ]</td>
+						<td>[ ' width | number_format ' ] × [ ' height | number_format ' ] [ ' _t: UnitPixel ' ]</td>
 					</tr>
 				=]
 				<tr>

@@ -46,8 +46,8 @@
 								[ ' topic.created | time_formatted ' ]
 							</small>
 						</td>
-						<td><small>[ ' topic.comments | number 0 , . ' ]</small></td>
-						<td><small>[ ' topic.hits | number 0 , . ' ]</small></td>
+						<td><small>[ ' topic.comments | number_format ' ]</small></td>
+						<td><small>[ ' topic.hits | number_format ' ]</small></td>
 						<td>
 							[= c =
 								<small[ ' style ' ] title="[ ' ip ' ]">
