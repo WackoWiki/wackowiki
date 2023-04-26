@@ -621,11 +621,14 @@ class Wacko
 	// converts a number to a locale-specific string
 	function number_format($number, $precision = 0)
 	{
-		$save	= $this->set_language($this->get_user()['user_lang'], true, true);
+		$lang	= $this->get_user()['user_lang'] ?? $this->db->language;
+		$save	= $this->set_language($lang, true, true);
+
 		$numfmt = new NumberFormatter($this->lang['locale'], NumberFormatter::DECIMAL);
 		$numfmt->setAttribute(NumberFormatter::ROUNDING_MODE, 0);
 		$numfmt->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $precision);
 		$numfmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $precision);
+
 		$this->set_language($save, true);
 
 		return $numfmt->format($number);
