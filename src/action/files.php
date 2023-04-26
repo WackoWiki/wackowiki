@@ -449,7 +449,7 @@ if ($can_view)
 				$tpl->p_name		= Ut::shorten_string($file['file_name'], $file_name_maxlen);
 				$tpl->p_desc		= $desc;
 				$tpl->p_meta		= ($file['picture_w']
-										? number_format($file['picture_w'], 0, ',', '.') . ' × ' . number_format($file['picture_h'], 0, ',', '.') . ' px'
+										? $this->number_format($file['picture_w']) . ' × ' . $this->number_format($file['picture_h']) . ' px'
 										: '');
 				$tpl->p_size		= $file_size;
 				$tpl->p_user		= $this->user_link($file['user_name'], true, false);

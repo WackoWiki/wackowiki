@@ -41,12 +41,12 @@ class Diag
 				}
 
 				#echo "<li>UTC: " . date('Y-m-d H:i:s', time()) . "</li>\n";
-				echo "\t<li>Overall time taken: " . (number_format(($overall_time), 3)) . " sec. </li>\n";
+				echo "\t<li>Overall time taken: " . $engine->number_format($overall_time, 3) . " sec. </li>\n";
 
 				if ($config['debug'] >= 2)
 				{
-					echo "\t<li>Execution time: " . number_format($overall_time - $config->query_time, 3) . " sec.</li>\n";
-					echo "\t<li>SQL time: " . number_format($config->query_time, 3) . " sec.</li>\n";
+					echo "\t<li>Execution time: " . $engine->number_format($overall_time - $config->query_time, 3) . " sec.</li>\n";
+					echo "\t<li>SQL time: " . $engine->number_format($config->query_time, 3) . " sec.</li>\n";
 				}
 
 				if ($config['debug'] >= 3)
@@ -96,7 +96,7 @@ class Diag
 						echo "\t";
 						echo '<li class="sqllog">';
 						echo str_replace(['<', '>'], ['&lt;', '&gt;'], $query) . '<br>';
-						echo '[' . number_format($time, 4) . ' sec., ' . $affected_rows . ' rows';
+						echo '[' . $engine->number_format($time, 4) . ' sec., ' . $affected_rows . ' rows';
 						echo '<div class="backtrace">';
 						echo '<table>' . $btext . '</table>';
 						echo "</div>]</li>\n";

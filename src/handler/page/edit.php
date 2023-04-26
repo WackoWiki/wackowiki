@@ -145,7 +145,7 @@ if ($this->has_access('read')
 			{
 				$message = Ut::perc_replace(
 					$this->_t('TextDbOversize'),
-					'<code>' . number_format($text_size - $this->db->max_page_size, 0, ',', '.') . '</code>');
+					'<code>' . $this->number_format($text_size - $this->db->max_page_size) . '</code>');
 				$this->set_message($message , 'error');
 				$error = true;
 			}
@@ -330,7 +330,7 @@ if ($this->has_access('read')
 	// preview?
 	if (isset($_POST['preview']))
 	{
-		$text_chars			= number_format(mb_strlen($_body), 0, ',', '.');
+		$text_chars			= $this->number_format(mb_strlen($_body));
 		$preview			= $this->format($_body,		'pre_wacko');
 		$preview			= $this->format($preview,	'wacko');
 		$preview			= $this->format($preview,	'post_wacko', ['strip_marker' => true]);

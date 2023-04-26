@@ -618,6 +618,19 @@ class Wacko
 			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
 	}
 
+	// converts a number to a locale-specific string
+	function number_format($number, $precision = 0)
+	{
+		$save	= $this->set_language($this->get_user()['user_lang'], true, true);
+		$numfmt = new NumberFormatter($this->lang['locale'], NumberFormatter::DECIMAL);
+		$numfmt->setAttribute(NumberFormatter::ROUNDING_MODE, 0);
+		$numfmt->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $precision);
+		$numfmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $precision);
+		$this->set_language($save, true);
+
+		return $numfmt->format($number);
+	}
+
 	// LANG FUNCTIONS
 	function set_translation($lang): void
 	{
@@ -9367,16 +9380,18 @@ class Wacko
 
 			if ($rounded)
 			{
-				$size = round($size, 0);
+				// for MiB and bigger use two decimal places
+				$precision	= $x > 1 ? 2 : 0;
+				$size		= $this->number_format($size, $precision);
 			}
 			else
 			{
-				$size = sprintf('%01.2f', $size);
+				$size		= $this->number_format($size, 2); #sprintf('%01.2f', $size);
 			}
 
 			if ($suffix)
 			{
-				$size = $size . NBSP . $norm[$x];
+				$size		= $size . NBSP . $norm[$x];
 			}
 
 			return $size;
@@ -9404,12 +9419,12 @@ class Wacko
 		if ($size_delta > 0)
 		{
 			$diff_class = 'diff-pos';
-			$size_delta = '+' . number_format($size_delta, 0, ',', '.');
+			$size_delta = '+' . $this->number_format($size_delta);
 		}
 		else if ($size_delta < 0)
 		{
 			$diff_class = 'diff-neg';
-			$size_delta = number_format($size_delta, 0, ',', '.');
+			$size_delta = $this->number_format($size_delta);
 		}
 		else
 		{
