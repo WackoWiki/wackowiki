@@ -894,6 +894,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'Μια μικρογραφία που δημιουργείται δεν θα υπερβαίνει το πλάτος που καθορίζεται εδώ.',
 	'MinThumbFilesize'			=> 'Ελάχιστο μέγεθος αρχείου μικρογραφίας:',
 	'MinThumbFilesizeInfo'		=> 'Να μη δημιουργείται μικρογραφία για εικόνες μικρότερες από αυτό.',
+	'MaxImageWidth'				=> 'Όριο μεγέθους εικόνας στις σελίδες:',
+	'MaxImageWidthInfo'			=> 'Διαφορετικά, δημιουργείται μια μικρογραφία σε μικρότερη κλίμακα.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

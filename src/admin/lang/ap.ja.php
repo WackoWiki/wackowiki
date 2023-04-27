@@ -897,6 +897,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
 	'MinThumbFilesize'			=> 'Minimum thumbnail file size:',
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+	'MaxImageWidth'				=> 'ページ上の画像サイズ制限：',
+	'MaxImageWidthInfo'			=> 'ページ内で使用できる画像の最大幅を指定し、それ以外は縮小されたサムネイルが生成されます。',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

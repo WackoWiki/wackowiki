@@ -893,6 +893,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'Les miniatures générées ne dépasseront pas la largeur de cette valeur.',
 	'MinThumbFilesize'			=> 'Taille minimale des miniatures :',
 	'MinThumbFilesizeInfo'		=> 'Si la taille des images est inférieure à cette valeur, ces dernières ne seront pas miniaturisées.',
+	'MaxImageWidth'				=> 'Limite de taille de l\'image sur les pages :',
+	'MaxImageWidthInfo'			=> 'Largeur maximale d\'une image sur les pages, sinon une vignette réduite est générée.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'Liste des pages, révisions et fichiers supprimés.

@@ -894,6 +894,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'A generált kiskép nem fogja túllépni az itt megadott szélességet.',
 	'MinThumbFilesize'			=> 'Maximális kiskép állományméret:',
 	'MinThumbFilesizeInfo'		=> 'Ennél kisebb képeknél nem lesz kiskép készítve.',
+	'MaxImageWidth'				=> 'Képméretkorlátozás az oldalakon:',
+	'MaxImageWidthInfo'			=> 'A kép maximális szélessége az oldalakon, különben a rendszer egy kicsinyített miniatűr képet generál.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

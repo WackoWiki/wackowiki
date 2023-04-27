@@ -897,6 +897,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
 	'MinThumbFilesize'			=> 'Minimum thumbnail file size:',
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+	'MaxImageWidth'				=> '페이지의 이미지 크기 제한:',
+	'MaxImageWidthInfo'			=> '페이지에서 이미지가 가질 수 있는 최대 너비이며, 그렇지 않으면 축소된 썸네일이 생성됩니다.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

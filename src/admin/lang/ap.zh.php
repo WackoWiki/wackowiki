@@ -878,6 +878,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> '生成的缩略图不会超过此处设置的宽度。',
 	'MinThumbFilesize'			=> '最小缩略图文件大小：',
 	'MinThumbFilesizeInfo'		=> '不要为小于此大小的图像创建缩略图。',
+	'MaxImageWidth'				=> '页面上的图像大小限制：',
+	'MaxImageWidthInfo'			=> '图片在页面上的最大宽度，否则会生成一个缩小的缩略图。',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> '已删除页面、修订和文件的列表。 最后，通过单击相应行中的删除或恢复链接，从数据库中删除或恢复页面、修订或文件。 （注意，不要求删除确认！）',

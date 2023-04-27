@@ -892,6 +892,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'La miniatura generata non avrà una larghezza superiore a quella impostata qui.',
 	'MinThumbFilesize'			=> 'Dimensioni minime per miniatura:',
 	'MinThumbFilesizeInfo'		=> 'Non crea miniature per immagini con dimensioni inferiori a queste.',
+	'MaxImageWidth'				=> 'Limite di dimensione dell\'immagine nelle pagine:',
+	'MaxImageWidthInfo'			=> 'La larghezza massima che un\'immagine può avere nelle pagine, altrimenti viene generata una miniatura ridimensionata.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

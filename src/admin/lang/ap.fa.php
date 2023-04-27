@@ -897,6 +897,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
 	'MinThumbFilesize'			=> 'Minimum thumbnail file size:',
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+	'MaxImageWidth'				=> 'محدودیت اندازه تصویر در صفحات:',
+	'MaxImageWidthInfo'			=> 'حداکثر عرضی که یک تصویر می تواند در صفحات داشته باشد، در غیر این صورت یک تصویر کوچک کوچک شده ایجاد می شود.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

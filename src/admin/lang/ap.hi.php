@@ -897,6 +897,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
 	'MinThumbFilesize'			=> 'Minimum thumbnail file size:',
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+	'MaxImageWidth'				=> 'पृष्ठों पर छवि आकार सीमा:',
+	'MaxImageWidthInfo'			=> 'पृष्ठों पर छवि की अधिकतम चौड़ाई हो सकती है, अन्यथा एक छोटा छोटा थंबनेल उत्पन्न होता है।',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

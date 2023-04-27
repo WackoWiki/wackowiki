@@ -892,6 +892,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'Miniaturer vil ikke blive oprettet bredere end værdien defineret her.',
 	'MinThumbFilesize'			=> 'Grænse for oprettelse af miniature:',
 	'MinThumbFilesizeInfo'		=> 'Opret ikke miniature for billeder der er mindre end.',
+	'MaxImageWidth'				=> 'Begrænsning af billedstørrelse på sider:',
+	'MaxImageWidthInfo'			=> 'Den maksimale bredde, som et billede kan have på siderne, ellers genereres et nedskaleret miniaturebillede.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

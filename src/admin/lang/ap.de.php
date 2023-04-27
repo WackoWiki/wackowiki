@@ -896,6 +896,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'Ein Vorschaubild wird nicht breiter sein als der hier eingestellte Wert.',
 	'MinThumbFilesize'			=> 'Minimale Vorschaubild-Dateigröße:',
 	'MinThumbFilesizeInfo'		=> 'Erstellt keine Vorschaubilder bei Bildern, die kleiner sind als dieser Wert.',
+	'MaxImageWidth'				=> 'Begrenzung der Bildgröße auf Seiten:',
+	'MaxImageWidthInfo'			=> 'Die maximale Breite, die ein Bild auf Seiten haben kann, andernfalls wird ein verkleinertes Miniaturbild erzeugt.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten, Revisionen und Dateien.

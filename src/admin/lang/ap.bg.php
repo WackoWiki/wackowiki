@@ -894,6 +894,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'Генерираната галерия няма да превиши ширината тук.',
 	'MinThumbFilesize'			=> 'Минимален размер на галерията:',
 	'MinThumbFilesizeInfo'		=> 'Не създавайте галерия на изображения по-малки от размера тук.',
+	'MaxImageWidth'				=> 'Ограничение на размера на изображението на страниците:',
+	'MaxImageWidthInfo'			=> 'Максималната ширина на изображението на страниците, в противен случай се генерира умалена миниатюра.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

@@ -892,6 +892,9 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'Een aangemaakte miniatuur zal de hier ingestelde breedte niet overschrijden.',
 	'MinThumbFilesize'			=> 'Minimum miniatuur bestandsgrootte:',
 	'MinThumbFilesizeInfo'		=> 'Maakt geen miniatuur aan voor afbeeldingen kleiner dan dit.',
+	'MaxImageWidth'				=> 'Afbeeldingsgroottelimiet op pagina\'s:',
+	'MaxImageWidthInfo'			=> 'De maximale breedte die een afbeelding mag hebben op pagina\'s, anders wordt een verkleinde thumbnail gegenereerd.
+',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

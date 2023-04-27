@@ -894,6 +894,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'Loodud pisipilt ei ületa siin määratud laiust.',
 	'MinThumbFilesize'			=> 'Minimaalne pisipildi failisuurus:',
 	'MinThumbFilesizeInfo'		=> 'Ära loo pisipilti piltidele, mis on sellest väiksemad.',
+	'MaxImageWidth'				=> 'Pildi suuruse piirang lehekülgedel:',
+	'MaxImageWidthInfo'			=> 'Vastasel juhul genereeritakse väiksema suurusega pisipilt.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.

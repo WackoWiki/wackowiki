@@ -891,6 +891,8 @@ $ap_translation = [
 	'MaxThumbWidthInfo'			=> 'La mini-imagen generada no excederá este ancho.',
 	'MinThumbFilesize'			=> 'Tamaño mínimo para vista en miniatura:',
 	'MinThumbFilesizeInfo'		=> 'No crear vista en miniatura para imágenes más pequeñas que esto.',
+	'MaxImageWidth'				=> 'Límite de tamaño de la imagen en las páginas:',
+	'MaxImageWidthInfo'			=> 'El ancho máximo que puede tener una imagen en las páginas, de lo contrario se genera una miniatura a escala reducida.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'Lista de páginas, revisiones y archivos eliminados.
