@@ -694,14 +694,12 @@ class GD extends PHPThumb
 	 */
 	public function rotateImage(string $direction = 'CW'): GD
 	{
-		if ($direction == 'CW')
-		{
-			$this->rotateImageNDegrees(90);
-		}
-		else
-		{
-			$this->rotateImageNDegrees(-90);
-		}
+		$degrees = match($direction) {
+			'CW'		=> 90,
+			default		=> -90,
+		};
+
+		$this->rotateImageNDegrees($degrees);
 
 		return $this;
 	}

@@ -21,10 +21,12 @@
 					<td></td>
 					<td class="msg hint">
 						[ ' _t: UploadMax ' ] [ ' size ' ]<br>
-						<details>
-							<summary>[ ' _t: PermittedFiletype ' ]</summary>
-							[ ' allowed | e ' ]
-						</details>
+						[= d _ =
+							<details>
+								<summary>[ ' _t: PermittedFiletype ' ]</summary>
+								[ ' allowed | e ' ]
+							</details>
+						=]
 					</td>
 				</tr>
 				[= global _ =
