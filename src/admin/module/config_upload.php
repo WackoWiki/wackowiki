@@ -117,6 +117,7 @@ function admin_config_upload($engine, $module)
 		$config['svg_sanitizer']			= (int) $_POST['svg_sanitizer'];
 		$config['create_thumbnail']			= (int) $_POST['create_thumbnail'];
 		$config['jpeg_quality']				= (int) $_POST['jpeg_quality'];
+		$config['max_image_area']			= (int) $_POST['max_image_area'];
 		$config['max_thumb_width']			= (int) $_POST['max_thumb_width'];
 		$config['max_image_width']			= (int) $_POST['max_image_width'];
 
@@ -313,6 +314,18 @@ function admin_config_upload($engine, $module)
 				</td>
 				<td>
 					<input type="number" min="1" max="100" maxlength="3" size="3" id="jpeg_quality" name="jpeg_quality" value="<?php echo (int) $engine->db->jpeg_quality;?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="max_image_area"><strong><?php echo $engine->_t('MaxImageArea');?></strong><br>
+					<small><?php echo $engine->_t('MaxImageAreaInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" min="-1" max="100000000000" maxlength="10" size="10" id="max_image_area" name="max_image_area" value="<?php echo (int) $engine->db->max_image_area;?>"> <?php echo $engine->_t('UnitPixel'); ?>
 				</td>
 			</tr>
 			<tr class="lined">

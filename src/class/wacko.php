@@ -858,6 +858,19 @@ class Wacko
 			return $this->resource[$name];
 		}
 
+		// fall back to English
+		if ($lang != 'en')
+		{
+			$save		= $this->set_language('en');
+
+			if ($text = @$this->translations['en'][$name])
+			{
+				$this->set_language($save, true);
+
+				return $text;
+			}
+		}
+
 		// NB: must return NULL if no translation available, it's API
 	}
 
@@ -4454,14 +4467,14 @@ class Wacko
 				&& $file['picture_w'] > $param['width'])
 			{
 				$thumb		= true;
-				$thumb_name = $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
+				$thumb_name	= $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
 			}
 			else if ($this->db->max_image_width && $file['picture_h']
 				&& $file['picture_w'] > $this->db->max_image_width)
 			{
 				$thumb		= true;
-				[$param['width'], $param['height']] = $this->get_img_width_height($this->db->max_image_width, 0, $file['picture_w'], $file['picture_h']);
-				$thumb_name = $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
+				[$param['width'], $param['height']]	= $this->get_img_width_height($this->db->max_image_width, 0, $file['picture_w'], $file['picture_h']);
+				$thumb_name	= $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
 			}
 		}
 
@@ -4525,12 +4538,25 @@ class Wacko
 	{
 		$max_image_area = $this->db->max_image_area;
 
-		if (!$max_image_area)
+		// no image size check before attempting to scale it
+		if ($max_image_area = -1)
 		{
 			return true;
 		}
 
-		if ( $width * $height > $max_image_area)
+		// dynamic determination
+		if (!$max_image_area)
+		{
+			$memory = Ut::shorthand_to_int(ini_get('memory_limit'));
+			// factor to MiB
+			$memory /= 1024 * 1024;
+			// cap memory, e.g. max 80%
+			$memory *= 0.8;
+			// MiB if decompressed to RGBA form
+			$max_image_area = $memory * 245000;
+		}
+
+		if ($width * $height > $max_image_area)
 		{
 			return false;
 		}
@@ -5822,7 +5848,7 @@ class Wacko
 	{
 		$user_max = $this->get_user_setting('list_count') ?? $this->db->list_count;
 
-		$user_max = match($user_max)
+		$user_max = match(true)
 		{
 			$user_max <= 0		=> 10,
 			$user_max > 100		=> 100,

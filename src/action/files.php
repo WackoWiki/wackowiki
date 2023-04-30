@@ -425,6 +425,16 @@ if ($can_view)
 				$desc = NBSP;
 			}
 
+			$thumb = '';
+
+			// create thumbnails for images with width > 500px
+			if ($this->db->create_thumbnail
+				&& in_array($file['file_ext'], self::EXT['bitmap'])
+				&& $file['picture_w'] > 500)
+			{
+				$thumb = '?450';
+			}
+
 			$file_id	= $file['file_id'];
 			$file_name	= $file['file_name'];
 			$shown_name	= Ut::shorten_string($file_name, $file_name_maxlen);
@@ -435,7 +445,7 @@ if ($can_view)
 							: $shown_name);
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
 
-			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
+			$link		= $this->link($path2 . $file_name . $thumb, '', $text, '', $track);
 
 			$tpl->enter('n_');
 
