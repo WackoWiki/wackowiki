@@ -429,6 +429,7 @@ if ($can_view)
 
 			// create thumbnails for images with width > 500px
 			if ($this->db->create_thumbnail
+				&& $media
 				&& in_array($file['file_ext'], self::EXT['bitmap'])
 				&& $file['picture_w'] > 500)
 			{
