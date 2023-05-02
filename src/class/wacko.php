@@ -4464,13 +4464,13 @@ class Wacko
 			&& $this->thumbnail_image_area($file['picture_w'], $file['picture_h']))
 		{
 			if ($file['picture_h'] && $param['width']
-				&& $file['picture_w'] > $param['width'])
+				&& $file['picture_w'] - $this->db->min_thumbnail_distance > $param['width'])
 			{
 				$thumb		= true;
 				$thumb_name	= $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
 			}
 			else if ($this->db->max_image_width && $file['picture_h']
-				&& $file['picture_w'] > $this->db->max_image_width)
+				&& $file['picture_w'] - $this->db->min_thumbnail_distance > $this->db->max_image_width)
 			{
 				$thumb		= true;
 				[$param['width'], $param['height']]	= $this->get_img_width_height($this->db->max_image_width, 0, $file['picture_w'], $file['picture_h']);
@@ -4548,12 +4548,15 @@ class Wacko
 		if (!$max_image_area)
 		{
 			$memory = Ut::shorthand_to_int(ini_get('memory_limit'));
+			// cap memory usage, e.g. max 80%
+			$memory *= 0.8;
 			// factor to MiB
 			$memory /= 1024 * 1024;
-			// cap memory, e.g. max 80%
-			$memory *= 0.8;
 			// MiB if decompressed to RGBA form
 			$max_image_area = $memory * 245000;
+
+			// keep value
+			$this->db->max_image_area = $max_image_area;
 		}
 
 		if ($width * $height > $max_image_area)
@@ -4582,11 +4585,16 @@ class Wacko
 
 			if (is_object($thumb))
 			{
+				$start = microtime(true);
+
 				$thumb->setOptions(['jpegQuality' => (int) $this->db->jpeg_quality]);
 				$thumb->resize($width, $height);
 
 				// requires correct write permissions!
 				$thumb->save($tbn_image);
+
+				$time = microtime(true) - $start;
+				$this->log(5, Ut::perc_replace($this->_t('LogThumbnailGeneration'), $this->number_format($time, 3)) . ' -> ' . $src_image . ' (' . $width . '×' . $height . ')');
 			}
 		}
 	}
