@@ -121,14 +121,7 @@ class GD extends PHPThumb
 		}
 
 		// create the working image
-		if (function_exists('imagecreatetruecolor'))
-		{
-			$this->workingImage = imagecreatetruecolor($width, $height);
-		}
-		else
-		{
-			$this->workingImage = imagecreate($width, $height);
-		}
+		$this->workingImage = imagecreatetruecolor($width, $height);
 
 		// create the fill color
 		$fillColor = imagecolorallocate(
@@ -175,8 +168,8 @@ class GD extends PHPThumb
 	{
 		if ($this->options['resizeUp'] === false)
 		{
-			$this->maxHeight	= ($maxHeight > $this->currentDimensions['height']) ? $this->currentDimensions['height'] : $maxHeight;
-			$this->maxWidth		= ($maxWidth > $this->currentDimensions['width']) ? $this->currentDimensions['width'] : $maxWidth;
+			$this->maxHeight	= ($maxHeight > $this->currentDimensions['height'])	? $this->currentDimensions['height'] 	: $maxHeight;
+			$this->maxWidth		= ($maxWidth > $this->currentDimensions['width'])	? $this->currentDimensions['width']		: $maxWidth;
 		}
 		else
 		{
@@ -204,14 +197,7 @@ class GD extends PHPThumb
 		$this->calcImageSize($this->currentDimensions['width'], $this->currentDimensions['height']);
 
 		// create the working image
-		if (function_exists('imagecreatetruecolor'))
-		{
-			$this->workingImage = imagecreatetruecolor($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
-		}
-		else
-		{
-			$this->workingImage = imagecreate($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
-		}
+		$this->workingImage = imagecreatetruecolor($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
 
 		$this->preserveAlpha();
 
@@ -273,14 +259,7 @@ class GD extends PHPThumb
 		$this->checkingMaxSize($width, $height);
 
 		// create the working image
-		if (function_exists('imagecreatetruecolor'))
-		{
-			$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
-		}
-		else
-		{
-			$this->workingImage = imagecreate($this->maxWidth, $this->maxHeight);
-		}
+		$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
 
 		$this->preserveAlpha();
 
@@ -370,14 +349,7 @@ class GD extends PHPThumb
 		$this->checkingMaxSize($width, $height);
 
 		// create the working image
-		if (function_exists('imagecreatetruecolor'))
-		{
-			$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
-		}
-		else
-		{
-			$this->workingImage = imagecreate($this->maxWidth, $this->maxHeight);
-		}
+		$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
 
 		$this->preserveAlpha();
 
@@ -479,14 +451,8 @@ class GD extends PHPThumb
 		$this->checkingMaxSize($width, $height);
 
 		// create the working image
-		if (function_exists('imagecreatetruecolor'))
-		{
-			$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
-		}
-		else
-		{
-			$this->workingImage = imagecreate($this->maxWidth, $this->maxHeight);
-		}
+		$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
+
 
 		$this->preserveAlpha();
 
@@ -606,14 +572,7 @@ class GD extends PHPThumb
 		}
 
 		// create the working image
-		if (function_exists('imagecreatetruecolor'))
-		{
-			$this->workingImage = imagecreatetruecolor($cropWidth, $cropHeight);
-		}
-		else
-		{
-			$this->workingImage = imagecreate($cropWidth, $cropHeight);
-		}
+		$this->workingImage = imagecreatetruecolor($cropWidth, $cropHeight);
 
 		$this->preserveAlpha();
 
@@ -858,24 +817,13 @@ class GD extends PHPThumb
 			imageinterlace($this->oldImage, 0);
 		}
 
-		switch ($format) {
-			case 'AVIF':
-				imageavif($this->oldImage, $fileName);
-				break;
-			case 'GIF':
-				imagegif($this->oldImage, $fileName);
-				break;
-			case 'JPEG':
-			case 'JPG':
-				imagejpeg($this->oldImage, $fileName, $this->options['jpegQuality']);
-				break;
-			case 'PNG':
-				imagepng($this->oldImage, $fileName);
-				break;
-			case 'WEBP':
-				imagewebp($this->oldImage, $fileName);
-				break;
-		}
+		$save = match ($format) {
+			'AVIF'			=> imageavif	($this->oldImage, $fileName),
+			'GIF'			=> imagegif		($this->oldImage, $fileName),
+			'JPEG', 'JPG'	=> imagejpeg	($this->oldImage, $fileName, $this->options['jpegQuality']),
+			'PNG'			=> imagepng		($this->oldImage, $fileName),
+			'WEBP'			=> imagewebp	($this->oldImage, $fileName),
+		};
 
 		return $this;
 	}
