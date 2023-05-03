@@ -24,37 +24,25 @@ abstract class PHPThumb
 	/**
 	 * The name of the file we're manipulating
 	 * This must include the path to the file (absolute paths recommended)
-	 *
-	 * @var string
 	 */
 	protected string $fileName;
 
 	/**
 	 * What the file format is (mime-type)
-	 *
-	 * @var string
 	 */
 	protected string $format;
 
 	/**
 	 * Whether or not the image is hosted remotely
-	 *
-	 * @var bool
 	 */
 	protected bool $remoteImage;
 
 	/**
 	 * An array of attached plugins to execute in order.
-	 * @var array
 	 */
 	protected array $plugins;
 
-	/**
-	 * @param $fileName
-	 * @param array $options
-	 * @param array $plugins
-	 */
-	public function __construct($fileName, array $options = [], array $plugins = [])
+	public function __construct(string $fileName, array $options = [], array $plugins = [])
 	{
 		$this->fileName		= $fileName;
 		$this->remoteImage	= false;
@@ -75,11 +63,8 @@ abstract class PHPThumb
 	 * Check the provided filename/url. If it is an url, validate that it is properly
 	 * formatted. If it is a file, check to make sure that it actually exists on
 	 * the filesystem.
-	 *
-	 * @param $filename
-	 * @return bool
 	 */
-	protected function validateRequestedResource($filename): bool
+	protected function validateRequestedResource(string $filename): bool
 	{
 		if (false !== filter_var($filename, FILTER_VALIDATE_URL))
 		{
@@ -97,7 +82,6 @@ abstract class PHPThumb
 
 	/**
 	 * Returns the filename.
-	 * @return string
 	 */
 	public function getFileName(): string
 	{
@@ -106,10 +90,8 @@ abstract class PHPThumb
 
 	/**
 	 * Sets the filename.
-	 * @param $fileName
-	 * @return PHPThumb
 	 */
-	public function setFileName($fileName): PHPThumb
+	public function setFileName(string $fileName): PHPThumb
 	{
 		$this->fileName = $fileName;
 
@@ -118,7 +100,6 @@ abstract class PHPThumb
 
 	/**
 	 * Returns the format.
-	 * @return string
 	 */
 	public function getFormat(): string
 	{
@@ -127,10 +108,8 @@ abstract class PHPThumb
 
 	/**
 	 * Sets the format.
-	 * @param $format
-	 * @return PHPThumb
 	 */
-	public function setFormat($format): PHPThumb
+	public function setFormat(string $format): PHPThumb
 	{
 		$this->format = $format;
 
@@ -139,7 +118,6 @@ abstract class PHPThumb
 
 	/**
 	 * Returns whether the image exists remotely, i.e. it was loaded via a URL.
-	 * @return bool
 	 */
 	public function getIsRemoteImage(): bool
 	{
