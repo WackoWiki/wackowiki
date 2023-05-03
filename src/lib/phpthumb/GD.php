@@ -1233,7 +1233,7 @@ class GD extends PHPThumb
 			'image/jpeg'	=> 'JPEG',
 			'image/png'		=> 'PNG',
 			'image/webp'	=> 'WEBP',
-			default			=> throw new \Exception('Image format not supported: ' . $mimeType),
+			default			=> throw new Exception('Image format not supported: ' . $mimeType),
 		};
 	}
 
@@ -1249,7 +1249,7 @@ class GD extends PHPThumb
 		$isCompatible = match ($this->format) {
 			'AVIF'	=> $gdInfo[$this->format . ' Support'],
 			'GIF'	=> $gdInfo['GIF Create Support'],
-			'JPEG'	=> isset($gdInfo['JPG Support']) || isset($gdInfo['JPEG Support']),
+			'JPEG'	=> $gdInfo[$this->format . ' Support'],
 			'PNG'	=> $gdInfo[$this->format . ' Support'],
 			'WEBP'	=> $gdInfo['WebP Support'],
 			default	=> false,

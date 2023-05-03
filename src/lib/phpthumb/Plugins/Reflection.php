@@ -58,10 +58,6 @@ class Reflection implements PluginInterface
 		$this->borderColor	= $borderColor;
 	}
 
-	/**
-	 * @param PHPThumb $phpthumb
-	 * @return PHPThumb
-	 */
 	public function execute(PHPThumb $phpthumb): PHPThumb
 	{
 		$this->currentDimensions	= $phpthumb->getCurrentDimensions();
@@ -241,12 +237,8 @@ class Reflection implements PluginInterface
 
 	/**
 	 * Converts a hex color to rgb tuples
-	 *
-	 * @param  string $hex
-	 * @param bool $asString
-	 * @return mixed
 	 */
-	protected function hex2rgb (string $hex, bool $asString = false): mixed
+	protected function hex2rgb (string $hex, bool $asString = false): string|array
 	{
 		// strip off any leading #
 		if (str_starts_with($hex, '#'))
@@ -267,6 +259,6 @@ class Reflection implements PluginInterface
 		$rgb[1] = (isset($rgb[1]) ? hexdec($rgb[1]) : 0);
 		$rgb[2] = (isset($rgb[2]) ? hexdec($rgb[2]) : 0);
 
-		return ($asString ? "{$rgb[0]} {$rgb[1]} {$rgb[2]}" : $rgb);
+		return ($asString ? "$rgb[0] $rgb[1] $rgb[2]" : $rgb);
 	}
 }
