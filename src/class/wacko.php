@@ -3872,14 +3872,14 @@ class Wacko
 						}
 						else
 						{
-							[$param['width'], $param['height']] = $this->get_img_width_height(
-								$param['width'],
-								$param['height'],
-								$file_data['picture_w'],
-								$file_data['picture_h']);
-
 							if ($file_data['picture_w'])
 							{
+								[$param['width'], $param['height']] = $this->get_img_width_height(
+									$param['width'],
+									$param['height'],
+									$file_data['picture_w'],
+									$file_data['picture_h']);
+
 								// takes user provided values else original size
 								$width	= $param['width']	?? $file_data['picture_w'];
 								$height	= $param['height']	?? $file_data['picture_h'];
@@ -3900,9 +3900,8 @@ class Wacko
 							$tpl	= 'localimage';
 							$icon	= '';
 
+							// $param gets updated via &$param for max_image_width
 							$src	= $this->media_src($file_data, $param, $page_tag, $global);
-							// set new width and height for max_image_width
-							$scale	= ' width="' . $param['width'] . '" height="' . $param['height'] . '"';
 							$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 
 							switch ($param['linking'])
@@ -3927,6 +3926,8 @@ class Wacko
 
 								if ($file_data['picture_w'] || $file_data['file_ext'] == 'svg')
 								{
+									// set new width and height for max_image_width
+									$scale	= ' width="' . $param['width'] . '" height="' . $param['height'] . '"';
 									$text	= $this->image_link($src, $media_class, $aname, $title, $alt, $scale);
 								}
 								else if (in_array($file_data['file_ext'], self::EXT['video']))
