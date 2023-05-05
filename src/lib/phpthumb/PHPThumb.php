@@ -25,7 +25,7 @@ abstract class PHPThumb
 	 * The name of the file we're manipulating
 	 * This must include the path to the file (absolute paths recommended)
 	 */
-	protected string $fileName;
+	protected string $file_name;
 
 	/**
 	 * What the file format is (mime-type)
@@ -35,21 +35,21 @@ abstract class PHPThumb
 	/**
 	 * Whether or not the image is hosted remotely
 	 */
-	protected bool $remoteImage;
+	protected bool $remote_image;
 
 	/**
 	 * An array of attached plugins to execute in order.
 	 */
 	protected array $plugins;
 
-	public function __construct(string $fileName, array $options = [], array $plugins = [])
+	public function __construct(string $file_name, array $options = [], array $plugins = [])
 	{
-		$this->fileName		= $fileName;
-		$this->remoteImage	= false;
+		$this->file_name	= $file_name;
+		$this->remote_image	= false;
 
-		if(!$this->validateRequestedResource($fileName))
+		if(!$this->validateRequestedResource($file_name))
 		{
-			throw new InvalidArgumentException('Image file not found: ' . $fileName);
+			throw new InvalidArgumentException('Image file not found: ' . $file_name);
 		}
 
 		$this->setOptions($options);
@@ -68,7 +68,7 @@ abstract class PHPThumb
 	{
 		if (false !== filter_var($filename, FILTER_VALIDATE_URL))
 		{
-			$this->remoteImage = true;
+			$this->remote_image = true;
 			return true;
 		}
 
@@ -85,15 +85,15 @@ abstract class PHPThumb
 	 */
 	public function getFileName(): string
 	{
-		return $this->fileName;
+		return $this->file_name;
 	}
 
 	/**
 	 * Sets the filename.
 	 */
-	public function setFileName(string $fileName): PHPThumb
+	public function setFileName(string $file_name): PHPThumb
 	{
-		$this->fileName = $fileName;
+		$this->file_name = $file_name;
 
 		return $this;
 	}
@@ -121,6 +121,6 @@ abstract class PHPThumb
 	 */
 	public function getIsRemoteImage(): bool
 	{
-		return $this->remoteImage;
+		return $this->remote_image;
 	}
 }

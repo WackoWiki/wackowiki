@@ -28,24 +28,24 @@ class GD extends PHPThumb
 	 *
 	 * @var resource
 	 */
-	protected $oldImage;
+	protected $old_image;
 
 	/**
 	 * The working image (used during manipulation)
 	 *
 	 * @var resource
 	 */
-	protected $workingImage;
+	protected $working_image;
 
 	/**
 	 * The current dimensions of the image
 	 */
-	protected array $currentDimensions;
+	protected array $current_dimensions;
 
 	/**
 	 * The new, calculated dimensions of the image
 	 */
-	protected array $newDimensions;
+	protected array $new_dimensions;
 
 	/**
 	 * The options for this class
@@ -59,12 +59,12 @@ class GD extends PHPThumb
 	/**
 	 * The maximum width an image can be after resizing (in pixels)
 	 */
-	protected int $maxWidth;
+	protected int $max_width;
 
 	/**
 	 * The maximum height an image can be after resizing (in pixels)
 	 */
-	protected int $maxHeight;
+	protected int $max_height;
 
 	/**
 	 * The percentage to resize the image by
@@ -74,38 +74,38 @@ class GD extends PHPThumb
 	/**
 	 * @throws Exception
 	 */
-	public function __construct(string $fileName, array $options = [], array $plugins = [])
+	public function __construct(string $file_name, array $options = [], array $plugins = [])
 	{
-		parent::__construct($fileName, $options, $plugins);
+		parent::__construct($file_name, $options, $plugins);
 
 		$this->determineFormat();
 		$this->verifyFormatCompatiblity();
 
-		$this->oldImage = match ($this->format) {
-			'AVIF'		=> imagecreatefromavif		($this->fileName),
-			'GIF'		=> imagecreatefromgif		($this->fileName),
-			'JPEG'		=> imagecreatefromjpeg		($this->fileName),
-			'PNG'		=> imagecreatefrompng		($this->fileName),
-			'STRING'	=> imagecreatefromstring	($this->fileName),
-			'WEBP'		=> imagecreatefromwebp		($this->fileName),
+		$this->old_image = match ($this->format) {
+			'AVIF'		=> imagecreatefromavif		($this->file_name),
+			'GIF'		=> imagecreatefromgif		($this->file_name),
+			'JPEG'		=> imagecreatefromjpeg		($this->file_name),
+			'PNG'		=> imagecreatefrompng		($this->file_name),
+			'STRING'	=> imagecreatefromstring	($this->file_name),
+			'WEBP'		=> imagecreatefromwebp		($this->file_name),
 		};
 
-		$this->currentDimensions = [
-			'width'		=> imagesx($this->oldImage),
-			'height'	=> imagesy($this->oldImage)
+		$this->current_dimensions = [
+			'width'		=> imagesx($this->old_image),
+			'height'	=> imagesy($this->old_image)
 		];
 	}
 
 	public function __destruct()
 	{
-		if (is_resource($this->oldImage))
+		if (is_resource($this->old_image))
 		{
-			imagedestroy($this->oldImage);
+			imagedestroy($this->old_image);
 		}
 
-		if (is_resource($this->workingImage))
+		if (is_resource($this->working_image))
 		{
-			imagedestroy($this->workingImage);
+			imagedestroy($this->working_image);
 		}
 	}
 
@@ -115,17 +115,17 @@ class GD extends PHPThumb
 	public function pad(int $width, int $height, array $color = [255, 255, 255]): GD
 	{
 		// no resize - woohoo!
-		if ($width == $this->currentDimensions['width'] && $height == $this->currentDimensions['height'])
+		if ($width == $this->current_dimensions['width'] && $height == $this->current_dimensions['height'])
 		{
 			return $this;
 		}
 
 		// create the working image
-		$this->workingImage = imagecreatetruecolor($width, $height);
+		$this->working_image = imagecreatetruecolor($width, $height);
 
 		// create the fill color
-		$fillColor = imagecolorallocate(
-			$this->workingImage,
+		$fill_color = imagecolorallocate(
+			$this->working_image,
 			$color[0],
 			$color[1],
 			$color[2]
@@ -133,30 +133,30 @@ class GD extends PHPThumb
 
 		// fill our working image with the fill color
 		imagefill(
-			$this->workingImage,
+			$this->working_image,
 			0,
 			0,
-			$fillColor
+			$fill_color
 		);
 
 		// copy the image into the center of our working image
 		imagecopyresampled(
-			$this->workingImage,
-			$this->oldImage,
-			intval(($width-$this->currentDimensions['width']) / 2),
-			intval(($height-$this->currentDimensions['height']) / 2),
+			$this->working_image,
+			$this->old_image,
+			intval(($width-$this->current_dimensions['width']) / 2),
+			intval(($height-$this->current_dimensions['height']) / 2),
 			0,
 			0,
-			$this->currentDimensions['width'],
-			$this->currentDimensions['height'],
-			$this->currentDimensions['width'],
-			$this->currentDimensions['height']
+			$this->current_dimensions['width'],
+			$this->current_dimensions['height'],
+			$this->current_dimensions['width'],
+			$this->current_dimensions['height']
 		);
 
 		// update all the variables and resources to be correct
-		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= $width;
-		$this->currentDimensions['height']	= $height;
+		$this->old_image					= $this->working_image;
+		$this->current_dimensions['width']	= $width;
+		$this->current_dimensions['height']	= $height;
 
 		return $this;
 	}
@@ -164,61 +164,61 @@ class GD extends PHPThumb
 	/**
 	 * Check if the image can be scaled up
 	 */
-	private function checkingMaxSize(int $maxWidth, int $maxHeight): void
+	private function checkingMaxSize(int $max_width, int $max_height): void
 	{
 		if ($this->options['resizeUp'] === false)
 		{
-			$this->maxHeight	= ($maxHeight > $this->currentDimensions['height'])	? $this->currentDimensions['height'] 	: $maxHeight;
-			$this->maxWidth		= ($maxWidth > $this->currentDimensions['width'])	? $this->currentDimensions['width']		: $maxWidth;
+			$this->max_height	= ($max_height > $this->current_dimensions['height'])	? $this->current_dimensions['height'] 	: $max_height;
+			$this->max_width	= ($max_width > $this->current_dimensions['width'])		? $this->current_dimensions['width']	: $max_width;
 		}
 		else
 		{
-			$this->maxHeight	= $maxHeight;
-			$this->maxWidth		= $maxWidth;
+			$this->max_height	= $max_height;
+			$this->max_width	= $max_width;
 		}
 	}
 
 	/**
-	 * Resizes an image to be no larger than $maxWidth or $maxHeight
+	 * Resizes an image to be no larger than $max_width or $max_height
 	 *
 	 * If either param is set to zero, then that dimension will not be considered as a part of the resize.
 	 * Additionally, if $this->options['resizeUp'] is set to true (false by default), then this function will
 	 * also scale the image up to the maximum dimensions provided.
 	 *
-	 * @param int $maxWidth  The maximum width of the image in pixels
-	 * @param int $maxHeight The maximum height of the image in pixels
+	 * @param int $max_width  The maximum width of the image in pixels
+	 * @param int $max_height The maximum height of the image in pixels
 	 */
-	public function resize(int $maxWidth = 0, int $maxHeight = 0): GD
+	public function resize(int $max_width = 0, int $max_height = 0): GD
 	{
 		// make sure we're not exceeding our image size if we're not supposed to
-		$this->checkingMaxSize($maxWidth, $maxHeight);
+		$this->checkingMaxSize($max_width, $max_height);
 
 		// get the new dimensions...
-		$this->calcImageSize($this->currentDimensions['width'], $this->currentDimensions['height']);
+		$this->calcImageSize($this->current_dimensions['width'], $this->current_dimensions['height']);
 
 		// create the working image
-		$this->workingImage = imagecreatetruecolor($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
+		$this->working_image = imagecreatetruecolor($this->new_dimensions['new_width'], $this->new_dimensions['new_height']);
 
 		$this->preserveAlpha();
 
 		// and create the newly sized image
 		imagecopyresampled(
-			$this->workingImage,
-			$this->oldImage,
+			$this->working_image,
+			$this->old_image,
 			0,
 			0,
 			0,
 			0,
-			$this->newDimensions['newWidth'],
-			$this->newDimensions['newHeight'],
-			$this->currentDimensions['width'],
-			$this->currentDimensions['height']
+			$this->new_dimensions['new_width'],
+			$this->new_dimensions['new_height'],
+			$this->current_dimensions['width'],
+			$this->current_dimensions['height']
 		);
 
 		// update all the variables and resources to be correct
-		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= $this->newDimensions['newWidth'];
-		$this->currentDimensions['height']	= $this->newDimensions['newHeight'];
+		$this->old_image					= $this->working_image;
+		$this->current_dimensions['width']	= $this->new_dimensions['new_width'];
+		$this->current_dimensions['height']	= $this->new_dimensions['new_height'];
 
 		return $this;
 	}
@@ -239,62 +239,62 @@ class GD extends PHPThumb
 
 		if ($width == 0)
 		{
-			$width = intval(($height * $this->currentDimensions['width']) / $this->currentDimensions['height']);
+			$width = intval(($height * $this->current_dimensions['width']) / $this->current_dimensions['height']);
 		}
 
 		if ($height == 0)
 		{
-			$height = intval(($width * $this->currentDimensions['height']) / $this->currentDimensions['width']);
+			$height = intval(($width * $this->current_dimensions['height']) / $this->current_dimensions['width']);
 		}
 
 		// make sure we're not exceeding our image size if we're not supposed to
 		$this->checkingMaxSize($width, $height);
 
-		$this->calcImageSizeStrict($this->currentDimensions['width'], $this->currentDimensions['height']);
+		$this->calcImageSizeStrict($this->current_dimensions['width'], $this->current_dimensions['height']);
 
 		// resize the image to be close to our desired dimensions
-		$this->resize($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
+		$this->resize($this->new_dimensions['new_width'], $this->new_dimensions['new_height']);
 
 		// reset the max dimensions...
 		$this->checkingMaxSize($width, $height);
 
 		// create the working image
-		$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
+		$this->working_image = imagecreatetruecolor($this->max_width, $this->max_height);
 
 		$this->preserveAlpha();
 
-		$cropWidth	= $this->maxWidth;
-		$cropHeight	= $this->maxHeight;
-		$cropX		= 0;
-		$cropY		= 0;
+		$crop_width		= $this->max_width;
+		$crop_height	= $this->max_height;
+		$crop_x			= 0;
+		$crop_y			= 0;
 
 		// now, figure out how to crop the rest of the image...
-		if ($this->currentDimensions['width'] > $this->maxWidth)
+		if ($this->current_dimensions['width'] > $this->max_width)
 		{
-			$cropX = intval(($this->currentDimensions['width'] - $this->maxWidth) / 2);
+			$crop_x = intval(($this->current_dimensions['width'] - $this->max_width) / 2);
 		}
-		else if ($this->currentDimensions['height'] > $this->maxHeight)
+		else if ($this->current_dimensions['height'] > $this->max_height)
 		{
-			$cropY = intval(($this->currentDimensions['height'] - $this->maxHeight) / 2);
+			$crop_y = intval(($this->current_dimensions['height'] - $this->max_height) / 2);
 		}
 
 		imagecopyresampled(
-			$this->workingImage,
-			$this->oldImage,
+			$this->working_image,
+			$this->old_image,
 			0,
 			0,
-			$cropX,
-			$cropY,
-			$cropWidth,
-			$cropHeight,
-			$cropWidth,
-			$cropHeight
+			$crop_x,
+			$crop_y,
+			$crop_width,
+			$crop_height,
+			$crop_width,
+			$crop_height
 		);
 
 		// update all the variables and resources to be correct
-		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= $this->maxWidth;
-		$this->currentDimensions['height']	= $this->maxHeight;
+		$this->old_image					= $this->working_image;
+		$this->current_dimensions['width']	= $this->max_width;
+		$this->current_dimensions['height']	= $this->max_height;
 
 		return $this;
 	}
@@ -340,23 +340,23 @@ class GD extends PHPThumb
 		// make sure we're not exceeding our image size if we're not supposed to
 		$this->checkingMaxSize($width, $height);
 
-		$this->calcImageSizeStrict($this->currentDimensions['width'], $this->currentDimensions['height']);
+		$this->calcImageSizeStrict($this->current_dimensions['width'], $this->current_dimensions['height']);
 
 		// resize the image to be close to our desired dimensions
-		$this->resize($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
+		$this->resize($this->new_dimensions['new_width'], $this->new_dimensions['new_height']);
 
 		// reset the max dimensions...
 		$this->checkingMaxSize($width, $height);
 
 		// create the working image
-		$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
+		$this->working_image = imagecreatetruecolor($this->max_width, $this->max_height);
 
 		$this->preserveAlpha();
 
-		$cropWidth	= $this->maxWidth;
-		$cropHeight	= $this->maxHeight;
-		$cropX		= 0;
-		$cropY		= 0;
+		$crop_width		= $this->max_width;
+		$crop_height	= $this->max_height;
+		$crop_x			= 0;
+		$crop_y			= 0;
 
 		// Crop the rest of the image using the quadrant
 
@@ -369,37 +369,37 @@ class GD extends PHPThumb
 			$percent = 1;
 		}
 
-		if ($this->currentDimensions['width'] > $this->maxWidth)
+		if ($this->current_dimensions['width'] > $this->max_width)
 		{
 			// Image is landscape
-			$maxCropX	= $this->currentDimensions['width'] - $this->maxWidth;
-			$cropX		= intval(($percent / 100) * $maxCropX);
+			$max_crop_x	= $this->current_dimensions['width'] - $this->max_width;
+			$crop_x		= intval(($percent / 100) * $max_crop_x);
 
 		}
-		else if ($this->currentDimensions['height'] > $this->maxHeight)
+		else if ($this->current_dimensions['height'] > $this->max_height)
 		{
 			// Image is portrait
-			$maxCropY	= $this->currentDimensions['height'] - $this->maxHeight;
-			$cropY		= intval(($percent / 100) * $maxCropY);
+			$max_crop_y	= $this->current_dimensions['height'] - $this->max_height;
+			$crop_y		= intval(($percent / 100) * $max_crop_y);
 		}
 
 		imagecopyresampled(
-			$this->workingImage,
-			$this->oldImage,
+			$this->working_image,
+			$this->old_image,
 			0,
 			0,
-			$cropX,
-			$cropY,
-			$cropWidth,
-			$cropHeight,
-			$cropWidth,
-			$cropHeight
+			$crop_x,
+			$crop_y,
+			$crop_width,
+			$crop_height,
+			$crop_width,
+			$crop_height
 		);
 
 		// update all the variables and resources to be correct
-		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= $this->maxWidth;
-		$this->currentDimensions['height']	= $this->maxHeight;
+		$this->old_image					= $this->working_image;
+		$this->current_dimensions['width']	= $this->max_width;
+		$this->current_dimensions['height']	= $this->max_height;
 
 		return $this;
 	}
@@ -442,63 +442,63 @@ class GD extends PHPThumb
 		// make sure we're not exceeding our image size if we're not supposed to
 		$this->checkingMaxSize($width, $height);
 
-		$this->calcImageSizeStrict($this->currentDimensions['width'], $this->currentDimensions['height']);
+		$this->calcImageSizeStrict($this->current_dimensions['width'], $this->current_dimensions['height']);
 
 		// resize the image to be close to our desired dimensions
-		$this->resize($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
+		$this->resize($this->new_dimensions['new_width'], $this->new_dimensions['new_height']);
 
 		// reset the max dimensions...
 		$this->checkingMaxSize($width, $height);
 
 		// create the working image
-		$this->workingImage = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
+		$this->working_image = imagecreatetruecolor($this->max_width, $this->max_height);
 
 
 		$this->preserveAlpha();
 
-		$cropWidth	= $this->maxWidth;
-		$cropHeight	= $this->maxHeight;
-		$cropX		= 0;
-		$cropY		= 0;
+		$crop_width		= $this->max_width;
+		$crop_height	= $this->max_height;
+		$crop_x			= 0;
+		$crop_y			= 0;
 
 		// Crop the rest of the image using the quadrant
 
-		if ($this->currentDimensions['width'] > $this->maxWidth)
+		if ($this->current_dimensions['width'] > $this->max_width)
 		{
 			// Image is landscape
-			$cropX = match ($quadrant) {
+			$crop_x = match ($quadrant) {
 				'L'		=> 0,
-				'R'		=> intval(($this->currentDimensions['width'] - $this->maxWidth)),
-				default	=> intval(($this->currentDimensions['width'] - $this->maxWidth) / 2),
+				'R'		=> intval(($this->current_dimensions['width'] - $this->max_width)),
+				default	=> intval(($this->current_dimensions['width'] - $this->max_width) / 2),
 			};
 		}
-		else if ($this->currentDimensions['height'] > $this->maxHeight)
+		else if ($this->current_dimensions['height'] > $this->max_height)
 		{
 			// Image is portrait
-			$cropY = match ($quadrant) {
+			$crop_y = match ($quadrant) {
 				'T'		=> 0,
-				'B'		=> intval(($this->currentDimensions['height'] - $this->maxHeight)),
-				default	=> intval(($this->currentDimensions['height'] - $this->maxHeight) / 2),
+				'B'		=> intval(($this->current_dimensions['height'] - $this->max_height)),
+				default	=> intval(($this->current_dimensions['height'] - $this->max_height) / 2),
 			};
 		}
 
 		imagecopyresampled(
-			$this->workingImage,
-			$this->oldImage,
+			$this->working_image,
+			$this->old_image,
 			0,
 			0,
-			$cropX,
-			$cropY,
-			$cropWidth,
-			$cropHeight,
-			$cropWidth,
-			$cropHeight
+			$crop_x,
+			$crop_y,
+			$crop_width,
+			$crop_height,
+			$crop_width,
+			$crop_height
 		);
 
 		// update all the variables and resources to be correct
-		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= $this->maxWidth;
-		$this->currentDimensions['height']	= $this->maxHeight;
+		$this->old_image					= $this->working_image;
+		$this->current_dimensions['width']	= $this->max_width;
+		$this->current_dimensions['height']	= $this->max_height;
 
 		return $this;
 	}
@@ -513,9 +513,9 @@ class GD extends PHPThumb
 	{
 		$this->percent = $percent;
 
-		$this->calcImageSizePercent($this->currentDimensions['width'], $this->currentDimensions['height']);
+		$this->calcImageSizePercent($this->current_dimensions['width'], $this->current_dimensions['height']);
 
-		return $this->resize($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
+		return $this->resize($this->new_dimensions['new_width'], $this->new_dimensions['new_height']);
 	}
 
 	/**
@@ -523,20 +523,20 @@ class GD extends PHPThumb
 	 *
 	 * If no height is given, the width will be used as a height, thus creating a square crop
 	 */
-	public function cropFromCenter(int $cropWidth, ?int $cropHeight = 0): GD
+	public function cropFromCenter(int $crop_width, ?int $crop_height = 0): GD
 	{
-		if ($cropHeight == 0)
+		if ($crop_height == 0)
 		{
-			$cropHeight = $cropWidth;
+			$crop_height = $crop_width;
 		}
 
-		$cropWidth	= ($this->currentDimensions['width'] < $cropWidth)		? $this->currentDimensions['width']		: $cropWidth;
-		$cropHeight	= ($this->currentDimensions['height'] < $cropHeight)	? $this->currentDimensions['height']	: $cropHeight;
+		$crop_width		= ($this->current_dimensions['width'] < $crop_width)	? $this->current_dimensions['width']	: $crop_width;
+		$crop_height	= ($this->current_dimensions['height'] < $crop_height)	? $this->current_dimensions['height']	: $crop_height;
 
-		$cropX = intval(($this->currentDimensions['width'] - $cropWidth) / 2);
-		$cropY = intval(($this->currentDimensions['height'] - $cropHeight) / 2);
+		$crop_x = intval(($this->current_dimensions['width'] - $crop_width) / 2);
+		$crop_y = intval(($this->current_dimensions['height'] - $crop_height) / 2);
 
-		$this->crop($cropX, $cropY, $cropWidth, $cropHeight);
+		$this->crop($crop_x, $crop_y, $crop_width, $crop_height);
 
 		return $this;
 	}
@@ -544,21 +544,21 @@ class GD extends PHPThumb
 	/**
 	 * Vanilla Cropping - Crops from x,y with specified width and height
 	 */
-	public function crop(int $startX, int $startY, int $cropWidth, int $cropHeight): GD
+	public function crop(int $startX, int $startY, int $crop_width, int $crop_height): GD
 	{
 		// do some calculations
-		$cropWidth	= ($this->currentDimensions['width'] < $cropWidth) ? $this->currentDimensions['width'] : $cropWidth;
-		$cropHeight	= ($this->currentDimensions['height'] < $cropHeight) ? $this->currentDimensions['height'] : $cropHeight;
+		$crop_width		= ($this->current_dimensions['width'] < $crop_width) ? $this->current_dimensions['width'] : $crop_width;
+		$crop_height	= ($this->current_dimensions['height'] < $crop_height) ? $this->current_dimensions['height'] : $crop_height;
 
 		// ensure everything's in bounds
-		if (($startX + $cropWidth) > $this->currentDimensions['width'])
+		if (($startX + $crop_width) > $this->current_dimensions['width'])
 		{
-			$startX = ($this->currentDimensions['width'] - $cropWidth);
+			$startX = ($this->current_dimensions['width'] - $crop_width);
 		}
 
-		if (($startY + $cropHeight) > $this->currentDimensions['height'])
+		if (($startY + $crop_height) > $this->current_dimensions['height'])
 		{
-			$startY = ($this->currentDimensions['height'] - $cropHeight);
+			$startY = ($this->current_dimensions['height'] - $crop_height);
 		}
 
 		if ($startX < 0)
@@ -572,26 +572,26 @@ class GD extends PHPThumb
 		}
 
 		// create the working image
-		$this->workingImage = imagecreatetruecolor($cropWidth, $cropHeight);
+		$this->working_image = imagecreatetruecolor($crop_width, $crop_height);
 
 		$this->preserveAlpha();
 
 		imagecopyresampled(
-			$this->workingImage,
-			$this->oldImage,
+			$this->working_image,
+			$this->old_image,
 			0,
 			0,
 			$startX,
 			$startY,
-			$cropWidth,
-			$cropHeight,
-			$cropWidth,
-			$cropHeight
+			$crop_width,
+			$crop_height,
+			$crop_width,
+			$crop_height
 		);
 
-		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= $cropWidth;
-		$this->currentDimensions['height']	= $cropHeight;
+		$this->old_image					= $this->working_image;
+		$this->current_dimensions['width']	= $crop_width;
+		$this->current_dimensions['height']	= $crop_height;
 
 		return $this;
 	}
@@ -621,11 +621,11 @@ class GD extends PHPThumb
 			throw new RuntimeException('Your version of GD does not support image rotation');
 		}
 
-		$this->workingImage = imagerotate($this->oldImage, $degrees, 0);
+		$this->working_image = imagerotate($this->old_image, $degrees, 0);
 
-		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= imagesx($this->workingImage);
-		$this->currentDimensions['height']	= imagesy($this->workingImage);
+		$this->old_image					= $this->working_image;
+		$this->current_dimensions['width']	= imagesx($this->working_image);
+		$this->current_dimensions['height']	= imagesy($this->working_image);
 
 		return $this;
 	}
@@ -642,23 +642,23 @@ class GD extends PHPThumb
 
 		if ($arg1 === false)
 		{
-			$result = imagefilter($this->oldImage, $filter);
+			$result = imagefilter($this->old_image, $filter);
 		}
 		else if ($arg2 === false)
 		{
-			$result = imagefilter($this->oldImage, $filter, $arg1);
+			$result = imagefilter($this->old_image, $filter, $arg1);
 		}
 		else if ($arg3 === false)
 		{
-			$result = imagefilter($this->oldImage, $filter, $arg1, $arg2);
+			$result = imagefilter($this->old_image, $filter, $arg1, $arg2);
 		}
 		else if ($arg4 === false)
 		{
-			$result = imagefilter($this->oldImage, $filter, $arg1, $arg2, $arg3);
+			$result = imagefilter($this->old_image, $filter, $arg1, $arg2, $arg3);
 		}
 		else
 		{
-			$result = imagefilter($this->oldImage, $filter, $arg1, $arg2, $arg3, $arg4);
+			$result = imagefilter($this->old_image, $filter, $arg1, $arg2, $arg3, $arg4);
 		}
 
 		if (!$result)
@@ -666,7 +666,7 @@ class GD extends PHPThumb
 			throw new RuntimeException('GD imagefilter failed');
 		}
 
-		$this->workingImage = $this->oldImage;
+		$this->working_image = $this->old_image;
 
 		return $this;
 	}
@@ -678,9 +678,9 @@ class GD extends PHPThumb
 	 * for the format, and then outputting the image data. If headers have already been sent,
 	 * a runtime exception will be thrown
 	 *
-	 * @param bool $rawData Whether or not the raw image stream should be output
+	 * @param bool $raw_data Whether or not the raw image stream should be output
 	 */
-	public function show(bool $rawData = false): GD
+	public function show(bool $raw_data = false): GD
 	{
 		//Execute any plugins
 		if ($this->plugins)
@@ -700,49 +700,49 @@ class GD extends PHPThumb
 		// When the interlace option equals true or false call imageinterlace else leave it to default
 		if ($this->options['interlace'] === true)
 		{
-			imageinterlace($this->oldImage, 1);
+			imageinterlace($this->old_image, 1);
 		}
 		else if ($this->options['interlace'] === false)
 		{
-			imageinterlace($this->oldImage, 0);
+			imageinterlace($this->old_image, 0);
 		}
 
 		switch ($this->format) {
 			case 'AVIF':
-				if ($rawData === false)
+				if ($raw_data === false)
 				{
 					header('Content-type: image/avif');
 				}
-				imageavif($this->oldImage);
+				imageavif($this->old_image);
 				break;
 			case 'GIF':
-				if ($rawData === false)
+				if ($raw_data === false)
 				{
 					header('Content-type: image/gif');
 				}
-				imagegif($this->oldImage);
+				imagegif($this->old_image);
 				break;
 			case 'JPEG':
-				if ($rawData === false)
+				if ($raw_data === false)
 				{
 					header('Content-type: image/jpeg');
 				}
-				imagejpeg($this->oldImage, null, $this->options['jpegQuality']);
+				imagejpeg($this->old_image, null, $this->options['jpegQuality']);
 				break;
 			case 'PNG':
 			case 'STRING':
-				if ($rawData === false)
+				if ($raw_data === false)
 				{
 					header('Content-type: image/png');
 				}
-				imagepng($this->oldImage);
+				imagepng($this->old_image);
 				break;
 			case 'WEBP':
-				if ($rawData === false)
+				if ($raw_data === false)
 				{
 					header('Content-type: image/webp');
 				}
-				imagewebp($this->oldImage);
+				imagewebp($this->old_image);
 				break;
 		}
 
@@ -774,10 +774,10 @@ class GD extends PHPThumb
 	 * is set as an option ($this->options['correctPermissions']).  If the target cannot be made writeable, then a
 	 * \RuntimeException is thrown.
 	 *
-	 * @param string		$fileName	The full path and filename of the image to save
+	 * @param string		$file_name	The full path and filename of the image to save
 	 * @param string|null	$format		The format to save the image in (optional, must be one of [AVIF, GIF, JPEG, JPG, PNG, WEBP]
 	 */
-	public function save(string $fileName, string $format = null): GD
+	public function save(string $file_name, string $format = null): GD
 	{
 		$validFormats	= ['AVIF', 'GIF', 'JPEG', 'JPG', 'PNG', 'WEBP'];
 		$format			= ($format !== null) ? strtoupper($format) : $this->format;
@@ -788,41 +788,41 @@ class GD extends PHPThumb
 		}
 
 		// make sure the directory is writeable
-		if (!is_writeable(dirname($fileName)))
+		if (!is_writeable(dirname($file_name)))
 		{
 			// try to correct the permissions
 			if ($this->options['correctPermissions'] === true)
 			{
-				@chmod(dirname($fileName), 0777);
+				@chmod(dirname($file_name), 0777);
 
 				// throw an exception if not writeable
-				if (!is_writeable(dirname($fileName)))
+				if (!is_writeable(dirname($file_name)))
 				{
-					throw new RuntimeException('File is not writeable, and could not correct permissions: ' . $fileName);
+					throw new RuntimeException('File is not writeable, and could not correct permissions: ' . $file_name);
 				}
 			}
 			else
 			{ // throw an exception if not writeable
-				throw new RuntimeException('File not writeable: ' . $fileName);
+				throw new RuntimeException('File not writeable: ' . $file_name);
 			}
 		}
 
 		// When the interlace option equals true or false call imageinterlace else leave it to default
 		if ($this->options['interlace'] === true)
 		{
-			imageinterlace($this->oldImage, 1);
+			imageinterlace($this->old_image, 1);
 		}
 		else if ($this->options['interlace'] === false)
 		{
-			imageinterlace($this->oldImage, 0);
+			imageinterlace($this->old_image, 0);
 		}
 
 		$save = match ($format) {
-			'AVIF'			=> imageavif	($this->oldImage, $fileName),
-			'GIF'			=> imagegif		($this->oldImage, $fileName),
-			'JPEG', 'JPG'	=> imagejpeg	($this->oldImage, $fileName, $this->options['jpegQuality']),
-			'PNG'			=> imagepng		($this->oldImage, $fileName),
-			'WEBP'			=> imagewebp	($this->oldImage, $fileName),
+			'AVIF'			=> imageavif	($this->old_image, $file_name),
+			'GIF'			=> imagegif		($this->old_image, $file_name),
+			'JPEG', 'JPG'	=> imagejpeg	($this->old_image, $file_name, $this->options['jpegQuality']),
+			'PNG'			=> imagepng		($this->old_image, $file_name),
+			'WEBP'			=> imagewebp	($this->old_image, $file_name),
 		};
 
 		return $this;
@@ -840,7 +840,7 @@ class GD extends PHPThumb
 		// we've yet to init the default options, so create them here
 		if (count($this->options) == 0)
 		{
-			$defaultOptions = [
+			$default_options = [
 				'resizeUp'				=> false,
 				'jpegQuality'			=> 100,
 				'correctPermissions'	=> false,
@@ -854,73 +854,73 @@ class GD extends PHPThumb
 		else
 		{
 			// otherwise, let's use what we've got already
-			$defaultOptions = $this->options;
+			$default_options = $this->options;
 		}
 
-		$this->options = array_merge($defaultOptions, $options);
+		$this->options = array_merge($default_options, $options);
 
 		return $this;
 	}
 
 	/**
-	 * Returns $currentDimensions.
+	 * Returns $current_dimensions.
 	 *
 	 * @see GD
 	 */
 	public function getCurrentDimensions(): array
 	{
-		return $this->currentDimensions;
+		return $this->current_dimensions;
 	}
 
-	public function setCurrentDimensions(array $currentDimensions): GD
+	public function setCurrentDimensions(array $current_dimensions): GD
 	{
-		$this->currentDimensions = $currentDimensions;
+		$this->current_dimensions = $current_dimensions;
 
 		return $this;
 	}
 
 	public function getMaxHeight(): int
 	{
-		return $this->maxHeight;
+		return $this->max_height;
 	}
 
-	public function setMaxHeight(int $maxHeight): GD
+	public function setMaxHeight(int $max_height): GD
 	{
-		$this->maxHeight = $maxHeight;
+		$this->max_height = $max_height;
 
 		return $this;
 	}
 
 	public function getMaxWidth(): int
 	{
-		return $this->maxWidth;
+		return $this->max_width;
 	}
 
-	public function setMaxWidth(int $maxWidth): GD
+	public function setMaxWidth(int $max_width): GD
 	{
-		$this->maxWidth = $maxWidth;
+		$this->max_width = $max_width;
 
 		return $this;
 	}
 
 	/**
-	 * Returns $newDimensions.
+	 * Returns $new_dimensions.
 	 *
 	 * @see GD
 	 */
 	public function getNewDimensions(): array
 	{
-		return $this->newDimensions;
+		return $this->new_dimensions;
 	}
 
 	/**
-	 * Sets $newDimensions.
+	 * Sets $new_dimensions.
 	 *
 	 * @see GD
 	 */
-	public function setNewDimensions(array $newDimensions): GD
+	public function setNewDimensions(array $new_dimensions): GD
 	{
-		$this->newDimensions = $newDimensions;
+		$this->new_dimensions = $new_dimensions;
 
 		return $this;
 	}
@@ -958,45 +958,45 @@ class GD extends PHPThumb
 	}
 
 	/**
-	 * Returns $oldImage.
+	 * Returns $old_image.
 	 *
 	 * @see GD
 	 */
 	public function getOldImage()
 	{
-		return $this->oldImage;
+		return $this->old_image;
 	}
 
 	/**
-	 * Sets $oldImage.
+	 * Sets $old_image.
 	 *
 	 * @see GD
 	 */
-	public function setOldImage(object $oldImage): GD
+	public function setOldImage(object $old_image): GD
 	{
-		$this->oldImage = $oldImage;
+		$this->old_image = $old_image;
 
 		return $this;
 	}
 
 	/**
-	 * Returns $workingImage.
+	 * Returns $working_image.
 	 *
 	 * @see GD
 	 */
 	public function getWorkingImage()
 	{
-		return $this->workingImage;
+		return $this->working_image;
 	}
 
 	/**
-	 * Sets $workingImage.
+	 * Sets $working_image.
 	 *
 	 * @see GD
 	 */
-	public function setWorkingImage(object $workingImage): GD
+	public function setWorkingImage(object $working_image): GD
 	{
-		$this->workingImage = $workingImage;
+		$this->working_image = $working_image;
 
 		return $this;
 	}
@@ -1007,30 +1007,30 @@ class GD extends PHPThumb
 	#################################
 
 	/**
-	 * Calculates a new width and height for the image based on $this->maxWidth and the provided dimensions
+	 * Calculates a new width and height for the image based on $this->max_width and the provided dimensions
 	 */
 	protected function calcWidth(int $width, int $height): array
 	{
-		$newWidthPercentage	= (100 * $this->maxWidth) / $width;
-		$newHeight			= ($height * $newWidthPercentage) / 100;
+		$new_width_percentage	= (100 * $this->max_width) / $width;
+		$new_height				= ($height * $new_width_percentage) / 100;
 
 		return [
-			'newWidth'	=> $this->maxWidth,
-			'newHeight'	=> intval($newHeight)
+			'new_width'		=> $this->max_width,
+			'new_height'	=> intval($new_height)
 		];
 	}
 
 	/**
-	 * Calculates a new width and height for the image based on $this->maxWidth and the provided dimensions
+	 * Calculates a new width and height for the image based on $this->max_width and the provided dimensions
 	 */
 	protected function calcHeight(int $width, int $height): array
 	{
-		$newHeightPercentage	= (100 * $this->maxHeight) / $height;
-		$newWidth				= ($width * $newHeightPercentage) / 100;
+		$new_height_percentage	= (100 * $this->max_height) / $height;
+		$new_width				= ($width * $new_height_percentage) / 100;
 
 		return [
-			'newWidth'	=> ceil($newWidth),
-			'newHeight'	=> ceil($this->maxHeight)
+			'new_width'		=> ceil($new_width),
+			'new_height'	=> ceil($this->max_height)
 		];
 	}
 
@@ -1039,48 +1039,48 @@ class GD extends PHPThumb
 	 */
 	protected function calcPercent(int $width, int $height): array
 	{
-		$newWidth	= ($width * $this->percent) / 100;
-		$newHeight	= ($height * $this->percent) / 100;
+		$new_width	= ($width * $this->percent) / 100;
+		$new_height	= ($height * $this->percent) / 100;
 
 		return [
-			'newWidth'	=> ceil($newWidth),
-			'newHeight'	=> ceil($newHeight)
+			'new_width'		=> ceil($new_width),
+			'new_height'	=> ceil($new_height)
 		];
 	}
 
 	/**
 	 * Calculates the new image dimensions
 	 *
-	 * These calculations are based on both the provided dimensions and $this->maxWidth and $this->maxHeight
+	 * These calculations are based on both the provided dimensions and $this->max_width and $this->max_height
 	 */
 	protected function calcImageSize(int $width, int $height): void
 	{
-		$newSize = [
-			'newWidth'	=> $width,
-			'newHeight'	=> $height
+		$new_size = [
+			'new_width'	=> $width,
+			'new_height'	=> $height
 		];
 
-		if ($this->maxWidth > 0)
+		if ($this->max_width > 0)
 		{
-			$newSize = $this->calcWidth($width, $height);
+			$new_size = $this->calcWidth($width, $height);
 
-			if ($this->maxHeight > 0 && $newSize['newHeight'] > $this->maxHeight)
+			if ($this->max_height > 0 && $new_size['new_height'] > $this->max_height)
 			{
-				$newSize = $this->calcHeight($newSize['newWidth'], $newSize['newHeight']);
+				$new_size = $this->calcHeight($new_size['new_width'], $new_size['new_height']);
 			}
 		}
 
-		if ($this->maxHeight > 0)
+		if ($this->max_height > 0)
 		{
-			$newSize = $this->calcHeight($width, $height);
+			$new_size = $this->calcHeight($width, $height);
 
-			if ($this->maxWidth > 0 && $newSize['newWidth'] > $this->maxWidth)
+			if ($this->max_width > 0 && $new_size['new_width'] > $this->max_width)
 			{
-				$newSize = $this->calcWidth($newSize['newWidth'], $newSize['newHeight']);
+				$new_size = $this->calcWidth($new_size['new_width'], $new_size['new_height']);
 			}
 		}
 
-		$this->newDimensions = $newSize;
+		$this->new_dimensions = $new_size;
 	}
 
 	/**
@@ -1088,54 +1088,54 @@ class GD extends PHPThumb
 	 */
 	protected function calcImageSizeStrict(int $width, int $height): void
 	{
-		$newDimensions = $this->getCurrentDimensions();
+		$new_dimensions = $this->getCurrentDimensions();
 
 		// first, we need to determine what the longest resize dimension is..
-		if ($this->maxWidth >= $this->maxHeight)
+		if ($this->max_width >= $this->max_height)
 		{
 			// and determine the longest original dimension
 			if ($width > $height)
 			{
-				$newDimensions = $this->calcHeight($width, $height);
+				$new_dimensions = $this->calcHeight($width, $height);
 
-				if ($newDimensions['newWidth'] < $this->maxWidth)
+				if ($new_dimensions['new_width'] < $this->max_width)
 				{
-					$newDimensions = $this->calcWidth($width, $height);
+					$new_dimensions = $this->calcWidth($width, $height);
 				}
 			}
 			else if ($height >= $width)
 			{
-				$newDimensions = $this->calcWidth($width, $height);
+				$new_dimensions = $this->calcWidth($width, $height);
 
-				if ($newDimensions['newHeight'] < $this->maxHeight)
+				if ($new_dimensions['new_height'] < $this->max_height)
 				{
-					$newDimensions = $this->calcHeight($width, $height);
+					$new_dimensions = $this->calcHeight($width, $height);
 				}
 			}
 		}
-		else if ($this->maxHeight > $this->maxWidth)
+		else if ($this->max_height > $this->max_width)
 		{
 			if ($width >= $height)
 			{
-				$newDimensions = $this->calcWidth($width, $height);
+				$new_dimensions = $this->calcWidth($width, $height);
 
-				if ($newDimensions['newHeight'] < $this->maxHeight)
+				if ($new_dimensions['new_height'] < $this->max_height)
 				{
-					$newDimensions = $this->calcHeight($width, $height);
+					$new_dimensions = $this->calcHeight($width, $height);
 				}
 			}
 			else if ($height > $width)
 			{
-				$newDimensions = $this->calcHeight($width, $height);
+				$new_dimensions = $this->calcHeight($width, $height);
 
-				if ($newDimensions['newWidth'] < $this->maxWidth)
+				if ($new_dimensions['new_width'] < $this->max_width)
 				{
-					$newDimensions = $this->calcWidth($width, $height);
+					$new_dimensions = $this->calcWidth($width, $height);
 				}
 			}
 		}
 
-		$this->newDimensions = $newDimensions;
+		$this->new_dimensions = $new_dimensions;
 	}
 
 	/**
@@ -1145,7 +1145,7 @@ class GD extends PHPThumb
 	{
 		if ($this->percent > 0)
 		{
-			$this->newDimensions = $this->calcPercent($width, $height);
+			$this->new_dimensions = $this->calcPercent($width, $height);
 		}
 	}
 
@@ -1158,30 +1158,30 @@ class GD extends PHPThumb
 	 */
 	protected function determineFormat(): void
 	{
-		$formatInfo = getimagesize($this->fileName);
+		$format_info = getimagesize($this->file_name);
 
 		// non-image files will return false
-		if ($formatInfo === false)
+		if ($format_info === false)
 		{
-			if ($this->remoteImage)
+			if ($this->remote_image)
 			{
-				throw new Exception('Could not determine format of remote image: ' . $this->fileName);
+				throw new Exception('Could not determine format of remote image: ' . $this->file_name);
 			}
 			else
 			{
-				throw new Exception('File is not a valid image: ' . $this->fileName);
+				throw new Exception('File is not a valid image: ' . $this->file_name);
 			}
 		}
 
-		$mimeType = $formatInfo['mime'] ?? null;
+		$mime_type = $format_info['mime'] ?? null;
 
-		$this->format = match ($mimeType) {
+		$this->format = match ($mime_type) {
 			'image/avif'	=> 'AVIF',
 			'image/gif'		=> 'GIF',
 			'image/jpeg'	=> 'JPEG',
 			'image/png'		=> 'PNG',
 			'image/webp'	=> 'WEBP',
-			default			=> throw new Exception('Image format not supported: ' . $mimeType),
+			default			=> throw new Exception('Image format not supported: ' . $mime_type),
 		};
 	}
 
@@ -1192,25 +1192,25 @@ class GD extends PHPThumb
 	 */
 	protected function verifyFormatCompatiblity(): void
 	{
-		$gdInfo = gd_info();
+		$gd_info = gd_info();
 
-		$isCompatible = match ($this->format) {
-			'AVIF'	=> $gdInfo[$this->format . ' Support'],
-			'GIF'	=> $gdInfo['GIF Create Support'],
-			'JPEG'	=> $gdInfo[$this->format . ' Support'],
-			'PNG'	=> $gdInfo[$this->format . ' Support'],
-			'WEBP'	=> $gdInfo['WebP Support'],
+		$is_compatible = match ($this->format) {
+			'AVIF'	=> $gd_info[$this->format . ' Support'],
+			'GIF'	=> $gd_info['GIF Create Support'],
+			'JPEG'	=> $gd_info[$this->format . ' Support'],
+			'PNG'	=> $gd_info[$this->format . ' Support'],
+			'WEBP'	=> $gd_info['WebP Support'],
 			default	=> false,
 		};
 
 		$suffix = strtolower($this->format);
 
-		$isCompatible =
+		$is_compatible =
 			   function_exists('image' . $suffix)
 			&& function_exists('imagecreatefrom' . $suffix)
-			&& $isCompatible;
+			&& $is_compatible;
 
-		if (!$isCompatible)
+		if (!$is_compatible)
 		{
 			throw new Exception('Your GD installation does not support ' . $this->format . ' image types');
 		}
@@ -1227,32 +1227,32 @@ class GD extends PHPThumb
 	{
 		if ($this->format == 'PNG' && $this->options['preserveAlpha'] === true)
 		{
-			imagealphablending($this->workingImage, false);
+			imagealphablending($this->working_image, false);
 
-			$colorTransparent = imagecolorallocatealpha(
-				$this->workingImage,
+			$color_transparent = imagecolorallocatealpha(
+				$this->working_image,
 				$this->options['alphaMaskColor'][0],
 				$this->options['alphaMaskColor'][1],
 				$this->options['alphaMaskColor'][2],
 				0
 			);
 
-			imagefill($this->workingImage, 0, 0, $colorTransparent);
-			imagesavealpha($this->workingImage, true);
+			imagefill		($this->working_image, 0, 0, $color_transparent);
+			imagesavealpha	($this->working_image, true);
 		}
 
 		// preserve transparency in GIFs... this is usually pretty rough tho
 		if ($this->format == 'GIF' && $this->options['preserveTransparency'] === true)
 		{
-			$colorTransparent = imagecolorallocate(
-				$this->workingImage,
+			$color_transparent = imagecolorallocate(
+				$this->working_image,
 				$this->options['transparencyMaskColor'][0],
 				$this->options['transparencyMaskColor'][1],
 				$this->options['transparencyMaskColor'][2]
 			);
 
-			imagecolortransparent($this->workingImage, $colorTransparent);
-			imagetruecolortopalette($this->workingImage, true, 256);
+			imagecolortransparent	($this->working_image, $color_transparent);
+			imagetruecolortopalette	($this->working_image, true, 256);
 		}
 	}
 }

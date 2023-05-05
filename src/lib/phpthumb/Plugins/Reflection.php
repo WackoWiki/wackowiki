@@ -38,45 +38,45 @@ use PHPThumb\PluginInterface;
  */
 class Reflection implements PluginInterface
 {
-	protected array $currentDimensions;
-	protected $workingImage;
-	protected object $newImage;
+	protected array $current_dimensions;
+	protected $working_image;
+	protected object $new_image;
 	protected array $options;
 
 	protected int $percent;
 	protected $reflection;
 	protected $white;
 	protected $border;
-	protected $borderColor;
+	protected $border_color;
 
-	public function __construct($percent, $reflection, $white, $border, $borderColor)
+	public function __construct($percent, $reflection, $white, $border, $border_color)
 	{
 		$this->percent		= $percent;
 		$this->reflection	= $reflection;
 		$this->white		= $white;
 		$this->border		= $border;
-		$this->borderColor	= $borderColor;
+		$this->border_color	= $border_color;
 	}
 
 	public function execute(PHPThumb $phpthumb): PHPThumb
 	{
-		$this->currentDimensions	= $phpthumb->getCurrentDimensions();
-		$this->workingImage			= $phpthumb->getWorkingImage();
-		$this->newImage				= $phpthumb->getOldImage();
+		$this->current_dimensions	= $phpthumb->getcurrent_dimensions();
+		$this->working_image		= $phpthumb->getworking_image();
+		$this->new_image			= $phpthumb->getOldImage();
 		$this->options				= $phpthumb->getOptions();
 
-		$width						= $this->currentDimensions['width'];
-		$height						= $this->currentDimensions['height'];
-		$reflectionHeight			= intval($height * ($this->reflection / 100));
-		$newHeight					= $height + $reflectionHeight;
-		$reflectedPart				= $height * ($this->percent / 100);
+		$width						= $this->current_dimensions['width'];
+		$height						= $this->current_dimensions['height'];
+		$reflection_height			= intval($height * ($this->reflection / 100));
+		$new_height					= $height + $reflection_height;
+		$reflected_part				= $height * ($this->percent / 100);
 
-		$this->workingImage = imagecreatetruecolor($width, $newHeight);
+		$this->working_image = imagecreatetruecolor($width, $new_height);
 
-		imagealphablending($this->workingImage, true);
+		imagealphablending($this->working_image, true);
 
-		$colorToPaint = imagecolorallocatealpha(
-			$this->workingImage,
+		$color_to_paint = imagecolorallocatealpha(
+			$this->working_image,
 			255,
 			255,
 			255,
@@ -84,32 +84,32 @@ class Reflection implements PluginInterface
 		);
 
 		imagefilledrectangle(
-			$this->workingImage,
+			$this->working_image,
 			0,
 			0,
 			$width,
-			$newHeight,
-			$colorToPaint
+			$new_height,
+			$color_to_paint
 		);
 
 		imagecopyresampled(
-			$this->workingImage,
-			$this->newImage,
+			$this->working_image,
+			$this->new_image,
 			0,
 			0,
 			0,
-			$reflectedPart,
+			$reflected_part,
 			$width,
-			$reflectionHeight,
+			$reflection_height,
 			$width,
-			($height - $reflectedPart)
+			($height - $reflected_part)
 		);
 
 		$this->imageFlipVertical();
 
 		imagecopy(
-			$this->workingImage,
-			$this->newImage,
+			$this->working_image,
+			$this->new_image,
 			0,
 			0,
 			0,
@@ -118,92 +118,92 @@ class Reflection implements PluginInterface
 			$height
 		);
 
-		imagealphablending($this->workingImage, true);
+		imagealphablending($this->working_image, true);
 
-		for ($i = 0; $i < $reflectionHeight; $i++)
+		for ($i = 0; $i < $reflection_height; $i++)
 		{
-			$colorToPaint = imagecolorallocatealpha(
-				$this->workingImage,
+			$color_to_paint = imagecolorallocatealpha(
+				$this->working_image,
 				255,
 				255,
 				255,
-				($i / $reflectionHeight * -1 + 1) * $this->white
+				($i / $reflection_height * -1 + 1) * $this->white
 			);
 
 			imagefilledrectangle(
-				$this->workingImage,
+				$this->working_image,
 				0,
 				$height + $i,
 				$width,
 				$height + $i,
-				$colorToPaint
+				$color_to_paint
 			);
 		}
 
 		if ($this->border)
 		{
-			$rgb			= $this->hex2rgb($this->borderColor, false);
-			$colorToPaint	= imagecolorallocate($this->workingImage, $rgb[0], $rgb[1], $rgb[2]);
+			$rgb			= $this->hex2rgb($this->border_color, false);
+			$color_to_paint	= imagecolorallocate($this->working_image, $rgb[0], $rgb[1], $rgb[2]);
 
 			//top line
 			imageline(
-				$this->workingImage,
+				$this->working_image,
 				0,
 				0,
 				$width,
 				0,
-				$colorToPaint
+				$color_to_paint
 			);
 
 			//bottom line
 			imageline(
-				$this->workingImage,
+				$this->working_image,
 				0,
 				$height,
 				$width,
 				$height,
-				$colorToPaint
+				$color_to_paint
 			);
 
 			//left line
 			imageline(
-				$this->workingImage,
+				$this->working_image,
 				0,
 				0,
 				0,
 				$height,
-				$colorToPaint
+				$color_to_paint
 			);
 
 			//right line
 			imageline(
-				$this->workingImage,
+				$this->working_image,
 				$width - 1,
 				0,
 				$width - 1,
 				$height,
-				$colorToPaint
+				$color_to_paint
 			);
 		}
 
 		if ($phpthumb->getFormat() == 'PNG')
 		{
-			$colorTransparent = imagecolorallocatealpha(
-				$this->workingImage,
+			$color_transparent = imagecolorallocatealpha(
+				$this->working_image,
 				$this->options['alphaMaskColor'][0],
 				$this->options['alphaMaskColor'][1],
 				$this->options['alphaMaskColor'][2],
 				0
 			);
 
-			imagefill($this->workingImage, 0, 0, $colorTransparent);
-			imagesavealpha($this->workingImage, true);
+			imagefill		($this->working_image, 0, 0, $color_transparent);
+			imagesavealpha	($this->working_image, true);
 		}
 
-		$phpthumb->setOldImage($this->workingImage);
-		$this->currentDimensions['width']  = $width;
-		$this->currentDimensions['height'] = $newHeight;
-		$phpthumb->setCurrentDimensions($this->currentDimensions);
+		$phpthumb->setOldImage($this->working_image);
+		$this->current_dimensions['width']  = $width;
+		$this->current_dimensions['height'] = $new_height;
+		$phpthumb->setCurrentDimensions($this->current_dimensions);
 
 		return $phpthumb;
 	}
@@ -214,16 +214,16 @@ class Reflection implements PluginInterface
 	 */
 	protected function imageFlipVertical (): void
 	{
-		$x_i = imagesx($this->workingImage);
-		$y_i = imagesy($this->workingImage);
+		$x_i = imagesx($this->working_image);
+		$y_i = imagesy($this->working_image);
 
 		for ($x = 0; $x < $x_i; $x++)
 		{
 			for ($y = 0; $y < $y_i; $y++)
 			{
 				imagecopy(
-					$this->workingImage,
-					$this->workingImage,
+					$this->working_image,
+					$this->working_image,
 					$x,
 					$y_i - $y - 1,
 					$x,
@@ -238,7 +238,7 @@ class Reflection implements PluginInterface
 	/**
 	 * Converts a hex color to rgb tuples
 	 */
-	protected function hex2rgb (string $hex, bool $asString = false): string|array
+	protected function hex2rgb (string $hex, bool $as_string = false): string|array
 	{
 		// strip off any leading #
 		if (str_starts_with($hex, '#'))
@@ -259,6 +259,6 @@ class Reflection implements PluginInterface
 		$rgb[1] = (isset($rgb[1]) ? hexdec($rgb[1]) : 0);
 		$rgb[2] = (isset($rgb[2]) ? hexdec($rgb[2]) : 0);
 
-		return ($asString ? "$rgb[0] $rgb[1] $rgb[2]" : $rgb);
+		return ($as_string ? "$rgb[0] $rgb[1] $rgb[2]" : $rgb);
 	}
 }
