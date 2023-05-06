@@ -153,7 +153,7 @@ $wacko_translation = [
 	'JabberLink'				=> '通过 XMPP 聊天 （Jabber 客户端启动）',
 	'PermaLink'					=> '永久链接',
 	'PermaLinkTip'				=> '本页面该版本的固定链接',
-	'PermaLink0Tip'				=> 'Permanent link to this page',
+	'PermaLink0Tip'				=> '本文的永久链接',
 
 	'ShowTip'					=> '返回查看模式',
 	'ShowText'					=> '查看',
@@ -215,7 +215,7 @@ $wacko_translation = [
 	'EditTip'					=> '编辑该页。',
 	'EditText'					=> '编辑',
 	'EditSection'				=> '编辑章节 %1',
-	'EditSectionHint'			=> 'Section %1 of %2',
+	'EditSectionHint'			=> '第 %1 节，共 %2 节',
 	'SectionHeadline'			=> '章节',
 	'EditCommentTip'			=> '编辑评论',
 	'EditComment'				=> '编辑此评论',
