@@ -2,15 +2,15 @@
 /**
  * SafeHTML Parser
  *
- * PHP version 7
+ * PHP version 8
  *
  * @category	HTML
  * @package		SafeHTML
  * @author		Roman Ivanov <thingol@mail.ru>
  * @author		Miguel Vazquez Gocobachi <demrit@mx.gnu.org>
- * @copyright	2004-2020 Roman Ivanov, Miguel Vazquez Gocobachi, WackoWiki Team
+ * @copyright	2004-2023 Roman Ivanov, Miguel Vazquez Gocobachi, WackoWiki Team
  * @license		http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version		1.3.12
+ * @version		1.3.13
  * @link		https://wackowiki.org/doc/Dev/Projects/SafeHTML
  */
 
@@ -48,86 +48,62 @@ class SafeHTML
 {
 	/**
 	 * Storage for resulting HTML output
-	 *
-	 * @var string
 	 */
 	protected string $xhtml = '';
 
 	/**
 	 * Array of counters for each tag
-	 *
-	 * @var array
 	 */
 	protected array $counter = [];
 
 	/**
 	 * Stack of unclosed tags
-	 *
-	 * @var array
 	 */
 	protected array $stack = [];
 
 	/**
 	 * Array of counters for tags that must be deleted with all content
-	 *
-	 * @var array
 	 */
 	protected array $dcCounter = [];
 
 	/**
 	 * Stack of unclosed tags that must be deleted with all content
-	 *
-	 * @var array
 	 */
 	protected array $dcStack = [];
 
 	/**
 	 * Stores level of list (ol/ul) nesting
-	 *
-	 * @var int
 	 */
 	protected int $listScope = 0;
 
 	/**
 	 * Stack of unclosed list tags
-	 *
-	 * @var array
 	 */
 	protected array $liStack = [];
 
 	/**
 	 * Array of prepared regular expressions for protocols (schemas) matching
-	 *
-	 * @var array
 	 */
 	protected array $protoRegexps = [];
 
 	/**
 	 * Array of prepared regular expressions for CSS matching
-	 *
-	 * @var array
 	 */
 	protected array $cssRegexps = [];
 
 	/**
 	 * Allowed tags
-	 *
-	 * @var array
 	 */
 	protected array $allowTags = [];
 
 
 	/**
 	 * List of single tags ("<tag>")
-	 *
-	 * @var array
 	 */
 	public array $singleTags = ['area', 'br', 'img', 'input', 'hr', 'wbr', ];
 
 	/**
 	 * List of dangerous tags (such tags will be deleted)
-	 *
-	 * @var array
 	 */
 	public array $deleteTags = [
 		'applet', 'base',   'basefont', 'bgsound', 'blink',  'body',
@@ -139,22 +115,16 @@ class SafeHTML
 	/**
 	 * List of dangerous tags (such tags will be deleted, and all content
 	 * inside this tags will be also removed)
-	 *
-	 * @var array
 	 */
 	public array $deleteTagsContent = ['script', 'style', 'title', 'xml', ];
 
 	/**
 	 * Type of protocols filtering ('white' or 'black')
-	 *
-	 * @var string
 	 */
 	public string $protocolFiltering = 'white';
 
 	/**
 	 * List of "dangerous" protocols (used for blacklist-filtering)
-	 *
-	 * @var array
 	 */
 	public array $blackProtocols = [
 		'about',   'chrome',     'data',       'disk',     'hcp',
@@ -166,8 +136,6 @@ class SafeHTML
 
 	/**
 	 * List of "safe" protocols (used for whitelist-filtering)
-	 *
-	 * @var array
 	 */
 	public array $whiteProtocols = [
 		'ed2k',   'file', 'ftp',  'gopher', 'http',   'https',
@@ -177,8 +145,6 @@ class SafeHTML
 
 	/**
 	 * List of attributes that can contain protocols
-	 *
-	 * @var array
 	 */
 	public array $protocolAttributes = [
 		'action', 'background', 'codebase', 'dynsrc', 'href', 'lowsrc', 'src',
@@ -189,8 +155,6 @@ class SafeHTML
 	 *
 	 * Whole style="" attribute will be removed, if parser will find one of
 	 * these keywords
-	 *
-	 * @var array
 	 */
 	public array $cssKeywords = [
 		'absolute', 'behavior',       'behaviour',   'content', 'expression',
@@ -200,7 +164,6 @@ class SafeHTML
 	/**
 	 * List of tags that can have no "closing tag"
 	 *
-	 * @var array
 	 * @deprecated XHTML does not allow such tags
 	 */
 	public array $noClose = [];
@@ -209,8 +172,6 @@ class SafeHTML
 	 * List of block-level tags that terminates paragraph
 	 *
 	 * Paragraph will be closed when this tags opened
-	 *
-	 * @var array
 	 */
 	public array $closeParagraph = [
 		'address',	'article',	'aside',		'blockquote',	'details',	'div',
@@ -222,8 +183,6 @@ class SafeHTML
 
 	/**
 	 * List of table tags, all table tags outside a table will be removed
-	 *
-	 * @var array
 	 */
 	public array $tableTags = [
 		'caption', 'col', 'colgroup', 'tbody', 'td', 'tfoot', 'th',
@@ -232,29 +191,21 @@ class SafeHTML
 
 	/**
 	 * List of list tags
-	 *
-	 * @var array
 	 */
 	public array $listTags = ['menu', 'ol', 'ul', 'dl', ];
 
 	/**
 	 * List of dangerous attributes
-	 *
-	 * @var array
 	 */
 	public array $attributes = ['dynsrc', 'id', 'name', ];
 
 	/**
 	 * List of allowed "namespaced" attributes
-	 *
-	 * @var array
 	 */
 	public array $attributesNS = ['xml:lang', ];
 
 	/**
 	 * Constructs class
-	 *
-	 * @access public
 	 */
 	public function __construct()
 	{
@@ -284,10 +235,8 @@ class SafeHTML
 	 * Handles the writing of attributes - called from $this->openHandler()
 	 *
 	 * @param array $attrs array of attributes $name => $value
-	 *
-	 * @return bool
 	 */
-	protected function writeAttrs($attrs): bool
+	protected function writeAttrs(array $attrs): bool
 	{
 		if (is_array($attrs))
 		{
@@ -405,14 +354,8 @@ class SafeHTML
 
 	/**
 	 * Opening tag handler - called from HTMLSax
-	 *
-	 * @param object &$parser HTML Parser
-	 * @param string $name	tag name
-	 * @param array  $attrs   tag attributes
-	 *
-	 * @return bool
 	 */
-	public function openHandler(&$parser, $name, $attrs): bool
+	public function openHandler(object &$parser, string $name, array $attrs): bool
 	{
 		$name = strtolower($name);
 
@@ -504,13 +447,8 @@ class SafeHTML
 
 	/**
 	 * Closing tag handler - called from HTMLSax
-	 *
-	 * @param object &$parser HTML parser
-	 * @param string $name	tag name
-	 *
-	 * @return bool
 	 */
-	public function closeHandler(&$parser, $name): bool
+	public function closeHandler(object &$parser, string $name): bool
 	{
 		$name = strtolower($name);
 
@@ -547,12 +485,8 @@ class SafeHTML
 
 	/**
 	 * Closes tag
-	 *
-	 * @param string $tag tag name
-	 *
-	 * @return bool
 	 */
-	protected function closeTag($tag): bool
+	protected function closeTag(string $tag): bool
 	{
 		if (!in_array($tag, $this->noClose))
 		{
@@ -576,13 +510,8 @@ class SafeHTML
 
 	/**
 	 * Character data handler - called from HTMLSax
-	 *
-	 * @param object &$parser HTML parser
-	 * @param string $data	textual data
-	 *
-	 * @return bool
 	 */
-	public function dataHandler(&$parser, $data): bool
+	public function dataHandler(object &$parser, string $data): bool
 	{
 		if (count($this->dcStack) == 0)
 		{
@@ -594,13 +523,8 @@ class SafeHTML
 
 	/**
 	 * Escape handler - called from HTMLSax
-	 *
-	 * @param object &$parser HTML parser
-	 * @param string $data	comments or other type of data
-	 *
-	 * @return bool
 	 */
-	public function escapeHandler(&$parser, $data)
+	public function escapeHandler(object &$parser, string $data): bool
 	{
 		return true;
 	}
@@ -613,12 +537,8 @@ class SafeHTML
 	 * $safe = new SafeHTML;
 	 * $safe->setAllowTags(['body']);
 	 * </pre>
-	 *
-	 * @param array $tags Tags to allow
-	 *
-	 * @return void
 	 */
-	public function setAllowTags($tags = []): void
+	public function setAllowTags(array $tags = []): void
 	{
 		if (is_array($tags))
 		{
@@ -628,8 +548,6 @@ class SafeHTML
 
 	/**
 	 * Returns the allowed tags
-	 *
-	 * @return array
 	 */
 	public function getAllowTags(): array
 	{
@@ -638,8 +556,6 @@ class SafeHTML
 
 	/**
 	 * Reset the allowed tags
-	 *
-	 * @return void
 	 */
 	public function resetAllowTags(): void
 	{
@@ -647,9 +563,7 @@ class SafeHTML
 	}
 
 	/**
-	 * Returns the XHTML document
-	 *
-	 * @return string Processed (X)HTML document
+	 * Returns the (X)HTML document
 	 */
 	public function getXHTML(): string
 	{
@@ -663,8 +577,6 @@ class SafeHTML
 
 	/**
 	 * Clears current document data
-	 *
-	 * @return bool
 	 */
 	public function clear(): bool
 	{
@@ -680,7 +592,7 @@ class SafeHTML
 	 *
 	 * @return string Processed (X)HTML document
 	 */
-	public function parse($doc): string
+	public function parse(string $doc): string
 	{
 		$result = '';
 
@@ -714,9 +626,8 @@ class SafeHTML
 	 *
 	 * @param string $str HTML document for recode ASCII part of UTF-7 back to ASCII
 	 * @return string Decoded document
-	 * @access private
 	 */
-	function repackUTF7($str): string
+	private function repackUTF7(string $str): string
 	{
 		return preg_replace_callback('!\+([a-zA-Z\d/]+)\-!', [$this, 'repackUTF7Callback'], $str);
 	}
@@ -726,9 +637,8 @@ class SafeHTML
 	 *
 	 * @param string $str String for recode ASCII part of UTF-7 back to ASCII
 	 * @return string Recoded string
-	 * @access private
 	 */
-	function repackUTF7Callback($str): string
+	private function repackUTF7Callback(string $str): string
 	{
 		$str = base64_decode($str[1]);
 		$str = preg_replace_callback('/^((?:\x00.)*)((?:[^\x00].)+)/', [$this, 'repackUTF7Back'], $str);
@@ -741,9 +651,8 @@ class SafeHTML
 	 *
 	 * @param string $str String for recode ASCII part of UTF-7 back to ASCII
 	 * @return string Recoded string
-	 * @access private
 	 */
-	function repackUTF7Back($str): string
+	private function repackUTF7Back(string $str): string
 	{
 		return $str[1] . '+' . rtrim(base64_encode($str[2]), '=') . '-';
 	}
