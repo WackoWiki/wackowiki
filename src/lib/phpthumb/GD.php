@@ -544,31 +544,31 @@ class GD extends PHPThumb
 	/**
 	 * Vanilla Cropping - Crops from x,y with specified width and height
 	 */
-	public function crop(int $startX, int $startY, int $crop_width, int $crop_height): GD
+	public function crop(int $start_x, int $start_y, int $crop_width, int $crop_height): GD
 	{
 		// do some calculations
-		$crop_width		= ($this->current_dimensions['width'] < $crop_width) ? $this->current_dimensions['width'] : $crop_width;
-		$crop_height	= ($this->current_dimensions['height'] < $crop_height) ? $this->current_dimensions['height'] : $crop_height;
+		$crop_width		= ($this->current_dimensions['width'] < $crop_width)	? $this->current_dimensions['width']	: $crop_width;
+		$crop_height	= ($this->current_dimensions['height'] < $crop_height)	? $this->current_dimensions['height']	: $crop_height;
 
 		// ensure everything's in bounds
-		if (($startX + $crop_width) > $this->current_dimensions['width'])
+		if (($start_x + $crop_width) > $this->current_dimensions['width'])
 		{
-			$startX = ($this->current_dimensions['width'] - $crop_width);
+			$start_x = ($this->current_dimensions['width'] - $crop_width);
 		}
 
-		if (($startY + $crop_height) > $this->current_dimensions['height'])
+		if (($start_y + $crop_height) > $this->current_dimensions['height'])
 		{
-			$startY = ($this->current_dimensions['height'] - $crop_height);
+			$start_y = ($this->current_dimensions['height'] - $crop_height);
 		}
 
-		if ($startX < 0)
+		if ($start_x < 0)
 		{
-			$startX = 0;
+			$start_x = 0;
 		}
 
-		if ($startY < 0)
+		if ($start_y < 0)
 		{
-			$startY = 0;
+			$start_y = 0;
 		}
 
 		// create the working image
@@ -581,8 +581,8 @@ class GD extends PHPThumb
 			$this->old_image,
 			0,
 			0,
-			$startX,
-			$startY,
+			$start_x,
+			$start_y,
 			$crop_width,
 			$crop_height,
 			$crop_width,
