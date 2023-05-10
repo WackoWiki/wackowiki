@@ -10,7 +10,7 @@
  *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ * https://www.php.net/license/3_0.txt.  If you did not receive a copy of
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
@@ -18,9 +18,8 @@
  * @package	Text_Highlighter
  * @author	 Andrey Demenev <demenev@gmail.com>
  * @copyright  2004-2006 Andrey Demenev
- * @license	http://www.php.net/license/3_0.txt  PHP License
- * @version	CVS: $Id$
- * @link	   http://pear.php.net/package/Text_Highlighter
+ * @license	https://www.php.net/license/3_0.txt  PHP License
+ * @link	   https://pear.php.net/package/Text_Highlighter
  */
 
 /**
@@ -28,8 +27,6 @@
  */
 require_once 'PEAR.php';
 require_once 'XML/Parser.php';
-
-// {{{ error codes
 
 const TEXT_HIGHLIGHTER_EMPTY_RE = 1;
 const TEXT_HIGHLIGHTER_INVALID_RE = 2;
@@ -43,7 +40,6 @@ const TEXT_HIGHLIGHTER_KEYWORD_INHERITS = 9;
 const TEXT_HIGHLIGHTER_PARSE = 10;
 const TEXT_HIGHLIGHTER_FILE_WRITE = 11;
 const TEXT_HIGHLIGHTER_FILE_READ = 12;
-// }}}
 
 /**
  * Syntax highliter class generator class
@@ -65,7 +61,6 @@ const TEXT_HIGHLIGHTER_FILE_READ = 12;
 
 class Text_Highlighter_Generator extends  XML_Parser
 {
-	// {{{ properties
 	/**
 	 * Whether to do case folding.
 	 * We have to declare it here, because XML_Parser
@@ -179,23 +174,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 */
 	private $_errors;
 
-	// }}}
-	// {{{ constructor
-
-	/**
-	 * PHP4 compatable constructor
-	 *
-	 * @param string $syntaxFile Name of XML file
-	 * with syntax highlighting rules
-	 *
-	 * @access public
-	 */
-
-	function Text_Highlighter_Generator($syntaxFile = '')
-	{
-		return $this->__construct($syntaxFile);
-	}
-
 	/**
 	 * Constructor
 	 *
@@ -216,9 +194,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 			$this->setInputFile($syntaxFile);
 		}
 	}
-
-	// }}}
-	// {{{ _formatError
 
 	/**
 	 * Format error message
@@ -248,9 +223,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return $ret;
 	}
 
-	// }}}
-	// {{{ declareErrorMessages
-
 	/**
 	 * Set up error message templates
 	 *
@@ -274,9 +246,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		];
 	}
 
-	// }}}
-	// {{{ setInputFile
-
 	/**
 	 * Sets the input xml file to be parsed
 	 *
@@ -298,9 +267,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 		return true;
 	}
-
-	// }}}
-	// {{{ generate
 
 	/**
 	 * Generates class code
@@ -334,9 +300,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return true;
 	}
 
-	// }}}
-	// {{{ getCode
-
 	/**
 	 * Returns generated code as a string.
 	 *
@@ -348,9 +311,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 	{
 		return $this->_code;
 	}
-
-	// }}}
-	// {{{ saveCode
 
 	/**
 	 * Saves generated class to file. Note that {@link Text_Highlighter::factory()}
@@ -379,9 +339,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return true;
 	}
 
-	// }}}
-	// {{{ hasErrors
-
 	/**
 	 * Reports if there were errors
 	 *
@@ -393,9 +350,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 	{
 		return count($this->_errors) > 0;
 	}
-
-	// }}}
-	// {{{ getErrors
 
 	/**
 	 * Returns errors
@@ -409,9 +363,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return $this->_errors;
 	}
 
-	// }}}
-	// {{{ _sortBlocks
-
 	/**
 	 * Sorts blocks
 	 *
@@ -423,8 +374,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return $b1['order'] - $b2['order'];
 	}
 
-	// }}}
-	// {{{ _sortLookFor
 	/**
 	 * Sort 'look for' list
 	 * @return int
@@ -438,9 +387,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 		return $o1 - $o2;
 	}
-
-	// }}}
-	// {{{ _makeRE
 
 	/**
 	 * Adds delimiters and modifiers to regular expression if necessary
@@ -488,9 +434,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return $text;
 	}
 
-	// }}}
-	// {{{ _exportArray
-
 	/**
 	 * Exports array as PHP code
 	 *
@@ -505,8 +448,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return trim(preg_replace('~^(\s*)~m','		\1\1', $array));
 	}
 
-	// }}}
-	// {{{ _countSubpatterns
 	/**
 	 * Find number of capturing suppaterns in regular expression
 	 * @return int
@@ -519,16 +460,12 @@ class Text_Highlighter_Generator extends  XML_Parser
 		return count($m) - 1;
 	}
 
-	// }}}
-
 	/**#@+
 	 * @access private
 	 * @param resource $xp	  XML parser resource
 	 * @param string   $elem	XML element name
 	 * @param array	$attribs XML element attributes
 	 */
-
-	// {{{ xmltag_Default
 
 	/**
 	 * start handler for <default> element
@@ -544,9 +481,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 		$this->_defClass = @$attribs['innerGroup'];
 	}
-
-	// }}}
-	// {{{ xmltag_Region
 
 	/**
 	 * start handler for <region> element
@@ -601,9 +535,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 	}
 
-	// }}}
-	// {{{ xmltag_Block
-
 	/**
 	 * start handler for <block> element
 	 */
@@ -653,9 +584,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 	}
 
-	// }}}
-	// {{{ cdataHandler
-
 	/**
 	 * Character data handler. Used for comment
 	 */
@@ -667,9 +595,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 	}
 
-	// }}}
-	// {{{ xmltag_Comment
-
 	/**
 	 * start handler for <comment> element
 	 */
@@ -678,9 +603,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		$this->_comment = '';
 		$this->_inComment = true;
 	}
-
-	// }}}
-	// {{{ xmltag_PartGroup
 
 	/**
 	 * start handler for <partgroup> element
@@ -697,9 +619,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		$this->_element['partClass'][$attribs['index']] = @$attribs['innerGroup'];
 	}
 
-	// }}}
-	// {{{ xmltag_PartClass
-
 	/**
 	 * start handler for <partclass> element
 	 */
@@ -707,9 +626,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 	{
 		$this->xmltag_PartGroup($xp, $elem, $attribs);
 	}
-
-	// }}}
-	// {{{ xmltag_Keywords
 
 	/**
 	 * start handler for <keywords> element
@@ -764,9 +680,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 	}
 
-	// }}}
-	// {{{ xmltag_Keyword
-
 	/**
 	 * start handler for <keyword> element
 	 */
@@ -786,9 +699,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 		$this->_element['match'][$keyword] = true;
 	}
-
-	// }}}
-	// {{{ xmltag_Contains
 
 	/**
 	 * start handler for <contains> element
@@ -810,9 +720,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 	}
 
-	// }}}
-	// {{{ xmltag_But
-
 	/**
 	 * start handler for <but> element
 	 */
@@ -829,9 +736,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 	}
 
-	// }}}
-	// {{{ xmltag_Onlyin
-
 	/**
 	 * start handler for <onlyin> element
 	 */
@@ -844,9 +748,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 		$this->_element['onlyin'][$attribs['region']] = xml_get_current_line_number($this->parser);
 	}
-
-	// }}}
-	// {{{ xmltag_Author
 
 	/**
 	 * start handler for <author> element
@@ -864,9 +765,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		];
 	}
 
-	// }}}
-	// {{{ xmltag_Highlight
-
 	/**
 	 * start handler for <highlight> element
 	 */
@@ -882,11 +780,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 		$this->_case		= @$attribs['case'] == 'yes';
 	}
 
-	// }}}
-
 	/**#@-*/
-
-	// {{{ _error
 
 	/**
 	 * Add an error message
@@ -905,9 +799,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 		$this->_errors[] = $this->_formatError($code, $params, $this->_syntaxFile, $lineNo);
 	}
-
-	// }}}
-	// {{{ _aliasAttributes
 
 	/**
 	 * BC trick
@@ -932,15 +823,11 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 	}
 
-	// }}}
-
 	/**#@+
 	 * @access private
 	 * @param resource $xp	  XML parser resource
 	 * @param string   $elem	XML element name
 	 */
-
-	// {{{ xmltag_Comment_
 
 	/**
 	 * end handler for <comment> element
@@ -949,9 +836,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 	{
 		$this->_inComment = false;
 	}
-
-	// }}}
-	// {{{ xmltag_Region_
 
 	/**
 	 * end handler for <region> element
@@ -963,9 +847,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		$this->_regions[$this->_element['name']] = $this->_element;
 	}
 
-	// }}}
-	// {{{ xmltag_Keywords_
-
 	/**
 	 * end handler for <keywords> element
 	 */
@@ -973,9 +854,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 	{
 		$this->_keywords[$this->_element['name']] = $this->_element;
 	}
-
-	// }}}
-	// {{{ xmltag_Block_
 
 	/**
 	 * end handler for <block> element
@@ -986,9 +864,6 @@ class Text_Highlighter_Generator extends  XML_Parser
 		$this->_element['order'] = $this->_blockOrder ++;
 		$this->_blocks[$this->_element['name']] = $this->_element;
 	}
-
-	// }}}
-	// {{{ xmltag_Highlight_
 
 	/**
 	 * end handler for <highlight> element
@@ -1204,13 +1079,13 @@ CODE;
 		*
 		* LICENSE: This source file is subject to version 3.0 of the PHP license
 		* that is available through the world-wide-web at the following URI:
-		* http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+		* https://www.php.net/license/3_0.txt.  If you did not receive a copy of
 		* the PHP License and are unable to obtain it through the web, please
 		* send a note to license@php.net so we can mail you a copy immediately.
 		*
 		* @copyright  2004-2006 Andrey Demenev
-		* @license	http://www.php.net/license/3_0.txt  PHP License
-		* @link	   http://pear.php.net/package/Text_Highlighter
+		* @license	https://www.php.net/license/3_0.txt  PHP License
+		* @link	   https://pear.php.net/package/Text_Highlighter
 		* @category   Text
 		* @package	Text_Highlighter
 		* @version	generated from: $this->_syntaxFile
@@ -1261,9 +1136,9 @@ CODE;
 		* @category		Text
 		* @package		Text_Highlighter
 		* @copyright	2004-2006 Andrey Demenev
-		* @license		http://www.php.net/license/3_0.txt  PHP License
+		* @license		https://www.php.net/license/3_0.txt  PHP License
 		* @version		Release: 0.8.0
-		* @link			http://pear.php.net/package/Text_Highlighter
+		* @link			https://pear.php.net/package/Text_Highlighter
 		*/
 		class Text_Highlighter_{$this->language} extends Text_Highlighter
 {
@@ -1477,18 +1352,18 @@ CODE;
 		}
 
 
-		$this->_code .= "\n		\$this->_regs = " . $this->_exportArray($regs);
-		$this->_code .= ";\n		\$this->_counts = " .$this->_exportArray($counts);
-		$this->_code .= ";\n		\$this->_delim = " .$this->_exportArray($delim);
-		$this->_code .= ";\n		\$this->_inner = " .$this->_exportArray($inner);
-		$this->_code .= ";\n		\$this->_end = " .$this->_exportArray($end);
-		$this->_code .= ";\n		\$this->_states = " .$this->_exportArray($stat);
-		$this->_code .= ";\n		\$this->_keywords = " .$this->_exportArray($keywords);
-		$this->_code .= ";\n		\$this->_parts = " .$this->_exportArray($parts);
-		$this->_code .= ";\n		\$this->_subst = " .$this->_exportArray($subst);
-		$this->_code .= ";\n		\$this->_conditions = " .$this->_exportArray($conditions);
-		$this->_code .= ";\n		\$this->_kwmap = " .$this->_exportArray($kwmap);
-		$this->_code .= ";\n		\$this->_defClass = '" .$this->_defClass . '\'';
+		$this->_code .= "\n		\$this->_regs = "			. $this->_exportArray($regs);
+		$this->_code .= ";\n		\$this->_counts = "		. $this->_exportArray($counts);
+		$this->_code .= ";\n		\$this->_delim = "		. $this->_exportArray($delim);
+		$this->_code .= ";\n		\$this->_inner = "		. $this->_exportArray($inner);
+		$this->_code .= ";\n		\$this->_end = "		. $this->_exportArray($end);
+		$this->_code .= ";\n		\$this->_states = "		. $this->_exportArray($stat);
+		$this->_code .= ";\n		\$this->_keywords = "	. $this->_exportArray($keywords);
+		$this->_code .= ";\n		\$this->_parts = "		. $this->_exportArray($parts);
+		$this->_code .= ";\n		\$this->_subst = "		. $this->_exportArray($subst);
+		$this->_code .= ";\n		\$this->_conditions = "	. $this->_exportArray($conditions);
+		$this->_code .= ";\n		\$this->_kwmap = "		. $this->_exportArray($kwmap);
+		$this->_code .= ";\n		\$this->_defClass = '"	. $this->_defClass . '\'';
 		$this->_code .= <<<CODE
 ;
 		\$this->_checkDefines();
@@ -1498,6 +1373,5 @@ CODE;
 CODE;
 	}
 
-	// }}}
 }
 

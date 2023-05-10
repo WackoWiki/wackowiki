@@ -5,7 +5,7 @@
  *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ * https://www.php.net/license/3_0.txt.  If you did not receive a copy of
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
@@ -13,12 +13,9 @@
  * @package    Text_Highlighter
  * @author     Andrey Demenev <demenev@gmail.com>
  * @copyright  2004-2006 Andrey Demenev
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Text_Highlighter
+ * @license    https://www.php.net/license/3_0.txt  PHP License
+ * @link       https://pear.php.net/package/Text_Highlighter
  */
-
-// {{{ BC constants
 
 // BC trick : define constants related to default
 // renderer if needed
@@ -39,20 +36,14 @@ if (!defined('HL_NUMBERS_LI')) {
 	/**#@-*/
 }
 
-// }}}
-// {{{ constants
 /**
  * for our purpose, it is infinity
  */
 const HL_INFINITY = 1000000000;
 
-// }}}
-
 /**
  * Text highlighter base class
  */
-
-// {{{ Text_Highlighter
 
 /**
  * Text highlighter base class
@@ -83,8 +74,6 @@ const HL_INFINITY = 1000000000;
 
 class Text_Highlighter
 {
-	// {{{ members
-
 	/**
 	 * Syntax highlighting rules.
 	 * Auto-generated classes set this var
@@ -109,7 +98,7 @@ class Text_Highlighter
 	 * @access protected
 	 * @var array
 	 */
-	public $_options = [];
+	public array $_options = [];
 
 	/**
 	 * Conditionds
@@ -117,7 +106,7 @@ class Text_Highlighter
 	 * @access protected
 	 * @var array
 	 */
-	public $_conditions = [];
+	public array $_conditions = [];
 
 	/**
 	 * Disabled keywords
@@ -125,7 +114,7 @@ class Text_Highlighter
 	 * @access protected
 	 * @var array
 	 */
-	public $_disabled = [];
+	public array $_disabled = [];
 
 	/**
 	 * Language
@@ -157,8 +146,6 @@ class Text_Highlighter
 	private string $_str;
 	private int $_len;
 
-	// }}}
-	// {{{ _checkDefines
 
 	/**
 	 * Called by subclssses' constructors to enable/disable
@@ -168,7 +155,7 @@ class Text_Highlighter
 	 *
 	 * @access protected
 	 */
-	function _checkDefines()
+	protected function _checkDefines()
 	{
 		$defines = $this->_options['defines'] ?? [];
 
@@ -195,8 +182,6 @@ class Text_Highlighter
 		}
 	}
 
-	// }}}
-	// {{{ factory
 
 	/**
 	 * Create a new Highlighter object for specified language
@@ -212,7 +197,7 @@ class Text_Highlighter
 	 * @static
 	 * @access public
 	 */
-	static function &factory($lang, $options = [])
+	public static function &factory(string $lang, array $options = [])
 	{
 		$lang = strtoupper($lang);
 		@include_once (__DIR__ . '/Highlighter/' . $lang . '.php');
@@ -230,9 +215,6 @@ class Text_Highlighter
 		return $obj;
 	}
 
-	// }}}
-	// {{{ setRenderer
-
 	/**
 	 * Set renderer object
 	 *
@@ -240,24 +222,21 @@ class Text_Highlighter
 	 *
 	 * @access public
 	 */
-	function setRenderer(&$renderer)
+	public function setRenderer(object &$renderer)
 	{
 		$this->_renderer = $renderer;
 	}
 
-	// }}}
 
 	/**
 	 * Helper function to find matching brackets
 	 *
 	 * @access private
 	 */
-	function _matchingBrackets($str)
+	private function _matchingBrackets($str)
 	{
 		return strtr($str, '()<>[]{}', ')(><][}{');
 	}
-
-
 
 
 	function _getToken()
@@ -269,7 +248,7 @@ class Text_Highlighter
 
 		if ($this->_pos >= $this->_len)
 		{
-			return NULL;
+			return null;
 		}
 
 		if ($this->_state != -1 && preg_match($this->_endpattern, $this->_str, $m, PREG_OFFSET_CAPTURE, $this->_pos))
@@ -415,10 +394,6 @@ class Text_Highlighter
 	}
 
 
-
-
-	// {{{ highlight
-
 	/**
 	 * Highlights code
 	 *
@@ -428,7 +403,7 @@ class Text_Highlighter
 	 *
 	 */
 
-	function highlight($str)
+	public function highlight($str): string
 	{
 		if (!($this->_renderer))
 		{
@@ -457,9 +432,5 @@ class Text_Highlighter
 		return $this->_renderer->getOutput();
 	}
 
-	// }}}
-
 }
-
-// }}}
 
