@@ -94,7 +94,7 @@ if ($this->has_access('read'))
 			$message = Ut::perc_replace($this->_t('RevisionHint'),
 				$this->href(),
 				$this->tag,
-				$this->sql_time_formatted($this->page['modified']),
+				$this->sql_time_format($this->page['modified']),
 				$this->user_link($this->page['user_name'], true, false));
 
 			// if this is an old revision, display ReEdit button
@@ -273,7 +273,7 @@ if ($this->has_access('read'))
 		// display page body
 		$tpl->data = $data;
 
-		$this->set_language($this->user_lang);
+		$this->set_language($this->user_lang, true);
 	}
 }
 else

@@ -21,7 +21,7 @@
 				<h1>[ ' db: site_name | e ' ]: [ ' title | e ' ]</h1>
 				<a href="[ ' db: base_url ' ]">[ ' db: base_url | trim / | e ' ]</a>
 				[= ver _ =
-					&nbsp;&nbsp;&nbsp;&nbsp;[ ' _t: Version ' ]: [ ' version ' ] ([ ' mtime | time_formatted ' ])
+					&nbsp;&nbsp;&nbsp;&nbsp;[ ' _t: Version ' ]: [ ' version ' ] ([ ' mtime | time_format ' ])
 				=]
 				<br>
 				[ ' path ' ]

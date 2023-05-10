@@ -19,7 +19,7 @@
 			[= cmt _ =
 				<article class="comment">
 					<span class="comment-meta">
-						<strong>— [ ' user ' ]</strong> ([ ' created | time_formatted ' ][ ' edit CmtEdited ' ])&nbsp;&nbsp;&nbsp;
+						<strong>— [ ' user ' ]</strong> ([ ' created | time_format ' ][ ' edit CmtEdited ' ])&nbsp;&nbsp;&nbsp;
 					</span>
 					<br>
 					['' body '']
@@ -43,4 +43,4 @@
 	</article>
 
 [== CmtEdited ==]
-, [ ' _t: CommentEdited ' ] [ ' time | time_formatted ' ]
+, [ ' _t: CommentEdited ' ] [ ' time | time_format ' ]

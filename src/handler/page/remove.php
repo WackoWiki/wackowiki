@@ -210,7 +210,7 @@ if ($this->is_admin()
 				$this->_t('LogRemovedComment', SYSTEM_LANG),
 				($comment_on['tag'] . ' ' . $comment_on['title']),
 				$this->page['user_name'],
-				$this->sql_time_formatted($this->page['created'])));
+				$this->sql_time_format($this->page['created'])));
 		}
 
 		foreach ($message as $notice)
@@ -235,7 +235,7 @@ if ($this->is_admin()
 			$message = Ut::perc_replace($this->_t('RevisionHint'),
 				$this->href(),
 				$this->tag,
-				$this->sql_time_formatted($revision['modified']),
+				$this->sql_time_format($revision['modified']),
 				$this->user_link($revision['user_name'], true, false));
 
 			$tpl->meta			= $this->show_message($message, 'revision-info', false);

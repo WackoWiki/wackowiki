@@ -417,7 +417,7 @@ if ($can_view)
 				$path2	= $path1;
 			}
 
-			$created	= $this->sql_time_formatted($file['created']);
+			$created	= $this->sql_time_format($file['created']);
 			$desc		= $this->format($file['file_description'], 'typografica', ['lang' => $file['file_lang']]);
 
 			if ($desc == '')

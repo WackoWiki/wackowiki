@@ -39,7 +39,7 @@
 								<td>
 									<small>
 										<a href="[ ' href ' ]">[ ' title | e ' ]</a><br>
-										[ ' user ' ] ([ ' comment.created | time_formatted ' ])
+										[ ' user ' ] ([ ' comment.created | time_format ' ])
 									</small>
 							=]
 							[= none =

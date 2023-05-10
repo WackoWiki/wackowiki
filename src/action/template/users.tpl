@@ -43,7 +43,7 @@ first really BIG template written
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: UsersSignupDate ' ]</th>
-				<td>[ ' user.signup_time | time_formatted ' ]</td>
+				<td>[ ' user.signup_time | time_format ' ]</td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: UsersLastSession ' ]</th>
@@ -144,7 +144,7 @@ first really BIG template written
 			<ul class="ul-list hl-line">
 				[= li _ =
 					<li>
-						<small>[ ' modified | time_formatted ' ]</small>  — [ ' link ' ]
+						<small>[ ' modified | time_format ' ]</small>  — [ ' link ' ]
 						[= edit =
 							<small><span class="editnote">[[ ' note ' ]]</span></small>
 						=]
@@ -164,7 +164,7 @@ first really BIG template written
 				[ ''' pagination ''' ]<br>
 				<ul class="ul-list hl-line">
 					[= li _ =
-						<li><small>[ ' created | time_formatted ' ]</small> — [ ' link ' ]</li>
+						<li><small>[ ' created | time_format ' ]</small> — [ ' link ' ]</li>
 					=]
 				</ul>
 			=]
@@ -179,7 +179,7 @@ first really BIG template written
 			['' pagination '']<br>
 			<ul class="ul-list hl-line">
 				[= li _ =
-					<li><small>[ ' created | time_formatted ' ]</small>  — [ ' link ' ]</li>
+					<li><small>[ ' created | time_format ' ]</small>  — [ ' link ' ]</li>
 				=]
 			</ul>
 		=]
@@ -194,7 +194,7 @@ first really BIG template written
 					<ul class="ul-list hl-line">
 						[= li _ =
 							<li>
-								<small>[ ' created | time_formatted ' ]</small>
+								<small>[ ' created | time_format ' ]</small>
 								— [ ' link ' ]
 								. . . . . . . . . . . . . . . .
 								[ ' onpage ' ]</span>['' // TODO refactor! '']
@@ -270,7 +270,7 @@ first really BIG template written
 				<td>[ ' user.total_revisions | number_format ' ]</td>
 				[= reg _ =
 					<td>[ ' user.total_uploads | number_format ' ]</td>
-					<td>[ ' user.signup_time | time_formatted ' ]</td>
+					<td>[ ' user.signup_time | time_format ' ]</td>
 					<td>[ ' sess lastSession ' ]</td>
 				=]
 			</tr>
@@ -296,7 +296,7 @@ first really BIG template written
 [== sessionNA ==]
 <em>[ ' _t: UsersSessionNA ' ]</em>
 [== sessionTime ==]
-[ ' visit | time_formatted ' ]
+[ ' visit | time_format ' ]
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>

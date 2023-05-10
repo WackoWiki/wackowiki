@@ -255,11 +255,11 @@
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsCreated ' ]</th>
-				<td>[ ' page.created | time_formatted ' ]</td>
+				<td>[ ' page.created | time_format ' ]</td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsCurrent ' ]</th>
-				<td>[ ' page.modified | time_formatted ' ]</td>
+				<td>[ ' page.modified | time_format ' ]</td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsSize ' ]</th>

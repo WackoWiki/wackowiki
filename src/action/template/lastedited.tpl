@@ -21,5 +21,5 @@
 <img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: LastEditedBy ' ]" title="[ ' _t: LastEditedBy ' ]" class="btn-revisions">
 
 [ === modified === ]
-<time datetime="[ ' time ' ]">[ ' time | time_formatted ' ]</time>
+<time datetime="[ ' time ' ]">[ ' time | time_format ' ]</time>
 	

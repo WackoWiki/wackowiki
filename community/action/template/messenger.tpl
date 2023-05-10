@@ -69,7 +69,7 @@
 						<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
 						<td>[ ' status ' ][ ' urgent ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a><small>[ ' replied ' ]</small></td>
 						<td>[ ' username ' ]</td>
-						<td>[ ' time | time_formatted ' ]</td>
+						<td>[ ' time | time_format ' ]</td>
 						<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
 					</tr>
 				=]
@@ -242,7 +242,7 @@
 				<tr>
 					<td><a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
 					<td>[ ' username ' ]</td>
-					<td>[ ' time | time_formatted ' ]</td>
+					<td>[ ' time | time_format ' ]</td>
 					<td>[ ' status ' ]</td>
 				</tr>
 			=]
@@ -281,7 +281,7 @@
 						<td><input type="checkbox" name="id[[ ' n ' ]]" value="[ ' msgid ' ]"></td>
 						<td>[ ' status ' ][ ' urgent ' ][ ' replied ' ] <a href="[ ' hrefview ' ]">[ ' subject ' ]</a></td>
 						<td>[ ' username ' ]</td>
-						<td>[ ' time | time_formatted ' ]</td>
+						<td>[ ' time | time_format ' ]</td>
 						<td><nav class="dt2- file-tools">[ ' i icon ' ]</nav></td>
 					</tr>
 				=]
@@ -310,7 +310,7 @@
 			</tr>
 			<tr>
 				<th>[ ' _t: Date ' ]: </th>
-				<td>[ ' replied ' ] [ ' time | time_formatted ' ]</td>
+				<td>[ ' replied ' ] [ ' time | time_format ' ]</td>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -337,7 +337,7 @@
 			</tr>
 			<tr>
 				<th>[ ' _t: Date ' ]: </th>
-				<td>[ ' time | time_formatted ' ]</td>
+				<td>[ ' time | time_format ' ]</td>
 			</tr>
 			<tr>
 				<th>[ ' _t: Status ' ]: </th>

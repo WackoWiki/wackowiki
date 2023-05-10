@@ -30,9 +30,9 @@
 								<footer>
 									<ul class="comment-meta">
 										<li>[ ' owner ' ]</li>
-										<li><time datetime="[ ' created ' ]">[ ' created | time_formatted ' ]</time></li>
+										<li><time datetime="[ ' created ' ]">[ ' created | time_format ' ]</time></li>
 										[= m _ =
-											<li><time datetime="[ ' modified ' ]"></time>[ ' modified | time_formatted ' ] [ ' _t: CommentEdited ' ]</li>
+											<li><time datetime="[ ' modified ' ]"></time>[ ' modified | time_format ' ] [ ' _t: CommentEdited ' ]</li>
 										=]
 									</ul>
 								</footer>

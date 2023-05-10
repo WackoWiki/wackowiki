@@ -53,7 +53,7 @@
 						<a href="[ ' href ' ]">[ ' page.title ' ]</a>
 					</h2>
 					<div class="news-info">
-						<span><time datetime="[ ' page.created ' ]">[ ' page.created | time_formatted ' ]</time> [ ' _t: By ' ] [ ' user ' ]</span>
+						<span><time datetime="[ ' page.created ' ]">[ ' page.created | time_format ' ]</time> [ ' _t: By ' ] [ ' user ' ]</span>
 					</div>
 					<div class="newscontent">[ ' include | pre ' ]</div>
 					<footer class="news-meta">

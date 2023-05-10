@@ -18,7 +18,7 @@ if (!$this->page['latest'])
 	$tpl->rev_text = Ut::perc_replace($this->_t('RevisionHint'),
 		$this->href(),
 		$this->tag,
-		$this->sql_time_formatted($this->page['modified']),
+		$this->sql_time_format($this->page['modified']),
 		$this->user_link($this->page['user_name'], true, false));
 }
 

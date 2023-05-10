@@ -948,7 +948,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
 								$this->get_page_tag($page['comment_on_id']) . ' ' . $this->get_page_title('', $page['comment_on_id']),
 								$page['user_name'],
-								$this->sql_time_formatted($page['created'])));
+								$this->sql_time_format($page['created'])));
 					}
 
 					// recount comments for current topic

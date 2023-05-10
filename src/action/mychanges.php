@@ -91,7 +91,7 @@ if ($user_id = $this->get_user_id())
 
 				// print entry
 				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
-				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->sql_time_formatted($page['modified']), $this->_t('RevisionTip'));
+				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->sql_time_format($page['modified']), $this->_t('RevisionTip'));
 			}
 
 			$tpl->leave();

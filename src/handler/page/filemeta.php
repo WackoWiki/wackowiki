@@ -248,7 +248,7 @@ else if ($mode && !empty($file))
 
 			$tpl->mime			= $file['mime_type'];
 			$tpl->user			= $this->user_link($file['user_name'], true, false);
-			$tpl->created		= $this->sql_time_formatted($file['created']);
+			$tpl->created		= $this->sql_time_format($file['created']);
 
 			if ($file['license_id'])
 			{

@@ -12,13 +12,13 @@
 				=]
 				[= modHide =
 					<li>
-						<time datetime="[ ' time ' ]">[ ' time | time_formatted ' ]</time>
+						<time datetime="[ ' time ' ]">[ ' time | time_format ' ]</time>
 					</li>
 				=]
 				[= mod =
 					<li>
 						<a href="[ ' revisions ' ]" title="[ ' _t: RevisionTip ' ]">
-						<time datetime="[ ' time ' ]">[ ' time | time_formatted ' ]</time></a>
+						<time datetime="[ ' time ' ]">[ ' time | time_format ' ]</time></a>
 					</li>
 				=]
 				[= owner =

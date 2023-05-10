@@ -40,7 +40,7 @@
 						[ '' placeholder '' ]
 						<input type="radio" name="b" value="[ ' value ' ]" [ ' checkedB ' ]>
 						[ '' placeholder '' ]&nbsp;
-						<a href="[ ' href ' ]">[ ' modified | time_formatted ' ]</a>
+						<a href="[ ' href ' ]">[ ' modified | time_format ' ]</a>
 						<span class="rev-size"> — ([ ' size ' ]) [ ' delta ' ]</span>
 						[ '' placeholder '' ] [ ' _t: By ' ] [ ' user ' ] 
 						[= n _ =

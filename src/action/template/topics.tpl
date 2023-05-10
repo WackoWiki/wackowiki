@@ -43,7 +43,7 @@
 						<td class="nowrap">
 							<small title="[ ' ip ' ]">
 								[ ' owner ' ]<br>
-								[ ' topic.created | time_formatted ' ]
+								[ ' topic.created | time_format ' ]
 							</small>
 						</td>
 						<td><small>[ ' topic.comments | number_format ' ]</small></td>
@@ -52,11 +52,11 @@
 							[= c =
 								<small[ ' style ' ] title="[ ' ip ' ]">
 									[ ' user ' ]<br>
-									<a href="[ ' href ' ]">[ ' created | time_formatted ' ]</a>
+									<a href="[ ' href ' ]">[ ' created | time_format ' ]</a>
 								</small>
 							=]
 							[= none =
-								<small><em>([ ' created | time_formatted ' ])</em></small>
+								<small><em>([ ' created | time_format ' ])</em></small>
 							=]
 						</td>
 					</tr>

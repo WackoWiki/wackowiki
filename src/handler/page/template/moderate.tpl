@@ -123,7 +123,7 @@
 					</td>
 					<td title="[ ' ip ' ]"><small>[ ' user ' ]</small></td>
 					<td><small>[ ' comments | number_format ' ]</small></td>
-					<td><small>[ ' created | time_formatted ' ]</small></td>
+					<td><small>[ ' created | time_format ' ]</small></td>
 				</tr>
 			=]
 			</tbody>
@@ -281,7 +281,7 @@
 					<td colspan="2" style="padding-bottom: 30px;">
 						<strong><small>
 							[ ' user ' ]
-							 ([ ' created | time_formatted ' ])</small></strong>
+							 ([ ' created | time_format ' ])</small></strong>
 						<br>[ ' body ' ]
 					</td>
 				</tr>
@@ -318,7 +318,7 @@
 						<br>[ ' desc ' ]
 					</td>
 					<td title="[ ' ip ' ]"><small>[ ' ulink ' ]</small></td>
-					<td><small>[ ' comment.created | time_formatted ' ]</small></td>
+					<td><small>[ ' comment.created | time_format ' ]</small></td>
 				</tr>
 			=]
 			</tbody>

@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: GroupsCreated ' ]</th>
-				<td>[ ' group.created | time_formatted ' ]</td>
+				<td>[ ' group.created | time_format ' ]</td>
 			</tr>
 			<tr>
 				[== // Have all usergroup pages as sub pages of the current Groups page. ==]
@@ -55,7 +55,7 @@
 					<td><a href="[ ' profile ' ]">[ ' group.group_name | e ' ]</a></td>
 					<td class="t-center">[ ' group.members | e ' ]</td>
 					[= reg _ =
-						<td class="t-center">[ ' group.created | time_formatted ' ]</td>
+						<td class="t-center">[ ' group.created | time_format ' ]</td>
 					=]
 				</tr>
 			=]

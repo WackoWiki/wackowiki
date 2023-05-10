@@ -339,11 +339,11 @@
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: UsersSignup ' ]</th>
-					<td>[ ' user.signup_time | time_formatted ' ]</td>
+					<td>[ ' user.signup_time | time_format ' ]</td>
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: UsersLastSession ' ]</th>
-					<td>[ ' user.last_visit | time_formatted ' ]</td>
+					<td>[ ' user.last_visit | time_format ' ]</td>
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: UploadQuota ' ]</th>

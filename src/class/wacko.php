@@ -518,7 +518,7 @@ class Wacko
 	}
 
 	// TODO: make format pattern depended from localization and user preferences?
-	function sql_time_formatted($text): string
+	function sql_time_format($text): string
 	{
 		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format);
 	}
@@ -660,7 +660,7 @@ class Wacko
 			$this->lang = &$this->languages[$lang];
 
 			setlocale(LC_CTYPE, $this->lang['locale']);
-			setlocale(LC_TIME, $this->lang['locale']);	// sql_time_formatted()
+			setlocale(LC_TIME, $this->lang['locale']);	// sql_time_format()
 
 			mb_internal_encoding('utf-8');
 
@@ -3113,7 +3113,7 @@ class Wacko
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
 			$this->_t('PostedBy') . ' ' .
 			$this->user_link($user_name, true, true) . ' ' .
-			$this->_t('At') . ' ' . $this->sql_time_formatted($modified);
+			$this->_t('At') . ' ' . $this->sql_time_format($modified);
 	}
 
 	/**
@@ -5318,7 +5318,7 @@ class Wacko
 							}
 						});
 					$tpl->filter('number_format',	function ($value, $decimal = 0)		{ return $this->number_format($value, $decimal); });
-					$tpl->filter('time_formatted',	function ($value)					{ return $this->sql_time_formatted($value); });
+					$tpl->filter('time_format',		function ($value)					{ return $this->sql_time_format($value); });
 
 					// STS lotta goodies must go there..
 				}

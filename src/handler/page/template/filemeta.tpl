@@ -234,7 +234,7 @@
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: FileAdded ' ]</th>
-					<td>[ ' file.created | time_formatted ' ]</td>
+					<td>[ ' file.created | time_format ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>

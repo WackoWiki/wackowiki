@@ -86,14 +86,14 @@
 	<div class="diffdown">
 		<span>[ ' version ' ]</span>
 		<a href="[ ' href ' ]">
-			[ ' modified | time_formatted ' ]
+			[ ' modified | time_format ' ]
 			<span class="dropdown-arrow">▼</span>
 		</a>
 		<div class="diffdown-content">
 			[= r _ =
 				<a href="[ ' href ' ]" [ ' class ' ]>
 					<span><strong>[ ' version ' ]</strong></span>
-					[ ' modified | time_formatted ' ]
+					[ ' modified | time_format ' ]
 					[ ' username ' ]
 					[ ' editnote | enclose " [" "]" ' ]
 				</a>

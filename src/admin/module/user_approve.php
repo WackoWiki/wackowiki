@@ -362,7 +362,7 @@ function admin_user_approve($engine, $module)
 				'<td>' . $row['email'] . '</td>' .
 				'<td>' . $row['user_ip'] . '</td>' .
 				'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang'], 'account_status' => $account_status]) . '">' . $row['user_lang'] . '</a></small></td>' .
-				'<td><small>' . $engine->sql_time_formatted($row['signup_time']) . '</small></td>' .
+				'<td><small>' . $engine->sql_time_format($row['signup_time']) . '</small></td>' .
 				'<td>' . $row['enabled'] . '</td>' .
 				'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
 				'<td>' .
