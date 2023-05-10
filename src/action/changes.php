@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // set defaults
 $date				??= $_GET['date'] ?? '';
-$hide_minor_edit	??= (bool) ($_GET['minor_edit'] ?? false);
+$minor_edit			??= (bool) ($_GET['minor_edit'] ?? true);
 $max				??= null;
 $noxml				??= 0;
 $page				??= '';
@@ -24,7 +24,7 @@ if ($date && !$this->validate_date($date))
 // process 'mark read'
 $this->mark_read($user);
 
-if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_edit))
+if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $minor_edit))
 {
 	if ($user)
 	{

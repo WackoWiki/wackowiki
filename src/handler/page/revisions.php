@@ -16,11 +16,11 @@ $this->ensure_page(true);
 // show minor edits
 if ($this->db->minor_edit)
 {
-	$hide_minor_edit = (bool) ($_GET['minor_edit'] ?? false);
+	$minor_edit = (bool) ($_GET['minor_edit'] ?? true);
 }
 else
 {
-	$hide_minor_edit = false;
+	$minor_edit = true;
 }
 
 // show deleted pages
@@ -43,7 +43,7 @@ if ($this->has_access('read'))
 	}
 
 	// load revisions for this page
-	if ([$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $show_deleted))
+	if ([$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $minor_edit, $show_deleted))
 	{
 		$this->context[++$this->current_context] = '';
 
@@ -63,9 +63,9 @@ if ($this->has_access('read'))
 		{
 			// STS: ?!..
 			// filter minor edits
-			$tpl->r_m_minor		= $hide_minor_edit;
-			$tpl->r_m_href		= $this->href('revisions', '', ['minor_edit' => ($hide_minor_edit ? 0 : 1)]);
-			$tpl->r_m_text		= $hide_minor_edit ? $this->_t('MinorEditShow') : $this->_t('MinorEditHide');
+			$tpl->r_m_minor		= $minor_edit;
+			$tpl->r_m_href		= $this->href('revisions', '', ['minor_edit' => ($minor_edit ? 0 : 1)]);
+			$tpl->r_m_text		= $minor_edit ? $this->_t('MinorEditHide') : $this->_t('MinorEditShow');
 		}
 
 		$tpl->r_pagination_text = $pagination['text'];

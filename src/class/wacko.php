@@ -1470,7 +1470,7 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function load_revisions($page_id, $hide_minor_edit = false, $deleted = false, $limit = 100): array
+	function load_revisions($page_id, $minor_edit = true, $deleted = false, $limit = 100): array
 	{
 		$revisions	= [];
 		$pagination	= [];
@@ -1483,7 +1483,7 @@ class Wacko
 				"LEFT JOIN " . $this->prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->prefix . "user o ON (p.reviewer_id = o.user_id) " .
 			"WHERE p.page_id = " . (int) $page_id . " " .
-				($hide_minor_edit
+				(!$minor_edit
 					? "AND p.minor_edit = 0 "
 					: "") .
 				($deleted
@@ -1512,7 +1512,7 @@ class Wacko
 					"LEFT JOIN " . $this->prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->prefix . "user o ON (p.reviewer_id = o.user_id) " .
 				"WHERE p.page_id = " . (int) $page_id . " " .
-					($hide_minor_edit
+					(!$minor_edit
 						? "AND p.minor_edit = 0 "
 						: "") .
 					($deleted
@@ -1650,7 +1650,7 @@ class Wacko
 		}
 	}
 
-	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = false, $default_pages = false, $deleted = false)
+	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = true, $default_pages = false, $deleted = false)
 	{
 		$pages		= [];
 		$pagination	= [];
@@ -1667,7 +1667,7 @@ class Wacko
 				($tag
 					? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
 					: "") .
-				($minor_edit
+				(!$minor_edit
 					? "AND p.minor_edit = 0 "
 					: "") .
 				($deleted
@@ -2398,7 +2398,7 @@ class Wacko
 		return $count? $count['n'] : 0;
 	}
 
-	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = false, $deleted = false): int
+	function count_revisions($page_id = null, $user_id = null, $minor_edit = true, $deleted = false): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(revision_id) AS n " .
@@ -2410,7 +2410,7 @@ class Wacko
 				($user_id
 					? "AND user_id = " . (int) $user_id . " "
 					: "") .
-				($hide_minor_edit
+				(!$minor_edit
 					? "AND minor_edit = 0 "
 					: "") .
 				($deleted

@@ -45,7 +45,7 @@ $a					= (int)		$_GET['a'];
 $b					= (int)		$_GET['b'];
 $diffmode			= (int)		($_GET['diffmode']		?? 0);
 $notification		= (int)		($_GET['notification']	?? 0);
-$hide_minor_edit	= (bool)	($_GET['minor_edit']	?? false);
+$minor_edit			= (bool)	($_GET['minor_edit']	?? true);
 
 if ($a < 0) $a = 0;
 if ($b < 0) $b = 0;
@@ -90,8 +90,8 @@ if ($page_a && $page_b
 	if ($notification == 0)
 	{
 		$tpl->enter('nav_');
-		// TODO: $hide_minor_edit
-		[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
+		// TODO: $minor_edit
+		[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $minor_edit, $this->is_admin());
 
 		$revisions_menu = function ($rev, $page, $side) use ($revisions, $diffmode, $page_a, $page_b, &$tpl)
 		{
