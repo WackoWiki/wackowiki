@@ -8,7 +8,7 @@ use RuntimeException;
 
 /**
  * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
- * Copyright (c) 2009, Ian Selby/Gen X Design
+ * Copyright (c) 2009, Ian Selby
  *
  * Author(s): Ian Selby <ianrselby@gmail.com>
  *
@@ -16,7 +16,7 @@ use RuntimeException;
  * Redistributions of files must retain the above copyright notice.
  *
  * @author Ian Selby <ianrselby@gmail.com>
- * @copyright Copyright (c) 2009 Gen X Design
+ * @copyright Copyright (c) 2009 Ian Selby
  * @link https://github.com/PHPThumb/PHPThumb
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
