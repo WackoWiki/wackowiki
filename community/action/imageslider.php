@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 
 	The sole condition is that all the images must be exactly the same size.
 
-	version: 0.8
+	version: 0.9
 
 	{{imageslider
 		[page="PageName" or global=1]
@@ -89,7 +89,6 @@ if (!$global)
 	else
 	{
 		$tag		= $this->unwrap_link($page);
-		$ppage		= '/' . $tag;
 
 		if ($_page_id = $this->get_page_id($tag))
 		{
@@ -178,165 +177,162 @@ if ($can_view)
 		#echo 'moveRatio: '			. $move_ratio . '<br>';
 		#echo 'basePercentage: '	. $base_percentage . '<br>';
 		#echo 'totalTime: '			. $total_time . '<br>';
-		?>
 
-		<style>
+		$img_width	= $img_count * 100;
+		$slidy		= '';
 
-		div#captioned-gallery {
-			width: 100%;
-			overflow: hidden;
+		if ($slidy_direction == 'right')
+		{
+			$slidy .= "0% \t{ left: -" . (($img_count - 1) * 100) . "%; }\n";
+
+			for ($i = $img_count - 1; $i > 0; $i--)
+			{
+				$position += $slide_ratio;
+				// make the keyframe the position of the image
+				$slidy .= "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
+				$position += $move_ratio;
+				// make the postion for the _next_ slide
+				$slidy .= "\t\t" . $position . "% \t{ left: -" . (($i - 1) * 100) . "%; }\n";
+			}
 		}
-		figure {
-			margin: 0;
+		else
+		{
+			$slidy .= "0% \t{ left: 0%; }\n";
+
+			// the slider is moving to the left
+			for ($i = 0; $i < ($img_count - 1); $i++)
+			{
+				$position += $slide_ratio;
+				// make the keyframe the position of the image
+				$slidy .= "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
+				$position += $move_ratio;
+				// make the postion for the _next_ slide
+				$slidy .= "\t\t" . $position . "% \t{ left: -" . (($i + 1) * 100) . "%; }\n";
+			}
 		}
-		figure.slider {
-			position: relative;
-			width: <?php echo $img_count * 100; ?>%;
-			font-size: 0;
-			animation: <?php echo $total_time . 's ' . $animation_timing; ?> slidy infinite;
-		}
-		figure.slider:hover {
-			/* animation: animation 1s  16 ease; */
-			animation-play-state: paused;
-		}
-		figure.slider figure {
-			width: <?php echo $base_percentage; ?>%;
-			height: auto;
-			display: inline-block;
-			position: inherit;
-		}
-		figure.slider img {
-			width: <?php echo $width_settings; ?>;
-			height: auto;
-		}
+
+		$tpl->css = <<<EOD
+	<style>
+
+	div#captioned-gallery {
+		width: 100%;
+		overflow: hidden;
+	}
+	figure {
+		margin: 0;
+	}
+	figure.slider {
+		position: relative;
+		width: {$img_width}%;
+		font-size: 0;
+		animation: {$total_time}s {$animation_timing} slidy infinite;
+	}
+	figure.slider:hover {
+		/* animation: animation 1s  16 ease; */
+		animation-play-state: paused;
+	}
+	figure.slider figure {
+		width: {$base_percentage}%;
+		height: auto;
+		display: inline-block;
+		position: inherit;
+	}
+	figure.slider img {
+		width: {$width_settings};
+		height: auto;
+	}
+	figure.slider figure figcaption {
+		position: absolute;
+		bottom: 0;
+		background: rgba(0,0,0,0.3);
+		color: #fff;
+		width: 100%;
+		font-size: 1rem;
+		padding: .6rem;
+	}
+	div#slider figure {
+		position: relative;
+		width: {$img_width}%;
+		margin: 0;
+		padding: 0;
+		font-size: 0;
+		left: 0;
+		text-align: left;
+		animation: {$total_time}s {$animation_timing} slidy infinite;
+	}
+
+	@media screen and (max-width: 500px) {
 		figure.slider figure figcaption {
-			position: absolute;
-			bottom: 0;
-			background: rgba(0,0,0,0.3);
-			color: #fff;
-			width: 100%;
-			font-size: 1rem;
-			padding: .6rem;
+			font-size: 1.2rem;
 		}
-		div#slider figure {
-			position: relative;
-			width: <?php echo $img_count * 100; ?>%;
-			margin: 0;
-			padding: 0;
-			font-size: 0;
-			left: 0;
-			text-align: left;
-			animation: <?php echo $total_time . 's ' . $animation_timing; ?> slidy infinite;
-		}
+	}
 
-		@media screen and (max-width: 500px) {
-			figure.slider figure figcaption {
-				font-size: 1.2rem;
+	/* figure.slider figure figcaption {
+		position: absolute;
+		bottom: -3.5rem;
+		background: rgba(0,0,0,0.3);
+		color: #fff;
+		width: 100%;
+		font-size: 2rem;
+		padding: .6rem;
+		transition: .5s bottom;
+	}
+	figure.slider figure:hover figcaption {
+		bottom: 0;
+	}
+
+	figure.slider figure:hover + figure figcaption {
+		bottom: 0;
+	} */
+
+	@keyframes slidy {
+		{$slidy}
+	}
+
+	</style>
+EOD;
+
+		// adding at the end a clone of the first array for transition loop
+		$files[]	= $files[0];
+		$n			= 0;
+
+		$tpl->enter('n_');
+
+		foreach($files as $file)
+		{
+			if ($file['picture_h']) // missing: svg!
+			{
+				$n++;
+
+				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+
+				$desc		= $this->format($file['file_description'], 'typografica', ['lang' => $file['file_lang']]);
+
+				if ($desc == '')
+				{
+					$desc = "\u{00A0}";	// No-Break Space
+				}
+
+				$file_name	= $file['file_name'];
+				$text		= $media ? '' : $file_name;
+
+				$tpl->image		= $this->link($path2 . $file_name, '', $text, '', $track);
+				$tpl->n			= $n;
+				$tpl->count		= $count['n'];
+				$tpl->desc		= $desc;
 			}
 		}
 
-		/* figure.slider figure figcaption {
-			position: absolute;
-			bottom: -3.5rem;
-			background: rgba(0,0,0,0.3);
-			color: #fff;
-			width: 100%;
-			font-size: 2rem;
-			padding: .6rem;
-			transition: .5s bottom;
-		}
-		figure.slider figure:hover figcaption {
-			bottom: 0;
-		}
-
-		figure.slider figure:hover + figure figcaption {
-			bottom: 0;
-		} */
-
-		@keyframes slidy {
-
-			<?php
-			if ($slidy_direction == 'right')
-			{
-				echo "0% \t{ left: -" . (($img_count - 1) * 100) . "%; }\n";
-
-				for ($i = $img_count - 1; $i > 0; $i--)
-				{
-					$position += $slide_ratio;
-					// make the keyframe the position of the image
-					echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
-					$position += $move_ratio;
-					// make the postion for the _next_ slide
-					echo "\t\t" . $position . "% \t{ left: -" . (($i - 1) * 100) . "%; }\n";
-				}
-			}
-			else
-			{
-				echo "0% \t{ left: 0%; }\n";
-
-				// the slider is moving to the left
-				for ($i = 0; $i < ($img_count - 1); $i++)
-				{
-					$position += $slide_ratio;
-					// make the keyframe the position of the image
-					echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
-					$position += $move_ratio;
-					// make the postion for the _next_ slide
-					echo "\t\t" . $position . "% \t{ left: -" . (($i + 1) * 100) . "%; }\n";
-				}
-			}?>
-
-		}
-
-		</style>
-
-		<div id="captioned-gallery">
-			<figure class="slider">
-			<?php
-			// adding at the end a clone of the first array for transition loop
-			$files[]	= $files[0];
-			$n			= 0;
-			#Ut::debug_print_r($files);
-
-			foreach($files as $file)
-			{
-				if ($file['picture_h']) // missing: svg!
-				{
-					$n++;
-
-					$this->file_cache[$file['page_id']][$file['file_name']] = $file;
-
-					$desc		= $this->format($file['file_description'], 'typografica', ['lang' => $file['file_lang']]);
-
-					if ($desc == '')
-					{
-						$desc = "\u{00A0}";	// \u{00A0} No-Break Space (NBSP)
-					}
-
-					$file_name	= $file['file_name'];
-					$text		= $media ? '' : $file_name;
-					$link		= $this->link($path2 . $file_name, '', $text, '', $track);
-
-					?>
-					<figure>
-						<?php echo $link; ?>
-						<figcaption><?php echo $n . '/' . $count['n'] . ' ' . $desc; ?></figcaption>
-					</figure>
-		<?php
-				}
-			}?>
-			</figure>
-		</div>
-	<?php
+		$tpl->leave();	// n
 	}
 	else
 	{
-		echo $this->_t('FileNotFound');
+		$tpl->nofile =  $this->_t('FileNotFound');
 	}
 
 	unset($files);
 }
 else
 {
-	echo $this->_t('ActionDenied');
+	$tpl->noaccess = true;
 }
