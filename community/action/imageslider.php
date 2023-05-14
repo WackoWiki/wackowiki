@@ -23,16 +23,14 @@ if (!defined('IN_WACKO'))
 	https://wackowiki.org/doc/Dev/PatchesHacks/ImageSlider
  */
 
-$page_id = '';
-
 // set defaults
-$order		??= '';
 $global		??= 0;
+$max		??= null;
+$media		??= 1;
+$order		??= '';
 $owner		??= '';
 $page		??= '';
 $track		??= 0;
-$media		??= 1;
-$max		??= null;
 
 if ($max)
 {
@@ -55,6 +53,7 @@ $order_by		= match($order) {
 
 $width_settings			= '100%'; // 100%, 300px, etc.
 $files					= [];
+$page_id				= null;
 
 // default options for slider
 $time_on_slide			= 6;
@@ -169,14 +168,6 @@ if ($can_view)
 		$base_percentage	= 100 / $img_count;
 		// set the initial position of the slidy element
 		$position			= 0;
-
-		// debug info
-		#echo 'imgCount: '			. $img_count . '<br>';
-		#echo 'totalTime: '			. $total_time . '<br>';
-		#echo 'slideRatio: '		. $slide_ratio . '<br>';
-		#echo 'moveRatio: '			. $move_ratio . '<br>';
-		#echo 'basePercentage: '	. $base_percentage . '<br>';
-		#echo 'totalTime: '			. $total_time . '<br>';
 
 		$img_width	= $img_count * 100;
 		$slidy		= '';
@@ -310,11 +301,11 @@ EOD;
 
 				if ($desc == '')
 				{
-					$desc = "\u{00A0}";	// No-Break Space
+					$desc = NBSP;	// No-Break Space
 				}
 
-				$file_name	= $file['file_name'];
-				$text		= $media ? '' : $file_name;
+				$file_name		= $file['file_name'];
+				$text			= $media ? '' : $file_name;
 
 				$tpl->image		= $this->link($path2 . $file_name, '', $text, '', $track);
 				$tpl->n			= $n;
