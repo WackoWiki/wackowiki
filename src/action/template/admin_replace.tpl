@@ -72,29 +72,6 @@
 			</p>
 		=]
 
-		[= ul _ =
-			<ul id="search-results">
-			[= l _ =
-				[ ' delim | void ' ]
-				<li>
-					[= l SearchItem =
-						<h3>
-							<input type="checkbox" tabindex="0" name="id[[ ' pageid ' ]]" value="[ ' pageid ' ]" checked="checked">
-							[ ' link ' ]
-						</h3>
-						<span class="search-meta">[ ' mtime | time_format ' ] - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
-						[= comments =
-							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
-						=]
-						</span><br>
-						[ ' preview | nl2br ' ]
-
-						[ ' category ' ]
-					=]
-				</li>
-			=]
-			</ul>
-		=]
 		<ol id="search-results" start="[ ' offset ' ]">
 		[= l _ =
 			[ ' delim | void ' ]
@@ -127,3 +104,17 @@
 [= replace =]
 <button type="submit" class="btn-ok" name="replace">[ ' _t: ReplaceTextReplace ' ]</button>&nbsp;
 <button type="submit" class="btn-ok" name="back">[ ' _t: ReplaceTextReturn ' ]</button>&nbsp;
+
+[= SearchItem =]
+<h3>
+	<input type="checkbox" tabindex="0" name="id[[ ' pageid ' ]]" value="[ ' pageid ' ]" checked="checked">
+	[ ' link ' ]
+</h3>
+<span class="search-meta">[ ' mtime | time_format ' ] - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
+[= comments =
+	- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
+=]
+</span><br>
+[ ' preview | nl2br ' ]
+
+[ ' category ' ]
