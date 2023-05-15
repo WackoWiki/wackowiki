@@ -24,7 +24,7 @@ $ap_translation = [
 	'Authorization'				=> 'Autorizzazione',
 	'AuthorizationTip'			=> 'Inserisci la password amministrativa (assicurati anche che i cookie siano ammessi nel tuo browser).',
 	'NoRecoveryPassword'		=> 'La password amministrativa non è specificata!',
-	'NoRecoveryPasswordTip'		=> 'Nota: l\'assenza di una password amministrativa è una minaccia alla sicurezza! Inserisci la tua password nel file di configurazione ed esegui nuovamente il programma.',
+	'NoRecoveryPasswordTip'		=> 'Nota: l’assenza di una password amministrativa è una minaccia alla sicurezza! Inserisci la tua password nel file di configurazione ed esegui nuovamente il programma.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
@@ -267,7 +267,7 @@ $ap_translation = [
 	'MultiLanguage'				=> 'Multilanguage support:',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages:',
-	'AllowedLanguagesInfo'		=> 'Si consiglia di selezionare solo l\'insieme delle lingue che si desidera utilizzare, altre saggiamente tutte le lingue sono selezionate.',
+	'AllowedLanguagesInfo'		=> 'Si consiglia di selezionare solo l’insieme delle lingue che si desidera utilizzare, altre saggiamente tutte le lingue sono selezionate.',
 
 	'CommentSection'			=> 'Commenti',
 	'AllowComments'				=> 'Allow comments:',
@@ -307,7 +307,7 @@ $ap_translation = [
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Attiva o disattiva i feed RSS per l\'intero wiki.',
+	'EnableFeedsInfo'			=> 'Attiva o disattiva i feed RSS per l’intero wiki.',
 
 	'XmlSitemap'				=> 'XML Sitemap:',
 	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
@@ -318,7 +318,7 @@ $ap_translation = [
 
 	'SearchSection'				=> 'Ricerca',
 	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Crea il file di descrizione di OpenSearch nella cartella XML e abilita l\'Autodiscovery del plugin di ricerca nell\'intestazione HTML.',
+	'OpenSearchInfo'			=> 'Crea il file di descrizione di OpenSearch nella cartella XML e abilita l’Autodiscovery del plugin di ricerca nell’intestazione HTML.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 
@@ -449,20 +449,20 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
 	'ReverseProxy'				=> 'Use Reverse proxy:',
-	'ReverseProxyInfo'			=> 'Attivare questa impostazione per determinare l\'indirizzo IP corretto del client remoto esaminando
+	'ReverseProxyInfo'			=> 'Attivare questa impostazione per determinare l’indirizzo IP corretto del client remoto esaminando
 									le informazioni memorizzate nelle intestazioni X-Forwarded-For. Le intestazioni X-Forwarded-For
 									sono un meccanismo standard per identificare i sistemi client che si connettono attraverso un
 									server proxy inverso, come Squid o Pound. I server proxy inversi sono spesso utilizzati per migliorare
 									le prestazioni di siti molto visitati e possono anche fornire altri vantaggi in termini di caching,
 									sicurezza o crittografia. Se questa installazione di WackoWiki opera dietro un reverse proxy,
-									questa impostazione dovrebbe essere abilitata in modo che le informazioni corrette sull\'indirizzo
+									questa impostazione dovrebbe essere abilitata in modo che le informazioni corrette sull’indirizzo
 									IP siano catturate nei sistemi di gestione delle sessioni, dei log, delle statistiche e degli
 									accessi di WackoWiki; se non si è sicuri di questa impostazione, se non si dispone di un reverse proxy
 									o se WackoWiki opera in un ambiente di hosting condiviso, questa impostazione dovrebbe rimanere disabilitata.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header:',
-	'ReverseProxyHeaderInfo'	=> 'Impostare questo valore se il server proxy invia l\'IP del client in un\'intestazione diversa
-									da X-Forwarded-For. L\'intestazione "X-Forwarded-For" è un elenco di indirizzi IP separati da
-									virgole e spazi, di cui verrà utilizzato solo l\'ultimo (quello più a sinistra).',
+	'ReverseProxyHeaderInfo'	=> 'Impostare questo valore se il server proxy invia l’IP del client in un’intestazione diversa
+									da X-Forwarded-For. L’intestazione "X-Forwarded-For" è un elenco di indirizzi IP separati da
+									virgole e spazi, di cui verrà utilizzato solo l’ultimo (quello più a sinistra).',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses:',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored
@@ -479,7 +479,7 @@ $ap_translation = [
 		'2'		=> 'Database',
 	],
 	'SessionNotice'					=> 'Mostra la causa di terminazione della sessione:',
-	'SessionNoticeInfo'				=> 'Indica la causa dell\'interruzione della sessione.',
+	'SessionNoticeInfo'				=> 'Indica la causa dell’interruzione della sessione.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
@@ -514,7 +514,7 @@ $ap_translation = [
 	'OwnersEditCategories'		=> 'Owners can edit page categories:',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
 	'TermHumanModeration'		=> 'Term human moderation:',
-	'TermHumanModerationInfo'	=> 'I moderatori possono modificare i commenti solo se sono stati creati non più di questo numero di giorni fa (questa limitazione non si applica all\'ultimo commento nell\'argomento).',
+	'TermHumanModerationInfo'	=> 'I moderatori possono modificare i commenti solo se sono stati creati non più di questo numero di giorni fa (questa limitazione non si applica all’ultimo commento nell’argomento).',
 
 	'UserCanDeleteAccount'		=> 'Gli utenti possono eliminare il proprio account',
 
@@ -523,7 +523,7 @@ $ap_translation = [
 	'SecuritySettingsUpdated'	=> 'Updated security settings',
 
 	'AllowRegistration'			=> 'Register online:',
-	'AllowRegistrationInfo'		=> 'Aprire la registrazione dell\'utente. Disabilitando questa opzione si impedisce la registrazione gratuita, tuttavia, l\'amministratore del sito potrà registrare personalmente gli altri utenti.',
+	'AllowRegistrationInfo'		=> 'Aprire la registrazione dell’utente. Disabilitando questa opzione si impedisce la registrazione gratuita, tuttavia, l’amministratore del sito potrà registrare personalmente gli altri utenti.',
 	'ApproveNewUser'			=> 'Approve new users:',
 	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies:',
@@ -566,7 +566,7 @@ $ap_translation = [
 		'2'		=> 'custom',
 	],
 	'PermissionsPolicy'			=> 'Permissions Policy:',
-	'PermissionsPolicyInfo'		=> 'L\'intestazione HTTP Permissions-Policy fornisce un meccanismo per abilitare o disabilitare esplicitamente varie potenti caratteristiche del browser.',
+	'PermissionsPolicyInfo'		=> 'L’intestazione HTTP Permissions-Policy fornisce un meccanismo per abilitare o disabilitare esplicitamente varie potenti caratteristiche del browser.',
 	'ReferrerPolicy'			=> 'Referrer Policy:',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [
@@ -660,9 +660,9 @@ $ap_translation = [
 	'LinkTarget'				=> 'Where external links open:',
 	'LinkTargetInfo'			=> 'Apre ogni link esterno in una nuova finestra del browser. Aggiunge <code>target="_blank"</code> alla sintassi del link.',
 	'Noreferrer'				=> 'noreferrer:',
-	'NoreferrerInfo'			=> 'Richiede che il browser non invii un header di riferimento HTTP se l\'utente segue il collegamento ipertestuale. Aggiunge <code>rel="noreferrer"</code> alla sintassi del link.',
+	'NoreferrerInfo'			=> 'Richiede che il browser non invii un header di riferimento HTTP se l’utente segue il collegamento ipertestuale. Aggiunge <code>rel="noreferrer"</code> alla sintassi del link.',
 	'Nofollow'					=> 'nofollow:',
-	'NofollowInfo'				=> 'Istruire alcuni motori di ricerca che il link ipertestuale non deve influenzare il posizionamento dei link target nell\'indice dei motori di ricerca. Aggiunge <code>rel="nofollow"</code> alla sintassi del link.',
+	'NofollowInfo'				=> 'Istruire alcuni motori di ricerca che il link ipertestuale non deve influenzare il posizionamento dei link target nell’indice dei motori di ricerca. Aggiunge <code>rel="nofollow"</code> alla sintassi del link.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores:',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Mostra gli spazi nei NomiWiki:',
@@ -673,7 +673,7 @@ $ap_translation = [
 	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
 
 	// Pages settings
-	'PagesSettingsInfo'			=> 'Qui è possibile impostare o modificare le pagine base del sistema utilizzate all\'interno del Wiki. Non dimenticate di creare o modificare le pagine corrispondenti nel Wiki in base alle vostre impostazioni.',
+	'PagesSettingsInfo'			=> 'Qui è possibile impostare o modificare le pagine base del sistema utilizzate all’interno del Wiki. Non dimenticate di creare o modificare le pagine corrispondenti nel Wiki in base alle vostre impostazioni.',
 	'PagesSettingsUpdated'		=> 'Updated settings base pages',
 
 	'ListCount'					=> 'Number of items per list:',
@@ -742,7 +742,7 @@ $ap_translation = [
 	'HelpPage'					=> 'Aiuto:',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index:',
-	'IndexPageInfo'				=> 'Pagina con l\'elenco di tutte le pagine (action %1).',
+	'IndexPageInfo'				=> 'Pagina con l’elenco di tutte le pagine (action %1).',
 	'RandomPage'				=> 'Casuale:',
 	'RandomPageInfo'			=> 'Carica una pagina casuale  (action %1).',
 
@@ -754,7 +754,7 @@ $ap_translation = [
 	'EmailNotification'			=> 'Email Notification:',
 	'EmailNotificationInfo'		=> 'Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that disabling email notifications has no effect on emails generated as part of the user signup process.',
 	'Autosubscribe'				=> 'Autosubscribe:',
-	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
+	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner’s notice of its changes.',
 
 	'NotificationSection'		=> 'Default user notification settings',
 	'NotifyPageEdit'			=> 'Notify page edit:',
@@ -794,9 +794,9 @@ $ap_translation = [
 	'PageStats'					=> 'Page statistics',
 	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
 
-	'AttachmentsInfo'			=> 'Aggiorna l\'hash del file per tutti gli allegati nel database.',
-	'AttachmentsSynched'		=> 'Revisione dell\'hash di tutti i file allegati',
-	'LogAttachmentsSynched'		=> 'Revisione dell\'hash di tutti i file allegati',
+	'AttachmentsInfo'			=> 'Aggiorna l’hash del file per tutti gli allegati nel database.',
+	'AttachmentsSynched'		=> 'Revisione dell’hash di tutti i file allegati',
+	'LogAttachmentsSynched'		=> 'Revisione dell’hash di tutti i file allegati',
 
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
@@ -816,7 +816,7 @@ $ap_translation = [
 	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Questo modulo viene usato quando si inviano email ai propri utenti dalla Board. Assicurati che l\'indirizzo email specificato sia valido; ogni messaggio respinto o non consegnato, verrà inviato a questo indirizzo. Se il tuo server non fornisce un servizio email (basato su PHP) puoi in alternativa inviare messaggi direttamente via SMTP. Questo richiede l\'indirizzo di un server appropriato (chiedi al tuo provider, se necessario). Non specificare nomi vecchi qui. Se il server richiede autenticazione (e solo se lo fa) inserisci nome utente e password.',
+	'EmaiSettingsInfo'			=> 'Questo modulo viene usato quando si inviano email ai propri utenti dalla Board. Assicurati che l’indirizzo email specificato sia valido; ogni messaggio respinto o non consegnato, verrà inviato a questo indirizzo. Se il tuo server non fornisce un servizio email (basato su PHP) puoi in alternativa inviare messaggi direttamente via SMTP. Questo richiede l’indirizzo di un server appropriato (chiedi al tuo provider, se necessario). Non specificare nomi vecchi qui. Se il server richiede autenticazione (e solo se lo fa) inserisci nome utente e password.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
@@ -837,10 +837,10 @@ $ap_translation = [
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
 	'SendTestEmail'				=> 'Invia email di prova',
-	'SendTestEmailInfo'			=> 'Questo invierà un\'email di prova all\'indirizzo specificato sul tuo account.',
+	'SendTestEmailInfo'			=> 'Questo invierà un’email di prova all’indirizzo specificato sul tuo account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your emails configuration.',
+	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don’t receive it, please check your emails configuration.',
 
 	'SmtpSettings'				=> 'Impostazioni SMTP',
 	'SmtpAutoTls'				=> 'Opportunistic TLS:',
@@ -875,9 +875,9 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Tipi di file consentiti:',
-	'AllowedUploadExtsInfo'		=> 'Estensioni consentite per il caricamento dei file, separate da una virgola, ad esempio <code>png, ogg, mp4</code>, altrimenti sono consentite tutte le estensioni di file non vietate.<br>Si consiglia di limitare l\'elenco dei tipi di file caricati consentiti al minimo necessario per la funzionalità dei contenuti del sito.',
+	'AllowedUploadExtsInfo'		=> 'Estensioni consentite per il caricamento dei file, separate da una virgola, ad esempio <code>png, ogg, mp4</code>, altrimenti sono consentite tutte le estensioni di file non vietate.<br>Si consiglia di limitare l’elenco dei tipi di file caricati consentiti al minimo necessario per la funzionalità dei contenuti del sito.',
 	'CheckMimetype'				=> 'Controlla allegati:',
-	'CheckMimetypeInfo'			=> 'Alcuni browser possono essere ingannati nell\'accettare un mimetype incorretto per i file da caricare. Questa opzione garantisce che i file che possono causare questo problema vengano respinti.',
+	'CheckMimetypeInfo'			=> 'Alcuni browser possono essere ingannati nell’accettare un mimetype incorretto per i file da caricare. Questa opzione garantisce che i file che possono causare questo problema vengano respinti.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'Questo permette di sanificare i file SVG caricati per evitare che vengano caricati file SVG/XML vulnerabili.',
 	'TranslitFileName'			=> 'Transliterate file names:',
@@ -888,12 +888,14 @@ $ap_translation = [
 	'CreateThumbnailInfo'		=> 'Crea miniatura in tutte le situazioni possibili.',
 	'JpegQuality'				=> 'Qualità JPEG:',
 	'JpegQualityInfo'			=> 'Qualità quando si scala una miniatura JPEG. Dovrebbe essere compreso tra 1 e 100, con 100 che indica una qualità del 100%.',
+	'MaxImageArea'				=> 'Maximum Image Area:',
+	'MaxImageAreaInfo'			=> 'Il numero massimo di pixel che un’immagine sorgente può avere. Questo fornisce un limite all’uso della memoria per il lato di decompressione dello scalatore di immagini. <br><code>-1</code> significa che non controllerà la dimensione dell’immagine prima di tentare di scalarla. <code>0</code> significa che determinerà il valore automaticamente.',
 	'MaxThumbWidth'				=> 'Larghezza massima miniatura in pixel:',
 	'MaxThumbWidthInfo'			=> 'La miniatura generata non avrà una larghezza superiore a quella impostata qui.',
 	'MinThumbFilesize'			=> 'Dimensioni minime per miniatura:',
 	'MinThumbFilesizeInfo'		=> 'Non crea miniature per immagini con dimensioni inferiori a queste.',
-	'MaxImageWidth'				=> 'Limite di dimensione dell\'immagine nelle pagine:',
-	'MaxImageWidthInfo'			=> 'La larghezza massima che un\'immagine può avere nelle pagine, altrimenti viene generata una miniatura ridimensionata.',
+	'MaxImageWidth'				=> 'Limite di dimensione dell’immagine nelle pagine:',
+	'MaxImageWidthInfo'			=> 'La larghezza massima che un’immagine può avere nelle pagine, altrimenti viene generata una miniatura ridimensionata.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
@@ -933,7 +935,7 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Da qui puoi inviare messaggi email a tutti gli utenti o a quelli di un gruppo specifico, <strong>purché abbiano l\'opzione di ricevere email di massa dall\'amministratore abilitata</strong>. L\'email verrà inviata all\'indirizzo amministrativo del Forum, e i destinatari la riceveranno come copia di conoscenza nascosta (CCN). Le impostazioni predefinite prevedono un massimo di 20 destinatari per ciascuna email, quindi se il numero è maggiore, verranno spedite diverse email; pertanto abbi pazienza dopo l\'invio e non bloccare il procedimento in corso, in quanto potrebbe durare anche diversi minuti se il numero di destinatari è molto elevato. Al termine dell\'operazione verrai informato dell\'avvenuto invio.',
+	'MassemailInfo'				=> 'Da qui puoi inviare messaggi email a tutti gli utenti o a quelli di un gruppo specifico, <strong>purché abbiano l’opzione di ricevere email di massa dall’amministratore abilitata</strong>. L’email verrà inviata all’indirizzo amministrativo del Forum, e i destinatari la riceveranno come copia di conoscenza nascosta (CCN). Le impostazioni predefinite prevedono un massimo di 20 destinatari per ciascuna email, quindi se il numero è maggiore, verranno spedite diverse email; pertanto abbi pazienza dopo l’invio e non bloccare il procedimento in corso, in quanto potrebbe durare anche diversi minuti se il numero di destinatari è molto elevato. Al termine dell’operazione verrai informato dell’avvenuto invio.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
@@ -1076,7 +1078,7 @@ $ap_translation = [
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'EditButton'				=> 'Modificare',
 	'UsersAddNew'				=> 'Add new user',
-	'UsersDelete'				=> 'Sei sicuro di voler rimuovere l\'utente %1?',
+	'UsersDelete'				=> 'Sei sicuro di voler rimuovere l’utente %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
 	'UsersRename'				=> 'Rename the user %1 to',
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
@@ -1088,9 +1090,9 @@ $ap_translation = [
 	'NoMatchingUser'			=> 'No users that meet the criteria',
 
 	'UserAccountNotify'			=> 'Notifica utente',
-	'UserNotifySignup'			=> 'informare l\'utente del nuovo account',
+	'UserNotifySignup'			=> 'informare l’utente del nuovo account',
 	'UserVerifyEmail'			=> 'imposta il token di conferma e-mail e aggiungi link per la verifica e-mail',
-	'UserReVerifyEmail'			=> 'Invia di nuovo il token di conferma dell\'e-mail',
+	'UserReVerifyEmail'			=> 'Invia di nuovo il token di conferma dell’e-mail',
 
 	// Groups module
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
@@ -1255,14 +1257,14 @@ $ap_translation = [
 	'BbOffsiteForms'			=> 'Allow form postings from other web sites',
 	'BbOffsiteFormsInfo'		=> 'required for OpenID; increases spam received',
 	'BbHttpbl'					=> 'http:BL',
-	'BbHttpblInfo'				=> 'To use Bad Behaviour\'s http:BL features you must have an %1',
+	'BbHttpblInfo'				=> 'To use Bad Behaviour’s http:BL features you must have an %1',
 	'BbHttpblKey'				=> 'http:BL Access Key',
 	'BbHttpblThreat'			=> 'Minimum Threat Level (25 is recommended)',
 	'BbHttpblMaxage'			=> 'Maximum Age of Data (30 is recommended)',
 	'BbReverseProxy'			=> 'Reverse Proxy/Load Balancer',
 	'BbReverseProxyInfo'		=> 'If you are using Bad Behaviour behind a reverse proxy, load balancer, HTTP accelerator, content cache or similar technology, enable the Reverse Proxy option.<br>' .
-									'If you have a chain of two or more reverse proxies between your server and the public Internet, you must specify <em>all</em> of the IP address ranges (in CIDR format) of all of your proxy servers, load balancers, etc. Otherwise, Bad Behaviour may be unable to determine the client\'s true IP address.<br>' .
-									'In addition, your reverse proxy servers must set the IP address of the Internet client from which they received the request in an HTTP header. If you don\'t specify a header, %1 will be used. Most proxy servers already support X-Forwarded-For and you would then only need to ensure that it is enabled on your proxy servers. Some other header names in common use include %2 and %3.',
+									'If you have a chain of two or more reverse proxies between your server and the public Internet, you must specify <em>all</em> of the IP address ranges (in CIDR format) of all of your proxy servers, load balancers, etc. Otherwise, Bad Behaviour may be unable to determine the client’s true IP address.<br>' .
+									'In addition, your reverse proxy servers must set the IP address of the Internet client from which they received the request in an HTTP header. If you don’t specify a header, %1 will be used. Most proxy servers already support X-Forwarded-For and you would then only need to ensure that it is enabled on your proxy servers. Some other header names in common use include %2 and %3.',
 	'BbReverseProxyEnable'		=> 'Enable Reverse Proxy',
 	'BbReverseProxyHeader'		=> 'Header containing Internet clients IP address',
 	'BbReverseProxyAddresses'	=> 'IP address or CIDR format address ranges for your proxy servers (one per line)',
