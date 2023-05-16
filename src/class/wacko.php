@@ -9146,7 +9146,7 @@ class Wacko
 		}
 	}
 
-	function show_category_form($lang, $object_id = null, $type_id = null, $can_edit = false, $buttons = true): string
+	function show_category_form($lang, $object_id = null, $type_id = null, $can_edit = false, $buttons = true, $pre_selected = []): string
 	{
 		$assigned	= [];
 		$selected	= [];
@@ -9165,13 +9165,19 @@ class Wacko
 					"AND object_type_id = " . (int) $type_id);
 		}
 
-		// exploding categories into array
+		// assigned categories
 		foreach ($assigned as $key => &$val)
 		{
 			if (is_array($val))
 			{
 				$selected[$key] = $val['category_id'];
 			}
+		}
+
+		// pre-selected categories
+		foreach ($pre_selected as $key => $val)
+		{
+			$selected[$key] = $val;
 		}
 
 		// print categories list

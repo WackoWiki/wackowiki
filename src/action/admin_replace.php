@@ -32,7 +32,7 @@ if (!$this->is_admin())
 // functions
 $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $deleted = false)
 {
-	$category_id	= null;
+	$category_ids	= null;
 	$lang			= null;
 	$comments		= null;
 	$pages			= null;
@@ -70,7 +70,7 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 
 	// namespace: include tag and tag/%, not tag%
 	$selector =
-		($category_id
+		($category_ids
 			? "LEFT JOIN " . $prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
 			: "") .
 		($tag
@@ -95,8 +95,8 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 			($lang
 				? "AND a.page_lang = " . $this->db->q($lang) . " "
 				: "") .
-			($category_id
-				? "AND ca.category_id IN (" . $this->ids_string($category_id) . ") " .
+			($category_ids
+				? "AND ca.category_id IN (" . $this->ids_string($category_ids) . ") " .
 				  "AND ca.object_type_id = " . (int) OBJECT_PAGE . " "
 				: "") .
 			($deleted
@@ -333,6 +333,8 @@ $extract_context = function ($text, $target, $use_regex = false, $padding = 40) 
 
 $search_form = function (array $o) use ($tpl)
 {
+	$category_ids		= $o['filter']['category_ids'];
+
 	$tpl->enter('search_');
 
 	$tpl->target		= $o['target'];
@@ -363,7 +365,7 @@ $search_form = function (array $o) use ($tpl)
 
 		$tpl->enter('options_');
 
-		$tpl->c_categories	= $this->show_category_form($this->page_lang, null, OBJECT_PAGE, false, false);
+		$tpl->c_categories	= $this->show_category_form($this->page_lang, null, OBJECT_PAGE, false, false, $category_ids);
 
 		if ($this->db->multilanguage)
 		{
@@ -402,6 +404,7 @@ $select_form = function ($pages, $pagination, $tcount, $max, array $o) use ($tpl
 	}
 
 	$hidden = [
+		'categories'		=> implode(',', $o['filter']['category_ids']),
 		'edit_comments'		=> $o['edit_comments'],
 		'edit_note'			=> $o['edit_note'],
 		'edit_pages'		=> $o['edit_pages'],
@@ -512,6 +515,7 @@ $title			??= 1;
 $mute			??= 1;
 
 $action			= (string)	($_POST['_action']			?? null);
+$categories		= (string)	($_POST['categories']		?? '');
 $edit_comments	= (bool)	($_POST['edit_comments']	?? 0);
 $edit_pages		= (bool)	($_POST['edit_pages']		?? 0);
 $edit_titles	= (bool)	($_POST['edit_titles']		?? 0);
@@ -547,6 +551,11 @@ $tag			= $this->unwrap_link($page);
 // category filter
 $category_ids	= [];
 
+if ($categories)
+{
+	$category_ids = explode(',', $categories);
+}
+
 foreach ($_POST as $key => $val)
 {
 	if (preg_match('/^category(\d+)$/', $key, $ids) && $val == 'set')
@@ -561,7 +570,7 @@ $o = [
 	'edit_pages'		=> $edit_pages,
 	'edit_titles'		=> $edit_titles,
 	'filter' => [
-		'category_id'	=> $category_ids,
+		'category_ids'	=> $category_ids,
 		'comments'		=> $edit_comments,
 		'lang'			=> $lang,
 		'pages'			=> $edit_pages,
