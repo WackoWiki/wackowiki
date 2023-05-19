@@ -9,10 +9,10 @@ if (!defined('IN_WACKO'))
 class Wacko
 {
 	public const EXT = [
-		'audio'			=> ['m4a', 'mp3', 'ogg', 'opus'],
+		'audio'			=> ['m4a', 'mka', 'mp3', 'ogg', 'opus'],
 		'bitmap'		=> ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'jxl', 'png', 'webp'],
 		'drawing'		=> ['svg'],
-		'video'			=> ['mp4', 'ogv', 'webm'],
+		'video'			=> ['av1', 'mkv', 'mp4', 'ogv', 'webm'],
 	];
 	public const PATTERN = [
 		'USER_NAME'		=> '[\p{L}\p{Nd}\.\-]+',
@@ -28,10 +28,10 @@ class Wacko
 		'ALPHANUM'		=> '[\p{L}\p{M}\p{Nd}\_\-\/]',
 		'ALPHANUM_P'	=> '\p{L}\p{M}\p{Nd}\_\-\/',
 
-		'AUDIO'			=> 'm4a|mp3|ogg|opus',
+		'AUDIO'			=> 'm4a|mka|mp3|ogg|opus',
 		'BITMAP'		=> 'avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp',
 		'DRAWING'		=> 'svg',
-		'VIDEO'			=> 'mp4|ogv|webm',
+		'VIDEO'			=> 'av1|mkv|mp4|ogv|webm',
 	];
 
 	private array $acl				= [];

@@ -1777,6 +1777,7 @@ video/h264					h264
 # video/h264-rcdo
 # video/h264-svc
 # video/h265
+video/av1					av1
 # video/iso.segment
 video/jpeg					jpgv
 # video/jpeg2000
