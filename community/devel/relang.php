@@ -1,6 +1,11 @@
 #!/usr/local/bin/php
 <?php
 
+// Import the PHPDiff class into the global namespace
+use PHPDiff\ {
+	Diff,
+};
+
 /*
  * ./relang.php wacko.en.php wacko.bg.php wacko.da.php wacko.de.php wacko.el.php wacko.es.php wacko.et.php wacko.fr.php wacko.hu.php \
  * 			wacko.it.php wacko.nl.php wacko.pl.php wacko.pt.php wacko.ru.php
@@ -53,21 +58,33 @@ function parse($fname)
 	global $contents;
 	static $defvar = false;
 
-	if (($contents = file_get_contents($fname)) === false) die("no $fname\n");
-	$contents = trim($contents);
+	if (($contents = file_get_contents($fname)) === false)
+	{
+		die("no $fname\n");
+	}
 
-	$parent = 0;
+	$contents	= trim($contents);
+	$parent		= 0;
+
 	if (!preg_match('/\$([\w_]+)\s*=\s*\[/', $contents, $match))
 	{
-		if (!$defvar) die("no var in $fname\n");
+		if (!$defvar)
+		{
+			die("no var in $fname\n");
+		}
+
 		$var = $defvar;
 	}
 	else
 	{
 		$var = $match[1];
+
 		if ($defvar)
 		{
-			if ($defvar != $var) die("invalid var $var in $fname\n");
+			if ($defvar != $var)
+			{
+				die("invalid var $var in $fname\n");
+			}
 		}
 		else
 		{
@@ -78,13 +95,19 @@ function parse($fname)
 
 	ob_start();
 	include $fname;
-	if (!isset($$var)) die("no var in $fname");
+
+	if (!isset($$var))
+	{
+		die("no var in $fname");
+	}
+
 	ob_end_clean();
 	$var = &$$var;
 
-	$cur = 0;
-	$accum = '';
-	$cmt = 0;
+	$cur	= 0;
+	$accum	= '';
+	$cmt	= 0;
+
 	foreach (explode("\n", $contents) as $line)
 	{
 		if ($parent && preg_match('#^\s*//\s*RENAME\s+(\S+)\s+(\S+)\s*$#', $line, $match))
@@ -95,6 +118,7 @@ function parse($fname)
 		}
 
 		$block = 0;
+
 		if (preg_match('/^\s*["\']([^"\']+)[\'"]\s*=>/', $line, $match))
 		{
 			if (array_key_exists($match[1], $var))
@@ -103,7 +127,11 @@ function parse($fname)
 				{
 					if (is_string($cur))
 					{
-						if (array_key_exists($cur, $data)) die("dupe $cur in $fname\n");
+						if (array_key_exists($cur, $data))
+						{
+							die("dupe $cur in $fname\n");
+						}
+
 						$data[$cur] = $accum;
 					}
 					else
@@ -111,8 +139,9 @@ function parse($fname)
 						$data['#' . $cmt++] = $accum;
 					}
 				}
-				$cur = $match[1];
-				$accum = '';
+
+				$cur	= $match[1];
+				$accum	= '';
 			}
 			else
 			{
@@ -127,16 +156,24 @@ function parse($fname)
 			$clean = rtrim(preg_replace_callback('#\'(\\\\\'|\\\\\\\\|[^\'])*\'|"(\\\\"|\\\\\\\\|[^"])*"|//.*$#',
 				function ($x)
 				{
-					if ($x[0][0] == '"' || $x[0][0] == "'") return $x[0];
+					if ($x[0][0] == '"' || $x[0][0] == "'")
+					{
+						return $x[0];
+					}
+
 					return '';
 			}, $line));
 
 			if (str_ends_with($clean, ','))
 			{
-				if (array_key_exists($cur, $data)) die("dupe $cur in $fname\n");
-				$data[$cur] = $accum;
-				$accum = '';
-				$cur = 0;
+				if (array_key_exists($cur, $data))
+				{
+					die("dupe $cur in $fname\n");
+				}
+
+				$data[$cur]	= $accum;
+				$accum		= '';
+				$cur		= 0;
 			}
 		}
 	}
@@ -145,7 +182,11 @@ function parse($fname)
 	{
 		if (is_string($cur))
 		{
-			if (array_key_exists($cur, $data)) die("dupe $cur in $fname\n");
+			if (array_key_exists($cur, $data))
+			{
+				die("dupe $cur in $fname\n");
+			}
+
 			$data[$cur] = $accum;
 		}
 		else
@@ -163,6 +204,7 @@ function renamer($line, $from, $to)
 	{
 		die("rename $from line mismatch: $line\n");
 	}
+
 	return $match[1] . $to . $match[3];
 }
 
@@ -171,14 +213,22 @@ $a1 = parse($argv[1]);
 // $renames maps old -> new
 // $rerenames maps new -> old
 $rerenames = array_flip($renames);
+
 foreach ($renames as $old => $new)
 {
-	if (isset($a1[$old]))		die("renamed $old found in {$argv[1]}\n");
-	if (!isset($a1[$new]))		die("new renamed $new not found in {$argv[1]}\n");
+	if (isset($a1[$old]))
+	{
+		die("renamed $old found in {$argv[1]}\n");
+	}
+
+	if (!isset($a1[$new]))
+	{
+		die("new renamed $new not found in {$argv[1]}\n");
+	}
 }
 
-$cache1 = [];
-$a = [];
+$cache1	= [];
+$a		= [];
 
 foreach ($a1 as $key => $data)
 {
@@ -186,23 +236,24 @@ foreach ($a1 as $key => $data)
 	{
 		if (trim($data))
 		{
-			$key = hash('sha1', $data);
-			$cache1[$key] = $data;
+			$key			= hash('sha1', $data);
+			$cache1[$key]	= $data;
 		}
 		else
 		{
-			$key = '';
+			$key			= '';
 		}
 	}
+
 	$a[] = $key;
 }
 
 for ($arg = 2; isset($argv[$arg]); ++$arg)
 {
-	$b1 = parse($argv[$arg]);
+	$b1		= parse($argv[$arg]);
 
-	$cache = $cache1;
-	$b = [];
+	$cache	= $cache1;
+	$b		= [];
 
 	foreach ($b1 as $key => $data)
 	{
@@ -210,12 +261,12 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 		{
 			if (trim($data))
 			{
-				$key = hash('sha1', $data);
-				$cache[$key] = $data;
+				$key			= hash('sha1', $data);
+				$cache[$key]	= $data;
 			}
 			else
 			{
-				$key = '';
+				$key			= '';
 			}
 		}
 		else
@@ -225,21 +276,24 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 				$key = $renames[$key];
 			}
 		}
+
 		$b[] = $key;
 	}
 
-	$diff = new Diff($b, $a, ['context' => 1000000]);
+	$diff		= new Diff($b, $a, ['context' => 1000000]);
+	$version2	= $diff->getVersion2();
 
 	if ($edits = $diff->getGroupedOpcodes())
 	{
 		$output = '';
+
 		foreach ($edits as $group)
 		{
-			$lastItem = count($group)-1;
-			$i1 = $group[0][1];
-			$i2 = $group[$lastItem][2];
-			$j1 = $group[0][3];
-			$j2 = $group[$lastItem][4];
+			$lastItem	= count($group)-1;
+			$i1			= $group[0][1];
+			$i2			= $group[$lastItem][2];
+			$j1			= $group[0][3];
+			$j2			= $group[$lastItem][4];
 
 			if ($i1 == 0 && $i2 == 0)
 			{
@@ -250,9 +304,10 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 			foreach ($group as $code)
 			{
 				[$tag, $i1, $i2, $j1, $j2] = $code;
+
 				if ($tag == 'equal')
 				{
-					foreach ($diff->GetB($j1, $j2) as $line)
+					foreach ($diff->getArrayRange($version2, $j1, $j2) as $line)
 					{
 						$output .= !$line
 							? "\n"
@@ -263,7 +318,7 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 				}
 				else if ($tag == 'replace' || $tag == 'insert')
 				{
-					foreach ($diff->GetB($j1, $j2) as $line)
+					foreach ($diff->getArrayRange($version2, $j1, $j2) as $line)
 					{
 						$output .= !$line
 							? "\n"
@@ -275,6 +330,7 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 		}
 
 		$output = trim($output);
+
 		if (str_ends_with($output, '?>'))
 		{
 			$output = trim(substr($output, 0, -2));
