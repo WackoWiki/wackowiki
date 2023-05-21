@@ -79,7 +79,7 @@ class GD extends PHPThumb
 		parent::__construct($file_name, $options, $plugins);
 
 		$this->determineFormat();
-		$this->verifyFormatCompatiblity();
+		$this->verifyFormatCompatibility();
 
 		$this->old_image = match ($this->format) {
 			'AVIF'		=> imagecreatefromavif		($this->file_name),
@@ -168,7 +168,7 @@ class GD extends PHPThumb
 	{
 		if ($this->options['resizeUp'] === false)
 		{
-			$this->max_height	= ($max_height > $this->current_dimensions['height'])	? $this->current_dimensions['height'] 	: $max_height;
+			$this->max_height	= ($max_height > $this->current_dimensions['height'])	? $this->current_dimensions['height']	: $max_height;
 			$this->max_width	= ($max_width > $this->current_dimensions['width'])		? $this->current_dimensions['width']	: $max_width;
 		}
 		else
@@ -1021,7 +1021,7 @@ class GD extends PHPThumb
 	}
 
 	/**
-	 * Calculates a new width and height for the image based on $this->max_width and the provided dimensions
+	 * Calculates a new width and height for the image based on $this->max_height and the provided dimensions
 	 */
 	protected function calcHeight(int $width, int $height): array
 	{
@@ -1056,7 +1056,7 @@ class GD extends PHPThumb
 	protected function calcImageSize(int $width, int $height): void
 	{
 		$new_size = [
-			'new_width'	=> $width,
+			'new_width'		=> $width,
 			'new_height'	=> $height
 		];
 
@@ -1190,7 +1190,7 @@ class GD extends PHPThumb
 	 *
 	 * @throws Exception
 	 */
-	protected function verifyFormatCompatiblity(): void
+	protected function verifyFormatCompatibility(): void
 	{
 		$gd_info = gd_info();
 

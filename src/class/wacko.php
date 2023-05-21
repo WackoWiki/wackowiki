@@ -130,7 +130,7 @@ class Wacko
 		'right'		=> ['_before'],
 		'left'		=> ['_before'],
 	];
-	public $time_intervals = [
+	public array $time_intervals = [
 		365*DAYSECS	=> 'Year',
 		30*DAYSECS	=> 'Month',
 		7*DAYSECS	=> 'Week',
@@ -313,7 +313,7 @@ class Wacko
 		}
 	}
 
-	static function get_file_extension($file_name)
+	static function get_file_extension(string $file_name)
 	{
 		if (!str_contains($file_name, '.'))
 		{
@@ -426,7 +426,7 @@ class Wacko
 	 *
 	 * @return bool
 	 */
-	function validate_extension($extension): bool
+	function validate_extension(string $extension): bool
 	{
 		$exts	= array_keys($this->http->mime_types());
 
@@ -635,7 +635,7 @@ class Wacko
 	}
 
 	// LANG FUNCTIONS
-	function set_translation($lang): void
+	function set_translation(string $lang): void
 	{
 		$this->resource = & $this->translations[$lang];
 	}
@@ -693,7 +693,7 @@ class Wacko
 	 *
 	 * @return void
 	 */
-	function load_translation($lang, $update = false): void
+	function load_translation(string $lang, bool $update = false): void
 	{
 		if ($lang && (!isset($this->translations[$lang]) || $update))
 		{
@@ -2231,7 +2231,7 @@ class Wacko
 	}
 
 	// create revision of a given page
-	function save_revision($page): void
+	function save_revision(array $page): void
 	{
 		// move revision
 		$this->db->sql_query(
@@ -3392,9 +3392,83 @@ class Wacko
 		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text . '</a>';
 	}
 
+	/**
+	 * Check if the image can be scaled up
+	 */
+	function check_max_img_size(int $max_width, int $max_height, int $width, int $height, bool $resize_up = false): array
+	{
+		if (!$resize_up)
+		{
+			$max_height	= ($max_height	> $height)	? $height	: $max_height;
+			$max_width	= ($max_width	> $width)	? $width	: $max_width;
+		}
+
+		return [$max_width, $max_height];
+	}
+
+	/**
+	 * Calculates a new width and height for the image based on $max_width and the provided dimensions
+	 */
+	function calc_img_width(int $max_width, int $width, int $height): array
+	{
+		$new_width_percentage	= (100 * $max_width) / $width;
+		$new_height				= ($height * $new_width_percentage) / 100;
+
+		return [
+			$max_width,
+			intval($new_height)
+		];
+	}
+
+	/**
+	 * Calculates a new width and height for the image based on $max_height and the provided dimensions
+	 */
+	function calc_img_height(int $max_height, int $width, int $height): array
+	{
+		$new_height_percentage	= (100 * $max_height) / $height;
+		$new_width				= ($width * $new_height_percentage) / 100;
+
+		return [
+			ceil($new_width),
+			ceil($max_height)
+		];
+	}
+
+	/**
+	 * Calculates the new image dimensions
+	 */
+	function calc_img_size(int $max_width, int $max_height, int $width, int $height): array
+	{
+		$new_size = [
+			$width,
+			$height
+		];
+
+		if ($max_width > 0)
+		{
+			$new_size = $this->calc_img_width($max_width, $width, $height);
+
+			if ($max_height > 0 && $new_size[1] > $max_height)
+			{
+				$new_size = $this->calc_img_height($max_height, $new_size[0], $new_size[1]);
+			}
+		}
+
+		if ($max_height > 0)
+		{
+			$new_size = $this->calc_img_height($max_height, $width, $height);
+
+			if ($max_width > 0 && $new_size[0] > $max_width)
+			{
+				$new_size = $this->calc_img_width($max_width, $new_size[0], $new_size[1]);
+			}
+		}
+
+		return $new_size;
+	}
 
 	// get the width and height to display image at
-	function get_img_width_height($max_width, $max_height, $width, $height)
+	function get_img_width_height(?int $max_width, ?int $max_height, int $width, int $height): array
 	{
 		if ($max_height && !$max_width && $height)
 		{
@@ -4475,7 +4549,7 @@ class Wacko
 			{
 				$thumb		= true;
 				[$param['width'], $param['height']]	= $this->get_img_width_height($this->db->max_image_width, 0, $file['picture_w'], $file['picture_h']);
-				$thumb_name	= $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
+				$thumb_name							= $this->thumb_name($file['file_name'], $param['width'], $param['height'], $file['file_ext']);
 			}
 		}
 

@@ -214,7 +214,10 @@ if ($can_view)
 				$file_name			= $file['file_name'];
 				$width				= '';
 				$height				= '';
-				$tbn_name			= $this->thumb_name($file['file_name'], $thumb_width, 0, $file['file_ext']);
+
+				// calculate relative height
+				[$width, $height]	= $this->calc_img_size($thumb_width, $thumb_width, $file['picture_w'], $file['picture_h']);
+				$tbn_name			= $this->thumb_name($file['file_name'], $width, $height, $file['file_ext']);
 
 				if ($caption == 1)
 				{
@@ -240,12 +243,9 @@ if ($can_view)
 				{
 					$src_path		= Ut::join_path(UPLOAD_LOCAL_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
 					$tbn_path		= Ut::join_path(THUMB_LOCAL_DIR,  '@' . $file_page['page_id'] . '@' . $tbn_name);
-					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $thumb_width . 'x' . '0']);
+					$tbn_src		= $this->href('file', $source_page_tag, ['get' => $file_name, 'tbn' => $width . 'x' . $height]);
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 				}
-
-				// calculate relative height
-				[$width, $height] = $this->get_img_width_height($thumb_width, 0, $file['picture_w'], $file['picture_h']);
 
 				$tpl->img	= '<img src="' . $tbn_src . '" ' .
 					'loading="lazy" ' .
@@ -256,7 +256,7 @@ if ($can_view)
 				// check for missing source image, we can't trust db record
 				if (!file_exists($tbn_path) && file_exists($src_path))
 				{
-					$this->create_thumbnail($tbn_path, $src_path, $width, $width);
+					$this->create_thumbnail($tbn_path, $src_path, $width, $height);
 				}
 
 				if ($table)
