@@ -144,10 +144,10 @@ function admin_tool_badbehaviour($engine, $module)
 			// Query the DB based on variables selected
 			$results = $engine->db->load_all(
 				"SELECT BINARY {$argument} as group_type, {$additional_fields} COUNT({$argument}) AS n " .
-				"FROM " . $engine->prefix . "bad_behaviour " .
+				'FROM ' . $engine->prefix . 'bad_behaviour ' .
 				"GROUP BY BINARY {$argument} " .
-				"ORDER BY n DESC " .
-				"LIMIT 10", true);
+				'ORDER BY n DESC ' .
+				'LIMIT 10', true);
 
 		// Display rows to the user
 
@@ -219,20 +219,20 @@ function admin_tool_badbehaviour($engine, $module)
 		$limit = 100;
 
 		// Get query variables desired by the user with input validation
-		if (!empty($g_key))					$where .= "AND `status_key`			= " . $engine->db->q($g_key) . " ";
+		if (!empty($g_key))					$where .= 'AND `status_key`			= ' . $engine->db->q($g_key) . ' ';
 		if (!empty($g_blocked))				$where .= "AND `status_key` 		!= '00000000' ";
 		else if (!empty($g_permitted))		$where .= "AND `status_key`			= '00000000' ";
 
-		if (!empty($g_ip))					$where .= "AND `ip` 				= " . $engine->db->q($g_ip) . " ";
-		if (!empty($g_user_agent))			$where .= "AND `user_agent_hash`	= " . $engine->db->q($g_user_agent) . " ";
-		if (!empty($g_request_method))		$where .= "AND `request_method`		= " . $engine->db->q($g_request_method) . " ";
-		if (!empty($g_request_uri))			$where .= "AND `request_uri_hash`	= " . $engine->db->q($g_request_uri) . " ";
+		if (!empty($g_ip))					$where .= 'AND `ip` 				= ' . $engine->db->q($g_ip) . ' ';
+		if (!empty($g_user_agent))			$where .= 'AND `user_agent_hash`	= ' . $engine->db->q($g_user_agent) . ' ';
+		if (!empty($g_request_method))		$where .= 'AND `request_method`		= ' . $engine->db->q($g_request_method) . ' ';
+		if (!empty($g_request_uri))			$where .= 'AND `request_uri_hash`	= ' . $engine->db->q($g_request_uri) . ' ';
 
 		// collecting data
 		$count = $engine->db->load_single(
-			"SELECT COUNT(log_id) AS n " .
-			"FROM " . $engine->prefix . "bad_behaviour l " .
-			"WHERE 1=1 " . ( $where ?: '' ));
+			'SELECT COUNT(log_id) AS n ' .
+			'FROM ' . $engine->prefix . 'bad_behaviour l ' .
+			'WHERE 1=1 ' . ( $where ?: '' ));
 
 
 
@@ -248,15 +248,15 @@ function admin_tool_badbehaviour($engine, $module)
 		// Query the DB based on variables selected
 
 		$totalcount		= $engine->db->load_single(
-			"SELECT COUNT(log_id) AS n " .
-			"FROM " . $engine->prefix . "bad_behaviour l ");
+			'SELECT COUNT(log_id) AS n ' .
+			'FROM ' . $engine->prefix . 'bad_behaviour l ');
 
 		$results		= $engine->db->load_all(
-			"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key " .
-			"FROM `" . $bb_table . "` " .
-			"WHERE 1=1 " .
+			'SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key ' .
+			'FROM `' . $bb_table . '` ' .
+			'WHERE 1=1 ' .
 			$where .
-			"ORDER BY `log_id` DESC " .
+			'ORDER BY `log_id` DESC ' .
 			$pagination['limit']);
 
 		// Display rows to the user
@@ -330,10 +330,10 @@ function admin_tool_badbehaviour($engine, $module)
 				{
 					$host = @gethostbyaddr($result['ip']);
 					$engine->db->sql_query(
-						"UPDATE " . $engine->prefix . "bad_behaviour SET " .
-							"host		= " . $engine->db->q($host) . " " .
-						"WHERE log_id	= " . (int) $result['log_id'] . " " .
-						"LIMIT 1");
+						'UPDATE ' . $engine->prefix . 'bad_behaviour SET ' .
+							'host		= ' . $engine->db->q($host) . ' ' .
+						'WHERE log_id	= ' . (int) $result['log_id'] . ' ' .
+						'LIMIT 1');
 				}
 
 				$host = $result['host'];
@@ -407,7 +407,7 @@ function admin_tool_badbehaviour($engine, $module)
 
 			if ($_POST['ip'])
 			{
-				$whitelists['ip'] = array_filter(preg_split("/\s+/m", $_POST['ip']));
+				$whitelists['ip'] = array_filter(preg_split('/\s+/m', $_POST['ip']));
 			}
 			else
 			{
@@ -416,7 +416,7 @@ function admin_tool_badbehaviour($engine, $module)
 
 			if ($_POST['url'])
 			{
-				$whitelists['url'] = array_filter(preg_split("/\s+/m", $_POST['url']));
+				$whitelists['url'] = array_filter(preg_split('/\s+/m', $_POST['url']));
 			}
 			else
 			{
@@ -572,7 +572,7 @@ function bb2_options($engine)
 
 		if ($_POST['httpbl_key'])
 		{
-			if (preg_match("/^[a-z]{12}$/", $_POST['httpbl_key']))
+			if (preg_match('/^[a-z]{12}$/', $_POST['httpbl_key']))
 			{
 				$settings['httpbl_key'] = $_POST['httpbl_key'];
 			}
@@ -633,7 +633,7 @@ function bb2_options($engine)
 
 		if ($_POST['reverse_proxy_addresses'])
 		{
-			$settings['reverse_proxy_addresses'] = preg_split("/[\s,]+/m", $_POST['reverse_proxy_addresses']);
+			$settings['reverse_proxy_addresses'] = preg_split('/[\s,]+/m', $_POST['reverse_proxy_addresses']);
 			$settings['reverse_proxy_addresses'] = array_map('sanitize_text_field', $settings['reverse_proxy_addresses']);
 		}
 		else
@@ -844,7 +844,7 @@ function bb2_options($engine)
 
 	if ($action == 'purge_badbehaviour')
 	{
-		$sql = "TRUNCATE " . $engine->prefix . "badbehaviour";
+		$sql = 'TRUNCATE ' . $engine->prefix . 'badbehaviour';
 		$engine->db->sql_query($sql);
 
 		// queries
@@ -877,7 +877,7 @@ function bb2_options($engine)
 		$mode = '';
 	}
 
-	echo '<h2>' . $engine->_t($tabs[$mode]) . "</h2>";
+	echo '<h2>' . $engine->_t($tabs[$mode]) . '</h2>';
 	echo '<p>' . $engine->tab_menu($tabs, $mode, '', [], $mode_selector) . '</p><br>';
 
 	if (!empty($engine->db->ext_bad_behaviour))

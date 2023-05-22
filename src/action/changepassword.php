@@ -15,10 +15,10 @@ $prefix		= $this->prefix;
 if ($code = (string) ($_REQUEST['secret_code'] ?? null))
 {
 	$user = $this->db->load_single(
-		"SELECT user_id, user_name " .
-		"FROM " . $prefix . "user " .
-		"WHERE change_password = " . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed_hash)) . " " .
-		"LIMIT 1");
+		'SELECT user_id, user_name ' .
+		'FROM ' . $prefix . 'user ' .
+		'WHERE change_password = ' . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed_hash)) . ' ' .
+		'LIMIT 1');
 
 	if (!$user)
 	{
@@ -59,11 +59,11 @@ if ($action === 'change_password' && $user)
 		else
 		{
 			$this->db->sql_query(
-				"UPDATE " . $prefix . "user SET " .
+				'UPDATE ' . $prefix . 'user SET ' .
 					"change_password	= '', " .
-					"password = " . $this->db->q($this->password_hash($user, $new_password)) . " " .
-				"WHERE user_id = " . (int) $user['user_id'] . " " .
-				"LIMIT 1");
+				'password = ' . $this->db->q($this->password_hash($user, $new_password)) . ' ' .
+				'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
+				'LIMIT 1');
 
 			$diag = $code? 'LogUserPasswordRecovered' : 'LogUserPasswordChanged';
 			$this->log(3, Ut::perc_replace($this->_t($diag, SYSTEM_LANG), $user['user_name']));
@@ -85,12 +85,12 @@ if ($action === 'forgot_password')
 	$user_name	= Ut::strip_spaces($_POST['user_name']);
 	$email		= Ut::strip_spaces($_POST['email']);
 	$user		= $this->db->load_single(
-					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang " .
-					"FROM " . $prefix . "user u " .
-						"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-					"WHERE u.user_name = " . $this->db->q($user_name) . " " .
-						"AND u.email = " . $this->db->q($email) . " " .
-					"LIMIT 1");
+					'SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ' .
+					'FROM ' . $prefix . 'user u ' .
+						'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
+					'WHERE u.user_name = ' . $this->db->q($user_name) . ' ' .
+						'AND u.email = ' . $this->db->q($email) . ' ' .
+					'LIMIT 1');
 
 	if (!$user)
 	{
@@ -107,11 +107,11 @@ if ($action === 'forgot_password')
 
 		// update table
 		$this->db->sql_query(
-			"UPDATE " . $prefix . "user SET " .
-				"password_request_count	= password_request_count + 1, ". // value unused
-				"change_password		= " . $this->db->q($code_hash) . " " .
-			"WHERE user_id = " . (int) $user['user_id'] . " " .
-			"LIMIT 1");
+			'UPDATE ' . $prefix . 'user SET ' .
+				'password_request_count	= password_request_count + 1, ' . // value unused
+				'change_password		= ' . $this->db->q($code_hash) . ' ' .
+			'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
+			'LIMIT 1');
 
 		// send code
 		$this->notify_password_reset($user, $code);

@@ -100,24 +100,24 @@ function admin_user_approve($engine, $module)
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
 		$user = $engine->db->load_single(
-			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = " . (int) $user_id . " " .
-				"AND u.account_type = 0 " .
-			"LIMIT 1");
+			'SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ' .
+			'FROM ' . $prefix . 'user u ' .
+				'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
+			'WHERE u.user_id = ' . (int) $user_id . ' ' .
+				'AND u.account_type = 0 ' .
+			'LIMIT 1');
 	}
 
 	// approve user
 	if (isset($_GET['approve']) && $user_id )
 	{
 		$user = $engine->db->load_single(
-			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = " . (int) $user_id . " " .
-				"AND u.account_type = 0 " .
-			"LIMIT 1");
+			'SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ' .
+			'FROM ' . $prefix . 'user u ' .
+				'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
+			'WHERE u.user_id = ' . (int) $user_id . ' ' .
+				'AND u.account_type = 0 ' .
+			'LIMIT 1');
 
 		if ($_GET['approve'] == 1)
 		{
@@ -159,11 +159,11 @@ function admin_user_approve($engine, $module)
 				if ((int) $user_id)
 				{
 					$user = $engine->db->load_single(
-						"SELECT u.user_name " .
-						"FROM " . $prefix . "user u " .
-						"WHERE u.user_id = " . (int) $user_id . " " .
-							"AND u.account_type = 0 " .
-						"LIMIT 1");
+						'SELECT u.user_name ' .
+						'FROM ' . $prefix . 'user u ' .
+						'WHERE u.user_id = ' . (int) $user_id . ' ' .
+							'AND u.account_type = 0 ' .
+						'LIMIT 1');
 
 					$engine->show_message($engine->_t('UsersDeleted'));
 					$engine->log(4, Ut::perc_replace($engine->_t('LogUserDeleted', SYSTEM_LANG), $user['user_name']));
@@ -179,7 +179,7 @@ function admin_user_approve($engine, $module)
 	// defining WHERE and ORDER clauses
 	if (!empty($_GET['user']) && mb_strlen($_GET['user']) > 2)
 	{
-		$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
+		$where			= 'WHERE user_name LIKE ' . $engine->db->q('%' . $_GET['user'] . '%') . ' ';
 	}
 
 	$order = match($_order) {
@@ -205,17 +205,17 @@ function admin_user_approve($engine, $module)
 	// filter by account_status
 	if ($account_status != -1)
 	{
-		$where			= "WHERE u.account_status = " . (int) $account_status . " ";
+		$where			= 'WHERE u.account_status = ' . (int) $account_status . ' ';
 	}
 	else
 	{
-		$where			= "WHERE u.account_status = 1 ";
+		$where			= 'WHERE u.account_status = 1 ';
 	}
 
 	// filter by lang
 	if (isset($_GET['user_lang']))
 	{
-		$where			= "WHERE s.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
+		$where			= 'WHERE s.user_lang = ' . $engine->db->q($_GET['user_lang']) . ' ';
 	}
 
 	// entries to display
@@ -225,12 +225,12 @@ function admin_user_approve($engine, $module)
 
 	// collecting data
 	$count = $engine->db->load_single(
-		"SELECT COUNT(user_name) AS n " .
-		"FROM " . $prefix . "user u " .
-			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+		'SELECT COUNT(user_name) AS n ' .
+		'FROM ' . $prefix . 'user u ' .
+			'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
 		($where ?: '') .
-		($where ? 'AND ' : "WHERE ") .
-			"u.user_name <> " . $engine->db->q($engine->db->admin_name) . " "
+		($where ? 'AND ' : 'WHERE ') .
+			'u.user_name <> ' . $engine->db->q($engine->db->admin_name) . ' '
 		);
 
 	$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
@@ -238,23 +238,23 @@ function admin_user_approve($engine, $module)
 	$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module] + $order_pagination  + ['account_status' => (int) $account_status], '', 'admin.php');
 
 	$users = $engine->db->load_all(
-		"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
-		"FROM " . $prefix . "user u " .
-			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+		'SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang ' .
+		'FROM ' . $prefix . 'user u ' .
+			'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
 		($where ?: '') .
-		($where ? "AND " : "WHERE ") .
-			"u.account_type = 0 " .
-			"AND u.user_name <> " . $engine->db->q($engine->db->admin_name) . " " .
-		"ORDER BY " . $order .
+		($where ? 'AND ' : 'WHERE ') .
+			'u.account_type = 0 ' .
+			'AND u.user_name <> ' . $engine->db->q($engine->db->admin_name) . ' ' .
+		'ORDER BY ' . $order .
 		$pagination['limit']);
 
 	// count records by status
 	$account_stati = $engine->db->load_all(
-		"SELECT account_status, COUNT(account_status) AS n
-		FROM " . $prefix . "user
+		'SELECT account_status, COUNT(account_status) AS n
+		FROM ' . $prefix . 'user
 		WHERE account_type = 0
-			AND user_name <> " . $engine->db->q($engine->db->admin_name) . "
-		GROUP BY account_status");
+			AND user_name <> ' . $engine->db->q($engine->db->admin_name) . '
+		GROUP BY account_status');
 
 	// set default status count
 	$status_count['0'] = 0; // approved

@@ -11,19 +11,19 @@ $load_recent_comments = function ($tag, $limit, $deleted = false)
 	$prefix		= $this->prefix;
 
 	$selector =
-		"WHERE " .
+		'WHERE ' .
 			($tag
-				? "b.tag LIKE " . $this->db->q($tag . '/%') . " "
-				: "a.comment_on_id <> 0 ") .
+				? 'b.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+				: 'a.comment_on_id <> 0 ') .
 			($deleted
-				? ""
-				: "AND a.deleted <> 1 ");
+				? ''
+				: 'AND a.deleted <> 1 ');
 
 	// count pages
 	$count = $this->db->load_single(
-		"SELECT COUNT(a.page_id) AS n " .
-		"FROM " . $prefix . "page a " .
-			"INNER JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
+		'SELECT COUNT(a.page_id) AS n ' .
+		'FROM ' . $prefix . 'page a ' .
+			'INNER JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) ' .
 		$selector
 		, true);
 
@@ -32,13 +32,13 @@ $load_recent_comments = function ($tag, $limit, $deleted = false)
 		$pagination = $this->pagination($count['n'], $limit);
 
 		$comments = $this->db->load_all(
-			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag AS comment_on_tag, b.title AS page_title, b.page_lang,
-				a.title AS comment_title, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id, b.owner_id AS page_owner_id " .
-			"FROM " . $prefix . "page a " .
-				"INNER JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
-				"LEFT JOIN " . $prefix . "user u ON (a.user_id = u.user_id) " .
+			'SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag AS comment_on_tag, b.title AS page_title, b.page_lang,
+				a.title AS comment_title, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id, b.owner_id AS page_owner_id ' .
+			'FROM ' . $prefix . 'page a ' .
+				'INNER JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) ' .
+				'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
 			$selector .
-			"ORDER BY a.modified DESC " .
+			'ORDER BY a.modified DESC ' .
 			$pagination['limit']);
 
 		return [$comments, $pagination];

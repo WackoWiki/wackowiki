@@ -43,7 +43,7 @@ function admin_content_deleted($engine, $module)
 		$mode = '';
 	}
 
-	echo '<h2>' . $engine->_t($tabs[$mode]) . "</h2>";
+	echo '<h2>' . $engine->_t($tabs[$mode]) . '</h2>';
 	echo '<p>' . $engine->tab_menu($tabs, $mode, '', [], $mode_selector) . '</p><br>';
 
 	$type			= (int)		($_GET['type']			?? 0);
@@ -109,19 +109,19 @@ function admin_content_deleted($engine, $module)
 	if ($type == 0)
 	{
 		$count_pages = $engine->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
-			"FROM " . $engine->prefix . "page " .
-			"WHERE deleted = 1 LIMIT 1");
+			'SELECT COUNT(page_id) AS n ' .
+			'FROM ' . $engine->prefix . 'page ' .
+			'WHERE deleted = 1 LIMIT 1');
 
 		$count_revisions = $engine->db->load_single(
-			"SELECT COUNT(revision_id) AS n " .
-			"FROM " . $engine->prefix . "revision " .
-			"WHERE deleted = 1 LIMIT 1");
+			'SELECT COUNT(revision_id) AS n ' .
+			'FROM ' . $engine->prefix . 'revision ' .
+			'WHERE deleted = 1 LIMIT 1');
 
 		$count_files = $engine->db->load_single(
-			"SELECT COUNT(file_id) AS n " .
-			"FROM " . $engine->prefix . "file " .
-			"WHERE deleted = 1 LIMIT 1");
+			'SELECT COUNT(file_id) AS n ' .
+			'FROM ' . $engine->prefix . 'file ' .
+			'WHERE deleted = 1 LIMIT 1');
 
 		$results[] = [$engine->href('', '', ['type' => OBJECT_PAGE]),		$engine->_t('UsersPages'),		$count_pages['n']];
 		$results[] = [$engine->href('', '', ['type' => OBJECT_REVISION]),	$engine->_t('UsersRevisions'),	$count_revisions['n']];

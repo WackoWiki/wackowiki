@@ -15,12 +15,12 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	return $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.created, f.modified, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title " .
-		"FROM " . $this->prefix . "file f " .
-			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->prefix . "page p ON (f.page_id = p.page_id) " .
-		"WHERE f.file_id = " . (int) $file_id . " " .
-		"LIMIT 1", true);
+		'SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.created, f.modified, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title ' .
+		'FROM ' . $this->prefix . 'file f ' .
+			'INNER JOIN ' . $this->prefix . 'user u ON (f.user_id = u.user_id) ' .
+			'LEFT JOIN ' . $this->prefix . 'page p ON (f.page_id = p.page_id) ' .
+		'WHERE f.file_id = ' . (int) $file_id . ' ' .
+		'LIMIT 1', true);
 };
 
 $file_access = function ($file)
@@ -115,17 +115,17 @@ if ($action && !empty($file))
 
 			// update file metadata
 			$this->db->sql_query(
-				"UPDATE " . $this->prefix . "file SET " .
-					"file_lang			= " . $this->db->q($file_lang) . ", " .
-					"file_description	= " . $this->db->q($description) . ", " .
-					"caption			= " . $this->db->q($caption) . ", " .
-					"author				= " . $this->db->q($author) . ", " .
-					"source				= " . $this->db->q($source) . ", " .
-					"source_url			= " . $this->db->q($source_url) . ", " .
-					"license_id			= " . (int) $license_id . ", " .
-					"modified			= UTC_TIMESTAMP() " .
-				"WHERE file_id = " . (int) $file['file_id'] . " " .
-				"LIMIT 1");
+				'UPDATE ' . $this->prefix . 'file SET ' .
+					'file_lang			= ' . $this->db->q($file_lang) . ', ' .
+					'file_description	= ' . $this->db->q($description) . ', ' .
+					'caption			= ' . $this->db->q($caption) . ', ' .
+					'author				= ' . $this->db->q($author) . ', ' .
+					'source				= ' . $this->db->q($source) . ', ' .
+					'source_url			= ' . $this->db->q($source_url) . ', ' .
+					'license_id			= ' . (int) $license_id . ', ' .
+					'modified			= UTC_TIMESTAMP() ' .
+				'WHERE file_id = ' . (int) $file['file_id'] . ' ' .
+				'LIMIT 1');
 
 			$this->set_message($this->_t('FileEditedMeta'), 'success');
 

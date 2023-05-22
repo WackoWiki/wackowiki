@@ -305,15 +305,15 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
 				$pages = $this->db->load_all(
-					"SELECT page_id, owner_id, user_id, tag, title, created, page_lang " .
-					"FROM " . $prefix . "page " .
-					"WHERE owner_id = " . (int) $user['user_id'] . " " .
-						"AND comment_on_id = 0 " .
-						"AND deleted <> 1 " .
-					"ORDER BY " .
+					'SELECT page_id, owner_id, user_id, tag, title, created, page_lang ' .
+					'FROM ' . $prefix . 'page ' .
+					'WHERE owner_id = ' . (int) $user['user_id'] . ' ' .
+						'AND comment_on_id = 0 ' .
+						'AND deleted <> 1 ' .
+					'ORDER BY ' .
 						($sort_name
 							? 'tag COLLATE utf8mb4_unicode_520_ci ASC'
-							: 'created DESC') . " " .
+							: 'created DESC') . ' ' .
 					$pagination['limit']);
 
 				$page_ids = [];
@@ -365,15 +365,15 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$profile + ['sort' => ($sort_modified? 'modified' : ''), '#' => 'changes']);
 
 				$pages = $this->db->load_all(
-					"SELECT page_id, owner_id, user_id, tag, title, modified, page_lang, edit_note " .
-					"FROM " . $prefix . "page " .
-					"WHERE user_id = " . (int) $user['user_id'] . " " .
-						"AND comment_on_id = 0 " .
-						"AND deleted <> 1 " .
-					"ORDER BY " .
+					'SELECT page_id, owner_id, user_id, tag, title, modified, page_lang, edit_note ' .
+					'FROM ' . $prefix . 'page ' .
+					'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
+						'AND comment_on_id = 0 ' .
+						'AND deleted <> 1 ' .
+					'ORDER BY ' .
 						($sort_modified
 							? 'modified ASC'
-							: 'modified DESC') . " " .
+							: 'modified DESC') . ' ' .
 					$pagination['limit']);
 
 				$page_ids = [];
@@ -439,14 +439,14 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$tpl->c_pagination_text = $pagination['text'];
 
 					$comments = $this->db->load_all(
-						"SELECT c.page_id, c.owner_id, c.user_id, c.tag, c.title, c.created, c.comment_on_id, c.page_lang, p.title AS page_title, p.tag AS page_tag, p.owner_id AS page_owner_id " .
-						"FROM " . $prefix . "page c " .
-							"LEFT JOIN " . $prefix . "page p ON (c.comment_on_id = p.page_id) " .
-						"WHERE c.owner_id = " . (int) $user['user_id'] . " " .
-							"AND c.comment_on_id <> 0 " .
-							"AND c.deleted <> 1 " .
-							"AND p.deleted <> 1 " .
-						"ORDER BY c.created DESC " .
+						'SELECT c.page_id, c.owner_id, c.user_id, c.tag, c.title, c.created, c.comment_on_id, c.page_lang, p.title AS page_title, p.tag AS page_tag, p.owner_id AS page_owner_id ' .
+						'FROM ' . $prefix . 'page c ' .
+							'LEFT JOIN ' . $prefix . 'page p ON (c.comment_on_id = p.page_id) ' .
+						'WHERE c.owner_id = ' . (int) $user['user_id'] . ' ' .
+							'AND c.comment_on_id <> 0 ' .
+							'AND c.deleted <> 1 ' .
+							'AND p.deleted <> 1 ' .
+						'ORDER BY c.created DESC ' .
 						$pagination['limit']);
 
 					$page_ids = [];
@@ -503,13 +503,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						$tpl->u_u2_pagination_text = $pagination['text'];
 
 						$files = $this->db->load_all(
-							"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.created, f.file_size, f.file_lang, p.owner_id, p.tag file_on_page, p.title file_on_title " .
-							"FROM " . $prefix . "file f " .
-								"LEFT JOIN " . $prefix . "page p ON (f.page_id = p.page_id) " .
-							"WHERE f.user_id = " . (int) $user['user_id'] . " " .
-								"AND f.deleted <> 1 " .
+							'SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.created, f.file_size, f.file_lang, p.owner_id, p.tag file_on_page, p.title file_on_title ' .
+							'FROM ' . $prefix . 'file f ' .
+								'LEFT JOIN ' . $prefix . 'page p ON (f.page_id = p.page_id) ' .
+							'WHERE f.user_id = ' . (int) $user['user_id'] . ' ' .
+								'AND f.deleted <> 1 ' .
 							// "AND p.deleted <> 1 " .
-							"ORDER BY f.created DESC " .
+							'ORDER BY f.created DESC ' .
 							$pagination['limit']);
 
 						$page_ids = [];
@@ -607,7 +607,7 @@ else
 		}
 
 		$params['user']	= $_user;
-		$sql_where		= "AND u.user_name LIKE " . $this->db->q('%' . $_user . '%') . " ";
+		$sql_where		= 'AND u.user_name LIKE ' . $this->db->q('%' . $_user . '%') . ' ';
 	}
 
 	if (isset($_GET['profile']))
@@ -647,18 +647,18 @@ else
 
 	$sql_where =
 		($group_id
-			? "LEFT JOIN " . $prefix . "usergroup_member m ON (u.user_id = m.user_id) "
-			: "") .
-		"WHERE u.account_type = 0 " .
-			"AND u.enabled = 1 " .
+			? 'LEFT JOIN ' . $prefix . 'usergroup_member m ON (u.user_id = m.user_id) '
+			: '') .
+		'WHERE u.account_type = 0 ' .
+			'AND u.enabled = 1 ' .
 			($group_id
-				? "AND m.group_id = " . (int) $group_id . " "
-				: "") .
+				? 'AND m.group_id = ' . (int) $group_id . ' '
+				: '') .
 			$sql_where;
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(u.user_name) AS n " .
-		"FROM " . $prefix . "user u " .
+		'SELECT COUNT(u.user_name) AS n ' .
+		'FROM ' . $prefix . 'user u ' .
 		$sql_where, true);
 
 	$tpl->enter('l_');
@@ -685,9 +685,9 @@ else
 
 	// collect data
 	$users = $this->db->load_all(
-		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession " .
-		"FROM " . $prefix . "user u " .
-			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+		'SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession ' .
+		'FROM ' . $prefix . 'user u ' .
+			'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
 		$sql_where .
 		$sql_order .
 		$pagination['limit'], true);

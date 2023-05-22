@@ -54,20 +54,20 @@ if ($user_id = $this->get_user_id())
 	{
 		$selector =
 			"FROM {$prefix}page " .
-			"WHERE owner_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 ";
+			'WHERE owner_id = ' . (int) $user_id . ' ' .
+				'AND deleted <> 1 ' .
+				'AND comment_on_id = 0 ';
 
 		$count	= $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
+			'SELECT COUNT(page_id) AS n ' .
 			$selector, true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('bydate'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, owner_id, user_id, tag, title, created, page_lang " .
+			'SELECT page_id, owner_id, user_id, tag, title, created, page_lang ' .
 			$selector .
-			"ORDER BY created DESC, tag ASC " .
+			'ORDER BY created DESC, tag ASC ' .
 			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];
@@ -105,24 +105,24 @@ if ($user_id = $this->get_user_id())
 	{
 		$selector =
 			"FROM {$prefix}page AS p " .
-			"LEFT JOIN {$prefix}revision AS r " .
-				"ON (p.page_id = r.page_id " .
-					"AND p.owner_id = " . (int) $user_id . ") " .
-			"WHERE p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 " .
-				"AND r.comment_on_id = 0 ";
+				"LEFT JOIN {$prefix}revision AS r " .
+					'ON (p.page_id = r.page_id ' .
+						'AND p.owner_id = ' . (int) $user_id . ') ' .
+			'WHERE p.comment_on_id = 0 ' .
+			'AND p.deleted <> 1 ' .
+			'AND r.comment_on_id = 0 ';
 
 		$count	= $this->db->load_single(
-			"SELECT COUNT( DISTINCT p.tag ) AS n " .
+			'SELECT COUNT( DISTINCT p.tag ) AS n ' .
 			$selector, true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('bychange'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.modified, p.page_lang " .
+			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.modified, p.page_lang ' .
 			$selector .
-			"GROUP BY p.tag, p.page_id, p.owner_id, p.user_id, p.title, p.modified, p.page_lang " .
-			"ORDER BY modified DESC, tag ASC " .
+			'GROUP BY p.tag, p.page_id, p.owner_id, p.user_id, p.title, p.modified, p.page_lang ' .
+			'ORDER BY modified DESC, tag ASC ' .
 			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];
@@ -160,20 +160,20 @@ if ($user_id = $this->get_user_id())
 	{
 		$selector =
 			"FROM {$prefix}page " .
-			"WHERE owner_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 ";
+			'WHERE owner_id = ' . (int) $user_id . ' ' .
+				'AND deleted <> 1 ' .
+				'AND comment_on_id = 0 ';
 
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
+			'SELECT COUNT(tag) AS n ' .
 			$selector, true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, owner_id, user_id, tag, title, modified, page_lang " .
+			'SELECT page_id, owner_id, user_id, tag, title, modified, page_lang ' .
 			$selector .
-			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .
+			'ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC ' .
 			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];

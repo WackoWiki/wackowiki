@@ -58,24 +58,24 @@ $system
 if (!$page)
 {
 	$selector =
-		"FROM " . $prefix . "page " .
-		"WHERE  comment_on_id = 0 " .
-		"AND deleted = 0 " .
+		'FROM ' . $prefix . 'page ' .
+		'WHERE  comment_on_id = 0 ' .
+		'AND deleted = 0 ' .
 		($user_id
-			? "AND owner_id <> " . (int) $user_id . " "
-			: "") .
+			? 'AND owner_id <> ' . (int) $user_id . ' '
+			: '') .
 		($lang
-			? "AND page_lang = " . $this->db->q($lang) . " "
-			: "");
+			? 'AND page_lang = ' . $this->db->q($lang) . ' '
+			: '');
 
 	$sql_count	=
-		"SELECT COUNT(page_id) AS n " .
+		'SELECT COUNT(page_id) AS n ' .
 		$selector;
 
 	$sql	=
-		"SELECT page_id, tag, title, hits, page_lang " .
+		'SELECT page_id, tag, title, hits, page_lang ' .
 		$selector .
-		"ORDER BY hits DESC ";
+		'ORDER BY hits DESC ';
 }
 else
 {
@@ -89,32 +89,32 @@ else
 		: $recurse = false;
 
 	$selector =
-		"FROM " . $prefix . "page a, " . $prefix . "page_link l " .
-			"INNER JOIN " . $prefix . "page b ON (l.from_page_id = b.page_id) " .
-			"INNER JOIN " . $prefix . "page c ON (l.to_page_id = c.page_id) " .
-		"WHERE a.comment_on_id = 0 " .
-			"AND a.deleted = 0 " .
-			"AND a.tag <> " . $this->db->q($tag) . " " .
-			"AND a.tag = c.tag " .
+		'FROM ' . $prefix . 'page a, ' . $prefix . 'page_link l ' .
+			'INNER JOIN ' . $prefix . 'page b ON (l.from_page_id = b.page_id) ' .
+			'INNER JOIN ' . $prefix . 'page c ON (l.to_page_id = c.page_id) ' .
+		'WHERE a.comment_on_id = 0 ' .
+			'AND a.deleted = 0 ' .
+			'AND a.tag <> ' . $this->db->q($tag) . ' ' .
+			'AND a.tag = c.tag ' .
 			($recurse
-				? "AND INSTR(b.tag, " . $this->db->q($tag) . ") = 1 "
-				: "AND b.tag = " . $this->db->q($tag) . " ") .
-			"AND INSTR(c.tag, " . $this->db->q($tag) . ") = 1 " .
+				? 'AND INSTR(b.tag, ' . $this->db->q($tag) . ') = 1 '
+				: 'AND b.tag = ' . $this->db->q($tag) . ' ') .
+			'AND INSTR(c.tag, ' . $this->db->q($tag) . ') = 1 ' .
 			($user_id
-				? "AND a.owner_id <> " . (int) $user_id . " "
-				: "") .
+				? 'AND a.owner_id <> ' . (int) $user_id . ' '
+				: '') .
 			($lang
-				? "AND a.page_lang = " . $this->db->q($lang) . " "
-				: "");
+				? 'AND a.page_lang = ' . $this->db->q($lang) . ' '
+				: '');
 
 	$sql_count	=
-		"SELECT COUNT(DISTINCT a.page_id) AS n " .
+		'SELECT COUNT(DISTINCT a.page_id) AS n ' .
 		$selector;
 
 	$sql	=
-		"SELECT DISTINCT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.hits, a.page_lang " .
+		'SELECT DISTINCT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.hits, a.page_lang ' .
 		$selector .
-		"ORDER BY a.hits DESC ";
+		'ORDER BY a.hits DESC ';
 }
 
 $count		= $this->db->load_single($sql_count, true);

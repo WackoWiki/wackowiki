@@ -23,11 +23,11 @@ else
 if ($this->is_owner($page_id) || $this->is_admin())
 {
 	$watchers = $this->db->load_all(
-		"SELECT u.user_name " .
-		"FROM " . $this->prefix . "watch w " .
-			"LEFT JOIN " . $this->prefix . "user u ON (w.user_id = u.user_id) " .
-		"WHERE w.page_id = " . (int) $page_id . " " .
-		"ORDER BY u.user_name ASC");
+		'SELECT u.user_name ' .
+		'FROM ' . $this->prefix . 'watch w ' .
+			'LEFT JOIN ' . $this->prefix . 'user u ON (w.user_id = u.user_id) ' .
+		'WHERE w.page_id = ' . (int) $page_id . ' ' .
+		'ORDER BY u.user_name ASC');
 
 	if (!$nomark)
 	{

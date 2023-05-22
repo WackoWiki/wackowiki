@@ -26,17 +26,17 @@ if (!defined('IN_WACKO'))
 $load_mime = function ()
 {
 	return $this->db->load_all(
-		"SELECT DISTINCT mime_type " .
-		"FROM " . $this->prefix . "file " .
-		"ORDER BY mime_type", true);
+		'SELECT DISTINCT mime_type ' .
+		'FROM ' . $this->prefix . 'file ' .
+		'ORDER BY mime_type', true);
 };
 
 $load_categories = function ()
 {
 	return $this->db->load_all(
-		"SELECT category_id, category, category_lang " .
-		"FROM " . $this->prefix . "category " .
-		"ORDER BY category", true);
+		'SELECT category_id, category, category_lang ' .
+		'FROM ' . $this->prefix . 'category ' .
+		'ORDER BY category', true);
 };
 
 $file_name_maxlen	= 80;
@@ -157,59 +157,59 @@ if ($can_view)
 
 	$selector =
 		($category_id
-			? "INNER JOIN " . $prefix . "category_assignment AS k ON (k.object_id = f.file_id) "
-			: "") . " " .
+			? 'INNER JOIN ' . $prefix . 'category_assignment AS k ON (k.object_id = f.file_id) '
+			: '') . ' ' .
 		($file_link
-			? "INNER JOIN " . $prefix . "file_link AS l ON (f.file_id = l.file_id) "
-			: "") . " " .
-			"WHERE ".
+			? 'INNER JOIN ' . $prefix . 'file_link AS l ON (f.file_id = l.file_id) '
+			: '') . ' ' .
+			'WHERE ' .
 		($all || $file_link || $file_ids
-			? "f.page_id IS NOT NULL "
+			? 'f.page_id IS NOT NULL '
 			: ($cluster
-				? "p.tag LIKE " . $this->db->q($tag . '/%') . " "
-				: "f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " "
+				? 'p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+				: 'f.page_id = ' . ($global ? 0 : (int) $filepage['page_id']) . ' '
 				)
-			) . " " .
+			) . ' ' .
 		($file_ids
-			? "AND f.file_id IN (" . $this->ids_string($file_ids) . ") "
+			? 'AND f.file_id IN (' . $this->ids_string($file_ids) . ') '
 			: '') .
 		($phrase
-			? "AND (f.file_name LIKE " . $this->db->q('%' . $phrase . '%') . " " .
-				"OR f.file_description LIKE " . $this->db->q('%' . $phrase . '%') . " " .
-				"OR f.caption LIKE " . $this->db->q('%' . $phrase . '%') . ") "
+			? 'AND (f.file_name LIKE ' . $this->db->q('%' . $phrase . '%') . ' ' .
+				'OR f.file_description LIKE ' . $this->db->q('%' . $phrase . '%') . ' ' .
+				'OR f.caption LIKE ' . $this->db->q('%' . $phrase . '%') . ') '
 			: '') .
 		($owner
-			? "AND u.user_name = " . $this->db->q($owner) . " "
+			? 'AND u.user_name = ' . $this->db->q($owner) . ' '
 			: '') .
 		($mime
-			? "AND f.mime_type = " . $this->db->q($mime) . " "
+			? 'AND f.mime_type = ' . $this->db->q($mime) . ' '
 			: '') .
 		($user_id
-			? "AND f.user_id = " . (int) $user_id . " "
+			? 'AND f.user_id = ' . (int) $user_id . ' '
 			: '') .
 		($lang
-			? "AND f.file_lang = " . $this->db->q($lang) . " "
-			: "") .
+			? 'AND f.file_lang = ' . $this->db->q($lang) . ' '
+			: '') .
 		($deleted
-			? ""
-			: "AND f.deleted <> 1 ");
+			? ''
+			: 'AND f.deleted <> 1 ');
 
 	if ($category_id)
 	{
-		$selector .= "AND k.category_id IN ( " . (int) $category_id . " ) " .
-					 "AND k.object_type_id = " . OBJECT_FILE . " ";
+		$selector .= 'AND k.category_id IN ( ' . (int) $category_id . ' ) ' .
+				'AND k.object_type_id = ' . OBJECT_FILE . ' ';
 	}
 
 	if ($file_link)
 	{
-		$selector .= "AND l.page_id = " . (int) $filepage['page_id'] . " ";
+		$selector .= 'AND l.page_id = ' . (int) $filepage['page_id'] . ' ';
 	}
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(f.file_id) AS n " .
-		"FROM " . $prefix . "file f " .
-			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
+		'SELECT COUNT(f.file_id) AS n ' .
+		'FROM ' . $prefix . 'file f ' .
+			'LEFT JOIN  ' . $prefix . 'page p ON (f.page_id = p.page_id) ' .
+			'INNER JOIN ' . $prefix . 'user u ON (f.user_id = u.user_id) ' .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $max, 'f',
@@ -224,13 +224,13 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext,
-			f.file_lang, f.file_name, f.file_description, f.created, p.owner_id, p.user_id AS puser_id, p.tag, u.user_name " .
-		"FROM " . $prefix . "file f " .
-			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
+		'SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext,
+			f.file_lang, f.file_name, f.file_description, f.created, p.owner_id, p.user_id AS puser_id, p.tag, u.user_name ' .
+		'FROM ' . $prefix . 'file f ' .
+			'LEFT JOIN  ' . $prefix . 'page p ON (f.page_id = p.page_id) ' .
+			'INNER JOIN ' . $prefix . 'user u ON (f.user_id = u.user_id) ' .
 		$selector .
-		"ORDER BY f." . $order_by . " " .
+		'ORDER BY f.' . $order_by . ' ' .
 		$pagination['limit']);
 
 	$page_ids = [];

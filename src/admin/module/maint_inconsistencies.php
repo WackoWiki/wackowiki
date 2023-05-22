@@ -36,78 +36,78 @@ function admin_maint_inconsistencies($engine, $module)
 		{
 			// 1.1 usergroup_member without user
 			$usergroup_member = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					gm.*
 				FROM
-					" . $prefix . "usergroup_member gm
-					LEFT JOIN " . $prefix . "user u ON (gm.user_id = u.user_id)
+					' . $prefix . 'usergroup_member gm
+					LEFT JOIN ' . $prefix . 'user u ON (gm.user_id = u.user_id)
 				WHERE
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['1.1'] = ['usergroup_member without user', count($usergroup_member)];
 			// -> DELETE
 
 			// 1.2 menu without user
 			$menu = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					m.menu_id
 				FROM
-					" . $prefix . "menu m
-					LEFT JOIN " . $prefix . "user u ON (m.user_id = u.user_id)
+					' . $prefix . 'menu m
+					LEFT JOIN ' . $prefix . 'user u ON (m.user_id = u.user_id)
 				WHERE
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['1.2'] = ['menu without user', count($menu)];
 				// -> DELETE
 
 			// 1.3 upload without user
 			$upload = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					u.user_id
 				FROM
-					" . $prefix . "file f
-					LEFT JOIN " . $prefix . "user u ON (f.user_id = u.user_id)
+					' . $prefix . 'file f
+					LEFT JOIN ' . $prefix . 'user u ON (f.user_id = u.user_id)
 				WHERE
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['1.3'] = ['upload without user', count($upload)];
 				// -> UPDATE / assign to new user
 
 			// 1.4 user_settings without user
 			$user_settings = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					us.setting_id
 				FROM
-					" . $prefix . "user_setting us
-					LEFT JOIN " . $prefix . "user u ON (us.user_id = u.user_id)
+					' . $prefix . 'user_setting us
+					LEFT JOIN ' . $prefix . 'user u ON (us.user_id = u.user_id)
 				WHERE
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['1.4'] = ['user_settings without user', count($user_settings)];
 				// -> DELETE
 
 			// 1.5 watches without user
 			$watches = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					w.watch_id
 				FROM
-					" . $prefix . "watch w
-					LEFT JOIN " . $prefix . "user u ON (w.user_id = u.user_id)
+					' . $prefix . 'watch w
+					LEFT JOIN ' . $prefix . 'user u ON (w.user_id = u.user_id)
 				WHERE
-					u.user_id is NULL");
+					u.user_id is NULL');
 
 			$inconsistencies['1.5'] = ['watches without user', count($watches)];
 				// -> DELETE
 
 			// 1.6 auth_token without user
 			$watches = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					t.auth_token_id
 				FROM
-					" . $prefix . "auth_token t
-					LEFT JOIN " . $prefix . "user u ON (t.user_id = u.user_id)
+					' . $prefix . 'auth_token t
+					LEFT JOIN ' . $prefix . 'user u ON (t.user_id = u.user_id)
 				WHERE
-					u.user_id is NULL");
+					u.user_id is NULL');
 
 			$inconsistencies['1.6'] = ['auth_token without user', count($watches)];
 				// -> DELETE
@@ -115,215 +115,215 @@ function admin_maint_inconsistencies($engine, $module)
 			// 2. without page
 			// 2.1 acl without page
 			$acl = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					a.*
 				FROM
-					" . $prefix . "acl a
-					LEFT JOIN " . $prefix . "page p ON (a.page_id = p.page_id)
+					' . $prefix . 'acl a
+					LEFT JOIN ' . $prefix . 'page p ON (a.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.1'] = ['acl without page', count($acl)];
 				// -> DELETE
 
 			// 2.2 category_assignment without page
 			$category_assignment = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					ca.*
 				FROM
-					" . $prefix . "category_assignment ca
-					LEFT JOIN " . $prefix . "page p ON (ca.object_id = p.page_id)
+					' . $prefix . 'category_assignment ca
+					LEFT JOIN ' . $prefix . 'page p ON (ca.object_id = p.page_id)
 				WHERE
 					ca.object_type_id = 1 AND
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.2'] = ['category_assignment without page', count($category_assignment)];
 				// -> DELETE
 
 			// 2.3 page_link without page
 			$page_link = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					l.link_id
 				FROM
-					" . $prefix . "page_link l
-					LEFT JOIN " . $prefix . "page p ON (l.from_page_id = p.page_id)
+					' . $prefix . 'page_link l
+					LEFT JOIN ' . $prefix . 'page p ON (l.from_page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.3'] = ['page_link without page', count($page_link)];
 				// -> DELETE
 
 			// 2.4 menu without page
 			$menu2 = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					m.menu_id
 				FROM
-					" . $prefix . "menu m
-					LEFT JOIN " . $prefix . "page p ON (m.page_id = p.page_id)
+					' . $prefix . 'menu m
+					LEFT JOIN ' . $prefix . 'page p ON (m.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.4'] = ['menu without page', count($menu2)];
 				// -> DELETE
 
 			// 2.6 referrer without page
 			$referrer = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					r.*
 				FROM
-					" . $prefix . "referrer r
-					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
+					' . $prefix . 'referrer r
+					LEFT JOIN ' . $prefix . 'page p ON (r.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.6'] = ['referrer without page', count($referrer)];
 				// -> DELETE
 
 			// 2.7 upload without page and not global
 			$upload2 = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					f.file_id
 				FROM
-					" . $prefix . "file f
-					LEFT JOIN " . $prefix . "page p ON (f.page_id = p.page_id)
+					' . $prefix . 'file f
+					LEFT JOIN ' . $prefix . 'page p ON (f.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL AND
-					f.page_id NOT LIKE 0");
+					f.page_id NOT LIKE 0');
 
 			$inconsistencies['2.7'] = ['upload without page and not global', count($upload2)];
 				// -> DELETE
 
 			// 2.8 watch without page
 			$watch2 = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					w.watch_id
 				FROM
-					" . $prefix . "watch w
-					LEFT JOIN " . $prefix . "page p ON (w.page_id = p.page_id)
+					' . $prefix . 'watch w
+					LEFT JOIN ' . $prefix . 'page p ON (w.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.8'] = ['watch without page', count($watch2)];
 				// -> DELETE
 
 			// 2.9 revision without page
 			$revision = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					r.revision_id
 				FROM
-					" . $prefix . "revision r
-					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
+					' . $prefix . 'revision r
+					LEFT JOIN ' . $prefix . 'page p ON (r.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.9'] = ['revision without page', count($revision)];
 				// -> DELETE
 
 			// 2.10 external_link without page
 			$external_link = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					l.link_id
 				FROM
-					" . $prefix . "external_link l
-					LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+					' . $prefix . 'external_link l
+					LEFT JOIN ' . $prefix . 'page p ON (l.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.10'] = ['external_link without page', count($external_link)];
 				// -> DELETE
 
 			// 2.11 file_link without page
 			$file_link = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					l.file_link_id
 				FROM
-					" . $prefix . "file_link l
-					LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+					' . $prefix . 'file_link l
+					LEFT JOIN ' . $prefix . 'page p ON (l.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.11'] = ['file_link without page', count($file_link)];
 				// -> DELETE
 
 			// 2.12 comment without page
 			$parent_page = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					c.page_id
 				FROM
-					" . $prefix . "page c
-					LEFT JOIN " . $prefix . "page p ON (c.comment_on_id = p.page_id)
+					' . $prefix . 'page c
+					LEFT JOIN ' . $prefix . 'page p ON (c.comment_on_id = p.page_id)
 				WHERE
 					c.comment_on_id <> 0 AND
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$inconsistencies['2.12'] = ['comment without parent page', count($parent_page)];
 				// -> DELETE
 
 			// 3.1 usergroup_member without group
 			$usergroup_member2 = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					gm.*
 				FROM
-					" . $prefix . "usergroup_member gm
-					LEFT JOIN " . $prefix . "usergroup g ON (gm.group_id = g.group_id)
+					' . $prefix . 'usergroup_member gm
+					LEFT JOIN ' . $prefix . 'usergroup g ON (gm.group_id = g.group_id)
 				WHERE
-					g.group_id IS NULL");
+					g.group_id IS NULL');
 
 			$inconsistencies['3.1'] = ['usergroup_member without usergroup', count($usergroup_member2)];
 				// -> DELETE
 
 			// 3.2 page without valid user_id (e.g. deleted user)
 			$page_user = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					p.page_id
 				FROM
-					" . $prefix . "page p
-					LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id)
+					' . $prefix . 'page p
+					LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id)
 				WHERE
 					p.user_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['3.2'] = ['page without valid user_id', count($page_user)];
 				// -> UPDATE / assign to new user
 
 			// 3.3 page without valid owner_id (e.g. deleted user)
 			$page_user = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					p.page_id
 				FROM
-					" . $prefix . "page p
-					LEFT JOIN " . $prefix . "user u ON (p.owner_id = u.user_id)
+					' . $prefix . 'page p
+					LEFT JOIN ' . $prefix . 'user u ON (p.owner_id = u.user_id)
 				WHERE
 					p.owner_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['3.3'] = ['page without valid owner_id', count($page_user)];
 				// -> UPDATE / assign to new user
 
 			// 3.4 revision without valid user_id (e.g. deleted user)
 			$page_user = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					r.page_id
 				FROM
-					" . $prefix . "revision r
-					LEFT JOIN " . $prefix . "user u ON (r.user_id = u.user_id)
+					' . $prefix . 'revision r
+					LEFT JOIN ' . $prefix . 'user u ON (r.user_id = u.user_id)
 				WHERE
 					r.user_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['3.4'] = ['revision without valid user_id', count($page_user)];
 				// -> UPDATE / assign to new user
 
 			// 3.5 revision without valid owner_id (e.g. deleted user)
 			$page_user = $engine->db->load_all(
-				"SELECT
+				'SELECT
 					r.page_id
 				FROM
-					" . $prefix . "revision r
-					LEFT JOIN " . $prefix . "user u ON (r.owner_id = u.user_id)
+					' . $prefix . 'revision r
+					LEFT JOIN ' . $prefix . 'user u ON (r.owner_id = u.user_id)
 				WHERE
 					r.owner_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$inconsistencies['3.5'] = ['revision without valid owner_id', count($page_user)];
 				// -> UPDATE / assign to new user
@@ -396,292 +396,292 @@ function admin_maint_inconsistencies($engine, $module)
 		{
 			// 1.1 usergroup_member without user
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					gm.*
 				FROM
-					" . $prefix . "usergroup_member gm
-					LEFT JOIN " . $prefix . "user u ON (gm.user_id = u.user_id)
+					' . $prefix . 'usergroup_member gm
+					LEFT JOIN ' . $prefix . 'user u ON (gm.user_id = u.user_id)
 				WHERE
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$_solved['1.1'] = ['usergroup_member without user', $engine->config->affected_rows];
 
 			// 1.2 menu without user
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					m.*
 				FROM
-					" . $prefix . "menu m
-					LEFT JOIN " . $prefix . "user u ON (m.user_id = u.user_id)
+					' . $prefix . 'menu m
+					LEFT JOIN ' . $prefix . 'user u ON (m.user_id = u.user_id)
 				WHERE
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$_solved['1.2'] = ['menu without user', $engine->config->affected_rows];
 
 			// 1.3 upload without user
 			$admin_id = $engine->db->load_single(
-				"SELECT
+				'SELECT
 					user_id
 				FROM
-					" . $prefix . "user
+					' . $prefix . 'user
 				WHERE
-					user_name = " . $engine->db->q($engine->db->admin_name) . "
-				LIMIT 1");
+					user_name = ' . $engine->db->q($engine->db->admin_name) . '
+				LIMIT 1');
 
 			$engine->db->sql_query(
-				"UPDATE
-					" . $prefix . "file f " .
-					"LEFT JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
-				"SET
-					f.user_id = " . (int) $admin_id['user_id'] . " " .
-				"WHERE
-					u.user_id IS NULL");
+				'UPDATE
+					' . $prefix . 'file f ' .
+					'LEFT JOIN ' . $prefix . 'user u ON (f.user_id = u.user_id) ' .
+				'SET
+					f.user_id = ' . (int) $admin_id['user_id'] . ' ' .
+				'WHERE
+					u.user_id IS NULL');
 
 			$_solved['1.3'] = ['upload without user', $engine->config->affected_rows];
 
 			// 1.4 user_settings without user
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					us.*
 				FROM
-					" . $prefix . "user_setting us
-					LEFT JOIN " . $prefix . "user u ON (us.user_id = u.user_id)
+					' . $prefix . 'user_setting us
+					LEFT JOIN ' . $prefix . 'user u ON (us.user_id = u.user_id)
 				WHERE
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$_solved['1.4'] = ['user_settings without user', $engine->config->affected_rows];
 
 			// 1.5 watches without user
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					w.*
 				FROM
-					" . $prefix . "watch w
-					LEFT JOIN " . $prefix . "user u ON (w.user_id = u.user_id)
+					' . $prefix . 'watch w
+					LEFT JOIN ' . $prefix . 'user u ON (w.user_id = u.user_id)
 				WHERE
-					u.user_id is NULL");
+					u.user_id is NULL');
 
 			$_solved['1.5'] = ['watches without user', $engine->config->affected_rows];
 
 			// 1.6 auth_token without user
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					t.*
 				FROM
-					" . $prefix . "auth_token t
-					LEFT JOIN " . $prefix . "user u ON (t.user_id = u.user_id)
+					' . $prefix . 'auth_token t
+					LEFT JOIN ' . $prefix . 'user u ON (t.user_id = u.user_id)
 				WHERE
-					u.user_id is NULL");
+					u.user_id is NULL');
 
 			$_solved['1.6'] = ['auth_token without user', $engine->config->affected_rows];
 
 			// 2. without page
 			// 2.1 acl without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					a.*
 				FROM
-					" . $prefix . "acl a
-					LEFT JOIN " . $prefix . "page p ON (a.page_id = p.page_id)
+					' . $prefix . 'acl a
+					LEFT JOIN ' . $prefix . 'page p ON (a.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.1'] = ['acl without page', $engine->config->affected_rows];
 
 			// 2.2 category_assignment without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					ca.*
 				FROM
-					" . $prefix . "category_assignment ca
-					LEFT JOIN " . $prefix . "page p ON (ca.object_id = p.page_id)
+					' . $prefix . 'category_assignment ca
+					LEFT JOIN ' . $prefix . 'page p ON (ca.object_id = p.page_id)
 				WHERE
 					ca.object_type_id = 1 AND
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.2'] = ['category_assignment without page', $engine->config->affected_rows];
 
 			// 2.3 page_link without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					l.*
 				FROM
-					" . $prefix . "page_link l
-					LEFT JOIN " . $prefix . "page p ON (l.from_page_id = p.page_id)
+					' . $prefix . 'page_link l
+					LEFT JOIN ' . $prefix . 'page p ON (l.from_page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.3'] = ['page_link without page', $engine->config->affected_rows];
 
 			// 2.4 menu without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					m.*
 				FROM
-					" . $prefix . "menu m
-					LEFT JOIN " . $prefix . "page p ON (m.page_id = p.page_id)
+					' . $prefix . 'menu m
+					LEFT JOIN ' . $prefix . 'page p ON (m.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.4'] = ['menu without page', $engine->config->affected_rows];
 
 			// 2.6 referrer without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					r.*
 				FROM
-					" . $prefix . "referrer r
-					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
+					' . $prefix . 'referrer r
+					LEFT JOIN ' . $prefix . 'page p ON (r.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.6'] = ['referrer without page', $engine->config->affected_rows];
 
 			// 2.7 upload without page and not global
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					f.*
 				FROM
-					" . $prefix . "file f
-					LEFT JOIN " . $prefix . "page p ON (f.page_id = p.page_id)
+					' . $prefix . 'file f
+					LEFT JOIN ' . $prefix . 'page p ON (f.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL AND
-					f.page_id NOT LIKE 0");
+					f.page_id NOT LIKE 0');
 
 			$_solved['2.7']	= ['upload without page and not global', $engine->config->affected_rows];
 
 			// 2.8 watch without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					w.*
 				FROM
-					" . $prefix . "watch w
-					LEFT JOIN " . $prefix . "page p ON (w.page_id = p.page_id)
+					' . $prefix . 'watch w
+					LEFT JOIN ' . $prefix . 'page p ON (w.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.8'] = ['watch without page', $engine->config->affected_rows];
 
 			// 2.9 revision without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					r.*
 				FROM
-					" . $prefix . "revision r
-					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
+					' . $prefix . 'revision r
+					LEFT JOIN ' . $prefix . 'page p ON (r.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.9'] = ['revision without page', $engine->config->affected_rows];
 
 			// 2.10 external_link without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					l.*
 				FROM
-					" . $prefix . "external_link l
-					LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+					' . $prefix . 'external_link l
+					LEFT JOIN ' . $prefix . 'page p ON (l.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.10'] = ['external_link without page', $engine->config->affected_rows];
 
 			// 2.11 file_link without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					l.*
 				FROM
-					" . $prefix . "file_link l
-					LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+					' . $prefix . 'file_link l
+					LEFT JOIN ' . $prefix . 'page p ON (l.page_id = p.page_id)
 				WHERE
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.11'] = ['file_link without page', $engine->config->affected_rows];
 
 			// 2.12 comment without page
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					c.*
 				FROM
-					" . $prefix . "page c
-					LEFT JOIN " . $prefix . "page p ON (c.comment_on_id = p.page_id)
+					' . $prefix . 'page c
+					LEFT JOIN ' . $prefix . 'page p ON (c.comment_on_id = p.page_id)
 				WHERE
 					c.comment_on_id <> 0 AND
-					p.page_id IS NULL");
+					p.page_id IS NULL');
 
 			$_solved['2.12'] = ['comment without parent page', $engine->config->affected_rows];
 
 			// 3.1 usergroup_member without group
 			$engine->db->sql_query(
-				"DELETE
+				'DELETE
 					gm.*
 				FROM
-					" . $prefix . "usergroup_member gm
-					LEFT JOIN " . $prefix . "usergroup g ON (gm.group_id = g.group_id)
+					' . $prefix . 'usergroup_member gm
+					LEFT JOIN ' . $prefix . 'usergroup g ON (gm.group_id = g.group_id)
 				WHERE
-					g.group_id IS NULL");
+					g.group_id IS NULL');
 
 			$_solved['3.1'] = ['usergroup_member without usergroup', $engine->config->affected_rows];
 
 			// 3.2 page without valid user_id (e.g. deleted user)
 			$sys_user_id = $engine->db->load_single(
-				"SELECT
+				'SELECT
 					user_id
 				FROM
-					" . $prefix . "user
+					' . $prefix . 'user
 				WHERE
-					user_name = " . $engine->db->q('Deleted') . "
+					user_name = ' . $engine->db->q('Deleted') . '
 					AND account_type = 1
-				LIMIT 1");
+				LIMIT 1');
 
 			$engine->db->sql_query(
-				"UPDATE
-					" . $prefix . "page p
-					LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id)
+				'UPDATE
+					' . $prefix . 'page p
+					LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id)
 				SET
-					p.user_id = " . (int) $sys_user_id['user_id'] . "
+					p.user_id = ' . (int) $sys_user_id['user_id'] . '
 				WHERE
 					p.user_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$_solved['3.2'] = ['page without valid user_id', $engine->config->affected_rows];
 
 			// 3.3 page without valid ower_id (e.g. deleted user)
 			$engine->db->sql_query(
-				"UPDATE
-					" . $prefix . "page p
-					LEFT JOIN " . $prefix . "user u ON (p.owner_id = u.user_id)
+				'UPDATE
+					' . $prefix . 'page p
+					LEFT JOIN ' . $prefix . 'user u ON (p.owner_id = u.user_id)
 				SET
-					p.owner_id = " . (int) $sys_user_id['user_id'] . "
+					p.owner_id = ' . (int) $sys_user_id['user_id'] . '
 				WHERE
 					p.owner_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$_solved['3.3'] = ['page without valid owner_id', $engine->config->affected_rows];
 
 			// 3.4 revision without valid user_id (e.g. deleted user)
 			$engine->db->sql_query(
-				"UPDATE
-					" . $prefix . "revision r
-					LEFT JOIN " . $prefix . "user u ON (r.user_id = u.user_id)
+				'UPDATE
+					' . $prefix . 'revision r
+					LEFT JOIN ' . $prefix . 'user u ON (r.user_id = u.user_id)
 				SET
-					r.user_id = " . (int) $sys_user_id['user_id'] . "
+					r.user_id = ' . (int) $sys_user_id['user_id'] . '
 				WHERE
 					r.user_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$_solved['3.4'] = ['revision without valid user_id', $engine->config->affected_rows];
 
 			// 3.5 revision without valid owner_id (e.g. deleted user)
 			$engine->db->sql_query(
-				"UPDATE
-					" . $prefix . "revision r
-					LEFT JOIN " . $prefix . "user u ON (r.owner_id = u.user_id)
+				'UPDATE
+					' . $prefix . 'revision r
+					LEFT JOIN ' . $prefix . 'user u ON (r.owner_id = u.user_id)
 				SET
-					r.owner_id = " . (int) $sys_user_id['user_id'] . "
+					r.owner_id = ' . (int) $sys_user_id['user_id'] . '
 				WHERE
 					r.owner_id <> 0 AND
-					u.user_id IS NULL");
+					u.user_id IS NULL');
 
 			$_solved['3.5'] = ['revision without valid owner_id', $engine->config->affected_rows];
 
@@ -747,8 +747,8 @@ function admin_maint_inconsistencies($engine, $module)
 		{
 			// 1. get db records
 			$files = $engine->db->load_all(
-				"SELECT f.file_id, f.page_id, f.file_ext, f.file_name " .
-				"FROM " . $engine->prefix . "file f ");
+				'SELECT f.file_id, f.page_id, f.file_ext, f.file_name ' .
+				'FROM ' . $engine->prefix . 'file f ');
 
 			$db_files			= [];
 

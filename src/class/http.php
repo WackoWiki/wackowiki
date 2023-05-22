@@ -98,12 +98,12 @@ class Http
 		chmod($this->file, CHMOD_SAFE);
 
 		$this->db->sql_query(
-			"INSERT INTO " . $this->db->table_prefix . "cache SET " .
-				"hash		= " . $this->db->q($this->hash) . ", " .
-				"method		= " . $this->db->q($this->method) . ", " .
-				"query		= " . $this->db->q($this->query) . ", " .
-				"cache_lang	= " . $this->db->q($this->lang) . ", " .	// user lang NOT user agent lang NOR page lang!
-				"cache_time	= UTC_TIMESTAMP()");
+			'INSERT INTO ' . $this->db->table_prefix . 'cache SET ' .
+				'hash		= ' . $this->db->q($this->hash) . ', ' .
+				'method		= ' . $this->db->q($this->method) . ', ' .
+				'query		= ' . $this->db->q($this->query) . ', ' .
+				'cache_lang	= ' . $this->db->q($this->lang) . ', ' .	// user lang NOT user agent lang NOR page lang!
+				'cache_time	= UTC_TIMESTAMP()');
 
 	}
 
@@ -117,9 +117,9 @@ class Http
 			[$page, $hash] = $this->normalize_page($page);
 
 			$params = $this->db->load_all(
-				"SELECT method, query, cache_lang " .
-				"FROM " . $this->db->table_prefix . "cache " .
-				"WHERE hash = " . $this->db->q($hash));
+				'SELECT method, query, cache_lang ' .
+				'FROM ' . $this->db->table_prefix . 'cache ' .
+				'WHERE hash = ' . $this->db->q($hash));
 
 			if ($params)
 			{
@@ -141,8 +141,8 @@ class Http
 				}
 
 				$this->db->sql_query(
-					"DELETE FROM " . $this->db->table_prefix . "cache " .
-					"WHERE hash = " . $this->db->q($hash));
+					'DELETE FROM ' . $this->db->table_prefix . 'cache ' .
+					'WHERE hash = ' . $this->db->q($hash));
 			}
 		}
 
@@ -482,8 +482,8 @@ class Http
 			$lang_list = $this->available_languages();
 
 			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
-			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
-					"(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/",
+			preg_match_all('/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?' .
+				'(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/',
 					strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
 					$matches, PREG_SET_ORDER);
 

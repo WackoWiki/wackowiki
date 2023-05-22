@@ -67,11 +67,11 @@ if (   $this->is_owner()
 			if ($category_id)
 			{
 				$word = $this->db->load_single(
-					"SELECT category_id, parent_id, category " .
-					"FROM " . $prefix . "category " .
-					"WHERE category_id = " . (int) $category_id . " " .
-						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
-					"LIMIT 1");
+					'SELECT category_id, parent_id, category ' .
+					'FROM ' . $prefix . 'category ' .
+					'WHERE category_id = ' . (int) $category_id . ' ' .
+						'AND category_lang = ' . $this->db->q($this->page['page_lang']) . ' ' .
+					'LIMIT 1');
 			}
 
 			// add item
@@ -79,11 +79,11 @@ if (   $this->is_owner()
 			{
 				// do we have identical name for this language?
 				if ($this->db->load_single(
-					"SELECT category_id " .
-					"FROM " . $prefix . "category " .
-					"WHERE category = " . $this->db->q($category) . " " .
-						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
-					"LIMIT 1"))
+					'SELECT category_id ' .
+					'FROM ' . $prefix . 'category ' .
+					'WHERE category = ' . $this->db->q($category) . ' ' .
+						'AND category_lang = ' . $this->db->q($this->page['page_lang']) . ' ' .
+					'LIMIT 1'))
 				{
 					$this->set_message(Ut::perc_replace($this->_t('CategoriesAlreadyExists'), '<code>' . $category . '</code>'));
 				}
@@ -91,16 +91,16 @@ if (   $this->is_owner()
 				{
 					// save item
 					$this->db->sql_query(
-						"INSERT INTO " . $prefix . "category SET " .
+						'INSERT INTO ' . $prefix . 'category SET ' .
 							($category_id && $_POST['group'] == 1
-								? "parent_id = " . ((int) $word['parent_id'] != 0
+								? 'parent_id = ' . ((int) $word['parent_id'] != 0
 									? (int) $word['parent_id']
-									: (int) $word['category_id'] ) . ", "
+									: (int) $word['category_id'] ) . ', '
 								: ''
 							) .
-							"category_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
-							"category				= " . $this->db->q($category) . ", " .
-							"category_description	= " . $this->db->q($category_description) . " ");
+							'category_lang			= ' . $this->db->q($this->page['page_lang']) . ', ' .
+							'category				= ' . $this->db->q($category) . ', ' .
+							'category_description	= ' . $this->db->q($category_description) . ' ');
 
 					$this->set_message(Ut::perc_replace($this->_t('CategoriesAdded'), '<code>' . $category . '</code>'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryCreated', SYSTEM_LANG), $category));
@@ -113,23 +113,23 @@ if (   $this->is_owner()
 			{
 				// do we have identical name for this language?
 				if ($this->db->load_single(
-					"SELECT category_id " .
-					"FROM " . $prefix . "category " .
-					"WHERE category = " . $this->db->q($category) . " " .
-						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
-						"AND category_id <> " . (int) $category_id . " " .
-					"LIMIT 1"))
+					'SELECT category_id ' .
+					'FROM ' . $prefix . 'category ' .
+					'WHERE category = ' . $this->db->q($category) . ' ' .
+						'AND category_lang = ' . $this->db->q($this->page['page_lang']) . ' ' .
+						'AND category_id <> ' . (int) $category_id . ' ' .
+					'LIMIT 1'))
 				{
 					$this->set_message(Ut::perc_replace($this->_t('CategoriesAlreadyExists'), '<code>' . $category . '</code>'));
 				}
 				else
 				{
 					$this->db->sql_query(
-						"UPDATE " . $prefix . "category SET " .
-							"category				= " . $this->db->q($category) . ", " .
-							"category_description	= " . $this->db->q($category_description) . " " .
-						"WHERE category_id = " . (int) $category_id . " " .
-						"LIMIT 1");
+						'UPDATE ' . $prefix . 'category SET ' .
+							'category				= ' . $this->db->q($category) . ', ' .
+							'category_description	= ' . $this->db->q($category_description) . ' ' .
+						'WHERE category_id = ' . (int) $category_id . ' ' .
+						'LIMIT 1');
 
 					$this->set_message($this->_t('CategoriesRenamed'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryRenamed', SYSTEM_LANG), $word['category'], $category));
@@ -144,10 +144,10 @@ if (   $this->is_owner()
 				if ($parent_id == 0)
 				{
 					$this->db->sql_query(
-						"UPDATE " . $prefix . "category SET " .
-							"parent_id = 0 " .
-						"WHERE category_id = " . (int) $category_id . " " .
-						"LIMIT 1");
+						'UPDATE ' . $prefix . 'category SET ' .
+							'parent_id = 0 ' .
+						'WHERE category_id = ' . (int) $category_id . ' ' .
+						'LIMIT 1');
 
 					$this->set_message($this->_t('CategoriesUngrouped'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryDebundled', SYSTEM_LANG), $word['category']));
@@ -155,23 +155,23 @@ if (   $this->is_owner()
 				else
 				{
 					$parent = $this->db->load_single(
-						"SELECT parent_id, category " .
-						"FROM " . $prefix . "category " .
-						"WHERE category_id = " . (int) $parent_id . " " .
-						"LIMIT 1");
+						'SELECT parent_id, category ' .
+						'FROM ' . $prefix . 'category ' .
+						'WHERE category_id = ' . (int) $parent_id . ' ' .
+						'LIMIT 1');
 
 					if ($parent['parent_id'] == 0)
 					{
 						$this->db->sql_query(
-							"UPDATE " . $prefix . "category SET " .
-								"parent_id = " . (int) $parent_id . " " .
-							"WHERE category_id = " . (int) $category_id . " " .
-							"LIMIT 1");
+							'UPDATE ' . $prefix . 'category SET ' .
+								'parent_id = ' . (int) $parent_id . ' ' .
+							'WHERE category_id = ' . (int) $category_id . ' ' .
+							'LIMIT 1');
 
 						$this->db->sql_query(
-							"UPDATE " . $prefix . "category SET " .
-								"parent_id = 0 " .
-							"WHERE parent_id = " . (int) $category_id);
+							'UPDATE ' . $prefix . 'category SET ' .
+								'parent_id = 0 ' .
+							'WHERE parent_id = ' . (int) $category_id);
 
 						$this->set_message($this->_t('CategoriesGrouped'), 'success');
 						$this->log(4, Ut::perc_replace($this->_t('LogCategoryGrouped', SYSTEM_LANG), $word['category'], $parent['category']));
@@ -188,17 +188,17 @@ if (   $this->is_owner()
 			else if ($action == 'remove_category' && $category_id)
 			{
 				$this->db->sql_query(
-					"DELETE FROM " . $prefix . "category " .
-					"WHERE category_id = " . (int) $category_id);
+					'DELETE FROM ' . $prefix . 'category ' .
+					'WHERE category_id = ' . (int) $category_id);
 
 				$this->db->sql_query(
-					"DELETE FROM " . $prefix . "category_assignment " .
-					"WHERE category_id = " . (int) $category_id);
+					'DELETE FROM ' . $prefix . 'category_assignment ' .
+					'WHERE category_id = ' . (int) $category_id);
 
 				$this->db->sql_query(
-					"UPDATE " . $prefix . "category SET " .
-						"parent_id = 0 " .
-					"WHERE parent_id = " . (int) $category_id);
+					'UPDATE ' . $prefix . 'category SET ' .
+						'parent_id = 0 ' .
+					'WHERE parent_id = ' . (int) $category_id);
 
 				$this->set_message($this->_t('CategoriesDeleted'), 'success');
 				$this->log(4, Ut::perc_replace($this->_t('LogCategoryRemoved', SYSTEM_LANG), $word['category']));
@@ -217,10 +217,10 @@ if (   $this->is_owner()
 				if ($category_id)
 				{
 					$word = $this->db->load_single(
-						"SELECT category_id, parent_id, category " .
-						"FROM " . $prefix . "category " .
-						"WHERE category_id = " . (int) $category_id . " " .
-						"LIMIT 1");
+						'SELECT category_id, parent_id, category ' .
+						'FROM ' . $prefix . 'category ' .
+						'WHERE category_id = ' . (int) $category_id . ' ' .
+						'LIMIT 1');
 
 					$parent_id = ($word['parent_id'] ?: $word['category_id']);
 				}
@@ -239,10 +239,10 @@ if (   $this->is_owner()
 			else if (isset($_POST['rename']) && $category_id)
 			{
 				if ($word = $this->db->load_single(
-					"SELECT category, category_description
-					FROM " . $prefix . "category
-					WHERE category_id = " . (int) $category_id . "
-					LIMIT 1"))
+					'SELECT category, category_description
+					FROM ' . $prefix . 'category
+					WHERE category_id = ' . (int) $category_id . '
+					LIMIT 1'))
 				{
 					$tpl->r_header		= true;
 					$tpl->r_categoryid	= (int) $category_id;
@@ -256,18 +256,18 @@ if (   $this->is_owner()
 			else if (isset($_POST['ungroup']) && $category_id)
 			{
 				if ($word = $this->db->load_single(
-					"SELECT category_id, parent_id, category, category_lang
-					FROM " . $prefix . "category
-					WHERE category_id = " . (int) $category_id . "
-					LIMIT 1"))
+					'SELECT category_id, parent_id, category, category_lang
+					FROM ' . $prefix . 'category
+					WHERE category_id = ' . (int) $category_id . '
+					LIMIT 1'))
 				{
 					$parents = $this->db->load_all(
-						"SELECT category_id, category " .
-						"FROM " . $prefix . "category " .
-						"WHERE parent_id = 0 " .
-							"AND category_lang = " . $this->db->q($word['category_lang']) . " " .
-							"AND category_id <> " . (int) $word['category_id'] . " " .
-						"ORDER BY category ASC");
+						'SELECT category_id, category ' .
+						'FROM ' . $prefix . 'category ' .
+						'WHERE parent_id = 0 ' .
+							'AND category_lang = ' . $this->db->q($word['category_lang']) . ' ' .
+							'AND category_id <> ' . (int) $word['category_id'] . ' ' .
+						'ORDER BY category ASC');
 
 					$tpl->g_header		= true;
 					$tpl->g_categoryid	= (int) $category_id;
@@ -287,10 +287,10 @@ if (   $this->is_owner()
 			else if (isset($_POST['delete']) && $category_id)
 			{
 				if ($word = $this->db->load_single(
-					"SELECT category
-					FROM " . $prefix . "category
-					WHERE category_id = " . (int) $category_id . "
-					LIMIT 1"))
+					'SELECT category
+					FROM ' . $prefix . 'category
+					WHERE category_id = ' . (int) $category_id . '
+					LIMIT 1'))
 				{
 					$tpl->d_header		= true;
 					$tpl->d_categoryid	= (int) $category_id;

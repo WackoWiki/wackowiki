@@ -122,14 +122,14 @@ function recursive_move(&$engine, $root, $new_root, $log): void
 	$owner_id	= '';
 	$_root		= $root;
 	$pages		= $engine->db->load_all(
-					"SELECT page_id, tag, page_lang " .
-					"FROM " . $engine->prefix . "page " .
-					"WHERE (tag LIKE " . $engine->db->q($_root . '/%') . " " .
-						" OR tag = " . $engine->db->q($_root) . ") " .
+					'SELECT page_id, tag, page_lang ' .
+					'FROM ' . $engine->prefix . 'page ' .
+					'WHERE (tag LIKE ' . $engine->db->q($_root . '/%') . ' ' .
+						'OR tag = ' . $engine->db->q($_root) . ') ' .
 					($owner_id
-						? "AND owner_id = " . (int) $owner_id . " "
-						: "") .
-					"AND comment_on_id = 0");
+						? 'AND owner_id = ' . (int) $owner_id . ' '
+						: '') .
+					'AND comment_on_id = 0');
 
 	foreach ($pages as $page)
 	{

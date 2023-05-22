@@ -29,40 +29,40 @@ $prefix		= $this->prefix;
 
 $selector =
 	($category
-		? "INNER JOIN " . $prefix . "category_assignment AS k ON (k.object_id = f.file_id) " .
-		  "LEFT JOIN " . $prefix . "category c ON (k.category_id = c.category_id) "
-		: "") . " " .
-		"WHERE " .
+		? 'INNER JOIN ' . $prefix . 'category_assignment AS k ON (k.object_id = f.file_id) ' .
+		'LEFT JOIN ' . $prefix . 'category c ON (k.category_id = c.category_id) '
+		: '') . ' ' .
+		'WHERE ' .
 			"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
-		"AND f.deleted <> 1 " .
+		'AND f.deleted <> 1 ' .
 	($owner
-		? "AND u.user_name = " . $this->db->q($owner) . " "
+		? 'AND u.user_name = ' . $this->db->q($owner) . ' '
 		: '') .
 	($global
-		? "AND f.page_id = 0 "
-		: "AND f.page_id = " . (int) $this->page['page_id'] . " "
+		? 'AND f.page_id = 0 '
+		: 'AND f.page_id = ' . (int) $this->page['page_id'] . ' '
 		);
 
 	if ($category)
 	{
-		$selector .= "AND c.category IN ( " . $this->db->q($category) . " ) " .
-					 "AND k.object_type_id = " . OBJECT_FILE . " ";
+		$selector .= 'AND c.category IN ( ' . $this->db->q($category) . ' ) ' .
+					'AND k.object_type_id = ' . OBJECT_FILE . ' ';
 	}
 
 $count = $this->db->load_single(
-	"SELECT COUNT(f.file_id) AS n " .
-	"FROM " . $prefix . "file f " .
+	'SELECT COUNT(f.file_id) AS n ' .
+	'FROM ' . $prefix . 'file f ' .
 	$selector, true);
 
 if ($count['n'])
 {
 	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.file_name, p.tag " .
-		"FROM " . $prefix . "file f " .
-			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
+		'SELECT f.file_id, f.page_id, f.file_name, p.tag ' .
+		'FROM ' . $prefix . 'file f ' .
+			'LEFT JOIN  ' . $prefix . 'page p ON (f.page_id = p.page_id) ' .
+			'INNER JOIN ' . $prefix . 'user u ON (f.user_id = u.user_id) ' .
 		$selector .
-		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
+		'LIMIT ' . Ut::rand(0, $count['n'] - 1) . ', 1'
 		, true);
 
 	$path1	= 'file:/';

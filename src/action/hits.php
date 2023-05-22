@@ -17,10 +17,10 @@ if ($page)
 	$tag = $this->unwrap_link($page);
 
 	$rs = $this->db->load_single(
-		"SELECT hits " .
-		"FROM " . $this->prefix . "page " .
-		"WHERE tag = " . $this->db->q($tag) . " " .
-		"LIMIT 1");
+		'SELECT hits ' .
+		'FROM ' . $this->prefix . 'page ' .
+		'WHERE tag = ' . $this->db->q($tag) . ' ' .
+		'LIMIT 1');
 
 	if (isset($rs['hits']))
 	{

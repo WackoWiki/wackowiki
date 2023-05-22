@@ -23,28 +23,28 @@ $page	??= '';
 $tag	= $this->unwrap_link($page);
 
 $query =
-	"FROM ". $this->prefix . "page p, ". $this->prefix . "acl a " .
-	"WHERE p.owner_id != " . (int) $this->db->system_user_id . " " .
+	'FROM ' . $this->prefix . 'page p, ' . $this->prefix . 'acl a ' .
+	'WHERE p.owner_id != ' . (int) $this->db->system_user_id . ' ' .
 		($tag
-			? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
-			: ""
+			? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+			: ''
 		) .
-		"AND p.comment_on_id = 0 " .
-		"AND p.page_id <> " . (int) $this->page['page_id'] . " " .
+		'AND p.comment_on_id = 0 ' .
+		'AND p.page_id <> ' . (int) $this->page['page_id'] . ' ' .
 		"AND a.privilege = 'read' " .
 		"AND a.list = '*' " .
-		"AND p.page_id = a.page_id ";
+		'AND p.page_id = a.page_id ';
 
 $count = $this->db->load_single(
-	"SELECT COUNT(p.tag) AS n " .
+	'SELECT COUNT(p.tag) AS n ' .
 	$query, true);
 
 if ($count['n'] > 1)
 {
 	$result = $this->db->load_single(
-		"SELECT p.tag " .
+		'SELECT p.tag ' .
 		$query .
-		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
+		'LIMIT ' . Ut::rand(0, $count['n'] - 1) . ', 1'
 		, true);
 }
 

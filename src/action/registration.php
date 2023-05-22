@@ -91,41 +91,41 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// INSERT user
 			$this->db->sql_query(
-				"INSERT INTO " . $this->prefix . "user " .
-				"SET " .
-					"signup_time		= UTC_TIMESTAMP(), " .
-					"user_name			= " . $this->db->q($user_name) . ", " .
-					"email				= " . $this->db->q($email) . ", " .
-					"password			= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", " .
-					"account_status		= " . (int) $account_status . ", " .
-					"enabled			= " . (int) $account_enabled . ", " .
-					"user_ip			= " . $this->db->q($user_ip) . " ");
+				'INSERT INTO ' . $this->prefix . 'user ' .
+				'SET ' .
+					'signup_time		= UTC_TIMESTAMP(), ' .
+					'user_name			= ' . $this->db->q($user_name) . ', ' .
+					'email				= ' . $this->db->q($email) . ', ' .
+					'password			= ' . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ', ' .
+					'account_status		= ' . (int) $account_status . ', ' .
+					'enabled			= ' . (int) $account_enabled . ', ' .
+					'user_ip			= ' . $this->db->q($user_ip) . ' ');
 
 			// get new user_id
 			$_user_id = $this->db->load_single(
-				"SELECT user_id " .
-				"FROM " . $this->prefix . "user " .
-				"WHERE user_name = " . $this->db->q($user_name) . " " .
-				"LIMIT 1");
+				'SELECT user_id ' .
+				'FROM ' . $this->prefix . 'user ' .
+				'WHERE user_name = ' . $this->db->q($user_name) . ' ' .
+				'LIMIT 1');
 
 			$user_id = $_user_id['user_id'];
 
 			// INSERT user settings
 			$this->db->sql_query(
-				"INSERT INTO " . $this->prefix . "user_setting " .
-				"SET " .
-					"user_id			= " . (int) $user_id . ", " .
-					"user_lang			= " . $this->db->q($user_lang) . ", " .
-					"list_count			= " . (int) $this->db->list_count . ", " .
-					"theme				= " . $this->db->q($this->db->theme) . ", " .
-					"diff_mode			= " . (int) $this->db->default_diff_mode . ", " .
-					"notify_minor_edit	= " . (int) $this->db->notify_minor_edit . ", " .
-					"notify_page		= " . (int) $this->db->notify_page . ", " .
-					"notify_comment		= " . (int) $this->db->notify_comment . ", " .
-					"sorting_comments	= " . (int) $this->db->sorting_comments . ", " .
-					"allow_intercom		= " . (int) $this->db->allow_intercom . ", " .
-					"allow_massemail	= " . (int) $this->db->allow_massemail . ", " .
-					"send_watchmail		= 1");
+				'INSERT INTO ' . $this->prefix . 'user_setting ' .
+				'SET ' .
+					'user_id			= ' . (int) $user_id . ', ' .
+					'user_lang			= ' . $this->db->q($user_lang) . ', ' .
+					'list_count			= ' . (int) $this->db->list_count . ', ' .
+					'theme				= ' . $this->db->q($this->db->theme) . ', ' .
+					'diff_mode			= ' . (int) $this->db->default_diff_mode . ', ' .
+					'notify_minor_edit	= ' . (int) $this->db->notify_minor_edit . ', ' .
+					'notify_page		= ' . (int) $this->db->notify_page . ', ' .
+					'notify_comment		= ' . (int) $this->db->notify_comment . ', ' .
+					'sorting_comments	= ' . (int) $this->db->sorting_comments . ', ' .
+					'allow_intercom		= ' . (int) $this->db->allow_intercom . ', ' .
+					'allow_massemail	= ' . (int) $this->db->allow_massemail . ', ' .
+					'send_watchmail		= 1');
 
 			// INSERT user menu items
 			// -> set_menu function will prepopulate user menu with default menu items

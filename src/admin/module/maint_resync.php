@@ -32,16 +32,16 @@ function admin_maint_resync($engine, $module)
 		if ($action == 'userstats')
 		{
 			// reset stats
-			$sql[] = "UPDATE " . $prefix . "user SET
+			$sql[] = 'UPDATE ' . $prefix . 'user SET
 						total_comments	= 0,
 						total_uploads	= 0,
 						total_revisions	= 0,
-						total_pages		= 0";
+						total_pages		= 0';
 
 			// set total comments posted
-			$sql[] = "UPDATE " . $prefix . "user u,
+			$sql[] = 'UPDATE ' . $prefix . 'user u,
 						(SELECT p.owner_id as user_id, COUNT(p.tag) AS n
-						FROM " . $prefix . "page p,
+						FROM ' . $prefix . "page p,
 							{$prefix}user o
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id <> 0
@@ -52,9 +52,9 @@ function admin_maint_resync($engine, $module)
 					WHERE u.user_id = s.user_id";
 
 			// set total pages in ownership
-			$sql[] = "UPDATE " . $prefix . "user u,
+			$sql[] = 'UPDATE ' . $prefix . 'user u,
 						(SELECT o.user_id, COUNT(p.tag) AS n
-						FROM " . $prefix . "page p,
+						FROM ' . $prefix . "page p,
 							{$prefix}user o
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id = 0
@@ -65,9 +65,9 @@ function admin_maint_resync($engine, $module)
 					WHERE u.user_id = s.user_id";
 
 			// set total revisions made
-			$sql[] = "UPDATE " . $prefix . "user u,
+			$sql[] = 'UPDATE ' . $prefix . 'user u,
 						(SELECT r.user_id, COUNT(r.page_id) AS n
-						FROM " . $prefix . "revision r,
+						FROM ' . $prefix . "revision r,
 							{$prefix}user o
 						WHERE r.owner_id = o.user_id
 							AND r.comment_on_id = 0
@@ -77,9 +77,9 @@ function admin_maint_resync($engine, $module)
 					WHERE u.user_id = s.user_id";
 
 			// set total files uploaded
-			$sql[] = "UPDATE " . $prefix . "user u,
+			$sql[] = 'UPDATE ' . $prefix . 'user u,
 						(SELECT o.user_id, COUNT(f.file_id) AS n
-						FROM " . $prefix . "file f,
+						FROM ' . $prefix . "file f,
 							{$prefix}user o
 						WHERE f.user_id = o.user_id
 							AND f.deleted <> 1
@@ -99,37 +99,37 @@ function admin_maint_resync($engine, $module)
 		else if ($action == 'pagestats')
 		{
 			// reset stats
-			$sql[] = "UPDATE " . $prefix . "page SET
+			$sql[] = 'UPDATE ' . $prefix . 'page SET
 						comments	= 0,
 						files		= 0,
-						revisions	= 0";
+						revisions	= 0';
 			// set comments
-			$sql[] = "UPDATE " . $prefix . "page p,
+			$sql[] = 'UPDATE ' . $prefix . 'page p,
 						(SELECT e.page_id, COUNT( c.page_id ) AS n
-						FROM " . $prefix . "page c
-							RIGHT JOIN " . $prefix . "page AS e ON c.comment_on_id = e.page_id
+						FROM ' . $prefix . 'page c
+							RIGHT JOIN ' . $prefix . 'page AS e ON c.comment_on_id = e.page_id
 						WHERE c.deleted <> 1
 						GROUP BY e.page_id) AS s
 					SET
 						p.comments = s.n
-					WHERE p.page_id = s.page_id";
+					WHERE p.page_id = s.page_id';
 			// set files
-			$sql[] = "UPDATE " . $prefix . "page p,
+			$sql[] = 'UPDATE ' . $prefix . 'page p,
 						(SELECT page_id, COUNT(file_id) AS files
-						FROM " . $prefix . "file
+						FROM ' . $prefix . 'file
 						WHERE page_id <> 0
 						GROUP BY page_id) AS f
 					SET
 						p.files = f.files
-					WHERE p.page_id = f.page_id";
+					WHERE p.page_id = f.page_id';
 			// set revisions
-			$sql[] = "UPDATE " . $prefix . "page p,
+			$sql[] = 'UPDATE ' . $prefix . 'page p,
 						(SELECT page_id, COUNT(page_id) AS revisions
-						FROM " . $prefix . "revision
+						FROM ' . $prefix . 'revision
 						GROUP BY page_id) AS r
 					SET
 						p.revisions = r.revisions
-					WHERE p.page_id = r.page_id";
+					WHERE p.page_id = r.page_id';
 
 			foreach ($sql as $query)
 			{
@@ -142,9 +142,9 @@ function admin_maint_resync($engine, $module)
 		else if ($action == 'attachments')
 		{
 			if ($files = $engine->db->load_all(
-				"SELECT file_id, page_id, file_name " .
-				"FROM " . $prefix . "file " .
-					"ORDER BY file_id"))
+				'SELECT file_id, page_id, file_name ' .
+				'FROM ' . $prefix . 'file ' .
+				'ORDER BY file_id'))
 			{
 				foreach ($files as $file)
 				{
@@ -159,9 +159,9 @@ function admin_maint_resync($engine, $module)
 
 					// update database with the new file hash
 					$engine->db->sql_query(
-						"UPDATE " . $prefix . "file SET " .
-							"file_hash	= " . $engine->db->q($file_hash) . " " .
-						"WHERE file_id = " . (int) $file['file_id']);
+						'UPDATE ' . $prefix . 'file SET ' .
+							'file_hash	= ' . $engine->db->q($file_hash) . ' ' .
+						'WHERE file_id = ' . (int) $file['file_id']);
 				}
 
 				$engine->log(1, $engine->_t('LogAttachmentsSynched', SYSTEM_LANG));
@@ -208,7 +208,7 @@ function admin_maint_resync($engine, $module)
 		else if ($action == 'reparse_body')
 		{
 			// purge body_r field to enforce page re-compiling
-			$engine->db->sql_query("UPDATE " . $prefix . "page SET body_r = ''");
+			$engine->db->sql_query('UPDATE ' . $prefix . "page SET body_r = ''");
 
 			$engine->show_message($engine->_t('PreparsedBodyPurged'), 'success');
 		}
@@ -252,14 +252,14 @@ function admin_maint_resync($engine, $module)
 				$engine->sess->resync_links			= '';
 				$engine->sess->resync_counter		= 0;
 
-				$engine->db->sql_query("TRUNCATE " . $prefix . "page_link");
-				$engine->db->sql_query("TRUNCATE " . $prefix . "file_link");
+				$engine->db->sql_query('TRUNCATE ' . $prefix . 'page_link');
+				$engine->db->sql_query('TRUNCATE ' . $prefix . 'file_link');
 
 				// purge body_r and body_toc field to enforce page re-compiling
 				if ($recompile)
 				{
-					$engine->db->sql_query("UPDATE " . $prefix . "page SET body_toc = ''");
-					$engine->db->sql_query("UPDATE " . $prefix . "page SET body_r = ''");
+					$engine->db->sql_query('UPDATE ' . $prefix . "page SET body_toc = ''");
+					$engine->db->sql_query('UPDATE ' . $prefix . "page SET body_r = ''");
 				}
 			}
 
@@ -270,12 +270,12 @@ function admin_maint_resync($engine, $module)
 			$engine->db->create_thumbnail = 0;
 
 			if ($pages = $engine->db->load_all(
-			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, a.page_lang, a.allow_rawhtml, a.disable_safehtml, a.typografica, " .
-				"b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml, b.typografica AS parent_typografica " .
-			"FROM " . $prefix . "page a " .
-				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
-			"ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci " .
-			"LIMIT " . ($i * $limit) . ", $limit"))
+			'SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, a.page_lang, a.allow_rawhtml, a.disable_safehtml, a.typografica, ' .
+				'b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml, b.typografica AS parent_typografica ' .
+			'FROM ' . $prefix . 'page a ' .
+				'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) ' .
+			'ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci ' .
+			'LIMIT ' . ($i * $limit) . ", $limit"))
 			{
 				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . ($i + 1) . " #########################################\n\n";
 

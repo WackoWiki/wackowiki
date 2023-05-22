@@ -674,6 +674,11 @@ $wacko_translation = [
 	'NoWatchers'				=> 'Personne ne surveille %1',
 	'NotOwnerToViewWatchers'	=> 'N’étant pas le propriétaire de cette page, vous ne pouvez pas voir la liste des utilisateurs qui la surveillent.',
 
+	// thumbnail
+	'TbnError'					=> 'Erreur lors de la création de la vignette : %1',
+	'TbnImageAreaTooBig'		=> 'Fichier avec des dimensions supérieures à %1',
+	'TbnImageMissing'			=> 'Le fichier suivant semble absent : %1',
+
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Générez le hachage de mot de passe pour <code>mot de passe de récupération</code>',
 
@@ -758,7 +763,7 @@ $wacko_translation = [
 	'PMFlooded'					=> 'L’intervalle séparant l’envoi de messages personnels doit être d’au moins %1 secondes.',
 	'PMSent'					=> 'Le message personnel a été transmis à l’utilisateur.',
 	'PMBody'					=> 'Ce message vous a été envoyé par l’utilisateur %1.',
-	'PMBodyCopy'				=> 'Vous avez envoyé le message suivant à l\'utilisateur %1.',
+	'PMBodyCopy'				=> 'Vous avez envoyé le message suivant à l’utilisateur %1.',
 	'PMReply'					=> 'Pour répondre à ce courriel, cliquez sur le lien suivant (n’utilisez pas  le bouton "répondre" de votre logiciel de courriel):',
 	'PMNotLoggedIn'				=> 'Vous n’êtes pas enregistré dans le système et ne pouvez envoyer de messages privés aux utilisateurs.',
 
@@ -774,7 +779,7 @@ $wacko_translation = [
 	'ReplaceTextEditTitles'		=> 'Remplacer le texte dans le titre des pages',
 	'ReplaceTextGiveTarget'		=> 'Vous devez spécifier la chaîne à remplacer.',
 	'ReplaceTextNoNamespace'	=> 'Vous devez sélectionner au moins un espace de noms.',
-	'ReplaceTextNoDifference'	=> 'Il n\'y a pas de différence entre le texte de remplacement et le texte cible.',
+	'ReplaceTextNoDifference'	=> 'Il n’y a pas de différence entre le texte de remplacement et le texte cible.',
 	'ReplaceTextNoOption'		=> 'Vous devez choisir au moins une option de remplacement.',
 	'ReplaceTextPagesEdit'		=> 'Remplacer %1 par %2 dans le texte des $3 pages suivantes :',
 	"ReplaceTextTitlesEdit"		=> 'Remplacer %1 par %2 dans les titres des %3 pages suivantes :',
@@ -1241,11 +1246,13 @@ $wacko_translation = [
 	'InAYear'		=> 'dans un an',
 	'InYears'		=> 'dans %1 ans',
 
-	// binary multiples
-	'DecimalPrefixShort'		=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-	'DecimalPrefixLong'			=> ['Octet', 'Kilooctets', 'Megaoctets', 'Gigaoctets', 'Teraoctets', 'Petaoctets', 'Exaoctets', 'Zettaoctets', 'Yottaoctets'],
-	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-	'BinaryPrefixLong'			=> ['Octet', 'Kibioctets', 'Mebioctets', 'Gibioctets', 'Tebioctets', 'Pebioctets', 'Exbioctets', 'Zebioctets', 'Yobioctets'],
+	// norm multiples
+	'ByteDecimalShort'			=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+	'ByteDecimalLong'			=> ['Octet', 'Kilooctets', 'Megaoctets', 'Gigaoctets', 'Teraoctets', 'Petaoctets', 'Exaoctets', 'Zettaoctets', 'Yottaoctets'],
+	'ByteBinaryShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+	'ByteBinaryLong'			=> ['Octet', 'Kibioctets', 'Mebioctets', 'Gibioctets', 'Tebioctets', 'Pebioctets', 'Exbioctets', 'Zebioctets', 'Yobioctets'],
+	'PixelDecimalShort'			=> ['px', 'KP', 'MP', 'GP', 'TP', 'PP', 'EP', 'ZP', 'YP'],
+	'PixelDecimalLong'			=> ['pixel', 'Kpx', 'Mpx', 'Gpx', 'Tpx', 'Ppx', 'Epx', 'Zpx', 'Ypx'],
 
 	// loading error
 	'UnknownAction'				=> 'Action inconnue',

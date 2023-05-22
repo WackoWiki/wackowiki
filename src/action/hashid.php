@@ -34,11 +34,11 @@ if (    $this->db->show_permalink == 1
 	else
 	{
 		$old_version = $this->db->load_single(
-			"SELECT version_id " .
-			"FROM " . $this->prefix . "revision " .
-			"WHERE page_id = " . (int) $this->page['page_id'] . " " .
-			"ORDER BY version_id DESC " .
-			"LIMIT 1");
+			'SELECT version_id ' .
+			'FROM ' . $this->prefix . 'revision ' .
+			'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
+			'ORDER BY version_id DESC ' .
+			'LIMIT 1');
 		$version_id = $old_version['version_id'] + 1;
 	}
 

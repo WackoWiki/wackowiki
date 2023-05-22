@@ -73,24 +73,24 @@ else
 
 		// load overall authors data from revision and page table
 		if ($_authors = $this->db->load_all(
-		"(SELECT u.user_name AS name, YEAR(r.modified) AS year " .
-		"FROM " . $prefix . "revision r " .
-			"INNER JOIN " . $prefix . "user u ON (r.user_id = u.user_id) " .
-		"WHERE r.tag = " . $this->db->q($this->tag) . " " .
+		'(SELECT u.user_name AS name, YEAR(r.modified) AS year ' .
+		'FROM ' . $prefix . 'revision r ' .
+			'INNER JOIN ' . $prefix . 'user u ON (r.user_id = u.user_id) ' .
+		'WHERE r.tag = ' . $this->db->q($this->tag) . ' ' .
 			($cluster
-				? "OR r.tag LIKE " . $this->db->q($this->tag . '/%') . " "
+				? 'OR r.tag LIKE ' . $this->db->q($this->tag . '/%') . ' '
 				: '') .
-		"GROUP BY u.user_name, year ) " .
-		"UNION " .
-		"(SELECT u.user_name AS name, YEAR(p.modified) AS year " .
-		"FROM " . $prefix . "page p " .
-			"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
-		"WHERE p.tag = " . $this->db->q($this->tag) . " " .
+		'GROUP BY u.user_name, year ) ' .
+		'UNION ' .
+		'(SELECT u.user_name AS name, YEAR(p.modified) AS year ' .
+		'FROM ' . $prefix . 'page p ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id) ' .
+		'WHERE p.tag = ' . $this->db->q($this->tag) . ' ' .
 			($cluster
-				? "OR p.tag LIKE " . $this->db->q($this->tag . '/%') . " "
+				? 'OR p.tag LIKE ' . $this->db->q($this->tag . '/%') . ' '
 				: '') .
-		"GROUP BY u.user_name, year ) " .
-		"ORDER BY name ASC, year ASC", true))
+		'GROUP BY u.user_name, year ) ' .
+		'ORDER BY name ASC, year ASC', true))
 		{
 			// rewriting results
 			foreach ($_authors as $author)

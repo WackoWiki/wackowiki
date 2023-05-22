@@ -46,7 +46,7 @@ $context		= $this->tag;
 			}
 			else
 			{
-				$num = str_replace('-', "–§",
+				$num = str_replace('-', '–§',
 						str_replace('p', '¹', $toc[$i][0] ));
 			}
 

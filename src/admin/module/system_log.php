@@ -30,7 +30,7 @@ function admin_system_log($engine, $module)
 
 	if (@$_POST['action'] == 'purge_log')
 	{
-		$sql = "TRUNCATE " . $engine->prefix . "log";
+		$sql = 'TRUNCATE ' . $engine->prefix . 'log';
 		$engine->db->sql_query($sql);
 
 		// queries
@@ -49,7 +49,7 @@ function admin_system_log($engine, $module)
 			3 => '=',	// equal
 		};
 
-		$where = "WHERE l.level " . $mod . " " . (int) $_level . " ";
+		$where = 'WHERE l.level ' . $mod . ' ' . (int) $_level . ' ';
 	}
 
 	$_order			= (string)	($_GET['order']		?? '');
@@ -83,11 +83,11 @@ function admin_system_log($engine, $module)
 	// filter by username or user ip
 	if ($_user_id)
 	{
-		$where = "WHERE l.user_id = " . (int) $_user_id . " ";
+		$where = 'WHERE l.user_id = ' . (int) $_user_id . ' ';
 	}
 	else if ($_ip)
 	{
-		$where = "WHERE l.ip = " . $engine->db->q($_ip) . " ";
+		$where = 'WHERE l.ip = ' . $engine->db->q($_ip) . ' ';
 	}
 
 	// entries to display
@@ -99,8 +99,8 @@ function admin_system_log($engine, $module)
 
 	// collecting data
 	$count = $engine->db->load_single(
-		"SELECT COUNT(log_id) AS n " .
-		"FROM " . $engine->prefix . "log l " .
+		'SELECT COUNT(log_id) AS n ' .
+		'FROM ' . $engine->prefix . 'log l ' .
 		($where ?: 'WHERE level <= ' . (int) $level . ' '));
 
 	$order_pagination		= !empty($_order)		? ['order' => Ut::html($_order)] : [];
@@ -110,11 +110,11 @@ function admin_system_log($engine, $module)
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module] + $order_pagination + $level_pagination + $level_mod_pagination, '', 'admin.php');
 
 	$log = $engine->db->load_all(
-		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip " .
-		"FROM " . $engine->prefix . "log l " .
-			"LEFT JOIN " . $engine->prefix . "user u ON (l.user_id = u.user_id) " .
+		'SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ' .
+		'FROM ' . $engine->prefix . 'log l ' .
+			'LEFT JOIN ' . $engine->prefix . 'user u ON (l.user_id = u.user_id) ' .
 		($where ?: 'WHERE l.level <= ' . (int) $level . ' ') .
-		"ORDER BY " . $order .
+		'ORDER BY ' . $order .
 		$pagination['limit']);
 
 	echo $engine->form_open('systemlog');

@@ -22,9 +22,9 @@ function admin_config_upload($engine, $module)
 	$prefix		= $engine->prefix;
 
 	$user_groups = $engine->db->load_all(
-		"SELECT group_name
-		FROM " . $prefix . "usergroup
-		ORDER BY BINARY group_name");
+		'SELECT group_name
+		FROM ' . $prefix . 'usergroup
+		ORDER BY BINARY group_name');
 
 	foreach ($user_groups as $group)
 	{

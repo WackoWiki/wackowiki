@@ -30,11 +30,11 @@ if ($action === 'set_permissions')
 		{
 			// admin can benefit to any possible user
 			$new_owner = $this->db->load_single(
-				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang " .
-				"FROM " . $prefix . "user u " .
-					"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-				"WHERE u.user_id = " . (int) $user_id . " " .
-				"LIMIT 1");
+				'SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang ' .
+				'FROM ' . $prefix . 'user u ' .
+					'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
+				'WHERE u.user_id = ' . (int) $user_id . ' ' .
+				'LIMIT 1');
 		}
 		else
 		{
@@ -85,10 +85,10 @@ if ($action === 'set_permissions')
 		// Change permissions for all comments on this page
 		// TODO: need to rethink/redo
 		$comments = $this->db->load_all(
-			"SELECT page_id " .
-			"FROM " . $prefix . "page " .
-			"WHERE comment_on_id = " . (int) $page_id . " " .
-				"AND owner_id = " . (int) $user_id); // STS ?? for admin too?
+			'SELECT page_id ' .
+			'FROM ' . $prefix . 'page ' .
+			'WHERE comment_on_id = ' . (int) $page_id . ' ' .
+				'AND owner_id = ' . (int) $user_id); // STS ?? for admin too?
 
 		foreach ($comments as $comment)
 		{
@@ -109,23 +109,23 @@ if ($action === 'set_permissions')
 		{
 			// update user statistics
 			$this->db->sql_query(
-				"UPDATE " . $prefix . "user SET " .
-					"total_pages	= total_pages - 1 " .
-				"WHERE user_id		= " . (int) $old_owner_id . " " .
-				"LIMIT 1");
+				'UPDATE ' . $prefix . 'user SET ' .
+					'total_pages	= total_pages - 1 ' .
+				'WHERE user_id		= ' . (int) $old_owner_id . ' ' .
+				'LIMIT 1');
 
 			$this->db->sql_query(
-				"UPDATE " . $prefix . "user SET " .
-					"total_pages	= total_pages + 1 " .
-				"WHERE user_id		= " . (int) $new_owner_id . " " .
-				"LIMIT 1");
+				'UPDATE ' . $prefix . 'user SET ' .
+					'total_pages	= total_pages + 1 ' .
+				'WHERE user_id		= ' . (int) $new_owner_id . ' ' .
+				'LIMIT 1');
 
 			// set new owner
 			$this->db->sql_query(
-				"UPDATE " . $prefix . "page SET " .
-					"owner_id		= " . (int) $new_owner_id . " " .
-				"WHERE page_id		= " . (int) $page_id . " " .
-				"LIMIT 1");
+				'UPDATE ' . $prefix . 'page SET ' .
+					'owner_id		= ' . (int) $new_owner_id . ' ' .
+				'WHERE page_id		= ' . (int) $page_id . ' ' .
+				'LIMIT 1');
 
 			$new_owner['owned_page'] .= $this->href('', $page['tag'], null, null, null, null, true, true) . "\n";
 
@@ -144,14 +144,14 @@ if ($action === 'set_permissions')
 	else
 	{
 		$pages = $this->db->load_all(
-			"SELECT page_id, tag, title, owner_id " .
-			"FROM " . $prefix . "page " .
-			"WHERE (tag = " . $this->db->q($this->tag) .
-				" OR tag LIKE " . $this->db->q($this->tag . '/%') .
-				") " .
+			'SELECT page_id, tag, title, owner_id ' .
+			'FROM ' . $prefix . 'page ' .
+			'WHERE (tag = ' . $this->db->q($this->tag) .
+				' OR tag LIKE ' . $this->db->q($this->tag . '/%') .
+			') ' .
 			($this->is_admin()
-				? ""
-				: "AND owner_id = " . (int) $user_id));
+				? ''
+				: 'AND owner_id = ' . (int) $user_id));
 
 		foreach ($pages as $page)
 		{

@@ -49,11 +49,11 @@ if ([$pages, $pagination] = $this->load_pages_linking($tag, null, $max))
 			{
 				if ($title)
 				{
-					$link = $this->link('/' . $page['tag'] . "#" . $anchor, '', $page['title']);
+					$link = $this->link('/' . $page['tag'] . '#' . $anchor, '', $page['title']);
 				}
 				else
 				{
-					$link = $this->link('/' . $page['tag'] . "#" . $anchor, '', $page['tag'], $page['title']);
+					$link = $this->link('/' . $page['tag'] . '#' . $anchor, '', $page['tag'], $page['title']);
 				}
 
 				if (mb_strpos($link, 'span class="missingpage"') === false)

@@ -49,11 +49,11 @@ if (@$_POST['_action'] === 'clone_page')
 		$log = $tpl->massLog();
 
 		$pages = $this->db->load_all(
-			"SELECT page_id, tag " .
-			"FROM " . $this->prefix . "page " .
-			"WHERE (tag LIKE " . $this->db->q($from . '/%') . " " .
-				"OR tag = " . $this->db->q($from) . ") " .
-				"AND comment_on_id = 0");
+			'SELECT page_id, tag ' .
+			'FROM ' . $this->prefix . 'page ' .
+			'WHERE (tag LIKE ' . $this->db->q($from . '/%') . ' ' .
+				'OR tag = ' . $this->db->q($from) . ') ' .
+				'AND comment_on_id = 0');
 
 		$slashes	= (int) @utf8_count_chars($from, 1)['/']; // @ to return 0 when no slashes used
 		$work		= [];
@@ -121,10 +121,10 @@ $tpl->enter('form_');
 if ($this->check_acl($this->get_user_name(), $this->db->rename_global_acl))
 {
 	$klusterwerks = $this->db->load_single(
-		"SELECT COUNT(*) AS n " .
-		"FROM " . $this->prefix . "page " .
-		"WHERE (tag LIKE " . $this->db->q($from . '/%') . ") " .
-			"AND comment_on_id = 0");
+		'SELECT COUNT(*) AS n ' .
+		'FROM ' . $this->prefix . 'page ' .
+		'WHERE (tag LIKE ' . $this->db->q($from . '/%') . ') ' .
+			'AND comment_on_id = 0');
 
 	if ((int) $klusterwerks['n'])
 	{

@@ -71,7 +71,7 @@ function admin_massemail($engine, $module)
 		$mail_body = strip_tags ($mail_body);
 
 		$members = $engine->db->load_all(
-			"SELECT DISTINCT
+			'SELECT DISTINCT
 				gm.user_id,
 				u.user_name,
 				u.email,
@@ -80,15 +80,15 @@ function admin_massemail($engine, $module)
 				u.email_confirm,
 				us.allow_massemail
 			FROM
-				" . $prefix . "user u
-					INNER JOIN " . $prefix . "usergroup_member gm
+				' . $prefix . 'user u
+					INNER JOIN ' . $prefix . 'usergroup_member gm
 						ON (u.user_id = gm.user_id)
-					INNER JOIN " . $prefix . "user_setting us
+					INNER JOIN ' . $prefix . 'user_setting us
 						ON (u.user_id = us.user_id)
 			WHERE
 				u.account_type = 0
-					AND (gm.group_id = " . (int) $group_id . "
-					OR u.user_id IN (" . $engine->ids_string($user_ids) . "))",
+					AND (gm.group_id = ' . (int) $group_id . '
+					OR u.user_id IN (' . $engine->ids_string($user_ids) . '))',
 				true);
 
 		if ($members)
@@ -120,10 +120,10 @@ function admin_massemail($engine, $module)
 	}
 
 	$available_groups = $engine->db->load_all(
-		"SELECT group_id, group_name " .
-		"FROM " . $prefix . "usergroup " .
-		"WHERE active = 1 " .
-		"ORDER BY BINARY group_name", true);
+		'SELECT group_id, group_name ' .
+		'FROM ' . $prefix . 'usergroup ' .
+		'WHERE active = 1 ' .
+		'ORDER BY BINARY group_name', true);
 
 	#Ut::debug_print_r($available_users);
 
@@ -147,13 +147,13 @@ function admin_massemail($engine, $module)
 					<option value="">[<?php echo $engine->_t('NoUser');?>]</option>
 <?php
 			$users = $engine->db->load_all(
-				"SELECT u.user_id, u.user_name, u.email_confirm, us.user_lang, us.allow_massemail " .
-				"FROM " . $prefix . "user u " .
-					"INNER JOIN " . $prefix . "user_setting us ON (u.user_id = us.user_id) " .
-				"WHERE u.enabled = 1 " .
+				'SELECT u.user_id, u.user_name, u.email_confirm, us.user_lang, us.allow_massemail ' .
+				'FROM ' . $prefix . 'user u ' .
+					'INNER JOIN ' . $prefix . 'user_setting us ON (u.user_id = us.user_id) ' .
+				'WHERE u.enabled = 1 ' .
 					"AND u.email_confirm = '' " .
-					"AND us.allow_massemail <> 0 " .
-				"ORDER BY BINARY u.user_name");
+					'AND us.allow_massemail <> 0 ' .
+				'ORDER BY BINARY u.user_name');
 
 			if ($users)
 			{

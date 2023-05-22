@@ -674,6 +674,11 @@ $wacko_translation = [
 	'NoWatchers'				=> '%1 没有关注者',
 	'NotOwnerToViewWatchers'	=> '您不是此页面的所有者，您无法查看该页面的关注者列表。',
 
+	// thumbnail
+	'TbnError'					=> '创建缩略图出错：%1',
+	'TbnImageAreaTooBig'		=> '尺寸超过%1的文件',
+	'TbnImageMissing'			=> '文件可能丢失：%1',
+
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> '为您的 <code>recovery_password</code> 生成密码哈希',
 
@@ -1241,11 +1246,13 @@ $wacko_translation = [
 	'InAYear'		=> '一年内',
 	'InYears'		=> ' %1 年内',
 
-	// binary multiples
-	'DecimalPrefixShort'		=> ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-	'DecimalPrefixLong'			=> ['字节', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
-	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-	'BinaryPrefixLong'			=> ['字节', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
+	// norm multiples
+	'ByteDecimalShort'			=> ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+	'ByteDecimalLong'			=> ['字节', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
+	'ByteBinaryShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+	'ByteBinaryLong'			=> ['字节', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
+	'PixelDecimalShort'			=> ['px', 'KP', 'MP', 'GP', 'TP', 'PP', 'EP', 'ZP', 'YP'],
+	'PixelDecimalLong'			=> ['pixel', 'Kpx', 'Mpx', 'Gpx', 'Tpx', 'Ppx', 'Epx', 'Zpx', 'Ypx'],
 
 	// loading error
 	'UnknownAction'				=> '未知动作',

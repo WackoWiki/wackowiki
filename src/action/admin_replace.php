@@ -5,15 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* USAGE:
-	{{admin_replace
-		[page="PageName"]
-		[options=1]
-		[lang="en"]
-		[mute=1]
-		[max=NUMBER]
-	}}
-
+/*
 	[A] search & replace form
 	[B] target matches selection form
 	[C] replace target text with replacement
@@ -23,6 +15,21 @@ if (!defined('IN_WACKO'))
 	- allow also $this->check_acl($user_name, $this->db->rename_global_acl)
 	- improve batch processing
 */
+
+$info = <<<EOD
+Description:
+	Replace edit allows administrators to do a global string find-and-replace on all the content pages of a wiki.
+
+Usage:
+	{{admin_replace}}
+
+Options:
+	[page="PageName"]
+	[options=1]
+	[lang="en"]
+	[mute=1]
+	[max=NUMBER]
+EOD;
 
 if (!$this->is_admin())
 {
@@ -45,83 +52,83 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 	{
 		$match =
 			($use_regex
-				? "(BINARY a.body REGEXP "		. $this->db->q($target) . " " .
-				  "OR BINARY a.title REGEXP "	. $this->db->q($target) . ") "
-				: "(BINARY a.body LIKE "		. $this->db->q('%' . $target . '%') . " " .
-				  "OR BINARY a.title LIKE "		. $this->db->q('%' . $target . '%') . ") "
+				? '(BINARY a.body REGEXP '	. $this->db->q($target) . ' ' .
+				'OR BINARY a.title REGEXP '	. $this->db->q($target) . ') '
+				: '(BINARY a.body LIKE '	. $this->db->q('%' . $target . '%') . ' ' .
+				'OR BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
 		);
 	}
 	else if ($pages || $comments)
 	{
 		$match =
 			($use_regex
-				? "(BINARY a.body REGEXP "		. $this->db->q($target) . ") "
-				: "(BINARY a.body LIKE "		. $this->db->q('%' . $target . '%') . ") "
+				? '(BINARY a.body REGEXP '	. $this->db->q($target) . ') '
+				: '(BINARY a.body LIKE '	. $this->db->q('%' . $target . '%') . ') '
 			);
 	}
 	else if ($titles)
 	{
 		$match =
 			($use_regex
-				? "(BINARY a.title REGEXP "		. $this->db->q($target) . ") "
-				: "(BINARY a.title LIKE "		. $this->db->q('%' . $target . '%') . ") "
+				? '(BINARY a.title REGEXP '	. $this->db->q($target) . ') '
+				: '(BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
 		);
 	}
 
 	// namespace: include tag and tag/%, not tag%
 	$selector =
 		($category_ids
-			? "LEFT JOIN " . $prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
-			: "") .
+			? 'LEFT JOIN ' . $prefix . 'category_assignment ca ON (a.page_id = ca.object_id) '
+			: '') .
 		($tag
-			? "LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) "
-			: "") .
-		"WHERE " .
+			? 'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) '
+			: '') .
+		'WHERE ' .
 			$match .
 			($tag
-				? "AND (a.tag = "	. $this->db->q($tag) . " " .
-				  "OR a.tag LIKE "	. $this->db->q($tag . '/%') . " " .
-				  "OR b.tag = "		. $this->db->q($tag) . " " .
-				  "OR b.tag LIKE "	. $this->db->q($tag . '/%') . ") "
-				: "") .
+				? 'AND (a.tag = '	. $this->db->q($tag) . ' ' .
+				'OR a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
+				'OR b.tag = '		. $this->db->q($tag) . ' ' .
+				'OR b.tag LIKE '	. $this->db->q($tag . '/%') . ') '
+				: '') .
 			($comments
 				? ($pages
-					?	""
-					:	"AND a.comment_on_id <> 0 ")
-				: "AND a.comment_on_id = 0 ") .
+					? ''
+					: 'AND a.comment_on_id <> 0 ')
+				: 'AND a.comment_on_id = 0 ') .
 			(!empty($this->sess->replace_unset)
-				? "AND a.page_id NOT IN (" . $this->ids_string($this->sess->replace_unset) . ") "
-				: "") .
+				? 'AND a.page_id NOT IN (' . $this->ids_string($this->sess->replace_unset) . ') '
+				: '') .
 			($lang
-				? "AND a.page_lang = " . $this->db->q($lang) . " "
-				: "") .
+				? 'AND a.page_lang = ' . $this->db->q($lang) . ' '
+				: '') .
 			($category_ids
-				? "AND ca.category_id IN (" . $this->ids_string($category_ids) . ") " .
-				  "AND ca.object_type_id = " . (int) OBJECT_PAGE . " "
-				: "") .
+				? 'AND ca.category_id IN (' . $this->ids_string($category_ids) . ') ' .
+				'AND ca.object_type_id = ' . (int) OBJECT_PAGE . ' '
+				: '') .
 			($deleted
-				? ""
+				? ''
 				: ($tag
-					? "AND (a.deleted <> 1 OR b.deleted <> 1) "
-					: "AND a.deleted <> 1 ")) .
-			" ";
+					? 'AND (a.deleted <> 1 OR b.deleted <> 1) '
+					: 'AND a.deleted <> 1 ')) .
+		' ';
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(a.page_id) AS n " .
-		"FROM " . $prefix . "page a " .
+		'SELECT COUNT(a.page_id) AS n ' .
+		'FROM ' . $prefix . 'page a ' .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $limit);
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
-			u.user_name, o.user_name as owner_name " .
-		"FROM " . $prefix . "page a " .
-			"LEFT JOIN " . $prefix . "user u ON (a.user_id = u.user_id) " .
-			"LEFT JOIN " . $prefix . "user o ON (a.owner_id = o.user_id) " .
+		'SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
+			u.user_name, o.user_name as owner_name ' .
+		'FROM ' . $prefix . 'page a ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
+			'LEFT JOIN ' . $prefix . 'user o ON (a.owner_id = o.user_id) ' .
 		$selector .
-		"ORDER BY a.tag " .
+		'ORDER BY a.tag ' .
 		$pagination['limit']);
 
 	foreach ($results as $result)
@@ -527,12 +534,12 @@ $use_regex		= (bool)	($_POST['use_regex']		?? 0);
 $edit_note		= (string)	trim(($_POST['edit_note']	?? ''));
 $minor_edit		= (bool)	($_POST['minor_edit']		?? 0);
 
-$edit_note		= $this->sanitize_text_field($edit_note, true);
-$show_form		= false;
+$edit_note			= $this->sanitize_text_field($edit_note, true);
+$show_search_form	= false;
 
 // remove \r (body contains only \n)
-$replacement	= str_replace("\r\n", "\n", $replacement);
-$target			= str_replace("\r\n", "\n", $target);
+$replacement		= str_replace("\r\n", "\n", $replacement);
+$target				= str_replace("\r\n", "\n", $target);
 
 // visualize line breaks in message sets
 $msg_replacement	= str_replace("\n", '↵', $replacement);
@@ -596,7 +603,7 @@ if ($action == 'replace_text')
 	// return to form
 	if (isset($_POST['back']))
 	{
-		$show_form = true;
+		$show_search_form = true;
 	}
 	else if (isset($_POST['replace']))
 	{
@@ -694,8 +701,8 @@ if ($action == 'select_pages')
 
 	if ($error)
 	{
-		$tpl->message	= $this->show_message($this->_t($error[0]), $error[1], false);
-		$show_form		= true;
+		$tpl->message		= $this->show_message($this->_t($error[0]), $error[1], false);
+		$show_search_form	= true;
 	}
 	else if (mb_strlen($target) >= 3)
 	{
@@ -724,17 +731,17 @@ if ($action == 'select_pages')
 					'<code>' . Ut::html($msg_target) . '</code>'),
 				'note', false);
 
-			$show_form = true;
+			$show_search_form = true;
 		}
 	}
 }
 else
 {
-	$show_form = true;
+	$show_search_form = true;
 }
 
 // [A] search & replace form
-if ($show_form)
+if ($show_search_form)
 {
 	unset(
 		$this->sess->replace_set,

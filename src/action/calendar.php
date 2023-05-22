@@ -93,7 +93,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		$day_names[$n] = utf8_ucfirst($this->date_format($t, $day_pattern));
 	}
 
-	[$year, $month_name]	= explode(',', $this->date_format($first_of_month, "yyyy,LLLL"));
+	[$year, $month_name]	= explode(',', $this->date_format($first_of_month, 'yyyy,LLLL'));
 	$weekday				= date('w', $first_of_month);
 
 	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day

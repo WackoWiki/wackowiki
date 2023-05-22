@@ -20,30 +20,30 @@ $load_wanted = function ($cluster, $limit)
 	$pref		= $this->prefix;
 
 	$selector =
-		"SELECT DISTINCT l.to_tag AS wanted_tag " .
-			"FROM " . $pref . "page_link l " .
-				"LEFT JOIN " . $pref . "page p ON " .
-				"((l.to_tag = p.tag " .
-					"AND l.to_page_id <> 0)) " .
-			"WHERE " .
+		'SELECT DISTINCT l.to_tag AS wanted_tag ' .
+			'FROM ' . $pref . 'page_link l ' .
+				'LEFT JOIN ' . $pref . 'page p ON ' .
+					'((l.to_tag = p.tag ' .
+						'AND l.to_page_id <> 0)) ' .
+			'WHERE ' .
 				($cluster
-					? "l.to_tag LIKE " . $this->db->q($cluster . '/%') . " AND "
-					: "") .
-				"p.tag is NULL GROUP BY wanted_tag ";
+					? 'l.to_tag LIKE ' . $this->db->q($cluster . '/%') . ' AND '
+					: '') .
+				'p.tag is NULL GROUP BY wanted_tag ';
 
 	// count pages
 	if ($count = $this->db->load_single(
-		"SELECT COUNT(*) AS n
-		FROM ( " .
+		'SELECT COUNT(*) AS n
+		FROM ( ' .
 			$selector .
-		") AS src"
+		') AS src'
 		, true))
 	{
 		$pagination = $this->pagination($count['n'], $limit);
 
 		$wanted = $this->db->load_all(
 				$selector .
-				"ORDER BY wanted_tag ASC " .
+				'ORDER BY wanted_tag ASC ' .
 				$pagination['limit']);
 
 		return [$wanted, $pagination];

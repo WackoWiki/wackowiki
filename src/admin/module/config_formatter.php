@@ -246,7 +246,7 @@ function admin_config_formatter($engine, $module)
 							($engine->db->timezone == $offset
 								? 'selected="selected"'
 								: ''
-							) . ">" . $timezone . "</option>\n";
+							) . '>' . $timezone . "</option>\n";
 					}
 					?>
 					</select>

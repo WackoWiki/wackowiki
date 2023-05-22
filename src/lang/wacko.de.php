@@ -674,6 +674,11 @@ $wacko_translation = [
 	'NoWatchers'				=> 'Keine Beobachter für %1',
 	'NotOwnerToViewWatchers'	=> 'Du bist nicht der Besitzer dieser Seite und kannst die Liste der Beobachter nicht einsehen.',
 
+	// thumbnail
+	'TbnError'					=> 'Fehler beim Erstellen des Vorschaubildes: %1',
+	'TbnImageAreaTooBig'		=> 'Datei mit Abmessungen größer als %1',
+	'TbnImageMissing'			=> 'Datei scheint zu fehlen: %1',
+
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Generiere den Passwort-Hash für dein <code>recovery_password</code>',
 
@@ -1240,11 +1245,13 @@ $wacko_translation = [
 	'InAYear'		=> 'in einem Jahr',
 	'InYears'		=> 'in %1 Jahren',
 
-	// binary multiples
-	'DecimalPrefixShort'		=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-	'DecimalPrefixLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
-	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
+	// norm multiples
+	'ByteDecimalShort'			=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+	'ByteDecimalLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
+	'ByteBinaryShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+	'ByteBinaryLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
+	'PixelDecimalShort'			=> ['px', 'KP', 'MP', 'GP', 'TP', 'PP', 'EP', 'ZP', 'YP'],
+	'PixelDecimalLong'			=> ['pixel', 'Kpx', 'Mpx', 'Gpx', 'Tpx', 'Ppx', 'Epx', 'Zpx', 'Ypx'],
 
 	// loading error
 	'UnknownAction'				=> 'Unbekannte Aktion',

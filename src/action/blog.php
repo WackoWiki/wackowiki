@@ -101,16 +101,16 @@ if (!empty($tag))
 	// collect data
 	// heavy lifting here (watch out for REGEXPs!)
 	$select_count =
-		"SELECT COUNT(p.page_id) AS n " .
+		'SELECT COUNT(p.page_id) AS n ' .
 		"FROM {$prefix}page p ";
 
 	$select_mode =
-		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
+		'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ' .
 		"FROM {$prefix}page p " .
 			"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ";
 
 	$order_by_mode =
-		"ORDER BY " . $order_by . " ";
+		'ORDER BY ' . $order_by . ' ';
 
 	if ($mode == 'latest')
 	{
@@ -118,8 +118,8 @@ if (!empty($tag))
 
 		$selector =
 			"WHERE p.tag REGEXP '^{$tag}{$blog_levels}$' " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 ";
+				'AND p.comment_on_id = 0 ' .
+				'AND p.deleted <> 1 ';
 
 		$sql_count	=
 			$select_count .
@@ -137,10 +137,10 @@ if (!empty($tag))
 		$selector =
 				"INNER JOIN {$prefix}category_assignment c ON (c.object_id = p.page_id) " .
 			"WHERE p.tag REGEXP '^{$tag}{$blog_levels}$' " .
-				"AND c.category_id = " . (int) $category_id . " " .
-				"AND c.object_type_id = 1 " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 ";
+				'AND c.category_id = ' . (int) $category_id . ' ' .
+				'AND c.object_type_id = 1 ' .
+				'AND p.comment_on_id = 0 ' .
+				'AND p.deleted <> 1 ';
 
 		$sql_count	=
 			$select_count .
@@ -152,9 +152,9 @@ if (!empty($tag))
 			$order_by_mode;
 
 		$category_title	= $this->db->load_single(
-			"SELECT category " .
+			'SELECT category ' .
 			"FROM {$prefix}category " .
-			"WHERE category_id = " . (int) $category_id . " ", false);
+			'WHERE category_id = ' . (int) $category_id . ' ', false);
 	}
 	else if ($mode == 'week')
 	{
@@ -162,9 +162,9 @@ if (!empty($tag))
 
 		$selector =
 			"WHERE p.tag REGEXP '^{$tag}{$blog_levels}$' " .
-				"AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 ";
+				'AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ' .
+				'AND p.comment_on_id = 0 ' .
+				'AND p.deleted <> 1 ';
 
 		$sql_count	=
 			$select_count .
@@ -182,9 +182,9 @@ if (!empty($tag))
 
 		$selector =
 			"WHERE p.tag REGEXP '^{$tag}{$blog_levels}$' " .
-				"AND p.created > " . $this->db->q($date) . " " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 ";
+				'AND p.created > ' . $this->db->q($date) . ' ' .
+				'AND p.comment_on_id = 0 ' .
+				'AND p.deleted <> 1 ';
 
 		$sql_count	=
 			$select_count .

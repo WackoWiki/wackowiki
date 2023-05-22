@@ -137,17 +137,17 @@ class Feed
 
 		// collect data
 		$pages = $this->engine->db->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
+			'SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang ' .
 			"FROM {$this->prefix}page p, " .
 				"{$this->prefix}acl AS a " .
-			"WHERE p.page_id = a.page_id " .
+			'WHERE p.page_id = a.page_id ' .
 				"AND a.privilege = 'read' AND a.list = '*' " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.noindex <> 1 " .
-				"AND p.deleted <> 1 " .
+				'AND p.comment_on_id = 0 ' .
+				'AND p.noindex <> 1 ' .
+				'AND p.deleted <> 1 ' .
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-			"ORDER BY p.created DESC " .
-			"LIMIT " . (int) $limit);
+			'ORDER BY p.created DESC ' .
+			'LIMIT ' . (int) $limit);
 
 		if ($pages)
 		{
@@ -294,15 +294,15 @@ class Feed
 	{
 		// collect data
 		$pages = $this->engine->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.modified, p.page_lang " .
+			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.modified, p.page_lang ' .
 			"FROM {$this->prefix}page p, " .
 				"{$this->prefix}acl AS a " .
-			"WHERE p.page_id = a.page_id " .
+			'WHERE p.page_id = a.page_id ' .
 				"AND a.privilege = 'read' AND a.list = '*' " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.noindex <> 1 " .
-				"AND p.deleted <> 1 " .
-			"ORDER BY p.modified DESC, BINARY p.tag");
+				'AND p.comment_on_id = 0 ' .
+				'AND p.noindex <> 1 ' .
+				'AND p.deleted <> 1 ' .
+			'ORDER BY p.modified DESC, BINARY p.tag');
 
 		$xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
 		$xml .= $this->engine->db->xml_sitemap_gz

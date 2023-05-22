@@ -14,7 +14,7 @@ $charset		= 'utf8mb4';
 $collation		= 'utf8mb4_unicode_520_ci';		// Unicode (UCA 5.2.0), case-insensitive, https://dev.mysql.com/doc/refman/8.0/en/charset-collation-names.html
 
 // get MariaDB / MySQL version
-$_db_version	= $this->db->load_single("SELECT version()");
+$_db_version	= $this->db->load_single('SELECT version()');
 $db_version		= $_db_version['version()'];
 
 echo '<h2>Upgrade Utilities</h2>';
@@ -55,7 +55,7 @@ if ($this->is_admin())
 	else if (isset($_POST['set_title']))
 	{
 		$pages = $this->db->load_all(
-			"SELECT page_id, tag, page_lang " .
+			'SELECT page_id, tag, page_lang ' .
 			"FROM {$prefix}page " .
 			"WHERE title = ''");
 
@@ -81,9 +81,9 @@ if ($this->is_admin())
 
 					$this->db->sql_query(
 						"UPDATE {$prefix}page " .
-						"SET title = " . $this->db->q($title) . " " .
-						"WHERE page_id = " . (int) $page['page_id'] . " " .
-						"LIMIT 1");
+						'SET title = ' . $this->db->q($title) . ' ' .
+						'WHERE page_id = ' . (int) $page['page_id'] . ' ' .
+						'LIMIT 1');
 
 					echo '<tr>
 							<td>' . $page['page_id'] . '</td>
@@ -121,9 +121,9 @@ if ($this->is_admin())
 	else if (isset($_POST['set_depth']))
 	{
 		$pages = $this->db->load_all(
-			"SELECT page_id, tag " .
+			'SELECT page_id, tag ' .
 			"FROM {$prefix}page " .
-			"WHERE comment_on_id = 0");
+			'WHERE comment_on_id = 0');
 
 		if (!empty($pages))
 		{
@@ -145,10 +145,10 @@ if ($this->is_admin())
 
 				$this->db->sql_query(
 					"UPDATE {$prefix}page SET " .
-						"depth		= " . (int) $depth . ", " .
-						"parent_id	= " . (int) $parent_id . " " .
-					"WHERE page_id = " . (int) $page['page_id'] . " " .
-					"LIMIT 1");
+						'depth		= ' . (int) $depth . ', ' .
+						'parent_id	= ' . (int) $parent_id . ' ' .
+					'WHERE page_id = ' . (int) $page['page_id'] . ' ' .
+					'LIMIT 1');
 
 				echo '<tr>
 						<td>' . $page['page_id'] . '</td>
@@ -182,9 +182,9 @@ if ($this->is_admin())
 	else if (isset($_POST['set_version_id']))
 	{
 		$pages = $this->db->load_all(
-			"SELECT page_id " .
+			'SELECT page_id ' .
 			"FROM {$prefix}revision " .
-			"GROUP BY page_id");
+			'GROUP BY page_id');
 
 		if (!empty($pages))
 		{
@@ -198,10 +198,10 @@ if ($this->is_admin())
 			foreach ($pages as $page)
 			{
 				$_revisions = $this->db->load_all(
-					"SELECT revision_id, page_id " .
+					'SELECT revision_id, page_id ' .
 					"FROM {$prefix}revision " .
-					"WHERE page_id = " . (int) $page['page_id'] . " " .
-					"ORDER BY modified DESC");
+					'WHERE page_id = ' . (int) $page['page_id'] . ' ' .
+					'ORDER BY modified DESC');
 
 				$t = count($_revisions);
 
@@ -211,9 +211,9 @@ if ($this->is_admin())
 
 					$this->db->sql_query(
 						"UPDATE {$prefix}revision SET " .
-							"version_id = " . (int) $version_id . " " .
-						"WHERE revision_id = " . (int) $_revision['revision_id'] . " " .
-						"LIMIT 1");
+							'version_id = ' . (int) $version_id . ' ' .
+						'WHERE revision_id = ' . (int) $_revision['revision_id'] . ' ' .
+						'LIMIT 1');
 
 					echo '<tr>
 							<td>' . $_revision['page_id'] . '</td>
@@ -392,9 +392,9 @@ if ($this->is_admin())
 	 */
 
 	$users = $this->db->load_all(
-		"SELECT user_id, user_name, LENGTH(password) AS password, email, email_confirm, signup_time, last_visit, total_pages, total_revisions, total_comments, total_uploads " .
-		"FROM " . $prefix . "user " .
-		"WHERE  LENGTH(password) = 32 OR LENGTH(password) = 64");
+		'SELECT user_id, user_name, LENGTH(password) AS password, email, email_confirm, signup_time, last_visit, total_pages, total_revisions, total_comments, total_uploads ' .
+		'FROM ' . $prefix . 'user ' .
+		'WHERE  LENGTH(password) = 32 OR LENGTH(password) = 64');
 
 	if ($users)
 	{
@@ -433,9 +433,9 @@ if ($this->is_admin())
 
 				// update database with the new password hash
 				$this->db->sql_query(
-					"UPDATE " . $prefix . "user SET " .
-						"password	= " . $this->db->q($hash) . " " .
-					"WHERE user_id = " . (int) $user['user_id']);
+					'UPDATE ' . $prefix . 'user SET ' .
+						'password	= ' . $this->db->q($hash) . ' ' .
+					'WHERE user_id = ' . (int) $user['user_id']);
 			}
 			else
 			{
@@ -463,7 +463,7 @@ if ($this->is_admin())
 		{
 			// remove obsolete salt field
 			$this->db->sql_query(
-				"ALTER TABLE " . $prefix . "user DROP salt");
+				'ALTER TABLE ' . $prefix . 'user DROP salt');
 		}
 		else
 		{
@@ -491,10 +491,10 @@ if ($this->is_admin())
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name " .
-		"FROM " . $prefix . "file " .
+		'SELECT file_id, page_id, user_id, file_size, file_ext, file_name ' .
+		'FROM ' . $prefix . 'file ' .
 		"WHERE mime_type = '' " .
-		"ORDER BY file_name ASC ");
+		'ORDER BY file_name ASC ');
 
 	if ($files)
 	{
@@ -524,9 +524,9 @@ if ($this->is_admin())
 			{
 				// update database with MIME type
 				$this->db->sql_query(
-					"UPDATE " . $prefix . "file SET " .
-						"mime_type	= " . $this->db->q($mime_type) . " " .
-					"WHERE file_id = " . (int) $file['file_id']);
+					'UPDATE ' . $prefix . 'file SET ' .
+						'mime_type	= ' . $this->db->q($mime_type) . ' ' .
+					'WHERE file_id = ' . (int) $file['file_id']);
 			}
 			else
 			{
@@ -570,10 +570,10 @@ if ($this->is_admin())
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT file_id, page_id, user_id, file_name " .
-		"FROM " . $prefix . "file " .
+		'SELECT file_id, page_id, user_id, file_name ' .
+		'FROM ' . $prefix . 'file ' .
 		"WHERE file_hash = '' " .
-		"ORDER BY file_name ASC ");
+		'ORDER BY file_name ASC ');
 
 	if ($files)
 	{
@@ -599,9 +599,9 @@ if ($this->is_admin())
 
 				// update database with the new file hash
 				$this->db->sql_query(
-					"UPDATE " . $prefix . "file SET " .
-						"file_hash	= " . $this->db->q($file_hash) . " " .
-					"WHERE file_id = " . (int) $file['file_id']);
+					'UPDATE ' . $prefix . 'file SET ' .
+						'file_hash	= ' . $this->db->q($file_hash) . ' ' .
+					'WHERE file_id = ' . (int) $file['file_id']);
 			}
 			else
 			{

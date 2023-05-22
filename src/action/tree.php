@@ -64,23 +64,23 @@ else
 
 // collect pages
 if ($pages = $this->db->load_all(
-	"SELECT page_id, tag, title, page_lang " .
-	"FROM " . $this->prefix . "page " .
-	"WHERE comment_on_id = 0 " .
+	'SELECT page_id, tag, title, page_lang ' .
+	'FROM ' . $this->prefix . 'page ' .
+	'WHERE comment_on_id = 0 ' .
 		($tag
-			? "AND tag LIKE " . $this->db->q($tag . '/%') . " "
-			: "") .
+			? 'AND tag LIKE ' . $this->db->q($tag . '/%') . ' '
+			: '') .
 		($user_id
-			? "AND owner_id <> " . (int) $user_id . " "
-			: "") .
+			? 'AND owner_id <> ' . (int) $user_id . ' '
+			: '') .
 		($lang
-			? "AND page_lang = " . $this->db->q($lang) . " "
-			: "") .
-		"AND deleted <> 1 " .
-	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci " .
+			? 'AND page_lang = ' . $this->db->q($lang) . ' '
+			: '') .
+		'AND deleted <> 1 ' .
+	'ORDER BY tag COLLATE utf8mb4_unicode_520_ci ' .
 		($sort == 'desc'
-			? "DESC"
-			: ""), true))
+			? 'DESC'
+			: ''), true))
 {
 	// pick all subpages up to the desired depth level
 	if ($depth > 0)
@@ -112,8 +112,8 @@ if ($pages = $this->db->load_all(
 		// cache links
 		if ($links = $this->db->load_all(
 			"SELECT {$this->page_meta} " .
-			"FROM " . $this->prefix . "page " .
-			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")", true))
+			'FROM ' . $this->prefix . 'page ' .
+			'WHERE page_id IN (' . $this->ids_string($page_ids) . ')', true))
 		{
 			foreach ($links as $link)
 			{

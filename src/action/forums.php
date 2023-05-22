@@ -38,16 +38,16 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	}
 
 	// make query
-	$sql =	"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.description, p.page_lang " .
-			"FROM " . $prefix . "page AS p, " .
-					  $prefix . "acl AS a " .
-			"WHERE p.page_id = a.page_id " .
+	$sql =	'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.description, p.page_lang ' .
+		'FROM ' . $prefix . 'page AS p, ' .
+					  $prefix . 'acl AS a ' .
+		'WHERE p.page_id = a.page_id ' .
 				"AND a.privilege = 'comment' " .
 				"AND a.list = '' ";
 
 	if (!isset($subforum))
 	{
-		$sql .= "AND p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " ";
+		$sql .= 'AND p.tag LIKE ' . $this->db->q($this->db->forum_cluster . '/%') . ' ';
 	}
 	else
 	{
@@ -63,10 +63,10 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 			$q_pages	.= $this->db->q($page);
 		}
 
-		$sql .= "AND p.tag IN (" . $q_pages . ") ";
+		$sql .= 'AND p.tag IN (' . $q_pages . ') ';
 	}
 
-	$sql .= "ORDER BY p.created ASC";
+	$sql .= 'ORDER BY p.created ASC';
 
 	// load sub forums data
 	$forums		= $this->db->load_all($sql, true);
@@ -108,21 +108,21 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 			{
 				// count total topics and posts
 				$counter = $this->db->load_single(
-					"SELECT COUNT(a.page_id) as topics_total, sum(a.comments) as posts_total " .
-					"FROM " . $prefix . "page a " .
-					"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-						"AND a.deleted <> 1 ", true);
+					'SELECT COUNT(a.page_id) as topics_total, sum(a.comments) as posts_total ' .
+					'FROM ' . $prefix . 'page a ' .
+					'WHERE a.tag LIKE ' . $this->db->q($forum['tag'] . '/%') . ' ' .
+						'AND a.deleted <> 1 ', true);
 
 				// load latest comment
 				$comments = $this->db->load_all(
-					"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.comment_on_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name " .
-					"FROM " . $prefix . "page a " .
-						"LEFT JOIN " . $prefix . "user u ON (a.user_id = u.user_id) " .
-						"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
-					"WHERE b.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-						"OR a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-						"AND a.deleted <> 1 " .
-					"ORDER BY a.created DESC ", true);
+					'SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.comment_on_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name ' .
+					'FROM ' . $prefix . 'page a ' .
+						'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
+						'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) ' .
+					'WHERE b.tag LIKE ' . $this->db->q($forum['tag'] . '/%') . ' ' .
+						'OR a.tag LIKE ' . $this->db->q($forum['tag'] . '/%') . ' ' .
+						'AND a.deleted <> 1 ' .
+					'ORDER BY a.created DESC ', true);
 
 				$comment = null;
 

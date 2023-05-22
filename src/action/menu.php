@@ -22,14 +22,14 @@ $menu_sorting = function ($a, $b)
 $load_user_menu = function ($user_id, $lang = '')
 {
 	return $this->db->load_all(
-		"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position " .
-		"FROM " . $this->prefix . "menu m " .
-			"LEFT JOIN " . $this->prefix . "page p ON (m.page_id = p.page_id) " .
-		"WHERE m.user_id = " . (int) $user_id . " " .
+		'SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position ' .
+		'FROM ' . $this->prefix . 'menu m ' .
+			'LEFT JOIN ' . $this->prefix . 'page p ON (m.page_id = p.page_id) ' .
+		'WHERE m.user_id = ' . (int) $user_id . ' ' .
 			($lang
-				? "AND m.menu_lang = " . $this->db->q($lang) . " "
-				: "") .
-		"ORDER BY m.menu_position", false);
+				? 'AND m.menu_lang = ' . $this->db->q($lang) . ' '
+				: '') .
+		'ORDER BY m.menu_position', false);
 };
 
 // set defaults
@@ -107,11 +107,11 @@ if (isset($_POST['_user_menu']))
 			$menu_title		= mb_substr(trim($menu_title), 0, 250);
 
 			$this->db->sql_query(
-				"UPDATE " . $prefix . "menu SET " .
-					"menu_position	= " . (int) $item['menu_position'] . ", " .
-					"menu_title		= " . $this->db->q($menu_title) . " " .
-				"WHERE menu_id		= " . (int) $item['menu_id'] . " " .
-				"LIMIT 1");
+				'UPDATE ' . $prefix . 'menu SET ' .
+					'menu_position	= ' . (int) $item['menu_position'] . ', ' .
+					'menu_title		= ' . $this->db->q($menu_title) . ' ' .
+				'WHERE menu_id		= ' . (int) $item['menu_id'] . ' ' .
+				'LIMIT 1');
 		}
 	}
 	else if (isset($_POST['add_menu_item']))
@@ -133,14 +133,14 @@ if (isset($_POST['_user_menu']))
 				{
 					// check if menu item already exists
 					if ($this->db->load_single(
-						"SELECT menu_id " .
-						"FROM " . $prefix . "menu " .
-						"WHERE user_id = " . (int) $_user_id . " " .
+						'SELECT menu_id ' .
+						'FROM ' . $prefix . 'menu ' .
+						'WHERE user_id = ' . (int) $_user_id . ' ' .
 							($default_menu
-								? "AND menu_lang = " . $this->db->q($_user_lang) . " "
-								: "") .
-							"AND page_id = " . (int) $_page_id." " .
-						"LIMIT 1"))
+								? 'AND menu_lang = ' . $this->db->q($_user_lang) . ' '
+								: '') .
+							'AND page_id = ' . (int) $_page_id. ' ' .
+						'LIMIT 1'))
 					{
 						$message .= $this->_t('BookmarkAlreadyExists');
 					}
@@ -148,12 +148,12 @@ if (isset($_POST['_user_menu']))
 					{
 						// writing new menu item
 						$_menu_position = $this->db->load_all(
-							"SELECT menu_id " .
-							"FROM " . $prefix . "menu " .
-							"WHERE user_id = " . (int) $_user_id . " " .
+							'SELECT menu_id ' .
+							'FROM ' . $prefix . 'menu ' .
+							'WHERE user_id = ' . (int) $_user_id . ' ' .
 								($default_menu
-									? "AND menu_lang = " . $this->db->q($_user_lang) . " "
-									: "")
+									? 'AND menu_lang = ' . $this->db->q($_user_lang) . ' '
+									: '')
 								, false);
 
 						$_menu_lang			= (($_user_lang != $page['page_lang']) && $default_menu === false
@@ -162,11 +162,11 @@ if (isset($_POST['_user_menu']))
 						$_menu_item_count	= count($_menu_position);
 
 						$this->db->sql_query(
-							"INSERT INTO " . $prefix . "menu SET " .
-								"user_id			= " . (int) $_user_id . ", " .
-								"page_id			= " . (int) $_page_id.", " .
-								"menu_lang			= " . $this->db->q($_menu_lang) . ", " .
-								"menu_position		= " . (int)($_menu_item_count + 1));
+							'INSERT INTO ' . $prefix . 'menu SET ' .
+								'user_id			= ' . (int) $_user_id . ', ' .
+								'page_id			= ' . (int) $_page_id. ', ' .
+								'menu_lang			= ' . $this->db->q($_menu_lang) . ', ' .
+								'menu_position		= ' . (int)($_menu_item_count + 1));
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set
 					}
@@ -206,9 +206,9 @@ if (isset($_POST['_user_menu']))
 		if (!empty($menu_ids))
 		{
 			$this->db->sql_query(
-				"DELETE " .
-				"FROM " . $prefix . "menu " .
-				"WHERE menu_id IN (" . $this->ids_string($menu_ids) . ")");
+				'DELETE ' .
+				'FROM ' . $prefix . 'menu ' .
+				'WHERE menu_id IN (' . $this->ids_string($menu_ids) . ')');
 		}
 	}
 

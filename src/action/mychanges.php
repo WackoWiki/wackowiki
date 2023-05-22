@@ -47,12 +47,12 @@ if ($user_id = $this->get_user_id())
 
 	$selector =
 		"FROM {$prefix}page " .
-		"WHERE user_id = " . (int) $user_id . " " .
-			"AND deleted <> 1 " .
-			"AND comment_on_id = 0 ";
+		'WHERE user_id = ' . (int) $user_id . ' ' .
+			'AND deleted <> 1 ' .
+			'AND comment_on_id = 0 ';
 
 	$count	= $this->db->load_single(
-		"SELECT COUNT(page_id) AS n " .
+		'SELECT COUNT(page_id) AS n ' .
 		$selector, true);
 
 	if ($mode == 'byname')
@@ -60,9 +60,9 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('byname'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, owner_id, user_id, tag, title, modified, page_lang " .
+			'SELECT page_id, owner_id, user_id, tag, title, modified, page_lang ' .
 			$selector .
-			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC, modified DESC " .
+			'ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC, modified DESC ' .
 			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];
@@ -106,9 +106,9 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, owner_id, user_id, tag, title, modified, edit_note, page_lang " .
+			'SELECT page_id, owner_id, user_id, tag, title, modified, edit_note, page_lang ' .
 			$selector .
-			"ORDER BY modified DESC, tag ASC " .
+			'ORDER BY modified DESC, tag ASC ' .
 			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];

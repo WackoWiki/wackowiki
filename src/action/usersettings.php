@@ -72,11 +72,11 @@ else if ($user = $this->get_user())
 			{
 				// update users table
 				$this->db->sql_query(
-					"UPDATE " . $this->prefix . "user SET " .
-						"real_name		= " . $this->db->q(trim($real_name)) . ", " .
-						"email			= " . $this->db->q($email) . " " .
-					"WHERE user_id = " . (int) $user['user_id'] . " " .
-					"LIMIT 1");
+					'UPDATE ' . $this->prefix . 'user SET ' .
+						'real_name		= ' . $this->db->q(trim($real_name)) . ', ' .
+						'email			= ' . $this->db->q($email) . ' ' .
+					'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
+					'LIMIT 1');
 
 				// log event
 				// $this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', SYSTEM_LANG), $user['user_name']));
@@ -88,28 +88,28 @@ else if ($user = $this->get_user())
 	if ($action == 'user_settings_extended')
 	{
 		$sql =
-		"doubleclick_edit	= " . (int) isset($_POST['doubleclick_edit']) . ", " .
-		"show_comments		= " . (int) isset($_POST['show_comments']) . ", " .
-		"show_spaces		= " . (int) isset($_POST['show_spaces']) . ", " .
-		"autocomplete		= " . (int) isset($_POST['autocomplete']) . ", " .
-		"numerate_links		= " . (int) isset($_POST['numerate_links']) . ", " .
-		"diff_mode			= " . (int) $_POST['diff_mode'] . ", " .
-		"dont_redirect		= " . (int) isset($_POST['dont_redirect']) . ", " .
-		"show_files			= " . (int) isset($_POST['show_files']) . ", " .
-		"hide_lastsession	= " . (int) isset($_POST['hide_lastsession']) . ", " .
-		"validate_ip		= " . (int) isset($_POST['validate_ip']) . ", " .
-		"noid_pubs			= " . (int) isset($_POST['noid_pubs']) . ", " .
-		"session_length		= " . (int) @$_POST['session_length'] . " "; // @ to normalize possible discrepancy
+		'doubleclick_edit	= ' . (int) isset($_POST['doubleclick_edit']) . ', ' .
+		'show_comments		= ' . (int) isset($_POST['show_comments']) . ', ' .
+		'show_spaces		= ' . (int) isset($_POST['show_spaces']) . ', ' .
+		'autocomplete		= ' . (int) isset($_POST['autocomplete']) . ', ' .
+		'numerate_links		= ' . (int) isset($_POST['numerate_links']) . ', ' .
+		'diff_mode			= ' . (int) $_POST['diff_mode'] . ', ' .
+		'dont_redirect		= ' . (int) isset($_POST['dont_redirect']) . ', ' .
+		'show_files			= ' . (int) isset($_POST['show_files']) . ', ' .
+		'hide_lastsession	= ' . (int) isset($_POST['hide_lastsession']) . ', ' .
+		'validate_ip		= ' . (int) isset($_POST['validate_ip']) . ', ' .
+		'noid_pubs			= ' . (int) isset($_POST['noid_pubs']) . ', ' .
+		'session_length		= ' . (int) @$_POST['session_length'] . ' '; // @ to normalize possible discrepancy
 	}
 	else if ($action == 'user_settings_notifications')
 	{
 		$sql =
-		"send_watchmail		= " . (int) isset($_POST['send_watchmail']) . ", " .
-		"allow_intercom		= " . (int) isset($_POST['allow_intercom']) . ", " .
-		"notify_minor_edit	= " . (int) isset($_POST['notify_minor_edit']) . ", " .
-		"notify_page		= " . (int) @$_POST['notify_page'] . ", ".		// @ to notify possible discrepancy
-		"notify_comment		= " . (int) @$_POST['notify_comment'] . ", ".	// @ to notify possible discrepancy
-		"allow_massemail	= " . (int) isset($_POST['allow_massemail']) . " ";
+		'send_watchmail		= ' . (int) isset($_POST['send_watchmail']) . ', ' .
+		'allow_intercom		= ' . (int) isset($_POST['allow_intercom']) . ', ' .
+		'notify_minor_edit	= ' . (int) isset($_POST['notify_minor_edit']) . ', ' .
+		'notify_page		= ' . (int) @$_POST['notify_page'] . ', ' .		// @ to notify possible discrepancy
+		'notify_comment		= ' . (int) @$_POST['notify_comment'] . ', ' .	// @ to notify possible discrepancy
+		'allow_massemail	= ' . (int) isset($_POST['allow_massemail']) . ' ';
 	}
 	else if ($action == 'user_settings_general')
 	{
@@ -118,22 +118,22 @@ else if ($user = $this->get_user())
 		$timezone	= $this->validate_timezone($_POST['timezone']);
 
 		$sql =
-		"user_lang			= " . $this->db->q($user_lang) . ", " .
-		"theme				= " . $this->db->q($theme) . ", " .
-		"timezone			= " . $this->db->q($timezone) . ", " .
-		"sorting_comments	= " . (int) $_POST['sorting_comments'] . ", " .
-		"menu_items			= " . (int) $_POST['menu_items'] . ", " .
-		"list_count			= " . (int) $_POST['list_count'] . " " ;
+		'user_lang			= ' . $this->db->q($user_lang) . ', ' .
+		'theme				= ' . $this->db->q($theme) . ', ' .
+		'timezone			= ' . $this->db->q($timezone) . ', ' .
+		'sorting_comments	= ' . (int) $_POST['sorting_comments'] . ', ' .
+		'menu_items			= ' . (int) $_POST['menu_items'] . ', ' .
+		'list_count			= ' . (int) $_POST['list_count'] . ' ';
 	}
 
 	if ($sql)
 	{
 		// update user_setting table
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "user_setting SET " .
+			'UPDATE ' . $this->prefix . 'user_setting SET ' .
 				$sql .
-			"WHERE user_id = " . (int) $user['user_id'] . " " .
-			"LIMIT 1");
+			'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
+			'LIMIT 1');
 
 		// log event
 		$this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', SYSTEM_LANG), $user['user_name']));
@@ -252,10 +252,10 @@ else if ($user = $this->get_user())
 		// user is logged in, display config form
 
 		$code = $this->db->load_single(
-			"SELECT email_confirm " .
-			"FROM " . $this->prefix . "user " .
-			"WHERE user_id = " . (int) $user['user_id'] . " " .
-			"LIMIT 1");
+			'SELECT email_confirm ' .
+			'FROM ' . $this->prefix . 'user ' .
+			'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
+			'LIMIT 1');
 
 		$tpl->user			= $user; // array
 		$tpl->userlink		= $this->user_link($user['user_name'], true, false);

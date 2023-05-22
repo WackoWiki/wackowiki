@@ -31,14 +31,14 @@ if ($user = $this->get_user())
 		}
 
 		$result = $this->db->load_all(
-			"SELECT
+			'SELECT
 				g.group_name,
 				u.user_id,
 				u.user_name
 			FROM
-				" . $this->prefix . "usergroup_member gm
-					INNER JOIN " . $this->prefix . "user u ON (gm.user_id = u.user_id)
-					INNER JOIN " . $this->prefix . "usergroup g ON (gm.group_id = g.group_id)", true);
+				' . $this->prefix . 'usergroup_member gm
+					INNER JOIN ' . $this->prefix . 'user u ON (gm.user_id = u.user_id)
+					INNER JOIN ' . $this->prefix . 'usergroup g ON (gm.group_id = g.group_id)', true);
 
 		foreach ($result as $row)
 		{

@@ -42,7 +42,7 @@ if ($this->get_user_name())
 		],
 	];
 
-	echo '<h3>' . $this->_t($action[$mode][0]) . "</h3>";
+	echo '<h3>' . $this->_t($action[$mode][0]) . '</h3>';
 
 	echo $this->action($action[$mode][1]);
 

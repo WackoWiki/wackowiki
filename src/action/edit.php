@@ -5,16 +5,31 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// If user has rights to edit page, show Edit link
-// {{edit [page="yourPage"] [text="your text"]}}
+$info = <<<EOD
+Description:
+	Creates a link to the edit handler, if the user has the right to edit the given page.
+
+Usage:
+	{{edit}}
+
+Options:
+	[page="EditThisPage"]
+	[text="your text"]
+EOD;
 
 // set defaults
+$help	??= 0;
 $page	??= '';
 $text	??= '';
 
 $tag	= $page ? $this->unwrap_link($page) : $this->tag;
-
 $href	= $this->href('edit', $tag);
+
+if ($help)
+{
+	$tpl->help_text	= $info;
+	return;
+}
 
 if (!$text)
 {

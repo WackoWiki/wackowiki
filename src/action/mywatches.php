@@ -55,21 +55,21 @@ if ($user_id = $this->get_user_id())
 		$selector =
 			"FROM {$prefix}page AS p " .
 				"LEFT JOIN {$prefix}watch AS w " .
-					"ON (p.page_id = w.page_id " .
-						"AND w.user_id = " . (int) $user_id . ") " .
-			"WHERE p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 " .
-				"AND p.owner_id <> " . (int) $this->db->system_user_id . " " .
-				"AND w.user_id IS NULL ";
+					'ON (p.page_id = w.page_id ' .
+						'AND w.user_id = ' . (int) $user_id . ') ' .
+			'WHERE p.comment_on_id = 0 ' .
+				'AND p.deleted <> 1 ' .
+				'AND p.owner_id <> ' . (int) $this->db->system_user_id . ' ' .
+				'AND w.user_id IS NULL ';
 
 		$sql_count	=
-			"SELECT COUNT(p.page_id) AS n " .
+			'SELECT COUNT(p.page_id) AS n ' .
 			$selector;
 
 		$sql =
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title " .
+			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title ' .
 			$selector .
-			"ORDER BY p.tag ASC ";
+			'ORDER BY p.tag ASC ';
 	}
 	else
 	{
@@ -83,20 +83,20 @@ if ($user_id = $this->get_user_id())
 		$icon_class		= 'watch-off';
 
 		$selector =
-			"WHERE w.user_id = " . (int) $user_id . " ";
+			'WHERE w.user_id = ' . (int) $user_id . ' ';
 
 		$sql_count	=
-			"SELECT COUNT( DISTINCT w.page_id ) as n " .
+			'SELECT COUNT( DISTINCT w.page_id ) as n ' .
 			"FROM {$prefix}watch w " .
 			$selector;
 
 		$sql =
-			"SELECT MAX(w.page_id) AS page_id, p.owner_id, p.user_id, p.tag, p.title " .
+			'SELECT MAX(w.page_id) AS page_id, p.owner_id, p.user_id, p.tag, p.title ' .
 			"FROM {$prefix}watch AS w " .
 				"LEFT JOIN {$prefix}page AS p " .
-					"ON (p.page_id = w.page_id) " .
+					'ON (p.page_id = w.page_id) ' .
 			$selector .
-			"GROUP BY p.tag, p.user_id, p.owner_id, p.title, p.page_id ";
+			'GROUP BY p.tag, p.user_id, p.owner_id, p.title, p.page_id ';
 	}
 
 	// print tabs

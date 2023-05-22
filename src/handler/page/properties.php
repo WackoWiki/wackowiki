@@ -24,22 +24,22 @@ if ($action === 'extended_properties')
 {
 	$mode = 'extended';
 	$this->db->sql_query(
-		"UPDATE " . $this->prefix . "page SET " .
-			"footer_comments	= " . (int) $_POST['footer_comments'] . ", " .
-			"footer_files		= " . (int) $_POST['footer_files'] . ", " .
+		'UPDATE ' . $this->prefix . 'page SET ' .
+			'footer_comments	= ' . (int) $_POST['footer_comments'] . ', ' .
+			'footer_files		= ' . (int) $_POST['footer_files'] . ', ' .
 			($custom_menus
-				?	"hide_toc			= " . (int) $_POST['hide_toc'] . ", " .
-					"hide_index			= " . (int) $_POST['hide_index'] . ", " .
-					"tree_level			= " . (int) $_POST['tree_level'] . ", "
-				:	"") .
+				?	'hide_toc			= ' . (int) $_POST['hide_toc'] . ', ' .
+					'hide_index			= ' . (int) $_POST['hide_index'] . ', ' .
+					'tree_level			= ' . (int) $_POST['tree_level'] . ', '
+				: '') .
 			($this->is_admin()
-				?	"allow_rawhtml		= " . (int) $_POST['allow_rawhtml'] . ", " .
-					"disable_safehtml	= " . (int) $_POST['disable_safehtml'] . ", "
-				:	"") .
-			"typografica		= " . (int) $_POST['typografica'] . ", " .
-			"noindex			= " . (int) $_POST['noindex'] . " " .
-		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
-		"LIMIT 1");
+				?	'allow_rawhtml		= ' . (int) $_POST['allow_rawhtml'] . ', ' .
+					'disable_safehtml	= ' . (int) $_POST['disable_safehtml'] . ', '
+				:	'') .
+			'typografica		= ' . (int) $_POST['typografica'] . ', ' .
+			'noindex			= ' . (int) $_POST['noindex'] . ' ' .
+		'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
+		'LIMIT 1');
 }
 
 if ($action === 'general_properties')
@@ -54,18 +54,18 @@ if ($action === 'general_properties')
 	$description	= $this->sanitize_text_field($_POST['description'], true);
 
 	$this->db->sql_query(
-		"UPDATE " . $this->prefix . "page SET " .
-			"page_lang			= " . $this->db->q($page_lang) . ", " .
-			"theme				= " . $this->db->q($theme) . ", " .
-			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
+		'UPDATE ' . $this->prefix . 'page SET ' .
+			'page_lang			= ' . $this->db->q($page_lang) . ', ' .
+			'theme				= ' . $this->db->q($theme) . ', ' .
+			'license_id			= ' . (int) ($_POST['license'] ?? '') . ', ' .
 			// menu_tag: unused currently, for use in custom theme menus
 			# "menu_tag			= " . $this->db->q($menu_tag) . ", " .
 			# "show_menu_tag	= " . (int) $_POST['show_menu_tag'] . ", " .
-			"title				= " . $this->db->q($title) . ", " .
-			"keywords			= " . $this->db->q($keywords) . ", " .
-			"description		= " . $this->db->q($description) . " " .
-		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
-		"LIMIT 1");
+			'title				= ' . $this->db->q($title) . ', ' .
+			'keywords			= ' . $this->db->q($keywords) . ', ' .
+			'description		= ' . $this->db->q($description) . ' ' .
+		'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
+		'LIMIT 1');
 }
 
 if ($_POST)
@@ -181,10 +181,10 @@ $tpl->version	= $this->page['version_id'];
 
 
 $watchers = $this->db->load_single(
-		"SELECT COUNT(page_id) AS n " .
-		"FROM " . $this->prefix . "watch " .
+		'SELECT COUNT(page_id) AS n ' .
+		'FROM ' . $this->prefix . 'watch ' .
 		"WHERE page_id = {$this->page['page_id']} " .
-		"LIMIT 1", true);
+		'LIMIT 1', true);
 
 $tpl->wat_number	= $watchers['n'];
 

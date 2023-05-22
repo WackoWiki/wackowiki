@@ -68,23 +68,23 @@ if (!isset($letters)
 	$this->sess->pi_time	= time() + 600;
 
 	$pages = $this->db->load_all(
-		"SELECT tag, title " .
-		"FROM " . $this->prefix . "page " .
-		"WHERE comment_on_id = 0 " .
-			"AND deleted = 0 " .
+		'SELECT tag, title ' .
+		'FROM ' . $this->prefix . 'page ' .
+		'WHERE comment_on_id = 0 ' .
+			'AND deleted = 0 ' .
 			($page
-				? "AND tag LIKE " . $this->db->q($tag . '/%') . " "
-				: "") .
+				? 'AND tag LIKE ' . $this->db->q($tag . '/%') . ' '
+				: '') .
 			($user_id
-				? "AND owner_id <> " . (int) $user_id . " "
-				: "") .
+				? 'AND owner_id <> ' . (int) $user_id . ' '
+				: '') .
 			($lang
-				? "AND page_lang = " . $this->db->q($lang) . " "
-				: "") .
-		"ORDER BY " .
+				? 'AND page_lang = ' . $this->db->q($lang) . ' '
+				: '') .
+		'ORDER BY ' .
 			($title
-				? "title ASC "
-				: "tag ASC ")
+				? 'title ASC '
+				: 'tag ASC ')
 			, true);
 
 	$letters = [];
@@ -107,28 +107,28 @@ if (!isset($letters)
 
 // get index pages
 $selector =
-	"FROM " . $this->prefix . "page " .
-	"WHERE comment_on_id = 0 " .
-		"AND deleted = 0 " .
+	'FROM ' . $this->prefix . 'page ' .
+	'WHERE comment_on_id = 0 ' .
+		'AND deleted = 0 ' .
 		($page
-			? "AND tag LIKE " . $this->db->q($tag . '/%') . " "
-			: "") .
+			? 'AND tag LIKE ' . $this->db->q($tag . '/%') . ' '
+			: '') .
 		($user_id
-			? "AND owner_id <> " . (int) $user_id . " "
-			: "") .
+			? 'AND owner_id <> ' . (int) $user_id . ' '
+			: '') .
 		($lang
-			? "AND page_lang = " . $this->db->q($lang) . " "
-			: "") .
+			? 'AND page_lang = ' . $this->db->q($lang) . ' '
+			: '') .
 		($letter !== ''
-			? "AND " .
+			? 'AND ' .
 				($title
-					? "title "
-					: "tag ") .
-				"COLLATE utf8mb4_unicode_520_ci LIKE " . $this->db->q($letter . '%') . " "
-			: "");
+					? 'title '
+					: 'tag ') .
+				'COLLATE utf8mb4_unicode_520_ci LIKE ' . $this->db->q($letter . '%') . ' '
+			: '');
 
 $count = $this->db->load_single(
-	"SELECT COUNT(page_id) AS n " .
+	'SELECT COUNT(page_id) AS n ' .
 	$selector
 	, true);
 
@@ -139,13 +139,13 @@ $pages_to_display	= [];
 $page_ids			= [];
 
 if ($pages = $this->db->load_all(
-	"SELECT page_id, owner_id, user_id, tag, title, page_lang " .
+	'SELECT page_id, owner_id, user_id, tag, title, page_lang ' .
 	$selector .
-	"ORDER BY " .
+	'ORDER BY ' .
 		($title
-			? "title "
-			: "tag ") .
-		"COLLATE utf8mb4_unicode_520_ci ASC " .
+			? 'title '
+			: 'tag ') .
+		'COLLATE utf8mb4_unicode_520_ci ASC ' .
 	$pagination['limit'], true))
 {
 	foreach ($pages as $page)

@@ -672,7 +672,12 @@ $wacko_translation = [
 	'Watchers'					=> 'Watchers voor %1',
 	'WatchersFor'				=> 'Watchers voor',
 	'NoWatchers'				=> 'Er zijn geen mensen die %1 in de gaten houden.',
-	'NotOwnerToViewWatchers'	=> 'U bent niet de eigenaar van deze pagina, en kunt de lijst van watchers dus niet bekijken.</em',
+	'NotOwnerToViewWatchers'	=> 'U bent niet de eigenaar van deze pagina, en kunt de lijst van watchers dus niet bekijken.',
+
+	// thumbnail
+	'TbnError'					=> 'Fout bij het aanmaken van de miniatuurafbeelding: %1',
+	'TbnImageAreaTooBig'		=> 'Bestand met afmetingen groter dan %1',
+	'TbnImageMissing'			=> 'Het bestand lijkt niet aanwezig te zijn: %1',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Genereer de wachtwoordhash voor uw <code>recovery_password</code>',
@@ -1241,11 +1246,13 @@ $wacko_translation = [
 	'InAYear'		=> 'in een jaar',
 	'InYears'		=> 'in %1 jaar',
 
-	// binary multiples
-	'DecimalPrefixShort'		=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-	'DecimalPrefixLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
-	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
+	// norm multiples
+	'ByteDecimalShort'			=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+	'ByteDecimalLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
+	'ByteBinaryShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+	'ByteBinaryLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
+	'PixelDecimalShort'			=> ['px', 'KP', 'MP', 'GP', 'TP', 'PP', 'EP', 'ZP', 'YP'],
+	'PixelDecimalLong'			=> ['pixel', 'Kpx', 'Mpx', 'Gpx', 'Tpx', 'Ppx', 'Epx', 'Zpx', 'Ypx'],
 
 	// loading error
 	'UnknownAction'				=> 'Onbekende actie',

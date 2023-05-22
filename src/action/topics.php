@@ -96,11 +96,11 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	$selector =
 		($category_id
-			? "INNER JOIN " . $prefix . "category_assignment AS k ON (k.object_id = p.page_id) "
-			: "") . ", " .
-			$prefix . "acl AS a " .
-		"WHERE p.page_id = a.page_id " .
-			"AND p.deleted <> 1 " .
+			? 'INNER JOIN ' . $prefix . 'category_assignment AS k ON (k.object_id = p.page_id) '
+			: '') . ', ' .
+			$prefix . 'acl AS a ' .
+		'WHERE p.page_id = a.page_id ' .
+			'AND p.deleted <> 1 ' .
 			"AND a.privilege = 'create' AND a.list = '' " .
 			"AND p.tag LIKE {$this->db->q($this->tag . '/%')} ";
 
@@ -108,21 +108,21 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	{
 		foreach ($pages as $page)
 		{
-			$selector .= "AND tag NOT LIKE " . $this->db->q($page . '/%') . " ";
+			$selector .= 'AND tag NOT LIKE ' . $this->db->q($page . '/%') . ' ';
 		}
 	}
 
 	if ($category_id)
 	{
 		$selector .=
-			"AND k.category_id IN ( " . (int) $category_id . " ) " .
-			"AND k.object_type_id = " . OBJECT_PAGE . " ";
+			'AND k.category_id IN ( ' . (int) $category_id . ' ) ' .
+			'AND k.object_type_id = ' . OBJECT_PAGE . ' ';
 	}
 
 	// make counter query
 	$sql =
-		"SELECT COUNT(p.page_id) AS n " .
-		"FROM " . $prefix . "page AS p " .
+		'SELECT COUNT(p.page_id) AS n ' .
+		'FROM ' . $prefix . 'page AS p ' .
 		$selector;
 
 	// count topics and make pagination
@@ -131,12 +131,12 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	// make collector query
 	$sql =
-		"SELECT p.page_id, p.user_id, p.owner_id, p.tag, p.title, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
-		"FROM " . $prefix . "page AS p " .
-			"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
-			"LEFT JOIN " . $prefix . "user o ON (p.owner_id = o.user_id) " .
+		'SELECT p.page_id, p.user_id, p.owner_id, p.tag, p.title, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name ' .
+		'FROM ' . $prefix . 'page AS p ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id) ' .
+			'LEFT JOIN ' . $prefix . 'user o ON (p.owner_id = o.user_id) ' .
 		$selector .
-		"ORDER BY p.commented DESC " .
+		'ORDER BY p.commented DESC ' .
 		$pagination['limit'];
 
 	// load topics data
@@ -156,15 +156,15 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 		// load latest topic comment
 		$sql_comments =
-			"SELECT p.tag, p.ip, p.created, p.comment_on_id, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name " .
-			"FROM " . $prefix . "page p " .
-				"LEFT JOIN " . $prefix . "page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) " .
-				"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
-				"LEFT JOIN " . $prefix . "user o ON (p.owner_id = o.user_id) " .
-			"WHERE p.comment_on_id IN (" . $this->ids_string($page_ids) . ") " .
-				"AND p2.page_id IS NULL " .
-				"AND p.comment_on_id <> 0 " .
-				"AND p.deleted <> 1";
+			'SELECT p.tag, p.ip, p.created, p.comment_on_id, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name ' .
+			'FROM ' . $prefix . 'page p ' .
+				'LEFT JOIN ' . $prefix . 'page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) ' .
+				'LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id) ' .
+				'LEFT JOIN ' . $prefix . 'user o ON (p.owner_id = o.user_id) ' .
+			'WHERE p.comment_on_id IN (' . $this->ids_string($page_ids) . ') ' .
+				'AND p2.page_id IS NULL ' .
+				'AND p.comment_on_id <> 0 ' .
+				'AND p.deleted <> 1';
 
 		$comments = $this->db->load_all($sql_comments);
 

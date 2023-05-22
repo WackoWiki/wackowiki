@@ -24,12 +24,12 @@ if (!preg_match('/^([' . self::PATTERN['ALPHANUM_P'] . '\.]+)$/u', $file_name))
 
 // 1. check existence
 $file = $this->db->load_single(
-	"SELECT file_id, user_id, file_name, file_ext " .
-	"FROM " . $this->prefix . "file " .
-	"WHERE page_id = " . (int) $page_id . " " .
-		"AND file_name = " . $this->db->q($file_name) . " " .
-		"AND deleted <> 1 " .
-	"LIMIT 1");
+	'SELECT file_id, user_id, file_name, file_ext ' .
+	'FROM ' . $this->prefix . 'file ' .
+	'WHERE page_id = ' . (int) $page_id . ' ' .
+		'AND file_name = ' . $this->db->q($file_name) . ' ' .
+		'AND deleted <> 1 ' .
+	'LIMIT 1');
 
 if (!$file)
 {

@@ -151,28 +151,28 @@ if ($can_view)
 	}
 
 	$selector =
-		"FROM " . $this->prefix . "file f " .
-			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->prefix . "page p ON (f.page_id = p.page_id) " .
+		'FROM ' . $this->prefix . 'file f ' .
+			'INNER JOIN ' . $this->prefix . 'user u ON (f.user_id = u.user_id) ' .
+			'LEFT JOIN ' . $this->prefix . 'page p ON (f.page_id = p.page_id) ' .
 		"WHERE f.page_id = '" . (int) ($global ? 0 : $file_page['page_id']) . "' " .
-			"AND f.picture_w <> 0 " .
-			"AND f.deleted <> 1 " .
+			'AND f.picture_w <> 0 ' .
+			'AND f.deleted <> 1 ' .
 		($owner
-			? "AND u.user_name = " . $this->db->q($owner) . " "
+			? 'AND u.user_name = ' . $this->db->q($owner) . ' '
 			: '');
 
 	// load only image files -> AND f.picture_w <> 0
 	$count = $this->db->load_single(
-		"SELECT COUNT(f.file_id) AS n " .
+		'SELECT COUNT(f.file_id) AS n ' .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $limit, $param_token);
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.created, u.user_name AS user, p.tag " .
+		'SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.created, u.user_name AS user, p.tag ' .
 		$selector .
-		"ORDER BY f." . $order_by . " " .
+		'ORDER BY f.' . $order_by . ' ' .
 		"LIMIT {$pagination['offset']}, {$limit}", true);
 
 	// Making a gallery

@@ -41,11 +41,11 @@ function admin_system_info($engine, $module)
 								);
 
 	// get MariaDB / mysql version
-	$_db_version			= $engine->db->load_single("SELECT version()");
+	$_db_version			= $engine->db->load_single('SELECT version()');
 	$db_version				= $_db_version['version()'];
 
 	// get SQL mode
-	$_sql_mode				= $engine->db->load_single("SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode");
+	$_sql_mode				= $engine->db->load_single('SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode');
 	$sql_mode_global		= $_sql_mode['@@GLOBAL.sql_mode'];
 	$sql_mode_session		= $_sql_mode['@@SESSION.sql_mode'];
 
