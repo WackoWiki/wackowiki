@@ -7160,11 +7160,11 @@ class Wacko
 					{
 						$this->db->sql_query(
 							'INSERT INTO ' . $this->prefix . 'menu SET ' .
-							'user_id			= ' . (int) $user['user_id'] . ', ' .
-							'page_id			= ' . (int) $menu_item[0] . ', ' .
-							'menu_lang			= ' . $this->db->q($menu_item[3]) . ', ' .
-							'menu_title			= ' . $this->db->q($menu_item[1]) . ', ' .
-							'menu_position		= ' . ++$position);
+								'user_id			= ' . (int) $user['user_id'] . ', ' .
+								'page_id			= ' . (int) $menu_item[0] . ', ' .
+								'menu_lang			= ' . $this->db->q($menu_item[3]) . ', ' .
+								'menu_title			= ' . $this->db->q($menu_item[1]) . ', ' .
+								'menu_position		= ' . ++$position);
 					}
 
 					$this->sess->menu_default = false;
