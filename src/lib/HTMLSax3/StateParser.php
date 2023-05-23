@@ -2,23 +2,6 @@
 
 namespace HTMLSax3;
 
-use HTMLSax3\ {
-	CaseFolding,
-	Entities_Parsed,
-	Entities_Unparsed,
-	Escape_Stripper,
-	Linefeed,
-	Tab,
-	Trim,
-	ClosingTagState,
-	EscapeState,
-	JaspState,
-	OpeningTagState,
-	PiState,
-	StartingState,
-	TagState,
-};
-
 /**
  * Define parser states
  */

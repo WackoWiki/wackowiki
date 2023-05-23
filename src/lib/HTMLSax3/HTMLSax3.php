@@ -29,10 +29,7 @@ namespace HTMLSax3;
 /**
  * Required classes
  */
-if (!defined('HTMLSax3'))
-{
-	define('HTMLSax3', 'XML/');
-}
+
 
 /**
  * Parsing states.
