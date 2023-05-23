@@ -91,7 +91,6 @@ const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
 // Do not change these three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 const WACKO_VERSION					= '6.1.21';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
-const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
 const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
 

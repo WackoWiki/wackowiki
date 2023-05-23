@@ -16,8 +16,11 @@
 
 /**
  * This package requires HTMLSax3 package
+ * @see autoload.conf
  */
-require_once XML_HTMLSAX3 . 'HTMLSax3.php';
+use HTMLSax3\ {
+	HTMLSax3,
+};
 
 /**
  * HTML_Safe Parser
@@ -603,7 +606,7 @@ class SafeHTML
 		$doc = $this->repackUTF7($doc);
 
 		// Instantiate the parser
-		$parser = new XML_HTMLSax3;
+		$parser = new HTMLSax3;
 
 		// Set up the parser
 		$parser->set_object($this);
