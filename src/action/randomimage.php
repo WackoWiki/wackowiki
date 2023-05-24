@@ -5,22 +5,32 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
-Random Image Action
+$info = <<<EOD
+Description:
+	Loads a random image.
 
- {{randomimage
-  [global=0|1]				// attached to page or global
-  [owner="UserName"]
-  [category="category"]
-  [caption=0|1]				// show caption
- }}
- */
+Usage:
+	{{randomimage}}
+
+Options:
+	[global=0|1]				// attached to page or global
+	[owner="UserName"]
+	[category="category"]
+	[caption=0|1]				// show caption
+EOD;
 
 // set defaults
 $caption	??= 0;
 $category	??= '';
 $global		??= 0;	// global attachments
+$help		??= 0;
 $owner		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if ($caption)	$param[]	= 'caption';
 
@@ -30,7 +40,7 @@ $prefix		= $this->prefix;
 $selector =
 	($category
 		? 'INNER JOIN ' . $prefix . 'category_assignment AS k ON (k.object_id = f.file_id) ' .
-		'LEFT JOIN ' . $prefix . 'category c ON (k.category_id = c.category_id) '
+		  'LEFT JOIN ' . $prefix . 'category c ON (k.category_id = c.category_id) '
 		: '') . ' ' .
 		'WHERE ' .
 			"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
@@ -40,8 +50,7 @@ $selector =
 		: '') .
 	($global
 		? 'AND f.page_id = 0 '
-		: 'AND f.page_id = ' . (int) $this->page['page_id'] . ' '
-		);
+		: 'AND f.page_id = ' . (int) $this->page['page_id'] . ' ');
 
 	if ($category)
 	{

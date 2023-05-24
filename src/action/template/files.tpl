@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= s =
 		<form action="[ ' href ' ]" method="get" name="file_search">
 			[ ' csrf: file_search ' ]

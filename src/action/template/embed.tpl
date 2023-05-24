@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= none _ =
 		<p><em>[ ' _t: EmbedNoURL ' ]</em></p>
 	=]

@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[ ' message ' ]
 	[= u _ =
 		<form action="[ ' href: upload ' ]" method="post" name="upload" enctype="multipart/form-data">

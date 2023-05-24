@@ -5,16 +5,20 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* USAGE:
-	{{include
-		[page="cluster"]
-		[nomark=1]
-		[notoc=1]
-		[nowarning=1]
-		[first_anchor="anchor1"]
-		[last_anchor="anchor2"]
-	}}
-*/
+$info = <<<EOD
+Description:
+	Writes the content of the included page directly into the body of the page (transclusion).
+
+Usage:
+	{{include page="SomePage"}}
+
+Options:
+	[nomark=1]
+	[notoc=1]
+	[nowarning=1]
+	[first_anchor="anchor1"]
+	[last_anchor="anchor2"]
+EOD;
 
 if (!isset($page))
 {
@@ -23,11 +27,18 @@ if (!isset($page))
 
 // set defaults
 $first_anchor	??= '';
+$help			??= 0;
 $last_anchor	??= '';
 $nomark			??= 0;
 $nowarning		??= 0;
 $revision_id	??= null;
 $track			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 // notoc=1 gets processed via regex in Paragrafica class
 

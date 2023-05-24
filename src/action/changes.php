@@ -5,13 +5,36 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays a list of the most recent changes in any cluster.
+
+Usage:
+	{{changes}}
+
+Options:
+	[page="cluster"]
+	[date="YYYY-MM-DD"]
+	[max=Number]
+	[title=1]
+	[noxml=1]
+EOD;
+
 // set defaults
-$date				??= $_GET['date'] ?? '';
-$minor_edit			??= (bool) ($_GET['minor_edit'] ?? true);
-$max				??= null;
-$noxml				??= 0;
-$page				??= '';
-$title				??= 0;
+$date			??= $_GET['date'] ?? '';
+$help			??= 0;
+$minor_edit		??= (bool) ($_GET['minor_edit'] ?? true);
+$max			??= null;
+$noxml			??= 0;
+$page			??= '';
+$title			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
+
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();

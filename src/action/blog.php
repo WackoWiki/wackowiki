@@ -5,24 +5,36 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* USAGE:
-	{{blog
-		[page="cluster"]
-		[mode="latest|week|from"]
-		[date="YYYY-MM-DD"]
-		[order="time|tag"]
-		[max=Number]
-		[title=1]
-		[noxml=1]
-	}}
-*/
+$info = <<<EOD
+Description:
+	Creates a blog in the namespace of your choice.
+
+Usage:
+	{{blog}}
+
+Options:
+	[page="cluster"]
+	[mode="latest|week|from"]
+	[date="YYYY-MM-DD"]
+	[order="time|tag"]
+	[max=Number]
+	[title=1]
+	[noxml=1]
+EOD;
 
 // set defaults
-$page			??= '/' . $this->tag;
-$date			??= $_GET['date'] ?? '';
+$help		??= 0;
+$page		??= '/' . $this->tag;
+$date		??= $_GET['date'] ?? '';
 
-$tag			= $this->unwrap_link($page);
-$error			= '';
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
+
+$tag		= $this->unwrap_link($page);
+$error		= '';
 
 if (!empty($tag))
 {

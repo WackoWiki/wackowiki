@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= mark _ =
 		<nav class="layout-box">
 			<p>

@@ -7,23 +7,38 @@ if (!defined('IN_WACKO'))
 
 /*
  Page Index Action
- {{pageindex
+ */
+
+$info = <<<EOD
+Description:
+	Outputs a complete directory of all pages on the site, ordered alphabetically.
+
+Usage:
+	{{pageindex}}
+
+Options:
 	[page="Cluster"]	// show page index only for a certain cluster
 	[max=50]			// number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
 	[letter="a"]		// only display pages whose name starts with this letter
 	[title=0|1]			// takes title inplace of tag
 	[system=0|1]		// includes or excludes system pages
 	[lang="ru"]			// show pages only in specified language
- }}
- */
+EOD;
 
 // set defaults
+$help		??= 0;
 $lang		??= '';
 $letter		??= '';
 $max		??= null;
 $page		??= '';
 $system		??= 1;
 $title		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $system
 	? $user_id		= null

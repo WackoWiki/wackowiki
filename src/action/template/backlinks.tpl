@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[ '' pagination '' ]
 	[= mark _ =
 		<div class="layout-box">

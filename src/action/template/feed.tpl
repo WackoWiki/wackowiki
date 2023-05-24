@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= nourl _ =
 		<p><em>[ ' _t: FeedNoURL ' ]</em></p>
 	=]

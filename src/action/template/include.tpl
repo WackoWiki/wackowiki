@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	<!--include-->
 	[= none _ =
 		<em>[ ' _t: SourcePageDoesntExist ' ] ([ ' link ' ])</em>

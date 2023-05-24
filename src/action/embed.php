@@ -7,22 +7,35 @@ if (!defined('IN_WACKO'))
 
 /*
 	Embed Action
-
-	The first three arguments here are required. The rest are optional.
-
-	{{embed
-		[url="file:the_movie.mp4"]
-		[width="100"]
-		[height="100"]
-		[align="left|center|right"]
-	}}
 */
+
+$info = <<<EOD
+Description:
+	Embeds an external application or interactive content, like PDF or videos.
+
+	The CSP directives must allow the selected source.
+
+Usage:
+	{{embed url="https://example.com/embed/zhec4tHwLzo"}}
+
+Options:
+	[width="400"]
+	[height="300"]
+	[align="left|center|right"]
+EOD;
 
 // set defaults
 $align		??= null;
 $height		??= 385;
+$help		??= 0;
 $url		??= null;
 $width		??= 640;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if (!$url)
 {

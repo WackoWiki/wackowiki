@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= form _ =
 		<form action="[ ' href ' ]" method="get" name="search">
 			[ ' href | hide_page ' ]

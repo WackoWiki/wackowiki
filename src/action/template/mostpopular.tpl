@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= mark _ =
 		<div class="layout-box">
 			<p>

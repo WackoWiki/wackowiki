@@ -9,8 +9,16 @@ if (!defined('IN_WACKO'))
  Most Popular Pages Action
 
  All arguments are optional, the "dontrecurse" argument is only used when the "page" argument is used and even then it's still optional
+ */
 
- {{mostpopular
+$info = <<<EOD
+Description:
+	Outputs a list of the most visited pages.
+
+Usage:
+	{{mostpopular}}
+
+Options:
 	[max=50]					// maximum number of pages to retrieve
 	[page="PageName"]			// page name to start from in the page hierarchy
 	[title=1]					// shows the page title
@@ -19,12 +27,12 @@ if (!defined('IN_WACKO'))
 	[counter=0|1]				// shows page hit counter
 	[system=0|1]				// excludes system pages
 	[lang="ru"]					// show pages only in specified language
- }}
- */
+EOD;
 
 // set defaults
 $counter		??= 1;
 $dontrecurse	??= false;
+$help			??= 0;
 $lang			??= '';
 $legend			??= '';
 $max			??= null;
@@ -32,6 +40,12 @@ $nomark			??= 0;
 $page			??= '';
 $system			??= 1;
 $title			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $prefix			= $this->prefix;
 

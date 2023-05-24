@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[ '' pagination '' ]
 
 	[= mark _ =

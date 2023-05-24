@@ -5,23 +5,26 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
-	Showing uploaded files
-
-	{{files
-		[page="PageName" or global=1 or all=1 or linked=1]
-		[order="ext|ext_desc|name_desc|size|size_desc|time|time_desc"]
-		[form=1]
-		[options=1]
-		[owner="UserName"]
-		[media=1]
-		[max=number]
-	}}
-*/
-
 // TODO:
 // - add option to filter by facets (user, language, category, type, type class, license)
 // - add reset button
+
+$info = <<<EOD
+Description:
+	Shows uploaded files.
+
+Usage:
+	{{files}}
+
+Options:
+	[page="PageName" or global=1 or all=1 or linked=1]
+	[order="ext|ext_desc|name_desc|size|size_desc|time|time_desc"]
+	[form=1]
+	[options=1]
+	[owner="UserName"]
+	[media=1]
+	[max=Number]
+EOD;
 
 $load_mime = function ()
 {
@@ -54,6 +57,7 @@ $dir		??= 'asc';
 $file_ids	??= null;
 $form		??= 0;		// show search form
 $global		??= 0;		// global attachments
+$help		??= 0;
 $lang		??= '';
 $legend		??= '';
 $linked		??= 0;		// file link in page
@@ -70,6 +74,12 @@ $params		??= null;	// for $_GET parameters to be passed with the page link
 $track		??= 0;
 $type_id	??= null;
 $user_id	??= null;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 // filter
 $category_id	= (int)		@$_GET['category_id'];

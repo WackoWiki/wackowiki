@@ -6,30 +6,42 @@ if (!defined('IN_WACKO'))
 }
 
 /*
- shows table of content
-
-	{{toc
-		page="!/SubTag"
-		from="h2"
-		to="h4"
-		numerate=[0|1]
-		start=[0|100]
-		legend="alternate legend"
-		nomark=[0|1]
-	}}
-
  requires activated paragrafica formatter
  toc is generated in paragrafica format
 */
 
+$info = <<<EOD
+Description:
+	Shows the table of content.
+
+Usage:
+	{{toc}}
+
+Options:
+	[page="!/SubTag"]
+	[from="h2"]
+	[to="h4"]
+	[numerate=0|1]
+	[start=0|100]
+	[legend="alternate legend"]
+	[nomark=0|1]
+EOD;
+
 // set defaults
 $from		??= '';
+$help		??= 0;
 $legend		??= '';
 $nomark		??= 0;
 $numerate	??= 0;
 $page		??= '';
 $start		??= 0;
 $to			??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if ($page)
 {

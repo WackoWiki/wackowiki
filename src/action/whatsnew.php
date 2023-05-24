@@ -7,18 +7,35 @@ if (!defined('IN_WACKO'))
 
 /*
  What's New Action
- Displays a list of all new, deleted, or changed pages, new attachments, and comments.
-
- {{whatsnew page="Cluster"}}
 
  TODO: table layout may suite visual orientation better, RSS feed
 */
 
+$info = <<<EOD
+Description:
+	Displays a list of all new, deleted, or changed pages, new attachments, and comments.
+
+Usage:
+	{{whatsnew}}
+
+Options:
+	[page="cluster"]
+	[max=Number]
+	[noxml=1]
+EOD;
+
 // set defaults
+$help		??= 0;
 $max		??= null;
 $noxml		??= 0;
 $page		??= '';
 $printed	??= [];
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if (!$max || $max > 100) $max = 100;
 

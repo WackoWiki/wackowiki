@@ -13,11 +13,31 @@ if (!defined('IN_WACKO'))
 	}}
 */
 
+$info = <<<EOD
+Description:
+	Uploads files to global or local namespace.
+
+Usage:
+	{{upload}}
+
+Options:
+	[global=1]
+	[maxsize=200]
+	[hide_description=1]
+EOD;
+
 // set defaults
 $global				??= 0;
+$help				??= 0;
 $hide_description	??= '';
 $maxsize			??= null;
 $rename				??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $maxsize	= (int) $maxsize;
 

@@ -513,6 +513,7 @@ $select_form = function ($pages, $pagination, $tcount, $max, array $o) use ($tpl
 // --------------------------------------------------------------------------------
 
 // set defaults
+$help			??= 0;
 $lang			??= '';
 $max			??= 50;	// (10 ... 100)
 $options		??= 0;
@@ -520,6 +521,12 @@ $padding		??= 40;
 $page			??= '/';
 $title			??= 1;
 $mute			??= 1;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $action			= (string)	($_POST['_action']			?? null);
 $categories		= (string)	($_POST['categories']		?? '');

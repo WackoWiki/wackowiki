@@ -5,29 +5,36 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// action/feed.php - WackoWiki Action to integrate RSS/Atom Feeds
-// requires SimplePie: https://simplepie.org
-/* USAGE:
-	{{feed
-		url="https://...[|https://...|https://...]"
-		[title="News feed title|no"]
-			"text" - displayed as title
-			"no" - means show no title
-			empty title - title taken from feed
-		[images=0] - text only for better readability
-		[max=x]
-		[time=1]
-		[nomark=1]
-			1 - makes feed header h3 and feed-items headers h4
-			0 - makes it all default
-	}}
+//
+/* requires SimplePie: https://simplepie.org
+
+	TODO:
+	* local image cache
+	* feed_acl
 */
 
-// TODO:
-//   * local image cache
-//   * feed_acl
+$info = <<<EOD
+Description:
+	RSS/Atom Feed Integration.
+
+Usage:
+	{{feed url="https://...[|https://...|https://...]"}}
+
+Options:
+	[title="News feed title|no"]
+		"text" - displayed as title
+		"no" - means show no title
+		empty title - title taken from feed
+	[images=0] - text only for better readability
+	[max=Number]
+	[time=1]
+	[nomark=1]
+		1 - makes feed header h3 and feed-items headers h4
+		0 - makes it all default
+EOD;
 
 // set defaults
+$help		??= 0;
 $images		??= 1;
 $max		??= 5;
 $nomark		??= 0;
@@ -35,6 +42,12 @@ $noxml		??= 0;
 $time		??= 1;
 $title		??= '';
 $url		??= null;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $error		= null;
 $p_mode		= [];

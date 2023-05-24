@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[ ' message ' ]
 	[= mark _ =
 		<small class="no-print"><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>

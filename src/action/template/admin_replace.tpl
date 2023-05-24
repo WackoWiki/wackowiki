@@ -1,11 +1,7 @@
 [ === main === ]
+	[ ' help ' ]
 	<h2>[ ' _t: ReplaceText ' ]</h2>
 	[ ' message ' ]<br>
-	[= help _ =
-		<pre>
-			[ ' text | pre ' ]
-		</pre>
-	=]
 	[= search _ =
 		<form action="[ ' href: ' ]" method="post" name="select_pages">
 			[ ' csrf: select_pages ' ]

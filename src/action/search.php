@@ -5,23 +5,28 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* USAGE:
-	{{search
-		[phrase="Term"]
-		[page="PageName"]
-		[topic=1]
-		[options=1]
-		[lang="en"]
-		[form=1]
-		[nomark=1]
-		[style=one of ("br","ul","ol","comma") ]
-		[scope=one of ("pages", "all")]
-	}}
-*/
-
 // TODO:
 // - too much loose ends, read thoroughly and refactor
 // - search also for attachments
+
+$info = <<<EOD
+Description:
+	Searches the content of the Wiki.
+
+Usage:
+	{{search}}
+
+Options:
+	[phrase="Term"]
+	[page="PageName"]
+	[topic=1]
+	[options=1]
+	[lang="en"]
+	[form=1]
+	[nomark=1]
+	[style=one of ("br","ul","ol","comma") ]
+	[scope=one of ("pages", "all")]
+EOD;
 
 $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = false)
 {
@@ -281,6 +286,7 @@ $highlight_this = function ($text, $words)
 // --------------------------------------------------------------------------------
 
 // set defaults
+$help		??= 0;
 $lang		??= '';
 $max		??= 10;	// (null) 50 -> 10 overwrites system default value!
 $nomark		??= 0;
@@ -292,6 +298,12 @@ $scope		??= '';
 $style		??= '';
 $title		??= 1;
 $topic		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $lang		= (string) ($_GET['lang'] ?? $lang);
 

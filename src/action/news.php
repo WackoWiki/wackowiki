@@ -5,17 +5,22 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* USAGE:
-	{{news
-		[page="cluster"]
-		[mode="latest|week|from"]
-		[date="YYYY-MM-DD"]
-		[order="time|tag"]
-		[max=Number]
-		[title=1]
-		[noxml=1]
-	}}
-*/
+$info = <<<EOD
+Description:
+	Creates a news feed in a predefined news cluster.
+
+Usage:
+	{{news}}
+
+Options:
+	[page="cluster"]
+	[mode="latest|week|from"]
+	[date="YYYY-MM-DD"]
+	[order="time|tag"]
+	[max=Number]
+	[title=1]
+	[noxml=1]
+EOD;
 
 if (!empty($this->db->news_cluster))
 {
@@ -27,11 +32,18 @@ if (!empty($this->db->news_cluster))
 
 	// set defaults
 	$date				??= $_GET['date'] ?? '';
+	$help				??= 0;
 	$max				??= 10;
 	$mode				??= 'latest';
 	$noxml				??= 0;
 	$order				??= '';
 	$title				??= 1;
+	
+	if ($help)
+	{
+		$tpl->help	= $this->action('help', ['info' => $info]);
+		return;
+	}
 
 	$pages				= [];
 	$p_mode				= [];

@@ -1,5 +1,6 @@
 
 [ === main ===]
+	[ ' help ' ]
 	[ '' pagination '' ]
 	[= letter _ =
 		<ul class="ul-letters">

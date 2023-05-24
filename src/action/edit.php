@@ -27,7 +27,7 @@ $href	= $this->href('edit', $tag);
 
 if ($help)
 {
-	$tpl->help_text	= $info;
+	$tpl->help	= $this->action('help', ['info' => $info]);
 	return;
 }
 

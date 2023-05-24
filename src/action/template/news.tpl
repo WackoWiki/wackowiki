@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= nocluster _ =
 		<br><br>[ ' _t: NewsNoClusterDefined ' ]
 	=]
