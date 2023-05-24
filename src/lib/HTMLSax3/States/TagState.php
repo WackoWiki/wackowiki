@@ -10,7 +10,7 @@ namespace HTMLSax3;
 class TagState
 {
 	/**
-	 * @param StateParser subclass
+	 * @param StateParser $context subclass
 	 * @return constant the next state to move into
 	 * @access protected
 	 */

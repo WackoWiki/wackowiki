@@ -10,7 +10,7 @@ namespace HTMLSax3;
 class JaspState
 {
 	/**
-	 * @param StateParser subclass
+	 * @param StateParser $context subclass
 	 * @return constant STATE_START
 	 * @access protected
 	 */

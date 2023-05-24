@@ -13,8 +13,7 @@ class OpeningTagState
 
 	/**
 	 * Handles attributes
-	 * @param string attribute name
-	 * @param string attribute value
+	 * @param string $context attribute name
 	 * @return void
 	 * @access protected
 	 * @see AttributeStartState
