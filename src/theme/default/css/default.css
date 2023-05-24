@@ -16,6 +16,11 @@
 
 	--ww-hover-primary: #ccffcc;
 	--ww-hover-secondary: #e7f9ff;
+	
+	--ww-buttonface: rgb(233, 233, 237);
+	--ww-buttonhighlight: rgb(255, 255, 255);
+	--ww-buttonshadow: rgb(160, 160, 160);
+	--ww-buttontext: rgb(0, 0, 0);
 
 	--ww-font-color: #000;
 	--ww-font-size: 14px;
@@ -1115,11 +1120,6 @@ a:target {
 	background-color: var(--ww-hover-secondary);
 }
 
-.buttonsspacer {
-	width: 10px;
-	height: 1px;
-}
-
 /** Wikiedit-related (JavaScript) ********************************************/
 	/* WikiEdit Toolbar -------------------------------------- */
 
@@ -1143,37 +1143,37 @@ a:target {
 }
 
 .toolbar li {
-	background: buttonface;
+	background: var(--ww-buttonface);
 }
 
 .toolbar .btn-,
 .toolbar .btn-hover,
 .toolbar .btn-active,
 .toolbar .btn-pressed {
-	background: buttonface;
-	color: ButtonText;
-	border: 1px solid buttonface;
+	background: var(--ww-buttonface);
+	color: var(--ww-buttontext);
+	border: 1px solid var(--ww-buttonface);
 	padding: 1px;
 	margin: 0;
 	cursor: pointer;
 }
 
 .toolbar .btn-hover {
-	border-color: buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	border-color: var(--ww-buttonhighlight) var(--ww-buttonshadow) var(--ww-buttonshadow) var(--ww-buttonhighlight);
 }
 
 .toolbar .btn-active,
 .toolbar .btn-pressed {
-	border-color: buttonshadow buttonhighlight buttonhighlight buttonshadow;
+	border-color: var(--ww-buttonshadow) var(--ww-buttonhighlight) var(--ww-buttonhighlight) var(--ww-buttonshadow);
 }
 
 .toolbar .btn-pressed {
-	background: buttonhighlight;
+	background: var(--ww-buttonhighlight);
 }
 
 .toolbar .btn-separator {
-	border-left: 1px solid buttonshadow;
-	border-right: 1px solid buttonhighlight;
+	border-left: 1px solid var(--ww-buttonshadow);
+	border-right: 1px solid var(--ww-buttonhighlight);
 	height: 20px;
 	margin: 3px;
 	padding: 0;
@@ -1291,8 +1291,8 @@ a:target {
 }
 	/* WikiEdit Autocomplete --------------------------------- */
 .autocomplete-inplace {
-	background: buttonface;
-	border: 1px solid buttonshadow;
+	background: var(--ww-buttonface);
+	border: 1px solid var(--ww-buttonshadow);
 	padding: 2px;
 	font: 12px var(--ww-font-sans-serif);
 }
