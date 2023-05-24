@@ -5,23 +5,32 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* shows all categories assigned to a particular object (page, file)
-	[one], [two], [tree]
-   USAGE:
-	{{categories
-		[page="cluster"]
-		[list=1] -
-		[nomark=1] -
-		[label=0|1] -
-	}}
- */
+$info = <<<EOD
+Description:
+	Shows all categories assigned to a particular object (page, file).
 
+Usage:
+	{{categories}}
+
+Options:
+	[page="cluster"]
+	[list=1]
+	[nomark=1]
+	[label=0|1]
+EOD;
 
 // set defaults
+$help		??= 0;
 $label		??= true;
 $list		??= 0;
 $nomark		??= 0;
 $type_id	??= OBJECT_PAGE;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if (empty($page))		$page		= $this->db->category_page;
 

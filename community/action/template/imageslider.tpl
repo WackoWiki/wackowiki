@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[ ' css ' ][ ' nofile ' ]
 
 	<div id="captioned-gallery">

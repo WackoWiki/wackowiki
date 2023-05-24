@@ -5,29 +5,37 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
- Most Commented Pages Action
+$info = <<<EOD
+Description:
+	Shows most commented pages.
 
- All arguments are optional, the "dontrecurse" argument is only used when the "page" argument is used and even then it's still optional
+Usage:
+	{{mostcommented}}
 
- {{mostcommented
+Options:
 	[max=50]					// maximum number of pages to retrieve
 	[page="PageName"]			// page name to start from in the page hierarchy
 	[title=1]					// shows the page title
 	[nomark=1]					// makes it possible to hide frame around
 	[dontrecurse="true|false"]	// if set to true the list will only include pages that are direct children of the "page" cluster
 	[lang="ru"]					// show pages only in specified language
- }}
- */
+EOD;
 
 // set defaults
 $dontrecurse	??= false;
+$help			??= 0;
 $lang			??= '';
 $legend			??= '';
 $max			??= null;
 $nomark			??= 0;
 $page			??= '';
 $title			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;

@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	<small>
 		[= hint _ =
 			<em>[ ' _t: AuthorsDisplayHint ' ]</em>

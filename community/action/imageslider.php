@@ -6,31 +6,45 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	Showing images as slider for uploaded by {{upload}} files
+	images as slider
 
 	The sole condition is that all the images must be exactly the same size.
 
 	version: 0.9
 
-	{{imageslider
-		[page="PageName" or global=1]
-		[order="time|name_desc|size|size_desc|ext"]
-		[owner="UserName"]
-		[media=1]
-		[max=number]
-	}}
-
 	https://wackowiki.org/doc/Dev/PatchesHacks/ImageSlider
  */
 
+$info = <<<EOD
+Description:
+	Showing images as slider for uploaded files.
+
+Usage:
+	{{imageslider}}
+
+Options:
+	[page="PageName" or global=1]
+	[order="time|name_desc|size|size_desc|ext"]
+	[owner="UserName"]
+	[media=1]
+	[max=number]
+EOD;
+
 // set defaults
 $global		??= 0;
+$help		??= 0;
 $max		??= null;
 $media		??= 1;
 $order		??= '';
 $owner		??= '';
 $page		??= '';
 $track		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if ($max)
 {
