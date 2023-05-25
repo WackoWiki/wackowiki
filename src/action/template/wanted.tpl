@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= none _ =
 		[ ' _t: NoWantedPages ' ]
 	=]

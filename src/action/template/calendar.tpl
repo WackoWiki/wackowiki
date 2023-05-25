@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	<table style="margin: auto;">
 		<tr>
 			[= m _ =

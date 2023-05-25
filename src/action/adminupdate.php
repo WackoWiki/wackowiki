@@ -5,13 +5,10 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// status: beta
-//
-// for testing and improvement - thought as upgrade routine for the installer
+// upgrade helper routine
 
 $prefix			= $this->prefix;
-$charset		= 'utf8mb4';
-$collation		= 'utf8mb4_unicode_520_ci';		// Unicode (UCA 5.2.0), case-insensitive, https://dev.mysql.com/doc/refman/8.0/en/charset-collation-names.html
+$collation		= 'utf8mb4_unicode_520_ci';
 
 // get MariaDB / MySQL version
 $_db_version	= $this->db->load_single('SELECT version()');

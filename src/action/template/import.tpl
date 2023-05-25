@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= f _ =
 		<div class="msg warning">[ ' hint ' ]</div><br>
 		<form action="[ ' href: ' ]" method="post" name="import_xml" enctype="multipart/form-data">

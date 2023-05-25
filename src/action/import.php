@@ -5,28 +5,43 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
-	{{import}}
-	http://example.com/somecluster/import --> {{import}}, to = "Test" .
-	Will be imported at: http://example.com/Test/*
-
-	i.e. no relative addressing
-
-	This is an Admins only action, it requires always write access and it will overwrite pages indicriminatory.
-	The old version of the page can be still accessed via revisions, you might ensure revisions are enabled and not purged.
-*/
-
 // TODO:
 //	logs event as XML page import as well as new created page in save_page function,
 //	maybe we log the import event only once as such and not for every imported page
 //	add a step for warning / confirmation (do you want overwrite? / Will add Import under ... [submit] [cancel])
 //	add better description
 
+$info = <<<EOD
+Description:
+	Import an XML file into a cluster.
+
+	http://example.com/SomeCluster/import --> {{import}}, to = "Test" .
+	Will be imported at: http://example.com/Test/*
+
+	i.e. no relative addressing
+
+	This is an Admins only action, it requires always write access and it will overwrite pages indicriminatory.
+	The old version of the page can be still accessed via revisions, you might ensure revisions are enabled and not purged.
+
+Usage:
+	{{import}}
+
+Options:
+	[mute=1]
+EOD;
+
+// set defaults
+$help		??= 0;
+$mute		??= 1;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
+
 if ($this->is_admin())
 {
-	// set defaults
-	$mute		??= 1;
-
 	$cluster	= $_POST['_to'] ?? '';
 
 	// show FORM

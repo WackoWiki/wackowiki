@@ -4,14 +4,35 @@ if (!defined('IN_WACKO'))
 {
 	exit;
 }
+
+$info = <<<EOD
+Description:
+	Loads a random line of a page into the body of data..
+
+Usage:
+	{{randomphrase}}
+
+Options:
+	[page="SomePage"]
+	[useemptystring=1]
+		indicates breaking up a page into blocks separated by an empty line rather than by lines
+EOD;
+
+// set defaults
+$help		??= 0;
+$page		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
+
 $use_empty_string	= (int) ($useemptystring ?? 0);
 $revision_id		= (int) ($_GET['revision_id'] ?? 0);
 
-// set defaults
-$page		??= '';
-
-$tag		= $this->unwrap_link($page);
-$page_id	= $this->get_page_id($tag);
+$tag				= $this->unwrap_link($page);
+$page_id			= $this->get_page_id($tag);
 
 if (!$this->has_access('read', $page_id))
 {
@@ -28,14 +49,14 @@ else
 		$strings		= preg_replace('/\{\{[^\}]+\}\}/u', '', $phrase_page['body']);
 		$strings		= $this->format($strings);
 		$strings		= $this->format($strings, 'post_wacko');
-		$splitexpr		= '|<br>|';
+		$split_expr		= '|<br>|';
 
 		if ($use_empty_string)
 		{
-			$splitexpr = '|<br>[\n\r ]*<br>|u';
+			$split_expr = '|<br>[\n\r ]*<br>|u';
 		}
 
-		$lines = preg_split($splitexpr, $strings);
+		$lines = preg_split($split_expr, $strings);
 		$lines = array_values(array_filter($lines, 'trim'));
 
 		if (!empty($lines))

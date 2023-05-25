@@ -3,22 +3,33 @@ if (!defined('IN_WACKO'))
 {
 	exit;
 }
-/*
-	print last editor of the page
+
+$info = <<<EOD
+Description:
+	Print last editor of the page.
 
 	Last edited by: SomeUser (22.12.2018 13:08 ) fixed two typos
 
-	{{lastedited [label=0|1] [note=0|1]}}
+Usage:
+	{{lastedited}}
 
-	icon	= show icon
-	label	= show 'Last edited by:' label
-	note	= show edit note
-*/
+Options:
+	[icon=0|1]		show icon
+	[label=0|1]		show 'Last edited by:' label
+	[note=0|1]		show edit note
+EOD;
 
 // set defaults
+$help		??= 0;
 $icon		??= false;
 $label		??= true;
 $note		??= false;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 if ($mtime = $this->page['modified'])
 {

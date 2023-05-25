@@ -5,14 +5,19 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
- shows pages that do not yet exist and are linked to
+$info = <<<EOD
+Description:
+	Shows pages that do not yet exist and are linked to for some cluster.
 
-	{{wanted
-		[page="cluster"]
-		[max=Number]
-	}}
-*/
+	By default it is equal to the current page. To display it for all namespaces, use root page="/".
+
+Usage:
+	{{wanted}}
+
+Options:
+	[page="Cluster"]
+	[max=Number]
+EOD;
 
 $load_wanted = function ($cluster, $limit)
 {
@@ -51,8 +56,15 @@ $load_wanted = function ($cluster, $limit)
 };
 
 // set defaults
+$help	??= 0;
 $page	??= '';
 $max	??= null;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $tag	= $this->unwrap_link($page);
 

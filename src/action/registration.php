@@ -5,6 +5,23 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Shows the registration form and performs the entire registration.
+
+Usage:
+	{{registration}}
+EOD;
+
+// set defaults
+$help			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
+
 $user_name		= '';
 $email			= '';
 $user_lang		= '';
@@ -25,7 +42,8 @@ if (isset($_GET['confirm']))
 	$this->login_page();
 }
 
-if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this->is_admin()))
+if (@$_POST['_action'] === 'register'
+	&& ($this->db->allow_registration || $this->is_admin()))
 {
 	// create new account if possible
 	// passing vars from user input

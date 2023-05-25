@@ -1,5 +1,5 @@
 [ === main === ]
-
+	[ ' help ' ]
 	[ '' icon '' ]
 	[= label _ =
 		[ ' _t: LastEditedBy ' ]:

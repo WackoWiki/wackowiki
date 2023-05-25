@@ -5,16 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* {{calendar
-		[year=2012|2013...] 		- year to display
-		[month=1|2|...]				- month to display
-		[highlight=today|1|2|...]	- date to highlight
-		[daywidth=3]				- length of weekday name
-		[range=1|2|...]				- number of month displayed starting with "month to display" parameter
-		[firstday=0|1]				- week satrts on: 0 - Sunday, 1 - Monday
-  }}
- */
-
 /* stylesheet parameters:
 	.calendar			(table container class)
 	.calendar-month		(month heading format)
@@ -23,14 +13,37 @@ if (!defined('IN_WACKO'))
 	.calendar-hl		(highlight)
 */
 
+$info = <<<EOD
+Description:
+	Displays a monthly calendar.
+
+Usage:
+	{{calendar}}
+
+Options:
+	[year=2012|2013...] 		- year to display
+	[month=1|2|...]				- month to display
+	[highlight=today|1|2|...]	- date to highlight
+	[daywidth=3]				- length of weekday name
+	[range=1|2|...]				- number of month displayed starting with "month to display" parameter
+	[firstday=0|1]				- week satrts on: 0 - Sunday, 1 - Monday
+EOD;
+
 // set defaults
 $days			??= '';
 $daywidth		??= '';
 $firstday		??= 1;
+$help			??= 0;
 $highlight		??= 'today';
 $month			??= '';
 $range			??= 1;
 $year			??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $time			= time();
 $current_year	= date('Y', $time);

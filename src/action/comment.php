@@ -5,12 +5,28 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// enables you to click comments inside from wikipages
-// {{comment [page="CommentThisPage"] [text="your text"]}}
+$info = <<<EOD
+Description:
+	Sets a link to the comments of a page.
+
+Usage:
+	{{comment}}
+
+Options:
+	[page="CommentThisPage"]
+	[text="your text"]
+EOD;
 
 // set defaults
+$help	??= 0;
 $page	??= '';
 $text	??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $tag	= $page ? $this->unwrap_link($page) : $this->tag;
 

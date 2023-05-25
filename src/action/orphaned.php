@@ -5,6 +5,20 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Outputs a list of lost pages (those pages that do not have any links to them) for some cluster.
+
+	By default it is equal to the current page. To display it for all namespaces, use root page="/".
+
+Usage:
+	{{orphaned}}
+
+Options:
+	[page="Cluster"]
+	[max=Number]
+EOD;
+
 $load_orphaned_pages = function ($tag, $limit, $deleted = false)
 {
 	$pagination	= [];
@@ -43,8 +57,15 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = false)
 };
 
 // set defaults
+$help	??= 0;
 $max	??= null;
 $page	??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info]);
+	return;
+}
 
 $tag	= $page ? $this->unwrap_link($page) : $this->tag;
 

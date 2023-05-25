@@ -5,14 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
-	{{upload
-		[global=1]
-		[maxsize=200]
-		[hide_description=1]
-	}}
-*/
-
 $info = <<<EOD
 Description:
 	Uploads files to global or local namespace.
