@@ -50,7 +50,7 @@ $license_id	??= null;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info]);
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'authors']);
 	return;
 }
 

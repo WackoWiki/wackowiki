@@ -26,7 +26,7 @@ Options:
 	[highlight=today|1|2|...]	- date to highlight
 	[daywidth=3]				- length of weekday name
 	[range=1|2|...]				- number of month displayed starting with "month to display" parameter
-	[firstday=0|1]				- week satrts on: 0 - Sunday, 1 - Monday
+	[firstday=0|1]				- week starts on: 0 - Sunday, 1 - Monday
 EOD;
 
 // set defaults
@@ -41,7 +41,7 @@ $year			??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info]);
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'calendar']);
 	return;
 }
 
@@ -67,7 +67,12 @@ if ($highlight == 'today')
 }
 else if ($highlight)
 {
-	$days = [$highlight => [null, null, $highlight]];
+	foreach (explode(',', $highlight) as $hl)
+	{
+		$hdays[$hl] = [null, null, $hl];
+	}
+
+	$days = $hdays;
 }
 
 if (!$daywidth)
@@ -194,8 +199,16 @@ for ($month; $month <= $_range; $month++)
 {
 	$tpl->enter('m_month_');
 
-	$generate_calendar($year, $month, $days, $daywidth, null, $firstday, []);
-	$days = []; // reset highlight array as we highlight only once per range
+	// set highlight context
+	$_days = ($month == $current_month
+				? ($highlight == 'today'
+					? ($year == $current_year
+						? $days
+						: [])
+					: $days)
+				: []);
+
+	$generate_calendar($year, $month, $_days, $daywidth, null, $firstday, []);
 
 	if ($n % 3 == 0 && $month < $_range)
 	{

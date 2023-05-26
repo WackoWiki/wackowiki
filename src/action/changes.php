@@ -13,7 +13,7 @@ Usage:
 	{{changes}}
 
 Options:
-	[page="cluster"]
+	[page="Cluster"]
 	[date="YYYY-MM-DD"]
 	[max=Number]
 	[title=1]
@@ -31,10 +31,9 @@ $title			??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info]);
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'changes']);
 	return;
 }
-
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();

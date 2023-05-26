@@ -5,9 +5,23 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO: add option for translated version
-
 // set defaults
 $info	??= '';
+$action	??= '';
+
+// check for translated version
+$lang		= $this->get_user_language();
+$help		= [];
+$lang_file	= Ut::join_path('action/lang', 'help.' . $lang . '.php');
+
+if (@file_exists($lang_file))
+{
+	include $lang_file;
+}
+
+if (isset($help[$action]))
+{
+	$info = $help[$action];
+}
 
 $tpl->help_text = $info;

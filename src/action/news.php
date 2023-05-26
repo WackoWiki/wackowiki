@@ -38,10 +38,10 @@ if (!empty($this->db->news_cluster))
 	$noxml				??= 0;
 	$order				??= '';
 	$title				??= 1;
-	
+
 	if ($help)
 	{
-		$tpl->help	= $this->action('help', ['info' => $info]);
+		$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'news']);
 		return;
 	}
 

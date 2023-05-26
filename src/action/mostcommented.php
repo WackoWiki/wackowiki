@@ -33,7 +33,7 @@ $title			??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info]);
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'mostcommented']);
 	return;
 }
 
