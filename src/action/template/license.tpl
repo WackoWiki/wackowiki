@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= l =
 		[= intro =
 			[ ' _t: DistributedUnder ' ]<br>

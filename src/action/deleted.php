@@ -5,7 +5,27 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// show deleted pages and comments
+$info = <<<EOD
+Description:
+	Displays a list of deleted pages and comments.
+
+Usage:
+	{{deleted}}
+
+Options:
+	[max=Number]
+EOD;
+
+// set defaults
+$help	??= 0;
+$max	??= null;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'deleted']);
+	return;
+}
+
 if ($this->is_admin())
 {
 	if (!isset($max) || $max > 1000) $max = 1000;

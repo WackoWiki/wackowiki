@@ -16,8 +16,29 @@ if (!defined('IN_WACKO'))
 	"toc-relative" not implemented yet
 */
 
+$info = <<<EOD
+Description:
+	It enters numeration for the paragraphs.
+
+Usage:
+	{{paragraphs}}
+
+Options:
+	[style="before|after|left|right"]		The style affects where paragraph numbers will be displayed.
+	[name="absolute|document-relative"]
+EOD;
+
+// set defaults
+$help			??= 0;
 $name			??= 'document-relative';
 $style			??= 'before';
+
+if ($help)
+{
+	echo $this->action('help', ['info' => $info, 'action' => 'paragraphs']);
+	return;
+}
+
 $start_depth	= '';
 $end_depth		= '';
 $link			= '';

@@ -6,32 +6,50 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-print page or file license.
-	{{license [license="CC-BY-SA"] [license_id=ID] [icon=0|1]}
-	license	= some free-form text (wiki-formatting applies) or one of predefined constants:
-				- CC-BY-ND			(CreativeCommons-Attribution-NoDerivatives)
-				- CC-BY-NC-SA		(CreativeCommons-Attribution-NonCommercial-ShareAlike)
-				- CC-BY-NC-ND		(CreativeCommons-Attribution-Non-Commercial No Derivatives)
-				- CC-BY-SA			(CreativeCommons-Attribution-ShareAlike)
-				- CC-BY-NC			(CreativeCommons-Attribution Non-Commercial)
-				- CC-BY				(CreativeCommons-Attribution)
-				- CC-Zero			(CreativeCommons-Zero / public domain)
-				- GNU-FDL			(GNU Free Documentation License)
-				- PD				(Public Domain)
-				- CR				(All Rights Reserved)
-	license_id	= assigned db value
-	icon		= show license icons
-	intro		= show intro text
-
 	https://creativecommons.org/choose/
 	https://en.wikipedia.org/wiki/Creative_Commons_license
 	https://creativecommons.org/about/downloads - icons
 */
 
+$info = <<<EOD
+Description:
+	Prints page or file license.
+
+Usage:
+	{{license}}
+
+Options:
+	[license="CC-BY-SA"]
+		some free-form text (wiki-formatting applies) or one of predefined constants:
+			- CC-BY-ND			(CreativeCommons-Attribution-NoDerivatives)
+			- CC-BY-NC-SA		(CreativeCommons-Attribution-NonCommercial-ShareAlike)
+			- CC-BY-NC-ND		(CreativeCommons-Attribution-Non-Commercial No Derivatives)
+			- CC-BY-SA			(CreativeCommons-Attribution-ShareAlike)
+			- CC-BY-NC			(CreativeCommons-Attribution Non-Commercial)
+			- CC-BY				(CreativeCommons-Attribution)
+			- CC-Zero			(CreativeCommons-Zero / public domain)
+			- GNU-FDL			(GNU Free Documentation License)
+			- PD				(Public Domain)
+			- CR				(All Rights Reserved)
+	[license_id=ID]
+		assigned db value
+	[icon=0|1]
+		show license icons
+	[intro=0|1]
+		show intro text
+EOD;
+
 // set defaults
+$help		??= 0;
 $icon		??= 0;
 $intro		??= 1;
 $license	??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'license']);
+	return;
+}
 
 // check for license_id
 if (empty($license) && !isset($license_id) && $this->db->enable_license)

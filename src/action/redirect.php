@@ -5,14 +5,31 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{redirect to="!/NewPage" temporary=[0 or 1] mute=[0|1]}}
+$info = <<<EOD
+Description:
+	Unconditionally it redirects the user to another page.
+
+Usage:
+	{{redirect to="!/NewPage"}}
+
+Options:
+	[temporary=0|1]
+	[mute=0|1]
+EOD;
 
 if (isset($page))		$to = $page;
 
 // set defaults
+$help		??= 0;
 $mute		??= 0;
 $temporary	??= 0;
 $to			??= '';
+
+if ($help)
+{
+	echo $this->action('help', ['info' => $info, 'action' => 'redirect']);
+	return;
+}
 
 $permanent = $temporary ? 0 : 1;
 

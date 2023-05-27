@@ -5,10 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
- shows tree list
+$info = <<<EOD
+Description:
+	Builds the page tree starting from the current or specified page.
 
- {{tree
+	Use [page="/"] to get the entire root.
+
+Usage:
+	{{tree}}
+
+Options:
 	[page="tag"]
 	[depth=3]
 	[title=1]
@@ -17,17 +23,14 @@ if (!defined('IN_WACKO'))
 	[sort="asc|desc"]
 	[system=0|1]		// excludes system pages
 	[lang="ru"]			// show pages only in specified language
- }}
-
- use [page="/"] to get the entire root
-
- */
+EOD;
 
 // constants
 $limit	= 500;
 
 // set defaults
 $depth		??= '';
+$help		??= 0;
 $lang		??= '';
 $legend		??= '';
 $nomark		??= 0;
@@ -35,6 +38,12 @@ $page		??= '/' . $this->page['tag'];
 $sort		??= '';
 $system		??= 0;
 $title		??= 1;
+
+if ($help)
+{
+	echo $this->action('help', ['info' => $info, 'action' => 'tree']);
+	return;
+}
 
 $system
 	? $user_id		= $this->db->system_user_id

@@ -6,28 +6,40 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	{{Hidden Content Wrapper
+	Hidden Content Wrapper
 
 	Version 1.4
 	David Millington aka Tann San
 
-	Shows hidden content based on user group or user name
-
-	[$username	=<comma deliminated list of user names>] - optional - $username="TannSan,BillyBob"
-	[$usergroup	=a single user group name] - optional - $usergroup="Admins"
-	[$text		=text to display if user meets login requirements]
-	[$alt		=alternative text to display to users who do not meet the login requirements] - optional
-
 	https://wackowiki.org/doc/Dev/PatchesHacks/HiddenContent
-	}}
-	*/
+*/
 
+$info = <<<EOD
+Description:
+	Shows hidden content based on user group or user name.
+
+Usage:
+	{{hiddencontent}}
+
+Options:
+	[username	= <comma deliminated list of user names>] - optional - username="TannSan,BillyBob"
+	[usergroup	= a single user group name] - optional - usergroup="Admins"
+	[text		= text to display if user meets login requirements]
+	[alt		= alternative text to display to users who do not meet the login requirements] - optional
+EOD;
 
 // set defaults
+$alt		??= '';
+$help		??= 0;
+$text		??= '';
 $usergroup	??= '';
 $username	??= '';
-$text		??= '';
-$alt		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'hiddencontent']);
+	return;
+}
 
 if ($usergroup !== '' || $username !== '')
 {
@@ -57,10 +69,10 @@ if ($usergroup !== '' || $username !== '')
 
 	if ($show_content)
 	{
-		echo $this->format($text);
+		$tpl->text = $this->format($text);
 	}
 }
 else if ($alt !== '')
 {
-	echo $this->format($alt);
+	$tpl->text = $this->format($alt);
 }

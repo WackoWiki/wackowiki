@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= nopages _ =
 		[ ' _t: NoDeletedPages ' ]
 	=]

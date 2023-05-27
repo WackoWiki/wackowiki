@@ -5,6 +5,20 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays a list of recent comments.
+
+Usage:
+	{{comments}}
+
+Options:
+	[page="Cluster"]
+	[max=Number]
+	[title=1]
+	[noxml=1]
+EOD;
+
 $load_recent_comments = function ($tag, $limit, $deleted = false)
 {
 	$pagination	= [];
@@ -46,10 +60,17 @@ $load_recent_comments = function ($tag, $limit, $deleted = false)
 };
 
 // set defaults
+$help	??= 0;
 $max	??= null;
 $noxml	??= 0;
 $page	??= '';
 $title	??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'comments']);
+	return;
+}
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();

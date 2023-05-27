@@ -5,6 +5,20 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays a list of the most recently commented pages.
+
+Usage:
+	{{commented}}
+
+Options:
+	[page="Cluster"]
+	[max=Number]
+	[title=1]
+	[noxml=1]
+EOD;
+
 $load_commented = function ($tag, $limit, $deleted = false)
 {
 	$comments	= [];
@@ -12,7 +26,7 @@ $load_commented = function ($tag, $limit, $deleted = false)
 	$prefix		= $this->prefix;
 
 	// going around the limitations of GROUP BY when used along with ORDER BY
-	// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
+	// http://dev.mysql.com/doc/refman/5.7/en/example-maximum-column-group-row.html
 	$page_ids = $this->db->load_all(
 		'SELECT a.page_id ' .
 		'FROM ' . $prefix . 'page a ' .
@@ -57,10 +71,17 @@ $load_commented = function ($tag, $limit, $deleted = false)
 };
 
 // set defaults
+$help	??= 0;
 $max	??= null;
 $noxml	??= 0;
 $page	??= '';
 $title	??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'commented']);
+	return;
+}
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
