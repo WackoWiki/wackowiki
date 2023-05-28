@@ -199,6 +199,7 @@ function get_directory_size($path)
 function remove_pack($pack)
 {
 	$pack_dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
+	$pack_file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack . '.tar');
 
 	// read log
 	$text	= file_get_contents(Ut::join_path($pack_dir, BACKUP_FILE_LOG));
@@ -233,7 +234,57 @@ function remove_pack($pack)
 		rmdir($pack_dir);
 	}
 
+	if (is_file($pack_file))
+	{
+		if (@unlink($pack_file))
+		{
+			clearstatcache();
+		}
+		else
+		{
+			$engine->set_message($engine->_t('FileRemovedFromFSError'), 'error');
+		}
+	}
+
 	return true;
+}
+
+function create_archive($pack)
+{
+	try {
+		// make sure the script has enough time to run (300 seconds = 5 minutes)
+		ini_set('max_execution_time', '300');
+		ini_set('set_time_limit', '0');
+
+		$dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
+		$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack . '.tar');
+
+		$archive = new PharData($file);
+		$archive->buildFromDirectory($dir);
+		#$archive->compress(Phar::GZ);
+
+
+		#echo 'Compressing all files done, check your server for the file ' . ' <code>' . Ut::html($file) . '</code>';
+	}
+	catch (Exception $e) {
+		echo $e->getMessage();
+	}
+
+	return true;
+}
+
+function extract_archive($pack)
+{
+	try {
+		$dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
+		$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack . '.tar');
+
+		$archive = new PharData($file);
+		$archive->extractTo($dir);
+	}
+	catch (Exception $e) {
+		echo $e->getMessage();
+	}
 }
 
 // construct sql for table restoration
@@ -246,7 +297,7 @@ function get_table($engine, $table, $drop = true): string
 	***************************************************************************/
 
 	$index			= [];
-	$schema_create	= "";
+	$schema_create	= '';
 	$field_query	= "SHOW FULL COLUMNS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
 
@@ -368,10 +419,10 @@ function get_data($engine, $tables, $pack, $table, $root = ''): int
 		{
 			$_root = $root;
 			$pages = $engine->db->load_all(
-				"SELECT page_id " .
-				"FROM " . $engine->prefix . "page " .
-				"WHERE tag LIKE " . $engine->db->q($_root . '/%') . " " .
-					"OR tag = " . $engine->db->q($_root) . " ");
+				'SELECT page_id ' .
+				'FROM ' . $engine->prefix . 'page ' .
+				'WHERE tag LIKE ' . $engine->db->q($_root . '/%') . ' ' .
+					'OR tag = ' . $engine->db->q($_root) . ' ');
 
 			foreach ($pages as $page)
 			{
@@ -390,13 +441,13 @@ function get_data($engine, $tables, $pack, $table, $root = ''): int
 
 		if ($table != $engine->prefix . 'page')	// not page table
 		{
-			$where = "WHERE {$tables[$table]['where']} IN (" . $cluster_pages[$root] . ") ";
+			$where = "WHERE {$tables[$table]['where']} IN (" . $cluster_pages[$root] . ') ';
 		}
 		else
 		{
-			$where = "WHERE tag LIKE " . $engine->db->q($root . '/%') . " " .
-						"OR tag = " . $engine->db->q($root) . " " .
-						"OR comment_on_id IN (" . $cluster_pages[$root] . ") ";
+			$where = 'WHERE tag LIKE ' . $engine->db->q($root . '/%') . ' ' .
+						'OR tag = ' . $engine->db->q($root) . ' ' .
+						'OR comment_on_id IN (' . $cluster_pages[$root] . ') ';
 		}
 	}
 
@@ -647,7 +698,7 @@ function put_data($engine, $pack, $table, $mode): int
 			}
 
 			// run and count sql query
-			$engine->db->sql_query("$mode INTO $table VALUES ( " . implode(', ', $row) . " )");
+			$engine->db->sql_query("$mode INTO $table VALUES ( " . implode(', ', $row) . ' )');
 			$t++;	// rows processed
 		}
 

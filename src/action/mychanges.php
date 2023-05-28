@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 // {{mychanges [max=Number] [bydate=1]}}
 
 // set defaults
-$bydate		??= '';
+$byname		??= 0;
 $max		??= null;
 $profile	??= null; // user action
 $title		??= 0;
@@ -55,7 +55,7 @@ if ($user_id = $this->get_user_id())
 		'SELECT COUNT(page_id) AS n ' .
 		$selector, true);
 
-	if ($mode == 'byname')
+	if ($mode == 'byname' || $byname)
 	{
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('byname'));
 

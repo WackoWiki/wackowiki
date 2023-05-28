@@ -28,7 +28,7 @@ Options:
 	[options=1]
 	[lang="en"]
 	[mute=1]
-	[max=NUMBER]
+	[max=Number]
 EOD;
 
 if (!$this->is_admin())

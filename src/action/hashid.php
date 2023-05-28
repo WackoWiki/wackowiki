@@ -5,15 +5,28 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* USAGE:
-	{{hashid [version=0|1]}}
-	version:
+$info = <<<EOD
+Description:
+	Shows hidden content based on user group or user name.
+
+Usage:
+	{{hashid}}
+
+Options:
+	[version=0|1]
 		0 - link to the page
 		1 - link to the current page version (default)
-*/
+EOD;
 
 // set defaults
-$version ??= 1;
+$help		??= 0;
+$version	??= 1;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'hiddencontent']);
+	return;
+}
 
 // import the Hashids class into the global namespace
 use Hashids\Hashids;

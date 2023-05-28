@@ -40,13 +40,11 @@ function admin_db_restore($engine, $module, $tables, $directories)
 	}
 
 	// RESTORE backup
-	if (isset($_POST['restore'])
+	if (    isset($_POST['restore'])
 		&& (isset($_POST['backup_id']) && $_POST['backup_id']))
 	{
 		// confirm restore backup
-		if (((isset($_POST['restore']) && isset($_POST['backup_id']))
-		||  (isset($_GET['restore']) && isset($_GET['backup_id'])))
-		&&  !isset($_POST['start']))
+		if (!isset($_POST['start']))
 		{
 			// read backup log
 			$text	= file_get_contents(Ut::join_path(UPLOAD_BACKUP_DIR, $backup_id, BACKUP_FILE_LOG));
@@ -57,7 +55,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			// check for possible backwards compatibility issues if the version differs
 			if ($log['wacko_version'] !== WACKO_VERSION)
 			{
-				$engine->show_message($engine->_t('RestoreWrongVersion'), 'error') ;
+				$engine->show_message($engine->_t('RestoreWrongVersion'), 'error');
 			}
 
 			// show details of backup package
@@ -203,7 +201,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			$pack	= $backup_id;
 
 			// set parameters
-			if (isset($_POST['ignore_keys']) && $_POST['ignore_keys']	== 1) $ikeys	= true;
+			if (isset($_POST['ignore_keys'])  && $_POST['ignore_keys']	== 1) $ikeys	= true;
 			if (isset($_POST['ignore_files']) && $_POST['ignore_files']	== 1) $ifiles	= true;
 
 			// read backup log
@@ -385,6 +383,32 @@ function admin_db_restore($engine, $module, $tables, $directories)
 	}
 	else
 	{
+		// archive backup
+		if (isset($_POST['archive']) && isset($_POST['backup_id']) && $backup_id)
+		{
+			$file = Ut::join_path(UPLOAD_BACKUP_DIR, $backup_id . '.tar');
+
+			if (!is_file($file))
+			{
+				create_archive($backup_id);
+
+				$engine->log(4, Ut::perc_replace($engine->_t('LogBackupArchived', SYSTEM_LANG), $backup_id));
+				$engine->show_message(
+					Ut::perc_replace(
+						$engine->_t('BackupArchived'),
+						' <code>' . Ut::html($file) . '</code>'),
+					'success');
+			}
+			else
+			{
+				$engine->show_message(
+					Ut::perc_replace(
+						$engine->_t('BackupArchiveExists'),
+						' <code>' . Ut::html($file) . '</code>'),
+					'notice');
+			}
+		}
+
 		// delete backup
 		if (   (isset($_POST['delete']) && $_POST['backup_id'])
 			|| (isset($_GET['delete'])  && $_GET['backup_id']))
@@ -422,6 +446,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 
 			$control_buttons =
 				'<button type="submit" name="restore" id="restore-submit">' . $engine->_t('BackupRestore') . '</button> ' .
+				'<button type="submit" name="archive" id="archive-submit">' . $engine->_t('ArchiveButton') . '</button> ' .
 				'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('BackupRemove') . '</button>';
 
 			// open backups dir and run through all subdirs

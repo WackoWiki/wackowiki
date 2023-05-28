@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 // action/mypages.php
 
 // set defaults
-$bychange		??= '';
-$bydate			??= '';
+$bychange		??= 0;
+$bycreation		??= 0;
 $max			??= null;
 $profile		??= ''; // user action
 $title			??= 0;
@@ -30,9 +30,9 @@ $by = function ($by) use ($profile, $mod_selector)
 
 // navigation
 $tabs	= [
-			''			=> 'OrderABC',
-			'bydate'	=> 'OrderDate',
-			'bychange'	=> 'OrderChange',
+			''				=> 'OrderABC',
+			'bycreation'	=> 'OrderCreation',
+			'bychange'		=> 'OrderChange',
 		];
 $mode	= @$_GET[$mod_selector];
 
@@ -50,7 +50,7 @@ if ($user_id = $this->get_user_id())
 
 	$prefix		= $this->prefix;
 
-	if ($mode == 'bydate' || $bydate)
+	if ($mode == 'bycreation' || $bycreation)
 	{
 		$selector =
 			"FROM {$prefix}page " .
@@ -62,7 +62,7 @@ if ($user_id = $this->get_user_id())
 			'SELECT COUNT(page_id) AS n ' .
 			$selector, true);
 
-		$pagination = $this->pagination($count['n'], $max, 'p', $by('bydate'));
+		$pagination = $this->pagination($count['n'], $max, 'p', $by('bycreation'));
 
 		if ($pages = $this->db->load_all(
 			'SELECT page_id, owner_id, user_id, tag, title, created, page_lang ' .
@@ -101,7 +101,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->nopages = true;
 		}
 	}
-	else if ($mode == 'bychange' || $bychange == 1)
+	else if ($mode == 'bychange' || $bychange)
 	{
 		$selector =
 			"FROM {$prefix}page AS p " .

@@ -398,6 +398,7 @@ $select_form = function ($pages, $pagination, $tcount, $max, array $o) use ($tpl
 // --------------------------------------------------------------------------------
 
 // set defaults
+$help			??= 0;
 $lang			??= '';
 $max			??= 50;	// (10 ... 100) overwritten by user settings
 $options		??= 0;
