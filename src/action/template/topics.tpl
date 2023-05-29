@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[ ' message ' ]
 	[= topics =
 		<div class="[ ' salign ' ] clearfix">

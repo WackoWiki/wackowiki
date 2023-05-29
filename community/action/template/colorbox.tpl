@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	<div style="[ ' s css ' ]">
 	[ ' text ' ]
 	[= spec _ =

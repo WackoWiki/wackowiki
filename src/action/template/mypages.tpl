@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= guest _ =
 		<em>[ ' _t: NotLoggedInThusOwned ' ]</em>
 	=]

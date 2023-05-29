@@ -5,10 +5,29 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays a list of the changed "observed" pages.
+
+Usage:
+	{{mychangeswatches}}
+
+Options:
+	[max=Number]
+	[title=1]
+EOD;
+
 // set defaults
+$help		??= 0;
 $max		??= null;
 $profile	??= ''; // user action
 $title		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'mychangeswatches']);
+	return;
+}
 
 if ($user_id = $this->get_user_id())
 {

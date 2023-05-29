@@ -31,11 +31,6 @@ Options:
 	[max=Number]
 EOD;
 
-if (!$this->is_admin())
-{
-	return;
-}
-
 // functions
 $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $deleted = false)
 {
@@ -525,6 +520,11 @@ $mute			??= 1;
 if ($help)
 {
 	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'admin_replace']);
+	return;
+}
+
+if (!$this->is_admin())
+{
 	return;
 }
 

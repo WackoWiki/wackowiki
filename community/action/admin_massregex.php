@@ -41,13 +41,8 @@ Options:
 	[options=1]
 	[lang="en"]
 	[mute=1]
-	[max=NUMBER]
+	[max=Number]
 EOD;
-
-if (!$this->is_admin())
-{
-	return;
-}
 
 // functions
 $search_text = function ($target, $tag, $limit, $filter = [], $deleted = false)
@@ -410,6 +405,11 @@ $mute			??= 1;
 if ($help)
 {
 	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'admin_massregex']);
+	return;
+}
+
+if (!$this->is_admin())
+{
 	return;
 }
 

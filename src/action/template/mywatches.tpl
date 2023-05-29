@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[ ' tabs ' ]
 	[ ' title | e ' ]<br><br>
 	[= denied =

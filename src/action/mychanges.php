@@ -5,13 +5,30 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{mychanges [max=Number] [bydate=1]}}
+$info = <<<EOD
+Description:
+	Displays a list of pages you have changed, with sorting options.
+
+Usage:
+	{{mychanges}}
+
+Options:
+	[max=Number]
+	[byname=1]
+EOD;
 
 // set defaults
 $byname		??= 0;
+$help		??= 0;
 $max		??= null;
 $profile	??= null; // user action
 $title		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'mychanges']);
+	return;
+}
 
 $title			= (int) $title;
 $profile		= ($profile? ['profile' => $profile] : []);

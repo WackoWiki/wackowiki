@@ -5,14 +5,32 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// action/mypages.php
+$info = <<<EOD
+Description:
+	Displays a list of pages that belong to you, sortable by alphabet or modification date.
+
+Usage:
+	{{mypages}}
+
+Options:
+	[max=Number]
+	[bychange=1]
+	[bycreation=1]
+EOD;
 
 // set defaults
 $bychange		??= 0;
 $bycreation		??= 0;
+$help			??= 0;
 $max			??= null;
 $profile		??= ''; // user action
 $title			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'mypages']);
+	return;
+}
 
 $current_char	= '';
 $title			= (int) $title;

@@ -5,15 +5,30 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// shows forum topics list
-// {{topics [pages="subtag1, subtag2, ..."]}}
-//		pages	= when creating multilevel forums this optional parameter passes
-//				  a comma-delimited list of tag names of pages that must be
-//				  considered sub forums, so topics under these cluster subpages
-//				  will not be displayed. tags must be absolute
+$info = <<<EOD
+Description:
+	Shows forum topics list.
+
+Usage:
+	{{topics}}
+
+Options:
+	[pages="subtag1, subtag2, ..."]
+		When creating multilevel forums this optional parameter passes
+		a comma-delimited list of tag names of pages that must be
+		considered sub forums, so topics under these cluster subpages
+		will not be displayed. Tags must be absolute.
+EOD;
 
 // set defaults
+$help		??= 0;
 $pages		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'topics']);
+	return;
+}
 
 $prefix		= $this->prefix;
 

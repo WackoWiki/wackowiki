@@ -5,14 +5,32 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// generates the hash for a new recovery_password
-// {{admin_recovery}}
-// 'recovery_password' => 'add hash here',
+$info = <<<EOD
+Description:
+	Generates the hash for a new recovery_password.
+
+	'recovery_password' => 'add hash here',
+
+Usage:
+	{{admin_recovery}}
+
+EOD;
+
+// set defaults
+$help		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'admin_recovery']);
+	return;
+}
 
 if ($this->is_admin())
 {
 	$error		= '';
 	$action		= $_POST['_action'] ?? null;
+
+	$tpl->enter('admin_');
 
 	if ($action === 'generate_hash')
 	{
@@ -55,4 +73,6 @@ if ($this->is_admin())
 	$tpl->autocomplete	= $this->form_autocomplete_off();
 	$tpl->href			= $this->href();
 	$tpl->complexity	= $this->show_password_complexity();
+
+	$tpl->leave(); // admin_
 }

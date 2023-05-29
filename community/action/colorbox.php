@@ -5,28 +5,38 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
+$info = <<<EOD
+Description:
+	Visualizes color sets as boxes.
 
-visualize color sets as boxes
+Usage:
+	{{colorbox}}
 
-{{colorbox bg_color="#FDFEB8" border_color="#FFBB00"}}
-	$bg_color			- background color
-	$border_color		- border color
-	$text				- description
-	$text_color			- text color
-	$border_width		- border width
-	$width				- width
-	$spec				- show color values
-*/
+Options:
+	[bg_color="#ffa"]		- background color
+	[border_color="#000"]	- border color
+	[border_width="3px"]	- border width
+	[spec=0|1]				- show color values
+	[text="description"]	- description
+	[text_color="#000"]		- text color
+	[width="300px"]			- width
+EOD;
 
 // set defaults
-$text				??= null;
-$border_width		??= '1px';
 $bg_color			??= '#ffa';
-$border_color		??= '#000000';
-$text_color			??= '#000000';
-$width				??= '200px';
+$border_color		??= '#000';
+$border_width		??= '1px';
+$help				??= 0;
 $spec				??= 1;
+$text				??= null;
+$text_color			??= '#000';
+$width				??= '200px';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'colorbox']);
+	return;
+}
 
 $sanitize = function($value, $filter)
 {

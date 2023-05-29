@@ -5,6 +5,23 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	List of all pages under the "observation" of this user.
+
+Usage:
+	{{mywatches}}
+EOD;
+
+// set defaults
+$help		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'mywatches']);
+	return;
+}
+
 if ($user_id = $this->get_user_id())
 {
 	// set defaults

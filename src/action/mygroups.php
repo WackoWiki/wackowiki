@@ -5,10 +5,26 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// action/mygroups.php
+$info = <<<EOD
+Description:
+	Displays the groups you're a member.
+
+Usage:
+	{{mygroups}}
+
+Options:
+	[nomark=1]
+EOD;
 
 // set defaults
+$help		??= 0;
 $nomark		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'mygroups']);
+	return;
+}
 
 $my_groups = function ($user_id, $groups) use ($tpl)
 {

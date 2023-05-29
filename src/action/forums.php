@@ -5,16 +5,31 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// shows sub forums list
-// {{forums [pages="subtag1, subtag2, ..."]}}
-//		pages	= to create multilevel forums this optional parameter passes
-//				  a comma-delimited list of tag names of pages that must be
-//				  considered sub forums, and not topics. tags must be absolute (not relative)
-//		if you define pages, it must be done for all sub forums and topic pages
+$info = <<<EOD
+Description:
+	Shows sub forums list.
 
-// define variables
+Usage:
+	{{forums}}
+
+Options:
+	[pages="subtag1, subtag2, ..."]
+		To create multilevel forums this optional parameter passes
+		a comma-delimited list of tag names of pages that must be
+		considered sub forums, and not topics. Tags must be absolute (not relative).
+		If you define pages, it must be done for all sub forums and topic pages.
+EOD;
+
+// set defaults
+$help		??= 0;
 $pages		??= '';
 $noxml		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'forums']);
+	return;
+}
 
 $comment	= null;
 $prefix		= $this->prefix;

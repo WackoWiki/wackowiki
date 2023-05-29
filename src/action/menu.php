@@ -5,7 +5,17 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{menu system=[0|1]}}
+$info = <<<EOD
+Description:
+	To edit and customize your bookmarks.
+
+Usage:
+	{{menu}}
+
+Options:
+	[system=1]
+		Global default bookmarks are displayed for administrators to edit.
+EOD;
 
 $menu_sorting = function ($a, $b)
 {
@@ -33,7 +43,14 @@ $load_user_menu = function ($user_id, $lang = '')
 };
 
 // set defaults
+$help			??= 0;
 $system			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'menu']);
+	return;
+}
 
 $default_menu	= false;
 $menu_lang		= '';
@@ -53,8 +70,6 @@ if ($this->is_admin() && $system)
 	{
 		$menu_lang = $this->db->language;
 	}
-
-	#$this->set_menu(MENU_DEFAULT);
 }
 else
 {
@@ -254,7 +269,11 @@ if ($_user_id)
 
 	if ($default_menu)
 	{
+		$tpl->enter('default_');
+
 		$tpl->lang_select	= $this->show_select_lang('lang_new', $menu_lang, false);
 		$tpl->menulang		= $menu_lang;
+
+		$tpl->leave(); // default_
 	}
 }
