@@ -5,8 +5,28 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// action args:
+$info = <<<EOD
+Description:
+	Shows list with registered users together with a quantity of pages belonging to them..
 
+Usage:
+	{{users}}
+
+Options:
+	[max=Number]
+EOD;
+
+// set defaults
+$help		??= 0;
+$max		??= null;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'users']);
+	return;
+}
+
+// action args:
 $group_id	= (int) @$group_id;
 $logged_in	= $this->get_user();
 $max		= (int) @$max;
@@ -14,7 +34,7 @@ $prefix		= $this->prefix;
 $tab_mode	= $_GET['mode'] ?? '';
 
 // display user profile
-if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal message can POST here
+if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET, so personal message can POST here
 {
 	// hide H1 article header
 	$this->hide_article_header = true;

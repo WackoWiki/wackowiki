@@ -5,6 +5,23 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays the settings page for registered users and the registration page for guests.
+
+Usage:
+	{{usersettings}}
+EOD;
+
+// set defaults
+$help		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'usersettings']);
+	return;
+}
+
 $mod_selector	= 'o';
 $tabs			= [
 					''				=> 'UserSettingsGeneral',
@@ -176,8 +193,8 @@ else if ($user = $this->get_user())
 	}
 
 	// print navigation
-	$tpl->header	= $this->_t($tabs[$mode]);
-	$tpl->tabs		= $this->tab_menu($tabs, $mode, '', [], $mod_selector);
+	$tpl->h_header	= $this->_t($tabs[$mode]);
+	$tpl->h_tabs	= $this->tab_menu($tabs, $mode, '', [], $mod_selector);
 
 	// MENU
 	if ($mode == 'menu' || isset($_POST['_user_menu']))

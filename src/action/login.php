@@ -5,6 +5,23 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays a login form if you are not yet logged in, or a welcome message if you are already logged in.
+
+Usage:
+	{{login}}
+EOD;
+
+// set defaults
+$help	??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'login']);
+	return;
+}
+
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 

@@ -5,14 +5,33 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{pagelinks [page="PageName"] [max=Number] [nomark=1] [title=0]}}
+$info = <<<EOD
+Description:
+	Outputs a list of pages that this page links to.
+
+Usage:
+	{{pagelinks}}
+
+Options:
+	[page="PageName"]
+	[max=Number]
+	[nomark=1]
+	[title=0]
+EOD;
 
 // set defaults
+$help		??= 0;
 $max		??= null;
 $nomark		??= 0;
 $page		??= '';
 $params		??= null;	// for $_GET parameters to be passed with the page link
 $title		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'pagelinks']);
+	return;
+}
 
 $tag = $page ? $this->unwrap_link($page) : $this->tag;
 

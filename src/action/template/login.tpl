@@ -1,5 +1,6 @@
 
 [ === main === ]
+	[ ' help ' ]
 <!--notypo-->
 	[= u LogoutForm =
 		<form action="[ ' href ' ]" method="get" name="logout">

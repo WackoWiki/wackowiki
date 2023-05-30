@@ -21,8 +21,8 @@ Options:
 	[nomark=0]
 	[legend=""]
 	[sort="asc|desc"]
-	[system=0|1]		// excludes system pages
-	[lang="ru"]			// show pages only in specified language
+	[system=0|1]		excludes system pages
+	[lang="ru"]			show pages only in specified language
 EOD;
 
 // constants

@@ -5,6 +5,27 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Shows list with usergroups and their members.
+
+Usage:
+	{{groups}}
+
+Options:
+	[max=Number]
+EOD;
+
+// set defaults
+$help		??= 0;
+$max		??= null;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'groups']);
+	return;
+}
+
 // args:
 $max			= (int) @$max;
 $logged_in		= $this->get_user();

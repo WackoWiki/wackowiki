@@ -1,5 +1,6 @@
 
 [ === main === ]
+	[ ' help ' ]
 	[= error _ =
 		<div class="msg error">[ ' message ' ]</div>
 	=]

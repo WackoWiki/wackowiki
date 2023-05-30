@@ -1,8 +1,11 @@
 [ === main === ]
+	[ ' help ' ]
 <!--notypo-->
-	<h3>[ ' _t: UserSettings ' ] » [ ' header ' ] </h3>
-	[ ' tabs ' ]
-	<br><br>
+	[= h _ =
+		<h3>[ ' _t: UserSettings ' ] » [ ' header ' ] </h3>
+		[ ' tabs ' ]
+		<br><br>
+	=]
 	[= menu _ =
 		[ ' action ' ]
 	=]

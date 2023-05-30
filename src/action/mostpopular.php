@@ -19,14 +19,14 @@ Usage:
 	{{mostpopular}}
 
 Options:
-	[max=50]					// maximum number of pages to retrieve
-	[page="PageName"]			// page name to start from in the page hierarchy
-	[title=1]					// shows the page title
-	[nomark=1]					// makes it possible to hide frame around
-	[dontrecurse="true|false"]	// if set to true the list will only include pages that are direct children of the "page" cluster
-	[counter=0|1]				// shows page hit counter
-	[system=0|1]				// excludes system pages
-	[lang="ru"]					// show pages only in specified language
+	[max=50]					maximum number of pages to retrieve
+	[page="PageName"]			page name to start from in the page hierarchy
+	[title=1]					shows the page title
+	[nomark=1]					makes it possible to hide frame around
+	[dontrecurse="true|false"]	if set to true the list will only include pages that are direct children of the "page" cluster
+	[counter=0|1]				shows page hit counter
+	[system=0|1]				excludes system pages
+	[lang="ru"]					show pages only in specified language
 EOD;
 
 // set defaults

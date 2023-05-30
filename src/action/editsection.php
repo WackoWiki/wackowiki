@@ -5,13 +5,30 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// show section edit link
-// {{editsection [page="yourPage"] [text="your text"]}}
+$info = <<<EOD
+Description:
+	Displays a section edit link.
+
+Usage:
+	{{editsection}}
+
+Options:
+	[page="yourPage"]
+	[section=Number]
+	[text="your text"]
+EOD;
 
 // set defaults
+$help		??= 0;
 $page		??= '/' . $this->context[$this->current_context];
 $section	??= 0;
 $text		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'editsection']);
+	return;
+}
 
 // ignore static feeds
 if ($this->static_feed)
@@ -23,8 +40,9 @@ if (   ($this->has_access('write') && !isset($this->comment_id))
 	|| $this->is_admin()
 	|| (isset($this->comment_id) && $this->is_owner($this->comment_id)))
 {
-	$tag	= $page ? $this->unwrap_link($page) : $this->tag;
-	$href	= $this->href('edit', $tag, ['section' => $section]);
+	$section	= (int) $section;
+	$tag		= $page ? $this->unwrap_link($page) : $this->tag;
+	$href		= $this->href('edit', $tag, ['section' => $section]);
 
 	if (!$text)
 	{

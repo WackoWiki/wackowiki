@@ -1,14 +1,15 @@
 first really BIG template written
 
 [ === main === ]
+	[ ' help ' ]
 	[= not _ =
 		<div class="msg error">[ ' found ' ]</div>
 	=]
 	[= disabled _ =
 		<div class="msg info">[ ' _t: AccountDisabled ' ]</div>
 	=]
-	[''' u Profile  ''']
-	[''' l UserList ''']
+	[ ''' u Profile  ''' ]
+	[ ''' l UserList ''' ]
 
 [ === // USERPROFILE ---------------------------------------------------------------------------------- === ]
 
@@ -17,7 +18,6 @@ first really BIG template written
 	<small><a href="[ ' href ' ]">« [ ' _t: UsersList ' ]</a></small>
 
 	[= tab _ =
-
 		<ul class="menu" id="list">
 			[= li _ =
 				[ ' commit | void  // alternation hack ' ]
@@ -35,7 +35,6 @@ first really BIG template written
 	=]
 
 	[= prof _ =
-
 		<table class="user-profile lined">
 			<tr>
 				<th scope="row">[ ' _t: RealName ' ]</th>
@@ -208,7 +207,7 @@ first really BIG template written
 	=]
 
 [ === userPagesByDate === ]
-<a href="[ ' href ' ]#pages">[ ' _t: UsersDocsSortDate ' ]</a>
+<a href="[ ' href ' ]#pages">[ ' _t: UsersDocsSortCreation ' ]</a>
 [ === userPagesByName === ]
 <a href="[ ' href ' ]#pages">[ ' _t: UsersDocsSortName ' ]</a>
 [ === userChangesAsc === ]
@@ -283,7 +282,7 @@ first really BIG template written
 	['' pagination '']
 
 [== sortsArr ==]
-&nbsp;['' a | replace desc ↑ asc ↓ '']
+&nbsp;[ '' a | replace desc ↑ asc ↓ '' ]
 
 
 

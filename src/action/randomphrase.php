@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $info = <<<EOD
 Description:
-	Loads a random line of a page into the body of data..
+	Loads a random line of a page into the body of data.
 
 Usage:
 	{{randomphrase}}

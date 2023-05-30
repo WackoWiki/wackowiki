@@ -5,9 +5,28 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Outputs a list of users watching this page.
+
+Usage:
+	{{watchers}}
+
+Options:
+	[page="PageName"]
+	[nomark=1]
+EOD;
+
 // set defaults
+$help		??= 0;
 $nomark		??= false;
 $page		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'watchers']);
+	return;
+}
 
 if ($page)
 {

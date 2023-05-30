@@ -5,6 +5,26 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays change password forms: password change and forgotten password reset.
+
+Usage:
+	{{changepassword}}
+
+Options:
+	[forgot=1]
+EOD;
+
+// set defaults
+$help	??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'changepassword']);
+	return;
+}
+
 $this->no_way_back = true; // prevent goback'ing that page
 
 // reconnect securely in tls mode
@@ -132,6 +152,7 @@ $_POST && $this->show_must_go_on($code? ['secret_code' => $code] : []);
 
 if ($user)
 {
+	// a. change password
 	$tpl->enter('c_');
 
 	if ($code)
@@ -154,6 +175,7 @@ if ($user)
 }
 else
 {
+	// b. reset forgotten password
 	$tpl->f_form			= $this->href();
 	$tpl->f_pattern			= self::PATTERN['USER_NAME'];
 	$tpl->f_only			=

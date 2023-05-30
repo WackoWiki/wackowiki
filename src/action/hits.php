@@ -5,11 +5,27 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{hits}}
-// take $this->page['hits'] in the first place
+$info = <<<EOD
+Description:
+	Shows the number of hits for a page.
+
+Usage:
+	{{hits}}
+
+Options:
+	[page="PageName"]
+EOD;
 
 // set defaults
+$help		??= 0;
 $page		??= '';
+
+if ($help)
+{
+	echo $this->action('help', ['info' => $info, 'action' => 'hits']);
+	return;
+}
+
 $result		= 0;
 
 if ($page)

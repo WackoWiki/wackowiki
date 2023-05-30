@@ -5,20 +5,30 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
-Random Page Action
+$info = <<<EOD
+Description:
+	Loads a random page.
 
- {{randompage
-  [page="PageName"]		// page name to start from in the page hierarchy
-  [test]				// show, don't redirect
- }}
- */
+Usage:
+	{{randompage}}
+
+Options:
+	[page="PageName"]		page name to start from in the page hierarchy
+	[test]					show, don't redirect
+EOD;
+
+// set defaults
+$help	??= 0;
+$page	??= '';
+
+if ($help)
+{
+	echo $this->action('help', ['info' => $info, 'action' => 'randompage']);
+	return;
+}
 
 // do not cache random page!
 $this->http->no_cache(false);
-
-// set defaults
-$page	??= '';
 
 $tag	= $this->unwrap_link($page);
 
