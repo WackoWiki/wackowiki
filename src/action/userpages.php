@@ -5,6 +5,23 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Displays all user related pages.
+
+Usage:
+	{{userpages}}
+EOD;
+
+// set defaults
+$help		??= 0;
+
+if ($help)
+{
+	echo $this->help($info, 'userpages');
+	return;
+}
+
 if ($this->get_user_name())
 {
 	$mode_selector	= 'mode';

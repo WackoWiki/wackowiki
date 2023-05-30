@@ -404,7 +404,7 @@ $mute			??= 1;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'admin_massregex']);
+	$tpl->help	= $this->help($info, 'admin_massregex');
 	return;
 }
 

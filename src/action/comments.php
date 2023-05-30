@@ -68,7 +68,7 @@ $title	??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'comments']);
+	$tpl->help	= $this->help($info, 'comments');
 	return;
 }
 

@@ -33,7 +33,7 @@ $printed	??= [];
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'whatsnew']);
+	$tpl->help	= $this->help($info, 'whatsnew');
 	return;
 }
 

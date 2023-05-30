@@ -41,7 +41,7 @@ if (!empty($this->db->news_cluster))
 
 	if ($help)
 	{
-		$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'news']);
+		$tpl->help	= $this->help($info, 'news');
 		return;
 	}
 

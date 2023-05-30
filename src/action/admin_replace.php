@@ -519,7 +519,7 @@ $mute			??= 1;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'admin_replace']);
+	$tpl->help	= $this->help($info, 'admin_replace');
 	return;
 }
 

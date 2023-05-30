@@ -22,7 +22,7 @@ $max		??= null;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'groups']);
+	$tpl->help	= $this->help($info, 'groups');
 	return;
 }
 

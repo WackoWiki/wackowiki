@@ -18,7 +18,7 @@ $help			??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'registration']);
+	$tpl->help	= $this->help($info, 'registration');
 	return;
 }
 

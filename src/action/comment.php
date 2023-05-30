@@ -24,7 +24,7 @@ $text	??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'comment']);
+	$tpl->help	= $this->help($info, 'comment');
 	return;
 }
 

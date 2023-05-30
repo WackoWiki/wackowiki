@@ -63,7 +63,7 @@ $type_id	??= OBJECT_PAGE;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'category']);
+	$tpl->help	= $this->help($info, 'category');
 	return;
 }
 

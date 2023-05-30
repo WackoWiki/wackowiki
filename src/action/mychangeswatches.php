@@ -25,7 +25,7 @@ $title		??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'mychangeswatches']);
+	$tpl->help	= $this->help($info, 'mychangeswatches');
 	return;
 }
 

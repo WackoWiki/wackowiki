@@ -37,7 +37,7 @@ $username	??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'hiddencontent']);
+	$tpl->help	= $this->help($info, 'hiddencontent');
 	return;
 }
 

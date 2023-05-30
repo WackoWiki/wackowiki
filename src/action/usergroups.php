@@ -7,9 +7,28 @@ if (!defined('IN_WACKO'))
 
 // You have to be logged in to use this action
 
+$info = <<<EOD
+Description:
+	Displays the list of groups and their members.
+
+Usage:
+	{{usergroups}}
+
+Options:
+	[cols=Number]
+	[nomark=1]
+EOD;
+
 // set defaults
+$help		??= 0;
 $cols		??= '';
 $nomark		??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->help($info, 'usergroups');
+	return;
+}
 
 if ($user = $this->get_user())
 {
@@ -37,8 +56,8 @@ if ($user = $this->get_user())
 				u.user_name
 			FROM
 				' . $this->prefix . 'usergroup_member gm
-					INNER JOIN ' . $this->prefix . 'user u ON (gm.user_id = u.user_id)
-					INNER JOIN ' . $this->prefix . 'usergroup g ON (gm.group_id = g.group_id)', true);
+				INNER JOIN ' . $this->prefix . 'user u ON (gm.user_id = u.user_id)
+				INNER JOIN ' . $this->prefix . 'usergroup g ON (gm.group_id = g.group_id)', true);
 
 		foreach ($result as $row)
 		{
@@ -64,7 +83,6 @@ if ($user = $this->get_user())
 			 */
 			if ($this->is_admin() || in_array($user['user_id'], $group_members))
 			{
-
 				$tpl->group	= $this->group_link($group_name, true, false);
 
 				foreach ($group_members as $k => $user_name)

@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' help ' ]
 	[= mark =
 		<div class="layout-box">
 			<p><span>[ ' _t: UserGroups ' ]: </span></p>

@@ -45,7 +45,7 @@ $url		??= null;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'feed']);
+	$tpl->help	= $this->help($info, 'feed');
 	return;
 }
 

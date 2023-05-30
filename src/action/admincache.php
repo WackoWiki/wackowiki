@@ -5,6 +5,23 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$info = <<<EOD
+Description:
+	Clears cache.
+
+Usage:
+	{{admincache}}
+EOD;
+
+// set defaults
+$help			??= 0;
+
+if ($help)
+{
+	$tpl->help	= $this->help($info, 'admincache');
+	return;
+}
+
 if ($this->is_admin())
 {
 	$action = $_POST['_action'] ?? null;
@@ -58,5 +75,5 @@ if ($this->is_admin())
 	}
 
 	// STS $add = (@$_GET['add'] || @$_POST['add']);
-	$tpl->href = $this->href();
+	$tpl->form_href = $this->href();
 }

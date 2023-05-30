@@ -13,7 +13,7 @@ Usage:
 	{{edit}}
 
 Options:
-	[page="EditThisPage"]
+	[page="PageName"]
 	[text="your text"]
 EOD;
 
@@ -27,7 +27,7 @@ $href	= $this->href('edit', $tag);
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'edit']);
+	$tpl->help	= $this->help($info, 'edit');
 	return;
 }
 

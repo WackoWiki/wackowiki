@@ -33,7 +33,7 @@ $width		??= 640;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'embed']);
+	$tpl->help	= $this->help($info, 'embed');
 	return;
 }
 

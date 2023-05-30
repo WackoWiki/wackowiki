@@ -36,7 +36,7 @@ $mute		??= 1;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'import']);
+	$tpl->help	= $this->help($info, 'import');
 	return;
 }
 

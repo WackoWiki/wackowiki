@@ -5,7 +5,22 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// upgrade helper routine
+$info = <<<EOD
+Description:
+	Upgrade helper routines.
+
+Usage:
+	{{adminupdate}}
+EOD;
+
+// set defaults
+$help		??= 0;
+
+if ($help)
+{
+	echo $this->help($info, 'adminupdate');
+	return;
+}
 
 $prefix			= $this->prefix;
 $collation		= 'utf8mb4_unicode_520_ci';

@@ -27,7 +27,7 @@ $title		??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'anchor']);
+	$tpl->help	= $this->help($info, 'anchor');
 	return;
 }
 

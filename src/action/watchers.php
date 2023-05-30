@@ -24,7 +24,7 @@ $page		??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'watchers']);
+	$tpl->help	= $this->help($info, 'watchers');
 	return;
 }
 

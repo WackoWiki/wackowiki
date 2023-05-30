@@ -82,7 +82,7 @@ $sort		??= 'abc';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'tagcloud']);
+	$tpl->help	= $this->help($info, 'tagcloud');
 	return;
 }
 

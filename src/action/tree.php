@@ -43,7 +43,7 @@ $title		??= 1;
 
 if ($help)
 {
-	echo $this->action('help', ['info' => $info, 'action' => 'tree']);
+	echo $this->help($info, 'tree');
 	return;
 }
 

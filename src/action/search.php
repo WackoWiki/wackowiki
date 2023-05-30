@@ -301,7 +301,7 @@ $topic		??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'search']);
+	$tpl->help	= $this->help($info, 'search');
 	return;
 }
 

@@ -25,7 +25,7 @@ $page	??= '';
 
 if ($help)
 {
-	echo $this->action('help', ['info' => $info, 'action' => 'randompage']);
+	echo $this->help($info, 'randompage');
 	return;
 }
 

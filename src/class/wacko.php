@@ -5447,6 +5447,11 @@ class Wacko
 		return $this->include_buffered($section . $mod . '.php', $error_message, '', $theme_path);
 	}
 
+	function help(string $info, string $action): string
+	{
+		return $this->action('help', ['info' => $info, 'action' => $action]);
+	}
+
 	/**
 	* Invokes Action and returns its output.
 	*

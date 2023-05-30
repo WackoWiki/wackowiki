@@ -30,7 +30,7 @@ $note		??= false;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'lastedited']);
+	$tpl->help	= $this->help($info, 'lastedited');
 	return;
 }
 

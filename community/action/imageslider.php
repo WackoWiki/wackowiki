@@ -42,7 +42,7 @@ $track		??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'imageslider']);
+	$tpl->help	= $this->help($info, 'imageslider');
 	return;
 }
 

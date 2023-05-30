@@ -48,7 +48,7 @@ $system			??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'menu']);
+	$tpl->help	= $this->help($info, 'menu');
 	return;
 }
 

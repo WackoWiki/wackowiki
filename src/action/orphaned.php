@@ -63,7 +63,7 @@ $page	??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'orphaned']);
+	$tpl->help	= $this->help($info, 'orphaned');
 	return;
 }
 

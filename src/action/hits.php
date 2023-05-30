@@ -22,7 +22,7 @@ $page		??= '';
 
 if ($help)
 {
-	echo $this->action('help', ['info' => $info, 'action' => 'hits']);
+	echo $this->help($info, 'hits');
 	return;
 }
 

@@ -34,7 +34,7 @@ $width				??= '200px';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'colorbox']);
+	$tpl->help	= $this->help($info, 'colorbox');
 	return;
 }
 

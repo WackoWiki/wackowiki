@@ -68,7 +68,7 @@ $title			??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'gallery']);
+	$tpl->help	= $this->help($info, 'gallery');
 	return;
 }
 

@@ -30,7 +30,7 @@ $owner		??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'randomimage']);
+	$tpl->help	= $this->help($info, 'randomimage');
 	return;
 }
 

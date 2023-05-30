@@ -21,7 +21,7 @@ $help		??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'admin_recovery']);
+	$tpl->help	= $this->help($info, 'admin_recovery');
 	return;
 }
 

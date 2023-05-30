@@ -26,7 +26,7 @@ $pages		??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'topics']);
+	$tpl->help	= $this->help($info, 'topics');
 	return;
 }
 

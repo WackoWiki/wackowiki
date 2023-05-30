@@ -29,7 +29,7 @@ $date		??= $_GET['date'] ?? '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'blog']);
+	$tpl->help	= $this->help($info, 'blog');
 	return;
 }
 

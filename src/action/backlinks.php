@@ -29,7 +29,7 @@ $title		??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'backlinks']);
+	$tpl->help	= $this->help($info, 'backlinks');
 	return;
 }
 

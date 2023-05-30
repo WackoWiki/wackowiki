@@ -36,7 +36,7 @@ $style			??= 'before';
 
 if ($help)
 {
-	echo $this->action('help', ['info' => $info, 'action' => 'paragraphs']);
+	echo $this->help($info, 'paragraphs');
 	return;
 }
 

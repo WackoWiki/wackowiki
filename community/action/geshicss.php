@@ -28,7 +28,7 @@ EOD;
 
 	if ($help)
 	{
-		$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'geshicss']);
+		$tpl->help	= $this->help($info, 'geshicss');
 		return;
 	}
 

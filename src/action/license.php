@@ -47,7 +47,7 @@ $license	??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'license']);
+	$tpl->help	= $this->help($info, 'license');
 	return;
 }
 

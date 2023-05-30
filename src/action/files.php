@@ -77,7 +77,7 @@ $user_id	??= null;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'files']);
+	$tpl->help	= $this->help($info, 'files');
 	return;
 }
 

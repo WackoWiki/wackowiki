@@ -27,7 +27,7 @@ $noxml		??= 0;
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'forums']);
+	$tpl->help	= $this->help($info, 'forums');
 	return;
 }
 

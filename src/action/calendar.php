@@ -47,7 +47,7 @@ $year			??= '';
 
 if ($help)
 {
-	$tpl->help	= $this->action('help', ['info' => $info, 'action' => 'calendar']);
+	$tpl->help	= $this->help($info, 'calendar');
 	return;
 }
 

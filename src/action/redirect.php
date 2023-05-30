@@ -27,7 +27,7 @@ $to			??= '';
 
 if ($help)
 {
-	echo $this->action('help', ['info' => $info, 'action' => 'redirect']);
+	echo $this->help($info, 'redirect');
 	return;
 }
 
