@@ -13,7 +13,7 @@ Usage:
 	{{blog}}
 
 Options:
-	[page="cluster"]
+	[page="Cluster"]
 	[mode="latest|week|from"]
 	[date="YYYY-MM-DD"]
 	[order="time|tag"]

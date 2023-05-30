@@ -13,13 +13,20 @@ Usage:
 	{{category}}
 
 Options:
-	[page="cluster"]	- where to start counting from (defaults to current tag)
-	[list=0]			- make categories clickable links which display pages of a given category (1 (default) or 0)
-	[ids="1,2,3"]		- display pages which belong to these comma-separated categories ids (default none)
-	[lang="fr"]			- categories language if necessary (defaults to current page lang)
-	[sort="abc|date"]	- order pages alphabetically ('abc', default) or creation date ('date')
-	[nomark=1]			- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
-	[info=0|1]			- display category description
+	[page="Cluster"]
+		where to start counting from (defaults to current tag)
+	[list=0]
+		make categories clickable links which display pages of a given category (1 (default) or 0)
+	[ids="1,2,3"]
+		display pages which belong to these comma-separated categories ids (default none)
+	[lang="fr"]
+		categories language if necessary (defaults to current page lang)
+	[sort="abc|date"]
+		order pages alphabetically ('abc', default) or creation date ('date')
+	[nomark=1]
+		display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
+	[info=0|1]
+		display category description
 EOD;
 
 $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', $filter = [])

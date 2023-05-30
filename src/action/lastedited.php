@@ -14,9 +14,12 @@ Usage:
 	{{lastedited}}
 
 Options:
-	[icon=0|1]		show icon
-	[label=0|1]		show 'Last edited by:' label
-	[note=0|1]		show edit note
+	[icon=0|1]
+		show icon
+	[label=0|1]
+		show 'Last edited by:' label
+	[note=0|1]
+		show edit note
 EOD;
 
 // set defaults

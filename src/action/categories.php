@@ -13,7 +13,7 @@ Usage:
 	{{categories}}
 
 Options:
-	[page="cluster"]
+	[page="Cluster"]
 	[list=1]
 	[nomark=1]
 	[label=0|1]

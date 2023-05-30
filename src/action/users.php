@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $info = <<<EOD
 Description:
-	Shows list with registered users together with a quantity of pages belonging to them..
+	Shows list with registered users together with a quantity of pages belonging to them.
 
 Usage:
 	{{users}}

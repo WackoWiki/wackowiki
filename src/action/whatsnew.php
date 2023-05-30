@@ -19,7 +19,7 @@ Usage:
 	{{whatsnew}}
 
 Options:
-	[page="cluster"]
+	[page="Cluster"]
 	[max=Number]
 	[noxml=1]
 EOD;

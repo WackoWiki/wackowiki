@@ -13,7 +13,7 @@ Usage:
 	{{editsection}}
 
 Options:
-	[page="yourPage"]
+	[page="PageName"]
 	[section=Number]
 	[text="your text"]
 EOD;

@@ -13,7 +13,7 @@ Usage:
 	{{randomphrase}}
 
 Options:
-	[page="SomePage"]
+	[page="PageName"]
 	[useemptystring=1]
 		indicates breaking up a page into blocks separated by an empty line rather than by lines
 EOD;

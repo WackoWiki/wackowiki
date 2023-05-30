@@ -480,6 +480,12 @@ form input.submitinput {
 	visibility: visible;
 }
 
+pre.help {
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	padding: 10px;
+}
+
 header {
 	padding: 0;
 	width: 96%;

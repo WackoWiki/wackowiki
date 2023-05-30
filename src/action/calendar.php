@@ -21,12 +21,18 @@ Usage:
 	{{calendar}}
 
 Options:
-	[year=2012|2013...] 		- year to display
-	[month=1|2|...]				- month to display
-	[highlight=today|1|2|...]	- date to highlight
-	[daywidth=3]				- length of weekday name
-	[range=1|2|...]				- number of month displayed starting with "month to display" parameter
-	[firstday=0|1]				- week starts on: 0 - Sunday, 1 - Monday
+	[year=2012|2013...]
+		year to display
+	[month=1|2|...]
+		month to display
+	[highlight=today|1|2|...]
+		date to highlight
+	[daywidth=3]
+		length of weekday name
+	[range=1|2|...]
+		number of month displayed starting with "month to display" parameter
+	[firstday=0|1]
+		week starts on: 0 - Sunday, 1 - Monday
 EOD;
 
 // set defaults

@@ -26,18 +26,26 @@ Usage:
 	{{gallery}}
 
 Options:
-	[page		= "page_tag"]	- call image from another page
-	[global		= 0|1]			- call global images
-	[perrow		= Number]		- Number of images per rows(default = 5)
-	[caption	= 1|2]			- 1 show file description, 2 show file caption
-	[title		= "Gallery"]	- album title
-	[target		= 1|2]			- show large images without page (if = 2 in new browser window)
-	[nomark		= 1]			- hide external border
-	[table		= 1]			- pictures in table
+	[page="PageName"]
+		call image from another page
+	[global=0|1]
+		call global images
+	[perrow=Number]
+		Number of images per rows (default = 5)
+	[caption=1|2]
+		1 show file description, 2 show file caption
+	[title="Gallery"]
+		album title
+	[target=1|2]
+		show large images without page (if = 2 in new browser window)
+	[nomark=1]
+		hide external border
+	[table=1]
+		pictures in table
 
-	[order		= "ext|name_desc|size|size_desc|time|time_desc"]
-	[owner		= "UserName"]
-	[max		= Number]
+	[order="ext|name_desc|size|size_desc|time|time_desc"]
+	[owner="UserName"]
+	[max=Number]
 EOD;
 
 // include PHP Thumbnailer (see autoload.conf)

@@ -24,7 +24,8 @@ Usage:
 	{{paragraphs}}
 
 Options:
-	[style="before|after|left|right"]		The style affects where paragraph numbers will be displayed.
+	[style="before|after|left|right"]
+		The style affects where paragraph numbers will be displayed.
 	[name="absolute|document-relative"]
 EOD;
 

@@ -13,12 +13,16 @@ Usage:
 	{{tagcloud}}
 
 Options:
-	[page="cluster"]	- where to start counting from (defaults to current tag)
-	[lang='fi']			- categories language if necessary (defaults to current page lang)
-	[owner="UserName"]	- page owner
-	[sort="abc|number"]	- order categories alphabetically or by number ('abc'| 'number')
-	[nomark=1]			- display header and fieldset (1) or 0 (default))
-
+	[page="Cluster"]
+		where to start counting from (defaults to current tag)
+	[lang='fi']
+		categories language if necessary (defaults to current page lang)
+	[owner="UserName"]
+		page owner
+	[sort="abc|number"]
+		order categories alphabetically or by number ('abc'| 'number')
+	[nomark=1]
+		display header and fieldset (1) or 0 (default))
 EOD;
 
 $print_tag_cloud = function ($tags, $method = '', $cluster = '') use (&$tpl)

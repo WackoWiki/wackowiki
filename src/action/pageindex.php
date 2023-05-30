@@ -17,12 +17,18 @@ Usage:
 	{{pageindex}}
 
 Options:
-	[page="Cluster"]	show page index only for a certain cluster
-	[max=50]			number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
-	[letter="a"]		only display pages whose name starts with this letter
-	[title=0|1]			takes title inplace of tag
-	[system=0|1]		includes or excludes system pages
-	[lang="ru"]			show pages only in specified language
+	[page="Cluster"]
+		show page index only for a certain cluster
+	[max=50]
+		number of pages to show at one time, if there are more pages then the next/prev buttons are shown
+	[letter="a"]
+		only display pages whose name starts with this letter
+	[title=0|1]
+		takes title inplace of tag
+	[system=0|1]
+		includes or excludes system pages
+	[lang="ru"]
+		show pages only in specified language
 EOD;
 
 // set defaults

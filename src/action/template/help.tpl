@@ -1,9 +1,6 @@
 [ === main === ]
 	[= help _ =
-		<hr>
-		<pre>
+		<pre class="help">
 			[ ' text | pre ' ]
 		</pre>
-		<hr>
 	=]
-

@@ -13,10 +13,12 @@ Usage:
 	{{randomimage}}
 
 Options:
-	[global=0|1]				// attached to page or global
+	[global=0|1]
+		attached to page or global
 	[owner="UserName"]
 	[category="category"]
-	[caption=0|1]				// show caption
+	[caption=0|1]
+		show caption
 EOD;
 
 // set defaults

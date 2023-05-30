@@ -13,7 +13,7 @@ Usage:
 	{{comment}}
 
 Options:
-	[page="CommentThisPage"]
+	[page="PageName"]
 	[text="your text"]
 EOD;
 

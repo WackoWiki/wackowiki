@@ -13,8 +13,10 @@ Usage:
 	{{randompage}}
 
 Options:
-	[page="PageName"]		page name to start from in the page hierarchy
-	[test]					show, don't redirect
+	[page="PageName"]
+		page name to start from in the page hierarchy
+	[test]
+		show, don't redirect
 EOD;
 
 // set defaults
