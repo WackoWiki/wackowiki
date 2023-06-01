@@ -5,12 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*
- Most Popular Pages Action
-
- All arguments are optional, the "dontrecurse" argument is only used when the "page" argument is used and even then it's still optional
- */
-
 $info = <<<EOD
 Description:
 	Outputs a list of the most visited pages.
@@ -27,7 +21,7 @@ Options:
 		shows the page title
 	[nomark=1]
 		makes it possible to hide frame around
-	[dontrecurse="true|false"]
+	[dontrecurse=0|1]
 		if set to true the list will only include pages that are direct children of the "page" cluster
 	[counter=0|1]
 		shows page hit counter
@@ -39,7 +33,7 @@ EOD;
 
 // set defaults
 $counter		??= 1;
-$dontrecurse	??= false;
+$dontrecurse	??= 0;
 $help			??= 0;
 $lang			??= '';
 $legend			??= '';
@@ -106,9 +100,9 @@ else
 	// $recurse
 	//	true	- recurses and includes all the sub-pages of sub-pages (and so on) in the listing
 	//	false	- display only pages directly under the selected page, not their kids and grandkids
-	(!$dontrecurse || $dontrecurse == 'false')
-		? $recurse = true
-		: $recurse = false;
+	$dontrecurse
+		? $recurse = false
+		: $recurse = true;
 
 	$selector =
 		'FROM ' . $prefix . 'page a, ' . $prefix . 'page_link l ' .

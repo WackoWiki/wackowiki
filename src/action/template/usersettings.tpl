@@ -1,5 +1,5 @@
 [ === main === ]
-	[ ' help ' ]
+[ ' help ' ]
 <!--notypo-->
 	[= h _ =
 		<h3>[ ' _t: UserSettings ' ] » [ ' header ' ] </h3>

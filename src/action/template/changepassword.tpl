@@ -1,6 +1,6 @@
 
 [ === main === ]
-	[ ' help ' ]
+[ ' help ' ]
 <!--notypo-->
 	[= c ChangePassword =
 		<form action="[ ' form ' ]" method="post" name="change_password">

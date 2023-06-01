@@ -21,14 +21,14 @@ Options:
 		shows the page title
 	[nomark=1]
 		makes it possible to hide frame around
-	[dontrecurse="true|false"]
+	[dontrecurse=0|1]
 		if set to true the list will only include pages that are direct children of the "page" cluster
 	[lang="ru"]
 		show pages only in specified language
 EOD;
 
 // set defaults
-$dontrecurse	??= false;
+$dontrecurse	??= 0;
 $help			??= 0;
 $lang			??= '';
 $legend			??= '';
@@ -86,9 +86,9 @@ else
 	// $recurse
 	//	true	- recurses and includes all the sub-pages of sub-pages (and so on) in the listing
 	//	false	- display only pages directly under the selected page, not their kids and grandkids
-	(!$dontrecurse || $dontrecurse == 'false')
-		? $recurse = true
-		: $recurse = false;
+	$dontrecurse
+		? $recurse = false
+		: $recurse = true;
 
 	$selector =
 		'FROM ' . $this->prefix . 'page a, ' . $this->prefix . 'page_link l ' .

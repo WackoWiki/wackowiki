@@ -1,6 +1,8 @@
 [ === main === ]
 	[ ' help ' ]
-	<h2>[ ' _t: ReplaceText ' ]</h2>
+	[= header _ =
+		<h2>[ ' _t: ReplaceText ' ]</h2>
+	=]
 	[ ' message ' ]<br>
 	[= search _ =
 		<form action="[ ' href: ' ]" method="post" name="select_pages">

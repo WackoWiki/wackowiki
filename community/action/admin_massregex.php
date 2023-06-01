@@ -493,6 +493,8 @@ $o = [
 	'title'				=> $title,
 ];
 
+$tpl->header = true;
+
 // [C] replace target text with replacement
 if ($action == 'replace_text')
 {

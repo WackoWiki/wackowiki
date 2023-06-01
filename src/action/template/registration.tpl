@@ -1,5 +1,5 @@
 [ === main === ]
-	[ ' help ' ]
+[ ' help ' ]
 <!--notypo-->
 	[= closed _ =
 		<div class="msg hint">[ ' _t: RegistrationClosed ' ]</div>

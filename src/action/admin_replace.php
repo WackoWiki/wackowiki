@@ -604,6 +604,8 @@ $o = [
 	'use_regex'			=> $use_regex,
 ];
 
+$tpl->header = true;
+
 // [C] replace target text with replacement
 if ($action == 'replace_text')
 {

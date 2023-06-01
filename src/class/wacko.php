@@ -5447,6 +5447,7 @@ class Wacko
 		return $this->include_buffered($section . $mod . '.php', $error_message, '', $theme_path);
 	}
 
+	// help action wrapper
 	function help(string $info, string $action): string
 	{
 		return $this->action('help', ['info' => $info, 'action' => $action]);
@@ -5461,7 +5462,7 @@ class Wacko
 	* 											Optional, default value is FALSE.
 	* @return string	Result of action
 	*/
-	function action($action, $params = [], $link_tracking = false): string
+	function action(string $action, array $params = [], bool $link_tracking = false): string
 	{
 		$action = mb_strtolower(trim($action));
 		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';

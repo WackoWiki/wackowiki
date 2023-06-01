@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 // set defaults
-$info	??= '';
-$action	??= '';
+$info	??= 'No help text available.';
+$action	??= 'help';
 
 // check for translated version
 $lang		= $this->get_user_language();
