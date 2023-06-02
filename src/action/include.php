@@ -20,11 +20,6 @@ Options:
 	[last_anchor="anchor2"]
 EOD;
 
-if (!isset($page))
-{
-	return;
-}
-
 // set defaults
 $first_anchor	??= '';
 $help			??= 0;
@@ -33,6 +28,7 @@ $nomark			??= 0;
 $nowarning		??= 0;
 $revision_id	??= null;
 $track			??= 0;
+// notoc=1 gets processed via regex in Paragrafica class
 
 if ($help)
 {
@@ -40,7 +36,10 @@ if ($help)
 	return;
 }
 
-// notoc=1 gets processed via regex in Paragrafica class
+if (!isset($page))
+{
+	return;
+}
 
 $tag = $this->unwrap_link($page);
 

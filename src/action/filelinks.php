@@ -7,12 +7,33 @@ if (!defined('IN_WACKO'))
 
 // {{filelinks [page="PageName"] [max=Number] [nomark=1] [title=0]}}
 
+$info = <<<EOD
+Description:
+	Outputs a list of files that this page links to.
+
+Usage:
+	{{filelinks}}
+
+Options:
+	[page="PageName"]
+	[max=Number]
+	[nomark=1]
+	[title=0]
+EOD;
+
 // set defaults
 $file_id	??= null;
+$help		??= 0;
 $max		??= null;
 $nomark		??= 0;
 $params		??= null;	// for $_GET parameters to be passed with the page link
 $title		??= '';
+
+if ($help)
+{
+	$tpl->help	= $this->help($info, 'filelinks');
+	return;
+}
 
 if ($file_id)
 {
