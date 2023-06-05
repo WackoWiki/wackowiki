@@ -31,14 +31,14 @@ $db_version		= $_db_version['version()'];
 
 echo '<h2>Upgrade Utilities</h2>';
 
-$info[] = ['WackoWiki version', $this->format('**!!(green)' . $this->db->wacko_version . '!!**', 'wacko')];
-$info[] = ['MariaDB / MySQL version', $db_version];
-$info[] = ['Database charset', $this->db->db_charset];
-$info[] = ['Database collation', $this->db->db_collation];
+$sys_info[] = ['WackoWiki version', $this->format('**!!(green)' . $this->db->wacko_version . '!!**', 'wacko')];
+$sys_info[] = ['MariaDB / MySQL version', $db_version];
+$sys_info[] = ['Database charset', $this->db->db_charset];
+$sys_info[] = ['Database collation', $this->db->db_collation];
 
 echo '<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">' . "\n";
 
-foreach ($info as $value)
+foreach ($sys_info as $value)
 {
 	echo '<tr>' .
 			'<td class="label"><strong>' . $value[0] . '</strong></td>' .

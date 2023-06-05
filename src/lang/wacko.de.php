@@ -1025,7 +1025,7 @@ $wacko_translation = [
 	'PageCache'					=> 'Seiten-Zwischenspeicher',
 	'SQLCache'					=> 'SQL-Zwischenspeicher',
 	'TemplateCache'				=> 'Template-Zwischenspeicher',
-	'ThumbCache'				=> 'Vorschaubild Zwischenspeicher',
+	'ThumbCache'				=> 'Vorschaubild-Zwischenspeicher',
 
 	// Embed
 	'EmbedNoURL'				=> 'Bitte gib die Adresse der Ressource mit dem Parameter url an. (z.B. {{embed url="https://example.com/embed/video.mp4"}} )',
