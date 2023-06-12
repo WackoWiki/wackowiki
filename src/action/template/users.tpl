@@ -135,7 +135,7 @@ first really BIG template written
 		=]
 
 		<h2 id="changes" class="heading">[ ' _t: UsersChanges ' ]</h2>
-		<div class="indent"><small>[ ' _t: UsersRevisionsMade ' ] [ ' user.total_revisions | number 0 , . ' ]</small></div><br>
+		<div class="indent"><small>[ ' _t: UsersRevisionsMade ' ] [ ' user.total_revisions | number_format ' ]</small></div><br>
 
 		[ ''' nochanges UsersNA2 ''' ]
 		[= changes _ =
@@ -158,7 +158,7 @@ first really BIG template written
 			[ ' _t: CommentsDisabled ' ]
 		=]
 		[= comments _ =
-			<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ] [ ' n | number 0 , . ' ]</small></div>
+			<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ] [ ' n | number_format ' ]</small></div>
 			[ ''' none UsersNA2 ''' ]
 			[= c _ =
 				[ ''' pagination ''' ]<br>
@@ -171,7 +171,7 @@ first really BIG template written
 		=]
 
 		<h2 id="pages" class="heading">[ ' _t: UsersPages ' ]</h2>
-		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ] [ ' user.total_pages | number 0 , . ' ]</small></div><br>
+		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ] [ ' user.total_pages | number_format ' ]</small></div><br>
 
 		[ ''' nopages UsersNA2 ''' ]
 		[= pages _ =
@@ -187,7 +187,7 @@ first really BIG template written
 		[= files _ =
 			<h2 id="uploads" class="heading">[ ' _t: UsersUploads ' ]</h2>
 			[= u _ =
-				<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ] [ ' n | number 0 , . ' ]</small></div>
+				<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ] [ ' n | number_format ' ]</small></div>
 				[ ''' none UsersNA2 ''' ]
 				[= u2 _ =
 					[ ''' pagination ''' ]<br>
@@ -265,11 +265,11 @@ first really BIG template written
 		[= u _ =
 			<tr>
 				<td>[ ' link ' ]</td>
-				<td>[ ' user.total_pages | number 0 , . ' ]</td>
-				<td>[ ' user.total_comments | number 0 , . ' ]</td>
-				<td>[ ' user.total_revisions | number 0 , . ' ]</td>
+				<td>[ ' user.total_pages | number_format ' ]</td>
+				<td>[ ' user.total_comments | number_format ' ]</td>
+				<td>[ ' user.total_revisions | number_format ' ]</td>
 				[= reg _ =
-					<td>[ ' user.total_uploads | number 0 , . ' ]</td>
+					<td>[ ' user.total_uploads | number_format ' ]</td>
 					<td>[ ' user.signup_time | time_formatted ' ]</td>
 					<td>[ ' sess lastSession ' ]</td>
 				=]

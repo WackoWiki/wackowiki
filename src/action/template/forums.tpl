@@ -33,8 +33,8 @@
 								<strong>[ ' link ' ]</strong><br>
 								<small>[ ' description ' ]</small>
 							</td>
-							<td>[ ' counter.topics_total | number 0 , . ' ]</td>
-							<td>[ ' counter.posts_total | number 0 , . ' ]</td>
+							<td>[ ' counter.topics_total | number_format ' ]</td>
+							<td>[ ' counter.posts_total | number_format ' ]</td>
 							[= c =
 								<td>
 									<small>

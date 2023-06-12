@@ -50,7 +50,7 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 				echo
 					'<tr>' .
 						'<th class="label"><strong>' . $table['Name'] . '</strong></th>' .
-						'<td>' . number_format($table['Rows'], 0, ',', '.') . '</td>' .
+						'<td>' . $engine->number_format($table['Rows']) . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Data_length'], false, true, true) . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Index_length'], false, true, true) . '</td>' .
 						'<td>' .
@@ -72,7 +72,7 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 	echo
 		'<tr>' .
 			'<td class="label"><strong>' . $engine->_t('DbTotal') . ':</strong></td>' .
-			'<td><strong>' . number_format($trows, 0, ',', '.') . '</strong></td>' .
+			'<td><strong>' . $engine->number_format($trows) . '</strong></td>' .
 			'<td><strong>' . $engine->binary_multiples($tdata, false, true, true) . '</strong></td>' .
 			'<td><strong>' . $engine->binary_multiples($tindex, false, true, true) . '</strong></td>' .
 			'<td><strong>' .

@@ -572,6 +572,22 @@ class Wacko
 			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
 	}
 
+	// converts a number to a locale-specific string
+	function number_format($number, $precision = 0)
+	{
+		$lang	= $this->get_user()['user_lang'] ?? $this->db->language;
+		$save	= $this->set_language($lang, true, true);
+
+		$numfmt = new NumberFormatter($this->lang['locale'], NumberFormatter::DECIMAL);
+		$numfmt->setAttribute(NumberFormatter::ROUNDING_MODE, 0);
+		$numfmt->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $precision);
+		$numfmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $precision);
+
+		$this->set_language($save, true);
+
+		return $numfmt->format($number);
+	}
+
 	// LANG FUNCTIONS
 	function set_translation($lang): void
 	{
@@ -794,6 +810,19 @@ class Wacko
 		if (isset($this->resource[$name]))
 		{
 			return $this->resource[$name];
+		}
+
+		// fall back to English
+		if ($lang != 'en')
+		{
+			$save		= $this->set_language('en');
+
+			if ($text = @$this->translations['en'][$name])
+			{
+				$this->set_language($save, true);
+
+				return $text;
+			}
 		}
 
 		// NB: must return NULL if no translation available, it's API
@@ -5111,8 +5140,8 @@ class Wacko
 
 					// pull
 					$tpl->pull('_t',		function ($block, $loc, $str)						{ return $this->_t($str); });
-					$tpl->pull('format_t',	function ($block, $loc, $str)						{ return $this->format_t($str); });
 					$tpl->pull('db',		function ($block, $loc, $str)						{ return $this->db[$str]; });
+					$tpl->pull('format_t',	function ($block, $loc, $str)						{ return $this->format_t($str); });
 					$tpl->pull('href',		function ($block, $loc, $method = '', $param = '')	{ return $this->href($method, '', $param); });
 					$tpl->pull('csrf',
 						function ($block, $loc, $action)
@@ -5131,11 +5160,7 @@ class Wacko
 					$tpl->setEncoding($this->charset);
 
 					// filter
-					$tpl->filter('time_formatted',
-						function ($value)
-						{
-							return $this->sql_time_formatted($value);
-						});
+					$tpl->filter('_t',				function ($str)						{ return $this->_t($str); });
 					$tpl->filter('hide_page',
 						function ($value)
 						{
@@ -5145,7 +5170,8 @@ class Wacko
 								return '<input type="hidden" name="page" value="' . $match[1] . '">';
 							}
 						});
-					$tpl->filter('_t', function ($str) { return $this->_t($str); });
+					$tpl->filter('number_format',	function ($value, $decimal = 0)		{ return $this->number_format($value, $decimal); });
+					$tpl->filter('time_formatted',	function ($value)					{ return $this->sql_time_formatted($value); });
 
 					// STS lotta goodies must go there..
 				}
@@ -9254,11 +9280,13 @@ class Wacko
 
 			if ($rounded)
 			{
-				$size = round($size, 0);
+				// for MiB and bigger use two decimal places
+				$precision	= $x > 1 ? 2 : 0;
+				$size		= $this->number_format($size, $precision);
 			}
 			else
 			{
-				$size = sprintf('%01.2f', $size);
+				$size		= $this->number_format($size, 2); #sprintf('%01.2f', $size);
 			}
 
 			if ($suffix)
@@ -9291,12 +9319,12 @@ class Wacko
 		if ($size_delta > 0)
 		{
 			$diff_class = 'diff-pos';
-			$size_delta = '+' . number_format($size_delta, 0, ',', '.');
+			$size_delta = '+' . $this->number_format($size_delta);
 		}
 		else if ($size_delta < 0)
 		{
 			$diff_class = 'diff-neg';
-			$size_delta = number_format($size_delta, 0, ',', '.');
+			$size_delta = $this->number_format($size_delta);
 		}
 		else
 		{

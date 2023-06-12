@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 // shows forum topics list
 // {{topics [pages="subtag1, subtag2, ..."]}}
 //		pages	= when creating multilevel forums this optional parameter passes
-//				  a comma-delimeted list of tag names of pages that must be
-//				  considered subforums, so topics under these cluster subpages
+//				  a comma-delimited list of tag names of pages that must be
+//				  considered sub forums, so topics under these cluster subpages
 //				  will not be displayed. tags must be absolute
 
 // set defaults
@@ -265,7 +265,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 			$tpl->leave(); // r_
 
-			// mark all topis read
+			// mark all topics read
 			if ($user)
 			{
 				$tpl->mark_href = $this->href('', '', ['markread' => 1]);

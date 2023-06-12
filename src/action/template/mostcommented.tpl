@@ -13,7 +13,7 @@
 			<tr>
 				<td>[ ' num ' ]</td>
 				<td>[ ' link ' ]</td>
-				<td><a href="[ ' href ' ]">[ ' comments | number 0 , . ' ]</a></td>
+				<td><a href="[ ' href ' ]">[ ' comments | number_format ' ]</a></td>
 			</tr>
 		=]
 	</table>

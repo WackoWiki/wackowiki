@@ -31,4 +31,4 @@ else
 	$result = $this->page['hits'];
 }
 
-echo number_format($result, 0, ',', '.');
+echo $this->number_format($result);

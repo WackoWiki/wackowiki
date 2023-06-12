@@ -5,12 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// shows subforums list
+// shows sub forums list
 // {{forums [pages="subtag1, subtag2, ..."]}}
 //		pages	= to create multilevel forums this optional parameter passes
-//				  a comma-delimeted list of tag names of pages that must be
-//				  considered subforums, and not topics. tags must be absolute (not relative)
-//		if you define pages, it must be done for all subforums and topic pages
+//				  a comma-delimited list of tag names of pages that must be
+//				  considered sub forums, and not topics. tags must be absolute (not relative)
+//		if you define pages, it must be done for all sub forums and topic pages
 
 // define variables
 $pages		= '';
@@ -30,7 +30,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	// process 'mark read'
 	$this->mark_read($user);
 
-	// parse subforums list if any
+	// parse sub forums list if any
 	if (!empty($pages))
 	{
 		$_subforum	= explode(',', $pages);
@@ -68,7 +68,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	$sql .= "ORDER BY p.created ASC";
 
-	// load subforums data
+	// load sub forums data
 	$forums		= $this->db->load_all($sql, true);
 
 	$page_ids	= [];
@@ -215,7 +215,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 }
 else
 {
-	// action placed ouside forum cluster, show hint
+	// action placed outside forum cluster, show hint
 	$message	= (!$this->db->forum_cluster
 		? $this->_t('ForumNoClusterDefined')
 		: Ut::perc_replace($this->_t('ForumOutsideCluster'), '<code>forums</code>')

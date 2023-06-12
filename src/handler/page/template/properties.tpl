@@ -270,21 +270,21 @@
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: Version ' ]</th>
-				<td><a href="[ ' href: revisions ' ]" title="[ ' _t: RevisionTip ' ]">[ ' version | number 0 , . ' ]</a></td>
+				<td><a href="[ ' href: revisions ' ]" title="[ ' _t: RevisionTip ' ]">[ ' version | number_format ' ]</a></td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsTotalComs ' ]</th>
-				<td><a href="[ ' href: '' show_comments=1#header-comments ' ]" title="[ ' _t: ShowComments ' ]">[ ' page.comments | number 0 , . ' ]</a></td>
+				<td><a href="[ ' href: '' show_comments=1#header-comments ' ]" title="[ ' _t: ShowComments ' ]">[ ' page.comments | number_format ' ]</a></td>
 			</tr>
 			[= wat _ =
 				<tr>
 					<th scope="row">[ ' _t: SettingsWatchers ' ]</th>
-					<td><a href="[ ' href: watchers ' ]" title="[ ' _t: RevisionTip ' ]">[ ' number | number 0 , . ' ]</a></td>
+					<td><a href="[ ' href: watchers ' ]" title="[ ' _t: RevisionTip ' ]">[ ' number | number_format ' ]</a></td>
 				</tr>
 			=]
 			<tr>
 				<th scope="row">[ ' _t: SettingsHits ' ]</th>
-				<td>[ ' page.hits | number 0 , . ' ]</td>
+				<td>[ ' page.hits | number_format ' ]</td>
 			</tr>
 			[= rat _ =
 				<tr>
