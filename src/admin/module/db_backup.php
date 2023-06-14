@@ -60,6 +60,8 @@ function admin_db_backup($engine, $module, $tables, $directories)
 
 		$time		= time();				// backup time (unix format)
 		$pack		= set_pack_dir($time);	// backup directory
+		$note		= $_POST['log_note'] ?? '';
+		$note		= $engine->sanitize_text_field($note, true);
 		$root		= $_POST['root'] ?? '';
 		$engine->sanitize_page_tag($root);
 		$data		= [];
@@ -164,7 +166,8 @@ function admin_db_backup($engine, $module, $tables, $directories)
 			'data'			=> implode(';', $data),
 			'files'			=> implode(';', $files),
 			'wacko_version'	=> WACKO_VERSION,
-			'size'			=> get_directory_size($pack)
+			'size'			=> get_directory_size($pack),
+			'note'			=> $note,
 			// TODO: add metadata to avoid conflicts
 			// unique_instance_key	-> warn / show user if he restores data from another deployment or
 			// hash
@@ -210,9 +213,10 @@ function admin_db_backup($engine, $module, $tables, $directories)
 ?>
 			<table class="backup formation lined">
 				<tr>
-					<th class="t-right"><label for="root"><?php echo $engine->_t('BackupCluster'); ?></label></th>
-					<th colspan="2"><input type="text" id="root" name="root" size="30" value=""></th>
+					<th class="label"><label for="root"><?php echo $engine->_t('BackupCluster'); ?></label></th>
+					<td colspan="2"><input type="text" id="root" name="root" size="30" value=""></td>
 				</tr>
+				<tr><td colspan="3"><br></td></tr>
 				<tr>
 					<th><?php echo $engine->_t('BackupTable'); ?></th>
 					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
@@ -241,9 +245,10 @@ function admin_db_backup($engine, $module, $tables, $directories)
 					'</tr>' . "\n";
 			}
 ?>
+				<tr><td colspan="3"><br></td></tr>
 				<tr>
-					<th colspan="2"><?php echo $engine->_t('BackupFolder'); ?></th>
-					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
+					<th><?php echo $engine->_t('BackupFolder'); ?></th>
+					<th colspan="2"><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
 				</tr>
 <?php
 			$i = 0;
@@ -261,17 +266,25 @@ function admin_db_backup($engine, $module, $tables, $directories)
 				$dir = rtrim($dir, '/');
 
 				echo '<tr>' .
-						'<td colspan="2" class="label">' .
-							'<label for="dir_' . $i . '"><strong>' . $dir . '</strong></label>' .
+						'<td class="label">' .
+							'<label for="dir_' . $i . '">' . $dir . '</label>' .
 						'</td>' .
-						'<td class="t-center">  ' .
+						'<td colspan="2" class="t-center">  ' .
 							'<input type="checkbox" id="dir_' . $i . '" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files']) ? ' checked' : '') . '>' .
 						'</td>' .
 					'</tr>' . "\n";
 			}
 ?>
-				</table>
-				<button type="submit" name="start" id="submit"><?php echo $engine->_t('Backup'); ?></button>
+				<tr><td colspan="3"><br></td></tr>
+				</tr>
+					<th class="label"><label for="log_note"><?php echo $engine->_t('BackupNote'); ?></label></th>
+					<td colspan="3">
+						<input type="text" id="log_note" name="log_note" maxlength="200" value="" size="30">
+					</td>
+				</tr>
+			</table>
+			<br>
+			<button type="submit" name="start" id="submit"><?php echo $engine->_t('Backup'); ?></button>
 <?php
 			echo $engine->form_close();
 		}

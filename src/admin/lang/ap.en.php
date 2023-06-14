@@ -997,6 +997,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Files',
+	'BackupNote'				=> 'Note:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1075,6 +1076,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'Backup %1 archived.',
+	'BackupArchiveExists'		=> 'Backup archive %1 already exists.',
+	'LogBackupArchived'			=> 'Backup ##%1## archived.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

@@ -28,16 +28,140 @@ function admin_db_restore($engine, $module, $tables, $directories)
 	$ifiles			= '';
 	$backup_dir		= UPLOAD_BACKUP_DIR . '/';
 
-	// IDs PROCESSING (COMMON PROCEDURES)
-	$set = [];
-
-	$backup_id = $_POST['backup_id'] ?? ($_GET['backup_id'] ?? false);
+	$backup_id		= $_POST['backup_id'] ?? ($_GET['backup_id'] ?? false);
 
 	// validate directory format 2022_0208_145128
 	if (!preg_match('/^(\d{4}_\d{4}_\d{6})$/', $backup_id))
 	{
 		$backup_id = false;
 	}
+
+	$show_package = function ($log, $select = true, $id = 0) use ($engine, $tables, $directories)
+	{
+		// pack
+		echo
+			'<tr class="hl-setting">' . "\n" .
+				'<td>
+					<table class="restore-meta">
+						<tr>' .
+							'<td class="label">' .
+							($select
+								? '<input type="radio" id="pack_' . $id . '" name="backup_id" value="' . $log['pack'] . '">'
+								: '' ) .
+							'</td>
+							<th class="t-left nowrap">' .
+								($select ? '<label for="pack_' . $id . '">' : '') .
+									$engine->date_format($log['time'], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
+								($select ? '</label>' : '') .
+							'</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								' . ($log['wacko_version'] ?? null) . '
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								' . (isset($log['size']) ? $engine->binary_multiples($log['size'], false, true, true) : null) . '
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								' . ($log['note'] ? '<br><div class="msg comment">' . Ut::html($log['note']) . '</div>' : null) . '
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<br><a href="' . $engine->href('', '', ['remove' => 1, 'backup_id' => Ut::html($log['pack'])]) . '">' . $engine->_t('DeleteButton') . '</a>
+							</td>
+						</tr>
+					</table>' .
+				'</td>' . "\n" .
+
+				// Description:
+				'<td><table>' .
+				// cluster root
+				'<tr>' .
+					'<th colspan="3" class="t-left nowrap">' .
+						$engine->_t('BackupCluster') . ' ' . ($log['cluster'] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+					'</th>' .
+				'</tr>' . "\n" .
+				// contents
+				'<tr>' .
+					'<th>' . $engine->_t('BackupStructure') . '</th>' .
+					'<th>' . $engine->_t('BackupData') . '</th>' .
+					'<th>' . $engine->_t('BackupFiles') . '</th>' .
+				'</tr>' . "\n" .
+				// a. structure
+				'<tr>' .
+					'<td>';
+
+				$list_structure = explode(';', $log['structure']);
+
+				foreach ($tables as $table)
+				{
+					if (in_array($table['name'], $list_structure))
+					{
+						echo '<strong>' . $table['name'] . '</strong><br>' . "\n";
+					}
+					else
+					{
+						echo '<em class="grey">' . $table['name'] . '</em><br>' . "\n";
+					}
+				}
+
+				// b. data
+				echo
+					'</td>' . "\n" .
+					'<td>';
+
+				$list_data = explode(';', $log['data'] ?? null);
+
+				foreach ($tables as $table)
+				{
+					if (in_array($table['name'], $list_data))
+					{
+						echo '<strong>' . $table['name'] . '</strong><br>' . "\n";
+					}
+					else
+					{
+						echo '<em class="grey">' . $table['name'] . '</em><br>';
+					}
+				}
+
+				// c. files
+				echo
+					'</td>' . "\n" .
+					'<td>';
+
+				$list_files = explode(';', $log['files'] ?? null);
+
+				foreach ($directories as $directory)
+				{
+					$directory = rtrim($directory, '/');
+
+					if (in_array($directory, $list_files))
+					{
+						echo '<strong>' . $directory . '</strong><br>';
+					}
+					else
+					{
+						echo '<em class="grey">' . $directory . '</em><br>';
+					}
+				}
+
+				echo
+					"</td>\n" .
+					"</tr>\n</table>\n" .
+
+			// close row
+			"</td>\n</tr>\n";
+			// end dir check
+	};
 
 	// RESTORE backup
 	if (    isset($_POST['restore'])
@@ -59,136 +183,42 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			}
 
 			// show details of backup package
-			echo '<table class="formation">' .
-						'<tr>
-							<td>' .
-							'</td>
-						</tr>' .
+			echo
+				'<table class="formation">' .
+					'<tr>
+						<td></td>
+					</tr>';
+
 					// open row
-					'<tr class="hl-setting">' . "\n" .
-
-					// pack
-					'<td>
-						<table class="restore-meta">
-							<tr>
-								<td class="label">' .
-								'</td>
-								<th class="t-left nowrap">' .
-									$engine->date_format($log['time'], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
-								'</th>
-							</tr>
-							<tr>
-								<td></td>
-								<td>
-									' . ($log['wacko_version'] ?? null) . '
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>
-									' . (isset($log['size']) ? $engine->binary_multiples($log['size'], false, true, true) : null) . '
-								</td>
-							</tr>
-						</table>' .
-					'</td>' . "\n";
-
-					// description
-					echo '<td><table>';
-						// cluster root
-						echo '<tr><th colspan="3" class="t-left nowrap">' .
-								$engine->_t('BackupCluster') . ' ' . ($log['cluster'] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
-							'</th></tr>' . "\n";
-						// contents
-						echo '<tr>' .
-								'<th>' . $engine->_t('BackupStructure') . '</th>' .
-								'<th>' . $engine->_t('BackupData') . '</th>' .
-								'<th>' . $engine->_t('BackupFiles') . '</th>' .
-							'</tr>' . "\n";
-						// structure
-						echo '<tr>' .
-								'<td>';
-
-						$list = explode(';', $log['structure']);
-
-						foreach ($tables as $table)
-						{
-							if (in_array($table['name'], $list))
-							{
-								echo '<strong>' . $table['name'] . '</strong><br>';
-							}
-							else
-							{
-								echo '<em class="grey">' . $table['name'] . '</em><br>';
-							}
-						}
-
-						// data
-						echo '</td>' . "\n" .
-							'<td>';
-
-						$list = explode(';', $log['data'] ?? null);
-
-						foreach ($tables as $table)
-						{
-							if (in_array($table['name'], $list))
-							{
-								echo '<strong>' . $table['name'] . '</strong><br>';
-							}
-							else
-							{
-								echo '<em class="grey">' . $table['name'] . '</em><br>';
-							}
-						}
-
-						// files
-						echo '</td>' . "\n" .
-							'<td>';
-
-						$list = explode(';', $log['files'] ?? null);
-
-						foreach ($directories as $directory)
-						{
-							$directory = rtrim($directory, '/');
-
-							if (in_array($directory, $list))
-							{
-								echo '<strong>' . $directory . '</strong><br>';
-							}
-							else
-							{
-								echo '<em class="grey">' . $directory . '</em><br>';
-							}
-						}
-
-						echo	 "</td>\n" .
-							"</tr>\n</table>\n";
-
+					$show_package($log, false);
 					// close row
-					echo "</td>\n</tr>\n" .
-					// end dir check
-						'<tr>
-							<td colspan="2">
-								<strong>' . $engine->_t('RestoreOptions') . '</strong><br>
-								<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1">
-								<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeysNr') . ' *</small></label><br>
-								<input type="checkbox" id="ignore_files" name="ignore_files" value="1">
-								<label for="ignore_files"><small>' . $engine->_t('IgnoreSameFiles') . ' **</small></label><br>
-							</td>
-						</tr>' .
-					'</table>
+
+			echo
+					'<tr>
+						<td colspan="2">
+							<strong>' . $engine->_t('RestoreOptions') . '</strong><br>
+							<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1">
+							<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeysNr') . ' *</small></label><br>
+							<input type="checkbox" id="ignore_files" name="ignore_files" value="1">
+							<label for="ignore_files"><small>' . $engine->_t('IgnoreSameFiles') . ' **</small></label><br>
+						</td>
+					</tr>' .
+				'</table>
 				<br>';
 
-				echo	'<input type="hidden" name="backup_id" value="' . Ut::html($backup_id) . '">' . "\n" .
-						'<input type="hidden" name="start" value="true">' . "\n" .
-						Ut::perc_replace($engine->_t('ConfirmDbRestore'), ' <code>' . Ut::html($backup_id) . '</code>') . '<br><br>' .
-						'<button type="submit" id="submit" name="restore">' . $engine->_t('RestoreYes') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('RestoreNo') . '</button></a>' .
-						'<br><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
+			echo
+				'<input type="hidden" name="backup_id" value="' . Ut::html($backup_id) . '">' . "\n" .
+				'<input type="hidden" name="start" value="true">' . "\n" .
+				Ut::perc_replace($engine->_t('ConfirmDbRestore'), ' <code>' . Ut::html($backup_id) . '</code>') . '<br><br>' .
+				'<button type="submit" id="submit" name="restore">' . $engine->_t('RestoreYes') . '</button> ' .
+				'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('RestoreNo') . '</button></a>' .
+				'<br><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
 
-				echo '<br><br>
-						<p><small>' .
-							$engine->_t('RestoreOptionsInfo') .
-						'</small></p>';
+			echo
+				'<br><br>
+				<p><small>' .
+				$engine->_t('RestoreOptionsInfo') .
+				'</small></p>';
 
 			echo $engine->form_close();
 		}
@@ -488,124 +518,14 @@ function admin_db_restore($engine, $module, $tables, $directories)
 					foreach ($logs as $i => $log)
 					{
 						// open row
-						echo '<tr class="hl-setting">' . "\n";
-
-						// pack
-						echo '<td>
-								<table class="restore-meta">
-									<tr>' .
-										'<td class="label">' .
-										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '>
-										#</td>' .
-										#'<td>' .
-											'<input type="radio" id="pack_' . $i . '" name="backup_id" value="' . $log['pack'] . '">' .
-										'</td>
-										<th class="t-left nowrap">' .
-											'<label for="pack_' . $i . '">' .
-												$engine->date_format($log['time'], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
-												'</label>' .
-										'</th>
-									</tr>
-									<tr>
-										<td></td>
-										<td>
-											' . ($log['wacko_version'] ?? null) . '
-										</td>
-									</tr>
-									<tr>
-										<td></td>
-										<td>
-											' . (isset($log['size']) ? $engine->binary_multiples($log['size'], false, true, true) : null) . '
-										</td>
-									</tr>
-									<tr>
-										<td></td>
-										<td>
-											<br><a href="' . $engine->href('', '', ['remove' => 1, 'backup_id' => Ut::html($log['pack'])]) . '">' . $engine->_t('DeleteButton') . '</a>
-										</td>
-									</tr>
-								</table>' .
-							"</td>\n";
-
-						// description
-						echo '<td><table>';
-							// cluster root
-							echo '<tr><th colspan="3" class="t-left nowrap">' .
-									$engine->_t('BackupCluster') . ' ' . ($log['cluster'] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
-								'</th></tr>' . "\n";
-							// contents
-							echo '<tr>' .
-									'<th>' . $engine->_t('BackupStructure') . '</th>' .
-									'<th>' . $engine->_t('BackupData') . '</th>' .
-									'<th>' . $engine->_t('BackupFiles') . '</th>' .
-								'</tr>' . "\n";
-							// structure
-							echo '<tr>' .
-									'<td>';
-
-							$list = explode(';', $log['structure']);
-
-							foreach ($tables as $table)
-							{
-								if (in_array($table['name'], $list))
-								{
-									echo '<strong>' . $table['name'] . '</strong><br>';
-								}
-								else
-								{
-									echo '<em class="grey">' . $table['name'] . '</em><br>';
-								}
-							}
-
-							// data
-							echo '</td>' . "\n" .
-								'<td>';
-
-							$list = explode(';', $log['data'] ?? null);
-
-							foreach ($tables as $table)
-							{
-								if (in_array($table['name'], $list))
-								{
-									echo '<strong>' . $table['name'] . '</strong><br>';
-								}
-								else
-								{
-									echo '<em class="grey">' . $table['name'] . '</em><br>';
-								}
-							}
-
-							// files
-							echo '</td>' . "\n" .
-								'<td>';
-
-							$list = explode(';', $log['files'] ?? null);
-
-							foreach ($directories as $directory)
-							{
-								$directory = rtrim($directory, '/');
-
-								if (in_array($directory, $list))
-								{
-									echo '<strong>' . $directory . '</strong><br>';
-								}
-								else
-								{
-									echo '<em class="grey">' . $directory . '</em><br>';
-								}
-							}
-
-							echo	"</td>\n" .
-								"</tr>\n</table>\n";
-
+						$show_package($log, true, $i);
 						// close row
-						echo "</td>\n</tr>\n" .
-							'<tr class="lined"><td colspan="2"></td></tr>' . "\n";
+
+						echo	'<tr class="lined"><td colspan="2"></td></tr>' . "\n";
 					} // end foreach
 
 					echo '</table>';
 					echo $control_buttons;
-
 				}
 				else
 				{
