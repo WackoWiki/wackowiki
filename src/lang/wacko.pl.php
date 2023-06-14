@@ -36,6 +36,7 @@ $wacko_translation = [
 
 	'FormInvalid'				=> 'Wysłany formularz był nieprawidłowy. Spróbuj wysłać ponownie.',
 	'UnitPixel'					=> 'px',
+	'Number'					=> 'Liczba',
 
 	// logged in panel
 	'AccountText'				=> 'Moje konto',

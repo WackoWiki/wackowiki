@@ -36,6 +36,7 @@ $wacko_translation = [
 
 	'FormInvalid'				=> 'Изпратената форма е невалидна, опитайте отново.',
 	'UnitPixel'					=> 'px',
+	'Number'					=> 'Брой',
 
 	// logged in panel
 	'AccountText'				=> 'Личен профил',

@@ -488,12 +488,10 @@ sup, sub {
 .msg.error::after {
 	content: url('./../../image/cross.svg') " ";
 }
-.comment-info {
-	color: #aaa;
+.comment {
 	border: 1px solid #d5d9e6;
-	font-weight: bold;
 }
-.msg.comment-info::after {
+.msg.comment::after {
 	content: url('./../../image/comment.svg') " ";
 }
 

@@ -8,7 +8,7 @@ $info = <<<EOD
 Description:
 	Print last editor of the page.
 
-	Last edited by: SomeUser (22.12.2018 13:08 ) fixed two typos
+	Last edited by: SomeUser (22.12.2018 13:08) fixed two typos
 
 Usage:
 	{{lastedited}}

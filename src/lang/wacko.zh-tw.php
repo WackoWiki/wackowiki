@@ -36,6 +36,7 @@ $wacko_translation = [
 
 	'FormInvalid'				=> '提交的表格無效。 嘗試再次提交。',
 	'UnitPixel'					=> 'px',
+	'Number'					=> 'Number',
 
 	// logged in panel
 	'AccountText'				=> '帳',

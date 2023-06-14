@@ -134,7 +134,7 @@ function admin_content_deleted($engine, $module)
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col"><?php echo $engine->_t('BbHits');?></th>
+					<th scope="col"><?php echo $engine->_t('Number');?></th>
 					<th scope="col"><?php echo $engine->_t('Category'); ?></th>
 				</tr>
 			</thead>

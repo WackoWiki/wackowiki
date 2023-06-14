@@ -36,6 +36,7 @@ $wacko_translation = [
 
 	'FormInvalid'				=> 'A benyújtott űrlap érvénytelen. Próbáld meg újra benyújtani.',
 	'UnitPixel'					=> 'px',
+	'Number'					=> 'Száma',
 
 	// logged in panel
 	'AccountText'				=> 'Fiók',

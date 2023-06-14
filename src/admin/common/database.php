@@ -395,7 +395,10 @@ function get_table($engine, $table, $drop = true): string
 		}
 	}
 
-	$schema_create .= "\n) ENGINE={$engine->db->db_engine} CHARSET={$engine->db->db_charset} COLLATE={$engine->db->db_collation};";
+	$schema_create .= "\n) " .
+		"ENGINE={$engine->db->db_engine} " .
+		"CHARSET={$engine->db->db_charset} " .
+		"COLLATE={$engine->db->db_collation};";
 
 	return ($schema_create);
 }
