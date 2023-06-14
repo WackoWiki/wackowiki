@@ -286,8 +286,6 @@ class WackoFormatter
 				}
 			}
 
-			$formatter = mb_strtolower($formatter);
-
 			// no formatter specified, use default
 			if ($formatter == '')
 			{

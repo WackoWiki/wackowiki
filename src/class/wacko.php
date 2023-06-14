@@ -21,6 +21,9 @@ class Wacko
 		'TAG'			=> '[\p{L}\p{M}\p{Nd}\.\-\/]',
 		'TAG_P'			=> '\p{L}\p{M}\p{Nd}\.\-\/',
 
+		'ACTION'		=> '\p{Latin}\_\-',
+		'FORMATTER'		=> '\p{Latin}\_\-\/',
+
 		'UPPER'			=> '[\p{Lu}]',
 		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
 		'LOWER'			=> '[\p{Ll}\/]',
@@ -4929,13 +4932,13 @@ class Wacko
 	 * Sanitize a string
 	 *
 	 * @param string	$string		String to sanitize.
-	 * @param bool		$keep_nl	optional Whether to keep newlines. Default: false.
+	 * @param bool		$remove_nl	optional Whether to keep newlines. Default: false.
 	 *
 	 * @return string Sanitized string.
 	 */
-	function sanitize_text_field($string, $keep_nl = false): string
+	function sanitize_text_field($string, $remove_nl = false): string
 	{
-		return Ut::strip_all_tags($string, $keep_nl);
+		return Ut::strip_all_tags($string, $remove_nl);
 	}
 
 	function sanitize_username($user_name): string
@@ -5442,9 +5445,9 @@ class Wacko
 	function theme_template($section, $mod = ''): string
 	{
 		$theme_path		= Ut::join_path(THEME_DIR, $this->db->theme, 'appearance');
-		$error_message	= $this->_t('ThemeCorrupt') . ': ' . $this->db->theme;
+		$error			= $this->_t('ThemeCorrupt') . ': ' . $this->db->theme;
 
-		return $this->include_buffered($section . $mod . '.php', $error_message, '', $theme_path);
+		return $this->include_buffered($section . $mod . '.php', $error, '', $theme_path);
 	}
 
 	// help action wrapper
@@ -5464,15 +5467,17 @@ class Wacko
 	*/
 	function action(string $action, array $params = [], bool $link_tracking = false): string
 	{
-		$action = mb_strtolower(trim($action));
-		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
+		// remove invalid characters
+		$action	= preg_replace('/[^' . self::PATTERN['ACTION'] . ']/u', '', $action);
+		$action	= mb_strtolower(trim($action));
+		$error	= '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
 
 		if (!$link_tracking)
 		{
 			$this->stop_link_tracking();
 		}
 
-		$result = $this->include_buffered($action . '.php', $errmsg, $params, ACTION_DIR);
+		$result = $this->include_buffered($action . '.php', $error, $params, ACTION_DIR);
 
 		$this->start_link_tracking();
 		$this->http->no_cache();
@@ -5488,9 +5493,9 @@ class Wacko
 		}
 
 		$method_location	= Ut::join_path($handler, $method . '.php');
-		$errmsg				= '<em>' . $this->_t('UnknownMethod') . ' <code>' . $method_location . '</code></em>';
+		$error				= '<em>' . $this->_t('UnknownMethod') . ' <code>' . $method_location . '</code></em>';
 
-		$result				= $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
+		$result				= $this->include_buffered($method_location, $error, '', HANDLER_DIR);
 
 		return (!strncmp($result, ADD_NO_DIV, strlen(ADD_NO_DIV)))
 			? mb_substr($result, strlen(ADD_NO_DIV))
@@ -5505,8 +5510,12 @@ class Wacko
 
 	function _format($text, $formatter, &$options): string
 	{
-		$error	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
-		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $error, compact('text', 'options'));
+		// remove invalid characters
+		$formatter	= preg_replace('/[^' . self::PATTERN['FORMATTER'] . ']/u', '', $formatter);
+		$formatter	= mb_strtolower(trim($formatter));
+		$error		= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
+
+		$text		= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $error, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->db->typografica)
 		{
