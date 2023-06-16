@@ -60,8 +60,8 @@ class Reflection implements PluginInterface
 
 	public function execute(PHPThumb $phpthumb): PHPThumb
 	{
-		$this->current_dimensions	= $phpthumb->getcurrent_dimensions();
-		$this->working_image		= $phpthumb->getworking_image();
+		$this->current_dimensions	= $phpthumb->getCurrentDimensions();
+		$this->working_image		= $phpthumb->getWorkingImage();
 		$this->new_image			= $phpthumb->getOldImage();
 		$this->options				= $phpthumb->getOptions();
 

@@ -1195,12 +1195,10 @@ class GD extends PHPThumb
 		$gd_info = gd_info();
 
 		$is_compatible = match ($this->format) {
-			'AVIF'	=> $gd_info[$this->format . ' Support'],
-			'GIF'	=> $gd_info['GIF Create Support'],
-			'JPEG'	=> $gd_info[$this->format . ' Support'],
-			'PNG'	=> $gd_info[$this->format . ' Support'],
-			'WEBP'	=> $gd_info['WebP Support'],
-			default	=> false,
+			'AVIF', 'JPEG', 'PNG'	=> $gd_info[$this->format . ' Support'],
+			'GIF'					=> $gd_info['GIF Create Support'],
+			'WEBP'					=> $gd_info['WebP Support'],
+			default					=> false,
 		};
 
 		$suffix = strtolower($this->format);

@@ -107,25 +107,25 @@ class Wacko
 	public bool $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
 	public array $paragrafica_styles	= [
 		'before'	=> [
-						'_before'	=> '',
-						'_after'	=> '',
-						'before'	=> '<span class="pmark">[##]</span><br>',
-						'after'		=> ''],
+			'_before'	=> '',
+			'_after'	=> '',
+			'before'	=> '<span class="pmark">[##]</span><br>',
+			'after'		=> ''],
 		'after'		=> [
-						'_before'	=> '',
-						'_after'	=> '',
-						'before'	=> '',
-						'after'		=> '<span class="pmark">[##]</span>'],
+			'_before'	=> '',
+			'_after'	=> '',
+			'before'	=> '',
+			'after'		=> '<span class="pmark">[##]</span>'],
 		'right'		=> [
-						'_before'	=> '<div class="pright"><div class="p-">' . NBSP . '<span class="pmark">[##]</span></div><div class="pbody-">',
-						'_after'	=> '</div></div>',
-						'before'	=> '',
-						'after'		=> ''],
+			'_before'	=> '<div class="pright"><div class="p-">' . NBSP . '<span class="pmark">[##]</span></div><div class="pbody-">',
+			'_after'	=> '</div></div>',
+			'before'	=> '',
+			'after'		=> ''],
 		'left'		=> [
-						'_before'	=> '<div class="pleft"><div class="p-"><span class="pmark">[##]</span>' . NBSP . '</div><div class="pbody-">',
-						'_after'	=> '</div></div>',
-						'before'	=> '',
-						'after'		=> ''],
+			'_before'	=> '<div class="pleft"><div class="p-"><span class="pmark">[##]</span>' . NBSP . '</div><div class="pbody-">',
+			'_after'	=> '</div></div>',
+			'before'	=> '',
+			'after'		=> ''],
 	];
 	public array $paragrafica_patches = [
 		'before'	=> ['before'],
