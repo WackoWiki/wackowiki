@@ -149,6 +149,10 @@ else // login
 					{
 						$error = $this->_t(($user['account_status'] == 1)? 'UserApprovalPending' : 'AccountDisabled');
 					}
+					else if ($this->db->email_confirmation && $user['email_confirm'])
+					{
+						$error = $this->_t('EmailNotVerified');
+					}
 					else
 					{
 						$this->log_user_in($user, $persistent);

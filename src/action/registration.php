@@ -29,7 +29,7 @@ $password		= '';
 $conf_password	= '';
 $error			= '';
 
-// reconnect securely in tls mode
+// reconnect securely in TLS mode
 $this->http->ensure_tls($this->href());
 
 $this->no_way_back = true; // prevent goback'ing that page

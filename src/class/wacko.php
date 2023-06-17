@@ -8973,7 +8973,11 @@ class Wacko
 		{
 			return $this->_t('EmailTaken') . ' ';
 		}
-		else if (!empty($this->db->allowed_email_domains) && !$this->validate_email_domain($email))
+		else if (!empty($this->db->allowed_email_domains) && !$this->validate_email_domain($email, $this->db->allowed_email_domains))
+		{
+			return Ut::perc_replace($this->_t('EmailDomainNotAllowed'), '<code>' . $email . '</code>') . ' ';
+		}
+		else if (!empty($this->db->forbidden_email_domains) && $this->validate_email_domain($email, $this->db->forbidden_email_domains, false))
 		{
 			return Ut::perc_replace($this->_t('EmailDomainNotAllowed'), '<code>' . $email . '</code>') . ' ';
 		}
@@ -9008,14 +9012,14 @@ class Wacko
 	}
 
 	// only allow and send email to addresses in the given domain(s)
-	function validate_email_domain($email_address): ?bool
+	function validate_email_domain($email_address, $email_domains, $allowed = true): ?bool
 	{
 		$domain = substr($email_address, strpos($email_address, '@') + 1);
 
 		// see if we're limited to a set of known domains
-		if(!empty($this->db->allowed_email_domains))
+		if(!empty($email_domains))
 		{
-			$allowed_domains = preg_split('/[\s,]+/', $this->db->allowed_email_domains, -1, PREG_SPLIT_NO_EMPTY);
+			$allowed_domains = preg_split('/[\s,]+/', $email_domains, -1, PREG_SPLIT_NO_EMPTY);
 
 			foreach($allowed_domains as $email_domain)
 			{
@@ -9025,7 +9029,10 @@ class Wacko
 				}
 			}
 
-			$this->log(2, Ut::perc_replace($this->_t('LogUserEmailNotAllowed', SYSTEM_LANG), $email_address));
+			if ($allowed)
+			{
+				$this->log(2, Ut::perc_replace($this->_t('LogUserEmailNotAllowed', SYSTEM_LANG), $email_address));
+			}
 
 			return false;
 		}

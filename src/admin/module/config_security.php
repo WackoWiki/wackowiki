@@ -42,7 +42,9 @@ function admin_config_security($engine, $module)
 		$config['allow_persistent_cookie']		= (int) ($_POST['allow_persistent_cookie'] ?? 0);
 		$config['disable_wikiname']				= (int) ($_POST['disable_wikiname'] ?? 0);
 		$config['allow_email_reuse']			= (int) ($_POST['allow_email_reuse'] ?? 0);
+		$config['email_confirmation']			= (int) ($_POST['email_confirmation'] ?? 0);
 		$config['allowed_email_domains']		= (string) ($_POST['allowed_email_domains'] ?? '');
+		$config['forbidden_email_domains']		= (string) ($_POST['forbidden_email_domains'] ?? '');
 		$config['tls']							= (int) ($_POST['tls'] ?? 0);
 		$config['tls_implicit']					= (int) ($_POST['tls_implicit'] ?? 0);
 		$config['pwd_admin_min_chars']			= (int) $_POST['pwd_admin_min_chars'];
@@ -131,11 +133,39 @@ function admin_config_security($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
+					<label for="username_chars_min"><strong><?php echo $engine->_t('UsernameLength');?></strong><br>
+					<small><?php echo $engine->_t('UsernameLengthInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" min="0" maxlength="3" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>"> <label for="username_chars_min"><?php echo $engine->_t('Min');?></label>
+					<input type="number" min="0" maxlength="3" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>"> <label for="username_chars_max"><?php echo $engine->_t('Max');?></label>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('EmailSection');?>
+				</th>
+			</tr>			<tr class="hl-setting">
+				<td class="label">
 					<label for="allow_email_reuse"><strong><?php echo $engine->_t('AllowEmailReuse');?></strong><br>
 					<small><?php echo $engine->_t('AllowEmailReuseInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ($engine->db->allow_email_reuse ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="email_confirmation"><strong><?php echo $engine->_t('EmailConfirmation');?></strong><br>
+					<small><?php echo $engine->_t('EmailConfirmationInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="email_confirmation_on" name="email_confirmation" value="1"<?php echo ($engine->db->email_confirmation == 1 ? ' checked' : '');?>><label for="email_confirmation_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="email_confirmation_off" name="email_confirmation" value="0"<?php echo ($engine->db->email_confirmation == 0 ? ' checked' : '');?>><label for="email_confirmation_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -155,12 +185,11 @@ function admin_config_security($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="username_chars_min"><strong><?php echo $engine->_t('UsernameLength');?></strong><br>
-					<small><?php echo $engine->_t('UsernameLengthInfo');?></small></label>
+					<label for="forbidden_email_domains"><strong><?php echo $engine->_t('ForbiddenEmailDomains');?></strong><br>
+					<small><?php echo $engine->_t('ForbiddenEmailDomainsInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="3" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>"> <label for="username_chars_min"><?php echo $engine->_t('Min');?></label>
-					<input type="number" min="0" maxlength="3" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>"> <label for="username_chars_max"><?php echo $engine->_t('Max');?></label>
+					<input type="text" size="50" maxlength="255" id="forbidden_email_domains" name="forbidden_email_domains" value="<?php echo Ut::html($engine->db->forbidden_email_domains);?>">
 				</td>
 			</tr>
 			<tr>
