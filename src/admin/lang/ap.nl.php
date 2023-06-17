@@ -530,12 +530,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Gebruikersnaam lengte:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'Bevestiging per e-mail afdwingen:',
+	'EmailConfirmationInfo'		=> 'Vereist dat de gebruiker zijn e-mailadres verifieert voordat hij kan inloggen.',
+	'AllowedEmailDomains'		=> 'Toegestane e-maildomeinen:',
+	'AllowedEmailDomainsInfo'	=> 'Toegestane e-maildomeinen, gescheiden door komma\'s, bijv. <code>example.com, local.lan</code> etc., anders zijn alle e-maildomeinen toegestaan.',
+	'ForbiddenEmailDomains'		=> 'Verboden e-maildomeinen:',
+	'ForbiddenEmailDomainsInfo'	=> 'Verboden e-maildomeinen, gescheiden door komma\'s, bijv. <code>example.com, local.lan</code> enz.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -993,6 +999,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Bestanden',
+	'BackupNote'				=> 'Opmerking:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1071,6 +1078,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Ja',
 	'RestoreNo'					=> 'Nee',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'Back-up %1 gearchiveerd.',
+	'BackupArchiveExists'		=> 'Back-uparchief %1 bestaat al.',
+	'LogBackupArchived'			=> 'Back-up ##%1## gearchiveerd.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

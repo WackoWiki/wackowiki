@@ -516,12 +516,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> '允许持久性 cookie。',
 	'DisableWikiName'			=> '禁用 WikiName：',
 	'DisableWikiNameInfo'		=> '禁用 WikiName 的强制使用。 允许使用传统昵称注册用户，而不是强制 NameSurname。',
-	'AllowEmailReuse'			=> '允许电子邮件地址重复使用：',
-	'AllowEmailReuseInfo'		=> '不同的用户可以使用相同的电子邮件地址注册。',
-	'AllowedEmailDomains'		=> '允许的电子邮件域名',
-	'AllowedEmailDomainsInfo'	=> '允许用逗号分隔的电子邮件域名，例如： <code>example.com, local.lan</code> 等等，允许所有电子邮件域。',
 	'UsernameLength'			=> '用户名长度：',
 	'UsernameLengthInfo'		=> '用户名中的最小和最大字符数。',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> '允许电子邮件地址重复使用：',
+	'AllowEmailReuseInfo'		=> '不同的用户可以使用相同的电子邮件地址注册。',
+	'EmailConfirmation'			=> '强制执行电子邮件确认：',
+	'EmailConfirmationInfo'		=> '要求用户在登录前确认其电子邮件地址。',
+	'AllowedEmailDomains'		=> '允许的电子邮件域名',
+	'AllowedEmailDomainsInfo'	=> '允许用逗号分隔的电子邮件域名，例如： <code>example.com, local.lan</code> 等等，允许所有电子邮件域。',
+	'ForbiddenEmailDomains'		=> '禁止的电子邮件域：',
+	'ForbiddenEmailDomainsInfo'	=> '禁用的电子邮件域以逗号分隔，例如： <code>example.com, local.lan</code> etc.',
 
 	'CaptchaSection'			=> '验证码',
 	'EnableCaptcha'				=> '启用验证码：',
@@ -976,6 +982,7 @@ $ap_translation = [
 	'BackupTable'				=> '表',
 	'BackupCluster'				=> '集群：',
 	'BackupFiles'				=> '文件',
+	'BackupNote'				=> '注意：',
 	'BackupSettings'			=> '指定所需的备份方案。<br>' .
 									'根集群不影响全局文件备份和缓存文件备份（被选择它们总是完整保存）。<br>' .
 									'<br>' .
@@ -1054,6 +1061,10 @@ $ap_translation = [
 	'RestoreYes'				=> '是',
 	'RestoreNo'					=> '否',
 	'LogDbRestored'				=> '备份 ##%1## 的数据库已还原。',
+
+	'BackupArchived'			=> '备份%1已归档。',
+	'BackupArchiveExists'		=> '备份档案%1已经存在。',
+	'LogBackupArchived'			=> '备份##%1##已归档。',
 
 	// User module
 	'UsersInfo'					=> '在这里，您可以更改您的用户信息和某些特定选项。',

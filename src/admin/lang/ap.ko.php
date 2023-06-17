@@ -535,12 +535,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> '전자 메일 확인을 적용합니다:',
+	'EmailConfirmationInfo'		=> '사용자가 로그인하기 전에 전자 메일 주소를 확인하도록 요구합니다.',
+	'AllowedEmailDomains'		=> '허용된 전자 메일 도메인::',
+	'AllowedEmailDomainsInfo'	=> '쉼표로 구분된 허용된 이메일 도메인(예: <code>example.com, local.lan</code> 등), 그렇지 않으면 모든 이메일 도메인이 허용됩니다.',
+	'ForbiddenEmailDomains'		=> '금지된 이메일 도메인:',
+	'ForbiddenEmailDomainsInfo'	=> '쉼표로 구분된 금지 이메일 도메인(예: <code>example.com, local.lan</code> 등).',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -997,6 +1003,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> '파일',
+	'BackupNote'				=> '참고:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1075,6 +1082,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> '백업 %1을(를) 보관했습니다.',
+	'BackupArchiveExists'		=> '백업 아카이브 %1이(가) 이미 있습니다.',
+	'LogBackupArchived'			=> '백업 ##%1##을(를) 보관했습니다.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

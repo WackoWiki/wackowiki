@@ -534,12 +534,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Erlaube dauerhafte Cookies.',
 	'DisableWikiName'			=> 'Deaktiviere WikiName:',
 	'DisableWikiNameInfo'		=> 'Deaktiviert die die obligatorische Verwendung von WikiNamen. Ermöglicht die Registrierung von Benutzern mit traditionellen Spitznamen, NameVorname ist nicht zwingend.',
-	'AllowEmailReuse'			=> 'Erlaubt die Wiederverwendung von E-Mail-Adressen:',
-	'AllowEmailReuseInfo'		=> 'Verschiedene Benutzer können sich mit derselben E-Mail-Adresse registrieren.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Länge von Benutzernamen:',
 	'UsernameLengthInfo'		=> 'Mindestens erforderliche und maximal zulässige Zeichenanzahl in Benutzernamen.',
+
+	'EmailSection'				=> 'E-Mail',
+	'AllowEmailReuse'			=> 'Erlaubt die Wiederverwendung von E-Mail-Adressen:',
+	'AllowEmailReuseInfo'		=> 'Verschiedene Benutzer können sich mit derselben E-Mail-Adresse registrieren.',
+	'EmailConfirmation'			=> 'E-Mail-Bestätigung erforderlich:',
+	'EmailConfirmationInfo'		=> 'Erfordert, dass der Benutzer seine E-Mail-Adresse verifiziert, bevor er sich anmelden kann.',
+	'AllowedEmailDomains'		=> 'Erlaubte Email-Domainen:',
+	'AllowedEmailDomainsInfo'	=> 'Erlaubte E-Mail-Domains durch Komma getrennt, z. B. <code>example.com, local.lan</code> usw., anderenfalls sind alle E-Mail-Domainen erlaubt.',
+	'ForbiddenEmailDomains'		=> 'Nicht gestattete E-Mail-Domänen:',
+	'ForbiddenEmailDomainsInfo'	=> 'Nicht gestattete E-Mail-Domänen durch Komma getrennt, e.g. <code>example.com, local.lan</code> usw.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Aktiviere Captcha:',
@@ -996,6 +1002,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Tabelle',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Dateien',
+	'BackupNote'				=> 'Hinweis:',
 	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br>' .
 									'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollständig gespeichert).<br>' .
 									'<br>' .
@@ -1074,6 +1081,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Ja',
 	'RestoreNo'					=> 'Nein',
 	'LogDbRestored'				=> 'Sicherung ##%1## der Datenbank wiederhergestellt.',
+
+	'BackupArchived'			=> 'Sicherung %1 komprimiert.',
+	'BackupArchiveExists'		=> 'Sicherungsarchiv %1 existiert bereits.',
+	'LogBackupArchived'			=> 'Sicherung ##%1## komprimiert.',
 
 	// User module
 	'UsersInfo'					=> 'Hier können Benutzerinformationen und bestimmte spezifische Optionen geändert werden.',

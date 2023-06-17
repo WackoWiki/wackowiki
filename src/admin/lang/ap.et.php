@@ -532,12 +532,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'Jõustada e-posti kinnitus:',
+	'EmailConfirmationInfo'		=> 'Nõuab kasutajalt oma e-posti aadressi kinnitamist enne sisselogimist.',
+	'AllowedEmailDomains'		=> 'Lubatud e-posti domeenid:',
+	'AllowedEmailDomainsInfo'	=> 'Lubatud e-posti domeenid komadega eraldatud, nt <code>example.com, local.lan</code> jne, muidu on lubatud kõik e-posti domeenid.',
+	'ForbiddenEmailDomains'		=> 'Keelatud e-posti domeenid:',
+	'ForbiddenEmailDomainsInfo'	=> 'Keelatud e-posti domeenid komadega eraldatud, nt <code>example.com, local.lan</code> jne.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -994,6 +1000,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Tabel',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Failid',
+	'BackupNote'				=> 'Meeldetuletus:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1072,6 +1079,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Jah',
 	'RestoreNo'					=> 'Ei',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'Varukoopia %1 arhiveeritud.',
+	'BackupArchiveExists'		=> 'Varukoopiaarhiiv %1 on juba olemas.',
+	'LogBackupArchived'			=> 'Varukoopia ##%1## arhiveeritud.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

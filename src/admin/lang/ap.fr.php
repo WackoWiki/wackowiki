@@ -531,12 +531,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Autoriser les cookies persistants.',
 	'DisableWikiName'			=> 'Désactiver le NomWiki :',
 	'DisableWikiNameInfo'		=> 'Désactivez l’utilisation obligatoire du NomWiki. Permet d’enregistrer les utilisateurs avec des surnoms traditionnels, et non forcés NameSurname.',
-	'AllowEmailReuse'			=> 'Autoriser la réutilisation de l’adresse e-mail :',
-	'AllowEmailReuseInfo'		=> 'Différents utilisateurs peuvent s’inscrire avec la même adresse e-mail.',
-	'AllowedEmailDomains'		=> 'Allowed email domains :',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Longueur du nom d’utilisateur :',
 	'UsernameLengthInfo'		=> 'Nombre minimum et maximum de caractères dans les noms d’utilisateur.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Autoriser la réutilisation de l’adresse e-mail :',
+	'AllowEmailReuseInfo'		=> 'Différents utilisateurs peuvent s’inscrire avec la même adresse e-mail.',
+	'EmailConfirmation'			=> 'Confirmation de l\'adresse électronique :',
+	'EmailConfirmationInfo'		=> 'Exige que l\'utilisateur vérifie son adresse électronique avant de pouvoir se connecter.',
+	'AllowedEmailDomains'		=> 'Domaines de messagerie autorisés :',
+	'AllowedEmailDomainsInfo'	=> 'Domaines de messagerie autorisés séparés par des virgules, par exemple <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
+	'ForbiddenEmailDomains'		=> 'Domaines de messagerie interdits :',
+	'ForbiddenEmailDomainsInfo'	=> 'Domaines de courrier électronique interdits, séparés par des virgules, par exemple <code>example.com, local.lan</code> etc.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Activer Captcha :',
@@ -993,6 +999,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Fichiers',
+	'BackupNote'				=> 'Note :',
 	'BackupSettings'			=> 'Spécifiez le schéma de sauvegarde souhaité.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1071,6 +1078,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'si',
 	'RestoreNo'					=> 'non',
 	'LogDbRestored'				=> 'Sauvegarde ##%1## de la base de données restaurée.',
+
+	'BackupArchived'			=> 'Sauvegarde %1 archivée.',
+	'BackupArchiveExists'		=> 'L\'archive de sauvegarde %1 existe déjà.',
+	'LogBackupArchived'			=> 'Sauvegarde ##%1## archivée.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

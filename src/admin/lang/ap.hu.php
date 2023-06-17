@@ -532,12 +532,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'Erősítse meg az e-mail megerősítést:',
+	'EmailConfirmationInfo'		=> 'A felhasználónak igazolnia kell az e-mail címét, mielőtt bejelentkezhet.',
+	'AllowedEmailDomains'		=> 'Engedélyezett e-mail tartományok:',
+	'AllowedEmailDomainsInfo'	=> 'Engedélyezett e-mail tartományok vesszővel elválasztva, pl. <code>example.com, local.lan</code> stb., egyébként minden e-mail tartomány engedélyezett.',
+	'ForbiddenEmailDomains'		=> 'Tiltott e-mail tartományok:',
+	'ForbiddenEmailDomainsInfo'	=> 'Tiltott e-mail tartományok vesszővel elválasztva, pl. <code>example.com, local.lan</code> stb.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -994,6 +1000,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Fájlok',
+	'BackupNote'				=> 'Megjegyzés:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1072,6 +1079,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Igen',
 	'RestoreNo'					=> 'Nem',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'Biztonsági mentés %1 archiválva.',
+	'BackupArchiveExists'		=> 'A %1 biztonsági mentés archívuma már létezik.',
+	'LogBackupArchived'			=> 'Biztonsági mentés ##%1## archiválva.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

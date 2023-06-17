@@ -532,12 +532,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'Наложете потвърждение по имейл:',
+	'EmailConfirmationInfo'		=> 'Изисква от потребителя да потвърди своя имейл адрес, преди да влезе в системата.',
+	'AllowedEmailDomains'		=> 'Разрешени имейл домейни:',
+	'AllowedEmailDomainsInfo'	=> 'Позволените имейл домейни се разделят със запетая, например <code>example.com, local.lan</code> и т.н., в противен случай всички имейл домейни са разрешени.',
+	'ForbiddenEmailDomains'		=> 'Забранени имейл домейни:',
+	'ForbiddenEmailDomainsInfo'	=> 'Забранени имейл домейни, разделени със запетая, например ##example.com, local.lan## и т.н.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -994,6 +1000,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Файлове',
+	'BackupNote'				=> 'Забележка:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1072,6 +1079,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'Архивирано е резервно копие %1.',
+	'BackupArchiveExists'		=> 'Архивът на резервно копие %1 вече съществува.',
+	'LogBackupArchived'			=> 'Архивирано е резервно копие ##%1##.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

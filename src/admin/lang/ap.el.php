@@ -532,12 +532,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'Επιβολή επιβεβαίωσης μέσω email:',
+	'EmailConfirmationInfo'		=> 'Απαιτεί από τον χρήστη να επιβεβαιώσει τη διεύθυνση ηλεκτρονικού ταχυδρομείου του πριν συνδεθεί.',
+	'AllowedEmailDomains'		=> 'Επιτρεπόμενοι τομείς ηλεκτρονικού ταχυδρομείου:',
+	'AllowedEmailDomainsInfo'	=> 'Επιτρεπόμενοι τομείς ηλεκτρονικού ταχυδρομείου διαχωρισμένοι με κόμμα, π.χ. <code>example.com, local.lan</code> κ.λπ., διαφορετικά επιτρέπονται όλοι οι τομείς ηλεκτρονικού ταχυδρομείου.',
+	'ForbiddenEmailDomains'		=> 'Απαγορευμένοι τομείς ηλεκτρονικού ταχυδρομείου:',
+	'ForbiddenEmailDomainsInfo'	=> 'Απαγορευμένοι τομείς ηλεκτρονικού ταχυδρομείου διαχωρισμένοι με κόμμα, π.χ. <code>example.com, local.lan</code> κ.λπ.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -994,6 +1000,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Αρχεία',
+	'BackupNote'				=> 'Προσοχή:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1072,6 +1079,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'Το αντίγραφο ασφαλείας %1 αρχειοθετήθηκε.',
+	'BackupArchiveExists'		=> 'Το αρχείο αντιγράφων ασφαλείας %1 υπάρχει ήδη.',
+	'LogBackupArchived'			=> 'Το αντίγραφο ασφαλείας ##%1## αρχειοθετήθηκε.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

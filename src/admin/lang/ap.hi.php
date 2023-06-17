@@ -535,12 +535,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'ईमेल पुष्टि लागू करें:',
+	'EmailConfirmationInfo'		=> 'लॉग इन करने से पहले उपयोगकर्ता को अपना ईमेल पता सत्यापित करने की आवश्यकता होती है।',
+	'AllowedEmailDomains'		=> 'अनुमत ईमेल डोमेन:',
+	'AllowedEmailDomainsInfo'	=> 'अनुमत ईमेल डोमेन कॉमा से अलग किए गए, उदा. <code>example.com, local.lan</code> आदि, अन्यथा सभी ईमेल डोमेन की अनुमति है।',
+	'ForbiddenEmailDomains'		=> 'निषिद्ध ईमेल डोमेन:',
+	'ForbiddenEmailDomainsInfo'	=> 'निषिद्ध ईमेल डोमेन कॉमा से अलग किए गए, उदा.  <code>example.com, local.lan</code> आदि।',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -997,6 +1003,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'फ़ाइलें',
+	'BackupNote'				=> 'सूचना:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1075,6 +1082,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'बैकअप %1 संगृहीत।',
+	'BackupArchiveExists'		=> 'बैकअप संग्रह% 1 पहले से मौजूद है।',
+	'LogBackupArchived'			=> 'बैकअप ##%1##  संगृहीत।',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

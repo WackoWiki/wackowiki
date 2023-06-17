@@ -535,12 +535,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'اجرای تایید ایمیل:',
+	'EmailConfirmationInfo'		=> 'از کاربر می‌خواهد قبل از ورود به سیستم، آدرس ایمیل خود را تأیید کند.',
+	'AllowedEmailDomains'		=> 'دامنه های مجاز ایمیل:',
+	'AllowedEmailDomainsInfo'	=> 'امنه های ایمیل مجاز با کاما از هم جدا شده اند، به عنوان مثال. <code>example.com, local.lan</code> و غیره، در غیر این صورت همه دامنه های ایمیل مجاز هستند.',
+	'ForbiddenEmailDomains'		=> 'دامنه های ایمیل ممنوع:',
+	'ForbiddenEmailDomainsInfo'	=> 'دامنه های ایمیل ممنوع با کاما از هم جدا شده اند، به عنوان مثال. <code>example.com, local.lan</code> غیره.',
 
 	'CaptchaSection'			=> 'کپچا',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -997,6 +1003,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'فایل‌ها',
+	'BackupNote'				=> 'Note:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1075,6 +1082,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'بله',
 	'RestoreNo'					=> 'خیر',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'پشتیبان %1 بایگانی شد.',
+	'BackupArchiveExists'		=> 'بایگانی پشتیبان %1 از قبل وجود دارد.',
+	'LogBackupArchived'			=> 'پشتیبان ##%1## بایگانی شد.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',

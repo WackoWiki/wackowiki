@@ -530,12 +530,18 @@ $ap_translation = [
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'EmailSection'				=> 'Email',
+	'AllowEmailReuse'			=> 'Allow email address re-use:',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'EmailConfirmation'			=> 'Impor confirmação por correio eletrónico:',
+	'EmailConfirmationInfo'		=> 'Requer que o utilizador verifique o seu endereço de correio eletrónico antes de poder iniciar sessão.',
+	'AllowedEmailDomains'		=> 'Domínios de correio eletrónico permitidos:',
+	'AllowedEmailDomainsInfo'	=> 'Domínios de correio eletrónico permitidos separados por vírgulas, por exemplo, <code>example.com, local.lan</code> etc., caso contrário, todos os domínios de correio eletrónico são permitidos.',
+	'ForbiddenEmailDomains'		=> 'Domínios de correio eletrónico proibidos:',
+	'ForbiddenEmailDomainsInfo'	=> 'Domínios de correio eletrónico proibidos separados por vírgulas, por exemplo, <code>example.com, local.lan</code> etc.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -992,6 +998,7 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Ficheiros',
+	'BackupNote'				=> 'Nota:',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1070,6 +1077,10 @@ $ap_translation = [
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+
+	'BackupArchived'			=> 'Cópia de segurança %1 arquivada.',
+	'BackupArchiveExists'		=> 'O arquivo de cópia de segurança %1 já existe.',
+	'LogBackupArchived'			=> 'Cópia de segurança ##%1## arquivada.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',
