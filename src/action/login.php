@@ -151,7 +151,9 @@ else // login
 					}
 					else if ($this->db->email_confirmation && $user['email_confirm'])
 					{
-						$error = $this->_t('EmailNotVerified');
+						$error =
+							$this->_t('EmailNotVerified') . '<br>' .
+							$this->_t('EmailConfirmRequired');
 					}
 					else
 					{
