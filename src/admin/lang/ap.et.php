@@ -543,7 +543,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'Lubatud e-posti domeenid:',
 	'AllowedEmailDomainsInfo'	=> 'Lubatud e-posti domeenid komadega eraldatud, nt <code>example.com, local.lan</code> jne, muidu on lubatud kõik e-posti domeenid.',
 	'ForbiddenEmailDomains'		=> 'Keelatud e-posti domeenid:',
-	'ForbiddenEmailDomainsInfo'	=> 'Keelatud e-posti domeenid komadega eraldatud, nt <code>example.com, local.lan</code> jne.',
+	'ForbiddenEmailDomainsInfo'	=> 'Keelatud e-posti domeenid komadega eraldatud, nt <code>example.com, local.lan</code> jne. (ainult siis, kui lubatud e-posti domeenide nimekiri on tühi)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',

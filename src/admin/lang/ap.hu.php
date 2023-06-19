@@ -543,7 +543,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'Engedélyezett e-mail tartományok:',
 	'AllowedEmailDomainsInfo'	=> 'Engedélyezett e-mail tartományok vesszővel elválasztva, pl. <code>example.com, local.lan</code> stb., egyébként minden e-mail tartomány engedélyezett.',
 	'ForbiddenEmailDomains'		=> 'Tiltott e-mail tartományok:',
-	'ForbiddenEmailDomainsInfo'	=> 'Tiltott e-mail tartományok vesszővel elválasztva, pl. <code>example.com, local.lan</code> stb.',
+	'ForbiddenEmailDomainsInfo'	=> 'Tiltott e-mail tartományok vesszővel elválasztva, pl. <code>example.com, local.lan</code> stb. (csak akkor hatékony, ha a megengedett e-mail domainek listája üres)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',

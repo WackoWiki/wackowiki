@@ -545,7 +545,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'Erlaubte Email-Domainen:',
 	'AllowedEmailDomainsInfo'	=> 'Erlaubte E-Mail-Domains durch Komma getrennt, z. B. <code>example.com, local.lan</code> usw., anderenfalls sind alle E-Mail-Domainen erlaubt.',
 	'ForbiddenEmailDomains'		=> 'Nicht gestattete E-Mail-Domänen:',
-	'ForbiddenEmailDomainsInfo'	=> 'Nicht gestattete E-Mail-Domänen durch Komma getrennt, e.g. <code>example.com, local.lan</code> usw.',
+	'ForbiddenEmailDomainsInfo'	=> 'Nicht gestattete E-Mail-Domänen durch Komma getrennt, e.g. <code>example.com, local.lan</code> usw. (nur wirksam, wenn die Liste der erlaubten E-Mail-Domänen leer ist)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Aktiviere Captcha:',

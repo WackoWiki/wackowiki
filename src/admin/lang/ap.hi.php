@@ -546,7 +546,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'अनुमत ईमेल डोमेन:',
 	'AllowedEmailDomainsInfo'	=> 'अनुमत ईमेल डोमेन कॉमा से अलग किए गए, उदा. <code>example.com, local.lan</code> आदि, अन्यथा सभी ईमेल डोमेन की अनुमति है।',
 	'ForbiddenEmailDomains'		=> 'निषिद्ध ईमेल डोमेन:',
-	'ForbiddenEmailDomainsInfo'	=> 'निषिद्ध ईमेल डोमेन कॉमा से अलग किए गए, उदा.  <code>example.com, local.lan</code> आदि।',
+	'ForbiddenEmailDomainsInfo'	=> 'निषिद्ध ईमेल डोमेन कॉमा से अलग किए गए, उदा.  <code>example.com, local.lan</code> आदि। (only effective if allowed email domains list is empty)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',

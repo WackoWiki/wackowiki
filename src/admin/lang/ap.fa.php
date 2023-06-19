@@ -546,7 +546,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'دامنه های مجاز ایمیل:',
 	'AllowedEmailDomainsInfo'	=> 'امنه های ایمیل مجاز با کاما از هم جدا شده اند، به عنوان مثال. <code>example.com, local.lan</code> و غیره، در غیر این صورت همه دامنه های ایمیل مجاز هستند.',
 	'ForbiddenEmailDomains'		=> 'دامنه های ایمیل ممنوع:',
-	'ForbiddenEmailDomainsInfo'	=> 'دامنه های ایمیل ممنوع با کاما از هم جدا شده اند، به عنوان مثال. <code>example.com, local.lan</code> غیره.',
+	'ForbiddenEmailDomainsInfo'	=> 'دامنه های ایمیل ممنوع با کاما از هم جدا شده اند، به عنوان مثال. <code>example.com, local.lan</code> غیره. (only effective if allowed email domains list is empty)',
 
 	'CaptchaSection'			=> 'کپچا',
 	'EnableCaptcha'				=> 'Enable Captcha:',

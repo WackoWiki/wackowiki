@@ -546,7 +546,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> '許可された電子メール・ドメイン：',
 	'AllowedEmailDomainsInfo'	=> '許可された電子メールドメインはカンマで区切られています。例えば、<code>example.com, local.lan</code>などです。, other wise all email domains are allowed.',
 	'ForbiddenEmailDomains'		=> '禁止された電子メールドメイン：',
-	'ForbiddenEmailDomainsInfo'	=> 'Forbidden email domains comma separated, e.g. <code>example.com, local.lan</code> etc.',
+	'ForbiddenEmailDomainsInfo'	=> 'Forbidden email domains comma separated, e.g. <code>example.com, local.lan</code> etc. (only effective if allowed email domains list is empty)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',

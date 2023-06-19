@@ -525,7 +525,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'Разрешённые домены электронной домены:',
 	'AllowedEmailDomainsInfo'	=> 'Разрешенные домены электронной почты разделены запятой, например <code>example.com, local.lan</code> и т.д., иначе все домены электронной почты будут разрешены.',
 	'ForbiddenEmailDomains'		=> 'Запрещенные почтовые домены:',
-	'ForbiddenEmailDomainsInfo'	=> 'Запрещенные почтовые домены через запятую, например <code>example.com, local.lan</code> и т.д.',
+	'ForbiddenEmailDomainsInfo'	=> 'Запрещенные почтовые домены через запятую, например <code>example.com, local.lan</code> и т.д. (действует только в том случае, если список разрешенных почтовых доменов пуст)',
 
 	'CaptchaSection'			=> 'Тест Тьюринга (CAPTCHA)',
 	'EnableCaptcha'				=> 'Применять Captcha:',

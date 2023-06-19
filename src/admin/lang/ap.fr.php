@@ -542,7 +542,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'Domaines de messagerie autorisés :',
 	'AllowedEmailDomainsInfo'	=> 'Domaines de messagerie autorisés séparés par des virgules, par exemple <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'ForbiddenEmailDomains'		=> 'Domaines de messagerie interdits :',
-	'ForbiddenEmailDomainsInfo'	=> 'Domaines de courrier électronique interdits, séparés par des virgules, par exemple <code>example.com, local.lan</code> etc.',
+	'ForbiddenEmailDomainsInfo'	=> 'Domaines de courrier électronique interdits, séparés par des virgules, par exemple <code>example.com, local.lan</code> etc. (n\'est efficace que si la liste des domaines de courrier électronique autorisés est vide)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Activer Captcha :',

@@ -546,7 +546,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> '允許的電子郵件域：',
 	'AllowedEmailDomainsInfo'	=> '允許的電子郵件域以逗號分隔，例如 <code>example.com, local.lan</code> 等，否則所有電子郵件域都是允許的。',
 	'ForbiddenEmailDomains'		=> '禁止的電子郵件域：',
-	'ForbiddenEmailDomainsInfo'	=> '禁止的電子郵件域以逗號分隔，例如 <code>example.com, local.lan</code> 等。',
+	'ForbiddenEmailDomainsInfo'	=> '禁止的電子郵件域以逗號分隔，例如 <code>example.com, local.lan</code> 等。 (only effective if allowed email domains list is empty)',
 
 
 	'CaptchaSection'			=> 'CAPTCHA',

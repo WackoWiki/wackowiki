@@ -546,7 +546,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> '허용된 전자 메일 도메인::',
 	'AllowedEmailDomainsInfo'	=> '쉼표로 구분된 허용된 이메일 도메인(예: <code>example.com, local.lan</code> 등), 그렇지 않으면 모든 이메일 도메인이 허용됩니다.',
 	'ForbiddenEmailDomains'		=> '금지된 이메일 도메인:',
-	'ForbiddenEmailDomainsInfo'	=> '쉼표로 구분된 금지 이메일 도메인(예: <code>example.com, local.lan</code> 등).',
+	'ForbiddenEmailDomainsInfo'	=> '쉼표로 구분된 금지 이메일 도메인(예: <code>example.com, local.lan</code> 등). 허용된 이메일 도메인 목록이 비어 있는 경우에만 유효합니다.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',

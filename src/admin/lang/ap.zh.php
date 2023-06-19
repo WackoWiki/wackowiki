@@ -527,7 +527,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> '允许的电子邮件域名',
 	'AllowedEmailDomainsInfo'	=> '允许用逗号分隔的电子邮件域名，例如： <code>example.com, local.lan</code> 等等，允许所有电子邮件域。',
 	'ForbiddenEmailDomains'		=> '禁止的电子邮件域：',
-	'ForbiddenEmailDomainsInfo'	=> '禁用的电子邮件域以逗号分隔，例如： <code>example.com, local.lan</code> etc.',
+	'ForbiddenEmailDomainsInfo'	=> '禁用的电子邮件域以逗号分隔，例如： <code>example.com, local.lan</code> etc. (only effective if allowed email domains list is empty)',
 
 	'CaptchaSection'			=> '验证码',
 	'EnableCaptcha'				=> '启用验证码：',

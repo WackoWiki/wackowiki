@@ -543,7 +543,7 @@ $ap_translation = [
 	'AllowedEmailDomains'		=> 'Επιτρεπόμενοι τομείς ηλεκτρονικού ταχυδρομείου:',
 	'AllowedEmailDomainsInfo'	=> 'Επιτρεπόμενοι τομείς ηλεκτρονικού ταχυδρομείου διαχωρισμένοι με κόμμα, π.χ. <code>example.com, local.lan</code> κ.λπ., διαφορετικά επιτρέπονται όλοι οι τομείς ηλεκτρονικού ταχυδρομείου.',
 	'ForbiddenEmailDomains'		=> 'Απαγορευμένοι τομείς ηλεκτρονικού ταχυδρομείου:',
-	'ForbiddenEmailDomainsInfo'	=> 'Απαγορευμένοι τομείς ηλεκτρονικού ταχυδρομείου διαχωρισμένοι με κόμμα, π.χ. <code>example.com, local.lan</code> κ.λπ.',
+	'ForbiddenEmailDomainsInfo'	=> 'Απαγορευμένοι τομείς ηλεκτρονικού ταχυδρομείου διαχωρισμένοι με κόμμα, π.χ. <code>example.com, local.lan</code> κ.λπ. (μόνο αν η λίστα των επιτρεπόμενων τομέων ηλεκτρονικού ταχυδρομείου είναι κενή)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
