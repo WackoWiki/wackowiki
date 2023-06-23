@@ -134,7 +134,7 @@ if (!$write_file)
 		'<li>' .
 			Ut::perc_replace($lang['ErrorGivePrivileges'],
 				'<code>' . CONFIG_FILE . '</code>',
-				'<code>touch ' . CONFIG_FILE . '</code><br><code>' . decoct(CHMOD_FILE) . ' ' . CONFIG_FILE . '</code>',
+				'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod ' . decoct(CHMOD_FILE) . ' ' . CONFIG_FILE . '</code>',
 				'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
 		'</li>' . "\n";
 }
