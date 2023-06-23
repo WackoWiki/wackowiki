@@ -111,7 +111,7 @@ Ut::purge_directory(CACHE_CONFIG_DIR);
 Ut::purge_directory(CACHE_TEMPLATE_DIR);
 
 echo '<h2>' . $lang['SecurityConsiderations'] . '</h2>' . "\n";
-echo '<ul class="security">' . "\n";
+echo '<ul class="attention">' . "\n";
 
 if (!$perm_changed)
 {
@@ -134,7 +134,7 @@ if (!$write_file)
 		'<li>' .
 			Ut::perc_replace($lang['ErrorGivePrivileges'],
 				'<code>' . CONFIG_FILE . '</code>',
-				'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod 666 ' . CONFIG_FILE . '</code>',
+				'<code>touch ' . CONFIG_FILE . '</code><br><code>' . decoct(CHMOD_FILE) . ' ' . CONFIG_FILE . '</code>',
 				'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
 		'</li>' . "\n";
 }
@@ -151,7 +151,7 @@ if ($write_file)
 else
 {
 	echo
-		'<form action="' . $base_path . '?installAction=write-config" method="post">' . "\n";
+		'<form action="' . $base_path . '?installAction=write-config" method="post">' . "\n" .
 			write_config_hidden_nodes($config_parameters) .
 			'<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n" .
 		'</form>' . "\n" .

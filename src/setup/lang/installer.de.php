@@ -53,7 +53,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Spracheinstellungen',
-'PleaseUpgradeToR6'				=> 'Bei dir läuft eine alte (pre %1) Version von WackoWiki (%1). Um auf diese neue Version von WackoWiki zu aktualisieren, musst du zuerst deine Installation auf %2 updaten.',
+'PleaseUpgradeToR6'				=> 'Bei dir läuft eine alte (pre %2) Version von WackoWiki (%1). Um auf diese neue Version von WackoWiki zu aktualisieren, musst du zuerst deine Installation auf %2 updaten.',
 'UpgradeFromWacko'				=> 'Wilkommen bei WackoWiki, es scheint das du von WackoWiki %1 auf %2 aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'FreshInstall'					=> 'Wilkommen bei WackoWiki, du installierst gerade WackoWiki %1. Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'PleaseBackup'					=> 'Bitte erstelle eine <strong>Sicherungskopie</strong> von deiner Datenbank und der Konfigurationsdatei config.php und aller geänderter Dateien bevor du den Aktualisierungsvorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.',
@@ -77,7 +77,7 @@ $lang = [
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'In deiner PHP Installation scheinen folgende von WackoWiki benötigte PHP-Erweiterungen nicht verfügbar zu sein.',
 'PcreWithoutUtf8'				=> 'PCRE ist nicht mit UTF-8-Unterstützung kompiliert.',
-'NotePermissions'				=> 'ACHTUNG: Der Installer wird versuchen, die Einstellungen in die Datei %1 zu schreiben, diese Datei befindet sich im WackoWiki Verzeichnis. Damit das funktioniert, muss sichergestellt sein, dass der Webserver Schreibrechte auf diese Datei hat! Falls das nicht möglich ist, musst du die Datei später von Hand geändert werden (das Installationsskript sagt dann, was zu tun ist).<br><br>Lies <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a> für weitere Einzelheiten.',
+'NotePermissions'				=> 'ACHTUNG: Der Installer wird versuchen, die Einstellungen in die Datei %1 zu schreiben, diese Datei befindet sich im WackoWiki Verzeichnis. Damit das funktioniert, muss sichergestellt sein, dass der Webserver Schreibrechte auf diese Datei hat! Falls das nicht möglich ist, musst die Datei später von Hand geändert werden (das Installationsskript sagt dann, was zu tun ist).<br><br>Lies <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a> für weitere Einzelheiten.',
 'ErrorPermissions'				=> 'Es scheint das der Installer nicht die erforderlichen Zugriffsrechte für die Dateien automatisch setzen kann um korrekt zu funktionieren. Du wirst später im Installationsprozess aufgefordert, die erforderlichen Zugriffsrechte händisch auf dem Server zu setzen.',
 'ErrorMinPhpVersion'			=> 'Die PHP Version muss größer als <strong>' . PHP_MIN_VERSION . '</strong> sein, dein Server scheint mit einer füheren Version zu laufen.  Du must auf eine aktuellere PHP Version upgraden damit WackoWiki korrekt funktioniert.',
 'Ready'							=> 'Glückwünsch, dein Server scheint fähig WackoWiki ausführen zu können. Die folgenden Seiten werden dich durch den Konfigurationsprozess führen.',
@@ -203,8 +203,8 @@ $lang = [
 'ThatsAll'						=> 'Das wars! Du kannst nun <a href="%1"> zu deinem WackoWiki zurückkehren</a>.',
 'SecurityConsiderations'		=> 'Sicherheitserwägungen',
 'SecurityRisk'					=> 'Es wird dringend empfohlen, die Schreibrechte auf die Datei %1 nach dem Schreiben der Konfiguration wieder mit %2 zu entfernen. Eine überschreibbare Konfigurationsdatei ist ein Sicherheitsrisiko!<br>i.e. %2',
-'RemoveSetupDirectory'			=> 'Du solltest den Ordner <code>%1</code> löschen nachdem die Installation beendet wurde.',
-'ErrorGivePrivileges'			=> 'Die Konfigurationsdatei %1 konnte nicht geschrieben werden. Du musst dem Webserver vorübergehend Schreibrechte auf das WackoWiki Verzeichnis oder auf eine leere Datei %1<br>%2<br> geben; vergiss nicht, das Schreibrecht später wieder zu entziehen, z.B. mit %2.<br>Falls das aus irgendwelchen Gründen nicht möglich ist, kopiere den folgenden Text in eine neue Datei und speichere diese unter %1 in dem WackoWiki Verzeichnis ab. Danach sollte dein WackoWiki funktionieren. Falls nicht, gehe zu <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a>',
+'RemoveSetupDirectory'			=> 'Du solltest den Ordner %1 löschen nachdem die Installation beendet wurde.',
+'ErrorGivePrivileges'			=> 'Die Konfigurationsdatei %1 konnte nicht geschrieben werden. Du musst dem Webserver vorübergehend Schreibrechte auf das WackoWiki Verzeichnis oder auf die leere %1 Datei geben<br>%2<br><br>Vergiss nicht, das Schreibrecht später wieder zu entziehen, z.B. mit<br>%3.<br><br>Falls das aus irgendwelchen Gründen nicht möglich ist, kopiere den folgenden Text in eine neue Datei und speichere diese unter %1 in dem WackoWiki Verzeichnis ab. Danach sollte dein WackoWiki funktionieren. Falls nicht, gehe zu <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a>',
 'NextStep'						=> 'Im nächsten Schritt wird das Installationsprogramm versuchen, die aktualisierte Konfigurationsdatei, %1, zu schreiben. Bitte stelle sicher, dass der Webserver Schreibrechte auf die Datei besitzt oder du musst die Datei von Hand ändern.  Für die Einzelheiten besuche bitte <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a>.',
 'WrittenAt'						=> 'geschrieben am ',
 'DontChange'					=> 'Ändere wacko_version nicht von Hand!',

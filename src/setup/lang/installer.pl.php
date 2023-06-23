@@ -52,7 +52,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Konfiguracja Języka',
-'PleaseUpgradeToR6'				=> 'Używana jest stara (sprzed %1) wersja WackoWiki (%1). Aby zaktualizować WackoWiki do nowej wersji, należy najpierw zaktualizować instalację do wersji %2.',
+'PleaseUpgradeToR6'				=> 'Używana jest stara (sprzed %2) wersja WackoWiki (%1). Aby zaktualizować WackoWiki do nowej wersji, należy najpierw zaktualizować instalację do wersji %2.',
 'UpgradeFromWacko'				=> 'Witamy w WackoWiki. Wygląda na to, że dokonujesz aktualizacji z wersji %1 WackoWiki do wersji %2.  Następne kilka stron poprowadzi Cię przez proces aktualizacji.',
 'FreshInstall'					=> 'Witamy w WackoWiki. Za chwilę nastąpi instalacja %1 WackoWiki.  Następne kilka stron poprowadzi Cię przez proces instalacji.',
 'PleaseBackup'					=> 'Proszę, <strong>zrób kopię zapasową</strong> swojej bazy danych, pliku konfiguracyjnego i wszystkich zmienionych plików, takich jak te, które mają hacki i poprawki zastosowane do nich przed rozpoczęciem procesu aktualizacji. To może zaoszczędzić Ci dużego bólu głowy.',

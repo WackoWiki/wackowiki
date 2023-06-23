@@ -52,7 +52,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Nyelvi Beállítások',
-'PleaseUpgradeToR6'				=> 'Ön tisztában legyen fut egy régi (pre %1) felszabadulását WackoWiki. A WackoWiki ezen kiadásának frissítéséhez először frissítenie kell a telepítést %2-re.',
+'PleaseUpgradeToR6'				=> 'Ön tisztában legyen fut egy régi (pre %2) felszabadulását WackoWiki (%1). A WackoWiki ezen kiadásának frissítéséhez először frissítenie kell a telepítést %2-re.',
 'UpgradeFromWacko'				=> 'Üdvözöljük a WackoWiki! Úgy tűnik, hogy a (z) %1 WackoWiki verzióról %2-ra frissít. A következő néhány oldal végigvezeti Önt a frissítési folyamaton.',
 'FreshInstall'					=> 'Üdvözöljük a WackoWiki oldalán, a WackoWiki %1 telepítéséhez készül. A következő néhány oldal végigvezeti Önt a frissítési folyamaton.',
 'PleaseBackup'					=> 'Kérjük, a frissítési folyamat megkezdése előtt <strong>készítsen biztonsági másolatot</strong> az adatbázisról, a konfigurációs fájlról és az összes megváltozott fájlról, például azokról, amelyeken feltörések és javítások vannak. Ez megmenthet a nagy fejfájástól.',
