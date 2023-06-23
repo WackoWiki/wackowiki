@@ -200,22 +200,54 @@ hr {
 	right: 90px;
 }
 
+/*
+   Message Boxes
+*/
+.msg {
+	position: relative;
+	margin: .6rem 0;
+	padding: .625rem 2.5rem .625rem;
+	overflow: auto;
+}
+.msg::before {
+	bottom: 0;
+	content: '';
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 2.5rem;
+}
+.msg::after {
+	position: absolute;
+	height: 1rem;
+	width: 1rem;
+	margin-top: 0;
+	top: .6rem;
+	left: .6rem;
+}
+
+.notice {
+	border: 1px solid #ddddaa;
+	background: #ffffef;
+}
+.notice::after {
+	content: url('../../image/info.svg') " ";
+}
+
 .warning {
 	border: 1px solid #ffee66;
-	width: auto;
-	background: #ffffdd url('../image/important.svg') no-repeat scroll 10px 10px;
-	margin: 10px 43px;
-	padding: 10px 10px 10px 40px;
-	position: relative;
+	background: #ffffdd;
 }
-div.security,
-p.security {
+.warning::after {
+	content: url('../../image/important.svg') " ";
+}
+
+.security {
 	border: 1px solid #d893a1;
-	width: auto;
-	background: #fbe6f2 url('../image/warning.svg') no-repeat scroll 10px 10px;
-	margin: 10px 43px;
-	padding: 10px 10px 10px 40px;
-	position: relative;
+	background: #fbe6f2;
+}
+.msg.security::after {
+	content: url('../../image/warning.svg') " ";
 }
 
 /*
@@ -226,13 +258,13 @@ p.security {
 }
 
 .cross {
-	background: url('../image/cross.svg'), none no-repeat;
+	background: url('../../image/cross.svg'), none no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 }
 .tick {
-	background: url('../image/tick.svg'), none no-repeat;
+	background: url('../../image/tick.svg'), none no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
@@ -276,17 +308,36 @@ p.security {
 /*
    Write Config Specific
 */
-ul.security {
-	padding: 10px;
+ul.attention {
 	border: 1px solid #d893a1;
 	background: #fbe6f2;
 }
-ul.security li {
-	min-height: 23px;
-	padding: 3px 0 0 35px;
-	background: url(../image/warning.svg) no-repeat scroll 0 0;
+
+.attention li {
+	position: relative;
+	padding: .625rem 2.5rem .625rem;
+	overflow: auto;
+}
+.attention li::before {
+	bottom: 0;
+	content: '';
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 2.5rem;
+}
+.attention li::after {
+	position: absolute;
+	height: 1rem;
+	width: 1rem;
+	margin-top: 0;
+	top: .6rem;
+	left: .6rem;
 }
 
+.attention li::after {
+	content: url('../../image/warning.svg') " ";
+}
 /*
    Generic Stylings
 */

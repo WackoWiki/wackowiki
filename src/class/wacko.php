@@ -4145,40 +4145,39 @@ class Wacko
 			$aname			= '';
 			$match			= '';
 			$tag			= $matches[1];
-			$untag			= $unwtag	= $this->unwrap_link($tag);
+			$untag			= $unwrap_tag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/ui';
-			$ptag			= $unwtag;
 			$handler		= null;
 
 			// detecting page handler
-			if (preg_match($regex_handlers, '/' . $ptag . '/', $match))
+			if (preg_match($regex_handlers, '/' . $untag . '/', $match))
 			{
 				$handler	= $match[2];
 
 				$_ptag		??= ''; // XXX: ???
 
 				$ptag		= $match[1];
-				$unwtag		= '/' . $unwtag . '/';
+				$unwrap_tag	= '/' . $unwrap_tag . '/';
 				$co			= mb_substr_count($_ptag, '/') - mb_substr_count($ptag, '/');
 
 				for ($i = 0; $i < $co; $i++)
 				{
-					$unwtag	= mb_substr($unwtag, 0, mb_strrpos($unwtag, '/'));
+					$unwrap_tag	= mb_substr($unwrap_tag, 0, mb_strrpos($unwrap_tag, '/'));
 				}
 			}
 
-			$unwtag			= utf8_trim($unwtag, '/.');
-			$unwtag			= str_replace('_', '', $unwtag);
+			$unwrap_tag			= utf8_trim($unwrap_tag, '/.');
+			$unwrap_tag			= str_replace('_', '', $unwrap_tag);
 
 			if ($handler)
 			{
 				// strip handler from page tag
-				$unwtag		= mb_substr($unwtag, 0, - (mb_strlen($handler) + 1));
+				$unwrap_tag	= mb_substr($unwrap_tag, 0, - (mb_strlen($handler) + 1));
 				$method		= $handler;
 			}
 
-			$this_page		= $this->load_page($unwtag, 0, null, LOAD_CACHE, LOAD_META);
+			$this_page		= $this->load_page($unwrap_tag, 0, null, LOAD_CACHE, LOAD_META);
 
 			if (mb_substr($tag, 0, 2) == '!/')
 			{
@@ -4238,7 +4237,7 @@ class Wacko
 
 			$page_path		= mb_substr($untag, 0, mb_strlen($untag) - mb_strlen($page0));
 			$anchor			= $matches[2] ?? '';
-			$tag			= $unwtag;
+			$tag			= $unwrap_tag;
 
 			// track page link
 			if ($track)
@@ -4827,7 +4826,7 @@ class Wacko
 		if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 		{
 			// disallow pages with Comment[0-9] and all sub-pages, we do not want sub-pages on a comment.
-			if (preg_match( '/\b(Comment(\d+))\b/ui', $_data, $match ))
+			if (preg_match('/\b(Comment(\d+))\b/ui', $_data, $match))
 			{
 				return 'Comment([0-9]+)';
 			}

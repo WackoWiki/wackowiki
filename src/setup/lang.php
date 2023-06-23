@@ -10,10 +10,10 @@ if (array_key_exists('wacko_version', $config))
 	{
 		$config['is_update'] = null;
 
-		echo '<ul class="security"><li>' .
+		echo '<ul class="attention"><li>' .
 			Ut::perc_replace(
 				$lang['PleaseUpgradeToR6'],
-				'<code class="version">' . $min_upgrade_version . '</code>',
+				'<code class="version">' . $config['wacko_version'] . '</code>',
 				'<code class="version">' . $min_upgrade_version . '</code>') .
 			"</li></ul>\n";
 		// https://sourceforge.net/projects/wackowiki/files/
@@ -29,7 +29,7 @@ if (array_key_exists('wacko_version', $config))
 				'<code class="version">' . $config['wacko_version'] . '</code>',
 				'<code class="version">' . WACKO_VERSION . '</code>') .
 			"</p>\n";
-		echo '<p class="warning">' . $lang['PleaseBackup'] . "</p>\n";
+		echo '<p class="msg warning">' . $lang['PleaseBackup'] . "</p>\n";
 	}
 }
 else
@@ -51,7 +51,7 @@ $n = 1;
 echo '<br><ul class="checkbox_input column-3">' . "\n";
 
 // available languages
-foreach($lang['LanguageArray'] as $key => $value)
+foreach ($lang['LanguageArray'] as $key => $value)
 {
 	echo "\t<li>\n\t\t";
 	echo '<input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';

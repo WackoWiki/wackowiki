@@ -94,10 +94,11 @@ write_config_hidden_nodes($config_parameters);
 	 Check for required PHP Extensions
 	 */
 
-	// check for bcmath, ctype, gd, iconv, intl, JSON, mb_string, openssl, pcre, SPL extension
+	// check for bcmath, ctype, gd, iconv, intl, JSON, mb_string, openssl, pcre, SPL, zlib extension
 	$php_extension = [
 		'bcmath',
 		'ctype',
+		'fileinfo',
 		'gd',
 		'iconv',
 		'intl',
@@ -106,6 +107,7 @@ write_config_hidden_nodes($config_parameters);
 		'openssl',
 		'pcre',
 		'spl',
+		'zlib',
 	];
 
 	$php_extension_result	= true;
@@ -191,7 +193,7 @@ write_config_hidden_nodes($config_parameters);
 		End of checks, are we ready to install?
 	*/
 
-	$permissions_notice	= '<p class="warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
+	$permissions_notice	= '<p class="msg warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
 	$btn_try_again		= '<button type="button" class="next" onClick="window.location.reload( true );">' . $lang['TryAgain'] . '</button>';
 	$btn_continue		= '<button type="submit" class="next">' . $lang['Continue'] . '</button>';
 	?>
@@ -208,29 +210,38 @@ write_config_hidden_nodes($config_parameters);
 	}
 	else if (!$php_version_result)
 	{
-		echo '<p class="security">' . $lang['ErrorMinPhpVersion'] . '</p>';
+		echo '<p class="msg security">' . $lang['ErrorMinPhpVersion'] . '</p>';
 		echo $btn_try_again;
 	}
 	else if (!$database_result)
 	{
-		echo '<p class="security">' . $lang['ErrorNoDbDriverDetected'] . '</p>';
+		echo '<p class="msg security">' . $lang['ErrorNoDbDriverDetected'] . '</p>';
 		echo $btn_try_again;
 	}
 	else if (!$php_extension_result)
 	{
-		echo '<div class="security">' . $lang['ErrorPhpExtensions'];
+		echo '<div class="msg security">' . $lang['ErrorPhpExtensions'];
 		echo '<ul>';
+
 		foreach ($missing_php_extension as $php_extension)
 		{
 			echo '<li><code>' . $php_extension . "</code></li>\n";
 		}
+
 		echo '</ul></div>';
 		echo $btn_try_again;
 	}
 	else if (!$file_permissions_result)
 	{
 		echo $permissions_notice;
-		echo '<p class="security">' . $lang['ErrorPermissions'] . '</p>';
+		echo '<p class="msg security">' . $lang['ErrorPermissions'] . '</p>';
+		/* echo '<p class="msg notice">
+				<code>
+					chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
+					<br><br>
+					chmod 0660 config/config.php config/lock config/lock_ap
+				</code>
+			</p>'; */
 		echo $btn_try_again;
 		echo $btn_continue;
 	}
