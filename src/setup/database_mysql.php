@@ -43,7 +43,7 @@ $tbl_cache =
 		cache_lang VARCHAR(5) NOT NULL DEFAULT '',
 		cache_time DATETIME NULL DEFAULT NULL,
 		PRIMARY KEY (cache_id),
-		INDEX (name),
+		INDEX idx_hash (hash),
 		KEY idx_cache_time (cache_time)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 

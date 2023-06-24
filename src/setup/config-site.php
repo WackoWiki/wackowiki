@@ -80,7 +80,7 @@ else
 $_languages	= $lang['LanguageArray'];
 $n			= 1;
 
-echo '<ul class="checkbox_input column-3">' . "\n";
+echo '<ul class="checkbox_input column-4">' . "\n";
 
 foreach ($langs as $_lang)
 {

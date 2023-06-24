@@ -48,7 +48,7 @@ echo '<p>' . $lang['LangDesc'] . "</p>\n";
 
 $n = 1;
 
-echo '<br><ul class="checkbox_input column-3">' . "\n";
+echo '<br><ul class="checkbox_input column-4">' . "\n";
 
 // available languages
 foreach ($lang['LanguageArray'] as $key => $value)

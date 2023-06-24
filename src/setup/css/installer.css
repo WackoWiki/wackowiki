@@ -366,6 +366,11 @@ ul.attention {
 	column-gap: 40px;
 	width: 400px;
 }
+.column-4 {
+	column-count: 4;
+	column-gap: 40px;
+	width: 600px;
+}
 
 .next {
 	position: relative;
