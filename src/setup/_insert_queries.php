@@ -88,6 +88,7 @@ $upgrade['6.1.22'][]	= ['create',	'cache',			$tbl_cache_r6_0_0];
 
 $upgrade['6.1.9'][]		= ['alter',		'cache',			$alter_cache_r6_0_1];
 $upgrade['6.1.21'][]	= ['alter',		'cache',			$alter_cache_r6_0_2];
+$upgrade['6.1.22'][]	= ['alter',		'cache',			$alter_cache_r6_0_3];
 
 // category
 

@@ -35,6 +35,7 @@ $tbl_cache_r6_0_0 = "CREATE TABLE IF NOT EXISTS {$pref}cache (
 
 $alter_cache_r6_0_1 = "ALTER TABLE {$pref}cache CHANGE query query VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_cache_r6_0_2 = "ALTER TABLE {$pref}cache CHANGE name hash CHAR(40) NOT NULL DEFAULT ''";
+$alter_cache_r6_0_3 = "ALTER TABLE {$pref}cache DROP INDEX name, ADD INDEX idx_hash (hash)";
 
 // CATEGORY
 
@@ -58,7 +59,7 @@ $alter_file_r6_0_6 = "ALTER TABLE {$pref}file ADD INDEX idx_file_hash (file_hash
 // LOG
 
 // MENU
-$alter_menu_r6_0_1 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_menu (user_id, page_id, menu_lang) USING BTREE";
+$alter_menu_r6_0_1 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_menu (user_id, page_id, menu_lang)";
 $alter_menu_r6_0_2 = "ALTER TABLE {$pref}menu ADD INDEX idx_user_id (user_id)";
 $alter_menu_r6_0_3 = "ALTER TABLE {$pref}menu ADD INDEX idx_page_id (page_id)";
 $alter_menu_r6_0_4 = "ALTER TABLE {$pref}menu ADD INDEX idx_lang (menu_lang)";
