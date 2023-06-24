@@ -30,6 +30,7 @@ write_config_hidden_nodes($config_parameters);
 	} ?>
 </p>
 	<?php
+	// only available for update at this stage
 	if ($config['is_update'])
 	{
 		$_db_version		= $db->load_single("SELECT version()");
@@ -235,7 +236,8 @@ write_config_hidden_nodes($config_parameters);
 	{
 		echo $permissions_notice;
 		echo '<p class="msg security">' . $lang['ErrorPermissions'] . '</p>';
-		/* echo '<p class="msg notice">
+		/* echo
+			'<p class="msg notice">
 				<code>
 					chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
 					<br><br>

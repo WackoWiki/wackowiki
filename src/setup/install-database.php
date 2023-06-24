@@ -82,7 +82,7 @@ if ($config['is_update'])
 
 	if (version_compare($config['wacko_version'], '6.1.17', '<'))
 	{
-		$config['typografica']	= $config['default_typografica'];
+		$config['typografica']			= $config['default_typografica'];
 	}
 
 	if (version_compare($config['wacko_version'], '6.1.19', '<'))
@@ -97,8 +97,8 @@ if ($config['is_update'])
 
 	if (version_compare($config['wacko_version'], '6.1.21', '<'))
 	{
-		$config['create_thumbnail']	= $config['img_create_thumbnail']	?? 0;
-		$config['max_thumb_width']	= $config['img_max_thumb_width']	?? 150;
+		$config['create_thumbnail']		= $config['img_create_thumbnail']	?? 0;
+		$config['max_thumb_width']		= $config['img_max_thumb_width']	?? 150;
 	}
 }
 

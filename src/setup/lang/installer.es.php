@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'Instalación WackoWiki',
+'TitleInstallation'				=> 'Instalación WackoWiki',
+'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> 'Continuar',
 'Back'							=> 'Volver',
 'Recommended'					=> 'recomendado',
@@ -76,7 +77,7 @@ $lang = [
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Su instalación de PHP parece carecer de las extensiones PHP que WackoWiki requiere.',
 'PcreWithoutUtf8'				=> 'PCRE no está compilado con soporte UTF-8.',
-'NotePermissions'				=> 'El instalador intentará guardar los datos de configuración en el archivo %1, ubicado en el directorio de WackoWiki. Para que pueda funcionar esto debe asegurarse que el servidor web tiene permiso de escritura para este archivo. Si no lo logra concederle, deberá editar el archivo manualmente (el instalador le dará indicaciones de como..).<br><br>Véa <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> por más detalles.',
+'NotePermissions'				=> 'El instalador intentará guardar los datos de configuración en el archivo %1, ubicado en el directorio de WackoWiki. Para que pueda funcionar esto debe asegurarse que el servidor web tiene permiso de escritura para este archivo. Si no lo logra concederle, deberá editar el archivo manualmente (el instalador le dará indicaciones de como..).<br><br>Véa <a href="https://wackowiki.org/doc/Doc/Español/Instalación" target="_blank">WackoWiki:Doc/Español/Instalación</a> por más detalles.',
 'ErrorPermissions'				=> 'Parece que el instalador no puede setear los permisos de archivos para el funcionamiento correcto de WackoWiki. Más adelante se le va a pedir de realizar los cambios de permisos necesarios manualmente en el servidor.',
 'ErrorMinPhpVersion'			=> 'La versión PHP debe ser mayor a <strong>' . PHP_MIN_VERSION . '</strong>, el servidor parece tener instalado una versión anterior. PHP se debe actualizar a una versión más nueva para que WackoWiki pueda funcionar correctamente.',
 'Ready'							=> 'Felicidades, su servidor parece ser capaz de ejecutar WackoWiki. Las páginas siguientes le guiarán a través del proceso de configuración.',
@@ -96,7 +97,7 @@ $lang = [
 'AllowedLang'					=> 'Idiomas permitidos',
 'AllowedLangDesc'				=> 'Se recomienda seleccionar únicamente los idiomas que va a utilizar, sino se selecionarán todos los idiomas.',
 'Admin'							=> 'Nombre de Administrador',
-'AdminDesc'						=> 'Ingrese el nombre de usuario del administrador, esto debería escrito de manera <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">NombreWiki</a> (e.g. <code>WikiAdmin</code>).',
+'AdminDesc'						=> 'Ingrese el nombre de usuario del administrador, esto debería escrito de manera <a href="https://wackowiki.org/doc/Doc/Español/PalabraWiki" title="View Help" target="_blank">NombreWiki</a> (e.g. <code>WikiAdmin</code>).',
 'NameAlphanumOnly'				=> 'El nombre de usuario debe tener entre %1 y %2 caracteres de longitud y ser solamente alfanuméricos',
 'NameCamelCaseOnly'				=> 'El nombre de usuario debe tener entre %1 y %2 caracteres de longitud and WikiName formatted.',
 'Password'						=> 'Contraseña del Administrador',
@@ -189,6 +190,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Tablas eliminados',
 'ErrorDeletingTable'			=> 'Error al eliminar tabla %1, en caso que no existe la tabla puede ignorar esta advertencia.',
 'DeletingTable'					=> 'Eliminando tabla %1 ',
+'NextStep'						=> 'En el paso siguiente el instalador intentará guardar el archivo con las configuraciones actualizadas, %1. Por favor asegurese que el servidor web tenga acceso de escritura al archivo, o lo tendrá que editar manualmente. Vea <a href="https://wackowiki.org/doc/Doc/Español/Instalación" target="_blank">WackoWiki:Doc/Español/Instalación</a> por detalles.',
 
 /*
    Write Config Page
@@ -202,8 +204,9 @@ $lang = [
 'SecurityConsiderations'		=> 'Consideraciones de Seguridad',
 'SecurityRisk'					=> 'Le recomendamos remover el privilegio de escritura para el archivo %1 ya que ahora está guardado. Si el archivo permanece con privilegios de escritura, puede correr un riesgo de seguridad!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'Debería eliminar ahora el directorio %1 ya que se finalizó la instalación.',
-'ErrorGivePrivileges'			=> 'No fue posible guardar el archivo de configuración %1. Debería dar temporalmente permisos al servidor web para el directorio de WackoWiki, o al menos un archivo en blanco llamado %1<br>%2<br>; no se olvide de remover los privilegios de escritura más adelante, i.e. %3.<br>Si por algun  motivo no lo logra hacer, debería copiar el texto abajo en un archivo nuevo, y guardarlo/subirlo como %1 al directorio de WackoWiki. Hecho esto el sitio WackoWiki debería funcionar. Si continúa con problemas, visite <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
-'NextStep'						=> 'En el paso siguiente el instalador intentará guardar el archivo con las configuraciones actualizadas, %1. Por favor asegurese que el servidor web tenga acceso de escritura al archivo, o lo tendrá que editar manualmente. Vea <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> por detalles.',
+'ErrorGivePrivileges'			=> 'No fue posible guardar el archivo de configuración %1. Debería dar temporalmente permisos al servidor web para el directorio de WackoWiki, o al menos un archivo en blanco llamado %1<br>%2<br><br>; no se olvide de remover los privilegios de escritura más adelante, i.e. <br>%3.<br><br>',
+'ErrorPrivilegesInstall'		=> 'Si por algun  motivo no lo logra hacer, debería copiar el texto abajo en un archivo nuevo, y guardarlo/subirlo como %1 al directorio de WackoWiki. Hecho esto el sitio WackoWiki debería funcionar. Si continúa con problemas, visite <a href="https://wackowiki.org/doc/Doc/Español/Instalación" target="_blank">WackoWiki:Doc/Español/Instalación</a>',
+'ErrorPrivilegesUpgrade'		=> 'Hecho esto el sitio WackoWiki debería funcionar. Si continúa con problemas, visite <a href="https://wackowiki.org/doc/Doc/Español/Instalación" target="_blank">WackoWiki:Doc/Español/Instalación</a>',
 'WrittenAt'						=> 'Guardado ',
 'DontChange'					=> 'no cambie manualmente wacko_version!',
 'ConfigDescription'				=> 'descripción detallada https://wackowiki.org/doc/Doc/English/Configuration',

@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'WackoWiki Installatie',
+'TitleInstallation'				=> 'WackoWiki Installatie',
+'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> 'Verder gaan',
 'Back'							=> 'Terug',
 'Recommended'					=> 'aanbevolen',
@@ -189,6 +190,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
+'NextStep'						=> 'In de volgende stap probeert het installatieprogramma het actuele configuratie bestand weg te schrijven, %1. Controleer of de web server schrijfrechten heeft op het bestand, anders moet u het handmatig aanpassen. Wederom, zie <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 
 /*
    Write Config Page
@@ -202,8 +204,9 @@ $lang = [
 'SecurityConsiderations'		=> 'Beveiligingsoverwegingen',
 'SecurityRisk'					=> 'Echter, u wordt geadviseerd om schrijfrechten op %1 te verwijderen nu het is weggeschreven. Door de schrijfrechten te handhaven creert u een veiligheidsrisico!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'U moet de %1 -directory verwijderen nu het installatieproces is voltooid.',
-'ErrorGivePrivileges'			=> 'Het configuratie bestand %1 Geen schrijf rechten. U dient uw webserver tijdelijk schrijfrechten te geven op uw WackoWiki directory, of een lege bestand met de naam %1<br>%2<br>; vergeet niet om de schrijfrechten later te verwijderen, i.e. %3.<br>Als, voor welke reden dan ook,for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
-'NextStep'						=> 'In de volgende stap probeert het installatieprogramma het actuele configuratie bestand weg te schrijven, %1. Controleer of de web server schrijfrechten heeft op het bestand, anders moet u het handmatig aanpassen. Wederom, zie <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
+'ErrorGivePrivileges'			=> 'Het configuratie bestand %1 Geen schrijf rechten. U dient uw webserver tijdelijk schrijfrechten te geven op uw WackoWiki directory, of een lege bestand met de naam %1<br>%2<br><br>; vergeet niet om de schrijfrechten later te verwijderen, i.e. <br>%3.<br><br>',
+'ErrorPrivilegesInstall'		=> 'Als, voor welke reden dan ook,for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
+'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'geschreven op ',
 'DontChange'					=> 'Wijzig de wacko_version niet handmatig!',
 'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',

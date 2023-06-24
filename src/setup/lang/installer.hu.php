@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'WackoWiki Telepítés',
+'TitleInstallation'				=> 'WackoWiki Telepítés',
+'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> 'Folytatni',
 'Back'							=> 'Vissza',
 'Recommended'					=> 'ajánlott',
@@ -189,6 +190,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
+'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 
 /*
    Write Config Page
@@ -202,8 +204,9 @@ $lang = [
 'SecurityConsiderations'		=> 'Biztonsági szempontok',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
-'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
+'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>',
+'ErrorPrivilegesInstall'		=> 'If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
+'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'nem változik wacko_version kézzel!',
 'ConfigDescription'				=> 'részletes leírása https://wackowiki.org/doc/Doc/English/Configuration',

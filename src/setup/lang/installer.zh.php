@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'WackoWiki 配置',
+'TitleInstallation'				=> 'WackoWiki 配置',
+'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> '继续',
 'Back'							=> '后退',
 'Recommended'					=> '建议',
@@ -189,6 +190,7 @@ $lang = [
 'DeletingTablesEnd'				=> '删除数据表',
 'ErrorDeletingTable'			=> '删除 %1 表时出错，最可能的原因是表不存在，在这种情况下您可以忽略此警告。',
 'DeletingTable'					=> '正在删除 %1 表',
+'NextStep'						=> '此安装程序将尝试将配置数据写入你的WackoWiki 目录中的文件 %1。 为了使此文件生效，您必须确保网页服务器能够写入该文件。 如果您不能这样做，您将需要手动编辑文件 （安装程序将告诉您如何操作）。<br><br>详情请参阅 <a href="https://wackowiki.org/doc/Doc/简体中文/安装指南" target="_blank">WackoWiki:Doc/简体中文/安装指南</a>',
 
 /*
    Write Config Page
@@ -202,8 +204,9 @@ $lang = [
 'SecurityConsiderations'		=> '安全考虑因素',
 'SecurityRisk'					=> '建议移除已写入的对 %1 的写权限。 文件可写入可能是一个安全风险！<br> %2',
 'RemoveSetupDirectory'			=> '现在安装过程已经完成，您应该删除 %1 目录。',
-'ErrorGivePrivileges'			=> '无法写入配置文件 %1 。 您需要给予您的 web 服务器临时写入访问您的 WackoWiki 目录的权限。 或者一个名为 %1的空白文件<br>%2<br>; 不要忘记在稍后再次移除写入权限。 . %3.<br>如果出于任何原因你不能这样做， 您必须将下面的文本复制到一个新文件并保存/上传为 %1 到 WackoWiki 目录。 一旦你完成了这个操作，你的 WackoWiki 网站应该正常工作。如果没有，请访问 <a href="https://wackowiki.org/doc/Doc/简体中文/安装指南" target="_blank">WackoWiki:Doc/简体中文/安装指南</a>',
-'NextStep'						=> '此安装程序将尝试将配置数据写入你的WackoWiki 目录中的文件 %1。 为了使此文件生效，您必须确保网页服务器能够写入该文件。 如果您不能这样做，您将需要手动编辑文件 （安装程序将告诉您如何操作）。<br><br>详情请参阅 <a href="https://wackowiki.org/doc/Doc/简体中文/安装指南" target="_blank">WackoWiki:Doc/简体中文/安装指南</a>',
+'ErrorGivePrivileges'			=> '无法写入配置文件 %1 。 您需要给予您的 web 服务器临时写入访问您的 WackoWiki 目录的权限。 或者一个名为 %1的空白文件<br>%2<br><br>; 不要忘记在稍后再次移除写入权限。<br>%3<br><br>',
+'ErrorPrivilegesInstall'		=> '如果出于任何原因你不能这样做， 您必须将下面的文本复制到一个新文件并保存/上传为 %1 到 WackoWiki 目录。 一旦你完成了这个操作，你的 WackoWiki 网站应该正常工作。如果没有，请访问 <a href="https://wackowiki.org/doc/Doc/简体中文/安装指南" target="_blank">WackoWiki:Doc/简体中文/安装指南</a>',
+'ErrorPrivilegesUpgrade'		=> '一旦你完成了这个操作，你的 WackoWiki 网站应该正常工作。如果没有，请访问 <a href="https://wackowiki.org/doc/Doc/简体中文/安装指南" target="_blank">WackoWiki:Doc/简体中文/安装指南</a>',
 'WrittenAt'						=> '写入 ',
 'DontChange'					=> '不要手动更改 wacko_version ！',
 'ConfigDescription'				=> '详细描述 https://wackowiki.org/doc/Doc/English/Configuration',

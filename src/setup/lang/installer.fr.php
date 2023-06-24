@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'Installation de WackoWiki',
+'TitleInstallation'				=> 'Installation de WackoWiki',
+'TitleUpdate'					=> 'Mise à jour de WackoWiki',
 'Continue'						=> 'Continuer',
 'Back'							=> 'Revenir en arrière',
 'Recommended'					=> 'recommandée',
@@ -76,7 +77,7 @@ $lang = [
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Il semble manquer à votre installation de PHP installation les extensions indiqués requises par WackoWiki.',
 'PcreWithoutUtf8'				=> 'PCRE n’est pas compilé avec le support UTF8',
-'NotePermissions'				=> 'Cet installeur va tenter d’écrire les données de configuration dans le fichier %1, dans votre répertoire WackoWiki. Pour cela assurez-vous que le serveur http ait le droit d’écrire dans ce répertoire.  Sinon, vous devrez éditer ce fichier manuellement ; l’installeur vous indiquera comment faire.<br><br>Voir <a href="https://wackowiki.org/doc/Doc/Français/InstallationEtMiseAJour" target="_blank">WackoWiki:Doc/Français/InstallationEtMiseAJour</a> pour les détails.',
+'NotePermissions'				=> 'Cet installeur va tenter d’écrire les données de configuration dans le fichier %1, dans votre répertoire WackoWiki. Pour cela assurez-vous que le serveur http ait le droit d’écrire dans ce répertoire.  Sinon, vous devrez éditer ce fichier manuellement ; l’installeur vous indiquera comment faire.<br><br>Voir <a href="https://wackowiki.org/doc/Doc/Français/Installation" target="_blank">WackoWiki:Doc/Français/Installation</a> pour les détails.',
 'ErrorPermissions'				=> 'L’installeur ne semble pas autorisé à attribuer des droits suffisants sur les fichiers pour que WackoWiki fonctionne correctement.  On vous demandera ultérieurement de le faire vous-même.',
 'ErrorMinPhpVersion'			=> 'La version de PHP doit être supérieure à <strong>' . PHP_MIN_VERSION . '</strong> et votre serveur semble fonctionner avec une version antérieure.  Vous devez mettre à niveau PHP pour que WackoWiki fonctionne correctement.',
 'Ready'							=> 'Félicitations, votre serveur semble capable de faire fonctionner WackoWiki.  Les quelques pages qui suivent vous guideront dans le processus de configuration.',
@@ -161,7 +162,7 @@ $lang = [
 'InstallDefaultData'			=> 'Ajout des données par défaut',
 'InstallPagesBegin'				=> 'Ajout des pages par défaut',
 'InstallPagesEnd'				=> 'Ajout des pages par défaut',
-'InstallSystemAccount'			=> 'Ajout de l’utilisateur <code>système</code>',
+'InstallSystemAccount'			=> 'Ajout de l’utilisateur <code>System</code>',
 'InstallDeletedAccount'			=> 'Ajout de l’utilisateur <code>Deleted</code>',
 'InstallAdmin'					=> 'Ajout de l’utilisateur administrateur',
 'InstallAdminSetting'			=> 'Réglages pour l’utilisateur administrateur',
@@ -189,6 +190,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Effacement des tables terminé',
 'ErrorDeletingTable'			=> 'Erreur lors de l’effacement de la table %1, probablement parce que cette table n’existe pas, auquel cas vous pouvez ignorer cette alerte.',
 'DeletingTable'					=> 'Effacement de la table %1',
+'NextStep'						=> 'Au cours de la prochaine étape, l’installeur va tenter d’écrire le fichier de configuration mis à jour, %1.  Assurez-vous que le serveur ait le droit d’écrire ce fichier, sinon vous devrez l’éditer manuellement. Encore une fois, voyez <a href="https://wackowiki.org/doc/Doc/Français/Installation" target="_blank">WackoWiki:Doc/Français/Installation</a> pour les détails.',
 
 /*
    Write Config Page
@@ -202,8 +204,9 @@ $lang = [
 'SecurityConsiderations'		=> 'Considérations sur la sécurité',
 'SecurityRisk'					=> 'Par sécurité, limitez maintenant le droit d’écrire le fichier %1 maintenant, par exemple %2.',
 'RemoveSetupDirectory'			=> 'Par sécurité, supprimez maintenant le répertoire %1, devenu inutile.',
-'ErrorGivePrivileges'			=> 'Le fichier de configuration %1 n’a pas pu être écrit par le serveur http dans votre répertoire WackoWiki.<br>Si possible, créez un fichier vide appelé  %1, sur lequel vous attribuerez à provisoirement à tous le droit d’écrire :<br>%2<br>Nota : après enregistrement vous supprimerez ce droit, i.e. %3.<br> Sinon, vous devrez copier le texte ci-dessous dans un fichier et le sauvegarder comme %1 dans le répertoire WackoWiki.<br>Ceci fait, votre site WackoWiki devrait fonctionner. Sinon, voyez  <a href="https://wackowiki.org/doc/Doc/Français/InstallationEtMiseAJour" target="_blank">WackoWiki:Doc/Français/InstallationEtMiseAJour</a>',
-'NextStep'						=> 'Au cours de la prochaine étape, l’installeur va tenter d’écrire le fichier de configuration mis à jour, %1.  Assurez-vous que le serveur ait le droit d’écrire ce fichier, sinon vous devrez l’éditer manuellement. Encore une fois, voyez <a href="https://wackowiki.org/doc/Doc/Français/InstallationEtMiseAJour" target="_blank">WackoWiki:Doc/Français/InstallationEtMiseAJour</a> pour les détails.',
+'ErrorGivePrivileges'			=> 'Le fichier de configuration %1 n’a pas pu être écrit par le serveur http dans votre répertoire WackoWiki.<br>Si possible, créez un fichier vide appelé  %1, sur lequel vous attribuerez à provisoirement à tous le droit d’écrire :<br>%2<br><br>Nota : après enregistrement vous supprimerez ce droit, i.e. <br>%3.<br><br>',
+'ErrorPrivilegesInstall'		=> 'Sinon, vous devrez copier le texte ci-dessous dans un fichier et le sauvegarder comme %1 dans le répertoire WackoWiki.<br>Ceci fait, votre site WackoWiki devrait fonctionner. Sinon, voyez  <a href="https://wackowiki.org/doc/Doc/Français/Installation" target="_blank">WackoWiki:Doc/Français/Installation</a>',
+'ErrorPrivilegesUpgrade'		=> 'Ceci fait, votre site WackoWiki devrait fonctionner. Sinon, voyez  <a href="https://wackowiki.org/doc/Doc/Français/MiseAJour" target="_blank">WackoWiki:Doc/Français/MiseAJour</a>',
 'WrittenAt'						=> 'écrit à ',
 'DontChange'					=> 'ne modifiez pas le paramètre « wacko_version » !',
 'ConfigDescription'				=> 'pour une description détaillée de la configuration voir https://wackowiki.org/doc/Doc/Français/Configuration',

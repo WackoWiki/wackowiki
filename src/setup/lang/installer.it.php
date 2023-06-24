@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'Installazione di WackoWiki',
+'TitleInstallation'				=> 'Installazione di WackoWiki',
+'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> 'Continua',
 'Back'							=> 'Indietro',
 'Recommended'					=> 'raccomandato',
@@ -189,6 +190,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Finito Eliminazione Tabelle',
 'ErrorDeletingTable'			=> 'Errore di cancellazione della tabella %1, la ragione più probabile è che la tabella non esiste, nel qual caso si può ignorare questo avviso.',
 'DeletingTable'					=> 'Eliminazione tabella %1',
+'NextStep'						=> 'Nel passo successivo, l\'installatore tenterà di scrivere il nuovo file di configurazione, %1. Verifica che il server del web abbia accesso alla scrittura sul file, o che tu possa editarlo manualmente.  Ancora una volta, consulta  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> per i dettagli.',
 
 /*
    Write Config Page
@@ -202,8 +204,9 @@ $lang = [
 'SecurityConsiderations'		=> 'Considerazioni di sicurezza',
 'SecurityRisk'					=> 'Infine, ti consigliamo di escludere l\'opzione di scrittura su %1 ora che è stata scritta. Lasciare il file aperto alla scrittura è un rischio per la tua sicurezza!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'Dovreste cancellare la directory %1 ora che il processo di installazione è stato completato.',
-'ErrorGivePrivileges'			=> 'Il file di configurazione %1 non si è potuto scrivere. Si dovrà rendere temporaneamente accessibile alla scrittura il tuo server e la tua directory WackoWiki, o un file vuoto col nome di %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>Se, per qualche motivo, non puoi farlo, dovrai copiare il testo in basso in un nuovo file e salvarlo/immetterlo come %1 nella directory WackoWiki. Ciò fatto, il tuo sito WackoWiki è pronto per funzionare. Altrimenti, visita <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
-'NextStep'						=> 'Nel passo successivo, l\'installatore tenterà di scrivere il nuovo file di configurazione, %1. Verifica che il server del web abbia accesso alla scrittura sul file, o che tu possa editarlo manualmente.  Ancora una volta, consulta  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> per i dettagli.',
+'ErrorGivePrivileges'			=> 'Il file di configurazione %1 non si è potuto scrivere. Si dovrà rendere temporaneamente accessibile alla scrittura il tuo server e la tua directory WackoWiki, o un file vuoto col nome di %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>',
+'ErrorPrivilegesInstall'		=> 'Se, per qualche motivo, non puoi farlo, dovrai copiare il testo in basso in un nuovo file e salvarlo/immetterlo come %1 nella directory WackoWiki. Ciò fatto, il tuo sito WackoWiki è pronto per funzionare. Altrimenti, visita <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
+'ErrorPrivilegesUpgrade'		=> 'Ciò fatto, il tuo sito WackoWiki è pronto per funzionare. Altrimenti, visita <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'scritto a ',
 'DontChange'					=> 'non modificare manualmente la wacko_version!',
 'ConfigDescription'				=> 'descrizione dettagliata https://wackowiki.org/doc/Doc/English/Configuration',

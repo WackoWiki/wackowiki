@@ -21,9 +21,6 @@ if (!$config['hashid_seed'])
 	$config['hashid_seed'] = Ut::random_token(20, 3);
 }
 
-// set version to current version, yay!
-$config['wacko_version'] = WACKO_VERSION;
-
 $config_file = [];
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +44,7 @@ $config_file['system_seed']			= $config['system_seed'];
 $config_file['recovery_password']	= $config['recovery_password'];
 $config_file['hashid_seed']			= $config['hashid_seed'];
 // version
-$config_file['wacko_version']		= $config['wacko_version'];
+$config_file['wacko_version']		= WACKO_VERSION;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	END MANDATORY CONFIGURATION
@@ -136,6 +133,10 @@ if (!$write_file)
 				'<code>' . CONFIG_FILE . '</code>',
 				'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod ' . decoct(CHMOD_FILE) . ' ' . CONFIG_FILE . '</code>',
 				'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
+			(!$config['is_update']
+				? Ut::perc_replace($lang['ErrorPrivilegesInstall'],
+					'<code>' . CONFIG_FILE . '</code>')
+				: $lang['ErrorPrivilegesUpgrade']) .
 		'</li>' . "\n";
 }
 
@@ -152,13 +153,18 @@ else
 {
 	echo
 		'<form action="' . $base_path . '?installAction=write-config" method="post">' . "\n" .
-			write_config_hidden_nodes($config_parameters) .
+			write_config_hidden_nodes($config_parameters, false) .
 			'<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n" .
-		'</form>' . "\n" .
+		'</form>' . "\n";
 
-		'<div id="config_code" class="config_code"><pre>' .
-			htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
-		'</pre></div>' . "\n";
+	// show final config only for new installation
+	if (!$config['wacko_version'])
+	{
+		echo
+			'<div id="config_code" class="config_code"><pre>' .
+				htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
+			'</pre></div>' . "\n";
+	}
 }
 ?>
 <br>

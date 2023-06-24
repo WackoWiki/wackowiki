@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'Instalacja WackoWiki',
+'TitleInstallation'				=> 'Instalacja WackoWiki',
+'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> 'Kontynuuj',
 'Back'							=> 'Wstecz',
 'Recommended'					=> 'zalecane',
@@ -189,6 +190,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
+'NextStep'						=> 'W następnym kroku, instalator będzie próbował zapisać zaktualizowany plik konfiguracyjny, %1.  Postaraj się, że serwer posiada prawo zapisu do pliku, w przeciwnym wypadku będziesz musiał edytować go ręcznie. Raz jeszcze, zaglądnij na  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> po więcej informacji.',
 
 /*
    Write Config Page
@@ -202,8 +204,9 @@ $lang = [
 'SecurityConsiderations'		=> 'Security Considerations',
 'SecurityRisk'					=> 'Jednak, doradzamy usunięcie praw zapisu do pliku %1 po tym jak został on zapisany. Zagrożeniem dla bezpieczeństwa jest pozostawienie pliku z prawem do zapisu!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'Plik konfiguracyjny %1 nie może zostać zapisany. Musisz nadać swojemu serwerowi tymczasowe prawo do zapisu do katalogu WackoWiki, lub także dla pustego pliku %1<br>%2<br>; nie zapomnij usunąć prawa do zapisu później, czyli %3.<br>Jeżeli, z jakiegoś powodu nie możesz tego zrobić, będziesz musiał skopiować poniższy tekst do nowego pliku i zapisać/wgrać go na server jako %1 do katalogu WackoWiki. Gdy już to zrobisz, Twoja strona WackoWiki powinna już działać. Jeżeli nie, odwiedź proszę <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
-'NextStep'						=> 'W następnym kroku, instalator będzie próbował zapisać zaktualizowany plik konfiguracyjny, %1.  Postaraj się, że serwer posiada prawo zapisu do pliku, w przeciwnym wypadku będziesz musiał edytować go ręcznie. Raz jeszcze, zaglądnij na  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> po więcej informacji.',
+'ErrorGivePrivileges'			=> 'Plik konfiguracyjny %1 nie może zostać zapisany. Musisz nadać swojemu serwerowi tymczasowe prawo do zapisu do katalogu WackoWiki, lub także dla pustego pliku %1<br>%2<br><br>; nie zapomnij usunąć prawa do zapisu później, czyli <br>%3.<br><br>',
+'ErrorPrivilegesInstall'		=> 'Jeżeli, z jakiegoś powodu nie możesz tego zrobić, będziesz musiał skopiować poniższy tekst do nowego pliku i zapisać/wgrać go na server jako %1 do katalogu WackoWiki. Gdy już to zrobisz, Twoja strona WackoWiki powinna już działać. Jeżeli nie, odwiedź proszę <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
+'ErrorPrivilegesUpgrade'		=> 'Gdy już to zrobisz, Twoja strona WackoWiki powinna już działać. Jeżeli nie, odwiedź proszę <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'zapisano jako ',
 'DontChange'					=> 'nie zmieniaj wacko_version ręcznie!',
 'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
