@@ -1,10 +1,12 @@
 <?php
 
 // setup header
-function write_config_hidden_nodes($config_parameters)
+function write_config_hidden_nodes($config_parameters, $show = true)
 {
 	if (is_array($config_parameters))
 	{
+		$nodes = '';
+
 		foreach ($config_parameters as $key => $value)
 		{
 			if (is_array($value))
@@ -12,7 +14,16 @@ function write_config_hidden_nodes($config_parameters)
 				$value = implode(',', $value);
 			}
 
-			echo "\t" . '<input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
+			$nodes .= "\t" . '<input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
+		}
+
+		if ($show)
+		{
+			echo $nodes;
+		}
+		else
+		{
+			return $nodes;
 		}
 	}
 }

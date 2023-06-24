@@ -30,6 +30,7 @@ write_config_hidden_nodes($config_parameters);
 	} ?>
 </p>
 	<?php
+	// only available for update at this stage
 	if ($config['is_update'])
 	{
 		$_db_version		= $db->load_single("SELECT version()");

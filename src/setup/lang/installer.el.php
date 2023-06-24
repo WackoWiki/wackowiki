@@ -42,7 +42,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'Εγκατάσταση WackoWiki',
+'TitleInstallation'				=> 'Εγκατάσταση WackoWiki',
+'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> 'Συνέχεια',
 'Back'							=> 'Επιστροφή',
 'Recommended'					=> 'Συνιστάται',
@@ -190,6 +191,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Ολοκλήρωση Διαγραφής Πινάκων',
 'ErrorDeletingTable'			=> 'Σφάλμα κατά τη διαγραφή του πίνακα %1, ο πιθανότερος λόγος είναι ότι ο πίνακας δεν υπάρχει σε αυτή την περίπτωση μπορείτε να αγνοήσετε αυτή την προειδοποίηση.',
 'DeletingTable'					=> 'Διαγραφή %1 πίνακα',
+'NextStep'						=> 'Στο επόμενο βήμα, το πρόγραμμα εγκατάστασης θα προσπαθήσει να γράψει το ανανεωμένο αρχείο ρυθμίσεων, %1. Παρακαλώ σιγουρευτείται ότι ο web server σας έχει δικαίωμα πρόσβασης εγγραφής στο αρχείο, αλλιώς θα χρειαστεί να το επεξεργαστείται με το χέρι. Ακόμα μία φορά, δείτε για λεπτομέρειες εδώ: <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
 
 /*
    Write Config Page
@@ -203,10 +205,9 @@ $lang = [
 'SecurityConsiderations'		=> 'Προτάσεις Ασφάλειας',
 'SecurityRisk'					=> 'Σας προτείνεται να αφαιρέσετε το δικαίωμα εγγραφής στο %1 τώρα που έχει γραφτεί. Αφήνοντάς το αρχείο εγγράψιμο μπορεί να αποτελεί ρίσκο ασφάλειας!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'Θα πρέπει να διαγράψετε τον κατάλογο %1 τώρα που η διαδικασία εγκατάστασης έχει ολοκληρωθεί.',
-'ErrorGivePrivileges'			=> 'Το αρχείο ρυθμίσεων %1 δεν πρέπει να είναι εγγράψιμο. Θα χρειαστεί να δώσετε στον web server σας προσωρινή πρόσβαση ώστε να γράψει είτε στον κατάλογο του WackoWiki, ή ένα κενό αρχείο με όνομα %1<br>%2<br>; μην ξεχάσετε να αφαιρέσετε το δικαίωμα εγγραφής αργότερα, π.χ. %3.<br>Αν, για κάποιο λόγο, δεν μπορείτε να το κάνετε, θα πρέπει να αντιγράψετε το παρακάτω κείμενο σε ένα νέο αρχείο και να το αποθηκεύσετε/ανεβάσετε ως %1 μέσα στον κατάλογο του WackoWiki. Όταν το κάνετε αυτόμ το WackoWiki site σας θα δουλέψει. Εάν όχι, παρακαλώ επισκεφτείται το <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
-'NextStep'						=> 'Στο επόμενο βήμα, το πρόγραμμα εγκατάστασης θα προσπαθήσει να γράψει το ανανεωμένο αρχείο ρυθμίσεων, %1.
-Παρακαλώ σιγουρευτείται ότι ο web server σας έχει δικαίωμα πρόσβασης εγγραφής στο αρχείο, αλλιώς θα χρειαστεί να το επεξεργαστείται με το χέρι.
-Ακόμα μία φορά, δείτε για λεπτομέρειες εδώ: <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
+'ErrorGivePrivileges'			=> 'Το αρχείο ρυθμίσεων %1 δεν πρέπει να είναι εγγράψιμο. Θα χρειαστεί να δώσετε στον web server σας προσωρινή πρόσβαση ώστε να γράψει είτε στον κατάλογο του WackoWiki, ή ένα κενό αρχείο με όνομα %1<br>%2<br><br>; μην ξεχάσετε να αφαιρέσετε το δικαίωμα εγγραφής αργότερα, π.χ. <br>%3.<br><br>',
+'ErrorPrivilegesInstall'		=> 'Αν, για κάποιο λόγο, δεν μπορείτε να το κάνετε, θα πρέπει να αντιγράψετε το παρακάτω κείμενο σε ένα νέο αρχείο και να το αποθηκεύσετε/ανεβάσετε ως %1 μέσα στον κατάλογο του WackoWiki. Όταν το κάνετε αυτόμ το WackoWiki site σας θα δουλέψει. Εάν όχι, παρακαλώ επισκεφτείται το <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
+'ErrorPrivilegesUpgrade'		=> 'Όταν το κάνετε αυτόμ το WackoWiki site σας θα δουλέψει. Εάν όχι, παρακαλώ επισκεφτείται το <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'WrittenAt'						=> 'εγγράψιμο στις ',
 'DontChange'					=> 'μην αλλάξετε την έκδοση του wacko_version με το χέρι!',
 'ConfigDescription'				=> 'λεπτομερής περιγραφή https://wackowiki.org/doc/Doc/English/Configuration',

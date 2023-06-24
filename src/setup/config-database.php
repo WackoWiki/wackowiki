@@ -21,7 +21,7 @@
 			}
 			else
 			{
-				// Else there is only one database driver radio box available and it will already be selected
+				// Else there is only one database driver radio box available, and it will already be selected
 				db_driver_selected = true;
 			}
 

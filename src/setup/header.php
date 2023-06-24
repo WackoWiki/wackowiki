@@ -9,7 +9,7 @@ if ($config['tls'] && (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT']
 require_once 'setup/common.php';
 global $config;
 
-// If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.
+// If we have any config data in the _POST then it means they have somehow navigated backwards, so we should preserve their updated values.
 if (isset($_POST['config']))
 {
 	$config_parameters	= $_POST['config'];
@@ -23,15 +23,14 @@ if (   !isset($config['language'])
 	$config['language'] = 'en';
 }
 
-$separator =
-'<div class="fake_hr_separator">
-	<hr>
-</div>';
+$separator	= '<div class="fake_hr_separator"><hr></div>';
 
 global $lang;
 require_once 'setup/lang/installer.all.php';
 require_once 'setup/lang/installer.' . $config['language'] . '.php';
-$lang = array_merge ($lang, $lang_all);
+
+$lang	= array_merge ($lang, $lang_all);
+$title	= $config['wacko_version'] ? $lang['TitleUpdate'] : $lang['TitleInstallation'];
 
 // set default install action
 if (!isset($lang[$install_action])) $lang[$install_action] = '';
@@ -43,7 +42,7 @@ header('Content-Type: text/html; charset=utf-8');
 <html dir="<?php echo $lang['LangDir']; ?>" lang="<?php echo $config['language']; ?>">
 	<head>
 		<meta charset="utf-8">
-		<title><?php echo $lang['Title'] . ': ' . WACKO_VERSION . ' - ' . $lang[$install_action]; ?></title>
+		<title><?php echo $title . ': ' . WACKO_VERSION . ' - ' . $lang[$install_action]; ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<link rel="stylesheet" href="<?php echo $base_path ?>setup/css/installer.css">
@@ -51,7 +50,10 @@ header('Content-Type: text/html; charset=utf-8');
 	</head>
 	<body>
 		<div class="installer">
-			<h1><?php echo $lang['Title'];?><span class="white"> : </span><?php echo $lang[$install_action]; ?></h1>
+			<h1>
+				<?php echo $title;?>
+				<span class="white"> : </span><?php echo $lang[$install_action]; ?>
+			</h1>
 			<ul class="menu">
 			<?php
 				$next = '';
