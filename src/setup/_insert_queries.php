@@ -84,6 +84,8 @@ $upgrade['6.1.11'][]	= ['alter',		'acl',				$alter_acl_r6_0_1];
 $upgrade['6.1.13'][]	= ['delete',	'bad_behavior',		$delete_bad_behavior_r6_1_0];
 
 // cache
+$upgrade['6.1.22'][]	= ['create',	'cache',			$tbl_cache_r6_0_0];
+
 $upgrade['6.1.9'][]		= ['alter',		'cache',			$alter_cache_r6_0_1];
 $upgrade['6.1.21'][]	= ['alter',		'cache',			$alter_cache_r6_0_2];
 

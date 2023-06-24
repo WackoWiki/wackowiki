@@ -21,6 +21,18 @@ $alter_acl_r6_0_1 = "ALTER TABLE {$pref}acl ADD acl_id INT(10) UNSIGNED NOT NULL
 $delete_bad_behavior_r6_1_0 = "DROP TABLE {$pref}bad_behavior";
 
 // CACHE
+$tbl_cache_r6_0_0 = "CREATE TABLE IF NOT EXISTS {$pref}cache (
+						cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+						hash CHAR(40) NOT NULL DEFAULT '',
+						method VARCHAR(20) NOT NULL DEFAULT '',
+						query VARCHAR(255) NOT NULL DEFAULT '',
+						cache_lang VARCHAR(5) NOT NULL DEFAULT '',
+						cache_time DATETIME NULL DEFAULT NULL,
+						PRIMARY KEY (cache_id),
+						INDEX idx_hash (hash),
+						KEY idx_cache_time (cache_time)
+					) {$engine} COMMENT='' {$charset} {$collation}";
+
 $alter_cache_r6_0_1 = "ALTER TABLE {$pref}cache CHANGE query query VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_cache_r6_0_2 = "ALTER TABLE {$pref}cache CHANGE name hash CHAR(40) NOT NULL DEFAULT ''";
 
