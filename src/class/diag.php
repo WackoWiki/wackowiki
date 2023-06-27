@@ -51,7 +51,7 @@ class Diag
 
 				if ($config['debug'] >= 3)
 				{
-					echo "\t<li>SQL queries: " . count($config->query_log) . "</li>\n";
+					echo "\t<li>SQL queries: " . $engine->number_format(count($config->query_log)) . "</li>\n";
 					echo "\t<li>SQL queries dump follows" .
 							($config['debug_sql_threshold'] > 0
 								? ' (&gt;' . $config['debug_sql_threshold'] . ' sec.)'
