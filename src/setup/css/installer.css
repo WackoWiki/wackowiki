@@ -205,9 +205,10 @@ hr {
 */
 .msg {
 	position: relative;
-	margin: .6rem 0;
-	padding: .625rem 2.5rem .625rem;
+	margin: .6rem 43px;
+	padding: .625rem .625rem .625rem 2.5rem;
 	overflow: auto;
+	width: 857px;
 }
 .msg::before {
 	bottom: 0;
@@ -311,12 +312,14 @@ hr {
 ul.attention {
 	border: 1px solid #d893a1;
 	background: #fbe6f2;
+	width: 907px;
 }
 
 .attention li {
 	position: relative;
 	padding: .625rem 2.5rem .625rem;
 	overflow: auto;
+	width: 827px;
 }
 .attention li::before {
 	bottom: 0;
