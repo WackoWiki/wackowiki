@@ -1015,6 +1015,7 @@ $ap_translation = [
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 	'Backup'					=> 'Datensicherung',
+	'CantReadFile'				=> 'Kann Datei %1 nicht lesen.',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Du kannst jedes der gefundenen Sicherungspakete wiederherstellen oder vom Server entfernen.',

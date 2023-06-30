@@ -995,6 +995,7 @@ $ap_translation = [
 									'要恢复备份副本或删除包，请转到<a href="%2">恢复数据库</a>。',
 	'LogSavedBackup'			=> '保存的备份数据库##%1##',
 	'Backup'					=> '备份',
+	'CantReadFile'				=> 'Can\'t read file %1.',
 
 	// DB Restore module
 	'RestoreInfo'				=> '您可以恢复找到的任何备份包或将其从服务器中删除。',

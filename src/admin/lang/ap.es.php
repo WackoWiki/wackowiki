@@ -1010,6 +1010,7 @@ $ap_translation = [
 									'Para restaurar una copia del backup o remover un paquete, ingrese en <a href="%2">Restaurar base de datos</a>.',
 	'LogSavedBackup'			=> 'Guardado backup de base de datos ##%1##',
 	'Backup'					=> 'Backup',
+	'CantReadFile'				=> 'Can\'t read file %1.',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Puede restaurar un backup existente o removerlo del servidor.',
