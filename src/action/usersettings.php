@@ -49,7 +49,7 @@ if (isset($_GET['confirm']))
 }
 else if (@$_GET['action'] === 'logout')
 {
-	$this->log_user_out();
+	$this->logout_user();
 	$this->show_must_go_on();
 }
 else if ($user = $this->get_user())

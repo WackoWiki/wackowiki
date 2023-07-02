@@ -59,7 +59,7 @@ if ($action === 'change_password' && $user)
 	{
 		// wrong current password
 		$error = $this->_t('WrongPassword');
-		$this->log_user_delay();
+		$this->login_delay();
 		$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordMismatch', SYSTEM_LANG), $user['user_name']));
 	}
 	else
@@ -89,7 +89,7 @@ if ($action === 'change_password' && $user)
 			$this->log(3, Ut::perc_replace($this->_t($diag, SYSTEM_LANG), $user['user_name']));
 			$this->set_message($this->_t('PasswordChanged'), 'success');
 
-			$this->log_user_out();
+			$this->logout_user();
 			$this->context[++$this->current_context] = ''; // STS what's that?!
 			$this->login_page();
 			// NEVER BEEN HERE

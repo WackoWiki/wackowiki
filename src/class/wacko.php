@@ -6037,7 +6037,7 @@ class Wacko
 	}
 
 	// user logs in by explicitly providing password
-	function log_user_in($user, $remember_me = false): void
+	function login_user($user, $remember_me = false): void
 	{
 		$this->soft_login($user);
 
@@ -6101,7 +6101,7 @@ class Wacko
 	}
 
 	// explicitly end user session and free session vars
-	function log_user_out(): void
+	function logout_user(): void
 	{
 		if ($user = $this->get_user())
 		{
@@ -6120,7 +6120,7 @@ class Wacko
 
 	// here we make all false login attempts last the same amount of time
 	// to avoid timing attacks on valid usernames
-	function log_user_delay($login_delay = 5): void // STS TODO configure
+	function login_delay($login_delay = 5): void // STS TODO configure
 	{
 		$exec_limit = ini_get('max_execution_time');
 		set_time_limit(0);
@@ -7485,7 +7485,7 @@ class Wacko
 					'<code>' . $this->get_user_setting('ip') . '</code>',
 					'<code>' . $this->http->ip . '</code>'
 					) . '</span></strong>');
-			$this->log_user_out();
+			$this->logout_user();
 			$this->login_page();
 		}
 

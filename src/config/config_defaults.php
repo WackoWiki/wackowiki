@@ -236,7 +236,7 @@ $wacko_config_defaults = [
 	'max_image_area'				=> 0,		// -1, 0, 1.25e7 (off, auto, custom [e.g. 3500x3500: 12.5 million pixels])
 	'max_image_width'				=> 0,		// 320, 640, 800, 1024, 1280, 2560
 	'min_thumbnail_distance'		=> 50,
-	'jpeg_quality'					=> 80,
+	'jpeg_quality'					=> 80,		// 92, 80, ...
 
 	'enable_feeds'					=> 1,
 

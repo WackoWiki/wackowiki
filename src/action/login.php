@@ -45,7 +45,7 @@ $this->hide_article_header = true;
 if (@$_GET['action'] === 'logout')
 {
 	$this->context[++$this->current_context] = ''; // TODO ?!
-	$this->log_user_out();
+	$this->logout_user();
 	$this->go_back($this->db->root_page);
 }
 
@@ -157,7 +157,7 @@ else // login
 					}
 					else
 					{
-						$this->log_user_in($user, $persistent);
+						$this->login_user($user, $persistent);
 						$this->context[++$this->current_context] = ''; // STS what for?
 
 						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $user['user_name']));
@@ -178,7 +178,7 @@ else // login
 
 	if ($logins)
 	{
-		$this->log_user_delay();
+		$this->login_delay();
 
 		if ($this->db->max_login_attempts && $logins > $this->db->max_login_attempts
 			&& ($cap = $this->show_captcha()))

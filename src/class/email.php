@@ -120,7 +120,7 @@ class Email
 			$mail->addAddress($email_to, $name_to);
 			# $mail->addBCC($email_to, $name_to);
 
-			$mail->isHTML(false);		// set email format to plain
+			$mail->isHTML(false);										// set email format to plain
 			$mail->ContentType	= 'text/plain';
 			$mail->WordWrap		= 80;
 			$mail->Priority		= $this->engine->db->email_priority;	// Urgent = 1, Not Urgent = 5, Disable = 0
@@ -163,13 +163,13 @@ class Email
 
 		catch (Exception $e)
 		{
-			echo $e->errorMessage(); //Pretty error messages from PHPMailer
+			echo $e->errorMessage(); // Pretty error messages from PHPMailer
 			$send_ok = false;
 		}
 
 		catch (\Exception $e)
 		{
-			echo $e->getMessage(); //Boring error messages from anything else!
+			echo $e->getMessage(); // Boring error messages from anything else!
 			$send_ok = false;
 		}
 		// end

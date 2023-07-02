@@ -113,7 +113,7 @@ if (@$_POST['_action'] === 'ap_login')
 	}
 	else
 	{
-		$engine->log_user_delay();
+		$engine->login_delay();
 
 		// set default login count
 		$engine->sess->ap_failed_login_count ??= 0;

@@ -22,19 +22,11 @@ abstract class Dbal // need to be extended by Settings to be usable
 	{
 		if (!$this->db)
 		{
-			switch ($this->db_driver)
+			$this->db = match ($this->db_driver)
 			{
-				case 'mysql_pdo':
-					$this->db = new DbPDO($this);
-					break;
-
-				default:
-					$this->db_driver = 'mysqli_legacy';
-					// FALLTHRU
-				case 'mysqli_legacy':
-					$this->db = new DbMysqli($this);
-					break;
-			}
+				'mysql_pdo'	=> new DbPDO	($this),
+				default		=> new DbMysqli	($this),	// mysqli_legacy
+			};
 
 			// Change the current SQL mode at runtime
 			$sql_modes = $this->sql_mode_strict ? SQL_MODE_STRICT : SQL_MODE_PERMISSIVE;
@@ -207,9 +199,15 @@ abstract class Dbal // need to be extended by Settings to be usable
 			function ($x)
 			{
 				if (!empty($x[1]))
+				{
 					return ' ';
+				}
+
 				if (!empty($x[2]))
+				{
 					return '';
+				}
+
 				return $x[0];
 			}, $query);
 
