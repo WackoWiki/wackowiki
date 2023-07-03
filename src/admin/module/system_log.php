@@ -119,48 +119,48 @@ function admin_system_log($engine, $module)
 
 	echo $engine->form_open('systemlog');
 ?>
-		<div>
-			<h4><?php echo $engine->_t('LogFilterTip'); ?></h4><br>
-			<label for="level_mod"><?php echo $engine->_t('LogLevel'); ?></label>
-			<select id="level_mod" name="level_mod">
-			<?php
-				$log_filters = $engine->_t('LogLevelFilters');
+		<h4><?php echo $engine->_t('LogFilterTip'); ?></h4><br>
+		<label for="level_mod"><?php echo $engine->_t('LogLevel'); ?></label>
+		<select id="level_mod" name="level_mod">
+		<?php
+			$log_filters = $engine->_t('LogLevelFilters');
 
-				foreach ($log_filters as $mode => $log_filter)
-				{
-					$selected =
-						($mode === 1
-							? (!isset($_POST['level_mod']) || (int) @$_POST['level_mod'] == $mode)
-							: ((int) ($_POST['level_mod'] ?? $_GET['level_mod'] ?? '') == $mode)
-					);
+			foreach ($log_filters as $mode => $log_filter)
+			{
+				$selected =
+					($mode === 1
+						? (!isset($_POST['level_mod']) || (int) @$_POST['level_mod'] == $mode)
+						: ((int) ($_POST['level_mod'] ?? $_GET['level_mod'] ?? '') == $mode)
+				);
 
-					echo
-						'<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' .
-							$log_filter .
-						'</option>' . "\n";
-				}
-			?>
-			</select>
-			<select name="level">
-			<?php
-				$log_levels = $engine->_t('LogLevels');
+				echo
+					'<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' .
+						$log_filter .
+					'</option>' . "\n";
+			}
+		?>
+		</select>
+		<select name="level">
+		<?php
+			$log_levels = $engine->_t('LogLevels');
 
-				foreach ($log_levels as $mode => $log_level)
-				{
-					$selected =
-						(	!isset($_POST['level']) && (int) $level == $mode)
-						|| ((int) ($_POST['level'] ?? $_GET['level'] ?? '') == $mode);
+			foreach ($log_levels as $mode => $log_level)
+			{
+				$selected =
+					(	!isset($_POST['level']) && (int) $level == $mode)
+					|| ((int) ($_POST['level'] ?? $_GET['level'] ?? '') == $mode);
 
-					echo
-						'<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' .
-							$mode . ': ' . $log_level .
-						'</option>' . "\n";
-				}
-			?>
-			</select>
+				echo
+					'<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' .
+						$mode . ': ' . $log_level .
+					'</option>' . "\n";
+			}
+		?>
+		</select>
 
-			<button type="submit" name="update" id="submit"><?php echo $engine->_t('UpdateButton');?></button>
-			<button type="submit" name="reset" id="submit"><?php echo $engine->_t('ResetButton');?></button>
+		<button type="submit" name="update" id="submit"><?php echo $engine->_t('UpdateButton');?></button>
+		<button type="submit" name="reset" id="submit"><?php echo $engine->_t('ResetButton');?></button>
+	</form>
 
 <?php
 		$engine->print_pagination($pagination);
@@ -180,11 +180,11 @@ function admin_system_log($engine, $module)
 		{
 			// level highlighting
 			$row['level'] = match((int) $row['level']) {
-				1		=> '<strong class="red">' . $engine->_t('LogLevels')[1] . '</strong>',
-				2		=> '<span class="red">' . $engine->_t('LogLevels')[2] . '</span>',
-				3		=> '<strong>' . $engine->_t('LogLevels')[3] . '</strong>',
-				4		=> $engine->_t('LogLevels')[$row['level']],
-				5		=> '<small>' . $engine->_t('LogLevels')[$row['level']] . '</small>',
+				1		=> '<strong class="red">'. 	$engine->_t('LogLevels')[1] . '</strong>',
+				2		=> '<span class="red">'. 	$engine->_t('LogLevels')[2] . '</span>',
+				3		=> '<strong>'. 				$engine->_t('LogLevels')[3] . '</strong>',
+				4		=> 							$engine->_t('LogLevels')[$row['level']],
+				5		=> '<small>' . 				$engine->_t('LogLevels')[$row['level']] . '</small>',
 				6, 7	=> '<small class="grey">' . $engine->_t('LogLevels')[$row['level']] . '</small>',
 			};
 
