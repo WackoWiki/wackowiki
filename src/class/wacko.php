@@ -94,6 +94,7 @@ class Wacko
 	public $user_lang_dir			= null;
 
 	public $linktable				= null;
+	public $linktracking			= null;
 	public $noautolinks				= null;		// formatter
 	public $numerate_links			= null;
 	public $tocs					= null;
@@ -5017,18 +5018,17 @@ class Wacko
 
 	function start_link_tracking(): void
 	{
-		// STS: why in SESSION? is tracking between page instances possible?
-		$this->sess->linktracking = 1;
+		$this->linktracking = 1;
 	}
 
 	function stop_link_tracking(): void
 	{
-		$this->sess->linktracking = 0;
+		$this->linktracking = 0;
 	}
 
 	function link_tracking()
 	{
-		return @$this->sess->linktracking;
+		return @$this->linktracking;
 	}
 
 	/**
