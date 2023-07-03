@@ -4791,7 +4791,7 @@ class Wacko
 			['(' . self::PATTERN['ALPHANUM'] . ')\/',																				'\\1' . NBSP . '/'],
 			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . self::PATTERN['UPPERNUM'] . ')',	'\\1'],
 			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . '\/)',								'\\1'],
-			['\/(' . self::PATTERN['ALPHANUM'] . ')',																				'\\1'],
+			['\/(' . self::PATTERN['ALPHANUM'] . ')',																				'/' . NBSP . '\\1'],
 			['(' . self::PATTERN['UPPERNUM'] . ')' . NBSP . '(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
 			['(\d)(' . self::PATTERN['ALPHA'] . ')',																				'\\2'],
 			['(' . self::PATTERN['ALPHA'] . ')(\d)',																				'\\2'],
