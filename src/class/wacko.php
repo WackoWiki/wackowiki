@@ -21,8 +21,8 @@ class Wacko
 		'TAG'			=> '[\p{L}\p{M}\p{Nd}\.\-\/]',
 		'TAG_P'			=> '\p{L}\p{M}\p{Nd}\.\-\/',
 
-		'ACTION'		=> '\p{Latin}\_\-',
-		'FORMATTER'		=> '\p{Latin}\_\-\/',
+		'ACTION'		=> '\p{Latin}\d\_\-',
+		'FORMATTER'		=> '\p{Latin}\d\_\-\/',
 
 		'UPPER'			=> '[\p{Lu}]',
 		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
