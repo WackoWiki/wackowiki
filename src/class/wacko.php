@@ -94,7 +94,7 @@ class Wacko
 	public $user_lang_dir			= null;
 
 	public $linktable				= null;
-	public $linktracking			= null;
+	public bool $linktracking		= false;
 	public $noautolinks				= null;		// formatter
 	public $numerate_links			= null;
 	public $tocs					= null;
@@ -4794,8 +4794,8 @@ class Wacko
 			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . '\/)',								'\\1'],
 			['\/(' . self::PATTERN['ALPHANUM'] . ')',																				'/' . NBSP . '\\1'],
 			['(' . self::PATTERN['UPPERNUM'] . ')' . NBSP . '(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
-			['(\d)(' . self::PATTERN['ALPHA'] . ')',																				'\\2'],
-			['(' . self::PATTERN['ALPHA'] . ')(\d)',																				'\\2'],
+			['(\d)(' . self::PATTERN['ALPHA'] . ')',																				'\\1' . NBSP . '\\2'],
+			['(' . self::PATTERN['ALPHA'] . ')(\d)',																				'\\1' . NBSP . '\\2'],
 			# ['(\d)' . NBSP . '(?=\d)',																							'\\1'],
 			['(\d)' . NBSP . '(?!' . self::PATTERN['ALPHA'] . ')',																	'\\1'],
 		];
@@ -5018,17 +5018,17 @@ class Wacko
 
 	function start_link_tracking(): void
 	{
-		$this->linktracking = 1;
+		$this->linktracking = true;
 	}
 
 	function stop_link_tracking(): void
 	{
-		$this->linktracking = 0;
+		$this->linktracking = false;
 	}
 
-	function link_tracking()
+	function link_tracking(): bool
 	{
-		return @$this->linktracking;
+		return $this->linktracking;
 	}
 
 	/**
