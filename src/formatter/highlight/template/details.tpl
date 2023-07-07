@@ -4,6 +4,6 @@
 	[= s _ =
 		<summary>[ ' title | e ' ]</summary>
 	=]
-	[ ' include ' ]
+[ ' include  // <-- no indention for embeded pre ' ]
 	</details>
 </ignore>
