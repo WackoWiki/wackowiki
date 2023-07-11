@@ -353,7 +353,7 @@ if (isset($_POST['upload']) & $can_upload)
 								$file_name		= $small_name[count($small_name) - 1];
 							}
 
-							$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
+							$file_size_ft	= $this->binary_multiples($file_size, 'binary', true, true);
 							$page_id		= $is_global ? 0 : $this->page['page_id'];
 
 							// replace option: keep old data if new entry is empty
@@ -475,16 +475,16 @@ if (isset($_POST['upload']) & $can_upload)
 		{
 			$error =
 				$this->_t('UploadMaxFileQuota') . '. <br>' .
-				$this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) .
-				' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples((int) $this->db->upload_quota_per_user, true, true, true);
+				$this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($user_files['used_user_quota'], 'binary', true, true) .
+				' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples((int) $this->db->upload_quota_per_user, 'binary', true, true);
 		}
 
 		if ($this->db->upload_quota > 0)
 		{
 			$error .=
 				'<br>' . $this->_t('UploadMaxFileQuota') . '. <br>' .
-				$this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($files['used_quota'], false, true, true) .
-				' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples((int) $this->db->upload_quota, true, true, true);
+				$this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($files['used_quota'], 'binary', true, true) .
+				' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples((int) $this->db->upload_quota, 'binary', true, true);
 		}
 	}
 

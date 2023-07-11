@@ -350,7 +350,7 @@
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: UploadQuota ' ]</th>
-					<td title="[ ' _t: UploadQuotaTip ' ]"><div class="meter"><span style="width: 25%;">[ ' quota ' ] ([ ' percentage ' ])</span></div></td>
+					<td title="[ ' _t: UploadQuotaTip ' ]"><div class="meter"><span style="width: 25%;">[ ' quota ' ][ ' percentage ' ]</span></div></td>
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: UsersPages ' ]</th>

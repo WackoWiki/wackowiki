@@ -94,7 +94,7 @@ if ($this->can_upload(true))
 		$tpl->u_d_allowed = $allowed_types;
 	}
 
-	$tpl->u_size = $this->binary_multiples($maxfilesize, false, true, true);
+	$tpl->u_size = $this->binary_multiples($maxfilesize, 'binary', true, true);
 
 	if ($global)
 	{

@@ -237,7 +237,7 @@ else if ($mode && !empty($file))
 
 			$tpl->desc			= $format_desc($file['file_description'], $file['file_lang']);
 			$tpl->caption		= $format_desc($file['caption'], $file['file_lang']);
-			$tpl->size			= $this->binary_multiples($file['file_size'], false, true, true);
+			$tpl->size			= $this->binary_multiples($file['file_size'], 'binary', true, true);
 
 			// image dimension
 			if ($file['picture_w'])
@@ -334,7 +334,7 @@ else if ($mode && !empty($file))
 		{
 			$tpl->link		= $this->link($file_tag, '', Ut::shorten_string($file['file_name']));
 			$tpl->file		= $file; // array -> [ ' file.field ' ]
-			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
+			$tpl->size		= $this->binary_multiples($file['file_size'], 'binary', true, true);
 			$tpl->user		= $this->user_link($file['user_name'], true, false);
 
 			$tpl->location	= $file['tag']

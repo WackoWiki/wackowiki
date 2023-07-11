@@ -94,7 +94,7 @@ if ($this->has_access('read'))
 
 			// page_size change
 			$tpl->delta			= $this->delta_formatted($this->rev_delta[$page['revision_id']]);
-			$tpl->size			= $this->binary_multiples($page['page_size'], false, true, true);
+			$tpl->size			= $this->binary_multiples($page['page_size'], 'binary', true, true);
 			$tpl->version		= $page['version_id'];
 			$tpl->href			= $this->href('show', '', ['revision_id' => $page['revision_id']]);
 			$tpl->modified		= $page['modified'];

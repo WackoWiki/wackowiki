@@ -173,7 +173,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET, so personal me
 				if ($pm_size > INTERCOM_MAX_SIZE)
 				{
 					$error = Ut::perc_replace($this->_t('PMOversized'),
-						$this->binary_multiples(($pm_size - INTERCOM_MAX_SIZE)));
+						$this->binary_multiples(($pm_size - INTERCOM_MAX_SIZE), 'binary'));
 				}
 				// personal messages flood control
 				else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)

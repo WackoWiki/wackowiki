@@ -157,7 +157,7 @@ class WackoFormatter
 				? ''
 				: "``.*?``|" .
 				  "\%\%.*?\%\%|") .
-			// escaped  ~...
+			// escaped ~...
 			"~([^ \t\n]+)|" .
 			// escaped  ""...""
 			"\"\".*?\"\"|" .
@@ -218,6 +218,7 @@ class WackoFormatter
 		$wacko		= &$this->object;
 		$callback	= [&$this, 'wacko_preprocess'];
 
+		// escaped ~...
 		if (!empty($thing[0]) && $thing[0] == '~')
 		{
 			if ($thing[1] == '~')

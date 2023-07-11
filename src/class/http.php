@@ -858,6 +858,7 @@ class Http
 	{
 		$str = preg_replace_callback('/(^|(?<=&))[^=[&]+/', function($key) { return bin2hex(urldecode($key[0])); }, $str);
 		parse_str($str, $post);
+
 		return array_combine(array_map('hex2bin', array_keys($post)), $post);
 	}
 
@@ -881,7 +882,6 @@ class Http
 		}
 
 		$path = trim($path, '/');
-
 		$path = $this->cut_prefix($base, $path);
 
 		isset($uri[1])  &&  $path .= '?' . $uri[1];

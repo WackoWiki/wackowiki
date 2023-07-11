@@ -837,8 +837,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Aktiviere E-Mail:',
 	'EnableEmailInfo'			=> 'Aktiviere E-Mail-Funktionalität',
 
+	'EmailIdentitySettings'		=> 'Identität',
 	'FromEmailName'				=> 'Absender:',
 	'FromEmailNameInfo'			=> 'Absender Name, im Adressfeld <code>Von:</code> der Kopfzeile in E-Mails für alle E-Mail-Benachrichtigungen, die von dieser Seite gesendet werden.',
+	'EmailSubjectPrefix'		=> 'Betreff-Prefix:',
+	'EmailSubjectPrefixInfo'	=> 'Alternativer E-Mail-Betreff-Prefix, e.g. <code>[Prefix] Betreff</code>. Wenn nicht festgelegt, verwendet es den möglicherweise längeren Namen der Seite %1 als Prefix.',
+
 	'NoReplyEmail'				=> 'No-reply Adresse:',
 	'NoReplyEmailInfo'			=> 'Diese Adresse, z.B. <code>noreply@example.com</code>, erscheint im Adressfeld <code>Von:</code> der Kopfzeile bei allen E-Mail Benachrichtigungen, die von dieser Seite gesendet werden.',
 	'AdminEmail'				=> 'E-Mail Adresse des Seiteninhabers:',

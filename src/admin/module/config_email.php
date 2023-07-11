@@ -41,7 +41,11 @@ function admin_config_email($engine, $module)
 			$engine->set_message($engine->_t('NotAEmail'), 'error');
 			return false;
 		}
+	};
 
+	$sanitize_name = function ($string) use ($engine)
+	{
+		return trim(preg_replace('/[\r\n]+/', '', $string));
 	};
 
 	// send test email
@@ -66,7 +70,8 @@ function admin_config_email($engine, $module)
 			$config['phpmailer_method']			= (string) $_POST['phpmailer_method'];
 		}
 
-		$config['email_from']					= (string) $_POST['email_from'];
+		$config['email_from']					= (string) $sanitize_name($_POST['email_from']);
+		$config['email_subject_prefix']			= (string) $sanitize_name($_POST['email_subject_prefix']);
 
 		if ($validate_email($_POST['admin_email']))
 		{
@@ -87,7 +92,7 @@ function admin_config_email($engine, $module)
 
 		if (in_array($_POST['smtp_connection_mode'], ['', 'ssl', 'tls']))
 		{
-			$config['smtp_connection_mode']			= (string) $_POST['smtp_connection_mode'];
+			$config['smtp_connection_mode']		= (string) $_POST['smtp_connection_mode'];
 		}
 
 		$config['smtp_host']					= (string) $_POST['smtp_host'];
@@ -139,8 +144,11 @@ function admin_config_email($engine, $module)
 					</select>
 				</td>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
+			<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('EmailIdentitySettings'); ?>
+				</th>
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
@@ -149,6 +157,21 @@ function admin_config_email($engine, $module)
 				</td>
 				<td>
 					<input type="text" size="50" maxlength="100" id="email_from" name="email_from" value="<?php echo Ut::html($engine->db->email_from);?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="email_subject_prefix"><strong><?php echo $engine->_t('EmailSubjectPrefix'); ?></strong><br>
+					<small><?php echo Ut::perc_replace(
+						$engine->_t('EmailSubjectPrefixInfo'),
+						'<code>[' . $engine->db->site_name . ']</code>'); ?>
+					</small></label>
+				</td>
+				<td>
+					<input type="text" size="50" maxlength="100" id="email_subject_prefix" placeholder="<?php echo Ut::html($engine->db->site_name);?>" name="email_subject_prefix" value="<?php echo Ut::html($engine->db->email_subject_prefix);?>">
 				</td>
 			</tr>
 			<tr class="lined">

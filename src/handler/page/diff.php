@@ -100,7 +100,7 @@ if ($page_a && $page_b
 			$tpl->href		= $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : ''));
 			$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $page['version_id'] . '</strong>');
 			$tpl->modified	= $page['modified'];
-			$tpl->size		= $this->binary_multiples($page['page_size'], false, true, true);
+			$tpl->size		= $this->binary_multiples($page['page_size'], 'binary', true, true);
 
 			if ($side == 'b')
 			{

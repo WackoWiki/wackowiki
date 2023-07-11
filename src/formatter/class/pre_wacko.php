@@ -31,7 +31,7 @@ class PreFormatter
 		$thing = $things[1];
 
 		// formatter text  ``...``
-		if (  preg_match('/^``(.*)``$/us', $thing, $matches))
+		if (preg_match('/^``(.*)``$/us', $thing, $matches))
 		{
 			return '``' . $matches[1] . '``';
 		}

@@ -63,6 +63,7 @@ $wacko_config_defaults = [
 	'email_priority'				=> 3,
 
 	'email_from'					=> 'WackoWiki',
+	'email_subject_prefix'			=> '',	// uses site_name if not defined
 	'enable_email'					=> 1,
 	'enable_email_notification'		=> 1,
 

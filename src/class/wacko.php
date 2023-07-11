@@ -2088,9 +2088,9 @@ class Wacko
 						'page_size		= ' . (int) strlen($body) . ', ' .
 						($reviewed
 							?	'reviewed		= ' . (int) $reviewed . ', ' .
-							'reviewed_time	= UTC_TIMESTAMP(), ' .
-							'reviewer_id	= ' . (int) $reviewer_id . ', '
-							: '') .
+								'reviewed_time	= UTC_TIMESTAMP(), ' .
+								'reviewer_id	= ' . (int) $reviewer_id . ', '
+							:	'') .
 						'latest			= 1, ' . // 1 - new page
 						'ip				= ' . $this->db->q($ip) . ', ' .
 						'page_lang		= ' . $this->db->q($lang) . ' ');
@@ -2195,9 +2195,9 @@ class Wacko
 							'page_size		= ' . (int) strlen($body) . ', ' .
 							(isset($reviewed)
 								?	'reviewed		= ' . (int) $reviewed . ', ' .
-								'reviewed_time	= UTC_TIMESTAMP(), ' .
-								'reviewer_id	= ' . (int) $reviewer_id . ', '
-								: '') .
+									'reviewed_time	= UTC_TIMESTAMP(), ' .
+									'reviewer_id	= ' . (int) $reviewer_id . ', '
+								:	'') .
 							'latest			= 2 ' . // 2 - modified page
 						'WHERE page_id = ' . (int) $page_id . ' ' .
 						'LIMIT 1');
@@ -2256,9 +2256,9 @@ class Wacko
 				'page_size		= ' . (int) $page['page_size'] . ', ' .
 				($page['reviewed_time']
 					?	'reviewed		= ' . (int) $page['reviewed'] . ', ' .
-					'reviewed_time	= ' . $this->db->q($page['reviewed_time']) . ', ' .
-					'reviewer_id	= ' . (int) $page['reviewer_id'] . ', '
-					: '') .
+						'reviewed_time	= ' . $this->db->q($page['reviewed_time']) . ', ' .
+						'reviewer_id	= ' . (int) $page['reviewer_id'] . ', '
+					:	'') .
 				'latest			= 0, ' . // 0 - old page
 				'ip				= ' . $this->db->q($page['ip']) . ', ' .
 				'handler		= ' . $this->db->q($page['handler']) . ', ' .
@@ -2510,7 +2510,6 @@ class Wacko
 
 	function add_user_page($user_name, $user_lang = null, $mute = true): void
 	{
-
 		$user_lang			??= $this->db->language;
 
 		$tag				= $this->db->users_page . '/' . $user_name;
@@ -2579,7 +2578,7 @@ class Wacko
 
 		$email_to	= $user['email'];
 		$name_to	= $user['user_name'];
-		$prefix		= '[' . $this->db->site_name . '] ';	// TODO: add option for custom prefix
+		$prefix		= '[' . ($this->db->email_subject_prefix ?: $this->db->site_name) . '] ';
 
 		$subject	= $prefix . $subject;
 		$body		= $this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
@@ -3925,7 +3924,7 @@ class Wacko
 				// check 403 here!
 				if ($global || $file_access)
 				{
-					$title		= Ut::html($file_data['file_description']) . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
+					$title		= Ut::html($file_data['file_description']) . ' (' . $this->binary_multiples($file_data['file_size'], 'binary', true, true) . ')';
 					$alt		= Ut::html($file_data['file_description']);
 					$src		= '';
 					$width		= '';
@@ -9488,11 +9487,22 @@ class Wacko
 		return $out;
 	}
 
-	function binary_multiples($size, $prefix = true, $short = true, $rounded = false, $suffix = true, $norm = 'bytes')
+	/**
+	 *
+	 * @param int		$size
+	 * @param string	$prefix		'decimal' or 'binary'
+	 * @param bool		$short
+	 * @param bool		$rounded
+	 * @param bool		$suffix
+	 * @param string	$norm
+	 *
+	 * @return string|number
+	 */
+	function binary_multiples($size, $prefix = 'decimal', $short = true, $rounded = false, $suffix = true, $norm = 'bytes')
 	{
 		if (is_numeric($size))
 		{
-			if ($prefix)
+			if ($prefix == 'decimal')
 			{
 				// decimal prefix
 				$factor	= 1000;
@@ -9520,7 +9530,8 @@ class Wacko
 			if ($rounded)
 			{
 				// for MiB and bigger use two decimal places
-				$precision	= $x > 1 ? 2 : 0;
+				# $precision	= $x > 1 ? 2 : 0;
+				$precision	= 0;
 				$size		= $this->number_format($size, $precision);
 			}
 			else

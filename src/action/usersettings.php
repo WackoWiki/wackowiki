@@ -328,11 +328,11 @@ else if ($user = $this->get_user())
 
 		if ($this->db->upload_quota_per_user)
 		{
-			$tpl->percentage = round(($upload_quota / (($this->db->upload_quota_per_user) / 100)) ) . '%';
+			$tpl->percentage = ' (' . round(($upload_quota / (($this->db->upload_quota_per_user) / 100)) ) . '%)';
 		}
 
 		$tpl->userpage		= $this->href('', ($this->db->users_page . '/' . $user['user_name']));
-		$tpl->quota			= $this->binary_multiples($upload_quota, false, true, true);
+		$tpl->quota			= $this->binary_multiples($upload_quota, 'binary', true, true);
 		$tpl->pages			= $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages');
 		# $tpl->revisions	= $this->href('', $this->db->users_page, 'profile=' . $user['user_name']);
 		$tpl->comments		= $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments');
