@@ -833,8 +833,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'E-mails inschakelen:',
 	'EnableEmailInfo'			=> 'E-mails inschakelen',
 
+	'EmailIdentitySettings'		=> 'Website E-mails Identiteit',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'Onderwerp Voorvoegsel:',
+	'EmailSubjectPrefixInfo'	=> 'Alternatief e-mailonderwerpvoorvoegsel, bijv. <code>[Voorvoegsel] Onderwerp</code>. Als dit niet is gedefinieerd, is het standaardvoorvoegsel sitenaam: %1.',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',

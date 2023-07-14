@@ -835,8 +835,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Enable emails:',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
+	'EmailIdentitySettings'		=> 'Weboldal e-mailek Azonosság',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'Tárgy előtag:',
+	'EmailSubjectPrefixInfo'	=> 'Alternatív e-mail tárgy előtag, pl. <code>[Előtag] Téma</code>. Ha nincs megadva, az alapértelmezett előtag a Helyszín neve: %1.',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',

@@ -835,8 +835,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Enable emails:',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
+	'EmailIdentitySettings'		=> 'Veebisaidi e-kirjad Identiteet',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'Subjekti eesliide:',
+	'EmailSubjectPrefixInfo'	=> 'Alternatiivne e-posti teema eesliide, nt <code>[Eesliide] Teema</code>. Kui seda ei ole määratud, on vaikimisi eesliide Site Name: %1.',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',

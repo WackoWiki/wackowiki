@@ -838,8 +838,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Enable emails:',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
+	'EmailIdentitySettings'		=> 'वेबसाइट ईमेल पहचान',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'विषय उपसर्ग:',
+	'EmailSubjectPrefixInfo'	=> 'वैकल्पिक ईमेल विषय उपसर्ग, उदा. <code>[उपसर्ग] विषय</code>। यदि परिभाषित नहीं है, तो डिफ़ॉल्ट उपसर्ग साइट का नाम: %1 है।',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',

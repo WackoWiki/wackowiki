@@ -819,8 +819,12 @@ $ap_translation = [
 	'EnableEmail'				=> '启用电子邮件：',
 	'EnableEmailInfo'			=> '启用电子邮件',
 
+	'EmailIdentitySettings'		=> '网站电子邮件',
 	'FromEmailName'				=> '发件人名称：',
 	'FromEmailNameInfo'			=> '发件人姓名，电子邮件中 <code>From:</code> 标头的一部分，用于从站点发送的所有电子邮件通知。',
+	'EmailSubjectPrefix'		=> '主题前缀：',
+	'EmailSubjectPrefixInfo'	=> '备用电子邮件主题前缀，例如<code>[前缀]主题</code>。如果未定义，如果未定义，默认前缀为站点名称： %1。',
+
 	'NoReplyEmail'				=> 'No-reply 地址：',
 	'NoReplyEmailInfo'			=> '这个地址，例如 <code>noreply@example.com</code>，将出现在您从该站点发送的所有电子邮件通知的 <code>From:</code> 电子邮件地址字段中。',
 	'AdminEmail'				=> '网站所有者的电子邮件：',

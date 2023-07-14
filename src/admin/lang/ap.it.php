@@ -537,11 +537,11 @@ $ap_translation = [
 	'AllowEmailReuse'			=> 'Allow email address re-use:',
 	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
 	'EmailConfirmation'			=> 'Imporre la conferma via e-mail:',
-	'EmailConfirmationInfo'		=> 'Richiede all\'utente di verificare il suo indirizzo e-mail prima di poter accedere.',
+	'EmailConfirmationInfo'		=> 'Richiede all’utente di verificare il suo indirizzo e-mail prima di poter accedere.',
 	'AllowedEmailDomains'		=> 'Domini e-mail consentiti:',
 	'AllowedEmailDomainsInfo'	=> 'Domini e-mail consentiti separati da virgole, ad esempio <code>example.com, local.lan</code> ecc, other wise all email domains are allowed.',
 	'ForbiddenEmailDomains'		=> 'Domini e-mail proibiti:',
-	'ForbiddenEmailDomainsInfo'	=> 'Domini e-mail vietati separati da una virgola, ad esempio <code>example.com, local.lan</code> ecc (efficace solo se l\'elenco dei domini e-mail consentiti è vuoto)',
+	'ForbiddenEmailDomainsInfo'	=> 'Domini e-mail vietati separati da una virgola, ad esempio <code>example.com, local.lan</code> ecc (efficace solo se l’elenco dei domini e-mail consentiti è vuoto)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha:',
@@ -833,8 +833,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Enable emails:',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
+	'EmailIdentitySettings'		=> 'Sito web Email Identità',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'Prefisso dell’oggetto:',
+	'EmailSubjectPrefixInfo'	=> 'Prefisso alternativo dell’oggetto dell’e-mail, ad esempio <code>[Prefisso] Argomento</code>. Se non è definito, il prefisso predefinito è Nome del sito: %1.',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',
@@ -1011,7 +1015,7 @@ $ap_translation = [
 									'To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 	'Backup'					=> 'Backup',
-	'CantReadFile'				=> 'Can\'t read file %1.',
+	'CantReadFile'				=> 'Can’t read file %1.',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
@@ -1080,7 +1084,7 @@ $ap_translation = [
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	'BackupArchived'			=> 'Backup %1 archiviato.',
-	'BackupArchiveExists'		=> 'L\'archivio di backup %1 esiste già.',
+	'BackupArchiveExists'		=> 'L’archivio di backup %1 esiste già.',
 	'LogBackupArchived'			=> 'Backup ##%1## archiviato.',
 
 	// User module

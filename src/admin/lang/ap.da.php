@@ -833,8 +833,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Boardets emailsystem er:',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
+	'EmailIdentitySettings'		=> 'Hjemmeside E-mails Identitet',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'Emne-præfiks:',
+	'EmailSubjectPrefixInfo'	=> 'Alternativt e-mail-emnepræfiks, f.eks. <code>[Præfiks] Emne</code>. Hvis det ikke er defineret, er standardpræfikset Site Name: %1.',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',

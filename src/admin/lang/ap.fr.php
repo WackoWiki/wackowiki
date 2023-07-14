@@ -537,12 +537,12 @@ $ap_translation = [
 	'EmailSection'				=> 'Email',
 	'AllowEmailReuse'			=> 'Autoriser la réutilisation de l’adresse e-mail :',
 	'AllowEmailReuseInfo'		=> 'Différents utilisateurs peuvent s’inscrire avec la même adresse e-mail.',
-	'EmailConfirmation'			=> 'Confirmation de l\'adresse électronique :',
-	'EmailConfirmationInfo'		=> 'Exige que l\'utilisateur vérifie son adresse électronique avant de pouvoir se connecter.',
+	'EmailConfirmation'			=> 'Confirmation de l’adresse électronique :',
+	'EmailConfirmationInfo'		=> 'Exige que l’utilisateur vérifie son adresse électronique avant de pouvoir se connecter.',
 	'AllowedEmailDomains'		=> 'Domaines de messagerie autorisés :',
 	'AllowedEmailDomainsInfo'	=> 'Domaines de messagerie autorisés séparés par des virgules, par exemple <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'ForbiddenEmailDomains'		=> 'Domaines de messagerie interdits :',
-	'ForbiddenEmailDomainsInfo'	=> 'Domaines de courrier électronique interdits, séparés par des virgules, par exemple <code>example.com, local.lan</code> etc. (n\'est efficace que si la liste des domaines de courrier électronique autorisés est vide)',
+	'ForbiddenEmailDomainsInfo'	=> 'Domaines de courrier électronique interdits, séparés par des virgules, par exemple <code>example.com, local.lan</code> etc. (n’est efficace que si la liste des domaines de courrier électronique autorisés est vide)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Activer Captcha :',
@@ -834,8 +834,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Activer les emails :',
 	'EnableEmailInfo'			=> 'Activation des emails',
 
+	'EmailIdentitySettings'		=> 'Site Internet Emails Identité',
 	'FromEmailName'				=> 'From nom :',
 	'FromEmailNameInfo'			=> 'Le nom de l’expéditeur, partie de <code>From:</code>en-tête dans les courriels pour toutes les notifications par courriel envoyées à partir du site.',
+	'EmailSubjectPrefix'		=> 'Préfixe du sujet :',
+	'EmailSubjectPrefixInfo'	=> 'Autre préfixe de l’objet du courrier électronique, par exemple <code>[Préfixe] Sujet</code>. S’il n’est pas défini, le préfixe par défaut est Nom du site : %1.',
+
 	'NoReplyEmail'				=> 'No-reply adress :',
 	'NoReplyEmailInfo'			=> 'Cette adresse, par exemple <code>noreply@example.com</code>, apparaîtra dans le champ <code>From:</code> email address de toutes vos notifications par e-mail envoyées depuis le site.',
 	'AdminEmail'				=> 'Email du propriétaire du site :',
@@ -1012,7 +1016,7 @@ $ap_translation = [
 									'Pour restaurer une copie de sauvegarde ou supprimer un paquet, allez à <a href="%2">Restaurer la base de données</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 	'Backup'					=> 'Sauvegarde',
-	'CantReadFile'				=> 'Can\'t read file %1.',
+	'CantReadFile'				=> 'Can’t read file %1.',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Vous pouvez restaurer n’importe lequel des paquets de sauvegarde trouvés ou le supprimer du serveur.',
@@ -1081,7 +1085,7 @@ $ap_translation = [
 	'LogDbRestored'				=> 'Sauvegarde ##%1## de la base de données restaurée.',
 
 	'BackupArchived'			=> 'Sauvegarde %1 archivée.',
-	'BackupArchiveExists'		=> 'L\'archive de sauvegarde %1 existe déjà.',
+	'BackupArchiveExists'		=> 'L’archive de sauvegarde %1 existe déjà.',
 	'LogBackupArchived'			=> 'Sauvegarde ##%1## archivée.',
 
 	// User module

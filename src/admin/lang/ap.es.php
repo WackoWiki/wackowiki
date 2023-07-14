@@ -832,8 +832,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Habilitar envío de emails:',
 	'EnableEmailInfo'			=> 'habilitando emails',
 
+	'EmailIdentitySettings'		=> 'Sitio web Correos electrónicos Identidad',
 	'FromEmailName'				=> 'Nombre remitente:',
 	'FromEmailNameInfo'			=> 'Nombre del remitente, parte de la cabecera <code>From:</code> en emails para todas las notificaciones de email desde este sitio.',
+	'EmailSubjectPrefix'		=> 'Prefijo del asunto:',
+	'EmailSubjectPrefixInfo'	=> 'Prefijo alternativo del asunto del correo electrónico, por ejemplo <code>[Prefijo] Tema</code>. Si no se define, el prefijo por defecto es Nombre del sitio: %1.',
+
 	'NoReplyEmail'				=> 'dirección no-responder:',
 	'NoReplyEmailInfo'			=> 'Esta dirección, p.ej. <code>noreply@example.com</code> aparecerá en el campo <code>From:</code> del email en todas las notificaciones de email desde este sitio.',
 	'AdminEmail'				=> 'Email del dueño del sitio:',

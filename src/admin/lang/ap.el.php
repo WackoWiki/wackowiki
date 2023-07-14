@@ -835,8 +835,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Enable emails:',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
+	'EmailIdentitySettings'		=> 'Ιστοσελίδα Emails Ταυτότητα',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'Πρόθεμα υποκειμένου:',
+	'EmailSubjectPrefixInfo'	=> 'Θέμα: Εναλλακτικό πρόθεμα θέματος ηλεκτρονικού ταχυδρομείου, π.χ. <code>[Πρόθεμα] Θέμα</code>. Εάν δεν οριστεί, το προεπιλεγμένο πρόθεμα είναι το Όνομα τοποθεσίας: %1.',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',

@@ -817,8 +817,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Разрешить email-сообщения:',
 	'EnableEmailInfo'			=> 'Разрешить отправку email-сообщений сайтом',
 
+	'EmailIdentitySettings'		=> 'Идентификация эл.писем веб-сайта',
 	'FromEmailName'				=> 'Имя отправителя по-умолчанию:',
 	'FromEmailNameInfo'			=> 'Имя отправителя отображается в поле <code>From:</code> во всех email-уведомлениях, посылаемых сайтом.',
+	'EmailSubjectPrefix'		=> 'Префикс темы:',
+	'EmailSubjectPrefixInfo'	=> 'Альтернативный префикс темы электронного письма, например. <code>[Префикс] Тема</code>. Если он не определен, префикс по умолчанию — имя сайта: %1.',
+
 	'NoReplyEmail'				=> 'Адрес отправителя по-умолчанию:',
 	'NoReplyEmailInfo'			=> 'Адрес отправителя по-умолчанию, например <code>noreply@example.com</code>, отображается в поле <code>From:</code> во всех email-уведомлениях, посылаемых сайтом.',
 	'AdminEmail'				=> 'Обратный email-адрес:',

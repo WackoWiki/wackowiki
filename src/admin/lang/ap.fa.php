@@ -838,8 +838,12 @@ $ap_translation = [
 	'EnableEmail'				=> 'Enable emails:',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
+	'EmailIdentitySettings'		=> 'هویت ایمیل های وب سایت',
 	'FromEmailName'				=> 'From Name:',
 	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'EmailSubjectPrefix'		=> 'پیشوند موضوع:',
+	'EmailSubjectPrefixInfo'	=> 'پیشوند موضوع ایمیل جایگزین، به عنوان مثال. [پیشوند] موضوع. اگر تعریف نشده باشد از نام سایت احتمالاً طولانی‌تر % 1 به عنوان پیشوند استفاده می‌کند.',
+
 	'NoReplyEmail'				=> 'No-reply address:',
 	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',
