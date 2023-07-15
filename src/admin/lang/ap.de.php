@@ -837,7 +837,7 @@ $ap_translation = [
 	'EnableEmail'				=> 'Aktiviere E-Mail:',
 	'EnableEmailInfo'			=> 'Aktiviere E-Mail-Funktionalität',
 
-	'EmailIdentitySettings'		=> 'Website-Email-Identität',
+	'EmailIdentitySettings'		=> 'Website-E-Mail-Identität',
 	'FromEmailName'				=> 'Absender:',
 	'FromEmailNameInfo'			=> 'Absender Name, im Adressfeld <code>Von:</code> der Kopfzeile in E-Mails für alle E-Mail-Benachrichtigungen, die von dieser Seite gesendet werden.',
 	'EmailSubjectPrefix'		=> 'Betreff-Prefix:',

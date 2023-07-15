@@ -267,7 +267,6 @@
 						</th>
 						<td>
 							<select id="theme" name="theme">
-								<option value="">--</option>
 								[= t _ =
 									<option value="[ ' theme ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' theme ' ]</option>
 								=]

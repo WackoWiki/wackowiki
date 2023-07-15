@@ -78,7 +78,6 @@ else if ($user = $this->get_user())
 		if ($error)
 		{
 			$this->set_message($error, 'error');
-			$this->set_message($this->_t('SettingsNotStored')); // message set does not exist!
 		}
 		else
 		{

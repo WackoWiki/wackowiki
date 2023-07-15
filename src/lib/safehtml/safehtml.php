@@ -277,7 +277,7 @@ class SafeHTML
 
 				if ($name == 'style')
 				{
-					// removes insignificant backslahes
+					// removes insignificant backslashes
 					$value = str_replace("\\", '', $value);
 
 					// removes CSS comments
