@@ -5,17 +5,11 @@ if (!defined('IN_WACKO'))
 	exit('No direct script access allowed');
 }
 
-/*
-
-########################################################
-##              Email Constructor                     ##
-########################################################
-
-*/
-
 // Import the PHPMailer class into the global namespace
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use PHPMailer\ {
+	PHPMailer\PHPMailer,
+	PHPMailer\Exception
+};
 
 class Email
 {

@@ -136,39 +136,39 @@ function test($text, $condition, $error_text = '')
 	return true;
 }
 
-function test_mysqli($text, $query, $errorText = '')
+function test_mysqli($text, $query, $error_text = '')
 {
 	global $dblink;
 
 	try
 	{
-		test($text, @mysqli_query($dblink, $query), $errorText);
+		test($text, @mysqli_query($dblink, $query), $error_text);
 	}
 	catch (mysqli_sql_exception $e)
 	{
-		test($text, false, $errorText . '<br>' . $e->getMessage());
+		test($text, false, $error_text . '<br>' . $e->getMessage());
 	}
 	catch (Exception $e)
 	{
-		test($text, false, $errorText);
+		test($text, false, $error_text);
 	}
 }
 
-function test_pdo($text, $query, $errorText = '')
+function test_pdo($text, $query, $error_text = '')
 {
 	global $dblink;
 
 	try
 	{
-		test($text, $dblink->query($query), $errorText);
+		test($text, $dblink->query($query), $error_text);
 	}
 	catch (PDOException $e)
 	{
-		test($text, false, $errorText . '<br>' . $e->getMessage());
+		test($text, false, $error_text . '<br>' . $e->getMessage());
 	}
 	catch (Exception $e)
 	{
-		test($text, false, $errorText);
+		test($text, false, $error_text);
 	}
 }
 

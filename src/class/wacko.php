@@ -3066,7 +3066,9 @@ class Wacko
 		}
 
 		// get system message
-		if (($message = $this->db->system_message) && !$this->db->ap_mode)
+		if ($this->db->enable_system_message
+			&& ($message = $this->db->system_message)
+			&& !$this->db->ap_mode)
 		{
 			array_unshift($messages, [$message, 'sys-message ' . $this->db->system_message_type]);
 		}
@@ -3097,7 +3099,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			$info_box = '<div class="msg ' . $type . '">' . $message . "</div>\n";
+			$info_box = '<div class="msg ' . $type . '">' . $message . '</div>' . "\n";
 
 			if ($show)
 			{
@@ -3335,7 +3337,7 @@ class Wacko
 	/**
 	* Convert WikiWord to Wiki_Word in URLs if config value urls_underscores is 1
 	*
-	* @param string $tag Page tag
+	* @param string $tag page tag
 	*
 	* @return string
 	*/

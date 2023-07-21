@@ -140,7 +140,7 @@ switch ($config['db_driver'])
 	case 'mysqli_legacy':
 
 		$config['db_port']								??= '3306';
-		if (!$port = trim($config['db_port']))	$port	= '3306';
+		if (!$port = trim($config['db_port']))	$port	  = '3306';
 
 		echo '<ul>' . "\n";
 
@@ -153,7 +153,8 @@ switch ($config['db_driver'])
 			test(
 				$lang['TestConnectionString'],
 				$dblink = new mysqli($config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'], $port),
-				$lang['ErrorDbConnection']);
+				$lang['ErrorDbConnection']
+			);
 		}
 		catch (mysqli_sql_exception $e)
 		{
@@ -161,7 +162,8 @@ switch ($config['db_driver'])
 			test(
 				$lang['TestConnectionString'],
 				false,
-				$lang['ErrorDbConnection'] . '<br>' . 'MySQLi Error: ' . $e->getMessage());
+				$lang['ErrorDbConnection'] . '<br>' . 'MySQLi Error: ' . $e->getMessage()
+			);
 			$fatal_error = true;
 		}
 
@@ -337,7 +339,8 @@ switch ($config['db_driver'])
 			test(
 				$lang['TestConnectionString'],
 				$dblink = @new PDO($dsn, $config['db_user'], $config['db_password']),
-				$lang['ErrorDbConnection']);
+				$lang['ErrorDbConnection']
+			);
 			$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e)
@@ -345,7 +348,8 @@ switch ($config['db_driver'])
 			test(
 				$lang['TestConnectionString'],
 				false,
-				$lang['ErrorDbConnection'] . '<br>' . 'PDO Error: ' . $e->getMessage());
+				$lang['ErrorDbConnection'] . '<br>' . 'PDO Error: ' . $e->getMessage()
+			);
 			$fatal_error = true;
 		}
 
