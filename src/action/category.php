@@ -158,9 +158,9 @@ if ($list && ($ids || isset($_GET['category_id'])))
 			'FROM ' . $this->prefix . 'category ' .
 			'WHERE category_id IN (' . $this->ids_string($category_ids) . ')', true))
 		{
-			if ($info)
+			if ($info && $description = trim($_words[0]['category_description']))
 			{
-				$tpl->d_description	= $_words[0]['category_description'];
+				$tpl->d_description	= $description;
 			}
 
 			foreach ($pages as $page)

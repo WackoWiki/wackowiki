@@ -15,7 +15,7 @@
 						<label for="new_category">[ ' _t: CategoriesAdd ' ]</label>
 					</td>
 					<td>
-						<input type="text" id="new_category" name="category" class="cols-50" value="[ ' category | e attr ' ]" size="40" maxlength="100" required>
+						<input type="text" id="new_category" name="category" class="cols-80" value="[ ' category | e attr ' ]" size="80" maxlength="255" required>
 					</td>
 				</tr>
 				<tr>
@@ -23,7 +23,7 @@
 						<label for="category_description">[ ' _t: CategoryDescription ' ]</label>
 					</td>
 					<td>
-						<textarea id="category_description" name="category_description" class="cols-50" rows="4" cols="50" maxlength="250"></textarea>
+						<textarea id="category_description" name="category_description" class="cols-80" rows="8" cols="80"></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -34,7 +34,7 @@
 							<input type="radio" id="group0" name="group" value="0">
 							<label for="group0">[ ' _t: CategoriesAddGroupedNo ' ]</label><br><br>
 						=]
-						<button type="submit" id="submit_create" name="create">[ ' _t: SubmitButton ' ]</button>
+						<button type="submit" class="btn-ok" id="submit_create" name="create">[ ' _t: SubmitButton ' ]</button>
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -52,7 +52,7 @@
 						<label for="new_name">[ ' newname ' ]</label>
 					</td>
 					<td>
-						<input type="text" name="category" id="new_name" value="[ ' category | e attr ' ]" size="40" maxlength="100" required>
+						<input type="text" name="category" id="new_name" value="[ ' category | e attr ' ]" size="80" maxlength="255" required>
 					</td>
 				</tr>
 				<tr>
@@ -60,13 +60,13 @@
 						<label for="category_description">[ ' _t: CategoryDescription ' ]</label>
 					</td>
 					<td>
-						<textarea id="category_description" name="category_description" class="cols-50" rows="4" cols="50" maxlength="250">[ ' description | e ' ]</textarea>
+						<textarea id="category_description" name="category_description" class="cols-80" rows="8" cols="80">[ ' description | e ' ]</textarea>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<small>[ ' _t: CategoriesRenameInfo ' ]</small><br>
-						<button type="submit" id="submit_new_name" name="rename">[ ' _t: SubmitButton ' ]</button>
+						<button type="submit" class="btn-ok" id="submit_new_name" name="rename">[ ' _t: SubmitButton ' ]</button>
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -88,7 +88,7 @@
 								<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category | e ' ]</option>
 							=]
 						</select>
-						<button type="submit" id="submit_ungroup" name="ungroup">[ ' _t: SubmitButton ' ]</button>
+						<button type="submit" class="btn-ok" id="submit_ungroup" name="ungroup">[ ' _t: SubmitButton ' ]</button>
 						[ '' cancel '' ]
 						<br><small>[ ' _t: CategoriesGroupInfo ' ]</small>
 					</td>
@@ -105,7 +105,7 @@
 				<tr>
 					<td>
 						<label for="">[ ' category ' ]</label> 
-						<button type="submit" id="submit_delete" name="delete">[ ' _t: DeleteText ' ]</button>
+						<button type="submit" class="btn-danger" id="submit_delete" name="delete">[ ' _t: DeleteText ' ]</button>
 						[ '' cancel '' ]
 						<br><small>[ ' _t: CategoriesDeleteInfo ' ]</small>
 					</td>

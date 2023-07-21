@@ -91,6 +91,8 @@ $upgrade['6.1.21'][]	= ['alter',		'cache',			$alter_cache_r6_0_2];
 $upgrade['6.1.22'][]	= ['alter',		'cache',			$alter_cache_r6_0_3];
 
 // category
+$upgrade['6.1.23'][]	= ['alter',		'category',			$alter_category_r6_0_1];
+$upgrade['6.1.23'][]	= ['alter',		'category',			$alter_category_r6_0_2];
 
 // config
 $upgrade['6.1.21'][]	= ['update',	'config',			$update_config_r6_0_1];

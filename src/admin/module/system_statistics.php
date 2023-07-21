@@ -133,5 +133,3 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 <?php
 
 }
-
-?>

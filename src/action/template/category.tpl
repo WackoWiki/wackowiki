@@ -8,7 +8,7 @@
 				</p>
 		=]
 		[= d _ =
-			<div class="note">[ ' description ' ]</div><br>
+			<div class="msg notice">[ ' description ' ]</div><br>
 		=]
 		<ol>
 			[= l _ =

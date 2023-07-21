@@ -52,8 +52,8 @@ $tbl_category =
 		category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 		parent_id INT(10) UNSIGNED NOT NULL DEFAULT 0,
 		category_lang VARCHAR(5) NOT NULL DEFAULT '',
-		category VARCHAR(100) NOT NULL DEFAULT '',
-		category_description VARCHAR(255) NOT NULL DEFAULT '',
+		category VARCHAR(255) NOT NULL DEFAULT '',
+		category_description TEXT NOT NULL DEFAULT '',
 		PRIMARY KEY (category_id),
 		UNIQUE KEY idx_category (category_lang, category)
 	) {$engine} COMMENT='' {$charset} {$collation}";

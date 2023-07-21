@@ -270,6 +270,7 @@ $wacko_config_defaults = [
 
 	'system_message'				=> '',
 	'system_message_type'			=> '',
+	'enable_system_message'			=> 1,
 
 	'enable_captcha'				=> 1,
 	'captcha_new_comment'			=> 1,
