@@ -25,7 +25,7 @@ Options:
 		order pages alphabetically ('abc', default) or creation date ('date')
 	[nomark=1]
 		display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
-	[info=0|1]
+	[caption=0|1]
 		display category description
 EOD;
 
@@ -52,8 +52,8 @@ $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', 
 };
 
 // set defaults
+$caption	??= 0;
 $ids		??= null;
-$info		??= 0;
 $lang		??= $this->page['page_lang'];
 $list		??= 1;
 $nomark		??= 0;
@@ -158,7 +158,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 			'FROM ' . $this->prefix . 'category ' .
 			'WHERE category_id IN (' . $this->ids_string($category_ids) . ')', true))
 		{
-			if ($info && $description = trim($_words[0]['category_description']))
+			if ($caption && $description = trim($_words[0]['category_description']))
 			{
 				$tpl->d_description	= $description;
 			}
