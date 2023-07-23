@@ -113,7 +113,7 @@ if (!$global)
 }
 else
 {
-	$can_view	= 1;
+	$can_view	= true;
 	$tag		= $this->tag;
 }
 

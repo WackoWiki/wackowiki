@@ -981,6 +981,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
 	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 

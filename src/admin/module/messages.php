@@ -33,8 +33,9 @@ function admin_messages($engine, $module)
 	if ($action == 'messages')
 	{
 		$config['system_message']			= (string) $_POST['system_message'];
-		$config['system_message']			= $engine->format($config['system_message'], 'wiki');
+		#$config['system_message']			= $engine->format($config['system_message'], 'wiki');
 		$config['system_message_type']		= (string) $_POST['system_message_type'];
+		$config['system_message_audience']	= (int) $_POST['system_message_audience'];
 		$config['enable_system_message']	= (int) $_POST['enable_system_message'];
 
 		$engine->config->_set($config);
@@ -53,6 +54,19 @@ function admin_messages($engine, $module)
 			</colgroup>
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('SysMsgSection');?></th>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<strong><?php echo $engine->_t('SysMsgAudience');?></strong><br>
+					<small><?php echo $engine->_t('SysMsgAudienceInfo');?></small></td>
+				<td>
+					<input type="radio" id="sys_message_all" name="system_message_audience" value="1"<?php echo ($engine->db->system_message_audience == 1 ? ' checked' : '');?>><label for="sys_message_all"><?php echo $engine->_t('Everybody');?></label>
+					<input type="radio" id="sys_message_guests" name="system_message_audience" value="2"<?php echo ($engine->db->system_message_audience == 2 ? ' checked' : '');?>><label for="sys_message_guests"><?php echo $engine->_t('Guest');?></label>
+					<input type="radio" id="sys_message_registered" name="system_message_audience" value="3"<?php echo ($engine->db->system_message_audience == 3 ? ' checked' : '');?>><label for="sys_message_registered"><?php echo $engine->_t('Registered');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
@@ -111,4 +125,3 @@ function admin_messages($engine, $module)
 <?php
 	echo $engine->form_close();
 }
-

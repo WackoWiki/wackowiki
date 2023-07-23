@@ -2846,7 +2846,7 @@ class Wacko
 				'LEFT JOIN ' . $this->prefix . 'user u ON (w.user_id = u.user_id) ' .
 				'LEFT JOIN ' . $this->prefix . 'user_setting s ON (w.user_id = s.user_id) ' .
 			'WHERE w.page_id = ' . (int) $object_id . ' ' .
-				'AND w.user_id != ' . (int) $user_id);
+				'AND w.user_id <> ' . (int) $user_id);
 
 		foreach ($watchers as $user)
 		{
@@ -3066,11 +3066,9 @@ class Wacko
 		}
 
 		// get system message
-		if ($this->db->enable_system_message
-			&& ($message = $this->db->system_message)
-			&& !$this->db->ap_mode)
+		if ($message = $this->get_system_message())
 		{
-			array_unshift($messages, [$message, 'sys-message ' . $this->db->system_message_type]);
+			array_unshift($messages, $message);
 		}
 
 		if ($show)
@@ -3079,8 +3077,7 @@ class Wacko
 			// TODO: think about quoting....
 			foreach ($messages as $message)
 			{
-				[$_message, $_type] = $message;
-				$this->show_message($_message, $_type);
+				$this->show_message($message[0], $message[1]);
 			}
 		}
 		else
@@ -3108,6 +3105,28 @@ class Wacko
 			else
 			{
 				return $info_box;
+			}
+		}
+	}
+
+	function get_system_message()
+	{
+		if (    $this->db->enable_system_message
+			&& ($this->db->system_message)
+			&& !$this->db->ap_mode)
+		{
+			$audience = match ((int) $this->db->system_message_audience) {
+				1 => true,						// all
+				2 => !$this->get_user_id(),		// guest
+				3 => $this->get_user_id(),		// registered
+			};
+
+			if ($audience)
+			{
+				return [
+					$this->db->system_message,
+					'sys-message ' . $this->db->system_message_type
+				];
 			}
 		}
 	}
