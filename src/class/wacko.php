@@ -3113,7 +3113,8 @@ class Wacko
 	{
 		if (    $this->db->enable_system_message
 			&& ($this->db->system_message)
-			&& !$this->db->ap_mode)
+			&& !$this->db->ap_mode
+			&& $this->method == 'show')
 		{
 			$audience = match ((int) $this->db->system_message_audience) {
 				1 => true,						// all
@@ -3133,7 +3134,8 @@ class Wacko
 
 	function msg_is_comment_on($tag, $title, $user_name, $modified): string
 	{
-		return $this->_t('ThisIsCommentOn') . ' ' .
+		return
+			$this->_t('ThisIsCommentOn') . ' ' .
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
 			$this->_t('PostedBy') . ' ' .
 			$this->user_link($user_name) . ' ' .
@@ -3874,7 +3876,7 @@ class Wacko
 			// 1 -> file:/some.zip (global)
 			if (count($file_array) == 2 && $file_array[0] == '')
 			{
-				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // FIXME: prevents that tag is set as admin.php in href()
+				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // FIXME: prevents that tag is set as 'admin.php' in href()
 				$file_name	= $file_array[1];
 				$param		= $this->parse_media_param($file_name);
 
@@ -3905,7 +3907,7 @@ class Wacko
 					$_page_tag = '!/';
 				}
 
-				//unwrap tag (check !/, ../ cases)
+				// unwrap relative tag (check !/, ../ cases)
 				$uw_tag			= $this->unwrap_link($_page_tag);
 				$page_tag		= utf8_rtrim($uw_tag, './');
 				$page_id		= $this->get_page_id($page_tag);
@@ -4315,7 +4317,7 @@ class Wacko
 			}
 			else
 			{
-				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'wordprocessor') ? 'p' : '') . 'w' . $tpl;
+				$tpl		= (isset($this->method) && in_array($this->method, ['print', 'wordprocessor']) ? 'p' : '') . 'w' . $tpl;
 				$page_link	= $this->href('edit', $tag, $lang ? 'lang=' . $lang : '', 1);
 				$accicon	= $this->_t('Icon.Wanted');
 				$title		= $this->_t('CreatePage');
