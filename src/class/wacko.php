@@ -1692,7 +1692,7 @@ class Wacko
 
 		if ($pages = $this->db->load_all(
 		'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.edit_note, p.minor_edit,
-				p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name ' .
+				p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, r1.revision_id, u.user_name ' .
 		$selector .
 		'ORDER BY p.modified DESC ' .
 		$pagination['limit'], true))
@@ -2942,7 +2942,7 @@ class Wacko
 
 					$body .=
 							$this->_t('SomeoneChangedThisPage') . "\n" .
-							$this->href('', $tag, null, null, null, null, true, true) . "\n\n" .
+							$this->href('diff', $tag, ['a' => $page['revision_id'], 'b' => '', 'diffmode' => $this->db->default_diff_mode], null, null, null, true, true) . "\n\n" .
 							$title . "\n" .
 							"======================================================================\n\n" .
 							$diff . "\n\n" .
@@ -6867,12 +6867,12 @@ class Wacko
 				// check for inversion character "!"
 				if (preg_match('/^\!(.*)$/u', $line, $matches))
 				{
-					$negate	= 1;
+					$negate		= 1;
 					$line_lo	= $matches[1];
 				}
 				else
 				{
-					$negate = 0;
+					$negate		= 0;
 				}
 
 				$line_lo = mb_strtolower(trim($line_lo));
@@ -6882,7 +6882,7 @@ class Wacko
 					foreach (explode("\\n", $aliases[$line_lo]) as $item)
 					{
 						$item	= trim($item);
-						$list[]	= ($negate ? '!' . $item : $item);
+						$list[]	= ($negate ? '!' : '') . $item;
 					}
 
 					$replaced++;

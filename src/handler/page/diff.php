@@ -335,7 +335,7 @@ if ($page_a && $page_b
 		case 7:
 			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/diff.css">'); // STS
 
-			// using nice lib/php-diff library..
+			// using nice lib/php-diff library
 			$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
 
 			$tpl->enter('m3_');

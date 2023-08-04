@@ -96,20 +96,7 @@ function admin_config_basic($engine, $module)
 
 		$config['enable_comments']				= (int) $_POST['enable_comments'];
 		$config['sorting_comments']				= (int) $_POST['sorting_comments'];
-		$config['noindex']						= (int) ($_POST['noindex'] ?? 0);
-		$config['opensearch']					= (int) ($_POST['opensearch'] ?? 0);
 
-		// create OpenSearch description file
-		if ($engine->db->opensearch == 0 && $config['source_handler'])
-		{
-			$xml = new Feed($engine);
-			$xml->open_search();
-		}
-
-		$config['xml_sitemap']					= (int) ($_POST['xml_sitemap'] ?? 0);
-		$config['xml_sitemap_gz']				= (int) ($_POST['xml_sitemap_gz'] ?? 0);
-		$config['xml_sitemap_time']				= (int) $_POST['xml_sitemap_time'];
-		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
 
 		$engine->config->_set($config);
@@ -461,85 +448,6 @@ function admin_config_basic($engine, $module)
 					<input type="radio" id="export_handler_on" name="export_handler" value="1"<?php echo ($engine->db->export_handler == 1 ? ' checked' : '');?>><label for="export_handler_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="export_handler_user" name="export_handler" value="2"<?php echo ($engine->db->export_handler == 2 ? ' checked' : '');?>><label for="export_handler_user"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="export_handler_off" name="export_handler" value="0"<?php echo ($engine->db->export_handler == 0 ? ' checked' : '');?>><label for="export_handler_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<br>
-					<?php echo $engine->_t('FeedsSection');?>
-				</th>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="enable_feeds"><strong><?php echo $engine->_t('EnableFeeds');?></strong><br>
-					<small><?php echo $engine->_t('EnableFeedsInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="enable_feeds" name="enable_feeds" value="1"<?php echo ($engine->db->enable_feeds ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="xml_sitemap"><strong><?php echo $engine->_t('XmlSitemap');?></strong><br>
-					<small><?php echo Ut::perc_replace($engine->_t('XmlSitemapInfo'), '<code>' . SITEMAP_XML . '</code>');?><br>
-					<code>Sitemap: <?php echo $engine->db->base_url . Ut::join_path(XML_DIR, SITEMAP_XML) . ($engine->db->xml_sitemap_gz ? '.gz' : '');?></code></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ($engine->db->xml_sitemap ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="xml_sitemap_gz"><strong><?php echo $engine->_t('XmlSitemapGz');?></strong><br>
-					<small><?php echo $engine->_t('XmlSitemapGzInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="xml_sitemap_gz" name="xml_sitemap_gz" value="1"<?php echo ($engine->db->xml_sitemap_gz ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="xml_sitemap_time"><strong><?php echo $engine->_t('XmlSitemapTime');?></strong><br>
-					<small><?php echo $engine->_t('XmlSitemapTimeInfo');?></small></label>
-				</td>
-				<td>
-					<input type="number" min="0" maxlength="4" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo (int) $engine->db->xml_sitemap_time;?>">
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<br>
-					<?php echo $engine->_t('SearchSection');?>
-				</th>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="noindex"><strong><?php echo $engine->_t('SearchEngineVisibility');?></strong><br>
-					<small><?php echo $engine->_t('SearchEngineVisibilityInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ($engine->db->noindex ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="opensearch"><strong><?php echo $engine->_t('OpenSearch');?></strong><br>
-					<small><?php echo $engine->_t('OpenSearchInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="opensearch" name="opensearch" value="1"<?php echo ($engine->db->opensearch ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr>

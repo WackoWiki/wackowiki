@@ -81,7 +81,7 @@ class Feed
 		$name	= $this->xml_name('changes');
 		$count	= '';
 
-		$this->engine->canonical	= true;
+		$this->engine->canonical = true;
 
 		$xml = $this->feed_header('ChangesXML', 'ChangesXMLTitle');
 
@@ -100,18 +100,24 @@ class Feed
 
 				if ($access && ($count < $limit))
 				{
+					$link = match ($this->engine->db->xml_changes_link) {
+						'1'			=> $this->engine->href('diff', $page['tag'], ['a' => $page['revision_id'], 'b' => '', 'diffmode' => $this->engine->db->default_diff_mode]),
+						'2'			=> $this->engine->href('show', $page['tag'], ['revision_id' => $page['revision_id']]),
+						'3'			=> $this->engine->href('revisions', $page['tag']),
+						default		=> $this->engine->href('', $page['tag']),
+					};
+
 					$count++;
 					$xml .=
 						'<item>' . "\n" .
 							'<title>' . $page['tag'] . '</title>' . "\n" .
-							'<link>' . $this->engine->href('', $page['tag']) . '</link>' . "\n" .
+							'<link>' . $link . '</link>' . "\n" .
 							'<guid>' . $this->engine->href('', $page['tag']) . '</guid>' . "\n" .
 							'<pubDate>' . date('r', strtotime($page['modified'])) . '</pubDate>' . "\n" .
-							'<description>' . $page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
-							($page['user_name'] ?: $this->engine->_t('Guest')) .
-							($page['edit_note']
-								? ' [' . $page['edit_note'] . ']'
-								: '') .
+							'<description>' .
+								$page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
+								($page['user_name'] ?: $this->engine->_t('Guest')) .
+								($page['edit_note'] ? ' [' . $page['edit_note'] . ']' : '') .
 							'</description>' . "\n" .
 						'</item>' . "\n";
 				}
@@ -122,7 +128,7 @@ class Feed
 		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
-		$this->engine->canonical	= false;
+		$this->engine->canonical = false;
 	}
 
 	function feed($feed_cluster = ''): void

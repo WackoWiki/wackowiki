@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Email settings',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Syndication',
+		'title'		=> 'Syndication settings',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
-
-	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
-
-	'SearchSection'				=> 'Search',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Creates the OpenSearch description file in the XML folder and enables Autodiscovery of search plugin in the HTML header.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -356,6 +345,34 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Keep the history of referring external pages no longer than a given number of days. Zero means eternal storage, but for an actively visited site this can lead to database overflow.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
+
+	// Syndication settings
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Enable feeds:',
+	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'XML feed links to',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'difference view',
+		'2'		=> 'the revised page',
+		'3'		=> 'list of revisions',
+		'4'		=> 'the current page',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
+
+	'SearchSection'				=> 'Search',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Creates the OpenSearch description file in the XML folder and enables Autodiscovery of search plugin in the HTML header.',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
