@@ -108,7 +108,11 @@ class Email
 			$mail->addCustomHeader('Auto-Submitted: auto-generated');	// RFC3834
 			$mail->addCustomHeader('X-Auto-Response-Suppress: All');	// Microsoft Exchange
 
-			# $mail->Sender		= $this->engine->db->abuse_email;		// 'return-path' header
+			if(!empty($this->engine->db->abuse_email))
+			{
+				$mail->Sender		= $this->engine->db->abuse_email;	// 'return-path' header
+			}
+
 			# $mail->addReplyTo('name@example.com', 'First Last');		//
 			$mail->setFrom($email_from, $name_from);
 			$mail->addAddress($email_to, $name_to);
