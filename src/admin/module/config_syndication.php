@@ -22,6 +22,10 @@ function admin_config_syndication($engine, $module)
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
+	<p>
+		<?php echo $engine->_t('SyndicationSettingsInfo');?>
+	</p>
+	<br>
 	<?php
 	$action = $_POST['_action'] ?? null;
 
@@ -46,8 +50,8 @@ function admin_config_syndication($engine, $module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, $engine->_t('LogBasicSettingsUpdated', SYSTEM_LANG));
-		$engine->set_message($engine->_t('BasicSettingsUpdated'), 'success');
+		$engine->log(1, $engine->_t('SyndicationSettingsUpdated', SYSTEM_LANG));
+		$engine->set_message($engine->_t('SyndicationSettingsUpdated'), 'success');
 		$engine->http->redirect($engine->href());
 	}
 

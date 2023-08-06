@@ -184,8 +184,13 @@ function admin_config_upload($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="upload_quota"><strong><?php echo $engine->_t('UploadQuota');?></strong><br>
-					<small><?php echo $engine->_t('UploadQuotaInfo');?><strong> <?php echo $engine->binary_multiples($engine->upload_quota(), 'binary', true, true);?></strong> used.</small></label>
+					<label for="upload_quota">
+						<strong><?php echo $engine->_t('UploadQuota');?></strong><br>
+						<small><?php echo Ut::perc_replace(
+								$engine->_t('UploadQuotaInfo'),
+								'<strong>' . $engine->binary_multiples($engine->upload_quota(), 'binary', true, true) . '</strong>');?>
+						</small>
+					</label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples((int) $engine->db->upload_quota, 'binary', true, true, false);?>">
