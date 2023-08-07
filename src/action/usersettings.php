@@ -331,7 +331,7 @@ else if ($user = $this->get_user())
 		}
 
 		$tpl->userpage		= $this->href('', ($this->db->users_page . '/' . $user['user_name']));
-		$tpl->quota			= $this->binary_multiples($upload_quota, 'binary', true, true);
+		$tpl->quota			= $this->factor_multiples($upload_quota, 'binary', true, true);
 		$tpl->pages			= $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages');
 		# $tpl->revisions	= $this->href('', $this->db->users_page, 'profile=' . $user['user_name']);
 		$tpl->comments		= $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments');

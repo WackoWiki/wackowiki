@@ -76,7 +76,7 @@ EOD;
 		}
 
 		$tpl->stylesheet	= $styles;
-		$tpl->size			= $this->binary_multiples(strlen($styles), 'binary', true, true);
+		$tpl->size			= $this->factor_multiples(strlen($styles), 'binary', true, true);
 		$tpl->reset			= true;
 		$tpl->leave();	// post_
 	}

@@ -466,7 +466,7 @@ $select_form = function ($pages, $pagination, $tcount, $max, array $o) use ($tpl
 			$tpl->link		= $this->link('/' . $p['tag'], '', ($o['title'] ? $p['title'] : $p['tag']), '', false);
 			$tpl->userlink	= $this->user_link($p['user_name'], false, false);
 			$tpl->mtime		= $p['modified'];
-			$tpl->psize		= $this->binary_multiples($p['page_size'], 'binary', true, true);
+			$tpl->psize		= $this->factor_multiples($p['page_size'], 'binary', true, true);
 
 			if ($this->db->multilanguage)
 			{

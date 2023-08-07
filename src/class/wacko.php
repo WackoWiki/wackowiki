@@ -3947,7 +3947,7 @@ class Wacko
 				// check 403 here!
 				if ($global || $file_access)
 				{
-					$title		= Ut::html($file_data['file_description']) . ' (' . $this->binary_multiples($file_data['file_size'], 'binary', true, true) . ')';
+					$title		= Ut::html($file_data['file_description']) . ' (' . $this->factor_multiples($file_data['file_size'], 'binary', true, true) . ')';
 					$alt		= Ut::html($file_data['file_description']);
 					$src		= '';
 					$width		= '';
@@ -9521,7 +9521,7 @@ class Wacko
 	 *
 	 * @return string|number
 	 */
-	function binary_multiples($size, $prefix = 'decimal', $short = true, $rounded = false, $suffix = true, $norm = 'bytes')
+	function factor_multiples($size, $prefix = 'decimal', $short = true, $rounded = false, $suffix = true, $norm = 'bytes')
 	{
 		if (is_numeric($size))
 		{
@@ -9554,7 +9554,7 @@ class Wacko
 			{
 				// for MiB and bigger use two decimal places
 				# $precision	= $x > 1 ? 2 : 0;
-				$precision	= 0;
+				$precision	= 1;
 				$size		= $this->number_format($size, $precision);
 			}
 			else
@@ -9571,12 +9571,15 @@ class Wacko
 		}
 	}
 
-	function binary_multiples_factor ($size, $prefix = true): int
+	function multiples_factor($size, $prefix = 'decimal'): int
 	{
 		$count	= 9;
 		$x		= 0;
 
-		$factor = $prefix ? 1000 : 1024;
+		$factor = match($prefix) {
+			'binary'	=> 1024,
+			default		=> 1000,
+		};
 
 		while ($size >= $factor && $x < $count)
 		{

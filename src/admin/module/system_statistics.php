@@ -51,12 +51,12 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 					'<tr>' .
 						'<th class="label"><strong>' . $table['Name'] . '</strong></th>' .
 						'<td>' . $engine->number_format($table['Rows']) . '</td>' .
-						'<td>' . $engine->binary_multiples($table['Data_length'], 'binary', true, true) . '</td>' .
-						'<td>' . $engine->binary_multiples($table['Index_length'], 'binary', true, true) . '</td>' .
+						'<td>' . $engine->factor_multiples($table['Data_length'], 'binary', true, true) . '</td>' .
+						'<td>' . $engine->factor_multiples($table['Index_length'], 'binary', true, true) . '</td>' .
 						'<td>' .
 							// for InnoDB, this does not contain the number of overhead bytes but the total free space
 							($engine->db->db_engine !== 'InnoDB'
-								? $engine->binary_multiples($table['Data_free'], 'binary', true, true)
+								? $engine->factor_multiples($table['Data_free'], 'binary', true, true)
 								: '-') .
 						'</td>' .
 					'</tr>' . "\n";
@@ -73,11 +73,11 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 		'<tr>' .
 			'<td class="label"><strong>' . $engine->_t('DbTotal') . ':</strong></td>' .
 			'<td><strong>' . $engine->number_format($trows) . '</strong></td>' .
-			'<td><strong>' . $engine->binary_multiples($tdata, 'binary', true, true) . '</strong></td>' .
-			'<td><strong>' . $engine->binary_multiples($tindex, 'binary', true, true) . '</strong></td>' .
+			'<td><strong>' . $engine->factor_multiples($tdata, 'binary', true, true) . '</strong></td>' .
+			'<td><strong>' . $engine->factor_multiples($tindex, 'binary', true, true) . '</strong></td>' .
 			'<td><strong>' .
 				($engine->db->db_engine !== 'InnoDB'
-					? $engine->binary_multiples($tfrag, 'binary', true, true)
+					? $engine->factor_multiples($tfrag, 'binary', true, true)
 					: '-') . '</strong></td>' .
 		'</tr>' . "\n";
 	?>
@@ -118,7 +118,7 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 				'<tr>' .
 					'<td class="label"><strong>' . $dir . '</strong></td>' .
 					'<td>' . $files . '</td>' .
-					'<td>' . $engine->binary_multiples($size, 'binary', true, true) . '</td>' .
+					'<td>' . $engine->factor_multiples($size, 'binary', true, true) . '</td>' .
 				'</tr>' . "\n";
 		}
 	}
@@ -126,7 +126,7 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 		<tr>
 			<td class="label"><strong><?php echo $engine->_t('FileTotal');?>:</strong></td>
 			<td><strong><?php echo $tfiles; ?></strong></td>
-			<td><strong><?php echo $engine->binary_multiples($tsize, 'binary', true, true); ?></strong></td>
+			<td><strong><?php echo $engine->factor_multiples($tsize, 'binary', true, true); ?></strong></td>
 		</tr>
 	</table>
 

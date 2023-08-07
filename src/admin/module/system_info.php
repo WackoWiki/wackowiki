@@ -81,9 +81,9 @@ function admin_system_info($engine, $module)
 	$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
 	$sysinfo['icu_version']			= [$engine->_t('IcuVersion'), INTL_ICU_VERSION];
 	$sysinfo['php_version']			= [$engine->_t('PhpVersion'), PHP_VERSION];
-	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->binary_multiples($memory, 'binary', true, true)];
-	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->binary_multiples($upload_max_filesize, 'binary', true, true)];
-	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->binary_multiples($post_max_size, 'binary', true, true)];
+	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->factor_multiples($memory, 'binary', true, true)];
+	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->factor_multiples($upload_max_filesize, 'binary', true, true)];
+	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->factor_multiples($post_max_size, 'binary', true, true)];
 	$sysinfo['max_execution_time']	= [$engine->_t('MaxExecutionTime'), get_cfg_var('max_execution_time') . ' seconds'];
 	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), CACHE_SESSION_DIR . ' (PHP default: ' . $session_save_path . ')'];
 	$sysinfo['default_charset']		= [$engine->_t('PhpDefaultCharset'), ini_get('default_charset')];

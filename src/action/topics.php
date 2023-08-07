@@ -305,11 +305,11 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 else
 {
 	// wrong placed show hint
-	$message	= (!$this->db->forum_cluster
+	$message = (!$this->db->forum_cluster
 		? $this->_t('ForumNoClusterDefined')
 		: Ut::perc_replace($this->_t('ForumOutsideCluster'), '<code>topics</code>')
 	);
 
-	$tpl->message	= $this->show_message($message,'note', false);
+	$tpl->message = $this->show_message($message,'note', false);
 }
 

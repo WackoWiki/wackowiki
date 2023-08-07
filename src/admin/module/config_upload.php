@@ -170,8 +170,8 @@ function admin_config_upload($engine, $module)
 					<small><?php echo $engine->_t('UploadMaxFilesizeInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples((int) $engine->db->upload_max_size, 'binary', true, true, false);?>">
-					<?php $x = $engine->binary_multiples_factor($engine->db->upload_max_size, false); ?>
+					<input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->factor_multiples((int) $engine->db->upload_max_size, 'binary', true, true, false);?>">
+					<?php $x = $engine->multiples_factor($engine->db->upload_max_size, 'binary'); ?>
 					<select name="upload_max_size_factor" id="upload_max_size_factor">
 						<option value="0" <?php echo ($x == 0 ? ' selected' : '');?> ><?php echo $engine->_t('ByteBinaryShort')[0];?></option>
 						<option value="1" <?php echo ($x == 1 ? ' selected' : '');?> ><?php echo $engine->_t('ByteBinaryShort')[1];?></option>
@@ -188,13 +188,13 @@ function admin_config_upload($engine, $module)
 						<strong><?php echo $engine->_t('UploadQuota');?></strong><br>
 						<small><?php echo Ut::perc_replace(
 								$engine->_t('UploadQuotaInfo'),
-								'<strong>' . $engine->binary_multiples($engine->upload_quota(), 'binary', true, true) . '</strong>');?>
+								'<strong>' . $engine->factor_multiples($engine->upload_quota(), 'binary', true, true) . '</strong>');?>
 						</small>
 					</label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples((int) $engine->db->upload_quota, 'binary', true, true, false);?>">
-					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota, false); ?>
+					<input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->factor_multiples((int) $engine->db->upload_quota, 'binary', true, true, false);?>">
+					<?php $x = $engine->multiples_factor($engine->db->upload_quota, 'binary'); ?>
 					<select name="upload_quota_factor" id="upload_quota_factor">
 						<option value="0" <?php echo ($x == 0 ? ' selected' : '');?> ><?php echo $engine->_t('ByteBinaryShort')[0];?></option>
 						<option value="1" <?php echo ($x == 1 ? ' selected' : '');?> ><?php echo $engine->_t('ByteBinaryShort')[1];?></option>
@@ -212,8 +212,8 @@ function admin_config_upload($engine, $module)
 					<small><?php echo $engine->_t('UploadQuotaUserInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples((int) $engine->db->upload_quota_per_user, 'binary', true, true, false);?>">
-					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota_per_user, false); ?>
+					<input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->factor_multiples((int) $engine->db->upload_quota_per_user, 'binary', true, true, false);?>">
+					<?php $x = $engine->multiples_factor($engine->db->upload_quota_per_user, 'binary'); ?>
 					<select name="upload_quota_per_user_factor" id="upload_quota_per_user_factor">
 						<option value="0" <?php echo ($x == 0 ? ' selected' : '');?> ><?php echo $engine->_t('ByteBinaryShort')[0];?></option>
 						<option value="1" <?php echo ($x == 1 ? ' selected' : '');?> ><?php echo $engine->_t('ByteBinaryShort')[1];?></option>

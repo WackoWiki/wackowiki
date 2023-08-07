@@ -454,7 +454,7 @@ if ($can_view)
 								? ''					// parses image, audio and video links into their media tags
 								: $shown_name)			// shows file link
 							: $shown_name);
-			$file_size	= $this->binary_multiples($file['file_size'], 'binary', true, true);
+			$file_size	= $this->factor_multiples($file['file_size'], 'binary', true, true);
 
 			$link		= $this->link($path2 . $file_name . $thumb, '', $text, '', $track);
 

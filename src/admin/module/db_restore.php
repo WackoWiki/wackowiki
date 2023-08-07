@@ -64,7 +64,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						<tr>
 							<td></td>
 							<td>
-								' . (isset($log['size']) ? $engine->binary_multiples($log['size'], 'binary', true, true) : null) . '
+								' . (isset($log['size']) ? $engine->factor_multiples($log['size'], 'binary', true, true) : null) . '
 							</td>
 						</tr>
 						<tr>

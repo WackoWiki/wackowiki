@@ -37,7 +37,7 @@ class Diag
 
 				if ($execmem)
 				{
-					echo "\t<li>Memory allocated: " . $engine->binary_multiples($execmem, 'binary', true, false) . "</li>\n";
+					echo "\t<li>Memory allocated: " . $engine->factor_multiples($execmem, 'binary', true, true) . "</li>\n";
 				}
 
 				#echo "<li>UTC: " . date('Y-m-d H:i:s', time()) . "</li>\n";
