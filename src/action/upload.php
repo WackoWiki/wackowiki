@@ -15,6 +15,7 @@ Usage:
 Options:
 	[global=1]
 	[maxsize=200]
+		forcedly limits maximum size (must be less than in config)
 	[hide_description=1]
 EOD;
 
@@ -57,9 +58,11 @@ $accept_types = function($types)
 // check who u are, can u upload?
 if ($this->can_upload(true))
 {
+	$tpl->enter('u_');
+
 	if ($maxsize)
 	{
-		$tpl->u_s_maxsize = floor($maxsize);
+		$tpl->s_maxsize = floor($maxsize);
 	}
 
 	// if you have no write access, and you are not admin, you can upload only "global" file
@@ -79,41 +82,43 @@ if ($this->can_upload(true))
 		$maxfilesize = $maxsize;
 	}
 
-	$tpl->u_maxfilesize = $maxfilesize;
+	$tpl->maxfilesize = $maxfilesize;
 
 	if ($this->db->upload_images_only && !$this->is_admin())
 	{
-		$allowed_types = implode(', ' , self::EXT['bitmap']);
+		$allowed_types = implode(', ', self::EXT['bitmap']);
 	}
 
 	if ($allowed_types)
 	{
 		// adds 'accept' attribute depending on config settings
 		// https://www.w3.org/TR/html5/forms.html#attr-input-accept
-		$tpl->u_accecpt = 'accept="' . $accept_types($allowed_types) . '"';
-		$tpl->u_d_allowed = $allowed_types;
+		$tpl->accecpt		= 'accept="' . $accept_types($allowed_types) . '"';
+		$tpl->d_allowed		= $allowed_types;
 	}
 
-	$tpl->u_size = $this->factor_multiples($maxfilesize, 'binary', true, true);
+	$tpl->size = $this->factor_multiples($maxfilesize, 'binary', true, true);
 
 	if ($global)
 	{
-		$tpl->u_global = true;
+		$tpl->global	= true;
 	}
 	else
 	{
-		$tpl->u_local = true;
+		$tpl->local		= true;
 	}
 
 	if ($rename)
 	{
-		$tpl->u_rename = true;
+		$tpl->rename	= true;
 	}
 
 	if (!$hide_description)
 	{
-		$tpl->u_desc = true;
+		$tpl->desc		= true;
 	}
+
+	$tpl->leave(); // u_
 }
 else
 {
