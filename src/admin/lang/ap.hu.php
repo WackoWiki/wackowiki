@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'E-mail beállítások',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Hírfolyam',
+		'title'		=> 'Hírfolyam beállítások',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Szűrő',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Az RSS-hírcsatornák be- és kikapcsolása a teljes wiki számára.',
-
-	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'A webhelytérképet csak egyszer generálja az adott napszámban, nulla azt jelenti, hogy minden oldalváltozáson megy végbe.',
-
-	'SearchSection'				=> 'Keresés',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Létrehozza az OpenSearch leíró fájlt az XML mappában, és engedélyezi a keresési bővítmény automatikus felfedezését a HTML fejlécben.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Tartsa a hivatkozott külső oldalak történetét nem több, mint egy megadott napnál. A nulla az örök tárolást jelenti, de egy aktívan meglátogatott webhelyhez ez az adatbázis túlcsordulásához vezethet.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Control default web syndication settings for your site.',
+	'SyndicationSettingsUpdated'	=> 'Updated syndication settings.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Enable feeds:',
+	'EnableFeedsInfo'			=> 'Az RSS-hírcsatornák be- és kikapcsolása a teljes wiki számára.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'a változás nézetre',
+		'2'		=> 'a jelenlegi oldalra',
+		'3'		=> 'a változatok listájára',
+		'4'		=> 'az átdolgozott oldalra',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'A webhelytérképet csak egyszer generálja az adott napszámban, nulla azt jelenti, hogy minden oldalváltozáson megy végbe.',
+
+	'SearchSection'				=> 'Keresés',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Létrehozza az OpenSearch leíró fájlt az XML mappában, és engedélyezi a keresési bővítmény automatikus felfedezését a HTML fejlécben.',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Állítsa be a webhely alapértelmezett kinézet beállításait.',
@@ -879,7 +899,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Maximális állományméret:',
 	'UploadMaxFilesizeInfo'		=> 'Legfeljebb ekkorák lehetnek az állományok. A 0 érték kikapcsolja a korlátozást.',
 	'UploadQuota'				=> 'Csatolmányok tárhelye:',
-	'UploadQuotaInfo'			=> 'Az egész fórumon a csatolmányok legfeljebb ekkora helyet foglalhatnak el összesen. A <code>0</code> érték kikapcsolja a korlátozást.',
+	'UploadQuotaInfo'			=> 'Az egész fórumon a csatolmányok legfeljebb ekkora helyet foglalhatnak el összesen. A <code>0</code> érték kikapcsolja a korlátozást. %1 used.',
 	'UploadQuotaUser'			=> 'Tárolási kvóta felhasználónként:',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 
@@ -978,6 +998,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
 	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 

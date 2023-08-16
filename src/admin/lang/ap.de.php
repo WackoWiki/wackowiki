@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'E-Mail-Einstellungen',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Syndikation',
+		'title'		=> 'Syndikation-Einstellungen',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'XML-Export-Handler aktivieren:',
 	'ExportHandlerInfo'			=> 'Erlaubt das Anzeigen des XML-Export-Handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Aktiviere Feeds:',
-	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
-
-	'XmlSitemap'				=> 'XML-Sitemap:',
-	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Der Pfad zur Sitemap kann in der robots.txt-Datei im Stammverzeichnis wie folgt hinzufügt werden:',
-	'XmlSitemapGz'				=> 'XML-Sitemap-Komprimierung:',
-	'XmlSitemapGzInfo'			=> 'Wenn gewünscht, kann man die Sitemap-Textdatei mit gzip komprimieren, um den Bandbreitenbedarf zu verringern.',
-	'XmlSitemapTime'			=> 'XML-Sitemap-Erstellungszeit:',
-	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
-
-	'SearchSection'				=> 'Suche',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Legt die OpenSearch-Beschreibungsdatei im XML-Ordner an und aktiviert die automatische Erkennung des Such-Plugins im HTML-Header.',
-	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit):',
-	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
-
 	'DiffModeSection'			=> 'Diff-Modi',
 	'DefaultDiffModeSetting'	=> 'Standard Diff-Modus:',
 	'DefaultDiffModeSettingInfo'=> 'Vorausgewählter Diff-Modus.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, kann zu einer hohen Auslastung der Datenbank führen.',
 	'EnableCounters'			=> 'Seitenzugriffszähler:',
 	'EnableCountersInfo'		=> 'Erlaubt die Zählung der Zugriffe pro Seite und ermöglicht die Anzeige von einfachen Statistiken. Aufrufe des Seitenbesitzers werden nicht gezählt.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Standardeinstellungen für die Web-Syndizierung der Webseite anpassen.',
+	'SyndicationSettingsUpdated'	=> 'Web-Syndikation aktualisiert.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Aktiviere Feeds:',
+	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
+	'XmlChangeLink'				=> 'Änderungsfeed-Linkmodus:',
+	'XmlChangeLinkInfo'			=> 'Legt fest, wohin die XML-Änderungsfeed-Elemente verlinkt werden.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'Änderungen zeigen',
+		'2'		=> 'geänderte Seite',
+		'3'		=> 'Liste aller Änderungen',
+		'4'		=> 'Aktuelle Seite',
+	],
+
+	'XmlSitemap'				=> 'XML-Sitemap:',
+	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Der Pfad zur Sitemap kann in der robots.txt-Datei im Stammverzeichnis wie folgt hinzufügt werden:',
+	'XmlSitemapGz'				=> 'XML-Sitemap-Komprimierung:',
+	'XmlSitemapGzInfo'			=> 'Wenn gewünscht, kann man die Sitemap-Textdatei mit gzip komprimieren, um den Bandbreitenbedarf zu verringern.',
+	'XmlSitemapTime'			=> 'XML-Sitemap-Erstellungszeit:',
+	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
+
+	'SearchSection'				=> 'Suche',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Legt die OpenSearch-Beschreibungsdatei im XML-Ordner an und aktiviert die automatische Erkennung des Such-Plugins im HTML-Header.',
+	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit):',
+	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben. Es liegt an den Suchmaschinen, diese Anfrage zu berücksichtigen.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Die Darstellung der Webseite ändern',
@@ -881,7 +901,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Maximale Dateigröße:',
 	'UploadMaxFilesizeInfo'		=> 'Maximale Größe pro Datei. Die Dateigröße wird nur durch die PHP-Konfiguration beschränkt, wenn 0 als Wert eingestellt wird.',
 	'UploadQuota'				=> 'Maximales Kontingent für Dateianhänge:',
-	'UploadQuotaInfo'			=> 'Maximaler für Dateianhänge verfügbarer Speicherplatz für das gesamte Wiki; <code>0</code> bedeutet unbegrenzt.',
+	'UploadQuotaInfo'			=> 'Maximaler für Dateianhänge verfügbarer Speicherplatz für das gesamte Wiki; <code>0</code> bedeutet unbegrenzt. %1 in Verwendung.',
 	'UploadQuotaUser'			=> 'Speicherkontingent pro Benutzer:',
 	'UploadQuotaUserInfo'		=> 'Beschränkung des Speicherkontingentes, der von einem Benutzer hochgeladen werden kann, wobei <code>0</code> unbegrenzt ist.',
 
@@ -980,6 +1000,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Typ:',
 	'SysMsgTypeInfo'			=> 'Mitteilungtyp (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Zielgruppe, der die Systemmeldung angezeigt wird.',
 	'EnableSysMsg'				=> 'Aktiviere System-Mitteilung:',
 	'EnableSysMsgInfo'			=> 'Zeige System-Mitteilung.',
 

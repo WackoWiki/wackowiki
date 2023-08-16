@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Email настройки',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Syndication',
+		'title'		=> 'Syndication settings',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Включва или изключва RSS емисии за цялата уики.',
-
-	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'Генерира Sitemap само веднъж за дадения брой дни, нула означава всяка промяна на страницата.',
-
-	'SearchSection'				=> 'Търси',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Създава файла с описанието на OpenSearch в папката XML и активира функцията за автоматично откриване на приставката за търсене в заглавието на HTML.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Съхранявайте историята на препращането на външни страници не повече от определен брой дни. Нулата означава вечно съхранение, но за активно посещаван сайт това може да доведе до препълване на база данни.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Control default web syndication settings for your site.',
+	'SyndicationSettingsUpdated'	=> 'Updated syndication settings.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Enable feeds:',
+	'EnableFeedsInfo'			=> 'Включва или изключва RSS емисии за цялата уики.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'изглед на разликите',
+		'2'		=> 'текущата страница',
+		'3'		=> 'списък на версиите',
+		'4'		=> 'променената страница',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'Генерира Sitemap само веднъж за дадения брой дни, нула означава всяка промяна на страницата.',
+
+	'SearchSection'				=> 'Търси',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Създава файла с описанието на OpenSearch в папката XML и активира функцията за автоматично откриване на приставката за търсене в заглавието на HTML.',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -879,7 +899,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Максимален размер на файла:',
 	'UploadMaxFilesizeInfo'		=> 'Максимален размер на всеки файл, ако поставите 0, размера ще се ограничава от настройките на PHP-то.',
 	'UploadQuota'				=> 'Обща квота на прикачените файлове:',
-	'UploadQuotaInfo'			=> 'Максимален размер на всички прикачени файлове, <code>0</code> е неограничен.',
+	'UploadQuotaInfo'			=> 'Максимален размер на всички прикачени файлове, <code>0</code> е неограничен. %1 used.',
 	'UploadQuotaUser'			=> 'Storage quota per user:',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 
@@ -978,6 +998,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
 	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 

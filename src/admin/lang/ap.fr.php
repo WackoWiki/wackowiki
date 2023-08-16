@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Paramètres d’e-mail',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Syndication',
+		'title'		=> 'Paramètres de syndication',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filtre',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler :',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Activer les flux :',
-	'EnableFeedsInfo'			=> 'Active ou désactive les flux RSS pour l’ensemble du wiki.',
-
-	'XmlSitemap'				=> 'XML Sitemap :',
-	'XmlSitemapInfo'			=> 'Créez un fichier XML appelé %1 dans le dossier xml. Générer un fichier XML compatible avec le format Sitemaps XML. Vous pouvez modifier le chemin d’accès pour le placer dans votre dossier racine, car c’est l’une des conditions requises, à savoir que le fichier XML se trouve dans le dossier racine. D’autre part, vous pouvez également ajouter le chemin d’accès au plan du site dans le fichier robots.txt de votre répertoire racine comme suit :',
-	'XmlSitemapGz'				=> 'XML Sitemap compression :',
-	'XmlSitemapGzInfo'			=> 'Si vous le souhaitez, vous pouvez compresser votre fichier texte Sitemap à l’aide de gzip afin de réduire votre besoin en bande passante.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time :',
-	'XmlSitemapTimeInfo'		=> 'Génère le Sitemap une seule fois dans le nombre de jours donné, zéro signifie à chaque changement de page.',
-
-	'SearchSection'				=> 'Recherche',
-	'OpenSearch'				=> 'OpenSearch :',
-	'OpenSearchInfo'			=> 'Crée le fichier de description OpenSearch dans le dossier XML et active la découverte automatique du plugin de recherche dans l’en-tête HTML.',
-	'SearchEngineVisibility'	=> 'Bloquer les moteurs de recherche (Visibilité sur les moteurs de recherche) :',
-	'SearchEngineVisibilityInfo'=> 'Bloquer les moteurs de recherche, mais permettre aux visiteurs normaux. Remplace les paramètres de page. <br>Décourager les moteurs de recherche d’indexer ce site, c’est aux moteurs de recherche d’honorer cette demande.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Mode diff par défaut :',
 	'DefaultDiffModeSettingInfo'=> 'Mode diff présélectionné.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'L’historique des renvois de pages externes ne doit pas dépasser un nombre de jours donné. Zéro signifie stockage éternel, mais pour un site activement visité, cela peut entraîner un débordement de la base de données.',
 	'EnableCounters'			=> 'Hit Counters :',
 	'EnableCountersInfo'		=> 'Permet de compter les hits par page et d’afficher des statistiques simples. Les appels du propriétaire de la page ne sont pas comptabilisés.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Contrôle les paramètres de syndication web par défaut pour votre site.',
+	'SyndicationSettingsUpdated'	=> 'Paramètres de syndication mis à jour.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Activer les flux :',
+	'EnableFeedsInfo'			=> 'Active ou désactive les flux RSS pour l’ensemble du wiki.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'liste des différences',
+		'2'		=> 'page actuelle',
+		'3'		=> 'liste des révisions',
+		'4'		=> 'page révisée',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap :',
+	'XmlSitemapInfo'			=> 'Créez un fichier XML appelé %1 dans le dossier xml. Générer un fichier XML compatible avec le format Sitemaps XML. Vous pouvez modifier le chemin d’accès pour le placer dans votre dossier racine, car c’est l’une des conditions requises, à savoir que le fichier XML se trouve dans le dossier racine. D’autre part, vous pouvez également ajouter le chemin d’accès au plan du site dans le fichier robots.txt de votre répertoire racine comme suit :',
+	'XmlSitemapGz'				=> 'XML Sitemap compression :',
+	'XmlSitemapGzInfo'			=> 'Si vous le souhaitez, vous pouvez compresser votre fichier texte Sitemap à l’aide de gzip afin de réduire votre besoin en bande passante.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time :',
+	'XmlSitemapTimeInfo'		=> 'Génère le Sitemap une seule fois dans le nombre de jours donné, zéro signifie à chaque changement de page.',
+
+	'SearchSection'				=> 'Recherche',
+	'OpenSearch'				=> 'OpenSearch :',
+	'OpenSearchInfo'			=> 'Crée le fichier de description OpenSearch dans le dossier XML et active la découverte automatique du plugin de recherche dans l’en-tête HTML.',
+	'SearchEngineVisibility'	=> 'Bloquer les moteurs de recherche (Visibilité sur les moteurs de recherche) :',
+	'SearchEngineVisibilityInfo'=> 'Bloquer les moteurs de recherche, mais permettre aux visiteurs normaux. Remplace les paramètres de page. <br>Décourager les moteurs de recherche d’indexer ce site, c’est aux moteurs de recherche d’honorer cette demande.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Contrôlez les paramètres d’affichage par défaut de votre site.',
@@ -878,7 +898,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Taille maximale des pièces jointes :',
 	'UploadMaxFilesizeInfo'		=> 'La taille maximale des pièces jointes. Si cette valeur est réglée sur 0, la taille ne sera limitée que par votre configuration de PHP.',
 	'UploadQuota'				=> 'Quota maximal des pièces jointes :',
-	'UploadQuotaInfo'			=> 'L’espace de stockage maximal alloué à la totalité des pièces jointes transférées sur le forum. Réglez cette valeur sur <code>0</code> si vous ne souhaitez pas limiter cet espace.',
+	'UploadQuotaInfo'			=> 'L’espace de stockage maximal alloué à la totalité des pièces jointes transférées sur le forum. Réglez cette valeur sur <code>0</code> si vous ne souhaitez pas limiter cet espace. %1 used.',
 	'UploadQuotaUser'			=> 'Quota de stockage par utilisateur :',
 	'UploadQuotaUserInfo'		=> 'Restriction sur le quota de stockage qui peut être téléchargé par un utilisateur, <code>0</code> étant illimité.',
 
@@ -977,6 +997,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type :',
 	'SysMsgTypeInfo'			=> 'Type de message (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience à laquelle le message du système est présenté.',
 	'EnableSysMsg'				=> 'Activer le message du système :',
 	'EnableSysMsgInfo'			=> 'Afficher le message système.',
 

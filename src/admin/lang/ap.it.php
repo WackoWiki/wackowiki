@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Impostazioni e-mail',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Sindacato',
+		'title'		=> 'Impostazioni di syndication',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Attiva o disattiva i feed RSS per l’intero wiki.',
-
-	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'Genera la Sitemap una sola volta nel numero di giorni indicato, zero significa ad ogni cambio di pagina.',
-
-	'SearchSection'				=> 'Ricerca',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Crea il file di descrizione di OpenSearch nella cartella XML e abilita l’Autodiscovery del plugin di ricerca nell’intestazione HTML.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Conservare la cronologia delle pagine esterne di riferimento non più di un determinato numero di giorni. Zero significa conservazione eterna, ma per un sito visitato attivamente questo può portare ad un overflow del database.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Permette il conteggio delle visite per pagina e la visualizzazione di semplici statistiche. Le chiamate del proprietario della pagina non vengono contate.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Controlla le impostazioni di syndication web predefinite per il vostro sito.',
+	'SyndicationSettingsUpdated'	=> 'Impostazioni di syndication aggiornate.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Enable feeds:',
+	'EnableFeedsInfo'			=> 'Attiva o disattiva i feed RSS per l’intero wiki.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'vista differenze',
+		'2'		=> 'pagina attuale',
+		'3'		=> 'elenco revisioni',
+		'4'		=> 'pagina revisionata',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'Genera la Sitemap una sola volta nel numero di giorni indicato, zero significa ad ogni cambio di pagina.',
+
+	'SearchSection'				=> 'Ricerca',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Crea il file di descrizione di OpenSearch nella cartella XML e abilita l’Autodiscovery del plugin di ricerca nell’intestazione HTML.',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -877,7 +897,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Dimensione massima:',
 	'UploadMaxFilesizeInfo'		=> 'Dimensione massima di ogni file. Se questo valore è uguale a 0, la dimensione del file inviabile sarà limitata solo dalla configurazione PHP.',
 	'UploadQuota'				=> 'Quota massima allegati:',
-	'UploadQuotaInfo'			=> 'Dimensione massima riservata su disco per tutti gli allegati; <code>0</code> = illimitata.',
+	'UploadQuotaInfo'			=> 'Dimensione massima riservata su disco per tutti gli allegati; <code>0</code> = illimitata. %1 used.',
 	'UploadQuotaUser'			=> 'Storage quota per user:',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 
@@ -976,6 +996,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'SysMsgAudience'			=> 'Pubblico:',
+	'SysMsgAudienceInfo'		=> 'Pubblico a cui viene mostrato il messaggio di sistema.',
 	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 

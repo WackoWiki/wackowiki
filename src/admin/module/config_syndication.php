@@ -101,6 +101,33 @@ function admin_config_syndication($engine, $module)
 			<tr>
 				<th colspan="2">
 					<br>
+					<?php echo $engine->_t('SearchSection');?>
+				</th>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="noindex"><strong><?php echo $engine->_t('SearchEngineVisibility');?></strong><br>
+					<small><?php echo $engine->_t('SearchEngineVisibilityInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ($engine->db->noindex ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="opensearch"><strong><?php echo $engine->_t('OpenSearch');?></strong><br>
+					<small><?php echo $engine->_t('OpenSearchInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="opensearch" name="opensearch" value="1"<?php echo ($engine->db->opensearch ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br>
 					<?php echo $engine->_t('XmlSiteMap');?>
 				</th>
 			</tr>
@@ -136,33 +163,6 @@ function admin_config_syndication($engine, $module)
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo (int) $engine->db->xml_sitemap_time;?>">
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<br>
-					<?php echo $engine->_t('SearchSection');?>
-				</th>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="noindex"><strong><?php echo $engine->_t('SearchEngineVisibility');?></strong><br>
-					<small><?php echo $engine->_t('SearchEngineVisibilityInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ($engine->db->noindex ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="opensearch"><strong><?php echo $engine->_t('OpenSearch');?></strong><br>
-					<small><?php echo $engine->_t('OpenSearchInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="opensearch" name="opensearch" value="1"<?php echo ($engine->db->opensearch ? ' checked' : '');?>>
 				</td>
 			</tr>
 		</table>

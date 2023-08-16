@@ -130,6 +130,7 @@ $wacko_translation = [
 
 	// other
 	'Guest'						=> 'Invitado',
+	'Everybody'					=> 'Everybody',
 	'Help'						=> 'Ayuda',
 	'TopicSearchText'			=> 'Buscar solo en titulos',
 	'WordprocessorVersion'		=> 'Versión para procesador de texto',

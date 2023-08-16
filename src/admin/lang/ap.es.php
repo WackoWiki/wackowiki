@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Configuración Correo',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Sindicación',
+		'title'		=> 'Configuración de Sindicación',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filtros',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Habilitar el controlador de exportación XML:',
 	'ExportHandlerInfo'			=> 'Permite mostrar el controlador de exportación XML.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Habilitar feeds:',
-	'EnableFeedsInfo'			=> 'Activa o desactiva las fuentes Sindicación RSS de toda la wiki.',
-
-	'XmlSitemap'				=> 'Mapa del sitio XML:',
-	'XmlSitemapInfo'			=> 'Cree un archivo XML llamado %1 dentro de la carpeta xml. Genere un archivo XML compatible con el formato XML de mapa del sitio. Es posible que desee cambiar la ruta para generarlo en su carpeta raíz, ya que ese es uno de los requisitos, es decir, que el archivo XML esté en la carpeta raíz. Por otro lado, también puede agregar la ruta al mapa del sitio en el archivo robots.txt en su directorio raíz de la siguiente manera:',
-	'XmlSitemapGz'				=> 'Compresión XML Sitemap:',
-	'XmlSitemapGzInfo'			=> 'Si lo desea, puede comprimir su archivo de texto de Sitemap usando gzip para reducir su ancho de banda.',
-	'XmlSitemapTime'			=> 'Tiempo de generación de mapa del sitio XML:',
-	'XmlSitemapTimeInfo'		=> 'Genera el mapa del sitio sólo una vez en el número de días dado, cero significa en cada cambio de página.',
-
-	'SearchSection'				=> 'Buscar',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Crea el archivo de descripción de OpenSearch en la carpeta XML y habilita el Autodiscovery del plugin de búsqueda en la cabecera HTML.',
-	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
-
 	'DiffModeSection'			=> 'Modos de Diferencia',
 	'DefaultDiffModeSetting'	=> 'Modo diferencial predeterminado:',
 	'DefaultDiffModeSettingInfo'=> 'Modo diff preseleccionado.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Mantener el historial de remisión de páginas externas no más allá de un número determinado de días. Cero significa almacenamiento eterno, pero para un sitio visitado activamente esto puede llevar a un desbordamiento de la base de datos.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Permite el recuento de visitas por página y permite la visualización de estadísticas sencillas. No se cuentan las llamadas del propietario de la página.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Controla la configuración predeterminada de sindicación web para tu sitio.',
+	'SyndicationSettingsUpdated'	=> 'Configuración de sindicación actualizada.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Habilitar feeds:',
+	'EnableFeedsInfo'			=> 'Activa o desactiva las fuentes Sindicación RSS de toda la wiki.',
+	'XmlChangeLink'				=> 'Modo de enlace del feed de Cambios:',
+	'XmlChangeLinkInfo'			=> 'Define a dónde enlazan los elementos del feed XML Changes.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'ver las diferencias',
+		'2'		=> 'la página actual',
+		'3'		=> 'lista de revisiones',
+		'4'		=> 'la página revisada',
+	],
+
+	'XmlSitemap'				=> 'Mapa del sitio XML:',
+	'XmlSitemapInfo'			=> 'Cree un archivo XML llamado %1 dentro de la carpeta xml. Genere un archivo XML compatible con el formato XML de mapa del sitio. Es posible que desee cambiar la ruta para generarlo en su carpeta raíz, ya que ese es uno de los requisitos, es decir, que el archivo XML esté en la carpeta raíz. Por otro lado, también puede agregar la ruta al mapa del sitio en el archivo robots.txt en su directorio raíz de la siguiente manera:',
+	'XmlSitemapGz'				=> 'Compresión XML Sitemap:',
+	'XmlSitemapGzInfo'			=> 'Si lo desea, puede comprimir su archivo de texto de Sitemap usando gzip para reducir su ancho de banda.',
+	'XmlSitemapTime'			=> 'Tiempo de generación de mapa del sitio XML:',
+	'XmlSitemapTimeInfo'		=> 'Genera el mapa del sitio sólo una vez en el número de días dado, cero significa en cada cambio de página.',
+
+	'SearchSection'				=> 'Buscar',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Crea el archivo de descripción de OpenSearch en la carpeta XML y habilita el Autodiscovery del plugin de búsqueda en la cabecera HTML.',
+	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Configuración predeterminada de visualización para el sitio.',
@@ -876,7 +896,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Tamaño máximo:',
 	'UploadMaxFilesizeInfo'		=> 'Tamaño máximo de cada archivo. Si este valor es 0, el tamaño del archivo para subir sólo estará limitado por la configuración de PHP.',
 	'UploadQuota'				=> 'Máximo total para adjuntos:',
-	'UploadQuotaInfo'			=> 'Máximo en disco disponible para adjuntos en todo el sitio, <code>0</code> significa ilimitado.',
+	'UploadQuotaInfo'			=> 'Máximo en disco disponible para adjuntos en todo el sitio, <code>0</code> significa ilimitado. %1 used.',
 	'UploadQuotaUser'			=> 'Cuota de espacio por usuario:',
 	'UploadQuotaUserInfo'		=> 'Restricción de la cuota de almacenamiento que puede ser cargada por un usuario, siendo <code>0</code> ilimitado.',
 
@@ -975,6 +995,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Tipo:',
 	'SysMsgTypeInfo'			=> 'Tipo de mensaje (CSS).',
+	'SysMsgAudience'			=> 'Público:',
+	'SysMsgAudienceInfo'		=> 'Audiencia a la que se muestra el mensaje del sistema.',
 	'EnableSysMsg'				=> 'Habilitar mensaje de sistema:',
 	'EnableSysMsgInfo'			=> 'Mostrar mensaje de sistema.',
 

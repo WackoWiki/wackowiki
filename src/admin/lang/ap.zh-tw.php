@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Email settings',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> '聚合',
+		'title'		=> '聚合設定',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
-
-	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
-
-	'SearchSection'				=> '搜尋',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> '在XML文件夾中創建OpenSearch描述文件，並在HTML標頭中啟用搜索插件的自動發現。',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Keep the history of referring external pages no longer than a given number of days. Zero means eternal storage, but for an actively visited site this can lead to database overflow.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Control default web syndication settings for your site.',
+	'SyndicationSettingsUpdated'	=> 'Updated syndication settings.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Enable feeds:',
+	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> '差異檢視',
+		'2'		=> '目前頁面',
+		'3'		=> '版本清單',
+		'4'		=> '已修訂的頁面',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
+
+	'SearchSection'				=> '搜尋',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> '在XML文件夾中創建OpenSearch描述文件，並在HTML標頭中啟用搜索插件的自動發現。',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -883,7 +903,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Maximum file size:',
 	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
 	'UploadQuota'				=> 'Total attachment quota:',
-	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with <code>0</code> being unlimited.',
+	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with <code>0</code> being unlimited. %1 used.',
 	'UploadQuotaUser'			=> 'Storage quota per user:',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 
@@ -982,6 +1002,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
 	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 

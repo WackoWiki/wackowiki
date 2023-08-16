@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Ustawienia E-mail',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Syndication',
+		'title'		=> 'Syndication settings',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filtr',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Włącza lub wyłącza zasilanie RSS dla całej wiki.',
-
-	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'Generuje mapę Sitemap tylko raz w danej liczbie dni, zero oznacza na każdej zmianie strony.',
-
-	'SearchSection'				=> 'Znajdź',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Tworzy plik opisu OpenSearch w katalogu XML i włącza Autodiscovery pluginu wyszukiwania w nagłówku HTML.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Przechowuj historię odsyłania stron zewnętrznych nie dłużej niż przez określoną liczbę dni. Zero oznacza wieczne przechowywanie, ale dla aktywnie odwiedzanej strony może to prowadzić do przepełnienia bazy danych.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Control default web syndication settings for your site.',
+	'SyndicationSettingsUpdated'	=> 'Updated syndication settings.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Enable feeds:',
+	'EnableFeedsInfo'			=> 'Włącza lub wyłącza zasilanie RSS dla całej wiki.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'różnice',
+		'2'		=> 'aktualna strona',
+		'3'		=> 'lista zmian',
+		'4'		=> 'zmodyfikowana strona',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'Generuje mapę Sitemap tylko raz w danej liczbie dni, zero oznacza na każdej zmianie strony.',
+
+	'SearchSection'				=> 'Znajdź',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Tworzy plik opisu OpenSearch w katalogu XML i włącza Autodiscovery pluginu wyszukiwania w nagłówku HTML.',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -877,7 +897,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Maksymalny rozmiar pliku:',
 	'UploadMaxFilesizeInfo'		=> 'Maksymalny rozmiar zamieszczanego pliku. Wartość zero (0) - rozmiar zamieszczanego pliku ograniczany jest tylko przez ustawienia PHP.',
 	'UploadQuota'				=> 'Rozmiar przestrzeni dyskowej:',
-	'UploadQuotaInfo'			=> 'Maksymalna przestrzeń dyskowa dostępna dla wszystkich załączników w tej instalacji Wiki. Wartość zero <code>0</code> - brak ograniczenia przestrzeni.',
+	'UploadQuotaInfo'			=> 'Maksymalna przestrzeń dyskowa dostępna dla wszystkich załączników w tej instalacji Wiki. Wartość zero <code>0</code> - brak ograniczenia przestrzeni. %1 used.',
 	'UploadQuotaUser'			=> 'Storage quota per user:',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 
@@ -976,6 +996,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
 	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 

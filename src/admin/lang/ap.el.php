@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> 'Ρυθμίσεις Email',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> 'Syndication',
+		'title'		=> 'Ρυθμίσεις σύνδεσης',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Φίλτρο',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> 'Enable XML export handler:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Ενεργοποιεί ή απενεργοποιεί τις τροφοδοσίες RSS για ολόκληρο το wiki.',
-
-	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'Δημιουργεί το Χάρτη ιστοτόπου μόνο μία φορά στον δεδομένο αριθμό ημερών, μηδέν μέσα σε κάθε σελίδα αλλαγή.',
-
-	'SearchSection'				=> 'Αναζήτηση',
-	'OpenSearch'				=> 'OpenSearch:',
-	'OpenSearchInfo'			=> 'Δημιουργεί το αρχείο περιγραφής OpenSearch στο φάκελο XML και ενεργοποιεί την αυτόματη ανακάλυψη του πρόσθετου αναζήτησης στην επικεφαλίδα HTML.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
-
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> 'Κρατήστε το ιστορικό των εξωτερικών σελίδων παραπομπής όχι περισσότερο από δεδομένο αριθμό ημερών. Το μηδέν σημαίνει αιώνια αποθήκευση, αλλά για έναν ιστότοπο που επισκέπτεται ενεργά αυτό μπορεί να οδηγήσει σε υπερχείλιση βάσης δεδομένων.',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Control default web syndication settings for your site.',
+	'SyndicationSettingsUpdated'	=> 'Updated syndication settings.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> 'Enable feeds:',
+	'EnableFeedsInfo'			=> 'Ενεργοποιεί ή απενεργοποιεί τις τροφοδοσίες RSS για ολόκληρο το wiki.',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> 'προβολή αλλαγών',
+		'2'		=> 'τρέχουσα σελίδα',
+		'3'		=> 'εκδόσεις σελίδας',
+		'4'		=> 'τροποποιημένη σελίδα',
+	],
+
+	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'Δημιουργεί το Χάρτη ιστοτόπου μόνο μία φορά στον δεδομένο αριθμό ημερών, μηδέν μέσα σε κάθε σελίδα αλλαγή.',
+
+	'SearchSection'				=> 'Αναζήτηση',
+	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearchInfo'			=> 'Δημιουργεί το αρχείο περιγραφής OpenSearch στο φάκελο XML και ενεργοποιεί την αυτόματη ανακάλυψη του πρόσθετου αναζήτησης στην επικεφαλίδα HTML.',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -879,7 +899,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Μέγιστο μέγεθος αρχείου:',
 	'UploadMaxFilesizeInfo'		=> 'Μέγιστο μέγεθος του κάθε αρχείου. Εάν η τιμή είναι 0, το μέγεθος του προς φόρτωση αρχείου περιορίζεται μόνο από τις ρυθμίσεις του PHP σας.',
 	'UploadQuota'				=> 'Συνολική ποσόστωση συνημμένων:',
-	'UploadQuotaInfo'			=> 'Μέγιστος διαθέσιμος χώρος στη μονάδα δίσκου για ολόκληρo το σύστημα συζητήσεων, με <code>0</code> είναι απεριόριστος.',
+	'UploadQuotaInfo'			=> 'Μέγιστος διαθέσιμος χώρος στη μονάδα δίσκου για ολόκληρo το σύστημα συζητήσεων, με <code>0</code> είναι απεριόριστος. %1 used.',
 	'UploadQuotaUser'			=> 'Storage quota per user:',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 
@@ -978,6 +998,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
 	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 

@@ -90,6 +90,12 @@ $ap_translation = [
 		'title'		=> '邮件设置',
 	],
 
+	// Config Syndication module
+	'config_syndication'		=> [
+		'name'		=> '聚合',
+		'title'		=> '聚合设置',
+	],
+
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> '筛选',
@@ -305,23 +311,6 @@ $ap_translation = [
 	'ExportHandler'				=> '启用 XML 导出处理程序：',
 	'ExportHandlerInfo'			=> '允许显示 XML 导出处理程序。',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> '打开feeds：',
-	'EnableFeedsInfo'			=> '打开或关闭整个 wiki 的 RSS 源。',
-
-	'XmlSitemap'				=> 'XML 站点地图：',
-	'XmlSitemapInfo'			=> '在 xml 文件夹中创建一个名为 %1 的 XML 文件。 您可以在根目录的 robots.txt 文件中添加站点地图的路径，如下所示：',
-	'XmlSitemapGz'				=> 'XML 站点地图压缩：',
-	'XmlSitemapGzInfo'			=> '如果您愿意，您可以使用 gzip 压缩您的站点地图文本文件以减少您的带宽需求。',
-	'XmlSitemapTime'			=> 'XML 站点地图生成时间：',
-	'XmlSitemapTimeInfo'		=> '在给定的天数内仅生成一次站点地图，零表示每次页面更改。',
-
-	'SearchSection'				=> '搜索',
-	'OpenSearch'				=> '打开搜索：',
-	'OpenSearchInfo'			=> '在XML文件夹中创建OpenSearch描述文件，并在HTML标题中启用搜索插件的Autodiscovery。',
-	'SearchEngineVisibility'	=> '阻止搜索引擎（搜索引擎可见性）：',
-	'SearchEngineVisibilityInfo'=> '阻止搜索引擎，但允许普通访问者。 覆盖页面设置。 <br>劝阻搜索引擎对该网站编制索引，搜索引擎应遵守此请求。',
-
 	'DiffModeSection'			=> '差异模式',
 	'DefaultDiffModeSetting'	=> '默认差异模式：',
 	'DefaultDiffModeSettingInfo'=> '预选的差异模式。',
@@ -356,6 +345,37 @@ $ap_translation = [
 	'ReferrersPurgeTimeInfo'	=> '保持引用外部页面的历史不超过给定的天数。 零意味着永久存储，但对于积极访问的站点，这可能导致数据库溢出。',
 	'EnableCounters'			=> '计数器：',
 	'EnableCountersInfo'		=> '允许每页点击计数器并启用简单统计信息的显示。 不计算页面所有者的浏览量。',
+
+	// Syndication settings
+	'SyndicationSettingsInfo'		=> 'Control default web syndication settings for your site.',
+	'SyndicationSettingsUpdated'	=> 'Updated syndication settings.',
+
+	'FeedsSection'				=> 'Feeds',
+	'EnableFeeds'				=> '打开feeds：',
+	'EnableFeedsInfo'			=> '打开或关闭整个 wiki 的 RSS 源。',
+	'XmlChangeLink'				=> 'Changes feed link mode:',
+	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLinkMode'			=> [
+		'1'		=> '差别查看',
+		'2'		=> '当前页面',
+		'3'		=> '修订列表',
+		'4'		=> '已修订的页面',
+	],
+
+	'XmlSitemap'				=> 'XML 站点地图：',
+	'XmlSitemapInfo'			=> '在 xml 文件夹中创建一个名为 %1 的 XML 文件。 您可以在根目录的 robots.txt 文件中添加站点地图的路径，如下所示：',
+	'XmlSitemapGz'				=> 'XML 站点地图压缩：',
+	'XmlSitemapGzInfo'			=> '如果您愿意，您可以使用 gzip 压缩您的站点地图文本文件以减少您的带宽需求。',
+	'XmlSitemapTime'			=> 'XML 站点地图生成时间：',
+	'XmlSitemapTimeInfo'		=> '在给定的天数内仅生成一次站点地图，零表示每次页面更改。',
+
+	'SearchSection'				=> '搜索',
+	'OpenSearch'				=> '打开搜索：',
+	'OpenSearchInfo'			=> '在XML文件夹中创建OpenSearch描述文件，并在HTML标题中启用搜索插件的Autodiscovery。',
+	'SearchEngineVisibility'	=> '阻止搜索引擎（搜索引擎可见性）：',
+	'SearchEngineVisibilityInfo'=> '阻止搜索引擎，但允许普通访问者。 覆盖页面设置。 <br>劝阻搜索引擎对该网站编制索引，搜索引擎应遵守此请求。',
+
+
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> '控制站点的默认显示设置。',
@@ -863,7 +883,7 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> '文件大小上限：',
 	'UploadMaxFilesizeInfo'		=> '每个文件的最大大小。 如果此值为 0，则可上传的文件大小仅受您的 PHP 配置限制。',
 	'UploadQuota'				=> '总附件配额：',
-	'UploadQuotaInfo'			=> '整个 wiki 的附件可用的最大驱动器空间，<code>0</code> 是无限的。',
+	'UploadQuotaInfo'			=> '整个 wiki 的附件可用的最大驱动器空间，<code>0</code> 是无限的。 %1 used.',
 	'UploadQuotaUser'			=> '每个用户的存储配额：',
 	'UploadQuotaUserInfo'		=> '限制一个用户可以上传的存储配额，<code>0</code> 无限制。',
 
@@ -960,6 +980,8 @@ $ap_translation = [
 
 	'SysMsgType'				=> '类型：',
 	'SysMsgTypeInfo'			=> '消息类型 (CSS)。',
+	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
 	'EnableSysMsg'				=> '启用系统消息：',
 	'EnableSysMsgInfo'			=> '显示系统消息。',
 

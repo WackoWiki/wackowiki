@@ -130,6 +130,7 @@ $wacko_translation = [
 
 	// other
 	'Guest'						=> 'Επισκέπτης',
+	'Everybody'					=> 'Everybody',
 	'Help'						=> 'Βοήθεια',
 	'TopicSearchText'			=> 'Αναζήτηση μόνο σε τίτλους',
 	'WordprocessorVersion'		=> 'Έκδοση Επεξεργαστής εγγράφου',

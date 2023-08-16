@@ -130,6 +130,7 @@ $wacko_translation = [
 
 	// other
 	'Guest'						=> 'अतिथि',
+	'Everybody'					=> 'Everybody',
 	'Help'						=> 'सहायता',
 	'TopicSearchText'			=> 'केवल शीर्षकों में खोजें',
 	'WordprocessorVersion'		=> 'Word processor version',
