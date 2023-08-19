@@ -3564,8 +3564,6 @@ class Wacko
 				default							=> 'auto',
 			};
 
-			// uses width="50" height="50", no units allowed - assumes px
-			#$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
 			// uses style="..."
 			$scale	= ' style=" width: ' . $width . '; height: ' . $height . ';"';
 		}
@@ -3876,7 +3874,7 @@ class Wacko
 			// 1 -> file:/some.zip (global)
 			if (count($file_array) == 2 && $file_array[0] == '')
 			{
-				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // FIXME: prevents that tag is set as 'admin.php' in href()
+				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // prevents that tag is set as 'admin.php' in href()
 				$file_name	= $file_array[1];
 				$param		= $this->parse_media_param($file_name);
 
@@ -4392,7 +4390,10 @@ class Wacko
 			die ("ERROR: no link template '$tpl' found.");
 		}
 
-		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+		if (!$text)
+		{
+			$text = htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+		}
 
 		// external link
 		if ($href)
@@ -4639,7 +4640,7 @@ class Wacko
 		$max_image_area = $this->db->max_image_area;
 
 		// no image size check before attempting to scale it
-		if ($max_image_area = -1)
+		if ($max_image_area == -1)
 		{
 			return true;
 		}
@@ -6497,7 +6498,6 @@ class Wacko
 		// validate
 		if (!$this->validate_acl_syntax($list, $privilege))
 		{
-			#$this->reload_me();
 			return;
 		}
 
@@ -9297,6 +9297,14 @@ class Wacko
 			$selected[$key] = $val;
 		}
 
+		$checked = function ($category_id) use ($selected)
+		{
+			return
+				is_array($selected)
+					? (in_array($category_id, $selected) ? ' checked' : '')
+					: '';
+		};
+
 		// print categories list
 		if (is_array($categories))
 		{
@@ -9314,7 +9322,7 @@ class Wacko
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
 							? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">'
-							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '> ' . "\n\t") .
+							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . $checked($category_id) . '> ' . "\n\t") .
 						'<label for="category' . $category_id . '"><strong>' . Ut::html($word['category']) . '</strong></label>' . "\n";
 
 				if (isset($word['child']) && $word['child'])
@@ -9330,7 +9338,7 @@ class Wacko
 							'<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
 								($can_edit
 									? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">' . "\n\t\t\t"
-									: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
+									: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . $checked($category_id) . '>' . "\n\t\t\t") .
 								'<label for="category' . $category_id . '">' . Ut::html($word['category']) . '</label>' . "\n\t\t" .
 							'</li>' . "\n";
 					}
