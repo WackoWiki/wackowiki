@@ -4810,16 +4810,22 @@ class Wacko
 
 	function add_nbsps($text): string
 	{
+		// pattern without hyphen-minus (to keep Wiki-Word unchanged)
+		$PATTERN = [
+			'ALPHA'		=> '[\p{L}\_\/]',
+			'ALPHANUM'	=> '[\p{L}\p{M}\p{Nd}\_\/]',
+		];
+
 		$patterns =[
-			['(' . self::PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 												'\\1' . NBSP . '\\2'],
+			['(' . $PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 													'\\1' . NBSP . '\\2'],
 			['(' . self::PATTERN['UPPERNUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')',												'\\1' . NBSP . '\\2'],
-			['(' . self::PATTERN['ALPHANUM'] . ')\/',																				'\\1' . NBSP . '/'],
+			['(' . $PATTERN['ALPHANUM'] . ')\/',																					'\\1' . NBSP . '/'],
 			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . self::PATTERN['UPPERNUM'] . ')',	'\\1'],
 			['(' . self::PATTERN['UPPER'] . ')' . NBSP . '(?=' . self::PATTERN['UPPER'] . NBSP . '\/)',								'\\1'],
-			['\/(' . self::PATTERN['ALPHANUM'] . ')',																				'/' . NBSP . '\\1'],
+			['\/(' . $PATTERN['ALPHANUM'] . ')',																					'/' . NBSP . '\\1'],
 			['(' . self::PATTERN['UPPERNUM'] . ')' . NBSP . '(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
-			['(\d)(' . self::PATTERN['ALPHA'] . ')',																				'\\1' . NBSP . '\\2'],
-			['(' . self::PATTERN['ALPHA'] . ')(\d)',																				'\\1' . NBSP . '\\2'],
+			['(\d)(' . $PATTERN['ALPHA'] . ')',																						'\\1' . NBSP . '\\2'],
+			['(' . $PATTERN['ALPHA'] . ')(\d)',																						'\\1' . NBSP . '\\2'],
 			# ['(\d)' . NBSP . '(?=\d)',																							'\\1'],
 			['(\d)' . NBSP . '(?!' . self::PATTERN['ALPHA'] . ')',																	'\\1'],
 		];
