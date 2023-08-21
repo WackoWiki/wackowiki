@@ -3364,14 +3364,15 @@ class Wacko
 	*/
 	function underscore_url($tag): ?string
 	{
-		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
+		// - is now allowed in tag, but we do not want Wiki-_Word:
+		// uses PATTERN['ALPHANUM'] without -
 		if ($this->db->urls_underscores)
 		{
 			$patterns =[
-				['(' . self::PATTERN['ALPHANUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')', 									'\\1¶\\2'],
-				['(' . self::PATTERN['UPPERNUM'] . ')(' . self::PATTERN['UPPERNUM'] . ')',									'\\1¶\\2'],
-				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶' . self::PATTERN['UPPERNUM'] . ')',	'\\1'],
-				['(' . self::PATTERN['UPPER'] . ')¶(?=' . self::PATTERN['UPPER'] . '¶\/)',									'\\1'],
+				['([\p{L}\p{M}\p{Nd}\_\/])(' .             self::PATTERN['UPPERNUM'] . ')',									'\\1¶\\2'],
+				['(' . self::PATTERN['UPPERNUM'] . ')(' .  self::PATTERN['UPPERNUM'] . ')',									'\\1¶\\2'],
+				['(' . self::PATTERN['UPPER'] . ')¶(?=' .  self::PATTERN['UPPER'] . '¶' . self::PATTERN['UPPERNUM'] . ')',	'\\1'],
+				['(' . self::PATTERN['UPPER'] . ')¶(?=' .  self::PATTERN['UPPER'] . '¶\/)',									'\\1'],
 				['(' . self::PATTERN['UPPERNUM'] . ')¶(' . self::PATTERN['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
 				['\/¶(' . self::PATTERN['UPPERNUM'] . ')',																	'/\\1'],
 				['¶',																										'_'],
