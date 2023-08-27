@@ -57,7 +57,7 @@ class Http
 		if ($this->db->tls && !$this->tls_session)
 		{
 			// relative addressing
-			if (!preg_match('/^(http|https):\/\/([^\\s\"<>]+)$/', $url))
+			if (!preg_match('/^(https?):\/\/([^\\s\"<>]+)$/', $url))
 			{
 				$url = 'https://' . $_SERVER['SERVER_NAME'] . $url;
 			}
