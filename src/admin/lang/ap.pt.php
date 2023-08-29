@@ -28,7 +28,7 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Erro ao carregar o módulo admin %1: não existe.',
 
-	'ApHomePage'				=> 'Home Page',
+	'ApHomePage'				=> 'Página inicial',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Desligar',
 	'ApLogOutTip'				=> 'quit system administration',
@@ -36,14 +36,14 @@ $ap_translation = [
 	'TimeLeft'					=> 'Tempo restante: %1 minutos',
 	'ApVersion'					=> 'versão',
 
-	'SiteOpen'					=> 'Open',
-	'SiteOpened'				=> 'site opened',
-	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'Close',
-	'SiteClosed'				=> 'site closed',
+	'SiteOpen'					=> 'Abrir',
+	'SiteOpened'				=> 'site aberto',
+	'SiteOpenedTip'				=> 'O site está aberto',
+	'SiteClose'					=> 'Fechar',
+	'SiteClosed'				=> 'site fechado',
 	'SiteClosedTip'				=> 'The site is closed',
 
-	'System'					=> 'System',
+	'System'					=> 'Sistema',
 
 	// Generic
 	'Cancel'					=> 'Cancelar',
@@ -51,17 +51,17 @@ $ap_translation = [
 	'Edit'						=> 'Editar',
 	'Remove'					=> 'Remover',
 	'Enabled'					=> 'Ativado',
-	'Disabled'					=> 'Disabled',
+	'Disabled'					=> 'Desativado',
 	'Mandatory'					=> 'Obrigatório',
-	'Admin'						=> 'Admin',
-	'Min'						=> 'Min',
-	'Max'						=> 'Max',
+	'Admin'						=> 'Administrador',
+	'Min'						=> 'Mínimo',
+	'Max'						=> 'Máximo',
 
 	'MiscellaneousSection'		=> 'Diversos',
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'O diretório %1 não pode ser escrito.',
-	'FileNotWritable'			=> 'The %1 file is not writable.',
+	'FileNotWritable'			=> 'O arquivo %1 não pode ser escrito.',
 
 	/**
 	 * AP MENU
@@ -87,7 +87,7 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-mail',
-		'title'		=> 'Email settings',
+		'title'		=> 'Configurações de e-mail',
 	],
 
 	// Config Syndication module
@@ -98,14 +98,14 @@ $ap_translation = [
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'name'		=> 'Filtrar',
+		'title'		=> 'Configurações do filtro',
 	],
 
 	// Config Formatter module
 	'config_formatter'		=> [
-		'name'		=> 'Formatter',
-		'title'		=> 'Formatting options',
+		'name'		=> 'Formatador',
+		'title'		=> 'Opções de formatação',
 	],
 
 	// Config Notifications module
@@ -135,13 +135,13 @@ $ap_translation = [
 	// Config System module
 	'config_system'		=> [
 		'name'		=> 'Sistema',
-		'title'		=> 'System options',
+		'title'		=> 'Opções do sistema',
 	],
 
 	// Config Upload module
 	'config_upload'		=> [
 		'name'		=> 'Enviar',
-		'title'		=> 'Attachment settings',
+		'title'		=> 'Definições dos Anexos',
 	],
 
 	// Deleted module
@@ -158,26 +158,26 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
+		'name'		=> 'Cópia de segurança',
 		'title'		=> 'Backing up data',
 	],
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Repair',
-		'title'		=> 'Repair and Optimize Database',
+		'name'		=> 'Reparar',
+		'title'		=> 'Reparar e Otimizar o Banco de Dados',
 	],
 
 	// DB Restore module
 	'db_restore'		=> [
 		'name'		=> 'Restaurar',
-		'title'		=> 'Restoring backup data',
+		'title'		=> 'Restaurar dados da cópia de segurança',
 	],
 
 	// Dashboard module
 	'main'		=> [
 		'name'		=> 'Menu principal',
-		'title'		=> 'WackoWiki Administration',
+		'title'		=> 'Administração de WackoWiki',
 	],
 
 	// Inconsistencies module
@@ -194,64 +194,64 @@ $ap_translation = [
 
 	// Mass email module
 	'massemail'		=> [
-		'name'		=> 'Mass email',
-		'title'		=> 'Mass email',
+		'name'		=> 'E-mails em massa',
+		'title'		=> 'E-mails em massa',
 	],
 
 	// System message module
 	'messages'		=> [
-		'name'		=> 'System message',
-		'title'		=> 'System messages',
+		'name'		=> 'Mensagem do sistema',
+		'title'		=> 'Mensagens do sistema',
 	],
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Information',
+		'name'		=> 'Informação do Sistema',
+		'title'		=> 'Informação do Sistema',
 	],
 
 	// System log module
 	'system_log'		=> [
 		'name'		=> 'System log',
-		'title'		=> 'Log of system events',
+		'title'		=> 'Log de eventos do sistema',
 	],
 
 	// Statistics module
 	'system_statistics'		=> [
 		'name'		=> 'Estatística',
-		'title'		=> 'Show statistics',
+		'title'		=> 'Mostrar estatísticas',
 	],
 
 	// Bad Behaviour module
 	'tool_badbehaviour'		=> [
-		'name'		=> 'Bad Behaviour',
-		'title'		=> 'Bad Behaviour',
+		'name'		=> 'Má conduta',
+		'title'		=> 'Má conduta',
 	],
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
-		'title'		=> 'User registration approval',
+		'name'		=> 'Aprovar',
+		'title'		=> 'Registro do Utilizador aprovado',
 	],
 
 	// Groups module
 	'user_groups'		=> [
 		'name'		=> 'Grupos',
-		'title'		=> 'Group management',
+		'title'		=> 'Gestão de grupos',
 	],
 
 	// User module
 	'user_users'		=> [
 		'name'		=> 'Usuários',
-		'title'		=> 'User management',
+		'title'		=> 'Gestão de utilizadores',
 	],
 
 	// Main module
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'PurgeSessions'				=> 'Purgar',
-	'PurgeSessionsTip'			=> 'Purge all sessions',
-	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
+	'PurgeSessionsTip'			=> 'Terminar todas as sessões',
+	'PurgeSessionsConfirm'		=> 'Tem certeza que deseja terminar todas as sessões? Esta ação terminará as sessões de todos os utilizadores.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
 
@@ -305,10 +305,10 @@ $ap_translation = [
 	'HideRevisions'				=> 'Hide Revisions:',
 	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
 	'AttachmentHandler'			=> 'Enable attachments handler:',
-	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
+	'AttachmentHandlerInfo'		=> 'Permite exibir o manipulador de anexos.',
 	'SourceHandler'				=> 'Enable source handler:',
 	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
-	'ExportHandler'				=> 'Enable XML export handler:',
+	'ExportHandler'				=> 'Ativar a exportação XML:',
 	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
 	'DiffModeSection'			=> 'Diff Modes',
@@ -350,7 +350,7 @@ $ap_translation = [
 	'SyndicationSettingsInfo'		=> 'Controlar as definições predefinidas de sindicação da Web para o seu site.',
 	'SyndicationSettingsUpdated'	=> 'Definições de sindicação actualizadas.',
 
-	'FeedsSection'				=> 'Feeds',
+	'FeedsSection'				=> 'Atividade',
 	'EnableFeeds'				=> 'Enable feeds:',
 	'EnableFeedsInfo'			=> 'Liga ou desliga os feeds RSS para todo o wiki.',
 	'XmlChangeLink'				=> 'Altera o modo de ligação do feed::',
