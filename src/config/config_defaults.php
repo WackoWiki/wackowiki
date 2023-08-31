@@ -240,6 +240,7 @@ $wacko_config_defaults = [
 	'jpeg_quality'					=> 80,		// 92, 80, ...
 
 	'enable_feeds'					=> 1,
+	'xml_changes_link'				=> 1,
 
 	'noindex'						=> 0,
 	'opensearch'					=> 0,

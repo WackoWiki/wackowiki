@@ -24,7 +24,7 @@ Please make sure the following subdirectories are writable, since this is where 
 
 Adjust the file permissions according to the permission group you're in.
 
-  chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
+  chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ file/thumb_local/ xml/
   chmod 666 config/config.php config/lock config/lock_ap
 
 Reset file permissions of the config file after installation.
