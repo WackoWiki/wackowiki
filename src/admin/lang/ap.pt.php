@@ -252,34 +252,34 @@ $ap_translation = [
 	'PurgeSessions'				=> 'Purgar',
 	'PurgeSessionsTip'			=> 'Terminar todas as sessões',
 	'PurgeSessionsConfirm'		=> 'Tem certeza que deseja terminar todas as sessões? Esta ação terminará as sessões de todos os utilizadores.',
-	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
-	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+	'PurgeSessionsExplain'		=> 'Eliminar todas as sessões. Isto irá terminar a sessão de todos os utilizadores, truncando a tabela auth_token.',
+	'PurgeSessionsDone'			=> 'Sessões eliminadas com sucesso.',
 
 	// Basic settings
 	'BasicSettingsInfo'			=> '',
-	'BasicSettingsUpdated'		=> 'Updated basic settings',
-	'LogBasicSettingsUpdated'	=> 'Updated basic settings',
+	'BasicSettingsUpdated'		=> 'Definições básicas actualizadas',
+	'LogBasicSettingsUpdated'	=> 'Definições básicas actualizadas',
 
 	'SiteName'					=> 'Site Name:',
 	'SiteNameInfo'				=> 'The title of this site, appears on browser title, theme header, email-notification, etc.',
 	'SiteDesc'					=> 'Site Description:',
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
 	'AdminName'					=> 'Admin of Site:',
-	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
+	'AdminNameInfo'				=> 'Nome do utilizador, que é responsável pelo apoio geral do sítio. Este nome não é utilizado para determinar os direitos de acesso, mas é desejável que esteja em conformidade com o nome do administrador principal do sítio.',
 
 	'LanguageSection'			=> 'Língua',
-	'DefaultLanguage'			=> 'Default language:',
-	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
-	'MultiLanguage'				=> 'Multilanguage support:',
-	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
-	'AllowedLanguages'			=> 'Allowed languages:',
+	'DefaultLanguage'			=> 'Língua predefinida:',
+	'DefaultLanguageInfo'		=> 'Especifica o idioma das mensagens apresentadas aos convidados não registados, bem como as definições de localidade.',
+	'MultiLanguage'				=> 'Suporte multilingue:',
+	'MultiLanguageInfo'			=> 'Permitir a capacidade de selecionar uma língua numa base página a página.',
+	'AllowedLanguages'			=> 'Línguas permitidas:',
 	'AllowedLanguagesInfo'		=> 'Recomenda-se que seleccione apenas o conjunto de idiomas que pretende utilizar, caso contrário todos os idiomas são seleccionados.',
 
 	'CommentSection'			=> 'Comentários',
 	'AllowComments'				=> 'Allow comments:',
-	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
-	'SortingComments'			=> 'Sorting comments:',
-	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+	'AllowCommentsInfo'			=> 'Ativar os comentários apenas para convidados ou utilizadores registados ou desactivá-los em todo o sítio.',
+	'SortingComments'			=> 'Ordenar comentários:',
+	'SortingCommentsInfo'		=> 'Altera a ordem pela qual os comentários da página são apresentados, com o comentário mais recente OU o mais antigo no topo.',
 
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel:',
@@ -315,7 +315,7 @@ $ap_translation = [
 	'DefaultDiffModeSetting'	=> 'Modo de comparação padrão:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
 	'AllowedDiffMode'			=> 'Allowed Diff modes:',
-	'AllowedDiffModeInfo'		=> 'It is recommended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
+	'AllowedDiffModeInfo'		=> 'Recomenda-se que seleccione apenas o conjunto de modos de diferenças que pretende utilizar; caso contrário, todos os modos de diferenças são seleccionados.',
 	'NotifyDiffMode'			=> 'Notify diff mode:',
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
@@ -338,7 +338,7 @@ $ap_translation = [
 	'KeepDeletedTime'			=> 'Storage time of deleted pages:',
 	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only with the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).',
 	'PagesPurgeTime'			=> 'Storage time of page revisions:',
-	'PagesPurgeTimeInfo'		=> 'Automatically deletes the older versions within the given number of days. If you enter zero, the older versions will not be removed.',
+	'PagesPurgeTimeInfo'		=> 'Elimina automaticamente as versões mais antigas dentro do número de dias indicado. Se introduzir zero, as versões mais antigas não serão removidas.',
 	'EnableReferrers'			=> 'Enable Referrers:',
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers:',
@@ -363,17 +363,17 @@ $ap_translation = [
 	],
 
 	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapInfo'			=> 'Cria um ficheiro XML chamado %1 dentro da pasta xml. Pode adicionar o caminho para o mapa do site no ficheiro robots.txt no seu diretório raiz da seguinte forma:',
+	'XmlSitemapGz'				=> 'Compressão do Sitemap XML:',
+	'XmlSitemapGzInfo'			=> 'Se desejar, pode comprimir o ficheiro de texto do Sitemap utilizando gzip para reduzir os requisitos de largura de banda.',
+	'XmlSitemapTime'			=> 'Tempo de geração do Sitemap XML:',
 	'XmlSitemapTimeInfo'		=> 'Gera o Mapa do Sítio apenas uma vez no determinado número de dias, zero significa em cada mudança de página.',
 
 	'SearchSection'				=> 'Pesquisa',
 	'OpenSearch'				=> 'OpenSearch:',
 	'OpenSearchInfo'			=> 'Cria o ficheiro de descrição OpenSearch na pasta XML e permite a Autodiscovery do plugin de pesquisa no cabeçalho HTML.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+	'SearchEngineVisibility'	=> 'Bloquear os motores de busca (Visibilidade nos motores de busca):',
+	'SearchEngineVisibilityInfo'=> 'Bloqueia os motores de busca, mas permite visitantes normais. Substitui as definições da página. <br>Desencorajar os motores de busca de indexar este sítio, cabe aos motores de busca honrar este pedido.',
 
 
 
@@ -387,15 +387,15 @@ $ap_translation = [
 
 	'LogoSection'				=> 'Logo',
 	'SiteLogo'					=> 'Site Logo:',
-	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
+	'SiteLogoInfo'				=> 'O seu logótipo aparecerá normalmente no canto superior esquerdo da aplicação. O tamanho máximo é de 2 MiB. As dimensões ideais são 255 píxeis de largura por 55 píxeis de altura.',
 	'LogoDimensions'			=> 'Logo dimensions:',
-	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
+	'LogoDimensionsInfo'		=> 'Largura e altura do logótipo apresentado.',
 	'LogoDisplayMode'			=> 'Logo display mode:',
-	'LogoDisplayModeInfo'		=> 'Defines the appearance of the Logo. Default is off.',
+	'LogoDisplayModeInfo'		=> 'Define o aspeto do logótipo. A predefinição é desligado.',
 
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site Favicon:',
-	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
+	'SiteFaviconInfo'			=> 'O seu ícone de atalho, ou favicon, é apresentado na barra de endereço, nos separadores e nos favoritos da maioria dos browsers. Isto irá substituir o favicon do seu tema.',
 	'SiteFaviconTooBig'			=> 'O Favicon é maior que 64 × 64px.',
 	'ThemeColor'				=> 'Cor do tema para a barra de endereços:',
 	'ThemeColorInfo'			=> 'O navegador irá definir a cor da barra de endereço de cada página de acordo com a cor CSS fornecida.',
@@ -506,7 +506,7 @@ $ap_translation = [
 										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
-	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
+	'PermissionsSettingsInfo'		=> 'Parâmetros responsáveis pelo controlo de acesso e permissões.',
 	'PermissionsSettingsUpdated'	=> 'Updated permissions settings',
 
 	'PermissionsSection'		=> 'Rights and privileges',
@@ -666,7 +666,7 @@ $ap_translation = [
 	'WikiLinksInfo'				=> 'Desactiva a ligação para <code>CamelCaseWords</code>, as suas Palavras CamelCase não serão mais ligadas directamente a uma nova página. Isto é útil quando se trabalha em diferentes namespaces aks clusters. Por defeito, está desligado.',
 	'BracketsLinks'				=> 'Disable bracketslinks:',
 	'BracketsLinksInfo'			=> 'Disables <code>[[link]]</code> and <code>((link))</code> syntax.',
-	'Formatters'				=> 'Disable Formatters:',
+	'Formatters'				=> 'Desativar formatadores:',
 	'FormattersInfo'			=> 'Disables <code>%%code%%</code> syntax, used for highlighters.',
 
 	'DateFormatsSection'		=> 'Date Formats',
@@ -971,7 +971,7 @@ $ap_translation = [
 
 	'NoEmailMessage'			=> 'Tem que introduzir uma mensagem.',
 	'NoEmailSubject'			=> 'A sua mensagem tem que ter um assunto.',
-	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
+	'NoEmailRecipient'			=> 'É necessário especificar pelo menos um utilizador ou grupo de utilizadores.',
 
 	'MassemailSection'			=> 'Mass email',
 	'MessageSubject'			=> 'Sujeito:',
@@ -984,7 +984,7 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Enviar para Grupo:',
 	'SendToUser'				=> 'Enviar para Utilizadores:',
-	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Só envia mensagens aos utilizadores que autorizaram os administradores a enviar-lhes informações por correio eletrónico. Esta opção está disponível nas definições do utilizador em Notificações.',
 
 	// System message module
 	'SystemMessageInfo'			=> '',
@@ -1002,7 +1002,7 @@ $ap_translation = [
 	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
-	'ApproveNotExists'			=> 'Please select at least one user via the Set button.',
+	'ApproveNotExists'			=> 'Seleccione pelo menos um utilizador através do botão Definir.',
 
 	'LogUserApproved'			=> 'User ##%1## approved',
 	'LogUserBlocked'			=> 'User ##%1## blocked',
@@ -1010,12 +1010,12 @@ $ap_translation = [
 	'LogUserCreated'			=> 'Created a new user ##%1##',
 	'LogUserUpdated'			=> 'Updated User ##%1##',
 
-	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
-	'Approve'					=> 'Approve',
-	'Deny'						=> 'Deny',
+	'UserApproveInfo'			=> 'Aprovar novos utilizadores antes de poderem iniciar sessão no sítio.',
+	'Approve'					=> 'Aprovar',
+	'Deny'						=> 'Recusar',
 	'Pending'					=> 'Pendente',
-	'Approved'					=> 'Approved',
-	'Denied'					=> 'Denied',
+	'Approved'					=> 'Aprovado',
+	'Denied'					=> 'Recusado',
 
 	// DB Backup module
 	'BackupStructure'			=> 'Structure',
@@ -1040,7 +1040,7 @@ $ap_translation = [
 	'CantReadFile'				=> 'Can\'t read file %1.',
 
 	// DB Restore module
-	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
+	'RestoreInfo'				=> 'Pode restaurar qualquer um dos pacotes de cópia de segurança encontrados ou removê-los do servidor.',
 	'ConfirmDbRestore'			=> 'Você quer restaurar o backup %1?',
 	'ConfirmDbRestoreInfo'		=> 'Aguarde, isso pode levar alguns minutos.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
@@ -1115,12 +1115,12 @@ $ap_translation = [
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'EditButton'				=> 'Editar',
-	'UsersAddNew'				=> 'Add new user',
+	'UsersAddNew'				=> 'Adicionar novo utilizador',
 	'UsersDelete'				=> 'Tens a certeza que queres remover o utilizador %1?',
-	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
+	'UsersDeleted'				=> 'O utilizador %1 foi eliminado da base de dados.',
 	'UsersRename'				=> 'Rename the user %1 to',
-	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
-	'UsersUpdated'				=> 'User successfully updated.',
+	'UsersRenameInfo'			=> '* Nota: A alteração afectará todas as páginas que estão atribuídas a esse utilizador.',
+	'UsersUpdated'				=> 'Utilizador atualizado com sucesso.',
 
 	'UserIP'					=> 'IP',
 	'UserSignuptime'			=> 'Signuptime',
@@ -1174,7 +1174,7 @@ $ap_translation = [
 	'MembersRemoved'			=> 'O membro foi retirado do grupo.',
 
 	// Statistics module
-	'DbStatSection'				=> 'Database Statistics',
+	'DbStatSection'				=> 'Estatísticas da base de dados',
 	'DbTable'					=> 'Table',
 	'DbRecords'					=> 'Records',
 	'DbSize'					=> 'Tamanho',
@@ -1182,7 +1182,7 @@ $ap_translation = [
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
-	'FileStatSection'			=> 'File system Statistics',
+	'FileStatSection'			=> 'Estatísticas do sistema de ficheiros',
 	'FileFolder'				=> 'Folder',
 	'FileFiles'					=> 'Ficheiros',
 	'FileSize'					=> 'Tamanho',
@@ -1215,13 +1215,13 @@ $ap_translation = [
 	'ApacheModules'				=> 'Apache modules',
 
 	// DB repair module
-	'DbRepairSection'			=> 'Repair Database',
-	'DbRepair'					=> 'Repair Database',
-	'DbRepairInfo'				=> 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.',
+	'DbRepairSection'			=> 'Reparar base de dados',
+	'DbRepair'					=> 'Reparar base de dados',
+	'DbRepairInfo'				=> 'Este script pode procurar automaticamente alguns problemas comuns da base de dados e repará-los. A reparação pode demorar algum tempo, por isso, seja paciente.',
 
-	'DbOptimizeRepairSection'	=> 'Repair and Optimize Database',
-	'DbOptimizeRepair'			=> 'Repair and Optimize Database',
-	'DbOptimizeRepairInfo'		=> 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.',
+	'DbOptimizeRepairSection'	=> 'Reparar e otimizar a base de dados',
+	'DbOptimizeRepair'			=> 'Reparar e otimizar a base de dados',
+	'DbOptimizeRepairInfo'		=> 'Este script também pode tentar otimizar a base de dados. Isso melhora o desempenho em algumas situações. Reparar e otimizar a base de dados pode demorar muito tempo e a base de dados será bloqueada durante a otimização.',
 
 	'TableOk'					=> 'The %1 table is okay.',
 	'TableNotOk'				=> 'The %1 table is not okay. It is reporting the following error: %2. This script will attempt to repair this table&hellip;',

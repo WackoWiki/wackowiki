@@ -511,7 +511,7 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Sua conta pode ser desativada ou bloqueada.',
 	'WrongPassword'				=> 'Password errada!',
-	'ConfirmPassword'			=> 'Confirme password',
+	'ConfirmPassword'			=> 'Confirmar palavra-passe',
 	'Email'						=> 'Email',
 	'MustBeWikiName'			=> 'O Username deve ser do formato <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> !',
 	'SpecifyEmail'				=> 'Deve inserir endereço email.',
