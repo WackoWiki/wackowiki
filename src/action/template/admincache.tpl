@@ -29,7 +29,7 @@
 	=]
 
 [ === post === ]
-[ ' page ' ][ ' sql ' ][ ' config ' ][ ' feed ' ][ ' template ' ][ ' thumbnail ' ][ ' _t: CacheCleared ' ]
+[ ' page ' ][ ' sql ' ][ ' config ' ][ ' feed ' ][ ' template ' ][ ' thumbglobal ' ][ ' thumblocal ' ][ ' _t: CacheCleared ' ]
 
 [ === page === ]
 [ ' _t: PageCache ' ] ([ ' n | e ' ]) ... ['' '']
@@ -46,5 +46,8 @@
 [ === template === ]
 [ ' _t: TemplateCache ' ] ([ ' n | e ' ]) ... ['' '']
 
-[ === thumbnail === ]
+[ === thumbglobal === ]
+[ ' _t: ThumbCache ' ] ([ ' n | e ' ]) ... ['' '']
+
+[ === thumblocal === ]
 [ ' _t: ThumbCache ' ] ([ ' n | e ' ]) ... ['' '']
