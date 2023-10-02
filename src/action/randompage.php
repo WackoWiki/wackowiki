@@ -29,10 +29,12 @@ if ($help)
 	return;
 }
 
-// do not cache random page!
+// do not cache random page
 $this->http->no_cache(false);
 
+// action args:
 $tag	= $this->unwrap_link($page);
+$user	= $this->get_user();
 
 $query =
 	'FROM ' . $this->prefix . 'page p, ' . $this->prefix . 'acl a ' .
@@ -44,7 +46,11 @@ $query =
 		'AND p.comment_on_id = 0 ' .
 		'AND p.page_id <> ' . (int) $this->page['page_id'] . ' ' .
 		"AND a.privilege = 'read' " .
-		"AND a.list = '*' " .
+		'AND ' .
+		($user
+			? "(a.list = '*' OR a.list = '$') "
+			: "a.list = '*' "
+		) .
 		'AND p.page_id = a.page_id ';
 
 $count = $this->db->load_single(
