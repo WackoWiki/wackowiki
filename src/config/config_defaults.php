@@ -104,7 +104,7 @@ $wacko_config_defaults = [
 	'max_page_size'					=> 2048 * 1024,
 	'edit_summary'					=> 0,
 	'minor_edit'					=> 0,
-	'section_edit'					=> 0,
+	'section_edit'					=> 1,
 	'review'						=> 0,
 
 	'enable_comments'				=> 1,
