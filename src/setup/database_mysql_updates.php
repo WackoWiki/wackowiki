@@ -38,7 +38,7 @@ $alter_cache_r6_0_2 = "ALTER TABLE {$pref}cache CHANGE name hash CHAR(40) NOT NU
 $alter_cache_r6_0_3 = "ALTER TABLE {$pref}cache DROP INDEX name, ADD INDEX idx_hash (hash)";
 
 // CATEGORY
-$alter_category_r6_0_1 = "ALTER TABLE {$pref}category CHANGE category_description category_description TEXT NOT NULL DEFAULT ''";
+$alter_category_r6_0_1 = "ALTER TABLE {$pref}category CHANGE category_description category_description TEXT NOT NULL";
 $alter_category_r6_0_2 = "ALTER TABLE {$pref}category CHANGE category category VARCHAR(255) NOT NULL DEFAULT ''";
 
 // CATEGORY ASSIGNMENT
