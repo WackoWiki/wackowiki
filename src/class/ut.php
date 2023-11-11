@@ -346,13 +346,9 @@ class Ut
 		return $n;
 	}
 
-	/*
-	 * For the purposes of this function, the encodings ISO-8859-1, ISO-8859-15, UTF-8, cp866, cp1251, cp1252, and KOI8-R are effectively equivalent,
-	 * provided the string itself is valid for the encoding, as the characters affected by htmlspecialchars() occupy the same positions in all of these encodings.
-	 */
 	static function html($string, $double_encode = true, $charset = HTML_ENTITIES_CHARSET): string
 	{
-		if (!$string)
+		if (empty($string) && $string !== '0')
 		{
 			return '';
 		}
