@@ -228,7 +228,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_json_decode($value)
 	{
-		return json_decode($value, 1);
+		return json_decode($value, true);
 	}
 
 	function filter_sp2nbsp($value)
