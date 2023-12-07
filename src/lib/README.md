@@ -13,7 +13,7 @@ The version and status of each is summarized below:
 | hashids			| Hashids			| 5.0.2		| unpatched |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
 | php-diff			| php-diff			| 2.4.0		| patched, see subdir |
-| phpmailer			| PHPMailer			| 6.8.0		| unpatched |
+| phpmailer			| PHPMailer			| 6.9.1		| unpatched |
 | phpthumb			| PhpThumb			| 2.2.1		| patched: various, see repo |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |
 | simplepie			| SimplePie			| 1.8.0		| unpatched |
