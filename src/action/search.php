@@ -249,38 +249,25 @@ $preview_text = function ($text, $limit, $hellip = true)
 
 $highlight_this = function ($text, $words)
 {
+	$count			= 0;
+	$hl_words		= [];
+	$text			= Ut::html($text);
 	$words			= trim($words);
-	$the_count		= 0;
 	$words_array	= explode(' ', $words);
 
-	// strip tags if preview is without HTML
-	$text 			= Ut::html($text);
-
-	foreach ($words_array as $word)
+	if ($words_array)
 	{
-		if (mb_strlen(trim($word)) != 0)
-		{
-			//exclude these words from being replaced
-			$exclude_list = ['word1', 'word2', 'word3'];
-		}
-
-		// Check if it's excluded
-		if (in_array(mb_strtolower($word), $exclude_list))
-		{
-			// skip
-		}
-		else
+		foreach ($words_array as $word)
 		{
 			// escape bad regex characters
-			$word		= preg_quote($word, '/');
-
-			// highlight uppercase and lowercase correctly
-			$text		= preg_replace('/(' . $word . ')/ui', '<mark class="highlight">$1</mark>', $text, -1, $count);
-			$the_count	= $count + $the_count;
+			$hl_words[] = preg_quote($word, '/');
 		}
+
+		$regex	= implode('|', $hl_words);
+		$text	= preg_replace('/(' . $regex . ')/ui', '<mark class="highlight">$1</mark>', $text, -1, $count);
 	}
 
-	return [$text, $the_count];
+	return [$text, $count];
 };
 
 // --------------------------------------------------------------------------------
