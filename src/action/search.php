@@ -23,6 +23,7 @@ Options:
 	[options=1]
 	[lang="en"]
 	[form=1]
+	[hl_simple=1]
 	[nomark=1]
 	[style=one of ("br","ul","ol","comma") ]
 	[scope=one of ("pages", "all")]
@@ -230,7 +231,6 @@ $get_line_with_phrase = function ($content, $phrase, $padding = 75, $insensitive
 // TODO: cut new line at the end without present keyword, e.g. ... stump text
 $preview_text = function ($text, $limit, $hellip = true)
 {
-	// trim text
 	$text = trim($text);
 
 	// if mb_strlen is smaller than limit return
@@ -247,9 +247,34 @@ $preview_text = function ($text, $limit, $hellip = true)
 	}
 };
 
-$highlight_this = function ($text, $words)
+// highlight only full words
+$highlight_terms = function ($text, $words)
 {
-	$count			= 0;
+	$boundaries		= '[\\p{Z}\\p{P}\\p{C}]';
+	$text			= Ut::html($text);
+	$words			= trim($words);
+	$words_array	= explode(' ', $words);
+
+	if ($words_array)
+	{
+		$pat_pre		= "(^|{$boundaries})";
+		$pat_post		= "({$boundaries}|$)";
+
+		foreach ($words_array as $word)
+		{
+			// escape bad regex characters
+			$word	= preg_quote($word, '/');
+
+			$pattern	= "/$pat_pre(" . $word . ")$pat_post/ui";
+			$text		= preg_replace($pattern, "\\1<mark class='highlight'>\\2</mark>\\3", $text);
+		}
+	}
+
+	return $text;
+};
+
+$highlight_simple = function ($text, $words)
+{
 	$hl_words		= [];
 	$text			= Ut::html($text);
 	$words			= trim($words);
@@ -263,17 +288,18 @@ $highlight_this = function ($text, $words)
 			$hl_words[] = preg_quote($word, '/');
 		}
 
-		$regex	= implode('|', $hl_words);
-		$text	= preg_replace('/(' . $regex . ')/ui', '<mark class="highlight">$1</mark>', $text, -1, $count);
+		$pattern	= implode('|', $hl_words);
+		$text	= preg_replace('/(' . $pattern . ')/ui', '<mark class="highlight">$1</mark>', $text);
 	}
 
-	return [$text, $count];
+	return $text;
 };
 
 // --------------------------------------------------------------------------------
 
 // set defaults
 $help		??= 0;
+$hl_simple	??= 0;
 $lang		??= '';
 $max		??= 10;	// (null) 50 -> 10 overwrites system default value!
 $nomark		??= 0;
@@ -394,21 +420,16 @@ if (mb_strlen($phrase) >= 3)
 				{
 					$tpl->delim = $n++;
 
-					$preview	= '';
-					$ccount		= false;
+					$context	= '';
 
 					// generate preview
 					if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 					{
 						$body		= $this->format($page['body'], 'cleanwacko');
-						// strip tags if preview is without HTML
-						#$body		 = preg_replace('/\s\s+/u', ' ', strip_tags($text));
 
 						$context	= $get_line_with_phrase($body, $phrase, $padding);
 						$context	= $preview_text($context, 500, 0);
-						$context	= $highlight_this($context, $phrase);
-						[$context, $ccount] = $context;
-						$preview	= $context;
+						$context	= $hl_simple ? $highlight_simple($context, $phrase) : $highlight_terms($context, $phrase);
 					}
 
 					$tpl->l_link		= $this->link('/' . $page['tag'], '', ($title ? $page['title'] : $page['tag']), '', false);
@@ -429,8 +450,7 @@ if (mb_strlen($phrase) >= 3)
 
 					if ($mode != 'topic')
 					{
-						#$tpl->l_count	= $ccount;
-						$tpl->l_preview	= $preview;
+						$tpl->l_preview	= $context;
 					}
 				}
 			}
@@ -449,4 +469,3 @@ if (mb_strlen($phrase) >= 3)
 
 	$nomark || $n || $tpl->none_phrase = $phrase;
 }
-
