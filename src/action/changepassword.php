@@ -152,6 +152,21 @@ $_POST && $this->show_must_go_on($code? ['secret_code' => $code] : []);
 
 if ($user)
 {
+	// check for members of Admins group
+	$is_admin = false;
+
+	if ($this->is_admin())
+	{
+		$is_admin = true;
+	}
+	else if (isset($this->db->groups['Admins']) && is_array($this->db->groups['Admins']))
+	{
+		if (in_array($user['user_id'], $this->db->groups['Admins']))
+		{
+			$is_admin = true;
+		}
+	}
+
 	// a. change password
 	$tpl->enter('c_');
 
@@ -168,7 +183,7 @@ if ($user)
 
 	$tpl->autocomplete		= $this->form_autocomplete_off();
 	$tpl->complexity		= $this->show_password_complexity();
-	$tpl->minchars			= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
+	$tpl->minchars			= $is_admin ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
 	$tpl->form				= $this->href();
 
 	$tpl->leave(); // c_
