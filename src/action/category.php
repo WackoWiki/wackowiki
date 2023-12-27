@@ -53,13 +53,13 @@ $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', 
 
 // set defaults
 $caption	??= 0;
+$help		??= 0;
 $ids		??= null;
 $lang		??= $this->page['page_lang'];
 $list		??= 1;
 $nomark		??= 0;
 $page		??= '/';
 $sort		??= 'abc';
-$type_id	??= OBJECT_PAGE;
 
 if ($help)
 {
