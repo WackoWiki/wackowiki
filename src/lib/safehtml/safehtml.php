@@ -42,7 +42,7 @@ use HTMLSax3\ {
  *
  * <b>Example:</b>
  * <pre>
- * $parser = new SafeHTML;
+ * $parser = new SafeHTML();
  * $result = $parser->parse($doc);
  * </pre>
  */
@@ -142,7 +142,7 @@ class SafeHTML
 	 */
 	public array $whiteProtocols = [
 		'ed2k',   'file', 'ftp',  'gopher', 'http',   'https',
-		'irc',    'mailto', 'news', 'nntp', 'telnet', 'webcal',
+		'irc',    'mailto', 's', 'nntp', 'telnet', 'webcal',
 		'xmpp',   'callto',
 	];
 
@@ -537,7 +537,7 @@ class SafeHTML
 	 *
 	 * Example:
 	 * <pre>
-	 * $safe = new SafeHTML;
+	 * $safe = new SafeHTML();
 	 * $safe->setAllowTags(['body']);
 	 * </pre>
 	 */
@@ -606,7 +606,7 @@ class SafeHTML
 		$doc = $this->repackUTF7($doc);
 
 		// Instantiate the parser
-		$parser = new HTMLSax3;
+		$parser = new HTMLSax3();
 
 		// Set up the parser
 		$parser->set_object($this);
