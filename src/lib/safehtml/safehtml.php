@@ -142,7 +142,7 @@ class SafeHTML
 	 */
 	public array $whiteProtocols = [
 		'ed2k',   'file', 'ftp',  'gopher', 'http',   'https',
-		'irc',    'mailto', 's', 'nntp', 'telnet', 'webcal',
+		'irc',    'mailto', 'news', 'nntp', 'telnet', 'webcal',
 		'xmpp',   'callto',
 	];
 
