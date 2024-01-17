@@ -285,7 +285,7 @@ class Http
 	{
 		if ($this->db->session_store == 1)
 		{
-			$sess = new SessionFileStore;
+			$sess = new SessionFileStore();
 			$sess->cf_file_path = CACHE_SESSION_DIR;
 		}
 		else

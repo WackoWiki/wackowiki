@@ -337,7 +337,7 @@ $select_form = function ($pages, $pagination, $tcount, $max, array $o) use ($tpl
 					continue;
 				}
 
-				$renderer	= new SideBySide;
+				$renderer	= new SideBySide();
 				$preview	= $diff->render($renderer);
 			}
 

@@ -349,19 +349,19 @@ if ($page_a && $page_b
 
 			if ($diffmode == 3)
 			{
-				$renderer = new SideBySide;
+				$renderer = new SideBySide();
 				// patched header
 				$tpl->diff = $diff->render($renderer);
 			}
 			else if ($diffmode == 4)
 			{
-				$renderer = new Unified;
+				$renderer = new Unified();
 				// patched header
 				$tpl->diff = $diff->render($renderer);
 			}
 			else if ($diffmode == 5)
 			{
-				$renderer = new Merged;
+				$renderer = new Merged();
 				// patched header
 				$tpl->diff = $diff->render($renderer);
 			}
@@ -370,11 +370,11 @@ if ($page_a && $page_b
 				if ($diffmode == 6)
 				{
 					// standard unified diff, useful for sending in emails or what
-					$renderer = new TextUnified;
+					$renderer = new TextUnified();
 				}
 				else
 				{
-					$renderer = new Context;
+					$renderer = new Context();
 				}
 
 				$tpl->diff =

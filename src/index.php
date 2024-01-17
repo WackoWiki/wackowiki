@@ -4,7 +4,7 @@ const IN_WACKO = 'wacko';
 include 'lib/mb_extends/mb_extends.php';
 include 'class/init.php';
 
-$db = new Settings;
+$db = new Settings();
 
 if ($db->ext_bad_behaviour)
 {
