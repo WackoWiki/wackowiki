@@ -24,7 +24,7 @@ $ap_translation = [
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'कृपया प्रशासनिक पासवर्ड दर्ज करें (यह भी सुनिश्चित करें कि आपके ब्राउज़र में कुकीज़ की अनुमति है)।',
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password hash in the configuration file and run the program again.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 

@@ -24,7 +24,7 @@ $ap_translation = [
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password hash in the configuration file and run the program again.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 

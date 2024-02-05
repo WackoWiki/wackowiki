@@ -23,8 +23,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Режим на възстановяване',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'NoRecoveryPassword'		=> 'Административната парола не е зададена!',
+	'NoRecoveryPasswordTip'		=> 'Забележка: Липсата на административна парола е заплаха за сигурността! Въведете хеш паролата си в конфигурационния файл и стартирайте програмата отново.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 

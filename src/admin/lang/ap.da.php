@@ -23,8 +23,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Gendannelsestilstand',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'NoRecoveryPassword'		=> 'Den administrative adgangskode er ikke angivet!',
+	'NoRecoveryPasswordTip'		=> 'Bemærk: Fraværet af en administrativ adgangskode er en trussel mod sikkerheden! Indtast dit password-hash i konfigurationsfilen, og kør programmet igen.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 

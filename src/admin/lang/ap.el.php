@@ -23,8 +23,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Λειτουργία ανάκτησης',
 	'Authorization'				=> 'Εξουσιοδότηση',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'NoRecoveryPassword'		=> 'Ο κωδικός πρόσβασης διαχειριστή δεν έχει καθοριστεί!',
+	'NoRecoveryPasswordTip'		=> 'Σημείωση: Η απουσία κωδικού πρόσβασης διαχειριστή αποτελεί απειλή για την ασφάλεια! Εισάγετε το hash του κωδικού πρόσβασης στο αρχείο ρυθμίσεων και εκτελέστε ξανά το πρόγραμμα.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
