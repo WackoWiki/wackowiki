@@ -110,6 +110,7 @@ $config_db['list_count']					= $config['list_count'];
 $config_db['log_default_show']				= $config['log_default_show'];
 $config_db['log_level']						= $config['log_level'];
 $config_db['log_purge_time']				= $config['log_purge_time'];
+$config_db['login_notice']					= $config['login_notice'];
 $config_db['login_page']					= $config['login_page'];
 $config_db['site_logo']						= $config['site_logo'];
 $config_db['logo_display']					= $config['logo_display'];

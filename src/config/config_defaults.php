@@ -289,6 +289,7 @@ $wacko_config_defaults = [
 
 	'session_length'				=> 30,	// cookie_expire_days
 	'session_notice'				=> 0,	// session termination notice
+	'login_notice'					=> 1,
 	'allow_persistent_cookie'		=> 1,
 
 	'enable_security_headers'		=> 1,

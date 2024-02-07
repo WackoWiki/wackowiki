@@ -6093,7 +6093,11 @@ class Wacko
 		$this->sess->restart();
 		$this->sess->sticky_login = 1;
 		$this->set_user($user);
-		$this->set_message(Ut::perc_replace($this->_t('WelcomeBack'), $user['user_name']), 'success');
+
+		if ($this->db->login_notice)
+		{
+			$this->set_message(Ut::perc_replace($this->_t('WelcomeBack'), $user['user_name']), 'success');
+		}
 	}
 
 	function session_notice($message): void
