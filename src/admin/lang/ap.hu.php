@@ -502,6 +502,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'Munkamenet befejezésének okának megjelenítése:',
 	'SessionNoticeInfo'				=> 'A munkamenet befejezésének okát jelzi.',
+	'LoginNotice'					=> 'Bejelentkezési értesítés:',
+	'LoginNoticeInfo'				=> 'Megjeleníti a bejelentkezési értesítést.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

@@ -499,6 +499,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'Mostrar la causa de finalización de la sesión:',
 	'SessionNoticeInfo'				=> 'Indica la causa de la finalización de la sesión.',
+	'LoginNotice'					=> 'Aviso de inicio de sesión:',
+	'LoginNoticeInfo'				=> 'Muestra un aviso de inicio de sesión.',
 
 	'RewriteMode'					=> 'Usar <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'Si su servidor web admite esta función, gire para obtener "hermosas" las direcciones de las páginas.<br>

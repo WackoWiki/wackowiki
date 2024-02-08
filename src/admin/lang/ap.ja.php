@@ -505,6 +505,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'セッションの終了原因を表示:',
 	'SessionNoticeInfo'				=> 'セッション終了の原因を示す。',
+	'LoginNotice'					=> 'ログイン通知：',
+	'LoginNoticeInfo'				=> 'ログイン通知を表示します。',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

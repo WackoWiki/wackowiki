@@ -502,6 +502,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'Показване на причината за прекратяване на сесията:',
 	'SessionNoticeInfo'				=> 'Посочва причината за прекратяване на сесията.',
+	'LoginNotice'					=> 'Известие за влизане:',
+	'LoginNoticeInfo'				=> 'Показва известие за влизане в системата.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

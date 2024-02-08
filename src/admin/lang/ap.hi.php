@@ -505,6 +505,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'सत्र समाप्ति कारण दिखाएं:',
 	'SessionNoticeInfo'				=> 'सत्र समाप्ति का कारण बताता है।',
+	'LoginNotice'					=> 'Login notice:',
+	'LoginNoticeInfo'				=> 'Displays login notice.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

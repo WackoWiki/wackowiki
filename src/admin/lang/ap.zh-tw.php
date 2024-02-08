@@ -505,6 +505,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> '顯示會話終止原因：',
 	'SessionNoticeInfo'				=> '指示會話終止的原因。',
+	'LoginNotice'					=> 'Login notice:',
+	'LoginNoticeInfo'				=> 'Displays login notice.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

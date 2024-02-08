@@ -42,6 +42,7 @@ function admin_config_system($engine, $module)
 		$config['log_level']				= (int) $_POST['log_level'];
 		$config['log_default_show']			= (int) $_POST['log_default_show'];
 		$config['log_purge_time']			= (int) $_POST['log_purge_time'];
+		$config['login_notice']				= (int) $_POST['login_notice'];
 		$config['anonymize_ip']				= (int) $_POST['anonymize_ip'];
 		$config['session_notice']			= (int) $_POST['session_notice'];
 		$config['session_store']			= (int) $_POST['session_store'];

@@ -505,6 +505,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> '세션 종료 원인 표시:',
 	'SessionNoticeInfo'				=> '세션 종료의 원인을 나타냅니다.',
+	'LoginNotice'					=> '로그인 알림:',
+	'LoginNoticeInfo'				=> '로그인 알림: 로그인 알림을 표시합니다.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

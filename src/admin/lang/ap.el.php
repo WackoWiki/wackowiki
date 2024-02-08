@@ -502,6 +502,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'Εμφάνιση αιτίας τερματισμού συνόδου:',
 	'SessionNoticeInfo'				=> 'Υποδεικνύει την αιτία τερματισμού της συνόδου.',
+	'LoginNotice'					=> 'Ειδοποίηση σύνδεσης:',
+	'LoginNoticeInfo'				=> 'Εμφανίζει μια ειδοποίηση σύνδεσης.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

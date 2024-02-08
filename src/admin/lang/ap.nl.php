@@ -500,6 +500,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'Toon sessie beëindiging oorzaak:',
 	'SessionNoticeInfo'				=> 'Geeft de oorzaak van de sessiebeëindiging aan.',
+	'LoginNotice'					=> 'Aanmeldingsbericht:',
+	'LoginNoticeInfo'				=> 'Geeft een aanmeldingsbericht weer.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

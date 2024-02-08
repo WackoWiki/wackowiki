@@ -504,6 +504,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'Zeige Ursache für Sitzungsabbruch:',
 	'SessionNoticeInfo'				=> 'Gibt die Ursache für die Beendigung der Sitzung an.',
+	'LoginNotice'					=> 'Anmeldehinweis:',
+	'LoginNoticeInfo'				=> 'Zeigt einen Anmeldehinweis an.',
 
 	'RewriteMode'					=> 'Verwende <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'Wenn der Webserver diese Funktion unterstützt, aktiviere sie, um "schöne" Seitenadressen zu erhalten.<br>

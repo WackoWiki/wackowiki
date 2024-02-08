@@ -487,6 +487,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> '显示会话终止原因：',
 	'SessionNoticeInfo'				=> '表示会话终止的原因。',
+	'LoginNotice'					=> '登录通知：',
+	'LoginNoticeInfo'				=> '显示登录通知。',
 
 	'RewriteMode'					=> '使用 <code>mod_rewrite</code>：',
 	'RewriteModeInfo'				=> '如果您的网络服务器支持此功能，请转而获取“漂亮”的页面地址。<br> <span class="cite">该值可能会在运行时被设置类覆盖，无论是否关闭， 如果 HTTP_MOD_REWRITE 开启。',

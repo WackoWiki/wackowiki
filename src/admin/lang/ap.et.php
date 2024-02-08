@@ -502,6 +502,8 @@ $ap_translation = [
 	],
 	'SessionNotice'					=> 'Näita seansi lõpetamise põhjust:',
 	'SessionNoticeInfo'				=> 'Näitab sessiooni lõpetamise põhjust.',
+	'LoginNotice'					=> 'Sisselogimise teade:',
+	'LoginNoticeInfo'				=> 'Kuvab sisselogimise teate.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
