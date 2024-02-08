@@ -1,4 +1,4 @@
-#THIS IS A FORK!  You probably are looking for WackoWiki/wackowiki...#
+# THIS IS A FORK!  You probably are looking for WackoWiki/wackowiki... #
 
 # WackoWiki
 
