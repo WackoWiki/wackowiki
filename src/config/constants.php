@@ -53,8 +53,10 @@ const GLOB_ALL						= '{,.}*';				// for glob()
 const ADD_NO_DIV					= '*';					// for Wacko::method()
 const SYSTEM_LANG					= -1;					// for Wacko::_t()
 
+const COOKIE_SAMESITE				= 'Lax';				// Strict, Lax, None
 const AUTH_TOKEN					= 'Auth';
 const GUEST							= 'guest@wacko';
+
 const INTERCOM_MAX_SIZE				= 262144;
 
 const LOAD_NOCACHE					= false;

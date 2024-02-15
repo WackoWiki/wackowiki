@@ -34,10 +34,10 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public int		$cf_cookie_lifetime		= 0;		// lifetime of the cookie in seconds which is sent to the browser. The value 0 means "until the browser is closed."
 	public string	$cf_cookie_path			= '/';		// path to set in the session cookie
 	public string	$cf_cookie_domain		= '';		// domain to set in the session cookie. '' for host name of the server which generated the cookie, according to cookies specification
-												// .php.net - to make cookies visible on all subdomains
+														// .php.net - to make cookies visible on all subdomains
 	public bool		$cf_cookie_secure		= false;	// cookie should only be sent over secure connections.
 	public bool		$cf_cookie_httponly		= true;		// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
-	public string	$cf_cookie_samesite		= 'Strict';	// asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
+	public string	$cf_cookie_samesite		= COOKIE_SAMESITE;	// 'Strict' asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
 	public string	$cf_referer_check		= '';
 	public string	$cf_cache_limiter		= 'none';
 	public			$cf_cache_expire		= 180*60;	// ttl for cached session pages in seconds
