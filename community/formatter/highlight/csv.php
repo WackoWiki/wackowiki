@@ -72,11 +72,11 @@ foreach ($csv_lines as $i => $line)
 			continue;
 		}
 
-		// if a cell is blank, echo &nbsp;
+		// if a cell is blank, echo NBSP
 		if (preg_match('/^\s*$/', $field))
 		{
 			$tpl->t_class	= $class[$r];
-			$tpl->t_cell	= '&nbsp;';
+			$tpl->t_cell	= "\u{00A0}";
 			continue;
 		}
 		// extract the cell out of it's quotes
@@ -97,7 +97,7 @@ foreach ($csv_lines as $i => $line)
 			{
 				$linked = $cell;
 
-				foreach ($all_links[1] as $n => $camel_link)
+				foreach ($all_links[1] as $camel_link)
 				{
 					$linked = preg_replace('/\[\[' . $camel_link . '\]\]/', $this->link($camel_link), $linked);
 				}
@@ -107,7 +107,7 @@ foreach ($csv_lines as $i => $line)
 			{
 				$linked = $cell;
 
-				foreach ($all_links[1] as $n => $url_link)
+				foreach ($all_links[1] as $url_link)
 				{
 					if(preg_match('/^(\S+)(\s+(.+))?$/us', $url_link, $matches))
 					{
