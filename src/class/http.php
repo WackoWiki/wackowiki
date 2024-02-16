@@ -468,7 +468,6 @@ class Http
 	{
 		// to be replaced then by no_cache or what
 		header('Cache-Control: public');
-		header('Pragma: cache');
 	}
 
 	// negotiate language with user's browser

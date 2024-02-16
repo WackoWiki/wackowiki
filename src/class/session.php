@@ -486,6 +486,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 				case 'private':
 					header('Expires: ' . Ut::http_date(-1)); // looong ago
+					header('Cache-Control: max-age=0');
 					// FALLTHRU
 
 				case 'private_no_expire':
