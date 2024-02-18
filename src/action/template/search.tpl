@@ -58,7 +58,7 @@
 			[= l _ =
 				[ ' delim | void ' ]
 				<li>
-					['' l SearchItem '']
+					[ '' l SearchItem '' ]
 				</li>
 			=]
 			</ol>
@@ -66,13 +66,13 @@
 		[= comma _ =
 			[= l _ =
 				[ ' delim | list '' , ' ]
-				['' l SearchItem '']
+				[ '' l SearchItem '' ]
 			=]
 		=]
 		[= br _ =
 			[= l _ =
 				[ ' delim | list '' '<br>' ' ]
-				['' l SearchItem '']
+				[ '' l SearchItem '' ]
 			=]
 		=]
 		[= emark _ =

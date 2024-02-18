@@ -139,7 +139,7 @@ first really BIG template written
 		[ ''' nochanges UsersNA2 ''' ]
 		[= changes _ =
 			<small>[ '' desc userChangesDesc '' ][ '' asc userChangesAsc '' ]</small>
-			['' pagination '']<br>
+			[ '' pagination '' ]<br>
 			<ul class="ul-list hl-line">
 				[= li _ =
 					<li>
@@ -175,7 +175,7 @@ first really BIG template written
 		[ ''' nopages UsersNA2 ''' ]
 		[= pages _ =
 			<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
-			['' pagination '']<br>
+			[ '' pagination '' ]<br>
 			<ul class="ul-list hl-line">
 				[= li _ =
 					<li><small>[ ' created | time_format ' ]</small>  — [ ' link ' ]</li>
@@ -196,7 +196,7 @@ first really BIG template written
 								<small>[ ' created | time_format ' ]</small>
 								— [ ' link ' ]
 								. . . . . . . . . . . . . . . .
-								[ ' onpage ' ]</span>['' // TODO refactor! '']
+								[ ' onpage ' ]</span>[ '' // TODO refactor! '' ]
 								[ ' descr ' ]
 							</li>
 						=]
@@ -225,7 +225,7 @@ first really BIG template written
 		<br>
 	=]
 	[= form _ =
-		['' // user filter form '']
+		[ '' // user filter form '' ]
 		<form action="[ ' href ' ]" method="get" name="search_user">
 			[ ' href | hide_page ' ]
 			[= hid _ =
@@ -242,7 +242,7 @@ first really BIG template written
 			</table><br>
 		</form>
 	=]
-	['' pagination '']
+	[ '' pagination '' ]
 	<table class="user-table lined hl-line nowrap">
 		<colgroup>
 			<col span="1">
@@ -256,7 +256,7 @@ first really BIG template written
 		<thead>
 			<tr>
 				[= s _ =
-					<th><a href="[ ' link ' ]">[ ' what ' ][''' arrow sortsArr ''']</a></th>
+					<th><a href="[ ' link ' ]">[ ' what ' ][ ''' arrow sortsArr ''' ]</a></th>
 				=]
 			</tr>
 		</thead>
@@ -279,7 +279,7 @@ first really BIG template written
 	[= none _ =
 		<br>[ ' _t: UsersNoMatching ' ]
 	=]
-	['' pagination '']
+	[ '' pagination '' ]
 
 [== sortsArr ==]
 &nbsp;[ '' a | replace desc ↑ asc ↓ '' ]

@@ -11,7 +11,7 @@ _common include file for themes
 		<meta name="theme-color" content="[ ' color | e ' ]">
 	=]
 	[= norobots _ =
-		['' nonstatic // dummy to make pattern non-static '']
+		[ ' nonstatic // dummy to make pattern non-static ' ]
 		<meta name="robots" content="noindex, nofollow">
 	=]
 	[= page _ =

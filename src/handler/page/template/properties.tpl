@@ -109,7 +109,7 @@
 		<div class="page-settings">
 		[= f GenOwner =
 			<form action="[ ' href: properties ' ]" method="post" name="general_properties">
-				[' csrf: general_properties ']
+				[ ' csrf: general_properties ' ]
 				<table class="properties form-tbl">
 					<colgroup>
 						<col span="1">
@@ -132,7 +132,7 @@
 								<textarea id="keywords" name="keywords" class="cols-50" rows="4" cols="50" maxlength="250">[ ' page.keywords | e ' ]</textarea>
 								[= categories _ =
 									<br>
-									['' html '']
+									[ '' html '' ]
 								=]
 							</td>
 						</tr>
