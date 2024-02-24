@@ -16,7 +16,7 @@
 			</div>
 		</li>
 		=]
-	</ul>	
+	</ul>
 <!--/notypo-->
 </ignore>
 

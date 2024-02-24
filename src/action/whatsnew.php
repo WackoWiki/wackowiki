@@ -74,7 +74,7 @@ $pages2 = $this->db->load_all(
 	'ORDER BY modified DESC ' .
 	'LIMIT ' . ($max * 2), true);
 
-// loading uloads
+// loading uploads
 $files = $this->db->load_all(
 	'SELECT f.page_id, p.owner_id, p.user_id, p.tag, f.created, f.modified, f.file_name AS title, f.file_id AS comment_on_id, 0 AS ip, f.created AS date, f.file_description AS edit_note, p.page_lang, f.file_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 2 AS ctype, f.deleted ' .
 	'FROM ' . $prefix . 'file f ' .

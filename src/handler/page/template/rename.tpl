@@ -40,7 +40,7 @@
 
 [ === massLog === ]
 <strong>[ ' mode ' ]</strong><br><br>
-[' log ']
+[ ' log ' ]
 
 [ === log === ]
 <ol>

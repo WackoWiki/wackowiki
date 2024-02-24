@@ -24,7 +24,7 @@
 			</tr>
 		</table>
 
-		[''' include // <--- output of Users sub-action ''']
+		[ ''' include // <--- output of Users sub-action ''' ]
 	=]
 	[= l GroupList =
 		[== // usergroup filter form ==]
@@ -42,10 +42,10 @@
 		</table>
 		<br>
 		<table class="user-table lined hl-line nowrap">
-			['' pagination '']
+			[ '' pagination '' ]
 			<tr>
 				[= s _ =
-					<th><a href="[ ' link ' ]">[ ' what ' ][''' arrow sortsArr ''']</a></th>
+					<th><a href="[ ' link ' ]">[ ' what ' ][ ''' arrow sortsArr ''' ]</a></th>
 				=]
 			</tr>
 			[= none _ =
@@ -60,13 +60,13 @@
 					=]
 				</tr>
 			=]
-			['' pagination '']
+			[ '' pagination '' ]
 		</table>
 	=]
 
 
 [== sortsArr ==]
- ['' a | replace desc ↑ asc ↓ '']
+ [ '' a | replace desc ↑ asc ↓ '' ]
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>

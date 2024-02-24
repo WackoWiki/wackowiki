@@ -10,7 +10,7 @@
 			[ ' _t: DidntEditAnyPage ' ]
 		=]
 
-		[''' // pagination ''']
+		[ '' // pagination '' ]
 
 		<ul class="ul-list">
 			[= page _ =

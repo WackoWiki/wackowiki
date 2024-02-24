@@ -22,7 +22,7 @@
 						<strong>— [ ' user ' ]</strong> ([ ' created | time_format ' ][ ' edit CmtEdited ' ])&nbsp;&nbsp;&nbsp;
 					</span>
 					<br>
-					['' body '']
+					[ ' body ' ]
 				</article>
 			=]
 		</section>

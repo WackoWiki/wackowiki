@@ -79,7 +79,7 @@ class Feed
 	{
 		$limit	= 30;
 		$name	= $this->xml_name('changes');
-		$count	= '';
+		$count	= 0;
 
 		$this->engine->canonical = true;
 
@@ -237,7 +237,7 @@ class Feed
 	{
 		$limit	= 20;
 		$name	= $this->xml_name('comments');
-		$count	= '';
+		$count	= 0;
 		$access	= '';
 
 		$this->engine->canonical	= true;

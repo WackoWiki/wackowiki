@@ -100,6 +100,6 @@
 [ === similarTags === ]
 <ol>
 	[= l _ =
-		<li>['' page '']</li>
+		<li>[ '' page '' ]</li>
 	=]
 </ol>

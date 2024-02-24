@@ -65,7 +65,7 @@
 						[ ' csrf: add_comment ' ]
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
 
-						['' // load WikiEdit '']
+						[ '' // load WikiEdit '' ]
 						<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
 						<script src="[ ' db: base_path ' ]js/wikiedit.js"></script>

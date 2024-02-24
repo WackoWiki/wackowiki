@@ -443,7 +443,7 @@
 	=]
 	[= n _ =
 		<br>
-		['' pagination '']
+		[ '' pagination '' ]
 		<table class="tbl-types usertable">
 			<tr>
 				<th>[ ' _t: ContactNames ' ]</th>
@@ -454,7 +454,7 @@
 			</tr>
 			=]
 		</table>
-		['' pagination '']
+		[ '' pagination '' ]
 
 		<aside class="sidebar cite">
 			[ ' _t: ClickContact2 ' ]

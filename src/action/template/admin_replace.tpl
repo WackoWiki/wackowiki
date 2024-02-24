@@ -79,7 +79,7 @@
 		[= l _ =
 			[ ' delim | void ' ]
 			<li>
-				['' l SearchItem '']
+				[ '' l SearchItem '' ]
 			</li>
 		=]
 		</ol>

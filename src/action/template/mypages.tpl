@@ -10,7 +10,7 @@
 			[ ' _t: NoPagesFound ' ]
 		=]
 
-		[''' // pagination ''']
+		[ '' // pagination '' ]
 
 		<ul class="ul-list">
 			[= page _ =

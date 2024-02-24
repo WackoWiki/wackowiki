@@ -4,7 +4,7 @@
 .include ../../../_common/_header.tpl
 
 [ === DefaultHead === ]
-[''' h HtmlHead ''']
+[ ''' h HtmlHead ''' ]
 <body>
 <div id="mainwrapper">
 <header[ ' dir ' ]>
@@ -70,7 +70,7 @@
 					<li class="dropdown">
 						<a href="#" id="menu-more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-overflow-menu"></a>
 						<ul class="dropdown_menu">
-							['' menu menuList '']
+							[ '' menu menuList '' ]
 						</ul>
 					</li>
 				=]
@@ -108,8 +108,8 @@
 				[= droptab _ =
 					<li class="dropdown"><a href="#" id="handler-more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown-arrow">▼</span></a>
 						<ul class="dropdown_menu">
-							['' tab TabList '']
-							['' // last empty '']
+							[ '' tab TabList '' ]
+							[ '' // last empty '' ]
 							<li></li>
 						</ul>
 					</li>
