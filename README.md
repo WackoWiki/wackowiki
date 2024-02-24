@@ -1,5 +1,3 @@
-# THIS IS A FORK!  You probably are looking for WackoWiki/wackowiki... #
-
 # WackoWiki
 
 WackoWiki is a light and easy to install multilingual Wiki-engine. 
