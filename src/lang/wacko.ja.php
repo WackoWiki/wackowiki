@@ -980,6 +980,7 @@ $wacko_translation = [
 
 	// pagination
 	'ToOverview'				=> '概要に戻る',
+	'Overview'					=> '概要',
 	'ToThePage'					=> 'To page:',
 	'Next'						=> '次へ',
 	'Prev'						=> '前へ',

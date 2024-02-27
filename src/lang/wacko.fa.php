@@ -979,7 +979,8 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
 
 	// pagination
-	'ToOverview'				=> 'Back to overview',
+	'ToOverview'				=> 'بازگشت به نمای کلی',
+	'Overview'					=> 'بررسی اجمالی',
 	'ToThePage'					=> 'به صفحه',
 	'Next'						=> 'بعدی',
 	'Prev'						=> 'قبلی',
