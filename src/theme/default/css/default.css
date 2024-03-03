@@ -2387,6 +2387,24 @@ li.m-source img {
 	padding-left: 10px;
 }
 
+/* navigation action ------------- */
+.nav-chapter {
+	background-color: rgb(241, 241, 241);
+	padding: 10px 10px;
+}
+.nav-chapter td:nth-child(1) {
+	text-align: left;
+	white-space: nowrap;
+}
+.nav-chapter td:nth-child(2) {
+	text-align: center;
+	width: 100%;
+}
+.nav-chapter td:nth-child(3) {
+	text-align: right;
+	white-space: nowrap;
+}
+
 /* upload action ------------- */
 .upload-table {
 	border-spacing: 3px; 
