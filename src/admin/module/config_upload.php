@@ -24,7 +24,7 @@ function admin_config_upload($engine, $module)
 	$user_groups = $engine->db->load_all(
 		'SELECT group_name
 		FROM ' . $prefix . 'usergroup
-		ORDER BY BINARY group_name');
+		ORDER BY group_name');
 
 	foreach ($user_groups as $group)
 	{
