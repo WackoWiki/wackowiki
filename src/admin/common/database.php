@@ -401,7 +401,7 @@ function get_table($engine, $table, $drop = true): string
 		"CHARSET={$engine->db->db_charset} " .
 		"COLLATE={$engine->db->db_collation};";
 
-	return ($schema_create);
+	return $schema_create;
 }
 
 // extract and compress table dump into the out file

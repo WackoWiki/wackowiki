@@ -26,15 +26,18 @@ Options:
 		tag of previous chapter
 	[next="NextPage"]
 		tag of next chapter
+	[title=0|1]
+		uses page title for links
 EOD;
 
 // set defaults
-$help			??= 0;
-$main			??= '';
-$next			??= '';
-$prev			??= '';
-$table			??= 1;
-$track			??= true; // seems to have no effect
+$help		??= 0;
+$main		??= '';
+$next		??= '';
+$prev		??= '';
+$table		??= 1;
+$title		??= 0;
+$track		??= true; // seems to have no effect
 
 
 if ($help)
@@ -109,17 +112,27 @@ if (!$__next)
 	$__next['title']	= '';
 }
 
+// link text
+$__main['text'] = '↑ ' .	($title ? $__main['title'] : $this->_t('Overview'));
+$__prev['text'] = '« ' .	($title ? $__prev['title'] : $this->_t('Back'));
+$__next['text'] =			($title ? $__next['title'] : $this->_t('Next'))		. ' »';
+
+$__main['title'] = ($title ? '' : $__main['title']);
+$__prev['title'] = ($title ? '' : $__prev['title']);
+$__next['title'] = ($title ? '' : $__next['title']);
+
+// define navigation links
 $tpl->enter($table ? 'tbl_' : 'div_');
-$tpl->main_link		= $this->link('/' . $__main['tag'], '', '↑ ' . $this->_t('Overview'),	$__main['title'], $track, true, false);
+$tpl->main_link			= $this->link('/' . $__main['tag'], '', $__main['text'], $__main['title'], $track, true, false);
 
 if ($prev)
 {
-	$tpl->prev_link		= $this->link('/' . $__prev['tag'], '', '« ' . $this->_t('Back'),		$__prev['title'], $track, true, false);
+	$tpl->prev_link		= $this->link('/' . $__prev['tag'], '', $__prev['text'], $__prev['title'], $track, true, false);
 }
 
 if ($next)
 {
-	$tpl->next_link		= $this->link('/' . $__next['tag'], '', $this->_t('Next') . ' »',		$__next['title'], $track, true, false);
+	$tpl->next_link		= $this->link('/' . $__next['tag'], '', $__next['text'], $__next['title'], $track, true, false);
 }
 
 if ($prev & $next)
