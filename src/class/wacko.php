@@ -3555,18 +3555,18 @@ class Wacko
 
 		if ($width || $height)
 		{
-			$width = match(1){
-				preg_match('/^\d+$/', $width)	=> 'px',
+			$_width = match(1){
+				preg_match('/^\d+$/', $width)	=> $width . 'px',
 				default							=> 'auto',
 			};
 
-			$height = match(1){
-				preg_match('/^\d+$/', $height)	=> 'px',
+			$_height = match(1){
+				preg_match('/^\d+$/', $height)	=> $height . 'px',
 				default							=> 'auto',
 			};
 
 			// uses style="..."
-			$scale	= ' style=" width: ' . $width . '; height: ' . $height . ';"';
+			$scale	= ' style=" width: ' . $_width . '; height: ' . $_height . ';"';
 		}
 
 		// get alignment type
