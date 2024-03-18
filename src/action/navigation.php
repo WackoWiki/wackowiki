@@ -82,11 +82,11 @@ foreach ($pages as $page)
 	{
 		$__prev = $page;
 	}
-	if ($page['tag'] == $_main)
+	else if ($page['tag'] == $_main)
 	{
 		$__main = $page;
 	}
-	if ($page['tag'] == $_next)
+	else if ($page['tag'] == $_next)
 	{
 		$__next = $page;
 	}
@@ -117,9 +117,9 @@ $__main['text'] = '↑ ' .	($title ? $__main['title'] : $this->_t('Overview'));
 $__prev['text'] = '« ' .	($title ? $__prev['title'] : $this->_t('Back'));
 $__next['text'] =			($title ? $__next['title'] : $this->_t('Next'))		. ' »';
 
-$__main['title'] = ($title ? '' : $__main['title']);
-$__prev['title'] = ($title ? '' : $__prev['title']);
-$__next['title'] = ($title ? '' : $__next['title']);
+$__main['title'] =			($title ? '' : $__main['title']);
+$__prev['title'] =			($title ? '' : $__prev['title']);
+$__next['title'] =			($title ? '' : $__next['title']);
 
 // define navigation links
 $tpl->enter($table ? 'tbl_' : 'div_');
