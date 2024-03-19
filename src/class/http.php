@@ -453,7 +453,6 @@ class Http
 		// disable browser cache for page
 		if (!headers_sent())
 		{
-			header('Expires: ' . Ut::http_date(-1));						// Date in the past
 			header('Last-Modified: ' . Ut::http_date());					// always modified
 			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
 			header('Cache-Control: post-check=0, pre-check=0', false);
@@ -786,11 +785,9 @@ class Http
 		{
 			$age = (int)($age * DAYSECS);
 			header('Cache-Control: public, max-age=' . $age);
-			header('Expires: ' . Ut::http_date(time() + $age));
 		}
 		else
 		{
-			header('Expires: ' . Ut::http_date(-1));
 			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 		}
 
