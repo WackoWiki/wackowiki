@@ -104,7 +104,6 @@ class Http
 				'query		= ' . $this->db->q($this->query) . ', ' .
 				'cache_lang	= ' . $this->db->q($this->lang) . ', ' .	// user lang NOT user agent lang NOR page lang!
 				'cache_time	= UTC_TIMESTAMP()');
-
 	}
 
 	// Invalidate the page cache
@@ -123,7 +122,7 @@ class Http
 
 			if ($params)
 			{
-				// Ut::dbg('invalidate_page', $page);
+				# Ut::dbg('invalidate_page', $page);
 
 				$past = time() - $this->db->cache_ttl - 1;
 
@@ -137,7 +136,7 @@ class Http
 						++$n;
 					}
 
-					// Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
+					# Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 				}
 
 				$this->db->sql_query(
@@ -152,6 +151,7 @@ class Http
 	private function normalize_page($page): array
 	{
 		$page = str_replace(['\\', "'", '_'], '', $page);
+
 		return [$page, hash('sha1', $page)];
 	}
 
@@ -189,7 +189,7 @@ class Http
 		// check cache
 		if ($cached_page = $this->load_page($mtime))
 		{
-			// Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+			# Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
 			$gmt	= Ut::http_date($mtime);
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
@@ -200,14 +200,14 @@ class Http
 				$lastm = substr($lastm, 0, $p);
 			}
 
-			if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD')
+			if (in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD']))
 			{
 				if (!$lastm && !$etag);
 				else if ($lastm && $gmt != $lastm);
 				else if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
-					// Ut::dbg('not modified');
+					# Ut::dbg('not modified');
 					$this->status(304);
 					$this->terminate();
 				}
@@ -230,8 +230,8 @@ class Http
 				header('Last-Modified: ' . $gmt);
 				header('ETag: "' . $gmt . '"');
 
-				//header('Content-Length: '.strlen($cached));
-				//header('Cache-Control: max-age=0');
+				# header('Content-Length: ' . strlen($cached));
+				# header('Cache-Control: max-age=0');
 
 				echo $cached_page;
 
@@ -253,7 +253,10 @@ class Http
 	{
 		$this->method	= $method;
 
-		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
+		if ($this->db->cache
+			&& $_SERVER['REQUEST_METHOD'] != 'POST'
+			&& $method != 'edit'
+			&& $method != 'watch')
 		{
 			// cache only for anonymous user
 			if (!isset($this->sess->user_profile))
@@ -733,7 +736,7 @@ class Http
 		{
 			if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
 			{
-				// Ut::dbg('not modified');
+				# Ut::dbg('not modified');
 				$this->status(304);
 				return;
 			}

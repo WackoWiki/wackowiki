@@ -46,7 +46,8 @@ class UriRouter
 			{
 				$methods[] = pathinfo($method, PATHINFO_FILENAME);
 			}
-			// Ut::dbg('methods', $methods);
+
+			# Ut::dbg('methods', $methods);
 
 			$this->config = $this->read_config($conf_file, ['method' => implode('|', $methods)]);
 
