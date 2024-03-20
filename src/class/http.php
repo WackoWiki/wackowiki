@@ -455,7 +455,6 @@ class Http
 		{
 			header('Last-Modified: ' . Ut::http_date());					// always modified
 			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
-			header('Cache-Control: post-check=0, pre-check=0', false);
 		}
 		// STS: check into session nocache code!
 
@@ -788,7 +787,7 @@ class Http
 		}
 		else
 		{
-			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+			header('Cache-Control: no-store, no-cache, must-revalidate');
 		}
 
 		// protecting against XSS in SVG
