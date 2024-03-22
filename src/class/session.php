@@ -492,7 +492,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 					break;
 
 				case 'nocache':
-					header('Cache-Control: no-store, no-cache, must-revalidate');
+					header('Cache-Control: no-store');
 					return; // suppress last-modified
 
 				default:
