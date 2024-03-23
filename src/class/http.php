@@ -191,21 +191,29 @@ class Http
 		{
 			# Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
-			$gmt	= Ut::http_date($mtime);
-			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
-			$lastm	= @$_SERVER['HTTP_IF_MODIFIED_SINCE'];
-
-			if ($lastm && $p = strpos($lastm, ';'))
-			{
-				$lastm = substr($lastm, 0, $p);
-			}
-
 			if (in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD']))
 			{
-				if (!$lastm && !$etag);
-				else if ($lastm && $gmt != $lastm);
-				else if ($etag && $gmt != trim($etag, '\"'));
-				else
+				$client_etag			= !empty($_SERVER['HTTP_IF_NONE_MATCH'])		? trim($_SERVER['HTTP_IF_NONE_MATCH'])		: null;
+				$client_last_modified	= !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])	: null;
+				$client_accept_encoding	= $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '';
+				$identifier				= '';
+
+				$server_last_modified	= Ut::http_date($mtime);
+				$server_etag_raw		= hash('sha1', $cached_page . $client_accept_encoding . $identifier);
+				$server_etag			= '"' . $server_etag_raw . '"';
+
+				header('Last-Modified: '	. $server_last_modified);
+				header('ETag: '				. $server_etag);
+				header('Cache-Control: max-age=10800');
+				header('Vary: Accept-Encoding');
+
+				$matching_last_modified	= $client_last_modified == $server_last_modified;
+				$matching_etag			= $client_etag && strpos($client_etag, $server_etag_raw) !== false;
+				$strict					= false;
+
+				if (($client_last_modified && $client_etag) || $strict
+					? $matching_last_modified && $matching_etag
+					: $matching_last_modified || $matching_etag)
 				{
 					# Ut::dbg('not modified');
 					$this->status(304);
@@ -226,12 +234,6 @@ class Http
 				}
 
 				ini_set('default_charset', null);
-
-				header('Last-Modified: ' . $gmt);
-				header('ETag: "' . $gmt . '"');
-
-				# header('Content-Length: ' . strlen($cached));
-				# header('Cache-Control: max-age=0');
 
 				echo $cached_page;
 
@@ -454,7 +456,7 @@ class Http
 		if (!headers_sent())
 		{
 			header('Last-Modified: ' . Ut::http_date());					// always modified
-			header('Cache-Control: no-store');	// HTTP 1.1
+			header('Cache-Control: no-store');
 		}
 		// STS: check into session nocache code!
 
@@ -628,7 +630,7 @@ class Http
 
 		if (!headers_sent())
 		{
-			header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' ' . $code . ' ' . $text[$code], true, $code);
+			header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1') . ' ' . $code . ' ' . $text[$code], true, $code);
 		}
 	}
 

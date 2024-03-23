@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-header('Content-type: text/xml');
+header('Content-type: text/xml; charset=utf-8');
 
 $tpl->charset	= $this->get_charset();
 $tpl->tag		= $this->tag;

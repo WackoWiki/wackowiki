@@ -16,7 +16,7 @@ class Installer
 		// check for missing setup folder
 		if (!file_exists('setup/header.php'))
 		{
-			header('HTTP/1.0 503 Service Unavailable');
+			header('HTTP/1.1 503 Service Unavailable');
 			die('WackoWiki fatal error: setup/ folder is missing or empty. Please add the missing setup folder in order to upgrade your WackoWiki installation.');
 		}
 
