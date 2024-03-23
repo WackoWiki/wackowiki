@@ -729,19 +729,30 @@ class Http
 			return 403;
 		}
 
+		if ($age > 0)
+		{
+			$age = (int)($age * DAYSECS);
+			header('Cache-Control: max-age=' . $age);
+		}
+		else
+		{
+			header('Cache-Control: no-store');
+		}
+
 		$from = 0;
 		$to = $size;
 
 		if ($age >= 0)
 		{
+			header('Last-Modified: ' . Ut::http_date($mtime));
+
 			if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
 			{
 				# Ut::dbg('not modified');
+				header('Vary: Accept-Encoding');
 				$this->status(304);
 				return;
 			}
-
-			header('Last-Modified: ' . Ut::http_date($mtime));
 
 			if (isset($_SERVER['HTTP_RANGE']))
 			{
@@ -781,16 +792,6 @@ class Http
 		header('Content-Type: ' . ($type = $this->mime_type($path)));
 		header('Content-Disposition: inline; filename="' . ($filename ?: basename($path)) . '"');
 		header('Date: ' . Ut::http_date());
-
-		if ($age > 0)
-		{
-			$age = (int)($age * DAYSECS);
-			header('Cache-Control: public, max-age=' . $age);
-		}
-		else
-		{
-			header('Cache-Control: no-store');
-		}
 
 		// protecting against XSS in SVG
 		if ($type == 'image/svg+xml')
