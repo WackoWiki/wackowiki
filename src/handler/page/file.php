@@ -43,6 +43,9 @@ if (   $this->is_admin()
 	|| ($this->has_access('read'))
 	|| ($file['user_id'] == $this->get_user_id()) )
 {
+	// set Cache-Control: max-age (days)
+	$age	= $this->has_access('read', $page_id, GUEST) === false ? 0 : 30;
+
 	if ($thumbnail)
 	{
 		[$width, $height]	= explode('x', $thumbnail);
@@ -68,5 +71,5 @@ else
 }
 
 // 3. passthru
-$this->http->sendfile($file_path, $file_name);
+$this->http->sendfile($file_path, $file_name, $age);
 $this->http->terminate();
