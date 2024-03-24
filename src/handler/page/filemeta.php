@@ -81,7 +81,7 @@ if ($file_access($file))
 	$tabs['remove']	= 'FileRemove';
 }
 
-#Ut::debug_print_r($tabs);
+# Ut::debug_print_r($tabs);
 
 $mode	= $_GET[$mod_selector] ?? null;
 

@@ -131,7 +131,7 @@ function admin_user_groups($engine, $module)
 						'AND enabled = 1 ' .
 					'ORDER BY user_name');
 
-				#Ut::debug_print_r($available_users);
+				# Ut::debug_print_r($available_users);
 				echo '<h2>' . $engine->_t('GroupAddMember') . '</h2>';
 				echo $engine->form_open('add_group_member');
 

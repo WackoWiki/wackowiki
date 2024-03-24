@@ -484,7 +484,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 					break;
 
 				case 'private':
-					header('Cache-Control: max-age=0');
+					header('Cache-Control: no-cache');
 					// FALLTHRU
 
 				case 'private_no_expire':

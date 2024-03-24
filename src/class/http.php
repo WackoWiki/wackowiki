@@ -736,7 +736,7 @@ class Http
 		}
 		else
 		{
-			header('Cache-Control: no-store');
+			header('Cache-Control: private, no-cache');
 		}
 
 		$from = 0;

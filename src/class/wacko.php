@@ -4293,7 +4293,7 @@ class Wacko
 					}
 				}
 
-				#Ut::debug_print_r($this->acl['list']);
+				# Ut::debug_print_r($this->acl['list']);
 				$acl = explode("\n", $this->acl['list']);
 
 				if (!$access || $this->acl['list'] == '')
@@ -5642,7 +5642,7 @@ class Wacko
 		// \n? would break matches with the delimiter inside the text itself
 		$_body = preg_split("/\n[ \t]*(={3,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
 
-		#Ut::debug_print_r($_body);
+		# Ut::debug_print_r($_body);
 		$a = 0;	// value [0|1|2]
 		$s = 0;	// section_id
 		$n = 0;

@@ -76,9 +76,9 @@ class UriRouter
 			$env[$varname] = $GLOBALS[$varname]; // $$varname don't work for _GET & others...
 		}
 
-		//Ut::dbg(array_diff_key($env, ['_SERVER' => 0]));
+		# Ut::dbg(array_diff_key($env, ['_SERVER' => 0]));
 		$this->route($env);
-		//Ut::dbg('->', array_diff_key($env, ['_SERVER' => 0]));
+		# Ut::dbg('->', array_diff_key($env, ['_SERVER' => 0]));
 
 		$vars = $env['vars'];
 
@@ -102,7 +102,7 @@ class UriRouter
 					}
 				}
 			}
-			//Ut::dbg('_GET', $_GET);
+			# Ut::dbg('_GET', $_GET);
 		}
 
 		return $vars;
