@@ -58,7 +58,7 @@ if (@$_GET['action'] === 'logout')
 if (!$engine->db->recovery_password)
 {
 	$engine->http->status(403);
-	header('Content-Type: text/html; charset=' . $engine->get_charset());
+	header('Content-Type: text/html; charset=utf-8');
 	?>
 	<!DOCTYPE html>
 	<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
@@ -138,7 +138,7 @@ if (@$_POST['_action'] === 'ap_login')
 // check authorization
 if (!isset($engine->sess->ap_created))
 {
-	header('Content-Type: text/html; charset=' . $engine->get_charset());
+	header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
@@ -302,7 +302,7 @@ unset($category);
 ##                     Page header                    ##
 ########################################################
 
-header('Content-Type: text/html; charset=' . $engine->get_charset());
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">

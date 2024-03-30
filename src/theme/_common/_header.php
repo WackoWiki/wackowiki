@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // HTTP header with right charset settings
-header('Content-Type: text/html; charset=' . $this->get_charset());
+header('Content-Type: text/html; charset=utf-8');
 header_remove('X-Powered-By');
 
 $tpl->enter('h_');
