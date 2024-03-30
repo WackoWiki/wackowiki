@@ -238,7 +238,7 @@ class Http
 
 				if (!str_contains($this->method, '.xml'))
 				{
-					echo "\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $mtime) . " -->\n";
+					echo "\n<!-- WackoWiki Caching Engine: page cached at " . gmdate('Y-m-d H:i:s', $mtime) . " GMT -->\n";
 					echo "</body>\n</html>";
 				}
 
