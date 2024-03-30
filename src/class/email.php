@@ -122,7 +122,7 @@ class Email
 			$mail->ContentType	= 'text/plain';
 			$mail->WordWrap		= 80;
 			$mail->Priority		= $this->engine->db->email_priority;	// Urgent = 1, Not Urgent = 5, Disable = 0
-			$mail->CharSet		= $this->engine->get_charset();
+			$mail->CharSet		= 'utf-8';
 
 			$mail->Subject		= $subject;
 			$mail->Body			= $body;

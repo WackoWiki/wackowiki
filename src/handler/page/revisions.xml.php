@@ -14,7 +14,6 @@ $this->ensure_page(true);
 
 header('Content-type: text/xml; charset=utf-8');
 
-$tpl->charset	= $this->get_charset();
 $tpl->tag		= $this->tag;
 $tpl->date		= date('r');
 $tpl->lang		= $this->page_lang;

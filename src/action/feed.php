@@ -88,7 +88,7 @@ else
 	$feed->set_cache_location('./' . CACHE_FEED_DIR);
 
 	// Make sure that we're sending the right character set headers, etc.
-	$feed->set_output_encoding($this->get_charset());
+	$feed->set_output_encoding('utf-8');
 	$feed->strip_comments(true);
 
 	$feed->init();

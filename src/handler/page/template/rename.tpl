@@ -1,7 +1,7 @@
 [ === main === ]
 	[ ' message ' ]
 	[= l _ =
-		<span class="page-properties" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
+		<span class="page-properties" title="[ ' language ' ]">[ ' lang ' ]</span>
 	=]
 	<h3>[ ' _t: RenamePage ' ] [ ' page ' ]</h3><br>
 	[= f _ =

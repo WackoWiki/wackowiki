@@ -307,7 +307,7 @@ header('Content-Type: text/html; charset=utf-8');
 <!DOCTYPE html>
 <html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
 	<head>
-		<meta charset="<?php echo $engine->get_charset(); ?>">
+		<meta charset="utf-8">
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $title; ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
