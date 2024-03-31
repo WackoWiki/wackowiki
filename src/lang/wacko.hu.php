@@ -980,6 +980,7 @@ $wacko_translation = [
 
 	// pagination
 	'ToOverview'				=> 'Vissza az áttekintéshez',
+	'Overview'					=> 'Áttekintés',
 	'ToThePage'					=> 'To page:',
 	'Next'						=> 'következő',
 	'Prev'						=> 'előző',

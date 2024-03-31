@@ -1,5 +1,5 @@
 [ === main === ]
-	[ ' dummy | default * // ADD_NO_DIV ' ]<?xml version="1.0" encoding="[ ' charset ' ]"?>
+	[ ' dummy | default * // ADD_NO_DIV ' ]<?xml version="1.0" encoding="utf-8"?>
 	<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
 		<channel>
 			<title>[ ' tag ' ]</title>

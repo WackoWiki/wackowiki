@@ -3555,18 +3555,18 @@ class Wacko
 
 		if ($width || $height)
 		{
-			$width = match(1){
-				preg_match('/^\d+$/', $width)	=> 'px',
+			$_width = match(1){
+				preg_match('/^\d+$/', $width)	=> $width . 'px',
 				default							=> 'auto',
 			};
 
-			$height = match(1){
-				preg_match('/^\d+$/', $height)	=> 'px',
+			$_height = match(1){
+				preg_match('/^\d+$/', $height)	=> $height . 'px',
 				default							=> 'auto',
 			};
 
 			// uses style="..."
-			$scale	= ' style=" width: ' . $width . '; height: ' . $height . ';"';
+			$scale	= ' style=" width: ' . $_width . '; height: ' . $_height . ';"';
 		}
 
 		// get alignment type
@@ -4293,7 +4293,7 @@ class Wacko
 					}
 				}
 
-				#Ut::debug_print_r($this->acl['list']);
+				# Ut::debug_print_r($this->acl['list']);
 				$acl = explode("\n", $this->acl['list']);
 
 				if (!$access || $this->acl['list'] == '')
@@ -5642,7 +5642,7 @@ class Wacko
 		// \n? would break matches with the delimiter inside the text itself
 		$_body = preg_split("/\n[ \t]*(={3,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
 
-		#Ut::debug_print_r($_body);
+		# Ut::debug_print_r($_body);
 		$a = 0;	// value [0|1|2]
 		$s = 0;	// section_id
 		$n = 0;
@@ -7566,51 +7566,9 @@ class Wacko
 		}
 
 		$this->set_menu();
+		$this->set_page_settings();
 
-		// charset
 		$this->charset = $this->get_charset();
-
-		if ($this->page)
-		{
-			// override with perpage settings
-			$page_options = [
-				'allow_rawhtml',
-				'disable_safehtml',
-				'footer_comments',
-				'footer_files',
-				'hide_index',
-				'hide_toc',
-				'theme',
-				'tree_level',
-				'typografica',
-			];
-
-			foreach ($page_options as $key)
-			{
-				// ignore perpage page settings with empty / null as value
-				if (!Ut::is_empty($val = $this->page[$key]))
-				{
-					$this->db[$key] = $val;
-				}
-			}
-
-			if ($this->page['theme'])
-			{
-				$this->db->theme_url = $this->db->base_path . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
-				// reload theme language files
-				$this->set_language($this->user_lang, true, false, true);
-			}
-
-			// set page categories, this defines the $categories object property array
-			$categories = $this->load_categories($this->page['page_id']);
-
-			foreach ($categories as $word)
-			{
-				$this->categories[OBJECT_PAGE][$word['category_id']] = $word['category'];
-			}
-
-			unset($categories, $word);
-		}
 
 		if (!$user && isset($this->page['modified']))
 		{
@@ -7749,6 +7707,51 @@ class Wacko
 		}
 
 		return $page;
+	}
+
+	function set_page_settings(): void
+	{
+		if ($this->page)
+		{
+			// override with perpage settings
+			$page_options = [
+				'allow_rawhtml',
+				'disable_safehtml',
+				'footer_comments',
+				'footer_files',
+				'hide_index',
+				'hide_toc',
+				'theme',
+				'tree_level',
+				'typografica',
+			];
+
+			foreach ($page_options as $key)
+			{
+				// ignore perpage page settings with empty / null as value
+				if (!Ut::is_empty($val = $this->page[$key]))
+				{
+					$this->db[$key] = $val;
+				}
+			}
+
+			if ($this->page['theme'])
+			{
+				$this->db->theme_url = $this->db->base_path . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
+				// reload theme language files
+				$this->set_language($this->user_lang, true, false, true);
+			}
+
+			// set page categories, this defines the $categories object property array
+			$categories = $this->load_categories($this->page['page_id']);
+
+			foreach ($categories as $word)
+			{
+				$this->categories[OBJECT_PAGE][$word['category_id']] = $word['category'];
+			}
+
+			unset($categories, $word);
+		}
 	}
 
 	// TOC MANIPULATIONS
@@ -9030,10 +9033,10 @@ class Wacko
 		{
 			// Use the pattern given by the HTML5 spec for 'email' type form input elements
 			// http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
-			$HTML5_email_pattern = '/^[a-zA-Z\d.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}' .
-								'[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/sD';
+			$pattern = '/^[a-zA-Z\d.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}' .
+						'[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/sD';
 
-			return (bool) preg_match($HTML5_email_pattern, $email_address);
+			return (bool) preg_match($pattern, $email_address);
 		}
 		else
 		{

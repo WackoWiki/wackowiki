@@ -979,7 +979,8 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'जिन  पृष्ठों का नाम बदला है उसके लिए अनुप्रेषित बनायें',
 
 	// pagination
-	'ToOverview'				=> 'Back to overview',
+	'ToOverview'				=> 'अवलोकन पर वापस जाएं',
+	'Overview'					=> 'अवलोकन',
 	'ToThePage'					=> 'पृष्ठ पर जाएँ:',
 	'Next'						=> 'अगले',
 	'Prev'						=> 'पिछले',

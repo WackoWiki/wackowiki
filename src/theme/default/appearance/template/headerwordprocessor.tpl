@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="[ ' lang | e ' ]">
 	<head>
-		<meta charset="[ ' charset | e ' ]">
+		<meta charset="utf-8">
 		<meta name="language" content="[ ' lang | e ' ]">
 		<title>[ ' title | e ' ] (wordprocessor) - [ ' db: site_name | e ' ]</title>
 		<meta name="robots" content="noindex, nofollow">

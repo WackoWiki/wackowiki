@@ -23,7 +23,7 @@
 	--ww-buttontext: rgb(0, 0, 0);
 
 	--ww-font-color: #000;
-	--ww-font-size: 14px;
+	--ww-font-size: 0.875rem;
 	--ww-font-serif: "Times New Roman", Times, serif;
 	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
 	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
@@ -291,7 +291,7 @@ form input.submitinput {
 #header-site h1,
 #header-site a,
 #header-site a:visited {
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-weight: normal;
 	color: #444;
 	text-decoration: none;
@@ -308,7 +308,7 @@ form input.submitinput {
 
 .print {
 	font-family: var(--ww-font-sans-serif);
-	font-size: 12px;
+	font-size: 0.75rem;
 }
 
 /** message boxes ************************************************************/
@@ -448,7 +448,7 @@ form input.submitinput {
 .debug,
 #debug li,
 #debug pre {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #888;
 }
 
@@ -644,7 +644,7 @@ footer {
 }
 
 .page-properties {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #aaa;
 	text-align: right;
 	float: right;
@@ -661,7 +661,7 @@ footer {
 }
 .page-properties a {
 	color: #aaa;
-	font-size: 11px;
+	font-size: 0.6875rem;
 }
 
 /** File and comment-related *************************************************/
@@ -816,7 +816,7 @@ ol#comments ul ul ul {
 }
 
 #credits {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #aaa;
 	text-align: right;
 	padding: 5px 20px 0;
@@ -842,7 +842,7 @@ ol#comments ul ul ul {
 	list-style: none;
 }
 #credits li {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	margin-right: 20px;
 	float: left;
 }
@@ -855,7 +855,7 @@ ol#comments ul ul ul {
 
 .include-meta {
 	text-align: right;
-	font-size: 11px;
+	font-size: 0.6875rem;
 }
 
 /* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
@@ -1049,7 +1049,7 @@ td.file- {
 /* caption */
 .caption{
 	color: #1d1d1d;
-	font-size: 12px;
+	font-size: 0.75rem;
 }
 
 .caption-license {
@@ -1423,7 +1423,7 @@ a:target {
 }
 
 .feed-note {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #777;
 }
 
@@ -1439,11 +1439,11 @@ a:target {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background: transparent no-repeat 0 1px;
 	padding-left: 0;
-	font-size: 16px;
+	font-size: 1rem;
 }
 
 .feed h2 {
-	font-size: 14px;
+	font-size: 0.875rem;
 	border-bottom: none;
 	/* background-color: beige;
 	height: 30px;
@@ -1595,7 +1595,7 @@ table.gallery {
 }
 
 #login-box {
-	font-size: 12px;
+	font-size: 0.75rem;
 	margin: 0 auto 0;
 	overflow: hidden;
 	float: right;
@@ -1684,7 +1684,7 @@ table.gallery {
 }
 
 #search-results h3 {
-	font-size: 14px;
+	font-size: 0.875rem;
 	border-bottom: 0 none;
 }
 
@@ -1822,7 +1822,7 @@ article.newsarticle:hover {
 }
 
 .news-title {
-	font-size: 14px;
+	font-size: 0.875rem;
 	font-weight: bold;
 	border: 0 solid red;
 	border-left-width: 4px;
@@ -2387,6 +2387,24 @@ li.m-source img {
 	padding-left: 10px;
 }
 
+/* navigation action ------------- */
+.nav-chapter {
+	background-color: rgb(241, 241, 241);
+	padding: 10px 10px;
+}
+.nav-chapter td:nth-child(1) {
+	text-align: left;
+	white-space: nowrap;
+}
+.nav-chapter td:nth-child(2) {
+	text-align: center;
+	width: 100%;
+}
+.nav-chapter td:nth-child(3) {
+	text-align: right;
+	white-space: nowrap;
+}
+
 /* upload action ------------- */
 .upload-table {
 	border-spacing: 3px; 
@@ -2496,7 +2514,7 @@ table.topics {
 }
 table.forum th,
 table.topics th {
-	font-size: 12px;
+	font-size: 0.75rem;
 	text-align: center;
 	white-space: nowrap;
 	padding: 5px;
@@ -2534,7 +2552,7 @@ form.add-topic {
 	border: 1px solid lightgray;
 	border-radius: 3px;
 	display: inline-block;
-	font-size: 12px;
+	font-size: 0.75rem;
 	line-height: 1;
 	margin: 2px 2px 2px 0;
 	padding: 0.4em 0.5em;

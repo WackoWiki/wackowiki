@@ -24,7 +24,7 @@ function admin_config_upload($engine, $module)
 	$user_groups = $engine->db->load_all(
 		'SELECT group_name
 		FROM ' . $prefix . 'usergroup
-		ORDER BY BINARY group_name');
+		ORDER BY group_name');
 
 	foreach ($user_groups as $group)
 	{
@@ -107,9 +107,9 @@ function admin_config_upload($engine, $module)
 
 
 		$config['upload']					= (string) $upload;
-		$config['upload_max_size']			= (int) ($_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']]);
-		$config['upload_quota']				= (int) ($_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']]);
-		$config['upload_quota_per_user']	= (int) $_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
+		$config['upload_max_size']			= (int) ($_POST['upload_max_size']			* $binary_factor[(int) $_POST['upload_max_size_factor']]);
+		$config['upload_quota']				= (int) ($_POST['upload_quota']				* $binary_factor[(int) $_POST['upload_quota_factor']]);
+		$config['upload_quota_per_user']	= (int) ($_POST['upload_quota_per_user']	* $binary_factor[(int) $_POST['upload_quota_per_user_factor']]);
 		$config['upload_translit']			= (int) $_POST['upload_translit'];
 		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
 		$config['upload_allowed_exts']		= (string) $allowed_exts;

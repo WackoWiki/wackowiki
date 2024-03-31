@@ -25,7 +25,7 @@ pre {
 .Differences tbody th {
 	background: #CCCCCC;
 	border-right: 1px solid #000000;
-	font-size: 14px;
+	font-size: var(--ww-font-size);
 	padding: 1px 2px;
 	text-align: right;
 	vertical-align: top;
@@ -34,7 +34,7 @@ pre {
 
 .Differences td {
 	font-family: Consolas, monospace;
-	font-size: 14px;
+	font-size: var(--ww-font-size);
 	padding: 1px 2px;
 	vertical-align: top;
 }

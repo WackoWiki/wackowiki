@@ -58,7 +58,7 @@ if (@$_GET['action'] === 'logout')
 if (!$engine->db->recovery_password)
 {
 	$engine->http->status(403);
-	header('Content-Type: text/html; charset=' . $engine->get_charset());
+	header('Content-Type: text/html; charset=utf-8');
 	?>
 	<!DOCTYPE html>
 	<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
@@ -138,7 +138,7 @@ if (@$_POST['_action'] === 'ap_login')
 // check authorization
 if (!isset($engine->sess->ap_created))
 {
-	header('Content-Type: text/html; charset=' . $engine->get_charset());
+	header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
@@ -302,12 +302,12 @@ unset($category);
 ##                     Page header                    ##
 ########################################################
 
-header('Content-Type: text/html; charset=' . $engine->get_charset());
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
 	<head>
-		<meta charset="<?php echo $engine->get_charset(); ?>">
+		<meta charset="utf-8">
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $title; ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">

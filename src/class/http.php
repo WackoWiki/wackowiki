@@ -104,7 +104,6 @@ class Http
 				'query		= ' . $this->db->q($this->query) . ', ' .
 				'cache_lang	= ' . $this->db->q($this->lang) . ', ' .	// user lang NOT user agent lang NOR page lang!
 				'cache_time	= UTC_TIMESTAMP()');
-
 	}
 
 	// Invalidate the page cache
@@ -123,7 +122,7 @@ class Http
 
 			if ($params)
 			{
-				// Ut::dbg('invalidate_page', $page);
+				# Ut::dbg('invalidate_page', $page);
 
 				$past = time() - $this->db->cache_ttl - 1;
 
@@ -137,7 +136,7 @@ class Http
 						++$n;
 					}
 
-					// Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
+					# Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 				}
 
 				$this->db->sql_query(
@@ -152,6 +151,7 @@ class Http
 	private function normalize_page($page): array
 	{
 		$page = str_replace(['\\', "'", '_'], '', $page);
+
 		return [$page, hash('sha1', $page)];
 	}
 
@@ -189,25 +189,33 @@ class Http
 		// check cache
 		if ($cached_page = $this->load_page($mtime))
 		{
-			// Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+			# Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
-			$gmt	= Ut::http_date($mtime);
-			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
-			$lastm	= @$_SERVER['HTTP_IF_MODIFIED_SINCE'];
-
-			if ($lastm && $p = strpos($lastm, ';'))
+			if (in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD']))
 			{
-				$lastm = substr($lastm, 0, $p);
-			}
+				$client_etag			= !empty($_SERVER['HTTP_IF_NONE_MATCH'])		? trim($_SERVER['HTTP_IF_NONE_MATCH'])		: null;
+				$client_last_modified	= !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])	: null;
+				$client_accept_encoding	= $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '';
+				$identifier				= '';
 
-			if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD')
-			{
-				if (!$lastm && !$etag);
-				else if ($lastm && $gmt != $lastm);
-				else if ($etag && $gmt != trim($etag, '\"'));
-				else
+				$server_last_modified	= Ut::http_date($mtime);
+				$server_etag_raw		= hash('sha1', $cached_page . $client_accept_encoding . $identifier);
+				$server_etag			= '"' . $server_etag_raw . '"';
+
+				header('Last-Modified: '	. $server_last_modified);
+				header('ETag: '				. $server_etag);
+				header('Cache-Control: max-age=10800');
+				header('Vary: Accept-Encoding');
+
+				$matching_last_modified	= $client_last_modified == $server_last_modified;
+				$matching_etag			= $client_etag && strpos($client_etag, $server_etag_raw) !== false;
+				$strict					= false;
+
+				if (($client_last_modified && $client_etag) || $strict
+					? $matching_last_modified && $matching_etag
+					: $matching_last_modified || $matching_etag)
 				{
-					// Ut::dbg('not modified');
+					# Ut::dbg('not modified');
 					$this->status(304);
 					$this->terminate();
 				}
@@ -218,26 +226,19 @@ class Http
 				{
 					$head = substr($cached_page, 0, $head);
 
-					if (preg_match('#<html[^/>]*>#', $head) &&
-						preg_match('#<meta\s+charset="([^"]+)"\s*>#', $head, $match))
+					if (preg_match('#<html[^/>]*>#', $head))
 					{
-						header('Content-Type: text/html; charset=' . $match[1]);
+						header('Content-Type: text/html; charset=utf-8');
 					}
 				}
 
 				ini_set('default_charset', null);
 
-				header('Last-Modified: ' . $gmt);
-				header('ETag: "' . $gmt . '"');
-
-				//header('Content-Length: '.strlen($cached));
-				//header('Cache-Control: max-age=0');
-
 				echo $cached_page;
 
 				if (!str_contains($this->method, '.xml'))
 				{
-					echo "\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $mtime) . " -->\n";
+					echo "\n<!-- WackoWiki Caching Engine: page cached at " . gmdate('Y-m-d H:i:s', $mtime) . " GMT -->\n";
 					echo "</body>\n</html>";
 				}
 
@@ -253,7 +254,10 @@ class Http
 	{
 		$this->method	= $method;
 
-		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
+		if ($this->db->cache
+			&& $_SERVER['REQUEST_METHOD'] != 'POST'
+			&& $method != 'edit'
+			&& $method != 'watch')
 		{
 			// cache only for anonymous user
 			if (!isset($this->sess->user_profile))
@@ -450,10 +454,8 @@ class Http
 		// disable browser cache for page
 		if (!headers_sent())
 		{
-			header('Expires: ' . Ut::http_date(-1));						// Date in the past
 			header('Last-Modified: ' . Ut::http_date());					// always modified
-			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
-			header('Cache-Control: post-check=0, pre-check=0', false);
+			header('Cache-Control: no-store');
 		}
 		// STS: check into session nocache code!
 
@@ -627,7 +629,7 @@ class Http
 
 		if (!headers_sent())
 		{
-			header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' ' . $code . ' ' . $text[$code], true, $code);
+			header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1') . ' ' . $code . ' ' . $text[$code], true, $code);
 		}
 	}
 
@@ -726,19 +728,30 @@ class Http
 			return 403;
 		}
 
+		if ($age > 0)
+		{
+			$age = (int)($age * DAYSECS);
+			header('Cache-Control: max-age=' . $age);
+		}
+		else
+		{
+			header('Cache-Control: private, no-cache');
+		}
+
 		$from = 0;
 		$to = $size;
 
 		if ($age >= 0)
 		{
+			header('Last-Modified: ' . Ut::http_date($mtime));
+
 			if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
 			{
-				// Ut::dbg('not modified');
+				# Ut::dbg('not modified');
+				header('Vary: Accept-Encoding');
 				$this->status(304);
 				return;
 			}
-
-			header('Last-Modified: ' . Ut::http_date($mtime));
 
 			if (isset($_SERVER['HTTP_RANGE']))
 			{
@@ -778,18 +791,6 @@ class Http
 		header('Content-Type: ' . ($type = $this->mime_type($path)));
 		header('Content-Disposition: inline; filename="' . ($filename ?: basename($path)) . '"');
 		header('Date: ' . Ut::http_date());
-
-		if ($age > 0)
-		{
-			$age = (int)($age * DAYSECS);
-			header('Cache-Control: public, max-age=' . $age);
-			header('Expires: ' . Ut::http_date(time() + $age));
-		}
-		else
-		{
-			header('Expires: ' . Ut::http_date(-1));
-			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-		}
 
 		// protecting against XSS in SVG
 		if ($type == 'image/svg+xml')

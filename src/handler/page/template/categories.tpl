@@ -1,7 +1,7 @@
 [ === main === ]
 	[ ' denied ' ]
 	[= l _ =
-			<span class="page-properties" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
+			<span class="page-properties" title="[ ' language ' ]">[ ' lang ' ]</span>
 	=]
 	[= n _ =
 		

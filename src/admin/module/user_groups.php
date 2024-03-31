@@ -129,9 +129,9 @@ function admin_user_groups($engine, $module)
 					'WHERE user_id NOT IN (' . $subqery_members. ') ' .
 						'AND account_type = 0 ' .
 						'AND enabled = 1 ' .
-					'ORDER BY BINARY user_name');
+					'ORDER BY user_name');
 
-				#Ut::debug_print_r($available_users);
+				# Ut::debug_print_r($available_users);
 				echo '<h2>' . $engine->_t('GroupAddMember') . '</h2>';
 				echo $engine->form_open('add_group_member');
 
@@ -210,7 +210,7 @@ function admin_user_groups($engine, $module)
 			$group_name		= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
 			$description	= $engine->sanitize_text_field(($_POST['description'] ?? ''));
 
-			// do we have identical names?
+			// checking for identical name (case-insensitive, not BINARY)
 			if ($engine->db->load_single(
 				'SELECT group_id ' .
 				'FROM ' . $prefix . 'usergroup ' .

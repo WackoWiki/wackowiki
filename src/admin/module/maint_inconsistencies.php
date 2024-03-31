@@ -850,7 +850,7 @@ function admin_maint_inconsistencies($engine, $module)
 				echo '<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('ResetButton') . '</button></a>';
 			}
 
-			#Ut::debug_print_r($abandoned);
+			# Ut::debug_print_r($abandoned);
 		}
 	}
 

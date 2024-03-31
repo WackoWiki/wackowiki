@@ -2,7 +2,7 @@
 	[ ' dummy | default * // ADD_NO_DIV ' ]<!DOCTYPE html>
 	<html dir="[ ' dir ' ]" lang="[ ' lang ' ]">
 	<head>
-		<meta charset="[ ' charset ' ]">
+		<meta charset="utf-8">
 		<title>[ ' title | e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name | e ' ]</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">

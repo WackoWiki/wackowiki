@@ -51,12 +51,12 @@ if ($this->has_access('read'))
 		$slide = (int) (($_GET['slide'] ?? 1) ?: 1);
 
 		// HTTP header with right Charset settings
-		header('Content-Type: text/html; charset=' . $this->get_charset());
+		header('Content-Type: text/html; charset=utf-8');
 		header_remove('X-Powered-By');
 
 		$tpl->lang		= $this->page_lang;
 		$tpl->dir		= $this->get_direction($this->page_lang);
-		$tpl->charset	= $this->get_charset();
+
 		$tpl->method	= $this->method;
 		!Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);
 		$tpl->favicon	= $this->get_favicon();

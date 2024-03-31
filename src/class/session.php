@@ -480,22 +480,19 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			switch ($this->cf_cache_limiter)
 			{
 				case 'public':
-					header('Expires: ' . Ut::http_date(time() + $age));
 					header("Cache-Control: public, max-age=$age");
 					break;
 
 				case 'private':
-					header('Expires: ' . Ut::http_date(-1)); // looong ago
-					header('Cache-Control: max-age=0');
+					header('Cache-Control: no-cache');
 					// FALLTHRU
 
 				case 'private_no_expire':
-					header("Cache-Control: private, max-age=$age, pre-check=$age");
+					header("Cache-Control: private, max-age=$age");
 					break;
 
 				case 'nocache':
-					header('Expires: ' . Ut::http_date(-1));
-					header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+					header('Cache-Control: no-store');
 					return; // suppress last-modified
 
 				default:

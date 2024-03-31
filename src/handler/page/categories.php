@@ -32,7 +32,6 @@ if (   $this->is_owner()
 
 		$tpl->l_language	= $languages[$this->page_lang];
 		$tpl->l_lang		= $this->page_lang;
-		$tpl->l_charset		= $this->get_charset();
 	}
 
 	if (isset($_POST))

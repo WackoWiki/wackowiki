@@ -18,7 +18,6 @@ class Feed
 	// VARIABLES
 	public $engine;
 	public $lang;
-	public $charset;
 	public $prefix;
 
 	// CONSTRUCTOR
@@ -27,7 +26,6 @@ class Feed
 		$this->engine	= & $engine;
 		$this->lang		= $this->engine->db->language;
 		$this->engine->set_language($this->lang, true, true);
-		$this->charset	= $this->engine->get_charset();
 		$this->prefix	= $this->engine->db->table_prefix;
 	}
 
@@ -52,7 +50,7 @@ class Feed
 		#xmlns:slash="http://purl.org/rss/1.0/modules/slash/"			-> <slash:comments>
 
 		return
-			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
+			'<?xml version="1.0" encoding="utf-8"?>' . "\n" .
 			'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
 			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">' . "\n" .
 			'<channel>' . "\n" .

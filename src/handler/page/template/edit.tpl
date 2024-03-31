@@ -5,7 +5,7 @@
 		[= f _ =
 			[= l _ =
 				<div class="page-properties">[ ' accessmode ' ]<br><br><br>
-				<span title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]&nbsp;&nbsp;</span></div>
+				<span title="[ ' language ' ]">[ ' lang ' ]&nbsp;&nbsp;</span></div>
 			=]
 			[= p _ =
 				[ '' buttons '' ]

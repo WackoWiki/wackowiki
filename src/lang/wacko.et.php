@@ -979,7 +979,8 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
 
 	// pagination
-	'ToOverview'				=> 'Back to overview',
+	'ToOverview'				=> 'Tagasi ülevaate juurde',
+	'Overview'					=> 'Ülevaade',
 	'ToThePage'					=> 'To page:',
 	'Next'						=> 'Next',
 	'Prev'						=> 'Prev',

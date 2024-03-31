@@ -123,9 +123,9 @@ function admin_massemail($engine, $module)
 		'SELECT group_id, group_name ' .
 		'FROM ' . $prefix . 'usergroup ' .
 		'WHERE active = 1 ' .
-		'ORDER BY BINARY group_name', true);
+		'ORDER BY group_name', true);
 
-	#Ut::debug_print_r($available_users);
+	# Ut::debug_print_r($available_users);
 
 	echo $engine->form_open('massemail');
 ?>
@@ -153,7 +153,7 @@ function admin_massemail($engine, $module)
 				'WHERE u.enabled = 1 ' .
 					"AND u.email_confirm = '' " .
 					'AND us.allow_massemail <> 0 ' .
-				'ORDER BY BINARY u.user_name');
+				'ORDER BY u.user_name');
 
 			if ($users)
 			{

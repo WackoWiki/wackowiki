@@ -119,7 +119,6 @@ class Diag
 						'Page language: ' .					($engine->page['page_lang'] ?? ''),
 						'Config language: ' .				$config['language'],
 						'User selected language: ' .		($engine->user_lang ?? ''),
-						'Charset: ' .						$engine->get_charset(),
 						'HTML Entities Charset: ' .			HTML_ENTITIES_CHARSET,
 						// 'Disable cache: ' .				($engine->disable_cache === true ? 'true' : 'false'),
 					];
@@ -195,11 +194,11 @@ class Diag
 
 					if ($engine->is_admin())
 					{
-						// Ut::debug_print_r($_SERVER);
-						// Ut::debug_print_r($config);
+						# Ut::debug_print_r($_SERVER);
+						# Ut::debug_print_r($config);
 					}
 
-					// Ut::debug_print_r($engine->page);
+					# Ut::debug_print_r($engine->page);
 				}
 
 				echo "</div >\n";

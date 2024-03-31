@@ -4,7 +4,7 @@ _common include file for themes
 <!DOCTYPE html>
 <html dir="[ ' dir ' ]" lang="[ ' lang ' ]">
 <head>
-	<meta charset="[ ' charset ' ]">
+	<meta charset="utf-8">
 	<title>[ ' title | e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name | e ' ]</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	[= theme _ =

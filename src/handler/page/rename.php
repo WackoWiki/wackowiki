@@ -76,7 +76,6 @@ if ($registered
 
 				$tpl->l_language	= $languages[$this->page_lang];
 				$tpl->l_lang		= $this->page_lang;
-				$tpl->l_charset		= $this->get_charset();
 			}
 
 			$tpl->enter('f_');

@@ -500,7 +500,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 					} // end dir check
 				} // end while loop
 
-				#Ut::debug_print_r($logs);
+				# Ut::debug_print_r($logs);
 
 				if (!empty($logs))
 				{
