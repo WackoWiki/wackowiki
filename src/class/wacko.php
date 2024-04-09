@@ -6102,17 +6102,15 @@ class Wacko
 
 	function session_notice($message): void
 	{
-		if (	!$this->db->session_notice == 1
-			|| !($this->db->session_notice == 2 && $this->is_admin()))
-		{
-			return;
-		}
+		$lang			= !empty($this->user_lang) ? $this->user_lang : SYSTEM_LANG;
+		$show_notice	=
+				$this->db->session_notice == 1
+			|| ($this->db->session_notice == 2 && $this->is_admin());
 
-		// TODO: pass and use user_lang
-		if ($message == 'ip')
+		if ($message == 'ip' & $show_notice)
 		{
 			$this->set_message(Ut::perc_replace(
-				$this->_t('IPAddressChanged', SYSTEM_LANG),
+				$this->_t('IPAddressChanged', $lang),
 				$this->http->ip, implode(', ', array_keys($this->sess->sticky__ip))));
 		}
 		else if ($message && @$this->sess->sticky_login)
@@ -6129,7 +6127,11 @@ class Wacko
 				'ip'			=> 'IPChange',
 			];
 
-			$this->set_message($this->_t('Session' . $tr[$message], SYSTEM_LANG));
+			if ($show_notice)
+			{
+				$this->set_message($this->_t('Session' . $tr[$message], $lang));
+			}
+
 			$this->sess->sticky_login = 0;
 		}
 	}
