@@ -355,12 +355,6 @@
 					<th scope="row">[ ' _t: UsersPages ' ]</th>
 					<td><a href="[ ' pages ' ]" title="[ ' _t: SeeListOfPages ' ]">[ ' user.total_pages | number_format ' ]</a></td>
 				</tr>
-				[== CommentedOut _ =
-					<tr>
-						<th scope="row">[ ' _t: UsersRevisions ' ]</th>
-						<td><a href="[ ' revisions ' ]" title="[ ' _t: RevisionTip ' ]">[ ' user.total_revisions | number_format ' ]</a></td>
-					</tr>
-				==]
 				<tr>
 					<th scope="row">[ ' _t: UsersComments ' ]</th>
 					<td><a href="[ ' comments ' ]" title="[ ' _t: ShowComments ' ]">[ ' user.total_comments | number_format ' ]</a></td>
@@ -369,12 +363,6 @@
 					<th scope="row">[ ' _t: UsersUploads ' ]</th>
 					<td><a href="[ ' uploads ' ]" title="[ ' _t: ShowFiles ' ]">[ ' user.total_uploads | number_format ' ]</a></td>
 				</tr>
-				[== CommentedOut _ =
-					<tr>
-						<th scope="row">[ ' _t: UsersLogins ' ]</th>
-						<td>[ ' user.login_count | number_format ' ]</td>
-					</tr>
-				==]
 			</table>
 		</aside>
 	=]
