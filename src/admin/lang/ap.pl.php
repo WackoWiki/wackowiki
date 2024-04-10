@@ -914,6 +914,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> 'Umożliwia to sanityzację wgrywanych plików SVG, aby zapobiec wgrywaniu plików SVG/XML podatnych na ataki.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Jeśli ma to zastosowanie i nie ma potrzeby posiadania znaków Unicode, wysoce zalecane jest akceptowanie tylko znaków alfanumerycznych.',
+	'TranslitCaseFolding'		=> 'Konwertuje nazwy plików na małe litery:',
+	'TranslitCaseFoldingInfo'	=> 'Ta opcja działa tylko z aktywną transliteracją.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Zawsze twórz miniaturę:',

@@ -918,8 +918,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> '這樣可以對上傳的 SVG 文件進行清理，以防止上傳 SVG/XML 易受攻擊的文件。',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> '音譯檔名：',
+	'TranslitFileNameInfo'		=> '如果適用且不需要 Unicode 字符，強烈建議僅接受字母數字字元。',
+	'TranslitCaseFolding'		=> '將檔案名稱轉換為小寫：',
+	'TranslitCaseFoldingInfo'	=> '此選項僅對主動音譯有效。',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',

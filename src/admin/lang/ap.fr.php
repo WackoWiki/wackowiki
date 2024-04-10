@@ -915,6 +915,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> 'Cela permet d’assainir les fichiers SVG téléchargés afin d’éviter que des fichiers SVG/XML vulnérables ne soient téléchargés.',
 	'TranslitFileName'			=> 'Transliterate file names :',
 	'TranslitFileNameInfo'		=> 'Si elle est applicable et qu’il n’est pas nécessaire d’avoir des caractères Unicode, il est fortement recommandé de n’accepter que des caractères alphanumériques.',
+	'TranslitCaseFolding'		=> 'Convertir les noms de fichiers en minuscules :',
+	'TranslitCaseFoldingInfo'	=> 'Cette option n’est efficace qu’en cas de translittération active.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Générer des miniatures :',

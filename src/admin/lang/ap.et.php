@@ -914,8 +914,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'Mõndasid veebilehitsejaid saab petta, eeldades, et tegu on vale miimitüübiga. See valik kindlustab, et sellised failid keelatakse.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'See võimaldab üleslaaditud SVG-failide puhastamist, et vältida SVG/XML-i haavatavate failide üleslaadimist.',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> 'Failinimede translitereerimine:',
+	'TranslitFileNameInfo'		=> 'Kui see on kohaldatav ja Unicode-märke ei ole vaja, on väga soovitatav aktsepteerida ainult tähtnumbrilisi märke.',
+	'TranslitCaseFolding'		=> 'Konverteeri failinimed väikesteks tähtedeks:',
+	'TranslitCaseFoldingInfo'	=> 'See valik toimib ainult aktiivse translitereerimise korral.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Loo pisipilt:',

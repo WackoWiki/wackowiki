@@ -111,6 +111,7 @@ function admin_config_upload($engine, $module)
 		$config['upload_quota']				= (int) ($_POST['upload_quota']				* $binary_factor[(int) $_POST['upload_quota_factor']]);
 		$config['upload_quota_per_user']	= (int) ($_POST['upload_quota_per_user']	* $binary_factor[(int) $_POST['upload_quota_per_user_factor']]);
 		$config['upload_translit']			= (int) $_POST['upload_translit'];
+		$config['upload_translit_lower']	= (int) $_POST['upload_translit_lower'];
 		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
 		$config['upload_allowed_exts']		= (string) $allowed_exts;
 		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
@@ -235,6 +236,21 @@ function admin_config_upload($engine, $module)
 					<label for="upload_translit_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="upload_translit_off" name="upload_translit" value="0"<?php echo ($engine->db->upload_translit == 0 ? ' checked' : '');?>>
 					<label for="upload_translit_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<strong><?php echo $engine->_t('TranslitCaseFolding');?></strong><br>
+					<small><?php echo $engine->_t('TranslitCaseFoldingInfo');?></small>
+				</td>
+				<td>
+					<input type="radio" id="upload_translit_lower_on" name="upload_translit_lower" value="1"<?php echo ($engine->db->upload_translit_lower == 1 ? ' checked' : '');?>>
+					<label for="upload_translit_lower_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="upload_translit_lower_off" name="upload_translit_lower" value="0"<?php echo ($engine->db->upload_translit_lower == 0 ? ' checked' : '');?>>
+					<label for="upload_translit_lower_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>

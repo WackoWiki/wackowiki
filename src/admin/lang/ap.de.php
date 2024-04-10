@@ -918,6 +918,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> 'Dadurch können hochgeladene SVG-Dateien bereinigt werden, um zu verhindern, dass anfällige SVG/XML-Dateien hochgeladen werden.',
 	'TranslitFileName'			=> 'Translitieren der Dateinamen:',
 	'TranslitFileNameInfo'		=> 'Soweit dies möglich ist und keine Unicode-Zeichen erforderlich sind, wird dringend empfohlen, nur alphanumerische Zeichen zu akzeptieren.',
+	'TranslitCaseFolding'		=> 'Konvertiere Dateinamen in Kleinbuchstaben:',
+	'TranslitCaseFoldingInfo'	=> 'Diese Option ist nur bei aktiver Transliteration wirksam.',
 
 	'Thumbnails'				=> 'Vorschaubilder',
 	'CreateThumbnail'			=> 'Vorschaubild erstellen:',

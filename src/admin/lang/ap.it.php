@@ -914,6 +914,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> 'Questo permette di sanificare i file SVG caricati per evitare che vengano caricati file SVG/XML vulnerabili.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Se è applicabile e non è necessario avere caratteri Unicode, si raccomanda vivamente di accettare solo caratteri alfanumerici.',
+	'TranslitCaseFolding'		=> 'Converte i nomi dei file in minuscolo:',
+	'TranslitCaseFoldingInfo'	=> 'Questa opzione è efficace solo con la traslitterazione attiva.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Crea miniatura:',

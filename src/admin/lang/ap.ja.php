@@ -917,8 +917,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'アップロードされたSVGファイルをサニタイズし、SVG/XMLの脆弱なファイルがアップロードされないようにします。',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> 'ファイル名を音訳する：',
+	'TranslitFileNameInfo'		=> 'Unicode文字を使用する必要がない場合は、英数字のみを使用することを強くお勧めします。',
+	'TranslitCaseFolding'		=> 'ファイル名を小文字に変換します：',
+	'TranslitCaseFoldingInfo'	=> 'このオプションはアクティブな音訳でのみ有効です。',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',

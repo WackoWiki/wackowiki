@@ -919,6 +919,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> 'This enables sanitizing uploaded SVG files to to prevent SVG/XML vulnerable files being uploaded.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitCaseFolding'		=> 'Convert file names to lowercase:',
+	'TranslitCaseFoldingInfo'	=> 'This option is only effective with active transliteration.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',

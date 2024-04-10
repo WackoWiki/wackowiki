@@ -914,6 +914,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> 'Hiermee kunnen geüploade SVG-bestanden worden gezuiverd om te voorkomen dat SVG/XML kwetsbare bestanden worden geüpload.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Als het van toepassing is en er is geen noodzaak om Unicode-tekens te gebruiken, is het sterk aanbevolen om alleen alfanumerieke tekens te accepteren.',
+	'TranslitCaseFolding'		=> 'Converteer bestandsnamen naar kleine letters:',
+	'TranslitCaseFoldingInfo'	=> 'Deze optie werkt alleen bij actieve transliteratie.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Miniatuur aanmaken:',

@@ -67,7 +67,7 @@ $translit_filename = function($name)
 	// file name transliteration
 	if ($this->db->upload_translit)
 	{
-		$t_name	= Ut::translit($name);
+		$t_name	= Ut::translit($name, $this->db->upload_translit_lower);
 		$t_name	= preg_replace('/[\p{Z}]+/u', '_', $t_name);
 	}
 	else
