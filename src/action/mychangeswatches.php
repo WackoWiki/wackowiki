@@ -55,7 +55,7 @@ if ($user_id = $this->get_user_id())
 	$pages = $this->db->load_all(
 		'SELECT p.page_id, p.tag, p.title, p.modified, p.edit_note, p.user_id ' .
 		$selector .
-		'GROUP BY p.tag, p.page_id, p.modified, w.user_id ' .
+		'GROUP BY p.tag, p.page_id, p.title, p.modified, w.user_id ' .
 		'ORDER BY p.modified DESC, p.tag ASC ' .
 		$pagination['limit'], true);
 

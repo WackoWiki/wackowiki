@@ -143,7 +143,7 @@ function admin_tool_badbehaviour($engine, $module)
 
 			// Query the DB based on variables selected
 			$results = $engine->db->load_all(
-				"SELECT BINARY {$argument} as group_type, {$additional_fields} COUNT({$argument}) AS n " .
+				"SELECT BINARY {$argument} AS group_type, {$additional_fields} COUNT({$argument}) AS n " .
 				'FROM ' . $engine->prefix . 'bad_behaviour ' .
 				"GROUP BY BINARY {$argument} " .
 				'ORDER BY n DESC ' .
