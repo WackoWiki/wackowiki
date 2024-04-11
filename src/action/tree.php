@@ -61,9 +61,12 @@ if ($page == '/')		$page	= '';
 $tag	= $this->unwrap_link($page);
 $root	= $tag . '/';
 
-// TODO: set default depth level via config
-// TODO: show missing sublevels
-// TODO: add paging
+/*
+  TODO:
+  - set default depth level via config
+  - show missing sublevels
+  - add paging
+*/
 if (!$depth || $depth < 1)
 {
 	$depth	= 1;
@@ -165,16 +168,11 @@ if ($pages = $this->db->load_all(
 		}
 		else
 		{
-			// cluster root level
-			# $root_level = mb_substr_count($root, '/');
-
 			// begin list
 			echo '<ul class="tree">' . "\n";
 
 			$i	= 0;
 			$ul	= 0;
-
-			# Ut::debug_print_r($pages);
 
 			foreach ($pages as $page)
 			{
@@ -222,9 +220,6 @@ if ($pages = $this->db->load_all(
 				// begin element
 				echo '<li>';
 
-				# $is_root = $cur_level == $root_level && $cur_level < 2;
-				# if ($is_root )	echo '<strong>';
-
 				// displaying only the last word of tag OR title
 				$link_text = ($title == 0)
 					? mb_substr($page['tag'], mb_strrpos($page['tag'], '/') + 1)
@@ -239,8 +234,6 @@ if ($pages = $this->db->load_all(
 				{
 					echo $this->link('/' . $page['tag'], '', $link_text, '', false, true, false);
 				}
-
-				# if ($is_root )	echo '</strong>';
 
 				// recheck page level
 				$prev_level	= mb_substr_count($page['tag'], '/');
