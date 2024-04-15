@@ -74,6 +74,7 @@ class Wacko
 	public bool $new_comment		= false;
 
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
+	public string $file_meta		= 'file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
 	public $body_toc				= null;
@@ -296,8 +297,7 @@ class Wacko
 		if (empty($file))
 		{
 			$file = $this->db->load_single(
-				'SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption,
-						author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type ' .
+				'SELECT ' . $this->file_meta . ' ' .
 				'FROM ' . $this->prefix . 'file ' .
 				'WHERE page_id = ' . (int) $page_id . ' ' .
 				'AND file_name = ' . $this->db->q($file_name) . ' ' .
@@ -1259,11 +1259,9 @@ class Wacko
 
 		if (!empty($file_ids))
 		{
-			// TODO: use one query function together with check_file_record() -> both need the same set
 			// get and cache file data
 			if ($files = $this->db->load_all(
-				'SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author,
-						source, source_url, license_id, picture_w, picture_h, file_ext, mime_type ' .
+				'SELECT ' . $this->file_meta . ' ' .
 				'FROM ' . $this->prefix . 'file ' .
 				'WHERE file_id IN (' . $this->ids_string($file_ids) . ') ' .
 				'AND deleted <> 1 '
