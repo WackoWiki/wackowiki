@@ -74,6 +74,7 @@ class Wacko
 	public bool $new_comment		= false;
 
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
+	public string $file_meta		= 'file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
 	public $body_toc				= null;
@@ -296,8 +297,7 @@ class Wacko
 		if (empty($file))
 		{
 			$file = $this->db->load_single(
-				'SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption,
-						author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type ' .
+				'SELECT ' . $this->file_meta . ' ' .
 				'FROM ' . $this->prefix . 'file ' .
 				'WHERE page_id = ' . (int) $page_id . ' ' .
 				'AND file_name = ' . $this->db->q($file_name) . ' ' .
@@ -1259,11 +1259,9 @@ class Wacko
 
 		if (!empty($file_ids))
 		{
-			// TODO: use one query function together with check_file_record() -> both need the same set
 			// get and cache file data
 			if ($files = $this->db->load_all(
-				'SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author,
-						source, source_url, license_id, picture_w, picture_h, file_ext, mime_type ' .
+				'SELECT ' . $this->file_meta . ' ' .
 				'FROM ' . $this->prefix . 'file ' .
 				'WHERE file_id IN (' . $this->ids_string($file_ids) . ') ' .
 				'AND deleted <> 1 '
@@ -6102,17 +6100,15 @@ class Wacko
 
 	function session_notice($message): void
 	{
-		if (	!$this->db->session_notice == 1
-			|| !($this->db->session_notice == 2 && $this->is_admin()))
-		{
-			return;
-		}
+		$lang			= !empty($this->user_lang) ? $this->user_lang : SYSTEM_LANG;
+		$show_notice	=
+				$this->db->session_notice == 1
+			|| ($this->db->session_notice == 2 && $this->is_admin());
 
-		// TODO: pass and use user_lang
-		if ($message == 'ip')
+		if ($message == 'ip' & $show_notice)
 		{
 			$this->set_message(Ut::perc_replace(
-				$this->_t('IPAddressChanged', SYSTEM_LANG),
+				$this->_t('IPAddressChanged', $lang),
 				$this->http->ip, implode(', ', array_keys($this->sess->sticky__ip))));
 		}
 		else if ($message && @$this->sess->sticky_login)
@@ -6129,7 +6125,11 @@ class Wacko
 				'ip'			=> 'IPChange',
 			];
 
-			$this->set_message($this->_t('Session' . $tr[$message], SYSTEM_LANG));
+			if ($show_notice)
+			{
+				$this->set_message($this->_t('Session' . $tr[$message], $lang));
+			}
+
 			$this->sess->sticky_login = 0;
 		}
 	}

@@ -46,7 +46,7 @@ $can_replace = function($file_name, $page_id, $user)
 	return $result;
 };
 
-$translit_filename = function($name)
+$sanitize_filename = function($name)
 {
 	// prepare for translit
 	$name	= str_replace(['@', '%20', '+'], '_', $name);
@@ -67,7 +67,7 @@ $translit_filename = function($name)
 	// file name transliteration
 	if ($this->db->upload_translit)
 	{
-		$t_name	= Ut::translit($name);
+		$t_name	= Ut::translit($name, $this->db->upload_translit_lower);
 		$t_name	= preg_replace('/[\p{Z}]+/u', '_', $t_name);
 	}
 	else
@@ -184,7 +184,7 @@ if (isset($_POST['upload']) & $can_upload)
 			}
 
 			// sanitize & translit file name
-			$t_name	= $translit_filename($name);
+			$t_name	= $sanitize_filename($name);
 
 			// C. the file name and also the extension should not be empty at all
 			if ($t_name && preg_match('/[a-zA-Z0-9]{1,10}/u', $ext))

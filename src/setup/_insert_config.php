@@ -214,6 +214,7 @@ $config_db['upload_quota']					= $config['upload_quota'];
 $config_db['upload_quota_per_user']			= $config['upload_quota_per_user'];
 $config_db['upload_max_size']				= $config['upload_max_size'];
 $config_db['upload_translit']				= $config['upload_translit'];
+$config_db['upload_translit_lower']			= $config['upload_translit_lower'];
 $config_db['urls_underscores']				= $config['urls_underscores'];
 $config_db['username_chars_min']			= $config['username_chars_min'];
 $config_db['username_chars_max']			= $config['username_chars_max'];

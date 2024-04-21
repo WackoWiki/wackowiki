@@ -74,7 +74,7 @@ $mod_selector	= 'm';
 // tab navigation
 $tabs['show']	= 'FileViewProperties';
 
-if ($file_access($file))
+if (!empty($file) && $file_access($file))
 {
 	$tabs['edit']	= 'FileEditProperties';
 	$tabs['label']	= 'FileLabel';

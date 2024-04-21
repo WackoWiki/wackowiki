@@ -917,8 +917,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'यह एसवीजी/एक्सएमएल कमजोर फाइलों को अपलोड होने से रोकने के लिए अपलोड की गई एसवीजी फाइलों को साफ करने में सक्षम बनाता है।',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> 'फ़ाइल नामों का लिप्यंतरण करें:',
+	'TranslitFileNameInfo'		=> 'यदि यह लागू है और यूनिकोड वर्णों की कोई आवश्यकता नहीं है, तो केवल अल्फ़ा-न्यूमेरिक वर्णों को स्वीकार करने की अत्यधिक अनुशंसा की जाती है।',
+	'TranslitCaseFolding'		=> 'फ़ाइल नामों को लोअरकेस में बदलें:',
+	'TranslitCaseFoldingInfo'	=> 'यह विकल्प केवल सक्रिय लिप्यंतरण के साथ ही प्रभावी है।',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',

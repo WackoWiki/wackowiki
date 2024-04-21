@@ -914,8 +914,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'При някои браузъри може да има проблем с MIME типовете. Тази опция оправя този проблем.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'Това дава възможност за обработка на качените SVG файлове, за да се предотврати качването на уязвими SVG/XML файлове.',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> 'Транслитериране на имената на файловете:',
+	'TranslitFileNameInfo'		=> 'Ако е приложимо и не е необходимо да има символи Unicode, силно препоръчително е да се приемат само алфа-цифрови символи.',
+	'TranslitCaseFolding'		=> 'Преобразувайте имената на файловете в малки букви:',
+	'TranslitCaseFoldingInfo'	=> 'Тази опция е ефективна само при активна транслитерация.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Създай галерия:',

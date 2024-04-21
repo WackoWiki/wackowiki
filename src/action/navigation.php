@@ -135,7 +135,7 @@ if ($next)
 	$tpl->next_link		= $this->link('/' . $__next['tag'], '', $__next['text'], $__next['title'], $track, true, false);
 }
 
-if ($prev & $next)
+if ($prev && $next && !$table)
 {
 	$tpl->separator	= true;
 }

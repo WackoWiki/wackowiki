@@ -55,8 +55,8 @@
 		</div>
 	</div>
 	<nav class="menu-main">
-		<div id="menu-user">
-			<ol>
+		<div id="menu-user" class="submenu">
+			<ul>
 				[= menu menuList =
 					[ ' commit | void  // alternation hack ' ]
 					[= item _ =
@@ -67,9 +67,9 @@
 					=]
 				=]
 				[= dropmenu _ =
-					<li class="dropdown">
-						<a href="#" id="menu-more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-overflow-menu"></a>
-						<ul class="dropdown_menu">
+					<li>
+						<a href="#" aria-haspopup="true"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-overflow-menu"></a>
+						<ul class="dropdown" aria-label="submenu">
 							[ '' menu menuList '' ]
 						</ul>
 					</li>
@@ -88,11 +88,11 @@
 						</a>
 					</li>
 				=]
-			</ol>
+			</ul>
 		</div>
 		[ === // control tabs menu === ]
-		<div id="page-handler">
-			<ul class="submenu">
+		<div id="page-handler" class="submenu">
+			<ul>
 
 				[= tab TabList =
 					<li class="[ ' class ' ][ ' active ' ]">
@@ -106,8 +106,8 @@
 					</li>
 				=]
 				[= droptab _ =
-					<li class="dropdown"><a href="#" id="handler-more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown-arrow">▼</span></a>
-						<ul class="dropdown_menu">
+					<li><a href="#" aria-haspopup="true">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown-arrow">▼</span></a>
+						<ul class="dropdown" aria-label="submenu">
 							[ '' tab TabList '' ]
 							[ '' // last empty '' ]
 							<li></li>

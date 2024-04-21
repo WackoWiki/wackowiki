@@ -917,8 +917,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'این امکان پاکسازی فایل های SVG آپلود شده را برای جلوگیری از آپلود فایل های آسیب پذیر SVG/XML فراهم می کند.',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> 'ترجمه نام فایل ها:',
+	'TranslitFileNameInfo'		=> 'اگر قابل اجرا است و نیازی به داشتن کاراکترهای یونیکد نیست، توصیه می شود فقط کاراکترهای آلفا-عددی را بپذیرید.',
+	'TranslitCaseFolding'		=> 'تبدیل نام فایل ها به حروف کوچک:',
+	'TranslitCaseFoldingInfo'	=> 'این گزینه فقط با نویسه‌گردانی فعال مؤثر است.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',

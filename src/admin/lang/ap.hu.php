@@ -916,6 +916,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> 'Ez lehetővé teszi a feltöltött SVG fájlok szanálását, hogy megakadályozza az SVG/XML sérülékeny fájlok feltöltését.',
 	'TranslitFileName'			=> 'Transliterate file names:',
 	'TranslitFileNameInfo'		=> 'Ha alkalmazható, és nincs szükség Unicode karakterekre, akkor nagyon ajánlott csak alfa-numerikus karaktereket elfogadni.',
+	'TranslitCaseFolding'		=> 'A fájlnevek kisbetűsre alakítása:',
+	'TranslitCaseFoldingInfo'	=> 'Ez az opció csak aktív átírás esetén érvényes.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Kiskép készítése:',

@@ -900,6 +900,8 @@ $ap_translation = [
 	'SvgSanitizerInfo'			=> '这可以对上传的SVG文件进行消毒，以防止SVG/XML脆弱文件被上传。',
 	'TranslitFileName'			=> '音译文件名：',
 	'TranslitFileNameInfo'		=> '如果适用且不需要 Unicode 字符，强烈建议只接受 Alpha-Numeric 字符。',
+	'TranslitCaseFolding'		=> '将文件名转换为小写：',
+	'TranslitCaseFoldingInfo'	=> '该选项仅对主动音译有效。',
 
 	'Thumbnails'				=> '缩略图',
 	'CreateThumbnail'			=> '创建缩略图：',

@@ -912,8 +912,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'Dette gør det muligt at rense uploadede SVG-filer for at forhindre, at SVG/XML sårbare filer bliver uploadet.',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> 'Translitterere filnavne:',
+	'TranslitFileNameInfo'		=> 'Hvis det er relevant, og der ikke er behov for Unicode-tegn, anbefales det stærkt kun at acceptere alfanumeriske tegn.',
+	'TranslitCaseFolding'		=> 'Konverter filnavne til små bogstaver:',
+	'TranslitCaseFoldingInfo'	=> 'Denne indstilling er kun effektiv med aktiv translitteration.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Opret miniature:',

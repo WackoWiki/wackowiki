@@ -914,8 +914,10 @@ $ap_translation = [
 	'CheckMimetypeInfo'			=> 'Ορισμένα προγράμματα περιήγησης μπορεί να εξαπατηθούν και να υποθέσουν ένα ανακριβές είδος κωδικοποίησης για τα φορτώσιμα αρχεία. Αυτή η επιλογή εξασφαλίζει ότι τέτοια αρχεία που είναι πιθανό να προκαλέσουν αυτό, να απορρίπτονται.',
 	'SvgSanitizer'				=> 'SVG Sanitizer:',
 	'SvgSanitizerInfo'			=> 'Αυτό επιτρέπει την εξυγίανση των αρχείων SVG που μεταφορτώνονται για να αποτρέψει τη μεταφόρτωση ευάλωτων αρχείων SVG/XML.',
-	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileName'			=> 'Μεταγραφή ονομάτων αρχείων:',
+	'TranslitFileNameInfo'		=> 'Συνιστάται ιδιαίτερα να δέχεστε μόνο αλφαριθμητικούς χαρακτήρες.',
+	'TranslitCaseFolding'		=> 'Μετατροπή ονομάτων αρχείων σε πεζά:',
+	'TranslitCaseFoldingInfo'	=> 'Αυτή η επιλογή είναι αποτελεσματική μόνο με ενεργή μεταγραφή.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Δημιουργία μικρογραφίας:',
