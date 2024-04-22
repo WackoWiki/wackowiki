@@ -1499,20 +1499,12 @@ table.gallery {
 	text-align: right;
 }
 
-#menu-user li:first-child {
-	border-left: 1px none;
-}
-[dir=rtl] #menu-user li:first-child {
-	border-right: 1px none;
-	padding: 1px 0 4px 6px;
-}
-
 #menu-user li {
 	border-left: 1px dotted #aaa;
 	float: left;
 	line-height: 1.2em;
 	margin: 0 .5em 0 -.5em;
-	padding: 0 .5em 0 .5em;
+	padding: 0.2em 0.5em;
 	white-space: nowrap;
 }
 [dir=rtl] #menu-user li {
@@ -1521,6 +1513,12 @@ table.gallery {
 	float: right;
 }
 
+#menu-user li:first-child {
+	border-left: 1px none;
+}
+[dir=rtl] #menu-user li:first-child {
+	border-right: 1px none;
+}
 #menu-user li:first-child.active {
 	margin-left: -6px;
 	padding-left: 6px;
@@ -1537,10 +1535,11 @@ table.gallery {
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	color: #fff;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	margin-left: 0;
 }
-#menu-user ul ul li.active {
+#menu-user ul ul li.active,
+#menu-user ul ul li:first-child.active {
 	padding: 0;
+	margin: 0;
 }
 
 #menu-user li a {
