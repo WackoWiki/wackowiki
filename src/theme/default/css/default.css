@@ -1536,6 +1536,10 @@ table.gallery {
 	color: #fff;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
+#menu-user ul ul li {
+	border-left: none;
+	padding: 0 .5em;
+}
 #menu-user ul ul li.active,
 #menu-user ul ul li:first-child.active {
 	padding: 0;
@@ -2019,7 +2023,7 @@ table.formation td {
 }
 
 .submenu ul li ul li a,
-.submenu ul li ul li span {
+.submenu ul li ul li > span {
 	display: block;
 	float: left;
 	font-weight: normal;
@@ -2029,7 +2033,7 @@ table.formation td {
 	padding: 0.25em 20px 0.2em 0.5em;
 }
 [dir=rtl] .submenu ul li ul li a,
-[dir=rtl] .submenu ul li ul li span {
+[dir=rtl] .submenu ul li ul li > span {
 	float: right;
 	padding: 0.25em 0.5em 0.2em 20px;
 }
