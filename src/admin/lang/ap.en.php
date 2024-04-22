@@ -22,18 +22,18 @@ $ap_translation = [
 	'AdminPanel'				=> 'Administration Control Panel',
 	'RecoveryMode'				=> 'Recovery Mode',
 	'Authorization'				=> 'Authorization',
-	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
+	'AuthorizationTip'			=> 'Please enter the administrative password (make sure that cookies are allowed in your browser).',
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password hash in the configuration file and run the program again.',
+	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is a threat to security! Enter your password hash in the configuration file and run the program again.',
 
-	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
+	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exist.',
 
 	'ApHomePage'				=> 'Home Page',
-	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
+	'ApHomePageTip'				=> 'Quit system administration and open the home page',
 	'ApLogOut'					=> 'Log out',
-	'ApLogOutTip'				=> 'quit system administration',
+	'ApLogOutTip'				=> 'Quit system administration and log out of site',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeft'					=> 'Time left:  %1 minute(s)',
 	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'Open',
@@ -260,12 +260,12 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> 'Updated basic settings',
 	'LogBasicSettingsUpdated'	=> 'Updated basic settings',
 
-	'SiteName'					=> 'Site Name:',
-	'SiteNameInfo'				=> 'The title of this site, appears on browser title, theme header, email-notification, etc.',
-	'SiteDesc'					=> 'Site Description:',
-	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
-	'AdminName'					=> 'Admin of Site:',
-	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
+	'SiteName'					=> 'Site name:',
+	'SiteNameInfo'				=> 'The title of this site. Appears on browser title, theme header, email-notification, etc.',
+	'SiteDesc'					=> 'Site description:',
+	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header. Explains, in a few words, what this site is about.',
+	'AdminName'					=> 'Admin of site:',
+	'AdminNameInfo'				=> 'User name of individual who is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable that it conforms to the name of the chief administrator of the site.',
 
 	'LanguageSection'			=> 'Language',
 	'DefaultLanguage'			=> 'Default language:',
@@ -273,49 +273,49 @@ $ap_translation = [
 	'MultiLanguage'				=> 'Multilanguage support:',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages:',
-	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, otherwise all languages are selected.',
 
 	'CommentSection'			=> 'Comments',
 	'AllowComments'				=> 'Allow comments:',
-	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
+	'AllowCommentsInfo'			=> 'Enable comments for guests or registered users only, or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments:',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
 
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel:',
-	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
+	'CommentsPanelInfo'			=> 'The default display of comments at the bottom of the page.',
 	'FilePanel'					=> 'File panel:',
-	'FilePanelInfo'				=> 'The default display of attachments in the bottom of the page.',
+	'FilePanelInfo'				=> 'The default display of attachments at the bottom of the page.',
 	'TagsPanel'					=> 'Tags panel:',
-	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
+	'TagsPanelInfo'				=> 'The default display of the tags panel at the bottom of the page.',
 
 	'NavigationSection'			=> 'Navigation',
-	'ShowPermalink'				=> 'Show Permalink:',
+	'ShowPermalink'				=> 'Show permalink:',
 	'ShowPermalinkInfo'			=> 'The default display of the permalink for the current version of the page.',
 	'TocPanel'					=> 'Table of contents panel:',
 	'TocPanelInfo'				=> 'The default display table of contents panel of a page (may need support in the templates).',
 	'SectionsPanel'				=> 'Sections panel:',
-	'SectionsPanelInfo'			=> 'By default display the panel of adjacent pages (requires support in the templates).',
+	'SectionsPanelInfo'			=> 'By default, display the panel of adjacent pages (requires support in the templates).',
 	'DisplayingSections'		=> 'Displaying sections:',
-	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
+	'DisplayingSectionsInfo'	=> 'When the previous options are set, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>), both, or other (<em>tree</em>).',
 	'MenuItems'					=> 'Menu items:',
 	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
 
-	'HandlerSection'			=> 'Handler',
-	'HideRevisions'				=> 'Hide Revisions:',
+	'HandlerSection'			=> 'Handlers',
+	'HideRevisions'				=> 'Hide revisions:',
 	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
 	'AttachmentHandler'			=> 'Enable attachments handler:',
-	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
+	'AttachmentHandlerInfo'		=> 'Permits display of the attachments handler.',
 	'SourceHandler'				=> 'Enable source handler:',
-	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+	'SourceHandlerInfo'			=> 'Permits the display of the source handler.',
 	'ExportHandler'				=> 'Enable XML export handler:',
-	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
+	'ExportHandlerInfo'			=> 'Permits the display of the XML export handler.',
 
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
-	'AllowedDiffMode'			=> 'Allowed Diff modes:',
-	'AllowedDiffModeInfo'		=> 'It is recommended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
+	'AllowedDiffMode'			=> 'Allowed diff modes:',
+	'AllowedDiffModeInfo'		=> 'It is recommended to select only the set of diff modes you want to use, otherwise all diff modes are selected.',
 	'NotifyDiffMode'			=> 'Notify diff mode:',
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
@@ -329,20 +329,20 @@ $ap_translation = [
 	'ReviewSettings'			=> 'Review:',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
 	'PublishAnonymously'		=> 'Allow anonymous publishing:',
-	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
+	'PublishAnonymouslyInfo'	=> 'Allow users to publish anonymously (to hide the name).',
 
-	'DefaultRenameRedirect'		=> 'When renaming put redirection:',
+	'DefaultRenameRedirect'		=> 'When renaming, create redirection:',
 	'DefaultRenameRedirectInfo'	=> 'By default, offer to set a redirect to the old address of the page being renamed.',
 	'StoreDeletedPages'			=> 'Keep deleted pages:',
-	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file, keep it in a special section, where it will be available for review and recovery for some more time (as described below).',
+	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file, keep it in a special section, where it will be available for review and recovery for some period of time (as described below).',
 	'KeepDeletedTime'			=> 'Storage time of deleted pages:',
-	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only with the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).',
+	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only with the previous option. Use zero to ensure entities are never deleted (in this case the administrator can clear the "cart" manually).',
 	'PagesPurgeTime'			=> 'Storage time of page revisions:',
 	'PagesPurgeTimeInfo'		=> 'Automatically deletes the older versions within the given number of days. If you enter zero, the older versions will not be removed.',
-	'EnableReferrers'			=> 'Enable Referrers:',
-	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
+	'EnableReferrers'			=> 'Enable referrers:',
+	'EnableReferrersInfo'		=> 'Permits creation and display of external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers:',
-	'ReferrersPurgeTimeInfo'	=> 'Keep the history of referring external pages no longer than a given number of days. Zero means eternal storage, but for an actively visited site this can lead to database overflow.',
+	'ReferrersPurgeTimeInfo'	=> 'Keep the history of referring external pages no longer than a given number of days. Use zero to ensure referrers are never deleted (but for an actively visited site, this can lead to database overflow).',
 	'EnableCounters'			=> 'Hit Counters:',
 	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
 
@@ -352,7 +352,7 @@ $ap_translation = [
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds:',
-	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
+	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off for the entire wiki.',
 	'XmlChangeLink'				=> 'Changes feed link mode:',
 	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
 	'XmlChangeLinkMode'			=> [
@@ -362,18 +362,18 @@ $ap_translation = [
 		'4'		=> 'the current page',
 	],
 
-	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemap'				=> 'XML sitemap:',
 	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
-	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
+	'XmlSitemapGz'				=> 'XML sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML sitemap generation time:',
+	'XmlSitemapTimeInfo'		=> 'Generates the sitemap only once in the given number of days. Set to zero to generate on every page change.',
 
 	'SearchSection'				=> 'Search',
 	'OpenSearch'				=> 'OpenSearch:',
 	'OpenSearchInfo'			=> 'Creates the OpenSearch description file in the XML folder and enables Autodiscovery of search plugin in the HTML header.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+	'SearchEngineVisibility'	=> 'Block search engines (search engine visibility):',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site. It is up to search engines to honor this request.',
 
 
 
@@ -386,17 +386,17 @@ $ap_translation = [
 	'LogoAndTitle'				=> 'logo and title',
 
 	'LogoSection'				=> 'Logo',
-	'SiteLogo'					=> 'Site Logo:',
-	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
+	'SiteLogo'					=> 'Site logo:',
+	'SiteLogoInfo'				=> 'Your logo will typically appear at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
 	'LogoDimensions'			=> 'Logo dimensions:',
-	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
+	'LogoDimensionsInfo'		=> 'Width and height of the displayed logo.',
 	'LogoDisplayMode'			=> 'Logo display mode:',
-	'LogoDisplayModeInfo'		=> 'Defines the appearance of the Logo. Default is off.',
+	'LogoDisplayModeInfo'		=> 'Defines the appearance of the logo. Default is off.',
 
 	'FaviconSection'			=> 'Favicon',
-	'SiteFavicon'				=> 'Site Favicon:',
+	'SiteFavicon'				=> 'Site favicon:',
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
-	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 × 64px.',
+	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 x 64 px.',
 	'ThemeColor'				=> 'Theme color for address bar:',
 	'ThemeColorInfo'			=> 'The browser will set the address bar color of every page according to the provided CSS color.',
 
@@ -404,20 +404,20 @@ $ap_translation = [
 	'Theme'						=> 'Theme:',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
 	'ResetUserTheme'			=> 'Reset all user themes:',
-	'ResetUserThemeInfo'		=> 'Resets all user themes. Warning: This action will set back all user selected themes to the global default theme.',
-	'SetBackUserTheme'			=> 'Set back all user themes to %1 theme.',
+	'ResetUserThemeInfo'		=> 'Resets all user themes. Warning: This action will revert all user-selected themes to the global default theme.',
+	'SetBackUserTheme'			=> 'Revert all user themes to %1 theme.',
 	'ThemesAllowed'				=> 'Allowed Themes:',
-	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
+	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose; otherwise, all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page:',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'SystemSettingsInfo'		=> 'Group of parameters responsible for fine-tuning the site. Do not change them unless you are confident in their actions.',
 	'SystemSettingsUpdated'		=> 'Updated system settings',
 
-	'DebugModeSection'			=> 'Debug mode',
+	'DebugModeSection'			=> 'Debug Mode',
 	'DebugMode'					=> 'Debug mode:',
-	'DebugModeInfo'				=> 'Fixing and outputting telemetry data about the programs execution time. Attention: Full detail mode imposes higher requirements to the allocated memory, especially for resource-intensive operations, such as database backup and restore.',
+	'DebugModeInfo'				=> 'Extracting and outputting telemetry data about the application\'s execution time. Attention: Full detail mode imposes higher requirements to the allocated memory, especially for resource-intensive operations, such as database backup and restore.',
 	'DebugModes'	=> [
 		'0'		=> 'debugging is off',
 		'1'		=> 'only the total execution time',
@@ -425,25 +425,25 @@ $ap_translation = [
 		'3'		=> 'full detail (DBMS, cache, etc.)',
 	],
 	'DebugSqlThreshold'			=> 'Threshold performance RDBMS:',
-	'DebugSqlThresholdInfo'		=> 'In the detailed debug mode to record only the queries take longer than the number of seconds.',
+	'DebugSqlThresholdInfo'		=> 'In detailed debug mode, report only the queries that take longer than the number of seconds specified.',
 	'DebugAdminOnly'			=> 'Closed diagnosis:',
 	'DebugAdminOnlyInfo'		=> 'Show debug data of the program (and DBMS) only for the administrator.',
 
 	'CachingSection'			=> 'Caching Options',
 	'Cache'						=> 'Cache rendered pages:',
 	'CacheInfo'					=> 'Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.',
-	'CacheTtl'					=> 'Term relevance cached pages:',
+	'CacheTtl'					=> 'Time-to-live for cached pages:',
 	'CacheTtlInfo'				=> 'Cache pages no more than a specified number of seconds.',
 	'CacheSql'					=> 'Cache DBMS queries:',
-	'CacheSqlInfo'				=> 'Maintain a local cache the results of certain resource-SQL-queries.',
-	'CacheSqlTtl'				=> 'Term relevance Cache Database:',
-	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
+	'CacheSqlInfo'				=> 'Maintain a local cache of the results of certain resource-related SQL queries.',
+	'CacheSqlTtl'				=> 'Time-to-live for cached SQL queries:',
+	'CacheSqlTtlInfo'			=> 'Cache results of SQL queries for no more than the specified number of seconds. Values greater than 1200 are not desirable.',
 
-	'LogSection'				=> 'Log settings',
-	'LogLevelUsage'				=> 'Using logging:',
+	'LogSection'				=> 'Log Settings',
+	'LogLevelUsage'				=> 'Use logging:',
 	'LogLevelUsageInfo'			=> 'The minimum priority of the events recorded in the log.',
 	'LogThresholds'	=> [
-		'0'		=> 'not keep a journal',
+		'0'		=> 'do not keep a journal',
 		'1'		=> 'only the critical level',
 		'2'		=> 'from the highest level',
 		'3'		=> 'from high',
@@ -452,7 +452,7 @@ $ap_translation = [
 		'6'		=> 'the minimum level',
 		'7'		=> 'record all',
 	],
-	'LogDefaultShow'			=> 'Display Log Mode:',
+	'LogDefaultShow'			=> 'Display log mode:',
 	'LogDefaultShowInfo'		=> 'The minimum priority events displayed in the log by default.',
 	'LogModes'	=> [
 		'1'		=> 'only the critical level',
@@ -464,41 +464,31 @@ $ap_translation = [
 		'7'		=> 'show all',
 	],
 	'LogPurgeTime'				=> 'Storage time of Log:',
-	'LogPurgeTimeInfo'			=> 'Remove event log over a given number of days.',
+	'LogPurgeTimeInfo'			=> 'Remove event log after the specified number of days.',
 
 	'PrivacySection'			=> 'Privacy',
-	'AnonymizeIp'				=> 'Anonymize users IP addresses:',
-	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
+	'AnonymizeIp'				=> 'Anonymize users\' IP addresses:',
+	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable (i.e., page, revision or referrers).',
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
-	'ReverseProxy'				=> 'Use Reverse proxy:',
-	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
-									 client by examining information stored in the X-Forwarded-For headers.
-									 X-Forwarded-For headers are a standard mechanism for identifying client
-									 systems connecting through a reverse proxy server, such as Squid or
-									 Pound. Reverse proxy servers are often used to enhance the performance
-									 of heavily visited sites and may also provide other site caching,
-									 security or encryption benefits. If this WackoWiki installation operates
-									 behind a reverse proxy, this setting should be enabled so that correct
-									 IP address information is captured in WackoWiki\'s session management,
-									 logging, statistics and access management systems; if you are unsure
-									 about this setting, do not have a reverse proxy, or WackoWiki operates in
-									 a shared hosting environment, this setting should remain disabled.',
+	'ReverseProxy'				=> 'Use reverse proxy:',
+    'ReverseProxyInfo'			=> 
+    'Enable this setting to determine the correct IP address of the remote client by examining information stored in the X-Forwarded-For headers.  X-Forwarded-For headers are a standard mechanism for identifying client systems connecting through a reverse proxy server, such as Squid or Pound. Reverse proxy servers are often used to enhance the performance of heavily visited sites and may also provide other site caching, security or encryption benefits. If this WackoWiki installation operates behind a reverse proxy, this setting should be enabled so that correct IP address information is captured in WackoWiki\'s session management, logging, statistics and access management systems; if you are unsure about this setting, do not have a reverse proxy, or WackoWiki operates in a shared hosting environment, this setting should remain disabled.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header:',
 	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
+									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma-delimited list of IP
+									 addresses; only the last one (the left-most) will be used.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses:',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
-									 proxies. Filling this array WackoWiki will trust the information stored
-									 in the X-Forwarded-For headers only if Remote IP address is one of
-									 these, that is the request reaches the web server from one of your
+									 proxies. If using this array, WackoWiki will trust the information stored
+									 in the X-Forwarded-For headers only if the Remote IP address is one of
+									 these, that is, the request reaches the web server from one of your
 									 reverse proxies. Otherwise, the client could directly connect to
-									 your web server spoofing the X-Forwarded-For headers.',
+									 your web server by spoofing the X-Forwarded-For headers.',
 
-	'SessionSection'				=> 'Session handling',
+	'SessionSection'				=> 'Session Handling',
 	'SessionStorage'				=> 'Session storage:',
-	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
+	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default, either file or database session storage is selected.',
 	'SessionModes'	=> [
 		'1'		=> 'File',
 		'2'		=> 'Database',
@@ -509,38 +499,38 @@ $ap_translation = [
 	'LoginNoticeInfo'				=> 'Displays login notice.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
-	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
+	'RewriteModeInfo'				=> 'If your web server supports this feature, enable to "beautify" the page URLs.<br>
 										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
 	'PermissionsSettingsUpdated'	=> 'Updated permissions settings',
 
-	'PermissionsSection'		=> 'Rights and privileges',
+	'PermissionsSection'		=> 'Rights and Privileges',
 	'ReadRights'				=> 'Read rights by default:',
-	'ReadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'ReadRightsInfo'			=> 'Default assigned to the created root pages, as well as pages for which parent ACLs cannot be defined.',
 	'WriteRights'				=> 'Write rights by default:',
-	'WriteRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'WriteRightsInfo'			=> 'Default assigned to the created root pages, as well as pages for which parent ACLs cannot be defined.',
 	'CommentRights'				=> 'Comment rights by default:',
-	'CommentRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'CommentRightsInfo'			=> 'Default assigned to the created root pages, as well as pages for which parent ACLs cannot be defined.',
 	'CreateRights'				=> 'Create rights of a sub page by default:',
-	'CreateRightsInfo'			=> 'Define the right for creating root pages and assign them to pages for which parental rights cannot be defined.',
+	'CreateRightsInfo'			=> 'Default assigned to the created sub pages.',
 	'UploadRights'				=> 'Upload rights by default:',
-	'UploadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'UploadRightsInfo'			=> 'Default upload rights.',
 	'RenameRights'				=> 'Global rename right:',
 	'RenameRightsInfo'			=> 'The list of permissions to freely rename (move) pages.',
 
-	'LockAcl'					=> 'Lock all ACL to read only:',
-	'LockAclInfo'				=> '<span class="cite">Overwrites the acl settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
+	'LockAcl'					=> 'Lock all ACLs to read only:',
+	'LockAclInfo'				=> '<span class="cite">Overwrites the ACL settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period of time for security reasons, or as a emergency response to an exploit or vulnerability.',
 	'HideLocked'				=> 'Hide inaccessible pages:',
-	'HideLockedInfo'			=> 'If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).',
+	'HideLockedInfo'			=> 'If the user does not have permission to read the page, hide it in different page lists (however the link placed in text will still be visible).',
 	'RemoveOnlyAdmins'			=> 'Only administrators can delete pages:',
-	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.',
+	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, the ability to delete pages. The first limit applies to owners of normal pages.',
 	'OwnersRemoveComments'		=> 'Owners of pages can delete comments:',
 	'OwnersRemoveCommentsInfo'	=> 'Allow page owners to moderate comments on their pages.',
 	'OwnersEditCategories'		=> 'Owners can edit page categories:',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
-	'TermHumanModeration'		=> 'Term human moderation:',
+	'TermHumanModeration'		=> 'Human moderation expiration:',
 	'TermHumanModerationInfo'	=> 'Moderators can only edit comments if they were created no more than this number of days ago (this limitation does not apply to the last comment in the topic).',
 
 	'UserCanDeleteAccount'		=> 'Allow users to delete their accounts',
@@ -550,58 +540,58 @@ $ap_translation = [
 	'SecuritySettingsUpdated'	=> 'Updated security settings',
 
 	'AllowRegistration'			=> 'Register online:',
-	'AllowRegistrationInfo'		=> 'Open user registration. Disabling this option will prevent free registration, however, the site administrator will be able to register other users himself.',
+	'AllowRegistrationInfo'		=> 'Open user registration. Disabling this option will prevent free registration, however, the site administrator will still be able to register users.',
 	'ApproveNewUser'			=> 'Approve new users:',
-	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
+	'ApproveNewUserInfo'		=> 'Allows administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies:',
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
-	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
+	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of a WikiName for users. Permits user registration with traditional nicknames instead of forced CamelCase-formatted names (i.e., NameSurname).',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
 
 	'EmailSection'				=> 'Email',
 	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same email address.',
 	'EmailConfirmation'			=> 'Enforce email confirmation:',
-	'EmailConfirmationInfo'		=> 'Requires the user to verify his email address before he can log in.',
+	'EmailConfirmationInfo'		=> 'Requires the user to verify their email address before they can log in.',
 	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
+	'AllowedEmailDomainsInfo'	=> 'Comma-separated email domains, e.g. <code>example.com, local.lan</code> etc. If not specified, all email domains are allowed.',
 	'ForbiddenEmailDomains'		=> 'Forbidden email domains:',
-	'ForbiddenEmailDomainsInfo'	=> 'Forbidden email domains comma separated, e.g. <code>example.com, local.lan</code> etc. (only effective if allowed email domains list is empty)',
+	'ForbiddenEmailDomainsInfo'	=> 'Comma-separated forbidden email domains, e.g. <code>example.com, local.lan</code> etc. Only effective if allowed email domains list is empty.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
-	'EnableCaptcha'				=> 'Enable Captcha:',
-	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
+	'EnableCaptcha'				=> 'Enable captcha:',
+	'EnableCaptchaInfo'			=> 'If enabled, captcha will be shown in the following cases, or if a security threshold is reached.',
 	'CaptchaComment'			=> 'New comment:',
-	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
+	'CaptchaCommentInfo'		=> 'As protection against spam, unregistered users must complete captcha before comment will be posted.',
 	'CaptchaPage'				=> 'New page:',
-	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
+	'CaptchaPageInfo'			=> 'As protection against spam, unregistered users must complete captcha before creating a new page.',
 	'CaptchaEdit'				=> 'Edit page:',
-	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
+	'CaptchaEditInfo'			=> 'As protection against spam, unregistered users must complete captcha before editing pages.',
 	'CaptchaRegistration'		=> 'Registration:',
-	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
+	'CaptchaRegistrationInfo'	=> 'As protection against spam, unregistered users must complete captcha before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
-	'TlsConnection'				=> 'TLS-Connection:',
-	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server, otherwise you will lose access to the admin panel!</span><br>It also determines if the the Cookie Secure Flag is set, the <code>secure</code> flag specifies whether cookies should only be sent over secure connections.',
+	'TlsConnection'				=> 'TLS connection:',
+	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS certificate on the server, otherwise you will lose access to the admin panel!</span><br>It also determines if the the Cookie Secure Flag is set: The <code>secure</code> flag specifies whether cookies should only be sent over secure connections.',
 	'TlsImplicit'				=> 'Mandatory TLS:',
 	'TlsImplicitInfo'			=> 'Forcibly reconnect the client from HTTP to HTTPS. With the option disabled, the client can browse the site through an open HTTP channel.',
 
 	'HttpSecurityHeaders'		=> 'HTTP Security Headers',
-	'EnableSecurityHeaders'		=> 'Enable Security Headers:',
-	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',
-	'Csp'						=> 'Content-Security-Policy (CSP):',
-	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
+	'EnableSecurityHeaders'		=> 'Enable security headers:',
+	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk!',
+	'Csp'						=> 'Content security policy (CSP):',
+	'CspInfo'					=> 'Configuring CSP involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
 		'0'		=> 'disabled',
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
-	'PermissionsPolicy'			=> 'Permissions Policy:',
+	'PermissionsPolicy'			=> 'Permissions policy:',
 	'PermissionsPolicyInfo'		=> 'The HTTP Permissions-Policy header provides a mechanism to explicitly enable or disable various powerful browser features.',
-	'ReferrerPolicy'			=> 'Referrer Policy:',
-	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
+	'ReferrerPolicy'			=> 'Referrer policy:',
+	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included in responses.',
 	'ReferrerPolicyModes'	=> [
 		'0'		=> '[off]',
 		'1'		=> 'no-referrer',
@@ -614,10 +604,10 @@ $ap_translation = [
 		'8'		=> 'unsafe-url'
 	],
 
-	'UserPasswordSection'		=> 'Persistence of user passwords',
+	'UserPasswordSection'		=> 'Persistence of User Passwords',
 	'PwdMinChars'				=> 'Minimum password length:',
 	'PwdMinCharsInfo'			=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.',
-	'AdminPwdMinChars'			=> 'Minimum Admin password length:',
+	'AdminPwdMinChars'			=> 'Minimum admin password length:',
 	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
 	'PwdCharComplexity'			=> 'The required password complexity:',
 	'PwdCharClasses'	=> [
@@ -643,37 +633,37 @@ $ap_translation = [
 	'FormTokenTime'				=> 'Maximum time to submit forms:',
 	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in seconds).<br> Note that a form might become invalid if the session expires, regardless of this setting.',
 
-	'SessionLength'				=> 'Term login cookie:',
-	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
+	'SessionLength'				=> 'Session cookie expiration:',
+	'SessionLengthInfo'			=> 'The lifetime of the user session cookie by default (in days).',
 	'CommentDelay'				=> 'Anti-flood for comments:',
-	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in seconds).',
+	'CommentDelayInfo'			=> 'The minimum delay between the publication of new user comments (in seconds).',
 	'IntercomDelay'				=> 'Anti-flood for personal communications:',
-	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in seconds).',
+	'IntercomDelayInfo'			=> 'The minimum delay between sending private messages (in seconds).',
 	'RegistrationDelay'			=> 'Time threshold for registering:',
-	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
+	'RegistrationDelayInfo'		=> 'The minimum time threshold between registration form submissions to discourage registration bots (in seconds).',
 
 	// Formatter settings
-	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'FormatterSettingsInfo'		=> 'Group of parameters responsible for fine-tuning the site. Do not change them unless you are confident in their actions.',
 	'FormatterSettingsUpdated'	=> 'Updated formatting settings',
 
-	'TextHandlerSection'		=> 'Text Handler ',
-	'Typografica'				=> 'Typographical Proofreader:',
-	'TypograficaInfo'			=> 'Unsetting slightly speed up the process of adding comments and save the page.',
+	'TextHandlerSection'		=> 'Text Handler:',
+	'Typografica'				=> 'Typographical proofreader:',
+	'TypograficaInfo'			=> 'Disabling this option will speed up the processes of adding comments and saving pages.',
 	'Paragrafica'				=> 'Paragrafica markings:',
-	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.',
-	'AllowRawhtml'				=> 'Global HTML Support:',
+	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents (<code>{{toc}}</code>).',
+	'AllowRawhtml'				=> 'Global HTML support:',
 	'AllowRawhtmlInfo'			=> 'This option is potentially unsafe for an open site.',
 	'SafeHtml'					=> 'Filtering HTML:',
-	'SafeHtmlInfo'				=> 'Prevents saving of dangerous HTML-objects. Turning off the filter on an open site with HTML support is <span class="underline">extremely</span> undesirable!',
+	'SafeHtmlInfo'				=> 'Prevents saving of dangerous HTML objects. Turning off the filter on an open site with HTML support is <span class="underline">extremely</span> undesirable!',
 
 	'WackoFormatterSection'		=> 'Wiki Text Formatter (Wacko Formatter)',
-	'X11colors'					=> 'X11 Colors Usage:',
-	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
-	'WikiLinks'					=> 'Disable Wikilinks:',
-	'WikiLinksInfo'				=> 'Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page. This is useful when you work across different namespaces aks clusters. By default it is off.',
-	'BracketsLinks'				=> 'Disable bracketslinks:',
+	'X11colors'					=> 'X11 colors usage:',
+	'X11colorsInfo'				=> 'Extends the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Disabling this option speeds up the processes of adding comments and saving pages.',
+	'WikiLinks'					=> 'Disable wiki links:',
+	'WikiLinksInfo'				=> 'Disables linking for <code>CamelCaseWords</code>: Your CamelCase words will no longer be linked directly to a new page. This is useful when you work across different namespaces/clusters. By default it is off.',
+	'BracketsLinks'				=> 'Disable bracketed links:',
 	'BracketsLinksInfo'			=> 'Disables <code>[[link]]</code> and <code>((link))</code> syntax.',
-	'Formatters'				=> 'Disable Formatters:',
+	'Formatters'				=> 'Disable formatters:',
 	'FormattersInfo'			=> 'Disables <code>%%code%%</code> syntax, used for highlighters.',
 
 	'DateFormatsSection'		=> 'Date Formats',
@@ -686,9 +676,9 @@ $ap_translation = [
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro:',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Timezone:',
-	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
+	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged-in users can change their timezone in their user settings.',
 
-	'Canonical'					=> 'Use fully canonical URLs:',
+	'Canonical'					=> 'Use fully-canonical URLs:',
 	'CanonicalInfo'				=> 'All links are created as absolute URLs in the form %1. URLs relative to the server root in the form %2 should be preferred.',
 	'LinkTarget'				=> 'Where external links open:',
 	'LinkTargetInfo'			=> 'Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.',
@@ -697,61 +687,61 @@ $ap_translation = [
 	'Nofollow'					=> 'nofollow:',
 	'NofollowInfo'				=> 'Tells search engines that the hyperlinks should not affect the page ranking of the target page in the search engine index. Adds <code>rel="nofollow"</code> to the link syntax.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores:',
-	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
+	'UrlsUnderscoresInfo'		=> 'For example, %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Show spaces in WikiNames:',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
-	'NumerateLinks'				=> 'Numerate links in print view:',
-	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
+	'NumerateLinks'				=> 'Enumerate links in print view:',
+	'NumerateLinksInfo'			=> 'Enumerates and lists all links at the bottom of the print view with this option.',
 	'YouareHereText'			=> 'Disable and visualize self-referencing links:',
-	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
+	'YouareHereTextInfo'		=> 'Visualize links to the same page, using <code>&lt;b&gt;####&lt;/b&gt;</code>. All links to self lose link formatting, but are displayed as bold text.',
 
 	// Pages settings
-	'PagesSettingsInfo'			=> 'Here you can set or change the system base pages used within the Wiki. Please ensure you not forget to create or change the corresponding pages in the Wiki according your settings here.',
+	'PagesSettingsInfo'			=> 'Here you can set or change the system base pages used within the Wiki. Please ensure you do not forget to create or change the corresponding pages in the Wiki according your settings here.',
 	'PagesSettingsUpdated'		=> 'Updated settings base pages',
 
 	'ListCount'					=> 'Number of items per list:',
-	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+	'ListCountInfo'				=> 'Number of items displayed on each list for guest, or as default value for new users.',
 
 	'ForumSection'				=> 'Options Forum',
-	'ForumCluster'				=> 'Cluster Forum:',
+	'ForumCluster'				=> 'Cluster forum:',
 	'ForumClusterInfo'			=> 'Root cluster for forum section (action %1).',
 	'ForumTopics'				=> 'Number of topics per page:',
 	'ForumTopicsInfo'			=> 'Number of topics displayed on each page of the list in the forum sections (action %1).',
 	'CommentsCount'				=> 'Number of comments per page:',
-	'CommentsCountInfo'			=> 'Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.',
+	'CommentsCountInfo'			=> 'Number of comments displayed on each page\'s list of comments. This applies to all the comments on the site, not just those posted in the forum.',
 
 	'NewsSection'				=> 'Section News',
-	'NewsCluster'				=> 'Cluster for the News:',
+	'NewsCluster'				=> 'Cluster for the news:',
 	'NewsClusterInfo'			=> 'Root cluster for news section (action %1).',
 	'NewsStructure'				=> 'News cluster structure:',
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
 	'LicenseSection'			=> 'License',
 	'DefaultLicense'			=> 'Default license:',
-	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
-	'EnableLicense'				=> 'Enable License:',
+	'DefaultLicenseInfo'		=> 'Under which license your content can be released.',
+	'EnableLicense'				=> 'Enable license:',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
 	'LicensePerPage'			=> 'License per page:',
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
-	'ServicePagesSection'		=> 'Service pages',
+	'ServicePagesSection'		=> 'Service Pages',
 	'RootPage'					=> 'Home page:',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Privacy Policy:',
+	'PrivacyPage'				=> 'Privacy policy:',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
-	'TermsPage'					=> 'Policies and Regulations:',
+	'TermsPage'					=> 'Policies and regulations:',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
-	'SearchPage'				=> 'Search',
+	'SearchPage'				=> 'Search:',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
 	'RegistrationPage'			=> 'Registration:',
-	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
+	'RegistrationPageInfo'		=> 'Page for new user registration (action %1).',
 	'LoginPage'					=> 'User login:',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
 	'SettingsPage'				=> 'User Settings:',
-	'SettingsPageInfo'			=> 'Page customize the user profile (action %1).',
+	'SettingsPageInfo'			=> 'Page to customize the user profile (action %1).',
 	'PasswordPage'				=> 'Change Password:',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list:',
@@ -763,15 +753,15 @@ $ap_translation = [
 	'ChangesPage'				=> 'Recent changes:',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
 	'CommentsPage'				=> 'Recent comments:',
-	'CommentsPageInfo'			=> 'Page with a list of recent comment on the page (action %1).',
+	'CommentsPageInfo'			=> 'Page with a list of recent comments on the page (action %1).',
 	'RemovalsPage'				=> 'Deleted pages:',
 	'RemovalsPageInfo'			=> 'Page with a list of recently deleted pages (action %1).',
 	'WantedPage'				=> 'Wanted pages:',
 	'WantedPageInfo'			=> 'Page with a list of missing pages that are referenced (action %1).',
 	'OrphanedPage'				=> 'Orphaned pages:',
-	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
+	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related via links to any other page (action %1).',
 	'SandboxPage'				=> 'Sandbox:',
-	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
+	'SandboxPageInfo'			=> 'Page where users can practice their wiki markup skills.',
 	'HelpPage'					=> 'Help:',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index:',
@@ -784,29 +774,29 @@ $ap_translation = [
 	'NotificationSettingsInfo'	=> 'Parameters for notifications of the platform.',
 	'NotificationSettingsUpdated'	=> 'Updated notification settings',
 
-	'EmailNotification'			=> 'Email Notification:',
-	'EmailNotificationInfo'		=> 'Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that disabling email notifications has no effect on emails generated as part of the user signup process.',
+	'EmailNotification'			=> 'Email notification:',
+	'EmailNotificationInfo'		=> 'Allow email notification. Set to Enabled to enable email notifications, Disabled to disable them. Note that disabling email notifications has no effect on emails generated as part of the user signup process.',
 	'Autosubscribe'				=> 'Autosubscribe:',
-	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
+	'AutosubscribeInfo'			=> 'Automatically notify owner of page changes.',
 
-	'NotificationSection'		=> 'Default user notification settings',
+	'NotificationSection'		=> 'Default User Notification Settings',
 	'NotifyPageEdit'			=> 'Notify page edit:',
-	'NotifyPageEditInfo'		=> 'Pending - Sending a email notification only for the first change until the user visits the page again.',
+	'NotifyPageEditInfo'		=> 'Pending - Send an email notification only for the first change until the user visits the page again.',
 	'NotifyMinorEdit'			=> 'Notify minor edit:',
 	'NotifyMinorEditInfo'		=> 'Sends notifications also for minor edits.',
 	'NotifyNewComment'			=> 'Notify new comment:',
-	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
+	'NotifyNewCommentInfo'		=> 'Pending - Send an email notification only for the first comment until the user visits the page again.',
 
 	'NotifyUserAccount'			=> 'Notify new user account:',
 	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the signup form.',
 	'NotifyUpload'				=> 'Notify file upload:',
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
-	'PersonalMessagesSection'	=> 'Personal messages',
-	'AllowIntercomDefault'		=> 'Allow Intercom:',
-	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
-	'AllowMassemailDefault'		=> 'Allow Massemail:',
-	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
+	'PersonalMessagesSection'	=> 'Personal Messages',
+	'AllowIntercomDefault'		=> 'Allow intercom:',
+	'AllowIntercomDefaultInfo'	=> 'Enabling this option allows other users to send personal messages to the recipient\'s email address without disclosing the address.',
+	'AllowMassemailDefault'		=> 'Allow mass email:',
+	'AllowMassemailDefaultInfo'	=> 'Only send messages to those users who have permitted administrators to email them information.',
 
 	// Resync settings
 	'Synchronize'				=> 'Synchronize',
@@ -822,10 +812,10 @@ $ap_translation = [
 	'LogFeedsUpdated'			=> 'Synchronized RSS feeds',
 	'LogPageBodySynched'		=> 'Reparsed page body and links',
 
-	'UserStats'					=> 'User Statistics',
-	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'UserStats'					=> 'User statistics',
+	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to match actual data contained in the database.',
 	'PageStats'					=> 'Page statistics',
-	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to match actual data contained in database.',
 
 	'AttachmentsInfo'			=> 'Update the file hash for all attachments in the database.',
 	'AttachmentsSynched'		=> 'Re-hashed all file attachments',
@@ -833,7 +823,7 @@ $ap_translation = [
 
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
-	'XmlSiteMap'				=> 'XML-Sitemap',
+	'XmlSiteMap'				=> 'XML Sitemap',
 	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
 	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
@@ -842,54 +832,54 @@ $ap_translation = [
 	'ReparseBodyInfo'			=> 'Empties <code>body_r</code> in page table, so that each page gets rendered again on the next page view. This may be useful if you modified the formatter or changed the domain of your wiki.',
 	'PreparsedBodyPurged'		=> 'Emptied <code>body_r</code> field in page table.',
 
-	'WikiLinksResync'			=> 'Wiki-links',
-	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
+	'WikiLinksResync'			=> 'Wiki links',
+	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the <code>page_link</code> and <code>file_link</code> tables in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Re-compiling all pages (extremely costly)',
 	'ResyncOptions'				=> 'Additional options',
 	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
+	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, as any bounced or undeliverable messages will likely be sent to that address. If your hosting provider does not provide a native (PHP-based) email service, you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your hosting provider if necessary). If the server requires authentication (and only if it does), enter the necessary username, password and authentication method.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'Email function name:',
 	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
+	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want to, or have to, send email via a named server instead of via the local mail function.',
 
 	'EnableEmail'				=> 'Enable emails:',
-	'EnableEmailInfo'			=> 'Enabling emails',
+	'EnableEmailInfo'			=> 'Enable sending of emails.',
 
-	'EmailIdentitySettings'		=> 'Website Emails Identity',
-	'FromEmailName'				=> 'From Name:',
-	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
-	'EmailSubjectPrefix'		=> 'Subject Prefix:',
+	'EmailIdentitySettings'		=> 'Website Email Identities',
+	'FromEmailName'				=> 'From name:',
+	'FromEmailNameInfo'			=> 'The sender name that is use for the <code>From:</code> header for all email notifications sent from the site.',
+	'EmailSubjectPrefix'		=> 'Subject prefix:',
 	'EmailSubjectPrefixInfo'	=> 'Alternate email subject prefix, e.g. <code>[Prefix] Topic</code>. If not defined, the default prefix is Site Name: %1.',
 
 	'NoReplyEmail'				=> 'No-reply address:',
-	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
+	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all email notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',
 	'AdminEmailInfo'			=> 'This address is used for admin purposes, like new user notification.',
 	'AbuseEmail'				=> 'Email abuse service:',
-	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
+	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may be the same as the site owner email.',
 
 	'SendTestEmail'				=> 'Send a test email',
 	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your emails configuration.',
+	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your email configuration settings.',
 
-	'SmtpSettings'				=> 'SMTP settings',
+	'SmtpSettings'				=> 'SMTP Settings',
 	'SmtpAutoTls'				=> 'Opportunistic TLS:',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Connection mode for SMTP:',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
+	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is required. Ask your provider if you are unsure which method to use',
 	'SmtpPassword'				=> 'SMTP password:',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
+	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plaintext in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
 	'SmtpPort'					=> 'SMTP server port:',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465).',
 	'SmtpServer'				=> 'SMTP server address:',
-	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
+	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>.',
 	'SmtpUsername'				=> 'SMTP username:',
 	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
 
@@ -897,39 +887,39 @@ $ap_translation = [
 	'UploadSettingsInfo'		=> 'Here you can configure the main settings for attachments and the associated special categories.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
-	'FileUploadsSection'		=> 'File uploads',
+	'FileUploadsSection'		=> 'File Uploads',
 	'RegisteredUsers'			=> 'registered users',
-	'RightToUpload'				=> 'Right to the upload files:',
+	'RightToUpload'				=> 'Permissions to upload files:',
 	'RightToUploadInfo'			=> '<code>admins</code> means that only users belonging to the admins group can upload  files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
 	'UploadMaxFilesize'			=> 'Maximum file size:',
-	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
+	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the maximum uploadable filesize is only limited by your PHP configuration.',
 	'UploadQuota'				=> 'Total attachment quota:',
 	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with <code>0</code> being unlimited. %1 used.',
 	'UploadQuotaUser'			=> 'Storage quota per user:',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 
-	'FileTypes'					=> 'File types',
+	'FileTypes'					=> 'File Types',
 	'UploadOnlyImages'			=> 'Allow only upload of images:',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'AllowedUploadExts'			=> 'Allowed file types:',
-	'AllowedUploadExtsInfo'		=> 'Allowed extensions for uploading files, comma separated e.g. <code>png, ogg, mp4</code>, other wise all not prohibited file extensions are allowed.<br>You should limit the uploaded file types allowed list to the necessary minimum required for you site content functionality.',
+	'AllowedUploadExtsInfo'		=> 'Allowed extensions for uploading files, comma-separated (i.e., <code>png, ogg, mp4</code>); otherwise, all file extensions are allowed.<br>You should limit the allowed file extensions to the minimum required for your site\'s proper functionality.',
 	'CheckMimetype'				=> 'Check MIME type:',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
-	'SvgSanitizer'				=> 'SVG Sanitizer:',
-	'SvgSanitizerInfo'			=> 'This enables sanitizing uploaded SVG files to to prevent SVG/XML vulnerable files being uploaded.',
+	'SvgSanitizer'				=> 'SVG sanitizer:',
+	'SvgSanitizerInfo'			=> 'This enables sanitizing SVG files to to prevent SVG/XML vulnerabilities from being uploaded.',
 	'TranslitFileName'			=> 'Transliterate file names:',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept alphanumeric characters in filenames.',
 	'TranslitCaseFolding'		=> 'Convert file names to lowercase:',
 	'TranslitCaseFoldingInfo'	=> 'This option is only effective with active transliteration.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'Create a thumbnail in all possible situations.',
-	'JpegQuality'				=> 'JPEG Quality:',
+	'JpegQuality'				=> 'JPEG quality:',
 	'JpegQualityInfo'			=> 'Quality when scaling a JPEG thumbnail. It should be between 1 and 100, with 100 indicating 100% quality.',
-	'MaxImageArea'				=> 'Maximum Image Area:',
+	'MaxImageArea'				=> 'Maximum image area:',
 	'MaxImageAreaInfo'			=> 'The maximum number of pixels a source image can have. This provides a limit on memory usage for the decompression side of the image scaler.<br><code>-1</code> means it will not check the size of the image before attempting to scale it. <code>0</code> means it will determine the value automatically.',
-	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixel:',
+	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixels:',
 	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
 	'MinThumbFilesize'			=> 'Minimum thumbnail file size:',
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
@@ -938,16 +928,16 @@ $ap_translation = [
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
-									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
+									Remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Words that will be automatically censored on your Wiki.',
 	'FilterSettingsUpdated'		=> 'Updated spam filter settings',
 
-	'WordCensoringSection'		=> 'Word censoring',
-	'SPAMFilter'				=> 'SPAM Filter:',
-	'SPAMFilterInfo'			=> 'Enabling SPAM Filter',
+	'WordCensoringSection'		=> 'Word Censoring',
+	'SPAMFilter'				=> 'Spam filter:',
+	'SPAMFilterInfo'			=> 'Enabling Spam Filter',
 	'WordList'					=> 'Word list:',
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
 
@@ -974,9 +964,9 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Here you can email a message to either all of your users or all users of a specific group having the option to receive mass emails enabled. To achieve this an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. The default setting is to only include 20 recipients in such an email, for more recipients more emails will be sent. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time, you will be notified when the script has completed.',
-	'LogMassemail'				=> 'Messemail send %1 to group / user ',
-	'MassemailSend'				=> 'Massemail send',
+	'MassemailInfo'				=> 'Here you can email a message to either (1) all of your users or (2) all users of a specific group who have enabled receiving of mass emails. An email will be sent out to the administrative email address supplied, with a blind carbon copy (BCC) sent to all recipients. The default setting is to include a maximum of 20 recipients in such an email. If there are more than 20 recipients, additional emails will be sent. If you are emailing a large group of people, please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time. You will be notified when the script has completed.',
+	'LogMassemail'				=> 'Mass email send %1 to group / user ',
+	'MassemailSend'				=> 'Mass email send',
 
 	'NoEmailMessage'			=> 'You must enter a message.',
 	'NoEmailSubject'			=> 'You must specify a subject for your message.',
@@ -986,20 +976,20 @@ $ap_translation = [
 	'MessageSubject'			=> 'Subject:',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Your message:',
-	'YourMessageInfo'			=> 'Please note that you may enter only plain text. All markup will be removed before sending.',
+	'YourMessageInfo'			=> 'Please note that you may enter only plaintext. All markup will be removed before sending.',
 
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 
 	'SendToGroup'				=> 'Send to group:',
 	'SendToUser'				=> 'Send to user:',
-	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Only users who permit Administrators to email them information will receive mass emails. This option is available in their user settings under Notifications.',
 
 	// System message module
 	'SystemMessageInfo'			=> '',
 	'SysMsgUpdated'				=> 'Updated system message',
 
-	'SysMsgSection'				=> 'System message',
+	'SysMsgSection'				=> 'System Message',
 	'SysMsg'					=> 'System message:',
 	'SysMsgInfo'				=> 'Your text here',
 
@@ -1034,24 +1024,19 @@ $ap_translation = [
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Files',
 	'BackupNote'				=> 'Note:',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
-									'<br>' .
-									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ' .
-									'same when backing up only table structure without saving the data. ' .
-									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
+	'BackupSettings'			=> 'Specify the desired scheme of backup.<br>' .
+    	'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .  '<br>' .
+		'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster, the tables from this backup will not be restructured, same as when backing up only table structure without saving the data. To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
-									'The Backup package files were stored in the sub-directory %1.<br>' .
-									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
-									'To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
+    	'The Backup package files were stored in the sub-directory %1.<br>. To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 	'Backup'					=> 'Backup',
 	'CantReadFile'				=> 'Can\'t read file %1.',
 
 	// DB Restore module
-	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
+	'RestoreInfo'				=> 'You can restore any of the backup packages found, or remove them from the server.',
 	'ConfirmDbRestore'			=> 'Do you want to restore backup %1?',
-	'ConfirmDbRestoreInfo'		=> 'Please wait, this can take some minutes.',
+	'ConfirmDbRestoreInfo'		=> 'Please wait, this can take some time.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
 	'DirectoryNotExecutable'	=> 'The %1 directory is not executable.',
 	'BackupDelete'				=> 'Are you sure you want to remove backup %1?',
@@ -1060,9 +1045,9 @@ $ap_translation = [
 	'RestoreOptionsInfo'		=> '* Before restoring the <strong>cluster backup</strong>, ' .
 									'the target tables are not deleted (to prevent loss of information from the clusters that have not been backed up). ' .
 									'Thus, during the recovery process duplicate records will occur. ' .
-									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), ' .
+									'In normal mode, all of them will be replaced by the records form backup (using SQL <code>REPLACE</code>), ' .
 									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), ' .
-									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br>' .
+									'and only the records with new keys are added to the table (SQL <code>INSERT IGNORE</code>).<br>' .
 									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br>' .
 									'<br>' .
 									'** If the backup contains the user files (global and perpage, cache files, etc.), ' .
@@ -1084,11 +1069,11 @@ $ap_translation = [
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
 	'RestoreTableStructure'		=> 'Restoring the structure of the table',
-	'RunSqlQueries'				=> 'Perform SQL-instructions:',
+	'RunSqlQueries'				=> 'Perform SQL instructions:',
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions:',
 	'NoTableStructure'			=> 'The structure of the tables was not saved - skip',
 	'RestoreRecords'			=> 'Restore the contents of tables',
-	'ProcessTablesDump'			=> 'Just download and process tables dump',
+	'ProcessTablesDump'			=> 'Just download and process table dumps',
 	'Instruction'				=> 'Instruction',
 	'RestoredRecords'			=> 'records:',
 	'RecordsRestoreDone'		=> 'Completed. Total entries:',
@@ -1119,10 +1104,10 @@ $ap_translation = [
 	'LogBackupArchived'			=> 'Backup ##%1## archived.',
 
 	// User module
-	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',
+	'UsersInfo'					=> 'Here you can change your users\' information and certain specific options.',
 
 	'UsersAdded'				=> 'User added',
-	'UsersDeleteInfo'			=> '[User delete Info here..]',
+	'UsersDeleteInfo'			=> 'Delete user:',
 	'EditButton'				=> 'Edit',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user %1?',
@@ -1161,7 +1146,7 @@ $ap_translation = [
 	'GroupsAlreadyExists'		=> 'This group already exists.',
 	'GroupsAdded'				=> 'Group added successfully.',
 	'GroupsRenamed'				=> 'Group successfully renamed.',
-	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
+	'GroupsDeleted'				=> 'The group %1 and all associated pages were deleted from the database.',
 	'GroupsAdd'					=> 'Add a new group',
 	'GroupsRename'				=> 'Rename the group %1 to',
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
@@ -1198,7 +1183,7 @@ $ap_translation = [
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
-	'SysInfo'					=> 'Version informations:',
+	'SysInfo'					=> 'Version information:',
 	'SysParameter'				=> 'Parameter',
 	'SysValues'					=> 'Values',
 
@@ -1257,7 +1242,7 @@ $ap_translation = [
 	'Solve'						=> 'Solve',
 
 	// Bad Behaviour module
-	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+	'BbInfo'					=> 'Detects and blocks unwanted web accesses, deny automated spambots access.<br>For more information, please visit the %1 homepage.',
 	'BbEnable'					=> 'Enable Bad Behaviour:',
 	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
 	'BbStats'					=> 'Bad Behaviour has blocked %1 access attempts in the last 7 days.',
