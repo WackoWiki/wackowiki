@@ -82,11 +82,6 @@ if ($this->has_access('read'))
 			$tpl->title		= $this->_t('ShowFiles');
 			$tpl->text		= $have_files;
 		}
-		else
-		{
-			// TODO: add message if registered users can upload files on this page
-			// e.g. 'Log in or create an account to attach files to this page.'
-		}
 	}
 
 	$tpl->leave();

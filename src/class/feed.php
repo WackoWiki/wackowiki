@@ -192,7 +192,7 @@ class Feed
 
 				// TODO: format -> add ['feed' => true]
 				$this->engine->context[++$this->engine->current_context] = $page['tag'];
-				$text	= $this->engine->format($page['body_r'], 'post_wacko');
+				$text	= $this->engine->format($page['body_r'], 'post_wacko', ['strip_marker' => true]);
 				$this->engine->current_context--;
 
 				$xml .=
