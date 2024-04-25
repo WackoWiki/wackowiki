@@ -23,6 +23,8 @@
 !/file/perpage/.htaccess
 /file/thumb/*
 !/file/thumb/.htaccess
+/file/thumb_local/*
+!/file/thumb_local/.htaccess
 
 # Eclipse IDE
 .buildpath
