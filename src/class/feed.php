@@ -270,7 +270,7 @@ class Feed
 
 					$xml .=
 						'<item>' . "\n" .
-							'<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
+							'<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('From') . ' ' .
 							($comment['user_name'] ?: $this->engine->_t('Guest')) .
 							'</title>' . "\n" .
 							'<link>' . $this->engine->href('', $comment['tag']) . '</link>' . "\n" .

@@ -130,9 +130,9 @@ if ($action && !empty($file))
 			$this->set_message($this->_t('FileEditedMeta'), 'success');
 
 			$this->log(4, Ut::perc_replace(
-					$this->_t('LogUpdatedFileMeta', SYSTEM_LANG),
-					$this->tag . ' ' . $this->page['title'],
-					$file['file_name']));
+				$this->_t('LogUpdatedFileMeta', SYSTEM_LANG),
+				$this->tag . ' ' . $this->page['title'],
+				$file['file_name']));
 			$this->db->invalidate_sql_cache();
 
 			$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
@@ -170,11 +170,11 @@ if ($action && !empty($file))
 			$this->remove_file($file['file_id'], $dontkeep);
 
 			$this->log(1, Ut::perc_replace(
-					$this->_t('LogRemovedFile', SYSTEM_LANG),
-					$this->tag . ' ' . $this->page['title'],
-					$file['file_name']));
+				$this->_t('LogRemovedFile', SYSTEM_LANG),
+				$this->tag . ' ' . $this->page['title'],
+				$file['file_name']));
 
-			$this->db->invalidate_sql_cache(); // TODO: check if sql cache is enabled plus purge page cache
+			$this->db->invalidate_sql_cache(); // TODO: purge related page cache
 
 			$this->http->redirect($this->href('attachments'));
 		}

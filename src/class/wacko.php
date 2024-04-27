@@ -8455,7 +8455,8 @@ class Wacko
 
 				// remove from DB
 				$this->db->sql_query(
-					'DELETE FROM ' . $this->prefix . 'file ' .
+					'DELETE ' .
+					'FROM ' . $this->prefix . 'file ' .
 					'WHERE page_id = ' . (int) $page['page_id']);
 			}
 
@@ -8514,7 +8515,8 @@ class Wacko
 
 			// remove from DB
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'file ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'file ' .
 				'WHERE file_id = ' . (int) $file['file_id']);
 
 			if ($message)
