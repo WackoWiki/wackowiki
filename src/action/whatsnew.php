@@ -249,15 +249,14 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			// deleted
 			else if ($page['deleted'])
 			{
-				if ($page['comment_on_page'])
-				{
-					$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', false, true);
-				}
+				$title = $page['comment_on_page']
+					? $page['tag'] . ' → ' . $page['title_on_page']
+					: '';
 
 				$tpl->i_title		= $page['comment_on_page'] ? $this->_t('CommentDeleted') : $this->_t('PageDeleted');
 				$tpl->i_alt			= 'deleted';
 				$tpl->i_class		= 'btn-delete';
-				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], $title, false, true);
 				$tpl->cluster_link	= $get_cluster($page['comment_on_page'] ?? $page['tag']);
 			}
 			// new comment
@@ -266,8 +265,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				$tpl->i_title		= $this->_t('NewCommentAdded');
 				$tpl->i_alt			= 'comment';
 				$tpl->i_class		= 'btn-comment';
-				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', false, true);
-				$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', false, true);
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], $page['tag'] . ' → ' . $page['title_on_page'], false, true);
 				$tpl->cluster_link	= $get_cluster($page['comment_on_page']);
 			}
 			// new page

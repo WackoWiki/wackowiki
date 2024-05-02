@@ -26,7 +26,7 @@
 							[ ' i icon ' ]
 							[ ' link ' ]
 								[= to =
-									[ ' _t: To ' ]&nbsp;&nbsp;[ ' link ' ]
+									[ ' _t: To ' ]&nbsp;[ ' link ' ]
 								=]
 							[= cluster =
 								<span title="[ ' _t: Cluster ' ]">→ [ ' link ' ]</span>
