@@ -1906,9 +1906,7 @@ table.formation td {
 	padding: 0;
 	text-decoration: none;
 }
-#menu-global a:link {
-	color: #babdb6;
-}
+#menu-global a:link,
 #menu-global a:visited {
 	color: #babdb6;
 }
@@ -2149,167 +2147,87 @@ li.m-source img {
 	background: url('./../icon/light/review2.svg') no-repeat;
 }
 
-.btn-reload {
-	background: url('./../icon/light/reload.svg') no-repeat;
+.btn-sm {
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
+.btn-md {
 	background-size: 22px 22px;
 	height: 22px;
 	width: 22px;
 	display: inline-block;
 }
+.btn-reload {
+	background: url('./../icon/light/reload.svg') no-repeat;
+}
 .btn-menu {
 	background: url('./../icon/light/menu.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 
 .btn-overflow-menu {
 	background: url('./../icon/light/overflow-menu.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-addbookmark {
 	background: url('./../icon/light/bookmark.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-removebookmark {
 	background: url('./../icon/light/bookmark-remove.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-delete {
 	background: url('./../icon/light/delete.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-edit {
 	background: url('./../icon/light/edit.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-source {
 	background: url('./../icon/light/text.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-feed {
 	background: url('./../icon/light/feed.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-info {
 	background: url('./../icon/light/dialog-info.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-tick {
 	background: url('./../icon/light/tick.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-warning {
 	background: url('./../icon/light/warning.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-add-page {
 	background: url('./../icon/light/page-add.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-page {
 	background: url('./../icon/light/show.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-comment {
 	background: url('./../icon/light/comment.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-attachment {
 	background: url('./../icon/light/attachment.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-upload {
 	background: url('./../icon/light/upload.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-unlocked {
 	background: url('./../icon/light/unlocked.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-locked {
 	background: url('./../icon/light/locked.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-search {
 	background: url('./../icon/light/search.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-tag {
 	background: url('./../icon/light/tag.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-languages {
 	background: url('./../icon/light/languages.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-revisions {
 	background: url('./../icon/light/revisions.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 
 .viewed {
