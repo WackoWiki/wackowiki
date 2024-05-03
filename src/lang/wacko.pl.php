@@ -497,7 +497,7 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'Dla bezpieczeństwa, twoja sesja się skończyła. Zaloguj się ponownie.',
 
 	// user settings
-	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
+	'EmailConfirmResent'		=> 'Email confirmation code resent to your address.',
 	'EmailConfirmNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
 	'Hello'						=> 'Witamy',
 	'UserName'					=> 'Użytkownik',
@@ -658,9 +658,9 @@ $wacko_translation = [
 	'EmailNotConfirmed'			=> 'Adres e-mail nie mógł zostać potwierdzony. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'E-mail nie został zweryfikowany!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
-									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
-									'until your email-address was confirmed, by following the link in the email sent to you. ' .
-									'If, within days after registration You never got a email, ask for it again by clicking ',
+									'or messages from other users. Also, you <strong>will not be able to recover a forgotten password</strong>, ' .
+									'until your email address is confirmed by following the link in the email sent to you. ' .
+									'If, within days after registration you do not receive an email, ask for it again by clicking ',
 
 	'ForgotPasswordHint'		=> 'Wpisz swój login i adres e-mail,' . "\n" . 'aby został przesłany do ciebie e-mail z instrukcjami.',
 	'ForgotPassword'			=> 'Zapomniałeś hasła?',
@@ -702,7 +702,7 @@ $wacko_translation = [
 	'NoUnwatchedPages'			=> 'You watch for changes in all pages.',
 	'ViewWatchedPages'			=> 'Show watched pages',
 	'ViewUnwatchedPages'		=> 'Show unwatched page',
-	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify so your list of watches.',
+	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify your list of watches.',
 
 	// mychangeswatches action
 	'MyChangesWatches'			=> 'List of all pages you watched that were edited by others since your last editing',
@@ -1145,7 +1145,7 @@ $wacko_translation = [
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
 	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
-	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
+	'ModerateCommentsSplitFailed'	=> 'Note: For some reason separating the selected comments to a new topic failed.<br>Usually this should not happen, so please notify the site administrator.<br>As a precaution, the issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
@@ -1181,8 +1181,8 @@ $wacko_translation = [
 	'PwdCplxDesc4'				=> 'should consist of ',
 	'PwdCplxDesc41'				=> 'letters and numbers',
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
-	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
-	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphanumeric characters',
+	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters except spaces.',
 
 	'PasswordTooShort'			=> 'Wprowadzone hasło jest za krótkie.',
 	'PasswordTooCommon'			=> 'To hasło jest zbyt popularne.',
@@ -1266,8 +1266,8 @@ $wacko_translation = [
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
 	'LogAdminLogout'			=> 'Logout of the administrative panel',
-	'LogAdminLoginFailed'		=> '!!Failure to authorize into the administrative panel!!',
-	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
+	'LogAdminLoginFailed'		=> '!!Failure to authorize access to administrative panel!!',
+	'LogAdminLoginLocked'		=> 'Locked login to the administrative panel',
 	'LogUserCookieForged'		=> '!!**An attempt to login on a forged cookie with login ##%1##**!!',
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
@@ -1285,31 +1285,31 @@ $wacko_translation = [
 	'LogUserLoginFailed'		=> '!!Unsuccessful attempts to log in with ##~%1##!!',
 	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
 	'LogRenamedPage'			=> 'Page ##%1## renamed to [[/%2]]',
-	'LogRenamedPage2'			=> '. On the old page, a link to the new',
-	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
+	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
+	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
-	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recover his forgotten password',
-	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) his password',
-	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change his password: Password mismatch with current!!',
-	'LogUserIPSwitched'			=> 'Unauthorized switched IP-address of the user %1 from %2 to %3',
+	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recovered the forgotten password',
+	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) the password',
+	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change the password: current password mismatch!!',
+	'LogUserIPSwitched'			=> 'Unauthorized IP address change of the user %1 from %2 to %3',
 	'LogPageImported'			=> 'Imported page [[/%1]]',
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
 	'LogPageCreated'			=> 'Created new page [[/%1]]',
 	'LogPagePropertiesUpdated'	=> 'Updated page properties [[/%1]]',
-	'LogPageOwnershipClaimed'	=> 'You claimed ownership of the page [[/%1]]',
-	'LogFileUploadedLocal'		=> 'To page [[/%1]] uploaded new file ##%2## (size %3)',
-	'LogFileUploadedGlobal'		=> 'Uploaded a new file to global folder ##%2## (size %3)',
+	'LogPageOwnershipClaimed'	=> 'The user got ownership of the page [[/%1]]',
+	'LogFileUploadedLocal'		=> 'New file ##%2## uploaded to the page [[/%1]] (size %3)',
+	'LogFileUploadedGlobal'		=> 'New file ##%2## uploaded to the global folder (size %3)',
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## not in allowed domains list',
 	'LogRegisterTiming'			=> 'Rejestracja nie powiodła się, próg czasu formularza to ##%1## sekund (było ##%2##)',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
-	'LogCommentPosted'			=> 'Added [[/%1 new comment]] to page [[/%2]]',
+	'LogCommentPosted'			=> 'Added [[/%1 new comment(s)]] to page [[/%2]]',
 	'LogUserLoginOK'			=> 'User ##%1## successfully logged in the system',
 	'LogUserLoggedOut'			=> 'User ##%1## successfully logged out the system',
-	'LogUserSessionContinued'	=> 'User ##%1## continued to suspend the session',
+	'LogUserSessionContinued'	=> 'User ##%1## continued the suspended session',
 	'LogUserSettingsUpdate'		=> 'User ##%1## updated personal settings',
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
@@ -1331,6 +1331,7 @@ $wacko_translation = [
 	'LogCategoryDebundled'		=> 'Category ##%1## debundled',
 	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
+	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
 
 	'ErrorMinPHPVersion'		=> 'Wersja PHP musi być większa niż <strong>' . PHP_MIN_VERSION . '</strong>,' .
 									' Wygląda na to, że na Twoim serwerze jest uruchomiona wersja <strong>' . PHP_VERSION . '</strong>.' .

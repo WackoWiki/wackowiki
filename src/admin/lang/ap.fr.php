@@ -297,19 +297,19 @@ $ap_translation = [
 	'SectionsPanel'				=> 'Panneau des sections :',
 	'SectionsPanelInfo'			=> 'Par défaut, affiche le panneau des pages adjacentes (nécessite une prise en charge dans les modèles).',
 	'DisplayingSections'		=> 'Affichage des sections :',
-	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
+	'DisplayingSectionsInfo'	=> 'When the previous options are set, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>), both, or other (<em>tree</em>).',
 	'MenuItems'					=> 'Éléments du menu :',
 	'MenuItemsInfo'				=> 'Nombre par défaut d’éléments de menu affichés (peut avoir besoin d’aide dans les modèles).',
 
-	'HandlerSection'			=> 'Handler',
+	'HandlerSection'			=> 'Handlers',
 	'HideRevisions'				=> 'Masquer révisions :',
 	'HideRevisionsInfo'			=> 'L’affichage par défaut des révisions de la page.',
 	'AttachmentHandler'			=> 'Activer le gestionnaire de pièces jointes :',
 	'AttachmentHandlerInfo'		=> 'Permet d’afficher le gestionnaire de pièces jointes.',
 	'SourceHandler'				=> 'Enable source handler :',
-	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+	'SourceHandlerInfo'			=> 'Permits the display of the source handler.',
 	'ExportHandler'				=> 'Enable XML export handler :',
-	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
+	'ExportHandlerInfo'			=> 'Permits the display of the XML export handler.',
 
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Mode diff par défaut :',
@@ -414,7 +414,7 @@ $ap_translation = [
 
 	'DebugModeSection'			=> 'Mode débogage',
 	'DebugMode'					=> 'Mode débogage :',
-	'DebugModeInfo'				=> 'Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.',
+	'DebugModeInfo'				=> 'Extracting and outputting telemetry data about the application\'s execution time. Attention: Full detail mode imposes higher requirements to the allocated memory, especially for resource-intensive operations, such as database backup and restore.',
 	'DebugModes'	=> [
 		'0'		=> 'le débogage est désactivé',
 		'1'		=> 'uniquement le temps d’exécution total',
@@ -436,11 +436,11 @@ $ap_translation = [
 	'CacheSqlTtl'				=> 'Pertinence du terme Cache Base de données :',
 	'CacheSqlTtlInfo'			=> 'Cache les résultats des requêtes SQL pendant un nombre de secondes maximum spécifié. L’utilisation de valeurs supérieures à 1200 n’est pas souhaitable.',
 
-	'LogSection'				=> 'Log settings',
+	'LogSection'				=> 'Log Settings',
 	'LogLevelUsage'				=> 'Using logging :',
 	'LogLevelUsageInfo'			=> 'The minimum priority of the events recorded in the log.',
 	'LogThresholds'	=> [
-		'0'		=> 'not keep a journal',
+		'0'		=> 'do not keep a journal',
 		'1'		=> 'only the critical level',
 		'2'		=> 'from the highest level',
 		'3'		=> 'from high',
@@ -461,7 +461,7 @@ $ap_translation = [
 		'7'		=> 'show all',
 	],
 	'LogPurgeTime'				=> 'Storage time of Log :',
-	'LogPurgeTimeInfo'			=> 'Remove event log over a given number of days.',
+	'LogPurgeTimeInfo'			=> 'Remove event log after the specified number of days.',
 
 	'PrivacySection'			=> 'Vie privée',
 	'AnonymizeIp'				=> 'Anonymiser les adresses IP des utilisateurs :',
@@ -486,11 +486,11 @@ $ap_translation = [
 									liste d’adresses IP séparées par des virgules et des espaces, seule la dernière (la plus à gauche) sera utilisée.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses :',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
-									 proxies. Filling this array WackoWiki will trust the information stored
-									 in the X-Forwarded-For headers only if Remote IP address is one of
-									 these, that is the request reaches the web server from one of your
+									 proxies. If using this array, WackoWiki will trust the information stored
+									 in the X-Forwarded-For headers only if the Remote IP address is one of
+									 these, that is, the request reaches the web server from one of your
 									 reverse proxies. Otherwise, the client could directly connect to
-									 your web server spoofing the X-Forwarded-For headers.',
+									 your web server by spoofing the X-Forwarded-For headers.',
 
 	'SessionSection'				=> 'Traitement des sessions',
 	'SessionStorage'				=> 'Stockage des sessions :',
@@ -505,7 +505,7 @@ $ap_translation = [
 	'LoginNoticeInfo'				=> 'Affiche une indication de connexion.',
 
 	'RewriteMode'					=> 'Utiliser <code>mod_rewrite</code> :',
-	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
+	'RewriteModeInfo'				=> 'If your web server supports this feature, enable to "beautify" the page URLs.<br>
 										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
@@ -562,7 +562,7 @@ $ap_translation = [
 	'EmailConfirmation'			=> 'Confirmation de l’adresse électronique :',
 	'EmailConfirmationInfo'		=> 'Exige que l’utilisateur vérifie son adresse électronique avant de pouvoir se connecter.',
 	'AllowedEmailDomains'		=> 'Domaines de messagerie autorisés :',
-	'AllowedEmailDomainsInfo'	=> 'Domaines de messagerie autorisés séparés par des virgules, par exemple <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
+	'AllowedEmailDomainsInfo'	=> 'Domaines de messagerie autorisés séparés par des virgules, par exemple <code>example.com, local.lan</code> etc., otherwise all email domains are allowed.',
 	'ForbiddenEmailDomains'		=> 'Domaines de messagerie interdits :',
 	'ForbiddenEmailDomainsInfo'	=> 'Domaines de courrier électronique interdits, séparés par des virgules, par exemple <code>example.com, local.lan</code> etc. (n’est efficace que si la liste des domaines de courrier électronique autorisés est vide)',
 
@@ -610,7 +610,7 @@ $ap_translation = [
 		'8'		=> 'unsafe-url'
 	],
 
-	'UserPasswordSection'		=> 'Persistence of user passwords',
+	'UserPasswordSection'		=> 'Persistence of User Passwords',
 	'PwdMinChars'				=> 'Minimum password length :',
 	'PwdMinCharsInfo'			=> 'Les mots de passe longs sont nécessairement plus sûrs que les mots de passe courts (par exemple 12 à 16 caractères).<br>L’utilisation de phrases de passe au lieu de mots de passe est encouragée.',
 	'AdminPwdMinChars'			=> 'Minimum Admin password length :',
@@ -640,11 +640,11 @@ $ap_translation = [
 	'FormTokenTimeInfo'			=> 'Le temps dont dispose un utilisateur pour soumettre un formulaire (en secondes).<br> Notez qu’un formulaire peut devenir invalide si la session expire, quel que soit ce paramètre.',
 
 	'SessionLength'				=> 'Term login cookie :',
-	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
+	'SessionLengthInfo'			=> 'The lifetime of the user session cookie by default (in days).',
 	'CommentDelay'				=> 'Anti-flood for comments :',
-	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in seconds).',
+	'CommentDelayInfo'			=> 'The minimum delay between the publication of new user comments (in seconds).',
 	'IntercomDelay'				=> 'Anti-flood for personal communications :',
-	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in seconds).',
+	'IntercomDelayInfo'			=> 'The minimum delay between sending private messages (in seconds).',
 	'RegistrationDelay'			=> 'Time threshold for registering :',
 	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
@@ -652,11 +652,11 @@ $ap_translation = [
 	'FormatterSettingsInfo'		=> 'Groupe de paramètres responsable de la plate-forme de réglage fin. Ne les changez pas à moins d’avoir confiance en leurs actions.',
 	'FormatterSettingsUpdated'	=> 'Mise à jour des paramètres de formatage',
 
-	'TextHandlerSection'		=> 'Text Handler ',
+	'TextHandlerSection'		=> 'Text Handler:',
 	'Typografica'				=> 'Typographical Proofreader :',
-	'TypograficaInfo'			=> 'Unsetting slightly speed up the process of adding comments and save the page.',
+	'TypograficaInfo'			=> 'Disabling this option will speed up the processes of adding comments and saving pages.',
 	'Paragrafica'				=> 'Paragrafica markings :',
-	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.',
+	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents (<code>{{toc}}</code>).',
 	'AllowRawhtml'				=> 'Global HTML Support :',
 	'AllowRawhtmlInfo'			=> 'Cette option est potentiellement dangereuse pour un site ouvert.',
 	'SafeHtml'					=> 'Filtering HTML :',
@@ -664,7 +664,7 @@ $ap_translation = [
 
 	'WackoFormatterSection'		=> 'Mise en forme de texte Wiki (Wacko Formatter)',
 	'X11colors'					=> 'X11 Colors Usage :',
-	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
+	'X11colorsInfo'				=> 'Extends the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Disabling this option speeds up the processes of adding comments and saving pages.',
 	'WikiLinks'					=> 'Désactiver les Wikilinks :',
 	'WikiLinksInfo'				=> 'Désactive les liens pour <code>CamelCaseWords</code>, vos CamelCase Words ne seront plus liés directement à une nouvelle page. Ceci est utile lorsque vous travaillez sur différents espaces de noms et clusters. Par défaut, il est désactivé.',
 	'BracketsLinks'				=> 'Désactiver les liens entre parenthèses :',
@@ -693,20 +693,20 @@ $ap_translation = [
 	'Nofollow'					=> 'nofollow :',
 	'NofollowInfo'				=> 'Indiquez à certains moteurs de recherche que l’hyperlien ne doit pas influencer le classement des liens ciblés dans l’index des moteurs de recherche. Ajoute <code>rel="nofollow"</code> à la syntaxe du lien.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores :',
-	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
+	'UrlsUnderscoresInfo'		=> 'For example, %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Insérer des espaces dans les NomWiki :',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Numérotation des liens en vue d’impression :',
-	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
+	'NumerateLinksInfo'			=> 'Enumerates and lists all links at the bottom of the print view with this option.',
 	'YouareHereText'			=> 'Disable and visualize self-referencing links :',
-	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
+	'YouareHereTextInfo'		=> 'Visualize links to the same page, using <code>&lt;b&gt;####&lt;/b&gt;</code>. All links to self lose link formatting, but are displayed as bold text.',
 
 	// Pages settings
 	'PagesSettingsInfo'			=> 'Ici, vous pouvez définir ou modifier les pages de base du système utilisées dans le Wiki. N’oubliez pas de créer ou de modifier les pages correspondantes dans le Wiki en fonction des paramètres que vous avez définis ici.',
 	'PagesSettingsUpdated'		=> 'Updated settings base pages',
 
 	'ListCount'					=> 'Number of items per list :',
-	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+	'ListCountInfo'				=> 'Number of items displayed on each list for guest, or as default value for new users.',
 
 	'ForumSection'				=> 'Options Forum',
 	'ForumCluster'				=> 'Cluster Forum :',
@@ -724,13 +724,13 @@ $ap_translation = [
 
 	'LicenseSection'			=> 'Licence',
 	'DefaultLicense'			=> 'Default license :',
-	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
+	'DefaultLicenseInfo'		=> 'Under which license your content can be released.',
 	'EnableLicense'				=> 'Enable License :',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
 	'LicensePerPage'			=> 'License per page :',
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
-	'ServicePagesSection'		=> 'Service pages',
+	'ServicePagesSection'		=> 'Service Pages',
 	'RootPage'					=> 'Page d’accueil :',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
@@ -765,9 +765,9 @@ $ap_translation = [
 	'WantedPage'				=> 'Wanted pages :',
 	'WantedPageInfo'			=> 'Page with a list of missing pages that are referenced (action %1).',
 	'OrphanedPage'				=> 'Orphaned pages :',
-	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
+	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related via links to any other page (action %1).',
 	'SandboxPage'				=> 'Sandbox :',
-	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
+	'SandboxPageInfo'			=> 'Page where users can practice their wiki markup skills.',
 	'HelpPage'					=> 'Aide :',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index :',
@@ -819,9 +819,9 @@ $ap_translation = [
 	'LogPageBodySynched'		=> 'Reparsed page body and links',
 
 	'UserStats'					=> 'Statistiques utilisateur',
-	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to match actual data contained in the database.',
 	'PageStats'					=> 'Statistiques des pages',
-	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to match actual data contained in database.',
 
 	'AttachmentsInfo'			=> 'Met à jour le hachage du fichier pour toutes les pièces jointes de la base de données.',
 	'AttachmentsSynched'		=> 'Remise à jour de toutes les pièces jointes',
@@ -839,7 +839,7 @@ $ap_translation = [
 	'PreparsedBodyPurged'		=> 'Emptied <code>body_r</code> field in page table.',
 
 	'WikiLinksResync'			=> 'Wiki-links',
-	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
+	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the <code>page_link</code> and <code>file_link</code> tables in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Recompiler toutes les pages (extrêmement cher)',
 	'ResyncOptions'				=> 'Options additionelles',
 	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
@@ -934,7 +934,7 @@ $ap_translation = [
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'Liste des pages, révisions et fichiers supprimés.
-									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
+									Remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
 	// Filter module
@@ -971,8 +971,8 @@ $ap_translation = [
 
 	// Massemail module
 	'MassemailInfo'				=> 'Vous pouvez envoyer sur cette page un courriel à la totalité des utilisateurs ou aux utilisateurs d’un groupe d’utilisateurs spécifique <strong>qui acceptent la réception de courriels de masse</strong>. Pour ce faire, un courriel sera envoyé à l’adresse de courriel renseignée par les administrateurs et une copie sera adressée à tous les destinataires. Le réglage par défaut est limité à 20 destinataires par courriel, mais si ce nombre est dépassé, des courriels supplémentaires seront envoyés. Sachez également que plus les destinataires sont nombreux, plus le temps d’exécution est important. Il est normal que l’envoi d’un courriel de masse prenne un certain temps, veillez à ne pas vous déplacer sur une autre page tant que l’opération n’est pas totalement terminée.',
-	'LogMassemail'				=> 'Messemail send %1 to group / user ',
-	'MassemailSend'				=> 'Massemail send',
+	'LogMassemail'				=> 'Mass email send %1 to group / user ',
+	'MassemailSend'				=> 'Mass email send',
 
 	'NoEmailMessage'			=> 'Vous devez saisir un message.',
 	'NoEmailSubject'			=> 'Vous devez saisir le sujet de votre message.',
@@ -1084,7 +1084,7 @@ $ap_translation = [
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions :',
 	'NoTableStructure'			=> 'The structure of the tables was not saved - skip',
 	'RestoreRecords'			=> 'Restore the contents of tables',
-	'ProcessTablesDump'			=> 'Just download and process tables dump',
+	'ProcessTablesDump'			=> 'Just download and process table dumps',
 	'Instruction'				=> 'Instruction',
 	'RestoredRecords'			=> 'records :',
 	'RecordsRestoreDone'		=> 'Completed. Total entries :',

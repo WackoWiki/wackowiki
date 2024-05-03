@@ -106,7 +106,7 @@ $wacko_translation = [
 	'LoggedInAs'				=> 'You are logged in as',
 
 	'ClearCookies'				=> 'Delete all cookies',
-	'BindSessionIp'				=> 'Bind session to the IP-address',
+	'BindSessionIp'				=> 'Bind session to the IP address',
 	'BindSessionIpOn'			=> 'enabled (current IP %1)',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'The current session ends',
@@ -658,9 +658,9 @@ $wacko_translation = [
 	'EmailNotConfirmed'			=> 'Email cannot be confirmed. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> '이메일 확인되지!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
-									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
-									'until your email-address was confirmed, by following the link in the email sent to you. ' .
-									'If, within days after registration You never got a email, ask for it again by clicking ',
+									'or messages from other users. Also, you <strong>will not be able to recover a forgotten password</strong>, ' .
+									'until your email address is confirmed by following the link in the email sent to you. ' .
+									'If, within days after registration you do not receive an email, ask for it again by clicking ',
 
 	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then email with instructions will be send to you.',
 	'ForgotPassword'			=> '비밀번호를 잊으셨나요?',
@@ -687,7 +687,7 @@ $wacko_translation = [
 
 	// import action
 	'ImportTo'					=> 'Import in cluster:',
-	'ImportWhat'				=> 'XML-file for import:',
+	'ImportWhat'				=> 'XML file to import:',
 	'ImportButton'				=> '가져오기',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> '가져오기 실패.',
@@ -702,7 +702,7 @@ $wacko_translation = [
 	'NoUnwatchedPages'			=> 'You watch for changes in all pages.',
 	'ViewWatchedPages'			=> 'Show watched pages',
 	'ViewUnwatchedPages'		=> 'Show unwatched page',
-	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify so your list of watches.',
+	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify your list of watches.',
 
 	// mychangeswatches action
 	'MyChangesWatches'			=> 'List of all pages you watched that were edited by others since your last editing',
@@ -722,7 +722,7 @@ $wacko_translation = [
 	// users action
 	'UsersSearch'				=> 'Find Users',
 	'UsersOpenProfile'			=> '프로필 보기',
-	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
+	'UsersNoMatching'			=> 'Matching users not found. Try a less strict search criteria.',
 	'UsersName'					=> '이름',
 	'UsersPages'				=> '페이지',
 	'UsersChanges'				=> '바뀜',
@@ -877,7 +877,7 @@ $wacko_translation = [
 	'FileIsDuplicate'			=> '업로드한 항목은 현재 판과 완전히 중복입니다.',
 	'FileHasDuplicate'			=> '현재 올리고 있는 파일이 아래 파일과 중복됩니다:',
 
-	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
+	'UploadMaxFileQuota'		=> 'You have reached your upload limit. This file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',
 	'UploadFileForbidden'		=> 'File access prohibited',
 	'UploadTitle'				=> 'Files accessible from this page',
@@ -1033,12 +1033,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter URL. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> '피드 제목',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter URL. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> '출처:',
 	'FeedXMLTip'				=> '',
@@ -1145,7 +1145,7 @@ $wacko_translation = [
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
 	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
-	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
+	'ModerateCommentsSplitFailed'	=> 'Note: For some reason separating the selected comments to a new topic failed.<br>Usually this should not happen, so please notify the site administrator.<br>As a precaution, the issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
@@ -1181,8 +1181,8 @@ $wacko_translation = [
 	'PwdCplxDesc4'				=> 'should consist of ',
 	'PwdCplxDesc41'				=> 'letters and numbers',
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
-	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
-	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphanumeric characters',
+	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters except spaces.',
 
 	'PasswordTooShort'			=> '비밀번호가 너무 짧습니다.',
 	'PasswordTooCommon'			=> 'That password is too common.',
@@ -1266,8 +1266,8 @@ $wacko_translation = [
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
 	'LogAdminLogout'			=> 'Logout of the administrative panel',
-	'LogAdminLoginFailed'		=> '!!Failure to authorize into the administrative panel!!',
-	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
+	'LogAdminLoginFailed'		=> '!!Failure to authorize access to administrative panel!!',
+	'LogAdminLoginLocked'		=> 'Locked login to the administrative panel',
 	'LogUserCookieForged'		=> '!!**An attempt to login on a forged cookie with login ##%1##**!!',
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
@@ -1286,12 +1286,12 @@ $wacko_translation = [
 	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
 	'LogRenamedPage'			=> 'Page ##%1## renamed to [[/%2]]',
 	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
-	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
+	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
-	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recover his forgotten password',
-	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) his password',
-	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change his password: current password mismatch!!',
+	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recovered the forgotten password',
+	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) the password',
+	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change the password: current password mismatch!!',
 	'LogUserIPSwitched'			=> 'Unauthorized IP address change of the user %1 from %2 to %3',
 	'LogPageImported'			=> 'Imported page [[/%1]]',
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',

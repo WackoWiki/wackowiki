@@ -209,7 +209,7 @@ $lang = [
 'ErrorPrivilegesUpgrade'		=> 'Depois de ter feito isto, o seu site WackoWiki deve funcionar. Caso contrário, visite <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'não altere a wacko_version manualmente!',
-'ConfigDescription'				=> 'descrição detalhada https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'descrição detalhada: https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> 'Tente novamente',
 
 ];

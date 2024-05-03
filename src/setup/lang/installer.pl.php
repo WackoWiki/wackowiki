@@ -126,7 +126,7 @@ $lang = [
 'DbEngine'						=> 'Engine',
 'DbEngineDesc'					=> 'The database engine you want to use.',
 'DbHost'						=> 'Host',
-'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
+'DbHostDesc'					=> 'The host your database server is running on, usually <code>127.0.0.1</code> or <code>localhost</code> (i.e., the same machine your WackoWiki site is on).',
 'DbPort'						=> 'Port (Optional)',
 'DbPortDesc'					=> 'Numer portu, przez który Twój serwer bazy danych jest dostępny, pozostaw puste, aby użyć domyślnego numeru portu.',
 'DbName'						=> 'Baza danych',
@@ -188,7 +188,7 @@ $lang = [
 'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
 'DeletingTables'				=> 'Deleting Tables',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
-'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
+'ErrorDeletingTable'			=> 'Error deleting %1 table. The most likely reason is that the table does not exist, in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
 'NextStep'						=> 'W następnym kroku, instalator będzie próbował zapisać zaktualizowany plik konfiguracyjny, %1.  Postaraj się, że serwer posiada prawo zapisu do pliku, w przeciwnym wypadku będziesz musiał edytować go ręcznie. Raz jeszcze, zaglądnij na  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> po więcej informacji.',
 
@@ -209,7 +209,7 @@ $lang = [
 'ErrorPrivilegesUpgrade'		=> 'Gdy już to zrobisz, Twoja strona WackoWiki powinna już działać. Jeżeli nie, odwiedź proszę <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'zapisano jako ',
 'DontChange'					=> 'nie zmieniaj wacko_version ręcznie!',
-'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'detailed description: https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> 'Spróbuj ponownie',
 
 ];

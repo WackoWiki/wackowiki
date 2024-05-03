@@ -106,7 +106,7 @@ $wacko_translation = [
 	'LoggedInAs'				=> 'You are logged in as',
 
 	'ClearCookies'				=> 'Delete all cookies',
-	'BindSessionIp'				=> 'Bind session to the IP-address',
+	'BindSessionIp'				=> 'Bind session to the IP address',
 	'BindSessionIpOn'			=> 'enabled (current IP %1)',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'The current session ends',
@@ -325,7 +325,7 @@ $wacko_translation = [
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
-	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
+	'GroupsNoMatching'			=> 'Matching groups not found. Try a less strict search criteria.',
 	'GroupsOpenProfile'			=> 'プロフィールを表示',
 	'GroupsName'				=> 'グループ',
 	'GroupsMembers'				=> 'Members',
@@ -497,7 +497,7 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'セキュリティのため、お客様のセッションは終了しました。再度ログインしてください。',
 
 	// user settings
-	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
+	'EmailConfirmResent'		=> 'Email confirmation code resent to your address.',
 	'EmailConfirmNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
 	'Hello'						=> 'Hello',
 	'UserName'					=> 'ユーザー名',
@@ -541,7 +541,7 @@ $wacko_translation = [
 	'AccountDeleteConfirm'		=> 'Are you sure you want to delete the account?',
 	'AccountDeleted'			=> 'Account successfully deleted',
 	'AccountDeleteHeader'		=> 'Delete account %1',
-	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note however, that data like attachments and wiki entries can not be deleted without impeding the work of the other users. Such data is hence reassigned to an account called %1. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
+	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note, however, that data like attachments and wiki entries cannot be deleted without impeding the work of the other users. Such data is hence reassigned to an account called %1. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
 	'AccountDeleteWarning'		=> 'Deleting the user account is an irreversible action.',
 	'AccountDeleteHint'			=> 'Your account will be deleted from the system. Therefore, you will no longer be able to log in with your current credentials. If you choose to become a user of this application again, you can do so by using the means this application grants.',
 	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
@@ -554,8 +554,8 @@ $wacko_translation = [
 	'EditIcon'					=> '編集',
 	'TreeClusterTitle'			=> 'Tree of cluster %1',
 	'TreeSiteTitle'				=> 'Site tree',
-	'TreeEmpty'					=> '%1 has not subpages',
-	'TreeEmptyLevels'			=> '%1 has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmpty'					=> '%1 has no subpages',
+	'TreeEmptyLevels'			=> '%1 has no subpages for given levels of depth. Increase the value for depth.',
 	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler
@@ -652,22 +652,22 @@ $wacko_translation = [
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'If you did not request this registration, ignore this message and nothing will happen.',
 	'EmailDoNotReply'			=> 'Do not reply to this message.',
-	'EmailReverify'				=> 'Someone (maybe you) submitted your email as notification address at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want receive notifications, you need to approve your email. Please follow the link to do this.' . "\n" . '%3' . "\n\n",
+	'EmailReverify'				=> 'Someone (maybe you) submitted your email as notification address at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want to receive notifications, you need to approve your email. Please follow the link to do this.' . "\n" . '%3' . "\n\n",
 	'EmailConfirm'				=> 'Please verify your email',
 	'EmailConfirmed'			=> 'Email successfully confirmed.',
 	'EmailNotConfirmed'			=> 'Email cannot be confirmed. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email not verified!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
-									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
-									'until your email-address was confirmed, by following the link in the email sent to you. ' .
-									'If, within days after registration You never got a email, ask for it again by clicking ',
+									'or messages from other users. Also, you <strong>will not be able to recover a forgotten password</strong>, ' .
+									'until your email address is confirmed by following the link in the email sent to you. ' .
+									'If, within days after registration you do not receive an email, ask for it again by clicking ',
 
-	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then email with instructions will be send to you.',
+	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then an email with instructions will be send to you.',
 	'ForgotPassword'			=> 'パスワードをお忘れですか?',
 	'UserNotFound'				=> 'User with this name or email address was not found.',
-	'NotConfirmedEmail'			=> 'Your email address is not confirmed.<br>Mail can\'t be send to non-confirmed address.',
+	'NotConfirmedEmail'			=> 'Your email address is not confirmed.<br>Mail can\'t be send to a non-confirmed address.',
 	'EmailForgotSubject'		=> 'Password renewal for ',
-	'EmailForgotMessage'		=> 'Someone (maybe you) forgot your password for %1.' . "\n" . 'Your login: %2'."\n\n" . 'Click the link or copy it to the browser address line to change your password.' . "\n" . '%3' . "\n\n",
+	'EmailForgotMessage'		=> 'Someone (maybe you) forgot your password for %1.' . "\n" . 'Your login: %2'."\n\n" . 'Click the link or copy it to the browser address line to change your password.' . "\n" . '%3'."\n\n",
 	'CodeWasSent'				=> 'Password recovery instruction was sent to you by email.',
 	'WrongCode'					=> 'Wrong code',
 	'ChangePasswordForUser'		=> '%1\'s password change',
@@ -687,7 +687,7 @@ $wacko_translation = [
 
 	// import action
 	'ImportTo'					=> 'Import in cluster:',
-	'ImportWhat'				=> 'XML-file for import:',
+	'ImportWhat'				=> 'XML file to import:',
 	'ImportButton'				=> 'インポート',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
@@ -702,7 +702,7 @@ $wacko_translation = [
 	'NoUnwatchedPages'			=> 'You watch for changes in all pages.',
 	'ViewWatchedPages'			=> 'Show watched pages',
 	'ViewUnwatchedPages'		=> 'Show unwatched page',
-	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify so your list of watches.',
+	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify your list of watches.',
 
 	// mychangeswatches action
 	'MyChangesWatches'			=> 'List of all pages you watched that were edited by others since your last editing',
@@ -722,7 +722,7 @@ $wacko_translation = [
 	// users action
 	'UsersSearch'				=> 'Find Users',
 	'UsersOpenProfile'			=> 'プロフィールを表示',
-	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
+	'UsersNoMatching'			=> 'Matching users not found. Try a less strict search criteria.',
 	'UsersName'					=> '名前',
 	'UsersPages'				=> 'ページ',
 	'UsersChanges'				=> '変化',
@@ -759,8 +759,8 @@ $wacko_translation = [
 	'IntercomMessage'			=> '本文：',
 	'IntercomCopy'				=> '送信する',
 	'IntercomSubjectN'			=> '[start a new topic]',
-	'IntercomDisabled'			=> 'Sorry, you do not want or can not receive personal messages.',
-	'IntercomHint'				=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
+	'IntercomDisabled'			=> 'Sorry, you do not want or cannot receive personal messages.',
+	'IntercomHint'				=> 'Please log in first and follow the link again, if you want to answer the personal message you have received.',
 	'IntercomDesc'				=> '注：自分のアドレスを公開せずに、相手のメールアドレスに個人的なメッセージを送信すること。受信者は、あなたのプロフィールページの同じフォームを使って、あなたに返信することができます。 ',
 	'PMOversized'				=> 'The length of the message exceeds the maximum allowed size by %1. Please shorten your message and submit again.',
 	'PMFlooded'					=> 'The interval between sending personal messages should not be less than %1 seconds.',
@@ -768,7 +768,7 @@ $wacko_translation = [
 	'PMBody'					=> 'This message has been sent to you by the user %1.',
 	'PMBodyCopy'				=> 'あなたはユーザー%1に以下のメッセージを送信しました。',
 	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
-	'PMNotLoggedIn'				=> 'You are not registered in the system and can not send personal messages to users.',
+	'PMNotLoggedIn'				=> 'You are not registered in the system and cannot send personal messages to users.',
 
 	// admin_replace action
 	'ReplaceText'				=> '文字列の置換',
@@ -864,10 +864,10 @@ $wacko_translation = [
 	'FileDesc'					=> '説明：',
 	'UploadForbidden'			=> 'You are not allowed to upload files here.',
 	'UploadOverwriteDenied'		=> 'ファイルの所有者または管理者のみが %1 ファイルを上書きできます。',
-	'UploadNoFile'				=> 'There was not file in form, for some reason.',
+	'UploadNoFile'				=> 'There was no file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
 	'UploadDirNotWritable'		=> 'File directory is not writable!',
-	'UploadNotAPicture'			=> 'There is allowed to upload pictures only, and what do you trying to upload?',
+	'UploadNotAPicture'			=> 'Picture uploads only are allowed. What are you trying to upload?',
 	'UploadEmptyExtension'		=> 'ファイル名と拡張子は空白にできません。',
 	'FilenameTooLong'			=> '240バイトを超えるファイル名は禁止されています。',
 	'BannedFiletype'			=> '%1 は許可されていないファイル形式です。',
@@ -877,7 +877,7 @@ $wacko_translation = [
 	'FileIsDuplicate'			=> 'アップロードされたものはの現在のバージョンのものと全く同じです。',
 	'FileHasDuplicate'			=> 'このファイルは以下のファイル群と重複しています:',
 
-	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
+	'UploadMaxFileQuota'		=> 'You have reached your upload limit. This file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',
 	'UploadFileForbidden'		=> 'File access prohibited',
 	'UploadTitle'				=> 'Files accessible from this page',
@@ -1033,7 +1033,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter URL. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
@@ -1145,7 +1145,7 @@ $wacko_translation = [
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
 	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
-	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
+	'ModerateCommentsSplitFailed'	=> 'Note: For some reason separating the selected comments to a new topic failed.<br>Usually this should not happen, so please notify the site administrator.<br>As a precaution, the issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
@@ -1181,8 +1181,8 @@ $wacko_translation = [
 	'PwdCplxDesc4'				=> 'should consist of ',
 	'PwdCplxDesc41'				=> 'letters and numbers',
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
-	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
-	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphanumeric characters',
+	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters except spaces.',
 
 	'PasswordTooShort'			=> 'パスワードが短すぎます。',
 	'PasswordTooCommon'			=> 'That password is too common.',
@@ -1266,8 +1266,8 @@ $wacko_translation = [
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
 	'LogAdminLogout'			=> 'Logout of the administrative panel',
-	'LogAdminLoginFailed'		=> '!!Failure to authorize into the administrative panel!!',
-	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
+	'LogAdminLoginFailed'		=> '!!Failure to authorize access to administrative panel!!',
+	'LogAdminLoginLocked'		=> 'Locked login to the administrative panel',
 	'LogUserCookieForged'		=> '!!**An attempt to login on a forged cookie with login ##%1##**!!',
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
@@ -1286,12 +1286,12 @@ $wacko_translation = [
 	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
 	'LogRenamedPage'			=> 'Page ##%1## renamed to [[/%2]]',
 	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
-	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
+	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
-	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recover his forgotten password',
-	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) his password',
-	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change his password: current password mismatch!!',
+	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recovered the forgotten password',
+	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) the password',
+	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change the password: current password mismatch!!',
 	'LogUserIPSwitched'			=> 'Unauthorized IP address change of the user %1 from %2 to %3',
 	'LogPageImported'			=> 'Imported page [[/%1]]',
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',

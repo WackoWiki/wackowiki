@@ -106,7 +106,7 @@ $wacko_translation = [
 	'LoggedInAs'				=> 'You are logged in as',
 
 	'ClearCookies'				=> 'Delete all cookies',
-	'BindSessionIp'				=> 'Bind session to the IP-address',
+	'BindSessionIp'				=> 'Bind session to the IP address',
 	'BindSessionIpOn'			=> 'enabled (current IP %1)',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'The current session ends',
@@ -207,7 +207,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'پیوست‌ها',
-	'DeleteTip'					=> 'Delete page, it\'s files and comments',
+	'DeleteTip'					=> 'Delete page, its files and comments',
 	'DeleteCommentTip'			=> 'حذف دیدگاه',
 	'DeleteText'				=> 'حذف',
 	'AclText'					=> 'مجوزها',
@@ -264,7 +264,7 @@ $wacko_translation = [
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',
-	'NotOwnerAndCantPurge'		=> 'You are not the owner of the page and you can not purge it.',
+	'NotOwnerAndCantPurge'		=> 'You are not the owner of the page and you cannot purge it.',
 	'ReallyPurge'				=> 'ATTENTION: Purging the page is irreversible!',
 	'SelectPurgeOptions'		=> 'Select the necessary purge options:',
 	'PurgeComments'				=> 'Purge all comments of the page',
@@ -325,7 +325,7 @@ $wacko_translation = [
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
-	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
+	'GroupsNoMatching'			=> 'Matching groups not found. Try a less strict search criteria.',
 	'GroupsOpenProfile'			=> 'مشاهده پروفایل',
 	'GroupsName'				=> 'گروه',
 	'GroupsMembers'				=> 'اعضا',
@@ -541,7 +541,7 @@ $wacko_translation = [
 	'AccountDeleteConfirm'		=> 'Are you sure you want to delete the account?',
 	'AccountDeleted'			=> 'Account successfully deleted',
 	'AccountDeleteHeader'		=> 'Delete account %1',
-	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note however, that data like attachments and wiki entries can not be deleted without impeding the work of the other users. Such data is hence reassigned to an account called %1. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
+	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note, however, that data like attachments and wiki entries cannot be deleted without impeding the work of the other users. Such data is hence reassigned to an account called %1. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
 	'AccountDeleteWarning'		=> 'Deleting the user account is an irreversible action.',
 	'AccountDeleteHint'			=> 'Your account will be deleted from the system. Therefore, you will no longer be able to log in with your current credentials. If you choose to become a user of this application again, you can do so by using the means this application grants.',
 	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
@@ -554,8 +554,8 @@ $wacko_translation = [
 	'EditIcon'					=> 'ویرایش',
 	'TreeClusterTitle'			=> 'Tree of cluster %1',
 	'TreeSiteTitle'				=> 'Site tree',
-	'TreeEmpty'					=> '%1 has not subpages',
-	'TreeEmptyLevels'			=> '%1 has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmpty'					=> '%1 has no subpages',
+	'TreeEmptyLevels'			=> '%1 has no subpages for given levels of depth. Increase the value for depth.',
 	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler
@@ -632,7 +632,7 @@ $wacko_translation = [
 	'UserReservedWord'			=> 'User names cannot contain %1 as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
-	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
+	'SendWatchEmail'			=> 'Send notifying email when someone (except you) changes any page you are watching',
 	'AllowIntercom'				=> 'Allow personal messages from users of the system',
 	'AllowMassemail'			=> 'Administrators can email me information',
 	'HideLastSession'			=> 'Hide last session',
@@ -652,15 +652,15 @@ $wacko_translation = [
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'If you did not request this registration, ignore this message and nothing will happen.',
 	'EmailDoNotReply'			=> 'Do not reply to this message.',
-	'EmailReverify'				=> 'Someone (maybe you) submitted your email as notification address at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want receive notifications, you need to approve your email. Please follow the link to do this.' . "\n" . '%3' . "\n\n",
+	'EmailReverify'				=> 'Someone (maybe you) submitted your email as notification address at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want to receive notifications, you need to approve your email. Please follow the link to do this.' . "\n" . '%3' . "\n\n",
 	'EmailConfirm'				=> 'Please verify your email',
 	'EmailConfirmed'			=> 'Email successfully confirmed.',
 	'EmailNotConfirmed'			=> 'Email cannot be confirmed. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email not verified!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
-									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
-									'until your email-address was confirmed, by following the link in the email sent to you. ' .
-									'If, within days after registration You never got a email, ask for it again by clicking ',
+									'or messages from other users. Also, you <strong>will not be able to recover a forgotten password</strong>, ' .
+									'until your email address is confirmed by following the link in the email sent to you. ' .
+									'If, within days after registration you do not receive an email, ask for it again by clicking ',
 
 	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then email with instructions will be send to you.',
 	'ForgotPassword'			=> 'گذرواژه‌تان را فراموش کردید؟',
@@ -687,7 +687,7 @@ $wacko_translation = [
 
 	// import action
 	'ImportTo'					=> 'Import in cluster:',
-	'ImportWhat'				=> 'XML-file for import:',
+	'ImportWhat'				=> 'XML file to import:',
 	'ImportButton'				=> 'وارد کردن',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'درون‌ریزی صفحه‌ها شکست خورد.',
@@ -702,7 +702,7 @@ $wacko_translation = [
 	'NoUnwatchedPages'			=> 'You watch for changes in all pages.',
 	'ViewWatchedPages'			=> 'Show watched pages',
 	'ViewUnwatchedPages'		=> 'Show unwatched page',
-	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify so your list of watches.',
+	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify your list of watches.',
 
 	// mychangeswatches action
 	'MyChangesWatches'			=> 'List of all pages you watched that were edited by others since your last editing',
@@ -759,9 +759,9 @@ $wacko_translation = [
 	'IntercomMessage'			=> 'Message:',
 	'IntercomCopy'				=> 'یک کپی برای من بفرست',
 	'IntercomSubjectN'			=> '[start a new topic]',
-	'IntercomDisabled'			=> 'Sorry, you do not want or can not receive personal messages.',
-	'IntercomHint'				=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'IntercomDesc'				=> 'Note: Sending personal messages carried on the email-address recipient without disclosing your address. The recipient will be able to respond to you, using similar form on your profile page. ',
+	'IntercomDisabled'			=> 'Sorry, you do not want or cannot receive personal messages.',
+	'IntercomHint'				=> 'Please log in first and follow the link again, if you want to answer the personal message you have received.',
+	'IntercomDesc'				=> 'Note: Sending personal messages carried on the email recipient without disclosing your address. The recipient will be able to respond to you, using a similar form on your profile page. ',
 	'PMOversized'				=> 'The length of the message exceeds the maximum allowed size by %1. Please shorten your message and submit again.',
 	'PMFlooded'					=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'PMSent'					=> 'Personal message was successfully sent to the user.',
@@ -867,7 +867,7 @@ $wacko_translation = [
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
 	'UploadDirNotWritable'		=> 'File directory is not writable!',
-	'UploadNotAPicture'			=> 'There is allowed to upload pictures only, and what do you trying to upload?',
+	'UploadNotAPicture'			=> 'Picture uploads only are allowed. What are you trying to upload?',
 	'UploadEmptyExtension'		=> 'نام فایل و همچنین پسوند نمی تواند خالی باشد.',
 	'FilenameTooLong'			=> 'نام پرونده نباید از ۲۴۰ بایت طولانی‌تر باشد.',
 	'BannedFiletype'			=> '%1این نوع پرونده ممنوع است.',
@@ -877,7 +877,7 @@ $wacko_translation = [
 	'FileIsDuplicate'			=> 'آنچه بارگذاری شده دقیقاً نسخه‌ای تکراری از نسخهٔ فعلی است.',
 	'FileHasDuplicate'			=> 'This file is a duplicate of the following files:',
 
-	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
+	'UploadMaxFileQuota'		=> 'You have reached your upload limit. This file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',
 	'UploadFileForbidden'		=> 'File access prohibited',
 	'UploadTitle'				=> 'Files accessible from this page',
@@ -1033,12 +1033,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter URL. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter URL. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> ':منبع',
 	'FeedXMLTip'				=> '',
@@ -1116,8 +1116,8 @@ $wacko_translation = [
 	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',
-	'ModeratePgMoveConfirm'		=> 'Specify the name of the cluster, in which to place the page. To move a page to the root of the site, type &quot;/&quot;',
-	'ModerateMoveExists'		=> 'Operation aborted: in this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.',
+	'ModeratePgMoveConfirm'		=> 'Specify the name of the cluster in which to place the page. To move a page to the root of the site, type &quot;/&quot;',
+	'ModerateMoveExists'		=> 'Operation aborted: In this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.',
 	'ModerateMoveNotExists'		=> 'The page / cluster does not exist. Please check the name and try again.',
 	'ModerateMergeConfirm'		=> 'Choose a topic, which should combine the remaining',
 	'ModerateMerge2Min'			=> 'To join you must select at least two topics!',
@@ -1145,7 +1145,7 @@ $wacko_translation = [
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
 	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
-	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
+	'ModerateCommentsSplitFailed'	=> 'Note: For some reason separating the selected comments to a new topic failed.<br>Usually this should not happen, so please notify the site administrator.<br>As a precaution, the issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
@@ -1181,8 +1181,8 @@ $wacko_translation = [
 	'PwdCplxDesc4'				=> 'should consist of ',
 	'PwdCplxDesc41'				=> 'letters and numbers',
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
-	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
-	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphanumeric characters',
+	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters except spaces.',
 
 	'PasswordTooShort'			=> 'Password too short.',
 	'PasswordTooCommon'			=> 'That password is too common.',
@@ -1266,8 +1266,8 @@ $wacko_translation = [
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
 	'LogAdminLogout'			=> 'Logout of the administrative panel',
-	'LogAdminLoginFailed'		=> '!!Failure to authorize into the administrative panel!!',
-	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
+	'LogAdminLoginFailed'		=> '!!Failure to authorize access to administrative panel!!',
+	'LogAdminLoginLocked'		=> 'Locked login to the administrative panel',
 	'LogUserCookieForged'		=> '!!**An attempt to login on a forged cookie with login ##%1##**!!',
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
@@ -1286,12 +1286,12 @@ $wacko_translation = [
 	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
 	'LogRenamedPage'			=> 'Page ##%1## renamed to [[/%2]]',
 	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
-	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
+	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
-	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recover his forgotten password',
-	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) his password',
-	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change his password: current password mismatch!!',
+	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recovered the forgotten password',
+	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) the password',
+	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change the password: current password mismatch!!',
 	'LogUserIPSwitched'			=> 'Unauthorized IP address change of the user %1 from %2 to %3',
 	'LogPageImported'			=> 'Imported page [[/%1]]',
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',

@@ -301,7 +301,7 @@ $ap_translation = [
 	'MenuItems'					=> 'Menüpunkte:',
 	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten Menüelemente (setzt die Unterstützung durch das Layout vorraus).',
 
-	'HandlerSection'			=> 'Handler',
+	'HandlerSection'			=> 'Handlers',
 	'HideRevisions'				=> 'Seitenversionen ausblenden:',
 	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
 	'AttachmentHandler'			=> 'Datei-Handler aktivieren:',
@@ -655,7 +655,7 @@ $ap_translation = [
 	'FormatterSettingsInfo'		=> 'Gruppe von Parametern, die für die Feinabstimmung der Plattform verantwortlich sind. Ändere sie nicht, es sei denn, du bist mit ihrer Funktionsweise vertraut.',
 	'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
 
-	'TextHandlerSection'		=> 'Text Handler ',
+	'TextHandlerSection'		=> 'Text Handler:',
 	'Typografica'				=> 'Typografischer Korrektor:',
 	'TypograficaInfo'			=> 'Durch das Deaktivieren wird der Vorgang des Hinzufügens von Kommentaren und des Speicherns von Seiten geringfügig beschleunigt.',
 	'Paragrafica'				=> 'Paragrafica Markierungen:',
