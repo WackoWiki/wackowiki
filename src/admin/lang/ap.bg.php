@@ -364,9 +364,9 @@ $ap_translation = [
 
 	'XmlSitemap'				=> 'XML sitemap:',
 	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapGz'				=> 'XML sitemap compression:',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapTime'			=> 'XML sitemap generation time:',
 	'XmlSitemapTimeInfo'		=> 'Генерира Sitemap само веднъж за дадения брой дни, нула означава всяка промяна на страницата.',
 
 	'SearchSection'				=> 'Търси',
@@ -585,9 +585,9 @@ $ap_translation = [
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
-	'PermissionsPolicy'			=> 'Permissions Policy:',
+	'PermissionsPolicy'			=> 'Permissions policy:',
 	'PermissionsPolicyInfo'		=> 'Заглавието HTTP Permissions-Policy предоставя механизъм за изрично разрешаване или забраняване на различни мощни функции на браузъра.',
-	'ReferrerPolicy'			=> 'Referrer Policy:',
+	'ReferrerPolicy'			=> 'Referrer policy:',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included in responses.',
 	'ReferrerPolicyModes'	=> [
 		'0'		=> '[off]',
@@ -870,7 +870,7 @@ $ap_translation = [
 	'SmtpAutoTls'				=> 'Opportunistic TLS:',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Автентичност SMTP:',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
+	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is required. Ask your provider if you are unsure which method to use.',
 	'SmtpPassword'				=> 'SMTP парола:',
 	'SmtpPasswordInfo'			=> 'Въведи парола само ако SMTP сървъра я изисква. <em><strong>Важно:</strong> паролата се запазва като прост текст в базата данни.</em>',
 	'SmtpPort'					=> 'SMTP сървър порт:',

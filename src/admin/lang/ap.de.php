@@ -599,7 +599,7 @@ $ap_translation = [
 	],
 	'PermissionsPolicy'			=> 'Permissions Policy:',
 	'PermissionsPolicyInfo'		=> 'Der HTTP Permissions-Policy-Header bietet einen Mechanismus zum expliziten Aktivieren oder Deaktivieren verschiedener leistungsstarker Browserfunktionen.',
-	'ReferrerPolicy'			=> 'Referrer Policy:',
+	'ReferrerPolicy'			=> 'Referrer-Policy:',
 	'ReferrerPolicyInfo'		=> 'Der Referrer-Policy-HTTP-Header bestimmt, welche Referrer-Informationen, die im Referer-Header gesendet werden, in die Anfragen aufgenommen werden sollen.',
 	'ReferrerPolicyModes'	=> [
 		'0'		=> '[off]',

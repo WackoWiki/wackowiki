@@ -396,7 +396,7 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site favicon:',
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
-	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 x 64 px.',
+	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 × 64 px.',
 	'ThemeColor'				=> 'Theme color for address bar:',
 	'ThemeColorInfo'			=> 'The browser will set the address bar color of every page according to the provided CSS color.',
 
@@ -983,7 +983,7 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Send to group:',
 	'SendToUser'				=> 'Send to user:',
-	'SendToUserInfo'			=> 'Only users who permit Administrators to email them information will receive mass emails. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Only users who permit administrators to email them information will receive mass emails. This option is available in their user settings under Notifications.',
 
 	// System message module
 	'SystemMessageInfo'			=> '',

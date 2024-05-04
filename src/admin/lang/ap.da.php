@@ -593,10 +593,10 @@ $ap_translation = [
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
-	'PermissionsPolicy'			=> 'Permissions Policy:',
+	'PermissionsPolicy'			=> 'Permissions policy:',
 	'PermissionsPolicyInfo'		=> 'HTTP Permissions-Policy-headeren giver en mekanisme til eksplicit at aktivere eller deaktivere forskellige effektive browserfunktioner.',
-	'ReferrerPolicy'			=> 'Referrer Policy:',
-	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
+	'ReferrerPolicy'			=> 'Referrer policy:',
+	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included in responses.',
 	'ReferrerPolicyModes'	=> [
 		'0'		=> '[off]',
 		'1'		=> 'no-referrer',
