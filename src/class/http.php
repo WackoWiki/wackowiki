@@ -266,7 +266,7 @@ class Http
 
 	public function store_cache(): void
 	{
-		if ($this->caching)
+		if ($this->caching && !isset($this->sess->user_profile))
 		{
 			$data = ob_get_contents();
 
