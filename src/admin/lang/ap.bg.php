@@ -687,8 +687,8 @@ $ap_translation = [
 	'UrlsUnderscoresInfo'		=> 'For example, %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Покажи празните символи в УикиИмента:',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
-	'NumerateLinks'				=> 'EEnumerate links in print view:',
-	'NumerateLinksInfo'			=> 'EEnumerates and lists all links at the bottom of the print view with this option.',
+	'NumerateLinks'				=> 'Enumerate links in print view:',
+	'NumerateLinksInfo'			=> 'Enumerates and lists all links at the bottom of the print view with this option.',
 	'YouareHereText'			=> 'Disable and visualize self-referencing links:',
 	'YouareHereTextInfo'		=> 'Visualize links to the same page, using <code>&lt;b&gt;####&lt;/b&gt;</code>. All links to self lose link formatting, but are displayed as bold text.',
 

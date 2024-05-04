@@ -404,7 +404,7 @@ $ap_translation = [
 	'Theme'						=> 'Theme:',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
 	'ThemesAllowed'				=> 'Allowed Themes:',
-	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
+	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose; otherwise, all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page:',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
 
@@ -587,7 +587,7 @@ $ap_translation = [
 	'EnableSecurityHeaders'		=> 'Enable security headers:',
 	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk!',
 	'Csp'						=> 'Content-Security-Policy (CSP):',
-	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
+	'CspInfo'					=> 'Configuring CSP involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
 		'0'		=> 'disabled',
 		'1'		=> 'strict',
@@ -1030,10 +1030,10 @@ $ap_translation = [
 	'BackupFiles'				=> 'Ficheiros',
 	'BackupNote'				=> 'Nota:',
 	'BackupSettings'			=> 'Specify the desired scheme of backup.<br>' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
+									'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .
 									'<br>' .
-									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ' .
-									'same when backing up only table structure without saving the data. ' .
+									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster, the tables from this backup will not be restructured, ' .
+									'same as when backing up only table structure without saving the data. ' .
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
 									'The Backup package files were stored in the following sub-directory %1.<br>' .
@@ -1252,7 +1252,7 @@ $ap_translation = [
 	'Solve'						=> 'Solve',
 
 	// Bad Behaviour module
-	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+	'BbInfo'					=> 'Detects and blocks unwanted web accesses, deny automated spambots access.<br>For more information, please visit the %1 homepage.',
 	'BbEnable'					=> 'Enable Bad Behaviour:',
 	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
 	'BbStats'					=> 'Bad Behaviour has blocked %1 access attempts in the last 7 days.',

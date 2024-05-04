@@ -588,7 +588,7 @@ $ap_translation = [
 	'EnableSecurityHeaders'		=> 'Activer Security Headers :',
 	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk!',
 	'Csp'						=> 'Content-Security-Policy (CSP) :',
-	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
+	'CspInfo'					=> 'Configuring CSP involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
 		'0'		=> 'désactivé',
 		'1'		=> 'rigoureux',
@@ -1031,10 +1031,10 @@ $ap_translation = [
 	'BackupFiles'				=> 'Fichiers',
 	'BackupNote'				=> 'Note :',
 	'BackupSettings'			=> 'Spécifiez le schéma de sauvegarde souhaité.<br>' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
+									'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .
 									'<br>' .
-									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ' .
-									'same when backing up only table structure without saving the data. ' .
+									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster, the tables from this backup will not be restructured, ' .
+									'same as when backing up only table structure without saving the data. ' .
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Sauvegarde et archivage terminés.<br>' .
 									'Les fichiers du package de sauvegarde ont été stockés dans le sous-répertoire %1 suivant.<br>' .

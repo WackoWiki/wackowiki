@@ -1032,10 +1032,10 @@ $ap_translation = [
 	'BackupFiles'				=> 'Failid',
 	'BackupNote'				=> 'Meeldetuletus:',
 	'BackupSettings'			=> 'Specify the desired scheme of backup.<br>' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
+									'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .
 									'<br>' .
-									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ' .
-									'same when backing up only table structure without saving the data. ' .
+									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster, the tables from this backup will not be restructured, ' .
+									'same as when backing up only table structure without saving the data. ' .
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
 									'The Backup package files were stored in the following sub-directory %1.<br>' .
@@ -1254,7 +1254,7 @@ $ap_translation = [
 	'Solve'						=> 'Solve',
 
 	// Bad Behaviour module
-	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+	'BbInfo'					=> 'Detects and blocks unwanted web accesses, deny automated spambots access.<br>For more information, please visit the %1 homepage.',
 	'BbEnable'					=> 'Enable Bad Behaviour:',
 	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
 	'BbStats'					=> 'Bad Behaviour has blocked %1 access attempts in the last 7 days.',
