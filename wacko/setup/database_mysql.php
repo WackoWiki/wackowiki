@@ -216,15 +216,6 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_comment_on_id (comment_on_id)".
 				") {$engine} COMMENT='' {$charset}";
 
-/*$table_session = "CREATE TABLE {$pref}session (".
-					"session_id VARCHAR( 40 ) DEFAULT '0' NOT NULL ,".
-					"ip_address VARCHAR( 16 ) DEFAULT '0' NOT NULL ,".
-					"user_agent VARCHAR( 50 ) NOT NULL ,".
-					"last_activity INT( 10 ) unsigned DEFAULT 0 NOT NULL ,".
-					"user_data text NOT NULL ,".
-					"PRIMARY KEY ( session_id )".
-				") {$engine} COMMENT='' {$charset}";*/
-
 $table_tag = "CREATE TABLE {$pref}tag (".
 					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -352,12 +343,6 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 					"PRIMARY KEY (watch_id)".
 				") {$engine} COMMENT='' {$charset}";
 
-/* $table_word = "CREATE TABLE {$pref}word (".
-					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"word VARCHAR(255) NOT NULL DEFAULT '',".
-					"replacement VARCHAR(255) NOT NULL DEFAULT '',".
-					"PRIMARY KEY (word_id)".
-				") {$engine} COMMENT='' {$charset}"; */
 
 /*
  Wacko Wiki MySQL Table Deletion Script
@@ -376,7 +361,6 @@ $table_poll_drop				= "DROP TABLE {$pref}poll";
 $table_rating_drop				= "DROP TABLE {$pref}rating";
 $table_referrer_drop			= "DROP TABLE {$pref}referrer";
 $table_revision_drop			= "DROP TABLE {$pref}revision";
-/*$table_session_drop			= "DROP TABLE {$pref}session";*/
 $table_tag_drop					= "DROP TABLE {$pref}tag";
 $table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
 $table_upload_drop				= "DROP TABLE {$pref}upload";
@@ -385,6 +369,5 @@ $table_user_setting_drop		= "DROP TABLE {$pref}user_setting";
 $table_usergroup_drop			= "DROP TABLE {$pref}usergroup";
 $table_usergroup_member_drop	= "DROP TABLE {$pref}usergroup_member";
 $table_watch_drop				= "DROP TABLE {$pref}watch";
-/* $table_word_drop				= "DROP TABLE {$pref}word"; */
 
 ?>
