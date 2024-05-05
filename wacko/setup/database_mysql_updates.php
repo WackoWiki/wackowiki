@@ -77,7 +77,7 @@ $table_log_r4_3 = "CREATE TABLE {$pref}log (".
 					"log_time TIMESTAMP NOT NULL,".
 					"level TINYINT(1) UNSIGNED NOT NULL,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"ip VARCHAR(15) NOT NULL,".
+					"ip VARCHAR(15) NOT NULL DEFAULT '',".
 					"message TEXT NOT NULL,".
 					"PRIMARY KEY (log_id),".
 					"KEY idx_level (level),".
@@ -119,7 +119,7 @@ $alter_page_r4_3_13 = "ALTER TABLE {$pref}page DROP comment_on";
 $alter_page_r4_3_14 = "ALTER TABLE {$pref}page DROP super_comment_on";
 $alter_page_r4_3_15 = "ALTER TABLE {$pref}page DROP owner";
 $alter_page_r4_3_16 = "ALTER TABLE {$pref}page DROP user";
-$alter_page_r4_3_17 = "ALTER TABLE {$pref}page ADD ip VARCHAR(15) NOT NULL AFTER minor_edit";
+$alter_page_r4_3_17 = "ALTER TABLE {$pref}page ADD ip VARCHAR(15) NOT NULL DEFAULT '' AFTER minor_edit";
 $alter_page_r4_3_18 = "ALTER TABLE {$pref}page CHANGE id page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_page_r4_3_19 = "ALTER TABLE {$pref}page CHANGE time modified DATETIME NULL DEFAULT NULL";
 $alter_page_r4_3_20 = "ALTER TABLE {$pref}page DROP INDEX idx_time, ADD INDEX idx_modified (modified)";
