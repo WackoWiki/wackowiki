@@ -42,14 +42,17 @@ if (    @$this->page['tag'] !== $this->db->root_page
 // if user is logged in, shows 'UserName'
 if ($logged_in = $this->get_user())
 {
-	$tpl->uare_link			= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
-	$tpl->uare_account		= $this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'), $this->_t('AccountTip'));
-	$tpl->uare_logout		= $this->href('', $this->db->login_page, ['action' => 'logout']);
+	$tpl->enter('uare_');
+	$tpl->link				= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
+	$tpl->account			= $this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'), $this->_t('AccountTip'));
+	$tpl->logout			= $this->href('', $this->db->login_page, ['action' => 'logout']);
 
 	if ($this->is_admin())
 	{
-		$tpl->uare_ap_link	= $this->href('', 'admin.php', [], false, '', false);
+		$tpl->ap_link	= $this->href('', 'admin.php', [], false, '', false);
 	}
+
+	$tpl->leave(); // uare_
 }
 // else shows login's controls
 else

@@ -64,7 +64,7 @@ fieldset.preview img {
 .missingpage {
 	color: #999;
 	font-style: italic;
-	border-bottom: 1px dashed #cc0000;
+	border-bottom: 1px dashed #c00;
 }
 
 
@@ -72,28 +72,28 @@ fieldset.preview img {
 /*	Wiki formatting	*/
 
 .cite {
-	color: #cc0000;
+	color: #c00;
 }
 .cite a,
 #content .cite a {
-	color: #990000;
+	color: #900;
 }
 .cite a:hover,
 #content .cite a:hover {
 }
 .cite a:active,
 #content .cite a:active {
-	color: #990000;
+	color: #900;
 }
 
 .cl-grey {
 	color: #babfc7;
 }
 .cl-green {
-	color: #00CCAA;
+	color: #0CA;
 }
 .cl-blue {
-	color: #00AACC;
+	color: #0AC;
 }
 
 .email2 {
@@ -104,8 +104,8 @@ fieldset.preview img {
 }
 
 mark {
-	color: #990000;
-	background-color: #FFCCCC;
+	color: #900;
+	background-color: #FCC;
 	display: block;
 	padding: 2px;
 	margin: 5px;
@@ -174,13 +174,13 @@ table.dtable td.usercell {
 	background-color: #131313;
 	color: #fff;
 	border-radius: 6px;
-	padding: 7px 7px 7px 7px;
+	padding: 7px;
 
 	/* Position the tooltip */
 	position: absolute;
 	z-index: 1;
-	top: +30px;
-	left: +100px;
+	top: 30px;
+	left: 100px;
 }
 
 .sqllog:hover {

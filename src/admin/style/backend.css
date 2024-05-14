@@ -40,9 +40,9 @@ p {
 code {
 	font-family: var(--ww-font-monospace);
 	text-align: left;
-	background-color: #ffffcc;
+	background-color: #ffc;
 	padding: 0 2px;
-	color: #666600;
+	color: #660;
 }
 pre {
 	font-family: var(--ww-font-monospace);
@@ -194,7 +194,7 @@ input.verify { display: none; }
 	padding-top: 15px;
 }
 .error {
-	color: #ff9999;
+	color: #f99;
 	font-weight: 600;
 }
 .nobr {
@@ -227,7 +227,7 @@ td.label,
 th.label {
 	text-align: right;
 	padding-right: 5px;
-	border-right: 1px solid #cc0000;
+	border-right: 1px solid #c00;
 	/* border-bottom: 0 !important; */
 }
 [dir=rtl] td.label,
@@ -236,7 +236,7 @@ th.label {
 	border-right: unset;
 	text-align: left;
 	padding-left: 5px;
-	border-left: 1px solid #cc0000;
+	border-left: 1px solid #c00;
 }
 
 .lined td {
@@ -245,7 +245,7 @@ th.label {
 .lined tr:hover,
 .hl-line tr:hover,
 .hl-setting:hover {
-	background: none repeat scroll 0 0 #ccffcc !important;
+	background: none repeat scroll 0 0 #cfc !important;
 }
 
 table.forum th {
@@ -416,10 +416,10 @@ table.backup {
 	font-weight: normal;
 }
 
-.red	{ color: #cc0000; }
+.red	{ color: #c00; }
 .grey	{ color: #babfc7; }
-.green	{ color: #00cc33; }
-.blue	{ color: #00aacc; }
+.green	{ color: #0c3; }
+.blue	{ color: #0ac; }
 
 /*	Basic tags	*/
 
@@ -461,7 +461,7 @@ sup, sub {
 .msg {
 	position: relative;
 	margin: .6rem 0;
-	padding: .625rem 2.5rem .625rem;
+	padding: .625rem 2.5rem;
 	overflow: auto;
 }
 .msg::before {
@@ -482,7 +482,7 @@ sup, sub {
 }
 .error {
 	background: #f8d4cc;
-	color: #cc3333;
+	color: #c33;
 	font-weight: bold;
 }
 .msg.error::after {
@@ -498,7 +498,7 @@ sup, sub {
 .note {
 	background: #f4fbff;
 	border: 1px solid #d5d9e6;
-	color: #cc3333;
+	color: #c33;
 }
 .msg.note::after {
 	content: url('./../../image/info.svg') " ";
@@ -506,7 +506,7 @@ sup, sub {
 
 .notice {
 	background-color: #fff;
-	border: 1px dotted #ddddaa;
+	border: 1px dotted #dda;
 }
 .msg.notice::after {
 	content: url('./../../image/info.svg') " ";
@@ -533,8 +533,8 @@ sup, sub {
 }
 
 .hint {
-	border: 1px solid #ffee66;
-	background: #ffffdd;
+	border: 1px solid #fe6;
+	background: #ffd;
 }
 .msg.hint::after {
 	content: url('./../../image/important.svg') " ";

@@ -29,9 +29,9 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Erro ao carregar o módulo admin %1: não existe.',
 
 	'ApHomePage'				=> 'Página inicial',
-	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
+	'ApHomePageTip'				=> 'Open the home page, you do not quit system administration',
 	'ApLogOut'					=> 'Desligar',
-	'ApLogOutTip'				=> 'quit system administration',
+	'ApLogOutTip'				=> 'Quit system administration',
 
 	'TimeLeft'					=> 'Tempo restante: %1 minutos',
 	'ApVersion'					=> 'versão',
@@ -247,7 +247,7 @@ $ap_translation = [
 	],
 
 	// Main module
-	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'					=> 'Note: It is recommended that access to the site be temporarily blocked for administrative maintenance.',
 
 	'PurgeSessions'				=> 'Purgar',
 	'PurgeSessionsTip'			=> 'Terminar todas as sessões',
@@ -261,10 +261,10 @@ $ap_translation = [
 	'LogBasicSettingsUpdated'	=> 'Definições básicas actualizadas',
 
 	'SiteName'					=> 'Site Name:',
-	'SiteNameInfo'				=> 'The title of this site, appears on browser title, theme header, email-notification, etc.',
-	'SiteDesc'					=> 'Site Description:',
-	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
-	'AdminName'					=> 'Admin of Site:',
+	'SiteNameInfo'				=> 'The title of this site. Appears on browser title, theme header, email-notification, etc.',
+	'SiteDesc'					=> 'Site description:',
+	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header. Explains, in a few words, what this site is about.',
+	'AdminName'					=> 'Admin of site:',
 	'AdminNameInfo'				=> 'Nome do utilizador, que é responsável pelo apoio geral do sítio. Este nome não é utilizado para determinar os direitos de acesso, mas é desejável que esteja em conformidade com o nome do administrador principal do sítio.',
 
 	'LanguageSection'			=> 'Língua',
@@ -283,38 +283,38 @@ $ap_translation = [
 
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel:',
-	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
+	'CommentsPanelInfo'			=> 'The default display of comments at the bottom of the page.',
 	'FilePanel'					=> 'File panel:',
-	'FilePanelInfo'				=> 'The default display of attachments in the bottom of the page.',
+	'FilePanelInfo'				=> 'The default display of attachments at the bottom of the page.',
 	'TagsPanel'					=> 'Tags panel:',
-	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
+	'TagsPanelInfo'				=> 'The default display of the tags panel at the bottom of the page.',
 
 	'NavigationSection'			=> 'Navigation',
-	'ShowPermalink'				=> 'Show Permalink:',
+	'ShowPermalink'				=> 'Show permalink:',
 	'ShowPermalinkInfo'			=> 'The default display of the permalink for the current version of the page.',
 	'TocPanel'					=> 'Table of contents panel:',
 	'TocPanelInfo'				=> 'The default display table of contents panel of a page (may need support in the templates).',
 	'SectionsPanel'				=> 'Sections panel:',
-	'SectionsPanelInfo'			=> 'By default display the panel of adjacent pages (requires support in the templates).',
+	'SectionsPanelInfo'			=> 'By default, display the panel of adjacent pages (requires support in the templates).',
 	'DisplayingSections'		=> 'Displaying sections:',
-	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
+	'DisplayingSectionsInfo'	=> 'When the previous options are set, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>), both, or other (<em>tree</em>).',
 	'MenuItems'					=> 'Menu items:',
 	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
 
-	'HandlerSection'			=> 'Handler',
-	'HideRevisions'				=> 'Hide Revisions:',
+	'HandlerSection'			=> 'Handlers',
+	'HideRevisions'				=> 'Hide revisions:',
 	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
 	'AttachmentHandler'			=> 'Enable attachments handler:',
 	'AttachmentHandlerInfo'		=> 'Permite exibir o manipulador de anexos.',
 	'SourceHandler'				=> 'Enable source handler:',
-	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+	'SourceHandlerInfo'			=> 'Permits the display of the source handler.',
 	'ExportHandler'				=> 'Ativar a exportação XML:',
-	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
+	'ExportHandlerInfo'			=> 'Permits the display of the XML export handler.',
 
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Modo de comparação padrão:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
-	'AllowedDiffMode'			=> 'Allowed Diff modes:',
+	'AllowedDiffMode'			=> 'Allowed diff modes:',
 	'AllowedDiffModeInfo'		=> 'Recomenda-se que seleccione apenas o conjunto de modos de diferenças que pretende utilizar; caso contrário, todos os modos de diferenças são seleccionados.',
 	'NotifyDiffMode'			=> 'Notify diff mode:',
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
@@ -329,18 +329,18 @@ $ap_translation = [
 	'ReviewSettings'			=> 'Review:',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
 	'PublishAnonymously'		=> 'Allow anonymous publishing:',
-	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
+	'PublishAnonymouslyInfo'	=> 'Allow users to publish anonymously (to hide the name).',
 
-	'DefaultRenameRedirect'		=> 'When renaming put redirection:',
+	'DefaultRenameRedirect'		=> 'When renaming, create redirection:',
 	'DefaultRenameRedirectInfo'	=> 'By default, offer to set a redirect to the old address of the page being renamed.',
 	'StoreDeletedPages'			=> 'Keep deleted pages:',
-	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file, keep it in a special section, where it will be available for review and recovery for some more time (as described below).',
+	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file, keep it in a special section, where it will be available for review and recovery for some period of time (as described below).',
 	'KeepDeletedTime'			=> 'Storage time of deleted pages:',
-	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only with the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).',
+	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only with the previous option. Use zero to ensure entities are never deleted (in this case the administrator can clear the "cart" manually).',
 	'PagesPurgeTime'			=> 'Storage time of page revisions:',
 	'PagesPurgeTimeInfo'		=> 'Elimina automaticamente as versões mais antigas dentro do número de dias indicado. Se introduzir zero, as versões mais antigas não serão removidas.',
-	'EnableReferrers'			=> 'Enable Referrers:',
-	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
+	'EnableReferrers'			=> 'Enable referrers:',
+	'EnableReferrersInfo'		=> 'Permits creation and display of external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers:',
 	'ReferrersPurgeTimeInfo'	=> 'Manter o histórico de referência de páginas externas não mais do que um determinado número de dias. Zero significa armazenamento eterno, mas para um site visitado activamente isto pode levar ao transbordamento da base de dados.',
 	'EnableCounters'			=> 'Hit Counters:',
@@ -362,7 +362,7 @@ $ap_translation = [
 		'4'		=> 'página revista',
 	],
 
-	'XmlSitemap'				=> 'XML Sitemap:',
+	'XmlSitemap'				=> 'XML sitemap:',
 	'XmlSitemapInfo'			=> 'Cria um ficheiro XML chamado %1 dentro da pasta xml. Pode adicionar o caminho para o mapa do site no ficheiro robots.txt no seu diretório raiz da seguinte forma:',
 	'XmlSitemapGz'				=> 'Compressão do Sitemap XML:',
 	'XmlSitemapGzInfo'			=> 'Se desejar, pode comprimir o ficheiro de texto do Sitemap utilizando gzip para reduzir os requisitos de largura de banda.',
@@ -386,7 +386,7 @@ $ap_translation = [
 	'LogoAndTitle'				=> 'logo and title',
 
 	'LogoSection'				=> 'Logo',
-	'SiteLogo'					=> 'Site Logo:',
+	'SiteLogo'					=> 'Site logo:',
 	'SiteLogoInfo'				=> 'O seu logótipo aparecerá normalmente no canto superior esquerdo da aplicação. O tamanho máximo é de 2 MiB. As dimensões ideais são 255 píxeis de largura por 55 píxeis de altura.',
 	'LogoDimensions'			=> 'Logo dimensions:',
 	'LogoDimensionsInfo'		=> 'Largura e altura do logótipo apresentado.',
@@ -394,7 +394,7 @@ $ap_translation = [
 	'LogoDisplayModeInfo'		=> 'Define o aspeto do logótipo. A predefinição é desligado.',
 
 	'FaviconSection'			=> 'Favicon',
-	'SiteFavicon'				=> 'Site Favicon:',
+	'SiteFavicon'				=> 'Site favicon:',
 	'SiteFaviconInfo'			=> 'O seu ícone de atalho, ou favicon, é apresentado na barra de endereço, nos separadores e nos favoritos da maioria dos browsers. Isto irá substituir o favicon do seu tema.',
 	'SiteFaviconTooBig'			=> 'O Favicon é maior que 64 × 64px.',
 	'ThemeColor'				=> 'Cor do tema para a barra de endereços:',
@@ -404,17 +404,17 @@ $ap_translation = [
 	'Theme'						=> 'Theme:',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
 	'ThemesAllowed'				=> 'Allowed Themes:',
-	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
+	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose; otherwise, all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page:',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'SystemSettingsInfo'		=> 'Group of parameters responsible for fine-tuning the site. Do not change them unless you are confident in their actions.',
 	'SystemSettingsUpdated'		=> 'Updated system settings',
 
-	'DebugModeSection'			=> 'Debug mode',
+	'DebugModeSection'			=> 'Debug Mode',
 	'DebugMode'					=> 'Debug mode:',
-	'DebugModeInfo'				=> 'Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.',
+	'DebugModeInfo'				=> 'Extracting and outputting telemetry data about the application\'s execution time. Attention: Full detail mode imposes higher requirements to the allocated memory, especially for resource-intensive operations, such as database backup and restore.',
 	'DebugModes'	=> [
 		'0'		=> 'debugging is off',
 		'1'		=> 'only the total execution time',
@@ -422,25 +422,25 @@ $ap_translation = [
 		'3'		=> 'full detail (DBMS, cache, etc.)',
 	],
 	'DebugSqlThreshold'			=> 'Threshold performance RDBMS:',
-	'DebugSqlThresholdInfo'		=> 'In the detailed debug mode to record only the queries take longer than the number of seconds.',
+	'DebugSqlThresholdInfo'		=> 'In detailed debug mode, report only the queries that take longer than the number of seconds specified.',
 	'DebugAdminOnly'			=> 'Closed diagnosis:',
 	'DebugAdminOnlyInfo'		=> 'Show debug data of the program (and DBMS) only for the administrator.',
 
 	'CachingSection'			=> 'Caching Options',
 	'Cache'						=> 'Cache rendered pages:',
 	'CacheInfo'					=> 'Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.',
-	'CacheTtl'					=> 'Term relevance cached pages:',
+	'CacheTtl'					=> 'Time-to-live for cached pages:',
 	'CacheTtlInfo'				=> 'Cache pages no more than a specified number of seconds.',
 	'CacheSql'					=> 'Cache DBMS queries:',
-	'CacheSqlInfo'				=> 'Maintain a local cache the results of certain resource-SQL-queries.',
-	'CacheSqlTtl'				=> 'Term relevance Cache Database:',
-	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
+	'CacheSqlInfo'				=> 'Maintain a local cache of the results of certain resource-related SQL queries.',
+	'CacheSqlTtl'				=> 'Time-to-live for cached SQL queries:',
+	'CacheSqlTtlInfo'			=> 'Cache results of SQL queries for no more than the specified number of seconds. Values greater than 1200 are not desirable.',
 
-	'LogSection'				=> 'Log settings',
-	'LogLevelUsage'				=> 'Using logging:',
+	'LogSection'				=> 'Log Settings',
+	'LogLevelUsage'				=> 'Use logging:',
 	'LogLevelUsageInfo'			=> 'The minimum priority of the events recorded in the log.',
 	'LogThresholds'	=> [
-		'0'		=> 'not keep a journal',
+		'0'		=> 'do not keep a journal',
 		'1'		=> 'only the critical level',
 		'2'		=> 'from the highest level',
 		'3'		=> 'from high',
@@ -449,7 +449,7 @@ $ap_translation = [
 		'6'		=> 'the minimum level',
 		'7'		=> 'record all',
 	],
-	'LogDefaultShow'			=> 'Display Log Mode:',
+	'LogDefaultShow'			=> 'Display log mode:',
 	'LogDefaultShowInfo'		=> 'The minimum priority events displayed in the log by default.',
 	'LogModes'	=> [
 		'1'		=> 'only the critical level',
@@ -461,14 +461,14 @@ $ap_translation = [
 		'7'		=> 'show all',
 	],
 	'LogPurgeTime'				=> 'Storage time of Log:',
-	'LogPurgeTimeInfo'			=> 'Remove event log over a given number of days.',
+	'LogPurgeTimeInfo'			=> 'Remove event log after the specified number of days.',
 
 	'PrivacySection'			=> 'Privacy',
 	'AnonymizeIp'				=> 'Anonymize users IP addresses:',
-	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
+	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable (i.e., page, revision or referrers).',
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
-	'ReverseProxy'				=> 'Use Reverse proxy:',
+	'ReverseProxy'				=> 'Use reverse proxy:',
 	'ReverseProxyInfo'			=> 'Habilitar esta configuração para determinar o endereço IP correcto do cliente remoto,
 									examinando a informação armazenada nos cabeçalhos do X-Forwarded-For. X-Forwarded-For headers
 									são um mecanismo padrão para identificar sistemas clientes que se ligam através de um servidor
@@ -485,15 +485,15 @@ $ap_translation = [
 									IP separada por vírgula+espaço, apenas o último (o mais à esquerda) será utilizado.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses:',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
-									 proxies. Filling this array WackoWiki will trust the information stored
-									 in the X-Forwarded-For headers only if Remote IP address is one of
-									 these, that is the request reaches the web server from one of your
+									 proxies. If using this array, WackoWiki will trust the information stored
+									 in the X-Forwarded-For headers only if the Remote IP address is one of
+									 these, that is, the request reaches the web server from one of your
 									 reverse proxies. Otherwise, the client could directly connect to
-									 your web server spoofing the X-Forwarded-For headers.',
+									 your web server by spoofing the X-Forwarded-For headers.',
 
-	'SessionSection'				=> 'Session handling',
+	'SessionSection'				=> 'Session Handling',
 	'SessionStorage'				=> 'Session storage:',
-	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
+	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default, either file or database session storage is selected.',
 	'SessionModes'	=> [
 		'1'		=> 'Ficheiro',
 		'2'		=> 'Base de dados',
@@ -504,38 +504,38 @@ $ap_translation = [
 	'LoginNoticeInfo'				=> 'Apresenta um aviso de início de sessão.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>:',
-	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
+	'RewriteModeInfo'				=> 'If your web server supports this feature, enable to "beautify" the page URLs.<br>
 										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parâmetros responsáveis pelo controlo de acesso e permissões.',
 	'PermissionsSettingsUpdated'	=> 'Updated permissions settings',
 
-	'PermissionsSection'		=> 'Rights and privileges',
+	'PermissionsSection'		=> 'Rights and Privileges',
 	'ReadRights'				=> 'Read rights by default:',
-	'ReadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'ReadRightsInfo'			=> 'Default assigned to the created root pages, as well as pages for which parent ACLs cannot be defined.',
 	'WriteRights'				=> 'Write rights by default:',
-	'WriteRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'WriteRightsInfo'			=> 'Default assigned to the created root pages, as well as pages for which parent ACLs cannot be defined.',
 	'CommentRights'				=> 'Comment rights by default:',
-	'CommentRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'CommentRightsInfo'			=> 'Default assigned to the created root pages, as well as pages for which parent ACLs cannot be defined.',
 	'CreateRights'				=> 'Create rights of a sub page by default:',
 	'CreateRightsInfo'			=> 'Define the right for creating root pages and assign them to pages for which parental rights cannot be defined.',
 	'UploadRights'				=> 'Upload rights by default:',
-	'UploadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'UploadRightsInfo'			=> 'Default upload rights.',
 	'RenameRights'				=> 'Global rename right:',
 	'RenameRightsInfo'			=> 'The list of permissions to freely rename (move) pages.',
 
-	'LockAcl'					=> 'Lock all ACL to read only:',
-	'LockAclInfo'				=> '<span class="cite">Overwrites the acl settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
+	'LockAcl'					=> 'Lock all ACLs to read only:',
+	'LockAclInfo'				=> '<span class="cite">Overwrites the ACL settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period of time for security reasons, or as a emergency response to an exploit or vulnerability.',
 	'HideLocked'				=> 'Hide inaccessible pages:',
-	'HideLockedInfo'			=> 'If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).',
+	'HideLockedInfo'			=> 'If the user does not have permission to read the page, hide it in different page lists (however the link placed in text will still be visible).',
 	'RemoveOnlyAdmins'			=> 'Only administrators can delete pages:',
-	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.',
+	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, the ability to delete pages. The first limit applies to owners of normal pages.',
 	'OwnersRemoveComments'		=> 'Owners of pages can delete comments:',
 	'OwnersRemoveCommentsInfo'	=> 'Allow page owners to moderate comments on their pages.',
 	'OwnersEditCategories'		=> 'Owners can edit page categories:',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
-	'TermHumanModeration'		=> 'Term human moderation:',
+	'TermHumanModeration'		=> 'Human moderation expiration:',
 	'TermHumanModerationInfo'	=> 'Os moderadores só podem editar comentários se tiverem sido criados não mais do que este número de dias atrás (esta limitação não se aplica ao último comentário no tópico).',
 
 	'UserCanDeleteAccount'		=> 'Os utilizadores podem eliminar as suas contas',
@@ -547,17 +547,17 @@ $ap_translation = [
 	'AllowRegistration'			=> 'Register online:',
 	'AllowRegistrationInfo'		=> 'Registo de utilizador aberto. A desactivação desta opção impedirá o registo gratuito, no entanto, o próprio administrador do sítio poderá registar outros utilizadores.',
 	'ApproveNewUser'			=> 'Approve new users:',
-	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
+	'ApproveNewUserInfo'		=> 'Allows administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies:',
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
 	'DisableWikiName'			=> 'Disable WikiName:',
-	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
+	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of a WikiName for users. Permits user registration with traditional nicknames instead of forced CamelCase-formatted names (i.e., NameSurname).',
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
 
 	'EmailSection'				=> 'Email',
 	'AllowEmailReuse'			=> 'Allow email address re-use:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same email address.',
 	'EmailConfirmation'			=> 'Impor confirmação por correio eletrónico:',
 	'EmailConfirmationInfo'		=> 'Requer que o utilizador verifique o seu endereço de correio eletrónico antes de poder iniciar sessão.',
 	'AllowedEmailDomains'		=> 'Domínios de correio eletrónico permitidos:',
@@ -566,16 +566,16 @@ $ap_translation = [
 	'ForbiddenEmailDomainsInfo'	=> 'Domínios de correio eletrónico proibidos separados por vírgulas, por exemplo, <code>example.com, local.lan</code> etc. (só é eficaz se a lista de domínios de correio eletrónico permitidos estiver vazia)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
-	'EnableCaptcha'				=> 'Enable Captcha:',
-	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
+	'EnableCaptcha'				=> 'Enable captcha:',
+	'EnableCaptchaInfo'			=> 'If enabled, captcha will be shown in the following cases, or if a security threshold is reached.',
 	'CaptchaComment'			=> 'New comment:',
-	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
+	'CaptchaCommentInfo'		=> 'As protection against spam, unregistered users must complete captcha before comment will be posted.',
 	'CaptchaPage'				=> 'New page:',
-	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
+	'CaptchaPageInfo'			=> 'As protection against spam, unregistered users must complete captcha before creating a new page.',
 	'CaptchaEdit'				=> 'Edit page:',
-	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
+	'CaptchaEditInfo'			=> 'As protection against spam, unregistered users must complete captcha before editing pages.',
 	'CaptchaRegistration'		=> 'Criar conta:',
-	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
+	'CaptchaRegistrationInfo'	=> 'As protection against spam, unregistered users must complete captcha before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
 	'TlsConnection'				=> 'TLS-Connection:',
@@ -584,19 +584,19 @@ $ap_translation = [
 	'TlsImplicitInfo'			=> 'Forcibly reconnect the client from HTTP to HTTPS. With the option disabled, the client can browse the site through an open HTTP channel.',
 
 	'HttpSecurityHeaders'		=> 'HTTP Security Headers',
-	'EnableSecurityHeaders'		=> 'Enable Security Headers:',
-	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',
+	'EnableSecurityHeaders'		=> 'Enable security headers:',
+	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk!',
 	'Csp'						=> 'Content-Security-Policy (CSP):',
-	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
+	'CspInfo'					=> 'Configuring CSP involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
 		'0'		=> 'disabled',
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
-	'PermissionsPolicy'			=> 'Permissions Policy:',
+	'PermissionsPolicy'			=> 'Permissions policy:',
 	'PermissionsPolicyInfo'		=> 'O cabeçalho HTTP Permissions-Policy fornece um mecanismo para activar ou desactivar explicitamente várias funcionalidades poderosas do navegador.',
-	'ReferrerPolicy'			=> 'Referrer Policy:',
-	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
+	'ReferrerPolicy'			=> 'Referrer policy:',
+	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included in responses.',
 	'ReferrerPolicyModes'	=> [
 		'0'		=> '[off]',
 		'1'		=> 'no-referrer',
@@ -609,10 +609,10 @@ $ap_translation = [
 		'8'		=> 'unsafe-url'
 	],
 
-	'UserPasswordSection'		=> 'Persistence of user passwords',
+	'UserPasswordSection'		=> 'Persistence of User Passwords',
 	'PwdMinChars'				=> 'Minimum password length:',
 	'PwdMinCharsInfo'			=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.',
-	'AdminPwdMinChars'			=> 'Minimum Admin password length:',
+	'AdminPwdMinChars'			=> 'Minimum admin password length:',
 	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
 	'PwdCharComplexity'			=> 'The required password complexity:',
 	'PwdCharClasses'	=> [
@@ -638,35 +638,35 @@ $ap_translation = [
 	'FormTokenTime'				=> 'Maximum time to submit forms:',
 	'FormTokenTimeInfo'			=> 'O tempo que um utilizador tem de submeter um formulário (em segundos).<br> Note que um formulário pode tornar-se inválido se a sessão expirar, independentemente desta configuração.',
 
-	'SessionLength'				=> 'Term login cookie:',
-	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
+	'SessionLength'				=> 'Session cookie expiration:',
+	'SessionLengthInfo'			=> 'The lifetime of the user session cookie by default (in days).',
 	'CommentDelay'				=> 'Anti-flood for comments:',
-	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in seconds).',
+	'CommentDelayInfo'			=> 'The minimum delay between the publication of new user comments (in seconds).',
 	'IntercomDelay'				=> 'Anti-flood for personal communications:',
-	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in seconds).',
+	'IntercomDelayInfo'			=> 'The minimum delay between sending private messages (in seconds).',
 	'RegistrationDelay'			=> 'Time threshold for registering:',
 	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
 	// Formatter settings
-	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'FormatterSettingsInfo'		=> 'Group of parameters responsible for fine-tuning the site. Do not change them unless you are confident in their actions.',
 	'FormatterSettingsUpdated'	=> 'Updated formatting settings',
 
-	'TextHandlerSection'		=> 'Text Handler ',
-	'Typografica'				=> 'Typographical Proofreader:',
-	'TypograficaInfo'			=> 'Unsetting slightly speed up the process of adding comments and save the page.',
+	'TextHandlerSection'		=> 'Text Handler:',
+	'Typografica'				=> 'Typographical proofreader:',
+	'TypograficaInfo'			=> 'Disabling this option will speed up the processes of adding comments and saving pages.',
 	'Paragrafica'				=> 'Paragrafica markings:',
-	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.',
-	'AllowRawhtml'				=> 'Global HTML Support:',
+	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents (<code>{{toc}}</code>).',
+	'AllowRawhtml'				=> 'Global HTML support:',
 	'AllowRawhtmlInfo'			=> 'This option is potentially unsafe for an open site.',
 	'SafeHtml'					=> 'Filtering HTML:',
 	'SafeHtmlInfo'				=> 'Prevents saving of dangerous HTML-objects. Turning off the filter on an open site with HTML support is <span class="underline">extremely</span> undesirable!',
 
 	'WackoFormatterSection'		=> 'Wiki Text Formatter (Wacko Formatter)',
-	'X11colors'					=> 'X11 Colors Usage:',
-	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
-	'WikiLinks'					=> 'Disable Wikilinks:',
+	'X11colors'					=> 'X11 colors usage:',
+	'X11colorsInfo'				=> 'Extends the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Disabling this option speeds up the processes of adding comments and saving pages.',
+	'WikiLinks'					=> 'Disable wiki links:',
 	'WikiLinksInfo'				=> 'Desactiva a ligação para <code>CamelCaseWords</code>, as suas Palavras CamelCase não serão mais ligadas directamente a uma nova página. Isto é útil quando se trabalha em diferentes namespaces aks clusters. Por defeito, está desligado.',
-	'BracketsLinks'				=> 'Disable bracketslinks:',
+	'BracketsLinks'				=> 'Disable bracketed links:',
 	'BracketsLinksInfo'			=> 'Disables <code>[[link]]</code> and <code>((link))</code> syntax.',
 	'Formatters'				=> 'Desativar formatadores:',
 	'FormattersInfo'			=> 'Disables <code>%%code%%</code> syntax, used for highlighters.',
@@ -692,61 +692,61 @@ $ap_translation = [
 	'Nofollow'					=> 'nofollow:',
 	'NofollowInfo'				=> 'Instrua alguns motores de busca que o hiperlink não deve influenciar a classificação dos links alvo no índice dos motores de busca. Adiciona <code>rel="nofollow"</code> à sintaxe da hiperligação.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores:',
-	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
+	'UrlsUnderscoresInfo'		=> 'For example, %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Mostrar espaço em WikiNames:',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
-	'NumerateLinks'				=> 'Numerate links in print view:',
-	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
+	'NumerateLinks'				=> 'Enumerate links in print view:',
+	'NumerateLinksInfo'			=> 'Enumerates and lists all links at the bottom of the print view with this option.',
 	'YouareHereText'			=> 'Disable and visualize self-referencing links:',
-	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
+	'YouareHereTextInfo'		=> 'Visualize links to the same page, using <code>&lt;b&gt;####&lt;/b&gt;</code>. All links to self lose link formatting, but are displayed as bold text.',
 
 	// Pages settings
 	'PagesSettingsInfo'			=> 'Aqui pode definir ou alterar as páginas base do sistema utilizadas dentro do Wiki. Por favor não se esqueça de criar ou alterar as páginas correspondentes no Wiki de acordo com as suas definições aqui.',
 	'PagesSettingsUpdated'		=> 'Updated settings base pages',
 
 	'ListCount'					=> 'Number of items per list:',
-	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+	'ListCountInfo'				=> 'Number of items displayed on each list for guest, or as default value for new users.',
 
 	'ForumSection'				=> 'Options Forum',
-	'ForumCluster'				=> 'Cluster Forum:',
+	'ForumCluster'				=> 'Cluster forum:',
 	'ForumClusterInfo'			=> 'Root cluster for forum section (action %1).',
 	'ForumTopics'				=> 'Number of topics per page:',
 	'ForumTopicsInfo'			=> 'Number of topics displayed on each page of the list in the forum sections (action %1).',
 	'CommentsCount'				=> 'Number of comments per page:',
-	'CommentsCountInfo'			=> 'Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.',
+	'CommentsCountInfo'			=> 'Number of comments displayed on each page\'s list of comments. This applies to all the comments on the site, not just those posted in the forum.',
 
 	'NewsSection'				=> 'Section News',
-	'NewsCluster'				=> 'Cluster for the News:',
+	'NewsCluster'				=> 'Cluster for the news:',
 	'NewsClusterInfo'			=> 'Root cluster for news section (action %1).',
 	'NewsStructure'				=> 'News cluster structure:',
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
 	'LicenseSection'			=> 'Licença',
 	'DefaultLicense'			=> 'Default license:',
-	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
-	'EnableLicense'				=> 'Enable License:',
+	'DefaultLicenseInfo'		=> 'Under which license your content can be released.',
+	'EnableLicense'				=> 'Enable license:',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
 	'LicensePerPage'			=> 'License per page:',
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
-	'ServicePagesSection'		=> 'Service pages',
+	'ServicePagesSection'		=> 'Service Pages',
 	'RootPage'					=> 'Home page:',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
 	'PrivacyPage'				=> 'Política de privacidade:',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
-	'TermsPage'					=> 'Policies and Regulations:',
+	'TermsPage'					=> 'Policies and regulations:',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
 	'SearchPage'				=> 'Pesquisa:',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
 	'RegistrationPage'			=> 'CriarConta:',
-	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
+	'RegistrationPageInfo'		=> 'Page for new user registration (action %1).',
 	'LoginPage'					=> 'User login:',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
 	'SettingsPage'				=> 'User Settings:',
-	'SettingsPageInfo'			=> 'Page customize the user profile (action %1).',
+	'SettingsPageInfo'			=> 'Page to customize the user profile (action %1).',
 	'PasswordPage'				=> 'Change Password:',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list:',
@@ -764,9 +764,9 @@ $ap_translation = [
 	'WantedPage'				=> 'Wanted pages:',
 	'WantedPageInfo'			=> 'Page with a list of missing pages that are referenced (action %1).',
 	'OrphanedPage'				=> 'Orphaned pages:',
-	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
+	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related via links to any other page (action %1).',
 	'SandboxPage'				=> 'Sandbox:',
-	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
+	'SandboxPageInfo'			=> 'Page where users can practice their wiki markup skills.',
 	'HelpPage'					=> 'Socorro:',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index:',
@@ -779,18 +779,18 @@ $ap_translation = [
 	'NotificationSettingsInfo'	=> 'Parameters for notifications of the platform.',
 	'NotificationSettingsUpdated'	=> 'Updated notification settings',
 
-	'EmailNotification'			=> 'Email Notification:',
-	'EmailNotificationInfo'		=> 'Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that disabling email notifications has no effect on emails generated as part of the user signup process.',
+	'EmailNotification'			=> 'Email notification:',
+	'EmailNotificationInfo'		=> 'Allow email notification. Set to Enabled to enable email notifications, Disabled to disable them. Note that disabling email notifications has no effect on emails generated as part of the user signup process.',
 	'Autosubscribe'				=> 'Autosubscribe:',
 	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
 
-	'NotificationSection'		=> 'Default user notification settings',
+	'NotificationSection'		=> 'Default User Notification Settings',
 	'NotifyPageEdit'			=> 'Notify page edit:',
-	'NotifyPageEditInfo'		=> 'Pending - Sending a email notification only for the first change until the user visits the page again.',
+	'NotifyPageEditInfo'		=> 'Pending - Send an email notification only for the first change until the user visits the page again.',
 	'NotifyMinorEdit'			=> 'Notify minor edit:',
 	'NotifyMinorEditInfo'		=> 'Sends notifications also for minor edits.',
 	'NotifyNewComment'			=> 'Notify new comment:',
-	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
+	'NotifyNewCommentInfo'		=> 'Pending - Send an email notification only for the first comment until the user visits the page again.',
 
 	'NotifyUserAccount'			=> 'Notify new user account:',
 	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the signup form.',
@@ -798,10 +798,10 @@ $ap_translation = [
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
 	'PersonalMessagesSection'	=> 'Mensagens pessoais',
-	'AllowIntercomDefault'		=> 'Allow Intercom:',
-	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
-	'AllowMassemailDefault'		=> 'Allow Massemail:',
-	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
+	'AllowIntercomDefault'		=> 'Allow intercom:',
+	'AllowIntercomDefaultInfo'	=> 'Enabling this option allows other users to send personal messages to the recipient\'s email address without disclosing the address.',
+	'AllowMassemailDefault'		=> 'Allow mass email:',
+	'AllowMassemailDefaultInfo'	=> 'Only send messages to those users who have permitted administrators to email them information.',
 
 	// Resync settings
 	'Synchronize'				=> 'sincronizar',
@@ -817,10 +817,10 @@ $ap_translation = [
 	'LogFeedsUpdated'			=> 'Synchronized RSS feeds',
 	'LogPageBodySynched'		=> 'Reparsed page body and links',
 
-	'UserStats'					=> 'User Statistics',
-	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'UserStats'					=> 'User statistics',
+	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to match actual data contained in the database.',
 	'PageStats'					=> 'Page statistics',
-	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to match actual data contained in database.',
 
 	'AttachmentsInfo'			=> 'Actualiza o hash do ficheiro para todos os anexos da base de dados.',
 	'AttachmentsSynched'		=> 'Reescrever todos os anexos dos ficheiros',
@@ -838,7 +838,7 @@ $ap_translation = [
 	'PreparsedBodyPurged'		=> 'Emptied <code>body_r</code> field in page table.',
 
 	'WikiLinksResync'			=> 'Wiki-links',
-	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
+	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the <code>page_link</code> and <code>file_link</code> tables in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Recopilando todas as páginas (extremamente caras)',
 	'ResyncOptions'				=> 'Additional options',
 	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
@@ -853,26 +853,26 @@ $ap_translation = [
 	'UseSmtpInfo'				=> 'Select <code>SMTP</code> se quer ou tem que enviar os emails recorrendo a um Servidor SMTP em vez da função de email do Servidor.',
 
 	'EnableEmail'				=> 'Enable emails:',
-	'EnableEmailInfo'			=> 'Enabling emails',
+	'EnableEmailInfo'			=> 'Enable sending of emails.',
 
 	'EmailIdentitySettings'		=> 'Website E-mails Identidade',
 	'FromEmailName'				=> 'From Name:',
-	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'FromEmailNameInfo'			=> 'The sender name that is use for the <code>From:</code> header for all email notifications sent from the site.',
 	'EmailSubjectPrefix'		=> 'Prefixo do assunto:',
 	'EmailSubjectPrefixInfo'	=> 'Prefixo alternativo do assunto do correio eletrónico, por exemplo, <code>[Prefixo] Tópico</code>. Se não for definido, o prefixo predefinido é Nome do sítio: %1.',
 
 	'NoReplyEmail'				=> 'No-reply address:',
-	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
+	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all email notifications sent from the site.',
 	'AdminEmail'				=> 'Email of the site owner:',
 	'AdminEmailInfo'			=> 'This address is used for admin purposes, like new user notification.',
 	'AbuseEmail'				=> 'Email abuse service:',
-	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
+	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may be the same as the site owner email.',
 
 	'SendTestEmail'				=> 'Enviar um E-mail de Teste',
 	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your emails configuration.',
+	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your email configuration settings.',
 
 	'SmtpSettings'				=> 'Configurações do SMTP',
 	'SmtpAutoTls'				=> 'Opportunistic TLS:',
@@ -892,9 +892,9 @@ $ap_translation = [
 	'UploadSettingsInfo'		=> 'Aqui pode configurar as Opções Principais para os Anexos e Categorias Especiais associadas.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
-	'FileUploadsSection'		=> 'File uploads',
+	'FileUploadsSection'		=> 'File Uploads',
 	'RegisteredUsers'			=> 'utilizadores registados',
-	'RightToUpload'				=> 'Right to the upload files:',
+	'RightToUpload'				=> 'Permissions to upload files:',
 	'RightToUploadInfo'			=> '<code>admins</code> means that only users belonging to the admins group can upload  files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
 	'UploadMaxFilesize'			=> 'Tamanho máximo de anexos:',
 	'UploadMaxFilesizeInfo'		=> 'Tamanho máximo de cada anexo. Se este valor for 0, o tamanho do ficheiro enviado fica sujeito às permissões do PHP.',
@@ -933,16 +933,16 @@ $ap_translation = [
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
-									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
+									Remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Words that will be automatically censored on your Wiki.',
 	'FilterSettingsUpdated'		=> 'Updated spam filter settings',
 
-	'WordCensoringSection'		=> 'Word censoring',
-	'SPAMFilter'				=> 'SPAM Filter:',
-	'SPAMFilterInfo'			=> 'Enabling SPAM Filter',
+	'WordCensoringSection'		=> 'Word Censoring',
+	'SPAMFilter'				=> 'Spam filter:',
+	'SPAMFilterInfo'			=> 'Enabling Spam Filter',
 	'WordList'					=> 'Word list:',
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
 
@@ -970,8 +970,8 @@ $ap_translation = [
 
 	// Massemail module
 	'MassemailInfo'				=> 'Aqui pode enviar um email a todos os seus Utilizadores ou a todos os Utilizadores de um determinado Grupo, <strong>se tiver a opção de receber emails ativada</strong>. Para isso, uma mensagem será enviada ao endereço de email do administrador a informar, com uma cópia a todos membros. A configuração padrão apenas inclui 20 destinatários por mensagem, sendo que para mais destinatários mais emails serão enviados. Se está a enviar mensagens a um grande grupo de Utilizadores, por favor, seja paciente e não feche a página durante o envio. É normal que o envio em massa de mensagens leve algum tempo: Será avisado quando o processo terminar.',
-	'LogMassemail'				=> 'Messemail send %1 to group / user ',
-	'MassemailSend'				=> 'Massemail send',
+	'LogMassemail'				=> 'Mass email send %1 to group / user ',
+	'MassemailSend'				=> 'Mass email send',
 
 	'NoEmailMessage'			=> 'Tem que introduzir uma mensagem.',
 	'NoEmailSubject'			=> 'A sua mensagem tem que ter um assunto.',
@@ -1029,11 +1029,11 @@ $ap_translation = [
 	'BackupCluster'				=> 'Cluster:',
 	'BackupFiles'				=> 'Ficheiros',
 	'BackupNote'				=> 'Nota:',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
+	'BackupSettings'			=> 'Specify the desired scheme of backup.<br>' .
+									'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .
 									'<br>' .
-									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ' .
-									'same when backing up only table structure without saving the data. ' .
+									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster, the tables from this backup will not be restructured, ' .
+									'same as when backing up only table structure without saving the data. ' .
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
 									'The Backup package files were stored in the following sub-directory %1.<br>' .
@@ -1083,7 +1083,7 @@ $ap_translation = [
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions:',
 	'NoTableStructure'			=> 'The structure of the tables was not saved - skip',
 	'RestoreRecords'			=> 'Restore the contents of tables',
-	'ProcessTablesDump'			=> 'Just download and process tables dump',
+	'ProcessTablesDump'			=> 'Just download and process table dumps',
 	'Instruction'				=> 'Instruction',
 	'RestoredRecords'			=> 'records:',
 	'RecordsRestoreDone'		=> 'Completed. Total entries:',
@@ -1156,7 +1156,7 @@ $ap_translation = [
 	'GroupsAlreadyExists'		=> 'Este grupo já existe.',
 	'GroupsAdded'				=> 'Grupo adicionado com sucesso.',
 	'GroupsRenamed'				=> 'Grupo renomeado com sucesso.',
-	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
+	'GroupsDeleted'				=> 'The group %1 and all associated pages were deleted from the database.',
 	'GroupsAdd'					=> 'Adicionar um novo grupo',
 	'GroupsRename'				=> 'Renomear o grupo %1 para',
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
@@ -1193,7 +1193,7 @@ $ap_translation = [
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
-	'SysInfo'					=> 'Version informations:',
+	'SysInfo'					=> 'Version information:',
 	'SysParameter'				=> 'Parameter',
 	'SysValues'					=> 'Values',
 
@@ -1252,7 +1252,7 @@ $ap_translation = [
 	'Solve'						=> 'Solve',
 
 	// Bad Behaviour module
-	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+	'BbInfo'					=> 'Detects and blocks unwanted web accesses, deny automated spambots access.<br>For more information, please visit the %1 homepage.',
 	'BbEnable'					=> 'Enable Bad Behaviour:',
 	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
 	'BbStats'					=> 'Bad Behaviour has blocked %1 access attempts in the last 7 days.',

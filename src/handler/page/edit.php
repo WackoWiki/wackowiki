@@ -231,12 +231,6 @@ if ($this->has_access('read')
 
 				$this->page_cache[$this->page['page_id']]	= '';
 
-				// show success message (too much visual clutter)
-				/* $message	= $this->page['comment_on_id']
-					? $this->_t('CommentSaved')
-					: Ut::perc_replace($this->_t('PageSaved'), ($this->page['version_id'] + 1));
-				$this->set_message($message, 'success'); */
-
 				// forward to show handler
 				$this->http->redirect($this->href('', '' , $anchor));
 			}

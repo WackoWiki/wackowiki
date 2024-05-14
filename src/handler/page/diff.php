@@ -90,7 +90,7 @@ if ($page_a && $page_b
 	if ($notification == 0)
 	{
 		$tpl->enter('nav_');
-		// TODO: $minor_edit
+
 		[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $minor_edit, $this->is_admin());
 
 		$revisions_menu = function ($rev, $page, $side) use ($revisions, $diffmode, $page_a, $page_b, &$tpl)
@@ -350,19 +350,16 @@ if ($page_a && $page_b
 			if ($diffmode == 3)
 			{
 				$renderer = new SideBySide();
-				// patched header
 				$tpl->diff = $diff->render($renderer);
 			}
 			else if ($diffmode == 4)
 			{
 				$renderer = new Unified();
-				// patched header
 				$tpl->diff = $diff->render($renderer);
 			}
 			else if ($diffmode == 5)
 			{
 				$renderer = new Merged();
-				// patched header
 				$tpl->diff = $diff->render($renderer);
 			}
 			else

@@ -29,9 +29,9 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exist.',
 
 	'ApHomePage'				=> 'Home Page',
-	'ApHomePageTip'				=> 'Quit system administration and open the home page',
+	'ApHomePageTip'				=> 'Open the home page, you do not quit system administration',
 	'ApLogOut'					=> 'Log out',
-	'ApLogOutTip'				=> 'Quit system administration and log out of site',
+	'ApLogOutTip'				=> 'Quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minute(s)',
 	'ApVersion'					=> 'version',
@@ -396,7 +396,7 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site favicon:',
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
-	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 x 64 px.',
+	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 × 64 px.',
 	'ThemeColor'				=> 'Theme color for address bar:',
 	'ThemeColorInfo'			=> 'The browser will set the address bar color of every page according to the provided CSS color.',
 
@@ -640,7 +640,7 @@ $ap_translation = [
 	'IntercomDelay'				=> 'Anti-flood for personal communications:',
 	'IntercomDelayInfo'			=> 'The minimum delay between sending private messages (in seconds).',
 	'RegistrationDelay'			=> 'Time threshold for registering:',
-	'RegistrationDelayInfo'		=> 'The minimum time threshold between registration form submissions to discourage registration bots (in seconds).',
+	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
 	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for fine-tuning the site. Do not change them unless you are confident in their actions.',
@@ -873,7 +873,7 @@ $ap_translation = [
 	'SmtpAutoTls'				=> 'Opportunistic TLS:',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Connection mode for SMTP:',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is required. Ask your provider if you are unsure which method to use',
+	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is required. Ask your provider if you are unsure which method to use.',
 	'SmtpPassword'				=> 'SMTP password:',
 	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plaintext in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
 	'SmtpPort'					=> 'SMTP server port:',
@@ -983,7 +983,7 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Send to group:',
 	'SendToUser'				=> 'Send to user:',
-	'SendToUserInfo'			=> 'Only users who permit Administrators to email them information will receive mass emails. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Only users who permit administrators to email them information will receive mass emails. This option is available in their user settings under Notifications.',
 
 	// System message module
 	'SystemMessageInfo'			=> '',

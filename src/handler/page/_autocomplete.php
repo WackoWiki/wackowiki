@@ -215,7 +215,7 @@ ob_end_clean();
 
 if (!headers_sent())
 {
-	header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' 200 Ok');
+	header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1') . ' 200 Ok');
 	# header('Content-type: text/javascript; charset=utf-8');
 	header('Last-Modified: ' . Ut::http_date());
 }

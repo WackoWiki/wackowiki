@@ -68,7 +68,7 @@
 				=]
 				[= dropmenu _ =
 					<li>
-						<a href="#" aria-haspopup="true"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-overflow-menu"></a>
+						<a href="#" aria-haspopup="true"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-overflow-menu btn-sm"></a>
 						<ul class="dropdown" aria-label="submenu">
 							[ '' menu menuList '' ]
 						</ul>
@@ -77,14 +77,14 @@
 				[= addmark _ =
 					<li>
 						<a href="[ ' href ' ]">
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="+" title="[ ' _t: AddBookmark ' ]" class="btn-addbookmark">
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="+" title="[ ' _t: AddBookmark ' ]" class="btn-addbookmark btn-sm">
 						</a>
 					</li>
 				=]
 				[= removemark _ =
 					<li>
 						<a href="[ ' href ' ]">
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: RemoveBookmark ' ]" class="btn-removebookmark">
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: RemoveBookmark ' ]" class="btn-removebookmark btn-sm">
 						</a>
 					</li>
 				=]
@@ -123,7 +123,7 @@
 								<label for="phrase" class="visuallyhidden">[ ' _t: SearchText ' ]</label>
 								<input type="search" name="phrase" id="phrase" size="20" title="[ ' _t: SearchButton ' ]">
 								<button type="submit" title="[ ' _t: SearchButton ' ]" value="[ ' _t: SearchButton ' ]">
-									<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButton ' ]" class="btn-search">
+									<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButton ' ]" class="btn-search btn-sm">
 								</button>
 							</span>
 						</form>

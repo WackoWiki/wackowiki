@@ -1331,6 +1331,7 @@ $wacko_translation = [
 	'LogCategoryDebundled'		=> '类别 ##%1## 已解绑',
 	'LogCategoryGrouped'		=> '类别 ##%1## 与单词 ##%2## 分组',
 	'LogCategoryRemoved'		=> '类别 ##%1## 从数据库中删除',
+	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
 
 	'ErrorMinPHPVersion'		=> 'PHP版本必须大于 <strong>' . PHP_MIN_VERSION . '</strong>,' .
 									' 你的服务器似乎在运行一个 <strong>' . PHP_VERSION . '</strong>。' .

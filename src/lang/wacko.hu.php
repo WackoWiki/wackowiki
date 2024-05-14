@@ -702,7 +702,7 @@ $wacko_translation = [
 	'NoUnwatchedPages'			=> 'You watch for changes in all pages.',
 	'ViewWatchedPages'			=> 'Show watched pages',
 	'ViewUnwatchedPages'		=> 'Show unwatched page',
-	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify so your list of watches.',
+	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify your list of watches.',
 
 	// mychangeswatches action
 	'MyChangesWatches'			=> 'List of all pages you watched that were edited by others since your last editing',
@@ -722,7 +722,7 @@ $wacko_translation = [
 	// users action
 	'UsersSearch'				=> 'Felhasználók keresése',
 	'UsersOpenProfile'			=> 'Profil megtekintése',
-	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
+	'UsersNoMatching'			=> 'Matching users not found. Try a less strict search criteria.',
 	'UsersName'					=> 'Név',
 	'UsersPages'				=> 'Oldalak',
 	'UsersChanges'				=> 'Változtatások',
@@ -1005,7 +1005,7 @@ $wacko_translation = [
 	'AnonymousUsers'			=> 'Névtelen felhasználók',
 	'License'					=> 'Engedély',
 	'LicenseArray'				=> [
-		'1'		=> 'Attribution-NoDerivatives.',
+		'1'		=> 'Attribution-NoDerivatives',
 		'2'		=> 'Attribution-NonCommercial-ShareAlike',
 		'3'		=> 'Attribution-NonCommercial-NoDerivatives',
 		'4'		=> 'Attribution-ShareAlike',
@@ -1038,7 +1038,7 @@ $wacko_translation = [
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter URL. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Oldalforrás:',
 	'FeedXMLTip'				=> '',
@@ -1116,8 +1116,8 @@ $wacko_translation = [
 	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',
-	'ModeratePgMoveConfirm'		=> 'Specify the name of the cluster, in which to place the page. To move a page to the root of the site, type &quot;/&quot;',
-	'ModerateMoveExists'		=> 'Operation aborted: in this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.',
+	'ModeratePgMoveConfirm'		=> 'Specify the name of the cluster in which to place the page. To move a page to the root of the site, type &quot;/&quot;',
+	'ModerateMoveExists'		=> 'Operation aborted: In this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.',
 	'ModerateMoveNotExists'		=> 'The page / cluster does not exist. Please check the name and try again.',
 	'ModerateMergeConfirm'		=> 'Choose a topic, which should combine the remaining',
 	'ModerateMerge2Min'			=> 'To join you must select at least two topics!',
@@ -1181,8 +1181,8 @@ $wacko_translation = [
 	'PwdCplxDesc4'				=> 'should consist of ',
 	'PwdCplxDesc41'				=> 'letters and numbers',
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
-	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
-	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphanumeric characters',
+	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters except spaces.',
 
 	'PasswordTooShort'			=> 'A jelszó túl rövid.',
 	'PasswordTooCommon'			=> 'A jelszó túl gyakori.',
@@ -1266,8 +1266,8 @@ $wacko_translation = [
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
 	'LogAdminLogout'			=> 'Logout of the administrative panel',
-	'LogAdminLoginFailed'		=> '!!Failure to authorize into the administrative panel!!',
-	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
+	'LogAdminLoginFailed'		=> '!!Failure to authorize access to administrative panel!!',
+	'LogAdminLoginLocked'		=> 'Locked login to the administrative panel',
 	'LogUserCookieForged'		=> '!!**An attempt to login on a forged cookie with login ##%1##**!!',
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
@@ -1286,12 +1286,12 @@ $wacko_translation = [
 	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
 	'LogRenamedPage'			=> 'Page ##%1## renamed to [[/%2]]',
 	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
-	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
+	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
-	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recover his forgotten password',
-	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) his password',
-	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change his password: current password mismatch!!',
+	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recovered the forgotten password',
+	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) the password',
+	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change the password: current password mismatch!!',
 	'LogUserIPSwitched'			=> 'Unauthorized IP address change of the user %1 from %2 to %3',
 	'LogPageImported'			=> 'Imported page [[/%1]]',
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
@@ -1331,6 +1331,7 @@ $wacko_translation = [
 	'LogCategoryDebundled'		=> 'Category ##%1## debundled',
 	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
+	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
 
 	'ErrorMinPHPVersion'		=> 'A PHP verziónak nagyobbnak kell lennie, mint a <strong>' . PHP_MIN_VERSION . '</strong>,' .
 									' úgy tűnik, hogy a szerverén <strong>' . PHP_VERSION . '</strong>.' .

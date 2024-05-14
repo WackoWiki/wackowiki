@@ -1331,6 +1331,7 @@ $wacko_translation = [
 	'LogCategoryDebundled'		=> 'Categoría ##%1## desagrupado',
 	'LogCategoryGrouped'		=> 'Categoría ##%1## Agrupadas con la palabra ##%2##',
 	'LogCategoryRemoved'		=> 'Categoría ##%1## eliminado de la base de datos',
+	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
 
 	'ErrorMinPHPVersion'		=> 'La versión de PHP debe ser mayor a <strong>' . PHP_MIN_VERSION . '</strong>,' .
 									' el servidor utiliza aparentemente la versión <strong>' . PHP_VERSION . '</strong>.' .

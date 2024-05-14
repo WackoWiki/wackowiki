@@ -79,11 +79,13 @@ class WikiEdit extends ProtoEdit
 		this.addButton('source',		lang.CodeWrapper,	'\'%% \', \' %%\', 2');
 		//this.addButton('html',		lang.HTML,			"'<# ', ' #>', 2");
 		this.addButton('action',		lang.Action,		"'{{', '}}', 2");
-		this.addButton('hr',			lang.Line,			'\'\', \'\\n----\\n\', 2');
-		this.addButton('signature',		lang.Signature,		'\'::@::\', \' \', 1');
 		this.addButton('textred',		lang.MarkedText,	'\'!!\', \'!!\', 2');
 		this.addButton('highlight',		lang.HighlightText,	'\'??\', \'??\', 2');
 		//this.addButton('shade',		lang.Shade,			"'%%(wacko wrapper="shade")', '%%', 2");
+		this.addButton('customhtml',	separator);
+
+		this.addButton('hr',			lang.Line,			'\'\', \'\\n----\\n\', 2');
+		this.addButton('signature',		lang.Signature,		'\'::@::\', \' \', 1');
 		this.addButton('createlink',	lang.Hyperlink,		'', 'document.getElementById(\'' + this.id + '\')._owner.createLink');
 
 		if (this.autocomplete)

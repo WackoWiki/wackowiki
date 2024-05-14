@@ -1333,6 +1333,7 @@ $wacko_translation = [
 	'LogCategoryDebundled'		=> 'Категория ##%1## разгруппированa',
 	'LogCategoryGrouped'		=> 'Категория ##%1## сгруппированa со словом ##%2##',
 	'LogCategoryRemoved'		=> 'Категория ##%1## удалена из базы данных',
+	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
 
 	'ErrorMinPHPVersion'		=> 'WackoWiki требуется версия php не ниже <strong>' . PHP_MIN_VERSION . '</strong>,' .
 									' на вашем же сервере используется <strong>' . PHP_VERSION . '</strong>.' .

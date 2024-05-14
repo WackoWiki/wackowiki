@@ -8455,7 +8455,8 @@ class Wacko
 
 				// remove from DB
 				$this->db->sql_query(
-					'DELETE FROM ' . $this->prefix . 'file ' .
+					'DELETE ' .
+					'FROM ' . $this->prefix . 'file ' .
 					'WHERE page_id = ' . (int) $page['page_id']);
 			}
 
@@ -8514,7 +8515,8 @@ class Wacko
 
 			// remove from DB
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'file ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'file ' .
 				'WHERE file_id = ' . (int) $file['file_id']);
 
 			if ($message)
@@ -8959,7 +8961,7 @@ class Wacko
 				// href('', '.freecap') won't work, because mini_href() would strip the DOT
 				'<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n" .
 				'<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">' .
-				'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n" .
+				'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload btn-md"></a>' . "<br>\n" .
 				'<input type="text" id="captcha" name="captcha" maxlength="6" required>' .
 				($inline ? '' : "<br>\n");
 		}

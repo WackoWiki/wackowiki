@@ -228,7 +228,7 @@ hr {
 }
 
 .notice {
-	border: 1px solid #ddddaa;
+	border: 1px solid #dda;
 	background: #ffffef;
 }
 .notice::after {
@@ -236,8 +236,8 @@ hr {
 }
 
 .warning {
-	border: 1px solid #ffee66;
-	background: #ffffdd;
+	border: 1px solid #fe6;
+	background: #ffd;
 }
 .warning::after {
 	content: url('../../image/important.svg') " ";
@@ -317,7 +317,7 @@ ul.attention {
 
 .attention li {
 	position: relative;
-	padding: .625rem 2.5rem .625rem;
+	padding: .625rem 2.5rem;
 	overflow: auto;
 	width: 827px;
 }
