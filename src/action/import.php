@@ -15,8 +15,8 @@ $info = <<<EOD
 Description:
 	Import an XML file into a cluster.
 
-	http://example.com/SomeCluster/import --> {{import}}, to = "Test" .
-	Will be imported at: http://example.com/Test/*
+	https://example.com/SomeCluster/import --> {{import}}, to = "Test" .
+	Will be imported at: https://example.com/Test/*
 
 	i.e. no relative addressing
 

@@ -44,7 +44,7 @@ class GPG
 		// defining main object properties
 		$this->engine	= & $engine;
 		$this->secret	= hash('sha1', $this->engine->db->system_seed . 'GPG_SECRET');
-		$this->baseurl	= "http://{$_SERVER['SERVER_NAME']}/";
+		$this->baseurl	= "https://{$_SERVER['SERVER_NAME']}/";
 		$this->homedir	= rtrim($this->engine->db->gpg_home, '/');
 		$this->tempdir	= rtrim($this->engine->db->gpg_temp, '/');
 		$this->wrapper	= trim($this->engine->db->gpg_wrapper, '/');

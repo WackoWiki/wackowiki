@@ -854,7 +854,7 @@ ol#comments ul ul ul {
 	font-size: 0.6875rem;
 }
 
-/* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
+/* Outgoing hyperlinks: SYNTAX ((https://slashdot.org nerds)) */
 .outerlink {
 	color: #990000;
 }

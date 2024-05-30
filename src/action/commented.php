@@ -26,7 +26,7 @@ $load_commented = function ($tag, $limit, $deleted = false)
 	$prefix		= $this->prefix;
 
 	// going around the limitations of GROUP BY when used along with ORDER BY
-	// http://dev.mysql.com/doc/refman/5.7/en/example-maximum-column-group-row.html
+	// https://dev.mysql.com/doc/refman/8.0/en/example-maximum-column-group-row.html
 	$page_ids = $this->db->load_all(
 		'SELECT a.page_id ' .
 		'FROM ' . $prefix . 'page a ' .
