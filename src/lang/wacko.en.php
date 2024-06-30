@@ -1210,6 +1210,7 @@ $wacko_translation = [
 		'pl' => 'Polish',
 		'pt' => 'Portuguese',
 		'ru' => 'Russian',
+		'ta' => 'Tamil',
 		'zh' => 'Chinese',
 		'zh-tw' => 'Chinese',
 	],
