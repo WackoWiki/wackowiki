@@ -12,7 +12,7 @@ $ap_translation = [
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
 		'users'			=> 'பயனர்கள்',
-		'maintenance'	=> 'Maintenance',
+		'maintenance'	=> 'பராமரிப்பு',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
 		'database'		=> 'Database',
@@ -34,7 +34,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Quit system administration and log out of site',
 
 	'TimeLeft'					=> 'Time left:  %1 minute(s)',
-	'ApVersion'					=> 'version',
+	'ApVersion'					=> 'பதிப்பு',
 
 	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
@@ -46,12 +46,12 @@ $ap_translation = [
 	'System'					=> 'System',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
-	'Add'						=> 'Add',
+	'Cancel'					=> 'வேண்டாம்',
+	'Add'						=> 'சேர்',
 	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
+	'Remove'					=> 'நீக்கு',
 	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
+	'Disabled'					=> 'முடக்கப்பட்டது',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 	'Min'						=> 'Min',
@@ -75,12 +75,12 @@ $ap_translation = [
 	// Config Basic module
 	'config_basic'		=> [
 		'name'		=> 'Basic',
-		'title'		=> 'Basic settings',
+		'title'		=> 'அடிப்படை அமைப்புகள்',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Appearance',
+		'name'		=> 'தோற்றம்',
 		'title'		=> 'Appearance settings',
 	],
 
@@ -110,19 +110,19 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
-		'title'		=> 'Notifications settings',
+		'name'		=> 'அறிவிப்புகள்',
+		'title'		=> 'அறிவிப்பு அமைப்புகள்',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> 'பக்கங்கள்',
 		'title'		=> 'Pages and site parameters',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'அனுமதிகள்',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -140,7 +140,7 @@ $ap_translation = [
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
+		'name'		=> 'பதிவேற்றம்',
 		'title'		=> 'Attachment settings',
 	],
 
@@ -158,7 +158,7 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
+		'name'		=> 'காப்புப் பிரதி',
 		'title'		=> 'Backing up data',
 	],
 
@@ -267,15 +267,15 @@ $ap_translation = [
 	'AdminName'					=> 'Admin of site:',
 	'AdminNameInfo'				=> 'User name of individual who is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable that it conforms to the name of the chief administrator of the site.',
 
-	'LanguageSection'			=> 'Language',
-	'DefaultLanguage'			=> 'Default language:',
+	'LanguageSection'			=> 'மொழி',
+	'DefaultLanguage'			=> 'இயல்புநிலை மொழி:',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support:',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages:',
 	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, otherwise all languages are selected.',
 
-	'CommentSection'			=> 'Comments',
+	'CommentSection'			=> 'கருத்துகள்',
 	'AllowComments'				=> 'Allow comments:',
 	'AllowCommentsInfo'			=> 'Enable comments for guests or registered users only, or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments:',
@@ -369,7 +369,7 @@ $ap_translation = [
 	'XmlSitemapTime'			=> 'XML sitemap generation time:',
 	'XmlSitemapTimeInfo'		=> 'Generates the sitemap only once in the given number of days. Set to zero to generate on every page change.',
 
-	'SearchSection'				=> 'Search',
+	'SearchSection'				=> 'தேடு',
 	'OpenSearch'				=> 'OpenSearch:',
 	'OpenSearchInfo'			=> 'Creates the OpenSearch description file in the XML folder and enables Autodiscovery of search plugin in the HTML header.',
 	'SearchEngineVisibility'	=> 'Block search engines (search engine visibility):',
@@ -466,7 +466,7 @@ $ap_translation = [
 	'LogPurgeTime'				=> 'Storage time of Log:',
 	'LogPurgeTimeInfo'			=> 'Remove event log after the specified number of days.',
 
-	'PrivacySection'			=> 'Privacy',
+	'PrivacySection'			=> 'தனியுரிமை',
 	'AnonymizeIp'				=> 'Anonymize users\' IP addresses:',
 	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable (i.e., page, revision or referrers).',
 
@@ -567,9 +567,9 @@ $ap_translation = [
 	'CaptchaCommentInfo'		=> 'As protection against spam, unregistered users must complete captcha before comment will be posted.',
 	'CaptchaPage'				=> 'New page:',
 	'CaptchaPageInfo'			=> 'As protection against spam, unregistered users must complete captcha before creating a new page.',
-	'CaptchaEdit'				=> 'Edit page:',
+	'CaptchaEdit'				=> 'பக்கத்தைத் திருத்து:',
 	'CaptchaEditInfo'			=> 'As protection against spam, unregistered users must complete captcha before editing pages.',
-	'CaptchaRegistration'		=> 'Registration:',
+	'CaptchaRegistration'		=> 'பதிவு:',
 	'CaptchaRegistrationInfo'	=> 'As protection against spam, unregistered users must complete captcha before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
@@ -584,7 +584,7 @@ $ap_translation = [
 	'Csp'						=> 'Content security policy (CSP):',
 	'CspInfo'					=> 'Configuring CSP involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
-		'0'		=> 'disabled',
+		'0'		=> 'முடக்கப்பட்டது',
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
@@ -716,7 +716,7 @@ $ap_translation = [
 	'NewsStructure'				=> 'News cluster structure:',
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
-	'LicenseSection'			=> 'License',
+	'LicenseSection'			=> 'உரிமம்',
 	'DefaultLicense'			=> 'Default license:',
 	'DefaultLicenseInfo'		=> 'Under which license your content can be released.',
 	'EnableLicense'				=> 'Enable license:',
@@ -728,13 +728,13 @@ $ap_translation = [
 	'RootPage'					=> 'இல்லப்பக்கம்:',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Privacy policy:',
+	'PrivacyPage'				=> 'தனியுரிமைக் கொள்கை:',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
 	'TermsPage'					=> 'Policies and regulations:',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
-	'SearchPage'				=> 'Search:',
+	'SearchPage'				=> 'தேடு:',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
 	'RegistrationPage'			=> 'பதிவு:',
 	'RegistrationPageInfo'		=> 'Page for new user registration (action %1).',
@@ -746,7 +746,7 @@ $ap_translation = [
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list:',
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
-	'CategoryPage'				=> 'Category:',
+	'CategoryPage'				=> 'வகை:',
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
 	'GroupsPage'				=> 'குழுக்கள்:',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
@@ -799,7 +799,7 @@ $ap_translation = [
 	'AllowMassemailDefaultInfo'	=> 'Only send messages to those users who have permitted administrators to email them information.',
 
 	// Resync settings
-	'Synchronize'				=> 'Synchronize',
+	'Synchronize'				=> 'ஒத்திசைவாக்குங்கள்',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
@@ -952,7 +952,7 @@ $ap_translation = [
 	'LogNoMatch'				=> 'No events that meet the criteria',
 	'LogDate'					=> 'Date',
 	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Username',
+	'LogUsername'				=> 'பயனர் பெயர்',
 	'LogLevels'	=> [
 		'1'		=> 'critical',
 		'2'		=> 'highest',
@@ -1030,7 +1030,7 @@ $ap_translation = [
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
     	'The Backup package files were stored in the sub-directory %1.<br>. To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
-	'Backup'					=> 'Backup',
+	'Backup'					=> 'காப்புப் பிரதி',
 	'CantReadFile'				=> 'Can\'t read file %1.',
 
 	// DB Restore module
@@ -1093,8 +1093,8 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
-	'BackupRemove'				=> 'Remove',
+	'BackupRestore'				=> 'மீட்டெடு',
+	'BackupRemove'				=> 'நீக்கு',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1137,8 +1137,8 @@ $ap_translation = [
 	'LogGroupRemoved'			=> 'Removed group ##%1##',
 
 	'GroupsMembersFor'			=> 'Members for Group',
-	'GroupsDescription'			=> 'Description',
-	'GroupsModerator'			=> 'Moderator',
+	'GroupsDescription'			=> 'விளக்கம்',
+	'GroupsModerator'			=> 'மட்டுறுத்துனர்',
 	'GroupsOpen'				=> 'Open',
 	'GroupsActive'				=> 'Active',
 	'GroupsTip'					=> 'Click to edit Group',
@@ -1147,7 +1147,7 @@ $ap_translation = [
 	'GroupsAdded'				=> 'Group added successfully.',
 	'GroupsRenamed'				=> 'Group successfully renamed.',
 	'GroupsDeleted'				=> 'The group %1 and all associated pages were deleted from the database.',
-	'GroupsAdd'					=> 'Add a new group',
+	'GroupsAdd'					=> 'ஒரு புதிய குழுவை சேர்',
 	'GroupsRename'				=> 'Rename the group %1 to',
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
 	'GroupsDelete'				=> 'Are you sure you want to remove group %1?',
@@ -1158,7 +1158,7 @@ $ap_translation = [
 
 	'GroupAddMember'			=> 'Add member',
 	'GroupRemoveMember'			=> 'Remove Member',
-	'GroupAddNew'				=> 'Add group',
+	'GroupAddNew'				=> 'குழுவைச் சேர்',
 	'GroupEdit'					=> 'Edit Group',
 	'GroupDelete'				=> 'Remove Group',
 
@@ -1232,7 +1232,7 @@ $ap_translation = [
 	'Inconsistencies'			=> 'Inconsistencies',
 	'CheckDatabase'				=> 'Database',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
-	'CheckFiles'				=> 'Files',
+	'CheckFiles'				=> 'கோப்புகள்',
 	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
 	'Records'					=> 'Records',
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',

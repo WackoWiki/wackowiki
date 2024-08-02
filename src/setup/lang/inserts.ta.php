@@ -30,7 +30,7 @@ $insert = [
 	'random_page'		=> 'ஏதாவது ஒரு கட்டுரை',
 
 	'changes_page_bm'	=> 'Changes',
-	'comments_page_bm'	=> 'Comments',
+	'comments_page_bm'	=> 'கருத்துகள்',
 	'index_page_bm'		=> 'Index',
 	'random_page_bm'	=> 'Random',
 ];
