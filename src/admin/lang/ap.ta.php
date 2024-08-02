@@ -11,7 +11,7 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
+		'users'			=> 'பயனர்கள்',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
@@ -28,7 +28,7 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exist.',
 
-	'ApHomePage'				=> 'Home Page',
+	'ApHomePage'				=> 'இல்லப்பக்கம்',
 	'ApHomePageTip'				=> 'Quit system administration and open the home page',
 	'ApLogOut'					=> 'Log out',
 	'ApLogOutTip'				=> 'Quit system administration and log out of site',
@@ -218,7 +218,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'புள்ளிவிவரங்கள்',
 		'title'		=> 'Show statistics',
 	],
 
@@ -236,13 +236,13 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'குழுக்கள்',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> 'பயனர்கள்',
 		'title'		=> 'User management',
 	],
 
@@ -560,7 +560,7 @@ $ap_translation = [
 	'ForbiddenEmailDomains'		=> 'Forbidden email domains:',
 	'ForbiddenEmailDomainsInfo'	=> 'Comma-separated forbidden email domains, e.g. <code>example.com, local.lan</code> etc. Only effective if allowed email domains list is empty.',
 
-	'CaptchaSection'			=> 'CAPTCHA',
+	'CaptchaSection'			=> 'காப்ச்சா',
 	'EnableCaptcha'				=> 'Enable captcha:',
 	'EnableCaptchaInfo'			=> 'If enabled, captcha will be shown in the following cases, or if a security threshold is reached.',
 	'CaptchaComment'			=> 'New comment:',
@@ -623,7 +623,7 @@ $ap_translation = [
 		'2'		=> 'password does not contain username',
 	],
 
-	'LoginSection'				=> 'Login',
+	'LoginSection'				=> 'புகுபதிகை',
 	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username:',
 	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
 	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address:',
@@ -725,7 +725,7 @@ $ap_translation = [
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
 	'ServicePagesSection'		=> 'Service Pages',
-	'RootPage'					=> 'Home page:',
+	'RootPage'					=> 'இல்லப்பக்கம்:',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
 	'PrivacyPage'				=> 'Privacy policy:',
@@ -736,11 +736,11 @@ $ap_translation = [
 
 	'SearchPage'				=> 'Search:',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
-	'RegistrationPage'			=> 'Registration:',
+	'RegistrationPage'			=> 'பதிவு:',
 	'RegistrationPageInfo'		=> 'Page for new user registration (action %1).',
 	'LoginPage'					=> 'User login:',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
-	'SettingsPage'				=> 'User Settings:',
+	'SettingsPage'				=> 'பயனர் அமைப்புகள்:',
 	'SettingsPageInfo'			=> 'Page to customize the user profile (action %1).',
 	'PasswordPage'				=> 'Change Password:',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
@@ -748,9 +748,9 @@ $ap_translation = [
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
 	'CategoryPage'				=> 'Category:',
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
-	'GroupsPage'				=> 'Groups:',
+	'GroupsPage'				=> 'குழுக்கள்:',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
-	'ChangesPage'				=> 'Recent changes:',
+	'ChangesPage'				=> 'அண்மைய மாற்றங்கள்:',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
 	'CommentsPage'				=> 'Recent comments:',
 	'CommentsPageInfo'			=> 'Page with a list of recent comments on the page (action %1).',
@@ -762,7 +762,7 @@ $ap_translation = [
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related via links to any other page (action %1).',
 	'SandboxPage'				=> 'Sandbox:',
 	'SandboxPageInfo'			=> 'Page where users can practice their wiki markup skills.',
-	'HelpPage'					=> 'Help:',
+	'HelpPage'					=> 'உதவி:',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index:',
 	'IndexPageInfo'				=> 'Page with a list of all pages (action %1).',
@@ -1249,7 +1249,7 @@ $ap_translation = [
 
 	'BbSummary'					=> 'Summary',
 	'BbLog'						=> 'Log',
-	'BbSettings'				=> 'Settings',
+	'BbSettings'				=> 'அமைப்புகள்',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log

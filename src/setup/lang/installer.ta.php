@@ -4,9 +4,9 @@ $lang = [
 /*
    Language Settings
 */
-'LangISO'		=> 'en',
-'LangLocale'	=> 'en_US',
-'LangName'		=> 'English',
+'LangISO'		=> 'ta',
+'LangLocale'	=> 'ta_IN',
+'LangName'		=> 'தமிழ்',
 'LangDir'		=> 'ltr',
 
 /*
@@ -14,15 +14,15 @@ $lang = [
 */
 'ConfigDefaults'	=> [
 	// pages (tag)
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
-	'users_page'		=> 'Users',
+	'category_page'		=> 'வகை',
+	'groups_page'		=> 'குழுக்கள்',
+	'users_page'		=> 'பயனர்கள்',
 
-	'search_page'		=> 'Search',
-	'login_page'		=> 'Login',
-	'account_page'		=> 'Settings',
-	'registration_page'	=> 'Registration',
-	'password_page'		=> 'Password',
+	'search_page'		=> 'தேடு',
+	'login_page'		=> 'புகுபதிகை',
+	'account_page'		=> 'அமைப்புகள்',
+	'registration_page'	=> 'பதிவு',
+	'password_page'		=> 'கடவுச்சொல்',
 
 	'changes_page'		=> 'RecentChanges',
 	'comments_page'		=> 'RecentlyCommented',
@@ -44,7 +44,7 @@ $lang = [
 */
 'TitleInstallation'				=> 'WackoWiki Installation',
 'TitleUpdate'					=> 'WackoWiki Update',
-'Continue'						=> 'Continue',
+'Continue'						=> 'தொடர்',
 'Back'							=> 'Back',
 'Recommended'					=> 'recommended',
 'InvalidAction'					=> 'Invalid action',
@@ -62,17 +62,17 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check'					=> 'System Requirements',
-'PhpVersion'					=> 'PHP Version',
+'version-check'					=> 'முறைமை தேவைகள்',
+'PhpVersion'					=> 'PHP பதிப்பு',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
 'Database'						=> 'Database',
 'PhpExtensions'					=> 'PHP Extensions',
-'Permissions'					=> 'Permissions',
+'Permissions'					=> 'அனுமதிகள்',
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
-'OK'							=> 'OK',
+'OK'							=> 'சரி',
 'Problem'						=> 'Problem',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Your PHP installation appears to be missing the indicated PHP extensions, which are required by WackoWiki.',
@@ -89,9 +89,9 @@ $lang = [
 'SiteName'						=> 'Wiki Name',
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
 'SiteNameDefault'				=> 'MyWikiSite',
-'HomePage'						=> 'Home Page',
+'HomePage'						=> 'இல்லப்பக்கம்',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have. This will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
-'HomePageDefault'				=> 'HomePage',
+'HomePageDefault'				=> 'இல்லப்பக்கம்',
 'MultiLang'						=> 'Multi Language Mode',
 'MultiLangDesc'					=> 'Multilingual mode allows you to have pages with different language settings within a single installation. When this mode is enabled, the installer creates initial menu items for all languages available in the distribution.',
 'AllowedLang'					=> 'Allowed Languages',
@@ -133,7 +133,7 @@ $lang = [
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbUser'						=> 'User Name',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
-'DbPassword'					=> 'Password',
+'DbPassword'					=> 'கடவுச்சொல்',
 'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
 'Prefix'						=> 'Table Prefix',
 'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',

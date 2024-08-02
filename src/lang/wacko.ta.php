@@ -63,7 +63,7 @@ $wacko_translation = [
 
 	'NewAccountSubject'			=> 'Account registration',
 	'NewAccountAdminCreated'	=> 'The user %1 has created an account for you with username "%2". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:',
-	'NewAccountUsername'		=> 'Username:',
+	'NewAccountUsername'		=> 'பயனர் பெயர்:',
 	'AccountLanguage'			=> 'மொழி:',
 	'NewAccountEmail'			=> 'Email:',
 	'NewAccountIP'				=> 'Remote IP address:',
@@ -88,13 +88,13 @@ $wacko_translation = [
 	'Language'					=> 'மொழி',
 
 	// login panel
-	'LoginWelcome'				=> 'Login',
-	'CreateAccount'				=> 'Create new account',
-	'RegistrationLink'			=> 'Registration',
-	'LoginName'					=> 'Username',
-	'Password'					=> 'Password',
-	'LoginButton'				=> 'Login',
-	'LoginLink'					=> 'Login',
+	'LoginWelcome'				=> 'புகுபதிகை',
+	'CreateAccount'				=> 'கணக்கை ஆக்கு',
+	'RegistrationLink'			=> 'பதிவு',
+	'LoginName'					=> 'பயனர் பெயர்',
+	'Password'					=> 'கடவுச்சொல்',
+	'LoginButton'				=> 'புகுபதிகை',
+	'LoginLink'					=> 'புகுபதிகை',
 	'PersistentCookie'			=> 'Stay signed in',
 	'Session'					=> 'Session',
 	'SessionTip'				=> 'parameters of current session',
@@ -500,7 +500,7 @@ $wacko_translation = [
 	'EmailConfirmResent'		=> 'Email confirmation code resent to your address.',
 	'EmailConfirmNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
 	'Hello'						=> 'Hello',
-	'UserName'					=> 'User name',
+	'UserName'					=> 'பயனர் பெயர்',
 	'EmailAddress'				=> 'Email address',
 	'RealName'					=> 'Real name',
 	'MenuItemsShown'			=> 'Menu items shown',
@@ -511,7 +511,7 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
 	'WrongPassword'				=> 'Wrong password!',
-	'ConfirmPassword'			=> 'Confirm password',
+	'ConfirmPassword'			=> 'கடவுச்சொல்லை உறுதி செய்க',
 	'Email'						=> 'Email address',
 	'MustBeWikiName'			=> 'User name must be <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> formatted!',
 	'SpecifyEmail'				=> 'You must specify an email address.',
@@ -587,7 +587,7 @@ $wacko_translation = [
 	'RedirectCreated'			=> 'In the page %1 created redirect to the new one',
 
 	'UserSettings'				=> 'பயனர் அமைப்புகள்',
-	'UserSettingsGeneral'		=> 'General',
+	'UserSettingsGeneral'		=> 'பொது',
 	'UserSettingsNotifications'	=> 'Notifications',
 
 	'NotifyMinorEdit'			=> 'Notify also minor edit',
@@ -663,7 +663,7 @@ $wacko_translation = [
 									'If, within days after registration you do not receive an email, ask for it again by clicking ',
 
 	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then an email with instructions will be send to you.',
-	'ForgotPassword'			=> 'Forgot password?',
+	'ForgotPassword'			=> 'உமது கடவுச்சொல் மறந்ததா?',
 	'UserNotFound'				=> 'User with this name or email address was not found.',
 	'NotConfirmedEmail'			=> 'Your email address is not confirmed.<br>Mail can\'t be send to a non-confirmed address.',
 	'EmailForgotSubject'		=> 'Password renewal for ',
@@ -997,7 +997,7 @@ $wacko_translation = [
 	'UserGroups'				=> 'Groups of users',
 	'MyGroups'					=> 'Group Associations',
 	'Group'						=> 'group',
-	'Groups'					=> 'groups',
+	'Groups'					=> 'குழுக்கள்',
 
 	// license action
 	'DistributedUnder'			=> 'Material is distributed under',
@@ -1044,7 +1044,7 @@ $wacko_translation = [
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
-	'ChangesXMLTitle'			=> ' - Recent changes',
+	'ChangesXMLTitle'			=> ' - அண்மைய மாற்றங்கள்',
 	'ChangesXML'				=> 'Recent changes to the ',
 	'CommentsXMLTitle'			=> ' - Recent comments',
 	'CommentsXML'				=> 'Recent comments to the ',
