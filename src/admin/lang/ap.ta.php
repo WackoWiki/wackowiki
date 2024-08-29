@@ -15,7 +15,7 @@ $ap_translation = [
 		'maintenance'	=> 'பராமரிப்பு',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'database'		=> 'தரவுத்தள',
 	],
 
 	// Admin panel
@@ -491,7 +491,7 @@ $ap_translation = [
 	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default, either file or database session storage is selected.',
 	'SessionModes'	=> [
 		'1'		=> 'File',
-		'2'		=> 'Database',
+		'2'		=> 'தரவுத்தள',
 	],
 	'SessionNotice'					=> 'Session termination notice:',
 	'SessionNoticeInfo'				=> 'Indicates the cause of the session termination.',
@@ -1108,7 +1108,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> 'Delete user:',
-	'EditButton'				=> 'Edit',
+	'EditButton'				=> 'தொகு',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
@@ -1230,7 +1230,7 @@ $ap_translation = [
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
 	'Inconsistencies'			=> 'Inconsistencies',
-	'CheckDatabase'				=> 'Database',
+	'CheckDatabase'				=> 'தரவுத்தள',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
 	'CheckFiles'				=> 'கோப்புகள்',
 	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
@@ -1262,7 +1262,7 @@ $ap_translation = [
 	'BbGetPost'					=> 'GET/POST',
 	'BbUri'						=> 'URI',
 	'BbRecordsAll'				=> 'Displaying all %1 records',
-	'BbShow'					=> 'Show',
+	'BbShow'					=> 'காட்டு',
 	'BbIpDateStatus'			=> 'IP/Date/Status',
 	'BbHeaders'					=> 'Headers',
 	'BbEntity'					=> 'Entity',
