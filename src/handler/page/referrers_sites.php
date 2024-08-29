@@ -86,7 +86,7 @@ if ($referrers)
 	{
 		$tpl->l_count	= $site_count;
 		$tpl->l_site	= (($site !== $unknown)
-				? '<a href="http://' . Ut::html($site) . '" rel="nofollow noreferrer">' .
+				? '<a href="https://' . Ut::html($site) . '" rel="nofollow noreferrer">' .
 					Ut::html($site) . '</a>'
 				: $site
 			);
