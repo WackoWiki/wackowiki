@@ -1203,7 +1203,7 @@ $wacko_translation = [
 		'et' => 'эстонский',
 		'fa' => 'персидский',
 		'fr' => 'французский',
-		'hi' => 'Хинди',
+		'hi' => 'хинди',
 		'hu' => 'венгерский',
 		'it' => 'итальянский',
 		'ja' => 'японский',
@@ -1211,8 +1211,8 @@ $wacko_translation = [
 		'nl' => 'нидерландский',
 		'pl' => 'польский',
 		'pt' => 'португальский',
-	    'ru' => 'русский',
-	    'ta' => 'тамильский',
+		'ru' => 'русский',
+		'ta' => 'тамильский',
 		'zh' => 'китайский',
 		'zh-tw' => 'китайский',
 	],
@@ -1334,7 +1334,7 @@ $wacko_translation = [
 	'LogCategoryDebundled'		=> 'Категория ##%1## разгруппированa',
 	'LogCategoryGrouped'		=> 'Категория ##%1## сгруппированa со словом ##%2##',
 	'LogCategoryRemoved'		=> 'Категория ##%1## удалена из базы данных',
-	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
+	'LogThumbnailGeneration'	=> 'Генерация эскиза %1 сек.',
 
 	'ErrorMinPHPVersion'		=> 'WackoWiki требуется версия php не ниже <strong>' . PHP_MIN_VERSION . '</strong>,' .
 									' на вашем же сервере используется <strong>' . PHP_VERSION . '</strong>.' .
