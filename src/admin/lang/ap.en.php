@@ -514,7 +514,7 @@ $ap_translation = [
 	'CommentRights'				=> 'Comment rights by default:',
 	'CommentRightsInfo'			=> 'Default assigned to the created root pages, as well as pages for which parent ACLs cannot be defined.',
 	'CreateRights'				=> 'Create rights of a sub page by default:',
-	'CreateRightsInfo'			=> 'Default assigned to the created sub pages.',
+	'CreateRightsInfo'			=> 'Default rights assigned to (1) parentless sub pages and (2) root pages.',
 	'UploadRights'				=> 'Upload rights by default:',
 	'UploadRightsInfo'			=> 'Default upload rights.',
 	'RenameRights'				=> 'Global rename right:',
@@ -640,7 +640,7 @@ $ap_translation = [
 	'IntercomDelay'				=> 'Anti-flood for personal communications:',
 	'IntercomDelayInfo'			=> 'The minimum delay between sending private messages (in seconds).',
 	'RegistrationDelay'			=> 'Time threshold for registering:',
-	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
+	'RegistrationDelayInfo'		=> 'The minimum time threshold between registration form submissions to discourage registration bots (in seconds).',
 
 	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for fine-tuning the site. Do not change them unless you are confident in their actions.',
