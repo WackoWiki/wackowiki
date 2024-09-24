@@ -35,7 +35,7 @@ $wacko_translation = [
 	'UpdateButton'				=> '更新',
 
 	'FormInvalid'				=> '提交的表格无效。尝试再次提交。',
-	'UnitPixel'					=> 'px',
+	'UnitPixel'					=> '像素（px）',
 	'Number'					=> 'Number',
 
 	// logged in panel
@@ -130,7 +130,7 @@ $wacko_translation = [
 
 	// other
 	'Guest'						=> '游客',
-	'Everybody'					=> 'Everybody',
+	'Everybody'					=> '任何人',
 	'Help'						=> '帮助',
 	'TopicSearchText'			=> '只搜索标题',
 	'WordprocessorVersion'		=> '文字处理器版本',
@@ -1209,8 +1209,8 @@ $wacko_translation = [
 		'nl' => '荷兰语',
 		'pl' => '波兰语',
 		'pt' => '葡萄牙语',
-	    'ru' => '俄语',
-	    'ta' => '泰米尔语',
+		'ru' => '俄语',
+		'ta' => '泰米尔语',
 		'zh' => '简体中文',
 		'zh-tw' => '繁体中文',
 	],
@@ -1256,8 +1256,8 @@ $wacko_translation = [
 	'ByteDecimalLong'			=> ['字节', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
 	'ByteBinaryShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
 	'ByteBinaryLong'			=> ['字节', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
-	'PixelDecimalShort'			=> ['px', 'KP', 'MP', 'GP', 'TP', 'PP', 'EP', 'ZP', 'YP'],
-	'PixelDecimalLong'			=> ['pixel', 'Kpx', 'Mpx', 'Gpx', 'Tpx', 'Ppx', 'Epx', 'Zpx', 'Ypx'],
+	'PixelDecimalShort'			=> ['像素（px）', 'KP', 'MP', 'GP', 'TP', 'PP', 'EP', 'ZP', 'YP'],
+	'PixelDecimalLong'			=> ['像素', 'Kpx', 'Mpx', 'Gpx', 'Tpx', 'Ppx', 'Epx', 'Zpx', 'Ypx'],
 
 	// loading error
 	'UnknownAction'				=> '未知动作',

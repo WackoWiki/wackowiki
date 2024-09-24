@@ -353,8 +353,8 @@ $ap_translation = [
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> '打开feeds：',
 	'EnableFeedsInfo'			=> '打开或关闭整个 wiki 的 RSS 源。',
-	'XmlChangeLink'				=> 'Changes feed link mode:',
-	'XmlChangeLinkInfo'			=> 'Defines where the XML Changes feed items links to.',
+	'XmlChangeLink'				=> '更改源链接模式：',
+	'XmlChangeLinkInfo'			=> '定义XML 更改种子项目链接到的位置。',
 	'XmlChangeLinkMode'			=> [
 		'1'		=> '差别查看',
 		'2'		=> '当前页面',
@@ -1021,11 +1021,11 @@ $ap_translation = [
 									'要将表完全转换为备份格式，您必须在不指定集群的情况下进行<em>完整的数据库备份（结构和数据）</em>。',
 	'BackupCompleted'			=> '备份和存档已完成。<br>' .
 									'备份包文件存储在子目录 %1 中。<br>' .
-									'要使用 FTP 下载它（复制时保持目录结构和文件名）。<br>' .
-									'要恢复备份副本或删除包，请转到<a href="%2">恢复数据库</a>。',
+									'要下载它，请使用 FTP (在复制时保持目录结构和文件名称)。<br>' .
+									'若要恢复备份副本或删除包，请前往 <a href="%2">还原数据库</a>。',
 	'LogSavedBackup'			=> '保存的备份数据库##%1##',
 	'Backup'					=> '备份',
-	'CantReadFile'				=> 'Can\'t read file %1.',
+	'CantReadFile'				=> '无法读取文件 %1。',
 
 	// DB Restore module
 	'RestoreInfo'				=> '您可以恢复找到的任何备份包或将其从服务器中删除。',
