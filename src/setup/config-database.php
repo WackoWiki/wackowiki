@@ -94,6 +94,33 @@ else
 ?>
 	</ul>
 	<br>
+	<?php echo $separator; ?>
+	<label class="label_top" for="db_vendor"><?php echo $lang['DbVendor'];?></label>
+	<p class="notop"><?php echo $lang['DbVendorDesc']; ?></p>
+
+<?php
+	/*
+	 Each time a new database vendor is supported it needs to be added to this list
+
+	 [0]   :  database vendor name
+	 [1]   :  database vendor name to be stored in the config file
+	 [2]   :  the name to display in the list here
+	 */
+
+	$vendors	= [];
+	$vendors[]	= ['mariadb',	'mariadb',	'MariaDB'];	// default
+	$vendors[]	= ['mysql',		'mysql',	'MySQL'];
+
+	echo '	<select id="db_vendor" name="config[db_vendor]" required>';
+
+	foreach ($vendors as $vendor)
+	{
+	    echo '<option value="' . $vendor[1] . '" ' . ($config['db_vendor'] == $vendor[1] ? 'selected' : '') . '>' . $vendor[2] . "</option>\n";
+	}
+
+	echo "</select>\n";
+?>
+	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="db_charset"><?php echo $lang['DbCharset'];?></label>
 	<p class="notop"><?php echo $lang['DbCharsetDesc']; ?></p>
@@ -101,7 +128,7 @@ else
 <?php
 	/*
 	 Each time a new database charset is supported it needs to be added to this list
-	 https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html
+	 https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html
 
 	 [0]   :  database charset name
 	 [1]   :  database charset name to be stored in the config file

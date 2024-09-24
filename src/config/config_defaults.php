@@ -20,6 +20,7 @@ $wacko_config_defaults = [
 	'db_collation'					=> 'utf8mb4_unicode_520_ci',
 	'db_charset'					=> 'utf8mb4',
 	'db_engine'						=> 'InnoDB',
+	'db_vendor'						=> 'mysql',
 
 	'session_store'					=> 1,
 	'sql_mode_strict'				=> 0,

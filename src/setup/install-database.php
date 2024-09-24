@@ -128,11 +128,11 @@ if (isset($config['wacko_version']))
 
 if (!empty($config['sql_mode_strict']))
 {
-	$sql_modes = SQL_MODE_STRICT;
+	$sql_modes = SQL_MODE_STRICT[$config['db_vendor']];
 }
 else
 {
-	$sql_modes = SQL_MODE_PERMISSIVE;
+	$sql_modes = SQL_MODE_PERMISSIVE[$config['db_vendor']];
 }
 
 switch ($config['db_driver'])
@@ -183,6 +183,10 @@ switch ($config['db_driver'])
 			$_db_version	= mysqli_query($dblink, "SELECT version()");
 			$_db_version	= mysqli_fetch_assoc($_db_version);
 			$db_version		= $_db_version['version()'];
+
+			/* $config['db_vendor'] = preg_match('/MariaDB/', $db_version, $matches)
+				? 'mariadb'
+				: 'mysql'; */
 
 			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 				? DB_MIN_VERSION['mariadb']
@@ -360,6 +364,10 @@ switch ($config['db_driver'])
 		$_db_version	= $dblink->query("SELECT version()");
 		$_db_version	= $_db_version->fetch(PDO::FETCH_ASSOC);
 		$db_version		= $_db_version['version()'];
+
+/* 		$config['db_vendor'] = preg_match('/MariaDB/', $db_version, $matches)
+			? 'mariadb'
+			: 'mysql'; */
 
 		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 			? DB_MIN_VERSION['mariadb']

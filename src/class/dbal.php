@@ -29,7 +29,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 			};
 
 			// Change the current SQL mode at runtime
-			$sql_modes = $this->sql_mode_strict ? SQL_MODE_STRICT : SQL_MODE_PERMISSIVE;
+			$sql_modes = $this->sql_mode_strict ? SQL_MODE_STRICT[$this->db_vendor] : SQL_MODE_PERMISSIVE[$this->db_vendor];
 			$this->db->query("SET SESSION sql_mode = '$sql_modes'");
 
 			// Set database collation

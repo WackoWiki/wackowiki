@@ -87,8 +87,14 @@ const AUTO_REWRITE					= 1;					// 0 - off, turns off auto rewrite for debugging
 															//		with mode_rewrite still active on your webserver,
 															//		you're also required to deactivate the rules in the .htaccess file
 
-const SQL_MODE_STRICT				= 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY';
-const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
+const SQL_MODE_STRICT				= [
+						'mariadb'	=> 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY',
+						'mysql'		=> 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY'
+];
+const SQL_MODE_PERMISSIVE			= [
+						'mariadb'	=> 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER',
+						'mysql'		=> 'NO_ENGINE_SUBSTITUTION'
+];
 
 // Do not change these two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 const WACKO_VERSION					= '6.1.25';
@@ -98,7 +104,7 @@ const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - sta
 
 const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
-const DB_MIN_VERSION				= ['mariadb' => '10.2.2', 'mysql' => '5.7.7'];
+const DB_MIN_VERSION				= ['mariadb' => '10.4', 'mysql' => '8.0'];
 const DB_ERROR_MODE					= 0;					// DB error mode: 0 - silent, 1 - warning, 2 - exception
 
 const PHP_MIN_VERSION				= '8.0';				// minimum required PHP version

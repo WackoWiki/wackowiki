@@ -32,6 +32,7 @@ $config_file['db_charset']			= $config['db_charset'];
 $config_file['db_collation']		= $config['db_collation'];
 $config_file['db_driver']			= $config['db_driver'];
 $config_file['db_engine']			= $config['db_engine'];
+$config_file['db_vendor']			= $config['db_vendor'];
 $config_file['db_host']				= $config['db_host'];
 $config_file['db_port']				= $config['db_port'];
 $config_file['db_name']				= $config['db_name'];
