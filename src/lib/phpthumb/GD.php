@@ -713,7 +713,7 @@ class GD extends PHPThumb
 				{
 					header('Content-type: image/avif');
 				}
-				imageavif($this->old_image);
+				imageavif($this->old_image, null, $this->options['avifQuality']);
 				break;
 			case 'GIF':
 				if ($raw_data === false)
@@ -742,7 +742,7 @@ class GD extends PHPThumb
 				{
 					header('Content-type: image/webp');
 				}
-				imagewebp($this->old_image);
+				imagewebp($this->old_image, null, $this->options['webpQuality']);
 				break;
 		}
 
@@ -818,11 +818,11 @@ class GD extends PHPThumb
 		}
 
 		$save = match ($format) {
-			'AVIF'			=> imageavif	($this->old_image, $file_name),
+			'AVIF'			=> imageavif	($this->old_image, $file_name, $this->options['avifQuality']),
 			'GIF'			=> imagegif		($this->old_image, $file_name),
 			'JPEG', 'JPG'	=> imagejpeg	($this->old_image, $file_name, $this->options['jpegQuality']),
 			'PNG'			=> imagepng		($this->old_image, $file_name),
-			'WEBP'			=> imagewebp	($this->old_image, $file_name),
+			'WEBP'			=> imagewebp	($this->old_image, $file_name, $this->options['webpQuality']),
 		};
 
 		return $this;
@@ -842,7 +842,9 @@ class GD extends PHPThumb
 		{
 			$default_options = [
 				'resizeUp'				=> false,
+				'avifQuality'			=> 100,
 				'jpegQuality'			=> 100,
+				'webpQuality'			=> 100,
 				'correctPermissions'	=> false,
 				'preserveAlpha'			=> true,
 				'alphaMaskColor'		=> [255, 255, 255],
@@ -1223,7 +1225,7 @@ class GD extends PHPThumb
 	 */
 	protected function preserveAlpha(): void
 	{
-		if ($this->format == 'PNG' && $this->options['preserveAlpha'] === true)
+		if ($this->format === 'PNG' && $this->options['preserveAlpha'] === true)
 		{
 			imagealphablending($this->working_image, false);
 
@@ -1240,7 +1242,7 @@ class GD extends PHPThumb
 		}
 
 		// preserve transparency in GIFs... this is usually pretty rough tho
-		if ($this->format == 'GIF' && $this->options['preserveTransparency'] === true)
+		if ($this->format === 'GIF' && $this->options['preserveTransparency'] === true)
 		{
 			$color_transparent = imagecolorallocate(
 				$this->working_image,
@@ -1252,5 +1254,17 @@ class GD extends PHPThumb
 			imagecolortransparent	($this->working_image, $color_transparent);
 			imagetruecolortopalette	($this->working_image, true, 256);
 		}
+
+		if ($this->format === 'WEBP' && $this->options['preserveTransparency'] === true)
+		{
+            imagealphablending($this->working_image, false);
+
+            // Create a palette image to copy the color palette from
+            $palette_image = imagecreatetruecolor(1, 1);
+
+			imagepalettecopy($palette_image, $this->working_image);
+            imagepalettecopy($this->working_image, $palette_image);
+            imagedestroy($palette_image);
+        }
 	}
 }
