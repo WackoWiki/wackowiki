@@ -38,7 +38,7 @@ $config_file['db_port']				= $config['db_port'];
 $config_file['db_name']				= $config['db_name'];
 $config_file['db_user']				= $config['db_user'];
 $config_file['db_password']			= $config['db_password'];
-$config_file['sql_mode_strict']		= $config['sql_mode_strict'];
+$config_file['sql_mode']			= $config['sql_mode'];
 $config_file['table_prefix']		= $config['table_prefix'];
 // security values
 $config_file['system_seed']			= $config['system_seed'];

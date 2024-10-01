@@ -126,14 +126,11 @@ if (isset($config['wacko_version']))
 	}
 }
 
-if (!empty($config['sql_mode_strict']))
-{
-	$sql_modes = SQL_MODE_STRICT[$config['db_vendor']];
-}
-else
-{
-	$sql_modes = SQL_MODE_PERMISSIVE[$config['db_vendor']];
-}
+$sql_modes = match((int) $config['sql_mode']) {
+	1		=> SQL_MODE_LAX[$config['db_vendor']],
+	2		=> SQL_MODE_STRICT[$config['db_vendor']],
+	default	=> 0, // server SQL mode
+};
 
 switch ($config['db_driver'])
 {
@@ -177,7 +174,10 @@ switch ($config['db_driver'])
 			mysqli_set_charset($dblink, $config['db_charset']);
 
 			// set SESSION sql_mode
-			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
+			if ($sql_modes)
+			{
+				mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
+			}
 
 			// check min database version
 			$_db_version	= mysqli_query($dblink, "SELECT version()");
@@ -358,7 +358,10 @@ switch ($config['db_driver'])
 		}
 
 		// set SESSION sql_mode
-		$dblink->query("SET SESSION sql_mode='$sql_modes'");
+		if ($sql_modes)
+		{
+			$dblink->query("SET SESSION sql_mode='$sql_modes'");
+		}
 
 		// check min database version
 		$_db_version	= $dblink->query("SELECT version()");

@@ -28,9 +28,17 @@ abstract class Dbal // need to be extended by Settings to be usable
 				default		=> new DbMysqli	($this),	// mysqli_legacy
 			};
 
-			// Change the current SQL mode at runtime
-			$sql_modes = $this->sql_mode_strict ? SQL_MODE_STRICT[$this->db_vendor] : SQL_MODE_PERMISSIVE[$this->db_vendor];
-			$this->db->query("SET SESSION sql_mode = '$sql_modes'");
+			// change the current SQL mode at runtime
+			$sql_modes = match((int) $this->sql_mode) {
+				1		=> SQL_MODE_LAX[$this->db_vendor],
+				2		=> SQL_MODE_STRICT[$this->db_vendor],
+				default	=> 0, // server SQL mode
+			};
+
+			if ($sql_modes)
+			{
+				$this->db->query("SET SESSION sql_mode = '$sql_modes'");
+			}
 
 			// Set database collation
 			if ($this->db_collation)

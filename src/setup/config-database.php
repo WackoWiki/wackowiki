@@ -95,6 +95,34 @@ else
 	</ul>
 	<br>
 	<?php echo $separator; ?>
+	<label class="label_top" for="sql_mode"><?php echo $lang['DbSqlMode'];?></label>
+	<p class="notop"><?php echo $lang['DbSqlModeDesc']; ?></p>
+
+<?php
+	/*
+	 SQL modes
+
+	 [0]   :  SQL mode
+	 [1]   :  SQL mode to be stored in the config file
+	 [2]   :  the name to display in the list here
+	 */
+
+	$sql_modes		= [];
+	$sql_modes[]	= ['server',			'0',	'Server'];			// default
+	$sql_modes[]	= ['session lax',		'1',	'Session Lax'];
+	$sql_modes[]	= ['session strict',	'2',	'Session Strict'];
+
+	echo '	<select id="sql_mode" name="config[sql_mode]" required>';
+
+	foreach ($sql_modes as $sql_mode)
+	{
+		echo '<option value="' . $sql_mode[1] . '" ' . ($config['sql_mode'] == $sql_mode[1] ? 'selected' : '') . '>' . $sql_mode[2] . "</option>\n";
+	}
+
+	echo "</select>\n";
+?>
+	<br>
+	<?php echo $separator; ?>
 	<label class="label_top" for="db_vendor"><?php echo $lang['DbVendor'];?></label>
 	<p class="notop"><?php echo $lang['DbVendorDesc']; ?></p>
 
@@ -115,7 +143,7 @@ else
 
 	foreach ($vendors as $vendor)
 	{
-	    echo '<option value="' . $vendor[1] . '" ' . ($config['db_vendor'] == $vendor[1] ? 'selected' : '') . '>' . $vendor[2] . "</option>\n";
+		echo '<option value="' . $vendor[1] . '" ' . ($config['db_vendor'] == $vendor[1] ? 'selected' : '') . '>' . $vendor[2] . "</option>\n";
 	}
 
 	echo "</select>\n";

@@ -23,7 +23,7 @@ $wacko_config_defaults = [
 	'db_vendor'						=> 'mysql',
 
 	'session_store'					=> 1,
-	'sql_mode_strict'				=> 0,
+	'sql_mode'						=> 0,
 
 	'table_prefix'					=> 'wacko_',
 
