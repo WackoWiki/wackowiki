@@ -122,7 +122,10 @@ else
 	echo "</select>\n";
 ?>
 	<br>
-	<?php echo $separator; ?>
+<?php
+if ($config['debug'] >= 3)
+{
+	echo $separator; ?>
 	<label class="label_top" for="db_vendor"><?php echo $lang['DbVendor'];?></label>
 	<p class="notop"><?php echo $lang['DbVendorDesc']; ?></p>
 
@@ -147,6 +150,7 @@ else
 	}
 
 	echo "</select>\n";
+}
 ?>
 	<br>
 <?php echo $separator; ?>

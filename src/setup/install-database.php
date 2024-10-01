@@ -174,7 +174,7 @@ switch ($config['db_driver'])
 			mysqli_set_charset($dblink, $config['db_charset']);
 
 			// set SESSION sql_mode
-			if ($sql_modes)
+			if ($sql_modes && $config['debug'] >= 3)
 			{
 				mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
 			}
@@ -184,9 +184,9 @@ switch ($config['db_driver'])
 			$_db_version	= mysqli_fetch_assoc($_db_version);
 			$db_version		= $_db_version['version()'];
 
-			/* $config['db_vendor'] = preg_match('/MariaDB/', $db_version, $matches)
+			$config['db_vendor'] = preg_match('/MariaDB/', $db_version, $matches)
 				? 'mariadb'
-				: 'mysql'; */
+				: 'mysql';
 
 			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 				? DB_MIN_VERSION['mariadb']
@@ -358,7 +358,7 @@ switch ($config['db_driver'])
 		}
 
 		// set SESSION sql_mode
-		if ($sql_modes)
+		if ($sql_modes && $config['debug'] >= 3)
 		{
 			$dblink->query("SET SESSION sql_mode='$sql_modes'");
 		}
@@ -368,9 +368,9 @@ switch ($config['db_driver'])
 		$_db_version	= $_db_version->fetch(PDO::FETCH_ASSOC);
 		$db_version		= $_db_version['version()'];
 
-/* 		$config['db_vendor'] = preg_match('/MariaDB/', $db_version, $matches)
+		$config['db_vendor'] = preg_match('/MariaDB/', $db_version, $matches)
 			? 'mariadb'
-			: 'mysql'; */
+			: 'mysql';
 
 		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 			? DB_MIN_VERSION['mariadb']
@@ -511,6 +511,9 @@ if (!$fatal_error)
 <p><?php echo Ut::perc_replace($lang['NextStep'], '<code>' . CONFIG_FILE . '</code>');?></p>
 <form action="<?php echo $base_path; ?>?installAction=write-config" method="post">
 <?php
+	// set detected db_vendor
+	$config_parameters['db_vendor'] = $config['db_vendor'];
+
 	write_config_hidden_nodes($config_parameters);
 ?>
 	<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
