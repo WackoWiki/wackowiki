@@ -7090,56 +7090,60 @@ class Wacko
 		return $this->get_user_menu($user_id, $lang, true);
 	}
 
-	function get_user_menu($user_id, $lang = '', $public = false): array
-	{
-		$user_menu_formatted = [];
+    function get_user_menu($user_id, $lang = '', $public = false): array
+    {
+        $user_menu_formatted = [];
 
-		// avoid results if $user_id is 0 (user does not exist)
-		if ($user_id)
-		{
-			$user_menu = $this->db->load_all(
-				'SELECT p.page_id, p.tag, p.title, m.menu_title, m.menu_lang ' .
-				'FROM ' . $this->prefix . 'menu m ' .
-					($public
-						? 'LEFT JOIN ' . $this->prefix . 'acl a ON (m.page_id = a.page_id) '
-						: '') .
-					'LEFT JOIN ' . $this->prefix . 'page p ON (m.page_id = p.page_id) ' .
-				'WHERE m.user_id = ' . (int) $user_id . ' ' .
-					($lang
-						? 'AND m.menu_lang = ' . $this->db->q($lang) . ' '
-						: '') .
-					($public
-						? "AND a.privilege = 'read' " .
-						  "AND a.list = '*' " // TODO: assumes only '*' is present, will fail with additional lines
-						: '') .
-				'ORDER BY m.menu_position', true);
+        // avoid results if $user_id is 0 (user does not exist)
+        if ($user_id)
+        {
+            $this->get_user_id() > 1        // can't use $user_id here as the function get_user_menu() called once for registered user, and if he has no menu, called again for system user id = 1. Registered users have id > 1, anonymous users have id = 1.
+                ? $rights = "(a.list = '*' OR a.list = '$')"        // registered users can see read * (public) and $ (for registered users) ACL pages in the default top menu
+                : $rights = "a.list = '*'";                         // anonymous users can see only read * (public) ACL pages in the default top menu
 
-			foreach ($user_menu as $menu_item)
-			{
-				$title = $menu_item['menu_title'];
+            $user_menu = $this->db->load_all(
+                'SELECT p.page_id, p.tag, p.title, m.menu_title, m.menu_lang ' .
+                'FROM ' . $this->prefix . 'menu m ' .
+                    ($public
+                        ? 'LEFT JOIN ' . $this->prefix . 'acl a ON (m.page_id = a.page_id) '
+                        : '') .
+                'LEFT JOIN ' . $this->prefix . 'page p ON (m.page_id = p.page_id) ' .
+                'WHERE m.user_id = ' . (int) $user_id . ' ' .
+                    ($lang
+                        ? 'AND m.menu_lang = ' . $this->db->q($lang) . ' '
+                        : '') .
+                    ($public
+                        ? "AND a.privilege = 'read' " .
+                          "AND " . $rights . " " // assumes '*' for anonymous, '*' and '$' for registered users 
+                        : '') .
+                'ORDER BY m.menu_position', true);
 
-				if ($title === '')
-				{
-					$title = $menu_item['title'];
-				}
+            foreach ($user_menu as $menu_item)
+            {
+                $title = $menu_item['menu_title'];
 
-				// [0] - page_id
-				// [1] - menu_title
-				// [2] - menu_item formatted ((tag menu_title))
-				// [3] - menu_lang
-				$user_menu_formatted[] = [
-					$menu_item['page_id'],
-					(($title !== '')? $title : $menu_item['tag']),
-					'((' . $menu_item['tag'] .
-						(($title !== '')? ' ' . $title : '') .
-					'))',
-					$menu_item['menu_lang'],
-				];
-			}
-		}
+                if ($title === '')
+                {
+                    $title = $menu_item['title'];
+                }
 
-		return $user_menu_formatted;
-	}
+                // [0] - page_id
+                // [1] - menu_title
+                // [2] - menu_item formatted ((tag menu_title))
+                // [3] - menu_lang
+                $user_menu_formatted[] = [
+                    $menu_item['page_id'],
+                    (($title !== '')? $title : $menu_item['tag']),
+                    '((' . $menu_item['tag'] .
+                    (($title !== '')? ' ' . $title : '') .
+                    '))',
+                    $menu_item['menu_lang'],
+                ];
+            }
+        }
+
+        return $user_menu_formatted;
+    }
 
 	function set_menu($set = MENU_AUTO, $update = false): void
 	{
