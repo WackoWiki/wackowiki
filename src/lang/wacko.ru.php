@@ -993,7 +993,7 @@ $wacko_translation = [
 	// filter
 	'Filter'					=> 'Фильтр',
 	'OptionalFilters'			=> 'Необязательные фильтры:',
-	'Any'						=> 'Любой',
+	'Any'						=> 'Все',
 
 	// My Groups
 	'UserGroups'				=> 'Группы пользователей',
