@@ -7097,7 +7097,7 @@ class Wacko
         // avoid results if $user_id is 0 (user does not exist)
         if ($user_id)
         {
-            $this->get_user_id() > 1        //can't use $user_id here as the function get_user_menu() called once for registered user, and if he has no menu, called again for system user id = 1. Registered users have id > 1, anonymous users have id = 1.
+            $this->get_user_id() > 1        // can't use $user_id here as the function get_user_menu() called once for registered user, and if he has no menu, called again for system user id = 1. Registered users have id > 1, anonymous users have id = 1.
                 ? $rights = "(a.list = '*' OR a.list = '$')"        // registered users can see read * (public) and $ (for registered users) ACL pages in the default top menu
                 : $rights = "a.list = '*'";                         // anonymous users can see only read * (public) ACL pages in the default top menu
 
