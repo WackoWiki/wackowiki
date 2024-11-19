@@ -43,7 +43,7 @@ $ap_translation = [
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
 
-	'System'					=> 'System',
+	'System'					=> 'Süsteem',
 
 	// Generic
 	'Cancel'					=> 'Loobun',
@@ -54,14 +54,14 @@ $ap_translation = [
 	'Disabled'					=> 'Keelatud',
 	'Mandatory'					=> 'Kohustuslik',
 	'Admin'						=> 'Admin',
-	'Min'						=> 'Min',
-	'Max'						=> 'Max',
+	'Min'						=> 'Min.',
+	'Max'						=> 'Maks.',
 
-	'MiscellaneousSection'		=> 'Miscellaneous',
+	'MiscellaneousSection'		=> 'Varia',
 	'MainSection'				=> 'General Options',
 
-	'DirNotWritable'			=> 'The %1 directory is not writable.',
-	'FileNotWritable'			=> 'The %1 file is not writable.',
+	'DirNotWritable'			=> 'Kaust %1 pole kirjutatav.',
+	'FileNotWritable'			=> 'Fail %1 ei ole kirjutatav.',
 
 	/**
 	 * AP MENU
@@ -87,7 +87,7 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-post',
-		'title'		=> 'Email settings',
+		'title'		=> 'E-posti seaded',
 	],
 
 	// Config Syndication module
@@ -164,7 +164,7 @@ $ap_translation = [
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Repair',
+		'name'		=> 'Paranda',
 		'title'		=> 'Repair and Optimize Database',
 	],
 
@@ -230,7 +230,7 @@ $ap_translation = [
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
+		'name'		=> 'Kiida heaks',
 		'title'		=> 'User registration approval',
 	],
 
@@ -270,13 +270,13 @@ $ap_translation = [
 	'LanguageSection'			=> 'Keel',
 	'DefaultLanguage'			=> 'Default language:',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
-	'MultiLanguage'				=> 'Multilanguage support:',
+	'MultiLanguage'				=> 'Mitmekeelsuse tugi:',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
-	'AllowedLanguages'			=> 'Allowed languages:',
+	'AllowedLanguages'			=> 'Lubatud keeled:',
 	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, otherwise all languages are selected.',
 
 	'CommentSection'			=> 'Kommentaarid',
-	'AllowComments'				=> 'Allow comments:',
+	'AllowComments'				=> 'Luba kommentaarid:',
 	'AllowCommentsInfo'			=> 'Enable comments for guests or registered users only, or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments:',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
@@ -289,7 +289,7 @@ $ap_translation = [
 	'TagsPanel'					=> 'Tags panel:',
 	'TagsPanelInfo'				=> 'The default display of the tags panel at the bottom of the page.',
 
-	'NavigationSection'			=> 'Navigation',
+	'NavigationSection'			=> 'Navigeerimine',
 	'ShowPermalink'				=> 'Show permalink:',
 	'ShowPermalinkInfo'			=> 'The default display of the permalink for the current version of the page.',
 	'TocPanel'					=> 'Table of contents panel:',
@@ -319,7 +319,7 @@ $ap_translation = [
 	'NotifyDiffMode'			=> 'Notify diff mode:',
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
-	'EditingSection'			=> 'Editing',
+	'EditingSection'			=> 'Muutmine',
 	'EditSummary'				=> 'Redigeeri kokkuvõte:',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Pisimuudatus:',
@@ -383,7 +383,7 @@ $ap_translation = [
 
 	'LogoOff'					=> 'Off',
 	'LogoOnly'					=> 'logo',
-	'LogoAndTitle'				=> 'logo and title',
+	'LogoAndTitle'				=> 'logo ja pealkiri',
 
 	'LogoSection'				=> 'Logo',
 	'SiteLogo'					=> 'Site logo:',
@@ -400,8 +400,8 @@ $ap_translation = [
 	'ThemeColor'				=> 'Aadressiriba teemavärv:',
 	'ThemeColorInfo'			=> 'Brauser määrab iga lehe aadressiriba värvi vastavalt esitatud CSS-värvile.',
 
-	'LayoutSection'				=> 'Layout',
-	'Theme'						=> 'Theme:',
+	'LayoutSection'				=> 'Paigutus',
+	'Theme'						=> 'Teema:',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
 	'ThemesAllowed'				=> 'Allowed Themes:',
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose; otherwise, all available themes are allowed.',
@@ -444,7 +444,7 @@ $ap_translation = [
 		'1'		=> 'only the critical level',
 		'2'		=> 'from the highest level',
 		'3'		=> 'from high',
-		'4'		=> 'on average',
+		'4'		=> 'keskmiselt',
 		'5'		=> 'from low',
 		'6'		=> 'the minimum level',
 		'7'		=> 'record all',
@@ -455,10 +455,10 @@ $ap_translation = [
 		'1'		=> 'only the critical level',
 		'2'		=> 'from the highest level',
 		'3'		=> 'from high-level',
-		'4'		=> 'the average',
+		'4'		=> 'keskmine',
 		'5'		=> 'from a low',
 		'6'		=> 'from the minimum level',
-		'7'		=> 'show all',
+		'7'		=> 'näita kõiki',
 	],
 	'LogPurgeTime'				=> 'Storage time of Log:',
 	'LogPurgeTimeInfo'			=> 'Remove event log after the specified number of days.',
@@ -557,7 +557,7 @@ $ap_translation = [
 	'UsernameLength'			=> 'Username length:',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
 
-	'EmailSection'				=> 'Email',
+	'EmailSection'				=> 'E-post',
 	'AllowEmailReuse'			=> 'Allow email address re-use:',
 	'AllowEmailReuseInfo'		=> 'Different users can register with the same email address.',
 	'EmailConfirmation'			=> 'Jõustada e-posti kinnitus:',
@@ -592,8 +592,8 @@ $ap_translation = [
 	'CspInfo'					=> 'Configuring CSP involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
 		'0'		=> 'keelatud',
-		'1'		=> 'strict',
-		'2'		=> 'custom',
+		'1'		=> 'range',
+		'2'		=> 'kohandatud',
 	],
 	'PermissionsPolicy'			=> 'Permissions policy:',
 	'PermissionsPolicyInfo'		=> 'The HTTP Permissions-Policy header provides a mechanism to explicitly enable or disable various powerful browser features.',
@@ -950,23 +950,23 @@ $ap_translation = [
 
 	// Log module
 	'LogFilterTip'				=> 'Filter events by criteria:',
-	'LogLevel'					=> 'Level',
+	'LogLevel'					=> 'Tase',
 	'LogLevelFilters'	=> [
-		'1'		=> 'not less than',
-		'2'		=> 'not higher than',
-		'3'		=> 'equal',
+		'1'		=> 'mitte vähem kui',
+		'2'		=> 'mitte kõrgem kui',
+		'3'		=> 'võrdne',
 	],
-	'LogNoMatch'				=> 'No events that meet the criteria',
-	'LogDate'					=> 'Date',
-	'LogEvent'					=> 'Event',
+	'LogNoMatch'				=> 'Ükski sündmus ei vasta sellele kriteeriumile',
+	'LogDate'					=> 'Kuupäev',
+	'LogEvent'					=> 'Sündmus',
 	'LogUsername'				=> 'Kasutajanimi',
 	'LogLevels'	=> [
 		'1'		=> 'kriitiline',
 		'2'		=> 'kõrgeim',
 		'3'		=> 'kõrge',
-		'4'		=> 'medium',
-		'5'		=> 'low',
-		'6'		=> 'lowest',
+		'4'		=> 'keskmine',
+		'5'		=> 'madal',
+		'6'		=> 'madalaim',
 		'7'		=> 'debugging',
 	],
 
@@ -982,7 +982,7 @@ $ap_translation = [
 	'MassemailSection'			=> 'Mass email',
 	'MessageSubject'			=> 'Teema:',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Your message:',
+	'YourMessage'				=> 'Sinu sõnum:',
 	'YourMessageInfo'			=> 'Sa võid sisestada ainult puhast teksti, kõik koodi märgistused eemaldatakse enne saatmist.',
 
 	'NoUser'					=> 'No user',
@@ -997,10 +997,10 @@ $ap_translation = [
 	'SysMsgUpdated'				=> 'Updated system message',
 
 	'SysMsgSection'				=> 'System message',
-	'SysMsg'					=> 'System message:',
-	'SysMsgInfo'				=> 'Your text here',
+	'SysMsg'					=> 'Süsteemiteade:',
+	'SysMsgInfo'				=> 'Sinu tekst siia',
 
-	'SysMsgType'				=> 'Type:',
+	'SysMsgType'				=> 'Liik:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
 	'SysMsgAudience'			=> 'Audience:',
 	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
@@ -1017,10 +1017,10 @@ $ap_translation = [
 	'LogUserUpdated'			=> 'Updated User ##%1##',
 
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
-	'Approve'					=> 'Approve',
-	'Deny'						=> 'Deny',
-	'Pending'					=> 'Pending',
-	'Approved'					=> 'Approved',
+	'Approve'					=> 'Kiida heaks',
+	'Deny'						=> 'Keela',
+	'Pending'					=> 'Ootel',
+	'Approved'					=> 'Heaks kiidetud',
 	'Denied'					=> 'Keelatud',
 
 	// DB Backup module
@@ -1093,8 +1093,8 @@ $ap_translation = [
 	'RestoringFiles'			=> 'Restoring files',
 	'DecompressAndStore'		=> 'Decompress and store the contents of directories',
 	'HomonymicFiles'			=> 'homonymic files',
-	'RestoreSkip'				=> 'skip',
-	'RestoreReplace'			=> 'replace',
+	'RestoreSkip'				=> 'jäta vahele',
+	'RestoreReplace'			=> 'asenda',
 	'RestoreFile'				=> 'Fail:',
 	'RestoredFiles'				=> 'restored:',
 	'SkippedFiles'				=> 'skipped:',
@@ -1103,9 +1103,9 @@ $ap_translation = [
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
-	'BackupCreationDate'		=> 'Creation Date',
-	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
+	'BackupCreationDate'		=> 'Loomise kuupäev',
+	'BackupPackageContents'		=> 'Paketi sisu',
+	'BackupRestore'				=> 'Taasta',
 	'BackupRemove'				=> 'Eemalda',
 	'RestoreYes'				=> 'Jah',
 	'RestoreNo'					=> 'Ei',
@@ -1118,10 +1118,10 @@ $ap_translation = [
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',
 
-	'UsersAdded'				=> 'User added',
+	'UsersAdded'				=> 'Kasutaja on lisatud',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'EditButton'				=> 'Muuda',
-	'UsersAddNew'				=> 'Add new user',
+	'UsersAddNew'				=> 'Lisa uus kasutaja',
 	'UsersDelete'				=> 'Kas soovite kindlasti kasutaja %1 eemaldada?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
 	'UsersRename'				=> 'Rename the user %1 to',
@@ -1130,7 +1130,7 @@ $ap_translation = [
 
 	'UserIP'					=> 'IP',
 	'UserSignuptime'			=> 'Signuptime',
-	'UserActions'				=> 'Actions',
+	'UserActions'				=> 'Tegevused',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
 
 	'UserAccountNotify'			=> 'Teata kasutajat',
@@ -1168,49 +1168,49 @@ $ap_translation = [
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
-	'GroupAddMember'			=> 'Add member',
-	'GroupRemoveMember'			=> 'Remove Member',
-	'GroupAddNew'				=> 'Add group',
-	'GroupEdit'					=> 'Edit Group',
-	'GroupDelete'				=> 'Remove Group',
+	'GroupAddMember'			=> 'Lisa liige',
+	'GroupRemoveMember'			=> 'Eemalda liige',
+	'GroupAddNew'				=> 'Lisa grupp',
+	'GroupEdit'					=> 'Muuda gruppi',
+	'GroupDelete'				=> 'Eemalda grupp',
 
-	'MembersAddNew'				=> 'Add new member',
+	'MembersAddNew'				=> 'Lisa uus liige',
 	'MembersAdded'				=> 'Added new member to the group successfully.',
 	'MembersRemove'				=> 'Are you sure you want to remove member %1?',
 	'MembersRemoved'			=> 'The member was removed from the group.',
 
 	// Statistics module
-	'DbStatSection'				=> 'Database Statistics',
+	'DbStatSection'				=> 'Andmebaasi statistika',
 	'DbTable'					=> 'Tabel',
-	'DbRecords'					=> 'Records',
+	'DbRecords'					=> 'Kirjed',
 	'DbSize'					=> 'Suurus',
 	'DbIndex'					=> 'Indeks',
 	'DbOverhead'				=> 'Overhead',
-	'DbTotal'					=> 'Total',
+	'DbTotal'					=> 'Kokku',
 
-	'FileStatSection'			=> 'File system Statistics',
-	'FileFolder'				=> 'Folder',
+	'FileStatSection'			=> 'Failisüsteemi statistika',
+	'FileFolder'				=> 'Kaust',
 	'FileFiles'					=> 'Failid',
 	'FileSize'					=> 'Suurus',
-	'FileTotal'					=> 'Total',
+	'FileTotal'					=> 'Kokku',
 
 	// Sysinfo module
 	'SysInfo'					=> 'Version information:',
-	'SysParameter'				=> 'Parameter',
-	'SysValues'					=> 'Values',
+	'SysParameter'				=> 'Parameeter',
+	'SysValues'					=> 'Väärtused',
 
 	'WackoVersion'				=> 'WackoWiki',
-	'LastWackoUpdate'			=> 'Last update',
+	'LastWackoUpdate'			=> 'Viimane uuendus',
 	'ServerOS'					=> 'OS',
-	'ServerName'				=> 'Server name',
-	'WebServer'					=> 'Web server',
+	'ServerName'				=> 'Serveri nimi',
+	'WebServer'					=> 'Veebiserver',
 	'HttpProtocol'				=> 'HTTP Protocol',
 	'DbVersion'					=> 'MariaDB / MySQL',
 	'SqlModesGlobal'			=> 'SQL Modes Global',
 	'SqlModesSession'			=> 'SQL Modes Session',
 	'IcuVersion'				=> 'ICU',
 	'PhpVersion'				=> 'PHP',
-	'MemoryLimit'				=> 'Memory',
+	'MemoryLimit'				=> 'Mälu',
 	'UploadFilesizeMax'			=> 'Upload max filesize',
 	'PostMaxSize'				=> 'Post max size',
 	'MaxExecutionTime'			=> 'Max execution time',
@@ -1221,8 +1221,8 @@ $ap_translation = [
 	'ApacheModules'				=> 'Apache modules',
 
 	// DB repair module
-	'DbRepairSection'			=> 'Repair Database',
-	'DbRepair'					=> 'Repair Database',
+	'DbRepairSection'			=> 'Paranda andmebaasi',
+	'DbRepair'					=> 'Paranda andmebaasi',
 	'DbRepairInfo'				=> 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.',
 
 	'DbOptimizeRepairSection'	=> 'Repair and Optimize Database',
@@ -1262,27 +1262,27 @@ $ap_translation = [
 	'BbSummary'					=> 'Kokkuvõte',
 	'BbLog'						=> 'Log',
 	'BbSettings'				=> 'Seadistused',
-	'BbWhitelist'				=> 'Whitelist',
+	'BbWhitelist'				=> 'Valge nimekiri',
 
 	// --> Log
-	'BbHits'					=> 'Hits',
+	'BbHits'					=> 'Klikke',
 	'BbRecordsFiltered'			=> 'Displaying %1 of %2 records filtered by',
-	'BbStatus'					=> 'Status',
-	'BbBlocked'					=> 'Blocked',
-	'BbPermitted'				=> 'Permitted',
+	'BbStatus'					=> 'Staatus',
+	'BbBlocked'					=> 'Blokeeritud',
+	'BbPermitted'				=> 'Lubatud',
 	'BbIp'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
 	'BbUri'						=> 'URI',
 	'BbRecordsAll'				=> 'Displaying all %1 records',
-	'BbShow'					=> 'Show',
+	'BbShow'					=> 'Näita',
 	'BbIpDateStatus'			=> 'IP/Date/Status',
-	'BbHeaders'					=> 'Headers',
+	'BbHeaders'					=> 'Päised',
 	'BbEntity'					=> 'Entity',
 
 	// --> Whitelist
-	'BbOptionsSaved'			=> 'Options saved.',
+	'BbOptionsSaved'			=> 'Valikud on salvestatud.',
 	'BbWhitelistHint'			=> 'Inappropriate whitelisting WILL expose you to spam, or cause Bad Behaviour to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.',
-	'BbIpAddress'				=> 'IP Address',
+	'BbIpAddress'				=> 'IP aadress',
 	'BbIpAddressInfo'			=> 'IP address or CIDR format address ranges to be whitelisted (one per line)',
 	'BbUrl'						=> 'URL',
 	'BbUrlInfo'					=> 'URL fragments beginning with the / after your web site hostname (one per line)',
