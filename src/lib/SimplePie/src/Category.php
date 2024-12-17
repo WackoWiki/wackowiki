@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie;
 
@@ -19,9 +13,6 @@ namespace SimplePie;
  * Used by {@see \SimplePie\Item::get_category()} and {@see \SimplePie\Item::get_categories()}
  *
  * This class can be overloaded with {@see \SimplePie\SimplePie::set_category_class()}
- *
- * @package SimplePie
- * @subpackage API
  */
 class Category
 {
@@ -68,7 +59,7 @@ class Category
      * @param string|null $label
      * @param string|null $type
      */
-    public function __construct($term = null, $scheme = null, $label = null, $type = null)
+    public function __construct(?string $term = null, ?string $scheme = null, ?string $label = null, ?string $type = null)
     {
         $this->term = $term;
         $this->scheme = $scheme;
@@ -113,7 +104,7 @@ class Category
      * @param bool $strict
      * @return string|null
      */
-    public function get_label($strict = false)
+    public function get_label(bool $strict = false)
     {
         if ($this->label === null && $strict !== true) {
             return $this->get_term();

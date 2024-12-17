@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie;
 
@@ -21,8 +15,6 @@ use SimplePie\XML\Declaration\Parser as DeclarationParser;
  * Handles creating objects and calling methods
  *
  * Access this via {@see \SimplePie\SimplePie::get_registry()}
- *
- * @package SimplePie
  */
 class Registry
 {
@@ -59,7 +51,7 @@ class Registry
      * Class mapping
      *
      * @see register()
-     * @var array
+     * @var array<string, class-string>
      */
     protected $classes = [];
 
@@ -116,7 +108,7 @@ class Registry
      * @param bool $legacy Whether to enable legacy support for this class
      * @return bool Successfulness
      */
-    public function register($type, $class, $legacy = false)
+    public function register(string $type, $class, bool $legacy = false)
     {
         if (array_key_exists($type, $this->legacyTypes)) {
             // trigger_error(sprintf('"%s"(): Using argument #1 ($type) with value "%s" is deprecated since SimplePie 1.8.0, use class-string "%s" instead.', __METHOD__, $type, $this->legacyTypes[$type]), \E_USER_DEPRECATED);
@@ -124,7 +116,7 @@ class Registry
             $type = $this->legacyTypes[$type];
         }
 
-        if (! array_key_exists($type, $this->default)) {
+        if (!array_key_exists($type, $this->default)) {
             return false;
         }
 
@@ -165,7 +157,7 @@ class Registry
             $type = $this->legacyTypes[$type];
         }
 
-        if (! array_key_exists($type, $this->default)) {
+        if (!array_key_exists($type, $this->default)) {
             return null;
         }
 
@@ -183,10 +175,10 @@ class Registry
      *
      * @template T class-string $type
      * @param class-string<T> $type
-     * @param array $parameters Parameters to pass to the constructor
+     * @param array<mixed> $parameters Parameters to pass to the constructor
      * @return T Instance of class
      */
-    public function &create($type, $parameters = [])
+    public function &create($type, array $parameters = [])
     {
         $class = $this->get_class($type);
 
@@ -211,10 +203,10 @@ class Registry
      *
      * @param class-string $type
      * @param string $method
-     * @param array $parameters
+     * @param array<mixed> $parameters
      * @return mixed
      */
-    public function &call($type, $method, $parameters = [])
+    public function &call($type, string $method, array $parameters = [])
     {
         $class = $this->get_class($type);
 

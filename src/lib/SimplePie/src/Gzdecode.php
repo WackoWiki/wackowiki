@@ -1,24 +1,18 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie;
 
 /**
  * Decode 'gzip' encoded HTTP data
  *
- * @package SimplePie
- * @subpackage HTTP
  * @link http://www.gzip.org/format.txt
+ * @link https://www.php.net/manual/en/function.gzdecode.php
+ * @deprecated since SimplePie 1.9.0, use `gzdecode` function instead.
  */
 class Gzdecode
 {
@@ -148,9 +142,9 @@ class Gzdecode
      * @param string $name
      * @param mixed $value
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
-        trigger_error("Cannot write property $name", E_USER_ERROR);
+        throw new Exception("Cannot write property $name");
     }
 
     /**
@@ -158,7 +152,7 @@ class Gzdecode
      *
      * @param string $data
      */
-    public function __construct($data)
+    public function __construct(string $data)
     {
         $this->compressed_data = $data;
         $this->compressed_size = strlen($data);
