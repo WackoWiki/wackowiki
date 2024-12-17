@@ -1,15 +1,10 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-FileCopyrightText: 2015 Jan Kozak <galvani78@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie\Cache;
 
@@ -24,8 +19,6 @@ use Redis as NativeRedis;
  * connect to redis on `localhost` on port 6379. All tables will be
  * prefixed with `simple_primary-` and data will expire after 3600 seconds
  *
- * @package SimplePie
- * @subpackage Caching
  * @uses Redis
  * @deprecated since SimplePie 1.8.0, use implementation of "Psr\SimpleCache\CacheInterface" instead
  */
@@ -41,7 +34,7 @@ class Redis implements Base
     /**
      * Options
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $options;
 
@@ -57,9 +50,9 @@ class Redis implements Base
      *
      * @param string $location Location string (from SimplePie::$cache_location)
      * @param string $name Unique ID for the cache
-     * @param Base::TYPE_FEED|Base::TYPE_IMAGE $type Either TYPE_FEED for SimplePie data, or TYPE_IMAGE for image data
+     * @param Base::TYPE_FEED|Base::TYPE_IMAGE|array<string, mixed>|null $options Either TYPE_FEED for SimplePie data, or TYPE_IMAGE for image data
      */
-    public function __construct($location, $name, $options = null)
+    public function __construct(string $location, string $name, $options = null)
     {
         //$this->cache = \flow\simple\cache\Redis::getRedisClientInstance();
         $parsed = \SimplePie\Cache::parse_URL($location);
@@ -87,6 +80,7 @@ class Redis implements Base
 
     /**
      * @param NativeRedis $cache
+     * @return void
      */
     public function setRedisClient(NativeRedis $cache)
     {
@@ -96,7 +90,7 @@ class Redis implements Base
     /**
      * Save data to the cache
      *
-     * @param array|\SimplePie\SimplePie $data Data to store in the cache. If passed a SimplePie object, only cache the $data property
+     * @param array<mixed>|\SimplePie\SimplePie $data Data to store in the cache. If passed a SimplePie object, only cache the $data property
      * @return bool Successfulness
      */
     public function save($data)
@@ -115,7 +109,7 @@ class Redis implements Base
     /**
      * Retrieve the data saved to the cache
      *
-     * @return array Data for SimplePie::$data
+     * @return array<mixed>|false Data for SimplePie::$data
      */
     public function load()
     {
@@ -130,7 +124,7 @@ class Redis implements Base
     /**
      * Retrieve the last modified time for the cache
      *
-     * @return int Timestamp
+     * @return int|false Timestamp
      */
     public function mtime()
     {

@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2022 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie\Cache;
 
@@ -24,8 +18,6 @@ use InvalidArgumentException;
  * The methods names must be different, but should be compatible to the
  * methods of \Psr\SimpleCache\CacheInterface.
  *
- * @package SimplePie
- * @subpackage Caching
  * @internal
  */
 interface DataCache
@@ -57,7 +49,7 @@ interface DataCache
      * </code>
      *
      * @param string   $key   The key of the item to store.
-     * @param array    $value The value of the item to store, must be serializable.
+     * @param array<mixed> $value The value of the item to store, must be serializable.
      * @param null|int $ttl   Optional. The TTL value of this item. If no value is sent and
      *                                      the driver supports TTL then the library may set a default value
      *                                      for it or let the driver take care of that.
