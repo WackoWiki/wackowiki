@@ -1,68 +1,85 @@
 <?php
 
-// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
-// SPDX-License-Identifier: BSD-3-Clause
-
-declare(strict_types=1);
+/**
+ * SimplePie
+ *
+ * A PHP-Based RSS and Atom Feed Framework.
+ * Takes the hard work out of managing a complete RSS/Atom solution.
+ *
+ * Copyright (c) 2004-2022, Ryan Parman, Sam Sneddon, Ryan McCue, and contributors
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ * 	* Redistributions of source code must retain the above copyright notice, this list of
+ * 	  conditions and the following disclaimer.
+ *
+ * 	* Redistributions in binary form must reproduce the above copyright notice, this list
+ * 	  of conditions and the following disclaimer in the documentation and/or other materials
+ * 	  provided with the distribution.
+ *
+ * 	* Neither the name of the SimplePie Team nor the names of its contributors may be used
+ * 	  to endorse or promote products derived from this software without specific prior
+ * 	  written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+ * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS
+ * AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @package SimplePie
+ * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
+ * @author Ryan Parman
+ * @author Sam Sneddon
+ * @author Ryan McCue
+ * @link http://simplepie.org/ SimplePie
+ * @license http://www.opensource.org/licenses/bsd-license.php BSD License
+ */
 
 namespace SimplePie;
 
 use SimplePie\XML\Declaration\Parser as DeclarationParser;
-use XMLParser;
 
 /**
  * Parses XML into something sane
  *
  *
  * This class can be overloaded with {@see \SimplePie\SimplePie::set_parser_class()}
+ *
+ * @package SimplePie
+ * @subpackage Parsing
  */
 class Parser implements RegistryAware
 {
-    /** @var int */
     public $error_code;
-    /** @var string */
     public $error_string;
-    /** @var int */
     public $current_line;
-    /** @var int */
     public $current_column;
-    /** @var int */
     public $current_byte;
-    /** @var string */
     public $separator = ' ';
-    /** @var string[] */
     public $namespace = [''];
-    /** @var string[] */
     public $element = [''];
-    /** @var string[] */
     public $xml_base = [''];
-    /** @var bool[] */
     public $xml_base_explicit = [false];
-    /** @var string[] */
     public $xml_lang = [''];
-    /** @var array<string, mixed> */
     public $data = [];
-    /** @var array<array<string, mixed>> */
     public $datas = [[]];
-    /** @var int */
     public $current_xhtml_construct = -1;
-    /** @var string */
     public $encoding;
-    /** @var Registry */
     protected $registry;
 
-    /**
-     * @return void
-     */
-    public function set_registry(\SimplePie\Registry $registry)
+    public function set_registry(\SimplePie\Registry $registry)/* : void */
     {
         $this->registry = $registry;
     }
 
-    /**
-     * @return bool
-     */
-    public function parse(string &$data, string $encoding, string $url = '')
+    public function parse(&$data, $encoding, $url = '')
     {
         if (class_exists('DOMXpath') && function_exists('Mf2\parse')) {
             $doc = new \DOMDocument();
@@ -144,9 +161,7 @@ class Parser implements RegistryAware
                 //Parse by chunks not to use too much memory
                 do {
                     $stream_data = fread($stream, 1048576);
-                    // NB: At some point between PHP 7.3 and 7.4, the signature for `fread()` has changed
-                    // from returning `string` to returning `string|false`, hence the falsy check:
-                    if (!xml_parse($xml, $stream_data == false ? '' : $stream_data, feof($stream))) {
+                    if (!xml_parse($xml, $stream_data === false ? '' : $stream_data, feof($stream))) {
                         $this->error_code = xml_get_error_code($xml);
                         $this->error_string = xml_error_string($this->error_code);
                         $return = false;
@@ -217,60 +232,37 @@ class Parser implements RegistryAware
         return true;
     }
 
-    /**
-     * @return int
-     */
     public function get_error_code()
     {
         return $this->error_code;
     }
 
-    /**
-     * @return string
-     */
     public function get_error_string()
     {
         return $this->error_string;
     }
 
-    /**
-     * @return int
-     */
     public function get_current_line()
     {
         return $this->current_line;
     }
 
-    /**
-     * @return int
-     */
     public function get_current_column()
     {
         return $this->current_column;
     }
 
-    /**
-     * @return int
-     */
     public function get_current_byte()
     {
         return $this->current_byte;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function get_data()
     {
         return $this->data;
     }
 
-    /**
-     * @param XMLParser|resource|null $parser
-     * @param array<string, string> $attributes
-     * @return void
-     */
-    public function tag_open($parser, string $tag, array $attributes)
+    public function tag_open($parser, $tag, $attributes)
     {
         [$this->namespace[], $this->element[]] = $this->split_ns($tag);
 
@@ -322,11 +314,7 @@ class Parser implements RegistryAware
         }
     }
 
-    /**
-     * @param XMLParser|resource|null $parser
-     * @return void
-     */
-    public function cdata($parser, string $cdata)
+    public function cdata($parser, $cdata)
     {
         if ($this->current_xhtml_construct >= 0) {
             $this->data['data'] .= htmlspecialchars($cdata, ENT_QUOTES, $this->encoding);
@@ -335,11 +323,7 @@ class Parser implements RegistryAware
         }
     }
 
-    /**
-     * @param XMLParser|resource|null $parser
-     * @return void
-     */
-    public function tag_close($parser, string $tag)
+    public function tag_close($parser, $tag)
     {
         if ($this->current_xhtml_construct >= 0) {
             $this->current_xhtml_construct--;
@@ -359,10 +343,7 @@ class Parser implements RegistryAware
         array_pop($this->xml_lang);
     }
 
-    /**
-     * @return array{string, string}
-     */
-    public function split_ns(string $string)
+    public function split_ns($string)
     {
         static $cache = [];
         if (!isset($cache[$string])) {
@@ -393,10 +374,7 @@ class Parser implements RegistryAware
         return $cache[$string];
     }
 
-    /**
-     * @param array<string, mixed> $data
-     */
-    private function parse_hcard(array $data, bool $category = false): string
+    private function parse_hcard($data, $category = false)
     {
         $name = '';
         $link = '';
@@ -420,10 +398,7 @@ class Parser implements RegistryAware
         return $data['value'] ?? '';
     }
 
-    /**
-     * @return true
-     */
-    private function parse_microformats(string &$data, string $url): bool
+    private function parse_microformats(&$data, $url)
     {
         $feed_title = '';
         $feed_author = null;
@@ -644,7 +619,7 @@ class Parser implements RegistryAware
         return true;
     }
 
-    private function declare_html_entities(): string
+    private function declare_html_entities()
     {
         // This is required because the RSS specification says that entity-encoded
         // html is allowed, but the xml specification says they must be declared.

@@ -1,9 +1,46 @@
 <?php
 
-// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
-// SPDX-License-Identifier: BSD-3-Clause
-
-declare(strict_types=1);
+/**
+ * SimplePie
+ *
+ * A PHP-Based RSS and Atom Feed Framework.
+ * Takes the hard work out of managing a complete RSS/Atom solution.
+ *
+ * Copyright (c) 2004-2022, Ryan Parman, Sam Sneddon, Ryan McCue, and contributors
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ * 	* Redistributions of source code must retain the above copyright notice, this list of
+ * 	  conditions and the following disclaimer.
+ *
+ * 	* Redistributions in binary form must reproduce the above copyright notice, this list
+ * 	  of conditions and the following disclaimer in the documentation and/or other materials
+ * 	  provided with the distribution.
+ *
+ * 	* Neither the name of the SimplePie Team nor the names of its contributors may be used
+ * 	  to endorse or promote products derived from this software without specific prior
+ * 	  written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+ * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS
+ * AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @package SimplePie
+ * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
+ * @author Ryan Parman
+ * @author Sam Sneddon
+ * @author Ryan McCue
+ * @link http://simplepie.org/ SimplePie
+ * @license http://www.opensource.org/licenses/bsd-license.php BSD License
+ */
 
 namespace SimplePie;
 
@@ -13,83 +50,86 @@ namespace SimplePie;
  * Used by {@see \SimplePie\Item::get_enclosure()} and {@see \SimplePie\Item::get_enclosures()}
  *
  * This class can be overloaded with {@see \SimplePie\SimplePie::set_enclosure_class()}
+ *
+ * @package SimplePie
+ * @subpackage API
  */
 class Enclosure
 {
     /**
-     * @var ?string
+     * @var string
      * @see get_bitrate()
      */
     public $bitrate;
 
     /**
-     * @var Caption[]|null
+     * @var array
      * @see get_captions()
      */
     public $captions;
 
     /**
-     * @var Category[]|null
+     * @var array
      * @see get_categories()
      */
     public $categories;
 
     /**
-     * @var ?int
+     * @var int
      * @see get_channels()
      */
     public $channels;
 
     /**
-     * @var ?Copyright
+     * @var \SimplePie\Copyright
      * @see get_copyright()
      */
     public $copyright;
 
     /**
-     * @var Credit[]|null
+     * @var array
      * @see get_credits()
      */
     public $credits;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_description()
      */
     public $description;
 
     /**
-     * @var ?int
+     * @var int
      * @see get_duration()
      */
     public $duration;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_expression()
      */
     public $expression;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_framerate()
      */
     public $framerate;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_handler()
      */
     public $handler;
 
     /**
-     * @var string[]|null
+     * @var array
      * @see get_hashes()
      */
     public $hashes;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_height()
      */
     public $height;
@@ -101,79 +141,79 @@ class Enclosure
     public $javascript;
 
     /**
-     * @var string[]|null
+     * @var array
      * @see get_keywords()
      */
     public $keywords;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_language()
      */
     public $lang;
 
     /**
-     * @var ?int
+     * @var string
      * @see get_length()
      */
     public $length;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_link()
      */
     public $link;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_medium()
      */
     public $medium;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_player()
      */
     public $player;
 
     /**
-     * @var Rating[]|null
+     * @var array
      * @see get_ratings()
      */
     public $ratings;
 
     /**
-     * @var ?Restriction[]
+     * @var array
      * @see get_restrictions()
      */
     public $restrictions;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_sampling_rate()
      */
     public $samplingrate;
 
     /**
-     * @var string[]|null
+     * @var array
      * @see get_thumbnails()
      */
     public $thumbnails;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_title()
      */
     public $title;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_type()
      */
     public $type;
 
     /**
-     * @var ?string
+     * @var string
      * @see get_width()
      */
     public $width;
@@ -184,46 +224,10 @@ class Enclosure
      * For documentation on all the parameters, see the corresponding
      * properties and their accessors
      *
-     * @uses idn_to_ascii If available, this will convert an IDN
-     *
-     * @param null $javascript
-     * @param Caption[]|null $captions
-     * @param Category[]|null $categories
-     * @param Credit[]|null $credits
-     * @param string[]|null $hashes
-     * @param string[]|null $keywords
-     * @param Rating[]|null $ratings
-     * @param Restriction[]|null $restrictions
-     * @param string[]|null $thumbnails
+     * @uses idna_convert If available, this will convert an IDN
      */
-    public function __construct(
-        ?string $link = null,
-        ?string $type = null,
-        ?int $length = null,
-        $javascript = null,
-        ?string $bitrate = null,
-        ?array $captions = null,
-        ?array $categories = null,
-        ?int $channels = null,
-        ?Copyright $copyright = null,
-        ?array $credits = null,
-        ?string $description = null,
-        ?int $duration = null,
-        ?string $expression = null,
-        ?string $framerate = null,
-        ?array $hashes = null,
-        ?string $height = null,
-        ?array $keywords = null,
-        ?string $lang = null,
-        ?string $medium = null,
-        ?string $player = null,
-        ?array $ratings = null,
-        ?array $restrictions = null,
-        ?string $samplingrate = null,
-        ?array $thumbnails = null,
-        ?string $title = null,
-        ?string $width = null
-    ) {
+    public function __construct($link = null, $type = null, $length = null, $javascript = null, $bitrate = null, $captions = null, $categories = null, $channels = null, $copyright = null, $credits = null, $description = null, $duration = null, $expression = null, $framerate = null, $hashes = null, $height = null, $keywords = null, $lang = null, $medium = null, $player = null, $ratings = null, $restrictions = null, $samplingrate = null, $thumbnails = null, $title = null, $width = null)
+    {
         $this->bitrate = $bitrate;
         $this->captions = $captions;
         $this->categories = $categories;
@@ -250,12 +254,10 @@ class Enclosure
         $this->type = $type;
         $this->width = $width;
 
-        if (function_exists('idn_to_ascii')) {
-            $parsed = \SimplePie\Misc::parse_url($link ?? '');
-            if ($parsed['authority'] !== '' && !ctype_print($parsed['authority'])) {
-                $authority = \idn_to_ascii($parsed['authority'], \IDNA_NONTRANSITIONAL_TO_ASCII, \INTL_IDNA_VARIANT_UTS46);
-                $this->link = \SimplePie\Misc::compress_parse_url($parsed['scheme'], $authority, $parsed['path'], $parsed['query'], $parsed['fragment']);
-            }
+        if (class_exists('idna_convert')) {
+            $idn = new \idna_convert();
+            $parsed = \SimplePie\Misc::parse_url($link);
+            $this->link = \SimplePie\Misc::compress_parse_url($parsed['scheme'], $idn->encode($parsed['authority']), $parsed['path'], $parsed['query'], $parsed['fragment']);
         }
         $this->handler = $this->get_handler(); // Needs to load last
     }
@@ -291,7 +293,7 @@ class Enclosure
      * @param int $key
      * @return \SimplePie\Caption|null
      */
-    public function get_caption(int $key = 0)
+    public function get_caption($key = 0)
     {
         $captions = $this->get_captions();
         if (isset($captions[$key])) {
@@ -304,7 +306,7 @@ class Enclosure
     /**
      * Get all captions
      *
-     * @return Caption[]|null
+     * @return array|null Array of {@see \SimplePie\Caption} objects
      */
     public function get_captions()
     {
@@ -321,7 +323,7 @@ class Enclosure
      * @param int $key
      * @return \SimplePie\Category|null
      */
-    public function get_category(int $key = 0)
+    public function get_category($key = 0)
     {
         $categories = $this->get_categories();
         if (isset($categories[$key])) {
@@ -334,7 +336,7 @@ class Enclosure
     /**
      * Get all categories
      *
-     * @return \SimplePie\Category[]|null
+     * @return array|null Array of {@see \SimplePie\Category} objects
      */
     public function get_categories()
     {
@@ -379,7 +381,7 @@ class Enclosure
      * @param int $key
      * @return \SimplePie\Credit|null
      */
-    public function get_credit(int $key = 0)
+    public function get_credit($key = 0)
     {
         $credits = $this->get_credits();
         if (isset($credits[$key])) {
@@ -392,7 +394,7 @@ class Enclosure
     /**
      * Get all credits
      *
-     * @return Credit[]|null
+     * @return array|null Array of {@see \SimplePie\Credit} objects
      */
     public function get_credits()
     {
@@ -423,7 +425,7 @@ class Enclosure
      * @param bool $convert Convert seconds into hh:mm:ss
      * @return string|int|null 'hh:mm:ss' string if `$convert` was specified, otherwise integer (or null if none found)
      */
-    public function get_duration(bool $convert = false)
+    public function get_duration($convert = false)
     {
         if ($this->duration !== null) {
             if ($convert) {
@@ -498,7 +500,7 @@ class Enclosure
      * @param int $key
      * @return string|null Hash as per `media:hash`, prefixed with "$algo:"
      */
-    public function get_hash(int $key = 0)
+    public function get_hash($key = 0)
     {
         $hashes = $this->get_hashes();
         if (isset($hashes[$key])) {
@@ -511,7 +513,7 @@ class Enclosure
     /**
      * Get all credits
      *
-     * @return string[]|null Array of strings, see {@see get_hash()}
+     * @return array|null Array of strings, see {@see get_hash()}
      */
     public function get_hashes()
     {
@@ -557,7 +559,7 @@ class Enclosure
      * @param int $key
      * @return string|null
      */
-    public function get_keyword(int $key = 0)
+    public function get_keyword($key = 0)
     {
         $keywords = $this->get_keywords();
         if (isset($keywords[$key])) {
@@ -570,7 +572,7 @@ class Enclosure
     /**
      * Get all keywords
      *
-     * @return string[]|null
+     * @return array|null Array of strings
      */
     public function get_keywords()
     {
@@ -584,7 +586,7 @@ class Enclosure
     /**
      * Get length
      *
-     * @return ?int Length in bytes
+     * @return float Length in bytes
      */
     public function get_length()
     {
@@ -645,7 +647,7 @@ class Enclosure
      * @param int $key
      * @return \SimplePie\Rating|null
      */
-    public function get_rating(int $key = 0)
+    public function get_rating($key = 0)
     {
         $ratings = $this->get_ratings();
         if (isset($ratings[$key])) {
@@ -658,7 +660,7 @@ class Enclosure
     /**
      * Get all ratings
      *
-     * @return Rating[]|null
+     * @return array|null Array of {@see \SimplePie\Rating} objects
      */
     public function get_ratings()
     {
@@ -675,7 +677,7 @@ class Enclosure
      * @param int $key
      * @return \SimplePie\Restriction|null
      */
-    public function get_restriction(int $key = 0)
+    public function get_restriction($key = 0)
     {
         $restrictions = $this->get_restrictions();
         if (isset($restrictions[$key])) {
@@ -688,7 +690,7 @@ class Enclosure
     /**
      * Get all restrictions
      *
-     * @return Restriction[]|null
+     * @return array|null Array of {@see \SimplePie\Restriction} objects
      */
     public function get_restrictions()
     {
@@ -734,7 +736,7 @@ class Enclosure
      * @param int $key
      * @return string|null Thumbnail URL
      */
-    public function get_thumbnail(int $key = 0)
+    public function get_thumbnail($key = 0)
     {
         $thumbnails = $this->get_thumbnails();
         if (isset($thumbnails[$key])) {
@@ -747,7 +749,7 @@ class Enclosure
     /**
      * Get all thumbnails
      *
-     * @return string[]|null Array of thumbnail URLs
+     * @return array|null Array of thumbnail URLs
      */
     public function get_thumbnails()
     {
@@ -806,7 +808,7 @@ class Enclosure
      *
      * @deprecated Use the second parameter to {@see embed} instead
      *
-     * @param array<string, mixed>|string $options See first parameter to {@see embed}
+     * @param array|string $options See first parameter to {@see embed}
      * @return string HTML string to output
      */
     public function native_embed($options = '')
@@ -855,11 +857,11 @@ class Enclosure
      * `width` and `height` set to `auto` will default to 480x270 video resolution.
      *
      * @todo If the dimensions for media:content are defined, use them when width/height are set to 'auto'.
-     * @param array<string, mixed>|string $options Comma-separated key:value list, or array
+     * @param array|string $options Comma-separated key:value list, or array
      * @param bool $native Use `<embed>`
      * @return string HTML string to output
      */
-    public function embed($options = '', bool $native = false)
+    public function embed($options = '', $native = false)
     {
         // Set up defaults
         $audio = '';
@@ -1042,9 +1044,9 @@ class Enclosure
      *
      * @see get_type()
      * @param bool $find_handler Internal use only, use {@see get_handler()} instead
-     * @return string|null MIME type
+     * @return string MIME type
      */
-    public function get_real_type(bool $find_handler = false)
+    public function get_real_type($find_handler = false)
     {
         // Mime-types by handler.
         $types_flash = ['application/x-shockwave-flash', 'application/futuresplash']; // Flash
@@ -1112,9 +1114,9 @@ class Enclosure
                     $type = 'audio/x-ms-wma';
                     break;
 
+                    // Video mime-types
                 case '3gp':
                 case '3gpp':
-                    // Video mime-types
                     $type = 'video/3gpp';
                     break;
 
@@ -1175,8 +1177,8 @@ class Enclosure
                     $type = 'video/x-ms-wvx';
                     break;
 
-                case 'spl':
                     // Flash mime-types
+                case 'spl':
                     $type = 'application/futuresplash';
                     break;
 
