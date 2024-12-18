@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie;
 
@@ -19,16 +13,13 @@ namespace SimplePie;
  * Used by {@see Item::get_author()} and {@see SimplePie::get_authors()}
  *
  * This class can be overloaded with {@see SimplePie::set_author_class()}
- *
- * @package SimplePie
- * @subpackage API
  */
 class Author
 {
     /**
      * Author's name
      *
-     * @var string
+     * @var ?string
      * @see get_name()
      */
     public $name;
@@ -36,7 +27,7 @@ class Author
     /**
      * Author's link
      *
-     * @var string
+     * @var ?string
      * @see get_link()
      */
     public $link;
@@ -44,20 +35,19 @@ class Author
     /**
      * Author's email address
      *
-     * @var string
+     * @var ?string
      * @see get_email()
      */
     public $email;
 
     /**
      * Constructor, used to input the data
-     *
-     * @param string $name
-     * @param string $link
-     * @param string $email
      */
-    public function __construct($name = null, $link = null, $email = null)
-    {
+    public function __construct(
+        ?string $name = null,
+        ?string $link = null,
+        ?string $email = null
+    ) {
         $this->name = $name;
         $this->link = $link;
         $this->email = $email;

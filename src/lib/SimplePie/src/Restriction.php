@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie;
 
@@ -19,16 +13,16 @@ namespace SimplePie;
  * Used by {@see \SimplePie\Enclosure::get_restriction()} and {@see \SimplePie\Enclosure::get_restrictions()}
  *
  * This class can be overloaded with {@see \SimplePie\SimplePie::set_restriction_class()}
- *
- * @package SimplePie
- * @subpackage API
  */
 class Restriction
 {
+    public const RELATIONSHIP_ALLOW = 'allow';
+    public const RELATIONSHIP_DENY = 'deny';
+
     /**
      * Relationship ('allow'/'deny')
      *
-     * @var string
+     * @var self::RELATIONSHIP_*|null
      * @see get_relationship()
      */
     public $relationship;
@@ -36,7 +30,7 @@ class Restriction
     /**
      * Type of restriction
      *
-     * @var string
+     * @var string|null
      * @see get_type()
      */
     public $type;
@@ -44,7 +38,7 @@ class Restriction
     /**
      * Restricted values
      *
-     * @var string
+     * @var string|null
      * @see get_value()
      */
     public $value;
@@ -54,8 +48,10 @@ class Restriction
      *
      * For documentation on all the parameters, see the corresponding
      * properties and their accessors
+     *
+     * @param ?self::RELATIONSHIP_* $relationship
      */
-    public function __construct($relationship = null, $type = null, $value = null)
+    public function __construct(?string $relationship = null, ?string $type = null, ?string $value = null)
     {
         $this->relationship = $relationship;
         $this->type = $type;
@@ -76,7 +72,7 @@ class Restriction
     /**
      * Get the relationship
      *
-     * @return string|null Either 'allow' or 'deny'
+     * @return ?self::RELATIONSHIP_*
      */
     public function get_relationship()
     {

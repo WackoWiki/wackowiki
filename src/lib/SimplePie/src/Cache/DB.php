@@ -1,21 +1,17 @@
 <?php
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
+
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 namespace SimplePie\Cache;
+
+use SimplePie\Item;
 
 /**
  * Base class for database-based caches
  *
- * @package SimplePie
- * @subpackage Caching
  * @deprecated since SimplePie 1.8.0, use implementation of "Psr\SimpleCache\CacheInterface" instead
  */
 abstract class DB implements Base
@@ -26,9 +22,9 @@ abstract class DB implements Base
      * Converts a given {@see SimplePie} object into data to be stored
      *
      * @param \SimplePie\SimplePie $data
-     * @return array First item is the serialized data for storage, second item is the unique ID for this item
+     * @return array{string, array<string, Item>} First item is the serialized data for storage, second item is the unique ID for this item
      */
-    protected static function prepare_simplepie_object_for_cache($data)
+    protected static function prepare_simplepie_object_for_cache(\SimplePie\SimplePie $data)
     {
         $items = $data->get_items();
         $items_by_id = [];
@@ -46,13 +42,13 @@ abstract class DB implements Base
             }
 
             if (isset($data->data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0])) {
-                $channel =& $data->data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0];
+                $channel = &$data->data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0];
             } elseif (isset($data->data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0])) {
-                $channel =& $data->data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0];
+                $channel = &$data->data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0];
             } elseif (isset($data->data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0])) {
-                $channel =& $data->data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0];
+                $channel = &$data->data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0];
             } elseif (isset($data->data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0]['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['channel'][0])) {
-                $channel =& $data->data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0]['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['channel'][0];
+                $channel = &$data->data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0]['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['channel'][0];
             } else {
                 $channel = null;
             }

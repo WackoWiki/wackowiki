@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie\Cache;
 
@@ -22,8 +16,6 @@ namespace SimplePie\Cache;
  * connect to the `mydb` database on `localhost` on port 3306, with the user
  * `root` and the password `password`. All tables will be prefixed with `sp_`
  *
- * @package SimplePie
- * @subpackage Caching
  * @deprecated since SimplePie 1.8.0, use implementation of "Psr\SimpleCache\CacheInterface" instead
  */
 class MySQL extends DB
@@ -31,14 +23,14 @@ class MySQL extends DB
     /**
      * PDO instance
      *
-     * @var \PDO
+     * @var \PDO|null
      */
     protected $mysql;
 
     /**
      * Options
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $options;
 
@@ -56,7 +48,7 @@ class MySQL extends DB
      * @param string $name Unique ID for the cache
      * @param Base::TYPE_FEED|Base::TYPE_IMAGE $type Either TYPE_FEED for SimplePie data, or TYPE_IMAGE for image data
      */
-    public function __construct($location, $name, $type)
+    public function __construct(string $location, string $name, $type)
     {
         $this->options = [
             'user' => null,
@@ -116,7 +108,7 @@ class MySQL extends DB
     /**
      * Save data to the cache
      *
-     * @param array|\SimplePie\SimplePie $data Data to store in the cache. If passed a SimplePie object, only cache the $data property
+     * @param array<string>|\SimplePie\SimplePie $data Data to store in the cache. If passed a SimplePie object, only cache the $data property
      * @return bool Successfulness
      */
     public function save($data)
@@ -237,7 +229,7 @@ class MySQL extends DB
     /**
      * Retrieve the data saved to the cache
      *
-     * @return array Data for SimplePie::$data
+     * @return array<string>|false Data for SimplePie::$data
      */
     public function load()
     {
@@ -258,13 +250,13 @@ class MySQL extends DB
 
             if ($items !== 0) {
                 if (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0];
                 } elseif (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0];
                 } elseif (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0];
                 } elseif (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0];
                 } else {
                     $feed = null;
                 }
@@ -294,7 +286,7 @@ class MySQL extends DB
     /**
      * Retrieve the last modified time for the cache
      *
-     * @return int Timestamp
+     * @return int|false Timestamp
      */
     public function mtime()
     {

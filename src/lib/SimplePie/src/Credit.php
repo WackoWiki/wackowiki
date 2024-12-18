@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie;
 
@@ -19,16 +13,13 @@ namespace SimplePie;
  * Used by {@see \SimplePie\Enclosure::get_credit()} and {@see \SimplePie\Enclosure::get_credits()}
  *
  * This class can be overloaded with {@see \SimplePie\SimplePie::set_credit_class()}
- *
- * @package SimplePie
- * @subpackage API
  */
 class Credit
 {
     /**
      * Credited role
      *
-     * @var string
+     * @var ?string
      * @see get_role()
      */
     public $role;
@@ -36,7 +27,7 @@ class Credit
     /**
      * Organizational scheme
      *
-     * @var string
+     * @var ?string
      * @see get_scheme()
      */
     public $scheme;
@@ -44,7 +35,7 @@ class Credit
     /**
      * Credited name
      *
-     * @var string
+     * @var ?string
      * @see get_name()
      */
     public $name;
@@ -55,8 +46,11 @@ class Credit
      * For documentation on all the parameters, see the corresponding
      * properties and their accessors
      */
-    public function __construct($role = null, $scheme = null, $name = null)
-    {
+    public function __construct(
+        ?string $role = null,
+        ?string $scheme = null,
+        ?string $name = null
+    ) {
         $this->role = $role;
         $this->scheme = $scheme;
         $this->name = $name;

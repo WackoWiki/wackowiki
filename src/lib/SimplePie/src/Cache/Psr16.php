@@ -1,26 +1,19 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2022 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie\Cache;
 
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
+use Throwable;
 
 /**
  * Caches data into a PSR-16 cache implementation
  *
- * @package SimplePie
- * @subpackage Caching
  * @internal
  */
 final class Psr16 implements DataCache
@@ -55,14 +48,14 @@ final class Psr16 implements DataCache
      *
      * @return array|mixed The value of the item from the cache, or $default in case of cache miss.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException&Throwable
      *   MUST be thrown if the $key string is not a legal value.
      */
     public function get_data(string $key, $default = null)
     {
         $data = $this->cache->get($key, $default);
 
-        if (! is_array($data) || $data === $default) {
+        if (!is_array($data) || $data === $default) {
             return $default;
         }
 
@@ -78,14 +71,14 @@ final class Psr16 implements DataCache
      * </code>
      *
      * @param string   $key   The key of the item to store.
-     * @param array    $value The value of the item to store, must be serializable.
+     * @param array<mixed> $value The value of the item to store, must be serializable.
      * @param null|int $ttl   Optional. The TTL value of this item. If no value is sent and
      *                                      the driver supports TTL then the library may set a default value
      *                                      for it or let the driver take care of that.
      *
      * @return bool True on success and false on failure.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException&Throwable
      *   MUST be thrown if the $key string is not a legal value.
      */
     public function set_data(string $key, array $value, ?int $ttl = null): bool
@@ -105,7 +98,7 @@ final class Psr16 implements DataCache
      *
      * @return bool True if the item was successfully removed. False if there was an error.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException&Throwable
      *   MUST be thrown if the $key string is not a legal value.
      */
     public function delete_data(string $key): bool

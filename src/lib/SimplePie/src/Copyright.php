@@ -1,15 +1,9 @@
 <?php
 
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
 declare(strict_types=1);
-/**
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
 
 namespace SimplePie;
 
@@ -19,16 +13,13 @@ namespace SimplePie;
  * Used by {@see \SimplePie\Enclosure::get_copyright()}
  *
  * This class can be overloaded with {@see \SimplePie\SimplePie::set_copyright_class()}
- *
- * @package SimplePie
- * @subpackage API
  */
 class Copyright
 {
     /**
      * Copyright URL
      *
-     * @var string
+     * @var ?string
      * @see get_url()
      */
     public $url;
@@ -36,7 +27,7 @@ class Copyright
     /**
      * Attribution
      *
-     * @var string
+     * @var ?string
      * @see get_attribution()
      */
     public $label;
@@ -47,8 +38,10 @@ class Copyright
      * For documentation on all the parameters, see the corresponding
      * properties and their accessors
      */
-    public function __construct($url = null, $label = null)
-    {
+    public function __construct(
+        ?string $url = null,
+        ?string $label = null
+    ) {
         $this->url = $url;
         $this->label = $label;
     }
