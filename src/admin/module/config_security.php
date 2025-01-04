@@ -426,7 +426,7 @@ function admin_config_security($engine, $module)
 					<small><?php echo $engine->_t('PwdMinCharsInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="10" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>">
+					<input type="number" min="8" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -438,7 +438,7 @@ function admin_config_security($engine, $module)
 					<small><?php echo $engine->_t('AdminPwdMinCharsInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="15" maxlength="3" id="pwd_admin_min_chars" name="pwd_admin_min_chars" value="<?php echo (int) $engine->db->pwd_admin_min_chars;?>">
+					<input type="number" min="8" maxlength="3" id="pwd_admin_min_chars" name="pwd_admin_min_chars" value="<?php echo (int) $engine->db->pwd_admin_min_chars;?>">
 				</td>
 			</tr>
 			<tr class="lined">
