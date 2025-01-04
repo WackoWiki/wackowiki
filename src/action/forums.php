@@ -134,9 +134,9 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 					'FROM ' . $prefix . 'page a ' .
 						'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
 						'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) ' .
-					'WHERE b.tag LIKE ' . $this->db->q($forum['tag'] . '/%') . ' ' .
-						'OR a.tag LIKE ' . $this->db->q($forum['tag'] . '/%') . ' ' .
+					'WHERE a.tag LIKE ' . $this->db->q($forum['tag'] . '/%') . ' ' .
 						'AND a.deleted <> 1 ' .
+						'AND b.deleted <> 1 ' .
 					'ORDER BY a.created DESC ', true);
 
 				$comment = null;
