@@ -5,7 +5,9 @@ $lang_all = [
    common strings
 */
 'LanguageArray'	=> [
+	'ar' => 'العربية',
 	'bg' => 'Български',
+	'cs' => 'Čeština',
 	'da' => 'Dansk',
 	'de' => 'Deutsch',
 	'el' => 'Ελληνικά',
@@ -13,6 +15,7 @@ $lang_all = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fa' => 'فارسی',
+	'fi' => 'Suomi',
 	'fr' => 'Français',
 	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
@@ -20,10 +23,14 @@ $lang_all = [
 	'ja' => '日本語',
 	'ko' => '한국어',
 	'nl' => 'Nederlands',
+	'no' => 'Norsk',
 	'pl' => 'Polski',
 	'pt' => 'Português',
+	'pt-br' => 'Português Brasileiro',
+	'ro' => 'Romainiană',
 	'ru' => 'Русский',
-    'ta' => 'தமிழ்',
+	'sv' => 'Svenska',
+   'ta' => 'தமிழ்',
 	'zh' => '简体中文',
 	'zh-tw' => '正體中文',
 ],
