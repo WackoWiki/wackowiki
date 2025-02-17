@@ -1211,6 +1211,7 @@ $wacko_translation = [
 		'ja' => 'Japanese',
 		'ko' => 'Korean',
 		'nl' => 'Dutch',
+		'no' => 'Norwegian',
 		'pl' => 'Polish',
 		'pt' => 'Portuguese',
 		'pt-br' => 'Portuguese-Brazil',
