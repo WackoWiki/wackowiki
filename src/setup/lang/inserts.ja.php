@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'ja',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**あなたの ((WackoWiki:Doc/English WackoWiki)) サイトへようこそ！**' . "\n\n" .
 			'Click after you have ((/ログイン logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
-			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
-			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/検索 検索)).',
+			'ドキュメントは WackoWiki:Doc/Englishにあります。' . "\n" .
+			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/検索 検索)).' . "\n\n",
 	'root_page'			=> 'ホームページ',
 
 	'category_page'		=> 'カテゴリー',

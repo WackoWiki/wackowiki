@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'da',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Velkommen til din ((WackoWiki:Doc/English WackoWiki)) installation!**' . "\n\n" .
 			'Klik på "Rediger siden" linket nederst for at rette denne side.' . "\n\n" .
 			'Dokumentation finder du på WackoWiki:Doc/English.' . "\n" .
-			'Særlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Søgning Søgning)).',
+			'Særlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Søgning Søgning)).' . "\n\n",
 	'root_page'			=> 'Startside',
 
 	'category_page'		=> 'Kategori',
@@ -19,7 +19,7 @@ $insert = [
 	'privacy_page'		=> 'Privacy',
 
 	'registration_page'	=> 'Registrering',
-	'password_page'		=> 'Password',
+	'password_page'		=> 'Adgangskode',
 	'search_page'		=> 'Søgning',
 	'login_page'		=> 'Login',
 	'account_page'		=> 'Indstillinger',
