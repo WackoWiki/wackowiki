@@ -178,7 +178,7 @@ $wacko_translation = [
 
 	'PrivacyPolicy'				=> 'Πολιτική προσωπικών δεδομένων',
 	'TermsOfUse'				=> 'Βασικοί Όροι',
-	'AcceptTermsOfUse'			=> ' I accept',
+	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of Service of the site.',
 
 	'ShowComments'				=> 'Εμφάνιση σχόλια/φόρμες',
 	'HideComments'				=> 'Απόκρυψη σχόλια/φόρμες',
@@ -547,7 +547,7 @@ $wacko_translation = [
 	'AccountDeleteVerify'		=> 'Εισάγετε το όνομα χρήστη %1 για να επαληθεύσετε τη διαγραφή. Μόλις υποβληθεί, θα σας ζητηθεί να επιβεβαιώσετε τον κωδικό πρόσβασής σας.',
 
 	'MarkRead'					=> 'Σημειώστε όλα τα ως αναγνωσμένα',
-	'CurrentTime'				=> 'It is currently',
+	'CurrentTime'				=> 'Αυτή τη στιγμή είναι',
 	'Created'					=> 'δημιουργημένο',
 	'Modified'					=> 'τροποποιημένο',
 
@@ -1300,7 +1300,7 @@ $wacko_translation = [
 	'LogUserPasswordReminded'	=> 'Ο χρήστης ##%1## ζήτησε τη διαδικασία ανάκτησης κωδικού πρόσβασης στη διεύθυνση ##%2##',
 	'LogUserPasswordRecovered'	=> 'Ο χρήστης ##%1## ανακτούσε επιτυχώς τον ξεχασμένο κωδικό πρόσβασης',
 	'LogUserPasswordChanged'	=> 'Ο χρήστης ##%1## ενημέρωσε επιτυχώς (άλλαξε) τον κωδικό πρόσβασης',
-	'LogUserPasswordMismatch'	=> '!!User ##%1## απέτυχε να αλλάξει τον κωδικό πρόσβασης: ο τρέχων κωδικός πρόσβασης δεν ταιριάζει!!',
+	'LogUserPasswordMismatch'	=> '!!Χρήστης ##%1## απέτυχε να αλλάξει τον κωδικό πρόσβασης: ο τρέχων κωδικός δεν ταιριάζει!!',
 	'LogUserIPSwitched'			=> 'Μη εξουσιοδοτημένη αλλαγή διεύθυνσης IP του χρήστη %1 από %2 σε %3',
 	'LogPageImported'			=> 'Εισαγόμενη σελίδα [[/%1]]',
 	'LogSaveNoRights'			=> 'Δεν υπάρχουν κατάλληλα δικαιώματα αποθήκευσης της σελίδας [[/%1]]',

@@ -499,8 +499,10 @@ $ap_translation = [
 	'LoginNoticeInfo'				=> 'Εμφανίζει μια ειδοποίηση σύνδεσης.',
 
 	'RewriteMode'					=> 'Χρησιμοποιήστε <code>mod_rewrite</code>:',
-	'RewriteModeInfo'				=> 'If your web server supports this feature, enable to "beautify" the page URLs.<br>
-										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
+	'RewriteModeInfo'				=> 'Εάν ο διακομιστής ιστού σας υποστηρίζει αυτή τη λειτουργία, ενεργοποιήστε την για να "ομορφύνετε" τις διευθύνσεις URL της σελίδας.<br>
+										<span class="cite">Το
+ τιμή ενδέχεται να αντικατασταθεί από την κλάση Settings κατά την εκτέλεση, 
+ανεξάρτητα από το αν είναι απενεργοποιημένη, εάν η HTTP_MOD_REWRITE είναι ενεργοποιημένη.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Παράμετροι υπεύθυνοι για τον έλεγχο πρόσβασης και τα δικαιώματα.',
@@ -530,7 +532,7 @@ $ap_translation = [
 	'OwnersRemoveCommentsInfo'	=> 'Επιτρέψτε στους ιδιοκτήτες σελίδων να μετριάσουν σχόλια στις σελίδες τους.',
 	'OwnersEditCategories'		=> 'Οι ιδιοκτήτες μπορούν να επεξεργαστούν κατηγορίες σελίδων:',
 	'OwnersEditCategoriesInfo'	=> 'Επιτρέψτε στους ιδιοκτήτες να τροποποιήσουν τη λίστα κατηγοριών σελίδων του ιστότοπού σας (προσθέστε λέξεις, διαγράψτε λέξεις), αντιστοιχίστε σε μια σελίδα.',
-	'TermHumanModeration'		=> 'Human moderation expiration:',
+	'TermHumanModeration'		=> 'Λήξη ανθρώπινης μετριοπάθειας:',
 	'TermHumanModerationInfo'	=> 'Οι επόπτες μπορούν να επεξεργαστούν σχόλια μόνο εάν δημιουργήθηκαν πριν από αυτόν τον αριθμό ημερών (αυτός ο περιορισμός δεν ισχύει για το τελευταίο σχόλιο στο θέμα).',
 
 	'UserCanDeleteAccount'		=> 'Επιτρέψτε στους χρήστες να διαγράψουν τους λογαριασμούς τους',
@@ -574,13 +576,13 @@ $ap_translation = [
 
 	'TlsSection'				=> 'Ρυθμίσεις TLS',
 	'TlsConnection'				=> 'Σύνδεση TLS:',
-	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS certificate on the server, otherwise you will lose access to the admin panel!</span><br>It also determines if the the Cookie Secure Flag is set: The <code>secure</code> flag specifies whether cookies should only be sent over secure connections.',
+	'TlsConnectionInfo'			=> 'Χρησιμοποιήστε σύνδεση με ασφάλεια TLS. <span class="cite">Ενεργοποιήστε το απαιτούμενο προεγκατεστημένο πιστοποιητικό TLS στον διακομιστή, διαφορετικά θα χάσετε την πρόσβαση στον πίνακα διαχείρισης!</span><br>Επίσης, καθορίζει εάν έχει οριστεί η σημαία ασφαλούς cookie: Η σημαία <code>secure</code> καθορίζει εάν τα cookie θα πρέπει να αποστέλλονται μόνο μέσω ασφαλών συνδέσεων.',
 	'TlsImplicit'				=> 'Mandatory TLS:',
 	'TlsImplicitInfo'			=> 'Αναγκαστική επανασύνδεση του πελάτη από HTTP σε HTTPS. Με την επιλογή απενεργοποιημένη, ο πελάτης μπορεί να περιηγηθεί στον ιστότοπο μέσω ενός ανοικτού καναλιού HTTP.',
 
 	'HttpSecurityHeaders'		=> 'Κεφαλίδες Ασφαλείας HTTP',
 	'EnableSecurityHeaders'		=> 'Ενεργοποίηση κεφαλίδων ασφαλείας:',
-	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk!',
+	'EnableSecurityHeadersinfo'	=> 'Ρυθμίστε κεφαλίδες ασφαλείας (κάθισμα πλαισίου, clickjacking/XSS/CSRF προστασία). <br>Το CSP μπορεί να προκαλέσει προβλήματα σε ορισμένες περιπτώσεις (π.χ. κατά την ανάπτυξη) ή κατά τη χρήση προσθηκών που βασίζονται σε πόρους που φιλοξενούνται εξωτερικά, όπως εικόνες ή σενάρια. <br>Η απενεργοποίηση της Πολιτικής Ασφάλειας Περιεχομένου αποτελεί κίνδυνο για την ασφάλεια!',
 	'Csp'						=> 'Content-Security-Policy (CSP):',
 	'CspInfo'					=> 'Η ρύθμιση παραμέτρων CSP περιλαμβάνει την απόφαση ποιες πολιτικές θέλετε να επιβάλετε, και στη συνέχεια τη ρύθμιση παραμέτρων τους και τη χρήση Πολιτικής Περιεχομένου για να καθορίσει την πολιτική σας.',
 	'PolicyModes'	=> [
@@ -636,11 +638,11 @@ $ap_translation = [
 	'SessionLength'				=> 'Session cookie expiration:',
 	'SessionLengthInfo'			=> 'Η διάρκεια ζωής του cookie συνεδρίας χρήστη από προεπιλογή (σε ημέρες).',
 	'CommentDelay'				=> 'Αντιπλημμυρικές πλημμύρες για σχόλια:',
-	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in seconds).',
+	'CommentDelayInfo'			=> 'Η ελάχιστη καθυστέρηση μεταξύ της δημοσίευσης νέων σχολίων χρήστη (σε δευτερόλεπτα).',
 	'IntercomDelay'				=> 'Αντιπλημμύρας για προσωπικές επικοινωνίες:',
-	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in seconds).',
+	'IntercomDelayInfo'			=> 'Η ελάχιστη καθυστέρηση μεταξύ της αποστολής ιδιωτικών μηνυμάτων (σε δευτερόλεπτα).',
 	'RegistrationDelay'			=> 'Χρονικό όριο για την καταχώριση:',
-	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
+	'RegistrationDelayInfo'		=> 'Το ελάχιστο χρονικό όριο μεταξύ υποβολής φόρμας εγγραφής για να αποθαρρύνει τα ρομπότ εγγραφής (σε δευτερόλεπτα).',
 
 	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Ομάδα παραμέτρων που είναι υπεύθυνες για τη ρύθμιση της τοποθεσίας. Μην τις αλλάζετε εκτός αν είστε σίγουροι για τις ενέργειές τους.',
@@ -651,14 +653,14 @@ $ap_translation = [
 	'TypograficaInfo'			=> 'Η απενεργοποίηση αυτής της επιλογής θα επιταχύνει τις διαδικασίες προσθήκης σχολίων και αποθήκευσης σελίδων.',
 	'Paragrafica'				=> 'Σημάνσεις Παραγραφίκας:',
 	'ParagraficaInfo'			=> 'Παρόμοια με την προηγούμενη επιλογή, αλλά θα οδηγήσει σε αποσύνδεση του μη λειτουργικού αυτόματου πίνακα περιεχομένων (<code>{{toc}}</code>).',
-	'AllowRawhtml'				=> 'Global HTML support:',
+	'AllowRawhtml'				=> 'Γενική υποστήριξη HTML:',
 	'AllowRawhtmlInfo'			=> 'Αυτή η επιλογή είναι δυνητικά μη ασφαλής για μια ανοιχτή τοποθεσία.',
 	'SafeHtml'					=> 'Φιλτράρισμα HTML:',
 	'SafeHtmlInfo'				=> 'Αποτρέπει την αποθήκευση επικίνδυνων HTML αντικειμένων. Η απενεργοποίηση του φίλτρου σε μια ανοιχτή τοποθεσία με υποστήριξη HTML είναι <span class="underline">εξαιρετικά</span> ανεπιθύμητη!',
 
 	'WackoFormatterSection'		=> 'Μορφή Κειμένου Wiki (Wacko Formatter)',
-	'X11colors'					=> 'X11 colors usage:',
-	'X11colorsInfo'				=> 'Extends the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Disabling this option speeds up the processes of adding comments and saving pages.',
+	'X11colors'					=> 'Χρήση χρωμάτων X11:',
+	'X11colorsInfo'				=> 'Επεκτείνει τα διαθέσιμα χρώματα για <code>??(color) φόντο??</code> και <code>!!(color) κείμενο!!</code>Η απενεργοποίηση αυτής της επιλογής επιταχύνει τις διαδικασίες προσθήκης σχολίων και αποθήκευσης σελίδων.',
 	'WikiLinks'					=> 'Απενεργοποίηση συνδέσμων wiki:',
 	'WikiLinksInfo'				=> 'Απενεργοποιεί τη σύνδεση για <code>CamelCaseWords</code>: Οι λέξεις CamelCase δεν θα συνδέονται πλέον απευθείας με μια νέα σελίδα. Αυτό είναι χρήσιμο όταν εργάζεστε σε διαφορετικούς χώρους ονομάτων/συστοιχίες. Από προεπιλογή είναι απενεργοποιημένο.',
 	'BracketsLinks'				=> 'Disable bracketed links:',
@@ -700,10 +702,10 @@ $ap_translation = [
 	'PagesSettingsUpdated'		=> 'Ενημερωμένες βασικές σελίδες ρυθμίσεων',
 
 	'ListCount'					=> 'Αριθμός στοιχείων ανά λίστα:',
-	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+	'ListCountInfo'				=> 'Αριθμός στοιχείων που εμφανίζονται σε κάθε λίστα για επισκέπτη ή ως προεπιλεγμένη τιμή για νέους χρήστες.',
 
 	'ForumSection'				=> 'Επιλογές Φόρουμ',
-	'ForumCluster'				=> 'Cluster Forum:',
+	'ForumCluster'				=> 'Φόρουμ συστάδων:',
 	'ForumClusterInfo'			=> 'Σύμπλεγμα Root για το φόρουμ (δράση %1).',
 	'ForumTopics'				=> 'Αριθμός θεμάτων ανά σελίδα:',
 	'ForumTopicsInfo'			=> 'Αριθμός θεμάτων που εμφανίζονται σε κάθε σελίδα της λίστας στις ενότητες του φόρουμ (ενέργεια %1).',
@@ -753,7 +755,7 @@ $ap_translation = [
 	'ChangesPage'				=> 'Πρόσφατες αλλαγές:',
 	'ChangesPageInfo'			=> 'Σελίδα με λίστα με τις τελευταίες τροποποιημένες σελίδες (δράση %1).',
 	'CommentsPage'				=> 'Πρόσφατα σχόλια:',
-	'CommentsPageInfo'			=> 'Page with a list of recent comments on the page (action %1).',
+	'CommentsPageInfo'			=> 'Σελίδα με λίστα πρόσφατων σχολίων στη σελίδα (δράση %1).',
 	'RemovalsPage'				=> 'Διαγραμμένες σελίδες:',
 	'RemovalsPageInfo'			=> 'Σελίδα με μια λίστα από πρόσφατα διαγραμμένες σελίδες (δράση %1).',
 	'WantedPage'				=> 'Καταζητούμενες σελίδες:',
@@ -829,7 +831,7 @@ $ap_translation = [
 	'XmlSiteMapView'			=> 'Εμφάνιση χάρτη ιστοσελίδας σε ένα νέο παράθυρο.',
 
 	'ReparseBody'				=> 'Ανάλυση όλων των σελίδων',
-	'ReparseBodyInfo'			=> 'Empties <code>body_r</code> στον πίνακα σελίδας, έτσι ώστε κάθε σελίδα να εμφανίζεται ξανά στην επόμενη προβολή σελίδας. Αυτό μπορεί να είναι χρήσιμο αν τροποποιήσετε τον μορφοποιητή ή αλλάξετε τον τομέα του wiki.',
+	'ReparseBodyInfo'			=> 'Κενά <code>body_r</code> στον πίνακα σελίδων, έτσι ώστε κάθε σελίδα να εμφανίζεται ξανά στην επόμενη προβολή σελίδας. Αυτό μπορεί να είναι χρήσιμο αν τροποποιήσετε τον μορφοποιητή ή αλλάξετε τον τομέα του wiki σας.',
 	'PreparsedBodyPurged'		=> 'Κενό πεδίο <code>body_r</code> στον πίνακα σελίδας.',
 
 	'WikiLinksResync'			=> 'Wiki-links',
@@ -927,19 +929,19 @@ $ap_translation = [
 	'MaxImageWidthInfo'			=> 'Διαφορετικά, δημιουργείται μια μικρογραφία σε μικρότερη κλίμακα.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
-									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
-									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+	'DeletedObjectsInfo'		=> 'Λίστα σελίδων, αναθεωρήσεων και αρχείων που καταργήθηκαν.
+ Καταργήστε ή επαναφέρετε τις σελίδες, τις αναθεωρήσεις ή τα αρχεία από τη βάση δεδομένων κάνοντας κλικ στον σύνδεσμο <em>Κατάργηση</em>
+ ή <em>Επαναφορά</em> στην αντίστοιχη σειρά. (Προσέξτε, δεν απαιτείται επιβεβαίωση διαγραφής!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Λέξεις που θα λογοκρίνονται αυτόματα στο Wiki σας.',
 	'FilterSettingsUpdated'		=> 'Ενημέρωση ρυθμίσεων φίλτρου spam',
 
 	'WordCensoringSection'		=> 'Word Censoring',
-	'SPAMFilter'				=> 'Spam filter:',
-	'SPAMFilterInfo'			=> 'Enabling Spam Filter',
+	'SPAMFilter'				=> 'Φίλτρο ανεπιθύμητων:',
+	'SPAMFilterInfo'			=> 'Ενεργοποίηση Φίλτρου Ανεπιθύμητων',
 	'WordList'					=> 'Λίστα λέξεων:',
-	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
+	'WordListInfo'				=> 'Λέξη ή φράση <code>fragment</code> που θα μπει στη μαύρη λίστα (μία ανά γραμμή)',
 
 	// Log module
 	'LogFilterTip'				=> 'Φιλτράρισμα συμβάντων ανά κριτήρια:',
@@ -1104,7 +1106,7 @@ $ap_translation = [
 	'LogBackupArchived'			=> 'Το αντίγραφο ασφαλείας ##%1## αρχειοθετήθηκε.',
 
 	// User module
-	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',
+	'UsersInfo'					=> 'Εδώ μπορείτε να αλλάξετε τις πληροφορίες των χρηστών σας και ορισμένες συγκεκριμένες επιλογές.',
 
 	'UsersAdded'				=> 'Ο χρήστης προστέθηκε',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
@@ -1220,7 +1222,7 @@ $ap_translation = [
 	'TableOk'					=> 'Ο πίνακας %1 είναι εντάξει.',
 	'TableNotOk'				=> 'Ο πίνακας %1 δεν είναι εντάξει. Αναφέρει το ακόλουθο σφάλμα: %2. Αυτό το σενάριο θα προσπαθήσει να επισκευάσει αυτόν τον πίνακα&hellip;',
 	'TableRepaired'				=> 'Επιτυχής επισκευή του πίνακα %1.',
-	'TableRepairFailed'			=> 'Failed to repair the %1 table. <br>Error: %2',
+	'TableRepairFailed'			=> 'Απέτυχε η επισκευή του πίνακα %1. <br>Σφάλμα: %2',
 	'TableAlreadyOptimized'		=> 'Ο πίνακας %1 είναι ήδη βελτιστοποιημένος.',
 	'TableOptimized'			=> 'Ο πίνακας %1 βελτιστοποιήθηκε επιτυχώς.',
 	'TableOptimizeFailed'		=> 'Αποτυχία βελτιστοποίησης του πίνακα %1 . <br>Σφάλμα: %2',
@@ -1242,12 +1244,12 @@ $ap_translation = [
 	'Solve'						=> 'Λύση',
 
 	// Bad Behaviour module
-	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+	'BbInfo'					=> 'Ανιχνεύει και αποκλείει την ανεπιθύμητη πρόσβαση στο διαδίκτυο, αρνείται την αυτοματοποιημένη πρόσβαση σε spambots.<br>Για περισσότερες πληροφορίες, παρακαλώ επισκεφθείτε την αρχική σελίδα %1.',
 	'BbEnable'					=> 'Ενεργοποίηση Λάθους Συμπεριφορά:',
 	'BbEnableInfo'				=> 'Όλες οι άλλες ρυθμίσεις μπορούν να αλλάξουν στον φάκελο ρυθμίσεων %1.',
 	'BbStats'					=> 'Η κακή συμπεριφορά έχει αποκλείσει τις προσπάθειες πρόσβασης %1 τις τελευταίες 7 ημέρες.',
 
-	'BbSummary'					=> 'Summary',
+	'BbSummary'					=> 'Περίληψη',
 	'BbLog'						=> 'Καταγραφή',
 	'BbSettings'				=> 'Ρυθμίσεις',
 	'BbWhitelist'				=> 'Λευκή Λίστα',
