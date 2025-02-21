@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'el',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Καλώς ήλθατε στο ((WackoWiki:Doc/English WackoWiki)) site σας!**' . "\n\n" .
 			'Πατήστε στον σύνδεμο "Επεξεργασία Σελίδας" στο κάτω μέρος της σελίδας για να ξεκινήσετε.' . "\n\n" .
 			'Η τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.' . "\n" .
-			'Χρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Αναζήτηση Αναζήτηση)).',
+			'Χρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Αναζήτηση Αναζήτηση)).' . "\n\n",
 	'root_page'			=> 'Αρχική σελίδα',
 
 	'category_page'		=> 'Κατηγορία',

@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'ΕυρετήριοΣελίδων',
 
 	'random_page'		=> 'ΤυχαίαΣελίδα',
-	#'help_page'			=> 'Βοήθεια',
+	#'help_page'			=> 'Help',
 	#'terms_page'		=> 'Terms',
-	#'privacy_page'		=> 'Ιδιωτικότητα',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',
@@ -43,7 +43,7 @@ $lang = [
    Generic Page Text
 */
 'TitleInstallation'				=> 'Εγκατάσταση WackoWiki',
-'TitleUpdate'					=> 'WackoWiki Update',
+'TitleUpdate'					=> 'Ενημέρωση WackoWiki',
 'Continue'						=> 'Συνέχεια',
 'Back'							=> 'Επιστροφή',
 'Recommended'					=> 'Συνιστάται',
@@ -121,10 +121,10 @@ $lang = [
 'config-database'				=> 'Ρυθμίσεις Βάσης',
 'DbDriver'						=> 'Οδηγός',
 'DbDriverDesc'					=> 'Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε.',
-'DbSqlMode'						=> 'SQL mode',
-'DbSqlModeDesc'					=> 'The SQL mode you want use.',
-'DbVendor'						=> 'Vendor',
-'DbVendorDesc'					=> 'The database vendor you use.',
+'DbSqlMode'						=> 'Λειτουργία SQL',
+'DbSqlModeDesc'					=> 'Η λειτουργία SQL που θέλετε να χρησιμοποιήσετε.',
+'DbVendor'						=> 'Προμηθευτής',
+'DbVendorDesc'					=> 'Ο προμηθευτής βάσης δεδομένων που χρησιμοποιείτε.',
 'DbCharset'						=> 'Κωδικοποίηση χαρακτήρων',
 'DbCharsetDesc'					=> 'Η βάση κωδικοποίησης χαρακτήρων που θέλετε να χρησιμοποιήσετε.',
 'DbEngine'						=> 'Μηχανή',

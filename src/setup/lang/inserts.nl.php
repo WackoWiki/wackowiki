@@ -3,11 +3,16 @@
 $insert = [
 	'lang'				=> 'nl',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right\n**' .
-			'Welkom op uw ((WackoWiki:Doc/English WackoWiki)) site!**' . "\n\n" .
-			'Klik nadat je bent ingelogd op de "Bewerk deze pagina" link onderaan om te beginnen.' . "\n\n" .
-			'Documentatie is te vinden op WackoWiki:Doc/English.' . "\n" .
-			'Nuttige pagina\'s: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Zoeken Zoeken)).',
+	'home_page_body'		=> 'file:/wacko_logo.png?right\n**' . "\n" .
+			'
+
+' . "\n\n" .
+			'
+
+' . "\n\n" .
+			'
+' . "\n" .
+			'Handige pagina\'s: ((WackoWiki:Doc/English/Formatting formatteren)), ((/Search Search)).' . "\n\n",
 	'root_page'			=> 'Startpagina',
 
 	'category_page'		=> 'Categorie',
@@ -31,6 +36,6 @@ $insert = [
 
 	'changes_page_bm'	=> 'Wijzigingen',
 	'comments_page_bm'	=> 'Opmerkingen',
-	'index_page_bm'		=> 'Index',
+	'index_page_bm'		=> 'Indexeren',
 	'random_page_bm'	=> 'Willekeurig',
 ];
