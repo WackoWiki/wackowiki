@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'pl',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Witaj na swojej stronie ((WackoWiki:Doc/English WackoWiki))!**' . "\n\n" .
 			'Klinkij na link "Edytuj stronę" na dole by rozpocząć.' . "\n\n" .
 			'Dokumentacja dostępna jest w WackoWiki:Doc/English.' . "\n" .
-			'Przydatne strony: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Szukaj Szukaj)).',
+			'Przydatne strony: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Szukaj Szukaj)).' . "\n\n",
 	'root_page'			=> 'Strona startowa',
 
 	'category_page'		=> 'Kategoria',
@@ -21,7 +21,7 @@ $insert = [
 	'registration_page'	=> 'Rejestracja',
 	'password_page'		=> 'Hasło',
 	'search_page'		=> 'Szukaj',
-	'login_page'		=> 'Login',
+	'login_page'		=> 'Zaloguj się',
 	'account_page'		=> 'Ustawienia',
 
 	'changes_page'		=> 'Ostatnie Zmiany',
