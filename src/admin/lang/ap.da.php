@@ -260,7 +260,7 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> 'Opdaterede grundlæggende indstillinger',
 	'LogBasicSettingsUpdated'	=> 'Opdaterede grundlæggende indstillinger',
 
-	'SiteName'					=> 'Site name:',
+	'SiteName'					=> 'Site navn:',
 	'SiteNameInfo'				=> 'Titlen på dette site. Vises på browsertitel, tema header, e-mail notifikation, etc.',
 	'SiteDesc'					=> 'Site Description:',
 	'SiteDescInfo'				=> 'Supplement til titlen på det websted, der vises i siderne header. Forklarer, med et par ord, hvad dette websted handler om.',
@@ -295,14 +295,14 @@ $ap_translation = [
 	'TocPanel'					=> 'Tabel med indholdspanel:',
 	'TocPanelInfo'				=> 'Standard visningstabel for indholdspanel på en side (kan kræve understøttelse i skabelonerne).',
 	'SectionsPanel'				=> 'Sektioner panel:',
-	'SectionsPanelInfo'			=> 'By default display the panel of adjacent pages (requires support in the templates).',
+	'SectionsPanelInfo'			=> 'Vis som standard panelet af tilstødende sider (kræver understøttelse i skabelonerne).',
 	'DisplayingSections'		=> 'Viser sektioner:',
 	'DisplayingSectionsInfo'	=> 'Når de tidligere indstillinger er indstillet, om kun at vise undersider af side (<em>lavere</em>), kun nabo (<em>top</em>), begge eller andre (<em>træ</em>).',
 	'MenuItems'					=> 'Menupunkter:',
 	'MenuItemsInfo'				=> 'Standard antal viste menupunkter (kan kræve understøttelse i skabelonerne).',
 
 	'HandlerSection'			=> 'Handler',
-	'HideRevisions'				=> 'Hide Revisions:',
+	'HideRevisions'				=> 'Skjul revisioner:',
 	'HideRevisionsInfo'			=> 'Standard visningen af revisioner af siden.',
 	'AttachmentHandler'			=> 'Aktiver håndtering af vedhæftede filer:',
 	'AttachmentHandlerInfo'		=> 'Tillader visning af vedhæftede filer handler.',
@@ -339,7 +339,7 @@ $ap_translation = [
 	'KeepDeletedTimeInfo'		=> 'Perioden i dage. Det giver mening kun med den tidligere mulighed. Brug nul for at sikre, at enheder aldrig slettes (i dette tilfælde kan administratoren rydde "kurven" manuelt).',
 	'PagesPurgeTime'			=> 'Opbevaringstid for siderevisioner:',
 	'PagesPurgeTimeInfo'		=> 'Slet automatisk de ældre versioner inden for det givne antal dage. Hvis du indtaster nul, fjernes de ældre versioner.',
-	'EnableReferrers'			=> 'Enable Referrers:',
+	'EnableReferrers'			=> 'Aktiver henvisninger:',
 	'EnableReferrersInfo'		=> 'Tillader oprettelse og visning af eksterne henvisninger.',
 	'ReferrersPurgeTime'		=> 'Opbevaringstid for henviserede:',
 	'ReferrersPurgeTimeInfo'	=> 'Opbevar historien om henvisning til eksterne sider ikke længere end et givet antal dage. Nul betyder evig lagring, men for et aktivt besøgt websted kan dette føre til databaseoverløb.',
@@ -363,17 +363,17 @@ $ap_translation = [
 	],
 
 	'XmlSitemap'				=> 'XML Sitemap:',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows: ',
-	'XmlSitemapGz'				=> 'XML Sitemap compression:',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time:',
+	'XmlSitemapInfo'			=> 'Opretter en XML-fil kaldet %1 inde i XML-mappen. Du kan tilføje stien til sitemap i robots.txt filen i din rodmappe som følger:',
+	'XmlSitemapGz'				=> 'XML- sitemap komprimering:',
+	'XmlSitemapGzInfo'			=> 'Hvis du ønsker det, kan du komprimere din sitemap tekstfil ved hjælp af gzip til at reducere din båndbredde krav.',
+	'XmlSitemapTime'			=> 'XML- sitemap genereringstid:',
 	'XmlSitemapTimeInfo'		=> 'Genererer sitemap kun én gang i det givne antal dage, nul betyder ved hver sideændring.',
 
 	'SearchSection'				=> 'Søg',
 	'OpenSearch'				=> 'Åbensøg:',
 	'OpenSearchInfo'			=> 'Opretter OpenSearch-beskrivelsesfilen i XML-mappen og aktiverer Autodiscovery of search plugin i HTML-headeren.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility):',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, it is up to search engines to honor this request.',
+	'SearchEngineVisibility'	=> 'Bloker søgemaskiner (søgemaskine synlighed):',
+	'SearchEngineVisibilityInfo'=> 'Blokér søgemaskiner, men tillad normale besøgende. Tilsidesætter sideindstillinger. <br>Afvis søgemaskiner fra at indeksere dette websted. Det er op til søgemaskiner at honorere denne anmodning.',
 
 
 
@@ -387,11 +387,11 @@ $ap_translation = [
 
 	'LogoSection'				=> 'Logo',
 	'SiteLogo'					=> 'Site Logo:',
-	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
+	'SiteLogoInfo'				=> 'Dit logo vises typisk øverst til venstre i applikationen. Max størrelse er 2 MiB. Optimale dimensioner er 255 pixels bred med 55 pixels høj.',
 	'LogoDimensions'			=> 'Logo dimensioner:',
-	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
+	'LogoDimensionsInfo'		=> 'Bredde og højde af det viste logo.',
 	'LogoDisplayMode'			=> 'Logo visningstilstand:',
-	'LogoDisplayModeInfo'		=> 'Defines the appearance of the Logo. Default is off.',
+	'LogoDisplayModeInfo'		=> 'Definerer udseendet af logoet. Standard er deaktiveret.',
 
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site Favicon:',
@@ -407,17 +407,17 @@ $ap_translation = [
 	'ResetUserThemeInfo'		=> 'Nulstiller alle brugertemaer. Advarsel: Denne handling vil returnere alle brugervalgte temaer til det globale standardtema.',
 	'SetBackUserTheme'			=> 'Gendan alle brugertemaer til %1 -tema.',
 	'ThemesAllowed'				=> 'Tilladte Temaer:',
-	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
+	'ThemesAllowedInfo'			=> 'Vælg de tilladte temaer, som brugeren kan vælge; ellers er alle tilgængelige temaer tilladt.',
 	'ThemesPerPage'				=> 'Temaer pr. side:',
 	'ThemesPerPageInfo'			=> 'Tillad temaer pr. side, som sideejeren kan vælge via sideegenskaber.',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'SystemSettingsInfo'		=> 'Gruppe af parametre, der er ansvarlige for finjustering af webstedet. Ændr dem ikke, medmindre du er sikker på deres handlinger.',
 	'SystemSettingsUpdated'		=> 'Opdaterede systemindstillinger',
 
 	'DebugModeSection'			=> 'Debug mode',
 	'DebugMode'					=> 'Fejlfindingstilstand:',
-	'DebugModeInfo'				=> 'Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.',
+	'DebugModeInfo'				=> 'Udpakker og udsender telemetri data om programmets udførelsestid. Opmærksomhed: Fuldstændig detaljetilstand stiller højere krav til den tildelte hukommelse, især til ressourceintensive operationer, såsom database backup og gendannelse.',
 	'DebugModes'	=> [
 		'0'		=> 'fejlfinding er slået fra',
 		'1'		=> 'kun den samlede udførelsestid',
@@ -425,7 +425,7 @@ $ap_translation = [
 		'3'		=> 'fuld detalje (DBMS, cache, osv.)',
 	],
 	'DebugSqlThreshold'			=> 'Grænseværdi ydeevne RDBMS:',
-	'DebugSqlThresholdInfo'		=> 'In the detailed debug mode to record only the queries take longer than the number of seconds.',
+	'DebugSqlThresholdInfo'		=> 'I detaljeret fejlfindingstilstand, rapporteres kun de forespørgsler, der tager længere end antallet af sekunder angivet.',
 	'DebugAdminOnly'			=> 'Lukket diagnose:',
 	'DebugAdminOnlyInfo'		=> 'Vis kun fejlretningsdata for programmet (og DBMS) for administratoren.',
 
@@ -435,15 +435,15 @@ $ap_translation = [
 	'CacheTtl'					=> 'Term relevance cached pages:',
 	'CacheTtlInfo'				=> 'Cache sider ikke mere end et bestemt antal sekunder.',
 	'CacheSql'					=> 'Cache DBMS forespørgsler:',
-	'CacheSqlInfo'				=> 'Maintain a local cache the results of certain resource-SQL-queries.',
-	'CacheSqlTtl'				=> 'Term relevance Cache Database:',
-	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
+	'CacheSqlInfo'				=> 'Opretholde en lokal cache af resultaterne af visse ressource-relaterede SQL-forespørgsler.',
+	'CacheSqlTtl'				=> 'Time-to-live for cachelagrede SQL-forespørgsler:',
+	'CacheSqlTtlInfo'			=> 'Cache resultater af SQL forespørgsler i ikke mere end det angivne antal sekunder. Værdier større end 1200 er ikke ønskeligt.',
 
-	'LogSection'				=> 'Log settings',
-	'LogLevelUsage'				=> 'Using logging:',
+	'LogSection'				=> 'Logindstillinger',
+	'LogLevelUsage'				=> 'Brug logning:',
 	'LogLevelUsageInfo'			=> 'Minimumsprioriteten for de begivenheder, der er registreret i loggen.',
 	'LogThresholds'	=> [
-		'0'		=> 'not keep a journal',
+		'0'		=> 'opbevar ikke en journal',
 		'1'		=> 'kun det kritiske niveau',
 		'2'		=> 'fra højeste niveau',
 		'3'		=> 'fra høj',
@@ -452,7 +452,7 @@ $ap_translation = [
 		'6'		=> 'minimumsniveauet',
 		'7'		=> 'optag alle',
 	],
-	'LogDefaultShow'			=> 'Display Log Mode:',
+	'LogDefaultShow'			=> 'Vis log tilstand:',
 	'LogDefaultShowInfo'		=> 'Den mindste prioritet begivenheder vises i loggen som standard.',
 	'LogModes'	=> [
 		'1'		=> 'kun det kritiske niveau',
@@ -464,14 +464,14 @@ $ap_translation = [
 		'7'		=> 'vis alle',
 	],
 	'LogPurgeTime'				=> 'Opbevaringstid for log:',
-	'LogPurgeTimeInfo'			=> 'Remove event log over a given number of days.',
+	'LogPurgeTimeInfo'			=> 'Fjern begivenhedslog efter det angivne antal dage.',
 
 	'PrivacySection'			=> 'Privatliv',
-	'AnonymizeIp'				=> 'Anonymize users IP addresses:',
-	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
+	'AnonymizeIp'				=> 'Anonymisér brugernes IP-adresser:',
+	'AnonymizeIpInfo'			=> 'Anonymiser IP-adresser, hvor det er relevant (dvs. side, revision eller henvisninger).',
 
 	'ReverseProxySection'		=> 'Omvendt Proxy',
-	'ReverseProxy'				=> 'Use Reverse proxy:',
+	'ReverseProxy'				=> 'Brug omvendt proxy:',
     'ReverseProxyInfo'			=> 
     'Aktiver denne indstilling for at bestemme den korrekte IP-adresse for fjernklienten
 									ved at undersøge oplysninger, der er gemt i X-Forwarded-For-headerne. X-Forwarded-For-headere
@@ -488,16 +488,16 @@ $ap_translation = [
 									end X-Forwarded-For. "X-Forwarded-For"-headeren er en liste af IP-adresser adskilt af
 									kommaer og mellemrum, og kun den sidste (den længst til venstre) vil blive brugt.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepterer en række IP-adresser:',
-	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
-									 proxies. Filling this array WackoWiki will trust the information stored
-									 in the X-Forwarded-For headers only if Remote IP address is one of
-									 these, that is the request reaches the web server from one of your
-									 reverse proxies. Otherwise, the client could directly connect to
-									 your web server spoofing the X-Forwarded-For headers.',
+	'ReverseProxyAddressesInfo'	=> 'Hvert element i dette array er IP-adressen på en hvilken som helst af jeres omvendte
+									 ØGELØBEDØBEDØRTE proxies. Hvis du bruger dette array, WackoWiki vil stole på de oplysninger, der er lagret
+									 Øjeblikkelig - autentisk - i de X-Forwarded-For overskrifter kun hvis Remote IP-adressen er en af
+									 Øjeblikkelig, Det vil sige, at anmodningen når webserveren fra en af dine
+									 Øjeblikkelige proxies. Ellers, klienten kunne direkte oprette forbindelse til
+									 ØJEDES Øjeblikkelige din webserver ved at spoofing X-Forwarded-For overskrifter.',
 
-	'SessionSection'				=> 'Session handling',
+	'SessionSection'				=> 'Session Håndtering',
 	'SessionStorage'				=> 'Session lagring:',
-	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
+	'SessionStorageInfo'			=> 'Dette tilvalg definerer hvor sessionsdata gemmes. Som standard vælges enten fil- eller databasesessionslagring.',
 	'SessionModes'	=> [
 		'1'		=> 'Fil',
 		'2'		=> 'Database',
@@ -508,8 +508,8 @@ $ap_translation = [
 	'LoginNoticeInfo'				=> 'Viser en login-meddelelse.',
 
 	'RewriteMode'					=> 'Brug <code>mod_rewrite</code>:',
-	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
-										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
+	'RewriteModeInfo'				=> 'Hvis din webserver understøtter denne funktion, skal du aktivere for at "forskønne" sidens URL\'er.<br>
+  <span class="cite">Værdien kan blive overskrevet af klassen Indstillinger under kørsel, uanset om den er slået fra, hvis HTTP_MOD_REWRITE er slået til.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parametre, der er ansvarlige for adgangskontrol og tilladelser.',
@@ -517,29 +517,29 @@ $ap_translation = [
 
 	'PermissionsSection'		=> 'Rights and privileges',
 	'ReadRights'				=> 'Læs rettigheder som standard:',
-	'ReadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'ReadRightsInfo'			=> 'Standard tildelt til de oprettede rodsider, samt sider, for hvilke overordnede ACL\'er ikke kan defineres.',
 	'WriteRights'				=> 'Skriv rettigheder som standard:',
-	'WriteRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'WriteRightsInfo'			=> 'Standard tildelt til de oprettede rodsider, samt sider, for hvilke overordnede ACL\'er ikke kan defineres.',
 	'CommentRights'				=> 'Kommentar rettigheder som standard:',
-	'CommentRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'CommentRightsInfo'			=> 'Standard tildelt til de oprettede rodsider, samt sider, for hvilke overordnede ACL\'er ikke kan defineres.',
 	'CreateRights'				=> 'Opret rettigheder for en underside som standard:',
-	'CreateRightsInfo'			=> 'Define the right for creating root pages and assign them to pages for which parental rights cannot be defined.',
+	'CreateRightsInfo'			=> 'Standard tildelt til de oprettede undersider.',
 	'UploadRights'				=> 'Upload rettigheder som standard:',
-	'UploadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'UploadRightsInfo'			=> 'Standard upload rettigheder.',
 	'RenameRights'				=> 'Globalt omdøb højre:',
 	'RenameRightsInfo'			=> 'Listen over tilladelser til frit at omdøbe (flytte) sider.',
 
-	'LockAcl'					=> 'Lock all ACL to read only:',
-	'LockAclInfo'				=> '<span class="cite">Overwrites the acl settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
+	'LockAcl'					=> 'Lås alle ACL\'er for kun at læse:',
+	'LockAclInfo'				=> '<span class="cite">Overskriver ACL indstillingerne for alle sider til kun at læse.</span><br>Dette kan være nyttigt, hvis et projekt er færdigt, du ønsker tæt redigering for en periode af sikkerhedsmæssige årsager eller som en nødreaktion på en udnyttelse eller sårbarhed.',
 	'HideLocked'				=> 'Skjul utilgængelige sider:',
-	'HideLockedInfo'			=> 'If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).',
+	'HideLockedInfo'			=> 'Hvis brugeren ikke har tilladelse til at læse siden, skjule det i forskellige sidelister (linket placeret i tekst vil dog stadig være synligt).',
 	'RemoveOnlyAdmins'			=> 'Kun administratorer kan slette sider:',
-	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.',
+	'RemoveOnlyAdminsInfo'		=> 'Afvis alle, undtagen administratorer, muligheden for at slette sider. Den første grænse gælder for ejere af normale sider.',
 	'OwnersRemoveComments'		=> 'Ejere af sider kan slette kommentarer:',
 	'OwnersRemoveCommentsInfo'	=> 'Tillad sideejere at moderere kommentarer på deres sider.',
 	'OwnersEditCategories'		=> 'Ejere kan redigere sidekategorier:',
 	'OwnersEditCategoriesInfo'	=> 'Tillad ejere at ændre siders kategori liste over dit websted (tilføj ord, slet ord), tildeler en side.',
-	'TermHumanModeration'		=> 'Term human moderation:',
+	'TermHumanModeration'		=> 'Udløb af moderation hos mennesker:',
 	'TermHumanModerationInfo'	=> 'Moderatorer kan kun redigere kommentarer, hvis de ikke blev oprettet mere end dette antal dage siden (denne begrænsning gælder ikke for den sidste kommentar i emnet).',
 
 	'UserCanDeleteAccount'		=> 'Brugererne kan selv slette deres konti',
@@ -551,17 +551,17 @@ $ap_translation = [
 	'AllowRegistration'			=> 'Registrer online:',
 	'AllowRegistrationInfo'		=> 'Åben brugerregistrering. Deaktivering af denne mulighed forhindrer gratis registrering, men webstedsadministratoren kan selv registrere andre brugere.',
 	'ApproveNewUser'			=> 'Godkend nye brugere:',
-	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
+	'ApproveNewUserInfo'		=> 'Tillader administratorer at godkende brugere når de er registreret. Kun godkendte brugere vil få lov til at logge ind på webstedet.',
 	'PersistentCookies'			=> 'Vedvarende cookies:',
 	'PersistentCookiesInfo'		=> 'Tillad vedvarende cookies.',
 	'DisableWikiName'			=> 'Deaktivér WikiName:',
-	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
+	'DisableWikiNameInfo'		=> 'Deaktiver den obligatoriske brug af en WikiName for brugere. Tillader brugerregistrering med traditionelle kaldenavne i stedet for tvungen CamelCase-formateret navne (dvs. NavnEfternavn).',
 	'UsernameLength'			=> 'Brugernavn længde:',
 	'UsernameLengthInfo'		=> 'Minimum og maksimum antal tegn i brugernavne.',
 
 	'EmailSection'				=> 'E-mail',
 	'AllowEmailReuse'			=> 'Tillad genbrug af e-mailadresse:',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'AllowEmailReuseInfo'		=> 'Forskellige brugere kan registrere sig med den samme e-mail-adresse.',
 	'EmailConfirmation'			=> 'Gennemtving e-mail-bekræftelse:',
 	'EmailConfirmationInfo'		=> 'Kræver, at brugeren verificerer sin e-mailadresse, før han kan logge ind.',
 	'AllowedEmailDomains'		=> 'Tilladte e-mail-domæner:',
@@ -570,28 +570,28 @@ $ap_translation = [
 	'ForbiddenEmailDomainsInfo'	=> 'Forbudte e-mail-domæner kommasepareret, f.eks. <code>example.com, local.lan</code> osv. (kun effektiv, hvis listen over tilladte e-mail-domæner er tom)',
 
 	'CaptchaSection'			=> 'CAPTCHA',
-	'EnableCaptcha'				=> 'Enable Captcha:',
-	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
+	'EnableCaptcha'				=> 'Aktiver captcha:',
+	'EnableCaptchaInfo'			=> 'Hvis aktiveret, vil captcha blive vist i følgende tilfælde, eller hvis en sikkerhedstærskel er nået.',
 	'CaptchaComment'			=> 'Ny kommentar:',
-	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
+	'CaptchaCommentInfo'		=> 'Da beskyttelse mod spam skal uregistrerede brugere udfylde captcha før kommentarer vil blive sendt.',
 	'CaptchaPage'				=> 'Ny side:',
-	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
+	'CaptchaPageInfo'			=> 'Som beskyttelse mod spam skal uregistrerede brugere udfylde captcha før du opretter en ny side.',
 	'CaptchaEdit'				=> 'Rediger side:',
-	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
+	'CaptchaEditInfo'			=> 'Som beskyttelse mod spam skal uregistrerede brugere udfylde captcha før redigering sider.',
 	'CaptchaRegistration'		=> 'Registrering:',
-	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
+	'CaptchaRegistrationInfo'	=> 'Som beskyttelse mod spam skal uregistrerede brugere udfylde captcha før registrering.',
 
 	'TlsSection'				=> 'TLS Indstillinger',
-	'TlsConnection'				=> 'TLS-Connection:',
-	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server, otherwise you will lose access to the admin panel!</span><br>It also determines if the the Cookie Secure Flag is set, the <code>secure</code> flag specifies whether cookies should only be sent over secure connections.',
+	'TlsConnection'				=> 'TLS- forbindelse:',
+	'TlsConnectionInfo'			=> 'Brug TLS-sikret forbindelse. <span class="cite">Aktiver det forudinstallerede TLS-certifikat på serveren, ellers mister du adgang til admin-panelet!</span><br>Det afgør også, om Cookie Secure Flag er indstillet: <code>sikker</code> markering angiver, om cookies kun skal sendes over sikre forbindelser.',
 	'TlsImplicit'				=> 'Mandatory TLS:',
 	'TlsImplicitInfo'			=> 'Forstærket genforbinde klienten fra HTTP til HTTPS. Med indstillingen deaktiveret, kan klienten gennemse webstedet gennem en åben HTTP-kanal.',
 
 	'HttpSecurityHeaders'		=> 'Http Sikkerheds Headers',
-	'EnableSecurityHeaders'		=> 'Enable Security Headers:',
-	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',
+	'EnableSecurityHeaders'		=> 'Aktiver sikkerheds headers:',
+	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP kan forårsage problemer i visse situationer (f.eks. under udvikling), eller når du bruger plugins, der er afhængige af eksternt hostede ressourcer såsom billeder eller scripts. <br>Deaktivering af indholdssikkerhedspolitik er en sikkerhedsrisiko!',
 	'Csp'						=> 'Content-Security-Policy (CSP):',
-	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
+	'CspInfo'					=> 'Konfigurering af CSP indebærer at beslutte, hvilke politikker du ønsker at håndhæve, og derefter konfigurere dem og bruge Content-Security-Policy til at etablere din politik.',
 	'PolicyModes'	=> [
 		'0'		=> 'deaktiveret',
 		'1'		=> 'streng',
@@ -600,7 +600,7 @@ $ap_translation = [
 	'PermissionsPolicy'			=> 'Permissions Policy:',
 	'PermissionsPolicyInfo'		=> 'HTTP Permissions-Policy-headeren giver en mekanisme til eksplicit at aktivere eller deaktivere forskellige effektive browserfunktioner.',
 	'ReferrerPolicy'			=> 'Referrer Policy:',
-	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
+	'ReferrerPolicyInfo'		=> 'Referrer-Policy HTTP header regulerer, hvilke referrer oplysninger, der sendes i Referer header, bør indgå i svar.',
 	'ReferrerPolicyModes'	=> [
 		'0'		=> '[off]',
 		'1'		=> 'no-referrer',
@@ -613,10 +613,10 @@ $ap_translation = [
 		'8'		=> 'unsafe-url'
 	],
 
-	'UserPasswordSection'		=> 'Persistence of user passwords',
+	'UserPasswordSection'		=> 'Persistens af brugeradgangskoder',
 	'PwdMinChars'				=> 'Mindste adgangskodelængde:',
 	'PwdMinCharsInfo'			=> 'Længere adgangskoder er nødvendigvis mere sikre end kortere adgangskoder (f.eks. 12 til 16 tegn).<br>Brug af adgangskoder i stedet for adgangskoder opmuntres.',
-	'AdminPwdMinChars'			=> 'Minimum Admin password length:',
+	'AdminPwdMinChars'			=> 'Minimum admin adgangskode længde:',
 	'AdminPwdMinCharsInfo'		=> 'Længere adgangskoder er nødvendigvis mere sikre end kortere adgangskoder (f.eks. 15 til 20 tegn).<br>Brug af adgangskoder i stedet for adgangskoder opmuntres.',
 	'PwdCharComplexity'			=> 'Den påkrævede adgangskode kompleksitet:',
 	'PwdCharClasses'	=> [
@@ -642,37 +642,37 @@ $ap_translation = [
 	'FormTokenTime'				=> 'Maksimal tid til at indsende formularer:',
 	'FormTokenTimeInfo'			=> 'Den tid, en bruger skal indsende en formular (i sekunder). <br> Bemærk, at en formular kan blive ugyldig, hvis sessionen udløber, uanset denne indstilling.',
 
-	'SessionLength'				=> 'Term login cookie:',
-	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
+	'SessionLength'				=> 'Session cookie udløb:',
+	'SessionLengthInfo'			=> 'Levetiden for brugersessions cookie som standard (i dage).',
 	'CommentDelay'				=> 'Anti-oversvømmelse for kommentarer:',
-	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in seconds).',
+	'CommentDelayInfo'			=> 'Den mindste forsinkelse mellem offentliggørelsen af nye brugerkommentarer (i sekunder).',
 	'IntercomDelay'				=> 'Anti-oversvømmelse til personlig kommunikation:',
-	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in seconds).',
+	'IntercomDelayInfo'			=> 'Den mindste forsinkelse mellem afsendelse af private beskeder (i sekunder).',
 	'RegistrationDelay'			=> 'Tidsfrist for registrering:',
-	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
+	'RegistrationDelayInfo'		=> 'Minimumstærsklen mellem tilmeldingsblanketten for at modvirke tilmeldings-robotter (i sekunder).',
 
 	// Formatter settings
-	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'FormatterSettingsInfo'		=> 'Gruppe af parametre, der er ansvarlige for finjustering af webstedet. Ændr dem ikke, medmindre du er sikker på deres handlinger.',
 	'FormatterSettingsUpdated'	=> 'Opdaterede formateringsindstillinger',
 
 	'TextHandlerSection'		=> 'Text Handler ',
-	'Typografica'				=> 'Typographical Proofreader:',
-	'TypograficaInfo'			=> 'Unsetting slightly speed up the process of adding comments and save the page.',
+	'Typografica'				=> 'Typografisk korrekturlæser:',
+	'TypograficaInfo'			=> 'Deaktivering af denne indstilling vil fremskynde processen med at tilføje kommentarer og gemme sider.',
 	'Paragrafica'				=> 'Paragrafica markeringer:',
-	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.',
+	'ParagraficaInfo'			=> 'Svarende til den tidligere mulighed, men vil føre til afbrydelse af inoperable automatisk indholdsfortegnelse (<code>{{toc}}</code>).',
 	'AllowRawhtml'				=> 'Global HTML Support:',
 	'AllowRawhtmlInfo'			=> 'Denne indstilling er potentielt usikker for et åbent websted.',
 	'SafeHtml'					=> 'Filtrering HTML:',
-	'SafeHtmlInfo'				=> 'Prevents saving of dangerous HTML-objects. Turning off the filter on an open site with HTML support is <span class="underline">extremely</span> undesirable!',
+	'SafeHtmlInfo'				=> 'Forhindrer lagring af farlige HTML-objekter. At slukke for filteret på et åbent websted med HTML-understøttelse er <span class="underline">ekstremt</span> uønskeligt!',
 
 	'WackoFormatterSection'		=> 'Wiki Text Formatter (Wacko Formater)',
-	'X11colors'					=> 'X11 Colors Usage:',
-	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
-	'WikiLinks'					=> 'Disable Wikilinks:',
+	'X11colors'					=> 'X11 farveforbrug:',
+	'X11colorsInfo'				=> 'Udvider de tilgængelige farver til <code>??(farve) baggrund??</code> og <code>!!(farve) tekst!!</code>Deaktivering af denne indstilling fremskynder processen med at tilføje kommentarer og gemme sider.',
+	'WikiLinks'					=> 'Deaktiver wiki-links:',
 	'WikiLinksInfo'				=> 'Deaktiverer linking for <code>CamelCaseWords</code>, dine CamelCase Words vil ikke længere blive linket direkte til en ny side. Dette er nyttigt, når du arbejder på tværs af forskellige namespaces aks klynger. Som standard er den slået fra.',
-	'BracketsLinks'				=> 'Disable bracketslinks:',
+	'BracketsLinks'				=> 'Deaktiver bracketed links:',
 	'BracketsLinksInfo'			=> 'Deaktiverer <code>[[link]]</code> og <code>((link))</code> syntaks.',
-	'Formatters'				=> 'Disable Formatters:',
+	'Formatters'				=> 'Deaktiver formattere:',
 	'FormattersInfo'			=> 'Deaktiverer syntaks <code>%%code%%</code> , der bruges til fremhævninger.',
 
 	'DateFormatsSection'		=> 'Dato Formater',
@@ -696,20 +696,20 @@ $ap_translation = [
 	'Nofollow'					=> 'nofollow:',
 	'NofollowInfo'				=> 'Instruer nogle søgemaskiner, at hyperlinket ikke skal have indflydelse på rangeringen af linksmålet i søgemaskinens indeks. Tilføjer <code>rel="nofollow"</code> til linksyntaxen.',
 	'UrlsUnderscores'			=> 'Form adresser (URL\'er) med understregninger:',
-	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
+	'UrlsUnderscoresInfo'		=> 'For eksempel, %1 bliver %2 med denne mulighed.',
 	'ShowSpaces'				=> 'Vis mellemrum i WikiNavne:',
 	'ShowSpacesInfo'			=> 'Vis mellemrum i WikiNames, f.eks. <code>MyName</code> vises som <code>Mit navn</code> med denne indstilling.',
-	'NumerateLinks'				=> 'Numerate links in print view:',
-	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
+	'NumerateLinks'				=> 'Tæl links i udskriftsvisning:',
+	'NumerateLinksInfo'			=> 'Tæller og lister alle links nederst i udskriftsvisningen med denne indstilling.',
 	'YouareHereText'			=> 'Deaktiver og visualisere selvrefererende links:',
-	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
+	'YouareHereTextInfo'		=> 'Visualisér links til samme side, ved brug af <code>&lt;b&gt;####&lt;/b&gt;</code>. Alle links til self mister link formatering, men vises som fed tekst.',
 
 	// Pages settings
 	'PagesSettingsInfo'			=> 'Her kan du indstille eller ændre de systembasissider, der bruges i Wiki. Sørg for, at du ikke glemmer at oprette eller ændre de tilsvarende sider i Wiki i henhold til dine indstillinger her.',
 	'PagesSettingsUpdated'		=> 'Opdaterede indstillinger grundsider',
 
 	'ListCount'					=> 'Antal varer pr. liste:',
-	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+	'ListCountInfo'				=> 'Antal elementer der vises på hver liste for gæst, eller som standardværdi for nye brugere.',
 
 	'ForumSection'				=> 'Valgmuligheder Forum',
 	'ForumCluster'				=> 'Cluster Forum:',
@@ -717,7 +717,7 @@ $ap_translation = [
 	'ForumTopics'				=> 'Antal emner pr. side:',
 	'ForumTopicsInfo'			=> 'Antal emner der vises på hver side af listen i forumsektionerne (handling %1).',
 	'CommentsCount'				=> 'Antal kommentarer pr. side:',
-	'CommentsCountInfo'			=> 'Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.',
+	'CommentsCountInfo'			=> 'Antal kommentarer der vises på hver sides liste over kommentarer. Dette gælder for alle kommentarer på hjemmesiden, ikke kun dem, der er sendt i forummet.',
 
 	'NewsSection'				=> 'Afsnit Nyheder',
 	'NewsCluster'				=> 'Cluster for the News:',
@@ -727,8 +727,8 @@ $ap_translation = [
 
 	'LicenseSection'			=> 'Licens',
 	'DefaultLicense'			=> 'Standard licens:',
-	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
-	'EnableLicense'				=> 'Enable License:',
+	'DefaultLicenseInfo'		=> 'Under hvilken licens dit indhold kan frigives.',
+	'EnableLicense'				=> 'Aktiver licens:',
 	'EnableLicenseInfo'			=> 'Aktiver for at vise licensinformation.',
 	'LicensePerPage'			=> 'Licens pr. side:',
 	'LicensePerPageInfo'		=> 'Tillad licens pr. side, som sideejeren kan vælge via sideegenskaber.',
@@ -740,17 +740,17 @@ $ap_translation = [
 	'PrivacyPage'				=> 'Privacy Policy:',
 	'PrivacyPageInfo'			=> 'Siden med Privacy Policy af webstedet.',
 
-	'TermsPage'					=> 'Policies and Regulations:',
+	'TermsPage'					=> 'Politikker og forordninger:',
 	'TermsPageInfo'				=> 'Siden med reglerne for webstedet.',
 
 	'SearchPage'				=> 'Søg:',
 	'SearchPageInfo'			=> 'Side med søgeformularen (handling %1).',
 	'RegistrationPage'			=> 'Registrering:',
-	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
+	'RegistrationPageInfo'		=> 'Side til ny brugerregistrering (handling %1).',
 	'LoginPage'					=> 'Bruger login:',
 	'LoginPageInfo'				=> 'Login side på webstedet (handling %1).',
 	'SettingsPage'				=> 'Brugerindstillinger:',
-	'SettingsPageInfo'			=> 'Page customize the user profile (action %1).',
+	'SettingsPageInfo'			=> 'Side der skal tilpasses brugerprofilen (handling %1).',
 	'PasswordPage'				=> 'Skift Adgangskode:',
 	'PasswordPageInfo'			=> 'Side med en formular til at ændre / forespørge bruger adgangskode (handling %1).',
 	'UsersPage'					=> 'Brugerliste:',
@@ -762,15 +762,15 @@ $ap_translation = [
 	'ChangesPage'				=> 'Seneste ændringer:',
 	'ChangesPageInfo'			=> 'Side med en liste over de senest ændrede sider (handling %1).',
 	'CommentsPage'				=> 'Seneste kommentarer:',
-	'CommentsPageInfo'			=> 'Page with a list of recent comment on the page (action %1).',
+	'CommentsPageInfo'			=> 'Side med en liste over seneste kommentarer på siden (handling %1).',
 	'RemovalsPage'				=> 'Slettede sider:',
 	'RemovalsPageInfo'			=> 'Side med en liste over nyligt slettede sider (handling %1).',
 	'WantedPage'				=> 'Ønskede sider:',
 	'WantedPageInfo'			=> 'Side med en liste over manglende sider, der refereres til (handling %1).',
 	'OrphanedPage'				=> 'Forældreløse sider:',
-	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
+	'OrphanedPageInfo'			=> 'Side med en liste over eksisterende sider er ikke relateret via links til andre sider (handling %1).',
 	'SandboxPage'				=> 'Sandkasse:',
-	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
+	'SandboxPageInfo'			=> 'Siden, hvor brugerne kan øve deres wiki markup færdigheder.',
 	'HelpPage'					=> 'Hjælp:',
 	'HelpPageInfo'				=> 'Dokumentationsafsnittet til at arbejde med webstedsværktøjer.',
 	'IndexPage'					=> 'Indeks:',
@@ -784,17 +784,17 @@ $ap_translation = [
 	'NotificationSettingsUpdated'	=> 'Opdaterede notifikationsindstillinger',
 
 	'EmailNotification'			=> 'Email Notification:',
-	'EmailNotificationInfo'		=> 'Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that disabling email notifications has no effect on emails generated as part of the user signup process.',
+	'EmailNotificationInfo'		=> 'Tillad e-mail-notifikation. Sæt til aktiveret for at aktivere e-mail-notifikationer, deaktiveret for at deaktivere dem. Bemærk, at deaktivering af e-mail-meddelelser ikke har nogen effekt på e-mails, der genereres som en del af bruger-tilmeldingsprocessen.',
 	'Autosubscribe'				=> 'Autoabonnering:',
-	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
+	'AutosubscribeInfo'			=> 'Underret automatisk ejeren af sideændringer.',
 
-	'NotificationSection'		=> 'Default user notification settings',
+	'NotificationSection'		=> 'Standard Indstillinger For Brugernotifikationer',
 	'NotifyPageEdit'			=> 'Underret sideredigering:',
-	'NotifyPageEditInfo'		=> 'Pending - Sending a email notification only for the first change until the user visits the page again.',
+	'NotifyPageEditInfo'		=> 'Afventer - Send kun en e-mail notifikation for den første ændring, indtil brugeren besøger siden igen.',
 	'NotifyMinorEdit'			=> 'Underret mindre redigering:',
 	'NotifyMinorEditInfo'		=> 'Sender meddelelser også for mindre redigeringer.',
 	'NotifyNewComment'			=> 'Notificér ny kommentar:',
-	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
+	'NotifyNewCommentInfo'		=> 'Afventer - Send kun en e-mail notifikation for den første kommentar, indtil brugeren besøger siden igen.',
 
 	'NotifyUserAccount'			=> 'Underret ny brugerkonto:',
 	'NotifyUserAccountInfo'		=> 'Admin vil blive underrettet, når en ny bruger er blevet oprettet ved hjælp af tilmeldingsformularen.',
@@ -802,10 +802,10 @@ $ap_translation = [
 	'NotifyUploadInfo'			=> 'Moderatorerne får besked, når en fil er blevet uploadet.',
 
 	'PersonalMessagesSection'	=> 'Personlige beskeder',
-	'AllowIntercomDefault'		=> 'Allow Intercom:',
-	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
-	'AllowMassemailDefault'		=> 'Allow Massemail:',
-	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
+	'AllowIntercomDefault'		=> 'Tillad intercom:',
+	'AllowIntercomDefaultInfo'	=> 'Aktivering af denne indstilling giver andre brugere mulighed for at sende personlige beskeder til modtagerens e-mailadresse uden at afsløre adressen.',
+	'AllowMassemailDefault'		=> 'Tillad masse e-mail:',
+	'AllowMassemailDefaultInfo'	=> 'Send kun beskeder til de brugere, der har tilladt administratorer at e-maile dem oplysninger.',
 
 	// Resync settings
 	'Synchronize'				=> 'synkronisere',
@@ -821,10 +821,10 @@ $ap_translation = [
 	'LogFeedsUpdated'			=> 'Synkroniserede RSS-feeds',
 	'LogPageBodySynched'		=> 'Repareret side krop og links',
 
-	'UserStats'					=> 'User Statistics',
-	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'UserStats'					=> 'Brugerstatistik',
+	'UserStatsInfo'				=> 'Brugerstatistik (antal kommentarer, ejede sider, revisioner og filer) kan i nogle situationer afvige fra faktiske data. <br>Denne handling gør det muligt for opdateringsstatistikker at matche faktiske data i databasen.',
 	'PageStats'					=> 'Side statistik',
-	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'PageStatsInfo'				=> 'Sidestatistik (antal kommentarer, filer og revisioner) kan i visse situationer afvige fra faktiske data. <br>Denne handling gør det muligt for opdateringsstatistikker at matche faktiske data indeholdt i databasen.',
 
 	'AttachmentsInfo'			=> 'Opdaterer filhashen for alle vedhæftede filer i databasen.',
 	'AttachmentsSynched'		=> 'Genhastede alle filvedhæftninger',
@@ -842,7 +842,7 @@ $ap_translation = [
 	'PreparsedBodyPurged'		=> 'Tømt <code>body_r</code> felt i sidetabellen.',
 
 	'WikiLinksResync'			=> 'Wiki-links',
-	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
+	'WikiLinksResyncInfo'		=> 'Udfører en gengivelse for alle intrasite links og gendanner indholdet af <code>page_link</code> og <code>file_link</code> tabeller i tilfælde af skade eller omplacering (dette kan tage lang tid).',
 	'RecompilePage'				=> 'Genopbygning af alle sider (ekstremt dyre)',
 	'ResyncOptions'				=> 'Yderligere muligheder',
 	'RecompilePageLimit'		=> 'Antal sider der skal tolkes på én gang.',
@@ -861,18 +861,18 @@ $ap_translation = [
 
 	'EmailIdentitySettings'		=> 'Hjemmeside E-mails Identitet',
 	'FromEmailName'				=> 'From Name:',
-	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
+	'FromEmailNameInfo'			=> 'Afsendernavnet der bruges til <code>From:</code> header for alle e-mail notifikationer sendt fra webstedet.',
 	'EmailSubjectPrefix'		=> 'Emne-præfiks:',
 	'EmailSubjectPrefixInfo'	=> 'Alternativt e-mail-emnepræfiks, f.eks. <code>[Præfiks] Emne</code>. Hvis det ikke er defineret, er standardpræfikset Site Name: %1.',
 
 	'NoReplyEmail'				=> 'No-svar adresse:',
-	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
+	'NoReplyEmailInfo'			=> 'Denne adresse, f.eks. <code>noreply@example.com</code>, vises i <code>From:</code> e-mail-adresse felt af alle e-mail-meddelelser sendt fra webstedet.',
 	'AdminEmail'				=> 'Email for ejeren af webstedet:',
 	'AdminEmailInfo'			=> 'Denne adresse bruges til administrationsformål, som f.eks. notifikation af nye brugere.',
 	'AbuseEmail'				=> 'Email misbrugstjeneste:',
-	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
+	'AbuseEmailInfo'			=> 'Adresseanmodninger for hastende sager: registrering af en udenlandsk e-mail mv. Det kan være den samme som ejeren af webstedet e-mail.',
 
-	'SendTestEmail'				=> 'Send en test-email',
+	'SendTestEmail'				=> 'Send en test e-mail',
 	'SendTestEmailInfo'			=> 'Der afsendes en test-email til den mailadresse der er angivet for din konto.',
 	'TestEmailSubject'			=> 'Din Wiki er opsat korrekt til at sende emails',
 	'TestEmailBody'				=> 'Tillykke, da du har modtaget denne email er din Wiki korrekt konfigureret og kan sende emails.',
@@ -896,9 +896,9 @@ $ap_translation = [
 	'UploadSettingsInfo'		=> 'Her kan du ændre og vedligeholde indstillingerne for vedhæftede filer og tilknyttede specialkategorier.',
 	'UploadSettingsUpdated'		=> 'Opdaterede upload indstillinger',
 
-	'FileUploadsSection'		=> 'File uploads',
+	'FileUploadsSection'		=> 'Fil Uploads',
 	'RegisteredUsers'			=> 'registrerede brugere',
-	'RightToUpload'				=> 'Right to the upload files:',
+	'RightToUpload'				=> 'Tilladelser til at uploade filer:',
 	'RightToUploadInfo'			=> '<code>admins</code> betyder, at kun brugere, der tilhører admins gruppen, kan uploade filer. <code>1</code> betyder, at upload er åbnet for registrerede brugere. <code>0</code> betyder, at upload er deaktiveret.',
 	'UploadMaxFilesize'			=> 'Maksimal filstørrelse:',
 	'UploadMaxFilesizeInfo'		=> 'Er størrelsen sat til 0, er det alene din interne PHP-konfiguration, der begrænser filstørrelsen.',
@@ -944,9 +944,9 @@ $ap_translation = [
 	'FilterSettingsInfo'		=> 'Ord, der automatisk vil blive censureret på din Wiki.',
 	'FilterSettingsUpdated'		=> 'Opdaterede spamfilter indstillinger',
 
-	'WordCensoringSection'		=> 'Word censoring',
+	'WordCensoringSection'		=> 'Ord Censurering',
 	'SPAMFilter'				=> 'SPAM Filter:',
-	'SPAMFilterInfo'			=> 'Enabling SPAM Filter',
+	'SPAMFilterInfo'			=> 'Aktiverer Spam Filter',
 	'WordList'					=> 'Ordliste:',
 	'WordListInfo'				=> 'Ord eller sætning <code>fragment</code> der skal sortlistes (en pr. linje)',
 
@@ -974,8 +974,8 @@ $ap_translation = [
 
 	// Massemail module
 	'MassemailInfo'				=> 'Her kan du sende en email til enten alle dine brugere, eller til de brugere i en specifik gruppe som <strong>har muligheden for at modtage masse-emails aktiveret</strong>. Når en masse-email afsendes bliver administrator sat som afsender, og afsendes med modtagere som blind kopi, som derfor ikke kan se øvrige modtagere. Som standard afsendes emailen til 20 brugere ad gangen. Vær tålmodig, når du sender email til en stor gruppe af personer og stop ikke siden halvvejs. Afsendelsen af en masse-email kan tage lang tid, men du bliver informeret når scriptet er fuldført.',
-	'LogMassemail'				=> 'Messemail send %1 to group / user ',
-	'MassemailSend'				=> 'Massemail send',
+	'LogMassemail'				=> 'Masse e-mail sende %1 til gruppe / bruger ',
+	'MassemailSend'				=> 'Masse e-mail send',
 
 	'NoEmailMessage'			=> 'Du skal skrive en besked.',
 	'NoEmailSubject'			=> 'Du skal angive en overskrift i din email.',
@@ -992,7 +992,7 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Send til gruppe:',
 	'SendToUser'				=> 'Send til brugere:',
-	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Kun brugere som tillader Administratorer at sende en e-mail til dem, vil modtage masse- e- mail. Denne indstilling er tilgængelig i deres bruger- indstillinger under Notifikationer.',
 
 	// System message module
 	'SystemMessageInfo'			=> '',
@@ -1033,9 +1033,9 @@ $ap_translation = [
 	'BackupCluster'				=> 'Klynge:',
 	'BackupFiles'				=> 'Filer',
 	'BackupNote'				=> 'Bemærk:',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
-    	'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .  '<br>' .
-		'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ',
+	'BackupSettings'			=> 'Angiv den ønskede backup-ordning.<br>' .
+    	'Root-klyngen påvirker ikke sikkerhedskopieringen af globale filer og cache-filer (hvis valgt, gemmes de altid fuldt ud).<br>' .  '<br>' .
+		'<strong>Attention</strong>: For at undgå tab af oplysninger fra databasen, når du angiver rodklyngen, tabellerne fra denne backup vil ikke blive omstruktureret, det samme som når der kun sikkerhedskopieres tabelstruktur uden at gemme dataene. For at foretage en fuldstændig konvertering af tabellerne til backup-formatet skal du lave <em> fuld backup af databasen (struktur og data) uden at angive klyngen</em>.',
 	'BackupCompleted'			=> 'Sikkerhedskopiering og arkivering fuldført.<br>' .
     	'Backup-pakkefilerne blev gemt i undermappen %1.<br>. For at downloade det bruge FTP (vedligeholde mappestruktur og filnavne, når du kopierer).<br> For at gendanne en sikkerhedskopi eller fjerne en pakke, gå til <a href="%2">Gendan database</a>.',
 	'LogSavedBackup'			=> 'Gemt backup database ##%1##',
@@ -1043,7 +1043,7 @@ $ap_translation = [
 	'CantReadFile'				=> 'Kan ikke læse filen %1.',
 
 	// DB Restore module
-	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
+	'RestoreInfo'				=> 'Du kan gendanne nogen af de sikkerhedskopi pakker fundet, eller fjerne dem fra serveren.',
 	'ConfirmDbRestore'			=> 'Vil du gendanne sikkerhedskopi %1?',
 	'ConfirmDbRestoreInfo'		=> 'Vent venligst, dette kan tage nogle minutter.',
 	'RestoreWrongVersion'		=> 'Forkert WackoWiki version!',
@@ -1054,10 +1054,10 @@ $ap_translation = [
 	'RestoreOptionsInfo'		=> '* Før gendannelse af <strong>cluster backup</strong>, ' .
 									'måltabellerne slettes ikke (for at forhindre tab af information fra de klynger, der ikke er bakket op). ' .
 									'Således, under inddrivelse proces duplikere poster vil forekomme. ' .
-									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), ' .
+									'I normal tilstand vil alle af dem blive erstattet af posteringerne form backup (ved hjælp af SQL <code>REPLACE</code>), ' .
 									'men hvis dette afkrydsningsfelt er markeret, bliver alle dubletter sprunget over (de aktuelle værdier for elementer vil blive gemt), ' .
-									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br>' .
-									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br> (Automatic Copy)' .
+									'og kun poster med nye nøgler føjes til tabellen (SQL <code>INSERT IGNORE</code>).<br>' .
+									'<strong>Bemærk</strong>: Når du gendanner fuldstændig backup af webstedet, har denne indstilling ingen værdi.<br>' .
 									'<br>' .
 									'** Hvis sikkerhedskopien indeholder brugerfiler (global og perpage, cache filer, osv.), ' .
 									'i normal tilstand erstatter de eksisterende filer med de samme navne og placeres i samme mappe, når de gendannes. ' .
@@ -1078,11 +1078,11 @@ $ap_translation = [
 	'DataProtection'			=> 'Databeskyttelse - %1 udeladt',
 	'AssumeDropTable'			=> 'Antag %1',
 	'RestoreTableStructure'		=> 'Gendannelse af strukturen i tabellen',
-	'RunSqlQueries'				=> 'Perform SQL-instructions:',
+	'RunSqlQueries'				=> 'Udfør SQL instruktioner:',
 	'CompletedSqlQueries'		=> 'Fuldført. Behandlede instruktioner:',
 	'NoTableStructure'			=> 'Strukturen af tabellerne blev ikke gemt - spring over',
 	'RestoreRecords'			=> 'Gendan indholdet af tabeller',
-	'ProcessTablesDump'			=> 'Just download and process tables dump',
+	'ProcessTablesDump'			=> 'Bare downloade og behandle tabel lossepladser',
 	'Instruction'				=> 'Instruktion',
 	'RestoredRecords'			=> 'optegnelser:',
 	'RecordsRestoreDone'		=> 'Fuldført. Indgange i alt:',
@@ -1113,7 +1113,7 @@ $ap_translation = [
 	'LogBackupArchived'			=> 'Backup ##%1## arkiveret.',
 
 	// User module
-	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',
+	'UsersInfo'					=> 'Her kan du ændre dine brugeres information og visse specifikke indstillinger.',
 
 	'UsersAdded'				=> 'Bruger tilføjet',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
@@ -1155,7 +1155,7 @@ $ap_translation = [
 	'GroupsAlreadyExists'		=> 'Denne gruppe eksisterer allerede.',
 	'GroupsAdded'				=> 'Gruppen blev tilføjet.',
 	'GroupsRenamed'				=> 'Gruppe omdøbt.',
-	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
+	'GroupsDeleted'				=> 'Gruppen %1 og alle tilknyttede sider blev slettet fra databasen.',
 	'GroupsAdd'					=> 'Tilføj en ny gruppe',
 	'GroupsRename'				=> 'Omdøb gruppen %1 til',
 	'GroupsRenameInfo'			=> '* Bemærk: Ændringen vil påvirke alle sider, der er tilknyttet denne gruppe.',
@@ -1251,7 +1251,7 @@ $ap_translation = [
 	'Solve'						=> 'Løs',
 
 	// Bad Behaviour module
-	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+	'BbInfo'					=> 'Registrerer og blokerer uønsket webadgang, nægter automatisk adgang til spambots.<br>For mere information, besøg venligst %1 hjemmeside.',
 	'BbEnable'					=> 'Aktivér Dårlig Opførsel:',
 	'BbEnableInfo'				=> 'Alle andre indstillinger kan ændres i konfigurationsmappen %1.',
 	'BbStats'					=> 'Bad Adfærd har blokeret %1 adgang forsøg i de sidste 7 dage.',

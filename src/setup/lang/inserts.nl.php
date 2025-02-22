@@ -4,14 +4,9 @@ $insert = [
 	'lang'				=> 'nl',
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right\n**' . "\n" .
-			'
-
-' . "\n\n" .
-			'
-
-' . "\n\n" .
-			'
-' . "\n" .
+			'**Welkom op uw ((WackoWiki:Doc/English WackoWiki)) site!**' . "\n\n" .
+			'Klik nadat je ingelogd op de "Deze pagina bewerken" link onderaan om te beginnen.' . "\n\n" .
+			'Documentatie is te vinden op WackoWiki:Doc/English.' . "\n" .
 			'Handige pagina\'s: ((WackoWiki:Doc/English/Formatting formatteren)), ((/Search Search)).' . "\n\n",
 	'root_page'			=> 'Startpagina',
 

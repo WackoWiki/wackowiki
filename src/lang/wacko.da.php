@@ -658,9 +658,9 @@ $wacko_translation = [
 	'EmailNotConfirmed'			=> 'Kan ikke bekræfte din mail. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email ikke verificeret!',
 	'EmailNotVerifiedDesc'		=> 'Du vil ikke modtage notifikation om ændringer eller kommentarer på sete sider, ' .
-									'or messages from other users. Also, you <strong>will not be able to recover a forgotten password</strong>, ' .
-									'until your email address is confirmed by following the link in the email sent to you. ' .
-									'If, within days after registration you do not receive an email, ask for it again by clicking ',
+									'eller beskeder fra andre brugere. Du <strong>vil heller ikke være i stand til at gendanne en glemt adgangskode</strong>, ' .
+									'indtil din e-mail-adresse bekræftes ved at følge linket i den e-mail, der sendes til dig. ' .
+									'Hvis du inden for dage efter registreringen ikke modtager en e-mail, beder om det igen ved at klikke ',
 
 	'ForgotPasswordHint'		=> 'Oplys dit brugernavn og din emailadresse,' . "\n" . 'så sender vi en mail med instruktioner.',
 	'ForgotPassword'			=> 'Glemt password?',
