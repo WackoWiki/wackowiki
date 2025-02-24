@@ -141,6 +141,7 @@ $upgrade['6.1.3'][]		= ['alter',		'user',				$alter_user_r6_0_1];
 $upgrade['6.1.3'][]		= ['alter',		'user_settings',	$alter_user_setting_r6_0_1];
 $upgrade['6.1.3'][]		= ['alter',		'user_settings',	$alter_user_setting_r6_0_2];
 $upgrade['6.1.3'][]		= ['alter',		'user_settings',	$alter_user_setting_r6_0_3];
+$upgrade['6.1.26'][]	= ['alter',		'user_settings',	$alter_user_setting_r6_0_4];
 
 $upgrade['6.1.3'][]		= ['update',	'user_settings',	$update_user_setting_r6_0_1];
 

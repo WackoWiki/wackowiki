@@ -236,14 +236,17 @@ write_config_hidden_nodes($config_parameters);
 	{
 		echo $permissions_notice;
 		echo '<p class="msg security">' . $lang['ErrorPermissions'] . '</p>';
-		/* echo
-			'<p class="msg notice">
-				<code>
-					chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
-					<br><br>
-					chmod 0660 config/config.php config/lock config/lock_ap
-				</code>
-			</p>'; */
+		echo
+			'<details open="">
+				<summary>' . $lang['Example'] . '</summary>
+				<p class="msg notice">
+					<code>
+						chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
+						<br><br>
+						chmod 0660 config/config.php config/lock config/lock_ap
+					</code>
+				</p>
+			</details>';
 		echo $btn_try_again;
 		echo $btn_continue;
 	}

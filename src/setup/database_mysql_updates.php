@@ -97,6 +97,7 @@ $alter_user_r6_0_1 = "ALTER TABLE {$pref}user CHANGE lost_password_request_count
 $alter_user_setting_r6_0_1 = "ALTER TABLE {$pref}user_setting DROP typografica";
 $alter_user_setting_r6_0_2 = "ALTER TABLE {$pref}user_setting DROP dst";
 $alter_user_setting_r6_0_3 = "ALTER TABLE {$pref}user_setting CHANGE timezone timezone VARCHAR(100) NOT NULL DEFAULT 'UTC'";
+$alter_user_setting_r6_0_4 = "ALTER TABLE {$pref}user_setting ADD date_format VARCHAR(10) NOT NULL DEFAULT 'default' AFTER timezone";
 
 $update_user_setting_r6_0_1 = "UPDATE {$pref}user_setting SET timezone = 'UTC'";
 
