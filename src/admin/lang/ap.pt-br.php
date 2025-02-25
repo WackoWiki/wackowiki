@@ -580,7 +580,7 @@ $ap_translation = [
 
 	'HttpSecurityHeaders'		=> 'Cabeçalhos de Segurança HTTP',
 	'EnableSecurityHeaders'		=> 'Habilitar cabeçalhos de segurança:',
-	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk!',
+	'EnableSecurityHeadersinfo'	=> 'Definir cabeçalhos de segurança (buscando quadros, clickjacking/XSS/CSRF proteção). <br>CSP pode causar problemas em certas situações (por exemplo durante o desenvolvimento), ou ao usar plugins que dependem de recursos hospedados externos, como imagens ou scripts. <br>Desabilitar a Política de Segurança de Conteúdo é um risco de segurança!',
 	'Csp'						=> 'Política de segurança de conteúdo (CSP):',
 	'CspInfo'					=> 'Configurar o CSP envolve decidir quais políticas você deseja aplicar e, em seguida, configurá-los e usar a Content-Security-Policy para estabelecer a sua política.',
 	'PolicyModes'	=> [
@@ -606,9 +606,9 @@ $ap_translation = [
 
 	'UserPasswordSection'		=> 'Persistência de Senhas de Usuário',
 	'PwdMinChars'				=> 'Tamanho mínimo da senha:',
-	'PwdMinCharsInfo'			=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'PwdMinCharsInfo'			=> 'Senhas mais longas são necessariamente mais seguras do que senhas mais curtas (por exemplo, 12 a 16 caracteres).<br>O uso de frases-senha em vez de senhas é incentivado.',
 	'AdminPwdMinChars'			=> 'Tamanho mínimo da senha de administrador:',
-	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'AdminPwdMinCharsInfo'		=> 'Senhas mais longas são necessariamente mais seguras do que senhas mais curtas (por exemplo, 15 a 20 caracteres).<br>O uso de frases-senha em vez de senhas é incentivado.',
 	'PwdCharComplexity'			=> 'A complexidade de senha necessária:',
 	'PwdCharClasses'	=> [
 		'0'		=> 'não testado',
@@ -673,7 +673,7 @@ $ap_translation = [
 	'TimeFormatInfo'			=> '(hora, minuto)',
 	'TimeFormatSeconds'			=> 'O formato do horário exato:',
 	'TimeFormatSecondsInfo'		=> '(horas, minutos, segundos)',
-	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro:',
+	'NameDateMacro'				=> 'O formato do <code>::@::</code> macro:',
 	'NameDateMacroInfo'			=> '(name, time), ex.: <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Timezone:',
 	'TimezoneInfo'				=> 'Fuso horário para exibir horários para usuários que não estão conectados (convidados). Os usuários conectados podem alterar seu fuso horário em suas configurações de usuário.',
@@ -875,9 +875,9 @@ $ap_translation = [
 	'SmtpConnectionMode'		=> 'Modo de conexão SMTP:',
 	'SmtpConnectionModeInfo'	=> 'Usado somente se um nome de usuário/senha for necessário. Pergunte ao seu provedor se você não tem certeza qual método usar',
 	'SmtpPassword'				=> 'Senha do SMTP:',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plaintext in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
+	'SmtpPasswordInfo'			=> 'Insira uma senha somente se o seu servidor SMTP exigir.<br><em><strong>Aviso:</strong> Esta senha será armazenada como texto simples no banco de dados, visível para todos que podem acessar seu banco de dados ou que podem visualizar esta página de configuração.</em>',
 	'SmtpPort'					=> 'Porta do servidor SMTP:',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465).',
+	'SmtpPortInfo'				=> 'Só altere isso se você sabe que seu servidor SMTP está em uma porta diferente. <br>(padrão: <code>tls</code> na porta 587 (ou possivelmente 25) e <code>ssl</code> na porta 465).',
 	'SmtpServer'				=> 'Endereço do servidor SMTP:',
 	'SmtpServerInfo'			=> 'Note que você precisa fornecer o protocolo que seu servidor usa. Se você está usando SSL, este deve ser o protocolo <code>ssl://mail.example.com</code>.',
 	'SmtpUsername'				=> 'Usuário SMTP:',
@@ -1025,7 +1025,7 @@ $ap_translation = [
 	'BackupFiles'				=> 'arquivos',
 	'BackupNote'				=> 'Nota:',
 	'BackupSettings'			=> 'Especifique o esquema de backup desejado.<br>' .
-    	'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .  '<br>' .
+    	'O cluster raiz não afeta o backup dos arquivos globais e o backup dos arquivos de cache (se escolhido, eles são sempre salvos na íntegra).<br>' .  '<br>' .
 		'<strong>Atenção</strong>: Para evitar a perda de informações do banco de dados ao especificar o cluster de raiz, as tabelas deste backup não serão reestruturadas, o mesmo que durante o backup somente da estrutura de tabelas sem salvar os dados. Para fazer uma conversão completa das tabelas para o formato de backup, é necessário fazer o <em> backup completo da base de dados (estrutura e dados) sem especificar o cluster</em>.',
 	'BackupCompleted'			=> 'Backup e arquivamento concluído.<br>' .
     	'Os arquivos do pacote de Backup foram armazenados no sub-diretório %1.<br>. Para baixar, use FTP (mantenha a estrutura do diretório e os nomes de arquivos durante a cópia).<br> Para restaurar uma cópia de segurança ou remover um pacote, vá para <a href="%2">Restaurar banco de dados</a>.',
@@ -1295,7 +1295,7 @@ $ap_translation = [
 	'BbHttpblMaxage'			=> 'Idade máxima dos dados (30 é recomendado)',
 	'BbReverseProxy'			=> 'Balanço de Proxo/Carga Reverso',
 	'BbReverseProxyInfo'		=> 'Se você estiver usando o Bad Behaviour atrás de um proxy reverso, balanceador de carregamento, acelerador de HTTP, cache de conteúdo ou tecnologia similar, ative a opção de Proxy Reverso.<br>' .
-									'If you have a chain of two or more reverse proxies between your server and the public Internet, you must specify <em>all</em> of the IP address ranges (in CIDR format) of all of your proxy servers, load balancers, etc. Otherwise, Bad Behaviour may be unable to determine the client\'s true IP address.<br>' .
+									'Se você tiver uma cadeia de dois ou mais proxies reversos entre seu servidor e a Internet pública, deverá especificar <em>todos</em> os intervalos de endereços IP (no formato CIDR) de todos os seus servidores proxy, balanceadores de carga, etc. Caso contrário, o Bad Behaviour pode não conseguir determinar o verdadeiro endereço IP do cliente.<br>' .
 									'Além disso, os seus servidores de proxy reverso devem definir o endereço IP do cliente de Internet do qual receberam a solicitação num cabeçalho HTTP. Se você não especificar um cabeçalho, %1 será usado. A maioria dos servidores proxy já suporta X-Forwarded-For e então você só precisa garantir que ele esteja ativado nos seus servidores proxy. Alguns outros nomes de cabeçalho em uso comum incluem %2 e %3.',
 	'BbReverseProxyEnable'		=> 'Habilitar Proxy Reverso',
 	'BbReverseProxyHeader'		=> 'Cabeçalho contendo o endereço IP dos clientes Internet',

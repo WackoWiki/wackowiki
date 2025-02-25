@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'Il vostro server deve soddisfare i requisiti elencati di seguito.',
 'OK'							=> 'OK',
 'Problem'						=> 'Problema',
+'Example'						=> 'Esempio',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'La vostra installazione PHP sembra mancare le note estensioni PHP richieste da WackoWiki.',
 'PcreWithoutUtf8'				=> 'Il modulo PCRE di PHP sembra essere stato compilato senza il supporto PCRE_UTF8',

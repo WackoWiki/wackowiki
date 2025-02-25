@@ -4,9 +4,9 @@ $lang = [
 /*
    Language Settings
 */
-'LangISO'		=> 'cs',
-'LangLocale'	=> 'cs_CZ',
-'LangName'		=> 'Czech',
+'LangISO'		=> 'en',
+'LangLocale'	=> 'en_US',
+'LangName'		=> 'English',
 'LangDir'		=> 'ltr',
 
 /*
@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'Váš server musí splňovat níže uvedené požadavky.',
 'OK'							=> 'OK',
 'Problem'						=> 'Problém',
+'Example'						=> 'Příklad',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Zdá se, že vaše instalace PHP chybí uvedená rozšíření PHP, která WackoWiki vyžaduje.',
 'PcreWithoutUtf8'				=> 'PCRE není kompilován s podporou UTF-8.',

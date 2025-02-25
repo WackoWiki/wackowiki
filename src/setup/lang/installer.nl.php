@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'Uw server moet voldoen aan de onderstaande eisen.',
 'OK'							=> 'Ok',
 'Problem'						=> 'Probleem',
+'Example'						=> 'Voorbeeld',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Uw PHP-installatie lijkt de genoteerde PHP-extensies te missen die door WackoWiki zijn vereist.',
 'PcreWithoutUtf8'				=> 'PCRE is niet gecompileerd met UTF-8 ondersteuning.',

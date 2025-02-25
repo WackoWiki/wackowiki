@@ -499,8 +499,8 @@ $ap_translation = [
 	'LoginNoticeInfo'				=> 'Näyttää kirjautumisilmoituksen.',
 
 	'RewriteMode'					=> 'Käytä <code>mod_rewrite</code>:',
-	'RewriteModeInfo'				=> 'If your web server supports this feature, enable to "beautify" the page URLs.<br>
-										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
+	'RewriteModeInfo'				=> 'Jos verkkopalvelimesi tukee tätä ominaisuutta, ota se käyttöön ”kaunistaaksesi” sivun URL-osoitteita.<br>
+										<span class=”cite”>Asetukset-luokka saattaa korvata arvon ajonaikana riippumatta siitä, onko se kytketty pois päältä, jos HTTP_MOD_REWRITE on käytössä.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parametrit, jotka vastaavat kulunvalvonnasta ja käyttöoikeuksista.',
@@ -664,7 +664,7 @@ $ap_translation = [
 	'BracketsLinks'				=> 'Poista ristikkäiset linkit:',
 	'BracketsLinksInfo'			=> 'Poistaa <code>[[link]]</code> ja <code>((link))</code> syntaksin.',
 	'Formatters'				=> 'Poista formaatit käytöstä:',
-	'FormattersInfo'			=> 'Disables <code>%%code%%</code> syntax, used for highlighters.',
+	'FormattersInfo'			=> 'Poistaa käytöstä <code>%%code%%%</code>-syntaksin, jota käytetään korostimissa.',
 
 	'DateFormatsSection'		=> 'Päivämäärän Muodot',
 	'DateFormat'				=> 'Päivämäärän muoto:',
@@ -927,9 +927,9 @@ $ap_translation = [
 	'MaxImageWidthInfo'			=> 'Kuvan suurin leveys voi olla sivuilla, muuten luodaan pienennetty pienoiskuva alaspäin.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
-									Remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
-									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+	'DeletedObjectsInfo'		=> 'Luettelo poistetuista sivuista, versioista ja tiedostoista.
+ Poista tai palauta sivut, versiot tai tiedostot tietokannasta napsauttamalla <em>Poista</em>-linkkiä.
+ tai <em>Palauta</em> vastaavalla rivillä. (Ole varovainen, poistovahvistusta ei pyydetä!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Sanat, jotka automaattisesti sensuroidaan Wikillesi.',

@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'Ο διακομιστής πρέπει να έχει τις παρακάτω σε λίστα απαιτήσεις.',
 'OK'							=> 'ΟΚ',
 'Problem'						=> 'Πρόβλημα',
+'Example'						=> 'Παράδειγμα',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Στην εγκατάσταση PHP φαίνεται ότι λείπουν οι σημειωμένες επεκτάσεις PHP που απαιτούνται από το WackoWiki. ',
 'PcreWithoutUtf8'				=> 'Το PCRE module της PHP  φαίνεται να έχει μεταγλωττιστεί χωρίς υποστήριξη  PCRE_UTF8.',

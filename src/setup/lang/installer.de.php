@@ -29,10 +29,9 @@ $lang = [
 	'index_page'		=> 'SeitenIndex',
 
 	'random_page'		=> 'ZufälligeSeite',
-
-	#'help_page'			=> 'Hilfe',
-	#'terms_page'		=> 'Nutzungsbedingungen',
-	#'privacy_page'		=> 'Datenschutz',
+	#'help_page'			=> 'Help',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',
@@ -75,6 +74,7 @@ $lang = [
 'Requirements'					=> 'Dein Server muss den folgenden Anforderungen entsprechen.',
 'OK'							=> 'OK',
 'Problem'						=> 'Problem',
+'Example'						=> 'Beispiel',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'In deiner PHP Installation scheinen folgende von WackoWiki benötigte PHP-Erweiterungen nicht verfügbar zu sein.',
 'PcreWithoutUtf8'				=> 'PCRE ist nicht mit UTF-8-Unterstützung kompiliert.',
@@ -207,7 +207,7 @@ $lang = [
 'InstallationComplete'			=> 'Installation abgeschlossen',
 'ThatsAll'						=> 'Das wars! Du kannst nun <a href="%1"> zu deinem WackoWiki zurückkehren</a>.',
 'SecurityConsiderations'		=> 'Sicherheitserwägungen',
-'SecurityRisk'					=> 'Es wird dringend empfohlen, die Schreibrechte auf die Datei %1 nach dem Schreiben der Konfiguration wieder mit %2 zu entfernen. Eine überschreibbare Konfigurationsdatei ist ein Sicherheitsrisiko!<br>i.e. %2',
+'SecurityRisk'					=> 'Es wird dringend empfohlen, die Schreibrechte auf die Datei %1 nach dem Schreiben der Konfiguration wieder zu entfernen. Eine überschreibbare Konfigurationsdatei ist ein Sicherheitsrisiko!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'Du solltest den Ordner %1 löschen nachdem die Installation beendet wurde.',
 'ErrorGivePrivileges'			=> 'Die Konfigurationsdatei %1 konnte nicht geschrieben werden. Du musst dem Webserver vorübergehend Schreibrechte auf das WackoWiki Verzeichnis oder auf die leere %1 Datei geben<br>%2<br><br>Vergiss nicht, das Schreibrecht später wieder zu entziehen, z.B. mit<br>%3.<br><br>',
 'ErrorPrivilegesInstall'		=> 'Falls das aus irgendwelchen Gründen nicht möglich ist, kopiere den folgenden Text in eine neue Datei und speichere diese unter %1 in dem WackoWiki Verzeichnis ab. Danach sollte dein WackoWiki funktionieren. Falls nicht, gehe zu <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a>',

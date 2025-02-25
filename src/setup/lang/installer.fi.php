@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'Palvelimesi on täytettävä alla luetellut vaatimukset.',
 'OK'							=> 'Ok',
 'Problem'						=> 'Ongelma',
+'Example'						=> 'Esimerkki',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'PHP asennus näyttää puuttuvan merkityt PHP laajennukset, jotka vaaditaan WackoWiki.',
 'PcreWithoutUtf8'				=> 'PCRE ei ole käännetty UTF-8 tuella.',
@@ -101,7 +102,7 @@ $lang = [
 'NameAlphanumOnly'				=> 'Käyttäjänimen tulee olla %1 - %2 merkkiä pitkä ja käyttää vain alfanumeerisia merkkejä. Suurimmat kirjaimet ovat OK.',
 'NameCamelCaseOnly'				=> 'Käyttäjätunnuksen on oltava välillä %1 ja %2 merkkiä pitkä ja WikiName muotoiltu.',
 'Password'						=> 'Ylläpitäjän Salasana',
-'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
+'PasswordDesc'					=> 'Valitse ylläpitäjän salasana, jossa on vähintään %1 merkkiä.',
 'PasswordConfirm'				=> 'Salasana:',
 'Mail'							=> 'Ylläpitäjän Sähköpostiosoite',
 'MailDesc'						=> 'Syötä ylläpitäjän sähköpostiosoite.',
@@ -194,7 +195,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'Poistaminen Valmis',
 'ErrorDeletingTable'			=> 'Virhe poistettaessa %1 -taulukkoa. Todennäköisin syy on, että taulukkoa ei ole olemassa, jolloin voit ohittaa tämän varoituksen.',
 'DeletingTable'					=> 'Poistetaan %1 -taulua',
-'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
+'NextStep'						=> 'Seuraavassa vaiheessa asennusohjelma yrittää kirjoittaa päivitetyn asetustiedoston %1. Varmista, että verkkopalvelimella on kirjoitusoikeus tiedostoon, tai sinun on muokattava sitä manuaalisesti. Katso jälleen kerran lisätietoja kohdasta <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
 
 /*
    Write Config Page
@@ -204,7 +205,7 @@ $lang = [
 'Writing'						=> 'Kirjoitetaan Asetustiedostoa',
 'RemovingWritePrivilege'		=> 'Poistetaan Kirjoitusoikeuksia',
 'InstallationComplete'			=> 'Asennus Valmis',
-'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
+'ThatsAll'						=> 'Siinä kaikki! Voit nyt <a href="%1">tarkastella WackoWiki-sivustoasi</a>.',
 'SecurityConsiderations'		=> 'Turvallisuutta Koskevat Huomiot',
 'SecurityRisk'					=> 'Sinua kehotetaan poistamaan kirjoitusoikeudet %1 nyt kun se on kirjoitettu. Tiedoston jättäminen kirjoitettavaksi voi olla turvallisuusriski!<br>eli %2',
 'RemoveSetupDirectory'			=> 'Sinun pitäisi poistaa %1 -hakemisto nyt, kun asennusprosessi on valmis.',

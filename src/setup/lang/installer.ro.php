@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'Serverul tău trebuie să îndeplinească cerințele enumerate mai jos.',
 'OK'							=> 'Ok',
 'Problem'						=> 'Problemă',
+'Example'						=> 'Exemplu',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Instalarea dvs PHP pare să nu conțină extensiile PHP indicate, necesare pentru WackoWiki.',
 'PcreWithoutUtf8'				=> 'PCRE nu este compilat cu sprijinul UTF-8.',

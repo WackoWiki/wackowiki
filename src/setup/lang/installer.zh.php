@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> '页面索引',
 
 	'random_page'		=> '随机条目',
-	#'help_page'			=> '帮助',
-	#'terms_page'		=> '条款',
-	#'privacy_page'		=> '隐私',
+	#'help_page'			=> 'Help',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',
@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> '您的服务器必须满足下面列出的要求。',
 'OK'							=> '确定',
 'Problem'						=> '问题',
+'Example'						=> '示例',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> '你的PHP安装似乎缺少WackoWiki所需要的PHP扩展。',
 'PcreWithoutUtf8'				=> 'PHP的PCRE模块在编译时可能没有包含PCRE_UTF8支持。',

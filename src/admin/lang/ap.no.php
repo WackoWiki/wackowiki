@@ -43,7 +43,7 @@ $ap_translation = [
 	'SiteClosed'				=> 'nettstedet lukket',
 	'SiteClosedTip'				=> 'Nettstedet er stengt',
 
-	'System'					=> 'Systemadministrasjon',
+	'System'					=> 'System',
 
 	// Generic
 	'Cancel'					=> 'Avbryt',
@@ -297,7 +297,7 @@ $ap_translation = [
 	'SectionsPanel'				=> 'Deler panel:',
 	'SectionsPanelInfo'			=> 'Som standard må du vise panelet på tilstøtende sider (krever støtte i malene).',
 	'DisplayingSections'		=> 'Viser seksjoner:',
-	'DisplayingSectionsInfo'	=> 'When the previous options are set, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>), both, or other (<em>tree</em>).',
+	'DisplayingSectionsInfo'	=> 'Når de forrige alternativene er angitt, om du vil vise bare undersider til siden (<em>nedre</em>), bare nabo (<em>øverst</em>), begge eller andre (<em>tre</em>).',
 	'MenuItems'					=> 'Menyelementer:',
 	'MenuItemsInfo'				=> 'Standard antall viste menyelementer (kan trenge støtte i malene).',
 
@@ -522,7 +522,7 @@ $ap_translation = [
 	'RenameRightsInfo'			=> 'Listen over tillatelser for fritt å gi nytt navn (flyttende) sider.',
 
 	'LockAcl'					=> 'Lås alle ACLs til å lese:',
-	'LockAclInfo'				=> '<span class="cite">Overwrites the ACL settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period of time for security reasons, or as a emergency response to an exploit or vulnerability.',
+	'LockAclInfo'				=> '<span class="cite">Overskriver ACL-innstillingene for alle sider for kun å lese.</span><br>Dette kan være nyttig hvis et prosjekt er fullført, du vil ha tett redigering i en periode av sikkerhetsgrunner, eller som en nødreaksjon på en utnyttelse eller sårbarhet.',
 	'HideLocked'				=> 'Skjul utilgjengelige sider:',
 	'HideLockedInfo'			=> 'Hvis brukeren ikke har tillatelse til å lese siden, skjule det i en annen sideliste (men lenken i teksten vil fortsatt være synlig).',
 	'RemoveOnlyAdmins'			=> 'Kun administratorer kan slette sider:',
@@ -690,7 +690,7 @@ $ap_translation = [
 	'UrlsUnderscores'			=> 'Skjemaadresser (URLer) med understrekning:',
 	'UrlsUnderscoresInfo'		=> 'For eksempel beviker %1 %2 med dette valget.',
 	'ShowSpaces'				=> 'Vis fellesskap i WikiName:',
-	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
+	'ShowSpacesInfo'			=> 'Vis mellomrom i WikiNames, f.eks. <code>Mitt navn</code> vises som <code>Mitt navn</code> med dette alternativet.',
 	'NumerateLinks'				=> 'Liste opp lenker i utskriftsvesen:',
 	'NumerateLinksInfo'			=> 'Liste opp og viser alle koblingene nederst i utskriftsvinduet med dette alternativet.',
 	'YouareHereText'			=> 'Deaktiver og visualiser selvrefererende lenker:',
@@ -1049,7 +1049,7 @@ $ap_translation = [
 									'I vanlig modus blir alle vil bli erstattet av sikkerhetskopiering av postens skjema (ved å bruke SQL <code>REPLACE</code>), ' .
 									'men hvis denne avmerkingsboksen er merket, blir alle duplikater hoppet over (de gjeldende verdiene til poster vil bli holdt), ' .
 									'og bare elementene med nye nøkler er lagt til i tabellen (SQL <code>INSERT IGNORE</code>).<br>' .
-									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br>' .
+									'<strong>Merk</strong>: Når du gjenoppretter fullstendig sikkerhetskopi av nettstedet, har dette alternativet ingen verdi.<br>' .
 									'<br>' .
 									'** Hvis sikkerhetskopien inneholder brukerfilene (global og perside, mellomlagerfiler osv.), ' .
 									'i normal modus erstatter de eksisterende filene med samme navn og plasseres i samme mappe når de blir gjenopprettet. ' .
@@ -1219,12 +1219,12 @@ $ap_translation = [
 	'DbOptimizeRepairInfo'		=> 'Dette skriptet kan også forsøke å optimalisere databasen. Dette forbedrer ytelsen i noen situasjoner. Reparasjon og optimalisering av databasen kan ta lang tid, og databasen vil bli låst mens den optimaliseres.',
 
 	'TableOk'					=> '%1 bordet er greit.',
-	'TableNotOk'				=> 'The %1 table is not okay. It is reporting the following error: %2. This script will attempt to repair this table&hellip;',
+	'TableNotOk'				=> '%1-tabellen er ikke i orden. Den rapporterer følgende feil: %2. Dette skriptet vil forsøke å reparere denne tabellen&hellip;',
 	'TableRepaired'				=> '%1 ble reparert tabellen.',
-	'TableRepairFailed'			=> 'Failed to repair the %1 table. <br>Error: %2',
+	'TableRepairFailed'			=> 'Kunne ikke reparere %1-tabellen. <br>Feil: %2',
 	'TableAlreadyOptimized'		=> 'Tabellen %1 er allerede optimalisert.',
 	'TableOptimized'			=> 'Tabellen %1 ble optimalisert.',
-	'TableOptimizeFailed'		=> 'Failed to optimize the %1 table. <br>Error: %2',
+	'TableOptimizeFailed'		=> 'Kunne ikke optimalisere %1-tabellen. <br>Feil: %2',
 	'TableNotRepaired'			=> 'Enkelte databaseproblemer kunne ikke repareres.',
 	'RepairsComplete'			=> 'Reparasjoner fullført',
 

@@ -319,7 +319,7 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> 'Sorgente',
-	'SourceTip'					=> 'View the wiki-source',
+	'SourceTip'					=> 'Visualizza la sorgente wiki',
 	'SourceCopyToClipboard'		=> 'copia negli appunti',
 	'SourceFor'					=> 'Visualizza sorgente di %1',
 
@@ -497,7 +497,7 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'Per sicurezza, la sessione è terminata. Per favore esegui l’accesso di nuovo.',
 
 	// user settings
-	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
+	'EmailConfirmResent'		=> 'Codice di conferma email inviato al tuo indirizzo.',
 	'EmailConfirmNotSent'		=> 'Impossibile inviare il codice di conferma: l’e-mail non è specificata!',
 	'Hello'						=> 'Salve',
 	'UserName'					=> 'Nome utente',
@@ -1038,7 +1038,7 @@ $wacko_translation = [
 	// Feed
 	'FeedTitle'					=> 'Titolo Feed',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
+	'FeedNoURL'					=> 'Specifica un feed con l\'URL dei parametri. (es. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Impossibile caricare o analizzare il feed',
 	'FeedSource'				=> 'Sorgente:',
 	'FeedXMLTip'				=> '',
@@ -1124,7 +1124,7 @@ $wacko_translation = [
 	'ModerateComDelConfirm'		=> 'Sei sicuro di voler <strong>rimuovere</strong> %1 %2?',
 	'ModerateComment'			=> 'Commento',
 	'ModerateComments'			=> 'Commenti',
-	'ModerateSplitNewName'		=> 'Specify a name for separable topic and select a separation schema',
+	'ModerateSplitNewName'		=> 'Specifica un nome per un argomento separabile e seleziona uno schema di separazione',
 	'ModerateSplitPageName'		=> 'Inserisci il nome della pagina / argomento, dove spostare i commenti staccabili e selezionare uno schema di separazione',
 	'ModerateSplitAllAfter'		=> 'Stacca tutti i commenti dopo il primo selezionato (e incluso)',
 	'ModerateSplitSelected'		=> 'Solo commenti selezionati separati (totale %1)',

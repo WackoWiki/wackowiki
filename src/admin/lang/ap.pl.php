@@ -29,7 +29,7 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Błąd ładowania modułu administratora %1: nie istnieje.',
 
 	'ApHomePage'				=> 'Strona domowa',
-	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
+	'ApHomePageTip'				=> 'Zakończ administrację systemu i otwórz stronę główną',
 	'ApLogOut'					=> 'Wyloguj',
 	'ApLogOutTip'				=> 'Zakończ administrację systemu i wyloguj się z witryny',
 
@@ -58,7 +58,7 @@ $ap_translation = [
 	'Max'						=> 'Maks.',
 
 	'MiscellaneousSection'		=> 'Różne',
-	'MainSection'				=> 'Basic Parameters',
+	'MainSection'				=> 'Opcje Ogólne',
 
 	'DirNotWritable'			=> 'Katalog %1 nie jest zapisywalny.',
 	'FileNotWritable'			=> 'Plik %1 nie jest zapisywalny.',
@@ -541,7 +541,7 @@ niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włącz
 	'OwnersRemoveCommentsInfo'	=> 'Pozwól właścicielom stron na moderowanie komentarzy na ich stronach.',
 	'OwnersEditCategories'		=> 'Właściciele mogą edytować kategorie stron:',
 	'OwnersEditCategoriesInfo'	=> 'Pozwól właścicielom modyfikować listę kategorii stron Twojej witryny (dodaj słowa, usuń słowa), przypisuje do strony.',
-	'TermHumanModeration'		=> 'Term human moderation:',
+	'TermHumanModeration'		=> 'Ważność moderacji człowieka:',
 	'TermHumanModerationInfo'	=> 'Moderatorzy mogą edytować komentarze tylko wtedy, gdy zostały one utworzone nie więcej niż przed tą liczbą dni (to ograniczenie nie dotyczy ostatniego komentarza w temacie).',
 
 	'UserCanDeleteAccount'		=> 'Użytkownicy mogą usuwać swoje konta',
@@ -938,9 +938,9 @@ niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włącz
 	'MaxImageWidthInfo'			=> 'Maksymalna szerokość, jaką może mieć obraz na stronach, w przeciwnym razie generowana jest przeskalowana miniaturka.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
-									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
-									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+	'DeletedObjectsInfo'		=> 'Lista usuniętych stron, wersji i plików.
+Usuń lub przywróć strony, wersje lub pliki z bazy danych, klikając na link <em>Usuń</em>
+lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwierdzenie usunięcia!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Słowa, które zostaną automatycznie cenzurowane na Wiki.',
@@ -1056,9 +1056,9 @@ niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włącz
 	'RestoreOptionsInfo'		=> '* Przed przywróceniem kopii zapasowej klastrów <strong></strong>, ' .
 									'tabele docelowe nie są usuwane (aby zapobiec utracie informacji z klastrów, które nie zostały zabezpieczone). ' .
 									'Tak więc podczas procesu odzyskiwania wystąpią duplikaty rekordów. ' .
-									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), ' .
+									'W trybie normalnym, wszystkie z nich zostaną zastąpione kopią zapasową formularza rekordów (używając SQL <code>REPLACE</code>), ' .
 									'ale jeśli to pole wyboru jest zaznaczone, wszystkie duplikaty zostaną pominięte (bieżące wartości rekordów zostaną zachowane), ' .
-									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br>' .
+									'i tylko rekordy z nowymi kluczami są dodawane do tabeli (SQL <code>INSERT IGNORE</code>).<br>' .
 									'<strong>Uwaga</strong>: Podczas przywracania pełnej kopii zapasowej witryny ta opcja nie ma żadnej wartości.<br>' .
 									'<br>' .
 									'** Jeśli kopia zapasowa zawiera pliki użytkownika (globalne i perpity, pliki pamięci podręcznej itp.), ' .
@@ -1194,7 +1194,7 @@ niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włącz
 	'FileTotal'					=> 'Łącznie',
 
 	// Sysinfo module
-	'SysInfo'					=> 'Version informations:',
+	'SysInfo'					=> 'Informacje o wersji:',
 	'SysParameter'				=> 'Parametr',
 	'SysValues'					=> 'Wartości',
 

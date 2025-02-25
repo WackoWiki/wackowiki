@@ -5,7 +5,7 @@ $lang = [
    Language Settings
 */
 'LangISO'		=> 'ja',
-'LangLocale'	=> 'en_US',
+'LangLocale'	=> 'ja_JP',
 'LangName'		=> '日本語 ',
 'LangDir'		=> 'ltr',
 
@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'サーバーは以下の要件を満たしている必要があります。',
 'OK'							=> 'OK',
 'Problem'						=> '問題',
+'Example'						=> '例',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'あなたのPHPのインストールは、WackoWikiによって必要とされるPHP拡張機能を欠いているように見えます。',
 'PcreWithoutUtf8'				=> 'PHP の PCRE が PCRE_UTF8 対応なしでコンパイルされているようです。',

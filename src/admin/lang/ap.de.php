@@ -98,7 +98,7 @@ $ap_translation = [
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
+		'name'		=> 'Filtrer',
 		'title'		=> 'Filter-Einstellungen',
 	],
 
@@ -301,7 +301,7 @@ $ap_translation = [
 	'MenuItems'					=> 'Menüpunkte:',
 	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten Menüelemente (setzt die Unterstützung durch das Layout vorraus).',
 
-	'HandlerSection'			=> 'Handlers',
+	'HandlerSection'			=> 'Handler',
 	'HideRevisions'				=> 'Seitenversionen ausblenden:',
 	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
 	'AttachmentHandler'			=> 'Datei-Handler aktivieren:',
@@ -403,6 +403,9 @@ $ap_translation = [
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Layout:',
 	'ThemeInfo'					=> 'Layout, welches die Site standardmäßig verwendet.',
+	'ResetUserTheme'			=> 'Reset all user themes:',
+	'ResetUserThemeInfo'		=> 'Resets all user themes. Warning: This action will revert all user-selected themes to the global default theme.',
+	'SetBackUserTheme'			=> 'Revert all user themes to %1 theme.',
 	'ThemesAllowed'				=> 'Zulässige Layouts:',
 	'ThemesAllowedInfo'			=> 'Wähle die zulässigen Layouts aus, die der Benutzer verwenden kann, andernfalls sind alle verfügbaren Layouts zulässig.',
 	'ThemesPerPage'				=> 'Layouts pro Seite:',
@@ -411,6 +414,7 @@ $ap_translation = [
 	// System settings
 	'SystemSettingsInfo'		=> 'Systemeinstellungen der Webseite. Verändere hier nichts, außer wenn Du sicher über die Folgen bist.',
 	'SystemSettingsUpdated'		=> 'Systemeinstellungen  aktualisiert',
+
 	'DebugModeSection'			=> 'Debug-Modus',
 	'DebugMode'					=> 'Debug-Modus:',
 	'DebugModeInfo'				=> 'An- und Abschaltung der Ausgabe von Telemetriedaten über die Programmlaufzeit. Achtung: Der Modus für alle Details stellt höhere Anforderungen an den zugewiesenen Speicher, insbesondere bei ressourcenintensiven Vorgängen wie dem Sichern und Wiederherstellen der Datenbank.',
@@ -468,7 +472,8 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverse-Proxy',
 	'ReverseProxy'				=> 'Nutze Reverse-Proxy:',
-	'ReverseProxyInfo'			=> 'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
+    'ReverseProxyInfo'			=> 
+    'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
 									 Clients zu ermitteln, indem Sie die in den X-Forwarded-For-Headern
 									 gespeicherten Informationen untersuchen. X-Forwarded-For-Header sind ein
 									 Standardmechanismus zum Identifizieren von Client-Systemen, die über einen
@@ -599,10 +604,10 @@ $ap_translation = [
 	],
 	'PermissionsPolicy'			=> 'Permissions Policy:',
 	'PermissionsPolicyInfo'		=> 'Der HTTP Permissions-Policy-Header bietet einen Mechanismus zum expliziten Aktivieren oder Deaktivieren verschiedener leistungsstarker Browserfunktionen.',
-	'ReferrerPolicy'			=> 'Referrer-Policy:',
+	'ReferrerPolicy'			=> 'Referrer Policy:',
 	'ReferrerPolicyInfo'		=> 'Der Referrer-Policy-HTTP-Header bestimmt, welche Referrer-Informationen, die im Referer-Header gesendet werden, in die Anfragen aufgenommen werden sollen.',
 	'ReferrerPolicyModes'	=> [
-		'0'		=> '[off]',
+		'0'		=> '[aus]',
 		'1'		=> 'no-referrer',
 		'2'		=> 'no-referrer-when-downgrade',
 		'3'		=> 'same-origin',
@@ -655,7 +660,7 @@ $ap_translation = [
 	'FormatterSettingsInfo'		=> 'Gruppe von Parametern, die für die Feinabstimmung der Plattform verantwortlich sind. Ändere sie nicht, es sei denn, du bist mit ihrer Funktionsweise vertraut.',
 	'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
 
-	'TextHandlerSection'		=> 'Text Handler:',
+	'TextHandlerSection'		=> 'Text Handler ',
 	'Typografica'				=> 'Typografischer Korrektor:',
 	'TypograficaInfo'			=> 'Durch das Deaktivieren wird der Vorgang des Hinzufügens von Kommentaren und des Speicherns von Seiten geringfügig beschleunigt.',
 	'Paragrafica'				=> 'Paragrafica Markierungen:',
@@ -711,7 +716,7 @@ $ap_translation = [
 	'ListCount'					=> 'Anzahl der Datensätze pro Liste:',
 	'ListCountInfo'				=> 'Anzahl der Zeilen, die in jeder Liste für Gäste angezeigt werden, oder als Standardwert für neue Benutzer.',
 
-	'ForumSection'				=> 'Options Forum',
+	'ForumSection'				=> 'Optionen Forum',
 	'ForumCluster'				=> 'Cluster Forum:',
 	'ForumClusterInfo'			=> 'Root-Cluster für den Forumbereich (Aktion %1).',
 	'ForumTopics'				=> 'Anzahl der Themen pro Seite:',
@@ -969,7 +974,7 @@ $ap_translation = [
 		'4'		=> 'mittel',
 		'5'		=> 'niedrig',
 		'6'		=> 'unterste',
-		'7'		=> 'debugging',
+		'7'		=> 'Debugging',
 	],
 
 	// Massemail module
@@ -1004,7 +1009,7 @@ $ap_translation = [
 
 	'SysMsgType'				=> 'Typ:',
 	'SysMsgTypeInfo'			=> 'Mitteilungtyp (CSS).',
-	'SysMsgAudience'			=> 'Audience:',
+	'SysMsgAudience'			=> 'Zielgruppe:',
 	'SysMsgAudienceInfo'		=> 'Zielgruppe, der die Systemmeldung angezeigt wird.',
 	'EnableSysMsg'				=> 'Aktiviere System-Mitteilung:',
 	'EnableSysMsgInfo'			=> 'Zeige System-Mitteilung.',
@@ -1034,15 +1039,10 @@ $ap_translation = [
 	'BackupFiles'				=> 'Dateien',
 	'BackupNote'				=> 'Hinweis:',
 	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br>' .
-									'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollständig gespeichert).<br>' .
-									'<br>' .
-									'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, ' .
-									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. ' .
-									'Um eine vollständige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
+    	'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollständig gespeichert).<br>' .  '<br>' .
+		'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, ',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br>' .
-									'Die Sicherungspaketdateien wurden im Unterverzeichnis %1 abgelegt.<br>' .
-									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
-									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
+    	'The Backup package files were stored in the sub-directory %1.<br>. To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 	'Backup'					=> 'Datensicherung',
 	'CantReadFile'				=> 'Kann Datei %1 nicht lesen.',
@@ -1132,7 +1132,7 @@ $ap_translation = [
 
 	'UserIP'					=> 'IP',
 	'UserSignuptime'			=> 'Anmeldung',
-	'UserActions'				=> 'Actions',
+	'UserActions'				=> 'Aktionen',
 	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfüllen.',
 
 	'UserAccountNotify'			=> 'Benutzer benachrichtigen',
@@ -1208,17 +1208,17 @@ $ap_translation = [
 	'WebServer'					=> 'Webserver',
 	'HttpProtocol'				=> 'HTTP-Protokoll',
 	'DbVersion'					=> 'MariaDB / MySQL',
-	'SqlModesGlobal'			=> 'SQL Modes Global',
-	'SqlModesSession'			=> 'SQL Modes Session',
+	'SqlModesGlobal'			=> 'SQL-Modus global',
+	'SqlModesSession'			=> 'SQL-Modus Sitzung',
 	'IcuVersion'				=> 'ICU',
 	'PhpVersion'				=> 'PHP',
 	'MemoryLimit'				=> 'Speicher',
-	'UploadFilesizeMax'			=> 'Upload max filesize',
+	'UploadFilesizeMax'			=> 'Maximal hochladbare Dateigröße',
 	'PostMaxSize'				=> 'Post max size',
 	'MaxExecutionTime'			=> 'Max execution time',
 	'SessionPath'				=> 'Session path',
 	'PhpDefaultCharset'			=> 'PHP default charset',
-	'GZipCompression'			=> 'GZip compression',
+	'GZipCompression'			=> 'Gzip-Komprimierung',
 	'PhpExtensions'				=> 'PHP Erweiterungen',
 	'ApacheModules'				=> 'Apache Module',
 

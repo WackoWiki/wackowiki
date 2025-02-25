@@ -74,6 +74,7 @@ $lang = [
 'Requirements'					=> 'يجب أن يفي الخادم الخاص بك بالمتطلبات المدرجة أدناه.',
 'OK'							=> 'حسناً',
 'Problem'						=> 'مشكلة',
+'Example'						=> 'مثال',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'يبدو أن تثبيت PHP الخاص بك مفقود ملحقات PHP المشار إليها، والتي مطلوبة من قبل واكوويكي.',
 'PcreWithoutUtf8'				=> 'لم يتم تجميع PCRE بدعم من UTF-8.',
