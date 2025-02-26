@@ -129,7 +129,13 @@ else
 	echo $separator; ?>
 
 	<label class="label_top" for="base_url"><?php echo $lang['Base'];?></label>
-	<p class="notop"><?php echo $lang['BaseDesc'];?></p>
+	<p class="notop">
+	<?php echo $lang['BaseDesc'];?>
+		<ul>
+			<li><strong><code>https://example.com/</code></strong></li>
+			<li><strong><code>https://example.com/wiki/</code></strong></li>
+		</ul>
+	</p>
 	<input type="url" maxlength="1000" id="base_url" name="config[base_url]" value="<?php echo $config['base_url'] ?>" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
