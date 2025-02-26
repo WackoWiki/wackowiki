@@ -211,7 +211,7 @@ write_config_hidden_nodes($config_parameters);
 	}
 	else if (!$php_version_result)
 	{
-		echo '<p class="msg security">' . $lang['ErrorMinPhpVersion'] . '</p>';
+		echo '<p class="msg security">' . Ut::perc_replace($lang['ErrorMinPhpVersion'], '<strong>' . PHP_MIN_VERSION . '</strong>') . '</p>';
 		echo $btn_try_again;
 	}
 	else if (!$database_result)
