@@ -4,10 +4,10 @@ $lang = [
 /*
    Language Settings
 */
-'LangISO'		=> 'fa',
-'LangLocale'	=> 'fa_IR',
-'LangName'		=> 'Farsi',
-'LangDir'		=> 'rtl',
+'LangISO'		=> 'en',
+'LangLocale'	=> 'en_US',
+'LangName'		=> 'English',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults
@@ -29,7 +29,7 @@ $lang = [
 	'index_page'		=> 'PageIndex',
 
 	'random_page'		=> 'RandomPage',
-	#'help_page'			=> 'راهنما',
+	#'help_page'			=> 'Help',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',
 
@@ -74,12 +74,13 @@ $lang = [
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
 'Problem'						=> 'Problem',
+'Example'						=> 'Example',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Your PHP installation appears to be missing the noted PHP extensions which are required by WackoWiki.',
 'PcreWithoutUtf8'				=> 'PCRE با پشتیبانی UTF-8 کامپایل نشده است.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion'			=> 'The PHP version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
+'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
 'Ready'							=> 'Congratulations, it appears that your server is capable of running WackoWiki. The next few pages will take you through the configuration process.',
 
 /*
@@ -106,14 +107,14 @@ $lang = [
 'Mail'							=> 'آدرس ایمیل مدیران',
 'MailDesc'						=> 'Enter the admins email address.',
 'Base'							=> 'Base URL',
-'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
 'Rewrite'						=> 'رو نویسی حالت',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> 'فعال:',
 'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
 'ErrorAdminPasswordMismatch'	=> 'دو رمز عبوری که وارد کرده‌اید با هم مطابقت ندارند.',
-'ErrorAdminPasswordShort'		=> 'The admin password is too short! The minimum length is %1 characters.',
-'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled. This however does not mean it is disabled.',
+'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
+'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
 /*
    Database Config Page
@@ -130,11 +131,11 @@ $lang = [
 'DbEngine'						=> 'موتور ذخیره سازی',
 'DbEngineDesc'					=> 'The database engine you want to use.',
 'DbHost'						=> 'میزبان',
-'DbHostDesc'					=> 'The host your database server is running on, usually <code>127.0.0.1</code> or <code>localhost</code> (i.e., the same machine your WackoWiki site is on).',
+'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
 'DbPort'						=> 'درگاه (اختیاری)',
-'DbPortDesc'					=> 'The port number your database server is accessible through. Leave it blank to use the default port number.',
+'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
 'DbName'						=> 'نام پایگاه داده',
-'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
+'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbUser'						=> 'نام کاربری',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'گذرواژه',
@@ -206,14 +207,14 @@ $lang = [
 'InstallationComplete'			=> 'نصب کامل شد',
 'ThatsAll'						=> 'این همه است !اکنون می توانید <a href="%1">سایت WackoWiki خود را مشاهده کنید</a>.',
 'SecurityConsiderations'		=> 'ملاحظات امنیتی',
-'SecurityRisk'					=> 'You are advised to remove write access to %1 now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
+'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2.<br><br> Don\'t forget to remove write access again later, i.e., <br>%3.<br><br>',
+'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>',
 'ErrorPrivilegesInstall'		=> 'If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
-'ConfigDescription'				=> 'detailed description: https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> 'Try Again',
 
 ];

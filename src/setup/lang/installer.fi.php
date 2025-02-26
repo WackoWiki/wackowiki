@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE ei ole käännetty UTF-8 tuella.',
 'NotePermissions'				=> 'Tämä asentaja yrittää kirjoittaa asetustiedot tiedostoon %1, joka sijaitsee WackoWiki hakemistossa. Jotta tämä toimisi, sinun on varmistettava, että web-palvelimella on kirjoitusoikeudet kyseiseen tiedostoon. Jos et voi tehdä tätä, sinun täytyy muokata tiedostoa manuaalisesti (asennusohjelma kertoo sinulle).<br><br>Katso lisätietoja <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
 'ErrorPermissions'				=> 'Näyttää siltä, että asentaja ei voi automaattisesti asettaa vaadittuja tiedostoja WackoWiki toimimaan oikein. Sinulle kysytään myöhemmin asennusprosessissa, jotta voit määrittää manuaalisesti vaaditut tiedostooikeudet palvelimellasi.',
-'ErrorMinPhpVersion'			=> 'PHP-version on oltava suurempi kuin <strong>' . PHP_MIN_VERSION . '</strong>. Palvelimesi näyttää olevan käynnissä aikaisemmassa versiossa. Sinun täytyy päivittää uusimpaan PHP-versioon, jotta WackoWiki toimisi oikein.',
+'ErrorMinPhpVersion'			=> 'PHP-version on oltava suurempi kuin %1. Palvelimellasi näyttää olevan käynnissä aikaisempi versio. Sinun täytyy päivittää uusimpaan PHP-versioon, jotta WackoWiki toimisi oikein.',
 'Ready'							=> 'Onnittelut, näyttää siltä, että palvelimesi pystyy suorittamaan WackoWikin. Seuraavat sivut vievät sinut konfiguraation läpi.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Ylläpitäjän Sähköpostiosoite',
 'MailDesc'						=> 'Syötä ylläpitäjän sähköpostiosoite.',
 'Base'							=> 'Base URL',
-'BaseDesc'						=> 'WackoWiki sivuston perusosoite. Sivun nimet liitetään siihen, joten jos käytät mod_rewrite osoitetta loppuu eteenpäin slash, i. .</p><ul><li><strong><code>https://example. om/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'WackoWiki sivuston perusosoite. Sivun nimet lisätään siihen, joten jos käytät mod_rewrite osoitetta pitäisi lopettaa eteenpäin kauttaviivalla, eli',
 'Rewrite'						=> 'Uudelleenkirjoitustila',
 'RewriteDesc'					=> 'Uudelleenkirjoitustila tulisi ottaa käyttöön, jos käytät WackoWikiä URL-osoitteen uudelleenkirjoittamiseen.',
 'Enabled'						=> 'Käytössä:',

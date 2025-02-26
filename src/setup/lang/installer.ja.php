@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PHP の PCRE が PCRE_UTF8 対応なしでコンパイルされているようです。',
 'NotePermissions'				=> 'このインストーラはWackoWikiディレクトリにある %1ファイルに設定データを書き込もうとします。 これを機能させるには、ウェブサーバーがそのファイルへの書き込みアクセス権を持っていることを確認する必要があります。 これを行うことができない場合は、手動でファイルを編集する必要があります(インストーラが方法を教えてくれます)。 Aformat@@0<br><br>詳細は <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> をご覧ください。',
 'ErrorPermissions'				=> 'WackoWikiが正しく動作するために必要なファイル権限をインストーラが自動的に設定できないようです。 手動でサーバーに必要なファイル権限を設定するには、インストールプロセスの後半にプロンプトが表示されます。',
-'ErrorMinPhpVersion'			=> 'The PHP version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>. サーバーが以前のバージョンを実行しているようです。WackoWikiが正常に動作するには、最新のPHPバージョンにアップグレードする必要があります。',
+'ErrorMinPhpVersion'			=> 'PHPのバージョンは %1より大きくなければなりません。サーバーが以前のバージョンを実行しているようです。 WackoWikiが正しく動作するには、最新のPHPバージョンにアップグレードする必要があります。',
 'Ready'							=> 'おめでとうございます。あなたのサーバーは WackoWiki を実行できるようになっています。次のいくつかのページで構成プロセスを説明します。',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> '管理者メールアドレス',
 'MailDesc'						=> '管理者のメールアドレスを入力します。',
 'Base'							=> 'ベースURL',
-'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'あなたの WackoWiki サイトのベース URL です。 ページ名が付加されるので、mod_rewrite を使用している場合は、 アドレスはスラッシュ、すなわち で終わるべきです。',
 'Rewrite'						=> '書き換えモード',
 'RewriteDesc'					=> 'URL書き換えでWackoWikiを使用している場合は、書き換えモードを有効にする必要があります。',
 'Enabled'						=> '有効にする:',

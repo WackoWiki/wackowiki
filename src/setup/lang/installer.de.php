@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE ist nicht mit UTF-8-Unterstützung kompiliert.',
 'NotePermissions'				=> 'ACHTUNG: Der Installer wird versuchen, die Einstellungen in die Datei %1 zu schreiben, diese Datei befindet sich im WackoWiki Verzeichnis. Damit das funktioniert, muss sichergestellt sein, dass der Webserver Schreibrechte auf diese Datei hat! Falls das nicht möglich ist, musst die Datei später von Hand geändert werden (das Installationsskript sagt dann, was zu tun ist).<br><br>Lies <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a> für weitere Einzelheiten.',
 'ErrorPermissions'				=> 'Es scheint das der Installer nicht die erforderlichen Zugriffsrechte für die Dateien automatisch setzen kann um korrekt zu funktionieren. Du wirst später im Installationsprozess aufgefordert, die erforderlichen Zugriffsrechte händisch auf dem Server zu setzen.',
-'ErrorMinPhpVersion'			=> 'Die PHP Version muss größer als <strong>' . PHP_MIN_VERSION . '</strong> sein, dein Server scheint mit einer füheren Version zu laufen.  Du must auf eine aktuellere PHP Version upgraden damit WackoWiki korrekt funktioniert.',
+'ErrorMinPhpVersion'			=> 'Die PHP Version muss größer als %1 sein, dein Server scheint mit einer füheren Version zu laufen.  Du must auf eine aktuellere PHP Version upgraden damit WackoWiki korrekt funktioniert.',
 'Ready'							=> 'Glückwünsch, dein Server scheint fähig WackoWiki ausführen zu können. Die folgenden Seiten werden dich durch den Konfigurationsprozess führen.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'E-Mail Adresse des Verwalters',
 'MailDesc'						=> 'Gib die E-Mail Adresse des Verwalters ein.',
 'Base'							=> 'Basis-URL',
-'BaseDesc'						=> 'Die Basis-URL deines WackoWikis. Die Seitennamen werden an diese angehängt. Falls mod_rewrite verfügbar ist, muß die URL mit einen Schrägstrich abschließen:</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Die Basis-URL deines WackoWikis. Die Seitennamen werden an diese angehängt. Falls mod_rewrite verfügbar ist, muß die URL mit einen Schrägstrich abschließen:',
 'Rewrite'						=> 'Umschreiben',
 'RewriteDesc'					=> '<a href="https://wackowiki.org/doc/Doc/Deutsch/RewriteModus" target="_blank">Umschreiben</a> sollte aktiviert sein, falls du WackoWiki mit URL-Umschreiben verwenden willst.',
 'Enabled'						=> 'Aktiviert:',

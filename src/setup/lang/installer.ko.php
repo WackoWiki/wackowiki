@@ -5,7 +5,7 @@ $lang = [
    Language Settings
 */
 'LangISO'		=> 'ko',
-'LangLocale'	=> 'ko_KR',
+'LangLocale'	=> 'en_US',
 'LangName'		=> '한국어',
 'LangDir'		=> 'ltr',
 
@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> '페이지색인',
 
 	'random_page'		=> '임의의문서로',
-	#'help_page'		=> '도움말',
-	#'terms_page'		=> '서비스이용약관',
-	#'privacy_page'		=> '개인정보처리방침',
+	#'help_page'			=> 'Help',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',
@@ -74,12 +74,13 @@ $lang = [
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
 'Problem'						=> '문제',
+'Example'						=> 'Example',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'PHP 설치에 WackoWiki에서 요구하는 PHP 확장이 누락 된 것 같습니다. ',
 'PcreWithoutUtf8'				=> 'PHP의 PCRE 모듈은 RCRE_UTF8 지원 없이 컴파일된 것 같습니다.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion'			=> 'The PHP version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
+'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
 'Ready'							=> 'Congratulations, it appears that your server is capable of running WackoWiki. The next few pages will take you through the configuration process.',
 
 /*
@@ -106,7 +107,7 @@ $lang = [
 'Mail'							=> '관리자 이메일 주소',
 'MailDesc'						=> 'Enter the admins email address.',
 'Base'							=> 'Base URL',
-'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
 'Rewrite'						=> 'Rewrite Mode',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> '사용:',
@@ -130,11 +131,11 @@ $lang = [
 'DbEngine'						=> '저장소 엔진',
 'DbEngineDesc'					=> 'The database engine you want to use.',
 'DbHost'						=> '데이터베이스 호스트',
-'DbHostDesc'					=> 'The host your database server is running on, usually <code>127.0.0.1</code> or <code>localhost</code> (i.e., the same machine your WackoWiki site is on).',
+'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
 'DbPort'						=> '포트 (선택 과목)',
-'DbPortDesc'					=> 'The port number your database server is accessible through. Leave it blank to use the default port number.',
+'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
 'DbName'						=> '데이터베이스 이름',
-'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
+'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbUser'						=> '사용자 이름',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> '암호',
@@ -144,7 +145,7 @@ $lang = [
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
 'DeleteTables'					=> 'Delete Existing Tables?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone, and you will be required to manually restore the data from a backup.',
+'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
 'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
 
 /*
@@ -192,7 +193,7 @@ $lang = [
 'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
 'DeletingTables'				=> 'Deleting Tables',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
-'ErrorDeletingTable'			=> 'Error deleting %1 table. The most likely reason is that the table does not exist, in which case you can ignore this warning.',
+'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
 'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 
@@ -206,14 +207,14 @@ $lang = [
 'InstallationComplete'			=> '설치 완료',
 'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations'		=> '보안 고려 사항',
-'SecurityRisk'					=> 'You are advised to remove write access to %1 now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
+'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2.<br><br> Don\'t forget to remove write access again later, i.e., <br>%3.<br><br>',
+'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>',
 'ErrorPrivilegesInstall'		=> 'If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
-'ConfigDescription'				=> 'detailed description: https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> '다시 시도하십시오',
 
 ];

@@ -867,7 +867,7 @@ $ap_translation = [
 	'SendTestEmailInfo'			=> 'سيؤدي هذا إلى إرسال بريد إلكتروني تجريبي إلى العنوان المحدد في حسابك.',
 	'TestEmailSubject'			=> 'تم تكوين ويكي بشكل صحيح لإرسال رسائل البريد الإلكتروني',
 	'TestEmailBody'				=> 'إذا تلقيت هذا البريد الإلكتروني، يتم تكوين ويكي بشكل صحيح لإرسال رسائل البريد الإلكتروني.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your email configuration settings.',
+	'TestEmailMessage'			=> 'تم إرسال البريد الإلكتروني الاختباري. <br>إذا لم تستلمه، يرجى التحقق من إعدادات تكوين البريد الإلكتروني.',
 
 	'SmtpSettings'				=> 'إعدادات SMTP',
 	'SmtpAutoTls'				=> 'TLS الانتهازية:',
@@ -875,7 +875,7 @@ $ap_translation = [
 	'SmtpConnectionMode'		=> 'وضع الاتصال لـ SMTP:',
 	'SmtpConnectionModeInfo'	=> 'يستخدم فقط إذا كان اسم المستخدم/كلمة المرور مطلوبًا. اسأل المزود الخاص بك إذا كنت غير متأكد من أي طريقة لاستخدامها',
 	'SmtpPassword'				=> 'كلمة مرور SMTP:',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plaintext in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
+	'SmtpPasswordInfo'			=> 'أدخل كلمة مرور فقط إذا كان خادم SMTP الخاص بك يتطلبها.<br><em><strong>تحذير:</strong> سيتم تخزين كلمة المرور هذه كنص عادي في قاعدة البيانات، وستكون مرئية لأي شخص يمكنه الوصول إلى قاعدة البيانات الخاصة بك أو يمكنه عرض صفحة التكوين هذه.</em>',
 	'SmtpPort'					=> 'منفذ خادم SMTP:',
 	'SmtpPortInfo'				=> 'قم بتغيير هذا فقط إذا كنت تعرف أن خادم SMTP الخاص بك على منفذ مختلف. <br>(الافتراضي: <code>tls</code> على المنفذ 587 (أو ربما 25) و <code>ssl</code> على المنفذ 465).',
 	'SmtpServer'				=> 'عنوان خادم SMTP:',

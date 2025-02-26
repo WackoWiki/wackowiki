@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'O módulo PCRE do PHP parece ter sido compilado sem suporte PCRE_UTF8.',
 'NotePermissions'				=> 'Este instalador tentará escrever os dados de configuração no ficheiro %1, localizado no seu diretório WackoWiki. Para que isto funcione, tem de se certificar que o servidor web tem acesso de escrita a esse ficheiro. Se não o conseguir fazer, terá de editar o ficheiro manualmente (o instalador dir-lhe-á como).<br><br>Veja <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> para detalhes.',
 'ErrorPermissions'				=> 'Parece que o instalador não pode definir automaticamente as permissões de arquivo necessárias para que o WackoWiki funcione correctamente. Ser-lhe-á pedido mais tarde no processo de instalação para configurar manualmente as permissões de ficheiro necessárias no seu servidor.',
-'ErrorMinPhpVersion'			=> 'A Versão PHP deve ser maior que <strong>' . PHP_MIN_VERSION . '</strong>, o seu servidor parece estar a correr uma versão anterior. Tem de actualizar para uma versão mais recente do PHP para que o WackoWiki funcione correctamente.',
+'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
 'Ready'							=> 'Parabéns, parece que o seu servidor é capaz de executar o WackoWiki. As próximas páginas irão levá-lo através do processo de configuração.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Endereço de e-mail do administrador',
 'MailDesc'						=> 'Digite o endereço de e-mail dos administradores.',
 'Base'							=> 'URL Base',
-'BaseDesc'						=> 'O URL base do teu site WackoWiki.  Os nomes das páginas são anexados a ele, por isso, se estiver a usar mod_rewrite, o endereço deve terminar com uma barra, ou seja</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Sua URL de base de site WackoWiki. Nomes de páginas são anexados a ela, então se você estiver usando mod_rewrite o endereço deve terminar com uma barra para frente, ou seja,',
 'Rewrite'						=> 'Modo de reescrita',
 'RewriteDesc'					=> 'O modo de reescrita deve ser ativado se estiver a utilizar o WackoWiki com reescrita de URL.',
 'Enabled'						=> 'Ativado:',

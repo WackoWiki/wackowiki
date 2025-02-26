@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE nu este compilat cu sprijinul UTF-8.',
 'NotePermissions'				=> 'Acest instalator va încerca să scrie datele de configurare în fișierul %1, localizat în directorul WackoWiki. Pentru ca acest lucru să funcționeze, trebuie să vă asigurați că serverul web are acces la scriere la acest fișier. Dacă nu puteți face acest lucru, va trebui să editați fișierul manual (instalatorul vă va spune cum).<br><br>Vezi <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> pentru detalii.',
 'ErrorPermissions'				=> 'Se pare că instalarea nu poate seta automat permisiunile de fișier necesare pentru ca WackoWiki să funcționeze corect. Vi se va solicita mai târziu în procesul de instalare să configurezi manual permisiunile de fișier necesare pe serverul tău.',
-'ErrorMinPhpVersion'			=> 'Versiunea PHP trebuie să fie mai mare decât <strong>' . PHP_MIN_VERSION . '</strong>. Serverul dumneavoastră pare să ruleze o versiune mai veche. Trebuie să faceți upgrade la o versiune mai recentă de PHP pentru ca WackoWiki să funcționeze corect.',
+'ErrorMinPhpVersion'			=> 'Versiunea PHP trebuie să fie mai mare decât %1. Serverul tău pare să ruleze o versiune mai veche. Trebuie să faceți upgrade la o versiune mai recentă de PHP pentru ca WackoWiki să funcționeze corect.',
 'Ready'							=> 'Felicitări, se pare că serverul tău este capabil să ruleze WackoWiki. Următoarele câteva pagini te vor duce prin procesul de configurare.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Adresă e-mail administrator',
 'MailDesc'						=> 'Introduceți adresa de e-mail a administratorului.',
 'Base'							=> 'URL de bază',
-'BaseDesc'						=> 'URL-ul de bază al site-ului WackoWiki. Numele paginii sunt anexate lui, deci dacă utilizați mod_rewrite adresa ar trebui să se termine cu un înainte slash, i. .</p><ul><li><strong><code>https://exemplu. om/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'URL-ul de bază al site-ului WackoWiki. Numele paginii sunt anexate lui, deci dacă utilizați mod_rewrite adresa ar trebui să se termine cu un slash, adică',
 'Rewrite'						=> 'Mod Rescriere',
 'RewriteDesc'					=> 'Modul de Rescriere ar trebui să fie activat dacă utilizați WackoWiki cu rescrierea de URL-uri.',
 'Enabled'						=> 'Activat:',
@@ -205,7 +205,7 @@ $lang = [
 'Writing'						=> 'Scrie fișierul de configurare',
 'RemovingWritePrivilege'		=> 'Eliminare privilegiu scriere',
 'InstallationComplete'			=> 'Instalare completă',
-'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
+'ThatsAll'						=> 'Asta e tot! Acum puteți să <a href="%1">vedeți site-ul dvs. WackoWiki</a>.',
 'SecurityConsiderations'		=> 'Considerații de securitate',
 'SecurityRisk'					=> 'Acum ești sfătuit să elimini accesul la scriere la %1 pentru că a fost scris. Lăsarea fişierului care poate fi scris poate fi un risc de securitate!<br> %2',
 'RemoveSetupDirectory'			=> 'Ar trebui să ştergeţi directorul %1 acum că procesul de instalare a fost finalizat.',

@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE er ikke utarbeidet med UTF-8-støtte.',
 'NotePermissions'				=> 'Denne installasjonsprogrammet vil forsøke å skrive konfigurasjonsdataene til filen %1, basert i din WackoWiki-mappe. For at dette skal fungere, må du sørge for at webserveren har skrivetilgang til den filen. Hvis du ikke kan gjøre dette, må du redigere filen manuelt (installatøren vil fortelle deg hvordan).<br><br>Se <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for detaljer.',
 'ErrorPermissions'				=> 'Det vil vises at installasjonsprogrammet ikke kan sette de nødvendige filtillatelsene for WackoWiki automatisk for å fungere riktig. Du vil bli spurt senere i installasjonsprosessen for å manuelt konfigurere de nødvendige filtillatelsene på serveren din.',
-'ErrorMinPhpVersion'			=> 'PHP-versjonen må være større enn <strong>' . PHP_MIN_VERSION . '</strong>. Serveren din ser ut til å kjøre en tidligere versjon. Du må oppgradere til en nyere PHP-versjon for at WackoWiki skal fungere riktig.',
+'ErrorMinPhpVersion'			=> 'PHP-versjonen må være større enn %1. Serveren din ser ut til å kjøre en tidligere versjon. Du må oppgradere til en nyere PHP-versjon for at WackoWiki skal fungere riktig.',
 'Ready'							=> 'Gratulerer, det ser ut til at serveren din er i stand til å kjøre WackoWiki. De neste sidene vil ta deg gjennom konfigurasjonsprosessen.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Admin e-postadresse',
 'MailDesc'						=> 'Skriv inn brukerens e-postadresse.',
 'Base'							=> 'Standard URL',
-'BaseDesc'						=> 'WackoWiki sidens grunnURL. Sidenavn blir lagt til her, så hvis du bruker mod_rewrite adressen bør slutte med en skråstrek, i. .</p><ul><li><strong><code>https://example. om/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'WackoWiki sidens grunnURL. Sidenavn blir lagt til her, så hvis du bruker mod_rewrite adressen bør slutte med en skråstrek, dvs.',
 'Rewrite'						=> 'Omskrive modus',
 'RewriteDesc'					=> 'Omskrivingsmodus bør aktiveres hvis du bruker WackoWiki med URL omskrivning.',
 'Enabled'						=> 'Aktivert:',

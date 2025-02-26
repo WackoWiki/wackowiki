@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PHP的PCRE模块在编译时可能没有包含PCRE_UTF8支持。',
 'NotePermissions'				=> '此安装程序将尝试将配置数据写入你的WackoWiki 目录中的文件 %1。 为了使此文件生效，您必须确保网页服务器能够写入该文件。 如果您不能这样做，您将需要手动编辑文件 （安装程序将告诉您如何操作）。<br><br>详情请参阅 <a href="https://wackowiki.org/doc/Doc/简体中文/安装指南" target="_blank">WackoWiki:Doc/简体中文/安装指南</a>',
 'ErrorPermissions'				=> '看起来安装程序无法自动设置WackoWiki所需的文件权限。 您将在稍后被提示手动配置您服务器上所需的文件权限。',
-'ErrorMinPhpVersion'			=> 'PHP版本必须大于 <strong>' . PHP_MIN_VERSION . '</strong>, 你的服务器似乎正在运行较早的版本。你必须升级到最新PHP 版本才能正常安装。',
+'ErrorMinPhpVersion'			=> 'PHP 版本必须大于 %1。您的服务器似乎正在运行早期版本。 您必须升级到 WackoWiki 的最新PHP 版本才能正常工作。',
 'Ready'							=> '恭喜，您的服务器似乎能够运行 WackoWiki。下面的几个页面将带你完成配置过程。',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> '管理员邮箱地址',
 'MailDesc'						=> '输入管理员邮箱地址。',
 'Base'							=> '基础 URL',
-'BaseDesc'						=> '您的 WackoWiki 站点URL。 页面名称被附加到它，所以如果您使用 mod_rewrite 模式的话，请用斜杠/结尾。 。</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> '您的 WackoWiki 站点URL。 页面名称被附加到它，所以如果你正在使用 mod_rewrite 地址，应该以前方的slash结尾，即：',
 'Rewrite'						=> '重写模式',
 'RewriteDesc'					=> '如果您使用 WackoWiki 并重写URL，应该启用重写模式。',
 'Enabled'						=> '启用：',

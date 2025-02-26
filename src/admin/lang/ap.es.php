@@ -14,7 +14,7 @@ $ap_translation = [
 		'users'			=> 'Usuarios',
 		'maintenance'	=> 'Mantenimiento',
 		'messages'		=> 'Mensajes',
-		'extension'		=> 'Extension',
+		'extension'		=> 'Extensión',
 		'database'		=> 'Base de datos',
 	],
 
@@ -43,7 +43,7 @@ $ap_translation = [
 	'SiteClosed'				=> 'sitio cerrado',
 	'SiteClosedTip'				=> 'El sitio está cerrado',
 
-	'System'					=> 'System',
+	'System'					=> 'Sistema',
 
 	// Generic
 	'Cancel'					=> 'Cancelar',
@@ -54,14 +54,14 @@ $ap_translation = [
 	'Disabled'					=> 'Deshabilitar',
 	'Mandatory'					=> 'Obligatorio',
 	'Admin'						=> 'Admin',
-	'Min'						=> 'Min',
-	'Max'						=> 'Max',
+	'Min'						=> 'Mínimo',
+	'Max'						=> 'Máx',
 
 	'MiscellaneousSection'		=> 'Misceláneo',
 	'MainSection'				=> 'Parámetros básicos',
 
 	'DirNotWritable'			=> 'El directorio %1 no es escribible.',
-	'FileNotWritable'			=> 'The %1 file is not writable.',
+	'FileNotWritable'			=> 'El archivo %1 no tiene permisos de escritura.',
 
 	/**
 	 * AP MENU
@@ -206,8 +206,8 @@ $ap_translation = [
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Information',
+		'name'		=> 'Información del sistema',
+		'title'		=> 'Información del sistema',
 	],
 
 	// System log module
@@ -343,14 +343,14 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Permite almacenar y mostrar referencias externas.',
 	'ReferrersPurgeTime'		=> 'Tiempo de almacenamiento de los referidos:',
 	'ReferrersPurgeTimeInfo'	=> 'Mantener el historial de remisión de páginas externas no más allá de un número determinado de días. Cero significa almacenamiento eterno, pero para un sitio visitado activamente esto puede llevar a un desbordamiento de la base de datos.',
-	'EnableCounters'			=> 'Hit Counters:',
+	'EnableCounters'			=> 'Contadores de golpe:',
 	'EnableCountersInfo'		=> 'Permite el recuento de visitas por página y permite la visualización de estadísticas sencillas. No se cuentan las llamadas del propietario de la página.',
 
 	// Syndication settings
 	'SyndicationSettingsInfo'		=> 'Controla la configuración predeterminada de sindicación web para tu sitio.',
 	'SyndicationSettingsUpdated'	=> 'Configuración de sindicación actualizada.',
 
-	'FeedsSection'				=> 'Feeds',
+	'FeedsSection'				=> 'Alimentos',
 	'EnableFeeds'				=> 'Habilitar feeds:',
 	'EnableFeedsInfo'			=> 'Activa o desactiva las fuentes Sindicación RSS de toda la wiki.',
 	'XmlChangeLink'				=> 'Modo de enlace del feed de Cambios:',
@@ -370,7 +370,7 @@ $ap_translation = [
 	'XmlSitemapTimeInfo'		=> 'Genera el mapa del sitio sólo una vez en el número de días dado, cero significa en cada cambio de página.',
 
 	'SearchSection'				=> 'Buscar',
-	'OpenSearch'				=> 'OpenSearch:',
+	'OpenSearch'				=> 'Búsqueda abierta:',
 	'OpenSearchInfo'			=> 'Crea el archivo de descripción de OpenSearch en la carpeta XML y habilita el Autodiscovery del plugin de búsqueda en la cabecera HTML.',
 	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility):',
 	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
@@ -382,7 +382,7 @@ $ap_translation = [
 	'AppearanceSettingsUpdated'	=> 'Configuración de apariencia actualizada.',
 
 	'LogoOff'					=> 'Apagado',
-	'LogoOnly'					=> 'logo',
+	'LogoOnly'					=> 'logotipo',
 	'LogoAndTitle'				=> 'logo y título',
 
 	'LogoSection'				=> 'Logo',
@@ -403,6 +403,9 @@ $ap_translation = [
 	'LayoutSection'				=> 'Diseño',
 	'Theme'						=> 'Tema:',
 	'ThemeInfo'					=> 'El diseño de la plantilla que el sitio utiliza por defecto.',
+	'ResetUserTheme'			=> 'Restablecer todos los temas de usuario:',
+	'ResetUserThemeInfo'		=> 'Restablece todos los temas de usuario. Advertencia: Esta acción revertirá todos los temas seleccionados por el usuario al tema global por defecto.',
+	'SetBackUserTheme'			=> 'Revertir todos los temas de usuario a un tema %1.',
 	'ThemesAllowed'				=> 'Temas permitidos:',
 	'ThemesAllowedInfo'			=> 'Seleccione los temas permitidos, que el usuario puede elegir, de lo contrario se permiten todos los temas disponibles.',
 	'ThemesPerPage'				=> 'Temas por página:',
@@ -469,7 +472,8 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Proxy inverso',
 	'ReverseProxy'				=> 'Usar proxy inverso:',
-	'ReverseProxyInfo'			=> 'Habilite esta configuración para determinar la dirección IP correcta del control remoto
+    'ReverseProxyInfo'			=> 
+    'Habilite esta configuración para determinar la dirección IP correcta del control remoto
 									cliente examinando la información almacenada en los encabezados X-Fordered-For.
 									Los encabezados X-Fordered-For son un mecanismo estándar para identificar los sistemas cliente
 									que se conectan a través de un servidor proxy inverso, como Squid o Pound. Los servidores
@@ -598,14 +602,14 @@ $ap_translation = [
 	'ReferrerPolicyInfo'		=> 'El encabezado HTTP Referrer-Policy gobierna qué información de referencia, enviada en el encabezado Referer, debe incluirse con las solicitudes realizadas.',
 	'ReferrerPolicyModes'	=> [
 		'0'		=> '[off]',
-		'1'		=> 'no-referrer',
-		'2'		=> 'no-referrer-when-downgrade',
-		'3'		=> 'same-origin',
-		'4'		=> 'origin',
-		'5'		=> 'strict-origin',
-		'6'		=> 'origin-when-cross-origin',
-		'7'		=> 'strict-origin-when-cross-origin',
-		'8'		=> 'unsafe-url'
+		'1'		=> 'sin referencia',
+		'2'		=> 'no-referencia-degradación',
+		'3'		=> 'mismo origen',
+		'4'		=> 'origen',
+		'5'		=> 'origen estricto',
+		'6'		=> 'origin-cuando-origen cruzado',
+		'7'		=> 'estricto origen-cuando-cruzado',
+		'8'		=> 'url insegura'
 	],
 
 	'UserPasswordSection'		=> 'Persistencia de las contraseñas de los usuarios',
@@ -764,7 +768,7 @@ $ap_translation = [
 	'WantedPageInfo'			=> 'Página con una lista de páginas faltantes a las que se hace referencia (action %1).',
 	'OrphanedPage'				=> 'Páginas huérfanas:',
 	'OrphanedPageInfo'			=> 'Las páginas con una lista de páginas existentes no son enlaces relacionados con el resto (action %1).',
-	'SandboxPage'				=> 'Sandbox:',
+	'SandboxPage'				=> 'Caja de arena:',
 	'SandboxPageInfo'			=> 'Página donde los usuarios pueden ser entrenados en el uso del marcado wiki.',
 	'HelpPage'					=> 'Ayuda:',
 	'HelpPageInfo'				=> 'La sección de documentación para trabajar con herramientas del sitio.',
@@ -822,10 +826,10 @@ $ap_translation = [
 	'PageStatsInfo'				=> 'Las estadísticas de página (número de comentarios, archivos y revisiones) pueden diferir en algunas situaciones de los datos reales. <br>Esta operación permite actualizar las estadísticas a los datos actuales de la base de datos.',
 
 	'AttachmentsInfo'			=> 'Actualiza el hash de todos los archivos adjuntos de la base de datos.',
-	'AttachmentsSynched'		=> 'Re-hashed all file attachments',
-	'LogAttachmentsSynched'		=> 'Re-hashed all file attachments',
+	'AttachmentsSynched'		=> 'Volver a cifrar todos los archivos adjuntos',
+	'LogAttachmentsSynched'		=> 'Volver a cifrar todos los archivos adjuntos',
 
-	'Feeds'						=> 'Feeds',
+	'Feeds'						=> 'Alimentos',
 	'FeedsInfo'					=> 'En el caso de la edición directa de las páginas de la base de datos, el contenido de las fuentes RSS puede no reflejar los cambios realizados. <br>Esta función sincroniza los canales RSS con el estado actual de la base de datos.',
 	'XmlSiteMap'				=> 'Mapa del sitio XML',
 	'XmlSiteMapInfo'			=> 'Esta función sincroniza el mapa del sitio XML con el estado actual de la base de datos.',
@@ -864,7 +868,7 @@ $ap_translation = [
 	'NoReplyEmailInfo'			=> 'Esta dirección, p.ej. <code>noreply@example.com</code> aparecerá en el campo <code>From:</code> del email en todas las notificaciones de email desde este sitio.',
 	'AdminEmail'				=> 'Email del dueño del sitio:',
 	'AdminEmailInfo'			=> 'Esta dirección es para efectos de administración, por ejemplo notificación de nuevo usuario.',
-	'AbuseEmail'				=> 'Email abuse service:',
+	'AbuseEmail'				=> 'Servicio de abuso de correo:',
 	'AbuseEmailInfo'			=> 'Dirección para asuntos urgentes: registro de un email estraño etc. Puee coincidir con e anterior.',
 
 	'SendTestEmail'				=> 'Enviar un correo electrónico de prueba',
@@ -1029,18 +1033,13 @@ $ap_translation = [
 	'BackupFiles'				=> 'Archivos',
 	'BackupNote'				=> 'Nota:',
 	'BackupSettings'			=> 'Indique el esquema de backup deseado.<br>' .
-									'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br>' .
-									'<br>' .
-									'<strong>Atención</strong>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, ' .
-									'igual al realizar backup de solamente la estructura de tabla sin guardar los datos. ' .
-									'Para realizar la conversión completa de las tablas al formato de backup debe realizar <em> el backup completo de base de datos (estructura y datos) sin especificar el cluster</em>.',
+    	'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br>' .  '<br>' .
+		'<strong>Atención</strong>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, ',
 	'BackupCompleted'			=> 'Backup y archivación terminado.<br>' .
-									'Archivo del backup guardado en subdirectorio %1.<br>' .
-									'Use FTP para descargarlo (mantenga la estructura de diretorios y nombres de archivos al copiar).<br>' .
-									'Para restaurar una copia del backup o remover un paquete, ingrese en <a href="%2">Restaurar base de datos</a>.',
+    	'Los archivos del paquete de respaldo se almacenaron en el subdirectorio %1.<br>. Para descargarlo, utilice FTP (mantenga la estructura del directorio y los nombres de los archivos al copiar).<br> Para restaurar una copia de respaldo o eliminar un paquete, vaya a <a href="%2">Restaurar base de datos</a>.',
 	'LogSavedBackup'			=> 'Guardado backup de base de datos ##%1##',
-	'Backup'					=> 'Backup',
-	'CantReadFile'				=> 'Can\'t read file %1.',
+	'Backup'					=> 'Respaldo',
+	'CantReadFile'				=> 'No se puede leer el archivo %1.',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Puede restaurar un backup existente o removerlo del servidor.',
@@ -1105,7 +1104,7 @@ $ap_translation = [
 	'BackupRestore'				=> 'Restaurar',
 	'BackupRemove'				=> 'Eliminar',
 	'RestoreYes'				=> 'Sí',
-	'RestoreNo'					=> 'No',
+	'RestoreNo'					=> 'Nro',
 	'LogDbRestored'				=> 'Copia de seguridad ##%1## de la base de datos restaurada.',
 
 	'BackupArchived'			=> 'Copia de seguridad %1 archivada.',
@@ -1227,7 +1226,7 @@ $ap_translation = [
 	'DbOptimizeRepairInfo'		=> 'Este script también puede intentar optimizar la base de datos. Esto mejora el rendimiento en algunas situaciones. La reparación y optimización de la base de datos puede llevar mucho tiempo y la base de datos se bloqueará mientras se optimiza.',
 
 	'TableOk'					=> 'La tabla de %1 está bien.',
-	'TableNotOk'				=> 'The %1 table is not okay. It is reporting the following error: %2. This script will attempt to repair this table&hellip;',
+	'TableNotOk'				=> 'La tabla %1 no está bien. Está reportando el siguiente error: %2. Este script intentará reparar esta tabla&hellip;',
 	'TableRepaired'				=> 'Reparó con éxito la tabla de %1.',
 	'TableRepairFailed'			=> 'No se reparó la tabla de %1. <br>Error: %2',
 	'TableAlreadyOptimized'		=> 'La tabla %1 ya está optimizada.',
@@ -1257,16 +1256,16 @@ $ap_translation = [
 	'BbStats'					=> 'Bad Behaviour ha bloqueado %1 intentos de acceso en los últimos 7 días.',
 
 	'BbSummary'					=> 'Resumen',
-	'BbLog'						=> 'Log',
+	'BbLog'						=> 'Logo',
 	'BbSettings'				=> 'Configuraciones',
 	'BbWhitelist'				=> 'Lista blanca',
 
 	// --> Log
-	'BbHits'					=> 'Hits',
-	'BbRecordsFiltered'			=> 'Displaying %1 of %2 records filtered by',
+	'BbHits'					=> 'Golpes',
+	'BbRecordsFiltered'			=> 'Mostrando %1 de %2 registros filtrados por',
 	'BbStatus'					=> 'Estado',
 	'BbBlocked'					=> 'Bloqueada',
-	'BbPermitted'				=> 'Permitted',
+	'BbPermitted'				=> 'Permitido',
 	'BbIp'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
 	'BbUri'						=> 'URI',

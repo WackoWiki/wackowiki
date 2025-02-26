@@ -513,7 +513,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Parolă greșită!',
 	'ConfirmPassword'			=> 'Confirmă parola',
 	'Email'						=> 'Adresa de e-mail',
-	'MustBeWikiName'			=> 'User name must be <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> formatted!',
+	'MustBeWikiName'			=> 'Numele de utilizator trebuie să fie <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> formatat!',
 	'SpecifyEmail'				=> 'Trebuie să specificați o adresă de e-mail.',
 	'NotAEmail'					=> 'Asta nu arată ca o adresă de e-mail validă.',
 	'EmailTaken'				=> 'Adresa de e-mail introdusă este deja utilizată.',
@@ -658,7 +658,7 @@ $wacko_translation = [
 	'EmailNotConfirmed'			=> 'E-mailul nu poate fi confirmat. Acest lucru se poate datora unui cod de confirmare incorect sau adresa de e-mail poate fi deja confirmată. Puteți verifica dacă adresa de e-mail este deja confirmată prin autentificarea și vizualizarea stării sale pe pagina %1.',
 	'EmailNotVerified'			=> 'E-mailul nu a fost verificat!',
 	'EmailNotVerifiedDesc'		=> 'Nu veți primi notificări despre modificări sau comentarii ale paginilor urmărite, ' .
-									'or messages from other users. Also, you <strong>will not be able to recover a forgotten password</strong>, ' .
+									'sau mesaje de la alți utilizatori. De asemenea, <strong>nu veți putea recupera o parolă uitată</strong>, ' .
 									'până când adresa dvs. de e-mail este confirmată prin accesarea linkului din e-mailul trimis către dvs. ' .
 									'Dacă, în decurs de câteva zile de la înregistrare, nu primiți un e-mail, solicitați-l din nou făcând clic pe ',
 

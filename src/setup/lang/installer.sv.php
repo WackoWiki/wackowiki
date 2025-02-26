@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE kompileras inte med UTF-8-stöd.',
 'NotePermissions'				=> 'Detta installationsprogram kommer att försöka skriva konfigurationsdata till filen %1, som finns i din WackoWiki-katalog. För att detta ska fungera måste du se till att webbservern har skrivrättigheter till den filen. Om du inte kan göra detta måste du redigera filen manuellt (installationsprogrammet kommer att berätta hur).<br><br>Se <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> för detaljer.',
 'ErrorPermissions'				=> 'Det verkar som att installationsprogrammet inte automatiskt kan ställa in de nödvändiga filbehörigheterna för WackoWiki att fungera korrekt. Du kommer att bli tillfrågad senare i installationsprocessen för att manuellt konfigurera de nödvändiga filbehörigheterna på din server.',
-'ErrorMinPhpVersion'			=> 'PHP-versionen måste vara större än <strong>' . PHP_MIN_VERSION . '</strong>. Din server verkar köra en tidigare version. Du måste uppgradera till en nyare PHP-version för att WackoWiki ska fungera korrekt.',
+'ErrorMinPhpVersion'			=> 'PHP-versionen måste vara större än %1. Din server verkar köra en tidigare version. Du måste uppgradera till en nyare PHP-version för att WackoWiki ska fungera korrekt.',
 'Ready'							=> 'Grattis, det verkar som om din server kan köra WackoWiki. De närmaste sidorna tar dig genom konfigurationsprocessen.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Admins e-postadress',
 'MailDesc'						=> 'Ange administratörens e-postadress.',
 'Base'							=> 'Bas URL',
-'BaseDesc'						=> 'Din WackoWiki webbplats URL Sidnamn läggs till i det, så om du använder mod_rewrite bör adressen sluta med ett framåtriktat snedstreck i. .</p><ul><li><strong><code>https://exempel. om/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Din WackoWiki webbplats URL Sidnamn läggs till i det, så om du använder mod_rewrite bör adressen sluta med ett snedstreck för framåt, dvs',
 'Rewrite'						=> 'Skriv om läge',
 'RewriteDesc'					=> 'Omskrivningsläge bör aktiveras om du använder WackoWiki med URL-omskrivning.',
 'Enabled'						=> 'Aktiverad:',

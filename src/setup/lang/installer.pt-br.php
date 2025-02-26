@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE não está compilado com suporte UTF-8.',
 'NotePermissions'				=> 'Este instalador tentará escrever os dados de configuração do arquivo %1, localizado no diretório WackoWiki. Para que isso funcione, você precisa ter certeza de que o servidor web tem acesso de escrita a esse arquivo. Se você não puder fazer isso, você terá que editar o arquivo manualmente (o instalador lhe dirá como).<br><br>Veja <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> para detalhes.',
 'ErrorPermissions'				=> 'Parece que o instalador não pode definir automaticamente as permissões de arquivo necessárias para que o WackoWiki funcione corretamente. Será solicitado posteriormente no processo de instalação que configure manualmente as permissões de arquivo necessárias no seu servidor.',
-'ErrorMinPhpVersion'			=> 'A versão do PHP deve ser maior que <strong>' . PHP_MIN_VERSION . '</strong>. Seu servidor parece estar executando uma versão anterior. Você precisa atualizar para uma versão mais recente do PHP para que o WackoWiki funcione corretamente.',
+'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
 'Ready'							=> 'Parabéns, parece que seu servidor é capaz de executar WackoWiki. As próximas páginas irão levá-lo através do processo de configuração.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Endereço de e-mail do administrador',
 'MailDesc'						=> 'Insira o endereço de e-mail do administrador.',
 'Base'							=> 'URL Base',
-'BaseDesc'						=> 'Sua URL de base de site WackoWiki. Nomes de páginas são anexados a ela, então se você está usando mod_rewrite o endereço deve terminar com uma barra de rolagem, i. .</p><ul><li><strong><code>https://exemplo. om/</code></strong></li><li><strong><code>https://exemplo.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Sua URL de base de site WackoWiki. Nomes de páginas são anexados a ela, então se você estiver usando mod_rewrite o endereço deve terminar com uma barra para frente, ou seja,',
 'Rewrite'						=> 'Modo de reescrita',
 'RewriteDesc'					=> 'O modo de reescrita deve ser ativado se você estiver usando WackoWiki com a reescrita de URL.',
 'Enabled'						=> 'Habilitado:',
@@ -168,7 +168,7 @@ $lang = [
 'InstallPagesBegin'				=> 'Adicionar páginas padrão',
 'InstallPagesEnd'				=> 'Adicionando páginas padrão',
 'InstallSystemAccount'			=> 'Adicionando usuário <code>Sistema</code>',
-'InstallDeletedAccount'			=> 'Adding <code>Deleted</code> User',
+'InstallDeletedAccount'			=> 'Adicionando <code>Deleted</code> Usuário',
 'InstallAdmin'					=> 'Adicionando usuário Admin',
 'InstallAdminSetting'			=> 'Adicionando preferências de usuário Admin',
 'InstallAdminGroup'				=> 'Adicionando Grupo de Administradores',

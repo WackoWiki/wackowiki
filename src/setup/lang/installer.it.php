@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'Il modulo PCRE di PHP sembra essere stato compilato senza il supporto PCRE_UTF8',
 'NotePermissions'				=> 'Questo installatore  tenterà di scrivere i dati di configurazione nel file %1, presente nella tua directory WackoWiki. Per gestire al meglio questa operazione, devi assicurarti che il server del tuo sito sia accessibile alla scrittura per questo file! Se non puoi farlo, dovrai editare il file manualmente (l\'installatore ti dirà come farlo).<br><br>Vedi <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> per i dettagli.',
 'ErrorPermissions'				=> 'Sembrerebbe che il programma di installazione non possa impostare automaticamente i permessi necessari per il corretto funzionamento di WackoWiki.  Più avanti nel processo di installazione vi verrà richiesto di configurare manualmente i permessi richiesti per i file sul vostro server.',
-'ErrorMinPhpVersion'			=> 'La versione di PHP deve essere maggiore di <strong>' . PHP_MIN_VERSION . '</strong>, il vostro server sembra eseguire una versione precedente. Per far funzionare correttamente WackoWiki, è necessario eseguire l\'aggiornamento a una versione più recente di PHP.',
+'ErrorMinPhpVersion'			=> 'La versione PHP deve essere maggiore di %1. Il server sembra aver eseguito una versione precedente. È necessario aggiornare a una versione PHP più recente per WackoWiki per funzionare correttamente.',
 'Ready'							=> 'Congratulazioni, sembra che il vostro server sia in grado di eseguire WackoWiki. Le prossime pagine vi guideranno attraverso il processo di configurazione.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Email dell\'amministratore.',
 'MailDesc'						=> 'Inserisci l\'indirizzo e-mail degli amministratori.',
 'Base'							=> 'URL di base',
-'BaseDesc'						=> 'La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l\'oggetto-parametro "?page=" se la modalità di riscrittura di URL non funziona sul tuo server. <ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Il tuo URL base del sito WackoWiki. I nomi delle pagine vengono aggiunti ad esso, quindi se si utilizza mod_rewrite l\'indirizzo dovrebbe terminare con uno slash in avanti, ad es.',
 'Rewrite'						=> 'Modalità Rewrite',
 'RewriteDesc'					=> 'La modalità Rewrite sarà attivata se si sta usando WackoWiki per la riscrittura d\'URL.',
 'Enabled'						=> 'Attivato:',

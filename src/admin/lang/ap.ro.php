@@ -664,7 +664,7 @@ $ap_translation = [
 	'BracketsLinks'				=> 'Dezactivează link-urile cu paranteză:',
 	'BracketsLinksInfo'			=> 'Dezactivează sintaxa <code>[[link]]</code> și <code>(link))</code>.',
 	'Formatters'				=> 'Dezactivare formatare:',
-	'FormattersInfo'			=> 'Disables <code>%%code%%</code> syntax, used for highlighters.',
+	'FormattersInfo'			=> 'Dezactivează sintaxa <code>%%code%%</code>, utilizată pentru evidențiere.',
 
 	'DateFormatsSection'		=> 'Formate de dată',
 	'DateFormat'				=> 'Formatul datei:',
@@ -825,7 +825,7 @@ $ap_translation = [
 	'FeedsInfo'					=> 'În cazul editării directe a paginilor în baza de date, conținutul fluxurilor RSS poate să nu reflecte modificările efectuate. <br>Această funcţie sincronizează canalele RSS cu starea curentă a bazei de date.',
 	'XmlSiteMap'				=> 'XML Sitemap',
 	'XmlSiteMapInfo'			=> 'Această funcţie sincronizează XML-Sitemap cu starea curentă a bazei de date.',
-	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
+	'XmlSiteMapPeriod'			=> 'Perioada %1 zile. Ultima dată scris %2.',
 	'XmlSiteMapView'			=> 'Arată sitemap într-o fereastră nouă.',
 
 	'ReparseBody'				=> 'Repară toate paginile',
@@ -927,9 +927,9 @@ $ap_translation = [
 	'MaxImageWidthInfo'			=> 'Lățimea maximă pe care o imagine poate avea pe pagini, altfel o miniatură scalată în jos este generată.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
-									Remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
-									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+	'DeletedObjectsInfo'		=> 'Lista paginilor, revizuirilor și fișierelor eliminate.
+ Eliminați sau restaurați paginile, revizuirile sau fișierele din baza de date făcând clic pe linkul <em>Eliminați</em>
+ sau <em>Restaurați</em> în rândul corespunzător. (Aveți grijă, nu se solicită nicio confirmare de ștergere!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Cuvinte care vor fi cenzurate automat pe Wiki.',

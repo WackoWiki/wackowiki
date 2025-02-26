@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE n’est pas compilé avec le support UTF8',
 'NotePermissions'				=> 'Cet installeur va tenter d’écrire les données de configuration dans le fichier %1, dans votre répertoire WackoWiki. Pour cela assurez-vous que le serveur http ait le droit d’écrire dans ce répertoire.  Sinon, vous devrez éditer ce fichier manuellement ; l’installeur vous indiquera comment faire.<br><br>Voir <a href="https://wackowiki.org/doc/Doc/Français/Installation" target="_blank">WackoWiki:Doc/Français/Installation</a> pour les détails.',
 'ErrorPermissions'				=> 'L’installeur ne semble pas autorisé à attribuer des droits suffisants sur les fichiers pour que WackoWiki fonctionne correctement.  On vous demandera ultérieurement de le faire vous-même.',
-'ErrorMinPhpVersion'			=> 'La version de PHP doit être supérieure à <strong>' . PHP_MIN_VERSION . '</strong> et votre serveur semble fonctionner avec une version antérieure.  Vous devez mettre à niveau PHP pour que WackoWiki fonctionne correctement.',
+'ErrorMinPhpVersion'			=> 'La version de PHP doit être supérieure à %1. Votre serveur semble fonctionner avec une version antérieure. Vous devez mettre à jour PHP vers une version plus récente pour que WackoWiki fonctionne correctement.',
 'Ready'							=> 'Félicitations, votre serveur semble capable de faire fonctionner WackoWiki.  Les quelques pages qui suivent vous guideront dans le processus de configuration.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Adresse de messagerie de l’administrateur',
 'MailDesc'						=> 'Indiquez l’adresse de messagerie de l’administrateur.',
 'Base'							=> 'URL de base',
-'BaseDesc'						=> 'URL de base de votre site WackoWiki. Les noms de page lui sont accolés, aussi doit-il se terminer par une barre oblique si vous utilisez l’extension "mod_rewrite", exemples :<br><code>https://example.com/<br>https://example.com/wiki/</code><br>',
+'BaseDesc'						=> 'URL de base de votre site WackoWiki. Les noms de page lui sont accolés, aussi doit-il se terminer par une barre oblique si vous utilisez l’extension "mod_rewrite", exemples :',
 'Rewrite'						=> 'Mode "rewrite"',
 'RewriteDesc'					=> 'L’extension "mod_rewrite" doit être activée pour utiliser WackoWiki avec la réécriture d’URL.',
 'Enabled'						=> 'Activé ',

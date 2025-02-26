@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'Wydaje się, że moduł PCRE w PHP został skompilowany bez wsparcia dla UTF‐8.',
 'NotePermissions'				=> 'Instalator spróbuje zapisać dane z konfiguracji do pliku %1, umieszczonego w katalogu WackoWiki. Aby to się udało, musisz mieć pewność, że serwer posiada prawo zapisu do tego pliku! Jeżeli nie możesz tego zrobić, będziesz musiał edytować plik ręcznie (instalator powie Ci jak).<br><br>Zaglądnij na <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> po więcej informacji.',
 'ErrorPermissions'				=> 'Wygląda na to, że instalator nie może automatycznie ustawić uprawnień do plików wymaganych do poprawnego działania WackoWiki.  W dalszej części procesu instalacji zostanie wyświetlony monit o ręczne skonfigurowanie wymaganych uprawnień do plików na serwerze.',
-'ErrorMinPhpVersion'			=> 'Wersja PHP musi być większa niż <strong>' . PHP_MIN_VERSION . '</strong>, wygląda na to, że Twój serwer działa na wcześniejszej wersji.  Aby WackoWiki działało poprawnie, należy zaktualizować go do nowszej wersji PHP.',
+'ErrorMinPhpVersion'			=> 'Wersja PHP musi być większa niż %1. Wygląda na to, że Twój serwer ma wcześniejszą wersję. Musisz uaktualnić do najnowszej wersji PHP dla WackoWiki, aby działać poprawnie.',
 'Ready'							=> 'Gratulacje, wygląda na to, że na twoim serwerze można uruchomić WackoWiki.  Na następnych stronach zostanie przeprowadzony proces konfiguracji.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Adres e-mail administratora',
 'MailDesc'						=> 'Wpisz adres e-mail administratora.',
 'Base'							=> 'Podstawowy URL',
-'BaseDesc'						=> 'Twój adres URL bazy stron WackoWiki. Nazwy stron są do nich dołączone, więc jeśli używasz mod_rewrite adres powinien kończyć się przednim ukośnikiem, i.</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Twój adres URL bazy WackoWiki. Nazwy stron zostaną do nich dołączone, więc jeśli używasz mod_rewrite adres powinien kończyć się przednim ukośnikiem, tj.',
 'Rewrite'						=> 'Tryb Rewrite',
 'RewriteDesc'					=> 'Tryb Rewrite powinien być włączony jeżeli używasz WackoWiki z nadpisywaniem URLi.',
 'Enabled'						=> 'Włączony:',

@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE není kompilován s podporou UTF-8.',
 'NotePermissions'				=> 'Tento instalátor se pokusí zapsat konfigurační data do souboru %1ve vašem adresáři WackoWiki. Aby to fungovalo, musíte se ujistit, že webový server má přístup k tomuto souboru. Pokud to neuděláte, budete muset soubor upravovat ručně (instalátor vám řekne jak).<br><br>Viz <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> pro podrobnosti.',
 'ErrorPermissions'				=> 'Zdá se, že instalační program nemůže automaticky nastavit požadovaná oprávnění pro správné fungování WackoWiki. V instalačním procesu budete vyzváni k manuálnímu nastavení požadovaných oprávnění k souboru na vašem serveru.',
-'ErrorMinPhpVersion'			=> 'Verze PHP musí být větší než <strong>' . PHP_MIN_VERSION . '</strong>. Zdá se, že váš server používá starší verzi. Musíte aktualizovat na novější verzi PHP, aby WackoWiki fungovala správně.',
+'ErrorMinPhpVersion'			=> 'Verze PHP musí být větší než %1. Zdá se, že váš server používá starší verzi. Musíte aktualizovat na novější verzi PHP, aby WackoWiki fungovala správně.',
 'Ready'							=> 'Gratulujeme, zdá se, že váš server je schopen spustit WackoWiki. Následující několik stránek vás provede v procesu nastavení.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'E-mailová adresa správce',
 'MailDesc'						=> 'Zadejte e-mailovou adresu administrátora.',
 'Base'							=> 'Základní URL',
-'BaseDesc'						=> 'Vaše URL adresa webu WackoWiki Názvy stránek jsou připojeny, takže pokud používáte mod_rewrite kód, měla by adresa skončit lomítkem, i. .</p><ul><li><strong><code>https://example. om/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Vaše URL adresa webu WackoWiki Názvy stránek jsou připojeny, takže pokud používáte mod_rewrite měla by adresa končit lomítkem vpřed, tj.',
 'Rewrite'						=> 'Režim přepisu',
 'RewriteDesc'					=> 'Přepis by měl být povolen, pokud používáte WackoWiki s přepisem URL.',
 'Enabled'						=> 'Povoleno:',

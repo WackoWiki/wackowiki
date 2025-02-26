@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE is niet gecompileerd met UTF-8 ondersteuning.',
 'NotePermissions'				=> 'Deze installer, probeert het configuratie instellingen naar het bestand %1, in uw WackoWiki directory. Om dit te doen dient u zeker te weten dat uw webserver schrijfrechten heeft op dat bestand! Als dat niet mogelijk is moet u het bestand handmatig wijzigen (het installatieprogramma zal u vertellen hoe).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'ErrorPermissions'				=> 'Het lijkt erop dat het installatieprogramma niet automatisch de vereiste bestandsrechten kan instellen om WackoWiki correct te laten werken. Later in het installatieproces wordt u gevraagd om de vereiste bestandsrechten op uw server handmatig te configureren.',
-'ErrorMinPhpVersion'			=> 'De PHP-versie moet groter zijn dan <strong>' . PHP_MIN_VERSION . '</strong>, uw server lijkt een eerdere versie te draaien. U moet upgraden naar een recentere PHP-versie om WackoWiki correct te laten werken.',
+'ErrorMinPhpVersion'			=> 'De PHP-versie moet groter zijn dan %1. Uw server gebruikt een eerdere versie. U moet upgraden naar een recentere PHP-versie om WackoWiki correct te laten werken.',
 'Ready'							=> 'Gefeliciteerd, het blijkt dat uw server in staat is om WackoWiki te draaien. De volgende pagina\'s nemen u mee door het configuratieproces.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Beheerders mailadres.',
 'MailDesc'						=> 'Enter the beheerders mailadres.',
 'Base'							=> 'Basis URL',
-'BaseDesc'						=> 'De basis URL van je WackoWiki-site.  Paginanamen worden er aan toegevoegd, dus als je mod_rewrite gebruikt moet het adres eindigen met een forward slash, bijv.</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Uw basis-URL van uw WackoWiki Paginanamen worden er aan toegevoegd, dus als u gebruik maakt van mod_rewrite moet het adres eindigen met een slash, dat wil zeggen',
 'Rewrite'						=> 'Herschrijf modus',
 'RewriteDesc'					=> 'Herschrijven modus moet aan staan als u een WackoWiki met URL rewriting gebruikt.',
 'Enabled'						=> 'Aan:',

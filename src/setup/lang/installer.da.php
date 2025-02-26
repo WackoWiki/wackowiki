@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE er ikke kompileret med UTF-8-understøttelse.',
 'NotePermissions'				=> 'Dette installationsprogram vil forsøge at skrive konfigurationsdata til filen %1, der er placeret i din WackoWiki-mappe. For at dette kan virke, skal du sørge for, at webserveren har skriveadgang til filen. Hvis du ikke kan gøre dette, bliver du nødt til at redigere filen manuelt (installationsprogrammet vil fortælle dig hvordan).<br><br>Se <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for detaljer.',
 'ErrorPermissions'				=> 'Det ser ud til, at installationsprogrammet ikke automatisk kan indstille de nødvendige filtilladelser for at WackoWiki kan fungere korrekt. Du vil senere i installationsprocessen blive bedt om manuelt at konfigurere de nødvendige filtilladelser på din server.',
-'ErrorMinPhpVersion'			=> 'PHP-versionen skal være større end <strong>' . PHP_MIN_VERSION . '</strong>, det ser ud til, at din server kører en tidligere version. Du skal opgradere til en nyere PHP-version for at WackoWiki kan fungere korrekt.',
+'ErrorMinPhpVersion'			=> 'PHP versionen skal være større end %1. Din server synes at køre en tidligere version. Du skal opgradere til en nyere PHP-version for at WackoWiki kan fungere korrekt.',
 'Ready'							=> 'Tillykke, det ser ud til, at din server kan køre WackoWiki. De næste par sider vil føre dig gennem konfigurationsprocessen.',
 
 /*
@@ -107,7 +107,7 @@ $lang = [
 'Mail'							=> 'Admin E-Mail Adresse',
 'MailDesc'						=> 'Indtast administratorens e-mailadresse.',
 'Base'							=> 'Base URL',
-'BaseDesc'						=> 'Dit WackoWiki-websteds basis-URL. Sidenavne bliver tilføjet til det, så hvis du bruger mod_rewrite, skal adressen ende med en skråstreg, dvs. </p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Din WackoWiki site base URL. Page names get added to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
 'Rewrite'						=> 'Omskriv Tilstand',
 'RewriteDesc'					=> 'Omskrivningstilstand skal være aktiveret, hvis du bruger WackoWiki med URL omskrivning.',
 'Enabled'						=> 'Aktiveret:',
