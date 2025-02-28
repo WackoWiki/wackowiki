@@ -1190,6 +1190,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Your password is the same as your email.',
 
 	'Timezone'					=> 'Timezone',
+	'DateFormat'				=> 'Date format',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabic',
@@ -1219,6 +1220,7 @@ $wacko_translation = [
 		'ru' => 'Russian',
 		'sv' => 'Swedish',
 		'ta' => 'Tamil',
+		'uk' => 'Ukrainian',
 		'zh' => 'Chinese',
 		'zh-tw' => 'Chinese',
 	],
