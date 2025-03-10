@@ -4,10 +4,10 @@ $lang = [
 /*
    Language Settings
 */
-'LangISO'		=> 'en',
-'LangLocale'	=> 'en_US',
-'LangName'		=> 'English',
-'LangDir'		=> 'ltr',
+'LangISO'		=> 'fa',
+'LangLocale'	=> 'fa_IR',
+'LangName'		=> 'Farsi',
+'LangDir'		=> 'rtl',
 
 /*
    Config Defaults

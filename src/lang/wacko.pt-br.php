@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'pt_BR.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'dd/MM/yyyy',
+	],
+
 	// common
 	'AddButton'					=> 'Adicionar',
 	'ArchiveButton'				=> 'Arquivo',
@@ -248,7 +252,7 @@ $wacko_translation = [
 	'OwnerDontChange'			=> 'Não mudar',
 	'AclAccessDenied'			=> 'Você não é o proprietário desta página.',
 	'AclSyntaxError'			=> 'Erro de sintaxe da lista de controle de acesso',
-	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
+	'AclHelp'					=> '<code>*</code> - todos são permitidos<br>' .
 									'<code>$</code> - apenas usuários registrados<br>' .
 									'<code>!</code> - um ponto de exclamação anterior nega a respectiva direita<br>' .
 									'<code>[UserName]</code> - nomes dos usuários permitidos<br>' .
@@ -1190,6 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Sua senha é igual ao seu e-mail.',
 
 	'Timezone'					=> 'Timezone',
+	'DateFormat'				=> 'Formato da Data',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arábico',
@@ -1219,6 +1224,7 @@ $wacko_translation = [
 		'ru' => 'Russo',
 		'sv' => 'sueco',
 		'ta' => 'Tamil',
+		'uk' => 'ucraniano',
 		'zh' => 'chinês',
 		'zh-tw' => 'chinês',
 	],

@@ -287,6 +287,19 @@
 						</td>
 					</tr>
 					<tr>
+						<th scope="row">
+							<label for="date_preference">[ ' _t: DateFormat ' ]</label>
+						</th>
+						<td>
+							<select id="date_preference" name="date_preference">
+								<option value="">--</option>
+								[= df _ =
+									<option value="[ ' offset ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' format | truncate 50 ' ]</option>
+								=]
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<th>
 							<label for="sorting_comments">[ ' _t: SortComment ' ]</label>
 						</th>

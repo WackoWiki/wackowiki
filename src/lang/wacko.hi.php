@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'hi_IN.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'dd-MM-yyyy',
+	],
+
 	// common
 	'AddButton'					=> 'जोड़ें',
 	'ArchiveButton'				=> 'Archive',
@@ -319,13 +323,13 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> 'Source',
-	'SourceTip'					=> 'View the wiki source',
+	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'SourceFor'					=> '%1 का स्रोत देखें',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
-	'GroupsNoMatching'			=> 'Matching groups not found. Try a less strict search criteria.',
+	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
 	'GroupsOpenProfile'			=> 'View Profile',
 	'GroupsName'				=> 'समूह',
 	'GroupsMembers'				=> 'Members',
@@ -541,7 +545,7 @@ $wacko_translation = [
 	'AccountDeleteConfirm'		=> 'Are you sure you want to delete the account?',
 	'AccountDeleted'			=> 'Account successfully deleted',
 	'AccountDeleteHeader'		=> 'Delete account %1',
-	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note, however, that data like attachments and wiki entries cannot be deleted without impeding the work of the other users. Such data is hence reassigned to an account called %1. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
+	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note however, that data like attachments and wiki entries can not be deleted without impeding the work of the other users. Such data is hence reassigned to an account called %1. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
 	'AccountDeleteWarning'		=> 'Deleting the user account is an irreversible action.',
 	'AccountDeleteHint'			=> 'Your account will be deleted from the system. Therefore, you will no longer be able to log in with your current credentials. If you choose to become a user of this application again, you can do so by using the means this application grants.',
 	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
@@ -554,8 +558,8 @@ $wacko_translation = [
 	'EditIcon'					=> 'सम्पादन',
 	'TreeClusterTitle'			=> 'Tree of cluster %1',
 	'TreeSiteTitle'				=> 'Site tree',
-	'TreeEmpty'					=> '%1 has no subpages',
-	'TreeEmptyLevels'			=> '%1 has no subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmpty'					=> '%1 has not subpages',
+	'TreeEmptyLevels'			=> '%1 has not subpages for given levels of depth. Increase the value for depth.',
 	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler
@@ -658,11 +662,11 @@ $wacko_translation = [
 	'EmailNotConfirmed'			=> 'Email cannot be confirmed. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'ईमेल सत्यापित नहीं!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
-									'or messages from other users. Also, you <strong>will not be able to recover a forgotten password</strong>, ' .
-									'until your email address is confirmed by following the link in the email sent to you. ' .
-									'If, within days after registration you do not receive an email, ask for it again by clicking ',
+									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
+									'until your email-address was confirmed, by following the link in the email sent to you. ' .
+									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then an email with instructions will be send to you.',
+	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then email with instructions will be send to you.',
 	'ForgotPassword'			=> 'अपना पासवर्ड भूल गए?',
 	'UserNotFound'				=> 'User with this name or email address was not found.',
 	'NotConfirmedEmail'			=> 'आपके ईमेल पते की पुष्टि नहीं हुई है।<br>मेल को अपुष्ट पते पर नहीं भेजा जा सकता है।',
@@ -687,7 +691,7 @@ $wacko_translation = [
 
 	// import action
 	'ImportTo'					=> 'Import in cluster:',
-	'ImportWhat'				=> 'XML file to import:',
+	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> 'आयात',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'आयात विफल हुआ.',
@@ -702,7 +706,7 @@ $wacko_translation = [
 	'NoUnwatchedPages'			=> 'You watch for changes in all pages.',
 	'ViewWatchedPages'			=> 'Show watched pages',
 	'ViewUnwatchedPages'		=> 'Show unwatched page',
-	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify your list of watches.',
+	'NotLoggedInWatches'		=> 'You are not logged in, hence we couldn\'t identify so your list of watches.',
 
 	// mychangeswatches action
 	'MyChangesWatches'			=> 'List of all pages you watched that were edited by others since your last editing',
@@ -722,7 +726,7 @@ $wacko_translation = [
 	// users action
 	'UsersSearch'				=> 'Find Users',
 	'UsersOpenProfile'			=> 'View Profile',
-	'UsersNoMatching'			=> 'Matching users not found. Try a less strict search criteria.',
+	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'नाम',
 	'UsersPages'				=> 'पृष्ठ',
 	'UsersChanges'				=> 'Changes',
@@ -759,16 +763,16 @@ $wacko_translation = [
 	'IntercomMessage'			=> 'संदेश:',
 	'IntercomCopy'				=> 'मुझे एक कॉपी भेजें',
 	'IntercomSubjectN'			=> '[एक नया विषय शुरू करें]',
-	'IntercomDisabled'			=> 'Sorry, you do not want or cannot receive personal messages.',
-	'IntercomHint'				=> 'Please log in first and follow the link again, if you want to answer the personal message you have received.',
-	'IntercomDesc'				=> 'Note: Sending personal messages carried on the email recipient without disclosing your address. The recipient will be able to respond to you, using a similar form on your profile page. ',
+	'IntercomDisabled'			=> 'Sorry, you do not want or can not receive personal messages.',
+	'IntercomHint'				=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
+	'IntercomDesc'				=> 'Note: Sending personal messages carried on the email-address recipient without disclosing your address. The recipient will be able to respond to you, using similar form on your profile page. ',
 	'PMOversized'				=> 'The length of the message exceeds the maximum allowed size by %1. Please shorten your message and submit again.',
 	'PMFlooded'					=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'PMSent'					=> 'Personal message was successfully sent to the user.',
 	'PMBody'					=> 'This message has been sent to you by the user %1.',
 	'PMBodyCopy'				=> 'आपने उपयोगकर्ता% 1 को निम्न संदेश भेजा।',
 	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
-	'PMNotLoggedIn'				=> 'You are not registered in the system and cannot send personal messages to users.',
+	'PMNotLoggedIn'				=> 'You are not registered in the system and can not send personal messages to users.',
 
 	// admin_replace action
 	'ReplaceText'				=> 'पाठ बदलें',
@@ -933,9 +937,9 @@ $wacko_translation = [
 	'FileUsageText'				=> 'The following pages link to this file:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
-	'FileSortExt'				=> 'extension',
-	'FileSortName'				=> 'name',
-	'FileSortSize'				=> 'size',
+	'FileSortExt'				=> 'एक्सटेंशन',
+	'FileSortName'				=> 'फ़ाइल का नाम',
+	'FileSortSize'				=> 'फ़ाईल का आकार',
 	'FileSortTime'				=> 'बनाया',
 
 	'SortBy'					=> 'Sort by',
@@ -1033,12 +1037,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter URL. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter URL. (e.g. {{feed url="https://example.com/feed.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 	'FeedXMLTip'				=> '',
@@ -1181,8 +1185,8 @@ $wacko_translation = [
 	'PwdCplxDesc4'				=> 'should consist of ',
 	'PwdCplxDesc41'				=> 'letters and numbers',
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
-	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphanumeric characters',
-	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters except spaces.',
+	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
+	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
 
 	'PasswordTooShort'			=> 'Password too short.',
 	'PasswordTooCommon'			=> 'That password is too common.',
@@ -1190,9 +1194,12 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Your password is the same as your email.',
 
 	'Timezone'					=> 'क्षेत्रीय समय',
+	'DateFormat'				=> 'Date format',
 
 	'LanguageArray'	=> [
+		'ar' => 'Arabic',
 		'bg' => 'Bulgarian',
+		'cs' => 'Czech',
 		'da' => 'Danish',
 		'de' => 'German',
 		'el' => 'Greek',
@@ -1200,17 +1207,24 @@ $wacko_translation = [
 		'es' => 'Spanish',
 		'et' => 'Estonian',
 		'fa' => 'Persian',
+		'fi' => 'Finnish',
 		'fr' => 'French',
 		'hi' => 'हिन्दी',
 		'hu' => 'Hungarian',
+		'id' => 'Indonesian',
 		'it' => 'Italian',
 		'ja' => 'Japanese',
 		'ko' => 'Korean',
 		'nl' => 'Dutch',
+		'no' => 'Norwegian',
 		'pl' => 'Polish',
 		'pt' => 'Portuguese',
-	    'ru' => 'Russian',
-	    'ta' => 'तामिल',
+		'pt-br' => 'Portuguese-Brazil',
+		'ro' => 'Romainian',
+		'ru' => 'Russian',
+		'sv' => 'Swedish',
+		'ta' => 'Tamil',
+		'uk' => 'Ukrainian',
 		'zh' => 'Chinese',
 		'zh-tw' => 'Chinese',
 	],
@@ -1267,8 +1281,8 @@ $wacko_translation = [
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
 	'LogAdminLogout'			=> 'Logout of the administrative panel',
-	'LogAdminLoginFailed'		=> '!!Failure to authorize access to administrative panel!!',
-	'LogAdminLoginLocked'		=> 'Locked login to the administrative panel',
+	'LogAdminLoginFailed'		=> '!!Failure to authorize into the administrative panel!!',
+	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
 	'LogUserCookieForged'		=> '!!**An attempt to login on a forged cookie with login ##%1##**!!',
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
@@ -1287,12 +1301,12 @@ $wacko_translation = [
 	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
 	'LogRenamedPage'			=> 'Page ##%1## renamed to [[/%2]]',
 	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
-	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
+	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
-	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recovered the forgotten password',
-	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) the password',
-	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change the password: current password mismatch!!',
+	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recover his forgotten password',
+	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) his password',
+	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change his password: current password mismatch!!',
 	'LogUserIPSwitched'			=> 'Unauthorized IP address change of the user %1 from %2 to %3',
 	'LogPageImported'			=> 'Imported page [[/%1]]',
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
@@ -1332,6 +1346,7 @@ $wacko_translation = [
 	'LogCategoryDebundled'		=> 'Category ##%1## debundled',
 	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
+	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
 
 	'ErrorMinPHPVersion'		=> 'PHP संस्करण <strong>' . PHP_MIN_VERSION . '</strong>से बड़ा होना चाहिए,' .
 									'   ऐसा प्रतीत होता है कि आपका सर्वर <strong>' . PHP_VERSION . '</strong> चला रहा है।' .

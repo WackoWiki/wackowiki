@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'ja_JP.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'yyyy年MM月dd日',
+	],
+
 	// common
 	'AddButton'					=> '追加',
 	'ArchiveButton'				=> 'アーカイブ',
@@ -53,7 +57,7 @@ $wacko_translation = [
 	'UserNameOwned'				=> 'このユーザー名は既に登録されています。他のユーザー名を選択してください。',
 	'SiteRegistered'			=> 'サイト %1への登録に成功しました。',
 	'RegistrationEmailInfo'		=> '有効なメールアドレス システムからのすべてのメールがこのアドレスに送信されます。 メールアドレスは公開されておらず、新しいパスワードを受け取りたい場合や、特定のニュースや通知をメールで受け取りたい場合にのみ使用されます。',
-	'EmailConfirmHint'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. <br>Furthermore you will not be notified of recent page changes and comments.',
+	'EmailConfirmHint'			=> '送信された手順のリンクをクリックして、電子メール アドレスを確認してください。<br>電子メール アドレスを確認しないと、紛失した可能性のあるパスワードを取得できなくなります。<br>さらに、最近のページの変更やコメントに関する通知も届きません。',
 	'EmailConfirmRequired'		=> 'メールアドレスが確認できない場合は、ログインできません。',
 	'NameTooShort'				=> 'ユーザー名が短すぎます。少なくとも %2 文字が必要です。',
 	'NameTooLong'				=> 'ユーザー名が長すぎます。最大 %2 文字が許可されています。',
@@ -1190,6 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'パスワードはメールアドレスと同じです。',
 
 	'Timezone'					=> 'タイムゾーン',
+	'DateFormat'				=> '日付の形式',
 
 	'LanguageArray'	=> [
 		'ar' => 'アラビア文字',
@@ -1219,6 +1224,7 @@ $wacko_translation = [
 		'ru' => 'ロシア語',
 		'sv' => 'スウェーデン語',
 		'ta' => 'Tamil',
+		'uk' => 'ウクライナ語',
 		'zh' => '中国語',
 		'zh-tw' => '中国語',
 	],

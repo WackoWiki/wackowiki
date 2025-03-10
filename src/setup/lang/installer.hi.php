@@ -5,7 +5,7 @@ $lang = [
    Language Settings
 */
 'LangISO'		=> 'hi',
-'LangLocale'	=> 'en_US',
+'LangLocale'	=> 'hi_IN',
 'LangName'		=> 'हिन्दी',
 'LangDir'		=> 'ltr',
 
@@ -53,10 +53,10 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Language Configuration',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %2) release of WackoWiki (%1). To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
-'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
+'PleaseUpgradeToR6'				=> 'You appear to be running an old (pre %2) release of WackoWiki (%1). To update to this release of WackoWiki, you must first update your installation to %2.',
+'UpgradeFromWacko'				=> 'Welcome to WackoWiki! It appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
+'FreshInstall'					=> 'Welcome to WackoWiki! You are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
+'PleaseBackup'					=> 'कृपया, अपग्रेड प्रक्रिया शुरू करने से पहले अपने डेटाबेस, कॉन्फ़िगरेशन फ़ाइल और सभी परिवर्तित फ़ाइलों जैसे कि जिन पर स्थानीय हैक और पैच लागू किए गए हैं, का <strong>बैकअप</strong> लें। यह आपको एक बड़ी सिरदर्द से बचा सकता है।',
 'LangDesc'						=> 'Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.',
 
 /*
@@ -76,7 +76,7 @@ $lang = [
 'Problem'						=> 'Problem',
 'Example'						=> 'Example',
 'NotePhpExtensions'				=> '',
-'ErrorPhpExtensions'			=> 'Your PHP installation appears to be missing the noted PHP extensions which are required by WackoWiki.',
+'ErrorPhpExtensions'			=> 'ऐसा प्रतीत होता है कि आपके PHP इंस्टॉलेशन में संकेतित PHP एक्सटेंशन गायब हैं, जो WackoWiki के लिए आवश्यक हैं।',
 'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
@@ -91,21 +91,21 @@ $lang = [
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
 'SiteNameDefault'				=> 'मेरा विकि',
 'HomePage'						=> 'मुख पृष्ठ',
-'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'HomePageDesc'					=> 'Enter the name you would like your home page to have. This will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> 'मुखपृष्ठ',
 'MultiLang'						=> 'Multi Language Mode',
 'MultiLangDesc'					=> 'Multilingual mode allows you to have pages with different language settings within a single installation. When this mode is enabled, the installer creates initial menu items for all languages available in the distribution.',
 'AllowedLang'					=> 'Allowed Languages',
-'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc'				=> 'यह अनुशंसा की जाती है कि आप केवल उन्हीं भाषाओं का चयन करें जिन्हें आप उपयोग करना चाहते हैं, अन्यथा सभी भाषाएँ चयनित हो जाएंगी।',
 'Admin'							=> 'Admin Name',
-'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
-'NameAlphanumOnly'				=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters. Upper case characters are OK.',
+'AdminDesc'						=> 'Enter the admin\'s username. This should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'उपयोगकर्ता नाम %1 और %2 अक्षरों के बीच होना चाहिए और केवल अल्फ़ान्यूमेरिक अक्षरों का उपयोग करना चाहिए। बड़े अक्षर ठीक हैं।',
 'NameCamelCaseOnly'				=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
 'Password'						=> 'Admin Password',
 'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
 'PasswordConfirm'				=> 'Repeat Password:',
 'Mail'							=> 'Admin Email Address',
-'MailDesc'						=> 'Enter the admins email address.',
+'MailDesc'						=> 'व्यवस्थापक का ईमेल पता दर्ज करें।',
 'Base'							=> 'Base URL',
 'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
 'Rewrite'						=> 'Rewrite Mode',
@@ -113,8 +113,8 @@ $lang = [
 'Enabled'						=> 'Enabled:',
 'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
 'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
-'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
-'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
+'ErrorAdminPasswordShort'		=> 'एडमिन पासवर्ड बहुत छोटा है! न्यूनतम लंबाई %1 वर्ण है।',
+'ModRewriteStatusUnknown'		=> 'इंस्टॉलर यह सत्यापित नहीं कर सकता कि mod_rewrite सक्षम है। हालाँकि, इसका मतलब यह नहीं है कि यह अक्षम है।',
 
 /*
    Database Config Page
@@ -131,11 +131,11 @@ $lang = [
 'DbEngine'						=> 'Engine',
 'DbEngineDesc'					=> 'The database engine you want to use.',
 'DbHost'						=> 'डेटाबेस होस्ट',
-'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
+'DbHostDesc'					=> 'वह होस्ट जिस पर आपका डेटाबेस सर्वर चल रहा है, आमतौर पर <code>127.0.0.1</code> या <code>localhost</code> (अर्थात, वही मशीन जिस पर आपकी WackoWiki साइट है)।',
 'DbPort'						=> 'डेटाबेस पोर्ट (Optional)',
-'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
+'DbPortDesc'					=> 'The port number your database server is accessible through. Leave it blank to use the default port number.',
 'DbName'						=> 'डेटाबेस का नाम',
-'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
+'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbUser'						=> 'डेटाबेस सदस्यनाम',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'कूटशब्द',
@@ -145,7 +145,7 @@ $lang = [
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
 'DeleteTables'					=> 'Delete Existing Tables?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
+'DeleteTablesDesc'				=> 'ध्यान दें! यदि आप इस विकल्प को चुनकर आगे बढ़ते हैं तो आपके डेटाबेस से सभी मौजूदा विकी डेटा मिटा दिए जाएँगे। जब तक आप बैकअप से डेटा को मैन्युअल रूप से पुनर्स्थापित नहीं करते, तब तक इसे पूर्ववत नहीं किया जा सकता।',
 'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
 
 /*
@@ -193,7 +193,7 @@ $lang = [
 'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
 'DeletingTables'				=> 'Deleting Tables',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
-'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
+'ErrorDeletingTable'			=> 'Error deleting %1 table. The most likely reason is that the table does not exist, in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
 'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 
@@ -207,14 +207,14 @@ $lang = [
 'InstallationComplete'			=> 'Installation Complete',
 'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
-'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
+'SecurityRisk'					=> 'You are advised to remove write access to %1 now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>',
+'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2.<br><br> Don\'t forget to remove write access again later, i.e., <br>%3.<br><br>',
 'ErrorPrivilegesInstall'		=> 'If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
-'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'detailed description: https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> 'Try Again',
 
 ];

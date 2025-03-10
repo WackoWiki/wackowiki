@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'ko_KR.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'yyyy년 MM월 dd일',
+	],
+
 	// common
 	'AddButton'					=> '추가',
 	'ArchiveButton'				=> 'Archive',

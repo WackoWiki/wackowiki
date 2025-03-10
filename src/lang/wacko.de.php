@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'de_DE.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'dd.MM.yyyy',
+	],
+
 	// common
 	'AddButton'					=> 'Hinzufügen',
 	'ArchiveButton'				=> 'Archivieren',
@@ -1190,6 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Dein Passwort entspricht deiner E-Mail-Adresse.',
 
 	'Timezone'					=> 'Zeitzone',
+	'DateFormat'				=> 'Datumsformat',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabisch',
@@ -1219,6 +1224,7 @@ $wacko_translation = [
 		'ru' => 'Russisch',
 		'sv' => 'Schwedisch',
 		'ta' => 'Tamil',
+		'uk' => 'Ukrainisch',
 		'zh' => 'Chinesisch',
 		'zh-tw' => 'Chinesisch',
 	],

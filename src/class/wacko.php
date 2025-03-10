@@ -512,7 +512,8 @@ class Wacko
 
 	function sql2datetime($text, &$date, &$time): void
 	{
-		$date	= $this->date_format($this->sql2time($text), $this->db->date_format);
+		$date_format = $this->date_format_pattern();
+		$date	= $this->date_format($this->sql2time($text), $date_format);
 		$time	= $this->date_format($this->sql2time($text), $this->db->time_format);
 	}
 
@@ -524,7 +525,9 @@ class Wacko
 	// TODO: make format pattern depended from localization and user preferences?
 	function sql_time_format($text): string
 	{
-		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format);
+		$date_format = $this->date_format_pattern();
+
+		return $this->date_format($this->sql2time($text), $date_format . ' ' . $this->db->time_format);
 	}
 
 	// unix time formatted (must be passed as UTC time)
@@ -620,6 +623,34 @@ class Wacko
 	{
 		return preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $date, $m)
 			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
+	}
+
+	function date_format_pattern()
+	{
+		if (isset($this->sess->date_pattern))
+		{
+			return $this->sess->date_pattern;
+		}
+		else
+		{
+			// TODO: set default, e.g. via match(), array size may differ depending on language
+			$preference					= $this->get_user()['date_preference'] ?? 'default';
+			$date_format				= $this->available_date_formats()[$preference] ?? $this->db->date_format;
+			$this->sess->date_pattern	= $date_format;
+
+			return $date_format;
+		}
+	}
+
+	function available_date_formats()
+	{
+		// language defaults
+		$date_formats				= $this->_t('date_formats');
+		// global defaults
+		$date_formats['ISO 8601']	= 'yyyy-MM-dd';
+		$date_formats['system']		= $this->db->date_format;
+
+		return $date_formats;
 	}
 
 	// converts a number to a locale-specific string
@@ -5860,7 +5891,7 @@ class Wacko
 				s.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.theme,
 				s.autocomplete, s.numerate_links, s.diff_mode, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
 				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
-				s.session_length, s.timezone, s.sorting_comments ' .
+				s.session_length, s.timezone, s.date_preference, s.sorting_comments ' .
 			'FROM ' . $this->prefix . 'user u ' .
 				'LEFT JOIN ' . $this->prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
 			'WHERE ' . ($user_id
@@ -7114,7 +7145,7 @@ class Wacko
                         : '') .
                     ($public
                         ? "AND a.privilege = 'read' " .
-                          "AND " . $rights . " " // assumes '*' for anonymous, '*' and '$' for registered users 
+                          "AND " . $rights . " " // assumes '*' for anonymous, '*' and '$' for registered users
                         : '') .
                 'ORDER BY m.menu_position', true);
 

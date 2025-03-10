@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'uk_UA.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'dd.MM.yyyy',
+	],
+
 	// common
 	'AddButton'					=> 'Додати',
 	'ArchiveButton'				=> 'Архів',

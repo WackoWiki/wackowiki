@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'ro_RO.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'dd.MM.yyyy',
+	],
+
 	// common
 	'AddButton'					=> 'Adăugare',
 	'ArchiveButton'				=> 'Arhivează',
@@ -1190,6 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Parola dvs. este identică cu cea a e-mailului dvs.',
 
 	'Timezone'					=> 'Timezone',
+	'DateFormat'				=> 'Formatul datei',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabă',
@@ -1219,6 +1224,7 @@ $wacko_translation = [
 		'ru' => 'Rusă',
 		'sv' => 'Suedeză',
 		'ta' => 'Tamil',
+		'uk' => 'Ucraineană',
 		'zh' => 'Chineză',
 		'zh-tw' => 'Chineză',
 	],

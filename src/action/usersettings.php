@@ -132,11 +132,13 @@ else if ($user = $this->get_user())
 		$user_lang	= $this->validate_language($_POST['user_lang']);
 		$theme		= $this->validate_theme($_POST['theme']);
 		$timezone	= $this->validate_timezone($_POST['timezone']);
-
+		$preference = $_POST['date_preference'];
+		$this->sess->date_pattern = $this->available_date_formats()[$preference] ?? $this->db->date_format;
 		$sql =
 		'user_lang			= ' . $this->db->q($user_lang) . ', ' .
 		'theme				= ' . $this->db->q($theme) . ', ' .
 		'timezone			= ' . $this->db->q($timezone) . ', ' .
+		'date_preference	= ' . $this->db->q($preference) . ', ' .
 		'sorting_comments	= ' . (int) $_POST['sorting_comments'] . ', ' .
 		'menu_items			= ' . (int) $_POST['menu_items'] . ', ' .
 		'list_count			= ' . (int) $_POST['list_count'] . ' ';
@@ -314,6 +316,16 @@ else if ($user = $this->get_user())
 			$tpl->z_timezone	= $timezone;
 			$tpl->z_sel			= (int) (isset($a_zone) && $a_zone == $offset);
 			$tpl->z_offset		= $offset;
+		}
+
+		$a_date_preference		= $user['date_preference'] ?: 'default';
+		$date_formats			= $this->available_date_formats();
+
+		foreach ($date_formats as $offset => $date_format)
+		{
+			$tpl->df_format		= $offset; //  . ')' . $date_format;
+			$tpl->df_sel		= (int) (isset($a_date_preference) && $a_date_preference == $offset);
+			$tpl->df_offset		= $offset;
 		}
 
 		$tpl->sortcomments	= $user['sorting_comments'];

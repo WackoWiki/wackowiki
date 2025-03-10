@@ -19,7 +19,7 @@ $insert = [
 	'privacy_page'		=> 'Normativa de privacidad',
 
 	'registration_page'	=> 'Registrarse',
-	'password_page'		=> 'Password',
+	'password_page'		=> 'Contraseña',
 	'search_page'		=> 'Buscar',
 	'login_page'		=> 'Conectar',
 	'account_page'		=> 'Preferencias',

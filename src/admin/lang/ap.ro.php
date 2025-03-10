@@ -658,7 +658,7 @@ $ap_translation = [
 
 	'WackoFormatterSection'		=> 'Formatter text Wiki (Wacko Formatter)',
 	'X11colors'					=> 'X11 culori utilizate:',
-	'X11colorsInfo'				=> 'Extinde culorile disponibile pentru <code>??(color) fundal??</code> și <code>!! color) text!!</code>Dezactivarea acestei opțiuni accelerează procesele de adăugare a comentariilor și de salvare a paginilor.',
+	'X11colorsInfo'				=> 'Extinde culorile disponibile pentru <code>??(color) fundal??</code> și <code>!!(color) text!!</code>Dezactivarea acestei opțiuni accelerează procesele de adăugare a comentariilor și de salvare a paginilor.',
 	'WikiLinks'					=> 'Dezactivare link-uri wiki:',
 	'WikiLinksInfo'				=> 'Dezactiveaza legatura pentru <code>CamelCaseWords</code>: Cuvintele CamelCase nu vor mai fi legate direct la o pagina noua. Acest lucru este util atunci când lucrați pe diferite spații de nume/clustere. Implicit este oprit.',
 	'BracketsLinks'				=> 'Dezactivează link-urile cu paranteză:',

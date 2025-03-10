@@ -658,7 +658,7 @@ $ap_translation = [
 
 	'WackoFormatterSection'		=> 'Formatador de Texto Wiki (Formato Wacko)',
 	'X11colors'					=> 'Uso de cores X11:',
-	'X11colorsInfo'				=> 'Estende as cores disponíveis para <code>??(cor) de fundo??</code> e <code>!! color) texto!!</code>Desativar esta opção acelera os processos de adicionar comentários e salvar páginas.',
+	'X11colorsInfo'				=> 'Estende as cores disponíveis para <code>??(cor) de fundo??</code> e <code>!!(color) texto!!</code>Desativar esta opção acelera os processos de adicionar comentários e salvar páginas.',
 	'WikiLinks'					=> 'Desabilitar links wiki:',
 	'WikiLinksInfo'				=> 'Desativa a vinculação para <code>CamelCaseWords</code>: Suas palavras CamelCase já não serão vinculadas diretamente a uma nova página. Isso é útil quando você trabalha em diferentes namespaces/clusters. Por padrão, ele está desativado.',
 	'BracketsLinks'				=> 'Desativar links para-braços:',

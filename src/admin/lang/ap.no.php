@@ -659,7 +659,7 @@ $ap_translation = [
 
 	'WackoFormatterSection'		=> 'Wiki tekst formatering',
 	'X11colors'					=> 'X11 bruk av farger:',
-	'X11colorsInfo'				=> 'Forlenger tilgjengelige farger for <code>?(farge) bakgrunn??</code> og <code>!! Farge) tekst!!</code>Deaktivering av denne alternativet, øker prosessene for å legge til kommentarer og lagre sider.',
+	'X11colorsInfo'				=> 'Forlenger tilgjengelige farger for <code>??(farge) bakgrunn??</code> og <code>!!(farge) tekst!!</code>Deaktivering av denne alternativet, øker prosessene for å legge til kommentarer og lagre sider.',
 	'WikiLinks'					=> 'Deaktivere wiki-lenker:',
 	'WikiLinksInfo'				=> 'Deaktiverer kobling for <code>CamelCaseWords</code>: CamelCase ordene dine vil ikke lenger bli knyttet til en ny side. Dette er nyttig når du arbeider på tvers av navneområder/clustere. Som standard er den av.',
 	'BracketsLinks'				=> 'Deaktiver parenteserte lenker:',

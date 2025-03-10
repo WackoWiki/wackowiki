@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'PCRE não está compilado com suporte UTF-8.',
 'NotePermissions'				=> 'Este instalador tentará escrever os dados de configuração do arquivo %1, localizado no diretório WackoWiki. Para que isso funcione, você precisa ter certeza de que o servidor web tem acesso de escrita a esse arquivo. Se você não puder fazer isso, você terá que editar o arquivo manualmente (o instalador lhe dirá como).<br><br>Veja <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> para detalhes.',
 'ErrorPermissions'				=> 'Parece que o instalador não pode definir automaticamente as permissões de arquivo necessárias para que o WackoWiki funcione corretamente. Será solicitado posteriormente no processo de instalação que configure manualmente as permissões de arquivo necessárias no seu servidor.',
-'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
+'ErrorMinPhpVersion'			=> 'A versão do PHP deve ser maior que %1. Seu servidor parece estar executando uma versão anterior. Você precisa atualizar para uma versão mais recente do PHP para que o WackoWiki funcione corretamente.',
 'Ready'							=> 'Parabéns, parece que seu servidor é capaz de executar WackoWiki. As próximas páginas irão levá-lo através do processo de configuração.',
 
 /*
@@ -189,7 +189,7 @@ $lang = [
 'ErrorRenameTable'				=> 'Erro ao renomear tabela %1',
 'ErrorUpdatingTable'			=> 'Erro ao atualizar tabela %1',
 'CreatingTable'					=> 'Criando tabela %1',
-'ErrorAlreadyExists'			=> 'The %1 already exists',
+'ErrorAlreadyExists'			=> 'O %1 já existe',
 'ErrorCreatingTable'			=> 'Erro ao criar tabela %1 , ela já existe?',
 'DeletingTables'				=> 'Excluindo tabelas',
 'DeletingTablesEnd'				=> 'Excluindo tabelas concluído',

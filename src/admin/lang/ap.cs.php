@@ -479,12 +479,12 @@ $ap_translation = [
 									 jiné než X-Forwarded-For. Hlavička "X-Forwarded-For" je čárkou oddělený seznam IP
 									 adres; bude použita pouze poslední (vlevo).',
 	'ReverseProxyAddresses'		=> 'reverse_proxy přijímá pole IP adres:',
-	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
-									 proxies. If using this array, WackoWiki will trust the information stored
-									 in the X-Forwarded-For headers only if the Remote IP address is one of
-									 these, that is, the request reaches the web server from one of your
-									 reverse proxies. Otherwise, the client could directly connect to
-									 your web server by spoofing the X-Forwarded-For headers.',
+	'ReverseProxyAddressesInfo'	=> 'Každý prvek tohoto pole je IP adresa kterékoliv vaší reverzní
+									 proxy adresy. Použije-li toto pole, WackoWiki bude důvěřovat informacím uloženým
+									 v hlavičkách X-Forwarded-For pouze pokud vzdálená IP adresa je jednou z
+									 těchto To znamená, že žádost se dostane na webový server z jednoho z vašich
+									 proxi reverzních zástupců. V opačném případě by se klient mohl přímo připojit k
+									 vašemu webserveru tím, že by promluvil X-Forwarded-For headers.',
 
 	'SessionSection'				=> 'Manipulace s relací',
 	'SessionStorage'				=> 'Úložiště relace:',
@@ -658,7 +658,7 @@ $ap_translation = [
 
 	'WackoFormatterSection'		=> 'Wiki textová fóra (Wacko Formatter)',
 	'X11colors'					=> 'Použití barev X11:',
-	'X11colorsInfo'				=> 'Rozšiřuje dostupné barvy pro <code>???(barva) pozadí??</code> a <code>!! Barva) text!!</code>Zakázání této možnosti urychluje procesy přidávání komentářů a ukládání stránek.',
+	'X11colorsInfo'				=> 'Rozšiřuje dostupné barvy pro <code>??(barva) pozadí??</code> a <code>!!(barva) text!!</code>Zakázání této možnosti urychluje procesy přidávání komentářů a ukládání stránek.',
 	'WikiLinks'					=> 'Zakázat Wiki odkazy:',
 	'WikiLinksInfo'				=> 'Zakáže propojení pro <code>CamelCaseWords</code>: Vaše CamelCase slova již nebudou přímo propojena s novou stránkou. To je užitečné, pokud pracujete na různých jmenných místech/clusterech. Ve výchozím nastavení je vypnuto.',
 	'BracketsLinks'				=> 'Zakázat závorkové odkazy:',
@@ -1112,7 +1112,7 @@ $ap_translation = [
 	'UsersAddNew'				=> 'Přidat nového uživatele',
 	'UsersDelete'				=> 'Jste si jisti, že chcete odstranit uživatele %1?',
 	'UsersDeleted'				=> 'Uživatel %1 byl odstraněn z databáze.',
-	'UsersRename'				=> 'Rename the user %1 to',
+	'UsersRename'				=> 'Přejmenovat uživatele %1',
 	'UsersRenameInfo'			=> '* Poznámka: Změna ovlivní všechny stránky, které jsou přiřazeny tomuto uživateli.',
 	'UsersUpdated'				=> 'Uživatel byl úspěšně aktualizován.',
 

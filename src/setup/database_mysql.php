@@ -348,7 +348,7 @@ $tbl_user_setting =
 		noid_pubs TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 		session_length TINYINT(3) UNSIGNED DEFAULT NULL,
 		timezone VARCHAR(100) NOT NULL DEFAULT 'UTC',
-		date_format VARCHAR(10) DEFAULT 'default',
+		date_preference VARCHAR(10) DEFAULT 'default',
 		sorting_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 		PRIMARY KEY (setting_id),
 		UNIQUE KEY idx_user_id (user_id),

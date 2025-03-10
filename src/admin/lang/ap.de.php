@@ -98,7 +98,7 @@ $ap_translation = [
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filtrer',
+		'name'		=> 'Filter',
 		'title'		=> 'Filter-Einstellungen',
 	],
 
@@ -1042,7 +1042,7 @@ $ap_translation = [
     	'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollständig gespeichert).<br>' .  '<br>' .
 		'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, ',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br>' .
-    	'The Backup package files were stored in the sub-directory %1.<br>. To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
+    	'Die Backup-Paketdateien wurden im Unterverzeichnis %1 gespeichert.<br>. Verwende zum Herunterladen FTP (Bewahre beim Kopieren die Verzeichnisstruktur und Dateinamen).<br> Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 	'Backup'					=> 'Datensicherung',
 	'CantReadFile'				=> 'Kann Datei %1 nicht lesen.',

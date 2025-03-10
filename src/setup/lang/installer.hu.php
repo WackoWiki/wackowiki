@@ -80,7 +80,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'Úgy tűnik, hogy a PHP PRCE modulja PRCE_UTF8 támogatás nélkül lett fordítva.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'ErrorPermissions'				=> 'Úgy tűnik, hogy a telepítő nem tudja automatikusan beállítani a WackoWiki megfelelő működéséhez szükséges fájlengedélyeket. A telepítés folyamán később a rendszer kéri, hogy manuálisan állítsa be a szükséges fájlengedélyeket a szerveren.',
-'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
+'ErrorMinPhpVersion'			=> 'A PHP verziónak nagyobbnak kell lennie, mint a %1, úgy tűnik, hogy a szerverén egy korábbi verzió fut. A WackoWiki helyes működéséhez frissítenie kell egy újabb PHP verzióra.',
 'Ready'							=> 'Gratulálunk, úgy tűnik, hogy a szerver képes futtatni a WackoWiki-t. A következő néhány oldalon végigvezet a konfigurációs folyamaton.',
 
 /*

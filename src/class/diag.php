@@ -121,6 +121,7 @@ class Diag
 						'User agent language: ' .			$http->user_agent_language(),
 						'User language set: ' .				(isset($user['user_lang']) ? 'true' : 'false'),
 						'User language value: ' .			($user['user_lang'] ?? ''),
+						'Local: ' .							$engine->lang['locale'],
 						'Page language: ' .					($engine->page['page_lang'] ?? ''),
 						'Config language: ' .				$config['language'],
 						'User selected language: ' .		($engine->user_lang ?? ''),

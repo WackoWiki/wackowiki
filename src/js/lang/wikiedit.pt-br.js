@@ -3,7 +3,7 @@ lang = {
 	ReallySave: 'Deseja realmente salvar?',
 	ModifiedHint: 'O campo foi alterado, não se esqueça de salvar as alterações.',
 	NotSavedWarning: 'Você não salvou as alterações. Tem certeza que deseja sair?',
-	SessionExpiredEditor: 'Your session has expired!\nYou\'ve been logged off due to long inactivity.\n1. Save your form edits to text file to prevent loss.\n2. Refresh the page.\n3. Log in again and re-submit.',
+	SessionExpiredEditor: 'Sua sessão expirou!\nVocê foi desconectado devido à longa inatividade.\n1. Salve suas edições de formulário em um arquivo de texto para evitar perdas.\n2. Atualize a página.\n3. Efetue login novamente e reenvie.',
 	// wikiedit.js
 	HelpAbout: 'Ajuda e Sobre',
 	HelpFormatting: 'Socorro',

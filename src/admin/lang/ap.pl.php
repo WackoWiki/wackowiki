@@ -669,7 +669,7 @@ niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włącz
 
 	'WackoFormatterSection'		=> 'Forma tekstowa Wiki (Wacko Formatter)',
 	'X11colors'					=> 'Użycie kolorów X11:',
-	'X11colorsInfo'				=> 'Rozszerza dostępne kolory dla <code>??(kolor) tła??</code> i <code>!!(kolor) tekst!</code>Wyłączenie tej opcji przyspiesza procesy dodawania komentarzy i zapisywania stron.',
+	'X11colorsInfo'				=> 'Rozszerza dostępne kolory dla <code>??(kolor) tła??</code> i <code>!!(kolor) tekst!!</code>Wyłączenie tej opcji przyspiesza procesy dodawania komentarzy i zapisywania stron.',
 	'WikiLinks'					=> 'Wyłącz linki wiki:',
 	'WikiLinksInfo'				=> 'Wyłącza łączenie dla <code>CamelCaseWords</code>: Twoje słowa CamelCase nie będą już bezpośrednio powiązane z nową stroną. Jest to przydatne, gdy pracujesz w różnych przedziałach nazw/klastrach. Domyślnie jest wyłączone.',
 	'BracketsLinks'				=> 'Wyłącz nawiasowane linki:',

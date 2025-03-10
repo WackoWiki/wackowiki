@@ -15,6 +15,13 @@ $wacko_translation = [
 		'locale'	=> 'en_US.UTF-8',
 	],
 
+	'date_formats'	=> [
+		'default'	=> 'yyyy-MM-dd',
+		'mdy'		=> 'MM/dd/yyyy',
+		'dmy'		=> 'dd-MM-yyyy',
+		'ymd'		=> 'yyyy-MM-dd',
+	],
+
 	// common
 	'AddButton'					=> 'Add',
 	'ArchiveButton'				=> 'Archive',
