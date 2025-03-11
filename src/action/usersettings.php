@@ -133,7 +133,7 @@ else if ($user = $this->get_user())
 		$theme		= $this->validate_theme($_POST['theme']);
 		$timezone	= $this->validate_timezone($_POST['timezone']);
 		$preference = $_POST['date_preference'];
-		$this->sess->date_pattern = $this->available_date_formats()[$preference] ?? $this->db->date_format;
+
 		$sql =
 		'user_lang			= ' . $this->db->q($user_lang) . ', ' .
 		'theme				= ' . $this->db->q($theme) . ', ' .
@@ -173,6 +173,7 @@ else if ($user = $this->get_user())
 	{
 		$user = $this->load_user('', $user['user_id']);
 		$this->set_user($user);
+		$this->sess->date_pattern = $this->available_date_formats()[$preference] ?? $this->db->date_format;
 
 		$this->set_message($this->_t('UserSettingsStored', @$_POST['user_lang']), 'success');
 

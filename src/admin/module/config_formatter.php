@@ -47,6 +47,7 @@ function admin_config_formatter($engine, $module)
 		$config['time_format_seconds']		= (string) $_POST['time_format_seconds'];
 		$config['name_date_macro']			= (string) $_POST['name_date_macro'];
 		$config['timezone']					= (string) $timezone;
+		$config['american_date']				= (int) ($_POST['american_date'] ?? 0);
 		$config['link_target']				= (int) ($_POST['link_target'] ?? 0);
 		$config['noreferrer']				= (int) ($_POST['noreferrer'] ?? 0);
 		$config['nofollow']					= (int) ($_POST['nofollow'] ?? 0);
@@ -250,6 +251,18 @@ function admin_config_formatter($engine, $module)
 					}
 					?>
 					</select>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="american_date"><strong><?php echo $engine->_t('AmericanDate');?></strong><br>
+					<small><?php echo $engine->_t('AmericanDateInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="american_date" name="american_date" value="1"<?php echo ($engine->db->american_date ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr>

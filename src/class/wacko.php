@@ -635,6 +635,12 @@ class Wacko
 		{
 			// TODO: set default, e.g. via match(), array size may differ depending on language
 			$preference					= $this->get_user()['date_preference'] ?? 'default';
+
+			if ($engine->user_lang === 'en' && $this->db->american_date && $preference === 'default')
+			{
+				$preference = 'mdy';
+			}
+
 			$date_format				= $this->available_date_formats()[$preference] ?? $this->db->date_format;
 			$this->sess->date_pattern	= $date_format;
 

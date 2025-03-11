@@ -16,10 +16,9 @@ $wacko_translation = [
 	],
 
 	'date_formats'	=> [
-		'default'	=> 'yyyy-MM-dd',
-		'mdy'		=> 'MM/dd/yyyy',
+		'default'	=> 'dd-MM-yyyy',
 		'dmy'		=> 'dd-MM-yyyy',
-		'ymd'		=> 'yyyy-MM-dd',
+		'mdy'		=> 'MM/dd/yyyy',
 	],
 
 	// common
