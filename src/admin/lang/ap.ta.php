@@ -29,9 +29,9 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exist.',
 
 	'ApHomePage'				=> 'இல்லப்பக்கம்',
-	'ApHomePageTip'				=> 'Quit system administration and open the home page',
-	'ApLogOut'					=> 'Log out',
-	'ApLogOutTip'				=> 'Quit system administration and log out of site',
+	'ApHomePageTip'				=> 'Open the home page, you do not quit system administration',
+	'ApLogOut'					=> 'வெளியேறு',
+	'ApLogOutTip'				=> 'Quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minute(s)',
 	'ApVersion'					=> 'பதிப்பு',
@@ -48,12 +48,12 @@ $ap_translation = [
 	// Generic
 	'Cancel'					=> 'வேண்டாம்',
 	'Add'						=> 'சேர்',
-	'Edit'						=> 'Edit',
+	'Edit'						=> 'தொகு',
 	'Remove'					=> 'நீக்கு',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'முடக்கப்பட்டது',
 	'Mandatory'					=> 'Mandatory',
-	'Admin'						=> 'Admin',
+	'Admin'						=> 'நிர்வாகி',
 	'Min'						=> 'Min',
 	'Max'						=> 'Max',
 
@@ -170,7 +170,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> 'மீட்டெடு',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -396,7 +396,7 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site favicon:',
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
-	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 x 64 px.',
+	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 × 64 px.',
 	'ThemeColor'				=> 'Theme color for address bar:',
 	'ThemeColorInfo'			=> 'The browser will set the address bar color of every page according to the provided CSS color.',
 
@@ -640,7 +640,7 @@ $ap_translation = [
 	'IntercomDelay'				=> 'Anti-flood for personal communications:',
 	'IntercomDelayInfo'			=> 'The minimum delay between sending private messages (in seconds).',
 	'RegistrationDelay'			=> 'Time threshold for registering:',
-	'RegistrationDelayInfo'		=> 'The minimum time threshold between registration form submissions to discourage registration bots (in seconds).',
+	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
 	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for fine-tuning the site. Do not change them unless you are confident in their actions.',
@@ -677,6 +677,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Timezone:',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged-in users can change their timezone in their user settings.',
+	'AmericanDate'					=> 'American date:',
+	'AmericanDateInfo'				=> 'Uses american date format as default for English.',
 
 	'Canonical'					=> 'Use fully-canonical URLs:',
 	'CanonicalInfo'				=> 'All links are created as absolute URLs in the form %1. URLs relative to the server root in the form %2 should be preferred.',
@@ -873,7 +875,7 @@ $ap_translation = [
 	'SmtpAutoTls'				=> 'Opportunistic TLS:',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Connection mode for SMTP:',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is required. Ask your provider if you are unsure which method to use',
+	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is required. Ask your provider if you are unsure which method to use.',
 	'SmtpPassword'				=> 'SMTP password:',
 	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plaintext in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
 	'SmtpPort'					=> 'SMTP server port:',
@@ -983,7 +985,7 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Send to group:',
 	'SendToUser'				=> 'Send to user:',
-	'SendToUserInfo'			=> 'Only users who permit Administrators to email them information will receive mass emails. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Only users who permit administrators to email them information will receive mass emails. This option is available in their user settings under Notifications.',
 
 	// System message module
 	'SystemMessageInfo'			=> '',
@@ -1022,7 +1024,7 @@ $ap_translation = [
 	'BackupFolder'				=> 'Folder',
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster:',
-	'BackupFiles'				=> 'Files',
+	'BackupFiles'				=> 'கோப்புகள்',
 	'BackupNote'				=> 'Note:',
 	'BackupSettings'			=> 'Specify the desired scheme of backup.<br>' .
     	'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .  '<br>' .
@@ -1178,7 +1180,7 @@ $ap_translation = [
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
-	'FileFiles'					=> 'Files',
+	'FileFiles'					=> 'கோப்புகள்',
 	'FileSize'					=> 'Size',
 	'FileTotal'					=> 'Total',
 

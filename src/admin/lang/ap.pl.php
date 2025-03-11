@@ -688,6 +688,8 @@ niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włącz
 	'NameDateMacroInfo'			=> '(nazwa, czas), np. <code>Nazwa użytkownika (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Strefa czasowa:',
 	'TimezoneInfo'				=> 'Strefa czasowa, która ma być używana do wyświetlania czasu niezalogowanym użytkownikom (gościom). Zalogowani użytkownicy ustawiają i mogą zmieniać swoją strefę czasową w ustawieniach użytkownika.',
+	'AmericanDate'					=> 'Data amerykańska:',
+	'AmericanDateInfo'				=> 'Używa formatu daty amerykańskiej jako domyślnego dla języka angielskiego.',
 
 	'Canonical'					=> 'Kanoniczne adresy URL:',
 	'CanonicalInfo'				=> 'Wszystkie linki są tworzone jako bezwzględne adresy URL w postaci %1. Należy preferować adresy URL w stosunku do korzenia serwera w postaci %2.',

@@ -677,6 +677,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(jméno, čas), např. <code>Uživatelské jméno (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Timezone:',
 	'TimezoneInfo'				=> 'Časové pásmo pro zobrazení časů uživatelům, kteří nejsou přihlášeni (hosté). Přihlášení uživatelé mohou změnit své časové pásmo v nastavení uživatele.',
+	'AmericanDate'					=> 'Datum v americkém jazyce:',
+	'AmericanDateInfo'				=> 'Používá formát data kamery jako výchozí pro angličtinu.',
 
 	'Canonical'					=> 'Použít plně kanonické URL:',
 	'CanonicalInfo'				=> 'Všechny odkazy jsou vytvořeny jako absolutní URL ve tvaru %1. URL vzhledem k kořenovému adresáři serveru ve tvaru %2 by měla být upřednostněna.',

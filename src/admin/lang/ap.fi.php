@@ -658,7 +658,7 @@ $ap_translation = [
 
 	'WackoFormatterSection'		=> 'Wiki Text Formatter (Wacko Formatter)',
 	'X11colors'					=> 'X11 värien käyttö:',
-	'X11colorsInfo'				=> 'Laajentaa saatavilla olevat värit <code>??(väri) taustalle??</code> ja <code>!! väri) teksti!!</code>Tämän asetuksen poistaminen käytöstä nopeuttaa kommentteja lisäämisen ja sivujen tallentamisen prosesseja.',
+	'X11colorsInfo'				=> 'Laajentaa saatavilla olevat värit <code>??(väri) taustalle??</code> ja <code>!!(väri) teksti!!</code>Tämän asetuksen poistaminen käytöstä nopeuttaa kommentteja lisäämisen ja sivujen tallentamisen prosesseja.',
 	'WikiLinks'					=> 'Poista wiki-linkit käytöstä:',
 	'WikiLinksInfo'				=> 'Poistaa yhteyden <code>CamelCaseWords</code>: CamelCase sanoja ei enää linkitetä suoraan uuteen sivuun. Tämä on hyödyllistä, kun työskentelet eri nimia/ryhmiä. Oletuksena se on pois päältä.',
 	'BracketsLinks'				=> 'Poista ristikkäiset linkit:',
@@ -677,6 +677,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(nimi, aika), esim. <code>Käyttäjätunnus (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Timezone:',
 	'TimezoneInfo'				=> 'Aikavyöhyke, jota käytetään aikojen näyttämiseen käyttäjille, jotka eivät ole kirjautuneet sisään (vieraille). Kirjautuneet käyttäjät voivat muuttaa aikavyöhykettään käyttäjän asetuksissa.',
+	'AmericanDate'					=> 'Amerikan pvm:',
+	'AmericanDateInfo'				=> 'Käyttää amerikkalaista päivämäärän muotoa oletuksena englanniksi.',
 
 	'Canonical'					=> 'Käytä täysin kanonisia URL-osoitteita:',
 	'CanonicalInfo'				=> 'Kaikki linkit on luotu absoluuttisina URL-osoitteina muodossa %1. URL-osoitteet suhteessa palvelimen juuriin muodossa %2 tulisi asettaa etusijalle.',

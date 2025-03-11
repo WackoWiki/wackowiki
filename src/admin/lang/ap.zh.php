@@ -472,7 +472,8 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> '反向代理',
 	'ReverseProxy'				=> '使用反向代理：',
-	'ReverseProxyInfo'			=> '启用此设置以确定远程的正确 IP 地址客户端通过检查存储在 X-Forwarded-For 标头中的信息。X-Forwarded-For 标头是识别客户端的标准机制通过反向代理服务器连接的系统，例如 Squid 或磅。 反向代理服务器通常用于增强性能访问量大的站点，还可能提供其他站点缓存，安全或加密的好处。 如果此 WackoWiki 安装运行在反向代理之后，应启用此设置，以便正确IP 地址信息在 WackoWiki 的会话管理中捕获，日志、统计和访问管理系统； 如果你不确定关于这个设置，没有反向代理，或者 WackoWiki 在共享主机环境，此设置应保持禁用状态。',
+    'ReverseProxyInfo'			=> 
+    '启用此设置以确定远程的正确 IP 地址客户端通过检查存储在 X-Forwarded-For 标头中的信息。X-Forwarded-For 标头是识别客户端的标准机制通过反向代理服务器连接的系统，例如 Squid 或磅。 反向代理服务器通常用于增强性能访问量大的站点，还可能提供其他站点缓存，安全或加密的好处。 如果此 WackoWiki 安装运行在反向代理之后，应启用此设置，以便正确IP 地址信息在 WackoWiki 的会话管理中捕获，日志、统计和访问管理系统； 如果你不确定关于这个设置，没有反向代理，或者 WackoWiki 在共享主机环境，此设置应保持禁用状态。',
 	'ReverseProxyHeader'		=> '反向代理标头：',
 	'ReverseProxyHeaderInfo'	=> '果您的代理服务器在 X-Forwarded-For 以外的标头中发送客户端 IP，请设置此值。 “X-Forwarded-For”标头是一个逗号+空格分隔的 IP 地址列表，仅使用最后一个（最左侧）。',
 	'ReverseProxyAddresses'		=> 'reverse_proxy 接受 IP 地址数组：',
@@ -668,6 +669,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '（姓名，时间），例如 <code>用户名 (17.11.2016 16:48)</code>',
 	'Timezone'					=> '时区：',
 	'TimezoneInfo'				=> '用于向未登录的用户（来宾）显示时间的时区。 登录用户设置并可以在其用户设置中更改其时区。',
+	'AmericanDate'					=> '美国日期：',
+	'AmericanDateInfo'				=> '使用美洲日期格式作为英文的默认值。',
 
 	'Canonical'					=> '使用完全规范的 URL：',
 	'CanonicalInfo'				=> '所有链接都创建为 %1 格式的绝对 URL。 应首选格式为 %2 的相对于服务器根目录的 URL。',
@@ -1014,15 +1017,10 @@ $ap_translation = [
 	'BackupFiles'				=> '文件',
 	'BackupNote'				=> '注意：',
 	'BackupSettings'			=> '指定所需的备份方案。<br>' .
-									'根集群不影响全局文件备份和缓存文件备份（被选择它们总是完整保存）。<br>' .
-									'<br>' .
-									'<strong>注意</strong>：为避免在指定根集群时从数据库中丢失信息，此备份中的表将不会被重组，' .
-									'仅备份表结构而不保存数据时相同。 ' .
-									'要将表完全转换为备份格式，您必须在不指定集群的情况下进行<em>完整的数据库备份（结构和数据）</em>。',
+    	'根集群不影响全局文件备份和缓存文件备份（被选择它们总是完整保存）。<br>' .  '<br>' .
+		'<strong>注意</strong>：为避免在指定根集群时从数据库中丢失信息，此备份中的表将不会被重组，',
 	'BackupCompleted'			=> '备份和存档已完成。<br>' .
-									'备份包文件存储在子目录 %1 中。<br>' .
-									'要下载它，请使用 FTP (在复制时保持目录结构和文件名称)。<br>' .
-									'若要恢复备份副本或删除包，请前往 <a href="%2">还原数据库</a>。',
+    	'备份包文件存储在子目录 %1中。<br>要下载它，请使用 FTP (在复制时保持目录结构和文件名称)。<br> 若要恢复备份副本或删除包，请前往 <a href="%2">还原数据库</a>',
 	'LogSavedBackup'			=> '保存的备份数据库##%1##',
 	'Backup'					=> '备份',
 	'CantReadFile'				=> '无法读取文件 %1。',

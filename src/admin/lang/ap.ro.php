@@ -677,6 +677,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(nume, oră), ex. <code>Utilizator (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Timezone:',
 	'TimezoneInfo'				=> 'Fus orar utilizat pentru afișarea timpilor pentru utilizatorii care nu sunt autentificați (vizitatori). Utilizatorii autentificați își pot schimba fusul orar în setările lor de utilizator.',
+	'AmericanDate'					=> 'Data Statelor Unite:',
+	'AmericanDateInfo'				=> 'Folosește formatul de dată american ca implicit pentru engleză.',
 
 	'Canonical'					=> 'Utilizaţi URL-uri complet canonice:',
 	'CanonicalInfo'				=> 'Toate link-urile sunt create ca URL-uri absolute în forma %1. URL-uri relative la rădăcina serverului în forma %2 ar trebui să fie preferate.',

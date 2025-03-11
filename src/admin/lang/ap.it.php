@@ -683,6 +683,8 @@ questi, ovvero se la richiesta raggiunge il server web da uno dei tuoi proxy inv
 	'NameDateMacroInfo'			=> '(nome, ora), ad esempio <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Fuso orario:',
 	'TimezoneInfo'				=> 'Fuso orario da utilizzare per la visualizzazione degli orari agli utenti che non sono collegati (ospiti). Gli utenti registrati impostano e possono cambiare il loro fuso orario nelle loro impostazioni utente.',
+	'AmericanDate'					=> 'Data americana:',
+	'AmericanDateInfo'				=> 'Usa il formato data americano come predefinito per l\'inglese.',
 
 	'Canonical'					=> 'Usa URL canoniche:',
 	'CanonicalInfo'				=> 'Tutti i link vengono creati come URL assoluti nella forma %1. Sono da preferire gli URL relativi alla radice del server nella forma %2.',

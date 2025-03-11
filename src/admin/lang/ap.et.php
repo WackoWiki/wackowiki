@@ -688,6 +688,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Ajatsoon:',
 	'TimezoneInfo'				=> 'Ajavöönd, mida kasutatakse kellaaegade kuvamiseks kasutajatele, kes ei ole sisse logitud (külalised). Sisselogitud kasutajad määravad ja saavad oma ajavööndit muuta oma kasutaja seadetes.',
+	'AmericanDate'					=> 'American date:',
+	'AmericanDateInfo'				=> 'Uses american date format as default for English.',
 
 	'Canonical'					=> 'Kasutage täielikult kanoonilisi URL-e:',
 	'CanonicalInfo'				=> 'Kõik lingid luuakse absoluutsete URL-idena kujul %1. Eelistada tuleks URL-e serveri juure suhtes vormis %2.',

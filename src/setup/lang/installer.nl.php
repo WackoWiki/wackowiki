@@ -32,11 +32,6 @@ $lang = [
 	#'help_page'			=> 'Help',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',
-
-	// time
-	#'date_format'					=> 'dd.MM.yyyy',
-	#'time_format'					=> 'HH:mm',
-	#'time_format_seconds'			=> 'HH:mm:ss',
 ],
 
 /*

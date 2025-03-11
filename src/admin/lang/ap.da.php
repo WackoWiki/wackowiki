@@ -686,6 +686,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(navn, tid), f.eks. <code>Brugernavn (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Tidszone:',
 	'TimezoneInfo'				=> 'Tidszone, der skal bruges til at vise tidspunkter til brugere, der ikke er logget ind (gæster). Indloggede brugere indstiller og kan ændre deres tidszone i deres brugerindstillinger.',
+	'AmericanDate'					=> 'Amerikansk dato:',
+	'AmericanDateInfo'				=> 'Bruger amerikansk datoformat som standard for engelsk.',
 
 	'Canonical'					=> 'Benyt fuldt kanoniske netadresser:',
 	'CanonicalInfo'				=> 'Alle links oprettes som absolutte URL\'er i formularen %1. URL\'er i forhold til serverroden i formularen %2 bør foretrækkes.',

@@ -686,6 +686,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), ex.: <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Fuso Horário:',
 	'TimezoneInfo'				=> 'Fuso horário a utilizar para mostrar os horários aos utilizadores que não estão ligados (convidados). Os utilizadores com sessão iniciada definem e podem alterar o seu fuso horário nas suas definições de utilizador.',
+	'AmericanDate'					=> 'Data americana:',
+	'AmericanDateInfo'				=> 'Usa o formato de data Americano como padrão para Inglês.',
 
 	'Canonical'					=> 'Usar URLs absolutas:',
 	'CanonicalInfo'				=> 'Todos os links são criados como URLs absolutos no formulário %1. Os URLs relativos à raiz do servidor no formulário %2 devem ser preferidos.',
