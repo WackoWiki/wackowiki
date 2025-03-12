@@ -324,7 +324,7 @@ else if ($user = $this->get_user())
 
 		foreach ($date_formats as $offset => $date_format)
 		{
-			$tpl->df_format		= $offset; //  . ')' . $date_format;
+			$tpl->df_format		= '[' . $date_format . '] ' . $offset;
 			$tpl->df_sel		= (int) (isset($a_date_preference) && $a_date_preference == $offset);
 			$tpl->df_offset		= $offset;
 		}

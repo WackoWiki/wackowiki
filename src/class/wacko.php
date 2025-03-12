@@ -650,11 +650,11 @@ class Wacko
 
 		if ($this->user_lang === 'en' && $this->db->american_date)
 		{
-				$date_formats['default']	 = 'MM/dd/yyyy';
+				$date_formats['default']	 = 'MM/dd/y';
 		}
 
 		// global defaults
-		$date_formats['ISO 8601']	= 'yyyy-MM-dd';
+		$date_formats['ISO 8601']	= 'y-MM-dd';
 		$date_formats['system']		= $this->db->date_format;
 
 		return $date_formats;

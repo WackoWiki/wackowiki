@@ -15,6 +15,10 @@ $wacko_translation = [
 		'locale'	=> 'id_ID.UTF-8',
 	],
 
+	'date_formats'	 => [
+		'default'	=> 'dd/MM/y',
+	],
+
 	// common
 	'AddButton'					=> 'Tambahkan',
 	'ArchiveButton'				=> 'Arsip',

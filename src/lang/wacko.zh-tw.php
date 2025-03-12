@@ -15,8 +15,8 @@ $wacko_translation = [
 		'locale'	=> 'zh_TW.UTF-8',
 	],
 
-	'date_formats'	=> [
-		'default'	=> 'yyyy年MM月dd日',
+	'date_formats'	 => [
+		'default'	=> 'y年MM月dd日',
 	],
 
 	// common
