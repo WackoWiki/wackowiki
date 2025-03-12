@@ -512,7 +512,7 @@ class Wacko
 
 	function sql2datetime($text, &$date, &$time): void
 	{
-		$date_format = $this->date_format_pattern();
+		$date_format = $this->get_date_pattern();
 		$date	= $this->date_format($this->sql2time($text), $date_format);
 		$time	= $this->date_format($this->sql2time($text), $this->db->time_format);
 	}
@@ -524,7 +524,7 @@ class Wacko
 
 	function sql_time_format($text): string
 	{
-		$date_format = $this->date_format_pattern();
+		$date_format = $this->get_date_pattern();
 
 		return $this->date_format($this->sql2time($text), $date_format . ' ' . $this->db->time_format);
 	}
@@ -624,7 +624,7 @@ class Wacko
 			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
 	}
 
-	function date_format_pattern()
+	function get_date_pattern(): string
 	{
 		if (isset($this->sess->date_pattern))
 		{
@@ -643,7 +643,7 @@ class Wacko
 		}
 	}
 
-	function available_date_formats()
+	function available_date_formats(): array
 	{
 		// language defaults
 		$date_formats				= $this->_t('date_formats');
