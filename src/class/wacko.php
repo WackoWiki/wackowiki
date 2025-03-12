@@ -522,7 +522,6 @@ class Wacko
 		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format_seconds);
 	}
 
-	// TODO: make format pattern depended from localization and user preferences?
 	function sql_time_format($text): string
 	{
 		$date_format = $this->date_format_pattern();
@@ -633,18 +632,14 @@ class Wacko
 		}
 		else
 		{
-			// TODO: set default, e.g. via match(), array size may differ depending on language
+			// array may differ depending on language
 			$preference					= $this->get_user()['date_preference'] ?? 'default';
 
-			if ($engine->user_lang === 'en' && $this->db->american_date && $preference === 'default')
-			{
-				$preference = 'mdy';
-			}
+			$patterns								= $this->available_date_formats();
+			$date_pattern				= $patterns[$preference] ?? ($patterns['default'] ?? $this->db->date_format);
+			$this->sess->date_pattern	= $date_pattern;
 
-			$date_format				= $this->available_date_formats()[$preference] ?? $this->db->date_format;
-			$this->sess->date_pattern	= $date_format;
-
-			return $date_format;
+			return $date_pattern;
 		}
 	}
 
@@ -652,6 +647,12 @@ class Wacko
 	{
 		// language defaults
 		$date_formats				= $this->_t('date_formats');
+
+		if ($this->user_lang === 'en' && $this->db->american_date)
+		{
+				$date_formats['default']	 = 'MM/dd/yyyy';
+		}
+
 		// global defaults
 		$date_formats['ISO 8601']	= 'yyyy-MM-dd';
 		$date_formats['system']		= $this->db->date_format;
