@@ -536,7 +536,7 @@ class Wacko
 		$tz		= $user['timezone'] ?? $this->db->timezone;
 
 		$fmt = new IntlDateFormatter(
-			$this->lang['locale'],
+			$this->user_lang,
 			IntlDateFormatter::FULL,
 			IntlDateFormatter::FULL,
 			$tz,
@@ -663,15 +663,10 @@ class Wacko
 	// converts a number to a locale-specific string
 	function number_format($number, $precision = 0)
 	{
-		$lang	= $this->get_user()['user_lang'] ?? $this->db->language;
-		$save	= $this->set_language($lang, true, true);
-
-		$numfmt = new NumberFormatter($this->lang['locale'], NumberFormatter::DECIMAL);
+		$numfmt = new NumberFormatter($this->user_lang, NumberFormatter::DECIMAL);
 		$numfmt->setAttribute(NumberFormatter::ROUNDING_MODE, 0);
 		$numfmt->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $precision);
 		$numfmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $precision);
-
-		$this->set_language($save, true);
 
 		return $numfmt->format($number);
 	}
