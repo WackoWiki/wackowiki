@@ -73,7 +73,7 @@ if ($config['is_update'])
 	{
 		// set timezone and new ICU formats
 		$config['timezone']				= 'UTC';
-		$config['date_format']			= 'dd.MM.yyyy';
+		$config['date_format']			= 'dd.MM.y';
 		$config['time_format']			= 'HH:mm';
 		$config['time_format_seconds']	= 'HH:mm:ss';
 
@@ -99,6 +99,25 @@ if ($config['is_update'])
 	{
 		$config['create_thumbnail']		= $config['img_create_thumbnail']	?? 0;
 		$config['max_thumb_width']		= $config['img_max_thumb_width']	?? 150;
+	}
+
+	if (version_compare($config['wacko_version'], '6.1.22', '<'))
+	{
+		$config['max_image_area']		= 0;
+		$config['max_image_width']		= 0;
+		$config['min_thumbnail_distance']		= 50;
+	}
+
+	if (version_compare($config['wacko_version'], '6.1.25', '<'))
+	{
+		$config['login_notice']		= 0;
+		$config['session_notice']		= 0;
+		$config['section_edit']		= 1;
+	}
+
+	if (version_compare($config['wacko_version'], '6.1.27', '<'))
+	{
+		$config['american_date']		= 1;
 	}
 }
 
