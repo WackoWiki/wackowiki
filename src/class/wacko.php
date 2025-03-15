@@ -696,8 +696,9 @@ class Wacko
 			$this->load_translation($lang, $update);
 			$this->lang = &$this->languages[$lang];
 
+				// 3rd party support for scripts not using intl based date&time formatting
 			setlocale(LC_CTYPE, $this->lang['locale']);
-			setlocale(LC_TIME, $this->lang['locale']);	// sql_time_format()
+			setlocale(LC_TIME, $this->lang['locale']);
 
 			mb_internal_encoding('utf-8');
 		}
