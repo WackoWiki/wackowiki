@@ -96,6 +96,40 @@ if (!$config['is_update'])
 {
 	echo $separator;
 
+<h2><?php echo $lang['AclMode'];?></h2>
+	<p class="notop"><?php echo $lang['AclModeDesc']; ?></p>
+	<ul>
+<?php
+	/*
+	 ACL Wiki Modes
+
+	 [0]   :  default_read_acl value to be stored in the config
+	 [1]   :  the name to display in the list here
+	 */
+
+	$acls	= [];
+	$acls[]	= ['*',	$lang['PublicWiki']];
+	$acls[]	= ['$',	$lang['PrivateWiki']];
+
+	foreach ($acls as $m => $acl)
+	{
+			echo '<li>
+						<input type="radio" id="acl_mode_' . $m . '" name="config[default_read_acl]" value="' . $acl[0] . '" ' .
+							($config['default_read_acl'] == $acl[0]		? 'checked' : ''
+							) . '>
+						<label for="acl_mode_' . $m . '">' . $acl[1] . "</label>
+					</li>\n";
+	}
+?>
+	</ul>
+	<br>
+<?php
+}
+
+if (!$config['is_update'])
+{
+	echo $separator;
+
 	$name_pattern =
 		Ut::perc_replace(($config['disable_wikiname']? $lang['NameAlphanumOnly'] : $lang['NameCamelCaseOnly']),
 			$config['username_chars_min'],

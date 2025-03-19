@@ -61,7 +61,6 @@ function insert_pages($insert, $config)
 	 * [0] $title,
 	 * [1] $body,
 	 * [default] $page_lang,
-	 * [default] $rights		= 'Admins',
 	 * [2] $critical			= false,
 	 * [3] $set_menu			= 0,
 	 * [4] $menu_title			= false,
@@ -75,7 +74,6 @@ function insert_pages($insert, $config)
 			$value[0],
 			$value[1],
 			$insert['lang'],
-			'Admins',
 			$value[2],
 			$value[3],
 			$value[4] ?? false,
@@ -85,9 +83,13 @@ function insert_pages($insert, $config)
 }
 
 // insert default page, all related acls and menu items
-function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
+function insert_page($tag, $title, $body, $lang, $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
 {
 	global $config_global, $dblink_global, $lang_global;
+
+	$public_pages = [$config['login_page'], $config['password_page']	, $config['registration_page']];
+	$read_rights = in_array($tag, $public_pages) ? '*' : $config['default_read_acl'];
+	$write_rights = 'Admins';
 
 	sanitize_page_tag($tag);
 
@@ -143,9 +145,9 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 			)
 			VALUES
 				((" . $q_page_id . "), 'read',		'*'),
-				((" . $q_page_id . "), 'write',		'" . _q($rights) . "'),
+				((" . $q_page_id . "), 'write',		'" . _q($write_rights) . "'),
 				((" . $q_page_id . "), 'comment',		'$'),
-				((" . $q_page_id . "), 'create',		'$'),
+				((" . $q_page_id . "), 'create',		'" . _q($write_rights) . "'),
 				((" . $q_page_id . "), 'upload',		'')";
 
 		$insert_data[]	= [$page_insert,	$lang_global['ErrorInsertPage']];
