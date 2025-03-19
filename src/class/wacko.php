@@ -512,28 +512,24 @@ class Wacko
 
 	function sql2datetime($text, &$date, &$time): void
 	{
-		$date_format = $this->get_date_pattern();
-		$date	= $this->date_format($this->sql2time($text), $date_format);
+		$date	= $this->date_format($this->sql2time($text), $this->date_pattern());
 		$time	= $this->date_format($this->sql2time($text), $this->db->time_format);
 	}
 
 	function sql2precisetime($text): string
 	{
-		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format_seconds);
+		return $this->date_format($this->sql2time($text), $this->date_pattern() . ' ' . $this->db->time_format_seconds);
 	}
 
 	function sql_time_format($text): string
 	{
-		$date_format = $this->get_date_pattern();
-
-		return $this->date_format($this->sql2time($text), $date_format . ' ' . $this->db->time_format);
+		return $this->date_format($this->sql2time($text), $this->date_pattern() . ' ' . $this->db->time_format);
 	}
 
 	// unix time formatted (must be passed as UTC time)
 	function date_format($unix_time, $pattern): string
 	{
-		$user	= $this->get_user();
-		$tz		= $user['timezone'] ?? $this->db->timezone;
+		$tz		= $this->get_user()['timezone'] ?? $this->db->timezone;
 
 		$fmt = new IntlDateFormatter(
 			$this->user_lang,
@@ -624,7 +620,7 @@ class Wacko
 			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
 	}
 
-	function get_date_pattern(): string
+	function date_pattern(): string
 	{
 		if (isset($this->sess->date_pattern))
 		{
