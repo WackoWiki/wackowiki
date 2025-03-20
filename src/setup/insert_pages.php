@@ -61,6 +61,7 @@ function insert_pages($insert, $config)
 	 * [0] $title,
 	 * [1] $body,
 	 * [default] $page_lang,
+	 * $config
 	 * [2] $critical			= false,
 	 * [3] $set_menu			= 0,
 	 * [4] $menu_title			= false,
@@ -74,6 +75,7 @@ function insert_pages($insert, $config)
 			$value[0],
 			$value[1],
 			$insert['lang'],
+			$config,
 			$value[2],
 			$value[3],
 			$value[4] ?? false,
@@ -83,7 +85,7 @@ function insert_pages($insert, $config)
 }
 
 // insert default page, all related acls and menu items
-function insert_page($tag, $title, $body, $lang, $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
+function insert_page($tag, $title, $body, $lang, $config, $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
 {
 	global $config_global, $dblink_global, $lang_global;
 

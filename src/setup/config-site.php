@@ -94,7 +94,7 @@ echo "</ul>\n";
 
 if (!$config['is_update'])
 {
-	echo $separator;
+	echo $separator; ?>
 
 <h2><?php echo $lang['AclMode'];?></h2>
 	<p class="notop"><?php echo $lang['AclModeDesc']; ?></p>
