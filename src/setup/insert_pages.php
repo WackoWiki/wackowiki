@@ -144,7 +144,7 @@ function insert_page($tag, $title, $body, $lang, $critical = false, $set_menu = 
 				page_id, privilege, list
 			)
 			VALUES
-				((" . $q_page_id . "), 'read',		'*'),
+				((" . $q_page_id . "), 'read',		'" . _q($read_rights) . "'),
 				((" . $q_page_id . "), 'write',		'" . _q($write_rights) . "'),
 				((" . $q_page_id . "), 'comment',		'$'),
 				((" . $q_page_id . "), 'create',		'" . _q($write_rights) . "'),
