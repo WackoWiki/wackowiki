@@ -247,7 +247,10 @@ else
 	}
 
 	// referrers tab
-	$echo_tab('referrers', 'ReferrersTip', 'ReferrersText', 2, '', 'l');
+	if ($readable)
+	{
+		$echo_tab('referrers', 'ReferrersTip', 'ReferrersText', 2, '', 'l');
+	}
 
 	// watch tab
 	if ($logged_in)
