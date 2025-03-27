@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'ko',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**당신의 ((WackoWiki:Doc/English WackoWiki)) 사이트에 오신 것을 환영합니다!**' . "\n\n" .
 			'시작하려면 하단의 "이 페이지 편집" 링크에 로그인한 후 클릭하십시오. ' . "\n\n" .
 			'문서는 다음에서 찾을 수 있습니다 WackoWiki:Doc/English.' . "\n" .
-			'유용한 페이지들: ((WackoWiki:Doc/English/Formatting Formatting)), ((/검색 검색)).',
+			'유용한 페이지들: ((WackoWiki:Doc/English/Formatting Formatting)), ((/검색 검색)).' . "\n\n",
 	'root_page'			=> '홈페이지',
 
 	'category_page'		=> '카테고리',

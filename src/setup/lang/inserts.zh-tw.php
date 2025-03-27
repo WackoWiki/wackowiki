@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'zh-tw',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**歡迎來到您的 ((WackoWiki:Doc/English WackoWiki)) 網站！**' . "\n\n" .
 			'Click after you have ((/登入 logged in)) on the "編輯" link at the bottom to get started.' . "\n\n" .
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
-			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/搜尋 搜尋)).',
+			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/搜尋 搜尋)).' . "\n\n",
 	'root_page'			=> '首頁',
 
 	'category_page'		=> '分類',
