@@ -4,10 +4,10 @@ $insert = [
 	'lang'				=> 'pt-br',
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
-			'**Bem-vindo ao seu site ((WackoWiki:Doc/English WackoWiki)!**' . "\n\n" .
-			'Clique após ((/Login logado)) no link "Edite esta página" no canto inferior para começar.' . "\n\n" .
-			'Documentação pode ser encontrada em WackoWiki:Doc/Inglês.' . "\n" .
-			'Páginas úteis: ((WackoWiki:Doc/Inglês/Formatação de formatação)), ((/Pesquisa de Pesquisa)).' . "\n\n",
+			'**Bem-vindo ao seu site ((WackoWiki:Doc/English WackoWiki))!**' . "\n\n" .
+			'Clique após ((/Entrar logado)) no link "Edite esta página" no canto inferior para começar.' . "\n\n" .
+			'Documentação pode ser encontrada em WackoWiki:Doc/English.' . "\n" .
+			'Páginas úteis: ((WackoWiki:Doc/English/Formatting de formatação)), ((/Pesquisa de Pesquisa)).' . "\n\n",
 	'root_page'			=> 'Página Inicial',
 
 	'category_page'		=> 'categoria',

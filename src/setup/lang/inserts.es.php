@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'es',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Bienvenida a tu ((WackoWiki:Doc/English WackoWiki))!**' . "\n\n" .
 			'Da click en el enlace "Editar esta pagina" abajo en la pagina para empezar.' . "\n\n" .
 			'La documentación se puede encontrar en WackoWiki:Doc/English.' . "\n" .
-			'Paginas útiles: ((WackoWiki:Doc/Español/ReglasFormato Formatting)), ((/Buscar Buscar)).',
+			'Paginas útiles: ((WackoWiki:Doc/Español/ReglasFormato Formatting)), ((/Buscar Buscar)).' . "\n\n",
 	'root_page'			=> 'Página de inicio',
 
 	'category_page'		=> 'Categoría',

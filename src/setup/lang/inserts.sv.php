@@ -5,9 +5,9 @@ $insert = [
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Välkommen till din ((WackoWiki:Doc/English WackoWiki)) webbplats!**' . "\n\n" .
-			'Klicka efter att du har (/Logga in inloggad)) på länken "Redigera denna sida" längst ner för att komma igång.' . "\n\n" .
-			'Dokumentation finns på WackoWiki:Doc/engelska.' . "\n" .
-			'Användbara sidor: ((WackoWiki:Doc/English/Formatting Formating)), ((/Search Search)).' . "\n\n",
+			'Klicka efter att du har ((/Inloggning in inloggad)) på länken "Redigera denna sida" längst ner för att komma igång.' . "\n\n" .
+			'Dokumentation finns på WackoWiki:Doc/English.' . "\n" .
+			'Användbara sidor: ((WackoWiki:Doc/English/Formatting Formating)), ((/Sök Sök)).' . "\n\n",
 	'root_page'			=> 'Startsida',
 
 	'category_page'		=> 'Kategori',

@@ -4,7 +4,7 @@ $insert = [
 	'lang'				=> 'ar',
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
-			'**مرحبا بك في موقعك ((WackoWiki:Doc/English WackoWiki)!**' . "\n\n" .
+			'**مرحبا بك في موقعك ((WackoWiki:Doc/English WackoWiki))!**' . "\n\n" .
 			'انقر بعد أن يكون لديك (((/سجل الدخول)) على رابط "تحرير هذه الصفحة" في الأسفل للبدء.' . "\n\n" .
 			'ويمكن الاطلاع على الوثائق في WackoWiki:Doc/English.' . "\n" .
 			'الصفحات المفيدة: ((WackoWiki:Doc/English/Formatting Formatting)) (البحث).' . "\n\n",

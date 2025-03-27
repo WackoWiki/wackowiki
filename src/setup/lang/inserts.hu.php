@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'hu',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Üdvözöljük ((WackoWiki:Doc/English WackoWiki)) webhelyén!**' . "\n\n" .
 			'A kezdéshez kattintson a ((/Bejelentkezés Bejelentkezés)) gombra az alján található "Szerkesztés" linkre.' . "\n\n" .
 			'A dokumentáció a következő címen található WackoWiki:Doc/English.' . "\n" .
-			'Hasznos oldalak: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Keresés Keresés)).',
+			'Hasznos oldalak: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Keresés Keresés)).' . "\n\n",
 	'root_page'			=> 'Kezdőlap',
 
 	'category_page'		=> 'Kategória',

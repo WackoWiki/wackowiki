@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'bg',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Добре дошли във вълшебния свят на ((WackoWiki:Doc/English WackoWiki)).**' . "\n\n" .
 			'Кликнете на линка долу, за да редактирате тази страница (става също и само с двойно кликане на мишката някъде на страницата).' . "\n\n" .
 			'Документация (на английски) има на WackoWiki:Doc/English.' . "\n" .
-			'Полезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Търсене Търсене)).',
+			'Полезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Търсене Търсене)).' . "\n\n",
 	'root_page'			=> 'Начална страница',
 
 	'category_page'		=> 'Категория',

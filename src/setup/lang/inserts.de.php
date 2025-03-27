@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'de',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch WackoWiki)) Installation!**' . "\n\n" .
 			'Klicke nach der ((/Anmeldung Anmeldung)) unten auf den Punkt "Editieren" um zu beginnen.' . "\n\n" .
 			'Die Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.' . "\n" .
-			'Nützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((/Suche Suche)).',
+			'Nützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((/Suche Suche)).' . "\n\n",
 	'root_page'			=> 'Startseite',
 
 	'category_page'		=> 'Kategorie',

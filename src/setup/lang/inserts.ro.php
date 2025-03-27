@@ -5,9 +5,9 @@ $insert = [
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Bine ați venit la site-ul ((WackoWiki:Doc/English WackoWiki)!**' . "\n\n" .
-			'Faceți clic după ce aveți ((/Login conectat)) pe link-ul "Editați această pagină" în partea de jos pentru a începe.' . "\n\n" .
+			'Faceți clic după ce aveți ((/Autentificare conectat)) pe link-ul "Editați această pagină" în partea de jos pentru a începe.' . "\n\n" .
 			'Documentația poate fi găsită la WackoWiki:Doc/English.' . "\n" .
-			'Pagini utile: ((WackoWiki:Doc/English/Formatare de formatare)), ((/Căutare de căutare)).' . "\n\n",
+			'Pagini utile: ((WackoWiki:Doc/English/Formatting de formatare)), ((/Caută de căutare)).' . "\n\n",
 	'root_page'			=> 'Pagina de start',
 
 	'category_page'		=> 'Categorie',

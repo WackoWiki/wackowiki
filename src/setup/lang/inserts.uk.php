@@ -5,9 +5,9 @@ $insert = [
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Ласкаво просимо на ваш (WackoWiki:Doc/English WackoWiki)) сайт!**' . "\n\n" .
-			'Клацніть, якщо у вас є (/увійти в систему)) на посилання "Редагувати цю сторінку" внизу, щоб почати роботу.' . "\n\n" .
+			'Клацніть, якщо у вас є ((/Логін в систему)) на посилання "Редагувати цю сторінку" внизу, щоб почати роботу.' . "\n\n" .
 			'Документація може бути знайдена на WackoWiki:Doc/English' . "\n" .
-			'Корисні сторінки: (WackoWiki:Doc/English/Formating Forming)), ((/Search Search)).' . "\n\n",
+			'Корисні сторінки: ((WackoWiki:Doc/English/Formatting Forming)), ((/Пошук Пошук)).' . "\n\n",
 	'root_page'			=> 'Домашня сторінка',
 
 	'category_page'		=> 'Категорія',

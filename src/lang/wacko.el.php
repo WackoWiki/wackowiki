@@ -15,7 +15,7 @@ $wacko_translation = [
 		'locale'	=> 'el_GR',
 	],
 
-	'date_formats' => [
+	'date_formats'	 => [
 		'default'	=> 'dd/MM/y',
 	],
 

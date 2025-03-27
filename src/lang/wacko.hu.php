@@ -1009,7 +1009,7 @@ $wacko_translation = [
 	'AnonymousUsers'			=> 'Névtelen felhasználók',
 	'License'					=> 'Engedély',
 	'LicenseArray'				=> [
-		'1'		=> 'Attribution-NoDerivatives',
+		'1'		=> 'Attribution-NoDerivatives.',
 		'2'		=> 'Attribution-NonCommercial-ShareAlike',
 		'3'		=> 'Attribution-NonCommercial-NoDerivatives',
 		'4'		=> 'Attribution-ShareAlike',
@@ -1042,7 +1042,7 @@ $wacko_translation = [
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter URL. (e.g. {{feed url="https://example.com/feed.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Oldalforrás:',
 	'FeedXMLTip'				=> '',
@@ -1120,8 +1120,8 @@ $wacko_translation = [
 	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',
-	'ModeratePgMoveConfirm'		=> 'Specify the name of the cluster in which to place the page. To move a page to the root of the site, type &quot;/&quot;',
-	'ModerateMoveExists'		=> 'Operation aborted: In this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.',
+	'ModeratePgMoveConfirm'		=> 'Specify the name of the cluster, in which to place the page. To move a page to the root of the site, type &quot;/&quot;',
+	'ModerateMoveExists'		=> 'Operation aborted: in this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.',
 	'ModerateMoveNotExists'		=> 'The page / cluster does not exist. Please check the name and try again.',
 	'ModerateMergeConfirm'		=> 'Choose a topic, which should combine the remaining',
 	'ModerateMerge2Min'			=> 'To join you must select at least two topics!',
@@ -1194,7 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'A jelszó ugyanaz, mint az e-mail.',
 
 	'Timezone'					=> 'Időzóna',
-	'DateFormat'				=> 'Date format',
+	'DateFormat'				=> 'Dátumformátum',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabic',

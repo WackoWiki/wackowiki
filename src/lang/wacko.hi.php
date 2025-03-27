@@ -1194,7 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Your password is the same as your email.',
 
 	'Timezone'					=> 'क्षेत्रीय समय',
-	'DateFormat'				=> 'Date format',
+	'DateFormat'				=> 'तारिख का प्रारूप',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabic',

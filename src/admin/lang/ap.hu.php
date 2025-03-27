@@ -688,8 +688,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Időzóna:',
 	'TimezoneInfo'				=> 'Időzóna, amelyet a be nem jelentkezett felhasználók (vendégek) számára megjelenítendő időpontokhoz használnak. A bejelentkezett felhasználók a felhasználói beállításaikban beállíthatják és megváltoztathatják az időzónát.',
-	'AmericanDate'					=> 'American date:',
-	'AmericanDateInfo'				=> 'Uses american date format as default for English.',
+	'AmericanDate'					=> 'Amerikai dátum:',
+	'AmericanDateInfo'				=> 'Az amerikai dátumformátumot használja alapértelmezettként az angol nyelvhez.',
 
 	'Canonical'					=> 'Teljesen kanonikus URL-ek használata:',
 	'CanonicalInfo'				=> 'Όλοι οι σύνδεσμοι δημιουργούνται ως απόλυτα URL με τη μορφή %1. Οι διευθύνσεις URL που σχετίζονται με τη ρίζα του διακομιστή με τη μορφή %2 θα πρέπει να προτιμώνται.',

@@ -15,7 +15,7 @@ $wacko_translation = [
 		'locale'	=> 'de_DE',
 	],
 
-	'date_formats' => [
+	'date_formats'	 => [
 		'default'	=> 'dd.MM.y',
 	],
 
@@ -804,7 +804,7 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Eigenschaften für Seite %1',
-	'MetaTag'					=> 'Schlagworte',
+	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Titel',
 	'MetaKeywords'				=> 'Schlüsselwörter',
 	'MetaDescription'			=> 'Beschreibung',

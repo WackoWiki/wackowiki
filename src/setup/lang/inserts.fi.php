@@ -4,10 +4,10 @@ $insert = [
 	'lang'				=> 'fi',
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
-			'**Tervetuloa ((WackoWiki:Doc/Englanti WackoWiki)) sivustoon!**' . "\n\n" .
+			'**Tervetuloa ((WackoWiki:Doc/English WackoWiki)) sivustoon!**' . "\n\n" .
 			'Klikkaa kun olet (/Kirjaudu kirjautunut sisään)) alareunassa olevasta "Muokkaa tätä sivua" -linkistä, jotta pääset alkuun.' . "\n\n" .
 			'Dokumentaatio löytyy osoitteesta WackoWiki:Doc/English.' . "\n" .
-			'Hyödyllisiä sivuja: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Search Search)).' . "\n\n",
+			'Hyödyllisiä sivuja: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Etsi Etsi)).' . "\n\n",
 	'root_page'			=> 'Kotisivu',
 
 	'category_page'		=> 'Kategoria',

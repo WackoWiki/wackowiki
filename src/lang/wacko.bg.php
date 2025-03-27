@@ -15,7 +15,7 @@ $wacko_translation = [
 		'locale'	=> 'bg_BG',
 	],
 
-	'date_formats' => [
+	'date_formats'	 => [
 		'default'	=> 'dd.MM.y',
 	],
 
@@ -1194,7 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Паролата ви е същата като вашата електронна поща.',
 
 	'Timezone'					=> 'Времева зона',
-	'DateFormat'				=> 'Date format',
+	'DateFormat'				=> 'Формат на датата',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabic',

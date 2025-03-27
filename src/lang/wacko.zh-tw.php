@@ -182,7 +182,7 @@ $wacko_translation = [
 
 	'PrivacyPolicy'				=> '隱私政策',
 	'TermsOfUse'				=> '使用條款',
-	'AcceptTermsOfUse'			=> '我已閱讀、理解並同意本網站的使用條款。',
+	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of Service of the site.',
 
 	'ShowComments'				=> '顯示評論/表單',
 	'HideComments'				=> '隱藏評論/表單',
@@ -197,7 +197,7 @@ $wacko_translation = [
 	'InvalidNamespace'			=> '給定的命名空間無效。',
 	'DoesNotExists'				=> '該頁不存在。',
 	'PromptCreate'				=> '您是不是要 <strong><a href="%1">新建</a></strong> 它呢？',
-	'RevisionHint'				=> 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
+	'RevisionHint'				=> '這是一個舊版本的 of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied'			=> '您無權閱讀此頁面。',
 	'ReadAccessDeniedHintGuest'	=> '請先登入才能閱讀此頁面。',
 	'PageDeletedInfo'			=> '此頁面已被刪除。 ',
@@ -1194,7 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Your password is the same as your email.',
 
 	'Timezone'					=> '時區',
-	'DateFormat'				=> 'Date format',
+	'DateFormat'				=> '日期格式',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabic',
@@ -1349,7 +1349,7 @@ $wacko_translation = [
 	'LogThumbnailGeneration'	=> 'Thumbnail generation %1 sec.',
 
 	'ErrorMinPHPVersion'		=> 'PHP 版本必須大於 <strong>' . PHP_MIN_VERSION . '</strong>,' .
-									' 您的服務器似乎正在運行 <strong>' . PHP_VERSION . '</strong>。' .
+									' 您的服務器似乎正在運行' . PHP_VERSION . '</strong>。' .
 									'  您應該升級到更新的 PHP 版本以使 WackoWiki 正常工作。',
 
 ];

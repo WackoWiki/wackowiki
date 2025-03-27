@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'hi',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**आपकी ((WackoWiki:Doc/English WackoWiki)) साइट पर आपका स्वागत है!**' . "\n\n" .
 			'आरंभ करने के लिए नीचे "इस पृष्ठ को संपादित करें" लिंक पर लॉग इन करने के बाद क्लिक करें।' . "\n\n" .
 			'दस्तावेज़ीकरण यहां पाया जा सकता है  WackoWiki:Doc/English.' . "\n" .
-			'उपयोगी पृष्ठ: ((WackoWiki:Doc/English/Formatting Formatting)), ((/खोजें खोजें)).',
+			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/खोजें खोजें)).' . "\n\n",
 	'root_page'			=> 'मुख पृष्ठ',
 
 	'category_page'		=> 'वर्ग',
@@ -26,10 +26,10 @@ $insert = [
 
 	'changes_page'		=> 'हाल में हुए परिवर्तन',
 	'comments_page'		=> 'हाल की टिप्पणियाँ',
-	'index_page'		=> 'पृष्ठ अनुक्रमणिका',
+	'index_page'		=> 'Page Index',
 	'random_page'		=> 'यादृच्छिक पृष्',
 
-	'changes_page_bm'	=> 'परिवर्तन',
+	'changes_page_bm'	=> 'Changes',
 	'comments_page_bm'	=> 'टिप्पणियाँ',
 	'index_page_bm'		=> 'अनुक्रमणिका',
 	'random_page_bm'	=> 'यादृच्छिक',

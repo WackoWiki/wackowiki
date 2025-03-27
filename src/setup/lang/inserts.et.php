@@ -3,11 +3,11 @@
 $insert = [
 	'lang'				=> 'et',
 
-	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Tere tulemast oma ((WackoWiki:Doc/English WackoWiki)) saidile!**' . "\n\n" .
 			'Pärast sisselogimist klõpsake allosas olevale lingile "Muuda lehte", et alustada.' . "\n\n" .
 			'Dokumentatsioon on kättesaadav aadressil WackoWiki:Doc/English.' . "\n" .
-			'Kasulikud leheküljed: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Otsing Otsing)).',
+			'Kasulikud leheküljed: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Otsing Otsing)).' . "\n\n",
 	'root_page'			=> 'Koduleht',
 
 	'category_page'		=> 'Kategooria',

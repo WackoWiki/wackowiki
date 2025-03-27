@@ -355,10 +355,10 @@ $wacko_translation = [
 	'MinorEditShow'				=> 'Tampilkan suntingan remeh-temeh',
 	'PostAnonymously'			=> 'Posting secara anonim tanpa memberikan nama Anda',
 	'NotifyMe'					=> 'Beri tahu saya tentang komentar baru dan perubahan halaman',
-	'OverwriteAlert'			=> 'OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br>Please copy your changes and re-edit this page.',
-	'TextDbOversize'			=> 'Warning: Your text exceeds the length limit by %1 characters. Please shorten your text to an acceptable number of characters. Tip: You may place the remaining text on a separate page.',
-	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
-	'WriteAccessDenied'			=> 'You don\'t have write access to this page.',
+	'OverwriteAlert'			=> 'PERINGATAN PENULISAN LEBIH BANYAK: Halaman ini dimodifikasi oleh orang lain ketika Anda menyuntingnya.<br>Silakan salin perubahan Anda dan sunting ulang halaman ini.',
+	'TextDbOversize'			=> 'Peringatan: Teks Anda melebihi batas panjang sebesar %1 karakter. Persingkat teks Anda ke jumlah karakter yang dapat diterima. Tips: Anda dapat menempatkan teks yang tersisa pada halaman terpisah.',
+	'EditingRevisionWarning'	=> 'Anda sedang menyunting revisi lama dari halaman ini. Jika Anda mempublikasikannya, semua perubahan yang dibuat sejak saat itu akan dihapus. <br>Anda mungkin ingin menyunting revisi saat ini.',
+	'WriteAccessDenied'			=> 'Anda tidak memiliki akses tulis ke halaman ini.',
 	'EmptyPage'					=> 'Page body was empty - not saved!',
 	'EmptyComment'				=> 'Comment body was empty - not saved!',
 	'CommentAccessDenied'		=> 'Sorry, you\'re not allowed to post comments to this page.',
@@ -1196,7 +1196,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Your password is the same as your email.',
 
 	'Timezone'					=> 'Timezone',
-	'DateFormat'				=> 'Date format',
+	'DateFormat'				=> 'Format tanggal',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabic',

@@ -1194,7 +1194,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Parool ühtib sinu meiliaadressiga.',
 
 	'Timezone'					=> 'Ajatsoon',
-	'DateFormat'				=> 'Date format',
+	'DateFormat'				=> 'Kuupäeva formaat',
 
 	'LanguageArray'	=> [
 		'ar' => 'Arabic',

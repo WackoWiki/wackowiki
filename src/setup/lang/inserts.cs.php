@@ -5,9 +5,9 @@ $insert = [
 
 	'home_page_body'		=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Vítejte na vašem ((WackoWiki:Doc/English WackoWiki)) stránce!**' . "\n\n" .
-			'Klepněte na tlačítko "Upravit tuto stránku" ve spodní části na odkaz (/Login přihlášen) pro začátek.' . "\n\n" .
+			'Klepněte na tlačítko "Upravit tuto stránku" ve spodní části na odkaz ((/Přihlásit přihlášen)) pro začátek.' . "\n\n" .
 			'Dokumentaci lze nalézt na WackoWiki:Doc/English.' . "\n" .
-			'Užitečné stránky: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Search Search)).' . "\n\n",
+			'Užitečné stránky: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Hledat Hledat)).' . "\n\n",
 	'root_page'			=> 'Domovská stránka',
 
 	'category_page'		=> 'Kategorie',
