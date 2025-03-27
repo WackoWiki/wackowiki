@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Bulgarian',
 		'code'		=> 'bg',
 		'dir'		=> 'ltr',
-		'locale'	=> 'bg_BG.UTF-8',
+		'locale'	=> 'bg_BG',
 	],
 
 	'date_formats' => [

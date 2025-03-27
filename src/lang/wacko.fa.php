@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Farsi',
 		'code'		=> 'fa',
 		'dir'		=> 'rtl',
-		'locale'	=> 'fa_IR.utf-8',
+		'locale'	=> 'fa_IR',
 	],
 
 	'date_formats'	 => [

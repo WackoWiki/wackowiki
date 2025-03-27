@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'German',
 		'code'		=> 'de',
 		'dir'		=> 'ltr',
-		'locale'	=> 'de_DE.UTF-8',
+		'locale'	=> 'de_DE',
 	],
 
 	'date_formats' => [

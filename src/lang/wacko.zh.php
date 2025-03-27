@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Chinese',
 		'code'		=> 'zh',
 		'dir'		=> 'ltr',
-		'locale'	=> 'zh_CN.UTF-8',
+		'locale'	=> 'zh_CN',
 	],
 
 	'date_formats'	 => [

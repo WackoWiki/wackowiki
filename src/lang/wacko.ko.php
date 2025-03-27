@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Korean',
 		'code'		=> 'ko',
 		'dir'		=> 'ltr',
-		'locale'	=> 'ko_KR.UTF-8',
+		'locale'	=> 'ko_KR',
 	],
 
 	'date_formats'	 => [

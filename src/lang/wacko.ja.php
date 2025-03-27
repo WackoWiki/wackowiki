@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Japanese',
 		'code'		=> 'ja',
 		'dir'		=> 'ltr',
-		'locale'	=> 'ja_JP.UTF-8',
+		'locale'	=> 'ja_JP',
 	],
 
 	'date_formats'	 => [

@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Finnish',
 		'code'		=> 'fi',
 		'dir'		=> 'ltr',
-		'locale'	=> 'fi_FI.UTF-8',
+		'locale'	=> 'fi_FI',
 	],
 
 	'date_formats'	 => [

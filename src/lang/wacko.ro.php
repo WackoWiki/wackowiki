@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Română',
 		'code'		=> 'ro',
 		'dir'		=> 'ltr',
-		'locale'	=> 'ro_RO.UTF-8',
+		'locale'	=> 'ro_RO',
 	],
 
 	'date_formats'	 => [

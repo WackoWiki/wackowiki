@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Tamil',
 		'code'		=> 'ta',
 		'dir'		=> 'ltr',
-		'locale'	=> 'ta_IN.UTF-8',
+		'locale'	=> 'ta_IN',
 	],
 
 	'date_formats'	 => [

@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Hungarian',
 		'code'		=> 'hu',
 		'dir'		=> 'ltr',
-		'locale'	=> 'hu_HU.UTF-8',
+		'locale'	=> 'hu_HU',
 	],
 
 	'date_formats'	 => [

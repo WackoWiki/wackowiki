@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Arabic',
 		'code'		=> 'ar',
 		'dir'		=> 'rtl',
-		'locale'	=> 'AR_AA',
+		'locale'	=> 'ar_AA',
 	],
 
 	'date_formats'	=> [

@@ -12,7 +12,7 @@ $wacko_translation = [
 		'name'		=> 'Hindi',
 		'code'		=> 'hi',
 		'dir'		=> 'ltr',
-		'locale'	=> 'hi_IN.UTF-8',
+		'locale'	=> 'hi_IN',
 	],
 
 	'date_formats'	 => [
