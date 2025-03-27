@@ -472,7 +472,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'リバースプロキシ',
 	'ReverseProxy'				=> 'リバースプロキシを使用:',
-    'ReverseProxyInfo'			=> 
+    'ReverseProxyInfo'			=>
     'この設定を有効にすると、X-Forward-For ヘッダーに保存されている情報を調べることで、リモートクライアントの正しいIPアドレスを特定できます。 X-Forwarded-For ヘッダは、イカやポンドなど、リバースプロキシサーバーを介して接続しているクライアントシステムを識別するための標準的なメカニズムです。 リバース・プロキシ・サーバーは、多くの場合、訪問されたサイトのパフォーマンスを向上させるために使用され、他のサイトのキャッシュ、セキュリティ、または暗号化の利点を提供する可能性があります。 この WackoWiki インストールがリバースプロキシの背後で動作する場合。 この設定は、WackoWikiのセッション管理、ログ、統計、アクセス管理システムで正しいIPアドレス情報をキャプチャするように有効にする必要があります。 この設定が不明な場合はリバースプロキシを使用しないでください または、WackoWikiは共有ホスティング環境で動作します。この設定は無効のままにしておく必要があります。',
 	'ReverseProxyHeader'		=> 'リバースプロキシヘッダー:',
 	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
@@ -654,7 +654,7 @@ $ap_translation = [
 	'AllowRawhtml'				=> 'グローバル HTML サポート:',
 	'AllowRawhtmlInfo'			=> 'このオプションは、オープンサイトでは安全ではない可能性があります。',
 	'SafeHtml'					=> 'HTMLのフィルタリング:',
-	'SafeHtmlInfo'				=> 'Prevents saving of dangerous HTML objects. Turning off the filter on an open site with HTML support is <span class="underline">extremely</span> undesirable!',
+	'SafeHtmlInfo'				=> '危険な HTML オブジェクトの保存を防止します。HTML をサポートするオープン サイトでフィルターをオフにすることは、<span class="underline">絶対に</span> 避けてください！',
 
 	'WackoFormatterSection'		=> 'Wiki テキストフォーマット(Wacko Formatter)',
 	'X11colors'					=> 'X11 カラー使用量:',
@@ -847,7 +847,7 @@ $ap_translation = [
 
 	'EmailFunctionName'			=> 'メール機能名:',
 	'EmailFunctionNameInfo'		=> 'PHP経由でメールを送信するために使用されるメール機能。',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want to, or have to, send email via a named server instead of via the local mail function.',
+	'UseSmtpInfo'				=> 'ローカル メール機能ではなく、名前付きサーバー経由で電子メールを送信する場合、または送信する必要がある場合は、<code>SMTP</code> を選択します。',
 
 	'EnableEmail'				=> 'メールアドレスを有効にする:',
 	'EnableEmailInfo'			=> 'メールの送信を有効にします。',
@@ -877,11 +877,11 @@ $ap_translation = [
 	'SmtpConnectionMode'		=> 'SMTPの接続モード:',
 	'SmtpConnectionModeInfo'	=> 'ユーザー名/パスワードが必要な場合にのみ使用されます。どの方法を使用するか不明な場合はプロバイダに確認してください。',
 	'SmtpPassword'				=> 'SMTPパスワード:',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plaintext in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
+	'SmtpPasswordInfo'			=> 'SMTP サーバーで必要な場合のみ、パスワードを入力してください。<br><em><strong>警告:</strong> このパスワードはデータベースにプレーンテキストとして保存され、データベースにアクセスできるユーザーやこの構成ページを表示できるユーザー全員が閲覧できます。</em>',
 	'SmtpPort'					=> 'SMTP サーバー ポート:',
 	'SmtpPortInfo'				=> 'SMTP サーバーが別のポートにあることがわかっている場合にのみ、これを変更してください。 <br>(デフォルト: <code>tls</code> on port 587 (or may 25) and <code>ssl</code> on port 465).',
 	'SmtpServer'				=> 'SMTPサーバーアドレス:',
-	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>.',
+	'SmtpServerInfo'			=> 'サーバーが使用するプロトコルを指定する必要があることに注意してください。SSL を使用している場合は、<code>ssl://mail.example.com</code> にする必要があります。',
 	'SmtpUsername'				=> 'SMTPユーザー名:',
 	'SmtpUsernameInfo'			=> 'SMTPサーバーが必要な場合にのみユーザー名を入力してください。',
 

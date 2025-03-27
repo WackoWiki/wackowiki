@@ -51,7 +51,7 @@ $lang = [
 'PleaseUpgradeToR6'				=> 'You appear to be running an old (pre %2) release of WackoWiki (%1). To update to this release of WackoWiki, you must first update your installation to %2.',
 'UpgradeFromWacko'				=> 'WackoWiki へようこそ! WackoWiki %1 から %2にアップグレードしているようです。 次の数ページでは、アップグレードプロセスをご案内します。',
 'FreshInstall'					=> 'WackoWiki へようこそ! WackoWiki %1をインストールしようとしています。次の数ページはインストールプロセスをご案内します。',
-'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have local hacks and patches applied to them before starting upgrade process. This can save you from a big headache.',
+'PleaseBackup'					=> 'アップグレード プロセスを開始する前に、データベース、構成ファイル、ローカル ハックやパッチが適用されたファイルなど、変更されたすべてのファイルを <strong>バックアップ</strong> してください。これにより、大きな問題から解放されます。',
 'LangDesc'						=> 'インストールプロセスの言語を選択してください。この言語はWackoWikiのデフォルト言語としても使用されます。',
 
 /*
@@ -95,7 +95,7 @@ $lang = [
 'AclMode'						=> 'デフォルトの ACL 設定',
 'AclModeDesc'					=> '',
 'PublicWiki'					=> '公開 Wiki (すべてのユーザーのために読んで、登録ユーザーのために書いてコメントしてください)',
-'PrivateWiki'					=> 'Private Wiki (read, write, comment for created users only)',
+'PrivateWiki'					=> 'プライベート Wiki (作成されたユーザーのみ読み取り、書き込み、コメント可能)',
 'Admin'							=> '管理者名',
 'AdminDesc'						=> '管理者のユーザ名を入力します。これは、 <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (例: <code>WikiAdmin</code> )にする必要があります。',
 'NameAlphanumOnly'				=> 'ユーザー名は %1 文字から %2 文字の間で、英数字のみを使用する必要があります。大文字はOKです。',
@@ -194,7 +194,7 @@ $lang = [
 'DeletingTablesEnd'				=> 'テーブルの削除が完了しました',
 'ErrorDeletingTable'			=> '%1 テーブルの削除エラー。テーブルが存在しない可能性が最も高い理由は、この警告を無視することができます。',
 'DeletingTable'					=> '%1 テーブルの削除',
-'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
+'NextStep'						=> '次のステップでは、インストーラーは更新された構成ファイル %1 を書き込もうとします。Web サーバーにファイルへの書き込み権限があることを確認してください。権限がない場合は、手動で編集する必要があります。詳細については、<a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> を参照してください。',
 
 /*
    Write Config Page

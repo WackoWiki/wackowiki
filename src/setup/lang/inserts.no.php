@@ -7,7 +7,7 @@ $insert = [
 			'**Velkommen til din ((WackoWiki:Doc/English WackoWiki)) side!**' . "\n\n" .
 			'Klikk etter at du har ((/Innlogging innlogging)) på "Rediger denne siden" linken nederst for å komme i gang.' . "\n\n" .
 			'Dokumentasjon finnes på WackoWiki:Doc/English.' . "\n" .
-			'Nyttige sider: ((WackoWiki:Doc/English/Formatting Formatering)), ((/Søke Søk)).' . "\n\n",
+			'Nyttige sider: ((WackoWiki:Doc/English/Formatting Formatering)), ((/Søk Søk)).' . "\n\n",
 	'root_page'			=> 'Hjemme Side',
 
 	'category_page'		=> 'Kategori',
