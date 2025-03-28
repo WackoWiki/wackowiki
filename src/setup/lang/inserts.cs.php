@@ -31,6 +31,6 @@ $insert = [
 
 	'changes_page_bm'	=> 'Změny',
 	'comments_page_bm'	=> 'Komentáře',
-	'index_page_bm'		=> 'Objem dovozu (v tunách)',
+	'index_page_bm'		=> 'Index',
 	'random_page_bm'	=> 'Náhodný',
 ];
