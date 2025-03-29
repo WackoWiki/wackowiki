@@ -18,19 +18,19 @@ $insert = [
 	'terms_page'		=> 'Termos de Utilização',
 	'privacy_page'		=> 'Política de privacidade',
 
-	'registration_page'	=> 'Cadastro',
-	'password_page'		=> 'Palavra-passe',
-	'search_page'		=> 'Pesquisa',
-	'login_page'		=> 'Conectar-se',
+	'registration_page'	=> 'Criar conta',
+	'password_page'		=> 'Senha',
+	'search_page'		=> 'Buscar',
+	'login_page'		=> 'Entrar',
 	'account_page'		=> 'Confirgurações',
 
 	'changes_page'		=> 'Alterações Recentes',
 	'comments_page'		=> 'Comentado recentemente',
-	'index_page'		=> 'Índice da Página',
+	'index_page'		=> 'Índice Página',
 	'random_page'		=> 'Página aleatória',
 
-	'changes_page_bm'	=> 'Mudanças',
-	'comments_page_bm'	=> 'comentários',
-	'index_page_bm'		=> 'Indexação',
+	'changes_page_bm'	=> 'Alterações',
+	'comments_page_bm'	=> 'Comentários',
+	'index_page_bm'		=> 'Índice',
 	'random_page_bm'	=> 'Aleatório',
 ];
