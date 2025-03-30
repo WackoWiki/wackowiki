@@ -240,7 +240,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 
 			// start process logging
 			$results = '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreStarted') . "\n" .
-				'–––––––––––––––––––––––––––––––––––––––––' . "\n" .
+				'––––––––––––––––––––––––––––––––––––––––––––––––' . "\n" .
 				$engine->_t('RestoreParameters') . ':' . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedKeys') . ': ' . ($ikeys === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedFiles') . ': ' . ($ifiles === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n\n" .
@@ -253,7 +253,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 
 			// request structure restore
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreTableStructure') . "\n" .
-				'–––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
+				'––––––––––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
 
 			if ($log['structure'])
 			{
@@ -272,7 +272,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 
 			// request data restore
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreRecords') . "\n" .
-				'–––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
+				'––––––––––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
 
 			if ($log['data'])
 			{
@@ -300,7 +300,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						$mode = 'REPLACE';
 					}
 					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $table."\n" .
-						"\t" . '––––––––––––––––––––––</strong>' . "\n";
+						"\t" . '––––––––––––––––––––––––––</strong>' . "\n";
 
 					$total		= put_data($engine, $pack, $table, $mode);
 					$overall	+= $total;
@@ -317,7 +317,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 
 			// request files restore
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoringFiles') . "\n" .
-				'–––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
+				'––––––––––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
 
 			if (isset($log['files']) && $log['files'])
 			{
@@ -347,7 +347,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 					}
 
 					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $sub_dir . "\n" .
-						"\t" . '––––––––––––––––––––––</strong>' . "\n";
+						"\t" . '––––––––––––––––––––––––––</strong>' . "\n";
 
 					$total		= put_files($pack, $sub_dir, $keep);
 
@@ -373,7 +373,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			}
 
 			// finishing
-			$results .= '<strong>–––––––––––––––––––––––––––––––––––––––––' . "\n" .
+			$results .= '<strong>––––––––––––––––––––––––––––––––––––––––––––––––' . "\n" .
 				date('H:i:s') . ' - ' . $engine->_t('RestoreDone') . '</strong>';
 
 			$message = $engine->_t('BackupRestored') .
