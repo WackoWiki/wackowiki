@@ -262,7 +262,7 @@ function admin_config_formatter($engine, $module)
 					<small><?php echo $engine->_t('AmericanDateInfo');?></small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="american_date" name="american_date" value="1"<?php echo ($engine->db->american_date ? ' checked' : '');?>>
+					<input type="checkbox" id="american_date" name="american_date" value="1"<?php echo ($engine->db->american_date ? ' checked' : '');?>><code>MM/dd/y</code>
 				</td>
 			</tr>
 			<tr>
