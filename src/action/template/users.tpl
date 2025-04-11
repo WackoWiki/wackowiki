@@ -113,7 +113,7 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td>
-									<input type="checkbox" id="send_copy" name="send_copy" value="1">
+									<input type="checkbox" id="send_copy" name="send_copy" value="1" checked>
 									<label for="send_copy">[ ' _t: IntercomCopy ' ]</label>
 								</td>
 							</tr>
