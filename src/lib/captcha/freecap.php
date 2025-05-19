@@ -1,9 +1,9 @@
 <?php
 /************************************************************\
 *
-*     freeCap v1.4.5 Copyright
+*     freeCap v1.4.6 Copyright
 *     2005 Howard Yeend (solidred.co.uk),
-*     2008 - 2023 WackoWiki Team
+*     2008 - 2025 WackoWiki Team
 *
 *    This file is part of freeCap.
 *
@@ -59,10 +59,9 @@ $algo = 'sha1';
 $sess['hash_algo'] = $algo;
 
 // image type:
-// possible values: 'jpg', 'png', 'gif'
+// possible values: 'avif', 'gif', 'jpg', 'png', 'webp'
 // jpg doesn't support transparency (transparent bg option ends up white)
-// png isn't supported by old browsers (see http://www.libpng.org/pub/png/pngstatus.html)
-// gif may not be supported by your GD Lib.
+// avif and webp may not be supported by your GD Lib.
 $output = 'png';
 
 // 0 = generate pseudo-random string, 1 = use dictionary
@@ -330,18 +329,26 @@ function send_image($pic): void
 	switch($output)
 	{
 		// add other cases as desired
-		case 'jpg':
-			header('Content-Type: image/jpeg');
-			ImageJPEG($pic);
+		case 'avif':
+			header('Content-Type: image/avif');
+			imageavif($pic);
 			break;
 		case 'gif':
 			header('Content-Type: image/gif');
-			ImageGIF($pic);
+			imagegif($pic);
+			break;
+		case 'jpg':
+			header('Content-Type: image/jpeg');
+			imagejpeg($pic);
+			break;
+		case 'webp':
+			header('Content-Type: image/webp');
+			imagewebp($pic);
 			break;
 		case 'png':
 		default:
 			header('Content-Type: image/png');
-			ImagePNG($pic);
+			imagepng($pic);
 			break;
 	}
 
