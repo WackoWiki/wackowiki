@@ -717,8 +717,8 @@ class Wacko
 	 * 2. lang/wacko.all.php
 	 * 3. lang/custom.<lang>.php
 	 * 4. admin/lang/ap.<lang>.php
-	 * 5. theme/<theme>/lang/wacko.<lang>.php
-	 * 6. theme/<theme>/lang/wacko.all.php
+	 * 5. theme/<theme>/lang/theme.<lang>.php
+	 * 6. theme/<theme>/lang/theme.all.php
 	 *
 	 * @param string	$lang
 	 * @param bool		$update
@@ -775,7 +775,7 @@ class Wacko
 			else
 			{
 				// 5. theme lang files $theme_translation[]
-				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.' . $lang . '.php');
+				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/theme.' . $lang . '.php');
 
 				if (@file_exists($lang_file))
 				{
@@ -784,9 +784,9 @@ class Wacko
 
 				$theme_translation0 = $theme_translation;
 
-				// 6. wacko.all theme
+				// 6. theme.all
 				$theme_translation = [];
-				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.all.php');
+				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/theme.all.php');
 			}
 
 			if (@file_exists($lang_file))
