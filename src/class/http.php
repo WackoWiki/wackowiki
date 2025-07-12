@@ -616,6 +616,7 @@ class Http
 			404 => 'Not Found',
 			405 => 'Method Not Allowed',
 			409 => 'Conflict',
+			410 => 'Gone',
 			416 => 'Requested Range Not Satisfiable',
 			500 => 'Internal Server Error',
 			501 => 'Not Implemented',
