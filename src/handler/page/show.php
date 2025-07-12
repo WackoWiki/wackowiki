@@ -56,7 +56,7 @@ if ($this->has_access('read'))
 
 		if ($this->page['deleted'] || !empty($latest['deleted']))
 		{
-			$this->http->status(404);
+			$this->http->status(410);
 
 			if ($this->is_admin())
 			{
