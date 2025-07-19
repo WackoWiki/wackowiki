@@ -9566,6 +9566,11 @@ class Wacko
 		return $out;
 	}
 
+	function copy_to_clipboard()
+	{
+		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/clipboard.min.js" async onload="new ClipboardJS(\'.clipb\')"></script>');
+	}
+
 	/**
 	 *
 	 * @param int		$size

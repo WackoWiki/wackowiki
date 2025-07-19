@@ -108,7 +108,7 @@
 		<br><br>
 		<div class="page-settings">
 		[= f GenOwner =
-			<form action="[ ' href: properties ' ]" method="post" name="general_properties">
+			<form action="[ ' href: properties ' ]" method="post" id="general_properties" name="general_properties">
 				[ ' csrf: general_properties ' ]
 				<table class="properties form-tbl">
 					<colgroup>
@@ -116,6 +116,17 @@
 						<col span="1">
 					</colgroup>
 					<tbody>
+						<tr>
+							<th scope="row">
+								<label for="title">[ ' _t: MetaTag ' ]</label>
+							</th>
+							<td>
+								<code id="[ ' token ' ]">[ ' page.tag | e ' ]</code>
+								<button type="button" class="clipb" title="[ ' _t: SourceCopyToClipboard ' ]" data-clipboard-target="#[ ' token ' ]">
+									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceText ' ]" class="btn-copy btn-sm">
+								</button>
+							</td>
+						</tr>
 						<tr>
 							<th scope="row">
 								<label for="title">[ ' _t: MetaTitle ' ]</label>
@@ -208,7 +219,7 @@
 						<tr>
 							<th></th>
 							<td>
-								<button type="submit" class="btn-ok" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
+								<button type="submit" form="general_properties" class="btn-ok" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
 								<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
 							</td>
 						</tr>

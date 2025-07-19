@@ -222,12 +222,17 @@ else if ($mode && !empty($file))
 				$tpl->m_image		= $this->link($file_tag, '', '', '', null, null, null, false);
 			}
 
+			// copy to clipboard
+			$this->copy_to_clipboard();
+			$tpl->s_token = Ut::random_token(10);
+
 			if ($file['page_id'])
 			{
 				// relative path
 				$tpl->s_syntax		= 'file:' . $file['file_name'];
 				// absolute path (<details>)
 				$tpl->s_d_syntax	= $file_tag;
+				$tpl->s_d_token		= Ut::random_token(10);
 			}
 			else
 			{

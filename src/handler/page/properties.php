@@ -121,8 +121,12 @@ else
 	// load settings (shows only if owner is current user or Admin)
 	if ($this->is_owner() || $this->is_admin())
 	{
+		// copy to clipboard
+		$this->copy_to_clipboard();
+
 		$tpl->enter('g_f_');
-		$tpl->page = $this->page;
+		$tpl->page	= $this->page;
+		$tpl->token	= Ut::random_token(10);
 
 		if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], true))
 		{
