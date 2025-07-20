@@ -444,11 +444,23 @@ class Wacko
 
 	function get_max_upload_size()
 	{
-		return min(
-			$this->db->upload_max_size,
-			Ut::shorthand_to_int(ini_get('upload_max_filesize')),
-			Ut::shorthand_to_int(ini_get('post_max_size'))
-		);
+		// If upload_max_size is 0,
+		// the maximum uploadable filesize is only limited by the PHP configuration.
+		if ($this->db->upload_max_size)
+		{
+			return min(
+				$this->db->upload_max_size,
+				Ut::shorthand_to_int(ini_get('upload_max_filesize')),
+				Ut::shorthand_to_int(ini_get('post_max_size'))
+			);
+		}
+		else
+		{
+			return min(
+				Ut::shorthand_to_int(ini_get('upload_max_filesize')),
+				Ut::shorthand_to_int(ini_get('post_max_size'))
+			);
+		}
 	}
 
 	function upload_quota($user_id = null)
