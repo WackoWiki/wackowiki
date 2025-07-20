@@ -36,7 +36,7 @@ $theme_translation = [
 
 ```
 
-The theme config file `wacko.all.php` overrides the default values,
+The theme config file `theme.all.php` overrides the default values,
 it enables you to set your own config-options as well as overwriting existing ones.
 
 ```PHP
