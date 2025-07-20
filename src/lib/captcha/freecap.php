@@ -38,8 +38,8 @@ $version = '1.4.6';
 
 // try to avoid the 'free p*rn' method of CAPTCHA circumvention
 // see en.wikipedia.org/captcha for more info
-// $site_tags[0] = "To avoid spam, please do NOT enter the text if";
-// $site_tags[1] = "this site is not example.com";
+// $site_tags[0] = 'To avoid spam, please do NOT enter the text if';
+// $site_tags[1] = 'this site is not example.com';
 // or more simply:
 // $site_tags[0] = 'for use only on example.com';
 // reword or add lines as you please

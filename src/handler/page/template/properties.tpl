@@ -121,7 +121,7 @@
 								<label for="title">[ ' _t: MetaTag ' ]</label>
 							</th>
 							<td>
-								<code id="[ ' token ' ]">[ ' page.tag | e ' ]</code>
+								<code id="[ ' token ' ]">/[ ' page.tag | e ' ]</code>
 								<button type="button" class="clipb" title="[ ' _t: SourceCopyToClipboard ' ]" data-clipboard-target="#[ ' token ' ]">
 									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceText ' ]" class="btn-copy btn-sm">
 								</button>
