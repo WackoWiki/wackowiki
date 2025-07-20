@@ -324,13 +324,14 @@ function send_image($pic): void
 {
 	// output image with appropriate headers
 	global $output, $im, $im2, $im3;
-	header(base64_decode('WC1DYXB0Y2hhOiBmcmVlQ2FwIDEuNCAtIHd3dy5wdXJlbWFuZ28uY28udWs='));
+	# header('x-captcha: freeCap 1.4.6');
 
 	switch($output)
 	{
 		// add other cases as desired
 		case 'avif':
 			header('Content-Type: image/avif');
+			imagepalettetotruecolor($pic);
 			imageavif($pic);
 			break;
 		case 'gif':
@@ -343,6 +344,7 @@ function send_image($pic): void
 			break;
 		case 'webp':
 			header('Content-Type: image/webp');
+			imagepalettetotruecolor($pic);
 			imagewebp($pic);
 			break;
 		case 'png':
@@ -680,6 +682,7 @@ $font_pixelwidth = $font_widths[$j];
 // (so we only morph what we need to)
 $word_pix_size	= $word_start_x + (strlen($word) * $font_pixelwidth);
 $y_pos			= 0;
+
 // firstly move each character up or down a bit:
 for ($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
 {
