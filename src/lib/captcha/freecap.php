@@ -1,25 +1,25 @@
 <?php
 /************************************************************\
 *
-*     freeCap v1.4.6 Copyright
-*     2005 Howard Yeend (solidred.co.uk),
-*     2008 - 2025 WackoWiki Team
+*	freeCap v1.4.6 Copyright
+*	2005 Howard Yeend (solidred.co.uk),
+*	2008 - 2025 WackoWiki Team
 *
-*    This file is part of freeCap.
+*	This file is part of freeCap.
 *
-*    freeCap is free software; you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation; either version 2 of the License, or
-*    (at your option) any later version.
+*	freeCap is free software; you can redistribute it and/or modify
+*	it under the terms of the GNU General Public License as published by
+*	the Free Software Foundation; either version 2 of the License, or
+*	(at your option) any later version.
 *
-*    freeCap is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
+*	freeCap is distributed in the hope that it will be useful,
+*	but WITHOUT ANY WARRANTY; without even the implied warranty of
+*	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*	GNU General Public License for more details.
 *
-*    You should have received a copy of the GNU General Public License
-*    along with freeCap; if not, write to the Free Software
-*    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*	You should have received a copy of the GNU General Public License
+*	along with freeCap; if not, write to the Free Software
+*	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *
 *
 \************************************************************/
@@ -28,6 +28,9 @@ if (!defined('IN_WACKO'))
 {
 	exit;
 }
+
+// freeCap version
+$version = '1.4.6';
 
 //////////////////////////////////////////////////////
 ////// User Defined Vars:
@@ -55,6 +58,7 @@ $rand_func = function ($mi, $ma) {return Ut::rand($mi, $ma);};
 // which type of hash to use?
 // possible values: 'sha1', 'sha256', 'SHA512'
 $algo = 'sha1';
+
 // store in session so can validate in form processor
 $sess['hash_algo'] = $algo;
 
@@ -68,9 +72,10 @@ $output = 'png';
 // dictionary is easier to recognise
 // - both for humans and computers, so use random string if you're paranoid.
 $use_dict = 1;
+
 // if your server is NOT set up to deny web access to files beginning '.ht'
 // then you should ensure the dictionary file is kept outside the web directory
-// eg: if www.foo.com/index.html points to c:\website\www\index.html
+// eg: if www.example.com/index.html points to c:\website\www\index.html
 // then the dictionary should be placed in c:\website\dict.txt
 // test your server's config by trying to access the dictionary through a web browser
 // you should NOT be able to view the contents.
@@ -152,8 +157,10 @@ else
 // many thanks to http://ocr-research.org.ua and http://sam.zoy.org/pwntcha/ for testing
 // for jpgs, 'transparent' is white
 $bg_type = 1;
+
 // should we blur the background? (looks nicer, makes text easier to read, takes longer)
 $blur_bg = true;
+
 // for bg_type 3, which images should we use?
 // if you add your own, make sure they're fairly 'busy' images (ie a lot of shapes in them)
 $bg_images = [
@@ -163,6 +170,7 @@ $bg_images = [
 	'/.ht_freecap_im4.jpg',
 	'/.ht_freecap_im5.jpg'
 ];
+
 // for non-transparent backgrounds only:
 	// if 0, merges CAPTCHA with bg
 	// if 1, write CAPTCHA over bg
@@ -324,7 +332,7 @@ function send_image($pic): void
 {
 	// output image with appropriate headers
 	global $output, $im, $im2, $im3;
-	# header('x-captcha: freeCap 1.4.6');
+	# header('x-captcha: freeCap ' . $version);
 
 	switch($output)
 	{
@@ -874,7 +882,7 @@ if ($bg_type)
 // the least you could do is give me credit
 // but I understand that in professional environments, your boss might not like this tag
 // so that's cool.
-// $tag_str = 'freeCap v1.4.5';
+// $tag_str = 'freeCap v' . $version;
 $tag_str = '';
 // for debug:
 # $tag_str = '[' . $word . ']';
