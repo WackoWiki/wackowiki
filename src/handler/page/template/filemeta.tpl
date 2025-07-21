@@ -19,14 +19,14 @@
 					[= s _ =
 						<code id="[ ' token ' ]">[ ' syntax ' ]</code>
 						<button type="button" class="clipb" title="[ ' _t: SourceCopyToClipboard ' ]" data-clipboard-target="#[ ' token ' ]">
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceText ' ]" class="btn-copy btn-sm">
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceCopyToClipboard ' ]" class="btn-copy btn-sm">
 						</button>
 						[= d _ =
 							<details>
 								<summary>[ ' _t: FileAbsolutePath ' ]</summary>
 								<code id="[ ' token ' ]">[ ' syntax ' ]</code>
 								<button type="button" class="clipb" title="[ ' _t: SourceCopyToClipboard ' ]" data-clipboard-target="#[ ' token ' ]">
-									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceText ' ]" class="btn-copy btn-sm">
+									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceCopyToClipboard ' ]" class="btn-copy btn-sm">
 								</button>
 							</details>
 						=]
