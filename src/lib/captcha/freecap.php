@@ -66,7 +66,7 @@ $sess['hash_algo'] = $algo;
 // possible values: 'avif', 'gif', 'jpg', 'png', 'webp'
 // jpg doesn't support transparency (transparent bg option ends up white)
 // avif and webp may not be supported by your GD Lib.
-$output = 'png';
+$output = 'webp';
 
 // 0 = generate pseudo-random string, 1 = use dictionary
 // dictionary is easier to recognise
