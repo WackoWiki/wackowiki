@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> '댓글 삭제',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepPurge'		=> '제거된 파일, 수정 사항 및 주석의 사본을 저장하지 마십시오.',
 	'RemoveDontKeepRevision'	=> 'Do not save a copy of the removed revision',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'RemoveDontKeepFile'		=> '제거 된 파일의 사본을 저장하지 마십시오.',

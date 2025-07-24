@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Poista kommentti',
 	'RemoveCluster'				=> 'Poista klusterin kaikki sivut',
 	'RemoveDontKeep'			=> 'Älä tallenna kopiota poistetusta sivusta ja kommenteista',
+	'RemoveDontKeepPurge'		=> 'Älä tallenna kopiota poistetuista tiedostoista, versioista ja kommenteista',
 	'RemoveDontKeepRevision'	=> 'Älä tallenna kopiota poistetusta versiosta',
 	'RemoveDontKeepComment'		=> 'Älä tallenna kopiota poistetusta kommentista',
 	'RemoveDontKeepFile'		=> 'Älä tallenna kopiota poistetusta tiedostosta',

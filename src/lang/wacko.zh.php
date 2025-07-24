@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> '删除评论',
 	'RemoveCluster'				=> '删除集群内所有页面',
 	'RemoveDontKeep'			=> '不要保存已删除页面和评论的副本',
+	'RemoveDontKeepPurge'		=> '不要保存已删除的文件、修订和评论的副本',
 	'RemoveDontKeepRevision'	=> '不要保存已删除修订的副本',
 	'RemoveDontKeepComment'		=> '不要保存已删除评论的副本',
 	'RemoveDontKeepFile'		=> '不要保存已删除文件的副本',

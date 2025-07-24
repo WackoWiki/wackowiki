@@ -29,7 +29,7 @@
 				[= dontkeep _ =
 					<br>
 					<input type="checkbox" id="dontkeep" name="dontkeep">
-					<label for="dontkeep">[ ' _t: RemoveDontKeep ' ]</label><br>
+					<label for="dontkeep">[ ' _t: RemoveDontKeepPurge ' ]</label><br>
 				=]
 			=]
 			<br>

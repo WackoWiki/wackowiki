@@ -182,7 +182,7 @@ $wacko_translation = [
 
 	'PrivacyPolicy'				=> '隱私政策',
 	'TermsOfUse'				=> '使用條款',
-	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of Service of the site.',
+	'AcceptTermsOfUse'			=> '我已閱讀、理解並同意本網站的使用條款。',
 
 	'ShowComments'				=> '顯示評論/表單',
 	'HideComments'				=> '隱藏評論/表單',

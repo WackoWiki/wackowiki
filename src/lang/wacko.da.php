@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Slet kommentar',
 	'RemoveCluster'				=> 'Fjern alle sider i klyngen',
 	'RemoveDontKeep'			=> 'Gem ikke en kopi af en fjernet side og kommentarer',
+	'RemoveDontKeepPurge'		=> 'Gem ikke en kopi af de fjernede filer, revisioner og kommentarer',
 	'RemoveDontKeepRevision'	=> 'Gem ikke en kopi af den fjernede revision',
 	'RemoveDontKeepComment'		=> 'Gem ikke en kopi af den fjernede kommentar',
 	'RemoveDontKeepFile'		=> 'Gem ikke en kopi af den fjernede fil',

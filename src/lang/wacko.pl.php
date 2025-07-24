@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Usuń komentarz',
 	'RemoveCluster'				=> 'Usuń wszystkie strony klastra',
 	'RemoveDontKeep'			=> 'Nie zapisuj kopii usuniętej strony i komentarzy',
+	'RemoveDontKeepPurge'		=> 'Nie zapisuj kopii usuniętych plików, wersji i komentarzy',
 	'RemoveDontKeepRevision'	=> 'Nie zapisuj kopii usuniętej zmiany',
 	'RemoveDontKeepComment'		=> 'Nie zapisuj kopii usuniętego komentarza',
 	'RemoveDontKeepFile'		=> 'Nie zapisuj kopii usuniętego pliku',

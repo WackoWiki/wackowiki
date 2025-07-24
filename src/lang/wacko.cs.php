@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Odstranit komentář',
 	'RemoveCluster'				=> 'Odstranit všechny stránky clusteru',
 	'RemoveDontKeep'			=> 'Neukládat kopii odstraněné stránky a komentářů',
+	'RemoveDontKeepPurge'		=> 'Neukládat kopii odstraněných souborů, revizí a komentářů',
 	'RemoveDontKeepRevision'	=> 'Neukládat kopii odstraněné revize',
 	'RemoveDontKeepComment'		=> 'Neukládat kopii odstraněného komentáře',
 	'RemoveDontKeepFile'		=> 'Neukládat kopii odstraněného souboru',

@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Kustuta kommentaar',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepPurge'		=> 'Ärge salvestage eemaldatud failide, paranduste ja kommentaaride koopiaid',
 	'RemoveDontKeepRevision'	=> 'Do not save a copy of the removed revision',
 	'RemoveDontKeepComment'		=> 'Ärge salvestage eemaldatud kommentaari koopiat',
 	'RemoveDontKeepFile'		=> 'Ärge salvestage eemaldatud faili koopiat',

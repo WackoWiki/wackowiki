@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Click here to delete comment.',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepPurge'		=> 'Не запазвайте копие на премахнатите файлове, редакции и коментари',
 	'RemoveDontKeepRevision'	=> 'Не запазвайте копие на премахнатата редакция',
 	'RemoveDontKeepComment'		=> 'Не запазвайте копие на премахнатия коментар',
 	'RemoveDontKeepFile'		=> 'Не запазвайте копие на премахвания файл',

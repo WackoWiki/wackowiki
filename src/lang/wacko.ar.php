@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'حذف التعليق',
 	'RemoveCluster'				=> 'إزالة جميع صفحات المجموعة',
 	'RemoveDontKeep'			=> 'لا تقم بحفظ نسخة من صفحة و تعليقات محذوفة',
+	'RemoveDontKeepPurge'		=> 'لا تقم بحفظ نسخة من الملفات والمراجعات والتعليقات التي تمت إزالتها',
 	'RemoveDontKeepRevision'	=> 'لا تقم بحفظ نسخة من التنقيح الذي تمت إزالته',
 	'RemoveDontKeepComment'		=> 'لا تقم بحفظ نسخة من التعليق الذي تمت إزالته',
 	'RemoveDontKeepFile'		=> 'لا تقم بحفظ نسخة من الملف الذي تمت إزالته',

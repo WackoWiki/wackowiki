@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'コメントの削除',
 	'RemoveCluster'				=> 'クラスターのすべてのページを削除',
 	'RemoveDontKeep'			=> '削除されたページとコメントのコピーを保存しない',
+	'RemoveDontKeepPurge'		=> '削除されたファイル、リビジョン、コメントのコピーを保存しない',
 	'RemoveDontKeepRevision'	=> '削除されたリビジョンのコピーを保存しない',
 	'RemoveDontKeepComment'		=> '削除されたコメントのコピーを保存しない',
 	'RemoveDontKeepFile'		=> '削除されたファイルのコピーを保存しない',

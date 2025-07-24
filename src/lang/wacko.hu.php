@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Megjegyzés törlése',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepPurge'		=> 'Ne mentse el az eltávolított fájlok, módosítások és megjegyzések másolatát',
 	'RemoveDontKeepRevision'	=> 'Do not save a copy of the removed revision',
 	'RemoveDontKeepComment'		=> 'Ne mentse el az eltávolított megjegyzés másolatát',
 	'RemoveDontKeepFile'		=> 'Ne mentse el az eltávolított fájl másolatát',
