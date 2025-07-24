@@ -33,11 +33,12 @@ $max		= (int) @$max;
 $prefix		= $this->prefix;
 $tab_mode	= $_GET['mode'] ?? '';
 
-// display user profile
+// [A] display user profile
 if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET, so personal message can POST here
 {
 	// hide H1 article header
-	$this->hide_article_header = true;
+	$this->hide_article_header	= true;
+	$this->doubleclick			= false;
 
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))
@@ -605,7 +606,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET, so personal me
 		$tpl->leave();	//	u_
 	}
 }
-// USERLIST
+// [B] userlist
 // display whole userlist instead of the particular profile
 else
 {

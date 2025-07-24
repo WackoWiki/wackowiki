@@ -40,7 +40,8 @@ if (!array_key_exists($mode, $tabs))
 $this->http->ensure_tls($this->href());
 
 // hide article H1 header
-$this->hide_article_header = true;
+$this->hide_article_header	= true;
+$this->doubleclick			= false;
 
 // email confirmation
 if (isset($_GET['confirm']))

@@ -543,6 +543,7 @@ $minor_edit		= (bool)	($_POST['minor_edit']		?? 0);
 
 $edit_note			= $this->sanitize_text_field($edit_note, true);
 $show_search_form	= false;
+$this->doubleclick	= false;
 
 // remove \r (body contains only \n)
 $replacement		= str_replace("\r\n", "\n", $replacement);

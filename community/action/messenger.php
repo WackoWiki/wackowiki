@@ -119,6 +119,7 @@ $get_contacts = function($user_id) use ($prefix)
 if ($user_id = $this->get_user_id())
 {
 	# $create_table();
+	$this->doubleclick = false;
 
 	// needed for pagination
 	$limit = 10;

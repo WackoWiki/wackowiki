@@ -87,13 +87,16 @@ if (!empty($this->db->ext_bad_behaviour))
 }
 
 // Doubleclick edit feature.
-// Enabled only for registered users who don't turn it off (requires class=page in show handler).
-$user = $this->get_user();
-$doubleclick = $user
+//   Enabled only for [a] guests with write access, [b] registered users who don't turn it off,
+//   requires class=page in show handler and $this->doubleclick (disabled for action forms).
+$user			= $this->get_user();
+$u_doubleclick	= $user
 	? @$user['doubleclick_edit']
 	: $this->has_access('write');
 
-if ($doubleclick && $this->method == 'show')
+if ($u_doubleclick
+	&& $this->method == 'show'
+	&& $this->doubleclick)
 {
 	$tpl->doubleclick_href = $this->href('edit');
 }
