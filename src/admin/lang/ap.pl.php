@@ -1021,6 +1021,7 @@ lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwier
 	'LogUserDeleted'			=> 'Użytkownik ##%1## usunięty z bazy danych',
 	'LogUserCreated'			=> 'Utworzono nowego użytkownika ##%1##',
 	'LogUserUpdated'			=> 'Zaktualizowano użytkownika ##%1##',
+	'LogUserPasswordReset'		=> 'Hasło dla użytkownika ##%1## pomyślnie zresetowane',
 
 	'UserApproveInfo'			=> 'Zatwierdź nowych użytkowników zanim będą mogli zalogować się na witrynę.',
 	'Approve'					=> 'Zatwierdź',

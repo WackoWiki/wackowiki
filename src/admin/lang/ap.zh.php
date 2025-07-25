@@ -1000,6 +1000,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> '用户 ##%1## 从数据库中删除',
 	'LogUserCreated'			=> '创建了一个新用户##%1##',
 	'LogUserUpdated'			=> '更新用户 ##%1##',
+	'LogUserPasswordReset'		=> '用户 ##%1## 的密码重置成功',
 
 	'UserApproveInfo'			=> '在新用户能够登录网站之前批准他们。',
 	'Approve'					=> '批准',

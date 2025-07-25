@@ -1016,6 +1016,7 @@ questi, ovvero se la richiesta raggiunge il server web da uno dei tuoi proxy inv
 	'LogUserDeleted'			=> 'Utente ##%1## rimosso dal database',
 	'LogUserCreated'			=> 'Creato un nuovo utente ##%1##',
 	'LogUserUpdated'			=> 'Utente Aggiornato ##%1##',
+	'LogUserPasswordReset'		=> 'Password per l\'utente ##%1## reimpostata con successo',
 
 	'UserApproveInfo'			=> 'Approva nuovi utenti prima che siano in grado di accedere al sito.',
 	'Approve'					=> 'Approva',

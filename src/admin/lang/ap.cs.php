@@ -1010,6 +1010,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'Uživatel ##%1## odstraněn z databáze',
 	'LogUserCreated'			=> 'Vytvořil nového uživatele ##%1##',
 	'LogUserUpdated'			=> 'Aktualizován uživatel ##%1##',
+	'LogUserPasswordReset'		=> 'Heslo pro uživatele ##%1## úspěšně obnoveno',
 
 	'UserApproveInfo'			=> 'Schválit nové uživatele před tím, než se budou moci přihlásit na web.',
 	'Approve'					=> 'Schválit',

@@ -1010,6 +1010,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'Utilizator ##%1## eliminat din baza de date',
 	'LogUserCreated'			=> 'Creat un utilizator nou ##%1##',
 	'LogUserUpdated'			=> 'Utilizator actualizat ##%1##',
+	'LogUserPasswordReset'		=> 'Parola pentru utilizator ##%1## resetare cu succes',
 
 	'UserApproveInfo'			=> 'Aproba utilizatori noi înainte de a se putea conecta la site. (Automatic Translation)',
 	'Approve'					=> 'Aprobați',

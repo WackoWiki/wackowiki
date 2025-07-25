@@ -1010,6 +1010,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'Käyttäjä ##%1## poistettu tietokannasta',
 	'LogUserCreated'			=> 'Luotu uuden käyttäjän ##%1##',
 	'LogUserUpdated'			=> 'Päivitetty Käyttäjä ##%1##',
+	'LogUserPasswordReset'		=> 'Käyttäjän salasana ##%1## nollaus onnistui',
 
 	'UserApproveInfo'			=> 'Hyväksy uudet käyttäjät ennen kuin he voivat kirjautua sivustolle.',
 	'Approve'					=> 'Hyväksy',

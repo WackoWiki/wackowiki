@@ -1021,6 +1021,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'User ##%1## removed from the database',
 	'LogUserCreated'			=> 'Created a new user ##%1##',
 	'LogUserUpdated'			=> 'Updated User ##%1##',
+	'LogUserPasswordReset'		=> 'Паролата за потребител ##%1## е успешно нулирана',
 
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
 	'Approve'					=> 'Approve',

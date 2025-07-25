@@ -1020,6 +1020,7 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 	'LogUserDeleted'			=> 'Gebruiker ##%1verwijderd uit de database',
 	'LogUserCreated'			=> 'Maak een nieuwe gebruiker ##%1##',
 	'LogUserUpdated'			=> 'Bijgewerkt gebruiker ##%1##',
+	'LogUserPasswordReset'		=> 'Wachtwoord voor gebruiker ##%1## succesvol gereset',
 
 	'UserApproveInfo'			=> 'Goedkeuren nieuwe gebruikers voordat ze kunnen inloggen op de site.',
 	'Approve'					=> 'Goedkeuren',

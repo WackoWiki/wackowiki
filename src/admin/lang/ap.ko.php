@@ -1021,6 +1021,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'User ##%1## removed from the database',
 	'LogUserCreated'			=> 'Created a new user ##%1##',
 	'LogUserUpdated'			=> 'Updated User ##%1##',
+	'LogUserPasswordReset'		=> '사용자 ##%1##의 비밀번호가 성공적으로 재설정되었습니다.',
 
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
 	'Approve'					=> '승인',

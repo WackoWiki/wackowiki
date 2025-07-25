@@ -1019,6 +1019,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'Bruger ##%1## fjernet fra databasen',
 	'LogUserCreated'			=> 'Oprettede en ny bruger ##%1##',
 	'LogUserUpdated'			=> 'Opdateret Bruger ##%1##',
+	'LogUserPasswordReset'		=> 'Adgangskode for bruger ##%1## succesfuldt nulstillet',
 
 	'UserApproveInfo'			=> 'Godkend nye brugere, før de kan logge ind på webstedet.',
 	'Approve'					=> 'Godkend',

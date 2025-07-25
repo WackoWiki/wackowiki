@@ -312,7 +312,7 @@ $ap_translation = [
 	'ExportHandlerInfo'			=> 'Permits the display of the XML export handler.',
 
 	'DiffModeSection'			=> 'Diff Modes',
-	'DefaultDiffModeSetting'	=> 'Default diff mode:',
+	'DefaultDiffModeSetting'	=> 'Mode pembanding bawaan:',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
 	'AllowedDiffMode'			=> 'Allowed diff modes:',
 	'AllowedDiffModeInfo'		=> 'It is recommended to select only the set of diff modes you want to use, otherwise all diff modes are selected.',
@@ -1010,6 +1010,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'User ##%1## removed from the database',
 	'LogUserCreated'			=> 'Created a new user ##%1##',
 	'LogUserUpdated'			=> 'Updated User ##%1##',
+	'LogUserPasswordReset'		=> 'Kata sandi untuk pengguna ##%1## berhasil disetel ulang',
 
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
 	'Approve'					=> 'Setujui',

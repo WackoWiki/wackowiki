@@ -472,7 +472,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'リバースプロキシ',
 	'ReverseProxy'				=> 'リバースプロキシを使用:',
-    'ReverseProxyInfo'			=>
+    'ReverseProxyInfo'			=> 
     'この設定を有効にすると、X-Forward-For ヘッダーに保存されている情報を調べることで、リモートクライアントの正しいIPアドレスを特定できます。 X-Forwarded-For ヘッダは、イカやポンドなど、リバースプロキシサーバーを介して接続しているクライアントシステムを識別するための標準的なメカニズムです。 リバース・プロキシ・サーバーは、多くの場合、訪問されたサイトのパフォーマンスを向上させるために使用され、他のサイトのキャッシュ、セキュリティ、または暗号化の利点を提供する可能性があります。 この WackoWiki インストールがリバースプロキシの背後で動作する場合。 この設定は、WackoWikiのセッション管理、ログ、統計、アクセス管理システムで正しいIPアドレス情報をキャプチャするように有効にする必要があります。 この設定が不明な場合はリバースプロキシを使用しないでください または、WackoWikiは共有ホスティング環境で動作します。この設定は無効のままにしておく必要があります。',
 	'ReverseProxyHeader'		=> 'リバースプロキシヘッダー:',
 	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
@@ -1010,6 +1010,7 @@ $ap_translation = [
 	'LogUserDeleted'			=> 'ユーザー ##%1## がデータベースから削除されました',
 	'LogUserCreated'			=> '新しいユーザー ##%1 ## を作成',
 	'LogUserUpdated'			=> '更新されたユーザー ##%1##',
+	'LogUserPasswordReset'		=> 'ユーザー ##%1## のパスワードが正常にリセットされました',
 
 	'UserApproveInfo'			=> 'サイトにログインする前に新規ユーザーを承認します。',
 	'Approve'					=> '承認',
