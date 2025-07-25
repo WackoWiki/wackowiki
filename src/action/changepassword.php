@@ -81,7 +81,7 @@ if ($action === 'change_password' && $user)
 			$this->db->sql_query(
 				'UPDATE ' . $prefix . 'user SET ' .
 					"change_password	= '', " .
-				'password = ' . $this->db->q($this->password_hash($user, $new_password)) . ' ' .
+					'password			= ' . $this->db->q($this->password_hash($user, $new_password)) . ' ' .
 				'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
 				'LIMIT 1');
 

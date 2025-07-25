@@ -232,7 +232,7 @@
 							<a href="[ ' href ' ]">[ ' _t: YouWantChangePassword ' ]</a>
 						</th>
 						<td>
-							<a href="[ ' href ' ]" class="btn-link"><button type="button" id="button" name="_password">[ ' _t: YouWantChangePassword ' ]</button></a>
+							<a href="[ ' href ' ]" class="btn-link"><button type="button" id="button" name="_password">[ ' _t: ChangePasswordButton ' ]</button></a>
 						</td>
 					</tr>
 					<tr>
