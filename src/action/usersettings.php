@@ -141,6 +141,7 @@ else if ($user = $this->get_user())
 		'timezone			= ' . $this->db->q($timezone) . ', ' .
 		'date_preference	= ' . $this->db->q($preference) . ', ' .
 		'sorting_comments	= ' . (int) $_POST['sorting_comments'] . ', ' .
+		'comments_offset	= ' . (int) $_POST['comments_offset'] . ', ' .
 		'menu_items			= ' . (int) $_POST['menu_items'] . ', ' .
 		'list_count			= ' . (int) $_POST['list_count'] . ' ';
 	}
@@ -331,6 +332,7 @@ else if ($user = $this->get_user())
 		}
 
 		$tpl->sortcomments	= $user['sorting_comments'];
+		$tpl->commentsoffset	= $user['comments_offset'];
 		$tpl->menuitems		= $user['menu_items'];
 		$tpl->listcount		= $user['list_count'];
 

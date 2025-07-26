@@ -258,6 +258,7 @@ $wacko_config_defaults = [
 	'cache_sql_ttl'					=> 600,
 
 	'spam_filter'					=> 1,
+	'comments_offset'				=> 0,		// 0 - first page, 1 - last page
 	'sorting_comments'				=> 0,
 
 	'registration_delay'			=> 10,

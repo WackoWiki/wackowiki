@@ -350,6 +350,7 @@ $tbl_user_setting =
 		timezone VARCHAR(100) NOT NULL DEFAULT 'UTC',
 		date_preference VARCHAR(10) DEFAULT 'default',
 		sorting_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+		comments_offset TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 		PRIMARY KEY (setting_id),
 		UNIQUE KEY idx_user_id (user_id),
 		KEY idx_send_watchmail (send_watchmail)

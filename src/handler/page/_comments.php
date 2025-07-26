@@ -5,6 +5,14 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// set default comments page (0 - first | 1 - last)
+$comments_offset	= $this->get_user_setting('comments_offset') ?? $this->db->comments_offset;;
+
+if ($comments_offset && !isset($_GET['p']))
+{
+	$_GET['p'] = 'last';
+}
+
 // pagination
 $pagination = $this->pagination($this->page['comments'], $this->db->comments_count, 'p', ['show_comments' => 1, '#' => 'header-comments']);
 
@@ -21,9 +29,7 @@ if ($this->has_access('read'))
 	}
 
 	// sorting comments ASC / DESC
-	$sort_comment	= null;
-	$sort_comment	= $this->get_user_setting('sorting_comments');
-	$sort_comment	??= $this->db->sorting_comments;
+	$sort_comment	= $this->get_user_setting('sorting_comments') ?? $this->db->sorting_comments;
 
 	$tpl->enter('cp_s_');
 

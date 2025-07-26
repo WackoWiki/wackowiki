@@ -141,6 +141,7 @@ if (@$_POST['_action'] === 'register'
 					'notify_page		= ' . (int) $this->db->notify_page . ', ' .
 					'notify_comment		= ' . (int) $this->db->notify_comment . ', ' .
 					'sorting_comments	= ' . (int) $this->db->sorting_comments . ', ' .
+					'comments_offset	= ' . (int) $this->db->comments_offset . ', ' .
 					'allow_intercom		= ' . (int) $this->db->allow_intercom . ', ' .
 					'allow_massemail	= ' . (int) $this->db->allow_massemail . ', ' .
 					'send_watchmail		= 1');

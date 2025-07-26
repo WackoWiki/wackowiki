@@ -49,6 +49,7 @@ $config_db['changes_page']					= $config['changes_page'];
 $config_db['check_mimetype']				= $config['check_mimetype'];
 $config_db['comments_count']				= $config['comments_count'];
 $config_db['comment_delay']					= $config['comment_delay'];
+$config_db['comments_offset']				= $config['comments_offset'];
 $config_db['comments_page']					= $config['comments_page'];
 $config_db['create_thumbnail']				= $config['create_thumbnail'];
 $config_db['csp']							= $config['csp'];

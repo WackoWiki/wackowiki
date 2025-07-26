@@ -644,7 +644,7 @@ class Wacko
 			// array may differ depending on language
 			$preference					= $this->get_user()['date_preference'] ?? 'default';
 
-			$patterns								= $this->available_date_formats();
+			$patterns					= $this->available_date_formats();
 			$date_pattern				= $patterns[$preference] ?? ($patterns['default'] ?? $this->db->date_format);
 			$this->sess->date_pattern	= $date_pattern;
 
@@ -5903,7 +5903,7 @@ class Wacko
 				s.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.theme,
 				s.autocomplete, s.numerate_links, s.diff_mode, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
 				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
-				s.session_length, s.timezone, s.date_preference, s.sorting_comments ' .
+				s.session_length, s.timezone, s.date_preference, s.sorting_comments, s.comments_offset ' .
 			'FROM ' . $this->prefix . 'user u ' .
 				'LEFT JOIN ' . $this->prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
 			'WHERE ' . ($user_id

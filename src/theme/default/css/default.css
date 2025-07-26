@@ -781,7 +781,7 @@ ol#comments ul ul ul {
 /* Comment author and date */
 .comment-meta {
 	color: #aaa;
-	padding-bottom: 20px;
+	padding: 10px;
 	float: right;
 }
 [dir=rtl] .comment-meta {

@@ -301,6 +301,17 @@
 					</tr>
 					<tr>
 						<th>
+							<label for="comments_offset">[ ' _t: CommentOffset ' ]</label>
+						</th>
+						<td>
+							<select id="comments_offset" name="comments_offset">
+								<option value="0"[ ' commentsoffset | select 0 ' ]>[ ' _t: CommentOffsetFirst ' ]</option>
+								<option value="1"[ ' commentsoffset | select 1 ' ]>[ ' _t: CommentOffsetLast ' ]</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>
 							<label for="sorting_comments">[ ' _t: SortComment ' ]</label>
 						</th>
 						<td>

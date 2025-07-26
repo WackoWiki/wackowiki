@@ -95,6 +95,7 @@ function admin_config_basic($engine, $module)
 		$config['export_handler']				= (int) $_POST['export_handler'];
 
 		$config['enable_comments']				= (int) $_POST['enable_comments'];
+		$config['comments_offset']				= (int) $_POST['comments_offset'];
 		$config['sorting_comments']				= (int) $_POST['sorting_comments'];
 
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
@@ -267,13 +268,28 @@ function admin_config_basic($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
+					<label for="sorting_comments"><strong><?php echo $engine->_t('CommentsOffset');?></strong><br>
+					<small><?php echo $engine->_t('CommentsOffsetInfo');?></small></label>
+				</td>
+				<td>
+					<select id="sorting_comments" name="sorting_comments">
+						<option value="0" <?php echo ($engine->db->comments_offset == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('CommentOffsetFirst');?></option>
+						<option value="1" <?php echo ($engine->db->comments_offset == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('CommentOffsetLast');?></option>
+					</select>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
 					<label for="sorting_comments"><strong><?php echo $engine->_t('SortingComments');?></strong><br>
 					<small><?php echo $engine->_t('SortingCommentsInfo');?></small></label>
 				</td>
 				<td>
-					<select id="sorting_comments" name="sorting_comments">
-						<option value="0" <?php echo ($engine->db->sorting_comments  == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('SortCommentAsc');?></option>
-						<option value="1" <?php echo ($engine->db->sorting_comments  == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('SortCommentDesc');?></option>
+					<select id="comments_offset" name="comments_offset">
+						<option value="0" <?php echo ($engine->db->sorting_comments == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('SortCommentAsc');?></option>
+						<option value="1" <?php echo ($engine->db->sorting_comments == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('SortCommentDesc');?></option>
 					</select>
 				</td>
 			</tr>

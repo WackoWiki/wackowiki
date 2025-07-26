@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Enable comments for guests or registered users only, or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments:',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+	'CommentsOffset'			=> 'Comments page:',
+	'CommentsOffsetInfo'		=> 'Comments page to display by default',
 
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel:',

@@ -179,6 +179,7 @@ function admin_user_users($engine, $module)
 					'notify_page		= ' . (int) $engine->db->notify_page . ', ' .
 					'notify_comment		= ' . (int) $engine->db->notify_comment . ', ' .
 					'sorting_comments	= ' . (int) $engine->db->sorting_comments . ', ' .
+					'comments_offset	= ' . (int) $engine->db->comments_offset . ', ' .
 					'allow_intercom		= ' . (int) $engine->db->allow_intercom . ', ' .
 					'allow_massemail	= ' . (int) $engine->db->allow_massemail . ', ' .
 					'send_watchmail		= 1');

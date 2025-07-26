@@ -319,7 +319,7 @@ if ($this->method == 'show' && (isset($this->page['latest']) && $this->page['lat
 	}
 
 	// places footer inside, to include the footer in the themes footer
-	// set $this->db->footer_inside = 0; in theme/lang/wacko.all.php
+	// set $this->db->footer_inside = 0; in theme/lang/theme.all.php
 	if (!isset($this->db->footer_inside))
 	{
 		// files code starts
