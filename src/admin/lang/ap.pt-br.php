@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Habilitar comentários para convidados ou usuários registrados apenas, ou desativá-los em todo o site.',
 	'SortingComments'			=> 'Classificando comentários:',
 	'SortingCommentsInfo'		=> 'Altera a ordem em que os comentários da página são apresentados, seja com o comentário mais recente OU o mais antigo no topo.',
+	'CommentsOffset'			=> 'Página de comentários:',
+	'CommentsOffsetInfo'		=> 'Página de comentários a exibir por padrão',
 
 	'ToolbarSection'			=> 'Barra',
 	'CommentsPanel'				=> 'Painel de comentários.',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Proxy reverso',
 	'ReverseProxy'				=> 'Usar proxy reverso:',
-    'ReverseProxyInfo'			=> 
-    'Ativar esta configuração para determinar o endereço IP correto do cliente remoto examinando informações armazenadas nos cabeçalhos X-Forwarded-para. Os cabeçalhos X-Forwarded-For são um mecanismo padrão para identificar sistemas de clientes se conectando através de um servidor proxy reverso, como Lula ou Pound. Servidores de proxy reversos são frequentemente usados para melhorar o desempenho de sites visitados fortemente e também podem fornecer outros benefícios de cache, segurança ou encriptação do site. Se esta instalação do WackoWiki opera atrás de um proxy reverso, essa configuração deve ser habilitada para que informações corretas de endereço IP sejam capturadas nos sistemas de gerenciamento de sessão do WackoWiki; se você não tiver certeza sobre essa configuração, não tenha um proxy reverso, ou WackoWiki opera em um ambiente de hospedagem compartilhada, esta configuração deve permanecer desativada.',
+	'ReverseProxyInfo'			=> 'Ativar esta configuração para determinar o endereço IP correto do cliente remoto examinando informações armazenadas nos cabeçalhos X-Forwarded-para. Os cabeçalhos X-Forwarded-For são um mecanismo padrão para identificar sistemas de clientes se conectando através de um servidor proxy reverso, como Lula ou Pound. Servidores de proxy reversos são frequentemente usados para melhorar o desempenho de sites visitados fortemente e também podem fornecer outros benefícios de cache, segurança ou encriptação do site. Se esta instalação do WackoWiki opera atrás de um proxy reverso, essa configuração deve ser habilitada para que informações corretas de endereço IP sejam capturadas nos sistemas de gerenciamento de sessão do WackoWiki; se você não tiver certeza sobre essa configuração, não tenha um proxy reverso, ou WackoWiki opera em um ambiente de hospedagem compartilhada, esta configuração deve permanecer desativada.',
 	'ReverseProxyHeader'		=> 'Cabeçalho do proxy revertido:',
 	'ReverseProxyHeaderInfo'	=> 'Defina este valor se o seu servidor proxy enviar o IP do cliente em um cabeçalho
 									 ├├├├├├other than X-Forwarded-For. O cabeçalho "X-Forwarded-for" é uma lista de IPA delimitada por vírgulas

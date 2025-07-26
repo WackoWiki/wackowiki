@@ -575,6 +575,9 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Página %1 ilegível.',
 	'CloneCannotCreate'			=> 'Página %1 não criável.',
 
+	'CommentOffset'				=> 'Página do comentário',
+	'CommentOffsetFirst'		=> 'primeira página',
+	'CommentOffsetLast'			=> 'última página',
 	'SortComment'				=> 'Classificar comentários por',
 	'SortCommentAsc'			=> 'Mais recente no fundo',
 	'SortCommentDesc'			=> 'Mais recentes no topo',

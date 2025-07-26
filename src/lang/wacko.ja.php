@@ -575,6 +575,9 @@ $wacko_translation = [
 	'CloneCannotRead'			=> '%1 ページを読み込めません。',
 	'CloneCannotCreate'			=> '作成できないページ %1.',
 
+	'CommentOffset'				=> 'コメントページ',
+	'CommentOffsetFirst'		=> '最初のページ',
+	'CommentOffsetLast'			=> '最後のページ',
 	'SortComment'				=> 'コメントの並び替え',
 	'SortCommentAsc'			=> '最下部に最近表示',
 	'SortCommentDesc'			=> '最も新しい順',

@@ -575,6 +575,9 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Nečitelná stránka %1.',
 	'CloneCannotCreate'			=> 'Neodstranitelná stránka %1.',
 
+	'CommentOffset'				=> 'Stránka komentáře',
+	'CommentOffsetFirst'		=> 'první stránka',
+	'CommentOffsetLast'			=> 'poslední stránka',
 	'SortComment'				=> 'Seřadit komentáře podle',
 	'SortCommentAsc'			=> 'Nejnovější dole',
 	'SortCommentDesc'			=> 'Nejnovější nahoře',

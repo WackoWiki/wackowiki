@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sortowanie komentarzy:',
 	'SortingCommentsInfo'		=> 'Zmienia kolejność, w której komentarze strony są prezentowane, albo z najnowszym OR najstarszym komentarzem na górze.',
+	'CommentsOffset'			=> 'Strona komentarzy:',
+	'CommentsOffsetInfo'		=> 'Domyślne do wyświetlenia strony komentarzy',
 
 	'ToolbarSection'			=> 'Pasek narzędzi',
 	'CommentsPanel'				=> 'Panel komentarzy:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Odwrotne proxy',
 	'ReverseProxy'				=> 'Użyj odwrotnego proxy:',
-    'ReverseProxyInfo'			=> 
-    'Włącz to ustawienie, aby określić prawidłowy adres IP zdalnego klienta, analizując informacje z
+	'ReverseProxyInfo'			=> 'Włącz to ustawienie, aby określić prawidłowy adres IP zdalnego klienta, analizując informacje z
 									apisane w nagłówkach X-Forwarded-For. Nagłówki X-Forwarded-For są standardowym mechanizmem
 									identyfikacji systemów klienckich łączących się przez odwrotny serwer proxy, taki jak Squid lub Pound.
 									Odwrócone serwery proxy są często używane w celu zwiększenia wydajności często odwiedzanych witryn,

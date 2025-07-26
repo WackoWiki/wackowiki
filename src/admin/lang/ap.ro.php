@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Activează comentariile doar pentru vizitatori sau utilizatori înregistrați, sau dezactivează-le pe întregul site.',
 	'SortingComments'			=> 'Sortare comentarii:',
 	'SortingCommentsInfo'		=> 'Modifică ordinea comentariilor paginii sunt prezentate, fie cu cel mai recent SAU cel mai vechi comentariu din partea de sus.',
+	'CommentsOffset'			=> 'Pagina de comentarii:',
+	'CommentsOffsetInfo'		=> 'Pagină Comentarii de afișat în mod implicit',
 
 	'ToolbarSection'			=> 'Bară de instrumente',
 	'CommentsPanel'				=> 'Panou comentarii:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Inversează Proxy',
 	'ReverseProxy'				=> 'Folosește proxy invers:',
-    'ReverseProxyInfo'			=> 
-    'Activează această setare pentru a determina adresa IP corectă a clientului de la distanţă prin examinarea informaţiilor stocate în antetul X-Forwarded-For X-Forwarded-For headers sunt un mecanism standard pentru identificarea sistemelor client care se conectează printr-un server proxy invers, cum ar fi Squid sau Pound. Serverele proxy inverse sunt adesea utilizate pentru a îmbunătăți performanța site-urilor vizitate intens și pot oferi, de asemenea, beneficii pentru caching, securitate sau criptare pe alte site-uri. Dacă această instalație WackoWiki funcționează în spatele unui proxy invers această setare ar trebui activată astfel încât informațiile corecte despre adresa IP să fie captate în sistemele de gestionare, logare a sesiunilor, statistici și gestionare a accesului ale WackoWiki; dacă nu sunteți sigur de această setare, nu aveți un proxy invers, sau WackoWiki operează într-un mediu de găzduire comun, această setare ar trebui să rămână dezactivată.',
+	'ReverseProxyInfo'			=> 'Activează această setare pentru a determina adresa IP corectă a clientului de la distanţă prin examinarea informaţiilor stocate în antetul X-Forwarded-For X-Forwarded-For headers sunt un mecanism standard pentru identificarea sistemelor client care se conectează printr-un server proxy invers, cum ar fi Squid sau Pound. Serverele proxy inverse sunt adesea utilizate pentru a îmbunătăți performanța site-urilor vizitate intens și pot oferi, de asemenea, beneficii pentru caching, securitate sau criptare pe alte site-uri. Dacă această instalație WackoWiki funcționează în spatele unui proxy invers această setare ar trebui activată astfel încât informațiile corecte despre adresa IP să fie captate în sistemele de gestionare, logare a sesiunilor, statistici și gestionare a accesului ale WackoWiki; dacă nu sunteți sigur de această setare, nu aveți un proxy invers, sau WackoWiki operează într-un mediu de găzduire comun, această setare ar trebui să rămână dezactivată.',
 	'ReverseProxyHeader'		=> 'Inversează antetul proxy:',
 	'ReverseProxyHeaderInfo'	=> 'Setează această valoare în cazul în care serverul tău proxy trimite IP-ul clientului într-un antet de tip
 									 avut toate efectele, altele decât X-Forwarded-For. Antet "X-Forwarded-For" este o listă delimitată prin virgulă a IP-

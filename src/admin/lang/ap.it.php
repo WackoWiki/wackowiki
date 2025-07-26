@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Abilita i commenti solo per gli ospiti o gli utenti registrati, o disabilitarli su tutto il sito.',
 	'SortingComments'			=> 'Ordinamento commenti:',
 	'SortingCommentsInfo'		=> 'Modifica l\'ordine che i commenti della pagina sono presentati, sia con il più recente OR il più vecchio commento in alto.',
+	'CommentsOffset'			=> 'Pagina dei commenti:',
+	'CommentsOffsetInfo'		=> 'Pagina dei commenti da visualizzare come predefinita',
 
 	'ToolbarSection'			=> 'Barra Strumenti',
 	'CommentsPanel'				=> 'Pannello commenti:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Proxy Inverso',
 	'ReverseProxy'				=> 'Usa proxy inverso:',
-    'ReverseProxyInfo'			=> 
-    'Attivare questa impostazione per determinare l’indirizzo IP corretto del client remoto esaminando
+	'ReverseProxyInfo'			=> 'Attivare questa impostazione per determinare l’indirizzo IP corretto del client remoto esaminando
 									le informazioni memorizzate nelle intestazioni X-Forwarded-For. Le intestazioni X-Forwarded-For
 									sono un meccanismo standard per identificare i sistemi client che si connettono attraverso un
 									server proxy inverso, come Squid o Pound. I server proxy inversi sono spesso utilizzati per migliorare

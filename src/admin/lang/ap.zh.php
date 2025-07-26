@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> '仅对访客或注册用户启用评论，或在整个站点上禁用它们。',
 	'SortingComments'			=> '评论排序：',
 	'SortingCommentsInfo'		=> '更改页面评论的显示顺序，最新或最旧的评论位于顶部。',
+	'CommentsOffset'			=> '评论页面：',
+	'CommentsOffsetInfo'		=> '默认显示评论页面',
 
 	'ToolbarSection'			=> '工具栏',
 	'CommentsPanel'				=> '评论面板：',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> '反向代理',
 	'ReverseProxy'				=> '使用反向代理：',
-    'ReverseProxyInfo'			=> 
-    '启用此设置以确定远程的正确 IP 地址客户端通过检查存储在 X-Forwarded-For 标头中的信息。X-Forwarded-For 标头是识别客户端的标准机制通过反向代理服务器连接的系统，例如 Squid 或磅。 反向代理服务器通常用于增强性能访问量大的站点，还可能提供其他站点缓存，安全或加密的好处。 如果此 WackoWiki 安装运行在反向代理之后，应启用此设置，以便正确IP 地址信息在 WackoWiki 的会话管理中捕获，日志、统计和访问管理系统； 如果你不确定关于这个设置，没有反向代理，或者 WackoWiki 在共享主机环境，此设置应保持禁用状态。',
+	'ReverseProxyInfo'			=> '启用此设置以确定远程的正确 IP 地址客户端通过检查存储在 X-Forwarded-For 标头中的信息。X-Forwarded-For 标头是识别客户端的标准机制通过反向代理服务器连接的系统，例如 Squid 或磅。 反向代理服务器通常用于增强性能访问量大的站点，还可能提供其他站点缓存，安全或加密的好处。 如果此 WackoWiki 安装运行在反向代理之后，应启用此设置，以便正确IP 地址信息在 WackoWiki 的会话管理中捕获，日志、统计和访问管理系统； 如果你不确定关于这个设置，没有反向代理，或者 WackoWiki 在共享主机环境，此设置应保持禁用状态。',
 	'ReverseProxyHeader'		=> '反向代理标头：',
 	'ReverseProxyHeaderInfo'	=> '果您的代理服务器在 X-Forwarded-For 以外的标头中发送客户端 IP，请设置此值。 “X-Forwarded-For”标头是一个逗号+空格分隔的 IP 地址列表，仅使用最后一个（最左侧）。',
 	'ReverseProxyAddresses'		=> 'reverse_proxy 接受 IP 地址数组：',

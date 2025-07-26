@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Ativar os comentários apenas para convidados ou utilizadores registados ou desactivá-los em todo o sítio.',
 	'SortingComments'			=> 'Ordenar comentários:',
 	'SortingCommentsInfo'		=> 'Altera a ordem pela qual os comentários da página são apresentados, com o comentário mais recente OU o mais antigo no topo.',
+	'CommentsOffset'			=> 'Página de comentários:',
+	'CommentsOffsetInfo'		=> 'Página de comentários a mostrar por omissão',
 
 	'ToolbarSection'			=> 'Barra',
 	'CommentsPanel'				=> 'Painel de comentários.',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Proxy reverso',
 	'ReverseProxy'				=> 'Use Reverse proxy:',
-    'ReverseProxyInfo'			=> 
-    'Habilitar esta configuração para determinar o endereço IP correcto do cliente remoto,
+	'ReverseProxyInfo'			=> 'Habilitar esta configuração para determinar o endereço IP correcto do cliente remoto,
 									examinando a informação armazenada nos cabeçalhos do X-Forwarded-For. X-Forwarded-For headers
 									são um mecanismo padrão para identificar sistemas clientes que se ligam através de um servidor
 									proxy reverso, como o Squid ou o Pound. Os servidores proxy reversos são frequentemente utilizados

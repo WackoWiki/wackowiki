@@ -575,6 +575,9 @@ $wacko_translation = [
 	'CloneCannotRead'			=> '无法读取页面 %1。',
 	'CloneCannotCreate'			=> '无法创建页面 %1。',
 
+	'CommentOffset'				=> '评论页面',
+	'CommentOffsetFirst'		=> '首页',
+	'CommentOffsetLast'			=> '尾页',
 	'SortComment'				=> '按评论排序',
 	'SortCommentAsc'			=> '最近的在底部',
 	'SortCommentDesc'			=> '最近的在顶部',

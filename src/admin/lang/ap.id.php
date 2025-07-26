@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Aktifkan komentar hanya untuk pengguna anonim atau pengguna terdaftar, atau nonaktifkan komentar di seluruh situs.',
 	'SortingComments'			=> 'Menyortir komentar:',
 	'SortingCommentsInfo'		=> 'Mengubah urutan komentar halaman yang ditampilkan, baik dengan komentar terbaru atau komentar terlama di bagian atas.',
+	'CommentsOffset'			=> 'Comments page:',
+	'CommentsOffsetInfo'		=> 'Halaman komentar untuk ditampilkan secara otomatis',
 
 	'ToolbarSection'			=> 'Bilah alat',
 	'CommentsPanel'				=> 'Panel komentar:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
 	'ReverseProxy'				=> 'Use reverse proxy:',
-    'ReverseProxyInfo'			=> 
-    'Enable this setting to determine the correct IP address of the remote client by examining information stored in the X-Forwarded-For headers.  X-Forwarded-For headers are a standard mechanism for identifying client systems connecting through a reverse proxy server, such as Squid or Pound. Reverse proxy servers are often used to enhance the performance of heavily visited sites and may also provide other site caching, security or encryption benefits. If this WackoWiki installation operates behind a reverse proxy, this setting should be enabled so that correct IP address information is captured in WackoWiki\'s session management, logging, statistics and access management systems; if you are unsure about this setting, do not have a reverse proxy, or WackoWiki operates in a shared hosting environment, this setting should remain disabled.',
+	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote client by examining information stored in the X-Forwarded-For headers.  X-Forwarded-For headers are a standard mechanism for identifying client systems connecting through a reverse proxy server, such as Squid or Pound. Reverse proxy servers are often used to enhance the performance of heavily visited sites and may also provide other site caching, security or encryption benefits. If this WackoWiki installation operates behind a reverse proxy, this setting should be enabled so that correct IP address information is captured in WackoWiki\'s session management, logging, statistics and access management systems; if you are unsure about this setting, do not have a reverse proxy, or WackoWiki operates in a shared hosting environment, this setting should remain disabled.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header:',
 	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
 									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma-delimited list of IP

@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments:',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+	'CommentsOffset'			=> 'Comments page:',
+	'CommentsOffsetInfo'		=> 'Comments page to display by default',
 
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
 	'ReverseProxy'				=> 'Use Reverse proxy:',
-    'ReverseProxyInfo'			=> 
-    'Enable this setting to determine the correct IP address of the remote
+	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
 									 client by examining information stored in the X-Forwarded-For headers.
 									 X-Forwarded-For headers are a standard mechanism for identifying client
 									 systems connecting through a reverse proxy server, such as Squid or

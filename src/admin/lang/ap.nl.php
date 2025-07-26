@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Activeer reacties voor gasten of geregistreerde gebruikers alleen, of schakel deze uit op de hele site.',
 	'SortingComments'			=> 'Reacties sorteren:',
 	'SortingCommentsInfo'		=> 'Wijzigt de volgorde waarin de paginacommentaren worden gepresenteerd, ofwel met de meest recente of de oudste reactie aan de bovenkant.',
+	'CommentsOffset'			=> 'Reacties pagina:',
+	'CommentsOffsetInfo'		=> 'Reacties pagina om standaard te tonen',
 
 	'ToolbarSection'			=> 'Werkbalk',
 	'CommentsPanel'				=> 'Paneel opmerkingen:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Omgekeerde Proxy',
 	'ReverseProxy'				=> 'Omgekeerde proxy gebruiken:',
-    'ReverseProxyInfo'			=> 
-    'Schakel deze instelling in om het juiste IP adres van de remote client te bepalen door
+	'ReverseProxyInfo'			=> 'Schakel deze instelling in om het juiste IP adres van de remote client te bepalen door
 									de informatie opgeslagen in de X-Forwarded-For headers te onderzoeken. X-Forwarded-For headers
 									zijn een standaardmechanisme om cliëntsystemen te identificeren die verbinding maken via een
 									reverse proxyserver, zoals Squid of Pound. Reverse proxy servers worden vaak gebruikt om de prestatie

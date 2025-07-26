@@ -415,6 +415,7 @@ $wacko_translation = [
 	'RemoveComment'				=> '刪除回應',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepPurge'		=> 'Do not save a copy of the removed files, revisions and comments',
 	'RemoveDontKeepRevision'	=> 'Do not save a copy of the removed revision',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'RemoveDontKeepFile'		=> 'Do not save a copy of the removed file',
@@ -574,6 +575,9 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Unreadable page %1.',
 	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
+	'CommentOffset'				=> 'Comments page',
+	'CommentOffsetFirst'		=> '第一頁',
+	'CommentOffsetLast'			=> '最末頁',
 	'SortComment'				=> 'Sort comments by',
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',

@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Habilitar comentarios sólo para usuarios invitados o registrados o deshabilitarlos en todo el sitio.',
 	'SortingComments'			=> 'Ordenar comentarios:',
 	'SortingCommentsInfo'		=> 'Cambia el orden en que se presentan los comentarios de la página, ya sea con el comentario más reciente O el más antiguo en la parte superior.',
+	'CommentsOffset'			=> 'Página de comentarios:',
+	'CommentsOffsetInfo'		=> 'Página de comentarios a mostrar por defecto',
 
 	'ToolbarSection'			=> 'Barra de herramientas',
 	'CommentsPanel'				=> 'Panel de comentarios:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Proxy inverso',
 	'ReverseProxy'				=> 'Usar proxy inverso:',
-    'ReverseProxyInfo'			=> 
-    'Habilite esta configuración para determinar la dirección IP correcta del control remoto
+	'ReverseProxyInfo'			=> 'Habilite esta configuración para determinar la dirección IP correcta del control remoto
 									cliente examinando la información almacenada en los encabezados X-Fordered-For.
 									Los encabezados X-Fordered-For son un mecanismo estándar para identificar los sistemas cliente
 									que se conectan a través de un servidor proxy inverso, como Squid o Pound. Los servidores

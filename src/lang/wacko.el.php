@@ -575,6 +575,9 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Μη αναγνώσιμη σελίδα %1.',
 	'CloneCannotCreate'			=> 'Μη δημιουργήσιμη σελίδα %1.',
 
+	'CommentOffset'				=> 'Σελίδα σχολίων',
+	'CommentOffsetFirst'		=> 'πρώτη σελίδα',
+	'CommentOffsetLast'			=> 'τελευταία σελίδα',
 	'SortComment'				=> 'Ταξινόμηση σχολίων κατά',
 	'SortCommentAsc'			=> 'Πιο πρόσφατα στο κάτω μέρος',
 	'SortCommentDesc'			=> 'Τα πιο πρόσφατα στην κορυφή',

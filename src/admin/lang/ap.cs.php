@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Povolit komentáře pouze pro hosty nebo registrované uživatele nebo je zakázat na celém webu.',
 	'SortingComments'			=> 'Řazení komentářů:',
 	'SortingCommentsInfo'		=> 'Změní pořadí komentářů stránky, buď s nejnovějšími NEBO nejstaršími komentáři nahoře.',
+	'CommentsOffset'			=> 'Stránka komentáře:',
+	'CommentsOffsetInfo'		=> 'Zobrazení stránky s komentáři ve výchozím nastavení',
 
 	'ToolbarSection'			=> 'Panel nástrojů',
 	'CommentsPanel'				=> 'Panel pro poznámky:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverzní proxy',
 	'ReverseProxy'				=> 'Použít reverzní proxy:',
-    'ReverseProxyInfo'			=> 
-    'Povolte toto nastavení pro určení správné IP adresy vzdáleného klienta na základě zkoumání informací uložených v hlavičkách X-Forwarded-For headers. Hlavičky X-Forwarded-For jsou standardním mechanismem pro identifikaci klientských systémů spojujících přes reverzní proxy server, jako je Squid nebo Pound. Reverzní proxy servery jsou často využívány ke zlepšení výkonu silně navštívených stránek a mohou také poskytovat další výhody v mezipaměti stránek, zabezpečení nebo šifrování. Pokud tato instalace WackoWiki funguje za reverzním proxy, toto nastavení by mělo být povoleno tak, aby byly do systému řízení relací WackoWiki zachyceny správné informace IP adresy, logování, statistiky a správy přístupu; pokud si nejste jisti tímto nastavením, nemáte reverzní proxy nebo WackoWiki funguje ve sdíleném hostitelském prostředí, toto nastavení by mělo zůstat vypnuto.',
+	'ReverseProxyInfo'			=> 'Povolte toto nastavení pro určení správné IP adresy vzdáleného klienta na základě zkoumání informací uložených v hlavičkách X-Forwarded-For headers. Hlavičky X-Forwarded-For jsou standardním mechanismem pro identifikaci klientských systémů spojujících přes reverzní proxy server, jako je Squid nebo Pound. Reverzní proxy servery jsou často využívány ke zlepšení výkonu silně navštívených stránek a mohou také poskytovat další výhody v mezipaměti stránek, zabezpečení nebo šifrování. Pokud tato instalace WackoWiki funguje za reverzním proxy, toto nastavení by mělo být povoleno tak, aby byly do systému řízení relací WackoWiki zachyceny správné informace IP adresy, logování, statistiky a správy přístupu; pokud si nejste jisti tímto nastavením, nemáte reverzní proxy nebo WackoWiki funguje ve sdíleném hostitelském prostředí, toto nastavení by mělo zůstat vypnuto.',
 	'ReverseProxyHeader'		=> 'Reverzní proxy header:',
 	'ReverseProxyHeaderInfo'	=> 'Nastavte tuto hodnotu, pokud proxy server odešle klientovi IP adresu v záhlaví
 									 jiné než X-Forwarded-For. Hlavička "X-Forwarded-For" je čárkou oddělený seznam IP

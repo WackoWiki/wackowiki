@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Aktiver kommentarer for gjester eller registrerte brukere eller deaktiver dem på hele nettstedet.',
 	'SortingComments'			=> 'Sortering av kommentarer:',
 	'SortingCommentsInfo'		=> 'Endrer rekkefølgen på kommentarer til siden blir presentert, enten med den nyeste ELLER den eldste kommentaren øverst.',
+	'CommentsOffset'			=> 'Kommentarer side:',
+	'CommentsOffsetInfo'		=> 'Kommentarer siden som skal vises som standard',
 
 	'ToolbarSection'			=> 'Verktøylinje',
 	'CommentsPanel'				=> 'Panelet for kommentarer:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Revers proxy',
 	'ReverseProxy'				=> 'Bruk omvendt proxy:',
-    'ReverseProxyInfo'			=> 
-    'Aktiver denne innstillingen for å fastsette korrekt IP-adresse til fjernklienten ved å undersøke informasjon lagret i X-Forwarded-For overskrifter. X-Forwarded-For headere er en standardmekanisme for å identifisere klientsystemer som kobles til via en revers proxy-server, som firkant eller Pound. Reverser proxyservere blir ofte brukt til å forbedre ytelsen til tungt besøkte nettsteder og kan også gi andre tjenester som fungerer på nettstedet, sikkerhet eller kryptering. Hvis denne WackoWiki-installasjonen opererer bak en omvendt proxy, denne innstillingen bør aktiveres slik at korrekt IP-adresseinformasjon fanges opp i WackoWikis øktbehandling, logging, statistikk og tilgang til styringssystemer; hvis du er usikker på denne innstillingen, ikke har omvendt proxy, eller WackoWiki opererer i et felles hostingsmiljø, denne innstillingen bør forbli deaktivert.',
+	'ReverseProxyInfo'			=> 'Aktiver denne innstillingen for å fastsette korrekt IP-adresse til fjernklienten ved å undersøke informasjon lagret i X-Forwarded-For overskrifter. X-Forwarded-For headere er en standardmekanisme for å identifisere klientsystemer som kobles til via en revers proxy-server, som firkant eller Pound. Reverser proxyservere blir ofte brukt til å forbedre ytelsen til tungt besøkte nettsteder og kan også gi andre tjenester som fungerer på nettstedet, sikkerhet eller kryptering. Hvis denne WackoWiki-installasjonen opererer bak en omvendt proxy, denne innstillingen bør aktiveres slik at korrekt IP-adresseinformasjon fanges opp i WackoWikis øktbehandling, logging, statistikk og tilgang til styringssystemer; hvis du er usikker på denne innstillingen, ikke har omvendt proxy, eller WackoWiki opererer i et felles hostingsmiljø, denne innstillingen bør forbli deaktivert.',
 	'ReverseProxyHeader'		=> 'Revers proxy header:',
 	'ReverseProxyHeaderInfo'	=> 'Angi denne verdien hvis proxytjenen din sender klientens IP i en overskrift
 									 ⋅εεεεεεεεεε^ other than X-Forwarded-For. (Automatic Translation) Overskriften "X-Forwarded-For" er en kommaseparert liste over IP

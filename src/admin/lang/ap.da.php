@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Aktiver kun kommentarer for gæster eller registrerede brugere, eller deaktiver dem på hele webstedet.',
 	'SortingComments'			=> 'Sortering af kommentarer:',
 	'SortingCommentsInfo'		=> 'Ændrer rækkefølgen på siden kommentarerne er præsenteret, enten med den seneste ELLER den ældste kommentar øverst.',
+	'CommentsOffset'			=> 'Kommentarer side:',
+	'CommentsOffsetInfo'		=> 'Kommentarside skal vises som standard',
 
 	'ToolbarSection'			=> 'Værktøjslinje',
 	'CommentsPanel'				=> 'Kommentarer panel:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Omvendt Proxy',
 	'ReverseProxy'				=> 'Brug omvendt proxy:',
-    'ReverseProxyInfo'			=> 
-    'Aktiver denne indstilling for at bestemme den korrekte IP-adresse for fjernklienten
+	'ReverseProxyInfo'			=> 'Aktiver denne indstilling for at bestemme den korrekte IP-adresse for fjernklienten
 									ved at undersøge oplysninger, der er gemt i X-Forwarded-For-headerne. X-Forwarded-For-headere
 									er en standardmekanisme til identifikation af klientsystemer, der opretter forbindelse via en
 									reverse proxyserver, f.eks. Squid eller Pound. Reverse proxyservere bruges ofte til at forbedre

@@ -268,11 +268,11 @@ function admin_config_basic($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="sorting_comments"><strong><?php echo $engine->_t('CommentsOffset');?></strong><br>
+					<label for="comments_offset"><strong><?php echo $engine->_t('CommentsOffset');?></strong><br>
 					<small><?php echo $engine->_t('CommentsOffsetInfo');?></small></label>
 				</td>
 				<td>
-					<select id="sorting_comments" name="sorting_comments">
+					<select id="comments_offset" name="comments_offset">
 						<option value="0" <?php echo ($engine->db->comments_offset == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('CommentOffsetFirst');?></option>
 						<option value="1" <?php echo ($engine->db->comments_offset == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('CommentOffsetLast');?></option>
 					</select>
@@ -287,7 +287,7 @@ function admin_config_basic($engine, $module)
 					<small><?php echo $engine->_t('SortingCommentsInfo');?></small></label>
 				</td>
 				<td>
-					<select id="comments_offset" name="comments_offset">
+					<select id="sorting_comments" name="sorting_comments">
 						<option value="0" <?php echo ($engine->db->sorting_comments == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('SortCommentAsc');?></option>
 						<option value="1" <?php echo ($engine->db->sorting_comments == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('SortCommentDesc');?></option>
 					</select>

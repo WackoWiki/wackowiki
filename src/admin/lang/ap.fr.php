@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Activer les commentaires pour les utilisateurs invités ou enregistrés uniquement ou les désactiver sur l’ensemble du site.',
 	'SortingComments'			=> 'Tri des commentaires :',
 	'SortingCommentsInfo'		=> 'Modifie l’ordre dans lequel les commentaires de la page sont présentés, soit avec le commentaire le plus récent OU le plus ancien en haut.',
+	'CommentsOffset'			=> 'Page de commentaires:',
+	'CommentsOffsetInfo'		=> 'Page de commentaires à afficher par défaut',
 
 	'ToolbarSection'			=> 'Barre d’outils',
 	'CommentsPanel'				=> 'Panneau des commentaires :',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Proxy inverse',
 	'ReverseProxy'				=> 'Utiliser un proxy inverse :',
-    'ReverseProxyInfo'			=> 
-    'Activez ce paramètre pour déterminer l’adresse IP correcte du client distant en examinant
+	'ReverseProxyInfo'			=> 'Activez ce paramètre pour déterminer l’adresse IP correcte du client distant en examinant
 									les informations stockées dans les en-têtes X-Forwarded-For. Les en-têtes X-Forwarded-For sont
 									un mécanisme standard d’identification des systèmes clients se connectant via un serveur proxy inverse,
 									tel que Squid ou Pound. Les serveurs proxy inversés sont souvent utilisés pour améliorer

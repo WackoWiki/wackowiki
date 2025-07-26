@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Ota kommentit käyttöön vain vieraille tai rekisteröityneille käyttäjille tai poista ne käytöstä koko sivustolla.',
 	'SortingComments'			=> 'Lajittelu kommentit:',
 	'SortingCommentsInfo'		=> 'Muutokset tilauksen sivun kommentit on esitelty, joko uusimman TAI vanhin kommentti yläreunassa.',
+	'CommentsOffset'			=> 'Kommenttien sivu:',
+	'CommentsOffsetInfo'		=> 'Oletusarvoisesti näytettävä kommenttisivu',
 
 	'ToolbarSection'			=> 'Työkalupalkki',
 	'CommentsPanel'				=> 'Kommenttipaneeli:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Käänteinen Välityspalvelin',
 	'ReverseProxy'				=> 'Käytä käänteisvälitystä:',
-    'ReverseProxyInfo'			=> 
-    'Ota tämä asetus käyttöön määrittääksesi etäasiakkaan oikean IP-osoitteen tutkimalla X-Forwarded-For -otsikoihin tallennettuja tietoja. X-Forwarded-For headers on standardi mekanismi tunnistaa asiakasjärjestelmät yhdistämällä käänteinen välityspalvelin, kuten Squid tai Pound. Käänteisiä välityspalvelimet käytetään usein parantamaan suorituskykyä voimakkaasti vierailevien sivustojen ja voi myös tarjota muita sivuston välimuisti-, tietoturva- tai salausetuja. Jos tämä WackoWiki asennus toimii takana käänteinen välityspalvelin, tämän asetuksen tulisi olla käytössä niin, että oikeat IP-osoitteen tiedot tallennetaan WackoWikin istunnonhallintaan, lokiin, tilastoihin ja käyttöoikeuksien hallintajärjestelmiin; jos olet epävarma tästä asetuksesta, sinulla ei ole käänteistä välitystä, tai WackoWiki toimii jaetussa hosting-ympäristössä, tämä asetus olisi pidettävä poissa käytöstä.',
+	'ReverseProxyInfo'			=> 'Ota tämä asetus käyttöön määrittääksesi etäasiakkaan oikean IP-osoitteen tutkimalla X-Forwarded-For -otsikoihin tallennettuja tietoja. X-Forwarded-For headers on standardi mekanismi tunnistaa asiakasjärjestelmät yhdistämällä käänteinen välityspalvelin, kuten Squid tai Pound. Käänteisiä välityspalvelimet käytetään usein parantamaan suorituskykyä voimakkaasti vierailevien sivustojen ja voi myös tarjota muita sivuston välimuisti-, tietoturva- tai salausetuja. Jos tämä WackoWiki asennus toimii takana käänteinen välityspalvelin, tämän asetuksen tulisi olla käytössä niin, että oikeat IP-osoitteen tiedot tallennetaan WackoWikin istunnonhallintaan, lokiin, tilastoihin ja käyttöoikeuksien hallintajärjestelmiin; jos olet epävarma tästä asetuksesta, sinulla ei ole käänteistä välitystä, tai WackoWiki toimii jaetussa hosting-ympäristössä, tämä asetus olisi pidettävä poissa käytöstä.',
 	'ReverseProxyHeader'		=> 'Käänteinen välityspalvelimen otsake:',
 	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server send the client IP in a header
 									 ¶ \ \ \ \ \ \ other than X-Forwarded-For. The "X-Forwarded-For" header is a comma-delimited list of IP

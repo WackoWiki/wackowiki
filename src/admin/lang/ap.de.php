@@ -280,6 +280,8 @@ $ap_translation = [
 	'AllowCommentsInfo'			=> 'Aktivieren von Kommentaren für Gäste, registrierte Benutzer oder deaktivieren auf der gesamten Website.',
 	'SortingComments'			=> 'Kommentare sortieren:',
 	'SortingCommentsInfo'		=> 'Ändern der Reihenfolge, in der die Seitenkommentare angezeigt werden, entweder mit dem neuesten oder dem ältesten Kommentar oben.',
+	'CommentsOffset'			=> 'Kommentarseite:',
+	'CommentsOffsetInfo'		=> 'Standardmäßig anzuzeigende Kommentarseite',
 
 	'ToolbarSection'			=> 'Werkzeugleisten',
 	'CommentsPanel'				=> 'Kommentare:',
@@ -472,8 +474,7 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverse-Proxy',
 	'ReverseProxy'				=> 'Nutze Reverse-Proxy:',
-    'ReverseProxyInfo'			=> 
-    'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
+	'ReverseProxyInfo'			=> 'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
 									 Clients zu ermitteln, indem Sie die in den X-Forwarded-For-Headern
 									 gespeicherten Informationen untersuchen. X-Forwarded-For-Header sind ein
 									 Standardmechanismus zum Identifizieren von Client-Systemen, die über einen
