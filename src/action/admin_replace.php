@@ -267,7 +267,8 @@ $extract_context = function ($text, $target, $use_regex = false, $padding = 40) 
 	// get all indexes
 	if ($use_regex)
 	{
-		$target_str	= "/$target/Uu";
+		$target_q	= str_replace('/', "\\/", $target);
+		$target_str	= "/$target_q/Uu";
 	}
 	else
 	{
