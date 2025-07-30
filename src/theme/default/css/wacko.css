@@ -279,10 +279,10 @@ img.media-right,
 
 /* Quoted message on new email */
 
-.email1 {color: #800000;}
-.email2 {color: #808000;}
-.email-odd {color: #800000;}
-.email-even {color: #808000;}
+.email1		{color: #800000;}
+.email2		{color: #808000;}
+.email-odd	{color: #800000;}
+.email-even	{color: #808000;}
 
 /* Quotes: SYNTAX <[text]> */
 blockquote {
@@ -454,10 +454,10 @@ aside.wrapper {
 div.wrapper-content { padding: 10px 10px 25px 10px; }
 
 /* Important colored text: SYNTAX !!(red)text!! */
-.cl-red {color: #c00;}
-.cl-green {color: #008000;}
-.cl-blue {color: #00c;}
-.cl-yellow {color: #ff0;}
+.cl-red		{color: #c00;}
+.cl-green	{color: #008000;}
+.cl-blue	{color: #00c;}
+.cl-yellow	{color: #ff0;}
 
 /* Fixed width text: SYNTAX ##monospace## */
 code {
@@ -478,25 +478,22 @@ code {
 mark {background: #ffa;}
 
 /* Highlighted text: SYNTAX ??(green)text?? */
-.mark-yellow {background: #ff0;}
-.mark-green {background: #a0ffa4;}
-.mark-blue {background: #9ec6ff;}
-.mark-red {background: #ffbaba;}
+.mark-yellow	{background: #ff0;}
+.mark-green		{background: #a0ffa4;}
+.mark-blue		{background: #9ec6ff;}
+.mark-red		{background: #ffbaba;}
 
 /* InterWiki links: SYNTAX (HostPrefix:Term) */
 
 a.iw-bugs .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/report-bug.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a.iw-commit .icon,
 a.iw-revision .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/commit.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a.iw-source .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/repository.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 
 /* Wiki links: SYNTAX (prefix://) */
@@ -508,66 +505,57 @@ span.icon{
 	vertical-align: text-bottom;
 }
 
+a .icon {
+	padding-left: 17px;
+}
+
 a.external-link .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/web.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a.group-link .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/group.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a.user-link .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/user.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 
 a.file-link .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/file.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 
 a[href^="mailto:"] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/mail.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href^="xmpp:"] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/jabber.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 
 /* lockicon */
 a.acl-denied .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/locked.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 /* keyicon */
 a.acl-customsec .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/unlocked.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 
 /* mime */
 
 a[href $='.pdf'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/pdf.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.epub'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/epub.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.txt'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/text.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.diff'] .icon,
 a[href $='.patch'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/patch.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.odt'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/document.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.avif'] .icon,
 a[href $='.gif'] .icon,
@@ -579,11 +567,9 @@ a[href $='.jxl'] .icon,
 a[href $='.png'] .icon, 
 a[href $='.webp'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/image.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.rdf'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/xml.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 
 a[href $='.7z'] .icon,
@@ -595,20 +581,16 @@ a[href $='.tgz'] .icon,
 a[href $='.zip'] .icon,
 a[href $='.zst'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/archive.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.ods'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/spreadsheet.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.odp'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/presentation.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.odg'] .icon,
 a[href $='.svg'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/drawing.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.mp3'] .icon,
 a[href $='.m4a'] .icon,
@@ -616,13 +598,11 @@ a[href $='.oga'] .icon,
 a[href $='.ogg'] .icon,
 a[href $='.opus'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/audio.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 a[href $='.mp4'] .icon,
 a[href $='.ogv'] .icon,
 a[href $='.webm'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/video.svg') no-repeat scroll left center;
-	padding-left: 17px;
 }
 
 /* Callouts: SYNTAX %%(info type="warning" title="Warning")text%% */
