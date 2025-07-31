@@ -20,7 +20,8 @@ Options:
 	[page="PageName" or global=1 or all=1 or linked=1]
 	[order="ext|ext_desc|name_desc|size|size_desc|time|time_desc"]
 	[form=1]
-	[options=1]
+	[options=0|1]
+		1 - show sort & filter options
 	[owner="UserName"]
 	[media=1]
 	[max=Number]
