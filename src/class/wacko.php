@@ -3723,18 +3723,22 @@ class Wacko
 			}
 		}
 		// file link -> http://example.com/file.zip
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(7z|bz2|doc|exe|gz|odt|pdf|ppt|rar|rdf|rpm|tgz|xls|zip)$/u', $tag, $matches))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/u', $tag))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= match($matches[3])
-			{
-				'pdf'		=> $this->_t('PDFLink'),
-				'rdf'		=> $this->_t('RDFLink'),
-				default		=> $this->_t('FileLink'),
-			};
-			$icon	= $this->_t('Icon.Outer');
+			$title	= $this->_t('FileLink');
+			$icon	= $this->_t('OuterIcon');
 			$class	= '';
-			$tpl	= 'outerlink';
+			$tpl	= 'file';
+		}
+		// PDF link
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/u', $tag))
+		{
+			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
+			$title	= $this->_t('PDFLink');
+			$icon	= $this->_t('OuterIcon');
+			$class	= '';
+			$tpl	= 'file';
 		}
 		// external URL
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
