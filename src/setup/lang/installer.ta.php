@@ -37,12 +37,12 @@ $lang = [
 /*
    Generic Page Text
 */
-'TitleInstallation'				=> 'WackoWiki Installation',
+'TitleInstallation'				=> 'WackoWiki நிறுவல்',
 'TitleUpdate'					=> 'WackoWiki Update',
 'Continue'						=> 'தொடர்',
 'Back'							=> 'பின்னே',
 'Recommended'					=> 'recommended',
-'InvalidAction'					=> 'Invalid action',
+'InvalidAction'					=> 'செயல் தவறானது',
 
 /*
    Language Selection Page
@@ -92,10 +92,10 @@ $lang = [
 'MultiLangDesc'					=> 'Multilingual mode allows you to have pages with different language settings within a single installation. When this mode is enabled, the installer creates initial menu items for all languages available in the distribution.',
 'AllowedLang'					=> 'Allowed Languages',
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, otherwise all languages are selected.',
-'AclMode'							=> 'இயல்புநிலை ACL அமைப்புகள்',
-'AclModeDesc'							=> '',
-'PublicWiki'							=> 'பொது விக்கி (அனைவருக்கும் படிக்கவும், பதிவுசெய்யப்பட்ட பயனர்களுக்கு எழுதவும் கருத்து தெரிவிக்கவும்)',
-'PrivateWiki'							=> 'தனிப்பட்ட விக்கி (பதிவுசெய்யப்பட்ட பயனர்களுக்கு மட்டும் படிக்கவும், எழுதவும், கருத்து தெரிவிக்கவும்)',
+'AclMode'						=> 'இயல்புநிலை ACL அமைப்புகள்',
+'AclModeDesc'					=> '',
+'PublicWiki'					=> 'பொது விக்கி (அனைவருக்கும் படிக்கவும், பதிவுசெய்யப்பட்ட பயனர்களுக்கு எழுதவும் கருத்து தெரிவிக்கவும்)',
+'PrivateWiki'					=> 'தனிப்பட்ட விக்கி (பதிவுசெய்யப்பட்ட பயனர்களுக்கு மட்டும் படிக்கவும், எழுதவும், கருத்து தெரிவிக்கவும்)',
 'Admin'							=> 'Admin Name',
 'AdminDesc'						=> 'Enter the admin\'s username. This should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'NameAlphanumOnly'				=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters. Uppercase characters are OK.',
@@ -105,7 +105,7 @@ $lang = [
 'PasswordConfirm'				=> 'Repeat Password:',
 'Mail'							=> 'Admin Email Address',
 'MailDesc'						=> 'Enter the admin\'s email address.',
-'Base'							=> 'Base URL',
+'Base'							=> 'அடிப்படை முகவரி',
 'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
 'Rewrite'						=> 'Rewrite Mode',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
@@ -118,7 +118,7 @@ $lang = [
 /*
    Database Config Page
 */
-'config-database'				=> 'Database Configuration',
+'config-database'				=> 'தரவுத்தளம்',
 'DbDriver'						=> 'Driver',
 'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbSqlMode'						=> 'SQL mode',
@@ -139,7 +139,7 @@ $lang = [
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'கடவுச்சொல்',
 'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
-'Prefix'						=> 'Table Prefix',
+'Prefix'						=> 'அட்டவணை முன்னொட்டு',
 'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
@@ -150,7 +150,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'install-database'				=> 'Database Installation',
+'install-database'				=> 'தரவுத்தளத்தை நிறுவுதல்',
 'TestingConfiguration'			=> 'Testing Configuration',
 'TestConnectionString'			=> 'Testing database connection settings',
 'TestDatabaseExists'			=> 'Checking if the database you specified exists',
@@ -194,14 +194,14 @@ $lang = [
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Error deleting %1 table. The most likely reason is that the table does not exist, in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
-'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
+'NextStep'						=> 'அடுத்த கட்டத்தில், நிறுவல் நிரல் உள்ளமைவு கோப்பை எழுத முயற்சிக்கும், %1.  இந்த கோப்பில் எழுத வலை சேவையகத்திற்கு உரிமை உள்ளதா என்பதை உறுதிப்படுத்திக் கொள்ளுங்கள், இல்லையெனில் நீங்கள் அதை கைமுறையாக மாற்ற வேண்டும்.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 
 /*
    Write Config Page
 */
 'write-config'					=> 'Write Config File',
 'FinalStep'						=> 'Final Step',
-'Writing'						=> 'Writing Configuration File',
+'Writing'						=> 'உள்ளமைவு கோப்பை எழுதுதல்',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
 'InstallationComplete'			=> 'Installation Complete',
 'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
@@ -214,6 +214,6 @@ $lang = [
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
 'ConfigDescription'				=> 'detailed description: https://wackowiki.org/doc/Doc/English/Configuration',
-'TryAgain'						=> 'Try Again',
+'TryAgain'						=> 'மீண்டும் முயற்சி வெற்றி',
 
 ];
