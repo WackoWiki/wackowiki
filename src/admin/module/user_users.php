@@ -98,15 +98,15 @@ function admin_user_users($engine, $module)
 	if ($user_id)
 	{
 		$user = $engine->db->load_single(
-			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status, u.email_confirm " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = " . (int) $user_id . " " .
-				"AND u.account_type = 0 " .
-			"LIMIT 1");
+			'SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status, u.email_confirm ' .
+			'FROM ' . $prefix . 'user u ' .
+				'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
+			'WHERE u.user_id = ' . (int) $user_id . ' ' .
+				'AND u.account_type = 0 ' .
+			'LIMIT 1');
 	}
 
-	if (isset($_POST['create']) || isset($_POST['edit']))
+	if (isset($_POST['create']) || isset($_POST['edit']) || isset($_POST['reset_password']))
 	{
 		// passing vars from user input
 		$user_name		= $engine->sanitize_username(($_POST['user_name'] ?? ''));
@@ -137,7 +137,7 @@ function admin_user_users($engine, $module)
 		// confirmed password mismatch
 		else if ($conf_password != $password)
 		{
-			$error .= $engine->_t('PasswordsDidntMatch') . " ";
+			$error .= $engine->_t('PasswordsDidntMatch') . ' ';
 		}
 		// password complexity validation
 		else if ($complexity)
@@ -153,19 +153,19 @@ function admin_user_users($engine, $module)
 		else
 		{
 			$engine->db->sql_query(
-				"INSERT INTO " . $prefix . "user SET " .
-					"user_name			= " . $engine->db->q($user_name) . ", " .
-					"email				= " . $engine->db->q($email) . ", " .
-					"password			= " . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ", " .
-					"enabled			= " . (int) $enabled . ", " .
-					"signup_time		= UTC_TIMESTAMP()");
+				'INSERT INTO ' . $prefix . 'user SET ' .
+					'user_name			= ' . $engine->db->q($user_name) . ', ' .
+					'email				= ' . $engine->db->q($email) . ', ' .
+					'password			= ' . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ', ' .
+					'enabled			= ' . (int) $enabled . ', ' .
+					'signup_time		= UTC_TIMESTAMP()');
 
 			// get new user_id
 			$_user_id = $engine->db->load_single(
-				"SELECT user_id " .
-				"FROM " . $prefix . "user " .
-				"WHERE user_name = " . $engine->db->q($user_name) . " " .
-				"LIMIT 1");
+				'SELECT user_id ' .
+				'FROM ' . $prefix . 'user ' .
+				'WHERE user_name = ' . $engine->db->q($user_name) . ' ' .
+				'LIMIT 1');
 
 			// INSERT user settings
 			$engine->db->sql_query(
@@ -214,14 +214,6 @@ function admin_user_users($engine, $module)
 	// approve user processing
 	else if (isset($_POST['approve']) && $user_id)
 	{
-		$user = $engine->db->load_single(
-			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = " . (int) $user_id . " " .
-			"AND u.account_type = 0 " .
-			"LIMIT 1");
-
 		$engine->approve_user($user, $user['account_status']);
 		$engine->add_user_page($user['user_name'], $user['user_lang']);
 	}
@@ -252,24 +244,58 @@ function admin_user_users($engine, $module)
 			}
 
 			$engine->db->sql_query(
-				"UPDATE " . $prefix . "user SET " .
-					"user_name		= " . $engine->db->q($user_name) . ", " .
-					"email			= " . $engine->db->q($email) . ", " .
-					"real_name		= " . $engine->db->q($real_name) . ", " .
-					"enabled		= " . (int) $enabled . ", " .
-					"account_status	= " . (int) $_POST['account_status'] . " " .
-				"WHERE user_id		= " . (int) $user_id . " " .
-				"LIMIT 1");
+				'UPDATE ' . $prefix . 'user SET ' .
+					'user_name		= ' . $engine->db->q($user_name) . ', ' .
+					'email			= ' . $engine->db->q($email) . ', ' .
+					'real_name		= ' . $engine->db->q($real_name) . ', ' .
+					'enabled		= ' . (int) $enabled . ', ' .
+					'account_status	= ' . (int) $_POST['account_status'] . ' ' .
+				'WHERE user_id		= ' . (int) $user_id . ' ' .
+				'LIMIT 1');
 
 			$engine->db->sql_query(
-				"UPDATE " . $prefix . "user_setting SET " .
-					"user_lang		= " . $engine->db->q($user_lang) . ", " .
-					"theme			= " . $engine->db->q($theme) . " " .
-				"WHERE user_id		= " . (int) $user_id . " " .
-				"LIMIT 1");
+				'UPDATE ' . $prefix . 'user_setting SET ' .
+					'user_lang		= ' . $engine->db->q($user_lang) . ', ' .
+					'theme			= ' . $engine->db->q($theme) . ' ' .
+				'WHERE user_id		= ' . (int) $user_id . ' ' .
+				'LIMIT 1');
 
 			$engine->set_message($engine->_t('UsersUpdated'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogUserUpdated', SYSTEM_LANG), $user['user_name']));
+			$engine->http->redirect($engine->href('', '', ['user_id' => $user_id]));
+		}
+	}
+	// reset password processing
+	if ($action == 'reset_password' && $user_id && $user['user_name'])
+	{
+		// confirmed password mismatch
+		if ($conf_password != $password)
+		{
+			$error .= $engine->_t('PasswordsDidntMatch') . ' ';
+		}
+		// password complexity validation
+		else if ($complexity)
+		{
+			$error .= $complexity;
+		}
+
+		if ($error)
+		{
+			$engine->show_message($error, 'error');
+			$_POST['change']			= (int) $user_id;
+			$_POST['reset_password']	= 1;
+		}
+		else
+		{
+			$engine->db->sql_query(
+				'UPDATE ' . $prefix . 'user SET ' .
+					"change_password	= '', " .
+					'password			= ' . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ', ' .
+				'WHERE user_id			= ' . (int) $user_id . ' ' .
+				'LIMIT 1');
+
+			$engine->set_message($engine->_t('PasswordChanged'), 'success');
+			$engine->log(3, Ut::perc_replace($engine->_t('LogUserPasswordReset', SYSTEM_LANG), $user['user_name']));
 			$engine->http->redirect($engine->href('', '', ['user_id' => $user_id]));
 		}
 	}
@@ -296,30 +322,30 @@ function admin_user_users($engine, $module)
 				if ((int) $user_id)
 				{
 					$user = $engine->db->load_single(
-						"SELECT u.user_name " .
-						"FROM " . $prefix . "user u " .
-						"WHERE u.user_id = " . (int) $user_id . " " .
-							"AND u.account_type = 0 " .
-						"LIMIT 1");
+						'SELECT u.user_name ' .
+						'FROM ' . $prefix . 'user u ' .
+						'WHERE u.user_id = ' . (int) $user_id . ' ' .
+							'AND u.account_type = 0 ' .
+						'LIMIT 1');
 
 					$engine->db->sql_query(
-						"DELETE FROM " . $prefix . "user " .
-						"WHERE user_id = " . (int) $user_id);
+						'DELETE FROM ' . $prefix . 'user ' .
+						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						"DELETE FROM " . $prefix . "user_setting " .
-						"WHERE user_id = " . (int) $user_id);
+						'DELETE FROM ' . $prefix . 'user_setting ' .
+						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						"DELETE FROM " . $prefix . "usergroup_member " .
-						"WHERE user_id = " . (int) $user_id);
+						'DELETE FROM ' . $prefix . 'usergroup_member ' .
+						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						"DELETE FROM " . $prefix . "menu " .
-						"WHERE user_id = " . (int) $user_id);
+						'DELETE FROM ' . $prefix . 'menu ' .
+						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						"DELETE FROM " . $prefix . "watch " .
-						"WHERE user_id = " . (int) $user_id);
+						'DELETE FROM ' . $prefix . 'watch ' .
+						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						"DELETE FROM " . $prefix . "auth_token " .
-						"WHERE user_id = " . (int) $user_id);
+						'DELETE FROM ' . $prefix . 'auth_token ' .
+						'WHERE user_id = ' . (int) $user_id);
 
 					// remove user space
 					$user_space = $engine->db->users_page . '/' . $user['user_name'];
@@ -336,11 +362,11 @@ function admin_user_users($engine, $module)
 					$engine->remove_revisions			($user_space, true);
 
 					$engine->db->sql_query(
-						"DELETE FROM " . $prefix . "page " .
-						"WHERE tag = " . $engine->db->q($user_space) . " " .
-							"OR tag LIKE " . $engine->db->q($user_space . '/%') . " " .
+						'DELETE FROM ' . $prefix . 'page ' .
+						'WHERE tag = ' . $engine->db->q($user_space) . ' ' .
+							'OR tag LIKE ' . $engine->db->q($user_space . '/%') . ' ' .
 							#"AND owner_id = " . (int) $user_id . " " .
-						"");
+						'');
 
 					$engine->config->invalidate_config_cache();
 					$engine->show_message(Ut::perc_replace($engine->_t('UsersDeleted'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>'), 'success');
@@ -448,125 +474,162 @@ function admin_user_users($engine, $module)
 		echo $engine->form_close();
 	}
 	// edit user form
-	else if (isset($_POST['edit']) && $user_id)
+	else if (isset($_POST['edit']) && $user_id && $user['user_name'])
 	{
-		if ($user = $engine->db->load_single(
-			"SELECT u.user_name, u.real_name, u.email, s.user_lang, s.theme, u.enabled, u.account_status " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = " . (int) $user_id . " " .
-				"AND u.account_type = 0 " .
-			"LIMIT 1"))
-		{
-			echo $engine->form_open('edit_user');
+		echo $engine->form_open('edit_user');
 
-			echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">
-				<table class="formation lined">
-				<tr>
-					<th class="label">
-						<label for="user_name">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
-					</th>
-					<td>
-						<input type="text" id="user_name" name="user_name" value="' . Ut::html(($user_name ?: $user['user_name'])) . '" pattern="' . $engine::PATTERN['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
-					</td>
-				</tr>
-				<tr>
-					<th class="label">
-						<label for="newrealname">' . $engine->_t('RealName') . '</label>
-					</th>
-					<td>
-						<input type="text" id="realname" name="realname" value="' . Ut::html(($real_name ?: $user['real_name'])) . '" size="50" maxlength="100">
-					</td>
-				</tr>
-				<tr>
-					<th class="label">
-						<label for="newemail">' . $engine->_t('Email') . '</label>
-					</th>
-					<td>
-						<input type="email" id="email" name="email" value="' . Ut::html(($email ?: $user['email'])) . '" size="50" maxlength="100">
-					</td>
-				</tr>
-				<tr>
-					<th class="label">
-						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
-					</th>
-					<td>
-						<select id="user_lang" name="user_lang">
-							<option value=""></option>';
+		echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">
+			<table class="formation lined">
+			<tr>
+				<th class="label">
+					<label for="user_name">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
+				</th>
+				<td>
+					<input type="text" id="user_name" name="user_name" value="' . Ut::html(($user_name ?: $user['user_name'])) . '" pattern="' . $engine::PATTERN['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="newrealname">' . $engine->_t('RealName') . '</label>
+				</th>
+				<td>
+					<input type="text" id="realname" name="realname" value="' . Ut::html(($real_name ?: $user['real_name'])) . '" size="50" maxlength="100">
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="newemail">' . $engine->_t('Email') . '</label>
+				</th>
+				<td>
+					<input type="email" id="email" name="email" value="' . Ut::html(($email ?: $user['email'])) . '" size="50" maxlength="100">
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
+				</th>
+				<td>
+					<select id="user_lang" name="user_lang">
+						<option value=""></option>';
 
-						$languages = $engine->_t('LanguageArray');
+					$languages = $engine->_t('LanguageArray');
 
-						if ($langs = $engine->http->available_languages())
+					if ($langs = $engine->http->available_languages())
+					{
+						foreach ($langs as $lang)
 						{
-							foreach ($langs as $lang)
-							{
-								echo '<option value="' . $lang . '" ' . ($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
-							}
+							echo '<option value="' . $lang . '" ' . ($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
 						}
+					}
 
-					echo '</select>
-					</td>
-				</tr>
-				<tr>
-					<th class="label">
-						<label for="theme">' . $engine->_t('ChooseTheme') . '</label>
-					</th>
-					<td>
-						<select id="theme" name="theme">';
+				echo '</select>
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="theme">' . $engine->_t('ChooseTheme') . '</label>
+				</th>
+				<td>
+					<select id="theme" name="theme">';
 
-						$themes = $engine->available_themes();
+					$themes = $engine->available_themes();
 
-						foreach ($themes as $theme)
-						{
-							echo '<option value="' . $theme . '" ' . ($user['theme'] == $theme ? 'selected' : '') . '>' . $theme . '</option>';
-						}
+					foreach ($themes as $theme)
+					{
+						echo '<option value="' . $theme . '" ' . ($user['theme'] == $theme ? 'selected' : '') . '>' . $theme . '</option>';
+					}
 
-					echo '</select>
-					</td>
-				</tr>
-				<tr>
-					<th class="label">
-						<label for="enabled">' . $engine->_t('Enabled') . '</label>
-					</th>
-					<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (isset($enabled) || $user['enabled'] == 1  ? ' checked' : '') . '>
-					</td>
-				</tr>
-				<tr>
-					<th class="label">
-						<label for="account_status">' . $engine->_t('AccountStatus') . '</label>
-					</th>
-					<td>
-						<select id="account_status" name="account_status">';
+				echo '</select>
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="enabled">' . $engine->_t('Enabled') . '</label>
+				</th>
+				<td>
+					<input type="checkbox" id="enabled" name="enabled" value="1" ' . (isset($enabled) || $user['enabled'] == 1  ? ' checked' : '') . '>
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="account_status">' . $engine->_t('AccountStatus') . '</label>
+				</th>
+				<td>
+					<select id="account_status" name="account_status">';
 
-						$account_status = $engine->_t('AccountStatusArray');
+					$account_status = $engine->_t('AccountStatusArray');
 
-						foreach ($account_status as $offset => $status)
-						{
-							echo '<option value="' . $offset . '" ' .
-								(isset($user['account_status']) && $user['account_status'] == $offset
-									? 'selected '
-									: '') .
-								'>' . $status . "</option>\n";
-						}
+					foreach ($account_status as $offset => $status)
+					{
+						echo '<option value="' . $offset . '" ' .
+							(isset($user['account_status']) && $user['account_status'] == $offset
+								? 'selected '
+								: '') .
+							'>' . $status . "</option>\n";
+					}
 
-					echo '</select>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br>
-						<small>' . $engine->_t('UsersRenameInfo') . '</small>
-						<br><br>
-						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button>
-						<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
-					</td>
-				</tr>
-			</table>
-			<br>';
+				echo '</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<br>
+					<small>' . $engine->_t('UsersRenameInfo') . '</small>
+					<br><br>
+					<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button>
+					<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+				</td>
+			</tr>
+		</table>
+		<br>';
 
-			echo $engine->form_close();
-		}
+		echo $engine->form_close();
+
+	}
+	// reset user password form
+	else if (isset($_POST['reset_password']) && $user_id && $user['user_name'])
+	{
+		echo '<h2>' . $engine->_t('YouWantChangePassword') . '</h2>';
+		echo $engine->form_open('reset_password');
+
+		echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">
+			<table class="formation lined">
+			<tr>
+				<th class="label">
+					<label for="user_name">' . $engine->_t('UsersName') . '</label>
+				</th>
+				<td>
+					<span>' . Ut::html(($user['user_name'])) . '</span>
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="password">' . $engine->_t('Password') . '</label>
+				</th>
+				<td>
+					<input type="password" id="password" name="password" size="24" minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html($password) . '" autocomplete="off" required>
+				</td>
+			</tr>
+			<tr>
+				<th class="label">
+					<label for="conf_password">' . $engine->_t('ConfirmPassword') . '</label>
+				</th>
+				<td>
+					<input type="password" id="conf_password" name="conf_password" size="24"  minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html($conf_password) . '" autocomplete="off" required>
+					<p>' . $engine->show_password_complexity() . '</p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<br><br>
+					<button type="submit" id="submit" name="reset_password">' . $engine->_t('ChangePasswordButton') . '</button>
+					<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+				</td>
+			</tr>
+		</table>
+		<br>';
+
+		echo $engine->form_close();
 	}
 	// delete user form
 	else if (isset($_POST['remove']) && (isset($user_id) || $set))
@@ -591,10 +654,10 @@ function admin_user_users($engine, $module)
 				}
 
 				if ($user = $engine->db->load_single(
-					"SELECT user_name
-					FROM " . $prefix . "user
-					WHERE user_id = " . (int) $user_id . "
-					LIMIT 1"))
+					'SELECT user_name
+					FROM ' . $prefix . 'user
+					WHERE user_id = ' . (int) $user_id . '
+					LIMIT 1'))
 				{
 					$users	.= '<code>' . Ut::html($user['user_name']) . '</code>';
 				}
@@ -622,7 +685,7 @@ function admin_user_users($engine, $module)
 	// get user
 	else if (isset($_GET['user_id']))
 	{
-		echo '<h2>' . $user['user_name'] . "</h2>";
+		echo '<h2>' . $user['user_name'] . '</h2>';
 
 		// user data
 		$status = $engine->_t('AccountStatusArray');
@@ -680,6 +743,7 @@ function admin_user_users($engine, $module)
 		/////////////////////////////////////////////
 
 		echo '<br><button type="submit" id="button" name="edit">' . $engine->_t('EditButton') . '</button> ';
+		echo '<button type="submit" id="button" name="reset_password">' . $engine->_t('ChangePasswordButton') . '</button> ';
 		echo '<button type="submit" id="button" name="remove" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ';
 		echo '<a href="' . $engine->href() . '" class="cancel" ><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>';
 		echo $engine->form_close();
@@ -689,7 +753,7 @@ function admin_user_users($engine, $module)
 		// defining WHERE and ORDER clauses
 		if (!empty($_GET['user']) && mb_strlen($_GET['user']) > 2)
 		{
-			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . trim($_GET['user']) . '%') . " ";
+			$where				= 'WHERE user_name LIKE ' . $engine->db->q('%' . trim($_GET['user']) . '%') . ' ';
 		}
 
 		// set signuptime ordering
@@ -808,13 +872,13 @@ function admin_user_users($engine, $module)
 		// filter by account_status
 		if (isset($_GET['account_status']))
 		{
-			$where				= "WHERE u.account_status = " . (int) $_GET['account_status'] . " ";
+			$where				= 'WHERE u.account_status = ' . (int) $_GET['account_status'] . ' ';
 		}
 
 		// filter by lang
 		if (isset($_GET['user_lang']))
 		{
-			$where				= "WHERE s.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
+			$where				= 'WHERE s.user_lang = ' . $engine->db->q($_GET['user_lang']) . ' ';
 		}
 
 		// entries to display
@@ -824,9 +888,9 @@ function admin_user_users($engine, $module)
 
 		// collecting data
 		$count = $engine->db->load_single(
-			"SELECT COUNT(user_name) AS n " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			'SELECT COUNT(user_name) AS n ' .
+			'FROM ' . $prefix . 'user u ' .
+				'LEFT JOIN ' . $prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
 			($where ?: '')
 			);
 

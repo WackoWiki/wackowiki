@@ -138,6 +138,9 @@
 		[ ' // usertrail ' ]
 	</nav>
 	[ === #------------------------------ === ]
+	<nav class="totop-button">
+		<a class="chevron-up" href="#top"></a>
+	</nav>
 </header>
 
 <main>
