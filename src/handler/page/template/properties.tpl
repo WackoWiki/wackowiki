@@ -135,7 +135,7 @@
 								<textarea id="keywords" name="keywords" class="cols-50" rows="4" cols="50" maxlength="250">[ ' page.keywords | e ' ]</textarea>
 								[= categories _ =
 									<br>
-									['' html '']
+									[ '' html '' ]
 								=]
 							</td>
 						</tr>

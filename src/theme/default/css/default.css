@@ -5,20 +5,25 @@
 
 	--ww-a-active: #ff0000;
 	--ww-a-hover: #b90022;
-	--ww-a-normal: #003399;
-	--ww-a-target-bg: #ffeeee;
-	--ww-a-visited: #990000;
+	--ww-a-normal: #039;
+	--ww-a-target-bg: #fee;
+	--ww-a-visited: #900;
 
 	--ww-acl-public: #008000;
-	--ww-acl-registered: #003399;
+	--ww-acl-registered: #039;
 	--ww-acl-custom: #ff8a00;
 	--ww-acl-private: #ff0000;
 
-	--ww-hover-primary: #ccffcc;
+	--ww-hover-primary: #cfc;
 	--ww-hover-secondary: #e7f9ff;
 
+	--ww-buttonface: rgb(233, 233, 237);
+	--ww-buttonhighlight: rgb(255, 255, 255);
+	--ww-buttonshadow: rgb(160, 160, 160);
+	--ww-buttontext: rgb(0, 0, 0);
+
 	--ww-font-color: #000;
-	--ww-font-size: 14px;
+	--ww-font-size: 0.875rem;
 	--ww-font-serif: "Times New Roman", Times, serif;
 	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
 	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
@@ -39,7 +44,7 @@ textarea {
 ol:lang(fa) li {
 	list-style-type: persian;
 }
-ol:lang(hi) li  {
+ol:lang(hi) li {
 	list-style-type: devanagari;
 }
 
@@ -47,7 +52,6 @@ ol:lang(hi) li  {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-	
 }
 /* cellpadding */
 th,
@@ -61,7 +65,7 @@ label {
 
 /* Textareas */
 select,
-textarea, 
+textarea,
 input:not([type]),
 input[type="text"],
 input[type="password"],
@@ -100,7 +104,6 @@ input[type=email]:focus,
 input[type=password]:focus,
 textarea:focus {
 	border: 1px solid #3daee9;
-	/* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6); */
 }
 
 input[type=checkbox],
@@ -230,8 +233,7 @@ a:target {
 }
 
 header h1 > a.edit-section,
-.heading > a.edit-section
-{
+.heading > a.edit-section {
 	visibility: hidden;
 }
 header h1:hover > a.edit-section,
@@ -286,7 +288,7 @@ form input.submitinput {
 #header-site h1,
 #header-site a,
 #header-site a:visited {
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-weight: normal;
 	color: #444;
 	text-decoration: none;
@@ -304,14 +306,14 @@ form input.submitinput {
 
 .print {
 	font-family: var(--ww-font-sans-serif);
-	font-size: 12px;
+	font-size: 0.75rem;
 }
 
 /** message boxes ************************************************************/
 .msg {
 	position: relative;
 	margin: .6rem 0;
-	padding: .625rem 2.5rem .625rem;
+	padding: .625rem 2.5rem;
 	overflow: auto;
 }
 .msg::before {
@@ -336,7 +338,7 @@ form input.submitinput {
 
 .error {
 	background: #f8d4cc;
-	color: #cc3333;
+	color: #c33;
 	font-weight: bold;
 }
 .error::after {
@@ -363,7 +365,7 @@ form input.submitinput {
 .revision-info {
 	background: #f4fbff;
 	border: 1px solid #d5d9e6;
-	color: #cc3333;
+	color: #c33;
 	font-weight: bold;
 }
 .msg.revision-info::after {
@@ -378,7 +380,7 @@ form input.submitinput {
 .note {
 	background: #f4fbff;
 	border: 1px solid #d5d9e6;
-	color: #cc3333;
+	color: #c33;
 	font-weight: bold;
 }
 .msg.note::after {
@@ -387,7 +389,7 @@ form input.submitinput {
 
 .notice {
 	background-color: #ffffef;
-	border: 1px dotted #ddddaa;
+	border: 1px dotted #dda;
 }
 .msg.notice::after {
 	content: url('./../icon/info.svg') " ";
@@ -435,7 +437,7 @@ form input.submitinput {
 
 /* Debugging information */
 #debug {
-	padding: 0 20px 20px 20px;
+	padding: 0 20px 20px;
 	float: left;
 }
 [dir=rtl] #debug {
@@ -444,7 +446,7 @@ form input.submitinput {
 .debug,
 #debug li,
 #debug pre {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #888;
 }
 
@@ -459,13 +461,13 @@ form input.submitinput {
 	background-color: #131313;
 	color: #fff;
 	border-radius: 6px;
-	padding: 7px 7px 7px 7px;
+	padding: 7px;
 
 	/* Position the tooltip */
 	position: absolute;
 	z-index: 1;
-	top: +30px;
-	left: +100px;
+	top: 30px;
+	left: 100px;
 }
 
 .sqllog:hover {
@@ -524,7 +526,7 @@ article header {
 
 @media (min-width: 700px) {
 	#mainwrapper {
-	width: 980px;
+		width: 980px;
 	}
 }
 
@@ -541,8 +543,7 @@ main {
 article,
 #section-content,
 #page-show,
-#page-edit
-{
+#page-edit {
 	float: left;
 	width: 100%;
 }
@@ -557,7 +558,7 @@ article,
 
 #section-content,
 #page {
-	padding: 5px 0 20px 0;
+	padding: 5px 0 20px;
 }
 
 #page-edit {
@@ -605,7 +606,7 @@ footer {
 }
 
 .page-meta {
-	margin: 0 auto 0;
+	margin: 0 auto;
 	overflow: hidden;
 }
 
@@ -620,7 +621,7 @@ footer {
 	float: left;
 	line-height: 1.2em;
 	margin: 0 .5em 0 -.5em;
-	padding: 0 .5em 0 .5em;
+	padding: 0 .5em;
 	white-space: nowrap;
 }
 [dir="rtl"] .page-meta li {
@@ -634,7 +635,7 @@ footer {
 }
 
 .page-properties {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #aaa;
 	text-align: right;
 	float: right;
@@ -651,7 +652,7 @@ footer {
 }
 .page-properties a {
 	color: #aaa;
-	font-size: 11px;
+	font-size: 0.6875rem;
 }
 
 /** File and comment-related *************************************************/
@@ -735,7 +736,7 @@ ol#comments ul ul ul {
 /* Comment author and date */
 .comment-meta {
 	color: #aaa;
-	padding-bottom: 20px;
+	padding: 10px;
 	float: right;
 }
 [dir=rtl] .comment-meta {
@@ -762,7 +763,7 @@ ol#comments ul ul ul {
 	width: 800px;
 }
 
-.comment-text footer{
+.comment-text footer {
 	width: 100%;
 }
 
@@ -808,7 +809,7 @@ ol#comments ul ul ul {
 }
 
 #credits {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #aaa;
 	text-align: right;
 	padding: 5px 20px 0;
@@ -834,7 +835,7 @@ ol#comments ul ul ul {
 	list-style: none;
 }
 #credits li {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	margin-right: 20px;
 	float: left;
 }
@@ -847,10 +848,10 @@ ol#comments ul ul ul {
 
 .include-meta {
 	text-align: right;
-	font-size: 11px;
+	font-size: 0.6875rem;
 }
 
-/* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
+/* Outgoing hyperlinks: SYNTAX ((https://slashdot.org nerds)) */
 .outerlink {
 	color: #990000;
 }
@@ -868,16 +869,14 @@ ol#comments ul ul ul {
 [dir="rtl"] .search input {
 	padding: 0 2px 0 25px;
 }
-.search button
-{
+.search button {
 	height: 30px;
 	padding: 1px 6px 4px;
-	border-width: 0px;
+	border-width: 0;
 	background-color: transparent;
 	margin-left: -30px;
 }
-[dir=rtl] .search button
-{
+[dir=rtl] .search button {
 	margin: 0 -30px 0 0;
 }
 .search button img {
@@ -917,8 +916,7 @@ a.btn-link {
 	width: 100%;
 }
 
-.tbl-fixed
-{
+.tbl-fixed {
 	table-layout: fixed;
 }
 
@@ -926,7 +924,7 @@ a.btn-link {
 	background: var(--ww-hover-primary);
 }
 
-.file th{
+.file th {
 	color: #444;
 	font-weight: normal;
 	text-align: left;
@@ -935,7 +933,7 @@ a.btn-link {
 
 .file td,
 .file th {
-	padding: 2px 5px 2px 5px;
+	padding: 2px 5px;
 	vertical-align: top;
 }
 
@@ -995,20 +993,19 @@ td.file- {
 	text-align: left;
 	width: 130px;
 }
-[dir=rtl] .filemeta th{
+[dir=rtl] .filemeta th {
 	text-align: right;
 }
 
 .filemeta td,
 .filemeta th {
-	padding: 2px 5px 2px 5px;
+	padding: 2px 5px;
 	vertical-align: top;
 }
 
 .filemeta li {
 	list-style-type: none;
 	padding-bottom: 5px;
-	/* text-align: left; */
 	overflow-wrap: break-word;
 }
 
@@ -1039,9 +1036,9 @@ td.file- {
 }
 
 /* caption */
-.caption{
+.caption {
 	color: #1d1d1d;
-	font-size: 12px;
+	font-size: 0.75rem;
 }
 
 .caption-license {
@@ -1060,7 +1057,7 @@ td.file- {
 p.preview {
 	color: red;
 	font-weight: bold;
-	margin: -1.5em 0 10px 0;
+	margin: -1.5em 0 10px;
 	padding: 0;
 	border: 0;
 }
@@ -1085,7 +1082,7 @@ p.preview {
 
 .layout-box > p {
 	background: transparent;
-	margin: -1.5em 0 10px 0;
+	margin: -1.5em 0 10px;
 	padding: 0;
 	border: 0;
 }
@@ -1129,7 +1126,7 @@ a:target {
 #buttons_1 {
 	clear: none;
 	float: left;
-	padding: 0 0 0 0;
+	padding: 0;
 }
 [dir=rtl] #buttons_1 {
 	float: right;
@@ -1146,37 +1143,37 @@ a:target {
 }
 
 .toolbar li {
-	background: buttonface;
+	background: var(--ww-buttonface);
 }
 
 .toolbar .btn-,
 .toolbar .btn-hover,
 .toolbar .btn-active,
 .toolbar .btn-pressed {
-	background: buttonface;
-	color: ButtonText;
-	border: 1px solid buttonface;
+	background: var(--ww-buttonface);
+	color: var(--ww-buttontext);
+	border: 1px solid var(--ww-buttonface);
 	padding: 1px;
 	margin: 0;
 	cursor: pointer;
 }
 
 .toolbar .btn-hover {
-	border-color: buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	border-color: var(--ww-buttonhighlight) var(--ww-buttonshadow) var(--ww-buttonshadow) var(--ww-buttonhighlight);
 }
 
 .toolbar .btn-active,
 .toolbar .btn-pressed {
-	border-color: buttonshadow buttonhighlight buttonhighlight buttonshadow;
+	border-color: var(--ww-buttonshadow) var(--ww-buttonhighlight) var(--ww-buttonhighlight) var(--ww-buttonshadow);
 }
 
 .toolbar .btn-pressed {
-	background: buttonhighlight;
+	background: var(--ww-buttonhighlight);
 }
 
 .toolbar .btn-separator {
-	border-left: 1px solid buttonshadow;
-	border-right: 1px solid buttonhighlight;
+	border-left: 1px solid var(--ww-buttonshadow);
+	border-right: 1px solid var(--ww-buttonhighlight);
 	height: 20px;
 	margin: 3px;
 	padding: 0;
@@ -1294,8 +1291,8 @@ a:target {
 }
 	/* WikiEdit Autocomplete --------------------------------- */
 .autocomplete-inplace {
-	background: buttonface;
-	border: 1px solid buttonshadow;
+	background: var(--ww-buttonface);
+	border: 1px solid var(--ww-buttonshadow);
 	padding: 2px;
 	font: 12px var(--ww-font-sans-serif);
 }
@@ -1420,7 +1417,7 @@ a:target {
 }
 
 .feed-note {
-	font-size: 11px;
+	font-size: 0.6875rem;
 	color: #777;
 }
 
@@ -1436,11 +1433,11 @@ a:target {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background: transparent no-repeat 0 1px;
 	padding-left: 0;
-	font-size: 16px;
+	font-size: 1rem;
 }
 
 .feed h2 {
-	font-size: 14px;
+	font-size: 0.875rem;
 	border-bottom: none;
 }
 
@@ -1475,7 +1472,7 @@ table.gallery {
 	caption-side: bottom;
 }
 
-/*Handlers --------------------------------------------------*/
+/* Handlers --------------------------------------------------*/
 
 /* languages */
 
@@ -1567,7 +1564,7 @@ table.gallery {
 }
 
 #search-box {
-	margin: 0 auto 0;
+	margin: 0 auto;
 	overflow: hidden;
 	float: right;
 	text-align: left;
@@ -1576,7 +1573,7 @@ table.gallery {
 }
 
 #header-site {
-	margin: 0 auto 0;
+	margin: 0 auto;
 	overflow: hidden;
 	float: left;
 	text-align: left;
@@ -1589,8 +1586,8 @@ table.gallery {
 }
 
 #login-box {
-	font-size: 12px;
-	margin: 0 auto 0;
+	font-size: 0.75rem;
+	margin: 0 auto;
 	overflow: hidden;
 	float: right;
 	text-align: left;
@@ -1616,7 +1613,7 @@ table.gallery {
 	float: left;
 	line-height: 1.2em;
 	margin: 0 .5em 0 -.5em;
-	padding: 0 .5em 0 .5em;
+	padding: 0 .5em;
 	white-space: nowrap;
 }
 
@@ -1664,7 +1661,7 @@ table.gallery {
 
 /*search*/
 .highlight {
-	background-color: #ffffaa;
+	background-color: #ffa;
 	font-style: normal;
 	font-weight: bold;
 }
@@ -1678,7 +1675,7 @@ table.gallery {
 }
 
 #search-results h3 {
-	font-size: 14px;
+	font-size: 0.875rem;
 	border-bottom: 0 none;
 }
 
@@ -1758,7 +1755,7 @@ tr.lined:hover {
 }
 .sidebar {
 	float: right;
-	padding: 0 10px 10px 10px;
+	padding: 0 10px 10px;
 }
 [dir="rtl"] .sidebar {
 	float: left;
@@ -1816,7 +1813,7 @@ article.newsarticle:hover {
 }
 
 .news-title {
-	font-size: 14px;
+	font-size: 0.875rem;
 	font-weight: bold;
 	border: 0 solid red;
 	border-left-width: 4px;
@@ -1883,7 +1880,7 @@ table.formation td {
 
 .diff-pos {
 	background-color: #efe;
-	color: #008800;
+	color: #080;
 }
 
 .diff-neg {
@@ -1917,9 +1914,7 @@ table.formation td {
 	padding: 0;
 	text-decoration: none;
 }
-#menu-global a:link {
-	color: #babdb6;
-}
+#menu-global a:link,
 #menu-global a:visited {
 	color: #babdb6;
 }
@@ -2490,7 +2485,7 @@ table.topics {
 }
 table.forum th,
 table.topics th {
-	font-size: 12px;
+	font-size: 0.75rem;
 	text-align: center;
 	white-space: nowrap;
 	padding: 5px;
@@ -2528,7 +2523,7 @@ form.add-topic {
 	border: 1px solid lightgray;
 	border-radius: 3px;
 	display: inline-block;
-	font-size: 12px;
+	font-size: 0.75rem;
 	line-height: 1;
 	margin: 2px 2px 2px 0;
 	padding: 0.4em 0.5em;

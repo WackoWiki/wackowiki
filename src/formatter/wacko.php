@@ -23,15 +23,15 @@ for ($i = 2; $i < count($texts); $i = $i + 2)
 }
 
 $wtext	= preg_replace_callback($parser->MIDDLE_REGEX, [&$parser, 'wacko_middleprocess'], $wtext);
-$wtext	= preg_replace_callback($parser->LONG_REGEX, [&$parser, 'wacko_callback'], $wtext);
+$wtext	= preg_replace_callback($parser->LONG_REGEX,   [&$parser, 'wacko_callback'],      $wtext);
 $wtexts	= explode("\u{00FE}\u{00A6}", $wtext);
 $text	= '';
 
 for ($i = 0; $i < count($wtexts); $i++)
 {
 	$text = $text .
-			($wtexts[$i] ?? '') .
-			($texts[2 * $i + 1] ?? '');
+			($wtexts[$i]			?? '') .
+			($texts[2 * $i + 1]		?? '');
 }
 
 $text	= str_replace("\u{2592}" . "<br>\n", '', $text);

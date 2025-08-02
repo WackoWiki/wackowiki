@@ -73,7 +73,7 @@ if ($this->get_user())
 	}
 }
 
-// comment this out for not showing privacy link at the bottom of your pages
+// comment this out for not showing license link at the bottom of your pages
 if ($this->db->license)
 {
 	#$tpl->license_text = $this->_t('License')[$this->db->license];

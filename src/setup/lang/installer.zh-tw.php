@@ -47,7 +47,7 @@ $lang = [
 'Continue'						=> '繼續',
 'Back'							=> '返回',
 'Recommended'					=> '建議',
-'InvalidAction'					=> 'Invalid action',
+'InvalidAction'					=> '動作無效',
 
 /*
    Language Selection Page
@@ -67,9 +67,9 @@ $lang = [
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
-'Database'						=> 'Database',
+'Database'						=> '資料庫',
 'PhpExtensions'					=> 'PHP 擴充',
-'Permissions'					=> 'Permissions',
+'Permissions'					=> '權限',
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
@@ -85,11 +85,11 @@ $lang = [
 /*
    Site Config Page
 */
-'config-site'					=> 'Site Configuration',
+'config-site'					=> '網站設定',
 'SiteName'						=> 'Wiki Name',
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
 'SiteNameDefault'				=> '我的 wiki',
-'HomePage'						=> 'Home Page',
+'HomePage'						=> '首頁',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> '首頁',
 'MultiLang'						=> 'Multi Language Mode',
@@ -99,7 +99,7 @@ $lang = [
 'Admin'							=> 'Admin Name',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'NameAlphanumOnly'				=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters. Upper case characters are OK.',
-'NameCamelCaseOnly'				=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
+'NameCamelCaseOnly'				=> '使用者名稱長度必須在 %1 - %2 字元間，並且為WikiName的格式。',
 'Password'						=> 'Admin Password',
 'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
 'PasswordConfirm'				=> 'Repeat Password:',

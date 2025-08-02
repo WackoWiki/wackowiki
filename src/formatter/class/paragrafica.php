@@ -191,7 +191,7 @@ class Paragrafica
 
 		while ($_w != $what);
 
-		// 3. replace each <t->....<-t> to <p class="auto">...</p>
+		// 3. replace each <t->...<-t> with <p class="auto">...</p>
 		$pcount = 0;
 		$pieces = explode($this->mark2, $what);
 

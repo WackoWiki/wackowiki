@@ -24,7 +24,7 @@ function _unescape($s)
 {
 	return preg_replace_callback(
 		'/% (?: u([A-F\d]{1,4}) | ([A-F\d]{1,2})) /sxi',
-		"_unescape_callback",
+		'_unescape_callback',
 		$s
 	);
 }
@@ -46,7 +46,7 @@ function _unescape_callback($p)
 	{
 		if ($p[2] === '26' && $SCRIPT_DECODE_MODE == 'entities')
 		{
-			$c = "&amp;";
+			$c = '&amp;';
 		}
 		else
 		{
@@ -82,20 +82,20 @@ $tag2	= $q;
 $limit	= 10;
 
 $pages1 = $this->db->load_all(
-	"SELECT page_id, tag " .
-	"FROM " . $this->prefix . "page " .
-	"WHERE tag LIKE " . $this->db->q($tag1 . '%') . " " .
-		"AND comment_on_id = 0 " .
-	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .
-	"LIMIT " . (int) $limit);
+	'SELECT page_id, tag ' .
+	'FROM ' . $this->prefix . 'page ' .
+	'WHERE tag LIKE ' . $this->db->q($tag1 . '%') . ' ' .
+		'AND comment_on_id = 0 ' .
+	'ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC ' .
+	'LIMIT ' . (int) $limit);
 
 $pages2 = $this->db->load_all(
-	"SELECT page_id, tag " .
-	"FROM " . $this->prefix . "page " .
-	"WHERE tag LIKE " . $this->db->q($tag2 . '%') . " " .
-		"AND comment_on_id = 0 " .
-	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .
-	"LIMIT " . (int) $limit);
+	'SELECT page_id, tag ' .
+	'FROM ' . $this->prefix . 'page ' .
+	'WHERE tag LIKE ' . $this->db->q($tag2 . '%') . ' ' .
+		'AND comment_on_id = 0 ' .
+	'ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC ' .
+	'LIMIT ' . (int) $limit);
 
 // 3. stripping by rights
 $pages	= [];
@@ -215,8 +215,8 @@ ob_end_clean();
 
 if (!headers_sent())
 {
-	header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' 200 Ok');
-	//header('Content-type: text/javascript; charset=utf-8');
+	header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1') . ' 200 Ok');
+	# header('Content-type: text/javascript; charset=utf-8');
 	header('Last-Modified: ' . Ut::http_date());
 }
 

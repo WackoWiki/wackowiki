@@ -8,7 +8,7 @@
 	[= t _ =
 		<p class="info-title">[ ' title | e ' ]</p>
 	=]
-	[ ' include ' ]
+[ ' include  // <-- no indention for embeded pre ' ]
 	[= eicon _ =
 		[ ' nonstatic ' ]
 		</div>

@@ -157,7 +157,7 @@ class WackoFormatter
 				? ''
 				: "``.*?``|" .
 				  "\%\%.*?\%\%|") .
-			// escaped  ~...
+			// escaped ~...
 			"~([^ \t\n]+)|" .
 			// escaped  ""...""
 			"\"\".*?\"\"|" .
@@ -218,6 +218,7 @@ class WackoFormatter
 		$wacko		= &$this->object;
 		$callback	= [&$this, 'wacko_preprocess'];
 
+		// escaped ~...
 		if (!empty($thing[0]) && $thing[0] == '~')
 		{
 			if ($thing[1] == '~')
@@ -519,7 +520,7 @@ class WackoFormatter
 		{
 			$url = mb_strtolower($matches[1]);
 
-			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((' . $wacko::PATTERN['AUDIO'] . ')|(' . $wacko::PATTERN['BITMAP'] . '|' . $wacko::PATTERN['DRAWING'] . ')|(' . $wacko::PATTERN['VIDEO'] . '))$/u', $url, $media))
+			if (preg_match('/^(https?|ftp):\/\/([^\\s\"<>]+)\.((' . $wacko::PATTERN['AUDIO'] . ')|(' . $wacko::PATTERN['BITMAP'] . '|' . $wacko::PATTERN['DRAWING'] . ')|(' . $wacko::PATTERN['VIDEO'] . '))$/u', $url, $media))
 			{
 				// audio
 				if ($media[4])

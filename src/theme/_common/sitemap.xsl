@@ -22,7 +22,7 @@
 				</title>
 				<style type="text/css">
 					*{margin: 0;padding: 0;}
-					body{color: #333;font-family: Arial;padding: 20px;font-size: 12px;}
+					body{color: #333;font-family: Arial,sans-serif;padding: 20px;font-size: 12px;}
 					h1, h3{margin-bottom: 10px;}
 					h1{font-size: 24px;}
 					h3{font-size: 16px;}

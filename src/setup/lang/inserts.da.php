@@ -19,7 +19,7 @@ $insert = [
 	'privacy_page'		=> 'Privacy',
 
 	'registration_page'	=> 'Registrering',
-	'password_page'		=> 'Password',
+	'password_page'		=> 'Adgangskode',
 	'search_page'		=> 'Søgning',
 	'login_page'		=> 'Login',
 	'account_page'		=> 'Indstillinger',

@@ -198,7 +198,8 @@ class AutoComplete
 
 			if (itempos >= 0)
 			{
-				str = longtext.substr(0, itempos) + this.wikiedit.begin
+				str = longtext.substr(0, itempos)
+					+ this.wikiedit.begin
 					+ this.request_pattern + this.wikiedit.end
 					+ longtext.substr(itempos + this.request_pattern.length)
 					+ this.wikiedit.sel2;

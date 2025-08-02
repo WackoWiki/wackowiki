@@ -6,14 +6,13 @@ if (!defined('IN_WACKO'))
 }
 
 // HTTP header with right charset settings
-header('Content-Type: text/html; charset=' . $this->get_charset());
+header('Content-Type: text/html; charset=utf-8');
 header_remove('X-Powered-By');
 
 $tpl->enter('h_');
 
 $tpl->lang			= $this->page_lang;
 $tpl->dir			= $this->get_direction($this->page_lang);
-$tpl->charset		= $this->get_charset();
 
 !Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);
 $this->method == 'show' || $tpl->method = $this->method;

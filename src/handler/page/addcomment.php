@@ -32,11 +32,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 	// find last comment number
 	if ($latest_comment = $this->db->load_single(
-		"SELECT tag, page_id
-		FROM " . $this->prefix . "page
+		'SELECT tag, page_id
+		FROM ' . $this->prefix . 'page
 		WHERE comment_on_id <> 0
 		ORDER BY page_id DESC
-		LIMIT 1"))
+		LIMIT 1'))
 	{
 		preg_match('/^Comment(\d+)$/', $latest_comment['tag'], $matches);
 		$num = $matches[1] + 1;

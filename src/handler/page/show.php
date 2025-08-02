@@ -10,13 +10,13 @@ if (isset($this->page['latest']) && $this->page['comment_on_id'] && !$this->page
 {
 	// count previous comments
 	$count = $this->db->load_single(
-		"SELECT COUNT(tag) AS n " .
-		"FROM " . $this->prefix . "page " .
-		"WHERE comment_on_id = " . (int) $this->page['comment_on_id'] . " " .
-			"AND created <= " . $this->db->q($this->page['created']) . " " .
-			"AND deleted <> 1 " .
-		"GROUP BY comment_on_id " .
-		"LIMIT 1", true);
+		'SELECT COUNT(tag) AS n ' .
+		'FROM ' . $this->prefix . 'page ' .
+		'WHERE comment_on_id = ' . (int) $this->page['comment_on_id'] . ' ' .
+			'AND created <= ' . $this->db->q($this->page['created']) . ' ' .
+			'AND deleted <> 1 ' .
+		'GROUP BY comment_on_id ' .
+		'LIMIT 1', true);
 
 	// determine comments page number where this comment is located
 	$p = ceil($count['n'] / $this->db->comments_count);
@@ -56,7 +56,7 @@ if ($this->has_access('read'))
 
 		if ($this->page['deleted'] || !empty($latest['deleted']))
 		{
-			$this->http->status(404);
+			$this->http->status(410);
 
 			if ($this->is_admin())
 			{
@@ -220,10 +220,10 @@ if ($this->has_access('read'))
 			&& ($this->get_user_id() != $this->page['owner_id']))
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->prefix . "page SET " .
-					"hits = hits + 1 " .
-				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
-				"LIMIT 1");
+				'UPDATE ' . $this->prefix . 'page SET ' .
+					'hits = hits + 1 ' .
+				'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
+				'LIMIT 1');
 		}
 
 		$user			= $this->get_user();
@@ -282,13 +282,6 @@ else
 
 	$message		= $this->_t('ReadAccessDenied');
 	$tpl->n_message	= $this->show_message($message, 'note', false);
-
-	// user might want to log in
-	/* if ($this->has_access('read', '', GUEST) === false)
-	{
-		$message = $this->_t('ReadAccessDeniedHintGuest');
-		$tpl->n_message = $this->show_message($message, 'hint', false);
-	} */
 }
 
 // show category tags

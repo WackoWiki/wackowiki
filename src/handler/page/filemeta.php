@@ -74,14 +74,14 @@ $mod_selector	= 'm';
 // tab navigation
 $tabs['show']	= 'FileViewProperties';
 
-if ($file_access($file))
+if (!empty($file) && $file_access($file))
 {
 	$tabs['edit']	= 'FileEditProperties';
 	$tabs['label']	= 'FileLabel';
 	$tabs['remove']	= 'FileRemove';
 }
 
-#Ut::debug_print_r($tabs);
+# Ut::debug_print_r($tabs);
 
 $mode	= $_GET[$mod_selector] ?? null;
 
@@ -115,24 +115,24 @@ if ($action && !empty($file))
 
 			// update file metadata
 			$this->db->sql_query(
-				"UPDATE " . $this->prefix . "file SET " .
-					"file_lang			= " . $this->db->q($file_lang) . ", " .
-					"file_description	= " . $this->db->q($description) . ", " .
-					"caption			= " . $this->db->q($caption) . ", " .
-					"author				= " . $this->db->q($author) . ", " .
-					"source				= " . $this->db->q($source) . ", " .
-					"source_url			= " . $this->db->q($source_url) . ", " .
-					"license_id			= " . (int) $license_id . ", " .
-					"modified_dt			= UTC_TIMESTAMP() " .
-				"WHERE file_id = " . (int) $file['file_id'] . " " .
-				"LIMIT 1");
+				'UPDATE ' . $this->prefix . 'file SET ' .
+					'file_lang			= ' . $this->db->q($file_lang) . ', ' .
+					'file_description	= ' . $this->db->q($description) . ', ' .
+					'caption			= ' . $this->db->q($caption) . ', ' .
+					'author				= ' . $this->db->q($author) . ', ' .
+					'source				= ' . $this->db->q($source) . ', ' .
+					'source_url			= ' . $this->db->q($source_url) . ', ' .
+					'license_id			= ' . (int) $license_id . ', ' .
+					'modified			= UTC_TIMESTAMP() ' .
+				'WHERE file_id = ' . (int) $file['file_id'] . ' ' .
+				'LIMIT 1');
 
 			$this->set_message($this->_t('FileEditedMeta'), 'success');
 
 			$this->log(4, Ut::perc_replace(
-					$this->_t('LogUpdatedFileMeta', SYSTEM_LANG),
-					$this->tag . ' ' . $this->page['title'],
-					$file['file_name']));
+				$this->_t('LogUpdatedFileMeta', SYSTEM_LANG),
+				$this->tag . ' ' . $this->page['title'],
+				$file['file_name']));
 			$this->db->invalidate_sql_cache();
 
 			$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
@@ -153,9 +153,9 @@ if ($action && !empty($file))
 		$this->save_categories_list($file['file_id'], OBJECT_FILE);
 
 		$this->log(4, Ut::perc_replace(
-				$this->_t('LogUpdatedFileCategories', SYSTEM_LANG),
-				$this->tag . ' ' . $this->page['title'],
-				$file['file_name']));
+			$this->_t('LogUpdatedFileCategories', SYSTEM_LANG),
+			$this->tag . ' ' . $this->page['title'],
+			$file['file_name']));
 		$this->set_message($this->_t('CategoriesUpdated'), 'success');
 
 		$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
@@ -170,11 +170,11 @@ if ($action && !empty($file))
 			$this->remove_file($file['file_id'], $dontkeep);
 
 			$this->log(1, Ut::perc_replace(
-					$this->_t('LogRemovedFile', SYSTEM_LANG),
-					$this->tag . ' ' . $this->page['title'],
-					$file['file_name']));
+				$this->_t('LogRemovedFile', SYSTEM_LANG),
+				$this->tag . ' ' . $this->page['title'],
+				$file['file_name']));
 
-			$this->db->invalidate_sql_cache(); // TODO: check if sql cache is enabled plus purge page cache
+			$this->db->invalidate_sql_cache(); // TODO: purge related page cache
 
 			$this->http->redirect($this->href('attachments'));
 		}

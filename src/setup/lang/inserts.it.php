@@ -7,8 +7,8 @@ $insert = [
 			'**Benvenuto sul tuo sito ((WackoWiki:Doc/English WackoWiki)) site!**' . "\n\n" .
 			'Per cominciare clicca su "Edita questa pagina" nella pagina in basso.' . "\n\n" .
 			'La documentazione, in inglese, può essere trovata  in WackoWiki:Doc/English.' . "\n" .
-			'Pagine utili: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Ricerca Ricerca)).',
-	'root_page'			=> 'Home Page',
+			'Pagine utili: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Ricerca Ricerca)).' . "\n\n",
+	'root_page'			=> 'Pagina Iniziale',
 
 	'category_page'		=> 'Categoria',
 	'groups_page'		=> 'Gruppi',

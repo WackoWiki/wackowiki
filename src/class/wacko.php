@@ -438,11 +438,23 @@ class Wacko
 
 	function get_max_upload_size()
 	{
-		return min(
-			$this->db->upload_max_size,
-			Ut::shorthand_to_int(ini_get('upload_max_filesize')),
-			Ut::shorthand_to_int(ini_get('post_max_size'))
-		);
+		// If upload_max_size is 0,
+		// the maximum uploadable filesize is only limited by the PHP configuration.
+		if ($this->db->upload_max_size)
+		{
+			return min(
+				$this->db->upload_max_size,
+				Ut::shorthand_to_int(ini_get('upload_max_filesize')),
+				Ut::shorthand_to_int(ini_get('post_max_size'))
+			);
+		}
+		else
+		{
+			return min(
+				Ut::shorthand_to_int(ini_get('upload_max_filesize')),
+				Ut::shorthand_to_int(ini_get('post_max_size'))
+			);
+		}
 	}
 
 	function upload_quota($user_id = null)
@@ -3810,7 +3822,7 @@ class Wacko
 				}
 			}
 
-			// try to find file in global / local storage and return if success
+			// file in global or local namespace
 			if (is_array($file_data))
 			{
 				// set an anchor once for file link at the first appearance
@@ -4209,7 +4221,7 @@ class Wacko
 			}
 			else
 			{
-				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'wordprocessor') ? 'p' : '') . 'w' . $tpl;
+				$tpl		= (isset($this->method) && in_array($this->method, ['print', 'wordprocessor']) ? 'p' : '') . 'w' . $tpl;
 				$page_link	= $this->href('edit', $tag, $lang ? 'lang=' . $lang : '', 1);
 				$accicon	= $this->_t('Icon.Wanted');
 				$title		= $this->_t('CreatePage');
@@ -4601,7 +4613,7 @@ class Wacko
 		if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 		{
 			// disallow pages with Comment[0-9] and all sub-pages, we do not want sub-pages on a comment.
-			if (preg_match( '/\b(Comment(\d+))\b/ui', $_data, $match ))
+			if (preg_match('/\b(Comment(\d+))\b/ui', $_data, $match))
 			{
 				return 'Comment([0-9]+)';
 			}
@@ -6253,7 +6265,6 @@ class Wacko
 		// validate
 		if (!$this->validate_acl_syntax($list, $privilege))
 		{
-			#$this->reload_me();
 			return;
 		}
 

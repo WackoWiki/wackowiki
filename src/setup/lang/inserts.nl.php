@@ -31,6 +31,6 @@ $insert = [
 
 	'changes_page_bm'	=> 'Wijzigingen',
 	'comments_page_bm'	=> 'Opmerkingen',
-	'index_page_bm'		=> 'Index',
+	'index_page_bm'		=> 'Indexeren',
 	'random_page_bm'	=> 'Willekeurig',
 ];

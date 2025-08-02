@@ -37,7 +37,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 												// .php.net - to make cookies visible on all subdomains
 	public $cf_cookie_secure		= false;	// cookie should only be sent over secure connections.
 	public $cf_cookie_httponly		= true;		// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
-	public $cf_cookie_samesite		= 'Strict';	// asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
+	public $cf_cookie_samesite		= COOKIE_SAMESITE;	// 'Strict' asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
 	public $cf_referer_check		= '';
 	public $cf_cache_limiter		= 'none';
 	public $cf_cache_expire			= 180*60;	// ttl for cached session pages in seconds
@@ -105,7 +105,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$this->sticky__log = array_slice($this->sticky__log, 0, 1) + ['...'] + array_slice($this->sticky__log, -10, null);
 			}
 
-			// let old page live for some seconds to gather missing requests (ajax etc)
+			// let old page live for some seconds to gather missing requests (ajax etc.)
 			if (!isset($this->__expire))
 			{
 				$this->__expire = ($delete_old? 0 : $now + 5); // STS magic number
@@ -480,22 +480,19 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			switch ($this->cf_cache_limiter)
 			{
 				case 'public':
-					header('Expires: ' . Ut::http_date(time() + $age));
 					header("Cache-Control: public, max-age=$age");
 					break;
 
 				case 'private':
-					header('Expires: ' . Ut::http_date(-1)); // looong ago
+					header('Cache-Control: no-cache');
 					// FALLTHRU
 
 				case 'private_no_expire':
-					header("Cache-Control: private, max-age=$age, pre-check=$age");
+					header("Cache-Control: private, max-age=$age");
 					break;
 
 				case 'nocache':
-					header('Expires: ' . Ut::http_date(-1));
-					header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-					header('Pragma: no-cache');
+					header('Cache-Control: no-store');
 					return; // suppress last-modified
 
 				default:

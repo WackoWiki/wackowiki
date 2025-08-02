@@ -15,7 +15,7 @@ if ($copy_button)
 {
 	$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/clipboard.min.js" async onload="new ClipboardJS(\'.clipb\')"></script>');
 
-	echo '<button class="clipb" style="margin:5px;" data-clipboard-target="#' . $div_id . '">' .
+	echo '<button type="button" class="clipb" data-clipboard-target="#' . $div_id . '">' .
 		$this->_t('SourceCopyToClipboard') .
 		'</button>';
 }

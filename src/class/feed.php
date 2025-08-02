@@ -18,7 +18,6 @@ class Feed
 	// VARIABLES
 	public $engine;
 	public $lang;
-	public $charset;
 	public $prefix;
 
 	// CONSTRUCTOR
@@ -27,7 +26,6 @@ class Feed
 		$this->engine	= & $engine;
 		$this->lang		= $this->engine->db->language;
 		$this->engine->set_language($this->lang, true, true);
-		$this->charset	= $this->engine->get_charset();
 		$this->prefix	= $this->engine->db->table_prefix;
 	}
 
@@ -52,7 +50,7 @@ class Feed
 		#xmlns:slash="http://purl.org/rss/1.0/modules/slash/"			-> <slash:comments>
 
 		return
-			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
+			'<?xml version="1.0" encoding="utf-8"?>' . "\n" .
 			'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
 			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">' . "\n" .
 			'<channel>' . "\n" .
@@ -79,9 +77,9 @@ class Feed
 	{
 		$limit	= 30;
 		$name	= $this->xml_name('changes');
-		$count	= '';
+		$count	= 0;
 
-		$this->engine->canonical	= true;
+		$this->engine->canonical = true;
 
 		$xml = $this->feed_header('ChangesXML', 'ChangesXMLTitle');
 
@@ -122,7 +120,7 @@ class Feed
 		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
-		$this->engine->canonical	= false;
+		$this->engine->canonical = false;
 	}
 
 	function feed($feed_cluster = ''): void
@@ -137,17 +135,17 @@ class Feed
 
 		// collect data
 		$pages = $this->engine->db->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
+			'SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang ' .
 			"FROM {$this->prefix}page p, " .
 				"{$this->prefix}acl AS a " .
-			"WHERE p.page_id = a.page_id " .
+			'WHERE p.page_id = a.page_id ' .
 				"AND a.privilege = 'read' AND a.list = '*' " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.noindex <> 1 " .
-				"AND p.deleted <> 1 " .
+				'AND p.comment_on_id = 0 ' .
+				'AND p.noindex <> 1 ' .
+				'AND p.deleted <> 1 ' .
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-			"ORDER BY p.created DESC " .
-			"LIMIT " . (int) $limit);
+			'ORDER BY p.created DESC ' .
+			'LIMIT ' . (int) $limit);
 
 		if ($pages)
 		{
@@ -231,7 +229,7 @@ class Feed
 	{
 		$limit	= 20;
 		$name	= $this->xml_name('comments');
-		$count	= '';
+		$count	= 0;
 		$access	= '';
 
 		$this->engine->canonical	= true;
@@ -266,7 +264,7 @@ class Feed
 
 					$xml .=
 						'<item>' . "\n" .
-							'<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
+							'<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('From') . ' ' .
 							($comment['user_name'] ?: $this->engine->_t('Guest')) .
 							'</title>' . "\n" .
 							'<link>' . $this->engine->href('', $comment['tag']) . '</link>' . "\n" .
@@ -294,15 +292,15 @@ class Feed
 	{
 		// collect data
 		$pages = $this->engine->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.modified, p.page_lang " .
+			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.modified, p.page_lang ' .
 			"FROM {$this->prefix}page p, " .
 				"{$this->prefix}acl AS a " .
-			"WHERE p.page_id = a.page_id " .
+			'WHERE p.page_id = a.page_id ' .
 				"AND a.privilege = 'read' AND a.list = '*' " .
-				"AND p.comment_on_id = 0 " .
-				"AND p.noindex <> 1 " .
-				"AND p.deleted <> 1 " .
-			"ORDER BY p.modified DESC, BINARY p.tag");
+				'AND p.comment_on_id = 0 ' .
+				'AND p.noindex <> 1 ' .
+				'AND p.deleted <> 1 ' .
+			'ORDER BY p.modified DESC, BINARY p.tag');
 
 		$xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
 		$xml .= $this->engine->db->xml_sitemap_gz

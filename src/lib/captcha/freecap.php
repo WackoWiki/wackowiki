@@ -1,25 +1,25 @@
 <?php
 /************************************************************\
 *
-*     freeCap v1.4.5 Copyright
-*     2005 Howard Yeend (solidred.co.uk),
-*     2008 - 2023 WackoWiki Team
+*	freeCap v1.4.6 Copyright
+*	2005 Howard Yeend (solidred.co.uk),
+*	2008 - 2025 WackoWiki Team
 *
-*    This file is part of freeCap.
+*	This file is part of freeCap.
 *
-*    freeCap is free software; you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation; either version 2 of the License, or
-*    (at your option) any later version.
+*	freeCap is free software; you can redistribute it and/or modify
+*	it under the terms of the GNU General Public License as published by
+*	the Free Software Foundation; either version 2 of the License, or
+*	(at your option) any later version.
 *
-*    freeCap is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
+*	freeCap is distributed in the hope that it will be useful,
+*	but WITHOUT ANY WARRANTY; without even the implied warranty of
+*	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*	GNU General Public License for more details.
 *
-*    You should have received a copy of the GNU General Public License
-*    along with freeCap; if not, write to the Free Software
-*    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*	You should have received a copy of the GNU General Public License
+*	along with freeCap; if not, write to the Free Software
+*	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *
 *
 \************************************************************/
@@ -29,14 +29,17 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// freeCap version
+$version = '1.4.6';
+
 //////////////////////////////////////////////////////
 ////// User Defined Vars:
 //////////////////////////////////////////////////////
 
 // try to avoid the 'free p*rn' method of CAPTCHA circumvention
 // see en.wikipedia.org/captcha for more info
-// $site_tags[0] = "To avoid spam, please do NOT enter the text if";
-// $site_tags[1] = "this site is not example.com";
+// $site_tags[0] = 'To avoid spam, please do NOT enter the text if';
+// $site_tags[1] = 'this site is not example.com';
 // or more simply:
 // $site_tags[0] = 'for use only on example.com';
 // reword or add lines as you please
@@ -55,23 +58,24 @@ $rand_func = function ($mi, $ma) {return Ut::rand($mi, $ma);};
 // which type of hash to use?
 // possible values: 'sha1', 'sha256', 'SHA512'
 $algo = 'sha1';
+
 // store in session so can validate in form processor
 $sess['hash_algo'] = $algo;
 
 // image type:
-// possible values: 'jpg', 'png', 'gif'
+// possible values: 'avif', 'gif', 'jpg', 'png', 'webp'
 // jpg doesn't support transparency (transparent bg option ends up white)
-// png isn't supported by old browsers (see http://www.libpng.org/pub/png/pngstatus.html)
-// gif may not be supported by your GD Lib.
+// avif and webp may not be supported by your GD Lib.
 $output = 'png';
 
 // 0 = generate pseudo-random string, 1 = use dictionary
 // dictionary is easier to recognise
 // - both for humans and computers, so use random string if you're paranoid.
 $use_dict = 1;
+
 // if your server is NOT set up to deny web access to files beginning '.ht'
 // then you should ensure the dictionary file is kept outside the web directory
-// eg: if www.foo.com/index.html points to c:\website\www\index.html
+// eg: if www.example.com/index.html points to c:\website\www\index.html
 // then the dictionary should be placed in c:\website\dict.txt
 // test your server's config by trying to access the dictionary through a web browser
 // you should NOT be able to view the contents.
@@ -97,7 +101,7 @@ $max_attempts = 15;
 // If you are not successful in displaying an image (but the
 // background is displayed), it's likely you are on a Mac PowerPC,
 // Sun, or other machine that uses "big-endian" byte storage for
-// multi-byte data types.  Switch the flag below for an alternate font
+// multibyte data types.  Switch the flag below for an alternate font
 // set that uses big-endian byte format.
 // Auto-Detect system endian value
 // Modified from: http://www.phpdig.net/ref/rn45re877.html
@@ -153,8 +157,10 @@ else
 // many thanks to http://ocr-research.org.ua and http://sam.zoy.org/pwntcha/ for testing
 // for jpgs, 'transparent' is white
 $bg_type = 1;
+
 // should we blur the background? (looks nicer, makes text easier to read, takes longer)
 $blur_bg = true;
+
 // for bg_type 3, which images should we use?
 // if you add your own, make sure they're fairly 'busy' images (ie a lot of shapes in them)
 $bg_images = [
@@ -164,6 +170,7 @@ $bg_images = [
 	'/.ht_freecap_im4.jpg',
 	'/.ht_freecap_im5.jpg'
 ];
+
 // for non-transparent backgrounds only:
 	// if 0, merges CAPTCHA with bg
 	// if 1, write CAPTCHA over bg
@@ -321,27 +328,37 @@ function my_image_blur($im)
 	return $im;
 }
 
-function send_image($pic)
+function send_image($pic): void
 {
 	// output image with appropriate headers
 	global $output, $im, $im2, $im3;
-	header(base64_decode('WC1DYXB0Y2hhOiBmcmVlQ2FwIDEuNCAtIHd3dy5wdXJlbWFuZ28uY28udWs='));
+	# header('x-captcha: freeCap ' . $version);
 
 	switch($output)
 	{
 		// add other cases as desired
-		case 'jpg':
-			header('Content-Type: image/jpeg');
-			ImageJPEG($pic);
+		case 'avif':
+			header('Content-Type: image/avif');
+			imagepalettetotruecolor($pic);
+			imageavif($pic);
 			break;
 		case 'gif':
 			header('Content-Type: image/gif');
-			ImageGIF($pic);
+			imagegif($pic);
+			break;
+		case 'jpg':
+			header('Content-Type: image/jpeg');
+			imagejpeg($pic);
+			break;
+		case 'webp':
+			header('Content-Type: image/webp');
+			imagepalettetotruecolor($pic);
+			imagewebp($pic);
 			break;
 		case 'png':
 		default:
 			header('Content-Type: image/png');
-			ImagePNG($pic);
+			imagepng($pic);
 			break;
 	}
 
@@ -523,7 +540,7 @@ if ($bg_type)
 			// line terminations and start from there. (I don't think they're that advanced yet..)
 			for ($j = 1; $j < $rand_func(5, 10); $j++)
 			{
-				$points[] = $rand_func(1 * (20 * ($i + 1)), 1 * (50 * ($i + 1)));
+				$points[] = $rand_func(20 * ($i + 1), 50 * ($i + 1));
 				$points[] = $rand_func(30, $height + 30);
 			}
 
@@ -673,6 +690,7 @@ $font_pixelwidth = $font_widths[$j];
 // (so we only morph what we need to)
 $word_pix_size	= $word_start_x + (strlen($word) * $font_pixelwidth);
 $y_pos			= 0;
+
 // firstly move each character up or down a bit:
 for ($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
 {
@@ -864,7 +882,7 @@ if ($bg_type)
 // the least you could do is give me credit
 // but I understand that in professional environments, your boss might not like this tag
 // so that's cool.
-// $tag_str = 'freeCap v1.4.5';
+// $tag_str = 'freeCap v' . $version;
 $tag_str = '';
 // for debug:
 # $tag_str = '[' . $word . ']';

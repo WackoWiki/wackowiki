@@ -95,9 +95,9 @@ $duplicate_file = function($file, $file_hash)
 $duplicate_files = function($file_hash) use ($prefix)
 {
 	$files	= $this->db->load_all(
-		"SELECT file_id " .
-		"FROM " . $prefix . "file " .
-		"WHERE file_hash = " . $this->db->q($file_hash) . " ");
+		'SELECT file_id ' .
+		'FROM ' . $prefix . 'file ' .
+		'WHERE file_hash = ' . $this->db->q($file_hash) . ' ');
 
 	$file_ids = [];
 
@@ -132,16 +132,16 @@ if (isset($_POST['upload']) & $can_upload)
 
 	// TODO: set user used_quota in user table (?)
 	$user_files	= $this->db->load_single(
-		"SELECT SUM(file_size) AS used_user_quota " .
-		"FROM " . $prefix . "file " .
-		"WHERE user_id = " . (int) $user['user_id'] . " " .
-		"LIMIT 1");
+		'SELECT SUM(file_size) AS used_user_quota ' .
+		'FROM ' . $prefix . 'file ' .
+		'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
+		'LIMIT 1');
 
 	// TODO: set used_quota in config table (?)
 	$files		= $this->db->load_single(
-		"SELECT SUM(file_size) AS used_quota " .
-		"FROM " . $prefix . "file " .
-		"LIMIT 1");
+		'SELECT SUM(file_size) AS used_quota ' .
+		'FROM ' . $prefix . 'file ' .
+		'LIMIT 1');
 
 	// Checks
 
@@ -406,12 +406,12 @@ if (isset($_POST['upload']) & $can_upload)
 
 							// get file_id of uploaded file
 							$file = $this->db->load_single(
-								"SELECT file_id " .
-								"FROM " . $prefix . "file " .
-								"WHERE " .
-									"file_name		= " . $this->db->q($file_name) . " AND " .
-									"page_id		= " . (int) $page_id . " " .
-								"LIMIT 1");
+								'SELECT file_id ' .
+								'FROM ' . $prefix . 'file ' .
+								'WHERE ' .
+									'file_name		= ' . $this->db->q($file_name) . ' AND ' .
+									'page_id		= ' . (int) $page_id . ' ' .
+								'LIMIT 1');
 
 							if (!$is_duplicate)
 							{

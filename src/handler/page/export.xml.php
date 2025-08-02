@@ -5,9 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-header('Content-type: text/xml');
+header('Content-type: text/xml; charset=utf-8');
 
-$tpl->charset	= $this->get_charset();
 $tpl->tag		= $this->tag;
 $tpl->date		= date('r');
 $tpl->lang		= $this->page_lang;
@@ -20,12 +19,12 @@ if ($this->has_access('read')
 	$num_slashes = mb_substr_count($this->tag, '/');
 
 	$pages = $this->db->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.title, p.created, p.body, u.user_name " .
-		"FROM " . $this->prefix . "page p " .
-			"LEFT JOIN " . $this->prefix . "user u ON (p.owner_id = u.user_id) " .
-		"WHERE (tag = " . $this->db->q($this->tag) . " " .
-			"OR tag LIKE " . $this->db->q($this->tag . '/%') . ") " .
-			"AND comment_on_id = 0");
+		'SELECT p.page_id, p.owner_id, p.tag, p.title, p.created, p.body, u.user_name ' .
+		'FROM ' . $this->prefix . 'page p ' .
+			'LEFT JOIN ' . $this->prefix . 'user u ON (p.owner_id = u.user_id) ' .
+		'WHERE (tag = ' . $this->db->q($this->tag) . ' ' .
+			'OR tag LIKE ' . $this->db->q($this->tag . '/%') . ') ' .
+			'AND comment_on_id = 0');
 
 	$tpl->enter('p_');
 

@@ -43,7 +43,7 @@ $lang = [
    Generic Page Text
 */
 'TitleInstallation'				=> 'Εγκατάσταση WackoWiki',
-'TitleUpdate'					=> 'WackoWiki Update',
+'TitleUpdate'					=> 'Ενημέρωση WackoWiki',
 'Continue'						=> 'Συνέχεια',
 'Back'							=> 'Επιστροφή',
 'Recommended'					=> 'Συνιστάται',

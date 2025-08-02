@@ -52,8 +52,10 @@ const GLOB_ALL						= '{,.}*';				// for glob()
 const ADD_NO_DIV					= '*';					// for Wacko::method()
 const SYSTEM_LANG					= -1;					// for Wacko::_t()
 
+const COOKIE_SAMESITE				= 'Lax';				// Strict, Lax, None
 const AUTH_TOKEN					= 'Auth';
 const GUEST							= 'guest@wacko';
+
 const INTERCOM_MAX_SIZE				= 262144;
 
 const LOAD_NOCACHE					= 0;
@@ -61,9 +63,9 @@ const LOAD_CACHE					= 1;
 const LOAD_ALL						= 0;
 const LOAD_META						= 1;
 
+const IS_HEADING					= 66666;
 const IS_PARAGRAPH					= 77777;
 const IS_INCLUDE					= 99999;
-const IS_HEADING					= 66666;
 
 const MENU_AUTO						= 0;
 const MENU_USER						= 1;

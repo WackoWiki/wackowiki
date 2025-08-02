@@ -54,18 +54,18 @@ if ($action === 'general_properties')
 	$description	= $this->sanitize_text_field($_POST['description'], true);
 
 	$this->db->sql_query(
-		"UPDATE " . $this->prefix . "page SET " .
-			"page_lang			= " . $this->db->q($page_lang) . ", " .
-			"theme				= " . $this->db->q($theme) . ", " .
-			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
+		'UPDATE ' . $this->prefix . 'page SET ' .
+			'page_lang			= ' . $this->db->q($page_lang) . ', ' .
+			'theme				= ' . $this->db->q($theme) . ', ' .
+			'license_id			= ' . (int) ($_POST['license'] ?? '') . ', ' .
 			// menu_tag: unused currently, for use in custom theme menus
 			# "menu_tag			= " . $this->db->q($menu_tag) . ", " .
 			# "show_menu_tag	= " . (int) $_POST['show_menu_tag'] . ", " .
-			"title				= " . $this->db->q($title) . ", " .
-			"keywords			= " . $this->db->q($keywords) . ", " .
-			"description		= " . $this->db->q($description) . " " .
-		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
-		"LIMIT 1");
+			'title				= ' . $this->db->q($title) . ', ' .
+			'keywords			= ' . $this->db->q($keywords) . ', ' .
+			'description		= ' . $this->db->q($description) . ' ' .
+		'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
+		'LIMIT 1');
 }
 
 if ($_POST)
@@ -185,10 +185,10 @@ $tpl->version	= $this->page['version_id'];
 
 
 $watchers = $this->db->load_single(
-		"SELECT COUNT(page_id) AS n " .
-		"FROM " . $this->prefix . "watch " .
+		'SELECT COUNT(page_id) AS n ' .
+		'FROM ' . $this->prefix . 'watch ' .
 		"WHERE page_id = {$this->page['page_id']} " .
-		"LIMIT 1", true);
+		'LIMIT 1', true);
 
 $tpl->wat_number	= $watchers['n'];
 

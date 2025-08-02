@@ -21,8 +21,8 @@ $insert = [
 	'registration_page'	=> 'Registreerimine',
 	'password_page'		=> 'Parool',
 	'search_page'		=> 'Otsing',
-	'login_page'		=> 'Login',
-	'account_page'		=> 'Settings',
+	'login_page'		=> 'Logi sisse',
+	'account_page'		=> 'Seadistused',
 
 	'changes_page'		=> 'Viimased Muudatused',
 	'comments_page'		=> 'Viimati Kommenteeritud',
@@ -31,6 +31,6 @@ $insert = [
 
 	'changes_page_bm'	=> 'Muudatused',
 	'comments_page_bm'	=> 'Kommenteeritud',
-	'index_page_bm'		=> 'Index',
+	'index_page_bm'		=> 'Indeks',
 	'random_page_bm'	=> 'Juhuslik',
 ];

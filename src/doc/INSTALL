@@ -6,9 +6,9 @@ Then go to the corresponding URL. A web-based installer will walk you through th
 
 Example:
 
-If your website, say, http://www.example.com, is mapped to the directory /home/jdoe/www/,
+If your website, say, https://www.example.com, is mapped to the directory /home/jdoe/www/,
 and you place the Wacko distribution files into /home/jdoe/www/wacko/, you should go to
-http://www.example.com/wacko/.
+https://www.example.com/wacko/.
 
 Note that WackoWiki distributions normally unpack into directories that include the version
 in their name; you'll probably want to rename those to just "wacko" -- or, if you're

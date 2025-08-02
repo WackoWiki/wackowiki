@@ -40,9 +40,9 @@ p {
 code {
 	font-family: var(--ww-font-monospace);
 	text-align: left;
-	background-color: #ffffcc;
+	background-color: #ffc;
 	padding: 0 2px;
-	color: #666600;
+	color: #660;
 }
 pre {
 	font-family: var(--ww-font-monospace);
@@ -194,7 +194,7 @@ input.verify { display: none; }
 	padding-top: 15px;
 }
 .error {
-	color: #ff9999;
+	color: #f99;
 	font-weight: 600;
 }
 .nobr {
@@ -227,7 +227,7 @@ td.label,
 th.label {
 	text-align: right;
 	padding-right: 5px;
-	border-right: 1px solid #cc0000;
+	border-right: 1px solid #c00;
 	/* border-bottom: 0 !important; */
 }
 [dir=rtl] td.label,
@@ -236,7 +236,7 @@ th.label {
 	border-right: unset;
 	text-align: left;
 	padding-left: 5px;
-	border-left: 1px solid #cc0000;
+	border-left: 1px solid #c00;
 }
 
 .lined td {
@@ -245,7 +245,7 @@ th.label {
 .lined tr:hover,
 .hl-line tr:hover,
 .hl-setting:hover {
-	background: none repeat scroll 0 0 #ccffcc !important;
+	background: none repeat scroll 0 0 #cfc !important;
 }
 
 table.forum th {
@@ -416,10 +416,10 @@ table.backup {
 	font-weight: normal;
 }
 
-.red	{ color: #cc0000; }
+.red	{ color: #c00; }
 .grey	{ color: #babfc7; }
-.green	{ color: #00cc33; }
-.blue	{ color: #00aacc; }
+.green	{ color: #0c3; }
+.blue	{ color: #0ac; }
 
 /*	Basic tags	*/
 
@@ -461,7 +461,7 @@ sup, sub {
 .msg {
 	position: relative;
 	margin: .6rem 0;
-	padding: .625rem 2.5rem .625rem;
+	padding: .625rem 2.5rem;
 	overflow: auto;
 }
 .msg::before {
@@ -482,25 +482,23 @@ sup, sub {
 }
 .error {
 	background: #f8d4cc;
-	color: #cc3333;
+	color: #c33;
 	font-weight: bold;
 }
 .msg.error::after {
 	content: url('./../../image/cross.svg') " ";
 }
-.comment-info {
-	color: #aaa;
+.comment {
 	border: 1px solid #d5d9e6;
-	font-weight: bold;
 }
-.msg.comment-info::after {
+.msg.comment::after {
 	content: url('./../../image/comment.svg') " ";
 }
 
 .note {
 	background: #f4fbff;
 	border: 1px solid #d5d9e6;
-	color: #cc3333;
+	color: #c33;
 }
 .msg.note::after {
 	content: url('./../../image/info.svg') " ";
@@ -508,7 +506,7 @@ sup, sub {
 
 .notice {
 	background-color: #fff;
-	border: 1px dotted #ddddaa;
+	border: 1px dotted #dda;
 }
 .msg.notice::after {
 	content: url('./../../image/info.svg') " ";
@@ -535,8 +533,8 @@ sup, sub {
 }
 
 .hint {
-	border: 1px solid #ffee66;
-	background: #ffffdd;
+	border: 1px solid #fe6;
+	background: #ffd;
 }
 .msg.hint::after {
 	content: url('./../../image/important.svg') " ";
@@ -569,7 +567,7 @@ sup, sub {
 /*	Form elements	*/
 textarea {
 	font-family: var(--ww-font-monospace);
-	font-size: 0.875rem; /* 14px */
+	font-size: 0.875rem;
 	color: #333;
 	letter-spacing: 1px;
 	width: 100%;
@@ -584,7 +582,7 @@ textarea {
 }
 #path {
 	font-family: var(--ww-font-monospace);
-	font-size: 0.625rem; /* 10px */
+	font-size: 0.625rem;
 	color: #333;
 	line-height: 20px;
 	margin-left: 20px;
@@ -631,7 +629,7 @@ textarea {
 		#pane div.middle h1 a:active {
 			color: #666;
 			font-family: var(--ww-font-monospace);
-			font-size: 1.125rem; /* 18px */
+			font-size: 1.125rem;
 			line-height: 18px;
 			text-align: center;
 			white-space: normal;
@@ -666,7 +664,7 @@ textarea {
 		}
 	#tools {
 		color: #073d69;
-		font-size: 0.625rem; /* 10px */
+		font-size: 0.625rem;
 		text-align: right;
 		padding-right: 20px;
 		padding-top: 10px;
@@ -702,7 +700,7 @@ textarea {
 			}
 			#tools input.field {
 				color: #cbdae1;
-				font-size: 0.6875rem; /* 11px */
+				font-size: 0.6875rem;
 				background-color: #2a6792;
 				padding: 1px;
 				border: 1px solid #1a5581;
@@ -760,7 +758,7 @@ textarea {
 
 nav#menu {
 	font-family: var(--ww-font-sans-serif);
-	font-size: 0.75rem; /* 12px */
+	font-size: 0.75rem;
 	background-color: #fff;
 	padding-bottom: 20px;
 
@@ -889,7 +887,7 @@ span.tocnumber {
 #page {
 	color: #333;
 	font-family: var(--ww-font-sans-serif);
-	font-size: 0.875rem; /* 14px */
+	font-size: 0.875rem;
 	line-height: 18px;
 	word-spacing: 3px;
 /*	text-align: justify;*/
@@ -967,7 +965,7 @@ span.tocnumber {
 	background-color: #f0f4f5;
 	border-top:1px dotted #ccc;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 0.625rem; /* 10px */
+	font-size: 0.625rem;
 	text-align: center;
 	padding: 20px;
 }
@@ -1005,7 +1003,7 @@ span.tocnumber {
 div#loginbox {
 	font-family: var(--ww-font-monospace);
 	color: #073d69;
-	font-size: 0.75rem; /* 12px */
+	font-size: 0.75rem;
 	background-color: #f0f4f5;
 	width:500px;
 	margin:50px auto;
