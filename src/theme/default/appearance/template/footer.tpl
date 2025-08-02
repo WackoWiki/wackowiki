@@ -8,7 +8,7 @@
 		<div class="page-meta">
 			<ul>
 				[= edit =
-					<li><a href="[ ' href ' ]" accesskey="E" title="[ ' _t: EditTip ' ]">[ ' _t: EditText' ]</a></li>
+					<li><a href="[ ' href ' ]" title="[ ' _t: EditTip ' ]">[ ' _t: EditText' ]</a></li>
 				=]
 				[= modHide =
 					<li>

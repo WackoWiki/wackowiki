@@ -1,5 +1,6 @@
 <?php
 /**
+
  * @package SimplePie
  * @copyright 2004-2022 Ryan Parman, Sam Sneddon, Ryan McCue
  * @author Ryan Parman

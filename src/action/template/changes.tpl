@@ -6,7 +6,7 @@
 	[= xml =
 		<span class="desc-rss-feed">
 			<a href="[ ' href ' ]">
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ChangesXMLTip ' ]" alt="XML" class="btn-feed">
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ChangesXMLTip ' ]" alt="XML" class="btn-feed btn-sm">
 			</a>
 		</span>
 		<br><br>

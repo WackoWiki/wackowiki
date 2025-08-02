@@ -1,7 +1,7 @@
 [ === main === ]
 	[ '' pagination '' ]
 	[= s =
-		<form action="[ ' href: attachments ' ]" method="get" name="file_search">
+		<form action="[ ' href ' ]" method="get" name="file_search">
 			[ ' csrf: file_search ' ]
 			[ ' href: attachments | hide_page ' ]
 			<input type="hidden" name="files" value="[ ' filter | e attr ' ]">
@@ -66,4 +66,4 @@
 <nav class="pagination">[ ' text ' ]</nav>
 
 [= icon =]
-<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ]"></a>
+<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ] btn-sm"></a>

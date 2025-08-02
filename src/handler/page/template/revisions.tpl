@@ -19,7 +19,7 @@
 				=]
 				[ '' placeholder '' ]
 				<a href="[ ' href: revisions.xml ' ]">
-					<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: RevisionXMLTip ' ]" alt="XML" class="btn-feed">
+					<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: RevisionXMLTip ' ]" alt="XML" class="btn-feed btn-sm">
 				</a>
 				[= m _ =
 					<input name="minor_edit" value="[ ' minor ' ]" type="hidden">

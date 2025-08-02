@@ -25,7 +25,7 @@
 						<tr>
 							<td>
 								[= closed =
-									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ForumLocked ' ]" alt="[ ' _t: ForumLocked ' ]" class="btn-locked">'
+									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ForumLocked ' ]" alt="[ ' _t: ForumLocked ' ]" class="btn-locked btn-sm">'
 								=]
 								[= updated =
 									<strong class="cite" title="[ ' _t: ForumNewPosts ' ]">[updated]</strong>
@@ -60,7 +60,7 @@
 		[= xml =
 			<span class="desc-rss-feed">
 				<a href="[ ' href ' ]">
-					<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: CommentsXMLTip ' ]" alt="XML" class="btn-feed">
+					<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: CommentsXMLTip ' ]" alt="XML" class="btn-feed btn-sm">
 				</a>
 			</span>
 			<br><br>

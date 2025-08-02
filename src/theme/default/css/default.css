@@ -1525,30 +1525,11 @@ table.gallery {
 /* menu */
 
 #menu-user {
-	margin: 0 auto 0;
 	float: left;
-	text-align: left;
-	position: relative;
 }
 [dir=rtl] #menu-user {
 	float: right;
 	text-align: right;
-}
-
-#menu-user ol,
-#menu-user ol ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-#menu-user li:first-child {
-	border-left: 1px none;
-	padding: 1px 6px 4px 0;
-}
-[dir=rtl] #menu-user li:first-child {
-	border-right: 1px none;
-	padding: 1px 0 4px 6px;
 }
 
 #menu-user li {
@@ -1556,18 +1537,21 @@ table.gallery {
 	float: left;
 	line-height: 1.2em;
 	margin: 0 .5em 0 -.5em;
-	padding: 0 .5em 0 .5em;
+	padding: 0.2em 0.5em;
 	white-space: nowrap;
 }
 [dir=rtl] #menu-user li {
 	border: dotted #aaa;
 	border-width: 0 1px 0 0;
+	float: right;
 }
 
-#menu-user ol ul li {
-	border-left: 0;
+#menu-user li:first-child {
+	border-left: 1px none;
 }
-
+[dir=rtl] #menu-user li:first-child {
+	border-right: 1px none;
+}
 #menu-user li:first-child.active {
 	margin-left: -6px;
 	padding-left: 6px;
@@ -1584,6 +1568,15 @@ table.gallery {
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	color: #fff;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+#menu-user ul ul li {
+	border-left: none;
+	padding: 0 .5em;
+}
+#menu-user ul ul li.active,
+#menu-user ul ul li:first-child.active {
+	padding: 0;
+	margin: 0;
 }
 
 #menu-user li a {
@@ -1966,48 +1959,13 @@ table.formation td {
 }
 
 #page-handler {
-	/* clear:both; */
 	float: right;
-	margin: 0 auto;
-	text-align: left;
-	z-index: 1000;
-	position: relative;
 }
 [dir=rtl] #page-handler {
 	float: left;
-	text-align: right;
-}
-#page-handler ul {
-	list-style: none outside none;
-	float: right;
-	position: relative;
-	margin: 0;
-	padding: 0;
-}
-[dir=rtl] #page-handler ul {
-	float: left;
 }
 
-#menu-user ol li,
-#page-handler ul li {
-	display: block;
-	float: left;
-	position: relative;
-	margin: 0;
-	padding: 1px 6px 4px;
-	white-space: nowrap;
-}
-[dir=rtl] #menu-user ol li,
-[dir=rtl] #page-handler ul li {
-	float: right;
-}
-
-#menu-user ol li a,
-#page-handler ul li a {
-	display:block;
-}
-
-#page-handler li.search{
+#page-handler li.search {
 	padding-bottom: 0;
 }
 
@@ -2022,64 +1980,81 @@ table.formation td {
 	border-right-color: #ccc;
 	border-bottom: 0 #ccc;
 	background-color: #fcfcfc;
+	width: 100%;
+	padding: 0;
+	margin-left: -1px;
 }
 
 /* submenu items */
-#menu-user ol ul, 
-#page-handler ul ul {
-	display: none; /* Sub menus are hidden by default */
+.submenu ul {
+	background: var(--ww-bg-secondary);
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+[dir=rtl] .submenu ul {
+	padding-right: 0;
+}
+
+.submenu li {
+	background: transparent;
+	display: block;
+	float: left;
+	padding: 1px 6px 4px;
+	position: relative;
+	text-decoration: none;
+	transition-duration: 0.5s;
+}
+[dir=rtl] .submenu li {
+	float: right;
+}
+
+.submenu li:hover,
+.submenu li:focus-within {
+	cursor: pointer;
+}
+
+.submenu li:focus-within a {
+	outline: none;
+}
+
+.submenu ul li ul {
+	background: var(--ww-bg-secondary);
+	visibility: hidden;
+	opacity: 0;
+	min-width: 5rem;
 	position: absolute;
-	background: none repeat scroll 0 0 white;
-	padding-top: 4px !important;
-	left: -1px;
-	right: auto;
-	width: auto;
+	transition: all 0.5s ease;
+	margin-top: 0px;
+	padding-top: 4px;
+	left: 0;
 	border: 1px solid #ccc;
 	border-top-width: 0;
-}
-[dir=rtl] #menu-user ol ul, 
-[dir=rtl] #page-handler ul ul {
-	right: -1px;
-	left: auto;
-}
-#menu-user ol ul a,
-#page-handler ul ul a {
-	background: none repeat scroll 0 0 transparent;
+	display: none;
+	z-index: 1000;
 }
 
-.dropdown-arrow {
-	font-size: 85%;
-	text-decoration: none;
+.submenu ul li:hover > ul,
+.submenu ul li:focus-within > ul,
+.submenu ul li ul:hover,
+.submenu ul li ul:focus {
+	visibility: visible;
+	opacity: 1;
+	display: block;
 }
 
-#menu-user ol ul li,
-#page-handler ul ul li {
-	left: auto;  /*resets the left: on the parent li */
-	margin: 0; /* Reset the 1px margin from the top menu */
-	clear: left;
+.submenu ul li ul li {
+	clear: both;
 	width: 100%;
-	padding: 0 20px 0 0;
 	white-space: nowrap;
+	padding: 0 20px 0 0;
 }
-[dir=rtl] #menu-user ol ul li,
-[dir=rtl] #page-handler ul ul li {
+[dir=rtl] .submenu ul li ul li {
 	padding: 0 0 0 20px;
 }
 
-#menu-user ol ul li.active,
-#page-handler ul ul li.active {
-	padding: 0;
-}
-
-#menu-user ol ul li a,
-#menu-user ol li.active li a,
-#menu-user ol li:hover ul li a,
-#menu-user ol ul li.active span,
-#page-handler ul ul li a,
-#page-handler ul li.active li a,
-#page-handler ul li:hover ul li a,
-#page-handler ul ul li span {
-	background: none repeat scroll 0 0 transparent;
+.submenu ul li ul li a,
+.submenu ul li ul li > span {
 	display: block;
 	float: left;
 	font-weight: normal;
@@ -2088,32 +2063,22 @@ table.formation td {
 	margin: 0;
 	padding: 0.25em 20px 0.2em 0.5em;
 }
-[dir=rtl] #menu-user ol ul li a,
-[dir=rtl] #menu-user ol li.active li a,
-[dir=rtl] #menu-user ol li:hover ul li a,
-[dir=rtl] #menu-user ol ul li.active span,
-[dir=rtl] #page-handler ul ul li a,
-[dir=rtl] #page-handler ul li.active li a,
-[dir=rtl] #page-handler ul li:hover ul li a,
-[dir=rtl] #page-handler ul ul li span {
+[dir=rtl] .submenu ul li ul li a,
+[dir=rtl] .submenu ul li ul li > span {
 	float: right;
 	padding: 0.25em 0.5em 0.2em 20px;
 }
 
-#page-handler ul ul li.active {
-	margin-left: -1px;
-}
-[dir=rtl] #page-handler ul ul li.active {
-	margin: 0 -1px 0 0;
+.submenu li:focus-within a {
+	outline: none;
 }
 
-/* make the sub menus appear on hover */
-#menu-user ol li:hover ul,
-#page-handler ul li:hover ul {
-	display: block; /* Show the sub menus */
-	z-index: 20;
+
+.dropdown-arrow {
+	font-size: 85%;
+	text-decoration: none;
 }
-	
+
 .page-handler{
 	list-style: none;
 }
@@ -2225,167 +2190,90 @@ li.m-source img {
 	background: url('./../icon/review2.svg') no-repeat;
 }
 
-.btn-reload {
-	background: url('./../icon/reload.svg') no-repeat;
+.btn-sm {
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
+.btn-md {
 	background-size: 22px 22px;
 	height: 22px;
 	width: 22px;
 	display: inline-block;
 }
+.btn-reload {
+	background: url('./../icon/reload.svg') no-repeat;
+}
 .btn-menu {
 	background: url('./../icon/menu.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 
 .btn-overflow-menu {
 	background: url('./../icon/overflow-menu.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-addbookmark {
 	background: url('./../icon/bookmark.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-removebookmark {
 	background: url('./../icon/bookmark-remove.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-delete {
 	background: url('./../icon/delete.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-edit {
 	background: url('./../icon/edit.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
+}
+.btn-copy {
+	background: url('./../icon/light/copy.svg') no-repeat;
 }
 .btn-source {
 	background: url('./../icon/text.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-feed {
 	background: url('./../icon/feed.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-info {
 	background: url('./../icon/dialog-info.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-tick {
 	background: url('./../icon/tick.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-warning {
 	background: url('./../icon/warning.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-add-page {
 	background: url('./../icon/page-add.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-page {
 	background: url('./../icon/show.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-comment {
 	background: url('./../icon/comment.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-attachment {
 	background: url('./../icon/attachment.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-upload {
 	background: url('./../icon/upload.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-unlocked {
 	background: url('./../icon/unlocked.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-locked {
 	background: url('./../icon/locked.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-search {
 	background: url('./../icon/search.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-tag {
 	background: url('./../icon/tag.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-languages {
 	background: url('./../icon/languages.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 .btn-revisions {
 	background: url('./../icon/revisions.svg') no-repeat;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-	display: inline-block;
 }
 
 .viewed {
@@ -2416,6 +2304,24 @@ li.m-source img {
 	width: 50px; 
 	float: left; 
 	padding-left: 10px;
+}
+
+/* navigation action ------------- */
+.nav-chapter {
+	background-color: rgb(241, 241, 241);
+	padding: 10px;
+}
+.nav-chapter td:nth-child(1) {
+	text-align: left;
+	white-space: nowrap;
+}
+.nav-chapter td:nth-child(2) {
+	text-align: center;
+	width: 100%;
+}
+.nav-chapter td:nth-child(3) {
+	text-align: right;
+	white-space: nowrap;
 }
 
 /* upload action ------------- */

@@ -1,7 +1,7 @@
 <?php
 
-declare(strict_types=1);
 /**
+
  * @package SimplePie
  * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
  * @author Ryan Parman
@@ -258,13 +258,13 @@ class MySQL extends DB
 
             if ($items !== 0) {
                 if (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_10]['feed'][0];
                 } elseif (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_ATOM_03]['feed'][0];
                 } elseif (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_RDF]['RDF'][0];
                 } elseif (isset($data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0])) {
-                    $feed =& $data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0];
+                    $feed = &$data['child'][\SimplePie\SimplePie::NAMESPACE_RSS_20]['rss'][0];
                 } else {
                     $feed = null;
                 }

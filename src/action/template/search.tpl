@@ -41,7 +41,7 @@
 						<h3>[ ' link ' ]</h3>
 						<span class="search-meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
 						[= comments =
-							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
+							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
 						=]
 						</span><br>
 						[ ' preview | nl2br ' ]
@@ -57,7 +57,7 @@
 			[= l _ =
 				[ ' delim | void ' ]
 				<li>
-					['' l SearchItem '']
+					[ '' l SearchItem '' ]
 				</li>
 			=]
 			</ol>
@@ -65,13 +65,13 @@
 		[= comma _ =
 			[= l _ =
 				[ ' delim | list '' , ' ]
-				['' l SearchItem '']
+				[ '' l SearchItem '' ]
 			=]
 		=]
 		[= br _ =
 			[= l _ =
 				[ ' delim | list '' '<br>' ' ]
-				['' l SearchItem '']
+				[ '' l SearchItem '' ]
 			=]
 		=]
 		[= emark _ =

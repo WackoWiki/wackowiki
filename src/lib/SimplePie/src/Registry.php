@@ -1,7 +1,7 @@
 <?php
 
-declare(strict_types=1);
 /**
+
  * @package SimplePie
  * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
  * @author Ryan Parman
@@ -124,7 +124,7 @@ class Registry
             $type = $this->legacyTypes[$type];
         }
 
-        if (! array_key_exists($type, $this->default)) {
+        if (!array_key_exists($type, $this->default)) {
             return false;
         }
 
@@ -165,7 +165,7 @@ class Registry
             $type = $this->legacyTypes[$type];
         }
 
-        if (! array_key_exists($type, $this->default)) {
+        if (!array_key_exists($type, $this->default)) {
             return null;
         }
 

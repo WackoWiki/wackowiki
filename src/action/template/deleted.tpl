@@ -31,4 +31,4 @@
 <nav class="pagination">[ ' text ' ]</nav>
 
 [= icon =]
-<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: PageDeleted ' ]" alt="[deleted]" class="btn-delete">
+<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: PageDeleted ' ]" alt="[deleted]" class="btn-delete btn-sm">

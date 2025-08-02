@@ -18,7 +18,7 @@
 	</small>
 	
 [ === icon === ]
-<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: LastEditedBy ' ]" title="[ ' _t: LastEditedBy ' ]" class="btn-revisions">
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: LastEditedBy ' ]" title="[ ' _t: LastEditedBy ' ]" class="btn-revisions btn-sm">
 
 [ === modified === ]
 <time datetime="[ ' time ' ]">[ ' time | time_formatted ' ]</time>

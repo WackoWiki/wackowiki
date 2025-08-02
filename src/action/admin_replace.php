@@ -32,7 +32,7 @@ if (!$this->is_admin())
 // functions
 $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $deleted = false)
 {
-	$category_id	= null;
+	$category_ids	= null;
 	$lang			= null;
 	$comments		= null;
 	$pages			= null;
@@ -45,83 +45,83 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 	{
 		$match =
 			($use_regex
-				? "(BINARY a.body REGEXP "		. $this->db->q($target) . " " .
-				  "OR BINARY a.title REGEXP "	. $this->db->q($target) . ") "
-				: "(BINARY a.body LIKE "		. $this->db->q('%' . $target . '%') . " " .
-				  "OR BINARY a.title LIKE "		. $this->db->q('%' . $target . '%') . ") "
+				? '(BINARY a.body REGEXP '	. $this->db->q($target) . ' ' .
+				'OR BINARY a.title REGEXP '	. $this->db->q($target) . ') '
+				: '(BINARY a.body LIKE '	. $this->db->q('%' . $target . '%') . ' ' .
+				'OR BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
 		);
 	}
 	else if ($pages || $comments)
 	{
 		$match =
 			($use_regex
-				? "(BINARY a.body REGEXP "		. $this->db->q($target) . ") "
-				: "(BINARY a.body LIKE "		. $this->db->q('%' . $target . '%') . ") "
+				? '(BINARY a.body REGEXP '	. $this->db->q($target) . ') '
+				: '(BINARY a.body LIKE '	. $this->db->q('%' . $target . '%') . ') '
 			);
 	}
 	else if ($titles)
 	{
 		$match =
 			($use_regex
-				? "(BINARY a.title REGEXP "		. $this->db->q($target) . ") "
-				: "(BINARY a.title LIKE "		. $this->db->q('%' . $target . '%') . ") "
+				? '(BINARY a.title REGEXP '	. $this->db->q($target) . ') '
+				: '(BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
 		);
 	}
 
 	// namespace: include tag and tag/%, not tag%
 	$selector =
-		($category_id
-			? "LEFT JOIN " . $prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
-			: "") .
+		($category_ids
+			? 'LEFT JOIN ' . $prefix . 'category_assignment ca ON (a.page_id = ca.object_id) '
+			: '') .
 		($tag
-			? "LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) "
-			: "") .
-		"WHERE " .
+			? 'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) '
+			: '') .
+		'WHERE ' .
 			$match .
 			($tag
-				? "AND (a.tag = "	. $this->db->q($tag) . " " .
-				  "OR a.tag LIKE "	. $this->db->q($tag . '/%') . " " .
-				  "OR b.tag = "		. $this->db->q($tag) . " " .
-				  "OR b.tag LIKE "	. $this->db->q($tag . '/%') . ") "
-				: "") .
+				? 'AND (a.tag = '	. $this->db->q($tag) . ' ' .
+				'OR a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
+				'OR b.tag = '		. $this->db->q($tag) . ' ' .
+				'OR b.tag LIKE '	. $this->db->q($tag . '/%') . ') '
+				: '') .
 			($comments
 				? ($pages
-					?	""
-					:	"AND a.comment_on_id <> 0 ")
-				: "AND a.comment_on_id = 0 ") .
+					? ''
+					: 'AND a.comment_on_id <> 0 ')
+				: 'AND a.comment_on_id = 0 ') .
 			(!empty($this->sess->replace_unset)
-				? "AND a.page_id NOT IN (" . $this->ids_string($this->sess->replace_unset) . ") "
-				: "") .
+				? 'AND a.page_id NOT IN (' . $this->ids_string($this->sess->replace_unset) . ') '
+				: '') .
 			($lang
-				? "AND a.page_lang = " . $this->db->q($lang) . " "
-				: "") .
-			($category_id
-				? "AND ca.category_id IN (" . $this->ids_string($category_id) . ") " .
-				  "AND ca.object_type_id = " . (int) OBJECT_PAGE . " "
-				: "") .
+				? 'AND a.page_lang = ' . $this->db->q($lang) . ' '
+				: '') .
+			($category_ids
+				? 'AND ca.category_id IN (' . $this->ids_string($category_ids) . ') ' .
+				'AND ca.object_type_id = ' . (int) OBJECT_PAGE . ' '
+				: '') .
 			($deleted
-				? ""
+				? ''
 				: ($tag
-					? "AND (a.deleted <> 1 OR b.deleted <> 1) "
-					: "AND a.deleted <> 1 ")) .
-			" ";
+					? 'AND (a.deleted <> 1 OR b.deleted <> 1) '
+					: 'AND a.deleted <> 1 ')) .
+		' ';
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(a.page_id) AS n " .
-		"FROM " . $prefix . "page a " .
+		'SELECT COUNT(a.page_id) AS n ' .
+		'FROM ' . $prefix . 'page a ' .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $limit);
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
-			u.user_name, o.user_name as owner_name " .
-		"FROM " . $prefix . "page a " .
-			"LEFT JOIN " . $prefix . "user u ON (a.user_id = u.user_id) " .
-			"LEFT JOIN " . $prefix . "user o ON (a.owner_id = o.user_id) " .
+		'SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
+			u.user_name, o.user_name as owner_name ' .
+		'FROM ' . $prefix . 'page a ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
+			'LEFT JOIN ' . $prefix . 'user o ON (a.owner_id = o.user_id) ' .
 		$selector .
-		"ORDER BY a.tag " .
+		'ORDER BY a.tag ' .
 		$pagination['limit']);
 
 	foreach ($results as $result)
@@ -265,7 +265,8 @@ $extract_context = function ($text, $target, $use_regex = false, $padding = 40) 
 	// get all indexes
 	if ($use_regex)
 	{
-		$target_str	= "/$target/Uu";
+		$target_q	= str_replace('/', "\\/", $target);
+		$target_str	= "/$target_q/Uu";
 	}
 	else
 	{
@@ -333,6 +334,8 @@ $extract_context = function ($text, $target, $use_regex = false, $padding = 40) 
 
 $search_form = function (array $o) use ($tpl)
 {
+	$category_ids		= $o['filter']['category_ids'];
+
 	$tpl->enter('search_');
 
 	$tpl->target		= $o['target'];
@@ -363,7 +366,7 @@ $search_form = function (array $o) use ($tpl)
 
 		$tpl->enter('options_');
 
-		$tpl->c_categories	= $this->show_category_form($this->page_lang, null, OBJECT_PAGE, false, false);
+		$tpl->c_categories	= $this->show_category_form($this->page_lang, null, OBJECT_PAGE, false, false, $category_ids);
 
 		if ($this->db->multilanguage)
 		{
@@ -402,6 +405,7 @@ $select_form = function ($pages, $pagination, $tcount, $max, array $o) use ($tpl
 	}
 
 	$hidden = [
+		'categories'		=> implode(',', $o['filter']['category_ids']),
 		'edit_comments'		=> $o['edit_comments'],
 		'edit_note'			=> $o['edit_note'],
 		'edit_pages'		=> $o['edit_pages'],
@@ -512,6 +516,7 @@ if (!isset($title))		$title		= 1;
 if (!isset($mute))		$mute		= 1;
 
 $action			= (string)	($_POST['_action']			?? null);
+$categories		= (string)	($_POST['categories']		?? '');
 $edit_comments	= (bool)	($_POST['edit_comments']	?? 0);
 $edit_pages		= (bool)	($_POST['edit_pages']		?? 0);
 $edit_titles	= (bool)	($_POST['edit_titles']		?? 0);
@@ -523,12 +528,12 @@ $use_regex		= (bool)	($_POST['use_regex']		?? 0);
 $edit_note		= (string)	trim(($_POST['edit_note']	?? ''));
 $minor_edit		= (bool)	($_POST['minor_edit']		?? 0);
 
-$edit_note		= $this->sanitize_text_field($edit_note, true);
-$show_form		= false;
+$edit_note			= $this->sanitize_text_field($edit_note, true);
+$show_search_form	= false;
 
 // remove \r (body contains only \n)
-$replacement	= str_replace("\r\n", "\n", $replacement);
-$target			= str_replace("\r\n", "\n", $target);
+$replacement		= str_replace("\r\n", "\n", $replacement);
+$target				= str_replace("\r\n", "\n", $target);
 
 // visualize line breaks in message sets
 $msg_replacement	= str_replace("\n", '↵', $replacement);
@@ -547,6 +552,11 @@ $tag			= $this->unwrap_link($page);
 // category filter
 $category_ids	= [];
 
+if ($categories)
+{
+	$category_ids = explode(',', $categories);
+}
+
 foreach ($_POST as $key => $val)
 {
 	if (preg_match('/^category(\d+)$/', $key, $ids) && $val == 'set')
@@ -561,7 +571,7 @@ $o = [
 	'edit_pages'		=> $edit_pages,
 	'edit_titles'		=> $edit_titles,
 	'filter' => [
-		'category_id'	=> $category_ids,
+		'category_ids'	=> $category_ids,
 		'comments'		=> $edit_comments,
 		'lang'			=> $lang,
 		'pages'			=> $edit_pages,
@@ -581,13 +591,15 @@ $o = [
 	'use_regex'			=> $use_regex,
 ];
 
+$tpl->header = true;
+
 // [C] replace target text with replacement
 if ($action == 'replace_text')
 {
 	// return to form
 	if (isset($_POST['back']))
 	{
-		$show_form = true;
+		$show_search_form = true;
 	}
 	else if (isset($_POST['replace']))
 	{
@@ -685,8 +697,8 @@ if ($action == 'select_pages')
 
 	if ($error)
 	{
-		$tpl->message	= $this->show_message($this->_t($error[0]), $error[1], false);
-		$show_form		= true;
+		$tpl->message		= $this->show_message($this->_t($error[0]), $error[1], false);
+		$show_search_form	= true;
 	}
 	else if (mb_strlen($target) >= 3)
 	{
@@ -715,17 +727,17 @@ if ($action == 'select_pages')
 					'<code>' . Ut::html($msg_target) . '</code>'),
 				'note', false);
 
-			$show_form = true;
+			$show_search_form = true;
 		}
 	}
 }
 else
 {
-	$show_form = true;
+	$show_search_form = true;
 }
 
 // [A] search & replace form
-if ($show_form)
+if ($show_search_form)
 {
 	unset(
 		$this->sess->replace_set,

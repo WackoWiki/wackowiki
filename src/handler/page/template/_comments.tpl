@@ -13,13 +13,13 @@
 								[= b _ =
 									<nav class="comment-tools">
 										[= remove _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-delete"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-delete btn-sm"></a>
 										=]
 										[= edit _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditCommentTip ' ]" alt="[ ' _t: EditComment ' ]" class="btn-edit"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditCommentTip ' ]" alt="[ ' _t: EditComment ' ]" class="btn-edit btn-sm"></a>
 										=]
 										[= source _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceTip ' ]" alt="[ ' _t: SourceText ' ]" class="btn-source"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceTip ' ]" alt="[ ' _t: SourceText ' ]" class="btn-source btn-sm"></a>
 										=]
 									</nav>
 								=]
@@ -65,7 +65,7 @@
 						[ ' csrf: add_comment ' ]
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
 
-						['' // load WikiEdit '']
+						[ '' // load WikiEdit '' ]
 						<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
 						<script src="[ ' db: base_path ' ]js/wikiedit.js"></script>
