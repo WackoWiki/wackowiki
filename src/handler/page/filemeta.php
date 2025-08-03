@@ -123,7 +123,7 @@ if ($action && !empty($file))
 					'source				= ' . $this->db->q($source) . ', ' .
 					'source_url			= ' . $this->db->q($source_url) . ', ' .
 					'license_id			= ' . (int) $license_id . ', ' .
-					'modified			= UTC_TIMESTAMP() ' .
+					'modified_dt		= UTC_TIMESTAMP() ' .
 				'WHERE file_id = ' . (int) $file['file_id'] . ' ' .
 				'LIMIT 1');
 
