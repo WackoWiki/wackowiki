@@ -453,12 +453,6 @@ aside.wrapper {
 }
 div.wrapper-content { padding: 10px 10px 25px 10px; }
 
-/* Important colored text: SYNTAX !!(red)text!! */
-.cl-red		{color: #c00;}
-.cl-green	{color: #008000;}
-.cl-blue	{color: #00c;}
-.cl-yellow	{color: #ff0;}
-
 /* Fixed width text: SYNTAX ##monospace## */
 code {
 	color: #660; 
@@ -468,11 +462,17 @@ code {
 	font-family: var(--ww-font-monospace);
 }
 
+/* underline text: SYNTAX __text__ */
+.underline { text-decoration: underline; }
+
 /* Important text: SYNTAX !!text!! */
 .cite {color: #ff0000; font-style: normal;}
 
-/* underline text: SYNTAX __text__ */
-.underline { text-decoration: underline; }
+/* Important colored text: SYNTAX !!(red)text!! */
+.cl-red		{color: #c00;}
+.cl-green	{color: #008000;}
+.cl-blue	{color: #00c;}
+.cl-yellow	{color: #ff0;}
 
 /* Highlighted text: SYNTAX ??text?? */
 mark {background: #ffa;}
