@@ -23,14 +23,13 @@ if (   !isset($config['language'])
 	$config['language'] = 'en';
 }
 
-$separator	= '<div class="fake_hr_separator"><hr></div>';
-
 global $lang;
 require_once 'setup/lang/installer.all.php';
 require_once 'setup/lang/installer.' . $config['language'] . '.php';
 
-$lang	= array_merge ($lang, $lang_all);
-$title	= $config['wacko_version'] ? $lang['TitleUpdate'] : $lang['TitleInstallation'];
+$lang		= array_merge ($lang, $lang_all);
+$separator	= '<div class="fake_hr_separator"><hr></div>';
+$title		= $config['wacko_version'] ? $lang['TitleUpdate'] : $lang['TitleInstallation'];
 
 // set default install action
 $lang[$install_action] ??= '';

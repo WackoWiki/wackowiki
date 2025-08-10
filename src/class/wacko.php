@@ -3552,7 +3552,7 @@ class Wacko
 		return [$width, $height];
 	}
 
-	// parse off <img> resizing tags from text: height= / width= / align=, e.g. ((http://example.com/image.png width=500))
+	// parse off <img> resizing tags from text: height= / width= / align=, e.g. ((https://example.com/image.png width=500))
 	function parse_img_param($text): array
 	{
 		$media_class = '';
@@ -3748,10 +3748,10 @@ class Wacko
 	* Returns full <a href=".."> or <img ...> HTML for Tag
 	*
 	* @param string		$tag			Link content - may be Wacko tag, interwiki wikiname:page tag,
-	*									http/file/ftp/https/mailto/xmpp URL,
+	*									http/https/file/ftp/mailto/xmpp URL,
 	*									local or remote audio/image/video-file for <audio>/<img>/<video> link,
 	*									or local or remote doc-file;
-	*									if pagetag is for an external link but not protocol is specified, http:// is prepended
+	*									if pagetag is for an external link but not protocol is specified, https:// is prepended
 	* @param string		$method			Optional Wacko method (default 'show' method added in run() function)
 	* @param string		$text			Optional text or image-file for HREF link (defaults to same as pagetag)
 	* @param string		$title
@@ -3872,7 +3872,7 @@ class Wacko
 				$tpl	= 'outerlink';
 			}
 		}
-		// file link -> http://example.com/file.zip
+		// file link -> https://example.com/file.zip
 		else if (preg_match('/^(https?|ftp|file):\/\/([^\\s\"<>]+)\.(7z|bz2|doc|exe|gz|odt|pdf|ppt|rar|rdf|rpm|tgz|xls|zip)$/u', $tag, $matches))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
@@ -9088,7 +9088,7 @@ class Wacko
 		else
 		{
 			// Use PHP built-in FILTER_VALIDATE_EMAIL, does not allow 'dotless' domains;
-			// http://php.net/filter.filters.validate
+			// https://www.php.net/manual/en/filter.constants.php#constant.filter-validate-email
 			return (bool) filter_var($email_address, FILTER_VALIDATE_EMAIL);
 		}
 	}

@@ -483,19 +483,6 @@ mark {background: #ffa;}
 .mark-blue		{background: #9ec6ff;}
 .mark-red		{background: #ffbaba;}
 
-/* InterWiki links: SYNTAX (HostPrefix:Term) */
-
-a.iw-bugs .icon {
-	background: rgba(0, 0, 0, 0) url('./../icon/light/report-bug.svg') no-repeat scroll left center;
-}
-a.iw-commit .icon,
-a.iw-revision .icon {
-	background: rgba(0, 0, 0, 0) url('./../icon/light/commit.svg') no-repeat scroll left center;
-}
-a.iw-source .icon {
-	background: rgba(0, 0, 0, 0) url('./../icon/light/repository.svg') no-repeat scroll left center;
-}
-
 /* Wiki links: SYNTAX (prefix://) */
 span.icon{
 	/* ! required for span width -> inline element */
@@ -539,7 +526,27 @@ a.acl-customsec .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/unlocked.svg') no-repeat scroll left center;
 }
 
-/* mime */
+/* InterWiki links: SYNTAX (HostPrefix:Term) */
+
+a.iw-bugs .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/report-bug.svg') no-repeat scroll left center;
+}
+a.iw-commit .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/commit.svg') no-repeat scroll left center;
+}
+a.iw-source .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/repository.svg') no-repeat scroll left center;
+}
+/* Interwiki links without icon */
+a.iw-archive .icon,
+a.iw-brave .icon,
+a.iw-rfc .icon,
+a.iw-ppr .icon,
+a.iw-wackowiki .icon {
+	padding-left: 0;
+}
+
+/* MIME */
 
 a[href $='.pdf'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/pdf.svg') no-repeat scroll left center;
