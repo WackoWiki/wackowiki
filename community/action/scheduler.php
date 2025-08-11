@@ -95,8 +95,6 @@ $get_last_day_of_month	= function ($mon, $year)
 	return $tday;
 };
 
-$this->doubleclick = false;
-
 $mode_month		= 'month';
 $mode_day		= 'day';
 $mode_default	= 'default';

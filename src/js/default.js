@@ -64,6 +64,15 @@ function dclick()
 {
 	if (edit)
 	{
+		// skip double-click editing for pages having forms
+		const pageShow	= document.getElementById('page-show');
+		const form		= pageShow.querySelector('form');
+
+		if (form)
+		{
+			return;
+		}
+
 		document.addEventListener('dblclick', mouseClick, true);
 	}
 }
@@ -218,7 +227,7 @@ function userSessionHeartbeat(duration, ename)
 			if (xhr.readyState == 4 && xhr.status != 200)
 			{
 				// Error handling
-				//alert(xhr.status + ': ' + (xhr.statusText ? xhr.statusText : 'Unknown')); // E.g.: 404: Not Found
+				// alert(xhr.status + ': ' + (xhr.statusText ? xhr.statusText : 'Unknown')); // E.g.: 404: Not Found
 				var div = document.createElement('div');
 				div.className = 'msg error';
 				div.innerHTML = lang.SessionExpiredEditor.replace(/\n/g, '<br>');
@@ -244,7 +253,7 @@ function userSessionHeartbeat(duration, ename)
 			if (xhr.status == 200)
 			{
 				// Response handling
-				//alert( xhr.responseText ); // responseText output
+				// alert( xhr.responseText ); // responseText output
 			}
 		};
 

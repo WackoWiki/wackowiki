@@ -57,7 +57,6 @@ class Wacko
 	public $module;
 	public $method					= '';
 
-	public bool $doubleclick		= true;
 	public bool $forum				= false;
 	public bool $canonical			= false;
 	public bool $static_feed		= false;	// disables section edit link in post_wacko

@@ -41,7 +41,6 @@ $this->http->ensure_tls($this->href());
 
 // hide article H1 header
 $this->hide_article_header	= true;
-$this->doubleclick			= false;
 
 // email confirmation
 if (isset($_GET['confirm']))

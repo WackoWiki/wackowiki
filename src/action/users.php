@@ -38,7 +38,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET, so personal me
 {
 	// hide H1 article header
 	$this->hide_article_header	= true;
-	$this->doubleclick			= false;
 
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))
