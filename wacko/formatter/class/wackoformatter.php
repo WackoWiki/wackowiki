@@ -1,4 +1,5 @@
 <?php
+
 /*
 * WackoFormatter.
 *
@@ -184,15 +185,13 @@ class WackoFormatter
 				: '') .
 			// html comments
 			#"<!--.*-->|" .
-			//? (?...?)
+			// definition  (?...?)
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|" .
 			// bracket links [[tag description]] or ((tag description))
 			($this->object->db->disable_bracketslinks
 				? ''
 				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|" .
-				  "\(\((\S+?)([ \t]+([^\n]+?))?\)\)|" .
-				  "\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|" .
-				  "\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|") .
+				  "\(\((\S+?)([ \t]+([^\n]+?))?\)\)|") .
 			// citated  > ... or  >> ...
 			"\n[ \t]*>+[^\n]*|" .
 			// cite text <[...]>
@@ -243,14 +242,14 @@ class WackoFormatter
 			// headers
 			"\n[ \t]*={2,7}.*?={2,7}|" .
 			// separator
-			"[-]{4,}|" .
+			"-{4,}|" .
 			// line break
 			"---\n?\s*|" .
 			// strikethrough
 			"--\S--|" .
 			"--(\S.*?[^- \t\n\r])--|" .
 			// list including multilevel
-			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|" .
+			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]{1,3}|[ivIV]+|(\d{1,3}))[\.\)](\#\d{1,3})?)?|" .
 			// media links
 			"file:((\.\.|!)?\/)?[[:alnum:]][[:alnum:]\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
@@ -283,7 +282,7 @@ class WackoFormatter
 			")/sm";
 
 		$this->MOREREGEXP =
-			// centered text  >>...<< (depreciated)
+			// centered text  >>...<< (deprecated)
 			"/(>>.*?<<|" .
 			// escaped  ~...
 			"~([^ \t\n]+)|" .
@@ -332,6 +331,7 @@ class WackoFormatter
 		$wacko		= &$this->object;
 		$callback	= [&$this, 'wacko_preprocess'];
 
+		// escaped ~...
 		if (!empty($thing[0]) && $thing[0] == '~')
 		{
 			if ($thing[1] == '~')
@@ -462,7 +462,7 @@ class WackoFormatter
 		{
 			return $matches[1];
 		}
-		// centered text (depreciated)
+		// centered text (deprecated)
 		else if (preg_match('/^>>(.*)<<$/s', $thing, $matches))
 		{
 			return '<!--escaped--><div class="center">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</div><!--escaped-->';
@@ -518,7 +518,7 @@ class WackoFormatter
 		// table begin
 		else if ($thing == '#||')
 		{
-			$this->br			= 0;
+			$this->br			= false;
 			$this->cols			= 0;
 			$this->intablebr	= true;
 			$this->table_scope	= true;
@@ -527,7 +527,7 @@ class WackoFormatter
 		}
 		else if ($thing == '#|')
 		{
-			$this->br			= 0;
+			$this->br			= false;
 			$this->cols			= 0;
 			$this->intablebr	= true;
 			$this->table_scope	= true;
@@ -537,8 +537,8 @@ class WackoFormatter
 		// table end
 		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)
 		{
-			$this->br			= 0;
-			$this->intablebr	= false;
+			$this->br			= false;
+			$this->intable_br	= false;
 			$this->table_scope	= false;
 
 			return '</table>';
@@ -680,14 +680,14 @@ class WackoFormatter
 		// deleted
 		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s', $thing, $matches))
 		{
-			$this->br = 0;
+			$this->br = false;
 
 			return '<del class="diff">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</del>';
 		}
 		// inserted
 		else if (preg_match('/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s', $thing, $matches))
 		{
-			$this->br = 0;
+			$this->br = false;
 
 			return '<ins class="diff">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</ins>';
 		}
@@ -721,7 +721,7 @@ class WackoFormatter
 		else if (  preg_match('/^\'\'(.*?)\'\'$/s', $thing, $matches)
 				|| preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s', $thing, $matches))
 		{
-			$this->br = 1;
+			$this->br = true;
 
 			if (isset($matches[3])
 				&& $color = in_array($matches[3], ($this->object->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
@@ -734,7 +734,7 @@ class WackoFormatter
 		// mark
 		else if (preg_match('/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/s', $thing, $matches))
 		{
-			$this->br = 1;
+			$this->br = true;
 
 			if (isset($matches[3])
 				&& $color = in_array($matches[3], ($this->object->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
@@ -801,13 +801,7 @@ class WackoFormatter
 			$result = preg_replace('/^(<br>)+/i', '', $result );
 			$result = preg_replace('/(<br>)+$/i', '', $result );
 
-			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
-			if (preg_match('/<\/ul>[\s\r\t\n]*$/i', $result))
-			{
-				$result .= $this->z_gif;
-			}
-
-			return $result; // '<blockquote>' . $result . '</blockquote>';
+			return $result;
 		}
 		// super
 		else if (preg_match('/^\^\^(.*)\^\^$/', $thing, $matches))
@@ -837,7 +831,7 @@ class WackoFormatter
 		// separators
 		else if (preg_match('/^-{4,}$/', $thing))
 		{
-			$this->br = 0;
+			$this->br = false;
 
 			return "<hr>\n";
 		}
@@ -911,7 +905,10 @@ class WackoFormatter
 						$text = substr($url, 1);
 					}
 
-					return ($sup ? '<sup>' : '') . '<a href="#o' . $aname . '" id="' . $aname . '">' . $text . '</a>' . ($sup ? '</sup>' : '');
+					return
+						($sup ? '<sup>' : '') .
+							'<a href="#o' . $aname . '" id="' . $aname . '">' . $text . '</a>' .
+						($sup ? '</sup>' : '');
 				}
 				// footnote [[#*]], [[#**]], [[#1]], [[#2]]
 				else if ($url[0] == '#')
@@ -938,7 +935,10 @@ class WackoFormatter
 						$text = substr($url, 1);
 					}
 
-					return ($sup ? '<sup>' : '') . '<a href="#' . $ahref . '" id="o' . $ahref . '">' . $text . '</a>' . ($sup ? '</sup>' : '');
+					return
+						($sup ? '<sup>' : '') .
+							'<a href="#' . $ahref . '" id="o' . $ahref . '">' . $text . '</a>' .
+						($sup ? '</sup>' : '');
 				}
 				// autogenerated footnote [[fn footnote here]]
 				else if (substr($url, 0, 2) == 'fn')
@@ -967,6 +967,7 @@ class WackoFormatter
 
 					return ($sup ? '<sup class="footnote">' : '') . '<a href="#footnote-' . $footnote_count . '" id="footnote-' . $footnote_count . '-ref" title="footnote ' . $footnote_count . '" >[' . $footnote_count . ']</a>' . ($sup ? '</sup>' : '');
 				}
+				// forced links
 				else
 				{
 					if ($url != ($url = (preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/', '', $url))))
@@ -1001,50 +1002,13 @@ class WackoFormatter
 
 			return '';
 		}
-		// experimental: backported from openSpace
-		// image link (*(http://example.com file:image.png)*)
-		else if (  preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/', $thing, $matches)
-				|| preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/', $thing, $matches)
-				)
-		{
-			$url	= $matches[1] ?? '';
-			$img	= $matches[3] ?? '';
-
-			if ($url && $img)
-			{
-				if ($url != ($url = (preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/', '', $url))))
-				{
-					$result	= '</span>';
-				}
-
-				if ($url[0] == '(')
-				{
-					$url	 = substr($url, 1);
-					$result	.= '(';
-				}
-
-				if ($url[0] == '[')
-				{
-					$url	 = substr($url, 1);
-					$result	.= '[';
-				}
-
-				$img		= preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/', '', $img);
-
-				return $result . $wacko->pre_link($url, $img, 1, 1);
-			}
-			else
-			{
-				return '';
-			}
-		}
 		// indented text
-		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|[0-9]{1,3})[\.\)](\#[0-9]{1,3})?)?(\n|$)/s', $thing, $matches))
+		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]{1,3}|[ivIV]+|\d{1,3})[\.\)](\#\d{1,3})?)?(\n|$)/s', $thing, $matches))
 		{
 			// new line
 			$result .= ($this->br ? "<br>\n" : "\n");
 
-			//intable or not?
+			// intable or not?
 			if ($this->intable)
 			{
 				$closers	= &$this->tdindent_closers;
@@ -1059,7 +1023,7 @@ class WackoFormatter
 			}
 
 			// we definitely want no line break in this one.
-			$this->br = 0;
+			$this->br = false;
 
 			// #18 syntax support
 			if ($matches[5])
@@ -1078,7 +1042,7 @@ class WackoFormatter
 			{
 				$opener		= '<div class="indent">';
 				$closer		= '</div>' . "\n";
-				$this->br	= 1;
+				$this->br	= true;
 				$new_type	= 'i';
 			}
 			else if ($new_indent_type == '-' || $new_indent_type == '*')
@@ -1090,8 +1054,8 @@ class WackoFormatter
 			}
 			else
 			{
-				$opener		= '<ol type="' . $new_indent_type . '"><li' .
-							  ($start ? ' value="' . $start . '"' : '') . '>';
+				$opener		= '<ol type="' . $new_indent_type . '">' .
+							  '<li' . ($start ? ' value="' . $start . '"' : '') . '>';
 				$closer		= '</li></ol>' . "\n";
 				$new_type	= 1;
 				$li			= 1;
@@ -1148,12 +1112,12 @@ class WackoFormatter
 
 			if ($result)
 			{
-				$this->br = 0;
+				$this->br = false;
 			}
 
 			$result .= $this->br ? "<br>\n" : "\n";
 
-			$this->br = 1;
+			$this->br = true;
 
 			return $result;
 		}
@@ -1166,7 +1130,7 @@ class WackoFormatter
 				$caption = 2;
 			}
 			#Diag::dbg('GOLD', ' ::fileimg:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
-			return $wacko->pre_link($thing, '', 1, $caption);
+			return $wacko->pre_link($thing, '', true, $caption);
 		}
 		// interwiki links
 		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/s', $thing, $matches))

@@ -1,7 +1,7 @@
 <?php
 /*
 
-Typografica library: paragrafica class.
+Typografica library: Paragrafica class.
 
 https://wackowiki.org/doc/Dev/Projects/Typografica
 
@@ -179,7 +179,7 @@ class Paragrafica
 
 		while ($_w != $what);
 
-		// 3. replace each <t->....<-t> to <p class="auto">...</p>
+		// 3. replace each <t->...<-t> with <p class="auto">...</p>
 		$pcount = 0;
 		$pieces = explode($this->mark2, $what);
 
@@ -212,7 +212,7 @@ class Paragrafica
 					{
 						$pieces_inside = explode($this->mark3, $v);
 
-						if (sizeof($pieces_inside) < 3)
+						if (count($pieces_inside) < 3)
 						{
 							$insert_p = true;
 						}
@@ -239,21 +239,26 @@ class Paragrafica
 		}
 
 		$what = implode('', $pieces);
-		// 4. remove unused <t-> & <-t>
-		$what = str_replace($this->mark1, '', $what);
-		$what = str_replace($this->mark2, '', $what);
-		$what = str_replace($this->mark3, '', $what);
-		$what = str_replace($this->mark4, '', $what);
-		// remove obsolete <ignore> tags
-		$what = str_replace('<ignore>', '', $what);
-		$what = str_replace('</ignore>', '', $what);
+
+		// 4. remove unused <t-> & <-t> and <ignore> tags
+		$what = str_replace(
+			[
+				$this->mark1,
+				$this->mark2,
+				$this->mark3,
+				$this->mark4,
+				'<ignore>',
+				'</ignore>'
+			],
+			'',
+			$what);
 
 		// -. done with P
 
 		// INFINITY-2. inserting a (or next?) ignored regexp
 		{
 			$what	.= ' ';
-			$a		 = explode( '{:typo:markup:3:}', $what);
+			$a		 = explode('{:typo:markup:3:}', $what);
 
 			if ($a)
 			{

@@ -33,18 +33,22 @@ class PreFormatter
 		{
 			return '""' . $matches[1] . '""';
 		}
+		// macro  :::::
 		else if ($thing == ':::::')
 		{
 			return '((user:' . $wacko->get_user_name() . ' ' . $wacko->get_user_name() . ')):';
 		}
+		// macro  ::::
 		else if ($thing == '::::')
 		{
 			return '((user:' . $wacko->get_user_name() . ' ' . $wacko->get_user_name() . '))';
 		}
+		// macro  ::@::
 		else if ($thing == '::@::')
 		{
 			return sprintf($wacko->db->name_date_macro, '((user:' . $wacko->get_user_name() . ' ' . $wacko->get_user_name() . '))', date($wacko->db->date_format . ' ' . $wacko->db->time_format));
 		}
+		// macro  ::+::
 		else if ($thing == '::+::')
 		{
 			return date($wacko->db->date_format . ' ' . $wacko->db->time_format);
@@ -65,5 +69,3 @@ class PreFormatter
 		return $thing;
 	}
 }
-
-?>
