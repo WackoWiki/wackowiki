@@ -5,14 +5,6 @@ if (!defined('IN_WACKO'))
 	exit('No direct script access allowed');
 }
 
-/*
-
-########################################################
-##              Email Constructor                     ##
-########################################################
-
-*/
-
 // Import the PHPMailer class into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -152,30 +144,18 @@ class Email
 
 			$mail->send();
 
-			/* if (!$mail->Send())
-			{
-				$message = "Mailer Error: " . $mail->ErrorInfo;
-				$this->engine->log(4, $message);
-				exit;
-			}
-			else
-			{
-				$message = "Message has been sent.";
-				$this->engine->log(5, $message);
-			} */
-
 			$send_ok = true;
 		}
 
 		catch (Exception $e)
 		{
-			echo $e->errorMessage(); //Pretty error messages from PHPMailer
+			echo $e->errorMessage(); // Pretty error messages from PHPMailer
 			$send_ok = false;
 		}
 
 		catch (\Exception $e)
 		{
-			echo $e->getMessage(); //Boring error messages from anything else!
+			echo $e->getMessage(); // Boring error messages from anything else!
 			$send_ok = false;
 		}
 		// end

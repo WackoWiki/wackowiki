@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-define('WACKO_STARTED', microtime(1));
+define('WACKO_STARTED', microtime(true));
 
 require_once 'config/constants.php';
 

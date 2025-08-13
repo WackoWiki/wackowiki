@@ -1,30 +1,34 @@
 lang = {
 	// default.js
 	ReallySave :			"Really save?",
+	ModifiedHint :			"Field has changed, do not forget to save the changes.",
+	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"Сесията ви е изтекла!\nВие сте излезли поради продължително бездействие.\n1. Запишете редакциите на формуляра си в текстов файл, за да предотвратите загуба.\n2. Обновете страницата.\n3. Влезте отново и отново изпратете.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",
-	HelpFormatting :		"Help",
+	HelpFormatting :		"Справка",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
-	Heading1 :				"Heading 1",
-	Heading2 :				"Heading 2",
-	Heading3 :				"Heading 3",
-	Heading4 :				"Heading 4",
-	Heading5 :				"Heading 5",
-	Heading6 :				"Heading 6",
-	Bold :					"Bold",
-	Italic :				"Italic",
-	Underline :				"Underline",
-	Strikethrough :			"Strikethrough",
-	Code :					"Code",
+
+	Heading1 :				"Заглавие от 1 ниво",
+	Heading2 :				"Заглавие от 2 ниво",
+	Heading3 :				"Заглавие от 3 ниво",
+	Heading4 :				"Заглавие от 4 ниво",
+	Heading5 :				"Заглавие от 5 ниво",
+	Heading6 :				"Заглавие от 6 ниво",
+	Bold :					"Удебелен",
+	Italic :				"Курсив",
+	Underline :				"Подчертан",
+	Strikethrough :			"Зачеркнат",
+	Small :					"Малък",
+	Code :					"Код",
 	Superscript :			"Superscript",
 	Subscript :				"Subscript",
-	List :					"List",
-	NumberedList :			"Numbered list",
+	List :					"Неномериран списък",
+	NumberedList :			"Номериран списък",
 	Left :					"Left",
-	Center :				"Center",
+	Center :				"Център",
 	Right :					"Right",
 	Justify :				"Justify",
 	Outdent :				"Outdent",
@@ -32,19 +36,20 @@ lang = {
 	CodeWrapper :			"Code Wrapper",
 	HTML :					"HTML",
 	Action :				"Action",
-	Line :					"Line",
-	Signature :				"Signature",
+	Line :					"Хоризонтална линия",
+	Signature :				"Подпис",
 	Quote :					"Quote",
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Footnote",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
-	
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
@@ -62,5 +67,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

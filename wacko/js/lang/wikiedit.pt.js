@@ -1,66 +1,49 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
-
+	ReallySave: 'Deseja realmente salvar?',
+	ModifiedHint: 'O campo foi alterado, não se esqueça de salvar as alterações.',
+	NotSavedWarning: 'Você não salvou as alterações. Tem certeza que deseja sair?',
+	SessionExpiredEditor: 'A sua sessão expirou!\nVocê foi desconectado devido a uma longa inatividade.\n1. Guarde as edições do seu formulário no ficheiro de texto para evitar a sua perda.\n2. Actualize a página.\n3. Faça novamente o login e volte a enviar.',
 	// wikiedit.js
-	HelpAbout :				"Help & About",
-	HelpFormatting :		"Help",
-	HelpFormattingTip :		"Help on Wiki-formatting",
-	HelpFormattingPage :	"Doc/English/Formatting",
-	
-	Heading1 :				"Cabe�alho N�vel 1",
-	Heading2 :				"Cabe�alho N�vel 2",
-	Heading3 :				"Cabe�alho N�vel 3",
-	Heading4 :				"Cabe�alho N�vel 4",
-	Heading5 :				"Cabe�alho N�vel 5",
-	Heading6 :				"Cabe�alho N�vel 6",
-	Bold :					"Bold",
-	Italic :				"It�lico",
-	Underline :				"Sublinhado",
-	Strikethrough :			"Riscado",
-	Code :					"C�digo",
-	Superscript :			"Superscript",
-	Subscript :				"Subscript",
-	List :					"List",
-	NumberedList :			"Item numa Lista Ordenada",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
-	Outdent :				"Outdent",
-	Indent :				"Indent",
-	CodeWrapper :			"Code Wrapper",
-	HTML :					"HTML",
-	Action :				"Action",
-	Line :					"Barra Horizontal",
-	Signature :				"Inserir Assinatura",
-	Quote :					"Quote",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
-	Shade :					"Shade",
-	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
-	
-	Link :					"Link",
-	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
-							' Ctrl+B - Bold\n'+
-							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
-							' Alt+U or Ctrl+Shift+T - Unindent\n'+
-							' Ctrl+J - MarkUp (!!)\n'+
-							' Ctrl+H - MarkUp (??)\n'+
-							' Alt+L - Link\n'+
-							' Ctrl+L - Link with description\n'+
-							' Ctrl+Shift+L - Unordered List\n'+
-							' Ctrl+Shift+N - Ordered List\n'+
-							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
-							' \n'
-
+	HelpAbout: 'Ajuda e Sobre',
+	HelpFormatting: 'Ajuda',
+	HelpFormattingTip: 'Ajuda na formatação do Wiki-Wiki',
+	HelpFormattingPage: 'Doc/English/Formatting',
+	Heading1: 'Cabeçalho Nível 1',
+	Heading2: 'Cabeçalho Nível 2',
+	Heading3: 'Cabeçalho Nível 3',
+	Heading4: 'Cabeçalho Nível 4',
+	Heading5: 'Cabeçalho Nível 5',
+	Heading6: 'Cabeçalho Nível 6',
+	Bold: 'Negrito',
+	Italic: 'Itálico',
+	Underline: 'Sublinhado',
+	Strikethrough: 'Riscado',
+	Small: 'Pequeno',
+	Code: 'Código',
+	Superscript: 'Sobrescrito',
+	Subscript: 'Sub-script',
+	List: 'Item numa Lista Não Ordenada',
+	NumberedList: 'Item numa Lista Ordenada',
+	Left: 'Esquerda',
+	Center: 'Centrar',
+	Right: 'Direita',
+	Justify: 'Justificado',
+	Outdent: 'Desindentar',
+	Indent: 'Indentar',
+	CodeWrapper: 'Colaborador de Código',
+	HTML: 'HTML',
+	Action: 'Acão',
+	Line: 'Barra Horizontal',
+	Signature: 'Inserir Assinatura',
+	Quote: 'Cotação',
+	MarkedText: 'Texto marcado',
+	HighlightText: 'Destacar texto',
+	Shade: 'Sombra',
+	Footnote: 'Nota de rodapé',
+	Hyperlink: 'Hiperlink',
+	InsertTable: 'Inserir tabela',
+	Link: 'Vincular',
+	TextForLinking: 'Texto para ligação',
+	HelpAboutTip: ' Shortcuts:\n' + ' Ctrl+B - Negrito\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Sublinhar\n' + ' Ctrl+Shift+S - Ataque\n' + ' Ctrl+Shift+1 .. 4 - Título 1..4\n' + ' Alt+I ou Ctrl+T - Recuo\n' + ' Alt+U ou Ctrl+Shift+T - Sem recuo\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link com a descrição\n' + ' Ctrl+Shift+L - Lista Ordenada\n' + ' Ctrl+Shift+N - Lista Ordenada\n' + ' Ctrl+Shift+O - Lista Ordenada\n' + ' Ctrl+= - Texto pequeno\n' + ' Ctrl+Shift+Menos - Linha Horizontal\n' + ' \n'
 };

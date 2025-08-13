@@ -1,13 +1,16 @@
 lang = {
 	// default.js
 	ReallySave :			"Really save?",
+	ModifiedHint :			"Field has changed, do not forget to save the changes.",
+	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"Je sessie is verlopen!\nJe bent afgemeld vanwege lange inactiviteit.\n1. Sla je formulier op in een sms-bestand om verlies te voorkomen.\n2. Vernieuw de pagina.\n3. Log opnieuw in en dien opnieuw in.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",
 	HelpFormatting :		"Help",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
+
 	Heading1 :				"Niveau 1 kop",
 	Heading2 :				"Niveau 2 kop",
 	Heading3 :				"Niveau 3 kop",
@@ -17,34 +20,36 @@ lang = {
 	Bold :					"Vetgedrukte",
 	Italic :				"Cursieve",
 	Underline :				"Onderstreepte",
-	Strikethrough :			"Strikethrough",
+	Strikethrough :			"Doorgestreepte",
+	Small :					"Klein",
 	Code :					"Code",
 	Superscript :			"Superscript",
 	Subscript :				"Subscript",
-	List :					"List",
-	NumberedList :			"Numbered list",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
-	Outdent :				"Outdent",
-	Indent :				"Indent",
+	List :					"Ongeordende lijst",
+	NumberedList :			"Geordende lijst",
+	Left :					"Links",
+	Center :				"Gecentreerd",
+	Right :					"Rechts",
+	Justify :				"Uitvullen",
+	Outdent :				"Uitspringen",
+	Indent :				"Inspringen",
 	CodeWrapper :			"Code Wrapper",
 	HTML :					"HTML",
 	Action :				"Action",
-	Line :					"Line",
-	Signature :				"Signature",
+	Line :					"Horizontale lijn",
+	Signature :				"Handtekening",
 	Quote :					"Quote",
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Voetnoot",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
-	
+	InsertTable :			"Tafel invoegen",
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
@@ -62,5 +67,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

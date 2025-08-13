@@ -1,50 +1,55 @@
 lang = {
 	// default.js
 	ReallySave :			"Really save?",
+	ModifiedHint :			"Field has changed, do not forget to save the changes.",
+	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"La tua sessione è scaduta!\nSei stato disconnesso a causa di una lunga inattività.\n1. Salva il tuo modulo modificato in un file di testo per evitare perdite.\n2. Aggiorna la pagina.\n3. Effettuare di nuovo il login e ripresentarsi.",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
-	HelpFormatting :		"Help",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpAbout :				"Aiuto & Informazioni",
+	HelpFormatting :		"Aiuto",
+	HelpFormattingTip :		"Aiuto nella formattazione Wiki",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
-	Heading1 :				"Heading 1",
-	Heading2 :				"Heading 2",
-	Heading3 :				"Heading 3",
-	Heading4 :				"Heading 4",
-	Heading5 :				"Heading 5",
-	Heading6 :				"Heading 6",
-	Bold :					"Bold",
-	Italic :				"Italic",
-	Underline :				"Underline",
-	Strikethrough :			"Strikethrough",
-	Code :					"Code",
-	Superscript :			"Superscript",
-	Subscript :				"Subscript",
-	List :					"List",
-	NumberedList :			"Numbered list",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
-	Outdent :				"Outdent",
-	Indent :				"Indent",
+
+	Heading1 :				"Intestazione 1",
+	Heading2 :				"Intestazione 2",
+	Heading3 :				"Intestazione 3",
+	Heading4 :				"Intestazione 4",
+	Heading5 :				"Intestazione 5",
+	Heading6 :				"Intestazione 6",
+	Bold :					"Grassetto",
+	Italic :				"Corsivo",
+	Underline :				"Sottolineato",
+	Strikethrough :			"Barrato",
+	Small :					"Piccola",
+	Code :					"Codice",
+	Superscript :			"Apice",
+	Subscript :				"Pedice",
+	List :					"Elenco puntato",
+	NumberedList :			"Elenco numerato",
+	Left :					"Sinistra",
+	Center :				"Centro",
+	Right :					"Destra",
+	Justify :				"Giustificato",
+	Outdent :				"Meno indentato",
+	Indent :				"Più indentato",
 	CodeWrapper :			"Code Wrapper",
 	HTML :					"HTML",
 	Action :				"Action",
-	Line :					"Line",
-	Signature :				"Signature",
+	Line :					"Riga orizzontale",
+	Signature :				"Inserisci la firma",
 	Quote :					"Quote",
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Nota a piè di pagina",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
-	
+	InsertTable :			"Inserire tabella",
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
@@ -62,5 +67,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

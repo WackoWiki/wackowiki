@@ -1,13 +1,16 @@
 lang = {
 	// default.js
 	ReallySave :			"Really save?",
+	ModifiedHint :			"Field has changed, do not forget to save the changes.",
+	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"Your session has expired!\nYou\'ve been logged off due to long inactivity.\n1. Save your form edits to text file to prevent loss.\n2. Refresh the page.\n3. Log in again and re-submit.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",
 	HelpFormatting :		"Help",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpFormattingTip :		"Help on Wiki formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
+
 	Heading1 :				"Heading 1",
 	Heading2 :				"Heading 2",
 	Heading3 :				"Heading 3",
@@ -18,7 +21,8 @@ lang = {
 	Italic :				"Italic",
 	Underline :				"Underline",
 	Strikethrough :			"Strikethrough",
-	Code :					"Code",
+	Small :					"Small",
+	Code :					"Inline code",
 	Superscript :			"Superscript",
 	Subscript :				"Subscript",
 	List :					"List",
@@ -38,13 +42,14 @@ lang = {
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Footnote",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
-	
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
@@ -62,5 +67,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

@@ -45,7 +45,7 @@ class Settings extends Dbal implements ArrayAccess
 
 			if ($this->wacko_version != WACKO_VERSION && (!$this->system_seed || strlen($this->system_seed) < 20))
 			{
-				die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
+				die('WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.');
 			}
 
 			$this->system_seed_hash = hash('sha1', $this->system_seed);
@@ -57,9 +57,9 @@ class Settings extends Dbal implements ArrayAccess
 
 				// retrieving configuration data from db
 				if (!($result = $this->load_all(
-						"SELECT config_name, config_value FROM {$this->table_prefix}config")))
+					"SELECT config_name, config_value FROM {$this->table_prefix}config")))
 				{
-					die("Error loading WackoWiki config data: database `config` table is empty.");
+					die('Error loading WackoWiki config data: database `config` table is empty.');
 				}
 
 				foreach ($result as $row)
@@ -87,7 +87,7 @@ class Settings extends Dbal implements ArrayAccess
 								INNER JOIN {$this->table_prefix}user u ON (gm.user_id = u.user_id)
 								INNER JOIN {$this->table_prefix}usergroup g ON (gm.group_id = g.group_id)")))
 				{
-					die("Error loading WackoWiki usergroups data: database `group` table is empty.");
+					die('Error loading WackoWiki usergroups data: database `usergroup` table is empty.');
 				}
 
 				$this->groups	= [];
@@ -118,7 +118,7 @@ class Settings extends Dbal implements ArrayAccess
 
 				$prefix .= substr(base64_encode(hash('sha1', $this->base_url . $this->system_seed_hash, true)), 1, 6);
 
-				$this->cookie_prefix	= preg_replace('/[^0-9a-z]+/i', '', $prefix);
+				$this->cookie_prefix	= preg_replace('/[^a-z\d]+/i', '', $prefix);
 				$this->user_table		= $this->table_prefix . 'user';
 
 				// cache to file

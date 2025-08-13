@@ -1,50 +1,55 @@
 lang = {
 	// default.js
 	ReallySave :			"Really save?",
+	ModifiedHint :			"Field has changed, do not forget to save the changes.",
+	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"A munkamenet lejÃ¡rt!\nA hosszÃº tÃ©tlensÃ©g miatt bejelentkezett.\n1. Az elvesztÃ©s elkerÃ¼lÃ©se Ã©rdekÃ©ben az Å±rlapszerkesztÃ©seket szÃ¶veges fÃ¡jlba mentse.\n2. FrissÃ­tsd az oldalt.\n3. Jelentkezzen be Ãºjra, Ã©s kÃ¼ldje el Ãºjra.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",
-	HelpFormatting :		"Segítség",
+	HelpFormatting :		"SegÃ­tsÃ©g",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
-	Heading1 :				"1. szintû címsor",
-	Heading2 :				"2. szintû címsor",
-	Heading3 :				"3. szintû címsor",
-	Heading4 :				"4. szintû címsor",
-	Heading5 :				"5. szintû címsor",
-	Heading6 :				"6. szintû címsor",
-	Bold :					"Félkövér szöveg",
-	Italic :				"Dõlt szöveg",
-	Underline :				"Aláhúzott szöveg",
-	Strikethrough :			"Áthúzott szöveg",
-	Code :					"Forráskód",
-	Superscript :			"Superscript",
-	Subscript :				"Subscript",
-	List :					"Felsorolásos lista elem",
-	NumberedList :			"Sorszámozott lista elem",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
-	Outdent :				"Outdent",
-	Indent :				"Indent",
+
+	Heading1 :				"1. szintÅ± cÃ­msor",
+	Heading2 :				"2. szintÅ± cÃ­msor",
+	Heading3 :				"3. szintÅ± cÃ­msor",
+	Heading4 :				"4. szintÅ± cÃ­msor",
+	Heading5 :				"5. szintÅ± cÃ­msor",
+	Heading6 :				"6. szintÅ± cÃ­msor",
+	Bold :					"FÃ©lkÃ¶vÃ©r szÃ¶veg",
+	Italic :				"DÅ‘lt szÃ¶veg",
+	Underline :				"AlÃ¡hÃºzott szÃ¶veg",
+	Strikethrough :			"ÃthÃºzott szÃ¶veg",
+	Small :					"Kicsi",
+	Code :					"ForrÃ¡skÃ³d",
+	Superscript :			"FelsÅ‘ index",
+	Subscript :				"AlsÃ³ index",
+	List :					"FelsorolÃ¡sos lista elem",
+	NumberedList :			"SorszÃ¡mozott lista elem",
+	Left :					"Balra zÃ¡rt",
+	Center :				"KÃ¶zÃ©pre zÃ¡rt",
+	Right :					"Jobbra zÃ¡rt",
+	Justify :				"SorkizÃ¡rt",
+	Outdent :				"KihÃºzÃ¡s",
+	Indent :				"BehÃºzÃ¡s",
 	CodeWrapper :			"Code Wrapper",
 	HTML :					"HTML",
 	Action :				"Action",
-	Line :					"Vízszintes elválasztó vonal",
-	Signature :				"Aláírás beszúrása",
-	Quote :					"Quote",
+	Line :					"VÃ­zszintes elvÃ¡lasztÃ³ vonal",
+	Signature :				"AlÃ¡Ã­rÃ¡s beszÃºrÃ¡sa",
+	Quote :					"IdÃ©zet",
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"LÃ¡bjegyzet",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
-	
-	Link :					"Link",
+	InsertTable :			"TÃ¡blÃ¡zat beillesztÃ©se",
+
+	Link :					"HivatkozÃ¡s",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' GyorshivatkozÃ¡sok:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
@@ -62,5 +67,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

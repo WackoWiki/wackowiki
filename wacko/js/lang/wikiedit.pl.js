@@ -1,66 +1,49 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
-
+	ReallySave: 'Naprawd臋 zapisa膰?',
+	ModifiedHint: 'Pole uleg艂o zmianie, nie zapomnij zapisa膰 zmian.',
+	NotSavedWarning: 'Nie zapisa艂e艣 zmian. Czy na pewno chcesz opu艣ci膰?',
+	SessionExpiredEditor: 'Twoja sesja wygas艂a!\nZosta艂e艣 wylogowany z powodu d艂ugiej nieaktywno艣ci.\n1. Zapisz edycj臋 formularza w pliku tekstowym, 偶eby zapobiec utracie.\n2. Od艣wie偶 stron臋.\n3. Zaloguj si臋 ponownie i prze艣lij ponownie.',
 	// wikiedit.js
-	HelpAbout :				"Help & About",
-	HelpFormatting :		"Help",
-	HelpFormattingTip :		"Help on Wiki-formatting",
-	HelpFormattingPage :	"Doc/English/Formatting",
-	
-	Heading1 :				"Nag丑wek 1 stopnia",
-	Heading2 :				"Nag丑wek 2 stopnia",
-	Heading3 :				"Nag丑wek 3 stopnia",
-	Heading4 :				"Nag丑wek 4 stopnia",
-	Heading5 :				"Nag丑wek 5 stopnia",
-	Heading6 :				"Nag丑wek 6 stopnia",
-	Bold :					"Pogrubienie",
-	Italic :				"Pochylenie",
-	Underline :				"Podkre秎enie",
-	Strikethrough :			"Przekre秎enie",
-	Code :					"Kod 紃骴硂wy",
-	Superscript :			"Superscript",
-	Subscript :				"Subscript",
-	List :					"Wypunktowanie",
-	NumberedList :			"Numeracja",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
-	Outdent :				"Outdent",
-	Indent :				"Indent",
-	CodeWrapper :			"Code Wrapper",
-	HTML :					"HTML",
-	Action :				"Action",
-	Line :					"Linia pozioma",
-	Signature :				"Signature",
-	Quote :					"Quote",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
-	Shade :					"Shade",
-	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
-	
-	Link :					"Link",
-	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
-							' Ctrl+B - Bold\n'+
-							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
-							' Alt+U or Ctrl+Shift+T - Unindent\n'+
-							' Ctrl+J - MarkUp (!!)\n'+
-							' Ctrl+H - MarkUp (??)\n'+
-							' Alt+L - Link\n'+
-							' Ctrl+L - Link with description\n'+
-							' Ctrl+Shift+L - Unordered List\n'+
-							' Ctrl+Shift+N - Ordered List\n'+
-							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
-							' \n'
-
+	HelpAbout: 'Pomoc & Oko艂o',
+	HelpFormatting: 'Pomoc',
+	HelpFormattingTip: 'Pomoc w formatowaniu Wiki',
+	HelpFormattingPage: 'Doc/Polski/FormatowanieTekstu',
+	Heading1: 'Nag艂贸wek 1 stopnia',
+	Heading2: 'Nag艂贸wek 2 stopnia',
+	Heading3: 'Nag艂贸wek 3 stopnia',
+	Heading4: 'Nag艂贸wek 4 stopnia',
+	Heading5: 'Nag艂贸wek 5 stopnia',
+	Heading6: 'Nag艂贸wek 6 stopnia',
+	Bold: 'Pogrubienie',
+	Italic: 'Pochylenie',
+	Underline: 'Podkre艣lenie',
+	Strikethrough: 'Przekre艣lenie',
+	Small: 'Ma艂y',
+	Code: 'Kod 藕r贸d艂owy',
+	Superscript: 'Superskrypt',
+	Subscript: 'Subskrypt',
+	List: 'Wypunktowanie',
+	NumberedList: 'Numeracja',
+	Left: 'Lewo',
+	Center: '艢rodek',
+	Right: 'Prawo',
+	Justify: 'Wyjustuj',
+	Outdent: 'Wysuni臋cie',
+	Indent: 'Wci臋cie',
+	CodeWrapper: 'Wrapper kodu',
+	HTML: 'HTML',
+	Action: 'Akcja',
+	Line: 'Linia pozioma',
+	Signature: 'Podpis',
+	Quote: 'Cytowanie',
+	MarkedText: 'Oznaczony tekst',
+	HighlightText: 'Pod艣wietl tekst',
+	Shade: 'Cieniowanie',
+	Footnote: 'Przypis',
+	Hyperlink: 'Hiperlink',
+	InsertTable: 'Wstaw tabel臋',
+	Link: 'Link',
+	TextForLinking: 'Tekst do 艂膮czenia',
+	HelpAboutTip: ' Skr贸t贸w:\n' + ' Ctrl+B - Pogrubienie\n' + ' Ctrl+I - Pochylenie\n' + ' Ctrl+U - Podkre艣lenie\n' + ' Ctrl+Shift+S - Przekre艣lenie\n' + ' Ctrl+Shift+1 .. 4 - Nag艂贸wek 1..4\n' + ' Alt+I or Ctrl+T - Wci臋cie\n' + ' Alt+U or Ctrl+Shift+T - Wysuni臋cie\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link z opisem\n' + ' Ctrl+Shift+L - Nieuporz膮dkowana lista\n' + ' Ctrl+Shift+N - Lista uporz膮dkowana\n' + ' Ctrl+Shift+O - Lista uporz膮dkowana\n' + ' Ctrl+= - Ma艂y tekst\n' + ' Ctrl+Shift+Minus - Linia pozioma\n' + ' \n'
 };

@@ -55,7 +55,7 @@ if ($this->db->enable_feeds)
 	$tpl->rss_url = $url =
 		[
 			$this->db->base_url . XML_DIR . '/',
-			'_' . preg_replace('/[^0-9a-z]/', '', strtolower($this->db->site_name)) . '.xml'
+			'_' . preg_replace('/[^a-z\d]/', '', strtolower($this->db->site_name)) . '.xml'
 		];
 
 	if ($this->db->news_cluster)
@@ -65,7 +65,7 @@ if ($this->db->enable_feeds)
 
 	if (!$this->hide_revisions)
 	{
-		$tpl->rss_revisions_tag	= $this->tag;
+		$tpl->rss_revisions_tag		= $this->tag;
 		$tpl->rss_revisions_href	= $this->href('revisions.xml');
 	}
 }

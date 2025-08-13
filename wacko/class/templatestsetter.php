@@ -126,7 +126,7 @@ class TemplatestSetter extends TemplatestFilters
 				// when doing inline substitution - all of \n is removed from the subject
 				$text = trim($text, "\n");
 
-				// all of whitespace spans with \n in them replaced by single space
+				// all whitespace spans with \n in them replaced by single space
 				for ($i = 0; ($nl = strpos($text, "\n", $i)) !== false; $i = $pre)
 				{
 					for ($pre = $nl; $pre > 0 && ctype_space($text[$pre - 1]); --$pre);

@@ -28,7 +28,7 @@ const CACHE_FEED_DIR				= '_cache/feed';
 const CACHE_PAGE_DIR				= '_cache/page';
 const CACHE_SQL_DIR					= '_cache/query';
 const CACHE_TEMPLATE_DIR			= '_cache/template';
-const CACHE_SESSION_DIR				= '/tmp';				// '_cache/session'
+const CACHE_SESSION_DIR				= '/tmp';				// '/tmp', '_cache/session'
 
 const CHMOD_SAFE					= 0640;					// better to use 0600 in production
 const CHMOD_FILE					= 0644;					// file creation mode
@@ -52,8 +52,10 @@ const GLOB_ALL						= '{,.}*';				// for glob()
 const ADD_NO_DIV					= '*';					// for Wacko::method()
 const SYSTEM_LANG					= -1;					// for Wacko::_t()
 
+const COOKIE_SAMESITE				= 'Lax';				// Strict, Lax, None
 const AUTH_TOKEN					= 'Auth';
 const GUEST							= 'guest@wacko';
+
 const INTERCOM_MAX_SIZE				= 262144;
 
 const LOAD_NOCACHE					= 0;

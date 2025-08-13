@@ -70,7 +70,7 @@ class SessionFileStore extends Session
 
 	protected function store_read($id, $create = false)
 	{
-		if (($this->open_file($id, $create)))
+		if ($this->open_file($id, $create))
 		{
 			$stat = fstat($this->fd);
 
@@ -82,7 +82,7 @@ class SessionFileStore extends Session
 			if (($text = fread($this->fd, $size)) !== false)
 			{
 				$text = $this->decrypt($text);
-				$text and $text = gzinflate($text);
+				$text && $text = gzinflate($text);
 			}
 
 			return $text;
@@ -94,7 +94,7 @@ class SessionFileStore extends Session
 
 	protected function store_write($id, $text)
 	{
-		if (($this->open_file($id, true)))
+		if ($this->open_file($id, true))
 		{
 			$text = gzdeflate($text, 9);
 			$text = $this->encrypt($text);
@@ -199,7 +199,7 @@ class SessionFileStore extends Session
 
 		if (@file_exists($fname))
 		{
-			// we REQUIRE existant session file to be writable usual file and not symlink
+			// we REQUIRE existent session file to be writable usual file and not symlink
 			if (!is_writable($fname) || is_link($fname) || !is_file($fname))
 			{
 				if (!$create)
@@ -208,7 +208,7 @@ class SessionFileStore extends Session
 				}
 
 				// destructive fix attempt
-				unlink($fname) or rmdir($fname);
+				unlink($fname) || rmdir($fname);
 				clearstatcache();
 
 				if (@file_exists($fname))
@@ -232,7 +232,7 @@ class SessionFileStore extends Session
 				if (!is_writable($dir) || is_link($dir) || !is_dir($dir))
 				{
 					// destructive fix attempt
-					unlink($dir) or rmdir($dir);
+					unlink($dir) || rmdir($dir);
 					clearstatcache();
 
 					if (@file_exists($dir))

@@ -11,9 +11,9 @@ use Hashids\Hashids;
 
 class UriRouter
 {
-	const CODE_VERSION = 2; // to not read incompatible cached data
-	const GLOBALS = ['G' => '_GET', 'P' => '_POST', 'S' => '_SERVER'];
-	private $config = [];
+	const CODE_VERSION	= 2; // to not read incompatible cached data
+	const GLOBALS		= ['G' => '_GET', 'P' => '_POST', 'S' => '_SERVER'];
+	private $config		= [];
 	private $db;
 	private $http;
 
@@ -46,7 +46,8 @@ class UriRouter
 			{
 				$methods[] = pathinfo($method, PATHINFO_FILENAME);
 			}
-			// Ut::dbg('methods', $methods);
+
+			# Ut::dbg('methods', $methods);
 
 			$this->config = $this->read_config($conf_file, ['method' => implode('|', $methods)]);
 
@@ -75,9 +76,9 @@ class UriRouter
 			$env[$varname] = $GLOBALS[$varname]; // $$varname don't work for _GET & others...
 		}
 
-		//Ut::dbg(array_diff_key($env, ['_SERVER'=>0]));
+		# Ut::dbg(array_diff_key($env, ['_SERVER' => 0]));
 		$this->route($env);
-		//Ut::dbg('->', array_diff_key($env, ['_SERVER'=>0]));
+		# Ut::dbg('->', array_diff_key($env, ['_SERVER' => 0]));
 
 		$vars = $env['vars'];
 
@@ -101,7 +102,7 @@ class UriRouter
 					}
 				}
 			}
-			//Ut::dbg('_GET', $_GET);
+			# Ut::dbg('_GET', $_GET);
 		}
 
 		return $vars;
@@ -129,7 +130,7 @@ class UriRouter
 
 				foreach ($env['match'] as $var => $val)
 				{
-					if (preg_match('#[^\d]#', $var))
+					if (preg_match('#\D#', (string) $var))
 					{
 						list ($varname, $varidx) = $this->parse_var($var);
 						$env[$varname][$varidx] = $val;
@@ -158,7 +159,7 @@ class UriRouter
 					// substitute vars into value
 					if (strpos($val, '$') !== false)
 					{
-						$val = preg_replace_callback('#@?(\$[0-9a-j])|@?\$\{([\w&]+)\}|\$\$|\$\@#',
+						$val = preg_replace_callback('#@?(\$[a-j\d])|@?\$\{([\w&]+)\}|\$\$|\$\@#',
 							function ($x) use (&$env)
 							{
 								if ($x[0] == '$$' || $x[0] == '$@')
@@ -220,7 +221,7 @@ class UriRouter
 						break;	// fail - unset var
 					}
 
-					// pre-comaprison func
+					// pre-comparison func
 					switch ($func)
 					{
 						case 'int':
@@ -250,7 +251,7 @@ class UriRouter
 									$hashids = new Hashids($seed);
 								}
 
-								$ids = $hashids->decode(preg_replace('#[^a-zA-Z0-9]+#', '', $var));
+								$ids = $hashids->decode(preg_replace('#[^a-zA-Z\d]+#', '', $var));
 
 								if (($n = count($ids)) == $exp[1] + 1)
 								{
@@ -274,7 +275,7 @@ class UriRouter
 								$env['sub'] = $match2;
 							}
 
-							$ok = (!!$ok) === ($op == '~');
+							$ok = ((bool) $ok) === ($op == '~');
 							break;
 
 						case '==':
@@ -376,7 +377,7 @@ class UriRouter
 				$regex = preg_replace_callback('#\{((\w+?)[:=])?([^}\d]*)\}#',
 					function ($x) use (&$re_place)
 					{
-						if (($repl = @$re_place[strtolower($x[3])]))
+						if ($repl = @$re_place[strtolower($x[3])])
 						{
 							return '(' . (empty($x[2])? '' : '?P<' . $x[2] . '>') . $repl . ')';
 						}
@@ -393,7 +394,7 @@ class UriRouter
 				$actions = [];
 				foreach (array_slice($line, 1, $nf - 1) as &$one)
 				{
-					if (!preg_match('#^(\$[0-9a-j]|[\w&]+)(:(\w+))?(\?=?|==?|![~=]?|[<>]=|[-=~<>])(.*)$#', $one, $match) ||
+					if (!preg_match('#^(\$[a-j\d]|[\w&]+)(:(\w+))?(\?=?|==?|![~=]?|[<>]=|[-=~<>])(.*)$#', $one, $match) ||
 						(($match[2] == '!' || $match[2] == '-' || $match[2] == '?') && $match[3] !== ''))
 					{
 						$this->aband($prefix . 'invalid action "' . $one . '"');
@@ -446,7 +447,7 @@ class UriRouter
 			$varidx = ord($var[1]) - ord('a');
 			$varname = 'sub'; // submatch
 		}
-		else if (($varname = @self::GLOBALS[$var[0]]))
+		else if ($varname = @self::GLOBALS[$var[0]])
 		{
 			$varidx = substr($var, 1);	 // _GET/etc vars
 		}

@@ -37,7 +37,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 												// .php.net - to make cookies visible on all subdomains
 	public $cf_cookie_secure		= false;	// cookie should only be sent over secure connections.
 	public $cf_cookie_httponly		= true;		// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
-	public $cf_cookie_samesite		= 'Strict';	// asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
+	public $cf_cookie_samesite		= COOKIE_SAMESITE;	// 'Strict' asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
 	public $cf_referer_check		= '';
 	public $cf_cache_limiter		= 'none';
 	public $cf_cache_expire			= 180*60;	// ttl for cached session pages in seconds
@@ -49,7 +49,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		register_shutdown_function([$this, 'terminator'], getcwd());
 		parent::__construct([], parent::ARRAY_AS_PROPS);
 
-		$ua = $_SERVER['HTTP_USER_AGENT'] ?? null;
+		$ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
 		if (strpos($ua, 'Trident') !== false)
 		{
@@ -105,7 +105,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$this->sticky__log = array_slice($this->sticky__log, 0, 1) + ['...'] + array_slice($this->sticky__log, -10, null);
 			}
 
-			// let old page live for some seconds to gather missing requests (ajax etc)
+			// let old page live for some seconds to gather missing requests (ajax etc.)
 			if (!isset($this->__expire))
 			{
 				$this->__expire = ($delete_old? 0 : $now + 5); // STS magic number
@@ -147,7 +147,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if ($name || !$this->name)
 		{
 			// filter name
-			$name = preg_replace('/[^0-9a-zA-Z_\-]+/', '', $name);
+			$name = preg_replace('/[^a-zA-Z\d_\-]+/', '', $name);
 
 			if (!$name || ctype_digit($name))
 			{
@@ -288,13 +288,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if (!isset($this->__started))
 		{
 			$now = time();
-			isset($this->sticky__created)  or  $this->sticky__created = $now;
+			isset($this->sticky__created)  ||  $this->sticky__created = $now;
 
 			$this->__started =
 			$this->__regenerated = $now;
 			$this->__user_agent = $this->user_agent;
-			isset($this->cf_tls)  and  $this->__user_tls = $this->cf_tls;
-			isset($this->cf_ip)  and  $this->__user_ip = $this->cf_ip;
+			isset($this->cf_tls)  &&  $this->__user_tls = $this->cf_tls;
+			isset($this->cf_ip)   &&  $this->__user_ip  = $this->cf_ip;
 		}
 	}
 
@@ -424,7 +424,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		$index = static::nonce_index($action, $code);
 
-		if (($ret = isset($nonces[$index])))
+		if ($ret = isset($nonces[$index]))
 		{
 			if ($protect)
 			{
@@ -448,7 +448,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $ret;
 	}
 
-	// those two is for possible override in store methods
+	// those two are for possible override in store methods
 	protected function store_generate_id()
 	{
 		return Ut::random_token(21);
@@ -456,7 +456,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	protected function store_validate_id($id)
 	{
-		return preg_match('/^[0-9a-zA-Z]{21}$/', $id);
+		return preg_match('/^[a-zA-Z\d]{21}$/', $id);
 	}
 
 	// clean vars on hard reset, leave sticky_ vars in place
@@ -480,22 +480,19 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			switch ($this->cf_cache_limiter)
 			{
 				case 'public':
-					header('Expires: ' . Ut::http_date(time() + $age));
 					header("Cache-Control: public, max-age=$age");
 					break;
 
 				case 'private':
-					header('Expires: ' . Ut::http_date(-1)); // looong ago
+					header('Cache-Control: no-cache');
 					// FALLTHRU
 
 				case 'private_no_expire':
-					header("Cache-Control: private, max-age=$age, pre-check=$age");
+					header("Cache-Control: private, max-age=$age");
 					break;
 
 				case 'nocache':
-					header('Expires: ' . Ut::http_date(-1));
-					header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-					header('Pragma: no-cache');
+					header('Cache-Control: no-store');
 					return; // suppress last-modified
 
 				default:
@@ -558,11 +555,11 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			return;
 		}
 
-		isset($path)		or $path		= $this->cf_cookie_path;
-		isset($domain)		or $domain		= $this->cf_cookie_domain;
-		isset($secure)		or $secure		= $this->cf_cookie_secure;
-		isset($httponly)	or $httponly	= $this->cf_cookie_httponly;
-		isset($samesite)	or $samesite	= $this->cf_cookie_samesite;
+		isset($path)		|| $path		= $this->cf_cookie_path;
+		isset($domain)		|| $domain		= $this->cf_cookie_domain;
+		isset($secure)		|| $secure		= $this->cf_cookie_secure;
+		isset($httponly)	|| $httponly	= $this->cf_cookie_httponly;
+		isset($samesite)	|| $samesite	= $this->cf_cookie_samesite;
 
 		// cookie name must be rfc2616 2.2 token:
 		$name = Ut::urlencode('/[\x7F\x00-\x1F\s()<>@,;:\\\\"\/\[\]?={}%]/', $name);
@@ -571,8 +568,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		if (Ut::is_empty($value))
 		{
-			$expires = 1;
-			$value = 'deleted';
+			$expires	= 1;
+			$value		= 'deleted';
 		}
 
 		// rfc6265 4.1.1 cookie-octet
@@ -592,11 +589,11 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 		}
 
-		$path		and $cookie .= '; path=' . $path;
-		$domain		and $cookie .= '; domain=' . $domain;
-		$secure		and $cookie .= '; secure';
-		$httponly	and $cookie .= '; httponly';
-		$samesite	and $cookie .= '; SameSite=' . $samesite;
+		$path		&& $cookie .= '; path=' . $path;
+		$domain		&& $cookie .= '; domain=' . $domain;
+		$secure		&& $cookie .= '; secure';
+		$httponly	&& $cookie .= '; httponly';
+		$samesite	&& $cookie .= '; SameSite=' . $samesite;
 
 		header($cookie, false); // false -- add, not replace
 
@@ -617,7 +614,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		foreach (headers_list() as $name => $value)
 		{
-			if (!strcasecmp($name, $set))
+			if (!strcasecmp((string) $name, $set))
 			{
 				if (!strncmp($value, $cookie, $clen) && substr($value, $clen, 1) == '=')
 				{

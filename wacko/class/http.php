@@ -57,7 +57,7 @@ class Http
 		if ($this->db->tls && !$this->tls_session)
 		{
 			// relative addressing
-			if (!preg_match('/^(http|https):\/\/([^\\s\"<>]+)$/', $url))
+			if (!preg_match('/^(https?):\/\/([^\\s\"<>]+)$/', $url))
 			{
 				$url = 'https://' . $_SERVER['SERVER_NAME'] . $url;
 			}
@@ -77,11 +77,11 @@ class Http
 
 		clearstatcache();
 
-		if (($timestamp = @filemtime($this->file)))
+		if ($timestamp = @filemtime($this->file))
 		{
 			if (time() - $timestamp <= $this->db->cache_ttl)
 			{
-				if (($contents = file_get_contents($this->file)))
+				if ($contents = file_get_contents($this->file))
 				{
 					return $contents;
 				}
@@ -120,19 +120,21 @@ class Http
 				"FROM " . $this->db->table_prefix . "cache " .
 				"WHERE name = " . $this->db->q($hash));
 
-			// Ut::dbg('invalidate_page', $page);
-
-			$past = time() - $this->db->cache_ttl - 1;
-
-			foreach ($params as $param)
+			if ($params)
 			{
-				$file	= $this->construct_id($page, $param['method'], $param['query'], $param['cache_lang']);
-				$x		= @touch($file, $past); // touching is faster than unlinking
+				# Ut::dbg('invalidate_page', $page);
 
-				if ($x)
+				$past = time() - $this->db->cache_ttl - 1;
+
+				foreach ($params as $param)
 				{
-					++$n;
-				}
+					$file	= $this->construct_id($page, $param['method'], $param['query'], $param['cache_lang']);
+					$x		= @touch($file, $past); // touching is faster than unlinking
+
+					if ($x)
+					{
+						++$n;
+					}
 
 				// Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
@@ -153,7 +155,7 @@ class Http
 
 	private function construct_id($page, $method, $query, $lang)
 	{
-		return Ut::join_path(CACHE_PAGE_DIR, Ut::http64_encode(hash('sha1', ($page . '_' . $method . '_' . $query . '_' . $lang), 1)));
+		return Ut::join_path(CACHE_PAGE_DIR, Ut::http64_encode(hash('sha1', ($page . '_' . $method . '_' . $query . '_' . $lang), true)));
 	}
 
 	// Check http-request. May be, output cached version.
@@ -183,27 +185,35 @@ class Http
 		$this->query = $query;
 
 		// check cache
-		if (($cached_page = $this->load_page($mtime)))
+		if ($cached_page = $this->load_page($mtime))
 		{
-			// Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+			# Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
-			$gmt	= Ut::http_date($mtime);
-			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
-			$lastm	= @$_SERVER['HTTP_IF_MODIFIED_SINCE'];
-
-			if (($p = strpos($lastm, ';')))
+			if (in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD']))
 			{
-				$lastm = substr($lastm, 0, $p);
-			}
+				$client_etag			= !empty($_SERVER['HTTP_IF_NONE_MATCH'])		? trim($_SERVER['HTTP_IF_NONE_MATCH'])		: null;
+				$client_last_modified	= !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])	: null;
+				$client_accept_encoding	= $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '';
+				$identifier				= '';
 
-			if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD')
-			{
-				if (!$lastm && !$etag);
-				else if ($lastm && $gmt != $lastm);
-				else if ($etag && $gmt != trim($etag, '\"'));
-				else
+				$server_last_modified	= Ut::http_date($mtime);
+				$server_etag_raw		= hash('sha1', $cached_page . $client_accept_encoding . $identifier);
+				$server_etag			= '"' . $server_etag_raw . '"';
+
+				header('Last-Modified: '	. $server_last_modified);
+				header('ETag: '				. $server_etag);
+				header('Cache-Control: max-age=10800');
+				header('Vary: Accept-Encoding');
+
+				$matching_last_modified	= $client_last_modified == $server_last_modified;
+				$matching_etag			= $client_etag && strpos($client_etag, $server_etag_raw) !== false;
+				$strict					= false;
+
+				if (($client_last_modified && $client_etag) || $strict
+					? $matching_last_modified && $matching_etag
+					: $matching_last_modified || $matching_etag)
 				{
-					// Ut::dbg('not modified');
+					# Ut::dbg('not modified');
 					$this->status(304);
 					$this->terminate();
 				}
@@ -223,17 +233,11 @@ class Http
 
 				ini_set('default_charset', null);
 
-				header('Last-Modified: ' . $gmt);
-				header('ETag: "' . $gmt . '"');
-
-				//header('Content-Length: '.strlen($cached));
-				//header('Cache-Control: max-age=0');
-
 				echo $cached_page;
 
 				if (strpos($this->method, '.xml') === false)
 				{
-					echo "\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $mtime) . " -->\n";
+					echo "\n<!-- WackoWiki Caching Engine: page cached at " . gmdate('Y-m-d H:i:s', $mtime) . " GMT -->\n";
 					echo "</body>\n</html>";
 				}
 
@@ -249,7 +253,10 @@ class Http
 	{
 		$this->method	= $method;
 
-		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
+		if ($this->db->cache
+			&& $_SERVER['REQUEST_METHOD'] != 'POST'
+			&& $method != 'edit'
+			&& $method != 'watch')
 		{
 			// cache only for anonymous user
 			if (!isset($this->sess->userprofile))
@@ -281,7 +288,7 @@ class Http
 	{
 		if ($this->db->session_store == 1)
 		{
-			$sess = new SessionFileStore;
+			$sess = new SessionFileStore();
 			$sess->cf_file_path = CACHE_SESSION_DIR;
 		}
 		else
@@ -303,8 +310,8 @@ class Http
 		// for freecap, /file method and alike - do not play in NoReplay & do no simple id regen
 		if ($route & 2)
 		{
-			$sess->cf_static = 1;
-			$sess->cf_prevent_replay = 0;
+			$sess->cf_static			= 1;
+			$sess->cf_prevent_replay	= 0;
 		}
 
 		$sess->start('Session');
@@ -426,18 +433,15 @@ class Http
 	/**
 	 * disable caching
 	 *
-	 * @param boolean $client_only - Disables only client-side caching. Optional, default is TRUE
+	 * @param bool $client_only - Disables only client-side caching. Optional, default is TRUE
 	 */
 	function no_cache($client_only = true)
 	{
 		// disable browser cache for page
 		if (!headers_sent())
 		{
-			header('Expires: ' . Ut::http_date(-1));						// Date in the past
 			header('Last-Modified: ' . Ut::http_date());					// always modified
-			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
-			header('Cache-Control: post-check=0, pre-check=0', false);
-			header('Pragma: no-cache');										// HTTP 1.0
+			header('Cache-Control: no-store');
 		}
 		// STS: check into session nocache code!
 
@@ -452,7 +456,6 @@ class Http
 	{
 		// to be replaced then by no_cache or what
 		header('Cache-Control: public');
-		header('Pragma: cache');
 	}
 
 	// negotiate language with user's browser
@@ -465,8 +468,8 @@ class Http
 			$lang_list = $this->available_languages();
 
 			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
-			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
-					"(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/",
+			preg_match_all('/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?' .
+				'(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/',
 					strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
 					$matches, PREG_SET_ORDER);
 
@@ -542,7 +545,7 @@ class Http
 			$lang_list[true] = $list;
 		}
 
-		return $lang_list[!!$subset];
+		return $lang_list[(bool) $subset];
 	}
 
 	private function real_ip()
@@ -550,7 +553,7 @@ class Http
 		$reverse_proxy_addresses = preg_split('/[\s,]+/', $this->db->reverse_proxy_addresses, -1, PREG_SPLIT_NO_EMPTY);
 
 		$x = trim($this->db->reverse_proxy_header);
-		$x or $x = 'X-Forwarded-For';
+		$x || $x = 'X-Forwarded-For';
 		$reverse_proxy_header = 'HTTP_' . strtoupper(strtr($x, '-', '_'));
 
 		foreach (['HTTP_X_CLUSTER_CLIENT_IP', $reverse_proxy_header, 'HTTP_CLIENT_IP', 'HTTP_X_REMOTE_ADDR', 'REMOTE_ADDR'] as $ip)
@@ -595,6 +598,8 @@ class Http
 			403 => 'Forbidden',
 			404 => 'Not Found',
 			405 => 'Method Not Allowed',
+			409 => 'Conflict',
+			410 => 'Gone',
 			416 => 'Requested Range Not Satisfiable',
 			500 => 'Internal Server Error',
 			501 => 'Not Implemented',
@@ -608,7 +613,7 @@ class Http
 
 		if (!headers_sent())
 		{
-			header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' ' . $code . ' ' . $text[$code], true, $code);
+			header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1') . ' ' . $code . ' ' . $text[$code], true, $code);
 		}
 	}
 
@@ -667,10 +672,10 @@ class Http
 	{
 		header_remove();
 		set_time_limit(0);
-		isset($this->sess)  and  $this->sess->write_close();
+		isset($this->sess)  &&  $this->sess->write_close();
 
 		// allow to be called sendfile(404)
-		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename, $age))))
+		if ($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename, $age)))
 		{
 			$this->status($code);
 
@@ -700,19 +705,30 @@ class Http
 			return 403;
 		}
 
+		if ($age > 0)
+		{
+			$age = (int)($age * DAYSECS);
+			header('Cache-Control: max-age=' . $age);
+		}
+		else
+		{
+			header('Cache-Control: private, no-cache');
+		}
+
 		$from = 0;
 		$to = $size;
 
 		if ($age >= 0)
 		{
+			header('Last-Modified: ' . Ut::http_date($mtime));
+
 			if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
 			{
-				// Ut::dbg('not modified');
+				# Ut::dbg('not modified');
+				header('Vary: Accept-Encoding');
 				$this->status(304);
 				return;
 			}
-
-			header('Last-Modified: ' . Ut::http_date($mtime));
 
 			if (isset($_SERVER['HTTP_RANGE']))
 			{
@@ -734,7 +750,7 @@ class Http
 				else
 				{
 					$from = (int) $m[1];
-					$m[2] === ''  or  $to = (int) $m[2] + 1;
+					$m[2] === ''  ||  $to = (int) $m[2] + 1;
 				}
 			}
 
@@ -753,17 +769,14 @@ class Http
 		header('Content-Disposition: inline; filename="' . ($filename ?: basename($path)) . '"');
 		header('Date: ' . Ut::http_date());
 
-		if ($age > 0)
+		// protecting against XSS in SVG
+		if ($type == 'image/svg+xml')
 		{
-			$age = (int)($age * DAYSECS);
-			header('Cache-Control: public, max-age=' . $age);
-			header('Expires: ' . Ut::http_date(time() + $age));
+			header("Content-Security-Policy: default-src self; script-src 'none'");
 		}
-		else
+		else if ($type == 'application/pdf')
 		{
-			header('Expires: ' . Ut::http_date(-1));
-			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-			header('Pragma: no-cache');
+			header("Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox");
 		}
 
 		// nosniff only applies to "script" and "style" types.
@@ -778,7 +791,7 @@ class Http
 		{
 			readfile($path);
 			// gzip only text files
-			preg_match('/^text|xml|javascript/i', $type) and $this->gzip();
+			preg_match('/^text|xml|javascript/i', $type) && $this->gzip();
 		}
 		else
 		{
@@ -820,6 +833,7 @@ class Http
 	{
 		$str = preg_replace_callback('/(^|(?<=&))[^=[&]+/', function($key) { return bin2hex(urldecode($key[0])); }, $str);
 		parse_str($str, $post);
+
 		return array_combine(array_map('hex2bin', array_keys($post)), $post);
 	}
 
@@ -843,10 +857,9 @@ class Http
 		}
 
 		$path = trim($path, '/');
-
 		$path = $this->cut_prefix($base, $path);
 
-		isset($uri[1])  and  $path .= '?' . $uri[1];
+		isset($uri[1])  &&  $path .= '?' . $uri[1];
 
 		return $path;
 	}

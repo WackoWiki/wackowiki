@@ -113,7 +113,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_default($value, $default)
 	{
-		($value === null || $value === false) and $value = $default;
+		($value === null || $value === false) && $value = $default;
 		return $value;
 	}
 
@@ -150,7 +150,7 @@ class TemplatestFilters extends TemplatestEscaper
 	// TODO: localize formatting
 	function filter_number($value, $decimals = 0, $dec_point = ',', $thousands_sep = '.')
 	{
-		return number_format($value, $decimals, $dec_point, $thousands_sep);
+		return number_format($value, (int) $decimals, $dec_point, $thousands_sep);
 	}
 
 	function filter_void($value)
@@ -211,7 +211,7 @@ class TemplatestFilters extends TemplatestEscaper
 		{
 			$option = strtoupper($option);
 
-			strncmp($option, 'JSON_', 5) and $option = 'JSON_' . $option;
+			strncmp($option, 'JSON_', 5) && $option = 'JSON_' . $option;
 
 			if (defined($option))
 			{
@@ -228,7 +228,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_json_decode($value)
 	{
-		return json_decode($value, 1);
+		return json_decode($value, true);
 	}
 
 	function filter_sp2nbsp($value)
@@ -326,7 +326,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_regex($value, $re, $to, $limit = -1, $strict = false)
 	{
-		$value = preg_replace($re, $to, $value, $limit, $count);
+		$value = preg_replace($re, $to, $value, (int) $limit, $count);
 
 		if ($value === null)
 		{
@@ -383,7 +383,7 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		if (strlen($value) > $limit)
 		{
-			$split	= explode(' ', substr($value, 0, $limit));
+			$split	= explode(' ', substr($value, 0, (int) $limit));
 			$split1	= array_slice($split, 0, -1);
 			$value	= implode(' ', $split1 ?: $split) . $ellipsis;
 		}
