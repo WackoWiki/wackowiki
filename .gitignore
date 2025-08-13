@@ -1,0 +1,34 @@
+# WackoWiki
+
+/cache/*
+!/cache/.htaccess
+/cache/config/*
+!/cache/config/.htaccess
+/cache/feed/*
+!/cache/feed/.htaccess
+/cache/page/*
+!/cache/page/.htaccess
+/cache/query/*
+!/cache/query/.htaccess
+/cache/session/*
+!/cache/session/.htaccess
+/cache/template/*
+!/cache/template/.htaccess
+
+/file/backup/*
+!/file/backup/.htaccess
+/file/global/*
+!/file/global/wacko_logo.png
+/file/perpage/*
+!/file/perpage/.htaccess
+/file/thumb/*
+!/file/thumb/.htaccess
+
+# Eclipse IDE
+.buildpath
+.project
+.settings/
+
+# PHPStorm IDE
+.idea
+*.iml

@@ -1,0 +1,11 @@
+* text eol=lf
+
+*.png binary
+*.gif binary
+*.ico binary
+
+.editorconfig export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+composer.json export-ignore
+composer.lock export-ignore
