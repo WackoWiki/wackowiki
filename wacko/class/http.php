@@ -136,7 +136,9 @@ class Http
 						++$n;
 					}
 
-				// Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
+					# Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
+				}
+
 			}
 
 			$this->db->sql_query(
@@ -617,31 +619,31 @@ class Http
 		}
 	}
 
-	function mime_type($path)
+	function mime_types()
 	{
 		static $types;
 
 		if (!isset($types))
 		{
-			$conffile	= Ut::join_path(CONFIG_DIR, 'mime.types');
-			$cachefile	= Ut::join_path(CACHE_CONFIG_DIR, 'mime.types');
+			$conf_file	= Ut::join_path(CONFIG_DIR, 'mime.types');
+			$cache_file	= Ut::join_path(CACHE_CONFIG_DIR, 'mime.types');
 
 			clearstatcache();
 
-			if (!($conftime = @filemtime($conffile)))
+			if (!($conftime = @filemtime($conf_file)))
 			{
-				die($conffile . ' not found');
+				die($conf_file . ' not found');
 			}
 
 			// do not read stale or non-writable cachefile
-			if (!((@filemtime($cachefile) >= $conftime)
-				&& is_writable($cachefile)
-				&& ($text = file_get_contents($cachefile))
+			if (!((@filemtime($cache_file) >= $conftime)
+				&& is_writable($cache_file)
+				&& ($text = file_get_contents($cache_file))
 				&& ($types = Ut::unserialize($text))))
 			{
 				$types = [];
 
-				foreach (file($conffile) as $line)
+				foreach (file($conf_file) as $line)
 				{
 					$line = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -659,12 +661,19 @@ class Http
 				// cache to file
 				$text = Ut::serialize($types);
 				// unable to write cache file considered are 'turn config caching off' feature
-				@file_put_contents($cachefile, $text);
-				@chmod($cachefile, CHMOD_FILE);
+				@file_put_contents($cache_file, $text);
+				@chmod($cache_file, CHMOD_FILE);
 			}
 		}
 
-		$ext = pathinfo($path, PATHINFO_EXTENSION);
+		return $types;
+	}
+
+	function mime_type($path)
+	{
+		$types	= $this->mime_types();
+		$ext	= pathinfo($path, PATHINFO_EXTENSION);
+
 		return $types[$ext] ?? 'application/octet-stream';
 	}
 

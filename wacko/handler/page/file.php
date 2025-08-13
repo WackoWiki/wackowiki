@@ -36,6 +36,9 @@ if (   $this->is_admin()
 	|| ($this->has_access('read'))
 	|| ($file['user_id'] == $this->get_user_id()) )
 {
+	// set Cache-Control: max-age (days)
+	$age	= $this->has_access('read', $page_id, GUEST) === false ? 0 : 30;
+
 	$file_path = Ut::join_path(
 		($page_id? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
 		($page_id
@@ -64,5 +67,5 @@ if (strncmp($type, 'image/', 6)) // do not count images
 		"LIMIT 1");
 }
 
-$this->http->sendfile($file_path, $file['file_name']);
+$this->http->sendfile($file_path, $file['file_name'], $age);
 $this->http->terminate();

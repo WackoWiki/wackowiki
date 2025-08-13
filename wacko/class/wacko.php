@@ -249,7 +249,7 @@ class Wacko
 	*
 	* @return array File description array
 	*/
-	function check_file_record($file_name, $page_id = 0, $deleted = 0)
+	function check_file_record(string $file_name, int $page_id = 0, $deleted = false)
 	{
 		$file = &$this->file_cache[$page_id][$file_name];
 
@@ -276,7 +276,7 @@ class Wacko
 		}
 	}
 
-	static function get_file_extension($file_name)
+	static function get_file_extension(string $file_name)
 	{
 		if (strpos($file_name, '.') === false)
 		{
@@ -284,14 +284,16 @@ class Wacko
 		}
 
 		$file_name = explode('.', $file_name);
+
 		return array_pop($file_name);
 	}
 
 	/**
 	 * File extension check
 	 *
-	 * @param string $file_name File name.
-	 * @return boolean
+	 * @param string $file_name		File name.
+	 *
+	 * @return bool
 	 */
 	function file_extension_check($file_name)
 	{
@@ -304,7 +306,7 @@ class Wacko
 		// check against disallowed files
 		if (!Ut::is_blank($banned_list))
 		{
-			$banned_exts = explode('|', $banned_list);
+			$banned_exts = $this->get_filetype_list($banned_list);
 
 			foreach ($banned_exts as $extension)
 			{
@@ -315,14 +317,14 @@ class Wacko
 			}
 		}
 
-		// if the allowed list is note populated then the file must be allowed
+		// if the allowed list is not populated then the file must be allowed
 		if (Ut::is_blank($allowed_list))
 		{
 			return true;
 		}
 
 		// check against allowed files
-		$allowed_exts = explode('|', $allowed_list);
+		$allowed_exts = $this->get_filetype_list($allowed_list);
 
 		foreach ($allowed_exts as $extension)
 		{
@@ -335,7 +337,71 @@ class Wacko
 		return false;
 	}
 
-	function upload_quota($user_id = '')
+	function get_filetype_list($filetyp_string)
+	{
+		return array_map(
+			function($types) {
+				return strtolower(trim($types));
+			},
+			explode(',', $filetyp_string));
+	}
+
+	function get_extensions_from_mime_type($mime): array
+	{
+		$mime	= strtolower($mime);
+		$exts	= $this->http->mime_types();
+
+		foreach($exts as $ext => $type)
+		{
+			if ($type == $mime)
+			{
+				$_exts[] = $ext;
+			}
+		}
+
+		return $_exts ?? [];
+	}
+
+	/**
+	 * Checks if the MIME type of the uploaded file matches the file extension.
+	 *
+	 * @param string $mime			The MIME type of the uploaded file
+	 * @param string $extension		The filename extension that the file is to be served with
+	 *
+	 * @return bool
+	 */
+	function verify_extension($mime, $extension): ?bool
+	{
+		$exts = $this->get_extensions_from_mime_type($mime);
+
+		if (!$exts)
+		{
+			return null; // unknown MIME type
+		}
+
+		return in_array(strtolower($extension), $exts);
+	}
+
+	/**
+	 * Checks if the file type is part of MIME map.
+	 *
+	 * @param string $extension
+	 *
+	 * @return bool
+	 */
+	function validate_extension(string $extension): bool
+	{
+		$exts	= array_keys($this->http->mime_types());
+
+		if (in_array($extension, $exts))
+		{
+			return true;
+		}
+
+		return false; // unknown file type
+	}
+
+	function upload_quota($user_id = null)
 	{
 		// get used upload quota
 		$files	= $this->db->load_single(
@@ -346,9 +412,7 @@ class Wacko
 						: "") .
 				"LIMIT 1");
 
-		$used_upload_quota = $files['used_quota'];
-
-		return $used_upload_quota;
+		return $files['used_quota'];
 	}
 
 	function available_themes()
