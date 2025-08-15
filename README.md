@@ -23,4 +23,4 @@ If you found a bug, or have an idea for new functionality, feel free to report i
 
 ## Screenshot
 
-![Example Image](readme.png "Example")
+![Example Image](readme.webp "Example")
