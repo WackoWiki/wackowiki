@@ -322,8 +322,6 @@ function my_image_blur($im)
 	ImageCopyMerge($im, $temp_im, 0, 0, $distance, 0, $width - $distance, $height, 70);
 	ImageCopyMerge($temp_im, $im, 0, $distance, 0, 0, $width, $height, 70);
 	ImageCopyMerge($im, $temp_im, $distance, 0, 0, 0, $width, $height, 70);
-	// remove temp image
-	ImageDestroy($temp_im);
 
 	return $im;
 }
@@ -360,16 +358,6 @@ function send_image($pic): void
 			header('Content-Type: image/png');
 			imagepng($pic);
 			break;
-	}
-
-	// kill GD images (removes from memory)
-	ImageDestroy($im);
-	ImageDestroy($im2);
-	@ImageDestroy($pic);
-
-	if (!empty($im3))
-	{
-		ImageDestroy($im3);
 	}
 
 	exit();
@@ -574,12 +562,6 @@ if ($bg_type)
 			}
 		}
 
-		for ($i = 0; $i < count($temp_im); $i++)
-		{
-			// remove bgs from memory
-			ImageDestroy($temp_im[$i]);
-		}
-
 		// for debug:
 		# send_image($temp_bg);
 	}
@@ -626,8 +608,6 @@ if ($bg_type)
 		// just copy temp_bg onto im3
 		ImageCopy($im3, $temp_bg, 0, 0, 30, 30, $width, $height);
 	}
-
-	ImageDestroy($temp_bg);
 
 	if ($blur_bg)
 	{
@@ -845,7 +825,6 @@ if ($bg_type)
 		ImageCopyMerge($im3, $temp_im, 0, 0, 0, 0, $width, $height, $bg_fade_pct);
 		// for debug:
 		# send_image($im3);
-		ImageDestroy($temp_im);
 		$c_fade_pct = 50;
 	}
 	else

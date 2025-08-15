@@ -96,19 +96,6 @@ class GD extends PHPThumb
 		];
 	}
 
-	public function __destruct()
-	{
-		if (is_resource($this->old_image))
-		{
-			imagedestroy($this->old_image);
-		}
-
-		if (is_resource($this->working_image))
-		{
-			imagedestroy($this->working_image);
-		}
-	}
-
 	/**
 	 * Pad an image to desired dimensions. Moves the image into the center and fills the rest with $color.
 	 */
@@ -1257,14 +1244,13 @@ class GD extends PHPThumb
 
 		if ($this->format === 'WEBP' && $this->options['preserveTransparency'] === true)
 		{
-            imagealphablending($this->working_image, false);
+			imagealphablending($this->working_image, false);
 
-            // Create a palette image to copy the color palette from
-            $palette_image = imagecreatetruecolor(1, 1);
+			// Create a palette image to copy the color palette from
+			$palette_image = imagecreatetruecolor(1, 1);
 
 			imagepalettecopy($palette_image, $this->working_image);
-            imagepalettecopy($this->working_image, $palette_image);
-            imagedestroy($palette_image);
-        }
+			imagepalettecopy($this->working_image, $palette_image);
+		}
 	}
 }
