@@ -8,13 +8,13 @@ The version and status of each is summarized below:
 
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
-| bad_behaviour		| Bad Behaviour		| 2.2.25	| patched: various, see repo |
-| captcha			| freeCap			| 1.4.6		| patched: various, see repo |
+| bad_behaviour		| Bad Behaviour		| 2.2.25	| unpatched |
+| captcha			| freeCap			| 1.4.6		| unpatched |
 | hashids			| Hashids			| 5.0.2		| unpatched |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
 | php-diff			| php-diff			| 2.4.0		| patched, see subdir |
-| phpmailer			| PHPMailer			| 6.10.0		| unpatched |
-| phpthumb			| PhpThumb			| 2.3.1		| patched: various, see repo |
+| phpmailer			| PHPMailer			| 6.10.0	| unpatched |
+| phpthumb			| PhpThumb			| 2.3.2		| unpatched |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |
 | simplepie			| SimplePie			| 1.8.1		| unpatched |
 | svg-sanitizer		| svg-sanitizer		| 0.20		| patched: various, see repo |

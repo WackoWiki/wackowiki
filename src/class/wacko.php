@@ -7553,15 +7553,17 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting('validate_ip') && $this->get_user_setting('ip') != $this->http->ip)
+		if (   $this->get_user_setting('validate_ip')
+			&& $this->get_user_setting('ip') != $this->http->ip)
 		{
 			// TODO: set and load lang??
-			$this->log(1, '<strong><span class="cite">' . Ut::perc_replace(
+			$this->log(1, '<strong><span class="cite">' .
+				Ut::perc_replace(
 					$this->_t('LogUserIPSwitched', SYSTEM_LANG),
 					'<code>' . $this->get_user_setting('user_name') . '</code>',
 					'<code>' . $this->get_user_setting('ip') . '</code>',
 					'<code>' . $this->http->ip . '</code>'
-					) . '</span></strong>');
+				) . '</span></strong>');
 			$this->logout_user();
 			$this->login_page();
 		}
@@ -7724,7 +7726,7 @@ class Wacko
 				$this->method = 'show';
 			}
 
-			// normalize & sanitize tag name
+			// normalize & sanitize page tag
 			$this->sanitize_page_tag($tag);
 
 			$revision_id	= (int) ($_GET['revision_id'] ?? '');
