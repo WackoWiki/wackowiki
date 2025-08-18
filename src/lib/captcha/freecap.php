@@ -348,15 +348,15 @@ function send_image($pic): void
 			header('Content-Type: image/jpeg');
 			imagejpeg($pic);
 			break;
+		case 'png':
+			header('Content-Type: image/png');
+			imagepng($pic);
+			break;
 		case 'webp':
+		default:
 			header('Content-Type: image/webp');
 			imagepalettetotruecolor($pic);
 			imagewebp($pic);
-			break;
-		case 'png':
-		default:
-			header('Content-Type: image/png');
-			imagepng($pic);
 			break;
 	}
 
@@ -588,7 +588,7 @@ if ($bg_type)
 		for ($x = 0; $x < $width; $x += $morph_chunk)
 		{
 			$morph_chunk = $rand_func(1, 5);
-			$morph_y += $rand_func(-1, 1);
+			$morph_y    += $rand_func(-1, 1);
 			ImageCopy($im3, $temp_bg, $x, 0, $x + 30, 30 + $morph_y, $morph_chunk, $height * 2);
 		}
 
