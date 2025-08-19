@@ -65,7 +65,7 @@ function dclick()
 	if (edit)
 	{
 		// skip double-click editing for pages having forms
-		const pageShow	= document.getElementById('page-show');
+		const pageShow	= document.getElementById('section-content');
 		const form		= pageShow.querySelector('form');
 
 		if (form)
