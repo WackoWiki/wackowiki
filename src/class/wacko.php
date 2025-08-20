@@ -90,6 +90,7 @@ class Wacko
 	public $notify_lang				= null;		// sets language in _t() function for notifications
 	public $page_lang				= null;
 	public $resource				= null;
+	public $show_spaces				= null;
 	public $translations			= null;
 	public $user_lang				= null;
 	public $user_lang_dir			= null;
@@ -4205,6 +4206,7 @@ class Wacko
 			$aname			= '';
 			$match			= '';
 			$tag			= $matches[1];
+			$anchor			= $matches[2] ?? '';
 			$untag			= $unwrap_tag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/ui';
@@ -4243,30 +4245,27 @@ class Wacko
 			{
 				$icon		= $this->_t('Icon.Child');
 				$page0		= mb_substr($tag, 2);
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 3) == '../')
 			{
 				$icon		= $this->_t('Icon.Parent');
 				$page0		= mb_substr($tag, 3);
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 1) == '/')
 			{
 				$icon		= $this->_t('Icon.Root');
 				$page0		= mb_substr($tag, 1);
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
 			else
 			{
 				$icon		= $this->_t('Icon.Equal');
 				$page0		= $tag;
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
+
+			$page		= $this->add_spaces($page0, true);
+			$page_path	= mb_substr($untag, 0, mb_strlen($untag) - mb_strlen($page0));
+			$page_path	= $this->add_spaces($page_path, true) . ($this->show_spaces ? ' ' : '');
+			$tpl		= 'page';
 
 			if ($img_link)
 			{
@@ -4295,9 +4294,7 @@ class Wacko
 				$icon		= '';
 			}
 
-			$page_path		= mb_substr($untag, 0, mb_strlen($untag) - mb_strlen($page0));
-			$anchor			= $matches[2] ?? '';
-			$tag			= $unwrap_tag;
+			$tag		= $unwrap_tag;
 
 			// track page link
 			if ($track)
@@ -4813,7 +4810,7 @@ class Wacko
 
 	/**
 	* Add spaces to WikiWords (if config parameter show_spaces = 1) and replace
-	* relative  path (/ !/ ../) to icons Icon.RootLink, Icon.SubLink, Icon.UpLink
+	* relative path (/ !/ ../) to icons Icon.RootLink, Icon.SubLink, Icon.UpLink
 	*
 	* @param	string		$text	Text with WikiWords
 	* @param	bool		$icon	adds Link icon as prefix
@@ -4822,7 +4819,12 @@ class Wacko
 	*/
 	function add_spaces($text, $icon = false): ?string
 	{
-		if (($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces)
+		if (!isset($this->show_spaces))
+		{
+			$this->show_spaces = ($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces;
+		}
+
+		if ($this->show_spaces)
 		{
 			$text = $this->add_nbsps($text);
 		}
