@@ -7,7 +7,6 @@ use svgSanitize\data\AttributeInterface;
 use svgSanitize\data\TagInterface;
 use svgSanitize\data\XPath;
 use svgSanitize\ElementReference\Resolver;
-use SafeHTML;
 
 /**
  * Class Sanitizer
@@ -422,7 +421,7 @@ class Sanitizer
              * Such as xlink:href when the xlink namespace isn't imported.
              * We have to do this as the link is still ran in this case.
              */
-            if (false !== strpos($attrName, 'href')) {
+            if (false !== stripos($attrName, 'href')) {
                 $href = $element->getAttribute($attrName);
                 if (false === $this->isHrefSafeValue($href)) {
                     $element->removeAttribute($attrName);
@@ -454,14 +453,17 @@ class Sanitizer
      */
     protected function cleanXlinkHrefs(\DOMElement $element)
     {
-        $xlinks = $element->getAttributeNS('http://www.w3.org/1999/xlink', 'href');
-        if (false === $this->isHrefSafeValue($xlinks)) {
-            $element->removeAttributeNS( 'http://www.w3.org/1999/xlink', 'href' );
-            $this->xmlIssues[] = array(
-                'message' => 'Suspicious attribute \'href\'',
-                'line' => $element->getLineNo(),
-            );
+        foreach ($element->attributes as $attribute) {
+            // remove attributes with unexpected namespace prefix, e.g. `XLinK:href` (instead of `xlink:href`)
+            if ($attribute->prefix === '' && strtolower($attribute->nodeName) === 'xlink:href') {
+                $element->removeAttribute($attribute->nodeName);
+                $this->xmlIssues[] = array(
+                    'message' => sprintf('Unexpected attribute \'%s\'', $attribute->nodeName),
+                    'line' => $element->getLineNo(),
+                );
+            }
         }
+        $this->cleanHrefAttributes($element, 'xlink');
     }
 
     /**
@@ -471,13 +473,33 @@ class Sanitizer
      */
     protected function cleanHrefs(\DOMElement $element)
     {
-        $href = $element->getAttribute('href');
-        if (false === $this->isHrefSafeValue($href)) {
-            $element->removeAttribute('href');
-            $this->xmlIssues[] = array(
-                'message' => 'Suspicious attribute \'href\'',
-                'line' => $element->getLineNo(),
-            );
+        $this->cleanHrefAttributes($element);
+    }
+
+    protected function cleanHrefAttributes(\DOMElement $element, string $prefix = ''): void
+    {
+        $relevantAttributes = array_filter(
+            iterator_to_array($element->attributes),
+            static function (\DOMAttr $attr) use ($prefix) {
+                return strtolower($attr->name) === 'href' && strtolower($attr->prefix) === $prefix;
+            }
+        );
+        foreach ($relevantAttributes as $attribute) {
+            if (!$this->isHrefSafeValue($attribute->value)) {
+                $element->removeAttribute($attribute->nodeName);
+                $this->xmlIssues[] = array(
+                    'message' => sprintf('Suspicious attribute \'%s\'', $attribute->nodeName),
+                    'line' => $element->getLineNo(),
+                );
+                continue;
+            }
+            // in case the attribute name is `HrEf`/`xlink:HrEf`, adjust it to `href`/`xlink:href`
+            if (!in_array($attribute->nodeName, $this->allowedAttrs, true)
+                && in_array(strtolower($attribute->nodeName), $this->allowedAttrs, true)
+            ) {
+                $element->removeAttribute($attribute->nodeName);
+                $element->setAttribute(strtolower($attribute->nodeName), $attribute->value);
+            }
         }
     }
 
@@ -685,9 +707,7 @@ class Sanitizer
     protected function cleanUnsafeNodes(\DOMNode $currentElement) {
         // Replace CDATA node with encoded text node
         if ($currentElement instanceof \DOMCdataSection) {
-            $safehtml = new SafeHTML;
-            $clean_html = $safehtml->parse($currentElement->nodeValue);
-            $textNode = $currentElement->ownerDocument->createTextNode($clean_html);
+            $textNode = $currentElement->ownerDocument->createTextNode($currentElement->nodeValue);
             $currentElement->parentNode->replaceChild($textNode, $currentElement);
         // If the element doesn't have a tagname, remove it and continue with next iteration
         } elseif (!$currentElement instanceof \DOMElement && !$currentElement instanceof \DOMText) {

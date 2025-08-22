@@ -17,7 +17,7 @@ The version and status of each is summarized below:
 | phpthumb			| PhpThumb			| 2.3.2		| unpatched |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |
 | simplepie			| SimplePie			| 1.8.1		| unpatched |
-| svg-sanitizer		| svg-sanitizer		| 0.20		| patched: various, see repo |
+| svg-sanitizer		| svg-sanitizer		| 0.22		| patched: various, see repo |
 | text-hl			| Text_Highlighter	| 0.8.0		| patched: various, see repo |
 
 ## JavaScript libraries
