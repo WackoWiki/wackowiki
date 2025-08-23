@@ -580,7 +580,7 @@ class Wacko
 	// check and validate YYYY-MM-DD date
 	function validate_date($date): bool
 	{
-		return preg_match("/^(\d{4})-(\d{1,2})-(\d{1,2})$/", $date, $m)
+		return preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $date, $m)
 			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
 	}
 
@@ -1475,12 +1475,12 @@ class Wacko
 					"LEFT JOIN " . $this->prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->prefix . "user o ON (p.reviewer_id = o.user_id) " .
 				"WHERE p.page_id = " . (int) $page_id . " " .
-					($hide_minor_edit
-						? "AND p.minor_edit = 0 "
-						: "") .
-					($deleted
-						? ""
-						: "AND p.deleted <> 1 ") .
+				($hide_minor_edit
+					? "AND p.minor_edit = 0 "
+					: "") .
+				($deleted
+					? ""
+					: "AND p.deleted <> 1 ") .
 				"ORDER BY p.modified DESC " .
 				"LIMIT 1"))
 			{
@@ -2307,19 +2307,19 @@ class Wacko
 	function count_comments($page_id, $user_id = null, $deleted = false): int
 	{
 		$count = $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
-			"FROM " . $this->prefix . "page " .
-			"WHERE comment_on_id <> 0 " . // dummy for AND
+			'SELECT COUNT(page_id) AS n ' .
+			'FROM ' . $this->prefix . 'page ' .
+			'WHERE comment_on_id <> 0 ' . // dummy for AND
 				($page_id
-					? "AND comment_on_id = " . (int) $page_id . " "
-					: "") .
+					? 'AND comment_on_id = ' . (int) $page_id . ' '
+					: '') .
 				($user_id
-					? "AND owner_id = " . (int) $user_id . " "
-					: "") .
+					? 'AND owner_id = ' . (int) $user_id . ' '
+					: '') .
 				($deleted
-					? ""
-					: "AND deleted <> 1 ") .
-			"LIMIT 1");
+					? ''
+					: 'AND deleted <> 1 ') .
+			'LIMIT 1');
 
 		return $count? $count['n'] : 0;
 	}
@@ -2327,19 +2327,19 @@ class Wacko
 	function count_files($page_id = null, $user_id = null, $deleted = false): int
 	{
 		$count = $this->db->load_single(
-			"SELECT COUNT(file_id) AS n " .
-			"FROM " . $this->prefix . "file " .
-			"WHERE 1=1 " . // dummy for AND
+			'SELECT COUNT(file_id) AS n ' .
+			'FROM ' . $this->prefix . 'file ' .
+			'WHERE 1=1 ' . // dummy for AND
 				($page_id
-					? "AND page_id = " . (int) $page_id . " "
-					: "") .
+					? 'AND page_id = ' . (int) $page_id . ' '
+					: '') .
 				($user_id
-					? "AND user_id = " . (int) $user_id . " "
-					: "") .
+					? 'AND user_id = ' . (int) $user_id . ' '
+					: '') .
 				($deleted
-					? ""
-					: "AND deleted <> 1 ") .
-			"LIMIT 1");
+					? ''
+					: 'AND deleted <> 1 ') .
+			'LIMIT 1');
 
 		return $count? $count['n'] : 0;
 	}
@@ -2347,16 +2347,16 @@ class Wacko
 	function count_pages($user_id = null, $deleted = false): int
 	{
 		$count = $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
-			"FROM " . $this->prefix . "page " .
-			"WHERE comment_on_id = 0 " .
+			'SELECT COUNT(page_id) AS n ' .
+			'FROM ' . $this->prefix . 'page ' .
+			'WHERE comment_on_id = 0 ' .
 				($user_id
-					? "AND owner_id = " . (int) $user_id . " "
-					: "") .
+					? 'AND owner_id = ' . (int) $user_id . ' '
+					: '') .
 				($deleted
-					? ""
-					: "AND deleted <> 1 ") .
-			"LIMIT 1");
+					? ''
+					: 'AND deleted <> 1 ') .
+			'LIMIT 1');
 
 		return $count? $count['n'] : 0;
 	}
@@ -2391,32 +2391,32 @@ class Wacko
 		{
 			// load latest comment
 			$comment = $this->db->load_single(
-				"SELECT created " .
-				"FROM " . $this->prefix . "page " .
-				"WHERE comment_on_id = " . (int) $page_id . " " .
-					"AND deleted <> 1 " .
-				"ORDER BY created DESC " .
-				"LIMIT 1");
+				'SELECT created ' .
+				'FROM ' . $this->prefix . 'page ' .
+				'WHERE comment_on_id = ' . (int) $page_id . ' ' .
+					'AND deleted <> 1 ' .
+				'ORDER BY created DESC ' .
+				'LIMIT 1');
 		}
 
 		// update comments count and date on commented page
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "page SET " .
-				"comments	= " . (int) $this->count_comments($page_id) . ", " .
-				"commented	= " . ($last_created
+			'UPDATE ' . $this->prefix . 'page SET ' .
+				'comments	= ' . (int) $this->count_comments($page_id) . ', ' .
+				'commented	= ' . ($last_created
 									? (isset($comment['created'])
 											? $this->db->q($comment['created'])
-											: "NULL")
-									: "UTC_TIMESTAMP()") . " " .
-			"WHERE page_id = " . (int) $page_id . " " .
-			"LIMIT 1");
+											: 'NULL')
+									: 'UTC_TIMESTAMP()') . ' ' .
+			'WHERE page_id = ' . (int) $page_id . ' ' .
+			'LIMIT 1');
 
 		// update user comments count
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "user SET " .
-				"total_comments = " . (int) $this->count_comments(null, $user_id) . " " .
-			"WHERE user_id = " . (int) $user_id . " " .
-			"LIMIT 1");
+			'UPDATE ' . $this->prefix . 'user SET ' .
+				'total_comments = ' . (int) $this->count_comments(null, $user_id) . ' ' .
+			'WHERE user_id = ' . (int) $user_id . ' ' .
+			'LIMIT 1');
 	}
 
 	function update_files_count($page_id, $user_id): void
@@ -2426,44 +2426,44 @@ class Wacko
 		{
 			// update page uploads count
 			$this->db->sql_query(
-				"UPDATE " . $this->prefix . "page SET " .
-					"files = " . (int) $this->count_files($page_id) . " " .
-				"WHERE page_id = " . (int) $page_id . " " .
-				"LIMIT 1");
+				'UPDATE ' . $this->prefix . 'page SET ' .
+					'files = ' . (int) $this->count_files($page_id) . ' ' .
+				'WHERE page_id = ' . (int) $page_id . ' ' .
+				'LIMIT 1');
 		}
 
 		// update user uploads count
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "user SET " .
-				"total_uploads = " . (int) $this->count_files(null, $user_id) . " " .
-			"WHERE user_id = " . (int) $user_id . " " .
-			"LIMIT 1");
+			'UPDATE ' . $this->prefix . 'user SET ' .
+				'total_uploads = ' . (int) $this->count_files(null, $user_id) . ' ' .
+			'WHERE user_id = ' . (int) $user_id . ' ' .
+			'LIMIT 1');
 	}
 
 	function update_pages_count($user_id): void
 	{
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "user SET " .
-				"total_pages = " . (int) $this->count_pages($user_id) . " " .
-			"WHERE user_id = " . (int) $user_id . " " .
-			"LIMIT 1");
+			'UPDATE ' . $this->prefix . 'user SET ' .
+				'total_pages = ' . (int) $this->count_pages($user_id) . ' ' .
+			'WHERE user_id = ' . (int) $user_id . ' ' .
+			'LIMIT 1');
 	}
 
 	function update_revisions_count($page_id, $user_id = null): void
 	{
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "page SET " .
-				"revisions = " . (int) $this->count_revisions($page_id) . " " .
-			"WHERE page_id = " . (int) $page_id . " " .
-			"LIMIT 1");
+			'UPDATE ' . $this->prefix . 'page SET ' .
+				'revisions = ' . (int) $this->count_revisions($page_id) . ' ' .
+			'WHERE page_id = ' . (int) $page_id . ' ' .
+			'LIMIT 1');
 
 		if ($user_id)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->prefix . "user SET " .
-					"total_revisions = " . (int) $this->count_revisions(null, $user_id) . " " .
-				"WHERE user_id = " . (int) $user_id . " " .
-				"LIMIT 1");
+				'UPDATE ' . $this->prefix . 'user SET ' .
+					'total_revisions = ' . (int) $this->count_revisions(null, $user_id) . ' ' .
+				'WHERE user_id = ' . (int) $user_id . ' ' .
+				'LIMIT 1');
 		}
 	}
 
@@ -2500,11 +2500,11 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "user SET " .
-				"enabled		= " . (int) $enabled . ", " .
-				"account_status	= " . (int) $account_status . " " .
-			"WHERE user_id = " . (int) $user_id . " " .
-			"LIMIT 1");
+			'UPDATE ' . $this->prefix . 'user SET ' .
+				'enabled		= ' . (int) $enabled . ', ' .
+				'account_status	= ' . (int) $account_status . ' ' .
+			'WHERE user_id = ' . (int) $user_id . ' ' .
+			'LIMIT 1');
 	}
 
 	function approve_user($user, $account_status): void
@@ -2727,11 +2727,11 @@ class Wacko
 		if (isset($this->db->groups['Moderator']) && is_array($this->db->groups['Moderator']))
 		{
 			$members = $this->db->load_all(
-				"SELECT m.user_id, u.user_name, u.email, s.user_lang, u.email_confirm, u.enabled, s.send_watchmail " .
-				"FROM " . $this->prefix . "usergroup g " .
-					"INNER JOIN " . $this->prefix . "usergroup_member m ON (g.group_id = m.group_id) " .
-					"INNER JOIN " . $this->prefix . "user u ON (m.user_id = u.user_id) " .
-					"LEFT JOIN " . $this->prefix . "user_setting s ON (u.user_id = s.user_id) " .
+				'SELECT m.user_id, u.user_name, u.email, s.user_lang, u.email_confirm, u.enabled, s.send_watchmail ' .
+				'FROM ' . $this->prefix . 'usergroup g ' .
+					'INNER JOIN ' . $this->prefix . 'usergroup_member m ON (g.group_id = m.group_id) ' .
+					'INNER JOIN ' . $this->prefix . 'user u ON (m.user_id = u.user_id) ' .
+					'LEFT JOIN ' . $this->prefix . 'user_setting s ON (u.user_id = s.user_id) ' .
 				"WHERE g.group_name = 'Moderator'");
 
 			foreach ($members as $user)
@@ -2782,11 +2782,11 @@ class Wacko
 			$object_id				= $page_id;
 			// revisions diff
 			$page = $this->db->load_single(
-				"SELECT revision_id " .
-				"FROM " . $this->prefix . "revision " .
-				"WHERE page_id = " . (int) $page_id . " " .
-				"ORDER BY modified DESC " .
-				"LIMIT 1");
+				'SELECT revision_id ' .
+				'FROM ' . $this->prefix . 'revision ' .
+				'WHERE page_id = ' . (int) $page_id . ' ' .
+				'ORDER BY modified DESC ' .
+				'LIMIT 1');
 
 			// a -> b (old -> new)
 			$_GET['a']				= $page['revision_id'];
@@ -2800,15 +2800,15 @@ class Wacko
 
 		// get watchers
 		$watchers	= $this->db->load_all(
-			"SELECT DISTINCT
+			'SELECT DISTINCT
 				w.user_id, w.comment_id, w.pending,
 				u.email, u.user_name, u.email_confirm, u.enabled,
-				s.user_lang, s.send_watchmail, s.notify_minor_edit, s.notify_page, s.notify_comment " .
-			"FROM " . $this->prefix . "watch w " .
-				"LEFT JOIN " . $this->prefix . "user u ON (w.user_id = u.user_id) " .
-				"LEFT JOIN " . $this->prefix . "user_setting s ON (w.user_id = s.user_id) " .
-			"WHERE w.page_id = " . (int) $object_id . " " .
-				"AND w.user_id != " . (int) $user_id);
+				s.user_lang, s.send_watchmail, s.notify_minor_edit, s.notify_page, s.notify_comment ' .
+			'FROM ' . $this->prefix . 'watch w ' .
+				'LEFT JOIN ' . $this->prefix . 'user u ON (w.user_id = u.user_id) ' .
+				'LEFT JOIN ' . $this->prefix . 'user_setting s ON (w.user_id = s.user_id) ' .
+			'WHERE w.page_id = ' . (int) $object_id . ' ' .
+				'AND w.user_id <> ' . (int) $user_id);
 
 		foreach ($watchers as $user)
 		{
@@ -2821,10 +2821,10 @@ class Wacko
 					if (!$user['comment_id'])
 					{
 						$this->db->sql_query(
-							"UPDATE " . $this->prefix . "watch SET " .
-								"comment_id	= " . (int) $page_id . " " .
-							"WHERE page_id = " . (int) $comment_on_id . " " .
-								"AND user_id = " . (int) $user['user_id']);
+							'UPDATE ' . $this->prefix . 'watch SET ' .
+								'comment_id	= ' . (int) $page_id . ' ' .
+							'WHERE page_id = ' . (int) $comment_on_id . ' ' .
+								'AND user_id = ' . (int) $user['user_id']);
 					}
 					else
 					{
@@ -3592,10 +3592,10 @@ class Wacko
 	* Returns full <a href=".."> or <img ...> HTML for Tag
 	*
 	* @param string		$tag			Link content - may be Wacko tag, interwiki wikiname:page tag,
-	*									http/file/ftp/https/mailto/xmpp URL,
+	*									http/https/file/ftp/mailto/xmpp URL,
 	*									local or remote audio/image/video-file for <audio>/<img>/<video> link,
 	*									or local or remote doc-file;
-	*									if pagetag is for an external link but not protocol is specified, http:// is prepended
+	*									if pagetag is for an external link but not protocol is specified, https:// is prepended
 	* @param string		$method			Optional Wacko method (default 'show' method added in run() function)
 	* @param string		$text			Optional text or image-file for HREF link (defaults to same as pagetag)
 	* @param string		$title
@@ -3609,22 +3609,22 @@ class Wacko
 	*/
 	function link($tag, $method = '', $text = '', $title = '', $track = true, $safe = false, $anchor_link = true, $meta_direct = true): string
 	{
-		$aname		= '';
-		$caption	= '';
-		$class		= '';
-		$clear		= '';
-		$media_class = '';
-		$icon		= '';
-		$audio_link	= false;
-		$img_link	= false;
-		$video_link	= false;
-		$scale		= '';
-		$lang		= '';
-		$matches	= [];
-		$rel		= '';
-		$href		= '';
-		$text		= str_replace('"', '&quot;', $text);
-		$title		= str_replace('"', '&quot;', $title);
+		$aname			= '';
+		$audio_link		= false;
+		$caption		= '';
+		$class			= '';
+		$clear			= '';
+		$href			= '';
+		$icon			= '';
+		$img_link		= false;
+		$lang			= '';
+		$matches		= [];
+		$media_class	= '';
+		$rel			= '';
+		$scale			= '';
+		$text			= str_replace('"', '&quot;', $text);
+		$title			= str_replace('"', '&quot;', $title);
+		$video_link		= false;
 
 		if ($text)
 		{
@@ -3634,16 +3634,25 @@ class Wacko
 		if ($track)
 		{
 			$track = $this->link_tracking();
+
+			// tracking external link
+			if (preg_match('/^(https?|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+			{
+				if (!mb_stristr($tag, $this->db->base_url))
+				{
+					$this->track_link($tag, LINK_EXTERNAL);
+				}
+			}
 		}
 
 		if (!$safe)
 		{
-			$text	= htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+			$text	= htmlspecialchars($text,  ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 			$title	= htmlspecialchars($title, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 		}
 
 		// external media file
-		if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((' . self::PATTERN['AUDIO'] . ')|(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')|(' . self::PATTERN['VIDEO'] . '))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
+		if (preg_match('/^(https?|ftp):\/\/([^\\s\"<>]+)\.((' . self::PATTERN['AUDIO'] . ')|(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')|(' . self::PATTERN['VIDEO'] . '))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			// remove typografica glue
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3662,20 +3671,6 @@ class Wacko
 			else if ($matches[6])
 			{
 				$video_link = $link;
-			}
-		}
-
-		// TODO: match all external links for tracking: images, mail:, xampp:
-		// TODO: add related code to actions and handlers (currently there is no available use case)
-		if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
-		{
-			if (!mb_stristr($tag, $this->db->base_url))
-			{
-				// tracking external link
-				if ($track)
-				{
-					$this->track_link($tag, LINK_EXTERNAL);
-				}
 			}
 		}
 
@@ -3704,7 +3699,7 @@ class Wacko
 			$tpl	= 'anchor';
 		}
 		// external image
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
+		else if (preg_match('/^(https?|ftp|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
 		{
 			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3740,7 +3735,7 @@ class Wacko
 			$tpl	= 'file';
 		}
 		// external URL
-		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+		else if (preg_match('/^(https?|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
@@ -3767,7 +3762,7 @@ class Wacko
 			// 1 -> file:/some.zip (global)
 			if (count($file_array) == 2 && $file_array[0] == '')
 			{
-				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // FIXME: prevents that tag is set as admin.php in href()
+				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // prevents that tag is set as 'admin.php' in href()
 				$file_name	= $file_array[1];
 				$param		= $this->parse_media_param($file_name);
 
@@ -3798,7 +3793,7 @@ class Wacko
 					$_page_tag = '!/';
 				}
 
-				//unwrap tag (check !/, ../ cases)
+				// unwrap relative tag (check !/, ../ cases)
 				$uw_tag			= $this->unwrap_link($_page_tag);
 				$page_tag		= utf8_rtrim($uw_tag, './');
 				$page_id		= $this->get_page_id($page_tag);
@@ -3992,7 +3987,7 @@ class Wacko
 						}
 					}
 				}
-				else //403
+				else // 403
 				{
 					$href		= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_name]);
 					$icon		= $this->_t('Icon.Outer');
@@ -4001,7 +3996,7 @@ class Wacko
 					$class		= 'acl-denied';
 				}
 			}
-			else	//404
+			else	// 404
 			{
 				$tpl	= 'wlocalfile';
 				$href	= '404';
@@ -4014,7 +4009,7 @@ class Wacko
 				{
 					$title	= '404: /' . utf8_trim($page_tag, '/') . '/file' . ($this->db->rewrite_mode ? '?' : '&amp;') . 'get=' . $file_name;
 				}
-			} //forgot 'bout 403
+			} // forgot 'bout 403
 
 			unset($file_data);
 		}
@@ -4071,72 +4066,66 @@ class Wacko
 			$aname			= '';
 			$match			= '';
 			$tag			= $matches[1];
-			$untag			= $unwtag	= $this->unwrap_link($tag);
+			$anchor			= $matches[2] ?? '';
+			$untag			= $unwrap_tag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/ui';
-			$ptag			= $unwtag;
 			$handler		= null;
 
 			// detecting page handler
-			if (preg_match($regex_handlers, '/' . $ptag . '/', $match))
+			if (preg_match($regex_handlers, '/' . $untag . '/', $match))
 			{
 				$handler	= $match[2];
 
-				if (!isset($_ptag))
-				{
-					$_ptag = ''; // XXX: ???
-				}
+				$_ptag		??= ''; // XXX: ???
 
 				$ptag		= $match[1];
-				$unwtag		= '/' . $unwtag . '/';
+				$unwrap_tag	= '/' . $unwrap_tag . '/';
 				$co			= mb_substr_count($_ptag, '/') - mb_substr_count($ptag, '/');
 
 				for ($i = 0; $i < $co; $i++)
 				{
-					$unwtag	= mb_substr($unwtag, 0, mb_strrpos($unwtag, '/'));
+					$unwrap_tag	= mb_substr($unwrap_tag, 0, mb_strrpos($unwrap_tag, '/'));
 				}
 			}
 
-			$unwtag			= utf8_trim($unwtag, '/.');
-			$unwtag			= str_replace('_', '', $unwtag);
+			$unwrap_tag			= utf8_trim($unwrap_tag, '/.');
+			$unwrap_tag			= str_replace('_', '', $unwrap_tag);
 
 			if ($handler)
 			{
 				// strip handler from page tag
-				$unwtag		= mb_substr($unwtag, 0, - (mb_strlen($handler) + 1));
+				$unwrap_tag	= mb_substr($unwrap_tag, 0, - (mb_strlen($handler) + 1));
 				$method		= $handler;
 			}
 
-			$this_page		= $this->load_page($unwtag, 0, null, LOAD_CACHE, LOAD_META);
+			$this_page		= $this->load_page($unwrap_tag, 0, null, LOAD_CACHE, LOAD_META);
 
 			if (mb_substr($tag, 0, 2) == '!/')
 			{
 				$icon		= $this->_t('Icon.Child');
 				$page0		= mb_substr($tag, 2);
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 3) == '../')
 			{
 				$icon		= $this->_t('Icon.Parent');
 				$page0		= mb_substr($tag, 3);
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
 			else if (mb_substr($tag, 0, 1) == '/')
 			{
 				$icon		= $this->_t('Icon.Root');
 				$page0		= mb_substr($tag, 1);
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
 			else
 			{
 				$icon		= $this->_t('Icon.Equal');
 				$page0		= $tag;
-				$page		= $this->add_spaces($page0, true);
-				$tpl		= 'page';
 			}
+
+			$page		= $this->add_spaces($page0, true);
+			$page_path	= mb_substr($untag, 0, mb_strlen($untag) - mb_strlen($page0));
+			$page_path	= $this->add_spaces($page_path, true) . ($this->show_spaces ? ' ' : '');
+			$tpl		= 'page';
 
 			if ($img_link)
 			{
@@ -4165,9 +4154,7 @@ class Wacko
 				$icon		= '';
 			}
 
-			$page_path		= mb_substr($untag, 0, mb_strlen($untag) - mb_strlen($page0));
-			$anchor			= $matches[2] ?? '';
-			$tag			= $unwtag;
+			$tag		= $unwrap_tag;
 
 			// track page link
 			if ($track)
@@ -4201,7 +4188,7 @@ class Wacko
 					}
 				}
 
-				#Ut::debug_print_r($this->acl['list']);
+				# Ut::debug_print_r($this->acl['list']);
 				$acl = explode("\n", $this->acl['list']);
 
 				if (!$access || $this->acl['list'] == '')
@@ -4299,7 +4286,10 @@ class Wacko
 			die ("ERROR: no link template '$tpl' found.");
 		}
 
-		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+		if (!$text)
+		{
+			$text = htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+		}
 
 		// external link
 		if ($href)
@@ -4629,11 +4619,11 @@ class Wacko
 	function similar_page_exists($tag)
 	{
 		return $this->db->load_all(
-			"SELECT page_id, tag " .
-			"FROM " . $this->prefix . "page " .
-			"WHERE tag = " . $this->db->q($tag) . " " .
-				"COLLATE utf8mb4_general_ci " .
-			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci");
+			'SELECT page_id, tag ' .
+			'FROM ' . $this->prefix . 'page ' .
+			'WHERE tag = ' . $this->db->q($tag) . ' ' .
+				'COLLATE utf8mb4_general_ci ' .
+			'ORDER BY tag COLLATE utf8mb4_unicode_520_ci');
 	}
 
 	function sanitize_page_tag(&$tag): void
@@ -5556,13 +5546,13 @@ class Wacko
 	function load_usergroup($group_name, $group_id = 0)
 	{
 		return $this->db->load_single(
-			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.created, g.is_system, g.open, g.active, u.user_name AS moderator " .
-			"FROM " . $this->prefix . "usergroup g " .
-				"LEFT JOIN " . $this->prefix . "user u ON (g.moderator_id = u.user_id) " .
-			"WHERE " . ( $group_id
-				? "g.group_id		= " . (int) $group_id . " "
-				: "g.group_name		= " . $this->db->q($group_name) . " ") .
-			"LIMIT 1");
+			'SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.created, g.is_system, g.open, g.active, u.user_name AS moderator ' .
+			'FROM ' . $this->prefix . 'usergroup g ' .
+				'LEFT JOIN ' . $this->prefix . 'user u ON (g.moderator_id = u.user_id) ' .
+			'WHERE ' . ( $group_id
+				? 'g.group_id		= ' . (int) $group_id . ' '
+				: 'g.group_name		= ' . $this->db->q($group_name) . ' ') .
+			'LIMIT 1');
 	}
 
 	// USERS
@@ -5840,15 +5830,15 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "user SET " .
-				"last_visit						= UTC_TIMESTAMP(), " .
-				"change_password				= '', " .
-				"login_count					= login_count + 1, " .
-				"failed_login_count				= 0, " .
-				"lost_password_request_count	= 0 " . // STS value unused
-			"WHERE " .
-				"user_id						= " . (int) $user['user_id'] . " " .
-			"LIMIT 1");
+			'UPDATE ' . $this->prefix . 'user SET ' .
+				'last_visit					= UTC_TIMESTAMP(), ' .
+				"change_password			= '', " .
+				'login_count				= login_count + 1, ' .
+				'failed_login_count			= 0, ' .
+				'password_request_count		= 0 ' . // STS value unused
+			'WHERE ' .
+				'user_id					= ' . (int) $user['user_id'] . ' ' .
+			'LIMIT 1');
 	}
 
 	function soft_login($user): void
@@ -6858,22 +6848,26 @@ class Wacko
 		// avoid results if $user_id is 0 (user does not exist)
 		if ($user_id)
 		{
+			$this->get_user_id() > 1		// can't use $user_id here as the function get_user_menu() called once for registered user, and if he has no menu, called again for system user id = 1. Registered users have id > 1, anonymous users have id = 1.
+				? $rights = "(a.list = '*' OR a.list = '$')"		// registered users can see read * (public) and $ (for registered users) ACL pages in the default top menu
+				: $rights = "a.list = '*'";							// anonymous users can see only read * (public) ACL pages in the default top menu
+
 			$user_menu = $this->db->load_all(
-				"SELECT p.page_id, p.tag, p.title, m.menu_title, m.menu_lang " .
-				"FROM " . $this->prefix . "menu m " .
+				'SELECT p.page_id, p.tag, p.title, m.menu_title, m.menu_lang ' .
+				'FROM ' . $this->prefix . 'menu m ' .
 					($public
-						? "LEFT JOIN ". $this->prefix . "acl a ON (m.page_id = a.page_id) "
-						: "") .
-					"LEFT JOIN " . $this->prefix . "page p ON (m.page_id = p.page_id) " .
-				"WHERE m.user_id = " . (int) $user_id . " " .
+						? 'LEFT JOIN ' . $this->prefix . 'acl a ON (m.page_id = a.page_id) '
+						: '') .
+				'LEFT JOIN ' . $this->prefix . 'page p ON (m.page_id = p.page_id) ' .
+				'WHERE m.user_id = ' . (int) $user_id . ' ' .
 					($lang
-						? "AND m.menu_lang = " . $this->db->q($lang) . " "
-						: "") .
+						? 'AND m.menu_lang = ' . $this->db->q($lang) . ' '
+						: '') .
 					($public
 						? "AND a.privilege = 'read' " .
-						  "AND a.list = '*' " // TODO: assumes only '*' is present, will fail with additional lines
-						: "") .
-				"ORDER BY m.menu_position", true);
+						  "AND " . $rights . " " // assumes '*' for anonymous, '*' and '$' for registered users
+						: '') .
+				'ORDER BY m.menu_position', true);
 
 			foreach ($user_menu as $menu_item)
 			{
@@ -6891,9 +6885,7 @@ class Wacko
 				$user_menu_formatted[] = [
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
-					'((' . $menu_item['tag'] .
-						(($title !== '')? ' ' . $title : '') .
-					'))',
+					'((' . $menu_item['tag'] . (($title !== '')? ' ' . $title : '') . '))',
 					$menu_item['menu_lang'],
 				];
 			}
@@ -7268,10 +7260,12 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting('validate_ip') && $this->get_user_setting('ip') != $this->http->ip)
+		if (   $this->get_user_setting('validate_ip')
+			&& $this->get_user_setting('ip') != $this->http->ip)
 		{
 			// TODO: set and load lang??
-			$this->log(1, '<strong><span class="cite">' . Ut::perc_replace(
+			$this->log(1, '<strong><span class="cite">' .
+				Ut::perc_replace(
 					$this->_t('LogUserIPSwitched', SYSTEM_LANG),
 					'<code>' . $this->get_user_setting('user_name') . '</code>',
 					'<code>' . $this->get_user_setting('ip') . '</code>',
@@ -7396,7 +7390,7 @@ class Wacko
 
 		// forum page
 		$this->forum =
-			(bool) (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->tag)
+			(bool) (preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->tag)
 			|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id']
 				? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->get_page_tag($this->page['comment_on_id']))
 				: ''));
