@@ -4186,7 +4186,7 @@ class Wacko
 			$tpl	= 'userlink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]*)$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 

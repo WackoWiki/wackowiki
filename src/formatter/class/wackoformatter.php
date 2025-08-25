@@ -139,7 +139,7 @@ class WackoFormatter
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(" . $object::PATTERN['AUDIO'] . '|' . $object::PATTERN['BITMAP'] . '|' . $object::PATTERN['DRAWING'] . '|' . $object::PATTERN['VIDEO'] . ")(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
-			"\b[[:alnum:]]+:[" . $object::PATTERN['ALPHANUM_P'] . "\!\.][" . $object::PATTERN['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
+			"\b[[:alnum:]]+:[" . $object::PATTERN['ALPHANUM_P'] . "\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// wiki links (beside actions)
@@ -883,7 +883,7 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', true, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+:[' . $wacko::PATTERN['ALPHANUM_P'] . '\!\.][' . $wacko::PATTERN['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
+		else if (preg_match('/^([[:alnum:]]+:[' . $wacko::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];

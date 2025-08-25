@@ -527,18 +527,25 @@ a.acl-customsec .icon {
 }
 
 /* InterWiki links: SYNTAX (HostPrefix:Term) */
-
+a.iw-archive .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/ia.svg') no-repeat scroll left center;
+}
 a.iw-bugs .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/report-bug.svg') no-repeat scroll left center;
 }
 a.iw-commit .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/commit.svg') no-repeat scroll left center;
 }
+a.iw-geo .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/location.svg') no-repeat scroll left center;
+}
 a.iw-source .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/repository.svg') no-repeat scroll left center;
 }
+a.iw-tel .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/call.svg') no-repeat scroll left center;
+}
 /* Interwiki links without icon */
-a.iw-archive .icon,
 a.iw-brave .icon,
 a.iw-rfc .icon,
 a.iw-ppr .icon,
