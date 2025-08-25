@@ -4188,14 +4188,24 @@ class Wacko
 		// interwiki -> wiki:page
 		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]*)$/u', $tag, $matches))
 		{
-			$parts	= explode('/', $matches[2]);
-
-			for ($i = 0; $i < count($parts); $i++)
+			// hack! rfc 5870 & 3966, prevent URL-encode according to RFC 3986
+			if (in_array($matches[1], ['geo', 'tel']))
 			{
-				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
+				$parts = $matches[2];
+			}
+			else
+			{
+				$_parts	= explode('/', $matches[2]);
+
+				foreach ($_parts as $part)
+				{
+					$__parts[] = str_replace('%23', '#', rawurlencode($part));
+				}
+
+				$parts = implode('/', $__parts);
 			}
 
-			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
+			$href	= $this->get_inter_wiki_url($matches[1], $parts);
 			$class	= 'iw-' . mb_strtolower($matches[1]);
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'outerlink';
