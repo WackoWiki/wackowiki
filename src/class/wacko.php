@@ -24,12 +24,14 @@ class Wacko
 		'ACTION'		=> '\p{Latin}\d\_\-',
 		'FORMATTER'		=> '\p{Latin}\d\_\-\/',
 
-		'UPPER'			=> '[\p{Lu}]',
-		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
-		'LOWER'			=> '[\p{Ll}\/]',
 		'ALPHA'			=> '[\p{L}\_\-\/]',
 		'ALPHANUM'		=> '[\p{L}\p{M}\p{Nd}\_\-\/]',
 		'ALPHANUM_P'	=> '\p{L}\p{M}\p{Nd}\_\-\/',
+		'LOWER'			=> '[\p{Ll}\/]',
+		'UPPER'			=> '[\p{Lu}]',
+		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
+
+		'URI'			=> '[[:alnum:]\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]',
 
 		'AUDIO'			=> 'm4a|mka|mp3|ogg|opus',
 		'BITMAP'		=> 'avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp',
@@ -3792,7 +3794,7 @@ class Wacko
 			$track = $this->link_tracking();
 
 			// tracking external link
-			if (preg_match('/^(https?|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+			if (preg_match('/^(https?|ftps?|file|git|nntp|sftp|ssh|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 			{
 				if (!mb_stristr($tag, $this->db->base_url))
 				{
@@ -3808,7 +3810,7 @@ class Wacko
 		}
 
 		// external media file
-		if (preg_match('/^(https?|ftp):\/\/([^\\s\"<>]+)\.((' . self::PATTERN['AUDIO'] . ')|(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')|(' . self::PATTERN['VIDEO'] . '))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
+		if (preg_match('/^(https?|ftps?):\/\/([^\\s\"<>]+)\.((' . self::PATTERN['AUDIO'] . ')|(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')|(' . self::PATTERN['VIDEO'] . '))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			// remove typografica glue
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3855,7 +3857,7 @@ class Wacko
 			$tpl	= 'anchor';
 		}
 		// external image
-		else if (preg_match('/^(https?|ftp|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
+		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
 		{
 			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3873,7 +3875,7 @@ class Wacko
 			}
 		}
 		// file link -> https://example.com/file.zip
-		else if (preg_match('/^(https?|ftp|file):\/\/([^\\s\"<>]+)\.(7z|bz2|doc|exe|gz|odt|pdf|ppt|rar|rdf|rpm|tgz|xls|zip)$/u', $tag, $matches))
+		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(7z|bz2|doc|exe|gz|odt|pdf|ppt|rar|rdf|rpm|tgz|xls|zip)$/u', $tag, $matches))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= match($matches[3])
@@ -3887,7 +3889,7 @@ class Wacko
 			$tpl	= 'outerlink';
 		}
 		// external URL
-		else if (preg_match('/^(https?|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+		else if (preg_match('/^(https?|ftps?|file|git|nntp|sftp|ssh|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
