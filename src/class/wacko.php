@@ -9,10 +9,10 @@ if (!defined('IN_WACKO'))
 class Wacko
 {
 	public const EXT = [
-		'audio'			=> ['m4a', 'mp3', 'ogg', 'opus'],
+		'audio'			=> ['m4a', 'mka', 'mp3', 'ogg', 'opus'],
 		'bitmap'		=> ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'jxl', 'png', 'webp'],
 		'drawing'		=> ['svg'],
-		'video'			=> ['mp4', 'ogv', 'webm'],
+		'video'			=> ['av1', 'mkv', 'mp4', 'ogv', 'webm'],
 	];
 	public const PATTERN = [
 		'USER_NAME'		=> '[\p{L}\p{Nd}\.\-]+',
@@ -21,17 +21,19 @@ class Wacko
 		'TAG'			=> '[\p{L}\p{M}\p{Nd}\.\-\/]',
 		'TAG_P'			=> '\p{L}\p{M}\p{Nd}\.\-\/',
 
-		'UPPER'			=> '[\p{Lu}]',
-		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
-		'LOWER'			=> '[\p{Ll}\/]',
 		'ALPHA'			=> '[\p{L}\_\-\/]',
 		'ALPHANUM'		=> '[\p{L}\p{M}\p{Nd}\_\-\/]',
 		'ALPHANUM_P'	=> '\p{L}\p{M}\p{Nd}\_\-\/',
+		'LOWER'			=> '[\p{Ll}\/]',
+		'UPPER'			=> '[\p{Lu}]',
+		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
 
-		'AUDIO'			=> 'm4a|mp3|ogg|opus',
+		'URI'			=> '[[:alnum:]\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]',
+
+		'AUDIO'			=> 'm4a|mka|mp3|ogg|opus',
 		'BITMAP'		=> 'avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp',
 		'DRAWING'		=> 'svg',
-		'VIDEO'			=> 'mp4|ogv|webm',
+		'VIDEO'			=> 'av1|mkv|mp4|ogv|webm',
 	];
 
 	private $acl					= [];
@@ -84,6 +86,7 @@ class Wacko
 	public $notify_lang				= null;		// sets language in _t() function for notifications
 	public $page_lang				= null;
 	public $resource				= null;
+	public $show_spaces				= null;
 	public $translations			= null;
 	public $user_lang				= null;
 	public $user_lang_dir			= null;
@@ -3636,7 +3639,7 @@ class Wacko
 			$track = $this->link_tracking();
 
 			// tracking external link
-			if (preg_match('/^(https?|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+			if (preg_match('/^(https?|ftps?|file|git|nntp|sftp|ssh|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 			{
 				if (!mb_stristr($tag, $this->db->base_url))
 				{
@@ -3652,7 +3655,7 @@ class Wacko
 		}
 
 		// external media file
-		if (preg_match('/^(https?|ftp):\/\/([^\\s\"<>]+)\.((' . self::PATTERN['AUDIO'] . ')|(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')|(' . self::PATTERN['VIDEO'] . '))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
+		if (preg_match('/^(https?|ftps?):\/\/([^\\s\"<>]+)\.((' . self::PATTERN['AUDIO'] . ')|(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')|(' . self::PATTERN['VIDEO'] . '))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			// remove typografica glue
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3699,7 +3702,7 @@ class Wacko
 			$tpl	= 'anchor';
 		}
 		// external image
-		else if (preg_match('/^(https?|ftp|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
+		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
 		{
 			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3717,7 +3720,7 @@ class Wacko
 			}
 		}
 		// file link -> http://example.com/file.zip
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/u', $tag))
+		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/u', $tag))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('FileLink');
@@ -3726,7 +3729,7 @@ class Wacko
 			$tpl	= 'file';
 		}
 		// PDF link
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/u', $tag))
+		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(pdf)$/u', $tag))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('PDFLink');
@@ -3735,7 +3738,7 @@ class Wacko
 			$tpl	= 'file';
 		}
 		// external URL
-		else if (preg_match('/^(https?|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+		else if (preg_match('/^(https?|ftps?|file|git|nntp|sftp|ssh|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
@@ -3926,6 +3929,8 @@ class Wacko
 
 								if ($file_data['picture_w'] || $file_data['file_ext'] == 'svg')
 								{
+									// set new width and height for max_image_width
+									$scale	= ' width="' . $param['width'] . '" height="' . $param['height'] . '"';
 									$text	= $this->image_link($src, $media_class, $aname, $title, $alt, $scale);
 								}
 								else if (in_array($file_data['file_ext'], self::EXT['video']))
@@ -4046,16 +4051,26 @@ class Wacko
 			$tpl	= 'userlink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]*)$/u', $tag, $matches))
 		{
-			$parts	= explode('/', $matches[2]);
-
-			for ($i = 0; $i < count($parts); $i++)
+			// hack! rfc 5870 & 3966, prevent URL-encode according to RFC 3986
+			if (in_array($matches[1], ['geo', 'tel']))
 			{
-				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
+				$parts = $matches[2];
+			}
+			else
+			{
+				$_parts	= explode('/', $matches[2]);
+
+				foreach ($_parts as $part)
+				{
+					$__parts[] = str_replace('%23', '#', rawurlencode($part));
+				}
+
+				$parts = implode('/', $__parts);
 			}
 
-			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
+			$href	= $this->get_inter_wiki_url($matches[1], $parts);
 			$class	= 'iw-' . mb_strtolower($matches[1]);
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'outerlink';
@@ -4530,7 +4545,7 @@ class Wacko
 
 	/**
 	* Add spaces to WikiWords (if config parameter show_spaces = 1) and replace
-	* relative  path (/ !/ ../) to icons Icon.RootLink, Icon.SubLink, Icon.UpLink
+	* relative path (/ !/ ../) to icons Icon.RootLink, Icon.SubLink, Icon.UpLink
 	*
 	* @param	string		$text	Text with WikiWords
 	* @param	bool		$icon	adds Link icon as prefix
@@ -4539,7 +4554,12 @@ class Wacko
 	*/
 	function add_spaces($text, $icon = false): ?string
 	{
-		if (($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces)
+		if (!isset($this->show_spaces))
+		{
+			$this->show_spaces = ($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces;
+		}
+
+		if ($this->show_spaces)
 		{
 			$text = $this->add_nbsps($text);
 		}
