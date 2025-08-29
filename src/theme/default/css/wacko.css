@@ -510,8 +510,14 @@ a.file-link .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/file.svg') no-repeat scroll left center;
 }
 
+a[href^="geo:"] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/location.svg') no-repeat scroll left center;
+}
 a[href^="mailto:"] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/mail.svg') no-repeat scroll left center;
+}
+a[href^="tel:"] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/call.svg') no-repeat scroll left center;
 }
 a[href^="xmpp:"] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/jabber.svg') no-repeat scroll left center;
@@ -536,14 +542,8 @@ a.iw-bugs .icon {
 a.iw-commit .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/commit.svg') no-repeat scroll left center;
 }
-a.iw-geo .icon {
-	background: rgba(0, 0, 0, 0) url('./../icon/light/location.svg') no-repeat scroll left center;
-}
 a.iw-source .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/repository.svg') no-repeat scroll left center;
-}
-a.iw-tel .icon {
-	background: rgba(0, 0, 0, 0) url('./../icon/light/call.svg') no-repeat scroll left center;
 }
 /* Interwiki links without icon */
 a.iw-brave .icon,

@@ -3841,6 +3841,24 @@ class Wacko
 			$class	= '';
 			$tpl	= 'outerlink';
 		}
+		// geo URI -> geo:-3.075833,37.353333
+		else if (preg_match('/^geo:[^\\s\"<>&\:]+$/u', $tag, $matches))
+		{
+			$href	= $tag;
+			$title	= $this->_t('GeoLink');
+			$icon	= $this->_t('Icon.Outer');
+			$class	= '';
+			$tpl	= 'outerlink';
+		}
+		// tel URI -> tel:+1-234-567-890
+		else if (preg_match('/^tel:[^\\s\"<>&\:]+$/u', $tag, $matches))
+		{
+			$href	= $tag;
+			$title	= $this->_t('TelLink');
+			$icon	= $this->_t('Icon.Outer');
+			$class	= '';
+			$tpl	= 'outerlink';
+		}
 		// XMPP address -> xmpp:info@example.com
 		else if (preg_match('/^xmpp:[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
@@ -4190,22 +4208,14 @@ class Wacko
 		// interwiki -> wiki:page
 		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]*)$/u', $tag, $matches))
 		{
-			// hack! rfc 5870 & 3966, prevent URL-encode according to RFC 3986
-			if (in_array($matches[1], ['geo', 'tel']))
-			{
-				$parts = $matches[2];
-			}
-			else
-			{
-				$_parts	= explode('/', $matches[2]);
+			$_parts	= explode('/', $matches[2]);
 
-				foreach ($_parts as $part)
-				{
-					$__parts[] = str_replace('%23', '#', rawurlencode($part));
-				}
-
-				$parts = implode('/', $__parts);
+			foreach ($_parts as $part)
+			{
+				$__parts[] = str_replace('%23', '#', rawurlencode($part));
 			}
+
+			$parts	= implode('/', $__parts);
 
 			$href	= $this->get_inter_wiki_url($matches[1], $parts);
 			$class	= 'iw-' . mb_strtolower($matches[1]);
