@@ -1,7 +1,7 @@
 <?php
 /************************************************************\
 *
-*	freeCap v1.4.6 Copyright
+*	freeCap v1.4.7 Copyright
 *	2005 Howard Yeend (solidred.co.uk),
 *	2008 - 2025 WackoWiki Team
 *
@@ -30,7 +30,7 @@ if (!defined('IN_WACKO'))
 }
 
 // freeCap version
-$version = '1.4.6';
+$version = '1.4.7';
 
 //////////////////////////////////////////////////////
 ////// User Defined Vars:

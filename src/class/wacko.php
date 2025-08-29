@@ -3842,19 +3842,15 @@ class Wacko
 			$tpl	= 'outerlink';
 		}
 		// geo URI -> geo:-3.075833,37.353333
-		else if (preg_match('/^geo:[^\\s\"<>&\:]+$/u', $tag, $matches))
-		{
-			$href	= $tag;
-			$title	= $this->_t('GeoLink');
-			$icon	= $this->_t('Icon.Outer');
-			$class	= '';
-			$tpl	= 'outerlink';
-		}
 		// tel URI -> tel:+1-234-567-890
-		else if (preg_match('/^tel:[^\\s\"<>&\:]+$/u', $tag, $matches))
+		else if (preg_match('/^(geo|tel):[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
 			$href	= $tag;
-			$title	= $this->_t('TelLink');
+			$title	= match($matches[1])
+			{
+				'geo'		=> $this->_t('GeoLink'),
+				default		=> $this->_t('TelLink'),
+			};
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'outerlink';
