@@ -37,12 +37,12 @@ $load_wanted = function ($cluster, $limit)
 				'p.tag is NULL GROUP BY wanted_tag ';
 
 	// count pages
-	if ($count = $this->db->load_single(
+	$count = $this->db->load_single(
 		'SELECT COUNT(*) AS n
-		FROM ( ' .
-			$selector .
-		') AS src'
-		, true))
+		FROM ( ' . $selector . ') AS src'
+		, true);
+
+	if ($count['n'])
 	{
 		$pagination = $this->pagination($count['n'], $limit);
 
