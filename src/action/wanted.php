@@ -104,7 +104,8 @@ else
 
 				if (!$this->db->hide_locked || $this->has_access('read', $page_id_parent))
 				{
-					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
+					// update the referrer count for the WantedPage,
+					// we need to take pages the user is not allowed to view out of the total
 					$count = 0;
 
 					if ([$ref_pages, $pagination] = $this->load_pages_linking($page['wanted_tag'], $tag))
@@ -118,7 +119,8 @@ else
 						}
 					}
 
-					// If no pages are referring to the WantedPage it means the referrers are all locked so don't show the link at all
+					// If no pages are referring to the WantedPage
+					// it means the referrers are all locked so don't show the link at all
 					if ($count > 0)
 					{
 						$tpl->l_link	= $this->link('/' . $page['wanted_tag']);
@@ -129,6 +131,11 @@ else
 			}
 
 			$tpl->leave();
+		}
+
+		if (!$count)
+		{
+			$tpl->none = true;
 		}
 	}
 	else
