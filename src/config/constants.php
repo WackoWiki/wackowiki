@@ -97,7 +97,7 @@ const SQL_MODE_LAX					= [
 ];
 
 // Do not change these two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.1.28';
+const WACKO_VERSION					= '6.1.29';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 
 const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
