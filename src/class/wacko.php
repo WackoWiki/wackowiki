@@ -31,7 +31,7 @@ class Wacko
 		'UPPER'			=> '[\p{Lu}]',
 		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
 
-		'URI'			=> '[[:alnum:]\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]',
+		'URI'			=> '[[:alnum:]\-\.\_\~\:\/\?\#\[\]\%\@\!\$\&\'\(\)\*\+\,\;\=]',
 
 		'AUDIO'			=> 'm4a|mka|mp3|ogg|opus',
 		'BITMAP'		=> 'avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp',

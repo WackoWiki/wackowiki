@@ -214,13 +214,14 @@ function admin_maint_resync($engine, $module)
 		}
 		else if ($action == 'wikilinks')
 		{
-			/* TODO:	1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
-						2) Browser will stop after 20 redirects with: ERR_TOO_MANY_REDIRECTS: There were too many redirects. -> load recent url again after error,
-							solution: stop after after 15 redirects and provide a 'contine' button
-							Chrome and Firefox out of the box is 20
-						3) if processing breaks see point 1
-							- fails with page having a broken action using templates
-						4) TIMEOUT or reach of memory limit - try to reduce the value for the $page_limit parameter
+			/* TODO:
+				1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
+				2) Browser will stop after 20 redirects with: ERR_TOO_MANY_REDIRECTS: There were too many redirects. -> load recent url again after error,
+					solution: stop after after 15 redirects and provide a 'contine' button
+					Chrome and Firefox out of the box is 20
+				3) if processing breaks see point 1
+					- fails with page having a broken action using templates
+				4) TIMEOUT or reach of memory limit - try to reduce the value for the $page_limit parameter
 			*/
 
 			if (isset($_POST['page_limit']))
