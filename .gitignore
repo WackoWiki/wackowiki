@@ -1,30 +1,30 @@
 # WackoWiki
 
-/cache/*
-!/cache/.htaccess
-/cache/config/*
-!/cache/config/.htaccess
-/cache/feed/*
-!/cache/feed/.htaccess
-/cache/page/*
-!/cache/page/.htaccess
-/cache/query/*
-!/cache/query/.htaccess
-/cache/session/*
-!/cache/session/.htaccess
-/cache/template/*
-!/cache/template/.htaccess
+/src/_cache/*
+!/src/_cache/.htaccess
+/src/_cache/config/*
+!/src/_cache/config/.htaccess
+/src/_cache/feed/*
+!/src/_cache/feed/.htaccess
+/src/_cache/page/*
+!/src/_cache/page/.htaccess
+/src/_cache/query/*
+!/src/_cache/query/.htaccess
+/src/_cache/session/*
+!/src/_cache/session/.htaccess
+/src/_cache/template/*
+!/src/_cache/template/.htaccess
 
-/file/backup/*
-!/file/backup/.htaccess
-/file/global/*
-!/file/global/wacko_logo.png
-/file/perpage/*
-!/file/perpage/.htaccess
-/file/thumb/*
-!/file/thumb/.htaccess
-/file/thumb_local/*
-!/file/thumb_local/.htaccess
+/src/file/backup/*
+!/src/file/backup/.htaccess
+/src/file/global/*
+!/src/file/global/wacko_logo.png
+/src/file/perpage/*
+!/src/file/perpage/.htaccess
+/src/file/thumb/*
+!/src/file/thumb/.htaccess
+/src/file/thumb_local/*
+!/src/file/thumb_local/.htaccess
 
 # Eclipse IDE
 .buildpath
