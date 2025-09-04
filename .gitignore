@@ -24,6 +24,9 @@
 /src/file/thumb/*
 !/src/file/thumb/.htaccess
 
+/src/xml/*
+!/src/xml/.htaccess
+
 # Eclipse IDE
 .buildpath
 .project
