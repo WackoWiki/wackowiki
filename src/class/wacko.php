@@ -28,7 +28,7 @@ class Wacko
 		'UPPER'			=> '[\p{Lu}]',
 		'UPPERNUM'		=> '[\p{Lu}\p{Nd}]',
 
-		'URI'			=> '[[:alnum:]\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]',
+		'URI'			=> '[[:alnum:]\-\.\_\~\:\/\?\#\[\]\%\@\!\$\&\'\(\)\*\+\,\;\=]',
 
 		'AUDIO'			=> 'm4a|mka|mp3|ogg|opus',
 		'BITMAP'		=> 'avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp',
@@ -2960,10 +2960,10 @@ class Wacko
 		$token = Ut::random_token(21);
 
 		$this->db->sql_query(
-			"UPDATE " . $this->prefix . "user SET " .
-				"email_confirm = " . $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash)) . " " .
-			"WHERE user_id = " . (int) $user_id . " " .
-			"LIMIT 1");
+			'UPDATE ' . $this->prefix . 'user SET ' .
+				'email_confirm = ' . $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash)) . ' ' .
+			'WHERE user_id = ' . (int) $user_id . ' ' .
+			'LIMIT 1');
 
 		return $this->href('', $this->db->account_page, ['confirm' => $token], null, null, null, true, true);
 	}
@@ -2973,16 +2973,16 @@ class Wacko
 		$hash = $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash));
 
 		if ($user = $this->db->load_single(
-			"SELECT user_name, email " .
-			"FROM " . $this->prefix . "user " .
-			"WHERE email_confirm = " . $hash . " " .
-			"LIMIT 1"))
+			'SELECT user_name, email ' .
+			'FROM ' . $this->prefix . 'user ' .
+			'WHERE email_confirm = ' . $hash . ' ' .
+			'LIMIT 1'))
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->prefix . "user SET " .
+				'UPDATE ' . $this->prefix . 'user SET ' .
 					"email_confirm = '' " .
-				"WHERE email_confirm = " . $hash . " " .
-				"LIMIT 1");
+				'WHERE email_confirm = ' . $hash . ' ' .
+				'LIMIT 1');
 
 			if ($this->get_user_name() == $user['user_name'])
 			{
@@ -3062,7 +3062,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			$info_box = '<div class="msg ' . $type . '">' . $message . "</div>\n";
+			$info_box = '<div class="msg ' . $type . '">' . $message . '</div>' . "\n";
 
 			if ($show)
 			{
@@ -4053,22 +4053,14 @@ class Wacko
 		// interwiki -> wiki:page
 		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]*)$/u', $tag, $matches))
 		{
-			// hack! rfc 5870 & 3966, prevent URL-encode according to RFC 3986
-			if (in_array($matches[1], ['geo', 'tel']))
-			{
-				$parts = $matches[2];
-			}
-			else
-			{
-				$_parts	= explode('/', $matches[2]);
+			$_parts	= explode('/', $matches[2]);
 
-				foreach ($_parts as $part)
-				{
-					$__parts[] = str_replace('%23', '#', rawurlencode($part));
-				}
-
-				$parts = implode('/', $__parts);
+			foreach ($_parts as $part)
+			{
+				$__parts[] = str_replace('%23', '#', rawurlencode($part));
 			}
+
+			$parts	= implode('/', $__parts);
 
 			$href	= $this->get_inter_wiki_url($matches[1], $parts);
 			$class	= 'iw-' . mb_strtolower($matches[1]);
