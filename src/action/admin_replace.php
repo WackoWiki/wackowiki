@@ -48,9 +48,9 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 		$match =
 			($use_regex
 				? '(BINARY a.body REGEXP '	. $this->db->q($target) . ' ' .
-				'OR BINARY a.title REGEXP '	. $this->db->q($target) . ') '
+				  'OR BINARY a.title REGEXP '	. $this->db->q($target) . ') '
 				: '(BINARY a.body LIKE '	. $this->db->q('%' . $target . '%') . ' ' .
-				'OR BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
+				  'OR BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
 		);
 	}
 	else if ($pages || $comments)
@@ -82,9 +82,9 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 			$match .
 			($tag
 				? 'AND (a.tag = '	. $this->db->q($tag) . ' ' .
-				'OR a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
-				'OR b.tag = '		. $this->db->q($tag) . ' ' .
-				'OR b.tag LIKE '	. $this->db->q($tag . '/%') . ') '
+				  'OR a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
+				  'OR b.tag = '		. $this->db->q($tag) . ' ' .
+				  'OR b.tag LIKE '	. $this->db->q($tag . '/%') . ') '
 				: '') .
 			($comments
 				? ($pages
@@ -99,7 +99,7 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 				: '') .
 			($category_ids
 				? 'AND ca.category_id IN (' . $this->ids_string($category_ids) . ') ' .
-				'AND ca.object_type_id = ' . (int) OBJECT_PAGE . ' '
+				  'AND ca.object_type_id = ' . (int) OBJECT_PAGE . ' '
 				: '') .
 			($deleted
 				? ''
