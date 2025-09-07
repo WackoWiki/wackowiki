@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Теми пошуку для ',
 	'NotFoundInTopics'			=> 'не знайдено в темах',
 	'FilterLangNotAvailable'	=> 'Обрана мова недоступна!',
+	'SearchInPages'				=> 'Вміст сторінки',
+	'SearchInComments'			=> 'Пошук в коментарях',
+	'SearchInPageTitles'		=> 'Шукати у заголовках сторінок',
 
 	'PostedBy'					=> 'опубліковано',
 	'ThisIsCommentOn'			=> 'Це коментар до',

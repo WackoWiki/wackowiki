@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> '主题搜索结果 ',
 	'NotFoundInTopics'			=> '在主题中找不到',
 	'FilterLangNotAvailable'	=> '所选语言不可用！',
+	'SearchInPages'				=> '搜索页面内容',
+	'SearchInComments'			=> '在评论中搜索',
+	'SearchInPageTitles'		=> '在页面标题中搜索',
 
 	'PostedBy'					=> '发布者',
 	'ThisIsCommentOn'			=> '这是一个评论',

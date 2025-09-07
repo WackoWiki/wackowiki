@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Резултати за заглавието на търсената фраза ',
 	'NotFoundInTopics'			=> 'няма в заглавието ',
 	'FilterLangNotAvailable'	=> 'Избраният език не е наличен!',
+	'SearchInPages'				=> 'Търсене в съдържанието на страницата',
+	'SearchInComments'			=> 'Търсене в коментарите',
+	'SearchInPageTitles'		=> 'Търсене в заглавията на страниците',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
@@ -777,7 +780,7 @@ $wacko_translation = [
 	'PMSent'					=> 'Личното съобщение беше успешно изпратено до потребителя.',
 	'PMBody'					=> 'Това съобщение ви е изпратено от потребителя %1.',
 	'PMBodyCopy'				=> 'Изпратихте следното съобщение до потребителя %1.',
-	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'PMReply'					=> 'За да отговорите на този имейл, кликнете върху следната връзка (не използвайте бутона „Отговор“ / „Отговор в имейла“):',
 	'PMNotLoggedIn'				=> 'Не сте влезли в системата и не можете да изпращате никакви лични съобщения до потребителите.',
 
 	// admin_replace action

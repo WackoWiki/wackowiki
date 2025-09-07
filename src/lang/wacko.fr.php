@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Résultat de la recherche dans les sujets ',
 	'NotFoundInTopics'			=> 'non trouvé dans les sujets',
 	'FilterLangNotAvailable'	=> 'La langue sélectionnée n’est pas disponible !',
+	'SearchInPages'				=> 'Rechercher dans le contenu de la page',
+	'SearchInComments'			=> 'Rechercher dans les commentaires',
+	'SearchInPageTitles'		=> 'Rechercher dans les titres de la page',
 
 	'PostedBy'					=> 'posté par',
 	'ThisIsCommentOn'			=> 'Ceci est un commentaire sur',

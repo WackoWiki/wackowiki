@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Zoekresultaat voor het onderwerp ',
 	'NotFoundInTopics'			=> 'Niet gevonden in de onderwerpen',
 	'FilterLangNotAvailable'	=> 'De geselecteerde taal is niet beschikbaar!',
+	'SearchInPages'				=> 'Zoeken in inhoud van de pagina',
+	'SearchInComments'			=> 'Zoeken in reacties',
+	'SearchInPageTitles'		=> 'Zoeken in paginatitels',
 
 	'PostedBy'					=> 'gepost door',
 	'ThisIsCommentOn'			=> 'Dit is een opmerking over',

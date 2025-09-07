@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Aiheiden hakutulokset kohteelle ',
 	'NotFoundInTopics'			=> 'ei löydy aiheista',
 	'FilterLangNotAvailable'	=> 'Valittu kieli ei ole saatavilla!',
+	'SearchInPages'				=> 'Etsi sivun sisällöstä',
+	'SearchInComments'			=> 'Etsi kommenteista',
+	'SearchInPageTitles'		=> 'Etsi sivujen otsikoista',
 
 	'PostedBy'					=> 'lähettänyt',
 	'ThisIsCommentOn'			=> 'Tämä on kommentti',

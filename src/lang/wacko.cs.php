@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Výsledky hledání témat pro ',
 	'NotFoundInTopics'			=> 'nenalezeno v tématech',
 	'FilterLangNotAvailable'	=> 'Vybraný jazyk není k dispozici!',
+	'SearchInPages'				=> 'Hledat v obsahu stránky',
+	'SearchInComments'			=> 'Hledat v komentářích',
+	'SearchInPageTitles'		=> 'Hledat na titulcích stránky',
 
 	'PostedBy'					=> 'odeslal(a)',
 	'ThisIsCommentOn'			=> 'Toto je komentář k',

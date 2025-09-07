@@ -159,7 +159,7 @@ $wacko_translation = [
 	'EmailLink'					=> 'Koosta e-kiri (mailiprogramm avaneb)',
 	'GeoLink'					=> 'Näita seda asukohta (kaardirakenduse käivitamine)',
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
-	'TelLink'					=> 'Call this number (phone app launch)',
+	'TelLink'					=> 'Helista sellele numbrile (telefonirakenduse käivitamine)',
 	'PermaLink'					=> 'Püsilink',
 	'PermaLinkTip'				=> 'Püsilink sellele lehele',
 	'PermaLink0Tip'				=> 'Püsilink sellele lehele',
@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Otsingu tulemused ',
 	'NotFoundInTopics'			=> 'Ei leidunud',
 	'FilterLangNotAvailable'	=> 'Valitud keel pole saadaval!',
+	'SearchInPages'				=> 'Otsi lehe sisust',
+	'SearchInComments'			=> 'Otsi kommentaaridest',
+	'SearchInPageTitles'		=> 'Otsi lehe pealkirjadest',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
@@ -777,7 +780,7 @@ $wacko_translation = [
 	'PMSent'					=> 'Isiklik sõnum saadeti kasutajale edukalt.',
 	'PMBody'					=> 'Selle teate on teile saatnud kasutaja %1.',
 	'PMBodyCopy'				=> 'Saatsite kasutajale %1 järgmise sõnumi.',
-	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'PMReply'					=> 'Sellele e-kirjale vastamiseks klõpsa järgmisel lingil (ära kasuta e-kirjas olevat nuppu „Vasta“ / „Vasta“):',
 	'PMNotLoggedIn'				=> 'Te pole süsteemi sisse logitud ega saa kasutajatele isiklikke sõnumeid saata.',
 
 	// admin_replace action

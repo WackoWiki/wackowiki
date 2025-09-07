@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Topics search results for ',
 	'NotFoundInTopics'			=> 'not found in topics',
 	'FilterLangNotAvailable'	=> 'A kiválasztott nyelv nem érhető el!',
+	'SearchInPages'				=> 'Keresés az oldal tartalmában',
+	'SearchInComments'			=> 'Keresés a hozzászólásokban',
+	'SearchInPageTitles'		=> 'Keresés az oldalcímekben',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',

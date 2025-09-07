@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'نتائج البحث عن المواضيع ',
 	'NotFoundInTopics'			=> 'غير موجود في المواضيع',
 	'FilterLangNotAvailable'	=> 'اللغة المحددة غير متوفرة!',
+	'SearchInPages'				=> 'البحث في محتويات الصفحة',
+	'SearchInComments'			=> 'البحث في التعليقات',
+	'SearchInPageTitles'		=> 'البحث في عناوين الصفحات',
 
 	'PostedBy'					=> 'نشر بواسطة',
 	'ThisIsCommentOn'			=> 'هذا تعليق على',

@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Topics search results for ',
 	'NotFoundInTopics'			=> 'not found in topics',
 	'FilterLangNotAvailable'	=> 'The selected language is not available!',
+	'SearchInPages'				=> 'पृष्ठ सामग्री में खोजें',
+	'SearchInComments'			=> 'टिप्पणियों में खोजें',
+	'SearchInPageTitles'		=> 'पृष्ठ शीर्षकों में खोजें',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
@@ -658,7 +661,7 @@ $wacko_translation = [
 	'PasswordChanged'			=> 'आपका कूटशब्द बदल दिया गया है!',
 	'EmailWelcome'				=> 'You\'ve registered at ',
 	'EmailRegistered'			=> 'You\'ve successfully registered at %1.' . "\n" . 'Your username: %2' . "\n\n",
-	'EmailVerify'				=> 'यदि आप सूचनाएँ प्राप्त करना चाहते हैं, तो आपको अपना ईमेल पता सत्यापित करना होगा। कृपया निम्नलिखित लिंक पर क्लिक करें या उसे वेब ब्राउज़र में कॉपी करें: ' . "\n" . '%1',
+	'EmailVerify'				=> 'यदि आप सूचनाएँ प्राप्त करना चाहते हैं, तो आपको अपना ईमेल पता सत्यापित करना होगा। कृपया निम्नलिखित लिंक पर क्लिक करें या उसे वेब ब्राउज़र में कॉपी करें ' . "\n" . '%1',
 	'EmailRegisteredLogin'		=> 'कृपया विकी पर वापस लौटें और अपने नए उपयोगकर्ता नाम और पासवर्ड के साथ लॉगिन करें।',
 	'EmailRegisteredIgnore'		=> 'If you did not request this registration, ignore this message and nothing will happen.',
 	'EmailDoNotReply'			=> 'Do not reply to this message.',
@@ -777,7 +780,7 @@ $wacko_translation = [
 	'PMSent'					=> 'Personal message was successfully sent to the user.',
 	'PMBody'					=> 'This message has been sent to you by the user %1.',
 	'PMBodyCopy'				=> 'आपने उपयोगकर्ता% 1 को निम्न संदेश भेजा।',
-	'PMReply'					=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'PMReply'					=> 'इस ईमेल का उत्तर देने के लिए, निम्न लिंक पर क्लिक करें (उत्तर दें बटन / मेलर में उत्तर दें का उपयोग न करें):',
 	'PMNotLoggedIn'				=> 'You are not registered in the system and can not send personal messages to users.',
 
 	// admin_replace action

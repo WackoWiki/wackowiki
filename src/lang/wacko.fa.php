@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Topics search results for ',
 	'NotFoundInTopics'			=> 'not found in topics',
 	'FilterLangNotAvailable'	=> 'زبان انتخاب شده در دسترس نیست!',
+	'SearchInPages'				=> 'جستجو در محتوای صفحه',
+	'SearchInComments'			=> 'جستجو در نظرات',
+	'SearchInPageTitles'		=> 'جستجو در عنوان صفحه',
 
 	'PostedBy'					=> 'ارسال‌شده توسط',
 	'ThisIsCommentOn'			=> 'This is a comment on',

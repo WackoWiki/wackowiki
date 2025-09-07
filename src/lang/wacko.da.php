@@ -481,6 +481,9 @@ $wacko_translation = [
 	'TopicSearchResults'		=> 'Emnesøgning for ',
 	'NotFoundInTopics'			=> 'ikke fundet blandt emnerne',
 	'FilterLangNotAvailable'	=> 'Det valgte sprog er ikke tilgængeligt!',
+	'SearchInPages'				=> 'Søg i sidens indhold',
+	'SearchInComments'			=> 'Søg i kommentarer',
+	'SearchInPageTitles'		=> 'Søg i sidetitler',
 
 	'PostedBy'					=> 'Indsendt af',
 	'ThisIsCommentOn'			=> 'Dette er en kommentar til',
