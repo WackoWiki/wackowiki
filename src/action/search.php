@@ -13,6 +13,8 @@ $info = <<<EOD
 Description:
 	Searches the content of the Wiki.
 
+	Use [page="/"] to search all clusters.
+
 Usage:
 	{{search}}
 
@@ -24,6 +26,8 @@ Options:
 	[lang="en"]
 	[form=1]
 	[hl_simple=1]
+	[max=10]	
+		overwrites system default value
 	[nomark=1]
 	[style=one of ("br","ul","ol","comma") ]
 	[scope=one of ("pages", "all")]
@@ -44,11 +48,11 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 			? 'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) '
 			: '') .
 		'WHERE ((MATCH
-					(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) ' .
-					'OR lower(a.title) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
-					'OR lower(a.tag) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
-					'OR lower(a.description) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
-					'OR lower(a.keywords) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
+			(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) ' .
+			'OR lower(a.title) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
+			'OR lower(a.tag) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
+			'OR lower(a.description) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
+			'OR lower(a.keywords) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
 		') ' .
 			($tag
 				? 'AND (a.tag LIKE ' . $this->db->q($tag . '/%') . ' ' .
