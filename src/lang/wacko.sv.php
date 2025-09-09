@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'Sök i sidans innehåll',
 	'SearchInComments'			=> 'Sök i kommentarer',
 	'SearchInPageTitles'		=> 'Sök i sidtitlar',
+	'SearchInNoOption'			=> 'Du måste välja minst ett av sökalternativen.',
 
 	'PostedBy'					=> 'Upplagd av',
 	'ThisIsCommentOn'			=> 'Detta är en kommentar på',

@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'جستجو در محتوای صفحه',
 	'SearchInComments'			=> 'جستجو در نظرات',
 	'SearchInPageTitles'		=> 'جستجو در عنوان صفحه',
+	'SearchInNoOption'			=> 'شما باید حداقل یکی از گزینه‌های جستجو را انتخاب کنید.',
 
 	'PostedBy'					=> 'ارسال‌شده توسط',
 	'ThisIsCommentOn'			=> 'This is a comment on',

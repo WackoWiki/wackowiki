@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'Cari di konten halaman',
 	'SearchInComments'			=> 'Cari di komentar',
 	'SearchInPageTitles'		=> 'Cari di judul halaman',
+	'SearchInNoOption'			=> 'Anda harus memilih setidaknya satu opsi pencarian.',
 
 	'PostedBy'					=> 'diposting oleh',
 	'ThisIsCommentOn'			=> 'Ini adalah komentar di',

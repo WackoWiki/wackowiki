@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'Вміст сторінки',
 	'SearchInComments'			=> 'Пошук в коментарях',
 	'SearchInPageTitles'		=> 'Шукати у заголовках сторінок',
+	'SearchInNoOption'			=> 'Слід вибрати хоча б один із варіантів пошуку.',
 
 	'PostedBy'					=> 'опубліковано',
 	'ThisIsCommentOn'			=> 'Це коментар до',

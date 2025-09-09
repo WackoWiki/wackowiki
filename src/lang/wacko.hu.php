@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'Keresés az oldal tartalmában',
 	'SearchInComments'			=> 'Keresés a hozzászólásokban',
 	'SearchInPageTitles'		=> 'Keresés az oldalcímekben',
+	'SearchInNoOption'			=> 'Legalább egy keresési lehetőséget ki kell választania.',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',

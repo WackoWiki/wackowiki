@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'Căutare în conținutul paginii',
 	'SearchInComments'			=> 'Caută în comentarii',
 	'SearchInPageTitles'		=> 'Căutare în titlurile paginii',
+	'SearchInNoOption'			=> 'Trebuie să selectaţi cel puţin una dintre opţiunile de căutare.',
 
 	'PostedBy'					=> 'postat de',
 	'ThisIsCommentOn'			=> 'Acesta este un comentariu pe',

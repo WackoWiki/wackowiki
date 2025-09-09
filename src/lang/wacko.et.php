@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'Otsi lehe sisust',
 	'SearchInComments'			=> 'Otsi kommentaaridest',
 	'SearchInPageTitles'		=> 'Otsi lehe pealkirjadest',
+	'SearchInNoOption'			=> 'Peate valima vähemalt ühe otsinguvõimalustest.',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',

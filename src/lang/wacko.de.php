@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'In Seiteninhalt suchen',
 	'SearchInComments'			=> 'In Kommentaren suchen',
 	'SearchInPageTitles'		=> 'In Seitentitel suchen',
+	'SearchInNoOption'			=> 'Du musst mindestens eine Suchoption wählen.',
 
 	'PostedBy'					=> 'eingetragen von',
 	'ThisIsCommentOn'			=> 'Das ist ein Kommentar zu',
@@ -1025,7 +1026,7 @@ $wacko_translation = [
 		'5'		=> 'Namensnennung - Nicht kommerziell',
 		'6'		=> 'Namensnennung',
 		'7'		=> 'CC0 1.0 Universal',
-		'8'		=> 'GNU Free Documentation License',
+		'8'		=> 'GNU Free Documentation Lizenz',
 		'9'		=> 'gemeinfrei',
 		'10'	=> 'Alle Rechte vorbehalten',
 	],

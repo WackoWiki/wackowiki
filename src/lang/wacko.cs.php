@@ -484,6 +484,7 @@ $wacko_translation = [
 	'SearchInPages'				=> 'Hledat v obsahu stránky',
 	'SearchInComments'			=> 'Hledat v komentářích',
 	'SearchInPageTitles'		=> 'Hledat na titulcích stránky',
+	'SearchInNoOption'			=> 'Musíte vybrat alespoň jednu z možností vyhledávání.',
 
 	'PostedBy'					=> 'odeslal(a)',
 	'ThisIsCommentOn'			=> 'Toto je komentář k',
