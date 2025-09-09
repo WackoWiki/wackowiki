@@ -1,8 +1,9 @@
 * text eol=lf
 
-*.png binary
 *.gif binary
 *.ico binary
+*.png binary
+*.webp binary
 
 .editorconfig export-ignore
 .gitattributes export-ignore
