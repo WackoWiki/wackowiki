@@ -80,6 +80,7 @@
 						<tr>
 							<td>&nbsp;</td>
 							<td>
+								<br>
 								<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							</td>
 						</tr>
@@ -193,6 +194,7 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td>
+						<br>
 						<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 					</td>
 				</tr>
@@ -274,6 +276,9 @@
 						</td>
 					</tr>
 					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
 						<th scope="row">
 							<label for="timezone">[ ' _t: Timezone ' ]</label>
 						</th>
@@ -346,6 +351,7 @@
 					<tr>
 						<td>&nbsp;</td>
 						<td>
+							<br>
 							<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							&nbsp;
 							<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: LogoutButton ' ]</button></a>
