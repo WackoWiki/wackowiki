@@ -49,14 +49,14 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 			: '') .
 		'WHERE ((MATCH
 			(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) ' .
-			'OR lower(a.title) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
-			'OR lower(a.tag) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
-			'OR lower(a.description) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
-			'OR lower(a.keywords) LIKE lower(' . $this->db->q('%' . $phrase . '%') . ') ' .
+			'OR lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
+			'OR lower(a.tag) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
+			'OR lower(a.description) LIKE lower('	. $this->db->q('%' . $phrase . '%') . ') ' .
+			'OR lower(a.keywords) LIKE lower('		. $this->db->q('%' . $phrase . '%') . ') ' .
 		') ' .
 			($tag
-				? 'AND (a.tag LIKE ' . $this->db->q($tag . '/%') . ' ' .
-				'OR b.tag LIKE ' . $this->db->q($tag . '/%') . ') '
+				? 'AND (a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
+				  'OR b.tag LIKE '		. $this->db->q($tag . '/%') . ') '
 				: '') .
 			($scope
 				? 'AND a.comment_on_id = 0 '
@@ -125,10 +125,10 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 			? 'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) '
 			: '') .
 		'WHERE ( lower(a.tag) LIKE binary lower('	. $this->db->q('%' . $phrase . '%') . ') ' .
-		'OR lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ')) ' .
+			'OR lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ')) ' .
 		($tag
 			? 'AND (a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
-			'OR b.tag LIKE '	. $this->db->q($tag . '/%') . ') '
+			  'OR b.tag LIKE '		. $this->db->q($tag . '/%') . ') '
 			: '') .
 		($scope
 			? 'AND a.comment_on_id = 0 '
@@ -443,18 +443,19 @@ if (mb_strlen($phrase) >= 3)
 
 					if ($this->db->multilanguage)
 					{
-						$tpl->l_lang	= '- ' . $page['page_lang'];
+						$tpl->l_lang		= '- ' . $page['page_lang'];
 					}
 
 					if ($page['comments'])
 					{
 						$tpl->l_comments_n	= $page['comments'];
 					}
+
 					$tpl->l_category	= $this->get_categories($page['page_id'], OBJECT_PAGE, '', '', ['phrase' => $phrase]);
 
 					if ($mode != 'topic')
 					{
-						$tpl->l_preview	= $context;
+						$tpl->l_preview		= $context;
 					}
 				}
 			}
