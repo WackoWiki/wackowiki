@@ -28,9 +28,12 @@ Options:
 		tag of next chapter
 	[title=0|1]
 		uses page title for links
+	[head=0|1]
+		add <link rel="prev|next" ...> to HTML <head>
 EOD;
 
 // set defaults
+$head		??= 0;
 $help		??= 0;
 $main		??= '';
 $next		??= '';
@@ -141,4 +144,16 @@ if ($prev && $next && !$table)
 }
 
 $tpl->leave();
+
+if ($head)
+{
+	if ($prev)
+	{
+		$this->add_html('header', '<link rel="prev" title="' . $__prev['title'] . '" href="' . $this->href('', $_prev) . '">');
+	}
+	if ($next)
+	{
+		$this->add_html('header', '<link rel="next" title="' . $__next['title'] . '" href="' . $this->href('', $_next) . '">');
+	}
+}
 
