@@ -1,24 +1,18 @@
 <?php
 
-/**
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
 
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
+declare(strict_types=1);
 
 namespace SimplePie;
 
 /**
  * Decode 'gzip' encoded HTTP data
  *
- * @package SimplePie
- * @subpackage HTTP
  * @link http://www.gzip.org/format.txt
+ * @link https://www.php.net/manual/en/function.gzdecode.php
+ * @deprecated since SimplePie 1.9.0, use `gzdecode` function instead.
  */
 class Gzdecode
 {
@@ -148,7 +142,7 @@ class Gzdecode
      * @param string $name
      * @param mixed $value
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         throw new Exception("Cannot write property $name");
     }
@@ -158,7 +152,7 @@ class Gzdecode
      *
      * @param string $data
      */
-    public function __construct($data)
+    public function __construct(string $data)
     {
         $this->compressed_data = $data;
         $this->compressed_size = strlen($data);
@@ -193,10 +187,10 @@ class Gzdecode
             // MTIME
             $mtime = substr($this->compressed_data, $this->position, 4);
             // Reverse the string if we're on a big-endian arch because l is the only signed long and is machine endianness
-            if (current(unpack('S', "\x00\x01")) === 1) {
+            if (current((array) unpack('S', "\x00\x01")) === 1) {
                 $mtime = strrev($mtime);
             }
-            $this->MTIME = current(unpack('l', $mtime));
+            $this->MTIME = current((array) unpack('l', $mtime));
             $this->position += 4;
 
             // Get the XFL (eXtra FLags)
@@ -217,7 +211,7 @@ class Gzdecode
                 }
 
                 // Get the length of the extra field
-                $len = current(unpack('v', substr($this->compressed_data, $this->position, 2)));
+                $len = current((array) unpack('v', substr($this->compressed_data, $this->position, 2)));
                 $this->position += 2;
 
                 // Check the length of the string is still valid
@@ -269,7 +263,7 @@ class Gzdecode
                 $this->min_compressed_size += $len + 2;
                 if ($this->compressed_size >= $this->min_compressed_size) {
                     // Read the CRC
-                    $crc = current(unpack('v', substr($this->compressed_data, $this->position, 2)));
+                    $crc = current((array) unpack('v', substr($this->compressed_data, $this->position, 2)));
 
                     // Check the CRC matches
                     if ((crc32(substr($this->compressed_data, 0, $this->position)) & 0xFFFF) === $crc) {
@@ -283,14 +277,15 @@ class Gzdecode
             }
 
             // Decompress the actual data
-            if (($this->data = gzinflate(substr($this->compressed_data, $this->position, -8))) === false) {
+            if (($data = gzinflate(substr($this->compressed_data, $this->position, -8))) === false) {
                 return false;
             }
 
+            $this->data = $data;
             $this->position = $this->compressed_size - 8;
 
             // Check CRC of data
-            $crc = current(unpack('V', substr($this->compressed_data, $this->position, 4)));
+            $crc = current((array) unpack('V', substr($this->compressed_data, $this->position, 4)));
             $this->position += 4;
             /*if (extension_loaded('hash') && sprintf('%u', current(unpack('V', hash('crc32b', $this->data)))) !== sprintf('%u', $crc))
             {
@@ -298,7 +293,7 @@ class Gzdecode
             }*/
 
             // Check ISIZE of data
-            $isize = current(unpack('V', substr($this->compressed_data, $this->position, 4)));
+            $isize = current((array) unpack('V', substr($this->compressed_data, $this->position, 4)));
             $this->position += 4;
             if (sprintf('%u', strlen($this->data) & 0xFFFFFFFF) !== sprintf('%u', $isize)) {
                 return false;

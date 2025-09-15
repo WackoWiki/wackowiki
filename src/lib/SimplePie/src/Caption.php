@@ -1,15 +1,9 @@
 <?php
 
-/**
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
 
- * @package SimplePie
- * @copyright 2004-2016 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
+declare(strict_types=1);
 
 namespace SimplePie;
 
@@ -19,16 +13,13 @@ namespace SimplePie;
  * Used by {@see \SimplePie\Enclosure::get_caption()} and {@see \SimplePie\Enclosure::get_captions()}
  *
  * This class can be overloaded with {@see \SimplePie\SimplePie::set_caption_class()}
- *
- * @package SimplePie
- * @subpackage API
  */
 class Caption
 {
     /**
      * Content type
      *
-     * @var string
+     * @var ?string
      * @see get_type()
      */
     public $type;
@@ -36,7 +27,7 @@ class Caption
     /**
      * Language
      *
-     * @var string
+     * @var ?string
      * @see get_language()
      */
     public $lang;
@@ -44,7 +35,7 @@ class Caption
     /**
      * Start time
      *
-     * @var string
+     * @var ?string
      * @see get_starttime()
      */
     public $startTime;
@@ -52,7 +43,7 @@ class Caption
     /**
      * End time
      *
-     * @var string
+     * @var ?string
      * @see get_endtime()
      */
     public $endTime;
@@ -60,7 +51,7 @@ class Caption
     /**
      * Caption text
      *
-     * @var string
+     * @var ?string
      * @see get_text()
      */
     public $text;
@@ -71,8 +62,13 @@ class Caption
      * For documentation on all the parameters, see the corresponding
      * properties and their accessors
      */
-    public function __construct($type = null, $lang = null, $startTime = null, $endTime = null, $text = null)
-    {
+    public function __construct(
+        ?string $type = null,
+        ?string $lang = null,
+        ?string $startTime = null,
+        ?string $endTime = null,
+        ?string $text = null
+    ) {
         $this->type = $type;
         $this->lang = $lang;
         $this->startTime = $startTime;

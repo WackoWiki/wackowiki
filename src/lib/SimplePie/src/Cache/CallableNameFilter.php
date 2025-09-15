@@ -1,30 +1,25 @@
 <?php
-/**
 
- * @package SimplePie
- * @copyright 2004-2022 Ryan Parman, Sam Sneddon, Ryan McCue
- * @author Ryan Parman
- * @author Sam Sneddon
- * @author Ryan McCue
- * @link http://simplepie.org/ SimplePie
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- */
+// SPDX-FileCopyrightText: 2004-2023 Ryan Parman, Sam Sneddon, Ryan McCue
+// SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 namespace SimplePie\Cache;
 
 /**
  * Creating a cache filename with callables
- *
- * @package SimplePie
- * @subpackage Caching
  */
 final class CallableNameFilter implements NameFilter
 {
     /**
-     * @var callable
+     * @var callable(string): string
      */
     private $callable;
 
+    /**
+     * @param callable(string): string $callable
+     */
     public function __construct(callable $callable)
     {
         $this->callable = $callable;
@@ -47,7 +42,7 @@ final class CallableNameFilter implements NameFilter
      * and encodings or longer lengths, but MUST support at least that
      * minimum.
      *
-     * @param string $name The name for the cache will be most likly an url with query string
+     * @param string $name The name for the cache will be most likely an url with query string
      *
      * @return string the new cache name
      */
