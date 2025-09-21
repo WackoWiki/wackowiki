@@ -542,6 +542,9 @@ a.iw-bugs .icon {
 a.iw-commit .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/commit.svg') no-repeat scroll left center;
 }
+a.iw-diff .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/diff.svg') no-repeat scroll left center;
+}
 a.iw-source .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/repository.svg') no-repeat scroll left center;
 }
