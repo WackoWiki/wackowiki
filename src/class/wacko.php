@@ -197,7 +197,10 @@ class Wacko
 				$tag = $page['tag'] ?? null;
 
 				// cache it
-				$this->page_tag_cache[$page_id] = $page['tag'];
+				if (isset($page['tag']))
+				{
+					$this->page_tag_cache[$page_id] = $page['tag'];
+				}
 			}
 			else
 			{
@@ -227,7 +230,10 @@ class Wacko
 				$page_id = $page['page_id'] ?? null;
 
 				// cache it
-				$this->page_id_cache[$tag] = $page_id;
+				if (isset($page['page_id']))
+				{
+					$this->page_id_cache[$tag] = $page_id;
+				}
 			}
 			else
 			{
