@@ -52,7 +52,7 @@ class DbMysqli implements DbInterface
 		{
 			ob_end_clean();
 
-			if ($this->db->debug > 2)
+			if ($this->config->debug > 2)
 			{
 				die('Query failed: ' . $query . ' (' . mysqli_connect_errno() . ': ' . mysqli_connect_error() . ')');
 			}
