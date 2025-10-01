@@ -361,9 +361,6 @@ $show_matches = function ($pages, $pagination, $tcount, $max, array $o) use ($tp
 {
 	$tpl->enter('matches_');
 
-	$tpl->replace		= true;
-	$tpl->cancel		= true;
-
 	if (count($pages) > 5)
 	{
 		$tpl->invert	= true;
@@ -422,7 +419,7 @@ $show_matches = function ($pages, $pagination, $tcount, $max, array $o) use ($tp
 			? $pagination['perpage'] . ' / ' . $tcount
 			: $tcount;
 
-		$tpl->mark_diag		= $this->_t(($mode == 'topic' ? 'Topic' : '') . 'SearchResults');
+		$tpl->mark_diag		= $this->_t('SearchResults');
 		$tpl->mark_phrase	= $o['msg_target'];
 		$tpl->mark_count	= $tcount;	// TODO: count only accessible results
 		$tpl->emark			= true;
