@@ -391,7 +391,6 @@ $show_matches = function ($pages, $pagination, $tcount, $max, array $o) use ($tp
 
 			$tpl->enter('l_');
 
-			$tpl->pageid	= $p['page_id'];
 			$tpl->link		= $this->link('/' . $p['tag'], '', ($o['title'] ? $p['title'] : $p['tag']), '', false);
 			$tpl->userlink	= $this->user_link($p['user_name'], false, false);
 			$tpl->mtime		= $p['modified'];
