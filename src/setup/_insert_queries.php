@@ -116,6 +116,7 @@ $upgrade['6.1.4'][]		= ['alter',		'menu',				$alter_menu_r6_0_4];
 // page
 $upgrade['6.1.2'][]		= ['alter',		'page',				$alter_page_r6_0_1];
 $upgrade['6.1.16'][]	= ['alter',		'page',				$alter_page_r6_0_2];
+$upgrade['6.1.29'][]	= ['alter',		'page',				$alter_page_r6_0_3];
 
 $upgrade['6.1.9'][]		= ['update',	'page',				$update_page_r6_0_1];
 $upgrade['6.1.9'][]		= ['update',	'page',				$update_page_r6_0_2];

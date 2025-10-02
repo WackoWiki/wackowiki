@@ -211,7 +211,7 @@ $tbl_page =
 		PRIMARY KEY (page_id),
 		KEY idx_user_id (user_id),
 		KEY idx_owner_id (owner_id),
-		FULLTEXT KEY body (body),
+		FULLTEXT KEY idx_body (body),
 		UNIQUE KEY idx_tag (tag),
 		KEY idx_depth(depth),
 		KEY idx_created (created),
