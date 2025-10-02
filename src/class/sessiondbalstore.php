@@ -23,10 +23,10 @@ class SessionDbalStore extends Session
 		{
 			$this->db->sql_query("
 				CREATE TABLE IF NOT EXISTS `{$this->cf_dbal_table_name}` (
-					`session_id` varchar(32) NOT NULL default '',
-					`session_data` blob NOT NULL,
-					`session_expire` int(11) NOT NULL default '0',
-					PRIMARY KEY  (`session_id`)
+					`session_id` VARCHAR(32) NOT NULL DEFAULT '',
+					`session_data` BLOB NOT NULL,
+					`session_expire` INT(11) NOT NULL DEFAULT '0',
+					PRIMARY KEY (`session_id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
 			$this->created = true;
