@@ -148,7 +148,7 @@ class Diff implements ConstantsInterface
      * When a keyName matches the name of a default option, that option's value will be overridden by the key's value.
      * Any other keyName (and it's value) will be added as an option, but will not be used if not implemented.
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->options = array_merge($this->defaultOptions, $options);
     }
@@ -217,11 +217,6 @@ class Diff implements ConstantsInterface
             return $array;
         }
 
-        if ($end === null) {
-            //Return single element.
-            return array_slice($array, $start, 1);
-        }
-
         //Return range of elements.
         $length = $end - $start;
 
@@ -286,5 +281,16 @@ class Diff implements ConstantsInterface
         $this->similarity = $similarity->getSimilarity($method);
 
         return $this->similarity;
+    }
+
+    /**
+     * Get diff statistics
+     *
+     * @return array
+     */
+    public function getStatistics(): array
+    {
+        $similarity = new Similarity($this->version1, $this->version2, $this->options);
+        return $similarity->getDifference();
     }
 }

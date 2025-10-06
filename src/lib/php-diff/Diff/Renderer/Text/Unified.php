@@ -34,25 +34,30 @@ class Unified extends MainRendererAbstract
     {
         $diff    = false;
         $opCodes = $this->diff->getGroupedOpCodes();
-        foreach ($opCodes as $group) {
-            $lastItem = count($group) - 1;
-            $i1       = $group['0']['1'];
-            $i2       = $group[$lastItem]['2'];
-            $j1       = $group['0']['3'];
-            $j2       = $group[$lastItem]['4'];
+        foreach ($opCodes as $key => $group) {
+            if ($key % 2) {
+                // Skip lines which are Out Of Context.
+                continue;
+            }
+            $lastItem = array_key_last($group);
+            $iGroup1       = $group[0][1];
+            $iGroup2       = $group[$lastItem][2];
+            $jGroup1       = $group[0][3];
+            $jGroup2       = $group[$lastItem][4];
 
-            if ($i1 == 0 && $i2 == 0) {
-                $i1 = -1;
-                $i2 = -1;
+            if ($iGroup1 == 0 && $iGroup2 == 0) {
+                $iGroup1 = -1;
+                $iGroup2 = -1;
             }
 
-            $diff .= '@@ -' . ($i1 + 1) . ',' . ($i2 - $i1) . ' +' . ($j1 + 1) . ',' . ($j2 - $j1) . " @@\n";
-            foreach ($group as [$tag, $i1, $i2, $j1, $j2]) {
+            $diff .= '@@ -' . ($iGroup1 + 1) . ',' . ($iGroup2 - $iGroup1) . ' +' . ($jGroup1 + 1)
+                . ',' . ($jGroup2 - $jGroup1) . " @@\n";
+            foreach ($group as [$tag, $iGroup1, $iGroup2, $jGroup1, $jGroup2]) {
                 if ($tag == 'equal') {
                     $diff .= ' ' .
                         implode(
                             "\n ",
-                            $this->diff->getArrayRange($this->diff->getVersion1(), $i1, $i2)
+                            $this->diff->getArrayRange($this->diff->getVersion1(), $iGroup1, $iGroup2)
                         ) . "\n";
                     continue;
                 }
@@ -60,14 +65,14 @@ class Unified extends MainRendererAbstract
                     $diff .= '-' .
                         implode(
                             "\n-",
-                            $this->diff->getArrayRange($this->diff->getVersion1(), $i1, $i2)
+                            $this->diff->getArrayRange($this->diff->getVersion1(), $iGroup1, $iGroup2)
                         ) . "\n";
                 }
                 if ($tag == 'replace' || $tag == 'insert') {
                     $diff .= '+' .
                         implode(
                             "\n+",
-                            $this->diff->getArrayRange($this->diff->getVersion2(), $j1, $j2)
+                            $this->diff->getArrayRange($this->diff->getVersion2(), $jGroup1, $jGroup2)
                         ) . "\n";
                 }
             }

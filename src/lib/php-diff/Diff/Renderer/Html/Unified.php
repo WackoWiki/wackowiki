@@ -80,9 +80,9 @@ HTML;
     /**
      * @inheritDoc
      *
-     * @return string HTML code representation of skipped lines.
+     * @return string HTML code representing table rows showing text which is 'Out Of Context'
      */
-    public function generateSkippedLines(): string
+    public function generateLinesOutOfContext($change): string
     {
         return <<<HTML
 <tr>
@@ -215,7 +215,7 @@ HTML;
     /**
      * @inheritDoc
      *
-     * @return string Html code representing table rows showing modified text.
+     * @return string Html code representing table rows showing ignored text.
      */
     public function generateLinesIgnore(array $changes): string
     {

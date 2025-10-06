@@ -12,7 +12,7 @@ The version and status of each is summarized below:
 | captcha			| freeCap			| 1.4.7		| unpatched |
 | hashids			| Hashids			| 5.0.2		| unpatched |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
-| php-diff			| php-diff			| 2.4.0		| patched, see subdir |
+| php-diff			| php-diff			| 2.5.0		| patched, see subdir |
 | phpmailer			| PHPMailer			| 6.10.0	| unpatched |
 | phpthumb			| PhpThumb			| 2.3.2		| unpatched |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |

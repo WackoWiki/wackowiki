@@ -15,6 +15,7 @@ namespace PHPDiff\Diff\Renderer;
  * @license         New BSD License http://www.opensource.org/licenses/bsd-license.php
  * @version         2.4.0
  * @link            https://github.com/JBlond/php-diff
+ * @codeCoverageIgnore
  */
 interface SubRendererInterface
 {
@@ -63,11 +64,11 @@ interface SubRendererInterface
     public function generateLinesInsert(array $changes): string;
 
     /**
-     * Generate a string representation of lines that are skipped in the diff view.
+     * Generate a string representation of lines that are "Out Of Context" for the diff view.
      *
-     * @return string Representation of skipped lines.
+     * @return string Representation of 'Out Of Context' lines.
      */
-    public function generateSkippedLines(): string;
+    public function generateLinesOutOfContext($change): string;
 
     /**
      * Generate a string representation of lines with ignored differences between both versions.
