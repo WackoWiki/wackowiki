@@ -123,9 +123,9 @@ if ($action && !empty($file))
 					'source				= ' . $this->db->q($source) . ', ' .
 					'source_url			= ' . $this->db->q($source_url) . ', ' .
 					'license_id			= ' . (int) $license_id . ', ' .
-					'modified			= UTC_TIMESTAMP() ' .
+					'modified			= ' . $this->db->utc_dt() . ' ' .
 				'WHERE file_id = ' . (int) $file['file_id'] . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 
 			$this->set_message($this->_t('FileEditedMeta'), 'success');
 

@@ -458,6 +458,12 @@ class Ut
 		throw new TypeError('Expected an integer');
 	}
 
+	// check whether the string is in UTF-8
+	function is_utf8(?string $string): bool
+	{
+		return (preg_match('~~u', $string));
+	}
+
 	// from Random_* Compatibility Library
 	// Copyright (c) 2015 Paragon Initiative Enterprises
 	static function rand($min, $max): int

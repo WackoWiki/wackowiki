@@ -1,15 +1,13 @@
 <?php
 
 /*
-	WackoWiki MySQL Table Updates Script
+	WackoWiki SQLite Table Updates Script
 
 	These are all the updates that need to applied to earlier Wacko version to bring them up to 6.1 specs
 */
 
 $pref		= $config['table_prefix'];
-$charset	= 'DEFAULT CHARSET=' . $config['db_charset'];
-$collation	= 'COLLATE ' . $config['db_collation'];
-$engine		= 'ENGINE=' . $config['db_engine'];
+
 
 // ACL
 

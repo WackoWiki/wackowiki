@@ -36,7 +36,7 @@ class Settings extends Dbal implements ArrayAccess
 				return; // ready for installer
 			}
 
-			require CONFIG_FILE;
+			require CONFIG_FILE; // TODO: check for array
 			$this->config = array_merge($wacko_config_defaults, $wacko_config);
 
 			if (!isset($this->config['wacko_version']))
@@ -49,7 +49,8 @@ class Settings extends Dbal implements ArrayAccess
 				die('WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.');
 			}
 
-			$this->system_seed_hash = hash('sha1', $this->system_seed);
+			$this->system_seed_hash	= hash('sha1', $this->system_seed);
+			$this->sqlite			= in_array($this->db_driver, ['sqlite', 'sqlite_pdo']);
 
 			if (!RECOVERY_MODE)
 			{
@@ -238,15 +239,21 @@ class Settings extends Dbal implements ArrayAccess
 
 		// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
 		// https://dev.mysql.com/doc/refman/8.0/en/insert-on-duplicate.html
-
 		if ($values)
 		{
 			$this->sql_query(
 				"INSERT INTO {$this->table_prefix}config (config_id, config_name, config_value)
-					VALUES " . implode(', ', $values) . "
-					ON DUPLICATE KEY UPDATE
-						config_name		= VALUES(config_name),
-						config_value	= VALUES(config_value)");
+					VALUES " .
+						implode(', ', $values) . " " .
+					(!$this->sqlite
+						? "ON DUPLICATE KEY UPDATE
+							config_name		= VALUES(config_name),
+							config_value	= VALUES(config_value)"
+						: "ON CONFLICT(config_name) DO UPDATE SET
+							config_name		= excluded.config_name,
+							config_value	= excluded.config_value"
+					)
+				);
 
 			if ($delete_cache)
 			{

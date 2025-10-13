@@ -306,7 +306,7 @@ class Feed
 				'AND p.comment_on_id = 0 ' .
 				'AND p.noindex <> 1 ' .
 				'AND p.deleted <> 1 ' .
-			'ORDER BY p.modified DESC, BINARY p.tag');
+			'ORDER BY p.modified DESC, CAST(p.tag AS ' . $this->db->binary() . ')');
 
 		$xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
 		$xml .= $this->engine->db->xml_sitemap_gz

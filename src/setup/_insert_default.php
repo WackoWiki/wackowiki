@@ -33,7 +33,7 @@ $insert_user_system =
 		'',
 		'',
 		1,
-		UTC_TIMESTAMP()
+		" . utc_dt() . "
 	)";
 
 // user 'deleted' holds all pages and attachments from deleted users
@@ -50,7 +50,7 @@ $insert_user_deleted =
 		'',
 		'',
 		1,
-		UTC_TIMESTAMP()
+		" . utc_dt() . "
 	)";
 
 // user 'admin'
@@ -65,7 +65,7 @@ $insert_admin =
 		'" . _q($config['admin_name']) . "',
 		'" . _q($password_hashed) . "',
 		'" . _q($config['admin_email']) . "',
-		UTC_TIMESTAMP()
+		" . utc_dt() . "
 	)";
 
 $insert_admin_setting =
@@ -94,7 +94,7 @@ $insert_admin_group =
 		'Admins',
 		'',
 		(" . $q_user_id . "),
-		UTC_TIMESTAMP(),
+		" . utc_dt() . ",
 		1,
 		1
 	)";
@@ -122,7 +122,7 @@ $insert_moderator_group =
 		'Moderator',
 		'',
 		(" . $q_user_id . "),
-		UTC_TIMESTAMP(),
+		" . utc_dt() . ",
 		1,
 		1
 	)";
@@ -140,7 +140,7 @@ $insert_reviewer_group =
 		'Reviewer',
 		'',
 		(" . $q_user_id . "),
-		UTC_TIMESTAMP(),
+		" . utc_dt() . ",
 		1,
 		1
 	)";
@@ -167,8 +167,8 @@ $insert_logo_image =
 		'" . _q($config['site_logo']) . "',
 		'" . _q($config['language']) . "',
 		'WackoWiki',
-		UTC_TIMESTAMP(),
-		UTC_TIMESTAMP(),
+		" . utc_dt() . ",
+		" . utc_dt() . ",
 		'" . (int) $file_size . "',
 		'" . (int) $image_size[0] . "',
 		'" . (int) $image_size[1] . "',

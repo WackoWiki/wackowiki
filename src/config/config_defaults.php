@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 // These default settings are used when config.php is not present.
 
 $wacko_config_defaults = [
-	'db_driver'						=> '',
+	'db_driver'						=> '',	// mysqli, mysql_pdo, sqlite, sqlite_pdo
 	'db_host'						=> 'localhost',
 	'db_port'						=> '',
 	'db_name'						=> 'wacko',

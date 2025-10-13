@@ -42,26 +42,26 @@ $search_text = function ($target, $tag, $use_regex, $limit, $filter = [], $delet
 	{
 		$match =
 			($use_regex
-				? '(BINARY a.body REGEXP '	. $this->db->q($target) . ' ' .
-				  'OR BINARY a.title REGEXP '	. $this->db->q($target) . ') '
-				: '(BINARY a.body LIKE '	. $this->db->q('%' . $target . '%') . ' ' .
-				  'OR BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
+				? '(CAST(a.body AS ' . $this->db->binary() . ') REGEXP '	. $this->db->q($target) . ' ' .
+				  'OR CAST(a.title AS ' . $this->db->binary() . ') REGEXP '	. $this->db->q($target) . ') '
+				: '(CAST(a.body AS ' . $this->db->binary() . ') LIKE '		. $this->db->q('%' . $target . '%') . ' ' .
+				  'OR CAST(a.title AS ' . $this->db->binary() . ') LIKE '	. $this->db->q('%' . $target . '%') . ') '
 		);
 	}
 	else if ($pages || $comments)
 	{
 		$match =
 			($use_regex
-				? '(BINARY a.body REGEXP '	. $this->db->q($target) . ') '
-				: '(BINARY a.body LIKE '	. $this->db->q('%' . $target . '%') . ') '
+				? '(CAST(a.body AS ' . $this->db->binary() . ') REGEXP '	. $this->db->q($target) . ') '
+				: '(CAST(a.body AS ' . $this->db->binary() . ') LIKE '		. $this->db->q('%' . $target . '%') . ') '
 			);
 	}
 	else if ($titles)
 	{
 		$match =
 			($use_regex
-				? '(BINARY a.title REGEXP '	. $this->db->q($target) . ') '
-				: '(BINARY a.title LIKE '	. $this->db->q('%' . $target . '%') . ') '
+				? '(CAST(a.title AS ' . $this->db->binary() . ') REGEXP '	. $this->db->q($target) . ') '
+				: '(CAST(a.title AS ' . $this->db->binary() . ') LIKE '		. $this->db->q('%' . $target . '%') . ') '
 		);
 	}
 

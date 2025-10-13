@@ -98,12 +98,19 @@ class Http
 		chmod($this->file, CHMOD_SAFE);
 
 		$this->db->sql_query(
-			'INSERT INTO ' . $this->db->table_prefix . 'cache SET ' .
-				'hash		= ' . $this->db->q($this->hash) . ', ' .
-				'method		= ' . $this->db->q($this->method) . ', ' .
-				'query		= ' . $this->db->q($this->query) . ', ' .
-				'cache_lang	= ' . $this->db->q($this->lang) . ', ' .	// user lang NOT user agent lang NOR page lang!
-				'cache_time	= UTC_TIMESTAMP()');
+			'INSERT INTO ' . $this->db->table_prefix . 'cache (' .
+				'hash, ' .
+				'method, ' .
+				'query, ' .
+				'cache_lang, ' .
+				'cache_time)' .
+			'VALUES (' .
+				$this->db->q($this->hash) . ', ' .
+				$this->db->q($this->method) . ', ' .
+				$this->db->q($this->query) . ', ' .
+				$this->db->q($this->lang) . ', ' .	// user lang NOT user agent lang NOR page lang!
+				$this->db->utc_dt() . ')'
+		);
 	}
 
 	// Invalidate the page cache

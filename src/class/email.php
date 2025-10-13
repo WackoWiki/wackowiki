@@ -153,13 +153,6 @@ class Email
 			$send_ok = false;
 		}
 
-		catch (\Exception $e)
-		{
-			echo $e->getMessage(); // Boring error messages from anything else!
-			$send_ok = false;
-		}
-		// end
-
 		return $send_ok;
 	}
 }

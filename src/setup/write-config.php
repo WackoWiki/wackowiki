@@ -1,7 +1,7 @@
 <?php
 
 // config values
-if (($config['db_driver'] == ('mysqli_legacy' || 'mysql_pdo')) && empty($config['db_port']))
+if (in_array($config['db_driver'], ['mysqli', 'mysql_pdo']) && empty($config['db_port']))
 {
 	$config['db_port'] = '3306';
 }
@@ -9,6 +9,19 @@ if (($config['db_driver'] == ('mysqli_legacy' || 'mysql_pdo')) && empty($config[
 if ($config['db_collation'] == '0')
 {
 	$config['db_collation'] = 'utf8mb4_unicode_520_ci';
+}
+// reset config defaults for SQLite
+if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+{
+	$config['db_charset']	= '';
+	$config['db_collation']	= '';
+	$config['db_engine']	= 'sqlite3';
+	$config['db_vendor']	= '';
+	$config['db_host']		= '';
+	$config['db_port']		= '';
+	$config['db_user']		= '';
+	$config['db_password']	= '';
+	$config['table_prefix']	= '';
 }
 
 if (!$config['system_seed'])

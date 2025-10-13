@@ -223,7 +223,8 @@ if ($this->has_access('read'))
 				'UPDATE ' . $this->prefix . 'page SET ' .
 					'hits = hits + 1 ' .
 				'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
-				'LIMIT 1');
+				$this->db->limit()
+			);
 		}
 
 		$user			= $this->get_user();

@@ -126,7 +126,7 @@ if (isset($_POST['_user_menu']))
 					'menu_position	= ' . (int) $item['menu_position'] . ', ' .
 					'menu_title		= ' . $this->db->q($menu_title) . ' ' .
 				'WHERE menu_id		= ' . (int) $item['menu_id'] . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 		}
 	}
 	else if (isset($_POST['add_menu_item']))
@@ -177,11 +177,18 @@ if (isset($_POST['_user_menu']))
 						$_menu_item_count	= count($_menu_position);
 
 						$this->db->sql_query(
-							'INSERT INTO ' . $prefix . 'menu SET ' .
-								'user_id			= ' . (int) $_user_id . ', ' .
-								'page_id			= ' . (int) $_page_id. ', ' .
-								'menu_lang			= ' . $this->db->q($_menu_lang) . ', ' .
-								'menu_position		= ' . (int)($_menu_item_count + 1));
+							'INSERT INTO ' . $prefix . 'menu (' .
+								'user_id, ' .
+								'page_id, ' .
+								'menu_lang, ' .
+								'menu_position) ' .
+							'VALUES (' .
+								(int) $_user_id . ', ' .
+								(int) $_page_id. ', ' .
+								$this->db->q($_menu_lang) . ', ' .
+								(int)($_menu_item_count + 1) . ')'
+							);
+
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set
 					}

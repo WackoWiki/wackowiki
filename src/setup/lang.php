@@ -4,7 +4,7 @@
 // Check if Upgrade or Fresh Install
 if (array_key_exists('wacko_version', $config))
 {
-	$min_upgrade_version = '6.0.22';
+	$min_upgrade_version = '6.1.29';
 
 	if (version_compare($config['wacko_version'], $min_upgrade_version, '<'))
 	{

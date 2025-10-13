@@ -112,20 +112,20 @@ if ($action === 'set_permissions')
 				'UPDATE ' . $prefix . 'user SET ' .
 					'total_pages	= total_pages - 1 ' .
 				'WHERE user_id		= ' . (int) $old_owner_id . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 
 			$this->db->sql_query(
 				'UPDATE ' . $prefix . 'user SET ' .
 					'total_pages	= total_pages + 1 ' .
 				'WHERE user_id		= ' . (int) $new_owner_id . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 
 			// set new owner
 			$this->db->sql_query(
 				'UPDATE ' . $prefix . 'page SET ' .
 					'owner_id		= ' . (int) $new_owner_id . ' ' .
 				'WHERE page_id		= ' . (int) $page_id . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 
 			$new_owner['owned_page'] .= $this->href('', $page['tag'], null, null, null, null, true, true) . "\n";
 

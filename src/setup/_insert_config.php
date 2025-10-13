@@ -27,7 +27,7 @@ $config_db['allow_themes_per_page']			= $config['allow_themes_per_page'];
 $config_db['allow_x11colors']				= $config['allow_x11colors'];
 $config_db['allowed_email_domains']			= $config['allowed_email_domains'];
 $config_db['allowed_languages']				= $config['allowed_languages'];
-$config_db['american_date']				= $config['american_date'];
+$config_db['american_date']					= $config['american_date'];
 $config_db['anonymize_ip']					= $config['anonymize_ip'];
 $config_db['ap_failed_login_count']			= $config['ap_failed_login_count'];
 $config_db['ap_max_login_attempts']			= $config['ap_max_login_attempts'];
@@ -231,15 +231,23 @@ $config_db['youarehere_text']				= $config['youarehere_text'];
 
 foreach ($config_db as $key => $value)
 {
-	$config_insert .= "(0, '$key', '" . _q($value) . "'),";
+	$config_insert .= "('$key', '" . _q($value) . "'), ";
 }
+
+$config_insert .= "('maint_last_update', " . utc_dt() . ") ";
 
 // to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
 // https://dev.mysql.com/doc/refman/8.0/en/insert-on-duplicate.html
-$insert_config =	"INSERT INTO " . $config['table_prefix'] . "config (config_id, config_name, config_value)
-						VALUES " . $config_insert . "(0, 'maint_last_update', UTC_TIMESTAMP()) " .
-					"ON DUPLICATE KEY
-						UPDATE
-							config_name		= VALUES(config_name),
-							config_value	= VALUES(config_value);";
+$insert_config =	"INSERT INTO " . $config['table_prefix'] . "config (config_name, config_value)
+						VALUES " .
+							$config_insert .
+						(!in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
+							? "ON DUPLICATE KEY UPDATE
+								config_name		= VALUES(config_name),
+								config_value	= VALUES(config_value);"
 
+							: "ON CONFLICT(config_name) DO UPDATE SET
+
+								config_name		= excluded.config_name,
+								config_value	= excluded.config_value;"
+						); // FIXME: ON CONFLICT(config_id, config_name)

@@ -65,7 +65,7 @@ $search_text = function ($target, $tag, $limit, $filter = [], $deleted = false)
 		}
 
 		$tags_string	= implode(',', $q_tags_string);
-		$match			= 'BINARY a.tag IN (' . $tags_string . ') ';
+		$match			= 'CAST(a.tag AS ' . $this->db->binary() . ') IN (' . $tags_string . ') ';
 	}
 
 	// namespace: include tag and tag/%, not tag%

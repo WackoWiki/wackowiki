@@ -178,7 +178,7 @@ if (!empty($this->db->news_cluster))
 
 		$selector =
 			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				'AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ' .
+				'AND p.created > DATE_SUB( ' . $this->db->utc_dt() . ', INTERVAL 7 DAY ) ' .
 				'AND p.comment_on_id = 0 ' .
 				'AND p.deleted <> 1 ';
 

@@ -290,6 +290,12 @@ function admin_config_system($engine, $module)
 
 						foreach ($store_modes as $mode => $store_mode)
 						{
+							// SQLite allows only file sessions
+							if ($engine->db->sqlite && $mode !== 1)
+							{
+								continue;
+							}
+
 							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->session_store === $mode ? 'selected' : '') . '>' . $mode . ': ' . $store_mode . '</option>' . "\n";
 						}
 					?>

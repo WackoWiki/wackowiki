@@ -374,13 +374,13 @@ if (isset($_POST['upload']) & $can_upload)
 										'picture_h			= ' . (int) $size[1] . ',' .
 										'file_ext			= ' . $this->db->q($ext) . ',' .
 										'mime_type			= ' . $this->db->q($mime_type) . ',' .
-										'created			= UTC_TIMESTAMP(), ' .
-										'modified			= UTC_TIMESTAMP(), ' .
+										'created			= ' . $this->db->utc_dt() . ', ' .
+										'modified			= ' . $this->db->utc_dt() . ', ' .
 										'file_hash			= ' . $this->db->q($file_hash) . ' ' .
 									'WHERE ' .
 										'page_id			= ' . (int) $page_id . ' AND ' .
 										'file_name			= ' . $this->db->q($file_name) . ' ' .
-									'LIMIT 1');
+									$this->db->limit());
 
 								if ($this->db->create_thumbnail && $is_image)
 								{
@@ -390,20 +390,35 @@ if (isset($_POST['upload']) & $can_upload)
 							else if (!$is_duplicate)
 							{
 								$this->db->sql_query(
-									'INSERT INTO ' . $prefix . 'file SET ' .
-										'page_id			= ' . (int) $page_id . ', ' .
-										'user_id			= ' . (int) $user['user_id'] . ',' .
-										'file_name			= ' . $this->db->q($file_name) . ', ' .
-										'file_lang			= ' . $this->db->q($this->page['page_lang']) . ', ' .
-										'file_description	= ' . $this->db->q($description) . ', ' .
-										'file_size			= ' . (int) $file_size . ',' .
-										'picture_w			= ' . (int) $size[0] . ',' .
-										'picture_h			= ' . (int) $size[1] . ',' .
-										'file_ext			= ' . $this->db->q($ext) . ',' .
-										'mime_type			= ' . $this->db->q($mime_type) . ',' .
-										'created			= UTC_TIMESTAMP(),' .
-										'modified			= UTC_TIMESTAMP(),' .
-										'file_hash			= ' . $this->db->q($file_hash) . ' ');
+									'INSERT INTO ' . $prefix . 'file (' .
+										'page_id, ' .
+										'user_id,' .
+										'file_name, ' .
+										'file_lang, ' .
+										'file_description, ' .
+										'file_size,' .
+										'picture_w,' .
+										'picture_h,' .
+										'file_ext,' .
+										'mime_type,' .
+										'created,' .
+										'modified,' .
+										'file_hash) ' .
+									'VALUES (' .
+										(int) $page_id . ', ' .
+										(int) $user['user_id'] . ',' .
+										$this->db->q($file_name) . ', ' .
+										$this->db->q($this->page['page_lang']) . ', ' .
+										$this->db->q($description) . ', ' .
+										(int) $file_size . ',' .
+										(int) $size[0] . ',' .
+										(int) $size[1] . ',' .
+										$this->db->q($ext) . ',' .
+										$this->db->q($mime_type) . ',' .
+										$this->db->utc_dt() . ',' .
+										$this->db->utc_dt() . ',' .
+										$this->db->q($file_hash) . ')'
+									);
 
 								// update user uploads count
 								$this->update_files_count($page_id, $user['user_id']);

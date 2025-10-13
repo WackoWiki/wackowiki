@@ -91,7 +91,7 @@ if ($pages = $this->db->load_all(
 			? 'AND page_lang = ' . $this->db->q($lang) . ' '
 			: '') .
 		'AND deleted <> 1 ' .
-	'ORDER BY tag COLLATE utf8mb4_unicode_520_ci ' .
+	'ORDER BY tag COLLATE ' . $this->db->collate() . ' ' .
 		($sort == 'desc'
 			? 'DESC'
 			: ''), true))

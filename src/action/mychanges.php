@@ -79,7 +79,7 @@ if ($user_id = $this->get_user_id())
 		if ($pages = $this->db->load_all(
 			'SELECT page_id, owner_id, user_id, tag, title, modified, page_lang ' .
 			$selector .
-			'ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC, modified DESC ' .
+			'ORDER BY tag COLLATE ' . $this->db->collate() . ' ASC, modified DESC ' .
 			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];

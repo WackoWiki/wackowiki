@@ -332,7 +332,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET, so personal me
 						'AND deleted <> 1 ' .
 					'ORDER BY ' .
 						($sort_name
-							? 'tag COLLATE utf8mb4_unicode_520_ci ASC'
+							? 'tag COLLATE ' . $this->db->collate() . ' ASC'
 							: 'created DESC') . ' ' .
 					$pagination['limit']);
 

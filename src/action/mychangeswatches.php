@@ -65,7 +65,7 @@ if ($user_id = $this->get_user_id())
 		{
 			$this->db->sql_query(
 				'UPDATE ' . $prefix . 'watch SET ' .
-					'watch_time = UTC_TIMESTAMP() ' .
+					'watch_time = ' . $this->db->utc_dt() . ' ' .
 				'WHERE page_id = ' . (int) $page['page_id'] . ' ' .
 					'AND user_id = ' . (int) $user_id);
 		}

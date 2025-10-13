@@ -24,8 +24,9 @@ abstract class Dbal // need to be extended by Settings to be usable
 		{
 			$this->db = match ($this->db_driver)
 			{
-				'mysql_pdo'	=> new DbPDO	($this),
-				default		=> new DbMysqli	($this),	// mysqli_legacy
+				'sqlite'					=> new DbSqlite	($this),
+				'mysql_pdo', 'sqlite_pdo'	=> new DbPDO	($this),
+				default						=> new DbMysqli	($this),
 			};
 
 			// change the current SQL mode at runtime
@@ -41,7 +42,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 			}
 
 			// Set database collation
-			if ($this->db_collation)
+			if ($this->db_collation && $this->db_driver != 'sqlite')
 			{
 				$this->db->query("SET collation_connection = '$this->db_collation'");
 			}
@@ -64,6 +65,62 @@ abstract class Dbal // need to be extended by Settings to be usable
 		is_string($t) && $t = strtotime($t);
 
 		return gmdate(self::SQL_DATE_FORMAT, (int) $t);
+	}
+
+	function utc_dt()
+	{
+		return match ($this->db_driver)
+		{
+			'sqlite', 'sqlite_pdo'	=> "datetime('now')",
+			default					=> "UTC_TIMESTAMP()",
+		};
+	}
+
+	function date_sub(int $value, string $interval): string
+	{
+		if ($this->sqlite)
+		{
+			return match ($interval)
+			{
+				'days'		=> "datetime('now', '-" . $value . " days')",
+				'seconds'	=> "datetime('now', '-" . $value . " seconds')",
+			};
+		}
+		else
+		{
+			return match ($interval)
+			{
+				'days'		=> 'DATE_SUB(UTC_TIMESTAMP(), INTERVAL ' . $value . ' DAY)',
+				'seconds'	=> 'DATE_SUB(UTC_TIMESTAMP(), INTERVAL ' . $value . ' SECOND)',
+			};
+		}
+	}
+
+	function binary()
+	{
+		return match ($this->db_driver)
+		{
+			'sqlite', 'sqlite_pdo'	=> 'TEXT', // TODO: https://www.sqlite.org/lang_expr.html#castexpr
+			default					=> 'BINARY',
+		};
+	}
+
+	function collate()
+	{
+		return match ($this->db_driver)
+		{
+			'sqlite', 'sqlite_pdo'	=> 'NOCASE',
+			default					=> 'utf8mb4_unicode_520_ci',
+		};
+	}
+
+	function limit()
+	{
+		return match ($this->db_driver)
+		{
+			'sqlite', 'sqlite_pdo'	=> '',
+			default					=> 'LIMIT 1',
+		};
 	}
 
 	function is_null_date($t): bool

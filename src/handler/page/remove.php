@@ -183,7 +183,7 @@ if ($this->is_admin()
 					: 'SET total_pages		= total_pages		- 1 '
 				) .
 				'WHERE user_id = ' . (int) $owner_id . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 		}
 
 		// purge SQL queries cache

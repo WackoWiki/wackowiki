@@ -47,13 +47,30 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		($tag
 			? 'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) '
 			: '') .
-		'WHERE ((MATCH
-			(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) ' .
-			'OR lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
-			'OR lower(a.tag) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
-			'OR lower(a.description) LIKE lower('	. $this->db->q('%' . $phrase . '%') . ') ' .
-			'OR lower(a.keywords) LIKE lower('		. $this->db->q('%' . $phrase . '%') . ') ' .
-		') ' .
+		(!$this->db->sqlite
+			? 	''
+			: 	'LEFT JOIN (
+					SELECT rowid
+					FROM ' . $prefix . 'page_fts
+					WHERE ' . $prefix . 'page_fts MATCH ' . $this->db->q($phrase) . '
+				) f ON a.page_id = f.rowid '
+		) .
+		'WHERE (' .
+			(!$this->db->sqlite
+				?	'(MATCH
+						(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) ' .
+						'OR lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
+						'OR lower(a.tag) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
+						'OR lower(a.description) LIKE lower('	. $this->db->q('%' . $phrase . '%') . ') ' .
+						'OR lower(a.keywords) LIKE lower('		. $this->db->q('%' . $phrase . '%') . ') ' .
+					') '
+				:
+					'(lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
+					'OR lower(a.tag) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
+					'OR lower(a.description) LIKE lower('	. $this->db->q('%' . $phrase . '%') . ') ' .
+					'OR lower(a.keywords) LIKE lower('		. $this->db->q('%' . $phrase . '%') . ')) ' .
+					'OR f.rowid IS NOT NULL '
+			) .
 			($tag
 				? 'AND (a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
 				  'OR b.tag LIKE '		. $this->db->q($tag . '/%') . ') '
@@ -84,14 +101,20 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 
 	// load search results
 	$results = $this->db->load_all(
-		'SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
-			MATCH(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) AS score,
-			u.user_name, o.user_name as owner_name ' .
+		'SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments, ' .
+			(!$this->db->sqlite
+				? 'MATCH(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) AS score, '
+				: ''
+			) .
+			'u.user_name, o.user_name as owner_name ' .
 		'FROM ' . $prefix . 'page a ' .
 			'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
 			'LEFT JOIN ' . $prefix . 'user o ON (a.owner_id = o.user_id) ' .
 		$selector .
-		'ORDER BY score DESC ' .
+		(!$this->db->sqlite
+			? 'ORDER BY score DESC '
+			: ''
+		) .
 		$pagination['limit']);
 
 	foreach ($results as $result)
@@ -160,7 +183,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 			'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
 			'LEFT JOIN ' . $prefix . 'user o ON (a.owner_id = o.user_id) ' .
 		$selector .
-		'ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci ' .
+		'ORDER BY a.tag COLLATE ' . $this->db->collate() . ' ' .
 		$pagination['limit']);
 
 	return [$results, $pagination, $count['n']];

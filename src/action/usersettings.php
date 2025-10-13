@@ -92,7 +92,7 @@ else if ($user = $this->get_user())
 						'real_name		= ' . $this->db->q(trim($real_name)) . ', ' .
 						'email			= ' . $this->db->q($email) . ' ' .
 					'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
-					'LIMIT 1');
+					$this->db->limit());
 
 				// log event
 				# $this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', SYSTEM_LANG), $user['user_name']));
@@ -152,7 +152,7 @@ else if ($user = $this->get_user())
 			'UPDATE ' . $this->prefix . 'user_setting SET ' .
 				$sql .
 			'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
-			'LIMIT 1');
+			$this->db->limit());
 
 		// log event
 		$this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', SYSTEM_LANG), $user['user_name']));

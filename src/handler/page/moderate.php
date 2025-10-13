@@ -188,9 +188,9 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 	$this->db->sql_query(
 		'UPDATE ' . $this->prefix . 'page SET ' .
 			'comments	= ' . (int) $this->count_comments($base_id) . ', ' .
-			'commented	= UTC_TIMESTAMP() ' .
+			'commented	= ' . $this->db->utc_dt() . ' ' .
 		'WHERE page_id = ' . (int) $base_id . ' ' .
-		'LIMIT 1');
+		$this->db->limit());
 
 	// restore forum context
 	$this->forum = $forum_context;
@@ -288,15 +288,15 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 	$this->db->sql_query(
 		'UPDATE ' . $this->prefix . 'page SET ' .
 			'comments	= ' . (int) $this->count_comments($new_page_id) . ', ' .
-			'commented	= UTC_TIMESTAMP() ' .
+			'commented	= ' . $this->db->utc_dt() . ' ' .
 		'WHERE page_id = ' . (int) $new_page_id . ' ' .
-		'LIMIT 1');
+		$this->db->limit());
 
 	$this->db->sql_query(
 		'UPDATE ' . $this->prefix . 'page SET ' .
 			'comments = ' . (int) $this->count_comments($old_page_id) . ' ' .
 		'WHERE page_id = ' . (int) $old_page_id . ' ' .
-		'LIMIT 1');
+		$this->db->limit());
 
 	// restore forum context
 	$this->forum = $forum_context;
@@ -955,9 +955,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$this->db->sql_query(
 						'UPDATE ' . $prefix . 'page SET ' .
 							'comments	= ' . (int) $this->count_comments($this->page['page_id']) . ', ' .
-							'commented	= UTC_TIMESTAMP() ' .
+							'commented	= ' . $this->db->utc_dt() . ' ' .
 						'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
-						'LIMIT 1');
+						$this->db->limit());
 
 					unset($accept_action);
 
@@ -1104,14 +1104,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'UPDATE ' . $prefix . 'page SET ' .
 								'comments = ' . (int) $this->count_comments($this->page['page_id']) . ' ' .
 							'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
-							'LIMIT 1');
+							$this->db->limit());
 
 						$this->db->sql_query(
 							'UPDATE ' . $prefix . 'page SET ' .
 								'comments	= ' . (int) $this->count_comments($page_id) . ', ' .
-								'commented	= UTC_TIMESTAMP() ' .
+								'commented	= ' . $this->db->utc_dt() . ' ' .
 							'WHERE page_id = ' . (int) $page_id . ' ' .
-							'LIMIT 1');
+							$this->db->limit());
 
 						$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
 								$this->tag . ' ' . $this->page['title'],

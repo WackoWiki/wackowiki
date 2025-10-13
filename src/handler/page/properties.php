@@ -39,7 +39,7 @@ if ($action === 'extended_properties')
 			'typografica		= ' . (int) $_POST['typografica'] . ', ' .
 			'noindex			= ' . (int) $_POST['noindex'] . ' ' .
 		'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
-		'LIMIT 1');
+		$this->db->limit());
 }
 
 if ($action === 'general_properties')
@@ -65,7 +65,7 @@ if ($action === 'general_properties')
 			'keywords			= ' . $this->db->q($keywords) . ', ' .
 			'description		= ' . $this->db->q($description) . ' ' .
 		'WHERE page_id = ' . (int) $this->page['page_id'] . ' ' .
-		'LIMIT 1');
+		$this->db->limit());
 }
 
 if ($_POST)

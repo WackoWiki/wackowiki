@@ -153,12 +153,19 @@ function admin_user_users($engine, $module)
 		else
 		{
 			$engine->db->sql_query(
-				'INSERT INTO ' . $prefix . 'user SET ' .
-					'user_name			= ' . $engine->db->q($user_name) . ', ' .
-					'email				= ' . $engine->db->q($email) . ', ' .
-					'password			= ' . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ', ' .
-					'enabled			= ' . (int) $enabled . ', ' .
-					'signup_time		= UTC_TIMESTAMP()');
+				'INSERT INTO ' . $prefix . 'user (' .
+					'user_name, ' .
+					'email, ' .
+					'password, ' .
+					'enabled, ' .
+					'signup_time)' .
+				'VALUES (' .
+					$engine->db->q($user_name) . ', ' .
+					$engine->db->q($email) . ', ' .
+					$engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ', ' .
+					(int) $enabled . ', ' .
+					$engine->db->utc_dt() . ')'
+				);
 
 			// get new user_id
 			$_user_id = $engine->db->load_single(
@@ -169,20 +176,35 @@ function admin_user_users($engine, $module)
 
 			// INSERT user settings
 			$engine->db->sql_query(
-				'INSERT INTO ' . $prefix . 'user_setting SET ' .
-					'user_id			= ' . (int) $_user_id['user_id'] . ', ' .
-					'user_lang			= ' . $engine->db->q($user_lang) . ', ' .
-					'list_count			= ' . (int) $engine->db->list_count . ', ' .
-					'theme				= ' . $engine->db->q($engine->db->theme) . ', ' .
-					'diff_mode			= ' . (int) $engine->db->default_diff_mode . ', ' .
-					'notify_minor_edit	= ' . (int) $engine->db->notify_minor_edit . ', ' .
-					'notify_page		= ' . (int) $engine->db->notify_page . ', ' .
-					'notify_comment		= ' . (int) $engine->db->notify_comment . ', ' .
-					'sorting_comments	= ' . (int) $engine->db->sorting_comments . ', ' .
-					'comments_offset	= ' . (int) $engine->db->comments_offset . ', ' .
-					'allow_intercom		= ' . (int) $engine->db->allow_intercom . ', ' .
-					'allow_massemail	= ' . (int) $engine->db->allow_massemail . ', ' .
-					'send_watchmail		= 1');
+				'INSERT INTO ' . $prefix . 'user_setting (' .
+					'user_id, ' .
+					'user_lang, ' .
+					'list_count, ' .
+					'theme, ' .
+					'diff_mode, ' .
+					'notify_minor_edit, ' .
+					'notify_page, ' .
+					'notify_comment, ' .
+					'sorting_comments, ' .
+					'comments_offset, ' .
+					'allow_intercom, ' .
+					'allow_massemail, ' .
+					'send_watchmail)' .
+				'VALUES (' .
+					(int) $_user_id['user_id'] . ', ' .
+					$engine->db->q($user_lang) . ', ' .
+					(int) $engine->db->list_count . ', ' .
+					$engine->db->q($engine->db->theme) . ', ' .
+					(int) $engine->db->default_diff_mode . ', ' .
+					(int) $engine->db->notify_minor_edit . ', ' .
+					(int) $engine->db->notify_page . ', ' .
+					(int) $engine->db->notify_comment . ', ' .
+					(int) $engine->db->sorting_comments . ', ' .
+					(int) $engine->db->comments_offset . ', ' .
+					(int) $engine->db->allow_intercom . ', ' .
+					(int) $engine->db->allow_massemail . ', ' .
+					'1' . ')'
+				);
 
 			// add user page
 			$engine->add_user_page($user_name, $user_lang);

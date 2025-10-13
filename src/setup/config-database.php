@@ -50,7 +50,15 @@ write_config_hidden_nodes($config_parameters);
 echo '   <input type="hidden" name="password" value="' . ($_POST['password'] ?? '') . '">' . "\n";
 
 // If none of the PHP SQL extensions are loaded then let the user know there is a problem
-if (!extension_loaded('mysqli') && !extension_loaded('pdo'))
+if (   !extension_loaded('mysqli')
+	&& !extension_loaded('sqlite3')
+	&& (!extension_loaded('pdo')
+		|| (extension_loaded('pdo')
+			&& (	!extension_loaded('pdo_mysql')
+				&&	!extension_loaded('pdo_sqlite'))
+			)
+		)
+	)
 {
 ?>
 	<p class="notop"><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
@@ -71,22 +79,48 @@ else
 	 [2]   :  the name to display in the list here
 	 */
 
+	if ($config['db_driver'] == 'mysqli_legacy')
+	{
+		$config['db_driver'] = 'mysqli';
+	}
+
 	$drivers	= [];
-	$drivers[]	= ['mysqli',	'mysqli_legacy',	'MySQLi (' . $lang['Recommended'] . ')'];
-	$drivers[]	= ['pdo',		'mysql_pdo',		'PDO MySQL'];
-	// $drivers[]	= ['pdo',		'pgsql',		'PDO PostgreSQL'];
-	// $drivers[]	= ['pdo',		'sqlite3',		'PDO SQLite3'];
+
+	if (!$config['is_update'])
+	{
+		$drivers[]	= ['mysqli',		'mysqli',		'MySQLi (' . $lang['Recommended'] . ')'];
+		$drivers[]	= ['pdo_mysql',		'mysql_pdo',	'PDO MySQL'];
+		$drivers[]	= ['pdo_sqlite',	'sqlite_pdo',	'PDO SQLite'];
+		$drivers[]	= ['sqlite',		'sqlite',		'SQLite'];
+		// $drivers[]	= ['pdo',		'pgsql',		'PDO PostgreSQL'];
+	}
+	else
+	{
+		// Can't switch between SQLite and MariaDB / MySQL during upgrade routine!
+		if ($config['sqlite'])
+		{
+			$drivers[]	= ['pdo_sqlite',	'sqlite_pdo',	'PDO SQLite'];
+			$drivers[]	= ['sqlite',		'sqlite',		'SQLite'];
+		}
+		else
+		{
+			$drivers[]	= ['mysqli',		'mysqli',		'MySQLi (' . $lang['Recommended'] . ')'];
+			$drivers[]	= ['pdo_mysql',		'mysql_pdo',	'PDO MySQL'];
+		}
+	}
 
 	foreach ($drivers as $k => $driver)
 	{
-		if (extension_loaded($driver[0]))
+		if (extension_loaded($driver[0]) || ($driver[0] == 'sqlite' && class_exists('SQLite3')))
 		{
 			echo '<li>
 						<input type="radio" id="db_driver_' . $driver[0] . '" name="config[db_driver]" value="' . $driver[1] . '" ' .
-							($config['is_update']
+							($config['db_driver']
 								? ($config['db_driver'] == $driver[1]		? 'checked' : '')
-								: ($k == 0										? 'checked' : '')
-							) . '>
+								: ($k == 0									? 'checked' : '')
+							) .
+							" onClick=\"this.form.action='?installAction=config-database'; submit(); \"" .
+						'>
 						<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
 					</li>\n";
 		}
@@ -94,7 +128,10 @@ else
 ?>
 	</ul>
 	<br>
-	<?php echo $separator; ?>
+<?php
+if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+{
+	echo $separator; ?>
 	<label class="label_top" for="sql_mode"><?php echo $lang['DbSqlMode'];?></label>
 	<p class="notop"><?php echo $lang['DbSqlModeDesc']; ?></p>
 
@@ -123,34 +160,34 @@ else
 ?>
 	<br>
 <?php
-if ($config['debug'] >= 3)
-{
-	echo $separator; ?>
-	<label class="label_top" for="db_vendor"><?php echo $lang['DbVendor'];?></label>
-	<p class="notop"><?php echo $lang['DbVendorDesc']; ?></p>
-
-<?php
-	/*
-	 Each time a new database vendor is supported it needs to be added to this list
-
-	 [0]   :  database vendor name
-	 [1]   :  database vendor name to be stored in the config file
-	 [2]   :  the name to display in the list here
-	 */
-
-	$vendors	= [];
-	$vendors[]	= ['mariadb',	'mariadb',	'MariaDB'];	// default
-	$vendors[]	= ['mysql',		'mysql',	'MySQL'];
-
-	echo '	<select id="db_vendor" name="config[db_vendor]" required>';
-
-	foreach ($vendors as $vendor)
+	if ($config['debug'] >= 3)
 	{
-		echo '<option value="' . $vendor[1] . '" ' . ($config['db_vendor'] == $vendor[1] ? 'selected' : '') . '>' . $vendor[2] . "</option>\n";
-	}
+		echo $separator; ?>
+		<label class="label_top" for="db_vendor"><?php echo $lang['DbVendor'];?></label>
+		<p class="notop"><?php echo $lang['DbVendorDesc']; ?></p>
 
-	echo "</select>\n";
-}
+	<?php
+		/*
+		 Each time a new database vendor is supported it needs to be added to this list
+
+		 [0]   :  database vendor name
+		 [1]   :  database vendor name to be stored in the config file
+		 [2]   :  the name to display in the list here
+		 */
+
+		$vendors	= [];
+		$vendors[]	= ['mariadb',	'mariadb',	'MariaDB'];	// default
+		$vendors[]	= ['mysql',		'mysql',	'MySQL'];
+
+		echo '	<select id="db_vendor" name="config[db_vendor]" required>';
+
+		foreach ($vendors as $vendor)
+		{
+			echo '<option value="' . $vendor[1] . '" ' . ($config['db_vendor'] == $vendor[1] ? 'selected' : '') . '>' . $vendor[2] . "</option>\n";
+		}
+
+		echo "</select>\n";
+	}
 ?>
 	<br>
 <?php echo $separator; ?>
@@ -181,67 +218,97 @@ if ($config['debug'] >= 3)
 ?>
 	<br>
 <?php
+}
 	if (!$config['is_update'])
 	{
-		echo $separator;
-		?>
-		<h2><?php echo $lang['DbEngine'];?></h2>
-		<p class="notop"><?php echo $lang['DbEngineDesc']; ?></p>
-		<ul>
-		<?php
-		/*
-		 Each time a new database engine is supported it needs to be added to this list
-
-		 [0]   :  database engine name
-		 [1]   :  database engine name to be stored in the config file
-		 [2]   :  the name to display in the list here
-		 */
-
-		$engines	= [];
-		$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB (' . $lang['Recommended'] . ')'];	// default
-
-		foreach ($engines as $k => $engine)
+		if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
-			echo '<li>
-						<input type="radio" id="db_engine_' . $engine[0] . '" name="config[db_engine]" value="' . $engine[1] . '" ' . ($k == 0 ? 'checked' : '') . '>
-						<label for="db_engine_' . $engine[0] . '">' . $engine[2] . "</label>
-					</li>\n";
+			echo $separator;
+			?>
+			<h2><?php echo $lang['DbEngine'];?></h2>
+			<p class="notop"><?php echo $lang['DbEngineDesc']; ?></p>
+			<ul>
+			<?php
+			/*
+			 Each time a new database engine is supported it needs to be added to this list
+
+			 [0]   :  database engine name
+			 [1]   :  database engine name to be stored in the config file
+			 [2]   :  the name to display in the list here
+			 */
+
+			$engines	= [];
+			$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB (' . $lang['Recommended'] . ')'];	// default
+
+			foreach ($engines as $k => $engine)
+			{
+				echo '<li>
+							<input type="radio" id="db_engine_' . $engine[0] . '" name="config[db_engine]" value="' . $engine[1] . '" ' . ($k == 0 ? 'checked' : '') . '>
+							<label for="db_engine_' . $engine[0] . '">' . $engine[2] . "</label>
+						</li>\n";
+			}
+			?>
+			</ul>
+			<br>
+
+			<?php echo $separator; ?>
+			<label class="label_top" for="db_host"><?php echo $lang['DbHost'];?></label>
+			<p class="notop"><?php echo $lang['DbHostDesc']; ?></p>
+			<input type="text" maxlength="1000" id="db_host" name="config[db_host]" value="<?php echo $config['db_host'] ?>" placeholder="localhost" class="text_input" required>
+			<br>
+			<?php echo $separator; ?>
+			<label class="label_top" for="db_port"><?php echo $lang['DbPort'];?></label>
+			<p class="notop"><?php echo $lang['DbPortDesc']; ?></p>
+			<input type="number" maxlength="10" id="db_port" name="config[db_port]" value="<?php echo $config['db_port'] ?>" class="text_input">
+			<br>
+			<?php echo $separator;
+		}
+?>
+		<label class="label_top" for="db_name"><?php echo $lang['DbName'];?></label>
+		<?php
+		if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+		{
+			?>
+			<p class="notop"><?php echo $lang['DbNameDesc']; ?></p>
+			<?php
+		}
+		else
+		{
+			?>
+			<p class="notop"><?php echo $lang['DbNameSqliteDesc']; ?></p>
+			<p class="msg notice"><?php echo $lang['DbNameSqliteHelp']; ?></p>
+			<?php
 		}
 		?>
-		</ul>
-		<br>
-
-		<?php echo $separator; ?>
-		<label class="label_top" for="db_host"><?php echo $lang['DbHost'];?></label>
-		<p class="notop"><?php echo $lang['DbHostDesc']; ?></p>
-		<input type="text" maxlength="1000" id="db_host" name="config[db_host]" value="<?php echo $config['db_host'] ?>" placeholder="localhost" class="text_input" required>
-		<br>
-		<?php echo $separator; ?>
-		<label class="label_top" for="db_port"><?php echo $lang['DbPort'];?></label>
-		<p class="notop"><?php echo $lang['DbPortDesc']; ?></p>
-		<input type="number" maxlength="10" id="db_port" name="config[db_port]" value="<?php echo $config['db_port'] ?>" class="text_input">
-		<br>
-		<?php echo $separator; ?>
-		<label class="label_top" for="db_name"><?php echo $lang['DbName'];?></label>
-		<p class="notop"><?php echo $lang['DbNameDesc']; ?></p>
 		<input type="text" maxlength="64" id="db_name" name="config[db_name]" value="<?php echo $config['db_name'] ?>" class="text_input" required>
 		<br>
 		<?php echo $separator; ?>
-		<label class="label_top" for="db_user"><?php echo $lang['DbUser'];?></label>
-		<p class="notop"><?php echo $lang['DbUserDesc']; ?></p>
-		<input type="text" maxlength="50" id="db_user" name="config[db_user]" value="<?php echo $config['db_user'] ?>" class="text_input" required>
-		<br>
-		<?php echo $separator; ?>
-		<label class="label_top" for="db_password"><?php echo $lang['DbPassword'];?></label>
-		<p class="notop"><?php echo $lang['DbPasswordDesc']; ?></p>
-		<input type="password" maxlength="50" id="db_password" name="config[db_password]" autocomplete="off" value="<?php echo $config['db_password'] ?>" class="text_input">
-		<br>
-		<?php echo $separator; ?>
-		<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
-		<p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
-		<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" pattern="[\p{L}\p{Nd}\_]+" class="text_input">
-		<br>
-		<?php echo $separator;
+		<?php
+		if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+		{
+			?>
+			<input type="hidden" name="config[table_prefix]" value="0">
+			<?php
+		}
+		else
+		{
+			?>
+			<label class="label_top" for="db_user"><?php echo $lang['DbUser'];?></label>
+			<p class="notop"><?php echo $lang['DbUserDesc']; ?></p>
+			<input type="text" maxlength="50" id="db_user" name="config[db_user]" value="<?php echo $config['db_user'] ?>" class="text_input" required>
+			<br>
+			<?php echo $separator; ?>
+			<label class="label_top" for="db_password"><?php echo $lang['DbPassword'];?></label>
+			<p class="notop"><?php echo $lang['DbPasswordDesc']; ?></p>
+			<input type="password" maxlength="50" id="db_password" name="config[db_password]" autocomplete="off" value="<?php echo $config['db_password'] ?>" class="text_input">
+			<br>
+			<?php echo $separator; ?>
+			<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
+			<p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
+			<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" pattern="[\p{L}\p{Nd}\_]+" class="text_input">
+			<br>
+			<?php echo $separator;
+		}
 	}
 
 	if (!$config['is_update'])

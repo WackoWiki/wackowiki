@@ -143,28 +143,31 @@ class Diag
 				{
 					// [C] MySQL character set
 
-					$query = "SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation\_connection';";
-
-					if ($r = $engine->db->load_all($query, true))
+					if (!$config['sqlite'])
 					{
-						echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
+						$query = "SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation\_connection';";
 
-						foreach ($r as $charset_item)
+						if ($r = $engine->db->load_all($query, true))
 						{
-							echo "\t<li>" . $charset_item['Variable_name'] . ': ' . $charset_item['Value'] . "</li>\n";
+							echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
+
+							foreach ($r as $charset_item)
+							{
+								echo "\t<li>" . $charset_item['Variable_name'] . ': ' . $charset_item['Value'] . "</li>\n";
+							}
+
+							echo "</ul>\n";
 						}
 
-						echo "</ul>\n";
-					}
+						$query = 'SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;';
 
-					$query = 'SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;';
-
-					if ($r = $engine->db->load_single($query, true))
-					{
-						echo "<p class=\"debug\">SQL mode set</p>\n<ul>\n";
-						echo "\t<li>" . 'GLOBAL' . ': ' . $r['@@GLOBAL.sql_mode'] . "</li>\n";
-						echo "\t<li>" . 'SESSION' . ': ' . $r['@@SESSION.sql_mode'] . "</li>\n";
-						echo "</ul>\n";
+						if ($r = $engine->db->load_single($query, true))
+						{
+							echo "<p class=\"debug\">SQL mode set</p>\n<ul>\n";
+							echo "\t<li>" . 'GLOBAL' . ': ' . $r['@@GLOBAL.sql_mode'] . "</li>\n";
+							echo "\t<li>" . 'SESSION' . ': ' . $r['@@SESSION.sql_mode'] . "</li>\n";
+							echo "</ul>\n";
+						}
 					}
 
 					// [D] Environment data

@@ -44,7 +44,12 @@ write_config_hidden_nodes($config_parameters);
 	/*
 	 Check which database extensions are installed and what versions of the db are there
 	 */
-	$database_result = extension_loaded('mysqli') || (extension_loaded('pdo') && extension_loaded('pdo_mysql'));
+	$database_result =
+		    extension_loaded('mysqli')
+		||  extension_loaded('sqlite3')
+		|| (extension_loaded('pdo')
+			&& (   extension_loaded('pdo_mysql')
+				|| extension_loaded('pdo_sqlite')));
 
 	/*
 		With PDO it is not enough that we can just say "ok we've detected PDO".

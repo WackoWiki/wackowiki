@@ -148,27 +148,54 @@ function test_mysqli($text, $query, $error_text = '')
 	{
 		test($text, false, $error_text . '<br>' . $e->getMessage());
 	}
-	catch (Exception $e)
-	{
-		test($text, false, $error_text);
-	}
 }
 
 function test_pdo($text, $query, $error_text = '')
 {
 	global $dblink;
 
+/* 	$result = $dblink->exec($query);
+	if ($result)
+	{
+		if ($dblink->errorCode() !== '00000')
+		{
+			#ob_end_clean();
+
+			#if ($this->config->debug > 2)
+			{
+				die('Query failed: ' . $query . ' (' . $dblink->errorCode() . ': ' . $dblink->errorInfo() . ')');
+			}
+
+		}
+	} */
+
 	try
 	{
-		test($text, $dblink->query($query), $error_text);
+		test($text, $dblink->exec($query), $error_text);
 	}
 	catch (PDOException $e)
 	{
-		test($text, false, $error_text . '<br>' . $e->getMessage());
+		test($text, false, $error_text . '<br>' . $e->getCode() . ': (' . $e->getMessage() . ': ' . $dblink->errorInfo() . ')');
+	}
+}
+
+function test_sqlite($text, $query, $error_text = '')
+{
+	global $dblink;
+
+	/* $result = $dblink->exec($query);
+	if (!$result)
+	{
+			die('Query failed: ' . $query . ' (' . $dblink->lastErrorCode() . ': ' . $dblink->lastErrorMsg() . ')');
+	} */
+
+	try
+	{
+		test($text, $dblink->exec($query), $error_text);
 	}
 	catch (Exception $e)
 	{
-		test($text, false, $error_text);
+		test($text, false, $error_text . '<br>' . $e->getMessage() . ' ' . $dblink->lastErrorMsg() . ' -> ' . $query);
 	}
 }
 
@@ -198,7 +225,29 @@ function array_to_str ($arr, $name = '')
 	return $str;
 }
 
-// TODO: same function as in dbpdo class
+// TODO: same functions as in dbpdo class
+function utc_dt()
+{
+	global $config_global;
+
+	return match ($config_global['db_driver'])
+	{
+		'sqlite', 'sqlite_pdo'	=> "datetime('now')",
+		default					=> "UTC_TIMESTAMP()",
+	};
+}
+
+function check_sqlite_name($name)
+{
+	// avoid creating PHP files on unsecured servers
+	if (!preg_match("~^[^\\0]*\\.(db|sdb|sqlite)\$~", $name))
+	{
+		return false;
+	}
+
+	return true;
+}
+
 // default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
 function _q($string)
 {
@@ -206,7 +255,11 @@ function _q($string)
 	global $config_global, $dblink_global;
 
 	return match ($config_global['db_driver']) {
-		'mysqli_legacy'	=> mysqli_real_escape_string($dblink_global, $string),
+		'mysqli'		=> mysqli_real_escape_string($dblink_global, $string),
+		'sqlite'		=> $dblink_global->escapeString($string),
+		'sqlite_pdo'	=> strtr((string) $string, [
+			"'"		=> "''",
+		]),
 		default			=> strtr($string, [
 			"\x00"	=> '\x00',
 			"\n"	=> '\n',

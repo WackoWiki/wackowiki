@@ -88,9 +88,13 @@ function admin_user_groups($engine, $module)
 			if ($action == 'add_group_member' && $member['user_id'] && $p_group_id)
 			{
 				$engine->db->sql_query(
-					'INSERT INTO ' . $prefix . 'usergroup_member SET ' .
-						'group_id	= ' . (int) $p_group_id . ', ' .
-						'user_id	= ' . (int) $member['user_id']);
+					'INSERT INTO ' . $prefix . 'usergroup_member (' .
+						'group_id, ' .
+						'user_id)' .
+					'VALUES (' .
+						(int) $p_group_id . ', ' .
+						(int) $member['user_id'] . ')'
+					);
 
 					$engine->config->invalidate_config_cache();
 					$engine->show_message($engine->_t('MembersAdded'), 'success');
@@ -224,13 +228,21 @@ function admin_user_groups($engine, $module)
 			else
 			{
 				$engine->db->sql_query(
-					'INSERT INTO ' . $prefix . 'usergroup SET ' .
-						'group_name		= ' . $engine->db->q($group_name) . ', ' .
-						'description	= ' . $engine->db->q($description) . ', ' .
-						'moderator_id	= ' . (int) $_POST['moderator_id'] . ', ' .
-						'created		= UTC_TIMESTAMP(), ' .
-						'open			= ' . (int) $open . ', ' .
-						'active			= ' . (int) $active);
+					'INSERT INTO ' . $prefix . 'usergroup (' .
+						'group_name, ' .
+						'description, ' .
+						'moderator_id, ' .
+						'created, ' .
+						'open, ' .
+						'active)' .
+					'VALUES (' .
+						$engine->db->q($group_name) . ', ' .
+						$engine->db->q($description) . ', ' .
+						(int) $_POST['moderator_id'] . ', ' .
+						$engine->db->utc_dt() . ', ' .
+						(int) $open . ', ' .
+						(int) $active . ')'
+					);
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('GroupsAdded'), 'success');

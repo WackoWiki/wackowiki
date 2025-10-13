@@ -84,7 +84,9 @@ function insert_pages($insert, $config)
 	}
 }
 
-// insert default page, all related acls and menu items
+// Insert default page, all related acls and menu items
+// We flag some pages as critical in the insert.<lang>.php file, if these don't get inserted
+// then we have a serious problem and should indicate that to the user.
 function insert_page($tag, $title, $body, $lang, $config, $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
 {
 	global $config_global, $dblink_global, $lang_global;
@@ -131,8 +133,8 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 				'',
 				(" . $q_owner_id . "),
 				(" . $q_owner_id . "),
-				UTC_TIMESTAMP(),
-				UTC_TIMESTAMP(),
+				" . utc_dt() . ",
+				" . utc_dt() . ",
 				1,
 				" . strlen($body) . ",
 				'" . _q($lang) . "',
@@ -168,9 +170,13 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 			(" . $q_page_id . "),
 			'" . _q($lang) . "',
 			'" . _q($menu_title) . "'
-		)
-		ON DUPLICATE KEY UPDATE
-			menu_title = '" . _q($menu_title) . "'";
+		)" .
+		(!in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
+			? "ON DUPLICATE KEY UPDATE
+				menu_title = '" . _q($menu_title) . "'"
+			: "ON CONFLICT(user_id, page_id, menu_lang) DO UPDATE SET
+				menu_title = excluded.menu_title;"
+		);
 
 	if ($set_menu)
 	{
@@ -179,7 +185,7 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 
 	switch ($config_global['db_driver'])
 	{
-		case 'mysqli_legacy':
+		case 'mysqli':
 			$add_page = false;
 
 			if ($result = mysqli_query($dblink_global, $page_select))
@@ -193,15 +199,45 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 				{
 					mysqli_query($dblink_global, $data[0]);
 
-					/*
-						We flag some pages as critical in the insert.**.php file, if these don't get inserted
-						then we have a serious problem and should indicate that to the user.
-					*/
 					if ($critical)
 					{
 						if (mysqli_errno($dblink_global) != 0)
 						{
 							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . mysqli_error($dblink_global));
+						}
+					}
+				}
+			}
+			else if ($critical)
+			{
+				output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+			}
+
+			break;
+
+		case 'sqlite':
+			$add_page = false;
+
+			if ($result = $dblink_global->query($page_select))
+			{
+				$rows = [];
+				while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+					$rows[] = $row;
+				}
+				$add_page = (0 == count($rows));
+			}
+
+			if ($add_page || $set_menu == SET_MENU_ONLY)
+			{
+				foreach ($insert_data as $data)
+				{
+					$dblink_global->query($data[0]);
+
+					if ($critical)
+					{
+						if ($dblink_global->lastErrorCode() != 0)
+						{
+							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . $dblink_global->lastErrorMsg());
 						}
 					}
 				}
@@ -235,16 +271,7 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 			{
 				foreach ($insert_data as $data)
 				{
-					@$dblink_global->query($data[0]);
-
-					/* try
-					{
-						@$dblink_global->query($data[0]);
-					}
-					catch(PDOException $error)
-					{
-						echo $error->getMessage() . '<br>';
-					} */
+					$dblink_global->query($data[0]);
 
 					if ($critical)
 					{

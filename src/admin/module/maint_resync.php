@@ -83,7 +83,7 @@ function admin_maint_resync($engine, $module)
 							{$prefix}user o
 						WHERE f.user_id = o.user_id
 							AND f.deleted <> 1
-						GROUP BY f.user_id) AS s
+						GROUP BY o.user_id, f.user_id) AS s
 					SET
 						u.total_uploads = s.n
 					WHERE u.user_id = s.user_id";

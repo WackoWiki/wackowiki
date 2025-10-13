@@ -40,14 +40,27 @@ function admin_system_info($engine, $module)
 									: $engine->_t('Off')
 								);
 
-	// get MariaDB / mysql version
-	$_db_version			= $engine->db->load_single('SELECT version()');
-	$db_version				= $_db_version['version()'];
 
-	// get SQL mode
-	$_sql_mode				= $engine->db->load_single('SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode');
-	$sql_mode_global		= $_sql_mode['@@GLOBAL.sql_mode'];
-	$sql_mode_session		= $_sql_mode['@@SESSION.sql_mode'];
+	if (!$engine->db->sqlite)
+	{
+		// get MariaDB / mysql version
+		$_db_version			= $engine->db->load_single('SELECT version()');
+		$db_version				= $_db_version['version()'];
+		$db_version				= (preg_match('/MariaDB/', $db_version, $matches)
+									? 'MariaDB '
+									: 'MySQL '
+								) . explode('-', $db_version, 2)[0];
+
+		// get SQL mode
+		$_sql_mode				= $engine->db->load_single('SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode');
+		$sql_mode_global		= $_sql_mode['@@GLOBAL.sql_mode'];
+		$sql_mode_session		= $_sql_mode['@@SESSION.sql_mode'];
+	}
+	else
+	{
+		$_db_version			= $engine->db->load_single('SELECT sqlite_version() AS version');
+		$db_version				= 'SQLite ' . $_db_version['version'];
+	}
 
 	// get_cfg_var()		-> returns whatever is in php.ini
 	// ini_get()			-> returns runtime settings
@@ -77,8 +90,13 @@ function admin_system_info($engine, $module)
 	$sysinfo['server_protocol']		= [$engine->_t('HttpProtocol'), $_SERVER['SERVER_PROTOCOL']];
 	$sysinfo['tls_mode']			= [$engine->_t('TrafficProtection'), $tls_mode];
 	$sysinfo['db_version']			= [$engine->_t('DbVersion'), $db_version];
-	$sysinfo['sql_mode_global']		= [$engine->_t('SqlModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
-	$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
+
+	if (!$engine->db->sqlite)
+	{
+		$sysinfo['sql_mode_global']		= [$engine->_t('SqlModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
+		$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
+	}
+
 	$sysinfo['icu_version']			= [$engine->_t('IcuVersion'), INTL_ICU_VERSION];
 	$sysinfo['php_version']			= [$engine->_t('PhpVersion'), PHP_VERSION];
 	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->factor_multiples($memory, 'binary', true, true)];

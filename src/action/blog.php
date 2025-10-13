@@ -174,7 +174,7 @@ if (!empty($tag))
 
 		$selector =
 			"WHERE p.tag REGEXP '^{$tag}{$blog_levels}$' " .
-				'AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ' .
+				'AND p.created > ' . $this->db->date_sub(7, 'days') . ' ' .
 				'AND p.comment_on_id = 0 ' .
 				'AND p.deleted <> 1 ';
 

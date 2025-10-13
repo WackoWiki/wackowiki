@@ -83,7 +83,7 @@ if ($action === 'change_password' && $user)
 					"change_password	= '', " .
 					'password			= ' . $this->db->q($this->password_hash($user, $new_password)) . ' ' .
 				'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 
 			$diag = $code? 'LogUserPasswordRecovered' : 'LogUserPasswordChanged';
 			$this->log(3, Ut::perc_replace($this->_t($diag, SYSTEM_LANG), $user['user_name']));
@@ -131,7 +131,7 @@ if ($action === 'forgot_password')
 				'password_request_count	= password_request_count + 1, ' . // value unused
 				'change_password		= ' . $this->db->q($code_hash) . ' ' .
 			'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
-			'LIMIT 1');
+			$this->db->limit());
 
 		// send code
 		$this->notify_password_reset($user, $code);

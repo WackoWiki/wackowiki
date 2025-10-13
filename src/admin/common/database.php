@@ -252,7 +252,8 @@ function remove_pack($pack)
 
 function create_archive($pack)
 {
-	try {
+	try
+	{
 		// make sure the script has enough time to run (300 seconds = 5 minutes)
 		ini_set('max_execution_time', '300');
 		ini_set('set_time_limit', '0');
@@ -264,10 +265,10 @@ function create_archive($pack)
 		$archive->buildFromDirectory($dir);
 		#$archive->compress(Phar::GZ);
 
-
 		#echo 'Compressing all files done, check your server for the file ' . ' <code>' . Ut::html($file) . '</code>';
 	}
-	catch (Exception $e) {
+	catch (Exception $e)
+	{
 		echo $e->getMessage();
 	}
 
@@ -276,14 +277,16 @@ function create_archive($pack)
 
 function extract_archive($pack)
 {
-	try {
+	try
+	{
 		$dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 		$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack . '.tar');
 
 		$archive = new PharData($file);
 		$archive->extractTo($dir);
 	}
-	catch (Exception $e) {
+	catch (Exception $e)
+	{
 		echo $e->getMessage();
 	}
 }

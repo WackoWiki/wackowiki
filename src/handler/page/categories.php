@@ -90,16 +90,25 @@ if (   $this->is_owner()
 				{
 					// save item
 					$this->db->sql_query(
-						'INSERT INTO ' . $prefix . 'category SET ' .
+						'INSERT INTO ' . $prefix . 'category (' .
 							($category_id && $_POST['group'] == 1
-								? 'parent_id = ' . ((int) $word['parent_id'] != 0
+								? 'parent_id, '
+								: ''
+							) .
+							'category_lang, ' .
+							'category, ' .
+							'category_description)' .
+						'VALUES (' .
+							($category_id && $_POST['group'] == 1
+								? ((int) $word['parent_id'] != 0
 									? (int) $word['parent_id']
 									: (int) $word['category_id'] ) . ', '
 								: ''
 							) .
-							'category_lang			= ' . $this->db->q($this->page['page_lang']) . ', ' .
-							'category				= ' . $this->db->q($category) . ', ' .
-							'category_description	= ' . $this->db->q($category_description) . ' ');
+							$this->db->q($this->page['page_lang']) . ', ' .
+							$this->db->q($category) . ', ' .
+							$this->db->q($category_description) . ')'
+						);
 
 					$this->set_message(Ut::perc_replace($this->_t('CategoriesAdded'), '<code>' . $category . '</code>'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryCreated', SYSTEM_LANG), $category));
@@ -128,7 +137,7 @@ if (   $this->is_owner()
 							'category				= ' . $this->db->q($category) . ', ' .
 							'category_description	= ' . $this->db->q($category_description) . ' ' .
 						'WHERE category_id = ' . (int) $category_id . ' ' .
-						'LIMIT 1');
+						$this->db->limit());
 
 					$this->set_message($this->_t('CategoriesRenamed'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryRenamed', SYSTEM_LANG), $word['category'], $category));
@@ -146,7 +155,7 @@ if (   $this->is_owner()
 						'UPDATE ' . $prefix . 'category SET ' .
 							'parent_id = 0 ' .
 						'WHERE category_id = ' . (int) $category_id . ' ' .
-						'LIMIT 1');
+						$this->db->limit());
 
 					$this->set_message($this->_t('CategoriesUngrouped'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryDebundled', SYSTEM_LANG), $word['category']));
@@ -165,7 +174,7 @@ if (   $this->is_owner()
 							'UPDATE ' . $prefix . 'category SET ' .
 								'parent_id = ' . (int) $parent_id . ' ' .
 							'WHERE category_id = ' . (int) $category_id . ' ' .
-							'LIMIT 1');
+							$this->db->limit());
 
 						$this->db->sql_query(
 							'UPDATE ' . $prefix . 'category SET ' .
