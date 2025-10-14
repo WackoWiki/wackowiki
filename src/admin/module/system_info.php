@@ -41,11 +41,16 @@ function admin_system_info($engine, $module)
 								);
 
 
-	if (!$engine->db->sqlite)
+	if ($engine->db->sqlite)
+	{
+		$_db_version			= $engine->db->load_single('SELECT sqlite_version() AS version');
+		$db_version				= 'SQLite ' . $_db_version['version'];
+	}
+	else
 	{
 		// get MariaDB / mysql version
-		$_db_version			= $engine->db->load_single('SELECT version()');
-		$db_version				= $_db_version['version()'];
+		$_db_version			= $engine->db->load_single('SELECT version() AS version');
+		$db_version				= $_db_version['version'];
 		$db_version				= (preg_match('/MariaDB/', $db_version, $matches)
 									? 'MariaDB '
 									: 'MySQL '
@@ -55,11 +60,6 @@ function admin_system_info($engine, $module)
 		$_sql_mode				= $engine->db->load_single('SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode');
 		$sql_mode_global		= $_sql_mode['@@GLOBAL.sql_mode'];
 		$sql_mode_session		= $_sql_mode['@@SESSION.sql_mode'];
-	}
-	else
-	{
-		$_db_version			= $engine->db->load_single('SELECT sqlite_version() AS version');
-		$db_version				= 'SQLite ' . $_db_version['version'];
 	}
 
 	// get_cfg_var()		-> returns whatever is in php.ini

@@ -33,11 +33,26 @@ write_config_hidden_nodes($config_parameters);
 	// only available for update at this stage
 	if ($config['is_update'])
 	{
-		$_db_version		= $db->load_single("SELECT version()");
-		$db_version			= $_db_version['version()'];
-		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
-			? DB_MIN_VERSION['mariadb']
-			: DB_MIN_VERSION['mysql'];
+		if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+		{
+			$_db_version		= $db->load_single('SELECT sqlite_version() AS version');
+			$db_version			= 'SQLite ' . $_db_version['version'];
+			$min_db_version		= DB_MIN_VERSION['sqlite'];
+		}
+		else
+		{
+			// get MariaDB / mysql version
+			$_db_version		= $db->load_single('SELECT version() AS version');
+			$db_version			= $_db_version['version'];
+			$db_version			= (preg_match('/MariaDB/', $db_version, $matches)
+										? 'MariaDB '
+										: 'MySQL '
+									) . explode('-', $db_version, 2)[0];
+			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
+									? DB_MIN_VERSION['mariadb']
+									: DB_MIN_VERSION['mysql'];
+		}
+
 		$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
 	}
 
@@ -46,7 +61,7 @@ write_config_hidden_nodes($config_parameters);
 	 */
 	$database_result =
 		    extension_loaded('mysqli')
-		||  extension_loaded('sqlite3')
+		||  class_exists('SQLite3')
 		|| (extension_loaded('pdo')
 			&& (   extension_loaded('pdo_mysql')
 				|| extension_loaded('pdo_sqlite')));

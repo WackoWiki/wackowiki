@@ -111,7 +111,7 @@ else
 
 	foreach ($drivers as $k => $driver)
 	{
-		if (extension_loaded($driver[0]))
+		if (extension_loaded($driver[0]) || ($driver[0] == 'sqlite' && class_exists('SQLite3')))
 		{
 			echo '<li>
 						<input type="radio" id="db_driver_' . $driver[0] . '" name="config[db_driver]" value="' . $driver[1] . '" ' .
