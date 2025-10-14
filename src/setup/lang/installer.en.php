@@ -135,6 +135,8 @@ $lang = [
 'DbPortDesc'					=> 'The port number your database server is accessible through. Leave it blank to use the default port number.',
 'DbName'						=> 'Database Name',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
+'DbNameSqliteDesc'				=> 'The SQLite data directory and file name WackoWiki should use.',
+
 'DbUser'						=> 'User Name',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'Password',
