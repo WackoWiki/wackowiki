@@ -17,6 +17,8 @@
 
 /src/file/backup/*
 !/src/file/backup/.htaccess
+/src/file/data/*
+!/src/file/data/.htaccess
 /src/file/global/*
 !/src/file/global/wacko_logo.png
 /src/file/perpage/*
