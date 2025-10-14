@@ -150,6 +150,26 @@ function test_mysqli($text, $query, $error_text = '')
 	}
 }
 
+function test_sqlite($text, $query, $error_text = '')
+{
+	global $dblink;
+
+	/* $result = $dblink->exec($query);
+	 if (!$result)
+	 {
+	 die('Query failed: ' . $query . ' (' . $dblink->lastErrorCode() . ': ' . $dblink->lastErrorMsg() . ')');
+	 } */
+
+	try
+	{
+		test($text, $dblink->exec($query), $error_text);
+	}
+	catch (Exception $e)
+	{
+		test($text, false, $error_text . '<br>' . $e->getMessage() . ' ' . $dblink->lastErrorMsg() . ' -> ' . $query);
+	}
+}
+
 function test_pdo($text, $query, $error_text = '')
 {
 	global $dblink;
@@ -176,26 +196,6 @@ function test_pdo($text, $query, $error_text = '')
 	catch (PDOException $e)
 	{
 		test($text, false, $error_text . '<br>' . $e->getCode() . ': (' . $e->getMessage() . ': ' . $dblink->errorInfo() . ')');
-	}
-}
-
-function test_sqlite($text, $query, $error_text = '')
-{
-	global $dblink;
-
-	/* $result = $dblink->exec($query);
-	if (!$result)
-	{
-			die('Query failed: ' . $query . ' (' . $dblink->lastErrorCode() . ': ' . $dblink->lastErrorMsg() . ')');
-	} */
-
-	try
-	{
-		test($text, $dblink->exec($query), $error_text);
-	}
-	catch (Exception $e)
-	{
-		test($text, false, $error_text . '<br>' . $e->getMessage() . ' ' . $dblink->lastErrorMsg() . ' -> ' . $query);
 	}
 }
 

@@ -30,7 +30,7 @@ require_once 'setup/lang/installer.' . $config['language'] . '.php';
 
 $lang		= array_merge ($lang, $lang_all);
 $separator	= '<div class="fake_hr_separator"><hr></div>';
-$title		= $config['wacko_version'] ? $lang['TitleUpdate'] : $lang['TitleInstallation'];
+$title		= !empty($config['wacko_version']) ? $lang['TitleUpdate'] : $lang['TitleInstallation'];
 
 // set default install action
 $lang[$install_action] ??= '';
