@@ -71,7 +71,7 @@ $pages2 = $this->db->load_all(
 			: '') .
 		'AND p.deleted = 0 ' .
 		'AND (u.account_type = 0 OR p.user_id = 0) ' .
-	'ORDER BY modified DESC ' .
+	'ORDER BY p.modified DESC ' .
 	'LIMIT ' . ($max * 2), true);
 
 // loading uploads
