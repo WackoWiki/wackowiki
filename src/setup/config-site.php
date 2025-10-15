@@ -6,13 +6,13 @@
 
 			if (f.elements['password'].value.length < <?php echo $config['pwd_admin_min_chars'];?>)
 			{
-				alert('<?php echo Ut::perc_replace($lang['ErrorAdminPasswordShort'], $config['pwd_admin_min_chars']);?>');
+				alert('<?php echo Ut::perc_replace(_t('ErrorAdminPasswordShort'), $config['pwd_admin_min_chars']);?>');
 				return false;
 			}
 
 			if (f.elements['password'].value!=f.elements["password2"].value)
 			{
-				alert('<?php echo $lang['ErrorAdminPasswordMismatch'];?>');
+				alert('<?php echo _t('ErrorAdminPasswordMismatch');?>');
 				return false;
 			}
 
@@ -26,16 +26,16 @@
 write_config_hidden_nodes($config_parameters);
 
 ?>
-	<label class="label_top" for="site_name"><?php echo $lang['SiteName'];?></label>
-	<p class="notop"><?php echo $lang['SiteNameDesc'];?></p>
-	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['is_update'] ? $config['site_name'] : ($lang['SiteNameDefault'] ?? $config['site_name']); ?>" class="text_input" required>
+	<label class="label_top" for="site_name"><?php echo _t('SiteName');?></label>
+	<p class="notop"><?php echo _t('SiteNameDesc');?></p>
+	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['is_update'] ? $config['site_name'] : (_t('SiteNameDefault') ?? $config['site_name']); ?>" class="text_input" required>
 <?php
 if (!$config['is_update'])
 {
 	echo $separator; ?>
-	<label class="label_top" for="root_page"><?php echo $lang['HomePage'];?></label>
-	<p class="notop"><?php echo $lang['HomePageDesc'];?></p>
-	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo $lang['HomePageDefault'] ?? $config['root_page']; ?>" class="text_input" required>
+	<label class="label_top" for="root_page"><?php echo _t('HomePage');?></label>
+	<p class="notop"><?php echo _t('HomePageDesc');?></p>
+	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo _t('HomePageDefault') ?? $config['root_page']; ?>" class="text_input" required>
 	<br>
 <?php
 }
@@ -46,16 +46,16 @@ else
 
 	echo $separator; ?>
 
-	<h2><?php echo $lang['MultiLang'];?></h2>
-	<p class="notop"><?php echo $lang['MultiLangDesc'];?></p>
-	<label class="indented_label" for="multilanguage"><?php echo $lang['Enabled'];?></label>
+	<h2><?php echo _t('MultiLang');?></h2>
+	<p class="notop"><?php echo _t('MultiLangDesc');?></p>
+	<label class="indented_label" for="multilanguage"><?php echo _t('Enabled');?></label>
 	<input type="checkbox" id="multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? 'checked' : '' ?> class="checkbox_input">
 	<br>
 
 <?php echo $separator; ?>
 
-	<h2><?php echo $lang['AllowedLang'];?></h2>
-	<p class="notop"><?php echo $lang['AllowedLangDesc'];?></p>
+	<h2><?php echo _t('AllowedLang');?></h2>
+	<p class="notop"><?php echo _t('AllowedLangDesc');?></p>
 
 <?php
 
@@ -77,7 +77,7 @@ else
 	$lang_list= [];
 }
 
-$_languages	= $lang['LanguageArray'];
+$_languages	= _t('LanguageArray');
 $n			= 1;
 
 echo '<ul class="checkbox_input column-4">' . "\n";
@@ -96,8 +96,8 @@ if (!$config['is_update'])
 {
 	echo $separator; ?>
 
-<h2><?php echo $lang['AclMode'];?></h2>
-	<p class="notop"><?php echo $lang['AclModeDesc']; ?></p>
+<h2><?php echo _t('AclMode');?></h2>
+	<p class="notop"><?php echo _t('AclModeDesc'); ?></p>
 	<ul>
 <?php
 	/*
@@ -108,8 +108,8 @@ if (!$config['is_update'])
 	 */
 
 	$acls	= [];
-	$acls[]	= ['*',	$lang['PublicWiki']];
-	$acls[]	= ['$',	$lang['PrivateWiki']];
+	$acls[]	= ['*',	_t('PublicWiki')];
+	$acls[]	= ['$',	_t('PrivateWiki')];
 
 	foreach ($acls as $m => $acl)
 	{
@@ -131,25 +131,25 @@ if (!$config['is_update'])
 	echo $separator;
 
 	$name_pattern =
-		Ut::perc_replace(($config['disable_wikiname']? $lang['NameAlphanumOnly'] : $lang['NameCamelCaseOnly']),
+	Ut::perc_replace(($config['disable_wikiname']? _t('NameAlphanumOnly') : _t('NameCamelCaseOnly')),
 			$config['username_chars_min'],
 			$config['username_chars_max']);
 	?>
 
-	<label class="label_top" for="admin_nam"><?php echo $lang['Admin'];?></label>
-	<p class="notop"><?php echo $lang['AdminDesc'];?></p>
+	<label class="label_top" for="admin_nam"><?php echo _t('Admin');?></label>
+	<p class="notop"><?php echo _t('AdminDesc');?></p>
 	<input type="text" minlength="<?php echo $config['username_chars_min'] ?>" maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php echo $config['admin_name'] ?? null; ?>" class="text_input" pattern="[\p{L}\p{Nd}]+" title="<?php echo $name_pattern; ?>" required>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="password"><?php echo $lang['Password'];?></label>
-	<p class="notop"><?php echo Ut::perc_replace($lang['PasswordDesc'], $config['pwd_admin_min_chars']);?></p>
+	<label class="label_top" for="password"><?php echo _t('Password');?></label>
+	<p class="notop"><?php echo Ut::perc_replace(_t('PasswordDesc'), $config['pwd_admin_min_chars']);?></p>
 	<input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="password" name="password" value="" class="text_input" required>
-	<label class="label_password2" for="wiki_admin_password2"><?php echo $lang['PasswordConfirm'];?></label>
+	<label class="label_password2" for="wiki_admin_password2"><?php echo _t('PasswordConfirm');?></label>
 	<input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="wiki_admin_password2" name="password2" value="" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="admin_email"><?php echo $lang['Mail'];?></label>
-	<p class="notop"><?php echo $lang['MailDesc'];?></p>
+	<label class="label_top" for="admin_email"><?php echo _t('Mail');?></label>
+	<p class="notop"><?php echo _t('MailDesc');?></p>
 	<input type="email" maxlength="320" id="admin_email" name="config[admin_email]" value="<?php echo $config['admin_email'] ?? null; ?>" class="text_input" required>
 	<br>
 <?php
@@ -162,9 +162,9 @@ else
 
 	echo $separator; ?>
 
-	<label class="label_top" for="base_url"><?php echo $lang['Base'];?></label>
+	<label class="label_top" for="base_url"><?php echo _t('Base');?></label>
 	<p class="notop">
-	<?php echo $lang['BaseDesc'];?>
+	<?php echo _t('BaseDesc');?>
 		<ul>
 			<li><strong><code>https://example.com/</code></strong></li>
 			<li><strong><code>https://example.com/wiki/</code></strong></li>
@@ -173,11 +173,11 @@ else
 	<input type="url" maxlength="1000" id="base_url" name="config[base_url]" value="<?php echo $config['base_url'] ?>" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
-	<h2><?php echo $lang['Rewrite'];?></h2>
-	<p class="notop"><?php echo $lang['RewriteDesc'];?></p>
-	<label class="indented_label" for="wiki_rewrite"><?php echo $lang['Enabled'];?></label>
+	<h2><?php echo _t('Rewrite');?></h2>
+	<p class="notop"><?php echo _t('RewriteDesc');?></p>
+	<label class="indented_label" for="wiki_rewrite"><?php echo _t('Enabled');?></label>
 	<input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]"  value="1" <?php echo isset($config['rewrite_mode']) ? 'checked' : '' ?> class="checkbox_input">
 	<br>
 <?php echo $separator; ?>
-	<button type="submit" class="next" onclick="return check();"><?php echo $lang['Continue'];?></button>
+	<button type="submit" class="next" onclick="return check();"><?php echo _t('Continue');?></button>
 </form>

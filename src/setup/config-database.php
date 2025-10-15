@@ -27,12 +27,12 @@
 
 			if(!db_driver_selected)
 			{
-				alert('<?php echo $lang['ErrorNoDbDriverSelected'];?>');
+				alert('<?php echo _t('ErrorNoDbDriverSelected');?>');
 				db_driver_selected = false;
 			}
 			else if(f.elements["config[DeleteTables]"].checked)
 			{
-				if(!confirm('<?php echo $lang['ConfirmTableDeletion'];?>'))
+				if(!confirm('<?php echo _t('ConfirmTableDeletion');?>'))
 				{
 					db_driver_selected = false;
 				}
@@ -61,14 +61,14 @@ if (   !extension_loaded('mysqli')
 	)
 {
 ?>
-	<p class="notop"><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
+	<p class="notop"><?php echo _t('ErrorNoDbDriverDetected'); ?></p>
 <?php
 }
 else
 {
 ?>
-	<h2><?php echo $lang['DbDriver'];?></h2>
-	<p class="notop"><?php echo $lang['DbDriverDesc']; ?></p>
+	<h2><?php echo _t('DbDriver');?></h2>
+	<p class="notop"><?php echo _t('DbDriverDesc'); ?></p>
 	<ul>
 <?php
 	/*
@@ -88,7 +88,7 @@ else
 
 	if (!$config['is_update'])
 	{
-		$drivers[]	= ['mysqli',		'mysqli',		'MySQLi (' . $lang['Recommended'] . ')'];
+		$drivers[]	= ['mysqli',		'mysqli',		'MySQLi (' . _t('Recommended') . ')'];
 		$drivers[]	= ['pdo_mysql',		'mysql_pdo',	'PDO MySQL'];
 		$drivers[]	= ['pdo_sqlite',	'sqlite_pdo',	'PDO SQLite'];
 		$drivers[]	= ['sqlite',		'sqlite',		'SQLite'];
@@ -104,7 +104,7 @@ else
 		}
 		else
 		{
-			$drivers[]	= ['mysqli',		'mysqli',		'MySQLi (' . $lang['Recommended'] . ')'];
+			$drivers[]	= ['mysqli',		'mysqli',		'MySQLi (' . _t('Recommended') . ')'];
 			$drivers[]	= ['pdo_mysql',		'mysql_pdo',	'PDO MySQL'];
 		}
 	}
@@ -132,8 +132,8 @@ else
 if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 {
 	echo $separator; ?>
-	<label class="label_top" for="sql_mode"><?php echo $lang['DbSqlMode'];?></label>
-	<p class="notop"><?php echo $lang['DbSqlModeDesc']; ?></p>
+	<label class="label_top" for="sql_mode"><?php echo _t('DbSqlMode');?></label>
+	<p class="notop"><?php echo _t('DbSqlModeDesc'); ?></p>
 
 <?php
 	/*
@@ -163,8 +163,8 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 	if ($config['debug'] >= 3)
 	{
 		echo $separator; ?>
-		<label class="label_top" for="db_vendor"><?php echo $lang['DbVendor'];?></label>
-		<p class="notop"><?php echo $lang['DbVendorDesc']; ?></p>
+		<label class="label_top" for="db_vendor"><?php echo _t('DbVendor');?></label>
+		<p class="notop"><?php echo _t('DbVendorDesc'); ?></p>
 
 	<?php
 		/*
@@ -191,8 +191,8 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 ?>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="db_charset"><?php echo $lang['DbCharset'];?></label>
-	<p class="notop"><?php echo $lang['DbCharsetDesc']; ?></p>
+	<label class="label_top" for="db_charset"><?php echo _t('DbCharset');?></label>
+	<p class="notop"><?php echo _t('DbCharsetDesc'); ?></p>
 
 <?php
 	/*
@@ -205,7 +205,7 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 	 */
 
 	$charsets	= [];
-	$charsets[]	= ['utf8mb4',	'utf8mb4',	'utf8mb4 (' . $lang['Recommended'] . ')'];	// default
+	$charsets[]	= ['utf8mb4',	'utf8mb4',	'utf8mb4 (' . _t('Recommended') . ')'];	// default
 
 	echo '	<select id="db_charset" name="config[db_charset]" required>';
 
@@ -225,8 +225,8 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
 			echo $separator;
 			?>
-			<h2><?php echo $lang['DbEngine'];?></h2>
-			<p class="notop"><?php echo $lang['DbEngineDesc']; ?></p>
+			<h2><?php echo _t('DbEngine');?></h2>
+			<p class="notop"><?php echo _t('DbEngineDesc'); ?></p>
 			<ul>
 			<?php
 			/*
@@ -238,7 +238,7 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 			 */
 
 			$engines	= [];
-			$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB (' . $lang['Recommended'] . ')'];	// default
+			$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB (' . _t('Recommended') . ')'];	// default
 
 			foreach ($engines as $k => $engine)
 			{
@@ -252,31 +252,31 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 			<br>
 
 			<?php echo $separator; ?>
-			<label class="label_top" for="db_host"><?php echo $lang['DbHost'];?></label>
-			<p class="notop"><?php echo $lang['DbHostDesc']; ?></p>
+			<label class="label_top" for="db_host"><?php echo _t('DbHost');?></label>
+			<p class="notop"><?php echo _t('DbHostDesc'); ?></p>
 			<input type="text" maxlength="1000" id="db_host" name="config[db_host]" value="<?php echo $config['db_host'] ?>" placeholder="localhost" class="text_input" required>
 			<br>
 			<?php echo $separator; ?>
-			<label class="label_top" for="db_port"><?php echo $lang['DbPort'];?></label>
-			<p class="notop"><?php echo $lang['DbPortDesc']; ?></p>
+			<label class="label_top" for="db_port"><?php echo _t('DbPort');?></label>
+			<p class="notop"><?php echo _t('DbPortDesc'); ?></p>
 			<input type="number" maxlength="10" id="db_port" name="config[db_port]" value="<?php echo $config['db_port'] ?>" class="text_input">
 			<br>
 			<?php echo $separator;
 		}
 ?>
-		<label class="label_top" for="db_name"><?php echo $lang['DbName'];?></label>
+		<label class="label_top" for="db_name"><?php echo _t('DbName');?></label>
 		<?php
 		if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
 			?>
-			<p class="notop"><?php echo $lang['DbNameDesc']; ?></p>
+			<p class="notop"><?php echo _t('DbNameDesc'); ?></p>
 			<?php
 		}
 		else
 		{
 			?>
-			<p class="notop"><?php echo $lang['DbNameSqliteDesc']; ?></p>
-			<p class="msg notice"><?php echo $lang['DbNameSqliteHelp']; ?></p>
+			<p class="notop"><?php echo _t('DbNameSqliteDesc'); ?></p>
+			<p class="msg notice"><?php echo _t('DbNameSqliteHelp'); ?></p>
 			<?php
 		}
 		?>
@@ -293,18 +293,18 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		else
 		{
 			?>
-			<label class="label_top" for="db_user"><?php echo $lang['DbUser'];?></label>
-			<p class="notop"><?php echo $lang['DbUserDesc']; ?></p>
+			<label class="label_top" for="db_user"><?php echo _t('DbUser');?></label>
+			<p class="notop"><?php echo _t('DbUserDesc'); ?></p>
 			<input type="text" maxlength="50" id="db_user" name="config[db_user]" value="<?php echo $config['db_user'] ?>" class="text_input" required>
 			<br>
 			<?php echo $separator; ?>
-			<label class="label_top" for="db_password"><?php echo $lang['DbPassword'];?></label>
-			<p class="notop"><?php echo $lang['DbPasswordDesc']; ?></p>
+			<label class="label_top" for="db_password"><?php echo _t('DbPassword');?></label>
+			<p class="notop"><?php echo _t('DbPasswordDesc'); ?></p>
 			<input type="password" maxlength="50" id="db_password" name="config[db_password]" autocomplete="off" value="<?php echo $config['db_password'] ?>" class="text_input">
 			<br>
 			<?php echo $separator; ?>
-			<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
-			<p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
+			<label class="label_top" for="table_prefix"><?php echo _t('Prefix');?></label>
+			<p class="notop"><?php echo _t('PrefixDesc'); ?></p>
 			<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" pattern="[\p{L}\p{Nd}\_]+" class="text_input">
 			<br>
 			<?php echo $separator;
@@ -313,9 +313,9 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 
 	if (!$config['is_update'])
 	{?>
-		<h2><?php echo $lang['DeleteTables'];?></h2>
-		<p class="notop"><?php echo $lang['DeleteTablesDesc']; ?></p>
-		<label class="indented_label" for="wiki_delete_tables"><?php echo $lang['DeleteTables'];?></label>
+		<h2><?php echo _t('DeleteTables');?></h2>
+		<p class="notop"><?php echo _t('DeleteTablesDesc'); ?></p>
+		<label class="indented_label" for="wiki_delete_tables"><?php echo _t('DeleteTables');?></label>
 		<input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config['DeleteTables']) ? ' checked' : ''; ?> class="checkbox_input">
 		<br>
 		<?php echo $separator;
@@ -325,7 +325,7 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		echo '<input type="hidden" value="off" name="config[DeleteTables]">';
 	}
 ?>
-	<button type="submit" class="next" onclick="return check();"><?php echo $lang['Continue'];?></button>
+	<button type="submit" class="next" onclick="return check();"><?php echo _t('Continue');?></button>
 <?php
 }
 ?>

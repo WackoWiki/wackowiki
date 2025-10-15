@@ -36,9 +36,9 @@ function output_error($error_text = '')
 // Draws a tick or cross next to a result
 function output_image($ok)
 {
-	global $lang, $base_path;
+	global $base_path;
 
-	$text = $ok ? $lang['OK'] : $lang['Problem'];
+	$text = $ok ? _t('OK') : _t('Problem');
 
 	return '<img src="' . $base_path . 'image/spacer.png" width="20" height="20" alt="' . $text . '" title="' . $text . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
 }
@@ -69,6 +69,48 @@ function available_languages()
 	sort($lang_list, SORT_STRING);
 
 	return $lang_list;
+}
+
+function set_language($iso)
+{
+	require_once 'setup/lang/installer.all.php';
+
+	if ($iso == 'en')
+	{
+		require_once 'setup/lang/installer.' . $iso . '.php';
+		$x[$iso] = array_merge ($lang, $lang_all);
+	}
+	else
+	{
+		require_once 'setup/lang/installer.' . $iso . '.php';
+		$x[$iso] = array_merge ($lang, $lang_all);
+		require_once 'setup/lang/installer.' . 'en' . '.php';
+		$x['en'] = array_merge ($lang, $lang_all);
+	}
+
+	#Ut::debug_print_r($x);
+
+	return $x;
+}
+
+function _t($name)
+{
+	global $config, $translation;
+	$lang = $config['language'];
+
+	if (isset($translation[$lang][$name]))
+	{
+		return $translation[$lang][$name];
+	}
+
+	// fall back to English
+	if ($lang != 'en')
+	{
+		if (isset($translation['en'][$name]))
+		{
+			return $translation['en'][$name];
+		}
+	}
 }
 
 // TODO: same function as in wacko class

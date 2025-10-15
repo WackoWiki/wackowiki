@@ -4,10 +4,9 @@ $config_db		= [];
 $config_insert	= '';
 
 // needed to allow config variables to be accessed within some functions like _quote or insert_pages.
-global $config_global, $dblink_global, $lang_global;
+global $config_global, $dblink_global;
 $config_global	= $config;
 $dblink_global	= $dblink;
-$lang_global	= $lang;
 
 // inserting secondary config values
 $config_db['abuse_email']					= $config['admin_email'];

@@ -2,7 +2,7 @@
 <?php
 write_config_hidden_nodes($config_parameters);
 ?>
-<p><?php echo $lang['Requirements']; ?></p>
+<p><?php echo _t('Requirements'); ?></p>
 	<?php
 	/*
 		Check PHP Version
@@ -10,15 +10,15 @@ write_config_hidden_nodes($config_parameters);
 
 	$php_version_result = version_compare(PHP_MIN_VERSION, PHP_VERSION, '<');
 	?>
-<h2><?php echo $lang['PhpVersion']; ?></h2>
-<p class="notop"><?php echo $lang['PhpDetected']; ?> <?php echo phpversion() . '   ' . output_image($php_version_result); ?></p>
+<h2><?php echo _t('PhpVersion'); ?></h2>
+<p class="notop"><?php echo _t('PhpDetected'); ?> <?php echo phpversion() . '   ' . output_image($php_version_result); ?></p>
 	<?php
 	/*
 		Check if mod_rewrite is installed
 	*/
 	?>
-<h2><?php echo $lang['ModRewrite']; ?></h2>
-<p class="notop"><?php echo $lang['ModRewriteInstalled']; ?>
+<h2><?php echo _t('ModRewrite'); ?></h2>
+<p class="notop"><?php echo _t('ModRewriteInstalled'); ?>
 	<?php
 	if (function_exists('apache_get_modules'))
 	{
@@ -26,7 +26,7 @@ write_config_hidden_nodes($config_parameters);
 	}
 	else
 	{
-		echo $lang['ModRewriteStatusUnknown'];
+		echo _t('ModRewriteStatusUnknown');
 	} ?>
 </p>
 	<?php
@@ -98,7 +98,7 @@ write_config_hidden_nodes($config_parameters);
 		}
 	}
 	?>
-<h2><?php echo $lang['Database']; ?></h2>
+<h2><?php echo _t('Database'); ?></h2>
 <ul>
 	<?php
 	if ($config['is_update'])
@@ -134,7 +134,7 @@ write_config_hidden_nodes($config_parameters);
 	$php_extension_result	= true;
 	$missing_php_extension	= [];
 	?>
-<h2><?php echo $lang['PhpExtensions']; ?></h2>
+<h2><?php echo _t('PhpExtensions'); ?></h2>
 <ul class="column-3">
 	<?php
 	foreach ($php_extension as $extension)
@@ -155,7 +155,7 @@ write_config_hidden_nodes($config_parameters);
 
 	if (1 != preg_match('/^.$/u', "ñ", $UTF8_ar))
 	{
-		echo "\t<li>" . $lang['PcreWithoutUtf8'] . ' ' . output_image(false) . "</li>\n";
+		echo "\t<li>" . _t('PcreWithoutUtf8') . ' ' . output_image(false) . "</li>\n";
 	}
 
 	unset($UTF8_ar);
@@ -191,7 +191,7 @@ write_config_hidden_nodes($config_parameters);
 	// If the cache directory is writable then we can enable caching as default
 	echo '<input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
 	?>
-<h2><?php echo $lang['Permissions']; ?></h2>
+<h2><?php echo _t('Permissions'); ?></h2>
 <ul>
 	<?php
 	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
@@ -214,34 +214,34 @@ write_config_hidden_nodes($config_parameters);
 		End of checks, are we ready to install?
 	*/
 
-	$permissions_notice	= '<p class="msg warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
-	$btn_try_again		= '<button type="button" class="next" onClick="window.location.reload( true );">' . $lang['TryAgain'] . '</button>';
-	$btn_continue		= '<button type="submit" class="next">' . $lang['Continue'] . '</button>';
+	$permissions_notice	= '<p class="msg warning">' . Ut::perc_replace(_t('NotePermissions'), '<code>' . CONFIG_FILE . '</code>') . '</p>';
+	$btn_try_again		= '<button type="button" class="next" onClick="window.location.reload( true );">' . _t('TryAgain') . '</button>';
+	$btn_continue		= '<button type="submit" class="next">' . _t('Continue') . '</button>';
 	?>
-<h2><?php echo $lang['ReadyToInstall']; ?></h2>
+<h2><?php echo _t('ReadyToInstall'); ?></h2>
 <?php
 	if (   $php_version_result
 		&& $database_result
 		&& $php_extension_result
 		&& $file_permissions_result)
 	{
-		echo '<p>' . $lang['Ready'] . '</p>';
+		echo '<p>' . _t('Ready') . '</p>';
 		echo $permissions_notice;
 		echo $btn_continue;
 	}
 	else if (!$php_version_result)
 	{
-		echo '<p class="msg security">' . Ut::perc_replace($lang['ErrorMinPhpVersion'], '<strong>' . PHP_MIN_VERSION . '</strong>') . '</p>';
+		echo '<p class="msg security">' . Ut::perc_replace(_t('ErrorMinPhpVersion'), '<strong>' . PHP_MIN_VERSION . '</strong>') . '</p>';
 		echo $btn_try_again;
 	}
 	else if (!$database_result)
 	{
-		echo '<p class="msg security">' . $lang['ErrorNoDbDriverDetected'] . '</p>';
+		echo '<p class="msg security">' . _t('ErrorNoDbDriverDetected') . '</p>';
 		echo $btn_try_again;
 	}
 	else if (!$php_extension_result)
 	{
-		echo '<div class="msg security">' . $lang['ErrorPhpExtensions'];
+		echo '<div class="msg security">' . _t('ErrorPhpExtensions');
 		echo '<ul>';
 
 		foreach ($missing_php_extension as $php_extension)
@@ -255,9 +255,9 @@ write_config_hidden_nodes($config_parameters);
 	else if (!$file_permissions_result)
 	{
 		echo $permissions_notice;
-		echo '<p class="msg security">' . $lang['ErrorPermissions'] . '</p>';
+		echo '<p class="msg security">' . _t('ErrorPermissions') . '</p>';
 		echo '<p class="msg notice">
-					<strong>' . $lang['Example'] . '</strong><br><br>
+					<strong>' . _t('Example') . '</strong><br><br>
 					<code>
 						chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ file/thumb_local/ xml/
 						<br><br>

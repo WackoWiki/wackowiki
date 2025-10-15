@@ -59,14 +59,14 @@ $create_table[]			= ['word',					$tbl_word];
 //		$value[0] - record type
 //		$value[1] - SQL query
 //		$value[2] - record
-$insert_records[]		= [$lang['InstallSystemAccount'],		$insert_user_system,			'system account'];
-$insert_records[]		= [$lang['InstallDeletedAccount'],		$insert_user_deleted,			'deleted account'];
-$insert_records[]		= [$lang['InstallAdmin'],				$insert_admin,					'admin user'];
-$insert_records[]		= [$lang['InstallAdminSetting'],		$insert_admin_setting,			'admin user settings'];
-$insert_records[]		= [$lang['InstallAdminGroup'],			$insert_admin_group,			'admin group'];
-$insert_records[]		= [$lang['InstallAdminGroupMember'],	$insert_admin_group_member,		'admin group member'];
-$insert_records[]		= [$lang['InstallModeratorGroup'],		$insert_moderator_group,		'moderator group'];
-$insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			'reviewer group'];
+$insert_records[]		= [_t('InstallSystemAccount'),		$insert_user_system,			'system account'];
+$insert_records[]		= [_t('InstallDeletedAccount'),		$insert_user_deleted,			'deleted account'];
+$insert_records[]		= [_t('InstallAdmin'),				$insert_admin,					'admin user'];
+$insert_records[]		= [_t('InstallAdminSetting'),		$insert_admin_setting,			'admin user settings'];
+$insert_records[]		= [_t('InstallAdminGroup'),			$insert_admin_group,			'admin group'];
+$insert_records[]		= [_t('InstallAdminGroupMember'),	$insert_admin_group_member,		'admin group member'];
+$insert_records[]		= [_t('InstallModeratorGroup'),		$insert_moderator_group,		'moderator group'];
+$insert_records[]		= [_t('InstallReviewerGroup'),		$insert_reviewer_group,			'reviewer group'];
 
 // UPGRADE
 // update tables

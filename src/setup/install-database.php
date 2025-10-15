@@ -3,7 +3,7 @@
 @ignore_user_abort(true);
 
 // test configuration
-echo '<h2>' . $lang['TestingConfiguration'] . '</h2>' . "\n";
+echo '<h2>' . _t('TestingConfiguration') . '</h2>' . "\n";
 
 $delete_table		= [];
 $create_trigger		= [];
@@ -13,33 +13,33 @@ $upgrade			= [];
 
 $upgrade_msg = [
 	'alter' => [
-		'ok'		=> $lang['AlterTable'],
-		'error'		=> $lang['ErrorAlterTable']
+		'ok'		=> _t('AlterTable'),
+		'error'		=> _t('ErrorAlterTable')
 	],
 
 	'create' => [
-		'ok'		=> $lang['CreatingTable'],
-		'error'		=> $lang['ErrorCreatingTable']
+		'ok'		=> _t('CreatingTable'),
+		'error'		=> _t('ErrorCreatingTable')
 	],
 
 	'delete' => [
-		'ok'		=> $lang['DeletingTable'],
-		'error'		=> $lang['ErrorDeletingTable']
+		'ok'		=> _t('DeletingTable'),
+		'error'		=> _t('ErrorDeletingTable')
 	],
 
 	'insert' => [
-		'ok'		=> $lang['InsertRecord'],
-		'error'		=> $lang['ErrorInsertRecord']
+		'ok'		=> _t('InsertRecord'),
+		'error'		=> _t('ErrorInsertRecord')
 	],
 
 	'rename' => [
-		'ok'		=> $lang['RenameTable'],
-		'error'		=> $lang['ErrorRenameTable']
+		'ok'		=> _t('RenameTable'),
+		'error'		=> _t('ErrorRenameTable')
 	],
 
 	'update' => [
-		'ok'		=> $lang['UpdateTable'],
-		'error'		=> $lang['ErrorUpdatingTable']
+		'ok'		=> _t('UpdateTable'),
+		'error'		=> _t('ErrorUpdatingTable')
 	]
 ];
 
@@ -59,7 +59,7 @@ if (empty($config['noreply_email']))
 // check for language related default values
 if (!$config['is_update'])
 {
-	$config = array_merge($config, $lang['ConfigDefaults']);
+	$config = array_merge($config, _t('ConfigDefaults'));
 }
 
 // no table_prefix for SQLite
@@ -122,18 +122,18 @@ switch ($config['db_driver'])
 		{
 			mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				$dblink = new mysqli($config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'], $port),
-				$lang['ErrorDbConnection']
+				_t('ErrorDbConnection')
 			);
 		}
 		catch (mysqli_sql_exception $e)
 		{
 			// There was a problem with the connection string
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				false,
-				$lang['ErrorDbConnection'] . '<br>' . 'MySQLi Error: ' . $e->getMessage() . ' ' . $e->getCode()
+				_t('ErrorDbConnection') . '<br>' . 'MySQLi Error: ' . $e->getMessage() . ' ' . $e->getCode()
 			);
 
 			$fatal_error = true;
@@ -169,9 +169,9 @@ switch ($config['db_driver'])
 			$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
 
 			echo '<li>' . ($valid_db_version
-				? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
+				? _t('TestDatabaseVersion') . ' ' . output_image($valid_db_version)
 				: Ut::perc_replace(
-					$lang['ErrorDatabaseVersion'],
+					_t('ErrorDatabaseVersion'),
 					'<code>' . $db_version . '</code>',
 					'<code>' . $min_db_version . '</code>') . ' ' .
 					output_image($valid_db_version)
@@ -194,15 +194,15 @@ switch ($config['db_driver'])
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				echo '<h2>' . $lang['DeletingTables'] . '</h2>' . "\n";
+				echo '<h2>' . _t('DeletingTables') . '</h2>' . "\n";
 				echo '<ol>' . "\n";
 
 				foreach ($delete_table as $value)
 				{
 					test_mysqli(
-						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
+						Ut::perc_replace(_t('DeletingTable'), '<code>' . $value[0] . '</code>'),
 						$value[1],
-						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>')
+						Ut::perc_replace(_t('ErrorDeletingTable'), '<code>' . $value[0] . '</code>')
 					);
 
 					/* echo '<pre>';
@@ -210,7 +210,7 @@ switch ($config['db_driver'])
 					echo '</pre>'; */
 				}
 
-				echo '<li>' . $lang['DeletingTablesEnd'] . '</li>' . "\n";
+				echo '<li>' . _t('DeletingTablesEnd') . '</li>' . "\n";
 				echo '</ol>' . "\n";
 				echo '<br>' . "\n";
 
@@ -222,15 +222,15 @@ switch ($config['db_driver'])
 				// new installation
 				if ($version == '0')
 				{
-					echo '<h2>' . $lang['InstallTables'] . '</h2>' . "\n";
+					echo '<h2>' . _t('InstallTables') . '</h2>' . "\n";
 					echo '<ol>' . "\n";
 
 					foreach ($create_table as $value)
 					{
 						test_mysqli(
-							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+							Ut::perc_replace(_t('CreatingTable'), '<code>' . $value[0] . '</code>'),
 							$value[1],
-							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>')
+							Ut::perc_replace(_t('ErrorCreatingTable'), '<code>' . $value[0] . '</code>')
 						);
 					}
 
@@ -239,14 +239,14 @@ switch ($config['db_driver'])
 						test_mysqli(
 							$value[0],
 							$value[1],
-							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>')
+							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . $value[2] . '</code>')
 						);
 					}
 
 					test_mysqli(
-						$lang['InstallLogoImage'],
+						_t('InstallLogoImage'),
 						$insert_logo_image,
-						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
+							Ut::perc_replace(_t('ErrorAlreadyExists'), _t('LogoImage'))
 					);
 
 					echo '</ol>' . "\n";
@@ -262,7 +262,7 @@ switch ($config['db_driver'])
 					{
 						if (version_compare($version, $to_version, '<='))
 						{
-							echo '<h2>Wacko ' . $to_version . ' ' . $lang['To'] . ' ' . WACKO_VERSION . '</h2>' . "\n";
+							echo '<h2>Wacko ' . $to_version . ' ' . _t('To') . ' ' . WACKO_VERSION . '</h2>' . "\n";
 							echo '<ol>' . "\n";
 
 							foreach ($upgrade[$to_version] as $value)
@@ -280,20 +280,20 @@ switch ($config['db_driver'])
 				}
 
 				echo '<br>' . "\n";
-				echo '<h2>' . $lang['InstallDefaultData'] . '</h2>' . "\n";
+				echo '<h2>' . _t('InstallDefaultData') . '</h2>' . "\n";
 				echo '<ul>' . "\n";
 
 				// inserting config values
 				test_mysqli(
-					$lang['InstallConfigValues'],
+					_t('InstallConfigValues'),
 					$insert_config,
-					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
+					Ut::perc_replace(_t('ErrorAlreadyExists'), _t('ConfigValues'))
 				);
 
-				echo '<li>' . $lang['InstallPagesBegin'];
+						echo '<li>' . _t('InstallPagesBegin');
 				require_once 'setup/insert_pages.php';
 				echo '</li>' . "\n";
-				echo '<li>' . $lang['InstallPagesEnd'] . '</li>' . "\n";
+				echo '<li>' . _t('InstallPagesEnd') . '</li>' . "\n";
 				echo '</ul>' . "\n";
 			}
 		}
@@ -309,9 +309,9 @@ switch ($config['db_driver'])
 		if (file_exists($config['db_name']) && !$config['is_update'])
 		{
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				false,
-				$lang['ErrorDbConnection'] . '<br>' . 'SQLlite file exists.'
+				_t('ErrorDbConnection') . '<br>' . 'SQLlite file exists.'
 			);
 
 			$fatal_error = true;
@@ -320,9 +320,9 @@ switch ($config['db_driver'])
 		if (!check_sqlite_name($config['db_name']))
 		{
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				false,
-				$lang['ErrorDbConnection'] . '<br>' . 'Please use one of the extensions db, sdb, sqlite.'
+				_t('ErrorDbConnection') . '<br>' . 'Please use one of the extensions db, sdb, sqlite.'
 			);
 
 			$fatal_error = true;
@@ -333,20 +333,21 @@ switch ($config['db_driver'])
 		try
 		{
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				$dblink = new \SQLite3($config['db_name']),
-				$lang['ErrorDbConnection']
+				_t('ErrorDbConnection')
 			);
 
 			$dblink->enableExceptions(true);
+			$dblink->busyTimeout(5000);
 		}
 		catch (Exception $e)
 		{
 			// There was a problem with the connection string
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				false,
-				$lang['ErrorDbConnection'] . '<br>' . 'SQLlite Error: ' . $e->getMessage() . ' ' . $e->getCode()
+				_t('ErrorDbConnection') . '<br>' . 'SQLlite Error: ' . $e->getMessage() . ' ' . $e->getCode()
 			);
 
 			$fatal_error = true;
@@ -371,9 +372,9 @@ switch ($config['db_driver'])
 			$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
 
 			echo '<li>' . ($valid_db_version
-				? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
+				? _t('TestDatabaseVersion') . ' ' . output_image($valid_db_version)
 				: Ut::perc_replace(
-					$lang['ErrorDatabaseVersion'],
+					_t('ErrorDatabaseVersion'),
 					'<code>' . $db_version . '</code>',
 					'<code>' . $min_db_version . '</code>') . ' ' .
 					output_image($valid_db_version)
@@ -396,15 +397,15 @@ switch ($config['db_driver'])
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				echo '<h2>' . $lang['DeletingTables'] . '</h2>' . "\n";
+				echo '<h2>' . _t('DeletingTables') . '</h2>' . "\n";
 				echo '<ol>' . "\n";
 
 				foreach ($delete_table as $value)
 				{
 					test_sqlite(
-						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
+						Ut::perc_replace(_t('DeletingTable'), '<code>' . $value[0] . '</code>'),
 						$value[1],
-						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>')
+						Ut::perc_replace(_t('ErrorDeletingTable'), '<code>' . $value[0] . '</code>')
 					);
 
 					/* echo '<pre>';
@@ -412,7 +413,7 @@ switch ($config['db_driver'])
 					 echo '</pre>'; */
 				}
 
-				echo '<li>' . $lang['DeletingTablesEnd'] . '</li>' . "\n";
+				echo '<li>' . _t('DeletingTablesEnd') . '</li>' . "\n";
 				echo '</ol>' . "\n";
 				echo '<br>' . "\n";
 
@@ -424,15 +425,15 @@ switch ($config['db_driver'])
 				// new installation
 				if ($version == '0')
 				{
-					echo '<h2>' . $lang['InstallTables'] . '</h2>' . "\n";
+					echo '<h2>' . _t('InstallTables') . '</h2>' . "\n";
 					echo '<ol>' . "\n";
 
 					foreach ($create_table as $value)
 					{
 						test_sqlite(
-							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+							Ut::perc_replace(_t('CreatingTable'), '<code>' . $value[0] . '</code>'),
 							$value[1],
-							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>')
+							Ut::perc_replace(_t('ErrorCreatingTable'), '<code>' . $value[0] . '</code>')
 							);
 					}
 
@@ -441,9 +442,9 @@ switch ($config['db_driver'])
 					foreach ($create_trigger as $n => $value)
 					{
 						test_sqlite(
-							Ut::perc_replace($lang['CreatingTrigger'], '<code>' . $n . '</code>'),
+							Ut::perc_replace(_t('CreatingTrigger'), '<code>' . $n . '</code>'),
 							$value,
-							Ut::perc_replace($lang['ErrorCreatingTrigger'], '<code>' . $n . '</code>')
+							Ut::perc_replace(_t('ErrorCreatingTrigger'), '<code>' . $n . '</code>')
 						);
 					}
 
@@ -452,14 +453,14 @@ switch ($config['db_driver'])
 						test_sqlite(
 							$value[0],
 							$value[1],
-							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>')
+							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . $value[2] . '</code>')
 						);
 					}
 
 					test_sqlite(
-						$lang['InstallLogoImage'],
+						_t('InstallLogoImage'),
 						$insert_logo_image,
-						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
+						Ut::perc_replace(_t('ErrorAlreadyExists'), _t('LogoImage'))
 					);
 
 					echo '</ol>' . "\n";
@@ -475,7 +476,7 @@ switch ($config['db_driver'])
 						{
 							if (version_compare($version, $to_version, '<='))
 							{
-								echo '<h2>Wacko ' . $to_version . ' ' . $lang['To'] . ' ' . WACKO_VERSION . '</h2>' . "\n";
+								echo '<h2>Wacko ' . $to_version . ' ' . _t('To') . ' ' . WACKO_VERSION . '</h2>' . "\n";
 								echo '<ol>' . "\n";
 
 								foreach ($upgrade[$to_version] as $value)
@@ -493,20 +494,20 @@ switch ($config['db_driver'])
 				}
 
 				echo '<br>' . "\n";
-				echo '<h2>' . $lang['InstallDefaultData'] . '</h2>' . "\n";
+				echo '<h2>' . _t('InstallDefaultData') . '</h2>' . "\n";
 				echo '<ul>' . "\n";
 
 				// inserting config values
 				test_sqlite(
-					$lang['InstallConfigValues'],
+					_t('InstallConfigValues'),
 					$insert_config,
-					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
+					Ut::perc_replace(_t('ErrorAlreadyExists'), _t('ConfigValues'))
 				);
 
-				echo '<li>' . $lang['InstallPagesBegin'];
+				echo '<li>' . _t('InstallPagesBegin');
 				require_once 'setup/insert_pages.php';
 				echo '</li>' . "\n";
-				echo '<li>' . $lang['InstallPagesEnd'] . '</li>' . "\n";
+				echo '<li>' . _t('InstallPagesEnd') . '</li>' . "\n";
 				echo '</ul>' . "\n";
 			}
 		}
@@ -530,9 +531,9 @@ switch ($config['db_driver'])
 			if (file_exists($config['db_name']) && !$config['is_update'])
 			{
 				test(
-					$lang['TestConnectionString'],
+					_t('TestConnectionString'),
 					false,
-					$lang['ErrorDbConnection'] . '<br>' . 'SQLlite file exists.'
+					_t('ErrorDbConnection') . '<br>' . 'SQLlite file exists.'
 				);
 
 				$fatal_error = true;
@@ -541,9 +542,9 @@ switch ($config['db_driver'])
 			if (!check_sqlite_name($config['db_name']))
 			{
 				test(
-					$lang['TestConnectionString'],
+					_t('TestConnectionString'),
 					false,
-					$lang['ErrorDbConnection'] . '<br>' . 'Please use one of the extensions db, sdb, sqlite.'
+					_t('ErrorDbConnection') . '<br>' . 'Please use one of the extensions db, sdb, sqlite.'
 				);
 
 				$fatal_error = true;
@@ -555,12 +556,12 @@ switch ($config['db_driver'])
 		try
 		{
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				$dblink = @new PDO(
 					$dsn,
 					$config['db_user'],
 					$config['db_password']),
-				$lang['ErrorDbConnection']
+				_t('ErrorDbConnection')
 			);
 
 			$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -568,9 +569,9 @@ switch ($config['db_driver'])
 		catch (PDOException $e)
 		{
 			test(
-				$lang['TestConnectionString'],
+				_t('TestConnectionString'),
 				false,
-				$lang['ErrorDbConnection'] . '<br>' . 'PDO Error: ' . $e->getMessage() . ' ' . $e->getCode()
+				_t('ErrorDbConnection') . '<br>' . 'PDO Error: ' . $e->getMessage() . ' ' . $e->getCode()
 			);
 
 			$fatal_error = true;
@@ -607,9 +608,9 @@ switch ($config['db_driver'])
 			$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
 
 			echo '<li>' . ($valid_db_version
-				? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
+				? _t('TestDatabaseVersion') . ' ' . output_image($valid_db_version)
 				: Ut::perc_replace(
-					$lang['ErrorDatabaseVersion'],
+					_t('ErrorDatabaseVersion'),
 					'<code>' . $db_version . '</code>',
 					'<code>' . $min_db_version . '</code>') . ' ' .
 					output_image($valid_db_version)
@@ -641,19 +642,19 @@ switch ($config['db_driver'])
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				echo '<h2>' . $lang['DeletingTables'] . '</h2>' . "\n";
+				echo '<h2>' . _t('DeletingTables') . '</h2>' . "\n";
 				echo '<ol>' . "\n";
 
 				foreach ($delete_table as $value)
 				{
 					test_pdo(
-						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
+						Ut::perc_replace(_t('DeletingTable'), '<code>' . $value[0] . '</code>'),
 						$value[1],
-						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>')
+						Ut::perc_replace(_t('ErrorDeletingTable'), '<code>' . $value[0] . '</code>')
 					);
 				}
 
-				echo '<li>' . $lang['DeletingTablesEnd'] . '</li>' . "\n";
+				echo '<li>' . _t('DeletingTablesEnd') . '</li>' . "\n";
 				echo '</ol>' . "\n";
 				echo '<br>' . "\n";
 
@@ -665,15 +666,15 @@ switch ($config['db_driver'])
 				// new installation
 				if ($version == '0')
 				{
-					echo '<h2>' . $lang['InstallTables'] . '</h2>' . "\n";
+					echo '<h2>' . _t('InstallTables') . '</h2>' . "\n";
 					echo '<ol>' . "\n";
 
 					foreach ($create_table as $value)
 					{
 						test_pdo(
-							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+							Ut::perc_replace(_t('CreatingTable'), '<code>' . $value[0] . '</code>'),
 							$value[1],
-							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>')
+							Ut::perc_replace(_t('ErrorCreatingTable'), '<code>' . $value[0] . '</code>')
 						);
 					}
 
@@ -684,10 +685,10 @@ switch ($config['db_driver'])
 						foreach ($create_trigger as $n => $value)
 						{
 							test_pdo(
-								Ut::perc_replace($lang['CreatingTrigger'], '<code>' . $n . '</code>'),
+								Ut::perc_replace(_t('CreatingTrigger'), '<code>' . $n . '</code>'),
 								$value,
-								Ut::perc_replace($lang['ErrorCreatingTrigger'], '<code>' . $n . '</code>')
-								);
+								Ut::perc_replace(_t('ErrorCreatingTrigger'), '<code>' . $n . '</code>')
+							);
 						}
 					}
 
@@ -696,14 +697,14 @@ switch ($config['db_driver'])
 						test_pdo(
 							$value[0],
 							$value[1],
-							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>')
+							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . $value[2] . '</code>')
 						);
 					}
 
 					test_pdo(
-						$lang['InstallLogoImage'],
+						_t('InstallLogoImage'),
 						$insert_logo_image,
-						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
+						Ut::perc_replace(_t('ErrorAlreadyExists'), _t('LogoImage'))
 					);
 
 					echo '</ol>' . "\n";
@@ -719,7 +720,7 @@ switch ($config['db_driver'])
 					{
 						if (version_compare($version, $to_version, '<='))
 						{
-							echo '<h2>Wacko ' . $to_version . ' ' . $lang['To'] . ' ' . WACKO_VERSION . '</h2>' . "\n";
+							echo '<h2>Wacko ' . $to_version . ' ' . _t('To') . ' ' . WACKO_VERSION . '</h2>' . "\n";
 							echo '<ol>' . "\n";
 
 							foreach ($upgrade[$to_version] as $value)
@@ -737,20 +738,20 @@ switch ($config['db_driver'])
 				}
 
 				echo '<br>' . "\n";
-				echo '<h2>' . $lang['InstallDefaultData'] . '</h2>' . "\n";
+				echo '<h2>' . _t('InstallDefaultData') . '</h2>' . "\n";
 				echo '<ul>' . "\n";
 
 				// inserting config values
 				test_pdo(
-					$lang['InstallConfigValues'],
+					_t('InstallConfigValues'),
 					$insert_config,
-					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
+					Ut::perc_replace(_t('ErrorAlreadyExists'), _t('ConfigValues'))
 				);
 
-				echo '<li>' . $lang['InstallPagesBegin'];
+				echo '<li>' . _t('InstallPagesBegin');
 				require_once 'setup/insert_pages.php';
 				echo '</li>' . "\n";
-				echo '<li>' . $lang['InstallPagesEnd'] . '</li>' . "\n";
+				echo '<li>' . _t('InstallPagesEnd') . '</li>' . "\n";
 				echo '</ul>' . "\n";
 			}
 		}
@@ -761,7 +762,7 @@ switch ($config['db_driver'])
 if (!$fatal_error)
 {
 ?>
-<p><?php echo Ut::perc_replace($lang['NextStep'], '<code>' . CONFIG_FILE . '</code>');?></p>
+<p><?php echo Ut::perc_replace(_t('NextStep'), '<code>' . CONFIG_FILE . '</code>');?></p>
 <form action="<?php echo $base_path; ?>?installAction=write-config" method="post">
 <?php
 	// set detected db_vendor
@@ -769,15 +770,15 @@ if (!$fatal_error)
 
 	write_config_hidden_nodes($config_parameters);
 ?>
-	<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
+	<button type="submit" class="next"><?php echo _t('Continue');?></button>
 </form>
 <?php
 }
 else
 {
 ?>
-<button type="submit" class="next" onclick="history.go(-1);"><?php echo $lang['Back'];?></button>
-<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
+<button type="submit" class="next" onclick="history.go(-1);"><?php echo _t('Back');?></button>
+<button type="button" class="next" onClick="window.location.reload( true );"><?php echo _t('TryAgain');?></button>
 <?php
 }
 ?>

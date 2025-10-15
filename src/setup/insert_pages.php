@@ -89,7 +89,7 @@ function insert_pages($insert, $config)
 // then we have a serious problem and should indicate that to the user.
 function insert_page($tag, $title, $body, $lang, $config, $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
 {
-	global $config_global, $dblink_global, $lang_global;
+	global $config_global, $dblink_global;
 
 	$public_pages = [$config['login_page'], $config['password_page']	, $config['registration_page']];
 	$read_rights = in_array($tag, $public_pages) ? '*' : $config['default_read_acl'];
@@ -154,8 +154,8 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 				((" . $q_page_id . "), 'create',		'" . _q($write_rights) . "'),
 				((" . $q_page_id . "), 'upload',		'')";
 
-		$insert_data[]	= [$page_insert,	$lang_global['ErrorInsertPage']];
-		$insert_data[]	= [$perm_insert,	$lang_global['ErrorInsertPagePermission']];
+		$insert_data[]	= [$page_insert,	_t('ErrorInsertPage')];
+		$insert_data[]	= [$perm_insert,	_t('ErrorInsertPagePermission')];
 	}
 
 	$default_menu_item	=
@@ -180,7 +180,7 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 
 	if ($set_menu)
 	{
-		$insert_data[]	= [$default_menu_item,	$lang_global['ErrorInsertDefaultMenuItem']];
+		$insert_data[]	= [$default_menu_item,	_t('ErrorInsertDefaultMenuItem')];
 	}
 
 	switch ($config_global['db_driver'])
@@ -210,7 +210,7 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 			}
 			else if ($critical)
 			{
-				output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+				output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), $tag));
 			}
 
 			break;
@@ -244,7 +244,7 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 			}
 			else if ($critical)
 			{
-				output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+				output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), $tag));
 			}
 
 			break;
@@ -260,7 +260,7 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 
 					if ($critical)
 					{
-						output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+						output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), $tag));
 					}
 				}
 

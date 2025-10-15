@@ -12,7 +12,7 @@ if (array_key_exists('wacko_version', $config))
 
 		echo '<ul class="attention"><li>' .
 			Ut::perc_replace(
-				$lang['PleaseUpgradeToR6'],
+				_t('PleaseUpgradeToR6'),
 				'<code class="version">' . $config['wacko_version'] . '</code>',
 				'<code class="version">' . $min_upgrade_version . '</code>') .
 			"</li></ul>\n";
@@ -25,11 +25,11 @@ if (array_key_exists('wacko_version', $config))
 
 		echo '<p>' .
 			Ut::perc_replace(
-				$lang['UpgradeFromWacko'],
+				_t('UpgradeFromWacko'),
 				'<code class="version">' . $config['wacko_version'] . '</code>',
 				'<code class="version">' . WACKO_VERSION . '</code>') .
 			"</p>\n";
-		echo '<p class="msg warning">' . $lang['PleaseBackup'] . "</p>\n";
+				echo '<p class="msg warning">' . _t('PleaseBackup') . "</p>\n";
 	}
 }
 else
@@ -37,21 +37,21 @@ else
 	$config['is_update'] = '0';
 
 	echo '<p>' . Ut::perc_replace(
-				$lang['FreshInstall'],
+				_t('FreshInstall'),
 				'<code class="version">' . WACKO_VERSION . '</code>') .
 		"</p>\n";
 }
 
 echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_update]">';
 
-echo '<p>' . $lang['LangDesc'] . "</p>\n";
+echo '<p>' . _t('LangDesc') . "</p>\n";
 
 $n = 1;
 
 echo '<br><ul class="checkbox_input column-4">' . "\n";
 
 // available languages
-foreach ($lang['LanguageArray'] as $key => $value)
+foreach (_t('LanguageArray') as $key => $value)
 {
 	echo "\t<li>\n\t\t";
 	echo '<input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';
@@ -73,7 +73,7 @@ echo "\n</ul>\n<br>\n";
 
 if (isset($config['is_update']))
 {
-	echo '<button type="submit" class="next">' . $lang['Continue'] . "</button>\n";
+	echo '<button type="submit" class="next">' . _t('Continue') . "</button>\n";
 }
 ?>
 </form>

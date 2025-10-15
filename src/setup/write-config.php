@@ -66,22 +66,22 @@ $config_file['wacko_version']		= WACKO_VERSION;
 
 // convert config array into PHP code
 $fmt			= new IntlDateFormatter(
-					$lang['LangLocale'],
+					_t('LangLocale'),
 					IntlDateFormatter::FULL,
 					IntlDateFormatter::FULL,
 					null,
 					null,
 					'EEEEEE dd MMM yyyy HH:mm:ss zzz');
 $config_code	= '<?php' . "\n" .
-				'// config.php ' . $lang['WrittenAt'] . $fmt->format(time()) . "\n" .
-				'// ' . $lang['ConfigDescription'] . "\n" .
-				'// ' . $lang['DontChange'] . "\n\n" .
+				'// config.php ' . _t('WrittenAt') . $fmt->format(time()) . "\n" .
+				'// ' . _t('ConfigDescription') . "\n" .
+				'// ' . _t('DontChange') . "\n\n" .
 				array_to_str($config_file);
 
 // try to write configuration file
-echo '<h2>' . $lang['FinalStep'] . '</h2>' . "\n";
+echo '<h2>' . _t('FinalStep') . '</h2>' . "\n";
 echo '<ul>' . "\n";
-echo	'<li>' . $lang['Writing'] . '   ';
+echo	'<li>' . _t('Writing') . '   ';
 
 $perm_changed	= true;
 $file_name		= CONFIG_FILE;
@@ -98,7 +98,7 @@ if (is_writable($file_name))
 
 		echo output_image(true) . '</li>' . "\n";
 
-		echo '<li>' . $lang['RemovingWritePrivilege'] . '   ' . output_image($perm_changed) . '</li>' . "\n";
+		echo '<li>' . _t('RemovingWritePrivilege') . '   ' . output_image($perm_changed) . '</li>' . "\n";
 	}
 	else
 	{
@@ -121,21 +121,21 @@ Ut::purge_directory(CACHE_SQL_DIR);
 Ut::purge_directory(CACHE_CONFIG_DIR);
 Ut::purge_directory(CACHE_TEMPLATE_DIR);
 
-echo '<h2>' . $lang['SecurityConsiderations'] . '</h2>' . "\n";
+echo '<h2>' . _t('SecurityConsiderations') . '</h2>' . "\n";
 echo '<ul class="attention">' . "\n";
 
 if (!$perm_changed)
 {
 	echo
 		'<li>' .
-			Ut::perc_replace($lang['SecurityRisk'],
+			Ut::perc_replace(_t('SecurityRisk'),
 				'<code>' . CONFIG_FILE . '</code>',
 				'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
 		'</li>' . "\n";
 }
 
 echo	'<li>' .
-			Ut::perc_replace($lang['RemoveSetupDirectory'],
+			Ut::perc_replace(_t('RemoveSetupDirectory'),
 				'<code>setup/</code>') .
 		'</li>' . "\n";
 
@@ -143,14 +143,14 @@ if (!$write_file)
 {
 	echo
 		'<li>' .
-			Ut::perc_replace($lang['ErrorGivePrivileges'],
+			Ut::perc_replace(_t('ErrorGivePrivileges'),
 				'<code>' . CONFIG_FILE . '</code>',
 				'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod ' . decoct(CHMOD_FILE) . ' ' . CONFIG_FILE . '</code>',
 				'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
 			(!$config['is_update']
-				? Ut::perc_replace($lang['ErrorPrivilegesInstall'],
+				? Ut::perc_replace(_t('ErrorPrivilegesInstall'),
 					'<code>' . CONFIG_FILE . '</code>')
-				: $lang['ErrorPrivilegesUpgrade']) .
+				: _t('ErrorPrivilegesUpgrade')) .
 		'</li>' . "\n";
 }
 
@@ -160,15 +160,15 @@ echo	'</ul>' . "\n";
 if ($write_file)
 {
 	echo
-		'<h2>' . $lang['InstallationComplete'] . '</h2>' . "\n" .
-		'<p>' . Ut::perc_replace($lang['ThatsAll'], $config['base_url']) . '</p>' . "\n";
+		'<h2>' . _t('InstallationComplete') . '</h2>' . "\n" .
+		'<p>' . Ut::perc_replace(_t('ThatsAll'), $config['base_url']) . '</p>' . "\n";
 }
 else
 {
 	echo
 		'<form action="' . $base_path . '?installAction=write-config" method="post">' . "\n" .
 			write_config_hidden_nodes($config_parameters, false) .
-			'<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n" .
+			'<button type="submit" class="next">' . _t('TryAgain') . '</button>' . "\n" .
 		'</form>' . "\n";
 
 	// show final config only for new installation
