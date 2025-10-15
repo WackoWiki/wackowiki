@@ -51,7 +51,8 @@ class TemplatestEscaper
 	function escapeHtmlAttr($string)
 	{
 		$string = $this->toUtf8($string);
-		if ($string === '' || ctype_digit($string))
+
+		if ($string === '' || ctype_digit((string) $string))
 		{
 			return $string;
 		}

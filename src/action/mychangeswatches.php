@@ -50,6 +50,8 @@ if ($user_id = $this->get_user_id())
 		$selector .
 		'GROUP BY p.tag ', true);
 
+	if (!$count) return;
+
 	$pagination = $this->pagination($count['n'], $max, 'p', $profile);
 
 	$pages = $this->db->load_all(

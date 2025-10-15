@@ -153,6 +153,8 @@ $count = $this->db->load_single(
 	$selector
 	, true);
 
+if (!$count) return;
+
 $pagination = $this->pagination($count['n'], $max, 'p', ($letter !== ''? ['letter' => $letter] : []));
 
 // collect data for index
