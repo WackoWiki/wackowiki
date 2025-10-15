@@ -10,12 +10,20 @@ function insert_pages($insert, $config)
 		if (!$config['is_update'])
 		{
 			$home_page_body		= $insert['home_page_body'] . "\n\n";
-			$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
+			$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n" .
+				'{{tree}}'	. "\n\n";
+			$admin_tools_body	= '' . "\n\n" .
+				'%%(wacko wrapper="shade" wrapper_type="warning")'	. "\n\n" .
+				'{{admincache}}'	. "\n\n" .
+				'{{admin_recovery}}' . "\n\n" .
+				'%%' . "\n\n";
 			$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
+			$admin_tools		= $config['users_page'] . '/' . $config['admin_name'] . '/' . 'Tools';
 
 			$critical_pages = [
 				$config['root_page']		=> [$insert['root_page'],			$home_page_body,		true, false, null, 0],
 				$admin_page					=> [$config['admin_name'],			$admin_page_body,		true, false, null, 0],
+				$admin_tools				=> [$insert['tools_page'],			$admin_tools_body,		true, false, null, 0],
 			];
 		}
 
@@ -34,8 +42,9 @@ function insert_pages($insert, $config)
 			$config['login_page']			=> [$insert['login_page'],			'{{login}}',			false, false],
 			$config['account_page']			=> [$insert['account_page'],		'{{usersettings}}',		false, false],
 
-			$config['changes_page']			=> [$insert['changes_page'],		'{{changes}}',			false, SET_MENU, $insert['changes_page_bm']],
-			$config['comments_page']		=> [$insert['comments_page'],		'{{commented}}',		false, SET_MENU, $insert['comments_page_bm']],
+			$config['changes_page']			=> [$insert['changes_page'],		'{{changes}}',			false, false],
+			$config['comments_page']		=> [$insert['comments_page'],		'{{commented}}',		false, false],
+			$config['whatsnew_page']		=> [$insert['whatsnew_page'],		'{{whatsnew}}',			false, SET_MENU, $insert['whatsnew_page_bm']],
 			$config['index_page']			=> [$insert['index_page'],			'{{pageindex}}',		false, SET_MENU, $insert['index_page_bm']],
 			$config['random_page']			=> [$insert['random_page'],			'{{randompage}}',		false, SET_MENU, $insert['random_page_bm']],
 		];
@@ -44,8 +53,9 @@ function insert_pages($insert, $config)
 	{
 		// set only bookmarks
 		$pages = [
-			$config['changes_page']			=> ['',		'',		false, SET_MENU_ONLY, $insert['changes_page_bm']],
-			$config['comments_page']		=> ['',		'',		false, SET_MENU_ONLY, $insert['comments_page_bm']],
+			# $config['changes_page']		=> ['',		'',		false, SET_MENU_ONLY, $insert['changes_page_bm']],
+			# $config['comments_page']		=> ['',		'',		false, SET_MENU_ONLY, $insert['comments_page_bm']],
+			$config['whatsnew_page']		=> ['',		'',		false, SET_MENU_ONLY, $insert['whatsnew_page_bm']],
 			$config['index_page']			=> ['',		'',		false, SET_MENU_ONLY, $insert['index_page_bm']],
 			$config['random_page']			=> ['',		'',		false, SET_MENU_ONLY, $insert['random_page_bm']],
 		];
@@ -91,9 +101,25 @@ function insert_page($tag, $title, $body, $lang, $config, $critical = false, $se
 {
 	global $config_global, $dblink_global;
 
-	$public_pages = [$config['login_page'], $config['password_page']	, $config['registration_page']];
-	$read_rights = in_array($tag, $public_pages) ? '*' : $config['default_read_acl'];
-	$write_rights = 'Admins';
+	$public_pages	= [
+		$config['login_page'],
+		$config['password_page'],
+		$config['registration_page']
+	];
+
+	$admin_pages	= [
+		$config['users_page'] . '/' . $config['admin_name'] . '/' . 'Tools'
+	];
+
+	// set rights
+	$read_rights	= match (true)
+	{
+		in_array($tag, $public_pages)	=> '*',
+		in_array($tag, $admin_pages)	=> 'Admins',
+		default							=> $config['default_read_acl']
+	};
+
+	$write_rights	= 'Admins';
 
 	sanitize_page_tag($tag);
 

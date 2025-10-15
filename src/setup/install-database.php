@@ -246,7 +246,7 @@ switch ($config['db_driver'])
 					test_mysqli(
 						_t('InstallLogoImage'),
 						$insert_logo_image,
-							Ut::perc_replace(_t('ErrorAlreadyExists'), _t('LogoImage'))
+						Ut::perc_replace(_t('ErrorAlreadyExists'), _t('LogoImage'))
 					);
 
 					echo '</ol>' . "\n";
