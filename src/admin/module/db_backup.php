@@ -276,7 +276,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 			}
 ?>
 				<tr><td colspan="3"><br></td></tr>
-				</tr>
+				<tr>
 					<th class="label"><label for="log_note"><?php echo $engine->_t('BackupNote'); ?></label></th>
 					<td colspan="3">
 						<input type="text" id="log_note" name="log_note" maxlength="200" value="" size="30">
