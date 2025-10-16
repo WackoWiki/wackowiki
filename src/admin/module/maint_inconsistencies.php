@@ -769,12 +769,12 @@ function admin_maint_inconsistencies($engine, $module)
 				$fs_files['global'][] = $file;
 			}
 
-			if (!empty($fs_files['local']))
+			if (!empty($fs_files['local']) && !empty($db_files['local']))
 			{
 				$abandoned['local'] = array_diff($fs_files['local'], $db_files['local']);
 			}
 
-			if (!empty($fs_files['global']))
+			if (!empty($fs_files['global']) && !empty($db_files['global']))
 			{
 				$abandoned['global'] = array_diff($fs_files['global'], $db_files['global']);
 			}

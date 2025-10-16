@@ -26,6 +26,9 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 	<?php echo $engine->_t('DbStatSection');?>
 	<br>
 	<br>
+	<?php if (!$engine->db->sqlite)
+	{
+	?>
 	<table class="db-stats formation lined">
 		<tr>
 			<th><?php echo $engine->_t('DbTable');?></th>
@@ -82,8 +85,11 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 		'</tr>' . "\n";
 	?>
 	</table>
+	<?php
+	}
+	?>
 	<br>
-	<?php echo $engine->_t('FileStatSection');?>:
+	<?php echo $engine->_t('FileStatSection');?>
 	<br>
 	<br>
 	<table class="file-stats formation lined">

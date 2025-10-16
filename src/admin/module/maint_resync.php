@@ -253,8 +253,12 @@ function admin_maint_resync($engine, $module)
 				$engine->sess->resync_links			= '';
 				$engine->sess->resync_counter		= 0;
 
-				$engine->db->sql_query('TRUNCATE ' . $prefix . 'page_link');
-				$engine->db->sql_query('TRUNCATE ' . $prefix . 'file_link');
+				$sql_truncate = ($engine->db->sqlite
+					? 'DELETE FROM '
+					: 'TRUNCATE ');
+
+				$engine->db->sql_query($sql_truncate . $prefix . 'page_link');
+				$engine->db->sql_query($sql_truncate . $prefix . 'file_link');
 
 				// purge body_r and body_toc field to enforce page re-compiling
 				if ($recompile)
@@ -275,7 +279,7 @@ function admin_maint_resync($engine, $module)
 				'b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml, b.typografica AS parent_typografica ' .
 			'FROM ' . $prefix . 'page a ' .
 				'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) ' .
-			'ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci ' .
+				'ORDER BY a.tag COLLATE ' . $engine->db->collate() . ' ' .
 			'LIMIT ' . ($i * $limit) . ", $limit"))
 			{
 				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . ($i + 1) . " #########################################\n\n";
