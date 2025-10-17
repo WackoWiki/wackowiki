@@ -351,22 +351,28 @@ function admin_user_users($engine, $module)
 						'LIMIT 1');
 
 					$engine->db->sql_query(
-						'DELETE FROM ' . $prefix . 'user ' .
+						'DELETE ' .
+						'FROM ' . $prefix . 'user ' .
 						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						'DELETE FROM ' . $prefix . 'user_setting ' .
+						'DELETE ' .
+						'FROM ' . $prefix . 'user_setting ' .
 						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						'DELETE FROM ' . $prefix . 'usergroup_member ' .
+						'DELETE ' .
+						'FROM ' . $prefix . 'usergroup_member ' .
 						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						'DELETE FROM ' . $prefix . 'menu ' .
+						'DELETE ' .
+						'FROM ' . $prefix . 'menu ' .
 						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						'DELETE FROM ' . $prefix . 'watch ' .
+						'DELETE ' .
+						'FROM ' . $prefix . 'watch ' .
 						'WHERE user_id = ' . (int) $user_id);
 					$engine->db->sql_query(
-						'DELETE FROM ' . $prefix . 'auth_token ' .
+						'DELETE ' .
+						'FROM ' . $prefix . 'auth_token ' .
 						'WHERE user_id = ' . (int) $user_id);
 
 					// remove user space
@@ -383,7 +389,8 @@ function admin_user_users($engine, $module)
 					$engine->remove_revisions				($user_space, true);
 
 					$engine->db->sql_query(
-						'DELETE FROM ' . $prefix . 'page ' .
+						'DELETE ' .
+						'FROM ' . $prefix . 'page ' .
 						'WHERE tag = ' . $engine->db->q($user_space) . ' ' .
 							'OR tag LIKE ' . $engine->db->q($user_space . '/%') . ' ' .
 							#"AND owner_id = " . (int) $user_id . " " .

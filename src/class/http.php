@@ -147,7 +147,8 @@ class Http
 				}
 
 				$this->db->sql_query(
-					'DELETE FROM ' . $this->db->table_prefix . 'cache ' .
+					'DELETE ' .
+					'FROM ' . $this->db->table_prefix . 'cache ' .
 					'WHERE hash = ' . $this->db->q($hash));
 			}
 		}

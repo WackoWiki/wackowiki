@@ -7177,7 +7177,8 @@ class Wacko
 	function clear_watch($user_id, $page_id)
 	{
 		return $this->db->sql_query(
-			'DELETE FROM ' . $this->prefix . 'watch ' .
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'watch ' .
 			'WHERE user_id		= ' . (int) $user_id . ' ' .
 				'AND page_id	= ' . (int) $page_id);
 	}
@@ -7416,7 +7417,8 @@ class Wacko
 			}
 
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'menu ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'menu ' .
 				'WHERE user_id = ' . (int) $user['user_id'] . ' ' .
 					'AND page_id = ' . (int) $this->page['page_id']);
 
@@ -7539,7 +7541,8 @@ class Wacko
 				&& $now > $this->db->maint_last_refs)
 		{
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'referrer ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'referrer ' .
 				'WHERE referrer_time < ' . $this->db->date_sub($days, 'days'));
 
 			$update['maint_last_refs'] = $now + 1 * DAYSECS;
@@ -7551,7 +7554,8 @@ class Wacko
 				&& $now > $this->db->maint_last_oldpages)
 		{
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'revision ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'revision ' .
 				'WHERE modified < ' . $this->db->date_sub($days, 'days'));
 
 			$update['maint_last_oldpages'] = $now + 7 * DAYSECS;
@@ -7589,7 +7593,8 @@ class Wacko
 			&& $now > $this->db->maint_last_log)
 		{
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'log ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'log ' .
 				'WHERE log_time < ' . $this->db->date_sub($days, 'days'));
 
 			$update['maint_last_log'] = $now + 3 * DAYSECS;
@@ -7605,7 +7610,8 @@ class Wacko
 			{
 				// clear from db
 				$this->db->sql_query(
-					'DELETE FROM ' . $this->prefix . 'cache ' .
+					'DELETE ' .
+					'FROM ' . $this->prefix . 'cache ' .
 					'WHERE cache_time < ' . $this->db->date_sub($ttl, 'seconds'));
 
 				if (Ut::purge_directory(CACHE_PAGE_DIR, $ttl))
@@ -7630,7 +7636,8 @@ class Wacko
 		if ($now > $this->db->maint_last_session)
 		{
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'auth_token ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'auth_token ' .
 				'WHERE token_expires < ' . $this->db->utc_dt());
 
 			$update['maint_last_session'] = $now + 3 * DAYSECS;
@@ -8228,14 +8235,18 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			'DELETE a.* ' .
-			'FROM ' . $this->prefix . 'acl a ' .
-				'LEFT JOIN ' . $this->prefix . 'page p ' .
-					'ON (a.page_id = p.page_id) ' .
-			'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
-				($cluster === true
-					? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-					: '') );
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'acl ' .
+			'WHERE page_id IN (' .
+				'SELECT a.page_id ' .
+				'FROM acl a ' .
+					'LEFT JOIN page p ' .
+						'ON (a.page_id = p.page_id) ' .
+				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
+					($cluster === true
+						? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+						: '') .
+			')');
 
 		return true;
 	}
@@ -8245,7 +8256,8 @@ class Wacko
 		if ($dontkeep)
 		{
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'acl ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'acl ' .
 				'WHERE page_id IN (' . $this->ids_string($page_ids) . ')');
 		}
 	}
@@ -8261,11 +8273,13 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			'DELETE FROM ' . $this->prefix . 'page ' .
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'page ' .
 			'WHERE page_id IN (' . $this->ids_string($page_ids) . ')');
 
 		$this->db->sql_query(
-			'DELETE FROM ' . $this->prefix . 'revision ' .
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'revision ' .
 			'WHERE page_id IN (' . $this->ids_string($page_ids) . ')');
 	}
 
@@ -8328,7 +8342,8 @@ class Wacko
 		else
 		{
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'revision ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'revision ' .
 				'WHERE page_id = ' . (int) $page_id . ' ' .
 					'AND revision_id = ' . (int) $revision_id . ' ' .
 				'LIMIT 1');
@@ -8357,7 +8372,8 @@ class Wacko
 		else
 		{
 			$this->db->sql_query(
-				'DELETE FROM ' . $this->prefix . 'revision ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'revision ' .
 				'WHERE tag = ' . $this->db->q($tag) . ' ' .
 					($cluster
 						? 'OR tag LIKE ' . $this->db->q($tag . '/%') . ' '
@@ -8414,14 +8430,16 @@ class Wacko
 		}
 
 		return $this->db->sql_query(
-			'DELETE b.* ' .
-			'FROM ' . $this->prefix . 'menu b ' .
-				'LEFT JOIN ' . $this->prefix . 'page p ' .
-					'ON (b.page_id = p.page_id) ' .
-			'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'menu ' .
+			'WHERE page_id IN (' .
+				'SELECT page_id ' .
+				'FROM page ' .
+				'WHERE tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
-					? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-					: '') );
+					? 'OR tag LIKE ' . $this->db->q($tag . '/%') . ' '
+					: '') .
+			')');
 	}
 
 	function remove_watches($tag, $cluster = false)
@@ -8432,14 +8450,18 @@ class Wacko
 		}
 
 		return $this->db->sql_query(
-			'DELETE w.* ' .
-			'FROM ' . $this->prefix . 'watch w ' .
-				'LEFT JOIN ' . $this->prefix . 'page p ' .
-					'ON (w.page_id = p.page_id) ' .
-			'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
-				($cluster === true
-					? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-					: '') );
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'watch ' .
+			'WHERE page_id IN (' .
+				'SELECT w.page_id ' .
+				'FROM watch w ' .
+					'LEFT JOIN page p ' .
+						'ON (w.page_id = p.page_id) ' .
+				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
+					($cluster === true
+						? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+						: '') .
+			')');
 	}
 
 	// removes all associated page links
@@ -8452,28 +8474,36 @@ class Wacko
 
 		// external links
 		$this->db->sql_query(
-			'DELETE l.* ' .
-			'FROM ' . $this->prefix . 'external_link l ' .
-				'LEFT JOIN ' . $this->prefix . 'page p ' .
-					'ON (l.page_id = p.page_id) ' .
-			'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'external_link ' .
+			'WHERE page_id IN (' .
+				'SELECT l.page_id ' .
+				'FROM external_link l ' .
+					'LEFT JOIN page p ' .
+						'ON l.page_id = p.page_id  ' .
+				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
 					? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-					: '') );
+					: '') .
+			')');
 
 		// file links
 		$this->remove_file_link(null, $tag, $cluster);
 
 		// internal links
 		$this->db->sql_query(
-			'DELETE l.* ' .
-			'FROM ' . $this->prefix . 'page_link l ' .
-				'LEFT JOIN ' . $this->prefix . 'page p ' .
-					'ON (l.from_page_id = p.page_id) ' .
-			'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'page_link ' .
+			'WHERE from_page_id IN (' .
+				'SELECT l.from_page_id ' .
+				'FROM page_link l ' .
+					'LEFT JOIN page p ' .
+						'ON l.from_page_id = p.page_id ' .
+				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
 					? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-					: '') );
+					: '') .
+			')');
 	}
 
 	function remove_file_link($file_id = null, $tag = null, $cluster = false)
@@ -8481,21 +8511,25 @@ class Wacko
 		if ($tag)
 		{
 			return $this->db->sql_query(
-				'DELETE l.* ' .
-				'FROM ' . $this->prefix . 'file_link l ' .
-					'LEFT JOIN ' . $this->prefix . 'page p ' .
-						'ON (l.page_id = p.page_id) ' .
-				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'file_link ' .
+				'WHERE page_id IN (' .
+					'SELECT l.page_id ' .
+					'FROM file_link l ' .
+						'LEFT JOIN page p ' .
+							'ON l.page_id = p.page_id ' .
+					'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 					($cluster === true
 						? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-						: '') );
+						: '') .
+				')');
 		}
 		else if ($file_id)
 		{
 			return $this->db->sql_query(
-				'DELETE l.* ' .
-				'FROM ' . $this->prefix . 'file_link l ' .
-				'WHERE l.file_id = ' . (int) $file_id . ' ');
+				'DELETE ' .
+				'FROM ' . $this->prefix . 'file_link ' .
+				'WHERE file_id = ' . (int) $file_id . ' ');
 		}
 		else
 		{
@@ -8511,15 +8545,19 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			'DELETE k.* ' .
-			'FROM ' . $this->prefix . 'category_assignment k ' .
-				'LEFT JOIN ' . $this->prefix . 'page p ' .
-					'ON (k.object_id = p.page_id) ' .
-			'WHERE (p.tag = ' . $this->db->q($tag) . ' ' .
-				($cluster === true
-					? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-					: '') . ') ' .
-				'AND k.object_type_id = 1');
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'category_assignment ' .
+			'WHERE object_id IN (' .
+				'SELECT k.object_id ' .
+				'FROM category_assignment k ' .
+					'LEFT JOIN page p ' .
+						'ON (k.object_id = p.page_id) ' .
+				'WHERE (p.tag = ' . $this->db->q($tag) . ' ' .
+					($cluster === true
+						? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+						: '') . ') ' .
+					'AND k.object_type_id = 1' .
+			')');
 
 		return true;
 	}
@@ -8532,10 +8570,10 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			'DELETE k.* ' .
-			'FROM ' . $this->prefix . 'category_assignment k ' .
-			'WHERE k.object_id = ' . (int) $object_id . ' ' .
-				'AND k.object_type_id = ' . (int) $type_id);
+			'DELETE ' .
+			'FROM ' . $this->prefix . 'category_assignment ' .
+			'WHERE object_id = ' . (int) $object_id . ' ' .
+				'AND object_type_id = ' . (int) $type_id);
 
 		return true;
 	}
@@ -8549,13 +8587,17 @@ class Wacko
 
 		return $this->db->sql_query(
 			'DELETE ' .
-				'r.* ' .
-			'FROM ' . $this->prefix . 'referrer r ' .
-				'INNER JOIN ' . $this->prefix . 'page p ON (r.page_id = p.page_id) ' .
-			'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
+			'FROM ' . $this->prefix . 'referrer ' .
+			'WHERE page_id IN (' .
+				'SELECT r.page_id ' .
+				'FROM referrer r ' .
+					'INNER JOIN page p ' .
+						'ON r.page_id = p.page_id ' .
+				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
 					? 'OR p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-					: '') );
+					: '') .
+			')');
 	}
 
 	// removes all files attached to a page

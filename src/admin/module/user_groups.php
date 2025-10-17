@@ -105,7 +105,8 @@ function admin_user_groups($engine, $module)
 			else if ($action == 'remove_group_member' && $member['user_id'] && $p_group_id)
 			{
 				$engine->db->sql_query(
-					'DELETE FROM ' . $prefix . 'usergroup_member ' .
+					'DELETE ' .
+					'FROM ' . $prefix . 'usergroup_member ' .
 					'WHERE group_id = ' . (int) $p_group_id . ' ' .
 						'AND user_id = ' . (int) $member['user_id']);
 
@@ -297,11 +298,13 @@ function admin_user_groups($engine, $module)
 				LIMIT 1');
 
 			$engine->db->sql_query(
-				'DELETE FROM ' . $prefix . 'usergroup ' .
+				'DELETE ' .
+				'FROM ' . $prefix . 'usergroup ' .
 				'WHERE group_id = ' . (int) $usergroup['group_id']) . ' ' .
 					'AND is_system <> 1';
 			$engine->db->sql_query(
-				'DELETE FROM ' . $prefix . 'usergroup_member ' .
+				'DELETE ' .
+				'FROM ' . $prefix . 'usergroup_member ' .
 				'WHERE group_id = ' . (int) $usergroup['group_id']) . ' ' .
 					'AND is_system <> 1';
 

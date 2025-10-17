@@ -196,11 +196,13 @@ if (   $this->is_owner()
 			else if ($action == 'remove_category' && $category_id)
 			{
 				$this->db->sql_query(
-					'DELETE FROM ' . $prefix . 'category ' .
+					'DELETE ' .
+					'FROM ' . $prefix . 'category ' .
 					'WHERE category_id = ' . (int) $category_id);
 
 				$this->db->sql_query(
-					'DELETE FROM ' . $prefix . 'category_assignment ' .
+					'DELETE ' .
+					'FROM ' . $prefix . 'category_assignment ' .
 					'WHERE category_id = ' . (int) $category_id);
 
 				$this->db->sql_query(
