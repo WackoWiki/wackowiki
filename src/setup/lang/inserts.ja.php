@@ -9,6 +9,7 @@ $insert = [
 			'ドキュメントは WackoWiki:Doc/Englishにあります。' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/検索 検索)).' . "\n\n",
 	'root_page'			=> 'ホームページ',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'カテゴリー',
 	'groups_page'		=> 'グループ',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> 'ログイン',
 	'account_page'		=> '設定',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> '最近の変化',
 	'comments_page'		=> '最近コメント',
 	'index_page'		=> 'ページインデックス',
 	'random_page'		=> 'ランダムページ',
 
+	'whatsnew_page_bm'	=> '変化',
 	'changes_page_bm'	=> '変化',
 	'comments_page_bm'	=> 'コメント',
 	'index_page_bm'		=> 'インデックス',

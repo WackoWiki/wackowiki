@@ -9,6 +9,7 @@ $insert = [
 			'Dokumentasjon finnes på WackoWiki:Doc/English.' . "\n" .
 			'Nyttige sider: ((WackoWiki:Doc/English/Formatting Formatering)), ((/Søk Søk)).' . "\n\n",
 	'root_page'			=> 'Hjemme Side',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Grupper',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> 'Innlogging',
 	'account_page'		=> 'Innstillinger',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> 'Nylige endringer',
 	'comments_page'		=> 'Nylig kommentert',
 	'index_page'		=> 'Side indeks',
 	'random_page'		=> 'Tilfeldig side',
 
+	'whatsnew_page_bm'	=> 'Endringer',
 	'changes_page_bm'	=> 'Endringer',
 	'comments_page_bm'	=> 'Kommentarer',
 	'index_page_bm'		=> 'Indeks',

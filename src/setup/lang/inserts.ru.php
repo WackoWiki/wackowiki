@@ -9,6 +9,7 @@ $insert = [
 			'Документация по WackoWiki доступна на WackoWiki:Doc/Русский.' . "\n" .
 			'Полезные страницы: ((WackoWiki:Doc/Русский/WackoСинтаксис Форматирование)), ((/Поиск Поиск)).',
 	'root_page'			=> 'Стартовая страница',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'Категории',
 	'groups_page'		=> 'Группы',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> 'Вход',
 	'account_page'		=> 'Настройки',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> 'Изменения',
 	'comments_page'		=> 'Новые Комментарии',
 	'index_page'		=> 'Каталог',
 	'random_page'		=> 'Случайная страница',
 
+	'whatsnew_page_bm'	=> 'Изменения',
 	'changes_page_bm'	=> 'Изменения',
 	'comments_page_bm'	=> 'Комментарии',
 	'index_page_bm'		=> 'Каталог',

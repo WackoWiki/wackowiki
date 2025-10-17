@@ -9,6 +9,7 @@ $insert = [
 			'Documentatie is te vinden op WackoWiki:Doc/English.' . "\n" .
 			'Handige pagina\'s: ((WackoWiki:Doc/English/Formatting formatteren)), ((/Search Search)).' . "\n\n",
 	'root_page'			=> 'Startpagina',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'Categorie',
 	'groups_page'		=> 'Groepen',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> 'Inloggen',
 	'account_page'		=> 'Instellingen',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> 'Laatste Wijzigingen',
 	'comments_page'		=> 'Laatste Opmerkingen',
 	'index_page'		=> 'Pagina Index',
 	'random_page'		=> 'Willekeurige pagina',
 
+	'whatsnew_page_bm'	=> 'Wijzigingen',
 	'changes_page_bm'	=> 'Wijzigingen',
 	'comments_page_bm'	=> 'Opmerkingen',
 	'index_page_bm'		=> 'Indexeren',

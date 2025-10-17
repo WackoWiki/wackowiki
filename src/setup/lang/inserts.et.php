@@ -9,6 +9,7 @@ $insert = [
 			'Dokumentatsioon on kättesaadav aadressil WackoWiki:Doc/English.' . "\n" .
 			'Kasulikud leheküljed: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Otsing Otsing)).' . "\n\n",
 	'root_page'			=> 'Koduleht',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'Kategooria',
 	'groups_page'		=> 'Grupid',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> 'Logi sisse',
 	'account_page'		=> 'Seadistused',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> 'Viimased Muudatused',
 	'comments_page'		=> 'Viimati Kommenteeritud',
 	'index_page'		=> 'Sisu Kord',
 	'random_page'		=> 'Juhuslik lehekülg',
 
+	'whatsnew_page_bm'	=> 'Muudatused',
 	'changes_page_bm'	=> 'Muudatused',
 	'comments_page_bm'	=> 'Kommenteeritud',
 	'index_page_bm'		=> 'Indeks',

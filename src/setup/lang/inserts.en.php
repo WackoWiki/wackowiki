@@ -31,7 +31,7 @@ $insert = [
 	'index_page'		=> 'Page Index',
 	'random_page'		=> 'Random Page',
 
-	'whatsnew_page_bm'	=> 'Updates',
+	'whatsnew_page_bm'	=> 'Changes',
 	'changes_page_bm'	=> 'Changes',
 	'comments_page_bm'	=> 'Comments',
 	'index_page_bm'		=> 'Index',

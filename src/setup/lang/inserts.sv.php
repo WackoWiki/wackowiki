@@ -9,6 +9,7 @@ $insert = [
 			'Dokumentation finns på WackoWiki:Doc/English.' . "\n" .
 			'Användbara sidor: ((WackoWiki:Doc/English/Formatting Formating)), ((/Sök Sök)).' . "\n\n",
 	'root_page'			=> 'Startsida',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Grupper',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> 'Inloggning',
 	'account_page'		=> 'Inställningar',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> 'Senaste ändringarna',
 	'comments_page'		=> 'Nyligen kommenterade',
 	'index_page'		=> 'Sidans index',
 	'random_page'		=> 'Slumpmässig sida',
 
+	'whatsnew_page_bm'	=> 'Ändringar',
 	'changes_page_bm'	=> 'Ändringar',
 	'comments_page_bm'	=> 'Kommentarer',
 	'index_page_bm'		=> 'Index',

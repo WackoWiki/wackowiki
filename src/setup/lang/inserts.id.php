@@ -9,6 +9,7 @@ $insert = [
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Search Search)).' . "\n\n",
 	'root_page'			=> 'Halaman Beranda',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Kelompok',
@@ -16,21 +17,23 @@ $insert = [
 
 	'help_page'			=> 'Bantuan',
 	'terms_page'		=> 'Ketentuan Penggunaan',
-	'privacy_page'		=> 'Privacy policy',
+	'privacy_page'		=> 'Kebijakan privasi',
 
 	'registration_page'	=> 'Registrasi',
 	'password_page'		=> 'Kata sandi',
 	'search_page'		=> 'Cari',
 	'login_page'		=> 'Log masuk',
-	'account_page'		=> 'Settings',
+	'account_page'		=> 'Pengaturan',
 
-	'changes_page'		=> 'Recent Changes',
+	'whatsnew_page'		=> 'Whats New',
+	'changes_page'		=> 'Perubahan terbaru',
 	'comments_page'		=> 'Recently Commented',
 	'index_page'		=> 'Page Index',
-	'random_page'		=> 'Random Page',
+	'random_page'		=> 'Halaman sembarang',
 
-	'changes_page_bm'	=> 'Changes',
+	'whatsnew_page_bm'	=> 'Perubahan',
+	'changes_page_bm'	=> 'Perubahan',
 	'comments_page_bm'	=> 'Komentar',
-	'index_page_bm'		=> 'Index',
+	'index_page_bm'		=> 'Indeks',
 	'random_page_bm'	=> 'Random',
 ];

@@ -9,6 +9,7 @@ $insert = [
 			'文件可在以下网址找到 WackoWiki:Doc/简体中文。' . "\n" .
 			'有用的页面：((WackoWiki:Doc/简体中文/格式化 格式化)), ((/搜索 搜索))。',
 	'root_page'			=> '首页',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> '分类',
 	'groups_page'		=> '用户组',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> '登录',
 	'account_page'		=> '帐户设置',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> '最近更改',
 	'comments_page'		=> '最近评论',
 	'index_page'		=> '页面索引',
 	'random_page'		=> '随机页面',
 
+	'whatsnew_page_bm'	=> '更改',
 	'changes_page_bm'	=> '更改',
 	'comments_page_bm'	=> '评论',
 	'index_page_bm'		=> '索引',

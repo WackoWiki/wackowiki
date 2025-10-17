@@ -9,6 +9,7 @@ $insert = [
 			'A dokumentáció a következő címen található WackoWiki:Doc/English.' . "\n" .
 			'Hasznos oldalak: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Keresés Keresés)).' . "\n\n",
 	'root_page'			=> 'Kezdőlap',
+	'tools_page'		=> 'Admin tools',
 
 	'category_page'		=> 'Kategória',
 	'groups_page'		=> 'Csoportok',
@@ -24,11 +25,13 @@ $insert = [
 	'login_page'		=> 'Bejelentkezés',
 	'account_page'		=> 'Beállítások',
 
+	'whatsnew_page'		=> 'Whats New',
 	'changes_page'		=> 'Friss változtatások',
 	'comments_page'		=> 'Utolsó megjegyzések',
 	'index_page'		=> 'Oldal Index',
 	'random_page'		=> 'Lap találomra',
 
+	'whatsnew_page_bm'	=> 'Változtatások',
 	'changes_page_bm'	=> 'Változtatások',
 	'comments_page_bm'	=> 'Megjegyzések',
 	'index_page_bm'		=> 'Index',
