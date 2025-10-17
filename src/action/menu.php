@@ -93,14 +93,14 @@ if (isset($_POST['_user_menu']))
 		$b[$k]['tag']			= $v['tag'];
 	}
 
-	$this->data['user_menu'] = & $b;
+	$data_menu = & $b;
 
 	if (isset($_POST['update_menu']))
 	{
 		// reposition
 		$data = [];
 
-		foreach ($this->data['user_menu'] as $k => $item)
+		foreach ($data_menu as $k => $item)
 		{
 			$data[] = [
 				'menu_id'		=> $item['menu_id'],
@@ -217,7 +217,7 @@ if (isset($_POST['_user_menu']))
 	{
 		$menu_ids = [];
 
-		foreach ($this->data['user_menu'] as $item)
+		foreach ($data_menu as $item)
 		{
 			if (isset($_POST['delete_' . $item['menu_id']]))
 			{

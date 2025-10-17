@@ -48,17 +48,18 @@
 			</table>
 		</form>
 	=]
-	[= default _ =
-		<form action="[ ' href: ' ]" method="post" name="add_bookmark">
-			[ ' csrf: add_bookmark ' ]
-			<input type="hidden" name="_user_menu" value="yes">
-			<input type="hidden" name="menu_lang" value="[ ' menulang ' ]">
-			<br><br>
-			<label for="add_menu_item">[ ' _t: BookmarksAddPage ' ]</label><br>
-			<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255">
+	<form action="[ ' href: ' ]" method="post" name="add_bookmark">
+		[ ' csrf: add_bookmark ' ]
+		<input type="hidden" name="_user_menu" value="yes">
+		
+		<br><br>
+		<label for="add_menu_item">[ ' _t: BookmarksAddPage ' ]</label><br>
+		<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255">
+		[= default _ =
 			[= lang _ =
 				[ ' select ' ]
 			=]
-			<button type="submit" name="add_menu_item">[ ' _t: CreateButton ' ]</button>
-		</form>
-	=]
+			<input type="hidden" name="menu_lang" value="[ ' menulang ' ]">
+		=]
+		<button type="submit" name="add_menu_item">[ ' _t: CreateButton ' ]</button>
+	</form>
