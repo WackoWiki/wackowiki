@@ -36,7 +36,8 @@ write_config_hidden_nodes($config_parameters);
 		if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
 			$_db_version		= $db->load_single('SELECT sqlite_version() AS version');
-			$db_version			= 'SQLite ' . $_db_version['version'];
+			$db_version			= $_db_version['version'];
+			$db_name			= 'SQLite';
 			$min_db_version		= DB_MIN_VERSION['sqlite'];
 		}
 		else
@@ -47,7 +48,8 @@ write_config_hidden_nodes($config_parameters);
 			$db_version			= (preg_match('/MariaDB/', $db_version, $matches)
 										? 'MariaDB '
 										: 'MySQL '
-									) . explode('-', $db_version, 2)[0];
+									);
+			$db_name			= explode('-', $db_version, 2)[0];
 			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 									? DB_MIN_VERSION['mariadb']
 									: DB_MIN_VERSION['mysql'];
@@ -103,7 +105,7 @@ write_config_hidden_nodes($config_parameters);
 	<?php
 	if ($config['is_update'])
 	{
-		echo '<li>Version: ' . $db_version . '   ' . output_image($valid_db_version) . "<br><br></li>\n";
+		echo '<li>Version: ' . $db_name . ' ' . $db_version . '   ' . output_image($valid_db_version) . "<br><br></li>\n";
 	}
 	?>
 
