@@ -14,10 +14,11 @@ if (array_key_exists('wacko_version', $config))
 			Ut::perc_replace(
 				_t('PleaseUpgradeToR6'),
 				'<code class="version">' . $config['wacko_version'] . '</code>',
-				'<code class="version">' . $min_upgrade_version . '</code>') .
+				'<code class="version">' . $min_upgrade_version . '</code>') . '</br></br>' .
+				$config['wacko_version'] . ' → ' . $min_upgrade_version . '</br>' .
+				$min_upgrade_version . ' → ' . WACKO_VERSION . '</br></br>' .
+				'<a href="https://wackowiki.org/doc/Dev/Release/R6.2/Upgrade">Upgrade notices for WackoWiki 6.2</a>' .
 			"</li></ul>\n";
-		// https://sourceforge.net/projects/wackowiki/files/
-		// https://wackowiki.org/doc/Dev/Release/R6.1/Upgrade
 	}
 	else
 	{

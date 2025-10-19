@@ -73,7 +73,10 @@ if ($config['is_update'])
 {
 	if (version_compare($config['wacko_version'], '6.2.0', '<'))
 	{
-		$config['mysqli']				= $config['mysqli_legacy'];
+		if ($config['db_driver'] == 'mysqli_legacy')
+		{
+			$config['db_driver'] = 'mysqli';
+		}
 	}
 }
 

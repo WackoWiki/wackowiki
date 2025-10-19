@@ -159,6 +159,7 @@ $wacko_config_defaults = [
 	'sandbox'						=> '',
 	'comments_page'					=> '',
 	'changes_page'					=> '',
+	'whatsnew_page'					=> '',
 	'index_page'					=> 'Index',
 	'random_page'					=> 'Random',
 	'removals_page'					=> '',

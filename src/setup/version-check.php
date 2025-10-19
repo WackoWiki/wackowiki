@@ -35,24 +35,21 @@ write_config_hidden_nodes($config_parameters);
 	{
 		if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
-			$_db_version		= $db->load_single('SELECT sqlite_version() AS version');
-			$db_version			= $_db_version['version'];
-			$db_name			= 'SQLite';
+			$db_version		= $db->load_single('SELECT sqlite_version() AS version')['version'];
+			$db_type			= 'SQLite';
 			$min_db_version		= DB_MIN_VERSION['sqlite'];
 		}
 		else
 		{
 			// get MariaDB / mysql version
-			$_db_version		= $db->load_single('SELECT version() AS version');
-			$db_version			= $_db_version['version'];
-			$db_version			= (preg_match('/MariaDB/', $db_version, $matches)
-										? 'MariaDB '
-										: 'MySQL '
-									);
-			$db_name			= explode('-', $db_version, 2)[0];
-			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
-									? DB_MIN_VERSION['mariadb']
-									: DB_MIN_VERSION['mysql'];
+			$_db_version		= $db->load_single('SELECT version() AS version')['version'];
+			$db_version			= explode('-', $_db_version, 2)[0];
+			$db_type			= (preg_match('/MariaDB/', $_db_version, $matches)
+				? 'MariaDB '
+				: 'MySQL ');
+			$min_db_version		= $db_type == 'MariaDB'
+				? DB_MIN_VERSION['mariadb']
+				: DB_MIN_VERSION['mysql'];
 		}
 
 		$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
@@ -105,7 +102,7 @@ write_config_hidden_nodes($config_parameters);
 	<?php
 	if ($config['is_update'])
 	{
-		echo '<li>Version: ' . $db_name . ' ' . $db_version . '   ' . output_image($valid_db_version) . "<br><br></li>\n";
+		echo '<li>Version: ' . $db_type . ' ' . $db_version . '   ' . output_image($valid_db_version) . "<br><br></li>\n";
 	}
 	?>
 
