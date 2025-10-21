@@ -77,7 +77,8 @@ p {
 	color: #000;
 }
 
-code {
+code,
+pre {
 	font-size: 0.875rem;
 }
 
