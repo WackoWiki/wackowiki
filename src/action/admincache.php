@@ -34,8 +34,12 @@ if ($this->is_admin())
 
 		if (isset($_POST['pages_cache']) && ($n = Ut::purge_directory(CACHE_PAGE_DIR)))
 		{
+			$sql_truncate = ($engine->db->sqlite
+				? 'DELETE FROM '
+				: 'TRUNCATE ');
+
 			// empties cache table and reset AUTO_INCREMENT value to its start value
-			$this->db->sql_query('TRUNCATE ' . $this->prefix . 'cache');
+			$this->db->sql_query($sql_truncate . $this->prefix . 'cache');
 			$done->page_n = $n;
 		}
 
