@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Categorie',
 	'groups_page'		=> 'Grupuri',
 	'users_page'		=> 'Utilizatori',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'Înregistrare',
 	'password_page'		=> 'Parolă',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'Modificări',
 	'comments_page'		=> 'Comentat',
 	'index_page'		=> 'PageIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Configurare limbă',
-'PleaseUpgradeToR6'				=> 'Se pare că rulezi o versiune veche (pre %2) de WackoWiki (%1). Pentru a actualiza la această versiune de WackoWiki, trebuie mai întâi să actualizați instalarea la %2.',
+'PleaseUpgradeToR6'				=> 'Se pare că rulezi o versiune veche de WackoWiki %1. Pentru a actualiza la această versiune de WackoWiki, trebuie mai întâi să actualizați instalarea la %2.',
 'UpgradeFromWacko'				=> 'Bine ați venit la WackoWiki! Se pare că faceți upgrade de la WackoWiki %1 la %2. Următoarele câteva pagini vă vor ghida prin procesul de actualizare.',
 'FreshInstall'					=> 'Bine ați venit la WackoWiki! Urmează să instalați WackoWiki %1. Următoarele câteva pagini vă vor ghida prin procesul de instalare.',
 'PleaseBackup'					=> 'Vă rugăm, <strong>copiați copia de rezervă</strong> bazei de date fișierul de configurare și toate fișierele modificate, cum ar fi cele care au hack-uri locale și patch-uri aplicate acestora înainte de a începe procesul de actualizare. Acest lucru vă poate salva de o durere de cap mare.',

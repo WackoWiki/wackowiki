@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Catégories',
 	'groups_page'		=> 'Groupes',
 	'users_page'		=> 'Utilisateurs',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'Enregistrement',
 	'password_page'		=> 'MotDePasse',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'Modifications',
 	'comments_page'		=> 'Commentaires',
 	'index_page'		=> 'Index',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Configuration de la langue',
-'PleaseUpgradeToR6'				=> 'Vous faites fonctionner une vieille version de WackoWiki (%1), antérieure à la %2. Pour la mettre à jour à la version actuelle, vous devez d’abord effectuer une mise à jour à la version %2.',
+'PleaseUpgradeToR6'				=> 'Vous faites fonctionner une vieille version de WackoWiki %1. Pour la mettre à jour à la version actuelle, vous devez d’abord effectuer une mise à jour à la version %2.',
 'UpgradeFromWacko'				=> 'Bienvenue à bord de WackoWiki, vous semblez passer de WackoWiki %1 à %2.  Les quelques pages qui suivent vous guideront dans le processus de mise à niveau.',
 'FreshInstall'					=> 'Bienvenue à bord de WackoWiki, vous vous apprêtez à installer WackoWiki %1.  Les quelques pages qui suivent vous guideront dans le processus d’installation.',
 'PleaseBackup'					=> 'Merci de sauvegarder votre base de données, le fichier de configuration et tous les fichiers modifiés, tels que ceux qui auxquels des rustines auraient été appliquées, avant de commencer le processus de mise à niveau. Cela peut vous éviter une bonne migraine.',

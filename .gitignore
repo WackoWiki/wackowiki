@@ -28,6 +28,8 @@
 /src/file/thumb_local/*
 !/src/file/thumb_local/.htaccess
 
+/src/lang/custom.*.php
+
 /src/xml/*
 !/src/xml/.htaccess
 

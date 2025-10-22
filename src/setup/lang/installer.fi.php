@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Kategoria',
 	'groups_page'		=> 'Ryhmät',
 	'users_page'		=> 'Käyttäjät',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'Rekisteröinti',
 	'password_page'		=> 'Salasana',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'ViimeisimmätMuutokset',
 	'comments_page'		=> 'ÄskettäinKommentoitu',
 	'index_page'		=> 'PageIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Kielen Asetukset',
-'PleaseUpgradeToR6'				=> 'Näytät olevan käynnissä vanha (pre %2) julkaisu WackoWiki (%1). Päivittääksesi tähän WackoWikin versioon, sinun on ensin päivitettävä asennus %2 versioon.',
+'PleaseUpgradeToR6'				=> 'Näytät olevan käynnissä vanha julkaisu WackoWiki %1. Päivittääksesi tähän WackoWikin versioon, sinun on ensin päivitettävä asennus %2 versioon.',
 'UpgradeFromWacko'				=> 'Tervetuloa WackoWikiin! Näyttää siltä, että olet päivittämässä WackoWiki %1 %2. Seuraavat muutamat sivut opastavat sinua läpi päivitysprosessin.',
 'FreshInstall'					=> 'Tervetuloa WackoWikiin! Olet asentamassa WackoWiki %1. Seuraavat sivut opastavat sinut asennusprosessin läpi.',
 'PleaseBackup'					=> 'Ole hyvä ja <strong>varmuuskopioi</strong> tietokantasi, config tiedosto ja kaikki muutetut tiedostot, kuten ne, joilla on paikallisia hakata ja korjauksia sovelletaan niihin ennen päivitysprosessin aloittamista. Tämä voi pelastaa sinut iso päänsärky.',

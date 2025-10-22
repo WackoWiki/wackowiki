@@ -21,9 +21,9 @@ class DbSqlite implements DbInterface
 			die('Error: Database file ' . $config->db_name . ' does not exist.');
 		}
 
-		if (!is_readable($config->db_name))
+		if (!is_readable($config->db_name) || !is_writeable($config->db_name))
 		{
-			die('Error: SQLite database file ' . $config->db_name . ' is not readable.');
+			die('Error: SQLite database file ' . $config->db_name . ' is not writable.');
 		}
 
 		try

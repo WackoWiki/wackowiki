@@ -170,7 +170,7 @@ function set_pack_dir($time): string
 {
 	// check dir name and create if not exists
 	$pack	= date('Y_md_His', $time);
-	$dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
+	$dir	= Ut::join_path(BACKUP_DIR, $pack);
 
 	clearstatcache();
 	ensure_dir($dir);
@@ -199,8 +199,8 @@ function get_directory_size($path)
 // delete backup pack from the server
 function remove_pack($pack)
 {
-	$pack_dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
-	$pack_file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack . '.tar');
+	$pack_dir	= Ut::join_path(BACKUP_DIR, $pack);
+	$pack_file	= Ut::join_path(BACKUP_DIR, $pack . '.tar');
 
 	// read log
 	$text	= file_get_contents(Ut::join_path($pack_dir, BACKUP_FILE_LOG));
@@ -258,8 +258,8 @@ function create_archive($pack)
 		ini_set('max_execution_time', '300');
 		ini_set('set_time_limit', '0');
 
-		$dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
-		$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack . '.tar');
+		$dir	= Ut::join_path(BACKUP_DIR, $pack);
+		$file	= Ut::join_path(BACKUP_DIR, $pack . '.tar');
 
 		$archive = new PharData($file);
 		$archive->buildFromDirectory($dir);
@@ -279,8 +279,8 @@ function extract_archive($pack)
 {
 	try
 	{
-		$dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
-		$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack . '.tar');
+		$dir	= Ut::join_path(BACKUP_DIR, $pack);
+		$file	= Ut::join_path(BACKUP_DIR, $pack . '.tar');
 
 		$archive = new PharData($file);
 		$archive->extractTo($dir);
@@ -628,7 +628,7 @@ function get_files($engine, $directories, $pack, $dir, $root)
 function put_table($engine, $pack): int
 {
 	// read sql data
-	$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE);
+	$file	= Ut::join_path(BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE);
 	$sql	= explode(';', file_get_contents($file));
 
 	array_pop($sql);
@@ -652,7 +652,7 @@ function put_data($engine, $pack, $table, $mode): int
 	$point		= 0;
 
 	// open table dump file with read access
-	$file_name	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $table . BACKUP_FILE_DUMP_SUFFIX);
+	$file_name	= Ut::join_path(BACKUP_DIR, $pack, $table . BACKUP_FILE_DUMP_SUFFIX);
 	$file		= gzopen($file_name, 'rb');
 
 	// read and process file in iterations to the end
@@ -729,7 +729,7 @@ function put_files($pack, $dir, $keep = false)
 	$total[0]	= 0;
 	$total[1]	= 0;
 
-	$pack_dir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
+	$pack_dir = Ut::join_path(BACKUP_DIR, $pack, $dir);
 
 	// restore files subdir or full path recursively if needed
 	$offset		= 0;

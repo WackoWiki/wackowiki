@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Kategorie',
 	'groups_page'		=> 'Gruppen',
 	'users_page'		=> 'Benutzer',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'Registrierung',
 	'password_page'		=> 'Passwort',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'LetzteÄnderungen',
 	'comments_page'		=> 'LetzteKommentare',
 	'index_page'		=> 'SeitenIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Spracheinstellungen',
-'PleaseUpgradeToR6'				=> 'Bei dir läuft eine alte (pre %2) Version von WackoWiki (%1). Um auf diese neue Version von WackoWiki zu aktualisieren, musst du zuerst deine Installation auf %2 updaten.',
+'PleaseUpgradeToR6'				=> 'Bei dir läuft eine alte Version von WackoWiki %1. Um auf diese neue Version von WackoWiki zu aktualisieren, musst du zuerst deine Installation auf %2 updaten.',
 'UpgradeFromWacko'				=> 'Wilkommen bei WackoWiki, es scheint das du von WackoWiki %1 auf %2 aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'FreshInstall'					=> 'Wilkommen bei WackoWiki, du installierst gerade WackoWiki %1. Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'PleaseBackup'					=> 'Bitte erstelle eine <strong>Sicherungskopie</strong> von deiner Datenbank und der Konfigurationsdatei config.php und aller geänderter Dateien bevor du den Aktualisierungsvorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.',

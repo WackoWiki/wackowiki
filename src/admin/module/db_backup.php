@@ -193,11 +193,11 @@ function admin_db_backup($engine, $module, $tables, $directories)
 	}
 	else
 	{
-		if (!is_writable(UPLOAD_BACKUP_DIR . '/'))
+		if (!is_writable(BACKUP_DIR . '/'))
 		{
 			echo output_image($engine, false) .
 				'<strong class="red">' .
-					Ut::perc_replace($engine->_t('DirNotWritable'), '<code>' . UPLOAD_BACKUP_DIR . '</code>') .
+					Ut::perc_replace($engine->_t('DirNotWritable'), '<code>' . BACKUP_DIR . '</code>') .
 				'</strong><br>' . "\n";
 		}
 		else

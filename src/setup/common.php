@@ -34,7 +34,7 @@ function output_error($error_text = '')
 }
 
 // Draws a tick or cross next to a result
-function output_image($ok)
+function output_image($ok): string
 {
 	global $base_path;
 
@@ -45,7 +45,7 @@ function output_image($ok)
 
 // TODO: same function as in wacko class
 // site config
-function available_languages()
+function available_languages(): array
 {
 	$lang_list = [];
 
@@ -71,7 +71,7 @@ function available_languages()
 	return $lang_list;
 }
 
-function set_language($iso)
+function set_language($iso): array
 {
 	require_once 'setup/lang/installer.all.php';
 
@@ -93,7 +93,7 @@ function set_language($iso)
 	return $x;
 }
 
-function _t($name)
+function _t($name): array|string
 {
 	global $config, $translation;
 	$lang = $config['language'];
@@ -159,7 +159,7 @@ function sanitize_page_tag(&$tag, $normalize = false)
 }
 
 // database install
-function test($text, $condition, $error_text = '')
+function test($text, $condition, $error_text = ''): bool
 {
 	echo '<li>' . $text . '   ' . output_image($condition);
 
@@ -241,8 +241,32 @@ function test_pdo($text, $query, $error_text = '')
 	}
 }
 
+// default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
+function _q($string): string
+{
+	$string ??= '';
+	global $config_global, $dblink_global;
+
+	return match ($config_global['db_driver']) {
+		'mysqli'		=> mysqli_real_escape_string($dblink_global, $string),
+		'sqlite'		=> $dblink_global->escapeString($string),
+		'sqlite_pdo'	=> strtr((string) $string, [
+			"'"		=> "''",
+		]),
+		default			=> strtr($string, [
+			"\x00"	=> '\x00',
+			"\n"	=> '\n',
+			"\r"	=> '\r',
+			'\\'	=> '\\\\',
+			"'"		=> "\'",
+			'"'		=> '\"',
+			"\x1a"	=> '\x1a'
+		]),
+	};
+}
+
 // write config
-function array_to_str ($arr, $name = '')
+function array_to_str ($arr, $name = ''): string
 {
 	$entries	= '';
 	$arrays		= '';
@@ -268,7 +292,7 @@ function array_to_str ($arr, $name = '')
 }
 
 // TODO: same functions as in dbpdo class
-function utc_dt()
+function utc_dt(): string
 {
 	global $config_global;
 
@@ -279,9 +303,12 @@ function utc_dt()
 	};
 }
 
-function check_sqlite_name($name)
+/**
+ * SQLite functions
+ */
+
+function check_sqlite_name($name): bool
 {
-	// avoid creating PHP files on unsecured servers
 	if (!preg_match("~^[^\\0]*\\.(db|sdb|sqlite)\$~", $name))
 	{
 		return false;
@@ -290,26 +317,99 @@ function check_sqlite_name($name)
 	return true;
 }
 
-// default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
-function _q($string)
+function check_data_dir($dir): array
 {
-	$string ??= '';
-	global $config_global, $dblink_global;
+	if (is_dir($dir))
+	{
+		if (!is_readable($dir) || !is_writable($dir))
+		{
+			return [false, Ut::perc_replace(_t('SqliteDirUnwritable'), $dir)];
+		}
+	}
+	else if (!is_writable(dirname($dir)))
+	{
+		// Check the parent directory if $dir not exists
+		$webserver_group = get_webserver_primary_group();
 
-	return match ($config_global['db_driver']) {
-		'mysqli'		=> mysqli_real_escape_string($dblink_global, $string),
-		'sqlite'		=> $dblink_global->escapeString($string),
-		'sqlite_pdo'	=> strtr((string) $string, [
-			"'"		=> "''",
-		]),
-		default			=> strtr($string, [
-			"\x00"	=> '\x00',
-			"\n"	=> '\n',
-			"\r"	=> '\r',
-			'\\'	=> '\\\\',
-			"'"		=> "\'",
-			'"'		=> '\"',
-			"\x1a"	=> '\x1a'
-		]),
-	};
+		if ($webserver_group !== null)
+		{
+			return [false, Ut::perc_replace(
+				_t('SqliteParentUnwritableGroup'),
+				$dir,
+				dirname($dir),
+				basename($dir),
+				$webserver_group)];
+		}
+
+		return [false, Ut::perc_replace(
+			_t('SqliteParentUnwritableNogroup'),
+			$dir,
+			dirname($dir),
+			basename($dir))];
+	}
+
+	return [true, ''];
 }
+
+function create_db_file(string $file): array
+{
+	if (file_exists($file))
+	{
+		if (!is_writable($file))
+		{
+			return [false, Ut::perc_replace(_t('SqliteReadonly'), $file)];
+		}
+
+		return [true, ''];
+	}
+
+	$old_mask = umask(0177);
+
+	if (file_put_contents($file, '') === false)
+	{
+		umask($old_mask);
+
+		return [false, Ut::perc_replace(_t('SqliteCantCreateDb'), $file)];
+	}
+
+	umask($old_mask);
+
+	return [true, ''];
+}
+
+function create_data_dir($dir): array
+{
+	if (!is_dir($dir))
+	{
+		$ok = @mkdir($dir, 0700, true);
+
+		if (!$ok)
+		{
+			return [false, Ut::perc_replace(_t('SqliteMkdirError'), $dir)];
+		}
+	}
+
+	// put a .htaccess file
+	file_put_contents("$dir/.htaccess",
+		"Require all denied\n" .
+		"Satisfy All\n");
+
+	return [true, ''];
+}
+
+
+// On POSIX systems return the primary group of the webserver the program is running under.
+function get_webserver_primary_group(): ?string
+{
+	if (!function_exists('posix_getegid') || !function_exists('posix_getpwuid'))
+	{
+		return null;
+	}
+
+	$gid = posix_getegid();
+
+	return posix_getpwuid($gid)['name'] ?? null;
+}
+
+
+

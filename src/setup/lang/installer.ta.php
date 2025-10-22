@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'வகை',
 	'groups_page'		=> 'குழுக்கள்',
 	'users_page'		=> 'பயனர்கள்',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'பதிவு',
 	'password_page'		=> 'கடவுச்சொல்',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'RecentChanges',
 	'comments_page'		=> 'RecentlyCommented',
 	'index_page'		=> 'PageIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Language Configuration',
-'PleaseUpgradeToR6'				=> 'You appear to be running an old (pre %2) release of WackoWiki (%1). To update to this release of WackoWiki, you must first update your installation to %2.',
+'PleaseUpgradeToR6'				=> 'You appear to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
 'UpgradeFromWacko'				=> 'Welcome to WackoWiki! It appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
 'FreshInstall'					=> 'Welcome to WackoWiki! You are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have local hacks and patches applied to them before starting upgrade process. This can save you from a big headache.',

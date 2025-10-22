@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Category',
 	'groups_page'		=> 'Groups',
 	'users_page'		=> 'Users',
@@ -49,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Language Configuration',
-'PleaseUpgradeToR6'				=> 'You appear to be running an old (pre %2) release of WackoWiki (%1). To update to this release of WackoWiki, you must first update your installation to %2.',
+'PleaseUpgradeToR6'				=> 'You appear to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
 'UpgradeFromWacko'				=> 'Welcome to WackoWiki! It appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
 'FreshInstall'					=> 'Welcome to WackoWiki! You are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have local hacks and patches applied to them before starting upgrade process. This can save you from a big headache.',
@@ -158,6 +159,14 @@ $lang = [
 'TestConnectionString'			=> 'Testing database connection settings',
 'TestDatabaseExists'			=> 'Checking if the database you specified exists',
 'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
+'SqliteFileExtensionError'		=> 'Please use one of the extensions db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Error creating the data directory <code>%1</code>.<br>Check the location and try again.',
+'SqliteDirUnwritable'			=> 'Unable to write to the directory <code>%1</code>.<br>Change its permissions so that the webserver can write to it, and try again.',
+'SqliteConnectionError'			=> '%1.<br><br>Check the data directory and database name below and try again.',
+'SqliteReadonly'				=> 'The file <code>%1</code> is not writeable.',
+'SqliteCantCreateDb'			=> 'Could not create database file <code>%1</code>.',
 'InstallTables'					=> 'Installing Tables',
 'ErrorDbConnection'				=> 'There was a problem with the database connection details you specified, please go back and check they are correct.',
 'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',

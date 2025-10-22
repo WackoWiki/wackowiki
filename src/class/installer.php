@@ -6,7 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 const SET_MENU			= 1;
-const SET_MENU_ONLY		= 2;
+const SET_MENU_ADMIN	= 2;
+const SET_MENU_ONLY		= 3;
 const ACTIONS			= ['lang', 'version-check', 'config-site', 'config-database', 'install-database', 'write-config'];
 
 class Installer

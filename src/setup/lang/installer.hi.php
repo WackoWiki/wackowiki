@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'वर्ग',
 	'groups_page'		=> 'समूह',
 	'users_page'		=> 'उपयोगकर्ताओं',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'पंजीकरण',
 	'password_page'		=> 'कूटशब्द',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'RecentChanges',
 	'comments_page'		=> 'हालकीटिप्पणियाँ',
 	'index_page'		=> 'PageIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Language Configuration',
-'PleaseUpgradeToR6'				=> 'You appear to be running an old (pre %2) release of WackoWiki (%1). To update to this release of WackoWiki, you must first update your installation to %2.',
+'PleaseUpgradeToR6'				=> 'You appear to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
 'UpgradeFromWacko'				=> 'Welcome to WackoWiki! It appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
 'FreshInstall'					=> 'Welcome to WackoWiki! You are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
 'PleaseBackup'					=> 'कृपया, अपग्रेड प्रक्रिया शुरू करने से पहले अपने डेटाबेस, कॉन्फ़िगरेशन फ़ाइल और सभी परिवर्तित फ़ाइलों जैसे कि जिन पर स्थानीय हैक और पैच लागू किए गए हैं, का <strong>बैकअप</strong> लें। यह आपको एक बड़ी सिरदर्द से बचा सकता है।',

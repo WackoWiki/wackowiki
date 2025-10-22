@@ -12,6 +12,8 @@ const SITE_LOCK						= 'config/lock';
 const AP_LOCK						= 'config/lock_ap';
 
 const ACTION_DIR					= 'action';
+const BACKUP_DIR					= 'file/backup';
+const DATA_DIR						= 'file/data';
 const FORMATTER_DIR					= 'formatter';
 const HANDLER_DIR					= 'handler';
 const IMAGE_DIR						= 'image';
@@ -21,7 +23,6 @@ const THUMB_DIR						= 'file/thumb';
 const THUMB_LOCAL_DIR				= 'file/thumb_local';
 const UPLOAD_GLOBAL_DIR				= 'file/global';
 const UPLOAD_LOCAL_DIR				= 'file/perpage';
-const UPLOAD_BACKUP_DIR				= 'file/backup';
 const XML_DIR						= 'xml';
 
 const CACHE_CONFIG_DIR				= '_cache/config';
@@ -97,16 +98,16 @@ const SQL_MODE_LAX					= [
 ];
 
 // Do not change these two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.1.29';
+const WACKO_VERSION					= '6.2.0';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 
 const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
 
 const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
-const DB_MIN_VERSION				= ['mariadb' => '10.4', 'mysql' => '8.0'];
+const DB_MIN_VERSION				= ['mariadb' => '10.4', 'mysql' => '8.0', 'sqlite' => '3.24'];
 const DB_ERROR_MODE					= 0;					// 0 - silent, 1 - warning, 2 - exception
 
 const PHP_MIN_VERSION				= '8.0';				// minimum required PHP version
-const PHP_MAX_VERSION				= '8.4';				// maximum supported PHP version
+const PHP_MAX_VERSION				= '8.5';				// maximum supported PHP version
 const PHP_ERROR_REPORTING			= 0;					// PHP error reporting: 0 - off, 6 - all

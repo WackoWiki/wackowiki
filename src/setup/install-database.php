@@ -103,7 +103,8 @@ if (isset($config['wacko_version']))
 	}
 }
 
-$sql_modes = match((int) $config['sql_mode']) {
+$sql_modes = match((int) $config['sql_mode'])
+{
 	1		=> SQL_MODE_LAX[$config['db_vendor']],
 	2		=> SQL_MODE_STRICT[$config['db_vendor']],
 	default	=> 0, // server SQL mode
@@ -207,10 +208,6 @@ switch ($config['db_driver'])
 						$value[1],
 						Ut::perc_replace(_t('ErrorDeletingTable'), '<code>' . $value[0] . '</code>')
 					);
-
-					/* echo '<pre>';
-					print_r($value);
-					echo '</pre>'; */
 				}
 
 				echo '<li>' . _t('DeletingTablesEnd') . '</li>' . "\n";
@@ -309,51 +306,70 @@ switch ($config['db_driver'])
 
 		global $dblink;
 
-		if (file_exists($config['db_name']) && !$config['is_update'])
-		{
-			test(
-				_t('TestConnectionString'),
-				false,
-				_t('ErrorDbConnection') . '<br>' . 'SQLlite file exists.'
-			);
-
-			$fatal_error = true;
-		}
-
 		if (!check_sqlite_name($config['db_name']))
 		{
 			test(
 				_t('TestConnectionString'),
 				false,
-				_t('ErrorDbConnection') . '<br>' . 'Please use one of the extensions db, sdb, sqlite.'
+				_t('ErrorDbConnection') . '<br>' . _t('SqliteFileExtensionError')
+			);
+
+			$fatal_error = true;
+		}
+
+		$db_path = dirname($config['db_name']);
+
+		// create data dir and db file
+		if ([$ok, $message] = check_data_dir($db_path))
+		{
+			if ($ok)
+			{
+				[$ok, $message] = create_data_dir($db_path);
+
+				if ($ok)
+				{
+					#Ut::join_path($db_path, $db_name)
+					[$ok, $message] = create_db_file($config['db_name']);
+				}
+			}
+		}
+
+		if (!$ok)
+		{
+			test(
+				_t('TestConnectionString'),
+				false,
+				$message
 			);
 
 			$fatal_error = true;
 		}
 
 		if (!$fatal_error)
-		// Do the initial database connection test separately as it is a special case.
-		try
 		{
-			test(
-				_t('TestConnectionString'),
-				$dblink = new \SQLite3($config['db_name']),
-				_t('ErrorDbConnection')
-			);
+			// Do the initial database connection test separately as it is a special case.
+			try
+			{
+				test(
+					_t('TestConnectionString'),
+					$dblink = new \SQLite3($config['db_name']),
+					_t('ErrorDbConnection')
+				);
 
-			$dblink->enableExceptions(true);
-			$dblink->busyTimeout(5000);
-		}
-		catch (Exception $e)
-		{
-			// There was a problem with the connection string
-			test(
-				_t('TestConnectionString'),
-				false,
-				_t('ErrorDbConnection') . '<br>' . 'SQLlite Error: ' . $e->getMessage() . ' ' . $e->getCode()
-			);
+				$dblink->enableExceptions(true);
+				$dblink->busyTimeout(5000);
+			}
+			catch (Exception $e)
+			{
+				// There was a problem with the connection string
+				test(
+					_t('TestConnectionString'),
+					false,
+					_t('ErrorDbConnection') . '<br>' . 'SQLlite Error: ' . $e->getMessage() . ' ' . $e->getCode()
+				);
 
-			$fatal_error = true;
+				$fatal_error = true;
+			}
 		}
 
 		if (!$fatal_error)
@@ -361,12 +377,6 @@ switch ($config['db_driver'])
 			/*
 			 The connection string and the database name are ok, proceed
 			 */
-
-			// set charset
-			# none
-
-			// set SESSION sql_mode
-			# none
 
 			// check min database version
 			$db_version		= $dblink->querySingle("SELECT sqlite_version() AS version");
@@ -391,7 +401,6 @@ switch ($config['db_driver'])
 
 		if (!$fatal_error)
 		{
-			// sqlite only
 			require_once 'setup/_insert_config.php';
 			require_once 'setup/_insert_default.php';
 			require_once 'setup/database_sqlite.php';
@@ -410,10 +419,6 @@ switch ($config['db_driver'])
 						$value[1],
 						Ut::perc_replace(_t('ErrorDeletingTable'), '<code>' . $value[0] . '</code>')
 					);
-
-					/* echo '<pre>';
-					 print_r($value);
-					 echo '</pre>'; */
 				}
 
 				echo '<li>' . _t('DeletingTablesEnd') . '</li>' . "\n";
@@ -531,53 +536,72 @@ switch ($config['db_driver'])
 
 		if ($config['db_driver'] == 'sqlite_pdo')
 		{
-			if (file_exists($config['db_name']) && !$config['is_update'])
-			{
-				test(
-					_t('TestConnectionString'),
-					false,
-					_t('ErrorDbConnection') . '<br>' . 'SQLlite file exists.'
-				);
-
-				$fatal_error = true;
-			}
-
 			if (!check_sqlite_name($config['db_name']))
 			{
 				test(
 					_t('TestConnectionString'),
 					false,
-					_t('ErrorDbConnection') . '<br>' . 'Please use one of the extensions db, sdb, sqlite.'
+					_t('ErrorDbConnection') . '<br>' . _t('SqliteFileExtensionError')
 				);
+
+				$fatal_error = true;
+			}
+
+			$db_path = dirname($config['db_name']);
+
+			// create data dir and db file
+			if ([$ok, $message] = check_data_dir($db_path))
+			{
+				if ($ok)
+				{
+					[$ok, $message] = create_data_dir($db_path);
+
+					if ($ok)
+					{
+						#Ut::join_path($db_path, $db_name)
+						[$ok, $message] = create_db_file($config['db_name']);
+					}
+				}
+			}
+
+			if (!$ok)
+			{
+				test(
+					_t('TestConnectionString'),
+					false,
+					$message
+					);
 
 				$fatal_error = true;
 			}
 		}
 
 		if (!$fatal_error)
-		// Do the initial database connection test separately as it is a special case.
-		try
 		{
-			test(
-				_t('TestConnectionString'),
-				$dblink = @new PDO(
-					$dsn,
-					$config['db_user'],
-					$config['db_password']),
-				_t('ErrorDbConnection')
-			);
+			// Do the initial database connection test separately as it is a special case.
+			try
+			{
+				test(
+					_t('TestConnectionString'),
+					$dblink = @new PDO(
+						$dsn,
+						$config['db_user'],
+						$config['db_password']),
+					_t('ErrorDbConnection')
+				);
 
-			$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}
-		catch (PDOException $e)
-		{
-			test(
-				_t('TestConnectionString'),
-				false,
-				_t('ErrorDbConnection') . '<br>' . 'PDO Error: ' . $e->getMessage() . ' ' . $e->getCode()
-			);
+				$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			}
+			catch (PDOException $e)
+			{
+				test(
+					_t('TestConnectionString'),
+					false,
+					_t('ErrorDbConnection') . '<br>' . 'PDO Error: ' . $e->getMessage() . ' ' . $e->getCode()
+				);
 
-			$fatal_error = true;
+				$fatal_error = true;
+			}
 		}
 
 		if (!$fatal_error)

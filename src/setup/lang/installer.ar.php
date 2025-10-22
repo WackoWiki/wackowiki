@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'الفئة',
 	'groups_page'		=> 'المجموعات',
 	'users_page'		=> 'المستخدمون',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'التسجيل',
 	'password_page'		=> 'كلمة-السر',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'التغييرات-الأخيرة',
 	'comments_page'		=> 'تم-التعليق-مؤخرا',
 	'index_page'		=> 'PageIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'تكوين اللغة',
-'PleaseUpgradeToR6'				=> 'يبدو أنك تقوم بتشغيل إصدار قديم (قبل %2) من WackoWiki (%1). للتحديث إلى هذا الإصدار من WackoWiki ، يجب أولاً تحديث التثبيت الخاص بك إلى %2.',
+'PleaseUpgradeToR6'				=> 'يبدو أنك تقوم بتشغيل إصدار قديم من WackoWiki %1. للتحديث إلى هذا الإصدار من WackoWiki ، يجب أولاً تحديث التثبيت الخاص بك إلى %2.',
 'UpgradeFromWacko'				=> 'مرحبا بكم في WackoWiki! يبدو أنك تقوم بالترقية من WackoWiki %1 إلى %2. الصفحات القليلة القادمة سوف توجهك من خلال عملية الترقية.',
 'FreshInstall'					=> 'مرحبا بك في WackoWiki! أنت على وشك تثبيت WackoWiki %1. ستوجهك الصفحات القليلة القادمة خلال عملية التثبيت.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have local hacks and patches applied to them before starting upgrade process. This can save you from a big headache.',

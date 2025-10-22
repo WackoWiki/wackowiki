@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Grupper',
 	'users_page'		=> 'Brukere',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'Registrering',
 	'password_page'		=> 'Passord',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'NyligeEndringer',
 	'comments_page'		=> 'NyligKommentert',
 	'index_page'		=> 'PageIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Språkkonfigurasjon (Automatic Translation)',
-'PleaseUpgradeToR6'				=> 'Det ser ut til at du kjører en gammel (pre %2) utgivelse av WackoWiki (%1). For å oppdatere i denne utgaven av WackoWiki, må du først oppdatere installasjonen til %2.',
+'PleaseUpgradeToR6'				=> 'Det ser ut til at du kjører en gammel utgivelse av WackoWiki %1. For å oppdatere i denne utgaven av WackoWiki, må du først oppdatere installasjonen til %2.',
 'UpgradeFromWacko'				=> 'Velkommen til WackoWiki! Det ser ut til at du oppgraderer fra WackoWiki %1 til %2. De neste sidene vil lede deg gjennom oppgraderingsprosessen.',
 'FreshInstall'					=> 'Velkommen til WackoWiki! Du er i ferd med å installere WackoWiki %1. De neste sidene vil veilede deg gjennom installasjonsprosessen.',
 'PleaseBackup'					=> 'Vennligst <strong>sikkerhetskopi</strong> databasen, konfigurasjonsfilen og alle endrede filer, for eksempel de som har lokale hacks og oppdateringer påført før oppgraderingsprosessen starter. Dette kan spare deg for stor hodepine.',

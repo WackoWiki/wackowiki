@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Kategorie',
 	'groups_page'		=> 'Skupiny',
 	'users_page'		=> 'Uživatelé',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'Registrace',
 	'password_page'		=> 'Heslo',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'PosledníZměny',
 	'comments_page'		=> 'NedávnoKomentováno',
 	'index_page'		=> 'PageIndex',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Nastavení jazyka',
-'PleaseUpgradeToR6'				=> 'Zdá se, že používáte starou verzi (před vydáním %2) WackoWiki (%1). Chcete-li aktualizovat na tuto verzi WackoWiki, musíte nejprve aktualizovat instalaci na %2.',
+'PleaseUpgradeToR6'				=> 'Zdá se, že používáte starou verzi WackoWiki %1. Chcete-li aktualizovat na tuto verzi WackoWiki, musíte nejprve aktualizovat instalaci na %2.',
 'UpgradeFromWacko'				=> 'Vítejte na WackoWiki! Zdá se, že jste upgrade z WackoWiki %1 na %2. Několik dalších stránek vás provede aktualizací.',
 'FreshInstall'					=> 'Vítejte ve WackoWiki! Chystáte se nainstalovat WackoWiki %1. Několik dalších stránek vás provede instalačním procesem.',
 'PleaseBackup'					=> 'Prosím, <strong>zálohujte</strong> svou databázi, konfigurační soubor a všechny změněné soubory, jako jsou ty, které mají místní hacky a záplaty před spuštěním procesu aktualizace. Toto tě může ušetřit z velké bolesti hlavy.',

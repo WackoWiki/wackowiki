@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> '카테고리',
 	'groups_page'		=> '그룹',
 	'users_page'		=> '사용자',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> '계정만들기',
 	'password_page'		=> '비밀번호',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> '최근바뀜',
 	'comments_page'		=> '최근댓글',
 	'index_page'		=> '페이지색인',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> '언어 설정',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %2) release of WackoWiki (%1). To update to this release of WackoWiki, you must first update your installation to %2.',
+'PleaseUpgradeToR6'				=> 'You aware to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
 'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
 'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',

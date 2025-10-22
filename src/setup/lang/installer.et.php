@@ -11,9 +11,10 @@ $lang = [
 
 /*
    Config Defaults
+
+   localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	// pages (tag)
 	'category_page'		=> 'Kategooria',
 	'groups_page'		=> 'Grupid',
 	'users_page'		=> 'Kasutajad',
@@ -24,6 +25,7 @@ $lang = [
 	'registration_page'	=> 'Registreerimine',
 	'password_page'		=> 'Parool',
 
+	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'ViimasedMuudatused',
 	'comments_page'		=> 'ViimatiKommenteeritud',
 	'index_page'		=> 'SisuKord',
@@ -48,7 +50,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Keele konfigureerimine',
-'PleaseUpgradeToR6'				=> 'Tundub, et kasutate WackoWiki (%1) vana (enne %2) versiooni. Et uuendada WackoWiki selle versiooniga, peate kõigepealt uuendama oma paigalduse versioonile %2.',
+'PleaseUpgradeToR6'				=> 'Tundub, et kasutate WackoWiki %1 vana versiooni. Et uuendada WackoWiki selle versiooniga, peate kõigepealt uuendama oma paigalduse versioonile %2.',
 'UpgradeFromWacko'				=> 'Tere tulemast WackoWikisse! Tundub, et te uuendate WackoWiki %1-st %2-le.  Järgmised leheküljed juhatavad teid läbi uuendamise protsessi.',
 'FreshInstall'					=> 'Tere tulemast WackoWiki-le, et kavatsete installida WackoWiki %1. Järgmised mõned lehed suunavad teid installiprotsessi.',
 'PleaseBackup'					=> 'Enne, kui alustad versioonitäienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kõikidest muudetud failidest. See võib sind säästa suurest peavalust!',

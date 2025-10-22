@@ -79,6 +79,7 @@ else
 	 [2]   :  the name to display in the list here
 	 */
 
+	// 6.1.29 → 6.2.0
 	if ($config['db_driver'] == 'mysqli_legacy')
 	{
 		$config['db_driver'] = 'mysqli';
@@ -266,17 +267,35 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 ?>
 		<label class="label_top" for="db_name"><?php echo _t('DbName');?></label>
 		<?php
-		if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
-		{
-			?>
-			<p class="notop"><?php echo _t('DbNameDesc'); ?></p>
-			<?php
-		}
-		else
+		if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
 			?>
 			<p class="notop"><?php echo _t('DbNameSqliteDesc'); ?></p>
 			<p class="msg notice"><?php echo _t('DbNameSqliteHelp'); ?></p>
+			<?php
+			/*
+			 TODO: Suggest alternative SQLite data directory locations
+
+			 [0]   :  custom data directory (DATA_DIR)
+			 [1]   :  web root parent/data/
+			 [2]   :  non-public directory inside project (but not in web root)
+			 [3]   :  OS-specific safe fallbacks outside project
+			 */
+
+			// set default for SQLite
+			if($_SERVER['DOCUMENT_ROOT'])
+			{
+				$config['db_name'] = Ut::join_path(dirname($_SERVER['DOCUMENT_ROOT']), 'data', '.ht.sqlite');
+			}
+			else
+			{
+				$config['db_name'] = Ut::join_path(DATA_DIR, '.ht.sqlite');
+			}
+		}
+		else
+		{
+			?>
+			<p class="notop"><?php echo _t('DbNameDesc'); ?></p>
 			<?php
 		}
 		?>
@@ -287,7 +306,7 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
 			?>
-			<input type="hidden" name="config[table_prefix]" value="0">
+			<input type="hidden" name="config[table_prefix]" value="">
 			<?php
 		}
 		else
