@@ -71,6 +71,7 @@ function admin_config_pages($engine, $module)
 		$config['users_page']				= (string) $sanitize_tag($_POST['users_page']);
 		$config['category_page']			= (string) $sanitize_tag($_POST['category_page']);
 		$config['groups_page']				= (string) $sanitize_tag($_POST['groups_page']);
+		$config['whatsnew_page']			= (string) $sanitize_tag($_POST['whatsnew_page']);
 		$config['changes_page']				= (string) $sanitize_tag($_POST['changes_page']);
 		$config['comments_page']			= (string) $sanitize_tag($_POST['comments_page']);
 		$config['index_page']				= (string) $sanitize_tag($_POST['index_page']);
@@ -377,6 +378,18 @@ function admin_config_pages($engine, $module)
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="groups_page" name="groups_page" value="<?php echo Ut::html($engine->db->groups_page);?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="whatsnew_page"><strong><?php echo $engine->_t('WhatsNewPage');?></strong><br>
+					<small><?php echo Ut::perc_replace($engine->_t('WhatsNewPageInfo'), '<code>{{whatsnew}}</code>');?></small></label>
+				</td>
+				<td>
+					<input type="text" maxlength="255" id="whatsnew_page" name="whatsnew_page" value="<?php echo Ut::html($engine->db->whatsnew_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
