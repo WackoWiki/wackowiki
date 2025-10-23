@@ -54,7 +54,14 @@ class DbPDO implements DbInterface
 		}
 		catch (PDOException $e)
 		{
-			die('PDO DSN Error: ' . $e->getMessage());
+			if ($this->config->debug > 2)
+			{
+				die('PDO DSN Error: [' . $e->getCode() . '] ' . $e->getMessage());
+			}
+			else
+			{
+				die('Error loading WackoWiki DBAL: could not establish database connection.');
+			}
 		}
 	}
 
@@ -70,32 +77,14 @@ class DbPDO implements DbInterface
 
 			if ($this->config->debug > 2)
 			{
-				die('Query failed: ' . $e->getMessage()  . ' (' . $e->getCode() . ') -> ' . $query);
+				# $e->getTraceAsString()
+				die('Query failed: [' . $e->getCode() . '] ' . $e->getMessage()  . ' -> ' . $query);
 			}
 			else
 			{
 				die('DBAL error: SQL query failed.');
 			}
 		}
-
-		/* $result = $this->dblink->query($query);
-
-		if ($result)
-		{
-			if ($result->errorCode() != '00000')
-			{
-				ob_end_clean();
-
-				if ($this->config->debug > 2)
-				{
-					die('Query failed: ' . $query . ' (' . $result->errorCode() . ': ' . $result->errorInfo() . ')');
-				}
-				else
-				{
-					die('DBAL error: SQL query failed.');
-				}
-			}
-		} */
 
 		return $result;
 	}

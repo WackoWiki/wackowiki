@@ -36,7 +36,7 @@ class DbSqlite implements DbInterface
 		{
 			if ($this->config->debug > 2)
 			{
-				die('Error opening database: ' . $e->getMessage() . ' ' . $e->getCode());
+				die('Error opening database: [' . $e->getCode() . '] ' . $e->getMessage());
 			}
 			else
 			{
@@ -57,8 +57,8 @@ class DbSqlite implements DbInterface
 
 			if ($this->config->debug > 2)
 			{
-				#die('Query failed: ' . $e->getMessage()  . ' (' . $e->getCode() . ') -> ' . $query);
-				die('Query failed: ' . $query . ' (' . $this->dblink->lastErrorCode() . ': ' . $this->dblink->lastErrorMsg() . ')');
+				# $e->getTraceAsString()
+				die('Query failed: [' . $e->getCode() . '] ' . $e->getMessage()  . ' -> ' . $query);
 			}
 			else
 			{

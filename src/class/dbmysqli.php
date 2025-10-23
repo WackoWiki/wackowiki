@@ -38,23 +38,31 @@ class DbMysqli implements DbInterface
 		}
 		catch (mysqli_sql_exception $e)
 		{
-			die('Error loading WackoWiki DBAL: could not establish database connection.');
-
-			#throw new \mysqli_sql_exception($e->getMessage(), $e->getCode());
+			if ($this->config->debug > 2)
+			{
+				die('Error opening database: [' . $e->getCode() . '] ' . $e->getMessage());
+			}
+			else
+			{
+				die('Error loading WackoWiki DBAL: could not establish database connection.');
+			}
 		}
 	}
 
 	function query($query)
 	{
-		$result = mysqli_query($this->dblink, $query);
-
-		if (mysqli_connect_errno())
+		try
+		{
+			$result = mysqli_query($this->dblink, $query);
+		}
+		catch (mysqli_sql_exception $e)
 		{
 			ob_end_clean();
 
 			if ($this->config->debug > 2)
 			{
-				die('Query failed: ' . $query . ' (' . mysqli_connect_errno() . ': ' . mysqli_connect_error() . ')');
+				# $e->getTraceAsString()
+				die('Query failed: [' . $e->getCode() . '] ' . $e->getMessage() . ' -> ' . $query);
 			}
 			else
 			{

@@ -166,7 +166,7 @@ write_config_hidden_nodes($config_parameters);
 	 */
 
 	// [0] - directory, file
-	// [1] - write permissions (octal integer, precede the number with a 0 (zero)!)
+	// [1] - write permissions (octal integer, precede the number with a 0 [zero]!)
 	$file_permission = [
 		[CACHE_CONFIG_DIR,		CHMOD_DIR],
 		[CACHE_FEED_DIR,		CHMOD_DIR],
@@ -192,7 +192,7 @@ write_config_hidden_nodes($config_parameters);
 	echo '<input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
 	?>
 <h2><?php echo _t('Permissions'); ?></h2>
-<ul>
+<ul class="column-3">
 	<?php
 	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
 	foreach ($file_permission as $permission)
