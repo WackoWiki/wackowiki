@@ -192,8 +192,8 @@ switch ($config['db_driver'])
 			// mariadb / mysql only
 			require_once 'setup/_insert_config.php';
 			require_once 'setup/_insert_default.php';
-			require_once 'setup/database_mysql.php';
-			require_once 'setup/database_mysql_updates.php';
+			require_once 'setup/database/mysql.php';
+			require_once 'setup/database/mysql_updates.php';
 			require_once 'setup/_insert_queries.php';
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
@@ -403,8 +403,8 @@ switch ($config['db_driver'])
 		{
 			require_once 'setup/_insert_config.php';
 			require_once 'setup/_insert_default.php';
-			require_once 'setup/database_sqlite.php';
-			require_once 'setup/database_sqlite_updates.php';
+			require_once 'setup/database/sqlite.php';
+			require_once 'setup/database/sqlite_updates.php';
 			require_once 'setup/_insert_queries.php';
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
@@ -656,13 +656,13 @@ switch ($config['db_driver'])
 
 			if ($config['db_driver'] == 'sqlite_pdo')
 			{
-				require_once 'setup/database_sqlite.php';
-				require_once 'setup/database_sqlite_updates.php';
+				require_once 'setup/database/sqlite.php';
+				require_once 'setup/database/sqlite_updates.php';
 			}
 			else
 			{
-				require_once 'setup/database_mysql.php';
-				require_once 'setup/database_mysql_updates.php';
+				require_once 'setup/database/mysql.php';
+				require_once 'setup/database/mysql_updates.php';
 			}
 
 			require_once 'setup/_insert_queries.php';
