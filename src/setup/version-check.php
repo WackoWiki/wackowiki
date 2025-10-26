@@ -106,8 +106,9 @@ write_config_hidden_nodes($config_parameters);
 	}
 	?>
 
-	<li>MySQLi   <?php echo output_image(extension_loaded('mysqli')); ?></li>
-	<li>PDO   <?php echo output_image($detected > 0); ?></li>
+	<li>MySQLi	<?php echo output_image(extension_loaded('mysqli')); ?></li>
+	<li>PDO		<?php echo output_image($detected > 0); ?></li>
+	<li>SQLite	<?php echo output_image(class_exists('SQLite3')); ?></li>
 </ul>
 	<?php
 	/*

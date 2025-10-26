@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['db_backup'] = [
 		'order'	=> 500,
 		'cat'	=> 'database',
-		'status'=> true,
+		'status'=> !$db->sqlite,
 	];
 
 ##########################################################

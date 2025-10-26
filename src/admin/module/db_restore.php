@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['db_restore'] = [
 		'order'	=> 501,
 		'cat'	=> 'database',
-		'status'=> true,
+		'status'=> !$db->sqlite,
 	];
 
 ##########################################################

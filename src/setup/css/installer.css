@@ -77,9 +77,13 @@ p {
 	color: #000;
 }
 
-code,
 pre {
 	font-size: 0.875rem;
+}
+
+code {
+	font-size: 0.875rem;
+	background: #f2f2f3;
 }
 
 label {
