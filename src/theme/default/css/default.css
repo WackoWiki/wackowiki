@@ -652,6 +652,13 @@ footer {
 	width: 100%;
 }
 
+.article-header-meta {
+	float: right;
+	color: #808080; 
+	line-height: 1.24; 
+	white-space: nowrap;
+}
+
 .page-meta {
 	margin: 0 auto;
 	overflow: hidden;

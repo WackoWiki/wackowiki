@@ -269,6 +269,12 @@ if ($this->has_access('read'))
 				// show edit link
 				$tpl->h_edit = true;
 			}
+
+			if ($this->page['comments'])
+			{
+				$tpl->h_comments_n		= $this->page['comments'];
+				$tpl->h_comments_href	= $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']);
+			}
 		}
 
 		// display page body

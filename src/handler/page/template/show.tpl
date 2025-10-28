@@ -16,6 +16,13 @@
 		[= h _ =
 			<header>
 				<h1>[ ' title | e ' ][ '' edit '' ]</h1>
+				<span class="article-header-meta">
+					[= comments =
+						<a href="[ ' href ' ]">
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
+						</a>
+					=]
+				</span>
 			</header>
 		=]
 		<section id="section-content" class="page" data-dbclick="page">
