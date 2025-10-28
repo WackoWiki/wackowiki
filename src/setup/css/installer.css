@@ -1,11 +1,12 @@
 /*
    Wacko Wiki Installer Cascading Stylesheet
 
-   Panel Theme v1.0 by Tann San 19.04.2008
+   Panel Theme v1.1 by Tann San 19.04.2008
 */
 
 :root {
 	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
+	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
 }
 
 html {
@@ -182,6 +183,27 @@ hr {
 .current {
 	color: #ff0000;
 }
+
+/*
+   Locked Authorization
+*/
+div#loginbox {
+	font-family: var(--ww-font-monospace);
+	color: #073d69;
+	font-size: 0.875rem;
+	background-color: #f0f4f5;
+	width:500px;
+	margin:50px auto;
+	padding: 30px;
+	border: 1px dotted #ccc;
+}
+#loginbox code {
+	background: #ffc;
+	border-radius: .2rem;
+	border: 1px solid transparent;
+	padding: 0 .1rem;
+}
+#loginbox label {color: #073d69;}
 
 /*
    Language Selection Specific

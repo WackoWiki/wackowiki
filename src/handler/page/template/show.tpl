@@ -18,7 +18,7 @@
 				<h1>[ ' title | e ' ][ '' edit '' ]</h1>
 				<span class="article-header-meta">
 					[= comments =
-						<a href="[ ' href ' ]">
+						<a href="[ ' href ' ]" title="[ ' _t: Comments ' ]">
 							<img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
 						</a>
 					=]

@@ -1,4 +1,4 @@
-<form action="<?php echo $base_path ?>?installAction=config-site" method="post">
+<form action="<?php echo $base_path ?>?installAction=config-site" method="post" name="version_check">
 <?php
 write_config_hidden_nodes($config_parameters);
 ?>

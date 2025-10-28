@@ -790,7 +790,7 @@ if (!$fatal_error)
 {
 ?>
 <p><?php echo Ut::perc_replace(_t('NextStep'), '<code>' . CONFIG_FILE . '</code>');?></p>
-<form action="<?php echo $base_path; ?>?installAction=write-config" method="post">
+<form action="<?php echo $base_path; ?>?installAction=write-config" method="post" name="install_database">
 <?php
 	// set detected db_vendor
 	$config_parameters['db_vendor'] = $config['db_vendor'];

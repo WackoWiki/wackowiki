@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Invalid action',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Authorization',
+'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockPassword'					=> 'Password:',
+'LockLogin'						=> 'Login',
+'LockPasswordInvalid'			=> 'Invalid password.',
+'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Language Configuration',

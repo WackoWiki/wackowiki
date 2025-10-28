@@ -1,5 +1,9 @@
-<form action="<?php echo $base_path ?>?installAction=version-check" method="post">
+<form action="<?php echo $base_path ?>?installAction=version-check" method="post" name="set_language">
 <?php
+if (isset($config['auth']))
+{
+	echo '<input type="hidden" value="' . $config['auth'] . '" name="config[auth]">';
+}
 
 // Check if Upgrade or Fresh Install
 if (array_key_exists('wacko_version', $config))

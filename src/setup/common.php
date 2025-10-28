@@ -111,6 +111,8 @@ function _t($name): array|string
 			return $translation['en'][$name];
 		}
 	}
+
+	return '';
 }
 
 // TODO: same function as in wacko class
@@ -411,5 +413,61 @@ function get_webserver_primary_group(): ?string
 	return posix_getpwuid($gid)['name'] ?? null;
 }
 
+function generate_secure_token($secret): string
+{
+	$expires_in		= 600;
+	$time			= time();
+	$expires		= $time + $expires_in;
+	$token			= bin2hex(random_bytes(32));
 
+	// Create payload: time|expires|token
+	$payload = "$time|$expires|$token";
+
+	// Create HMAC signature to prevent tampering
+	$hmac = hash_hmac('sha256', $payload, $secret);
+
+	// Combine payload and signature
+	return base64_encode($payload . '|' . $hmac);
+}
+
+function validate_token($value, $secret)
+{
+	$data = base64_decode($value);
+
+	if (!$data)
+	{
+		return false;
+	}
+
+	$parts = explode('|', $data);
+
+	if (count($parts) !== 4)
+	{
+		return false;
+	}
+
+	[$time, $expires, $token, $received_hmac] = $parts;
+
+	// Re-calculate HMAC
+	$expected_payload	= "$time|$expires|$token";
+	$expected_hmac		= hash_hmac('sha256', $expected_payload, $secret);
+
+	// Use hash_equals for timing attack resistance
+	if (!hash_equals($expected_hmac, $received_hmac))
+	{
+		return false; // Tampering detected
+	}
+
+	// Check expiration
+	if (time() > (int) $expires)
+	{
+		return false; // Token expired
+	}
+
+	return [
+		'issued_at'		=> (int) $time,
+		'expires_at'	=> (int) $expires,
+		'token'			=> $token
+	];
+}
 

@@ -6,7 +6,6 @@ if ($config['tls'] && (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT']
 	$config['base_url']	= str_replace('http://', 'https://', $config['base_url']);
 }
 
-require_once 'setup/common.php';
 global $config, $translation;
 
 // If we have any config data in the _POST then it means they have somehow navigated backwards,
