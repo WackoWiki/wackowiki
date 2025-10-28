@@ -82,7 +82,7 @@
 <h3>
 	[ ' link ' ]
 </h3>
-<span class="search-meta">[ ' mtime | time_format ' ] - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
+<span class="search-meta"><time datetime="[ ' mtime ' ]">[ ' mtime | time_format ' ]</time> - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
 [= comments =
 	- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
 =]
