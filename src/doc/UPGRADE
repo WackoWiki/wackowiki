@@ -11,8 +11,8 @@ up automatically.
 
 Note: Before you complete the update script, everybody who will browse to your WackoWiki
 will see it, too. So if you run a relatively high traffic site, you may want to lock
-down your Wacko installation temporarily by placing a file called "locked" into your
-Wacko directory; once Wacko sees it, it will ask for a a password (whatever you put into that file). 
+down your Wacko installation temporarily by placing a file called "lock_setup" into your
+"config/" directory; once Wacko sees it, it will ask for a a password (whatever you put into that file). 
 Don't forget to remove the "locked" file once you're done with upgrading!
 
 More details on https://wackowiki.org/doc/Doc/English/Upgrade.

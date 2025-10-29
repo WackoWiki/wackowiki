@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-const LOCK_FILE			= 'locked';
+const SETUP_LOCK		= 'config/lock_setup';
 const SET_MENU			= 1;
 const SET_MENU_ADMIN	= 2;
 const SET_MENU_ONLY		= 3;
@@ -30,10 +30,10 @@ class Installer
 		require_once 'setup/common.php';
 
 		// check for locking
-		if (@file_exists(LOCK_FILE))
+		if (@file_exists(SETUP_LOCK))
 		{
 			// read password from lockfile
-			$lines		= file(LOCK_FILE);
+			$lines		= file(SETUP_LOCK);
 			$lock_pw	= trim($lines[0]);
 
 			$logged_in	= false;
@@ -43,7 +43,7 @@ class Installer
 				$config_post	= $_POST['config'];
 			}
 
-			// Check for AUTH token in URL
+			// Check for auth token
 			if (!empty($config_post['auth']))
 			{
 				if (validate_token($config_post['auth'], $lock_pw))

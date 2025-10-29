@@ -11,7 +11,7 @@ else
 ?>
 <div id="loginbox">
 	<strong><?php echo _t('LockAuthorization');?></strong><br>
-	<?php echo Ut::perc_replace(_t('LockAuthorizationInfo'), '<code>' . LOCK_FILE . '</code>');?>
+	<?php echo Ut::perc_replace(_t('LockAuthorizationInfo'), '<code>' . SETUP_LOCK . '</code>');?>
 	<br><br>
 	<form method="post">
 		<input type="hidden" name="setup_login" value="1"><br>
