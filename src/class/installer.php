@@ -66,6 +66,9 @@ class Installer
 				{
 					$error = true;
 				}
+
+				// reset
+				$_REQUEST['installAction'] = '';
 			}
 		}
 
