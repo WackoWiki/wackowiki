@@ -13,8 +13,8 @@ else
 	<strong><?php echo _t('LockAuthorization');?></strong><br>
 	<?php echo Ut::perc_replace(_t('LockAuthorizationInfo'), '<code>' . SETUP_LOCK . '</code>');?>
 	<br><br>
-	<form method="post">
-		<input type="hidden" name="setup_login" value="1"><br>
+	<form method="post" name="installer_auth">
+		<input type="hidden" name="setup_auth" value="1"><br>
 		<label for="setup_password"><strong><?php echo _t('LockPassword');?></strong></label>
 		<input type="password" id="setup_password" name="password" required>
 		<button type="submit" value="Login"><?php echo _t('LockLogin');?></button><br>

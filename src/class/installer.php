@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+const APP_NAME			= 'wackowiki';
+const SQLITE_DB_FILE	= '.ht.sqlite';
 const SETUP_LOCK		= 'config/lock_setup';
 const SET_MENU			= 1;
 const SET_MENU_ADMIN	= 2;
@@ -38,22 +40,22 @@ class Installer
 
 			$logged_in	= false;
 
-			if (isset($_POST['config']))
+			if (isset($_POST['config']['auth']))
 			{
-				$config_post	= $_POST['config'];
+				$auth_token = $_POST['config']['auth'];
 			}
 
 			// Check for auth token
-			if (!empty($config_post['auth']))
+			if (!empty($auth_token))
 			{
-				if (validate_token($config_post['auth'], $lock_pw))
+				if (validate_token($auth_token, $lock_pw))
 				{
 					$logged_in = true;
 				}
 			}
 
 			// Handle login form submission
-			if (!$logged_in && !empty($_POST['setup_login']))
+			if (!$logged_in && !empty($_POST['setup_auth']))
 			{
 				$input_pass = $_POST['password'] ?? '';
 

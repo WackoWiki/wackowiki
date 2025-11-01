@@ -126,7 +126,7 @@ ul.install_error {
 }
 
 li {
-	width: 907px;
+	width: max-content;
 }
 
 /*
