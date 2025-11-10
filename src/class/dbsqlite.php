@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 class DbSqlite implements DbInterface
 {
-	private $dblink;
+	private SQLite3 $dblink;
 	private $config;
 	private $result;
 

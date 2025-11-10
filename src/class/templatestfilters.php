@@ -40,15 +40,11 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function getFilters(): array
 	{
-		$list = [];
 
-		foreach ($this->filters as $id => $func)
+		$list = array_filter($this->filters, function ($func)
 		{
-			if (!(is_array($func) && $func[0] === $this))
-			{
-				$list[$id] = $func;
-			}
-		}
+			return !(is_array($func) && $func[0] === $this);
+		});
 
 		return $list;
 	}

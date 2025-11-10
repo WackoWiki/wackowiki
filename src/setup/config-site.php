@@ -2,7 +2,7 @@
 	<!--
 		function check()
 		{
-			var f = document.forms.form1;
+			const f = document.forms.config_site;
 
 			if (f.elements['password'].value.length < <?php echo $config['pwd_admin_min_chars'];?>)
 			{
@@ -10,7 +10,7 @@
 				return false;
 			}
 
-			if (f.elements['password'].value!=f.elements["password2"].value)
+			if (f.elements['password'].value !== f.elements["password2"].value)
 			{
 				alert('<?php echo _t('ErrorAdminPasswordMismatch');?>');
 				return false;

@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 class DbPDO implements DbInterface
 {
 	private $config;
-	private $dblink;
+	private PDO $dblink;
 
 	function __construct(&$config)
 	{

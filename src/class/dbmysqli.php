@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 class DbMysqli implements DbInterface
 {
-	private $dblink;
+	private mysqli $dblink;
 	private $config;
 
 	function __construct(&$config)

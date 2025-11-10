@@ -25,6 +25,7 @@
 		"ext-pdo" : "*",
 		"ext-pdo_mysql" : "*",
 		"ext-SPL" : "*",
+		"ext-sqlite3": "*",
 		"ext-zlib" : "*"
 	},
 	"prefer-stable" : true

@@ -216,7 +216,7 @@ class Http
 				header('Vary: Accept-Encoding');
 
 				$matching_last_modified	= $client_last_modified == $server_last_modified;
-				$matching_etag			= $client_etag && strpos($client_etag, $server_etag_raw) !== false;
+				$matching_etag			= $client_etag && str_contains($client_etag, $server_etag_raw);
 				$strict					= false;
 
 				if (($client_last_modified && $client_etag) || $strict
