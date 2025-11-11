@@ -14,17 +14,11 @@
 </IfModule>
 
 <IfModule !mod_rewrite.c>
-<FilesMatch \.php$>
-	# Apache 2.4
-	<IfModule mod_authz_core.c>
+	<FilesMatch \.php$>
 		Require all denied
-	</IfModule>
-</FilesMatch>
+	</FilesMatch>
 
-<FilesMatch "^(admin|index)\.php$">
-	# Apache 2.4
-	<IfModule mod_authz_core.c>
+	<FilesMatch "^(admin|index)\.php$">
 		Require all granted
-	</IfModule>
-</FilesMatch>
+	</FilesMatch>
 </IfModule>
