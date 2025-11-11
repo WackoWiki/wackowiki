@@ -43,8 +43,8 @@ function all_init()
 // freecap
 function new_freecap()
 {
-	var separator	= '?';
-	var thesrc		= document.getElementById('freecap').src;
+	let separator	= '?';
+	let thesrc		= document.getElementById('freecap').src;
 
 	// routing with rewrite OFF
 	if (thesrc.indexOf('?page=') !== - 1)
@@ -66,7 +66,7 @@ function dclick()
 	{
 		// skip double-click editing for pages having forms
 		const pageShow	= document.getElementById('section-content');
-		const form		= pageShow.querySelector('form');
+		const form		= pageShow.querySelector('#section-content form');
 
 		if (form)
 		{
