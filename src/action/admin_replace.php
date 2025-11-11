@@ -175,7 +175,7 @@ $space_to_nbsp = function ($message)
 
 	$msg = preg_replace('/^ /m',	NBSP . ' ', $msg);
 	$msg = preg_replace('/ $/m',	' ' . NBSP, $msg);
-	$msg = preg_replace('/  /',		NBSP . ' ', $msg);
+	$msg = preg_replace('/ {2}/',	NBSP . ' ', $msg);
 
 	return $msg;
 };
