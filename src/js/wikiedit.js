@@ -1,5 +1,5 @@
 /*!
- * WikiEdit v3.22
+ * WikiEdit v3.25
  * https://wackowiki.org/doc/Dev/Projects/WikiEdit
  *
  * Licensed BSD © Roman Ivanov, Evgeny Nedelko, WackoWiki Team
@@ -105,7 +105,7 @@ class WikiEdit extends ProtoEdit
 		this.addButton('about',			lang.HelpAbout,		'', 'document.getElementById(\'' + this.id + '\')._owner.help');
 
 		try {
-			var toolbar			= document.createElement('div');
+			let toolbar			= document.createElement('div');
 			toolbar.id			= 'tb_' + this.id;
 			this.area.parentNode.insertBefore(toolbar, this.area);
 			toolbar				= document.getElementById('tb_' + this.id);
@@ -124,8 +124,8 @@ class WikiEdit extends ProtoEdit
 	// internal functions ----------------------------------------------------
 	_LSum(Tag, Text, Skip)
 	{
-		var q, w;
-		
+		let q, w;
+
 		if (Skip)
 		{
 			let bb	= /^([ ]*)([*][*])(.*)$/;
@@ -158,8 +158,8 @@ class WikiEdit extends ProtoEdit
 
 	_RSum(Text, Tag)
 	{
-		var w	= /^(.*)([ ]*)$/;
-		var q	= Text.match(w);
+		const w	= /^(.*)([ ]*)$/;
+		const q	= Text.match(w);
 		Text	= q[1] + Tag + q[2];
 
 		return Text;
@@ -167,9 +167,9 @@ class WikiEdit extends ProtoEdit
 
 	_TSum(Text, Tag, Tag2, Skip)
 	{
-		var bb	= new RegExp('^([ ]*)' + this.begin + '([ ]*)([*][*])(.*)$');
-		var q	= Text.match(bb);
-		var w;
+		const bb	= new RegExp('^([ ]*)' + this.begin + '([ ]*)([*][*])(.*)$');
+		let q		= Text.match(bb);
+		let w;
 
 		if (q != null)
 		{
@@ -202,14 +202,14 @@ class WikiEdit extends ProtoEdit
 		if (q != null)
 		{
 			w		= new RegExp('^(.*)' + this.end);
-			var q1	= Text.match(w);
+			const q1	= Text.match(w);
 
 			if (q1 != null)
 			{
-				var s	= q1[1];
-				var ch	= s.substring(s.length - 1, s.length);
+				let s	= q1[1];
+				let ch	= s.substring(s.length - 1, s.length);
 
-				while (ch == ' ')
+				while (ch === ' ')
 				{
 					s	= s.substring(0, s.length - 1);
 					ch	= s.substring(s.length - 1, s.length);
@@ -224,26 +224,40 @@ class WikiEdit extends ProtoEdit
 
 	MarkUp(Tag, Text, Tag2, onNewLine, expand, strip)
 	{
-		var skip	= 0;
-		if (expand == 0)
-			skip = 1;
-		var r		= '';
-		var fIn		= false;
-		var fOut	= false;
-		var add		= 0;
-		var f		= false;
-		var w		= /^ {2}( *)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))/u;
-		Text		= Text.replace(/\r/g, '');
-		var lines	= Text.split('\n');
+		let l;
+		let skip	= 0;
 
-		for (var i = 0; i < lines.length; i++)
+		if (expand === 0)
+		{
+			skip = 1;
+		}
+
+		let r		= '';
+		let fIn		= false;
+		let fOut	= false;
+		let add		= 0;
+		let f		= false;
+		const w		= /^ {2}( *)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))/u;
+		Text		= Text.replace(/\r/g, '');
+		const lines	= Text.split('\n');
+
+		for (let i = 0; i < lines.length; i++)
 		{
 			if (this.rbegin.test(lines[i]))
+			{
 				fIn = true;
+			}
+
 			if (this.rendb.test(lines[i]))
+			{
 				fIn = false;
+			}
+
 			if (this.rend.test(lines[i]))
+			{
 				fOut = true;
+			}
+
 			if (this.rendb.test(lines[i + 1]))
 			{
 				fOut = true;
@@ -251,12 +265,12 @@ class WikiEdit extends ProtoEdit
 				lines[i]		= lines[i] + this.end;
 			}
 
-			if (r != '')
+			if (r !== '')
 			{
 				r += '\n';
 			}
 
-			if (fIn && strip == 1)
+			if (fIn && strip === 1)
 			{
 				if (this.rbegin.test(lines[i]))
 				{
@@ -285,20 +299,33 @@ class WikiEdit extends ProtoEdit
 			// adding first tag if first or adding last one if last
 			// else adding unchanged text
 			*/
-			if (fIn && (onNewLine == 0 | (onNewLine == 1 && add == 0) | (onNewLine == 2 && (add == 0 || fOut))))
+			if (fIn && (onNewLine === 0 | (onNewLine === 1 && add === 0) | (onNewLine === 2 && (add === 0 || fOut))))
 			{
 				//adding tags
-				if (expand == 1)
+				if (expand === 1)
 				{
 					l = lines[i];
-					if (add == 0)
+
+					if (add === 0)
+					{
 						l = this._LSum(Tag, l, skip);
+					}
+
 					if (fOut)
+					{
 						l = this._RSum(l, Tag2);
-					if (add != 0 && onNewLine != 2)
+					}
+
+					if (add !== 0 && onNewLine !== 2)
+					{
 						l = this._LSum(Tag, l, skip);
-					if (!fOut && onNewLine != 2)
+					}
+
+					if (!fOut && onNewLine !== 2)
+					{
 						l = this._RSum(l, Tag2);
+					}
+
 					r += l;
 				}
 				else
@@ -312,14 +339,14 @@ class WikiEdit extends ProtoEdit
 					 */
 					//	alert(lines[i].replace(/\n/g, '|').replace(/ /g, '_'));
 					//	alert(lines[i+1].replace(/\n/g, '|').replace(/ /g, '_'));
-					var l = this._TSum(lines[i], Tag, Tag2, skip);
+					l = this._TSum(lines[i], Tag, Tag2, skip);
 
-					if (add != 0 && onNewLine != 2)
+					if (add !== 0 && onNewLine !== 2)
 					{
 						l = this._LSum(Tag, l, skip);
 					}
 
-					if (!fOut && onNewLine != 2)
+					if (!fOut && onNewLine !== 2)
 					{
 						l = this._RSum(l, Tag2);
 					}
@@ -347,10 +374,19 @@ class WikiEdit extends ProtoEdit
 	keyDown(e)
 	{
 		if (!this.enabled)
+		{
 			return;
+		}
+
 		if (!e)
+		{
 			e = window.event;
-		var q,
+		}
+
+		const t			= this.area;
+		const wasEvent	= false;
+
+		let q,
 			lines,
 			totalLines,
 			re,
@@ -358,25 +394,34 @@ class WikiEdit extends ProtoEdit
 			sel,
 			q2,
 			z;
-		var justenter	= false;
-		var wasEvent	= false;
-		var res			= false;
-		var remundo		= false;
-		var noscroll	= false;
-		var t			= this.area;
-		var Key			= e.keyCode;
-		if (Key == 0)
+		let justenter	= false;
+		let noscroll	= false;
+		let remundo		= false;
+		let res			= false;
+		let Key			= e.keyCode;
+
+		if (Key === 0)
+		{
 			Key = e.key;
-		if (Key == 8 || Key == 13 || Key == 32 || (Key > 45 && Key < 91) || (Key > 93 && Key < 112)
-			|| (Key > 123 && Key < 144) || (Key > 145 && Key < 255)) {
+		}
+
+		if (Key === 8 || Key === 13 || Key === 32 || (Key > 45 && Key < 91) || (Key > 93 && Key < 112)
+			|| (Key > 123 && Key < 144) || (Key > 145 && Key < 255))
+		{
 			remundo = Key;
 		}
-		if (e.altKey && !e.ctrlKey)
-			Key = Key + 4096;
-		if (e.ctrlKey)
-			Key = Key + 2048;
 
-		if (e.type == 'keypress' && this.checkKey(Key))
+		if (e.altKey && !e.ctrlKey)
+		{
+			Key = Key + 4096;
+		}
+
+		if (e.ctrlKey)
+		{
+			Key = Key + 2048;
+		}
+
+		if (e.type === 'keypress' && this.checkKey(Key))
 		{
 			e.preventDefault();
 			e.stopPropagation();
@@ -384,17 +429,17 @@ class WikiEdit extends ProtoEdit
 			return false;
 		}
 
-		if (e.type == 'keyup' && (Key == 9 || Key == 13))
+		if (e.type === 'keyup' && (Key === 9 || Key === 13))
 		{
 			return false;
 		}
 
-		var scroll		= t.scrollTop;
-		var undotext	= t.value;
-		var undosels	= t.selectionStart;
-		var undosele	= t.selectionEnd;
+		const scroll	= t.scrollTop;
+		const undotext	= t.value;
+		const undosels	= t.selectionStart;
+		const undosele	= t.selectionEnd;
 
-		str				= t.value.substr(t.selectionStart, t.selectionEnd - t.selectionStart);
+		str				= t.value.substring(t.selectionStart, t.selectionEnd - t.selectionStart);
 		sel				= (str.length > 0);
 
 		// take an autocomplete
@@ -422,9 +467,9 @@ class WikiEdit extends ProtoEdit
 			//	case 2132: // T -- disabled because conflict with FireFox Ctrl+T shortcut
 			case 4181: // U
 			case 4169: // I
-				if (this.tab || Key != 9)
+				if (this.tab || Key !== 9)
 				{
-					if (e.shiftKey || Key == 4181)
+					if (e.shiftKey || Key === 4181)
 					{
 						res = this.unindent();
 					}
@@ -530,10 +575,10 @@ class WikiEdit extends ProtoEdit
 				}
 				else
 				{
-					var text	= t.value;
+					let text	= t.value;
 					text		= text.replace(/\r/g, '');
-					var sel1	= text.substr(0, t.selectionStart);
-					var sel2	= text.substr(t.selectionEnd);
+					let sel1	= text.substring(0, t.selectionStart);
+					const sel2	= text.substring(t.selectionEnd);
 
 					re			= new RegExp('(^|\n)(( +)((([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$', 'u');
 					q			= sel1.match(re);
@@ -542,7 +587,7 @@ class WikiEdit extends ProtoEdit
 					{
 						if (!this.enterpressed)
 						{
-							if (q[3].length % 2 == 1)
+							if (q[3].length % 2 === 1)
 							{
 								q[2] = '';
 							}
@@ -570,14 +615,14 @@ class WikiEdit extends ProtoEdit
 						if (t.childNodes[0] != null)
 						{
 							t.childNodes[0].nodeValue = t.value;
-							var temp = document.createRange();
+							const temp = document.createRange();
 							temp.setStart(t.childNodes[0], sel - 2);
 							temp.setEnd(t.childNodes[0], sel);
 						}
 
 						// t.scrollIntoView(true);
 						z			= t.selectionStart;
-						lines		= t.value.substr(0, z).split('\n').length - 1;
+						lines		= t.value.substring(0, z).split('\n').length - 1;
 						totalLines	= t.value.split('\n').length - 1;
 
 						if (scroll + t.offsetHeight + 25 > Math.floor((t.scrollHeight / (totalLines + 1)) * lines))
@@ -611,15 +656,21 @@ class WikiEdit extends ProtoEdit
 			this.undotext	= undotext;
 			this.undosels	= undosels;
 			this.undosele	= undosele;
+
 			if (wasEvent)
+			{
 				return true;
-			e.cancelBubble	= true;
+			}
+
 			e.preventDefault();
 			e.stopPropagation();
 
 			if (!noscroll)
+			{
 				t.scrollTop = scroll;
-			e.returnValue	= false;
+			}
+
+			e.preventDefault();
 
 			return false;
 		}
@@ -627,13 +678,14 @@ class WikiEdit extends ProtoEdit
 
 	getDefines()
 	{
-		var t			= this.area;
-		var text		= t.value;
+		const t			= this.area;
+		const text		= t.value;
+
 		this.ss			= t.selectionStart;
 		this.se			= t.selectionEnd;
-		this.sel1		= text.substr(0, this.ss);
-		this.sel2		= text.substr(this.se);
-		this.sel		= text.substr(this.ss, this.se - this.ss);
+		this.sel1		= text.substring(0, this.ss);
+		this.sel2		= text.substring(this.se);
+		this.sel		= text.substring(this.ss, this.se - this.ss);
 		this.str		= this.sel1 + this.begin + this.sel + this.end + this.sel2;
 
 		this.scroll		= t.scrollTop;
@@ -644,11 +696,11 @@ class WikiEdit extends ProtoEdit
 
 	setAreaContent(str)
 	{
-		var t		= this.area;
-		var q		= str.match(new RegExp('((.|\n)*)' + this.begin)); //?:
-		var l		= q[1].length;
+		const t		= this.area;
+		let q		= str.match(new RegExp('((.|\n)*)' + this.begin)); //?:
+		const l		= q[1].length;
 		q			= str.match(new RegExp(this.begin + '((.|\n)*)' + this.end));
-		var l1		= q[1].length;
+		const l1	= q[1].length;
 		str			= str.replace(this.rbegin, '');
 		str			= str.replace(this.rend, '');
 		t.value		= str;
@@ -665,22 +717,31 @@ class WikiEdit extends ProtoEdit
 			1 - add tags only on the first line of selection
 			2 - add tags before and after selection
 			//3 - add tags only if there's one line -- not implemented
-		
+
 		expand:
 			0 - add tags on selection
 			1 - add tags on full line(s)
 		*/
 		if (onNewLine == null)
+		{
 			onNewLine = 0;
+		}
+
 		if (expand == null)
+		{
 			expand = 0;
+		}
+
 		if (strip == null)
+		{
 			strip = 0;
-		var t = this.area;
+		}
+
+		const t = this.area;
 		t.focus();
 		this.getDefines();
 		// alert(Tag + " | " + Tag2 + " | " + onNewLine + " | " + expand + " | " + strip);
-		var str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
+		const str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
 		this.setAreaContent(str);
 
 		return true;
@@ -688,17 +749,17 @@ class WikiEdit extends ProtoEdit
 
 	unindent()
 	{
-		var t		= this.area;
+		const t		= this.area;
 		t.focus();
 		this.getDefines();
-		var r		= '';
-		var fIn		= false;
-		var lines	= this.str.split('\n');
-		var rbeginb	= new RegExp('^' + this.begin);
+		let r		= '';
+		let fIn		= false;
+		const lines	= this.str.split('\n');
+		let rbeginb	= new RegExp('^' + this.begin);
 
 		for (let value of lines)
 		{
-			var line = value;
+			let line = value;
 
 			if (this.rbegin.test(line))
 			{
@@ -712,7 +773,7 @@ class WikiEdit extends ProtoEdit
 				fIn = false;
 			}
 
-			if (r != '')
+			if (r !== '')
 			{
 				r += '\n';
 			}
@@ -739,21 +800,30 @@ class WikiEdit extends ProtoEdit
 
 	createLink(isAlt)
 	{
-		var t = this.area;
+		const n = /\n/;
+		const t = this.area;
+
 		t.focus();
 		this.getDefines();
-		var n = /\n/;
 
 		if (!n.test(this.sel))
 		{
 			if (!isAlt)
 			{
-				var lnk = prompt(lang.Link + ':', this.sel);
+				let lnk = prompt(lang.Link + ':', this.sel);
+
 				if (lnk == null)
+				{
 					lnk = this.sel;
-				var sl = prompt(lang.TextForLinking + ':', this.sel);
+				}
+
+				let sl = prompt(lang.TextForLinking + ':', this.sel);
+
 				if (sl == null)
+				{
 					sl = '';
+				}
+
 				this.sel = lnk + ' ' + sl;
 			}
 
@@ -769,10 +839,10 @@ class WikiEdit extends ProtoEdit
 
 	help()
 	{
-		var s = '';
+		let s = '';
 
-		s = '				WikiEdit 3.23 \n';
-		s += '	© Roman Ivanov, WackoWiki Team 2003-2023	 \n';
+		s = '				WikiEdit 3.25 \n';
+		s += '	© Roman Ivanov, WackoWiki Team 2003-2025	 \n';
 		s += '	https://wackowiki.org/doc/Dev/Projects/WikiEdit \n';
 		s += '\n';
 		s += lang.HelpAboutTip;

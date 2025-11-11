@@ -4,6 +4,10 @@
  * Licensed BSD © Kuso Mendokusee, WackoWiki Team
  */
 
+// Ajax "XmlHttpRequest" routine.
+// builds request to server-side,
+let req;
+
 class AutoComplete
 {
 	constructor(wikiedit, handler)
@@ -33,8 +37,8 @@ class AutoComplete
 	// add some stuff for visualization
 	addButton()
 	{
-		var we	= this.wikiedit;
-		this.id	= 'autocomplete_' + this.wikiedit.id;
+		const we	= this.wikiedit;
+		this.id		= 'autocomplete_' + this.wikiedit.id;
 		we.addButton('customhtml',
 			  '<li id="' + this.id + '_li" style="display:none;">'
 			+ '<div style="font:bold 12px Arial; margin:0; padding: 3px 3px 4px 4px;" id="' + this.id + '" '
@@ -55,12 +59,14 @@ class AutoComplete
 	}
 
 	// ------ inplace specific routines ------ ( MSIE ONLY ) ------
+	longtext;
+	itempos;
 	selectInplace(pos)
 	{
 		if (this.found_patterns === false)
 			return;
-		var _pos = this.found_patterns_selected;
-		var _item;
+		const _pos = this.found_patterns_selected;
+		let _item;
 
 		if (_pos >= 0)
 		{
@@ -84,71 +90,70 @@ class AutoComplete
 				_item.className				= 'ac-over-';
 			this.found_pattern				= this.found_patterns[pos];
 			this.found_patterns_selected	= pos;
-			var ac							= document.getElementById(this.id);
+			const ac						= document.getElementById(this.id);
 			ac.innerHTML					= this.found_pattern;
 		}
 	}
 
 	redrawInplace()
 	{
-		if (this.found_patterns.length == 0)
+		const _str = this.longtext.substring(0, this.itempos) + this.wikiedit.begin
+			+ this.request_pattern + this.wikiedit.end
+			+ this.longtext.substring(this.itempos + this.request_pattern.length)
+			+ this.wikiedit.sel2;
+		if (this.found_patterns.length === 0)
 			return;
 
-		var inplace		= document.getElementById(this.id + '_inplace');
-		var contents	= '';
+		const inplace		= document.getElementById(this.id + '_inplace');
+		let contents		= '';
 
 		// lets prepare content from this.found_patterns
-		for (var i in this.found_patterns)
+		for (const i in this.found_patterns)
 		{
-			var pattern	= this.found_patterns[i];
-			var div		= '<div id=\'' + this.wikiedit.id + '_item_' + i + '\'' +
-							' onmouseover=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.selectInplace(' + '"' + i + '"' + ');\' ' +
-							' onclick=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.insertFound(' + '"' + pattern + '"' + ');\'>' +
-							'<img src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
+			const pattern	= this.found_patterns[i];
+			const div		= '<div id=\'' + this.wikiedit.id + '_item_' + i + '\'' +
+								' onmouseover=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.selectInplace(' + '"' + i + '"' + ');\' ' +
+								' onclick=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.insertFound(' + '"' + pattern + '"' + ');\'>' +
+								'<img src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
 			contents += div;
 		}
 
 		// now we place out stuff form
-		var d		= document.body;
-		var d_left	= d.scrollLeft;
-		var d_top	= d.scrollTop;
-		var ta		= this.wikiedit.area;
+		const d			= document.body;
+		const d_left	= d.scrollLeft;
+		const d_top		= d.scrollTop;
+		const ta		= this.wikiedit.area;
 
 		// step 1. calculate position for inplace window
 		this.wikiedit.area.focus();
 		window.scrollTo(d_left, d_top);
 		this.wikiedit.getDefines();
 
-		var str = this.wikiedit.str;
+		const str = this.wikiedit.str;
 		{
-			var longtext	= this.wikiedit.sel1 + this.wikiedit.sel;
-			var itempos		= longtext.lastIndexOf(this.request_pattern);
+			const longtext	= this.wikiedit.sel1 + this.wikiedit.sel;
+			const itempos	= longtext.lastIndexOf(this.request_pattern);
 
 			if (itempos >= 0)
 			{
-				var _str = longtext.substr(0, itempos) + this.wikiedit.begin
-					+ this.request_pattern + this.wikiedit.end
-					+ longtext.substr(itempos + this.request_pattern.length)
-					+ this.wikiedit.sel2;
 			}
 		}
 
 		this.wikiedit.setAreaContent(_str);
-		var sel2		= window;
-		var sel2_range	= sel2.getSelection();
+		const sel2_range	= window.getSelection();
 		// -- calc x y of ta
-		var z			= ta;
-		var x			= 0;
-		var y			= 0;
+		let z				= ta;
+		let x				= 0;
+		let y				= 0;
 
 		do {
 			x += parseInt(isNaN(parseInt(z.offsetLeft)) ? 0 : z.offsetLeft);
 			y += parseInt(isNaN(parseInt(z.offsetTop)) ? 0 : z.offsetTop);
 		}
-		while (z = z.offsetParent);
+		while (z === z.offsetParent);
 
-		var left	= d.scrollLeft + ta.scrollLeft + sel2_range.boundingLeft - 2;
-		var top		= d.scrollTop + ta.scrollTop + sel2_range.boundingTop + 15;
+		const left	= d.scrollLeft + ta.scrollLeft + sel2_range.boundingLeft - 2;
+		const top	= d.scrollTop + ta.scrollTop + sel2_range.boundingTop + 15;
 
 		// step 3. draw window itself
 		inplace.innerHTML		= contents;
@@ -175,22 +180,22 @@ class AutoComplete
 	// inserts found pattern right into textarea
 	insertFound(foundPattern)
 	{
-		if (foundPattern == undef())
+		if (foundPattern === undef())
 			foundPattern = this.found_pattern;
-		var state = this.visual_state;
+		const state = this.visual_state;
 		this.visualState('hidden');
 		if (this.request_pattern === false)
 			return;
-		var d = document.body;
-		var d_left	= d.scrollLeft;
-		var d_top	= d.scrollTop;
+		const d			= document.body;
+		const d_left	= d.scrollLeft;
+		const d_top		= d.scrollTop;
 		this.wikiedit.area.focus();
 		this.wikiedit.getDefines();
 		window.scrollTo(d_left, d_top);
-		var str = this.wikiedit.str;
-		var longtext, itempos;
+		let str = this.wikiedit.str;
+		let longtext, itempos;
 
-		if (state == '404')
+		if (state === '404')
 		{
 			// just select word
 			longtext	= this.wikiedit.sel1 + this.wikiedit.sel;
@@ -198,10 +203,10 @@ class AutoComplete
 
 			if (itempos >= 0)
 			{
-				str = longtext.substr(0, itempos)
+				str = longtext.substring(0, itempos)
 					+ this.wikiedit.begin
 					+ this.request_pattern + this.wikiedit.end
-					+ longtext.substr(itempos + this.request_pattern.length)
+					+ longtext.substring(itempos + this.request_pattern.length)
 					+ this.wikiedit.sel2;
 			}
 		}
@@ -213,9 +218,9 @@ class AutoComplete
 
 			if (itempos >= 0)
 			{
-				str = this.wikiedit.sel1.substr(0, itempos)
+				str = this.wikiedit.sel1.substring(0, itempos)
 					+ foundPattern
-					+ this.wikiedit.sel1.substr(itempos + this.request_pattern.length)
+					+ this.wikiedit.sel1.substring(itempos + this.request_pattern.length)
 					+ this.wikiedit.begin + this.wikiedit.sel + this.wikiedit.end
 					+ this.wikiedit.sel2;
 			}
@@ -227,7 +232,7 @@ class AutoComplete
 
 	// keydown handler. Invoked from wikiedit`s keyDown
 	// its job is:
-	//	1. if user is likely typing some WikiName, then invoke recongnizer
+	//	1. if user is likely typing some WikiName, then invoke recognizer
 	//	2. if we have found some patterns, allow to select preferable one with up-down arrows and Enter/Escape as ok/cancel
 	keyDown(key, shiftKey)
 	{
@@ -257,9 +262,9 @@ class AutoComplete
 			}
 		}
 
-		var pattern;
+		let pattern;
 		// it is magic key (Ctrl + Space)
-		if (!this.found_pattern && key == 2080)
+		if (!this.found_pattern && key === 2080)
 		{
 			pattern = this.checkPattern(this.getPattern(), 'magic');
 
@@ -275,7 +280,7 @@ class AutoComplete
 
 		// it is [`\-0-9a-z] key
 		// fix it to whole russian subset
-		if ((key == 192) || (key == 189) || ((key >= 48) && (key <= 57)) || ((key >= 65) && (key <= 90))
+		if ((key === 192) || (key === 189) || ((key >= 48) && (key <= 57)) || ((key >= 65) && (key <= 90))
 			|| this.request_pattern)
 		{
 			// we will work only if user just stopped typing
@@ -311,8 +316,8 @@ class AutoComplete
 		}
 
 		this.request_pattern	= false;
-		var _pattern			= this.getPattern();
-		var pattern				= this.checkPattern(_pattern, magic_button_mode);
+		const _pattern			= this.getPattern();
+		const pattern			= this.checkPattern(_pattern, magic_button_mode);
 
 		if (pattern !== false)
 		{
@@ -365,7 +370,7 @@ class AutoComplete
 			{
 				this.strict_linking_mode = true;
 
-				return pattern.substr(2);
+				return pattern.substring(2);
 			}
 
 			if (pattern.match(this.regexp_LinkSubpage))
@@ -407,11 +412,11 @@ class AutoComplete
 	// some "range" magic
 	getPattern()
 	{
-		var start	= this.wikiedit.area.selectionStart;
-		var end		= this.wikiedit.area.selectionEnd;
+		let start	= this.wikiedit.area.selectionStart;
+		const end	= this.wikiedit.area.selectionEnd;
 
 		// go left
-		var f = 1;
+		let f		= 1;
 
 		while (f || ((this.wikiedit.area.value.charAt(start)).match(this.regexp_LinkLetter)))
 		{
@@ -421,21 +426,21 @@ class AutoComplete
 
 		start++;
 
-		return this.wikiedit.area.value.substr(start, end - start);
+		return this.wikiedit.area.value.substring(start, end - start);
 
 	}
 
 	// visual state routine. Sets some different visual widgets according to given state
 	visualState(to)
 	{
-		var reset	= document.getElementById(this.id + '_reset');
-		var li		= document.getElementById(this.id + '_li');
-		var ac		= document.getElementById(this.id);
+		const reset	= document.getElementById(this.id + '_reset');
+		const li	= document.getElementById(this.id + '_li');
+		const ac	= document.getElementById(this.id);
 
 		switch (to)
 		{
 			case 'seeking':
-				if (this.visual_state == 'found')
+				if (this.visual_state === 'found')
 					break;
 				li.style.display = '';
 				reset.style.display = '';
@@ -468,21 +473,21 @@ class AutoComplete
 
 	requestPattern(pattern)
 	{
-		var href	= this.handler + (this.handler.indexOf('?') >= 0 ? '&' : '?') + 'q=' + escape(pattern)
-					+ '&ta_id=' + escape(this.wikiedit.area.id) + '&_autocomplete=1&rnd=' + Math.random();
+		const href	= this.handler + (this.handler.indexOf('?') >= 0 ? '&' : '?') + 'q=' + encodeURIComponent(pattern)
+					+ '&ta_id=' + encodeURIComponent(this.wikiedit.area.id) + '&_autocomplete=1&rnd=' + Math.random();
 		req			= new XMLHttpRequest();
 
 		req.onreadystatechange = function()
 		{
 			if (req)
 			{
-				if (req.readyState == 4)
+				if (req.readyState === 4)
 				{
-					var items	= req.responseText.split('~~~');
-					var _items	= [];
-					var _items2;
+					const items		= req.responseText.split('~~~');
+					const _items	= [];
+					let _items2;
 
-					for (var i = 1; i < items.length; i++)
+					for (let i = 1; i < items.length; i++)
 					{
 						_items[i - 1] = items[i];
 					}
@@ -508,31 +513,25 @@ class AutoComplete
 }
 
 
-
-// Ajax "XmlHttpRequest" routine.
-// builds request to server-side,
-var req;
-
-
 // Ajax XmlHttpRequest helper routine.
 // gets invoked after ajax response arrived
 // do invoke appropriate autocomplete method
 function launchFinishComplete(ta_id, found, out)
 {
-	var ta = document.getElementById(ta_id);
-	var we = ta._owner;
-	var ac = we.autocomplete;
+	const ta = document.getElementById(ta_id);
+	const we = ta._owner;
+	const ac = we.autocomplete;
 
-	if (found == '') found = false;
+	if (found === '') found = false;
 	ac.finishComplete(found, out);
 }
 
 // lines-o-logic for "wait until users stops typing"
 function waitAutoComplete(ta_id, wait)
 {
-	var ta = document.getElementById(ta_id);
-	var we = ta._owner;
-	var ac = we.autocomplete;
+	const ta = document.getElementById(ta_id);
+	const we = ta._owner;
+	const ac = we.autocomplete;
 
-	if (ac.wait == wait) ac.tryComplete(ac.magic_mode);
+	if (ac.wait === wait) ac.tryComplete(ac.magic_mode);
 }

@@ -1,11 +1,14 @@
 /*!
- * ProtoEdit v2.22
+ * ProtoEdit v2.25
  *
  * Licensed BSD © WackoWiki Team
  */
 
 class ProtoEdit
 {
+	isIE;
+	imagesPath;
+	actionName;
 	constructor()
 	{
 		this.enabled = true;
@@ -18,7 +21,7 @@ class ProtoEdit
 		this.area			= document.getElementById(id); // area - textarea object
 		this.area._owner	= this; // area._owner - this
 
-		// rte - id of rte frame 
+		// rte - id of rte frame
 		if (rte)
 		{
 			document.getElementById(rte).contentWindow.document.addEventListener('keypress', function(ev)
@@ -56,13 +59,16 @@ class ProtoEdit
 	KeyDown()
 	{
 		if (!this.enabled)
+		{
 			return;
+		}
+
 		return true;
 	}
 
 	insTag(Tag, Tag2)
 	{
-		if (isIE)
+		if (this.isIE)
 		{
 			this.area.focus();
 			let sel				= window.getSelection();
@@ -72,9 +78,9 @@ class ProtoEdit
 		else
 		{
 			let ss				= this.area.scrollTop;
-			let sel1			= this.area.value.substr(0, this.area.selectionStart);
-			let sel2			= this.area.value.substr(this.area.selectionEnd);
-			let sel				= this.area.value.substr(this.area.selectionStart, this.area.selectionEnd - this.area.selectionStart);
+			let sel1			= this.area.value.substring(0, this.area.selectionStart);
+			let sel2			= this.area.value.substring(this.area.selectionEnd);
+			let sel				= this.area.value.substring(this.area.selectionStart, this.area.selectionEnd - this.area.selectionStart);
 			this.area.value		= sel1 + Tag + sel + Tag2 + sel2;
 			let selPos			= Tag.length + sel1.length + sel.length + Tag2.length;
 			this.area.setSelectionRange(sel1.length, selPos);
@@ -91,13 +97,13 @@ class ProtoEdit
 
 		for (let value of this.buttons)
 		{
-			var btn = value;
+			const btn = value;
 
-			if (btn.name == ' ')
+			if (btn.name === ' ')
 			{
 				html += ' <li> </li>\n';
 			}
-			else if (btn.name == 'customhtml')
+			else if (btn.name === 'customhtml')
 			{
 				html += btn.desc;
 			}
@@ -125,7 +131,7 @@ class ProtoEdit
 			actionName = this.actionName;
 		}
 
-		var i							= this.buttons.length;
+		const i							= this.buttons.length;
 		this.buttons[i]					= {};
 		this.buttons[i].name			= name;
 		this.buttons[i].desc			= desc;
@@ -135,11 +141,11 @@ class ProtoEdit
 
 	checkKey(k)
 	{
-		return	k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 || k == 53 + 2048 || k == 54 + 2048 ||
-				k == 76 + 4096 || k == 76 + 2048 || k == 78 + 2048 || k == 79 + 2048 || k == 66 + 2048 || k == 83 + 2048 ||
-				k == 85 + 2048 || k == 72 + 2048 || k == 73 + 2048 || k == 74 + 2048 || k == 84 + 2048 || k == 2109 ||
-				k == 2124 + 32 || k == 2126 + 32 || k == 2127 + 32 || k == 2114 + 32 || k == 2131 + 32 ||
-				k == 2133 + 32 || k == 2121 + 32 || k == 2120 + 32 || k == 2122 + 32;
+		return	k === 85 + 4096 || k === 73 + 4096 || k === 49 + 2048 || k === 50 + 2048 || k === 51 + 2048 || k === 52 + 2048 || k === 53 + 2048 || k === 54 + 2048 ||
+				k === 76 + 4096 || k === 76 + 2048 || k === 78 + 2048 || k === 79 + 2048 || k === 66 + 2048 || k === 83 + 2048 ||
+				k === 85 + 2048 || k === 72 + 2048 || k === 73 + 2048 || k === 74 + 2048 || k === 84 + 2048 || k === 2109 ||
+				k === 2124 + 32 || k === 2126 + 32 || k === 2127 + 32 || k === 2114 + 32 || k === 2131 + 32 ||
+				k === 2133 + 32 || k === 2121 + 32 || k === 2120 + 32 || k === 2122 + 32;
 	}
 
 	addEvent(el, evname, func)
@@ -154,11 +160,11 @@ class ProtoEdit
 			return s2;
 		}
 
-		var s	= s2;
-		var ch	= s.substring(0, 1);
+		let s	= s2;
+		let ch	= s.substring(0, 1);
 
 		// check for spaces at the beginning of the string
-		while (ch == ' ')
+		while (ch === ' ')
 		{
 			s	= s.substring(1, s.length);
 			ch	= s.substring(0, 1);
@@ -167,14 +173,14 @@ class ProtoEdit
 		ch		= s.substring(s.length - 1, s.length);
 
 		// check for spaces at the end of the string
-		while (ch == ' ')
+		while (ch === ' ')
 		{
 			s	= s.substring(0, s.length - 1);
 			ch	= s.substring(s.length - 1, s.length);
 		}
 
 		// note that there are two spaces in the string - look for multiple spaces within the string
-		while (s.indexOf('  ') != -1)
+		while (s.indexOf('  ') !== -1)
 		{
 			// again, there are two spaces in each of the strings
 			s	= s.substring(0, s.indexOf('  ')) + s.substring(s.indexOf('  ') + 1, s.length);
