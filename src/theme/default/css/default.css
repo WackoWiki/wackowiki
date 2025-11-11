@@ -490,6 +490,7 @@ header {
 
 article header {
 	width: 100%;
+	display: inline-block;
 }
 
 #header-main {
@@ -657,6 +658,15 @@ footer {
 	color: #808080; 
 	line-height: 1.24; 
 	white-space: nowrap;
+}
+
+.article-header-meta a {
+	opacity: 0;
+	pointer-events: none;
+}
+header:hover > span.article-header-meta a {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .page-meta {
