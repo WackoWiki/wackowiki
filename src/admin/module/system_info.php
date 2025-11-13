@@ -41,7 +41,7 @@ function admin_system_info($engine, $module)
 								);
 
 
-	if ($engine->db->sqlite)
+	if ($engine->db->is_sqlite)
 	{
 		$_db_version			= $engine->db->load_single('SELECT sqlite_version() AS version');
 		$db_version				= 'SQLite ' . $_db_version['version'];
@@ -91,7 +91,7 @@ function admin_system_info($engine, $module)
 	$sysinfo['tls_mode']			= [$engine->_t('TrafficProtection'), $tls_mode];
 	$sysinfo['db_version']			= [$engine->_t('DbVersion'), $db_version];
 
-	if (!$engine->db->sqlite)
+	if (!$engine->db->is_sqlite)
 	{
 		$sysinfo['sql_mode_global']		= [$engine->_t('SqlModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
 		$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];

@@ -24,7 +24,7 @@ function admin_db_repair($engine, $module, $tables)
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 <?php
-	if (!$engine->db->sqlite)
+	if (!$engine->db->is_sqlite)
 	{
 		if (isset($_POST['repair']))
 		{

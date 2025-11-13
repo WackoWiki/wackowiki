@@ -253,7 +253,7 @@ function admin_maint_resync($engine, $module)
 				$engine->sess->resync_links			= '';
 				$engine->sess->resync_counter		= 0;
 
-				$sql_truncate = ($engine->db->sqlite
+				$sql_truncate = ($engine->db->is_sqlite
 					? 'DELETE FROM '
 					: 'TRUNCATE ');
 

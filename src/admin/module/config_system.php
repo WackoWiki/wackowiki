@@ -291,7 +291,7 @@ function admin_config_system($engine, $module)
 						foreach ($store_modes as $mode => $store_mode)
 						{
 							// SQLite allows only file sessions
-							if ($engine->db->sqlite && $mode !== 1)
+							if ($engine->db->is_sqlite && $mode !== 1)
 							{
 								continue;
 							}

@@ -26,7 +26,7 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 	<?php echo $engine->_t('DbStatSection');?>
 	<br>
 	<br>
-	<?php if (!$engine->db->sqlite)
+	<?php if (!$engine->db->is_sqlite)
 	{
 	?>
 	<table class="db-stats formation lined">

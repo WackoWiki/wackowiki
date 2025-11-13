@@ -47,7 +47,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		($tag
 			? 'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) '
 			: '') .
-		(!$this->db->sqlite
+		(!$this->db->is_sqlite
 			? 	''
 			: 	'LEFT JOIN (
 					SELECT rowid
@@ -56,7 +56,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 				) f ON a.page_id = f.rowid '
 		) .
 		'WHERE (' .
-			(!$this->db->sqlite
+			(!$this->db->is_sqlite
 				?	'(MATCH
 						(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) ' .
 						'OR lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ') ' .
@@ -102,7 +102,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 	// load search results
 	$results = $this->db->load_all(
 		'SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments, ' .
-			(!$this->db->sqlite
+			(!$this->db->is_sqlite
 				? 'MATCH(a.body) AGAINST(' . $this->db->q($phrase) . ' IN BOOLEAN MODE) AS score, '
 				: ''
 			) .
@@ -111,7 +111,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 			'LEFT JOIN ' . $prefix . 'user u ON (a.user_id = u.user_id) ' .
 			'LEFT JOIN ' . $prefix . 'user o ON (a.owner_id = o.user_id) ' .
 		$selector .
-		(!$this->db->sqlite
+		(!$this->db->is_sqlite
 			? 'ORDER BY score DESC '
 			: ''
 		) .

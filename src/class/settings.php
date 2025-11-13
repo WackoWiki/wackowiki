@@ -50,7 +50,7 @@ class Settings extends Dbal implements ArrayAccess
 			}
 
 			$this->system_seed_hash	= hash('sha1', $this->system_seed);
-			$this->sqlite			= in_array($this->db_driver, ['sqlite', 'sqlite_pdo']);
+			$this->is_sqlite		= in_array($this->db_driver, ['sqlite', 'sqlite_pdo']);
 
 			if (!RECOVERY_MODE)
 			{
@@ -245,7 +245,7 @@ class Settings extends Dbal implements ArrayAccess
 				"INSERT INTO {$this->table_prefix}config (config_id, config_name, config_value)
 					VALUES " .
 						implode(', ', $values) . " " .
-					(!$this->sqlite
+					(!$this->is_sqlite
 						? "ON DUPLICATE KEY UPDATE
 							config_name		= VALUES(config_name),
 							config_value	= VALUES(config_value)"

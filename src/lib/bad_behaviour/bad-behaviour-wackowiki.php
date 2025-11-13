@@ -222,7 +222,7 @@ function bb2_install()
 
 	if (defined('BB2_NO_CREATE')) return;
 	if (!$settings['logging']) return;
-	if ($db->sqlite) return;
+	if ($db->is_sqlite) return;
 
 	bb2_db_query(bb2_table_structure($settings['log_table']));
 }

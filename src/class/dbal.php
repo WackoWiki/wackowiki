@@ -42,7 +42,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 			}
 
 			// Set database collation
-			if ($this->db_collation && !$this->sqlite)
+			if ($this->db_collation && !$this->is_sqlite)
 			{
 				$this->db->query("SET collation_connection = '$this->db_collation'");
 			}
@@ -78,7 +78,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 	function date_sub(int $value, string $interval): string
 	{
-		if ($this->sqlite)
+		if ($this->is_sqlite)
 		{
 			return match ($interval)
 			{

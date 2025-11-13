@@ -6661,7 +6661,7 @@ class Wacko
 				' . $this->db->q($privilege) . ',
 				' . $this->db->q($list) . '
 			)' .
-			(!$this->db->sqlite
+			(!$this->db->is_sqlite
 				? '	ON DUPLICATE KEY UPDATE
 						privilege	= VALUES(privilege),
 						list		= VALUES(list)'
