@@ -217,10 +217,12 @@ function bb2_write_settings($settings)
 // installation
 function bb2_install()
 {
+	global $db;
 	$settings = bb2_read_settings();
 
 	if (defined('BB2_NO_CREATE')) return;
 	if (!$settings['logging']) return;
+	if ($db->sqlite) return;
 
 	bb2_db_query(bb2_table_structure($settings['log_table']));
 }

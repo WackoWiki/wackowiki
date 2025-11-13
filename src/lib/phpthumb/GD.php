@@ -764,7 +764,7 @@ class GD extends PHPThumb
 	 * @param string		$file_name	The full path and filename of the image to save
 	 * @param string|null	$format		The format to save the image in (optional, must be one of [AVIF, GIF, JPEG, JPG, PNG, WEBP]
 	 */
-	public function save(string $file_name, string $format = null): GD
+	public function save(string $file_name, ?string $format = null): GD
 	{
 		$validFormats	= ['AVIF', 'GIF', 'JPEG', 'JPG', 'PNG', 'WEBP'];
 		$format			= ($format !== null) ? strtoupper($format) : $this->format;

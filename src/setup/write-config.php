@@ -15,7 +15,7 @@ if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 {
 	$config['db_charset']	= '';
 	$config['db_collation']	= '';
-	$config['db_engine']	= 'sqlite3';
+	$config['db_engine']	= 'SQLite3';
 	$config['db_vendor']	= '';
 	$config['db_host']		= '';
 	$config['db_port']		= '';
