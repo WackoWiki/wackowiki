@@ -42,7 +42,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 			}
 
 			// Set database collation
-			if ($this->db_collation && $this->db_driver != 'sqlite')
+			if ($this->db_collation && !$this->sqlite)
 			{
 				$this->db->query("SET collation_connection = '$this->db_collation'");
 			}
