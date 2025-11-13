@@ -30,6 +30,11 @@ class DbSqlite implements DbInterface
 		{
 			$this->dblink = new \SQLite3($config->db_name);
 
+			// Define the regexp function
+			$this->dblink->createFunction('regexp', function($pattern, $value) {
+				return preg_match("@$pattern@iu", $value) ? 1 : 0;
+			});
+
 			$this->dblink->enableExceptions(true);
 		}
 		catch (Exception $e)

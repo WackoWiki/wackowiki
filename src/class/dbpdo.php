@@ -13,9 +13,8 @@ class DbPDO implements DbInterface
 	function __construct(&$config)
 	{
 		$this->config = & $config;
-		$driver = $config->db_driver;
 
-		$driver = match ($driver)
+		$driver = match ($config->db_driver)
 		{
 			'mysql_pdo'		=> 'mysql',
 			'sqlite_pdo'	=> 'sqlite',
@@ -51,6 +50,15 @@ class DbPDO implements DbInterface
 				$config->db_user,
 				$config->db_password,
 				$options);
+
+			if ($driver == 'sqlite')
+			{
+				// Define the regexp function
+				$this->dblink->sqliteCreateFunction('regexp', function($pattern, $value) {
+					return preg_match("@$pattern@iu", $value) ? 1 : 0;
+				});
+			}
+
 		}
 		catch (PDOException $e)
 		{
