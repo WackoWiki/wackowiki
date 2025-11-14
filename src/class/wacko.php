@@ -5262,10 +5262,13 @@ class Wacko
 				}
 			}
 
-			$this->db->sql_query(
-				'INSERT INTO ' . $this->prefix . 'external_link ' .
-					'(page_id, link) ' .
-				'VALUES ' . utf8_rtrim($query, ','));
+			if ($query)
+			{
+				$this->db->sql_query(
+					'INSERT INTO ' . $this->prefix . 'external_link ' .
+						'(page_id, link) ' .
+					'VALUES ' . utf8_rtrim($query, ','));
+			}
 		}
 	}
 
