@@ -2,15 +2,15 @@
 	<!--
 		function check()
 		{
-			var f = document.forms.form1;
+			const f = document.forms.config_database;
 
 			// Ensure a database driver is selected
-			var db_driver_selected = false;
+			let db_driver_selected = false;
 
 			// If there is no value property then we have an array of possible database driver radio boxes
-			if(f.elements["config[db_driver]"].value == undefined)
+			if(f.elements["config[db_driver]"].value === undefined)
 			{
-				for (var i = 0; i < f.elements["config[db_driver]"].length; i++)
+				for (let i = 0; i < f.elements["config[db_driver]"].length; i++)
 				{
 					if(f.elements["config[db_driver]"][i].checked)
 					{
@@ -43,7 +43,7 @@
 	// -->
 </script>
 
-<form action="<?php echo $base_path ?>?installAction=install-database" method="post" name="form1">
+<form action="<?php echo $base_path ?>?installAction=install-database" method="post" name="config_database">
 <?php
 write_config_hidden_nodes($config_parameters);
 
@@ -98,7 +98,7 @@ else
 	else
 	{
 		// Can't switch between SQLite and MariaDB / MySQL during upgrade routine!
-		if ($config['sqlite'])
+		if ($config['is_sqlite'])
 		{
 			$drivers[]	= ['pdo_sqlite',	'sqlite_pdo',	'PDO SQLite'];
 			$drivers[]	= ['sqlite',		'sqlite',		'SQLite'];

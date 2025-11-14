@@ -143,7 +143,7 @@ class Diag
 				{
 					// [C] MySQL character set
 
-					if (!$config['sqlite'])
+					if (!$config['is_sqlite'])
 					{
 						$query = "SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation\_connection';";
 
