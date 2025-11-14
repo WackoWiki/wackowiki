@@ -60,29 +60,71 @@ $bb2_settings_defaults = [
 // Our log table structure
 function bb2_table_structure($name)
 {
+	global $db;
+
 	// It's not paranoia if they really are out to get you.
-	$name_escaped = bb2_db_escape($name);
-	return "CREATE TABLE IF NOT EXISTS `$name_escaped` (
-		`log_id` INT(11) NOT NULL AUTO_INCREMENT,
-		`ip` VARCHAR(45) NOT NULL DEFAULT '',
-		`host` VARCHAR(2083) NOT NULL DEFAULT '',
-		`date` DATETIME DEFAULT NULL,
-		`request_method` VARCHAR(8) NOT NULL DEFAULT '',
-		`request_uri` VARCHAR(2083) NOT NULL DEFAULT '',
-		`request_uri_hash` CHAR(40) NOT NULL DEFAULT '',
-		`server_protocol` VARCHAR(12) NOT NULL DEFAULT '',
-		`http_headers` TEXT NOT NULL,
-		`user_agent` TEXT DEFAULT NULL,
-		`user_agent_hash` CHAR(40) NOT NULL DEFAULT '',
-		`request_entity` TEXT DEFAULT NULL,
-		`status_key` VARCHAR(10) NOT NULL DEFAULT '',
-		PRIMARY KEY (`log_id`),
-		KEY `idx_staus_key` (`status_key`),
-		KEY `idx_request_uri_hash` (`request_uri_hash`),
-		KEY `idx_user_agent_hash` (`user_agent_hash`),
-		KEY `idx_ip` (`ip`),
-		KEY `idx_request_method` (`request_method`)
+	if ($db->is_sqlite)
+	{
+		$tbl_bb[] = <<<STR
+			CREATE TABLE IF NOT EXISTS "{$name}" (
+				"log_id" INTEGER PRIMARY KEY AUTOINCREMENT,
+				"ip" VARCHAR(45) NOT NULL DEFAULT '' ,
+				"host" VARCHAR(2083) NOT NULL DEFAULT '' ,
+				"date" DATETIME NULL  ,
+				"request_method" VARCHAR(8) NOT NULL DEFAULT '' ,
+				"request_uri" VARCHAR(2083) NOT NULL DEFAULT '' ,
+				"request_uri_hash" CHARACTER(40) NOT NULL DEFAULT '' ,
+				"server_protocol" VARCHAR(12) NOT NULL DEFAULT '' ,
+				"http_headers" TEXT NOT NULL  ,
+				"user_agent" TEXT NULL  ,
+				"user_agent_hash" CHARACTER(40) NOT NULL DEFAULT '' ,
+				"request_entity" TEXT NULL  ,
+				"status_key" VARCHAR(10) NOT NULL DEFAULT ''
+			);
+			STR;
+		$tbl_bb[] = <<<STR
+			CREATE INDEX IF NOT EXISTS "bb_idx_user_agent_hash" ON "{$name}" ("user_agent_hash");
+			STR;
+		$tbl_bb[] = <<<STR
+			CREATE INDEX IF NOT EXISTS "bb_idx_staus_key" ON "{$name}" ("status_key");
+			STR;
+		$tbl_bb[] = <<<STR
+			CREATE INDEX IF NOT EXISTS "bb_idx_request_uri_hash" ON "{$name}" ("request_uri_hash");
+			STR;
+		$tbl_bb[] = <<<STR
+			CREATE INDEX IF NOT EXISTS "bb_idx_request_method" ON "{$name}" ("request_method");
+			STR;
+		$tbl_bb[] = <<<STR
+			CREATE INDEX IF NOT EXISTS "bb_idx_ip" ON "{$name}" ("ip");
+			STR;
+	}
+	else
+	{
+		$name_escaped = bb2_db_escape($name);
+		$tbl_bb[] = "CREATE TABLE IF NOT EXISTS `$name_escaped` (
+			`log_id` INT(11) NOT NULL AUTO_INCREMENT,
+			`ip` VARCHAR(45) NOT NULL DEFAULT '',
+			`host` VARCHAR(2083) NOT NULL DEFAULT '',
+			`date` DATETIME DEFAULT NULL,
+			`request_method` VARCHAR(8) NOT NULL DEFAULT '',
+			`request_uri` VARCHAR(2083) NOT NULL DEFAULT '',
+			`request_uri_hash` CHAR(40) NOT NULL DEFAULT '',
+			`server_protocol` VARCHAR(12) NOT NULL DEFAULT '',
+			`http_headers` TEXT NOT NULL,
+			`user_agent` TEXT DEFAULT NULL,
+			`user_agent_hash` CHAR(40) NOT NULL DEFAULT '',
+			`request_entity` TEXT DEFAULT NULL,
+			`status_key` VARCHAR(10) NOT NULL DEFAULT '',
+			PRIMARY KEY (`log_id`),
+			KEY `idx_staus_key` (`status_key`),
+			KEY `idx_request_uri_hash` (`request_uri_hash`),
+			KEY `idx_user_agent_hash` (`user_agent_hash`),
+			KEY `idx_ip` (`ip`),
+			KEY `idx_request_method` (`request_method`)
 		);";
+	}
+
+	return $tbl_bb;
 }
 
 // Insert a new record
@@ -222,9 +264,12 @@ function bb2_install()
 
 	if (defined('BB2_NO_CREATE')) return;
 	if (!$settings['logging']) return;
-	if ($db->is_sqlite) return;
+	#if ($db->is_sqlite) return;
 
-	bb2_db_query(bb2_table_structure($settings['log_table']));
+	foreach (bb2_table_structure($settings['log_table']) as $query)
+	{
+		bb2_db_query($query);
+	}
 }
 
 // Cute timer display
