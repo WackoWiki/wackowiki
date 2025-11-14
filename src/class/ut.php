@@ -266,7 +266,7 @@ class Ut
 				$absolute = ($arg[0] == '/');
 			}
 
-			$parts = array_merge($parts, explode('/', $arg));
+			$parts = array_merge($parts, explode('/', $arg ?? ''));
 		}
 
 		$n = count($parts);
