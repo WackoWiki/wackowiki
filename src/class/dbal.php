@@ -67,7 +67,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 		return gmdate(self::SQL_DATE_FORMAT, (int) $t);
 	}
 
-	function utc_dt()
+	function utc_dt(): string
 	{
 		return match ($this->db_driver)
 		{
@@ -96,7 +96,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 		}
 	}
 
-	function binary()
+	function binary(): string
 	{
 		return match ($this->db_driver)
 		{
@@ -105,7 +105,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 		};
 	}
 
-	function collate()
+	function collate(): string
 	{
 		return match ($this->db_driver)
 		{
@@ -114,7 +114,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 		};
 	}
 
-	function limit()
+	function limit(): string
 	{
 		return match ($this->db_driver)
 		{
