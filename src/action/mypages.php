@@ -140,7 +140,7 @@ if ($user_id = $this->get_user_id())
 			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.modified, p.page_lang ' .
 			$selector .
 			'GROUP BY p.tag, p.page_id, p.owner_id, p.user_id, p.title, p.modified, p.page_lang ' .
-			'ORDER BY modified DESC, tag ASC ' .
+			'ORDER BY p.modified DESC, p.tag ASC ' .
 			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];

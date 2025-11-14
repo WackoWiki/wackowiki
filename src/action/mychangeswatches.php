@@ -40,6 +40,7 @@ if ($user_id = $this->get_user_id())
 
 	$selector =
 		"FROM {$prefix}page AS p, {$prefix}watch AS w " .
+			'LEFT JOIN ' . $this->prefix . 'user u ON (p.user_id = u.user_id) ' .
 		'WHERE p.page_id = w.page_id ' .
 			'AND p.modified > w.watch_time ' .
 			'AND w.user_id = ' . (int) $user_id . ' ' .
@@ -55,7 +56,7 @@ if ($user_id = $this->get_user_id())
 	$pagination = $this->pagination($count['n'], $max, 'p', $profile);
 
 	$pages = $this->db->load_all(
-		'SELECT p.page_id, p.tag, p.title, p.modified, p.edit_note, p.user_id ' .
+		'SELECT p.page_id, p.tag, p.title, p.modified, p.edit_note, p.user_id, u.user_name ' .
 		$selector .
 		'GROUP BY p.tag, p.page_id, p.title, p.modified, w.user_id ' .
 		'ORDER BY p.modified DESC, p.tag ASC ' .
@@ -89,6 +90,7 @@ if ($user_id = $this->get_user_id())
 		$this->preload_acl($page_ids);
 
 		$tpl->enter('page_');
+		$cur_day = '';
 
 		foreach ($pages as $page)
 		{

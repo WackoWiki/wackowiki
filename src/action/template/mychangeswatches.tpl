@@ -21,9 +21,16 @@
 						[= l _ =
 							<li>
 								[= t _ =
-									[ ' time ' ] — 
+									<span class="dt">[ ' time ' ]</span> — 
 								=]
 								[ ' link ' ]
+								. . . . . . . . . . . . . . . . 
+								<small>
+									[ ' user ' ]
+									[= edit =
+										<span class="editnote">[[ ' note ' ]]</span>
+									=]
+								</small>
 							</li>
 						=]
 					</ul>
