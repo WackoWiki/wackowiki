@@ -90,6 +90,12 @@ class GD extends PHPThumb
 			'WEBP'		=> imagecreatefromwebp		($this->file_name),
 		};
 
+		if ($this->old_image === false)
+		{
+			// Could not decode image: No codec available
+			throw new Exception('Your GD installation does not support ' . $this->format . ' image types');
+		}
+
 		$this->current_dimensions = [
 			'width'		=> imagesx($this->old_image),
 			'height'	=> imagesy($this->old_image)

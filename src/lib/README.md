@@ -14,7 +14,7 @@ The version and status of each is summarized below:
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
 | php-diff			| php-diff			| 2.5.0		| patched, see subdir |
 | phpmailer			| PHPMailer			| 7.0.0		| unpatched |
-| phpthumb			| PhpThumb			| 2.3.2		| unpatched |
+| phpthumb			| PhpThumb			| 2.3.3		| unpatched |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |
 | simplepie			| SimplePie			| 1.9.0		| unpatched |
 | svg-sanitizer		| svg-sanitizer		| 0.22		| patched: various, see repo |
