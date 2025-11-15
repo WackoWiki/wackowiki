@@ -92,8 +92,8 @@ class GD extends PHPThumb
 
 		if ($this->old_image === false)
 		{
-			// Could not decode image: No codec available
-			throw new Exception('Your GD installation does not support ' . $this->format . ' image types');
+			// Could not decode image
+			throw new Exception('The image file is invalid, corrupted, or the required ' . $this->format . ' codec is not available in the GD library.');
 		}
 
 		$this->current_dimensions = [
