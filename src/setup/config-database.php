@@ -272,34 +272,26 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 			?>
 			<p class="notop"><?php echo _t('DbNameSqliteDesc'); ?></p>
 			<p class="msg notice"><?php echo _t('DbNameSqliteHelp'); ?></p>
+			<ul>
 			<?php
-			/*
-			 TODO: Suggest alternative SQLite data directory locations
-
-			 [0]   :  custom data directory (DATA_DIR)
-			 [1]   :  web root parent/data/
-			 [2]   :  non-public directory inside project (but not in web root)
-			 [3]   :  OS-specific safe fallbacks outside project
-			 */
-
-			// set default for SQLite
-			if($_SERVER['DOCUMENT_ROOT'])
+			foreach (select_sqlite_db_path() as $i => $file)
 			{
-				$config['db_name'] = Ut::join_path(dirname($_SERVER['DOCUMENT_ROOT']), 'data', '.ht.sqlite');
+				echo '<li>
+							<input type="radio" id="sqlite_db_path_' . $i . '" name="config[sqlite_db_path]" value="' . $i . '" ' . ($i == 0 ? 'checked' : '') . '>
+							<label for="sqlite_db_path_' . $i . '"><code>' . $file . "</code></label>
+						</li>\n";
 			}
-			else
-			{
-				$config['db_name'] = Ut::join_path(DATA_DIR, '.ht.sqlite');
-			}
+
+			echo '</ul>';
 		}
 		else
 		{
 			?>
 			<p class="notop"><?php echo _t('DbNameDesc'); ?></p>
+			<input type="text" maxlength="64" id="db_name" name="config[db_name]" value="<?php echo $config['db_name'] ?>" class="text_input" required>
 			<?php
 		}
 		?>
-		<input type="text" maxlength="64" id="db_name" name="config[db_name]" value="<?php echo $config['db_name'] ?>" class="text_input" required>
 		<br>
 		<?php echo $separator; ?>
 		<?php

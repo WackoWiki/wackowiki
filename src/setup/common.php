@@ -413,6 +413,51 @@ function get_webserver_primary_group(): ?string
 	return posix_getpwuid($gid)['name'] ?? null;
 }
 
+function select_sqlite_db_path(): array
+{
+	/*
+	 Suggest alternative SQLite data directory locations
+
+	 [0]   :  custom data directory (DATA_DIR)
+	 [1]   :  web root parent/data/
+	 [2]   :  OS-specific safe fallbacks outside project
+	 [3]   :  non-public directory inside project (but not in web root)
+	 [4]   :  fallback parent directory
+	 */
+
+	// [0] set default for SQLite
+	$db_path[] = Ut::join_path(DATA_DIR, SQLITE_DB_FILE);
+
+	if ($_SERVER['DOCUMENT_ROOT'])
+	{
+		// [1] web root parent/data/
+		$db_path[] = Ut::join_path(dirname($_SERVER['DOCUMENT_ROOT']), 'data', SQLITE_DB_FILE);
+	}
+
+	// [2] OS-specific safe fallbacks outside project
+	$db_path[] = match (PHP_OS_FAMILY)
+	{
+		'Windows'	=> Ut::join_path(getenv('APPDATA'),	APP_NAME,SQLITE_DB_FILE),
+		'Linux'		=> Ut::join_path('/var/lib',		APP_NAME,SQLITE_DB_FILE),
+		'Darwin'	=> Ut::join_path('/Users/Shared',	APP_NAME,SQLITE_DB_FILE),
+	};
+
+	$web_roots		= ['public', 'public_html', 'www', 'web', 'htdocs'];
+	$root_basename	= basename(__DIR__);
+
+	// [3] real project root (one level above web root)
+	if (in_array($root_basename, $web_roots))
+	{
+		$parent_dir	= dirname(__DIR__);
+		$db_path[]	= Ut::join_path($parent_dir, 'data', SQLITE_DB_FILE);
+	}
+
+	// [4] fallback parent directory
+	$db_path[] = Ut::join_path(dirname(__DIR__, 2), 'data', SQLITE_DB_FILE);
+
+	return $db_path;
+}
+
 function generate_secure_token($secret): string
 {
 	$expires_in		= 600;

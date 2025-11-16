@@ -13,7 +13,7 @@ global $config, $translation;
 if (isset($_POST['config']))
 {
 	$config_parameters	= $_POST['config'];
-	$config				= array_merge ($config, $config_parameters);
+	$config				= array_merge($config, $config_parameters);
 }
 
 if (   !isset($config['language'])

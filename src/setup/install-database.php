@@ -62,10 +62,10 @@ if (!$config['is_update'])
 	$config = array_merge($config, _t('ConfigDefaults'));
 }
 
-// no table_prefix for SQLite
 if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 {
-	$config['table_prefix']			= '';
+	$config['db_name']			= select_sqlite_db_path()[$config['sqlite_db_path']];
+	$config['table_prefix']		= '';
 }
 
 // update config values
@@ -112,6 +112,13 @@ $sql_modes = match((int) $config['sql_mode'])
 
 switch ($config['db_driver'])
 {
+	/*
+	 ############################################################################################
+	 # MySQLi driver																			#
+	 ############################################################################################
+
+	 [mysqli]	:  MySQL
+	 */
 	case 'mysqli':
 
 		$config['db_port']								??= '3306';
@@ -127,7 +134,12 @@ switch ($config['db_driver'])
 			mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 			test(
 				_t('TestConnectionString'),
-				$dblink = new mysqli($config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'], $port),
+				$dblink = new mysqli(
+					$config['db_host'],
+					$config['db_user'],
+					$config['db_password'],
+					$config['db_name'],
+					$port),
 				_t('ErrorDbConnection')
 			);
 		}
@@ -300,6 +312,13 @@ switch ($config['db_driver'])
 
 		break;
 
+	/*
+	 ############################################################################################
+	 # SQLite3 driver																			#
+	 ############################################################################################
+
+	 [sqlite]	:  SQLite
+	 */
 	case 'sqlite':
 
 		echo '<ul>' . "\n";
@@ -522,6 +541,14 @@ switch ($config['db_driver'])
 
 		break;
 
+	/*
+	 ############################################################################################
+	 # PDO driver																				#
+	 ############################################################################################
+
+	 [mysql_pdo]	:  MySQL
+	 [sqlite_pdo]	:  SQLite
+	 */
 	default:
 		$dsn = match ($config['db_driver']) {
 			'mysql_pdo'		=> "mysql:host=" . $config['db_host'] . ($config['db_port'] != '' ? ";port=" . $config['db_port'] : '') . ";dbname=" . $config['db_name'] . ($config['db_charset'] != '' ? ";charset=" . $config['db_charset'] : ''),
