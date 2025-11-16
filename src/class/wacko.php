@@ -8242,8 +8242,8 @@ class Wacko
 			'FROM ' . $this->prefix . 'acl ' .
 			'WHERE page_id IN (' .
 				'SELECT a.page_id ' .
-				'FROM acl a ' .
-					'LEFT JOIN page p ' .
+				'FROM ' . $this->prefix . 'acl a ' .
+					'LEFT JOIN ' . $this->prefix . 'page p ' .
 						'ON (a.page_id = p.page_id) ' .
 				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 					($cluster === true
@@ -8437,7 +8437,7 @@ class Wacko
 			'FROM ' . $this->prefix . 'menu ' .
 			'WHERE page_id IN (' .
 				'SELECT page_id ' .
-				'FROM page ' .
+				'FROM ' . $this->prefix . 'page ' .
 				'WHERE tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
 					? 'OR tag LIKE ' . $this->db->q($tag . '/%') . ' '
@@ -8457,8 +8457,8 @@ class Wacko
 			'FROM ' . $this->prefix . 'watch ' .
 			'WHERE page_id IN (' .
 				'SELECT w.page_id ' .
-				'FROM watch w ' .
-					'LEFT JOIN page p ' .
+				'FROM ' . $this->prefix . 'watch w ' .
+					'LEFT JOIN ' . $this->prefix . 'page p ' .
 						'ON (w.page_id = p.page_id) ' .
 				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 					($cluster === true
@@ -8481,8 +8481,8 @@ class Wacko
 			'FROM ' . $this->prefix . 'external_link ' .
 			'WHERE page_id IN (' .
 				'SELECT l.page_id ' .
-				'FROM external_link l ' .
-					'LEFT JOIN page p ' .
+				'FROM ' . $this->prefix . 'external_link l ' .
+					'LEFT JOIN ' . $this->prefix . 'page p ' .
 						'ON l.page_id = p.page_id  ' .
 				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
@@ -8499,8 +8499,8 @@ class Wacko
 			'FROM ' . $this->prefix . 'page_link ' .
 			'WHERE from_page_id IN (' .
 				'SELECT l.from_page_id ' .
-				'FROM page_link l ' .
-					'LEFT JOIN page p ' .
+				'FROM ' . $this->prefix . 'page_link l ' .
+					'LEFT JOIN ' . $this->prefix . 'page p ' .
 						'ON l.from_page_id = p.page_id ' .
 				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
@@ -8518,8 +8518,8 @@ class Wacko
 				'FROM ' . $this->prefix . 'file_link ' .
 				'WHERE page_id IN (' .
 					'SELECT l.page_id ' .
-					'FROM file_link l ' .
-						'LEFT JOIN page p ' .
+					'FROM ' . $this->prefix . 'file_link l ' .
+						'LEFT JOIN ' . $this->prefix . 'page p ' .
 							'ON l.page_id = p.page_id ' .
 					'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 					($cluster === true
@@ -8552,8 +8552,8 @@ class Wacko
 			'FROM ' . $this->prefix . 'category_assignment ' .
 			'WHERE object_id IN (' .
 				'SELECT k.object_id ' .
-				'FROM category_assignment k ' .
-					'LEFT JOIN page p ' .
+				'FROM ' . $this->prefix . 'category_assignment k ' .
+					'LEFT JOIN ' . $this->prefix . 'page p ' .
 						'ON (k.object_id = p.page_id) ' .
 				'WHERE (p.tag = ' . $this->db->q($tag) . ' ' .
 					($cluster === true
@@ -8593,8 +8593,8 @@ class Wacko
 			'FROM ' . $this->prefix . 'referrer ' .
 			'WHERE page_id IN (' .
 				'SELECT r.page_id ' .
-				'FROM referrer r ' .
-					'INNER JOIN page p ' .
+				'FROM ' . $this->prefix . 'referrer r ' .
+					'INNER JOIN ' . $this->prefix . 'page p ' .
 						'ON r.page_id = p.page_id ' .
 				'WHERE p.tag = ' . $this->db->q($tag) . ' ' .
 				($cluster === true
