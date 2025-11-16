@@ -499,6 +499,7 @@ sup, sub {
 	background: #f4fbff;
 	border: 1px solid #d5d9e6;
 	color: #c33;
+	font-family: var(--ww-font-sans-serif);
 }
 .msg.note::after {
 	content: url('./../../image/info.svg') " ";
