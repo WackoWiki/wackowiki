@@ -403,7 +403,7 @@ $ap_translation = [
 	'ThemeColorInfo'			=> 'The browser will set the address bar color of every page according to the provided CSS color.',
 
 	'LayoutSection'				=> 'Layout',
-	'Theme'						=> 'Theme:',
+	'Theme'						=> 'Tema:',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
 	'ResetUserTheme'			=> 'Reset all user themes:',
 	'ResetUserThemeInfo'		=> 'Resets all user themes. Warning: This action will revert all user-selected themes to the global default theme.',
@@ -676,7 +676,7 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro:',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Timezone:',
+	'Timezone'					=> 'Zona waktu:',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged-in users can change their timezone in their user settings.',
 	'AmericanDate'					=> 'Tanggal Amerika:',
 	'AmericanDateInfo'				=> 'Menggunakan format tanggal Amerika sebagai standar untuk bahasa Inggris.',
@@ -719,7 +719,7 @@ $ap_translation = [
 	'NewsStructure'				=> 'News cluster structure:',
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
-	'LicenseSection'			=> 'License',
+	'LicenseSection'			=> 'Lisensi',
 	'DefaultLicense'			=> 'Default license:',
 	'DefaultLicenseInfo'		=> 'Under which license your content can be released.',
 	'EnableLicense'				=> 'Enable license:',
@@ -731,13 +731,13 @@ $ap_translation = [
 	'RootPage'					=> 'Home page:',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Privacy policy:',
+	'PrivacyPage'				=> 'Kebijakan privasi:',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
 	'TermsPage'					=> 'Policies and regulations:',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
-	'SearchPage'				=> 'Search:',
+	'SearchPage'				=> 'Cari:',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
 	'RegistrationPage'			=> 'Registrasi:',
 	'RegistrationPageInfo'		=> 'Page for new user registration (action %1).',
@@ -769,7 +769,7 @@ $ap_translation = [
 	'SandboxPageInfo'			=> 'Page where users can practice their wiki markup skills.',
 	'HelpPage'					=> 'Bantuan:',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
-	'IndexPage'					=> 'Index:',
+	'IndexPage'					=> 'Indeks:',
 	'IndexPageInfo'				=> 'Page with a list of all pages (action %1).',
 	'RandomPage'				=> 'Random:',
 	'RandomPageInfo'			=> 'Loads a random page (action %1).',
@@ -1088,7 +1088,7 @@ $ap_translation = [
 	'DecompressAndStore'		=> 'Decompress and store the contents of directories',
 	'HomonymicFiles'			=> 'homonymic files',
 	'RestoreSkip'				=> 'skip',
-	'RestoreReplace'			=> 'replace',
+	'RestoreReplace'			=> 'gantikan',
 	'RestoreFile'				=> 'File:',
 	'RestoredFiles'				=> 'restored:',
 	'SkippedFiles'				=> 'skipped:',
@@ -1101,8 +1101,8 @@ $ap_translation = [
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'Pulihkan',
 	'BackupRemove'				=> 'Hapus',
-	'RestoreYes'				=> 'Yes',
-	'RestoreNo'					=> 'No',
+	'RestoreYes'				=> 'Ya',
+	'RestoreNo'					=> 'Tidak',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	'BackupArchived'			=> 'Backup %1 archived.',
@@ -1177,15 +1177,15 @@ $ap_translation = [
 	'DbStatSection'				=> 'Database Statistics',
 	'DbTable'					=> 'Table',
 	'DbRecords'					=> 'Records',
-	'DbSize'					=> 'Size',
-	'DbIndex'					=> 'Index',
+	'DbSize'					=> 'Ukuran',
+	'DbIndex'					=> 'Indeks',
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
 	'FileFiles'					=> 'Files',
-	'FileSize'					=> 'Size',
+	'FileSize'					=> 'Ukuran',
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
@@ -1199,7 +1199,7 @@ $ap_translation = [
 	'ServerName'				=> 'Server name',
 	'WebServer'					=> 'Web server',
 	'HttpProtocol'				=> 'HTTP Protocol',
-	'DbVersion'					=> 'Database',
+	'DbVersion'					=> 'Basis data',
 	'SqlModesGlobal'			=> 'SQL Modes Global',
 	'SqlModesSession'			=> 'SQL Modes Session',
 	'IcuVersion'				=> 'ICU',
@@ -1255,7 +1255,7 @@ $ap_translation = [
 
 	'BbSummary'					=> 'Summary',
 	'BbLog'						=> 'Log',
-	'BbSettings'				=> 'Settings',
+	'BbSettings'				=> 'Pengaturan',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log

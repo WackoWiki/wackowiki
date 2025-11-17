@@ -21,7 +21,7 @@ $lang = [
 
 	'search_page'		=> 'Cari',
 	'login_page'		=> 'Log masuk',
-	'account_page'		=> 'Settings',
+	'account_page'		=> 'Pengaturan',
 	'registration_page'	=> 'Registrasi',
 	'password_page'		=> 'Kata sandi',
 
@@ -49,10 +49,10 @@ $lang = [
 /*
    Locking Check
  */
-'LockAuthorization'				=> 'Authorization',
+'LockAuthorization'				=> 'Otorisasi',
 'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
-'LockPassword'					=> 'Password:',
-'LockLogin'						=> 'Login',
+'LockPassword'					=> 'Kata sandi:',
+'LockLogin'						=> 'Log masuk',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
 
@@ -71,12 +71,12 @@ $lang = [
    System Requirements Page
 */
 'version-check'					=> 'System Requirements',
-'PhpVersion'					=> 'PHP Version',
+'PhpVersion'					=> 'Versi PHP',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
 'Database'						=> 'Basis data',
-'PhpExtensions'					=> 'PHP Extensions',
+'PhpExtensions'					=> 'Ekstensi PHP',
 'Permissions'					=> 'Hak akses',
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',

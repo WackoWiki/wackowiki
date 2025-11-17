@@ -31,7 +31,7 @@ $insert = [
 	'index_page'		=> 'Page Index',
 	'random_page'		=> 'Halaman sembarang',
 
-	'tools_page_bm'		=> 'Tools',
+	'tools_page_bm'		=> 'Alat',
 	'whatsnew_page_bm'	=> 'Perubahan',
 	'changes_page_bm'	=> 'Perubahan',
 	'comments_page_bm'	=> 'Komentar',
