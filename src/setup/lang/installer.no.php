@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Ugyldig handling',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorisasjon',
+'LockAuthorizationInfo'			=> 'Skriv inn passordet du lagret, i filen %1, som du midlertidig har plassert i Wacko-mappen.',
+'LockPassword'					=> 'Passord:',
+'LockLogin'						=> 'Innlogging',
+'LockPasswordInvalid'			=> 'Ugyldig passord.',
+'LockedTryLater'				=> 'Denne siden blir for øyeblikket oppgradert. Vennligst prøv igjen senere.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Språkkonfigurasjon (Automatic Translation)',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Portnummer databasen serveren er tilgjengelig for. La den være tom for å bruke standard portnummer.',
 'DbName'						=> 'Database navn',
 'DbNameDesc'					=> 'Databasen WackoWiki skal bruke. Denne databasen må allerede eksistere før du fortsetter!',
+'DbNameSqliteDesc'				=> 'Datatalogen og filnavnet SQLite skal brukes for WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite lagrer alle data i en enkelt fil.<br><br>Mappen du spesifiserer må være skrivbar av webserveren under installasjon. <br><br>Den skal ikke være tilgjengelig via <strong></strong> via nettet.<br><br>Installasjonsprogrammet vil opprette ytterligere <code>. taccess</code> -filen sammen med filen, men dersom dette ikke fungerer, kan det hende noen har tilgang til din database. <br>Dette inkluderer brukerdata (e-postadresser, hashed passwords) samt beskyttede sider og andre konfidensielle data lagret på wikien. <br><br>Det er derfor tilrådelig å lagre datafilen i en helt annen plassering, for eksempel i mappen <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Bruker navn',
 'DbUserDesc'					=> 'Navn på bruker som brukes til å koble til databasen.',
 'DbPassword'					=> 'Passord',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Tester databasetilkoblingsinnstillinger',
 'TestDatabaseExists'			=> 'Sjekker om databasen du angav finnes',
 'TestDatabaseVersion'			=> 'Sjekker minstekravene til versjon av databasen',
+'SqliteFileExtensionError'		=> 'Bruk én av følgende filendelser db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Kan ikke opprette datamappe <code>%1</code>, fordi overordnet katalog <code>%2</code> ikke er skrivbar av webserveren.<br><br>Installasjonsprogrammet har bestemt at brukeren din webserver skal kjøre.<br>gjør at <code>%3</code> mappen er skrivbar for å fortsette.<br>På et Unix/Linux-system gjøre:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Feil ved oppretting av datamappe <code>%1</code>.<br>Sjekk plassering og prøv igjen.',
+'SqliteDirUnwritable'			=> 'Kan ikke skrive til katalogen <code>%1</code>.<br>endre dens tillatelser slik at webserveren kan skrive til den og prøve igjen.',
+'SqliteReadonly'				=> 'Filen <code>%1</code> er ikke skrivbar.',
+'SqliteCantCreateDb'			=> 'Kunne ikke opprette databasefilen <code>%1</code>.',
 'InstallTables'					=> 'Installerer tabeller',
 'ErrorDbConnection'				=> 'Det oppstod et problem med tilkoblingsdetaljene til databasen du angitt, gå tilbake og sjekk at de er riktige.',
 'ErrorDatabaseVersion'			=> 'Databaseversjonen er %1 , men krever minst %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Feil ved endring av %1 -tabellen',
 'ErrorUpdatingTable'			=> 'Feil ved oppdatering av %1 -tabellen',
 'CreatingTable'					=> 'Oppretter %1 -tabellen',
+'CreatingIndex'					=> 'Oppretter %1 indeks',
+'CreatingTrigger'				=> 'Oppretter %1 utløser',
 'ErrorAlreadyExists'			=> '%1 finnes allerede',
 'ErrorCreatingTable'			=> 'Feil ved oppretting av %1 -tabellen, eksisterer allerede?',
+'ErrorCreatingIndex'			=> 'Feil ved oppretting av %1 index, finnes den allerede?',
+'ErrorCreatingTrigger'			=> 'Feil ved oppretting av %1 trigger, eksisterer allerede?',
 'DeletingTables'				=> 'Sletter tabeller',
 'DeletingTablesEnd'				=> 'Ferdig med å slette tabeller',
 'ErrorDeletingTable'			=> 'Feil ved sletting av %1 -tabellen. Den mest sannsynlige årsaken er at tabellen ikke eksisterer, i så fall kan du ignorere denne advarselen.',

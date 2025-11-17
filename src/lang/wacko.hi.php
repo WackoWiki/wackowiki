@@ -739,7 +739,7 @@ $wacko_translation = [
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'नाम',
 	'UsersPages'				=> 'पृष्ठ',
-	'UsersChanges'				=> 'Changes',
+	'UsersChanges'				=> 'परिवर्तन',
 	'UsersSubscription'			=> 'Subscription',
 	'UsersWatches'				=> 'Watches',
 	'UsersComments'				=> 'टिप्पणियाँ',
@@ -1072,7 +1072,7 @@ $wacko_translation = [
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
 
-	'ChangesFeed'				=> 'Changes',
+	'ChangesFeed'				=> 'परिवर्तन',
 	'CommentsFeed'				=> 'टिप्पणियाँ',
 	'NewsFeed'					=> 'समाचार',
 	'RevisionsFeed'				=> 'Revisions of ',

@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Neplatná akce',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorizace',
+'LockAuthorizationInfo'			=> 'Zadejte prosím heslo, které jste uložili do souboru %1, který jste dočasně umístili do adresáře Wacko.',
+'LockPassword'					=> 'Heslo:',
+'LockLogin'						=> 'Přihlásit se',
+'LockPasswordInvalid'			=> 'Neplatné heslo.',
+'LockedTryLater'				=> 'Tato stránka je aktuálně aktualizována. Opakujte akci později.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Nastavení jazyka',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Port číslo vašeho databázového serveru je přístupné. Nechte prázdné pro použití výchozího čísla portu.',
 'DbName'						=> 'Název databáze',
 'DbNameDesc'					=> 'Databáze WackoWiki by měla být používána. Tato databáze musí existovat, než budete pokračovat!',
+'DbNameSqliteDesc'				=> 'Datový adresář a název souboru SQLite by měl být použit pro WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Uživatelské jméno',
 'DbUserDesc'					=> 'Jméno uživatele použité k připojení k databázi.',
 'DbPassword'					=> 'Heslo',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Testování nastavení připojení k databázi',
 'TestDatabaseExists'			=> 'Kontroluji zda databáze, kterou jste zadali existuje',
 'TestDatabaseVersion'			=> 'Kontrola minimálních požadavků na verzi databáze',
+'SqliteFileExtensionError'		=> 'Použijte prosím jednu z následujících přípon souborů db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Nelze vytvořit datový adresář <code>%1</code>, protože do nadřazeného adresáře <code>%2</code> nelze webový server zapisovat.<br><br>Instalátor určil uživatele, který webserver běží jako.<br>Udělejte, aby adresář <code>%3</code> mohl zapisovat a pokračovat.<br>Na Unix/Linuxu do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Nelze vytvořit datový adresář <code>%1</code>, protože do nadřazeného adresáře <code>%2</code> nelze webový server zapisovat.<br><br>Instalátor nemohl určit uživatele, který webserver běží jako.<br>Udělej adresář <code>%3</code> pro globální zápis a další!) pro pokračování.<br>Na Unix/Linuxu do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Chyba při vytváření datového adresáře <code>%1</code>.<br>Zkontrolujte polohu a zkuste to znovu.',
+'SqliteDirUnwritable'			=> 'Nelze zapisovat do adresáře <code>%1</code>.<br>Změňte jeho oprávnění tak, aby na něj mohl webový server zapisovat a opakujte akci.',
+'SqliteReadonly'				=> 'Soubor <code>%1</code> není zapisovatelný.',
+'SqliteCantCreateDb'			=> 'Nelze vytvořit databázový soubor <code>%1</code>.',
 'InstallTables'					=> 'Instalace tabulek',
 'ErrorDbConnection'				=> 'Vyskytl se problém s údaji o připojení k databázi, které jste zadali, vraťte se prosím zpět a zkontrolujte, zda jsou správné.',
 'ErrorDatabaseVersion'			=> 'Verze databáze je %1 , ale vyžaduje alespoň %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Chyba při přejmenování tabulky %1',
 'ErrorUpdatingTable'			=> 'Chyba při aktualizaci tabulky %1',
 'CreatingTable'					=> 'Vytváření tabulky %1',
+'CreatingIndex'					=> 'Vytváření %1 indexu',
+'CreatingTrigger'				=> 'Vytváření spouštěče %1',
 'ErrorAlreadyExists'			=> '%1 již existuje',
 'ErrorCreatingTable'			=> 'Chyba při vytváření tabulky %1 , již existuje?',
+'ErrorCreatingIndex'			=> 'Chyba při vytváření indexu %1 , již existuje?',
+'ErrorCreatingTrigger'			=> 'Chyba při vytváření %1 spouštěče, již existuje?',
 'DeletingTables'				=> 'Mazání tabulek',
 'DeletingTablesEnd'				=> 'Mazání tabulek dokončeno',
 'ErrorDeletingTable'			=> 'Chyba při odstraňování tabulky %1 . Nejpravděpodobnějším důvodem je, že tabulka neexistuje, v tom případě můžete toto varování ignorovat.',

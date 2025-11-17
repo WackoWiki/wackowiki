@@ -31,6 +31,7 @@ $insert = [
 	'index_page'		=> '페이지 색인',
 	'random_page'		=> '임의의 문서로',
 
+	'tools_page_bm'		=> 'Tools',
 	'whatsnew_page_bm'	=> '바뀜',
 	'changes_page_bm'	=> '바뀜',
 	'comments_page_bm'	=> '댓글',

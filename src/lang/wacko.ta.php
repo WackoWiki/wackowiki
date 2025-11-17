@@ -156,10 +156,10 @@ $wacko_translation = [
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
 	'RDFLink'					=> 'RDF Document',
-	'EmailLink'					=> 'Write an email (mail client launch)',
-	'GeoLink'					=> 'Show this location (map app launch)',
+	'EmailLink'					=> 'ஒரு மின்னஞ்சல் எழுது (மெயில் கிளையன்ட் வெளியீடு)',
+	'GeoLink'					=> 'இந்த இடத்தைக் காட்டு (வரைபடப் பயன்பாட்டு வெளியீடு)',
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
-	'TelLink'					=> 'Call this number (phone app launch)',
+	'TelLink'					=> 'இந்த எண்ணை அழைக்கவும் (தொலைபேசி செயலி வெளியீடு)',
 	'PermaLink'					=> 'நிரந்தர இணைப்பு',
 	'PermaLinkTip'				=> 'Permanent link to this revision of the page',
 	'PermaLink0Tip'				=> 'Permanent link to this page',
@@ -1058,7 +1058,7 @@ $wacko_translation = [
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
-	'ChangesXMLTitle'			=> ' - அண்மைய மாற்றங்கள்',
+	'ChangesXMLTitle'			=> ' - சமீபத்திய மாற்றங்கள்',
 	'ChangesXML'				=> 'Recent changes to the ',
 	'CommentsXMLTitle'			=> ' - Recent comments',
 	'CommentsXML'				=> 'Recent comments to the ',

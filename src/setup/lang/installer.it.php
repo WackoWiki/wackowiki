@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Azione non valida',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorizzazione',
+'LockAuthorizationInfo'			=> 'Inserisci la password salvata nel file %1che hai temporaneamente inserito nella tua directory Wacko.',
+'LockPassword'					=> 'Password,',
+'LockLogin'						=> 'Accedi',
+'LockPasswordInvalid'			=> 'Password non valida.',
+'LockedTryLater'				=> 'Questo sito è attualmente in fase di aggiornamento. Riprova più tardi.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Configurazione della lingua',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Il numero di porta del server del database è accessibile, lascialo vuoto per usare il numero di porta predefinito.',
 'DbName'						=> 'Nome Database',
 'DbNameDesc'					=> 'Il database WackoWiki dovrebbe usare. Questo database deve esistere già una volta che continui!',
+'DbNameSqliteDesc'				=> 'La directory dei dati e il nome del file SQLite dovrebbero essere usati per WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite memorizza tutti i dati in un singolo file.<br><br>La directory specificata deve essere scrivibile dal server web durante l\'installazione. <br><br>Dovrebbe <strong>non</strong> essere accessibile tramite il web.<br><br>Il programma di installazione creerà un ulteriore <code>. taccess</code> file insieme al file, ma se questo fallisce, qualcuno potrebbe essere in grado di accedere al database. <br>Questo include i dati utente (indirizzi e-mail, password hashate) così come le pagine protette e altri dati riservati memorizzati nella wiki. <br><br>Si consiglia quindi di memorizzare il file di dati in una posizione completamente diversa, per esempio nella directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nome utente',
 'DbUserDesc'					=> 'Nome dell\'utente usato per connettersi al database.',
 'DbPassword'					=> 'Immetti password',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Prova i parametri di connessione database',
 'TestDatabaseExists'			=> 'Verifica dell\'esistenza del database specificato',
 'TestDatabaseVersion'			=> 'Controllo dei requisiti minimi di versione della banca dati',
+'SqliteFileExtensionError'		=> 'Utilizzare una delle seguenti estensioni di file db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Impossibile creare la directory dati <code>%1</code>, perché la directory superiore <code>%2</code> non è scrivibile dal webserver.<br><br>L\'installatore ha determinato l\'utente che il server web è in esecuzione.<br>Rendi la directory <code>%3</code> scrivibile per continuare.<br>Su un sistema Unix/Linux:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Impossibile creare la directory dati <code>%1</code>, perché la directory superiore <code>%2</code> non è scrivibile dal webserver.<br><br>L\'installatore non può determinare l\'utente che il server web è in esecuzione.<br>Rendi la directory <code>%3</code> scrivibile globalmente da essa (e da altri!) per continuare.<br>Su un sistema Unix/Linux:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Errore nella creazione della directory dati <code>%1</code>.<br>Controllare la posizione e riprovare.',
+'SqliteDirUnwritable'			=> 'Impossibile scrivere nella directory <code>%1</code>.<br>Modificare le autorizzazioni in modo che il webserver possa scriverle, e riprovare.',
+'SqliteReadonly'				=> 'Il file <code>%1</code> non è scrivibile.',
+'SqliteCantCreateDb'			=> 'Impossibile creare il file di database <code>%1</code>.',
 'InstallTables'					=> 'Installazione Tabelle',
 'ErrorDbConnection'				=> 'C\'è stato un problema con i dettagli di connessione al database che hai specificato, per favore torna indietro e controlla che siano corretti.',
 'ErrorDatabaseVersion'			=> 'La versione del database è %1 ma richiede almeno %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Errore nel rinominare tabella %1',
 'ErrorUpdatingTable'			=> 'Errore nell\'aggiornare la tabella %1',
 'CreatingTable'					=> 'Creazione di %1 tabella/e',
+'CreatingIndex'					=> 'Creazione indice %1',
+'CreatingTrigger'				=> 'Creazione trigger %1',
 'ErrorAlreadyExists'			=> '%1 esiste già',
 'ErrorCreatingTable'			=> 'Errore nella creazione della tabella %1, esiste gia?',
+'ErrorCreatingIndex'			=> 'Errore nel creare l\'indice %1 , esiste già?',
+'ErrorCreatingTrigger'			=> 'Errore nel creare il trigger %1 , esiste già?',
 'DeletingTables'				=> 'Eliminazione Tabelle',
 'DeletingTablesEnd'				=> 'Finito Eliminazione Tabelle',
 'ErrorDeletingTable'			=> 'Errore di cancellazione della tabella %1, la ragione più probabile è che la tabella non esiste, nel qual caso si può ignorare questo avviso.',

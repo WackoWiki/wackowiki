@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> 'CriarConta',
 	'password_page'		=> 'Senha',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'Novo',
 	'changes_page'		=> 'MudançasRecentes',
 	'comments_page'		=> 'RecentementeComentado',
 	'index_page'		=> 'PageIndex',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> 'Anterior',
 'Recommended'					=> 'recomendado',
 'InvalidAction'					=> 'Ação inválida',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorização',
+'LockAuthorizationInfo'			=> 'Por favor, digite a senha que você salvou no arquivo %1, que você colocou temporariamente no diretório Wacko.',
+'LockPassword'					=> 'Senha:',
+'LockLogin'						=> 'Conectar-se',
+'LockPasswordInvalid'			=> 'Senha inválida',
+'LockedTryLater'				=> 'Este site está sendo atualizado no momento. Por favor, tente novamente mais tarde.',
+
 
 /*
    Language Selection Page
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'O número da porta que o seu servidor de banco de dados está acessível. Deixe em branco para usar o número de porta padrão.',
 'DbName'						=> 'Nome da base',
 'DbNameDesc'					=> 'O banco de dados WackoWiki deve usar. Este banco de dados precisa existir já antes de continuar!',
+'DbNameSqliteDesc'				=> 'O diretório de dados e nome de arquivo SQLite devem ser usados para WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nome de usuário',
 'DbUserDesc'					=> 'Nome do usuário usado para conectar ao banco de dados.',
 'DbPassword'					=> 'Palavra-passe',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Testando configurações de conexão de banco de dados',
 'TestDatabaseExists'			=> 'Verificando se o banco de dados que você especificou existe',
 'TestDatabaseVersion'			=> 'Verificando requisitos mínimos da versão do banco de dados',
+'SqliteFileExtensionError'		=> 'Por favor utilize uma das seguintes extensões de arquivo db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Não foi possível criar o diretório de dados <code>%1</code>, porque o diretório pai <code>%2</code> não é gravável pelo servidor web.<br><br>O instalador não pôde determinar o usuário que seu webserver está executando como<br>Faça o <code>%3</code> diretório globalmente gravável por ele (e outros!) para continuar.<br>Em um sistema Unix/Linux :<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Erro ao criar o diretório de dados <code>%1</code>.<br>Verifique o local e tente novamente.',
+'SqliteDirUnwritable'			=> 'Não é possível gravar no diretório <code>%1</code>.<br>Altere suas permissões para que o servidor web possa escrever nele e tente novamente.',
+'SqliteReadonly'				=> 'O arquivo <code>%1</code> não é gravável.',
+'SqliteCantCreateDb'			=> 'Não foi possível criar o arquivo de banco de dados <code>%1</code>.',
 'InstallTables'					=> 'Instalando tabelas',
 'ErrorDbConnection'				=> 'Houve um problema com os detalhes da conexão com a base de dados especificados, por favor volte e verifique se estão corretos.',
 'ErrorDatabaseVersion'			=> 'A versão do banco de dados é %1 mas requer pelo menos %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Erro ao renomear tabela %1',
 'ErrorUpdatingTable'			=> 'Erro ao atualizar tabela %1',
 'CreatingTable'					=> 'Criando tabela %1',
+'CreatingIndex'					=> 'Criando índice %1',
+'CreatingTrigger'				=> 'Criando gatilho %1',
 'ErrorAlreadyExists'			=> 'O %1 já existe',
 'ErrorCreatingTable'			=> 'Erro ao criar tabela %1 , ela já existe?',
+'ErrorCreatingIndex'			=> 'Erro ao criar índice %1 , ele já existe?',
+'ErrorCreatingTrigger'			=> 'Erro ao criar disparador %1 , ele já existe?',
 'DeletingTables'				=> 'Excluindo tabelas',
 'DeletingTablesEnd'				=> 'Excluindo tabelas concluído',
 'ErrorDeletingTable'			=> 'Erro ao excluir a tabela %1 . A razão mais provável é que a tabela não existe, neste caso você pode ignorar este aviso.',

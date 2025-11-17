@@ -9,7 +9,7 @@ $insert = [
 			'Documentația poate fi găsită la WackoWiki:Doc/English.' . "\n" .
 			'Pagini utile: ((WackoWiki:Doc/English/Formatting de formatare)), ((/Caută de căutare)).' . "\n\n",
 	'root_page'			=> 'Pagina de start',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Instrumente administrator',
 
 	'category_page'		=> 'Categorie',
 	'groups_page'		=> 'Grupuri',
@@ -25,12 +25,13 @@ $insert = [
 	'login_page'		=> 'Autentificare',
 	'account_page'		=> 'Setări',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'Ce este nou',
 	'changes_page'		=> 'Modificări recente',
 	'comments_page'		=> 'Comentate recent',
 	'index_page'		=> 'Index pagină',
 	'random_page'		=> 'Pagină aleatorie',
 
+	'tools_page_bm'		=> 'Unelte',
 	'whatsnew_page_bm'	=> 'Modificări',
 	'changes_page_bm'	=> 'Modificări',
 	'comments_page_bm'	=> 'Comentarii',

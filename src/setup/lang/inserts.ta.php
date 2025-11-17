@@ -26,11 +26,12 @@ $insert = [
 	'account_page'		=> 'அமைப்புகள்',
 
 	'whatsnew_page'		=> 'Whats New',
-	'changes_page'		=> 'அண்மைய மாற்றங்கள்',
+	'changes_page'		=> 'சமீபத்திய மாற்றங்கள்',
 	'comments_page'		=> 'Recently Commented',
 	'index_page'		=> 'Page Index',
 	'random_page'		=> 'ஏதாவது ஒரு கட்டுரை',
 
+	'tools_page_bm'		=> 'Tools',
 	'whatsnew_page_bm'	=> 'Changes',
 	'changes_page_bm'	=> 'Changes',
 	'comments_page_bm'	=> 'கருத்துகள்',

@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Acțiune nevalidă',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorizare',
+'LockAuthorizationInfo'			=> 'Vă rugăm să introduceţi parola salvată în fişierul %1, pe care l-aţi plasat temporar în directorul Wacko.',
+'LockPassword'					=> 'Parola:',
+'LockLogin'						=> 'Autentificare',
+'LockPasswordInvalid'			=> 'Parolă nevalidă.',
+'LockedTryLater'				=> 'Acest site este în curs de actualizare. Vă rugăm să încercaţi din nou mai târziu.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Configurare limbă',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Numărul portului prin care serverul bazei de date este accesibil. Lăsați necompletat pentru a utiliza numărul implicit de port.',
 'DbName'						=> 'Numele bazei de date',
 'DbNameDesc'					=> 'Baza de date WackoWiki ar trebui să folosească. Această bază de date trebuie să existe deja înainte de a continua!',
+'DbNameSqliteDesc'				=> 'Directorul de date și numele fișierului SQLite ar trebui să fie utilizate pentru WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nume Utilizator',
 'DbUserDesc'					=> 'Numele utilizatorului folosit pentru conectarea la baza ta de date.',
 'DbPassword'					=> 'Parolă',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Testarea setărilor de conectare a bazei de date',
 'TestDatabaseExists'			=> 'Verificarea dacă baza de date specificată există',
 'TestDatabaseVersion'			=> 'Verificarea cerințelor minime ale versiunii în baza de date',
+'SqliteFileExtensionError'		=> 'Vă rugăm să folosiți una dintre următoarele extensii de fișier db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Nu se poate crea dosarul de date <code>%1</code>, pentru că directorul părinte <code>%2</code> nu poate fi scris de către webserver.<br><br>Instalatorul a determinat utilizatorul la care este pornit webserver-ul.<br>Fă directorul <code>%3</code> să poată fi scris de către acesta pentru a continua.<br>Pe un sistem Unix/Linux:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Nu se poate crea dosarul de date <code>%1</code>, pentru că directorul părinte <code>%2</code> nu poate fi scris de către webserver.<br><br>Instalatorul nu a putut determina utilizatorul la care este pornit webserver-ul.<br>Fă directorul <code>%3</code> în mod global inscriptibil de el (şi de alţii!) pentru a continua.<br>Pe un sistem Unix/Linux:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Eroare la crearea dosarului de date <code>%1</code>.<br>Verificați locația și încercați din nou.',
+'SqliteDirUnwritable'			=> 'Nu se poate scrie în directorul <code>%1</code>.<br>Schimbă permisiunile astfel încât serverul web să le poată scrie și să încerce din nou.',
+'SqliteReadonly'				=> 'Fișierul <code>%1</code> nu poate fi scris.',
+'SqliteCantCreateDb'			=> 'Nu s-a putut crea baza de date <code>%1</code>.',
 'InstallTables'					=> 'Instalare tabele',
 'ErrorDbConnection'				=> 'A apărut o problemă cu detaliile conexiunii bazei de date specificate, te rugăm să mergi înapoi și să verifici dacă sunt corecte.',
 'ErrorDatabaseVersion'			=> 'Versiunea bazei de date este %1 dar necesită cel puţin %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Eroare la redenumirea tabelului %1',
 'ErrorUpdatingTable'			=> 'Eroare la actualizarea tabelului %1',
 'CreatingTable'					=> 'Se creează tabelul %1',
+'CreatingIndex'					=> 'Se creează indexul %1',
+'CreatingTrigger'				=> 'Se creează declanșator %1',
 'ErrorAlreadyExists'			=> 'The %1 already exists (Automatic Copy)',
 'ErrorCreatingTable'			=> 'Eroare la crearea tabelului %1 , există deja?',
+'ErrorCreatingIndex'			=> 'Eroare la crearea indexului %1 , există deja?',
+'ErrorCreatingTrigger'			=> 'Eroare la crearea declanșatorului %1 , există deja?',
 'DeletingTables'				=> 'Ştergere tabele',
 'DeletingTablesEnd'				=> 'Stergere tabele terminate',
 'ErrorDeletingTable'			=> 'Eroare la ștergerea tabelului %1 . Cel mai probabil motiv este că tabelul nu există, caz în care puteți ignora acest avertisment.',

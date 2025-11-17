@@ -31,6 +31,7 @@ $insert = [
 	'index_page'		=> 'Oldal Index',
 	'random_page'		=> 'Lap találomra',
 
+	'tools_page_bm'		=> 'Tools',
 	'whatsnew_page_bm'	=> 'Változtatások',
 	'changes_page_bm'	=> 'Változtatások',
 	'comments_page_bm'	=> 'Megjegyzések',

@@ -9,7 +9,7 @@ $insert = [
 			'Η τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.' . "\n" .
 			'Χρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Αναζήτηση Αναζήτηση)).' . "\n\n",
 	'root_page'			=> 'Αρχική σελίδα',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Εργαλεία διαχειριστή',
 
 	'category_page'		=> 'Κατηγορία',
 	'groups_page'		=> 'Ομάδες',
@@ -25,12 +25,13 @@ $insert = [
 	'login_page'		=> 'Σύνδεση',
 	'account_page'		=> 'Ρυθμίσεις',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'Τι Νέο',
 	'changes_page'		=> 'Πρόσφατες αλλαγές',
 	'comments_page'		=> 'Πρόσφατα σχολιασμένες',
 	'index_page'		=> 'Ευρετήριο σελίδων',
 	'random_page'		=> 'Τυχαία σελίδα',
 
+	'tools_page_bm'		=> 'Εργαλεία',
 	'whatsnew_page_bm'	=> 'Αλλαγές',
 	'changes_page_bm'	=> 'Αλλαγές',
 	'comments_page_bm'	=> 'Σχόλια',

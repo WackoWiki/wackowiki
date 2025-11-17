@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> '無効なアクション',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> '承認',
+'LockAuthorizationInfo'			=> '一時的にWackoディレクトリに保存した %1ファイルに保存したパスワードを入力してください。',
+'LockPassword'					=> 'パスワード:',
+'LockLogin'						=> 'ログイン',
+'LockPasswordInvalid'			=> '無効なパスワードです。',
+'LockedTryLater'				=> 'このサイトはアップグレード中です。しばらくしてからもう一度お試しください。',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> '言語設定',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'データベースサーバーからアクセス可能なポート番号です。デフォルトのポート番号を使用するには空白のままにしてください。',
 'DbName'						=> 'データベース名',
 'DbNameDesc'					=> 'データベースの WackoWiki が使用する必要があります。このデータベースは続行する前に既に存在する必要があります！',
+'DbNameSqliteDesc'				=> 'WackoWikiには、データディレクトリとファイル名SQLiteが使用されます。',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'データベースのユーザー名',
 'DbUserDesc'					=> 'データベースへの接続に使用するユーザー名です。',
 'DbPassword'					=> 'データベースのパスワード',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'データベース接続設定のテスト',
 'TestDatabaseExists'			=> '指定したデータベースが存在するか確認しています',
 'TestDatabaseVersion'			=> 'データベースの最小バージョン要件を確認しています',
+'SqliteFileExtensionError'		=> '以下のファイル拡張子のいずれかを使用してください。 db, sdb, sqlite',
+'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'データ ディレクトリ <code>%1</code>を作成中にエラーが発生しました。<br>場所を確認して、もう一度お試しください。',
+'SqliteDirUnwritable'			=> '<code>%1</code>ディレクトリに書き込むことができません。<br>ウェブサーバーが書き込むことができるように権限を変更し、再度実行してください。',
+'SqliteReadonly'				=> 'ファイル <code>%1</code> は書き込み可能ではありません。',
+'SqliteCantCreateDb'			=> 'データベースファイル <code>%1</code> を作成できませんでした。',
 'InstallTables'					=> 'テーブルのインストール',
 'ErrorDbConnection'				=> '指定したデータベース接続の詳細に問題がありました。戻って正しいことを確認してください。',
 'ErrorDatabaseVersion'			=> 'データベースのバージョンは %1 ですが、少なくとも %2が必要です。',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> '%1 テーブルの名前を変更できませんでした',
 'ErrorUpdatingTable'			=> '%1 テーブルの更新中にエラーが発生しました',
 'CreatingTable'					=> '%1 テーブルの作成',
+'CreatingIndex'					=> '%1 インデックスの作成',
+'CreatingTrigger'				=> '%1 トリガーを作成しています',
 'ErrorAlreadyExists'			=> '%1 は既に存在します',
 'ErrorCreatingTable'			=> '%1 テーブルの作成でエラーが発生しました。既に存在しますか？',
+'ErrorCreatingIndex'			=> '%1 インデックスの作成中にエラーが発生しました。既に存在しますか？',
+'ErrorCreatingTrigger'			=> '%1 トリガーの作成中にエラーが発生しました。既に存在しますか？',
 'DeletingTables'				=> 'テーブルの削除',
 'DeletingTablesEnd'				=> 'テーブルの削除が完了しました',
 'ErrorDeletingTable'			=> '%1 テーブルの削除エラー。テーブルが存在しない可能性が最も高い理由は、この警告を無視することができます。',

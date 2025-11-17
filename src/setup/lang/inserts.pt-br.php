@@ -9,7 +9,7 @@ $insert = [
 			'Documentação pode ser encontrada em WackoWiki:Doc/English.' . "\n" .
 			'Páginas úteis: ((WackoWiki:Doc/English/Formatting de formatação)), ((/Pesquisa de Pesquisa)).' . "\n\n",
 	'root_page'			=> 'Página Inicial',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Ferramentas de administração',
 
 	'category_page'		=> 'categoria',
 	'groups_page'		=> 'grupos',
@@ -25,13 +25,14 @@ $insert = [
 	'login_page'		=> 'Entrar',
 	'account_page'		=> 'Confirgurações',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'O que é novo',
 	'changes_page'		=> 'Alterações Recentes',
 	'comments_page'		=> 'Comentado recentemente',
 	'index_page'		=> 'Índice Página',
 	'random_page'		=> 'Página aleatória',
 
-	'whatsnew_page_bm'	=> 'Alterações',
+	'tools_page_bm'		=> 'Ferramentas',
+	'whatsnew_page_bm'	=> 'Mudanças',
 	'changes_page_bm'	=> 'Alterações',
 	'comments_page_bm'	=> 'Comentários',
 	'index_page_bm'		=> 'Índice',

@@ -31,6 +31,7 @@ $insert = [
 	'index_page'		=> '頁面索引',
 	'random_page'		=> '隨機頁面',
 
+	'tools_page_bm'		=> 'Tools',
 	'whatsnew_page_bm'	=> '變動',
 	'changes_page_bm'	=> '變動',
 	'comments_page_bm'	=> '回應',

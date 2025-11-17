@@ -31,6 +31,7 @@ $insert = [
 	'index_page'		=> 'Каталог',
 	'random_page'		=> 'Случайна страница',
 
+	'tools_page_bm'		=> 'Tools',
 	'whatsnew_page_bm'	=> 'Промени',
 	'changes_page_bm'	=> 'Промени',
 	'comments_page_bm'	=> 'Коментари',

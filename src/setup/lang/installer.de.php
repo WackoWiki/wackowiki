@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> 'Registrierung',
 	'password_page'		=> 'Passwort',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'WasIstNeu',
 	'changes_page'		=> 'LetzteÄnderungen',
 	'comments_page'		=> 'LetzteKommentare',
 	'index_page'		=> 'SeitenIndex',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> 'Zurück',
 'Recommended'					=> 'empfohlen',
 'InvalidAction'					=> 'Ungültige Aktion',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorisierung',
+'LockAuthorizationInfo'			=> 'Bitte geben Sie das Passwort ein, das Sie in der Datei %1 gespeichert haben, die Sie vorübergehend in Ihrem Wacko-Verzeichnis gespeichert haben.',
+'LockPassword'					=> 'Passwort:',
+'LockLogin'						=> 'Anmelden',
+'LockPasswordInvalid'			=> 'Ungültiges Passwort.',
+'LockedTryLater'				=> 'Diese Seite wird gerade aktualisiert. Bitte versuchen Sie es später erneut.',
+
 
 /*
    Language Selection Page
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Die Port-Nummer über die dein Datenbankservers erreichbar ist, bei Verwendung der default Port Nummer leer lassen.',
 'DbName'						=> 'Datenbank Name',
 'DbNameDesc'					=> 'Die Datenbank für unser WackoWiki. Diese Datenbank muss bereits existieren!',
+'DbNameSqliteDesc'				=> 'Der Datenverzeichnis und Dateiname SQLite sollte für WackoWiki verwendet werden.',
+'DbNameSqliteHelp'				=> 'SQLite speichert alle Daten in einer einzigen Datei.<br><br>Das für sie vorgesehene Verzeichnis muss während des Installationsvorgangs beschreibbar sein.<br><br>Es sollte <strong>nicht</strong> über das Web zugänglich sein.<br><br>Das Installationsprogramm wird mit der Datei zusammen eine zusätzliche <code>.htaccess</code>-Datei erstellen. Sofern dies scheitert, können Dritte auf die Datendatei zugreifen.<br>Dazu gehören Benutzerdaten (E-Mail-Adressen, gehashte Passwörter) sowie geschützte Seiten und andere vertrauliche Daten, die im Wiki gespeichert sind. <br><br>Es ist daher ratsam, die Datendatei an gänzlich anderer Stelle abzulegen, beispielsweise im Verzeichnis <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Benutzername',
 'DbUserDesc'					=> 'Name des Benutzers welcher für die Datenbankverbindung verwendet wird.',
 'DbPassword'					=> 'Passwort',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Teste Datenbank Verbindung',
 'TestDatabaseExists'			=> 'Prüfe ob die ausgewählte Datenbank vorhanden ist',
 'TestDatabaseVersion'			=> 'Prüfe ob die Datenbank die erforderliche Mindestversion hat',
+'SqliteFileExtensionError'		=> 'Bitte verwenden Sie eine der folgenden Dateierweiterungen db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Das Datenverzeichnis <code>%1</code>kann nicht erstellt werden, weil das übergeordnete Verzeichnis <code>%2</code> vom Webserver nicht beschreibbar ist.<br><br>Der Installer hat den Benutzer ermittelt, unter dem Ihr Webserver läuft.<br>Machen Sie das <code>%3</code> Verzeichnis beschreibbar, um fortzufahren.<br>Auf einem Unix/Linux-System tun:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Das Datenverzeichnis <code>%1</code>kann nicht erstellt werden, weil das übergeordnete Verzeichnis <code>%2</code> vom Webserver nicht beschreibbar ist.<br><br>Der Installer konnte den Benutzer Ihres Webservers nicht ermitteln.<br>Machen Sie das <code>%3</code> Verzeichnis global beschreibbar und andere!, um fortzufahren.<br>Auf einem Unix/Linux-System tun:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Fehler beim Erstellen des Datenverzeichnisses <code>%1</code>.<br>Überprüfen Sie den Speicherort und versuchen Sie es erneut.',
+'SqliteDirUnwritable'			=> 'Konnte nicht in das Verzeichnis <code>%1</code>schreiben.<br>Ändern Sie seine Berechtigungen, damit der Webserver darauf schreiben kann, und versuchen Sie es erneut.',
+'SqliteReadonly'				=> 'Die Datei <code>%1</code> ist nicht beschreibbar.',
+'SqliteCantCreateDb'			=> 'Datenbankdatei <code>%1</code> konnte nicht erstellt werden.',
 'InstallTables'					=> 'Installiere Tabellen',
 'ErrorDbConnection'				=> 'Es gab ein Problem mit den von dir gemachten Datenbank Verbindungsdaten, bitte gehe zurück und prüfe ob diese korrekt sind.',
 'ErrorDatabaseVersion'			=> 'Die Datenbankversion ist %1 , benötigt aber mindestens %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Fehler beim Umbenennen der %1 Tabelle',
 'ErrorUpdatingTable'			=> 'Fehler beim Aktualisieren der %1 table',
 'CreatingTable'					=> 'Erstelle %1 Tabelle',
+'CreatingIndex'					=> 'Erstelle %1 Index',
+'CreatingTrigger'				=> 'Erstelle %1 Trigger',
 'ErrorAlreadyExists'			=> 'Der %1 existiert bereits',
 'ErrorCreatingTable'			=> 'Fehler beim Erstellen von %1 Tabelle, besteht diese bereits?',
+'ErrorCreatingIndex'			=> 'Fehler beim Erstellen des %1 Indexes. Besteht er bereits?',
+'ErrorCreatingTrigger'			=> 'Fehler beim Erstellen des %1 Triggers, existiert er bereits?',
 'DeletingTables'				=> 'Lösche Tabellen',
 'DeletingTablesEnd'				=> 'Tabellen wurden gelöscht',
 'ErrorDeletingTable'			=> 'Fehler beim Löschen der %1 Tabelle, der wahrscheinlichste Grund dafür ist, dass die Tabelle nicht existiert, in diesem Fall kannst du die Warnung ignorieren.',

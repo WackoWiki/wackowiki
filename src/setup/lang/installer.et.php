@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Kehtetu tegevus',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Authorization',
+'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockPassword'					=> 'Password:',
+'LockLogin'						=> 'Login',
+'LockPasswordInvalid'			=> 'Invalid password.',
+'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Keele konfigureerimine',
@@ -94,10 +105,10 @@ $lang = [
 'MultiLangDesc'					=> 'Mitmekeelne režiim võimaldab ühe installatsiooni sees kasutada erinevatel lehtedele erinevaid keelte määranguid. Kui see režiim on lubatud, siis installeerimise käigus tekitatakse kõigi võimalike keelte jaoks, mis paketiga kaasas on, ühesugused menüü üksused erinevates keeltes.',
 'AllowedLang'					=> 'Lubatud keeled',
 'AllowedLangDesc'				=> 'Soovitatav on valida ainult need keeled, mida soovite kasutada, vastasel juhul on valitud kõik keeled.',
-'AclMode'						=> 'Default ACL settings',
+'AclMode'						=> 'ACL-i vaikesätted',
 'AclModeDesc'					=> '',
-'PublicWiki'					=> 'Public Wiki (read for everyone, write and comment for registered users)',
-'PrivateWiki'					=> 'Private Wiki (read, write, comment for registered users only)',
+'PublicWiki'					=> 'Avalik Wiki (lugege kõigile, kirjutage ja kommenteerige registreerunud kasutajatele)',
+'PrivateWiki'					=> 'Privaatne Wiki (lugege, kirjutage, kommenteerivad ainult registreeritud kasutajad)',
 'Admin'							=> 'Adminni nimi',
 'AdminDesc'						=> 'Sisesta administraatori kasutajanimi. Peaks olema <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiNimi</a> (e.g. <code>WikiAdmin</code>).',
 'NameAlphanumOnly'				=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. Võid kasutada vaid kirjamärke.',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Pordi number, mille kaudu teie andmebaasiserver on kättesaadav. Jäta see tühjaks, et kasutada vaikimisi pordinumbrit.',
 'DbName'						=> 'Andmebassi nimi',
 'DbNameDesc'					=> 'Andmebaas, mida WackoWiki peaks kasutama. See andmebaas peab olema juba olemas, enne kui jätkate!',
+'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Kasutajanimi',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'Parool',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Testin database ühenduse seadistusi',
 'TestDatabaseExists'			=> 'Checking if the database you specified exists',
 'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
+'SqliteFileExtensionError'		=> 'Please use one of the following file extensions db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Error creating the data directory <code>%1</code>.<br>Check the location and try again.',
+'SqliteDirUnwritable'			=> 'Unable to write to the directory <code>%1</code>.<br>Change its permissions so that the webserver can write to it, and try again.',
+'SqliteReadonly'				=> 'The file <code>%1</code> is not writeable.',
+'SqliteCantCreateDb'			=> 'Could not create database file <code>%1</code>.',
 'InstallTables'					=> 'Tabelite installimine',
 'ErrorDbConnection'				=> 'Teie poolt määratud andmebaasiühenduse andmetega oli probleem, palun minge tagasi ja kontrollige, kas need on õiged.',
 'ErrorDatabaseVersion'			=> 'Andmebaasi versioon on %1, kuid nõuab vähemalt %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Error renaming %1 table',
 'ErrorUpdatingTable'			=> 'Error updating %1 table',
 'CreatingTable'					=> 'Loon %1 tabelit',
+'CreatingIndex'					=> 'Creating %1 index',
+'CreatingTrigger'				=> 'Creating %1 trigger',
 'ErrorAlreadyExists'			=> 'The %1 already exists',
 'ErrorCreatingTable'			=> 'Viga tabeli %1 loomisel, kas see on juba olemas?',
+'ErrorCreatingIndex'			=> 'Error creating %1 index, does it already exist?',
+'ErrorCreatingTrigger'			=> 'Error creating %1 trigger, does it already exist?',
 'DeletingTables'				=> 'Tabelite kustutamine',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Viga tabeli %1 kustutamisel. Kõige tõenäolisem põhjus on, et tabelit ei ole olemas, sellisel juhul võite seda hoiatust ignoreerida.',

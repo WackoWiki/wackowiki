@@ -9,7 +9,7 @@ $insert = [
 			'ويمكن الاطلاع على الوثائق في WackoWiki:Doc/English.' . "\n" .
 			'الصفحات المفيدة: ((WackoWiki:Doc/English/Formatting Formatting)) (البحث).' . "\n\n",
 	'root_page'			=> 'الصفحة الرئيسية',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'أدوات المشرف',
 
 	'category_page'		=> 'الفئة',
 	'groups_page'		=> 'المجموعات',
@@ -25,12 +25,13 @@ $insert = [
 	'login_page'		=> 'دخول',
 	'account_page'		=> 'إعدادات',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'ما الجديد',
 	'changes_page'		=> 'أحدث التغييرات',
 	'comments_page'		=> 'تم التعليق مؤخرا',
 	'index_page'		=> 'فهرس الصفحة',
 	'random_page'		=> 'صفحة عشوائية',
 
+	'tools_page_bm'		=> 'أدوات',
 	'whatsnew_page_bm'	=> 'التغييرات',
 	'changes_page_bm'	=> 'التغييرات',
 	'comments_page_bm'	=> 'تعليقات',

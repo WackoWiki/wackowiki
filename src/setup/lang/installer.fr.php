@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> 'Enregistrement',
 	'password_page'		=> 'MotDePasse',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'QuoiDeNeuf',
 	'changes_page'		=> 'Modifications',
 	'comments_page'		=> 'Commentaires',
 	'index_page'		=> 'Index',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> 'Revenir en arrière',
 'Recommended'					=> 'recommandée',
 'InvalidAction'					=> 'Action non valide',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorisation',
+'LockAuthorizationInfo'			=> 'Veuillez entrer le mot de passe que vous avez enregistré dans le fichier %1, que vous avez placé temporairement dans votre répertoire Wacko.',
+'LockPassword'					=> 'Mot de passe :',
+'LockLogin'						=> 'Se connecter',
+'LockPasswordInvalid'			=> 'Mot de passe invalide.',
+'LockedTryLater'				=> 'Ce site est en cours de mise à jour. Veuillez réessayer plus tard.',
+
 
 /*
    Language Selection Page
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Le numéro de port à utiliser pour communiquer avec votre serveur de base de données. Laissez-le vide pour utiliser le numéro de port pas défaut.',
 'DbName'						=> 'Nom de base de données',
 'DbNameDesc'					=> 'Indiquez le nom de la base de données à utiliser par WackoWiki. Elle doit exister avant de continuer !',
+'DbNameSqliteDesc'				=> 'Le répertoire de données et le nom de fichier SQLite doivent être utilisés pour WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nom d’utilisateur',
 'DbUserDesc'					=> 'Indiquez le nom de l’utilisateur sous l’identité duquel se connecter à votre base de données.',
 'DbPassword'					=> 'Mot de passe',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Test des paramètres de connexion à la base de données',
 'TestDatabaseExists'			=> 'Vérification de l’existence de la base de donnée indiquée',
 'TestDatabaseVersion'			=> 'Vérification de la version minimale requise de la base de données',
+'SqliteFileExtensionError'		=> 'Veuillez utiliser l\'une des extensions suivantes db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Impossible de créer le répertoire de données <code>%1</code>, parce que le répertoire parent <code>%2</code> n\'est pas accessible en écriture par le serveur web.<br><br>L\'installateur a déterminé que l\'utilisateur que votre serveur web fonctionne.<br>Rendre le dossier <code>%3</code> accessible en écriture pour continuer.<br>Sur un système Unix/Linux :<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Impossible de créer le répertoire de données <code>%1</code>, parce que le répertoire parent <code>%2</code> n\'est pas accessible en écriture par le serveur web.<br><br>L\'installateur n\'a pas pu déterminer l\'utilisateur sous lequel votre serveur web fonctionne.<br>Rendre <code>%3</code> répertoire globalement accessible en écriture par lui (et les autres!) pour continuer.<br>Sur un système Unix/Linux faire :<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Erreur lors de la création du répertoire de données <code>%1</code>.<br>Vérifiez l\'emplacement et réessayez.',
+'SqliteDirUnwritable'			=> 'Impossible d\'écrire dans le répertoire <code>%1</code>.<br>Changez ses permissions pour que le serveur web puisse y écrire et réessayez.',
+'SqliteReadonly'				=> 'Le fichier <code>%1</code> n\'est pas accessible en écriture.',
+'SqliteCantCreateDb'			=> 'Impossible de créer le fichier de base de données <code>%1</code>.',
 'InstallTables'					=> 'Installation des tables',
 'ErrorDbConnection'				=> 'Les paramètres de connexion à la base de données que vous avez indiqués posent un problème, merci de revenir en arrière et de les vérifier.',
 'ErrorDatabaseVersion'			=> 'La version de la base de données est %1 mais nécessite au moins %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Erreur de renommage de la table %1 ',
 'ErrorUpdatingTable'			=> 'Erreur lors de la mise à jour de la table %1',
 'CreatingTable'					=> 'Création de la table %1',
+'CreatingIndex'					=> 'Création de l\'index %1',
+'CreatingTrigger'				=> 'Création du déclencheur %1',
 'ErrorAlreadyExists'			=> ' Erreur, %1 existe déjà',
 'ErrorCreatingTable'			=> 'Erreur lors de la création de la table %1, existe-telle déjà ?',
+'ErrorCreatingIndex'			=> 'Erreur lors de la création de l\'index %1 , existe-t-il déjà?',
+'ErrorCreatingTrigger'			=> 'Erreur lors de la création du déclencheur %1 , existe-t-il déjà ?',
 'DeletingTables'				=> 'Effacement des tables',
 'DeletingTablesEnd'				=> 'Effacement des tables terminé',
 'ErrorDeletingTable'			=> 'Erreur lors de l’effacement de la table %1, probablement parce que cette table n’existe pas, auquel cas vous pouvez ignorer cette alerte.',

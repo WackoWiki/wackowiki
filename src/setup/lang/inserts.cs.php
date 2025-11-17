@@ -9,7 +9,7 @@ $insert = [
 			'Dokumentaci lze nalézt na WackoWiki:Doc/English.' . "\n" .
 			'Užitečné stránky: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Hledat Hledat)).' . "\n\n",
 	'root_page'			=> 'Domovská stránka',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Admin nástroje',
 
 	'category_page'		=> 'Kategorie',
 	'groups_page'		=> 'Skupiny',
@@ -25,12 +25,13 @@ $insert = [
 	'login_page'		=> 'Přihlásit se',
 	'account_page'		=> 'Nastavení',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'Co je nového',
 	'changes_page'		=> 'Nedávné změny',
 	'comments_page'		=> 'Nedávno komentované',
 	'index_page'		=> 'Index stránky',
 	'random_page'		=> 'Náhodná stránka',
 
+	'tools_page_bm'		=> 'Nástroje a nářadí',
 	'whatsnew_page_bm'	=> 'Změny',
 	'changes_page_bm'	=> 'Změny',
 	'comments_page_bm'	=> 'Komentáře',

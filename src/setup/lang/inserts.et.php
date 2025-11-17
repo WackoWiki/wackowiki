@@ -31,6 +31,7 @@ $insert = [
 	'index_page'		=> 'Sisu Kord',
 	'random_page'		=> 'Juhuslik lehekülg',
 
+	'tools_page_bm'		=> 'Tools',
 	'whatsnew_page_bm'	=> 'Muudatused',
 	'changes_page_bm'	=> 'Muudatused',
 	'comments_page_bm'	=> 'Kommenteeritud',

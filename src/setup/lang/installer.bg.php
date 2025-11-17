@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Invalid action',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Authorization',
+'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockPassword'					=> 'Password:',
+'LockLogin'						=> 'Login',
+'LockPasswordInvalid'			=> 'Invalid password.',
+'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Езикови настройки',
@@ -94,10 +105,10 @@ $lang = [
 'MultiLangDesc'					=> 'Многоезичен режим, позволяващ работа на няколко езика. Ако е включен, инсталаторът ще инициализира елементи от менюто на няколко различни езика.',
 'AllowedLang'					=> 'Allowed Languages',
 'AllowedLangDesc'				=> 'Препоръчително е да изберете само набора от езици, които искате да използвате, в противен случай се избират всички езици.',
-'AclMode'						=> 'Default ACL settings',
+'AclMode'						=> 'Настройки на ACL по подразбиране',
 'AclModeDesc'					=> '',
-'PublicWiki'					=> 'Public Wiki (read for everyone, write and comment for registered users)',
-'PrivateWiki'					=> 'Private Wiki (read, write, comment for registered users only)',
+'PublicWiki'					=> 'Public Wiki (четете за всички, пишете и коментирайте за регистрирани потребители)',
+'PrivateWiki'					=> 'Частно Wiki (четене, писане, коментар само за регистрирани потребители)',
 'Admin'							=> 'Име',
 'AdminDesc'						=> 'Изберете име. Нещо от тип <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (без кирилица).',
 'NameAlphanumOnly'				=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго и да използва само alphanumeric.',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
 'DbName'						=> 'БД',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
+'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Име (username)',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'Паролa (password)',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Проверка на връзката с БД',
 'TestDatabaseExists'			=> 'Checking if the database you specified exists',
 'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
+'SqliteFileExtensionError'		=> 'Please use one of the following file extensions db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Error creating the data directory <code>%1</code>.<br>Check the location and try again.',
+'SqliteDirUnwritable'			=> 'Unable to write to the directory <code>%1</code>.<br>Change its permissions so that the webserver can write to it, and try again.',
+'SqliteReadonly'				=> 'The file <code>%1</code> is not writeable.',
+'SqliteCantCreateDb'			=> 'Could not create database file <code>%1</code>.',
 'InstallTables'					=> 'Installing Tables',
 'ErrorDbConnection'				=> 'There was a problem with the database connection details you specified, please go back and check they are correct.',
 'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Error renaming %1 table',
 'ErrorUpdatingTable'			=> 'Error updating %1 table',
 'CreatingTable'					=> 'Създаваме таблица %1',
+'CreatingIndex'					=> 'Creating %1 index',
+'CreatingTrigger'				=> 'Creating %1 trigger',
 'ErrorAlreadyExists'			=> 'The %1 already exists',
 'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
+'ErrorCreatingIndex'			=> 'Error creating %1 index, does it already exist?',
+'ErrorCreatingTrigger'			=> 'Error creating %1 trigger, does it already exist?',
 'DeletingTables'				=> 'Deleting Tables',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',

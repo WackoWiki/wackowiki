@@ -9,7 +9,7 @@ $insert = [
 			'Dokumentacja dostępna jest w WackoWiki:Doc/English.' . "\n" .
 			'Przydatne strony: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Szukaj Szukaj)).' . "\n\n",
 	'root_page'			=> 'Strona startowa',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Narzędzia administratora',
 
 	'category_page'		=> 'Kategoria',
 	'groups_page'		=> 'Grupy',
@@ -25,12 +25,13 @@ $insert = [
 	'login_page'		=> 'Zaloguj się',
 	'account_page'		=> 'Ustawienia',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'Co nowego',
 	'changes_page'		=> 'Ostatnie Zmiany',
 	'comments_page'		=> 'Ostatnio Komentowane',
 	'index_page'		=> 'Index Stron',
 	'random_page'		=> 'Losową strona',
 
+	'tools_page_bm'		=> 'Narzędzia',
 	'whatsnew_page_bm'	=> 'Zmiany',
 	'changes_page_bm'	=> 'Zmiany',
 	'comments_page_bm'	=> 'Komentowane',

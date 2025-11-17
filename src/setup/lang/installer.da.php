@@ -23,7 +23,7 @@ $lang = [
 	'login_page'		=> 'Log ind',
 	'account_page'		=> 'Indstillinger',
 	'registration_page'	=> 'Registrering',
-	'password_page'		=> 'Din adgangskode',
+	'password_page'		=> 'Adgangskode',
 
 	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'Opdateringer',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> 'Tilbage',
 'Recommended'					=> 'anbefales',
 'InvalidAction'					=> 'Ugyldig handling',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Tilladelse',
+'LockAuthorizationInfo'			=> 'Indtast den adgangskode, du har gemt i filen %1, som du midlertidigt har placeret i din Wacko mappe.',
+'LockPassword'					=> 'Adgangskode:',
+'LockLogin'						=> 'Login',
+'LockPasswordInvalid'			=> 'Ugyldig adgangskode.',
+'LockedTryLater'				=> 'Dette websted er i øjeblikket ved at blive opgraderet. Prøv igen senere.',
+
 
 /*
    Language Selection Page
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Portenummeret som din databaseserver er tilgængeligt igennem. Lad det stå tomt for at bruge standard portnummeret.',
 'DbName'						=> 'Database Navn',
 'DbNameDesc'					=> 'Databasen WackoWiki skal bruge. Denne database skal allerede eksistere før du fortsætter!',
+'DbNameSqliteDesc'				=> 'Datamappen og filnavnet SQLite skal bruges til WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite gemmer alle data i en enkelt fil.<br><br>Den mappe, du angiver, skal være skrivbar for webserveren under installationen. <br><br>Den skal <strong>ikke</strong> være tilgængelig via internettet.<br><br>Installationsprogrammet vil oprette et yderligere <code>. taccess</code> -filen sammen med filen, men hvis dette mislykkes, kan nogen få adgang til din database. <br>Dette omfatter brugerdata (e-mailadresser, hashede adgangskoder) samt beskyttede sider og andre fortrolige data, der er gemt i wikien. <br><br>Det er derfor tilrådeligt at gemme datafilen på et helt andet sted, for eksempel i mappen <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Bruger Navn',
 'DbUserDesc'					=> 'Navn på den bruger, der bruges til at oprette forbindelse til din database.',
 'DbPassword'					=> 'Din adgangskode',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Test databaseforbindelsesindstillinger',
 'TestDatabaseExists'			=> 'Kontrollerer om den angivne database findes',
 'TestDatabaseVersion'			=> 'Kontrollerer minimumskrav til databaseversion',
+'SqliteFileExtensionError'		=> 'Brug venligst en af følgende filtypenavne db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Kan ikke oprette datamappen <code>%1</code>, fordi den overordnede mappe <code>%2</code> ikke er skrivbar for webserveren.<br><br>Installationsprogrammet har bestemt brugeren som din webserver kører som.<br>Gør <code>%3</code> mappen skrivbar af den til at fortsætte.<br>På et Unix/Linux-system gør:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Kan ikke oprette datamappen <code>%1</code>, fordi den overordnede mappe <code>%2</code> ikke er skrivbar for webserveren.<br><br>Installationsprogrammet kunne ikke bestemme hvilken bruger din webserver kører som.<br>Gør <code>%3</code> mappen globalt skrivbar af den (og andre!) for at fortsætte.<br>På et Unix/Linux-system gør:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Fejl ved oprettelse af datamappe <code>%1</code>.<br>Tjek placeringen og prøv igen.',
+'SqliteDirUnwritable'			=> 'Kan ikke skrive til mappen <code>%1</code>.<br>Skift dets tilladelser, så webserveren kan skrive til den, og prøv igen.',
+'SqliteReadonly'				=> 'Filen <code>%1</code> er ikke skrivbar.',
+'SqliteCantCreateDb'			=> 'Kunne ikke oprette database fil <code>%1</code>.',
 'InstallTables'					=> 'Installerer Tabeller',
 'ErrorDbConnection'				=> 'Der opstod et problem med de databaseforbindelsesdetaljer, du har angivet, gå venligst tilbage og tjek at de er korrekte.',
 'ErrorDatabaseVersion'			=> 'Databaseversionen er %1 , men kræver mindst %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Fejl under omdøbning af %1 tabel',
 'ErrorUpdatingTable'			=> 'Fejl under opdatering af %1 tabel',
 'CreatingTable'					=> 'Opretter %1 tabel',
+'CreatingIndex'					=> 'Opretter %1 indeks',
+'CreatingTrigger'				=> 'Opretter %1 udløser',
 'ErrorAlreadyExists'			=> '%1 findes allerede',
 'ErrorCreatingTable'			=> 'Fejl ved oprettelse af %1 -tabellen, eksisterer den allerede?',
+'ErrorCreatingIndex'			=> 'Fejl ved oprettelse af %1 -indeks, eksisterer det allerede?',
+'ErrorCreatingTrigger'			=> 'Fejl ved oprettelse af %1 udløseren, eksisterer den allerede?',
 'DeletingTables'				=> 'Sletter Tabeller',
 'DeletingTablesEnd'				=> 'Afsluttede Sletningstabeller',
 'ErrorDeletingTable'			=> 'Fejl ved sletning af %1 tabel. Den mest sandsynlige årsag er, at tabellen ikke findes, i hvilket tilfælde du kan ignorere denne advarsel.',

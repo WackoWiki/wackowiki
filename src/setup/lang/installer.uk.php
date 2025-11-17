@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> 'Реєстрація',
 	'password_page'		=> 'Пароль',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'ЩоНового',
 	'changes_page'		=> 'ОстанніЗміни',
 	'comments_page'		=> 'НещодавноКоментовані',
 	'index_page'		=> 'PageIndex',
@@ -42,9 +42,20 @@ $lang = [
 'TitleInstallation'				=> 'Встановлення WackoWiki',
 'TitleUpdate'					=> 'Оновлення WackoWiki',
 'Continue'						=> 'Продовжити',
-'Back'							=> 'Back',
+'Back'							=> 'Відмінити',
 'Recommended'					=> 'рекомендовано',
 'InvalidAction'					=> 'Неправильна дія',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Авторизація',
+'LockAuthorizationInfo'			=> 'Будь ласка, введіть пароль, який ви зберегли в файлі %1, який ви тимчасово помістили у ваш каталог Wacko.',
+'LockPassword'					=> 'Пароль:',
+'LockLogin'						=> 'Логін',
+'LockPasswordInvalid'			=> 'Невірний пароль.',
+'LockedTryLater'				=> 'Наразі сайт оновлюється. Будь ласка, спробуйте пізніше.',
+
 
 /*
    Language Selection Page
@@ -140,6 +151,8 @@ $lang = [
 'DbPortDesc'					=> 'Номер порту доступний до сервера бази даних. Залиште поле порожнім, щоб використовувати номер порту за замовчуванням.',
 'DbName'						=> 'Ім\'я бази даних',
 'DbNameDesc'					=> 'База даних WackoWiki повинна використовувати цю базу даних. Вона потребує наявності перед тим як продовжити!',
+'DbNameSqliteDesc'				=> 'Директорія даних і ім\'я файлу SQLite повинна використовувати для WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Ім\'я користувача',
 'DbUserDesc'					=> 'Ім\'я користувача, що використовується для підключення до вашої бази даних.',
 'DbPassword'					=> 'Пароль',
@@ -160,6 +173,13 @@ $lang = [
 'TestConnectionString'			=> 'Тестування параметрів підключення до бази даних',
 'TestDatabaseExists'			=> 'Перевірка, чи існує база даних, яку ви вказали',
 'TestDatabaseVersion'			=> 'Перевірка вимог до мінімальної версії бази даних',
+'SqliteFileExtensionError'		=> 'Будь ласка, використовуйте один з наступних розширень файлів db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Error creating the data directory <code>%1</code>.<br>Check the location and try again.',
+'SqliteDirUnwritable'			=> 'Неможливо записати дані в каталог <code>%1</code>.<br>Змінити права доступу на нього і спробувати ще раз.',
+'SqliteReadonly'				=> 'Файл <code>%1</code> не доступний для запису.',
+'SqliteCantCreateDb'			=> 'Could not create database file <code>%1</code>.',
 'InstallTables'					=> 'Встановлення таблиць',
 'ErrorDbConnection'				=> 'Виникла проблема з деталями підключення бази даних, будь ласка, поверніться назад і перевірте, що вони правильні.',
 'ErrorDatabaseVersion'			=> 'Версія бази даних %1, але потребує мінімум %2.',
@@ -193,8 +213,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Error renaming %1 table',
 'ErrorUpdatingTable'			=> 'Помилка оновлення таблиці %1',
 'CreatingTable'					=> 'Створення таблиці %1',
+'CreatingIndex'					=> 'Створення індексу %1',
+'CreatingTrigger'				=> 'Створення %1 тригера',
 'ErrorAlreadyExists'			=> 'The %1 already exists',
 'ErrorCreatingTable'			=> 'Помилка створення таблиць %1 , чи вона вже існує?',
+'ErrorCreatingIndex'			=> 'Помилка створення індексу %1 , вже існує?',
+'ErrorCreatingTrigger'			=> 'Помилка створення тригера %1?',
 'DeletingTables'				=> 'Видалення таблиць',
 'DeletingTablesEnd'				=> 'Видалення таблиць завершено',
 'ErrorDeletingTable'			=> 'Помилка видалення таблиці %1 . Найвірогідніша причина полягає в тому, що таблиці не існує, і в такому випадку ви можете проігнорувати це попередження.',

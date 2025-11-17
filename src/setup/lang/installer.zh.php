@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> '创建账户',
 	'password_page'		=> '密码',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> '新色调',
 	'changes_page'		=> '最近更改',
 	'comments_page'		=> '最近评论',
 	'index_page'		=> '页面索引',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> '后退',
 'Recommended'					=> '建议',
 'InvalidAction'					=> '无效操作',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> '授权',
+'LockAuthorizationInfo'			=> '请输入您保存在文件 %1中的密码，您已将其暂时放在您的 Wacko 目录中。',
+'LockPassword'					=> '密码：',
+'LockLogin'						=> '登录',
+'LockPasswordInvalid'			=> '无效的密码。',
+'LockedTryLater'				=> '此网站正在升级。请稍后再试。',
+
 
 /*
    Language Selection Page
@@ -123,10 +134,10 @@ $lang = [
 'config-database'				=> '数据库配置',
 'DbDriver'						=> '驱动',
 'DbDriverDesc'					=> '您想要使用的数据库驱动程序。',
-'DbSqlMode'						=> 'SQL mode',
-'DbSqlModeDesc'					=> 'The SQL mode you want use.',
-'DbVendor'						=> 'Vendor',
-'DbVendorDesc'					=> 'The database vendor you use.',
+'DbSqlMode'						=> 'SQL 模式',
+'DbSqlModeDesc'					=> '您想要使用的 SQL 模式。',
+'DbVendor'						=> '供应商',
+'DbVendorDesc'					=> '您使用的数据库提供商。',
 'DbCharset'						=> '字符集',
 'DbCharsetDesc'					=> '您想要使用的数据库字符集。',
 'DbEngine'						=> '存储引擎',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> '您的数据库服务器可以通过端口号访问。留空则使用默认端口号。',
 'DbName'						=> '数据库名称',
 'DbNameDesc'					=> 'WackoWiki 数据库将要使用。请确定数据库已经建立完毕！',
+'DbNameSqliteDesc'				=> '数据目录和文件名 SQLite 应用于 WackoWiki',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> '数据库用户名',
 'DbUserDesc'					=> '用于连接您的数据库的用户名称。',
 'DbPassword'					=> '数据库密码',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> '测试数据库连接设置',
 'TestDatabaseExists'			=> '检查您指定的数据库是否存在',
 'TestDatabaseVersion'			=> '检查数据库最低版本要求',
+'SqliteFileExtensionError'		=> '请使用以下文件扩展名 db、sdb、sqlite。',
+'SqliteParentUnwritableGroup'	=> '无法创建数据目录 <code>%1</code>, 因为父目录 <code>%2</code> 不可写 webserver。<br><br>安装程序已确定您的 Web 服务器运行的用户。<br>使 <code>%3</code> 目录可写入以继续。<br>Unix/Linux系统做了:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> '无法创建数据目录 <code>%1</code>, 因为父目录 <code>%2</code> 不可写 webserver。<br><br>安装程序无法确定您的 Web 服务器正在运行的用户。<br>使 <code>%3</code> 目录可从全局读取(和其他!) 继续。<br>Unix/Linux系统做了:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> '创建数据目录 <code>%1</code>时出错。<br>请检查位置并重试。',
+'SqliteDirUnwritable'			=> '无法写入到目录 <code>%1</code>。<br>更改其权限，以便web服务器能够写入并重试。',
+'SqliteReadonly'				=> '文件 <code>%1</code> 不可写。',
+'SqliteCantCreateDb'			=> '无法创建数据库文件 <code>%1</code>',
 'InstallTables'					=> '安装数据表',
 'ErrorDbConnection'				=> '您指定的数据库连接出现问题，请返回并检查它们是否正确。',
 'ErrorDatabaseVersion'			=> '数据库版本是 %1 ，但至少需要 %2。',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> '重命名 %1 表时出错',
 'ErrorUpdatingTable'			=> '更新 %1 表时出错',
 'CreatingTable'					=> '正在创建 %1 表',
+'CreatingIndex'					=> '正在创建 %1 索引',
+'CreatingTrigger'				=> '正在创建 %1 触发器',
 'ErrorAlreadyExists'			=> '%1 已存在',
 'ErrorCreatingTable'			=> '创建 %1 表时出错，它是否已经存在？',
+'ErrorCreatingIndex'			=> '创建 %1 索引时出错，它是否已经存在？',
+'ErrorCreatingTrigger'			=> '创建 %1 触发器时出错，它是否已经存在？',
 'DeletingTables'				=> '删除表',
 'DeletingTablesEnd'				=> '删除数据表',
 'ErrorDeletingTable'			=> '删除 %1 表时出错，最可能的原因是表不存在，在这种情况下您可以忽略此警告。',

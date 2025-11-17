@@ -47,6 +47,17 @@ $lang = [
 'InvalidAction'					=> 'Ogiltig åtgärd',
 
 /*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Tillstånd',
+'LockAuthorizationInfo'			=> 'Ange lösenordet du har sparat i filen %1, som du tillfälligt har placerat i din Wacko-katalog.',
+'LockPassword'					=> 'Lösenord:',
+'LockLogin'						=> 'Inloggning',
+'LockPasswordInvalid'			=> 'Ogiltigt lösenord.',
+'LockedTryLater'				=> 'Denna webbplats uppgraderas just nu. Försök igen senare.',
+
+
+/*
    Language Selection Page
 */
 'lang'							=> 'Språk konfiguration',
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Portnumret som din databasserver är tillgänglig genom. Lämna det tomt för att använda standardportnumret.',
 'DbName'						=> 'Databasens namn',
 'DbNameDesc'					=> 'Databasen WackoWiki bör använda. Denna databas måste finnas redan innan du fortsätter!',
+'DbNameSqliteDesc'				=> 'Datakatalogen och filnamnet SQLite bör användas för WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite lagrar all data i en enda fil.<br><br>Katalogen du anger måste vara skrivbar av webbservern under installationen. <br><br>Det bör <strong>inte</strong> vara tillgängligt via webben.<br><br>Installationsprogrammet kommer att skapa ytterligare <code>. taccess</code> fil tillsammans med filen, men om detta misslyckas, kan någon komma åt din databas. <br>Detta inkluderar användardata (e-postadresser, hashade lösenord) samt skyddade sidor och andra konfidentiella data som lagras i wiki. <br><br>Det är därför lämpligt att lagra datafilen på en helt annan plats, till exempel i katalogen <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Användarnamn',
 'DbUserDesc'					=> 'Namnet på användaren som används för att ansluta till din databas.',
 'DbPassword'					=> 'Lösenord',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Testar anslutningsinställningar för databas',
 'TestDatabaseExists'			=> 'Kontrollerar om databasen du angav finns',
 'TestDatabaseVersion'			=> 'Kontrollerar databasens minimikrav',
+'SqliteFileExtensionError'		=> 'Använd något av följande filtillägg db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Kan inte skapa datakatalogen <code>%1</code>, eftersom den överordnade katalogen <code>%2</code> inte är skrivbar av webbservern.<br><br>Installationsprogrammet har bestämt användaren din webbserver körs som.<br>Gör <code>%3</code> skrivbar för att fortsätta.<br>På ett Unix/Linux-system gör:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Kan inte skapa datakatalogen <code>%1</code>, eftersom den överordnade katalogen <code>%2</code> inte är skrivbar av webbservern.<br><br>Installationsprogrammet kunde inte avgöra vilken användare din webbserver körs som.<br>Gör <code>%3</code> globalt skrivbar av den (och andra!) för att fortsätta.<br>På ett Unix/Linux-system gör:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Fel vid skapande av datakatalogen <code>%1</code>.<br>Kontrollera platsen och försök igen.',
+'SqliteDirUnwritable'			=> 'Det gick inte att skriva till katalogen <code>%1</code>.<br>Ändra dess behörigheter så att webbservern kan skriva till den och försök igen.',
+'SqliteReadonly'				=> 'Filen <code>%1</code> är inte skrivbar.',
+'SqliteCantCreateDb'			=> 'Kunde inte skapa databasfilen <code>%1</code>.',
 'InstallTables'					=> 'Installerar tabeller',
 'ErrorDbConnection'				=> 'Det uppstod ett problem med databasens anslutningsdetaljer som du angav, gå tillbaka och kontrollera att de är korrekta.',
 'ErrorDatabaseVersion'			=> 'Databasversionen är %1 men kräver minst %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Fel vid namnbyte av %1 tabell',
 'ErrorUpdatingTable'			=> 'Fel vid uppdatering av %1 tabell',
 'CreatingTable'					=> 'Skapar %1 tabell',
+'CreatingIndex'					=> 'Skapar %1 index',
+'CreatingTrigger'				=> 'Skapar %1 utlösare',
 'ErrorAlreadyExists'			=> '%1 finns redan',
 'ErrorCreatingTable'			=> 'Fel vid skapande av %1 tabell, finns det?',
+'ErrorCreatingIndex'			=> 'Fel vid skapande av %1 index, finns det?',
+'ErrorCreatingTrigger'			=> 'Fel vid skapande av %1 trigger, finns det redan?',
 'DeletingTables'				=> 'Tar bort tabeller',
 'DeletingTablesEnd'				=> 'Avslutade Borttagning av tabeller',
 'ErrorDeletingTable'			=> 'Fel vid radering av %1 tabell. Den troligaste anledningen är att tabellen inte existerar, i vilket fall du kan ignorera denna varning.',

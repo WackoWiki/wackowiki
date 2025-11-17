@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> 'التسجيل',
 	'password_page'		=> 'كلمة-السر',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'واتس',
 	'changes_page'		=> 'التغييرات-الأخيرة',
 	'comments_page'		=> 'تم-التعليق-مؤخرا',
 	'index_page'		=> 'PageIndex',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> 'الرجوع',
 'Recommended'					=> 'مستحسن',
 'InvalidAction'					=> 'إجراء غير صالح',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'التصريح',
+'LockAuthorizationInfo'			=> 'الرجاء إدخال كلمة المرور التي قمت بحفظها في الملف %1، والتي قمت بوضعها مؤقتا في دليل واكو الخاص بك.',
+'LockPassword'					=> 'كلمة المرور:',
+'LockLogin'						=> 'تسجيل الدخول',
+'LockPasswordInvalid'			=> 'كلمة المرور غير صالحة.',
+'LockedTryLater'				=> 'يتم حاليا ترقية هذا الموقع. الرجاء المحاولة مرة أخرى لاحقا.',
+
 
 /*
    Language Selection Page
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'رقم المنفذ الخاص بك خادم قاعدة البيانات يمكن الوصول إليه من خلال. اتركه فارغاً لاستخدام رقم المنفذ الافتراضي.',
 'DbName'						=> 'اسم قاعدة البيانات',
 'DbNameDesc'					=> 'قاعدة البيانات WackoWiki يجب أن تستخدم. قاعدة البيانات هذه يجب أن تكون موجودة بالفعل قبل المتابعة!',
+'DbNameSqliteDesc'				=> 'يجب استخدام دليل البيانات واسم الملف SQLite لWackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'اسم المستخدم',
 'DbUserDesc'					=> 'اسم المستخدم المستخدم للاتصال بقاعدة البيانات الخاصة بك.',
 'DbPassword'					=> 'كلمة السر',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'اختبار إعدادات اتصال قاعدة البيانات',
 'TestDatabaseExists'			=> 'التحقق مما إذا كانت قاعدة البيانات التي حددتها موجودة',
 'TestDatabaseVersion'			=> 'التحقق من الحد الأدنى لاشتراطات إصدار قاعدة البيانات',
+'SqliteFileExtensionError'		=> 'الرجاء استخدام أحد ملحقات الملفات التالية db، sdb، sqlite.',
+'SqliteParentUnwritableGroup'	=> 'لا يمكن إنشاء دليل البيانات <code>%1</code>، لأن الدليل الأصلي <code>%2</code> غير قابل للكتابة من قبل خادم الويب.<br><br>قام المثبت بتحديد المستخدم الذي يعمل به خادم الويب الخاص بك.<br>اجعل الدليل <code>%3</code> قابل للكتابة من خلاله.<br>على نظام يونكس/لينكس يفعل أن:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'لا يمكن إنشاء دليل البيانات <code>%1</code>، لأن الدليل الأصلي <code>%2</code> غير قابل للكتابة من قبل خادم الويب.<br><br>لم يتمكن المثبت من تحديد المستخدم الذي يعمل به خادم الويب الخاص بك.<br>اجعل الدليل <code>%3</code> قابلاً للكتابة عالميا من خلاله (وغيرهم!) للمتابعة.<br>على نظام يونكس/لينكس :<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'حدث خطأ أثناء إنشاء دليل البيانات <code>%1</code>.<br>تحقق من الموقع وحاول مرة أخرى.',
+'SqliteDirUnwritable'			=> 'غير قادر على الكتابة إلى الدليل <code>%1</code>.<br>غير أذوناته بحيث يمكن لخادم الويب الكتابة إليه، وحاول مرة أخرى.',
+'SqliteReadonly'				=> 'الملف <code>%1</code> غير قابل للكتابة.',
+'SqliteCantCreateDb'			=> 'تعذر إنشاء ملف قاعدة البيانات <code>%1</code>.',
 'InstallTables'					=> 'تثبيت الجداول',
 'ErrorDbConnection'				=> 'حدثت مشكلة مع تفاصيل اتصال قاعدة البيانات التي حددتها، يرجى العودة والتحقق من صحتها.',
 'ErrorDatabaseVersion'			=> 'إصدار قاعدة البيانات هو %1 ولكن يتطلب على الأقل %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'خطأ في إعادة تسمية جدول %1',
 'ErrorUpdatingTable'			=> 'خطأ في تحديث جدول %1',
 'CreatingTable'					=> 'إنشاء جدول %1',
+'CreatingIndex'					=> 'إنشاء فهرس %1',
+'CreatingTrigger'				=> 'إنشاء مشغل %1',
 'ErrorAlreadyExists'			=> '%1 موجود بالفعل',
 'ErrorCreatingTable'			=> 'خطأ في إنشاء جدول %1 ، هل هو موجود بالفعل؟',
+'ErrorCreatingIndex'			=> 'خطأ في إنشاء فهرس %1 ، هل هو موجود بالفعل؟',
+'ErrorCreatingTrigger'			=> 'خطأ في إنشاء مشغل %1 ، هل هو موجود بالفعل؟',
 'DeletingTables'				=> 'حذف الجداول',
 'DeletingTablesEnd'				=> 'انتهى حذف الجداول',
 'ErrorDeletingTable'			=> 'خطأ في حذف جدول %1 . السبب الأرجح هو أن الجدول غير موجود، وفي هذه الحالة يمكنك تجاهل هذا التحذير.',

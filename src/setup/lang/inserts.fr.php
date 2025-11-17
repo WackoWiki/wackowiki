@@ -9,7 +9,7 @@ $insert = [
 			'Une documentation sommaire peut être trouvée ici : WackoWiki:Doc/Français.' . "\n" .
 			'Pages utiles: ((WackoWiki:Doc/Français/MiseEnForme MiseEnForme)), ((/Recherche Recherche)).' . "\n\n",
 	'root_page'			=> 'Page d\'accueil',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Outils d\'administration',
 
 	'category_page'		=> 'Catégories',
 	'groups_page'		=> 'Groupes',
@@ -25,13 +25,14 @@ $insert = [
 	'login_page'		=> 'Connexion',
 	'account_page'		=> 'Préférences',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'Quoi de neuf',
 	'changes_page'		=> 'Modifications',
 	'comments_page'		=> 'Commentaires',
 	'index_page'		=> 'Index',
 	'random_page'		=> 'Page au hasard',
 
-	'whatsnew_page_bm'	=> 'Modifications',
+	'tools_page_bm'		=> 'Outils',
+	'whatsnew_page_bm'	=> 'Changements',
 	'changes_page_bm'	=> 'Modifications',
 	'comments_page_bm'	=> 'Commentaires',
 	'index_page_bm'		=> 'Index',

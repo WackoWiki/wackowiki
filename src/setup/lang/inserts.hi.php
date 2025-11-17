@@ -7,7 +7,7 @@ $insert = [
 			'**आपकी ((WackoWiki:Doc/English WackoWiki)) साइट पर आपका स्वागत है!**' . "\n\n" .
 			'आरंभ करने के लिए नीचे "इस पृष्ठ को संपादित करें" लिंक पर लॉग इन करने के बाद क्लिक करें।' . "\n\n" .
 			'दस्तावेज़ीकरण यहां पाया जा सकता है  WackoWiki:Doc/English.' . "\n" .
-			'उपयोगी पृष्ठ: ((WackoWiki:Doc/English/Formatting Formatting)), ((/खोजें खोजें)).' . "\n\n",
+			'उपयोगी पृष्ठ: ((WackoWiki:Doc/English/Formatting Formatting)), ((/खोजें खोजें))।' . "\n\n",
 	'root_page'			=> 'मुख पृष्ठ',
 	'tools_page'		=> 'Admin tools',
 
@@ -31,6 +31,7 @@ $insert = [
 	'index_page'		=> 'पृष्ठ अनुक्रमणिका',
 	'random_page'		=> 'यादृच्छिक पृष्',
 
+	'tools_page_bm'		=> 'Tools',
 	'whatsnew_page_bm'	=> 'परिवर्तन',
 	'changes_page_bm'	=> 'परिवर्तन',
 	'comments_page_bm'	=> 'टिप्पणियाँ',

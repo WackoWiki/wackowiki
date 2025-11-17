@@ -9,7 +9,7 @@ $insert = [
 			'Документація може бути знайдена на WackoWiki:Doc/English' . "\n" .
 			'Корисні сторінки: ((WackoWiki:Doc/English/Formatting Forming)), ((/Пошук Пошук)).' . "\n\n",
 	'root_page'			=> 'Домашня сторінка',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Інструменти адміністратора',
 
 	'category_page'		=> 'Категорія',
 	'groups_page'		=> 'Групи',
@@ -25,12 +25,13 @@ $insert = [
 	'login_page'		=> 'Логін',
 	'account_page'		=> 'Налаштування',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'Нових ударів',
 	'changes_page'		=> 'Останні зміни',
 	'comments_page'		=> 'Нещодавно коментовані',
 	'index_page'		=> 'Індекс сторінки',
 	'random_page'		=> 'Випадкова сторінка',
 
+	'tools_page_bm'		=> 'Інструменти',
 	'whatsnew_page_bm'	=> 'Зміни',
 	'changes_page_bm'	=> 'Зміни',
 	'comments_page_bm'	=> 'Коментарі',

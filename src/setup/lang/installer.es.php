@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> 'Registrarse',
 	'password_page'		=> 'Contraseña',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'Novedades',
 	'changes_page'		=> 'UltimasModificaciones',
 	'comments_page'		=> 'UltimosComentarios',
 	'index_page'		=> 'IndiceDePaginas',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> 'Volver',
 'Recommended'					=> 'recomendado',
 'InvalidAction'					=> 'Acción no válida',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Autorización',
+'LockAuthorizationInfo'			=> 'Por favor, introduzca la contraseña que ha guardado en el archivo %1, que ha colocado temporalmente en su directorio Wacko.',
+'LockPassword'					=> 'Contraseña:',
+'LockLogin'						=> 'Ingresar',
+'LockPasswordInvalid'			=> 'Contraseña no válida.',
+'LockedTryLater'				=> 'Este sitio está siendo actualizado. Por favor, inténtalo de nuevo más tarde.',
+
 
 /*
    Language Selection Page
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Número de puerto para acceder al servidor de base de datos, dejelo en blanco para usar el puerto por defecto.',
 'DbName'						=> 'Nombre de base de datos',
 'DbNameDesc'					=> 'La base de datos usado por WackoWiki. Esta base de datos ya debe estar creada antes de continuar con la instalación!',
+'DbNameSqliteDesc'				=> 'El directorio de datos y el nombre del archivo SQLite deben usar para WackoWiki.',
+'DbNameSqliteHelp'				=> 'SQLite almacena todos los datos en un solo archivo.<br><br>El directorio que especifique debe ser escribible por el servidor web durante la instalación. <br><br>Debería <strong>no</strong> ser accesible a través de la web.<br><br>El programa de instalación creará un <code>adicional. taccess</code> junto con el archivo, pero si esto falla, puede que alguien pueda acceder a su base de datos. <br>Esto incluye datos de usuario (direcciones de correo electrónico, contraseñas cifradas) así como páginas protegidas y otros datos confidenciales almacenados en la wiki. <br><br>Por lo tanto, es recomendable almacenar el archivo de datos en una ubicación completamente diferente por ejemplo en el directorio <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nombre de usuario',
 'DbUserDesc'					=> 'Nombre del usuario para la conexión con la base de datos.',
 'DbPassword'					=> 'Contraseña',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Comprobando configuración de la conexión con la base de datos',
 'TestDatabaseExists'			=> 'Verificando si existe la base de datos especificada',
 'TestDatabaseVersion'			=> 'Comprobando los requisitos mínimos de versión de la base de datos',
+'SqliteFileExtensionError'		=> 'Por favor, utilice una de las siguientes extensiones de archivo db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Error al crear el directorio de datos <code>%1</code>.<br>Compruebe la ubicación e inténtelo de nuevo.',
+'SqliteDirUnwritable'			=> 'No se puede escribir en el directorio <code>%1</code>.<br>Cambie sus permisos para que el servidor web pueda escribir en él, e inténtelo de nuevo.',
+'SqliteReadonly'				=> 'El archivo <code>%1</code> no es escribible.',
+'SqliteCantCreateDb'			=> 'No se pudo crear el archivo de base de datos <code>%1</code>.',
 'InstallTables'					=> 'Instalando tablas',
 'ErrorDbConnection'				=> 'Ocurrió un problema con la configuración de la conexión con la base de datos, por favor retroceda para verificar.',
 'ErrorDatabaseVersion'			=> 'La versión de la base de datos es %1 pero requiere al menos %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Error al renombrar tabla %1 ',
 'ErrorUpdatingTable'			=> 'Error al actualizar tabla %1 ',
 'CreatingTable'					=> 'Creando %1 tabla',
+'CreatingIndex'					=> 'Creando índice %1',
+'CreatingTrigger'				=> 'Creando disparador %1',
 'ErrorAlreadyExists'			=> '%1 ya existe',
 'ErrorCreatingTable'			=> 'Error al crear %1 tabla, ya existe ?',
+'ErrorCreatingIndex'			=> 'Error al crear el índice %1 , ¿ya existe?',
+'ErrorCreatingTrigger'			=> 'Error al crear el disparador %1 , ¿ya existe?',
 'DeletingTables'				=> 'Eliminando Tablas',
 'DeletingTablesEnd'				=> 'Tablas eliminados',
 'ErrorDeletingTable'			=> 'Error al eliminar tabla %1, en caso que no existe la tabla puede ignorar esta advertencia.',

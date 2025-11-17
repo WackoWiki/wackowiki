@@ -25,7 +25,7 @@ $lang = [
 	'registration_page'	=> 'Rekisteröinti',
 	'password_page'		=> 'Salasana',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'Mitä Uutta',
 	'changes_page'		=> 'ViimeisimmätMuutokset',
 	'comments_page'		=> 'ÄskettäinKommentoitu',
 	'index_page'		=> 'PageIndex',
@@ -45,6 +45,17 @@ $lang = [
 'Back'							=> 'Takaisin',
 'Recommended'					=> 'suositellaan',
 'InvalidAction'					=> 'Virheellinen toiminto',
+
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'Valtuutus',
+'LockAuthorizationInfo'			=> 'Syötä salasana, jonka tallensit tiedostoon %1, jonka asetit väliaikaisesti Wacko-hakemistoon.',
+'LockPassword'					=> 'Salasana:',
+'LockLogin'						=> 'Kirjaudu',
+'LockPasswordInvalid'			=> 'Virheellinen salasana.',
+'LockedTryLater'				=> 'Sivustoa päivitetään parhaillaan. Yritä myöhemmin uudelleen.',
+
 
 /*
    Language Selection Page
@@ -137,6 +148,8 @@ $lang = [
 'DbPortDesc'					=> 'Portti numero tietokantapalvelin on käytettävissä läpi. Jätä tyhjäksi käyttääksesi oletusportin numero.',
 'DbName'						=> 'Tietokannan Nimi',
 'DbNameDesc'					=> 'Tietokannan WackoWiki pitäisi käyttää. Tämä tietokanta on oltava olemassa jo ennen kuin jatkat sitä!',
+'DbNameSqliteDesc'				=> 'Datahakemistoa ja tiedostonimeä SQLite pitäisi käyttää WackoWikille.',
+'DbNameSqliteHelp'				=> 'SQLite tallentaa kaikki tiedot yhteen tiedostoon.<br><br>Web-palvelin on kirjoitettava kansioon asennuksen aikana. <br><br>Sen ei pitäisi <strong></strong> olla käytettävissä verkon kautta.<br><br>Asennusohjelma luo uuden <code>. taccess</code> tiedosto yhdessä tiedoston kanssa, mutta jos tämä epäonnistuu, joku voi käyttää tietokantaasi. <br>Tämä sisältää käyttäjätiedot (sähköpostiosoitteet, salasanat) sekä suojatut sivut ja muut wikiin tallennetut luottamukselliset tiedot. <br><br>Siksi on suositeltavaa tallentaa tiedosto täysin eri paikkaan, esimerkiksi hakemistossa <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Käyttäjän Nimi',
 'DbUserDesc'					=> 'Tietokantaan yhdistettävän käyttäjän nimi. @ info: whatsthis',
 'DbPassword'					=> 'Salasana',
@@ -157,6 +170,13 @@ $lang = [
 'TestConnectionString'			=> 'Testataan tietokantayhteyden asetuksia',
 'TestDatabaseExists'			=> 'Tarkistetaan, onko määrittämäsi tietokanta olemassa',
 'TestDatabaseVersion'			=> 'Tarkistetaan tietokannan vähimmäisversiovaatimukset',
+'SqliteFileExtensionError'		=> 'Käytä jotakin seuraavista tiedostopäätteistä db, sdb, sqlite.',
+'SqliteParentUnwritableGroup'	=> 'Ei voi luoda datahakemistoa <code>%1</code>, koska ylähakemistoon <code>%2</code> ei voi kirjoittaa web- palvelin.<br><br>Asentaja on määrittänyt, että käyttäjä palvelimesi on käynnissä.<br>Tee <code>%3</code> hakemistosta kirjoitettava jatkaaksesi.<br>Unix/Linux-järjestelmässä:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Ei voi luoda datahakemistoa <code>%1</code>, koska ylähakemistoon <code>%2</code> ei voi kirjoittaa web- palvelin.<br><br>Asentaja ei pystynyt määrittämään käyttäjää joka on käynnissä.<br>Tee <code>%3</code> hakemistosta maailmanlaajuisesti kirjoitettava (ja muut!) jatkaaksesi.<br>Unix/Linux-järjestelmässä:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteMkdirError'				=> 'Virhe luotaessa datakansiota <code>%1</code>.<br>Tarkista sijainti ja yritä uudelleen.',
+'SqliteDirUnwritable'			=> 'Ei voitu kirjoittaa hakemistoon <code>%1</code>.<br>Muuta sen käyttöoikeuksia, jotta web-palvelin voi kirjoittaa siihen ja yritä uudelleen.',
+'SqliteReadonly'				=> 'Tiedosto <code>%1</code> ei ole kirjoitettavissa.',
+'SqliteCantCreateDb'			=> 'Ei voitu luoda tietokantatiedostoa <code>%1</code>.',
 'InstallTables'					=> 'Asennetaan Tauluja',
 'ErrorDbConnection'				=> 'Määrittämäsi tietokantayhteyden tiedot olivat ongelma, ole hyvä ja tarkista, että ne ovat oikeita.',
 'ErrorDatabaseVersion'			=> 'Tietokannan versio on %1 mutta vaatii vähintään %2.',
@@ -190,8 +210,12 @@ $lang = [
 'ErrorRenameTable'				=> 'Virhe uudelleennimeäessä %1 taulua',
 'ErrorUpdatingTable'			=> 'Virhe päivitettäessä %1 taulua',
 'CreatingTable'					=> 'Luodaan %1 -taulua',
+'CreatingIndex'					=> 'Luodaan %1 -indeksiä',
+'CreatingTrigger'				=> 'Luodaan %1 -käynnistin',
 'ErrorAlreadyExists'			=> '%1 on jo olemassa',
 'ErrorCreatingTable'			=> 'Virhe luotaessa %1 -taulukkoa, onko se jo olemassa?',
+'ErrorCreatingIndex'			=> 'Virhe luotaessa %1 -hakemistoa, onko se jo olemassa?',
+'ErrorCreatingTrigger'			=> 'Virhe luotaessa %1 -käynnistystä, onko se jo olemassa?',
 'DeletingTables'				=> 'Poistetaan Tauluja',
 'DeletingTablesEnd'				=> 'Poistaminen Valmis',
 'ErrorDeletingTable'			=> 'Virhe poistettaessa %1 -taulukkoa. Todennäköisin syy on, että taulukkoa ei ole olemassa, jolloin voit ohittaa tämän varoituksen.',
