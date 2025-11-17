@@ -144,9 +144,12 @@ function admin_tool_badbehaviour($engine, $module)
 			// Query the DB based on variables selected
 			$binary		= $engine->db->binary();
 			$results	= $engine->db->load_all(
-				"SELECT CAST({$argument} AS ' . $binary . ') AS group_type, {$additional_fields} COUNT({$argument}) AS n " .
+				'SELECT ' .
+					'CAST(' . $argument . ' AS ' . $binary . ') AS group_type, ' .
+					$additional_fields .
+					' COUNT(' . $argument . ') AS n ' .
 				'FROM ' . $engine->prefix . 'bad_behaviour ' .
-				"GROUP BY CAST({$argument} AS ' . $binary . ') " .
+				'GROUP BY CAST(' . $argument . ' AS ' . $binary . ') ' .
 				'ORDER BY n DESC ' .
 				'LIMIT 10', true);
 
