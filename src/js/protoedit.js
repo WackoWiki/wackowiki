@@ -78,9 +78,9 @@ class ProtoEdit
 		else
 		{
 			let ss				= this.area.scrollTop;
-			let sel1			= this.area.value.substring(0, this.area.selectionStart);
-			let sel2			= this.area.value.substring(this.area.selectionEnd);
-			let sel				= this.area.value.substring(this.area.selectionStart, this.area.selectionEnd - this.area.selectionStart);
+			let sel1			= safeSlice(this.area.value, 0, this.area.selectionStart);
+			let sel2			= safeSlice(this.area.value, this.area.selectionEnd);
+			let sel				= safeSlice(this.area.value, this.area.selectionStart, this.area.selectionEnd - this.area.selectionStart);
 			this.area.value		= sel1 + Tag + sel + Tag2 + sel2;
 			let selPos			= Tag.length + sel1.length + sel.length + Tag2.length;
 			this.area.setSelectionRange(sel1.length, selPos);
@@ -161,29 +161,29 @@ class ProtoEdit
 		}
 
 		let s	= s2;
-		let ch	= s.substring(0, 1);
+		let ch	= safeSlice(s, 0, 1);
 
 		// check for spaces at the beginning of the string
 		while (ch === ' ')
 		{
-			s	= s.substring(1, s.length);
-			ch	= s.substring(0, 1);
+			s	= safeSlice(s, 1, s.length);
+			ch	= safeSlice(s, 0, 1);
 		}
 
-		ch		= s.substring(s.length - 1, s.length);
+		ch		= safeSlice(s, s.length - 1, s.length);
 
 		// check for spaces at the end of the string
 		while (ch === ' ')
 		{
-			s	= s.substring(0, s.length - 1);
-			ch	= s.substring(s.length - 1, s.length);
+			s	= safeSlice(s, 0, s.length - 1);
+			ch	= safeSlice(s, s.length - 1, s.length);
 		}
 
 		// note that there are two spaces in the string - look for multiple spaces within the string
 		while (s.indexOf('  ') !== -1)
 		{
 			// again, there are two spaces in each of the strings
-			s	= s.substring(0, s.indexOf('  ')) + s.substring(s.indexOf('  ') + 1, s.length);
+			s	= safeSlice(s, 0, s.indexOf('  ')) + safeSlice(s, s.indexOf('  ') + 1, s.length);
 		}
 
 		return s; // return the trimmed string back to the user

@@ -207,12 +207,12 @@ class WikiEdit extends ProtoEdit
 			if (q1 != null)
 			{
 				let s	= q1[1];
-				let ch	= s.substring(s.length - 1, s.length);
+				let ch	= safeSlice(s, s.length - 1, s.length);
 
 				while (ch === ' ')
 				{
-					s	= s.substring(0, s.length - 1);
-					ch	= s.substring(s.length - 1, s.length);
+					s	= safeSlice(s, 0, s.length - 1);
+					ch	= safeSlice(s, s.length - 1, s.length);
 				}
 
 				Text = s + Tag2 + q[1] + this.end + q[2];
@@ -439,7 +439,7 @@ class WikiEdit extends ProtoEdit
 		const undosels	= t.selectionStart;
 		const undosele	= t.selectionEnd;
 
-		str				= t.value.substring(t.selectionStart, t.selectionEnd - t.selectionStart);
+		str				= safeSlice(t.value, t.selectionStart, t.selectionEnd - t.selectionStart);
 		sel				= (str.length > 0);
 
 		// take an autocomplete
@@ -577,8 +577,8 @@ class WikiEdit extends ProtoEdit
 				{
 					let text	= t.value;
 					text		= text.replace(/\r/g, '');
-					let sel1	= text.substring(0, t.selectionStart);
-					const sel2	= text.substring(t.selectionEnd);
+					let sel1	= safeSlice(text, 0, t.selectionStart);
+					const sel2	= safeSlice(text, t.selectionEnd);
 
 					re			= new RegExp('(^|\n)(( +)((([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$', 'u');
 					q			= sel1.match(re);
@@ -622,7 +622,7 @@ class WikiEdit extends ProtoEdit
 
 						// t.scrollIntoView(true);
 						z			= t.selectionStart;
-						lines		= t.value.substring(0, z).split('\n').length - 1;
+						lines		= safeSlice(t.value, 0, z).split('\n').length - 1;
 						totalLines	= t.value.split('\n').length - 1;
 
 						if (scroll + t.offsetHeight + 25 > Math.floor((t.scrollHeight / (totalLines + 1)) * lines))
@@ -683,9 +683,9 @@ class WikiEdit extends ProtoEdit
 
 		this.ss			= t.selectionStart;
 		this.se			= t.selectionEnd;
-		this.sel1		= text.substring(0, this.ss);
-		this.sel2		= text.substring(this.se);
-		this.sel		= text.substring(this.ss, this.se - this.ss);
+		this.sel1		= safeSlice(text, 0, this.ss);
+		this.sel2		= safeSlice(text, this.se);
+		this.sel		= safeSlice(text, this.ss, this.se - this.ss);
 		this.str		= this.sel1 + this.begin + this.sel + this.end + this.sel2;
 
 		this.scroll		= t.scrollTop;

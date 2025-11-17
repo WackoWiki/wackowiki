@@ -97,9 +97,9 @@ class AutoComplete
 
 	redrawInplace()
 	{
-		const _str = this.longtext.substring(0, this.itempos) + this.wikiedit.begin
+		const _str = safeSlice(this.longtext, 0, this.itempos) + this.wikiedit.begin
 			+ this.request_pattern + this.wikiedit.end
-			+ this.longtext.substring(this.itempos + this.request_pattern.length)
+			+ safeSlice(this.longtext, this.itempos + this.request_pattern.length)
 			+ this.wikiedit.sel2;
 		if (this.found_patterns.length === 0)
 			return;
@@ -203,10 +203,10 @@ class AutoComplete
 
 			if (itempos >= 0)
 			{
-				str = longtext.substring(0, itempos)
+				str = safeSlice(longtext, 0, itempos)
 					+ this.wikiedit.begin
 					+ this.request_pattern + this.wikiedit.end
-					+ longtext.substring(itempos + this.request_pattern.length)
+					+ safeSlice(longtext, itempos + this.request_pattern.length)
 					+ this.wikiedit.sel2;
 			}
 		}
@@ -218,9 +218,9 @@ class AutoComplete
 
 			if (itempos >= 0)
 			{
-				str = this.wikiedit.sel1.substring(0, itempos)
+				str = safeSlice(this.wikiedit.sel1, 0, itempos)
 					+ foundPattern
-					+ this.wikiedit.sel1.substring(itempos + this.request_pattern.length)
+					+ safeSlice(this.wikiedit.sel1, itempos + this.request_pattern.length)
 					+ this.wikiedit.begin + this.wikiedit.sel + this.wikiedit.end
 					+ this.wikiedit.sel2;
 			}
@@ -370,7 +370,7 @@ class AutoComplete
 			{
 				this.strict_linking_mode = true;
 
-				return pattern.substring(2);
+				return safeSlice(pattern, 2);
 			}
 
 			if (pattern.match(this.regexp_LinkSubpage))
@@ -426,7 +426,7 @@ class AutoComplete
 
 		start++;
 
-		return this.wikiedit.area.value.substring(start, end - start);
+		return safeSlice(this.wikiedit.area.value, start, end - start);
 
 	}
 
