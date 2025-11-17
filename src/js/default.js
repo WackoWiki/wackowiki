@@ -268,9 +268,9 @@ function userSessionHeartbeat(duration, ename)
 // substr() replacement
 function safeSlice(str, start, length)
 {
-	const actualStart = start < 0 ? Math.max(str.length + start, 0) : Math.min(start, str.length);
-	const actualLength = Math.max(Math.min(length ?? str.length, str.length), 0);
-	const actualEnd = Math.min(actualStart + actualLength, str.length);
+	const actualStart	= start < 0 ? Math.max(str.length + start, 0) : Math.min(start, str.length);
+	const actualLength	= Math.max(Math.min(length ?? str.length, str.length), 0);
+	const actualEnd		= Math.min(actualStart + actualLength, str.length);
 
 	return str.slice(actualStart, actualEnd);
 }
