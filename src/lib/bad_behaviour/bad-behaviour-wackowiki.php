@@ -18,8 +18,8 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 Please report any problems to bad . bots AT ioerror DOT us
 https://github.com/Bad-Behaviour/badbehaviour
 
-WackoWiki implementation, 2023 WackoWiki Team
-Version 0.8
+WackoWiki implementation, 2025 WackoWiki Team
+Version 0.9
 https://wackowiki.org/doc/Dev/PatchesHacks/BadBehaviour
 
 */
