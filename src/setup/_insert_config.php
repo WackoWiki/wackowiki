@@ -241,13 +241,11 @@ $config_insert .= "('maint_last_update', " . utc_dt() . ") ";
 $insert_config =	"INSERT INTO " . $config['table_prefix'] . "config (config_name, config_value)
 						VALUES " .
 							$config_insert .
-						(!in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
-							? "ON DUPLICATE KEY UPDATE
-								config_name		= VALUES(config_name),
-								config_value	= VALUES(config_value);"
-
-							: "ON CONFLICT(config_name) DO UPDATE SET
-
+						(in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
+							? "ON CONFLICT(config_name) DO UPDATE SET
 								config_name		= excluded.config_name,
 								config_value	= excluded.config_value;"
+							: "ON DUPLICATE KEY UPDATE
+								config_name		= VALUES(config_name),
+								config_value	= VALUES(config_value);"
 						); // FIXME: ON CONFLICT(config_id, config_name)

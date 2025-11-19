@@ -77,14 +77,15 @@ function set_language($iso): array
 
 	if ($iso == 'en')
 	{
-		require_once 'setup/lang/installer.' . $iso . '.php';
+		require_once 'setup/lang/installer.en.php';
 		$x[$iso] = array_merge ($lang, $lang_all);
 	}
 	else
 	{
 		require_once 'setup/lang/installer.' . $iso . '.php';
 		$x[$iso] = array_merge ($lang, $lang_all);
-		require_once 'setup/lang/installer.' . 'en' . '.php';
+
+		require_once 'setup/lang/installer.en.php';
 		$x['en'] = array_merge ($lang, $lang_all);
 	}
 
@@ -198,12 +199,6 @@ function test_sqlite($text, $query, $error_text = '')
 {
 	global $dblink;
 
-	/* $result = $dblink->exec($query);
-	 if (!$result)
-	 {
-	 die('Query failed: ' . $query . ' (' . $dblink->lastErrorCode() . ': ' . $dblink->lastErrorMsg() . ')');
-	 } */
-
 	try
 	{
 		test($text, $dblink->exec($query), $error_text);
@@ -217,21 +212,6 @@ function test_sqlite($text, $query, $error_text = '')
 function test_pdo($text, $query, $error_text = '')
 {
 	global $dblink;
-
-/* 	$result = $dblink->exec($query);
-	if ($result)
-	{
-		if ($dblink->errorCode() !== '00000')
-		{
-			#ob_end_clean();
-
-			#if ($this->config->debug > 2)
-			{
-				die('Query failed: ' . $query . ' (' . $dblink->errorCode() . ': ' . $dblink->errorInfo() . ')');
-			}
-
-		}
-	} */
 
 	try
 	{

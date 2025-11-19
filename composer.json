@@ -9,7 +9,7 @@
 	"homepage" : "https://wackowiki.org",
 	"license" : "BSD-3-Clause",
 	"require" : {
-		"php" : "8.0 - 8.4",
+		"php" : "8.0 - 8.5",
 		"ext-bcmath" : "*",
 		"ext-ctype" : "*",
 		"ext-dom" : "*",
@@ -25,7 +25,7 @@
 		"ext-pdo" : "*",
 		"ext-pdo_mysql" : "*",
 		"ext-SPL" : "*",
-		"ext-sqlite3": "*",
+		"ext-sqlite3" : "*",
 		"ext-zlib" : "*"
 	},
 	"prefer-stable" : true

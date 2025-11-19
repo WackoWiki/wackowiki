@@ -187,11 +187,11 @@ function insert_page($tag, $page, $lang, $config)
 				'" . _q($menu_title) . "',
 				'" . (int) $menu_position . "'
 			)" .
-			(!in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
-				? "ON DUPLICATE KEY UPDATE
-					menu_title = '" . _q($menu_title) . "'"
-				: "ON CONFLICT(user_id, page_id, menu_lang) DO UPDATE SET
+			(in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
+				? "ON CONFLICT(user_id, page_id, menu_lang) DO UPDATE SET
 					menu_title = excluded.menu_title;"
+				: "ON DUPLICATE KEY UPDATE
+					menu_title = '" . _q($menu_title) . "'"
 				);
 
 		if ($set_menu)
@@ -215,11 +215,11 @@ function insert_page($tag, $page, $lang, $config)
 			'" . _q($menu_title) . "',
 			'" . (int) $menu_position . "'
 		)" .
-		(!in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
-			? "ON DUPLICATE KEY UPDATE
-				menu_title = '" . _q($menu_title) . "'"
-			: "ON CONFLICT(user_id, page_id, menu_lang) DO UPDATE SET
+		(in_array($config_global['db_driver'], ['sqlite', 'sqlite_pdo'])
+			? "ON CONFLICT(user_id, page_id, menu_lang) DO UPDATE SET
 				menu_title = excluded.menu_title;"
+			: "ON DUPLICATE KEY UPDATE
+				menu_title = '" . _q($menu_title) . "'"
 		);
 
 	if ($set_menu && $set_menu != SET_MENU_ADMIN)
