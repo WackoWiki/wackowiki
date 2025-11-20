@@ -37,6 +37,20 @@ if ($help)
 	return;
 }
 
+$mod_selector	= 'mode';
+$tabs			= [
+	'all'		=> 'Any',
+	'pages'		=> 'UsersPages',
+	'comments'	=> 'Comments',
+	'files'		=> 'Files'
+];
+$mode			= $_GET[$mod_selector] ?? '';
+
+if (!array_key_exists($mode, $tabs))
+{
+	$mode = 'all';
+}#$mode = 'all';
+
 if (!$max || $max > 100) $max = 100;
 
 $prefix	= $this->prefix;
@@ -46,62 +60,80 @@ $user	= $this->get_user();
 // process 'mark read'
 $this->mark_read($user);
 
-// loading new pages/comments
-$pages1 = $this->db->load_all(
-	'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, NULL AS cf_lang, NULL AS comment_on_page, NULL AS title_on_page, u.user_name, 1 AS ctype, p.deleted ' .
-	'FROM ' . $prefix . 'page p ' .
-		'LEFT JOIN ' . $prefix . 'user u ON (p.owner_id = u.user_id) ' .
-	'WHERE (u.account_type = 0 OR p.user_id = 0) ' .
-	'AND p.comment_on_id = 0 ' .
-	($tag
-		? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-		: '') .
-	'ORDER BY p.created DESC ' .
-	'LIMIT ' . ($max * 2), true);
+$pages1		= [];
+$pages2		= [];
+$comments	= [];
+$files		= [];
 
-// loading revisions
-$pages2 = $this->db->load_all(
-	'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, NULL AS cf_lang, NULL AS comment_on_page, NULL AS title_on_page, u.user_name, 1 AS ctype, p.deleted ' .
-	'FROM ' . $prefix . 'page p ' .
-		'LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id) ' .
-	'WHERE p.comment_on_id = 0 ' .
+if ($mode == 'pages' || $mode == 'all')
+{
+	// loading new pages/comments
+	$pages1 = $this->db->load_all(
+		'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, NULL AS cf_lang, NULL AS comment_on_page, NULL AS title_on_page, u.user_name, 1 AS ctype, p.deleted ' .
+		'FROM ' . $prefix . 'page p ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (p.owner_id = u.user_id) ' .
+		'WHERE (u.account_type = 0 OR p.user_id = 0) ' .
+		'AND p.comment_on_id = 0 ' .
 		($tag
 			? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
 			: '') .
-		'AND p.deleted = 0 ' .
-		'AND (u.account_type = 0 OR p.user_id = 0) ' .
-	'ORDER BY p.modified DESC ' .
-	'LIMIT ' . ($max * 2), true);
+		'ORDER BY p.created DESC ' .
+		'LIMIT ' . ($max * 2), true);
 
-$comments = $this->db->load_all(
-	'SELECT c.page_id, c.owner_id, c.user_id, c.tag, c.created, c.modified, c.title, c.comment_on_id, c.ip, c.modified AS date, c.edit_note, c.page_lang, p.page_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 1 AS ctype, c.deleted ' .
-	'FROM ' . $prefix . 'page c ' .
-	'INNER JOIN ' . $prefix . 'page p ON (c.comment_on_id = p.page_id) ' .
-	'LEFT JOIN ' . $prefix . 'user u ON (c.owner_id = u.user_id) ' .
-	'WHERE (u.account_type = 0 OR c.user_id = 0) ' .
-	'AND c.comment_on_id <> 0 ' .
-	($tag
-		? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
-		: '') .
-	'ORDER BY c.modified DESC ' .
-	'LIMIT ' . ($max * 2), true);
+	// loading revisions
+	$pages2 = $this->db->load_all(
+		'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, NULL AS cf_lang, NULL AS comment_on_page, NULL AS title_on_page, u.user_name, 1 AS ctype, p.deleted ' .
+		'FROM ' . $prefix . 'page p ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id) ' .
+		'WHERE p.comment_on_id = 0 ' .
+			($tag
+				? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+				: '') .
+			'AND p.deleted = 0 ' .
+			'AND (u.account_type = 0 OR p.user_id = 0) ' .
+		'ORDER BY p.modified DESC ' .
+		'LIMIT ' . ($max * 2), true);
+}
 
-// loading uploads
-$files = $this->db->load_all(
-	'SELECT f.page_id, p.owner_id, p.user_id, p.tag, f.created, f.modified, f.file_name AS title, f.file_id AS comment_on_id, 0 AS ip, f.created AS date, f.file_description AS edit_note, p.page_lang, f.file_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 2 AS ctype, f.deleted ' .
-	'FROM ' . $prefix . 'file f ' .
-		'LEFT JOIN ' . $prefix . 'page p ON (f.page_id = p.page_id) ' .
-		'LEFT JOIN ' . $prefix . 'user u ON (f.user_id = u.user_id) ' .
-	'WHERE u.account_type = 0 ' .
+if ($mode == 'comments' || $mode == 'all')
+{
+	$comments = $this->db->load_all(
+		'SELECT c.page_id, c.owner_id, c.user_id, c.tag, c.created, c.modified, c.title, c.comment_on_id, c.ip, c.modified AS date, c.edit_note, c.page_lang, p.page_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 1 AS ctype, c.deleted ' .
+		'FROM ' . $prefix . 'page c ' .
+			'INNER JOIN ' . $prefix . 'page p ON (c.comment_on_id = p.page_id) ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (c.owner_id = u.user_id) ' .
+		'WHERE (u.account_type = 0 OR c.user_id = 0) ' .
+		'AND c.comment_on_id <> 0 ' .
+		($tag
+			? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+			: '') .
+		'ORDER BY c.modified DESC ' .
+		'LIMIT ' . ($max * 2), true);
+}
+
+if ($mode == 'files' || $mode == 'all')
+{
+	// loading uploads
+	$files = $this->db->load_all(
+		'SELECT f.page_id, p.owner_id, p.user_id, p.tag, f.created, f.modified, f.file_name AS title, f.file_id AS comment_on_id, 0 AS ip, f.created AS date, f.file_description AS edit_note, p.page_lang, f.file_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 2 AS ctype, f.deleted ' .
+		'FROM ' . $prefix . 'file f ' .
+			'LEFT JOIN ' . $prefix . 'page p ON (f.page_id = p.page_id) ' .
+			'LEFT JOIN ' . $prefix . 'user u ON (f.user_id = u.user_id) ' .
+		'WHERE u.account_type = 0 ' .
 		($tag
 			? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
 			: '') .
 		'AND f.deleted = 0 ' .
-	'ORDER BY f.created DESC ' .
-	'LIMIT ' . ($max * 2), true);
+		'ORDER BY f.created DESC ' .
+		'LIMIT ' . ($max * 2), true);
+}
 
 if ($pages = array_merge($pages1, $pages2, $comments, $files))
 {
+	// print navigation
+	$tpl->h_header	= $this->_t($tabs[$mode]);
+	$tpl->h_tabs	= $this->tab_menu($tabs, $mode, '', [], $mod_selector);
+
 	// sort by dates
 	$sort_dates = function($a, $b)
 	{
@@ -127,7 +159,8 @@ if ($pages = array_merge($pages1, $pages2, $comments, $files))
 		$tpl->xml_href = $this->get_xml_file('changes');
 	}
 
-	$pagination	= $this->pagination(count($pages), @$max, 'n', '', '');
+	$pagination	= $this->pagination(count($pages), @$max, 'n',
+		(!empty($mode)		? [$mod_selector	=> $mode]	: []), '');
 	$pages		= array_slice($pages, $pagination['offset'], $pagination['perpage']);
 
 	$curday		= '';

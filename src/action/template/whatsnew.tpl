@@ -1,6 +1,10 @@
 [ === main === ]
 	[ ' help ' ]
 	[ ' message ' ]
+	[= h _ =
+		[ ' tabs ' ]
+		<br><br>
+	=]
 	[= mark =
 		<small class="no-print"><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 	=]
