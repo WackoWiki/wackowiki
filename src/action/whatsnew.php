@@ -131,7 +131,6 @@ if ($mode == 'files' || $mode == 'all')
 if ($pages = array_merge($pages1, $pages2, $comments, $files))
 {
 	// print navigation
-	$tpl->h_header	= $this->_t($tabs[$mode]);
 	$tpl->h_tabs	= $this->tab_menu($tabs, $mode, '', [], $mod_selector);
 
 	// sort by dates
