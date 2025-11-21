@@ -49,7 +49,7 @@ $mode			= $_GET[$mod_selector] ?? '';
 if (!array_key_exists($mode, $tabs))
 {
 	$mode = 'all';
-}#$mode = 'all';
+}
 
 if (!$max || $max > 100) $max = 100;
 
@@ -128,11 +128,11 @@ if ($mode == 'files' || $mode == 'all')
 		'LIMIT ' . ($max * 2), true);
 }
 
+// print navigation
+$tpl->h_tabs	= $this->tab_menu($tabs, $mode, '', [], $mod_selector);
+
 if ($pages = array_merge($pages1, $pages2, $comments, $files))
 {
-	// print navigation
-	$tpl->h_tabs	= $this->tab_menu($tabs, $mode, '', [], $mod_selector);
-
 	// sort by dates
 	$sort_dates = function($a, $b)
 	{
