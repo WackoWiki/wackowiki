@@ -18,7 +18,8 @@ $route	= $router->run(['_install' => (int)(!isset($db->wacko_version) || version
 
 $db->ap_mode = ($route['route'] === 'admin');
 
-if (($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) && !isset($route['unlock'])) || (!$db->ap_mode && RECOVERY_MODE))
+if (   ($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) && !isset($route['unlock']))
+	|| (!$db->ap_mode && RECOVERY_MODE && !isset($route['unlock'])))
 {
 	$http->status(503);
 	echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
