@@ -4998,7 +4998,8 @@ class Wacko
 	// find reserved namespace (file, image, js, theme, xml)
 	function validate_namespace($data)
 	{
-		if (preg_match('#^(' . $this->db->reserved_namespaces . ')/?#u', $data, $match))
+		if ($this->db->reserved_namespaces
+			&& preg_match('#^(' . $this->db->reserved_namespaces . ')/?#u', $data, $match))
 		{
 			return Ut::perc_replace($this->_t('PageReservedNamespace'), '<code>' . $match[0] .'</code>');
 		}
