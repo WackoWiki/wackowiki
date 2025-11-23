@@ -11,18 +11,21 @@ if ($config['db_collation'] == '0')
 	$config['db_collation'] = 'utf8mb4_unicode_520_ci';
 }
 // reset config defaults for SQLite
-if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+if (!$config['is_update'])
 {
-	$config['db_charset']	= '';
-	$config['db_collation']	= '';
-	$config['db_engine']	= 'SQLite3';
-	$config['db_vendor']	= '';
-	$config['db_host']		= '';
-	$config['db_port']		= '';
-	$config['db_name']		= select_sqlite_db_path()[$config['sqlite_db_path']];
-	$config['db_user']		= '';
-	$config['db_password']	= '';
-	$config['table_prefix']	= '';
+	if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+	{
+		$config['db_charset']	= '';
+		$config['db_collation']	= '';
+		$config['db_engine']	= 'SQLite3';
+		$config['db_vendor']	= '';
+		$config['db_host']		= '';
+		$config['db_port']		= '';
+		$config['db_name']		= select_sqlite_db_path()[$config['sqlite_db_path']];
+		$config['db_user']		= '';
+		$config['db_password']	= '';
+		$config['table_prefix']	= '';
+	}
 }
 
 if (!$config['system_seed'])

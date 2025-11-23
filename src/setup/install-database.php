@@ -62,10 +62,13 @@ if (!$config['is_update'])
 	$config = array_merge($config, _t('ConfigDefaults'));
 }
 
-if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+if (!$config['is_update'])
 {
-	$config['db_name']			= select_sqlite_db_path()[$config['sqlite_db_path']];
-	$config['table_prefix']		= '';
+	if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
+	{
+		$config['db_name']			= select_sqlite_db_path()[$config['sqlite_db_path']];
+		$config['table_prefix']		= '';
+	}
 }
 
 // update config values
