@@ -15,7 +15,7 @@ $types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quo
 
 // defaults
 $options['type']	??= 'default';
-$options['title']	??= '';
+$options['title']	??= null;
 $options['icon']	??= 1;
 $options['style']	??= false;
 
