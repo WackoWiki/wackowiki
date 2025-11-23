@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Det finnes eksisterende lignende sider som %1:',
 
 	'PageReservedWord'			=> 'Du kan ikke bruke %1 som en del av adressen da det er et reservert ord.',
+	'PageReservedNamespace'		=> 'Du kan ikke bruke %1 når du starter adressen da det er et reservert navneområde.',
 	'UserReservedWord'			=> 'Brukernavn kan ikke inneholde %1 fordi det er et reservert ord.',
 
 	'DontRedirect'				=> 'Ikke tillat automatisk omdirigering med handlings omdirigering.',

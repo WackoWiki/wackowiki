@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'On olemassa samanlaisia sivuja kuin %1:',
 
 	'PageReservedWord'			=> 'Et voi käyttää %1 osoitetta osana koska se on varattu sana.',
+	'PageReservedNamespace'		=> 'Et voi käyttää %1 osoitteen alkuna, koska se on varattu nimiavaruus.',
 	'UserReservedWord'			=> 'Käyttäjänimet eivät voi sisältää %1 , koska se on varattu sana.',
 
 	'DontRedirect'				=> 'Älä salli automaattista uudelleenohjausta toiminnon uudelleenohjauksella.',

@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Existen páginas similares a %1:',
 
 	'PageReservedWord'			=> 'No puede usar %1 como parte de la dirección porque es una palabra reservada.',
+	'PageReservedNamespace'		=> 'No puedes usar %1 como el inicio de la dirección ya que es un espacio de nombres reservado.',
 	'UserReservedWord'			=> 'Nombres de usuario no deben contener %1 porque es una palabra reservada.',
 
 	'DontRedirect'				=> 'No autorizar la redirección automática.',
@@ -948,7 +949,7 @@ $wacko_translation = [
 	'NoFileUsage'				=> 'No hay páginas que enlacen a esta imagen.',
 
 	'FileSortExt'				=> 'extensión',
-	'FileSortName'				=> 'name',
+	'FileSortName'				=> 'nombre',
 	'FileSortSize'				=> 'tamaño',
 	'FileSortTime'				=> 'creado',
 

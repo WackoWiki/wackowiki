@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Există deja pagini similare cu %1:',
 
 	'PageReservedWord'			=> 'Nu puteți folosi %1 ca parte a adresei deoarece este un cuvânt rezervat.',
+	'PageReservedNamespace'		=> 'Nu puteți folosi %1 ca început al adresei deoarece este un spațiu de nume rezervat.',
 	'UserReservedWord'			=> 'Numele de utilizator nu poate conține %1 deoarece este un cuvânt rezervat.',
 
 	'DontRedirect'				=> 'Nu permite redirecționare automată prin acțiune Redirecționare.',

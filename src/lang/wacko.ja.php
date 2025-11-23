@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> '%1 と同様のページが存在します:',
 
 	'PageReservedWord'			=> '%1 は予約語なので、住所の一部として使用できません。',
+	'PageReservedNamespace'		=> '予約された名前空間のため、アドレスの先頭として %1 を使用することはできません。',
 	'UserReservedWord'			=> 'ユーザー名は予約語なので %1 を含めることはできません。',
 
 	'DontRedirect'				=> 'リダイレクトによる自動リダイレクトを許可しません。',

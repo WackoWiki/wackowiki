@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Existují podobné stránky %1:',
 
 	'PageReservedWord'			=> 'Nemůžete použít %1 jako část adresy, protože je to rezervované slovo.',
+	'PageReservedNamespace'		=> '%1 nelze použít jako začátek adresy, protože je to rezervovaný jmenný prostor.',
 	'UserReservedWord'			=> 'Uživatelská jména nemohou obsahovat %1 , protože je to vyhrazené slovo.',
 
 	'DontRedirect'				=> 'Nepovolit automatické přesměrování akčním přesměrováním.',

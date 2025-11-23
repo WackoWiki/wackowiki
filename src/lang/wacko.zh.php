@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> '存在与 %1 类似的页面：',
 
 	'PageReservedWord'			=> '您不能使用 %1 作为地址的一部分，因为它是一个保留字。',
+	'PageReservedNamespace'		=> '您不能使用 %1 作为地址的开头，因为这是一个保留的命名空间。',
 	'UserReservedWord'			=> '用户名不能包含%1，因为它是一个保留字。',
 
 	'DontRedirect'				=> '不允许通过操作 Redirect 进行自动重定向。',

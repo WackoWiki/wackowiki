@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Існують сторінки, схожі на %1:',
 
 	'PageReservedWord'			=> 'Ви не можете використовувати %1 як частину адреси, оскільки це зарезервоване слово.',
+	'PageReservedNamespace'		=> 'Ви не можете використовувати %1 як початок адреси в якості зарезервованого простору імен.',
 	'UserReservedWord'			=> 'Імена користувачів не можуть містити %1 , оскільки це зарезервоване слово.',
 
 	'DontRedirect'				=> 'Не дозволяти автоматичне перенаправлення шляхом перенаправлення дії.',
@@ -1010,7 +1011,7 @@ $wacko_translation = [
 	// My Groups
 	'UserGroups'				=> 'Groups of users',
 	'MyGroups'					=> 'Group Associations',
-	'Group'						=> 'group',
+	'Group'						=> 'група',
 	'Groups'					=> 'groups',
 
 	// license action
@@ -1074,7 +1075,7 @@ $wacko_translation = [
 
 	'ChangesFeed'				=> 'Зміни',
 	'CommentsFeed'				=> 'Коментарі',
-	'NewsFeed'					=> 'News',
+	'NewsFeed'					=> 'Новини',
 	'RevisionsFeed'				=> 'Revisions of ',
 
 	'LastModification'			=> 'Last Modification',
@@ -1112,7 +1113,7 @@ $wacko_translation = [
 
 	// moderation handler
 	'Moderation'				=> 'Moderation',
-	'Topics'					=> 'topics',
+	'Topics'					=> 'теми',
 	'ModerateSection'			=> 'section / page ',
 
 	'NotModerator'				=> 'You do not have authority to moderate this page / chapter',

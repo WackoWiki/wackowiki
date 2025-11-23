@@ -643,6 +643,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Има съществуващи подобни страници на %1:',
 
 	'PageReservedWord'			=> 'Не можете да използвате %1 като част от адреса, тъй като е запазена дума.',
+	'PageReservedNamespace'		=> 'Не можете да използвате %1 като начало на адреса, тъй като това е запазено пространство от имена.',
 	'UserReservedWord'			=> 'Потребителските имена не могат да съдържат %1, тъй като това е запазена дума.',
 
 	'DontRedirect'				=> 'Забрани действие Redirect автоматично пренасочване',
@@ -737,7 +738,7 @@ $wacko_translation = [
 	'UsersSearch'				=> 'Find Users',
 	'UsersOpenProfile'			=> 'View Profile',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
-	'UsersName'					=> 'Name',
+	'UsersName'				=> 'Име',
 	'UsersPages'				=> 'Pages',
 	'UsersChanges'				=> 'Промени',
 	'UsersSubscription'			=> 'Subscription',
