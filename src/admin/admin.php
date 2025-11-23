@@ -37,6 +37,9 @@ $http->ensure_tls($engine->href('', 'admin.php'));
 // clean _POST if no csrf token
 $engine->validate_post_token();
 
+// favicon
+$favicon = $engine->db->base_path . 'admin/style/favicon.svg';
+
 ########################################################
 ##            End admin session and logout            ##
 ########################################################
@@ -67,7 +70,7 @@ if (!$engine->db->recovery_password)
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta name="robots" content="noindex, nofollow, noarchive">
 			<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
-			<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
+			<link rel="icon" href="<?php echo $favicon; ?>" type="image/svg+xml">
 		</head>
 		<body>
 			<div id="mainwrapper">
@@ -147,7 +150,7 @@ if (!isset($engine->sess->ap_created))
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
-		<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
+		<link rel="icon" href="<?php echo $favicon; ?>" type="image/svg+xml">
 		<?php if (RECOVERY_MODE) echo '<style>input.verify { display: none; }</style>'; // TODO: fix routing for static files ?>
 	</head>
 	<body>
@@ -314,7 +317,7 @@ header('Content-Type: text/html; charset=utf-8');
 		<meta http-equiv="Content-Type" content="text/html;">
 		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/wiki.css" media="screen">
 		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
-		<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
+		<link rel="icon" href="<?php echo $favicon; ?>" type="image/svg+xml">
 	</head>
 	<body>
 	<div class="wrapper">
