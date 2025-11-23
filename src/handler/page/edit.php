@@ -20,11 +20,7 @@ if ($this->has_access('read')
 	// check for reserved word
 	if ($result = $this->validate_reserved_words($this->tag))
 	{
-		// $this->tag is reserved word
-		$message = Ut::perc_replace(
-			$this->_t('PageReservedWord'),
-			'<code>' . $result . '</code>');
-		$this->set_message($message);
+		$this->set_message($result);
 		$this->http->redirect($this->href('new', $this->db->root_page));
 	}
 
@@ -127,8 +123,7 @@ if ($this->has_access('read')
 			// check for reserved word
 			if ($result = $this->validate_reserved_words($this->tag))
 			{
-				$message = $result;
-				$this->set_message($message , 'error');
+				$this->set_message($result, 'error');
 				$error = true;
 			}
 

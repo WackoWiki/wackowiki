@@ -205,7 +205,8 @@ $wacko_config_defaults = [
 	'username_chars_min'			=> 3,
 	'username_chars_max'			=> 20,
 
-	'standard_handlers'				=> 'addcomment|admin\.php|attachments|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch|watchers|wordprocessor',
+	'standard_handlers'				=> 'addcomment|admin\.php|attachments|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|show|source|upload|watch|watchers|wordprocessor',
+	'reserved_namespaces'			=> 'admin|file|image|js|robots\.txt|theme|xml',
 
 	'upload'						=> 'admins',
 	'upload_images_only'			=> 1,

@@ -36,7 +36,7 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 	// check reserved word
 	else if ($result = $this->validate_reserved_words($new_tag))
 	{
-		$this->set_message(Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>'));
+		$this->set_message($result);
 	}
 	// check target page existence
 	else if ($page = $this->load_page($prefix . $new_tag, 0, null, LOAD_CACHE, LOAD_META))

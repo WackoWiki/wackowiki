@@ -4974,8 +4974,13 @@ class Wacko
 		// find the word
 		if (preg_match('/\b(' . $this->db->standard_handlers . ')\b/ui', $_data, $match))
 		{
-			// message
-			return $match[0];
+			return Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $match[0] .'</code>');
+		}
+
+		// find reserved namespace (file, image, js, theme, xml)
+		if ($result = $this->validate_namespace($data))
+		{
+			return $result;
 		}
 
 		if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
@@ -4983,8 +4988,19 @@ class Wacko
 			// disallow pages with Comment[0-9] and all sub-pages, we do not want sub-pages on a comment.
 			if (preg_match('/\b(Comment(\d+))\b/ui', $_data, $match))
 			{
-				return 'Comment([0-9]+)';
+				return Ut::perc_replace($this->_t('PageReservedWord'), '<code>Comment([0-9]+)</code>');
 			}
+		}
+
+		return false;
+	}
+
+	// find reserved namespace (file, image, js, theme, xml)
+	function validate_namespace($data)
+	{
+		if (preg_match('#^(' . $this->db->reserved_namespaces . ')/?#u', $data, $match))
+		{
+			return Ut::perc_replace($this->_t('PageReservedNamespace'), '<code>' . $match[0] .'</code>');
 		}
 
 		return false;
@@ -5063,7 +5079,7 @@ class Wacko
 
 		if ($result = $this->validate_reserved_words($tag))
 		{
-			return Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result .'</code>');
+			return $result;
 		}
 
 		if ($old_tag)
@@ -5128,7 +5144,7 @@ class Wacko
 		// check if reserved word
 		else if ($result = $this->validate_reserved_words($user_name))
 		{
-			return Ut::perc_replace($this->_t('UserReservedWord'), '<code>' . $result . '</code>');
+			return $result;
 		}
 		// if username already exists
 		else if ($this->user_name_exists($user_name) && $create)

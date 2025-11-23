@@ -167,6 +167,7 @@ $config_db['registration_delay']			= $config['registration_delay'];
 $config_db['registration_page']				= $config['registration_page'];
 $config_db['remove_onlyadmins']				= $config['remove_onlyadmins'];
 $config_db['rename_global_acl']				= $config['rename_global_acl'];
+$config_db['reserved_namespaces']			= $config['reserved_namespaces'];
 $config_db['reverse_proxy']					= $config['reverse_proxy'];
 $config_db['reverse_proxy_header']			= $config['reverse_proxy_header'];
 $config_db['reverse_proxy_addresses']		= $config['reverse_proxy_addresses'];
