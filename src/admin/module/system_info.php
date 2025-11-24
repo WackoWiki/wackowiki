@@ -62,6 +62,8 @@ function admin_system_info($engine, $module)
 		$sql_mode_session		= $_sql_mode['@@SESSION.sql_mode'];
 	}
 
+	$unicode_version		= implode('.', array_slice(IntlChar::getUnicodeVersion(), 0, 2));
+
 	// get_cfg_var()		-> returns whatever is in php.ini
 	// ini_get()			-> returns runtime settings
 	$upload_max_filesize	= Ut::shorthand_to_int(get_cfg_var('upload_max_filesize'));
@@ -97,7 +99,7 @@ function admin_system_info($engine, $module)
 		$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
 	}
 
-	$sysinfo['icu_version']			= [$engine->_t('IcuVersion'), INTL_ICU_VERSION];
+	$sysinfo['icu_version']			= [$engine->_t('IcuVersion'), INTL_ICU_VERSION . ' (Unicode: ' . $unicode_version . ')'];
 	$sysinfo['php_version']			= [$engine->_t('PhpVersion'), PHP_VERSION];
 	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->factor_multiples($memory, 'binary', true, true)];
 	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->factor_multiples($upload_max_filesize, 'binary', true, true)];
