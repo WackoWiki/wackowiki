@@ -9,7 +9,6 @@
 //		$value[1] - SQL query
 $delete_table[]			= ['acl',					$tbl_acl_drop];
 $delete_table[]			= ['auth_token',			$tbl_auth_token_drop];
-$delete_table[]			= ['menu',					$tbl_menu_drop];
 $delete_table[]			= ['cache',					$tbl_cache_drop];
 $delete_table[]			= ['config',				$tbl_config_drop];
 $delete_table[]			= ['category',				$tbl_category_drop];
@@ -18,6 +17,7 @@ $delete_table[]			= ['external_link',			$tbl_external_link_drop];
 $delete_table[]			= ['file',					$tbl_file_drop];
 $delete_table[]			= ['file_link',				$tbl_file_link_drop];
 $delete_table[]			= ['log',					$tbl_log_drop];
+$delete_table[]			= ['menu',					$tbl_menu_drop];
 $delete_table[]			= ['page',					$tbl_page_drop];
 $delete_table[]			= ['page_link',				$tbl_page_link_drop];
 $delete_table[]			= ['referrer',				$tbl_referrer_drop];
@@ -35,7 +35,6 @@ $delete_table[]			= ['word',					$tbl_word_drop];
 //		$value[1] - SQL query
 $create_table[]			= ['acl',					$tbl_acl];
 $create_table[]			= ['auth_token',			$tbl_auth_token];
-$create_table[]			= ['menu',					$tbl_menu];
 $create_table[]			= ['cache',					$tbl_cache];
 $create_table[]			= ['config',				$tbl_config];
 $create_table[]			= ['category',				$tbl_category];
@@ -44,6 +43,7 @@ $create_table[]			= ['external_link',			$tbl_external_link];
 $create_table[]			= ['file',					$tbl_file];
 $create_table[]			= ['file_link',				$tbl_file_link];
 $create_table[]			= ['log',					$tbl_log];
+$create_table[]			= ['menu',					$tbl_menu];
 $create_table[]			= ['page',					$tbl_page];
 $create_table[]			= ['page_link',				$tbl_page_link];
 $create_table[]			= ['referrer',				$tbl_referrer];
