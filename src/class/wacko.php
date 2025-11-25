@@ -1130,8 +1130,8 @@ class Wacko
 					'LEFT JOIN ' . $this->prefix . 'user u ON (p.user_id = u.user_id) ' .
 					'WHERE ' .
 						($page_id
-							? 'page_id  = ' . (int) $page_id . ' '
-							: 'tag = ' . $this->db->q($tag) . ' ') .
+							? 'p.page_id  = ' . (int) $page_id . ' '
+							: 'p.tag = ' . $this->db->q($tag) . ' ') .
 						($deleted
 							? ''
 							: 'AND p.deleted <> 1 ') .
@@ -1156,7 +1156,7 @@ class Wacko
 							($deleted
 								? ''
 								: 'AND p.deleted <> 1 ') .
-						'AND revision_id = ' . (int) $revision_id . ' ' .
+						'AND p.revision_id = ' . (int) $revision_id . ' ' .
 						'LIMIT 1');
 
 					$page['owner_id'] = $owner_id;
@@ -1614,7 +1614,7 @@ class Wacko
 		if ($pages = $this->db->load_all(
 			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang ' .
 			$selector .
-			'ORDER BY tag COLLATE ' . $this->db->collate() . ' ' .
+			'ORDER BY p.tag COLLATE ' . $this->db->collate() . ' ' .
 			$pagination['limit'], true))
 		{
 			return [$pages, $pagination];
@@ -1642,7 +1642,7 @@ class Wacko
 		if ($pages = $this->db->load_all(
 			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang ' .
 			$selector .
-			'ORDER BY tag COLLATE ' . $this->db->collate() . ' ' .
+			'ORDER BY p.tag COLLATE ' . $this->db->collate() . ' ' .
 			$pagination['limit'], true))
 		{
 			return [$pages, $pagination];
@@ -1694,7 +1694,7 @@ class Wacko
 		if ($pages = $this->db->load_all(
 			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang ' .
 			$selector .
-			'ORDER BY tag COLLATE ' . $this->db->collate() . ' ' .
+			'ORDER BY p.tag COLLATE ' . $this->db->collate() . ' ' .
 			$pagination['limit'], true))
 		{
 			return [$pages, $pagination];
