@@ -162,22 +162,38 @@ if ($pages = array_merge($pages1, $pages2, $comments, $files))
 		(!empty($mode)		? [$mod_selector	=> $mode]	: []), '');
 	$pages		= array_slice($pages, $pagination['offset'], $pagination['perpage']);
 
-	$curday		= '';
-	$file_ids	= [];
-	$page_ids	= [];
+	$curday			= '';
+	$file_ids		= [];
+	$page_ids		= [];
+	$xt_page_ids	= [];
 
+	// preload and cache
 	foreach ($pages as $page)
 	{
+		if ($page['page_id'])
+		{
+			$page_ids[] = $page['page_id'];
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+		}
+
 		// file it is
 		if ($page['ctype'] == 2)
 		{
-			$file_ids[] = $page['comment_on_id'];
+			$file_ids[]		= $page['comment_on_id'];
+
+			if ($page['page_id'] && !in_array($page['page_id'], $xt_page_ids))
+			{
+				$xt_page_ids[]	= $page['page_id'];
+			}
 		}
 		else
 		{
-			$page_ids[] = $page['page_id'];
+			if ($page['comment_on_id'])
+			{
+				$page_ids[]		= $page['comment_on_id'];
+				$xt_page_ids[]	= $page['comment_on_id'];
+			}
 
-			$this->page_id_cache[$page['tag']] = $page['page_id'];
 			$this->cache_page($page, true);
 		}
 	}
@@ -198,6 +214,23 @@ if ($pages = array_merge($pages1, $pages2, $comments, $files))
 			foreach ($files as $file)
 			{
 				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+			}
+		}
+	}
+
+	if (!empty($xt_page_ids))
+	{
+		if ($xt_pages = $this->db->load_all(
+			'SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.keywords, p.description, p.allow_rawhtml, p.disable_safehtml, p.typografica, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name ' .
+			'FROM ' . $prefix . 'page p ' .
+				'LEFT JOIN ' . $prefix . 'user o ON (p.owner_id = o.user_id) ' .
+				'LEFT JOIN ' . $prefix . 'user u ON (p.user_id = u.user_id) ' .
+			'WHERE p.page_id IN (' . $this->ids_string($xt_page_ids) . ') '
+			))
+		{
+			foreach ($xt_pages as $xt_page)
+			{
+				$this->cache_page($xt_page, true);
 			}
 		}
 	}
