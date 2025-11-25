@@ -83,7 +83,7 @@ const OBJECT_REVISION				= 3;
 
 const NBSP							= ' ';					// \u{00A0} No-Break Space (NBSP)
 
-const RECOVERY_MODE					= 0;					// 1 - restore database
+const RECOVERY_MODE					= 0;					// 1 - restore database (only for MariaDB & MySQL)
 const AUTO_REWRITE					= 1;					// 0 - off, turns off auto rewrite for debugging,
 															//		with mode_rewrite still active on your webserver,
 															//		you're also required to deactivate the rules in the .htaccess file
@@ -105,7 +105,7 @@ const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - sta
 
 const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
-const DB_MIN_VERSION				= ['mariadb' => '10.4', 'mysql' => '8.0', 'sqlite' => '3.24'];
+const DB_MIN_VERSION				= ['mariadb' => '10.6', 'mysql' => '8.0', 'sqlite' => '3.24'];
 const DB_ERROR_MODE					= 0;					// 0 - silent, 1 - warning, 2 - exception
 
 const PHP_MIN_VERSION				= '8.0';				// minimum required PHP version
