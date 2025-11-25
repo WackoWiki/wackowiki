@@ -1179,7 +1179,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Záznamy',
 	'DbSize'					=> 'Velikost',
 	'DbIndex'					=> 'Objem dovozu (v tunách)',
-	'DbOverhead'				=> 'Režijní',
 	'DbTotal'					=> 'Celkem',
 
 	'FileStatSection'			=> 'Statistiky souborového systému',

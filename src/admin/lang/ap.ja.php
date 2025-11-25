@@ -1179,7 +1179,6 @@ $ap_translation = [
 	'DbRecords'					=> 'レコード',
 	'DbSize'					=> 'サイズ',
 	'DbIndex'					=> '目次と索引',
-	'DbOverhead'				=> 'オーバーヘッド（オーバーヘッド）',
 	'DbTotal'					=> '合計',
 
 	'FileStatSection'			=> 'ファイルシステムの統計情報',

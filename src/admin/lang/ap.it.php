@@ -1185,7 +1185,6 @@ questi, ovvero se la richiesta raggiunge il server web da uno dei tuoi proxy inv
 	'DbRecords'					=> 'Record',
 	'DbSize'					=> 'Dimensione del file',
 	'DbIndex'					=> 'Indice',
-	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Totale',
 
 	'FileStatSection'			=> 'Statistiche Del File System',

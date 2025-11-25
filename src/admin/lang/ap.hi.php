@@ -1190,7 +1190,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Records',
 	'DbSize'					=> 'आकार',
 	'DbIndex'					=> 'अनुक्रमणिका',
-	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',

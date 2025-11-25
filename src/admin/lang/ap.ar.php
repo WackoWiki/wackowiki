@@ -1179,7 +1179,6 @@ $ap_translation = [
 	'DbRecords'					=> 'السجلات',
 	'DbSize'					=> 'الحجم',
 	'DbIndex'					=> 'الفهرس',
-	'DbOverhead'				=> 'رأس',
 	'DbTotal'					=> 'المجموع',
 
 	'FileStatSection'			=> 'إحصائيات نظام الملفات',

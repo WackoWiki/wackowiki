@@ -1179,7 +1179,6 @@ $ap_translation = [
 	'DbRecords'					=> 'registros',
 	'DbSize'					=> 'Tamanho',
 	'DbIndex'					=> 'Indexação',
-	'DbOverhead'				=> 'Sobrecarga',
 	'DbTotal'					=> 'Total:',
 
 	'FileStatSection'			=> 'Estatísticas do Sistema de Arquivos',

@@ -485,7 +485,7 @@ $ap_translation = [
 									 εεεdri in the X-Forwarded-For overskrifter bare dersom fjernIP-adressen er en av
 									 ₀ó ó ó ó ó ó ó httthese, det vil si at forespørselen når webserveren fra en av din
 									 ⋅εεεεεεrevers proxies. Ellers kan klienten koble til
-									 direkte til 
+									 direkte til
  εεεεεε″your web server ved å spole X-Forwarded-For headere med jukse.',
 
 	'SessionSection'				=> 'Økt håndtering',
@@ -1180,7 +1180,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Poster',
 	'DbSize'					=> 'Størrelse',
 	'DbIndex'					=> 'Indeks',
-	'DbOverhead'				=> 'Overhode',
 	'DbTotal'					=> 'Totalt',
 
 	'FileStatSection'			=> 'Statistikk for filsystem',

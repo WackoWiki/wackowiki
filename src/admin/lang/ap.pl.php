@@ -511,7 +511,7 @@ $ap_translation = [
 	'RewriteMode'					=> 'Użyj <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'Jeśli serwer internetowy obsługuje tę funkcję, włącz ją, aby "upiększyć" adresy URL stron.<br>
 										<span class="cite">Wartość
- może zostać nadpisana przez klasę Settings w czasie wykonywania, 
+ może zostać nadpisana przez klasę Settings w czasie wykonywania,
 niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włączony.',
 
 	// Permissions settings
@@ -1190,7 +1190,6 @@ lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwier
 	'DbRecords'					=> 'Rekordy',
 	'DbSize'					=> 'Rozmiar',
 	'DbIndex'					=> 'Wielkość sprzedaży i udział w rynku',
-	'DbOverhead'				=> 'Nieruchomości',
 	'DbTotal'					=> 'Łącznie',
 
 	'FileStatSection'			=> 'Statystyki systemu plików',

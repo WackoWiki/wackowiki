@@ -1190,7 +1190,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Records',
 	'DbSize'					=> 'Размер на файла',
 	'DbIndex'					=> 'Каталог',
-	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',

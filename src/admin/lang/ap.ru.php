@@ -1172,7 +1172,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Строк',
 	'DbSize'					=> 'Объем',
 	'DbIndex'					=> 'Индекс',
-	'DbOverhead'				=> 'Фрагментация',
 	'DbTotal'					=> 'Всего',
 
 	'FileStatSection'			=> 'Статистика файловой системы',

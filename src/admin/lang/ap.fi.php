@@ -1179,7 +1179,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Tietueet',
 	'DbSize'					=> 'Koko',
 	'DbIndex'					=> 'Indeksi',
-	'DbOverhead'				=> 'Ilmapiiri',
 	'DbTotal'					=> 'Yhteensä',
 
 	'FileStatSection'			=> 'Tiedostojärjestelmän tilastot',

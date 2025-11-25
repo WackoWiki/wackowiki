@@ -1179,7 +1179,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Înregistrări',
 	'DbSize'					=> 'Dimensiune',
 	'DbIndex'					=> 'Indice',
-	'DbOverhead'				=> 'Cheltuieli',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'Statistici sistem de fișiere',

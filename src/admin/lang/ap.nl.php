@@ -1189,7 +1189,6 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 	'DbRecords'					=> 'Records',
 	'DbSize'					=> 'Grootte',
 	'DbIndex'					=> 'Indexeren',
-	'DbOverhead'				=> 'Overschrijven',
 	'DbTotal'					=> 'Totaal',
 
 	'FileStatSection'			=> 'Bestandssysteem statistieken',

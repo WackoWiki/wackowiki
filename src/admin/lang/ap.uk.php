@@ -1179,7 +1179,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Записи',
 	'DbSize'					=> 'Розмір',
 	'DbIndex'					=> 'Покажчик',
-	'DbOverhead'				=> 'Перевитрати',
 	'DbTotal'					=> 'Загальна сума замовлення',
 
 	'FileStatSection'			=> 'Статистика файлової системи',

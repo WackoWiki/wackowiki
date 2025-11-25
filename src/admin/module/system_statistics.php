@@ -35,7 +35,6 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 			<th><?php echo $engine->_t('DbRecords');?></th>
 			<th><?php echo $engine->_t('DbSize');?></th>
 			<th><?php echo $engine->_t('DbIndex');?></th>
-			<th><?php echo $engine->_t('DbOverhead');?></th>
 		</tr>
 <?php
 	$results	= $engine->db->load_all("SHOW TABLE STATUS FROM `{$engine->db->db_name}`", true);
@@ -56,12 +55,6 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 						'<td>' . $engine->number_format($table['Rows']) . '</td>' .
 						'<td>' . $engine->factor_multiples($table['Data_length'], 'binary', true, true) . '</td>' .
 						'<td>' . $engine->factor_multiples($table['Index_length'], 'binary', true, true) . '</td>' .
-						'<td>' .
-							// for InnoDB, this does not contain the number of overhead bytes but the total free space
-							($engine->db->db_engine !== 'InnoDB'
-								? $engine->factor_multiples($table['Data_free'], 'binary', true, true)
-								: '-') .
-						'</td>' .
 					'</tr>' . "\n";
 
 				$trows	+= $table['Rows'];

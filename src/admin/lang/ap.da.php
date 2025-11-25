@@ -1188,7 +1188,6 @@ $ap_translation = [
 	'DbRecords'					=> 'Poster',
 	'DbSize'					=> 'Størrelse',
 	'DbIndex'					=> 'Indeks',
-	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'I Alt',
 
 	'FileStatSection'			=> 'Statistik over filsystemet',
