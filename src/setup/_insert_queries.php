@@ -90,7 +90,7 @@ $insert_records[]		= [_t('InstallReviewerGroup'),		$insert_reviewer_group,			're
 
 
 // config
-#$upgrade['6.2.0'][]	= ['update',	'config',			$update_config_r6_0_1];
+$upgrade['6.2.0'][]	= ['update',	'config',			$update_config_r6_1_1];
 
 // file
 

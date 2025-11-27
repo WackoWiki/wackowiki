@@ -29,7 +29,7 @@ $engine		= 'ENGINE=' . $config['db_engine'];
 // CATEGORY ASSIGNMENT
 
 // CONFIG
-#$update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('default_typografica', 'dst')";
+$update_config_r6_1_1 = "DELETE FROM {$pref}config WHERE config_name IN ('disable_npjlinks', 'session_prefix')";
 
 // EXTERNAL LINK
 
