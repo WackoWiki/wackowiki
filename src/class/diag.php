@@ -125,8 +125,6 @@ class Diag
 						'Page language: ' .					($engine->page['page_lang'] ?? ''),
 						'Config language: ' .				$config['language'],
 						'User selected language: ' .		($engine->user_lang ?? ''),
-						'HTML Entities Charset: ' .			HTML_ENTITIES_CHARSET,
-						# 'Disable cache: ' .				($engine->disable_cache ? 'true' : 'false'),
 					];
 
 					echo '<p class="debug">Language data</p>' . "\n<ul>\n";
@@ -175,14 +173,17 @@ class Diag
 					$env_data	= [
 						'session_id(): ' .		$engine->sess->id(),
 						'Base URL: ' .			$config['base_url'],
-						'Rewrite Mode: ' .		($config['rewrite_mode'] ? 'on' : 'off'),
-						'HTTP_MOD_ENV: ' .		((getenv('HTTP_MOD_ENV') === 'on') ? 'on' : 'off'),
-						'HTTP_MOD_REWRITE: ' .	((getenv('HTTP_MOD_REWRITE') === 'on') ? 'on' : 'off'),
+						'Base Path: ' .			$config['base_path'],
+						'Page cache: ' .		($config['cache']			? 'on' : 'off'),
+						'SQL cache: ' .			($config['cache_sql']		? 'on' : 'off'),
+						'Rewrite Mode: ' .		($config['rewrite_mode']	? 'on' : 'off'),
+						'HTTP_MOD_ENV: ' .		((getenv('HTTP_MOD_ENV')		=== 'on') ? 'on' : 'off'),
+						'HTTP_MOD_REWRITE: ' .	((getenv('HTTP_MOD_REWRITE')	=== 'on') ? 'on' : 'off'),
 						'HTTPS: ' .				($_SERVER['HTTPS'] ?? 'off'),
 						'IP-address: ' .		$http->ip,
 						'SERVER_PORT: ' .		$_SERVER['SERVER_PORT'],
-						'TLS: ' .				(isset($config['tls']) ? 'on' : 'off'),
-						'TLS implicit: ' .		($config['tls_implicit'] ? 'on' : 'off'),
+						'TLS: ' .				(isset($config['tls'])		? 'on' : 'off'),
+						'TLS implicit: ' .		($config['tls_implicit']	? 'on' : 'off'),
 						'Cookie path: ' .		$config['cookie_path'],
 						# 'GZIP: ' .			(@extension_loaded('zlib') ? 'On' : 'Off'),
 					];
