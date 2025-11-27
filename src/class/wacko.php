@@ -2431,6 +2431,7 @@ class Wacko
 			if (($days = $this->db->xml_sitemap_time) <= 0)
 			{
 				// write
+				$this->db->set('maint_last_xml_sitemap', time());
 			}
 			else if (time() > @$this->db->maint_last_xml_sitemap)
 			{
