@@ -311,7 +311,7 @@ class Feed
 		$xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
 		$xml .= $this->engine->db->xml_sitemap_gz
 				? ''
-				: '<?xml-stylesheet type="text/xsl" href="' . $this->engine->db->base_url . Ut::join_path(THEME_DIR, '_common/sitemap.xsl') . '"?>' . "\n";
+				: '<?xml-stylesheet type="text/xsl" href="' . $this->engine->db->base_path . Ut::join_path(THEME_DIR, '_common/sitemap.xsl') . '"?>' . "\n";
 		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
 		if ($pages)
