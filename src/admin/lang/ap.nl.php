@@ -1044,7 +1044,7 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
     	'De root cluster heeft geen invloed op de globale bestanden back-up en cache bestanden back-up (indien gekozen, worden ze altijd volledig bewaard).<br>' .  '<br>' .
 		'<strong>Aandacht</strong>: Om verlies van informatie uit de database te voorkomen bij het specificeren van de hoofdcluster, de tabellen van deze back-up zullen niet worden geherstructureerd, hetzelfde als wanneer alleen tabelstructuur wordt geback-upt zonder de gegevens op te slaan. Om een volledige conversie van de tabellen naar het back-upformaat te maken, moet je de <em> volledige database backup (structuur en gegevens) maken zonder de cluster</em> te specificeren.',
 	'BackupCompleted'			=> 'Back-up en archivering voltooid.<br>' .
-    	'De Back-up pakketbestanden zijn opgeslagen in de submap %1.<br>. Om het te downloaden gebruikt u FTP (behoud de mapstructuur en bestandsnamen tijdens het kopiëren).<br> Om een back-up te herstellen of te verwijderen, ga naar <a href="%2">Database</a>.',
+    	'De Back-up pakketbestanden zijn opgeslagen in de submap %1.<br>Om het te downloaden gebruikt u FTP (behoud de mapstructuur en bestandsnamen tijdens het kopiëren).<br> Om een back-up te herstellen of te verwijderen, ga naar <a href="%2">Database</a>.',
 	'LogSavedBackup'			=> 'Back-up database opgeslagen ##%1##',
 	'Backup'					=> 'Back-up',
 	'CantReadFile'				=> 'Kan bestand %1 niet lezen.',

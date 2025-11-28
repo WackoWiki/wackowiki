@@ -1042,7 +1042,7 @@ $ap_translation = [
     	'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br>' .  '<br>' .
 		'<strong>Atención</strong>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, ',
 	'BackupCompleted'			=> 'Backup y archivación terminado.<br>' .
-    	'Los archivos del paquete de respaldo se almacenaron en el subdirectorio %1.<br>. Para descargarlo, utilice FTP (mantenga la estructura del directorio y los nombres de los archivos al copiar).<br> Para restaurar una copia de respaldo o eliminar un paquete, vaya a <a href="%2">Restaurar base de datos</a>.',
+    	'Los archivos del paquete de respaldo se almacenaron en el subdirectorio %1.<br>Para descargarlo, utilice FTP (mantenga la estructura del directorio y los nombres de los archivos al copiar).<br> Para restaurar una copia de respaldo o eliminar un paquete, vaya a <a href="%2">Restaurar base de datos</a>.',
 	'LogSavedBackup'			=> 'Guardado backup de base de datos ##%1##',
 	'Backup'					=> 'Respaldo',
 	'CantReadFile'				=> 'No se puede leer el archivo %1.',

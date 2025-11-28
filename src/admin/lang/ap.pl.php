@@ -1045,7 +1045,7 @@ lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwier
     	'Klaster główny nie ma wpływu na globalną kopię zapasową plików i kopię zapasową plików pamięci podręcznej (jeśli wybrano, są one zawsze zapisywane w całości).<br>' .  '<br>' .
 		'<strong>Uwaga</strong>: Aby uniknąć utraty informacji z bazy danych podczas określania głównego klastra tabele z tej kopii zapasowej nie będą restrukturyzowane, tak samo jak podczas tworzenia kopii zapasowej tylko struktury tabeli bez zapisywania danych. Aby dokonać pełnej konwersji tabel do formatu kopii zapasowej, musisz wykonać pełną kopię zapasową bazy danych <em> (strukturę i dane) bez określania klastra</em>.',
 	'BackupCompleted'			=> 'Tworzenie kopii zapasowej i archiwizacja zakończone.<br>' .
-    	'Pliki pakietów kopii zapasowych były przechowywane w podkatalogu %1.<br>. Aby go pobrać użyj FTP (zachowaj strukturę katalogu i nazwy plików podczas kopiowania).<br> Aby przywrócić kopię zapasową lub usunąć pakiet, przejdź do <a href="%2">Przywróć bazę danych</a>.',
+    	'Pliki pakietów kopii zapasowych były przechowywane w podkatalogu %1.<br>Aby go pobrać użyj FTP (zachowaj strukturę katalogu i nazwy plików podczas kopiowania).<br> Aby przywrócić kopię zapasową lub usunąć pakiet, przejdź do <a href="%2">Przywróć bazę danych</a>.',
 	'LogSavedBackup'			=> 'Zapisano kopię zapasową bazy danych ##%1##',
 	'Backup'					=> 'Kopia zapasowa',
 	'CantReadFile'				=> 'Nie można odczytać pliku %1.',

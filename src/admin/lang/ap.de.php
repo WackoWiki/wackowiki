@@ -1048,7 +1048,7 @@ $ap_translation = [
     	'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollständig gespeichert).<br>' .  '<br>' .
 		'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, ',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br>' .
-    	'Die Backup-Paketdateien wurden im Unterverzeichnis %1 gespeichert.<br>. Verwende zum Herunterladen FTP (Bewahre beim Kopieren die Verzeichnisstruktur und Dateinamen).<br> Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
+    	'Die Backup-Paketdateien wurden im Unterverzeichnis %1 gespeichert.<br>Verwende zum Herunterladen FTP (Bewahre beim Kopieren die Verzeichnisstruktur und Dateinamen).<br> Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 	'Backup'					=> 'Datensicherung',
 	'CantReadFile'				=> 'Kann Datei %1 nicht lesen.',

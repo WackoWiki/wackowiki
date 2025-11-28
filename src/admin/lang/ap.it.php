@@ -1040,7 +1040,7 @@ questi, ovvero se la richiesta raggiunge il server web da uno dei tuoi proxy inv
     	'Il cluster radice non influenza il backup globale dei file e il backup dei file cache (se scelto, vengono sempre salvati completamente).<br>' .  '<br>' .
 		'<strong>Attenzione</strong>: Per evitare la perdita di informazioni dal database quando si specifica il cluster di root, le tabelle da questo backup non saranno ristrutturate, come quando si esegue il backup solo struttura della tabella senza salvare i dati. Per effettuare una conversione completa delle tabelle nel formato di backup è necessario effettuare il backup completo del database <em> (struttura e dati) senza specificare il cluster</em>.',
 	'BackupCompleted'			=> 'Backup e archiviazione completati.<br>' .
-    	'I file dei pacchetti di backup sono stati memorizzati nella sottodirectory %1.<br>. Per scaricarlo usa FTP (mantieni la struttura delle directory e i nomi dei file durante la copia).<br> Per ripristinare una copia di backup o rimuovere un pacchetto, vai su <a href="%2">Ripristina database</a>.',
+    	'I file dei pacchetti di backup sono stati memorizzati nella sottodirectory %1.<br>Per scaricarlo usa FTP (mantieni la struttura delle directory e i nomi dei file durante la copia).<br> Per ripristinare una copia di backup o rimuovere un pacchetto, vai su <a href="%2">Ripristina database</a>.',
 	'LogSavedBackup'			=> 'Backup salvato del database ##%1##',
 	'Backup'					=> 'Backup',
 	'CantReadFile'				=> 'Impossibile leggere il file %1.',

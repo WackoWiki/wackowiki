@@ -1045,7 +1045,7 @@ $ap_translation = [
     	'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .  '<br>' .
 		'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
-    	'The Backup package files were stored in the sub-directory %1.<br>. To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
+    	'The Backup package files were stored in the sub-directory %1.<br>To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 	'Backup'					=> 'پشتیبان‌گیری',
 	'CantReadFile'				=> 'Can\'t read file %1.',

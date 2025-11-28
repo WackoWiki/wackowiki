@@ -1034,7 +1034,7 @@ $ap_translation = [
     	'Juuriryhmä ei vaikuta varmuuskopioihin ja välimuistitiedostoihin (jos valittu, ne tallennetaan aina kokonaan).<br>' .  '<br>' .
 		'<strong>Huomio</strong>: Välttää tietojen menetys tietokannasta määriteltäessä juuriklusteria, tästä varmuuskopiosta peräisin olevia taulukoita ei järjestetä uudelleen, sama kuin kun varmuuskopioidaan vain taulukkorakennetta tallentamatta tietoja. Jotta taulukoiden täydellinen muuntaminen varmuuskopion muotoon, sinun on tehtävä <em> koko tietokannan varmuuskopio (rakenne ja tiedot) määrittelemättä klusteria</em>.',
 	'BackupCompleted'			=> 'Varmuuskopiointi ja arkistointi valmistui.<br>' .
-    	'Varmuuskopioidut pakettitiedostot on tallennettu alikansioon %1.<br>. Lataa se käyttää FTP (ylläpitää hakemistorakenne ja tiedostonimet kun kopioidaan).<br> Palautaksesi varmuuskopion tai poistaaksesi paketin, mene <a href="%2">Palauta tietokanta</a>.',
+    	'Varmuuskopioidut pakettitiedostot on tallennettu alikansioon %1.<br>Lataa se käyttää FTP (ylläpitää hakemistorakenne ja tiedostonimet kun kopioidaan).<br> Palautaksesi varmuuskopion tai poistaaksesi paketin, mene <a href="%2">Palauta tietokanta</a>.',
 	'LogSavedBackup'			=> 'Tallennettu varmuuskopiotietokanta ##%1##',
 	'Backup'					=> 'Varmuuskopio',
 	'CantReadFile'				=> 'Tiedostoa %1 ei voi lukea.',

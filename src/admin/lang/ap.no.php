@@ -1035,7 +1035,7 @@ $ap_translation = [
     	'Klysten for rot påvirker ikke den globale sikkerhetskopien og mellomlagret filer (hvis valgt, de er alltid lagret i full).<br>' .  '<br>' .
 		'<strong>Legg merke til</strong>: For å unngå tap av informasjon fra databasen når du angir rotklyngen, tabellene fra denne sikkerhetskopien vil ikke bli omstrukturert, samme som ved bare sikkerhetskopiering av tabellstruktur uten å lagre dataene. For å fullføre konverteringen av tabellene til sikkerhetskopiformatet må du lage <em> fullstendig sikkerhetskopi (struktur og data) uten å angi klyngen</em>.',
 	'BackupCompleted'			=> 'Sikkerhetskopiering og arkivering fullført.<br>' .
-    	'Sikkerhetskopieringspakkefilene ble lagret i underkatalogen %1.<br>. For å laste ned bruker du FTP (vedlikehold av mappestruktur og filnavn ved kopiering).<br> for å gjenopprette en sikkerhetskopiering eller fjerne en pakke, gå til <a href="%2">Gjenopprette database</a>.',
+    	'Sikkerhetskopieringspakkefilene ble lagret i underkatalogen %1.<br>For å laste ned bruker du FTP (vedlikehold av mappestruktur og filnavn ved kopiering).<br> for å gjenopprette en sikkerhetskopiering eller fjerne en pakke, gå til <a href="%2">Gjenopprette database</a>.',
 	'LogSavedBackup'			=> 'Lagret sikkerhetskopieringsdatabase ##%1##',
 	'Backup'					=> 'Sikkerhetskopi',
 	'CantReadFile'				=> 'Kan ikke lese filen %1.',

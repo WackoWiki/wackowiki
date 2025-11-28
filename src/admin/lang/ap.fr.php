@@ -1044,7 +1044,7 @@ $ap_translation = [
     	'La instance racine n\'affecte pas la sauvegarde des fichiers globaux et la sauvegarde des fichiers de cache (si choisi, ils sont toujours sauvegardés en intégralité).<br>' .  '<br>' .
 		'<strong>Attention</strong>: Pour éviter la perte d\'informations de la base de données lors de la spécification de la grappe racine, les tables de cette sauvegarde ne seront pas restructurées, comme lors de la sauvegarde de la structure de la table sans enregistrer les données. Pour effectuer une conversion complète des tables au format de sauvegarde, vous devez faire la sauvegarde complète de la base de données <em> (structure et données) sans spécifier la grappe</em>.',
 	'BackupCompleted'			=> 'Sauvegarde et archivage terminés.<br>' .
-    	'Les fichiers du package de sauvegarde ont été stockés dans le sous-répertoire %1.<br>. Pour le télécharger, utilisez FTP (maintenez la structure du répertoire et les noms de fichiers lors de la copie).<br> Pour restaurer une copie de sauvegarde ou supprimer un paquet, allez dans <a href="%2">Restaurer la base de données</a>.',
+    	'Les fichiers du package de sauvegarde ont été stockés dans le sous-répertoire %1.<br>Pour le télécharger, utilisez FTP (maintenez la structure du répertoire et les noms de fichiers lors de la copie).<br> Pour restaurer une copie de sauvegarde ou supprimer un paquet, allez dans <a href="%2">Restaurer la base de données</a>.',
 	'LogSavedBackup'			=> 'Base de données de sauvegarde enregistrée ##%1##',
 	'Backup'					=> 'Sauvegarde',
 	'CantReadFile'				=> 'Impossible de lire le fichier %1.',

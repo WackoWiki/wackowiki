@@ -1043,7 +1043,7 @@ $ap_translation = [
     	'Root-klyngen påvirker ikke sikkerhedskopieringen af globale filer og cache-filer (hvis valgt, gemmes de altid fuldt ud).<br>' .  '<br>' .
 		'<strong>Attention</strong>: For at undgå tab af oplysninger fra databasen, når du angiver rodklyngen, tabellerne fra denne backup vil ikke blive omstruktureret, det samme som når der kun sikkerhedskopieres tabelstruktur uden at gemme dataene. For at foretage en fuldstændig konvertering af tabellerne til backup-formatet skal du lave <em> fuld backup af databasen (struktur og data) uden at angive klyngen</em>.',
 	'BackupCompleted'			=> 'Sikkerhedskopiering og arkivering fuldført.<br>' .
-    	'Backup-pakkefilerne blev gemt i undermappen %1.<br>. For at downloade det bruge FTP (vedligeholde mappestruktur og filnavne, når du kopierer).<br> For at gendanne en sikkerhedskopi eller fjerne en pakke, gå til <a href="%2">Gendan database</a>.',
+    	'Backup-pakkefilerne blev gemt i undermappen %1.<br>For at downloade det bruge FTP (vedligeholde mappestruktur og filnavne, når du kopierer).<br> For at gendanne en sikkerhedskopi eller fjerne en pakke, gå til <a href="%2">Gendan database</a>.',
 	'LogSavedBackup'			=> 'Gemt backup database ##%1##',
 	'Backup'					=> 'Sikkerhedskopi',
 	'CantReadFile'				=> 'Kan ikke læse filen %1.',
