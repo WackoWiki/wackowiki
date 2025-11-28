@@ -61,7 +61,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> '言語設定',
-'PleaseUpgradeToR6'				=> 'You appear to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
+'PleaseUpgradeToR6'				=> '現在使用している WackoWiki %1 は古いバージョンのようです。<br>リリース版の WackoWiki にアップデートするには、まずインストールされている WackoWiki を %2 に更新する必要があります。',
 'UpgradeFromWacko'				=> 'WackoWiki へようこそ! WackoWiki %1 から %2にアップグレードしているようです。 次の数ページでは、アップグレードプロセスをご案内します。',
 'FreshInstall'					=> 'WackoWiki へようこそ! WackoWiki %1をインストールしようとしています。次の数ページはインストールプロセスをご案内します。',
 'PleaseBackup'					=> 'アップグレード プロセスを開始する前に、データベース、構成ファイル、ローカル ハックやパッチが適用されたファイルなど、変更されたすべてのファイルを <strong>バックアップ</strong> してください。これにより、大きな問題から解放されます。',
@@ -149,7 +149,7 @@ $lang = [
 'DbName'						=> 'データベース名',
 'DbNameDesc'					=> 'データベースの WackoWiki が使用する必要があります。このデータベースは続行する前に既に存在する必要があります！',
 'DbNameSqliteDesc'				=> 'WackoWikiには、データディレクトリとファイル名SQLiteが使用されます。',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite はすべてのデータを 1つのファイルに保存します。<br><br>指定するディレクトリは、インストール中に Web サーバーが書き込み可能である必要があります。<br><br>ただし、このディレクトリは Web 経由からのアクセスが<strong>不可能</strong>であるべきです。<br><br>インストールプログラムは、データファイルと同じ場所に追加の<code>.htaccess</code> ファイルを作成しますが、これがうまく作成されない場合、第三者があなたのデータベースにアクセスできてしまう可能性があります。<br>このデータベースには、ユーザーデータ（メールアドレス、ハッシュ化されたパスワード）、保護ページ、その他の機密情報が含まれています。<br><br>そのため、データファイルは、可能であれば全く別の場所、たとえば <code>/var/lib/wackowiki/yourwiki</code> のようなディレクトリに配置することが推奨されます。',
 'DbUser'						=> 'データベースのユーザー名',
 'DbUserDesc'					=> 'データベースへの接続に使用するユーザー名です。',
 'DbPassword'					=> 'データベースのパスワード',
@@ -171,7 +171,7 @@ $lang = [
 'TestDatabaseExists'			=> '指定したデータベースが存在するか確認しています',
 'TestDatabaseVersion'			=> 'データベースの最小バージョン要件を確認しています',
 'SqliteFileExtensionError'		=> '以下のファイル拡張子のいずれかを使用してください。 db, sdb, sqlite',
-'SqliteParentUnwritableGroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer has determined the user your webserver is running as.<br>Make the <code>%3</code> directory writable by it to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableGroup'	=> 'データディレクトリ <code>%1</code> を作成できません。親ディレクトリ <code>%2</code> に、Web サーバーから書き込み権限がないためです。<br><br>インストーラーは、Web サーバーがどのユーザーとして動作しているかを判別しました。<br>処理を続行するには、そのユーザーが <code>%3</code> ディレクトリに書き込みできるように設定してください。<br>Unix / Linux システムでは、次の操作を実行します：<br><br><pre> cd %2<br> mkdir %3 <br>chgrp %4 %3<br> chmod g+w %3 </pre>','SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
 'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
 'SqliteMkdirError'				=> 'データ ディレクトリ <code>%1</code>を作成中にエラーが発生しました。<br>場所を確認して、もう一度お試しください。',
 'SqliteDirUnwritable'			=> '<code>%1</code>ディレクトリに書き込むことができません。<br>ウェブサーバーが書き込むことができるように権限を変更し、再度実行してください。',

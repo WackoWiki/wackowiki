@@ -1,8 +1,8 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
-	ModifiedHint :			"Field has changed, do not forget to save the changes.",
-	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	ReallySave :			"Salvare davvero?",
+	ModifiedHint :			"Il campo è cambiato, non dimenticare di salvare le modifiche.",
+	NotSavedWarning :		"Non hai salvato le modifiche. Sei sicuro di voler uscire?",
 	SessionExpiredEditor :	"La tua sessione è scaduta!\nSei stato disconnesso a causa di una lunga inattività.\n1. Salva il tuo modulo modificato in un file di testo per evitare perdite.\n2. Aggiorna la pagina.\n3. Effettuare di nuovo il login e ripresentarsi.",
 
 	// wikiedit.js
@@ -39,32 +39,32 @@ lang = {
 	Line :					"Riga orizzontale",
 	Signature :				"Inserisci la firma",
 	Quote :					"Quote",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
+	MarkedText :			"Testo contrassegnato",
+	HighlightText :			"Evidenzia testo",
 	Shade :					"Shade",
 	Footnote :				"Nota a piè di pagina",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Inserire tabella",
 
 	Link :					"Link",
-	TextForLinking :		"Text for linking",
+	TextForLinking :		"TTesto per il collegamento",
 
-	HelpAboutTip :			' Shortcuts:\n'+
-							' Ctrl+B - Bold\n'+
+	HelpAboutTip :			' Scorciatoie:\n'+
+							' Ctrl+B - Grassetto\n'+
 							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
+							' Ctrl+U - Sottolinea\n'+
+							' Ctrl+Shift+S - Sbarratura\n'+
+							' Ctrl+Shift+1 .. 4 - Intestazione 1..4\n'+
+							' Alt+I or Ctrl+T - Rientro\n'+
 							' Alt+U or Ctrl+Shift+T - Unindent\n'+
 							' Ctrl+J - MarkUp (!!)\n'+
 							' Ctrl+H - MarkUp (??)\n'+
 							' Alt+L - Link\n'+
-							' Ctrl+L - Link with description\n'+
-							' Ctrl+Shift+L - Unordered List\n'+
-							' Ctrl+Shift+N - Ordered List\n'+
-							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
+							' Ctrl+L - Collega con la descrizione\n'+
+							' Ctrl+Shift+L - Elenco Non Ordinato\n'+
+							' Ctrl+Shift+N - Elenco Ordinato\n'+
+							' Ctrl+Shift+O - Elenco Ordinato\n'+
+							' Ctrl+= - Testo piccolo\n'+
+							' Ctrl+Shift+Minus - Linea orizzontale\n'+
 							' \n'
 };

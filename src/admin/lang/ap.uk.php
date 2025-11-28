@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Збережений кластер',
 	'DataProtection'			=> 'Захист даних - %1 пропущено',
 	'AssumeDropTable'			=> 'Assume %1',
+	'RestoreSQLiteDatabase'		=> 'Відновлення SQLite бази даних',
 	'RestoreTableStructure'		=> 'Відновлення структури таблиці',
 	'RunSqlQueries'				=> 'Виконання інструкції SQL:',
 	'CompletedSqlQueries'		=> 'Завершено. Оброблені інструкції:',

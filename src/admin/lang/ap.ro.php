@@ -1034,7 +1034,7 @@ $ap_translation = [
     	'Clusterul rădăcină nu afectează copia de rezervă a fişierelor globale şi a fişierelor de cache (dacă este ales, acestea sunt întotdeauna salvate în întregime).<br>' .  '<br>' .
 		'<strong>Atenția</strong>: Pentru a evita pierderea de informații din baza de date atunci când specificați grupul rădăcină, tabelele din această copie de rezervă nu vor fi restructurate, la fel ca atunci când copia de rezervă numai structura tabelelor fără a salva datele. Pentru a face o conversie completă a tabelelor în formatul de rezervă trebuie să faceți o copie de rezervă completă <em> bazei de date (structură și date) fără a specifica clusterul</em>.',
 	'BackupCompleted'			=> 'Arhivare și arhivare finalizată.<br>' .
-    	'Fișierele pachetului de backup au fost stocate în sub-directorul %1.<br>Pentru a o descărca folosește FTP (întreține structura directorului și numele fișierelor în copiere).<br> Pentru a restaura o copie de rezervă sau a elimina un pachet, accesați <a href="%2">Restaurați baza de date</a>.',
+    	'Fișierele pachetului de backup au fost stocate în sub-directorul %1.<br>Pentru a o descărca folosește FTP (întreține structura directorului și numele fișierelor la copiere).<br> Pentru a restaura o copie de rezervă sau a elimina un pachet, accesați <a href="%2">Restaurați baza de date</a>.',
 	'LogSavedBackup'			=> 'Baza de date de rezervă salvată ##%1##',
 	'Backup'					=> 'Backup',
 	'CantReadFile'				=> 'Nu se poate citi fișierul %1.',
@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Grup salvat',
 	'DataProtection'			=> 'Protecția datelor - %1 a fost omisă',
 	'AssumeDropTable'			=> 'Asumează %1',
+	'RestoreSQLiteDatabase'		=> 'Restabilirea bazei de date SQLite',
 	'RestoreTableStructure'		=> 'Restabilirea structurii tabelului',
 	'RunSqlQueries'				=> 'Efectuați instrucțiuni SQL:',
 	'CompletedSqlQueries'		=> 'Instrucţiuni finalizate:',

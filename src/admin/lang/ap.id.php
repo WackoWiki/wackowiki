@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Saved cluster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
+	'RestoreSQLiteDatabase'		=> 'Memulihkan basis data SQLite',
 	'RestoreTableStructure'		=> 'Restoring the structure of the table',
 	'RunSqlQueries'				=> 'Perform SQL instructions:',
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions:',

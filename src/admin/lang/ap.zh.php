@@ -1064,6 +1064,7 @@ $ap_translation = [
 	'SavedCluster'				=> '保存的集群',
 	'DataProtection'			=> '数据保护 - %1 省略',
 	'AssumeDropTable'			=> '假设 %1',
+	'RestoreSQLiteDatabase'		=> '正在恢复 SQLite 数据库',
 	'RestoreTableStructure'		=> '恢复表结构',
 	'RunSqlQueries'				=> '执行 SQL 指令：',
 	'CompletedSqlQueries'		=> '完全的。 处理指令：',

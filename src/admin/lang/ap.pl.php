@@ -511,7 +511,7 @@ $ap_translation = [
 	'RewriteMode'					=> 'Użyj <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'Jeśli serwer internetowy obsługuje tę funkcję, włącz ją, aby "upiększyć" adresy URL stron.<br>
 										<span class="cite">Wartość
- może zostać nadpisana przez klasę Settings w czasie wykonywania,
+ może zostać nadpisana przez klasę Settings w czasie wykonywania, 
 niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włączony.',
 
 	// Permissions settings
@@ -1045,7 +1045,7 @@ lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwier
     	'Klaster główny nie ma wpływu na globalną kopię zapasową plików i kopię zapasową plików pamięci podręcznej (jeśli wybrano, są one zawsze zapisywane w całości).<br>' .  '<br>' .
 		'<strong>Uwaga</strong>: Aby uniknąć utraty informacji z bazy danych podczas określania głównego klastra tabele z tej kopii zapasowej nie będą restrukturyzowane, tak samo jak podczas tworzenia kopii zapasowej tylko struktury tabeli bez zapisywania danych. Aby dokonać pełnej konwersji tabel do formatu kopii zapasowej, musisz wykonać pełną kopię zapasową bazy danych <em> (strukturę i dane) bez określania klastra</em>.',
 	'BackupCompleted'			=> 'Tworzenie kopii zapasowej i archiwizacja zakończone.<br>' .
-    	'Pliki pakietów kopii zapasowych były przechowywane w podkatalogu %1.<br>Aby go pobrać użyj FTP (zachowaj strukturę katalogu i nazwy plików podczas kopiowania).<br> Aby przywrócić kopię zapasową lub usunąć pakiet, przejdź do <a href="%2">Przywróć bazę danych</a>.',
+    	'Pliki kopii zapasowych zostały zapisane w podkatalogu %1.<br>Aby go ściągnąć, użyj FTP (zachowaj strukturę katalogu i nazwy plików podczas kopiowania).<br> Aby przywrócić kopię zapasową lub usunąć pakiet, przejdź do <a href="%2">Przywróć bazę danych</a>.',
 	'LogSavedBackup'			=> 'Zapisano kopię zapasową bazy danych ##%1##',
 	'Backup'					=> 'Kopia zapasowa',
 	'CantReadFile'				=> 'Nie można odczytać pliku %1.',
@@ -1085,6 +1085,7 @@ lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwier
 	'SavedCluster'				=> 'Zapisany klaster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Przyjmij %1',
+	'RestoreSQLiteDatabase'		=> 'Przywracanie bazy danych SQLite',
 	'RestoreTableStructure'		=> 'Przywracanie struktury tabeli',
 	'RunSqlQueries'				=> 'Wykonaj instrukcje SQL:',
 	'CompletedSqlQueries'		=> 'Ukończone. Przetworzone instrukcje:',

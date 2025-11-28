@@ -480,13 +480,12 @@ $ap_translation = [
 									 ⋅εεεεεεεεεε^ other than X-Forwarded-For. (Automatic Translation) Overskriften "X-Forwarded-For" er en kommaseparert liste over IP
 									 εephalephalephalephalephalε″addresses; bare den siste (den venstremest) vil bli brukt.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy godtar en liste med IP-adresser:',
-	'ReverseProxyAddressesInfo'	=> 'Hvert element i denne matrisen er IP-adressen til en av dine revers
-									 Glenεεεεεεephalεproxies. Dersom du bruker denne sjelden, WackoWiki vil stole på informasjonen som er lagret
-									 εεεdri in the X-Forwarded-For overskrifter bare dersom fjernIP-adressen er en av
-									 ₀ó ó ó ó ó ó ó httthese, det vil si at forespørselen når webserveren fra en av din
-									 ⋅εεεεεεrevers proxies. Ellers kan klienten koble til
-									 direkte til
- εεεεεε″your web server ved å spole X-Forwarded-For headere med jukse.',
+	'ReverseProxyAddressesInfo'	=> 'Hvert element i denne matrisen er IP-adressen til en av dine omvendte
+									 proxyer. Hvis du bruker denne matrisen, vil WackoWiki stole på informasjonen som er lagret
+									 i X-Forwarded-For-overskriftene bare hvis den eksterne IP-adressen er en av
+									 disse, det vil si at forespørselen når webserveren fra en av dine
+									 omvendte proxyer. Ellers kan klienten koble seg direkte til
+									 webserveren din ved å forfalske X-Forwarded-For-overskriftene.',
 
 	'SessionSection'				=> 'Økt håndtering',
 	'SessionStorage'				=> 'Økt-lager:',
@@ -1035,7 +1034,7 @@ $ap_translation = [
     	'Klysten for rot påvirker ikke den globale sikkerhetskopien og mellomlagret filer (hvis valgt, de er alltid lagret i full).<br>' .  '<br>' .
 		'<strong>Legg merke til</strong>: For å unngå tap av informasjon fra databasen når du angir rotklyngen, tabellene fra denne sikkerhetskopien vil ikke bli omstrukturert, samme som ved bare sikkerhetskopiering av tabellstruktur uten å lagre dataene. For å fullføre konverteringen av tabellene til sikkerhetskopiformatet må du lage <em> fullstendig sikkerhetskopi (struktur og data) uten å angi klyngen</em>.',
 	'BackupCompleted'			=> 'Sikkerhetskopiering og arkivering fullført.<br>' .
-    	'Sikkerhetskopieringspakkefilene ble lagret i underkatalogen %1.<br>For å laste ned bruker du FTP (vedlikehold av mappestruktur og filnavn ved kopiering).<br> for å gjenopprette en sikkerhetskopiering eller fjerne en pakke, gå til <a href="%2">Gjenopprette database</a>.',
+    	'Sikkerhetskopieringspakkefilene ble lagret i underkatalogen %1.<br>For å laste ned FTP (vedlikehold av mappestruktur og filnavn når de kopierer).<br> for å gjenopprette en sikkerhetskopiering eller fjerne en pakke, gå til <a href="%2">Gjenopprette database</a>.',
 	'LogSavedBackup'			=> 'Lagret sikkerhetskopieringsdatabase ##%1##',
 	'Backup'					=> 'Sikkerhetskopi',
 	'CantReadFile'				=> 'Kan ikke lese filen %1.',
@@ -1075,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Lagret klynge',
 	'DataProtection'			=> 'Datatiltak - %1 utelatt',
 	'AssumeDropTable'			=> 'Forutsett %1',
+	'RestoreSQLiteDatabase'		=> 'Gjenoppretter SQLite databasen',
 	'RestoreTableStructure'		=> 'Gjenoppretter konstruksjonen til tabellen',
 	'RunSqlQueries'				=> 'Utfør SQL-instruksjoner:',
 	'CompletedSqlQueries'		=> 'Fullført. Behandlede instruksjoner:',

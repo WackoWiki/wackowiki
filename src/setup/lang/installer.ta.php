@@ -52,7 +52,7 @@ $lang = [
 'LockAuthorization'				=> 'Authorization',
 'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
 'LockPassword'					=> 'Password:',
-'LockLogin'						=> 'Login',
+'LockLogin'						=> 'புகுபதிகை',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
 

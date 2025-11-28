@@ -1034,7 +1034,7 @@ $ap_translation = [
     	'Kořenový cluster nemá vliv na globální zálohování souborů a zálohování souborů v mezipaměti (pokud je vybráno, jsou vždy uloženy plnění).<br>' .  '<br>' .
 		'<strong>Pozornost</strong>: Aby se zabránilo ztrátě informací z databáze při specifikování kořenového clusteru, tabulky z této zálohy nebudou restrukturalizovány, stejné jako při zálohování pouze tabulky bez uložení dat. Chcete-li provést úplnou konverzi tabulek na formát zálohy, musíte <em> vytvořit úplnou zálohu databáze (strukturu a data) bez zadání clusteru</em>.',
 	'BackupCompleted'			=> 'Zálohování a archivace dokončena.<br>' .
-    	'Soubory záložních balíčků byly uloženy v podadresáři %1.<br>Pro stažení použijte FTP (udržovat strukturu adresáře a názvy souborů při kopírování).<br> Chcete-li obnovit zálohu nebo odstranit balíček, přejděte do <a href="%2">Obnovit databázi</a>.',
+    	'Soubory záložního balíčku byly uloženy v podadresáři %1.<br>Pro jeho stažení použijte FTP (udržovat strukturu adresáře a názvy souborů při kopírování).<br> Chcete-li obnovit zálohu nebo odstranit balíček, přejděte do <a href="%2">Obnovit databázi</a>.',
 	'LogSavedBackup'			=> 'Uložená záložní databáze ##%1##',
 	'Backup'					=> 'Záloha',
 	'CantReadFile'				=> 'Nelze číst soubor %1.',
@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Uložený cluster',
 	'DataProtection'			=> 'Ochrana dat - %1 vynechán',
 	'AssumeDropTable'			=> 'Předpokládat %1',
+	'RestoreSQLiteDatabase'		=> 'Obnovení SQLite databáze',
 	'RestoreTableStructure'		=> 'Obnovení struktury tabulky',
 	'RunSqlQueries'				=> 'Provést SQL instrukce:',
 	'CompletedSqlQueries'		=> 'Dokončeno. Zpracované instrukce:',

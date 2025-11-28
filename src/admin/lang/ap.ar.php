@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'مجموعة محفوظة',
 	'DataProtection'			=> 'حماية البيانات - %1 محذوف',
 	'AssumeDropTable'			=> 'افترض %1',
+	'RestoreSQLiteDatabase'		=> 'استعادة قاعدة بيانات SQLite',
 	'RestoreTableStructure'		=> 'باء - استعادة هيكل الجدول',
 	'RunSqlQueries'				=> 'تنفيذ تعليمات SQL:',
 	'CompletedSqlQueries'		=> 'اكتمل. التعليمات المعالجة:',

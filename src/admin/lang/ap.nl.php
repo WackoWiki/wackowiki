@@ -1084,6 +1084,7 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 	'SavedCluster'				=> 'Opgeslagen cluster',
 	'DataProtection'			=> 'Gegevensbescherming - %1 weggelaten',
 	'AssumeDropTable'			=> 'Neem %1 aan',
+	'RestoreSQLiteDatabase'		=> 'De SQLite database herstellen',
 	'RestoreTableStructure'		=> 'Herstellen van de structuur van de tabel',
 	'RunSqlQueries'				=> 'Perform SQL-instructions:',
 	'CompletedSqlQueries'		=> 'Voltooid. Verwerkte instructies:',

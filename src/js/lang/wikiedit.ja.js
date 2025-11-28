@@ -1,14 +1,14 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
-	ModifiedHint :			"Field has changed, do not forget to save the changes.",
-	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	ReallySave :			"本当に保存しますか？",
+	ModifiedHint :			"フィールドが変更されました。変更を保存することを忘れないでください。",
+	NotSavedWarning :		"変更を保存しませんでした。本当に退出しますか？",
 	SessionExpiredEditor :	"Your session has expired!\nYou\'ve been logged off due to long inactivity.\n1. Save your form edits to text file to prevent loss.\n2. Refresh the page.\n3. Log in again and re-submit.",
 
 	// wikiedit.js
 	HelpAbout :				"ヘルプ & アバウト",
 	HelpFormatting :		"ヘルプ",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpFormattingTip :		"ウィキフォーマットのヘルプ",
 	HelpFormattingPage :	"Doc/English/Formatting",
 
 	Heading1 :				"第一見出し",
@@ -38,33 +38,33 @@ lang = {
 	Action :				"Action",
 	Line :					"水平の罫線",
 	Signature :				"署名",
-	Quote :					"Quote",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
+	Quote :					"引用",
+	MarkedText :			"マークされたテキスト",
+	HighlightText :			"テキストを強調表示",
 	Shade :					"Shade",
-	Footnote :				"Footnote",
-	Hyperlink :				"Hyperlink",
+	Footnote :				"脚注",
+	Hyperlink :				"ハイパーリンク",
 	InsertTable :			"テーブルを挿入",
 
 	Link :					"リンク",
-	TextForLinking :		"Text for linking",
+	TextForLinking :		"リンクするテキスト",
 
 	HelpAboutTip :			' ショートカット:\n'+
-							' Ctrl+B - Bold\n'+
+							' Ctrl+B - 太字\n'+
 							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
-							' Alt+U or Ctrl+Shift+T - Unindent\n'+
+							' Ctrl+U - 下線\n'+
+							' Ctrl+Shift+S - 取り消し線\n'+
+							' Ctrl+Shift+1 .. 4 - 見出し 1..4\n'+
+							' Alt+I or Ctrl+T - インデント\n'+
+							' Alt+U or Ctrl+Shift+T - インデント解除\n'+
 							' Ctrl+J - MarkUp (!!)\n'+
 							' Ctrl+H - MarkUp (??)\n'+
-							' Alt+L - Link\n'+
+							' Alt+L - リンク\n'+
 							' Ctrl+L - Link with description\n'+
-							' Ctrl+Shift+L - Unordered List\n'+
-							' Ctrl+Shift+N - Ordered List\n'+
-							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
+							' Ctrl+Shift+L - 順序なしリスト\n'+
+							' Ctrl+Shift+N - 順序付きリスト\n'+
+							' Ctrl+Shift+O - 順序付きリスト\n'+
+							' Ctrl+= - 小文字\n'+
+							' Ctrl+Shift+Minus - 水平線\n'+
 							' \n'
 };

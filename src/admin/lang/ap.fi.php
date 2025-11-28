@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Tallennettu klusteri',
 	'DataProtection'			=> 'Tietosuoja - %1 jätetty pois',
 	'AssumeDropTable'			=> 'Oletetaan %1',
+	'RestoreSQLiteDatabase'		=> 'SQLite tietokannan palauttaminen',
 	'RestoreTableStructure'		=> 'Taulukon rakenteen palauttaminen',
 	'RunSqlQueries'				=> 'Suorita SQL-ohjeet:',
 	'CompletedSqlQueries'		=> 'Valmis. Käsitellyt ohjeet:',

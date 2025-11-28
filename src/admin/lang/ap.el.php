@@ -1076,6 +1076,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Αποθηκευμένο σύμπλεγμα',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Υποθέστε %1',
+	'RestoreSQLiteDatabase'		=> 'Επαναφορά της βάσης δεδομένων SQLite',
 	'RestoreTableStructure'		=> 'Αποκατάσταση της δομής του πίνακα',
 	'RunSqlQueries'				=> 'Εκτελέστε SQL οδηγίες:',
 	'CompletedSqlQueries'		=> 'Ολοκληρώθηκε. Επεξεργασμένες οδηγίες:',

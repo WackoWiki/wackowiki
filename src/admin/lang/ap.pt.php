@@ -1043,7 +1043,7 @@ $ap_translation = [
     	'O cluster raiz não afeta o backup dos ficheiros globais e o backup dos ficheiros de cache (se for escolhido, são sempre guardados na íntegra). <br>' .  '<br>' .
 		'<strong>Atenção</strong>: Para evitar a perda de informações do banco de dados ao especificar o cluster de raiz, as tabelas deste backup não serão reestruturadas, o mesmo que durante o backup somente da estrutura de tabelas sem salvar os dados. Para fazer uma conversão completa das tabelas para o formato de backup, é necessário fazer o <em> backup completo da base de dados (estrutura e dados) sem especificar o cluster</em>.',
 	'BackupCompleted'			=> 'Backup e arquivamento concluído.<br>' .
-    	'Os arquivos do pacote de Backup foram armazenados no sub-diretório %1.<br>Para baixar, use FTP (mantenha a estrutura do diretório e os nomes de arquivos durante a cópia).<br> Para restaurar uma cópia de segurança ou remover um pacote, vá para <a href="%2">Restaurar banco de dados</a>.',
+    	'Os arquivos do pacote de Backup foram armazenados na subpasta %1.<br>Para baixá-lo usa FTP (mantém a estrutura do diretório e nomes de arquivos quando copia).<br> Para restaurar uma cópia de segurança ou remover um pacote, vá para <a href="%2">Restaurar banco de dados</a>.',
 	'LogSavedBackup'			=> 'Banco de dados de backup salvo ##%1##',
 	'Backup'					=> 'Cópia de segurança',
 	'CantReadFile'				=> 'Não é possível ler o arquivo %1.',
@@ -1083,6 +1083,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Classe salva',
 	'DataProtection'			=> 'Proteção de dados - %1 omitido',
 	'AssumeDropTable'			=> 'Assumir %1',
+	'RestoreSQLiteDatabase'		=> 'Restaurando o banco de dados SQLite',
 	'RestoreTableStructure'		=> 'Restaurando a estrutura da tabela',
 	'RunSqlQueries'				=> 'Executar instruções SQL:',
 	'CompletedSqlQueries'		=> 'Concluído. Instruções processadas:',

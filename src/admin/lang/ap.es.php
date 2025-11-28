@@ -1082,6 +1082,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Clúster guardado',
 	'DataProtection'			=> 'Protección de datos: %1 omitido',
 	'AssumeDropTable'			=> 'Asumir %1',
+	'RestoreSQLiteDatabase'		=> 'Restaurando la base de datos SQLite',
 	'RestoreTableStructure'		=> 'Restaurando la estructura de la tabla',
 	'RunSqlQueries'				=> 'Realizar instrucciones SQL:',
 	'CompletedSqlQueries'		=> 'Terminado. Instrucciones procesadas:',

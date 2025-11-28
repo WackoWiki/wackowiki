@@ -1,14 +1,14 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
-	ModifiedHint :			"Field has changed, do not forget to save the changes.",
-	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	ReallySave :			"Vraiment sauvegarder ?",
+	ModifiedHint :			"Le champ a changé, n\'oubliez pas d\'enregistrer les modifications.",
+	NotSavedWarning :		"Vous n\'avez pas enregistré les modifications. Êtes-vous sûr de vouloir quitter ?",
 	SessionExpiredEditor :	"Votre session a expiré !\nVous avez été déconnecté en raison d'une longue inactivité.\n1. Enregistrez vos modifications de formulaire dans un fichier texte pour éviter toute perte.\n2. Rafraîchissez la page.\n3. Connectez-vous à nouveau et soumettez à nouveau.",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
+	HelpAbout :				"Aide & À propos",
 	HelpFormatting :		"Aide",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpFormattingTip :		"Aide sur le formatage Wiki",
 	HelpFormattingPage :	"Doc/Français/MiseEnForme",
 
 	Heading1 :				"Titre de niveau 1",
@@ -33,38 +33,38 @@ lang = {
 	Justify :				"Justifier",
 	Outdent :				"Retrait positif",
 	Indent :				"Retrait négatif",
-	CodeWrapper :			"Code Wrapper",
+	CodeWrapper :			"Conteneur de code",
 	HTML :					"HTML",
 	Action :				"Action",
 	Line :					"Ligne horizontale",
 	Signature :				"Signature",
-	Quote :					"Quote",
-	MarkedText :			"Marked text",
+	Quote :					"Citation",
+	MarkedText :			"Texte marqué",
 	HighlightText :			"Highlight text",
-	Shade :					"Shade",
+	Shade :					"Ombre",
 	Footnote :				"Note de bas de page",
-	Hyperlink :				"Hyperlink",
+	Hyperlink :				"Lien hypertexte",
 	InsertTable :			"Insérer tableau",
 
-	Link :					"Link",
-	TextForLinking :		"Text for linking",
+	Link :					"Lier",
+	TextForLinking :		"Texte pour la liaison",
 
-	HelpAboutTip :			' Shortcuts:\n'+
-							' Ctrl+B - Bold\n'+
+	HelpAboutTip :			' Raccourcis:\n'+
+							' Ctrl+B - Gras\n'+
 							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
+							' Ctrl+U - Souligner\n'+
 							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
-							' Alt+U or Ctrl+Shift+T - Unindent\n'+
+							' Ctrl+Shift+1 .. 4 - En-tête 1..4\n'+
+							' Alt+I ou Ctrl+T - Indentation\n'+
+							' Alt+U ou Ctrl+Shift+T - Unindent\n'+
 							' Ctrl+J - MarkUp (!!)\n'+
 							' Ctrl+H - MarkUp (??)\n'+
-							' Alt+L - Link\n'+
-							' Ctrl+L - Link with description\n'+
-							' Ctrl+Shift+L - Unordered List\n'+
-							' Ctrl+Shift+N - Ordered List\n'+
-							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
+							' Alt+L - Lien\n'+
+							' Ctrl+L - Lien avec la description\n'+
+							' Ctrl+Shift+L - Liste non ordonnée\n'+
+							' Ctrl+Shift+N - Liste ordonnée\n'+
+							' Ctrl+Shift+O - Liste ordonnée\n'+
+							' Ctrl+= - Petit texte\n'+
+							' Ctrl+Shift+Minus - Ligne horizontale\n'+
 							' \n'
 };

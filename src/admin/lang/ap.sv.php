@@ -1034,7 +1034,7 @@ $ap_translation = [
     	'Rotklustret påverkar inte säkerhetskopiering av globala filer och säkerhetskopiering av cachefiler (om valt, de sparas alltid i sin helhet).<br>' .  '<br>' .
 		'<strong>Obs</strong>: För att undvika förlust av information från databasen när du anger rotklustret, tabellerna från denna backup kommer inte att omstruktureras, samma som vid säkerhetskopiering endast tabellstruktur utan att spara data. För att göra en fullständig konvertering av tabellerna till säkerhetskopieringsformat måste du göra <em> full databas backup (struktur och data) utan att ange klustret</em>.',
 	'BackupCompleted'			=> 'Säkerhetskopiering och arkivering slutförd.<br>' .
-    	'Filerna för säkerhetskopior lagrades i underkatalogen %1.<br>För att ladda ner den använder FTP (underhålla katalogstrukturen och filnamnen vid kopiering).<br> För att återställa en säkerhetskopia eller ta bort ett paket, gå till <a href="%2">Återställ databas</a>.',
+    	'Paketfilerna för säkerhetskopior lagrades i underkatalogen %1.<br>För att ladda ner den använder du FTP (underhåll katalogstrukturen och filnamnen vid kopiering).<br> För att återställa en säkerhetskopia eller ta bort ett paket, gå till <a href="%2">Återställ databas</a>.',
 	'LogSavedBackup'			=> 'Sparad säkerhetskopieringsdatabas ##%1##',
 	'Backup'					=> 'Säkerhetskopiera',
 	'CantReadFile'				=> 'Kan inte läsa filen %1.',
@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Sparat kluster',
 	'DataProtection'			=> 'Dataskydd - %1 utelämnad',
 	'AssumeDropTable'			=> 'Anta %1',
+	'RestoreSQLiteDatabase'		=> 'Återställer SQLite-databasen',
 	'RestoreTableStructure'		=> 'Återställa strukturen på tabellen',
 	'RunSqlQueries'				=> 'Utför SQL-instruktioner:',
 	'CompletedSqlQueries'		=> 'Färdigställd. Bearbetade instruktioner:',

@@ -1074,6 +1074,7 @@ $ap_translation = [
 	'SavedCluster'				=> '保存されたクラスター',
 	'DataProtection'			=> 'データ保護 - %1 は省略されました',
 	'AssumeDropTable'			=> '%1 と仮定する',
+	'RestoreSQLiteDatabase'		=> 'SQLiteデータベースの復元',
 	'RestoreTableStructure'		=> 'テーブルの構造を復元する',
 	'RunSqlQueries'				=> 'SQL命令を実行:',
 	'CompletedSqlQueries'		=> '完了しました。処理済みの手順:',

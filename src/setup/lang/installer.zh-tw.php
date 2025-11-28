@@ -49,10 +49,10 @@ $lang = [
 /*
    Locking Check
  */
-'LockAuthorization'				=> 'Authorization',
+'LockAuthorization'				=> '授權',
 'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
-'LockPassword'					=> 'Password:',
-'LockLogin'						=> 'Login',
+'LockPassword'					=> '密碼:',
+'LockLogin'						=> '登入',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
 
@@ -61,7 +61,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Language Configuration',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
+'PleaseUpgradeToR6'				=> '您似乎正在使用舊版本的 WackoWiki %1。若要更新至此版本的 WackoWiki，您必須先將安裝更新至 %2。',
 'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
 'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',

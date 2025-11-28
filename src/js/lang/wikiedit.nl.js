@@ -1,14 +1,14 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
-	ModifiedHint :			"Field has changed, do not forget to save the changes.",
-	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	ReallySave :			"Echt opslaan?",
+	ModifiedHint :			"Het veld is veranderd, vergeet niet de wijzigingen op te slaan.",
+	NotSavedWarning :		"U hebt de wijzigingen niet opgeslagen. Weet u zeker dat u deze wilt verlaten?",
 	SessionExpiredEditor :	"Je sessie is verlopen!\nJe bent afgemeld vanwege lange inactiviteit.\n1. Sla je formulier op in een sms-bestand om verlies te voorkomen.\n2. Vernieuw de pagina.\n3. Log opnieuw in en dien opnieuw in.",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
-	HelpFormatting :		"Help",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpAbout :				"Help & Over",
+	HelpFormatting :		"Hulp",
+	HelpFormattingTip :		"Help over Wiki-opmaak",
 	HelpFormattingPage :	"Doc/English/Formatting",
 
 	Heading1 :				"Niveau 1 kop",
@@ -39,9 +39,9 @@ lang = {
 	Line :					"Horizontale lijn",
 	Signature :				"Handtekening",
 	Quote :					"Quote",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
-	Shade :					"Shade",
+	MarkedText :			"Gemarkeerde tekst",
+	HighlightText :			"Tekst markeren",
+	Shade :					"Schaduw",
 	Footnote :				"Voetnoot",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Tafel invoegen",
@@ -49,8 +49,8 @@ lang = {
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
 
-	HelpAboutTip :			' Shortcuts:\n'+
-							' Ctrl+B - Bold\n'+
+	HelpAboutTip :			' Snelkoppelingen:\n'+
+							' Ctrl+B - Vetgedrukt\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
 							' Ctrl+Shift+S - Strikethrough\n'+
@@ -64,7 +64,7 @@ lang = {
 							' Ctrl+Shift+L - Unordered List\n'+
 							' Ctrl+Shift+N - Ordered List\n'+
 							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
+							' Ctrl+= - Kleine tekst\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
 };

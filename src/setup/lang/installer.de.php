@@ -50,11 +50,11 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorisierung',
-'LockAuthorizationInfo'			=> 'Bitte geben Sie das Passwort ein, das Sie in der Datei %1 gespeichert haben, die Sie vorübergehend in Ihrem Wacko-Verzeichnis gespeichert haben.',
+'LockAuthorizationInfo'			=> 'Bitte gib das Passwort ein, das du in der Datei %1 gespeichert hast, die du vorübergehend in deinem Wacko-Verzeichnis abgelegt hast.',
 'LockPassword'					=> 'Passwort:',
 'LockLogin'						=> 'Anmelden',
 'LockPasswordInvalid'			=> 'Ungültiges Passwort.',
-'LockedTryLater'				=> 'Diese Seite wird gerade aktualisiert. Bitte versuchen Sie es später erneut.',
+'LockedTryLater'				=> 'Diese Seite wird gerade aktualisiert. Bitte versuche es später erneut.',
 
 
 /*

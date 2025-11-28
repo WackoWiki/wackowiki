@@ -2,8 +2,8 @@ lang = {
 	// default.js
 	ReallySave :			"Really save?",
 	ModifiedHint :			"Field has changed, do not forget to save the changes.",
-	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
-	SessionExpiredEditor :	"Your session has expired!\nYou\'ve been logged off due to long inactivity.\n1. Save your form edits to text file to prevent loss.\n2. Refresh the page.\n3. Log in again and re-submit.",
+	NotSavedWarning :		"변경 사항을 저장하지 않았습니다. 정말로 나가시겠습니까?",
+	SessionExpiredEditor :	"세션이 만료되었습니다!\n장기간 활동이 없어 로그오프되었습니다.\n1. 양식 수정 내용을 텍스트 파일로 저장하여 손실을 방지하세요.\n2. 페이지를 새로 고치세요.\n3. 다시 로그인하여 제출하세요.",
 
 	// wikiedit.js
 	HelpAbout :				"도움말 & 소개",
