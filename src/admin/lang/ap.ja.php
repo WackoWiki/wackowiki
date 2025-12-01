@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> '選択したバックアップが正常に削除されました。',
 	'LogRemovedBackup'			=> 'データベースのバックアップ ##%1 ## を削除しました',
 
+	'DbEngineInvalid'			=> '無効なデータベースエンジンです。 %1 を期待しています',
 	'RestoreStarted'			=> '復元を開始',
 	'RestoreParameters'			=> 'パラメータの使用',
 	'IgnoreDuplicatedKeys'		=> '重複キーを無視',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'データ保護 - %1 は省略されました',
 	'AssumeDropTable'			=> '%1 と仮定する',
 	'RestoreSQLiteDatabase'		=> 'SQLiteデータベースの復元',
+	'SQLiteDatabaseRestored'	=> 'データベースが正常に復元されました:',
 	'RestoreTableStructure'		=> 'テーブルの構造を復元する',
 	'RunSqlQueries'				=> 'SQL命令を実行:',
 	'CompletedSqlQueries'		=> '完了しました。処理済みの手順:',

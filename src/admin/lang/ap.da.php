@@ -1076,6 +1076,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Den valgte backup er blevet fjernet.',
 	'LogRemovedBackup'			=> 'Fjernet database backup ##%1##',
 
+	'DbEngineInvalid'			=> 'Ugyldig database motor, forventer %1',
 	'RestoreStarted'			=> 'Istandsat Gendannelse',
 	'RestoreParameters'			=> 'Bruger parametre',
 	'IgnoreDuplicatedKeys'		=> 'Ignorér duplikerede nøgler',
@@ -1084,6 +1085,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Databeskyttelse - %1 udeladt',
 	'AssumeDropTable'			=> 'Antag %1',
 	'RestoreSQLiteDatabase'		=> 'Gendannelse af SQLite- databasen',
+	'SQLiteDatabaseRestored'	=> 'Database gendannet succesfuldt fra:',
 	'RestoreTableStructure'		=> 'Gendannelse af strukturen i tabellen',
 	'RunSqlQueries'				=> 'Udfør SQL instruktioner:',
 	'CompletedSqlQueries'		=> 'Fuldført. Behandlede instruktioner:',

@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
 	'LogRemovedBackup'			=> 'Removed database backup ##%1##',
 
+	'DbEngineInvalid'			=> 'செயலற்ற தரவுத்தள இயந்திரம், %1-ஐ எதிர்பார்க்கிறது',
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated keys',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
 	'RestoreSQLiteDatabase'		=> 'Restoring the SQLite database',
+	'SQLiteDatabaseRestored'	=> 'தரவுத்தளம் இங்கிருந்து வெற்றிகரமாக மீட்கப்பட்டது:',
 	'RestoreTableStructure'		=> 'Restoring the structure of the table',
 	'RunSqlQueries'				=> 'Perform SQL instructions:',
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions:',

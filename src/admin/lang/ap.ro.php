@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Copia de rezervă selectată a fost eliminată cu succes.',
 	'LogRemovedBackup'			=> 'Backup pentru baze de date șterse ##%1##',
 
+	'DbEngineInvalid'			=> 'Motor bază de date nevalid, asteptare %1',
 	'RestoreStarted'			=> 'Restaurare inițiată',
 	'RestoreParameters'			=> 'Utilizarea parametrilor',
 	'IgnoreDuplicatedKeys'		=> 'Ignoră tastele duplicate',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Protecția datelor - %1 a fost omisă',
 	'AssumeDropTable'			=> 'Asumează %1',
 	'RestoreSQLiteDatabase'		=> 'Restabilirea bazei de date SQLite',
+	'SQLiteDatabaseRestored'	=> 'Baza de date restaurată cu succes din:',
 	'RestoreTableStructure'		=> 'Restabilirea structurii tabelului',
 	'RunSqlQueries'				=> 'Efectuați instrucțiuni SQL:',
 	'CompletedSqlQueries'		=> 'Instrucţiuni finalizate:',

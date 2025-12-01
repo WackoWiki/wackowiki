@@ -1069,6 +1069,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Το επιλεγμένο αντίγραφο ασφαλείας έχει αφαιρεθεί με επιτυχία.',
 	'LogRemovedBackup'			=> 'Αφαιρέθηκε αντίγραφο ασφαλείας της βάσης δεδομένων ##%1##',
 
+	'DbEngineInvalid'			=> 'Μη έγκυρη μηχανή βάσης δεδομένων, αναμένει %1',
 	'RestoreStarted'			=> 'Έναρξη Αποκατάστασης',
 	'RestoreParameters'			=> 'Χρήση παραμέτρων',
 	'IgnoreDuplicatedKeys'		=> 'Παράβλεψη διπλότυπων πλήκτρων',
@@ -1077,6 +1078,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Υποθέστε %1',
 	'RestoreSQLiteDatabase'		=> 'Επαναφορά της βάσης δεδομένων SQLite',
+	'SQLiteDatabaseRestored'	=> 'Η βάση δεδομένων επαναφέρθηκε επιτυχώς από:',
 	'RestoreTableStructure'		=> 'Αποκατάσταση της δομής του πίνακα',
 	'RunSqlQueries'				=> 'Εκτελέστε SQL οδηγίες:',
 	'CompletedSqlQueries'		=> 'Ολοκληρώθηκε. Επεξεργασμένες οδηγίες:',

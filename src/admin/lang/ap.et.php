@@ -1078,6 +1078,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
 	'LogRemovedBackup'			=> 'Removed database backup ##%1##',
 
+	'DbEngineInvalid'			=> 'Kehtetu andmebaasi mootor, oodatakse %1',
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated keys',
@@ -1086,6 +1087,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
 	'RestoreSQLiteDatabase'		=> 'Restoring the SQLite database',
+	'SQLiteDatabaseRestored'	=> 'Andmebaas taastati edukalt järgmisest asukohast:',
 	'RestoreTableStructure'		=> 'Restoring the structure of the table',
 	'RunSqlQueries'				=> 'Perform SQL-instructions:',
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions:',

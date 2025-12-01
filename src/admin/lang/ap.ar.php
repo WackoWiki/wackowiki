@@ -1034,7 +1034,7 @@ $ap_translation = [
     	'مجموعة الجذر لا تؤثر على النسخ الاحتياطي للملفات العالمية و النسخ الاحتياطي لملفات ذاكرة التخزين المؤقت (إذا تم اختيارها، يتم حفظها دائما كاملة).<br>' .  '<br>' .
 		'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster, the tables from this backup will not be restructured, same as when backing up only table structure without saving the data. To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'تم النسخ الاحتياطي والأرشفة.<br>' .
-    	'تم تخزين ملفات حزمة النسخ الاحتياطي في الدليل الفرعي %1.<br>للتنزيل يستخدم FTP (الحفاظ على هيكل الدليل وأسماء الملفات عند النسخ).<br> لاستعادة نسخة احتياطية أو إزالة حزمة، انتقل إلى <a href="%2">استعادة قاعدة البيانات</a>.',
+    	'تم تخزين ملفات حزمة النسخ الاحتياطي في الدليل الفرعي %1.<br>للتنزيل باستخدام FTP (الحفاظ على هيكل الدليل وأسماء الملفات عند النسخ).<br> لاستعادة نسخة احتياطية أو إزالة حزمة، انتقل إلى <a href="%2">استعادة قاعدة البيانات</a>.',
 	'LogSavedBackup'			=> 'حفظ قاعدة بيانات النسخ الاحتياطي ##%1##',
 	'Backup'					=> 'نسخة احتياطية',
 	'CantReadFile'				=> 'لا يمكن قراءة الملف %1.',
@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'تم إزالة النسخة الاحتياطية المحددة بنجاح.',
 	'LogRemovedBackup'			=> 'تمت إزالة النسخ الاحتياطي لقاعدة البيانات ##%1##',
 
+	'DbEngineInvalid'			=> 'محرك قاعدة البيانات غير صالح، يتوقع %1',
 	'RestoreStarted'			=> 'بدء الاستعادة',
 	'RestoreParameters'			=> 'استخدام المعلمات',
 	'IgnoreDuplicatedKeys'		=> 'تجاهل المفاتيح المكررة',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'حماية البيانات - %1 محذوف',
 	'AssumeDropTable'			=> 'افترض %1',
 	'RestoreSQLiteDatabase'		=> 'استعادة قاعدة بيانات SQLite',
+	'SQLiteDatabaseRestored'	=> 'تمت استعادة قاعدة البيانات بنجاح من:',
 	'RestoreTableStructure'		=> 'باء - استعادة هيكل الجدول',
 	'RunSqlQueries'				=> 'تنفيذ تعليمات SQL:',
 	'CompletedSqlQueries'		=> 'اكتمل. التعليمات المعالجة:',

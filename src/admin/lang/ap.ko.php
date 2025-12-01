@@ -1078,6 +1078,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
 	'LogRemovedBackup'			=> 'Removed database backup ##%1##',
 
+	'DbEngineInvalid'			=> '유효하지 않은 데이터베이스 엔진, %1을 기대함',
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated keys',
@@ -1086,6 +1087,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
 	'RestoreSQLiteDatabase'		=> 'SQLite 데이터베이스 복원',
+	'SQLiteDatabaseRestored'	=> '다음 위치에서 데이터베이스가 성공적으로 복원되었습니다:',
 	'RestoreTableStructure'		=> 'Restoring the structure of the table',
 	'RunSqlQueries'				=> 'Perform SQL-instructions:',
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions:',

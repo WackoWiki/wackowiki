@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Обрана резервна копія успішно видалена.',
 	'LogRemovedBackup'			=> 'Видалено резервну копію бази даних ##%1##',
 
+	'DbEngineInvalid'			=> 'Недійсний двигун бази даних, очікується %1',
 	'RestoreStarted'			=> 'Почате відновлення',
 	'RestoreParameters'			=> 'Використання параметрів',
 	'IgnoreDuplicatedKeys'		=> 'Ігнорувати дубльовані ключі',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Захист даних - %1 пропущено',
 	'AssumeDropTable'			=> 'Assume %1',
 	'RestoreSQLiteDatabase'		=> 'Відновлення SQLite бази даних',
+	'SQLiteDatabaseRestored'	=> 'Базу даних успішно відновлена:',
 	'RestoreTableStructure'		=> 'Відновлення структури таблиці',
 	'RunSqlQueries'				=> 'Виконання інструкції SQL:',
 	'CompletedSqlQueries'		=> 'Завершено. Оброблені інструкції:',

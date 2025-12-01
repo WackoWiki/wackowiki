@@ -1073,6 +1073,7 @@ questi, ovvero se la richiesta raggiunge il server web da uno dei tuoi proxy inv
 	'BackupRemoved'				=> 'Il backup selezionato è stato rimosso con successo.',
 	'LogRemovedBackup'			=> 'Backup del database rimosso ##%1##',
 
+	'DbEngineInvalid'			=> 'Motore database non valido, prevede %1',
 	'RestoreStarted'			=> 'Ripristino Iniziato',
 	'RestoreParameters'			=> 'Uso dei parametri',
 	'IgnoreDuplicatedKeys'		=> 'Ignora i tasti duplicati',
@@ -1081,6 +1082,7 @@ questi, ovvero se la richiesta raggiunge il server web da uno dei tuoi proxy inv
 	'DataProtection'			=> 'Protezione dei dati - %1 omesso',
 	'AssumeDropTable'			=> 'Assumere %1',
 	'RestoreSQLiteDatabase'		=> 'Ripristino del database SQLite',
+	'SQLiteDatabaseRestored'	=> 'Database ripristinato correttamente da:',
 	'RestoreTableStructure'		=> 'Ripristino della struttura del tavolo',
 	'RunSqlQueries'				=> 'Perform SQL-instructions:',
 	'CompletedSqlQueries'		=> 'Completato. Istruzioni elaborate:',

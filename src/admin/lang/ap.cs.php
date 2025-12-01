@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Vybraná záloha byla úspěšně odstraněna.',
 	'LogRemovedBackup'			=> 'Záloha databáze ##%1 ## byla odstraněna',
 
+	'DbEngineInvalid'			=> 'Neplatný databázový engine, očekává %1',
 	'RestoreStarted'			=> 'Zahájené obnovení',
 	'RestoreParameters'			=> 'Použití parametrů',
 	'IgnoreDuplicatedKeys'		=> 'Ignorovat duplicitní klíče',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Ochrana dat - %1 vynechán',
 	'AssumeDropTable'			=> 'Předpokládat %1',
 	'RestoreSQLiteDatabase'		=> 'Obnovení SQLite databáze',
+	'SQLiteDatabaseRestored'	=> 'Databáze byla úspěšně obnovena z:',
 	'RestoreTableStructure'		=> 'Obnovení struktury tabulky',
 	'RunSqlQueries'				=> 'Provést SQL instrukce:',
 	'CompletedSqlQueries'		=> 'Dokončeno. Zpracované instrukce:',

@@ -1057,6 +1057,7 @@ $ap_translation = [
 	'BackupRemoved'				=> '所选备份已成功删除。',
 	'LogRemovedBackup'			=> '删除了数据库备份##%1##',
 
+	'DbEngineInvalid'			=> 'Invalid database engine, expects %1',
 	'RestoreStarted'			=> '启动恢复',
 	'RestoreParameters'			=> '使用参数',
 	'IgnoreDuplicatedKeys'		=> '忽略重复的键',
@@ -1065,6 +1066,7 @@ $ap_translation = [
 	'DataProtection'			=> '数据保护 - %1 省略',
 	'AssumeDropTable'			=> '假设 %1',
 	'RestoreSQLiteDatabase'		=> '正在恢复 SQLite 数据库',
+	'SQLiteDatabaseRestored'	=> '数据库已成功从:',
 	'RestoreTableStructure'		=> '恢复表结构',
 	'RunSqlQueries'				=> '执行 SQL 指令：',
 	'CompletedSqlQueries'		=> '完全的。 处理指令：',

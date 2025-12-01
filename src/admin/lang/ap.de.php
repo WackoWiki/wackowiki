@@ -1081,6 +1081,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Die ausgewählte Datensicherung wurde erfolgreich entfernt.',
 	'LogRemovedBackup'			=> 'Sicherungskopie gelöscht ##%1##',
 
+	'DbEngineInvalid'			=> 'Ungültige Datenbank-Engine, erwartet %1',
 	'RestoreStarted'			=> 'Beginne mit Wiederherstellung der Datensicherung',
 	'RestoreParameters'			=> 'Verwendete Parameter',
 	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte Schlüssel',
@@ -1089,6 +1090,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Datenschutz - %1 weggelassen',
 	'AssumeDropTable'			=> 'Nehme %1',
 	'RestoreSQLiteDatabase'		=> 'Wiederherstellung der SQLite-Datenbank',
+	'SQLiteDatabaseRestored'	=> 'Datenbank erfolgreich wiederhergestellt von:',
 	'RestoreTableStructure'		=> 'Wiederherstellen der Struktur der Tabelle',
 	'RunSqlQueries'				=> 'Führe SQL-Anweisungen aus:',
 	'CompletedSqlQueries'		=> 'Abgeschlossen. Verarbeitete Anweisungen:',

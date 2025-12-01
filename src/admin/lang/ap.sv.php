@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Den valda säkerhetskopian har tagits bort.',
 	'LogRemovedBackup'			=> 'Borttagen säkerhetskopia av databasen ##%1##',
 
+	'DbEngineInvalid'			=> 'Ogiltig databasmotor, förväntar sig %1',
 	'RestoreStarted'			=> 'Initierad återställning',
 	'RestoreParameters'			=> 'Använda parametrar',
 	'IgnoreDuplicatedKeys'		=> 'Ignorera duplicerade nycklar',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Dataskydd - %1 utelämnad',
 	'AssumeDropTable'			=> 'Anta %1',
 	'RestoreSQLiteDatabase'		=> 'Återställer SQLite-databasen',
+	'SQLiteDatabaseRestored'	=> 'Databasen återställd framgångsrikt från:',
 	'RestoreTableStructure'		=> 'Återställa strukturen på tabellen',
 	'RunSqlQueries'				=> 'Utför SQL-instruktioner:',
 	'CompletedSqlQueries'		=> 'Färdigställd. Bearbetade instruktioner:',

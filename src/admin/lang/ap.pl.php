@@ -1078,6 +1078,7 @@ lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwier
 	'BackupRemoved'				=> 'Wybrana kopia zapasowa została pomyślnie usunięta.',
 	'LogRemovedBackup'			=> 'Usunięto kopię zapasową bazy danych ##%1##',
 
+	'DbEngineInvalid'			=> 'Nieprawidłowy silnik bazy danych, oczekuje %1',
 	'RestoreStarted'			=> 'Rozpoczęto przywracanie',
 	'RestoreParameters'			=> 'Używanie parametrów',
 	'IgnoreDuplicatedKeys'		=> 'Ignoruj zduplikowane klucze',
@@ -1086,6 +1087,7 @@ lub <em>Przywróć</em> w odpowiednim wierszu. (Uwaga, nie jest wymagane potwier
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Przyjmij %1',
 	'RestoreSQLiteDatabase'		=> 'Przywracanie bazy danych SQLite',
+	'SQLiteDatabaseRestored'	=> 'Baza danych przywrócona pomyślnie z:',
 	'RestoreTableStructure'		=> 'Przywracanie struktury tabeli',
 	'RunSqlQueries'				=> 'Wykonaj instrukcje SQL:',
 	'CompletedSqlQueries'		=> 'Ukończone. Przetworzone instrukcje:',

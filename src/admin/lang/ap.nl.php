@@ -1077,6 +1077,7 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 	'BackupRemoved'				=> 'De geselecteerde back-up is met succes verwijderd.',
 	'LogRemovedBackup'			=> 'Database backup ##%1 ## verwijderd',
 
+	'DbEngineInvalid'			=> 'Ongeldige database engine, verwacht %1',
 	'RestoreStarted'			=> 'Herstel geïnitieerd',
 	'RestoreParameters'			=> 'Gebruik parameters',
 	'IgnoreDuplicatedKeys'		=> 'Dubbele toetsen negeren',
@@ -1085,6 +1086,7 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 	'DataProtection'			=> 'Gegevensbescherming - %1 weggelaten',
 	'AssumeDropTable'			=> 'Neem %1 aan',
 	'RestoreSQLiteDatabase'		=> 'De SQLite database herstellen',
+	'SQLiteDatabaseRestored'	=> 'Database succesvol hersteld van:',
 	'RestoreTableStructure'		=> 'Herstellen van de structuur van de tabel',
 	'RunSqlQueries'				=> 'Perform SQL-instructions:',
 	'CompletedSqlQueries'		=> 'Voltooid. Verwerkte instructies:',

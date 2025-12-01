@@ -1067,6 +1067,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Valittu varmuuskopio on onnistuneesti poistettu.',
 	'LogRemovedBackup'			=> 'Tietokannan varmuuskopiointi ##%1##',
 
+	'DbEngineInvalid'			=> 'Virheellinen tietokantamoottori, odottaa %1',
 	'RestoreStarted'			=> 'Alustettu Palautus',
 	'RestoreParameters'			=> 'Parametrien käyttö',
 	'IgnoreDuplicatedKeys'		=> 'Ohita monistetut avaimet',
@@ -1075,6 +1076,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Tietosuoja - %1 jätetty pois',
 	'AssumeDropTable'			=> 'Oletetaan %1',
 	'RestoreSQLiteDatabase'		=> 'SQLite tietokannan palauttaminen',
+	'SQLiteDatabaseRestored'	=> 'Tietokanta palautettu onnistuneesti:',
 	'RestoreTableStructure'		=> 'Taulukon rakenteen palauttaminen',
 	'RunSqlQueries'				=> 'Suorita SQL-ohjeet:',
 	'CompletedSqlQueries'		=> 'Valmis. Käsitellyt ohjeet:',

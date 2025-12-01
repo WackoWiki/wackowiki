@@ -1076,6 +1076,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'O backup selecionado foi removido com sucesso.',
 	'LogRemovedBackup'			=> 'Backup do banco de dados removido ##%1##',
 
+	'DbEngineInvalid'			=> 'Mecanismo de banco de dados inválido, espera %1',
 	'RestoreStarted'			=> 'Restauração iniciada',
 	'RestoreParameters'			=> 'Usando parâmetros',
 	'IgnoreDuplicatedKeys'		=> 'Ignorar chaves duplicadas',
@@ -1084,6 +1085,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Proteção de dados - %1 omitido',
 	'AssumeDropTable'			=> 'Assumir %1',
 	'RestoreSQLiteDatabase'		=> 'Restaurando o banco de dados SQLite',
+	'SQLiteDatabaseRestored'	=> 'Banco de dados restaurado com sucesso de:',
 	'RestoreTableStructure'		=> 'Restaurando a estrutura da tabela',
 	'RunSqlQueries'				=> 'Executar instruções SQL:',
 	'CompletedSqlQueries'		=> 'Concluído. Instruções processadas:',
