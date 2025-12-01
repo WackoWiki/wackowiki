@@ -761,8 +761,6 @@ function sqlite_backup($source_db_path, $backup_dir)
 		throw new RuntimeException('Backup failed: ' . $error);
 	}
 
-	# echo 'Backup created successfully: ' . $backup_file . "\n";
-
 	return $backup_file;
 }
 

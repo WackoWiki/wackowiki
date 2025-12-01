@@ -64,6 +64,12 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						<tr>
 							<td></td>
 							<td>
+								' . ($log['db_engine'] ?? null) . '
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
 								' . (isset($log['size']) ? $engine->factor_multiples($log['size'], 'binary', true, true) : null) . '
 							</td>
 						</tr>
@@ -167,9 +173,25 @@ function admin_db_restore($engine, $module, $tables, $directories)
 	if (	isset($_POST['restore'])
 		&& (isset($_POST['backup_id']) && $_POST['backup_id']))
 	{
+		// read backup log
+		$text				= file_get_contents(Ut::join_path(BACKUP_DIR, $backup_id, BACKUP_FILE_LOG));
+		$log				= Ut::unserialize($text);
+		$log['pack']		= $backup_id;
+		$log['db_engine']	??= 'InnoDB';
+
+
 		if (!$backup_id)
 		{
 			$engine->show_message('Invalid directory format, expects <code>2025_1122_145128</code>', 'error');
+
+			return;
+		}
+		else if ($engine->db->db_engine !== $log['db_engine'])
+		{
+			$engine->show_message(
+				Ut::perc_replace($engine->_t('DbEngineInvalid'), ' <code>' . $engine->db->db_engine . '</code>'),
+				'error'
+			);
 
 			return;
 		}
@@ -177,12 +199,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 		// confirm restore backup
 		if (!isset($_POST['start']))
 		{
-			// read backup log
-			$text			= file_get_contents(Ut::join_path(BACKUP_DIR, $backup_id, BACKUP_FILE_LOG));
-			$log			= Ut::unserialize($text);
-			$log['pack']	= $backup_id;
-
-			$disabled = $engine->db->db_engine == 'SQLite3' ? ' disabled' : '';
+			$disabled = $engine->db->db_engine === 'SQLite3' ? ' disabled' : '';
 
 			echo $engine->form_open('restore_backup');
 
@@ -233,6 +250,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			echo $engine->form_close();
 		}
 
+		// start restore backup
 		if (isset($_POST['start']))
 		{
 			set_time_limit(3600);
@@ -243,10 +261,6 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			// set parameters
 			if (isset($_POST['ignore_keys'])  && $_POST['ignore_keys']	== 1) $ikeys	= true;
 			if (isset($_POST['ignore_files']) && $_POST['ignore_files']	== 1) $ifiles	= true;
-
-			// read backup log
-			$text	= file_get_contents(Ut::join_path(BACKUP_DIR, $pack, BACKUP_FILE_LOG));
-			$log	= Ut::unserialize($text);
 
 			// start process logging
 			$results = date('H:i:s') . ' - ' . $engine->_t('RestoreStarted') . "\n" .
