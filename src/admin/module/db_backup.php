@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['db_backup'] = [
 		'order'	=> 500,
 		'cat'	=> 'database',
-		'status'=> !$db->is_sqlite,
+		'status'=> true,
 	];
 
 ##########################################################
@@ -30,9 +30,9 @@ function admin_db_backup($engine, $module, $tables, $directories)
 		$scheme['data']			= 1;
 	}
 
-	if (isset($_GET['structure'])	&& $_GET['structure']	== 1)	$scheme['structure']	= 1;
-	if (isset($_GET['data'])		&& $_GET['data']		== 1)	$scheme['data']			= 1;
-	if (isset($_GET['files'])		&& $_GET['files']		== 1)	$scheme['files']		= 1;
+	if (isset($_GET['structure'])	&& $_GET['structure']	== 1)	{$scheme['structure']	= 1;}
+	if (isset($_GET['data'])		&& $_GET['data']		== 1)	{$scheme['data']		= 1;}
+	if (isset($_GET['files'])		&& $_GET['files']		== 1)	{$scheme['files']		= 1;}
 
 	$getstr = '';
 
@@ -60,9 +60,9 @@ function admin_db_backup($engine, $module, $tables, $directories)
 
 		$time		= time();				// backup time (unix format)
 		$pack		= set_pack_dir($time);	// backup directory
-		$note		= $_POST['log_note'] ?? '';
+		$note		= (string) ($_POST['log_note'] ?? '');
 		$note		= $engine->sanitize_text_field($note, true);
-		$root		= $_POST['root'] ?? '';
+		$root		= (string) ($_POST['root'] ?? '');
 		$engine->sanitize_page_tag($root);
 		$data		= [];
 		$structure	= [];
@@ -83,7 +83,11 @@ function admin_db_backup($engine, $module, $tables, $directories)
 			else if ($key == 'data' && $val)
 			{
 				$data[] = $val;
-				get_data($engine, $tables, $pack, $val, $root);
+
+				if ($engine->db->db_engine == 'InnoDB')
+				{
+					get_data($engine, $tables, $pack, $val, $root);
+				}
 			}
 			// compress files
 			else if ($key == 'files' && $val)
@@ -93,69 +97,84 @@ function admin_db_backup($engine, $module, $tables, $directories)
 			}
 		}
 
-		// write sql for recreating selected tables
-		if ($structure)
+		if ($engine->db->db_engine == 'SQLite3')
 		{
-			foreach ($structure as $table)
+			try
 			{
-				// check whether table data was backed up
-				if (in_array($table, $data) && !$root)
-				{
-					$drop = 1;
-				}
-				else
-				{
-					$drop = 0;
-				}
-
-				// force drop for tables w/o WHERE clause
-				if (in_array($table, $data)
-					&& $tables[$table]['where'] === false)
-				{
-					$drop = 1;
-				}
-
-				// ...and for these specific tables
-				if ($table == $engine->prefix . 'cache'
-				||  $table == $engine->prefix . 'log'
-				||  $table == $engine->prefix . 'referrer')
-				{
-					$drop = 1;
-				}
-
-				$sql .= get_table($engine, $table, $drop) . "\n";
+				sqlite_backup($engine->db->db_name, $pack);
 			}
+			catch (Exception $e)
+			{
+				echo 'Restore failed: ' . $e->getMessage() . "\n";
+			}
+
 		}
-
-		// save sql to the disk
-		if ($sql)
+		else
 		{
-			// check file existence
-			clearstatcache();
-			$filename = $pack . BACKUP_FILE_STRUCTURE;
-
-			if (file_exists($filename) === true)
+			// write sql for recreating selected tables
+			if ($structure)
 			{
-				unlink($filename);
+				foreach ($structure as $table)
+				{
+					// check whether table data was backed up
+					if (in_array($table, $data) && !$root)
+					{
+						$drop = 1;
+					}
+					else
+					{
+						$drop = 0;
+					}
+
+					// force drop for tables w/o WHERE clause
+					if (in_array($table, $data)
+						&& $tables[$table]['where'] === false)
+					{
+						$drop = 1;
+					}
+
+					// ...and for these specific tables
+					if ($table == $engine->prefix . 'cache'
+					||  $table == $engine->prefix . 'log'
+					||  $table == $engine->prefix . 'referrer')
+					{
+						$drop = 1;
+					}
+
+					$sql .= get_table($engine, $table, $drop) . "\n";
+				}
 			}
 
-			// open file with write access
-			$file = fopen($filename, 'w');
+			// save sql to the disk
+			if ($sql)
+			{
+				// check file existence
+				clearstatcache();
+				$file_name = Ut::join_path($pack, BACKUP_FILE_STRUCTURE);
 
-			// write data (strip last semicolon off the sql)
-			// and close file
-			fwrite($file, $sql); // see array_pop($sql); on database.php
-			fclose($file);
-			chmod($filename, CHMOD_FILE);
+				if (file_exists($file_name) === true)
+				{
+					unlink($file_name);
+				}
+
+				// open file with write access
+				$file = fopen($file_name, 'w');
+
+				// write data (strip last semicolon off the sql)
+				// and close file
+				fwrite($file, $sql); // see array_pop($sql); on database.php
+				fclose($file);
+				chmod($file_name, CHMOD_FILE);
+			}
 		}
 
 		// save backup log
 		clearstatcache();
-		$filename = $pack . BACKUP_FILE_LOG;
+		$file_name = Ut::join_path($pack, BACKUP_FILE_LOG);
 
-		if (file_exists($filename) === true)
+		if (file_exists($file_name) === true)
 		{
-			unlink($filename);
+			unlink($file_name);
 		}
 
 		// log contents
@@ -166,6 +185,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 			'data'			=> implode(';', $data),
 			'files'			=> implode(';', $files),
 			'wacko_version'	=> WACKO_VERSION,
+			'db_engine'		=> $engine->db->db_engine,
 			'size'			=> get_directory_size($pack),
 			'note'			=> $note,
 			// TODO: add metadata to avoid conflicts
@@ -177,8 +197,8 @@ function admin_db_backup($engine, $module, $tables, $directories)
 		$text = Ut::serialize($contents, JSON_PRETTY_PRINT);
 
 		// write log file
-		file_put_contents($filename, $text);
-		chmod($filename, CHMOD_FILE);
+		file_put_contents($file_name, $text);
+		chmod($file_name, CHMOD_FILE);
 
 		$engine->log(1, Ut::perc_replace($engine->_t('LogSavedBackup', SYSTEM_LANG), trim($pack, '/')));
 
@@ -204,17 +224,19 @@ function admin_db_backup($engine, $module, $tables, $directories)
 		{
 ?>
 		<p>
-			<?php echo $engine->_t('BackupSettings'); ?>
+			<?php if ($engine->db->db_engine === 'InnoDB') {echo $engine->_t('BackupSettings');} ?>
 		</p>
 		<br>
 
 <?php
+		$disabled = $engine->db->db_engine === 'SQLite3' ? ' disabled' : '';
+
 		echo $engine->form_open('backup');
 ?>
 			<table class="backup formation lined">
 				<tr>
 					<th class="label"><label for="root"><?php echo $engine->_t('BackupCluster'); ?></label></th>
-					<td colspan="2"><input type="text" id="root" name="root" size="30" value=""></td>
+					<td colspan="2"><input type="text" id="root" name="root" size="30" value=""<?php echo $disabled; ?>></td>
 				</tr>
 				<tr><td colspan="3"><br></td></tr>
 				<tr>
@@ -237,10 +259,10 @@ function admin_db_backup($engine, $module, $tables, $directories)
 				echo '<tr>' .
 						'<td class="label">' . $table['name'] . '</td>' .
 						'<td class="t-center">
-							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] ? ' checked' : '') . '>
+							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] ? ' checked' : '') . $disabled . '>
 						</td>' .
 						'<td class="t-center">
-							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] ? ' checked' : '') . '>
+							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] ? ' checked' : '') . $disabled . '>
 						</td>' .
 					'</tr>' . "\n";
 			}
@@ -258,7 +280,7 @@ function admin_db_backup($engine, $module, $tables, $directories)
 				$i++;
 				$check = false;
 
-				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR || CACHE_TEMPLATE_DIR || THUMB_DIR))
+				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR || CACHE_TEMPLATE_DIR || THUMB_DIR || THUMB_LOCAL_DIR))
 				//{
 					$check = true;
 				//}

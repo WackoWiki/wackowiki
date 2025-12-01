@@ -469,7 +469,7 @@ function get_data($engine, $tables, $pack, $table, $root = ''): int
 
 	// check file existence
 	clearstatcache();
-	$file_name = $pack . $table . BACKUP_FILE_DUMP_SUFFIX;
+	$file_name = Ut::join_path($pack, $table, BACKUP_FILE_DUMP_SUFFIX);
 
 	if (file_exists($file_name) === true)
 	{
@@ -720,6 +720,77 @@ function put_data($engine, $pack, $table, $mode): int
 	gzclose($file);
 
 	return $t;
+}
+
+function sqlite_backup($source_db_path, $backup_dir)
+{
+	// Validate source database
+	if (!file_exists($source_db_path))
+	{
+		throw new RuntimeException('Source database not found: ' . $source_db_path);
+	}
+
+	// Ensure backup directory exists
+	ensure_dir($backup_dir);
+
+	$backup_file = Ut::join_path($backup_dir, 'backup.db');
+
+	// Check if backup file already exists (shouldn't due to timestamp)
+	if (file_exists($backup_file))
+	{
+		throw new RuntimeException('Backup file already exists: ' . $backup_file);
+	}
+
+	// Open connection to source database
+	$db = new SQLite3($source_db_path, SQLITE3_OPEN_READONLY);
+
+	if (!$db)
+	{
+		throw new RuntimeException('Failed to open database: ' . $source_db_path);
+	}
+
+	// Execute VACUUM INTO command
+	$sql	= "VACUUM INTO '$backup_file'";
+	$result	= $db->exec($sql);
+
+	$db->close();
+
+	if (!$result)
+	{
+		$error = $db->lastErrorMsg();
+		throw new RuntimeException('Backup failed: ' . $error);
+	}
+
+	# echo 'Backup created successfully: ' . $backup_file . "\n";
+
+	return $backup_file;
+}
+
+function sqlite_restore($pack, $target_db_path)
+{
+	$backup_file = Ut::join_path(BACKUP_DIR, $pack, 'backup.db');
+
+	if (!file_exists($backup_file))
+	{
+		throw new RuntimeException('Backup file not found: ' . $backup_file);
+	}
+
+	// Optionally, back up current DB before overwriting
+	/* if (file_exists($target_db_path))
+	{
+		$restore_backup = $target_db_path . '.restore_backup_' . date('Y-m-d_H-i-s');
+		copy($target_db_path, $restore_backup);
+
+		echo 'Existing database backed up to: ' . $restore_backup . "\n";
+	} */
+
+	// Perform restore
+	if (!copy($backup_file, $target_db_path))
+	{
+		throw new RuntimeException('Failed to restore database to: ' . $target_db_path);
+	}
+
+	# echo 'Database restored successfully from: ' . $backup_file . \n";
 }
 
 // decompress files and restore them into the filesystem

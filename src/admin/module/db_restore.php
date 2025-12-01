@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['db_restore'] = [
 		'order'	=> 501,
 		'cat'	=> 'database',
-		'status'=> !$db->is_sqlite,
+		'status'=> true,
 	];
 
 ##########################################################
@@ -164,15 +164,25 @@ function admin_db_restore($engine, $module, $tables, $directories)
 	};
 
 	// RESTORE backup
-	if (    isset($_POST['restore'])
+	if (	isset($_POST['restore'])
 		&& (isset($_POST['backup_id']) && $_POST['backup_id']))
 	{
+		if (!$backup_id)
+		{
+			$engine->show_message('Invalid directory format, expects <code>2025_1122_145128</code>', 'error');
+
+			return;
+		}
+
 		// confirm restore backup
 		if (!isset($_POST['start']))
 		{
 			// read backup log
-			$text	= file_get_contents(Ut::join_path(BACKUP_DIR, $backup_id, BACKUP_FILE_LOG));
-			$log	= Ut::unserialize($text);
+			$text			= file_get_contents(Ut::join_path(BACKUP_DIR, $backup_id, BACKUP_FILE_LOG));
+			$log			= Ut::unserialize($text);
+			$log['pack']	= $backup_id;
+
+			$disabled = $engine->db->db_engine == 'SQLite3' ? ' disabled' : '';
 
 			echo $engine->form_open('restore_backup');
 
@@ -197,7 +207,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 					'<tr>
 						<td colspan="2">
 							<strong>' . $engine->_t('RestoreOptions') . '</strong><br>
-							<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1">
+							<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1"' . $disabled .'>
 							<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeysNr') . ' *</small></label><br>
 							<input type="checkbox" id="ignore_files" name="ignore_files" value="1">
 							<label for="ignore_files"><small>' . $engine->_t('IgnoreSameFiles') . ' **</small></label><br>
@@ -251,68 +261,87 @@ function admin_db_restore($engine, $module, $tables, $directories)
 						: 'AssumeDropTable'), SYSTEM_LANG), 'DROP TABLE') . "\n" .
 				'</strong>' . "\n\n";
 
-			// request structure restore
-			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreTableStructure') . "\n" .
-				'––––––––––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
-
-			if ($log['structure'])
+			if ($log['db_engine'] === 'SQLite3')
 			{
-				$results .= '<strong>' . $engine->_t('RunSqlQueries') . '</strong>' . "\n\n";
-				$results .= file_get_contents(Ut::join_path(BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE)) . "\n\n";
+				// request db restore
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreSQLiteDatabase') . "\n" .
+					'––––––––––––––––––––––––––––––––––––––––––––––––</strong>'  . "\n\n\n";
 
-				// run
-				$total = put_table($engine, $pack);
-
-				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('CompletedSqlQueries') . ' ' . $total . '</strong>' . "\n\n\n";
-			}
-			else
-			{
-				$results .= '<strong>' . $engine->_t('NoTableStructure') . '</strong>' . "\n\n\n";
-			}
-
-			// request data restore
-			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreRecords') . "\n" .
-				'––––––––––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
-
-			if ($log['data'])
-			{
-				$list = explode(';', $log['data']);
-
-				// sql mode
-				if		(!$log['cluster'])	$mode = 'INSERT';
-				else if	($ikeys === true)	$mode = 'INSERT IGNORE';
-				else if	(!$ikeys)			$mode = 'REPLACE';
-
-				$results .= '<strong>' . $engine->_t('ProcessTablesDump') . "\n" .
-					'(' . $engine->_t('Instruction') . ' ' . $mode . '):</strong>' . "\n\n";
-
-				// run
-				$overall = 0;
-
-				foreach ($list as $table)
+				try
 				{
-					// force sql mode for some tables
-					if (($table == $tables[$engine->prefix . 'acl']['name']
-					||   $table == $tables[$engine->prefix . 'file_link']['name']
-					||   $table == $tables[$engine->prefix . 'page_link']['name'])
-					&& !$ikeys)
-					{
-						$mode = 'REPLACE';
-					}
-					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $table."\n" .
-						"\t" . '––––––––––––––––––––––––––</strong>' . "\n";
-
-					$total		= put_data($engine, $pack, $table, $mode);
-					$overall	+= $total;
-
-					$results .= "\t\t" . $engine->_t('RestoredRecords') . '   ' . $total . "\n\n";
+					sqlite_restore($pack, $engine->db->db_name);
+				}
+				catch (Exception $e)
+				{
+					echo 'Restore failed: ' . $e->getMessage() . "\n";
 				}
 
-				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RecordsRestoreDone') . ' ' . $overall . '</strong>' . "\n\n\n";
 			}
-			else
+			else #if ($log['db_engine'] === 'InnoDB')
 			{
-				$results .= '<strong>' . $engine->_t('SkippedRecords') . '</strong>' . "\n\n\n";
+				// request structure restore
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreTableStructure') . "\n" .
+					'––––––––––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
+
+				if ($log['structure'])
+				{
+					$results .= '<strong>' . $engine->_t('RunSqlQueries') . '</strong>' . "\n\n";
+					$results .= file_get_contents(Ut::join_path(BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE)) . "\n\n";
+
+					// run
+					$total = put_table($engine, $pack);
+
+					$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('CompletedSqlQueries') . ' ' . $total . '</strong>' . "\n\n\n";
+				}
+				else
+				{
+					$results .= '<strong>' . $engine->_t('NoTableStructure') . '</strong>' . "\n\n\n";
+				}
+
+				// request data restore
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreRecords') . "\n" .
+					'––––––––––––––––––––––––––––––––––––––––––––––––</strong>' . "\n";
+
+				if ($log['data'])
+				{
+					$list = explode(';', $log['data']);
+
+					// sql mode
+					if		(!$log['cluster'])	$mode = 'INSERT';
+					else if	($ikeys === true)	$mode = 'INSERT IGNORE';
+					else if	(!$ikeys)			$mode = 'REPLACE';
+
+					$results .= '<strong>' . $engine->_t('ProcessTablesDump') . "\n" .
+						'(' . $engine->_t('Instruction') . ' ' . $mode . '):</strong>' . "\n\n";
+
+					// run
+					$overall = 0;
+
+					foreach ($list as $table)
+					{
+						// force sql mode for some tables
+						if (($table == $tables[$engine->prefix . 'acl']['name']
+						||   $table == $tables[$engine->prefix . 'file_link']['name']
+						||   $table == $tables[$engine->prefix . 'page_link']['name'])
+						&& !$ikeys)
+						{
+							$mode = 'REPLACE';
+						}
+						$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $table."\n" .
+							"\t" . '––––––––––––––––––––––––––</strong>' . "\n";
+
+						$total		= put_data($engine, $pack, $table, $mode);
+						$overall	+= $total;
+
+						$results .= "\t\t" . $engine->_t('RestoredRecords') . '   ' . $total . "\n\n";
+					}
+
+					$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RecordsRestoreDone') . ' ' . $overall . '</strong>' . "\n\n\n";
+				}
+				else
+				{
+					$results .= '<strong>' . $engine->_t('SkippedRecords') . '</strong>' . "\n\n\n";
+				}
 			}
 
 			// request files restore
@@ -505,13 +534,14 @@ function admin_db_restore($engine, $module, $tables, $directories)
 				if (!empty($logs))
 				{
 					echo $control_buttons;
-	?>
-					<table class="restore formation">
+
+					echo
+					'<table class="restore formation">
 						<tr>
-							<th><?php echo $engine->_t('BackupCreationDate');?></th>
-							<th><?php echo $engine->_t('BackupPackageContents');?></th>
-						</tr>
-	<?php
+							<th>' . $engine->_t('BackupCreationDate') . '</th>
+							<th>' . $engine->_t('BackupPackageContents') . '</th>
+						</tr>';
+
 					// sort 'creation date' descending with custom numeric comparisons function
 					usort($logs, function (array $a, array $b) { return $b['time'] - $a['time']; });
 
