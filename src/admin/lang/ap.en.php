@@ -1075,6 +1075,7 @@ $ap_translation = [
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
 	'RestoreSQLiteDatabase'		=> 'Restoring the SQLite database',
+	'SQLiteDatabaseRestored'	=> 'Database restored successfully from:',
 	'RestoreTableStructure'		=> 'Restoring the structure of the table',
 	'RunSqlQueries'				=> 'Perform SQL instructions:',
 	'CompletedSqlQueries'		=> 'Completed. Processed instructions:',

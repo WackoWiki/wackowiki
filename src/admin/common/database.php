@@ -790,7 +790,7 @@ function sqlite_restore($pack, $target_db_path)
 		throw new RuntimeException('Failed to restore database to: ' . $target_db_path);
 	}
 
-	# echo 'Database restored successfully from: ' . $backup_file . \n";
+	return $backup_file;
 }
 
 // decompress files and restore them into the filesystem
