@@ -39,11 +39,11 @@ $ap_translation = [
 	'SiteOpen'					=> 'Abertas',
 	'SiteOpened'				=> 'site aberto',
 	'SiteOpenedTip'				=> 'O site está aberto',
-	'SiteClose'					=> 'FECHAR',
+	'SiteClose'					=> 'Fechar',
 	'SiteClosed'				=> 'site fechado',
 	'SiteClosedTip'				=> 'O site está fechado',
 
-	'System'					=> 'SISTEMA',
+	'System'					=> 'Sistema',
 
 	// Generic
 	'Cancel'					=> 'cancelar',
@@ -86,7 +86,7 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'e-mail',
+		'name'		=> 'E-mail',
 		'title'		=> 'Configurações de email',
 	],
 
@@ -98,7 +98,7 @@ $ap_translation = [
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'filtro',
+		'name'		=> 'Filtro',
 		'title'		=> 'Configurações de filtro',
 	],
 
@@ -110,13 +110,13 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'notificações',
+		'name'		=> 'Notificações',
 		'title'		=> 'Configurações de notificações',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'páginas',
+		'name'		=> 'Páginas',
 		'title'		=> 'Parâmetros do site e páginas',
 	],
 
@@ -134,7 +134,7 @@ $ap_translation = [
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'SISTEMA',
+		'name'		=> 'Sistema',
 		'title'		=> 'Opções de sistema',
 	],
 
@@ -170,7 +170,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'RESTAURAR',
+		'name'		=> 'Restaurar',
 		'title'		=> 'Restaurando dados do backup',
 	],
 
@@ -218,7 +218,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'estatísticas',
+		'name'		=> 'Estatísticas',
 		'title'		=> 'Mostrar estatísticas',
 	],
 
@@ -236,7 +236,7 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'grupos',
+		'name'		=> 'Grupos',
 		'title'		=> 'Gerenciamento de grupos',
 	],
 
@@ -267,7 +267,7 @@ $ap_translation = [
 	'AdminName'					=> 'Administrador do site:',
 	'AdminNameInfo'				=> 'Nome de usuário do indivíduo responsável pelo apoio global do site. Este nome não é usado para determinar permissões de acesso, mas é desejável que esteja de acordo com o nome do administrador-chefe do site.',
 
-	'LanguageSection'			=> 'IDIOMA',
+	'LanguageSection'			=> 'Idioma',
 	'DefaultLanguage'			=> 'Idioma padrão:',
 	'DefaultLanguageInfo'		=> 'Especifica o idioma das mensagens exibidas para visitantes não registrados, bem como as configurações de localidade.',
 	'MultiLanguage'				=> 'Suporte a Multilinguagem:',
@@ -477,15 +477,15 @@ $ap_translation = [
 	'ReverseProxyInfo'			=> 'Ativar esta configuração para determinar o endereço IP correto do cliente remoto examinando informações armazenadas nos cabeçalhos X-Forwarded-para. Os cabeçalhos X-Forwarded-For são um mecanismo padrão para identificar sistemas de clientes se conectando através de um servidor proxy reverso, como Lula ou Pound. Servidores de proxy reversos são frequentemente usados para melhorar o desempenho de sites visitados fortemente e também podem fornecer outros benefícios de cache, segurança ou encriptação do site. Se esta instalação do WackoWiki opera atrás de um proxy reverso, essa configuração deve ser habilitada para que informações corretas de endereço IP sejam capturadas nos sistemas de gerenciamento de sessão do WackoWiki; se você não tiver certeza sobre essa configuração, não tenha um proxy reverso, ou WackoWiki opera em um ambiente de hospedagem compartilhada, esta configuração deve permanecer desativada.',
 	'ReverseProxyHeader'		=> 'Cabeçalho do proxy revertido:',
 	'ReverseProxyHeaderInfo'	=> 'Defina este valor se o seu servidor proxy enviar o IP do cliente em um cabeçalho
-									 ├├├├├├other than X-Forwarded-For. O cabeçalho "X-Forwarded-for" é uma lista de IPA delimitada por vírgulas
+									 other than X-Forwarded-For. O cabeçalho "X-Forwarded-for" é uma lista de IPA delimitada por vírgulas
 									 econtramenginédita. Somente o último (o mais à esquerda) será utilizado.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy aceita um array de endereços IP:',
-	'ReverseProxyAddressesInfo'	=> 'Cada elemento desta matriz é o endereço IP de qualquer um dos seus aparelhos
-									 reverso A,format@@0 ├├├├├™️. Se estiver usando este array, O WackoWiki confiará na informação armazenada
-									 ├├├├├in the X-Forwarded-For somente se o endereço IP remoto é um de
-									 ├├├├├├these, ou seja, a solicitação chega ao servidor da web a partir de um dos seus procuradores
-									 de A-format@@3 「├├├├reverse proxies. Caso contrário, o cliente pode se conectar diretamente à
-									 anormalheia de seu servidor web falsificando cabeçalhos de Encaminhamento X-Forwarded-para.',
+	'ReverseProxyAddressesInfo'	=> 'Cada elemento desta matriz é o endereço IP de qualquer um dos seus proxies reversos.
+									Se utilizar esta matriz, o WackoWiki confiará nas informações armazenadas
+									nos cabeçalhos X-Forwarded-For apenas se o endereço IP remoto for um destes
+									esses, ou seja, a solicitação chega ao servidor web a partir de um dos seus
+									proxies reversos. Caso contrário, o cliente poderia se conectar diretamente ao
+									seu servidor web falsificando os cabeçalhos X-Forwarded-For.',
 
 	'SessionSection'				=> 'Manipulação da Sessão',
 	'SessionStorage'				=> 'Armazenamento de sessão:',
@@ -551,7 +551,7 @@ $ap_translation = [
 	'UsernameLength'			=> 'Tamanho do usuário:',
 	'UsernameLengthInfo'		=> 'Número mínimo e máximo de caracteres em nomes de usuário.',
 
-	'EmailSection'				=> 'e-mail',
+	'EmailSection'				=> 'E-mail',
 	'AllowEmailReuse'			=> 'Permitir endereço de e-mail reutilização:',
 	'AllowEmailReuseInfo'		=> 'Usuários diferentes podem se registrar com o mesmo endereço de e-mail.',
 	'EmailConfirmation'			=> 'Forçar confirmação do e-mail:',
@@ -678,8 +678,8 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), ex.: <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Timezone:',
 	'TimezoneInfo'				=> 'Fuso horário para exibir horários para usuários que não estão conectados (convidados). Os usuários conectados podem alterar seu fuso horário em suas configurações de usuário.',
-	'AmericanDate'					=> 'Data americana:',
-	'AmericanDateInfo'				=> 'Usa o formato de data Americano como padrão para Inglês.',
+	'AmericanDate'				=> 'Data americana:',
+	'AmericanDateInfo'			=> 'Usa o formato de data Americano como padrão para Inglês.',
 
 	'Canonical'					=> 'Usar URLs totalmente canônicos:',
 	'CanonicalInfo'				=> 'Todos os links são criados como URLs absolutas no formulário %1. URLs relativas à raiz do servidor no formulário %2 devem ser preferidas.',
@@ -932,9 +932,7 @@ $ap_translation = [
 	'MaxImageWidthInfo'			=> 'A largura máxima que uma imagem pode ter nas páginas, caso contrário, uma miniatura redimensionada será gerada.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'Lista de páginas removidas, revisões e arquivos. U
-									eé-vésprima&rbbamprrrb+rrbwrrrb+rba&rbr e restaurar as páginas, revisões ou arquivos do banco de dados clicando sobre o link <em>Remover</em>
-									├├├├├├├├and <em>Restaurar</em> na linha correspondente. (Cuidado, nenhuma confirmação de exclusão foi solicitada!)',
+	'DeletedObjectsInfo'		=> 'Lista de páginas, revisões e arquivos removidos. Remova ou restaure as páginas, revisões ou arquivos do banco de dados clicando no link <em>Remover</em> ou <em>Restaurar</em> na linha correspondente. (Cuidado, nenhuma confirmação de exclusão é solicitada!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Palavras que serão automaticamente censuradas no seu Wiki.',
@@ -1018,7 +1016,7 @@ $ap_translation = [
 	'UserApproveInfo'			=> 'Aprovar novos usuários antes que eles possam acessar o site.',
 	'Approve'					=> 'Aprovar',
 	'Deny'						=> 'Recusar',
-	'Pending'					=> 'PENDENTE',
+	'Pending'					=> 'Pendente',
 	'Approved'					=> 'Aceito',
 	'Denied'					=> 'Negado',
 
@@ -1102,7 +1100,7 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Data de Criação',
 	'BackupPackageContents'		=> 'O conteúdo do pacote',
-	'BackupRestore'				=> 'RESTAURAR',
+	'BackupRestore'				=> 'Restaurar',
 	'BackupRemove'				=> 'Excluir',
 	'RestoreYes'				=> 'sim',
 	'RestoreNo'					=> 'Não',
@@ -1125,7 +1123,7 @@ $ap_translation = [
 	'UsersRenameInfo'			=> '* Nota: A alteração afetará todas as páginas que são atribuídas a este usuário.',
 	'UsersUpdated'				=> 'Usuário atualizado com sucesso.',
 
-	'UserIP'					=> 'PI',
+	'UserIP'					=> 'IP',
 	'UserSignuptime'			=> 'Cadastro',
 	'UserActions'				=> 'Ações.',
 	'NoMatchingUser'			=> 'Nenhum usuário que atenda ao critério',
