@@ -1,5 +1,5 @@
 
-WackoWiki
+# WackoWiki
 
 Small, lightweight, handy, expandable Wiki written in PHP.
 

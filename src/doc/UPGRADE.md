@@ -1,18 +1,18 @@
 
-UPGRADING FROM AN EARLIER VERSION:
+# UPGRADING FROM AN EARLIER VERSION:
 
 Just unpack the new distribution archive wherever you need/want it; all you need from
 your old WackoWiki installation is config.php and the file folder. You can also just
 copy the new files over the old ones, but be careful not to overwrite your old
-config.php or any customizations you may have applied to the source files.
+`config.php` or any customizations you may have applied to the source files.
 
 Once the files are in place, browse to your WackoWiki. The update script should show
 up automatically.
 
 Note: Before you complete the update script, everybody who will browse to your WackoWiki
 will see it, too. So if you run a relatively high traffic site, you may want to lock
-down your Wacko installation temporarily by placing a file called "lock_setup" into your
-"config/" directory; once Wacko sees it, it will ask for a a password (whatever you put into that file). 
-Don't forget to remove the "lock_setup" file once you're done with upgrading!
+down your Wacko installation temporarily by placing a file called `lock_setup` into your
+`config/` directory; once Wacko sees it, it will ask for a a password (whatever you put into that file). 
+Don't forget to remove the `lock_setup` file once you're done with upgrading!
 
-More details on https://wackowiki.org/doc/Doc/English/Upgrade.
+More details on https://wackowiki.org/doc/Doc/English/Upgrade
