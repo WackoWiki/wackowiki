@@ -21,7 +21,7 @@ EOD;
 $byname		??= 0;
 $help		??= 0;
 $max		??= null;
-$profile	??= null; // user action
+$profile	??= []; // user action
 $title		??= 0;
 
 if ($help)
