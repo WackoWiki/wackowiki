@@ -1026,7 +1026,7 @@ $ap_translation = [
 	'BackupFolder'				=> 'pasta',
 	'BackupTable'				=> 'Classificações',
 	'BackupCluster'				=> 'Cluster:',
-	'BackupFiles'				=> 'arquivos',
+	'BackupFiles'				=> 'Arquivos',
 	'BackupNote'				=> 'Nota:',
 	'BackupSettings'			=> 'Especifique o esquema de backup desejado.<br>' .
     	'O cluster raiz não afeta o backup dos arquivos globais e o backup dos arquivos de cache (se escolhido, eles são sempre salvos na íntegra).<br>' .  '<br>' .
@@ -1183,8 +1183,8 @@ $ap_translation = [
 	'DbTotal'					=> 'Total:',
 
 	'FileStatSection'			=> 'Estatísticas do Sistema de Arquivos',
-	'FileFolder'				=> 'pasta',
-	'FileFiles'					=> 'arquivos',
+	'FileFolder'				=> 'Pasta',
+	'FileFiles'					=> 'Arquivos',
 	'FileSize'					=> 'Tamanho',
 	'FileTotal'					=> 'Total:',
 
@@ -1238,7 +1238,7 @@ $ap_translation = [
 	'Inconsistencies'			=> 'Inconsistências',
 	'CheckDatabase'				=> 'Banco',
 	'CheckDatabaseInfo'			=> 'Verifica se há inconsistências de registro no banco de dados.',
-	'CheckFiles'				=> 'arquivos',
+	'CheckFiles'				=> 'Arquivos',
 	'CheckFilesInfo'			=> 'Verifica arquivos abandonados, arquivos sem referência deixados na tabela de arquivos.',
 	'Records'					=> 'registros',
 	'InconsistenciesNone'		=> 'Nenhuma inconsistência de dados encontrada.',
