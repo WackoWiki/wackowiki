@@ -31,6 +31,7 @@ class DiffEngine
 	private array $xv;
 	private array $yv;
 	private int $lcs;
+	private array $seq;
 	private array $in_seq;
 
 	function diff ($from_lines, $to_lines)
