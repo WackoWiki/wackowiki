@@ -33,10 +33,30 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 		<tr>
 			<th><?php echo $engine->_t('DbTable');?></th>
 			<th><?php echo $engine->_t('DbRecords');?></th>
+			<th><?php echo $engine->_t('DbSize');?></th>
 		</tr>
 <?php
-	$results = $engine->db->load_all("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;", true);
+	$results	= $engine->db->load_all("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;", true);
 	$trows		= 0;
+	$tdata		= 0;
+	$has_dbstat	= false;
+
+	foreach ($engine->db->load_all("PRAGMA compile_options") as $row)
+	{
+		if ($row['compile_options'] === 'ENABLE_DBSTAT_VTAB')
+		{
+			$has_dbstat = true;
+			break;
+		}
+	}
+
+	if (!$has_dbstat)
+	{
+		if (file_exists($engine->db->db_name))
+		{
+			$db_size = filesize($engine->db->db_name);
+		}
+	}
 
 	foreach ($results as $table)
 	{
@@ -50,13 +70,23 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 				// Count rows in the current table
 				$table['rows'] = $engine->db->load_single("SELECT COUNT(*) AS n FROM $safe_table")['n'];
 
+				$table['size'] = 0;
+
+				// SQLite compiled with SQLITE_ENABLE_DBSTAT_VTAB
+				if ($has_dbstat)
+				{
+					$table['size'] = $engine->db->load_single('SELECT SUM("pgsize") FROM "dbstat" WHERE name=$safe_table');
+				}
+
 				echo
 				'<tr>' .
 					'<th class="label"><strong>' . $table['name'] . '</strong></th>' .
 					'<td>' . $engine->number_format($table['rows']) . '</td>' .
+					'<td>' . ($table['size'] ? $engine->factor_multiples($table['size'], 'binary', true, true) : '-') . '</td>' .
 				'</tr>' . "\n";
 
 				$trows	+= $table['rows'];
+				$tdata	+= $table['size'];
 			}
 		}
 	}
@@ -65,6 +95,7 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 		'<tr>' .
 			'<td class="label"><strong>' . $engine->_t('DbTotal') . ':</strong></td>' .
 			'<td><strong>' . $engine->number_format($trows) . '</strong></td>' .
+			'<td><strong>' . $engine->factor_multiples(($tdata ?: $db_size), 'binary', true, true) . '</strong></td>' .
 		'</tr>' . "\n";
 		?>
 	</table>
