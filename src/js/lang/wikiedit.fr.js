@@ -53,7 +53,7 @@ lang = {
 							' Ctrl+B - Gras\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Souligner\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
+							' Ctrl+Shift+S - Barré\n'+
 							' Ctrl+Shift+1 .. 4 - En-tête 1..4\n'+
 							' Alt+I ou Ctrl+T - Indentation\n'+
 							' Alt+U ou Ctrl+Shift+T - Unindent\n'+

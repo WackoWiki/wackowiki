@@ -26,7 +26,51 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 	<?php echo $engine->_t('DbStatSection');?>
 	<br>
 	<br>
-	<?php if (!$engine->db->is_sqlite)
+	<?php if ($engine->db->is_sqlite)
+	{
+	?>
+	<table class="db-stats formation lined">
+		<tr>
+			<th><?php echo $engine->_t('DbTable');?></th>
+			<th><?php echo $engine->_t('DbRecords');?></th>
+		</tr>
+<?php
+	$results = $engine->db->load_all("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;", true);
+	$trows		= 0;
+
+	foreach ($results as $table)
+	{
+		foreach ($tables as $wtable)
+		{
+			if ($table['name'] == $wtable['name'])
+			{
+				// Escape table name in case of special characters
+				$safe_table = '"' . str_replace('"', '""', $table['name']) . '"';
+
+				// Count rows in the current table
+				$table['rows'] = $engine->db->load_single("SELECT COUNT(*) AS n FROM $safe_table")['n'];
+
+				echo
+				'<tr>' .
+					'<th class="label"><strong>' . $table['name'] . '</strong></th>' .
+					'<td>' . $engine->number_format($table['rows']) . '</td>' .
+				'</tr>' . "\n";
+
+				$trows	+= $table['rows'];
+			}
+		}
+	}
+
+	echo
+		'<tr>' .
+			'<td class="label"><strong>' . $engine->_t('DbTotal') . ':</strong></td>' .
+			'<td><strong>' . $engine->number_format($trows) . '</strong></td>' .
+		'</tr>' . "\n";
+		?>
+	</table>
+	<?php
+	}
+	else
 	{
 	?>
 	<table class="db-stats formation lined">
@@ -41,7 +85,6 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 	$trows		= 0;
 	$tdata		= 0;
 	$tindex		= 0;
-	$tfrag		= 0;
 
 	foreach ($results as $table)
 	{
@@ -60,7 +103,6 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 				$trows	+= $table['Rows'];
 				$tdata	+= $table['Data_length'];
 				$tindex	+= $table['Index_length'];
-				$tfrag	+= $table['Data_free'];
 			}
 		}
 	}
@@ -71,10 +113,6 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 			'<td><strong>' . $engine->number_format($trows) . '</strong></td>' .
 			'<td><strong>' . $engine->factor_multiples($tdata, 'binary', true, true) . '</strong></td>' .
 			'<td><strong>' . $engine->factor_multiples($tindex, 'binary', true, true) . '</strong></td>' .
-			'<td><strong>' .
-				($engine->db->db_engine !== 'InnoDB'
-					? $engine->factor_multiples($tfrag, 'binary', true, true)
-					: '-') . '</strong></td>' .
 		'</tr>' . "\n";
 	?>
 	</table>

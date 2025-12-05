@@ -35,7 +35,7 @@ Reset file permissions of the config file after installation.
 Check if the provided path for `CACHE_SESSION_DIR` in `config/constants.php` is correct.
 
   The default value set in `constants.php` is `/tmp` but may vary in your environment.
-  You may want to change this to a custom folder (e.g. `_cache/session or /var/tmp`)
+  You may want to change this to a custom folder (e.g. `_cache/session` or `/var/tmp`)
 
 
 Mandatory installer password protection
