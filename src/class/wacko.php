@@ -950,7 +950,7 @@ class Wacko
 		}
 		else
 		{
-			$lang = @$this->page_lang;
+			$lang = $this->page_lang ?? '';
 		}
 
 		if (!$this->known_language($lang))

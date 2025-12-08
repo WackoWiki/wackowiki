@@ -61,7 +61,7 @@ class TemplatestEscaper
 			function ($matches)
 			{
 				$chr = $matches[0];
-				$ord = ord($chr);
+				$ord = ord($chr[0]);
 
 				/**
 				 * The following replaces characters undefined in HTML with the
