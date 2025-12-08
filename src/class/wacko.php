@@ -62,6 +62,7 @@ class Wacko
 	public bool $forum				= false;
 	public bool $canonical			= false;
 	public bool $static_feed		= false;	// disables section edit link in post_wacko
+	public bool $mathjax			= false;
 	public $categories;
 	public $watch					= [];
 	public bool $is_watched			= false;
@@ -846,6 +847,8 @@ class Wacko
 
 	function known_language($lang, $subset = true): bool
 	{
+		$lang ??= '';
+
 		return array_key_exists($lang, $this->http->available_languages($subset));
 	}
 
