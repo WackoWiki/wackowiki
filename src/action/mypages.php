@@ -52,7 +52,7 @@ $tabs	= [
 			'bycreation'	=> 'OrderCreation',
 			'bychange'		=> 'OrderChange',
 		];
-$mode	= @$_GET[$mod_selector];
+$mode	= $_GET[$mod_selector] ?? '';
 
 if (!array_key_exists($mode, $tabs))
 {
