@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Authorization',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1.',
 'LockPassword'					=> 'Password:',
 'LockLogin'						=> 'Login',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> 'Missing or empty %1 file. Please create the file and set a password into that file.',
 
 
 /*

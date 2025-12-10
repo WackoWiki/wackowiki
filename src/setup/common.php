@@ -496,3 +496,24 @@ function validate_token($value, $secret)
 	];
 }
 
+function empty_file($file_name)
+{
+	if (file_exists($file_name))
+	{
+		$content = trim(file_get_contents($file_name));
+
+		if (empty($content))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return true;
+	}
+}
+

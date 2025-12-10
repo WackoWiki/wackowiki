@@ -8,9 +8,7 @@ if (isset($config['auth']))
 // Check if Upgrade or Fresh Install
 if (array_key_exists('wacko_version', $config))
 {
-	$min_upgrade_version = '6.1.29';
-
-	if (version_compare($config['wacko_version'], $min_upgrade_version, '<'))
+	if (version_compare($config['wacko_version'], MIN_VERSION, '<'))
 	{
 		$config['is_update'] = null;
 
@@ -18,9 +16,9 @@ if (array_key_exists('wacko_version', $config))
 			Ut::perc_replace(
 				_t('PleaseUpgradeToR6'),
 				'<code class="version">' . $config['wacko_version'] . '</code>',
-				'<code class="version">' . $min_upgrade_version . '</code>') . '</br></br>' .
-				$config['wacko_version'] . ' → ' . $min_upgrade_version . '</br>' .
-				$min_upgrade_version . ' → ' . WACKO_VERSION . '</br></br>' .
+				'<code class="version">' . MIN_VERSION . '</code>') . '</br></br>' .
+				$config['wacko_version'] . ' → ' . MIN_VERSION . '</br>' .
+				MIN_VERSION . ' → ' . WACKO_VERSION . '</br></br>' .
 				'<a href="https://wackowiki.org/doc/Dev/Release/R6.2/Upgrade">Upgrade notices for WackoWiki 6.2</a>' .
 			"</li></ul>\n";
 	}

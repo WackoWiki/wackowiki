@@ -5,13 +5,14 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+const ACTIONS			= ['lang', 'version-check', 'config-site', 'config-database', 'install-database', 'write-config'];
 const APP_NAME			= 'wackowiki';
-const SQLITE_DB_FILE	= '.ht.sqlite';
-const SETUP_LOCK		= 'config/lock_setup';
+const MIN_VERSION		= '6.1.29';
 const SET_MENU			= 1;
 const SET_MENU_ADMIN	= 2;
 const SET_MENU_ONLY		= 3;
-const ACTIONS			= ['lang', 'version-check', 'config-site', 'config-database', 'install-database', 'write-config'];
+const SETUP_LOCK		= 'config/lock_setup';
+const SQLITE_DB_FILE	= '.ht.sqlite';
 
 class Installer
 {
@@ -31,14 +32,14 @@ class Installer
 
 		require_once 'setup/common.php';
 
+		$logged_in	= false;
+
 		// check for locking
-		if (@file_exists(SETUP_LOCK))
+		if ($lock_file = !empty_file(SETUP_LOCK))
 		{
 			// read password from lockfile
 			$lines		= file(SETUP_LOCK);
 			$lock_pw	= trim($lines[0]);
-
-			$logged_in	= false;
 
 			if (isset($_POST['config']['auth']))
 			{
