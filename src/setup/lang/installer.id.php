@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Otorisasi',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> 'Silakan masukkan kata sandi yang Anda simpan dalam berkas %1.',
 'LockPassword'					=> 'Kata sandi:',
 'LockLogin'						=> 'Log masuk',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> 'Berkas %1 hilang atau kosong. Silakan buat berkas tersebut dan atur kata sandi di dalamnya.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Database Name',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite menyimpan semua data dalam satu berkas.<br><br>Direktori yang Anda berikan harus dapat ditulis oleh server web selama proses instalasi.<br><br>Direktori tersebut <strong>tidak</strong> boleh dapat diakses melalui web. <br><br>Pemasang akan membuat berkas <code>.htaccess</code> bersamaan dengan itu, tetapi jika gagal, seseorang dapat mengakses basis data mentah Anda.<br>Hal ini termasuk data pengguna mentah (alamat email, kata sandi yang dienkripsi) serta halaman yang dilindungi dan data terbatas lainnya di wiki.<br><br>Pertimbangkan untuk menempatkan basis data di tempat lain sepenuhnya, misalnya di <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'User Name',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'Kata sandi',

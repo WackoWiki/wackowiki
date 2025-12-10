@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Authorization',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> 'कृपया उस पासवर्ड को दर्ज करें जिसे आपने %1 फ़ाइल में सहेजा है।',
 'LockPassword'					=> 'कूटशब्द:',
 'LockLogin'						=> 'प्रवेश',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> '%1 फ़ाइल अनुपस्थित या खाली है। कृपया फ़ाइल बनाएँ और उस फ़ाइल में एक पासवर्ड सेट करें।',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'डेटाबेस का नाम',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite सभी डेटा को एक ही फ़ाइल में संग्रहीत करता है।<br><br>आपके द्वारा प्रदान की गई निर्देशिका में इंस्टॉलेशन के दौरान वेब सर्वर द्वारा लिखने की अनुमति होनी चाहिए।<br><br>यह वेब के माध्यम से सुलभ <strong>नहीं</strong> होनी चाहिए। इंस्टॉलर इसके साथ एक <code>.htaccess</code> फ़ाइल लिखेगा, लेकिन अगर वह विफल हो जाता है तो कोई आपके कच्चे डेटाबेस तक पहुंच सकता है। इसमें कच्चा उपयोगकर्ता डेटा (ईमेल पते, हैश किए गए पासवर्ड) के साथ-साथ विकी पर संरक्षित पृष्ठ और अन्य प्रतिबंधित डेटा भी शामिल है।  डेटाबेस को पूरी तरह से कहीं और रखने पर विचार करें, उदाहरण के लिए <code>/var/lib/wackowiki/yourwiki</code> में।',
 'DbUser'						=> 'डेटाबेस सदस्यनाम',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'कूटशब्द',

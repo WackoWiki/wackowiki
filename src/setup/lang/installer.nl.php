@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorisatie',
-'LockAuthorizationInfo'			=> 'Voer het wachtwoord in dat u hebt opgeslagen in het bestand %1, dat u tijdelijk in de map Wacko hebt geplaatst.',
+'LockAuthorizationInfo'			=> 'Voer het wachtwoord in dat je hebt opgeslagen in het bestand %1.',
 'LockPassword'					=> 'Wachtwoord:',
 'LockLogin'						=> 'Aanmelden',
 'LockPasswordInvalid'			=> 'Ongeldig wachtwoord.',
 'LockedTryLater'				=> 'Deze site wordt momenteel bijgewerkt. Probeer het later opnieuw.',
+'EmptyAuthFile'					=> 'Ontbrekende of lege %1 bestand. Maak het bestand aan en stel een wachtwoord in dat bestand.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Database Naam',
 'DbNameDesc'					=> 'De database WackoWiki moet gebruiken. Deze database moet al bestaan voordat je doorgaat!',
 'DbNameSqliteDesc'				=> 'De gegevensmap en bestandsnaam SQLite zou moeten gebruiken voor WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite slaat alle gegevens in één enkel bestand op.<br><br>De map die u opgeeft moet beschrijfbaar zijn door de webserver tijdens de installatie. <br><br>Het moet <strong>niet</strong> toegankelijk zijn via het web.<br><br>Het installatieprogramma maakt een extra <code>. toegang tot</code> bestand samen met het bestand, maar als dit niet lukt, kan iemand toegang krijgen tot uw database. <br>Dit omvat gebruikersgegevens (e-mailadressen, hash-wachtwoorden) en beschermde pagina\'s en andere vertrouwelijke gegevens opgeslagen in de wiki. <br><br>Het is daarom raadzaam om het gegevensbestand op een volledig andere locatie op te slaan, bijvoorbeeld in de map <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite slaat alle gegevens in één enkel bestand op.<br><br>De directory die u opeft moet beschrijfbaar zijn door de webserver tijdens de installatie.<br><br>Het moet <strong>niet</strong> toegankelijk zijn via het web.<br><br>Het installatieprogramma schrijft een <code>. toegang tot</code> bestand, maar als dat niet lukt, kan iemand toegang krijgen tot je rauwe database.<br>dat onbewerkte gebruikersgegevens (e-mailadressen, hash-wachtwoorden) en beschermde pagina\'s en andere beperkte gegevens op de wiki bevat.<br><br>Overweeg om de database ergens anders te plaatsen, bijvoorbeeld in <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Gebruikersnaam',
 'DbUserDesc'					=> 'Naam van de gebruiker die gebruikt wordt om verbinding te maken met uw database.',
 'DbPassword'					=> 'Wachtwoord',

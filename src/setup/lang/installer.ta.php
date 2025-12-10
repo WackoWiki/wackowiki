@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Authorization',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1.',
 'LockPassword'					=> 'Password:',
 'LockLogin'						=> 'புகுபதிகை',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> 'Missing or empty %1 file. Please create the file and set a password into that file.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'தரவுதளப் பெயர்',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you provide must be writable by the webserver during installation.<br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installer will write a <code>.htaccess</code> file along with it, but if that fails someone can gain access to your raw database.<br>That includes raw user data (email addresses, hashed passwords) as well as protected pages and other restricted data on the wiki.<br><br>Consider putting the database somewhere else altogether, for example in <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'பயனர் பெயர்',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'கடவுச்சொல்',

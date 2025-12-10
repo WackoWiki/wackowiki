@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Авторизація',
-'LockAuthorizationInfo'			=> 'Будь ласка, введіть пароль, який ви зберегли в файлі %1, який ви тимчасово помістили у ваш каталог Wacko.',
+'LockAuthorizationInfo'			=> 'Будь ласка, введіть пароль, який ви зберегли в файлі %1.',
 'LockPassword'					=> 'Пароль:',
 'LockLogin'						=> 'Логін',
 'LockPasswordInvalid'			=> 'Невірний пароль.',
 'LockedTryLater'				=> 'Наразі сайт оновлюється. Будь ласка, спробуйте пізніше.',
+'EmptyAuthFile'					=> 'Відсутній або порожній файл %1 . Будь ласка, створіть файл і встановіть пароль в цьому файлі.',
 
 
 /*
@@ -152,7 +153,7 @@ $lang = [
 'DbName'						=> 'Ім\'я бази даних',
 'DbNameDesc'					=> 'База даних WackoWiki повинна використовувати цю базу даних. Вона потребує наявності перед тим як продовжити!',
 'DbNameSqliteDesc'				=> 'Директорія даних і ім\'я файлу SQLite повинна використовувати для WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite зберігає всі дані в одному файлі.<br><br>Каталог, який ви вказали, повинен бути доступним для запису веб-сервером під час інсталяції.<br><br>Він <strong>не повинен</strong> бути доступним через Інтернет. <br><br>Інсталятор створить файл <code>.htaccess</code>, але якщо це не вдасться, хтось може отримати доступ до вашої необробленої бази даних.<br>Це включає необроблені дані користувачів (адреси електронної пошти, хешовані паролі), а також захищені сторінки та інші обмежені дані на вікі.<br><br>Розгляньте можливість розміщення бази даних в іншому місці, наприклад, в <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Ім\'я користувача',
 'DbUserDesc'					=> 'Ім\'я користувача, що використовується для підключення до вашої бази даних.',
 'DbPassword'					=> 'Пароль',
@@ -175,7 +176,7 @@ $lang = [
 'TestDatabaseVersion'			=> 'Перевірка вимог до мінімальної версії бази даних',
 'SqliteFileExtensionError'		=> 'Будь ласка, використовуйте один з наступних розширень файлів db, sdb, sqlite.',
 'SqliteParentUnwritableGroup'	=> 'Не можна створити папку даних <code>%1</code>, оскільки батьківська папка <code>%2</code> не доступна веб-серверу для запису.<br><br>Інсталятор виявив, під яким користувачем працює Ваш сервер.<br>Зробіть папку <code>%3</code> доступною для запису, щоб продовжити.<br>В ОС Unix/Linux виконайте:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
-'SqliteParentUnwritableNogroup'	=> 'Не можна створити папку даних <code>%1</code>, оскільки батьківська папка <code>%2</code> не доступна веб-серверу для запису.<br><br>Інсталятор не зміг виявити, під яким користувачем працює Ваш сервер.<br>Зробіть папку <code>%3</code> доступною для запису серверу (і всім!) глобально, щоб продовжити.<br>В ОС Unix/Linux виконайте:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Не можна створити папку даних <code>%1</code>, оскільки батьківська папка <code>%2</code> не доступна веб-серверу для запису.<br><br>Інсталятор не зміг виявити, під яким користувачем працює Ваш сервер.<br>Зробіть папку <code>%3</code> доступною для запису серверу (і всім!) глобально, щоб продовжити.<br>В Ос Unix/Linux виконайте:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
 'SqliteMkdirError'				=> 'Помилка при створенні папки даних <code>%1</code>.<br>Перевірте розташування і спробуйте знову.',
 'SqliteDirUnwritable'			=> 'Неможливо записати дані в каталог <code>%1</code>.<br>Змінити права доступу на нього і спробувати ще раз.',
 'SqliteReadonly'				=> 'Файл <code>%1</code> не доступний для запису.',

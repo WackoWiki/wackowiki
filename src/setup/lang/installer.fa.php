@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'اجازه',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> 'لطفاً رمز عبوری را که در فایل %1 ذخیره کرده‌اید وارد کنید.',
 'LockPassword'					=> 'گذرواژه:',
 'LockLogin'						=> 'ورود به سامانه',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> 'فایل %1 یافت نشد یا خالی است. لطفاً فایل را ایجاد کرده و یک رمز عبور در آن تنظیم کنید.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'نام پایگاه داده',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite تمام داده‌ها را در یک فایل واحد ذخیره می‌کند.<br><br>دایرکتوری که ارائه می‌دهید باید در حین نصب برای وب‌سرور قابل نوشتن باشد.<br><br>این دایرکتوری نباید از طریق وب قابل دسترسی باشد. نصب‌کننده یک فایل <code>.htaccess</code> را به همراه آن می‌نویسد، اما اگر این کار با شکست مواجه شود، کسی می‌تواند به پایگاه داده خام شما دسترسی پیدا کند. این شامل داده‌های خام کاربر (آدرس‌های ایمیل، رمزهای عبور هش‌شده) و همچنین صفحات محافظت‌شده و سایر داده‌های محدود در ویکی می‌شود. در نظر بگیرید که پایگاه داده را به جای دیگری، برای مثال در <code>/var/lib/wackowiki/yourwiki</code> قرار دهید.',
 'DbUser'						=> 'نام کاربری',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'گذرواژه',

@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Valtuutus',
-'LockAuthorizationInfo'			=> 'Syötä salasana, jonka tallensit tiedostoon %1, jonka asetit väliaikaisesti Wacko-hakemistoon.',
+'LockAuthorizationInfo'			=> 'Anna tiedostoon %1 tallennettu salasana. Ole hyvä ja syötä salasana.',
 'LockPassword'					=> 'Salasana:',
 'LockLogin'						=> 'Kirjaudu',
 'LockPasswordInvalid'			=> 'Virheellinen salasana.',
 'LockedTryLater'				=> 'Sivustoa päivitetään parhaillaan. Yritä myöhemmin uudelleen.',
+'EmptyAuthFile'					=> 'Puuttuva tai tyhjä %1 -tiedosto. Luo tiedosto ja aseta salasana kyseiseen tiedostoon.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Tietokannan Nimi',
 'DbNameDesc'					=> 'Tietokannan WackoWiki pitäisi käyttää. Tämä tietokanta on oltava olemassa jo ennen kuin jatkat sitä!',
 'DbNameSqliteDesc'				=> 'Datahakemistoa ja tiedostonimeä SQLite pitäisi käyttää WackoWikille.',
-'DbNameSqliteHelp'				=> 'SQLite tallentaa kaikki tiedot yhteen tiedostoon.<br><br>Web-palvelin on kirjoitettava kansioon asennuksen aikana. <br><br>Sen ei pitäisi <strong></strong> olla käytettävissä verkon kautta.<br><br>Asennusohjelma luo uuden <code>. taccess</code> tiedosto yhdessä tiedoston kanssa, mutta jos tämä epäonnistuu, joku voi käyttää tietokantaasi. <br>Tämä sisältää käyttäjätiedot (sähköpostiosoitteet, salasanat) sekä suojatut sivut ja muut wikiin tallennetut luottamukselliset tiedot. <br><br>Siksi on suositeltavaa tallentaa tiedosto täysin eri paikkaan, esimerkiksi hakemistossa <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite tallentaa kaikki tiedot yhteen tiedostoon.<br><br>Web-palvelimen on oltava kirjoitussuojattu hakemistolla asennuksen aikana.<br><br>Sen ei pitäisi <strong></strong> olla käytettävissä verkon kautta.<br><br>Asentaja kirjoittaa <code>. taccess</code> tiedosto yhdessä sen kanssa, mutta jos se epäonnistuu, joku voi saada pääsyn raakatietokantaan.<br>Tämä sisältää raa\'at käyttäjätiedot (sähköpostiosoitteet, hajautetut salasanat) sekä suojatut sivut ja muut rajoitetut tiedot wikissä.<br><br>Harkitse tietokannan laittamista jonnekin muualle, esimerkiksi <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Käyttäjän Nimi',
 'DbUserDesc'					=> 'Tietokantaan yhdistettävän käyttäjän nimi. @ info: whatsthis',
 'DbPassword'					=> 'Salasana',

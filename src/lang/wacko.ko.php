@@ -118,7 +118,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> '입력 한 사용자 이름 또는 비밀번호가 유효하지 않습니다.',
 	'WelcomeBack'				=> 'Welcome back, %1',
-	'LoginAttemptsExceeded'		=> 'You exceeded the maximum allowed number of login attempts.<br>In addition to your username and password you now also have to solve the CAPTCHA below.',
+	'LoginAttemptsExceeded'		=> '허용된 최대 로그인 시도 횟수를 초과했습니다.<br>이제 사용자 이름과 비밀번호 외에도 아래의 CAPTCHA를 해결해야 합니다.',
 
 	// session notice
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
@@ -357,7 +357,7 @@ $wacko_translation = [
 	'NotifyMe'					=> '페이지의 새 댓글 및 변경 사항에 대해 알림',
 	'OverwriteAlert'			=> '덮어쓰기 경고: 이 페이지를 수정하는 동안 다른 사람이 수정했습니다.<br>변경 사항을 복사하고 이 페이지를 다시 수정하십시오.',
 	'TextDbOversize'			=> '경고: 텍스트 길이가 허용된 최대 %1자를 초과합니다. 텍스트를 허용 가능한 문자 수로 줄이십시오. 팁: 나머지 텍스트를 별도의 페이지에 배치할 수 있습니다.',
-	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
+	'EditingRevisionWarning'	=> '이 페이지는 오래된 버전으로 편집 중입니다. 게시하면 이후에 이루어진 모든 변경 사항이 삭제됩니다. <br>현재 버전으로 편집하시기 바랍니다.',
 	'WriteAccessDenied'			=> '이 페이지에 대한 쓰기 권한이 없습니다.',
 	'EmptyPage'					=> '페이지 본문이 비어 있어 저장되지 않았습니다!',
 	'EmptyComment'				=> 'Comment body was empty - not saved!',

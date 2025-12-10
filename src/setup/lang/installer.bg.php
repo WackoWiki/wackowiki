@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Authorization',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> 'Моля, въведете паролата, която сте запазили във файла %1.',
 'LockPassword'					=> 'Парола:',
 'LockLogin'						=> 'Влизане',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> 'Липсващ или празен файл %1. Моля, създайте файла и задайте парола в него.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'БД',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite съхранява всички данни в един файл.<br><br>Директорията, която предоставяте, трябва да може да се записва от уеб сървъра по време на инсталирането.<br><br>Тя <strong>не трябва</strong> да е достъпна чрез уеб. <br><br>Инсталаторът ще запише файл <code>.htaccess</code> заедно с него, но ако това не успее, някой може да получи достъп до вашата необработена база данни.<br>Това включва необработени потребителски данни (имейл адреси, хеширани пароли), както и защитени страници и други ограничени данни в уикито.<br><br>Обмислете да поставите базата данни на друго място, например в <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Име (username)',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'Паролa (password)',

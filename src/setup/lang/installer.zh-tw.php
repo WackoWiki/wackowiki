@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> '授權',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> '請輸入您儲存在檔案 %1 中的密碼。',
 'LockPassword'					=> '密碼:',
 'LockLogin'						=> '登入',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> '缺少或空的 %1 檔案。請建立該檔案並在其中設定密碼。',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> '資料庫名稱',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite 將所有資料儲存於單一檔案中。<br><br>安裝時，您提供的目錄必須可被網頁伺服器寫入。<br><br>該目錄應<strong>不可</strong>透過網頁存取。<br><br>安裝程式會同步建立 <code>.htaccess</code> 檔案，若此機制失效，他人可能直接存取原始資料庫。<br>這包含原始使用者資料（電子郵件地址、雜湊密碼）以及維基上的受保護頁面與其他限制性資料。<br><br>建議將資料庫另存至其他位置，例如 <code>/var/lib/wackowiki/yourwiki</code>。',
 'DbUser'						=> '資料庫使用者名稱',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> '資料庫密碼',

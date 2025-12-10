@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autoryzacja',
-'LockAuthorizationInfo'			=> 'Wprowadź hasło, które zapisałeś w pliku %1, który tymczasowo umieściłeś w katalogu Wacko.',
+'LockAuthorizationInfo'			=> 'Wprowadź hasło zapisane w pliku %1.',
 'LockPassword'					=> 'Hasło:',
 'LockLogin'						=> 'Logowanie',
 'LockPasswordInvalid'			=> 'Nieprawidłowe hasło.',
 'LockedTryLater'				=> 'Ta witryna jest obecnie aktualizowana. Spróbuj ponownie później.',
+'EmptyAuthFile'					=> 'Brakuje lub pusty plik %1 . Proszę utworzyć plik i ustawić hasło do tego pliku.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Baza danych',
 'DbNameDesc'					=> 'Baza danych, której WackoWiki powinno używać. Ta baza danych musi już istnieć, gdy będziesz kontynuować!',
 'DbNameSqliteDesc'				=> 'Katalog danych i nazwa pliku SQLite powinny używać dla WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite przechowuje wszystkie dane w jednym pliku. <br><br>Katalog, który podajesz, musi być dostępny do zapisu przez serwer WWW podczas instalacji. <br><br>Nie powinien być dostępny przez Internet. <br><br>Instalator utworzy plik <code>.htaccess</code>, ale jeśli to się nie powiedzie, ktoś może uzyskać dostęp do surowej bazy danych. <br>Obejmuje to surowe dane użytkowników (adresy e-mail, zaszyfrowane hasła), a także chronione strony i inne dane o ograniczonym dostępie w wiki. <br><br>Rozważ umieszczenie bazy danych w innym miejscu, na przykład w <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nazwa użytkownika',
 'DbUserDesc'					=> 'Nazwa użytkownika używanego do łączenia się z bazą danych.',
 'DbPassword'					=> 'Hasło użytkownika',

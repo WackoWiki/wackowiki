@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> '授权',
-'LockAuthorizationInfo'			=> '请输入您保存在文件 %1中的密码，您已将其暂时放在您的 Wacko 目录中。',
+'LockAuthorizationInfo'			=> '请输入您保存在文件 %1 中的密码。',
 'LockPassword'					=> '密码：',
 'LockLogin'						=> '登录',
 'LockPasswordInvalid'			=> '无效的密码。',
 'LockedTryLater'				=> '此网站正在升级。请稍后再试。',
+'EmptyAuthFile'					=> '缺少或空的 %1 文件。请创建文件并在该文件中设置密码。',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> '数据库名称',
 'DbNameDesc'					=> 'WackoWiki 数据库将要使用。请确定数据库已经建立完毕！',
 'DbNameSqliteDesc'				=> '数据目录和文件名 SQLite 应用于 WackoWiki',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite 将所有数据存储于单一文件中。<br><br>安装过程中，您提供的目录必须可被 Web 服务器写入。<br><br>该目录应<strong>不可</strong>通过网络访问。<br><br>安装程序会同时生成<code>.htaccess</code>文件，若该文件缺失，他人可能直接访问原始数据库。<br>这包括原始用户数据（电子邮箱、密码哈希值）以及维基中的受保护页面和其他限制性数据。<br><br>建议将数据库完全移至其他位置，例如<code>/var/lib/wackowiki/yourwiki</code>目录。',
 'DbUser'						=> '数据库用户名',
 'DbUserDesc'					=> '用于连接您的数据库的用户名称。',
 'DbPassword'					=> '数据库密码',

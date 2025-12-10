@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorizare',
-'LockAuthorizationInfo'			=> 'Vă rugăm să introduceţi parola salvată în fişierul %1, pe care l-aţi plasat temporar în directorul Wacko.',
+'LockAuthorizationInfo'			=> 'Introduceți parola pe care ați salvat-o în fișierul %1.',
 'LockPassword'					=> 'Parola:',
 'LockLogin'						=> 'Autentificare',
 'LockPasswordInvalid'			=> 'Parolă nevalidă.',
 'LockedTryLater'				=> 'Acest site este în curs de actualizare. Vă rugăm să încercaţi din nou mai târziu.',
+'EmptyAuthFile'					=> 'Fișierul %1 lipsește sau gol. Te rugăm să creezi fișierul și să setezi o parolă în acel fișier.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Numele bazei de date',
 'DbNameDesc'					=> 'Baza de date WackoWiki ar trebui să folosească. Această bază de date trebuie să existe deja înainte de a continua!',
 'DbNameSqliteDesc'				=> 'Directorul de date și numele fișierului SQLite ar trebui să fie utilizate pentru WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite stochează toate datele într-un singur fișier.<br><br>Directorul pe care îl furnizați trebuie să poată fi scris de serverul web în timpul instalării.<br><br>Acesta <strong>nu</strong> trebuie să fie accesibil prin internet. <br><br>Programul de instalare va scrie un fișier <code>.htaccess</code> împreună cu acesta, dar dacă acest lucru eșuează, cineva poate obține acces la baza de date brută. <br>Aceasta include datele brute ale utilizatorilor (adrese de e-mail, parole hash), precum și paginile protejate și alte date restricționate de pe wiki. <br><br>Luați în considerare plasarea bazei de date în alt loc, de exemplu în <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nume Utilizator',
 'DbUserDesc'					=> 'Numele utilizatorului folosit pentru conectarea la baza ta de date.',
 'DbPassword'					=> 'Parolă',

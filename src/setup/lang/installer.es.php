@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorización',
-'LockAuthorizationInfo'			=> 'Por favor, introduzca la contraseña que ha guardado en el archivo %1, que ha colocado temporalmente en su directorio Wacko.',
+'LockAuthorizationInfo'			=> 'Por favor, introduzca la contraseña guardada en el archivo %1.',
 'LockPassword'					=> 'Contraseña:',
 'LockLogin'						=> 'Ingresar',
 'LockPasswordInvalid'			=> 'Contraseña no válida.',
 'LockedTryLater'				=> 'Este sitio está siendo actualizado. Por favor, inténtalo de nuevo más tarde.',
+'EmptyAuthFile'					=> 'Falta o vacío el archivo %1 . Por favor, cree el archivo y establezca una contraseña en ese archivo.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Nombre de base de datos',
 'DbNameDesc'					=> 'La base de datos usado por WackoWiki. Esta base de datos ya debe estar creada antes de continuar con la instalación!',
 'DbNameSqliteDesc'				=> 'El directorio de datos y el nombre del archivo SQLite deben usar para WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite almacena todos los datos en un solo archivo.<br><br>El directorio que especifique debe ser escribible por el servidor web durante la instalación. <br><br>Debería <strong>no</strong> ser accesible a través de la web.<br><br>El programa de instalación creará un <code>adicional. taccess</code> junto con el archivo, pero si esto falla, puede que alguien pueda acceder a su base de datos. <br>Esto incluye datos de usuario (direcciones de correo electrónico, contraseñas cifradas) así como páginas protegidas y otros datos confidenciales almacenados en la wiki. <br><br>Por lo tanto, es recomendable almacenar el archivo de datos en una ubicación completamente diferente por ejemplo en el directorio <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite almacena todos los datos en un solo archivo.<br><br>El directorio que proporciona debe ser escribible por el servidor web durante la instalación.<br><br>Debería <strong>no</strong> ser accesible a través de la web.<br><br>El instalador escribirá un <code>. taccess</code> junto con él, pero si eso falla alguien puede obtener acceso a su base de datos sin procesar.<br>Esto incluye datos de usuario sin procesar (direcciones de correo electrónico, contraseñas cifradas), así como páginas protegidas y otros datos restringidos en el wiki.<br><br>Considere poner la base de datos en algún otro lugar, por ejemplo en <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nombre de usuario',
 'DbUserDesc'					=> 'Nombre del usuario para la conexión con la base de datos.',
 'DbPassword'					=> 'Contraseña',

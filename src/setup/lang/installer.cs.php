@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorizace',
-'LockAuthorizationInfo'			=> 'Zadejte prosím heslo, které jste uložili do souboru %1, který jste dočasně umístili do adresáře Wacko.',
+'LockAuthorizationInfo'			=> 'Zadejte prosím heslo, které jste uložili do souboru %1.',
 'LockPassword'					=> 'Heslo:',
 'LockLogin'						=> 'Přihlásit se',
 'LockPasswordInvalid'			=> 'Neplatné heslo.',
 'LockedTryLater'				=> 'Tato stránka je aktuálně aktualizována. Opakujte akci později.',
+'EmptyAuthFile'					=> 'Chybějící nebo prázdný soubor %1 . Vytvořte soubor a nastavte heslo do tohoto souboru.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Název databáze',
 'DbNameDesc'					=> 'Databáze WackoWiki by měla být používána. Tato databáze musí existovat, než budete pokračovat!',
 'DbNameSqliteDesc'				=> 'Datový adresář a název souboru SQLite by měl být použit pro WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite ukládá všechna data do jediného souboru.<br><br>Adresář, který zadáte, musí být během instalace přístupný pro zápis webovým serverem.<br><br>Neměl by být přístupný přes web. <br><br>Instalační program spolu s ním zapíše soubor <code>.htaccess</code>, ale pokud se to nepodaří, někdo může získat přístup k vaší surové databázi.<br>To zahrnuje surová uživatelská data (e-mailové adresy, hashovaná hesla) i chráněné stránky a další omezená data na wiki.<br><br>Zvažte umístění databáze úplně jinam, například do <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Uživatelské jméno',
 'DbUserDesc'					=> 'Jméno uživatele použité k připojení k databázi.',
 'DbPassword'					=> 'Heslo',

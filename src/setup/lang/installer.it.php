@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorizzazione',
-'LockAuthorizationInfo'			=> 'Inserisci la password salvata nel file %1che hai temporaneamente inserito nella tua directory Wacko.',
+'LockAuthorizationInfo'			=> 'Inserire la password salvata nel file %1.',
 'LockPassword'					=> 'Password,',
 'LockLogin'						=> 'Accedi',
 'LockPasswordInvalid'			=> 'Password non valida.',
 'LockedTryLater'				=> 'Questo sito è attualmente in fase di aggiornamento. Riprova più tardi.',
+'EmptyAuthFile'					=> 'File %1 mancante o vuoto. Si prega di creare il file e impostare una password in quel file.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Nome Database',
 'DbNameDesc'					=> 'Il database WackoWiki dovrebbe usare. Questo database deve esistere già una volta che continui!',
 'DbNameSqliteDesc'				=> 'La directory dei dati e il nome del file SQLite dovrebbero essere usati per WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite memorizza tutti i dati in un singolo file.<br><br>La directory specificata deve essere scrivibile dal server web durante l\'installazione. <br><br>Dovrebbe <strong>non</strong> essere accessibile tramite il web.<br><br>Il programma di installazione creerà un ulteriore <code>. taccess</code> file insieme al file, ma se questo fallisce, qualcuno potrebbe essere in grado di accedere al database. <br>Questo include i dati utente (indirizzi e-mail, password hashate) così come le pagine protette e altri dati riservati memorizzati nella wiki. <br><br>Si consiglia quindi di memorizzare il file di dati in una posizione completamente diversa, per esempio nella directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite memorizza tutti i dati in un singolo file.<br><br>La directory che fornisci deve essere scrivibile dal webserver durante l\'installazione.<br><br>Dovrebbe <strong>non</strong> essere accessibile tramite il web.<br><br>L\'installatore scriverà un <code>. taccess</code> file con esso, ma se fallisce qualcuno può ottenere l\'accesso al tuo database grezzo.<br>Ciò include i dati utente grezzi (indirizzi e-mail, password hashed) così come le pagine protette e altri dati limitati sulla wiki.<br><br>Considera di mettere il database da qualche altra parte, per esempio in <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nome utente',
 'DbUserDesc'					=> 'Nome dell\'utente usato per connettersi al database.',
 'DbPassword'					=> 'Immetti password',

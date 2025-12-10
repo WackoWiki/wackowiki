@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorisasjon',
-'LockAuthorizationInfo'			=> 'Skriv inn passordet du lagret, i filen %1, som du midlertidig har plassert i Wacko-mappen.',
+'LockAuthorizationInfo'			=> 'Skriv inn passordet du lagret i filen %1.',
 'LockPassword'					=> 'Passord:',
 'LockLogin'						=> 'Innlogging',
 'LockPasswordInvalid'			=> 'Ugyldig passord.',
 'LockedTryLater'				=> 'Denne siden blir for øyeblikket oppgradert. Vennligst prøv igjen senere.',
+'EmptyAuthFile'					=> 'Manglende eller tom %1 -fil. Vennligst opprett filen og sett inn et passord i filen.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Database navn',
 'DbNameDesc'					=> 'Databasen WackoWiki skal bruke. Denne databasen må allerede eksistere før du fortsetter!',
 'DbNameSqliteDesc'				=> 'Datatalogen og filnavnet SQLite skal brukes for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite lagrer alle data i en enkelt fil.<br><br>Mappen du spesifiserer må være skrivbar av webserveren under installasjon. <br><br>Den skal ikke være tilgjengelig via <strong></strong> via nettet.<br><br>Installasjonsprogrammet vil opprette ytterligere <code>. taccess</code> -filen sammen med filen, men dersom dette ikke fungerer, kan det hende noen har tilgang til din database. <br>Dette inkluderer brukerdata (e-postadresser, hashed passwords) samt beskyttede sider og andre konfidensielle data lagret på wikien. <br><br>Det er derfor tilrådelig å lagre datafilen i en helt annen plassering, for eksempel i mappen <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite lagrer alle data i en enkelt fil.<br><br>Mappen du leverer må være skrivbar av webserveren under installasjon.<br><br>Den skal ikke være tilgjengelig via <strong></strong> via nettet.<br><br>Installasjonsprogrammet vil skrive en <code>. taccess</code> -filen sammen med den, men dersom noen ikke får tilgang til din rådatabase.<br>Som inneholder råbrukerdata (e-postadresser, hashed passwords) samt beskyttede sider og andre begrenset data på wikien.<br><br>Vurder å legge databasen et annet sted helt sammen, for eksempel i <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Bruker navn',
 'DbUserDesc'					=> 'Navn på bruker som brukes til å koble til databasen.',
 'DbPassword'					=> 'Passord',

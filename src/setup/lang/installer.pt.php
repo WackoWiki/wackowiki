@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorização',
-'LockAuthorizationInfo'			=> 'Por favor, digite a senha que você salvou no arquivo %1, que você colocou temporariamente no diretório Wacko.',
+'LockAuthorizationInfo'			=> 'Por favor, digite a senha que você salvou no arquivo %1.',
 'LockPassword'					=> 'Senha:',
 'LockLogin'						=> 'Conectar-se',
 'LockPasswordInvalid'			=> 'Senha inválida',
 'LockedTryLater'				=> 'Este site está sendo atualizado no momento. Por favor, tente novamente mais tarde.',
+'EmptyAuthFile'					=> 'Arquivo %1 em falta ou vazio. Por favor, crie o arquivo e defina uma senha para ele.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Nome da base',
 'DbNameDesc'					=> 'A base de dados WackoWiki deve ser utilizada. Esta base de dados precisa de existir já depois de continuar!',
 'DbNameSqliteDesc'				=> 'O diretório de dados e nome de arquivo SQLite devem ser usados para WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'O SQLite armazena todos os dados num único ficheiro.<br><br>O diretório que fornecer deve ser gravável pelo servidor web durante a instalação.<br><br>Não deve ser acessível através da web. <br><br>O instalador irá gravar um ficheiro <code>.htaccess</code> junto com ele, mas se isso falhar, alguém poderá obter acesso ao seu banco de dados bruto.<br>Isso inclui dados brutos do utilizador (endereços de e-mail, senhas com hash), bem como páginas protegidas e outros dados restritos na wiki.<br><br>Considere colocar o banco de dados em outro lugar, por exemplo, em <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nome de utilizador',
 'DbUserDesc'					=> 'Nome do utilizador utilizado para se ligar à sua base de dados.',
 'DbPassword'					=> 'Palavra-chave',

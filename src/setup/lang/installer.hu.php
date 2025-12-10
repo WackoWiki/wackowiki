@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Authorization',
-'LockAuthorizationInfo'			=> 'Please enter the password you saved in the file %1, which you temporarily placed in your Wacko directory.',
+'LockAuthorizationInfo'			=> 'Kérjük, írja be a %1 fájlban elmentett jelszót.',
 'LockPassword'					=> 'Jelszó:',
 'LockLogin'						=> 'Bejelentkezés',
 'LockPasswordInvalid'			=> 'Invalid password.',
 'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'EmptyAuthFile'					=> 'Hiányzik vagy üres a %1 fájl. Kérjük, hozza létre a fájlt, és állítson be jelszót abban a fájlban.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Adatbázis név',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'Az SQLite az összes adatot egyetlen fájlban tárolja.<br><br>A megadott könyvtárnak a telepítés során írható állapotúnak kell lennie a webszerver számára.<br><br>A könyvtár <strong>nem</strong> lehet elérhető a weben keresztül. <br><br>A telepítő egy <code>.htaccess</code> fájlt is létrehoz, de ha ez nem sikerül, akkor valaki hozzáférhet a nyers adatbázisához.<br>Ez magában foglalja a nyers felhasználói adatokat (e-mail címek, hash-elt jelszavak), valamint a védett oldalakat és a wiki egyéb korlátozott adatait.<br><br>Fontolja meg, hogy az adatbázist egy teljesen más helyre helyezi, például a <code>/var/lib/wackowiki/yourwiki</code> mappába.',
 'DbUser'						=> 'Felhasználónév',
 'DbUserDesc'					=> 'Az adatbázisához való csatlakozáshoz használt felhasználó neve.',
 'DbPassword'					=> 'Jelszó',
@@ -171,8 +172,8 @@ $lang = [
 'TestDatabaseExists'			=> 'Ellenőrzése, ha a megadott adatbázis létezik',
 'TestDatabaseVersion'			=> 'Ellenőrzés adatbázis minimális követelmények',
 'SqliteFileExtensionError'		=> 'Kérjük, használja az alábbi fájlkiterjesztések egyikét: db, sdb, sqlite.',
-'SqliteParentUnwritableGroup'	=> 'Nem hozható létre a(z) <code>%1</code> adatkönyvtár, mert a szülőkönyvtárba (<code>%2</code>) nem írhat a webszerver.<br><br>A telepítő megállapította, hogy mely felhasználó futtatja a webszervert.<br>A folytatáshoz tedd írhatóvá a(z) <code>%3</code> könyvtárat.<br>Unix/Linux rendszeren tedd a következőt:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
-'SqliteParentUnwritableNogroup'	=> 'Nem lehet létrehozni az adatok tárolásához szükséges <code>%1</code> könyvtárat, mert a webszerver nem írhat a szülőkönyvtárba (<code>%2</code>).<br><br>A telepítő nem tudta megállapítani, hogy melyik felhasználói fiókon fut a webszerver.<br>A folytatáshoz tedd írhatóvá ezen fiók (és más fiókok!) számára a következő könyvtárat: <code>%3</code>.<br>Unix/Linux rendszereken tedd a következőt:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteParentUnwritableGroup'	=> 'Nem hozható létre a(z) <code>%1</code> adatkönyvtár, mert a szülőkönyvtárba <code>%2</code> nem írhat a webszerver.<br><br>A telepítő megállapította, hogy mely felhasználó futtatja a webszervert.<br>A folytatáshoz tedd írhatóvá a(z) <code>%3</code> könyvtárat.<br>Unix/Linux rendszeren tedd a következőt:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Nem lehet létrehozni az adatok tárolásához szükséges <code>%1</code> könyvtárat, mert a webszerver nem írhat a szülőkönyvtárba <code>%2</code>.<br><br>A telepítő nem tudta megállapítani, hogy melyik felhasználói fiókon fut a webszerver.<br>A folytatáshoz tedd írhatóvá ezen fiók (és más fiókok!) számára a következő könyvtárat: <code>%3</code>.<br>Unix/Linux rendszereken tedd a következőt:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
 'SqliteMkdirError'				=> 'Nem sikerült létrehozni a következő adatkönyvtárat: <code>%1</code>.<br>Ellenőrizd a helyet, majd próbáld újra.',
 'SqliteDirUnwritable'			=> 'Nem sikerült írni a következő könyvtárba: <code>%1</code>.<br>Módosítsd a jogosultságokat úgy, hogy a webszerver tudjon oda írni, majd próbáld újra.',
 'SqliteReadonly'				=> 'A következő fájl nem írható: <code>%1</code>.',

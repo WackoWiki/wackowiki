@@ -50,11 +50,12 @@ $lang = [
    Locking Check
  */
 'LockAuthorization'				=> 'Autorisation',
-'LockAuthorizationInfo'			=> 'Veuillez entrer le mot de passe que vous avez enregistré dans le fichier %1, que vous avez placé temporairement dans votre répertoire Wacko.',
+'LockAuthorizationInfo'			=> 'Veuillez entrer le mot de passe enregistré dans le fichier %1.',
 'LockPassword'					=> 'Mot de passe :',
 'LockLogin'						=> 'Se connecter',
 'LockPasswordInvalid'			=> 'Mot de passe invalide.',
 'LockedTryLater'				=> 'Ce site est en cours de mise à jour. Veuillez réessayer plus tard.',
+'EmptyAuthFile'					=> 'Fichier %1 manquant ou vide. Veuillez créer le fichier et définir un mot de passe dans ce fichier.',
 
 
 /*
@@ -149,7 +150,7 @@ $lang = [
 'DbName'						=> 'Nom de base de données',
 'DbNameDesc'					=> 'Indiquez le nom de la base de données à utiliser par WackoWiki. Elle doit exister avant de continuer !',
 'DbNameSqliteDesc'				=> 'Le répertoire de données et le nom de fichier SQLite doivent être utilisés pour WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you specify must be writable by the web server during installation. <br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installation programme will create an additional <code>.htaccess</code> file along with the file, but if this fails, someone may be able to access your database. <br>This includes user data (email addresses, hashed passwords) as well as protected pages and other confidential data stored in the wiki. <br><br>It is therefore advisable to store the data file in a completely different location, for example in the directory <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'SQLite stocke toutes les données dans un seul fichier.<br><br>Le répertoire que vous fournissez doit être accessible en écriture par le serveur web pendant l'installation.<br><br>Il ne doit <strong>pas</strong> être accessible via le web. <br><br>Le programme d'installation créera un fichier <code>.htaccess</code>, mais si cela échoue, quelqu'un pourra accéder à votre base de données brute. <br>Cela inclut les données brutes des utilisateurs (adresses e-mail, mots de passe hachés) ainsi que les pages protégées et autres données restreintes sur le wiki. <br><br>Envisagez de placer la base de données ailleurs, par exemple dans <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Nom d’utilisateur',
 'DbUserDesc'					=> 'Indiquez le nom de l’utilisateur sous l’identité duquel se connecter à votre base de données.',
 'DbPassword'					=> 'Mot de passe',
