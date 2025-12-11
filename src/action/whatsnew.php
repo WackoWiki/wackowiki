@@ -258,6 +258,9 @@ if ($pages = array_merge($pages1, $pages2, $comments, $files))
 
 	foreach ($pages as $page)
 	{
+		// avoid null as an array offset (global file)
+		$page['tag'] ??= '';
+
 		if ($this->db->hide_locked)
 		{
 			$access = ($page['comment_on_id'] && $page['ctype'] != 2
