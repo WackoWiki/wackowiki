@@ -1,5 +1,5 @@
 
-# WACKOWIKI INSTALLATION
+# WackoWiki Installation
 
 Unpack/upload the distribution files into a directory that can be accessed via the web.
 Then go to the corresponding URL. A web-based installer will walk you through the rest.
@@ -15,7 +15,7 @@ in their name; you'll probably want to rename those to just `wacko` -- or, if yo
 on a unixoid system, set up a symbolic link.
 
 
-## PERMISSIONS:
+## Permissions:
 
 For configuration purposes, you'll probably want to make `config/config.php` writable
 by the web server, at least temporarily.
@@ -48,7 +48,7 @@ should really just access the WackoWiki directory itself, and it will (or at lea
 work perfectly.
 
 
-## BACKEND:
+## Backend:
 
 Create a Recovery-Password to access the Admin panel.
 

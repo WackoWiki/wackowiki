@@ -1,5 +1,5 @@
 
-# UPGRADING FROM AN EARLIER VERSION:
+# Upgrading from an earlier version:
 
 Just unpack the new distribution archive wherever you need/want it; all you need from
 your old WackoWiki installation is config.php and the file folder. You can also just
