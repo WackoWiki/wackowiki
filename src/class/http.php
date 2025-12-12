@@ -489,7 +489,7 @@ class Http
 		{
 			$lang_list = $this->available_languages();
 
-			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+			// https://www.rfc-editor.org/rfc/rfc9110.html#section-12.5.4
 			preg_match_all('/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?' .
 				'(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/',
 					strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
