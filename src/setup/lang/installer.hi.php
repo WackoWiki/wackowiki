@@ -39,8 +39,8 @@ $lang = [
 /*
    Generic Page Text
 */
-'TitleInstallation'				=> 'WackoWiki Installation',
-'TitleUpdate'					=> 'WackoWiki Update',
+'TitleInstallation'				=> 'WackoWiki इंस्टॉलेशन',
+'TitleUpdate'					=> 'WackoWiki अपडेट',
 'Continue'						=> 'जारी रखें',
 'Back'							=> 'वापस',
 'Recommended'					=> 'recommended',
@@ -54,19 +54,19 @@ $lang = [
 'LockPassword'					=> 'कूटशब्द:',
 'LockLogin'						=> 'प्रवेश',
 'LockPasswordInvalid'			=> 'Invalid password.',
-'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'LockedTryLater'				=> 'यह साइट वर्तमान में अपग्रेड की जा रही है। कृपया बाद में फिर से प्रयास करें।',
 'EmptyAuthFile'					=> '%1 फ़ाइल अनुपस्थित या खाली है। कृपया फ़ाइल बनाएँ और उस फ़ाइल में एक पासवर्ड सेट करें।',
 
 
 /*
    Language Selection Page
 */
-'lang'							=> 'Language Configuration',
-'PleaseUpgradeToR6'				=> 'You appear to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki! It appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki! You are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
+'lang'							=> 'भाषा विन्यास',
+'PleaseUpgradeToR6'				=> 'ऐसा प्रतीत होता है कि आप WackoWiki %1 का पुराना संस्करण चला रहे हैं। WackoWiki के इस संस्करण में अपडेट करने के लिए, आपको पहले अपनी इंस्टॉलेशन को %2 में अपडेट करना होगा।',
+'UpgradeFromWacko'				=> 'WackoWiki में आपका स्वागत है! ऐसा प्रतीत होता है कि आप WackoWiki %1 से %2 में अपग्रेड कर रहे हैं। अगले कुछ पृष्ठ आपको अपग्रेड प्रक्रिया के माध्यम से मार्गदर्शन करेंगे।',
+'FreshInstall'					=> 'WackoWiki में आपका स्वागत है! आप WackoWiki %1 स्थापित करने वाले हैं। अगले कुछ पृष्ठ आपको स्थापना प्रक्रिया में मार्गदर्शन करेंगे।',
 'PleaseBackup'					=> 'कृपया, अपग्रेड प्रक्रिया शुरू करने से पहले अपने डेटाबेस, कॉन्फ़िगरेशन फ़ाइल और सभी परिवर्तित फ़ाइलों जैसे कि जिन पर स्थानीय हैक और पैच लागू किए गए हैं, का <strong>बैकअप</strong> लें। यह आपको एक बड़ी सिरदर्द से बचा सकता है।',
-'LangDesc'						=> 'Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.',
+'LangDesc'						=> 'कृपया इंस्टॉलेशन प्रक्रिया के लिए एक भाषा चुनें। यह भाषा आपके WackoWiki इंस्टॉलेशन की डिफ़ॉल्ट भाषा के रूप में भी उपयोग की जाएगी।',
 
 /*
    System Requirements Page
@@ -150,7 +150,7 @@ $lang = [
 'DbName'						=> 'डेटाबेस का नाम',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite सभी डेटा को एक ही फ़ाइल में संग्रहीत करता है।<br><br>आपके द्वारा प्रदान की गई निर्देशिका में इंस्टॉलेशन के दौरान वेब सर्वर द्वारा लिखने की अनुमति होनी चाहिए।<br><br>यह वेब के माध्यम से सुलभ <strong>नहीं</strong> होनी चाहिए। इंस्टॉलर इसके साथ एक <code>.htaccess</code> फ़ाइल लिखेगा, लेकिन अगर वह विफल हो जाता है तो कोई आपके कच्चे डेटाबेस तक पहुंच सकता है। इसमें कच्चा उपयोगकर्ता डेटा (ईमेल पते, हैश किए गए पासवर्ड) के साथ-साथ विकी पर संरक्षित पृष्ठ और अन्य प्रतिबंधित डेटा भी शामिल है।  डेटाबेस को पूरी तरह से कहीं और रखने पर विचार करें, उदाहरण के लिए <code>/var/lib/wackowiki/yourwiki</code> में।',
+'DbNameSqliteHelp'				=> 'SQLite सभी डेटा को एक ही फ़ाइल में संग्रहीत करता है।<br><br>आपके द्वारा प्रदान की गई निर्देशिका में इंस्टॉलेशन के दौरान वेब सर्वर द्वारा लिखने की अनुमति होनी चाहिए।<br><br>यह वेब के माध्यम से सुलभ <strong>नहीं</strong> होनी चाहिए। इंस्टॉलर इसके साथ एक <code>.htaccess</code> फ़ाइल लिखेगा, लेकिन अगर वह विफल हो जाता है तो कोई आपके कच्चे डेटाबेस तक पहुंच सकता है। इसमें कच्चा उपयोगकर्ता डेटा (ईमेल पते, हैश किए गए पासवर्ड) के साथ-साथ विकी पर संरक्षित पृष्ठ और अन्य प्रतिबंधित डेटा भी शामिल है। डेटाबेस को पूरी तरह से कहीं और रखने पर विचार करें, उदाहरण के लिए <code>/var/lib/wackowiki/yourwiki</code> में।',
 'DbUser'						=> 'डेटाबेस सदस्यनाम',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
 'DbPassword'					=> 'कूटशब्द',

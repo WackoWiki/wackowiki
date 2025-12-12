@@ -61,7 +61,7 @@ $lang = [
 /*
    Language Selection Page
 */
-'lang'							=> 'Språkkonfigurasjon (Automatic Translation)',
+'lang'							=> 'Språkkonfigurasjon',
 'PleaseUpgradeToR6'				=> 'Det ser ut til at du kjører en gammel utgivelse av WackoWiki %1. For å oppdatere i denne utgaven av WackoWiki, må du først oppdatere installasjonen til %2.',
 'UpgradeFromWacko'				=> 'Velkommen til WackoWiki! Det ser ut til at du oppgraderer fra WackoWiki %1 til %2. De neste sidene vil lede deg gjennom oppgraderingsprosessen.',
 'FreshInstall'					=> 'Velkommen til WackoWiki! Du er i ferd med å installere WackoWiki %1. De neste sidene vil veilede deg gjennom installasjonsprosessen.',
@@ -173,7 +173,7 @@ $lang = [
 'TestDatabaseVersion'			=> 'Sjekker minstekravene til versjon av databasen',
 'SqliteFileExtensionError'		=> 'Bruk én av følgende filendelser db, sdb, sqlite.',
 'SqliteParentUnwritableGroup'	=> 'Kan ikke opprette datamappe <code>%1</code>, fordi overordnet katalog <code>%2</code> ikke er skrivbar av webserveren.<br><br>Installasjonsprogrammet har bestemt at brukeren din webserver skal kjøre.<br>gjør at <code>%3</code> mappen er skrivbar for å fortsette.<br>På et Unix/Linux-system gjøre:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
-'SqliteParentUnwritableNogroup'	=> 'Cannot create the data directory <code>%1</code>, because the parent directory <code>%2</code> is not writable by the webserver.<br><br>The installer could not determine the user your webserver is running as.<br>Make the <code>%3</code> directory globally writable by it (and others!) to continue.<br>On a Unix/Linux system do:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
+'SqliteParentUnwritableNogroup'	=> 'Kan ikke opprette datakatalogen <code>%1</code>, fordi overordnet katalog <code>%2</code> ikke kan skrives til av webserveren.<br><br>Installasjonsprogrammet kunne ikke finne ut hvilken bruker webserveren din kjører som.<br>Gjør katalogen <code>%3</code> globalt skrivbar for den (og andre!) for å fortsette. <br>På et Unix/Linux-system gjør du følgende:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
 'SqliteMkdirError'				=> 'Feil ved oppretting av datamappe <code>%1</code>.<br>Sjekk plassering og prøv igjen.',
 'SqliteDirUnwritable'			=> 'Kan ikke skrive til katalogen <code>%1</code>.<br>endre dens tillatelser slik at webserveren kan skrive til den og prøve igjen.',
 'SqliteReadonly'				=> 'Filen <code>%1</code> er ikke skrivbar.',
@@ -201,7 +201,7 @@ $lang = [
 'InstallLogoImage'				=> 'Legger til Logo-bilde',
 'LogoImage'						=> 'Logobilde',
 'InstallConfigValues'			=> 'Legge til konfigurasjonsverdier',
-'ConfigValues'					=> 'Konfigurasjonsverdier (Automatic Translation)',
+'ConfigValues'					=> 'Konfigurasjonsverdier',
 'ErrorInsertPage'				=> 'Feil ved innsetting av %1 side',
 'ErrorInsertPagePermission'		=> 'Feil ved innstilling av tillatelse for %1 side',
 'ErrorInsertDefaultMenuItem'	=> 'Feil ved innstilling av side %1 som standard menyelement',

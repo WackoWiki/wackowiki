@@ -54,7 +54,7 @@ $lang = [
 'LockPassword'					=> 'Password:',
 'LockLogin'						=> 'புகுபதிகை',
 'LockPasswordInvalid'			=> 'Invalid password.',
-'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'LockedTryLater'				=> 'இந்தத் தளம் தற்போது மேம்படுத்தப்பட்டு வருகிறது. தயவுசெய்து பின்னர் மீண்டும் முயற்சிக்கவும்.',
 'EmptyAuthFile'					=> 'Missing or empty %1 file. Please create the file and set a password into that file.',
 
 

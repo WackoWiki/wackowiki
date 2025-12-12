@@ -54,7 +54,7 @@ $lang = [
 'LockPassword'					=> 'گذرواژه:',
 'LockLogin'						=> 'ورود به سامانه',
 'LockPasswordInvalid'			=> 'Invalid password.',
-'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'LockedTryLater'				=> 'این سایت در حال ارتقا است. لطفاً بعداً دوباره تلاش کنید.',
 'EmptyAuthFile'					=> 'فایل %1 یافت نشد یا خالی است. لطفاً فایل را ایجاد کرده و یک رمز عبور در آن تنظیم کنید.',
 
 

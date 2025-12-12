@@ -54,7 +54,7 @@ $lang = [
 'LockPassword'					=> 'Jelszó:',
 'LockLogin'						=> 'Bejelentkezés',
 'LockPasswordInvalid'			=> 'Invalid password.',
-'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'LockedTryLater'				=> 'Ez az oldal jelenleg frissítés alatt áll. Kérjük, próbálkozzon újra később.',
 'EmptyAuthFile'					=> 'Hiányzik vagy üres a %1 fájl. Kérjük, hozza létre a fájlt, és állítson be jelszót abban a fájlban.',
 
 

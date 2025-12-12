@@ -7,7 +7,7 @@ $lang = [
 'LangISO'		=> 'ar',
 'LangLocale'	=> 'ar_EG',
 'LangName'		=> 'Arabic',
-'LangDir'		=> 'ltr',
+'LangDir'		=> 'rtl',
 
 /*
    Config Defaults
@@ -65,7 +65,7 @@ $lang = [
 'PleaseUpgradeToR6'				=> 'يبدو أنك تقوم بتشغيل إصدار قديم من WackoWiki %1. للتحديث إلى هذا الإصدار من WackoWiki ، يجب أولاً تحديث التثبيت الخاص بك إلى %2.',
 'UpgradeFromWacko'				=> 'مرحبا بكم في WackoWiki! يبدو أنك تقوم بالترقية من WackoWiki %1 إلى %2. الصفحات القليلة القادمة سوف توجهك من خلال عملية الترقية.',
 'FreshInstall'					=> 'مرحبا بك في WackoWiki! أنت على وشك تثبيت WackoWiki %1. ستوجهك الصفحات القليلة القادمة خلال عملية التثبيت.',
-'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have local hacks and patches applied to them before starting upgrade process. This can save you from a big headache.',
+'PleaseBackup'					=> 'من فضلك، أنسخ <strong>نسخة احتياطية</strong> لقاعدة بياناتك، ملف التهيئة وجميع الملفات التي غيرت مثل تلك التي تحتوي على اختراقات و تصحيحات محلية مطبقة عليها قبل بدء عملية الترقية. هذا يمكن أن يحفظك من الصداع الكبير.',
 'LangDesc'						=> 'الرجاء اختيار لغة لعملية التثبيت. سوف تستخدم هذه اللغة أيضا كلغة افتراضية لتثبيت WackoWiki الخاص بك.',
 
 /*
@@ -150,7 +150,7 @@ $lang = [
 'DbName'						=> 'اسم قاعدة البيانات',
 'DbNameDesc'					=> 'قاعدة البيانات WackoWiki يجب أن تستخدم. قاعدة البيانات هذه يجب أن تكون موجودة بالفعل قبل المتابعة!',
 'DbNameSqliteDesc'				=> 'يجب استخدام دليل البيانات واسم الملف SQLite لWackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite stores all data in a single file.<br><br>The directory you provide must be writable by the webserver during installation.<br><br>It should <strong>not</strong> be accessible via the web.<br><br>The installer will write a <code>.htaccess</code> file along with it, but if that fails someone can gain access to your raw database.<br>That includes raw user data (email addresses, hashed passwords) as well as protected pages and other restricted data on the wiki.<br><br>Consider putting the database somewhere else altogether, for example in <code>/var/lib/wackowiki/yourwiki</code>.',
+'DbNameSqliteHelp'				=> 'يخزن SQLite جميع البيانات في ملف واحد. <br><br>يجب أن يكون الدليل الذي توفره قابلاً للكتابة بواسطة خادم الويب أثناء التثبيت. <br><br>يجب ألا يكون <strong>قابلاً</strong> للوصول عبر الويب. <br><br>سيقوم المثبت بكتابة ملف <code>.htaccess</code> معه، ولكن إذا فشل ذلك، يمكن لأي شخص الوصول إلى قاعدة البيانات الأولية الخاصة بك. <br>ويشمل ذلك بيانات المستخدمين الأولية (عناوين البريد الإلكتروني وكلمات المرور المشفرة) بالإضافة إلى الصفحات المحمية والبيانات الأخرى المقيدة على الويكي. <br><br>فكر في وضع قاعدة البيانات في مكان آخر تمامًا، على سبيل المثال في <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'اسم المستخدم',
 'DbUserDesc'					=> 'اسم المستخدم المستخدم للاتصال بقاعدة البيانات الخاصة بك.',
 'DbPassword'					=> 'كلمة السر',
@@ -189,7 +189,7 @@ $lang = [
 'InstallDefaultData'			=> 'إضافة البيانات الافتراضية',
 'InstallPagesBegin'				=> 'إضافة الصفحات الافتراضية',
 'InstallPagesEnd'				=> 'تم الانتهاء من إضافة الصفحات الافتراضية',
-'InstallSystemAccount'			=> 'Adding <code>System</code> User',
+'InstallSystemAccount'			=> 'إضافة <code>System</code> مستخدم',
 'InstallDeletedAccount'			=> 'Adding <code>Deleted</code> User',
 'InstallAdmin'					=> 'إضافة مستخدم مسؤول',
 'InstallAdminSetting'			=> 'إضافة تفضيلات مستخدم المدير',

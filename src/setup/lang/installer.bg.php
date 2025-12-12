@@ -54,7 +54,7 @@ $lang = [
 'LockPassword'					=> 'Парола:',
 'LockLogin'						=> 'Влизане',
 'LockPasswordInvalid'			=> 'Invalid password.',
-'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'LockedTryLater'				=> 'Този сайт в момента се обновява. Моля, опитайте отново по-късно.',
 'EmptyAuthFile'					=> 'Липсващ или празен файл %1. Моля, създайте файла и задайте парола в него.',
 
 

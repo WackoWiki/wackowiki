@@ -54,19 +54,19 @@ $lang = [
 'LockPassword'					=> 'Kata sandi:',
 'LockLogin'						=> 'Log masuk',
 'LockPasswordInvalid'			=> 'Invalid password.',
-'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'LockedTryLater'				=> 'Situs ini sedang dalam proses pembaruan. Silakan coba lagi nanti.',
 'EmptyAuthFile'					=> 'Berkas %1 hilang atau kosong. Silakan buat berkas tersebut dan atur kata sandi di dalamnya.',
 
 
 /*
    Language Selection Page
 */
-'lang'							=> 'Language Configuration',
-'PleaseUpgradeToR6'				=> 'You appear to be running an old release of WackoWiki %1. To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki! It appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki! You are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
-'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have local hacks and patches applied to them before starting upgrade process. This can save you from a big headache.',
-'LangDesc'						=> 'Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.',
+'lang'							=> 'Konfigurasi Bahasa',
+'PleaseUpgradeToR6'				=> 'Anda tampaknya menggunakan versi lama WackoWiki %1. Untuk memperbarui ke versi ini dari WackoWiki, Anda harus terlebih dahulu memperbarui instalasi Anda ke %2.',
+'UpgradeFromWacko'				=> 'Selamat datang di WackoWiki! Sepertinya Anda sedang melakukan pembaruan dari WackoWiki %1 ke %2.  Halaman-halaman berikutnya akan memandu Anda melalui proses pembaruan.',
+'FreshInstall'					=> 'Selamat datang di WackoWiki! Anda akan segera menginstal WackoWiki %1.  Halaman-halaman berikutnya akan memandu Anda melalui proses instalasi.',
+'PleaseBackup'					=> 'Silakan, <strong>cadangkan</strong> basis data, berkas konfigurasi, dan semua berkas yang telah diubah, seperti berkas yang telah diterapkan modifikasi lokal atau tambalan, sebelum memulai proses pembaruan. Hal ini dapat menghindarkan Anda dari masalah besar.',
+'LangDesc'						=> 'Silakan pilih bahasa untuk proses instalasi. Bahasa ini juga akan digunakan sebagai bahasa default untuk instalasi WackoWiki Anda.',
 
 /*
    System Requirements Page

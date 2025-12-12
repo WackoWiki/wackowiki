@@ -54,24 +54,24 @@ $lang = [
 'LockPassword'					=> '密碼:',
 'LockLogin'						=> '登入',
 'LockPasswordInvalid'			=> 'Invalid password.',
-'LockedTryLater'				=> 'This site is currently being upgraded. Please try again later.',
+'LockedTryLater'				=> '本網站正在升級中，請稍後再試。',
 'EmptyAuthFile'					=> '缺少或空的 %1 檔案。請建立該檔案並在其中設定密碼。',
 
 
 /*
    Language Selection Page
 */
-'lang'							=> 'Language Configuration',
+'lang'							=> '語言設定',
 'PleaseUpgradeToR6'				=> '您似乎正在使用舊版本的 WackoWiki %1。若要更新至此版本的 WackoWiki，您必須先將安裝更新至 %2。',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
-'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
-'LangDesc'						=> 'Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.',
+'UpgradeFromWacko'				=> '歡迎來到 WackoWiki！您似乎正在從 WackoWiki %1 升級至 %2。接下來的幾頁將引導您完成升級流程。',
+'FreshInstall'					=> '歡迎來到 WackoWiki！您即將安裝 WackoWiki %1。接下來的頁面將引導您完成安裝流程。',
+'PleaseBackup'					=> '請務必在啟動升級程序前，<strong>備份</strong>您的資料庫、設定檔以及所有已修改的檔案（例如已套用本地化修改或修補程式之檔案）。此舉可避免您日後陷入棘手的困境。',
+'LangDesc'						=> '請選擇安裝程序的語言。此語言亦將作為您的 WackoWiki 安裝預設語言。',
 
 /*
    System Requirements Page
 */
-'version-check'					=> 'System Requirements',
+'version-check'					=> '系統需求',
 'PhpVersion'					=> 'PHP 版本',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
@@ -100,25 +100,25 @@ $lang = [
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
 'SiteNameDefault'				=> '我的 wiki',
 'HomePage'						=> '首頁',
-'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'HomePageDesc'					=> 'Enter the name you would like your home page to have. This will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> '首頁',
 'MultiLang'						=> 'Multi Language Mode',
 'MultiLangDesc'					=> 'Multilingual mode allows you to have pages with different language settings within a single installation. When this mode is enabled, the installer creates initial menu items for all languages available in the distribution.',
 'AllowedLang'					=> 'Allowed Languages',
-'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, otherwise all languages are selected.',
 'AclMode'						=> '預設 ACL 設定',
 'AclModeDesc'					=> '',
 'PublicWiki'					=> '公共 Wiki（所有人可閱讀，註冊用戶可撰寫和評論）',
 'PrivateWiki'					=> '私人 Wiki（僅限註冊用戶閱讀、撰寫、評論）',
 'Admin'							=> 'Admin Name',
-'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
-'NameAlphanumOnly'				=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters. Upper case characters are OK.',
+'AdminDesc'						=> 'Enter the admin\'s username. This should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters. Uppercase characters are OK.',
 'NameCamelCaseOnly'				=> '使用者名稱長度必須在 %1 - %2 字元間，並且為WikiName的格式。',
 'Password'						=> 'Admin Password',
 'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
 'PasswordConfirm'				=> 'Repeat Password:',
 'Mail'							=> 'Admin Email Address',
-'MailDesc'						=> 'Enter the admins email address.',
+'MailDesc'						=> 'Enter the admin\'s email address.',
 'Base'							=> 'Base URL',
 'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
 'Rewrite'						=> '重寫模式',
@@ -126,8 +126,8 @@ $lang = [
 'Enabled'						=> 'Enabled:',
 'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
 'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
-'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
-'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
+'ErrorAdminPasswordShort'		=> 'The admin password is too short! The minimum length is %1 characters.',
+'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled. This, however, does not mean it is disabled.',
 
 /*
    Database Config Page
@@ -144,11 +144,11 @@ $lang = [
 'DbEngine'						=> '儲存引擎',
 'DbEngineDesc'					=> 'The database engine you want to use.',
 'DbHost'						=> '資料庫主機',
-'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
+'DbHostDesc'					=> 'The host your database server is running on, usually <code>127.0.0.1</code> or <code>localhost</code> (i.e., the same machine your WackoWiki site is on).',
 'DbPort'						=> '資料庫埠號 (Optional)',
-'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
+'DbPortDesc'					=> 'The port number your database server is accessible through. Leave it blank to use the default port number.',
 'DbName'						=> '資料庫名稱',
-'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
+'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
 'DbNameSqliteHelp'				=> 'SQLite 將所有資料儲存於單一檔案中。<br><br>安裝時，您提供的目錄必須可被網頁伺服器寫入。<br><br>該目錄應<strong>不可</strong>透過網頁存取。<br><br>安裝程式會同步建立 <code>.htaccess</code> 檔案，若此機制失效，他人可能直接存取原始資料庫。<br>這包含原始使用者資料（電子郵件地址、雜湊密碼）以及維基上的受保護頁面與其他限制性資料。<br><br>建議將資料庫另存至其他位置，例如 <code>/var/lib/wackowiki/yourwiki</code>。',
 'DbUser'						=> '資料庫使用者名稱',
@@ -160,13 +160,13 @@ $lang = [
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
 'DeleteTables'					=> 'Delete Existing Tables?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
+'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone, and you will be required to manually restore the data from a backup.',
 'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
 
 /*
    Database Installation Page
 */
-'install-database'				=> 'Database Installation',
+'install-database'				=> '資料庫安裝',
 'TestingConfiguration'			=> 'Testing Configuration',
 'TestConnectionString'			=> 'Testing database connection settings',
 'TestDatabaseExists'			=> 'Checking if the database you specified exists',
@@ -219,7 +219,7 @@ $lang = [
 'ErrorCreatingTrigger'			=> 'Error creating %1 trigger, does it already exist?',
 'DeletingTables'				=> '刪除表',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
-'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
+'ErrorDeletingTable'			=> 'Error deleting %1 table. The most likely reason is that the table does not exist, in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
 'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 
@@ -233,14 +233,14 @@ $lang = [
 'InstallationComplete'			=> '安装完成',
 'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
-'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
+'SecurityRisk'					=> 'You are advised to remove write access to %1 now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br><br>Don\'t forget to remove write access again later, i.e.<br>%3.<br><br>',
+'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2.<br><br> Don\'t forget to remove write access again later, i.e., <br>%3.<br><br>',
 'ErrorPrivilegesInstall'		=> 'If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
-'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'detailed description: https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> '再试一次',
 
 ];
