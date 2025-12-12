@@ -32,7 +32,7 @@ if (array_key_exists('wacko_version', $config))
 				'<code class="version">' . $config['wacko_version'] . '</code>',
 				'<code class="version">' . WACKO_VERSION . '</code>') .
 			"</p>\n";
-				echo '<p class="msg warning">' . _t('PleaseBackup') . "</p>\n";
+		echo '<p class="msg warning">' . _t('PleaseBackup') . "</p>\n";
 	}
 }
 else

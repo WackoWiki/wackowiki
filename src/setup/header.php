@@ -40,7 +40,7 @@ header('Content-Type: text/html; charset=utf-8');
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<link rel="stylesheet" href="<?php echo $base_path ?>setup/css/installer.css">
-		<link rel="shortcut icon" href="<?php echo $base_path ?>setup/images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="<?php echo $base_path ?>setup/image/favicon.ico" type="image/x-icon">
 	</head>
 	<body>
 		<div class="installer">
