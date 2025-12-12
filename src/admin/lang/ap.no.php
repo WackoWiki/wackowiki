@@ -309,7 +309,7 @@ $ap_translation = [
 	'AttachmentHandler'			=> 'Aktiver vedlegg behandler:',
 	'AttachmentHandlerInfo'		=> 'Tillater visning av vedlegg behandler.',
 	'SourceHandler'				=> 'Aktiver kildebehandler:',
-	'SourceHandlerInfo'			=> 'Permits the display of the source manager. (Automatic Copy)',
+	'SourceHandlerInfo'			=> 'Tillater visning av kildehåndtereren.',
 	'ExportHandler'				=> 'Aktiver XML-eksportbehandler:',
 	'ExportHandlerInfo'			=> 'Tillat visning av XML-eksportbehandleren.',
 
@@ -476,9 +476,8 @@ $ap_translation = [
 	'ReverseProxy'				=> 'Bruk omvendt proxy:',
 	'ReverseProxyInfo'			=> 'Aktiver denne innstillingen for å fastsette korrekt IP-adresse til fjernklienten ved å undersøke informasjon lagret i X-Forwarded-For overskrifter. X-Forwarded-For headere er en standardmekanisme for å identifisere klientsystemer som kobles til via en revers proxy-server, som firkant eller Pound. Reverser proxyservere blir ofte brukt til å forbedre ytelsen til tungt besøkte nettsteder og kan også gi andre tjenester som fungerer på nettstedet, sikkerhet eller kryptering. Hvis denne WackoWiki-installasjonen opererer bak en omvendt proxy, denne innstillingen bør aktiveres slik at korrekt IP-adresseinformasjon fanges opp i WackoWikis øktbehandling, logging, statistikk og tilgang til styringssystemer; hvis du er usikker på denne innstillingen, ikke har omvendt proxy, eller WackoWiki opererer i et felles hostingsmiljø, denne innstillingen bør forbli deaktivert.',
 	'ReverseProxyHeader'		=> 'Revers proxy header:',
-	'ReverseProxyHeaderInfo'	=> 'Angi denne verdien hvis proxytjenen din sender klientens IP i en overskrift
-									 ⋅εεεεεεεεεε^ other than X-Forwarded-For. (Automatic Translation) Overskriften "X-Forwarded-For" er en kommaseparert liste over IP
-									 εephalephalephalephalephalε″addresses; bare den siste (den venstremest) vil bli brukt.',
+	'ReverseProxyHeaderInfo'	=> 'Angi denne verdien hvis proxy-serveren din sender klient-IP-adressen i en annen header
+ enn X-Forwarded-For. «X-Forwarded-For»-headeren er en kommaseparert liste over IP-adresser; bare den siste (den til venstre) vil bli brukt.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy godtar en liste med IP-adresser:',
 	'ReverseProxyAddressesInfo'	=> 'Hvert element i denne matrisen er IP-adressen til en av dine omvendte
 									 proxyer. Hvis du bruker denne matrisen, vil WackoWiki stole på informasjonen som er lagret
@@ -501,7 +500,7 @@ $ap_translation = [
 
 	'RewriteMode'					=> 'Bruk <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'Hvis din web-server støtter denne funksjonen, aktiver "vakker" sidens URL-er.<br>
-										εεεεεεεεεε″										<span class="cite">Verdien kan overskrives av innstillingsklassen på kjøretidspunktet. uavhengig om den er slått av, hvis HTTP_MOD_REWRITE er på.',
+										<span class="cite">Verdien kan overskrives av innstillingsklassen på kjøretidspunktet. uavhengig om den er slått av, hvis HTTP_MOD_REWRITE er på.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parametere ansvarlig for tilgangskontroll og -tillatelser.',
@@ -932,9 +931,9 @@ $ap_translation = [
 	'MaxImageWidthInfo'			=> 'Maksimal bredde på et bilde kan ha på sider, ellers genereres et skalert miniatyrbilde.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'Liste over slettede sider, revisjoner og filer.
-									KABKABGlenεεεεεεε″Fjern eller gjenopprett sidene, Revisjoner eller filer fra databasen ved å klikke på koblingen <em>Fjern</em>
-									Connuflue εεεεεεephalephalephaló eller <em>Gjenoppretter</em> i tilsvarende rad. (Be forsiktig, ingen slette-bekreftelse er forespurt!)',
+	'DeletedObjectsInfo'		=> 'Liste over fjernede sider, revisjoner og filer.
+Fjern eller gjenopprett sidene, revisjonene eller filene fra databasen ved å klikke på lenken <em>Fjern</em>
+eller <em>Gjenopprett</em> i den tilsvarende raden. (Vær forsiktig, det blir ikke bedt om bekreftelse på sletting!)',
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Ord som vil bli sensurert automatisk på din Wiki.',
