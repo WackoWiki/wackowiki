@@ -469,7 +469,7 @@ function get_data($engine, $tables, $pack, $table, $root = ''): int
 
 	// check file existence
 	clearstatcache();
-	$file_name = Ut::join_path($pack, $table, BACKUP_FILE_DUMP_SUFFIX);
+	$file_name = Ut::join_path($pack, $table . BACKUP_FILE_DUMP_SUFFIX);
 
 	if (file_exists($file_name) === true)
 	{
