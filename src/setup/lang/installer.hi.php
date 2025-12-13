@@ -71,7 +71,7 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check'					=> 'System Requirements',
+'version-check'					=> 'प्रणाली आवश्यकताएँ',
 'PhpVersion'					=> 'PHP Version',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
@@ -80,7 +80,7 @@ $lang = [
 'PhpExtensions'					=> 'PHP विस्तार',
 'Permissions'					=> 'अनुमतियाँ',
 'ReadyToInstall'				=> 'Ready to Install?',
-'Requirements'					=> 'Your server must meet the requirements listed below.',
+'Requirements'					=> 'आपके सर्वर को नीचे सूचीबद्ध आवश्यकताओं को पूरा करना होगा।',
 'OK'							=> 'OK',
 'Problem'						=> 'Problem',
 'Example'						=> 'Example',
@@ -88,9 +88,9 @@ $lang = [
 'ErrorPhpExtensions'			=> 'ऐसा प्रतीत होता है कि आपके PHP इंस्टॉलेशन में संकेतित PHP एक्सटेंशन गायब हैं, जो WackoWiki के लिए आवश्यक हैं।',
 'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
-'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
-'Ready'							=> 'Congratulations, it appears that your server is capable of running WackoWiki. The next few pages will take you through the configuration process.',
+'ErrorPermissions'				=> 'ऐसा प्रतीत होता है कि इंस्टॉलर WackoWiki को सही ढंग से काम करने के लिए आवश्यक फ़ाइल अनुमतियाँ स्वचालित रूप से सेट नहीं कर पा रहा है। इंस्टॉलेशन प्रक्रिया में बाद में आपको अपने सर्वर पर आवश्यक फ़ाइल अनुमतियों को मैन्युअल रूप से कॉन्फ़िगर करने के लिए कहा जाएगा।',
+'ErrorMinPhpVersion'			=> 'PHP संस्करण %1 से अधिक होना चाहिए। ऐसा प्रतीत होता है कि आपका सर्वर एक पुराना संस्करण चला रहा है। WackoWiki को सही ढंग से काम करने के लिए आपको एक अधिक नवीन PHP संस्करण में अपग्रेड करना होगा।',
+'Ready'							=> 'बधाई हो, ऐसा प्रतीत होता है कि आपका सर्वर WackoWiki चलाने में सक्षम है। अगले कुछ पृष्ठ आपको कॉन्फ़िगरेशन प्रक्रिया से गुज़रेंगे।',
 
 /*
    Site Config Page
@@ -124,7 +124,7 @@ $lang = [
 'Rewrite'						=> 'Rewrite Mode',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> 'Enabled:',
-'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
+'ErrorAdminEmail'				=> 'आपने एक अमान्य ईमेल पता दर्ज किया है!',
 'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
 'ErrorAdminPasswordShort'		=> 'एडमिन पासवर्ड बहुत छोटा है! न्यूनतम लंबाई %1 वर्ण है।',
 'ModRewriteStatusUnknown'		=> 'इंस्टॉलर यह सत्यापित नहीं कर सकता कि mod_rewrite सक्षम है। हालाँकि, इसका मतलब यह नहीं है कि यह अक्षम है।',
@@ -146,7 +146,7 @@ $lang = [
 'DbHost'						=> 'डेटाबेस होस्ट',
 'DbHostDesc'					=> 'वह होस्ट जिस पर आपका डेटाबेस सर्वर चल रहा है, आमतौर पर <code>127.0.0.1</code> या <code>localhost</code> (अर्थात, वही मशीन जिस पर आपकी WackoWiki साइट है)।',
 'DbPort'						=> 'डेटाबेस पोर्ट (Optional)',
-'DbPortDesc'					=> 'The port number your database server is accessible through. Leave it blank to use the default port number.',
+'DbPortDesc'					=> 'वह पोर्ट नंबर जिसके माध्यम से आपका डेटाबेस सर्वर सुलभ है। डिफ़ॉल्ट पोर्ट नंबर का उपयोग करने के लिए इसे खाली छोड़ दें।',
 'DbName'						=> 'डेटाबेस का नाम',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
 'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
@@ -156,21 +156,21 @@ $lang = [
 'DbPassword'					=> 'कूटशब्द',
 'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
 'Prefix'						=> 'Table Prefix',
-'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',
+'PrefixDesc'					=> 'WackoWiki द्वारा उपयोग की जाने वाली सभी तालिकाओं का उपसर्ग। यह आपको एक ही डेटाबेस का उपयोग करते हुए विभिन्न तालिका उपसर्गों (जैसे wacko_) को कॉन्फ़िगर करके कई WackoWiki इंस्टॉलेशन चलाने की अनुमति देता है।',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
-'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
-'DeleteTables'					=> 'Delete Existing Tables?',
+'ErrorNoDbDriverSelected'		=> 'कोई डेटाबेस ड्राइवर चयनित नहीं है, कृपया सूची से एक चुनें।',
+'DeleteTables'					=> 'मौजूदा तालिकाएँ हटाएँ?',
 'DeleteTablesDesc'				=> 'ध्यान दें! यदि आप इस विकल्प को चुनकर आगे बढ़ते हैं तो आपके डेटाबेस से सभी मौजूदा विकी डेटा मिटा दिए जाएँगे। जब तक आप बैकअप से डेटा को मैन्युअल रूप से पुनर्स्थापित नहीं करते, तब तक इसे पूर्ववत नहीं किया जा सकता।',
 'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
 
 /*
    Database Installation Page
 */
-'install-database'				=> 'Database Installation',
+'install-database'				=> 'डेटाबेस स्थापना',
 'TestingConfiguration'			=> 'Testing Configuration',
-'TestConnectionString'			=> 'Testing database connection settings',
-'TestDatabaseExists'			=> 'Checking if the database you specified exists',
-'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
+'TestConnectionString'			=> 'डेटाबेस कनेक्शन सेटिंग्स का परीक्षण',
+'TestDatabaseExists'			=> 'आपके द्वारा निर्दिष्ट डेटाबेस का अस्तित्व है या नहीं, जांचा जा रहा है',
+'TestDatabaseVersion'			=> 'डेटाबेस न्यूनतम संस्करण आवश्यकताओं की जाँच',
 'SqliteFileExtensionError'		=> 'कृपया निम्नलिखित फ़ाइल एक्सटेंशनों में से किसी एक का उपयोग करें: db, sdb, sqlite।',
 'SqliteParentUnwritableGroup'	=> 'डेटा डिरेक्ट्री <code>%1</code> को बनाया नहीं जा सकता, क्योंकि जनक डिरोक्ट्री <code>%2</code> में वेब-सर्वर को लिखने की अनुमति नहीं है।<br><br>इंस्टॉलर ने उस सदस्य का पता लगा लिया है जिसके रूप में आपका वेब-सर्वर चल रहा है।<br>आगे बढ़ने के लिए <code>%3</code> डिरेक्ट्री में इसे लिखने की अनुमति दें।<br>Unix/Linux सिस्टम पर यह चलाएँ:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
 'SqliteParentUnwritableNogroup'	=> 'डेटा डिरेक्ट्री <code>%1</code> को बनाया नहीं जा सकता, क्योंकि जनक डिरोक्ट्री <code>%2</code> में वेब-सर्वर को लिखने की अनुमति नहीं है।<br><br>इंस्टॉलर ने उस सदस्य का पता लगा लिया है जिसके रूप में आपका वेब-सर्वर चल रहा है।<br>आगे बढ़ने के लिए <code>%3</code> डिरेक्ट्री में इसे (और दूसरे सर्वरों को भी!) लिखने की अनुमति दें।<br>Unix/Linux सिस्टम पर यह चलाएँ:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',

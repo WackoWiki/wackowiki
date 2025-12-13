@@ -43,7 +43,52 @@ function output_image($ok): string
 	return '<img src="' . $base_path . 'image/spacer.png" width="20" height="20" alt="' . $text . '" title="' . $text . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
 }
 
-// TODO: same function as in wacko class
+// negotiate language with user's browser
+function user_agent_language()
+{
+	global $config;
+	$lang = $config['language'];
+
+	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+	{
+		$lang_list = available_languages();
+
+		// https://www.rfc-editor.org/rfc/rfc9110.html#section-12.5.4
+		preg_match_all('/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?' .
+			'(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/',
+			strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
+			$matches, PREG_SET_ORDER);
+
+		$best = 0;
+
+		foreach ($matches as $i)
+		{
+			$want1 = $want2 = $i[1];
+
+			if ($i[3])
+			{
+				$want2 = $want1 . '-' . $i[3];
+			}
+
+			$q = ($i[5] !== '')? (float)$i[5] : 1;
+
+			if (in_array($want2, $lang_list) && $q > $best)
+			{
+				$lang = $want2;
+				$best = $q;
+			}
+			else if (in_array($want1, $lang_list) && $q * 0.9 > $best)
+			{
+				$lang = $want1;
+				$best = $q * 0.9;
+			}
+		}
+	}
+
+	return $lang;
+}
+
+// TODO: similar function in Http class
 // site config
 function available_languages(): array
 {
@@ -88,8 +133,6 @@ function set_language($iso): array
 		require_once 'setup/lang/installer.en.php';
 		$x['en'] = array_merge ($lang, $lang_all);
 	}
-
-	#Ut::debug_print_r($x);
 
 	return $x;
 }
