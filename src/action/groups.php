@@ -76,7 +76,7 @@ else
 		$param['group'] = $group;
 	}
 
-	$_sort = @$_GET['sort'];
+	$_sort = $_GET['sort'] ?? '';
 	$sort_modes	=
 	[
 		'name'			=> 'g.group_name',
@@ -86,7 +86,7 @@ else
 
 	if (isset($sort_modes[$_sort]))
 	{
-		$_order			= @$_GET['order'];
+		$_order			= $_GET['order'] ?? '';
 		$order_modes	=
 		[
 			'asc'	=> 'ASC',

@@ -50,7 +50,7 @@ if ($user_id = $this->get_user_id())
 				''			=> 'OrderChange',
 				'byname'	=> 'OrderABC',
 			];
-	$mode	= @$_GET[$mod_selector];
+	$mode	= $_GET[$mod_selector] ?? '';
 
 	if (!array_key_exists($mode, $tabs))
 	{

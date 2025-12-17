@@ -866,7 +866,7 @@ function bb2_options($engine)
 	<br><br>
 	<?php
 	$mode_selector	= 'setting';
-	$mode			= @$_GET[$mode_selector];
+	$mode			= $_GET[$mode_selector] ?? '';
 
 	// navigation
 	$tabs	= [

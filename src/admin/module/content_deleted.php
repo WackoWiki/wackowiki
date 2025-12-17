@@ -28,7 +28,7 @@ function admin_content_deleted($engine, $module)
 	<?php
 
 	$mode_selector	= 'type';
-	$mode			= @$_GET[$mode_selector];
+	$mode			= $_GET[$mode_selector] ?? '';
 
 	// navigation
 	$tabs	= [

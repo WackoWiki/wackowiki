@@ -25,7 +25,7 @@ if ($help)
 if ($this->get_user_name())
 {
 	$mode_selector	= 'mode';
-	$mode			= @$_GET[$mode_selector];
+	$mode			= $_GET[$mode_selector] ?? '';
 
 	// navigation
 	$tabs	= [

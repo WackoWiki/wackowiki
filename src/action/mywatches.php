@@ -33,7 +33,7 @@ if ($user_id = $this->get_user_id())
 	$profile		= ($profile? ['profile' => $profile] : []);
 	$profile_mode	= Ut::html(@$_GET['mode']);
 	$mode_selector	= 's';
-	$mode			= @$_GET[$mode_selector];
+	$mode			= $_GET[$mode_selector] ?? '';
 	$p				= isset($_GET['p']) ? ['p' => (int) $_GET['p']] : [];
 	$prefix			= $this->prefix;
 	$title			= (int) $title;

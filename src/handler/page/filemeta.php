@@ -83,7 +83,7 @@ if (!empty($file) && $file_access($file))
 
 # Ut::debug_print_r($tabs);
 
-$mode	= $_GET[$mod_selector] ?? null;
+$mode	= $_GET[$mod_selector] ?? '';
 
 if (!array_key_exists($mode, $tabs))
 {
