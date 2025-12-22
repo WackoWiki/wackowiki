@@ -754,7 +754,7 @@ $ap_translation = [
 	'GroupsPage'				=> 'Kelompok:',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'WhatsNewPage'				=> 'What\'s new:',
-	'WhatsNewPageInfo'			=> 'Page with a list of all new, deleted, or changed pages, new attachments, and comments. (action %1).',
+	'WhatsNewPageInfo'			=> 'Halaman yang menampilkan daftar semua halaman baru, dihapus, atau diubah, lampiran baru, dan komentar. (aksi %1).',
 	'ChangesPage'				=> 'Recent changes:',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
 	'CommentsPage'				=> 'Recent comments:',
@@ -1034,7 +1034,7 @@ $ap_translation = [
     	'The root cluster does not affect the global files backup and cache files backup (if chosen, they are always saved in full).<br>' .  '<br>' .
 		'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster, the tables from this backup will not be restructured, same as when backing up only table structure without saving the data. To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
-    	'The Backup package files were stored in the sub-directory %1.<br>To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
+    	'Berkas-berkas paket cadangan disimpan di subdirektori %1.<br>Untuk mengunduhnya, gunakan FTP (pastikan struktur direktori dan nama berkas tetap terjaga saat menyalin).<br> Untuk memulihkan salinan cadangan atau menghapus paket, kunjungi <a href="%2">Pulihkan basis data</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 	'Backup'					=> 'Cadangan',
 	'CantReadFile'				=> 'Can\'t read file %1.',

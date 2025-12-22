@@ -9,7 +9,7 @@ $insert = [
 			'문서는 다음에서 찾을 수 있습니다 WackoWiki:Doc/English.' . "\n" .
 			'유용한 페이지들: ((WackoWiki:Doc/English/Formatting Formatting)), ((/검색 검색)).' . "\n\n",
 	'root_page'			=> '홈페이지',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> '관리자 도구',
 
 	'category_page'		=> '카테고리',
 	'groups_page'		=> '그룹',
@@ -25,13 +25,13 @@ $insert = [
 	'login_page'		=> '로그인',
 	'account_page'		=> '설정',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> '새로운 소식',
 	'changes_page'		=> '최근 바뀜',
 	'comments_page'		=> '최근 댓글',
 	'index_page'		=> '페이지 색인',
 	'random_page'		=> '임의의 문서로',
 
-	'tools_page_bm'		=> 'Tools',
+	'tools_page_bm'		=> '도구',
 	'whatsnew_page_bm'	=> '바뀜',
 	'changes_page_bm'	=> '바뀜',
 	'comments_page_bm'	=> '댓글',

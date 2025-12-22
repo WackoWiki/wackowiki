@@ -9,7 +9,7 @@ $insert = [
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Search Search)).' . "\n\n",
 	'root_page'			=> 'Halaman Beranda',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Alat admin',
 
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Kelompok',

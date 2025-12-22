@@ -1,13 +1,13 @@
 lang = {
 	// default.js
 	ReallySave: 'Really save?',
-	ModifiedHint: 'Field has changed, do not forget to save the changes.',
-	NotSavedWarning: 'You did not save changes. Are you sure you want to leave?',
-	SessionExpiredEditor: 'Your session has expired!\nYou\'ve been logged off due to long inactivity.\n1. Save your form edits to text file to prevent loss.\n2. Refresh the page.\n3. Log in again and re-submit.',
+	ModifiedHint: 'Lapangan telah berubah, jangan lupa untuk menyimpan perubahan.',
+	NotSavedWarning: 'Anda belum menyimpan perubahan. Apakah Anda yakin ingin keluar?',
+	SessionExpiredEditor: 'Sesi Anda telah berakhir!\nAnda telah keluar karena tidak aktif dalam waktu lama.\n1. Simpan perubahan formulir Anda ke berkas teks untuk mencegah kehilangan data.\n2. Segarkan halaman.\n3. Masuk kembali dan kirim ulang.',
 	// wikiedit.js
 	HelpAbout: 'Help & About',
 	HelpFormatting: 'Bantuan',
-	HelpFormattingTip: 'Help on Wiki-formatting',
+	HelpFormattingTip: 'Bantuan tentang format wiki',
 	HelpFormattingPage: 'Doc/English/Formatting',
 	Heading1: 'Heading 1',
 	Heading2: 'Heading 2',

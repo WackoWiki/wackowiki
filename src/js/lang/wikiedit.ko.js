@@ -1,14 +1,14 @@
 lang = {
 	// default.js
 	ReallySave :			"Really save?",
-	ModifiedHint :			"Field has changed, do not forget to save the changes.",
+	ModifiedHint :			"필드가 변경되었습니다. 변경 사항을 저장하는 것을 잊지 마십시오.",
 	NotSavedWarning :		"변경 사항을 저장하지 않았습니다. 정말로 나가시겠습니까?",
 	SessionExpiredEditor :	"세션이 만료되었습니다!\n장기간 활동이 없어 로그오프되었습니다.\n1. 양식 수정 내용을 텍스트 파일로 저장하여 손실을 방지하세요.\n2. 페이지를 새로 고치세요.\n3. 다시 로그인하여 제출하세요.",
 
 	// wikiedit.js
 	HelpAbout :				"도움말 & 소개",
 	HelpFormatting :		"도움말",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpFormattingTip :		"위키 서식 도움말",
 	HelpFormattingPage :	"Doc/English/Formatting",
 
 	Heading1 :				"1단계 문단 제목",
@@ -42,7 +42,7 @@ lang = {
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
-	Footnote :				"Footnote",
+	Footnote :				"각주",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"표 삽입",
 

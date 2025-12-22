@@ -4,9 +4,9 @@ $lang = [
 /*
    Language Settings
 */
-'LangISO'		=> 'en',
-'LangLocale'	=> 'en_US',
-'LangName'		=> 'English',
+'LangISO'		=> 'cs',
+'LangLocale'	=> 'cs_CZ',
+'LangName'		=> 'Czech',
 'LangDir'		=> 'ltr',
 
 /*

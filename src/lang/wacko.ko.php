@@ -283,7 +283,7 @@ $wacko_translation = [
 
 	// categories handler
 	'Categories'				=> '카테고리',
-	'CategoriesAssign'			=> 'assign',
+	'CategoriesAssign'			=> '할당하다',
 	'CategoriesEdit'			=> '편집',
 	'Category'					=> '카테고리',
 	'CategoriesFor'				=> 'Categories for',
@@ -308,7 +308,7 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> '카테고리 %1을 삭제하시겠습니까?',
 	'CategoriesDeleteInfo'		=> '* 참고: 변경 사항은 해당 카테고리에 할당된 모든 페이지에 적용됩니다. 단어에 하위 카테고리가 있는 경우, 하위 카테고리는 삭제되지 않고 분리만 됩니다.',
-	'CategoriesStoreInfo'		=> '페이지에 범주를 할당하려면 확인란을 선택합니다..',
+	'CategoriesStoreInfo'		=> '페이지에 범주를 할당하려면 확인란을 선택합니다.',
 	'CategoriesStoreButton'		=> '카테고리 저장',
 	'CategoriesGroupButton'		=> '그룹',
 	'CategoriesEditInfo'		=> '카테고리 목록을 편집하려면 라디오 버튼을 선택하세요.',
@@ -371,12 +371,12 @@ $wacko_translation = [
 	'RevisionsFor'				=> '이력 %1',
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
-		'0'		=> 'Full diff',
-		'1'		=> 'Simple diff',
+		'0'		=> '전체 차이점',
+		'1'		=> '간단한 차이점',
 		'2'		=> '원본',
 		'3'		=> '다중 창 방식',
 		'4'		=> '직렬 방식',
-		'5'		=> 'Merged',
+		'5'		=> '병합됨',
 		'6'		=> 'Unified',
 		'7'		=> 'Context',
 	],
@@ -391,7 +391,7 @@ $wacko_translation = [
 
 	'ShowDifferencesButton'		=> '변경 사항 보기',
 	'CancelReturnButton'		=> '취소하고 페이지로 돌아 가기',
-	'Comparison'				=> 'Difference between revisions for %1',
+	'Comparison'				=> '%1에 대한 개정판 간 차이점',
 	'RevisionAsOf'				=> 'Revision %1 as of',
 	'SimpleDiffAdditions'		=> '추가 사항:',
 	'SimpleDiffDeletions'		=> '삭제 항목:',
@@ -441,7 +441,7 @@ $wacko_translation = [
 	'RevisionRestored'			=> 'Revision restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
-	'PrintVersion'				=> 'Print version',
+	'PrintVersion'				=> '인쇄용 버전',
 	'PrintText'					=> '인쇄',
 	'LinkedPages'				=> 'Linked pages:',
 	'NoLinkedPages'				=> 'There are no linked pages',
@@ -565,7 +565,7 @@ $wacko_translation = [
 	'EditIcon'					=> '편집',
 	'TreeClusterTitle'			=> 'Tree of cluster %1',
 	'TreeSiteTitle'				=> 'Site tree',
-	'TreeEmpty'					=> '%1 has no subpages',
+	'TreeEmpty'					=> '%1에는 하위 페이지가 없습니다',
 	'TreeEmptyLevels'			=> '%1에는 지정된 깊이 수준에 대한 하위 페이지가 없습니다. 깊이 값을 늘리십시오.',
 	'TreeTooBig'				=> '하위 페이지가 너무 많습니다',
 
@@ -737,7 +737,7 @@ $wacko_translation = [
 	// users action
 	'UsersSearch'				=> '사용자 찾기',
 	'UsersOpenProfile'			=> '프로필 보기',
-	'UsersNoMatching'			=> 'Matching users not found. Try a less strict search criteria.',
+	'UsersNoMatching'			=> '일치하는 사용자를 찾을 수 없습니다. 검색 조건을 완화해 보세요.',
 	'UsersName'					=> '이름',
 	'UsersPages'				=> '페이지',
 	'UsersChanges'				=> '바뀜',
@@ -751,7 +751,7 @@ $wacko_translation = [
 	'UsersRevisions'			=> '수정복사본',
 	'UsersSignup'				=> '가입하기',
 	'UsersLastSession'			=> '마지막 세션',
-	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
+	'UsersNotFound'				=> '사용자 %2를 찾을 수 없습니다. <a href="%1">여기</a>를 클릭하여 메인 목록으로 이동하세요.',
 	'UsersProfile'				=> '사용자 프로필',
 	'UsersContact'				=> '연락처',
 	'UsersList'					=> '전체 사용자 목록보기',
@@ -929,7 +929,7 @@ $wacko_translation = [
 	'FileNotFound'				=> '파일을 찾을 수 없습니다.',
 
 	'FileSearch'				=> '파일 찾기:',
-	'UploadBy'					=> 'Uploaded by:',
+	'UploadBy'					=> '업로드한 사람:',
 	'FileAdded'					=> '추가함:',
 	'FileModified'				=> '수정됨:',
 	'FileSize'					=> '파일 크기:',
@@ -984,7 +984,7 @@ $wacko_translation = [
 	'BookmarkTitle'				=> '북마크 제목',
 	'BookmarkPage'				=> '쪽',
 	'BookmarkSaveChanges'		=> '변경 사항 저장',
-	'BookmarksAddPage'			=> 'Set a bookmark for the following page',
+	'BookmarksAddPage'			=> '다음 페이지에 북마크를 설정하세요',
 	'BookmarkAlreadyExists'		=> '북마크가 이미 있습니다.',
 
 	'PoweredBy'					=> 'Powered by',
@@ -1016,7 +1016,7 @@ $wacko_translation = [
 
 	// license action
 	'DistributedUnder'			=> 'Material is distributed under',
-	'AuthorsDisplayHint'		=> 'The list of authors will be displayed when saving the page.',
+	'AuthorsDisplayHint'		=> '저자 목록은 페이지를 저장할 때 표시됩니다.',
 	'AnonymousUsers'			=> '익명 사용자',
 	'License'					=> '라이선스',
 	'LicenseArray'				=> [
@@ -1048,12 +1048,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter URL. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
+	'EmbedNoURL'				=> '매개변수 URL을 사용하여 리소스의 주소를 지정해 주세요. (예: {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> '피드 제목',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter URL. (e.g. {{feed url="https://example.com/feed.xml"}} )',
+	'FeedNoURL'					=> '매개변수 URL이 포함된 피드를 지정해 주세요. (예: {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> '출처:',
 	'FeedXMLTip'				=> '',
