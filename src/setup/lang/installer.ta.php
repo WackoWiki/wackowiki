@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'வகை',
 	'groups_page'		=> 'குழுக்கள்',
 	'users_page'		=> 'பயனர்கள்',
+	'tools_page'		=> 'கருவிகள்',
 
 	'search_page'		=> 'தேடு',
 	'login_page'		=> 'புகுபதிகை',

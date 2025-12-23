@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> '카테고리',
 	'groups_page'		=> '그룹',
 	'users_page'		=> '사용자',
+	'tools_page'		=> '도구',
 
 	'search_page'		=> '검색',
 	'login_page'		=> '로그인',

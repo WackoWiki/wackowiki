@@ -9,7 +9,7 @@ $insert = [
 			'दस्तावेज़ीकरण यहां पाया जा सकता है  WackoWiki:Doc/English.' . "\n" .
 			'उपयोगी पृष्ठ: ((WackoWiki:Doc/English/Formatting Formatting)), ((/खोजें खोजें))।' . "\n\n",
 	'root_page'			=> 'मुख पृष्ठ',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'प्रशासक टूल',
 
 	'category_page'		=> 'वर्ग',
 	'groups_page'		=> 'समूह',
@@ -31,7 +31,7 @@ $insert = [
 	'index_page'		=> 'पृष्ठ अनुक्रमणिका',
 	'random_page'		=> 'यादृच्छिक पृष्',
 
-	'tools_page_bm'		=> 'Tools',
+	'tools_page_bm'		=> 'टूल',
 	'whatsnew_page_bm'	=> 'परिवर्तन',
 	'changes_page_bm'	=> 'परिवर्तन',
 	'comments_page_bm'	=> 'टिप्पणियाँ',

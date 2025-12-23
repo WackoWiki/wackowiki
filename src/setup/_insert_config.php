@@ -206,6 +206,7 @@ $config_db['time_format_seconds']			= $config['time_format_seconds'];
 $config_db['timezone']						= $config['timezone'];
 $config_db['tls']							= $config['tls'];
 $config_db['tls_implicit']					= $config['tls_implicit'];
+$config_db['tools_page']					= $config['tools_page'];
 $config_db['tree_level']					= $config['tree_level'];
 $config_db['typografica']					= $config['typografica'];
 $config_db['upload']						= $config['upload'];

@@ -9,7 +9,7 @@ $insert = [
 			'Документация (на английски) има на WackoWiki:Doc/English.' . "\n" .
 			'Полезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Търсене Търсене)).' . "\n\n",
 	'root_page'			=> 'Начална страница',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'Админ инструменти',
 
 	'category_page'		=> 'Категория',
 	'groups_page'		=> 'Групи',
@@ -31,7 +31,7 @@ $insert = [
 	'index_page'		=> 'Каталог',
 	'random_page'		=> 'Случайна страница',
 
-	'tools_page_bm'		=> 'Tools',
+	'tools_page_bm'		=> 'Инструменти',
 	'whatsnew_page_bm'	=> 'Промени',
 	'changes_page_bm'	=> 'Промени',
 	'comments_page_bm'	=> 'Коментари',

@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Kategória',
 	'groups_page'		=> 'Csoportok',
 	'users_page'		=> 'Felhasználók',
+	'tools_page'		=> 'Eszközök',
 
 	'search_page'		=> 'Keresés',
 	'login_page'		=> 'Bejelentkezés',

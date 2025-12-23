@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Категория',
 	'groups_page'		=> 'Групи',
 	'users_page'		=> 'Потребители',
+	'tools_page'		=> 'Инструменти',
 
 	'search_page'		=> 'Търсене',
 	'login_page'		=> 'Влизане',
@@ -53,7 +54,7 @@ $lang = [
 'LockAuthorizationInfo'			=> 'Моля, въведете паролата, която сте запазили във файла %1.',
 'LockPassword'					=> 'Парола:',
 'LockLogin'						=> 'Влизане',
-'LockPasswordInvalid'			=> 'Invalid password.',
+'LockPasswordInvalid'			=> 'Невалидна парола.',
 'LockedTryLater'				=> 'Този сайт в момента се обновява. Моля, опитайте отново по-късно.',
 'EmptyAuthFile'					=> 'Липсващ или празен файл %1. Моля, създайте файла и задайте парола в него.',
 
@@ -149,7 +150,7 @@ $lang = [
 'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
 'DbName'						=> 'БД',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
-'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
+'DbNameSqliteDesc'				=> 'Директорията с данни и името на файла, които SQLite трябва да използва за WackoWiki.',
 'DbNameSqliteHelp'				=> 'SQLite съхранява всички данни в един файл.<br><br>Директорията, която предоставяте, трябва да може да се записва от уеб сървъра по време на инсталирането.<br><br>Тя <strong>не трябва</strong> да е достъпна чрез уеб. <br><br>Инсталаторът ще запише файл <code>.htaccess</code> заедно с него, но ако това не успее, някой може да получи достъп до вашата необработена база данни.<br>Това включва необработени потребителски данни (имейл адреси, хеширани пароли), както и защитени страници и други ограничени данни в уикито.<br><br>Обмислете да поставите базата данни на друго място, например в <code>/var/lib/wackowiki/yourwiki</code>.',
 'DbUser'						=> 'Име (username)',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',

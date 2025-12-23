@@ -1006,12 +1006,12 @@ $wacko_translation = [
 	// filter
 	'Filter'					=> 'filtro',
 	'OptionalFilters'			=> 'Filtros opcionais:',
-	'Any'						=> 'Qualquer',
+	'Any'						=> 'qualquer',
 
 	// My Groups
 	'UserGroups'				=> 'Grupos de usuários',
 	'MyGroups'					=> 'Associações de Grupos',
-	'Group'						=> 'Grupo',
+	'Group'						=> 'grupo',
 	'Groups'					=> 'grupos',
 
 	// license action

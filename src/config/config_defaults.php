@@ -167,6 +167,7 @@ $wacko_config_defaults = [
 	'orphaned_page'					=> '',
 	'search_page'					=> 'Search',
 	'login_page'					=> 'Login',
+	'tools_page'					=> 'Tools',
 	'account_page'					=> 'Account',
 	'registration_page'				=> 'Registration',
 	'password_page'					=> 'Password',

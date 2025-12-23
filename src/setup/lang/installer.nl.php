@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Categorie',
 	'groups_page'		=> 'Groepen',
 	'users_page'		=> 'Gebruikers',
+	'tools_page'		=> 'Hulpmiddelen',
 
 	'search_page'		=> 'Zoeken',
 	'login_page'		=> 'Inloggen',

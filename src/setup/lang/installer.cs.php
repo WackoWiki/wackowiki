@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Kategorie',
 	'groups_page'		=> 'Skupiny',
 	'users_page'		=> 'Uživatelé',
+	'tools_page'		=> 'Nástroje',
 
 	'search_page'		=> 'Hledat',
 	'login_page'		=> 'Přihlásit',

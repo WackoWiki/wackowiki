@@ -9,7 +9,7 @@ $insert = [
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'صفحات مفید: ((WackoWiki:Doc/English/Formatting Formatting)), ((جستجو)).' . "\n\n",
 	'root_page'			=> 'خانه',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'ابزارهای مدیریت',
 
 	'category_page'		=> 'دسته',
 	'groups_page'		=> 'گروه‌ها',
@@ -31,7 +31,7 @@ $insert = [
 	'index_page'		=> 'Page Index',
 	'random_page'		=> 'صفحه تصادفی',
 
-	'tools_page_bm'		=> 'Tools',
+	'tools_page_bm'		=> 'ابزارها',
 	'whatsnew_page_bm'	=> 'تغییرات',
 	'changes_page_bm'	=> 'تغییرات',
 	'comments_page_bm'	=> 'دیدگاه',

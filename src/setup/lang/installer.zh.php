@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> '分类',
 	'groups_page'		=> '用户组',
 	'users_page'		=> '用户',
+	'tools_page'		=> '工具',
 
 	'search_page'		=> '搜索',
 	'login_page'		=> '登录',

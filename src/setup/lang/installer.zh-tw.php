@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> '分類',
 	'groups_page'		=> '群組',
 	'users_page'		=> '使用者',
+	'tools_page'		=> '工具',
 
 	'search_page'		=> '搜尋',
 	'login_page'		=> '登入',
@@ -53,7 +54,7 @@ $lang = [
 'LockAuthorizationInfo'			=> '請輸入您儲存在檔案 %1 中的密碼。',
 'LockPassword'					=> '密碼:',
 'LockLogin'						=> '登入',
-'LockPasswordInvalid'			=> 'Invalid password.',
+'LockPasswordInvalid'			=> '密碼無效。',
 'LockedTryLater'				=> '本網站正在升級中，請稍後再試。',
 'EmptyAuthFile'					=> '缺少或空的 %1 檔案。請建立該檔案並在其中設定密碼。',
 
@@ -149,7 +150,7 @@ $lang = [
 'DbPortDesc'					=> 'The port number your database server is accessible through. Leave it blank to use the default port number.',
 'DbName'						=> '資料庫名稱',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
-'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
+'DbNameSqliteDesc'				=> 'SQLite 應該用於 WackoWiki 的資料目錄和檔名。',
 'DbNameSqliteHelp'				=> 'SQLite 將所有資料儲存於單一檔案中。<br><br>安裝時，您提供的目錄必須可被網頁伺服器寫入。<br><br>該目錄應<strong>不可</strong>透過網頁存取。<br><br>安裝程式會同步建立 <code>.htaccess</code> 檔案，若此機制失效，他人可能直接存取原始資料庫。<br>這包含原始使用者資料（電子郵件地址、雜湊密碼）以及維基上的受保護頁面與其他限制性資料。<br><br>建議將資料庫另存至其他位置，例如 <code>/var/lib/wackowiki/yourwiki</code>。',
 'DbUser'						=> '資料庫使用者名稱',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',

@@ -9,7 +9,7 @@ $insert = [
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/搜尋 搜尋)).' . "\n\n",
 	'root_page'			=> '首頁',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> '管理工具',
 
 	'category_page'		=> '分類',
 	'groups_page'		=> '群組',
@@ -31,7 +31,7 @@ $insert = [
 	'index_page'		=> '頁面索引',
 	'random_page'		=> '隨機頁面',
 
-	'tools_page_bm'		=> 'Tools',
+	'tools_page_bm'		=> '工具',
 	'whatsnew_page_bm'	=> '變動',
 	'changes_page_bm'	=> '變動',
 	'comments_page_bm'	=> '回應',

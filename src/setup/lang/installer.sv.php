@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Grupper',
 	'users_page'		=> 'Användare',
+	'tools_page'		=> 'Verktyg',
 
 	'search_page'		=> 'Sök',
 	'login_page'		=> 'Inloggning',

@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Kategooria',
 	'groups_page'		=> 'Grupid',
 	'users_page'		=> 'Kasutajad',
+	'tools_page'		=> 'Tööriistad',
 
 	'search_page'		=> 'Otsing',
 	'login_page'		=> 'Sisene',

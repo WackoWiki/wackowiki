@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'دسته',
 	'groups_page'		=> 'گروهها',
 	'users_page'		=> 'کاربران',
+	'tools_page'		=> 'ابزارها',
 
 	'search_page'		=> 'جستجو',
 	'login_page'		=> 'ورود',

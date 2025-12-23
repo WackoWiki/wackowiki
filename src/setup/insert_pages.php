@@ -19,7 +19,7 @@ function insert_pages($insert, $config)
 				'{{admin_recovery}}' . "\n\n" .
 				'%%' . "\n\n";
 			$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
-			$admin_tools		= $config['users_page'] . '/' . $config['admin_name'] . '/' . 'Tools';
+			$admin_tools		= $config['users_page'] . '/' . $config['admin_name'] . '/' . $config['tools_page'];
 
 			$critical_pages = [
 				$config['root_page']		=> [$insert['root_page'],			$home_page_body,		true, false, null, 0],

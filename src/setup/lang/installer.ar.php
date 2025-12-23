@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'الفئة',
 	'groups_page'		=> 'المجموعات',
 	'users_page'		=> 'المستخدمون',
+	'tools_page'		=> 'أدوات',
 
 	'search_page'		=> 'ابحث',
 	'login_page'		=> 'دخول',

@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'वर्ग',
 	'groups_page'		=> 'समूह',
 	'users_page'		=> 'उपयोगकर्ताओं',
+	'tools_page'		=> 'टूल',
 
 	'search_page'		=> 'खोजें',
 	'login_page'		=> 'प्रवेश',
@@ -53,7 +54,7 @@ $lang = [
 'LockAuthorizationInfo'			=> 'कृपया उस पासवर्ड को दर्ज करें जिसे आपने %1 फ़ाइल में सहेजा है।',
 'LockPassword'					=> 'कूटशब्द:',
 'LockLogin'						=> 'प्रवेश',
-'LockPasswordInvalid'			=> 'Invalid password.',
+'LockPasswordInvalid'			=> 'अवैध पासवर्ड।',
 'LockedTryLater'				=> 'यह साइट वर्तमान में अपग्रेड की जा रही है। कृपया बाद में फिर से प्रयास करें।',
 'EmptyAuthFile'					=> '%1 फ़ाइल अनुपस्थित या खाली है। कृपया फ़ाइल बनाएँ और उस फ़ाइल में एक पासवर्ड सेट करें।',
 
@@ -149,7 +150,7 @@ $lang = [
 'DbPortDesc'					=> 'वह पोर्ट नंबर जिसके माध्यम से आपका डेटाबेस सर्वर सुलभ है। डिफ़ॉल्ट पोर्ट नंबर का उपयोग करने के लिए इसे खाली छोड़ दें।',
 'DbName'						=> 'डेटाबेस का नाम',
 'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
-'DbNameSqliteDesc'				=> 'The data directory and file name SQLite should use for WackoWiki.',
+'DbNameSqliteDesc'				=> 'WackoWiki के लिए SQLite को डेटा डायरेक्टरी और फ़ाइल नाम का इस्तेमाल करना चाहिए।',
 'DbNameSqliteHelp'				=> 'SQLite सभी डेटा को एक ही फ़ाइल में संग्रहीत करता है।<br><br>आपके द्वारा प्रदान की गई निर्देशिका में इंस्टॉलेशन के दौरान वेब सर्वर द्वारा लिखने की अनुमति होनी चाहिए।<br><br>यह वेब के माध्यम से सुलभ <strong>नहीं</strong> होनी चाहिए। इंस्टॉलर इसके साथ एक <code>.htaccess</code> फ़ाइल लिखेगा, लेकिन अगर वह विफल हो जाता है तो कोई आपके कच्चे डेटाबेस तक पहुंच सकता है। इसमें कच्चा उपयोगकर्ता डेटा (ईमेल पते, हैश किए गए पासवर्ड) के साथ-साथ विकी पर संरक्षित पृष्ठ और अन्य प्रतिबंधित डेटा भी शामिल है। डेटाबेस को पूरी तरह से कहीं और रखने पर विचार करें, उदाहरण के लिए <code>/var/lib/wackowiki/yourwiki</code> में।',
 'DbUser'						=> 'डेटाबेस सदस्यनाम',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',

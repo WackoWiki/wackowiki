@@ -9,7 +9,7 @@ $insert = [
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Search Search)).' . "\n\n",
 	'root_page'			=> 'இல்லப்பக்கம்',
-	'tools_page'		=> 'Admin tools',
+	'tools_page'		=> 'நிர்வாகி கருவிகள்',
 
 	'category_page'		=> 'வகை',
 	'groups_page'		=> 'குழுக்கள்',
@@ -31,7 +31,7 @@ $insert = [
 	'index_page'		=> 'Page Index',
 	'random_page'		=> 'ஏதாவது ஒரு கட்டுரை',
 
-	'tools_page_bm'		=> 'Tools',
+	'tools_page_bm'		=> 'கருவிகள்',
 	'whatsnew_page_bm'	=> 'Changes',
 	'changes_page_bm'	=> 'Changes',
 	'comments_page_bm'	=> 'கருத்துகள்',

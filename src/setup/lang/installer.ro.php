@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Categorie',
 	'groups_page'		=> 'Grupuri',
 	'users_page'		=> 'Utilizatori',
+	'tools_page'		=> 'Unelte',
 
 	'search_page'		=> 'Caută',
 	'login_page'		=> 'Autentificare',

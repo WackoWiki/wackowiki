@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Κατηγορία',
 	'groups_page'		=> 'Ομάδες',
 	'users_page'		=> 'Χρήστες',
+	'tools_page'		=> 'Εργαλεία',
 
 	'search_page'		=> 'Αναζήτηση',
 	'login_page'		=> 'Σύνδεση',

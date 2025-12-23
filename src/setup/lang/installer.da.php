@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Grupper',
 	'users_page'		=> 'Brugere',
+	'tools_page'		=> 'Værktøjer',
 
 	'search_page'		=> 'Søgning',
 	'login_page'		=> 'Log ind',

@@ -765,7 +765,7 @@ $ap_translation = [
 	'GroupsPage'				=> 'Групи:',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'WhatsNewPage'				=> 'What\'s new:',
-	'WhatsNewPageInfo'			=> 'Page with a list of all new, deleted, or changed pages, new attachments, and comments. (action %1).',
+	'WhatsNewPageInfo'			=> 'Страница със списък на всички нови, изтрити или променени страници, нови прикачени файлове и коментари. (действие %1).',
 	'ChangesPage'				=> 'Последни Промени:',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
 	'CommentsPage'				=> 'Нови Коментари:',
@@ -1045,7 +1045,7 @@ $ap_translation = [
     	'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .  '<br>' .
 		'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
-    	'The Backup package files were stored in the sub-directory %1.<br>To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
+    	'Файловете на резервния пакет бяха съхранени в поддиректорията %1.<br>За да го изтеглите, използвайте FTP (запазете структурата на директориите и имената на файловете при копиране).<br> За да възстановите резервно копие или да премахнете пакет, отидете на <a href="%2">Възстановяване на базата данни</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 	'Backup'					=> 'Backup',
 	'CantReadFile'				=> 'Can\'t read file %1.',
@@ -1086,7 +1086,7 @@ $ap_translation = [
 	'SavedCluster'				=> 'Saved cluster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
-	'RestoreSQLiteDatabase'		=> 'Restoring the SQLite database',
+	'RestoreSQLiteDatabase'		=> 'Възстановяване на базата данни на SQLite',
 	'SQLiteDatabaseRestored'	=> 'Базата данни е възстановена успешно от:',
 	'RestoreTableStructure'		=> 'Restoring the structure of the table',
 	'RunSqlQueries'				=> 'Perform SQL-instructions:',

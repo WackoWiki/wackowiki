@@ -35,10 +35,10 @@ lang = {
 	Indent :				"Inspringen",
 	CodeWrapper :			"Code Wrapper",
 	HTML :					"HTML",
-	Action :				"Action",
+	Action :				"Actie",
 	Line :					"Horizontale lijn",
 	Signature :				"Handtekening",
-	Quote :					"Quote",
+	Quote :					"Offerte",
 	MarkedText :			"Gemarkeerde tekst",
 	HighlightText :			"Tekst markeren",
 	Shade :					"Schaduw",
@@ -47,7 +47,7 @@ lang = {
 	InsertTable :			"Tafel invoegen",
 
 	Link :					"Link",
-	TextForLinking :		"Text for linking",
+	TextForLinking :		"Tekst voor linken",
 
 	HelpAboutTip :			' Snelkoppelingen:\n'+
 							' Ctrl+B - Vetgedrukt\n'+
@@ -55,7 +55,7 @@ lang = {
 							' Ctrl+U - Underline\n'+
 							' Ctrl+Shift+S - Strikethrough\n'+
 							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
+							' Alt+I or Ctrl+T - Inspringen\n'+
 							' Alt+U or Ctrl+Shift+T - Unindent\n'+
 							' Ctrl+J - MarkUp (!!)\n'+
 							' Ctrl+H - MarkUp (??)\n'+

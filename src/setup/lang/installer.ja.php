@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'カテゴリー',
 	'groups_page'		=> 'グループ',
 	'users_page'		=> 'ユーザー',
+	'tools_page'		=> 'ツール',
 
 	'search_page'		=> '検索',
 	'login_page'		=> 'ログイン',

@@ -765,7 +765,7 @@ $ap_translation = [
 	'GroupsPage'				=> 'समूह:',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'WhatsNewPage'				=> 'What\'s new:',
-	'WhatsNewPageInfo'			=> 'Page with a list of all new, deleted, or changed pages, new attachments, and comments. (action %1).',
+	'WhatsNewPageInfo'			=> 'सभी नए, डिलीट किए गए या बदले गए पेज, नए अटैचमेंट और कमेंट्स की लिस्ट वाला पेज। (एक्शन %1)।',
 	'ChangesPage'				=> 'हाल में हुए परिवर्तन:',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
 	'CommentsPage'				=> 'हाल के कमेन्ट:',
@@ -779,7 +779,7 @@ $ap_translation = [
 	'SandboxPage'				=> 'Sandbox:',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
 	'HelpPage'					=> 'सहायता:',
-	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
+	'HelpPageInfo'				=> 'साइट टूल के साथ काम करने के लिए दस्तावेज़ीकरण अनुभाग।',
 	'IndexPage'					=> 'Index:',
 	'IndexPageInfo'				=> 'Page with a list of all pages (action %1).',
 	'RandomPage'				=> 'यादृच्छिक:',
@@ -1045,7 +1045,7 @@ $ap_translation = [
     	'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .  '<br>' .
 		'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
-    	'The Backup package files were stored in the sub-directory %1.<br>To download it use FTP (maintain the directory structure and file names when copying).<br> To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
+    	'बैकअप पैकेज फ़ाइलें सब-डायरेक्टरी %1 में स्टोर की गई थीं।<br>इसे डाउनलोड करने के लिए FTP का इस्तेमाल करें (कॉपी करते समय डायरेक्टरी स्ट्रक्चर और फ़ाइल नाम बनाए रखें)।<br> बैकअप कॉपी को रिस्टोर करने या पैकेज हटाने के लिए, <a href="%2">डेटाबेस रिस्टोर करें</a> पर जाएं।',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 	'Backup'					=> 'बैकअप',
 	'CantReadFile'				=> 'Can\'t read file %1.',

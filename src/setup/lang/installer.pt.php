@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Categoria',
 	'groups_page'		=> 'Grupos',
 	'users_page'		=> 'Usuários',
+	'tools_page'		=> 'Ferramentas',
 
 	'search_page'		=> 'Buscar',
 	'login_page'		=> 'Entrar',

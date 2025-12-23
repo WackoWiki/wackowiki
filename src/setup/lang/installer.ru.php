@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Категории',
 	'groups_page'		=> 'Группы',
 	'users_page'		=> 'Пользователи',
+	'tools_page'		=> 'Инструменты',
 
 	'search_page'		=> 'Поиск',
 	'login_page'		=> 'Вход',

@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Kategori',
 	'groups_page'		=> 'Kelompok',
 	'users_page'		=> 'Pengguna',
+	'tools_page'		=> 'Alat',
 
 	'search_page'		=> 'Cari',
 	'login_page'		=> 'Log masuk',

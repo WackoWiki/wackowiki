@@ -18,6 +18,7 @@ $lang = [
 	'category_page'		=> 'Kategoria',
 	'groups_page'		=> 'Ryhmät',
 	'users_page'		=> 'Käyttäjät',
+	'tools_page'		=> 'Työkalut',
 
 	'search_page'		=> 'Etsi',
 	'login_page'		=> 'Kirjaudu',
