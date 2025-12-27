@@ -400,7 +400,7 @@ $wacko_translation = [
 
 	'ExternalPages'				=> 'External pages linking to %1 (%2) (<a href="%3">see list of domains</a>):',
 	'ExternalPagesGlobal'		=> 'Sites linking to this WackoWiki (%2) (<a href="%1">see list of domains</a>):',
-	'Last24Hours'				=> 'last 24 hours',
+	'Last24Hours'				=> '최근 24 시간',
 	'LastDays'					=> 'last %1 days',
 	'DomainsSitesPages'			=> 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domains/sites linking to this WackoWiki (<a href="%1">see list of different URLs</a>):',
@@ -730,9 +730,9 @@ $wacko_translation = [
 	'NewPageCreated'			=> '새 페이지를 만들었습니다',
 	'NewRevisionAdded'			=> 'Changed page',
 	'Cluster'					=> 'cluster',
-	'PageDeleted'				=> 'Page deleted',
-	'CommentDeleted'			=> 'Comment deleted',
-	'FileDeleted'				=> 'File deleted',
+	'PageDeleted'				=> '페이지 삭제됨',
+	'CommentDeleted'			=> '댓글 삭제됨',
+	'FileDeleted'				=> '파일 삭제됨',
 
 	// users action
 	'UsersSearch'				=> '사용자 찾기',
@@ -746,7 +746,7 @@ $wacko_translation = [
 	'UsersComments'				=> '댓글',
 	'UsersUploads'				=> '업로드',
 	'UploadQuota'				=> 'Used space',
-	'UploadQuotaTip'			=> 'Upload Space Quota',
+	'UploadQuotaTip'			=> '업로드 공간 할당량',
 	'UsersLogins'				=> 'Logins',
 	'UsersRevisions'			=> '수정복사본',
 	'UsersSignup'				=> '가입하기',
@@ -758,11 +758,11 @@ $wacko_translation = [
 	'UsersNA'					=> '[not set]',
 	'UsersNA2'					=> '[No]',
 	'UsersSignupDate'			=> 'Signup date',
-	'UsersGroupMembership'		=> 'Group membership',
-	'UsersPersonalInfo'			=> 'Personal info',
+	'UsersGroupMembership'		=> '그룹 회원 자격',
+	'UsersPersonalInfo'			=> '개인 정보',
 	'UsersOwnedPages'			=> '소유 페이지:',
 	'UsersCommentsPosted'		=> '게시 된 댓글:',
-	'UsersFilesUploaded'		=> 'Files uploaded:',
+	'UsersFilesUploaded'		=> '업로드된 파일:',
 	'UsersRevisionsMade'		=> 'Revisions made:',
 	'UsersDocsSortName'			=> '[Sort by name]',
 	'UsersDocsSortCreation'		=> '[Sort by creation date]',
@@ -862,7 +862,7 @@ $wacko_translation = [
 	'SettingsWatch'				=> '주시',
 	'SettingsLatex'				=> 'LaTeX 버전',
 	'SettingsXML'				=> 'XML로 내보내기',
-	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
+	'NeedToChangeLang'			=> '지원되지 않는 페이지 언어 %1을 변경해야 합니다.',
 	'SetLang'					=> '이 페이지의 언어',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Show in navigation',
@@ -925,7 +925,7 @@ $wacko_translation = [
 	'FileRemovedFromFS'			=> '물리적 호스팅에서 지워진 파일',
 	'FileRemovedFromFSError'	=> '이 파일을 삭제하는 것은 불가능 할 것 같다!',
 	'FileRemoveConfirm'			=> '이 파일을 삭제 하시겠습니까?',
-	'FileRemoveDenied'			=> 'You are not allowed to remove this file',
+	'FileRemoveDenied'			=> '이 파일을 삭제할 수 없습니다',
 	'FileNotFound'				=> '파일을 찾을 수 없습니다.',
 
 	'FileSearch'				=> '파일 찾기:',
@@ -1071,7 +1071,7 @@ $wacko_translation = [
 	'NewsXMLTip'				=> 'Click to view recent news in XML format.',
 	'RevisionsXML'				=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
-	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
+	'AccessDeniedXML'			=> '이 정보에 접근할 수 없습니다.',
 
 	'ChangesFeed'				=> '바뀜',
 	'CommentsFeed'				=> '댓글',
@@ -1092,10 +1092,10 @@ $wacko_translation = [
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
-	'NewsDiscuss'				=> 'Discuss this article...',
+	'NewsDiscuss'				=> '이 글에 대해 토론하기...',
 
 	// blog
-	'BlogNewTopic'				=> 'Create a new post',
+	'BlogNewTopic'				=> '새 글 작성하기',
 	'NoPostAvailable'			=> 'No post available yet.',
 
 	// Review

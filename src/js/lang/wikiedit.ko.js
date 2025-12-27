@@ -33,21 +33,21 @@ lang = {
 	Justify :				"양쪽 맞춤",
 	Outdent :				"내어쓰기",
 	Indent :				"들여쓰기",
-	CodeWrapper :			"Code Wrapper",
+	CodeWrapper :			"'코드 래퍼",
 	HTML :					"HTML",
 	Action :				"Action",
 	Line :					"가로줄",
 	Signature :				"서명 넣기",
-	Quote :					"Quote",
+	Quote :					"인용문",
 	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
+	HighlightText :			"텍스트 강조 표시",
 	Shade :					"Shade",
 	Footnote :				"각주",
-	Hyperlink :				"Hyperlink",
+	Hyperlink :				"하이퍼 링크",
 	InsertTable :			"표 삽입",
 
 	Link :					"링크",
-	TextForLinking :		"Text for linking",
+	TextForLinking :		"링크용 텍스트",
 
 	HelpAboutTip :			' 바로가기:\n'+
 							' Ctrl+B - Bold\n'+
