@@ -208,7 +208,8 @@ $wacko_translation = [
 
 	'LastEditedBy'				=> 'Terakhir disunting oleh',
 	'YouAreOwner'				=> 'Anda adalah pemilik halaman ini.',
-	'Owner'						=> 'Pemilik:',
+	'Owner'						=> 'Pemilik',
+	'OwnerColon'				=> 'Pemilik:',
 	'Nobody'					=> 'Tak seorang pun',
 	'TakeOwnership'				=> 'Ambil Alih Hak Kepemilikan',
 	'FilesTip'					=> 'Kelola berkas terlampir',

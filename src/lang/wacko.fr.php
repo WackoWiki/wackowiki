@@ -208,7 +208,8 @@ $wacko_translation = [
 
 	'LastEditedBy'				=> 'Dernière édition par',
 	'YouAreOwner'				=> 'Vous êtes le propriétaire de cette page.',
-	'Owner'						=> 'Propriétaire :',
+	'Owner'						=> 'Propriétaire',
+	'OwnerColon'				=> 'Propriétaire :',
 	'Nobody'					=> 'Personne',
 	'TakeOwnership'				=> 'S’approprier',
 	'FilesTip'					=> 'gérer les fichiers attachés',

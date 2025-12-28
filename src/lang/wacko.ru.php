@@ -208,7 +208,8 @@ $wacko_translation = [
 
 	'LastEditedBy'				=> 'Последний раз редактировалось',
 	'YouAreOwner'				=> 'Владелец: Вы.',
-	'Owner'						=> 'Владелец:',
+	'Owner'						=> 'Владелец',
+	'OwnerColon'				=> 'Владелец:',
 	'Nobody'					=> 'Никто',
 	'TakeOwnership'				=> 'Вступить во владение',
 	'FilesTip'					=> 'Управление прикрепленными файлами',

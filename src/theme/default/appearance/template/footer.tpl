@@ -22,7 +22,7 @@
 					</li>
 				=]
 				[= owner =
-					<li>[ ' _t: Owner ' ] [ ' name | e ' ][ ' link ' ]</li>
+					<li>[ ' _t: OwnerColon ' ] [ ' name | e ' ][ ' link ' ]</li>
 				=]
 				[= claim =
 					<li>[ ' _t: Nobody ' ][ ' take Take ' ]</li>

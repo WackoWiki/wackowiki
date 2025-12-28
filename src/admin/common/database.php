@@ -139,12 +139,12 @@ if (!isset($tables, $directories))
 
 	// define files dirs
 	$directories = [
-		// CACHE_FEED_DIR,
-		// CACHE_PAGE_DIR,
-		// CACHE_SQL_DIR,
-		// CACHE_TEMPLATE_DIR,
-		// THUMB_DIR,
-		// THUMB_LOCAL_DIR,
+		# CACHE_FEED_DIR,
+		# CACHE_PAGE_DIR,
+		# CACHE_SQL_DIR,
+		# CACHE_TEMPLATE_DIR,
+		# THUMB_DIR,
+		# THUMB_LOCAL_DIR,
 		UPLOAD_GLOBAL_DIR,
 		UPLOAD_LOCAL_DIR
 	];

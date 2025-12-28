@@ -208,7 +208,8 @@ $wacko_translation = [
 
 	'LastEditedBy'				=> 'Viimati redigeerinud',
 	'YouAreOwner'				=> 'Sa oled selle lehe omanik.',
-	'Owner'						=> 'Omanik:',
+	'Owner'						=> 'Omanik',
+	'OwnerColon'				=> 'Omanik:',
 	'Nobody'					=> 'Mittekeegi',
 	'TakeOwnership'				=> 'Omasta',
 	'FilesTip'					=> 'Manage attached files',

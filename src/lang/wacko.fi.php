@@ -208,7 +208,8 @@ $wacko_translation = [
 
 	'LastEditedBy'				=> 'Viimeksi muokannut',
 	'YouAreOwner'				=> 'Olet tämän sivun omistaja.',
-	'Owner'						=> 'Omistaja:',
+	'Owner'						=> 'Omistaja',
+	'OwnerColon'				=> 'Omistaja:',
 	'Nobody'					=> 'Kukaan',
 	'TakeOwnership'				=> 'Ota Omistus',
 	'FilesTip'					=> 'Hallinnoi liitettyjä tiedostoja',

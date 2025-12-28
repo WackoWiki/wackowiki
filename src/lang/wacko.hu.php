@@ -208,7 +208,8 @@ $wacko_translation = [
 
 	'LastEditedBy'				=> 'Utoljára szerkesztette',
 	'YouAreOwner'				=> 'Ön a tulajdonosa ennek az oldalnak.',
-	'Owner'						=> 'Tulajdonos:',
+	'Owner'						=> 'Tulajdonos',
+	'OwnerColon'				=> 'Tulajdonos:',
 	'Nobody'					=> 'Nobody',
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',

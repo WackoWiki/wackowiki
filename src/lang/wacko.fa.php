@@ -209,6 +209,7 @@ $wacko_translation = [
 	'LastEditedBy'				=> 'Last edited by',
 	'YouAreOwner'				=> 'شما صاحب این صفحه هستید.',
 	'Owner'						=> 'مالک',
+	'OwnerColon'				=> 'مالک:',
 	'Nobody'					=> 'هیچ‌کس',
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',

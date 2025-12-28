@@ -208,7 +208,8 @@ $wacko_translation = [
 
 	'LastEditedBy'				=> 'Naposledy upravil(a)',
 	'YouAreOwner'				=> 'Jste vlastníkem této stránky.',
-	'Owner'						=> 'Vlastník:',
+	'Owner'						=> 'Vlastník',
+	'OwnerColon'				=> 'Vlastník:',
 	'Nobody'					=> 'Nikdo',
 	'TakeOwnership'				=> 'Převezměte vlastnictví',
 	'FilesTip'					=> 'Spravovat připojené soubory',
