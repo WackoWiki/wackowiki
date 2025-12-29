@@ -21,14 +21,11 @@ Options:
 		shows the page title
 	[nomark=1]
 		makes it possible to hide frame around
-	[dontrecurse=0|1]
-		if set to true the list will only include pages that are direct children of the "page" cluster
 	[lang="ru"]
 		show pages only in specified language
 EOD;
 
 // set defaults
-$dontrecurse	??= 0;
 $help			??= 0;
 $lang			??= '';
 $legend			??= '';
@@ -59,63 +56,28 @@ else
 	$_page		= $this->page;
 }
 
-if (!$page)
-{
-	$selector =
-		'FROM ' . $this->prefix . 'page ' .
-		'WHERE comments >= 1 ' .
-			'AND comment_on_id = 0 ' .
-			'AND deleted = 0 ' .
-		($lang
-			? 'AND page_lang = ' . $this->db->q($lang) . ' '
-			: '');
+$tag = $this->unwrap_link($page);
 
-	$sql_count	=
-		'SELECT COUNT(page_id) AS n ' .
-		$selector;
+$selector =
+	'FROM ' . $this->prefix . 'page ' .
+	'WHERE comments >= 1 ' .
+		'AND comment_on_id = 0 ' .
+		'AND deleted = 0 ' .
+	($tag
+		? 'AND tag LIKE ' . $this->db->q($tag . '/%') . ' '
+		: '') .
+	($lang
+		? 'AND page_lang = ' . $this->db->q($lang) . ' '
+		: '');
 
-	$sql	=
-		'SELECT page_id, tag, title, comments, page_lang ' .
-		$selector .
-		'ORDER BY comments DESC ';
-}
-else
-{
-	$tag = $this->unwrap_link($page);
+$sql_count	=
+	'SELECT COUNT(page_id) AS n ' .
+	$selector;
 
-	// $recurse
-	//	true	- recurses and includes all the sub-pages of sub-pages (and so on) in the listing
-	//	false	- display only pages directly under the selected page, not their kids and grandkids
-	$dontrecurse
-		? $recurse = false
-		: $recurse = true;
-
-	$selector =
-		'FROM ' . $this->prefix . 'page a, ' . $this->prefix . 'page_link l ' .
-			'INNER JOIN ' . $this->prefix . 'page b ON (l.from_page_id = b.page_id) ' .
-			'INNER JOIN ' . $this->prefix . 'page c ON (l.to_page_id = c.page_id) ' .
-		'WHERE a.tag <> ' . $this->db->q($tag) . ' ' .
-			'AND a.tag = c.tag ' .
-			($recurse
-				? 'AND INSTR(b.tag, ' . $this->db->q($tag) . ') = 1 '
-				: 'AND b.tag = ' . $this->db->q($tag) . ' ') .
-			'AND INSTR(c.tag, ' . $this->db->q($tag) . ') = 1 ' .
-			'AND a.comments >= 1 ' .
-			'AND a.comment_on_id = 0 ' .
-			'AND a.deleted = 0 ' .
-			($lang
-				? 'AND a.page_lang = ' . $this->db->q($lang) . ' '
-				: '');
-
-	$sql_count	=
-		'SELECT COUNT(DISTINCT a.page_id) AS n ' .
-		$selector;
-
-	$sql	=
-		'SELECT DISTINCT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.comments, a.page_lang ' .
-		$selector .
-		'ORDER BY a.comments DESC ';
-}
+$sql	=
+	'SELECT page_id, tag, title, comments, page_lang ' .
+	$selector .
+	'ORDER BY comments DESC ';
 
 $count		= $this->db->load_single($sql_count, true);
 $pagination	= $this->pagination($count['n'], $max, 'p', []);
