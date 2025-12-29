@@ -21,8 +21,6 @@ Options:
 		shows the page title
 	[nomark=1]
 		makes it possible to hide frame around
-	[dontrecurse=0|1]
-		if set to true the list will only include pages that are direct children of the "page" cluster
 	[counter=0|1]
 		shows page hit counter
 	[system=0|1]
@@ -33,7 +31,6 @@ EOD;
 
 // set defaults
 $counter		??= 1;
-$dontrecurse	??= 0;
 $help			??= 0;
 $lang			??= '';
 $legend			??= '';
@@ -49,7 +46,7 @@ if ($help)
 	return;
 }
 
-$prefix			= $this->prefix;
+$prefix				= $this->prefix;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;
@@ -67,71 +64,34 @@ else
 	$ppage		= '';
 }
 
+$tag				= $this->unwrap_link($page);
 $system
 	? $user_id		= $this->db->system_user_id
 	: $user_id		= null;
 
-if (!$page)
-{
-	$selector =
-		'FROM ' . $prefix . 'page ' .
-		'WHERE  comment_on_id = 0 ' .
-		'AND deleted = 0 ' .
-		($user_id
-			? 'AND owner_id <> ' . (int) $user_id . ' '
-			: '') .
-		($lang
-			? 'AND page_lang = ' . $this->db->q($lang) . ' '
-			: '');
+$selector =
+	'FROM ' . $prefix . 'page ' .
+	'WHERE  comment_on_id = 0 ' .
+	'AND deleted = 0 ' .
+	($tag
+		? 'AND tag LIKE ' . $this->db->q($tag . '/%') . ' '
+		: '') .
+	($user_id
+		? 'AND owner_id <> ' . (int) $user_id . ' '
+		: '') .
+	($lang
+		? 'AND page_lang = ' . $this->db->q($lang) . ' '
+		: '');
 
-	$sql_count	=
-		'SELECT COUNT(page_id) AS n ' .
-		$selector;
+$sql_count	=
+	'SELECT COUNT(page_id) AS n ' .
+	$selector;
 
-	$sql	=
-		'SELECT page_id, tag, title, hits, page_lang ' .
-		$selector .
-		'ORDER BY hits DESC ';
-}
-else
-{
-	$tag = $this->unwrap_link($page);
+$sql	=
+	'SELECT page_id, tag, title, hits, page_lang ' .
+	$selector .
+	'ORDER BY hits DESC ';
 
-	// $recurse
-	//	true	- recurses and includes all the sub-pages of sub-pages (and so on) in the listing
-	//	false	- display only pages directly under the selected page, not their kids and grandkids
-	$dontrecurse
-		? $recurse = false
-		: $recurse = true;
-
-	$selector =
-		'FROM ' . $prefix . 'page a, ' . $prefix . 'page_link l ' .
-			'INNER JOIN ' . $prefix . 'page b ON (l.from_page_id = b.page_id) ' .
-			'INNER JOIN ' . $prefix . 'page c ON (l.to_page_id = c.page_id) ' .
-		'WHERE a.comment_on_id = 0 ' .
-			'AND a.deleted = 0 ' .
-			'AND a.tag <> ' . $this->db->q($tag) . ' ' .
-			'AND a.tag = c.tag ' .
-			($recurse
-				? 'AND INSTR(b.tag, ' . $this->db->q($tag) . ') = 1 '
-				: 'AND b.tag = ' . $this->db->q($tag) . ' ') .
-			'AND INSTR(c.tag, ' . $this->db->q($tag) . ') = 1 ' .
-			($user_id
-				? 'AND a.owner_id <> ' . (int) $user_id . ' '
-				: '') .
-			($lang
-				? 'AND a.page_lang = ' . $this->db->q($lang) . ' '
-				: '');
-
-	$sql_count	=
-		'SELECT COUNT(DISTINCT a.page_id) AS n ' .
-		$selector;
-
-	$sql	=
-		'SELECT DISTINCT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.hits, a.page_lang ' .
-		$selector .
-		'ORDER BY a.hits DESC ';
-}
 
 $count		= $this->db->load_single($sql_count, true);
 $pagination	= $this->pagination($count['n'], $max, 'm', []);
