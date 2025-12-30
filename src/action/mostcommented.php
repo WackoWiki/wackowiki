@@ -78,13 +78,13 @@ $sql	=
 	$selector .
 	'ORDER BY comments DESC ';
 
-	// we're using a parameter token here to sort out multiple instances (must be unique and static)
+// we're using a parameter token here to sort out multiple instances (must be unique and static)
 $param_token	= substr(hash('sha1', $anchor . $page . $nomark . $lang . $max), 0, 8);
 $count			= $this->db->load_single($sql_count, true);
 $pagination		= $this->pagination($count['n'], $max, 'p', ['#' => $param_token]);
 $pages			= $this->db->load_all($sql . $pagination['limit'], true);
 
-$num			= $pagination['offset'] ; // + 1
+$num			= $pagination['offset'] ;
 
 if (!empty($pages))
 {
@@ -102,7 +102,12 @@ if (!empty($pages))
 	if (!$nomark)
 	{
 		$tpl->mark			= true;
-		$tpl->mark_legend	= $this->link($ppage, '', $legend);
+
+		if ($legend)
+		{
+			$tpl->mark_legend	= $this->link($ppage, '', $legend);
+		}
+
 		$tpl->emark			= true;
 	}
 

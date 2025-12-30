@@ -98,7 +98,7 @@ $count			= $this->db->load_single($sql_count, true);
 $pagination		= $this->pagination($count['n'], $max, 'm', ['#' => $param_token]);
 $pages			= $this->db->load_all($sql . $pagination['limit'], true);
 
-$num			= $pagination['offset'] ; // + 1
+$num			= $pagination['offset'] ;
 
 if (!empty($pages))
 {
@@ -116,7 +116,12 @@ if (!empty($pages))
 	if (!$nomark)
 	{
 		$tpl->mark			= true;
-		$tpl->mark_legend	= $this->link($ppage, '', $legend);
+
+		if ($legend)
+		{
+			$tpl->mark_legend	= $this->link($ppage, '', $legend);
+		}
+
 		$tpl->emark			= true;
 	}
 
