@@ -3323,7 +3323,8 @@ class Wacko
 			}
 		}
 
-		if ($root != '')
+		// ensure there is no empty $new_tag
+		if ($root != '' && $new_tag)
 		{
 			$new_tag	= '/' . $new_tag;
 		}
