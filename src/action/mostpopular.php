@@ -30,6 +30,7 @@ Options:
 EOD;
 
 // set defaults
+$anchor			??= 'mp';
 $counter		??= 1;
 $help			??= 0;
 $lang			??= '';
@@ -46,6 +47,7 @@ if ($help)
 	return;
 }
 
+$tag				= $this->unwrap_link($page);
 $prefix				= $this->prefix;
 
 if (!$max)				$max = 25;
@@ -54,17 +56,14 @@ if ($max > 500)			$max = 500;
 // check for first param (for what mostpopular is built)
 if (!empty($page))
 {
-	$tag		= $this->unwrap_link($page);
 	$ppage		= '/' . $tag;
 	if (!$legend)	$legend = $tag;
 }
 else
 {
-	$page		= '';
 	$ppage		= '';
 }
 
-$tag				= $this->unwrap_link($page);
 $system
 	? $user_id		= $this->db->system_user_id
 	: $user_id		= null;
@@ -92,12 +91,14 @@ $sql	=
 	$selector .
 	'ORDER BY hits DESC ';
 
+// we're using a parameter token here to sort out multiple instances (must be unique and static)
+$param_token	= substr(hash('sha1', $anchor . $page . $nomark . $lang . $max), 0, 8);
 
-$count		= $this->db->load_single($sql_count, true);
-$pagination	= $this->pagination($count['n'], $max, 'm', []);
-$pages		= $this->db->load_all($sql . $pagination['limit'], true);
+$count			= $this->db->load_single($sql_count, true);
+$pagination		= $this->pagination($count['n'], $max, 'm', ['#' => $param_token]);
+$pages			= $this->db->load_all($sql . $pagination['limit'], true);
 
-$num		= $pagination['offset'] ; // + 1
+$num			= $pagination['offset'] ; // + 1
 
 if (!empty($pages))
 {
@@ -119,7 +120,8 @@ if (!empty($pages))
 		$tpl->emark			= true;
 	}
 
-	$tpl->pagination_text = $pagination['text'];
+	$tpl->pagination_text	= $pagination['text'];
+	$tpl->token				= $param_token;
 
 	foreach ($pages as $page)
 	{

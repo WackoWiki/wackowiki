@@ -1,5 +1,6 @@
 [ === main === ]
 	[ ' help ' ]
+	<a id="[ ' token ' ]"></a>
 	[= mark _ =
 		<div class="layout-box">
 			<p>
