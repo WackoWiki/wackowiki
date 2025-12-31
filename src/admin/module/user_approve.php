@@ -91,7 +91,6 @@ function admin_user_approve($engine, $module)
 	//   list change/update
 	/////////////////////////////////////////////
 
-	#$user_id		= (int) ($_POST['user_id'] ?? $_GET['user_id'] ?? '');
 	$user_id		= (int) ($_REQUEST['user_id'] ?? '');
 	$account_status	= (int) ($_GET['account_status'] ?? -1);
 	$_order			= $_GET['order'] ?? '';
@@ -177,11 +176,6 @@ function admin_user_approve($engine, $module)
 	// manage, approving or denying users
 
 	// defining WHERE and ORDER clauses
-	if (!empty($_GET['user']) && mb_strlen($_GET['user']) > 2)
-	{
-		$where			= 'WHERE user_name LIKE ' . $engine->db->q('%' . $_GET['user'] . '%') . ' ';
-	}
-
 	$order = match($_order) {
 		'signup_asc'			=> 'u.signup_time ASC ',
 		'signup_desc'			=> 'u.signup_time DESC ',
@@ -212,10 +206,15 @@ function admin_user_approve($engine, $module)
 		$where			= 'WHERE u.account_status = 1 ';
 	}
 
+	if (!empty($_GET['user']) && mb_strlen($_GET['user']) > 2)
+	{
+		$where			.= 'AND u.user_name LIKE ' . $engine->db->q('%' . $_GET['user'] . '%') . ' ';
+	}
+
 	// filter by lang
 	if (isset($_GET['user_lang']))
 	{
-		$where			= 'WHERE s.user_lang = ' . $engine->db->q($_GET['user_lang']) . ' ';
+		$where			.= 'AND s.user_lang = ' . $engine->db->q($_GET['user_lang']) . ' ';
 	}
 
 	// entries to display
@@ -272,6 +271,7 @@ function admin_user_approve($engine, $module)
 	// user filter form
 	$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
 						'<input type="hidden" name="mode" value="' . $module . '">' .  // required to pass mode module via GET
+						'<input type="hidden" name="account_status" value="' . $account_status . '">' .
 						$engine->_t('UsersSearch') . ': </td><td>' .
 						'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(($_GET['user'] ?? '')) . '"> ' .
 						'<button type="submit" id="submit">' . $engine->_t('SearchButton') . '</button> ' .
