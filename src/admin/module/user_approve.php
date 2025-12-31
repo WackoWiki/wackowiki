@@ -291,24 +291,6 @@ function admin_user_approve($engine, $module)
 	echo '<span class="right">' . $search . '</span><br>';
 	echo $filter_status;
 
-	# echo $engine->form_open('approve');
-
-	/////////////////////////////////////////////
-	//   control buttons
-	/////////////////////////////////////////////
-
-	/* $control_buttons =	'<br>' .
-						'<button type="submit" id="approve-button" name="approve">' . $engine->_t('Approve') . '</button> ' .
-						'<button type="submit" id="remove-button" name="remove">' . $engine->_t('Deny') . '</button> ' .
-						'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
-						'<br>' . "\n" .
-							'<button type="submit" name="set" id="submit">' . $engine->_t('SetButton') . '</button> ' .
-							($set
-								? '<button type="submit" name="reset" id="submit">' . $engine->_t('ResetButton') . '</button> ' .
-								  '<small>ids: ' . implode(', ', $set) . '</small>'
-								: ''
-							); */
-
 	$approve_icon	= '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
 	$deny_icon		= '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny">';
 
@@ -350,13 +332,6 @@ function admin_user_approve($engine, $module)
 		{
 			echo
 			'<tr>' . "\n" .
-				#'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
-				#'<td class="label">' .
-				#	'<input type="checkbox" name="id" value="' . $row['user_id'] . '" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
-				#'</td>' .
-				#'<td>' .
-				#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
-				#'</td>' .
 				'<td>' . $row['user_id'] . '</td>' .
 				'<td><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
 				'<td>' . $row['email'] . '</td>' .
@@ -385,11 +360,4 @@ function admin_user_approve($engine, $module)
 	</table>
 <?php
 	$engine->print_pagination($pagination);
-
-	/////////////////////////////////////////////
-	//   control buttons
-	/////////////////////////////////////////////
-
-	# echo $control_buttons;
-	# echo $engine->form_close();
 }
