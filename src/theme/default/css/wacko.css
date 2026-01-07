@@ -132,8 +132,12 @@ div.hl-main {
 	white-space: pre-wrap;
 }
 
-.code code{
+.code code {
 	background: #fff;
+}
+
+.code pre {
+	margin: 0;
 }
 
 .notes { color: #880; }
