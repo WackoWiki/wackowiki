@@ -83,6 +83,9 @@ function admin_system_info($engine, $module)
 		$memory = Ut::shorthand_to_int(get_cfg_var('memory_limit'));
 	}
 
+	$php_extensions = get_loaded_extensions();
+	sort($php_extensions);
+
 	// Sysinfo in array
 	$sysinfo['app_version']			= [$engine->_t('WackoVersion'), $engine->db->wacko_version];
 	$sysinfo['app_updated']			= [$engine->_t('LastWackoUpdate'), $engine->sql2precisetime($engine->db->maint_last_update)];
@@ -108,11 +111,11 @@ function admin_system_info($engine, $module)
 	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), CACHE_SESSION_DIR . ' (PHP default: ' . $session_save_path . ')'];
 	$sysinfo['default_charset']		= [$engine->_t('PhpDefaultCharset'), ini_get('default_charset')];
 	$sysinfo['gzip_compression']	= [$engine->_t('GZipCompression'), $gzip_compression];
-	$sysinfo['php_extensions']		= [$engine->_t('PhpExtensions'), implode(', ',get_loaded_extensions())];
+	$sysinfo['php_extensions']		= [$engine->_t('PhpExtensions'), implode(', ', $php_extensions)];
 
 	if ( function_exists( 'apache_get_modules' ) )
 	{
-		$sysinfo['apache_modules']		= [$engine->_t('ApacheModules'), implode(', ',apache_get_modules())];
+		$sysinfo['apache_modules']		= [$engine->_t('ApacheModules'), implode(', ', apache_get_modules())];
 	}
 
 	foreach ($sysinfo as $value)

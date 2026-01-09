@@ -22,14 +22,14 @@ $help	??= 0;
 $page	??= '';
 $text	??= '';
 
-$tag	= $page ? $this->unwrap_link($page) : $this->tag;
-$href	= $this->href('edit', $tag);
-
 if ($help)
 {
 	$tpl->help	= $this->help($info, 'edit');
 	return;
 }
+
+$tag	= $page ? $this->unwrap_link($page) : $this->tag;
+$href	= $this->href('edit', $tag);
 
 if (!$text)
 {
