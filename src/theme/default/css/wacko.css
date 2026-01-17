@@ -473,19 +473,19 @@ code {
 .cite {color: #ff0000; font-style: normal;}
 
 /* Important colored text: SYNTAX !!(red)text!! */
-.cl-red		{color: #c00;}
-.cl-green	{color: #008000;}
 .cl-blue	{color: #00c;}
+.cl-green	{color: #008000;}
+.cl-red		{color: #c00;}
 .cl-yellow	{color: #ff0;}
 
 /* Highlighted text: SYNTAX ??text?? */
 mark {background: #ffa;}
 
 /* Highlighted text: SYNTAX ??(green)text?? */
-.mark-yellow	{background: #ff0;}
-.mark-green		{background: #a0ffa4;}
 .mark-blue		{background: #9ec6ff;}
+.mark-green		{background: #a0ffa4;}
 .mark-red		{background: #ffbaba;}
+.mark-yellow	{background: #ff0;}
 
 /* Wiki links: SYNTAX (prefix://) */
 span.icon{
