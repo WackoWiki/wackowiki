@@ -480,7 +480,7 @@ if ($bg_type)
 		// grid bg:
 
 		// draw grid on x
-		for($i = $rand_func(6, 20); $i < $width * 2; $i += $rand_func(10, 25))
+		for ($i = $rand_func(6, 20); $i < $width * 2; $i += $rand_func(10, 25))
 		{
 			ImageSetThickness($temp_bg, $rand_func(2, 6));
 			$text_r			= $rand_func(100, 150);
@@ -492,7 +492,7 @@ if ($bg_type)
 		}
 
 		// draw grid on y
-		for($i = $rand_func(6, 20); $i < $height * 2; $i += $rand_func(10, 25))
+		for ($i = $rand_func(6, 20); $i < $height * 2; $i += $rand_func(10, 25))
 		{
 			ImageSetThickness($temp_bg, $rand_func(2, 6));
 			$text_r			= $rand_func(100, 150);
@@ -638,7 +638,7 @@ if ($col_type == 0)
 }
 
 // write each char in different font
-for($i = 0 ; $i < strlen($word); $i++)
+for ($i = 0 ; $i < strlen($word); $i++)
 {
 	if ($col_type == 1)
 	{
