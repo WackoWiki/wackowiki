@@ -855,12 +855,6 @@ if ($bg_type)
 //////////////////////////////////////////////////////
 
 // tag it
-// feel free to remove/change
-// but if it's not essential I'd appreciate you leaving it
-// after all, I've put a lot of work into this and am giving it away for free
-// the least you could do is give me credit
-// but I understand that in professional environments, your boss might not like this tag
-// so that's cool.
 // $tag_str = 'freeCap v' . $version;
 $tag_str = '';
 // for debug:
