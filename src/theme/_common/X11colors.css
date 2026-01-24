@@ -144,6 +144,12 @@
 .cl-sienna {color: #a0522d;}
 .cl-burlywood {color: #deb887;}
 
+/* 
+	X11 colors replacements for red, blue and green are not suited to highlight text
+	replaces .mark-[blue|green|red] with [xblue|xgreen|xred] to not overwrite definitions in wacko.css
+	use .mark-[xblue|xgreen|xred] instead to use X11 colors for red, blue and green
+ */
+
 .mark-indianred {background: #cd5c5c;}
 .mark-lightcoral {background: #f08080;}
 .mark-orangered {background: #ff4500;}
@@ -219,7 +225,8 @@
 .mark-black {background: #000000;}
 .mark-darksalmon {background: #e9967a;}
 .mark-salmon {background: #fa8072;}
-.mark-red {background: #ff0000;}
+/* .mark-red → .mark-xred */
+.mark-xred {background: #ff0000;}
 .mark-firebrick {background: #b22222;}
 .mark-mediumvioletred {background: #c71585;}
 .mark-lightpink {background: #ffb6c1;}
@@ -240,7 +247,8 @@
 .mark-lightskyblue {background: #87cefa;}
 .mark-cornflowerblue {background: #6495ed;}
 .mark-mediumslateblue {background: #7b68ee;}
-.mark-blue {background: #0000ff;}
+/* .mark-blue → .mark-xblue */
+.mark-xblue {background: #0000ff;}
 .mark-darkblue {background: #00008b;}
 .mark-midnightblue {background: #191970;}
 .mark-orange {background: #ffa500;}
@@ -253,7 +261,8 @@
 .mark-yellowgreen {background: #9acd32;}
 .mark-mediumseagreen {background: #3cb371;}
 .mark-forestgreen {background: #228b22;}
-.mark-green {background: #008000;}
+/* .mark-green → .mark-xgreen */
+.mark-xgreen {background: #008000;}
 .mark-olive {background: #808000;}
 .mark-darkgreen {background: #006400;}
 .mark-turquoise {background: #40e0d0;}

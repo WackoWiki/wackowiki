@@ -55,6 +55,7 @@ class WackoFormatter
 		'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue',
 		'slateblue', 'slategray', 'snow', 'springgreen', 'steelblue', 'tan', 'teal', 'thistle',
 		'tomato', 'turquoise', 'violet', 'wheat', 'white', 'whitesmoke', 'yellow', 'yellowgreen',
+		'xblue', 'xgreen', 'xred', // x-replacement for X11 colors to highlight text
 	];
 
 	function __construct( &$object )
