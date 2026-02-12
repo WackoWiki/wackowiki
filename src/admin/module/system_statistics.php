@@ -75,7 +75,7 @@ function admin_system_statistics($engine, $module, $tables, $directories)
 				// SQLite compiled with SQLITE_ENABLE_DBSTAT_VTAB
 				if ($has_dbstat)
 				{
-					$table['size'] = $engine->db->load_single('SELECT SUM("pgsize") FROM "dbstat" WHERE name=$safe_table');
+					$table['size'] = $engine->db->load_single('SELECT SUM("pgsize") AS size FROM "dbstat" WHERE name=' . $safe_table)['size'];
 				}
 
 				echo
