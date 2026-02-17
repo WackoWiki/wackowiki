@@ -644,9 +644,9 @@ class Wacko
 
 	function date_pattern(): string
 	{
-		if (isset($this->sess->date_pattern))
+		if (isset($this->sess->date_pattern[$this->user_lang]))
 		{
-			return $this->sess->date_pattern;
+			return $this->sess->date_pattern[$this->user_lang];
 		}
 		else
 		{
@@ -655,7 +655,7 @@ class Wacko
 
 			$patterns					= $this->available_date_formats();
 			$date_pattern				= $patterns[$preference] ?? ($patterns['default'] ?? $this->db->date_format);
-			$this->sess->date_pattern	= $date_pattern;
+			$this->sess->date_pattern[$this->user_lang]	= $date_pattern;
 
 			return $date_pattern;
 		}

@@ -174,7 +174,7 @@ else if ($user = $this->get_user())
 	{
 		$user = $this->load_user('', $user['user_id']);
 		$this->set_user($user);
-		$this->sess->date_pattern = $this->available_date_formats()[$preference] ?? $this->db->date_format;
+		$this->sess->date_pattern[$this->user_lang] = $this->available_date_formats()[$preference] ?? $this->db->date_format;
 
 		$this->set_message($this->_t('UserSettingsStored', @$_POST['user_lang']), 'success');
 
