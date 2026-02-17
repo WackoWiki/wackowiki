@@ -34,7 +34,7 @@ if ($this->is_admin())
 
 		if (isset($_POST['pages_cache']) && ($n = Ut::purge_directory(CACHE_PAGE_DIR)))
 		{
-			$sql_truncate = ($engine->db->is_sqlite
+			$sql_truncate = ($this->db->is_sqlite
 				? 'DELETE FROM '
 				: 'TRUNCATE ');
 
