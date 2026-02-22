@@ -104,11 +104,13 @@ if (!$__prev)
 	$__prev['tag']		= $_prev;
 	$__prev['title']	= '';
 }
+
 if (!$__main)
 {
 	$__main['tag']		= $_main;
 	$__main['title']	= '';
 }
+
 if (!$__next)
 {
 	$__next['tag']		= $_next;
@@ -151,6 +153,7 @@ if ($head)
 	{
 		$this->add_html('header', '<link rel="prev" title="' . $__prev['title'] . '" href="' . $this->href('', $_prev) . '">');
 	}
+
 	if ($next)
 	{
 		$this->add_html('header', '<link rel="next" title="' . $__next['title'] . '" href="' . $this->href('', $_next) . '">');
