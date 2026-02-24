@@ -166,10 +166,18 @@ div.hl-main {
 	background-color: #eee;
 }
 
+.usertable caption {
+	border: 1px solid #ccc;
+	font-size: 95%;
+	color: #666;
+	margin: 5px 0;
+	padding: 2px;
+}
+
 .usertable td,
 .usertable th {
 	border: 1px solid #ccc;
-	padding: 4px;
+	padding: .3em .5em;
 	vertical-align: top;
 }
 
@@ -552,12 +560,13 @@ a.iw-diff .icon {
 a.iw-source .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/repository.svg') no-repeat scroll left center;
 }
-/* Interwiki links without icon */
+/* Interwiki links with generic icon */
 a.iw-brave .icon,
 a.iw-rfc .icon,
 a.iw-ppr .icon,
-a.iw-wackowiki .icon {
-	padding-left: 0;
+a.iw-wackowiki .icon,
+a.iw-wikipedia .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/open-link.svg') no-repeat scroll left center;
 }
 
 /* MIME */
