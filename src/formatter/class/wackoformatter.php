@@ -882,10 +882,12 @@ class WackoFormatter
 		else if (preg_match('/^file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(' . $wacko::PATTERN['AUDIO'] . '|' . $wacko::PATTERN['BITMAP'] . '|' . $wacko::PATTERN['DRAWING'] . '|' . $wacko::PATTERN['VIDEO'] . ')(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
 		{
 			$caption = 0;
+
 			if(!empty($matches[4]) && preg_match('/caption/ui', $matches[4]))
 			{
 				$caption = 2;
 			}
+
 			#Diag::dbg('GOLD', ' ::fileimg:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($thing, '', true, $caption);
 		}
@@ -960,7 +962,6 @@ class WackoFormatter
 				'<' . $tag . $colspan . '>' .
 				preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell));
 
-
 			if ($i != $count)
 			{
 				$output .= $this->indent_close();
@@ -972,7 +973,8 @@ class WackoFormatter
 		$output .= '</' . $tag . '>';
 		$output .= '</tr>';
 
-		if ($this->cols == 0) {
+		if ($this->cols == 0)
+		{
 			$this->cols = $count;
 		}
 
