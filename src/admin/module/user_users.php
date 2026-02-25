@@ -273,14 +273,14 @@ function admin_user_users($engine, $module)
 					'enabled		= ' . (int) $enabled . ', ' .
 					'account_status	= ' . (int) $_POST['account_status'] . ' ' .
 				'WHERE user_id		= ' . (int) $user_id . ' ' .
-				'LIMIT 1');
+				$engine->db->limit());
 
 			$engine->db->sql_query(
 				'UPDATE ' . $prefix . 'user_setting SET ' .
 					'user_lang		= ' . $engine->db->q($user_lang) . ', ' .
 					'theme			= ' . $engine->db->q($theme) . ' ' .
 				'WHERE user_id		= ' . (int) $user_id . ' ' .
-				'LIMIT 1');
+				$engine->db->limit());
 
 			$engine->set_message($engine->_t('UsersUpdated'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogUserUpdated', SYSTEM_LANG), $user['user_name']));
@@ -314,7 +314,7 @@ function admin_user_users($engine, $module)
 					"change_password	= '', " .
 					'password			= ' . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ', ' .
 				'WHERE user_id			= ' . (int) $user_id . ' ' .
-				'LIMIT 1');
+				$engine->db->limit());
 
 			$engine->set_message($engine->_t('PasswordChanged'), 'success');
 			$engine->log(3, Ut::perc_replace($engine->_t('LogUserPasswordReset', SYSTEM_LANG), $user['user_name']));

@@ -337,7 +337,7 @@ function admin_tool_badbehaviour($engine, $module)
 						'UPDATE ' . $engine->prefix . 'bad_behaviour SET ' .
 							'host		= ' . $engine->db->q($host) . ' ' .
 						'WHERE log_id	= ' . (int) $result['log_id'] . ' ' .
-						'LIMIT 1');
+						$engine->db->limit());
 				}
 
 				$host = $result['host'];

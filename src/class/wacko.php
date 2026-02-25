@@ -8371,7 +8371,7 @@ class Wacko
 				'FROM ' . $this->prefix . 'revision ' .
 				'WHERE page_id = ' . (int) $page_id . ' ' .
 					'AND revision_id = ' . (int) $revision_id . ' ' .
-				'LIMIT 1');
+				$this->db->limit());
 		}
 
 		return true;

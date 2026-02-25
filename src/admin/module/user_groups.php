@@ -280,7 +280,7 @@ function admin_user_groups($engine, $module)
 						'open			= ' . (int) $open . ', ' .
 						'active			= ' . (int) $active . ' ' .
 					'WHERE group_id = ' . (int) $p_group_id . ' ' .
-					'LIMIT 1');
+					$engine->db->limit());
 
 				$engine->show_message($engine->_t('GroupsRenamed'));
 				$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRenamed', SYSTEM_LANG), $usergroup['group_name'], $_POST['new_group_name']));
