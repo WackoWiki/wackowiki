@@ -108,9 +108,9 @@ class WackoFormatter
 			"\!\!(\S.*?\S)\!\!|" .
 			// underline __...__
 			"__[^\n]*?__|" .
-			// upper and lower indexes ^^...^^ and vv...vv
+			// upper and lower indexes ^^...^^ and ,,...,,
 			"\^\^\S*?\^\^|" .
-			"vv\S*?vv|" .
+			",,\S*?,,|" .
 			// deleted text for diff
 			// inserted text for diff
 			"<!--markup:1:begin-->\S<!--markup:1:end-->|" .
@@ -585,7 +585,7 @@ class WackoFormatter
 			return '<sup>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</sup>';
 		}
 		// sub
-		else if (preg_match('/^vv(.*)vv$/u', $thing, $matches))
+		else if (preg_match('/^,,(.*),,$/u', $thing, $matches))
 		{
 			return '<sub>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</sub>';
 		}

@@ -60,7 +60,7 @@ class WikiEdit extends ProtoEdit
 		this.addButton('customhtml',	separator);
 
 		//this.addButton('superscript',	lang.Superscript,	"'^^', '^^'");
-		//this.addButton('subscript',	lang.Subscript,		"'vv', 'vv'");
+		//this.addButton('subscript',	lang.Subscript,		"',,', ',,'");
 		//this.addButton('customhtml',	separator);
 		this.addButton('ul',			lang.List,			'\'  * \', \'\', 0, 1, 1');
 		this.addButton('ol',			lang.NumberedList,	'\'  1. \', \'\', 0, 1, 1');
