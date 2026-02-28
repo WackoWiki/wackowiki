@@ -1,6 +1,6 @@
 [ === main === ]
 <ignore>
-	<aside class="wrapper[ ' type ' ][ ' align ' ][ ' col ' ]" style="width: [ ' width ' ]px;">
+	<aside class="wrapper[ ' type ' ][ ' align ' ][ ' col ' ]" style="width: [ ' width ' ];">
 		[= t _ =
 			<p class="wrapper-title">[ ' title | e ' ]</p>
 		=]
