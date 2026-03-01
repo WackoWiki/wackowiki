@@ -124,6 +124,8 @@ class WackoFormatter
 			"\|\#|" .
 			"\|\|.*?\|\||" .
 			"\*\|.*?\|\*|" .
+			"\^\|.*?\|\||" .
+			"\?\|.*?\|\?|" .
 			// symbols < or >
 			"<|>|" .
 			// italic //...//
@@ -436,10 +438,20 @@ class WackoFormatter
 
 			return '</table>';
 		}
-		// table head
+		// table head columns
 		else if (preg_match('/^\*\|(.*?)\|\*$/us', $thing, $matches) && $this->table_scope)
 		{
-			return $this->table_rows($matches[1], $callback, true);
+			return $this->table_rows($matches[1], $callback, 1);
+		}
+		// table head column or head row
+		else if (preg_match('/^\^\|(.*?)\|\|$/us', $thing, $matches) && $this->table_scope)
+		{
+			return $this->table_rows($matches[1], $callback, 2);
+		}
+		// table caption
+		else if (preg_match('/^\?\|(.*?)\|\?$/us', $thing, $matches) && $this->table_scope)
+		{
+			return "\t" . '<caption>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</caption>';
 		}
 		// table row and cells
 		else if (preg_match('/^\|\|(.*?)\|\|$/us', $thing, $matches) && $this->table_scope)
@@ -798,7 +810,7 @@ class WackoFormatter
 			if (!$new_indent_type)
 			{
 				$opener		= '<div class="indent">';
-				$closer		= '</div>' . "\n";
+				$closer		= '</div>';
 				$this->br	= true;
 				$new_type	= 'i';
 			}
@@ -923,8 +935,10 @@ class WackoFormatter
 		return Ut::html($thing);
 	}
 
-	public function table_rows($matches, array $callback, bool $header = false): string
+	public function table_rows($string, array $callback, int $header = 0): string
 	{
+		$wacko		= & $this->object;
+
 		$strip_delimiter = function ($string): string
 		{
 			return str_replace("\u{2592}", '',
@@ -936,9 +950,33 @@ class WackoFormatter
 		$this->intable		= true;
 		$this->intable_br	= false;
 
-		$tag		= $header ? 'th' : 'td';
-		$output		= '<tr>';
-		$cells		= preg_split('/\|/', $matches);
+		$tag		= $header === 1 ? 'th' : 'td';
+		$output		= "\t" . '<tr>';
+
+		// ensures the ^ is not preceded or followed by another ^, matches only isolated ^ characters
+		$pattern	= '/((?<!\^)\^(?!\^)|\|)/';
+		$result		= preg_split($pattern, $string, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		// remove empty values if any
+		$result		= array_filter($result, 'strlen');
+
+		// rebuild into [key][delimiter, result]
+		$cells		= [];
+		$delimiter	= null;
+
+		foreach ($result as $token)
+		{
+			if (in_array($token, ['^', '|']))
+			{
+				$delimiter	= $token;
+			}
+			else
+			{
+				$cells[]	= [$delimiter, $token];
+				$delimiter	= null;
+			}
+		}
+
 		$count		= count($cells);
 		$count--;
 
@@ -946,21 +984,128 @@ class WackoFormatter
 		{
 			$this->tdold_indent_level	= 0;
 			$this->tdindent_closers		= [];
+
+			// supported attributes
+			$align						= '';
+			$bgcolor					= '';
+			$class						= '';
 			$colspan					= '';
+			$id							= '';
+			$rowspan					= '';
+			$scope						= '';
+			$valign						= '';
+			$width						= '';
 
-			if ($cell[0] == "\n")
+			if (!$header)
 			{
-				$cell = substr($cell, 1);
+				$tag = match($cell[0])
+				{
+					'^'			=> 'th',
+					default		=> 'td'
+				};
+			}
+			else if ($header === 2)
+			{
+				$tag = $i === 0 ? 'th' : 'td';
 			}
 
-			if (($i == $count) && ($this->cols <> 0) && ($count < $this->cols))
+			// attributes
+			$pattern = '/^\(((?:\s*(\w+)\s*=\s*([^)\s]+)\s*)+)\)(.*)/usm';
+
+			if (preg_match($pattern, $cell[1], $matches))
 			{
-				$colspan = ' colspan="' . ($this->cols - $count + 1) . '"';
+				$params_str		= $matches[1];
+				$param_pattern	= '/(\w+)\s*=\s*([^)\s]+)/';
+
+				preg_match_all($param_pattern, $params_str, $param_matches, PREG_SET_ORDER);
+
+				$params = [];
+
+				foreach ($param_matches as $pair)
+				{
+					$params[$pair[1]] = $pair[2];
+				}
+
+				// align
+				if (isset($params['align'])
+					&& in_array($params['align'], ['center', 'left', 'right', 'justify']))
+				{
+					$align = ' text-' . $params['align'];
+				}
+
+				// bgcolor
+				if (isset($params['bgcolor'])
+					&& in_array($params['bgcolor'], ($wacko->db->allow_x11colors ? $this->x11_colors : $this->colors)))
+				{
+					$bgcolor = ' mark-' . $params['bgcolor'];
+				}
+
+				// colspan
+				if (isset($params['colspan']))
+				{
+					$colspan = ' colspan="' . (int)	$params['colspan'] . '"';
+				}
+
+				// id
+				if (isset($params['id'])
+					&& preg_match('/^[\w-]+$/', $params['id']))
+				{
+					$id = ' id="' . $params['id'] . '"';
+				}
+
+				// rowspan
+				if (isset($params['rowspan']))
+				{
+					$rowspan = ' rowspan="' . (int)	$params['rowspan'] . '"';
+				}
+
+				// scope
+				if (isset($params['scope'])
+					&& in_array($params['scope'], ['row', 'col', 'rowgroup', 'colgroup']))
+				{
+					$scope = ' scope="' . $params['scope'] . '"';
+				}
+
+				// valign
+				if (isset($params['valign'])
+					&& in_array($params['valign'], ['top', 'middle', 'bottom']))
+				{
+					$valign = ' vertical-' . $params['valign'];
+				}
+
+				// width
+				if (isset($params['width'])
+					&& preg_match('/^(?:\d+|0\.\d+)(?:px|%|em|rem)$/', $params['width']))
+				{
+					$width = ' style="width: ' . $params['width'] . ';"';
+				}
+
+				// class
+				if ($align || $bgcolor || $valign)
+				{
+					$class = ' class="' . trim($align . $bgcolor . $valign) . '"';
+				}
+
+				$cell[1]	= $matches[4] ?? '';
 			}
 
-			$output .= $strip_delimiter(
-				'<' . $tag . $colspan . '>' .
-				preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell));
+			if ($cell[1][0] == "\n")
+			{
+				$cell[1] = substr($cell[1], 1);
+			}
+
+			$output .=
+				'<' .
+					$tag .			// <- must be first!
+					$id .
+					$class .
+					$colspan .
+					$rowspan .
+					$scope .
+					$width .
+				'>' .
+				$strip_delimiter(
+					preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell[1]));
 
 			if ($i != $count)
 			{
