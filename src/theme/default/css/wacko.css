@@ -63,6 +63,16 @@ h6 { font-size: 0.875rem; margin-top: 10px;}
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{ text-align: center;}
 
+/* Align text:  */
+.text-center		{ text-align: center; }
+.text-left			{ text-align: left; }
+.text-right			{ text-align: right; }
+.text-justify		{ text-align: justify; }
+
+.vertical-top		{ vertical-align: top; }
+.vertical-middle	{ vertical-align: middle !important; }
+.vertical-bottom	{ vertical-align: bottom !important; }
+
 /* Indent text: SYNTAX "  ", "  1.", etc. */
 .indent { margin-left: 40px;}
 
@@ -76,12 +86,8 @@ h6 { font-size: 0.875rem; margin-top: 10px;}
 }
 
 /* Simple differences */
-.additions {
-	background-color: #efe;
-}
-.deletions {
-	background-color: #fee;
-}
+.additions { background-color: #efe; }
+.deletions { background-color: #fee; }
 .additions, 
 .deletions {
 	padding: 3px;
@@ -124,7 +130,7 @@ div.hl-main {
 	}
 
 	/* hl numbers table */
-	div .hl-numbers-table div.hl-main{
+	div .hl-numbers-table div.hl-main {
 		border: none;
 	}
 
@@ -168,8 +174,6 @@ div.hl-main {
 
 .usertable caption {
 	border: 1px solid #ccc;
-	font-size: 95%;
-	color: #666;
 	margin: 5px 0;
 	padding: 2px;
 }
@@ -235,8 +239,7 @@ figure.caption {
 	caption-side: bottom;
 }
 
-figure.caption audio 
-{
+figure.caption audio {
 	min-width: 800px;
 }
 
@@ -333,7 +336,7 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 .pmark a:visited { color: #ccc; }
 
 .pmark a:hover,
-.pmark a:active  { color: #cc3300; }
+.pmark a:active { color: #cc3300; }
 
 .pright {}
 
@@ -433,28 +436,14 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 
 /* SYNTAX %%(wrapper xyz)%% */
 
-.wrapper-center {
-	margin: 0 auto !important;
-}
-.wrapper-left {
-	float: left;
-}
-.wrapper-right {
-	float: right;
-}
+.wrapper-center	{ margin: 0 auto !important; }
+.wrapper-left	{ float: left; }
+.wrapper-right	{ float: right; }
 
-.wrapper-col2 {
-	column-count: 2;
-}
-.wrapper-col3 {
-	column-count: 3;
-}
-.wrapper-col4 {
-	column-count: 4;
-}
-.wrapper-col5 {
-	column-count: 5;
-}
+.wrapper-col2 { column-count: 2; }
+.wrapper-col3 { column-count: 3; }
+.wrapper-col4 { column-count: 4; }
+.wrapper-col5 { column-count: 5; }
 
 div.wrapper,
 aside.wrapper {
@@ -566,7 +555,8 @@ a.iw-rfc .icon,
 a.iw-ppr .icon,
 a.iw-wackowiki .icon,
 a.iw-wikipedia .icon {
-	background: rgba(0, 0, 0, 0) url('./../icon/light/open-link.svg') no-repeat scroll left center;
+	/* background: rgba(0, 0, 0, 0) url('./../icon/light/open-link.svg') no-repeat scroll left center; */
+	padding-left: 0;
 }
 
 /* MIME */
