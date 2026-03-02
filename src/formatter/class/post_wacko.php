@@ -85,7 +85,7 @@ class PostWacko
 				$params		= [];
 				$c			= 0;
 
-				preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $_matches, PREG_SET_ORDER);
+				preg_match_all('/(([^\s=]+)(\s*=\s*((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $_matches, PREG_SET_ORDER);
 
 				foreach ($_matches as $m)
 				{

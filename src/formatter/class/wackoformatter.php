@@ -268,7 +268,7 @@ class WackoFormatter
 						$params		= [];
 						$c			= 0;
 
-						preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $matches, PREG_SET_ORDER);
+						preg_match_all('/(([^\s=]+)(\s*=\s*((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $matches, PREG_SET_ORDER);
 
 						foreach ($matches as $m)
 						{
