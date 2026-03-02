@@ -99,8 +99,6 @@ class WackoFormatter
 			"\*\*[^\n]*?\*\*|" .
 			// code ##...##
 			"\#\#[^\n]*?\#\#|" .
-			// code ¹¹...¹¹
-			"\¹\¹[^\n]*?\¹\¹|" .
 			// note ''...''
 			"\'\'.*?\'\'|" .
 			// note !!...!!
@@ -488,8 +486,7 @@ class WackoFormatter
 			return '<span class="underline">' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</span>';
 		}
 		// code
-		else if (  preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches)
-				|| preg_match('/^\¹\¹(.*?)\¹\¹$/u', $thing, $matches))
+		else if (  preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches))
 		{
 			return '<code>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</code>';
 		}
