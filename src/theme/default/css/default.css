@@ -826,10 +826,6 @@ ol#comments ul ul ul {
 	float: right;
 }
 
-.comment-text p {
-	width: 800px;
-}
-
 .comment-text footer {
 	width: 100%;
 }
@@ -2092,7 +2088,6 @@ table.formation td {
 .submenu li:focus-within a {
 	outline: none;
 }
-
 
 .dropdown-arrow {
 	font-size: 85%;
