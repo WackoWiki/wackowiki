@@ -99,15 +99,14 @@ class WackoFormatter
 			"\*\*[^\n]*?\*\*|" .
 			// code ##...##
 			"\#\#[^\n]*?\#\#|" .
-			// note ''...''
-			"\'\'.*?\'\'|" .
 			// note !!...!!
 			"\!\!\S\!\!|" .
 			"\!\!(\S.*?\S)\!\!|" .
 			// underline __...__
 			"__[^\n]*?__|" .
-			// upper and lower indexes ^^...^^ and ,,...,,
+			// superscript ^^...^^
 			"\^\^\S*?\^\^|" .
+			// subscript ,,...,,
 			",,\S*?,,|" .
 			// deleted text for diff
 			// inserted text for diff
@@ -486,7 +485,7 @@ class WackoFormatter
 			return '<span class="underline">' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</span>';
 		}
 		// code
-		else if (  preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches))
+		else if (preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches))
 		{
 			return '<code>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</code>';
 		}
@@ -496,8 +495,7 @@ class WackoFormatter
 			return '<small>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</small>';
 		}
 		// cite
-		else if (  preg_match('/^\'\'(.*?)\'\'$/us', $thing, $matches)
-				|| preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/us', $thing, $matches))
+		else if (preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/us', $thing, $matches))
 		{
 			$this->br = true;
 
