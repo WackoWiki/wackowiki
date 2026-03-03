@@ -83,7 +83,7 @@ const OBJECT_REVISION				= 3;
 
 const NBSP							= ' ';					// \u{00A0} No-Break Space (NBSP)
 
-const RECOVERY_MODE					= 0;					// 1 - restore database (only for MariaDB & MySQL)
+const RECOVERY_MODE					= 0;					// 1 - restore database
 const AUTO_REWRITE					= 1;					// 0 - off, turns off auto rewrite for debugging,
 															//		with mode_rewrite still active on your webserver,
 															//		you're also required to deactivate the rules in the .htaccess file
@@ -98,7 +98,7 @@ const SQL_MODE_LAX					= [
 ];
 
 // Do not change these two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.2.0';
+const WACKO_VERSION					= '6.2.1';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 
 const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
