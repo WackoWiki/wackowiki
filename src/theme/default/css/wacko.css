@@ -185,6 +185,11 @@ div.hl-main {
 	vertical-align: top;
 }
 
+.usertable td:target,
+.usertable th:target {
+	border: 2px solid #ff6600;
+}
+
 .usertable tr:hover {
 	background-color: var(--ww-hover-primary);
 }
