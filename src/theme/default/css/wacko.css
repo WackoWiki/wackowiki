@@ -64,6 +64,9 @@ h6 { font-size: 0.875rem; margin-top: 10px;}
 .center{ text-align: center;}
 
 /* Align text:  */
+.side-top			{ caption-side: top; }
+.side-bottom		{ caption-side: bottom; }
+
 .text-center		{ text-align: center; }
 .text-left			{ text-align: left; }
 .text-right			{ text-align: right; }
@@ -173,7 +176,7 @@ div.hl-main {
 }
 
 .usertable caption {
-	border: 1px solid #ccc;
+	/* border: 1px solid #ccc; */
 	margin: 5px 0;
 	padding: 2px;
 }

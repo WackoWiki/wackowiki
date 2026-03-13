@@ -18,6 +18,7 @@ class WackoFormatter
 	public array $auto_fn			= [];
 	public array $tdindent_closers	= [];
 	public bool $br					= true;
+	public bool $caption			= false;
 	public bool $intable			= false;
 	public bool $intable_br			= false;
 	public int $cols				= 0;
@@ -121,7 +122,10 @@ class WackoFormatter
 			"\|\#|" .
 			"\|\|.*?\|\||" .
 			"\*\|.*?\|\*|" .
+			// colgroup
+			"\!\|.*?\|\!|" .
 			"\^\|.*?\|\||" .
+			// caption
 			"\?\|.*?\|\?|" .
 			// symbols < or >
 			"<|>|" .
@@ -430,10 +434,31 @@ class WackoFormatter
 		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)
 		{
 			$this->br			= false;
+			$this->caption		= false;
 			$this->intable_br	= false;
 			$this->table_scope	= false;
 
 			return '</table>';
+		}
+		// table colgroup
+		else if (preg_match('/^\!\|(.*?)\|\!$/us', $thing, $matches) && $this->table_scope)
+		{
+			return $this->table_cols($matches[1]);
+		}
+		// table caption
+		else if (preg_match('/^\?\|(.*?)\|\?$/us', $thing, $matches) && $this->table_scope)
+		{
+			if ($this->caption)
+			{
+				return; // there can be only one caption
+			}
+
+			$this->caption	= true;
+			$attr			= [];
+			[$attr, $data]	= $this->table_attr($matches[1], 'caption');
+
+			// FIXME: returns null when (attr) is missing for data
+			return "\t" . '<caption ' . implode('', $attr ?? []) . '>' . preg_replace_callback($this->LONG_REGEX, $callback, $data ?? $matches[1]) . '</caption>';
 		}
 		// table head columns
 		else if (preg_match('/^\*\|(.*?)\|\*$/us', $thing, $matches) && $this->table_scope)
@@ -444,11 +469,6 @@ class WackoFormatter
 		else if (preg_match('/^\^\|(.*?)\|\|$/us', $thing, $matches) && $this->table_scope)
 		{
 			return $this->table_rows($matches[1], $callback, 2);
-		}
-		// table caption
-		else if (preg_match('/^\?\|(.*?)\|\?$/us', $thing, $matches) && $this->table_scope)
-		{
-			return "\t" . '<caption>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</caption>';
 		}
 		// table row and cells
 		else if (preg_match('/^\|\|(.*?)\|\|$/us', $thing, $matches) && $this->table_scope)
@@ -930,10 +950,58 @@ class WackoFormatter
 		return Ut::html($thing);
 	}
 
+	public function table_cols($string): string
+	{
+		$tag		= 'col';
+		$output		= "\t" . '<colgroup>';
+
+		$pattern	= '/\|/';
+		$result		= preg_split($pattern, $string, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		// remove empty values if any
+		$result		= array_filter($result, 'strlen');
+
+		// rebuild into [key][delimiter, result]
+		$cols		= [];
+		$delimiter	= null;
+
+		foreach ($result as $token)
+		{
+			if ($token === '|')
+			{
+				$delimiter	= $token;
+			}
+			else
+			{
+				$cols[]		= [$delimiter, $token];
+				$delimiter	= null;
+			}
+		}
+
+		foreach ($cols as $col)
+		{
+			$attr		= [];
+			[$attr, ]	= $this->table_attr($col[1], $tag);
+
+			if ($col[1][0] == "\n")
+			{
+				$col[1] = substr($col[1], 1);
+			}
+
+			$output .=
+			'<' .
+				$tag .
+				implode('', $attr ?? []) .
+			'>';
+		}
+
+		$output .= '</colgroup>';
+
+		return $output;
+	}
+
 	public function table_rows($string, array $callback, int $header = 0): string
 	{
-		$wacko		= & $this->object;
-
 		$strip_delimiter = function ($string): string
 		{
 			return str_replace("\u{2592}", '',
@@ -980,16 +1048,7 @@ class WackoFormatter
 			$this->tdold_indent_level	= 0;
 			$this->tdindent_closers		= [];
 
-			// supported attributes
-			$align						= '';
-			$bgcolor					= '';
-			$class						= '';
-			$colspan					= '';
-			$id							= '';
-			$rowspan					= '';
-			$scope						= '';
-			$valign						= '';
-			$width						= '';
+			$attr		= [];
 
 			if (!$header)
 			{
@@ -1004,84 +1063,9 @@ class WackoFormatter
 				$tag = $i === 0 ? 'th' : 'td';
 			}
 
-			// attributes
-			$pattern = '/^\(((?:\s*(\w+)\s*=\s*([^)\s]+)\s*)+)\)(.*)/usm';
-
-			if (preg_match($pattern, $cell[1], $matches))
+			if ([$attr, $data] = $this->table_attr($cell[1], $tag))
 			{
-				$params_str		= $matches[1];
-				$param_pattern	= '/(\w+)\s*=\s*([^)\s]+)/';
-
-				preg_match_all($param_pattern, $params_str, $param_matches, PREG_SET_ORDER);
-
-				$params = [];
-
-				foreach ($param_matches as $pair)
-				{
-					$params[$pair[1]] = $pair[2];
-				}
-
-				// align
-				if (isset($params['align'])
-					&& in_array($params['align'], ['center', 'left', 'right', 'justify']))
-				{
-					$align = ' text-' . $params['align'];
-				}
-
-				// bgcolor
-				if (isset($params['bgcolor'])
-					&& in_array($params['bgcolor'], ($wacko->db->allow_x11colors ? $this->x11_colors : $this->colors)))
-				{
-					$bgcolor = ' mark-' . $params['bgcolor'];
-				}
-
-				// colspan
-				if (isset($params['colspan']))
-				{
-					$colspan = ' colspan="' . (int)	$params['colspan'] . '"';
-				}
-
-				// id
-				if (isset($params['id'])
-					&& preg_match('/^[\w-]+$/', $params['id']))
-				{
-					$id = ' id="' . $params['id'] . '"';
-				}
-
-				// rowspan
-				if (isset($params['rowspan']))
-				{
-					$rowspan = ' rowspan="' . (int)	$params['rowspan'] . '"';
-				}
-
-				// scope
-				if (isset($params['scope'])
-					&& in_array($params['scope'], ['row', 'col', 'rowgroup', 'colgroup']))
-				{
-					$scope = ' scope="' . $params['scope'] . '"';
-				}
-
-				// valign
-				if (isset($params['valign'])
-					&& in_array($params['valign'], ['top', 'middle', 'bottom']))
-				{
-					$valign = ' vertical-' . $params['valign'];
-				}
-
-				// width
-				if (isset($params['width'])
-					&& preg_match('/^(?:\d+|0\.\d+)(?:px|%|em|rem)$/', $params['width']))
-				{
-					$width = ' style="width: ' . $params['width'] . ';"';
-				}
-
-				// class
-				if ($align || $bgcolor || $valign)
-				{
-					$class = ' class="' . trim($align . $bgcolor . $valign) . '"';
-				}
-
-				$cell[1]	= $matches[4] ?? '';
+				$cell[1]	= $data ?? '';
 			}
 
 			if ($cell[1][0] == "\n")
@@ -1091,13 +1075,8 @@ class WackoFormatter
 
 			$output .=
 				'<' .
-					$tag .			// <- must be first!
-					$id .
-					$class .
-					$colspan .
-					$rowspan .
-					$scope .
-					$width .
+					$tag .
+					implode('', $attr ?? []) .
 				'>' .
 				$strip_delimiter(
 					preg_replace_callback($this->LONG_REGEX, $callback, "\u{2592}\n" . $cell[1]));
@@ -1122,6 +1101,122 @@ class WackoFormatter
 		$this->intable_br	= true;
 
 		return $output;
+	}
+
+	public function table_attr(string $string, $tag = 'row'): ?array
+	{
+		$wacko		= & $this->object;
+
+		$attr		= [];
+		$class		= [];
+		$params		= [];
+		$pattern	= '/^\(((?:\s*(\w+)\s*=\s*([^)\s]+)\s*)+)\)(.*)/usm';
+
+		if (preg_match($pattern, $string, $matches))
+		{
+			$params_str		= $matches[1];
+			$param_pattern	= '/(\w+)\s*=\s*([^)\s]+)/';
+
+			preg_match_all($param_pattern, $params_str, $param_matches, PREG_SET_ORDER);
+
+			foreach ($param_matches as $pair)
+			{
+				$params[$pair[1]] = $pair[2];
+			}
+
+			// assign attributes
+
+			// [1] align
+			if (isset($params['align'])
+				&& in_array($tag, ['th', 'td', 'caption'])
+				&& in_array($params['align'], ['center', 'left', 'right', 'justify']))
+			{
+				$class[] = ' text-' . $params['align'];
+			}
+
+			// [2] bgcolor
+			if (isset($params['bgcolor'])
+				&& in_array($params['bgcolor'], ($wacko->db->allow_x11colors ? $this->x11_colors : $this->colors)))
+			{
+				$class[] = ' mark-' . $params['bgcolor'];
+			}
+
+			// [3] class
+			if (isset($params['class'])
+				&& preg_match('/^[\w-]+$/', $params['class']))
+			{
+				$class[] = ' ' . $params['class'];
+			}
+
+			// [4] colspan
+			if (isset($params['colspan'])
+				&& in_array($tag, ['th', 'td']))
+			{
+				$attr[] = ' colspan="' . (int)	$params['colspan'] . '"';
+			}
+
+			// [5] id
+			if (isset($params['id'])
+				&& preg_match('/^[\w-]+$/', $params['id']))
+			{
+				$attr[] = ' id="' . $params['id'] . '"';
+			}
+
+			// [6] rowspan
+			if (isset($params['rowspan'])
+				&& in_array($tag, ['th', 'td']))
+			{
+				$attr[] = ' rowspan="' . (int)	$params['rowspan'] . '"';
+			}
+
+			// [7] scope
+			if (isset($params['scope'])
+				&& in_array($tag, ['th'])
+				&& in_array($params['scope'], ['row', 'col', 'rowgroup', 'colgroup']))
+			{
+				$attr[] = ' scope="' . $params['scope'] . '"';
+			}
+
+			// [8] side
+			if (isset($params['side'])
+				&& in_array($tag, ['caption'])
+				&& in_array($params['side'], ['top', 'bottom']))
+			{
+				$class[] = ' side-' . $params['side'];
+			}
+
+			// [9] span
+			if (isset($params['span'])
+				&& in_array($tag, ['col']))
+			{
+				$attr[] = ' span="' . (int)	$params['span'] . '"';
+			}
+
+			// [10] valign
+			if (isset($params['valign'])
+				&& in_array($tag, ['td', 'th'])
+				&& in_array($params['valign'], ['top', 'middle', 'bottom']))
+			{
+				$class[] = ' vertical-' . $params['valign'];
+			}
+
+			// [11] width
+			if (isset($params['width'])
+				&& preg_match('/^(?:\d+|0\.\d+)(?:px|%|em|rem)$/', $params['width']))
+			{
+				$attr[] = ' style="width: ' . $params['width'] . ';"';
+			}
+
+			// compile class
+			if ($class)
+			{
+				$attr[] = ' class="' . trim(implode('', $class ?? [])) . '"';
+			}
+
+			return [$attr, $matches[4] ?? ''];
+		}
+
+		return null;
 	}
 
 	public function auto_footnotes(string $url, string $text): string
