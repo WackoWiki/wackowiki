@@ -164,6 +164,18 @@ div.hl-main {
 
 /** Table-related ************************************************************/
 
+.table-center	{ margin: 0 auto !important; }
+.table-left		{ float: left;  margin: 10px 15px 10px 0; }
+.table-right	{ float: right; margin: 10px 0 10px 15px; }
+
+@media (max-width: 768px) {
+	table.usertable {
+		float: none;
+		margin: 10px auto;
+		width: 100%;
+	}
+}
+
 /* Bordered tables: SYNTAX #|| || Here | there || ||# */
 .usertable {
 	border: 1px none;

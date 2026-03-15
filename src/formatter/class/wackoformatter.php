@@ -117,7 +117,7 @@ class WackoFormatter
 			"<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|" .
 			// tables #|| #| ||...|| ||# |#
 			"\#\|\||" .
-			"\#\||" .
+			"\#\|\(((?:\s*(\w+)\s*=\s*([^)\s]+)\s*)+)\)|" .
 			"\|\|\#|" .
 			"\|\#|" .
 			"\|\|.*?\|\||" .
@@ -421,14 +421,15 @@ class WackoFormatter
 
 			return '<table class="dtable">';
 		}
-		else if ($thing == '#|')
+		else if (preg_match('/^#\|(\((?:\s*\w+\s*=\s*[^)\s]+\s*)+\))$/us', $thing, $matches))
 		{
 			$this->br			= false;
 			$this->cols			= 0;
 			$this->intable_br	= true;
 			$this->table_scope	= true;
+			[$attr, ]			= $this->table_attr($matches[1], 'table');
 
-			return '<table class="usertable">';
+			return '<table ' . implode('', $attr ?? []) . '>';
 		}
 		// table end
 		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)
@@ -1125,13 +1126,24 @@ class WackoFormatter
 			}
 
 			// assign attributes
+			if ($tag === 'table')
+			{
+				$class[] = ' usertable';
+			}
 
 			// [1] align
-			if (isset($params['align'])
-				&& in_array($tag, ['th', 'td', 'caption'])
-				&& in_array($params['align'], ['center', 'left', 'right', 'justify']))
+			if (isset($params['align']))
 			{
-				$class[] = ' text-' . $params['align'];
+				if (in_array($tag, ['table'])
+					&& in_array($params['align'], ['center', 'left', 'right']))
+				{
+					$class[] = ' table-' . $params['align'];
+				}
+				else if (in_array($tag, ['th', 'td', 'caption'])
+					&& in_array($params['align'], ['center', 'left', 'right', 'justify']))
+				{
+					$class[] = ' text-' . $params['align'];
+				}
 			}
 
 			// [2] bgcolor
