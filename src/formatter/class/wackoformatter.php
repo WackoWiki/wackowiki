@@ -117,7 +117,7 @@ class WackoFormatter
 			"<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|" .
 			// tables #|| #| ||...|| ||# |#
 			"\#\|\||" .
-			"\#\|\(((?:\s*(\w+)\s*=\s*([^)\s]+)\s*)+)\)|" .
+			"\#\|(?:\((?:\s*\w+\s*=\s*[^)\s]+\s*)+\))?|" .
 			"\|\|\#|" .
 			"\|\#|" .
 			"\|\|.*?\|\||" .
@@ -421,13 +421,19 @@ class WackoFormatter
 
 			return '<table class="dtable">';
 		}
-		else if (preg_match('/^#\|(\((?:\s*\w+\s*=\s*[^)\s]+\s*)+\))$/us', $thing, $matches))
+		else if (preg_match('/^\#\|((?:\((?:\s*\w+\s*=\s*[^)\s]+\s*)+\)))?$/us', $thing, $matches))
 		{
 			$this->br			= false;
 			$this->cols			= 0;
 			$this->intable_br	= true;
 			$this->table_scope	= true;
-			[$attr, ]			= $this->table_attr($matches[1], 'table');
+
+			$attr[] = 'class="usertable"';
+
+			if (isset($matches[1]))
+			{
+				[$attr, ]			= $this->table_attr($matches[1], 'table');
+			}
 
 			return '<table ' . implode('', $attr ?? []) . '>';
 		}
