@@ -960,7 +960,7 @@ class WackoFormatter
 	public function table_cols($string): string
 	{
 		$tag		= 'col';
-		$output		= "\t" . '<colgroup>';
+		$output		= "\t" . '<colgroup>' . "\n";
 
 		$pattern	= '/\|/';
 		$result		= preg_split($pattern, $string, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -996,13 +996,15 @@ class WackoFormatter
 			}
 
 			$output .=
+			"\t\t" .
 			'<' .
 				$tag .
 				implode('', $attr ?? []) .
-			'>';
+			'>' .
+			"\n";
 		}
 
-		$output .= '</colgroup>';
+		$output .= "\t" . '</colgroup>';
 
 		return $output;
 	}
@@ -1021,7 +1023,7 @@ class WackoFormatter
 		$this->intable_br	= false;
 
 		$tag		= $header === 1 ? 'th' : 'td';
-		$output		= "\t" . '<tr>';
+		$output		= "\t" . '<tr>' . "\n";
 
 		// ensures the ^ is not preceded or followed by another ^, matches only isolated ^ characters
 		$pattern	= '/((?<!\^)\^(?!\^)|\|)/';
@@ -1081,6 +1083,7 @@ class WackoFormatter
 			}
 
 			$output .=
+				"\t\t" .
 				'<' .
 					$tag .
 					implode('', $attr ?? []) .
@@ -1091,13 +1094,13 @@ class WackoFormatter
 			if ($i != $count)
 			{
 				$output .= $this->indent_close();
-				$output .= '</' . $tag . '>';
+				$output .= '</' . $tag . '>' . "\n";
 			}
 		}
 
 		$output .= $this->indent_close();
-		$output .= '</' . $tag . '>';
-		$output .= '</tr>';
+		$output .= '</' . $tag . '>' . "\n";
+		$output .= "\t" . '</tr>';
 
 		if ($this->cols == 0)
 		{
