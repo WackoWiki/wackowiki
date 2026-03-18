@@ -209,9 +209,9 @@ div.hl-main {
 	background-color: var(--ww-hover-primary);
 }
 
-/* .usertable > tbody > tr:nth-of-type(2n+1) {
+.alternate > tbody > tr:nth-of-type(2n+1) {
 	background-color: #f9f9f9;
-} */
+}
 
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable {
