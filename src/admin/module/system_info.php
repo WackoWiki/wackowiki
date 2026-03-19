@@ -84,7 +84,7 @@ function admin_system_info($engine, $module)
 	}
 
 	$php_extensions = get_loaded_extensions();
-	sort($php_extensions);
+	natcasesort($php_extensions);
 
 	// Sysinfo in array
 	$sysinfo['app_version']			= [$engine->_t('WackoVersion'), $engine->db->wacko_version];
