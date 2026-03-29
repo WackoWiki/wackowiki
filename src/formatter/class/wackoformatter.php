@@ -117,7 +117,7 @@ class WackoFormatter
 			"<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|" .
 			// tables #|| #| ||...|| ||# |#
 			"\#\|\||" .
-			"\#\|(?:\((?:\s*\w+\s*=\s*[^)\s]+\s*)+\))?|" .
+			"\#\|(?:\((?:\s*\w+\s*=\s*(?:\"([^)\"]+)\"|([^)\s]+))\s*)+\))?|" .
 			"\|\|\#|" .
 			"\|\#|" .
 			"\|\|.*?\|\||" .
@@ -421,7 +421,7 @@ class WackoFormatter
 
 			return '<table class="dtable">';
 		}
-		else if (preg_match('/^\#\|((?:\((?:\s*\w+\s*=\s*[^)\s]+\s*)+\)))?$/us', $thing, $matches))
+		else if (preg_match('/^\#\|((?:\((?:\s*\w+\s*=\s*(?:\"([^)\"]+)\"|([^)\s]+))\s*)+\)))?$/us', $thing, $matches))
 		{
 			$this->br			= false;
 			$this->cols			= 0;
@@ -1120,24 +1120,32 @@ class WackoFormatter
 		$attr		= [];
 		$class		= [];
 		$params		= [];
-		$pattern	= '/^\(((?:\s*(\w+)\s*=\s*([^)\s]+)\s*)+)\)(.*)/usm';
+		$pattern	= '/^\(((?:\s*(\w+)\s*=\s*(?:\"([^)\"]+)\"|([^)\s]+))\s*)+)\)(.*)/usm';
 
 		if (preg_match($pattern, $string, $matches))
 		{
 			$params_str		= $matches[1];
-			$param_pattern	= '/(\w+)\s*=\s*([^)\s]+)/';
+			$param_pattern	= '/(\w+)\s*=\s*(?:\"([^)\"]+)\"|([^)\s]+))/';
 
 			preg_match_all($param_pattern, $params_str, $param_matches, PREG_SET_ORDER);
 
 			foreach ($param_matches as $pair)
 			{
-				$params[$pair[1]] = $pair[2];
+				$params[$pair[1]] = $pair[2] ?: $pair[3];;
 			}
 
 			// assign attributes
 			if ($tag === 'table')
 			{
-				$class[] = ' usertable';
+				if (isset($params['type'])
+					&& preg_match('/^[\w-]+$/', $params['class']))
+				{
+					$class[] = ' ' . $params['class'];
+				}
+				else
+				{
+					$class[] = ' usertable';
+				}
 			}
 
 			// [1] align
@@ -1164,7 +1172,7 @@ class WackoFormatter
 
 			// [3] class
 			if (isset($params['class'])
-				&& preg_match('/^[\w-]+$/', $params['class']))
+				&& preg_match('/^(?:[\w_-]*)(?:\s+[\w_-]*)*$/', $params['class']))
 			{
 				$class[] = ' ' . $params['class'];
 			}
@@ -1234,7 +1242,7 @@ class WackoFormatter
 				$attr[] = ' class="' . trim(implode('', $class ?? [])) . '"';
 			}
 
-			return [$attr, $matches[4] ?? ''];
+			return [$attr, $matches[5] ?? ''];
 		}
 
 		return null;
