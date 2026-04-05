@@ -1242,11 +1242,11 @@ a:target {
 .toolbar a img, 
 .toolbar span img {
 	border: medium none;
-	height: 22px;
-	width: 22px;
+	height: 1.375rem;
+	width: 1.375rem;
 }
 .toolbar li img {
-	background-size: 22px 22px;
+	background-size: 1.375rem 1.375rem;
 }
 .toolbar li.we-h1 img {
 	background: url('../../../image/wikiedit/light/h1.svg') no-repeat;
@@ -2104,8 +2104,8 @@ table.formation td {
 #page-handler a img,
 #page-handler span img {
 	border: medium none;
-	height: 16px;
-	width: 16px;
+	height: 1rem;
+	width: 1rem;
 }
 
 .page-handler img {
@@ -2188,8 +2188,8 @@ li.m-source img {
 .watch-off img,
 .watch-on img {
 	border: medium none;
-	height: 16px;
-	width: 16px;
+	height: 1rem;
+	width: 1rem;
 }
 .watch-off img {
 	background: url('./../icon/light/watch-off.svg') no-repeat;
@@ -2206,15 +2206,15 @@ li.m-source img {
 }
 
 .btn-sm {
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
+	background-size: 1rem 1rem;
+	height: 1rem;
+	width: 1rem;
 	display: inline-block;
 }
 .btn-md {
-	background-size: 22px 22px;
-	height: 22px;
-	width: 22px;
+	background-size: 1.375rem 1.375rem;
+	height: 1.375rem;
+	width: 1.375rem;
 	display: inline-block;
 }
 .btn-reload {

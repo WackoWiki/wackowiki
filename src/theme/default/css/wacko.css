@@ -745,7 +745,7 @@ mark {background: #ffa;}
 span.icon{
 	/* ! required for span width -> inline element */
 	display: inline-block;
-	height: 16px;
+	height: 1rem;
 	width: 0;
 	vertical-align: text-bottom;
 }
