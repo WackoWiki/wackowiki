@@ -188,7 +188,6 @@ div.hl-main {
 }
 
 .usertable caption {
-	/* border: 1px solid #ccc; */
 	margin: 5px 0;
 	padding: 2px;
 }
@@ -213,6 +212,11 @@ div.hl-main {
 	background-color: #f9f9f9;
 }
 
+.sticky > tbody > tr:first-child th {
+	position: sticky;
+	top: 0;
+}
+
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable {
 	width: 100%;
@@ -224,6 +228,239 @@ div.hl-main {
 	vertical-align: top;
 	border: 0 none #999;
 	padding: 4px;
+}
+
+/* colum alignment */
+
+.defaultleft,
+.col1left td:nth-child(1),
+.col1left th:nth-child(1),
+.col2left td:nth-child(2),
+.col3left td:nth-child(3),
+.col4left td:nth-child(4),
+.col5left td:nth-child(5),
+.col6left td:nth-child(6),
+.col7left td:nth-child(7),
+.col8left td:nth-child(8),
+.col9left td:nth-child(9),
+.col10left td:nth-child(10),
+.col11left td:nth-child(11),
+.col12left td:nth-child(12),
+.col13left td:nth-child(13),
+.col14left td:nth-child(14),
+.col15left td:nth-child(15),
+.col16left td:nth-child(16),
+.col17left td:nth-child(17),
+.col18left td:nth-child(18),
+.col19left td:nth-child(19),
+.col20left td:nth-child(20),
+.col21left td:nth-child(21),
+.col22left td:nth-child(22),
+.col23left td:nth-child(23),
+.col24left td:nth-child(24),
+.col25left td:nth-child(25),
+.col-1left td:nth-last-child(1),
+.col-2left td:nth-last-child(2),
+.col-3left td:nth-last-child(3),
+.col-4left td:nth-last-child(4),
+.col-5left td:nth-last-child(5),
+.col-6left td:nth-last-child(6),
+.col-7left td:nth-last-child(7),
+.col-8left td:nth-last-child(8),
+.col-9left td:nth-last-child(9) {
+	text-align: left;
+}
+
+.defaultcenter,
+.col1center td:nth-child(1),
+.col2center td:nth-child(2),
+.col3center td:nth-child(3),
+.col4center td:nth-child(4),
+.col5center td:nth-child(5),
+.col6center td:nth-child(6),
+.col7center td:nth-child(7),
+.col8center td:nth-child(8),
+.col9center td:nth-child(9),
+.col10center td:nth-child(10),
+.col11center td:nth-child(11),
+.col12center td:nth-child(12),
+.col13center td:nth-child(13),
+.col14center td:nth-child(14),
+.col15center td:nth-child(15),
+.col16center td:nth-child(16),
+.col17center td:nth-child(17),
+.col18center td:nth-child(18),
+.col19center td:nth-child(19),
+.col20center td:nth-child(20),
+.col21center td:nth-child(21),
+.col22center td:nth-child(22),
+.col23center td:nth-child(23),
+.col24center td:nth-child(24),
+.col25center td:nth-child(25),
+.col-1center td:nth-last-child(1),
+.col-2center td:nth-last-child(2),
+.col-3center td:nth-last-child(3),
+.col-4center td:nth-last-child(4),
+.col-5center td:nth-last-child(5),
+.col-6center td:nth-last-child(6),
+.col-7center td:nth-last-child(7),
+.col-8center td:nth-last-child(8),
+.col-9center td:nth-last-child(9) {
+	text-align: center;
+}
+
+.defaultright,
+.col1right td:nth-child(1),
+.col2right td:nth-child(2),
+.col3right td:nth-child(3),
+.col4right td:nth-child(4),
+.col5right td:nth-child(5),
+.col6right td:nth-child(6),
+.col7right td:nth-child(7),
+.col8right td:nth-child(8),
+.col9right td:nth-child(9),
+.col10right td:nth-child(10),
+.col11right td:nth-child(11),
+.col12right td:nth-child(12),
+.col13right td:nth-child(13),
+.col14right td:nth-child(14),
+.col15right td:nth-child(15),
+.col16right td:nth-child(16),
+.col17right td:nth-child(17),
+.col18right td:nth-child(18),
+.col19right td:nth-child(19),
+.col20right td:nth-child(20),
+.col21right td:nth-child(21),
+.col22right td:nth-child(22),
+.col23right td:nth-child(23),
+.col24right td:nth-child(24),
+.col25right td:nth-child(25),
+.col-1right td:nth-last-child(1),
+.col-2right td:nth-last-child(2),
+.col-3right td:nth-last-child(3),
+.col-4right td:nth-last-child(4),
+.col-5right td:nth-last-child(5),
+.col-6right td:nth-last-child(6),
+.col-7right td:nth-last-child(7),
+.col-8right td:nth-last-child(8),
+.col-9right td:nth-last-child(9) {
+	text-align: right;
+}
+
+.vertical-align-top tr,
+.defaulttop tr,
+.col1top td:nth-child(1),
+.col2top td:nth-child(2),
+.col3top td:nth-child(3),
+.col4top td:nth-child(4),
+.col5top td:nth-child(5),
+.col6top td:nth-child(6),
+.col7top td:nth-child(7),
+.col8top td:nth-child(8),
+.col9top td:nth-child(9),
+.col10top td:nth-child(10),
+.col11top td:nth-child(11),
+.col12top td:nth-child(12),
+.col13top td:nth-child(13),
+.col14top td:nth-child(14),
+.col15top td:nth-child(15),
+.col16top td:nth-child(16),
+.col17top td:nth-child(17),
+.col18top td:nth-child(18),
+.col19top td:nth-child(19),
+.col20top td:nth-child(20),
+.col21top td:nth-child(21),
+.col22top td:nth-child(22),
+.col23top td:nth-child(23),
+.col24top td:nth-child(24),
+.col25top td:nth-child(25),
+.col-1top td:nth-last-child(1),
+.col-2top td:nth-last-child(2),
+.col-3top td:nth-last-child(3),
+.col-4top td:nth-last-child(4),
+.col-5top td:nth-last-child(5),
+.col-6top td:nth-last-child(6),
+.col-7top td:nth-last-child(7),
+.col-8top td:nth-last-child(8),
+.col-9top td:nth-last-child(9) {
+	vertical-align: top;
+}
+
+.defaultmiddle tr,
+.col1middle td:nth-child(1),
+.col2middle td:nth-child(2),
+.col3middle td:nth-child(3),
+.col4middle td:nth-child(4),
+.col5middle td:nth-child(5),
+.col6middle td:nth-child(6),
+.col7middle td:nth-child(7),
+.col8middle td:nth-child(8),
+.col9middle td:nth-child(9),
+.col10middle td:nth-child(10),
+.col11middle td:nth-child(11),
+.col12middle td:nth-child(12),
+.col13middle td:nth-child(13),
+.col14middle td:nth-child(14),
+.col15middle td:nth-child(15),
+.col16middle td:nth-child(16),
+.col17middle td:nth-child(17),
+.col18middle td:nth-child(18),
+.col19middle td:nth-child(19),
+.col20middle td:nth-child(20),
+.col21middle td:nth-child(21),
+.col22middle td:nth-child(22),
+.col23middle td:nth-child(23),
+.col24middle td:nth-child(24),
+.col25middle td:nth-child(25),
+.col-1middle td:nth-last-child(1),
+.col-2middle td:nth-last-child(2),
+.col-3middle td:nth-last-child(3),
+.col-4middle td:nth-last-child(4),
+.col-5middle td:nth-last-child(5),
+.col-6middle td:nth-last-child(6),
+.col-7middle td:nth-last-child(7),
+.col-8middle td:nth-last-child(8),
+.col-9middle td:nth-last-child(9) {
+	vertical-align: middle;
+}
+
+.vertical-align-bottom tr,
+.defaultbottom tr,
+.col1bottom td:nth-child(1),
+.col2bottom td:nth-child(2),
+.col3bottom td:nth-child(3),
+.col4bottom td:nth-child(4),
+.col5bottom td:nth-child(5),
+.col6bottom td:nth-child(6),
+.col7bottom td:nth-child(7),
+.col8bottom td:nth-child(8),
+.col9bottom td:nth-child(9),
+.col10bottom td:nth-child(10),
+.col11bottom td:nth-child(11),
+.col12bottom td:nth-child(12),
+.col13bottom td:nth-child(13),
+.col14bottom td:nth-child(14),
+.col15bottom td:nth-child(15),
+.col16bottom td:nth-child(16),
+.col17bottom td:nth-child(17),
+.col18bottom td:nth-child(18),
+.col19bottom td:nth-child(19),
+.col20bottom td:nth-child(20),
+.col21bottom td:nth-child(21),
+.col22bottom td:nth-child(22),
+.col23bottom td:nth-child(23),
+.col24bottom td:nth-child(24),
+.col25bottom td:nth-child(25),
+.col-1bottom td:nth-last-child(1),
+.col-2bottom td:nth-last-child(2),
+.col-3bottom td:nth-last-child(3),
+.col-4bottom td:nth-last-child(4),
+.col-5bottom td:nth-last-child(5),
+.col-6bottom td:nth-last-child(6),
+.col-7bottom td:nth-last-child(7),
+.col-8bottom td:nth-last-child(8),
+.col-9bottom td:nth-last-child(9) {
+	vertical-align: bottom;
 }
 
 /* Inside the table of content: SYNTAX {{toc}} */
