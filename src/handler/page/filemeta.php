@@ -224,7 +224,7 @@ else if ($mode && !empty($file))
 
 			// copy to clipboard
 			$this->copy_to_clipboard();
-			$tpl->s_token = Ut::random_token(10);
+			$tpl->s_token = 'cb-' . Ut::random_token(7);
 
 			if ($file['page_id'])
 			{
@@ -232,7 +232,7 @@ else if ($mode && !empty($file))
 				$tpl->s_syntax		= 'file:' . $file['file_name'];
 				// absolute path (<details>)
 				$tpl->s_d_syntax	= $file_tag;
-				$tpl->s_d_token		= Ut::random_token(10);
+				$tpl->s_d_token		= 'cb-' . Ut::random_token(7);
 			}
 			else
 			{

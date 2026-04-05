@@ -126,7 +126,7 @@ else
 
 		$tpl->enter('g_f_');
 		$tpl->page	= $this->page;
-		$tpl->token	= Ut::random_token(10);
+		$tpl->token	= 'cb-' . Ut::random_token(7);
 
 		if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], true))
 		{

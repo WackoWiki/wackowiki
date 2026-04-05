@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 extract(array_merge(['default' => 'wacko', 'source' => $this->tag, 'copy_button' => false], $options));
 
-$div_id = Ut::random_token(10);
+$div_id = 'cb-' . Ut::random_token(7);
 echo '<!--notypo-->';
 
 // copy to clipboard
