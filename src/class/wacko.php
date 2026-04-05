@@ -1231,7 +1231,10 @@ class Wacko
 		$this->page_cache[$page['page_id']]['mdonly']	= $metadata_only;
 
 		// cache page_id to avoid roundtrips
-		$this->page_id_cache[$page['tag']] = $page['page_id'];
+		if (isset($page['tag']))
+		{
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+		}
 	}
 
 	function cache_wanted_page($tag, $page_id = 0, $check = false): void
