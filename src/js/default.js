@@ -1,276 +1,173 @@
-function undef(param)
-{
-	return param;
+// Tiny legacy helper (still used in crit_init)
+function undef(param) {
+  return param;
 }
 
-// all_init() initializes all js features:
-//   * WikiEdit
-//   * Double click editing
-//   * Session heart beat
-window.onload = function ()
-{
-	all_init();
-};
+// Global configuration variables
+let wikiedit;   // WikiEdit instance or config
+let dbclick = 'page';
+var edit;       // URL to open on double-click
+var timeout;    // session heartbeat interval in seconds
+var ename;      // name of the editor form element
 
-var ok;
-var wikiedit;
-var dbclick = 'page';
-var edit;
-var timeout;
-var ename;
+let cf_modified = false;   // track unsaved changes
 
-// initialize everything
-function all_init()
-{
-	if (wikiedit)
-	{
-		we_init(wikiedit);
-	}
-
-	if (dbclick)
-	{
-		dclick();
-	}
-
-	if (timeout)
-	{
-		userSessionHeartbeat(timeout, ename);
-	}
-
-	crit_init();
+// Main initializer – called on page load
+function all_init() {
+  if (wikiedit) we_init(wikiedit);           // we_init is defined by WikiEdit class
+  if (dbclick) dclick();
+  if (timeout) userSessionHeartbeat(timeout, ename);
+  crit_init();
 }
 
-// freecap
-function new_freecap()
-{
-	let separator	= '?';
-	let thesrc		= document.getElementById('freecap').src;
+// Refresh FreeCap (CAPTCHA) image
+function new_freecap() {
+  const img = document.getElementById('freecap');
+  if (!img) return;
 
-	// routing with rewrite OFF
-	if (thesrc.indexOf('?page=') !== - 1)
-	{
-		separator	= '&';
-	}
+  let src = img.src;
+  const separator = src.includes('?page=') ? '&' : '?';
 
-	if (thesrc.indexOf('freecap' + separator) !== - 1)
-	{
-		thesrc		= thesrc.substring(0, thesrc.lastIndexOf(separator));
-	}
+  // Remove previous freecap parameter if present
+  if (src.includes('freecap' + separator)) {
+    src = src.substring(0, src.lastIndexOf(separator));
+  }
 
-	document.getElementById('freecap').src = thesrc + separator + Math.round(Math.random() * 100000);
+  // Append random number 
+  img.src = src + separator + Math.round(Math.random() * 100000);
 }
 
-function dclick()
-{
-	if (edit)
-	{
-		// skip double-click editing for pages having forms
-		const pageShow	= document.getElementById('section-content');
-		const form		= pageShow.querySelector('#section-content form');
+// Double-click to edit
+function dclick() {
+  const pageShow = document.getElementById('section-content');
+  if (!pageShow) return;
 
-		if (form)
-		{
-			return;
-		}
+  // Skip double-click editing when a form is already present on the page
+  if (pageShow.querySelector('#section-content form')) return;
 
-		document.addEventListener('dblclick', mouseClick, true);
-	}
+  if (edit) {
+    document.addEventListener('dblclick', mouseClick, { capture: true });
+  }
 }
 
-function mouseClick(event)
-{
-	var op = event.target;
+function mouseClick(event) {
+  let op = event.target;
+  while (op && op.className !== dbclick && op.tagName !== 'BODY') {
+    op = op.parentNode;
+  }
 
-	while (op != null && op.className != dbclick && op.tagName != 'BODY')
-	{
-		op = op.parentNode;
-	}
-
-	if (op != null && op.className == dbclick)
-	{
-		document.location = edit;
-	}
+  if (op && op.className === dbclick) {
+    window.location.href = edit;
+  }
 }
 
-function weSave()
-{
-	if (confirm(lang.ReallySave))
-	{
-		document.forms.edit[0].click();
-	}
+// Save confirmation (called from WikiEdit toolbar)
+function weSave() {
+  if (confirm(lang.ReallySave)) {
+    const form = document.forms.namedItem('edit') || document.querySelector('form[name="edit"]');
+    if (form) form.submit();
+  }
 }
 
-// confirms leaving the page when there are unsaved changes
-var root = window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null;
-var cf_modified = false;
-
-function set_modified(e, strict_e)
-{
-	var el;
-
-	if (window.event && !strict_e)
-	{
-		el = window.event.target;
-	}
-	else if (e != null)
-	{
-		el = e.currentTarget;
-	}
-
-	if (el != null)
-	{
-		el.style.borderColor	= '#eecc99';
-		el.title				= lang.ModifiedHint;
-	}
-
-	cf_modified = true;
+// Unsaved changes warning
+function set_modified(e) {
+  const el = e?.currentTarget || e?.target;
+  if (el) {
+    el.style.borderColor = '#eecc99';
+    el.title = lang.ModifiedHint || 'Modified – unsaved changes';
+  }
+  cf_modified = true;
 }
 
-function ignore_modified() 
-{
-	if (typeof (root.onbeforeunload) != 'undefined')
-	{
-		root.onbeforeunload = null;
-	}
+function ignore_modified() {
+  window.onbeforeunload = null;
 }
 
-function check_cf()
-{
-	if (cf_modified)
-	{
-		return '\n' + lang.NotSavedWarning + '\n';
-	}
+function check_cf() {
+  if (cf_modified) {
+    return '\n' + (lang.NotSavedWarning || 'You have unsaved changes!') + '\n';
+  }
 }
 
-function crit_init()
-{
-	if (undef() == root.onbeforeunload) root.onbeforeunload = check_cf;
-	else return;
+function crit_init() {
+  // Set beforeunload warning only once
+  if (!window.onbeforeunload) {
+    window.onbeforeunload = check_cf;
+  }
 
-	var thisformcf, oCurrForm, oCurrFormElem;
+  // Modern clean loop over all forms and their elements
+  for (const form of document.forms) {
+    const hasCf = form.getAttribute('cf') !== null;
+    const hasNoCf = form.getAttribute('nocf') !== null;
 
-	for (var i = 0; oCurrForm = document.forms[i]; i++)
-	{
-		thisformcf = !!oCurrForm.getAttribute('cf');
+    if (hasNoCf) continue;
 
-		if (oCurrForm.getAttribute('nocf'))
-		{
-			thisformcf = false;
-		}
+    for (const elem of form.elements) {
+      const elemHasCf = elem.getAttribute('cf') !== null;
+      const elemHasNoCf = elem.getAttribute('nocf') !== null;
 
-		for (var j = 0; oCurrFormElem = oCurrForm.elements[j]; j++)
-		{
-			if (thisformcf || oCurrFormElem.getAttribute('cf'))
-			{
-				if (!oCurrFormElem.getAttribute('nocf'))
-				{
-					if (oCurrFormElem.addEventListener)
-					{
-						oCurrFormElem.addEventListener('change', set_modified, false);
-					}
-					else if (oCurrFormElem.attachEvent)
-					{
-						oCurrFormElem.attachEvent('onchange', set_modified);
-					}
-	
-					if (oCurrFormElem.addEventListener)
-					{
-						oCurrFormElem.addEventListener('keypress', set_modified, false);
-					}
-					else if (oCurrFormElem.attachEvent)
-					{
-						oCurrFormElem.attachEvent('onkeypress', set_modified);
-					}
-				}
-			}
-		}
+      if ((hasCf || elemHasCf) && !elemHasNoCf) {
+        elem.addEventListener('change', set_modified);
+        elem.addEventListener('keypress', set_modified);
+      }
+    }
 
-		if (oCurrForm.addEventListener) oCurrForm.addEventListener('submit', ignore_modified, false);
-		else if (oCurrForm.attachEvent) oCurrForm.attachEvent('onsubmit', ignore_modified);
-	}
+    // Clear warning when form is submitted
+    form.addEventListener('submit', ignore_modified);
+  }
 }
 
-function invertSelections(eid)
-{
-	var form = document.getElementById(eid),
-		numElements = form.elements.length,
-		i,
-		curElement;
 
-	for ( i = 0; i < numElements; i++ )
-	{
-		curElement = form.elements[ i ];
+// Toggle all checkboxes in a form
+function invertSelections(eid) {
+  const form = document.getElementById(eid);
+  if (!form) return;
 
-		if ( curElement.type === 'checkbox')
-		{
-			curElement.checked = !curElement.checked;
-		}
-	}
+  for (const el of form.elements) {
+    if (el.type === 'checkbox') {
+      el.checked = !el.checked;
+    }
+  }
 }
 
-if (root)
-{
-	if (root.addEventListener) root.addEventListener('load', crit_init, false);
-	else if (root.attachEvent) root.attachEvent('onload', crit_init);
+// Session heartbeat (keeps user session alive while editing)
+function userSessionHeartbeat(duration, ename) {
+  const intervalMs = duration * 1000;
+
+  const sessioncounter = setInterval(async () => {
+    try {
+      const url = `${window.location.href}?_autocomplete=1&rnd=${Math.random()}`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        cache: 'no-cache',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      // Success → do nothing
+
+    } catch {
+      // Session expired or network error
+      const div = document.createElement('div');
+      div.className = 'msg error';
+      div.innerHTML = (lang.SessionExpiredEditor || 'Your session has expired.').replace(/\n/g, '<br>');
+
+      const target = document.getElementsByName(ename)[0];
+      if (target) target.prepend(div);
+
+      alert(lang.SessionExpiredEditor || 'Your session has expired.');
+
+      // Disable all save/cancel buttons
+      document.querySelectorAll('.btn-ok, .btn-cancel').forEach(btn => {
+        btn.disabled = true;
+      });
+
+      clearInterval(sessioncounter);
+    }
+  }, intervalMs);
 }
 
-function userSessionHeartbeat(duration, ename)
-{
-	var sessioncounter = setInterval(function ()
-	{
-		// 1. Prepare new XMLHttpRequest
-		var xhr = new XMLHttpRequest();
-		var url = window.location.href + '?_autocomplete=1&rnd=' + Math.random();
 
-		xhr.onreadystatechange = function()
-		{
-			if (xhr.readyState == 4 && xhr.status != 200)
-			{
-				// Error handling
-				// alert(xhr.status + ': ' + (xhr.statusText ? xhr.statusText : 'Unknown')); // E.g.: 404: Not Found
-				var div = document.createElement('div');
-				div.className = 'msg error';
-				div.innerHTML = lang.SessionExpiredEditor.replace(/\n/g, '<br>');
-				alert(lang.SessionExpiredEditor);
-				document.getElementsByName(ename)['0'].prepend(div);
-
-				var list;
-				list = document.getElementsByClassName('btn-ok');
-				for (let value of list)
-				{
-					value.disabled = true;
-				}
-
-				list = document.getElementsByClassName('btn-cancel');
-				for (let value of list)
-				{
-					value.disabled = true;
-				}
-
-				clearInterval(sessioncounter);
-			}
-
-			if (xhr.status == 200)
-			{
-				// Response handling
-				// alert( xhr.responseText ); // responseText output
-			}
-		};
-
-		// 2. Configure: GET-request to url in async mode
-		xhr.open('GET', url, true);
-		// 3. Send heartbeat request
-		xhr.send();
-
-	}, duration * 1000);
-}
-
-// substr() replacement
-function safeSlice(str, start, length)
-{
-	const actualStart	= start < 0 ? Math.max(str.length + start, 0) : Math.min(start, str.length);
-	const actualLength	= Math.max(Math.min(length ?? str.length, str.length), 0);
-	const actualEnd		= Math.min(actualStart + actualLength, str.length);
-
-	return str.slice(actualStart, actualEnd);
-}
+// Auto-initialise everything when the page finishes loading
+window.addEventListener('load', all_init);

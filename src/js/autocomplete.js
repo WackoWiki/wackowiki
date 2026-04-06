@@ -54,7 +54,7 @@ class AutoComplete {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // Modern helpers (replaced safeSlice with native .slice)
+    // Helpers
     // ─────────────────────────────────────────────────────────────
     reset() {
         this.request_pattern = null;
