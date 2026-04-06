@@ -6,7 +6,6 @@
 
 class ProtoEdit
 {
-	isIE;
 	imagesPath;
 	actionName;
 	constructor()
@@ -68,24 +67,18 @@ class ProtoEdit
 
 	insTag(Tag, Tag2)
 	{
-		if (this.isIE)
-		{
-			this.area.focus();
-			let sel				= window.getSelection();
-			sel.text			= Tag + sel.text + Tag2;
-			this.area.focus();
-		}
-		else
-		{
-			let ss				= this.area.scrollTop;
-			let sel1			= safeSlice(this.area.value, 0, this.area.selectionStart);
-			let sel2			= safeSlice(this.area.value, this.area.selectionEnd);
-			let sel				= safeSlice(this.area.value, this.area.selectionStart, this.area.selectionEnd - this.area.selectionStart);
-			this.area.value		= sel1 + Tag + sel + Tag2 + sel2;
-			let selPos			= Tag.length + sel1.length + sel.length + Tag2.length;
-			this.area.setSelectionRange(sel1.length, selPos);
-			this.area.scrollTop = ss;
-		}
+		const area = this.area;
+		const scrollTop = area.scrollTop;
+		const start = area.selectionStart;
+		const end = area.selectionEnd;
+
+		// Get currently selected text (empty string if nothing is selected)
+		const selected = area.value.slice(start, end);
+
+		area.setRangeText(`${Tag}${selected}${Tag2}`, start, end, 'select');
+
+		// Restore scroll position
+		area.scrollTop = scrollTop;
 
 		return true;
 	}
