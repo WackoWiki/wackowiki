@@ -45,5 +45,12 @@ lang = {
 	InsertTable: 'Εισαγωγή πίνακα',
 	Link: 'Σύνδεσμος',
 	TextForLinking: 'Κείμενο για σύνδεση',
+	Insert: 'Insert',
+	Cancel: 'Ακύρωση',
+	NumberColumns: 'Αριθμός στηλών:',
+	NumberRows: 'Αριθμός γραμμών:',
+	TableCaption: 'Τίτλος πίνακα (προαιρετικό):',
+	UseColumnHeaders: 'Χρήση κεφαλίδων στηλών',
+	UseRowHeaders: 'Χρήση κεφαλίδων γραμμών',
 	HelpAboutTip: ' Συντομεύσεις:\n' + ' Ctrl+B - Έντονα\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Υπογράμμιση\n' + ' Ctrl+Shift+S - Επιδιαγράμμιση\n' + ' Ctrl+Shift+1 .. 4 - Κλάση 1..4\n' + ' Alt+I ή Ctrl+T - Εσοχή\n' + ' Alt+U ή Ctrl+Shift+T - Χωρίς εσοχή\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Σύνδεσμος\n' + ' Ctrl+L - Σύνδεσμος με περιγραφή\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Ordered List\n' + ' Ctrl+Shift+O - Κατάταξη Λίστας\n' + ' Ctrl+= - Μικρό κείμενο\n' + ' Ctrl+Shift+Minus - Οριζόντια γραμμή\n' + ' \n'
 };

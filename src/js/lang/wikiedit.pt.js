@@ -7,7 +7,7 @@ lang = {
 	// wikiedit.js
 	HelpAbout: 'Ajuda e Sobre',
 	HelpFormatting: 'Ajuda',
-	HelpFormattingTip: 'Ajuda na formatação do Wiki-Wiki',
+	HelpFormattingTip: 'Ajuda na formatação do Wiki',
 	HelpFormattingPage: 'Doc/English/Formatting',
 	Heading1: 'Cabeçalho Nível 1',
 	Heading2: 'Cabeçalho Nível 2',
@@ -45,5 +45,12 @@ lang = {
 	InsertTable: 'Inserir tabela',
 	Link: 'Vincular',
 	TextForLinking: 'Texto para ligação',
+	Insert: 'Insert',
+	Cancel: 'cancelar',
+	NumberColumns: 'Número de colunas:',
+	NumberRows: 'Número de linhas:',
+	TableCaption: 'Legenda da tabela (opcional):',
+	UseColumnHeaders: 'Usar cabeçalhos de coluna',
+	UseRowHeaders: 'Usar cabeçalhos de linha',
 	HelpAboutTip: ' Shortcuts:\n' + ' Ctrl+B - Negrito\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Sublinhar\n' + ' Ctrl+Shift+S - Ataque\n' + ' Ctrl+Shift+1 .. 4 - Título 1..4\n' + ' Alt+I ou Ctrl+T - Recuo\n' + ' Alt+U ou Ctrl+Shift+T - Sem recuo\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link com a descrição\n' + ' Ctrl+Shift+L - Lista Ordenada\n' + ' Ctrl+Shift+N - Lista Ordenada\n' + ' Ctrl+Shift+O - Lista Ordenada\n' + ' Ctrl+= - Texto pequeno\n' + ' Ctrl+Shift+Menos - Linha Horizontal\n' + ' \n'
 };

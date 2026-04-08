@@ -45,5 +45,12 @@ lang = {
 	InsertTable: 'Vložit tabulku',
 	Link: 'Odkaz',
 	TextForLinking: 'Text pro propojení',
+	Insert: 'Insert',
+	Cancel: 'Zrušit',
+	NumberColumns: 'Počet sloupců:',
+	NumberRows: 'Počet řádků:',
+	TableCaption: 'Titulek tabulky (nepovinné):',
+	UseColumnHeaders: 'Použít záhlaví sloupce',
+	UseRowHeaders: 'Použít záhlaví řádků',
 	HelpAboutTip: ' Zkratky:\n' + ' Ctrl+B - tučné\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - podtržení\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 4 - Položka 1..4\n' + ' Alt+I nebo Ctrl+T - odsazení\n' + ' Alt+U nebo Ctrl+Shift+T - Odsazení\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - odkaz\n' + ' Ctrl+L - Propojit s popisem\n' + ' Ctrl+Shift+L - neuspořádaný seznam\n' + ' Ctrl+Shift+N - Objednaný seznam\n' + ' Ctrl+Shift+O - Objednaný seznam\n' + ' Ctrl+= - Malý text\n' + ' Ctrl+Shift+Minus - vodorovná čára\n' + ' \n'
 };

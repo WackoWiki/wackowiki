@@ -45,5 +45,12 @@ lang = {
 	InsertTable: 'Lisää taulu',
 	Link: 'Linkki',
 	TextForLinking: 'Linkitystä koskeva teksti',
+	Insert: 'Insert',
+	Cancel: 'Peruuta',
+	NumberColumns: 'Sarakkeiden lukumäärä:',
+	NumberRows: 'Rivien määrä:',
+	TableCaption: 'Taulukon kuvaus (valinnainen):',
+	UseColumnHeaders: 'Käytä sarakkeen otsakkeita',
+	UseRowHeaders: 'Käytä rivin otsakkeita',
 	HelpAboutTip: ' Pikanäppäimet:\n' + ' Ctrl+B - Lihavoitu\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Alleviivaus\n' + ' Ctrl+Shift+S - Yliviivaus\n' + ' Ctrl+Shift+1 .. 4 - Otsake 1..4\n' + ' Alt+I tai Ctrl+T - Sisennys\n' + ' Alt+U tai Ctrl+Shift+T - sisennys\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Linkki\n' + ' Ctrl+L - Linkki kuvauksella\n' + ' Ctrl+Shift+L - Järjestämätön Luettelo\n' + ' Ctrl+Shift+N - Järjestetty Luettelo\n' + ' Ctrl+Shift+O - Järjestetty Luettelo\n' + ' Ctrl+= - Pieni teksti\n' + ' Ctrl+Shift+Minus - Vaakaviiva\n' + ' \n'
 };

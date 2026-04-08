@@ -602,6 +602,11 @@ class WikiEdit extends ProtoEdit {
       </div>
       <div class="we-modal-body">
         <form id="we-table-form-${this.id}">
+			<div class="we-form-group">
+				<label class="we-form-label">${lang.TableCaption || 'Table caption (optional):'}</label>
+				<input type="text" id="we-table-caption-${this.id}" class="we-form-input">
+			</div>
+
           <div class="we-form-grid">
             <div class="we-form-group">
               <label class="we-form-label">${lang.NumberColumns || 'Number of columns:'}</label>
@@ -611,11 +616,6 @@ class WikiEdit extends ProtoEdit {
               <label class="we-form-label">${lang.NumberRows || 'Number of rows:'}</label>
               <input type="number" id="we-table-rows-${this.id}" value="3" min="1" class="we-form-input">
             </div>
-          </div>
-
-          <div class="we-form-group">
-            <label class="we-form-label">${lang.TableCaption || 'Table caption (optional):'}</label>
-            <input type="text" id="we-table-caption-${this.id}" class="we-form-input">
           </div>
 
           <div class="we-form-checkboxes">
