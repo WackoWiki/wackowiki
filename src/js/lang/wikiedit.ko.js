@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"링크",
 	TextForLinking :		"링크용 텍스트",
+	Insert :				"Insert",
+	Cancel :				"취소",
+	NumberColumns :			"열 수:",
+	NumberRows :			"행 수:",
+	TableCaption :			"표 제목 (선택 사항):",
+	UseColumnHeaders :		"열 머리글 사용",
+	UseRowHeaders :			"행 머리글 사용",
 
 	HelpAboutTip :			' 바로가기:\n'+
 							' Ctrl+B - Bold\n'+

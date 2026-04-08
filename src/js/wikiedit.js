@@ -23,6 +23,12 @@ class WikiEdit extends ProtoEdit {
     this.undosels       = 0;
     this.undosele       = 0;
     this.buttons        = [];
+
+    // Single-form popups
+    this.linkForm       = null;
+    this.linkContext    = null;
+    this.tableForm      = null;
+    this.tableContext   = null;
   }
 
   // Initialisation
@@ -84,7 +90,7 @@ class WikiEdit extends ProtoEdit {
     if (this.autocomplete) this.autocomplete.addButton();
 
     this.addButton('footnote',   lang.Footnote,    "'[[^ ', ']]', 2");
-    this.addButton('createtable', lang.InsertTable, "'', '\\n#|\\n|| | ||\\n|| | ||\\n|#\\n', 2");
+    this.addButton('createtable', lang.InsertTable, '', `document.getElementById('${this.id}')._owner.createTable`);
     this.addButton('customhtml', separator);
 
     // Help button – now a clean template literal
@@ -458,29 +464,345 @@ class WikiEdit extends ProtoEdit {
     return true;
   }
 
+  // ====================== createLink + SINGLE FORM POPUP ======================
+
   createLink(isAlt) {
     const t = this.area;
     t.focus();
     this.getDefines();
 
     if (!/\n/.test(this.sel)) {
-      if (!isAlt) {
-        let lnk = prompt(lang.Link + ':', this.sel) ?? this.sel;
-        let sl = prompt(lang.TextForLinking + ':', this.sel) ?? '';
-        this.sel = lnk + ' ' + sl;
+      if (isAlt) {
+        const str = this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
+        t.value = str;
+        t.setSelectionRange(this.sel1.length, str.length - this.sel2.length);
+        return true;
       }
 
-      const str = this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
-      t.value = str;
-      t.setSelectionRange(this.sel1.length, str.length - this.sel2.length);
+      this.showLinkForm();
       return true;
     }
     return false;
   }
 
+  /**
+   * Lazily creates the modal form (single popup) once per editor instance.
+   */
+  createLinkForm() {
+    const modal = document.createElement('div');
+    modal.className = 'we-modal';
+
+    const dialog = document.createElement('div');
+    dialog.className = 'we-modal-dialog';
+
+    dialog.innerHTML = `
+      <div class="we-modal-header">
+        <h3 class="we-modal-title">${lang.Hyperlink || 'Hyperlink'}</h3>
+      </div>
+      <div class="we-modal-body">
+        <form id="we-link-form-${this.id}">
+          <div class="we-form-group">
+            <label class="we-form-label">${(lang.Link || 'Link') + ':'}</label>
+            <input type="text" id="we-link-url-${this.id}" class="we-form-input">
+          </div>
+
+          <div class="we-form-group">
+            <label class="we-form-label">${(lang.TextForLinking || 'Text for linking') + ':'}</label>
+            <input type="text" id="we-link-text-${this.id}" class="we-form-input">
+          </div>
+
+          <div class="we-modal-footer">
+            <button type="button" id="we-link-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
+            <button type="submit" id="we-link-insert-${this.id}" class="we-btn we-btn-primary">${lang.Insert || 'Insert'}</button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    modal.appendChild(dialog);
+    document.body.appendChild(modal);
+
+    // Cache DOM references
+    const urlInput   = document.getElementById(`we-link-url-${this.id}`);
+    const textInput  = document.getElementById(`we-link-text-${this.id}`);
+    const cancelBtn  = document.getElementById(`we-link-cancel-${this.id}`);
+    const formEl     = document.getElementById(`we-link-form-${this.id}`);
+
+    this.linkForm = {
+      modal: modal,
+      urlInput: urlInput,
+      textInput: textInput,
+      form: formEl
+    };
+
+    // Event listeners
+    cancelBtn.addEventListener('click', () => {
+      this.hideLinkForm();
+      this.area.focus();
+    });
+
+    formEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.insertLinkFromForm();
+    });
+  }
+
+  /**
+   * Shows the single link form popup (prefilled with current selection).
+   */
+  showLinkForm() {
+    if (!this.linkForm) this.createLinkForm();
+
+    const f = this.linkForm;
+    const defaultValue = this.sel || '';
+
+    f.urlInput.value = defaultValue;
+    f.textInput.value = defaultValue;
+
+    // Store context so we can safely insert after the modal closes
+    this.linkContext = {
+      sel1: this.sel1,
+      sel2: this.sel2,
+      area: this.area
+    };
+
+    f.modal.classList.add('show');
+    f.urlInput.focus();
+    f.urlInput.select();
+  }
+
+  hideLinkForm() {
+    if (this.linkForm) {
+      this.linkForm.modal.classList.remove('show');
+      this.linkContext = null;
+    }
+  }
+
+  // ====================== TABLE POPUP FORM ======================
+
+  createTable() {
+    const t = this.area;
+    t.focus();
+    this.getDefines();
+
+    this.showTableForm();
+    return true;
+  }
+
+  createTableForm() {
+    const modal = document.createElement('div');
+    modal.className = 'we-modal';
+
+    const dialog = document.createElement('div');
+    dialog.className = 'we-modal-dialog';
+
+    dialog.innerHTML = `
+      <div class="we-modal-header">
+        <h3 class="we-modal-title">${lang.InsertTable || 'Insert Table'}</h3>
+      </div>
+      <div class="we-modal-body">
+        <form id="we-table-form-${this.id}">
+          <div class="we-form-grid">
+            <div class="we-form-group">
+              <label class="we-form-label">${lang.NumberColumns || 'Number of columns:'}</label>
+              <input type="number" id="we-table-cols-${this.id}" value="4" min="1" class="we-form-input">
+            </div>
+            <div class="we-form-group">
+              <label class="we-form-label">${lang.NumberRows || 'Number of rows:'}</label>
+              <input type="number" id="we-table-rows-${this.id}" value="3" min="1" class="we-form-input">
+            </div>
+          </div>
+
+          <div class="we-form-group">
+            <label class="we-form-label">${lang.TableCaption || 'Table caption (optional):'}</label>
+            <input type="text" id="we-table-caption-${this.id}" class="we-form-input">
+          </div>
+
+          <div class="we-form-checkboxes">
+            <label class="we-checkbox-label">
+              <input type="checkbox" id="we-table-colheader-${this.id}">
+              ${lang.UseColumnHeaders || 'Use column headers'}
+            </label>
+            <label class="we-checkbox-label">
+              <input type="checkbox" id="we-table-rowheader-${this.id}">
+              ${lang.UseRowHeaders || 'Use row headers'}
+            </label>
+          </div>
+
+          <div class="we-modal-footer">
+            <button type="button" id="we-table-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
+            <button type="submit" id="we-table-insert-${this.id}" class="we-btn we-btn-primary">${lang.InsertTable || 'Insert Table'}</button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    modal.appendChild(dialog);
+    document.body.appendChild(modal);
+
+    // Cache DOM references
+    const colsInput     = document.getElementById(`we-table-cols-${this.id}`);
+    const rowsInput     = document.getElementById(`we-table-rows-${this.id}`);
+    const captionInput  = document.getElementById(`we-table-caption-${this.id}`);
+    const colHeaderCheck = document.getElementById(`we-table-colheader-${this.id}`);
+    const rowHeaderCheck = document.getElementById(`we-table-rowheader-${this.id}`);
+    const cancelBtn     = document.getElementById(`we-table-cancel-${this.id}`);
+    const formEl        = document.getElementById(`we-table-form-${this.id}`);
+
+    this.tableForm = {
+      modal: modal,
+      colsInput: colsInput,
+      rowsInput: rowsInput,
+      captionInput: captionInput,
+      colHeaderCheck: colHeaderCheck,
+      rowHeaderCheck: rowHeaderCheck,
+      form: formEl
+    };
+
+    cancelBtn.addEventListener('click', () => {
+      this.hideTableForm();
+      this.area.focus();
+    });
+
+    formEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.insertTableFromForm();
+    });
+  }
+
+  /**
+   * Shows the table configuration popup (defaults: 4 columns, 3 rows, no headers, no caption).
+   */
+  showTableForm() {
+    if (!this.tableForm) this.createTableForm();
+
+    const f = this.tableForm;
+
+    // Reset to sensible defaults
+    f.colsInput.value = '4';
+    f.rowsInput.value = '3';
+    f.captionInput.value = '';
+    f.colHeaderCheck.checked = false;
+    f.rowHeaderCheck.checked = false;
+
+    // Store current selection context for safe insertion
+    this.tableContext = {
+      sel1: this.sel1,
+      sel2: this.sel2,
+      area: this.area
+    };
+
+    f.modal.classList.add('show');
+    f.colsInput.focus();
+    f.colsInput.select();
+  }
+
+  hideTableForm() {
+    if (this.tableForm) {
+      this.tableForm.modal.classList.remove('show');
+      this.tableContext = null;
+    }
+  }
+
+  buildWikiTable(cols, rows, caption, colHeader, rowHeader) {
+    cols = Math.max(1, parseInt(cols) || 1);
+    rows = Math.max(1, parseInt(rows) || 1);
+
+    const lines = ['#|'];
+
+    // Optional caption
+    if (caption && caption.trim()) {
+      lines.push(`?| ${caption.trim()} |?`);
+    }
+
+    // Column header row (if requested)
+    if (colHeader) {
+      const headerCells = rowHeader ? [''] : [];
+      for (let c = 0; c < cols; c++) {
+        headerCells.push(`header ${c+1}`);
+      }
+      const chRow = '*| ' + headerCells.join(' | ') + ' |*';
+      lines.push(chRow);
+    }
+
+    // Data rows
+    for (let r = 0; r < rows; r++) {
+      const rowStart = rowHeader ? '^|' : '||';
+      const rowCells = rowHeader ? [`header ${r+1}`] : [];
+      for (let c = 0; c < cols; c++) {
+        rowCells.push('cell');
+      }
+      const rowStr = rowStart + ' ' + rowCells.join(' | ') + ' ||';
+      lines.push(rowStr);
+    }
+
+    lines.push('|#');
+    return lines.join('\n');
+  }
+
+  /**
+   * Called when user clicks "Insert Table" in the form.
+   * Builds the wiki table and inserts it at the current cursor/selection.
+   */
+  insertTableFromForm() {
+    if (!this.tableContext) return;
+
+    const { sel1, sel2, area } = this.tableContext;
+    const f = this.tableForm;
+
+    const cols = f.colsInput.value;
+    const rows = f.rowsInput.value;
+    const caption = f.captionInput.value;
+    const colHeader = f.colHeaderCheck.checked;
+    const rowHeader = f.rowHeaderCheck.checked;
+
+    const tableStr = this.buildWikiTable(cols, rows, caption, colHeader, rowHeader);
+
+    // Insert as a clean block with surrounding newlines
+    const insertStr = '\n' + tableStr + '\n';
+    const newValue = sel1 + insertStr + sel2;
+
+    area.value = newValue;
+
+    // Place cursor after the inserted table (ready for more editing)
+    const cursorPos = sel1.length + insertStr.length;
+    area.setSelectionRange(cursorPos, cursorPos);
+    area.focus();
+
+    this.hideTableForm();
+  }
+
+  insertLinkFromForm() {
+    if (!this.linkContext) return;
+
+    const { sel1, sel2, area } = this.linkContext;
+    const f = this.linkForm;
+
+    let lnk = f.urlInput.value ?? '';
+    let sl  = f.textInput.value ?? '';
+
+    let combined = lnk + ' ' + sl;
+
+    if (!combined.trim()) {
+      this.hideLinkForm();
+      area.focus();
+      return;
+    }
+
+    const str = sel1 + '((' + combined + '))' + sel2;
+
+    area.value = str;
+    const start = sel1.length;
+    const end   = str.length - sel2.length;
+    area.setSelectionRange(start, end);
+    area.focus();
+
+    this.hideLinkForm();
+  }
+
   help() {
     const s = `WikiEdit 3.26
-© Roman Ivanov, WackoWiki Team 2003-2025
+© Roman Ivanov, WackoWiki Team 2003-2026
 https://wackowiki.org/doc/Dev/Projects/WikiEdit
 
 ${lang.HelpAboutTip}`;

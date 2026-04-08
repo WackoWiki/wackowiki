@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"リンク",
 	TextForLinking :		"リンクするテキスト",
+	Insert :				"Insert",
+	Cancel :				"キャンセル",
+	NumberColumns :			"列数：",
+	NumberRows :			"行数：",
+	TableCaption :			"表のキャプション（任意）：",
+	UseColumnHeaders :		"列見出しを使用する",
+	UseRowHeaders :			"行見出しを使用する",
 
 	HelpAboutTip :			' ショートカット:\n'+
 							' Ctrl+B - 太字\n'+

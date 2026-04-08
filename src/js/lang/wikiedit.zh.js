@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"链接",
 	TextForLinking :		"链接文本",
+	Insert :				"Insert",
+	Cancel :				"取消",
+	NumberColumns :			"列数：",
+	NumberRows :			"行数：",
+	TableCaption :			"表格标题（可选）：",
+	UseColumnHeaders :		"使用列标题",
+	UseRowHeaders :			"使用行标题",
 
 	HelpAboutTip :			' 快捷方式：\n'+
 							' Ctrl+B - 粗体\n'+

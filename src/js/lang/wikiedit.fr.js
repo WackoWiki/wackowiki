@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"Lier",
 	TextForLinking :		"Texte pour la liaison",
+	Insert :				"Insert",
+	Cancel :				"Cancel",
+	NumberColumns :			"Number of columns:",
+	NumberRows :			"Number of rows:",
+	TableCaption :			"Table caption (optional):",
+	UseColumnHeaders :		"Use column headers",
+	UseRowHeaders :			"Use row headers",
 
 	HelpAboutTip :			' Raccourcis:\n'+
 							' Ctrl+B - Gras\n'+

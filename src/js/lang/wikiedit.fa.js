@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"پیوند",
 	TextForLinking :		"Text for linking",
+	Insert :				"Insert",
+	Cancel :				"Cancel",
+	NumberColumns :			"Number of columns:",
+	NumberRows :			"Number of rows:",
+	TableCaption :			"Table caption (optional):",
+	UseColumnHeaders :		"Use column headers",
+	UseRowHeaders :			"Use row headers",
 
 	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+

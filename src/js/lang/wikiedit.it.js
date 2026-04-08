@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"Link",
 	TextForLinking :		"TTesto per il collegamento",
+	Insert :				"Insert",
+	Cancel :				"Annulla",
+	NumberColumns :			"Numero di colonne:",
+	NumberRows :			"Numero di righe:",
+	TableCaption :			"Didascalia della tabella (facoltativa):",
+	UseColumnHeaders :		"Usa intestazioni di colonna",
+	UseRowHeaders :			"Usa intestazioni di riga",
 
 	HelpAboutTip :			' Scorciatoie:\n'+
 							' Ctrl+B - Grassetto\n'+

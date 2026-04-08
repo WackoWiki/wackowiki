@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"Enlace",
 	TextForLinking :		"Texto del enlace",
+	Insert :				"Insert",
+	Cancel :				"Cancel",
+	NumberColumns :			"Número de columnas:",
+	NumberRows :			"Número de filas:",
+	TableCaption :			"Título de la tabla (opcional):",
+	UseColumnHeaders :		"Usar encabezados de columna",
+	UseRowHeaders :			"Usar encabezados de fila",
 
 	HelpAboutTip :			' Teclas rápidas:\n'+
 							' Ctrl+B - Negrita\n'+

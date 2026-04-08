@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"Link",
 	TextForLinking :		"Tekst voor linken",
+	Insert :				"Insert",
+	Cancel :				"Cancel",
+	NumberColumns :			"Number of columns:",
+	NumberRows :			"Number of rows:",
+	TableCaption :			"Table caption (optional):",
+	UseColumnHeaders :		"Use column headers",
+	UseRowHeaders :			"Use row headers",
 
 	HelpAboutTip :			' Snelkoppelingen:\n'+
 							' Ctrl+B - Vetgedrukt\n'+

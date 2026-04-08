@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"連結",
 	TextForLinking :		"連結文字",
+	Insert :				"Insert",
+	Cancel :				"Cancel",
+	NumberColumns :			"Number of columns:",
+	NumberRows :			"Number of rows:",
+	TableCaption :			"Table caption (optional):",
+	UseColumnHeaders :		"Use column headers",
+	UseRowHeaders :			"Use row headers",
 
 	HelpAboutTip :			' 捷徑:\n'+
 							' Ctrl+B - Bold\n'+

@@ -48,6 +48,13 @@ lang = {
 
 	Link :					"Link",
 	TextForLinking :		"Text für Verlinkung",
+	Insert :				"Einfügen",
+	Cancel :				"Abbrechen",
+	NumberColumns :			"Anzahl der Spalten:",
+	NumberRows :			"Anzahl der Zeilen:",
+	TableCaption :			"Tabellenbeschriftung (optional):",
+	UseColumnHeaders :		"Spaltenüberschriften verwenden",
+	UseRowHeaders :			"Zeilenüberschriften verwenden",
 
 	HelpAboutTip :			' Tastenkürzel:\n'+
 							' Strg+B - Fett\n'+
