@@ -19,9 +19,6 @@ class WikiEdit extends ProtoEdit {
     this.enabled        = true;
     this.tab            = false;
     this.enterpressed   = false;
-    this.undotext       = '';
-    this.undosels       = 0;
-    this.undosele       = 0;
     this.buttons        = [];
 
     // Single-form popups
@@ -29,6 +26,11 @@ class WikiEdit extends ProtoEdit {
     this.linkContext    = null;
     this.tableForm      = null;
     this.tableContext   = null;
+
+    // Full undo/redo stack (replaces the old single-level undo)
+    this.undoStack      = [];
+    this.redoStack      = [];
+    this.maxHistory     = 100;
   }
 
   // Initialisation
@@ -38,16 +40,12 @@ class WikiEdit extends ProtoEdit {
     this.imagesPath = imgPath || 'image/';
     this.actionName = `document.getElementById('${this.id}')._owner.insTag`;
 
+    // Setup undo/redo – beforeinput fires BEFORE any native change (typing, paste, delete…)
+    this.area.addEventListener('beforeinput', this.handleBeforeInput.bind(this));
+
     const separator = '<li><div class="btn-separator"></div></li>';
 
-    // Capture initial undo state
-    try {
-      this.undotext = this.area.value;
-      this.undosels = this.area.selectionStart;
-      this.undosele = this.area.selectionEnd;
-    } catch {}
-
-    // Toolbar buttons (modern template literals + cleaned calls)
+    // Toolbar buttons
     this.addButton('h2', lang.Heading2, "'===', '===', 0, 1");
     this.addButton('h3', lang.Heading3, "'====', '====', 0, 1");
     this.addButton('h4', lang.Heading4, "'=====', '=====', 0, 1");
@@ -93,7 +91,7 @@ class WikiEdit extends ProtoEdit {
     this.addButton('createtable', lang.InsertTable, '', `document.getElementById('${this.id}')._owner.createTable`);
     this.addButton('customhtml', separator);
 
-    // Help button – now a clean template literal
+    // Help button
     const helpBtn = `<li class="we-help">
       <div id="hilfe_${this.id}"
            onmouseover="this.className='btn-hover';"
@@ -117,6 +115,97 @@ class WikiEdit extends ProtoEdit {
       this.area.parentNode.insertBefore(toolbar, this.area);
       document.getElementById(`tb_${this.id}`).innerHTML = this.createToolbar(1);
     } catch {}
+  }
+
+  // ====================== UNDO / REDO STACK ======================
+
+  /**
+   * Push current editor state (text + selection + scroll) to the undo stack.
+   * Called automatically before every native change via beforeinput and
+   * manually before every programmatic change (buttons, forms, list continuation).
+   */
+  pushState() {
+    const t = this.area;
+    const state = {
+      text: t.value,
+      start: t.selectionStart,
+      end: t.selectionEnd,
+      scroll: t.scrollTop
+    };
+
+    // Avoid pushing identical consecutive states
+    const last = this.undoStack[this.undoStack.length - 1];
+    if (last &&
+        last.text === state.text &&
+        last.start === state.start &&
+        last.end === state.end &&
+        last.scroll === state.scroll) {
+      return;
+    }
+
+    this.undoStack.push(state);
+    if (this.undoStack.length > this.maxHistory) {
+      this.undoStack.shift();
+    }
+    this.redoStack = []; // new change clears redo stack
+  }
+
+  /**
+   * Undo the last change (Ctrl+Z).
+   */
+  undo() {
+    if (this.undoStack.length === 0) return false;
+
+    const t = this.area;
+    const current = {
+      text: t.value,
+      start: t.selectionStart,
+      end: t.selectionEnd,
+      scroll: t.scrollTop
+    };
+    this.redoStack.push(current);
+
+    const prev = this.undoStack.pop();
+    t.value = prev.text;
+    t.setSelectionRange(prev.start, prev.end);
+    t.scrollTop = prev.scroll ?? 0;
+    t.focus();
+    return true;
+  }
+
+  /**
+   * Redo the last undone change (Ctrl+Shift+Z).
+   */
+  redo() {
+    if (this.redoStack.length === 0) return false;
+
+    const t = this.area;
+    const current = {
+      text: t.value,
+      start: t.selectionStart,
+      end: t.selectionEnd,
+      scroll: t.scrollTop
+    };
+    this.undoStack.push(current);
+
+    const next = this.redoStack.pop();
+    t.value = next.text;
+    t.setSelectionRange(next.start, next.end);
+    t.scrollTop = next.scroll ?? 0;
+    t.focus();
+    return true;
+  }
+
+  /**
+   * Fires BEFORE any native change (typing, paste, delete, etc.).
+   * Pushes the current state so it can be restored on undo.
+   */
+  handleBeforeInput(e) {
+    // Never interfere with the browser’s own history undo/redo
+    if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') {
+      return;
+    }
+    this.pushState();
   }
 
   // Toggle TAB key interception
@@ -246,14 +335,8 @@ class WikiEdit extends ProtoEdit {
     let res = false;
     let justenter = false;
     let noscroll = false;
-    let remundo = false;
 
     let Key = e.keyCode || e.key;
-
-    // Mark keys that should clear the undo buffer after normal typing
-    if ([8, 13, 32].includes(Key) || (Key > 45 && Key < 91) || (Key > 93 && Key < 112) || (Key > 123 && Key < 144) || (Key > 145 && Key < 255)) {
-      remundo = true;
-    }
 
     if (e.altKey && !e.ctrlKey) Key += 4096;
     if (e.ctrlKey) Key += 2048;
@@ -267,9 +350,6 @@ class WikiEdit extends ProtoEdit {
     if (e.type === 'keyup' && (Key === 9 || Key === 13)) return false;
 
     const scroll = t.scrollTop;
-    const undotext = t.value;
-    const undosels = t.selectionStart;
-    const undosele = t.selectionEnd;
 
     // Take autocomplete first
     if (this.autocomplete?.keyDown(Key, e.shiftKey)) {
@@ -278,11 +358,11 @@ class WikiEdit extends ProtoEdit {
     }
 
     switch (Key) {
-      case 2138: // Ctrl+Z
-        if (this.undotext) {
-          t.value = this.undotext;
-          t.setSelectionRange(this.undosels, this.undosele);
-          this.undotext = '';
+      case 2138: // Ctrl+Z (Undo) / Ctrl+Shift+Z (Redo)
+        const success = e.shiftKey ? this.redo() : this.undo();
+        if (success) {
+          res = true;
+          noscroll = true; // undo/redo already restored scroll – prevent overwrite
         }
         break;
 
@@ -354,6 +434,7 @@ class WikiEdit extends ProtoEdit {
               }
             }
 
+            this.pushState(); // ← capture state before list-continuation change
             t.value = sel1 + '\n' + prefix + sel2;
             const newSel = sel1.length + 1 + prefix.length;
             t.setSelectionRange(newSel, newSel);
@@ -374,15 +455,7 @@ class WikiEdit extends ProtoEdit {
 
     this.enterpressed = justenter;
 
-    // Clear undo buffer for normal typing
-    if (!res && remundo) this.undotext = '';
-
     if (res) {
-      t.focus();
-      this.undotext = undotext;
-      this.undosels = undosels;
-      this.undosele = undosele;
-
       e.preventDefault();
       if (!noscroll) t.scrollTop = scroll;
       return false;
@@ -403,9 +476,6 @@ class WikiEdit extends ProtoEdit {
     this.str = this.sel1 + this.begin + this.sel + this.end + this.sel2;
 
     this.scroll = t.scrollTop;
-    this.undotext = t.value;
-    this.undosels = t.selectionStart;
-    this.undosele = t.selectionEnd;
   }
 
   setAreaContent(str) {
@@ -423,6 +493,8 @@ class WikiEdit extends ProtoEdit {
     t.scrollTop = this.scroll;
   }
 
+  // ====================== MODIFICATION METHODS (now push state before change) ======================
+
   insTag(Tag, Tag2, onNewLine, expand, strip) {
     if (onNewLine == null) onNewLine = 0;
     if (expand == null) expand = 0;
@@ -431,6 +503,7 @@ class WikiEdit extends ProtoEdit {
     const t = this.area;
     t.focus();
     this.getDefines();
+    this.pushState();               // ← capture state before modification
 
     const str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
     this.setAreaContent(str);
@@ -441,6 +514,7 @@ class WikiEdit extends ProtoEdit {
     const t = this.area;
     t.focus();
     this.getDefines();
+    this.pushState();               // ← capture state before modification
 
     let r = '';
     let fIn = false;
@@ -464,8 +538,6 @@ class WikiEdit extends ProtoEdit {
     return true;
   }
 
-  // ====================== createLink + SINGLE FORM POPUP ======================
-
   createLink(isAlt) {
     const t = this.area;
     t.focus();
@@ -473,6 +545,7 @@ class WikiEdit extends ProtoEdit {
 
     if (!/\n/.test(this.sel)) {
       if (isAlt) {
+        this.pushState();           // ← capture state before quick-wrap
         const str = this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
         t.value = str;
         t.setSelectionRange(this.sel1.length, str.length - this.sel2.length);
@@ -759,6 +832,7 @@ class WikiEdit extends ProtoEdit {
     const tableStr = this.buildWikiTable(cols, rows, caption, colHeader, rowHeader);
 
     // Insert as a clean block with surrounding newlines
+    this.pushState();               // ← capture state before insert
     const insertStr = '\n' + tableStr + '\n';
     const newValue = sel1 + insertStr + sel2;
 
@@ -789,6 +863,7 @@ class WikiEdit extends ProtoEdit {
       return;
     }
 
+    this.pushState();               // ← capture state before insert
     const str = sel1 + '((' + combined + '))' + sel2;
 
     area.value = str;
