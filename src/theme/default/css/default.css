@@ -1425,8 +1425,8 @@ a:target {
 }
 
 .we-panel-actions {
-	display: flex;
-	gap: 8px;
+	/* display: flex; */
+	/* gap: 8px; */
 	margin-top: 20px;
 }
 
@@ -1437,8 +1437,8 @@ a:target {
 .we-modal-title {
 	margin: 0 0 18px 0;
 	font-size: 1.25em;
-	font-weight: 600;
-	color: #222;
+	/* font-weight: 600; */
+	/* color: #222; */
 }
 
 .we-modal-body {
@@ -1452,23 +1452,23 @@ a:target {
 .we-form-label {
 	display: block;
 	margin-bottom: 6px;
-	font-weight: 600;
+	/* font-weight: 600; */
 	font-size: 0.95em;
 }
 
 .we-form-input {
 	width: 100%;
-	padding: 10px 12px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
-	font-size: 1em;
+	/* padding: 10px 12px; */
+	/* border: 1px solid #ccc; */
+	/* border-radius: 4px; */
+	/* box-sizing: border-box; */
+	/* font-size: 1em; */
 }
 
 .we-form-options {
-	display: flex;
-	gap: 24px;
-	margin-bottom: 20px;
+	/* display: flex; */
+	/* gap: 24px; */
+	/* margin-bottom: 20px; */
 }
 
 .we-form-grid {
@@ -1489,7 +1489,7 @@ a:target {
 	gap: 8px;
 	cursor: pointer;
 	font-size: 0.95em;
-	font-weight: 600;
+	/* font-weight: 600; */
 }
 
 .we-modal-actions {
@@ -1507,26 +1507,26 @@ a:target {
 }
 
 .we-btn {
-	padding: 10px 20px;
-	border: 1px solid #ccc;
-	background: #f8f8f8;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 1em;
+	/* padding: 10px 20px; */
+	/* border: 1px solid #ccc; */
+	/* background: #f8f8f8; */
+	/* border-radius: 4px; */
+	/* cursor: pointer; */
+	/* font-size: 1em; */
 }
 
 .we-btn-primary {
-	background: #0078d4;
-	color: #fff;
-	border: none;
+	/* background: #0078d4; */
+	/* color: #fff; */
+	/* border: none; */
 }
 
 .we-btn:hover {
-	background: #e8e8e8;
+	/* background: #e8e8e8; */
 }
 
 .we-btn-primary:hover {
-	background: #0066b3;
+	/* background: #0066b3; */
 }
 
 	/* WikiEdit Autocomplete --------------------------------- */
