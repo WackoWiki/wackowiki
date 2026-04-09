@@ -656,12 +656,12 @@ class WikiEdit extends ProtoEdit {
       <div class="we-modal-body">
         <form id="we-link-form-${this.id}">
           <div class="we-form-group">
-            <label class="we-form-label">${(lang.Link || 'Link') + ':'}</label>
+            <label class="we-form-label" for="we-link-url-${this.id}">${(lang.Link || 'Link') + ':'}</label>
             <input type="text" id="we-link-url-${this.id}" class="we-form-input">
           </div>
 
           <div class="we-form-group">
-            <label class="we-form-label">${(lang.TextForLinking || 'Text for linking') + ':'}</label>
+            <label class="we-form-label" for="we-link-text-${this.id}">${(lang.TextForLinking || 'Text for linking') + ':'}</label>
             <input type="text" id="we-link-text-${this.id}" class="we-form-input">
           </div>
 
@@ -732,6 +732,35 @@ class WikiEdit extends ProtoEdit {
     }
   }
 
+  insertLinkFromForm() {
+    if (!this.linkContext) return;
+
+    const { sel1, sel2, area } = this.linkContext;
+    const f = this.linkForm;
+
+    let lnk = f.urlInput.value ?? '';
+    let sl  = f.textInput.value ?? '';
+
+    let combined = lnk + ' ' + sl;
+
+    if (!combined.trim()) {
+      this.hideLinkForm();
+      area.focus();
+      return;
+    }
+
+    this.pushState();
+    const str = sel1 + '((' + combined + '))' + sel2;
+
+    area.value = str;
+    const start = sel1.length;
+    const end   = str.length - sel2.length;
+    area.setSelectionRange(start, end);
+    area.focus();
+
+    this.hideLinkForm();
+  }
+
   createTable() {
     const t = this.area;
     t.focus();
@@ -755,17 +784,17 @@ class WikiEdit extends ProtoEdit {
       <div class="we-modal-body">
         <form id="we-table-form-${this.id}">
 			<div class="we-form-group">
-				<label class="we-form-label">${lang.TableCaption || 'Table caption (optional):'}</label>
+				<label class="we-form-label" for="we-table-caption-${this.id}">${lang.TableCaption || 'Table caption (optional):'}</label>
 				<input type="text" id="we-table-caption-${this.id}" class="we-form-input">
 			</div>
 
           <div class="we-form-grid">
             <div class="we-form-group">
-              <label class="we-form-label">${lang.NumberColumns || 'Number of columns:'}</label>
+              <label class="we-form-label" for="we-table-cols-${this.id}">${lang.NumberColumns || 'Number of columns:'}</label>
               <input type="number" id="we-table-cols-${this.id}" value="4" min="1" class="we-form-input">
             </div>
             <div class="we-form-group">
-              <label class="we-form-label">${lang.NumberRows || 'Number of rows:'}</label>
+              <label class="we-form-label" for="we-table-rows-${this.id}">${lang.NumberRows || 'Number of rows:'}</label>
               <input type="number" id="we-table-rows-${this.id}" value="3" min="1" class="we-form-input">
             </div>
           </div>
@@ -925,35 +954,6 @@ class WikiEdit extends ProtoEdit {
     this.hideTableForm();
   }
 
-  insertLinkFromForm() {
-    if (!this.linkContext) return;
-
-    const { sel1, sel2, area } = this.linkContext;
-    const f = this.linkForm;
-
-    let lnk = f.urlInput.value ?? '';
-    let sl  = f.textInput.value ?? '';
-
-    let combined = lnk + ' ' + sl;
-
-    if (!combined.trim()) {
-      this.hideLinkForm();
-      area.focus();
-      return;
-    }
-
-    this.pushState();
-    const str = sel1 + '((' + combined + '))' + sel2;
-
-    area.value = str;
-    const start = sel1.length;
-    const end   = str.length - sel2.length;
-    area.setSelectionRange(start, end);
-    area.focus();
-
-    this.hideLinkForm();
-  }
-
   // ====================== FIND / REPLACE FEATURE ======================
 
   showFindReplace() {
@@ -985,17 +985,17 @@ class WikiEdit extends ProtoEdit {
 
     panel.innerHTML = `
       <div class="we-panel-header">
-        <h3 class="we-panel-title">${lang.FindReplace || 'Find and Replace'}</h3>
+        <h3 class="we-panel-title">${lang.SearchReplace || 'Search and Replace'}</h3>
         <button type="button" id="we-find-close-${this.id}" class="we-panel-close">✕</button>
       </div>
       <div class="we-panel-body">
         <div class="we-form-group">
-          <label class="we-form-label">${lang.FindWhat || 'Find what:'}</label>
-          <input type="text" id="we-find-what-${this.id}" class="we-form-input">
+          <label class="we-form-label" for="we-search-for-${this.id}">${lang.SearchFor || 'Search for:'}</label>
+          <input type="text" id="we-search-for-${this.id}" class="we-form-input">
         </div>
 
         <div class="we-form-group">
-          <label class="we-form-label">${lang.ReplaceWith || 'Replace with:'}</label>
+          <label class="we-form-label" for="we-replace-with-${this.id}">${lang.ReplaceWith || 'Replace with:'}</label>
           <input type="text" id="we-replace-with-${this.id}" class="we-form-input">
         </div>
 
@@ -1015,9 +1015,9 @@ class WikiEdit extends ProtoEdit {
         </div>
 
         <div class="we-panel-actions">
-          <button type="button" id="we-find-next-${this.id}" class="we-btn we-btn-primary">Find Next</button>
-          <button type="button" id="we-replace-btn-${this.id}" class="we-btn">Replace</button>
-          <button type="button" id="we-replace-all-${this.id}" class="we-btn">Replace All</button>
+          <button type="button" id="we-find-next-${this.id}" class="we-btn we-btn-primary">${lang.FindNext || 'Find Next'}</button>
+          <button type="button" id="we-replace-btn-${this.id}" class="we-btn">${lang.Replace || 'Replace'}</button>
+          <button type="button" id="we-replace-all-${this.id}" class="we-btn">${lang.ReplaceAll || 'Replace All'}</button>
         </div>
       </div>
     `;
@@ -1026,7 +1026,7 @@ class WikiEdit extends ProtoEdit {
 
     this.findForm = {
       modal: panel, // reused name for consistency
-      findInput: document.getElementById(`we-find-what-${this.id}`),
+      findInput: document.getElementById(`we-search-for-${this.id}`),
       replaceInput: document.getElementById(`we-replace-with-${this.id}`),
       matchCaseCheck: document.getElementById(`we-find-case-${this.id}`),
       wholeWordCheck: document.getElementById(`we-find-whole-${this.id}`),

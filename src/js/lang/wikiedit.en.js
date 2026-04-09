@@ -57,6 +57,16 @@ lang = {
 	UseRowHeaders :			"Use row headers",
 	Cell :					"Cell",
 	Header :				"Header",
+	
+	SearchReplace :			"Search and Replace",
+	SearchFor :				"Search for:",
+	ReplaceWith :			"Replace with:",
+	MatchCase :				"Match case",
+	WholeWords :			"Whole words only",
+	UseRegex :				"Regular expression",
+	FindNext :				"Find Next",
+	Replace :				"Replace",
+	ReplaceAll :			"Replace All",
 
 	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
