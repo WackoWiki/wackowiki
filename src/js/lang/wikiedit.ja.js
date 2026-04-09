@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: '行ヘッダーを使用',
 	Cell: 'セル',
 	Header: 'ヘッダー',
+	SearchReplace: '検索と置換',
+	SearchFor: '検索対象:',
+	ReplaceWith: '置換先:',
+	MatchCase: '大文字と小文字を区別する',
+	WholeWords: '単語全体のみ',
+	UseRegex: '正規表現',
+	FindNext: '次を検索',
+	Replace: '置換',
+	ReplaceAll: 'すべて置換',
 	HelpAboutTip: ' ショートカット:\n' + ' Ctrl+B - 太字\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - 下線\n' + ' Ctrl+Shift+S - 取り消し線\n' + ' Ctrl+Shift+1 .. 4 - 見出し 1..4\n' + ' Alt+I または Ctrl+T - インデント\n' + ' Alt+UまたはCtrl+Shift+T - インデント解除\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - リンク\n' + ' Ctrl+L - Link with description\n' + ' Ctrl+Shift+L - 順序なしリスト\n' + ' Ctrl+Shift+N - 順序付きリスト\n' + ' Ctrl+Shift+O - 順序付きリスト\n' + ' Ctrl+= - 小文字\n' + ' Ctrl+Shift+Minus - 水平線\n' + ' \n'
 };

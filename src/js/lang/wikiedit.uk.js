@@ -45,7 +45,7 @@ lang = {
 	InsertTable: 'Вставити таблицю',
 	Link: 'Лінк',
 	TextForLinking: 'Текст посилання',
-	Insert: 'Insert',
+	Insert: 'Вставити',
 	Cancel: 'Скасувати',
 	NumberColumns: 'Кількість стовпчиків:',
 	NumberRows: 'Кількість рядків:',
@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: 'Використовувати заголовки рядків',
 	Cell: 'Комірка',
 	Header: 'Заголовок рядка стану',
+	SearchReplace: 'Пошук і заміна',
+	SearchFor: 'Шукати:',
+	ReplaceWith: 'Замінити на:',
+	MatchCase: 'З урахуванням регістру',
+	WholeWords: 'Лише слова цілком',
+	UseRegex: 'Регулярний вираз',
+	FindNext: 'Знайти наступне',
+	Replace: 'Заміняти',
+	ReplaceAll: 'Замінити всі',
 	HelpAboutTip: ' Ярлики:\n' + ' Ctrl+B - Жирний\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Underline\n' + ' Ctrl+Shift+S - Перекреслення\n' + ' Ctrl+Shift+1.. 4 - Заголовок 1..4\n' + ' Alt+I або Ctrl+T - Відступ\n' + ' Alt+U або Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - посилання\n' + ' Ctrl+L - посилання з описом\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Ordered List\n' + ' Ctrl+Shift+O - Ordered List\n' + ' Ctrl+= - невеликий текст\n' + ' Ctrl+Shift+Minus - Горизонтальна лінія\n' + ' \n'
 };

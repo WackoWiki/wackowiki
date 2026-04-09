@@ -45,7 +45,7 @@ lang = {
 	InsertTable: 'Tabelle einfügen',
 	Link: 'Link',
 	TextForLinking: 'Text für Verlinkung',
-	Insert: 'Insert',
+	Insert: 'Einfügen',
 	Cancel: 'Abbrechen',
 	NumberColumns: 'Anzahl der Spalten:',
 	NumberRows: 'Anzahl der Zeilen:',
@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: 'Zeilenüberschrift verwenden',
 	Cell: 'Zelle',
 	Header: 'Überschrift',
+	SearchReplace: 'Suchen und Ersetzen',
+	SearchFor: 'Suche nach:',
+	ReplaceWith: 'Ersetzen mit:',
+	MatchCase: 'Groß-/Kleinschreibung beachten',
+	WholeWords: 'Nur ganze Wörter',
+	UseRegex: 'Regulärer Ausdruck',
+	FindNext: 'Nächste suchen',
+	Replace: 'Ersetzen',
+	ReplaceAll: 'Alle ersetzen',
 	HelpAboutTip: ' Tastenkürzel:\n' + ' Strg+B - Fett\n' + ' Strg+I - Kursiv\n' + ' Strg+U - Unterstrichen\n' + ' Strg+Umschalt+S - Durchgestrichen\n' + ' Strg+Umschalt+1 .. 4 - Überschrift 1..4\n' + ' Alt+I oder Ctrl+T - Einrücken\n' + ' Alt+U oder Ctrl+Shift+T - Ausrücken\n' + ' Strg+J - Hervorheben (!!)\n' + ' Strg+H - Markieren (??)\n' + ' Alt+L - Link\n' + ' Strg+L - Link mit Beschreibung\n' + ' Strg+Umschalt+L - Ungeordnete Liste\n' + ' Strg+Umschalt+N - Geordnete Liste\n' + ' Strg+Umschalt+O - Geordnete Liste\n' + ' Strg+= - Kleiner Text\n' + ' Strg+Umschalt+Minus - Horizontale Line\n' + ' \n'
 };

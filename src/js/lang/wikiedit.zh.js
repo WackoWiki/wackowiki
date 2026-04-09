@@ -45,7 +45,7 @@ lang = {
 	InsertTable: '插入表格',
 	Link: '链接',
 	TextForLinking: '链接文本',
-	Insert: 'Insert',
+	Insert: '插入',
 	Cancel: '取消',
 	NumberColumns: '列数：',
 	NumberRows: '行数：',
@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: '使用行头',
 	Cell: '单元格',
 	Header: '标题',
+	SearchReplace: '搜索和替换',
+	SearchFor: '搜索：',
+	ReplaceWith: '替换为：',
+	MatchCase: '匹配大小写',
+	WholeWords: '仅整个单词',
+	UseRegex: '正则表达式',
+	FindNext: '查找下一个',
+	Replace: '替换',
+	ReplaceAll: '全部替换',
 	HelpAboutTip: ' 快捷方式：\n' + ' Ctrl+B - 粗体\n' + ' Ctrl+I - 斜体\n' + ' Ctrl+U - 下划线\n' + ' Ctrl+Shift+S - 删除线\n' + ' Ctrl+Shift+1 .. 4 - 标题 1..4\n' + ' Alt+I 或 Ctrl+T - 缩进\n' + ' Alt+U 或 Ctrl+Shift+T - 取消缩进\n' + ' Ctrl+J - 标记 (!!)\n' + ' 标记\n' + ' Alt+L - 链接\n' + ' Ctrl+L - 带描述的链接\n' + ' Ctrl+Shift+L - 无序列表\n' + ' Ctrl+Shift+N - 顺序列表\n' + ' Ctrl+Shift+O - 排序列表\n' + ' Ctrl+= - 小文本\n' + ' Ctrl+Shift+Minus - 水平线\n' + ' \n'
 };

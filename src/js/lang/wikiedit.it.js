@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: 'Usa intestazioni di riga',
 	Cell: 'Cella',
 	Header: 'Intestazione',
+	SearchReplace: 'Cerca e sostituisci',
+	SearchFor: 'Cerca per:',
+	ReplaceWith: 'Sostituire con:',
+	MatchCase: 'Corrispondenza maiuscole/minuscole',
+	WholeWords: 'Solo parole intere',
+	UseRegex: 'Espressione regolare',
+	FindNext: 'Trova Successivo',
+	Replace: 'Sostituisci',
+	ReplaceAll: 'Sostituisci Tutto',
 	HelpAboutTip: ' Scorciatoie:\n' + ' Ctrl+B - Grassetto\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Sottolinea\n' + ' Ctrl+Maiusc+S - Sbarratura\n' + ' Ctrl+Shift+1 .. 4 - Intestazione 1..4\n' + ' Alt+I o Ctrl+T - Rientro\n' + ' Alt+U o Ctrl+Maiusc+T - Annulla la lettera\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Collega con la descrizione\n' + ' Ctrl+Maiusc+L - Elenco Non Ordinato\n' + ' Ctrl+Maiusc+N - Elenco Ordinato\n' + ' Ctrl+Maiusc+O - Elenco Ordinato\n' + ' Ctrl+= - Testo piccolo\n' + ' Ctrl+Maiusc+Meno - Linea orizzontale\n' + ' \n'
 };

@@ -45,7 +45,7 @@ lang = {
 	InsertTable: 'Insérer tableau',
 	Link: 'Lier',
 	TextForLinking: 'Texte pour la liaison',
-	Insert: 'Insert',
+	Insert: 'Insérer',
 	Cancel: 'Abandonner',
 	NumberColumns: 'Nombre de colonnes:',
 	NumberRows: 'Nombre de lignes :',
@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: 'Utiliser les en-têtes de ligne',
 	Cell: 'Cellule',
 	Header: 'En-tête',
+	SearchReplace: 'Rechercher et remplacer',
+	SearchFor: 'Recherche pour:',
+	ReplaceWith: 'Remplacer par :',
+	MatchCase: 'Correspond à la casse',
+	WholeWords: 'Mots entiers uniquement',
+	UseRegex: 'Expression régulière',
+	FindNext: 'Rechercher suivant',
+	Replace: 'Remplacer',
+	ReplaceAll: 'Remplacer tout',
 	HelpAboutTip: ' Raccourcis :\n' + ' Ctrl+B - Gras\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Souligner\n' + ' Ctrl+Shift+S - Barré\n' + ' Ctrl+Shift+1 .. 4 - En-tête 1..4\n' + ' Alt+I ou Ctrl+T - Indentation\n' + ' Alt+U or Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Lien\n' + ' Ctrl+L - Lien avec la description\n' + ' Ctrl+Maj+L - Liste non ordonnée\n' + ' Ctrl+Maj+N - Liste ordonnée\n' + ' Ctrl+Maj+O - Liste ordonnée\n' + ' Ctrl+= - Petit texte\n' + ' Ctrl+Maj+Mous - Ligne horizontale\n' + ' \n'
 };

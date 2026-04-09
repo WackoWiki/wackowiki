@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: 'Folosește antete de rând',
 	Cell: 'Celulă',
 	Header: 'Antet',
+	SearchReplace: 'Caută și înlocuiește',
+	SearchFor: 'Căutare după:',
+	ReplaceWith: 'Înlocuiește cu:',
+	MatchCase: 'Potrivire litere',
+	WholeWords: 'Doar cuvinte întregi',
+	UseRegex: 'Expresie regulată',
+	FindNext: 'Găsește următorul',
+	Replace: 'Înlocuiește',
+	ReplaceAll: 'Înlocuiește tot',
 	HelpAboutTip: ' Scurtături:\n' + ' Ctrl+B - îngroșat\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Subliniere\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 4 - Rubrica 1..4\n' + ' Alt+I sau Ctrl+T - Indentare\n' + ' Alt+U sau Ctrl+Shift+T - Anulare indentare\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link cu descrierea\n' + ' Ctrl+Shift+L - Listă Unorizată\n' + ' Ctrl+Shift+N - Lista ordonată\n' + ' Ctrl+Shift+O - Lista ordonată\n' + ' Ctrl+= - Text mic\n' + ' Ctrl+Shift+Minus - Linia orizontală\n' + ' \n'
 };

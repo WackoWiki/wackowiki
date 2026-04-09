@@ -45,7 +45,7 @@ lang = {
 	InsertTable: 'Lisää taulu',
 	Link: 'Linkki',
 	TextForLinking: 'Linkitystä koskeva teksti',
-	Insert: 'Insert',
+	Insert: 'Lisää',
 	Cancel: 'Peruuta',
 	NumberColumns: 'Sarakkeiden lukumäärä:',
 	NumberRows: 'Rivien määrä:',
@@ -54,5 +54,14 @@ lang = {
 	UseRowHeaders: 'Käytä rivin otsakkeita',
 	Cell: 'Solu',
 	Header: 'Otsikko',
+	SearchReplace: 'Etsi ja korvaa',
+	SearchFor: 'Etsi kohteista:',
+	ReplaceWith: 'Korvaa seuraavilla:',
+	MatchCase: 'Täsmää kirjainkoko',
+	WholeWords: 'Vain kokonaiset sanat',
+	UseRegex: 'Säännöllinen lauseke',
+	FindNext: 'Etsi Seuraava',
+	Replace: 'Korvaa',
+	ReplaceAll: 'Korvaa Kaikki',
 	HelpAboutTip: ' Pikanäppäimet:\n' + ' Ctrl+B - Lihavoitu\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Alleviivaus\n' + ' Ctrl+Shift+S - Yliviivaus\n' + ' Ctrl+Shift+1 .. 4 - Otsake 1..4\n' + ' Alt+I tai Ctrl+T - Sisennys\n' + ' Alt+U tai Ctrl+Shift+T - sisennys\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Linkki\n' + ' Ctrl+L - Linkki kuvauksella\n' + ' Ctrl+Shift+L - Järjestämätön Luettelo\n' + ' Ctrl+Shift+N - Järjestetty Luettelo\n' + ' Ctrl+Shift+O - Järjestetty Luettelo\n' + ' Ctrl+= - Pieni teksti\n' + ' Ctrl+Shift+Minus - Vaakaviiva\n' + ' \n'
 };
