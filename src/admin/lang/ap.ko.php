@@ -273,7 +273,7 @@ $ap_translation = [
 	'MultiLanguage'				=> 'Multilanguage support:',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages:',
-	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, otherwise all languages are selected.',
+	'AllowedLanguagesInfo'		=> '사용하려는 언어만 선택하는 것이 좋습니다. 그렇지 않으면 모든 언어가 선택됩니다.',
 
 	'CommentSection'			=> '댓글',
 	'AllowComments'				=> 'Allow comments:',
@@ -691,7 +691,7 @@ $ap_translation = [
 	'NofollowInfo'				=> 'Tells search engines that the hyperlinks should not affect the page ranking of the target page in the search engine index. Adds <code>rel="nofollow"</code> to the link syntax.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores:',
 	'UrlsUnderscoresInfo'		=> 'For example, %1 becames %2 with this option.',
-	'ShowSpaces'				=> 'Show spaces in WikiNames:',
+	'ShowSpaces'				=> '위키 이름에 공백 표시:',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Enumerate links in print view:',
 	'NumerateLinksInfo'			=> 'Enumerates and lists all links at the bottom of the print view with this option.',
@@ -977,7 +977,7 @@ $ap_translation = [
 	'NoEmailSubject'			=> 'You must specify a subject for your message.',
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
-	'MassemailSection'			=> 'Mass email',
+	'MassemailSection'			=> '대량 이메일',
 	'MessageSubject'			=> '제목:',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Your message:',
@@ -995,7 +995,7 @@ $ap_translation = [
 	'SysMsgUpdated'				=> 'Updated system message',
 
 	'SysMsgSection'				=> 'System Message',
-	'SysMsg'					=> 'System message:',
+	'SysMsg'					=> '시스템 메시지:',
 	'SysMsgInfo'				=> 'Your text here',
 
 	'SysMsgType'				=> 'Type:',
@@ -1036,7 +1036,7 @@ $ap_translation = [
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
     	'백업 패키지 파일은 %1 하위 디렉터리에 저장되었습니다.<br>FTP를 사용하여 다운로드하세요(복사 시 디렉터리 구조와 파일 이름을 유지하세요).<br>백업 복사본을 복원하거나 패키지를 제거하려면 <a href="%2">데이터베이스 복원</a>으로 이동하세요.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
-	'Backup'					=> 'Backup',
+	'Backup'					=> '지원',
 	'CantReadFile'				=> 'Can\'t read file %1.',
 
 	// DB Restore module
@@ -1221,8 +1221,8 @@ $ap_translation = [
 	'DbRepair'					=> 'Repair Database',
 	'DbRepairInfo'				=> 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.',
 
-	'DbOptimizeRepairSection'	=> 'Repair and Optimize Database',
-	'DbOptimizeRepair'			=> 'Repair and Optimize Database',
+	'DbOptimizeRepairSection'	=> '데이터베이스 복구 및 최적화',
+	'DbOptimizeRepair'			=> '데이터베이스 복구 및 최적화',
 	'DbOptimizeRepairInfo'		=> 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.',
 
 	'TableOk'					=> 'The %1 table is okay.',
@@ -1237,7 +1237,7 @@ $ap_translation = [
 
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
-	'Inconsistencies'			=> 'Inconsistencies',
+	'Inconsistencies'			=> '불일치',
 	'CheckDatabase'				=> '데이터베이스',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
 	'CheckFiles'				=> '파일',
@@ -1291,7 +1291,7 @@ $ap_translation = [
 	'BbLogVerbose'				=> 'Verbose',
 	'BbLogNormal'				=> 'Normal (recommended)',
 	'BbLogOff'					=> 'Do not log (not recommended)',
-	'BbSecurity'				=> 'Security',
+	'BbSecurity'				=> '보안',
 	'BbStrict'					=> 'Strict checking',
 	'BbStrictInfo'				=> 'blocks more spam but may block some people',
 	'BbOffsiteForms'			=> 'Allow form postings from other web sites',

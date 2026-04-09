@@ -998,7 +998,7 @@ $ap_translation = [
 	'SysMsg'					=> 'Pesan sistem:',
 	'SysMsgInfo'				=> 'Your text here',
 
-	'SysMsgType'				=> 'Type:',
+	'SysMsgType'				=> 'Tipe:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
 	'SysMsgAudience'			=> 'Audience:',
 	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
@@ -1206,7 +1206,7 @@ $ap_translation = [
 	'SqlModesSession'			=> 'SQL Modes Session',
 	'IcuVersion'				=> 'ICU',
 	'PhpVersion'				=> 'PHP',
-	'MemoryLimit'				=> 'Memory',
+	'MemoryLimit'				=> 'Memori',
 	'UploadFilesizeMax'			=> 'Upload max filesize',
 	'PostMaxSize'				=> 'Post max size',
 	'MaxExecutionTime'			=> 'Max execution time',
