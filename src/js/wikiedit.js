@@ -36,6 +36,9 @@ class WikiEdit extends ProtoEdit {
     this.draftKey       = null;
     this.autosaveTimer  = null;
     this.autosaveDelay  = 2000; // save 2 seconds after the last change
+
+    // Find/Replace panel
+    this.findForm = null;
   }
 
   // Initialisation
@@ -94,6 +97,9 @@ class WikiEdit extends ProtoEdit {
 
     this.addButton('footnote',   lang.Footnote,    "'[[^ ', ']]', 2");
     this.addButton('createtable', lang.InsertTable, '', `document.getElementById('${this.id}')._owner.createTable`);
+
+    this.addButton('search', lang.FindReplace || 'Find and Replace', '', `document.getElementById('${this.id}')._owner.showFindReplace`);
+
     this.addButton('customhtml', separator);
 
     // Help button
@@ -131,8 +137,13 @@ class WikiEdit extends ProtoEdit {
   /**
    * Sets up autosave listeners and prepares the storage key.
    */
+  
   setupAutosave() {
-    this.draftKey = `wikiedit-draft-${this.id}`;
+	const path = window.location.pathname;
+	const section = window.location.search || ''; // e.g., ?section=2
+	const uniqueKey = `${this.id}-${path}${section}`;
+
+    this.draftKey = uniqueKey;
 
     // Save on every user edit (debounced)
     this.area.addEventListener('input', this.debounceAutosave.bind(this));
@@ -430,6 +441,11 @@ class WikiEdit extends ProtoEdit {
           res = true;
           noscroll = true; // undo/redo already restored scroll – prevent overwrite
         }
+        break;
+
+      case 2118: // Ctrl+F → Find/Replace
+        this.showFindReplace();
+        res = true;
         break;
 
       case 9: // Tab
@@ -895,7 +911,7 @@ class WikiEdit extends ProtoEdit {
     const tableStr = this.buildWikiTable(cols, rows, caption, colHeader, rowHeader);
 
     // Insert as a clean block with surrounding newlines
-    this.pushState();               // ← capture state before insert
+    this.pushState();
     const insertStr = '\n' + tableStr + '\n';
     const newValue = sel1 + insertStr + sel2;
 
@@ -926,7 +942,7 @@ class WikiEdit extends ProtoEdit {
       return;
     }
 
-    this.pushState();               // ← capture state before insert
+    this.pushState();
     const str = sel1 + '((' + combined + '))' + sel2;
 
     area.value = str;
@@ -937,6 +953,265 @@ class WikiEdit extends ProtoEdit {
 
     this.hideLinkForm();
   }
+
+  // ====================== FIND / REPLACE FEATURE ======================
+
+  showFindReplace() {
+    if (!this.findForm) this.createFindReplaceForm();
+
+    const f = this.findForm;
+    this.getDefines();
+
+    // Prefill with currently selected text (if any)
+    f.findInput.value = this.sel || '';
+
+    f.replaceInput.value = '';
+    f.modal.classList.add('show');
+
+    // Focus the find field
+    f.findInput.focus();
+    f.findInput.select();
+  }
+
+  hideFindReplace() {
+    if (this.findForm) {
+      this.findForm.modal.classList.remove('show');
+    }
+  }
+
+  createFindReplaceForm() {
+    const panel = document.createElement('div');
+    panel.className = 'we-find-panel';
+
+    panel.innerHTML = `
+      <div class="we-panel-header">
+        <h3 class="we-panel-title">${lang.FindReplace || 'Find and Replace'}</h3>
+        <button type="button" id="we-find-close-${this.id}" class="we-panel-close">✕</button>
+      </div>
+      <div class="we-panel-body">
+        <div class="we-form-group">
+          <label class="we-form-label">${lang.FindWhat || 'Find what:'}</label>
+          <input type="text" id="we-find-what-${this.id}" class="we-form-input">
+        </div>
+
+        <div class="we-form-group">
+          <label class="we-form-label">${lang.ReplaceWith || 'Replace with:'}</label>
+          <input type="text" id="we-replace-with-${this.id}" class="we-form-input">
+        </div>
+
+        <div class="we-form-options">
+          <label class="we-checkbox-label">
+            <input type="checkbox" id="we-find-case-${this.id}" checked>
+            ${lang.MatchCase || 'Match case'}
+          </label>
+          <label class="we-checkbox-label">
+            <input type="checkbox" id="we-find-whole-${this.id}">
+            ${lang.WholeWords || 'Whole words only'}
+          </label>
+          <label class="we-checkbox-label">
+            <input type="checkbox" id="we-find-regex-${this.id}">
+            ${lang.UseRegex || 'Regular expression'}
+          </label>
+        </div>
+
+        <div class="we-panel-actions">
+          <button type="button" id="we-find-next-${this.id}" class="we-btn we-btn-primary">Find Next</button>
+          <button type="button" id="we-replace-btn-${this.id}" class="we-btn">Replace</button>
+          <button type="button" id="we-replace-all-${this.id}" class="we-btn">Replace All</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(panel);
+
+    this.findForm = {
+      modal: panel, // reused name for consistency
+      findInput: document.getElementById(`we-find-what-${this.id}`),
+      replaceInput: document.getElementById(`we-replace-with-${this.id}`),
+      matchCaseCheck: document.getElementById(`we-find-case-${this.id}`),
+      wholeWordCheck: document.getElementById(`we-find-whole-${this.id}`),
+      regexCheck: document.getElementById(`we-find-regex-${this.id}`),
+      btnNext: document.getElementById(`we-find-next-${this.id}`),
+      btnReplace: document.getElementById(`we-replace-btn-${this.id}`),
+      btnReplaceAll: document.getElementById(`we-replace-all-${this.id}`),
+      btnClose: document.getElementById(`we-find-close-${this.id}`)
+    };
+
+    // Event listeners
+    this.findForm.btnNext.addEventListener('click', () => this.findNext());
+    this.findForm.btnReplace.addEventListener('click', () => this.replaceCurrent());
+    this.findForm.btnReplaceAll.addEventListener('click', () => this.replaceAll());
+    this.findForm.btnClose.addEventListener('click', () => this.hideFindReplace());
+
+    // Enter in find field = Find Next
+    this.findForm.findInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        this.findNext();
+      }
+    });
+  }
+
+  /**
+   * Scroll the textarea so the current selection is clearly visible.
+   * Called after every successful find or replace.
+   */
+  scrollToSelection() {
+    const t = this.area;
+    if (!t) return;
+
+    t.focus();
+
+    // Force browser to scroll the caret into view (very reliable in modern browsers)
+    const start = t.selectionStart;
+    t.selectionStart = start;   // re-setting triggers scroll
+    t.selectionEnd = t.selectionEnd;
+
+    // Additional safety: approximate scroll position to center the match
+    const textBefore = t.value.substring(0, start);
+    const lineCount = (textBefore.match(/\n/g) || []).length + 1;
+
+    const lineHeight = parseInt(getComputedStyle(t).lineHeight) || 20;
+    const targetScroll = Math.max(0, lineCount * lineHeight - t.clientHeight * 0.4);
+
+    t.scrollTop = targetScroll;
+  }
+
+  findNext() {
+    const t = this.area;
+    const f = this.findForm;
+    if (!f || !f.findInput.value) return;
+
+    const term = f.findInput.value;
+    const matchCase = f.matchCaseCheck.checked;
+    const wholeWord = f.wholeWordCheck.checked;
+    const useRegex = f.regexCheck.checked;
+    const text = t.value;
+
+    let re;
+
+    if (useRegex) {
+      try {
+        const flags = matchCase ? 'g' : 'gi';
+        re = new RegExp(term, flags);
+      } catch (err) {
+        alert(lang?.InvalidRegex || 'Invalid regular expression.');
+        return;
+      }
+    } else {
+      let escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const pattern = wholeWord ? '\\b' + escaped + '\\b' : escaped;
+      const flags = matchCase ? 'g' : 'gi';
+      re = new RegExp(pattern, flags);
+    }
+
+    let pos = t.selectionEnd;
+    re.lastIndex = pos;
+
+    let match = re.exec(text);
+
+    if (!match) {
+      re.lastIndex = 0;
+      match = re.exec(text);
+    }
+
+    if (match) {
+      t.setSelectionRange(match.index, match.index + match[0].length);
+      this.scrollToSelection();   // ← guaranteed visible
+    }
+  }
+
+  replaceCurrent() {
+    const t = this.area;
+    const f = this.findForm;
+    if (!f || !f.findInput.value) return;
+
+    if (t.selectionStart === t.selectionEnd) {
+      this.findNext();
+      return;
+    }
+
+    this.pushState(); // capture state before any change
+
+    const term = f.findInput.value;
+    const matchCase = f.matchCaseCheck.checked;
+    const useRegex = f.regexCheck.checked;
+    const selected = t.value.substring(t.selectionStart, t.selectionEnd);
+
+    let matches = false;
+
+    if (useRegex) {
+      try {
+        const flags = matchCase ? '' : 'i';
+        const re = new RegExp('^' + term + '$', flags);
+        matches = re.test(selected);
+      } catch (e) {
+        this.findNext();
+        return;
+      }
+    } else {
+      matches = matchCase
+        ? selected === term
+        : selected.toLowerCase() === term.toLowerCase();
+    }
+
+    if (!matches) {
+      this.findNext();
+      return;
+    }
+
+    const replacement = f.replaceInput.value ?? '';
+    const before = t.value.substring(0, t.selectionStart);
+    const after = t.value.substring(t.selectionEnd);
+
+    t.value = before + replacement + after;
+    const newPos = before.length + replacement.length;
+    t.setSelectionRange(newPos, newPos);
+
+    this.scrollToSelection();   // ← new text is visible
+    this.findNext();
+  }
+
+  replaceAll() {
+    const t = this.area;
+    const f = this.findForm;
+    if (!f || !f.findInput.value) return;
+
+    this.pushState(); // capture state before bulk replace
+
+    const term = f.findInput.value;
+    const matchCase = f.matchCaseCheck.checked;
+    const wholeWord = f.wholeWordCheck.checked;
+    const useRegex = f.regexCheck.checked;
+    const replacement = f.replaceInput.value ?? '';
+
+    let re;
+
+    if (useRegex) {
+      try {
+        const flags = matchCase ? 'g' : 'gi';
+        re = new RegExp(term, flags);
+      } catch (err) {
+        alert(lang?.InvalidRegex || 'Invalid regular expression.');
+        return;
+      }
+    } else {
+      let escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const pattern = wholeWord ? '\\b' + escaped + '\\b' : escaped;
+      const flags = matchCase ? 'g' : 'gi';
+      re = new RegExp(pattern, flags);
+    }
+
+    const newText = t.value.replace(re, replacement);
+
+    if (newText !== t.value) {
+      t.value = newText;
+      t.setSelectionRange(0, 0);
+      t.focus();
+    }
+  }
+
+  // ====================== HELP ======================
 
   help() {
     const s = `WikiEdit 3.26

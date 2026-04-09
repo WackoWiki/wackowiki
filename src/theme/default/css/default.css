@@ -1341,6 +1341,9 @@ a:target {
 .toolbar li.we-highlight img {
 	background: url('../../../image/wikiedit/light/highlight.svg') no-repeat;
 }
+.toolbar li.we-search img {
+	background: url('../../../image/wikiedit/light/find-replace.svg') no-repeat;
+}
 .toolbar li.we-about img {
 	background: url('../../../image/wikiedit/light/about.svg') no-repeat;
 }
@@ -1373,6 +1376,58 @@ a:target {
 	overflow: hidden;
 	max-width: 460px;
 	width: 100%;
+}
+
+.we-find-panel {
+	display: none;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+	width: 460px;
+	z-index: 100001;
+	font-family: system-ui, -apple-system, sans-serif;
+}
+
+.we-find-panel.show {
+	display: block;
+}
+
+.we-panel-header {
+	padding: 12px 20px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.we-panel-title {
+	margin: 0;
+	font-size: 1.1em;
+	font-weight: 600;
+	color: #222;
+}
+
+.we-panel-close {
+	background: none;
+	border: none;
+	font-size: 1.4em;
+	cursor: pointer;
+	color: #666;
+	padding: 0;
+	line-height: 1;
+}
+
+.we-panel-body {
+	padding: 20px 24px;
+}
+
+.we-panel-actions {
+	display: flex;
+	gap: 8px;
+	margin-top: 20px;
 }
 
 .we-modal-header {
@@ -1410,6 +1465,12 @@ a:target {
 	font-size: 1em;
 }
 
+.we-form-options {
+	display: flex;
+	gap: 24px;
+	margin-bottom: 20px;
+}
+
 .we-form-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -1429,6 +1490,12 @@ a:target {
 	cursor: pointer;
 	font-size: 0.95em;
 	font-weight: 600;
+}
+
+.we-modal-actions {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 24px;
 }
 
 .we-modal-footer {
