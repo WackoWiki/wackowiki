@@ -1,10 +1,9 @@
 lang = {
 	// default.js
-	ReallySave :			"Vraiment sauvegarder ?",
-	ModifiedHint :			"Le champ a changé, n\'oubliez pas d\'enregistrer les modifications.",
-	NotSavedWarning :		"Vous n\'avez pas enregistré les modifications. Êtes-vous sûr de vouloir quitter ?",
-	SessionExpiredEditor :	"Votre session a expiré !\nVous avez été déconnecté en raison d'une longue inactivité.\n1. Enregistrez vos modifications de formulaire dans un fichier texte pour éviter toute perte.\n2. Rafraîchissez la page.\n3. Connectez-vous à nouveau et soumettez à nouveau.",
-
+	ReallySave: 'Vraiment sauvegarder?',
+	ModifiedHint: 'Le champ a changé, n\'oubliez pas d\'enregistrer les modifications.',
+	NotSavedWarning: 'Vous n\'avez pas enregistré les modifications. Êtes-vous sûr de vouloir quitter ?',
+	SessionExpiredEditor: 'Votre session a expiré !\nVous avez été déconnecté en raison d\'une longue inactivité.\n1. Enregistrez vos modifications de formulaire dans un fichier texte pour éviter toute perte.\n2. Rafraîchissez la page.\n3. Connectez-vous à nouveau et soumettez à nouveau.',
 	// wikiedit.js
 	HelpAbout: 'Aide & À propos',
 	HelpFormatting: 'Aide',
@@ -53,5 +52,7 @@ lang = {
 	TableCaption: 'Légende de la table (optionnel) :',
 	UseColumnHeaders: 'Utiliser les en-têtes de colonne',
 	UseRowHeaders: 'Utiliser les en-têtes de ligne',
+	Cell: 'Cellule',
+	Header: 'En-tête',
 	HelpAboutTip: ' Raccourcis :\n' + ' Ctrl+B - Gras\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Souligner\n' + ' Ctrl+Shift+S - Barré\n' + ' Ctrl+Shift+1 .. 4 - En-tête 1..4\n' + ' Alt+I ou Ctrl+T - Indentation\n' + ' Alt+U or Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Lien\n' + ' Ctrl+L - Lien avec la description\n' + ' Ctrl+Maj+L - Liste non ordonnée\n' + ' Ctrl+Maj+N - Liste ordonnée\n' + ' Ctrl+Maj+O - Liste ordonnée\n' + ' Ctrl+= - Petit texte\n' + ' Ctrl+Maj+Mous - Ligne horizontale\n' + ' \n'
 };

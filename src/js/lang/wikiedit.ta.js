@@ -7,7 +7,7 @@ lang = {
 	// wikiedit.js
 	HelpAbout: 'Help & About',
 	HelpFormatting: 'உதவி',
-	HelpFormattingTip: 'Help on Wiki-formatting',
+	HelpFormattingTip: 'Help on Wiki formatting',
 	HelpFormattingPage: 'Doc/English/Formatting',
 	Heading1: 'Heading 1',
 	Heading2: 'Heading 2',
@@ -52,5 +52,7 @@ lang = {
 	TableCaption: 'Table caption (optional):',
 	UseColumnHeaders: 'Use column headers',
 	UseRowHeaders: 'Use row headers',
+	Cell: 'Cell',
+	Header: 'Header',
 	HelpAboutTip: ' Shortcuts:\n' + ' Ctrl+B - Bold\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Underline\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 4 - Heading 1..4\n' + ' Alt+I or Ctrl+T - Indent\n' + ' Alt+U or Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link with description\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Ordered List\n' + ' Ctrl+Shift+O - Ordered List\n' + ' Ctrl+= - Small text\n' + ' Ctrl+Shift+Minus - Horizontal line\n' + ' \n'
 };

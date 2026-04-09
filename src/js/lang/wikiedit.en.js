@@ -55,6 +55,8 @@ lang = {
 	TableCaption :			"Table caption (optional):",
 	UseColumnHeaders :		"Use column headers",
 	UseRowHeaders :			"Use row headers",
+	Cell :					"Cell",
+	Header :				"Header",
 
 	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+

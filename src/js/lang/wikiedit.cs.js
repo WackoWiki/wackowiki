@@ -7,7 +7,7 @@ lang = {
 	// wikiedit.js
 	HelpAbout: 'Nápověda a informace',
 	HelpFormatting: 'Nápověda',
-	HelpFormattingTip: 'Nápověda k formátování na Wiki',
+	HelpFormattingTip: 'Nápověda ke formátování Wiki',
 	HelpFormattingPage: 'Doc/English/Formatting',
 	Heading1: 'Hlava 1',
 	Heading2: 'Hlava 2',
@@ -52,5 +52,7 @@ lang = {
 	TableCaption: 'Titulek tabulky (nepovinné):',
 	UseColumnHeaders: 'Použít záhlaví sloupce',
 	UseRowHeaders: 'Použít záhlaví řádků',
+	Cell: 'Buňka',
+	Header: 'Záhlaví',
 	HelpAboutTip: ' Zkratky:\n' + ' Ctrl+B - tučné\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - podtržení\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 4 - Položka 1..4\n' + ' Alt+I nebo Ctrl+T - odsazení\n' + ' Alt+U nebo Ctrl+Shift+T - Odsazení\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - odkaz\n' + ' Ctrl+L - Propojit s popisem\n' + ' Ctrl+Shift+L - neuspořádaný seznam\n' + ' Ctrl+Shift+N - Objednaný seznam\n' + ' Ctrl+Shift+O - Objednaný seznam\n' + ' Ctrl+= - Malý text\n' + ' Ctrl+Shift+Minus - vodorovná čára\n' + ' \n'
 };

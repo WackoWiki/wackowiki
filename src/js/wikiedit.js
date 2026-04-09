@@ -512,8 +512,8 @@ class WikiEdit extends ProtoEdit {
           </div>
 
           <div class="we-modal-footer">
-            <button type="button" id="we-link-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
             <button type="submit" id="we-link-insert-${this.id}" class="we-btn we-btn-primary">${lang.Insert || 'Insert'}</button>
+            <button type="button" id="we-link-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
           </div>
         </form>
       </div>
@@ -630,8 +630,8 @@ class WikiEdit extends ProtoEdit {
           </div>
 
           <div class="we-modal-footer">
-            <button type="button" id="we-table-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
             <button type="submit" id="we-table-insert-${this.id}" class="we-btn we-btn-primary">${lang.InsertTable || 'Insert Table'}</button>
+            <button type="button" id="we-table-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
           </div>
         </form>
       </div>
@@ -719,7 +719,7 @@ class WikiEdit extends ProtoEdit {
     if (colHeader) {
       const headerCells = rowHeader ? [''] : [];
       for (let c = 0; c < cols; c++) {
-        headerCells.push(`header ${c+1}`);
+        headerCells.push(`${lang.Header || 'Header'} ${c+1}`);
       }
       const chRow = '*| ' + headerCells.join(' | ') + ' |*';
       lines.push(chRow);
@@ -728,9 +728,9 @@ class WikiEdit extends ProtoEdit {
     // Data rows
     for (let r = 0; r < rows; r++) {
       const rowStart = rowHeader ? '^|' : '||';
-      const rowCells = rowHeader ? [`header ${r+1}`] : [];
+      const rowCells = rowHeader ? [`${lang.Header || 'Header'} ${r+1}`] : [];
       for (let c = 0; c < cols; c++) {
-        rowCells.push('cell');
+        rowCells.push(`${lang.Cell || 'Cell'}`);
       }
       const rowStr = rowStart + ' ' + rowCells.join(' | ') + ' ||';
       lines.push(rowStr);

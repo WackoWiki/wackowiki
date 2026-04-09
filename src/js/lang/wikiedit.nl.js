@@ -1,10 +1,9 @@
 lang = {
 	// default.js
-	ReallySave :			"Echt opslaan?",
-	ModifiedHint :			"Het veld is veranderd, vergeet niet de wijzigingen op te slaan.",
-	NotSavedWarning :		"U hebt de wijzigingen niet opgeslagen. Weet u zeker dat u deze wilt verlaten?",
-	SessionExpiredEditor :	"Je sessie is verlopen!\nJe bent afgemeld vanwege lange inactiviteit.\n1. Sla je formulier op in een sms-bestand om verlies te voorkomen.\n2. Vernieuw de pagina.\n3. Log opnieuw in en dien opnieuw in.",
-
+	ReallySave: 'Echt opslaan?',
+	ModifiedHint: 'Het veld is veranderd, vergeet niet de wijzigingen op te slaan.',
+	NotSavedWarning: 'U hebt de wijzigingen niet opgeslagen. Weet u zeker dat u deze wilt verlaten?',
+	SessionExpiredEditor: 'Je sessie is verlopen!\nJe bent afgemeld vanwege lange inactiviteit.\n1. Sla je formulier op in een sms-bestand om verlies te voorkomen.\n2. Vernieuw de pagina.\n3. Log opnieuw in en dien opnieuw in.',
 	// wikiedit.js
 	HelpAbout: 'Help & Over',
 	HelpFormatting: 'Hulp',
@@ -53,5 +52,7 @@ lang = {
 	TableCaption: 'Tabel bijschrift (optioneel):',
 	UseColumnHeaders: 'Kolom headers gebruiken',
 	UseRowHeaders: 'Gebruik rij headers',
+	Cell: 'Cel',
+	Header: 'Koptekst',
 	HelpAboutTip: ' Snelkoppelingen:\n' + ' Ctrl+B - Vetgedrukt\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Underline\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 4 - rubriek 1..4\n' + ' Alt+I of Ctrl+T - Inspringen\n' + ' Alt+U of Ctrl+Shift+T - Oninspringen\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link met beschrijving\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Geordende lijst\n' + ' Ctrl+Shift+O - Ordered List\n' + ' Ctrl+= - Kleine tekst\n' + ' Ctrl+Shift+Minus - Horizontal line\n' + ' \n'
 };

@@ -7,7 +7,7 @@ lang = {
 	// wikiedit.js
 	HelpAbout: 'Ohjeet & Tietoja',
 	HelpFormatting: 'Ohje',
-	HelpFormattingTip: 'Ohjeet Wiki-muotoiluissa',
+	HelpFormattingTip: 'Ohjeita Wikin muotoiluun',
 	HelpFormattingPage: 'Doc/English/Formatting',
 	Heading1: 'Otsake 1',
 	Heading2: 'Otsake 2',
@@ -52,5 +52,7 @@ lang = {
 	TableCaption: 'Taulukon kuvaus (valinnainen):',
 	UseColumnHeaders: 'Käytä sarakkeen otsakkeita',
 	UseRowHeaders: 'Käytä rivin otsakkeita',
+	Cell: 'Solu',
+	Header: 'Otsikko',
 	HelpAboutTip: ' Pikanäppäimet:\n' + ' Ctrl+B - Lihavoitu\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Alleviivaus\n' + ' Ctrl+Shift+S - Yliviivaus\n' + ' Ctrl+Shift+1 .. 4 - Otsake 1..4\n' + ' Alt+I tai Ctrl+T - Sisennys\n' + ' Alt+U tai Ctrl+Shift+T - sisennys\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Linkki\n' + ' Ctrl+L - Linkki kuvauksella\n' + ' Ctrl+Shift+L - Järjestämätön Luettelo\n' + ' Ctrl+Shift+N - Järjestetty Luettelo\n' + ' Ctrl+Shift+O - Järjestetty Luettelo\n' + ' Ctrl+= - Pieni teksti\n' + ' Ctrl+Shift+Minus - Vaakaviiva\n' + ' \n'
 };
