@@ -27,10 +27,15 @@ class WikiEdit extends ProtoEdit {
     this.tableForm      = null;
     this.tableContext   = null;
 
-    // Full undo/redo stack (replaces the old single-level undo)
+    // Full undo/redo stack
     this.undoStack      = [];
     this.redoStack      = [];
     this.maxHistory     = 100;
+
+    // Autosave (localStorage draft)
+    this.draftKey       = null;
+    this.autosaveTimer  = null;
+    this.autosaveDelay  = 2000; // save 2 seconds after the last change
   }
 
   // Initialisation
@@ -40,7 +45,7 @@ class WikiEdit extends ProtoEdit {
     this.imagesPath = imgPath || 'image/';
     this.actionName = `document.getElementById('${this.id}')._owner.insTag`;
 
-    // Setup undo/redo – beforeinput fires BEFORE any native change (typing, paste, delete…)
+    // Setup undo/redo – beforeinput fires BEFORE any native change
     this.area.addEventListener('beforeinput', this.handleBeforeInput.bind(this));
 
     const separator = '<li><div class="btn-separator"></div></li>';
@@ -115,15 +120,83 @@ class WikiEdit extends ProtoEdit {
       this.area.parentNode.insertBefore(toolbar, this.area);
       document.getElementById(`tb_${this.id}`).innerHTML = this.createToolbar(1);
     } catch {}
+
+    // ====================== AUTOSAVE SETUP ======================
+    this.setupAutosave();
+    this.loadAutosavedDraft();
+  }
+
+  // ====================== AUTOSAVE (localStorage draft) ======================
+
+  /**
+   * Sets up autosave listeners and prepares the storage key.
+   */
+  setupAutosave() {
+    this.draftKey = `wikiedit-draft-${this.id}`;
+
+    // Save on every user edit (debounced)
+    this.area.addEventListener('input', this.debounceAutosave.bind(this));
+
+    // Immediate save when focus is lost
+    this.area.addEventListener('blur', () => {
+      clearTimeout(this.autosaveTimer);
+      this.saveDraft();
+    });
+
+    // Final save before the page is closed/reloaded
+    window.addEventListener('beforeunload', this.saveDraft.bind(this), { passive: true });
+  }
+
+  /**
+   * Debounced autosave – fires only after the user stops typing for `autosaveDelay` ms.
+   */
+  debounceAutosave() {
+    clearTimeout(this.autosaveTimer);
+    this.autosaveTimer = setTimeout(() => {
+      this.saveDraft();
+    }, this.autosaveDelay);
+  }
+
+  /**
+   * Saves the current editor content to localStorage.
+   * Empty content is not saved (draft is cleared).
+   */
+  saveDraft() {
+    if (!this.draftKey) return;
+
+    const content = this.area.value;
+    if (content.trim() === '') {
+      localStorage.removeItem(this.draftKey);
+      return;
+    }
+    localStorage.setItem(this.draftKey, content);
+  }
+
+  /**
+   * On editor initialisation: if a draft exists and differs from the loaded content,
+   * the user is asked whether to restore it (with undo support).
+   */
+  loadAutosavedDraft() {
+    if (!this.draftKey) return;
+
+    const saved = localStorage.getItem(this.draftKey);
+    if (saved !== null && saved !== this.area.value) {
+      const msg = lang?.AutosaveRestore
+        || 'An autosaved draft from a previous session was found.\n\nRestore it?';
+
+      if (confirm(msg)) {
+        this.pushState();                 // allow Ctrl+Z to revert the restore
+        this.area.value = saved;
+        this.area.setSelectionRange(saved.length, saved.length);
+        this.area.focus();
+      } else {
+        localStorage.removeItem(this.draftKey);
+      }
+    }
   }
 
   // ====================== UNDO / REDO STACK ======================
 
-  /**
-   * Push current editor state (text + selection + scroll) to the undo stack.
-   * Called automatically before every native change via beforeinput and
-   * manually before every programmatic change (buttons, forms, list continuation).
-   */
   pushState() {
     const t = this.area;
     const state = {
@@ -144,10 +217,8 @@ class WikiEdit extends ProtoEdit {
     }
 
     this.undoStack.push(state);
-    if (this.undoStack.length > this.maxHistory) {
-      this.undoStack.shift();
-    }
-    this.redoStack = []; // new change clears redo stack
+    if (this.undoStack.length > this.maxHistory) this.undoStack.shift();
+    this.redoStack = [];
   }
 
   /**
@@ -157,12 +228,7 @@ class WikiEdit extends ProtoEdit {
     if (this.undoStack.length === 0) return false;
 
     const t = this.area;
-    const current = {
-      text: t.value,
-      start: t.selectionStart,
-      end: t.selectionEnd,
-      scroll: t.scrollTop
-    };
+    const current = { text: t.value, start: t.selectionStart, end: t.selectionEnd, scroll: t.scrollTop };
     this.redoStack.push(current);
 
     const prev = this.undoStack.pop();
@@ -434,7 +500,7 @@ class WikiEdit extends ProtoEdit {
               }
             }
 
-            this.pushState(); // ← capture state before list-continuation change
+            this.pushState();
             t.value = sel1 + '\n' + prefix + sel2;
             const newSel = sel1.length + 1 + prefix.length;
             t.setSelectionRange(newSel, newSel);
@@ -493,7 +559,7 @@ class WikiEdit extends ProtoEdit {
     t.scrollTop = this.scroll;
   }
 
-  // ====================== MODIFICATION METHODS (now push state before change) ======================
+  // ====================== MODIFICATION METHODS ======================
 
   insTag(Tag, Tag2, onNewLine, expand, strip) {
     if (onNewLine == null) onNewLine = 0;
@@ -503,7 +569,7 @@ class WikiEdit extends ProtoEdit {
     const t = this.area;
     t.focus();
     this.getDefines();
-    this.pushState();               // ← capture state before modification
+    this.pushState();
 
     const str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
     this.setAreaContent(str);
@@ -514,7 +580,7 @@ class WikiEdit extends ProtoEdit {
     const t = this.area;
     t.focus();
     this.getDefines();
-    this.pushState();               // ← capture state before modification
+    this.pushState();
 
     let r = '';
     let fIn = false;
@@ -545,7 +611,7 @@ class WikiEdit extends ProtoEdit {
 
     if (!/\n/.test(this.sel)) {
       if (isAlt) {
-        this.pushState();           // ← capture state before quick-wrap
+        this.pushState();
         const str = this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
         t.value = str;
         t.setSelectionRange(this.sel1.length, str.length - this.sel2.length);
@@ -558,9 +624,8 @@ class WikiEdit extends ProtoEdit {
     return false;
   }
 
-  /**
-   * Lazily creates the modal form (single popup) once per editor instance.
-   */
+  // ====================== LINK & TABLE FORMS ======================
+
   createLinkForm() {
     const modal = document.createElement('div');
     modal.className = 'we-modal';
@@ -650,8 +715,6 @@ class WikiEdit extends ProtoEdit {
       this.linkContext = null;
     }
   }
-
-  // ====================== TABLE POPUP FORM ======================
 
   createTable() {
     const t = this.area;
