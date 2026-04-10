@@ -103,19 +103,15 @@ class WikiEdit extends ProtoEdit {
 	this.addButton('customhtml', separator);
 
     const dropdownHTML = `<li class="we-dropdown">
-      <div class="btn-" title="Tools &amp; Help">
+      <div class="btn-" title="${lang.ToolsHelp || 'Tools &amp; Help'}">
         <img src="${this.imagesPath}spacer.png" alt="▼">
       </div>
       <ul class="we-dropdown-menu">
-        <!-- Find/Replace – built like a normal addButton -->
         <li class="we-search" onclick="document.getElementById('${this.id}')._owner.showFindReplace()">
           <img src="${this.imagesPath}spacer.png" alt="🔎" title="${lang.SearchReplace}" style="margin-right:6px;">
-          
         </li>
-        <!-- Help &amp; About – built like a normal addButton -->
         <li class="we-about" onclick="document.getElementById('${this.id}')._owner.showHelpModal()">
           <img src="${this.imagesPath}spacer.png" alt="?" title="${lang.HelpAbout}" style="margin-right:6px;">
-          
         </li>
       </ul>
     </li>`;

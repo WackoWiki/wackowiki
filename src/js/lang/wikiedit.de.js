@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Zeilenüberschrift verwenden',
 	Cell: 'Zelle',
 	Header: 'Überschrift',
+	ToolsHelp: 'Werkzeuge & Hilfe',
 	SearchReplace: 'Suchen und Ersetzen',
 	SearchFor: 'Suche nach:',
 	ReplaceWith: 'Ersetzen mit:',
