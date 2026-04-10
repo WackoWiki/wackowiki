@@ -39,6 +39,9 @@ class WikiEdit extends ProtoEdit {
 
     // Find/Replace panel
     this.findForm = null;
+
+    // Unified Help modal
+    this.helpModal = null;
   }
 
   // Initialisation
@@ -48,7 +51,7 @@ class WikiEdit extends ProtoEdit {
     this.imagesPath = imgPath || 'image/';
     this.actionName = `document.getElementById('${this.id}')._owner.insTag`;
 
-    // Setup undo/redo – beforeinput fires BEFORE any native change
+    // Setup undo/redo
     this.area.addEventListener('beforeinput', this.handleBeforeInput.bind(this));
 
     const separator = '<li><div class="btn-separator"></div></li>';
@@ -97,27 +100,27 @@ class WikiEdit extends ProtoEdit {
 
     this.addButton('footnote',   lang.Footnote,    "'[[^ ', ']]', 2");
     this.addButton('createtable', lang.InsertTable, '', `document.getElementById('${this.id}')._owner.createTable`);
+	this.addButton('customhtml', separator);
 
-    this.addButton('search', lang.FindReplace || 'Find and Replace', '', `document.getElementById('${this.id}')._owner.showFindReplace`);
-
-    this.addButton('customhtml', separator);
-
-    // Help button
-    const helpBtn = `<li class="we-help">
-      <div id="hilfe_${this.id}"
-           onmouseover="this.className='btn-hover';"
-           onmouseout="this.className='btn-';"
-           class="btn-"
-           onclick="this.className='btn-pressed';window.open('${this.manual}${lang.HelpFormattingPage}');"
-           title="${lang.HelpFormattingTip}">
-        <img src="${this.imagesPath}spacer.png"
-             alt="${lang.HelpFormatting}"
-             title="${lang.HelpFormattingTip}">
+    const dropdownHTML = `<li class="we-dropdown">
+      <div class="btn-" title="Tools &amp; Help">
+        <img src="${this.imagesPath}spacer.png" alt="▼">
       </div>
+      <ul class="we-dropdown-menu">
+        <!-- Find/Replace – built like a normal addButton -->
+        <li class="we-search" onclick="document.getElementById('${this.id}')._owner.showFindReplace()">
+          <img src="${this.imagesPath}spacer.png" alt="🔎" title="${lang.SearchReplace}" style="margin-right:6px;">
+          
+        </li>
+        <!-- Help &amp; About – built like a normal addButton -->
+        <li class="we-about" onclick="document.getElementById('${this.id}')._owner.showHelpModal()">
+          <img src="${this.imagesPath}spacer.png" alt="?" title="${lang.HelpAbout}" style="margin-right:6px;">
+          
+        </li>
+      </ul>
     </li>`;
-    this.addButton('customhtml', helpBtn);
 
-    this.addButton('about', lang.HelpAbout, '', `document.getElementById('${this.id}')._owner.help`);
+    this.addButton('customhtml', dropdownHTML);
 
     // Build toolbar
     try {
@@ -954,6 +957,46 @@ class WikiEdit extends ProtoEdit {
     this.hideTableForm();
   }
 
+  // ====================== HELP MODAL ======================
+
+  showHelpModal() {
+    if (!this.helpModal) this.createHelpModal();
+    this.helpModal.modal.classList.add('show');
+  }
+
+  hideHelpModal() {
+    if (this.helpModal) this.helpModal.modal.classList.remove('show');
+  }
+
+  createHelpModal() {
+    const modal = document.createElement('div');
+    modal.className = 'we-modal';
+
+    const dialog = document.createElement('div');
+    dialog.className = 'we-modal-dialog';
+
+    dialog.innerHTML = `
+      <div class="we-modal-header">
+        <h3 class="we-modal-title">WikiEdit</h3>
+      </div>
+      <div class="we-modal-body">
+        <a href="${this.manual}${lang.HelpFormattingPage || 'Formatting'}" target="_blank">${lang.HelpFormattingTip}</a><br>
+        <a href="${this.manual}" target="_blank">Full Documentation</a><br>
+        <a href="https://wackowiki.org/doc/Dev/Projects/WikiEdit" target="_blank">Project Page</a>
+        <hr style="margin:15px 0;border:none;border-top:1px solid #ddd;">
+        <pre style="white-space:pre-wrap;font-size:0.95em;line-height:1.4;">${lang.HelpAboutTip || ''}</pre>
+      </div>
+      <div class="we-modal-footer">
+        <button type="button" onclick="document.getElementById('${this.id}')._owner.hideHelpModal()" class="we-btn">Close</button>
+      </div>
+    `;
+
+    modal.appendChild(dialog);
+    document.body.appendChild(modal);
+
+    this.helpModal = { modal };
+  }
+
   // ====================== FIND / REPLACE FEATURE ======================
 
   showFindReplace() {
@@ -1211,14 +1254,4 @@ class WikiEdit extends ProtoEdit {
     }
   }
 
-  // ====================== HELP ======================
-
-  help() {
-    const s = `WikiEdit 3.26
-© Roman Ivanov, WackoWiki Team 2003-2026
-https://wackowiki.org/doc/Dev/Projects/WikiEdit
-
-${lang.HelpAboutTip}`;
-    alert(s);
-  }
 }

@@ -1347,6 +1347,9 @@ a:target {
 .toolbar li.we-about img {
 	background: url('../../../image/wikiedit/light/about.svg') no-repeat;
 }
+.toolbar li.we-dropdown > div img {
+	background: url('../../../image/wikiedit/light/open-more.svg') no-repeat;
+}
 .toolbar li.we-help img {
 	background: url('../../../image/wikiedit/light/help.svg') no-repeat;
 }
@@ -1527,6 +1530,44 @@ a:target {
 
 .we-btn-primary:hover {
 	/* background: #0066b3; */
+}
+
+.we-dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.we-dropdown:hover .we-dropdown-menu,
+.we-dropdown .we-dropdown-menu:hover {
+	display: block;
+}
+
+.we-dropdown-menu {
+	display: none;
+	position: absolute;
+	top: 100%;           /* directly under the trigger */
+	left: 0;
+	margin-top: 0;       /* no gap */
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+	padding: 0;
+	min-width: 2.6rem;
+	z-index: 100002;
+	list-style: none;
+}
+
+.we-dropdown-menu li {
+	padding: 6px 12px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+}
+
+.we-dropdown-menu li:hover {
+	background: #f0f0f0;
 }
 
 	/* WikiEdit Autocomplete --------------------------------- */
