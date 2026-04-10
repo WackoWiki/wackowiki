@@ -76,9 +76,9 @@ class WikiEdit extends ProtoEdit {
     this.addButton('ol', lang.NumberedList, "'  1. ', '', 0, 1, 1");
     this.addButton('customhtml', separator);
 
-    this.addButton('center',  lang.Center,  "'%%(wacko wrapper=text wrapper_align=center)', '%%', 2");
-    this.addButton('right',   lang.Right,   "'%%(wacko wrapper=text wrapper_align=right)', '%%', 2");
-    this.addButton('justify', lang.Justify, "'%%(wacko wrapper=text wrapper_align=justify)', '%%', 2");
+	this.addButton('center',  lang.Center,  '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%(wacko wrapper=text wrapper_align=center)')`);
+	this.addButton('right',   lang.Right,   '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%(wacko wrapper=text wrapper_align=right)')`);
+	this.addButton('justify', lang.Justify, '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%(wacko wrapper=text wrapper_align=justify)')`);
     this.addButton('customhtml', separator);
 
     this.addButton('outdent', lang.Outdent, '', `document.getElementById('${this.id}')._owner.unindent`);
@@ -86,7 +86,7 @@ class WikiEdit extends ProtoEdit {
     this.addButton('customhtml', separator);
 
     this.addButton('quote',   lang.Quote,       "'<[', ']>', 2");
-    this.addButton('source',  lang.CodeWrapper, "'%%\\n', '\\n%%', 2");
+    this.addButton('source', lang.CodeWrapper, '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%')`);
     this.addButton('action',  lang.Action,      "'{{', '}}', 2");
     this.addButton('textred', lang.MarkedText,  "'!!', '!!', 2");
     this.addButton('highlight', lang.HighlightText, "'??', '??', 2");
@@ -398,6 +398,34 @@ class WikiEdit extends ProtoEdit {
       if (fOut) fIn = false;
     }
     return r;
+  }
+
+  /**
+   * Universal block wrapper for %%...%% style tags.
+   * Always produces:
+   *   %%(parameters)
+   *   content
+   *   %%
+   * Works for: cursor only, single line, multiple lines.
+   */
+  insBlockWrapper(openTag, closeTag = '%%') {
+    const t = this.area;
+    t.focus();
+    this.getDefines();
+    this.pushState();                    // undo/redo support
+
+    const content = this.sel || '';
+
+    const wrapped = `${openTag}\n${content}\n${closeTag}`;
+
+    const newValue = this.sel1 + wrapped + this.sel2;
+    t.value = newValue;
+
+    // Place cursor right after the opening tag (ready to type)
+    const cursorPos = this.sel1.length + openTag.length + 1;   // +1 for the newline
+    t.setSelectionRange(cursorPos, cursorPos);
+
+    return true;
   }
 
   // ====================== EVENT HANDLING ======================
