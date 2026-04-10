@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Usar cabeceras de fila',
 	Cell: 'Celda',
 	Header: 'Cabecera',
+	ToolsHelp: 'Herramientas y ayuda',
 	SearchReplace: 'Buscar y reemplazar',
 	SearchFor: 'Buscar:',
 	ReplaceWith: 'Reemplazar con:',

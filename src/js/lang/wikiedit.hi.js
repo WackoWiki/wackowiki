@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'पंक्ति हेडर का उपयोग करें',
 	Cell: 'Cell',
 	Header: 'Header',
+	ToolsHelp: 'Tools & Help',
 	SearchReplace: 'Search and Replace',
 	SearchFor: 'Search for:',
 	ReplaceWith: 'Replace with:',

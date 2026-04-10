@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: '使用行头',
 	Cell: '单元格',
 	Header: '标题',
+	ToolsHelp: '工具与帮助',
 	SearchReplace: '搜索和替换',
 	SearchFor: '搜索：',
 	ReplaceWith: '替换为：',

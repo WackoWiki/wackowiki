@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Utiliser les en-têtes de ligne',
 	Cell: 'Cellule',
 	Header: 'En-tête',
+	ToolsHelp: 'Outils & Aide',
 	SearchReplace: 'Rechercher et remplacer',
 	SearchFor: 'Recherche pour:',
 	ReplaceWith: 'Remplacer par :',

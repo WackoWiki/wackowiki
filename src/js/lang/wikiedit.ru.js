@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Использовать заголовки строк',
 	Cell: 'Клетка',
 	Header: 'Заголовок',
+	ToolsHelp: 'Инструменты и помощь',
 	SearchReplace: 'Поиск и замена',
 	SearchFor: 'Искать:',
 	ReplaceWith: 'Заменить на:',

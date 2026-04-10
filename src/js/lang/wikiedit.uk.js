@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Використовувати заголовки рядків',
 	Cell: 'Комірка',
 	Header: 'Заголовок рядка стану',
+	ToolsHelp: 'Інструменти та допомога',
 	SearchReplace: 'Пошук і заміна',
 	SearchFor: 'Шукати:',
 	ReplaceWith: 'Замінити на:',

@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Użyj nagłówków wierszy',
 	Cell: 'Komórka',
 	Header: 'Nagłówek',
+	ToolsHelp: 'Narzędzia i pomoc',
 	SearchReplace: 'Wyszukaj i zamień',
 	SearchFor: 'Szukaj:',
 	ReplaceWith: 'Zastąp z:',

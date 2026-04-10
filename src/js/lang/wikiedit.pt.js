@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Usar cabeçalhos de linha',
 	Cell: 'Célula',
 	Header: 'Cabeçalho',
+	ToolsHelp: 'Ferramentas e ajuda',
 	SearchReplace: 'Procurar e substituir',
 	SearchFor: 'Pesquisar por:',
 	ReplaceWith: 'Substituir com:',

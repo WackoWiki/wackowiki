@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Använd radrubriker',
 	Cell: 'Mobil',
 	Header: 'Rubrik',
+	ToolsHelp: 'Verktyg & Hjälp',
 	SearchReplace: 'Sök och ersätt',
 	SearchFor: 'Sök efter:',
 	ReplaceWith: 'Ersätt med:',

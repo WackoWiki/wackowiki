@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Použít záhlaví řádků',
 	Cell: 'Buňka',
 	Header: 'Záhlaví',
+	ToolsHelp: 'Nástroje a nápověda',
 	SearchReplace: 'Hledat a nahradit',
 	SearchFor: 'Hledat:',
 	ReplaceWith: 'Nahradit za:',

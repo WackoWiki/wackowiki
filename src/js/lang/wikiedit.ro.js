@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Folosește antete de rând',
 	Cell: 'Celulă',
 	Header: 'Antet',
+	ToolsHelp: 'Instrumente și ajutor',
 	SearchReplace: 'Caută și înlocuiește',
 	SearchFor: 'Căutare după:',
 	ReplaceWith: 'Înlocuiește cu:',

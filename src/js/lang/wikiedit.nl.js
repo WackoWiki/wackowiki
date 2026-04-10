@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Gebruik rij headers',
 	Cell: 'Cel',
 	Header: 'Koptekst',
+	ToolsHelp: 'Hulpmiddelen & Hulp',
 	SearchReplace: 'Zoeken en vervangen',
 	SearchFor: 'Zoek naar:',
 	ReplaceWith: 'Vervangen door:',

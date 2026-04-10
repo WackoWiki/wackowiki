@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Käytä rivin otsakkeita',
 	Cell: 'Solu',
 	Header: 'Otsikko',
+	ToolsHelp: 'Työkalut Ja Ohje',
 	SearchReplace: 'Etsi ja korvaa',
 	SearchFor: 'Etsi kohteista:',
 	ReplaceWith: 'Korvaa seuraavilla:',

@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: '行ヘッダーを使用',
 	Cell: 'セル',
 	Header: 'ヘッダー',
+	ToolsHelp: 'ツール & ヘルプ',
 	SearchReplace: '検索と置換',
 	SearchFor: '検索対象:',
 	ReplaceWith: '置換先:',

@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Brug rækkeoverskrifter',
 	Cell: 'Celle',
 	Header: 'Overskrift',
+	ToolsHelp: 'Værktøjer & Hjælp',
 	SearchReplace: 'Søg og erstat',
 	SearchFor: 'Søg efter:',
 	ReplaceWith: 'Erstat med:',

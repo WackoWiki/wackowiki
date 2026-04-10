@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Χρήση κεφαλίδων γραμμών',
 	Cell: 'Κελί',
 	Header: 'Κεφαλίδα',
+	ToolsHelp: 'Εργαλεία & Βοήθεια',
 	SearchReplace: 'Αναζήτηση και αντικατάσταση',
 	SearchFor: 'Αναζήτηση για:',
 	ReplaceWith: 'Αντικατάσταση με:',

@@ -7,7 +7,7 @@ lang = {
 	// wikiedit.js
 	HelpAbout: 'Hilfe & Über',
 	HelpFormatting: 'Hilfe',
-	HelpFormattingTip: 'Hilfe zum Formatieren von Wiki',
+	HelpFormattingTip: 'Hilfe zur Wiki-Formatierung',
 	HelpFormattingPage: 'Doc/Deutsch/Formatierung',
 	Heading1: 'Überschrift 1 (Strg+Umschalt+1)',
 	Heading2: 'Überschrift 2',

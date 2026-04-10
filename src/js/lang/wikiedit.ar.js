@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'استخدام رؤوس الصف',
 	Cell: 'خلية',
 	Header: 'رأس',
+	ToolsHelp: 'الأدوات والمساعدة',
 	SearchReplace: 'البحث والاستبدال',
 	SearchFor: 'البحث عن:',
 	ReplaceWith: 'يستعاض عن:',

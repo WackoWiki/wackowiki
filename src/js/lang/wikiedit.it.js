@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Usa intestazioni di riga',
 	Cell: 'Cella',
 	Header: 'Intestazione',
+	ToolsHelp: 'Strumenti E Aiuto',
 	SearchReplace: 'Cerca e sostituisci',
 	SearchFor: 'Cerca per:',
 	ReplaceWith: 'Sostituire con:',

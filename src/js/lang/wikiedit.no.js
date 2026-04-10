@@ -54,6 +54,7 @@ lang = {
 	UseRowHeaders: 'Bruk radoverskrifter',
 	Cell: 'Celle',
 	Header: 'Topptekst',
+	ToolsHelp: 'Verktøy & Hjelp',
 	SearchReplace: 'Søk og erstatt',
 	SearchFor: 'Søk etter:',
 	ReplaceWith: 'Erstatt med:',
