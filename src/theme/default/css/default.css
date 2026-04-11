@@ -1181,22 +1181,22 @@ a:target {
 /** Wikiedit-related (JavaScript) ********************************************/
 	/* WikiEdit Toolbar -------------------------------------- */
 
-#buttons_1 {
+.toolbar {
 	clear: none;
 	float: left;
 	padding: 0;
 }
-[dir=rtl] #buttons_1 {
+[dir=rtl] .toolbar {
 	float: right;
 }
 
-#buttons_1 li {
+.toolbar li {
 	float: left;
 	padding-right: 0.2em;
 	white-space: nowrap;
 	list-style: none outside none;
 }
-[dir=rtl] #buttons_1 li {
+[dir=rtl] .toolbar li {
 	float: right;
 }
 
@@ -1204,10 +1204,10 @@ a:target {
 	background: var(--ww-buttonface);
 }
 
-.toolbar .btn-,
-.toolbar .btn-hover,
-.toolbar .btn-active,
-.toolbar .btn-pressed {
+.toolbar button,
+.toolbar button:hover,
+.toolbar button:active,
+.toolbar button.btn-pressed {
 	background: var(--ww-buttonface);
 	color: var(--ww-buttontext);
 	border: 1px solid var(--ww-buttonface);
@@ -1216,16 +1216,16 @@ a:target {
 	cursor: pointer;
 }
 
-.toolbar .btn-hover {
+.toolbar button:hover {
 	border-color: var(--ww-buttonhighlight) var(--ww-buttonshadow) var(--ww-buttonshadow) var(--ww-buttonhighlight);
 }
 
-.toolbar .btn-active,
-.toolbar .btn-pressed {
+.toolbar button:active,
+.toolbar button.btn-pressed {
 	border-color: var(--ww-buttonshadow) var(--ww-buttonhighlight) var(--ww-buttonhighlight) var(--ww-buttonshadow);
 }
 
-.toolbar .btn-pressed {
+.toolbar button.btn-pressed {
 	background: var(--ww-buttonhighlight);
 }
 
@@ -1236,6 +1236,10 @@ a:target {
 	margin: 3px;
 	padding: 0;
 	width: 0;
+}
+
+.toolbar button {
+  transition: all 0.1s ease;
 }
 
 .toolbar img, 

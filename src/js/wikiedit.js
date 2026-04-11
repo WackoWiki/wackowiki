@@ -16,10 +16,8 @@ class WikiEdit extends ProtoEdit {
     this.end            = '##endpoint##';
     this.rend           = new RegExp(this.end);
     this.rendb          = new RegExp('^' + this.end);
-    this.enabled        = true;
     this.tab            = false;
     this.enterpressed   = false;
-    this.buttons        = [];
 
     // Single-form popups
     this.linkForm       = null;
@@ -49,7 +47,6 @@ class WikiEdit extends ProtoEdit {
     this._init(id);
 
     this.imagesPath = imgPath || 'image/';
-    this.actionName = `document.getElementById('${this.id}')._owner.insTag`;
 
     // Setup undo/redo
     this.area.addEventListener('beforeinput', this.handleBeforeInput.bind(this));
@@ -57,60 +54,61 @@ class WikiEdit extends ProtoEdit {
     const separator = '<li><div class="btn-separator"></div></li>';
 
     // Toolbar buttons
-    this.addButton('h2', lang.Heading2, "'===', '===', 0, 1");
-    this.addButton('h3', lang.Heading3, "'====', '====', 0, 1");
-    this.addButton('h4', lang.Heading4, "'=====', '=====', 0, 1");
-    this.addButton('h5', lang.Heading5, "'======', '======', 0, 1");
-    this.addButton('h6', lang.Heading6, "'=======', '=======', 0, 1");
+    this.addButton('h2', lang.Heading2, () => this.insTag('===', '===', 0, 1));
+    this.addButton('h3', lang.Heading3, () => this.insTag('====', '====', 0, 1));
+    this.addButton('h4', lang.Heading4, () => this.insTag('=====', '=====', 0, 1));
+    this.addButton('h5', lang.Heading5, () => this.insTag('======', '======', 0, 1));
+    this.addButton('h6', lang.Heading6, () => this.insTag('=======', '=======', 0, 1));
     this.addButton('customhtml', separator);
 
-    this.addButton('bold',       lang.Bold,          "'**', '**'");
-    this.addButton('italic',     lang.Italic,        "'//', '//'");
-    this.addButton('underline',  lang.Underline,     "'__', '__'");
-    this.addButton('strike',     lang.Strikethrough, "'--', '--'");
-    this.addButton('small',      lang.Small,         "'++', '++'");
-    this.addButton('code',       lang.Code,          "'##', '##'");
+    this.addButton('bold', lang.Bold, () => this.insTag('**', '**'));
+    this.addButton('italic', lang.Italic, () => this.insTag('//', '//'));
+    this.addButton('underline', lang.Underline, () => this.insTag('__', '__'));
+    this.addButton('strike', lang.Strikethrough, () => this.insTag('--', '--'));
+    this.addButton('small', lang.Small, () => this.insTag('++', '++'));
+    this.addButton('code', lang.Code, () => this.insTag('##', '##'));
     this.addButton('customhtml', separator);
 
-    this.addButton('ul', lang.List,         "'  * ', '', 0, 1, 1");
-    this.addButton('ol', lang.NumberedList, "'  1. ', '', 0, 1, 1");
+    this.addButton('ul', lang.List, () => this.insTag(' * ', '', 0, 1, 1));
+    this.addButton('ol', lang.NumberedList, () => this.insTag(' 1. ', '', 0, 1, 1));
     this.addButton('customhtml', separator);
 
-	this.addButton('center',  lang.Center,  '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%(wacko wrapper=text wrapper_align=center)')`);
-	this.addButton('right',   lang.Right,   '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%(wacko wrapper=text wrapper_align=right)')`);
-	this.addButton('justify', lang.Justify, '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%(wacko wrapper=text wrapper_align=justify)')`);
+    this.addButton('center', lang.Center, () => this.insBlockWrapper('%%(wacko wrapper=text wrapper_align=center)'));
+    this.addButton('right', lang.Right, () => this.insBlockWrapper('%%(wacko wrapper=text wrapper_align=right)'));
+    this.addButton('justify', lang.Justify, () => this.insBlockWrapper('%%(wacko wrapper=text wrapper_align=justify)'));
     this.addButton('customhtml', separator);
 
-    this.addButton('outdent', lang.Outdent, '', `document.getElementById('${this.id}')._owner.unindent`);
-    this.addButton('indent',  lang.Indent,  "'  ', '', 0, 1");
+    this.addButton('outdent', lang.Outdent, () => this.unindent());
+    this.addButton('indent', lang.Indent, () => this.insTag(' ', '', 0, 1));
     this.addButton('customhtml', separator);
 
-    this.addButton('quote',   lang.Quote,       "'<[', ']>', 2");
-    this.addButton('source', lang.CodeWrapper, '', `document.getElementById('${this.id}')._owner.insBlockWrapper('%%')`);
-    this.addButton('action',  lang.Action,      "'{{', '}}', 2");
-    this.addButton('textred', lang.MarkedText,  "'!!', '!!', 2");
-    this.addButton('highlight', lang.HighlightText, "'??', '??', 2");
+    this.addButton('quote', lang.Quote, () => this.insTag('<[', ']>', 2));
+    this.addButton('source', lang.CodeWrapper, () => this.insBlockWrapper('%%'));
+    this.addButton('action', lang.Action, () => this.insTag('{{', '}}', 2));
+    this.addButton('textred', lang.MarkedText, () => this.insTag('!!', '!!', 2));
+    this.addButton('highlight', lang.HighlightText, () => this.insTag('??', '??', 2));
     this.addButton('customhtml', separator);
 
-    this.addButton('hr',        lang.Line,       "'', '\\n----\\n', 2");
-    this.addButton('signature', lang.Signature,  "'::@::', ' ', 1");
-    this.addButton('createlink', lang.Hyperlink, '', `document.getElementById('${this.id}')._owner.createLink`);
+    this.addButton('hr', lang.Line, () => this.insTag('', '\n----\n', 2));
+    this.addButton('signature', lang.Signature, () => this.insTag('::@::', ' ', 1));
+    this.addButton('createlink', lang.Hyperlink, () => this.createLink());
 
     if (this.autocomplete) this.autocomplete.addButton();
 
-    this.addButton('footnote',   lang.Footnote,    "'[[^ ', ']]', 2");
-    this.addButton('createtable', lang.InsertTable, '', `document.getElementById('${this.id}')._owner.createTable`);
+    this.addButton('footnote', lang.Footnote, () => this.insTag('[[^ ', ']]', 2));
+    this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
 
+    // Dropdown (custom HTML)
     const dropdownHTML = `<li class="we-dropdown">
       <div class="btn-" title="${lang.ToolsHelp || 'Tools &amp; Help'}">
         <img src="${this.imagesPath}spacer.png" alt="▼">
       </div>
       <ul class="we-dropdown-menu">
-        <li class="we-search" onclick="document.getElementById('${this.id}')._owner.showFindReplace()">
+        <li class="we-search">
           <img src="${this.imagesPath}spacer.png" alt="🔎" title="${lang.SearchReplace}" style="margin-right:6px;">
         </li>
-        <li class="we-about" onclick="document.getElementById('${this.id}')._owner.showHelpModal()">
+        <li class="we-about">
           <img src="${this.imagesPath}spacer.png" alt="?" title="${lang.HelpAbout}" style="margin-right:6px;">
         </li>
       </ul>
@@ -119,16 +117,25 @@ class WikiEdit extends ProtoEdit {
     this.addButton('customhtml', dropdownHTML);
 
     // Build toolbar
-    try {
-      const toolbar = document.createElement('div');
-      toolbar.id = `tb_${this.id}`;
-      this.area.parentNode.insertBefore(toolbar, this.area);
-      document.getElementById(`tb_${this.id}`).innerHTML = this.createToolbar(1);
-	  
-	  if (this.autocomplete) {
-	      this.autocomplete.attachDropdown();
-	    }
-    } catch {}
+    const toolbarContainer = document.createElement('div');
+    toolbarContainer.id = `tb_${this.id}`;
+    this.area.parentNode.insertBefore(toolbarContainer, this.area);
+
+    const toolbar = this.createToolbar();           // new ProtoEdit returns real DOM <ul>
+    toolbarContainer.appendChild(toolbar);
+
+    // Attach click listeners to dropdown items (no more inline onclick / _owner)
+    const dropdown = toolbar.querySelector('.we-dropdown');
+    if (dropdown) {
+      const searchItem = dropdown.querySelector('.we-search');
+      const aboutItem  = dropdown.querySelector('.we-about');
+      if (searchItem) searchItem.addEventListener('click', () => this.showFindReplace());
+      if (aboutItem)  aboutItem.addEventListener('click', () => this.showHelpModal());
+    }
+
+    if (this.autocomplete) {
+      this.autocomplete.attachDropdown();
+    }
 
     // ====================== AUTOSAVE SETUP ======================
     this.setupAutosave();
@@ -435,7 +442,7 @@ class WikiEdit extends ProtoEdit {
   // ====================== EVENT HANDLING ======================
 
   keyDown(e) {
-    if (!this.enabled) return;
+    if (!this.enabled) return true;
 
     if (!e) e = window.event;
 
@@ -444,126 +451,102 @@ class WikiEdit extends ProtoEdit {
     let justenter = false;
     let noscroll = false;
 
-    let Key = e.keyCode || e.key;
-
-    if (e.altKey && !e.ctrlKey) Key += 4096;
-    if (e.ctrlKey) Key += 2048;
-
-    // Prevent default for our own hotkeys on keypress
-    if (e.type === 'keypress' && this.checkKey?.(Key)) {
+    // Modern prevention using ProtoEdit's isHandledKey (no more magic numbers)
+    if (e.type === 'keydown' && this.isHandledKey(e)) {
       e.preventDefault();
       return false;
     }
 
-    if (e.type === 'keyup' && (Key === 9 || Key === 13)) return false;
+    if (e.type === 'keyup' && (e.key === 'Tab' || e.key === 'Enter')) return false;
 
     const scroll = t.scrollTop;
 
     // Take autocomplete first
     if (this.autocomplete.keyDown(e)) {
       res = true;
-      Key = -1;
     }
 
-    switch (Key) {
-      case 2138: // Ctrl+Z (Undo) / Ctrl+Shift+Z (Redo)
-        const success = e.shiftKey ? this.redo() : this.undo();
-        if (success) {
-          res = true;
-          noscroll = true; // undo/redo already restored scroll – prevent overwrite
-        }
-        break;
+    // ====================== MODERN KEY HANDLING ======================
+    const ctrl = e.ctrlKey;
+    const alt  = e.altKey;
+    const shift = e.shiftKey;
+    const key   = e.key.toLowerCase();
 
-      case 2118: // Ctrl+F → Find/Replace
-        this.showFindReplace();
+    if (ctrl && key === 'z') {
+      const success = shift ? this.redo() : this.undo();
+      if (success) {
         res = true;
-        break;
+        noscroll = true;
+      }
+    } else if (ctrl && key === 'f') {
+      this.showFindReplace();
+      res = true;
+    } else if (e.key === 'Tab' || (alt && (key === 'u' || key === 'i'))) {
+      if (this.tab || e.key !== 'Tab') {
+        res = shift || (alt && key === 'u')
+          ? this.unindent()
+          : this.insTag(' ', '', 0, 1);
+      }
+    } else if (ctrl && /^[1-6]$/.test(key)) {
+      const level = parseInt(key);
+      const tag = '='.repeat(level + 1);
+      res = this.insTag(tag, tag, 0, 1);
+    } else if (key === '=' && this.sel) {
+      res = this.insTag('++', '++');
+    } else if (key === '_' && ctrl) {
+      res = this.insTag('', '\n----\n', 2);
+    } else if (ctrl && this.sel) {
+      if (key === 'b') res = this.insTag('**', '**');
+      else if (key === 's') res = this.insTag('--', '--');
+      else if (key === 'u') res = this.insTag('__', '__');
+      else if (key === 'i') res = this.insTag('//', '//');
+      else if (key === 'j') res = this.insTag('!!', '!!', 2);
+      else if (key === 'h') res = this.insTag('??', '??', 2);
+    } else if (alt && key === 's') {
+      try { if (typeof weSave === 'function') weSave(); } catch {}
+    } else if ((ctrl || alt) && key === 'l') {
+      if (shift && ctrl) {
+        res = this.insTag(' * ', '', 0, 1, 1);
+      } else {
+        res = this.createLink(alt);
+      }
+    } else if (ctrl && shift && (key === 'n' || key === 'o')) {
+      res = this.insTag(' 1. ', '', 0, 1, 1);
+    } else if (e.key === 'Enter' && !e.shiftKey) {
+      // (Enter auto-list logic – unchanged, only the key detection is modernized)
+      const text = t.value.replace(/\r/g, '');
+      const sel1 = text.slice(0, t.selectionStart);
+      const sel2 = text.slice(t.selectionEnd);
 
-      case 9: // Tab
-      case 4181: // Alt+U
-      case 4169: // Alt+I
-        if (this.tab || Key !== 9) {
-          res = e.shiftKey || Key === 4181
-            ? this.unindent()
-            : this.insTag('  ', '', 0, 1);
-        }
-        break;
+      const re = new RegExp('(^|\n)(( +)((([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\\r\\n]') + '*)' + '$', 'u');
+      const q = sel1.match(re);
 
-      case 2097: res = this.insTag('==', '==', 0, 1); break;     // 1
-      case 2098: res = this.insTag('===', '===', 0, 1); break;   // 2
-      case 2099: res = this.insTag('====', '====', 0, 1); break; // 3
-      case 2100: res = this.insTag('=====', '=====', 0, 1); break;// 4
-      case 2101: res = this.insTag('======', '======', 0, 1); break;// 5
-
-      case 2109: if (this.sel) res = this.insTag('++', '++'); break; // =
-      case 2143: res = this.insTag('', '\n----\n', 2); break;        // _
-      case 2114: if (this.sel) res = this.insTag('**', '**'); break; // B
-      case 2131: if (this.sel) res = this.insTag('--', '--'); break; // S
-      case 2133: if (this.sel) res = this.insTag('__', '__'); break; // U
-      case 2121: if (this.sel) res = this.insTag('//', '//'); break; // I
-      case 2122: if (this.sel) res = this.insTag('!!', '!!', 2); break; // J
-      case 2120: if (this.sel) res = this.insTag('??', '??', 2); break; // H
-
-      case 4179: // Alt+S
-        try { if (typeof weSave === 'function') weSave(); } catch {}
-        break;
-
-      case 2124: // L / Ctrl+Alt+L
-      case 4172:
-        if (e.shiftKey && e.ctrlKey) {
-          res = this.insTag('  * ', '', 0, 1, 1);
-        } else if (e.altKey || e.ctrlKey) {
-          res = this.createLink(e.altKey);
-        }
-        break;
-
-      case 2127: // O
-      case 2126: // N
-        if (e.ctrlKey && e.shiftKey) res = this.insTag('  1. ', '', 0, 1, 1);
-        break;
-
-      case 13: // Enter
-      case 2061:
-      case 4109:
-        if (e.ctrlKey) {
-          try { if (typeof weSave === 'function') weSave(); } catch {}
-        } else if (!e.shiftKey) {
-          const text = t.value.replace(/\r/g, '');
-          const sel1 = text.slice(0, t.selectionStart);
-          const sel2 = text.slice(t.selectionEnd);
-
-          const re = new RegExp('(^|\n)(( +)((([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\\r\\n]') + '*)' + '$', 'u');
-          const q = sel1.match(re);
-
-          if (q) {
-            let prefix = q[2];
-            if (!this.enterpressed) {
-              if (q[3].length % 2 === 1) {
-                prefix = '';
-              } else {
-                const numRe = /([1-9]\d*)([.]|[)])/;
-                const q2 = q[2].match(numRe);
-                if (q2) prefix = q[2].replace(numRe, String(Number(q2[1]) + 1) + q2[2]);
-              }
-            }
-
-            this.pushState();
-            t.value = sel1 + '\n' + prefix + sel2;
-            const newSel = sel1.length + 1 + prefix.length;
-            t.setSelectionRange(newSel, newSel);
-
-            // Scroll adjustment
-            const lines = text.slice(0, newSel).split('\n').length - 1;
-            const total = t.value.split('\n').length - 1;
-            if (scroll + t.offsetHeight + 25 > Math.floor((t.scrollHeight / (total + 1)) * lines)) {
-              t.scrollTop = Math.floor((t.scrollHeight / (total + 1)) * lines) - t.offsetHeight + 20;
-              noscroll = true;
-            }
-            res = true;
+      if (q) {
+        let prefix = q[2];
+        if (!this.enterpressed) {
+          if (q[3].length % 2 === 1) {
+            prefix = '';
+          } else {
+            const numRe = /([1-9]\d*)([.]|[)])/;
+            const q2 = q[2].match(numRe);
+            if (q2) prefix = q[2].replace(numRe, String(Number(q2[1]) + 1) + q2[2]);
           }
-          justenter = true;
         }
-        break;
+
+        this.pushState();
+        t.value = sel1 + '\n' + prefix + sel2;
+        const newSel = sel1.length + 1 + prefix.length;
+        t.setSelectionRange(newSel, newSel);
+
+        const lines = text.slice(0, newSel).split('\n').length - 1;
+        const total = t.value.split('\n').length - 1;
+        if (scroll + t.offsetHeight + 25 > Math.floor((t.scrollHeight / (total + 1)) * lines)) {
+          t.scrollTop = Math.floor((t.scrollHeight / (total + 1)) * lines) - t.offsetHeight + 20;
+          noscroll = true;
+        }
+        res = true;
+      }
+      justenter = true;
     }
 
     this.enterpressed = justenter;
@@ -1023,6 +1006,12 @@ class WikiEdit extends ProtoEdit {
     document.body.appendChild(modal);
 
     this.helpModal = { modal };
+
+    // Replace legacy inline onclick with clean event listener
+    const closeBtn = dialog.querySelector('button');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.hideHelpModal());
+    }
   }
 
   // ====================== FIND / REPLACE FEATURE ======================
