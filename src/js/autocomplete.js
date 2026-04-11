@@ -5,13 +5,22 @@
  */
 
 class AutoComplete {
+    // Private fields
+    #debounceTimer = null;
+    #abortController = null;
+    #containerLi = null;
+    #buttonEl = null;
+    #resetLi = null;
+    #dropdownEl = null;
+    #selectedIndex = -1;
+
     constructor(wikiedit, handler) {
         this.wikiedit = wikiedit;
         this.handler = handler;
 
         wikiedit.autocomplete = this;
 
-        this.interval = 500;           // debounce delay
+        this.interval = 500;
         this.request_pattern = null;
         this.found_pattern = null;
         this.found_patterns = [];
@@ -23,34 +32,41 @@ class AutoComplete {
         this.regexp_LinkCamel = /[\p{Ll}.\d]\p{Lu}/u;
         this.regexp_LinkStrict = /^([(\[]){2}.{2,}/;
         this.regexp_LinkSubpage = /^!\/.{2,}/;
-
-        this.#debounceTimer = null;
     }
 
-    // Private debounce timer
-    #debounceTimer = null;
-
-    // Add toolbar button (modern template literal)
+    // ─────────────────────────────────────────────────────────────
+    // Toolbar + floating dropdown
+    // ─────────────────────────────────────────────────────────────
     addButton() {
         const we = this.wikiedit;
         this.id = `autocomplete_${we.id}`;
 
         const html = `
-            <li id="${this.id}_li" style="display:none;">
-                <div style="font:bold 12px Arial; margin:0; padding:3px 3px 4px 4px;" id="${this.id}"
-                     class="btn-"
+            <li id="${this.id}_li" style="position:relative; display:none;">
+                <div id="${this.id}"
+                     class="we-autocomplete-btn"
                      onclick="document.getElementById('${we.id}')._owner.autocomplete.insertFound(); return false;"
-                     title="Insert Autocomplete">
+                     title="Insert best match">
                     Autocomplete
                 </div>
+                <ul id="${this.id}_dropdown" class="we-autocomplete-dropdown" style="display:none;"></ul>
             </li>
             <li id="${this.id}_reset" style="display:none;">
-                <div style="font:12px Arial; padding:3px 3px 4px 4px;" class="btn-"
+                <div class="we-autocomplete-reset-btn"
                      onclick="document.getElementById('${we.id}')._owner.autocomplete.reset(); return false;"
                      title="Hide Autocomplete">&times;</div>
             </li>`;
 
         we.addButton('customhtml', html);
+        // DO NOT capture DOM here anymore – toolbar not built yet
+    }
+
+    /** Called by WikiEdit AFTER toolbar is inserted into DOM */
+    attachDropdown() {
+        this.#containerLi = document.getElementById(`${this.id}_li`);
+        this.#buttonEl = document.getElementById(this.id);
+        this.#resetLi = document.getElementById(`${this.id}_reset`);
+        this.#dropdownEl = document.getElementById(`${this.id}_dropdown`);
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -68,7 +84,6 @@ class AutoComplete {
     insertFound() {
         if (!this.request_pattern) return;
 
-        const state = this.visual_state;
         this.visualState('hidden');
 
         this.wikiedit.area.focus();
@@ -92,13 +107,95 @@ class AutoComplete {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // Key handler (called from WikiEdit.keyDown)
+    // Dropdown
     // ─────────────────────────────────────────────────────────────
-    keyDown(key, shiftKey) {
+
+    insertSuggestion(suggestion) {
+        this.found_pattern = suggestion;
+        this.insertFound();
+    }
+
+    #renderDropdown() {
+        if (!this.#dropdownEl || this.found_patterns.length === 0) {
+            this.#hideDropdown();
+            return;
+        }
+
+        this.#dropdownEl.innerHTML = '';
+
+        this.found_patterns.forEach((suggestion, index) => {
+            const liEl = document.createElement('li');
+            liEl.className = 'we-autocomplete-dropdown-item';
+            liEl.textContent = suggestion;
+
+            if (index === this.#selectedIndex) {
+                liEl.classList.add('selected');
+            }
+
+            // Hover for keyboard navigation
+            liEl.addEventListener('mouseover', () => {
+                this.#selectedIndex = index;
+                this.#renderDropdown();
+            });
+
+            // Inline onclick – exactly like the green button (this is what was missing)
+            const safeSuggestion = suggestion.replace(/'/g, "\\'");
+            liEl.setAttribute('onclick', `document.getElementById('${this.wikiedit.id}')._owner.autocomplete.insertSuggestion('${safeSuggestion}'); return false;
+            `);
+
+            this.#dropdownEl.appendChild(liEl);
+        });
+
+        this.#dropdownEl.style.display = 'block';
+    }
+
+    #hideDropdown() {
+        if (this.#dropdownEl) {
+            this.#dropdownEl.style.display = 'none';
+        }
+        this.#selectedIndex = -1;
+    }
+
+    #insertSuggestion(suggestion) {
+        this.found_pattern = suggestion;
+        this.insertFound(); // reuses existing logic + resets everything
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Key handler
+    // ─────────────────────────────────────────────────────────────
+    keyDown(e) {
+        const key = e.keyCode;
+        const shiftKey = e.shiftKey;
+        const isDropdownVisible = this.#dropdownEl && this.#dropdownEl.style.display === 'block';
+
         // Arrow / Enter / Escape when a suggestion is active
         if (this.found_pattern !== null) {
+            if (isDropdownVisible) {
+                switch (key) {
+                    case 38: // Up
+                        this.#selectedIndex = Math.max(0, this.#selectedIndex - 1);
+                        this.#renderDropdown();
+                        return true;
+                    case 40: // Down
+                        this.#selectedIndex = Math.min(this.found_patterns.length - 1, this.#selectedIndex + 1);
+                        this.#renderDropdown();
+                        return true;
+                    case 13: // Enter
+                        if (this.#selectedIndex >= 0) {
+                            this.#insertSuggestion(this.found_patterns[this.#selectedIndex]);
+                            return true;
+                        }
+                        break; // fall through to default Enter behavior if nothing selected
+                    case 27: // Escape
+                        this.reset();
+                        return true;
+                }
+            }
+
+            // Default behavior when no dropdown or no selection in dropdown
             switch (key) {
-                case 13: // Enter
+                case 13: // Enter on best-match button
                     if (shiftKey) {
                         this.reset();
                         return false;
@@ -116,7 +213,7 @@ class AutoComplete {
         }
 
         // Ctrl+Space = magic mode (force autocomplete)
-        if (!this.found_pattern && key === 32 && (event?.ctrlKey || event?.metaKey)) {
+        if (!this.found_pattern && key === 32 && (e.ctrlKey || e.metaKey)) {
             const pattern = this.checkPattern(this.getPattern(), true);
             if (pattern) {
                 this.request_pattern = pattern;
@@ -127,7 +224,10 @@ class AutoComplete {
         }
 
         // Normal typing of wiki-link characters
-        const isLinkChar = (key === 192 || key === 189 || (key >= 48 && key <= 57) || (key >= 65 && key <= 90) || this.request_pattern);
+        const isLinkChar = (key === 192 || key === 189 ||
+                           (key >= 48 && key <= 57) ||
+                           (key >= 65 && key <= 90) ||
+                           !!this.request_pattern);
 
         if (isLinkChar) {
             const pattern = this.getPattern();
@@ -176,6 +276,14 @@ class AutoComplete {
         this.found_patterns = all_patterns || [];
 
         this.visualState(this.found_pattern ? 'found' : '404');
+
+        // Show floating dropdown ONLY when there are additional suggestions
+        if (this.found_pattern && this.found_patterns.length > 0) {
+            this.#selectedIndex = 0;
+            this.#renderDropdown();
+        } else {
+            this.#hideDropdown();
+        }
     }
 
     // Check if the current text looks like a WikiName
@@ -225,67 +333,84 @@ class AutoComplete {
 
     // Update toolbar button appearance
     visualState(to) {
-        const li = document.getElementById(`${this.id}_li`);
-        const reset = document.getElementById(`${this.id}_reset`);
-        const ac = document.getElementById(this.id);
+        if (!this.#containerLi || !this.#buttonEl) return;
 
-        if (!li || !ac) return;
+        const li = this.#containerLi;
+        const ac = this.#buttonEl;
+        const reset = this.#resetLi;
 
         switch (to) {
             case 'seeking':
                 li.style.display = '';
                 reset.style.display = '';
                 ac.innerHTML = '...';
-                ac.style.color = '#888888';
-                ac.style.backgroundColor = '';
+                ac.className = 'we-autocomplete-btn seeking';
+                this.#hideDropdown();
                 break;
 
             case 'found':
                 li.style.display = '';
                 reset.style.display = '';
                 ac.innerHTML = this.found_pattern;
-                ac.style.color = '#ffffff';
-                ac.style.backgroundColor = '#00cc00';
+                ac.className = 'we-autocomplete-btn found';
                 break;
 
             case '404':
                 li.style.display = '';
                 reset.style.display = '';
                 ac.innerHTML = this.request_pattern;
-                ac.style.color = '#ffffff';
-                ac.style.backgroundColor = '#FF0000';
+                ac.className = 'we-autocomplete-btn notfound';
+                this.#hideDropdown();
                 break;
 
             case 'hidden':
                 li.style.display = 'none';
                 reset.style.display = 'none';
+                this.#hideDropdown();
+                ac.className = 'we-autocomplete-btn';
                 break;
         }
 
         this.visual_state = to;
     }
 
-    // Modern AJAX with fetch
+    // Modern AJAX with fetch + AbortController
     async requestPattern(pattern) {
+        // Cancel any previous pending request
+        this.#abortController?.abort();
+        this.#abortController = new AbortController();
+        const signal = this.#abortController.signal;
+
         const href = `${this.handler}${
             this.handler.includes('?') ? '&' : '?'
         }q=${encodeURIComponent(pattern)}&ta_id=${encodeURIComponent(this.wikiedit.area.id)}&_autocomplete=1&rnd=${Math.random()}`;
 
         try {
-            const response = await fetch(href);
+            const response = await fetch(href, { signal });
+
             if (!response.ok) throw new Error('Network error');
 
             const text = await response.text();
-            const items = text.split('~~~').filter(Boolean);
+            const rawItems = text.split('~~~').map(i => i.trim()).filter(Boolean);
 
-            const found = items[0] || false;
-            const suggestions = items.slice(1);
+            let bestMatch = null;
+            let suggestions = [];
 
-            // Call finish inside the class (no more global launchFinishComplete)
-            this.finishComplete(found, suggestions);
+            if (rawItems.length > 0) {
+                if (rawItems[0] === 'postText') {
+                    bestMatch = rawItems[1] || null;
+                    suggestions = rawItems.slice(2);
+                } else {
+                    bestMatch = rawItems[0];
+                    suggestions = rawItems.slice(1);
+                }
+            }
+
+            this.finishComplete(bestMatch, suggestions);
         } catch (err) {
+            if (err.name === 'AbortError') return;
             console.warn('Autocomplete request failed:', err);
-            this.finishComplete(false, []);
+            this.finishComplete(null, []);
         }
     }
 }

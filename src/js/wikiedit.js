@@ -124,6 +124,10 @@ class WikiEdit extends ProtoEdit {
       toolbar.id = `tb_${this.id}`;
       this.area.parentNode.insertBefore(toolbar, this.area);
       document.getElementById(`tb_${this.id}`).innerHTML = this.createToolbar(1);
+	  
+	  if (this.autocomplete) {
+	      this.autocomplete.attachDropdown();
+	    }
     } catch {}
 
     // ====================== AUTOSAVE SETUP ======================
@@ -456,7 +460,7 @@ class WikiEdit extends ProtoEdit {
     const scroll = t.scrollTop;
 
     // Take autocomplete first
-    if (this.autocomplete?.keyDown(Key, e.shiftKey)) {
+    if (this.autocomplete.keyDown(e)) {
       res = true;
       Key = -1;
     }
