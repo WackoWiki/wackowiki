@@ -451,12 +451,26 @@ class WikiEdit extends ProtoEdit {
     let justenter = false;
     let noscroll = false;
 
+	// ─────────────────────────────────────────────────────────────
+	// 1. Early exit for keyup events
+	//    (we only want to run shortcut logic on keydown)
+	// ─────────────────────────────────────────────────────────────
+	if (e.type === 'keyup') {
+	  if (e.key === 'Tab' || e.key === 'Enter') return false;
+	    return;                     // skip the rest of the function on keyup
+	}
+
+	// From here on we are guaranteed to be in a keydown event
+	const scroll = t.scrollTop;
+
+	// Refresh current selection state so "this.sel" checks are accurate
+	// (this fixes stale-selection bugs that existed even in the original code)
+	this.getDefines();
+
     if (e.type === 'keyup' && (e.key === 'Tab' || e.key === 'Enter')) return false;
 
-    const scroll = t.scrollTop;
-
     // Take autocomplete first
-    if (this.autocomplete.keyDown(e)) {
+    if (this.autocomplete?.keyDown(e)) {
       res = true;
     }
 
