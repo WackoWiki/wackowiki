@@ -992,7 +992,7 @@ class WikiEdit extends ProtoEdit {
         <pre style="white-space:pre-wrap;font-size:0.95em;line-height:1.4;">${lang.HelpAboutTip || ''}</pre>
       </div>
       <div class="we-modal-footer">
-        <button type="button" onclick="document.getElementById('${this.id}')._owner.hideHelpModal()" class="we-btn">Close</button>
+        <button type="button" class="we-btn">Close</button>
       </div>
     `;
 
