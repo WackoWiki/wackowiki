@@ -444,8 +444,6 @@ class WikiEdit extends ProtoEdit {
   keyDown(e) {
     if (!this.enabled) return true;
 
-    if (!e) e = window.event;
-
     const t = this.area;
     let res = false;
     let justenter = false;

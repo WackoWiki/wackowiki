@@ -1653,6 +1653,64 @@ a:target {
     background-color: #e6f0ff;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   AutoComplete Dropdown – CSS positioning & styling
+   ───────────────────────────────────────────────────────────── */
+.we-autocomplete-container {
+    position: relative;           /* ← Key: makes dropdown position relative to this li */
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.we-autocomplete-dropdown {
+    position: absolute;           /* ← Key: absolute positioning */
+    top: 100%;                    /* directly below the button */
+    left: 0;
+    z-index: 10000;
+    display: none;                /* JS will toggle visibility */
+    
+    /* Visual polish */
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    /* min-width: 220px; */             /* comfortable width for suggestions */
+    max-height: 320px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 4px 0;
+    margin: 2px 0 0 0;
+    font-size: 0.95em;
+}
+
+.we-autocomplete-dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.we-autocomplete-dropdown-item:hover,
+.we-autocomplete-dropdown-item.selected {
+    background: #f0f4f9;
+}
+
+/* Optional: make the main autocomplete button look nicer */
+.we-autocomplete-btn {
+    padding: 4px 10px;
+    font-size: 0.9em;
+}
+.we-autocomplete-btn.found   { background: #e6f3e6; color: #006400; }
+.we-autocomplete-btn.notfound{ background: #ffe6e6; color: #9f0000; }
+.we-autocomplete-btn.seeking { background: #fff3e6; animation: pulse 1.5s infinite; }
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+}
+
 
 /* CSS form formatter */
 .cssform p {
