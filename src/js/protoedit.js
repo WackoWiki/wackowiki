@@ -45,27 +45,6 @@ class ProtoEdit {
     return true;
   }
 
-  /** Modern key-check helper (replaces legacy checkKey with magic numbers) */
-  isHandledKey(ev) {
-    const { ctrlKey, altKey, shiftKey, key } = ev;
-    const k = key.toUpperCase();
-
-    return (
-      // Alt+U, Alt+I
-      (altKey && (k === 'U' || k === 'I')) ||
-      // Ctrl+1…6
-      (ctrlKey && /^[1-6]$/.test(k)) ||
-      // Alt+L, Ctrl+L
-      (altKey && k === 'L') || (ctrlKey && k === 'L') ||
-      // Ctrl+N, Ctrl+O, Ctrl+B, Ctrl+S, Ctrl+U, Ctrl+H, Ctrl+I, Ctrl+J, Ctrl+T
-      (ctrlKey && ['N','O','B','S','U','H','I','J','T'].includes(k)) ||
-      // = (quick link?)
-      (k === '=') ||
-      // Shift + various (L/N/O/B/S/U/I/H/J)
-      (shiftKey && ['L','N','O','B','S','U','I','H','J'].includes(k))
-    );
-  }
-
   /** Simple inline tag insertion (unchanged – already excellent) */
   insTag(open, close, newLine = 0, expand = 0) {
     const area = this.area;

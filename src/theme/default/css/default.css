@@ -1351,7 +1351,7 @@ a:target {
 .toolbar li.we-about img {
 	background: url('../../../image/wikiedit/light/about.svg') no-repeat;
 }
-.toolbar li.we-dropdown > div img {
+.toolbar li.we-dropdown > button img {
 	background: url('../../../image/wikiedit/light/open-more.svg') no-repeat;
 }
 .toolbar li.we-help img {

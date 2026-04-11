@@ -101,9 +101,9 @@ class WikiEdit extends ProtoEdit {
 
     // Dropdown (custom HTML)
     const dropdownHTML = `<li class="we-dropdown">
-      <div class="btn-" title="${lang.ToolsHelp || 'Tools &amp; Help'}">
+      <button type="button" class="btn-" title="${lang.ToolsHelp || 'Tools &amp; Help'}">
         <img src="${this.imagesPath}spacer.png" alt="▼">
-      </div>
+      </button>
       <ul class="we-dropdown-menu">
         <li class="we-search">
           <img src="${this.imagesPath}spacer.png" alt="🔎" title="${lang.SearchReplace}" style="margin-right:6px;">
@@ -450,12 +450,6 @@ class WikiEdit extends ProtoEdit {
     let res = false;
     let justenter = false;
     let noscroll = false;
-
-    // Modern prevention using ProtoEdit's isHandledKey (no more magic numbers)
-    if (e.type === 'keydown' && this.isHandledKey(e)) {
-      e.preventDefault();
-      return false;
-    }
 
     if (e.type === 'keyup' && (e.key === 'Tab' || e.key === 'Enter')) return false;
 
