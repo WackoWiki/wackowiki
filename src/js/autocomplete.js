@@ -111,8 +111,7 @@ class AutoComplete {
     // ─────────────────────────────────────────────────────────────
 
     insertSuggestion(suggestion) {
-        this.found_pattern = suggestion;
-        this.insertFound();
+        this.#insertSuggestion(suggestion);
     }
 
     #renderDropdown() {
@@ -138,10 +137,18 @@ class AutoComplete {
                 this.#renderDropdown();
             });
 
-            // Inline onclick – exactly like the green button (this is what was missing)
+            // Modern click handler (backup)
+            liEl.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                e.stopPropagation();
+                this.insertSuggestion(suggestion);
+            });
+
+            // INLINE ONCLICK
             const safeSuggestion = suggestion.replace(/'/g, "\\'");
-            liEl.setAttribute('onclick', `document.getElementById('${this.wikiedit.id}')._owner.autocomplete.insertSuggestion('${safeSuggestion}'); return false;
-            `);
+            const onclickStr = "document.getElementById('" + this.wikiedit.id + "')._owner.autocomplete.insertSuggestion('" + safeSuggestion + "'); return false;";
+            liEl.setAttribute('onclick', onclickStr);
 
             this.#dropdownEl.appendChild(liEl);
         });

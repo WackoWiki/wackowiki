@@ -64,5 +64,5 @@ lang = {
 	FindNext: 'Znajdź następny',
 	Replace: 'Zamień',
 	ReplaceAll: 'Zastąp wszystko',
-	HelpAboutTip: ' Skrótów:\n' + ' Ctrl+B - Pogrubienie\n' + ' Ctrl+I - Pochylenie\n' + ' Ctrl+U - Podkreślenie\n' + ' Ctrl+Shift+S - Przekreślenie\n' + ' Ctrl+Shift+1 .. 4 - Nagłówek 1..4\n' + ' Alt+I or Ctrl+T - Wcięcie\n' + ' Alt+U or Ctrl+Shift+T - Wysunięcie\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link z opisem\n' + ' Ctrl+Shift+L - Nieuporządkowana lista\n' + ' Ctrl+Shift+N - Lista uporządkowana\n' + ' Ctrl+Shift+O - Lista uporządkowana\n' + ' Ctrl+= - Mały tekst\n' + ' Ctrl+Shift+Minus - Linia pozioma\n' + ' \n'
+	HelpAboutTip: ' Skrótów:\n' + ' Ctrl+B - Pogrubienie\n' + ' Ctrl+I - Pochylenie\n' + ' Ctrl+U - Podkreślenie\n' + ' Ctrl+Shift+S - Przekreślenie\n' + ' Ctrl+Shift+1 .. 5 - Nagłówek 1..5\n' + ' Alt+I or Ctrl+T - Wcięcie\n' + ' Alt+U or Ctrl+Shift+T - Wysunięcie\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link z opisem\n' + ' Ctrl+Shift+L - Nieuporządkowana lista\n' + ' Ctrl+Shift+N - Lista uporządkowana\n' + ' Ctrl+Shift+O - Lista uporządkowana\n' + ' Ctrl+= - Mały tekst\n' + ' Ctrl+Shift+Minus - Linia pozioma\n' + ' \n'
 };

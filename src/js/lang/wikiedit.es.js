@@ -64,5 +64,5 @@ lang = {
 	FindNext: 'Buscar Siguiente',
 	Replace: 'Reemplazar',
 	ReplaceAll: 'Reemplazar todo',
-	HelpAboutTip: ' Teclas rápidas:\n' + ' Ctrl+B - Negrita\n' + ' Ctrl+I - Cursivo\n' + ' Ctrl+U - Subrayado\n' + ' Ctrl+Shift+S - Tachado\n' + ' Ctrl+Shift+1 .. 4 - Título 1..4\n' + ' Alt+I or Ctrl+T - Sangría\n' + ' Alt+U or Ctrl+Shift+T - Sin sangría\n' + ' Ctrl+J - Margen (!!)\n' + ' Ctrl+H - Margen (??)\n' + ' Alt+L - Hipervínculo\n' + ' Ctrl+L - Hipervínculo con descripción\n' + ' Ctrl+Shift+L - Lista desordenada\n' + ' Ctrl+Shift+N - Lista ordenada\n' + ' Ctrl+Shift+O - Lista ordenada\n' + ' Ctrl+= - Texto pequeño\n' + ' Ctrl+Shift+Minus - Linea horizontal\n' + ' \n'
+	HelpAboutTip: ' Teclas rápidas:\n' + ' Ctrl+B - Negrita\n' + ' Ctrl+I - Cursivo\n' + ' Ctrl+U - Subrayado\n' + ' Ctrl+Shift+S - Tachado\n' + ' Ctrl+Shift+1 .. 5 - Título 1..5\n' + ' Alt+I or Ctrl+T - Sangría\n' + ' Alt+U or Ctrl+Shift+T - Sin sangría\n' + ' Ctrl+J - Margen (!!)\n' + ' Ctrl+H - Margen (??)\n' + ' Alt+L - Hipervínculo\n' + ' Ctrl+L - Hipervínculo con descripción\n' + ' Ctrl+Shift+L - Lista desordenada\n' + ' Ctrl+Shift+N - Lista ordenada\n' + ' Ctrl+Shift+O - Lista ordenada\n' + ' Ctrl+= - Texto pequeño\n' + ' Ctrl+Shift+Minus - Linea horizontal\n' + ' \n'
 };

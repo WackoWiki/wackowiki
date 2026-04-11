@@ -64,5 +64,5 @@ lang = {
 	FindNext: 'Найти далее',
 	Replace: 'Заменить',
 	ReplaceAll: 'Заменить все',
-	HelpAboutTip: ' Сочетания клавиш:\n' + ' Ctrl+B - Жирный\n' + ' Ctrl+I - Курсив\n' + ' Ctrl+U - Подчеркнутый\n' + ' Ctrl+Shift+S - Зачеркнутый\n' + ' Ctrl+Shift+1 .. 4 - Заголовок 1..4\n' + ' Alt+I или Ctrl+T - Оступ\n' + ' Alt+U или Ctrl+Shift+T - Убрать отступ\n' + ' Ctrl+J - Красный текст\n' + ' Ctrl+H - Выделенный желтым текст\n' + ' Alt+L - Ссылка\n' + ' Ctrl+L - Ссылка с описанием\n' + ' Ctrl+Shift+L - Маркированный список\n' + ' Ctrl+Shift+N - Нумерованный список\n' + ' Ctrl+Shift+O - Нумерованный список\n' + ' Ctrl+= - Мелкий текст\n' + ' Ctrl+Shift+Минус - Горизонтальная линия\n' + ' \n'
+	HelpAboutTip: ' Сочетания клавиш:\n' + ' Ctrl+B - Жирный\n' + ' Ctrl+I - Курсив\n' + ' Ctrl+U - Подчеркнутый\n' + ' Ctrl+Shift+S - Зачеркнутый\n' + ' Ctrl+Shift+1 .. 5 - Заголовок 1..5\n' + ' Alt+I или Ctrl+T - Оступ\n' + ' Alt+U или Ctrl+Shift+T - Убрать отступ\n' + ' Ctrl+J - Красный текст\n' + ' Ctrl+H - Выделенный желтым текст\n' + ' Alt+L - Ссылка\n' + ' Ctrl+L - Ссылка с описанием\n' + ' Ctrl+Shift+L - Маркированный список\n' + ' Ctrl+Shift+N - Нумерованный список\n' + ' Ctrl+Shift+O - Нумерованный список\n' + ' Ctrl+= - Мелкий текст\n' + ' Ctrl+Shift+Минус - Горизонтальная линия\n' + ' \n'
 };

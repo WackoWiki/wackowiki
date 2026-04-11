@@ -74,7 +74,7 @@ lang = {
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
 							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
+							' Ctrl+Shift+1 .. 5 - Heading 1..5\n'+
 							' Alt+I or Ctrl+T - Indent\n'+
 							' Alt+U or Ctrl+Shift+T - Unindent\n'+
 							' Ctrl+J - MarkUp (!!)\n'+
