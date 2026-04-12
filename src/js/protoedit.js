@@ -85,11 +85,11 @@ class ProtoEdit {
     this.buttons.push({ name, desc, handler });
   }
 
-  /** Build toolbar as real DOM element (no more innerHTML + inline JS) */
+  /** Build toolbar as real DOM element */
   createToolbar() {
     const ul = document.createElement('ul');
     ul.id = `buttons_${this.id}`;
-    ul.className = 'toolbar';
+    ul.className = 'we-toolbar';                    // ← changed from 'toolbar'
     ul.setAttribute('role', 'toolbar');
     ul.setAttribute('aria-label', 'Editor toolbar');
 
@@ -103,7 +103,7 @@ class ProtoEdit {
 
       if (btn.name === 'customhtml') {
         const li = document.createElement('li');
-        li.innerHTML = btn.desc; // custom HTML still allowed
+        li.innerHTML = btn.desc; // custom HTML (dropdown, separators, etc.)
         ul.append(li);
         continue;
       }
@@ -111,33 +111,30 @@ class ProtoEdit {
       const li = document.createElement('li');
       li.className = `we-${btn.name}`;
 
-      const button = document.createElement('button'); // ← semantic + accessible
+      const button = document.createElement('button');
       button.type = 'button';
       button.className = 'btn-';
       button.title = btn.desc;
       button.setAttribute('aria-label', btn.desc);
 
-      // Icon (unchanged – CSS background-image on .we-xxx)
+      // Icon (unchanged – CSS background-image)
       const img = document.createElement('img');
       img.src = `${this.imagesPath}spacer.png`;
       img.alt = '';
       button.append(img);
 
-      // Click handler – clean, bound to instance
+      // Click handler
       button.addEventListener('click', (e) => {
         e.preventDefault();
-        button.classList.add('btn-pressed'); // optional visual feedback
+        button.classList.add('btn-pressed');
 
-        // Execute the registered handler
         if (typeof btn.handler === 'function') {
-          btn.handler.call(this); // 'this' = ProtoEdit instance
+          btn.handler.call(this);
         }
 
-        // Remove pressed state after a short delay (or let CSS :active handle it)
         setTimeout(() => button.classList.remove('btn-pressed'), 150);
       });
 
-      // Pure CSS hover/active – no onmouseover/onmouseout needed
       li.append(button);
       ul.append(li);
     }

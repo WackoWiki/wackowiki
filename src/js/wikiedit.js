@@ -125,6 +125,8 @@ class WikiEdit extends ProtoEdit {
     const toolbar = this.createToolbar();           // new ProtoEdit returns real DOM <ul>
     toolbarContainer.appendChild(toolbar);
 
+	toolbarContainer.className = 'we-toolbar-container';
+
 	// ====================== FULLSCREEN BUTTON SETUP (editor-only) ======================
 	const fsLi = toolbar.querySelector('li.we-fullscreen');
 	if (fsLi) {

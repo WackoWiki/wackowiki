@@ -1209,23 +1209,79 @@ a:target {
 /** Wikiedit-related (JavaScript) ********************************************/
 	/* WikiEdit Toolbar -------------------------------------- */
 
-.toolbar {
-	clear: none;
-	float: left;
+/* ====================== RESPONSIVE TOOLBAR ====================== */
+.we-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	/* gap: 4px; */
+	/* padding: 6px 8px; */
 	padding: 0;
-}
-[dir=rtl] .toolbar {
-	float: right;
+	background: #f8f8f8;
+	border: 1px solid #ccc;
+	/* border-radius: 4px; */
+	list-style: none;
+	/* margin: 0 0 8px 0; */
+	margin: 0;
 }
 
-.toolbar li {
-	float: left;
-	padding-right: 0.2em;
-	white-space: nowrap;
-	list-style: none outside none;
+.we-toolbar li {
+	margin: 0;
 }
-[dir=rtl] .toolbar li {
-	float: right;
+
+.we-toolbar .btn- {
+	/* width: 32px;
+	height: 32px; */
+	width: 28px;
+	height: 28px;
+	/* padding: 4px; */
+	padding: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #ccc;
+	background: #fff;
+	/* border-radius: 3px; */
+	transition: all 0.1s;
+}
+
+.we-toolbar .btn-:hover,
+.we-toolbar .btn-:focus {
+	background: #f0f0f0;
+	border-color: #999;
+	outline: 2px solid #007bff;
+	outline-offset: -2px;
+}
+
+.we-toolbar .btn-pressed {
+	background: #e0e0e0;
+	transform: scale(0.95);
+}
+
+/* Mobile / small screens – tighter, touch-friendly */
+@media (max-width: 768px) {
+	.we-toolbar {
+		gap: 3px;
+		padding: 4px;
+	}
+
+	.we-toolbar .btn- {
+		width: 28px;
+		height: 28px;
+		padding: 3px;
+		font-size: 0.9em; /* smaller icons if you ever add text */
+	}
+
+	/* Optional: make the whole editor toolbar container scrollable horizontally on very narrow screens */
+	/* (uncomment if you prefer scroll instead of multi-row wrap on tiny phones) */
+	/* .we-toolbar { flex-wrap: nowrap; overflow-x: auto; } */
+}
+
+/* Fullscreen mode – keep toolbar compact */
+.we-fullscreen[open] .we-toolbar,
+body:has(.we-fullscreen[open]) .we-toolbar {
+	padding: 4px 6px;
+	gap: 3px;
 }
 
 .toolbar li {
@@ -1257,7 +1313,7 @@ a:target {
 	background: var(--ww-buttonhighlight);
 }
 
-.toolbar .btn-separator {
+.we-toolbar .btn-separator {
 	border-left: 1px solid var(--ww-buttonshadow);
 	border-right: 1px solid var(--ww-buttonhighlight);
 	height: 20px;
@@ -1266,158 +1322,154 @@ a:target {
 	width: 0;
 }
 
-.toolbar button {
-  transition: all 0.1s ease;
-}
-
-.toolbar img, 
-.toolbar a img, 
-.toolbar span img {
+.we-toolbar img, 
+.we-toolbar a img, 
+.we-toolbar span img {
 	border: medium none;
 	height: 1.375rem;
 	width: 1.375rem;
 }
-.toolbar li img {
+.we-toolbar li img {
 	background-size: 1.375rem 1.375rem;
 }
-.toolbar li.we-h1 img {
+.we-toolbar li.we-h1 img {
 	background: url('../../../image/wikiedit/light/h1.svg') no-repeat;
 }
-.toolbar li.we-h2 img {
+.we-toolbar li.we-h2 img {
 	background: url('../../../image/wikiedit/light/h2.svg') no-repeat;
 }
-.toolbar li.we-h3 img {
+.we-toolbar li.we-h3 img {
 	background: url('../../../image/wikiedit/light/h3.svg') no-repeat;
 }
-.toolbar li.we-h4 img {
+.we-toolbar li.we-h4 img {
 	background: url('../../../image/wikiedit/light/h4.svg') no-repeat;
 }
-.toolbar li.we-h5 img {
+.we-toolbar li.we-h5 img {
 	background: url('../../../image/wikiedit/light/h5.svg') no-repeat;
 }
-.toolbar li.we-h6 img {
+.we-toolbar li.we-h6 img {
 	background: url('../../../image/wikiedit/light/h6.svg') no-repeat;
 }
-.toolbar li.we-bold img {
+.we-toolbar li.we-bold img {
 	background: url('../../../image/wikiedit/light/bold.svg') no-repeat;
 }
-.toolbar li.we-italic img {
+.we-toolbar li.we-italic img {
 	background: url('../../../image/wikiedit/light/italic.svg') no-repeat;
 }
-.toolbar li.we-underline img {
+.we-toolbar li.we-underline img {
 	background: url('../../../image/wikiedit/light/underline.svg') no-repeat;
 }
-.toolbar li.we-strike img {
+.we-toolbar li.we-strike img {
 	background: url('../../../image/wikiedit/light/strike.svg') no-repeat;
 }
-.toolbar li.we-small img {
+.we-toolbar li.we-small img {
 	background: url('../../../image/wikiedit/light/small.svg') no-repeat;
 }
-.toolbar li.we-superscript img {
+.we-toolbar li.we-superscript img {
 	background: url('../../../image/wikiedit/light/superscript.svg') no-repeat;
 }
-.toolbar li.we-subscript img {
+.we-toolbar li.we-subscript img {
 	background: url('../../../image/wikiedit/light/subscript.svg') no-repeat;
 }
-.toolbar li.we-ul img {
+.we-toolbar li.we-ul img {
 	background: url('../../../image/wikiedit/light/ul.svg') no-repeat;
 }
-.toolbar li.we-ol img {
+.we-toolbar li.we-ol img {
 	background: url('../../../image/wikiedit/light/ol.svg') no-repeat;
 }
-.toolbar li.we-center img {
+.we-toolbar li.we-center img {
 	background: url('../../../image/wikiedit/light/center.svg') no-repeat;
 }
-.toolbar li.we-justify img {
+.we-toolbar li.we-justify img {
 	background: url('../../../image/wikiedit/light/justify.svg') no-repeat;
 }
-.toolbar li.we-right img {
+.we-toolbar li.we-right img {
 	background: url('../../../image/wikiedit/light/right.svg') no-repeat;
 }
-.toolbar li.we-outdent img {
+.we-toolbar li.we-outdent img {
 	background: url('../../../image/wikiedit/light/outdent.svg') no-repeat;
 }
-.toolbar li.we-indent img {
+.we-toolbar li.we-indent img {
 	background: url('../../../image/wikiedit/light/indent.svg') no-repeat;
 }
-.toolbar li.we-hr img {
+.we-toolbar li.we-hr img {
 	background: url('../../../image/wikiedit/light/hr.svg') no-repeat;
 }
-.toolbar li.we-signature img {
+.we-toolbar li.we-signature img {
 	background: url('../../../image/wikiedit/light/signature.svg') no-repeat;
 }
-.toolbar li.we-quote img {
+.we-toolbar li.we-quote img {
 	background: url('../../../image/wikiedit/light/quote.svg') no-repeat;
 }
-.toolbar li.we-source img {
+.we-toolbar li.we-source img {
 	background: url('../../../image/wikiedit/light/source.svg') no-repeat;
 }
-.toolbar li.we-code img {
+.we-toolbar li.we-code img {
 	background: url('../../../image/wikiedit/light/code.svg') no-repeat;
 }
-.toolbar li.we-action img {
+.we-toolbar li.we-action img {
 	background: url('../../../image/wikiedit/light/action.svg') no-repeat;
 }
-.toolbar li.we-footnote img {
+.we-toolbar li.we-footnote img {
 	background: url('../../../image/wikiedit/light/footnote.svg') no-repeat;
 }
-.toolbar li.we-createlink img {
+.we-toolbar li.we-createlink img {
 	background: url('../../../image/wikiedit/light/link.svg') no-repeat;
 }
-.toolbar li.we-createtable img {
+.we-toolbar li.we-createtable img {
 	background: url('../../../image/wikiedit/light/table.svg') no-repeat;
 }
-.toolbar li.we-textred img {
+.we-toolbar li.we-textred img {
 	background: url('../../../image/wikiedit/light/textcolor.svg') no-repeat;
 }
-.toolbar li.we-highlight img {
+.we-toolbar li.we-highlight img {
 	background: url('../../../image/wikiedit/light/highlight.svg') no-repeat;
 }
-.toolbar li.we-search img {
+.we-toolbar li.we-search img {
 	background: url('../../../image/wikiedit/light/find-replace.svg') no-repeat;
 }
-.toolbar li.we-about img {
+.we-toolbar li.we-about img {
 	background: url('../../../image/wikiedit/light/about.svg') no-repeat;
 }
-.toolbar li.we-fullscreen img {
+.we-toolbar li.we-fullscreen img {
 	background: url('../../../image/wikiedit/light/view-fullscreen.svg') no-repeat;
 }
-.toolbar li.we-dropdown > button img {
+.we-toolbar li.we-dropdown > button img {
 	background: url('../../../image/wikiedit/light/open-more.svg') no-repeat;
 }
-.toolbar li.we-help img {
+.we-toolbar li.we-help img {
 	background: url('../../../image/wikiedit/light/help.svg') no-repeat;
 }
 
 .we-statusbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: #555;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-top: none;
-  padding: 4px 10px;
-  margin-top: -5px;
-  border-radius: 0 0 4px 4px;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.03);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.85rem;
+	color: #555;
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	border-top: none;
+	padding: 4px 10px;
+	margin-top: -5px;
+	border-radius: 0 0 4px 4px;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.03);
 }
 
 .we-statusbar span {
-  white-space: nowrap;
+	white-space: nowrap;
 }
 
 /* Optional dark-mode support */
 @media (prefers-color-scheme: dark) {
-  .we-statusbar {
-    background: #2a2a2a;
-    color: #aaa;
-    border-color: #444;
-  }
-  .we-statusbar .we-message {
-    color: #4ade80;
-  }
+	.we-statusbar {
+		background: #2a2a2a;
+		color: #aaa;
+		border-color: #444;
+	}
+	.we-statusbar .we-message {
+		color: #4ade80;
+	}
 }
 
 /* Make sure the edit container can expand fully */
