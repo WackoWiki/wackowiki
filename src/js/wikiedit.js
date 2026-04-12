@@ -69,8 +69,8 @@ class WikiEdit extends ProtoEdit {
     this.addButton('code', lang.Code, () => this.insTag('##', '##'));
     this.addButton('customhtml', separator);
 
-    this.addButton('ul', lang.List, () => this.insTag(' * ', '', 0, 1, 1));
-    this.addButton('ol', lang.NumberedList, () => this.insTag(' 1. ', '', 0, 1, 1));
+    this.addButton('ul', lang.List, () => this.insTag('  * ', '', 0, 1, 1));
+    this.addButton('ol', lang.NumberedList, () => this.insTag('  1. ', '', 0, 1, 1));
     this.addButton('customhtml', separator);
 
     this.addButton('center', lang.Center, () => this.insBlockWrapper('%%(wacko wrapper=text wrapper_align=center)'));
@@ -79,7 +79,7 @@ class WikiEdit extends ProtoEdit {
     this.addButton('customhtml', separator);
 
     this.addButton('outdent', lang.Outdent, () => this.unindent());
-    this.addButton('indent', lang.Indent, () => this.insTag(' ', '', 0, 1));
+    this.addButton('indent', lang.Indent, () => this.insTag('  ', '', 0, 1));
     this.addButton('customhtml', separator);
 
     this.addButton('quote', lang.Quote, () => this.insTag('<[', ']>', 2));
