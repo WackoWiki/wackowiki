@@ -507,6 +507,49 @@ class WikiEdit extends ProtoEdit {
     return true;
   }
 
+  insTag(Tag, Tag2, onNewLine, expand, strip) {
+    if (onNewLine == null) onNewLine = 0;
+    if (expand == null) expand = 0;
+    if (strip == null) strip = 0;
+
+    const t = this.area;
+    t.focus();
+    this.getDefines();
+    this.pushState();
+
+    const str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
+    this.setAreaContent(str);
+    return true;
+  }
+
+  unindent() {
+    const t = this.area;
+    t.focus();
+    this.getDefines();
+    this.pushState();
+
+    let r = '';
+    let fIn = false;
+    const lines = this.str.split('\n');
+
+    for (let line of lines) {
+      if (this.rbegin.test(line)) {
+        fIn = true;
+        line = line.replace(new RegExp('^' + this.begin + '([ ]*)'), '$1' + this.begin);
+      }
+      if (this.rendb.test(line)) fIn = false;
+
+      if (r) r += '\n';
+
+      r += fIn ? line.replace(/^(( {2})|\t)/, '') : line;
+
+      if (this.rend.test(line)) fIn = false;
+    }
+
+    this.setAreaContent(r);
+    return true;
+  }
+
   // ====================== EVENT HANDLING ======================
 
   keyDown(e) {
@@ -664,49 +707,6 @@ class WikiEdit extends ProtoEdit {
   }
 
   // ====================== MODIFICATION METHODS ======================
-
-  insTag(Tag, Tag2, onNewLine, expand, strip) {
-    if (onNewLine == null) onNewLine = 0;
-    if (expand == null) expand = 0;
-    if (strip == null) strip = 0;
-
-    const t = this.area;
-    t.focus();
-    this.getDefines();
-    this.pushState();
-
-    const str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
-    this.setAreaContent(str);
-    return true;
-  }
-
-  unindent() {
-    const t = this.area;
-    t.focus();
-    this.getDefines();
-    this.pushState();
-
-    let r = '';
-    let fIn = false;
-    const lines = this.str.split('\n');
-
-    for (let line of lines) {
-      if (this.rbegin.test(line)) {
-        fIn = true;
-        line = line.replace(new RegExp('^' + this.begin + '([ ]*)'), '$1' + this.begin);
-      }
-      if (this.rendb.test(line)) fIn = false;
-
-      if (r) r += '\n';
-
-      r += fIn ? line.replace(/^(( {2})|\t)/, '') : line;
-
-      if (this.rend.test(line)) fIn = false;
-    }
-
-    this.setAreaContent(r);
-    return true;
-  }
 
   createLink(isAlt) {
     const t = this.area;

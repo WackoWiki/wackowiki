@@ -7,7 +7,6 @@
 class ProtoEdit {
   // Public properties (set by child classes)
   imagesPath = '';
-  // actionName is now deprecated – kept only for backward compat during migration
 
   constructor() {
     this.enabled = true;
@@ -73,15 +72,8 @@ class ProtoEdit {
     return true;
   }
 
-  /** NEW: Register button with a real handler function (modern API) */
+  /** Register button with a real handler function (modern API) */
   addButton(name, desc, handler) {
-    // Backward compat: if someone still passes a string, wrap it (remove after migration)
-    if (typeof handler === 'string') {
-      console.warn(`[ProtoEdit] String action for button "${name}" is deprecated. Use a function instead.`);
-      // For now we could eval, but better to force child classes to update
-      handler = () => { /* legacy string handling removed */ };
-    }
-
     this.buttons.push({ name, desc, handler });
   }
 
@@ -89,7 +81,7 @@ class ProtoEdit {
   createToolbar() {
     const ul = document.createElement('ul');
     ul.id = `buttons_${this.id}`;
-    ul.className = 'we-toolbar';                    // ← changed from 'toolbar'
+    ul.className = 'we-toolbar';
     ul.setAttribute('role', 'toolbar');
     ul.setAttribute('aria-label', 'Editor toolbar');
 
