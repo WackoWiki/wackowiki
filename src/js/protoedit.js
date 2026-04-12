@@ -14,6 +14,13 @@ class ProtoEdit {
     this.buttons = [];
     this.id = null;
     this.area = null;
+	
+	this.statusBar = null;
+	this.charsEl = null;
+	this.wordsEl = null;
+	this.cursorEl = null;
+	this.messageEl = null;
+	this.messageTimer = null;
   }
 
   /** Initialize editor – attaches keyboard handlers */
@@ -138,6 +145,75 @@ class ProtoEdit {
     return ul;
   }
 
-  // Legacy helpers removed (addEvent, trim, _owner, checkKey)
-  // trim can be replaced with: s?.replace(/ /g, '') if still needed
+  /** Create status bar below the textarea */
+  createStatusBar() {
+    const bar = document.createElement('div');
+    bar.className = 'we-statusbar';
+
+    // Stats (left side)
+    const stats = document.createElement('div');
+    stats.style.cssText = 'display:flex; align-items:center; gap:12px;';
+
+    this.charsEl = document.createElement('span');
+    this.charsEl.className = 'we-chars';
+    this.wordsEl = document.createElement('span');
+    this.wordsEl.className = 'we-words';
+    this.cursorEl = document.createElement('span');
+    this.cursorEl.className = 'we-cursor';
+
+    stats.append(
+      this.charsEl,
+      document.createTextNode(' • '),
+      this.wordsEl,
+      document.createTextNode(' • '),
+      this.cursorEl
+    );
+
+    bar.append(stats);
+
+    // Message area (right side – Draft saved)
+    this.messageEl = document.createElement('span');
+    this.messageEl.className = 'we-message';
+    bar.append(this.messageEl);
+
+    this.statusBar = bar;
+    return bar;
+  }
+
+  /** Update character/word counts and cursor position */
+  updateStatus() {
+    if (!this.area || !this.statusBar) return;
+
+    const text = this.area.value;
+    const chars = text.length;
+    const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+
+    // Cursor position (line/column based on selectionStart)
+    let line = 1;
+    let col = 1;
+    const pos = this.area.selectionStart ?? 0;
+    const before = text.substring(0, pos);
+    const lines = before.split('\n');
+    line = lines.length;
+    col = lines[lines.length - 1].length + 1;
+
+    this.charsEl.textContent = `${chars} chars`;
+    this.wordsEl.textContent = `${words} words`;
+    this.cursorEl.textContent = `Ln ${line}, Col ${col}`;
+  }
+
+  /** Show temporary status message (e.g. “✓ Draft saved”) */
+  showMessage(text, timeout = 3000) {
+    if (!this.messageEl) return;
+    this.messageEl.textContent = text;
+    this.messageEl.style.cssText = 'color:#28a745;font-weight:500;opacity:1;transition:opacity .3s;';
+
+    clearTimeout(this.messageTimer);
+    this.messageTimer = setTimeout(() => {
+      this.messageEl.style.opacity = '0';
+      setTimeout(() => {
+        if (this.messageEl.textContent === text) this.messageEl.textContent = '';
+      }, 300);
+    }, timeout);
+  }
 }

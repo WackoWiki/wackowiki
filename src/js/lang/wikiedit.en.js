@@ -69,6 +69,11 @@ lang = {
 	Replace:				'Replace',
 	ReplaceAll:				'Replace All',
 
+	DraftSaved:				'Draft saved',
+	DraftRestored:			'Draft restored',
+
+	Fullscreen:				'Fullscreen',
+
 	HelpAboutTip:			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+

@@ -51,7 +51,7 @@ class WikiEdit extends ProtoEdit {
     // Setup undo/redo
     this.area.addEventListener('beforeinput', this.handleBeforeInput.bind(this));
 
-    const separator = '<li><div class="btn-separator"></div></li>';
+    const separator = '<div class="btn-separator"></div>';
 
     // Toolbar buttons
     this.addButton('h2', lang.Heading2, () => this.insTag('===', '===', 0, 1));
@@ -98,6 +98,7 @@ class WikiEdit extends ProtoEdit {
     this.addButton('footnote', lang.Footnote, () => this.insTag('[[^ ', ']]', 2));
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
+	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
 
     // Dropdown (custom HTML)
     const dropdownHTML = `<li class="we-dropdown">
@@ -124,6 +125,27 @@ class WikiEdit extends ProtoEdit {
     const toolbar = this.createToolbar();           // new ProtoEdit returns real DOM <ul>
     toolbarContainer.appendChild(toolbar);
 
+	// ====================== FULLSCREEN BUTTON SETUP (editor-only) ======================
+	const fsLi = toolbar.querySelector('li.we-fullscreen');
+	if (fsLi) {
+	  this.fullscreenBtn = fsLi.querySelector('button');
+	  this.fullscreenIcon = this.fullscreenBtn?.querySelector('.we-icon');
+	}
+
+	// Update icon when fullscreen state changes (handles Esc key too)
+	const updateFSIcon = () => {
+	  if (!this.fullscreenIcon) return;
+	  const isFullscreen = !!document.fullscreenElement;
+	  this.fullscreenIcon.innerHTML = isFullscreen
+	    ? this.icons.exitfullscreen
+	    : this.icons.fullscreen;
+	};
+
+	document.addEventListener('fullscreenchange', updateFSIcon);
+
+	// Initial state
+	updateFSIcon();
+
     // Attach click listeners to dropdown items (no more inline onclick / _owner)
     const dropdown = toolbar.querySelector('.we-dropdown');
     if (dropdown) {
@@ -132,6 +154,20 @@ class WikiEdit extends ProtoEdit {
       if (searchItem) searchItem.addEventListener('click', () => this.showFindReplace());
       if (aboutItem)  aboutItem.addEventListener('click', () => this.showHelpModal());
     }
+	
+	// ====================== STATUS BAR ======================
+	const statusBar = this.createStatusBar();
+	this.area.parentNode.insertBefore(statusBar, this.area.nextSibling);
+
+	// Initial display
+	this.updateStatus();
+
+	// Live updates
+	const updateStatusHandler = () => this.updateStatus();
+	this.area.addEventListener('input', updateStatusHandler);
+	this.area.addEventListener('keyup', updateStatusHandler);
+	this.area.addEventListener('click', updateStatusHandler);
+	this.area.addEventListener('mouseup', updateStatusHandler);
 
     if (this.autocomplete) {
       this.autocomplete.attachDropdown();
@@ -191,6 +227,9 @@ class WikiEdit extends ProtoEdit {
       return;
     }
     localStorage.setItem(this.draftKey, content);
+
+    // === Show draft-saved indicator ===
+    this.showMessage(`✓ ${lang.DraftSaved || 'Draft saved'}`);
   }
 
   /**
@@ -210,9 +249,36 @@ class WikiEdit extends ProtoEdit {
         this.area.value = saved;
         this.area.setSelectionRange(saved.length, saved.length);
         this.area.focus();
+
+        // === Show restored message + update status ===
+        this.showMessage(`✓ ${lang.DraftRestored || 'Draft restored'}`);
+        this.updateStatus();
       } else {
         localStorage.removeItem(this.draftKey);
       }
+    }
+  }
+
+  /**
+   * Toggle fullscreen mode ONLY for the editor container (#page-edit).
+   * This gives a clean distraction-free editing area while the browser still
+   * shows its own chrome (address bar, etc.). Much better for wiki editing.
+   */
+  toggleFullscreen() {
+    const container = document.getElementById('page-edit');
+    if (!container) {
+      console.warn('WikiEdit: Could not find #page-edit container for fullscreen');
+      return;
+    }
+
+    if (document.fullscreenElement) {
+      // Exit fullscreen (works regardless of which element is fullscreen)
+      document.exitFullscreen().catch(err => console.error(err));
+    } else {
+      // Enter fullscreen on the editor container only
+      container.requestFullscreen({ navigationUI: 'hide' }).catch(err => {
+        console.error('Editor fullscreen request failed:', err);
+      });
     }
   }
 

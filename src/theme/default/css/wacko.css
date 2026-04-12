@@ -6,11 +6,12 @@ dfn {
 	letter-spacing: 0.1em;
 	font-style: normal;
 	cursor: help;
-	border-bottom: 1px dotted #000;
+	border-bottom: 1px dotted var(--ww-text);
 }
 
 /* Strike through text: SYNTAX --text-- */
 del { color: #999; }
+del a { color: #999; }
 
 del a:visited,
 del a:link { color: #999; }
@@ -30,16 +31,14 @@ hr {
 /* SYNTAX "  *", "  1.", etc. */
 
 ul, ol {
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-top: 0;
-	padding-bottom: 0;
+	margin-block: 0;
+	padding-block: 0;
 }
 
 /** Header related ***********************************************************/
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 5px;
+	margin-block: 0 5px;
 	padding: 0;
 	font-weight: normal;
 	line-height: 1.2;
@@ -77,7 +76,7 @@ h6 { font-size: 0.875rem; margin-top: 10px;}
 .vertical-bottom	{ vertical-align: bottom !important; }
 
 /* Indent text: SYNTAX "  ", "  1.", etc. */
-.indent { margin-left: 40px;}
+.indent { margin-inline-start: 40px;}
 
 /** Revisions-related *********************************************************/
 
@@ -117,14 +116,16 @@ del.diff {
 .code,
 .code-break,
 div.hl-main {
-	background: #fcfcfc;
-	border: 1px lightgray solid;
+	background: var(--ww-bg-secondary);
+	border: 1px solid var(--ww-border);
 	font-family: var(--ww-font-monospace);
 	font-size: 0.875rem;
 	border-radius: .1rem;
 	padding: 0.25em;
 	overflow: auto;
 	white-space: pre-wrap;
+	scrollbar-width: thin;
+	scrollbar-color: #888 var(--ww-bg-secondary);
 }
 
 	/* hl numbers li */
@@ -180,7 +181,7 @@ div.hl-main {
 .usertable {
 	border: 1px none;
 	border-collapse: collapse;
-	background-color: #fff;
+	background-color: var(--ww-bg-secondary);
 }
 
 .usertable th {
@@ -194,7 +195,7 @@ div.hl-main {
 
 .usertable td,
 .usertable th {
-	border: 1px solid #ccc;
+	border: 1px solid var(--ww-border);
 	padding: .3em .5em;
 	vertical-align: top;
 }

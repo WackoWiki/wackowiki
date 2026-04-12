@@ -1,13 +1,14 @@
 /* basic -------------------------------------------------- */
 :root {
+	/* Light theme (default) */
 	--ww-bg-primary: #fcfcfc;
 	--ww-bg-secondary: #fff;
-
-	--ww-a-active: #ff0000;
-	--ww-a-hover: #b90022;
+	--ww-text: #222;
 	--ww-a-normal: #039;
-	--ww-a-target-bg: #fee;
+	--ww-a-hover: #b90022;
+	--ww-a-active: #ff0000;
 	--ww-a-visited: #900;
+	--ww-a-target-bg: #fee;
 
 	--ww-acl-public: #008000;
 	--ww-acl-registered: #039;
@@ -22,11 +23,39 @@
 	--ww-buttonshadow: rgb(160, 160, 160);
 	--ww-buttontext: rgb(0, 0, 0);
 
-	--ww-font-color: #000;
+	--ww-font-color: #222;
 	--ww-font-size: 0.875rem;
 	--ww-font-serif: "Times New Roman", Times, serif;
-	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
-	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
+	--ww-font-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	--ww-font-monospace: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+	--ww-border: #ccc;
+	--ww-shadow: 0 1px 3px rgba(0,0,0,.1);
+	--ww-focus-ring: #3daee9;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--ww-bg-primary: #1e1e1e;
+		--ww-bg-secondary: #252526;
+		--ww-text: #ddd;
+		--ww-a-normal: #5ab0ff;
+		--ww-a-hover: #ff6b6b;
+		--ww-a-active: #ff4444;
+		--ww-a-visited: #c77;
+		--ww-a-target-bg: #332;
+		--ww-hover-primary: #334;
+		--ww-hover-secondary: #223344;
+		--ww-buttonface: rgb(45, 45, 48);
+		--ww-buttonhighlight: rgb(70, 70, 75);
+		--ww-buttonshadow: rgb(30, 30, 30);
+		--ww-buttontext: #ddd;
+		--ww-font-color: #ddd;
+		--ww-border: #555;
+		--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
+		--ww-focus-ring: #5ab0ff;
+	}
 }
 
 p,
@@ -74,8 +103,8 @@ textarea,
 input:not([type]),
 input[type="text"],
 input[type="password"],
-input[type="datetime"], 
-input[type="datetime-local"], 
+input[type="datetime"],
+input[type="datetime-local"],
 input[type="date"],
 input[type="month"],
 input[type="time"],
@@ -86,10 +115,10 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
-	background-color: #fff;
+	background-color: var(--ww-bg-secondary);
+	border: 1px solid var(--ww-border);
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 	transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-	border: 1px solid #ccc;
 	display: inline-block;
 	font-size: var(--ww-font-size);
 	height: auto;
@@ -158,10 +187,10 @@ body {
 img,
 svg,
 video {
-	border-width: 0;
-	vertical-align: middle;
 	max-width: 100%;
 	height: auto;
+	border-width: 0;
+	vertical-align: middle;
 }
 
 audio {
@@ -170,10 +199,10 @@ audio {
 }
 
 kbd {
-	background-color: #f7f7f7;
-	border: 1px solid #ccc;
+	background-color: var(--ww-bg-secondary);
+	border: 1px solid var(--ww-border);
 	border-radius: 3px;
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px var(--ww-bg-secondary) inset;
 	color: #333;
 	display: inline-block;
 	font-family: var(--ww-font-sans-serif);
@@ -185,6 +214,7 @@ kbd {
 	white-space: nowrap;
 }
 
+/* Accessibility */
 .visuallyhidden {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -278,11 +308,9 @@ a.edit-section {
 	float: left;
 }
 
-.clearfix::after,
-#mainwrapper::after {
-	content: "";
-	display: table;
-	clear: both;
+.clearfix,
+#mainwrapper {
+	display: flow-root;
 }
 
 form input.submitinput {
@@ -1351,11 +1379,62 @@ a:target {
 .toolbar li.we-about img {
 	background: url('../../../image/wikiedit/light/about.svg') no-repeat;
 }
+.toolbar li.we-fullscreen img {
+	background: url('../../../image/wikiedit/light/view-fullscreen.svg') no-repeat;
+}
 .toolbar li.we-dropdown > button img {
 	background: url('../../../image/wikiedit/light/open-more.svg') no-repeat;
 }
 .toolbar li.we-help img {
 	background: url('../../../image/wikiedit/light/help.svg') no-repeat;
+}
+
+.we-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #555;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 4px 10px;
+  margin-top: -5px;
+  border-radius: 0 0 4px 4px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.03);
+}
+
+.we-statusbar span {
+  white-space: nowrap;
+}
+
+/* Optional dark-mode support */
+@media (prefers-color-scheme: dark) {
+  .we-statusbar {
+    background: #2a2a2a;
+    color: #aaa;
+    border-color: #444;
+  }
+  .we-statusbar .we-message {
+    color: #4ade80;
+  }
+}
+
+/* Make sure the edit container can expand fully */
+#page-edit:fullscreen {
+	background: #fff;           /* or your theme background */
+	padding: 4rem;
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	#page-edit:fullscreen {
+		background: #1e1e1e;
+	}
 }
 	/* WikiEdit modal Forms --------------------------------- */
 .we-modal {
@@ -1594,121 +1673,126 @@ a:target {
 
 /* AutoComplete toolbar button + dropdown */
 .we-autocomplete-li {
-    position: relative;
-    display: none;
+	position: relative;
+	display: none;
 }
 
 .we-autocomplete-reset-li { display: none; }
 .we-autocomplete-reset-btn {
-    font: 12px Arial;
-    padding: 3px 3px 4px 4px;
-    cursor: pointer;
+	font: 12px Arial;
+	padding: 3px 3px 4px 4px;
+	cursor: pointer;
 }
 
 /* AutoComplete button states */
 .we-autocomplete-btn {
-    font: bold 12px Arial;
-    margin: 0;
-    padding: 3px 3px 4px 4px;
-    cursor: pointer;
+	font: bold 12px Arial;
+	margin: 0;
+	padding: 3px 3px 4px 4px;
+	cursor: pointer;
 }
 .we-autocomplete-btn.seeking   { color: #888888; background-color: transparent; }
 .we-autocomplete-btn.found     { color: #ffffff; background-color: #00cc00; }
 .we-autocomplete-btn.notfound  { color: #ffffff; background-color: #FF0000; }
 
 .we-autocomplete-reset-btn {
-    font: 12px Arial;
-    padding: 3px 3px 4px 4px;
-    cursor: pointer;
+	font: 12px Arial;
+	padding: 3px 3px 4px 4px;
+	cursor: pointer;
 }
 
 /* Floating dropdown */
 .we-autocomplete-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 10000;
-    background: #ffffff;
-    border: 1px solid #aaa;
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-    list-style: none;
-    padding: 0;
-    margin: 2px 0 0 0;
-    max-height: 220px;
-    overflow-y: auto;
-    font: 12px Arial;
-    min-width: 160px;
-    border-radius: 3px;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 10000;
+	background: #ffffff;
+	border: 1px solid #aaa;
+	box-shadow: 0 4px 12px rgba(0,0,0,.25);
+	list-style: none;
+	padding: 0;
+	margin: 2px 0 0 0;
+	max-height: 220px;
+	overflow-y: auto;
+	font: 12px Arial;
+	min-width: 160px;
+	border-radius: 3px;
 }
 
 .we-autocomplete-dropdown-item {
-    padding: 6px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-    white-space: nowrap;
+	padding: 6px 12px;
+	cursor: pointer;
+	border-bottom: 1px solid #eee;
+	white-space: nowrap;
 }
 
 .we-autocomplete-dropdown-item:hover,
 .we-autocomplete-dropdown-item.selected {
-    background-color: #e6f0ff;
+	background-color: #e6f0ff;
 }
 
 /* ─────────────────────────────────────────────────────────────
    AutoComplete Dropdown – CSS positioning & styling
    ───────────────────────────────────────────────────────────── */
 .we-autocomplete-container {
-    position: relative;           /* ← Key: makes dropdown position relative to this li */
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
 }
 
 .we-autocomplete-dropdown {
-    position: absolute;           /* ← Key: absolute positioning */
-    top: 100%;                    /* directly below the button */
-    left: 0;
-    z-index: 10000;
-    display: none;                /* JS will toggle visibility */
-    
-    /* Visual polish */
-    background: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    /* min-width: 220px; */             /* comfortable width for suggestions */
-    max-height: 320px;
-    overflow-y: auto;
-    list-style: none;
-    padding: 4px 0;
-    margin: 2px 0 0 0;
-    font-size: 0.95em;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 10000;
+	display: none;
+	background: var(--ww-bg-secondary);
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+	min-width: 240px;
+	max-height: 340px;
+	overflow-y: auto;
+	list-style: none;
+	padding: 6px 0;
+	margin: 4px 0 0 0;
+	font-size: var(--ww-font-size);
+}
+
+@media (prefers-color-scheme: dark) {
+	.we-autocomplete-dropdown {
+		border-color: #555;
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+	}
 }
 
 .we-autocomplete-dropdown-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	padding: 8px 14px;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .we-autocomplete-dropdown-item:hover,
 .we-autocomplete-dropdown-item.selected {
-    background: #f0f4f9;
+	background: var(--ww-hover-primary);
 }
 
-/* Optional: make the main autocomplete button look nicer */
 .we-autocomplete-btn {
-    padding: 4px 10px;
-    font-size: 0.9em;
+	padding: 4px 12px;
+	font-size: 0.9em;
+	border-radius: 4px;
 }
-.we-autocomplete-btn.found   { background: #e6f3e6; color: #006400; }
-.we-autocomplete-btn.notfound{ background: #ffe6e6; color: #9f0000; }
-.we-autocomplete-btn.seeking { background: #fff3e6; animation: pulse 1.5s infinite; }
+.we-autocomplete-btn.found    { background: #e6f3e6; color: #006400; }
+.we-autocomplete-btn.notfound { background: #ffe6e6; color: #9f0000; }
+.we-autocomplete-btn.seeking  { background: #fff3e6; animation: ww-pulse 1.5s infinite; }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.4; }
+@keyframes ww-pulse {
+	0%, 100% { opacity: 1; }
+	50%      { opacity: 0.4; }
 }
 
 
