@@ -729,7 +729,7 @@ class WikiEdit extends ProtoEdit {
   // ====================== LINK & TABLE FORMS ======================
 
   createLinkForm() {
-    const modal = document.createElement('div');
+    const modal = document.createElement('dialog');
     modal.className = 'we-modal';
 
     const dialog = document.createElement('div');
@@ -799,21 +799,20 @@ class WikiEdit extends ProtoEdit {
     f.urlInput.value = defaultValue;
     f.textInput.value = defaultValue;
 
-    // Store context so we can safely insert after the modal closes
     this.linkContext = {
       sel1: this.sel1,
       sel2: this.sel2,
       area: this.area
     };
 
-    f.modal.classList.add('show');
+    f.modal.showModal();
     f.urlInput.focus();
     f.urlInput.select();
   }
 
   hideLinkForm() {
     if (this.linkForm) {
-      this.linkForm.modal.classList.remove('show');
+      this.linkForm.modal.close();
       this.linkContext = null;
     }
   }
@@ -857,7 +856,7 @@ class WikiEdit extends ProtoEdit {
   }
 
   createTableForm() {
-    const modal = document.createElement('div');
+    const modal = document.createElement('dialog');
     modal.className = 'we-modal';
 
     const dialog = document.createElement('div');
@@ -869,10 +868,10 @@ class WikiEdit extends ProtoEdit {
       </div>
       <div class="we-modal-body">
         <form id="we-table-form-${this.id}">
-			<div class="we-form-group">
-				<label class="we-form-label" for="we-table-caption-${this.id}">${lang.TableCaption || 'Table caption (optional):'}</label>
-				<input type="text" id="we-table-caption-${this.id}" class="we-form-input">
-			</div>
+          <div class="we-form-group">
+            <label class="we-form-label" for="we-table-caption-${this.id}">${lang.TableCaption || 'Table caption (optional):'}</label>
+            <input type="text" id="we-table-caption-${this.id}" class="we-form-input">
+          </div>
 
           <div class="we-form-grid">
             <div class="we-form-group">
@@ -945,28 +944,26 @@ class WikiEdit extends ProtoEdit {
 
     const f = this.tableForm;
 
-    // Reset to sensible defaults
     f.colsInput.value = '4';
     f.rowsInput.value = '3';
     f.captionInput.value = '';
     f.colHeaderCheck.checked = false;
     f.rowHeaderCheck.checked = false;
 
-    // Store current selection context for safe insertion
     this.tableContext = {
       sel1: this.sel1,
       sel2: this.sel2,
       area: this.area
     };
 
-    f.modal.classList.add('show');
+    f.modal.showModal();
     f.colsInput.focus();
     f.colsInput.select();
   }
 
   hideTableForm() {
     if (this.tableForm) {
-      this.tableForm.modal.classList.remove('show');
+      this.tableForm.modal.close();
       this.tableContext = null;
     }
   }
@@ -1042,17 +1039,8 @@ class WikiEdit extends ProtoEdit {
 
   // ====================== HELP MODAL ======================
 
-  showHelpModal() {
-    if (!this.helpModal) this.createHelpModal();
-    this.helpModal.modal.classList.add('show');
-  }
-
-  hideHelpModal() {
-    if (this.helpModal) this.helpModal.modal.classList.remove('show');
-  }
-
   createHelpModal() {
-    const modal = document.createElement('div');
+    const modal = document.createElement('dialog');
     modal.className = 'we-modal';
 
     const dialog = document.createElement('div');
@@ -1079,11 +1067,19 @@ class WikiEdit extends ProtoEdit {
 
     this.helpModal = { modal };
 
-    // Replace legacy inline onclick with clean event listener
     const closeBtn = dialog.querySelector('button');
     if (closeBtn) {
       closeBtn.addEventListener('click', () => this.hideHelpModal());
     }
+  }
+
+  showHelpModal() {
+    if (!this.helpModal) this.createHelpModal();
+    this.helpModal.modal.showModal();   // ← native
+  }
+
+  hideHelpModal() {
+    if (this.helpModal) this.helpModal.modal.close();   // ← native
   }
 
   // ====================== FIND / REPLACE FEATURE ======================
