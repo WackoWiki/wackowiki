@@ -73,6 +73,7 @@ lang = {
 	DraftRestored:			'Draft restored',
 
 	Fullscreen:				'Fullscreen',
+	LivePreview:			'Live Preview',
 
 	HelpAboutTip:			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
