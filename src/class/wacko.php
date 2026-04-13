@@ -49,8 +49,7 @@ class Wacko
 	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
 	public $charset;
-	public $config;								// @deprecated, but will live for a looong time
-	public $db;									// new config
+	public $db;									// config
 	public $http;
 	public $sess;
 	public $prefix;								// alias for table prefix
@@ -158,8 +157,7 @@ class Wacko
 	*/
 	function __construct(&$config, &$http)
 	{
-		$this->db		=
-		$this->config	= & $config;
+		$this->db		= & $config;
 		$this->http		= & $http;
 		$this->sess		= & $http->sess;
 
