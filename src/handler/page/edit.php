@@ -86,6 +86,42 @@ if ($this->has_access('read')
 
 	if (isset($_POST))
 	{
+		// === AJAX LIVE PREVIEW (for WikiEdit side-by-side pane) ===
+		if (isset($_POST['ajax_preview']) && $_POST['ajax_preview'] === '1')
+		{
+			$_body      = $_POST['body'] ?? '';
+			$title      = $_POST['title'] ?? ($this->page['title'] ?? $this->get_page_title($this->tag));
+			$section_id = (int) ($_POST['section'] ?? 0);
+
+			$preview = '';
+			$text_chars = '0';
+
+			if ($_body !== '')
+			{
+				$text_chars = $this->number_format(mb_strlen($_body));
+
+				$preview = $this->format($_body, 'pre_wacko');
+				$preview = $this->format($preview, 'wacko');
+				$preview = $this->format($preview, 'post_wacko', ['strip_marker' => true]);
+			}
+
+			// === FRESH FORM TOKEN ===
+			// The normal edit form uses [ ' csrf: edit_page ' ] in edit.tpl
+			// This line must generate the exact same token value that the template would insert.
+			// Adjust the method name if your core uses something different (search for "csrf" or "form_token" in the template engine).
+			#$new_form_token = $this->generate_form_token('edit_page');   // most common Wacko pattern
+			$new_form_token = $this->sess->create_nonce('edit_page', max(30, $this->db->form_token_time));
+
+			header('Content-Type: application/json; charset=utf-8');
+			echo json_encode([
+				'preview_html'   => $preview,
+				'new_form_token' => $new_form_token,
+				'chars'          => $text_chars
+			], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+			exit;   // important – do not continue with normal form rendering
+		}
+
 		$anchor		= [];
 		$_body		= $_POST['body'] ?? '';
 		$section_id	= (int) ($_POST['section'] ?? 0);

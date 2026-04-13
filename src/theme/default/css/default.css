@@ -1217,7 +1217,7 @@ a:target {
 	/* gap: 4px; */
 	/* padding: 6px 8px; */
 	padding: 0;
-	background: #f8f8f8;
+	background: var(--ww-buttonface);
 	border: 1px solid #ccc;
 	/* border-radius: 4px; */
 	list-style: none;
@@ -1239,10 +1239,11 @@ a:target {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid #ccc;
-	background: #fff;
+	border: 1px solid var(--ww-buttonface);
+	background: var(--ww-buttonface);
 	/* border-radius: 3px; */
 	transition: all 0.1s;
+	cursor: pointer;
 }
 
 .we-toolbar .btn-:hover,
@@ -1433,6 +1434,9 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 }
 .we-toolbar li.we-fullscreen img {
 	background: url('../../../image/wikiedit/light/view-fullscreen.svg') no-repeat;
+}
+.we-toolbar li.we-livepreview img {
+	background: url('../../../image/wikiedit/light/view-visible.svg') no-repeat;
 }
 .we-toolbar li.we-dropdown > button img {
 	background: url('../../../image/wikiedit/light/open-more.svg') no-repeat;

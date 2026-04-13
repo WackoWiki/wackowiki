@@ -99,6 +99,11 @@ class WikiEdit extends ProtoEdit {
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
+	// Live Preview toggle (added for side-by-side pane)
+	this.addButton('livepreview', lang.LivePreview || '👁 Live Preview', () => this.toggleLivePreview());
+
+	// === ENABLE LIVE PREVIEW SYSTEM (must be called after toolbar is built) ===
+	this.enableLivePreview();
 
     // Dropdown (custom HTML)
     const dropdownHTML = `<li class="we-dropdown">
@@ -1341,4 +1346,173 @@ class WikiEdit extends ProtoEdit {
     }
   }
 
+  // ====================== LIVE PREVIEW ======================
+  /**
+   * Sets up side-by-side layout + draggable splitter + FULL bidirectional scroll sync
+   * that survives preview updates. Now with proper height forcing so scrolling actually appears.
+   */
+  enableLivePreview() {
+  	const wrapper = this.area.parentNode;
+
+  	// === SAVE ORIGINAL TEXTAREA HEIGHT BEFORE MOVING IT ===
+  	const originalHeight = this.area.style.height || getComputedStyle(this.area).height || '500px';
+
+  	// Create split container
+  	const container = document.createElement('div');
+  	container.className = 'wikiedit-split-container';
+  	container.style.cssText = `display:flex; height:${originalHeight}; min-height:400px; gap:8px; box-sizing:border-box;`;
+
+  	this.editPane = document.createElement('div');
+  	this.editPane.style.cssText = 'flex:1 1 50%; min-width:300px; display:flex; flex-direction:column; height:100%;';
+
+  	// Move textarea and FORCE it to fill the pane
+  	this.area.style.cssText += 'flex:1 1 auto; height:100%; width:100%; box-sizing:border-box; resize:none; min-height:0;';
+  	this.editPane.appendChild(this.area);
+
+  	this.splitter = document.createElement('div');
+  	this.splitter.style.cssText = 'width:6px; background:#ddd; cursor:col-resize; flex-shrink:0; display:none;';
+
+  	this.previewPane = document.createElement('div');
+  	this.previewPane.id = 'wikiedit-live-preview';
+  	this.previewPane.style.cssText = 'flex:1 1 50%; min-width:300px; overflow:auto; padding:20px; background:#fff; border:1px solid #ccc; border-radius:4px; display:none; box-sizing:border-box;';
+
+  	container.append(this.editPane, this.splitter, this.previewPane);
+  	wrapper.appendChild(container);
+
+  	// Draggable splitter
+  	let isDragging = false;
+  	this.splitter.addEventListener('mousedown', e => { isDragging = true; e.preventDefault(); });
+  	document.addEventListener('mousemove', e => {
+  		if (!isDragging) return;
+  		const rect = container.getBoundingClientRect();
+  		let percent = ((e.clientX - rect.left) / rect.width) * 100;
+  		percent = Math.max(20, Math.min(80, percent));
+  		this.editPane.style.flex = `1 1 ${percent}%`;
+  		this.previewPane.style.flex = `1 1 ${100 - percent}%`;
+  	});
+  	document.addEventListener('mouseup', () => { isDragging = false; });
+
+  	// === BIDIRECTIONAL VERTICAL SCROLL SYNC ===
+  	let syncing = false;
+
+  	this.syncEditorToPreview = () => {
+  		if (!this.livePreviewEnabled || syncing) return;
+  		syncing = true;
+  		const editor = this.area;
+  		const preview = this.previewPane;
+  		const percent = (editor.scrollHeight > editor.clientHeight)
+  			? editor.scrollTop / (editor.scrollHeight - editor.clientHeight)
+  			: 0;
+  		preview.scrollTop = percent * (preview.scrollHeight - preview.clientHeight || 0);
+  		syncing = false;
+  	};
+
+  	this.syncPreviewToEditor = () => {
+  		if (!this.livePreviewEnabled || syncing) return;
+  		syncing = true;
+  		const editor = this.area;
+  		const preview = this.previewPane;
+  		const percent = (preview.scrollHeight > preview.clientHeight)
+  			? preview.scrollTop / (preview.scrollHeight - preview.clientHeight)
+  			: 0;
+  		editor.scrollTop = percent * (editor.scrollHeight - editor.clientHeight || 0);
+  		syncing = false;
+  	};
+
+  	this.area.addEventListener('scroll', this.syncEditorToPreview, { passive: true });
+  	this.previewPane.addEventListener('scroll', this.syncPreviewToEditor, { passive: true });
+
+  	// Live preview logic
+  	this.livePreviewEnabled = false;
+  	this.previewTimer = null;
+
+  	this.updatePreview = async () => {
+  		const form = this.area.closest('form');
+  		if (!form) return;
+
+  		const fd = new FormData(form);
+  		fd.set('body', this.area.value);
+  		fd.set('ajax_preview', '1');
+
+  		try {
+  			const res = await fetch(window.location.href, {
+  				method: 'POST',
+  				body: fd,
+  				credentials: 'same-origin'
+  			});
+  			if (!res.ok) throw new Error();
+
+  			const data = await res.json();
+
+  			this.previewPane.innerHTML = data.preview_html || '<p style="color:#999;">(empty preview)</p>';
+
+  			const tokenField = form.querySelector('input[name="_nonce"]');
+  			if (tokenField && data.new_form_token) {
+  				tokenField.value = data.new_form_token;
+  			}
+
+  			// Re-sync scroll AFTER browser has painted the new content
+  			if (this.livePreviewEnabled) {
+  				requestAnimationFrame(() => {
+  					this.syncEditorToPreview();
+  				});
+  			}
+  		} catch (e) {
+  			console.warn('Live preview failed', e);
+  		}
+  	};
+
+  	// 100% reliable change detection (unchanged)
+  	const ta = this.area;
+  	const self = this;
+  	const valueDescriptor = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+  	const origSetter = valueDescriptor.set;
+
+  	Object.defineProperty(ta, 'value', {
+  		get() { return valueDescriptor.get.call(this); },
+  		set(newValue) {
+  			origSetter.call(this, newValue);
+  			if (self.livePreviewEnabled && self.updatePreview) {
+  				clearTimeout(self.previewTimer);
+  				self.previewTimer = setTimeout(() => self.updatePreview(), 80);
+  			}
+  		},
+  		configurable: true
+  	});
+
+  	this.area.addEventListener('input', () => {
+  		if (this.livePreviewEnabled) {
+  			clearTimeout(this.previewTimer);
+  			this.previewTimer = setTimeout(() => this.updatePreview(), 420);
+  		}
+  	});
+
+  	console.log('%cWikiEdit live preview + FIXED bidirectional scroll sync (height-forced) ready', 'color:#0a0;font-weight:bold');
+  }
+
+  /**
+   * Toggle Live Preview on/off
+   */
+  toggleLivePreview() {
+  	this.livePreviewEnabled = !this.livePreviewEnabled;
+
+  	const tb = document.getElementById(`tb_${this.id}`);
+  	const liveLi = tb ? tb.querySelector('li.we-livepreview') : null;
+  	if (liveLi) liveLi.classList.toggle('active', this.livePreviewEnabled);
+
+  	if (this.livePreviewEnabled) {
+  		this.previewPane.style.display = 'block';
+  		this.splitter.style.display = 'block';
+  		this.editPane.style.flex = '1 1 50%';
+  		this.previewPane.style.flex = '1 1 50%';
+
+  		if (this.area.value.trim()) {
+  			setTimeout(() => this.updatePreview(), 10);
+  		}
+  	} else {
+  		this.previewPane.style.display = 'none';
+  		this.splitter.style.display = 'none';
+  		this.editPane.style.flex = '1 1 100%';
+  	}
+  }
 }
