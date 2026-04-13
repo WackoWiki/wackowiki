@@ -32,7 +32,7 @@ class ProtoEdit {
     if (rte) {
       const frame = document.getElementById(rte)?.contentWindow?.document;
       if (frame) {
-        frame.addEventListener('keydown', handler, { capture: true }); // modern: keydown is better for shortcuts
+        frame.addEventListener('keydown', handler, { capture: true });
         frame.addEventListener('keyup', handler, { capture: true });
       }
     } else {
@@ -51,7 +51,7 @@ class ProtoEdit {
     return true;
   }
 
-  /** Simple inline tag insertion (unchanged – already excellent) */
+  /** Simple inline tag insertion */
   insTag(open, close, newLine = 0, expand = 0) {
     const area = this.area;
     if (!area) return false;
@@ -109,7 +109,7 @@ class ProtoEdit {
       button.title = btn.desc;
       button.setAttribute('aria-label', btn.desc);
 
-      // Icon (unchanged – CSS background-image)
+      // Icon (CSS background-image)
       const img = document.createElement('img');
       img.src = `${this.imagesPath}spacer.png`;
       img.alt = '';

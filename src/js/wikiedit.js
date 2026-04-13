@@ -99,7 +99,6 @@ class WikiEdit extends ProtoEdit {
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
-	// Live Preview toggle (added for side-by-side pane)
 	this.addButton('livepreview', lang.LivePreview || '👁 Live Preview', () => this.toggleLivePreview());
 
 	// === ENABLE LIVE PREVIEW SYSTEM (must be called after toolbar is built) ===
@@ -635,7 +634,7 @@ class WikiEdit extends ProtoEdit {
     } else if (ctrl && shift && (key === 'n' || key === 'o')) {
       res = this.insTag(' 1. ', '', 0, 1, 1);
     } else if (e.key === 'Enter' && !e.shiftKey) {
-      // (Enter auto-list logic – unchanged, only the key detection is modernized)
+      // (Enter auto-list logic)
       const text = t.value.replace(/\r/g, '');
       const sel1 = text.slice(0, t.selectionStart);
       const sel2 = text.slice(t.selectionEnd);
@@ -1082,11 +1081,11 @@ class WikiEdit extends ProtoEdit {
 
   showHelpModal() {
     if (!this.helpModal) this.createHelpModal();
-    this.helpModal.modal.showModal();   // ← native
+    this.helpModal.modal.showModal();
   }
 
   hideHelpModal() {
-    if (this.helpModal) this.helpModal.modal.close();   // ← native
+    if (this.helpModal) this.helpModal.modal.close();
   }
 
   // ====================== FIND / REPLACE FEATURE ======================
@@ -1160,7 +1159,7 @@ class WikiEdit extends ProtoEdit {
     document.body.appendChild(panel);
 
     this.findForm = {
-      modal: panel, // reused name for consistency
+      modal: panel,
       findInput: document.getElementById(`we-search-for-${this.id}`),
       replaceInput: document.getElementById(`we-replace-with-${this.id}`),
       matchCaseCheck: document.getElementById(`we-find-case-${this.id}`),
@@ -1199,7 +1198,7 @@ class WikiEdit extends ProtoEdit {
 
     // Force browser to scroll the caret into view (very reliable in modern browsers)
     const start = t.selectionStart;
-    t.selectionStart = start;   // re-setting triggers scroll
+    t.selectionStart = start;
     t.selectionEnd = t.selectionEnd;
 
     // Additional safety: approximate scroll position to center the match
@@ -1252,7 +1251,7 @@ class WikiEdit extends ProtoEdit {
 
     if (match) {
       t.setSelectionRange(match.index, match.index + match[0].length);
-      this.scrollToSelection();   // ← guaranteed visible
+      this.scrollToSelection();
     }
   }
 
@@ -1266,7 +1265,7 @@ class WikiEdit extends ProtoEdit {
       return;
     }
 
-    this.pushState(); // capture state before any change
+    this.pushState();
 
     const term = f.findInput.value;
     const matchCase = f.matchCaseCheck.checked;
@@ -1303,7 +1302,7 @@ class WikiEdit extends ProtoEdit {
     const newPos = before.length + replacement.length;
     t.setSelectionRange(newPos, newPos);
 
-    this.scrollToSelection();   // ← new text is visible
+    this.scrollToSelection();
     this.findNext();
   }
 
@@ -1312,7 +1311,7 @@ class WikiEdit extends ProtoEdit {
     const f = this.findForm;
     if (!f || !f.findInput.value) return;
 
-    this.pushState(); // capture state before bulk replace
+    this.pushState();
 
     const term = f.findInput.value;
     const matchCase = f.matchCaseCheck.checked;
@@ -1487,7 +1486,7 @@ class WikiEdit extends ProtoEdit {
   		}
   	});
 
-  	console.log('%cWikiEdit live preview + FIXED bidirectional scroll sync (height-forced) ready', 'color:#0a0;font-weight:bold');
+  	console.log('%cWikiEdit live preview ready', 'color:#0a0;font-weight:bold');
   }
 
   /**

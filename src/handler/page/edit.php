@@ -105,11 +105,6 @@ if ($this->has_access('read')
 				$preview = $this->format($preview, 'post_wacko', ['strip_marker' => true]);
 			}
 
-			// === FRESH FORM TOKEN ===
-			// The normal edit form uses [ ' csrf: edit_page ' ] in edit.tpl
-			// This line must generate the exact same token value that the template would insert.
-			// Adjust the method name if your core uses something different (search for "csrf" or "form_token" in the template engine).
-			#$new_form_token = $this->generate_form_token('edit_page');   // most common Wacko pattern
 			$new_form_token = $this->sess->create_nonce('edit_page', max(30, $this->db->form_token_time));
 
 			header('Content-Type: application/json; charset=utf-8');
