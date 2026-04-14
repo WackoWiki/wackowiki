@@ -103,8 +103,10 @@ class WikiEdit extends ProtoEdit {
     this.addButton('footnote', lang.Footnote, () => this.insTag('[[^ ', ']]', 2));
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
-	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
+
 	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
+	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
+
 	//this.addButton('markdown', 'MD/Wacko Toggle', () => this.toggleMarkdownMode());
 	this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
 	this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
@@ -1818,6 +1820,15 @@ class WikiEdit extends ProtoEdit {
 	    .replace(/</g, '&lt;')
 	    .replace(/>/g, '&gt;');
 
+	  // Protect ""..."" literal blocks FIRST so that NO syntax inside them is ever processed.
+	  const literals = [];
+	  html = html.replace(/""(.+?)""/gs, (match, content) => {
+	    const id = literals.length;
+	    literals.push(content);
+	    return `WIKI_LITERAL_${id}`;
+	  });
+
+	  // Original syntax (unchanged order + improved comments for clarity)
 	  html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
 	  html = html.replace(/\*\*(.+?)\*\*/g, '<span class="wiki-bold">**$1**</span>');
 	  html = html.replace(/\/\/(.+?)\/\//g, '<span class="wiki-italic">//$1//</span>');
@@ -1825,9 +1836,16 @@ class WikiEdit extends ProtoEdit {
 	  html = html.replace(/--(.+?)--/g, '<span class="wiki-strike">--$1--</span>');
 	  html = html.replace(/##(.+?)##/g, '<span class="wiki-code">##$1##</span>');
 	  html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
+	  html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
 	  html = html.replace(/^(\s*[*\d]\.?\s+)/gm, '<span class="wiki-list">$1</span>');
 	  html = html.replace(/(%%|<\[|\{\{|\?\?|\!\!)(.+?)(%%|]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
 	  html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
+
+	  // Restore literal blocks (inner syntax was completely ignored)
+	  html = html.replace(/WIKI_LITERAL_(\d+)/g, (match, id) => {
+	    const content = literals[parseInt(id, 10)];
+	    return `""${content}""`;
+	  });
 
 	  return html;
 	}

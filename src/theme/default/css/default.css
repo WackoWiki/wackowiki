@@ -1450,6 +1450,9 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-md2wacko img {
 	background: url('../../../image/wikiedit/light/markup.svg') no-repeat;
 }
+.we-toolbar li.we-syntax img {
+	background: url('../../../image/wikiedit/light/hl-syntax.svg') no-repeat;
+}
 
 .we-statusbar {
 	display: flex;
@@ -1527,7 +1530,7 @@ textarea.wikiedit-area {
 .wiki-italic { color: #070; font-style: italic; }
 .wiki-underline { color: #00a; text-decoration: underline; }
 .wiki-strike { color: #666; text-decoration: line-through; }
-.wiki-code { color: #c00; background: #f8f8f8; border-radius: 2px; }
+.wiki-code { color: #660; background: #ffc; border-radius: 2px; }/* #f8f8f8 */
 .wiki-link { color: #00c; }
 .wiki-list { color: #c60; }
 .wiki-block { color: #a0a; }
