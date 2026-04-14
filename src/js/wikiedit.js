@@ -100,6 +100,9 @@ class WikiEdit extends ProtoEdit {
 	this.addButton('customhtml', separator);
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
 	this.addButton('livepreview', lang.LivePreview || '👁 Live Preview', () => this.toggleLivePreview());
+	//this.addButton('markdown', 'MD/Wacko Toggle', () => this.toggleMarkdownMode());
+	this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
+	this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
 
 	// === ENABLE LIVE PREVIEW SYSTEM (must be called after toolbar is built) ===
 	this.enableLivePreview();
@@ -160,7 +163,7 @@ class WikiEdit extends ProtoEdit {
       if (searchItem) searchItem.addEventListener('click', () => this.showFindReplace());
       if (aboutItem)  aboutItem.addEventListener('click', () => this.showHelpModal());
     }
-	
+
 	// ====================== STATUS BAR ======================
 	const statusBar = this.createStatusBar();
 	this.area.parentNode.insertBefore(statusBar, this.area.nextSibling);
@@ -1513,5 +1516,202 @@ class WikiEdit extends ProtoEdit {
   		this.splitter.style.display = 'none';
   		this.editPane.style.flex = '1 1 100%';
   	}
+  }
+1
+  // ==================== Markdown ↔ Wacko Converter (added) ====================
+  /**
+   * Wacko → Markdown (approximate)
+   */
+  wackoToMarkdown(text) {
+    let md = text;
+
+    // Headings (== H2 → ##, === H3 → ### …)
+    md = md.replace(/^={2,7}\s+(.*?)\s*={2,}$/gm, (m, title) => {
+      const level = m.match(/^=+/)[0].length;
+      return '#'.repeat(level) + ' ' + title.trim();
+    });
+
+    // Bold (already compatible)
+    // Italic
+    md = md.replace(/\/\/(.*?)\/\//g, '*$1*');
+    // Underline (GFM compatible)
+    // Strikethrough
+    md = md.replace(/--(.*?)--/g, '~~$1~~');
+    // Inline code
+    md = md.replace(/##(.*?)##/g, '`$1`');
+    // Small text
+    md = md.replace(/\+\+(.*?)\+\+/g, '<small>$1</small>');
+    // Highlight / Marked text
+    md = md.replace(/\?\?(.*?)\?\?/g, '**$1**');
+    md = md.replace(/!!(.*?)!!/g, '**$1**');
+    md = md.replace(/!!\([^)]+\)(.*?)!!/g, '$1'); // strip color
+
+    // Quote <[ … ]>
+    md = md.replace(/<\[(.*?)\]>/gs, '> $1');
+
+    // Simple lists ( * → - )
+    md = md.replace(/^(\s*)[*+]\s+/gm, '$1- ');
+
+    // Links ((url text)) and [[page]]
+    md = md.replace(/\(\(([^)]+?)\s+([^\)]+?)\)\)/g, '[$2]($1)');
+    md = md.replace(/\[\[([^\]]+?)\]\]/g, '[$1]($1)');
+
+    // HR
+    md = md.replace(/^----$/gm, '---');
+
+    // Code blocks %% … %%
+    md = md.replace(/%%(.*?)%%/gs, '```\n$1\n```');
+	
+	// ==================== TABLES: Wacko → Markdown ====================
+	md = md.replace(/#\|[\s\S]*?\|#/gs, (block) => this._wackoTableToMarkdown(block));
+	md = md.replace(/#\|\|[\s\S]*?\|\|#/gs, (block) => this._wackoTableToMarkdown(block)); // no-border variant
+
+    return md;
+  }
+
+  /**
+     * Helper: single Wacko table block → Markdown table
+     */
+  _wackoTableToMarkdown(block) {
+    const lines = block.split(/\r?\n/).filter(l => l.trim());
+    const mdRows = [];
+
+    let isFirstRow = true;
+
+    for (let line of lines) {
+      line = line.trim();
+      if (!line || line === '#|' || line === '#||' || line === '|#' || line === '||#') continue;
+
+      // Remove row prefix (*| ^| ||) and trailing ||
+      let rowContent = line
+        .replace(/^\s*(\*|\^|\|)\|?\s*/, '')           // remove prefix
+        .replace(/\s*(\|\|?)\s*$/, '');                // remove trailing || or |
+
+      // Strip cell attributes (colspan=, align=, etc.)
+      rowContent = rowContent.replace(/\(\s*[^)]+\)\s*/g, '');
+
+      // Escape pipe if it was ""|"" (Wacko escape)
+      rowContent = rowContent.replace(/""/g, '\\|');
+
+      const cells = rowContent.split('|').map(c => c.trim());
+
+      if (cells.length < 2) continue; // not a table row
+
+      const mdRow = '| ' + cells.join(' | ') + ' |';
+
+      mdRows.push(mdRow);
+
+      // Add separator after first row (assume it's header)
+      if (isFirstRow) {
+        const separator = '| ' + cells.map(() => '---').join(' | ') + ' |';
+        mdRows.push(separator);
+        isFirstRow = false;
+      }
+    }
+
+    return mdRows.join('\n');
+  }
+
+  /**
+   * Markdown → Wacko (approximate)
+   */
+  markdownToWacko(text) {
+    let w = text;
+
+    // Headings (## → == … == with min 2 = on right)
+    w = w.replace(/^#{1,7}\s+(.*)$/gm, (m, title) => {
+      const level = m.match(/^#+/)[0].length;
+      return '='.repeat(level) + ' ' + title + ' ' + '='.repeat(Math.max(2, level));
+    });
+
+    // Bold (already compatible)
+    // Italic * → //
+    w = w.replace(/\_\_(.*?)\_\_/g, '**$1**');   // careful order: bold first in practice
+    // Strikethrough
+    w = w.replace(/~~(.*?)~~/g, '--$1--');
+	// Code blocks
+	w = w.replace(/```(.*?)```/gs, '%%$1%%');
+    // Inline code
+    w = w.replace(/`(.*?)`/g, '##$1##');
+    // Small
+    w = w.replace(/<small>(.*?)<\/small>/g, '++$1++');
+
+    // Simple lists (- → *)
+    w = w.replace(/^(\s*)[*+-] /gm, ' $1* ');
+
+    // Links [text](url) → ((url text))
+    w = w.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '(($2 $1))');
+
+    // HR
+    w = w.replace(/^---$/gm, '----');
+
+	// ==================== TABLES: Markdown → Wacko ====================
+	// Match full Markdown table blocks (header + separator + data rows)
+	w = w.replace(/(\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gs, (block) => this._markdownTableToWacko(block));
+	
+    return w;
+  }
+
+  /**
+   * Helper: single Markdown table block → Wacko table
+   */
+  _markdownTableToWacko(block) {
+    const lines = block.trim().split(/\r?\n/);
+    if (lines.length < 3) return block; // malformed
+
+    let wacko = '#|\n'; // bordered table (most common)
+
+    // Header row → *| ... |*
+    const headerCells = lines[0]
+      .split('|')
+      .map(c => c.trim())
+      .filter(c => c !== '');
+    if (headerCells.length) {
+      wacko += '*| ' + headerCells.join(' | ') + ' |*\n';
+    }
+
+    // Skip separator line (lines[1])
+
+    // Data rows → || ... ||
+    for (let i = 2; i < lines.length; i++) {
+      const cells = lines[i]
+        .split('|')
+        .map(c => c.trim())
+        .filter(c => c !== '');
+      if (cells.length) {
+        wacko += '|| ' + cells.join(' | ') + ' ||\n';
+      }
+    }
+
+    wacko += '|#\n';
+    return wacko;
+  }
+
+  /** One-click: Wacko → Markdown */
+  convertToMarkdown() {
+    if (!this.area) return;
+    const original = this.area.value;
+    this.area.value = this.wackoToMarkdown(original);
+    this.showMessage('✓ Wacko → Markdown');
+  }
+
+  /** One-click: Markdown → Wacko */
+  convertToWacko() {
+    if (!this.area) return;
+    const original = this.area.value;
+    this.area.value = this.markdownToWacko(original);
+    this.showMessage('✓ Markdown → Wacko');
+  }
+
+  /** Optional: Dual-mode toggle (Markdown ↔ Wacko editing) */
+  markdownMode = false;
+  toggleMarkdownMode() {
+    this.markdownMode = !this.markdownMode;
+    if (this.markdownMode) {
+      this.area.value = this.wackoToMarkdown(this.area.value);
+    } else {
+      this.area.value = this.markdownToWacko(this.area.value);
+    }
+    this.showMessage(this.markdownMode ? 'Markdown mode ON' : 'Wacko mode ON');
   }
 }
