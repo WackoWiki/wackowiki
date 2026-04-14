@@ -74,6 +74,7 @@ lang = {
 
 	Fullscreen:				'Fullscreen',
 	LivePreview:			'Live Preview',
+	SyntaxHighlighting:		'Syntax Highlighting',
 
 	HelpAboutTip:			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+

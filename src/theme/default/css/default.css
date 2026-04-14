@@ -1444,6 +1444,12 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-help img {
 	background: url('../../../image/wikiedit/light/help.svg') no-repeat;
 }
+.we-toolbar li.we-wacko2md img {
+	background: url('../../../image/wikiedit/light/markdown.svg') no-repeat;
+}
+.we-toolbar li.we-md2wacko img {
+	background: url('../../../image/wikiedit/light/markup.svg') no-repeat;
+}
 
 .we-statusbar {
 	display: flex;
@@ -1464,6 +1470,73 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	white-space: nowrap;
 }
 
+/* === SYNTAX HIGHLIGHTING === */
+.syntax-container {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	flex: 1 1 auto;
+	min-height: 0;
+}
+
+.syntax-highlighter {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	pointer-events: none;
+	margin: 0;
+	padding: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	background: transparent;
+	border: none;
+	z-index: 1;
+	color: #333;
+	tab-size: 4;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	word-break: normal;
+}
+
+textarea.wikiedit-area {
+	position: relative;
+	z-index: 2;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	resize: none;
+	color: #333;
+	caret-color: #000;
+	overflow-y: auto;
+	overflow-x: auto;
+	scrollbar-gutter: stable;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	word-break: normal;
+}
+
+/* Wiki syntax token colors */
+.wiki-h { color: #0073aa;  }
+.wiki-bold { color: #d00;  }
+.wiki-italic { color: #070; font-style: italic; }
+.wiki-underline { color: #00a; text-decoration: underline; }
+.wiki-strike { color: #666; text-decoration: line-through; }
+.wiki-code { color: #c00; background: #f8f8f8; border-radius: 2px; }
+.wiki-link { color: #00c; }
+.wiki-list { color: #c60; }
+.wiki-block { color: #a0a; }
+.wiki-hr { color: #999; }
+
+.we-syntax button {
+	font-size: 18px !important;
+}
+		
 /* Optional dark-mode support */
 @media (prefers-color-scheme: dark) {
 	.we-statusbar {

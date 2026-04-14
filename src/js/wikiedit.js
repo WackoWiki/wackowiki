@@ -40,6 +40,11 @@ class WikiEdit extends ProtoEdit {
 
     // Unified Help modal
     this.helpModal = null;
+
+	// Syntax Highlighting
+	this.syntaxHighlightEnabled = true;
+	this.highlighter = null;
+	this.syntaxContainer = null;
   }
 
   // Initialisation
@@ -99,12 +104,15 @@ class WikiEdit extends ProtoEdit {
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
-	this.addButton('livepreview', lang.LivePreview || '👁 Live Preview', () => this.toggleLivePreview());
+	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
 	//this.addButton('markdown', 'MD/Wacko Toggle', () => this.toggleMarkdownMode());
 	this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
 	this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
+	this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
 
-	// === ENABLE LIVE PREVIEW SYSTEM (must be called after toolbar is built) ===
+	this.area.classList.add('wikiedit-area');
+
+	// must be called after toolbar is built
 	this.enableLivePreview();
 
     // Dropdown (custom HTML)
@@ -170,6 +178,13 @@ class WikiEdit extends ProtoEdit {
 
 	// Initial display
 	this.updateStatus();
+	
+    this.area.addEventListener('input', () => this.updateStatus());
+    this.area.addEventListener('keyup', () => this.updateStatus());
+    this.area.addEventListener('click', () => this.updateStatus());
+
+	// Setup live syntax highlighting (inside the editPane)
+	if (this.syntaxHighlightEnabled) this.setupSyntaxHighlighting();
 
 	// Live updates
 	const updateStatusHandler = () => this.updateStatus();
@@ -1517,7 +1532,7 @@ class WikiEdit extends ProtoEdit {
   		this.editPane.style.flex = '1 1 100%';
   	}
   }
-1
+
   // ==================== Markdown ↔ Wacko Converter (added) ====================
   /**
    * Wacko → Markdown (approximate)
@@ -1714,4 +1729,123 @@ class WikiEdit extends ProtoEdit {
     }
     this.showMessage(this.markdownMode ? 'Markdown mode ON' : 'Wacko mode ON');
   }
+  
+  /* ================================================================
+    LIVE SYNTAX HIGHLIGHTING SETUP
+    ================================================================ */ 
+  syncContentSize() {
+    if (!this.highlighter || !this.area || !this.syntaxHighlightEnabled) return;
+
+    const ta = this.area;
+    const style = getComputedStyle(ta);
+
+    // Exact inner content area (clientWidth/Height already excludes border + scrollbar)
+    const width  = ta.clientWidth  - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const height = ta.clientHeight - parseFloat(style.paddingTop)  - parseFloat(style.paddingBottom);
+
+    this.highlighter.style.width  = `${width}px`;
+    this.highlighter.style.height = `${height}px`;
+
+    // Keep padding perfectly in sync (in case any dynamic CSS changes it)
+    this.highlighter.style.padding = style.padding;
+  }
+
+  setupSyntaxHighlighting() {
+    const ta = this.area;
+
+    this.syntaxContainer = document.createElement('div');
+    this.syntaxContainer.className = 'syntax-container';
+
+    const parent = ta.parentNode;
+    parent.insertBefore(this.syntaxContainer, ta);
+    this.syntaxContainer.appendChild(ta);
+
+    this.highlighter = document.createElement('pre');
+    this.highlighter.className = 'syntax-highlighter';
+    this.syntaxContainer.appendChild(this.highlighter);
+
+    const styles = getComputedStyle(ta);
+    this.highlighter.style.font = styles.font;
+    this.highlighter.style.lineHeight = styles.lineHeight;
+    //this.highlighter.style.padding = styles.padding;
+    this.highlighter.style.tabSize = styles.tabSize || '4';
+
+    ta.style.width = '100%';
+    ta.style.height = '100%';
+    ta.style.position = 'relative';
+    ta.style.zIndex = '2';
+    ta.style.boxSizing = 'border-box';
+
+    // Start with syntax ON
+    ta.style.background = 'transparent';
+    ta.style.color = 'transparent';
+    ta.style.caretColor = '#000';
+    ta.style.padding = styles.padding;   // keep padding on textarea for correct caret positioning
+
+    // Live update listeners
+    ta.addEventListener('input', () => {
+      this.updateSyntaxHighlight();
+      this.syncContentSize();
+    });
+
+    ta.addEventListener('scroll', () => {
+      if (this.highlighter) {
+        this.highlighter.scrollTop = ta.scrollTop;
+        this.highlighter.scrollLeft = ta.scrollLeft;
+      }
+    });
+
+    // Resize handling (split view, window resize, etc.)
+    this.resizeObserver = new ResizeObserver(() => this.syncContentSize());
+    this.resizeObserver.observe(ta);
+    this.resizeObserver.observe(this.syntaxContainer);
+
+    // Initial sync
+    this.syncContentSize();
+    this.updateSyntaxHighlight();
+	}
+
+	updateSyntaxHighlight() {
+	  if (!this.syntaxHighlightEnabled || !this.highlighter) return;
+	  this.highlighter.innerHTML = this.highlightWikiSyntax(this.area.value) + '\n';
+	}
+
+	highlightWikiSyntax(text) {
+	  if (!text) return '';
+
+	  let html = text
+	    .replace(/&/g, '&amp;')
+	    .replace(/</g, '&lt;')
+	    .replace(/>/g, '&gt;');
+
+	  html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
+	  html = html.replace(/\*\*(.+?)\*\*/g, '<span class="wiki-bold">**$1**</span>');
+	  html = html.replace(/\/\/(.+?)\/\//g, '<span class="wiki-italic">//$1//</span>');
+	  html = html.replace(/__(.+?)__/g, '<span class="wiki-underline">__$1__</span>');
+	  html = html.replace(/--(.+?)--/g, '<span class="wiki-strike">--$1--</span>');
+	  html = html.replace(/##(.+?)##/g, '<span class="wiki-code">##$1##</span>');
+	  html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
+	  html = html.replace(/^(\s*[*\d]\.?\s+)/gm, '<span class="wiki-list">$1</span>');
+	  html = html.replace(/(%%|<\[|\{\{|\?\?|\!\!)(.+?)(%%|]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
+	  html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
+
+	  return html;
+	}
+
+	toggleSyntaxHighlight() {
+	  this.syntaxHighlightEnabled = !this.syntaxHighlightEnabled;
+
+	  if (this.syntaxHighlightEnabled) {
+	    if (this.highlighter) this.highlighter.style.display = 'block';
+	    this.area.style.background = 'transparent';
+	    this.area.style.color = 'transparent';
+	    this.updateSyntaxHighlight();
+	    this.showMessage('Syntax highlighting ON', 2000);
+	  } else {
+	    if (this.highlighter) this.highlighter.style.display = 'none';
+	    this.area.style.background = '';
+	    this.area.style.color = '#333';
+	    this.showMessage('Syntax highlighting OFF', 2000);
+	  }
+	}
 }
