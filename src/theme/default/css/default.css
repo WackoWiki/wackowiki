@@ -1459,6 +1459,12 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-syntax img {
 	background: url('../../../image/wikiedit/light/hl-syntax.svg') no-repeat;
 }
+.we-toolbar li.we-enlarge img {
+	background: url('../../../image/wikiedit/light/go-down.svg') no-repeat;
+}
+.we-toolbar li.we-shrink img {
+	background: url('../../../image/wikiedit/light/go-up.svg') no-repeat;
+}
 
 .we-statusbar {
 	display: flex;

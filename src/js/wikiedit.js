@@ -127,8 +127,8 @@ class WikiEdit extends ProtoEdit {
 	this.addButton('customhtml', separator);
 
 	// === HEIGHT CONTROL (hybrid: server default via data-attr + localStorage override) ===
-	this.addButton('height-shrink', '−', () => this.changeEditorHeight(-100), 'Shrink editor height');
-	this.addButton('height-enlarge', '+', () => this.changeEditorHeight(100),  'Enlarge editor height');
+	this.addButton('shrink', '−', () => this.changeEditorHeight(-100), 'Shrink editor height');
+	this.addButton('enlarge', '+', () => this.changeEditorHeight(100),  'Enlarge editor height');
 
 	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
