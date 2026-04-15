@@ -45,6 +45,10 @@ class WikiEdit extends ProtoEdit {
 	this.syntaxHighlightEnabled = true;
 	this.highlighter = null;
 	this.syntaxContainer = null;
+
+	this.HEIGHT_KEY = 'wikiedit_editor_height';
+	this.DEFAULT_HEIGHT = 400;
+	this.preferredHeight = this.DEFAULT_HEIGHT;
   }
 
   // Initialisation
@@ -52,26 +56,12 @@ class WikiEdit extends ProtoEdit {
     this._init(id);
 
 	// ====================== HYBRID EDITOR HEIGHT (pixels, split-container focused) ======================
+	// Must run BEFORE enableLivePreview() so the split container gets the correct height
 	const ta = this.area;
-	let preferred = 400;
+	this.preferredHeight = this.loadPreferredHeight(ta);
 
-	// localStorage wins over server default
-	const saved = localStorage.getItem('wikiedit_editor_height');
-	if (saved) {
-	  preferred = parseInt(saved, 10);
-	} else {
-	  // fallback to server preference passed via data attribute
-	  const dataH = ta.dataset.editorHeight;
-	  if (dataH) preferred = parseInt(dataH, 10);
-	}
-
-	this.preferredHeight = Math.max(300, Math.min(800, preferred));
-
-	// Set explicit pixel height on textarea (used by originalHeight in enableLivePreview + non-split mode)
-	ta.style.height = this.preferredHeight + 'px';
-
-	// Optional: native vertical resize support on split container (add via CSS if desired)
-	// this.area.addEventListener('mouseup', () => { ... save to localStorage });
+	// Apply immediately to the textarea (used by enableLivePreview and non-split mode)
+	ta.style.height = `${this.preferredHeight}px`;
 
     this.imagesPath = imgPath || 'image/';
 
@@ -1423,6 +1413,72 @@ class WikiEdit extends ProtoEdit {
     }
   }
 
+  // ====================== localStorage HELPERS ======================
+  loadPreferredHeight(textarea) {
+    try {
+      const saved = localStorage.getItem(this.HEIGHT_KEY);
+      if (saved !== null) {
+        return Math.max(300, Math.min(800, parseInt(saved, 10)));
+      }
+      // fallback to server default (data-editor-height from edit.tpl)
+      const dataH = textarea?.dataset.editorHeight;
+      if (dataH) {
+        return Math.max(300, Math.min(800, parseInt(dataH, 10)));
+      }
+    } catch (e) {
+      // private mode / disabled localStorage → silent fallback
+    }
+    return this.DEFAULT_HEIGHT;
+  }
+
+  safeSetHeight(value) {
+    try {
+      localStorage.setItem(this.HEIGHT_KEY, value);
+      return true;
+    } catch (err) {
+      if (err.name === 'QuotaExceededError' ||
+          err.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
+          err.code === 22 || err.code === 1014) {
+        console.warn('[WikiEdit] localStorage quota exceeded – editor height not saved');
+        // optional: this.clearEditorSettings();
+      } else {
+        console.warn('[WikiEdit] localStorage unavailable (private mode?)');
+      }
+      return false;
+    }
+  }
+
+  // Hybrid height control – called by the ± toolbar buttons
+  changeEditorHeight(delta) {
+    let newH = this.preferredHeight + delta;
+    newH = Math.max(300, Math.min(800, newH));
+
+    this.preferredHeight = newH;
+
+    // Update split container (primary control) if it exists
+    if (this.splitContainer) {
+      this.splitContainer.style.height = `${newH}px`;
+      this.splitContainer.style.minHeight = `${Math.max(300, newH)}px`;
+    } else {
+      // fallback for non-split mode
+      this.area.style.height = `${newH}px`;
+    }
+
+    this.safeSetHeight(newH);
+
+    if (typeof this.updateStatus === 'function') {
+      this.updateStatus();
+    }
+  }
+
+  // Optional public helper – can be called from user settings or a "Reset" button
+  clearEditorSettings() {
+    try {
+      localStorage.removeItem(this.HEIGHT_KEY);
+    } catch {}
+    window.location.reload(); // reload to pick up server default again
+  }
+
   // ====================== LIVE PREVIEW ======================
   /**
    * Sets up side-by-side layout + draggable splitter + FULL bidirectional scroll sync
@@ -1431,9 +1487,9 @@ class WikiEdit extends ProtoEdit {
   enableLivePreview() {
   	const wrapper = this.area.parentNode;
 
-  	// === SAVE ORIGINAL TEXTAREA HEIGHT BEFORE MOVING IT ===
-    const originalHeight = this.area.style.height || (this.preferredHeight + 'px');
-
+	// Use hybrid preferredHeight (already set in init())
+	const originalHeight = `${this.preferredHeight}px`;
+	
   	// Create split container
   	const container = document.createElement('div');
 	container.className = 'wikiedit-split-container';
