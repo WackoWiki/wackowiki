@@ -1567,7 +1567,7 @@ class WikiEdit extends ProtoEdit {
     md = md.replace(/<\[(.*?)\]>/gs, '> $1');
 
     // Simple lists ( * → - )
-    md = md.replace(/^(\s*)[*+]\s+/gm, '$1- ');
+    md = md.replace(/^(\s*)[*-]\s+/gm, '$1- ');
 
     // Links ((url text)) and [[page]]
     md = md.replace(/\(\(([^)]+?)\s+([^\)]+?)\)\)/g, '[$2]($1)');
@@ -1635,26 +1635,38 @@ class WikiEdit extends ProtoEdit {
   markdownToWacko(text) {
     let w = text;
 
+    // List normalization for exact WackoWiki syntax
+    w = w.replace(
+      /^(\s*)([*+-]|\d+\.|[A-Za-z]\.)(?:\s*)/gm,
+      (match, indent, marker) => {
+        const len = indent.length;
+        let newIndent = indent;
+
+        if (len % 4 === 0 && len >= 4) {
+          newIndent = ' '.repeat(len / 2);
+        } else if (len === 0) {
+          newIndent = '  ';
+        }
+
+        return newIndent + marker;
+      }
+    );
+
     // Headings (## → == … == with min 2 = on right)
     w = w.replace(/^#{1,7}\s+(.*)$/gm, (m, title) => {
       const level = m.match(/^#+/)[0].length;
       return '='.repeat(level) + ' ' + title + ' ' + '='.repeat(Math.max(2, level));
     });
 
-    // Bold (already compatible)
-    // Italic * → //
-    w = w.replace(/\_\_(.*?)\_\_/g, '**$1**');   // careful order: bold first in practice
-    // Strikethrough
+    // Bold / Italic / Strikethrough / Code / Small
+    w = w.replace(/\_\_(.*?)\_\_/g, '**$1**');
     w = w.replace(/~~(.*?)~~/g, '--$1--');
-	// Code blocks
-	w = w.replace(/```(.*?)```/gs, '%%$1%%');
-    // Inline code
+    w = w.replace(/```(.*?)```/gs, '%%$1%%');
     w = w.replace(/`(.*?)`/g, '##$1##');
-    // Small
     w = w.replace(/<small>(.*?)<\/small>/g, '++$1++');
 
-    // Simple lists (- → *)
-    w = w.replace(/^(\s*)[*+-] /gm, ' $1* ');
+    // Images ![alt](url) → ((url alt))
+    w = w.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '(($2 $1))');
 
     // Links [text](url) → ((url text))
     w = w.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '(($2 $1))');
@@ -1662,10 +1674,9 @@ class WikiEdit extends ProtoEdit {
     // HR
     w = w.replace(/^---$/gm, '----');
 
-	// ==================== TABLES: Markdown → Wacko ====================
-	// Match full Markdown table blocks (header + separator + data rows)
-	w = w.replace(/(\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gs, (block) => this._markdownTableToWacko(block));
-	
+    // ==================== TABLES: Markdown → Wacko ====================
+    w = w.replace(/(\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gs, (block) => this._markdownTableToWacko(block));
+
     return w;
   }
 
@@ -1769,7 +1780,6 @@ class WikiEdit extends ProtoEdit {
     const styles = getComputedStyle(ta);
     this.highlighter.style.font = styles.font;
     this.highlighter.style.lineHeight = styles.lineHeight;
-    //this.highlighter.style.padding = styles.padding;
     this.highlighter.style.tabSize = styles.tabSize || '4';
 
     ta.style.width = '100%';
@@ -1828,7 +1838,6 @@ class WikiEdit extends ProtoEdit {
 	    return `WIKI_LITERAL_${id}`;
 	  });
 
-	  // Original syntax (unchanged order + improved comments for clarity)
 	  html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
 	  html = html.replace(/\*\*(.+?)\*\*/g, '<span class="wiki-bold">**$1**</span>');
 	  html = html.replace(/\/\/(.+?)\/\//g, '<span class="wiki-italic">//$1//</span>');
@@ -1837,7 +1846,7 @@ class WikiEdit extends ProtoEdit {
 	  html = html.replace(/##(.+?)##/g, '<span class="wiki-code">##$1##</span>');
 	  html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
 	  html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
-	  html = html.replace(/^(\s*[*\d]\.?\s+)/gm, '<span class="wiki-list">$1</span>');
+	  html = html.replace(/^(\s*([*-]|\d+\.|[a-zA-Z]\.)\s+)/gm, '<span class="wiki-list">$1</span>');
 	  html = html.replace(/(%%|<\[|\{\{|\?\?|\!\!)(.+?)(%%|]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
 	  html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
 
