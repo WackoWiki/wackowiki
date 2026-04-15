@@ -654,6 +654,7 @@ $wacko_translation = [
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'AnonymousPub'				=> 'Preferably, published anonymously (to hide the name)',
+	'EditorHeight'				=> 'Editor height',
 	'PageMoved'					=> 'This page moved. You can find it at',
 	'RedirectedFrom'			=> 'Redirected from %1',
 	'RedirectedTo'				=> 'Redirected to',

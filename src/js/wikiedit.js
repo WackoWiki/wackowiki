@@ -1442,9 +1442,6 @@ class WikiEdit extends ProtoEdit {
   	this.editPane = document.createElement('div');
   	this.editPane.style.cssText = 'flex:1 1 50%; min-width:300px; display:flex; flex-direction:column; height:100%;';
 
-	// Store reference so changeEditorHeight() can update it
-	this.splitContainer = container;
-
   	// Move textarea and FORCE it to fill the pane
   	this.area.style.cssText += 'flex:1 1 auto; height:100%; width:100%; box-sizing:border-box; resize:none; min-height:0;';
   	this.editPane.appendChild(this.area);

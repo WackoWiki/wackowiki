@@ -654,6 +654,7 @@ $wacko_translation = [
 	'HideLastSession'			=> 'Sembunyikan sesi terakhir',
 	'ValidateIP'				=> 'Menghubungkan sesi ke alamat IP',
 	'AnonymousPub'				=> 'Sebaiknya diterbitkan secara anonim (untuk menyembunyikan nama)',
+	'EditorHeight'				=> 'Editor height',
 	'PageMoved'					=> 'Halaman ini telah dipindahkan. Anda dapat menemukannya di',
 	'RedirectedFrom'			=> 'Redirected from %1',
 	'RedirectedTo'				=> 'Redirected to',

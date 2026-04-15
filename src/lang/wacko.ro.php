@@ -654,6 +654,7 @@ $wacko_translation = [
 	'HideLastSession'			=> 'Ascunde ultima sesiune',
 	'ValidateIP'				=> 'Legarea sesiunii de IP',
 	'AnonymousPub'				=> 'De preferat, publicat anonim (pentru a ascunde numele)',
+	'EditorHeight'				=> 'Înălțime editor',
 	'PageMoved'					=> 'Această pagină mutată. O puteți găsi la',
 	'RedirectedFrom'			=> 'Redirectionat de la %1',
 	'RedirectedTo'				=> 'Redirecționat către',

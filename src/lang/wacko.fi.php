@@ -654,6 +654,7 @@ $wacko_translation = [
 	'HideLastSession'			=> 'Piilota viimeinen istunto',
 	'ValidateIP'				=> 'Istunto IP-osoitteeseen',
 	'AnonymousPub'				=> 'Mieluiten julkaistu anonyymisti (piilottaa nimi)',
+	'EditorHeight'				=> 'Muokkaimen korkeus',
 	'PageMoved'					=> 'Tämä sivu siirretty. Löydät sen osoitteesta',
 	'RedirectedFrom'			=> 'Ohjattu uudelleen kohteesta %1',
 	'RedirectedTo'				=> 'Uudelleenohjattu kohteeseen',

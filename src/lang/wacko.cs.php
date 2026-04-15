@@ -654,6 +654,7 @@ $wacko_translation = [
 	'HideLastSession'			=> 'Skrýt poslední relaci',
 	'ValidateIP'				=> 'Ukládání relace na IP',
 	'AnonymousPub'				=> 'Upřednostňuji, publikováno anonymně (aby se skrývalo jméno)',
+	'EditorHeight'				=> 'Výška editoru',
 	'PageMoved'					=> 'Tato stránka byla přesunuta. Najdete ji na',
 	'RedirectedFrom'			=> 'Přesměrováno z %1',
 	'RedirectedTo'				=> 'Přesměrováno na',

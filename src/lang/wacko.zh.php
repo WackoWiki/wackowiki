@@ -654,6 +654,7 @@ $wacko_translation = [
 	'HideLastSession'			=> '隐藏上次会话',
 	'ValidateIP'				=> '将会话绑定到IP',
 	'AnonymousPub'				=> '最好是匿名发布（以隐藏名称）',
+	'EditorHeight'				=> '编辑器高度',
 	'PageMoved'					=> '这一页被移动了。你可以在',
 	'RedirectedFrom'			=> '重定向自%1',
 	'RedirectedTo'				=> '重定向至',

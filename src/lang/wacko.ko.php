@@ -654,6 +654,7 @@ $wacko_translation = [
 	'HideLastSession'			=> '마지막 세션 숨기기',
 	'ValidateIP'				=> '세션을 IP에 연결',
 	'AnonymousPub'				=> '가능하면 익명으로 게시해 주세요 (사용자 이름을 숨길 수 있도록)',
+	'EditorHeight'				=> 'Editor height',
 	'PageMoved'					=> 'This page moved. You can find it at',
 	'RedirectedFrom'			=> '%1에서 넘어옴',
 	'RedirectedTo'				=> '넘겨줄 대상',
