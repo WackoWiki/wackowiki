@@ -1442,7 +1442,7 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	background: url('../../../image/wikiedit/light/view-fullscreen.svg') no-repeat;
 }
 .we-toolbar li.we-livepreview img {
-	background: url('../../../image/wikiedit/light/view-visible.svg') no-repeat;
+	background: url('../../../image/wikiedit/light/view-presentation.svg') no-repeat;
 }
 .we-toolbar li.we-dropdown > button img {
 	background: url('../../../image/wikiedit/light/open-more.svg') no-repeat;
