@@ -49,6 +49,8 @@ class WikiEdit extends ProtoEdit {
 	this.HEIGHT_KEY = 'wikiedit_editor_height';
 	this.DEFAULT_HEIGHT = 400;
 	this.preferredHeight = this.DEFAULT_HEIGHT;
+
+	this.DRAFT_KEY_PREFIX = 'wikiedit_draft_';
   }
 
   // Initialisation
@@ -116,9 +118,11 @@ class WikiEdit extends ProtoEdit {
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
 
-	// === HEIGHT CONTROL (hybrid: server default via data-attr + localStorage override) ===
 	this.addButton('shrink', '−', () => this.changeEditorHeight(-100), 'Shrink editor height');
 	this.addButton('enlarge', '+', () => this.changeEditorHeight(100),  'Enlarge editor height');
+	this.addButton('height-reset', '⟳', () => this.clearEditorSettings(), 'Reset editor height to server default');
+	this.addButton('draft-clear', '🗑', () => this.clearDraft(), 'Clear autosaved draft');
+	this.addButton('customhtml', separator);
 
 	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
@@ -129,6 +133,9 @@ class WikiEdit extends ProtoEdit {
 	this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
 
 	this.area.classList.add('wikiedit-area');
+
+	// Setup autosave (now uses best-practice storage)
+	this.setupAutosave();
 
 	// must be called after toolbar is built
 	this.enableLivePreview();
@@ -1420,14 +1427,11 @@ class WikiEdit extends ProtoEdit {
       if (saved !== null) {
         return Math.max(300, Math.min(800, parseInt(saved, 10)));
       }
-      // fallback to server default (data-editor-height from edit.tpl)
       const dataH = textarea?.dataset.editorHeight;
       if (dataH) {
         return Math.max(300, Math.min(800, parseInt(dataH, 10)));
       }
-    } catch (e) {
-      // private mode / disabled localStorage → silent fallback
-    }
+    } catch (e) {}
     return this.DEFAULT_HEIGHT;
   }
 
@@ -1436,49 +1440,127 @@ class WikiEdit extends ProtoEdit {
       localStorage.setItem(this.HEIGHT_KEY, value);
       return true;
     } catch (err) {
-      if (err.name === 'QuotaExceededError' ||
-          err.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
-          err.code === 22 || err.code === 1014) {
-        console.warn('[WikiEdit] localStorage quota exceeded – editor height not saved');
-        // optional: this.clearEditorSettings();
-      } else {
-        console.warn('[WikiEdit] localStorage unavailable (private mode?)');
-      }
+      this._handleStorageError(err, 'editor height');
       return false;
     }
   }
 
-  // Hybrid height control – called by the ± toolbar buttons
   changeEditorHeight(delta) {
     let newH = this.preferredHeight + delta;
     newH = Math.max(300, Math.min(800, newH));
-
     this.preferredHeight = newH;
 
-    // Update split container (primary control) if it exists
     if (this.splitContainer) {
       this.splitContainer.style.height = `${newH}px`;
       this.splitContainer.style.minHeight = `${Math.max(300, newH)}px`;
     } else {
-      // fallback for non-split mode
       this.area.style.height = `${newH}px`;
     }
 
     this.safeSetHeight(newH);
 
-    if (typeof this.updateStatus === 'function') {
-      this.updateStatus();
+    if (typeof this.updateStatus === 'function') this.updateStatus();
+  }
+
+  clearEditorSettings() {
+    try { localStorage.removeItem(this.HEIGHT_KEY); } catch {}
+    console.info('[WikiEdit] Editor height reset to server default');
+    window.location.reload();
+  }
+
+// ── Autosave Draft ────────────────────────────────────────────────────────────
+  safeSetDraft(key, value) {
+    try {
+      localStorage.setItem(key, value);
+      return true;
+    } catch (err) {
+      this._handleStorageError(err, 'draft');
+      return false;
     }
   }
 
-  // Optional public helper – can be called from user settings or a "Reset" button
-  clearEditorSettings() {
+  safeGetDraft(key) {
     try {
-      localStorage.removeItem(this.HEIGHT_KEY);
-    } catch {}
-    window.location.reload(); // reload to pick up server default again
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
   }
 
+  safeRemoveDraft(key) {
+    try {
+      localStorage.removeItem(key);
+    } catch {}
+  }
+
+  _handleStorageError(err, context) {
+    if (err.name === 'QuotaExceededError' ||
+        err.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
+        err.code === 22 || err.code === 1014) {
+      console.warn(`[WikiEdit] localStorage quota exceeded – ${context} not saved`);
+    } else {
+      console.warn(`[WikiEdit] localStorage unavailable (private mode?) – ${context} skipped`);
+    }
+  }
+
+  // ====================== IMPROVED AUTOSAVE ======================
+  setupAutosave() {
+    const path = window.location.pathname;
+    const section = window.location.search || '';
+    const uniqueKey = `${this.id}-${path}${section}`;
+
+    this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;   // namespaced
+
+    this.area.addEventListener('input', this.debounceAutosave.bind(this));
+    this.area.addEventListener('blur', () => {
+      clearTimeout(this.autosaveTimer);
+      this.saveDraft();
+    });
+    window.addEventListener('beforeunload', () => this.saveDraft(), { passive: true });
+  }
+
+  debounceAutosave() {
+    clearTimeout(this.autosaveTimer);
+    this.autosaveTimer = setTimeout(() => this.saveDraft(), this.autosaveDelay);
+  }
+
+  saveDraft() {
+    if (!this.draftKey) return;
+    const content = this.area.value.trim();
+    if (content === '') {
+      this.safeRemoveDraft(this.draftKey);
+      return;
+    }
+    if (this.safeSetDraft(this.draftKey, content)) {
+      this.showMessage(`✓ ${lang.DraftSaved || 'Draft saved'}`);
+    }
+  }
+
+  loadAutosavedDraft() {
+    if (!this.draftKey) return;
+    const saved = this.safeGetDraft(this.draftKey);
+    if (saved !== null && saved !== this.area.value) {
+      const msg = lang?.AutosaveRestore || 'An autosaved draft from a previous session was found.\n\nRestore it?';
+      if (confirm(msg)) {
+        this.pushState();
+        this.area.value = saved;
+        this.area.setSelectionRange(saved.length, saved.length);
+        this.area.focus();
+        this.showMessage(`✓ ${lang.DraftRestored || 'Draft restored'}`);
+        this.updateStatus();
+      } else {
+        this.safeRemoveDraft(this.draftKey);
+      }
+    }
+  }
+
+  clearDraft() {
+    if (!this.draftKey) return;
+    this.safeRemoveDraft(this.draftKey);
+    console.info('[WikiEdit] Autosaved draft cleared');
+    this.showMessage(`🗑 ${lang.DraftCleared || 'Draft cleared'}`);
+  }
+  
   // ====================== LIVE PREVIEW ======================
   /**
    * Sets up side-by-side layout + draggable splitter + FULL bidirectional scroll sync
