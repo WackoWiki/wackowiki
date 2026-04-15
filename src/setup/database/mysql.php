@@ -345,6 +345,7 @@ $tbl_user_setting =
 		allow_massemail TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 		hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,
 		validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,
+		editor_height INT(10) UNSIGNED NOT NULL DEFAULT '400',
 		noid_pubs TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 		session_length TINYINT(3) UNSIGNED DEFAULT NULL,
 		timezone VARCHAR(100) NOT NULL DEFAULT 'UTC',

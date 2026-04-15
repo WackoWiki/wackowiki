@@ -172,6 +172,13 @@
 					</tr>
 				=]
 				<tr>
+					<th><label for="editor_height">[ ' _t: EditorHeight ' ]</label></th>
+					<td>
+						<input type="number" id="editor_height" name="editor_height" value="[ ' height ' ]" min="300" max="800" step="100" style="width:80px">
+						<span class="form-note">[ ' _t: UnitPixel ' ]</span>
+					</td>
+				</tr>
+				<tr>
 					<th><label for="default_diff_mode">[ ' _t: DefaultDiffMode ' ]</label></th>
 					<td>
 						<select id="default_diff_mode" name="diff_mode">

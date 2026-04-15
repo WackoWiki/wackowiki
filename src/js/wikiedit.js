@@ -51,6 +51,28 @@ class WikiEdit extends ProtoEdit {
   init(id, imgPath) {
     this._init(id);
 
+	// ====================== HYBRID EDITOR HEIGHT (pixels, split-container focused) ======================
+	const ta = this.area;
+	let preferred = 400;
+
+	// localStorage wins over server default
+	const saved = localStorage.getItem('wikiedit_editor_height');
+	if (saved) {
+	  preferred = parseInt(saved, 10);
+	} else {
+	  // fallback to server preference passed via data attribute
+	  const dataH = ta.dataset.editorHeight;
+	  if (dataH) preferred = parseInt(dataH, 10);
+	}
+
+	this.preferredHeight = Math.max(300, Math.min(800, preferred));
+
+	// Set explicit pixel height on textarea (used by originalHeight in enableLivePreview + non-split mode)
+	ta.style.height = this.preferredHeight + 'px';
+
+	// Optional: native vertical resize support on split container (add via CSS if desired)
+	// this.area.addEventListener('mouseup', () => { ... save to localStorage });
+
     this.imagesPath = imgPath || 'image/';
 
     // Setup undo/redo
@@ -103,6 +125,10 @@ class WikiEdit extends ProtoEdit {
     this.addButton('footnote', lang.Footnote, () => this.insTag('[[^ ', ']]', 2));
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
+
+	// === HEIGHT CONTROL (hybrid: server default via data-attr + localStorage override) ===
+	this.addButton('height-shrink', '−', () => this.changeEditorHeight(-100), 'Shrink editor height');
+	this.addButton('height-enlarge', '+', () => this.changeEditorHeight(100),  'Enlarge editor height');
 
 	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
@@ -306,6 +332,38 @@ class WikiEdit extends ProtoEdit {
         console.error('Editor fullscreen request failed:', err);
       });
     }
+  }
+
+  // Hybrid height control – called by the ± toolbar buttons
+  // Changes the wikiedit-split-container height (or textarea if split not yet enabled)
+  changeEditorHeight(delta) {
+    let newH = this.preferredHeight + delta;
+    newH = Math.max(300, Math.min(800, newH)); // sensible limits
+
+    this.preferredHeight = newH;
+
+    // Update split container if it exists (this is the main control for split-pane mode)
+    if (this.splitContainer) {
+      this.splitContainer.style.height = newH + 'px';
+      this.splitContainer.style.minHeight = Math.max(300, newH) + 'px';
+    } else {
+      // Fallback: non-split mode – update textarea directly (will be picked up when split is enabled)
+      this.area.style.height = newH + 'px';
+    }
+
+    // Persist permanently in localStorage (overrides server default for this browser)
+    localStorage.setItem('wikiedit_editor_height', newH);
+
+    // Optional: update status bar if you have one
+    if (typeof this.updateStatus === 'function') {
+      this.updateStatus();
+    }
+  }
+
+  // Optional helper – reset to server default (call from a “Reset height” button if you add one later)
+  resetEditorHeight() {
+    localStorage.removeItem('wikiedit_editor_height');
+    window.location.reload(); // reload to pick up server default again
   }
 
   // ====================== UNDO / REDO STACK ======================
@@ -1374,15 +1432,18 @@ class WikiEdit extends ProtoEdit {
   	const wrapper = this.area.parentNode;
 
   	// === SAVE ORIGINAL TEXTAREA HEIGHT BEFORE MOVING IT ===
-  	const originalHeight = this.area.style.height || getComputedStyle(this.area).height || '500px';
+    const originalHeight = this.area.style.height || (this.preferredHeight + 'px');
 
   	// Create split container
   	const container = document.createElement('div');
-  	container.className = 'wikiedit-split-container';
-  	container.style.cssText = `display:flex; height:${originalHeight}; min-height:400px; gap:8px; box-sizing:border-box;`;
+	container.className = 'wikiedit-split-container';
+	container.style.cssText = `display:flex; height:${originalHeight}; min-height:300px; gap:8px; box-sizing:border-box;`;
 
   	this.editPane = document.createElement('div');
   	this.editPane.style.cssText = 'flex:1 1 50%; min-width:300px; display:flex; flex-direction:column; height:100%;';
+
+	// Store reference so changeEditorHeight() can update it
+	this.splitContainer = container;
 
   	// Move textarea and FORCE it to fill the pane
   	this.area.style.cssText += 'flex:1 1 auto; height:100%; width:100%; box-sizing:border-box; resize:none; min-height:0;';
@@ -1394,6 +1455,9 @@ class WikiEdit extends ProtoEdit {
   	this.previewPane = document.createElement('div');
   	this.previewPane.id = 'wikiedit-live-preview';
   	this.previewPane.style.cssText = 'flex:1 1 50%; min-width:300px; overflow:auto; padding:20px; background:#fff; border:1px solid #ccc; border-radius:4px; display:none; box-sizing:border-box;';
+
+	// Store reference for changeEditorHeight()
+	this.splitContainer = container;
 
   	container.append(this.editPane, this.splitter, this.previewPane);
   	wrapper.appendChild(container);

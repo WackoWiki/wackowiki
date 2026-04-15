@@ -1285,6 +1285,12 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	gap: 3px;
 }
 
+.wikiedit-split-container {
+	resize: vertical;
+	min-height: 300px;
+	overflow: hidden;
+}
+
 .toolbar li {
 	background: var(--ww-buttonface);
 }

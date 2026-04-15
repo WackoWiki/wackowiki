@@ -61,7 +61,7 @@ $update_config_r6_1_1 = "DELETE FROM {$pref}config WHERE config_name IN ('disabl
 
 
 // USER SETTING
-
+$alter_user_setting_r6_2_1 = "ALTER TABLE {$pref}user_setting ADD COLUMN editor_height INTEGER NOT NULL DEFAULT 400";
 
 // USERGROUP
 

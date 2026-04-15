@@ -114,6 +114,7 @@ else if ($user = $this->get_user())
 		'show_files			= ' . (int) isset($_POST['show_files']) . ', ' .
 		'hide_lastsession	= ' . (int) isset($_POST['hide_lastsession']) . ', ' .
 		'validate_ip		= ' . (int) isset($_POST['validate_ip']) . ', ' .
+		'editor_height		= ' . (int) ($_POST['editor_height'] ?? 400) . ', ' .
 		'noid_pubs			= ' . (int) isset($_POST['noid_pubs']) . ', ' .
 		'session_length		= ' . (int) @$_POST['session_length'] . ' '; // @ to normalize possible discrepancy
 	}
@@ -243,6 +244,7 @@ else if ($user = $this->get_user())
 		$tpl->showfiles			= $user['show_files'];
 		$tpl->showspaces		= $user['show_spaces'];
 		$tpl->noredirect		= $user['dont_redirect'];
+		$tpl->height			= $user['editor_height'];
 		$tpl->validateip		= $user['validate_ip'];
 		$tpl->hidesession		= $user['hide_lastsession'];
 		$tpl->sessionlength		= $user['session_length'];

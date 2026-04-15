@@ -405,6 +405,7 @@ if ($this->has_access('read')
 
 	$tpl->sectionid	= $section_id;
 	$tpl->hlevel	= $h_level;
+	$tpl->height	= $user['editor_height'] ?? 450;
 	$tpl->previous	= $previous;		// -> [ ' previous | e attr ' ]
 	$tpl->body		= Ut::html($body);	// -> [ ' body | pre ' ]
 

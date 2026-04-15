@@ -41,7 +41,7 @@
 				=]
 
 				<label for="postText" class="visuallyhidden">[ ' _t: PageBody ' ]</label>
-				<textarea id="postText" name="body" class="textarea-page" rows="40" cols="60" required>[ ' body | pre ' ]</textarea>
+				<textarea id="postText" name="body" class="textarea-page" rows="40" cols="60" data-editor-height="[ ' height ' ]px" required>[ ' body | pre ' ]</textarea>
 				<br>
 
 				[= n _ =
