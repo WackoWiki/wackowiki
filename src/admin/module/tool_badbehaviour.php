@@ -852,7 +852,7 @@ function bb2_options($engine)
 		$engine->db->sql_query($sql);
 
 		// queries
-		$engine->config->invalidate_sql_cache();
+		$engine->db->invalidate_sql_cache();
 	}
 
 

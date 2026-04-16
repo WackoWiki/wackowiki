@@ -32,6 +32,13 @@
 	--ww-border: #ccc;
 	--ww-shadow: 0 1px 3px rgba(0,0,0,.1);
 	--ww-focus-ring: #3daee9;
+	
+	/* WikiEdit specific variables */
+	--we-textarea-bg: #fff;
+	--we-textarea-text: #222;
+	--we-textarea-caret: #000;
+	--we-split-bg: #f8f8f8;
+	--we-toolbar-bg: var(--ww-buttonface);
 }
 
 /* Dark theme */
@@ -55,6 +62,13 @@
 		--ww-border: #555;
 		--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
 		--ww-focus-ring: #5ab0ff;
+
+		/* WikiEdit dark variables */
+		--we-textarea-bg: #1e1e1e;
+		--we-textarea-text: #ddd;
+		--we-textarea-caret: #ddd;
+		--we-split-bg: #252526;
+		--we-toolbar-bg: #2d2d2d;
 	}
 }
 
@@ -1214,14 +1228,12 @@ a:target {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	/* gap: 4px; */
-	/* padding: 6px 8px; */
 	padding: 0;
-	background: var(--ww-buttonface);
+	/* background: var(--ww-buttonface); */
+	background: var(--we-toolbar-bg);
 	border: 1px solid #ccc;
-	/* border-radius: 4px; */
 	list-style: none;
-	/* margin: 0 0 8px 0; */
+
 	margin: 0;
 }
 
@@ -1272,10 +1284,6 @@ a:target {
 		padding: 3px;
 		font-size: 0.9em; /* smaller icons if you ever add text */
 	}
-
-	/* Optional: make the whole editor toolbar container scrollable horizontally on very narrow screens */
-	/* (uncomment if you prefer scroll instead of multi-row wrap on tiny phones) */
-	/* .we-toolbar { flex-wrap: nowrap; overflow-x: auto; } */
 }
 
 /* Fullscreen mode – keep toolbar compact */
@@ -1283,12 +1291,6 @@ a:target {
 body:has(.we-fullscreen[open]) .we-toolbar {
 	padding: 4px 6px;
 	gap: 3px;
-}
-
-.wikiedit-split-container {
-	resize: vertical;
-	min-height: 300px;
-	overflow: hidden;
 }
 
 .toolbar li {
@@ -1318,6 +1320,24 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 
 .toolbar button.btn-pressed {
 	background: var(--ww-buttonhighlight);
+}
+
+/* Our custom height/draft buttons */
+ .we-toolbar button[title*="height"],
+ .we-toolbar button[title*="draft"] {
+	font-size: 18px;
+	width: 32px;
+	height: 32px;
+	background: var(--ww-buttonface);
+	color: var(--ww-buttontext);
+}
+
+@media (prefers-color-scheme: dark) {
+	.we-toolbar button[title*="height"],
+	.we-toolbar button[title*="draft"] {
+		background: var(--we-toolbar-bg);
+		color: #ddd;
+	}
 }
 
 .we-toolbar .btn-separator {
@@ -1465,6 +1485,12 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-shrink img {
 	background: url('../../../image/wikiedit/light/go-up.svg') no-repeat;
 }
+.we-toolbar li.we-undo img {
+	background: url('../../../image/wikiedit/light/edit-undo.svg') no-repeat;
+}
+.we-toolbar li.we-redo img {
+	background: url('../../../image/wikiedit/light/edit-redo.svg') no-repeat;
+}
 
 .we-statusbar {
 	display: flex;
@@ -1526,8 +1552,9 @@ textarea.wikiedit-area {
 	width: 100%;
 	height: 100%;
 	resize: none;
-	color: #333;
-	caret-color: #000;
+	color: var(--we-textarea-text);
+	caret-color: var(--we-textarea-caret);
+	background: var(--we-textarea-bg);
 	overflow-y: auto;
 	overflow-x: auto;
 	scrollbar-gutter: stable;
@@ -1536,17 +1563,37 @@ textarea.wikiedit-area {
 	word-break: normal;
 }
 
+.wikiedit-split-container {
+	background: var(--we-split-bg);
+	resize: vertical;
+	min-height: 300px;
+	overflow: hidden;
+}
+
 /* Wiki syntax token colors */
-.wiki-h { color: #0073aa;  }
-.wiki-bold { color: #d00;  }
+.wiki-h { color: #0073aa; }
+.wiki-bold { color: #d00; }
 .wiki-italic { color: #070; font-style: italic; }
 .wiki-underline { color: #00a; text-decoration: underline; }
 .wiki-strike { color: #666; text-decoration: line-through; }
-.wiki-code { color: #660; background: #ffc; border-radius: 2px; }/* #f8f8f8 */
+.wiki-code { color: #660; background: #ffc; border-radius: 2px; }
 .wiki-link { color: #00c; }
 .wiki-list { color: #c60; }
 .wiki-block { color: #a0a; }
 .wiki-hr { color: #999; }
+
+@media (prefers-color-scheme: dark) {
+	.wiki-h { color: #5ab0ff; }
+	.wiki-bold { color: #ff6b6b; }
+	.wiki-italic { color: #7fff7f; }
+	.wiki-underline { color: #88ccff; }
+	.wiki-strike { color: #aaa; }
+	.wiki-code { color: #ffcc66; background: #332; }
+	.wiki-link { color: #88ccff; }
+	.wiki-list { color: #ffaa66; }
+	.wiki-block { color: #cc88ff; }
+	.wiki-hr { color: #777; }
+}
 
 .we-syntax button {
 	font-size: 18px !important;

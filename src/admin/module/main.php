@@ -35,7 +35,7 @@ function admin_main($engine, $module)
 		# $engine->db->sql_query($sql);
 		$engine->sess->delete_cookie(AUTH_TOKEN);
 		// queries
-		# $engine->config->invalidate_sql_cache();
+		# $engine->db->invalidate_sql_cache();
 	}
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

@@ -31,6 +31,7 @@ class WikiEdit extends ProtoEdit {
     this.maxHistory     = 100;
 
     // Autosave (localStorage draft)
+	this.hasDraft       = false; // // future flag to dynamically enable/disable the button
     this.draftKey       = null;
     this.autosaveTimer  = null;
     this.autosaveDelay  = 2000; // save 2 seconds after the last change
@@ -65,6 +66,9 @@ class WikiEdit extends ProtoEdit {
 	// Apply immediately to the textarea (used by enableLivePreview and non-split mode)
 	ta.style.height = `${this.preferredHeight}px`;
 
+	// Auto dark mode support – ensure the whole editor respects system preference
+	document.documentElement.style.setProperty('color-scheme', 'light dark');
+	
     this.imagesPath = imgPath || 'image/';
 
     // Setup undo/redo
@@ -118,19 +122,31 @@ class WikiEdit extends ProtoEdit {
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
 	this.addButton('customhtml', separator);
 
-	this.addButton('shrink', '−', () => this.changeEditorHeight(-100), 'Shrink editor height');
-	this.addButton('enlarge', '+', () => this.changeEditorHeight(100),  'Enlarge editor height');
+	this.addButton('dark-toggle', '☀️', () => this.toggleDarkMode(), 'Toggle dark/light mode (overrides system)');
+
+	this.addButton('shrink', '↓', () => this.changeEditorHeight(-100), 'Shrink editor height');
+	this.addButton('enlarge', '↑', () => this.changeEditorHeight(100),  'Enlarge editor height');
 	this.addButton('height-reset', '⟳', () => this.clearEditorSettings(), 'Reset editor height to server default');
 	this.addButton('draft-clear', '🗑', () => this.clearDraft(), 'Clear autosaved draft');
+	this.addButton('restore-draft', '🔄', () => this.restoreDraft(), 'Restore autosaved draft');
 	this.addButton('customhtml', separator);
 
+	this.addButton('undo', '↩', () => {
+	  if (this.undo()) this.updateStatus();
+	    }, 'Undo (Ctrl + Z)');
+	this.addButton('redo', '↪', () => {
+	  if (this.redo()) this.updateStatus();
+	    }, 'Redo (Ctrl + Shift + Z)');
+	this.addButton('customhtml', '<div class="btn-separator"></div>');
+		
+	this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
 	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
 	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
 
+	this.addButton('customhtml', separator);
 	//this.addButton('markdown', 'MD/Wacko Toggle', () => this.toggleMarkdownMode());
 	this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
 	this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
-	this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
 
 	this.area.classList.add('wikiedit-area');
 
@@ -232,25 +248,42 @@ class WikiEdit extends ProtoEdit {
   /**
    * Sets up autosave listeners and prepares the storage key.
    */
-  
   setupAutosave() {
-	const path = window.location.pathname;
-	const section = window.location.search || ''; // e.g., ?section=2
-	const uniqueKey = `${this.id}-${path}${section}`;
+    const path = window.location.pathname;
+    const section = window.location.search || '';
+    const uniqueKey = `${this.id}-${path}${section}`;
 
-    this.draftKey = uniqueKey;
+    this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;   // namespaced
 
-    // Save on every user edit (debounced)
     this.area.addEventListener('input', this.debounceAutosave.bind(this));
-
-    // Immediate save when focus is lost
     this.area.addEventListener('blur', () => {
       clearTimeout(this.autosaveTimer);
       this.saveDraft();
     });
+    window.addEventListener('beforeunload', () => this.saveDraft(), { passive: true });
+  }
 
-    // Final save before the page is closed/reloaded
-    window.addEventListener('beforeunload', this.saveDraft.bind(this), { passive: true });
+  /**
+   * Saves the current editor content to localStorage.
+   * Empty content is not saved (draft is cleared).
+   */
+  saveDraft() {
+    if (!this.draftKey) return;
+    const content = this.area.value.trim();
+    if (content === '') {
+      this.safeRemoveDraft(this.draftKey);
+      return;
+    }
+    if (this.safeSetDraft(this.draftKey, content)) {
+      this.showMessage(`✓ ${lang.DraftSaved || 'Draft saved'}`);
+    }
+  }
+
+  clearDraft() {
+    if (!this.draftKey) return;
+    this.safeRemoveDraft(this.draftKey);
+    console.info('[WikiEdit] Autosaved draft cleared');
+    this.showMessage(`🗑 ${lang.DraftCleared || 'Draft cleared'}`);
   }
 
   /**
@@ -264,50 +297,43 @@ class WikiEdit extends ProtoEdit {
   }
 
   /**
-   * Saves the current editor content to localStorage.
-   * Empty content is not saved (draft is cleared).
-   */
-  saveDraft() {
-    if (!this.draftKey) return;
-
-    const content = this.area.value;
-    if (content.trim() === '') {
-      localStorage.removeItem(this.draftKey);
-      return;
-    }
-    localStorage.setItem(this.draftKey, content);
-
-    // === Show draft-saved indicator ===
-    this.showMessage(`✓ ${lang.DraftSaved || 'Draft saved'}`);
-  }
-
-  /**
    * On editor initialisation: if a draft exists and differs from the loaded content,
    * the user is asked whether to restore it (with undo support).
    */
   loadAutosavedDraft() {
     if (!this.draftKey) return;
-
-    const saved = localStorage.getItem(this.draftKey);
+    const saved = this.safeGetDraft(this.draftKey);
+    if (saved !== null && saved !== this.area.value.trim()) {
+      // Just notify the user – no popup
+      this.showMessage(`📄 ${lang?.DraftAvailable || 'Autosaved draft found'} – click 🔄 Restore to recover it`, 4000);
+    }
+  }
+  
+  // Manual restore from toolbar button (no popup)
+  restoreDraft() {
+    if (!this.draftKey) return;
+    const saved = this.safeGetDraft(this.draftKey);
     if (saved !== null && saved !== this.area.value) {
-      const msg = lang?.AutosaveRestore
-        || 'An autosaved draft from a previous session was found.\n\nRestore it?';
-
-      if (confirm(msg)) {
-        this.pushState();                 // allow Ctrl+Z to revert the restore
-        this.area.value = saved;
-        this.area.setSelectionRange(saved.length, saved.length);
-        this.area.focus();
-
-        // === Show restored message + update status ===
-        this.showMessage(`✓ ${lang.DraftRestored || 'Draft restored'}`);
-        this.updateStatus();
-      } else {
-        localStorage.removeItem(this.draftKey);
-      }
+      this.pushState();                    // support Ctrl+Z to undo the restore
+      this.area.value = saved;
+      this.area.setSelectionRange(saved.length, saved.length);
+      this.area.focus();
+      this.showMessage(`✓ ${lang?.DraftRestored || 'Draft restored'}`);
+      this.updateStatus();
+    } else {
+      this.showMessage('No draft to restore');
     }
   }
 
+  toggleDarkMode() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    // Force repaint so syntax + toolbar update instantly
+    this.area.style.transition = 'background 0.2s';
+    setTimeout(() => { this.area.style.transition = ''; }, 300);
+    console.info('[WikiEdit] Manual dark mode toggled');
+  }
   /**
    * Toggle fullscreen mode ONLY for the editor container (#page-edit).
    * This gives a clean distraction-free editing area while the browser still
@@ -328,32 +354,6 @@ class WikiEdit extends ProtoEdit {
       container.requestFullscreen({ navigationUI: 'hide' }).catch(err => {
         console.error('Editor fullscreen request failed:', err);
       });
-    }
-  }
-
-  // Hybrid height control – called by the ± toolbar buttons
-  // Changes the wikiedit-split-container height (or textarea if split not yet enabled)
-  changeEditorHeight(delta) {
-    let newH = this.preferredHeight + delta;
-    newH = Math.max(300, Math.min(800, newH)); // sensible limits
-
-    this.preferredHeight = newH;
-
-    // Update split container if it exists (this is the main control for split-pane mode)
-    if (this.splitContainer) {
-      this.splitContainer.style.height = newH + 'px';
-      this.splitContainer.style.minHeight = Math.max(300, newH) + 'px';
-    } else {
-      // Fallback: non-split mode – update textarea directly (will be picked up when split is enabled)
-      this.area.style.height = newH + 'px';
-    }
-
-    // Persist permanently in localStorage (overrides server default for this browser)
-    localStorage.setItem('wikiedit_editor_height', newH);
-
-    // Optional: update status bar if you have one
-    if (typeof this.updateStatus === 'function') {
-      this.updateStatus();
     }
   }
 
@@ -1503,64 +1503,6 @@ class WikiEdit extends ProtoEdit {
     }
   }
 
-  // ====================== IMPROVED AUTOSAVE ======================
-  setupAutosave() {
-    const path = window.location.pathname;
-    const section = window.location.search || '';
-    const uniqueKey = `${this.id}-${path}${section}`;
-
-    this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;   // namespaced
-
-    this.area.addEventListener('input', this.debounceAutosave.bind(this));
-    this.area.addEventListener('blur', () => {
-      clearTimeout(this.autosaveTimer);
-      this.saveDraft();
-    });
-    window.addEventListener('beforeunload', () => this.saveDraft(), { passive: true });
-  }
-
-  debounceAutosave() {
-    clearTimeout(this.autosaveTimer);
-    this.autosaveTimer = setTimeout(() => this.saveDraft(), this.autosaveDelay);
-  }
-
-  saveDraft() {
-    if (!this.draftKey) return;
-    const content = this.area.value.trim();
-    if (content === '') {
-      this.safeRemoveDraft(this.draftKey);
-      return;
-    }
-    if (this.safeSetDraft(this.draftKey, content)) {
-      this.showMessage(`✓ ${lang.DraftSaved || 'Draft saved'}`);
-    }
-  }
-
-  loadAutosavedDraft() {
-    if (!this.draftKey) return;
-    const saved = this.safeGetDraft(this.draftKey);
-    if (saved !== null && saved !== this.area.value) {
-      const msg = lang?.AutosaveRestore || 'An autosaved draft from a previous session was found.\n\nRestore it?';
-      if (confirm(msg)) {
-        this.pushState();
-        this.area.value = saved;
-        this.area.setSelectionRange(saved.length, saved.length);
-        this.area.focus();
-        this.showMessage(`✓ ${lang.DraftRestored || 'Draft restored'}`);
-        this.updateStatus();
-      } else {
-        this.safeRemoveDraft(this.draftKey);
-      }
-    }
-  }
-
-  clearDraft() {
-    if (!this.draftKey) return;
-    this.safeRemoveDraft(this.draftKey);
-    console.info('[WikiEdit] Autosaved draft cleared');
-    this.showMessage(`🗑 ${lang.DraftCleared || 'Draft cleared'}`);
-  }
-  
   // ====================== LIVE PREVIEW ======================
   /**
    * Sets up side-by-side layout + draggable splitter + FULL bidirectional scroll sync

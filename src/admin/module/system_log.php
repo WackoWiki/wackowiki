@@ -34,7 +34,7 @@ function admin_system_log($engine, $module)
 		$engine->db->sql_query($sql);
 
 		// queries
-		$engine->config->invalidate_sql_cache();
+		$engine->db->invalidate_sql_cache();
 	}
 
 	if (isset($_POST['update']) || isset($_GET['level_mod']))
