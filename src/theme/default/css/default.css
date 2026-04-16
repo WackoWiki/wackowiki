@@ -1571,7 +1571,7 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	background: transparent;
 	border: none;
 	z-index: 1;
-	color: #333;
+	color: var(--ww-text);
 	tab-size: 4;
 	white-space: pre-wrap;
 	overflow-wrap: break-word;

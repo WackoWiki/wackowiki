@@ -127,8 +127,12 @@ class WikiEdit extends ProtoEdit {
 	this.addButton('shrink', '↓', () => this.changeEditorHeight(-100), 'Shrink editor height');
 	this.addButton('enlarge', '↑', () => this.changeEditorHeight(100),  'Enlarge editor height');
 	this.addButton('height-reset', '⟳', () => this.clearEditorSettings(), 'Reset editor height to server default');
-	this.addButton('draft-clear', '🗑', () => this.clearDraft(), 'Clear autosaved draft');
-	this.addButton('restore-draft', '🔄', () => this.restoreDraft(), 'Restore autosaved draft');
+	
+	const autosaveEnabled = this.area.dataset.autosaveDraft !== '0';
+	if (autosaveEnabled) {
+		this.addButton('draft-clear', '🗑', () => this.clearDraft(), 'Clear autosaved draft');
+		this.addButton('restore-draft', '🔄', () => this.restoreDraft(), 'Restore autosaved draft');
+	}
 	this.addButton('customhtml', separator);
 
 	this.addButton('undo', '↩', () => {
@@ -151,7 +155,7 @@ class WikiEdit extends ProtoEdit {
 	this.area.classList.add('wikiedit-area');
 
 	// Setup autosave (now uses best-practice storage)
-	this.setupAutosave();
+	// this.setupAutosave();
 
 	// must be called after toolbar is built
 	this.enableLivePreview();
@@ -239,8 +243,11 @@ class WikiEdit extends ProtoEdit {
     }
 
     // ====================== AUTOSAVE SETUP ======================
-    this.setupAutosave();
-    this.loadAutosavedDraft();
+	// Setup autosave ONLY if user has it enabled
+	if (this.area.dataset.autosaveDraft !== '0') {
+	    this.setupAutosave();
+	    this.loadAutosavedDraft();
+	}
   }
 
   // ====================== AUTOSAVE (localStorage draft) ======================

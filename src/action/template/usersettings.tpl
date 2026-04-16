@@ -172,6 +172,13 @@
 					</tr>
 				=]
 				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<input type="checkbox" id="autosave_draft" name="autosave_draft" id="autosave_draft"[ ' autosave | checkbox ' ]>
+						<label for="autosave_draft">[ ' _t: AutosaveDraft ' ]</label>
+					</td>
+				</tr>
+				<tr>
 					<th><label for="editor_height">[ ' _t: EditorHeight ' ]</label></th>
 					<td>
 						<input type="number" id="editor_height" name="editor_height" value="[ ' height ' ]" min="300" max="800" step="100" style="width:80px">
