@@ -1521,6 +1521,9 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-redo img {
 	background: url('../../../image/wikiedit/light/edit-redo.svg') no-repeat;
 }
+.we-toolbar li.we-dark-toggle img {
+	background: url('../../../image/wikiedit/light/darkmode.svg') no-repeat;
+}
 
 .we-statusbar {
 	display: flex;
