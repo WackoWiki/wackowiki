@@ -41,8 +41,38 @@
 	--we-toolbar-bg: var(--ww-buttonface);
 }
 
+/* === MANUAL THEME OVERRIDE (data-theme) === */
+:root[data-theme="dark"] {
+	--ww-bg-primary: #1e1e1e;
+	--ww-bg-secondary: #252526;
+	--ww-text: #ddd;
+	--ww-a-normal: #5ab0ff;
+	--ww-a-hover: #ff6b6b;
+	--ww-a-active: #ff4444;
+	--ww-a-visited: #c77;
+	--ww-a-target-bg: #332;
+	--ww-hover-primary: #334;
+	--ww-hover-secondary: #223344;
+	--ww-buttonface: rgb(45, 45, 48);
+	--ww-buttonhighlight: rgb(70, 70, 75);
+	--ww-buttonshadow: rgb(30, 30, 30);
+	--ww-buttontext: #ddd;
+	--ww-font-color: #ddd;
+	--ww-border: #555;
+	--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
+	--ww-focus-ring: #5ab0ff;
+
+	/* WikiEdit dark variables */
+	--we-textarea-bg: #1e1e1e;
+	--we-textarea-text: #ddd;
+	--we-textarea-caret: #ddd;
+	--we-split-bg: #252526;
+	--we-toolbar-bg: #2d2d2d;
+}
+
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
 	:root {
 		--ww-bg-primary: #1e1e1e;
 		--ww-bg-secondary: #252526;
@@ -69,7 +99,7 @@
 		--we-textarea-caret: #ddd;
 		--we-split-bg: #252526;
 		--we-toolbar-bg: #2d2d2d;
-	}
+	}}
 }
 
 p,

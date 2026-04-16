@@ -138,6 +138,7 @@ else if ($user = $this->get_user())
 		$sql =
 		'user_lang			= ' . $this->db->q($user_lang) . ', ' .
 		'theme				= ' . $this->db->q($theme) . ', ' .
+		'dark_mode			= ' . (int) $_POST['dark_mode'] . ', ' .
 		'timezone			= ' . $this->db->q($timezone) . ', ' .
 		'date_preference	= ' . $this->db->q($preference) . ', ' .
 		'sorting_comments	= ' . (int) $_POST['sorting_comments'] . ', ' .
@@ -312,6 +313,8 @@ else if ($user = $this->get_user())
 			$tpl->t_theme	= $theme;
 			$tpl->t_sel		= (int) (isset($a_theme) && $a_theme == $theme);
 		}
+
+		$tpl->modeoffset	= $user['dark_mode'];
 
 		$a_zone			= $user['timezone'] ?: $this->db->timezone;
 

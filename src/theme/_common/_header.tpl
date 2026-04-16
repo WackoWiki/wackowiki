@@ -2,7 +2,7 @@ _common include file for themes
 
 [ === HtmlHead === ]
 <!DOCTYPE html>
-<html dir="[ ' dir ' ]" lang="[ ' lang ' ]">
+<html dir="[ ' dir ' ]" lang="[ ' lang ' ]" data-theme="[ ' mode ' ]">
 <head>
 	<meta charset="utf-8">
 	<title>[ ' title | e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name | e ' ]</title>

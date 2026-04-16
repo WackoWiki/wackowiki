@@ -819,7 +819,7 @@ class WackoFormatter
 			// TODO: set list-style-type via predefined CSS class, e.g. for 'lower-greek'
 
 			// the order matters for Roman numerals
-			$new_indent_type = match(1){
+			$new_indent_type = match(true){
 				preg_match('/[*-]/',	$indent_type)	=> '*',
 				preg_match('/\d/',		$indent_type)	=> '1',	// numbers
 				preg_match('/[iv]/',	$indent_type)	=> 'i',	// lowercase Roman numerals

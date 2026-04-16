@@ -118,6 +118,7 @@ $upgrade['6.2.0'][]	= ['update',	'config',			$update_config_r6_1_1];
 
 // user setting
 $upgrade['6.2.1'][]		= ['alter',		'user_setting',		$alter_user_setting_r6_2_1];
+$upgrade['6.2.1'][]		= ['alter',		'user_setting',		$alter_user_setting_r6_2_2];
 
 // usergroup
 

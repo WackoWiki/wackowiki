@@ -349,6 +349,7 @@ $tbl_user_setting = <<<STR
 		"hide_lastsession" TINYINT NULL  ,
 		"validate_ip" TINYINT NULL  ,
 		"editor_height" INTEGER NOT NULL DEFAULT '400' ,
+		"dark_mode" TINYINT NOT NULL DEFAULT '0' ,
 		"noid_pubs" TINYINT NOT NULL DEFAULT '0' ,
 		"session_length" TINYINT NULL  ,
 		"timezone" VARCHAR(100) NOT NULL DEFAULT 'UTC' ,

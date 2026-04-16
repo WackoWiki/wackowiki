@@ -283,6 +283,16 @@
 						</td>
 					</tr>
 					<tr>
+						<td><label for="dark_mode">[ ' _t: DarkMode ' ]</label></td>
+						<td>
+							<select id="dark_mode" name="dark_mode">
+								<option value="0"[ ' modeoffset | select 0 ' ]>Auto (system)</option>
+								<option value="1"[ ' modeoffset | select 1 ' ]>Light</option>
+								<option value="2"[ ' modeoffset | select 2 ' ]>Dark</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td><br></td>
 					</tr>
 					<tr>

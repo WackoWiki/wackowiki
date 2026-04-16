@@ -100,6 +100,12 @@ if ($u_doubleclick
 	$tpl->doubleclick_href = $this->href('edit');
 }
 
+$tpl->mode = match (@$user['dark_mode']){
+	1		=> 'light',
+	2		=> 'dark',
+	default	=> 'auto',
+};
+
 if ($this->method == 'edit')
 {
 	$tpl->edit_lang	= $this->user_lang;
