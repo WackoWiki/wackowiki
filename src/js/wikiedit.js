@@ -2008,6 +2008,7 @@ class WikiEdit extends ProtoEdit {
 	  html = html.replace(/##(.+?)##/g, '<span class="wiki-code">##$1##</span>');
 	  html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
 	  html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
+	  html = html.replace(/(file:((\.\.|!)\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&=]*)?)/ug, '<span class="wiki-link">$1</span>');
 	  html = html.replace(/^(\s*([*-]|\d+\.|[a-zA-Z]\.)\s+)/gm, '<span class="wiki-list">$1</span>');
 	  html = html.replace(/(%%|<\[|\{\{|\?\?|\!\!)(.+?)(%%|]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
 	  html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
