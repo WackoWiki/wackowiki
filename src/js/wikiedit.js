@@ -69,6 +69,16 @@ class WikiEdit extends ProtoEdit {
 	// Auto dark mode support – ensure the whole editor respects system preference
 	document.documentElement.style.setProperty('color-scheme', 'light dark');
 	
+	// === DRAG & DROP + PASTE SUPPORT FOR IMAGES/FILES ===
+	if (this.canUpload) {
+		this.area.addEventListener('dragover',  this.handleDragOver.bind(this));
+		this.area.addEventListener('drop',      this.handleDrop.bind(this));
+		this.area.addEventListener('paste',     this.handlePaste.bind(this));
+	}
+
+	// === DRAG & DROP + PASTE MEDIA UPLOAD – only if user is allowed to upload ===
+	this.canUpload = this.area.dataset.canUpload === '1';
+	
     this.imagesPath = imgPath || 'image/';
 
     // Setup undo/redo
@@ -123,6 +133,10 @@ class WikiEdit extends ProtoEdit {
 	this.addButton('customhtml', separator);
 
 	this.addButton('dark-toggle', '☀️', () => this.toggleDarkMode(), 'Toggle dark/light mode (overrides system)');
+
+	if (this.canUpload) {
+	  this.addButton('upload-media', '📤', () => this.triggerFileUpload(), 'Upload image/file (drag & drop also supported)');
+	}
 
 	this.addButton('shrink', '↓', () => this.changeEditorHeight(-100), 'Shrink editor height');
 	this.addButton('enlarge', '↑', () => this.changeEditorHeight(100),  'Enlarge editor height');
@@ -2022,5 +2036,118 @@ class WikiEdit extends ProtoEdit {
 	    this.area.style.color = '#333';
 	    this.showMessage('Syntax highlighting OFF', 2000);
 	  }
+	}
+	
+	// ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
+	handleDragOver(e) {
+	  e.preventDefault();
+	  e.stopPropagation();
+	  this.area.classList.add('dragover');           // optional visual feedback (see CSS below)
+	}
+
+	handleDrop(e) {
+	  e.preventDefault();
+	  e.stopPropagation();
+	  this.area.classList.remove('dragover');
+	  const files = e.dataTransfer.files;
+	  if (files && files.length) this.uploadMediaFiles(files);
+	}
+
+	handlePaste(e) {
+	  const items = e.clipboardData?.items || [];
+	  const files = [];
+	  for (let item of items) {
+	    if (item.kind === 'file') {
+	      const file = item.getAsFile();
+	      if (file) files.push(file);
+	    }
+	  }
+	  if (files.length) {
+	    e.preventDefault();   // prevent plain text paste
+	    this.uploadMediaFiles(files);
+	  }
+	}
+
+	// Trigger native file dialog (for the new toolbar button)
+	triggerFileUpload() {
+	  const input = document.createElement('input');
+	  input.type = 'file';
+	  input.multiple = true;
+	  input.accept = 'image/*,*/*';   // all files
+	  input.onchange = (e) => {
+	    if (e.target.files.length) this.uploadMediaFiles(e.target.files);
+	  };
+	  input.click();
+	}
+
+	// Core upload function
+	// ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
+	async uploadMediaFiles(files) {
+	  let uploadUrl = window.location.pathname.replace(/\/edit$/, '/upload');
+	  if (!uploadUrl.endsWith('/upload')) uploadUrl += '/upload';
+	  uploadUrl = window.location.origin + uploadUrl;
+
+	  for (let file of files) {
+		const cursorPos = this.area.selectionStart;
+	    const placeholder = `[uploading ${file.name}...]`;
+	    this.insertAtCursor(placeholder);
+
+	    const formData = new FormData();
+	    formData.append('_nonce', this.area.dataset.uploadNonce || '');
+	    formData.append('_action', 'upload');
+	    formData.append('upload', '1');
+	    formData.append('ajax', '1');
+	    formData.append('upload_to', 'local');
+	    formData.append('file', file);
+
+	    try {
+	      const response = await fetch(uploadUrl, {
+	        method: 'POST',
+	        body: formData,
+	        credentials: 'same-origin'
+	      });
+
+	      let result = {};
+	      try { result = await response.json(); } catch (e) {}
+
+	      // Remove placeholder
+	      this.area.value = this.area.value.replace(placeholder, '');
+	      this.area.selectionStart = this.area.selectionEnd = cursorPos;
+
+	      if (response.ok && result.filename) {
+	        const isImage = file.type.startsWith('image/');
+	        const syntax = isImage
+	          ? `file:${result.filename}\n`
+	          : `((file:${result.filename} ${result.filename}))\n`;
+
+	        this.insertAtCursor(syntax + ' ');
+	        this.showMessage(`✓ ${file.name} uploaded`);
+
+	        // Update nonce for the next file ===
+	        if (result.new_nonce) {
+	          this.area.dataset.uploadNonce = result.new_nonce;
+	        }
+	      } else {
+	        console.error('Upload failed – server response:', result);
+	        this.showMessage(`✗ ${file.name}: ${result.error || 'Upload failed'}`, true);
+	      }
+	    } catch (err) {
+	      this.area.value = this.area.value.replace(placeholder, '');
+              this.area.selectionStart = this.area.selectionEnd = cursorPos;
+              this.showMessage(`✗ ${file.name} upload error`, true);
+              console.error(err);
+	    }
+	  }
+	}
+
+	// Helper: insert text at current cursor position
+	insertAtCursor(text) {
+	  const ta = this.area;
+	  const start = ta.selectionStart;
+	  const end = ta.selectionEnd;
+	  ta.value = ta.value.substring(0, start) + text + ta.value.substring(end);
+	  ta.selectionStart = ta.selectionEnd = start + text.length;
+	  ta.focus();
+	  this.updateStatus();
 	}
 }

@@ -1,4 +1,16 @@
 <?php
+// === AJAX UPLOAD SUPPORT FOR WIKIEDIT DRAG & DROP / PASTE ===
+// This small block makes the official upload handler return JSON
+// when called via AJAX (detected by Accept header).
+if (isset($_POST['upload']) && $_SERVER['HTTP_ACCEPT'] && str_contains($_SERVER['HTTP_ACCEPT'], 'application/json'))
+{
+	header('Content-Type: application/json; charset=utf-8');
+
+	// Run the normal upload logic (the rest of this file)
+	// We let the original code run, then catch the result at the end.
+
+	ob_start(); // buffer any output the original handler might produce
+}
 
 if (!defined('IN_WACKO'))
 {
@@ -68,7 +80,7 @@ $sanitize_filename = function($name)
 	if ($this->db->upload_translit)
 	{
 		$t_name	= Ut::translit($name, $this->db->upload_translit_lower);
-		$t_name	= preg_replace('/[\p{Z}]+/u', '_', $t_name);
+		$t_name	= preg_replace('/[^' . self::PATTERN['ALPHANUM_P'] . '\.]/u', '', $t_name);
 	}
 	else
 	{
@@ -357,7 +369,7 @@ if (isset($_POST['upload']) & $can_upload)
 							$page_id		= $is_global ? 0 : $this->page['page_id'];
 
 							// replace option: keep old data if new entry is empty
-							$description	= mb_substr($_POST['file_description'], 0, 250);
+							$description	= mb_substr(($_POST['file_description'] ?? ''), 0, 250);
 							$description	= $this->sanitize_text_field((string) $description, true);
 
 							if ($replace)
@@ -450,7 +462,10 @@ if (isset($_POST['upload']) & $can_upload)
 								$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $file_name, $file_size_ft));
 							}
 
-							$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
+							if (!isset($_POST['ajax']))
+							{
+								$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
+							}
 						} // [F] forbid
 					}
 					else // [E] maxsize
@@ -507,7 +522,11 @@ if (isset($_POST['upload']) & $can_upload)
 	if ($error)
 	{
 		$this->set_message($error, 'error');
-		$this->reload_me();
+
+		if (!isset($_POST['ajax']))
+		{
+			$this->reload_me();
+		}
 	}
 }
 else
@@ -529,4 +548,33 @@ else
 	{
 		$this->set_message($this->_t('UploadForbidden'));
 	}
+}
+
+// === AJAX JSON RESPONSE FOR WIKIEDIT DRAG & DROP + PASTE ===
+if (isset($_POST['upload']) && isset($_POST['ajax']))
+{
+	header('Content-Type: application/json; charset=utf-8');
+
+	if (isset($file_name) && $file_name !== '')
+	{
+		// Regenerate a fresh nonce for the next upload (fixes multi-file CSRF)
+		$new_nonce = $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
+
+		echo json_encode([
+			'filename'  => $file_name,
+			'new_nonce' => $new_nonce
+		]);
+	}
+	else
+	{
+		// Debug output so we can see exactly what failed
+		echo json_encode([
+			'error'     => $error ?? 'Upload failed (unknown reason)',
+			'fs_name'   => $fs_name ?? 'undefined',
+			'ext'       => $ext ?? 'undefined',
+			'post'      => $_POST,
+			'files'     => $_FILES
+		]);
+	}
+	exit;
 }

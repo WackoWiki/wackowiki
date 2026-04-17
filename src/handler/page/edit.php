@@ -31,7 +31,13 @@ if ($this->has_access('read')
 		return;
 	}
 
-	$user		= $this->get_user();
+	$user			= $this->get_user();
+	$upload_nonce	= '';
+
+	if ($can_upload = $this->can_upload())
+	{
+		$upload_nonce	= $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
+	}
 
 	// is comment?
 	if ($is_comment)
@@ -115,6 +121,33 @@ if ($this->has_access('read')
 			], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 			exit;   // important – do not continue with normal form rendering
+		}
+
+		// === AJAX FILE UPLOAD (for WikiEdit drag & drop + paste) ===
+		// Triggered when JS sends FormData with action=upload + $_FILES['file']
+		if (isset($_POST['action']) && $_POST['action'] === 'upload' && isset($_FILES['file']))
+		{
+			$file = $_FILES['file'];
+
+			// Use WackoWiki's built-in upload method (respects all permissions, file types, quotas, etc.)
+			$result = $this->upload_file(
+				$file,
+				$this->tag,                     // current page tag
+				$this->page['page_id'] ?? 0     // page_id (0 for new pages)
+			);
+
+			header('Content-Type: application/json; charset=utf-8');
+
+			if ($result && !empty($result['filename']))
+			{
+				echo json_encode(['filename' => $result['filename']]);
+			}
+			else
+			{
+					echo json_encode(['error' => $result['error'] ?? 'Upload failed']);
+			}
+
+			exit;
 		}
 
 		$anchor		= [];
@@ -405,6 +438,8 @@ if ($this->has_access('read')
 
 	$tpl->sectionid	= $section_id;
 	$tpl->hlevel	= $h_level;
+	$tpl->nonce		= $upload_nonce;
+	$tpl->upload	= (int)$can_upload;
 	$tpl->autosave	= $user['autosave_draft'] ?? 0;;
 	$tpl->height	= $user['editor_height'] ?? 400;
 	$tpl->previous	= $previous;		// -> [ ' previous | e attr ' ]
