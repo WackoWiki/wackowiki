@@ -1538,7 +1538,7 @@ class WikiEdit extends ProtoEdit {
 
   	this.previewPane = document.createElement('div');
   	this.previewPane.id = 'wikiedit-live-preview';
-  	this.previewPane.style.cssText = 'flex:1 1 50%; min-width:300px; overflow:auto; padding:20px; background:#fff; border:1px solid #ccc; border-radius:4px; display:none; box-sizing:border-box;';
+  	this.previewPane.style.cssText = 'flex:1 1 50%; min-width:300px; overflow:auto; padding:20px; border:1px solid #ccc; border-radius:4px; display:none; box-sizing:border-box;';
 
 	// Store reference for changeEditorHeight()
 	this.splitContainer = container;

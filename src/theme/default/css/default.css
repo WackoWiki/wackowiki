@@ -3,7 +3,10 @@
 	/* Light theme (default) */
 	--ww-bg-primary: #fcfcfc;
 	--ww-bg-secondary: #fff;
+	--ww-bg-tertiary: #fcfcfc;
 	--ww-text: #222;
+	--ww-text-secondary: #444;
+	--ww-text-tertiary: #444;
 	--ww-a-normal: #039;
 	--ww-a-hover: #b90022;
 	--ww-a-active: #ff0000;
@@ -23,11 +26,12 @@
 	--ww-buttonshadow: rgb(160, 160, 160);
 	--ww-buttontext: rgb(0, 0, 0);
 
-	--ww-font-color: #222;
 	--ww-font-size: 0.875rem;
 	--ww-font-serif: "Times New Roman", Times, serif;
 	--ww-font-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	--ww-font-monospace: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+	
+	--ww-table-header-bg: #eee;
 
 	--ww-border: #ccc;
 	--ww-shadow: 0 1px 3px rgba(0,0,0,.1);
@@ -45,7 +49,10 @@
 :root[data-theme="dark"] {
 	--ww-bg-primary: #1e1e1e;
 	--ww-bg-secondary: #252526;
+	--ww-bg-tertiary: #121212;
 	--ww-text: #ddd;
+	--ww-text-secondary: #c0c0c0;
+	--ww-text-tertiary: #c0c0c0;
 	--ww-a-normal: #5ab0ff;
 	--ww-a-hover: #ff6b6b;
 	--ww-a-active: #ff4444;
@@ -57,7 +64,7 @@
 	--ww-buttonhighlight: rgb(70, 70, 75);
 	--ww-buttonshadow: rgb(30, 30, 30);
 	--ww-buttontext: #ddd;
-	--ww-font-color: #ddd;
+	--ww-table-header-bg: #333;
 	--ww-border: #555;
 	--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
 	--ww-focus-ring: #5ab0ff;
@@ -76,7 +83,10 @@
 	:root {
 		--ww-bg-primary: #1e1e1e;
 		--ww-bg-secondary: #252526;
+		--ww-bg-tertiary: #121212;
 		--ww-text: #ddd;
+		--ww-text-secondary: #c0c0c0;
+		--ww-text-tertiary: #c0c0c0;
 		--ww-a-normal: #5ab0ff;
 		--ww-a-hover: #ff6b6b;
 		--ww-a-active: #ff4444;
@@ -88,7 +98,7 @@
 		--ww-buttonhighlight: rgb(70, 70, 75);
 		--ww-buttonshadow: rgb(30, 30, 30);
 		--ww-buttontext: #ddd;
-		--ww-font-color: #ddd;
+		--ww-table-header-bg: #333;
 		--ww-border: #555;
 		--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
 		--ww-focus-ring: #5ab0ff;
@@ -159,6 +169,7 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
+	color: var(--ww-text);
 	background-color: var(--ww-bg-secondary);
 	border: 1px solid var(--ww-border);
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
@@ -223,7 +234,7 @@ body {
 	font-family: var(--ww-font-sans-serif);
 	font-size: var(--ww-font-size);
 	line-height: 1.3;
-	color: var(--ww-font-color);
+	color: var(--ww-text);
 	background-color: var(--ww-bg-primary);
 	margin: 0;
 }
@@ -358,7 +369,7 @@ a.edit-section {
 }
 
 form input.submitinput {
-	color: var(--ww-font-color);
+	color: var(--ww-text);
 }
 
 #header-site,
@@ -367,7 +378,7 @@ form input.submitinput {
 #header-site a:visited {
 	font-size: 1.5rem;
 	font-weight: normal;
-	color: #444;
+	color: var(--ww-text-tertiary);
 	text-decoration: none;
 }
 
@@ -490,7 +501,7 @@ form input.submitinput {
 
 .warning {
 	color: #d33;
-	background: #fcfcfc;
+	background: var(--ww-bg-primary);
 	border: 1px dotted #d893a1;
 	font-weight: bold;
 }
@@ -587,7 +598,7 @@ article header {
 }
 
 .breadcrumb {
-	background-color: #fcfcfc;
+	background-color: var(--ww-bg-primary);
 	border-bottom: 1px dotted #b2b0b0;
 	border-top: 1px dotted #b2b0b0;
 	color: #333;
@@ -928,7 +939,7 @@ ol#comments ul ul ul {
 .commentform {
 	padding: 10px 20px;
 	margin: 0 -20px;
-	background-color: #fcfcfc;
+	background-color: var(--ww-bg-primary);
 	float: left;
 	width: 100%;
 }
@@ -977,7 +988,7 @@ ol#comments ul ul ul {
 
 /* Included pages: SYNTAX {{include page="xyz"}} */
 .include-page {
-	background-color: #fcfcfc;
+	background-color: var(--ww-bg-primary);
 	padding: 8px;
 }
 
@@ -1060,7 +1071,7 @@ a.btn-link {
 }
 
 .file th {
-	color: #444;
+	color: var(--ww-text-tertiary);
 	font-weight: normal;
 	text-align: left;
 	width: 130px;
@@ -1100,7 +1111,7 @@ td.file- {
 
 .file td.desc- {
 	font-size: 80%;
-	color: #444;
+	color: var(--ww-text-tertiary);
 }
 
 .file td.dt- .dt2-,
@@ -1123,7 +1134,7 @@ td.file- {
 }
 
 .filemeta th {
-	color: #444;
+	color: var(--ww-text-tertiary);
 	font-weight: normal;
 	text-align: left;
 	width: 130px;
@@ -1149,7 +1160,7 @@ td.file- {
 }
 
 .filemeta summary {
-	color: #444;
+	color: var(--ww-text-tertiary);
 }
 
 .file-info {
@@ -1212,7 +1223,7 @@ p.preview {
 	padding: 10px;
 	border: #ccc 1px dotted;
 	border-radius: .1rem;
-	background-color: #fcfcfc;
+	background-color: var(--ww-bg-primary);;
 }
 
 .layout-box > p {
@@ -1362,13 +1373,21 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	color: var(--ww-buttontext);
 }
 
+:root[data-theme="dark"] {
+	.we-toolbar button[title*="height"],
+	.we-toolbar button[title*="draft"] {
+		background: var(--we-toolbar-bg);
+		color: #ddd;
+}}
+
 @media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
 	.we-toolbar button[title*="height"],
 	.we-toolbar button[title*="draft"] {
 		background: var(--we-toolbar-bg);
 		color: #ddd;
 	}
-}
+}}
 
 .we-toolbar .btn-separator {
 	border-left: 1px solid var(--ww-buttonshadow);
@@ -1615,7 +1634,7 @@ textarea.wikiedit-area {
 .wiki-block { color: #a0a; }
 .wiki-hr { color: #999; }
 
-@media (prefers-color-scheme: dark) {
+:root[data-theme="dark"] {
 	.wiki-h { color: #5ab0ff; }
 	.wiki-bold { color: #ff6b6b; }
 	.wiki-italic { color: #7fff7f; }
@@ -1628,12 +1647,26 @@ textarea.wikiedit-area {
 	.wiki-hr { color: #777; }
 }
 
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+	.wiki-h { color: #5ab0ff; }
+	.wiki-bold { color: #ff6b6b; }
+	.wiki-italic { color: #7fff7f; }
+	.wiki-underline { color: #88ccff; }
+	.wiki-strike { color: #aaa; }
+	.wiki-code { color: #ffcc66; background: #332; }
+	.wiki-link { color: #88ccff; }
+	.wiki-list { color: #ffaa66; }
+	.wiki-block { color: #cc88ff; }
+	.wiki-hr { color: #777; }
+}}
+
 .we-syntax button {
 	font-size: 18px !important;
 }
 		
 /* Optional dark-mode support */
-@media (prefers-color-scheme: dark) {
+:root[data-theme="dark"] {
 	.we-statusbar {
 		background: #2a2a2a;
 		color: #aaa;
@@ -1642,7 +1675,25 @@ textarea.wikiedit-area {
 	.we-statusbar .we-message {
 		color: #4ade80;
 	}
+	#page-edit:fullscreen {
+		background: #1e1e1e;
+	}
 }
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+	.we-statusbar {
+		background: #2a2a2a;
+		color: #aaa;
+		border-color: #444;
+	}
+	.we-statusbar .we-message {
+		color: #4ade80;
+	}
+	#page-edit:fullscreen {
+		background: #1e1e1e;
+	}
+}}
 
 /* Make sure the edit container can expand fully */
 #page-edit:fullscreen {
@@ -1654,12 +1705,6 @@ textarea.wikiedit-area {
 	overflow: hidden;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-	#page-edit:fullscreen {
-		background: #1e1e1e;
-	}
-}
 	/* WikiEdit modal Forms --------------------------------- */
 .we-modal {
 	display: none;
@@ -2075,11 +2120,11 @@ textarea.wikiedit-area {
 }
 
 .form-tbl td label {
-	color: #666;
+	color: var(--ww-text-secondary);
 }
 
 .form-tbl th {
-	color: #444;
+	color: var(--ww-text-tertiary);
 	font-weight: bold;
 	text-align: right;
 	vertical-align: top;
@@ -2644,14 +2689,14 @@ table.formation td {
 #page-handler li.active {
 	border: 1px solid #aaa;
 	border-bottom-width: 0;
-	background-color: #fcfcfc;
+	background-color: var(--ww-bg-primary);
 }
 
 #page-handler ul ul li.active {
 	border: 1px solid #aaa;
 	border-right-color: #ccc;
 	border-bottom: 0 #ccc;
-	background-color: #fcfcfc;
+	background-color: var(--ww-bg-primary);
 	width: 100%;
 	padding: 0;
 	margin-left: -1px;
@@ -3006,7 +3051,7 @@ li.m-source img {
 }
 
 .upload-table th {
-	color: #444;
+	color: var(--ww-text-tertiary);
 	font-weight: normal;
 	text-align: left;
 	width: 130px;
@@ -3033,7 +3078,7 @@ li.m-source img {
 }
 
 .user-profile th {
-	color: #444;
+	color: var(--ww-text-tertiary);
 	font-weight: bold;
 	width: 100px;
 	white-space: nowrap;
@@ -3225,7 +3270,7 @@ a.acl-private {
 }
 
 .set-category legend {
-	color: #444;
+	color: var(--ww-text-tertiary);
 }
 
 .category-browser {

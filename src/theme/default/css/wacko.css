@@ -59,6 +59,23 @@ h4 { font-size: 1rem; margin-top: 15px; border-bottom: 1px #999 solid;}
 h5 { font-size: 0.875rem; margin-top: 10px; border-bottom: 1px #bbb solid;}
 h6 { font-size: 0.875rem; margin-top: 10px;}
 
+:root[data-theme="dark"] {
+	h1 { color: #6ea8e4; }
+	h2 { color: #5a90d2;}
+	h3 { border-bottom-color: #444; }
+	h4 { border-bottom-color: #666; }
+	h5 { border-bottom-color: #555; }
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+	h1 { color: #6ea8e4; }
+	h2 { color: #5a90d2;}
+	h3 { border-bottom-color: #444; }
+	h4 { border-bottom-color: #666; }
+	h5 { border-bottom-color: #555; }
+}}
+
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{ text-align: center;}
 
@@ -185,7 +202,7 @@ div.hl-main {
 }
 
 .usertable th {
-	background-color: #eee;
+	background-color: var(--ww-table-header-bg);
 }
 
 .usertable caption {
@@ -560,7 +577,7 @@ img.media-right,
 /* Quotes: SYNTAX <[text]> */
 blockquote {
 	border: 1px solid #f5f5f5;
-	color: #444;
+	color: var(--ww-text-tertiary);
 	margin: 0;
 	padding: 1.5rem 1.875rem 1.5rem 4rem;
 	font-family: var(--ww-font-sans-serif);
@@ -740,6 +757,58 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	.sql-4			{ color: #9CDCFE; }
 	.sql-5			{ color: #888888; }
 }
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+	/* Quoted message on new email */
+	.email1			{ color: #F48771; }
+	.email2			{ color: #D7BA7D; }
+	.email-odd		{ color: #F48771; }
+	.email-even		{ color: #D7BA7D; }
+
+	.hl-brackets	{ color: #4EC9B0; }
+	.hl-builtin		{ color: #CE9178; }
+	.hl-code		{ color: #D7BA7D; }
+	.hl-comment		{ color: #6A6A6A; }
+	.hl-default		{ color: #DADADA; }
+	.hl-identifier	{ color: #DADADA; }
+	.hl-inlinedoc	{ color: #9CDCFE; }
+	.hl-inlinetags	{ color: #F48771; }
+	.hl-number		{ color: #B5CEA8; }
+	.hl-quotes		{ color: #CE9178; }
+	.hl-reserved	{ color: #C586C0; }
+	.hl-special		{ color: #9CDCFE; }
+	.hl-string		{ color: #CE9178; }
+	.hl-url			{ color: #F48771; }
+	.hl-var			{ color: #9CDCFE; }
+	
+	/* HTML Syntax */
+	.html-attr		{ color: #CE9178; font-weight: bold; }
+	.html-attrval	{ color: #9CDCFE; }
+	.html-comment	{ color: #6A6A6A; }
+	.html-entity	{ color: #FF8C00; }
+	.html-tag		{ color: #569CD6; font-weight: bold; }
+	
+	/* SYNTAX %%(css)%% */
+	.css-attr		{ color: #CE9178; font-weight: bold; }
+	.css-attrval	{ color: #9CDCFE; }
+	.css-comment	{ color: #6A6A6A; }
+	.css-digit		{ color: #B5CEA8; }
+	.css-entity		{ color: #FF8C00; }
+	.css-tag		{ color: #569CD6; }
+	
+	/* SYNTAX %%(ini)%% */
+	.ini-1			{ color: #9CDCFE; }
+	.ini-2			{ color: #B5CEA8; }
+	.ini-3			{ color: #F48771; font-weight: bold; background: #2D2D2D; }
+	
+	/* SYNTAX %%(sql)%% */
+	.sql-1			{ color: #75A7C8; }
+	.sql-2			{ color: #C586C0; }
+	.sql-3			{ color: #B5CEA8; font-weight: bold; }
+	.sql-4			{ color: #9CDCFE; }
+	.sql-5			{ color: #888888; }
+}}
 
 /** Wrapper-related **********************************************************/
 
