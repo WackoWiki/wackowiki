@@ -43,7 +43,7 @@ function admin_config_notifications($engine, $module)
 		$config['allow_intercom']				= (int) $_POST['allow_intercom'];
 		$config['allow_massemail']				= (int) $_POST['allow_massemail'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, '!!' . $engine->_t('NotificationSettingsUpdated', SYSTEM_LANG)  . '!!');
 		$engine->set_message($engine->_t('NotificationSettingsUpdated'), 'success');

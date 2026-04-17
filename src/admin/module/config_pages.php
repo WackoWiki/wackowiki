@@ -81,7 +81,7 @@ function admin_config_pages($engine, $module)
 		$config['orphaned_page']			= (string) $sanitize_tag($_POST['orphaned_page']);
 		$config['sandbox']					= (string) $sanitize_tag($_POST['sandbox']);
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, $engine->_t('PagesSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('PagesSettingsUpdated'), 'success');

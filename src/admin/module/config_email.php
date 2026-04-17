@@ -100,7 +100,7 @@ function admin_config_email($engine, $module)
 		$config['smtp_port']					= (int) $_POST['smtp_port'];
 		$config['smtp_username']				= (string) $_POST['smtp_username'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, '!!' . $engine->_t('EmailSettingsUpdated', SYSTEM_LANG) . '!!');
 		$engine->set_message($engine->_t('EmailSettingsUpdated'), 'success');

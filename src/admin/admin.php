@@ -107,7 +107,7 @@ if (@$_POST['_action'] === 'ap_login')
 
 		if ($engine->db->ap_failed_login_count > 0)
 		{
-			$engine->config->set('ap_failed_login_count', 0);
+			$engine->db->set('ap_failed_login_count', 0);
 		}
 
 		$engine->log(1, $engine->_t('LogAdminLoginSuccess', SYSTEM_LANG));
@@ -121,7 +121,7 @@ if (@$_POST['_action'] === 'ap_login')
 		// set default login count
 		$engine->sess->ap_failed_login_count ??= 0;
 
-		$engine->config->set('ap_failed_login_count', $engine->db->ap_failed_login_count + 1);
+		$engine->db->set('ap_failed_login_count', $engine->db->ap_failed_login_count + 1);
 		$engine->log(1, $engine->_t('LogAdminLoginFailed', SYSTEM_LANG));
 
 		++$engine->sess->ap_failed_login_count;

@@ -65,7 +65,7 @@ function admin_config_security($engine, $module)
 		$config['form_token_time']				= (int) $_POST['form_token_time'];
 		$config['registration_delay']			= (int) $_POST['registration_delay'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, '!!' . $engine->_t('SecuritySettingsUpdated', SYSTEM_LANG) . '!!');
 		$engine->set_message($engine->_t('SecuritySettingsUpdated'), 'success');

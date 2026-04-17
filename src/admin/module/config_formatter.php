@@ -57,7 +57,7 @@ function admin_config_formatter($engine, $module)
 		$config['numerate_links']			= (int) ($_POST['numerate_links'] ?? 0);
 		$config['canonical']				= (int) ($_POST['canonical'] ?? 0);
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, $engine->_t('FormatterSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('FormatterSettingsUpdated'), 'success');

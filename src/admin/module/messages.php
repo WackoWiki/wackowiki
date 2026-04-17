@@ -38,7 +38,7 @@ function admin_messages($engine, $module)
 		$config['system_message_audience']	= (int) $_POST['system_message_audience'];
 		$config['enable_system_message']	= (int) $_POST['enable_system_message'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, $engine->_t('SysMsgUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('SysMsgUpdated'), 'success');

@@ -76,7 +76,7 @@ function admin_config_permissions($engine, $module)
 		$config['categories_handler']			= (int) ($_POST['categories_handler'] ?? 0);
 		$config['moders_can_edit']				= (int) $_POST['moders_can_edit'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, '!!' . $engine->_t('PermissionsSettingsUpdated', SYSTEM_LANG) . '!!');
 		$engine->set_message($engine->_t('PermissionsSettingsUpdated'), 'success');

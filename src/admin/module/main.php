@@ -24,7 +24,7 @@ function admin_main($engine, $module)
 	// (un)lock website
 	if ($action == 'lock')
 	{
-		$engine->config->lock();
+		$engine->db->lock();
 
 		$engine->http->redirect($engine->href());
 	}

@@ -396,7 +396,7 @@ function admin_user_users($engine, $module)
 							#"AND owner_id = " . (int) $user_id . " " .
 						'');
 
-					$engine->config->invalidate_config_cache();
+					$engine->db->invalidate_config_cache();
 					$engine->show_message(Ut::perc_replace($engine->_t('UsersDeleted'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>'), 'success');
 					$engine->log(4, Ut::perc_replace($engine->_t('LogUserDeleted', SYSTEM_LANG), $user['user_name']));
 				}

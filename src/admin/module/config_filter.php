@@ -44,7 +44,7 @@ function admin_config_filter($engine, $module)
 		$config['spam_filter']					= (string) $_POST['spam_filter'];
 		#$config['spam_action']					= (string) $_POST['spam_action'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		// write antispam.conf file
 		$phrase_list	= (string) $_POST['phrase_list'];

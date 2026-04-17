@@ -100,7 +100,7 @@ function admin_config_basic($engine, $module)
 
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, $engine->_t('LogBasicSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('BasicSettingsUpdated'), 'success');

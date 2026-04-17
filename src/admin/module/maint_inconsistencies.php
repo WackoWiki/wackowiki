@@ -403,7 +403,7 @@ function admin_maint_inconsistencies($engine, $module)
 					WHERE u.user_id IS NULL
 				)');
 
-			$_solved['1.1'] = ['usergroup_member without user', $engine->config->affected_rows];
+			$_solved['1.1'] = ['usergroup_member without user', $engine->db->affected_rows];
 
 			// 1.2 menu without user
 			$engine->db->sql_query(
@@ -413,7 +413,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					user_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['1.2'] = ['menu without user', $engine->config->affected_rows];
+			$_solved['1.2'] = ['menu without user', $engine->db->affected_rows];
 
 			// 1.3 upload without user
 			$admin_id = $engine->db->load_single(
@@ -433,7 +433,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					user_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['1.3'] = ['upload without user', $engine->config->affected_rows];
+			$_solved['1.3'] = ['upload without user', $engine->db->affected_rows];
 
 			// 1.4 user_settings without user
 			$engine->db->sql_query(
@@ -448,7 +448,7 @@ function admin_maint_inconsistencies($engine, $module)
 								ON us.user_id = u.user_id
 						WHERE u.user_id IS NULL)');
 
-			$_solved['1.4'] = ['user_settings without user', $engine->config->affected_rows];
+			$_solved['1.4'] = ['user_settings without user', $engine->db->affected_rows];
 
 			// 1.5 watches without user
 			$engine->db->sql_query(
@@ -458,7 +458,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					user_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['1.5'] = ['watches without user', $engine->config->affected_rows];
+			$_solved['1.5'] = ['watches without user', $engine->db->affected_rows];
 
 			// 1.6 auth_token without user
 			$engine->db->sql_query(
@@ -468,7 +468,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					user_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['1.6'] = ['auth_token without user', $engine->config->affected_rows];
+			$_solved['1.6'] = ['auth_token without user', $engine->db->affected_rows];
 
 			// 2. without page
 			// 2.1 acl without page
@@ -479,7 +479,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					page_id NOT IN (SELECT page_id FROM ' . $prefix . 'page)');
 
-			$_solved['2.1'] = ['acl without page', $engine->config->affected_rows];
+			$_solved['2.1'] = ['acl without page', $engine->db->affected_rows];
 
 			// 2.2 category_assignment without page
 			$engine->db->sql_query(
@@ -493,7 +493,7 @@ function admin_maint_inconsistencies($engine, $module)
 							ON ca.object_id = p.page_id
 					WHERE p.page_id IS NULL)');
 
-			$_solved['2.2'] = ['category_assignment without page', $engine->config->affected_rows];
+			$_solved['2.2'] = ['category_assignment without page', $engine->db->affected_rows];
 
 			// 2.3 page_link without page
 			$engine->db->sql_query(
@@ -503,7 +503,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					from_page_id NOT IN (SELECT page_id FROM ' . $prefix . 'page)');
 
-			$_solved['2.3'] = ['page_link without page', $engine->config->affected_rows];
+			$_solved['2.3'] = ['page_link without page', $engine->db->affected_rows];
 
 			// 2.4 menu without page
 			$engine->db->sql_query(
@@ -513,7 +513,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					page_id NOT IN (SELECT page_id FROM ' . $prefix . 'page)');
 
-			$_solved['2.4'] = ['menu without page', $engine->config->affected_rows];
+			$_solved['2.4'] = ['menu without page', $engine->db->affected_rows];
 
 			// 2.6 referrer without page
 			$engine->db->sql_query(
@@ -528,7 +528,7 @@ function admin_maint_inconsistencies($engine, $module)
 								ON r.page_id = p.page_id
 						WHERE p.page_id IS NULL)');
 
-			$_solved['2.6'] = ['referrer without page', $engine->config->affected_rows];
+			$_solved['2.6'] = ['referrer without page', $engine->db->affected_rows];
 
 			// 2.7 upload without page and not global
 			$engine->db->sql_query(
@@ -541,7 +541,7 @@ function admin_maint_inconsistencies($engine, $module)
 						FROM ' . $prefix . 'page)
 						AND page_id != 0');
 
-			$_solved['2.7']	= ['upload without page and not global', $engine->config->affected_rows];
+			$_solved['2.7']	= ['upload without page and not global', $engine->db->affected_rows];
 
 			// 2.8 watch without page
 			$engine->db->sql_query(
@@ -556,7 +556,7 @@ function admin_maint_inconsistencies($engine, $module)
 								ON (w.page_id = p.page_id)
 						WHERE p.page_id IS NULL)');
 
-			$_solved['2.8'] = ['watch without page', $engine->config->affected_rows];
+			$_solved['2.8'] = ['watch without page', $engine->db->affected_rows];
 
 			// 2.9 revision without page
 			$engine->db->sql_query(
@@ -571,7 +571,7 @@ function admin_maint_inconsistencies($engine, $module)
 								ON r.page_id = p.page_id
 						WHERE p.page_id IS NULL)');
 
-			$_solved['2.9'] = ['revision without page', $engine->config->affected_rows];
+			$_solved['2.9'] = ['revision without page', $engine->db->affected_rows];
 
 			// 2.10 external_link without page
 			$engine->db->sql_query(
@@ -586,7 +586,7 @@ function admin_maint_inconsistencies($engine, $module)
 								ON l.page_id = p.page_id
 						WHERE p.page_id IS NULL)');
 
-			$_solved['2.10'] = ['external_link without page', $engine->config->affected_rows];
+			$_solved['2.10'] = ['external_link without page', $engine->db->affected_rows];
 
 			// 2.11 file_link without page
 			$engine->db->sql_query(
@@ -596,7 +596,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					page_id NOT IN (SELECT page_id FROM ' . $prefix . 'page)');
 
-			$_solved['2.11'] = ['file_link without page', $engine->config->affected_rows];
+			$_solved['2.11'] = ['file_link without page', $engine->db->affected_rows];
 
 			// 2.12 comment without page
 			$engine->db->sql_query(
@@ -607,7 +607,7 @@ function admin_maint_inconsistencies($engine, $module)
 					comment_on_id <> 0
 					AND comment_on_id NOT IN (SELECT page_id FROM ' . $prefix . 'page)');
 
-			$_solved['2.12'] = ['comment without parent page', $engine->config->affected_rows];
+			$_solved['2.12'] = ['comment without parent page', $engine->db->affected_rows];
 
 			// 3.1 usergroup_member without group
 			$engine->db->sql_query(
@@ -617,7 +617,7 @@ function admin_maint_inconsistencies($engine, $module)
 				WHERE
 					group_id NOT IN (SELECT group_id FROM ' . $prefix . 'usergroup)');
 
-			$_solved['3.1'] = ['usergroup_member without usergroup', $engine->config->affected_rows];
+			$_solved['3.1'] = ['usergroup_member without usergroup', $engine->db->affected_rows];
 
 			// 3.2 page without valid user_id (e.g. deleted user)
 			$sys_user_id = $engine->db->load_single(
@@ -639,7 +639,7 @@ function admin_maint_inconsistencies($engine, $module)
 					user_id <> 0
 					AND user_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['3.2'] = ['page without valid user_id', $engine->config->affected_rows];
+			$_solved['3.2'] = ['page without valid user_id', $engine->db->affected_rows];
 
 			// 3.3 page without valid ower_id (e.g. deleted user)
 			$engine->db->sql_query(
@@ -651,7 +651,7 @@ function admin_maint_inconsistencies($engine, $module)
 					owner_id <> 0
 					AND owner_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['3.3'] = ['page without valid owner_id', $engine->config->affected_rows];
+			$_solved['3.3'] = ['page without valid owner_id', $engine->db->affected_rows];
 
 			// 3.4 revision without valid user_id (e.g. deleted user)
 			$engine->db->sql_query(
@@ -663,7 +663,7 @@ function admin_maint_inconsistencies($engine, $module)
 					user_id <> 0
 					AND user_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['3.4'] = ['revision without valid user_id', $engine->config->affected_rows];
+			$_solved['3.4'] = ['revision without valid user_id', $engine->db->affected_rows];
 
 			// 3.5 revision without valid owner_id (e.g. deleted user)
 			$engine->db->sql_query(
@@ -675,7 +675,7 @@ function admin_maint_inconsistencies($engine, $module)
 					owner_id <> 0
 					AND owner_id NOT IN (SELECT user_id FROM ' . $prefix . 'user)');
 
-			$_solved['3.5'] = ['revision without valid owner_id', $engine->config->affected_rows];
+			$_solved['3.5'] = ['revision without valid owner_id', $engine->db->affected_rows];
 
 			// execution summery
 			echo '<table class="formation" style="max-width: 600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';

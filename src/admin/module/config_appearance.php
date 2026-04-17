@@ -68,7 +68,7 @@ function admin_config_appearance($engine, $module)
 				$config['logo_width']		= '';
 			}
 
-			$engine->config->_set($config);
+			$engine->db->_set($config);
 		}
 		else
 		{
@@ -156,7 +156,7 @@ function admin_config_appearance($engine, $module)
 
 					$config['site_' . $file]		= $result_name;
 
-					$engine->config->_set($config);
+					$engine->db->_set($config);
 
 					$engine->set_message($engine->_t('UploadDone'), 'success');
 				}
@@ -233,7 +233,7 @@ function admin_config_appearance($engine, $module)
 
 		$config['allow_themes_per_page']	= (int) ($_POST['themes_per_page'] ?? null);
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, $engine->_t('AppearanceSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('AppearanceSettingsUpdated'), 'success');

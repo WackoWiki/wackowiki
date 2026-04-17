@@ -521,7 +521,7 @@ function bb2_options($engine)
 		$config['reverse_proxy_addresses']		= (string) $_POST['reverse_proxy_addresses'];
 		*/
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, '!!' . $engine->_t('BbSettingsUpdated') . '!!');
 		$engine->set_message($engine->_t('BbSettingsUpdated'));
@@ -839,7 +839,7 @@ function bb2_options($engine)
 	{
 		$config['ext_bad_behaviour'] = (int) $_POST['ext_bad_behaviour'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, '!!' . $engine->_t('BbSettingsUpdated') . '!!');
 		$engine->set_message($engine->_t('BbSettingsUpdated'));

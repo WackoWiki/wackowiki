@@ -122,7 +122,7 @@ function admin_config_upload($engine, $module)
 		$config['max_thumb_width']			= (int) $_POST['max_thumb_width'];
 		$config['max_image_width']			= (int) $_POST['max_image_width'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, $engine->_t('UploadSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('UploadSettingsUpdated'), 'success');

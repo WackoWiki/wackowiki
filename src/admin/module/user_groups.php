@@ -96,7 +96,7 @@ function admin_user_groups($engine, $module)
 						(int) $member['user_id'] . ')'
 					);
 
-					$engine->config->invalidate_config_cache();
+					$engine->db->invalidate_config_cache();
 					$engine->show_message($engine->_t('MembersAdded'), 'success');
 					$engine->log(4, Ut::perc_replace($engine->_t('LogMemberAdded', SYSTEM_LANG), $member['user_name'], $usergroup['group_name']));
 					unset($_POST['add_member']);
@@ -110,7 +110,7 @@ function admin_user_groups($engine, $module)
 					'WHERE group_id = ' . (int) $p_group_id . ' ' .
 						'AND user_id = ' . (int) $member['user_id']);
 
-				$engine->config->invalidate_config_cache();
+				$engine->db->invalidate_config_cache();
 				$engine->show_message($engine->_t('MembersRemoved'), 'success');
 				$engine->log(4, Ut::perc_replace($engine->_t('LogMemberRemoved', SYSTEM_LANG), $member['user_name'], $usergroup['group_name']));
 			}
@@ -245,7 +245,7 @@ function admin_user_groups($engine, $module)
 						(int) $active . ')'
 					);
 
-				$engine->config->invalidate_config_cache();
+				$engine->db->invalidate_config_cache();
 				$engine->show_message($engine->_t('GroupsAdded'), 'success');
 				$engine->log(4, Ut::perc_replace($engine->_t('LogGroupCreated', SYSTEM_LANG), $_POST['new_group_name']));
 				unset($_POST['create']);
@@ -308,7 +308,7 @@ function admin_user_groups($engine, $module)
 				'WHERE group_id = ' . (int) $usergroup['group_id']) . ' ' .
 					'AND is_system <> 1';
 
-			$engine->config->invalidate_config_cache();
+			$engine->db->invalidate_config_cache();
 			$engine->show_message(Ut::perc_replace($engine->_t('GroupsDeleted'), '<code>' . $usergroup['group_name'] . '</code>'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRemoved', SYSTEM_LANG), $usergroup['group_name']));
 

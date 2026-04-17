@@ -48,7 +48,7 @@ function admin_config_syndication($engine, $module)
 		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
 		$config['xml_changes_link']				= (int) $_POST['xml_changes_link'];
 
-		$engine->config->_set($config);
+		$engine->db->_set($config);
 
 		$engine->log(1, $engine->_t('SyndicationSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('SyndicationSettingsUpdated'), 'success');
