@@ -630,14 +630,6 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 .chat-u7 { background: rgba(255,145,0,.1); }
 .chat-u8 { background: rgba(101,31,255,.1); }
 
-/* SYNTAX %%(css)%% */
-.css-attr		{ color: #800000; font-weight: bold; }
-.css-attrval	{ color: blue; }
-.css-comment	{ color: gray; }
-.css-digit		{ color: green; }
-.css-entity		{ color: orange; }
-.css-tag		{ color: red; }
-
 /* SYNTAX %%(hl xyz)%% */
 
 .hl-main {
@@ -678,6 +670,14 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 .html-entity	{ color: orange; }
 .html-tag		{ color: #000080; font-weight: bold; }
 
+/* SYNTAX %%(css)%% */
+.css-attr		{ color: #800000; font-weight: bold; }
+.css-attrval	{ color: blue; }
+.css-comment	{ color: gray; }
+.css-digit		{ color: green; }
+.css-entity		{ color: orange; }
+.css-tag		{ color: red; }
+
 /* SYNTAX %%(ini)%% */
 .ini-1 { color: #40d; }
 .ini-2 { color: #262; }
@@ -689,6 +689,57 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 .sql-3 { color: green; font-weight: bold; }
 .sql-4 { color: blue; }
 .sql-5 { color: #888; }
+
+:root[data-theme="dark"] {
+	/* Quoted message on new email */
+	.email1			{ color: #F48771; }
+	.email2			{ color: #D7BA7D; }
+	.email-odd		{ color: #F48771; }
+	.email-even		{ color: #D7BA7D; }
+
+	.hl-brackets	{ color: #4EC9B0; }
+	.hl-builtin		{ color: #CE9178; }
+	.hl-code		{ color: #D7BA7D; }
+	.hl-comment		{ color: #6A6A6A; }
+	.hl-default		{ color: #DADADA; }
+	.hl-identifier	{ color: #DADADA; }
+	.hl-inlinedoc	{ color: #9CDCFE; }
+	.hl-inlinetags	{ color: #F48771; }
+	.hl-number		{ color: #B5CEA8; }
+	.hl-quotes		{ color: #CE9178; }
+	.hl-reserved	{ color: #C586C0; }
+	.hl-special		{ color: #9CDCFE; }
+	.hl-string		{ color: #CE9178; }
+	.hl-url			{ color: #F48771; }
+	.hl-var			{ color: #9CDCFE; }
+	
+	/* HTML Syntax */
+	.html-attr		{ color: #CE9178; font-weight: bold; }
+	.html-attrval	{ color: #9CDCFE; }
+	.html-comment	{ color: #6A6A6A; }
+	.html-entity	{ color: #FF8C00; }
+	.html-tag		{ color: #569CD6; font-weight: bold; }
+	
+	/* SYNTAX %%(css)%% */
+	.css-attr		{ color: #CE9178; font-weight: bold; }
+	.css-attrval	{ color: #9CDCFE; }
+	.css-comment	{ color: #6A6A6A; }
+	.css-digit		{ color: #B5CEA8; }
+	.css-entity		{ color: #FF8C00; }
+	.css-tag		{ color: #569CD6; }
+	
+	/* SYNTAX %%(ini)%% */
+	.ini-1			{ color: #9CDCFE; }
+	.ini-2			{ color: #B5CEA8; }
+	.ini-3			{ color: #F48771; font-weight: bold; background: #2D2D2D; }
+	
+	/* SYNTAX %%(sql)%% */
+	.sql-1			{ color: #75A7C8; }
+	.sql-2			{ color: #C586C0; }
+	.sql-3			{ color: #B5CEA8; font-weight: bold; }
+	.sql-4			{ color: #9CDCFE; }
+	.sql-5			{ color: #888888; }
+}
 
 /** Wrapper-related **********************************************************/
 
