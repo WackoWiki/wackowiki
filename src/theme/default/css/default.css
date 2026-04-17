@@ -3,7 +3,7 @@
 	/* Light theme (default) */
 	--ww-bg-primary: #fcfcfc;
 	--ww-bg-secondary: #fff;
-	--ww-bg-tertiary: #fcfcfc;
+	--ww-bg-tertiary: #f0f4f5;
 	--ww-text: #222;
 	--ww-text-secondary: #444;
 	--ww-text-tertiary: #444;
@@ -49,7 +49,7 @@
 :root[data-theme="dark"] {
 	--ww-bg-primary: #1e1e1e;
 	--ww-bg-secondary: #252526;
-	--ww-bg-tertiary: #121212;
+	--ww-bg-tertiary: #1a2b3c;
 	--ww-text: #ddd;
 	--ww-text-secondary: #c0c0c0;
 	--ww-text-tertiary: #c0c0c0;
@@ -83,7 +83,7 @@
 	:root {
 		--ww-bg-primary: #1e1e1e;
 		--ww-bg-secondary: #252526;
-		--ww-bg-tertiary: #121212;
+		--ww-bg-tertiary: #1a2b3c;
 		--ww-text: #ddd;
 		--ww-text-secondary: #c0c0c0;
 		--ww-text-tertiary: #c0c0c0;
@@ -728,7 +728,7 @@ footer {
 }
 
 .footer {
-	background-color: #f0f4f5;
+	background-color: var(--ww-bg-tertiary);
 	padding: 5px 20px;
 	border-top: none;
 	border-top: 1px dotted #ccc;
@@ -811,7 +811,7 @@ header:hover > span.article-header-meta a {
 	/* Headers (always visible) */
 #header-files,
 #header-comments {
-	background-color: #f0f4f5;
+	background-color: var(--ww-bg-tertiary);
 	padding: 4px 20px;
 	margin: 0 -20px;
 	border-top: 1px dotted #ccc;
@@ -1543,6 +1543,9 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-dark-toggle img {
 	background: url('../../../image/wikiedit/light/darkmode.svg') no-repeat;
 }
+.we-toolbar li.we-upload-media img {
+	background: url('../../../image/wikiedit/light/upload.svg') no-repeat;
+}
 
 .we-statusbar {
 	display: flex;
@@ -1620,6 +1623,18 @@ textarea.wikiedit-area {
 	resize: vertical;
 	min-height: 300px;
 	overflow: hidden;
+}
+
+.wikiedit-area.dragover {
+	background: #e0f0ff !important;
+	outline: 3px dashed #0099ff;
+	transition: all 0.2s;
+}
+@media (prefers-color-scheme: dark) {
+	.wikiedit-area.dragover {
+		background: #003344 !important;
+		outline-color: #44ccff;
+	}
 }
 
 /* Wiki syntax token colors */
