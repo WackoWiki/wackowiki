@@ -37,8 +37,8 @@ class WikiEdit extends ProtoEdit {
     this.autosaveDelay = 2000; // save 2 seconds after the last change
 
     // UI panels
-    this.findForm       = null;
-    this.helpModal      = null;
+    this.findForm = null;
+    this.helpModal = null;
 
     // Syntax Highlighting (overlay)
     this.syntaxHighlightEnabled = true;
@@ -46,7 +46,7 @@ class WikiEdit extends ProtoEdit {
     this.syntaxContainer = null;
 
     // Editor height
-    this.HEIGHT_KEY     = 'wikiedit_editor_height';
+    this.HEIGHT_KEY = 'wikiedit_editor_height';
     this.DEFAULT_HEIGHT = 400;
     this.preferredHeight = this.DEFAULT_HEIGHT;
 
@@ -72,8 +72,7 @@ class WikiEdit extends ProtoEdit {
     // ====================== FEATURE FLAGS ======================
     this.syntaxHighlighting = ta.dataset.syntaxHighlighting !== '0';
     this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
-    this.canUpload          = ta.dataset.canUpload === '1';
-
+    this.canUpload = ta.dataset.canUpload === '1';
 
     // ====================== DRAG & DROP + PASTE ======================
     if (this.canUpload) {
@@ -81,8 +80,6 @@ class WikiEdit extends ProtoEdit {
       this.area.addEventListener('drop', this.handleDrop.bind(this));
       this.area.addEventListener('paste', this.handlePaste.bind(this));
     }
-
-
 
     this.imagesPath = imgPath || 'image/';
 
@@ -169,23 +166,6 @@ class WikiEdit extends ProtoEdit {
 
     this.area.classList.add('wikiedit-area');
 
-    // must be called after toolbar is built
-    this.enableLivePreview();
-	// ====================== LIVE PREVIEW (features [a] + [b]) ======================
-	this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
-
-	// [a] Check default + [b] respect persisted user choice (like syntax highlighting)
-	const savedLivePreview = localStorage.getItem('wikiedit_live_preview_enabled');
-	const shouldEnableLivePreview = (savedLivePreview !== null)
-	  ? (savedLivePreview === 'true')
-	  : this.livePreviewDefault;
-
-	this.enableLivePreview();   // must run before any toggle
-
-	if (shouldEnableLivePreview) {
-	  // open in live preview on load (default or remembered state)
-	  setTimeout(() => this.toggleLivePreview(), 100);
-	}
 
     // Dropdown (custom HTML)
     const dropdownHTML = `<li class="we-dropdown">
@@ -229,10 +209,40 @@ class WikiEdit extends ProtoEdit {
         ? this.icons.exitfullscreen
         : this.icons.fullscreen;
     };
-	// ====================== LIVE PREVIEW AUTO-START ======================
-	if (this.livePreviewDefault) {
-	  setTimeout(() => this.toggleLivePreview(), 100);
-	}
+
+    // must be called after toolbar is built
+    // ====================== LIVE PREVIEW ======================
+    const savedLivePreview = localStorage.getItem('wikiedit_live_preview_enabled');
+    const shouldEnableLivePreview = (savedLivePreview !== null)
+      ? (savedLivePreview === 'true')
+      : this.livePreviewDefault;
+
+    this.enableLivePreview();   // must run before any toggle
+
+    if (shouldEnableLivePreview) {
+      // open in live preview on load (default or remembered state)
+      setTimeout(() => this.toggleLivePreview(), 100);
+    }
+
+    // ====================== DARK MODE PERSISTENCE ======================
+    // respect persisted user choice via the toggle button
+    // (no server-side default; if never toggled → system preference is used)
+    const savedDarkMode = localStorage.getItem('wikiedit_dark_mode_enabled');
+    if (savedDarkMode !== null) {
+      const shouldBeDark = savedDarkMode === 'true';
+      const html = document.documentElement;
+      html.setAttribute('data-theme', shouldBeDark ? 'dark' : 'light');
+
+      // set active class on toolbar button
+      const tb = document.getElementById(`tb_${this.id}`);
+      const darkLi = tb ? tb.querySelector('li.we-dark-toggle') : null;
+      if (darkLi) darkLi.classList.toggle('active', shouldBeDark);
+    }
+
+    // ====================== LIVE PREVIEW AUTO-START ======================
+    if (this.livePreviewDefault) {
+      setTimeout(() => this.toggleLivePreview(), 100);
+    }
     document.addEventListener('fullscreenchange', updateFSIcon);
 
     // Initial state
@@ -393,12 +403,24 @@ class WikiEdit extends ProtoEdit {
 
   toggleDarkMode() {
     const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    // Force repaint so syntax + toolbar update instantly
+    const currentIsDark = html.getAttribute('data-theme') === 'dark';
+    const newIsDark = !currentIsDark;
+
+    html.setAttribute('data-theme', newIsDark ? 'dark' : 'light');
+
+    // update toolbar active state (exactly like toggleLivePreview())
+    const tb = document.getElementById(`tb_${this.id}`);
+    const darkLi = tb ? tb.querySelector('li.we-dark-toggle') : null;
+    if (darkLi) darkLi.classList.toggle('active', newIsDark);
+
+    // Force repaint so syntax + toolbar update instantly (original behaviour kept)
     this.area.style.transition = 'background 0.2s';
     setTimeout(() => { this.area.style.transition = ''; }, 300);
+
     console.info('[WikiEdit] Manual dark mode toggled');
+
+    // Persist toggle state (exactly like toggleLivePreview() and toggleSyntaxHighlight())
+    localStorage.setItem('wikiedit_dark_mode_enabled', newIsDark);
   }
 
   /**
