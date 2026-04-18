@@ -85,6 +85,11 @@ lang = {
 	Undo:					'Undo (Ctrl+Z)',
 	Redo:					'Redo (Ctrl+Shift+Z)',
 
+	Autocomplete:			'Autocomplete',
+	AcHelp:					'Autocomplete (Ctrl+Space)',
+	AcReset:				'Reset autocomplete',
+	AcSuggestions:			'Autocomplete suggestions',
+
 	HelpAboutTip:			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+

@@ -77,6 +77,10 @@ lang = {
 	DraftClear: 'Automatisch gespeicherten Entwurf löschen',
 	DraftRestore: 'Autogespeicherter Entwurf wiederherstellen',
 	Undo: 'Rückgängig (Strg+Z)',
-	Redo: 'Erneut (Strg+Umschalt+Z)',
+	Redo: 'Wiederherstellen (Strg+Umschalt+Z)',
+	Autocomplete: 'Autovervollständigung',
+	AcHelp: 'Autovervollständigung (Strg+Leerzeichen)',
+	AcReset: 'Autovervollständigung zurücksetzen',
+	AcSuggestions: 'Autovervollständigungsvorschläge',
 	HelpAboutTip: ' Tastenkürzel:\n' + ' Strg+B - Fett\n' + ' Strg+I - Kursiv\n' + ' Strg+U - Unterstrichen\n' + ' Strg+Umschalt+S - Durchgestrichen\n' + ' Strg+Umschalt+1 .. 5 - Kopfzeile 1..5\n' + ' Alt+I oder Ctrl+T - Einrücken\n' + ' Alt+U oder Ctrl+Shift+T - Ausrücken\n' + ' Strg+J - Hervorheben (!!)\n' + ' Strg+H - Markieren (??)\n' + ' Alt+L - Link\n' + ' Strg+L - Link mit Beschreibung\n' + ' Strg+Umschalt+L - Ungeordnete Liste\n' + ' Strg+Umschalt+N - Geordnete Liste\n' + ' Strg+Umschalt+O - Geordnete Liste\n' + ' Strg+= - Kleiner Text\n' + ' Strg+Umschalt+Minus - Horizontale Line\n' + ' \n'
 };
