@@ -1992,7 +1992,7 @@ class WikiEdit extends ProtoEdit {
 
   refreshSyntaxHighlight() {
     if (!this.syntaxHighlightEnabled || !this.highlighter) return;
-    this.highlighter.innerHTML = this.highlightWikiSyntax(this.area.value);
+    this.highlighter.innerHTML = this.highlightWikiSyntax(this.area.value) + '\n';
   }
 
   // Scroll synchronization + resize handling
@@ -2008,11 +2008,6 @@ class WikiEdit extends ProtoEdit {
     this.highlighter.style.width = `${width}px`;
     this.highlighter.style.height = `${height}px`;
     this.highlighter.style.padding = style.padding;
-  }
-
-  updateSyntaxHighlight() {
-    if (!this.syntaxHighlightEnabled || !this.highlighter) return;
-    this.highlighter.innerHTML = this.highlightWikiSyntax(this.area.value) + '\n';
   }
 
   highlightWikiSyntax(text) {
