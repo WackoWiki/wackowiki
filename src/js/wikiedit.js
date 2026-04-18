@@ -180,8 +180,6 @@ class WikiEdit extends ProtoEdit {
 	  ? (savedLivePreview === 'true')
 	  : this.livePreviewDefault;
 
-	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
-
 	this.enableLivePreview();   // must run before any toggle
 
 	if (shouldEnableLivePreview) {
