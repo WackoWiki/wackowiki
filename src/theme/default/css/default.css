@@ -1617,6 +1617,65 @@ textarea.wikiedit-area {
 	overflow-wrap: break-word;
 	word-break: normal;
 }
+textarea.wikiedit-area:not(.syntax-enabled) {
+	color: var(--we-textarea-text);
+	background: var(--we-textarea-bg);
+	caret-color: var(--we-textarea-caret);
+}
+
+/* Syntax Highlighting Overlay */
+.syntax-container {
+  position: relative;
+  display: block;
+}
+
+* Syntax Highlighting Overlay – restored original behavior */
+/* Syntax Highlighting Overlay – perfect alignment */
+.syntax-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.syntax-highlighter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  background: transparent;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  tab-size: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  z-index: 1;
+  color: var(--we-textarea-text, #222);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .syntax-highlighter {
+    color: #ddd;
+  }
+}
+
+/* Textarea on top when syntax is enabled */
+textarea.wikiedit-area.syntax-enabled {
+  background: transparent !important;
+  color: transparent !important;
+  caret-color: var(--we-textarea-caret, #000) !important;
+}
 
 .wikiedit-split-container {
 	background: var(--we-split-bg);

@@ -75,6 +75,15 @@ lang = {
 	Fullscreen:				'Fullscreen',
 	LivePreview:			'Live Preview',
 	SyntaxHighlighting:		'Syntax Highlighting',
+	ToggleDark:				'Toggle dark/light mode',
+	Upload:					'Upload image/file',
+	HeightShrink:			'Shrink editor height',
+	HeightEnlarge:			'Enlarge editor height',
+	HeightReset:			'Reset editor height',
+	DraftClear:				'Clear autosaved draft',
+	DraftRestore:			'Restore autosaved draft',
+	Undo:					'Undo (Ctrl+Z)',
+	Redo:					'Redo (Ctrl+Shift+Z)',
 
 	HelpAboutTip:			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+

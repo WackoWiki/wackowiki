@@ -9,76 +9,84 @@ class WikiEdit extends ProtoEdit {
   constructor() {
     super();
 
-    this.manual         = 'https://wackowiki.org/doc/';
-    this.mark           = '##inspoint##';
-    this.begin          = '##startpoint##';
-    this.rbegin         = new RegExp(this.begin);
-    this.end            = '##endpoint##';
-    this.rend           = new RegExp(this.end);
-    this.rendb          = new RegExp('^' + this.end);
-    this.tab            = false;
-    this.enterpressed   = false;
+    this.manual = 'https://wackowiki.org/doc/';
+    this.mark = '##inspoint##';
+    this.begin = '##startpoint##';
+    this.rbegin = new RegExp(this.begin);
+    this.end = '##endpoint##';
+    this.rend = new RegExp(this.end);
+    this.rendb = new RegExp('^' + this.end);
+    this.tab = false;
+    this.enterpressed = false;
 
     // Single-form popups
-    this.linkForm       = null;
-    this.linkContext    = null;
-    this.tableForm      = null;
-    this.tableContext   = null;
+    this.linkForm = null;
+    this.linkContext = null;
+    this.tableForm = null;
+    this.tableContext = null;
 
-    // Full undo/redo stack
-    this.undoStack      = [];
-    this.redoStack      = [];
-    this.maxHistory     = 100;
+    // Undo/Redo
+    this.undoStack = [];
+    this.redoStack = [];
+    this.maxHistory = 100;
 
     // Autosave (localStorage draft)
-	this.hasDraft       = false; // // future flag to dynamically enable/disable the button
-    this.draftKey       = null;
-    this.autosaveTimer  = null;
-    this.autosaveDelay  = 2000; // save 2 seconds after the last change
+    this.hasDraft = false; // // future flag to dynamically enable/disable the button
+    this.draftKey = null;
+    this.autosaveTimer = null;
+    this.autosaveDelay = 2000; // save 2 seconds after the last change
 
-    // Find/Replace panel
-    this.findForm = null;
+    // UI panels
+    this.findForm       = null;
+    this.helpModal      = null;
 
-    // Unified Help modal
-    this.helpModal = null;
+    // Syntax Highlighting (overlay)
+    this.syntaxHighlightEnabled = true;
+    this.highlighter = null;
+    this.syntaxContainer = null;
 
-	// Syntax Highlighting
-	this.syntaxHighlightEnabled = true;
-	this.highlighter = null;
-	this.syntaxContainer = null;
+    // Editor height
+    this.HEIGHT_KEY     = 'wikiedit_editor_height';
+    this.DEFAULT_HEIGHT = 400;
+    this.preferredHeight = this.DEFAULT_HEIGHT;
 
-	this.HEIGHT_KEY = 'wikiedit_editor_height';
-	this.DEFAULT_HEIGHT = 400;
-	this.preferredHeight = this.DEFAULT_HEIGHT;
-
-	this.DRAFT_KEY_PREFIX = 'wikiedit_draft_';
+    // Autosave draft
+    this.DRAFT_KEY_PREFIX = 'wikiedit_draft_';
   }
 
-  // Initialisation
+  // ===================================================================
+  // INITIALISATION
+  // ===================================================================
   init(id, imgPath) {
     this._init(id);
 
-	// ====================== HYBRID EDITOR HEIGHT (pixels, split-container focused) ======================
-	// Must run BEFORE enableLivePreview() so the split container gets the correct height
-	const ta = this.area;
-	this.preferredHeight = this.loadPreferredHeight(ta);
+    const ta = this.area;
 
-	// Apply immediately to the textarea (used by enableLivePreview and non-split mode)
-	ta.style.height = `${this.preferredHeight}px`;
+    // ====================== HYBRID EDITOR HEIGHT ======================
+    this.preferredHeight = this.loadPreferredHeight(ta);
+    ta.style.height = `${this.preferredHeight}px`;
 
-	// Auto dark mode support – ensure the whole editor respects system preference
-	document.documentElement.style.setProperty('color-scheme', 'light dark');
-	
-	// === DRAG & DROP + PASTE SUPPORT FOR IMAGES/FILES ===
-	if (this.canUpload) {
-		this.area.addEventListener('dragover',  this.handleDragOver.bind(this));
-		this.area.addEventListener('drop',      this.handleDrop.bind(this));
-		this.area.addEventListener('paste',     this.handlePaste.bind(this));
-	}
+    // Auto dark mode support – ensure the whole editor respects system preference
+    document.documentElement.style.setProperty('color-scheme', 'light dark');
 
-	// === DRAG & DROP + PASTE MEDIA UPLOAD – only if user is allowed to upload ===
-	this.canUpload = this.area.dataset.canUpload === '1';
-	
+    // ====================== FEATURE FLAGS ======================
+    this.syntaxHighlighting = ta.dataset.syntaxHighlighting !== '0';
+    this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
+    this.canUpload          = ta.dataset.canUpload === '1';
+
+
+    // ====================== DRAG & DROP + PASTE ======================
+    if (this.canUpload) {
+      this.area.addEventListener('dragover', this.handleDragOver.bind(this));
+      this.area.addEventListener('drop', this.handleDrop.bind(this));
+      this.area.addEventListener('paste', this.handlePaste.bind(this));
+    }
+
+    // ====================== LIVE PREVIEW AUTO-START ======================
+    if (this.livePreviewDefault) {
+      setTimeout(() => this.toggleLivePreview(), 100);
+    }
+
     this.imagesPath = imgPath || 'image/';
 
     // Setup undo/redo
@@ -130,49 +138,42 @@ class WikiEdit extends ProtoEdit {
 
     this.addButton('footnote', lang.Footnote, () => this.insTag('[[^ ', ']]', 2));
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
-	this.addButton('customhtml', separator);
+    this.addButton('customhtml', separator);
 
-	this.addButton('dark-toggle', '☀️', () => this.toggleDarkMode(), 'Toggle dark/light mode (overrides system)');
+    // === Custom controls ===
+    this.addButton('dark-toggle', lang.ToggleDark, () => this.toggleDarkMode());
+    if (this.canUpload) {
+      this.addButton('upload-media', lang.Upload, () => this.triggerFileUpload());
+    }
 
-	if (this.canUpload) {
-	  this.addButton('upload-media', '📤', () => this.triggerFileUpload(), 'Upload image/file (drag & drop also supported)');
-	}
+    this.addButton('shrink', lang.HeightShrink, () => this.changeEditorHeight(-100));
+    this.addButton('enlarge', lang.HeightEnlarge, () => this.changeEditorHeight(100));
+    this.addButton('height-reset', lang.HeightReset, () => this.clearEditorSettings());
 
-	this.addButton('shrink', '↓', () => this.changeEditorHeight(-100), 'Shrink editor height');
-	this.addButton('enlarge', '↑', () => this.changeEditorHeight(100),  'Enlarge editor height');
-	this.addButton('height-reset', '⟳', () => this.clearEditorSettings(), 'Reset editor height to server default');
-	
-	const autosaveEnabled = this.area.dataset.autosaveDraft !== '0';
-	if (autosaveEnabled) {
-		this.addButton('draft-clear', '🗑', () => this.clearDraft(), 'Clear autosaved draft');
-		this.addButton('restore-draft', '🔄', () => this.restoreDraft(), 'Restore autosaved draft');
-	}
-	this.addButton('customhtml', separator);
+    const autosaveEnabled = this.area.dataset.autosaveDraft !== '0';
+    if (autosaveEnabled) {
+      this.addButton('draft-clear', lang.DraftClear, () => this.clearDraft());
+      this.addButton('restore-draft', lang.DraftRestore, () => this.restoreDraft());
+    }
 
-	this.addButton('undo', '↩', () => {
-	  if (this.undo()) this.updateStatus();
-	    }, 'Undo (Ctrl + Z)');
-	this.addButton('redo', '↪', () => {
-	  if (this.redo()) this.updateStatus();
-	    }, 'Redo (Ctrl + Shift + Z)');
-	this.addButton('customhtml', '<div class="btn-separator"></div>');
-		
-	this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
-	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
-	this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
+    this.addButton('customhtml', separator);
 
-	this.addButton('customhtml', separator);
-	//this.addButton('markdown', 'MD/Wacko Toggle', () => this.toggleMarkdownMode());
-	this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
-	this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
+    this.addButton('undo', lang.Undo, () => { if (this.undo()) this.updateStatus(); });
+    this.addButton('redo', lang.Redo, () => { if (this.redo()) this.updateStatus(); });
+    this.addButton('customhtml', '<div class="btn-separator"></div>');
 
-	this.area.classList.add('wikiedit-area');
+    this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
+    this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
+    this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
 
-	// Setup autosave (now uses best-practice storage)
-	// this.setupAutosave();
+    this.addButton('customhtml', separator);
+    this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
+    this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
 
-	// must be called after toolbar is built
-	this.enableLivePreview();
+    this.area.classList.add('wikiedit-area');
+
+    // must be called after toolbar is built
+    this.enableLivePreview();
 
     // Dropdown (custom HTML)
     const dropdownHTML = `<li class="we-dropdown">
@@ -196,72 +197,101 @@ class WikiEdit extends ProtoEdit {
     toolbarContainer.id = `tb_${this.id}`;
     this.area.parentNode.insertBefore(toolbarContainer, this.area);
 
-    const toolbar = this.createToolbar();           // new ProtoEdit returns real DOM <ul>
+    const toolbar = this.createToolbar();
     toolbarContainer.appendChild(toolbar);
 
-	toolbarContainer.className = 'we-toolbar-container';
+    toolbarContainer.className = 'we-toolbar-container';
 
-	// ====================== FULLSCREEN BUTTON SETUP (editor-only) ======================
-	const fsLi = toolbar.querySelector('li.we-fullscreen');
-	if (fsLi) {
-	  this.fullscreenBtn = fsLi.querySelector('button');
-	  this.fullscreenIcon = this.fullscreenBtn?.querySelector('.we-icon');
-	}
+    // ====================== FULLSCREEN BUTTON SETUP (editor-only) ======================
+    const fsLi = toolbar.querySelector('li.we-fullscreen');
+    if (fsLi) {
+      this.fullscreenBtn = fsLi.querySelector('button');
+      this.fullscreenIcon = this.fullscreenBtn?.querySelector('.we-icon');
+    }
 
-	// Update icon when fullscreen state changes (handles Esc key too)
-	const updateFSIcon = () => {
-	  if (!this.fullscreenIcon) return;
-	  const isFullscreen = !!document.fullscreenElement;
-	  this.fullscreenIcon.innerHTML = isFullscreen
-	    ? this.icons.exitfullscreen
-	    : this.icons.fullscreen;
-	};
+    // Update icon when fullscreen state changes (handles Esc key too)
+    const updateFSIcon = () => {
+      if (!this.fullscreenIcon) return;
+      const isFullscreen = !!document.fullscreenElement;
+      this.fullscreenIcon.innerHTML = isFullscreen
+        ? this.icons.exitfullscreen
+        : this.icons.fullscreen;
+    };
 
-	document.addEventListener('fullscreenchange', updateFSIcon);
+    document.addEventListener('fullscreenchange', updateFSIcon);
 
-	// Initial state
-	updateFSIcon();
+    // Initial state
+    updateFSIcon();
 
-    // Attach click listeners to dropdown items (no more inline onclick / _owner)
     const dropdown = toolbar.querySelector('.we-dropdown');
     if (dropdown) {
       const searchItem = dropdown.querySelector('.we-search');
-      const aboutItem  = dropdown.querySelector('.we-about');
+      const aboutItem = dropdown.querySelector('.we-about');
       if (searchItem) searchItem.addEventListener('click', () => this.showFindReplace());
-      if (aboutItem)  aboutItem.addEventListener('click', () => this.showHelpModal());
+      if (aboutItem) aboutItem.addEventListener('click', () => this.showHelpModal());
     }
 
-	// ====================== STATUS BAR ======================
-	const statusBar = this.createStatusBar();
-	this.area.parentNode.insertBefore(statusBar, this.area.nextSibling);
+    // ====================== STATUS BAR ======================
+    const statusBar = this.createStatusBar();
+    this.area.parentNode.insertBefore(statusBar, this.area.nextSibling);
 
-	// Initial display
-	this.updateStatus();
-	
+    // Initial display
+    this.updateStatus();
+
     this.area.addEventListener('input', () => this.updateStatus());
     this.area.addEventListener('keyup', () => this.updateStatus());
     this.area.addEventListener('click', () => this.updateStatus());
 
-	// Setup live syntax highlighting (inside the editPane)
-	if (this.syntaxHighlightEnabled) this.setupSyntaxHighlighting();
+    // Load saved syntax state from localStorage (overrides data-attribute)
+    const savedSyntax = localStorage.getItem('wikiedit_syntax_enabled');
+    if (savedSyntax !== null) {
+      this.syntaxHighlighting = savedSyntax === 'true';
+    }
 
-	// Live updates
-	const updateStatusHandler = () => this.updateStatus();
-	this.area.addEventListener('input', updateStatusHandler);
-	this.area.addEventListener('keyup', updateStatusHandler);
-	this.area.addEventListener('click', updateStatusHandler);
-	this.area.addEventListener('mouseup', updateStatusHandler);
+    // Setup overlay
+    this.setupSyntaxHighlighting();
+
+    // Apply state
+    if (this.syntaxHighlighting) {
+      this.enableSyntaxHighlighting();
+    } else {
+      this.disableSyntaxHighlighting();
+    }
+
+    // Live updates
+    this.area.addEventListener('input', () => {
+      this.updateStatus();
+      this.refreshSyntaxHighlight();
+    });
+
+    // Scroll sync + resize observer
+    this.area.addEventListener('scroll', () => {
+      if (this.highlighter) {
+        this.highlighter.scrollTop = this.area.scrollTop;
+        this.highlighter.scrollLeft = this.area.scrollLeft;
+      }
+    });
+
+    this.resizeObserver = new ResizeObserver(() => this.syncContentSize());
+    this.resizeObserver.observe(this.area);
+    this.resizeObserver.observe(this.syntaxContainer || this.area.parentNode);
+
+    // Live updates
+    const updateStatusHandler = () => this.updateStatus();
+    this.area.addEventListener('input', updateStatusHandler);
+    this.area.addEventListener('keyup', updateStatusHandler);
+    this.area.addEventListener('click', updateStatusHandler);
+    this.area.addEventListener('mouseup', updateStatusHandler);
 
     if (this.autocomplete) {
       this.autocomplete.attachDropdown();
     }
 
     // ====================== AUTOSAVE SETUP ======================
-	// Setup autosave ONLY if user has it enabled
-	if (this.area.dataset.autosaveDraft !== '0') {
-	    this.setupAutosave();
-	    this.loadAutosavedDraft();
-	}
+    if (this.area.dataset.autosaveDraft !== '0') {
+      this.setupAutosave();
+      this.loadAutosavedDraft();
+    }
   }
 
   // ====================== AUTOSAVE (localStorage draft) ======================
@@ -329,7 +359,7 @@ class WikiEdit extends ProtoEdit {
       this.showMessage(`📄 ${lang?.DraftAvailable || 'Autosaved draft found'} – click 🔄 Restore to recover it`, 4000);
     }
   }
-  
+
   // Manual restore from toolbar button (no popup)
   restoreDraft() {
     if (!this.draftKey) return;
@@ -346,15 +376,6 @@ class WikiEdit extends ProtoEdit {
     }
   }
 
-  toggleDarkMode() {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    // Force repaint so syntax + toolbar update instantly
-    this.area.style.transition = 'background 0.2s';
-    setTimeout(() => { this.area.style.transition = ''; }, 300);
-    console.info('[WikiEdit] Manual dark mode toggled');
-  }
   /**
    * Toggle fullscreen mode ONLY for the editor container (#page-edit).
    * This gives a clean distraction-free editing area while the browser still
@@ -398,10 +419,10 @@ class WikiEdit extends ProtoEdit {
     // Avoid pushing identical consecutive states
     const last = this.undoStack[this.undoStack.length - 1];
     if (last &&
-        last.text === state.text &&
-        last.start === state.start &&
-        last.end === state.end &&
-        last.scroll === state.scroll) {
+      last.text === state.text &&
+      last.start === state.start &&
+      last.end === state.end &&
+      last.scroll === state.scroll) {
       return;
     }
 
@@ -532,7 +553,7 @@ class WikiEdit extends ProtoEdit {
     Text = Text.replace(/\r/g, '');
     const lines = Text.split('\n');
 
-    for (let i = 0; i < lines.length; i++) {
+    for (let i = 0;i < lines.length;i++) {
       const line = lines[i];
 
       if (this.rbegin.test(line)) fIn = true;
@@ -660,21 +681,21 @@ class WikiEdit extends ProtoEdit {
     let justenter = false;
     let noscroll = false;
 
-	// ─────────────────────────────────────────────────────────────
-	// 1. Early exit for keyup events
-	//    (we only want to run shortcut logic on keydown)
-	// ─────────────────────────────────────────────────────────────
-	if (e.type === 'keyup') {
-	  if (e.key === 'Tab' || e.key === 'Enter') return false;
-	    return;                     // skip the rest of the function on keyup
-	}
+    // ─────────────────────────────────────────────────────────────
+    // 1. Early exit for keyup events
+    //    (we only want to run shortcut logic on keydown)
+    // ─────────────────────────────────────────────────────────────
+    if (e.type === 'keyup') {
+      if (e.key === 'Tab' || e.key === 'Enter') return false;
+      return;                     // skip the rest of the function on keyup
+    }
 
-	// From here on we are guaranteed to be in a keydown event
-	const scroll = t.scrollTop;
+    // From here on we are guaranteed to be in a keydown event
+    const scroll = t.scrollTop;
 
-	// Refresh current selection state so "this.sel" checks are accurate
-	// (this fixes stale-selection bugs that existed even in the original code)
-	this.getDefines();
+    // Refresh current selection state so "this.sel" checks are accurate
+    // (this fixes stale-selection bugs that existed even in the original code)
+    this.getDefines();
 
     if (e.type === 'keyup' && (e.key === 'Tab' || e.key === 'Enter')) return false;
 
@@ -685,9 +706,9 @@ class WikiEdit extends ProtoEdit {
 
     // ====================== MODERN KEY HANDLING ======================
     const ctrl = e.ctrlKey;
-    const alt  = e.altKey;
+    const alt = e.altKey;
     const shift = e.shiftKey;
-    const key   = e.key.toLowerCase();
+    const key = e.key.toLowerCase();
 
     if (ctrl && key === 'z') {
       const success = shift ? this.redo() : this.undo();
@@ -865,10 +886,10 @@ class WikiEdit extends ProtoEdit {
     document.body.appendChild(modal);
 
     // Cache DOM references
-    const urlInput   = document.getElementById(`we-link-url-${this.id}`);
-    const textInput  = document.getElementById(`we-link-text-${this.id}`);
-    const cancelBtn  = document.getElementById(`we-link-cancel-${this.id}`);
-    const formEl     = document.getElementById(`we-link-form-${this.id}`);
+    const urlInput = document.getElementById(`we-link-url-${this.id}`);
+    const textInput = document.getElementById(`we-link-text-${this.id}`);
+    const cancelBtn = document.getElementById(`we-link-cancel-${this.id}`);
+    const formEl = document.getElementById(`we-link-form-${this.id}`);
 
     this.linkForm = {
       modal: modal,
@@ -926,7 +947,7 @@ class WikiEdit extends ProtoEdit {
     const f = this.linkForm;
 
     let lnk = f.urlInput.value ?? '';
-    let sl  = f.textInput.value ?? '';
+    let sl = f.textInput.value ?? '';
 
     let combined = lnk + ' ' + sl;
 
@@ -941,7 +962,7 @@ class WikiEdit extends ProtoEdit {
 
     area.value = str;
     const start = sel1.length;
-    const end   = str.length - sel2.length;
+    const end = str.length - sel2.length;
     area.setSelectionRange(start, end);
     area.focus();
 
@@ -1009,13 +1030,13 @@ class WikiEdit extends ProtoEdit {
     document.body.appendChild(modal);
 
     // Cache DOM references
-    const colsInput     = document.getElementById(`we-table-cols-${this.id}`);
-    const rowsInput     = document.getElementById(`we-table-rows-${this.id}`);
-    const captionInput  = document.getElementById(`we-table-caption-${this.id}`);
+    const colsInput = document.getElementById(`we-table-cols-${this.id}`);
+    const rowsInput = document.getElementById(`we-table-rows-${this.id}`);
+    const captionInput = document.getElementById(`we-table-caption-${this.id}`);
     const colHeaderCheck = document.getElementById(`we-table-colheader-${this.id}`);
     const rowHeaderCheck = document.getElementById(`we-table-rowheader-${this.id}`);
-    const cancelBtn     = document.getElementById(`we-table-cancel-${this.id}`);
-    const formEl        = document.getElementById(`we-table-form-${this.id}`);
+    const cancelBtn = document.getElementById(`we-table-cancel-${this.id}`);
+    const formEl = document.getElementById(`we-table-form-${this.id}`);
 
     this.tableForm = {
       modal: modal,
@@ -1084,18 +1105,18 @@ class WikiEdit extends ProtoEdit {
     // Column header row (if requested)
     if (colHeader) {
       const headerCells = rowHeader ? [''] : [];
-      for (let c = 0; c < cols; c++) {
-        headerCells.push(`${lang.Header || 'Header'} ${c+1}`);
+      for (let c = 0;c < cols;c++) {
+        headerCells.push(`${lang.Header || 'Header'} ${c + 1}`);
       }
       const chRow = '*| ' + headerCells.join(' | ') + ' |*';
       lines.push(chRow);
     }
 
     // Data rows
-    for (let r = 0; r < rows; r++) {
+    for (let r = 0;r < rows;r++) {
       const rowStart = rowHeader ? '^|' : '||';
-      const rowCells = rowHeader ? [`${lang.Header || 'Header'} ${r+1}`] : [];
-      for (let c = 0; c < cols; c++) {
+      const rowCells = rowHeader ? [`${lang.Header || 'Header'} ${r + 1}`] : [];
+      for (let c = 0;c < cols;c++) {
         rowCells.push(`${lang.Cell || 'Cell'}`);
       }
       const rowStr = rowStart + ' ' + rowCells.join(' | ') + ' ||';
@@ -1489,7 +1510,7 @@ class WikiEdit extends ProtoEdit {
     window.location.reload();
   }
 
-// ── Autosave Draft ────────────────────────────────────────────────────────────
+  // ── Autosave Draft ────────────────────────────────────────────────────────────
   safeSetDraft(key, value) {
     try {
       localStorage.setItem(key, value);
@@ -1516,8 +1537,8 @@ class WikiEdit extends ProtoEdit {
 
   _handleStorageError(err, context) {
     if (err.name === 'QuotaExceededError' ||
-        err.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
-        err.code === 22 || err.code === 1014) {
+      err.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
+      err.code === 22 || err.code === 1014) {
       console.warn(`[WikiEdit] localStorage quota exceeded – ${context} not saved`);
     } else {
       console.warn(`[WikiEdit] localStorage unavailable (private mode?) – ${context} skipped`);
@@ -1530,171 +1551,171 @@ class WikiEdit extends ProtoEdit {
    * that survives preview updates. Now with proper height forcing so scrolling actually appears.
    */
   enableLivePreview() {
-  	const wrapper = this.area.parentNode;
+    const wrapper = this.area.parentNode;
 
-	// Use hybrid preferredHeight (already set in init())
-	const originalHeight = `${this.preferredHeight}px`;
-	
-  	// Create split container
-  	const container = document.createElement('div');
-	container.className = 'wikiedit-split-container';
-	container.style.cssText = `display:flex; height:${originalHeight}; min-height:300px; gap:8px; box-sizing:border-box;`;
+    // Use hybrid preferredHeight (already set in init())
+    const originalHeight = `${this.preferredHeight}px`;
 
-  	this.editPane = document.createElement('div');
-  	this.editPane.style.cssText = 'flex:1 1 50%; min-width:300px; display:flex; flex-direction:column; height:100%;';
+    // Create split container
+    const container = document.createElement('div');
+    container.className = 'wikiedit-split-container';
+    container.style.cssText = `display:flex; height:${originalHeight}; min-height:300px; gap:8px; box-sizing:border-box;`;
 
-  	// Move textarea and FORCE it to fill the pane
-  	this.area.style.cssText += 'flex:1 1 auto; height:100%; width:100%; box-sizing:border-box; resize:none; min-height:0;';
-  	this.editPane.appendChild(this.area);
+    this.editPane = document.createElement('div');
+    this.editPane.style.cssText = 'flex:1 1 50%; min-width:300px; display:flex; flex-direction:column; height:100%;';
 
-  	this.splitter = document.createElement('div');
-  	this.splitter.style.cssText = 'width:6px; background:#ddd; cursor:col-resize; flex-shrink:0; display:none;';
+    // Move textarea and FORCE it to fill the pane
+    this.area.style.cssText += 'flex:1 1 auto; height:100%; width:100%; box-sizing:border-box; resize:none; min-height:0;';
+    this.editPane.appendChild(this.area);
 
-  	this.previewPane = document.createElement('div');
-  	this.previewPane.id = 'wikiedit-live-preview';
-  	this.previewPane.style.cssText = 'flex:1 1 50%; min-width:300px; overflow:auto; padding:20px; border:1px solid #ccc; border-radius:4px; display:none; box-sizing:border-box;';
+    this.splitter = document.createElement('div');
+    this.splitter.style.cssText = 'width:6px; background:#ddd; cursor:col-resize; flex-shrink:0; display:none;';
 
-	// Store reference for changeEditorHeight()
-	this.splitContainer = container;
+    this.previewPane = document.createElement('div');
+    this.previewPane.id = 'wikiedit-live-preview';
+    this.previewPane.style.cssText = 'flex:1 1 50%; min-width:300px; overflow:auto; padding:20px; border:1px solid #ccc; border-radius:4px; display:none; box-sizing:border-box;';
 
-  	container.append(this.editPane, this.splitter, this.previewPane);
-  	wrapper.appendChild(container);
+    // Store reference for changeEditorHeight()
+    this.splitContainer = container;
 
-  	// Draggable splitter
-  	let isDragging = false;
-  	this.splitter.addEventListener('mousedown', e => { isDragging = true; e.preventDefault(); });
-  	document.addEventListener('mousemove', e => {
-  		if (!isDragging) return;
-  		const rect = container.getBoundingClientRect();
-  		let percent = ((e.clientX - rect.left) / rect.width) * 100;
-  		percent = Math.max(20, Math.min(80, percent));
-  		this.editPane.style.flex = `1 1 ${percent}%`;
-  		this.previewPane.style.flex = `1 1 ${100 - percent}%`;
-  	});
-  	document.addEventListener('mouseup', () => { isDragging = false; });
+    container.append(this.editPane, this.splitter, this.previewPane);
+    wrapper.appendChild(container);
 
-  	// === BIDIRECTIONAL VERTICAL SCROLL SYNC ===
-  	let syncing = false;
+    // Draggable splitter
+    let isDragging = false;
+    this.splitter.addEventListener('mousedown', e => { isDragging = true; e.preventDefault(); });
+    document.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const rect = container.getBoundingClientRect();
+      let percent = ((e.clientX - rect.left) / rect.width) * 100;
+      percent = Math.max(20, Math.min(80, percent));
+      this.editPane.style.flex = `1 1 ${percent}%`;
+      this.previewPane.style.flex = `1 1 ${100 - percent}%`;
+    });
+    document.addEventListener('mouseup', () => { isDragging = false; });
 
-  	this.syncEditorToPreview = () => {
-  		if (!this.livePreviewEnabled || syncing) return;
-  		syncing = true;
-  		const editor = this.area;
-  		const preview = this.previewPane;
-  		const percent = (editor.scrollHeight > editor.clientHeight)
-  			? editor.scrollTop / (editor.scrollHeight - editor.clientHeight)
-  			: 0;
-  		preview.scrollTop = percent * (preview.scrollHeight - preview.clientHeight || 0);
-  		syncing = false;
-  	};
+    // === BIDIRECTIONAL VERTICAL SCROLL SYNC ===
+    let syncing = false;
 
-  	this.syncPreviewToEditor = () => {
-  		if (!this.livePreviewEnabled || syncing) return;
-  		syncing = true;
-  		const editor = this.area;
-  		const preview = this.previewPane;
-  		const percent = (preview.scrollHeight > preview.clientHeight)
-  			? preview.scrollTop / (preview.scrollHeight - preview.clientHeight)
-  			: 0;
-  		editor.scrollTop = percent * (editor.scrollHeight - editor.clientHeight || 0);
-  		syncing = false;
-  	};
+    this.syncEditorToPreview = () => {
+      if (!this.livePreviewEnabled || syncing) return;
+      syncing = true;
+      const editor = this.area;
+      const preview = this.previewPane;
+      const percent = (editor.scrollHeight > editor.clientHeight)
+        ? editor.scrollTop / (editor.scrollHeight - editor.clientHeight)
+        : 0;
+      preview.scrollTop = percent * (preview.scrollHeight - preview.clientHeight || 0);
+      syncing = false;
+    };
 
-  	this.area.addEventListener('scroll', this.syncEditorToPreview, { passive: true });
-  	this.previewPane.addEventListener('scroll', this.syncPreviewToEditor, { passive: true });
+    this.syncPreviewToEditor = () => {
+      if (!this.livePreviewEnabled || syncing) return;
+      syncing = true;
+      const editor = this.area;
+      const preview = this.previewPane;
+      const percent = (preview.scrollHeight > preview.clientHeight)
+        ? preview.scrollTop / (preview.scrollHeight - preview.clientHeight)
+        : 0;
+      editor.scrollTop = percent * (editor.scrollHeight - editor.clientHeight || 0);
+      syncing = false;
+    };
 
-  	// Live preview logic
-  	this.livePreviewEnabled = false;
-  	this.previewTimer = null;
+    this.area.addEventListener('scroll', this.syncEditorToPreview, { passive: true });
+    this.previewPane.addEventListener('scroll', this.syncPreviewToEditor, { passive: true });
 
-  	this.updatePreview = async () => {
-  		const form = this.area.closest('form');
-  		if (!form) return;
+    // Live preview logic
+    this.livePreviewEnabled = false;
+    this.previewTimer = null;
 
-  		const fd = new FormData(form);
-  		fd.set('body', this.area.value);
-  		fd.set('ajax_preview', '1');
+    this.updatePreview = async () => {
+      const form = this.area.closest('form');
+      if (!form) return;
 
-  		try {
-  			const res = await fetch(window.location.href, {
-  				method: 'POST',
-  				body: fd,
-  				credentials: 'same-origin'
-  			});
-  			if (!res.ok) throw new Error();
+      const fd = new FormData(form);
+      fd.set('body', this.area.value);
+      fd.set('ajax_preview', '1');
 
-  			const data = await res.json();
+      try {
+        const res = await fetch(window.location.href, {
+          method: 'POST',
+          body: fd,
+          credentials: 'same-origin'
+        });
+        if (!res.ok) throw new Error();
 
-  			this.previewPane.innerHTML = data.preview_html || '<p style="color:#999;">(empty preview)</p>';
+        const data = await res.json();
 
-  			const tokenField = form.querySelector('input[name="_nonce"]');
-  			if (tokenField && data.new_form_token) {
-  				tokenField.value = data.new_form_token;
-  			}
+        this.previewPane.innerHTML = data.preview_html || '<p style="color:#999;">(empty preview)</p>';
 
-  			// Re-sync scroll AFTER browser has painted the new content
-  			if (this.livePreviewEnabled) {
-  				requestAnimationFrame(() => {
-  					this.syncEditorToPreview();
-  				});
-  			}
-  		} catch (e) {
-  			console.warn('Live preview failed', e);
-  		}
-  	};
+        const tokenField = form.querySelector('input[name="_nonce"]');
+        if (tokenField && data.new_form_token) {
+          tokenField.value = data.new_form_token;
+        }
 
-  	// 100% reliable change detection (unchanged)
-  	const ta = this.area;
-  	const self = this;
-  	const valueDescriptor = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
-  	const origSetter = valueDescriptor.set;
+        // Re-sync scroll AFTER browser has painted the new content
+        if (this.livePreviewEnabled) {
+          requestAnimationFrame(() => {
+            this.syncEditorToPreview();
+          });
+        }
+      } catch (e) {
+        console.warn('Live preview failed', e);
+      }
+    };
 
-  	Object.defineProperty(ta, 'value', {
-  		get() { return valueDescriptor.get.call(this); },
-  		set(newValue) {
-  			origSetter.call(this, newValue);
-  			if (self.livePreviewEnabled && self.updatePreview) {
-  				clearTimeout(self.previewTimer);
-  				self.previewTimer = setTimeout(() => self.updatePreview(), 80);
-  			}
-  		},
-  		configurable: true
-  	});
+    // 100% reliable change detection (unchanged)
+    const ta = this.area;
+    const self = this;
+    const valueDescriptor = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+    const origSetter = valueDescriptor.set;
 
-  	this.area.addEventListener('input', () => {
-  		if (this.livePreviewEnabled) {
-  			clearTimeout(this.previewTimer);
-  			this.previewTimer = setTimeout(() => this.updatePreview(), 420);
-  		}
-  	});
+    Object.defineProperty(ta, 'value', {
+      get() { return valueDescriptor.get.call(this); },
+      set(newValue) {
+        origSetter.call(this, newValue);
+        if (self.livePreviewEnabled && self.updatePreview) {
+          clearTimeout(self.previewTimer);
+          self.previewTimer = setTimeout(() => self.updatePreview(), 80);
+        }
+      },
+      configurable: true
+    });
 
-  	console.log('%cWikiEdit live preview ready', 'color:#0a0;font-weight:bold');
+    this.area.addEventListener('input', () => {
+      if (this.livePreviewEnabled) {
+        clearTimeout(this.previewTimer);
+        this.previewTimer = setTimeout(() => this.updatePreview(), 420);
+      }
+    });
+
+    console.log('%cWikiEdit live preview ready', 'color:#0a0;font-weight:bold');
   }
 
   /**
    * Toggle Live Preview on/off
    */
   toggleLivePreview() {
-  	this.livePreviewEnabled = !this.livePreviewEnabled;
+    this.livePreviewEnabled = !this.livePreviewEnabled;
 
-  	const tb = document.getElementById(`tb_${this.id}`);
-  	const liveLi = tb ? tb.querySelector('li.we-livepreview') : null;
-  	if (liveLi) liveLi.classList.toggle('active', this.livePreviewEnabled);
+    const tb = document.getElementById(`tb_${this.id}`);
+    const liveLi = tb ? tb.querySelector('li.we-livepreview') : null;
+    if (liveLi) liveLi.classList.toggle('active', this.livePreviewEnabled);
 
-  	if (this.livePreviewEnabled) {
-  		this.previewPane.style.display = 'block';
-  		this.splitter.style.display = 'block';
-  		this.editPane.style.flex = '1 1 50%';
-  		this.previewPane.style.flex = '1 1 50%';
+    if (this.livePreviewEnabled) {
+      this.previewPane.style.display = 'block';
+      this.splitter.style.display = 'block';
+      this.editPane.style.flex = '1 1 50%';
+      this.previewPane.style.flex = '1 1 50%';
 
-  		if (this.area.value.trim()) {
-  			setTimeout(() => this.updatePreview(), 10);
-  		}
-  	} else {
-  		this.previewPane.style.display = 'none';
-  		this.splitter.style.display = 'none';
-  		this.editPane.style.flex = '1 1 100%';
-  	}
+      if (this.area.value.trim()) {
+        setTimeout(() => this.updatePreview(), 10);
+      }
+    } else {
+      this.previewPane.style.display = 'none';
+      this.splitter.style.display = 'none';
+      this.editPane.style.flex = '1 1 100%';
+    }
   }
 
   // ==================== Markdown ↔ Wacko Converter (added) ====================
@@ -1740,10 +1761,10 @@ class WikiEdit extends ProtoEdit {
 
     // Code blocks %% … %%
     md = md.replace(/%%(.*?)%%/gs, '```\n$1\n```');
-	
-	// ==================== TABLES: Wacko → Markdown ====================
-	md = md.replace(/#\|[\s\S]*?\|#/gs, (block) => this._wackoTableToMarkdown(block));
-	md = md.replace(/#\|\|[\s\S]*?\|\|#/gs, (block) => this._wackoTableToMarkdown(block)); // no-border variant
+
+    // ==================== TABLES: Wacko → Markdown ====================
+    md = md.replace(/#\|[\s\S]*?\|#/gs, (block) => this._wackoTableToMarkdown(block));
+    md = md.replace(/#\|\|[\s\S]*?\|\|#/gs, (block) => this._wackoTableToMarkdown(block)); // no-border variant
 
     return md;
   }
@@ -1863,7 +1884,7 @@ class WikiEdit extends ProtoEdit {
     // Skip separator line (lines[1])
 
     // Data rows → || ... ||
-    for (let i = 2; i < lines.length; i++) {
+    for (let i = 2;i < lines.length;i++) {
       const cells = lines[i]
         .split('|')
         .map(c => c.trim())
@@ -1904,251 +1925,246 @@ class WikiEdit extends ProtoEdit {
     }
     this.showMessage(this.markdownMode ? 'Markdown mode ON' : 'Wacko mode ON');
   }
-  
+
   /* ================================================================
     LIVE SYNTAX HIGHLIGHTING SETUP
-    ================================================================ */ 
+    ================================================================ */
+  setupSyntaxHighlighting() {
+    const ta = this.area;
+
+    if (!this.syntaxContainer) {
+      this.syntaxContainer = document.createElement('div');
+      this.syntaxContainer.className = 'syntax-container';
+
+      this.highlighter = document.createElement('pre');
+      this.highlighter.className = 'syntax-highlighter';
+
+      this.syntaxContainer.appendChild(this.highlighter);
+      const parent = ta.parentNode;
+      parent.insertBefore(this.syntaxContainer, ta);
+      this.syntaxContainer.appendChild(ta);   // textarea stays on top
+    }
+
+    // Copy all relevant styles from textarea to highlighter for perfect sync
+    const style = getComputedStyle(ta);
+    this.highlighter.style.font = style.font;
+    this.highlighter.style.lineHeight = style.lineHeight;
+    this.highlighter.style.tabSize = style.tabSize || '4';
+    this.highlighter.style.letterSpacing = style.letterSpacing;
+    this.highlighter.style.wordSpacing = style.wordSpacing;
+    this.highlighter.style.padding = style.padding;
+  }
+
+  enableSyntaxHighlighting() {
+    this.syntaxHighlightEnabled = true;
+    this.area.classList.add('syntax-enabled');
+
+    if (!this.syntaxContainer) this.setupSyntaxHighlighting();
+
+    this.area.style.background = 'transparent';
+    this.area.style.color = 'transparent';
+    this.area.style.caretColor = 'var(--we-textarea-caret, #000)';
+
+    this.highlighter.style.display = 'block';
+    this.syncContentSize();
+    this.refreshSyntaxHighlight();
+  }
+
+  disableSyntaxHighlighting() {
+    this.syntaxHighlightEnabled = false;
+    this.area.classList.remove('syntax-enabled');
+
+    if (this.highlighter) this.highlighter.style.display = 'none';
+
+    this.area.style.background = 'var(--we-textarea-bg, #fff)';
+    this.area.style.color = 'var(--we-textarea-text, #222)';
+    this.area.style.caretColor = 'var(--we-textarea-caret, #000)';
+  }
+
+  toggleSyntaxHighlight() {
+    if (this.syntaxHighlightEnabled) {
+      this.disableSyntaxHighlighting();
+    } else {
+      this.enableSyntaxHighlighting();
+    }
+    localStorage.setItem('wikiedit_syntax_enabled', this.syntaxHighlightEnabled);
+  }
+
+  refreshSyntaxHighlight() {
+    if (!this.syntaxHighlightEnabled || !this.highlighter) return;
+    this.highlighter.innerHTML = this.highlightWikiSyntax(this.area.value);
+  }
+
+  // Scroll synchronization + resize handling
   syncContentSize() {
-    if (!this.highlighter || !this.area || !this.syntaxHighlightEnabled) return;
+    if (!this.highlighter || !this.area) return;
 
     const ta = this.area;
     const style = getComputedStyle(ta);
 
-    // Exact inner content area (clientWidth/Height already excludes border + scrollbar)
-    const width  = ta.clientWidth  - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-    const height = ta.clientHeight - parseFloat(style.paddingTop)  - parseFloat(style.paddingBottom);
+    const width = ta.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const height = ta.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
 
-    this.highlighter.style.width  = `${width}px`;
+    this.highlighter.style.width = `${width}px`;
     this.highlighter.style.height = `${height}px`;
-
-    // Keep padding perfectly in sync (in case any dynamic CSS changes it)
     this.highlighter.style.padding = style.padding;
   }
 
-  setupSyntaxHighlighting() {
-    const ta = this.area;
+  updateSyntaxHighlight() {
+    if (!this.syntaxHighlightEnabled || !this.highlighter) return;
+    this.highlighter.innerHTML = this.highlightWikiSyntax(this.area.value) + '\n';
+  }
 
-    this.syntaxContainer = document.createElement('div');
-    this.syntaxContainer.className = 'syntax-container';
+  highlightWikiSyntax(text) {
+    if (!text) return '';
 
-    const parent = ta.parentNode;
-    parent.insertBefore(this.syntaxContainer, ta);
-    this.syntaxContainer.appendChild(ta);
+    let html = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
 
-    this.highlighter = document.createElement('pre');
-    this.highlighter.className = 'syntax-highlighter';
-    this.syntaxContainer.appendChild(this.highlighter);
-
-    const styles = getComputedStyle(ta);
-    this.highlighter.style.font = styles.font;
-    this.highlighter.style.lineHeight = styles.lineHeight;
-    this.highlighter.style.tabSize = styles.tabSize || '4';
-
-    ta.style.width = '100%';
-    ta.style.height = '100%';
-    ta.style.position = 'relative';
-    ta.style.zIndex = '2';
-    ta.style.boxSizing = 'border-box';
-
-    // Start with syntax ON
-    ta.style.background = 'transparent';
-    ta.style.color = 'transparent';
-    ta.style.caretColor = '#000';
-    ta.style.padding = styles.padding;   // keep padding on textarea for correct caret positioning
-
-    // Live update listeners
-    ta.addEventListener('input', () => {
-      this.updateSyntaxHighlight();
-      this.syncContentSize();
+    // Protect ""..."" literal blocks FIRST so that NO syntax inside them is ever processed.
+    const literals = [];
+    html = html.replace(/""(.+?)""/gs, (match, content) => {
+      const id = literals.length;
+      literals.push(content);
+      return `WIKI_LITERAL_${id}`;
     });
 
-    ta.addEventListener('scroll', () => {
-      if (this.highlighter) {
-        this.highlighter.scrollTop = ta.scrollTop;
-        this.highlighter.scrollLeft = ta.scrollLeft;
+    html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
+    html = html.replace(/\*\*(.+?)\*\*/g, '<span class="wiki-bold">**$1**</span>');
+    html = html.replace(/\/\/(.+?)\/\//g, '<span class="wiki-italic">//$1//</span>');
+    html = html.replace(/__(.+?)__/g, '<span class="wiki-underline">__$1__</span>');
+    html = html.replace(/--(.+?)--/g, '<span class="wiki-strike">--$1--</span>');
+    html = html.replace(/##(.+?)##/g, '<span class="wiki-code">##$1##</span>');
+    html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
+    html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
+    html = html.replace(/(file:((\.\.|!)\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&=]*)?)/ug, '<span class="wiki-link">$1</span>');
+    html = html.replace(/^(\s*([*-]|\d+\.|[a-zA-Z]\.)\s+)/gm, '<span class="wiki-list">$1</span>');
+    html = html.replace(/(%%|<\[|\{\{|\?\?|\!\!)(.+?)(%%|]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
+    html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
+
+    // Restore literal blocks (inner syntax was completely ignored)
+    html = html.replace(/WIKI_LITERAL_(\d+)/g, (match, id) => {
+      const content = literals[parseInt(id, 10)];
+      return `""${content}""`;
+    });
+
+    return html;
+  }
+
+  // ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
+  handleDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.area.classList.add('dragover');           // optional visual feedback (see CSS below)
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.area.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    if (files && files.length) this.uploadMediaFiles(files);
+  }
+
+  handlePaste(e) {
+    const items = e.clipboardData?.items || [];
+    const files = [];
+    for (let item of items) {
+      if (item.kind === 'file') {
+        const file = item.getAsFile();
+        if (file) files.push(file);
       }
-    });
+    }
+    if (files.length) {
+      e.preventDefault();   // prevent plain text paste
+      this.uploadMediaFiles(files);
+    }
+  }
 
-    // Resize handling (split view, window resize, etc.)
-    this.resizeObserver = new ResizeObserver(() => this.syncContentSize());
-    this.resizeObserver.observe(ta);
-    this.resizeObserver.observe(this.syntaxContainer);
+  // Trigger native file dialog (for the new toolbar button)
+  triggerFileUpload() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.accept = 'image/*,*/*';   // all files
+    input.onchange = (e) => {
+      if (e.target.files.length) this.uploadMediaFiles(e.target.files);
+    };
+    input.click();
+  }
 
-    // Initial sync
-    this.syncContentSize();
-    this.updateSyntaxHighlight();
-	}
+  // Core upload function
+  // ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
+  async uploadMediaFiles(files) {
+    let uploadUrl = window.location.pathname.replace(/\/edit$/, '/upload');
+    if (!uploadUrl.endsWith('/upload')) uploadUrl += '/upload';
+    uploadUrl = window.location.origin + uploadUrl;
 
-	updateSyntaxHighlight() {
-	  if (!this.syntaxHighlightEnabled || !this.highlighter) return;
-	  this.highlighter.innerHTML = this.highlightWikiSyntax(this.area.value) + '\n';
-	}
+    for (let file of files) {
+      const cursorPos = this.area.selectionStart;
+      const placeholder = `[uploading ${file.name}...]`;
+      this.insertAtCursor(placeholder);
 
-	highlightWikiSyntax(text) {
-	  if (!text) return '';
+      const formData = new FormData();
+      formData.append('_nonce', this.area.dataset.uploadNonce || '');
+      formData.append('_action', 'upload');
+      formData.append('upload', '1');
+      formData.append('ajax', '1');
+      formData.append('upload_to', 'local');
+      formData.append('file', file);
 
-	  let html = text
-	    .replace(/&/g, '&amp;')
-	    .replace(/</g, '&lt;')
-	    .replace(/>/g, '&gt;');
+      try {
+        const response = await fetch(uploadUrl, {
+          method: 'POST',
+          body: formData,
+          credentials: 'same-origin'
+        });
 
-	  // Protect ""..."" literal blocks FIRST so that NO syntax inside them is ever processed.
-	  const literals = [];
-	  html = html.replace(/""(.+?)""/gs, (match, content) => {
-	    const id = literals.length;
-	    literals.push(content);
-	    return `WIKI_LITERAL_${id}`;
-	  });
+        let result = {};
+        try { result = await response.json(); } catch (e) {}
 
-	  html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
-	  html = html.replace(/\*\*(.+?)\*\*/g, '<span class="wiki-bold">**$1**</span>');
-	  html = html.replace(/\/\/(.+?)\/\//g, '<span class="wiki-italic">//$1//</span>');
-	  html = html.replace(/__(.+?)__/g, '<span class="wiki-underline">__$1__</span>');
-	  html = html.replace(/--(.+?)--/g, '<span class="wiki-strike">--$1--</span>');
-	  html = html.replace(/##(.+?)##/g, '<span class="wiki-code">##$1##</span>');
-	  html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
-	  html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
-	  html = html.replace(/(file:((\.\.|!)\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&=]*)?)/ug, '<span class="wiki-link">$1</span>');
-	  html = html.replace(/^(\s*([*-]|\d+\.|[a-zA-Z]\.)\s+)/gm, '<span class="wiki-list">$1</span>');
-	  html = html.replace(/(%%|<\[|\{\{|\?\?|\!\!)(.+?)(%%|]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
-	  html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
+        // Remove placeholder
+        this.area.value = this.area.value.replace(placeholder, '');
+        this.area.selectionStart = this.area.selectionEnd = cursorPos;
 
-	  // Restore literal blocks (inner syntax was completely ignored)
-	  html = html.replace(/WIKI_LITERAL_(\d+)/g, (match, id) => {
-	    const content = literals[parseInt(id, 10)];
-	    return `""${content}""`;
-	  });
+        if (response.ok && result.filename) {
+          const isImage = file.type.startsWith('image/');
+          const syntax = isImage
+            ? `file:${result.filename}`
+            : `((file:${result.filename} ${result.filename}))`;
 
-	  return html;
-	}
+          this.insertAtCursor(syntax + '\n');
+          this.refreshSyntaxHighlight();
+          this.showMessage(`✓ ${file.name} uploaded`);
 
-	toggleSyntaxHighlight() {
-	  this.syntaxHighlightEnabled = !this.syntaxHighlightEnabled;
+          // Update nonce for the next file ===
+          if (result.new_nonce) {
+            this.area.dataset.uploadNonce = result.new_nonce;
+          }
+        } else {
+          console.error('Upload failed – server response:', result);
+          this.showMessage(`✗ ${file.name}: ${result.error || 'Upload failed'}`, true);
+        }
+      } catch (err) {
+        this.area.value = this.area.value.replace(placeholder, '');
+        this.area.selectionStart = this.area.selectionEnd = cursorPos;
+        this.showMessage(`✗ ${file.name} upload error`, true);
+        console.error(err);
+      }
+    }
+  }
 
-	  if (this.syntaxHighlightEnabled) {
-	    if (this.highlighter) this.highlighter.style.display = 'block';
-	    this.area.style.background = 'transparent';
-	    this.area.style.color = 'transparent';
-	    this.updateSyntaxHighlight();
-	    this.showMessage('Syntax highlighting ON', 2000);
-	  } else {
-	    if (this.highlighter) this.highlighter.style.display = 'none';
-	    this.area.style.background = '';
-	    this.area.style.color = '#333';
-	    this.showMessage('Syntax highlighting OFF', 2000);
-	  }
-	}
-	
-	// ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
-	handleDragOver(e) {
-	  e.preventDefault();
-	  e.stopPropagation();
-	  this.area.classList.add('dragover');           // optional visual feedback (see CSS below)
-	}
-
-	handleDrop(e) {
-	  e.preventDefault();
-	  e.stopPropagation();
-	  this.area.classList.remove('dragover');
-	  const files = e.dataTransfer.files;
-	  if (files && files.length) this.uploadMediaFiles(files);
-	}
-
-	handlePaste(e) {
-	  const items = e.clipboardData?.items || [];
-	  const files = [];
-	  for (let item of items) {
-	    if (item.kind === 'file') {
-	      const file = item.getAsFile();
-	      if (file) files.push(file);
-	    }
-	  }
-	  if (files.length) {
-	    e.preventDefault();   // prevent plain text paste
-	    this.uploadMediaFiles(files);
-	  }
-	}
-
-	// Trigger native file dialog (for the new toolbar button)
-	triggerFileUpload() {
-	  const input = document.createElement('input');
-	  input.type = 'file';
-	  input.multiple = true;
-	  input.accept = 'image/*,*/*';   // all files
-	  input.onchange = (e) => {
-	    if (e.target.files.length) this.uploadMediaFiles(e.target.files);
-	  };
-	  input.click();
-	}
-
-	// Core upload function
-	// ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
-	async uploadMediaFiles(files) {
-	  let uploadUrl = window.location.pathname.replace(/\/edit$/, '/upload');
-	  if (!uploadUrl.endsWith('/upload')) uploadUrl += '/upload';
-	  uploadUrl = window.location.origin + uploadUrl;
-
-	  for (let file of files) {
-		const cursorPos = this.area.selectionStart;
-	    const placeholder = `[uploading ${file.name}...]`;
-	    this.insertAtCursor(placeholder);
-
-	    const formData = new FormData();
-	    formData.append('_nonce', this.area.dataset.uploadNonce || '');
-	    formData.append('_action', 'upload');
-	    formData.append('upload', '1');
-	    formData.append('ajax', '1');
-	    formData.append('upload_to', 'local');
-	    formData.append('file', file);
-
-	    try {
-	      const response = await fetch(uploadUrl, {
-	        method: 'POST',
-	        body: formData,
-	        credentials: 'same-origin'
-	      });
-
-	      let result = {};
-	      try { result = await response.json(); } catch (e) {}
-
-	      // Remove placeholder
-	      this.area.value = this.area.value.replace(placeholder, '');
-	      this.area.selectionStart = this.area.selectionEnd = cursorPos;
-
-	      if (response.ok && result.filename) {
-	        const isImage = file.type.startsWith('image/');
-	        const syntax = isImage
-	          ? `file:${result.filename}\n`
-	          : `((file:${result.filename} ${result.filename}))\n`;
-
-	        this.insertAtCursor(syntax + ' ');
-	        this.showMessage(`✓ ${file.name} uploaded`);
-
-	        // Update nonce for the next file ===
-	        if (result.new_nonce) {
-	          this.area.dataset.uploadNonce = result.new_nonce;
-	        }
-	      } else {
-	        console.error('Upload failed – server response:', result);
-	        this.showMessage(`✗ ${file.name}: ${result.error || 'Upload failed'}`, true);
-	      }
-	    } catch (err) {
-	      this.area.value = this.area.value.replace(placeholder, '');
-              this.area.selectionStart = this.area.selectionEnd = cursorPos;
-              this.showMessage(`✗ ${file.name} upload error`, true);
-              console.error(err);
-	    }
-	  }
-	}
-
-	// Helper: insert text at current cursor position
-	insertAtCursor(text) {
-	  const ta = this.area;
-	  const start = ta.selectionStart;
-	  const end = ta.selectionEnd;
-	  ta.value = ta.value.substring(0, start) + text + ta.value.substring(end);
-	  ta.selectionStart = ta.selectionEnd = start + text.length;
-	  ta.focus();
-	  this.updateStatus();
-	}
+  // Helper: insert text at current cursor position
+  insertAtCursor(text) {
+    const ta = this.area;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    ta.value = ta.value.substring(0, start) + text + ta.value.substring(end);
+    ta.selectionStart = ta.selectionEnd = start + text.length;
+    ta.focus();
+    this.updateStatus();
+    this.refreshSyntaxHighlight();
+  }
 }
