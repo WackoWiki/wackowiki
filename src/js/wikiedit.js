@@ -82,10 +82,7 @@ class WikiEdit extends ProtoEdit {
       this.area.addEventListener('paste', this.handlePaste.bind(this));
     }
 
-    // ====================== LIVE PREVIEW AUTO-START ======================
-    if (this.livePreviewDefault) {
-      setTimeout(() => this.toggleLivePreview(), 100);
-    }
+
 
     this.imagesPath = imgPath || 'image/';
 
@@ -174,6 +171,23 @@ class WikiEdit extends ProtoEdit {
 
     // must be called after toolbar is built
     this.enableLivePreview();
+	// ====================== LIVE PREVIEW (features [a] + [b]) ======================
+	this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
+
+	// [a] Check default + [b] respect persisted user choice (like syntax highlighting)
+	const savedLivePreview = localStorage.getItem('wikiedit_live_preview_enabled');
+	const shouldEnableLivePreview = (savedLivePreview !== null)
+	  ? (savedLivePreview === 'true')
+	  : this.livePreviewDefault;
+
+	this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
+
+	this.enableLivePreview();   // must run before any toggle
+
+	if (shouldEnableLivePreview) {
+	  // open in live preview on load (default or remembered state)
+	  setTimeout(() => this.toggleLivePreview(), 100);
+	}
 
     // Dropdown (custom HTML)
     const dropdownHTML = `<li class="we-dropdown">
@@ -217,7 +231,10 @@ class WikiEdit extends ProtoEdit {
         ? this.icons.exitfullscreen
         : this.icons.fullscreen;
     };
-
+	// ====================== LIVE PREVIEW AUTO-START ======================
+	if (this.livePreviewDefault) {
+	  setTimeout(() => this.toggleLivePreview(), 100);
+	}
     document.addEventListener('fullscreenchange', updateFSIcon);
 
     // Initial state
@@ -374,6 +391,16 @@ class WikiEdit extends ProtoEdit {
     } else {
       this.showMessage('No draft to restore');
     }
+  }
+
+  toggleDarkMode() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    // Force repaint so syntax + toolbar update instantly
+    this.area.style.transition = 'background 0.2s';
+    setTimeout(() => { this.area.style.transition = ''; }, 300);
+    console.info('[WikiEdit] Manual dark mode toggled');
   }
 
   /**
@@ -1716,6 +1743,9 @@ class WikiEdit extends ProtoEdit {
       this.splitter.style.display = 'none';
       this.editPane.style.flex = '1 1 100%';
     }
+
+    // [b] Persist toggle state (exactly like toggleSyntaxHighlight())
+    localStorage.setItem('wikiedit_live_preview_enabled', this.livePreviewEnabled);
   }
 
   // ==================== Markdown ↔ Wacko Converter (added) ====================
