@@ -65,7 +65,9 @@ $update_config_r6_1_1 = "DELETE FROM {$pref}config WHERE config_name IN ('disabl
 // USER SETTING
 $alter_user_setting_r6_2_1 = "ALTER TABLE {$pref}user_setting ADD editor_height INT(10) UNSIGNED NOT NULL DEFAULT '400' AFTER validate_ip";
 $alter_user_setting_r6_2_2 = "ALTER TABLE {$pref}user_setting ADD autosave_draft TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER editor_height";
-$alter_user_setting_r6_2_3 = "ALTER TABLE {$pref}user_setting ADD dark_mode TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER editor_height";
+$alter_user_setting_r6_2_3 = "ALTER TABLE {$pref}user_setting ADD dark_mode TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER autosave_draft";
+$alter_user_setting_r6_2_4 = "ALTER TABLE {$pref}user_setting ADD syntax_highlighting TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER dark_mode";
+$alter_user_setting_r6_2_5 = "ALTER TABLE {$pref}user_setting ADD live_preview TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER syntax_highlighting";
 
 // USERGROUP
 

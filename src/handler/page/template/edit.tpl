@@ -43,6 +43,8 @@
 				<label for="postText" class="visuallyhidden">[ ' _t: PageBody ' ]</label>
 				<textarea id="postText" name="body" class="textarea-page" rows="40" cols="60" 
 					data-autosave-draft="[ ' autosave ' ]"
+					data-syntax-highlighting="[ ' syntax ' ]"
+					data-live-preview="[ ' preview ' ]"
 					data-editor-height="[ ' height ' ]px"
 					data-can-upload="[ ' upload ' ]"
 					data-upload-nonce="[ ' nonce ' ]"

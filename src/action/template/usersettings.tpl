@@ -174,8 +174,22 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td>
-						<input type="checkbox" id="autosave_draft" name="autosave_draft" id="autosave_draft"[ ' autosave | checkbox ' ]>
+						<input type="checkbox" name="autosave_draft" id="autosave_draft"[ ' autosave | checkbox ' ]>
 						<label for="autosave_draft">[ ' _t: AutosaveDraft ' ]</label>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<input type="checkbox" name="syntax_highlighting" id="syntax_highlighting"[ ' syntax | checkbox ' ]>
+						<label for="syntax_highlighting">[ ' _t: SyntaxHighlighting ' ]</label>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<input type="checkbox" name="live_preview" id="live_preview"[ ' preview | checkbox ' ]>
+						<label for="live_preview">[ ' _t: LivePreview ' ]</label>
 					</td>
 				</tr>
 				<tr>

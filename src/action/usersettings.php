@@ -116,6 +116,8 @@ else if ($user = $this->get_user())
 		'validate_ip		= ' . (int) isset($_POST['validate_ip']) . ', ' .
 		'autosave_draft		= ' . (int) isset($_POST['autosave_draft']) . ', ' .
 		'editor_height		= ' . (int) ($_POST['editor_height'] ?? 400) . ', ' .
+		'syntax_highlighting = ' . (int) isset($_POST['syntax_highlighting']) . ', ' .
+		'live_preview		= ' . (int) isset($_POST['live_preview']) . ', ' .
 		'noid_pubs			= ' . (int) isset($_POST['noid_pubs']) . ', ' .
 		'session_length		= ' . (int) @$_POST['session_length'] . ' '; // @ to normalize possible discrepancy
 	}
@@ -248,6 +250,8 @@ else if ($user = $this->get_user())
 		$tpl->noredirect		= $user['dont_redirect'];
 		$tpl->autosave			= $user['autosave_draft'];
 		$tpl->height			= $user['editor_height'];
+		$tpl->syntax			= $user['syntax_highlighting'];
+		$tpl->preview			= $user['live_preview'];
 		$tpl->validateip		= $user['validate_ip'];
 		$tpl->hidesession		= $user['hide_lastsession'];
 		$tpl->sessionlength		= $user['session_length'];
