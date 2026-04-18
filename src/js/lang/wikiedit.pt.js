@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Tela cheia',
 	LivePreview: 'Pré-visualização ao vivo',
 	SyntaxHighlighting: 'Realce de sintaxe',
+	ToggleDark: 'Alternar modo escuro/claro',
+	Upload: 'Carregar imagem/arquivo',
+	HeightShrink: 'Altura do editor encolhido',
+	HeightEnlarge: 'Ampliar altura do editor',
+	HeightReset: 'Restaurar a altura do editor',
+	DraftClear: 'Limpar rascunho salvo automaticamente',
+	DraftRestore: 'Restaurar rascunho salvo automaticamente',
+	Undo: 'Desfazer (Ctrl+Z)',
+	Redo: 'Refazer (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Shortcuts:\n' + ' Ctrl+B - Negrito\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Sublinhar\n' + ' Ctrl+Shift+S - Ataque\n' + ' Ctrl+Shift+1 .. 5 - Título 1..5\n' + ' Alt+I ou Ctrl+T - Recuo\n' + ' Alt+U ou Ctrl+Shift+T - Sem recuo\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link com a descrição\n' + ' Ctrl+Shift+L - Lista Ordenada\n' + ' Ctrl+Shift+N - Lista Ordenada\n' + ' Ctrl+Shift+O - Lista Ordenada\n' + ' Ctrl+= - Texto pequeno\n' + ' Ctrl+Shift+Menos - Linha Horizontal\n' + ' \n'
 };

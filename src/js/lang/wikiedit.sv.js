@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Helskärm',
 	LivePreview: 'Förhandsgranska live',
 	SyntaxHighlighting: 'Syntax markerar',
+	ToggleDark: 'Växla mörk/ljus läge',
+	Upload: 'Ladda upp bild/fil',
+	HeightShrink: 'Shrink redaktörens höjd',
+	HeightEnlarge: 'Förstora editorns höjd',
+	HeightReset: 'Återställ redigeringshöjd',
+	DraftClear: 'Rensa autosaverat utkast',
+	DraftRestore: 'Återställ automatiskt sparat utkast',
+	Undo: 'Ångra (Ctrl+Z)',
+	Redo: 'Upprepa (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Genvägar:\n' + ' Ctrl+B - Fet\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Understruken\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 5 - Rubrik 1..5\n' + ' Alt+I eller Ctrl+T - Indent\n' + ' Alt+U eller Ctrl+Shift+T - Avgränsa\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - länk\n' + ' Ctrl+L - Länk till beskrivning\n' + ' Ctrl+Shift+L - Obeställd lista\n' + ' Ctrl+Shift+N - Ordnad lista\n' + ' Ctrl+Shift+O - Ordnad lista\n' + ' Ctrl+= - Liten text\n' + ' Ctrl+Shift+Minus - Horisontell linje\n' + ' \n'
 };

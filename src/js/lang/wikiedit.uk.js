@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Повноекранний',
 	LivePreview: 'Попередній перегляд',
 	SyntaxHighlighting: 'Підсвічування синтаксису',
+	ToggleDark: 'Перемкнути режим темних/світлої',
+	Upload: 'Завантажити зображення/файл',
+	HeightShrink: 'Висота стикового редактора',
+	HeightEnlarge: 'Велика висота редактора',
+	HeightReset: 'Скинути висоту редактора',
+	DraftClear: 'Очистити чернетку автозбереження',
+	DraftRestore: 'Відновити автозбережену чернетку',
+	Undo: 'Скасувати (Ctrl + Z)',
+	Redo: 'Повторити (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Ярлики:\n' + ' Ctrl+B - Жирний\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Underline\n' + ' Ctrl+Shift+S - Перекреслення\n' + ' Ctrl+Shift+1 .. 5 - Заголовок 1..5\n' + ' Alt+I або Ctrl+T - Відступ\n' + ' Alt+U або Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - посилання\n' + ' Ctrl+L - посилання з описом\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Ordered List\n' + ' Ctrl+Shift+O - Ordered List\n' + ' Ctrl+= - невеликий текст\n' + ' Ctrl+Shift+Minus - Горизонтальна лінія\n' + ' \n'
 };

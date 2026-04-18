@@ -14,7 +14,7 @@ $ap_translation = [
 		'users'			=> '使用者',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
+		'extension'		=> '擴充',
 		'database'		=> '資料庫',
 	],
 
@@ -36,14 +36,14 @@ $ap_translation = [
 	'TimeLeft'					=> 'Time left:  %1 minutes',
 	'ApVersion'					=> '版本',
 
-	'SiteOpen'					=> 'Open',
+	'SiteOpen'					=> '開啟',
 	'SiteOpened'				=> 'site opened',
 	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'Close',
+	'SiteClose'					=> '關閉',
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
 
-	'System'					=> 'System',
+	'System'					=> '系統管理',
 
 	// Generic
 	'Cancel'					=> '取消',
@@ -51,7 +51,7 @@ $ap_translation = [
 	'Edit'						=> '編輯',
 	'Remove'					=> '移除',
 	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
+	'Disabled'					=> '已停用',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> '管理',
 	'Min'						=> 'Min',
@@ -134,7 +134,7 @@ $ap_translation = [
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
+		'name'		=> '系統管理',
 		'title'		=> 'System options',
 	],
 
@@ -403,7 +403,7 @@ $ap_translation = [
 	'ThemeColorInfo'			=> '瀏覽器將根據提供的 CSS 顏色設置每個頁面的地址欄顏色。',
 
 	'LayoutSection'				=> 'Layout',
-	'Theme'						=> 'Theme:',
+	'Theme'						=> '主題:',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
 	'ResetUserTheme'			=> 'Reset all user themes:',
 	'ResetUserThemeInfo'		=> 'Resets all user themes. Warning: This action will set back all user selected themes to the global default theme.',
@@ -472,7 +472,7 @@ $ap_translation = [
 	'AnonymizeIp'				=> 'Anonymize users IP addresses:',
 	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
 
-	'ReverseProxySection'		=> 'Reverse Proxy',
+	'ReverseProxySection'		=> '反向代理',
 	'ReverseProxy'				=> 'Use Reverse proxy:',
 	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
 									 client by examining information stored in the X-Forwarded-For headers.
@@ -596,9 +596,9 @@ $ap_translation = [
 	'Csp'						=> 'Content-Security-Policy (CSP):',
 	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
-		'0'		=> 'disabled',
+		'0'		=> '已停用',
 		'1'		=> 'strict',
-		'2'		=> 'custom',
+		'2'		=> '自訂',
 	],
 	'PermissionsPolicy'			=> 'Permissions Policy:',
 	'PermissionsPolicyInfo'		=> 'The HTTP Permissions-Policy header provides a mechanism to explicitly enable or disable various powerful browser features.',
@@ -730,7 +730,7 @@ $ap_translation = [
 	'NewsStructure'				=> 'News cluster structure:',
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
-	'LicenseSection'			=> 'License',
+	'LicenseSection'			=> '許可證',
 	'DefaultLicense'			=> 'Default license:',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 	'EnableLicense'				=> 'Enable License:',
@@ -1009,7 +1009,7 @@ $ap_translation = [
 	'SysMsg'					=> 'System message:',
 	'SysMsgInfo'				=> 'Your text here',
 
-	'SysMsgType'				=> 'Type:',
+	'SysMsgType'				=> '類型：',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
 	'SysMsgAudience'			=> 'Audience:',
 	'SysMsgAudienceInfo'		=> 'Audience the system message is shown to.',
@@ -1029,7 +1029,7 @@ $ap_translation = [
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
 	'Approve'					=> 'Approve',
 	'Deny'						=> 'Deny',
-	'Pending'					=> 'Pending',
+	'Pending'					=> '待定',
 	'Approved'					=> 'Approved',
 	'Denied'					=> 'Denied',
 
@@ -1115,8 +1115,8 @@ $ap_translation = [
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> '復原',
 	'BackupRemove'				=> '移除',
-	'RestoreYes'				=> 'Yes',
-	'RestoreNo'					=> 'No',
+	'RestoreYes'				=> '是',
+	'RestoreNo'					=> '否',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	'BackupArchived'			=> '備份 %1 已存檔。',
@@ -1138,7 +1138,7 @@ $ap_translation = [
 
 	'UserIP'					=> 'IP',
 	'UserSignuptime'			=> 'Signuptime',
-	'UserActions'				=> 'Actions',
+	'UserActions'				=> '操作',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
 
 	'UserAccountNotify'			=> 'Notify user',
@@ -1159,8 +1159,8 @@ $ap_translation = [
 	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> '說明',
 	'GroupsModerator'			=> '版主',
-	'GroupsOpen'				=> 'Open',
-	'GroupsActive'				=> 'Active',
+	'GroupsOpen'				=> '開啟',
+	'GroupsActive'				=> '已啟用',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
 	'GroupsAlreadyExists'		=> 'This group already exists.',
@@ -1217,7 +1217,7 @@ $ap_translation = [
 	'SqlModesSession'			=> 'SQL Modes Session',
 	'IcuVersion'				=> 'ICU',
 	'PhpVersion'				=> 'PHP',
-	'MemoryLimit'				=> 'Memory',
+	'MemoryLimit'				=> '記憶體',
 	'UploadFilesizeMax'			=> 'Upload max filesize',
 	'PostMaxSize'				=> 'Post max size',
 	'MaxExecutionTime'			=> 'Max execution time',
@@ -1267,14 +1267,14 @@ $ap_translation = [
 	'BbStats'					=> 'Bad Behaviour has blocked %1 access attempts in the last 7 days.',
 
 	'BbSummary'					=> 'Summary',
-	'BbLog'						=> 'Log',
+	'BbLog'						=> '日誌',
 	'BbSettings'				=> '設定',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log
 	'BbHits'					=> 'Hits',
 	'BbRecordsFiltered'			=> 'Displaying %1 of %2 records filtered by',
-	'BbStatus'					=> 'Status',
+	'BbStatus'					=> '狀態',
 	'BbBlocked'					=> 'Blocked',
 	'BbPermitted'				=> 'Permitted',
 	'BbIp'						=> 'IP',

@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Fullskjerm',
 	LivePreview: 'Live visning',
 	SyntaxHighlighting: 'Syntaksutheving',
+	ToggleDark: 'Veksle mørke/lysmodus',
+	Upload: 'Last opp bilde/fil',
+	HeightShrink: 'Krymp tekstens høyde',
+	HeightEnlarge: 'Forstørr tekstbehandlerhøyde',
+	HeightReset: 'Tilbakestill tekstøyde',
+	DraftClear: 'Tøm autolagrede utkast',
+	DraftRestore: 'Gjenopprett automatisk utkast',
+	Undo: 'Angre (Ctrl+Z)',
+	Redo: 'Gjenta (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Snarveier:\n' + ' Ctrl+B - fet\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Understrek\n' + ' Ctrl+Shift+S - Gjennomstreking\n' + ' Ctrl+Shift+1 ... 5 - Overskrift 1..5\n' + ' Alt+I eller Ctrl+T - Indent\n' + ' Alt+U eller Ctrl+Shift+T - Ikke innrykk\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Lenke med beskrivelse\n' + ' Ctrl+Shift+L - Usortert liste\n' + ' Ctrl+Shift+N - Bestilt liste\n' + ' Ctrl+Shift+O - Bestilt liste\n' + ' Ctrl+= - Liten tekst\n' + ' Ctrl+Shift+Minus - Liggende linje\n' + ' \n'
 };

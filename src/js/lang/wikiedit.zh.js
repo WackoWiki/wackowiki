@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: '全屏',
 	LivePreview: '实时预览',
 	SyntaxHighlighting: '语法加亮',
+	ToggleDark: '切换暗色/亮色模式',
+	Upload: '上传图片/文件',
+	HeightShrink: '收缩编辑器高度',
+	HeightEnlarge: '扩大编辑器高度',
+	HeightReset: '重置编辑器高度',
+	DraftClear: '清除自动保存的草稿',
+	DraftRestore: '恢复自动保存的草稿',
+	Undo: '撤消(Ctrl+Z)',
+	Redo: '重做(Ctrl+Shift+Z)',
 	HelpAboutTip: ' 快捷方式：\n' + ' Ctrl+B - 粗体\n' + ' Ctrl+I - 斜体\n' + ' Ctrl+U - 下划线\n' + ' Ctrl+Shift+S - 删除线\n' + ' Ctrl+Shift+1... 5 - 标题 1..5\n' + ' Alt+I 或 Ctrl+T - 缩进\n' + ' Alt+U 或 Ctrl+Shift+T - 取消缩进\n' + ' Ctrl+J - 标记 (!!)\n' + ' 标记\n' + ' Alt+L - 链接\n' + ' Ctrl+L - 带描述的链接\n' + ' Ctrl+Shift+L - 无序列表\n' + ' Ctrl+Shift+N - 顺序列表\n' + ' Ctrl+Shift+O - 排序列表\n' + ' Ctrl+= - 小文本\n' + ' Ctrl+Shift+Minus - 水平线\n' + ' \n'
 };

@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Fuldskærm',
 	LivePreview: 'Live Forhåndsvisning',
 	SyntaxHighlighting: 'Syntaksfremhævning',
+	ToggleDark: 'Slå mørke/lys til/fra',
+	Upload: 'Upload billede/fil',
+	HeightShrink: 'Formindsk editor højde',
+	HeightEnlarge: 'Forstør editor højde',
+	HeightReset: 'Nulstil editor højde',
+	DraftClear: 'Ryd automatisk gemt kladde',
+	DraftRestore: 'Gendan automatisk gemt kladde',
+	Undo: 'Fortryd (Ctrl+Z)',
+	Redo: 'Gentag (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Genveje:\n' + ' Ctrl+B - Fed\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Understreg\n' + ' Ctrl+Shift+S - Gennemstreget\n' + ' Ctrl+Shift+1 .. 5 - Overskrift 1..5\n' + ' Alt+I eller Ctrl+T - Indryk\n' + ' Alt+U eller Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link med beskrivelse\n' + ' Ctrl+Shift+L - Uordnet Liste\n' + ' Ctrl+Shift+N - Bestilt Liste\n' + ' Ctrl+Shift+O - Bestilt Liste\n' + ' Ctrl+= - Lille tekst\n' + ' Ctrl+Shift+Minus - Vandret linje\n' + ' \n'
 };

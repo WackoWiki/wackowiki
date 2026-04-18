@@ -267,7 +267,7 @@ $wacko_translation = [
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> '註冊',
 	'AccessPrivate'				=> 'private',
-	'AccessCustom'				=> 'custom',
+	'AccessCustom'				=> '自訂',
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',
@@ -610,7 +610,7 @@ $wacko_translation = [
 	'NotifyComment'				=> '評論',
 	'NotifyOff'					=> '關閉',
 	'NotifyAlways'				=> '總是',
-	'NotifyPending'				=> 'Pending',
+	'NotifyPending'				=> '待定',
 	'NotifyDigest'				=> 'Digest',
 	'NotifyPendingPageTip'		=> 'Only one notification is sent for the first page change of a page you are watching.',
 	'NotifyPendingCommentTip'	=> 'Only one notification is sent for the first comment to a page you are watching.',
@@ -654,7 +654,11 @@ $wacko_translation = [
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'AnonymousPub'				=> 'Preferably, published anonymously (to hide the name)',
+	'AutosaveDraft'				=> 'Enable autosave draft (localStorage)',
+	'DarkMode'					=> 'Dark Mode',
 	'EditorHeight'				=> 'Editor height',
+	'SyntaxHighlighting'		=> 'Enable syntax highlighting',
+	'LivePreview'				=> 'Start with Live Preview enabled',
 	'PageMoved'					=> 'This page moved. You can find it at',
 	'RedirectedFrom'			=> '重新導向自%1',
 	'RedirectedTo'				=> '重新導向至',
@@ -950,7 +954,7 @@ $wacko_translation = [
 	'FileUsageText'				=> '以下个页面使用本文件：',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
-	'FileSortExt'				=> 'extension',
+	'FileSortExt'				=> '擴充',
 	'FileSortName'				=> '名稱',
 	'FileSortSize'				=> '大小',
 	'FileSortTime'				=> '已建立',
@@ -981,7 +985,7 @@ $wacko_translation = [
 
 	'BookmarkDeleteSelected'	=> '刪除所選的',
 	'BookmarkMark'				=> '標示',
-	'BookmarkNumber'			=> 'No.',
+	'BookmarkNumber'			=> '否.',
 	'BookmarkNone'				=> '您没有收藏.',
 	'BookmarkTitle'				=> 'Bookmark title',
 	'BookmarkPage'				=> '頁面',
@@ -1020,7 +1024,7 @@ $wacko_translation = [
 	'DistributedUnder'			=> 'Material is distributed under',
 	'AuthorsDisplayHint'		=> 'The list of authors will be displayed when saving the page.',
 	'AnonymousUsers'			=> 'Anonymous users',
-	'License'					=> 'License',
+	'License'					=> '許可證',
 	'LicenseArray'				=> [
 		'1'		=> 'Attribution-NoDerivatives',
 		'2'		=> 'Attribution-NonCommercial-ShareAlike',
@@ -1244,8 +1248,8 @@ $wacko_translation = [
 
 	'AccountStatus'				=> 'Account status',
 	'AccountStatusArray' => [
-		'0' => 'active',
-		'1' => 'pending',
+		'0' => '已啟用',
+		'1' => '待定',
 		'2' => 'blocked',
 		'3' => 'inactive',
 	],

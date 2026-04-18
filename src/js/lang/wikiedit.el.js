@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Πλήρης Οθόνη',
 	LivePreview: 'Ζωντανή Προεπισκόπηση',
 	SyntaxHighlighting: 'Επισήμανση Σύνταξης',
+	ToggleDark: 'Εναλλαγή λειτουργίας σκοτεινού/φωτός',
+	Upload: 'Μεταφόρτωση εικόνας/αρχείου',
+	HeightShrink: 'Σμίκρυνση ύψους επεξεργαστή',
+	HeightEnlarge: 'Μεγέθυνση ύψους επεξεργαστή',
+	HeightReset: 'Επαναφορά ύψους επεξεργαστή',
+	DraftClear: 'Εκκαθάριση προσχέδιου αυτόματης αποθήκευσης',
+	DraftRestore: 'Επαναφορά προχείρου αυτόματης αποθήκευσης',
+	Undo: 'Αναίρεση (Ctrl+Z)',
+	Redo: 'Επανάληψη (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Συντομεύσεις:\n' + ' Ctrl+B - Έντονα\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Υπογράμμιση\n' + ' Ctrl+Shift+S - Επιδιαγράμμιση\n' + ' Ctrl+Shift+1 .. 5 - Κλάση 1..5\n' + ' Alt+I ή Ctrl+T - Εσοχή\n' + ' Alt+U ή Ctrl+Shift+T - Χωρίς εσοχή\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Σύνδεσμος\n' + ' Ctrl+L - Σύνδεσμος με περιγραφή\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Ordered List\n' + ' Ctrl+Shift+O - Κατάταξη Λίστας\n' + ' Ctrl+= - Μικρό κείμενο\n' + ' Ctrl+Shift+Minus - Οριζόντια γραμμή\n' + ' \n'
 };

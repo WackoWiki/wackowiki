@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Celá obrazovka',
 	LivePreview: 'Živý náhled',
 	SyntaxHighlighting: 'Zvýraznění syntaxe',
+	ToggleDark: 'Přepnout tmavý/světlý režim',
+	Upload: 'Nahrát obrázek/soubor',
+	HeightShrink: 'Výška Shrink editoru',
+	HeightEnlarge: 'Výška zvětšovacího editoru',
+	HeightReset: 'Resetovat výšku editoru',
+	DraftClear: 'Vymazat automaticky uložený koncept',
+	DraftRestore: 'Obnovit automaticky uložený koncept',
+	Undo: 'Zpět (Ctrl + Z)',
+	Redo: 'Znovu (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Zkratky:\n' + ' Ctrl+B - tučné\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - podtržení\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 5 - Položka 1..5\n' + ' Alt+I nebo Ctrl+T - odsazení\n' + ' Alt+U nebo Ctrl+Shift+T - Odsazení\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - odkaz\n' + ' Ctrl+L - Propojit s popisem\n' + ' Ctrl+Shift+L - neuspořádaný seznam\n' + ' Ctrl+Shift+N - Objednaný seznam\n' + ' Ctrl+Shift+O - Objednaný seznam\n' + ' Ctrl+= - Malý text\n' + ' Ctrl+Shift+Minus - vodorovná čára\n' + ' \n'
 };

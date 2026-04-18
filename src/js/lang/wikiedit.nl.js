@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Volledig scherm',
 	LivePreview: 'Live voorbeeld',
 	SyntaxHighlighting: 'Syntaxis markering',
+	ToggleDark: 'Wissel donker/licht modus',
+	Upload: 'Afbeelding uploaden/bestand',
+	HeightShrink: 'Hoogte editor verkleinen',
+	HeightEnlarge: 'Vergroot bewerkingshoogte',
+	HeightReset: 'Reset tekstverwerker hoogte',
+	DraftClear: 'Automatisch opgeslagen concept wissen',
+	DraftRestore: 'Herstel automatisch opgeslagen concept',
+	Undo: 'Herstel (Ctrl+Z)',
+	Redo: 'Opnieuw (Ctrl+Shift+Z)',
 	HelpAboutTip: ' Snelkoppelingen:\n' + ' Ctrl+B - Vetgedrukt\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Underline\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 5 - rubriek 1..5\n' + ' Alt+I of Ctrl+T - Inspringen\n' + ' Alt+U of Ctrl+Shift+T - Oninspringen\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link met beschrijving\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Geordende lijst\n' + ' Ctrl+Shift+O - Ordered List\n' + ' Ctrl+= - Kleine tekst\n' + ' Ctrl+Shift+Minus - Horizontal line\n' + ' \n'
 };

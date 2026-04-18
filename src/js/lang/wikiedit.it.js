@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: 'Schermo',
 	LivePreview: 'Anteprima Live',
 	SyntaxHighlighting: 'Evidenziazione Sintassi',
+	ToggleDark: 'Attiva/disattiva modalità scuro/luce',
+	Upload: 'Carica immagine/file',
+	HeightShrink: 'Riduci l\'altezza dell\'editor',
+	HeightEnlarge: 'Ingrandisci altezza editor',
+	HeightReset: 'Reimposta altezza editor',
+	DraftClear: 'Cancella bozza salvata automaticamente',
+	DraftRestore: 'Ripristina bozza salvata automaticamente',
+	Undo: 'Annulla (Ctrl+Z)',
+	Redo: 'Rifai (Ctrl+Maiusc+Z)',
 	HelpAboutTip: ' Scorciatoie:\n' + ' Ctrl+B - Grassetto\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Sottolinea\n' + ' Ctrl+Maiusc+S - Sbarratura\n' + ' Ctrl+Shift+1 .. 5 - Intestazione 1..5\n' + ' Alt+I o Ctrl+T - Rientro\n' + ' Alt+U o Ctrl+Maiusc+T - Annulla la lettera\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Collega con la descrizione\n' + ' Ctrl+Maiusc+L - Elenco Non Ordinato\n' + ' Ctrl+Maiusc+N - Elenco Ordinato\n' + ' Ctrl+Maiusc+O - Elenco Ordinato\n' + ' Ctrl+= - Testo piccolo\n' + ' Ctrl+Maiusc+Meno - Linea orizzontale\n' + ' \n'
 };

@@ -69,5 +69,14 @@ lang = {
 	Fullscreen: '全画面',
 	LivePreview: 'ライブプレビュー',
 	SyntaxHighlighting: '構文のハイライト',
+	ToggleDark: 'ダーク/ライトモードの切り替え',
+	Upload: '画像/ファイルをアップロード',
+	HeightShrink: 'エディタの高さを縮小',
+	HeightEnlarge: 'エディタの高さを拡大',
+	HeightReset: 'エディタの高さをリセット',
+	DraftClear: '自動保存されたドラフトをクリア',
+	DraftRestore: '自動保存されたドラフトを復元',
+	Undo: '元に戻す (Ctrl+Z)',
+	Redo: 'Redo (Ctrl + Shift + Z)',
 	HelpAboutTip: ' ショートカット:\n' + ' Ctrl+B - 太字\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - 下線\n' + ' Ctrl+Shift+S - 取り消し線\n' + ' Ctrl+Shift+1 .. 5 - 見出し 1..5\n' + ' Alt+I または Ctrl+T - インデント\n' + ' Alt+UまたはCtrl+Shift+T - インデント解除\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - リンク\n' + ' Ctrl+L - Link with description\n' + ' Ctrl+Shift+L - 順序なしリスト\n' + ' Ctrl+Shift+N - 順序付きリスト\n' + ' Ctrl+Shift+O - 順序付きリスト\n' + ' Ctrl+= - 小文字\n' + ' Ctrl+Shift+Minus - 水平線\n' + ' \n'
 };
