@@ -456,8 +456,35 @@ class WikiEdit extends ProtoEdit {
 
   // ====================== UNDO / REDO STACK ======================
 
+  validateState(state) {
+    if (!state || typeof state !== 'object') {
+      console.warn('WikiEdit: undo state is not an object');
+      return false;
+    }
+    if (typeof state.text !== 'string') {
+      console.warn('WikiEdit: undo state.text is not a string');
+      return false;
+    }
+    const len = state.text.length;
+    if (typeof state.start !== 'number' || state.start < 0 || state.start > len) {
+      console.warn('WikiEdit: invalid selectionStart', state.start, '(text length =', len, ')');
+      return false;
+    }
+    if (typeof state.end !== 'number' || state.end < state.start || state.end > len) {
+      console.warn('WikiEdit: invalid selectionEnd', state.end, '(start =', state.start, ', length =', len, ')');
+      return false;
+    }
+    if (typeof state.scroll !== 'number' || state.scroll < 0) {
+      console.warn('WikiEdit: invalid scrollTop', state.scroll);
+      return false;
+    }
+    return true;
+  }
+
   pushState() {
     const t = this.area;
+    if (!t) return;
+
     const state = {
       text: t.value,
       start: t.selectionStart,
@@ -465,7 +492,12 @@ class WikiEdit extends ProtoEdit {
       scroll: t.scrollTop
     };
 
-    // Avoid pushing identical consecutive states
+    if (!this.validateState(state)) {
+      console.error('WikiEdit: invalid state – refusing to push to undo stack');
+      return;
+    }
+
+    // Avoid pushing identical consecutive states (existing logic)
     const last = this.undoStack[this.undoStack.length - 1];
     if (last &&
       last.text === state.text &&
@@ -487,10 +519,29 @@ class WikiEdit extends ProtoEdit {
     if (this.undoStack.length === 0) return false;
 
     const t = this.area;
-    const current = { text: t.value, start: t.selectionStart, end: t.selectionEnd, scroll: t.scrollTop };
+    const current = {
+      text: t.value,
+      start: t.selectionStart,
+      end: t.selectionEnd,
+      scroll: t.scrollTop
+    };
+
+    // validate current state before saving it to redo
+    if (!this.validateState(current)) {
+      console.warn('WikiEdit: current state invalid before undo – still proceeding');
+    }
+
     this.redoStack.push(current);
 
     const prev = this.undoStack.pop();
+
+    if (!this.validateState(prev)) {
+      console.error('WikiEdit: corrupted undo state popped! Stack sanitized.');
+      // aggressive cleanup of the entire undo stack (removes all bad states)
+      this.undoStack = this.undoStack.filter(s => this.validateState(s));
+      return false;
+    }
+
     t.value = prev.text;
     t.setSelectionRange(prev.start, prev.end);
     t.scrollTop = prev.scroll ?? 0;
@@ -513,9 +564,21 @@ class WikiEdit extends ProtoEdit {
       end: t.selectionEnd,
       scroll: t.scrollTop
     };
+
+    if (!this.validateState(current)) {
+      console.warn('WikiEdit: current state invalid before redo – still proceeding');
+    }
+
     this.undoStack.push(current);
 
     const next = this.redoStack.pop();
+
+    if (!this.validateState(next)) {
+      console.error('WikiEdit: corrupted redo state popped! Stack sanitized.');
+      this.redoStack = this.redoStack.filter(s => this.validateState(s));
+      return false;
+    }
+
     t.value = next.text;
     t.setSelectionRange(next.start, next.end);
     t.scrollTop = next.scroll ?? 0;
@@ -882,7 +945,7 @@ class WikiEdit extends ProtoEdit {
     t.setSelectionRange(l, l + l1);
     t.scrollTop = this.scroll;
 
-	this._updateSyntaxHighlight();
+    this._updateSyntaxHighlight();
   }
 
   // ====================== MODIFICATION METHODS ======================
@@ -2144,7 +2207,7 @@ class WikiEdit extends ProtoEdit {
     html = html.replace(/&lt;\[.*?\]&gt;/gs, '<span class="wiki-block">$&</span>');
     html = html.replace(/(\{\{)(.+?)(\}\})/gs, '<span class="wiki-block">$1$2$3</span>');
     html = html.replace(/(\?\?)(?=\S)(.+?)(?<=\S)(\?\?)/gs, '<span class="wiki-block">$1$2$3</span>');
-	html = html.replace(/(\!\!)(?=\S)(.+?)(?<=\S)(\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
+    html = html.replace(/(\!\!)(?=\S)(.+?)(?<=\S)(\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
     html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
 
     // Restore all blocks
