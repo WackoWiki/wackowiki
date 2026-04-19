@@ -90,6 +90,9 @@ lang = {
 	AcReset:				'Reset autocomplete',
 	AcSuggestions:			'Autocomplete suggestions',
 
+	Chars:					'chars',
+	Words:					'words',
+
 	HelpAboutTip:			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+

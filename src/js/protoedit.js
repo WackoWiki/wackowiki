@@ -186,9 +186,9 @@ class ProtoEdit {
     line = lines.length;
     col = lines[lines.length - 1].length + 1;
 
-    this.charsEl.textContent = `${chars} chars`;
-    this.wordsEl.textContent = `${words} words`;
-    this.cursorEl.textContent = `Ln ${line}, Col ${col}`;
+    this.charsEl.textContent = `${chars} ${lang.Chars || 'chars'}`;
+    this.wordsEl.textContent = `${words} ${lang.Words || 'words'}`;
+    this.cursorEl.textContent = `${line}:${col}`;
   }
 
   /** Show temporary status message (e.g. “✓ Draft saved”) */
