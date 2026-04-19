@@ -1790,8 +1790,9 @@ class WikiEdit extends ProtoEdit {
 
     // Headings (== H2 → ##, === H3 → ### …)
     md = md.replace(/^={2,7}\s+(.*?)\s*={2,}$/gm, (m, title) => {
-      const level = m.match(/^=+/)[0].length;
-      return '#'.repeat(level) + ' ' + title.trim();
+      const number = m.match(/^=+/)[0].length;
+	  const mkr = '#'.repeat(number - 1);
+      return mkr + ' ' + title.trim();
     });
 
     // Bold (already compatible)
@@ -1898,10 +1899,11 @@ class WikiEdit extends ProtoEdit {
       }
     );
 
-    // Headings (## → == … == with min 2 = on right)
+    // Headings (## → === … === level + 1 with min 2 = on right)
     w = w.replace(/^#{1,7}\s+(.*)$/gm, (m, title) => {
-      const level = m.match(/^#+/)[0].length;
-      return '='.repeat(level) + ' ' + title + ' ' + '='.repeat(Math.max(2, level));
+      const number = m.match(/^#+/)[0].length;
+      const mkr = '='.repeat(number + 1);
+      return mkr + ' ' + title + ' ' + mkr;
     });
 
     // Bold / Italic / Strikethrough / Code / Small
@@ -1965,6 +1967,7 @@ class WikiEdit extends ProtoEdit {
   convertToMarkdown() {
     if (!this.area) return;
     const original = this.area.value;
+    this.pushState();
     this.area.value = this.wackoToMarkdown(original);
     this.showMessage('✓ Wacko → Markdown');
 
@@ -1975,6 +1978,7 @@ class WikiEdit extends ProtoEdit {
   convertToWacko() {
     if (!this.area) return;
     const original = this.area.value;
+    this.pushState();
     this.area.value = this.markdownToWacko(original);
     this.showMessage('✓ Markdown → Wacko');
 
