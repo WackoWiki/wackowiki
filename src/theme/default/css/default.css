@@ -80,7 +80,6 @@
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
-	:root {
 		--ww-bg-primary: #1e1e1e;
 		--ww-bg-secondary: #252526;
 		--ww-bg-tertiary: #1a2b3c;
@@ -109,7 +108,7 @@
 		--we-textarea-caret: #ddd;
 		--we-split-bg: #252526;
 		--we-toolbar-bg: #2d2d2d;
-	}}
+	}
 }
 
 p,
