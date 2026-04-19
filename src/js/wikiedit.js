@@ -881,6 +881,8 @@ class WikiEdit extends ProtoEdit {
     t.value = str;
     t.setSelectionRange(l, l + l1);
     t.scrollTop = this.scroll;
+
+	this._updateSyntaxHighlight();
   }
 
   // ====================== MODIFICATION METHODS ======================
