@@ -2114,7 +2114,7 @@ class WikiEdit extends ProtoEdit {
 
     // Apply syntax highlighting to the remaining text (inside "" blocks is protected)
     html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
-    html = html.replace(/\*\*(?!\s)(.+?)(?<!\s)\*\*/g, '<span class="wiki-bold">**$1**</span>');   
+    html = html.replace(/\*\*(?!\s)(.+?)(?<!\s)\*\*/g, '<span class="wiki-bold">**$1**</span>');
     html = html.replace(/\/\/(?!\s)(.+?)(?<!\s)\/\//g, '<span class="wiki-italic">//$1//</span>');
     html = html.replace(/__(?!\s)(.+?)(?<!\s)__/g, '<span class="wiki-underline">__$1__</span>');
     html = html.replace(/--(?!\s)(.+?)(?<!\s)--/g, '<span class="wiki-strike">--$1--</span>');
@@ -2123,7 +2123,11 @@ class WikiEdit extends ProtoEdit {
     html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
     html = html.replace(/(file:((\.\.|!)\/|\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&=]*)?)/ug, '<span class="wiki-link">$1</span>');
     html = html.replace(/^(\s*([*-]|\d+\.|[a-zA-Z]\.)\s+)/gm, '<span class="wiki-list">$1</span>');
-    html = html.replace(/(<\[|\{\{|\?\?|\!\!)(.+?)(]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
+    html = html.replace(/&lt;\[.*?\]&gt;/gs, '<span class="wiki-block">$&</span>');
+    html = html.replace(/(\{\{)(.+?)(\}\})/gs, '<span class="wiki-block">$1$2$3</span>');
+
+    html = html.replace(/(\?\?)(?=\S)(.+?)(?<=\S)(\?\?)/gs, '<span class="wiki-block">$1$2$3</span>');
+	html = html.replace(/(\!\!)(?=\S)(.+?)(?<=\S)(\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
     html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
 
     // Restore all blocks
@@ -2132,7 +2136,7 @@ class WikiEdit extends ProtoEdit {
     });
 
     return html;
-  }   
+  }
 
   // ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
   handleDragOver(e) {
