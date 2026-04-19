@@ -1788,11 +1788,11 @@ class WikiEdit extends ProtoEdit {
   wackoToMarkdown(text) {
     let md = text;
 
-    // Headings (== H2 → ##, === H3 → ### …)
+    // Headings (=== H2 → ##, ==== H3 → ### …)
     md = md.replace(/^={2,7}\s+(.*?)\s*={2,}$/gm, (m, title) => {
       const number = m.match(/^=+/)[0].length;
-	  const mkr = '#'.repeat(number - 1);
-      return mkr + ' ' + title.trim();
+      const marker = '#'.repeat(number - 1);
+      return marker + ' ' + title.trim();
     });
 
     // Bold (already compatible)
@@ -1884,18 +1884,20 @@ class WikiEdit extends ProtoEdit {
 
     // List normalization for exact WackoWiki syntax
     w = w.replace(
-      /^(\s*)([*+-]|\d+\.|[A-Za-z]\.)(?:\s*)/gm,
-      (match, indent, marker) => {
+      /^(\s*)([*+-]|\d+\.|[A-Za-z]\.)([ \t]*)/gm,
+      (match, indent, marker, postSpace) => {
         const len = indent.length;
         let newIndent = indent;
 
         if (len % 4 === 0 && len >= 4) {
+          // Halve existing deep indentation (4 spaces -> 2, 8 spaces -> 4, etc.)
           newIndent = ' '.repeat(len / 2);
-        } else if (len === 0) {
+        } else if (len < 4) {
+          // Apply base 2-space indent to all top-level items (including the first one)
           newIndent = '  ';
         }
 
-        return newIndent + marker;
+        return newIndent + marker + postSpace;
       }
     );
 
@@ -2095,35 +2097,42 @@ class WikiEdit extends ProtoEdit {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
-    // Protect ""..."" literal blocks FIRST so that NO syntax inside them is ever processed.
-    const literals = [];
-    html = html.replace(/""(.+?)""/gs, (match, content) => {
-      const id = literals.length;
-      literals.push(content);
-      return `WIKI_LITERAL_${id}`;
+    // Extract all blocks in document order, prioritizing the first encountered
+    const blocks = [];
+    // Matches: 1. ""..."" 2. %%...%% 3. ``...`` (non-greedy, multi-line)
+    html = html.replace(/(""[\s\S]*?""|%%[\s\S]*?%%|``[\s\S]*?``)/g, (match) => {
+      const id = blocks.length;
+      // If it starts with "", treat as literal (ignore syntax)
+      if (match.startsWith('""')) {
+        blocks.push({ type: 'literal', content: match });
+      } else {
+        // Otherwise, it's a code block to be wrapped
+        blocks.push({ type: 'block', content: `<span class="wiki-block">${match}</span>` });
+      }
+      return `WIKI_TOKEN_${id}`;
     });
 
+    // Apply syntax highlighting to the remaining text (inside "" blocks is protected)
     html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
-    html = html.replace(/\*\*(.+?)\*\*/g, '<span class="wiki-bold">**$1**</span>');
-    html = html.replace(/\/\/(.+?)\/\//g, '<span class="wiki-italic">//$1//</span>');
-    html = html.replace(/__(.+?)__/g, '<span class="wiki-underline">__$1__</span>');
-    html = html.replace(/--(.+?)--/g, '<span class="wiki-strike">--$1--</span>');
-    html = html.replace(/##(.+?)##/g, '<span class="wiki-code">##$1##</span>');
+    html = html.replace(/\*\*(?!\s)(.+?)(?<!\s)\*\*/g, '<span class="wiki-bold">**$1**</span>');   
+    html = html.replace(/\/\/(?!\s)(.+?)(?<!\s)\/\//g, '<span class="wiki-italic">//$1//</span>');
+    html = html.replace(/__(?!\s)(.+?)(?<!\s)__/g, '<span class="wiki-underline">__$1__</span>');
+    html = html.replace(/--(?!\s)(.+?)(?<!\s)--/g, '<span class="wiki-strike">--$1--</span>');
+    html = html.replace(/##(?!\s)(.+?)(?<!\s)##/g, '<span class="wiki-code">##$1##</span>');
     html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
     html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
     html = html.replace(/(file:((\.\.|!)\/|\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&=]*)?)/ug, '<span class="wiki-link">$1</span>');
     html = html.replace(/^(\s*([*-]|\d+\.|[a-zA-Z]\.)\s+)/gm, '<span class="wiki-list">$1</span>');
-    html = html.replace(/(%%|<\[|\{\{|\?\?|\!\!)(.+?)(%%|]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
+    html = html.replace(/(<\[|\{\{|\?\?|\!\!)(.+?)(]\>|\}\}|\?\?|\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
     html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
 
-    // Restore literal blocks (inner syntax was completely ignored)
-    html = html.replace(/WIKI_LITERAL_(\d+)/g, (match, id) => {
-      const content = literals[parseInt(id, 10)];
-      return `""${content}""`;
+    // Restore all blocks
+    html = html.replace(/WIKI_TOKEN_(\d+)/g, (match, id) => {
+      return blocks[parseInt(id, 10)].content;
     });
 
     return html;
-  }
+  }   
 
   // ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
   handleDragOver(e) {
