@@ -396,6 +396,8 @@ class WikiEdit extends ProtoEdit {
       this.area.focus();
       this.showMessage(`✓ ${lang?.DraftRestored || 'Draft restored'}`);
       this.updateStatus();
+
+      this._updateSyntaxHighlight();
     } else {
       this.showMessage('No draft to restore');
     }
@@ -493,6 +495,8 @@ class WikiEdit extends ProtoEdit {
     t.setSelectionRange(prev.start, prev.end);
     t.scrollTop = prev.scroll ?? 0;
     t.focus();
+
+    this._updateSyntaxHighlight();
     return true;
   }
 
@@ -516,6 +520,8 @@ class WikiEdit extends ProtoEdit {
     t.setSelectionRange(next.start, next.end);
     t.scrollTop = next.scroll ?? 0;
     t.focus();
+
+    this._updateSyntaxHighlight();
     return true;
   }
 
@@ -672,6 +678,7 @@ class WikiEdit extends ProtoEdit {
     const cursorPos = this.sel1.length + openTag.length + 1;   // +1 for the newline
     t.setSelectionRange(cursorPos, cursorPos);
 
+    this._updateSyntaxHighlight();
     return true;
   }
 
@@ -687,6 +694,7 @@ class WikiEdit extends ProtoEdit {
 
     const str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
     this.setAreaContent(str);
+    this._updateSyntaxHighlight();
     return true;
   }
 
@@ -715,6 +723,7 @@ class WikiEdit extends ProtoEdit {
     }
 
     this.setAreaContent(r);
+    this._updateSyntaxHighlight();
     return true;
   }
 
@@ -1008,6 +1017,7 @@ class WikiEdit extends ProtoEdit {
     const str = sel1 + '((' + combined + '))' + sel2;
 
     area.value = str;
+    this._updateSyntaxHighlight();
     const start = sel1.length;
     const end = str.length - sel2.length;
     area.setSelectionRange(start, end);
@@ -1198,6 +1208,7 @@ class WikiEdit extends ProtoEdit {
     const newValue = sel1 + insertStr + sel2;
 
     area.value = newValue;
+    this._updateSyntaxHighlight();
 
     // Place cursor after the inserted table (ready for more editing)
     const cursorPos = sel1.length + insertStr.length;
@@ -1463,6 +1474,7 @@ class WikiEdit extends ProtoEdit {
     const after = t.value.substring(t.selectionEnd);
 
     t.value = before + replacement + after;
+    this._updateSyntaxHighlight();
     const newPos = before.length + replacement.length;
     t.setSelectionRange(newPos, newPos);
 
@@ -1504,6 +1516,7 @@ class WikiEdit extends ProtoEdit {
 
     if (newText !== t.value) {
       t.value = newText;
+      this._updateSyntaxHighlight();
       t.setSelectionRange(0, 0);
       t.focus();
     }
@@ -1954,6 +1967,8 @@ class WikiEdit extends ProtoEdit {
     const original = this.area.value;
     this.area.value = this.wackoToMarkdown(original);
     this.showMessage('✓ Wacko → Markdown');
+
+    this._updateSyntaxHighlight();
   }
 
   /** One-click: Markdown → Wacko */
@@ -1962,6 +1977,8 @@ class WikiEdit extends ProtoEdit {
     const original = this.area.value;
     this.area.value = this.markdownToWacko(original);
     this.showMessage('✓ Markdown → Wacko');
+
+    this._updateSyntaxHighlight();
   }
 
   /** Optional: Dual-mode toggle (Markdown ↔ Wacko editing) */
@@ -2038,6 +2055,12 @@ class WikiEdit extends ProtoEdit {
       this.enableSyntaxHighlighting();
     }
     localStorage.setItem('wikiedit_syntax_enabled', this.syntaxHighlightEnabled);
+  }
+
+  _updateSyntaxHighlight() {
+    if (this.syntaxHighlightEnabled) {
+      setTimeout(() => this.refreshSyntaxHighlight(), 0);
+    }
   }
 
   refreshSyntaxHighlight() {
@@ -2207,6 +2230,7 @@ class WikiEdit extends ProtoEdit {
     const start = ta.selectionStart;
     const end = ta.selectionEnd;
     ta.value = ta.value.substring(0, start) + text + ta.value.substring(end);
+    this._updateSyntaxHighlight();
     ta.selectionStart = ta.selectionEnd = start + text.length;
     ta.focus();
     this.updateStatus();
