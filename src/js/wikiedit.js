@@ -1389,138 +1389,154 @@ class WikiEdit extends ProtoEdit {
   }
 
   findNext() {
-    const t = this.area;
-    const f = this.findForm;
-    if (!f || !f.findInput.value) return;
+    try {
+      const t = this.area;
+      const f = this.findForm;
+      if (!f || !f.findInput || !f.findInput.value || !t) return;
 
-    const term = f.findInput.value;
-    const matchCase = f.matchCaseCheck.checked;
-    const wholeWord = f.wholeWordCheck.checked;
-    const useRegex = f.regexCheck.checked;
-    const text = t.value;
+      const term = f.findInput.value;
+      const matchCase = f.matchCaseCheck.checked;
+      const wholeWord = f.wholeWordCheck.checked;
+      const useRegex = f.regexCheck.checked;
+      const text = t.value;
 
-    let re;
+      let re;
 
-    if (useRegex) {
-      try {
+      if (useRegex) {
+        try {
+          const flags = matchCase ? 'g' : 'gi';
+          re = new RegExp(term, flags);
+        } catch (err) {
+          alert(lang?.InvalidRegex || 'Invalid regular expression.');
+          return;
+        }
+      } else {
+        let escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pattern = wholeWord ? '\\b' + escaped + '\\b' : escaped;
         const flags = matchCase ? 'g' : 'gi';
-        re = new RegExp(term, flags);
-      } catch (err) {
-        alert(lang?.InvalidRegex || 'Invalid regular expression.');
-        return;
+        re = new RegExp(pattern, flags);
       }
-    } else {
-      let escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const pattern = wholeWord ? '\\b' + escaped + '\\b' : escaped;
-      const flags = matchCase ? 'g' : 'gi';
-      re = new RegExp(pattern, flags);
-    }
 
-    let pos = t.selectionEnd;
-    re.lastIndex = pos;
+      let pos = t.selectionEnd;
+      re.lastIndex = pos;
 
-    let match = re.exec(text);
+      let match = re.exec(text);
 
-    if (!match) {
-      re.lastIndex = 0;
-      match = re.exec(text);
-    }
+      if (!match) {
+        re.lastIndex = 0;
+        match = re.exec(text);
+      }
 
-    if (match) {
-      t.setSelectionRange(match.index, match.index + match[0].length);
-      this.scrollToSelection();
+      if (match) {
+        t.setSelectionRange(match.index, match.index + match[0].length);
+        this.scrollToSelection();
+      }
+    } catch (err) {
+      console.error('WikiEdit findNext error:', err);
+      alert(lang?.FindReplaceError || 'An error occurred during find operation.');
     }
   }
 
   replaceCurrent() {
-    const t = this.area;
-    const f = this.findForm;
-    if (!f || !f.findInput.value) return;
+    try {
+      const t = this.area;
+      const f = this.findForm;
+      if (!f || !f.findInput || !t) return;
 
-    if (t.selectionStart === t.selectionEnd) {
-      this.findNext();
-      return;
-    }
-
-    this.pushState();
-
-    const term = f.findInput.value;
-    const matchCase = f.matchCaseCheck.checked;
-    const useRegex = f.regexCheck.checked;
-    const selected = t.value.substring(t.selectionStart, t.selectionEnd);
-
-    let matches = false;
-
-    if (useRegex) {
-      try {
-        const flags = matchCase ? '' : 'i';
-        const re = new RegExp('^' + term + '$', flags);
-        matches = re.test(selected);
-      } catch (e) {
+      if (t.selectionStart === t.selectionEnd) {
         this.findNext();
         return;
       }
-    } else {
-      matches = matchCase
-        ? selected === term
-        : selected.toLowerCase() === term.toLowerCase();
-    }
 
-    if (!matches) {
+      this.pushState();
+
+      const term = f.findInput.value;
+      const matchCase = f.matchCaseCheck.checked;
+      const useRegex = f.regexCheck.checked;
+      const selected = t.value.substring(t.selectionStart, t.selectionEnd);
+
+      let matches = false;
+
+      if (useRegex) {
+        try {
+          const flags = matchCase ? '' : 'i';
+          const re = new RegExp('^' + term + '$', flags);
+          matches = re.test(selected);
+        } catch (e) {
+          this.findNext();
+          return;
+        }
+      } else {
+        matches = matchCase
+          ? selected === term
+          : selected.toLowerCase() === term.toLowerCase();
+      }
+
+      if (!matches) {
+        this.findNext();
+        return;
+      }
+
+      const replacement = f.replaceInput.value ?? '';
+      const before = t.value.substring(0, t.selectionStart);
+      const after = t.value.substring(t.selectionEnd);
+
+      t.value = before + replacement + after;
+      this._updateSyntaxHighlight();           // safe – already added in previous update
+      const newPos = before.length + replacement.length;
+      t.setSelectionRange(newPos, newPos);
+
+      this.scrollToSelection();
       this.findNext();
-      return;
+    } catch (err) {
+      console.error('WikiEdit replaceCurrent error:', err);
+      alert(lang?.FindReplaceError || 'An error occurred during replace operation.');
+      // do NOT call findNext() on generic error – we already pushed undo state
     }
-
-    const replacement = f.replaceInput.value ?? '';
-    const before = t.value.substring(0, t.selectionStart);
-    const after = t.value.substring(t.selectionEnd);
-
-    t.value = before + replacement + after;
-    this._updateSyntaxHighlight();
-    const newPos = before.length + replacement.length;
-    t.setSelectionRange(newPos, newPos);
-
-    this.scrollToSelection();
-    this.findNext();
   }
 
   replaceAll() {
-    const t = this.area;
-    const f = this.findForm;
-    if (!f || !f.findInput.value) return;
+    try {
+      const t = this.area;
+      const f = this.findForm;
+      if (!f || !f.findInput || !t) return;
 
-    this.pushState();
+      this.pushState();
 
-    const term = f.findInput.value;
-    const matchCase = f.matchCaseCheck.checked;
-    const wholeWord = f.wholeWordCheck.checked;
-    const useRegex = f.regexCheck.checked;
-    const replacement = f.replaceInput.value ?? '';
+      const term = f.findInput.value;
+      const matchCase = f.matchCaseCheck.checked;
+      const wholeWord = f.wholeWordCheck.checked;
+      const useRegex = f.regexCheck.checked;
+      const replacement = f.replaceInput.value ?? '';
 
-    let re;
+      let re;
 
-    if (useRegex) {
-      try {
+      if (useRegex) {
+        try {
+          const flags = matchCase ? 'g' : 'gi';
+          re = new RegExp(term, flags);
+        } catch (err) {
+          alert(lang?.InvalidRegex || 'Invalid regular expression.');
+          return;
+        }
+      } else {
+        let escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pattern = wholeWord ? '\\b' + escaped + '\\b' : escaped;
         const flags = matchCase ? 'g' : 'gi';
-        re = new RegExp(term, flags);
-      } catch (err) {
-        alert(lang?.InvalidRegex || 'Invalid regular expression.');
-        return;
+        re = new RegExp(pattern, flags);
       }
-    } else {
-      let escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const pattern = wholeWord ? '\\b' + escaped + '\\b' : escaped;
-      const flags = matchCase ? 'g' : 'gi';
-      re = new RegExp(pattern, flags);
-    }
 
-    const newText = t.value.replace(re, replacement);
+      const newText = t.value.replace(re, replacement);
 
-    if (newText !== t.value) {
-      t.value = newText;
-      this._updateSyntaxHighlight();
-      t.setSelectionRange(0, 0);
-      t.focus();
+      if (newText !== t.value) {
+        t.value = newText;
+        this._updateSyntaxHighlight();
+        t.setSelectionRange(0, 0);
+        t.focus();
+      }
+    } catch (err) {
+      console.error('WikiEdit replaceAll error:', err);
+      alert(lang?.FindReplaceError || 'An error occurred during replace-all operation.');
     }
   }
 
@@ -1892,8 +1908,8 @@ class WikiEdit extends ProtoEdit {
         let newIndent = indent;
 
         if (len % 4 === 0 && len >= 4) {
-          // Halve existing deep indentation (4 spaces -> 2, 8 spaces -> 4, etc.)
-          newIndent = ' '.repeat(len / 2);
+          // Halve existing deep indentation (2 spaces & 4 spaces -> 2, 8 spaces -> 4, etc.)
+          newIndent = ' '.repeat(len / 2 + 2);
         } else if (len < 4) {
           // Apply base 2-space indent to all top-level items (including the first one)
           newIndent = '  ';
@@ -2127,7 +2143,6 @@ class WikiEdit extends ProtoEdit {
     html = html.replace(/^(\s*([*-]|\d+\.|[a-zA-Z]\.)\s+)/gm, '<span class="wiki-list">$1</span>');
     html = html.replace(/&lt;\[.*?\]&gt;/gs, '<span class="wiki-block">$&</span>');
     html = html.replace(/(\{\{)(.+?)(\}\})/gs, '<span class="wiki-block">$1$2$3</span>');
-
     html = html.replace(/(\?\?)(?=\S)(.+?)(?<=\S)(\?\?)/gs, '<span class="wiki-block">$1$2$3</span>');
 	html = html.replace(/(\!\!)(?=\S)(.+?)(?<=\S)(\!\!)/gs, '<span class="wiki-block">$1$2$3</span>');
     html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
