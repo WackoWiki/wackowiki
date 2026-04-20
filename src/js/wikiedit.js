@@ -129,41 +129,38 @@ class WikiEdit extends ProtoEdit {
     this.addButton('signature', lang.Signature, () => this.insTag('::@::', ' ', 1));
     this.addButton('createlink', lang.Hyperlink, () => this.createLink());
 
-    if (this.autocomplete) this.autocomplete.addButton();
-
     this.addButton('footnote', lang.Footnote, () => this.insTag('[[^ ', ']]', 2));
     this.addButton('createtable', lang.InsertTable, () => this.createTable());
-    this.addButton('customhtml', separator);
-
-    // === Custom controls ===
-    this.addButton('dark-toggle', lang.ToggleDark, () => this.toggleDarkMode());
     if (this.canUpload) {
       this.addButton('upload-media', lang.Upload, () => this.triggerFileUpload());
     }
+    this.addButton('customhtml', separator);
 
+    const autosaveEnabled = this.area.dataset.autosaveDraft !== '0';
+    if (autosaveEnabled) {
+      this.addButton('draft-restore', lang.DraftRestore, () => this.restoreDraft());
+      this.addButton('draft-clear', lang.DraftClear, () => this.clearDraft());
+      this.addButton('customhtml', separator);
+    }
+
+    this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
+    this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
+    this.addButton('customhtml', separator);
+
+    this.addButton('dark-toggle', lang.ToggleDark, () => this.toggleDarkMode());
+    this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
+    this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
+    this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
+    this.addButton('customhtml', separator);
+
+    // === Custom controls ===
     this.addButton('shrink', lang.HeightShrink, () => this.changeEditorHeight(-100));
     this.addButton('enlarge', lang.HeightEnlarge, () => this.changeEditorHeight(100));
     // this.addButton('height-reset', lang.HeightReset, () => this.clearEditorSettings());
 
-    const autosaveEnabled = this.area.dataset.autosaveDraft !== '0';
-    if (autosaveEnabled) {
-      this.addButton('draft-clear', lang.DraftClear, () => this.clearDraft());
-      this.addButton('restore-draft', lang.DraftRestore, () => this.restoreDraft());
-    }
-
     this.addButton('customhtml', separator);
-
     this.addButton('undo', lang.Undo, () => { if (this.undo()) this.updateStatus(); });
     this.addButton('redo', lang.Redo, () => { if (this.redo()) this.updateStatus(); });
-    this.addButton('customhtml', '<div class="btn-separator"></div>');
-
-    this.addButton('syntax', lang.SyntaxHighlighting, () => this.toggleSyntaxHighlight());
-    this.addButton('livepreview', lang.LivePreview, () => this.toggleLivePreview());
-    this.addButton('fullscreen', lang.Fullscreen, () => this.toggleFullscreen());
-
-    this.addButton('customhtml', separator);
-    this.addButton('wacko2md', 'Wacko → MD', () => this.convertToMarkdown());
-    this.addButton('md2wacko', 'MD → Wacko', () => this.convertToWacko());
 
     this.area.classList.add('wikiedit-area');
 
@@ -184,6 +181,7 @@ class WikiEdit extends ProtoEdit {
     </li>`;
 
     this.addButton('customhtml', dropdownHTML);
+    if (this.autocomplete) this.autocomplete.addButton();
 
     // Build toolbar
     const toolbarContainer = document.createElement('div');
