@@ -7,6 +7,64 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
+	// === AJAX LIVE PREVIEW (for WikiEdit side-by-side pane) ===
+	if (isset($_POST['ajax_preview']) && $_POST['ajax_preview'] === '1')
+	{
+		$_body      = $_POST['body'] ?? '';
+		$title      = $_POST['title'] ?? ($this->page['title'] ?? $this->get_page_title($this->tag));
+		#$section_id = (int) ($_POST['section'] ?? 0);
+
+		$preview = '';
+		$text_chars = '0';
+
+		if ($_body !== '')
+		{
+			$text_chars = $this->number_format(mb_strlen($_body));
+
+			$preview = $this->format($_body, 'pre_wacko');
+			$preview = $this->format($preview, 'wacko');
+			$preview = $this->format($preview, 'post_wacko', ['strip_marker' => true]);
+		}
+
+		$new_form_token = $this->sess->create_nonce('add_comment', max(30, $this->db->form_token_time));
+
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode([
+			'preview_html'   => $preview,
+			'new_form_token' => $new_form_token,
+			'chars'          => $text_chars
+		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+		exit;   // important – do not continue with normal form rendering
+	}
+
+	// === AJAX FILE UPLOAD (for WikiEdit drag & drop + paste) ===
+	// Triggered when JS sends FormData with action=upload + $_FILES['file']
+	if (isset($_POST['action']) && $_POST['action'] === 'upload' && isset($_FILES['file']))
+	{
+		$file = $_FILES['file'];
+
+		// Use WackoWiki's built-in upload method (respects all permissions, file types, quotas, etc.)
+		$result = $this->upload_file(
+			$file,
+			$this->tag,                     // current page tag
+			$this->page['page_id'] ?? 0     // page_id (0 for new pages)
+			);
+
+		header('Content-Type: application/json; charset=utf-8');
+
+		if ($result && !empty($result['filename']))
+		{
+			echo json_encode(['filename' => $result['filename']]);
+		}
+		else
+		{
+			echo json_encode(['error' => $result['error'] ?? 'Upload failed']);
+		}
+
+		exit;
+	}
+
 	$body				= str_replace("\r", '', rtrim(($_POST['body'] ?? '')));
 	$error				= '';
 	$title				= trim(($_POST['title'] ?? ''));

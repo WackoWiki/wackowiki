@@ -75,6 +75,19 @@ class WikiEdit extends ProtoEdit {
     this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
     this.canUpload = ta.dataset.canUpload === '1';
 
+    // ====================== CONTEXT DETECTION (EDIT vs COMMENT) ======================
+    const form = ta.closest('form');
+    this.ajaxUrl = form
+      ? (form.getAttribute('action') || window.location.href)
+      : window.location.href;
+
+    // comment form uses <div id="commentform" class="commentform">
+    this.isCommentMode = !!document.getElementById('commentform') ||
+      (form && form.closest('.commentform')) ||
+      ta.name === 'payload' || ta.id === 'payload';
+
+    console.log(`%cWikiEdit initialized in ${this.isCommentMode ? 'COMMENT' : 'EDIT'} mode – AJAX URL: ${this.ajaxUrl}`, 'color:#0a0;font-weight:bold');
+
     // ====================== DRAG & DROP + PASTE ======================
     if (this.canUpload) {
       this.area.addEventListener('dragover', this.handleDragOver.bind(this));
@@ -463,20 +476,27 @@ class WikiEdit extends ProtoEdit {
    * shows its own chrome (address bar, etc.). Much better for wiki editing.
    */
   toggleFullscreen() {
-    const container = document.getElementById('page-edit');
-    if (!container) {
-      console.warn('WikiEdit: Could not find #page-edit container for fullscreen');
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(err => console.error(err));
       return;
     }
 
-    if (document.fullscreenElement) {
-      // Exit fullscreen (works regardless of which element is fullscreen)
-      document.exitFullscreen().catch(err => console.error(err));
+    // Support BOTH edit handler (#page-edit) and comment handler (#commentform)
+    let container = document.getElementById('page-edit') ||
+      document.getElementById('commentform');
+
+    // fallback
+    if (!container) {
+      container = this.area.closest('form') ||
+        this.area.closest('.wikiedit-split-container') ||
+        document.querySelector('.commentform');
+    }
+
+    if (container) {
+      container.requestFullscreen({ navigationUI: 'hide' })
+        .catch(err => console.error('Editor fullscreen request failed:', err));
     } else {
-      // Enter fullscreen on the editor container only
-      container.requestFullscreen({ navigationUI: 'hide' }).catch(err => {
-        console.error('Editor fullscreen request failed:', err);
-      });
+      console.warn('WikiEdit: Could not find editor container for fullscreen (#page-edit or #commentform)');
     }
   }
 
@@ -1817,7 +1837,7 @@ class WikiEdit extends ProtoEdit {
       fd.set('ajax_preview', '1');
 
       try {
-        const res = await fetch(window.location.href, {
+        const res = await fetch(this.ajaxUrl, {
           method: 'POST',
           body: fd,
           credentials: 'same-origin'

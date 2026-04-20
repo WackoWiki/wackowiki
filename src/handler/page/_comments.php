@@ -134,6 +134,11 @@ if ($this->has_access('read'))
 
 			$tpl->enter('f_');
 
+			if ($can_upload = $this->can_upload())
+			{
+				$upload_nonce	= $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
+			}
+
 			$title			= $this->forum && empty($title)
 								? $this->_t('CommentTitleRe') . ' ' . $this->page['title']
 								: ($title ?? '');
@@ -156,6 +161,13 @@ if ($this->has_access('read'))
 			$tpl->title		= $this->sess->freecap_old_title
 								?? ($title
 									?? '');
+
+			$tpl->nonce		= $upload_nonce;
+			$tpl->upload	= (int) $can_upload;
+			$tpl->autosave	= $user['autosave_draft'] ?? 0;;
+			$tpl->height	= $user['editor_height'] ?? 400;
+			$tpl->syntax	= $user['syntax_highlighting'] ?? 1;
+			$tpl->preview	= $user['live_preview'] ?? 0;
 
 			$tpl->payload	= Ut::html(
 								$this->sess->freecap_old_comment

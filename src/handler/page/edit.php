@@ -439,7 +439,7 @@ if ($this->has_access('read')
 	$tpl->sectionid	= $section_id;
 	$tpl->hlevel	= $h_level;
 	$tpl->nonce		= $upload_nonce;
-	$tpl->upload	= (int)$can_upload;
+	$tpl->upload	= (int) $can_upload;
 	$tpl->autosave	= $user['autosave_draft'] ?? 0;;
 	$tpl->height	= $user['editor_height'] ?? 400;
 	$tpl->syntax	= $user['syntax_highlighting'] ?? 1;
