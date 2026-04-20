@@ -13,13 +13,13 @@ class ProtoEdit {
     this.buttons = [];
     this.id = null;
     this.area = null;
-	
-	this.statusBar = null;
-	this.charsEl = null;
-	this.wordsEl = null;
-	this.cursorEl = null;
-	this.messageEl = null;
-	this.messageTimer = null;
+
+    this.statusBar = null;
+    this.charsEl = null;
+    this.wordsEl = null;
+    this.cursorEl = null;
+    this.messageEl = null;
+    this.messageTimer = null;
   }
 
   /** Initialize editor – attaches keyboard handlers */
@@ -94,9 +94,13 @@ class ProtoEdit {
       }
 
       if (btn.name === 'customhtml') {
-        const li = document.createElement('li');
-        li.innerHTML = btn.desc; // custom HTML (dropdown, separators, etc.)
-        ul.append(li);
+        const temp = document.createElement('div');
+        temp.innerHTML = btn.desc.trim();
+
+        // Move every top-level node from the temp container into the toolbar <ul>
+        while (temp.firstChild) {
+          ul.appendChild(temp.firstChild);
+        }
         continue;
       }
 
