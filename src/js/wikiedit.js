@@ -875,7 +875,7 @@ class WikiEdit extends ProtoEdit {
       const sel1 = text.slice(0, t.selectionStart);
       const sel2 = text.slice(t.selectionEnd);
 
-      const re = new RegExp('(^|\n)(( +)((([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\\r\\n]') + '*)' + '$', 'u');
+      const re = new RegExp('(^|\n)(( +)((([*-]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\\r\\n]') + '*)' + '$', 'u');
       const q = sel1.match(re);
 
       if (q) {
@@ -892,6 +892,7 @@ class WikiEdit extends ProtoEdit {
 
         this.pushState();
         t.value = sel1 + '\n' + prefix + sel2;
+		this._updateSyntaxHighlight();
         const newSel = sel1.length + 1 + prefix.length;
         t.setSelectionRange(newSel, newSel);
 
@@ -2203,7 +2204,7 @@ class WikiEdit extends ProtoEdit {
     html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
     html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
     html = html.replace(/(file:((\.\.|!)\/|\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&=]*)?)/ug, '<span class="wiki-link">$1</span>');
-    html = html.replace(/(^([ \t]{2})+(([*-]|\d+\.|[a-zA-Z]\.))[ \t]+)/gm, '<span class="wiki-list">$1</span>');
+    html = html.replace(/(^([ ]{2}|\t)+(([*-]|\d+\.|[a-zA-Z]\.))[ \t]+)/gm, '<span class="wiki-list">$1</span>');
     html = html.replace(/&lt;\[.*?\]&gt;/gs, '<span class="wiki-block">$&</span>');
     html = html.replace(/(\{\{)(.+?)(\}\})/gs, '<span class="wiki-block">$1$2$3</span>');
     html = html.replace(/(\?\?)(?=\S)(.+?)(?<=\S)(\?\?)/gs, '<span class="wiki-block">$1$2$3</span>');
