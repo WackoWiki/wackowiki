@@ -35,6 +35,7 @@ class WikiEdit extends ProtoEdit {
     this.draftKey = null;
     this.autosaveTimer = null;
     this.autosaveDelay = 2000; // save 2 seconds after the last change
+    this.pushTimer = null;
 
     // UI panels
     this.findForm = null;
@@ -373,6 +374,32 @@ class WikiEdit extends ProtoEdit {
   }
 
   /**
+   * Debounce pushState aggressively only when the text is very large.
+   * This reduces the number of full-string copies and comparisons dramatically
+   * while still giving the user a responsive undo stack.
+   */
+  _debouncePushState() {
+    const t = this.area;
+    if (!t) return;
+
+    const len = t.value.length;
+
+    if (len < 20000) {
+      // small/medium text → instant push (original behaviour)
+      this.pushState();
+      return;
+    }
+
+    // very large text → debounce more aggressively
+    clearTimeout(this.pushTimer);
+    this.pushTimer = setTimeout(() => {
+      this.pushState();
+      this.pushTimer = null;
+    }, 650);   // 650 ms is a good "aggressive" sweet spot
+    // (you can tweak to 400–1000 ms if you prefer)
+  }
+
+  /**
    * On editor initialisation: if a draft exists and differs from the loaded content,
    * the user is asked whether to restore it (with undo support).
    */
@@ -597,8 +624,14 @@ class WikiEdit extends ProtoEdit {
     if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') {
       return;
     }
-    this.pushState();
+
+    this._debouncePushState();
   }
+
+  destroy() {
+      if (this.pushTimer) {
+        clearTimeout(this.pushTimer);
+      }
 
   // Toggle TAB key interception
   switchTab() {
@@ -892,7 +925,7 @@ class WikiEdit extends ProtoEdit {
 
         this.pushState();
         t.value = sel1 + '\n' + prefix + sel2;
-		this._updateSyntaxHighlight();
+        this._updateSyntaxHighlight();
         const newSel = sel1.length + 1 + prefix.length;
         t.setSelectionRange(newSel, newSel);
 
