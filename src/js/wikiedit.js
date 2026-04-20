@@ -629,10 +629,10 @@ class WikiEdit extends ProtoEdit {
   }
 
   destroy() {
-      if (this.pushTimer) {
-        clearTimeout(this.pushTimer);
-      }
-
+    if (this.pushTimer) {
+      clearTimeout(this.pushTimer);
+    }
+  }
   // Toggle TAB key interception
   switchTab() {
     this.tab = !this.tab;
