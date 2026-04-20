@@ -5,7 +5,7 @@
 	--ww-bg-secondary: #fff;
 	--ww-bg-tertiary: #f0f4f5;
 	--ww-text: #222;
-	--ww-text-secondary: #444;
+	--ww-text-secondary: #333;
 	--ww-text-tertiary: #444;
 	--ww-a-normal: #039;
 	--ww-a-hover: #b90022;
@@ -49,7 +49,7 @@
 :root[data-theme="dark"] {
 	--ww-bg-primary: #1e1e1e;
 	--ww-bg-secondary: #252526;
-	--ww-bg-tertiary: #1a2b3c;
+	--ww-bg-tertiary: #343434;
 	--ww-text: #ddd;
 	--ww-text-secondary: #c0c0c0;
 	--ww-text-tertiary: #c0c0c0;
@@ -82,7 +82,7 @@
 	:root:not([data-theme="light"]) {
 		--ww-bg-primary: #1e1e1e;
 		--ww-bg-secondary: #252526;
-		--ww-bg-tertiary: #1a2b3c;
+		--ww-bg-tertiary: #343434;
 		--ww-text: #ddd;
 		--ww-text-secondary: #c0c0c0;
 		--ww-text-tertiary: #c0c0c0;
@@ -600,7 +600,7 @@ article header {
 	background-color: var(--ww-bg-primary);
 	border-bottom: 1px dotted #b2b0b0;
 	border-top: 1px dotted #b2b0b0;
-	color: #333;
+	color: var(--ww-text-secondary);
 	font-size: 0.75em;
 	font-weight: normal;
 	padding: 0.1em 20px;
