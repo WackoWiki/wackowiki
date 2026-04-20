@@ -34,7 +34,7 @@ class WikiEdit extends ProtoEdit {
     this.hasDraft = false; // // future flag to dynamically enable/disable the button
     this.draftKey = null;
     this.autosaveTimer = null;
-    this.autosaveDelay = 2000; // save 2 seconds after the last change
+    this.autosaveDelay = 8000; // save 8 seconds after the last change (5–10 s range)
     this.pushTimer = null;
 
     // UI panels
@@ -143,7 +143,7 @@ class WikiEdit extends ProtoEdit {
 
     this.addButton('shrink', lang.HeightShrink, () => this.changeEditorHeight(-100));
     this.addButton('enlarge', lang.HeightEnlarge, () => this.changeEditorHeight(100));
-    this.addButton('height-reset', lang.HeightReset, () => this.clearEditorSettings());
+    // this.addButton('height-reset', lang.HeightReset, () => this.clearEditorSettings());
 
     const autosaveEnabled = this.area.dataset.autosaveDraft !== '0';
     if (autosaveEnabled) {
@@ -330,7 +330,7 @@ class WikiEdit extends ProtoEdit {
     const section = window.location.search || '';
     const uniqueKey = `${this.id}-${path}${section}`;
 
-    this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;   // namespaced
+    this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;
 
     this.area.addEventListener('input', this.debounceAutosave.bind(this));
     this.area.addEventListener('blur', () => {
@@ -338,6 +338,13 @@ class WikiEdit extends ProtoEdit {
       this.saveDraft();
     });
     window.addEventListener('beforeunload', () => this.saveDraft(), { passive: true });
+
+    const form = this.area.closest('form') || (this.area.form ? this.area.form : null);
+    if (form) {
+      form.addEventListener('submit', () => {
+        this.clearDraft();               // draft is no longer needed after successful save
+      }, { once: true });                // prevent multiple clears if submit fires more than once
+    }
   }
 
   /**
