@@ -1545,6 +1545,12 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-upload-media img {
 	background: url('../../../image/wikiedit/light/upload.svg') no-repeat;
 }
+.we-toolbar li.we-draft-clear img {
+	background: url('../../../image/wikiedit/light/edit-clear.svg') no-repeat;
+}
+.we-toolbar li.we-draft-restore img {
+	background: url('../../../image/wikiedit/light/restore.svg') no-repeat;
+}
 
 .we-statusbar {
 	display: flex;
