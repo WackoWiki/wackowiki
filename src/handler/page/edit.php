@@ -353,14 +353,6 @@ if ($this->has_access('read')
 	// display form
 	$tpl->enter('f_');
 
-	/**
-	 * "cf" attribute: it is for so-called "critical fields" in the form.
-	 * It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
-	 * "You are going to leave this page, but there are some changes you made but not saved yet."
-	 * Is used by this script to determine which changes it needs to monitor.
-	 * e.g. $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
-	 */
-
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
 		$tpl->new_tag		= $this->tag;

@@ -17,7 +17,6 @@ function all_init() {
   if (wikiedit) we_init(wikiedit);           // we_init is defined by WikiEdit class
   if (dbclick) dclick();
   if (timeout) userSessionHeartbeat(timeout, ename);
-  crit_init();
 }
 
 // Refresh FreeCap (CAPTCHA) image
@@ -78,45 +77,6 @@ function set_modified(e) {
   }
   cf_modified = true;
 }
-
-function ignore_modified() {
-  window.onbeforeunload = null;
-}
-
-function check_cf() {
-  if (cf_modified) {
-    return '\n' + (lang.NotSavedWarning || 'You have unsaved changes!') + '\n';
-  }
-}
-
-function crit_init() {
-  // Set beforeunload warning only once
-  if (!window.onbeforeunload) {
-    window.onbeforeunload = check_cf;
-  }
-
-  // Modern clean loop over all forms and their elements
-  for (const form of document.forms) {
-    const hasCf = form.getAttribute('cf') !== null;
-    const hasNoCf = form.getAttribute('nocf') !== null;
-
-    if (hasNoCf) continue;
-
-    for (const elem of form.elements) {
-      const elemHasCf = elem.getAttribute('cf') !== null;
-      const elemHasNoCf = elem.getAttribute('nocf') !== null;
-
-      if ((hasCf || elemHasCf) && !elemHasNoCf) {
-        elem.addEventListener('change', set_modified);
-        elem.addEventListener('keypress', set_modified);
-      }
-    }
-
-    // Clear warning when form is submitted
-    form.addEventListener('submit', ignore_modified);
-  }
-}
-
 
 // Toggle all checkboxes in a form
 function invertSelections(eid) {

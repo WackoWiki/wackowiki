@@ -16,7 +16,7 @@
 				</section>
 				<br>
 			=]
-			<form action="[ ' href: edit ' ]" method="post" id="edit_page" name="edit_page" cf="true">
+			<form action="[ ' href: edit ' ]" method="post" id="edit_page" name="edit_page">
 				[ ' csrf: edit_page ' ]
 				<input type="hidden" name="section" value="[ ' sectionid ' ]">
 				<input type="hidden" name="h_level" value="[ ' hlevel ' ]">

@@ -37,6 +37,8 @@ class WikiEdit extends ProtoEdit {
     this.autosaveDelay = 8000; // save 8 seconds after the last change (5–10 s range)
     this.pushTimer = null;
 
+    this.cf_modified = false;
+
     // UI panels
     this.findForm = null;
     this.helpModal = null;
@@ -343,16 +345,30 @@ class WikiEdit extends ProtoEdit {
 
     this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;
 
-    this.area.addEventListener('input', this.debounceAutosave.bind(this));
+    // Input → debounced autosave + mark as modified
+    this.area.addEventListener('input', (e) => {
+      this.setModified();               // critical fields
+      this.debounceAutosave.call(this); // autosave
+    });
+
+    // Blur + beforeunload still save immediately
     this.area.addEventListener('blur', () => {
       clearTimeout(this.autosaveTimer);
       this.saveDraft();
     });
     window.addEventListener('beforeunload', () => this.saveDraft(), { passive: true });
 
+    // ─────────────────────────────────────────────────────────────
+    // Critical Fields: take over the unsaved-changes warning
+    // ─────────────────────────────────────────────────────────────
+    if (!window.onbeforeunload) {
+      window.onbeforeunload = this.checkCf.bind(this);
+    }
+
     const form = this.area.closest('form') || (this.area.form ? this.area.form : null);
     if (form) {
       form.addEventListener('submit', () => {
+        this.ignoreModified();
         this.clearDraft();               // draft is no longer needed after successful save
       }, { once: true });                // prevent multiple clears if submit fires more than once
     }
@@ -1743,6 +1759,31 @@ class WikiEdit extends ProtoEdit {
     } else {
       console.warn(`[WikiEdit] localStorage unavailable (private mode?) – ${context} skipped`);
     }
+  }
+
+  // ===================================================================
+  // Critical Fields helpers
+  // ===================================================================
+  setModified() {
+    this.cf_modified = true;
+    // visual hint on the textarea (optional but matches original behaviour)
+    this.area.style.borderColor = '#eecc99';
+    this.area.title = lang.ModifiedHint || 'Modified – unsaved changes';
+  }
+
+  checkCf() {
+    if (this.cf_modified) {
+      return '\n' + (lang.NotSavedWarning || 'You have unsaved changes!') + '\n';
+    }
+    return undefined;
+  }
+
+  ignoreModified() {
+    window.onbeforeunload = null;
+    this.cf_modified = false;
+    // reset visual hint
+    this.area.style.borderColor = '';
+    this.area.title = '';
   }
 
   // ====================== LIVE PREVIEW ======================
