@@ -39,6 +39,9 @@ class WikiEdit extends ProtoEdit {
 
     this.cf_modified = false;
 
+    // Prevent race-condition re-save during actual page submit
+    this.isSubmitting = false;
+
     // UI panels
     this.findForm = null;
     this.helpModal = null;
@@ -346,7 +349,7 @@ class WikiEdit extends ProtoEdit {
     this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;
 
     // Input → mark as modified + debounced autosave
-    this.area.addEventListener('input', (e) => {
+    this.area.addEventListener('input', () => {
       this.setModified();
       this.debounceAutosave.call(this);
     });
@@ -388,12 +391,19 @@ class WikiEdit extends ProtoEdit {
    * Empty content is not saved (draft is cleared).
    */
   saveDraft() {
+    if (!this.cf_modified) {
+      console.info('[WikiEdit] saveDraft skipped – no changes from original');
+      return;
+    }
+
     if (!this.draftKey) return;
+
     const content = this.area.value.trim();
     if (content === '') {
       this.safeRemoveDraft(this.draftKey);
       return;
     }
+
     if (this.safeSetDraft(this.draftKey, content)) {
       this.showMessage(`✓ ${lang.DraftSaved || 'Draft saved'}`);
     }
