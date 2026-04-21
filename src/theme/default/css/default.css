@@ -30,13 +30,13 @@
 	--ww-font-serif: "Times New Roman", Times, serif;
 	--ww-font-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	--ww-font-monospace: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-	
+
 	--ww-table-header-bg: #eee;
 
 	--ww-border: #ccc;
 	--ww-shadow: 0 1px 3px rgba(0,0,0,.1);
 	--ww-focus-ring: #3daee9;
-	
+
 	/* WikiEdit specific variables */
 	--we-textarea-bg: #fff;
 	--we-textarea-text: #222;
@@ -124,7 +124,7 @@ td,
 th {
 	font-family: var(--ww-font-sans-serif);
 	font-size: .875rem;
-	line-height: 1.71429;;
+	line-height: 1.71429;
 }
 
 /* language specifics */
@@ -284,7 +284,6 @@ kbd {
 a {
 	color: var(--ww-a-normal);
 	text-decoration: none;
-	/* white-space: nowrap; */
 }
 
 a:link {
@@ -621,7 +620,6 @@ article header {
 		justify-content: space-around;
 		align-items: center;
 		position: fixed;
-		/* right: -100px; */
 		bottom: 50px;
 		width: 40px;
 		height: 40px;
@@ -632,7 +630,6 @@ article header {
 		transition: all 0.4s ease;
 		cursor: pointer;
 	}
-	/* △ */
 	.chevron-up:before {
 		content: "^";
 	}
@@ -653,9 +650,7 @@ article header {
 
 /** Styles for the main content in the page. *********************************/
 	/* Default settings */
-	
 #mainwrapper {
-	/* width: 980px; */
 	margin: 0 auto 1rem;
 }
 
@@ -729,7 +724,6 @@ footer {
 .footer {
 	background-color: var(--ww-bg-tertiary);
 	padding: 5px 20px;
-	border-top: none;
 	border-top: 1px dotted #ccc;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	margin: 0;
@@ -742,8 +736,8 @@ footer {
 
 .article-header-meta {
 	float: right;
-	color: #808080; 
-	line-height: 1.24; 
+	color: #808080;
+	line-height: 1.24;
 	white-space: nowrap;
 }
 
@@ -825,7 +819,7 @@ header:hover > span.article-header-meta a {
 	background-color: var(--ww-bg-secondary);
 	padding: 10px 20px;
 	margin: 0 -20px;
-	border-bottom: 1px solid #eee; /* disable for category, last .. */
+	border-bottom: 1px solid #eee;
 	float: left;
 	width: 100%;
 }
@@ -871,7 +865,7 @@ ol#comments {
 	padding: 0;
 }
 
-/* reset nested list syle */
+/* reset nested list style */
 ol#comments ul {
 	list-style: disc;
 }
@@ -1222,7 +1216,7 @@ p.preview {
 	padding: 10px;
 	border: #ccc 1px dotted;
 	border-radius: .1rem;
-	background-color: var(--ww-bg-primary);;
+	background-color: var(--ww-bg-primary);
 }
 
 .layout-box > p {
@@ -1262,18 +1256,14 @@ a:target {
 
 /** Wikiedit-related (JavaScript) ********************************************/
 	/* WikiEdit Toolbar -------------------------------------- */
-
-/* ====================== RESPONSIVE TOOLBAR ====================== */
 .we-toolbar {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	padding: 0;
-	/* background: var(--ww-buttonface); */
 	background: var(--we-toolbar-bg);
 	border: 1px solid #ccc;
 	list-style: none;
-
 	margin: 0;
 }
 
@@ -1282,18 +1272,14 @@ a:target {
 }
 
 .we-toolbar .btn- {
-	/* width: 32px;
-	height: 32px; */
 	width: 28px;
 	height: 28px;
-	/* padding: 4px; */
 	padding: 0px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: 1px solid var(--ww-buttonface);
 	background: var(--ww-buttonface);
-	/* border-radius: 3px; */
 	transition: all 0.1s;
 	cursor: pointer;
 }
@@ -1311,7 +1297,7 @@ a:target {
 	transform: scale(0.95);
 }
 
-/* Mobile / small screens – tighter, touch-friendly */
+/* Mobile / small screens */
 @media (max-width: 768px) {
 	.we-toolbar {
 		gap: 3px;
@@ -1322,71 +1308,16 @@ a:target {
 		width: 28px;
 		height: 28px;
 		padding: 3px;
-		font-size: 0.9em; /* smaller icons if you ever add text */
+		font-size: 0.9em;
 	}
 }
 
-/* Fullscreen mode – keep toolbar compact */
+/* Fullscreen mode */
 .we-fullscreen[open] .we-toolbar,
 body:has(.we-fullscreen[open]) .we-toolbar {
 	padding: 4px 6px;
 	gap: 3px;
 }
-
-.toolbar li {
-	background: var(--ww-buttonface);
-}
-
-.toolbar button,
-.toolbar button:hover,
-.toolbar button:active,
-.toolbar button.btn-pressed {
-	background: var(--ww-buttonface);
-	color: var(--ww-buttontext);
-	border: 1px solid var(--ww-buttonface);
-	padding: 1px;
-	margin: 0;
-	cursor: pointer;
-}
-
-.toolbar button:hover {
-	border-color: var(--ww-buttonhighlight) var(--ww-buttonshadow) var(--ww-buttonshadow) var(--ww-buttonhighlight);
-}
-
-.toolbar button:active,
-.toolbar button.btn-pressed {
-	border-color: var(--ww-buttonshadow) var(--ww-buttonhighlight) var(--ww-buttonhighlight) var(--ww-buttonshadow);
-}
-
-.toolbar button.btn-pressed {
-	background: var(--ww-buttonhighlight);
-}
-
-/* Our custom height/draft buttons */
- .we-toolbar button[title*="height"],
- .we-toolbar button[title*="draft"] {
-	font-size: 18px;
-	width: 32px;
-	height: 32px;
-	background: var(--ww-buttonface);
-	color: var(--ww-buttontext);
-}
-
-:root[data-theme="dark"] {
-	.we-toolbar button[title*="height"],
-	.we-toolbar button[title*="draft"] {
-		background: var(--we-toolbar-bg);
-		color: #ddd;
-}}
-
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme="light"]) {
-	.we-toolbar button[title*="height"],
-	.we-toolbar button[title*="draft"] {
-		background: var(--we-toolbar-bg);
-		color: #ddd;
-	}
-}}
 
 .we-toolbar .btn-separator {
 	border-left: 1px solid var(--ww-buttonshadow);
@@ -1397,16 +1328,19 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	width: 0;
 }
 
-.we-toolbar img, 
-.we-toolbar a img, 
+.we-toolbar img,
+.we-toolbar a img,
 .we-toolbar span img {
 	border: medium none;
 	height: 1.375rem;
 	width: 1.375rem;
 }
+
 .we-toolbar li img {
 	background-size: 1.375rem 1.375rem;
 }
+
+/* Toolbar icons */
 .we-toolbar li.we-h1 img {
 	background: url('../../../image/wikiedit/light/h1.svg') no-repeat;
 }
@@ -1552,6 +1486,30 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	background: url('../../../image/wikiedit/light/restore.svg') no-repeat;
 }
 
+/* Our custom height/draft buttons */
+.we-toolbar button[title*="height"],
+.we-toolbar button[title*="draft"] {
+	font-size: 18px;
+	width: 32px;
+	height: 32px;
+	background: var(--ww-buttonface);
+	color: var(--ww-buttontext);
+}
+
+:root[data-theme="dark"] .we-toolbar button[title*="height"],
+:root[data-theme="dark"] .we-toolbar button[title*="draft"] {
+	background: var(--we-toolbar-bg);
+	color: #ddd;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) .we-toolbar button[title*="height"],
+	:root:not([data-theme="light"]) .we-toolbar button[title*="draft"] {
+		background: var(--we-toolbar-bg);
+		color: #ddd;
+	}
+}
+
 .we-statusbar {
 	display: flex;
 	align-items: center;
@@ -1571,40 +1529,7 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	white-space: nowrap;
 }
 
-/* === SYNTAX HIGHLIGHTING === */
-.syntax-container {
-	position: relative;
-	display: block;
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
-	flex: 1 1 auto;
-	min-height: 0;
-}
-
-.syntax-highlighter {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	pointer-events: none;
-	margin: 0;
-	padding: inherit;
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
-	background: transparent;
-	border: none;
-	z-index: 1;
-	color: var(--ww-text);
-	tab-size: 4;
-	white-space: pre-wrap;
-	overflow-wrap: break-word;
-	word-break: normal;
-}
-
+/* Textarea */
 textarea.wikiedit-area {
 	position: relative;
 	z-index: 2;
@@ -1622,64 +1547,64 @@ textarea.wikiedit-area {
 	overflow-wrap: break-word;
 	word-break: normal;
 }
+
 textarea.wikiedit-area:not(.syntax-enabled) {
 	color: var(--we-textarea-text);
 	background: var(--we-textarea-bg);
 	caret-color: var(--we-textarea-caret);
 }
 
-/* Syntax Highlighting Overlay */
-.syntax-container {
-  position: relative;
-  display: block;
+/* === SYNTAX HIGHLIGHTING === */
+.syntax-highlighter {
+	tab-size: 4;
+	overflow-wrap: break-word;
+	word-break: normal;
 }
 
-* Syntax Highlighting Overlay – restored original behavior */
-/* Syntax Highlighting Overlay – perfect alignment */
 .syntax-container {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  flex: 1 1 auto;
-  min-height: 0;
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	flex: 1 1 auto;
+	min-height: 0;
 }
 
 .syntax-highlighter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: inherit;
-  overflow: hidden;
-  pointer-events: none;
-  background: transparent;
-  white-space: pre-wrap;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  tab-size: inherit;
-  letter-spacing: inherit;
-  word-spacing: inherit;
-  z-index: 1;
-  color: var(--we-textarea-text, #222);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: inherit;
+	overflow: hidden;
+	pointer-events: none;
+	background: transparent;
+	white-space: pre-wrap;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	tab-size: inherit;
+	letter-spacing: inherit;
+	word-spacing: inherit;
+	z-index: 1;
+	color: var(--we-textarea-text, #222);
 }
 
-/* Dark mode */
+/* Dark mode syntax highlighter */
 @media (prefers-color-scheme: dark) {
-  .syntax-highlighter {
-    color: #ddd;
-  }
+	.syntax-highlighter {
+		color: #ddd;
+	}
 }
 
 /* Textarea on top when syntax is enabled */
 textarea.wikiedit-area.syntax-enabled {
-  background: transparent !important;
-  color: transparent !important;
-  caret-color: var(--we-textarea-caret, #000) !important;
+	background: transparent !important;
+	color: transparent !important;
+	caret-color: var(--we-textarea-caret, #000) !important;
 }
 
 .wikiedit-split-container {
@@ -1728,23 +1653,24 @@ textarea.wikiedit-area.syntax-enabled {
 
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
-	.wiki-h { color: #5ab0ff; }
-	.wiki-bold { color: #ff6b6b; }
-	.wiki-italic { color: #7fff7f; }
-	.wiki-underline { color: #88ccff; }
-	.wiki-strike { color: #aaa; }
-	.wiki-code { color: #ffcc66; background: #332; }
-	.wiki-link { color: #88ccff; }
-	.wiki-list { color: #ffaa66; }
-	.wiki-block { color: #cc88ff; }
-	.wiki-hr { color: #777; }
-}}
+		.wiki-h { color: #5ab0ff; }
+		.wiki-bold { color: #ff6b6b; }
+		.wiki-italic { color: #7fff7f; }
+		.wiki-underline { color: #88ccff; }
+		.wiki-strike { color: #aaa; }
+		.wiki-code { color: #ffcc66; background: #332; }
+		.wiki-link { color: #88ccff; }
+		.wiki-list { color: #ffaa66; }
+		.wiki-block { color: #cc88ff; }
+		.wiki-hr { color: #777; }
+	}
+}
 
 .we-syntax button {
 	font-size: 18px !important;
 }
-		
-/* Optional dark-mode support */
+
+/* Optional dark-mode support for statusbar & fullscreen */
 :root[data-theme="dark"] {
 	.we-statusbar {
 		background: #2a2a2a;
@@ -1761,22 +1687,23 @@ textarea.wikiedit-area.syntax-enabled {
 
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
-	.we-statusbar {
-		background: #2a2a2a;
-		color: #aaa;
-		border-color: #444;
+		.we-statusbar {
+			background: #2a2a2a;
+			color: #aaa;
+			border-color: #444;
+		}
+		.we-statusbar .we-message {
+			color: #4ade80;
+		}
+		#page-edit:fullscreen {
+			background: #1e1e1e;
+		}
 	}
-	.we-statusbar .we-message {
-		color: #4ade80;
-	}
-	#page-edit:fullscreen {
-		background: #1e1e1e;
-	}
-}}
+}
 
-/* Make sure the edit container can expand fully */
+/* Fullscreen edit container */
 #page-edit:fullscreen {
-	background: #fff;           /* or your theme background */
+	background: #fff;
 	padding: 4rem;
 	margin: 0;
 	height: 100vh;
@@ -1784,7 +1711,7 @@ textarea.wikiedit-area.syntax-enabled {
 	overflow: hidden;
 }
 
-	/* WikiEdit modal Forms --------------------------------- */
+/* WikiEdit modal Forms --------------------------------- */
 .we-modal {
 	display: none;
 	position: fixed;
@@ -1860,8 +1787,6 @@ textarea.wikiedit-area.syntax-enabled {
 }
 
 .we-panel-actions {
-	/* display: flex; */
-	/* gap: 8px; */
 	margin-top: 20px;
 }
 
@@ -1872,8 +1797,6 @@ textarea.wikiedit-area.syntax-enabled {
 .we-modal-title {
 	margin: 0 0 18px 0;
 	font-size: 1.25em;
-	/* font-weight: 600; */
-	/* color: #222; */
 }
 
 .we-modal-body {
@@ -1887,23 +1810,11 @@ textarea.wikiedit-area.syntax-enabled {
 .we-form-label {
 	display: block;
 	margin-bottom: 6px;
-	/* font-weight: 600; */
 	font-size: 0.95em;
 }
 
 .we-form-input {
 	width: 100%;
-	/* padding: 10px 12px; */
-	/* border: 1px solid #ccc; */
-	/* border-radius: 4px; */
-	/* box-sizing: border-box; */
-	/* font-size: 1em; */
-}
-
-.we-form-options {
-	/* display: flex; */
-	/* gap: 24px; */
-	/* margin-bottom: 20px; */
 }
 
 .we-form-grid {
@@ -1924,7 +1835,6 @@ textarea.wikiedit-area.syntax-enabled {
 	gap: 8px;
 	cursor: pointer;
 	font-size: 0.95em;
-	/* font-weight: 600; */
 }
 
 .we-modal-actions {
@@ -1941,29 +1851,6 @@ textarea.wikiedit-area.syntax-enabled {
 	padding: 0 24px 24px 24px;
 }
 
-.we-btn {
-	/* padding: 10px 20px; */
-	/* border: 1px solid #ccc; */
-	/* background: #f8f8f8; */
-	/* border-radius: 4px; */
-	/* cursor: pointer; */
-	/* font-size: 1em; */
-}
-
-.we-btn-primary {
-	/* background: #0078d4; */
-	/* color: #fff; */
-	/* border: none; */
-}
-
-.we-btn:hover {
-	/* background: #e8e8e8; */
-}
-
-.we-btn-primary:hover {
-	/* background: #0066b3; */
-}
-
 .we-dropdown {
 	position: relative;
 	display: inline-block;
@@ -1977,9 +1864,9 @@ textarea.wikiedit-area.syntax-enabled {
 .we-dropdown-menu {
 	display: none;
 	position: absolute;
-	top: 100%;           /* directly under the trigger */
+	top: 100%;
 	left: 0;
-	margin-top: 0;       /* no gap */
+	margin-top: 0;
 	background: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -2002,9 +1889,7 @@ textarea.wikiedit-area.syntax-enabled {
 	background: #f0f0f0;
 }
 
-	/* WikiEdit Autocomplete --------------------------------- */
-/* AutoComplete toolbar button + dropdown */
-
+/* WikiEdit Autocomplete */
 .we-autocomplete-container {
 	position: relative;
 	display: inline-flex;
