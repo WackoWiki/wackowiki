@@ -2003,87 +2003,8 @@ textarea.wikiedit-area.syntax-enabled {
 }
 
 	/* WikiEdit Autocomplete --------------------------------- */
-.autocomplete-inplace {
-	background: var(--ww-buttonface);
-	border: 1px solid var(--ww-buttonshadow);
-	padding: 2px;
-	font: 12px var(--ww-font-sans-serif);
-}
-
-.autocomplete-inplace div {
-	padding: 2px 5px;
-	cursor: pointer;
-}
-
-.autocomplete-inplace div.ac-over- {
-	color: #fff;
-	background: #1e9905;
-}
-
 /* AutoComplete toolbar button + dropdown */
-.we-autocomplete-li {
-	position: relative;
-	display: none;
-}
 
-.we-autocomplete-reset-li { display: none; }
-.we-autocomplete-reset-btn {
-	font: 12px Arial;
-	padding: 3px 3px 4px 4px;
-	cursor: pointer;
-}
-
-/* AutoComplete button states */
-.we-autocomplete-btn {
-	font: bold 12px Arial;
-	margin: 0;
-	padding: 3px 3px 4px 4px;
-	cursor: pointer;
-}
-.we-autocomplete-btn.seeking   { color: #888888; background-color: transparent; }
-.we-autocomplete-btn.found     { color: #ffffff; background-color: #00cc00; }
-.we-autocomplete-btn.notfound  { color: #ffffff; background-color: #FF0000; }
-
-.we-autocomplete-reset-btn {
-	font: 12px Arial;
-	padding: 3px 3px 4px 4px;
-	cursor: pointer;
-}
-
-/* Floating dropdown */
-.we-autocomplete-dropdown {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 10000;
-	background: #ffffff;
-	border: 1px solid #aaa;
-	box-shadow: 0 4px 12px rgba(0,0,0,.25);
-	list-style: none;
-	padding: 0;
-	margin: 2px 0 0 0;
-	max-height: 220px;
-	overflow-y: auto;
-	font: 12px Arial;
-	min-width: 160px;
-	border-radius: 3px;
-}
-
-.we-autocomplete-dropdown-item {
-	padding: 6px 12px;
-	cursor: pointer;
-	border-bottom: 1px solid #eee;
-	white-space: nowrap;
-}
-
-.we-autocomplete-dropdown-item:hover,
-.we-autocomplete-dropdown-item.selected {
-	background-color: #e6f0ff;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   AutoComplete Dropdown – CSS positioning & styling
-   ───────────────────────────────────────────────────────────── */
 .we-autocomplete-container {
 	position: relative;
 	display: inline-flex;
@@ -2133,8 +2054,10 @@ textarea.wikiedit-area.syntax-enabled {
 .we-autocomplete-btn {
 	padding: 4px 12px;
 	font-size: 0.9em;
-	border-radius: 4px;
+	border-radius: 2px;
+	border-width: thin;
 }
+
 .we-autocomplete-btn.found    { background: #e6f3e6; color: #006400; }
 .we-autocomplete-btn.notfound { background: #ffe6e6; color: #9f0000; }
 .we-autocomplete-btn.seeking  { background: #fff3e6; animation: ww-pulse 1.5s infinite; }
