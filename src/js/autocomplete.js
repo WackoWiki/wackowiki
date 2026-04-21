@@ -42,7 +42,7 @@ class AutoComplete {
     this.id = `autocomplete_${we.id}`;
 
     const html = `
-            <li id="${this.id}_li" class="we-autocomplete-container">
+            <li id="${this.id}_li" class="we-autocomplete-container" style="display: none;">
                 <button id="${this.id}"
                         class="we-autocomplete-btn"
                         title="${lang.AcHelp || 'Autocomplete (Ctrl+Space)'}"
@@ -67,6 +67,9 @@ class AutoComplete {
     this.#buttonEl = document.getElementById(this.id);
     this.#resetLi = document.getElementById(`${this.id}_reset`);
     this.#dropdownEl = document.getElementById(`${this.id}_dropdown`);
+
+    // Force initial muted state
+    if (this.#containerLi) this.#containerLi.style.display = 'none';
 
     if (this.#buttonEl) {
       this.#buttonEl.addEventListener('click', () => {
@@ -192,7 +195,7 @@ class AutoComplete {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Key handler (modern e.key)
+  // Key handler
   // ─────────────────────────────────────────────────────────────
   keyDown(e) {
     const key = e.key;
@@ -297,6 +300,44 @@ class AutoComplete {
     await this.requestPattern(this.request_pattern);
   }
 
+  async requestPattern(pattern) {
+    // Cancel any previous pending request
+    this.#abortController?.abort();
+    this.#abortController = new AbortController();
+    const signal = this.#abortController.signal;
+
+    const separator = this.handler.includes('?') ? '&' : '?';
+    const href = `${this.handler}${separator}q=${encodeURIComponent(pattern)}&ta_id=${encodeURIComponent(this.wikiedit.area.id)}&_autocomplete=1&rnd=${Math.random()}`;
+
+    try {
+      const response = await fetch(href, { signal });
+
+      if (!response.ok) throw new Error('Network error');
+
+      const text = await response.text();
+      const rawItems = text.split('~~~').map(i => i.trim()).filter(Boolean);
+
+      let bestMatch = null;
+      let suggestions = [];
+
+      if (rawItems.length > 0) {
+        if (rawItems[0] === 'postText') {
+          bestMatch = rawItems[1] || null;
+          suggestions = rawItems.slice(2);
+        } else {
+          bestMatch = rawItems[0];
+          suggestions = rawItems.slice(1);
+        }
+      }
+
+      this.finishComplete(bestMatch, suggestions);
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      console.warn('Autocomplete request failed:', err);
+      this.finishComplete(null, []);
+    }
+  }
+
   // Finish after server response
   finishComplete(found_pattern, all_patterns) {
     this.found_pattern = found_pattern || null;
@@ -336,14 +377,6 @@ class AutoComplete {
     return false;
   }
 
-  // Wrap non-CamelCase links with (( ))
-  StrictLink(pattern) {
-    if (this.strict_linking_mode || this.regexp_LinkCamel.test(pattern)) {
-      return pattern;
-    }
-    return `((${pattern}))`;
-  }
-
   // Extract the current partial wiki link from the caret position
   getPattern() {
     const area = this.wikiedit.area;
@@ -356,6 +389,14 @@ class AutoComplete {
     }
 
     return area.value.slice(start, end);
+  }
+
+  // Wrap non-CamelCase links with (( ))
+  StrictLink(pattern) {
+    if (this.strict_linking_mode || this.regexp_LinkCamel.test(pattern)) {
+      return pattern;
+    }
+    return `((${pattern}))`;
   }
 
   // Update toolbar button appearance
@@ -396,44 +437,6 @@ class AutoComplete {
         this.#hideDropdown();
         ac.className = 'we-autocomplete-btn';
         break;
-    }
-  }
-
-  async requestPattern(pattern) {
-    // Cancel any previous pending request
-    this.#abortController?.abort();
-    this.#abortController = new AbortController();
-    const signal = this.#abortController.signal;
-
-    const separator = this.handler.includes('?') ? '&' : '?';
-    const href = `${this.handler}${separator}q=${encodeURIComponent(pattern)}&ta_id=${encodeURIComponent(this.wikiedit.area.id)}&_autocomplete=1&rnd=${Math.random()}`;
-
-    try {
-      const response = await fetch(href, { signal });
-
-      if (!response.ok) throw new Error('Network error');
-
-      const text = await response.text();
-      const rawItems = text.split('~~~').map(i => i.trim()).filter(Boolean);
-
-      let bestMatch = null;
-      let suggestions = [];
-
-      if (rawItems.length > 0) {
-        if (rawItems[0] === 'postText') {
-          bestMatch = rawItems[1] || null;
-          suggestions = rawItems.slice(2);
-        } else {
-          bestMatch = rawItems[0];
-          suggestions = rawItems.slice(1);
-        }
-      }
-
-      this.finishComplete(bestMatch, suggestions);
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      console.warn('Autocomplete request failed:', err);
-      this.finishComplete(null, []);
     }
   }
 }
