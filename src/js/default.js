@@ -60,16 +60,6 @@ function mouseClick(event) {
   }
 }
 
-// Unsaved changes warning
-function set_modified(e) {
-  const el = e?.currentTarget || e?.target;
-  if (el) {
-    el.style.borderColor = '#eecc99';
-    el.title = lang.ModifiedHint || 'Modified – unsaved changes';
-  }
-  cf_modified = true;
-}
-
 // Toggle all checkboxes in a form
 function invertSelections(eid) {
   const form = document.getElementById(eid);

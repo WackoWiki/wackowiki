@@ -368,9 +368,7 @@ class WikiEdit extends ProtoEdit {
     }, { passive: true });
 
     // Critical Fields
-    if (!window.onbeforeunload) {
-      window.onbeforeunload = this.checkCf.bind(this);
-    }
+    window.onbeforeunload = this.checkCf.bind(this);
 
     // Make legacy weSave() point to our new implementation
     window.weSave = () => this.savePage();
@@ -1815,8 +1813,8 @@ class WikiEdit extends ProtoEdit {
   // Critical Fields helpers
   // ===================================================================
   setModified() {
+    if (this.cf_modified) return;
     this.cf_modified = true;
-    // visual hint on the textarea (optional but matches original behaviour)
     this.area.style.borderColor = '#eecc99';
     this.area.title = lang.ModifiedHint || 'Modified – unsaved changes';
   }
@@ -1825,13 +1823,12 @@ class WikiEdit extends ProtoEdit {
     if (this.cf_modified) {
       return '\n' + (lang.NotSavedWarning || 'You have unsaved changes!') + '\n';
     }
-    return undefined;
+    return null;
   }
 
   ignoreModified() {
     window.onbeforeunload = null;
     this.cf_modified = false;
-    // reset visual hint
     this.area.style.borderColor = '';
     this.area.title = '';
   }
