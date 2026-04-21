@@ -1007,16 +1007,26 @@ class WikiEdit extends ProtoEdit {
     this.ignoreModified();
     this.clearDraft();
 
-    // Find the correct form (works with both old name="edit" and id="edit_page")
+    // Find the edit form (works with both name="edit" and id="edit_page")
     const form = this.area.form ||
       this.area.closest('form') ||
       document.forms.namedItem('edit') ||
       document.querySelector('form[name="edit"], form#edit_page');
 
-    if (form) {
-      form.submit();
+    if (!form) {
+      console.warn('[WikiEdit] savePage: could not find form');
+      return;
+    }
+
+    // CRITICAL FIX: Click the real Save button instead of form.submit()
+    // This sends name="save" in the POST data so the backend actually saves
+    const saveBtn = form.querySelector('input[name="save"], button[name="save"]');
+    if (saveBtn) {
+      console.log('[WikiEdit] savePage: clicking real Save button');
+      saveBtn.click();          // ← this is what makes the save actually happen
     } else {
-      console.warn('[WikiEdit] savePage: could not find form to submit');
+      console.warn('[WikiEdit] savePage: no name="save" button found – falling back to submit');
+      form.submit();
     }
   }
 
