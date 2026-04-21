@@ -91,7 +91,7 @@ class WikiEdit extends ProtoEdit {
       (form && form.closest('.commentform')) ||
       ta.name === 'payload' || ta.id === 'payload';
 
-    console.log(`%cWikiEdit initialized in ${this.isCommentMode ? 'COMMENT' : 'EDIT'} mode – AJAX URL: ${this.ajaxUrl}`, 'color:#0a0;font-weight:bold');
+    //console.log(`%cWikiEdit initialized in ${this.isCommentMode ? 'COMMENT' : 'EDIT'} mode – AJAX URL: ${this.ajaxUrl}`, 'color:#0a0;font-weight:bold');
 
     // ====================== DRAG & DROP + PASTE ======================
     if (this.canUpload) {
@@ -360,7 +360,7 @@ class WikiEdit extends ProtoEdit {
       this.saveDraft();
     });
 
-    // beforeunload save – now respects this.isSubmitting flag
+    // beforeunload save
     window.addEventListener('beforeunload', () => {
       if (!this.isSubmitting) {
         this.saveDraft();
@@ -411,7 +411,7 @@ class WikiEdit extends ProtoEdit {
     if (!this.draftKey) return;
     this.safeRemoveDraft(this.draftKey);
     console.info('[WikiEdit] Autosaved draft cleared');
-    this.showMessage(`🗑 ${lang.DraftCleared || 'Draft cleared'}`);
+    this.showMessage(`${lang.DraftCleared || 'Draft cleared'}`);
   }
 
   /**
@@ -436,7 +436,7 @@ class WikiEdit extends ProtoEdit {
     const len = t.value.length;
 
     if (len < 20000) {
-      // small/medium text → instant push (original behaviour)
+      // small/medium text → instant push
       this.pushState();
       return;
     }
@@ -447,7 +447,6 @@ class WikiEdit extends ProtoEdit {
       this.pushState();
       this.pushTimer = null;
     }, 650);   // 650 ms is a good "aggressive" sweet spot
-    // (you can tweak to 400–1000 ms if you prefer)
   }
 
   /**
@@ -459,7 +458,7 @@ class WikiEdit extends ProtoEdit {
     const saved = this.safeGetDraft(this.draftKey);
     if (saved !== null && saved !== this.area.value.trim()) {
       // Just notify the user – no popup
-      this.showMessage(`📄 ${lang?.DraftAvailable || 'Autosaved draft found'} – click 🔄 Restore to recover it`, 4000);
+      this.showMessage(`${lang?.DraftAvailable || 'Autosaved draft found'} – click 🔄 Restore to recover it`, 4000);
     }
   }
 
@@ -468,11 +467,11 @@ class WikiEdit extends ProtoEdit {
     if (!this.draftKey) return;
     const saved = this.safeGetDraft(this.draftKey);
     if (saved !== null && saved !== this.area.value) {
-      this.pushState();                    // support Ctrl+Z to undo the restore
+      this.pushState();
       this.area.value = saved;
       this.area.setSelectionRange(saved.length, saved.length);
       this.area.focus();
-      this.showMessage(`✓ ${lang?.DraftRestored || 'Draft restored'}`);
+      this.showMessage(`${lang?.DraftRestored || 'Draft restored'}`);
       this.updateStatus();
 
       this._updateSyntaxHighlight();
@@ -493,13 +492,12 @@ class WikiEdit extends ProtoEdit {
     const darkLi = tb ? tb.querySelector('li.we-dark-toggle') : null;
     if (darkLi) darkLi.classList.toggle('active', newIsDark);
 
-    // Force repaint so syntax + toolbar update instantly (original behaviour kept)
+    // Force repaint so syntax + toolbar update instantly
     this.area.style.transition = 'background 0.2s';
     setTimeout(() => { this.area.style.transition = ''; }, 300);
 
     console.info('[WikiEdit] Manual dark mode toggled');
 
-    // Persist toggle state (exactly like toggleLivePreview() and toggleSyntaxHighlight())
     localStorage.setItem('wikiedit_dark_mode_enabled', newIsDark);
   }
 
@@ -582,7 +580,7 @@ class WikiEdit extends ProtoEdit {
       return;
     }
 
-    // Avoid pushing identical consecutive states (existing logic)
+    // Avoid pushing identical consecutive states
     const last = this.undoStack[this.undoStack.length - 1];
     if (last &&
       last.text === state.text &&
@@ -819,7 +817,7 @@ class WikiEdit extends ProtoEdit {
     const t = this.area;
     t.focus();
     this.getDefines();
-    this.pushState();                    // undo/redo support
+    this.pushState();
 
     const content = this.sel || '';
 
@@ -1668,7 +1666,7 @@ class WikiEdit extends ProtoEdit {
       const after = t.value.substring(t.selectionEnd);
 
       t.value = before + replacement + after;
-      this._updateSyntaxHighlight();           // safe – already added in previous update
+      this._updateSyntaxHighlight();
       const newPos = before.length + replacement.length;
       t.setSelectionRange(newPos, newPos);
 
