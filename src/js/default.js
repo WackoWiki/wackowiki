@@ -60,14 +60,6 @@ function mouseClick(event) {
   }
 }
 
-// Save confirmation (called from WikiEdit toolbar)
-function weSave() {
-  if (confirm(lang.ReallySave)) {
-    const form = document.forms.namedItem('edit') || document.querySelector('form[name="edit"]');
-    if (form) form.submit();
-  }
-}
-
 // Unsaved changes warning
 function set_modified(e) {
   const el = e?.currentTarget || e?.target;

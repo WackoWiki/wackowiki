@@ -345,32 +345,41 @@ class WikiEdit extends ProtoEdit {
 
     this.draftKey = this.DRAFT_KEY_PREFIX + uniqueKey;
 
-    // Input → debounced autosave + mark as modified
+    // Input → mark as modified + debounced autosave
     this.area.addEventListener('input', (e) => {
-      this.setModified();               // critical fields
-      this.debounceAutosave.call(this); // autosave
+      this.setModified();
+      this.debounceAutosave.call(this);
     });
 
-    // Blur + beforeunload still save immediately
+    // Blur still saves immediately
     this.area.addEventListener('blur', () => {
       clearTimeout(this.autosaveTimer);
       this.saveDraft();
     });
-    window.addEventListener('beforeunload', () => this.saveDraft(), { passive: true });
 
-    // ─────────────────────────────────────────────────────────────
-    // Critical Fields: take over the unsaved-changes warning
-    // ─────────────────────────────────────────────────────────────
+    // beforeunload save – now respects this.isSubmitting flag
+    window.addEventListener('beforeunload', () => {
+      if (!this.isSubmitting) {
+        this.saveDraft();
+      }
+    }, { passive: true });
+
+    // Critical Fields
     if (!window.onbeforeunload) {
       window.onbeforeunload = this.checkCf.bind(this);
     }
 
-    const form = this.area.closest('form') || (this.area.form ? this.area.form : null);
+    // Make legacy weSave() point to our new implementation
+    window.weSave = () => this.savePage();
+
+    // Native form submit (backup for direct <input type="submit"> clicks)
+    const form = this.area.form || this.area.closest('form');
     if (form) {
       form.addEventListener('submit', () => {
+        this.isSubmitting = true;
         this.ignoreModified();
-        this.clearDraft();               // draft is no longer needed after successful save
-      }, { once: true });                // prevent multiple clears if submit fires more than once
+        this.clearDraft();
+      });
     }
   }
 
@@ -890,8 +899,6 @@ class WikiEdit extends ProtoEdit {
     // (this fixes stale-selection bugs that existed even in the original code)
     this.getDefines();
 
-    if (e.type === 'keyup' && (e.key === 'Tab' || e.key === 'Enter')) return false;
-
     // Take autocomplete first
     if (this.autocomplete?.keyDown(e)) {
       res = true;
@@ -934,7 +941,8 @@ class WikiEdit extends ProtoEdit {
       else if (key === 'j') res = this.insTag('!!', '!!', 2);
       else if (key === 'h') res = this.insTag('??', '??', 2);
     } else if (alt && key === 's') {
-      try { if (typeof weSave === 'function') weSave(); } catch {}
+      this.savePage();
+      res = true;
     } else if ((ctrl || alt) && key === 'l') {
       if (shift && ctrl) {
         res = this.insTag(' * ', '', 0, 1, 1);
@@ -987,6 +995,28 @@ class WikiEdit extends ProtoEdit {
       e.preventDefault();
       if (!noscroll) t.scrollTop = scroll;
       return false;
+    }
+  }
+
+  savePage() {
+    if (!confirm(lang.ReallySave || 'Really save this page?')) {
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.ignoreModified();
+    this.clearDraft();
+
+    // Find the correct form (works with both old name="edit" and id="edit_page")
+    const form = this.area.form ||
+      this.area.closest('form') ||
+      document.forms.namedItem('edit') ||
+      document.querySelector('form[name="edit"], form#edit_page');
+
+    if (form) {
+      form.submit();
+    } else {
+      console.warn('[WikiEdit] savePage: could not find form to submit');
     }
   }
 
