@@ -52,12 +52,12 @@ class WikiEdit extends ProtoEdit {
     this.syntaxContainer = null;
 
     // Editor height
-    this.HEIGHT_KEY = 'wikiedit_editor_height';
+    this.HEIGHT_KEY = 'we_editor_height';
     this.DEFAULT_HEIGHT = 400;
     this.preferredHeight = this.DEFAULT_HEIGHT;
 
     // Autosave draft
-    this.DRAFT_KEY_PREFIX = 'wikiedit_draft_';
+    this.DRAFT_KEY_PREFIX = 'we_draft_';
   }
 
   // ===================================================================
@@ -229,7 +229,7 @@ class WikiEdit extends ProtoEdit {
 
     // must be called after toolbar is built
     // ====================== LIVE PREVIEW ======================
-    const savedLivePreview = localStorage.getItem('wikiedit_live_preview_enabled');
+    const savedLivePreview = localStorage.getItem('we_live_preview_enabled');
     const shouldEnableLivePreview = (savedLivePreview !== null)
       ? (savedLivePreview === 'true')
       : this.livePreviewDefault;
@@ -244,7 +244,7 @@ class WikiEdit extends ProtoEdit {
     // ====================== DARK MODE PERSISTENCE ======================
     // respect persisted user choice via the toggle button
     // (no server-side default; if never toggled → system preference is used)
-    const savedDarkMode = localStorage.getItem('wikiedit_dark_mode_enabled');
+    const savedDarkMode = localStorage.getItem('we_dark_mode_enabled');
     if (savedDarkMode !== null) {
       const shouldBeDark = savedDarkMode === 'true';
       const html = document.documentElement;
@@ -285,7 +285,7 @@ class WikiEdit extends ProtoEdit {
     this.area.addEventListener('click', () => this.updateStatus());
 
     // Load saved syntax state from localStorage (overrides data-attribute)
-    const savedSyntax = localStorage.getItem('wikiedit_syntax_enabled');
+    const savedSyntax = localStorage.getItem('we_syntax_enabled');
     if (savedSyntax !== null) {
       this.syntaxHighlighting = savedSyntax === 'true';
     }
@@ -498,7 +498,7 @@ class WikiEdit extends ProtoEdit {
 
     console.info('[WikiEdit] Manual dark mode toggled');
 
-    localStorage.setItem('wikiedit_dark_mode_enabled', newIsDark);
+    localStorage.setItem('we_dark_mode_enabled', newIsDark);
   }
 
   /**
@@ -533,7 +533,7 @@ class WikiEdit extends ProtoEdit {
 
   // Optional helper – reset to server default (call from a “Reset height” button if you add one later)
   resetEditorHeight() {
-    localStorage.removeItem('wikiedit_editor_height');
+    localStorage.removeItem('we_editor_height');
     window.location.reload(); // reload to pick up server default again
   }
 
@@ -2004,7 +2004,7 @@ class WikiEdit extends ProtoEdit {
     }
 
     // [b] Persist toggle state (exactly like toggleSyntaxHighlight())
-    localStorage.setItem('wikiedit_live_preview_enabled', this.livePreviewEnabled);
+    localStorage.setItem('we_live_preview_enabled', this.livePreviewEnabled);
   }
 
   // ==================== Markdown ↔ Wacko Converter (added) ====================
@@ -2110,7 +2110,7 @@ class WikiEdit extends ProtoEdit {
 
     // List normalization for exact WackoWiki syntax
     w = w.replace(
-      /^(\s*)([*+-]|\d+\.|[A-Za-z]\.)([ \t]*)/gm,
+      /^(?!\s*\*\*)(\s*)([*+-]|\d+\.|[A-Za-z]\.)([ \t]*)/gm,
       (match, indent, marker, postSpace) => {
         const len = indent.length;
         let newIndent = indent;
@@ -2286,7 +2286,7 @@ class WikiEdit extends ProtoEdit {
     } else {
       this.enableSyntaxHighlighting();
     }
-    localStorage.setItem('wikiedit_syntax_enabled', this.syntaxHighlightEnabled);
+    localStorage.setItem('we_syntax_enabled', this.syntaxHighlightEnabled);
   }
 
   _updateSyntaxHighlight() {
