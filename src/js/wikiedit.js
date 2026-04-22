@@ -819,6 +819,45 @@ class WikiEdit extends ProtoEdit {
     this.getDefines();
     this.pushState();
 
+    // === TOGGLE LOGIC (mirrors insTag but accounts for \n after openTag) ===
+    const openWithNl = openTag + '\n';
+    const closeWithNl = '\n' + closeTag;
+    let applied = false;
+
+    if (this.sel &&
+        this.sel.length >= openWithNl.length + closeWithNl.length &&
+        this.sel.startsWith(openWithNl) &&
+        this.sel.endsWith(closeWithNl)) {
+      // Case 1: Whole block (including wrappers) is selected.
+      const newSel = this.sel.slice(openWithNl.length, -closeWithNl.length);
+      const newValue = this.sel1 + newSel + this.sel2;
+      const newStart = this.sel1.length;
+      const newEnd = newStart + newSel.length;
+
+      t.value = newValue;
+      t.setSelectionRange(newStart, newEnd);
+      t.scrollTop = this.scroll;
+      this._updateSyntaxHighlight();
+      applied = true;
+    } else if (this.sel1.endsWith(openWithNl) &&
+               this.sel2.startsWith(closeWithNl)) {
+      // Case 2: Inner content selected, wrappers are outside (common after first wrap).
+      const newValue = this.sel1.slice(0, -openWithNl.length) + this.sel + this.sel2.slice(closeWithNl.length);
+      const newStart = this.sel1.length - openWithNl.length;
+      const newEnd = newStart + this.sel.length;
+
+      t.value = newValue;
+      t.setSelectionRange(newStart, newEnd);
+      t.scrollTop = this.scroll;
+      this._updateSyntaxHighlight();
+      applied = true;
+    }
+
+    if (applied) {
+      return true;
+    }
+
+    // not already marked
     const content = this.sel || '';
 
     const wrapped = `${openTag}\n${content}\n${closeTag}`;
@@ -844,9 +883,53 @@ class WikiEdit extends ProtoEdit {
     this.getDefines();
     this.pushState();
 
+    // Detect if already marked (covers both "tags inside selection" and
+    // "tags outside selection" cases – works for single-line, multi-line,
+    // and the common case where the editor re-selects the inner content
+    // after the first wrap).
+    const tagLen = Tag.length;
+    const tag2Len = Tag2.length;
+    let applied = false;
+
+    if (this.sel &&
+        this.sel.length >= tagLen + tag2Len &&
+        this.sel.startsWith(Tag) &&
+        this.sel.endsWith(Tag2)) {
+      // Case 1: Tags are inside the current selection (e.g. user selected
+      // the whole "**text**" or the editor-selected inner content after wrap).
+      const newSel = this.sel.slice(tagLen, -tag2Len);
+      const newValue = this.sel1 + newSel + this.sel2;
+      const newStart = this.sel1.length;
+      const newEnd = newStart + newSel.length;
+
+      t.value = newValue;
+      t.setSelectionRange(newStart, newEnd);
+      t.scrollTop = this.scroll;
+      this._updateSyntaxHighlight();
+      applied = true;
+    } else if (this.sel1.length >= tagLen &&
+               this.sel1.endsWith(Tag) &&
+               this.sel2.length >= tag2Len &&
+               this.sel2.startsWith(Tag2)) {
+      // Case 2: Tags surround the current selection (most common after first click).
+      const newValue = this.sel1.slice(0, -tagLen) + this.sel + this.sel2.slice(tag2Len);
+      const newStart = this.sel1.length - tagLen;
+      const newEnd = newStart + this.sel.length;
+
+      t.value = newValue;
+      t.setSelectionRange(newStart, newEnd);
+      t.scrollTop = this.scroll;
+      this._updateSyntaxHighlight();
+      applied = true;
+    }
+
+    if (applied) {
+      return true;
+    }
+
+    // === ORIGINAL BEHAVIOR (if not already marked) ===
     const str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
     this.setAreaContent(str);
-    this._updateSyntaxHighlight();
     return true;
   }
 
@@ -875,7 +958,7 @@ class WikiEdit extends ProtoEdit {
     }
 
     this.setAreaContent(r);
-    this._updateSyntaxHighlight();
+
     return true;
   }
 
