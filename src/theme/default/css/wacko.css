@@ -1003,6 +1003,267 @@ a[href $='.webm'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/video.svg') no-repeat scroll left center;
 }
 
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		a.external-link .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/web.svg') no-repeat scroll left center;
+		}
+		a.group-link .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/group.svg') no-repeat scroll left center;
+		}
+		a.user-link .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/user.svg') no-repeat scroll left center;
+		}
+		
+		a.file-link .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/file.svg') no-repeat scroll left center;
+		}
+		
+		a[href^="geo:"] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/location.svg') no-repeat scroll left center;
+		}
+		a[href^="mailto:"] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/mail.svg') no-repeat scroll left center;
+		}
+		a[href^="tel:"] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/call.svg') no-repeat scroll left center;
+		}
+		a[href^="xmpp:"] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/jabber.svg') no-repeat scroll left center;
+		}
+		
+		/* lockicon */
+		a.acl-denied .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/locked.svg') no-repeat scroll left center;
+		}
+		/* keyicon */
+		a.acl-customsec .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/unlocked.svg') no-repeat scroll left center;
+		}
+		
+		/* InterWiki links: SYNTAX (HostPrefix:Term) */
+		a.iw-archive .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/ia.svg') no-repeat scroll left center;
+		}
+		a.iw-bugs .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/report-bug.svg') no-repeat scroll left center;
+		}
+		a.iw-commit .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/commit.svg') no-repeat scroll left center;
+		}
+		a.iw-diff .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/diff.svg') no-repeat scroll left center;
+		}
+		a.iw-source .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/repository.svg') no-repeat scroll left center;
+		}
+		/* Interwiki links with generic icon */
+		a.iw-brave .icon,
+		a.iw-rfc .icon,
+		a.iw-ppr .icon,
+		a.iw-wackowiki .icon,
+		a.iw-wikipedia .icon {
+			/* background: rgba(0, 0, 0, 0) url('./../icon/dark/open-link.svg') no-repeat scroll left center; */
+			padding-left: 0;
+		}
+		
+		/* MIME */
+		
+		a[href $='.pdf'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/pdf.svg') no-repeat scroll left center;
+		}
+		a[href $='.epub'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/epub.svg') no-repeat scroll left center;
+		}
+		a[href $='.txt'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/text.svg') no-repeat scroll left center;
+		}
+		a[href $='.diff'] .icon,
+		a[href $='.patch'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/patch.svg') no-repeat scroll left center;
+		}
+		a[href $='.odt'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/document.svg') no-repeat scroll left center;
+		}
+		a[href $='.avif'] .icon,
+		a[href $='.gif'] .icon,
+		a[href $='.ico'] .icon,
+		a[href $='.jpe'] .icon,
+		a[href $='.jpeg'] .icon,
+		a[href $='.jpg'] .icon,
+		a[href $='.jxl'] .icon,
+		a[href $='.png'] .icon, 
+		a[href $='.webp'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/image.svg') no-repeat scroll left center;
+		}
+		a[href $='.rdf'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/xml.svg') no-repeat scroll left center;
+		}
+		
+		a[href $='.7z'] .icon,
+		a[href $='.bz2'] .icon,
+		a[href $='.gz'] .icon,
+		a[href $='.rar'] .icon,
+		a[href $='.tar'] .icon,
+		a[href $='.tgz'] .icon,
+		a[href $='.zip'] .icon,
+		a[href $='.zst'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/archive.svg') no-repeat scroll left center;
+		}
+		a[href $='.ods'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/spreadsheet.svg') no-repeat scroll left center;
+		}
+		a[href $='.odp'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/presentation.svg') no-repeat scroll left center;
+		}
+		a[href $='.odg'] .icon,
+		a[href $='.svg'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/drawing.svg') no-repeat scroll left center;
+		}
+		a[href $='.mp3'] .icon,
+		a[href $='.m4a'] .icon,
+		a[href $='.oga'] .icon,
+		a[href $='.ogg'] .icon,
+		a[href $='.opus'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/audio.svg') no-repeat scroll left center;
+		}
+		a[href $='.mp4'] .icon,
+		a[href $='.ogv'] .icon,
+		a[href $='.webm'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/video.svg') no-repeat scroll left center;
+		}
+}}
+
+:root[data-theme="dark"] {
+	a.external-link .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/web.svg') no-repeat scroll left center;
+	}
+	a.group-link .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/group.svg') no-repeat scroll left center;
+	}
+	a.user-link .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/user.svg') no-repeat scroll left center;
+	}
+	
+	a.file-link .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/file.svg') no-repeat scroll left center;
+	}
+	
+	a[href^="geo:"] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/location.svg') no-repeat scroll left center;
+	}
+	a[href^="mailto:"] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/mail.svg') no-repeat scroll left center;
+	}
+	a[href^="tel:"] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/call.svg') no-repeat scroll left center;
+	}
+	a[href^="xmpp:"] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/jabber.svg') no-repeat scroll left center;
+	}
+	
+	/* lockicon */
+	a.acl-denied .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/locked.svg') no-repeat scroll left center;
+	}
+	/* keyicon */
+	a.acl-customsec .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/unlocked.svg') no-repeat scroll left center;
+	}
+	
+	/* InterWiki links: SYNTAX (HostPrefix:Term) */
+	a.iw-archive .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/ia.svg') no-repeat scroll left center;
+	}
+	a.iw-bugs .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/report-bug.svg') no-repeat scroll left center;
+	}
+	a.iw-commit .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/commit.svg') no-repeat scroll left center;
+	}
+	a.iw-diff .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/diff.svg') no-repeat scroll left center;
+	}
+	a.iw-source .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/repository.svg') no-repeat scroll left center;
+	}
+	/* Interwiki links with generic icon */
+	a.iw-brave .icon,
+	a.iw-rfc .icon,
+	a.iw-ppr .icon,
+	a.iw-wackowiki .icon,
+	a.iw-wikipedia .icon {
+		/* background: rgba(0, 0, 0, 0) url('./../icon/dark/open-link.svg') no-repeat scroll left center; */
+		padding-left: 0;
+	}
+	
+	/* MIME */
+	
+	a[href $='.pdf'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/pdf.svg') no-repeat scroll left center;
+	}
+	a[href $='.epub'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/epub.svg') no-repeat scroll left center;
+	}
+	a[href $='.txt'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/text.svg') no-repeat scroll left center;
+	}
+	a[href $='.diff'] .icon,
+	a[href $='.patch'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/patch.svg') no-repeat scroll left center;
+	}
+	a[href $='.odt'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/document.svg') no-repeat scroll left center;
+	}
+	a[href $='.avif'] .icon,
+	a[href $='.gif'] .icon,
+	a[href $='.ico'] .icon,
+	a[href $='.jpe'] .icon,
+	a[href $='.jpeg'] .icon,
+	a[href $='.jpg'] .icon,
+	a[href $='.jxl'] .icon,
+	a[href $='.png'] .icon, 
+	a[href $='.webp'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/image.svg') no-repeat scroll left center;
+	}
+	a[href $='.rdf'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/xml.svg') no-repeat scroll left center;
+	}
+	
+	a[href $='.7z'] .icon,
+	a[href $='.bz2'] .icon,
+	a[href $='.gz'] .icon,
+	a[href $='.rar'] .icon,
+	a[href $='.tar'] .icon,
+	a[href $='.tgz'] .icon,
+	a[href $='.zip'] .icon,
+	a[href $='.zst'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/archive.svg') no-repeat scroll left center;
+	}
+	a[href $='.ods'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/spreadsheet.svg') no-repeat scroll left center;
+	}
+	a[href $='.odp'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/presentation.svg') no-repeat scroll left center;
+	}
+	a[href $='.odg'] .icon,
+	a[href $='.svg'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/drawing.svg') no-repeat scroll left center;
+	}
+	a[href $='.mp3'] .icon,
+	a[href $='.m4a'] .icon,
+	a[href $='.oga'] .icon,
+	a[href $='.ogg'] .icon,
+	a[href $='.opus'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/audio.svg') no-repeat scroll left center;
+	}
+	a[href $='.mp4'] .icon,
+	a[href $='.ogv'] .icon,
+	a[href $='.webm'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/video.svg') no-repeat scroll left center;
+	}
+}
+
 /* Callouts: SYNTAX %%(info type="warning" title="Warning")text%% */
 
 /* 1. default */

@@ -1486,6 +1486,303 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	background: url('../../../image/wikiedit/light/restore.svg') no-repeat;
 }
 
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		.we-toolbar li.we-h1 img {
+			background: url('../../../image/wikiedit/dark/h1.svg') no-repeat;
+		}
+		.we-toolbar li.we-h2 img {
+			background: url('../../../image/wikiedit/dark/h2.svg') no-repeat;
+		}
+		.we-toolbar li.we-h3 img {
+			background: url('../../../image/wikiedit/dark/h3.svg') no-repeat;
+		}
+		.we-toolbar li.we-h4 img {
+			background: url('../../../image/wikiedit/dark/h4.svg') no-repeat;
+		}
+		.we-toolbar li.we-h5 img {
+			background: url('../../../image/wikiedit/dark/h5.svg') no-repeat;
+		}
+		.we-toolbar li.we-h6 img {
+			background: url('../../../image/wikiedit/dark/h6.svg') no-repeat;
+		}
+		.we-toolbar li.we-bold img {
+			background: url('../../../image/wikiedit/dark/bold.svg') no-repeat;
+		}
+		.we-toolbar li.we-italic img {
+			background: url('../../../image/wikiedit/dark/italic.svg') no-repeat;
+		}
+		.we-toolbar li.we-underline img {
+			background: url('../../../image/wikiedit/dark/underline.svg') no-repeat;
+		}
+		.we-toolbar li.we-strike img {
+			background: url('../../../image/wikiedit/dark/strike.svg') no-repeat;
+		}
+		.we-toolbar li.we-small img {
+			background: url('../../../image/wikiedit/dark/small.svg') no-repeat;
+		}
+		.we-toolbar li.we-superscript img {
+			background: url('../../../image/wikiedit/dark/superscript.svg') no-repeat;
+		}
+		.we-toolbar li.we-subscript img {
+			background: url('../../../image/wikiedit/dark/subscript.svg') no-repeat;
+		}
+		.we-toolbar li.we-ul img {
+			background: url('../../../image/wikiedit/dark/ul.svg') no-repeat;
+		}
+		.we-toolbar li.we-ol img {
+			background: url('../../../image/wikiedit/dark/ol.svg') no-repeat;
+		}
+		.we-toolbar li.we-center img {
+			background: url('../../../image/wikiedit/dark/center.svg') no-repeat;
+		}
+		.we-toolbar li.we-justify img {
+			background: url('../../../image/wikiedit/dark/justify.svg') no-repeat;
+		}
+		.we-toolbar li.we-right img {
+			background: url('../../../image/wikiedit/dark/right.svg') no-repeat;
+		}
+		.we-toolbar li.we-outdent img {
+			background: url('../../../image/wikiedit/dark/outdent.svg') no-repeat;
+		}
+		.we-toolbar li.we-indent img {
+			background: url('../../../image/wikiedit/dark/indent.svg') no-repeat;
+		}
+		.we-toolbar li.we-hr img {
+			background: url('../../../image/wikiedit/dark/hr.svg') no-repeat;
+		}
+		.we-toolbar li.we-signature img {
+			background: url('../../../image/wikiedit/dark/signature.svg') no-repeat;
+		}
+		.we-toolbar li.we-quote img {
+			background: url('../../../image/wikiedit/dark/quote.svg') no-repeat;
+		}
+		.we-toolbar li.we-source img {
+			background: url('../../../image/wikiedit/dark/source.svg') no-repeat;
+		}
+		.we-toolbar li.we-code img {
+			background: url('../../../image/wikiedit/dark/code.svg') no-repeat;
+		}
+		.we-toolbar li.we-action img {
+			background: url('../../../image/wikiedit/dark/action.svg') no-repeat;
+		}
+		.we-toolbar li.we-footnote img {
+			background: url('../../../image/wikiedit/dark/footnote.svg') no-repeat;
+		}
+		.we-toolbar li.we-createlink img {
+			background: url('../../../image/wikiedit/dark/link.svg') no-repeat;
+		}
+		.we-toolbar li.we-createtable img {
+			background: url('../../../image/wikiedit/dark/table.svg') no-repeat;
+		}
+		.we-toolbar li.we-textred img {
+			background: url('../../../image/wikiedit/dark/textcolor.svg') no-repeat;
+		}
+		.we-toolbar li.we-highlight img {
+			background: url('../../../image/wikiedit/dark/highlight.svg') no-repeat;
+		}
+		.we-toolbar li.we-search img {
+			background: url('../../../image/wikiedit/dark/find-replace.svg') no-repeat;
+		}
+		.we-toolbar li.we-about img {
+			background: url('../../../image/wikiedit/dark/about.svg') no-repeat;
+		}
+		.we-toolbar li.we-fullscreen img {
+			background: url('../../../image/wikiedit/dark/view-fullscreen.svg') no-repeat;
+		}
+		.we-toolbar li.we-livepreview img {
+			background: url('../../../image/wikiedit/dark/view-presentation.svg') no-repeat;
+		}
+		.we-toolbar li.we-dropdown > button img {
+			background: url('../../../image/wikiedit/dark/open-more.svg') no-repeat;
+		}
+		.we-toolbar li.we-help img {
+			background: url('../../../image/wikiedit/dark/help.svg') no-repeat;
+		}
+		.we-toolbar li.we-wacko2md img {
+			background: url('../../../image/wikiedit/dark/markdown.svg') no-repeat;
+		}
+		.we-toolbar li.we-md2wacko img {
+			background: url('../../../image/wikiedit/dark/markup.svg') no-repeat;
+		}
+		.we-toolbar li.we-syntax img {
+			background: url('../../../image/wikiedit/dark/hl-syntax.svg') no-repeat;
+		}
+		.we-toolbar li.we-enlarge img {
+			background: url('../../../image/wikiedit/dark/go-down.svg') no-repeat;
+		}
+		.we-toolbar li.we-shrink img {
+			background: url('../../../image/wikiedit/dark/go-up.svg') no-repeat;
+		}
+		.we-toolbar li.we-undo img {
+			background: url('../../../image/wikiedit/dark/edit-undo.svg') no-repeat;
+		}
+		.we-toolbar li.we-redo img {
+			background: url('../../../image/wikiedit/dark/edit-redo.svg') no-repeat;
+		}
+		.we-toolbar li.we-dark-toggle img {
+			background: url('../../../image/wikiedit/dark/darkmode.svg') no-repeat;
+		}
+		.we-toolbar li.we-upload-media img {
+			background: url('../../../image/wikiedit/dark/upload.svg') no-repeat;
+		}
+		.we-toolbar li.we-draft-clear img {
+			background: url('../../../image/wikiedit/dark/edit-clear.svg') no-repeat;
+		}
+		.we-toolbar li.we-draft-restore img {
+			background: url('../../../image/wikiedit/dark/restore.svg') no-repeat;
+		}
+	}
+}
+
+
+:root[data-theme="dark"] {
+	.we-toolbar li.we-h1 img {
+		background: url('../../../image/wikiedit/dark/h1.svg') no-repeat;
+	}
+	.we-toolbar li.we-h2 img {
+		background: url('../../../image/wikiedit/dark/h2.svg') no-repeat;
+	}
+	.we-toolbar li.we-h3 img {
+		background: url('../../../image/wikiedit/dark/h3.svg') no-repeat;
+	}
+	.we-toolbar li.we-h4 img {
+		background: url('../../../image/wikiedit/dark/h4.svg') no-repeat;
+	}
+	.we-toolbar li.we-h5 img {
+		background: url('../../../image/wikiedit/dark/h5.svg') no-repeat;
+	}
+	.we-toolbar li.we-h6 img {
+		background: url('../../../image/wikiedit/dark/h6.svg') no-repeat;
+	}
+	.we-toolbar li.we-bold img {
+		background: url('../../../image/wikiedit/dark/bold.svg') no-repeat;
+	}
+	.we-toolbar li.we-italic img {
+		background: url('../../../image/wikiedit/dark/italic.svg') no-repeat;
+	}
+	.we-toolbar li.we-underline img {
+		background: url('../../../image/wikiedit/dark/underline.svg') no-repeat;
+	}
+	.we-toolbar li.we-strike img {
+		background: url('../../../image/wikiedit/dark/strike.svg') no-repeat;
+	}
+	.we-toolbar li.we-small img {
+		background: url('../../../image/wikiedit/dark/small.svg') no-repeat;
+	}
+	.we-toolbar li.we-superscript img {
+		background: url('../../../image/wikiedit/dark/superscript.svg') no-repeat;
+	}
+	.we-toolbar li.we-subscript img {
+		background: url('../../../image/wikiedit/dark/subscript.svg') no-repeat;
+	}
+	.we-toolbar li.we-ul img {
+		background: url('../../../image/wikiedit/dark/ul.svg') no-repeat;
+	}
+	.we-toolbar li.we-ol img {
+		background: url('../../../image/wikiedit/dark/ol.svg') no-repeat;
+	}
+	.we-toolbar li.we-center img {
+		background: url('../../../image/wikiedit/dark/center.svg') no-repeat;
+	}
+	.we-toolbar li.we-justify img {
+		background: url('../../../image/wikiedit/dark/justify.svg') no-repeat;
+	}
+	.we-toolbar li.we-right img {
+		background: url('../../../image/wikiedit/dark/right.svg') no-repeat;
+	}
+	.we-toolbar li.we-outdent img {
+		background: url('../../../image/wikiedit/dark/outdent.svg') no-repeat;
+	}
+	.we-toolbar li.we-indent img {
+		background: url('../../../image/wikiedit/dark/indent.svg') no-repeat;
+	}
+	.we-toolbar li.we-hr img {
+		background: url('../../../image/wikiedit/dark/hr.svg') no-repeat;
+	}
+	.we-toolbar li.we-signature img {
+		background: url('../../../image/wikiedit/dark/signature.svg') no-repeat;
+	}
+	.we-toolbar li.we-quote img {
+		background: url('../../../image/wikiedit/dark/quote.svg') no-repeat;
+	}
+	.we-toolbar li.we-source img {
+		background: url('../../../image/wikiedit/dark/source.svg') no-repeat;
+	}
+	.we-toolbar li.we-code img {
+		background: url('../../../image/wikiedit/dark/code.svg') no-repeat;
+	}
+	.we-toolbar li.we-action img {
+		background: url('../../../image/wikiedit/dark/action.svg') no-repeat;
+	}
+	.we-toolbar li.we-footnote img {
+		background: url('../../../image/wikiedit/dark/footnote.svg') no-repeat;
+	}
+	.we-toolbar li.we-createlink img {
+		background: url('../../../image/wikiedit/dark/link.svg') no-repeat;
+	}
+	.we-toolbar li.we-createtable img {
+		background: url('../../../image/wikiedit/dark/table.svg') no-repeat;
+	}
+	.we-toolbar li.we-textred img {
+		background: url('../../../image/wikiedit/dark/textcolor.svg') no-repeat;
+	}
+	.we-toolbar li.we-highlight img {
+		background: url('../../../image/wikiedit/dark/highlight.svg') no-repeat;
+	}
+	.we-toolbar li.we-search img {
+		background: url('../../../image/wikiedit/dark/find-replace.svg') no-repeat;
+	}
+	.we-toolbar li.we-about img {
+		background: url('../../../image/wikiedit/dark/about.svg') no-repeat;
+	}
+	.we-toolbar li.we-fullscreen img {
+		background: url('../../../image/wikiedit/dark/view-fullscreen.svg') no-repeat;
+	}
+	.we-toolbar li.we-livepreview img {
+		background: url('../../../image/wikiedit/dark/view-presentation.svg') no-repeat;
+	}
+	.we-toolbar li.we-dropdown > button img {
+		background: url('../../../image/wikiedit/dark/open-more.svg') no-repeat;
+	}
+	.we-toolbar li.we-help img {
+		background: url('../../../image/wikiedit/dark/help.svg') no-repeat;
+	}
+	.we-toolbar li.we-wacko2md img {
+		background: url('../../../image/wikiedit/dark/markdown.svg') no-repeat;
+	}
+	.we-toolbar li.we-md2wacko img {
+		background: url('../../../image/wikiedit/dark/markup.svg') no-repeat;
+	}
+	.we-toolbar li.we-syntax img {
+		background: url('../../../image/wikiedit/dark/hl-syntax.svg') no-repeat;
+	}
+	.we-toolbar li.we-enlarge img {
+		background: url('../../../image/wikiedit/dark/go-down.svg') no-repeat;
+	}
+	.we-toolbar li.we-shrink img {
+		background: url('../../../image/wikiedit/dark/go-up.svg') no-repeat;
+	}
+	.we-toolbar li.we-undo img {
+		background: url('../../../image/wikiedit/dark/edit-undo.svg') no-repeat;
+	}
+	.we-toolbar li.we-redo img {
+		background: url('../../../image/wikiedit/dark/edit-redo.svg') no-repeat;
+	}
+	.we-toolbar li.we-dark-toggle img {
+		background: url('../../../image/wikiedit/dark/darkmode.svg') no-repeat;
+	}
+	.we-toolbar li.we-upload-media img {
+		background: url('../../../image/wikiedit/dark/upload.svg') no-repeat;
+	}
+	.we-toolbar li.we-draft-clear img {
+		background: url('../../../image/wikiedit/dark/edit-clear.svg') no-repeat;
+	}
+	.we-toolbar li.we-draft-restore img {
+		background: url('../../../image/wikiedit/dark/restore.svg') no-repeat;
+	}
+}
+
 /* Our custom height/draft buttons */
 .we-toolbar button[title*="height"],
 .we-toolbar button[title*="draft"] {
@@ -2764,6 +3061,133 @@ li.m-source img {
 	background: url('./../icon/light/text.svg') no-repeat;
 }
 
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		li.m-new img {
+			background: url('./../icon/dark/page-add.svg') no-repeat;
+		}
+		li.m-categories img {
+			background: url('./../icon/dark/tag.svg') no-repeat;
+		}
+		li.m-attachments img {
+			background: url('./../icon/dark/attachment.svg') no-repeat;
+		}
+		li.m-upload img {
+			background: url('./../icon/dark/upload.svg') no-repeat;
+		}
+		li.m-clone img {
+			background: url('./../icon/dark/copy.svg') no-repeat;
+		}
+		li.m-edit img {
+			background: url('./../icon/dark/edit.svg') no-repeat;
+		}
+		li.m-languages img {
+			background: url('./../icon/dark/languages.svg') no-repeat;
+		}
+		li.m-referrers img {
+			background: url('./../icon/dark/link.svg') no-repeat;
+		}
+		li.m-revisions img {
+			background: url('./../icon/dark/revisions.svg') no-repeat;
+		}
+		li.m-remove img {
+			background: url('./../icon/dark/delete.svg') no-repeat;
+		}
+		li.m-purge img {
+			background: url('./../icon/dark/purge.svg') no-repeat;
+		}
+		li.m-rename img {
+			background: url('./../icon/dark/edit.svg') no-repeat;
+		}
+		li.m-properties img {
+			background: url('./../icon/dark/properties.svg') no-repeat;
+		}
+		li.m-permissions img {
+			background: url('./../icon/dark/permission.svg') no-repeat;
+		}
+		li.m-show img {
+			background: url('./../icon/dark/show.svg') no-repeat;
+		}
+		li.m-moderate img {
+			background: url('./../icon/dark/comment.svg') no-repeat;
+		}
+		li.m-print img {
+			background: url('./../icon/dark/print.svg') no-repeat;
+		}
+		li.m-xml img {
+			background: url('./../icon/dark/xml.svg') no-repeat;
+		}
+		li.m-word img {
+			background: url('./../icon/dark/document.svg') no-repeat;
+		}
+		li.m-source img {
+			background: url('./../icon/dark/text.svg') no-repeat;
+		}
+}}
+
+:root[data-theme="dark"] {
+	li.m-new img {
+		background: url('./../icon/dark/page-add.svg') no-repeat;
+	}
+	li.m-categories img {
+		background: url('./../icon/dark/tag.svg') no-repeat;
+	}
+	li.m-attachments img {
+		background: url('./../icon/dark/attachment.svg') no-repeat;
+	}
+	li.m-upload img {
+		background: url('./../icon/dark/upload.svg') no-repeat;
+	}
+	li.m-clone img {
+		background: url('./../icon/dark/copy.svg') no-repeat;
+	}
+	li.m-edit img {
+		background: url('./../icon/dark/edit.svg') no-repeat;
+	}
+	li.m-languages img {
+		background: url('./../icon/dark/languages.svg') no-repeat;
+	}
+	li.m-referrers img {
+		background: url('./../icon/dark/link.svg') no-repeat;
+	}
+	li.m-revisions img {
+		background: url('./../icon/dark/revisions.svg') no-repeat;
+	}
+	li.m-remove img {
+		background: url('./../icon/dark/delete.svg') no-repeat;
+	}
+	li.m-purge img {
+		background: url('./../icon/dark/purge.svg') no-repeat;
+	}
+	li.m-rename img {
+		background: url('./../icon/dark/edit.svg') no-repeat;
+	}
+	li.m-properties img {
+		background: url('./../icon/dark/properties.svg') no-repeat;
+	}
+	li.m-permissions img {
+		background: url('./../icon/dark/permission.svg') no-repeat;
+	}
+	li.m-show img {
+		background: url('./../icon/dark/show.svg') no-repeat;
+	}
+	li.m-moderate img {
+		background: url('./../icon/dark/comment.svg') no-repeat;
+	}
+	li.m-print img {
+		background: url('./../icon/dark/print.svg') no-repeat;
+	}
+	li.m-xml img {
+		background: url('./../icon/dark/xml.svg') no-repeat;
+	}
+	li.m-word img {
+		background: url('./../icon/dark/document.svg') no-repeat;
+	}
+	li.m-source img {
+		background: url('./../icon/dark/text.svg') no-repeat;
+	}
+}
+
 .desc-rss-feed {
 	float: right;
 }
@@ -2877,6 +3301,159 @@ li.m-source img {
 }
 .btn-revisions {
 	background: url('./../icon/light/revisions.svg') no-repeat;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		.btn-reload {
+			background: url('./../icon/light/reload.svg') no-repeat;
+		}
+		.btn-menu {
+			background: url('./../icon/dark/menu.svg') no-repeat;
+		}
+		
+		.btn-overflow-menu {
+			background: url('./../icon/dark/overflow-menu.svg') no-repeat;
+		}
+		.btn-addbookmark {
+			background: url('./../icon/dark/bookmark.svg') no-repeat;
+		}
+		.btn-removebookmark {
+			background: url('./../icon/dark/bookmark-remove.svg') no-repeat;
+		}
+		.btn-delete {
+			background: url('./../icon/dark/delete.svg') no-repeat;
+		}
+		.btn-edit {
+			background: url('./../icon/dark/edit.svg') no-repeat;
+		}
+		.btn-copy {
+			background: url('./../icon/dark/copy.svg') no-repeat;
+		}
+		.btn-source {
+			background: url('./../icon/dark/text.svg') no-repeat;
+		}
+		.btn-feed {
+			background: url('./../icon/dark/feed.svg') no-repeat;
+		}
+		.btn-info {
+			background: url('./../icon/dark/dialog-info.svg') no-repeat;
+		}
+		.btn-tick {
+			background: url('./../icon/dark/tick.svg') no-repeat;
+		}
+		.btn-warning {
+			background: url('./../icon/dark/warning.svg') no-repeat;
+		}
+		.btn-add-page {
+			background: url('./../icon/dark/page-add.svg') no-repeat;
+		}
+		.btn-page {
+			background: url('./../icon/dark/show.svg') no-repeat;
+		}
+		.btn-comment {
+			background: url('./../icon/dark/comment.svg') no-repeat;
+		}
+		.btn-attachment {
+			background: url('./../icon/dark/attachment.svg') no-repeat;
+		}
+		.btn-upload {
+			background: url('./../icon/dark/upload.svg') no-repeat;
+		}
+		.btn-unlocked {
+			background: url('./../icon/dark/unlocked.svg') no-repeat;
+		}
+		.btn-locked {
+			background: url('./../icon/dark/locked.svg') no-repeat;
+		}
+		.btn-search {
+			background: url('./../icon/dark/search.svg') no-repeat;
+		}
+		.btn-tag {
+			background: url('./../icon/dark/tag.svg') no-repeat;
+		}
+		.btn-languages {
+			background: url('./../icon/dark/languages.svg') no-repeat;
+		}
+		.btn-revisions {
+			background: url('./../icon/dark/revisions.svg') no-repeat;
+		}
+}}
+
+:root[data-theme="dark"] {
+	.btn-reload {
+		background: url('./../icon/light/reload.svg') no-repeat;
+	}
+	.btn-menu {
+		background: url('./../icon/dark/menu.svg') no-repeat;
+	}
+	
+	.btn-overflow-menu {
+		background: url('./../icon/dark/overflow-menu.svg') no-repeat;
+	}
+	.btn-addbookmark {
+		background: url('./../icon/dark/bookmark.svg') no-repeat;
+	}
+	.btn-removebookmark {
+		background: url('./../icon/dark/bookmark-remove.svg') no-repeat;
+	}
+	.btn-delete {
+		background: url('./../icon/dark/delete.svg') no-repeat;
+	}
+	.btn-edit {
+		background: url('./../icon/dark/edit.svg') no-repeat;
+	}
+	.btn-copy {
+		background: url('./../icon/dark/copy.svg') no-repeat;
+	}
+	.btn-source {
+		background: url('./../icon/dark/text.svg') no-repeat;
+	}
+	.btn-feed {
+		background: url('./../icon/dark/feed.svg') no-repeat;
+	}
+	.btn-info {
+		background: url('./../icon/dark/dialog-info.svg') no-repeat;
+	}
+	.btn-tick {
+		background: url('./../icon/dark/tick.svg') no-repeat;
+	}
+	.btn-warning {
+		background: url('./../icon/dark/warning.svg') no-repeat;
+	}
+	.btn-add-page {
+		background: url('./../icon/dark/page-add.svg') no-repeat;
+	}
+	.btn-page {
+		background: url('./../icon/dark/show.svg') no-repeat;
+	}
+	.btn-comment {
+		background: url('./../icon/dark/comment.svg') no-repeat;
+	}
+	.btn-attachment {
+		background: url('./../icon/dark/attachment.svg') no-repeat;
+	}
+	.btn-upload {
+		background: url('./../icon/dark/upload.svg') no-repeat;
+	}
+	.btn-unlocked {
+		background: url('./../icon/dark/unlocked.svg') no-repeat;
+	}
+	.btn-locked {
+		background: url('./../icon/dark/locked.svg') no-repeat;
+	}
+	.btn-search {
+		background: url('./../icon/dark/search.svg') no-repeat;
+	}
+	.btn-tag {
+		background: url('./../icon/dark/tag.svg') no-repeat;
+	}
+	.btn-languages {
+		background: url('./../icon/dark/languages.svg') no-repeat;
+	}
+	.btn-revisions {
+		background: url('./../icon/dark/revisions.svg') no-repeat;
+	}
 }
 
 .viewed {
