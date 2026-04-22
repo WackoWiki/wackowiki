@@ -2309,7 +2309,7 @@ class WikiEdit extends ProtoEdit {
 
     const width = ta.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
     const height = ta.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-	const padding = parseFloat(style.padding) + 1; // it only is in syncs with + 1px (???)
+	const padding = parseFloat(style.padding) + parseFloat(style.borderTopWidth); // hack: workaround for ignoring border values for <pre>
 
     this.highlighter.style.width = `${width}px`;
     this.highlighter.style.height = `${height}px`;
