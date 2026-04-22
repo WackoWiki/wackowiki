@@ -2309,10 +2309,11 @@ class WikiEdit extends ProtoEdit {
 
     const width = ta.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
     const height = ta.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+	const padding = parseFloat(style.padding) + 1; // it only is in syncs with + 1px (???)
 
     this.highlighter.style.width = `${width}px`;
     this.highlighter.style.height = `${height}px`;
-    this.highlighter.style.padding = style.padding;
+    this.highlighter.style.padding = `${padding}px`;
   }
 
   highlightWikiSyntax(text) {
