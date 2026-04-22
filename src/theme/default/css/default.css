@@ -3,7 +3,7 @@
 	/* Light theme (default) */
 	--ww-bg-primary: #fcfcfc;
 	--ww-bg-secondary: #fff;
-	--ww-bg-tertiary: #f0f4f5;
+	--ww-bg-tertiary: #f0f0f0;
 	--ww-text: #222;
 	--ww-text-secondary: #333;
 	--ww-text-tertiary: #444;
@@ -1286,14 +1286,14 @@ a:target {
 
 .we-toolbar .btn-:hover,
 .we-toolbar .btn-:focus {
-	background: #f0f0f0;
+	background: var(ww-bg-tertiary);
 	border-color: #999;
 	outline: 2px solid #007bff;
 	outline-offset: -2px;
 }
 
 .we-toolbar .btn-pressed {
-	background: #e0e0e0;
+	background: var(--ww-bg-secondary);
 	transform: scale(0.95);
 }
 
@@ -1926,7 +1926,7 @@ textarea.wikiedit-area.syntax-enabled {
 /* Wiki syntax token colors */
 .wiki-h { color: #0073aa; }
 .wiki-bold { color: #d00; }
-.wiki-italic { color: #070; font-style: italic; }
+.wiki-italic { color: #070; }
 .wiki-underline { color: #00a; text-decoration: underline; }
 .wiki-strike { color: #666; text-decoration: line-through; }
 .wiki-code { color: #660; background: #ffc; border-radius: 2px; }
