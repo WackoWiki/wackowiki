@@ -29,7 +29,6 @@ The version and status of each is summarized below:
 Upstream projects
 -----------------
 - bad_behaviour		- https://github.com/Bad-Behaviour/badbehaviour
-- clipboard.js		- https://github.com/zenorocha/clipboard.js
 - freecap			- https://wackowiki.org/doc/Dev/Components/Lib/Captcha
 - hashids			- https://hashids.org/php/
 - htmlsax3			- https://pear.php.net/package/XML_HTMLSax3/

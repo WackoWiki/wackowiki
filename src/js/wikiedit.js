@@ -257,9 +257,7 @@ class WikiEdit extends ProtoEdit {
     }
 
     // ====================== LIVE PREVIEW AUTO-START ======================
-    if (this.livePreviewDefault) {
-      setTimeout(() => this.toggleLivePreview(), 100);
-    }
+
     document.addEventListener('fullscreenchange', updateFSIcon);
 
     // Initial state

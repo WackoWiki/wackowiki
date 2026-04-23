@@ -9,6 +9,17 @@
 				<input type="hidden" name="maxsize" value="[ ' maxsize ' ]">
 			=]
 			<input type="hidden" name="MAX_FILE_SIZE" value="[ ' maxfilesize ' ]">
+
+			<!-- Dropzone for multiple files, drag & drop, paste (JS only) -->
+			<div class="upload-dropzone" id="upload-dropzone">
+				<div class="dropzone-inner">
+					<p><strong>Drop files here</strong></p>
+					<p>or paste from clipboard (Ctrl + V)</p>
+					<p class="small">Multiple files supported • Click to select files</p>
+					<p class="small hint">Single-file form below works without JavaScript</p>
+				</div>
+			</div>
+
 			<table class="upload-table">
 				<tr>
 					<th>

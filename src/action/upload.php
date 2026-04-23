@@ -58,6 +58,8 @@ $accept_types = function($types)
 // check who u are, can u upload?
 if ($this->can_upload(true))
 {
+	$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/upload.js"></script>');
+
 	$tpl->enter('u_');
 
 	if ($maxsize)
