@@ -881,6 +881,11 @@ class WikiEdit extends ProtoEdit {
     this.getDefines();
     this.pushState();
 
+    // Skip toggle logic for indentation and list operations.
+    // These use expand=1 which means they work line-by-line with MarkUp().
+    // The toggle detection is only meant for simple inline/block tags.
+    const isIndentOrListOp = (expand === 1 || strip === 1);
+
     // Detect if already marked (covers both "tags inside selection" and
     // "tags outside selection" cases – works for single-line, multi-line,
     // and the common case where the editor re-selects the inner content
@@ -889,7 +894,7 @@ class WikiEdit extends ProtoEdit {
     const tag2Len = Tag2.length;
     let applied = false;
 
-    if (this.sel &&
+    if (!isIndentOrListOp && this.sel &&
       this.sel.length >= tagLen + tag2Len &&
       this.sel.startsWith(Tag) &&
       this.sel.endsWith(Tag2)) {
@@ -905,7 +910,7 @@ class WikiEdit extends ProtoEdit {
       t.scrollTop = this.scroll;
       this._updateSyntaxHighlight();
       applied = true;
-    } else if (this.sel1.length >= tagLen &&
+    } else if (!isIndentOrListOp && this.sel1.length >= tagLen &&
       this.sel1.endsWith(Tag) &&
       this.sel2.length >= tag2Len &&
       this.sel2.startsWith(Tag2)) {
@@ -1010,7 +1015,7 @@ class WikiEdit extends ProtoEdit {
       if (this.tab || e.key !== 'Tab') {
         res = shift || (alt && key === 'u')
           ? this.unindent()
-          : this.insTag(' ', '', 0, 1);
+          : this.insTag('  ', '', 0, 1);
       }
     } else if (ctrl && /^[1-6]$/.test(key)) {
       const level = parseInt(key);
