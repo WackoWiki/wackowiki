@@ -202,7 +202,7 @@ class Diag
 					$session = $engine->sess->toArray();
 					unset($session['user_profile']['password']);
 
-					echo '<p class="debug">Session data</p>' . "\n<ul>\n";
+					echo '<p class="debug">Session data</p>' . "\n";
 					Ut::debug_print_r($session);
 					Ut::debug_print_r($engine->context);
 
