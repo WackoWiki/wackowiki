@@ -19,8 +19,8 @@ del a:link { color: #999; }
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-	border: 0 none #ccc;
-	border-top: 1px solid #ccc;
+	border: 0 none var(--ww-border);
+	border-top: 1px solid var(--ww-border);
 }
 
 /* No line break */
@@ -227,7 +227,7 @@ div.hl-main {
 }
 
 .alternate > tbody > tr:nth-of-type(2n+1) {
-	background-color: #f9f9f9;
+	background-color: var(--ww-bg-accent);
 }
 
 .sticky > tbody > tr:first-child th {
@@ -827,7 +827,7 @@ div.wrapper,
 aside.wrapper {
 	margin: 2px;
 	background: #f6f7ed;
-	border: 1px dotted #ccc;
+	border: 1px dotted var(--ww-border);
 	max-width: 100%;
 }
 div.wrapper-content { padding: 10px 10px 25px 10px; }

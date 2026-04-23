@@ -4,6 +4,7 @@
 	--ww-bg-primary: #fcfcfc;
 	--ww-bg-secondary: #fff;
 	--ww-bg-tertiary: #f0f0f0;
+	--ww-bg-accent: #f9f9f9;
 	--ww-text: #222;
 	--ww-text-secondary: #333;
 	--ww-text-tertiary: #444;
@@ -50,6 +51,7 @@
 	--ww-bg-primary: #1e1e1e;
 	--ww-bg-secondary: #252526;
 	--ww-bg-tertiary: #343434;
+	--ww-bg-accent: #2a2a2a;
 	--ww-text: #ddd;
 	--ww-text-secondary: #c0c0c0;
 	--ww-text-tertiary: #c0c0c0;
@@ -83,6 +85,7 @@
 		--ww-bg-primary: #1e1e1e;
 		--ww-bg-secondary: #252526;
 		--ww-bg-tertiary: #343434;
+		--ww-bg-accent: #2a2a2a;
 		--ww-text: #ddd;
 		--ww-text-secondary: #c0c0c0;
 		--ww-text-tertiary: #c0c0c0;
@@ -724,7 +727,7 @@ footer {
 .footer {
 	background-color: var(--ww-bg-tertiary);
 	padding: 5px 20px;
-	border-top: 1px dotted #ccc;
+	border-top: 1px dotted var(--ww-border);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	margin: 0;
 	float: left;
@@ -762,7 +765,7 @@ header:hover > span.article-header-meta a {
 }
 
 .page-meta li {
-	border-left: 1px dotted #ccc;
+	border-left: 1px dotted var(--ww-border);
 	float: left;
 	line-height: 1.2em;
 	margin: 0 .5em 0 -.5em;
@@ -770,7 +773,7 @@ header:hover > span.article-header-meta a {
 	white-space: nowrap;
 }
 [dir="rtl"] .page-meta li {
-	border: dotted #ccc;
+	border: dotted var(--ww-border);
 	border-width: 0 1px 0 0;
 	float: right;
 	margin: 0 -.5em 0 .5em;
@@ -807,7 +810,7 @@ header:hover > span.article-header-meta a {
 	background-color: var(--ww-bg-tertiary);
 	padding: 4px 20px;
 	margin: 0 -20px;
-	border-top: 1px dotted #ccc;
+	border-top: 1px dotted var(--ww-border);
 	border-bottom: 1px solid #eee;
 	float: left;
 	width: 100%;
@@ -1175,12 +1178,12 @@ td.file- {
 }
 
 .upload-dropzone {
-	border: 3px dashed #ccc;
+	border: 3px dashed var(--ww-border);
 	border-radius: 8px;
 	padding: 2rem;
 	text-align: center;
 	margin-bottom: 1rem;
-	background: #f9f9f9;
+	background: var(--ww-bg-accent);
 	transition: all 0.2s;
 }
 .upload-dropzone.dragover {
@@ -1236,7 +1239,7 @@ p.preview {
 .layout-box {
 	margin: .8em 2px 2px;
 	padding: 10px;
-	border: #ccc 1px dotted;
+	border: var(--ww-border) 1px dotted;
 	border-radius: .1rem;
 	background-color: var(--ww-bg-primary);
 }
@@ -1284,7 +1287,7 @@ a:target {
 	align-items: center;
 	padding: 0;
 	background: var(--we-toolbar-bg);
-	border: 1px solid #ccc;
+	border: 1px solid var(--ww-border);
 	list-style: none;
 	margin: 0;
 }
@@ -1835,7 +1838,7 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	justify-content: space-between;
 	font-size: 0.85rem;
 	color: #555;
-	background: #f9f9f9;
+	background: var(--ww-bg-accent);
 	border: 1px solid #ddd;
 	border-top: none;
 	padding: 4px 10px;
@@ -1992,37 +1995,31 @@ textarea.wikiedit-area.syntax-enabled {
 /* Optional dark-mode support for statusbar & fullscreen */
 :root[data-theme="dark"] {
 	.we-statusbar {
-		background: #2a2a2a;
+		background: var(--ww-bg-accent);
 		color: #aaa;
 		border-color: #444;
 	}
 	.we-statusbar .we-message {
 		color: #4ade80;
 	}
-	#page-edit:fullscreen {
-		background: #1e1e1e;
-	}
 }
 
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
 		.we-statusbar {
-			background: #2a2a2a;
+			background: var(--ww-bg-accent);
 			color: #aaa;
 			border-color: #444;
 		}
 		.we-statusbar .we-message {
 			color: #4ade80;
 		}
-		#page-edit:fullscreen {
-			background: #1e1e1e;
-		}
 	}
 }
 
 /* Fullscreen edit container */
 #page-edit:fullscreen {
-	background: #fff;
+	background: var(--ww-bg-primary);
 	padding: 4rem;
 	margin: 0;
 	height: 100vh;
@@ -2187,7 +2184,7 @@ textarea.wikiedit-area.syntax-enabled {
 	left: 0;
 	margin-top: 0;
 	background: #fff;
-	border: 1px solid #ccc;
+	border: 1px solid var(--ww-border);
 	border-radius: 4px;
 	box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 	padding: 0;
@@ -2223,7 +2220,7 @@ textarea.wikiedit-area.syntax-enabled {
 	z-index: 10000;
 	display: none;
 	background: var(--ww-bg-secondary);
-	border: 1px solid #ccc;
+	border: 1px solid var(--ww-border);
 	border-radius: 6px;
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 	min-width: 240px;
@@ -2739,7 +2736,7 @@ tr.lined:hover {
 }
 
 .menu li {
-	border-left: 1px dotted #ccc;
+	border-left: 1px dotted var(--ww-border);
 	float: left;
 	line-height: 1.2em;
 	margin: 0 0.5em 0 -0.5em;
@@ -2747,7 +2744,7 @@ tr.lined:hover {
 	white-space: nowrap;
 }
 [dir="rtl"] .menu li {
-	border: dotted #ccc;
+	border: dotted var(--ww-border);
 	border-width: 0 1px 0 0;
 	float: right;
 }
@@ -2900,8 +2897,8 @@ table.formation td {
 
 #page-handler ul ul li.active {
 	border: 1px solid #aaa;
-	border-right-color: #ccc;
-	border-bottom: 0 #ccc;
+	border-right-color: var(--ww-border);
+	border-bottom: 0 var(--ww-border);
 	background-color: var(--ww-bg-primary);
 	width: 100%;
 	padding: 0;
@@ -2951,7 +2948,7 @@ table.formation td {
 	margin-top: 0px;
 	padding-top: 4px;
 	left: 0;
-	border: 1px solid #ccc;
+	border: 1px solid var(--ww-border);
 	border-top-width: 0;
 	display: none;
 	z-index: 1000;
@@ -3646,7 +3643,7 @@ table.topics td {
 	padding: 5px;
 }
 .topics tr.topic {
-	background-color: #f9f9f9;
+	background-color: var(--ww-bg-accent);
 }
 
 .forum tbody tr:hover,
@@ -3709,7 +3706,7 @@ a.acl-private {
 	font-family: var(--ww-font-monospace);
 	background: rgba(51, 51, 51, 0.9) none repeat scroll 0 0;
 	bottom: 0;
-	color: #ccc;
+	color: var(--ww-border);
 	left: 0;
 	position: fixed;
 	text-align: center;
@@ -3893,7 +3890,7 @@ table.diff td {
 .diffdown-content {
 	display: none;
 	position: absolute;
-	background-color: #f9f9f9;
+	background-color: var(--ww-bg-accent);
 	min-width: 160px;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
