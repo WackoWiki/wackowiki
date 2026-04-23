@@ -823,9 +823,9 @@ class WikiEdit extends ProtoEdit {
     let applied = false;
 
     if (this.sel &&
-        this.sel.length >= openWithNl.length + closeWithNl.length &&
-        this.sel.startsWith(openWithNl) &&
-        this.sel.endsWith(closeWithNl)) {
+      this.sel.length >= openWithNl.length + closeWithNl.length &&
+      this.sel.startsWith(openWithNl) &&
+      this.sel.endsWith(closeWithNl)) {
       // Case 1: Whole block (including wrappers) is selected.
       const newSel = this.sel.slice(openWithNl.length, -closeWithNl.length);
       const newValue = this.sel1 + newSel + this.sel2;
@@ -838,7 +838,7 @@ class WikiEdit extends ProtoEdit {
       this._updateSyntaxHighlight();
       applied = true;
     } else if (this.sel1.endsWith(openWithNl) &&
-               this.sel2.startsWith(closeWithNl)) {
+      this.sel2.startsWith(closeWithNl)) {
       // Case 2: Inner content selected, wrappers are outside (common after first wrap).
       const newValue = this.sel1.slice(0, -openWithNl.length) + this.sel + this.sel2.slice(closeWithNl.length);
       const newStart = this.sel1.length - openWithNl.length;
@@ -890,9 +890,9 @@ class WikiEdit extends ProtoEdit {
     let applied = false;
 
     if (this.sel &&
-        this.sel.length >= tagLen + tag2Len &&
-        this.sel.startsWith(Tag) &&
-        this.sel.endsWith(Tag2)) {
+      this.sel.length >= tagLen + tag2Len &&
+      this.sel.startsWith(Tag) &&
+      this.sel.endsWith(Tag2)) {
       // Case 1: Tags are inside the current selection (e.g. user selected
       // the whole "**text**" or the editor-selected inner content after wrap).
       const newSel = this.sel.slice(tagLen, -tag2Len);
@@ -906,9 +906,9 @@ class WikiEdit extends ProtoEdit {
       this._updateSyntaxHighlight();
       applied = true;
     } else if (this.sel1.length >= tagLen &&
-               this.sel1.endsWith(Tag) &&
-               this.sel2.length >= tag2Len &&
-               this.sel2.startsWith(Tag2)) {
+      this.sel1.endsWith(Tag) &&
+      this.sel2.length >= tag2Len &&
+      this.sel2.startsWith(Tag2)) {
       // Case 2: Tags surround the current selection (most common after first click).
       const newValue = this.sel1.slice(0, -tagLen) + this.sel + this.sel2.slice(tag2Len);
       const newStart = this.sel1.length - tagLen;
@@ -2188,8 +2188,21 @@ class WikiEdit extends ProtoEdit {
    */
   markdownToWacko(text) {
     let w = text;
+    const placeholders = [];
 
-    // List normalization for exact WackoWiki syntax
+    // Extract ```code blocks``` and replace with %%...%%
+    w = w.replace(/```([\s\S]*?)```/g, (match, content) => {
+      placeholders.push('%%' + content + '%%');
+      return `@@CODEBLOCK_${placeholders.length - 1}@@`;
+    });
+
+    // Extract `inline code` and replace with #...#
+    w = w.replace(/`([^`]*)`/g, (match, content) => {
+      placeholders.push('##' + content + '##');
+      return `@@INLINECODE_${placeholders.length - 1}@@`;
+    });
+
+	// List normalization for exact WackoWiki syntax
     w = w.replace(
       /^(?!\s*\*\*)(\s*)([*+-]|\d+\.|[A-Za-z]\.)([ \t]*)/gm,
       (match, indent, marker, postSpace) => {
@@ -2218,8 +2231,8 @@ class WikiEdit extends ProtoEdit {
     // Bold / Italic / Strikethrough / Code / Small
     w = w.replace(/\_\_(.*?)\_\_/g, '**$1**');
     w = w.replace(/~~(.*?)~~/g, '--$1--');
-    w = w.replace(/```(.*?)```/gs, '%%$1%%');
-    w = w.replace(/`(.*?)`/g, '##$1##');
+    w = w.replace(/```(.*?)```/gs, '%%$1%%'); // Will be replaced by placeholder
+    w = w.replace(/`(.*?)`/g, '##$1##');      // Will be replaced by placeholder
     w = w.replace(/<small>(.*?)<\/small>/g, '++$1++');
 
     // Images ![alt](url) → ((url alt))
@@ -2233,6 +2246,10 @@ class WikiEdit extends ProtoEdit {
 
     // ==================== TABLES: Markdown → Wacko ====================
     w = w.replace(/(\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gs, (block) => this._markdownTableToWacko(block));
+
+    // Restore code blocks and inline code
+    w = w.replace(/@@CODEBLOCK_(\d+)@@/g, (match, index) => placeholders[index]);
+    w = w.replace(/@@INLINECODE_(\d+)@@/g, (match, index) => placeholders[index]);
 
     return w;
   }
@@ -2390,7 +2407,7 @@ class WikiEdit extends ProtoEdit {
 
     const width = ta.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
     const height = ta.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-	const padding = parseFloat(style.padding) + parseFloat(style.borderTopWidth); // hack: workaround for ignoring border values for <pre>
+    const padding = parseFloat(style.padding) + parseFloat(style.borderTopWidth); // hack: workaround for ignoring border values for <pre>
 
     this.highlighter.style.width = `${width}px`;
     this.highlighter.style.height = `${height}px`;
@@ -2424,7 +2441,7 @@ class WikiEdit extends ProtoEdit {
     html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">$1$2$1</span>');
     html = html.replace(/\*\*(?!\s)(.+?)(?<!\s)\*\*/g, '<span class="wiki-bold">**$1**</span>');
     html = html.replace(/\/\/(?!\s)(.+?)(?<!\s)\/\//g, '<span class="wiki-italic">//$1//</span>');
-	html = html.replace(/\+\+(?!\s)(.+?)(?<!\s)\+\+/g, '<span class="wiki-italic">++$1++</span>');
+    html = html.replace(/\+\+(?!\s)(.+?)(?<!\s)\+\+/g, '<span class="wiki-italic">++$1++</span>');
     html = html.replace(/__(?!\s)(.+?)(?<!\s)__/g, '<span class="wiki-underline">__$1__</span>');
     html = html.replace(/--(?!\s)(.+?)(?<!\s)--/g, '<span class="wiki-strike">--$1--</span>');
     html = html.replace(/##(?!\s)(.+?)(?<!\s)##/g, '<span class="wiki-code">##$1##</span>');
