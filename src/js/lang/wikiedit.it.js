@@ -82,5 +82,7 @@ lang = {
 	AcHelp: 'Completamento Automatico (Ctrl+Spazio)',
 	AcReset: 'Reset autocomplete',
 	AcSuggestions: 'Suggerimenti di completamento automatico',
+	Chars: 'caratteri',
+	Words: 'parole',
 	HelpAboutTip: ' Scorciatoie:\n' + ' Ctrl+B - Grassetto\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Sottolinea\n' + ' Ctrl+Maiusc+S - Sbarratura\n' + ' Ctrl+Shift+1 .. 5 - Intestazione 1..5\n' + ' Alt+I o Ctrl+T - Rientro\n' + ' Alt+U o Ctrl+Maiusc+T - Annulla la lettera\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Collega con la descrizione\n' + ' Ctrl+Maiusc+L - Elenco Non Ordinato\n' + ' Ctrl+Maiusc+N - Elenco Ordinato\n' + ' Ctrl+Maiusc+O - Elenco Ordinato\n' + ' Ctrl+= - Testo piccolo\n' + ' Ctrl+Maiusc+Meno - Linea orizzontale\n' + ' \n'
 };

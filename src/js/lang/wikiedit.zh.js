@@ -82,5 +82,7 @@ lang = {
 	AcHelp: '自动完成(Ctrl+Space)',
 	AcReset: '重置自动完成',
 	AcSuggestions: '自动完成建议',
+	Chars: '字符数',
+	Words: '单词',
 	HelpAboutTip: ' 快捷方式：\n' + ' Ctrl+B - 粗体\n' + ' Ctrl+I - 斜体\n' + ' Ctrl+U - 下划线\n' + ' Ctrl+Shift+S - 删除线\n' + ' Ctrl+Shift+1... 5 - 标题 1..5\n' + ' Alt+I 或 Ctrl+T - 缩进\n' + ' Alt+U 或 Ctrl+Shift+T - 取消缩进\n' + ' Ctrl+J - 标记 (!!)\n' + ' 标记\n' + ' Alt+L - 链接\n' + ' Ctrl+L - 带描述的链接\n' + ' Ctrl+Shift+L - 无序列表\n' + ' Ctrl+Shift+N - 顺序列表\n' + ' Ctrl+Shift+O - 排序列表\n' + ' Ctrl+= - 小文本\n' + ' Ctrl+Shift+Minus - 水平线\n' + ' \n'
 };

@@ -82,5 +82,7 @@ lang = {
 	AcHelp: 'Automatické dokončování (Ctrl + mezera)',
 	AcReset: 'Reset autocomplete',
 	AcSuggestions: 'Návrhy automatického dokončování',
+	Chars: 'Znaky',
+	Words: 'slova',
 	HelpAboutTip: ' Zkratky:\n' + ' Ctrl+B - tučné\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - podtržení\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 5 - Položka 1..5\n' + ' Alt+I nebo Ctrl+T - odsazení\n' + ' Alt+U nebo Ctrl+Shift+T - Odsazení\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - odkaz\n' + ' Ctrl+L - Propojit s popisem\n' + ' Ctrl+Shift+L - neuspořádaný seznam\n' + ' Ctrl+Shift+N - Objednaný seznam\n' + ' Ctrl+Shift+O - Objednaný seznam\n' + ' Ctrl+= - Malý text\n' + ' Ctrl+Shift+Minus - vodorovná čára\n' + ' \n'
 };

@@ -82,5 +82,7 @@ lang = {
 	AcHelp: '自動完成 (Ctrl+Space)',
 	AcReset: '重設自動完成',
 	AcSuggestions: '自動完成建議',
+	Chars: 'chars',
+	Words: 'words',
 	HelpAboutTip: ' 捷徑:\n' + ' Ctrl+B - Bold\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Underline\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 5 - Heading 1..5\n' + ' Alt+I or Ctrl+T - Indent\n' + ' Alt+U or Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link with description\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Ordered List\n' + ' Ctrl+Shift+O - Ordered List\n' + ' Ctrl+= - Small text\n' + ' Ctrl+Shift+Minus - Horizontal line\n' + ' \n'
 };

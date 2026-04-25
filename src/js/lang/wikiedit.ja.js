@@ -82,5 +82,7 @@ lang = {
 	AcHelp: 'オートコンプリート（Ctrl + スペース）',
 	AcReset: 'Reset autocomplete',
 	AcSuggestions: '自動補完の提案',
+	Chars: '文字',
+	Words: '単語',
 	HelpAboutTip: ' ショートカット:\n' + ' Ctrl+B - 太字\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - 下線\n' + ' Ctrl+Shift+S - 取り消し線\n' + ' Ctrl+Shift+1 .. 5 - 見出し 1..5\n' + ' Alt+I または Ctrl+T - インデント\n' + ' Alt+UまたはCtrl+Shift+T - インデント解除\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - リンク\n' + ' Ctrl+L - Link with description\n' + ' Ctrl+Shift+L - 順序なしリスト\n' + ' Ctrl+Shift+N - 順序付きリスト\n' + ' Ctrl+Shift+O - 順序付きリスト\n' + ' Ctrl+= - 小文字\n' + ' Ctrl+Shift+Minus - 水平線\n' + ' \n'
 };

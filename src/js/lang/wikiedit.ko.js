@@ -82,5 +82,7 @@ lang = {
 	AcHelp: '자동완성 (Ctrl+Space)',
 	AcReset: '자동완성 초기화',
 	AcSuggestions: '자동완성 제안',
+	Chars: 'chars',
+	Words: 'words',
 	HelpAboutTip: ' 바로가기:\n' + ' Ctrl+B - Bold\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Underline\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 5 - Heading 1..5\n' + ' Alt+I or Ctrl+T - Indent\n' + ' Alt+U or Ctrl+Shift+T - Unindent\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - Link\n' + ' Ctrl+L - Link with description\n' + ' Ctrl+Shift+L - Unordered List\n' + ' Ctrl+Shift+N - Ordered List\n' + ' Ctrl+Shift+O - Ordered List\n' + ' Ctrl+= - Small text\n' + ' Ctrl+Shift+Minus - Horizontal line\n' + ' \n'
 };

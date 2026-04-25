@@ -82,5 +82,7 @@ lang = {
 	AcHelp: 'الإكمال التلقائي (Ctrl+Space)',
 	AcReset: 'Reset autocomplete',
 	AcSuggestions: 'الإكمال التلقائي للاقتراحات',
+	Chars: 'الأحرف',
+	Words: 'الكلمات',
 	HelpAboutTip: ' الاختصار:\n' + ' Ctrl+B - عريض\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - أسطر\n' + ' Ctrl+Shift+S - ضربة\n' + ' Ctrl+Shift+1 .. 5 - العنوان 1..5\n' + ' Alt+I أو Ctrl+T - المستفيد\n' + ' Alt+U أو Ctrl+Shift+T - غير داخلي\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - رابط\n' + ' Ctrl+L - رابط مع الوصف\n' + ' Ctrl+Shift+L - القائمة غير المطلوبة\n' + ' Ctrl+Shift+N - القائمة المطلوبة\n' + ' Ctrl+Shift+O - القائمة المطلوبة\n' + ' Ctrl+= - نص صغير\n' + ' Ctrl+Shift+Minus - السطر الأفقي\n' + ' \n'
 };

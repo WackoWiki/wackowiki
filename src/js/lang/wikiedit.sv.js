@@ -82,5 +82,7 @@ lang = {
 	AcHelp: 'Autokomplettera (Ctrl+-utrymme)',
 	AcReset: 'Reset autocomplete',
 	AcSuggestions: 'Autokomplettera förslag',
+	Chars: 'tecken',
+	Words: 'ord',
 	HelpAboutTip: ' Genvägar:\n' + ' Ctrl+B - Fet\n' + ' Ctrl+I - Italic\n' + ' Ctrl+U - Understruken\n' + ' Ctrl+Shift+S - Strikethrough\n' + ' Ctrl+Shift+1 .. 5 - Rubrik 1..5\n' + ' Alt+I eller Ctrl+T - Indent\n' + ' Alt+U eller Ctrl+Shift+T - Avgränsa\n' + ' Ctrl+J - MarkUp (!!)\n' + ' Ctrl+H - MarkUp (??)\n' + ' Alt+L - länk\n' + ' Ctrl+L - Länk till beskrivning\n' + ' Ctrl+Shift+L - Obeställd lista\n' + ' Ctrl+Shift+N - Ordnad lista\n' + ' Ctrl+Shift+O - Ordnad lista\n' + ' Ctrl+= - Liten text\n' + ' Ctrl+Shift+Minus - Horisontell linje\n' + ' \n'
 };

@@ -8,7 +8,7 @@ lang = {
 	HelpAbout: 'Yardım & Hakkında',
 	HelpFormatting: 'Yardım',
 	HelpFormattingTip: 'Wiki biçimlendirme ile ilgili yardım',
-	HelpFormattingPage: 'Doc/Turkish/Formatting',
+	HelpFormattingPage: 'Doc/English/Formatting',
 	Heading1: 'Başlık 1',
 	Heading2: 'Başlık 2',
 	Heading3: 'Başlık 3',
