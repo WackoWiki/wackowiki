@@ -1181,7 +1181,6 @@ td.file- {
 	border: 3px dashed var(--ww-border);
 	border-radius: 8px;
 	padding: 2rem;
-	text-align: center;
 	margin-bottom: 1rem;
 	background: var(--ww-bg-accent);
 	transition: all 0.2s;
@@ -1206,9 +1205,9 @@ td.file- {
 .upload-tab-content.hidden { display: none; }
 
 .btn-select-files {
-  margin: 0.5rem 0;
+/*   margin: 0.5rem 0;
   padding: 0.6rem 1.5rem;
-  font-size: 1rem;
+  font-size: 1rem; */
 }
 
 .upload-file-remove {
@@ -1275,19 +1274,6 @@ td.file- {
   margin-top: 1.2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;        /* centers the whole group horizontally */
-  gap: 0.6rem;
-}
-
-.radio-line {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  min-width: 450px;           /* optional: makes both lines same width */
-}
-
-.radio-line input[type="radio"] {
-  margin-right: 0.6rem;
 }
 
 /* Optional: make the active tab more obvious */

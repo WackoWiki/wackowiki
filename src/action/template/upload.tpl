@@ -12,21 +12,19 @@
 
 			<!-- Tabs: AJAX (modern) vs Classic (no-JS fallback) -->
 			<div class="upload-tabs">
-				<button type="button" class="tab-btn" data-tab="ajax">Drag & Drop / Multiple Files</button>
-				<button type="button" class="tab-btn active" data-tab="classic">Single File Upload</button>
+				<button type="button" class="tab-btn" data-tab="ajax">JavaScript</button>
+				<button type="button" class="tab-btn active" data-tab="classic">Classic</button>
 			</div>
 
 			<!-- AJAX Tab - hidden by default (for no-JS fallback) -->
 			<div id="tab-ajax" class="upload-tab-content hidden">
-				<div class="upload-dropzone">
+				<div class="upload-dropzone" aria-label="Drop files here to upload - multiple files supported">
 					<div class="dropzone-inner">
-						<p><strong>Drop files here</strong></p>
-						<p>or</p>
+						<p><strong>Drop files here to upload</strong></p>
+						<!-- Multiple files supported • Paste from clipboard (Ctrl+V) -->
+						<p class="msg hint">[ ' _t: UploadMax ' ] [ ' size ' ]</p>
 						<button type="button" class="btn-select-files">Select files</button>
-						<p class="small">Multiple files supported • Paste from clipboard (Ctrl+V)</p>
-						<p class="small hint">[ ' _t: UploadMax ' ] [ ' size ' ]</p>
 
-						<!-- Global / Local - one per line, centered, radio bullets aligned -->
 						<div class="upload-location">
 							<label class="radio-line"><input type="radio" name="upload_to" value="local" checked> [ ' _t: UploadLocalText ' ]</label>
 							<label class="radio-line"><input type="radio" name="upload_to" value="global"> [ ' _t: UploadGlobalText ' ]</label>
