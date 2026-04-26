@@ -560,10 +560,15 @@ if (isset($_POST['upload']) && isset($_POST['ajax']))
 		// Regenerate a fresh nonce for the next upload (fixes multi-file CSRF)
 		$new_nonce = $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
 
-		echo json_encode([
-			'filename'  => $file_name,
-			'new_nonce' => $new_nonce
-		]);
+		$result = [
+			'filename'   => $new_name ?? $t_name . '.' . $ext,   // adjust variable names to your code
+			'file_size'  => filesize($dir . '/' . ($new_fs_name ?? $fs_name) . '.' . $ext),
+			'new_nonce'  => $new_nonce ?? null,   // if you regenerate nonce
+			'success'    => true
+			// you can also add 'message' => $this->get_message() if you collect them
+		];
+
+		echo json_encode($result, JSON_UNESCAPED_UNICODE);
 	}
 	else
 	{

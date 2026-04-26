@@ -1199,6 +1199,104 @@ td.file- {
 .upload-success { background: #d4edda; color: #155724; }
 .upload-error   { background: #f8d7da; color: #721c24; }
 
+.upload-tabs { display: flex; margin-bottom: 1rem; border-bottom: 2px solid #ddd; }
+.tab-btn { padding: 0.75rem 1.5rem; background: none; border: none; cursor: pointer; }
+.tab-btn.active { border-bottom: 3px solid #007acc; font-weight: bold; }
+
+.upload-tab-content.hidden { display: none; }
+
+.btn-select-files {
+  margin: 0.5rem 0;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+}
+
+.upload-file-remove {
+  background: #ccc;
+  color: #333;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.upload-file-remove:hover { background: #e74c3c; color: white; }
+
+
+.upload-file-item { 
+  display: flex; 
+  align-items: center; 
+  padding: 0.75rem; 
+  border: 1px solid #ddd; 
+  margin: 0.5rem 0; 
+  border-radius: 6px; 
+  background: #fff; 
+}
+.upload-progress-container {
+  flex: 1;
+  margin: 0 1rem;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.upload-progress-bar {
+  width: 100%;
+  height: 100%;
+  background: #e0e0e0;
+}
+
+.upload-progress-fill {
+  height: 100%;
+  background: #007acc;           /* blue progress */
+  width: 0%;
+  transition: width 0.4s ease-in-out;
+}
+
+.upload-success .upload-progress-fill {
+  background: #28a745;           /* green when done */
+}
+
+.upload-success { color: #155724; }
+.upload-error   { color: #721c24; }
+
+.success-box { 
+  background: #d4edda; 
+  color: #155724; 
+  padding: 1rem; 
+  border-radius: 6px; 
+  margin-top: 1rem; 
+}
+
+.upload-location {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* centers the whole group horizontally */
+  gap: 0.6rem;
+}
+
+.radio-line {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  min-width: 450px;           /* optional: makes both lines same width */
+}
+
+.radio-line input[type="radio"] {
+  margin-right: 0.6rem;
+}
+
+/* Optional: make the active tab more obvious */
+.tab-btn.active {
+  background: #fff;
+  border-bottom: 3px solid #007acc;
+  font-weight: bold;
+}
+
 /* caption */
 .caption {
 	color: #1d1d1d;

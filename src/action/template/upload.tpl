@@ -2,7 +2,7 @@
 	[ ' help ' ]
 	[ ' message ' ]
 	[= u _ =
-		<form action="[ ' href: upload ' ]" method="post" name="upload" enctype="multipart/form-data">
+		<form action="[ ' href: upload ' ]" method="post" name="upload" enctype="multipart/form-data" data-base-path="[ ' basepath ' ]">
 			[ ' csrf: upload ' ]
 			<input type="hidden" name="upload" value="1">
 			[= s _ =
@@ -10,16 +10,36 @@
 			=]
 			<input type="hidden" name="MAX_FILE_SIZE" value="[ ' maxfilesize ' ]">
 
-			<!-- Dropzone for multiple files, drag & drop, paste (JS only) -->
-			<div class="upload-dropzone" id="upload-dropzone">
-				<div class="dropzone-inner">
-					<p><strong>Drop files here</strong></p>
-					<p>or paste from clipboard (Ctrl + V)</p>
-					<p class="small">Multiple files supported • Click to select files</p>
-					<p class="small hint">Single-file form below works without JavaScript</p>
-				</div>
+			<!-- Tabs: AJAX (modern) vs Classic (no-JS fallback) -->
+			<div class="upload-tabs">
+				<button type="button" class="tab-btn" data-tab="ajax">Drag & Drop / Multiple Files</button>
+				<button type="button" class="tab-btn active" data-tab="classic">Single File Upload</button>
 			</div>
 
+			<!-- AJAX Tab - hidden by default (for no-JS fallback) -->
+			<div id="tab-ajax" class="upload-tab-content hidden">
+				<div class="upload-dropzone">
+					<div class="dropzone-inner">
+						<p><strong>Drop files here</strong></p>
+						<p>or</p>
+						<button type="button" class="btn-select-files">Select files</button>
+						<p class="small">Multiple files supported • Paste from clipboard (Ctrl+V)</p>
+						<p class="small hint">[ ' _t: UploadMax ' ] [ ' size ' ]</p>
+
+						<!-- Global / Local - one per line, centered, radio bullets aligned -->
+						<div class="upload-location">
+							<label class="radio-line"><input type="radio" name="upload_to" value="local" checked> [ ' _t: UploadLocalText ' ]</label>
+							<label class="radio-line"><input type="radio" name="upload_to" value="global"> [ ' _t: UploadGlobalText ' ]</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Status list will be inserted here by JS -->
+				<div class="upload-status-list"></div>
+			</div>
+
+			<!-- Classic Tab - visible by default (no-JS) -->
+			<div id="tab-classic" class="upload-tab-content">
 			<table class="upload-table">
 				<tr>
 					<th>
@@ -96,5 +116,14 @@
 					</td>
 				</tr>
 			</table>
+			</div>
+			<noscript>
+				<div class="errorbox-js">
+					<strong>JavaScript is disabled.</strong><br>
+					The modern drag & drop upload is not available.<br>
+					Please use the <strong>Single File Upload (Classic)</strong> option above.
+				</div>
+			</noscript>
 		</form>
+		
 	=]
