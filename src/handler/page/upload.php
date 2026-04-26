@@ -30,6 +30,7 @@ $is_duplicate	= false;
 $is_global		= null;
 $is_image		= false;
 $prefix			= $this->prefix;
+$ajax			= isset($_POST['ajax']);
 
 $this->ensure_page(true);
 
@@ -445,7 +446,7 @@ if (isset($_POST['upload']) & $can_upload)
 									'page_id		= ' . (int) $page_id . ' ' .
 								'LIMIT 1');
 
-							if (!$is_duplicate)
+							if (!$is_duplicate && !$ajax)
 							{
 								$this->set_message($this->_t('UploadDone'), 'success');
 							}
@@ -462,7 +463,7 @@ if (isset($_POST['upload']) & $can_upload)
 								$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $file_name, $file_size_ft));
 							}
 
-							if (!isset($_POST['ajax']))
+							if (!$ajax)
 							{
 								$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
 							}
@@ -519,14 +520,10 @@ if (isset($_POST['upload']) & $can_upload)
 	}
 
 	// set error message and reload
-	if ($error)
+	if ($error && !$ajax)
 	{
 		$this->set_message($error, 'error');
-
-		if (!isset($_POST['ajax']))
-		{
-			$this->reload_me();
-		}
+		$this->reload_me();
 	}
 }
 else
@@ -551,7 +548,7 @@ else
 }
 
 // === AJAX JSON RESPONSE FOR WIKIEDIT DRAG & DROP + PASTE ===
-if (isset($_POST['upload']) && isset($_POST['ajax']))
+if (isset($_POST['upload']) && $ajax)
 {
 	header('Content-Type: application/json; charset=utf-8');
 
@@ -561,10 +558,12 @@ if (isset($_POST['upload']) && isset($_POST['ajax']))
 		$new_nonce = $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
 
 		$result = [
-			'filename'   => $new_name ?? $t_name . '.' . $ext,   // adjust variable names to your code
-			'file_size'  => filesize($dir . '/' . ($new_fs_name ?? $fs_name) . '.' . $ext),
+			'filename'   => $file_name,   // adjust variable names to your code
+			'file_size'  => $file_size,
+			'file_id'    => (int) $file['file_id'],
 			'new_nonce'  => $new_nonce ?? null,   // if you regenerate nonce
-			'success'    => true
+			'success'    => true,
+			#'message'    => $message
 			// you can also add 'message' => $this->get_message() if you collect them
 		];
 

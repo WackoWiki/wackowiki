@@ -100,6 +100,7 @@ if ($this->can_upload(true))
 	}
 
 	$tpl->size = $this->factor_multiples($maxfilesize, 'binary', true, true);
+	$tpl->basepath = $this->href();
 
 	if ($global)
 	{

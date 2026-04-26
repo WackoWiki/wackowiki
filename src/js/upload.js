@@ -3,17 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!forms.length) return;
 
   forms.forEach(form => {
-    const dropzone      = form.querySelector('.upload-dropzone');
-    const statusList    = form.querySelector('.upload-status-list');
-    const tabAjax       = document.getElementById('tab-ajax');
-    const tabClassic    = document.getElementById('tab-classic');
-    const tabs          = form.querySelectorAll('.tab-btn');
+    const dropzone = form.querySelector('.upload-dropzone');
+    const statusList = form.querySelector('.upload-status-list');
+    const tabAjax = document.getElementById('tab-ajax');
+    const tabClassic = document.getElementById('tab-classic');
+    const tabs = form.querySelectorAll('.tab-btn');
 
     if (!dropzone || !tabAjax || !tabClassic) return;
 
-    const uploadUrl     = form.action;
-    const nonceInput    = form.querySelector('input[name="_nonce"]');
-    let currentNonce    = nonceInput ? nonceInput.value : '';
+    const uploadUrl = form.action;
+    const nonceInput = form.querySelector('input[name="_nonce"]');
+    let currentNonce = nonceInput ? nonceInput.value : '';
 
     // Tab handling
     const switchTab = (tabName) => {
@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helpers
     const Ut = window.Ut || {};
-    Ut.escapeHtml = (str) => str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);
+    Ut.escapeHtml = (str) => str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
     Ut.formatBytes = (bytes) => {
       if (!bytes) return '0 B';
       const k = 1024;
-      const sizes = ['B','KB','MB','GB'];
+      const sizes = ['B', 'KB', 'MB', 'GB'];
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
     };
@@ -82,27 +82,28 @@ document.addEventListener('DOMContentLoaded', () => {
       return item;
     };
 
-    const updateItem = (item, text, progress = null, type = '') => {
-      const statusEl = item.querySelector('.upload-file-status');
-      statusEl.textContent = text;
-      if (type) statusEl.className = `upload-file-status upload-${type}`;
+    // Replace the entire info block on success to avoid any duplication
+    const updateItem = (item, html, progress = null, type = '') => {
+      const infoEl = item.querySelector('.upload-file-info');
+
+      if (type === 'success') {
+        // On success we replace the whole info line with a single clean line
+        infoEl.innerHTML = html;
+      } else {
+        // During upload we only update the status part
+        const statusEl = item.querySelector('.upload-file-status');
+        statusEl.innerHTML = html;
+      }
+
+      if (type) {
+        const statusEl = item.querySelector('.upload-file-status') || infoEl;
+        statusEl.className = `upload-file-status upload-${type}`;
+      }
 
       if (progress !== null) {
         const fill = item.querySelector('.upload-progress-fill');
         if (fill) fill.style.width = `${Math.min(100, progress)}%`;
       }
-    };
-
-    const showSummary = (successCount, total, isGlobal) => {
-      const summary = document.createElement('div');
-      summary.className = 'upload-summary success-box';
-      const link = isGlobal ? 'attachments?files=global&order=time&dir=desc' : 'attachments?files=local&order=time&dir=desc';
-      summary.innerHTML = `
-        <strong>${successCount} of ${total} file(s) uploaded successfully.</strong><br>
-        <a href="${form.dataset.basePath || ''}${link}">
-          → View and manage attachments
-        </a>`;
-      dropzone.parentNode.appendChild(summary);
     };
 
     const uploadFile = async (file) => {
@@ -123,8 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
         try { result = await response.json(); } catch(e) {}
 
         if (response.ok && result.filename) {
-          const isGlobal = form.querySelector('input[name="upload_to"]:checked')?.value === 'global';
-          updateItem(item, `✓ ${result.filename} (${Ut.formatBytes(result.file_size || file.size)})`, 100, 'success');
+          let successHtml = `${Ut.escapeHtml(result.filename)} (${Ut.formatBytes(result.file_size || file.size)})`;
+
+
+          // Add translated "edit metadata" link
+          if (result.file_id) {
+            const metaLink = `${form.dataset.basePath || ''}/filemeta?m=show&file_id=${result.file_id}`;
+            const editText = this.lang?.EditMetadata || 'edit metadata';   // fallback if lang not available
+            successHtml += ` <a href="${metaLink}" target="_blank" class="filemeta-link">(${editText})</a>`;
+          }
+
+          updateItem(item, successHtml, 100, 'success');
+
           if (result.new_nonce) {
             currentNonce = result.new_nonce;
             if (nonceInput) nonceInput.value = currentNonce;
@@ -136,6 +147,19 @@ document.addEventListener('DOMContentLoaded', () => {
         updateItem(item, 'Network error', null, 'error');
       }
     };
+
+    const showSummary = (successCount, total, isGlobal) => {
+      const summary = document.createElement('div');
+      summary.className = 'upload-summary success-box';
+      const link = isGlobal ? 'attachments?files=global&order=time&dir=desc' : 'attachments?files=local&order=time&dir=desc';
+      summary.innerHTML = `
+        <strong>${successCount} of ${total} file(s) uploaded successfully.</strong><br>
+        <a href="${form.dataset.basePath || ''}/${link}">
+          → View and manage attachments
+        </a>`;
+      dropzone.parentNode.appendChild(summary);
+    };
+
 
     const uploadFiles = async (files) => {
       statusList.innerHTML = '';
@@ -176,11 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // FIXED: Do not trigger file dialog when clicking on upload-location radios
     dropzone.addEventListener('click', e => {
       if (e.target.closest('.btn-select-files') ||
-          e.target.closest('.upload-location') ||
-          e.target.closest('input[type="radio"]')) {
+        e.target.closest('.upload-location') ||
+        e.target.closest('input[type="radio"]')) {
         return;
       }
       selectBtn?.click();
