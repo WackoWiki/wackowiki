@@ -10,7 +10,6 @@ extract(array_merge(['default' => 'wacko', 'source' => $this->tag, 'copy_button'
 $div_id = 'cb-' . Ut::random_token(7);
 echo '<!--notypo-->';
 
-// copy to clipboard
 if ($copy_button)
 {
 	$this->copy_to_clipboard();

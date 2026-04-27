@@ -222,7 +222,6 @@ else if ($mode && !empty($file))
 				$tpl->m_image		= $this->link($file_tag, '', '', '', null, null, null, false);
 			}
 
-			// copy to clipboard
 			$this->copy_to_clipboard();
 			$tpl->s_token = 'cb-' . Ut::random_token(7);
 

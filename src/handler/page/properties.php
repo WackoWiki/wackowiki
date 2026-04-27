@@ -121,7 +121,6 @@ else
 	// load settings (shows only if owner is current user or Admin)
 	if ($this->is_owner() || $this->is_admin())
 	{
-		// copy to clipboard
 		$this->copy_to_clipboard();
 
 		$tpl->enter('g_f_');

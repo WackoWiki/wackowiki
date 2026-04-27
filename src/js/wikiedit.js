@@ -5,6 +5,17 @@
  * Licensed BSD © Roman Ivanov, Evgeny Nedelko, WackoWiki Team
  */
 
+if (typeof window.Log === 'undefined') {
+    window.Log = {
+        debug: console.debug.bind(console),
+        log:   console.log.bind(console),
+        info:  console.info.bind(console),
+        warn:  console.warn.bind(console),
+        error: console.error.bind(console),
+        success: (...args) => console.log('%c✓', 'color:#28a745;font-weight:bold', ...args)
+    };
+}
+
 class WikiEdit extends ProtoEdit {
   constructor() {
     super();

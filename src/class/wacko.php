@@ -9773,7 +9773,7 @@ class Wacko
 
 	function copy_to_clipboard()
 	{
-		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/clipboard.js"></script>');
+		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/clipboard.js" defer></script>');
 	}
 
 	/**
