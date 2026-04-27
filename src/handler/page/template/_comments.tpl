@@ -84,6 +84,17 @@
 							data-can-upload="[ ' upload ' ]"
 							data-upload-nonce="[ ' nonce ' ]"
 							required>[ ' payload | pre ' ]</textarea>
+						<script>
+							wE = new WikiEdit();
+								[= autocomplete _ =
+									if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: show ' ]" ); }
+								=]
+							wE.init('addcomment', '[ ' wikiedit ' ]');
+							[= user _ =
+								var timeout = [ ' heartbeat ' ];
+								var name = 'add_comment';
+							=]
+						</script>
 						[= a _ =
 							<input type="checkbox" name="noid_publication" id="noid_publication" value="[ ' pageid ' ]" [ ' checked ' ]>
 							<label for="noid_publication">[ ' _t: PostAnonymously ' ]</label>
@@ -96,17 +107,6 @@
 						=]
 						<br>
 						[ ' captcha ' ]
-						<script>
-							wE = new WikiEdit();
-								[= autocomplete _ =
-									if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: show ' ]" ); }
-								=]
-							wE.init('addcomment', '[ ' wikiedit ' ]');
-							[= user _ =
-								var timeout = [ ' heartbeat ' ];
-								var name = 'add_comment';
-							=]
-						</script>
 						<button type="submit" class="btn-ok" name="save" accesskey="s">[ ' _t: AddCommentButton ' ]</button>
 						<button type="submit" class="btn-ok" name="preview">[ ' _t: PreviewButton ' ]</button>
 					</form>
