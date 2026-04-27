@@ -25,7 +25,7 @@
 				</span>
 			</header>
 		=]
-		<section id="section-content" class="page" data-dbclick="page">
+		<section id="section-content" class="page dbclick">
 			[ ' data | pre ' ]
 		</section>
 		[= p _ =

@@ -59,7 +59,7 @@ _common include file for themes
 	=]
 	[= doubleclick _ =
 		<script>
-			var edit = "[ ' href | e js ' ]";
+			document.documentElement.dataset.editUrl = "[ ' href | e js ' ]";
 		</script>
 	=]
 	[ ' additions ' ]

@@ -25,17 +25,12 @@ window.DEBUG_MODE = window.DEBUG_MODE ??
 
 // Global configuration variables
 let wikiedit;   // WikiEdit instance or config
-let dbclick = 'page';
-var edit;       // URL to open on double-click
 var timeout;    // session heartbeat interval in seconds
 var ename;      // name of the editor form element
-
-let cf_modified = false;   // track unsaved changes
 
 // Main initializer – called on page load
 function all_init() {
   if (wikiedit) we_init(wikiedit);           // we_init is defined by WikiEdit class
-  if (dbclick) dclick();
   if (timeout) userSessionHeartbeat(timeout, ename);
 }
 
@@ -56,29 +51,60 @@ function new_freecap() {
   img.src = src + separator + Math.round(Math.random() * 100000);
 }
 
-// Double-click to edit
-function dclick() {
-  const pageShow = document.getElementById('section-content');
-  if (!pageShow) return;
+/**
+ * Double-click to edit - Final robust version
+ */
+(function() {
+  function initDoubleClick() {
+    const editUrl = document.documentElement.dataset.editUrl;
 
-  // Skip double-click editing when a form is already present on the page
-  if (pageShow.querySelector('#section-content form')) return;
+    if (!editUrl) {
+      Log.debug('Double-click to edit: disabled (no editUrl)');
+      return;
+    }
 
-  if (edit) {
-    document.addEventListener('dblclick', mouseClick, { capture: true });
+    const contentArea = document.getElementById('section-content');
+    if (!contentArea) {
+      Log.warn('Double-click: #section-content not found');
+      return;
+    }
+
+    // Skip on edit pages
+    if (contentArea.querySelector('form[name="edit"], form.edit')) {
+      Log.debug('Double-click: already on edit page - skipping');
+      return;
+    }
+
+    document.addEventListener('dblclick', handleDoubleClick, { capture: true });
+    Log.info('Double-click to edit enabled → ' + editUrl);
   }
-}
 
-function mouseClick(event) {
-  let op = event.target;
-  while (op && op.className !== dbclick && op.tagName !== 'BODY') {
-    op = op.parentNode;
+  function handleDoubleClick(e) {
+    let el = e.target;
+    let found = false;
+
+    while (el && el !== document.body) {
+      if (el.classList && el.classList.contains('dbclick')) {
+        found = true;
+        Log.success('Double-click detected on element with class "dbclick"');
+        window.location.href = document.documentElement.dataset.editUrl;
+        return;
+      }
+      el = el.parentNode;
+    }
+
+    if (!found) {
+      Log.debug('Double-click: no element with class "dbclick" found');
+    }
   }
 
-  if (op && op.className === dbclick) {
-    window.location.href = edit;
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDoubleClick);
+  } else {
+    initDoubleClick();
   }
-}
+})();
 
 // Toggle all checkboxes in a form
 function invertSelections(eid) {
