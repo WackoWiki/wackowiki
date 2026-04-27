@@ -209,6 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
       selectBtn?.click();
     });
 
-    console.log('Upload.js - Progress bar + radio click fix + dynamic summary link loaded');
+    Log.log('Upload.js - Progress bar + radio click fix + dynamic summary link loaded');
   });
 });

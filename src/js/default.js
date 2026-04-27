@@ -1,7 +1,27 @@
-// Tiny legacy helper (still used in crit_init)
-function undef(param) {
-  return param;
-}
+/**
+ * Shared Logging Helper for WackoWiki
+ * - DEBUG_MODE can be controlled globally
+ * - Errors are always shown
+ * - Debug/info/success messages can be muted in production
+ */
+window.Log = (function() {
+  const isDebug = () => window.DEBUG_MODE === true;
+
+  return {
+    debug: (...args) => { if (isDebug()) console.debug(...args); },
+    log: (...args) => { if (isDebug()) console.log(...args); },
+    info: (...args) => { if (isDebug()) console.info(...args); },
+    warn: (...args) => { if (isDebug()) console.warn(...args); },
+    error: (...args) => { console.error(...args); },           // always visible
+    success: (...args) => { if (isDebug()) console.log('%c✓', 'color:#28a745;font-weight:bold', ...args); }
+  };
+})();
+
+// Default setting: Enable debug on localhost / when ?debug=1 is in URL
+window.DEBUG_MODE = window.DEBUG_MODE ??
+  (location.hostname === 'localhost' ||
+    location.hostname === '127.0.0.1' ||
+    new URLSearchParams(location.search).has('debug'));
 
 // Global configuration variables
 let wikiedit;   // WikiEdit instance or config

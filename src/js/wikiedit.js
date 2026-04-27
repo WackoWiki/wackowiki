@@ -91,7 +91,7 @@ class WikiEdit extends ProtoEdit {
       (form && form.closest('.commentform')) ||
       ta.name === 'payload' || ta.id === 'payload';
 
-    //console.log(`%cWikiEdit initialized in ${this.isCommentMode ? 'COMMENT' : 'EDIT'} mode – AJAX URL: ${this.ajaxUrl}`, 'color:#0a0;font-weight:bold');
+    //Log.log(`%cWikiEdit initialized in ${this.isCommentMode ? 'COMMENT' : 'EDIT'} mode – AJAX URL: ${this.ajaxUrl}`, 'color:#0a0;font-weight:bold');
 
     // ====================== DRAG & DROP + PASTE ======================
     if (this.canUpload) {
@@ -388,7 +388,7 @@ class WikiEdit extends ProtoEdit {
    */
   saveDraft() {
     if (!this.cf_modified) {
-      console.info('[WikiEdit] saveDraft skipped – no changes from original');
+      Log.info('[WikiEdit] saveDraft skipped – no changes from original');
       return;
     }
 
@@ -408,7 +408,7 @@ class WikiEdit extends ProtoEdit {
   clearDraft() {
     if (!this.draftKey) return;
     this.safeRemoveDraft(this.draftKey);
-    console.info('[WikiEdit] Autosaved draft cleared');
+    Log.info('[WikiEdit] Autosaved draft cleared');
     this.showMessage(`${lang.DraftCleared || 'Draft cleared'}`);
   }
 
@@ -494,7 +494,7 @@ class WikiEdit extends ProtoEdit {
     this.area.style.transition = 'background 0.2s';
     setTimeout(() => { this.area.style.transition = ''; }, 300);
 
-    console.info('[WikiEdit] Manual dark mode toggled');
+    Log.info('[WikiEdit] Manual dark mode toggled');
 
     localStorage.setItem('we_dark_mode_enabled', newIsDark);
   }
@@ -506,7 +506,7 @@ class WikiEdit extends ProtoEdit {
    */
   toggleFullscreen() {
     if (document.fullscreenElement) {
-      document.exitFullscreen().catch(err => console.error(err));
+      document.exitFullscreen().catch(err => Log.error(err));
       return;
     }
 
@@ -523,9 +523,9 @@ class WikiEdit extends ProtoEdit {
 
     if (container) {
       container.requestFullscreen({ navigationUI: 'hide' })
-        .catch(err => console.error('Editor fullscreen request failed:', err));
+        .catch(err => Log.error('Editor fullscreen request failed:', err));
     } else {
-      console.warn('WikiEdit: Could not find editor container for fullscreen (#page-edit or #commentform)');
+      Log.warn('WikiEdit: Could not find editor container for fullscreen (#page-edit or #commentform)');
     }
   }
 
@@ -539,24 +539,24 @@ class WikiEdit extends ProtoEdit {
 
   validateState(state) {
     if (!state || typeof state !== 'object') {
-      console.warn('WikiEdit: undo state is not an object');
+      Log.warn('WikiEdit: undo state is not an object');
       return false;
     }
     if (typeof state.text !== 'string') {
-      console.warn('WikiEdit: undo state.text is not a string');
+      Log.warn('WikiEdit: undo state.text is not a string');
       return false;
     }
     const len = state.text.length;
     if (typeof state.start !== 'number' || state.start < 0 || state.start > len) {
-      console.warn('WikiEdit: invalid selectionStart', state.start, '(text length =', len, ')');
+      Log.warn('WikiEdit: invalid selectionStart', state.start, '(text length =', len, ')');
       return false;
     }
     if (typeof state.end !== 'number' || state.end < state.start || state.end > len) {
-      console.warn('WikiEdit: invalid selectionEnd', state.end, '(start =', state.start, ', length =', len, ')');
+      Log.warn('WikiEdit: invalid selectionEnd', state.end, '(start =', state.start, ', length =', len, ')');
       return false;
     }
     if (typeof state.scroll !== 'number' || state.scroll < 0) {
-      console.warn('WikiEdit: invalid scrollTop', state.scroll);
+      Log.warn('WikiEdit: invalid scrollTop', state.scroll);
       return false;
     }
     return true;
@@ -574,7 +574,7 @@ class WikiEdit extends ProtoEdit {
     };
 
     if (!this.validateState(state)) {
-      console.error('WikiEdit: invalid state – refusing to push to undo stack');
+      Log.error('WikiEdit: invalid state – refusing to push to undo stack');
       return;
     }
 
@@ -609,7 +609,7 @@ class WikiEdit extends ProtoEdit {
 
     // validate current state before saving it to redo
     if (!this.validateState(current)) {
-      console.warn('WikiEdit: current state invalid before undo – still proceeding');
+      Log.warn('WikiEdit: current state invalid before undo – still proceeding');
     }
 
     this.redoStack.push(current);
@@ -617,7 +617,7 @@ class WikiEdit extends ProtoEdit {
     const prev = this.undoStack.pop();
 
     if (!this.validateState(prev)) {
-      console.error('WikiEdit: corrupted undo state popped! Stack sanitized.');
+      Log.error('WikiEdit: corrupted undo state popped! Stack sanitized.');
       // aggressive cleanup of the entire undo stack (removes all bad states)
       this.undoStack = this.undoStack.filter(s => this.validateState(s));
       return false;
@@ -647,7 +647,7 @@ class WikiEdit extends ProtoEdit {
     };
 
     if (!this.validateState(current)) {
-      console.warn('WikiEdit: current state invalid before redo – still proceeding');
+      Log.warn('WikiEdit: current state invalid before redo – still proceeding');
     }
 
     this.undoStack.push(current);
@@ -655,7 +655,7 @@ class WikiEdit extends ProtoEdit {
     const next = this.redoStack.pop();
 
     if (!this.validateState(next)) {
-      console.error('WikiEdit: corrupted redo state popped! Stack sanitized.');
+      Log.error('WikiEdit: corrupted redo state popped! Stack sanitized.');
       this.redoStack = this.redoStack.filter(s => this.validateState(s));
       return false;
     }
@@ -1106,7 +1106,7 @@ class WikiEdit extends ProtoEdit {
       document.querySelector('form[name="edit"], form#edit_page');
 
     if (!form) {
-      console.warn('[WikiEdit] savePage: could not find form');
+      Log.warn('[WikiEdit] savePage: could not find form');
       return;
     }
 
@@ -1114,10 +1114,10 @@ class WikiEdit extends ProtoEdit {
     // This sends name="save" in the POST data so the backend actually saves
     const saveBtn = form.querySelector('input[name="save"], button[name="save"]');
     if (saveBtn) {
-      console.log('[WikiEdit] savePage: clicking real Save button');
+      Log.log('[WikiEdit] savePage: clicking real Save button');
       saveBtn.click();          // ← this is what makes the save actually happen
     } else {
-      console.warn('[WikiEdit] savePage: no name="save" button found – falling back to submit');
+      Log.warn('[WikiEdit] savePage: no name="save" button found – falling back to submit');
       form.submit();
     }
   }
@@ -1702,7 +1702,7 @@ class WikiEdit extends ProtoEdit {
         this.scrollToSelection();
       }
     } catch (err) {
-      console.error('WikiEdit findNext error:', err);
+      Log.error('WikiEdit findNext error:', err);
       alert(lang?.FindReplaceError || 'An error occurred during find operation.');
     }
   }
@@ -1759,7 +1759,7 @@ class WikiEdit extends ProtoEdit {
       this.scrollToSelection();
       this.findNext();
     } catch (err) {
-      console.error('WikiEdit replaceCurrent error:', err);
+      Log.error('WikiEdit replaceCurrent error:', err);
       alert(lang?.FindReplaceError || 'An error occurred during replace operation.');
       // do NOT call findNext() on generic error – we already pushed undo state
     }
@@ -1805,7 +1805,7 @@ class WikiEdit extends ProtoEdit {
         t.focus();
       }
     } catch (err) {
-      console.error('WikiEdit replaceAll error:', err);
+      Log.error('WikiEdit replaceAll error:', err);
       alert(lang?.FindReplaceError || 'An error occurred during replace-all operation.');
     }
   }
@@ -1854,7 +1854,7 @@ class WikiEdit extends ProtoEdit {
 
   clearEditorSettings() {
     try { localStorage.removeItem(this.HEIGHT_KEY); } catch {}
-    console.info('[WikiEdit] Editor height reset to server default');
+    Log.info('[WikiEdit] Editor height reset to server default');
     window.location.reload();
   }
 
@@ -1887,9 +1887,9 @@ class WikiEdit extends ProtoEdit {
     if (err.name === 'QuotaExceededError' ||
       err.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
       err.code === 22 || err.code === 1014) {
-      console.warn(`[WikiEdit] localStorage quota exceeded – ${context} not saved`);
+      Log.warn(`[WikiEdit] localStorage quota exceeded – ${context} not saved`);
     } else {
-      console.warn(`[WikiEdit] localStorage unavailable (private mode?) – ${context} skipped`);
+      Log.warn(`[WikiEdit] localStorage unavailable (private mode?) – ${context} skipped`);
     }
   }
 
@@ -2032,7 +2032,7 @@ class WikiEdit extends ProtoEdit {
           });
         }
       } catch (e) {
-        console.warn('Live preview failed', e);
+        Log.warn('Live preview failed', e);
       }
     };
 
@@ -2061,7 +2061,7 @@ class WikiEdit extends ProtoEdit {
       }
     });
 
-    console.log('%cWikiEdit live preview ready', 'color:#0a0;font-weight:bold');
+    Log.log('%cWikiEdit live preview ready', 'color:#0a0;font-weight:bold');
   }
 
   /**
@@ -2195,8 +2195,23 @@ class WikiEdit extends ProtoEdit {
     let w = text;
     const placeholders = [];
 
+	// Extract all blocks in document order, prioritizing the first encountered
+/*	const blocks = [];
+	// Matches: 1. ""..."" 2. %%...%% 3. ``...`` (non-greedy, multi-line)
+	w = w.replace(/(```([\s\S]*?)```|`([^`]*)`)/g, (match) => {
+	  const id = blocks.length;
+	  // If it starts with ``, treat as literal (ignore syntax)
+	  if (match.startsWith('`')) {
+	    blocks.push({ type: 'literal', content: `##${match}##` });
+	  } else {
+	    // Otherwise, it's a code block to be wrapped
+	    blocks.push({ type: 'block', content: `%%${match}%%` });
+	  }
+	  return `WIKI_TOKEN_${id}`;
+	});*/
+
     // Extract ```code blocks``` and replace with %%...%%
-    w = w.replace(/```([\s\S]*?)```/g, (match, content) => {
+   w = w.replace(/```([\s\S]*?)```/g, (match, content) => {
       placeholders.push('%%' + content + '%%');
       return `@@CODEBLOCK_${placeholders.length - 1}@@`;
     });
@@ -2212,15 +2227,15 @@ class WikiEdit extends ProtoEdit {
       /^(?!\s*\*\*)(\s*)([*+-]|\d+\.|[A-Za-z]\.)([ \t]*)/gm,
       (match, indent, marker, postSpace) => {
         const len = indent.length;
-        let newIndent = indent;
 
-        if (len % 4 === 0 && len >= 4) {
-          // Halve existing deep indentation (2 spaces & 4 spaces -> 2, 8 spaces -> 4, etc.)
-          newIndent = ' '.repeat(len / 2 + 2);
-        } else if (len < 4) {
-          // Apply base 2-space indent to all top-level items (including the first one)
-          newIndent = '  ';
-        }
+        // Calculate logical nesting level from Markdown indentation
+        // We use floor(len / 2) which works well for both 2-space and 4-space Markdown lists
+        let level = Math.floor(len / 2);
+
+        // WackoWiki: 2 spaces × level (minimum 2 spaces even for top level)
+        const newIndentLength = Math.max(2, level * 2);
+
+        const newIndent = ' '.repeat(newIndentLength);
 
         return newIndent + marker + postSpace;
       }
@@ -2252,8 +2267,12 @@ class WikiEdit extends ProtoEdit {
     // ==================== TABLES: Markdown → Wacko ====================
     w = w.replace(/(\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gs, (block) => this._markdownTableToWacko(block));
 
+	// Restore all blocks and inline code
+	/*    w = w.replace(/WIKI_TOKEN_(\d+)/g, (match, id) => {
+	      return blocks[parseInt(id, 10)].content;
+	    });*/
     // Restore code blocks and inline code
-    w = w.replace(/@@CODEBLOCK_(\d+)@@/g, (match, index) => placeholders[index]);
+   w = w.replace(/@@CODEBLOCK_(\d+)@@/g, (match, index) => placeholders[index]);
     w = w.replace(/@@INLINECODE_(\d+)@@/g, (match, index) => placeholders[index]);
 
     return w;
@@ -2559,14 +2578,14 @@ class WikiEdit extends ProtoEdit {
             this.area.dataset.uploadNonce = result.new_nonce;
           }
         } else {
-          console.error('Upload failed – server response:', result);
+          Log.error('Upload failed – server response:', result);
           this.showMessage(`✗ ${file.name}: ${result.error || 'Upload failed'}`, true);
         }
       } catch (err) {
         this.area.value = this.area.value.replace(placeholder, '');
         this.area.selectionStart = this.area.selectionEnd = cursorPos;
         this.showMessage(`✗ ${file.name} upload error`, true);
-        console.error(err);
+        Log.error(err);
       }
     }
   }

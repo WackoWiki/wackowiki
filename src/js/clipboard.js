@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const targetElement = document.querySelector(targetSelector);
 
 			if (!targetElement) {
-				console.error(`Target element "${targetSelector}" not found!`);
+				Log.error(`Target element "${targetSelector}" not found!`);
 				return;
 			}
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// If there's nothing to copy, do nothing
 			if (!textToCopy) {
-				console.warn('Nothing to copy – text is empty');
+				Log.warn('Nothing to copy – text is empty');
 				return;
 			}
 
@@ -54,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				button.innerHTML = originalText;
 				}, 2000);
 
-				console.log('✅ Copied to clipboard:', textToCopy.substring(0, 30) + '...');
+				Log.log('Copied to clipboard:', textToCopy.substring(0, 30) + '...');
 
 			} catch (err) {
-				console.error('Failed to copy using Clipboard API:', err);
+				Log.error('Failed to copy using Clipboard API:', err);
 
 				// Fallback message
 				const originalText = button.innerHTML;
@@ -72,5 +72,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
-	console.log('Clipboard API ready!');
+	Log.log('Clipboard API ready!');
 });

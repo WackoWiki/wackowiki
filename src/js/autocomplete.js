@@ -333,7 +333,7 @@ class AutoComplete {
       this.finishComplete(bestMatch, suggestions);
     } catch (err) {
       if (err.name === 'AbortError') return;
-      console.warn('Autocomplete request failed:', err);
+      Log.warn('Autocomplete request failed:', err);
       this.finishComplete(null, []);
     }
   }
