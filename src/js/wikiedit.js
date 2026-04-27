@@ -2195,23 +2195,8 @@ class WikiEdit extends ProtoEdit {
     let w = text;
     const placeholders = [];
 
-	// Extract all blocks in document order, prioritizing the first encountered
-/*	const blocks = [];
-	// Matches: 1. ""..."" 2. %%...%% 3. ``...`` (non-greedy, multi-line)
-	w = w.replace(/(```([\s\S]*?)```|`([^`]*)`)/g, (match) => {
-	  const id = blocks.length;
-	  // If it starts with ``, treat as literal (ignore syntax)
-	  if (match.startsWith('`')) {
-	    blocks.push({ type: 'literal', content: `##${match}##` });
-	  } else {
-	    // Otherwise, it's a code block to be wrapped
-	    blocks.push({ type: 'block', content: `%%${match}%%` });
-	  }
-	  return `WIKI_TOKEN_${id}`;
-	});*/
-
     // Extract ```code blocks``` and replace with %%...%%
-   w = w.replace(/```([\s\S]*?)```/g, (match, content) => {
+    w = w.replace(/```([\s\S]*?)```/g, (match, content) => {
       placeholders.push('%%' + content + '%%');
       return `@@CODEBLOCK_${placeholders.length - 1}@@`;
     });
@@ -2222,20 +2207,20 @@ class WikiEdit extends ProtoEdit {
       return `@@INLINECODE_${placeholders.length - 1}@@`;
     });
 
-	// List normalization for exact WackoWiki syntax
+    // List normalization for exact WackoWiki syntax
     w = w.replace(
       /^(?!\s*\*\*)(\s*)([*+-]|\d+\.|[A-Za-z]\.)([ \t]*)/gm,
       (match, indent, marker, postSpace) => {
         const len = indent.length;
+        let newIndent = indent;
 
-        // Calculate logical nesting level from Markdown indentation
-        // We use floor(len / 2) which works well for both 2-space and 4-space Markdown lists
-        let level = Math.floor(len / 2);
-
-        // WackoWiki: 2 spaces × level (minimum 2 spaces even for top level)
-        const newIndentLength = Math.max(2, level * 2);
-
-        const newIndent = ' '.repeat(newIndentLength);
+        if (len % 4 === 0 && len >= 4) {
+          // Halve existing deep indentation (2 spaces & 4 spaces -> 2, 8 spaces -> 4, etc.)
+          newIndent = ' '.repeat(len / 2 + 2);
+        } else if (len < 4) {
+          // Apply base 2-space indent to all top-level items (including the first one)
+          newIndent = '  ';
+        }
 
         return newIndent + marker + postSpace;
       }
@@ -2267,12 +2252,12 @@ class WikiEdit extends ProtoEdit {
     // ==================== TABLES: Markdown → Wacko ====================
     w = w.replace(/(\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gs, (block) => this._markdownTableToWacko(block));
 
-	// Restore all blocks and inline code
-	/*    w = w.replace(/WIKI_TOKEN_(\d+)/g, (match, id) => {
-	      return blocks[parseInt(id, 10)].content;
-	    });*/
+    // Restore all blocks and inline code
+    /*    w = w.replace(/WIKI_TOKEN_(\d+)/g, (match, id) => {
+          return blocks[parseInt(id, 10)].content;
+        });*/
     // Restore code blocks and inline code
-   w = w.replace(/@@CODEBLOCK_(\d+)@@/g, (match, index) => placeholders[index]);
+    w = w.replace(/@@CODEBLOCK_(\d+)@@/g, (match, index) => placeholders[index]);
     w = w.replace(/@@INLINECODE_(\d+)@@/g, (match, index) => placeholders[index]);
 
     return w;
