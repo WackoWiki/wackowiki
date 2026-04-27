@@ -37,6 +37,9 @@ $lang = [
 	#'privacy_page'		=> 'Privacy',
 ],
 
+/*
+   Generic Page Text
+*/
 'TitleInstallation'				=> 'Cài đặt WackoWiki',
 'TitleUpdate'					=> 'Cập nhật WackoWiki',
 'Continue'						=> 'Tiếp tục',
@@ -44,6 +47,9 @@ $lang = [
 'Recommended'					=> 'được khuyến nghị',
 'InvalidAction'					=> 'Hành động không hợp lệ',
 
+/*
+   Locking Check
+ */
 'LockAuthorization'				=> 'Ủy quyền',
 'LockAuthorizationInfo'			=> 'Vui lòng nhập mật khẩu bạn đã lưu trong tệp %1.',
 'LockPassword'					=> 'Mật khẩu:',
@@ -52,6 +58,10 @@ $lang = [
 'LockedTryLater'				=> 'Trang này đang được nâng cấp. Vui lòng thử lại sau.',
 'EmptyAuthFile'					=> 'Tệp %1 bị thiếu hoặc rỗng. Vui lòng tạo tệp và đặt mật khẩu vào đó.',
 
+
+/*
+   Language Selection Page
+*/
 'lang'							=> 'Cấu hình ngôn ngữ',
 'PleaseUpgradeToR6'				=> 'Có vẻ bạn đang chạy bản WackoWiki cũ %1. Để nâng cấp lên bản này, trước tiên bạn phải cập nhật cài đặt của mình lên %2.',
 'UpgradeFromWacko'				=> 'Chào mừng đến với WackoWiki! Có vẻ bạn đang nâng cấp từ WackoWiki %1 lên %2. Một vài trang tiếp theo sẽ hướng dẫn bạn qua quá trình nâng cấp.',
@@ -59,6 +69,9 @@ $lang = [
 'PleaseBackup'					=> 'Vui lòng <strong>sao lưu</strong> cơ sở dữ liệu, file cấu hình và tất cả các file đã chỉnh sửa (ví dụ các file có sửa đổi cục bộ hoặc bản vá) trước khi bắt đầu nâng cấp. Việc này có thể cứu bạn khỏi nhiều rắc rối.',
 'LangDesc'						=> 'Vui lòng chọn ngôn ngữ cho quá trình cài đặt. Ngôn ngữ này cũng sẽ được dùng làm ngôn ngữ mặc định cho cài đặt WackoWiki của bạn.',
 
+/*
+   System Requirements Page
+*/
 'version-check'					=> 'Yêu cầu hệ thống',
 'PhpVersion'					=> 'Phiên bản PHP',
 'PhpDetected'					=> 'PHP phát hiện',
@@ -80,6 +93,9 @@ $lang = [
 'ErrorMinPhpVersion'			=> 'Phiên bản PHP phải lớn hơn %1. Máy chủ của bạn dường như đang chạy phiên bản cũ hơn. Bạn phải nâng cấp PHP để WackoWiki hoạt động đúng.',
 'Ready'							=> 'Chúc mừng, có vẻ máy chủ của bạn có thể chạy WackoWiki. Một vài trang tiếp theo sẽ hướng dẫn bạn qua quá trình cấu hình.',
 
+/*
+   Site Config Page
+*/
 'config-site'					=> 'Cấu hình trang',
 'SiteName'						=> 'Tên Wiki',
 'SiteNameDesc'					=> 'Vui lòng nhập tên cho trang Wiki của bạn.',
@@ -114,6 +130,9 @@ $lang = [
 'ErrorAdminPasswordShort'		=> 'Mật khẩu quản trị quá ngắn! Độ dài tối thiểu là %1 ký tự.',
 'ModRewriteStatusUnknown'		=> 'Trình cài đặt không thể xác minh liệu mod_rewrite có được bật hay không. Tuy nhiên điều này không có nghĩa là nó bị tắt.',
 
+/*
+   Database Config Page
+*/
 'config-database'				=> 'Cấu hình cơ sở dữ liệu',
 'DbDriver'						=> 'Trình điều khiển',
 'DbDriverDesc'					=> 'Trình điều khiển cơ sở dữ liệu bạn muốn sử dụng.',
@@ -145,6 +164,9 @@ $lang = [
 'DeleteTablesDesc'				=> 'CHÚ Ý! Nếu bạn tiếp tục với tùy chọn này được chọn, tất cả dữ liệu wiki hiện tại sẽ bị xóa khỏi cơ sở dữ liệu. Việc này không thể hoàn tác và bạn sẽ phải phục hồi thủ công từ bản sao lưu.',
 'ConfirmTableDeletion'			=> 'Bạn có chắc muốn xóa tất cả các bảng wiki hiện tại?',
 
+/*
+   Database Installation Page
+*/
 'install-database'				=> 'Cài đặt cơ sở dữ liệu',
 'TestingConfiguration'			=> 'Kiểm tra cấu hình',
 'TestConnectionString'			=> 'Kiểm tra thiết lập kết nối cơ sở dữ liệu',
@@ -202,6 +224,9 @@ $lang = [
 'DeletingTable'					=> 'Đang xóa bảng %1',
 'NextStep'						=> 'Bước tiếp theo, trình cài đặt sẽ cố gắng ghi file cấu hình đã cập nhật, %1. Vui lòng đảm bảo máy chủ web có quyền ghi vào file, nếu không bạn sẽ phải chỉnh sửa thủ công. Một lần nữa, xem <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> để biết chi tiết.',
 
+/*
+   Write Config Page
+*/
 'write-config'					=> 'Ghi file cấu hình',
 'FinalStep'						=> 'Bước cuối cùng',
 'Writing'						=> 'Đang ghi file cấu hình',

@@ -37,6 +37,9 @@ $lang = [
 	#'privacy_page'		=> 'Privacy',
 ],
 
+/*
+   Generic Page Text
+*/
 'TitleInstallation'				=> 'Instalacija WackoWiki',
 'TitleUpdate'					=> 'Ažuriranje WackoWiki',
 'Continue'						=> 'Nastavi',
@@ -44,6 +47,9 @@ $lang = [
 'Recommended'					=> 'preporučeno',
 'InvalidAction'					=> 'Nevažeća radnja',
 
+/*
+   Locking Check
+ */
 'LockAuthorization'				=> 'Autorizacija',
 'LockAuthorizationInfo'			=> 'Unesite lozinku koju ste spremili u datoteku %1.',
 'LockPassword'					=> 'Lozinka:',
@@ -52,6 +58,10 @@ $lang = [
 'LockedTryLater'				=> 'Stranica se trenutno nadograđuje. Molimo pokušajte kasnije.',
 'EmptyAuthFile'					=> 'Nedostaje ili je prazna datoteka %1. Molimo stvorite datoteku i postavite lozinku u nju.',
 
+
+/*
+   Language Selection Page
+*/
 'lang'							=> 'Konfiguracija jezika',
 'PleaseUpgradeToR6'				=> 'Izgleda da pokrećete staru verziju WackoWiki %1. Da biste ažurirali na ovu verziju, prvo morate ažurirati instalaciju na %2.',
 'UpgradeFromWacko'				=> 'Dobrodošli u WackoWiki! Izgleda da nadograđujete s WackoWiki %1 na %2. Sljedećih nekoliko stranica provest će vas kroz proces nadogradnje.',
@@ -59,6 +69,9 @@ $lang = [
 'PleaseBackup'					=> 'Molimo, <strong>napravite sigurnosnu kopiju</strong> svoje baze podataka, konfiguracijske datoteke i svih izmijenjenih datoteka (npr. lokalnih hakova i zakrpa) prije početka nadogradnje. To vam može uštedjeti mnogo problema.',
 'LangDesc'						=> 'Odaberite jezik za instalacijski proces. Taj će jezik također biti zadani jezik vaše WackoWiki instalacije.',
 
+/*
+   System Requirements Page
+*/
 'version-check'					=> 'Sistemski zahtjevi',
 'PhpVersion'					=> 'PHP verzija',
 'PhpDetected'					=> 'Otkriven PHP',
@@ -80,6 +93,9 @@ $lang = [
 'ErrorMinPhpVersion'			=> 'PHP verzija mora biti veća od %1. Vaš poslužitelj radi na starijoj verziji. Morate nadograditi PHP da bi WackoWiki ispravno funkcionirao.',
 'Ready'							=> 'Čestitamo, izgleda da je vaš poslužitelj sposoban pokrenuti WackoWiki. Sljedećih nekoliko stranica provest će vas kroz postupak konfiguracije.',
 
+/*
+   Site Config Page
+*/
 'config-site'					=> 'Konfiguracija stranice',
 'SiteName'						=> 'Naziv Wiki-ja',
 'SiteNameDesc'					=> 'Unesite naziv vašeg Wiki sajta.',
@@ -114,6 +130,9 @@ $lang = [
 'ErrorAdminPasswordShort'		=> 'Admin lozinka je prekratka! Minimalna duljina je %1 znakova.',
 'ModRewriteStatusUnknown'		=> 'Instalacijski program ne može potvrditi je li mod_rewrite omogućen. To ne znači nužno da je on onemogućen.',
 
+/*
+   Database Config Page
+*/
 'config-database'				=> 'Konfiguracija baze podataka',
 'DbDriver'						=> 'Pokretač',
 'DbDriverDesc'					=> 'Baza podataka pokretač koji želite koristiti.',
@@ -145,6 +164,9 @@ $lang = [
 'DeleteTablesDesc'				=> 'PAŽNJA! Ako nastavite s ovom opcijom, svi trenutni wiki podaci bit će izbrisani iz baze podataka. To se ne može poništiti i morat ćete ručno vratiti podatke iz sigurnosne kopije.',
 'ConfirmTableDeletion'			=> 'Jeste li sigurni da želite izbrisati sve trenutne wiki tablice?',
 
+/*
+   Database Installation Page
+*/
 'install-database'				=> 'Instalacija baze podataka',
 'TestingConfiguration'			=> 'Testiranje konfiguracije',
 'TestConnectionString'			=> 'Testiranje postavki za povezivanje s bazom podataka',
@@ -202,6 +224,9 @@ $lang = [
 'DeletingTable'					=> 'Brisanje tablice %1',
 'NextStep'						=> 'U sljedećem koraku instalacijski program pokušat će zapisati ažuriranu konfiguracijsku datoteku, %1. Molimo osigurajte da web server ima pristup za pisanje u tu datoteku, inače ćete je morati urediti ručno. Pogledajte <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> za detalje.',
 
+/*
+   Write Config Page
+*/
 'write-config'					=> 'Zapis konfiguracijske datoteke',
 'FinalStep'						=> 'Završni korak',
 'Writing'						=> 'Zapisivanje konfiguracijske datoteke',

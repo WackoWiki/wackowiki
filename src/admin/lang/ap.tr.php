@@ -63,6 +63,15 @@ $ap_translation = [
 	'DirNotWritable'			=> '%1 dizinine yazılamıyor.',
 	'FileNotWritable'			=> '%1 dosyasına yazılamıyor.',
 
+	/**
+	 * AP MENU
+	 *
+	 *	'module_name'		=> [
+	 *		'name'		=> 'Module name',
+	 *		'title'		=> 'Module title',
+	 *	],
+	 */
+
 	// Config Basic module
 	'config_basic'		=> [
 		'name'		=> 'Temel',

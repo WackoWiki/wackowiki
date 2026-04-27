@@ -14,49 +14,49 @@ $lang = [
 
    localized page tags (no spaces)
 */
-	'ConfigDefaults'	=> [
-		'category_page'		=> 'Category',
-		'groups_page'		=> 'Groups',
-		'users_page'		=> 'Users',
-		'tools_page'		=> 'เครื่องมือ',
+'ConfigDefaults'	=> [
+	'category_page'		=> 'Category',
+	'groups_page'		=> 'Groups',
+	'users_page'		=> 'Users',
+	'tools_page'		=> 'เครื่องมือ',
 
-		'search_page'		=> 'Search',
-		'login_page'		=> 'Login',
-		'account_page'		=> 'Settings',
-		'registration_page'	=> 'Registration',
-		'password_page'		=> 'Password',
+	'search_page'		=> 'Search',
+	'login_page'		=> 'Login',
+	'account_page'		=> 'Settings',
+	'registration_page'	=> 'Registration',
+	'password_page'		=> 'Password',
 
-		'whatsnew_page'		=> 'WhatsNew',
-		'changes_page'		=> 'RecentChanges',
-		'comments_page'		=> 'RecentlyCommented',
-		'index_page'		=> 'PageIndex',
+	'whatsnew_page'		=> 'WhatsNew',
+	'changes_page'		=> 'RecentChanges',
+	'comments_page'		=> 'RecentlyCommented',
+	'index_page'		=> 'PageIndex',
 
-		'random_page'		=> 'RandomPage',
-		#'help_page'			=> 'Help',
-		#'terms_page'		=> 'Terms',
-		#'privacy_page'		=> 'Privacy',
-	],
+	'random_page'		=> 'RandomPage',
+	#'help_page'			=> 'Help',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
+],
 
-	/*
-	 Generic Page Text
-	 */
-	'TitleInstallation'				=> 'การติดตั้ง WackoWiki',
-	'TitleUpdate'					=> 'อัปเดต WackoWiki',
-	'Continue'						=> 'ดำเนินการต่อ',
-	'Back'							=> 'ย้อนกลับ',
-	'Recommended'					=> 'แนะนำ',
-	'InvalidAction'					=> 'การดำเนินการไม่ถูกต้อง',
+/*
+   Generic Page Text
+*/
+'TitleInstallation'				=> 'การติดตั้ง WackoWiki',
+'TitleUpdate'					=> 'อัปเดต WackoWiki',
+'Continue'						=> 'ดำเนินการต่อ',
+'Back'							=> 'ย้อนกลับ',
+'Recommended'					=> 'แนะนำ',
+'InvalidAction'					=> 'การดำเนินการไม่ถูกต้อง',
 
-	/*
-	 Locking Check
-	 */
-	'LockAuthorization'				=> 'การอนุญาต',
-	'LockAuthorizationInfo'			=> 'โปรดใส่รหัสผ่านที่คุณบันทึกไว้ในไฟล์ %1',
-	'LockPassword'					=> 'รหัสผ่าน:',
-	'LockLogin'						=> 'เข้าสู่ระบบ',
-	'LockPasswordInvalid'			=> 'รหัสผ่านไม่ถูกต้อง',
-	'LockedTryLater'				=> 'เว็บไซต์นี้กำลังอยู่ระหว่างการอัปเกรด กรุณาลองใหม่อีกครั้งในภายหลัง',
-	'EmptyAuthFile'					=> 'ไฟล์ %1 หายไปหรือว่างเปล่า กรุณาสร้างไฟล์และใส่รหัสผ่านลงในไฟล์นั้น',
+/*
+   Locking Check
+ */
+'LockAuthorization'				=> 'การอนุญาต',
+'LockAuthorizationInfo'			=> 'โปรดใส่รหัสผ่านที่คุณบันทึกไว้ในไฟล์ %1',
+'LockPassword'					=> 'รหัสผ่าน:',
+'LockLogin'						=> 'เข้าสู่ระบบ',
+'LockPasswordInvalid'			=> 'รหัสผ่านไม่ถูกต้อง',
+'LockedTryLater'				=> 'เว็บไซต์นี้กำลังอยู่ระหว่างการอัปเกรด กรุณาลองใหม่อีกครั้งในภายหลัง',
+'EmptyAuthFile'					=> 'ไฟล์ %1 หายไปหรือว่างเปล่า กรุณาสร้างไฟล์และใส่รหัสผ่านลงในไฟล์นั้น',
 
 	/*
 	 Language Selection Page

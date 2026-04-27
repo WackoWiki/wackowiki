@@ -37,6 +37,9 @@ $lang = [
 	#'privacy_page'		=> 'Privacy',
 ],
 
+/*
+   Generic Page Text
+*/
 'TitleInstallation'				=> 'WackoWiki Kurulumu',
 'TitleUpdate'					=> 'WackoWiki Güncellemesi',
 'Continue'						=> 'Devam',
@@ -44,6 +47,9 @@ $lang = [
 'Recommended'					=> 'önerilen',
 'InvalidAction'					=> 'Geçersiz işlem',
 
+/*
+   Locking Check
+ */
 'LockAuthorization'				=> 'Yetkilendirme',
 'LockAuthorizationInfo'			=> 'Lütfen %1 dosyasına kaydettiğiniz parolayı girin.',
 'LockPassword'					=> 'Şifre:',
@@ -52,6 +58,10 @@ $lang = [
 'LockedTryLater'				=> 'Bu site şu anda yükseltme işlemi altında. Lütfen daha sonra tekrar deneyin.',
 'EmptyAuthFile'					=> 'Eksik veya boş %1 dosyası. Lütfen dosyayı oluşturun ve içine bir parola yazın.',
 
+
+/*
+   Language Selection Page
+*/
 'lang'							=> 'Dil Yapılandırması',
 'PleaseUpgradeToR6'				=> 'Görünüşe göre eski bir WackoWiki sürümü (%1) kullanıyorsunuz. Bu sürüme yükseltme yapmak için önce kurulumunuzu %2 sürümüne güncellemeniz gerekir.',
 'UpgradeFromWacko'				=> 'WackoWiki\'ye hoş geldiniz! Görünüşe göre WackoWiki %1 sürümünden %2 sürümüne yükseltiyorsunuz. Aşağıdaki sayfalar sizi yükseltme sürecinde yönlendirecek.',
@@ -59,6 +69,9 @@ $lang = [
 'PleaseBackup'					=> 'Lütfen güncelleme işlemine başlamadan önce veritabanınızı, yapılandırma dosyanızı ve yerel düzeltmeler veya yamalar uygulanmış tüm değiştirilmiş dosyaları <strong>yedekleyin</strong>. Bu size büyük bir baş ağrısından kurtarabilir.',
 'LangDesc'						=> 'Kurulum işlemi için bir dil seçin. Bu dil, WackoWiki kurulumunuzun varsayılan dili olarak kullanılacaktır.',
 
+/*
+   System Requirements Page
+*/
 'version-check'					=> 'Sistem Gereksinimleri',
 'PhpVersion'					=> 'PHP Sürümü',
 'PhpDetected'					=> 'Algılanan PHP',
@@ -80,6 +93,9 @@ $lang = [
 'ErrorMinPhpVersion'			=> 'PHP sürümü %1 veya daha yeni olmalıdır. Sunucunuz daha eski bir sürüm çalıştırıyor gibi görünüyor. WackoWiki\'nin düzgün çalışması için PHP\'yi daha yeni bir sürüme yükseltmelisiniz.',
 'Ready'							=> 'Tebrikler, sunucunuzun WackoWiki çalıştırmaya uygun olduğu görülüyor. Bir sonraki sayfalar sizi yapılandırma sürecinde yönlendirecek.',
 
+/*
+   Site Config Page
+*/
 'config-site'					=> 'Site Yapılandırması',
 'SiteName'						=> 'Wiki Adı',
 'SiteNameDesc'					=> 'Lütfen Wiki sitenizin adını girin.',
@@ -114,6 +130,9 @@ $lang = [
 'ErrorAdminPasswordShort'		=> 'Yönetici parolası çok kısa! Minimum uzunluk %1 karakterdir.',
 'ModRewriteStatusUnknown'		=> 'Yükleyici mod_rewrite\'ın etkin olup olmadığını doğrulayamadı. Ancak bu, mod_rewrite\'ın devre dışı olduğu anlamına gelmez.',
 
+/*
+   Database Config Page
+*/
 'config-database'				=> 'Veritabanı Yapılandırması',
 'DbDriver'						=> 'Sürücü',
 'DbDriverDesc'					=> 'Kullanmak istediğiniz veritabanı sürücüsü.',
@@ -145,6 +164,9 @@ $lang = [
 'DeleteTablesDesc'				=> 'DİKKAT! Bu seçeneği işaretleyip devam ederseniz, veritabanınızdaki mevcut wiki verilerinin tamamı silinecektir. Bu geri alınamaz ve verileri bir yedekten elle geri yüklemeniz gerekecektir.',
 'ConfirmTableDeletion'			=> 'Mevcut tüm wiki tablolarını silmek istediğinizden emin misiniz?',
 
+/*
+   Database Installation Page
+*/
 'install-database'				=> 'Veritabanı Kurulumu',
 'TestingConfiguration'			=> 'Yapılandırma Test Ediliyor',
 'TestConnectionString'			=> 'Veritabanı bağlantı ayarları test ediliyor',
@@ -202,6 +224,9 @@ $lang = [
 'DeletingTable'					=> '%1 tablosu siliniyor',
 'NextStep'						=> 'Bir sonraki adımda yükleyici güncellenmiş yapılandırma dosyası %1 dosyasını yazmaya çalışacaktır. Lütfen web sunucusunun bu dosyaya yazma izni olduğundan emin olun; aksi halde dosyayı elle düzenlemeniz gerekecektir. Detaylar için tekrar bkz. <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
 
+/*
+   Write Config Page
+*/
 'write-config'					=> 'Yapılandırma Dosyasını Yaz',
 'FinalStep'						=> 'Son Adım',
 'Writing'						=> 'Yapılandırma Dosyası Yazılıyor',
