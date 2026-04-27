@@ -1182,7 +1182,7 @@ td.file- {
 	border-radius: 8px;
 	padding: 2rem;
 	margin-bottom: 1rem;
-	background: var(--ww-bg-accent);
+	background: var(--ww-bg-secondary);
 	transition: all 0.2s;
 }
 .upload-dropzone.dragover {
@@ -1195,7 +1195,7 @@ td.file- {
 	margin: 0.25rem 0;
 	border-radius: 4px;
 }
-.upload-success { background: #d4edda; color: #155724; }
+.upload-success { /* background: #d4edda; */ color: #155724; }
 .upload-error   { background: #f8d7da; color: #721c24; }
 
 .upload-tabs { display: flex; margin-bottom: 1rem; border-bottom: 2px solid #ddd; }
@@ -1232,6 +1232,9 @@ td.file- {
   margin: 0.5rem 0; 
   border-radius: 6px; 
   background: #fff; 
+}
+.upload-file-item:hover {
+	background: var(--ww-hover-primary);
 }
 .upload-progress-container {
   flex: 1;
@@ -2132,7 +2135,8 @@ textarea.wikiedit-area.syntax-enabled {
 }
 
 .we-modal-dialog {
-	background: #fff;
+	background: var(--ww-bg-secondary);
+	color: var(--ww-text); 
 	border-radius: 8px;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
@@ -2145,7 +2149,7 @@ textarea.wikiedit-area.syntax-enabled {
 	position: fixed;
 	top: 20px;
 	right: 20px;
-	background: #fff;
+	background: var(--ww-bg-secondary);
 	border-radius: 8px;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 	width: 460px;
@@ -2169,7 +2173,6 @@ textarea.wikiedit-area.syntax-enabled {
 	margin: 0;
 	font-size: 1.1em;
 	font-weight: 600;
-	color: #222;
 }
 
 .we-panel-close {
