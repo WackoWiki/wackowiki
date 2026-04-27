@@ -8,7 +8,7 @@
 			[= ol _ =
 				<ol id="comments">
 					[= l _ =
-						<li id="[ ' tag ' ]" class="comment">
+						<li id="[ ' tag ' ]" class="comment dbclick">
 							<article class="comment-text">
 								[= b _ =
 									<nav class="comment-tools">

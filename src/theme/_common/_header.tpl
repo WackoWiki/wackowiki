@@ -60,6 +60,7 @@ _common include file for themes
 	[= doubleclick _ =
 		<script>
 			document.documentElement.dataset.editUrl = "[ ' href | e js ' ]";
+			document.documentElement.dataset.basePath = "[ ' db: base_path | e js ' ]";
 		</script>
 	=]
 	[ ' additions ' ]

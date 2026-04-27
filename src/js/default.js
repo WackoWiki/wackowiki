@@ -52,58 +52,63 @@ function new_freecap() {
 }
 
 /**
- * Double-click to edit - Final robust version
+ * Double-click to edit - Supports main page + root-level comments
  */
 (function() {
-  function initDoubleClick() {
-    const editUrl = document.documentElement.dataset.editUrl;
+    let editBaseUrl = null;
 
-    if (!editUrl) {
-      Log.debug('Double-click to edit: disabled (no editUrl)');
-      return;
+    function initDoubleClick() {
+        // Read from data attribute set by template
+        editBaseUrl = document.documentElement.dataset.editUrl;
+
+        if (!editBaseUrl) {
+            Log.debug('Double-click to edit: disabled (no editUrl)');
+            return;
+        }
+
+        const contentArea = document.getElementById('section-content');
+        if (!contentArea) return;
+
+        // Skip on edit pages
+        if (contentArea.querySelector('form[name="edit"], form.edit')) return;
+
+        document.addEventListener('dblclick', handleDoubleClick, { capture: true });
+        Log.info('Double-click to edit enabled');
     }
 
-    const contentArea = document.getElementById('section-content');
-    if (!contentArea) {
-      Log.warn('Double-click: #section-content not found');
-      return;
+    function handleDoubleClick(e) {
+        let el = e.target;
+
+        while (el && el !== document.body) {
+            if (el.classList && el.classList.contains('dbclick')) {
+                let targetUrl;
+
+                if (el.id && el.id.startsWith('Comment')) {
+                    // Comment case: always root-level comment page
+                    const commentTag = el.id;                    // "Comment4554"
+
+                    // Build correct URL using base_path + comment tag
+                    const base = document.documentElement.dataset.basePath || '';
+                    targetUrl = base + commentTag + '/edit';
+                } else {
+                    // Main page case
+                    targetUrl = editBaseUrl;
+                }
+
+                Log.success('Double-click → ' + targetUrl);
+                window.location.href = targetUrl;
+                return;
+            }
+            el = el.parentNode;
+        }
     }
 
-    // Skip on edit pages
-    if (contentArea.querySelector('form[name="edit"], form.edit')) {
-      Log.debug('Double-click: already on edit page - skipping');
-      return;
+    // Initialize
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDoubleClick);
+    } else {
+        initDoubleClick();
     }
-
-    document.addEventListener('dblclick', handleDoubleClick, { capture: true });
-    Log.info('Double-click to edit enabled → ' + editUrl);
-  }
-
-  function handleDoubleClick(e) {
-    let el = e.target;
-    let found = false;
-
-    while (el && el !== document.body) {
-      if (el.classList && el.classList.contains('dbclick')) {
-        found = true;
-        Log.success('Double-click detected on element with class "dbclick"');
-        window.location.href = document.documentElement.dataset.editUrl;
-        return;
-      }
-      el = el.parentNode;
-    }
-
-    if (!found) {
-      Log.debug('Double-click: no element with class "dbclick" found');
-    }
-  }
-
-  // Initialize
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDoubleClick);
-  } else {
-    initDoubleClick();
-  }
 })();
 
 // Toggle all checkboxes in a form
