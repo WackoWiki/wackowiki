@@ -359,7 +359,7 @@ class WikiEdit extends ProtoEdit {
   }
 
   /**
-   * Session heartbeat to keep user session alive while editing
+   * Initialize session heartbeat with exponential backoff and proper cleanup
    */
   initSessionHeartbeat() {
     const timeoutSec = parseInt(this.area.dataset.heartbeatTimeout, 10);
@@ -367,57 +367,113 @@ class WikiEdit extends ProtoEdit {
 
     if (!timeoutSec || timeoutSec < 60) return;
 
-    const intervalMs = timeoutSec * 1000;
+    if (this.heartbeatTimer) {
+      clearInterval(this.heartbeatTimer);
+    }
 
-    this.heartbeatTimer = setInterval(async () => {
+    let failCount = 0;
+    const maxFails = 3;
+
+    const heartbeat = async () => {
       try {
         const url = `${window.location.pathname}?_autocomplete=1&rnd=${Date.now()}`;
 
         const response = await fetch(url, {
           method: 'GET',
           cache: 'no-cache',
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-          },
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
           credentials: 'same-origin'
         });
 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-        // Success - session still alive
+        failCount = 0;                    // reset on success
         Log.debug(`Heartbeat OK for ${name}`);
 
       } catch (err) {
-        Log.warn('Session heartbeat failed:', err);
+        failCount++;
+        Log.warn(`Heartbeat failed (${failCount}/${maxFails}) for ${name}`);
 
-        this.showSessionExpiredWarning(name);
-        clearInterval(this.heartbeatTimer);
+        if (failCount >= maxFails) {
+          this.showSessionExpiredWarning(name);
+          this.stopHeartbeat();           // important: stop all further attempts
+        }
       }
-    }, intervalMs);
+    };
 
+    // Start the interval
+    this.heartbeatTimer = setInterval(heartbeat, timeoutSec * 1000);
     Log.debug(`Session heartbeat started for "${name}" every ${timeoutSec}s`);
   }
 
-  showSessionExpiredWarning(ename) {
-    const msg = (lang.SessionExpiredEditor)
-      || 'Your session has expired. Please save your changes manually and reload the page.';
+  /**
+   * Stop heartbeat completely
+   */
+  stopHeartbeat() {
+    if (this.heartbeatTimer) {
+      clearInterval(this.heartbeatTimer);
+      this.heartbeatTimer = null;
+    }
+  }
 
-    // Visual warning above the textarea
+  /**
+   * Show session expired warning only if content was modified
+   */
+  showSessionExpiredWarning(ename) {
+    if (!this.cf_modified) {
+      Log.debug('Session expired, but no changes detected → skipping warning');
+      return;
+    }
+
+    const lang = window.lang || {};
+    const msg = lang.SessionExpiredEditor
+      || 'Your session has expired. Please save your changes to avoid losing data.';
+
     const div = document.createElement('div');
-    div.className = 'msg error';
-    div.innerHTML = msg.replace(/\n/g, '<br>');
+    div.className = 'msg error session-expired-warning';
+    div.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+          <div>
+            <strong>${msg}</strong><br>
+            <small>Your unsaved changes are still in the editor.</small>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn-save-draft">Save Draft</button>
+            <button type="button" class="btn-reload">Reload Page</button>
+            <button type="button" class="btn-dismiss">Dismiss</button>
+          </div>
+        </div>
+      `;
 
     const target = document.getElementsByName(ename)[0] || this.area;
-    if (target && target.parentNode) {
+    if (target?.parentNode) {
       target.parentNode.insertBefore(div, target);
     }
 
+    // Save Draft
+    div.querySelector('.btn-save-draft').addEventListener('click', () => {
+      if (typeof this.saveDraft === 'function') this.saveDraft();
+      div.remove();
+    });
+
+    // Reload Page
+    div.querySelector('.btn-reload').addEventListener('click', () => {
+      if (confirm(lang.ConfirmReload || 'Reload page? Unsaved changes will be lost.')) {
+        window.location.reload();
+      }
+    });
+
+    // Dismiss
+    div.querySelector('.btn-dismiss').addEventListener('click', () => div.remove());
+
     alert(msg);
 
-    // Disable save buttons
-    document.querySelectorAll('button[type="submit"], .btn-ok, .btn-save').forEach(btn => {
-      btn.disabled = true;
+    // Disable main buttons
+    document.querySelectorAll('button[type="submit"], .btn-ok, .btn-save, .btn-publish').forEach(btn => {
+      if (!btn.classList.contains('btn-save-draft')) btn.disabled = true;
     });
+
+    Log.warn('Session expired warning displayed');
   }
 
   // ====================== AUTOSAVE (localStorage draft) ======================
