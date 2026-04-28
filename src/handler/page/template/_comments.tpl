@@ -77,6 +77,10 @@
 						<br>
 						<label for="addcomment">[ ' _t: AddComment ' ]</label><br>
 						<textarea id="addcomment" name="body" class="textarea-comment" rows="6" cols="60" 
+							[= user _ =
+								data-heartbeat-timeout="[ ' heartbeat ' ]"
+								data-heartbeat-name="add_comment"
+							=]
 							data-autosave-draft="[ ' autosave ' ]"
 							data-syntax-highlighting="[ ' syntax ' ]"
 							data-live-preview="[ ' preview ' ]"
@@ -85,15 +89,13 @@
 							data-upload-nonce="[ ' nonce ' ]"
 							required>[ ' payload | pre ' ]</textarea>
 						<script>
-							wE = new WikiEdit();
-								[= autocomplete _ =
-									if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: show ' ]" ); }
-								=]
-							wE.init('addcomment', '[ ' wikiedit ' ]');
-							[= user _ =
-								var timeout = [ ' heartbeat ' ];
-								var name = 'add_comment';
+							const wE = new WikiEdit();
+							[= autocomplete _ =
+								if (AutoComplete) {
+									new AutoComplete(wE, "[ ' href: show ' ]");
+								}
 							=]
+							wE.init('addcomment', '[ ' wikiedit ' ]');
 						</script>
 						[= a _ =
 							<input type="checkbox" name="noid_publication" id="noid_publication" value="[ ' pageid ' ]" [ ' checked ' ]>

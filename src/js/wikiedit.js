@@ -5,20 +5,26 @@
  * Licensed BSD © Roman Ivanov, Evgeny Nedelko, WackoWiki Team
  */
 
+// Safe Log fallback
 if (typeof window.Log === 'undefined') {
-    window.Log = {
-        debug: console.debug.bind(console),
-        log:   console.log.bind(console),
-        info:  console.info.bind(console),
-        warn:  console.warn.bind(console),
-        error: console.error.bind(console),
-        success: (...args) => console.log('%c✓', 'color:#28a745;font-weight:bold', ...args)
-    };
+  window.Log = {
+    debug: console.debug.bind(console),
+    log: console.log.bind(console),
+    info: console.info.bind(console),
+    warn: console.warn.bind(console),
+    error: console.error.bind(console),
+    success: (...args) => console.log('%c✓', 'color:#28a745;font-weight:bold', ...args)
+  };
 }
 
 class WikiEdit extends ProtoEdit {
   constructor() {
     super();
+
+    // Session heartbeat
+    this.heartbeatTimer = null;
+    this.heartbeatName = null;
+    this.heartbeatInterval = 0;
 
     this.manual = 'https://wackowiki.org/doc/';
     this.mark = '##inspoint##';
@@ -92,6 +98,8 @@ class WikiEdit extends ProtoEdit {
     this.canUpload = ta.dataset.canUpload === '1';
 
     // ====================== CONTEXT DETECTION (EDIT vs COMMENT) ======================
+    this.isCommentMode = ta.id === 'addcomment' || ta.name === 'payload';
+
     const form = ta.closest('form');
     this.ajaxUrl = form
       ? (form.getAttribute('action') || window.location.href)
@@ -343,6 +351,73 @@ class WikiEdit extends ProtoEdit {
       this.setupAutosave();
       this.loadAutosavedDraft();
     }
+
+    // ====================== SESSION HEARTBEAT ======================
+    this.initSessionHeartbeat();
+
+    // Log.success(`WikiEdit initialized: ${id}`);
+  }
+
+  /**
+   * Session heartbeat to keep user session alive while editing
+   */
+  initSessionHeartbeat() {
+    const timeoutSec = parseInt(this.area.dataset.heartbeatTimeout, 10);
+    const name = this.area.dataset.heartbeatName || 'edit';
+
+    if (!timeoutSec || timeoutSec < 60) return;
+
+    const intervalMs = timeoutSec * 1000;
+
+    this.heartbeatTimer = setInterval(async () => {
+      try {
+        const url = `${window.location.pathname}?_autocomplete=1&rnd=${Date.now()}`;
+
+        const response = await fetch(url, {
+          method: 'GET',
+          cache: 'no-cache',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          credentials: 'same-origin'
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        // Success - session still alive
+        Log.debug(`Heartbeat OK for ${name}`);
+
+      } catch (err) {
+        Log.warn('Session heartbeat failed:', err);
+
+        this.showSessionExpiredWarning(name);
+        clearInterval(this.heartbeatTimer);
+      }
+    }, intervalMs);
+
+    Log.debug(`Session heartbeat started for "${name}" every ${timeoutSec}s`);
+  }
+
+  showSessionExpiredWarning(ename) {
+    const msg = (lang.SessionExpiredEditor)
+      || 'Your session has expired. Please save your changes manually and reload the page.';
+
+    // Visual warning above the textarea
+    const div = document.createElement('div');
+    div.className = 'msg error';
+    div.innerHTML = msg.replace(/\n/g, '<br>');
+
+    const target = document.getElementsByName(ename)[0] || this.area;
+    if (target && target.parentNode) {
+      target.parentNode.insertBefore(div, target);
+    }
+
+    alert(msg);
+
+    // Disable save buttons
+    document.querySelectorAll('button[type="submit"], .btn-ok, .btn-save').forEach(btn => {
+      btn.disabled = true;
+    });
   }
 
   // ====================== AUTOSAVE (localStorage draft) ======================
@@ -694,6 +769,11 @@ class WikiEdit extends ProtoEdit {
   }
 
   destroy() {
+    if (this.heartbeatTimer) {
+      clearInterval(this.heartbeatTimer);
+      this.heartbeatTimer = null;
+    }
+
     if (this.pushTimer) {
       clearTimeout(this.pushTimer);
     }
