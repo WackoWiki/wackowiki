@@ -444,8 +444,7 @@ class WikiEdit extends ProtoEdit {
       return;
     }
 
-    const lang = window.lang || {};
-    const msg = lang.SessionExpiredEditor
+    const msg = t('SessionExpiredEditor')
       || 'Your session has expired. Please save your changes to avoid losing data.';
 
     const div = document.createElement('div');
@@ -477,7 +476,7 @@ class WikiEdit extends ProtoEdit {
 
     // Reload Page
     div.querySelector('.btn-reload').addEventListener('click', () => {
-      if (confirm(lang.ConfirmReload || 'Reload page? Unsaved changes will be lost.')) {
+      if (confirm(t('ConfirmReload') || 'Reload page? Unsaved changes will be lost.')) {
         window.location.reload();
       }
     });
@@ -568,7 +567,7 @@ class WikiEdit extends ProtoEdit {
     };
 
     if (this.safeSetDraft(this.draftKey, JSON.stringify(draftData))) {
-      this.showMessage(`✓ ${lang.DraftSaved || 'Draft saved'}`);
+      this.showMessage(`✓ ${t('DraftSaved') || 'Draft saved'}`);
     }
   }
 
@@ -576,7 +575,7 @@ class WikiEdit extends ProtoEdit {
     if (!this.draftKey) return;
     this.safeRemoveDraft(this.draftKey);
     Log.info('[WikiEdit] Autosaved draft cleared');
-    this.showMessage(`${lang.DraftCleared || 'Draft cleared'}`);
+    this.showMessage(`${t('DraftCleared') || 'Draft cleared'}`);
   }
 
   /**
@@ -647,15 +646,15 @@ class WikiEdit extends ProtoEdit {
 
       const infoboxHTML = `
         <div id="draft-infobox" class="info-box draft-infobox">
-              <strong>${this.lang?.DraftFound || 'Draft found'}</strong> — 
-              ${this.lang?.SavedOn || 'saved'} 
+              <strong>${t('DraftFound') || 'Draft found'}</strong> — 
+              ${t('SavedOn') || 'saved'} 
               <time datetime="${date.toISOString()}" title="${timeStr}">
                   ${relativeTime}
               </time><br>
-			<span class="visuallyhidden">${this.lang?.RecoverDraftQuestion || 'Do you want to recover the draft?'}</span>
+			<span class="visuallyhidden">${t('RecoverDraftQuestion') || 'Do you want to recover the draft?'}</span>
           <br>
-          <button type="button" class="btn-ok" id="recover-draft-btn">${this.lang?.RecoverDraft || 'Recover Draft'}</button>
-          <button type="button" class="btn-cancel" id="discard-draft-btn">${this.lang?.DiscardDraft || 'Discard Draft'}</button>
+          <button type="button" class="btn-ok" id="recover-draft-btn">${t('RecoverDraft') || 'Recover Draft'}</button>
+          <button type="button" class="btn-cancel" id="discard-draft-btn">${t('DiscardDraft') || 'Discard Draft'}</button>
         </div>
       `;
 
@@ -1289,7 +1288,7 @@ class WikiEdit extends ProtoEdit {
   }
 
   savePage() {
-    if (!confirm(lang.ReallySave || 'Really save this page?')) {
+    if (!confirm(t('ReallySave') || 'Really save this page?')) {
       return;
     }
 
@@ -1380,23 +1379,23 @@ class WikiEdit extends ProtoEdit {
 
     dialog.innerHTML = `
       <div class="we-modal-header">
-        <h3 class="we-modal-title">${lang.Hyperlink || 'Hyperlink'}</h3>
+        <h3 class="we-modal-title">${t('Hyperlink') || 'Hyperlink'}</h3>
       </div>
       <div class="we-modal-body">
         <form id="we-link-form-${this.id}">
           <div class="we-form-group">
-            <label class="we-form-label" for="we-link-url-${this.id}">${(lang.Link || 'Link') + ':'}</label>
+            <label class="we-form-label" for="we-link-url-${this.id}">${(t('Link') || 'Link') + ':'}</label>
             <input type="text" id="we-link-url-${this.id}" class="we-form-input">
           </div>
 
           <div class="we-form-group">
-            <label class="we-form-label" for="we-link-text-${this.id}">${(lang.TextForLinking || 'Text for linking') + ':'}</label>
+            <label class="we-form-label" for="we-link-text-${this.id}">${(t('TextForLinking') || 'Text for linking') + ':'}</label>
             <input type="text" id="we-link-text-${this.id}" class="we-form-input">
           </div>
 
           <div class="we-modal-footer">
-            <button type="submit" id="we-link-insert-${this.id}" class="we-btn we-btn-primary">${lang.Insert || 'Insert'}</button>
-            <button type="button" id="we-link-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
+            <button type="submit" id="we-link-insert-${this.id}" class="we-btn we-btn-primary">${t('Insert') || 'Insert'}</button>
+            <button type="button" id="we-link-cancel-${this.id}" class="we-btn">${t('Cancel') || 'Cancel'}</button>
           </div>
         </form>
       </div>
@@ -1506,22 +1505,22 @@ class WikiEdit extends ProtoEdit {
 
     dialog.innerHTML = `
       <div class="we-modal-header">
-        <h3 class="we-modal-title">${lang.InsertTable || 'Insert Table'}</h3>
+        <h3 class="we-modal-title">${t('InsertTable') || 'Insert Table'}</h3>
       </div>
       <div class="we-modal-body">
         <form id="we-table-form-${this.id}">
           <div class="we-form-group">
-            <label class="we-form-label" for="we-table-caption-${this.id}">${lang.TableCaption || 'Table caption (optional):'}</label>
+            <label class="we-form-label" for="we-table-caption-${this.id}">${t('TableCaption') || 'Table caption (optional):'}</label>
             <input type="text" id="we-table-caption-${this.id}" class="we-form-input">
           </div>
 
           <div class="we-form-grid">
             <div class="we-form-group">
-              <label class="we-form-label" for="we-table-cols-${this.id}">${lang.NumberColumns || 'Number of columns:'}</label>
+              <label class="we-form-label" for="we-table-cols-${this.id}">${t('NumberColumns') || 'Number of columns:'}</label>
               <input type="number" id="we-table-cols-${this.id}" value="4" min="1" class="we-form-input">
             </div>
             <div class="we-form-group">
-              <label class="we-form-label" for="we-table-rows-${this.id}">${lang.NumberRows || 'Number of rows:'}</label>
+              <label class="we-form-label" for="we-table-rows-${this.id}">${t('NumberRows') || 'Number of rows:'}</label>
               <input type="number" id="we-table-rows-${this.id}" value="3" min="1" class="we-form-input">
             </div>
           </div>
@@ -1529,17 +1528,17 @@ class WikiEdit extends ProtoEdit {
           <div class="we-form-checkboxes">
             <label class="we-checkbox-label">
               <input type="checkbox" id="we-table-colheader-${this.id}">
-              ${lang.UseColumnHeaders || 'Use column headers'}
+              ${t('UseColumnHeaders') || 'Use column headers'}
             </label>
             <label class="we-checkbox-label">
               <input type="checkbox" id="we-table-rowheader-${this.id}">
-              ${lang.UseRowHeaders || 'Use row headers'}
+              ${t('UseRowHeaders') || 'Use row headers'}
             </label>
           </div>
 
           <div class="we-modal-footer">
-            <button type="submit" id="we-table-insert-${this.id}" class="we-btn we-btn-primary">${lang.InsertTable || 'Insert Table'}</button>
-            <button type="button" id="we-table-cancel-${this.id}" class="we-btn">${lang.Cancel || 'Cancel'}</button>
+            <button type="submit" id="we-table-insert-${this.id}" class="we-btn we-btn-primary">${t('InsertTable') || 'Insert Table'}</button>
+            <button type="button" id="we-table-cancel-${this.id}" class="we-btn">${t('Cancel') || 'Cancel'}</button>
           </div>
         </form>
       </div>
@@ -1625,7 +1624,7 @@ class WikiEdit extends ProtoEdit {
     if (colHeader) {
       const headerCells = rowHeader ? [''] : [];
       for (let c = 0;c < cols;c++) {
-        headerCells.push(`${lang.Header || 'Header'} ${c + 1}`);
+        headerCells.push(`${t('Header') || 'Header'} ${c + 1}`);
       }
       const chRow = '*| ' + headerCells.join(' | ') + ' |*';
       lines.push(chRow);
@@ -1634,9 +1633,9 @@ class WikiEdit extends ProtoEdit {
     // Data rows
     for (let r = 0;r < rows;r++) {
       const rowStart = rowHeader ? '^|' : '||';
-      const rowCells = rowHeader ? [`${lang.Header || 'Header'} ${r + 1}`] : [];
+      const rowCells = rowHeader ? [`${t('Header') || 'Header'} ${r + 1}`] : [];
       for (let c = 0;c < cols;c++) {
-        rowCells.push(`${lang.Cell || 'Cell'}`);
+        rowCells.push(`${t('Cell') || 'Cell'}`);
       }
       const rowStr = rowStart + ' ' + rowCells.join(' | ') + ' ||';
       lines.push(rowStr);
@@ -1692,46 +1691,46 @@ class WikiEdit extends ProtoEdit {
         <h3 class="we-modal-title">WikiEdit</h3>
       </div>
       <div class="we-modal-body">
-        <a href="${this.manual}${lang.HelpFormattingPage || 'Formatting'}" target="_blank">${lang.HelpFormattingTip}</a><br>
+        <a href="${this.manual}${t('HelpFormattingPage') || 'Formatting'}" target="_blank">${t('HelpFormattingTip')}</a><br>
         <a href="${this.manual}" target="_blank">Full Documentation</a><br>
         <a href="https://wackowiki.org/doc/Dev/Projects/WikiEdit" target="_blank">Project Page</a>
       </div>
 	  <div class="we-modal-header">
-          <h3 class="we-modal-title">${lang.KeyboardShortcuts || 'Keyboard Shortcuts'}</h3>
+          <h3 class="we-modal-title">${t('KeyboardShortcuts') || 'Keyboard Shortcuts'}</h3>
         </div>
         <div class="we-modal-body" style="padding:20px; max-height:50vh; overflow-y:auto;">
           <table class="we-shortcuts-table" style="width:100%; border-collapse:collapse; font-size:13px;">
             <thead>
               <tr>
-                <th>${lang.Shortcut || 'Shortcut'}</th>
-                <th>${lang.Action || 'Action'}</th>
+                <th>${t('Shortcut') || 'Shortcut'}</th>
+                <th>${t('Action') || 'Action'}</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>Z</kbd></td><td>${lang.Undo || 'Undo'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>${lang.Shift}</kbd> + <kbd>Z</kbd></td><td>${lang.Redo || 'Redo'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>F</kbd></td><td>${lang.SearchReplace || 'Search & Replace'}</td></tr>
-              <tr><td><kbd>${lang.Alt}</kbd> + <kbd>I</kbd></td><td>${lang.Indent || 'Indent'}</td></tr>
-              <tr><td><kbd>${lang.Alt}</kbd> + <kbd>U</kbd></td><td>${lang.Outdent || 'Outdent'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>1</kbd> … <kbd>6</kbd></td><td>${lang.HeadingLevels || 'Heading level 1–6'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>B</kbd></td><td>${lang.Bold || 'Bold'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>I</kbd></td><td>${lang.Italic || 'Italic'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>U</kbd></td><td>${lang.Underline || 'Underline'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>=</kbd></td><td>${lang.Small || 'Small'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>S</kbd></td><td>${lang.Strikethrough || 'Strike-through'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>J</kbd></td><td>${lang.MarkedText || 'Marked text'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>H</kbd></td><td>${lang.HighlightText || 'Highlight text'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>_</kbd></td><td>${lang.HorizontalRule || 'Horizontal rule'}</td></tr>
-              <tr><td><kbd>${lang.Alt}</kbd> + <kbd>S</kbd></td><td>${lang.SavePage || 'Save page'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd>/<kbd>Alt</kbd> + <kbd>L</kbd></td><td>${lang.Hyperlink || 'Insert link'}</td></tr>
-              <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>${lang.Shift}</kbd> + <kbd>N</kbd>/<kbd>O</kbd></td><td>${lang.NumberedList || 'Numbered list'}</td></tr>
-              <tr><td><kbd>Enter</kbd> (inside list)</td><td>${lang.AutoList || 'Continue list automatically'}</td></tr>
-			  <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>${lang.Space}</kbd><td>${lang.Autocomplete || 'Autocomplete'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>Z</kbd></td><td>${t('Undo') || 'Undo'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>${t('Shift')}</kbd> + <kbd>Z</kbd></td><td>${t('Redo') || 'Redo'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>F</kbd></td><td>${t('SearchReplace') || 'Search & Replace'}</td></tr>
+              <tr><td><kbd>${t('Alt')}</kbd> + <kbd>I</kbd></td><td>${t('Indent') || 'Indent'}</td></tr>
+              <tr><td><kbd>${t('Alt')}</kbd> + <kbd>U</kbd></td><td>${t('Outdent') || 'Outdent'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>1</kbd> … <kbd>6</kbd></td><td>${t('HeadingLevels') || 'Heading level 1–6'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>B</kbd></td><td>${t('Bold') || 'Bold'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>I</kbd></td><td>${t('Italic') || 'Italic'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>U</kbd></td><td>${t('Underline') || 'Underline'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>=</kbd></td><td>${t('Small') || 'Small'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>S</kbd></td><td>${t('Strikethrough') || 'Strike-through'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>J</kbd></td><td>${t('MarkedText') || 'Marked text'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>H</kbd></td><td>${t('HighlightText') || 'Highlight text'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>_</kbd></td><td>${t('HorizontalRule') || 'Horizontal rule'}</td></tr>
+              <tr><td><kbd>${t('Alt')}</kbd> + <kbd>S</kbd></td><td>${t('SavePage') || 'Save page'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd>/<kbd>Alt</kbd> + <kbd>L</kbd></td><td>${t('Hyperlink') || 'Insert link'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>${t('Shift')}</kbd> + <kbd>N</kbd>/<kbd>O</kbd></td><td>${t('NumberedList') || 'Numbered list'}</td></tr>
+              <tr><td><kbd>Enter</kbd> (inside list)</td><td>${t('AutoList') || 'Continue list automatically'}</td></tr>
+			  <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>${t('Space')}</kbd><td>${t('Autocomplete') || 'Autocomplete'}</td></tr>
             </tbody>
           </table>
       </div>
       <div class="we-modal-footer">
-        <button type="button" class="we-btn">${lang.Close || 'Close'}</button>
+        <button type="button" class="we-btn">${t('Close') || 'Close'}</button>
       </div>
     `;
 
@@ -1786,39 +1785,39 @@ class WikiEdit extends ProtoEdit {
 
     panel.innerHTML = `
       <div class="we-panel-header">
-        <h3 class="we-panel-title">${lang.SearchReplace || 'Search and Replace'}</h3>
+        <h3 class="we-panel-title">${t('SearchReplace') || 'Search and Replace'}</h3>
         <button type="button" id="we-find-close-${this.id}" class="we-panel-close">✕</button>
       </div>
       <div class="we-panel-body">
         <div class="we-form-group">
-          <label class="we-form-label" for="we-search-for-${this.id}">${lang.SearchFor || 'Search for:'}</label>
+          <label class="we-form-label" for="we-search-for-${this.id}">${t('SearchFor') || 'Search for:'}</label>
           <input type="text" id="we-search-for-${this.id}" class="we-form-input">
         </div>
 
         <div class="we-form-group">
-          <label class="we-form-label" for="we-replace-with-${this.id}">${lang.ReplaceWith || 'Replace with:'}</label>
+          <label class="we-form-label" for="we-replace-with-${this.id}">${t('ReplaceWith') || 'Replace with:'}</label>
           <input type="text" id="we-replace-with-${this.id}" class="we-form-input">
         </div>
 
         <div class="we-form-options">
           <label class="we-checkbox-label">
             <input type="checkbox" id="we-find-case-${this.id}" checked>
-            ${lang.MatchCase || 'Match case'}
+            ${t('MatchCase') || 'Match case'}
           </label>
           <label class="we-checkbox-label">
             <input type="checkbox" id="we-find-whole-${this.id}">
-            ${lang.WholeWords || 'Whole words only'}
+            ${t('WholeWords') || 'Whole words only'}
           </label>
           <label class="we-checkbox-label">
             <input type="checkbox" id="we-find-regex-${this.id}">
-            ${lang.UseRegex || 'Regular expression'}
+            ${t('UseRegex') || 'Regular expression'}
           </label>
         </div>
 
         <div class="we-panel-actions">
-          <button type="button" id="we-find-next-${this.id}" class="we-btn we-btn-primary">${lang.FindNext || 'Find Next'}</button>
-          <button type="button" id="we-replace-btn-${this.id}" class="we-btn">${lang.Replace || 'Replace'}</button>
-          <button type="button" id="we-replace-all-${this.id}" class="we-btn">${lang.ReplaceAll || 'Replace All'}</button>
+          <button type="button" id="we-find-next-${this.id}" class="we-btn we-btn-primary">${t('FindNext') || 'Find Next'}</button>
+          <button type="button" id="we-replace-btn-${this.id}" class="we-btn">${t('Replace') || 'Replace'}</button>
+          <button type="button" id="we-replace-all-${this.id}" class="we-btn">${t('ReplaceAll') || 'Replace All'}</button>
         </div>
       </div>
     `;
@@ -1897,7 +1896,7 @@ class WikiEdit extends ProtoEdit {
           const flags = matchCase ? 'g' : 'gi';
           re = new RegExp(term, flags);
         } catch (err) {
-          alert(lang?.InvalidRegex || 'Invalid regular expression.');
+          alert(t('InvalidRegex') || 'Invalid regular expression.');
           return;
         }
       } else {
@@ -1923,7 +1922,7 @@ class WikiEdit extends ProtoEdit {
       }
     } catch (err) {
       Log.error('WikiEdit findNext error:', err);
-      alert(lang?.FindReplaceError || 'An error occurred during find operation.');
+      alert(t('FindReplaceError') || 'An error occurred during find operation.');
     }
   }
 
@@ -1978,7 +1977,7 @@ class WikiEdit extends ProtoEdit {
       this.findNext();
     } catch (err) {
       Log.error('WikiEdit replaceCurrent error:', err);
-      alert(lang?.FindReplaceError || 'An error occurred during replace operation.');
+      alert(t('FindReplaceError') || 'An error occurred during replace operation.');
       // do NOT call findNext() on generic error – we already pushed undo state
     }
   }
@@ -2002,7 +2001,7 @@ class WikiEdit extends ProtoEdit {
           const flags = matchCase ? 'g' : 'gi';
           re = new RegExp(term, flags);
         } catch (err) {
-          alert(lang?.InvalidRegex || 'Invalid regular expression.');
+          alert(t('InvalidRegex') || 'Invalid regular expression.');
           return;
         }
       } else {
@@ -2021,7 +2020,7 @@ class WikiEdit extends ProtoEdit {
       }
     } catch (err) {
       Log.error('WikiEdit replaceAll error:', err);
-      alert(lang?.FindReplaceError || 'An error occurred during replace-all operation.');
+      alert(t('FindReplaceError') || 'An error occurred during replace-all operation.');
     }
   }
 
@@ -2115,12 +2114,12 @@ class WikiEdit extends ProtoEdit {
     if (this.cf_modified) return;
     this.cf_modified = true;
     this.area.style.borderColor = '#eecc99';
-    this.area.title = lang.ModifiedHint || 'Modified – unsaved changes';
+    this.area.title = t('ModifiedHint') || 'Modified – unsaved changes';
   }
 
   checkCf() {
     if (this.cf_modified) {
-      return '\n' + (lang.NotSavedWarning || 'You have unsaved changes!') + '\n';
+      return '\n' + (t('NotSavedWarning') || 'You have unsaved changes!') + '\n';
     }
     return null;
   }
@@ -2814,7 +2813,7 @@ class WikiEdit extends ProtoEdit {
     const diffSec = Math.floor(diffMs / 1000);
 
     if (diffSec < 60) {
-      return this.lang?.JustNow || 'just now';
+      return t('JustNow') || 'just now';
     }
 
     const diffMin = Math.floor(diffSec / 60);
@@ -2831,7 +2830,7 @@ class WikiEdit extends ProtoEdit {
     yesterday.setDate(yesterday.getDate() - 1);
 
     if (date.toDateString() === yesterday.toDateString()) {
-      return this.lang?.Yesterday || 'yesterday';
+      return t('Yesterday') || 'yesterday';
     }
 
     const diffDay = Math.floor(diffHour / 24);
@@ -2840,7 +2839,7 @@ class WikiEdit extends ProtoEdit {
     }
 
     // Fallback for older drafts
-    return date.toLocaleDateString(this.lang?.Locale || undefined);
+    return date.toLocaleDateString(t('Locale') || undefined);
   }
 
   /**
@@ -2851,7 +2850,7 @@ class WikiEdit extends ProtoEdit {
 
       // Try localized template first (e.g. 'vor %s Stunden' or '%s hours ago')
       const key = isSingular ? unit + 'Ago' : unit + 'sAgo';
-      let template = this.lang?.[key];
+      let template = t(key);
 
       if (template) {
         return template
@@ -2862,9 +2861,9 @@ class WikiEdit extends ProtoEdit {
 
       // Fallback: Use singular/plural from language file
       if (isSingular) {
-        return `1 ${this.lang?.[unit] || unit.toLowerCase()} ago`;
+        return `1 ${t(unit) || unit.toLowerCase()} ago`;
       } else {
-        return `${value} ${this.lang?.[unit + 's'] || unit.toLowerCase() + 's'} ago`;
+        return `${value} ${t(unit + 's') || unit.toLowerCase() + 's'} ago`;
       }
     }
 

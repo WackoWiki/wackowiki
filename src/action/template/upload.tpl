@@ -18,12 +18,11 @@
 
 			<!-- AJAX Tab - hidden by default (for no-JS fallback) -->
 			<div id="tab-ajax" class="upload-tab-content hidden">
-				<div class="upload-dropzone" aria-label="Drop files here to upload - multiple files supported">
+				<div class="upload-dropzone" aria-label="[ ' _t: DropFilesHere ' ]">
 					<div class="dropzone-inner">
-						<p><strong>Drop files here to upload</strong></p>
-						<!-- Multiple files supported • Paste from clipboard (Ctrl+V) -->
+						<p><strong>[ ' _t: DropFilesHere ' ]</strong></p>
 						<p class="msg hint">[ ' _t: UploadMax ' ] [ ' size ' ]</p>
-						<button type="button" class="btn-select-files">Select files</button>
+						<button type="button" class="btn-select-files">[ ' _t: SelectFiles ' ]</button>
 
 						<div class="upload-location">
 							<label class="radio-line"><input type="radio" name="upload_to" value="local" checked> [ ' _t: UploadLocalText ' ]</label>

@@ -45,16 +45,16 @@ class AutoComplete {
             <li id="${this.id}_li" class="we-autocomplete-container" style="display: none;">
                 <button id="${this.id}"
                         class="we-autocomplete-btn"
-                        title="${lang.AcHelp || 'Autocomplete (Ctrl+Space)'}"
-                        aria-label="${lang.AcHelp || 'Trigger autocomplete'}">${lang.Autocomplete || 'Autocomplete'}</button>
+                        title="${t('AcHelp') || 'Autocomplete (Ctrl+Space)'}"
+                        aria-label="${t('AcHelp') || 'Trigger autocomplete'}">${t('Autocomplete') || 'Autocomplete'}</button>
                 <button id="${this.id}_reset"
                         class="we-autocomplete-reset"
-                        title="${lang.AcReset || 'Reset autocomplete'}"
-                        aria-label="${lang.AcReset || 'Reset autocomplete'}">×</button>
+                        title="${t('AcReset') || 'Reset autocomplete'}"
+                        aria-label="${t('AcReset') || 'Reset autocomplete'}">×</button>
                 <ul id="${this.id}_dropdown"
                     class="we-autocomplete-dropdown"
                     role="listbox"
-                    aria-label="${lang.AcSuggestions || 'Autocomplete suggestions'}"></ul>
+                    aria-label="${t('AcSuggestions') || 'Autocomplete suggestions'}"></ul>
             </li>
         `;
 

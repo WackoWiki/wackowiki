@@ -78,15 +78,15 @@ class ToolbarCustomizer {
               <div id="we-toolbar-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:10000;">
                   <div style="background:var(--ww-bg-secondary);width:680px;max-width:96%;max-height:92vh;border-radius:8px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.5);">
                       <div style="padding:16px 20px;var(--ww-bg-accent);border-bottom:1px solid #ddd;">
-                          <h3 style="margin:0;">${window.lang?.CustomizeToolbar || 'Customize WikiEdit Toolbar'}</h3>
-                          <p style="margin:4px 0 0;var(--ww-text-tertiary);">${window.lang?.DragToReorder || 'Drag to reorder • Uncheck to hide buttons'}</p>
+                          <h3 style="margin:0;">${t('CustomizeToolbar') || 'Customize WikiEdit Toolbar'}</h3>
+                          <p style="margin:4px 0 0;var(--ww-text-tertiary);">${t('DragToReorder') || 'Drag to reorder • Uncheck to hide buttons'}</p>
                       </div>
                       <div id="we-modal-content" style="padding:20px;max-height:62vh;overflow:auto;">
                       </div>
                       <div style="padding:12px 20px;background:var(--ww-bg-accent);border-top:1px solid #ddd;text-align:right;">
-                          <button type="button" onclick="ToolbarCustomizer.save()" style="background:#007acc;color:white;">${window.lang?.SaveChanges || 'Save Changes'}</button>
-                          <button type="button" onclick="ToolbarCustomizer.resetToDefault()" style="margin-left:8px;">${window.lang?.ResetToDefault || 'Reset to Default'}</button>
-                          <button type="button" onclick="ToolbarCustomizer.close()" style="margin-left:8px;">${window.lang?.Cancel || 'Cancel'}</button>
+                          <button type="button" onclick="ToolbarCustomizer.save()" style="background:#007acc;color:white;">${t('SaveChanges') || 'Save Changes'}</button>
+                          <button type="button" onclick="ToolbarCustomizer.resetToDefault()" style="margin-left:8px;">${t('ResetToDefault') || 'Reset to Default'}</button>
+                          <button type="button" onclick="ToolbarCustomizer.close()" style="margin-left:8px;">${t('Cancel') || 'Cancel'}</button>
                       </div>
                   </div>
               </div>`;
@@ -114,7 +114,7 @@ class ToolbarCustomizer {
 
       const def = this.buttonDefs[id] || {};
       const label = def.labelKey
-        ? (window.lang?.[def.labelKey] || id)
+        ? (t(def.labelKey) || id)
         : (def.label || id);
 
       const isChecked = currentOrder.includes(id) ? 'checked' : '';
@@ -174,13 +174,13 @@ class ToolbarCustomizer {
 
     // Show persistent message (no auto-hide)
     this.showSystemMessage(
-      window.lang?.ToolbarConfigUpdated ||
+      t('ToolbarConfigUpdated') ||
       'Toolbar configuration updated.<br><br>Please click <strong>Save Settings</strong> at the bottom of the page to store it on the server.'
     );
   }
 
   static resetToDefault() {
-    if (!confirm(window.lang?.ResetToolbarConfirm || 'Reset to default toolbar configuration?')) return;
+    if (!confirm(t('ResetToolbarConfirm') || 'Reset to default toolbar configuration?')) return;
 
     const hiddenField = document.getElementById('wikiedit_toolbar_hidden');
     if (hiddenField) hiddenField.value = '';
@@ -188,7 +188,7 @@ class ToolbarCustomizer {
     this.close();
 
     this.showSystemMessage(
-      window.lang?.ToolbarResetToDefault ||
+      t('ToolbarResetToDefault') ||
       'Toolbar has been reset to default.<br><br>Please save the settings form to apply the change.'
     );
   }

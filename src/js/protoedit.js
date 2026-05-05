@@ -19,7 +19,6 @@ class ProtoEdit {
   }
 
   constructor() {
-    this.lang = window.lang;
     this.enabled = true;
     this.buttons = [];
     this.id = null;
@@ -114,7 +113,7 @@ class ProtoEdit {
 	    if (typeof def.condition === 'string' && !this[def.condition]) continue;
 	  }
 
-      const label = def.labelKey ? (this.lang?.[def.labelKey] || id) : (def.label || id);
+      const label = def.labelKey ? (t(def.labelKey) || id) : (def.label || id);
 
       // Create handler bound to instance, using method/args if defined
       const handler = def.method 
@@ -158,10 +157,10 @@ class ProtoEdit {
 
   getDropdownHTML() {
     return ''; /*`<li class="we-dropdown">
-       <button type="button" class="btn-" title="${this.lang?.ToolsHelp || 'Tools'}">▼</button>
+       <button type="button" class="btn-" title="${t('ToolsHelp') || 'Tools'}">▼</button>
        <ul class="we-dropdown-menu">
           <li class="we-about">
-	              <a href="${this.manual || 'https://wackowiki.org/doc/'}" target="_blank">ℹ️ ${this.lang?.About || 'About WikiEdit'}</a>
+	              <a href="${this.manual || 'https://wackowiki.org/doc/'}" target="_blank">ℹ️ ${t('About') || 'About WikiEdit'}</a>
          </li>
 		 <!-- Add any other permanent dropdown items here -->
        </ul>
@@ -281,8 +280,8 @@ class ProtoEdit {
     line = lines.length;
     col = lines[lines.length - 1].length + 1;
 
-    this.charsEl.textContent = `${chars} ${lang.Chars || 'chars'}`;
-    this.wordsEl.textContent = `${words} ${lang.Words || 'words'}`;
+    this.charsEl.textContent = `${chars} ${t('Chars') || 'chars'}`;
+    this.wordsEl.textContent = `${words} ${t('Words') || 'words'}`;
     this.cursorEl.textContent = `${line}:${col}`;
   }
 

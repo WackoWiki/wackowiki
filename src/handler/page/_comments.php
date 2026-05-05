@@ -204,7 +204,8 @@ if ($this->has_access('read'))
 			{
 				if ($user['autocomplete'])
 				{
-					$tpl->autocomplete = true;
+					$tpl->ac			= true;
+					$tpl->autocomplete	= true;
 				}
 
 				// session heartbeat timeout = wiki session timeout - 40 second

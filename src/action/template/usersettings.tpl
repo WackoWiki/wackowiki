@@ -138,6 +138,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<fieldset>
+							<script src="[ ' db: base_path ' ]js/helpers.js"></script>
 							<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
 							<legend>[ ' _t: WikiEditToolbar ' ]</legend>
 							<input type="hidden" name="wikiedit_toolbar" id="wikiedit_toolbar_hidden" 

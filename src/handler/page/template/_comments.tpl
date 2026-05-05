@@ -66,10 +66,13 @@
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
 
 						[ '' // load WikiEdit '' ]
+						<script src="[ ' db: base_path ' ]js/helpers.js"></script>
 						<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
 						<script src="[ ' db: base_path ' ]js/wikiedit.js"></script>
-						<script src="[ ' db: base_path ' ]js/autocomplete.js"></script>
+						[= ac _ =
+							<script src="[ ' db: base_path ' ]js/autocomplete.js"></script>
+						=]
 
 						<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
 						<label for="addcomment_title">[ ' _t: AddCommentTitle ' ]</label><br>

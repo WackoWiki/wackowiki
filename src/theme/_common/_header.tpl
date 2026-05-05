@@ -50,6 +50,7 @@ _common include file for themes
 	<script src="[ ' db: base_path ' ]js/default.js" defer></script>
 	[= edit _ =
 		[ '' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '' ]
+		<script src="[ ' db: base_path ' ]js/helpers.js"></script>
 		<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
 		<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' lang | e ' ].js"></script>
 		<script src="[ ' db: base_path ' ]js/wikiedit.js"></script>

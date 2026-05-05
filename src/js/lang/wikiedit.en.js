@@ -97,7 +97,11 @@ lang = {
 
 	Chars:					'chars',
 	Words:					'words',
-	
+
+	ManageAttachments:		'View and manage attachments',
+	EditMetadata:			'edit metadata',
+	UploadSuccess:			'%1 of %2 file(s) uploaded successfully.',
+
 	CustomizeToolbar:		'Customize WikiEdit Toolbar',
 	DragToReorder:			'Drag to reorder • Uncheck to hide buttons',
 	SaveChanges:			'Save Changes',
