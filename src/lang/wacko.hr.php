@@ -916,6 +916,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Otpremi',
 	'UploadMax'					=> 'Ne više od ',
 	'UploadUsedStorage'			=> 'Korišteno prostora ',
+	'DropFilesHere'				=> 'Otpuštanje datoteka ovdje za prijenos',
+	'SelectFiles'				=> 'Odaberite datoteke',
 
 	// attachments
 	'Attachments'				=> 'Privitci',

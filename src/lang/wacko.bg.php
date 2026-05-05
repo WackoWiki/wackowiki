@@ -864,7 +864,7 @@ $wacko_translation = [
 	'MassRename'				=> 'для всех страниц кластера',
 	'SettingsRemove'			=> 'Изртиване',
 	'SettingsPurge'				=> 'Изчистване',
-	'SettingsModerate'			=> 'Модериstrongрай',
+	'SettingsModerate'			=> 'Модерирай',
 	'SettingsPermissions'		=> 'Достъп',
 	'AclForEntireCluster'		=> 'Права за целия СЕКТОР',
 	'SettingsAttachments'		=> 'Прикачени файлове',
@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Качване',
 	'UploadMax'					=> 'Не повече от ',
 	'UploadUsedStorage'			=> 'Storage in use ',
+	'DropFilesHere'				=> 'Drop files here to upload',
+	'SelectFiles'				=> 'Select files',
 
 	// attachments
 	'Attachments'				=> 'Прикачени файлове',

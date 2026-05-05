@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Μεταφόρτωση',
 	'UploadMax'					=> 'Όχι μεγαλύτερο από ',
 	'UploadUsedStorage'			=> 'Αποθηκευτικός χώρος σε χρήση ',
+	'DropFilesHere'				=> 'Αποθέστε αρχεία εδώ για μεταφόρτωση',
+	'SelectFiles'				=> 'Επιλογή αρχείων',
 
 	// attachments
 	'Attachments'				=> 'Συνημμένα',

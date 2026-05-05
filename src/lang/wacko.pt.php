@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Prossiga',
 	'UploadMax'					=> 'Não mais do que ',
 	'UploadUsedStorage'			=> 'Armazenamento em uso ',
+	'DropFilesHere'				=> 'Solte os arquivos aqui para enviar',
+	'SelectFiles'				=> 'Selecionar arquivos',
 
 	// attachments
 	'Attachments'				=> 'Anexos',

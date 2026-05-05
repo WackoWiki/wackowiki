@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Feltöltés',
 	'UploadMax'					=> 'Nem több, mint ',
 	'UploadUsedStorage'			=> 'Storage in use ',
+	'DropFilesHere'				=> 'Drop files here to upload',
+	'SelectFiles'				=> 'Select files',
 
 	// attachments
 	'Attachments'				=> 'Csatolmányok',

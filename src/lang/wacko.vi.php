@@ -916,6 +916,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Tải lên',
 	'UploadMax'					=> 'Không quá ',
 	'UploadUsedStorage'			=> 'Dung lượng đang sử dụng ',
+	'DropFilesHere'				=> 'Kéo thả tệp vào đây để tải lên',
+	'SelectFiles'				=> 'Chọn tệp',
 
 	// attachments
 	'Attachments'				=> 'Tệp đính kèm',

@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Nahrát',
 	'UploadMax'					=> 'Ne více než ',
 	'UploadUsedStorage'			=> 'Uložiště se používá ',
+	'DropFilesHere'				=> 'Pro nahrání přetáhněte soubory sem',
+	'SelectFiles'				=> 'Vybrat soubory',
 
 	// attachments
 	'Attachments'				=> 'Přílohy',

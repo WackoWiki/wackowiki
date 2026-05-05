@@ -911,6 +911,8 @@ $wacko_translation = [
 	'UploadFile'				=> '上傳檔案',
 	'UploadMax'					=> '最多 ',
 	'UploadUsedStorage'			=> '已使用空間 ',
+	'DropFilesHere'				=> '將檔案拖放到此處以上傳',
+	'SelectFiles'				=> '選擇檔案',
 
 	// attachments
 	'Attachments'				=> '附加檔案',

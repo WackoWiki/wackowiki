@@ -911,6 +911,8 @@ $wacko_translation = [
 	'UploadFile'				=> '올리기',
 	'UploadMax'					=> '파일의 최대 크기 ',
 	'UploadUsedStorage'			=> 'Storage in use ',
+	'DropFilesHere'				=> '업로드할 파일을 여기에 드롭하세요',
+	'SelectFiles'				=> '파일 선택',
 
 	// attachments
 	'Attachments'				=> '첨부',

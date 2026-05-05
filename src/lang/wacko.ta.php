@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'பதிவேற்றம்',
 	'UploadMax'					=> 'No more than ',
 	'UploadUsedStorage'			=> 'Storage in use ',
+	'DropFilesHere'				=> 'Drop files here to upload',
+	'SelectFiles'				=> 'Select files',
 
 	// attachments
 	'Attachments'				=> 'Attachments',

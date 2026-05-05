@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Doorgaan',
 	'UploadMax'					=> 'Maximaal ',
 	'UploadUsedStorage'			=> 'Opslag in gebruik ',
+	'DropFilesHere'				=> 'Sleep bestanden hier om te uploaden',
+	'SelectFiles'				=> 'Selecteer bestanden',
 
 	// attachments
 	'Attachments'				=> 'Bijlagen',

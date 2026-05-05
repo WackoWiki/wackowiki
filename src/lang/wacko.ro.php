@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Incarca',
 	'UploadMax'					=> 'Nu mai mult de ',
 	'UploadUsedStorage'			=> 'Păstrare în uz ',
+	'DropFilesHere'				=> 'Plasați fișierele aici pentru a le încărca',
+	'SelectFiles'				=> 'Selectaţi fişierele',
 
 	// attachments
 	'Attachments'				=> 'Atașamente',

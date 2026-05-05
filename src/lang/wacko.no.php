@@ -914,6 +914,8 @@ $wacko_translation = [
 	'UploadFile'				=> 'Last opp',
 	'UploadMax'					=> 'Ikke mer enn ',
 	'UploadUsedStorage'			=> 'Oppbevaring i bruk ',
+	'DropFilesHere'				=> 'Slipp filer her for å laste opp',
+	'SelectFiles'				=> 'Velg filer',
 
 	// attachments
 	'Attachments'				=> 'Vedlegg',
