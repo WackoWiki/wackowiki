@@ -73,6 +73,23 @@ const MENU_AUTO						= 0;
 const MENU_USER						= 1;
 const MENU_DEFAULT					= 2;
 
+const TB_DEFAULT					= [
+						'h2','h3','h4','h5','h6','separator',
+						'bold','italic','underline','strike','small','code','separator',
+						'ul','ol','separator',
+						'center','right','justify','separator',
+						'outdent','indent','separator',
+						'quote','source','action','textred','highlight','separator',
+						'hr','signature','createlink','footnote','createtable',
+						'upload-media','separator',
+						'draft-restore','draft-clear','separator',
+						'wacko2md','md2wacko','separator',
+						'dark-toggle','syntax','livepreview','fullscreen','separator',
+						'shrink','enlarge','separator',
+						'undo','redo','separator', 'search', 'about',
+						'dropdown'
+];
+
 const LINK_PAGE						= 0;
 const LINK_FILE						= 1;
 const LINK_EXTERNAL					= 2;

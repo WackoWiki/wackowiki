@@ -162,8 +162,11 @@ if ($this->has_access('read'))
 								?? ($title
 									?? '');
 
+			$default_toolbar = $this->db->wikiedit_toolbar ?? json_encode(TB_DEFAULT);
+
 			$tpl->nonce		= $upload_nonce;
 			$tpl->upload	= (int) $can_upload;
+			$tpl->toolbar	= $user['wikiedit_toolbar'] ?: $default_toolbar;
 			$tpl->autosave	= $user['autosave_draft'] ?? 0;;
 			$tpl->height	= $user['editor_height'] ?? 400;
 			$tpl->syntax	= $user['syntax_highlighting'] ?? 1;

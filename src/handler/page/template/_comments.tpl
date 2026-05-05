@@ -84,6 +84,7 @@
 								data-heartbeat-timeout="[ ' heartbeat ' ]"
 								data-heartbeat-name="add_comment"
 							=]
+							data-toolbar-buttons="[ ' toolbar | e ' ]"
 							data-autosave-draft="[ ' autosave ' ]"
 							data-syntax-highlighting="[ ' syntax ' ]"
 							data-live-preview="[ ' preview ' ]"
