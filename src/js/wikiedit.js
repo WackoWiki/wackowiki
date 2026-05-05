@@ -1702,7 +1702,7 @@ class WikiEdit extends ProtoEdit {
         <div class="we-modal-body" style="padding:20px; max-height:50vh; overflow-y:auto;">
           <table class="we-shortcuts-table" style="width:100%; border-collapse:collapse; font-size:13px;">
             <thead>
-              <tr style="background:#f8f8f8;">
+              <tr>
                 <th>${lang.Shortcut || 'Shortcut'}</th>
                 <th>${lang.Action || 'Action'}</th>
               </tr>
