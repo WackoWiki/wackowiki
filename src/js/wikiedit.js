@@ -1726,12 +1726,12 @@ class WikiEdit extends ProtoEdit {
               <tr><td><kbd>${lang.Ctrl}</kbd>/<kbd>Alt</kbd> + <kbd>L</kbd></td><td>${lang.Hyperlink || 'Insert link'}</td></tr>
               <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>${lang.Shift}</kbd> + <kbd>N</kbd>/<kbd>O</kbd></td><td>${lang.NumberedList || 'Numbered list'}</td></tr>
               <tr><td><kbd>Enter</kbd> (inside list)</td><td>${lang.AutoList || 'Continue list automatically'}</td></tr>
-			  <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>${lang.Space}</kbd><td>${lang.AutoList || 'Autocomplete'}</td></tr>
+			  <tr><td><kbd>${lang.Ctrl}</kbd> + <kbd>${lang.Space}</kbd><td>${lang.Autocomplete || 'Autocomplete'}</td></tr>
             </tbody>
           </table>
       </div>
       <div class="we-modal-footer">
-        <button type="button" class="we-btn">Close</button>
+        <button type="button" class="we-btn">${lang.Close || 'Close'}</button>
       </div>
     `;
 

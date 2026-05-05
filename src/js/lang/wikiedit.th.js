@@ -98,11 +98,13 @@ lang = {
 	KeyboardShortcuts: 'ทางลัดแป้นพิมพ์',
 	Shortcut: 'ทางลัด',
 	HeadingLevels: 'หัวเรื่อง ระดับ 1–6',
+	AutoList: 'Continue list automatically',
 	SavePage: 'บันทึกหน้า',
 	Ctrl: 'Ctrl',
 	Alt: 'Alt',
 	Shift: 'Shift',
 	Space: 'Space',
+	Close: 'Close',
 	JustNow: 'เมื่อสักครู่',
 	MinuteAgo: '1 นาทีที่แล้ว',
 	MinutesAgo: '%s นาทีที่แล้ว',
@@ -110,5 +112,5 @@ lang = {
 	HoursAgo: '%s ชั่วโมงที่แล้ว',
 	Yesterday: 'เมื่อวาน',
 	DaysAgo: 'หลายวันก่อน',
-	Yesterday: 'เมื่อวาน'
+	Yesterday: 'yesterday'
 };

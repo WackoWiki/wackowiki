@@ -98,11 +98,13 @@ lang = {
 	KeyboardShortcuts: 'Phím tắt',
 	Shortcut: 'Phím tắt',
 	HeadingLevels: 'Cấp đề mục 1–6',
+	AutoList: 'Continue list automatically',
 	SavePage: 'Lưu trang',
 	Ctrl: 'Ctrl',
 	Alt: 'Alt',
 	Shift: 'Shift',
 	Space: 'Space',
+	Close: 'Close',
 	JustNow: 'vừa xong',
 	MinuteAgo: '1 phút trước',
 	MinutesAgo: '%s phút trước',
@@ -110,5 +112,5 @@ lang = {
 	HoursAgo: '%s giờ trước',
 	Yesterday: 'hôm qua',
 	DaysAgo: '%s ngày trước',
-	Yesterday: 'hôm qua',
+	Yesterday: 'yesterday'
 };

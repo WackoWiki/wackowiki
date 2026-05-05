@@ -98,11 +98,13 @@ lang = {
 	KeyboardShortcuts: 'Klavye Kısayolları',
 	Shortcut: 'Kısayol',
 	HeadingLevels: 'Başlık düzeyleri 1–6',
+	AutoList: 'Continue list automatically',
 	SavePage: 'Sayfayı kaydet',
 	Ctrl: 'Ctrl',
 	Alt: 'Alt',
 	Shift: 'Shift',
 	Space: 'Space',
+	Close: 'Close',
 	JustNow: 'az önce',
 	MinuteAgo: '1 dakika önce',
 	MinutesAgo: '%s dakika önce',
@@ -110,5 +112,5 @@ lang = {
 	HoursAgo: '%s saat önce',
 	Yesterday: 'dün',
 	DaysAgo: '%s gün önce',
-	Yesterday: 'dün'
+	Yesterday: 'yesterday'
 };

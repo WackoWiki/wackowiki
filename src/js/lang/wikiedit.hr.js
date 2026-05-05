@@ -98,11 +98,13 @@ lang = {
 	KeyboardShortcuts: 'Tipkovni prečaci',
 	Shortcut: 'Prečac',
 	HeadingLevels: 'Razine naslova 1–6',
+	AutoList: 'Continue list automatically',
 	SavePage: 'Spremi stranicu',
 	Ctrl: 'Ctrl',
 	Alt: 'Alt',
 	Shift: 'Shift',
 	Space: 'Space',
+	Close: 'Close',
 	JustNow: 'upravo sada',
 	MinuteAgo: 'prije 1 minute',
 	MinutesAgo: 'prije %s minuta',
@@ -110,5 +112,5 @@ lang = {
 	HoursAgo: 'prije %s sati',
 	Yesterday: 'jučer',
 	DaysAgo: 'prije %s dana',
-	Yesterday: 'jučer'
+	Yesterday: 'yesterday'
 };

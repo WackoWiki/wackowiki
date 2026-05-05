@@ -89,7 +89,7 @@ lang = {
 	RecoverDraft:			'Recover Draft',
 	DiscardDraft:			'Discard Draft',
 	ThisPage:				'this page',
-	
+
 	Autocomplete:			'Autocomplete',
 	AcHelp:					'Autocomplete (Ctrl+Space)',
 	AcReset:				'Reset autocomplete',
@@ -109,11 +109,13 @@ lang = {
 	KeyboardShortcuts:		'Keyboard Shortcuts',
 	Shortcut:				'Shortcut',
 	HeadingLevels:			'Heading level 1–6',
+	AutoList:				'Continue list automatically',
 	SavePage:				'Save page',
 	Ctrl:					'Ctrl',
 	Alt:					'Alt',
 	Shift:					'Shift',
 	Space:					'Space',
+	Close:					'Close',
 	
 	JustNow:				'just now',
 	MinuteAgo:				'1 minute ago',
