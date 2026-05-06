@@ -2,7 +2,15 @@ _common include file for themes
 
 [ === HtmlHead === ]
 <!DOCTYPE html>
-<html dir="[ ' dir ' ]" lang="[ ' lang ' ]" data-theme="[ ' mode ' ]">
+<html 
+	dir="[ ' dir ' ]" 
+	lang="[ ' lang ' ]" 
+	data-theme="[ ' mode ' ]"
+	[= doubleclick _ =
+		data-edit-url="[ ' href | e ' ]" 
+		data-base-path="[ ' db: base_path | e ' ]"
+	=]
+	>
 <head>
 	<meta charset="utf-8">
 	<title>[ ' title | e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name | e ' ]</title>
@@ -58,12 +66,6 @@ _common include file for themes
 		[= ac _ =
 			<script src="[ ' db: base_path ' ]js/autocomplete.js"></script>
 		=]
-	=]
-	[= doubleclick _ =
-		<script>
-			document.documentElement.dataset.editUrl = "[ ' href | e js ' ]";
-			document.documentElement.dataset.basePath = "[ ' db: base_path | e js ' ]";
-		</script>
 	=]
 	[ ' additions ' ]
 </head>
