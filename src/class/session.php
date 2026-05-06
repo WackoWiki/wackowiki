@@ -38,6 +38,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public bool		$cf_cookie_secure		= false;	// cookie should only be sent over secure connections.
 	public bool		$cf_cookie_httponly		= true;		// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
 	public string	$cf_cookie_samesite		= COOKIE_SAMESITE;	// 'Strict' asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
+	public bool		$cf_enable_cookie_prefix = true;	// RFC 6265bis cookie prefixes (__Host-, __Secure-)
 	public string	$cf_referer_check		= '';
 	public string	$cf_cache_limiter		= 'none';
 	public			$cf_cache_expire		= 180*60;	// ttl for cached session pages in seconds
@@ -513,31 +514,86 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$this->send_cookie($this->name, $this->id);
 	}
 
-	// legacy get/set/delete from engine
+	/**
+	 * Get cookie value with RFC 6265bis prefix support
+	 *
+	 * Implements fallback chain for maximum compatibility:
+	 * 1. Try with determined prefix (if feature enabled)
+	 * 2. Try unprefixed (backward compatibility)
+	 * 3. Try alternative prefixes (migration scenarios)
+	 *
+	 * @param string $name Cookie name (without prefix)
+	 * @return mixed Cookie value or null
+	 */
 	function get_cookie($name)
 	{
-		return @$_COOKIE[$this->cf_cookie_prefix . $name];
+		$base_name = $this->cf_cookie_prefix . $name;
+
+		if (!$this->cf_enable_cookie_prefix)
+		{
+			// Feature disabled: only look for unprefixed
+			return $_COOKIE[$base_name] ?? null;
+		}
+
+		// Feature enabled: use CookiePrefix to find cookie with all fallbacks
+		return CookiePrefix::get(
+			$base_name,
+			(bool) $this->cf_cookie_secure,
+			$this->cf_cookie_path,
+			$this->cf_cookie_domain
+			);
 	}
 
 	// persistent: false, or number of days (0 for config default's days)
 	function set_cookie($name, $value, $persistent = false)
 	{
 		$name = $this->cf_cookie_prefix . $name;
-		$this->setcookie($name, $value,
-			(($persistent !== false && $this->cf_cookie_persistent !== false)? ($persistent ?: $this->cf_cookie_persistent) * DAYSECS + time() : 0));
-		$_COOKIE[$name] = $value;
+		$expires = (($persistent !== false && $this->cf_cookie_persistent !== false)? ($persistent ?: $this->cf_cookie_persistent) * DAYSECS + time() : 0);
+
+		$this->setcookie($name, $value, $expires);
+
+		// Update $_COOKIE array for this request
+		if ($this->cf_enable_cookie_prefix)
+		{
+			CookiePrefix::setLocal(
+				$name,
+				$value,
+				(bool) $this->cf_cookie_secure,
+				$this->cf_cookie_path,
+				$this->cf_cookie_domain
+				);
+		}
+		else
+		{
+			$_COOKIE[$name] = $value;
+		}
 	}
 
 	function delete_cookie($name)
 	{
 		$name = $this->cf_cookie_prefix . $name;
+
+		if ($this->cf_enable_cookie_prefix)
+		{
+			CookiePrefix::deleteLocal(
+				$name,
+				(bool) $this->cf_cookie_secure,
+				$this->cf_cookie_path,
+				$this->cf_cookie_domain
+				);
+		}
+		else
+		{
+			unset($_COOKIE[$name]);
+		}
+
 		$this->unsetcookie($name);
-		unset($_COOKIE[$name]);
 	}
 
 	protected function send_cookie($name, $value)
 	{
-		$this->setcookie($this->cf_cookie_prefix . $name, $value, ($this->cf_cookie_lifetime > 0? time() + $this->cf_cookie_lifetime : 0));
+		$expires = ($this->cf_cookie_lifetime > 0? time() + $this->cf_cookie_lifetime : 0);
+		$this->setcookie($this->cf_cookie_prefix . $name, $value, $expires);
 	}
 
 	// just sugar
@@ -560,6 +616,23 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		isset($secure)		|| $secure		= $this->cf_cookie_secure;
 		isset($httponly)	|| $httponly	= $this->cf_cookie_httponly;
 		isset($samesite)	|| $samesite	= $this->cf_cookie_samesite;
+
+		// Apply RFC 6265bis cookie prefixes if feature enabled
+		// This is the single point where prefixes are applied to outgoing cookies
+		if ($this->cf_enable_cookie_prefix)
+		{
+			$name = CookiePrefix::apply($name, (bool) $secure, $path, $domain);
+		}
+
+		// Validate prefix compliance
+		if ($this->cf_enable_cookie_prefix)
+		{
+			$validation = CookiePrefix::validate($name, (bool) $secure, $path, $domain);
+			if (!$validation['valid'])
+			{
+				trigger_error("Cookie configuration issue for '$name': {$validation['message']}", E_USER_WARNING);
+			}
+		}
 
 		// cookie name must be rfc2616 2.2 token:
 		$name = Ut::urlencode('/[\x7F\x00-\x1F\s()<>@,;:\\\\"\/\[\]?={}%]/', $name);

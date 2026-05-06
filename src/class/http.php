@@ -306,15 +306,16 @@ class Http
 			$sess->cf_dbal_table_name = $this->db->table_prefix . 'session';
 		}
 
-		$sess->cf_secret			= $this->db->system_seed_hash;
-		$sess->cf_cookie_prefix		= $this->db->cookie_prefix;
-		$sess->cf_cookie_persistent	= ($this->db->allow_persistent_cookie? $this->db->session_length : false);
-		$sess->cf_cookie_path		= $this->db->cookie_path;
-		$sess->cf_cookie_secure		= ($this->db->tls && $this->tls_session);
-		$sess->cf_cookie_httponly	= true;
+		$sess->cf_secret				= $this->db->system_seed_hash;
+		$sess->cf_cookie_prefix			= $this->db->cookie_prefix;
+		$sess->cf_cookie_persistent		= ($this->db->allow_persistent_cookie? $this->db->session_length : false);
+		$sess->cf_cookie_path			= $this->db->cookie_path;
+		$sess->cf_cookie_secure			= ($this->db->tls && $this->tls_session);
+		$sess->cf_cookie_httponly		= true;
+		$sess->cf_enable_cookie_prefix	= true;
 
-		$sess->cf_ip				= $this->ip;
-		$sess->cf_tls				= $this->tls_session;
+		$sess->cf_ip					= $this->ip;
+		$sess->cf_tls					= $this->tls_session;
 
 		// for freecap, /file method and alike - do not play in NoReplay & do no simple id regen
 		if ($route & 2)
