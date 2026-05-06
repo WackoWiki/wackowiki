@@ -134,6 +134,8 @@ if ($this->has_access('read'))
 
 			$tpl->enter('f_');
 
+			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/wikiedit.css">');
+
 			if ($can_upload = $this->can_upload())
 			{
 				$upload_nonce	= $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
