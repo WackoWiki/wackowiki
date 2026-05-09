@@ -83,11 +83,29 @@ function all_init() {
     }
   }
 
-  // Initialize
+  /**
+   * Initialize invert selections button - CSP-compliant
+   */
+  function initInvertSelections() {
+    const invertLink = document.getElementById('invert-selections');
+    if (invertLink) {
+      invertLink.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default anchor behavior
+        invertSelections('replace_text');
+      });
+      Log.debug('Invert selections button initialized');
+    }
+  }
+
+  // Initialize all functionality
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDoubleClick);
+    document.addEventListener('DOMContentLoaded', function() {
+      initDoubleClick();
+      initInvertSelections();
+    });
   } else {
     initDoubleClick();
+    initInvertSelections();
   }
 })();
 

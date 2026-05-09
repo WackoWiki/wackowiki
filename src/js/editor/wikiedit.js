@@ -640,49 +640,57 @@ class WikiEdit extends ProtoEdit {
   }
 
   showDraftInfobox(draft) {
-      const date = new Date(draft.timestamp);
-      const timeStr = date.toLocaleString();
-      const relativeTime = this.getRelativeTime(date);
+    const date = new Date(draft.timestamp);
+    const timeStr = date.toLocaleString();
+    const relativeTime = this.getRelativeTime(date);
 
-      const infoboxHTML = `
-        <div id="draft-infobox" class="info-box draft-infobox">
+    const infoboxHTML = `
+          <div id="draft-infobox" class="info-box draft-infobox">
               <strong>${t('DraftFound') || 'Draft found'}</strong> — 
               ${t('SavedOn') || 'saved'} 
               <time datetime="${date.toISOString()}" title="${timeStr}">
                   ${relativeTime}
               </time><br>
-			<span class="visuallyhidden">${t('RecoverDraftQuestion') || 'Do you want to recover the draft?'}</span>
-          <br>
-          <button type="button" class="btn-ok" id="recover-draft-btn">${t('RecoverDraft') || 'Recover Draft'}</button>
-          <button type="button" class="btn-cancel" id="discard-draft-btn">${t('DiscardDraft') || 'Discard Draft'}</button>
-        </div>
+              <span class="visuallyhidden">${t('RecoverDraftQuestion') || 'Do you want to recover the draft?'}</span>
+              <br>
+              <button type="button" class="btn-ok" id="recover-draft-btn">${t('RecoverDraft') || 'Recover Draft'}</button>
+              <button type="button" class="btn-cancel" id="discard-draft-btn">${t('DiscardDraft') || 'Discard Draft'}</button>
+          </div>
       `;
 
-      const placeholder = document.getElementById('draft-infobox-placeholder');
-      if (placeholder) {
-        placeholder.innerHTML = infoboxHTML;
-      } else {
-        // Fallback
-        const target = this.area?.parentNode;
-        if (target) {
-          const div = document.createElement('div');
-          div.innerHTML = infoboxHTML;
-          target.insertBefore(div, this.area);
-        }
+    const placeholder = document.getElementById('draft-infobox-placeholder');
+    if (placeholder) {
+      placeholder.innerHTML = infoboxHTML;
+    } else {
+      // Fallback
+      const target = this.area?.parentNode;
+      if (target) {
+        const div = document.createElement('div');
+        div.innerHTML = infoboxHTML;
+        target.insertBefore(div, this.area);
       }
+    }
 
-      // Handlers
-      document.getElementById('recover-draft-btn').onclick = () => {
+    // CSP-compliant event listeners
+    const recoverBtn = document.getElementById('recover-draft-btn');
+    const discardBtn = document.getElementById('discard-draft-btn');
+
+    if (recoverBtn) {
+      recoverBtn.addEventListener('click', () => {
         this.replaceContent(draft.content);
         this.safeRemoveDraft(this.draftKey);
         document.getElementById('draft-infobox')?.remove();
-      };
+      });
+    }
 
-      document.getElementById('discard-draft-btn').onclick = () => {
+    if (discardBtn) {
+      discardBtn.addEventListener('click', () => {
         this.safeRemoveDraft(this.draftKey);
         document.getElementById('draft-infobox')?.remove();
-      };
+      });
     }
+  }
+
 
   toggleDarkMode() {
     const html = document.documentElement;

@@ -100,7 +100,7 @@
 </a>
 
 [= invert =]
-<a tabindex="0" id="invert-selections" class="btn-link btn-right" onclick="invertSelections('replace_text')">
+<a tabindex="0" id="invert-selections" class="btn-link btn-right">
 	<button type="button" class="btn-cancel">[ ' _t: InvertSelection ' ]</button>
 </a>
 
