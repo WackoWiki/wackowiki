@@ -31,23 +31,6 @@ function all_init() {
   if (wikiedit) we_init(wikiedit);           // we_init is defined by WikiEdit class
 }
 
-// Refresh FreeCap (CAPTCHA) image
-function new_freecap() {
-  const img = document.getElementById('freecap');
-  if (!img) return;
-
-  let src = img.src;
-  const separator = src.includes('?page=') ? '&' : '?';
-
-  // Remove previous freecap parameter if present
-  if (src.includes('freecap' + separator)) {
-    src = src.substring(0, src.lastIndexOf(separator));
-  }
-
-  // Append random number 
-  img.src = src + separator + Math.round(Math.random() * 100000);
-}
-
 /**
  * Double-click to edit - Supports main page + root-level comments
  */

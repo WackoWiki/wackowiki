@@ -9179,6 +9179,8 @@ class Wacko
 		// captcha is for guests only and if gd available
 		if ($this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
 		{
+			$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/init-captcha.js"' . $this->db->csp_nonce . ' defer></script>');
+
 			// disable server cache for page
 			$this->http->no_cache(false);
 
@@ -9190,8 +9192,9 @@ class Wacko
 				($inline ? '' : "<br>\n") .
 				// href('', '.freecap') won't work, because mini_href() would strip the DOT
 				'<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n" .
-				'<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">' .
-				'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload btn-md"></a>' . "<br>\n" .
+				'<a href="#" id="reload-captcha" title="' . $this->_t('CaptchaReload') . '">' .
+					'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" ' . 'alt="' . $this->_t('CaptchaReload') . '" class="btn-reload btn-md">' .
+				'</a>'. "<br>\n" .
 				'<input type="text" id="captcha" name="captcha" maxlength="6" required>' .
 				($inline ? '' : "<br>\n");
 		}
