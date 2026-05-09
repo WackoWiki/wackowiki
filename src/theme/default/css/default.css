@@ -3045,3 +3045,67 @@ table.diff td {
 .diffdown:hover .diffdown-content {
 	display: block;
 }
+
+/* Toolbar Customizer Modal */
+#we-toolbar-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+#we-toolbar-modal > div {
+    background: var(--ww-bg-secondary, #ffffff);
+    width: 680px;
+    max-width: 96%;
+    max-height: 92vh;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+#we-toolbar-modal header {
+    padding: 16px 20px;
+    background: var(--ww-bg-accent, #f8f9fa);
+    border-bottom: 1px solid #ddd;
+}
+
+#we-toolbar-modal h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+#we-toolbar-modal .modal-description {
+    margin: 4px 0 0;
+    color: var(--ww-text-tertiary, #666);
+}
+
+#we-modal-content {
+    padding: 20px;
+    max-height: 62vh;
+    overflow: auto;
+}
+
+#we-toolbar-modal footer {
+    padding: 12px 20px;
+    background: var(--ww-bg-accent, #f8f9fa);
+    border-top: 1px solid #ddd;
+    text-align: right;
+}
+
+#we-toolbar-modal button {
+    padding: 8px 16px;
+    margin-left: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#we-toolbar-modal .we-modal-save {
+    background: #007acc;
+    color: white;
+    border-color: #007acc;
+}

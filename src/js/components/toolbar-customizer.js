@@ -4,6 +4,8 @@
 
 class ToolbarCustomizer {
 
+  static currentModal = null;
+
   static defaultOrder = [
     'h2', 'h3', 'h4', 'h5', 'h6', 'separator',
     'bold', 'italic', 'underline', 'strike', 'small', 'code', 'separator',
@@ -75,21 +77,20 @@ class ToolbarCustomizer {
     }
 
     const html = `
-              <div id="we-toolbar-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:10000;">
-                  <div style="background:var(--ww-bg-secondary);width:680px;max-width:96%;max-height:92vh;border-radius:8px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.5);">
-                      <div style="padding:16px 20px;var(--ww-bg-accent);border-bottom:1px solid #ddd;">
-                          <h3 style="margin:0;">${t('CustomizeToolbar') || 'Customize WikiEdit Toolbar'}</h3>
-                          <p style="margin:4px 0 0;var(--ww-text-tertiary);">${t('DragToReorder') || 'Drag to reorder • Uncheck to hide buttons'}</p>
-                      </div>
-                      <div id="we-modal-content" style="padding:20px;max-height:62vh;overflow:auto;">
-                      </div>
-                      <div style="padding:12px 20px;background:var(--ww-bg-accent);border-top:1px solid #ddd;text-align:right;">
-                          <button type="button" onclick="ToolbarCustomizer.save()" style="background:#007acc;color:white;">${t('SaveChanges') || 'Save Changes'}</button>
-                          <button type="button" onclick="ToolbarCustomizer.resetToDefault()" style="margin-left:8px;">${t('ResetToDefault') || 'Reset to Default'}</button>
-                          <button type="button" onclick="ToolbarCustomizer.close()" style="margin-left:8px;">${t('Cancel') || 'Cancel'}</button>
-                      </div>
-                  </div>
-              </div>`;
+	        <div id="we-toolbar-modal">
+	            <div>
+	                <header>
+	                    <h3>${t('CustomizeToolbar') || 'Customize WikiEdit Toolbar'}</h3>
+	                    <p class="modal-description">${t('DragToReorder') || 'Drag to reorder • Uncheck to hide buttons'}</p>
+	                </header>
+	                <div id="we-modal-content"></div>
+	                <footer>
+	                    <button type="button" class="we-modal-save">Save Changes</button>
+	                    <button type="button" class="we-modal-reset">Reset to Default</button>
+	                    <button type="button" class="we-modal-cancel">Cancel</button>
+	                </footer>
+	            </div>
+	        </div>`;
 
     const wrapper = document.createElement('div');
     wrapper.innerHTML = html;
@@ -99,6 +100,28 @@ class ToolbarCustomizer {
     this.currentModal = modal;
 
     this.renderList(currentOrder);
+    this.attachModalListeners();
+  }
+
+
+  static attachModalListeners() {
+    if (!this.currentModal) return;
+
+    // Use more reliable selectors
+    const saveBtn = this.currentModal.querySelector('.we-modal-save');
+    const resetBtn = this.currentModal.querySelector('.we-modal-reset');
+    const cancelBtn = this.currentModal.querySelector('.we-modal-cancel');
+
+    saveBtn?.addEventListener('click', () => this.save());
+    resetBtn?.addEventListener('click', () => this.resetToDefault());
+    cancelBtn?.addEventListener('click', () => this.close());
+
+    // Also support closing by clicking background
+    this.currentModal.addEventListener('click', (e) => {
+      if (e.target === this.currentModal) this.close();
+    });
+
+    console.log('Modal listeners attached');
   }
 
   static renderList(currentOrder) {

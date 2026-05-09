@@ -106,7 +106,7 @@ EOD;
 
 	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe.css">');
 	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe-dynamic-caption-plugin.css">');
-	$this->add_html('footer', '<script type="module">' . $script . '</script>');
+	$this->add_html('footer', '<script type="module"' . $this->db->csp_nonce . '>' . $script . '</script>');
 }
 
 $nav_offset		= (int) ($_GET[$param_token] ?? 1);

@@ -66,12 +66,12 @@
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
 
 						[ '' // load WikiEdit '' ]
-						<script src="[ ' db: base_path ' ]js/helpers.js"></script>
-						<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
-						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
-						<script src="[ ' db: base_path ' ]js/wikiedit.js"></script>
+						<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
+						<script src="[ ' db: base_path ' ]js/editor/protoedit.js"[ ' db: csp_nonce ' ]></script>
+						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"[ ' db: csp_nonce ' ]></script>
+						<script src="[ ' db: base_path ' ]js/editor/wikiedit.js"[ ' db: csp_nonce ' ]></script>
 						[= ac _ =
-							<script src="[ ' db: base_path ' ]js/autocomplete.js"></script>
+							<script src="[ ' db: base_path ' ]js/editor/autocomplete.js"[ ' db: csp_nonce ' ]></script>
 						=]
 
 						<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
@@ -92,7 +92,7 @@
 							data-can-upload="[ ' upload ' ]"
 							data-upload-nonce="[ ' nonce ' ]"
 							required>[ ' payload | pre ' ]</textarea>
-						<script>
+						<script[ ' db: csp_nonce ' ]>
 							const wE = new WikiEdit();
 							[= autocomplete _ =
 								if (AutoComplete) {

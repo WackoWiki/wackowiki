@@ -138,15 +138,16 @@
 					<td>&nbsp;</td>
 					<td>
 						<fieldset>
-							<script src="[ ' db: base_path ' ]js/helpers.js"></script>
-							<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
+							<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
+							<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"[ ' db: csp_nonce ' ]></script>
 							<legend>[ ' _t: WikiEditToolbar ' ]</legend>
 							<input type="hidden" name="wikiedit_toolbar" id="wikiedit_toolbar_hidden" 
 								value="[ ' toolbar | e ' ]">
-								<a href="#" onclick="ToolbarCustomizer.open('[ ' toolbar | e ' ]'); return false;" 
-									class="btn btn-primary">
-									[ ' _t: CustomizeToolbar ' ]
-								</a>
+								<a href="#" id="btn-customize-toolbar" 
+									class="btn btn-primary"
+									data-toolbar="[ ' toolbar | e ' ]">
+								[ ' _t: CustomizeToolbar ' ]
+							</a>
 						</fieldset>
 					</td>
 				</tr>
@@ -178,33 +179,6 @@
 			</table>
 			</div>
 		</form>
-		<script>
-			document.getElementById('clear_we_localstorage').addEventListener('click', function() {
-				const statusEl = document.getElementById('we_localstorage_status');
-		
-				// Clear only WikiEdit-related keys
-				const keys = Object.keys(localStorage);
-				let cleared = 0;
-		
-				keys.forEach(key => {
-					if (key.startsWith('we_') || 
-						key.startsWith('wikiedit_') || 
-						key.includes('draft')) {
-						localStorage.removeItem(key);
-						cleared++;
-					}
-				});
-		
-				// Success feedback
-				statusEl.style.color = 'green';
-				statusEl.textContent = '[ ' _t: WeCacheCleared ' ] (' + cleared + ' keys removed)';
-		
-				// Auto-hide message after 4 seconds
-				setTimeout(() => {
-					statusEl.textContent = '';
-				}, 4000);
-			});
-	</script>
 	=]
 	[= e _ =
 		<form action="[ ' href: ' ]" method="post" name="user_settings_extended">

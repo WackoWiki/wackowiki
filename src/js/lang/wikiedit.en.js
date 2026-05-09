@@ -109,6 +109,8 @@ lang = {
 	ResetToolbarConfirm:	'Reset to default toolbar configuration?',
 	ToolbarConfigUpdated:	'Toolbar configuration updated.<br><br>Please click <strong>Save Settings</strong> at the bottom of the page to store it on the server.',
 	ToolbarResetToDefault:	'Toolbar has been reset to default.<br><br>Please save the settings form to apply the change.',
+	
+	WeCacheCleared:			'WikiEdit local data cleared successfully',
 
 	KeyboardShortcuts:		'Keyboard Shortcuts',
 	Shortcut:				'Shortcut',

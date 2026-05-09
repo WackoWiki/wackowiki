@@ -352,7 +352,7 @@ class Http
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
-			// 1. Content-Security-Policy: http://www.w3.org/TR/CSP2/
+			// 1. Content-Security-Policy: https://www.w3.org/TR/CSP3/
 			if ($this->db->csp)
 			{
 				$file_name = match ((int) $this->db->csp)
@@ -362,6 +362,17 @@ class Http
 				};
 
 				$csp_header = $this->get_header_conf($file_name);
+
+				// Auto-generate nonce if '{nonce}' is present
+				if (str_contains($csp_header, '{nonce}')) {
+					$nonce = $this->generate_csp_nonce();
+
+					// Store nonce for use in templates
+					$this->db->csp_nonce = ' nonce="' . $nonce . '"';
+
+					$csp_header = str_replace("{nonce}", $nonce, $csp_header);
+				}
+
 				header($csp_header);
 			}
 
@@ -418,6 +429,15 @@ class Http
 		$csp_config		= file_get_contents(Ut::join_path(CONFIG_DIR, $file_name));
 
 		return			str_replace(["\r", "\n", "\t"], '', $csp_config);
+	}
+
+	/**
+	 * Generate a strong CSP nonce (base64url encoded)
+	 */
+	private function generate_csp_nonce(): string
+	{
+		return Ut::random_token(11);
+		#return rtrim(strtr(base64_encode(random_bytes(24)), '+/', '-_'), '=');
 	}
 
 	/**

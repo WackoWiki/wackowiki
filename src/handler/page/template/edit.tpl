@@ -56,7 +56,7 @@
 					data-can-upload="[ ' upload ' ]"
 					data-upload-nonce="[ ' nonce ' ]"
 					required>[ ' body | pre ' ]</textarea>
-				<script>
+				<script[ ' db: csp_nonce ' ]>
 					const wE = new WikiEdit();
 					[= autocomplete _ =
 						if (AutoComplete) {

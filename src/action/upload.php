@@ -58,9 +58,9 @@ $accept_types = function($types)
 // check who u are, can u upload?
 if ($this->can_upload(true))
 {
-	$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/helpers.js" defer></script>');
-	$this->add_html('footer', '<script src="' . $this->db->base_path . Ut::join_path('js/lang/', 'wikiedit.' . $this->user_lang . '.js') . '" defer></script>');
-	$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/upload.js" defer></script>');
+	$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/helpers.js"' . $this->db->csp_nonce . ' defer></script>');
+	$this->add_html('footer', '<script src="' . $this->db->base_path . Ut::join_path('js/lang/', 'wikiedit.' . $this->user_lang . '.js') . '"' . $this->db->csp_nonce . ' defer></script>');
+	$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/components/upload.js"' . $this->db->csp_nonce . ' defer></script>');
 
 	$tpl->enter('u_');
 
