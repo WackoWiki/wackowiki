@@ -2430,6 +2430,9 @@ class WikiEdit extends ProtoEdit {
     // Markdown: ---, ***, ___, or any 3+ of them → Wacko: ----
     w = w.replace(/^(?:[-*_]){3,}[ \t]*$/gm, '----');
 
+    // Blockquote: > text → <[text>]
+    w = w.replace(/^>\s+(.*)$/gm, '<[$1]>');
+
     // List normalization for WackoWiki syntax
     w = w.replace(
       /^(?!\s*----)(?!\s*\*\*)(\s*)([*+-]|\d+\.|[A-Za-z]\.)([ \t]*)/gm,
