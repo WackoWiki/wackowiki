@@ -7,6 +7,9 @@ if (!defined('IN_WACKO'))
 
 class Diag
 {
+	/** @var string|null Debug console HTML stored for injection */
+	private static $debug_console_html = null;
+
 	function __construct()
 	{
 		die('Diag is static');
@@ -219,7 +222,7 @@ class Diag
 			}
 		}
 
-		static::dbg_console($config['debug']);
+		static::dbg_console($engine, $config['debug']);
 	}
 
 	// NB class http saves/restores log on redirect
@@ -269,55 +272,72 @@ class Diag
 		}
 	}
 
-	private static function dbg_console($debug): void
+	private static function dbg_console($engine, $debug): void
 	{
 		if (!($log = static::$log))
 		{
 			return;
 		}
 
-		if ($debug)
-		{
-			echo <<<'EOD'
-	<script>
-		console = window.open('', 'WackoWikiConsoleWindow', 'height=150,width=450,location=0,menubar=0,status=0,toolbar=0,scrollbars=1');
-		console.document.writeln(
-			'<html><head><style type=text/css>'
-			+ 'body{background-color:#777777}'
-			+ '.logtype0{color:black}'
-			+ '.logtype1{color:blue}'
-			+ '.logtype2{color:gold}'
-			+ '.logtype3{color:orange}'
-			+ '.logtype4{color:red}'
-			+ '</style><title>wackowiki debug console</title>'
-			+ '</head><body onLoad="self.focus()"><table>;
-EOD;
+		$show_console = ($debug === true || (is_numeric($debug) && (int)$debug > 0));
 
-			foreach ($log as $one)
-			{
-				echo '<tr class="logtype' . (int) $one[1] . '">';
-				echo '<td>' .		number_format($one[0] - WACKO_STARTED, 4) . '</td>';
-				echo '<td><code>' .	Ut::html($one[3]) . '</code></td>';
-				echo '<td>' . 		Ut::html($one[2]) .  '</td>';
-				echo '</tr>';
-			}
-
-			echo <<<'EOD'
-			</table></body></html>');
-		console.document.close();
-		</script>
-EOD;
-		}
-
+		// Always write to file
 		$output = '';
-
 		foreach ($log as $one)
 		{
 			$time = (int) $one[0];
 			$output .= date('ymdHis', $time) . sprintf('.%04d ', ($one[0] - $time) * 10000)
-				. $one[3] . ': ' . $one[2] . "\n";
+			. $one[3] . ': ' . $one[2] . "\n";
+		}
+		@file_put_contents('DEBUG', $output, FILE_APPEND);
+
+		if (!$show_console)
+		{
+			return;
 		}
 
-		@file_put_contents('DEBUG', $output, FILE_APPEND);
+		$logData = [];
+		foreach ($log as $one)
+		{
+			$logData[] = [
+				'type' => (int) $one[1],
+				'time' => number_format($one[0] - WACKO_STARTED, 4),
+				'label' => $one[3],
+				'message' => $one[2]
+			];
+		}
+
+		$jsonData = json_encode($logData, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+
+		// Build complete HTML block including CSS and scripts
+		$html = '<!-- Debug Console Data Present: ' . count($logData) . ' entries -->' . "\n";
+		$html .= '<div id="debug-console-data" data-log="' . Ut::html($jsonData) . '"></div>' . "\n";
+
+		if (isset($engine))
+		{
+			// Add debug console CSS
+			$html .= '<link rel="stylesheet" href="' . $engine->db->theme_url . 'css/debug-console.css"' . $engine->db->csp_nonce . '>' . "\n";
+
+			// Add debug console JavaScript
+			$html .= '<script src="' . $engine->db->base_path . 'js/core/helpers.js"' . $engine->db->csp_nonce . ' defer></script>' . "\n";
+			$html .= '<script src="' . $engine->db->base_path . 'js/core/init-diag.js"' . $engine->db->csp_nonce . ' defer></script>' . "\n";
+		}
+
+		// Store in static property for later injection via final.php
+		self::$debug_console_html = $html;
+	}
+
+
+	/**
+	 * Get debug console HTML for injection into page
+	 * Called from final.php during shutdown
+	 * @return string
+	 */
+	static function get_debug_console_html(): string
+	{
+		$html = self::$debug_console_html ?? '';
+		self::$debug_console_html = null; // Clear after retrieval
+
+		return $html;
 	}
 }

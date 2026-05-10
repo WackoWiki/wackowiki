@@ -1,0 +1,91 @@
+/* ==================== WackoWiki Debug Console Styles ==================== */
+
+/* Debug Console Window Styles */
+.debug-console-body {
+	background-color: #2d2d2d;
+	color: #cccccc;
+	font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+	font-size: 12px;
+	margin: 12px;
+}
+
+.debug-console-title {
+	color: #ffffff;
+	font-size: 14px;
+	margin: 0 0 12px 0;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #555;
+}
+
+.debug-console-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.debug-console-table td {
+	padding: 2px 8px;
+	border-bottom: 1px solid #444;
+}
+
+.debug-console-table tr:hover {
+	background-color: #3d3d3d;
+}
+
+.debug-console-timestamp {
+	color: #888;
+	white-space: nowrap;
+	vertical-align: top;
+	font-size: 11px;
+}
+
+.debug-console-label {
+	white-space: nowrap;
+	vertical-align: top;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.debug-console-message {
+	vertical-align: top;
+	word-break: break-all;
+}
+
+.debug-console-count {
+	color: #888;
+	font-size: 11px;
+	margin-top: 12px;
+	font-style: italic;
+}
+
+/* Debug Console Controls */
+.debug-console-controls {
+	position: fixed;
+	top: 8px;
+	right: 12px;
+	background: #444;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 11px;
+	z-index: 1000;
+}
+
+.debug-console-controls button {
+	background: #555;
+	color: #fff;
+	border: 1px solid #666;
+	padding: 2px 8px;
+	margin-left: 4px;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 11px;
+	border-radius: 3px;
+}
+
+.debug-console-controls button:hover {
+	background: #666;
+}
+
+/* Debug Console Data Container (hidden in main page) */
+#debug-console-data {
+	display: none;
+}
