@@ -4356,6 +4356,12 @@ class Wacko
 
 			$unwrap_tag = utf8_trim($unwrap_tag, '/.');
 
+			if ($this->db->urls_underscores)
+			{
+				// Only replace underscores in the page tag part, never in the handler
+				$unwrap_tag = str_replace('_', ' ', $unwrap_tag);
+			}
+
 			$this_page		= $this->load_page($unwrap_tag, 0, null, LOAD_CACHE, LOAD_META);
 
 			if (mb_substr($tag, 0, 2) == '!/')
