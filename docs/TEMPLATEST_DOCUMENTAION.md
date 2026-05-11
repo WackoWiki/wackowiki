@@ -1,5 +1,3 @@
-Now I'll create comprehensive technical documentation for the Templatest template engine:
-
 # Templatest Template Engine: Technical Documentation
 
 ## Table of Contents

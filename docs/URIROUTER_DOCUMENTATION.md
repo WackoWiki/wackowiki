@@ -1,5 +1,3 @@
-Comprehensive technical documentation for the URI Router (YAUR – Yet Another URI Router). This documentation will be suitable for developers who need to understand how the system works and how to write routing rules.
-
 # YAUR: Yet Another URI Router - Technical Documentation
 
 ## Table of Contents
