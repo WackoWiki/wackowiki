@@ -3465,6 +3465,11 @@ class Wacko
 			$tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
 		}
 
+		if ($method && $method !== 'show')
+		{
+			$method = '_' . $method;   // e.g. _edit
+		}
+
 		return $tag . ($method ? '/' . $method : '');
 	}
 
@@ -3816,6 +3821,25 @@ class Wacko
 					: $text) .
 				'<!--link:end-->';
 		}
+	}
+
+	/**
+	 * Detects if current request is a handler and returns clean tag + handler
+	 */
+	function parse_page_handler(string $tag): array
+	{
+		$prefix = '_';
+		$pattern = '/^(.*?)\/' . preg_quote($prefix, '/') . '(' . $this->db->standard_handlers . ')(?:\/(.*))?$/ui';
+
+		if (preg_match($pattern, '/' . $tag . '/', $m)) {
+			return [
+				'tag'     => rtrim($m[1] ?? '', '/'),
+				'handler' => $m[2] ?? null,
+				'extra'   => $m[3] ?? ''
+			];
+		}
+
+		return ['tag' => rtrim($tag, '/'), 'handler' => null, 'extra' => ''];
 	}
 
 	/**
@@ -4299,35 +4323,38 @@ class Wacko
 			$anchor			= $matches[2] ?? '';
 			$untag			= $unwrap_tag	= $this->unwrap_link($tag);
 
-			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/ui';
-			$handler		= null;
+			// handler detection with virtual prefix support
+			$result = $this->parse_page_handler($untag);
 
-			// detecting page handler
-			if (preg_match($regex_handlers, '/' . $untag . '/', $match))
-			{
-				$handler	= $match[2];
+			$ptag    = $result['tag'];
+			$handler = $result['handler'];
 
-				$_ptag		??= ''; // XXX: ???
-
-				$ptag		= $match[1];
-				$unwrap_tag	= '/' . $unwrap_tag . '/';
-				$co			= mb_substr_count($_ptag, '/') - mb_substr_count($ptag, '/');
-
-				for ($i = 0; $i < $co; $i++)
-				{
-					$unwrap_tag	= mb_substr($unwrap_tag, 0, mb_strrpos($unwrap_tag, '/'));
-				}
-			}
-
-			$unwrap_tag			= utf8_trim($unwrap_tag, '/.');
-			$unwrap_tag			= str_replace('_', '', $unwrap_tag);
+			// === Unwrap tag logic (for relative paths / breadcrumbs) ===
+			$unwrap_tag = '/' . ($untag ?? '') . '/';
 
 			if ($handler)
 			{
-				// strip handler from page tag
-				$unwrap_tag	= mb_substr($unwrap_tag, 0, - (mb_strlen($handler) + 1));
-				$method		= $handler;
+				// Count how many extra levels we need to go up
+				$_ptag ??= '';
+				$co = mb_substr_count($_ptag, '/') - mb_substr_count($ptag, '/');
+
+				for ($i = 0; $i < $co; $i++)
+				{
+					$unwrap_tag = mb_substr($unwrap_tag, 0, mb_strrpos($unwrap_tag, '/'));
+				}
+
+				// Strip the handler part (works with leading _)
+				$unwrap_tag = rtrim($unwrap_tag, '/');
+
+				// Remove the handler suffix (/_edit)
+				$suffix = $handler;
+				if (str_ends_with($unwrap_tag, '/_' . $suffix))
+				{
+					$unwrap_tag = mb_substr($unwrap_tag, 0, - (mb_strlen($suffix) + 1));
+				}
 			}
+
+			$unwrap_tag = utf8_trim($unwrap_tag, '/.');
 
 			$this_page		= $this->load_page($unwrap_tag, 0, null, LOAD_CACHE, LOAD_META);
 
@@ -4976,12 +5003,6 @@ class Wacko
 	function validate_reserved_words($data)
 	{
 		$_data = '/' . $data . '/';
-
-		// find the word
-		if (preg_match('/\b(' . $this->db->standard_handlers . ')\b/ui', $_data, $match))
-		{
-			return Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $match[0] .'</code>');
-		}
 
 		// find reserved namespace (file, image, js, theme, xml)
 		if ($result = $this->validate_namespace($data))
