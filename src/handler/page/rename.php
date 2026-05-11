@@ -39,6 +39,27 @@ if ($registered
 			$new_tag	= $_POST['new_tag'] ?? '';
 			$old_tag	= $this->page['tag'];
 
+			// CamelCase each segment if it contains spaces
+			if ($new_tag !== '')
+			{
+				$new_tag = utf8_trim($new_tag, '/ ');   // clean outer slashes/spaces
+
+				$parts = explode('/', $new_tag);
+				foreach ($parts as &$part)
+				{
+					$part = utf8_trim($part);   // clean each segment
+
+					// uppercase the first character of each word only when there are multiple words separated by spaces
+					if (preg_match('/^\w+( +\w+)*$/u', $part))
+					{
+						$part = utf8_ucwords($part);
+					}
+				}
+				unset($part);
+
+				$new_tag = implode('/', $parts);
+			}
+
 			if ($error = $this->sanitize_new_page_tag($new_tag, $this->tag))
 			{
 				$this->set_message($error, 'error');
