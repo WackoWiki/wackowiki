@@ -28,7 +28,6 @@ if (   ($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) && !isset($route['unlo
 
 if (isset($route['session']))
 {
-	$http->http_security_headers();
 	$http->session($route['session']);
 }
 
@@ -57,6 +56,7 @@ switch ($route['route'])
 		$http->terminate();
 
 	case 'admin':
+		$http->http_security_headers();
 		include 'admin/admin.php';
 		break;
 

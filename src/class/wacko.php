@@ -7751,6 +7751,9 @@ class Wacko
 			$this->soft_login($user);
 		}
 
+		// after get_user() checks -> $this->sess->user_profile
+		$this->http->http_security_headers();
+
 		// user settings
 		// set user theme prior to user_lang to load theme lang files -> load_translation()
 		if (!empty($user['theme']))
@@ -9206,10 +9209,9 @@ class Wacko
 		// captcha is for guests only and if gd available
 		if ($this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
 		{
-			$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/init-captcha.js"' . $this->db->csp_nonce . ' defer></script>');
-
 			// disable server cache for page
 			$this->http->no_cache(false);
+			$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/init-captcha.js"' . $this->db->csp_nonce . ' defer></script>');
 
 			$this->sess->freecap_shown = 1;
 

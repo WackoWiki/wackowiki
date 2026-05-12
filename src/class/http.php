@@ -19,6 +19,7 @@ class Http
 	private		$query;
 	private		$lang;
 	private		$file;
+	private		$no_cache		= 0;		// for CSP nonces
 	private		$caching		= 0;
 
 	public function __construct(&$db)
@@ -348,7 +349,7 @@ class Http
 	//		4. Strict-Transport-Security:
 	//		5. X-Frame-Options:
 	//		6. X-Content-Type-Options:
-	public function http_security_headers(): void
+	public function http_security_headers(bool $update = false): void
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
@@ -364,16 +365,33 @@ class Http
 				$csp_header = $this->get_header_conf($file_name);
 
 				// Auto-generate nonce if '{nonce}' is present
-				if (str_contains($csp_header, '{nonce}')) {
-					$nonce = $this->generate_csp_nonce();
+				if (str_contains($csp_header, '{nonce}'))
+				{
+					if (isset($this->sess->user_profile) || $this->no_cache)
+					{
+						$nonce					= $this->generate_csp_nonce();
+						$this->db->csp_nonce	= ' nonce="' . $nonce . '"';
+						$csp_header				= str_replace("{nonce}", $nonce, $csp_header);
+					}
+					else
+					{
+						$this->db->csp_nonce = '';
 
-					// Store nonce for use in templates
-					$this->db->csp_nonce = ' nonce="' . $nonce . '"';
-
-					$csp_header = str_replace("{nonce}", $nonce, $csp_header);
+						// Cached page: fallback policy without strict-dynamic + nonce
+						$csp_header = str_replace(
+							["'strict-dynamic'", "'nonce-{nonce}'"],
+							['', ''],
+							$csp_header
+						);
+					}
 				}
 
 				header($csp_header);
+			}
+
+			if ($update)
+			{
+				return;
 			}
 
 			// 2. Permissions-Policy: https://www.w3.org/TR/permissions-policy/
@@ -492,6 +510,14 @@ class Http
 		if (!$client_only)
 		{
 			$this->caching = 0;
+
+			// CSP nonces
+			$this->no_cache = 1;
+
+			if(!$this->db->csp_nonce)
+			{
+				$this->http_security_headers(true);
+			}
 		}
 	}
 
