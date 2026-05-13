@@ -1259,7 +1259,13 @@ class WikiEdit extends ProtoEdit {
 
       if (q) {
         let prefix = q[2];
-        if (!this.enterpressed) {
+        const currentContent = q[9] || ''; // Content after the list marker
+
+        // If this is the SECOND consecutive empty list line, break the list
+        if (this.enterpressed && currentContent.trim() === '') {
+          prefix = '';
+        } else if (!this.enterpressed) {
+          // Normal list continuation logic (first Enter on a non-empty line)
           if (q[3].length % 2 === 1) {
             prefix = '';
           } else {
@@ -1268,6 +1274,7 @@ class WikiEdit extends ProtoEdit {
             if (q2) prefix = q[2].replace(numRe, String(Number(q2[1]) + 1) + q2[2]);
           }
         }
+        // else: enterpressed === true AND currentContent is NOT empty → still continue (do nothing to prefix)
 
         const newValue = sel1 + '\n' + prefix + sel2;
         this.replaceContent(newValue);
