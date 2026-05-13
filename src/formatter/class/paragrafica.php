@@ -122,21 +122,18 @@ class Paragrafica
 		// -2. ignoring a regexp (or ignoring next regexp)
 		$ignored = [];
 		{
-			$total	= preg_match_all($this->ignore, $what, $matches);
-			$what	= preg_replace($this->ignore, '{:typo:markup:3:}', $what);
-
-			for ($i = 0; $i < $total; $i++)
-			{
-				$ignored[] = $matches[0][$i];
-			}
+			$what = preg_replace_callback($this->ignore, function($m) use (&$ignored) {
+				$ignored[] = $m[0];
+				return '{:typo:markup:3:}';
+			}, $what);
 		}
 
 		// -1. remove t-prefix;
 		$what = str_replace($this->mark_prefix, '', $what);
 
 		$page_id = $this->wacko->page['page_id']
-					?? ($this->wacko->resync_page_id
-						?? substr((string) hash('crc32', (string) time()), 0, 5));
+		?? ($this->wacko->resync_page_id
+			?? substr((string) hash('crc32', (string) time()), 0, 5));
 
 		// 1. insert terminators appropriately
 		foreach ($this->t0 as $t)
@@ -182,24 +179,22 @@ class Paragrafica
 		// noneedin: > eliminating multiple breaks
 		$what = preg_replace('!((<br[^>]*>\s*)+)(' . $this->mark1 . ')!s', '$3', $what);
 
-		// 2. cleanup <t->\s<-t>
+		// 2. cleanup <t->\s<-t>   (empty pairs)
 		do
 		{
 			$_w		= $what;
 			$what	= preg_replace('!(' . $this->mark2 . ')((\s|(<br[^>]*>|' . $this->mark3 . '|' . $this->mark4 . '))*)(' . $this->mark1 . ')!si', '$2', $what);
 		}
-
 		while ($_w != $what);
 
 		// 3. replace each <t->...<-t> with <p class="auto">...</p>
+		//    Using callback to avoid explode of the whole string.
 		$pcount = 0;
-		$pieces = explode($this->mark2, $what);
-
-		foreach ($pieces as $k => $v)
-		{
-			if ($k > 0)
-			{
-				$pos	= strpos($v, $this->mark1);
+		$what = preg_replace_callback(
+			'!' . $this->mark2 . '(.*?)' . $this->mark1 . '!si',
+			function($m) use (&$pcount, $page_id) {
+				$v = $m[1]; // content between <t-> and <-t>
+				$pos	= strpos($v, $this->mark1); // should not appear, but keep logic
 				$pos2	= strpos($v, $this->mark3);
 				$pos_u	= strpos($v, $this->mark4);
 
@@ -214,7 +209,6 @@ class Paragrafica
 					else
 					{
 						$pieces_inside = explode($this->mark3, $v);
-
 						if (count($pieces_inside) < 3)
 						{
 							$insert_p = true;
@@ -229,19 +223,20 @@ class Paragrafica
 						if (strlen($inside))
 						{
 							$pcount++;
-							$pieces[$k] = "\n" .
-										  $this->prefix1 .
-										  $page_id . '-' . $pcount .
-										  $this->prefix2 .
-										  $inside .
-										  $this->postfix . substr($v, $pos);
+							return "\n" .
+								$this->prefix1 .
+								$page_id . '-' . $pcount .
+								$this->prefix2 .
+								$inside .
+								$this->postfix . substr($v, $pos);
 						}
 					}
 				}
-			}
-		}
-
-		$what = implode('', $pieces);
+				// If no paragraph inserted, return the content as-is (without delimiters)
+				return $v;
+			},
+			$what
+			);
 
 		// 4. remove unused <t-> & <-t> and <ignore> tags
 		$what = str_replace(
@@ -258,21 +253,13 @@ class Paragrafica
 
 		// -. done with P
 
-		// INFINITY-2. inserting a (or next?) ignored regexp
+		// INFINITY-2. inserting ignored regexp back using callback
+		if (!empty($ignored))
 		{
-			$what	.= ' ';
-			$a		 = explode('{:typo:markup:3:}', $what);
-
-			if ($a)
-			{
-				$what = $a[0];
-				$size = count($a);
-
-				for ($i = 1; $i < $size; $i++)
-				{
-					$what = $what . $ignored[$i - 1] . $a[$i];
-				}
-			}
+			$idx = 0;
+			$what = preg_replace_callback('/' . preg_quote('{:typo:markup:3:}', '/') . '/', function() use (&$ignored, &$idx) {
+				return $ignored[$idx++];
+			}, $what);
 		}
 
 		// ==================================================================
@@ -283,19 +270,19 @@ class Paragrafica
 		$this->toc = [];
 
 		return preg_replace_callback( '!' .
-				// [2] = depth,
-				// [3] = h-id,
-				// [4] = name
-				"(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h\d+-\d+\"></a>.*?</h\\2>)" .
-					"|" .
-				// [6] = p-id
-				"(<p id=\"(p\d+-\d+)\" class=\"auto\">)" .
-					"|" .
-				// [7] = tag,
-				// [8] = notoc
-				"<\!--action:begin-->include\s+.*?page=\"([^\ ]+)\".*?(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .
-				// {{include page="tag" notoc=1}}
-				"!ui", [&$this, 'add_toc_entry'], $what);
+			// [2] = depth,
+			// [3] = h-id,
+			// [4] = name
+			"(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h\d+-\d+\"></a>.*?</h\\2>)" .
+			"|" .
+			// [6] = p-id
+			"(<p id=\"(p\d+-\d+)\" class=\"auto\">)" .
+			"|" .
+			// [7] = tag,
+			// [8] = notoc
+			"<\!--action:begin-->include\s+.*?page=\"([^\ ]+)\".*?(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .
+			// {{include page="tag" notoc=1}}
+			"!ui", [&$this, 'add_toc_entry'], $what);
 	}
 
 	// for further TOC creation routines
