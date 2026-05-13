@@ -90,13 +90,10 @@ class Typografica
 		// -2. ignoring a (or next?) regexp
 		$ignored = [];
 		{
-			$total	= preg_match_all($this->ignore, $data, $matches);
-			$data	= preg_replace($this->ignore, $this->mark2, $data);
-
-			for ($i = 0; $i < $total; $i++)
-			{
-				$ignored[] = $matches[0][$i];
-			}
+			$data = preg_replace_callback($this->ignore, function($m) use (&$ignored) {
+				$ignored[] = $m[0];
+				return $this->mark2;
+			}, $data);
 		}
 
 		// -1. HTML tags ban
@@ -123,27 +120,24 @@ class Typografica
 		if ($this->skip_tags)
 		{
 			$re		= '/<\/?[a-z\d]+(' .			// tag name
-									'\s+(' .		// repeatable statement: if only one delimiter and little body
-									'[a-z]+(' .		// alpha-composed attribute, could be followed by equals character
-											'=((\'[^\']*\')|(\"[^\"]*\")|([\d@\-_a-z:\/?&=\.]+))' .
-											')?' .
-										')?' .
-									')*\/?>|' .
-						'<\!--link:begin-->[^\n]*?==|' .
-						'<\!--imglink:begin-->[^\n]*?==' .
-					'/ui';
-			$total	= preg_match_all($re, $data, $matches);
-			$data	= preg_replace($re, $this->mark1, $data);
-
-			for ($i = 0; $i < $total; $i++)
-			{
+				'\s+(' .		// repeatable statement: if only one delimiter and little body
+				'[a-z]+(' .		// alpha-composed attribute, could be followed by equals character
+				'=((\'[^\']*\')|(\"[^\"]*\")|([\d@\-_a-z:\/?&=\.]+))' .
+				')?' .
+				')?' .
+				')*\/?>|' .
+				'<\!--link:begin-->[^\n]*?==|' .
+				'<\!--imglink:begin-->[^\n]*?==' .
+				'/ui';
+			$data = preg_replace_callback($re, function($m) use (&$tags) {
+				$tag = $m[0];
 				if ($this->settings['html'])
 				{
-					$matches[0][$i] = '&lt;' . mb_substr($matches[0][$i], 1);
+					$tag = '&lt;' . mb_substr($tag, 1);
 				}
-
-				$tags[] = $matches[0][$i];
-			}
+				$tags[] = $tag;
+				return $this->mark1;
+			}, $data);
 		}
 
 		// 1. Commas and spaces
@@ -159,24 +153,24 @@ class Typografica
 		// 3. Short words and &nbsp;
 		if ($this->settings['wordglue'])
 		{
-			$data	= ' ' . $data . ' ';
-			$_data	= ' ' . $data . ' ';
+			$data = ' ' . $data . ' ';
+			// Single pass for 1-2 letter words
+			$data = preg_replace('/(\s+)(\p{L}{1,2})(\s+)([^\s$])/ui', "\\1\\2\u{00A0}\\4", $data);
+			// Single pass for 3-letter words
+			$data = preg_replace('/(\s+)(\p{L}{3})(\s+)([^\s$])/ui', "\\1\\2\u{00A0}\\4", $data);
 
-			while ($_data != $data)
+			// Combined left glue patterns
+			if (!empty($this->glueleft))
 			{
-				$_data	= $data;
-				$data	= preg_replace('/(\s+)(\p{L}{1,2})(\s+)([^\\s$])/ui', "\\1\\2\u{00A0}\\4", $data);	// \u{00A0} No-Break Space (NBSP)
-				$data	= preg_replace('/(\s+)(\p{L}{3})(\s+)([^\\s$])/ui',   "\\1\\2\u{00A0}\\4", $data);
+				$pattern = '/(\s+)(' . implode('|', $this->glueleft) . ')(\s+)/ui';
+				$data = preg_replace($pattern, "\\1\\2\u{00A0}", $data);
 			}
 
-			foreach ($this->glueleft as $i)
+			// Combined right glue patterns
+			if (!empty($this->glueright))
 			{
-				$data = preg_replace('/(\s+)(' . $i . ')(\s+)/ui', "\\1\\2\u{00A0}", $data);
-			}
-
-			foreach ($this->glueright as $i)
-			{
-				$data = preg_replace('/(\s+)(' . $i . ')(\s+)/ui', "\u{00A0}\\2\\3", $data);
+				$pattern = '/(\s+)(' . implode('|', $this->glueright) . ')(\s+)/ui';
+				$data = preg_replace($pattern, "\u{00A0}\\2\\3", $data);
 			}
 		}
 
@@ -189,15 +183,22 @@ class Typografica
 		// 5. Macros
 		$data = $this->replace_macros($data);
 
-		// INFINITY. Inserting tags back.
-		if ($this->skip_tags)
+		// INFINITY. Inserting tags back using callback
+		if ($this->skip_tags && !empty($tags))
 		{
-			$data = $this->insert_data($data, $tags, $this->mark1);
+			$idx = 0;
+			$data = preg_replace_callback('/' . preg_quote($this->mark1, '/') . '/', function() use (&$tags, &$idx) {
+				return $tags[$idx++];
+			}, $data);
 		}
 
-		// INFINITY-2. inserting a (next?) ignored regexp
+		// INFINITY-2. inserting ignored regexp back using callback
+		if (!empty($ignored))
 		{
-			$data = $this->insert_data($data, $ignored, $this->mark2);
+			$idx = 0;
+			$data = preg_replace_callback('/' . preg_quote($this->mark2, '/') . '/', function() use (&$ignored, &$idx) {
+				return $ignored[$idx++];
+			}, $data);
 		}
 
 		// ooh, finished
@@ -342,23 +343,6 @@ class Typografica
 		return $data;
 	}
 
-	function insert_data($data, $insert, $delimiter)
-	{
-		$data .= ' ';
-		$a = explode($delimiter, $data);
-
-		if ($a)
-		{
-			$data = $a[0];
-			$size = count($a);
-
-			for ($i = 1; $i < $size; $i++)
-			{
-				$data = $data . $insert[$i - 1] . $a[$i];
-			}
-		}
-
-		return $data;
-	}
-
+	// NOTE: The old insert_data() method has been removed.
+	// Tag and ignore restoration now uses preg_replace_callback().
 }
