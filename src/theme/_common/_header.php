@@ -89,7 +89,7 @@ if (!empty($this->db->ext_bad_behaviour))
 
 if ($user = $this->get_user())
 {
-	$tpl->user_zen			= $user['distraction_free'];
+	$tpl->user_zenmode		= $user['zenmode'];
 	$tpl->user_widescreen	= $user['widescreen_mode'];
 }
 

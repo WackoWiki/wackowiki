@@ -1006,14 +1006,14 @@ textarea.syntax-enabled {
 	50%      { opacity: 0.4; }
 }
 
-/* ==================== DISTRACTION-FREE MODE ==================== */
-body.zen header,
-body.zen footer,
-body.zen .header,
-body.zen .footer,
-body.zen .sidebar,
-body.zen .nav,
-body.zen .toc {
+/* ==================== ZEN MODE ==================== */
+body.zenmode header,
+body.zenmode footer,
+body.zenmode .header,
+body.zenmode .footer,
+body.zenmode .sidebar,
+body.zenmode .nav,
+body.zenmode .toc {
 	display: none !important;
 }
 
@@ -1024,14 +1024,13 @@ body.widescreen #mainwrapper
 	margin: 10px 0 0 0 !important;
 }
 
-body.widescreen #mainwrapper header,
-body.widescreen main{
+body.widescreen #mainwrapper header {
 	float: none;
 	width: stretch;
 	box-shadow: none;
 }
 
-body.zen .wikiedit-split-container {
+body.zenmode .wikiedit-split-container {
 	grid-template-columns: 1fr 1fr;
 	gap: 20px;
 }
@@ -1042,7 +1041,7 @@ body.widescreen .wikiedit-split-container {
 }
 
 /* Optional: Make editor even bigger in full zen mode */
-body.zen.widescreen .wikiedit-textarea {
+body.zenmode.widescreen .wikiedit-textarea {
 	font-size: 1.05rem;
 	line-height: 1.7;
 }

@@ -662,7 +662,7 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Editor height',
 	'SyntaxHighlighting'		=> 'Enable syntax highlighting',
 	'LivePreview'				=> 'Start with Live Preview enabled',
-	'DistractionFree'			=> 'Enable distraction-free writing by default',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
 	'WidescreenMode'			=> 'Use widescreen editor by default',
 	'EditorInterface'			=> 'Editor Interface',
 

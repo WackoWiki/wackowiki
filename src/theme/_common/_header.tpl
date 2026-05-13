@@ -7,7 +7,7 @@ _common include file for themes
 	lang="[ ' lang ' ]" 
 	data-theme="[ ' mode ' ]"
 	[= user _ =
-		data-zenmode="[ ' zen ' ]"
+		data-zenmode="[ ' zenmode ' ]"
 		data-widescreen="[ ' widescreen ' ]"
 	=]
 	[= doubleclick _ =

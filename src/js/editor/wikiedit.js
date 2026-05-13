@@ -54,7 +54,7 @@ class WikiEdit extends ProtoEdit {
     'dark-toggle': { labelKey: 'ToggleDark', method: 'toggleDarkMode', args: [] },
     'syntax': { labelKey: 'SyntaxHighlighting', method: 'toggleSyntaxHighlight', args: [] },
     'livepreview': { labelKey: 'LivePreview', method: 'toggleLivePreview', args: [] },
-    'zenmode': { labelKey: 'DistractionMode', method: 'toggleDistractionMode', args: [] },
+    'zenmode': { labelKey: 'ZenMode', method: 'toggleZenMode', args: [] },
     'fullscreen': { labelKey: 'Fullscreen', method: 'toggleFullscreen', args: [] },
     'shrink': { labelKey: 'HeightShrink', method: 'changeEditorHeight', args: [-100] },
     'enlarge': { labelKey: 'HeightEnlarge', method: 'changeEditorHeight', args: [100] },
@@ -145,7 +145,7 @@ class WikiEdit extends ProtoEdit {
     this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
     this.canUpload = ta.dataset.canUpload === '1';
 
-    this.initDistractionMode();
+    this.initZenMode();
 
     // ====================== CONTEXT DETECTION (EDIT vs COMMENT) ======================
     this.isCommentMode = ta.id === 'addcomment' || ta.name === 'payload';
@@ -716,19 +716,19 @@ class WikiEdit extends ProtoEdit {
     localStorage.setItem('we_dark_mode_enabled', newIsDark);
   }
 
-  // ====================== DISTRACTION-FREE & WIDESCREEN MODE ======================
+  // ====================== ZEN & WIDESCREEN MODE ======================
 
-  toggleDistractionMode() {
+  toggleZenMode() {
     const body = document.body;
-    const isActive = !body.classList.contains('zen');
+    const isActive = !body.classList.contains('zenmode');
 
     if (isActive) {
-      body.classList.add('zen', 'widescreen');
-      localStorage.setItem('we_distraction_free', '1');
+      body.classList.add('zenmode', 'widescreen');
+      localStorage.setItem('we_zenmode', '1');
       localStorage.setItem('we_widescreen', '1');
     } else {
-      body.classList.remove('zen', 'widescreen');
-      localStorage.removeItem('we_distraction_free');
+      body.classList.remove('zenmode', 'widescreen');
+      localStorage.removeItem('we_zenmode');
       localStorage.removeItem('we_widescreen');
     }
 
@@ -739,32 +739,32 @@ class WikiEdit extends ProtoEdit {
   /**
    * Restore saved mode on editor init
    */
-  initDistractionMode() {
+  initZenMode() {
     const html = document.documentElement;
 
-    const userPrefersDistraction = html.dataset.zenmode === '1';
+    const userPrefersZenmode = html.dataset.zenmode === '1';
     const userPrefersWidescreen = html.dataset.widescreen === '1';
 
-    const savedDistraction = localStorage.getItem('we_distraction_free');
+    const savedZenmode = localStorage.getItem('we_zenmode');
     const savedWidescreen = localStorage.getItem('we_widescreen');
 
     // LocalStorage has priority
-    const isDistractionFree = savedDistraction !== null
-      ? savedDistraction === '1'
-      : userPrefersDistraction;
+    const isZenMode = savedZenmode !== null
+      ? savedZenmode === '1'
+      : userPrefersZenmode;
 
     const isWidescreen = savedWidescreen !== null
       ? savedWidescreen === '1'
       : userPrefersWidescreen;
 
-    if (isDistractionFree) {
-      document.body.classList.add('zen');
+    if (isZenMode) {
+      document.body.classList.add('zenmode');
     }
     if (isWidescreen) {
       document.body.classList.add('widescreen');
     }
 
-    console.log(`Distraction-Free: ${isDistractionFree} (server: ${userPrefersDistraction}, local: ${savedDistraction})`);
+    console.log(`Distraction-Free: ${isZenMode} (server: ${userPrefersZenmode}, local: ${savedZenmode})`);
   }
   
   

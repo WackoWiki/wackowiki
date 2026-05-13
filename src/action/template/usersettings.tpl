@@ -140,8 +140,8 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td>
-						<input type="checkbox" name="distraction_free" id="distraction_free"[ ' zenmode | checkbox ' ]>
-						<label for="distraction_free">[ ' _t: DistractionFree ' ]</label>
+						<input type="checkbox" name="zenmode" id="zenmode"[ ' zenmode | checkbox ' ]>
+						<label for="zenmode">[ ' _t: ZenMode ' ]</label>
 					</td>
 				</tr>
 				<tr>

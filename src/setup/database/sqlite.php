@@ -354,7 +354,7 @@ $tbl_user_setting = <<<STR
 		"dark_mode" TINYINT NOT NULL DEFAULT '0' ,
 		"syntax_highlighting" TINYINT NOT NULL DEFAULT '1' ,
 		"live_preview" TINYINT NOT NULL DEFAULT '0' ,
-		"distraction_free" TINYINT NOT NULL DEFAULT '0' ,
+		"zenmode" TINYINT NOT NULL DEFAULT '0' ,
 		"widescreen_mode" TINYINT NOT NULL DEFAULT '0' ,
 		"noid_pubs" TINYINT NOT NULL DEFAULT '0' ,
 		"session_length" TINYINT NULL  ,
