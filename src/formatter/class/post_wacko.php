@@ -9,12 +9,13 @@ class PostWacko
 	public $object;
 	private array $action;
 	private $options;
+	private static $markerPattern = '/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u';
 
 	function __construct(&$object, &$options)
 	{
 		$this->object	= &$object;
 		$this->options	= &$options;
-		$this->action	= explode(', ', ACTION4DIFF);
+		$this->action	= array_flip(explode(', ', ACTION4DIFF)); // O(1) lookup
 	}
 
 	function postcallback($things)
@@ -32,7 +33,7 @@ class PostWacko
 			if ($url)
 			{
 				$url	= str_replace(' ', '%20', trim($url));
-				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $text));
+				$text	= trim(preg_replace(self::$markerPattern, '', $text));
 
 				return $wacko->link($url, '', $text, '', true, true);
 			}
@@ -49,18 +50,23 @@ class PostWacko
 			if ($url && $img)
 			{
 				$url	= str_replace(' ', '', $url);
-				$url	= $wacko->link($url, '', '', '', true, true);
+				$href	= $wacko->link($url, '', '', '', true, true);
 
-				if (!$url = preg_replace('/.*href="(.*?)".*|.*src="(.*?)".*/u', '\\1\\2', $url))
+				// Extract href from the generated anchor
+				if (preg_match('/href="([^"]+)"/', $href, $m))
 				{
-					return $url;
+					$href = $m[1];
+				}
+				else
+				{
+					return $href; // fallback
 				}
 
 				$img	= str_replace(' ', '', $img);
-				$img	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $img));
+				$img	= trim(preg_replace(self::$markerPattern, '', $img));
 				$img	= $wacko->link($img, '', '', '', true, true);
 
-				return '<a href="' . $url . '">' . $img . '</a>';
+				return '<a href="' . $href . '">' . $img . '</a>';
 			}
 			else
 			{
@@ -71,7 +77,7 @@ class PostWacko
 		else if (preg_match('/^<!--action:begin-->\s*(.*?)<!--action:end-->$/us', $thing, $matches))
 		{
 			// check for action parameters
-			$sep = mb_strpos($matches[1], ' ');
+			$sep = strpos($matches[1], ' '); // action names are ASCII
 
 			if ($sep === false)
 			{
@@ -80,23 +86,23 @@ class PostWacko
 			}
 			else
 			{
-				$action		= mb_substr($matches[1], 0, $sep);
-				$p			= ' ' . mb_substr($matches[1], $sep) . ' ';
+				$action		= substr($matches[1], 0, $sep);
+				$p			= ' ' . substr($matches[1], $sep) . ' ';
 				$params		= [];
 				$c			= 0;
 
-				preg_match_all('/(([^\s=]+)(\s*=\s*((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $_matches, PREG_SET_ORDER);
+				preg_match_all('/([^\s=]+)(?:\s*=\s*(?:"([^"]*)"|(\S+)))?\s/u', $p, $_matches, PREG_SET_ORDER);
 
 				foreach ($_matches as $m)
 				{
-					$value			= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : 1;
+					$value			= isset($m[2]) ? $m[2] : ($m[3] ?? 1);
 					$params[$c]		= $value;
-					$params[$m[2]]	= $value;
+					$params[$m[1]]	= $value;
 					$c++;
 				}
 			}
 
-			if ($action && (!isset($this->options['diff']) || in_array(mb_strtolower($action), $this->action)))
+			if ($action && (!isset($this->options['diff']) || isset($this->action[mb_strtolower($action)])))
 			{
 				return $wacko->action($action, $params);
 			}
