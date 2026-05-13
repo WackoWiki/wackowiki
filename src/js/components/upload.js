@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // Add translated "edit metadata" link
           if (result.file_id) {
-            const metaLink = `${form.dataset.basePath || ''}/filemeta?m=show&file_id=${result.file_id}`;
+            const metaLink = `${form.dataset.basePath || ''}/_filemeta?m=show&file_id=${result.file_id}`;
             const editText = t('EditMetadata') || 'edit metadata';
             successHtml += ` <a href="${metaLink}" target="_blank" class="filemeta-link">(${editText})</a>`;
           }
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showSummary = (successCount, total, isGlobal) => {
       const summary = document.createElement('div');
       summary.className = 'upload-summary success-box';
-      const link = isGlobal ? 'attachments?files=global&order=time&dir=desc' : 'attachments?files=local&order=time&dir=desc';
+      const link = isGlobal ? '_attachments?files=global&order=time&dir=desc' : '_attachments?files=local&order=time&dir=desc';
       summary.innerHTML = `
         <strong>${t('UploadSuccess', successCount, total)}</strong><br>
         <a href="${form.dataset.basePath || ''}/${link}">

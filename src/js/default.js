@@ -69,7 +69,7 @@ function all_init() {
 
           // Build correct URL using base_path + comment tag
           const base = document.documentElement.dataset.basePath || '';
-          targetUrl = base + commentTag + '/edit';
+          targetUrl = base + commentTag + '/_edit';
         } else {
           // Main page case
           targetUrl = editBaseUrl;

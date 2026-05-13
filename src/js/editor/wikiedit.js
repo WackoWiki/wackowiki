@@ -2778,8 +2778,8 @@ class WikiEdit extends ProtoEdit {
   // Core upload function
   // ====================== DRAG & DROP + PASTE MEDIA UPLOAD ======================
   async uploadMediaFiles(files) {
-    let uploadUrl = window.location.pathname.replace(/\/edit$/, '/upload');
-    if (!uploadUrl.endsWith('/upload')) uploadUrl += '/upload';
+    let uploadUrl = window.location.pathname.replace(/\/_edit$/, '/_upload');
+    if (!uploadUrl.endsWith('/_upload')) uploadUrl += '/_upload';
     uploadUrl = window.location.origin + uploadUrl;
 
     for (let file of files) {
