@@ -223,11 +223,8 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 .we-toolbar li.we-upload-media img {
 	background: url('../../../image/wikiedit/light/upload.svg') no-repeat;
 }
-.we-toolbar li.we-draft-clear img {
-	background: url('../../../image/wikiedit/light/edit-clear.svg') no-repeat;
-}
-.we-toolbar li.we-draft-restore img {
-	background: url('../../../image/wikiedit/light/restore.svg') no-repeat;
+.we-toolbar li.we-zenmode img {
+	background: url('../../../image/wikiedit/light/full-width.svg') no-repeat;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -370,11 +367,8 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 		.we-toolbar li.we-upload-media img {
 			background: url('../../../image/wikiedit/dark/upload.svg') no-repeat;
 		}
-		.we-toolbar li.we-draft-clear img {
-			background: url('../../../image/wikiedit/dark/edit-clear.svg') no-repeat;
-		}
-		.we-toolbar li.we-draft-restore img {
-			background: url('../../../image/wikiedit/dark/restore.svg') no-repeat;
+		.we-toolbar li.we-zenmode img {
+			background: url('../../../image/wikiedit/dark/full-width.svg') no-repeat;
 		}
 	}
 }
@@ -518,11 +512,8 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	.we-toolbar li.we-upload-media img {
 		background: url('../../../image/wikiedit/dark/upload.svg') no-repeat;
 	}
-	.we-toolbar li.we-draft-clear img {
-		background: url('../../../image/wikiedit/dark/edit-clear.svg') no-repeat;
-	}
-	.we-toolbar li.we-draft-restore img {
-		background: url('../../../image/wikiedit/dark/restore.svg') no-repeat;
+	.we-toolbar li.we-zenmode img {
+		background: url('../../../image/wikiedit/dark/full-width.svg') no-repeat;
 	}
 }
 
@@ -1014,3 +1005,45 @@ textarea.syntax-enabled {
 	0%, 100% { opacity: 1; }
 	50%      { opacity: 0.4; }
 }
+
+/* ==================== DISTRACTION-FREE MODE ==================== */
+body.zen header,
+body.zen footer,
+body.zen .header,
+body.zen .footer,
+body.zen .sidebar,
+body.zen .nav,
+body.zen .toc {
+	display: none !important;
+}
+
+body.widescreen #mainwrapper
+{
+	max-width: none !important;
+	width: 100% !important;
+	margin: 10px 0 0 0 !important;
+}
+
+body.widescreen #mainwrapper header,
+body.widescreen main{
+	float: none;
+	width: stretch;
+	box-shadow: none;
+}
+
+body.zen .wikiedit-split-container {
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+
+/* Widescreen emphasis */
+body.widescreen .wikiedit-split-container {
+	grid-template-columns: 55% 45%;
+}
+
+/* Optional: Make editor even bigger in full zen mode */
+body.zen.widescreen .wikiedit-textarea {
+	font-size: 1.05rem;
+	line-height: 1.7;
+}
+

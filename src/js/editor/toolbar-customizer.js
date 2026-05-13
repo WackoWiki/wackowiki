@@ -16,7 +16,7 @@ class ToolbarCustomizer {
     'hr', 'signature', 'createlink', 'footnote', 'createtable',
     'upload-media', 'separator',
     'wacko2md', 'md2wacko', 'separator',
-    'dark-toggle', 'syntax', 'livepreview', 'fullscreen', 'separator',
+    'dark-toggle', 'syntax', 'livepreview', 'zenmode', 'fullscreen', 'separator',
     'shrink', 'enlarge', 'separator',
     'undo', 'redo', 'separator', 'search', 'about',
     'dropdown'
@@ -57,6 +57,7 @@ class ToolbarCustomizer {
     'dark-toggle': { labelKey: 'ToggleDark' },
     'syntax': { labelKey: 'SyntaxHighlighting' },
     'livepreview': { labelKey: 'LivePreview' },
+    'zenmode': { labelKey: 'ZenMode' },
     'fullscreen': { labelKey: 'Fullscreen' },
     'shrink': { labelKey: 'HeightShrink' },
     'enlarge': { labelKey: 'HeightEnlarge' },

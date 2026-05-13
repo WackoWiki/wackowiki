@@ -122,6 +122,9 @@
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">[ ' _t: EditorInterface ' ]</th>
 					<td>
 						<input type="checkbox" name="syntax_highlighting" id="syntax_highlighting"[ ' syntax | checkbox ' ]>
 						<label for="syntax_highlighting">[ ' _t: SyntaxHighlighting ' ]</label>
@@ -132,6 +135,20 @@
 					<td>
 						<input type="checkbox" name="live_preview" id="live_preview"[ ' preview | checkbox ' ]>
 						<label for="live_preview">[ ' _t: LivePreview ' ]</label>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<input type="checkbox" name="distraction_free" id="distraction_free"[ ' zenmode | checkbox ' ]>
+						<label for="distraction_free">[ ' _t: DistractionFree ' ]</label>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<input type="checkbox" name="widescreen_mode" id="widescreen_mode"[ ' widescreen | checkbox ' ]>
+						<label for="widescreen_mode">[ ' _t: WidescreenMode ' ]</label>
 					</td>
 				</tr>
 				<tr>

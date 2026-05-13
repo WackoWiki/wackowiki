@@ -54,6 +54,7 @@ class WikiEdit extends ProtoEdit {
     'dark-toggle': { labelKey: 'ToggleDark', method: 'toggleDarkMode', args: [] },
     'syntax': { labelKey: 'SyntaxHighlighting', method: 'toggleSyntaxHighlight', args: [] },
     'livepreview': { labelKey: 'LivePreview', method: 'toggleLivePreview', args: [] },
+    'zenmode': { labelKey: 'DistractionMode', method: 'toggleDistractionMode', args: [] },
     'fullscreen': { labelKey: 'Fullscreen', method: 'toggleFullscreen', args: [] },
     'shrink': { labelKey: 'HeightShrink', method: 'changeEditorHeight', args: [-100] },
     'enlarge': { labelKey: 'HeightEnlarge', method: 'changeEditorHeight', args: [100] },
@@ -143,6 +144,8 @@ class WikiEdit extends ProtoEdit {
     this.syntaxHighlighting = ta.dataset.syntaxHighlighting !== '0';
     this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
     this.canUpload = ta.dataset.canUpload === '1';
+
+    this.initDistractionMode();
 
     // ====================== CONTEXT DETECTION (EDIT vs COMMENT) ======================
     this.isCommentMode = ta.id === 'addcomment' || ta.name === 'payload';
@@ -342,7 +345,7 @@ class WikiEdit extends ProtoEdit {
       'upload-media', 'separator',
       'draft-restore', 'draft-clear', 'separator',
       'wacko2md', 'md2wacko', 'separator',
-      'dark-toggle', 'syntax', 'livepreview', 'fullscreen', 'separator',
+      'dark-toggle', 'syntax', 'livepreview', 'zenmode', 'fullscreen', 'separator',
       'shrink', 'enlarge', 'separator',
       'undo', 'redo', 'separator', 'search', 'about',
       'dropdown',
@@ -713,6 +716,58 @@ class WikiEdit extends ProtoEdit {
     localStorage.setItem('we_dark_mode_enabled', newIsDark);
   }
 
+  // ====================== DISTRACTION-FREE & WIDESCREEN MODE ======================
+
+  toggleDistractionMode() {
+    const body = document.body;
+    const isActive = !body.classList.contains('zen');
+
+    if (isActive) {
+      body.classList.add('zen', 'widescreen');
+      localStorage.setItem('we_distraction_free', '1');
+      localStorage.setItem('we_widescreen', '1');
+    } else {
+      body.classList.remove('zen', 'widescreen');
+      localStorage.removeItem('we_distraction_free');
+      localStorage.removeItem('we_widescreen');
+    }
+
+    this.showMessage(isActive ? 'Distraction-free mode enabled' : 'Normal mode restored',
+      isActive ? 'success' : 'info', 1800);
+  }
+
+  /**
+   * Restore saved mode on editor init
+   */
+  initDistractionMode() {
+    const html = document.documentElement;
+
+    const userPrefersDistraction = html.dataset.zenmode === '1';
+    const userPrefersWidescreen = html.dataset.widescreen === '1';
+
+    const savedDistraction = localStorage.getItem('we_distraction_free');
+    const savedWidescreen = localStorage.getItem('we_widescreen');
+
+    // LocalStorage has priority
+    const isDistractionFree = savedDistraction !== null
+      ? savedDistraction === '1'
+      : userPrefersDistraction;
+
+    const isWidescreen = savedWidescreen !== null
+      ? savedWidescreen === '1'
+      : userPrefersWidescreen;
+
+    if (isDistractionFree) {
+      document.body.classList.add('zen');
+    }
+    if (isWidescreen) {
+      document.body.classList.add('widescreen');
+    }
+
+    console.log(`Distraction-Free: ${isDistractionFree} (server: ${userPrefersDistraction}, local: ${savedDistraction})`);
+  }
+  
+  
   /**
    * Toggle fullscreen mode ONLY for the editor container (#page-edit).
    * This gives a clean distraction-free editing area while the browser still

@@ -84,7 +84,7 @@ const TB_DEFAULT					= [
 						'upload-media','separator',
 						'draft-restore','draft-clear','separator',
 						'wacko2md','md2wacko','separator',
-						'dark-toggle','syntax','livepreview','fullscreen','separator',
+						'dark-toggle','syntax','livepreview','zenmode','fullscreen','separator',
 						'shrink','enlarge','separator',
 						'undo','redo','separator', 'search', 'about',
 						'dropdown'

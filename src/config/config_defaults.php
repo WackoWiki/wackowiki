@@ -293,7 +293,7 @@ $wacko_config_defaults = [
 											'separator',
 											'wacko2md','md2wacko',
 											'separator',
-											'dark-toggle','syntax','livepreview','fullscreen',
+											'dark-toggle','syntax','livepreview','zenmode','fullscreen',
 											'separator',
 											'shrink','enlarge',
 											'separator',

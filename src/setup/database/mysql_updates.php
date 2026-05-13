@@ -69,6 +69,9 @@ $alter_user_setting_r6_2_3 = "ALTER TABLE {$pref}user_setting ADD dark_mode TINY
 $alter_user_setting_r6_2_4 = "ALTER TABLE {$pref}user_setting ADD syntax_highlighting TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER dark_mode";
 $alter_user_setting_r6_2_5 = "ALTER TABLE {$pref}user_setting ADD live_preview TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER syntax_highlighting";
 $alter_user_setting_r6_2_6 = "ALTER TABLE {$pref}user_setting ADD wikiedit_toolbar VARCHAR(2048) NOT NULL DEFAULT '' AFTER validate_ip";
+$alter_user_setting_r6_2_7 = "ALTER TABLE {$pref}user_setting ADD distraction_free TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER live_preview";
+$alter_user_setting_r6_2_8 = "ALTER TABLE {$pref}user_setting ADD widescreen_mode TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER distraction_free";
+
 
 // USERGROUP
 

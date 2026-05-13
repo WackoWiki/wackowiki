@@ -125,6 +125,8 @@ else if ($user = $this->get_user())
 		'autosave_draft		= ' . (int) isset($_POST['autosave_draft']) . ', ' .
 		'editor_height		= ' . (int) ($_POST['editor_height'] ?? 400) . ', ' .
 		'syntax_highlighting = ' . (int) isset($_POST['syntax_highlighting']) . ', ' .
+		'distraction_free 	= ' . (int) isset($_POST['distraction_free']) . ', ' .
+		'widescreen_mode 	= ' . (int) isset($_POST['widescreen_mode']) . ', ' .
 		'live_preview		= ' . (int) isset($_POST['live_preview']) . ' ';
 	}
 	else if ($action == 'user_settings_notifications')
@@ -261,6 +263,8 @@ else if ($user = $this->get_user())
 		$tpl->height			= $user['editor_height'];
 		$tpl->syntax			= $user['syntax_highlighting'];
 		$tpl->preview			= $user['live_preview'];
+		$tpl->zenmode			= $user['distraction_free'];
+		$tpl->widescreen		= $user['widescreen_mode'];
 		$tpl->toolbar			= $user['wikiedit_toolbar'];
 
 		$tpl->leave();

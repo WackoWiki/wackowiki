@@ -6,6 +6,10 @@ _common include file for themes
 	dir="[ ' dir ' ]" 
 	lang="[ ' lang ' ]" 
 	data-theme="[ ' mode ' ]"
+	[= user _ =
+		data-zenmode="[ ' zen ' ]"
+		data-widescreen="[ ' widescreen ' ]"
+	=]
 	[= doubleclick _ =
 		data-edit-url="[ ' href | e ' ]" 
 		data-base-path="[ ' db: base_path | e ' ]"

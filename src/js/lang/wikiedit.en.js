@@ -74,6 +74,7 @@ lang = {
 
 	Fullscreen:				'Fullscreen',
 	LivePreview:			'Live Preview',
+	ZenMode:				'Zen Mode',
 	SyntaxHighlighting:		'Syntax Highlighting',
 	ToggleDark:				'Toggle dark/light mode',
 	Upload:					'Upload image/file',

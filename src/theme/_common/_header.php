@@ -86,10 +86,16 @@ if (!empty($this->db->ext_bad_behaviour))
 	$tpl->bb2 = bb2_timer();
 }
 
+
+if ($user = $this->get_user())
+{
+	$tpl->user_zen			= $user['distraction_free'];
+	$tpl->user_widescreen	= $user['widescreen_mode'];
+}
+
 // Doubleclick edit feature
 //   Enabled only for [a] guests with write access, [b] registered users who don't turn it off,
 //   requires class=page in show handler and is disabled for pages having forms.
-$user			= $this->get_user();
 $u_doubleclick	= $user
 	? @$user['doubleclick_edit']
 	: $this->has_access('write');
