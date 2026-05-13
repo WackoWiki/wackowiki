@@ -14,77 +14,86 @@ if ($text == '')
 	return;
 }
 
-// ignore the slashes and the long dash in the title, in url and pgp headers
-$text = preg_replace('/====(.*?)\/\/(.*?)\/\/(.*?)====/u',	'\\1@@@@\\2@@@@\\3',	$text);
-$text = preg_replace('/(http:|https:|ftp:|nntp:)\/\//u',	'\\1@@@@',				$text);
-$text = preg_replace('/-{5}([A-Z ]+?)-{5}/u',				'&&&&&\\1&&&&&',		$text);
-
-// Cut a simple counting
-$text = str_replace(
-	[
-		'**',
-		'//',
-		'__',
-		'----',
-		'---',
-		'##',
-		'++',
-		'??',
-		'""',
-		'~',
-		'>>>',
-		'>>',
-		'<<<',
-		'<<',
-		'%%',
-		'``',
-		'======',
-		'=====',
-		'====',
-		'===',
-	],
-	'',
-	$text);
+$text = preg_replace_callback(
+	'/
+		(==== .*? \/\/ .*? \/\/ .*? ====)  |   # group 1: ====text//text//text====
+		((?:http|https|ftp|nntp):\/\/)      |   # group 2: protocol://
+		(-{5} [A-Z ]+? -{5})                |   # group 3: -----TITLE-----
+	/ux',
+	function ($m) {
+		if ($m[1]) {
+			// Replace inner // with @@@@
+			return str_replace('//', '@@@@', $m[1]);
+		}
+		if ($m[2]) {
+			// Replace :// with :@@@@
+			return str_replace('://', ':@@@@', $m[2]);
+		}
+		if ($m[3]) {
+			// Replace ----- ----- with &&&&& ... &&&&&
+			return str_replace('-----', '&&&&&', $m[3]);
+		}
+		return $m[0];
+	},
+	$text
+	);
 
 $text = str_replace(
 	[
-		'<[',
-		']>',
-		'#||',
-		'||#',
-		'#|',
-		'|#',
+		'**', '//', '__', '----', '---', '##', '++', '??', '""', '~',
+		'>>>', '>>', '<<<', '<<', '%%', '``',
+		'======', '=====', '====', '===',
+		'<[', ']>', '#||', '||#', '#|', '|#',
+		'||', '*|', '|*',
 	],
-	'"',
-	$text);
-
-$text = str_replace(
 	[
-		'||',
-		'*|',
-		'|*',
+		'', '', '', '', '', '', '', '', '', '',
+		'', '', '', '', '', '',
+		'', '', '', '',
+		'"', '"', '"', '"', '"', '"',
+		'', '', '',
 	],
-	'',
-	$text);
+	$text
+	);
 
-// Cut headlines h1
-$text = preg_replace('/==.+?==[\s]*/', '', $text);
+// ---- Restore protected parts ----
+$text = str_replace('@@@@', '//', $text);
+$text = str_replace('&&&&&', '-----', $text);
 
-// return slash and dash
-$text = str_replace('@@@@',  '//',		$text);
-$text = str_replace('&&&&&', '-----',	$text);
+// ---- Complex layout cleanup ----
+$text = preg_replace('/!!(?:\\([\\w]+?\\))*(.+?)!!/u',		'\\1',	$text); // !!(color)text!!
+$text = preg_replace('/\\^\\^(\S+?)\\^\\^/u',				'^\\1',	$text); // ^^123^^
+$text = preg_replace('/{{.+?}}[\s]*/u',						'',		$text); // {{action}}
+$text = preg_replace('/[\n]{2,}/u',							"\n\n",	$text); // more than two transfers
+$text = preg_replace('/\\n[ ]{1}/u',						'',		$text); // gap at beginning of line
+$text = preg_replace('/--([^ ])/u',							'[\\1',	$text); // strikethrough left
+$text = preg_replace('/([^ ])--/u',							'\\1]',	$text); // strikethrough right
 
-// cut or parse a complex layout
-$text = preg_replace('/!!(?:\\([\\w]+?\\))*(.+?)!!/u',	'\\1',	$text); // !!(color)text!!
-$text = preg_replace('/\\^\\^(\S+?)\\^\\^/u',			'^\\1',	$text); // ^^123^^
-$text = preg_replace('/{{.+?}}[\s]*/u',					'',		$text); // {{action}}
-$text = preg_replace('/[\n]{2,}/u',						"\n\n",	$text); // more than two transfers
-$text = preg_replace('/\\n[ ]{1}/u',					'',		$text); // gap in the beginning of the line
-$text = preg_replace('/--([^ ])/u',						'[\\1',	$text); // strikethrough; not to be confused with the long dashes
-$text = preg_replace('/([^ ])--/u',						'\\1]',	$text); // strikethrough; not to be confused with the long dashes
-
-// Links
-$text = preg_replace('/(?:\\[\\[|\\(\\()(\S+?) (.*?)(?:\\]\\]|\\)\\))/u',	'\\2 (\\1)',	$text); // complex
-$text = preg_replace('/(?:\\[\\[|\\(\\()(\S+?)(?:\\]\\]|\\)\\))/u',			'\\1',			$text); // simple
+// ---- Links ----
+$text = preg_replace_callback(
+	'/
+		(?:\[\[|\(\()
+		(\S+?)
+		\s+
+		(.*?)
+		(?:]]|\)\))
+	|
+		(?:\[\[|\(\()
+		(\S+?)
+		(?:]]|\)\))
+	/ux',
+	function ($m) {
+		if ($m[1] && $m[2]) {
+			// Complex link: [[url desc]] or ((url desc))
+			return $m[2] . ' (' . $m[1] . ')';
+		}
+		if ($m[4]) {
+			// Simple link: [[url]] or ((url))
+			return $m[4];
+		}
+		return $m[0];
+	},
+	$text
+	);
 
 echo $text;

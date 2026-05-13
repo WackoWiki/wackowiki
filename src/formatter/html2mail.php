@@ -19,14 +19,27 @@ $text = str_replace('<br>', "\n", $text);
 // HTML email filters (text/html)
 if (isset($options['text_html']))
 {
-	// convert links to pages in the format "Description (URL)"
-	$text = preg_replace('/<a .*?href="(https?:\/\/.*?)" class="".*?>(.*?)<\/a>/u', '$2 ($1)', $text);
-
-	// remove tags from the links that contain dates
-	$text = preg_replace('/<a .*?href="https?:\/\/.*?">((?:0[1-9]|[12]\d|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19|20)\d{2} [0-2][0-3][-\/.:][0-5]\d)<\/a>/u', '$1', $text);
-
-	// remove references to the creation of new pages
-	$text = preg_replace('/<a .*?href="https?:\/\/.*?edit\\?add=1" title="' . $this->_t('CreatePage') . '">.*?<\/a>/u', '', $text);
+	// Combine all three replacements into a single callback
+	$text = preg_replace_callback(
+		'/<a .*?href="(https?:\/\/.*?)" class="".*?>(.*?)<\/a>/u',
+		function ($m) {
+			// Check for date links (second pattern)
+			if (preg_match(
+				'/^((?:0[1-9]|[12]\d|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19|20)\d{2} [0-2][0-3][-\/.:][0-5]\d)$/u',
+				$m[2]
+				)) {
+					return $m[2]; // keep date text, remove link
+				}
+				// Check for "create page" links (third pattern)
+				if (str_contains($m[0], 'edit?add=1') &&
+					str_contains($m[0], 'title="' . $this->_t('CreatePage') . '"')) {
+						return ''; // remove entirely
+					}
+					// Default: convert to "Description (URL)"
+					return $m[2] . ' (' . $m[1] . ')';
+		},
+		$text
+		);
 }
 
 // sanitizing remaining tags
