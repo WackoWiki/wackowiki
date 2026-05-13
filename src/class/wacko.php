@@ -3843,24 +3843,24 @@ class Wacko
 	}
 
 	/**
-	* Returns full <a href=".."> or <img ...> HTML for Tag
-	*
-	* @param string		$tag			Link content - may be Wacko tag, interwiki wikiname:page tag,
-	*									http/https/file/ftp/mailto/xmpp URL,
-	*									local or remote audio/image/video-file for <audio>/<img>/<video> link,
-	*									or local or remote doc-file;
-	*									if pagetag is for an external link but not protocol is specified, https:// is prepended
-	* @param string		$method			Optional Wacko method (default 'show' method added in run() function)
-	* @param string		$text			Optional text or image-file for HREF link (defaults to same as pagetag)
-	* @param string		$title
-	* @param bool		$track			Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINK table).
-	*									Optional, default is TRUE
-	* @param bool		$safe			If false, then sanitize $text, else no.
-	* @param bool		$anchor_link	Optional sets <a id="a-154" ...> once for link at the first appearance
-	* @param bool		$meta_direct	Links attached files to filemeta handler if TRUE
-	*
-	* @return string full Href link
-	*/
+	 * Returns full <a href=".."> or <img ...> HTML for Tag
+	 *
+	 * @param string		$tag			Link content - may be Wacko tag, interwiki wikiname:page tag,
+	 *									http/https/file/ftp/mailto/xmpp URL,
+	 *									local or remote audio/image/video-file for <audio>/<img>/<video> link,
+	 *									or local or remote doc-file;
+	 *									if pagetag is for an external link but not protocol is specified, https:// is prepended
+	 * @param string		$method			Optional Wacko method (default 'show' method added in run() function)
+	 * @param string		$text			Optional text or image-file for HREF link (defaults to same as pagetag)
+	 * @param string		$title
+	 * @param bool		$track			Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINK table).
+	 *									Optional, default is TRUE
+	 * @param bool		$safe			If false, then sanitize $text, else no.
+	 * @param bool		$anchor_link	Optional sets <a id="a-154" ...> once for link at the first appearance
+	 * @param bool		$meta_direct	Links attached files to filemeta handler if TRUE
+	 *
+	 * @return string full Href link
+	 */
 	function link($tag, $method = '', $text = '', $title = '', $track = true, $safe = false, $anchor_link = true, $meta_direct = true): string
 	{
 		$aname			= '';
@@ -3928,19 +3928,20 @@ class Wacko
 			}
 		}
 
-		// Email -> mailto:info@example.com
+		// unified dispatch: determine link type by most specific patterns first
 		if (preg_match('/^(mailto:)?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
+			// Email -> mailto:info@example.com
 			$href	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
 			$title	= $this->_t('EmailLink');
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'outerlink';
 		}
-		// geo URI -> geo:-3.075833,37.353333
-		// tel URI -> tel:+1-234-567-890
 		else if (preg_match('/^(geo|tel):[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
+			// geo URI -> geo:-3.075833,37.353333
+			// tel URI -> tel:+1-234-567-890
 			$href	= $tag;
 			$title	= match($matches[1])
 			{
@@ -3951,24 +3952,24 @@ class Wacko
 			$class	= '';
 			$tpl	= 'outerlink';
 		}
-		// XMPP address -> xmpp:info@example.com
-		else if (preg_match('/^xmpp:[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
+		else if (preg_match('/^xmpp:[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag))
 		{
+			// XMPP address -> xmpp:info@example.com
 			$href	= $tag;
 			$title	= $this->_t('JabberLink');
 			$icon	= $this->_t('Icon.Outer');
 			$class	= '';
 			$tpl	= 'outerlink';
 		}
-		// HTML anchor #...
 		else if (str_starts_with($tag, '#'))
 		{
+			// HTML anchor #...
 			$href	= $tag;
 			$tpl	= 'anchor';
 		}
-		// external image
 		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
 		{
+			// external image
 			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
@@ -3984,9 +3985,9 @@ class Wacko
 				$tpl	= 'outerlink';
 			}
 		}
-		// file link -> https://example.com/file.zip
 		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(7z|bz2|doc|exe|gz|odt|pdf|ppt|rar|rdf|rpm|tgz|xls|zip)$/u', $tag, $matches))
 		{
+			// file link -> https://example.com/file.zip
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= match($matches[3])
 			{
@@ -3998,9 +3999,9 @@ class Wacko
 			$class	= '';
 			$tpl	= 'outerlink';
 		}
-		// external URL
 		else if (preg_match('/^(https?|ftps?|file|git|nntp|sftp|ssh|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
+			// external URL
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
 
@@ -4010,24 +4011,24 @@ class Wacko
 				$icon	= $this->_t('Icon.Outer');
 			}
 		}
-		// local file -> file:image.png
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/u', $tag, $matches))
 		{
+			// local file -> file:image.png
 			$aname			= '';
 			$nomedia		= $matches[1]; // files action: matches '_file:' - patched link to not render media in their tags when not needed
 			$_file_name		= $matches[2];
-			$file_array		= explode('/', $_file_name);
 			$param			= [];
 			$page_tag		= '';
 			$class			= 'file-link'; // generic file icon
 			$global			= true;
 			$file_access	= false;
 
-			// 1 -> file:/some.zip (global)
-			if (count($file_array) == 2 && $file_array[0] == '')
+			// Determine global vs local
+			if (str_starts_with($_file_name, '/') && strpos($_file_name, '/', 1) === false)
 			{
+				// 1 -> file:/some.zip (global)
 				$page_tag	= $this->db->ap_mode ? $this->context[$this->current_context] : ''; // prevents that tag is set as 'admin.php' in href()
-				$file_name	= $file_array[1];
+				$file_name	= substr($_file_name, 1);
 				$param		= $this->parse_media_param($file_name);
 
 				if ($file_data = $this->check_file_record($param['src']))
@@ -4045,11 +4046,9 @@ class Wacko
 			{
 				// 2a -> file:some.zip				(local relative)
 				// 2b -> file:/cluster/some.zip		(local absolute)
-				$local_file	= $file_array;
+				$local_file	= explode('/', $_file_name);
 				$global		= false;
-				$file_name	= $local_file[count($local_file) - 1];
-
-				unset($local_file[count($local_file) - 1]);
+				$file_name	= array_pop($local_file);
 				$_page_tag	= implode('/', $local_file);
 
 				if ($_page_tag == '')
@@ -4075,9 +4074,9 @@ class Wacko
 
 					// check permissions
 					if ($this->is_admin()
-					|| ($file_data['file_id'] && ($this->page['owner_id'] == $this->get_user_id()))
-					|| ($this->has_access('read', $page_id))
-					|| ($file_data['user_id'] == $this->get_user_id()))
+						|| ($file_data['file_id'] && ($this->page['owner_id'] == $this->get_user_id()))
+						|| ($this->has_access('read', $page_id))
+						|| ($file_data['user_id'] == $this->get_user_id()))
 					{
 						$file_access = true;
 					}
@@ -4209,20 +4208,20 @@ class Wacko
 								if (!empty($file_data['caption']) && $param['caption'])
 								{
 									$caption	=
-										'<span class="caption-sub">' . Ut::html($file_data['caption']) . '</span>' . ' ' .
-										($file_data['author']
-											? '<br><span class="caption-license"><small>' .
-												'(' . $this->_t('FileSource') . ': ' .
-												($file_data['source_url']
-													? '<a href="' . $file_data['source_url'] . '" rel="nofollow" target="_blank">' . Ut::html($file_data['author']) . '</a>'
-													: Ut::html($file_data['author'])) .
-												($file_data['license_id']
-													? ' /' .
-														// FIXME; bad .tpl hack to remove line feed and indent stuff
-														preg_replace('/[\r\n\t]+/u', '', $this->action('license', ['license_id' => $file_data['license_id'], 'intro' => 0]))
-													: '') .
-												')</small></span>'
-											: '');
+									'<span class="caption-sub">' . Ut::html($file_data['caption']) . '</span>' . ' ' .
+									($file_data['author']
+										? '<br><span class="caption-license"><small>' .
+										'(' . $this->_t('FileSource') . ': ' .
+										($file_data['source_url']
+											? '<a href="' . $file_data['source_url'] . '" rel="nofollow" target="_blank">' . Ut::html($file_data['author']) . '</a>'
+											: Ut::html($file_data['author'])) .
+										($file_data['license_id']
+											? ' /' .
+											// FIXME; bad .tpl hack to remove line feed and indent stuff
+											preg_replace('/[\r\n\t]+/u', '', $this->action('license', ['license_id' => $file_data['license_id'], 'intro' => 0]))
+											: '') .
+										')</small></span>'
+										: '');
 								}
 
 								// disables linking also for print handler, first and foremost to prevent those links showing up in numerate_links
@@ -4265,48 +4264,37 @@ class Wacko
 
 			unset($file_data);
 		}
-		// user link -> user:UserName
 		else if (preg_match('/^(user):(' . self::PATTERN['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
+			// user link -> user:UserName
 			$parts	= explode('/', $matches[2]);
-
-			for ($i = 0; $i < count($parts); $i++)
-			{
-				$parts[$i] = str_replace('%23', '#', $parts[$i]);
-			}
-
+			$parts	= array_map(function($p) { return str_replace('%23', '#', $p); }, $parts);
 			$href	= $this->href('', $this->db->users_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'user-link';
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'userlink';
 		}
-		// group link -> group:UserGroup
 		else if (preg_match('/^(group):(' . self::PATTERN['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
+			// group link -> group:UserGroup
 			$parts	= explode('/', $matches[2]);
-
-			for ($i = 0; $i < count($parts); $i++)
-			{
-				$parts[$i] = str_replace('%23', '#', $parts[$i]);
-			}
-
+			$parts	= array_map(function($p) { return str_replace('%23', '#', $p); }, $parts);
 			$href	= $this->href('', $this->db->groups_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'group-link';
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'userlink';
 		}
-		// interwiki -> wiki:page
 		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]*)$/u', $tag, $matches))
 		{
+			// interwiki -> wiki:page
 			$_parts	= explode('/', $matches[2]);
-
+			$__parts = [];
 			foreach ($_parts as $part)
 			{
 				$__parts[] = str_replace('%23', '#', rawurlencode($part));
 			}
-
 			$parts	= implode('/', $__parts);
 
 			$href	= $this->get_inter_wiki_url($matches[1], $parts);
@@ -4314,9 +4302,9 @@ class Wacko
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'outerlink';
 		}
-		// wiki link
 		else if (preg_match('/^([\!\.' . self::PATTERN['ALPHANUM_P'] . ']+)(\#[' . self::PATTERN['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
 		{
+			// wiki link
 			$aname			= '';
 			$match			= '';
 			$tag			= $matches[1];
@@ -4504,7 +4492,8 @@ class Wacko
 					$icon	= '';
 				}
 
-				$templates = [
+				// Use strtr for template substitution (single pass, less memory)
+				$res = strtr($res, [
 					'{aname}'		=> $aname,
 					'{rel}'			=> $rel,
 					'{icon}'		=> $icon,
@@ -4515,13 +4504,7 @@ class Wacko
 					'{pagepath}'	=> $page_path,
 					'{page}'		=> $page,
 					'{text}'		=> $text,
-				];
-
-				// process template for internal link
-				foreach ($templates as $template => $element)
-				{
-					$res = str_replace($template, $element, $res);
-				}
+				]);
 
 				if (!$text)
 				{
@@ -4628,7 +4611,8 @@ class Wacko
 					$icon	= '';
 				}
 
-				$templates = [
+				// Use strtr for template substitution
+				$res = strtr($res, [
 					'{aname}'		=> $aname,
 					'{target}'		=> $target,
 					'{rel}'			=> $rel,
@@ -4637,13 +4621,7 @@ class Wacko
 					'{title}'		=> $title,
 					'{href}'		=> $href,
 					'{text}'		=> $text,
-				];
-
-				// process template for external link
-				foreach ($templates as $template => $element)
-				{
-					$res = str_replace($template, $element, $res);
-				}
+				]);
 
 				// numerated outer links and file links
 				if ($href != $text && $href != '404' && $href != '403')
