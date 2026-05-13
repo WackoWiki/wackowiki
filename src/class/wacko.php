@@ -39,6 +39,9 @@ class Wacko
 		'VIDEO'			=> 'av1|mkv|mp4|ogv|webm',
 	];
 
+	const PAGE_NEW		= 1;
+	const PAGE_MODIFIED	= 2;
+
 	private array $acl				= [];
 	private array $acl_cache		= [];
 	private array $file_cache		= [];
@@ -1965,8 +1968,8 @@ class Wacko
 	 * Page saving routine
 	 *
 	 * @param string	$tag			page address
-	 * @param string	$title			page name (metadata)
 	 * @param string	$body			page body (plain text)
+	 * @param string	$title			page name (metadata)
 	 * @param string	$edit_note		edit summary
 	 * @param int		$minor_edit		minor edit
 	 * @param int		$reviewed
@@ -1979,346 +1982,409 @@ class Wacko
 	 *
 	 * @return string|null				body_r - pre-rendered wikitext
 	 */
-	function save_page($tag, $body, $title = '', $edit_note = '', $minor_edit = false, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false): ?string
+	function save_page(
+		$tag,
+		$body,
+		$title			= '',
+		$edit_note		= '',
+		$minor_edit		= false,
+		$reviewed		= 0,
+		$comment_on_id	= 0,
+		$parent_id		= 0,
+		$lang			= '',
+		$mute			= false,
+		$user_name		= '',
+		$user_page		= false
+	): ?string
 	{
-		$desc = '';
-
-		// user data
-		$ip = $this->get_user_ip();
-
-		if ($user_name == '')
-		{
-			$user_name = GUEST;
-		}
-
-		if ($user_name && $user_name != GUEST)
-		{
-			$owner_id	= $user_id	= $this->get_user_id($user_name);
-			$registered	= true;
-		}
-		// current user is owner; if user is logged in! otherwise, no owner.
-		else if ($this->get_user_name())
-		{
-			$user_name	= $this->get_user_name();
-			$owner_id	= $user_id	= $this->get_user_id();
-			$registered	= true;
-		}
-		else if ($this->forum || $comment_on_id)
-		{
-			$owner_id	= $user_id	= 0; // GUEST
-			$registered	= false;
-		}
-		else
-		{
-			$owner_id	= $user_id	= 0;
-			$registered	= false;
-		}
-
-		$page_id = $this->get_page_id($tag);
-
 		if (!$tag)
 		{
 			return null;
 		}
 
-		// cache handling
+		// Resolve user data
+		$user		= $this->resolve_user($user_name);
+		$user_id	= $user['user_id'];
+		$owner_id	= $user['owner_id'];
+		$user_name	= $user['user_name'];
+		$ip			= $this->get_user_ip();
+
+		$page_id	= $this->get_page_id($tag);
+
+		// Access check
+		$can_write	= ($this->page && $this->has_access('write', $page_id))
+			|| (!$this->page && $this->has_access('create', '', $user_name, '', $tag))
+			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
+			|| $user_page;
+
+		if (!$can_write)
+		{
+			$this->log(2, Ut::perc_replace(
+				$this->_t('LogSaveNoRights', SYSTEM_LANG),
+				$tag . ' ' . $title
+				));
+
+			return null;
+		}
+
+		// Cache invalidation
 		if ($this->db->cache)
 		{
-			// page cache
-			if ($comment_on_id)
-			{
-				$this->http->invalidate_page($this->get_page_tag($comment_on_id));
-			}
-			else
-			{
-				$this->http->invalidate_page($this->tag);
-			}
+			$invalidate_tag = $comment_on_id
+				? $this->get_page_tag($comment_on_id)
+				: $this->tag;
 
+			$this->http->invalidate_page($invalidate_tag);
 			$this->db->invalidate_sql_cache();
 		}
 
-		// check privileges
-		if ( ($this->page && $this->has_access('write', $page_id))
-			|| (!$this->page && $this->has_access('create', '', $user_name, '', $tag))
-			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
-			|| $user_page)
+		// Pre‑format body
+		$body		= $this->format($body, 'pre_wacko');
+		$body_r		= $this->compile_body($body, $page_id, !$comment_on_id);
+		$body_toc	= $this->body_toc ?? null;
+
+		$title		= $this->sanitize_text_field($title, true);
+		$edit_note	= $this->sanitize_text_field($edit_note, true);
+
+		// Description (forum only)
+		$desc = $this->generate_description($body, (bool)$comment_on_id);
+
+		// Reviewer (if reviewed > 0)
+		$reviewer_id = $reviewed ? $user_id : null;
+
+		$old_page = $this->load_page('', $page_id, null, null, null, true);
+
+		if (!$old_page)
 		{
-			// for forum topic prepare description
-			if (!$comment_on_id && $this->forum)
+			// === NEW PAGE ===
+			$lang		= $this->resolve_language($lang);
+			$title		= $title ?: $this->get_default_title($tag, $comment_on_id);
+			$depth		= $comment_on_id ? 1 : $this->get_page_depth($tag);
+			$parent_id	= $comment_on_id ? $parent_id : $this->get_parent_id($tag);
+
+			$this->insert_new_page(
+				$page_id, $tag, $body, $body_r, $body_toc,
+				$title, $edit_note, $desc,
+				$comment_on_id, $parent_id, $depth,
+				$owner_id, $user_id, $minor_edit,
+				$reviewed, $reviewer_id, $ip, $lang
+			);
+
+			// Re‑fetch page_id after insert
+			$page_id = $this->get_page_id($tag);
+
+			// ACL defaults
+			$acl = $this->get_acl_defaults($user_name, $comment_on_id);
+
+			foreach (['read', 'write', 'comment', 'create', 'upload'] as $perm)
 			{
-				$desc = $this->format(mb_substr($body, 0, 500), 'cleanwacko');
-				$desc = (mb_strlen($desc) > 240 ? mb_substr($desc, 0, 240) . '[...]' : $desc);
+				$this->save_acl($page_id, $perm, $acl[$perm]);
 			}
 
-			// PreFormatter (macros and such)
-			$body			= $this->format($body, 'pre_wacko');
-
-			// making page body components
-			$paragrafica	= !$comment_on_id;
-			$body_r			= $this->compile_body($body, $page_id, $paragrafica);
-			$body_toc		= $this->body_toc ?? null;
-
-			$title			= $this->sanitize_text_field($title, true);
-			$edit_note		= $this->sanitize_text_field($edit_note, true);
-
-			// review
-			if (isset($reviewed))
+			// Logging
+			if (!$comment_on_id)
 			{
-				$reviewer_id	= $user_id;
-			}
-
-			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!($old_page = $this->load_page('', $page_id, null, null, null, true)))
-			{
-				if (empty($lang))
-				{
-					$lang = $_REQUEST['lang'] ?? '';
-
-					if (!$this->known_language($lang))
-					{
-						$lang = $this->user_lang;
-					}
-				}
-
-				if (!$lang)
-				{
-					$lang = $this->db->language;
-				}
-
-				$this->set_language($lang);
-
-				// getting title
-				if (!$title)
-				{
-					if ($comment_on_id)
-					{
-						$title = $this->_t('Comment') . ' ' . substr($tag, 7);
-					}
-					else
-					{
-						$title = $this->get_page_title($tag);
-					}
-				}
-
-				if ($comment_on_id)
-				{
-					$depth = 1;
-				}
-				else
-				{
-					// determine the page depth
-					$depth = $this->get_page_depth($tag);
-
-					// determine the page_id of the parent page
-					$parent_id	= $this->get_parent_id($tag);
-				}
-
-				$this->db->sql_query(
-					'INSERT INTO ' . $this->prefix . 'page (' .
-						'version_id, ' .
-						'comment_on_id, ' .
-						(!$comment_on_id
-							? 'description, '
-							: '') .
-						'parent_id, ' .
-						'created, ' .
-						'modified, ' .
-						(!$comment_on_id
-							? 'commented, '
-							: '') .
-						'depth, ' .
-						'owner_id, ' .
-						'user_id, ' .
-						'title, ' .
-						'tag, ' .
-						'body, ' .
-						'body_r, ' .
-						'body_toc, ' .
-						'edit_note, ' .
-						'minor_edit, ' .
-						'page_size, ' .
-						($reviewed
-							?	'reviewed, ' .
-								'reviewed_time, ' .
-								'reviewer_id, '
-							:	'') .
-						'latest, ' .
-						'ip, ' .
-						'page_lang)' .
-					'VALUES (' .
-						'1, ' .
-						(int) $comment_on_id . ', ' .
-						(!$comment_on_id
-							? $this->db->q($desc) . ', '
-							: '') .
-						(int) $parent_id . ', ' .
-						$this->db->utc_dt() . ', ' .
-						$this->db->utc_dt() . ', ' .
-						(!$comment_on_id
-							? $this->db->utc_dt() . ', '
-							: '') .
-						(int) $depth . ', ' .
-						(int) $owner_id . ', ' .
-						(int) $user_id . ', ' .
-						$this->db->q($title) . ', ' .
-						$this->db->q($tag) . ', ' .
-						$this->db->q($body) . ', ' .
-						$this->db->q($body_r) . ', ' .
-						$this->db->q($body_toc) . ', ' .
-						$this->db->q($edit_note) . ', ' .
-						(int) $minor_edit . ', ' .
-						(int) strlen($body) . ', ' .
-						($reviewed
-							?	(int) $reviewed . ', ' .
-								$this->db->utc_dt() . ', ' .
-								(int) $reviewer_id . ', '
-							:	'') .
-						'1, ' . // 1 - new page
-						$this->db->q($ip) . ', ' .
-						$this->db->q($lang) . ') '
+				$this->log(
+					4,
+					Ut::perc_replace(
+						$this->_t('LogPageCreated', SYSTEM_LANG),
+						$tag . ' ' . $title
+						)
 					);
+			}
 
-				// IMPORTANT! lookup newly created page_id
-				$page_id = $this->get_page_id($tag);
-
-				// create appropriate acls
-				$acl = $this->get_acl_defaults($user_name, $comment_on_id);
-
-				// saving acls
-				$this->save_acl($page_id, 'read',		$acl['read']);
-				$this->save_acl($page_id, 'write',		$acl['write']);
-				$this->save_acl($page_id, 'comment',	$acl['comment']);
-				$this->save_acl($page_id, 'create',		$acl['create']);
-				$this->save_acl($page_id, 'upload',		$acl['upload']);
-
-				// log event
-				if (!$comment_on_id)
-				{
-					// added new page
-					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag . ' ' . $title));
-				}
-
-				// counters
-				if ($comment_on_id)
-				{
-					$this->update_comments_count($comment_on_id, $owner_id);
-				}
-				else
-				{
-					$this->update_pages_count($owner_id);
-				}
-
-				// set watch
-				if ($this->db->autosubscribe && !$comment_on_id)
-				{
-					// subscribe the author
-					if ($registered === true)
-					{
-						$this->set_watch($user_id, $page_id);
-					}
-
-					// subscribe & notify moderators
-					if (!$mute)
-					{
-						$this->notify_new_page($page_id, $tag, $title, $user_id, $user_name);
-					}
-				}
-
-				if ($comment_on_id && !$mute)
-				{
-					// notifying watchers
-					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, $minor_edit);
-				}
-			} // end of new page
+			// Counters
+			if ($comment_on_id)
+			{
+				$this->update_comments_count($comment_on_id, $owner_id);
+			}
 			else
 			{
-				// RESAVING AN OLD PAGE, CREATING REVISION
-				$this->set_language($this->page_lang);
+				$this->update_pages_count($owner_id);
+			}
 
-				// getting title
-				if ($title == '')
+			// Watchers
+			if ($this->db->autosubscribe && !$comment_on_id && $user['registered'])
+			{
+				$this->set_watch($user_id, $page_id);
+			}
+
+			if (!$mute)
+			{
+				if ($comment_on_id)
 				{
-					if ($comment_on_id)
-					{
-						$title = $this->_t('Comment') . ' ' . substr($tag, 7);
-					}
-					else
-					{
-						$title = $this->get_page_title($tag);
-					}
+					$this->notify_watcher(
+						$page_id, $comment_on_id,
+						$tag, $title, $body,
+						$user_id, $user_name, $minor_edit
+						);
 				}
-
-				// Aha! Page isn't new, keep owner!
-				$owner_id = $old_page['owner_id'];
-
-				// only if page has been actually changed
-				if ($old_page['body'] != $body || $old_page['title'] != $title)
+				else
 				{
-					// Don't save revisions for comments. Personally I think we should.
-					if (!$old_page['comment_on_id'])
-					{
-						$this->save_revision($old_page);
-					}
-
-					// update current page copy
-					$this->db->sql_query(
-						'UPDATE ' . $this->prefix . 'page SET ' .
-							'version_id		= ' . (int)($old_page['version_id'] + 1) . ', ' .
-							'comment_on_id	= ' . (int) $comment_on_id . ', ' .
-							'modified		= ' . $this->db->utc_dt() . ', ' .
-							'owner_id		= ' . (int) $owner_id . ', ' .
-							'user_id		= ' . (int) $user_id . ', ' .
-							'title			= ' . $this->db->q($title) . ', ' .
-							'description	= ' . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc)) . ', ' .
-							'body			= ' . $this->db->q($body) . ', ' .
-							'body_r			= ' . $this->db->q($body_r) . ', ' .
-							'body_toc		= ' . $this->db->q($body_toc) . ', ' .
-							'edit_note		= ' . $this->db->q($edit_note) . ', ' .
-							'minor_edit		= ' . (int) $minor_edit . ', ' .
-							'page_size		= ' . (int) strlen($body) . ', ' .
-							(isset($reviewed)
-								?	'reviewed		= ' . (int) $reviewed . ', ' .
-									'reviewed_time	= ' . $this->db->utc_dt() . ', ' .
-									'reviewer_id	= ' . (int) $reviewer_id . ', '
-								:	'') .
-							'latest			= 2 ' . // 2 - modified page
-						'WHERE page_id = ' . (int) $page_id . ' ' .
-						$this->db->limit());
-
-					// log event
-					if ($this->page['comment_on_id'])
-					{
-						// comment modified
-						$this->log(6, Ut::perc_replace($this->_t('LogCommentEdited', SYSTEM_LANG), $tag . ' ' . $title));
-					}
-					else
-					{
-						// old page modified
-						$this->log(6, Ut::perc_replace($this->_t('LogPageEdited', SYSTEM_LANG), $tag . ' ' . $title));
-					}
-
-					// Since there's no revision history for comments it's pointless to do the following for them.
-					if (!$comment_on_id && !$mute)
-					{
-						// notifying watchers
-						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, $minor_edit);
-					}
-				} // end of new != old
-			} // end of existing page
+					$this->notify_new_page(
+						$page_id, $tag, $title,
+						$user_id, $user_name
+						);
+				}
+			}
 		}
 		else
 		{
-			$this->log(2, Ut::perc_replace($this->_t('LogSaveNoRights', SYSTEM_LANG), $tag . ' ' . $title));
+			// === UPDATE EXISTING PAGE ===
+			$this->set_language($this->page_lang);
+			$title		= $title ?: $this->get_default_title($tag, $comment_on_id);
+			$owner_id	= $old_page['owner_id']; // keep original owner
+
+			// Only save if changed
+			if ($old_page['body'] !== $body || $old_page['title'] !== $title)
+			{
+				if (!$old_page['comment_on_id'])
+				{
+					$this->save_revision($old_page);
+				}
+
+				$this->update_existing_page(
+					$page_id, $old_page,
+					$body, $body_r, $body_toc,
+					$title, $edit_note, $desc,
+					$comment_on_id, $owner_id, $user_id,
+					$minor_edit, $reviewed, $reviewer_id
+				);
+
+				// Logging
+				$log_msg = $old_page['comment_on_id']
+					? 'LogCommentEdited'
+					: 'LogPageEdited';
+
+				$this->log(
+					6,
+					Ut::perc_replace(
+						$this->_t($log_msg, SYSTEM_LANG),
+						$tag . ' ' . $title
+						)
+					);
+
+				// Notifications (only for non‑comments)
+				if (!$comment_on_id && !$mute)
+				{
+					$this->notify_watcher(
+						$page_id, $comment_on_id,
+						$tag, $title, null,
+						$user_id, $user_name, $minor_edit
+					);
+				}
+			}
 		}
 
-		// writing xmls
 		$this->write_feeds($mute, $comment_on_id);
-
 		return $body_r;
 	}
 
+	/**
+	 * Resolve user data (id, name, registered status)
+	 */
+	private function resolve_user(string $user_name = ''): array
+	{
+		if ($user_name && $user_name != GUEST)
+		{
+			$user_id	= $this->get_user_id($user_name);
+			$owner_id	= $user_id;
+			$registered	= true;
+		}
+		else if ($this->get_user_name())
+		{
+			$user_name	= $this->get_user_name();
+			$user_id	= $this->get_user_id();
+			$owner_id	= $user_id;
+			$registered	= true;
+		}
+		else
+		{
+			$user_id	= 0;
+			$owner_id	= 0;
+			$registered	= false;
+			$user_name	= GUEST;
+		}
+
+		return [
+			'user_id'		=> $user_id,
+			'owner_id'		=> $owner_id,
+			'registered'	=> $registered,
+			'user_name'		=> $user_name,
+		];
+	}
+
+	/**
+	 * Generate page description for forum topics
+	 */
+	private function generate_description(string $body, bool $is_comment): string
+	{
+		if ($is_comment || !$this->forum)
+		{
+			return '';
+		}
+
+		$desc = $this->format(mb_substr($body, 0, 500), 'cleanwacko');
+
+		if (mb_strlen($desc) > 240)
+		{
+			$desc = mb_substr($desc, 0, 240) . '[...]';
+		}
+
+		return $desc;
+	}
+
+	/**
+	 * Resolve page language
+	 */
+	private function resolve_language($lang): string
+	{
+		if (empty($lang))
+		{
+			$lang = $_REQUEST['lang'] ?? '';
+
+			if (!$this->known_language($lang))
+			{
+				$lang = $this->user_lang;
+			}
+		}
+
+		return $lang ?: $this->db->language;
+	}
+
+	/**
+	 * Get default page title
+	 */
+	private function get_default_title(string $tag, int $comment_on_id): string
+	{
+		if ($comment_on_id)
+		{
+			return $this->_t('Comment') . ' ' . substr($tag, 7);
+		}
+
+		return $this->get_page_title($tag);
+	}
+
+	/**
+	 * Insert a new page (SQL unchanged)
+	 */
+	private function insert_new_page(
+		$page_id, $tag, $body, $body_r, $body_toc,
+		$title, $edit_note, $desc,
+		$comment_on_id, $parent_id, $depth,
+		$owner_id, $user_id, $minor_edit,
+		$reviewed, $reviewer_id, $ip, $lang
+	): void
+	{
+		$this->db->sql_query(
+			'INSERT INTO ' . $this->prefix . 'page (' .
+				'version_id, ' .
+				'comment_on_id, ' .
+				(!$comment_on_id
+					? 'description, '
+					: '') .
+				'parent_id, ' .
+				'created, ' .
+				'modified, ' .
+				(!$comment_on_id
+					? 'commented, '
+					: '') .
+				'depth, ' .
+				'owner_id, ' .
+				'user_id, ' .
+				'title, ' .
+				'tag, ' .
+				'body, ' .
+				'body_r, ' .
+				'body_toc, ' .
+				'edit_note, ' .
+				'minor_edit, ' .
+				'page_size, ' .
+				($reviewed
+					?	'reviewed, ' .
+					'reviewed_time, ' .
+					'reviewer_id, '
+					:	'') .
+				'latest, ' .
+				'ip, ' .
+				'page_lang)' .
+			'VALUES (' .
+				'1, ' .
+				(int) $comment_on_id . ', ' .
+				(!$comment_on_id
+					? $this->db->q($desc) . ', '
+					: '') .
+				(int) $parent_id . ', ' .
+				$this->db->utc_dt() . ', ' .
+				$this->db->utc_dt() . ', ' .
+				(!$comment_on_id
+					? $this->db->utc_dt() . ', '
+					: '') .
+				(int) $depth . ', ' .
+				(int) $owner_id . ', ' .
+				(int) $user_id . ', ' .
+				$this->db->q($title) . ', ' .
+				$this->db->q($tag) . ', ' .
+				$this->db->q($body) . ', ' .
+				$this->db->q($body_r) . ', ' .
+				$this->db->q($body_toc) . ', ' .
+				$this->db->q($edit_note) . ', ' .
+				(int) $minor_edit . ', ' .
+				(int) strlen($body) . ', ' .
+				($reviewed
+					?	(int) $reviewed . ', ' .
+					$this->db->utc_dt() . ', ' .
+					(int) $reviewer_id . ', '
+					:	'') .
+				self::PAGE_NEW . ', ' .
+				$this->db->q($ip) . ', ' .
+				$this->db->q($lang) . ') '
+		);
+	}
+
+	/**
+	 * Update an existing page (SQL unchanged)
+	 */
+	private function update_existing_page(
+		$page_id, $old_page,
+		$body, $body_r, $body_toc,
+		$title, $edit_note, $desc,
+		$comment_on_id, $owner_id, $user_id,
+		$minor_edit, $reviewed, $reviewer_id
+	): void
+	{
+		$this->db->sql_query(
+			'UPDATE ' . $this->prefix . 'page SET ' .
+				'version_id		= ' . (int)($old_page['version_id'] + 1) . ', ' .
+				'comment_on_id	= ' . (int) $comment_on_id . ', ' .
+				'modified		= ' . $this->db->utc_dt() . ', ' .
+				'owner_id		= ' . (int) $owner_id . ', ' .
+				'user_id		= ' . (int) $user_id . ', ' .
+				'title			= ' . $this->db->q($title) . ', ' .
+				'description	= ' . $this->db->q(
+					($old_page['comment_on_id'] || $old_page['description']
+						? $old_page['description']
+						: $desc)
+					) . ', ' .
+				'body			= ' . $this->db->q($body) . ', ' .
+				'body_r			= ' . $this->db->q($body_r) . ', ' .
+				'body_toc		= ' . $this->db->q($body_toc) . ', ' .
+				'edit_note		= ' . $this->db->q($edit_note) . ', ' .
+				'minor_edit		= ' . (int) $minor_edit . ', ' .
+				'page_size		= ' . (int) strlen($body) . ', ' .
+				($reviewed
+					?	'reviewed		= ' . (int) $reviewed . ', ' .
+					'reviewed_time	= ' . $this->db->utc_dt() . ', ' .
+					'reviewer_id	= ' . (int) $reviewer_id . ', '
+					:	'') .
+				'latest			= ' . self::PAGE_MODIFIED . ' ' .
+			'WHERE page_id = ' . (int) $page_id . ' ' .
+				$this->db->limit()
+		);
+	}
+
 	// create revision of a given page
-	function save_revision(array $page): void
+	private function save_revision(array $page): void
 	{
 		// move revision
 		$this->db->sql_query(
