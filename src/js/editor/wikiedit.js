@@ -718,56 +718,58 @@ class WikiEdit extends ProtoEdit {
 
   // ====================== ZEN & WIDESCREEN MODE ======================
 
-  toggleZenMode() {
-    const body = document.body;
-    const isActive = !body.classList.contains('zenmode');
-
-    if (isActive) {
-      body.classList.add('zenmode', 'widescreen');
-      localStorage.setItem('we_zenmode', '1');
-      localStorage.setItem('we_widescreen', '1');
-    } else {
-      body.classList.remove('zenmode', 'widescreen');
-      localStorage.removeItem('we_zenmode');
-      localStorage.removeItem('we_widescreen');
-    }
-
-    this.showMessage(isActive ? 'Distraction-free mode enabled' : 'Normal mode restored',
-      isActive ? 'success' : 'info', 1800);
+  isEditPage() {
+    return !!(
+      document.body.classList.contains('page-edit') ||
+      document.getElementById('postText') ||           // most reliable on edit page
+      window.location.href.includes('/_edit') ||
+      document.querySelector('form[name="edit"]')
+    );
   }
 
-  /**
-   * Restore saved mode on editor init
-   */
   initZenMode() {
     const html = document.documentElement;
+    const isEdit = this.isEditPage();
+    const prefix = isEdit ? '' : '_comment';
 
-    const userPrefersZenmode = html.dataset.zenmode === '1';
-    const userPrefersWidescreen = html.dataset.widescreen === '1';
+    const lsZen = localStorage.getItem(`we_zenmode${prefix}`);
+    const lsWidescreen = localStorage.getItem(`we_widescreen${prefix}`);
 
-    const savedZenmode = localStorage.getItem('we_zenmode');
-    const savedWidescreen = localStorage.getItem('we_widescreen');
+    const userZen = html.dataset.zenmode === '1';
+    const userWidescreen = html.dataset.widescreen === '1';
 
-    // LocalStorage has priority
-    const isZenMode = savedZenmode !== null
-      ? savedZenmode === '1'
-      : userPrefersZenmode;
+    // LocalStorage wins if it exists, otherwise use server preference
+    const zenActive = lsZen !== null ? (lsZen === '1') : userZen;
+    const widescreenActive = lsWidescreen !== null ? (lsWidescreen === '1') : userWidescreen;
 
-    const isWidescreen = savedWidescreen !== null
-      ? savedWidescreen === '1'
-      : userPrefersWidescreen;
+    if (zenActive) document.body.classList.add('zenmode');
+    if (widescreenActive) document.body.classList.add('widescreen');
 
-    if (isZenMode) {
-      document.body.classList.add('zenmode');
-    }
-    if (isWidescreen) {
-      document.body.classList.add('widescreen');
-    }
-
-    console.log(`Distraction-Free: ${isZenMode} (server: ${userPrefersZenmode}, local: ${savedZenmode})`);
+    console.log(`ZenMode init (${isEdit ? 'EDIT' : 'COMMENT'}): ${zenActive} | Widescreen: ${widescreenActive}`);
   }
-  
-  
+
+  toggleZenMode() {
+    const isEdit = this.isEditPage();
+    const prefix = isEdit ? '' : '_comment';
+
+    const body = document.body;
+    const isCurrentlyZen = body.classList.contains('zenmode');
+
+    if (!isCurrentlyZen) {
+      // Activate Zen Mode
+      body.classList.add('zenmode', 'widescreen');
+      localStorage.setItem(`we_zenmode${prefix}`, '1');
+      localStorage.setItem(`we_widescreen${prefix}`, '1');
+      this.showMessage('Zen mode enabled', 'success', 1600);
+    } else {
+      // Deactivate Zen Mode
+      body.classList.remove('zenmode', 'widescreen');
+      localStorage.setItem(`we_zenmode${prefix}`, '0');
+      localStorage.setItem(`we_widescreen${prefix}`, '0');
+      this.showMessage('Zen mode disabled', 'info', 1600);
+    }
+  }
+
   /**
    * Toggle fullscreen mode ONLY for the editor container (#page-edit).
    * This gives a clean distraction-free editing area while the browser still
