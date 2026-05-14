@@ -90,8 +90,8 @@
 						<tr>
 							<th></th>
 							<td>
-								<button type="submit" class="btn-ok" name="extended" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
-								<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+								<button type="submit" class="btn btn-ok" name="extended" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
+								<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button></a>
 							</td>
 						</tr>
 					</tbody>
@@ -219,8 +219,8 @@
 						<tr>
 							<th></th>
 							<td>
-								<button type="submit" form="general_properties" class="btn-ok" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
-								<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
+								<button type="submit" form="general_properties" class="btn btn-ok" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
+								<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button></a>
 							</td>
 						</tr>
 					</tbody>

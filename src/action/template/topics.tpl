@@ -95,7 +95,7 @@
 							</td>
 							<td>
 								<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="">
-								<button type="submit" id="submit">[ ' _t: ForumTopicSubmit ' ]</button>
+								<button type="submit" class="btn btn-ok" id="submit">[ ' _t: ForumTopicSubmit ' ]</button>
 							</td>
 						</tr>
 					</table>

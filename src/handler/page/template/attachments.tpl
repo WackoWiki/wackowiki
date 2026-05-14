@@ -12,6 +12,6 @@
 		[ ' files ' ]
 		<br>
 		<a href="[ ' href: ' ]" class="btn-link">
-			<button type="button">[ ' _t: CancelReturnButton ' ]</button>
+			<button type="button" class="btn btn-cancel">[ ' _t: CancelReturnButton ' ]</button>
 		</a>
 	=]

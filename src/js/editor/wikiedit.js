@@ -656,8 +656,8 @@ class WikiEdit extends ProtoEdit {
               </time><br>
               <span class="visuallyhidden">${t('RecoverDraftQuestion') || 'Do you want to recover the draft?'}</span>
               <br>
-              <button type="button" class="btn-ok" id="recover-draft-btn">${t('RecoverDraft') || 'Recover Draft'}</button>
-              <button type="button" class="btn-cancel" id="discard-draft-btn">${t('DiscardDraft') || 'Discard Draft'}</button>
+              <button type="button" class="btn btn-ok" id="recover-draft-btn">${t('RecoverDraft') || 'Recover Draft'}</button>
+              <button type="button" class="btn btn-cancel" id="discard-draft-btn">${t('DiscardDraft') || 'Discard Draft'}</button>
           </div>
       `;
 
@@ -1466,8 +1466,8 @@ class WikiEdit extends ProtoEdit {
           </div>
 
           <div class="we-modal-footer">
-            <button type="submit" id="we-link-insert-${this.id}" class="we-btn we-btn-primary">${t('Insert') || 'Insert'}</button>
-            <button type="button" id="we-link-cancel-${this.id}" class="we-btn">${t('Cancel') || 'Cancel'}</button>
+            <button type="submit" id="we-link-insert-${this.id}" class="btn btn-primary">${t('Insert') || 'Insert'}</button>
+            <button type="button" id="we-link-cancel-${this.id}" class="btn btn-cancel">${t('Cancel') || 'Cancel'}</button>
           </div>
         </form>
       </div>
@@ -1609,8 +1609,8 @@ class WikiEdit extends ProtoEdit {
           </div>
 
           <div class="we-modal-footer">
-            <button type="submit" id="we-table-insert-${this.id}" class="we-btn we-btn-primary">${t('InsertTable') || 'Insert Table'}</button>
-            <button type="button" id="we-table-cancel-${this.id}" class="we-btn">${t('Cancel') || 'Cancel'}</button>
+            <button type="submit" id="we-table-insert-${this.id}" class="btn btn-primary">${t('InsertTable') || 'Insert Table'}</button>
+            <button type="button" id="we-table-cancel-${this.id}" class="btn btn-cancel">${t('Cancel') || 'Cancel'}</button>
           </div>
         </form>
       </div>
@@ -1802,7 +1802,7 @@ class WikiEdit extends ProtoEdit {
           </table>
       </div>
       <div class="we-modal-footer">
-        <button type="button" class="we-btn">${t('Close') || 'Close'}</button>
+        <button type="button" class="btn btn-primary">${t('Close') || 'Close'}</button>
       </div>
     `;
 
@@ -1887,9 +1887,9 @@ class WikiEdit extends ProtoEdit {
         </div>
 
         <div class="we-panel-actions">
-          <button type="button" id="we-find-next-${this.id}" class="we-btn we-btn-primary">${t('FindNext') || 'Find Next'}</button>
-          <button type="button" id="we-replace-btn-${this.id}" class="we-btn">${t('Replace') || 'Replace'}</button>
-          <button type="button" id="we-replace-all-${this.id}" class="we-btn">${t('ReplaceAll') || 'Replace All'}</button>
+          <button type="button" id="we-find-next-${this.id}" class="btn btn-primary">${t('FindNext') || 'Find Next'}</button>
+          <button type="button" id="we-replace-btn-${this.id}" class="btn">${t('Replace') || 'Replace'}</button>
+          <button type="button" id="we-replace-all-${this.id}" class="btn">${t('ReplaceAll') || 'Replace All'}</button>
         </div>
       </div>
     `;

@@ -35,7 +35,7 @@
 						[ ' href | hide_page ' ]
 						<label for="search_group" class="visuallyhidden">[ ' _t: GroupsSearch ' ]</label> 
 						<input type="search" id="search_group" name="group" maxchars="40" size="40" value="[ ' group | e attr ' ]" placeholder="[ ' _t: GroupsSearch ' ]" required> ['' '']
-						<button type="submit" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
+						<button type="submit" class="btn btn-ok" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
 					</form>
 				</td>
 			</tr>

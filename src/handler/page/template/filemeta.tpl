@@ -118,7 +118,7 @@
 
 			<br>
 			<a href="[ ' href: ' ]" class="btn-link">
-				<button type="button">[ ' _t: CancelReturnButton ' ]</button>
+				<button type="button" class="btn btn-cancel">[ ' _t: CancelReturnButton ' ]</button>
 			</a>
 			<br>
 			<br>
@@ -195,10 +195,10 @@
 					</tr>
 				</table>
 				<br>
-				<button type="submit" class="btn-ok" name="submit">[ ' _t: SaveButton ' ]</button>
+				<button type="submit" class="btn btn-ok" name="submit">[ ' _t: SaveButton ' ]</button>
 				&nbsp;
 				<a href="[ ' href: ' ]" class="btn-link">
-					<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+					<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 				</a>
 				<br>
 				<br>
@@ -263,10 +263,10 @@
 				<br>
 			=]
 
-			<button type="submit" class="btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button>
+			<button type="submit" class="btn btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button>
 			&nbsp;
 			<a href="[ ' href: ' ]" class="btn-link">
-				<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+				<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 			</a>
 			<br>
 			<br>

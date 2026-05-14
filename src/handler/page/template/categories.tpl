@@ -34,7 +34,7 @@
 							<input type="radio" id="group0" name="group" value="0">
 							<label for="group0">[ ' _t: CategoriesAddGroupedNo ' ]</label><br><br>
 						=]
-						<button type="submit" class="btn-ok" id="submit_create" name="create">[ ' _t: SubmitButton ' ]</button>
+						<button type="submit" class="btn btn-ok" id="submit_create" name="create">[ ' _t: SubmitButton ' ]</button>
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -66,7 +66,7 @@
 				<tr>
 					<td colspan="2">
 						<small>[ ' _t: CategoriesRenameInfo ' ]</small><br>
-						<button type="submit" class="btn-ok" id="submit_new_name" name="rename">[ ' _t: SubmitButton ' ]</button>
+						<button type="submit" class="btn btn-ok" id="submit_new_name" name="rename">[ ' _t: SubmitButton ' ]</button>
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -88,7 +88,7 @@
 								<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category | e ' ]</option>
 							=]
 						</select>
-						<button type="submit" class="btn-ok" id="submit_ungroup" name="ungroup">[ ' _t: SubmitButton ' ]</button>
+						<button type="submit" class="btn btn-ok" id="submit_ungroup" name="ungroup">[ ' _t: SubmitButton ' ]</button>
 						[ '' cancel '' ]
 						<br><small>[ ' _t: CategoriesGroupInfo ' ]</small>
 					</td>
@@ -105,7 +105,7 @@
 				<tr>
 					<td>
 						<label for="">[ ' category ' ]</label> 
-						<button type="submit" class="btn-danger" id="submit_delete" name="delete">[ ' _t: DeleteText ' ]</button>
+						<button type="submit" class="btn btn-danger" id="submit_delete" name="delete">[ ' _t: DeleteText ' ]</button>
 						[ '' cancel '' ]
 						<br><small>[ ' _t: CategoriesDeleteInfo ' ]</small>
 					</td>
@@ -141,5 +141,5 @@
 
 [ == cancel == ]
 <a href="[ ' href: categories edit ' ]" class="btn-link">
-	<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+	<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 </a>

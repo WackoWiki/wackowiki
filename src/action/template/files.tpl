@@ -10,7 +10,7 @@
 					<td>
 						<label for="search_file" class="visuallyhidden">[ ' _t: FileSearch ' ]</label>
 						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase | e attr ' ]" title="[ ' _t: FileSearch ' ]" placeholder="[ ' _t: FileSearch ' ]">
-						<button type="submit">[ ' _t: SearchButton ' ]</button>
+						<button type="submit" class="btn btn-ok">[ ' _t: SearchButton ' ]</button>
 					</td>
 				</tr>
 				[= options _ =

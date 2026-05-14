@@ -33,7 +33,7 @@
 							<td class="label"><label for="news-title">[ ' _t: NewsName ' ]</label></td>
 							<td>
 								<input type="text" id="news-title" name="title" size="50" maxlength="250" value="">
-								<button type="submit" id="submit">[ ' _t: CreateButton ' ]</button>
+								<button type="submit" class="btn btn-ok" id="submit">[ ' _t: CreateButton ' ]</button>
 							</td>
 						</tr>
 					</table>

@@ -29,9 +29,9 @@
 					<label for="dontkeep">[ ' _t: RemoveDontKeepRevision ' ]</label><br>
 				=]
 				<br>
-				<button type="submit" class="btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button> &nbsp;
+				<button type="submit" class="btn btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button> &nbsp;
 				<a href="[ ' href: ' ]" class="btn-link">
-					<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+					<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 				</a>
 				<br>
 			</form>
@@ -70,9 +70,9 @@
 					=]
 				=]
 				<br>
-				<button type="submit" class="btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button> &nbsp;
+				<button type="submit" class="btn btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button> &nbsp;
 				<a href="[ ' href: ' ]" class="btn-link">
-					<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+					<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 				</a>
 				<br>
 			</form>

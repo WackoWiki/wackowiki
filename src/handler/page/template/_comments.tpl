@@ -113,8 +113,8 @@
 						=]
 						<br>
 						[ ' captcha ' ]
-						<button type="submit" class="btn-ok" name="save" accesskey="s">[ ' _t: AddCommentButton ' ]</button>
-						<button type="submit" class="btn-ok" name="preview">[ ' _t: PreviewButton ' ]</button>
+						<button type="submit" class="btn btn-ok" name="save" accesskey="s">[ ' _t: AddCommentButton ' ]</button>
+						<button type="submit" class="btn" name="preview">[ ' _t: PreviewButton ' ]</button>
 					</form>
 				</div>
 			=]

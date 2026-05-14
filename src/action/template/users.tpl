@@ -119,7 +119,7 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td>
-									<button type="submit" id="submit" name="send_pm">[ ' _t: SendButton ' ]</button>
+									<button type="submit" class="btn btn-ok" id="submit" name="send_pm">[ ' _t: SendButton ' ]</button>
 								</td>
 							</tr>
 							<tr>
@@ -236,7 +236,7 @@ first really BIG template written
 					<td class="label">
 						<label for="search_user" class="visuallyhidden">[ ' _t: UsersSearch ' ]</label>
 						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" placeholder="[ ' _t: UsersSearch ' ]" required> ['' '']
-						<button type="submit" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
+						<button type="submit" class="btn btn-ok" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
 					</td>
 				</tr>
 			</table><br>

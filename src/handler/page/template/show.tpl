@@ -46,18 +46,18 @@
 			[ ' csrf: edit_revision ' ]
 			<input type="hidden" name="previous" value="[ ' modified ' ]">
 			<input type="hidden" name="id" value="[ ' pageid ' ]">
-			<button type="submit">[ ' _t: ReEditOldRevision ' ]</button>
+			<button type="submit" class="btn btn-ok">[ ' _t: ReEditOldRevision ' ]</button>
 		</form>
 	=]
 	[= remove _ =
 		<form action="[ ' href ' ]" method="post" name="delete_revision">
 			[ ' csrf: delete_revision ' ]
 			<input type="hidden" name="id" value="[ ' pageid ' ]">
-			<button type="submit" class="btn-danger">[ ' _t: RemoveButton ' ]</button>
+			<button type="submit" class="btn btn-danger">[ ' _t: RemoveButton ' ]</button>
 		</form>
 	=]
 	<a href="[ ' href: ' ]" class="btn-link">
-		<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+		<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 	</a>
 </div>
 
@@ -69,7 +69,7 @@
 		[ ' csrf: restore_page ' ]
 		<input type="hidden" name="page_id" value="[ ' pageid ' ]">
 		<input type="hidden" name="revision_id" value="[ ' revisionid ' ]">
-		<button type="submit">[ ' _t: RestoreButton ' ]</button>
+		<button type="submit" class="btn">[ ' _t: RestoreButton ' ]</button>
 	</form>
 </div>
 

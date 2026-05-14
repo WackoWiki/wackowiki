@@ -81,7 +81,7 @@
 							<td>&nbsp;</td>
 							<td>
 								<br>
-								<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+								<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							</td>
 						</tr>
 					</tbody>
@@ -189,7 +189,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<br>
-						<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+						<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 					</td>
 				</tr>
 			</tbody>
@@ -289,7 +289,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<br>
-						<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+						<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 					</td>
 				</tr>
 			</tbody>
@@ -328,7 +328,7 @@
 							<a href="[ ' href ' ]">[ ' _t: YouWantChangePassword ' ]</a>
 						</th>
 						<td>
-							<a href="[ ' href ' ]" class="btn-link"><button type="button" id="button" name="_password">[ ' _t: ChangePasswordButton ' ]</button></a>
+							<a href="[ ' href ' ]" class="btn-link"><button type="button" class="btn btn-secondary" id="button" name="_password">[ ' _t: ChangePasswordButton ' ]</button></a>
 						</td>
 					</tr>
 					<tr>
@@ -458,9 +458,9 @@
 						<td>&nbsp;</td>
 						<td>
 							<br>
-							<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+							<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							&nbsp;
-							<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: LogoutButton ' ]</button></a>
+							<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="btn btn-cancel">[ ' _t: LogoutButton ' ]</button></a>
 						</td>
 					</tr>
 				</tbody>

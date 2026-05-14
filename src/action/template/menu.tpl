@@ -9,7 +9,7 @@
 			<input type="hidden" name="_user_menu" value="yes">
 			[= lang _ =
 				[ ' select ' ]
-				<button type="submit" name="update" id="submit">[ ' _t: UpdateButton ' ]</button>
+				<button type="submit" class="btn btn-ok" name="update" id="submit">[ ' _t: UpdateButton ' ]</button>
 				<br><br>
 			=]
 			<table class="lined hl-line">
@@ -38,10 +38,10 @@
 				<tfoot>
 					<tr>
 						<td colspan="3">
-							<button type="submit" name="update_menu">[ ' _t: BookmarkSaveChanges ' ]</button>
+							<button type="submit" class="btn btn-ok" name="update_menu">[ ' _t: BookmarkSaveChanges ' ]</button>
 						</td>
 						<td>
-							<button type="submit" name="delete_menu_item">[ ' _t: BookmarkDeleteSelected ' ]</button>
+							<button type="submit" class="btn btn-secondary" name="delete_menu_item">[ ' _t: BookmarkDeleteSelected ' ]</button>
 						</td>
 					</tr>
 				</tfoot>
@@ -61,5 +61,5 @@
 			=]
 			<input type="hidden" name="menu_lang" value="[ ' menulang ' ]">
 		=]
-		<button type="submit" name="add_menu_item">[ ' _t: CreateButton ' ]</button>
+		<button type="submit" class="btn btn-ok" name="add_menu_item">[ ' _t: CreateButton ' ]</button>
 	</form>

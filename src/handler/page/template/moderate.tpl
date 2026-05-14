@@ -15,7 +15,7 @@
 				<tr><th>[ ' _t: ModerateDeleteConfirm ' ]</th></tr>
 				<tr><td>
 					<em>[ ' text ' ]</em><br>
-					<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+					<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
 					[ '' cancel '' ]
 				</td></tr>
 			</table><br>
@@ -35,7 +35,7 @@
 								<option value="[ ' tag ' ]">[ ' title | e ' ]</option>
 							=]
 						</select>
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						[ '' cancel '' ]
 				</td></tr>
 			</table><br>
@@ -50,7 +50,7 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]" required>
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						[ '' cancel '' ]
 						[= onlyone _ =
 							<br><small>[ ' _t: ModerateRename1Only ' ]</small>
@@ -75,7 +75,7 @@
 								<option value="[ ' tag ' ]">[ ' topic ' ]</option>
 							=]
 						</select>
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -88,16 +88,16 @@
 			<thead>
 				<tr class="lined">
 					<td colspan="5">
-						<button type="submit" name="delete" id="submit_delete" class="btn-danger">[ ' _t: DeleteButton ' ]</button>
-						<button type="submit" name="move" id="submit_move">[ ' _t: ModerateMove ' ]</button> 
-						<button type="submit" name="rename" id="submit_rename">[ ' _t: RenameButton ' ]</button>
-						<button type="submit" name="merge" id="submit_merge">[ ' _t: ModerateMerge ' ]</button>
-						<button type="submit" name="lock" id="submit_lock">[ ' _t: ModerateLock ' ]</button>
-						<button type="submit" name="unlock" id="submit_unlock">[ ' _t: ModerateUnlock ' ]</button>
+						<button type="submit" class="btn btn-danger" name="delete" id="submit_delete">[ ' _t: DeleteButton ' ]</button>
+						<button type="submit" class="btn btn-ok" name="move" id="submit_move">[ ' _t: ModerateMove ' ]</button> 
+						<button type="submit" class="btn btn-ok" name="rename" id="submit_rename">[ ' _t: RenameButton ' ]</button>
+						<button type="submit" class="btn btn-ok" name="merge" id="submit_merge">[ ' _t: ModerateMerge ' ]</button>
+						<button type="submit" class="btn btn-ok" name="lock" id="submit_lock">[ ' _t: ModerateLock ' ]</button>
+						<button type="submit" class="btn btn-ok" name="unlock" id="submit_unlock">[ ' _t: ModerateUnlock ' ]</button>
 						<br>
-						<button type="submit" name="set" id="submit">[ ' _t: SetButton ' ]</button>
+						<button type="submit" class="btn btn-secondary" name="set" id="submit">[ ' _t: SetButton ' ]</button>
 							[= set _ =
-								<button type="submit" name="reset" id="submit">[ ' _t: ResetButton ' ]</button>
+								<button type="submit" class="btn btn-secondary" name="reset" id="submit">[ ' _t: ResetButton ' ]</button>
 								&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
 							=]
 					</td>
@@ -144,7 +144,7 @@
 				<tr>
 					<td>
 						<em>[ ' text ' ]</em><br>
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -167,7 +167,7 @@
 									<option value="[ ' tag ' ]">[ ' title | e ' ]</option>
 								=]
 							</select> or <input type="text" name="cluster" size="50" maxlength="250"><br>
-							<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+							<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
 							[ '' cancel '' ]
 						</td>
 					</tr>
@@ -184,7 +184,7 @@
 							=]
 						<em>[ ' text ' ]</em><br>
 						<input type="text" name="cluster" size="50" maxlength="250" required>
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						[ '' cancel '' ]
 					</td></tr>
 				</table><br>
@@ -200,7 +200,7 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]" required> 
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -216,7 +216,7 @@
 						[= e _ =
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
 						[ '' cancel '' ]
 					</td>
 				</tr>
@@ -234,7 +234,7 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value=""> 
-						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+						<button type="submit" class="btn btn-ok" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
 						[ '' cancel '' ]
 						<br>
 						<small>
@@ -254,15 +254,15 @@
 			<thead>
 				<tr class="lined">
 					<td colspan="2">
-						<button type="submit" name="topic_delete" id="delete-submit">[ ' _t: ModerateDeleteTopic ' ]</button>
-						<button type="submit" name="topic_move" id="move-submit">[ ' _t: ModerateMove ' ]</button>
+						<button type="submit" class="btn btn-danger" name="topic_delete" id="delete-submit">[ ' _t: ModerateDeleteTopic ' ]</button>
+						<button type="submit" class="btn btn-ok" name="topic_move" id="move-submit">[ ' _t: ModerateMove ' ]</button>
 						[= forum _ =
-							<button type="submit" name="topic_rename" id="submit">[ ' _t: RenameButton ' ]</button>
+							<button type="submit" class="btn btn-ok" name="topic_rename" id="submit">[ ' _t: RenameButton ' ]</button>
 							[= unlocked _ =
-								<button type="submit" name="topic_lock" id="submit">[ ' _t: ModerateLock ' ]</button>
+								<button type="submit" class="btn btn-ok" name="topic_lock" id="submit">[ ' _t: ModerateLock ' ]</button>
 							=]
 							[= locked _ =
-								<button type="submit" name="topic_unlock" id="submit">[ ' _t: ModerateUnlock ' ]</button>
+								<button type="submit" class="btn btn-ok" name="topic_unlock" id="submit">[ ' _t: ModerateUnlock ' ]</button>
 							=]
 						=]
 					</td>
@@ -291,12 +291,12 @@
 			<thead>
 				<tr class="lined">
 					<td colspan="4">
-						<button type="submit" name="posts_delete" id="submit_delete">[ ' _t: ModerateDeletePosts ' ]</button>
-						<button type="submit" name="posts_split" id="submit_split">[ ' _t: ModerateSplit ' ]</button>
+						<button type="submit" class="btn btn-danger" name="posts_delete" id="submit_delete">[ ' _t: ModerateDeletePosts ' ]</button>
+						<button type="submit" class="btn btn-ok" name="posts_split" id="submit_split">[ ' _t: ModerateSplit ' ]</button>
 						<br>
-						<button type="submit" name="set" id="submit_set">[ ' _t: SetButton ' ]</button>
+						<button type="submit" class="btn btn-secondary" name="set" id="submit_set">[ ' _t: SetButton ' ]</button>
 						[= set _ =
-							<button type="submit" name="reset" id="submit_reset">[ ' _t: ResetButton ' ]</button>
+							<button type="submit" class="btn btn-secondary" name="reset" id="submit_reset">[ ' _t: ResetButton ' ]</button>
 							&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
 						=]
 					</td>
@@ -333,6 +333,6 @@
 
 [= cancel =]
 <a href="[ ' href: moderate ' ]" class="btn-link">
-	<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+	<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 </a>
 	

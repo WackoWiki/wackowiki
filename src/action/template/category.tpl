@@ -33,7 +33,7 @@
 				[ ' csrf: category_lang ' ]
 				<p class="t-right">
 					[ ' lang ' ]
-					<button type="submit" name="update" id="submit">[ ' _t: UpdateButton ' ]</button>
+					<button type="submit" class="btn btn-ok" name="update" id="submit">[ ' _t: UpdateButton ' ]</button>
 				</p>
 			</form>
 		=]
