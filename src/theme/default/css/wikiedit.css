@@ -967,7 +967,7 @@ textarea.syntax-enabled {
 	list-style: none;
 	padding: 6px 0;
 	margin: 4px 0 0 0;
-	font-size: var(--ww-font-size);
+	font-size: var(--ww-font-size-base);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1043,6 +1043,6 @@ body.widescreen .wikiedit-split-container {
 /* Optional: Make editor even bigger in full zen mode */
 body.zenmode.widescreen .wikiedit-textarea {
 	font-size: 1.05rem;
-	line-height: 1.7;
+	line-height: var(--ww-line-height-relaxed);
 }
 

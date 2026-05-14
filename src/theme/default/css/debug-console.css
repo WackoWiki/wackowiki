@@ -5,13 +5,13 @@
 	background-color: #2d2d2d;
 	color: #cccccc;
 	font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-	font-size: 12px;
+	font-size: var(--ww-font-size-xs);
 	margin: 12px;
 }
 
 .debug-console-title {
 	color: #ffffff;
-	font-size: 14px;
+	font-size: var(--ww-font-size-sm);
 	margin: 0 0 12px 0;
 	padding-bottom: 8px;
 	border-bottom: 1px solid #555;
@@ -35,14 +35,14 @@
 	color: #888;
 	white-space: nowrap;
 	vertical-align: top;
-	font-size: 11px;
+	font-size: var(--ww-font-size-xs);
 }
 
 .debug-console-label {
 	white-space: nowrap;
 	vertical-align: top;
 	font-weight: bold;
-	font-size: 11px;
+	font-size: var(--ww-font-size-xs);
 }
 
 .debug-console-message {
@@ -52,7 +52,7 @@
 
 .debug-console-count {
 	color: #888;
-	font-size: 11px;
+	font-size: var(--ww-font-size-xs);
 	margin-top: 12px;
 	font-style: italic;
 }
@@ -65,7 +65,7 @@
 	background: #444;
 	padding: 4px 8px;
 	border-radius: 4px;
-	font-size: 11px;
+	font-size: var(--ww-font-size-xs);
 	z-index: 1000;
 }
 
@@ -77,7 +77,7 @@
 	margin-left: 4px;
 	cursor: pointer;
 	font-family: inherit;
-	font-size: 11px;
+	font-size: var(--ww-font-size-xs);
 	border-radius: 3px;
 }
 

@@ -27,9 +27,23 @@
 	--ww-buttonshadow: rgb(160, 160, 160);
 	--ww-buttontext: rgb(0, 0, 0);
 
-	--ww-font-size: 0.875rem;
+	--ww-font-size-xs: 0.75rem;   /* 12px  - Captions, labels */
+	--ww-font-size-sm: 0.875rem;  /* 14px  - Small text */
+	--ww-font-size-base: 1rem;   /* 16px  - Body text */
+	--ww-font-size-lg: 1.125rem; /* 18px  - Large body text */
+	--ww-font-size-xl: 1.25rem;  /* 20px  - Subheadings */
+	--ww-font-size-2xl: 1.5rem;  /* 24px  - h3 */
+	--ww-font-size-3xl: 2rem;    /* 32px  - h2 */
+	--ww-font-size-4xl: 2.5rem;  /* 40px  - h1 */
+
+	--ww-line-height-tight: 1.1;    /* Headings */
+	--ww-line-height-normal: 1.5;   /* Body text (1.5–1.6 is ideal) */
+	--ww-line-height-relaxed: 1.7;  /* Large text blocks */
+ 
+	--ww-measure: 65ch;  /* Optimal for readability (45–75 chars) */
+
 	--ww-font-serif: "Times New Roman", Times, serif;
-	--ww-font-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	--ww-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	--ww-font-monospace: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 
 	--ww-table-header-bg: #eee;
@@ -44,6 +58,13 @@
 	--we-textarea-caret: #000;
 	--we-split-bg: #f8f8f8;
 	--we-toolbar-bg: var(--ww-buttonface);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --ww-font-size-base: 1.125rem; /* Slightly larger on bigger screens */
+    --measure: 70ch;
+  }
 }
 
 /* === MANUAL THEME OVERRIDE (data-theme) === */
@@ -118,15 +139,15 @@ p,
 li,
 select,
 textarea {
-	font-family: var(--ww-font-sans-serif);
-	font-size: var(--ww-font-size);
-	line-height: 1.3;
+	font-family: var(--ww-font-sans);
+	font-size: var(--ww-font-size-base);
+	line-height: var(--ww-line-height-normal);
 }
 
 td,
 th {
-	font-family: var(--ww-font-sans-serif);
-	font-size: .875rem;
+	font-family: var(--ww-font-sans);
+	font-size: var(--ww-font-size-sm);
 	line-height: 1.71429;
 }
 
@@ -177,7 +198,7 @@ input[type="color"] {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 	transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 	display: inline-block;
-	font-size: var(--ww-font-size);
+	font-size: var(--ww-font-size-base);
 	height: auto;
 }
 
@@ -233,12 +254,13 @@ fieldset {
 }
 
 body {
-	font-family: var(--ww-font-sans-serif);
-	font-size: var(--ww-font-size);
-	line-height: 1.3;
+	font-family: var(--ww-font-sans);
+	font-size: var(--ww-font-size-base);
+	line-height: var(--ww-line-height-normal);
 	color: var(--ww-text);
 	background-color: var(--ww-bg-primary);
 	margin: 0;
+	text-rendering: optimizeLegibility;
 }
 
 img,
@@ -361,7 +383,7 @@ form input.submitinput {
 #header-site h1,
 #header-site a,
 #header-site a:visited {
-	font-size: 1.5rem;
+	font-size: var(--ww-font-size-2xl);
 	font-weight: normal;
 	color: var(--ww-text-tertiary);
 	text-decoration: none;
@@ -369,7 +391,7 @@ form input.submitinput {
 
 #header-files h1,
 #header-comments h1 {
-	font-size: var(--ww-font-size);
+	font-size: var(--ww-font-size-base);
 	line-height: 1.3;
 	font-weight: normal;
 	padding: 0;
@@ -377,8 +399,8 @@ form input.submitinput {
 }
 
 .print {
-	font-family: var(--ww-font-sans-serif);
-	font-size: 0.75rem;
+	font-family: var(--ww-font-sans);
+	font-size: var(--ww-font-size-xs);
 }
 
 /** message boxes ************************************************************/
@@ -587,7 +609,7 @@ article header {
 	border-bottom: 1px dotted #b2b0b0;
 	border-top: 1px dotted #b2b0b0;
 	color: var(--ww-text-secondary);
-	font-size: 0.75em;
+	font-size: var(--ww-font-size-xs);
 	font-weight: normal;
 	padding: 0.1em 20px;
 	margin: 0 0 0 -20px;
@@ -894,8 +916,8 @@ ol#comments ul ul ul {
 }
 
 .comment-title h2 {
-	font-size: var(--ww-font-size);
-	line-height: 22px;
+	font-size: var(--ww-font-size-base);
+	line-height: var(--ww-line-height-normal);
 	font-weight: bold;
 	margin: 0 0 10px 0;
 	border: none;
@@ -1202,7 +1224,7 @@ td.file- {
 	height: 24px;
 	border-radius: 50%;
 	cursor: pointer;
-	font-size: 1.1rem;
+	font-size: var(--ww-font-size-lg);
 	line-height: 1;
 }
 .upload-file-remove:hover { background: #e74c3c; color: white; }
@@ -1267,7 +1289,7 @@ td.file- {
 /* caption */
 .caption {
 	color: #1d1d1d;
-	font-size: 0.75rem;
+	font-size: var(--ww-font-size-xs);
 }
 
 .caption-license {
@@ -1325,7 +1347,7 @@ p.preview {
 .layout-box dd {
 	margin: -20px 0 0 50px;
 	padding: 0;
-	line-height: 25px;
+	line-height: var(--ww-line-height-normal);
 }
 [dir="rtl"] .layout-box dd {
 	margin: -20px 50px 0 0;
@@ -1501,11 +1523,11 @@ a:target {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background: transparent no-repeat 0 1px;
 	padding-left: 0;
-	font-size: 1rem;
+	font-size: var(--ww-font-size-base);
 }
 
 .feed h2 {
-	font-size: 0.875rem;
+	font-size: var(--ww-font-size-sm);
 	border-bottom: none;
 }
 
@@ -1647,7 +1669,7 @@ table.gallery {
 }
 
 #login-box {
-	font-size: 0.75rem;
+	font-size: var(--ww-font-size-xs);
 	margin: 0 auto;
 	overflow: hidden;
 	float: right;
@@ -1736,7 +1758,7 @@ table.gallery {
 }
 
 #search-results h3 {
-	font-size: 0.875rem;
+	font-size: var(--ww-font-size-sm);
 	border-bottom: 0 none;
 }
 
@@ -1875,7 +1897,7 @@ article.newsarticle:hover {
 }
 
 .news-title {
-	font-size: 0.875rem;
+	font-size: var(--ww-font-size-sm);
 	font-weight: bold;
 	border: 0 solid red;
 	border-left-width: 4px;
@@ -2085,7 +2107,7 @@ table.formation td {
 	display: block;
 	float: left;
 	font-weight: normal;
-	line-height: 1.4em;
+	line-height: var(--ww-line-height-normal);
 	width: 100%;
 	margin: 0;
 	padding: 0.25em 20px 0.2em 0.5em;
@@ -2759,7 +2781,7 @@ table.topics {
 }
 table.forum th,
 table.topics th {
-	font-size: 0.75rem;
+	font-size: var(--ww-font-size-xs);
 	text-align: center;
 	white-space: nowrap;
 	padding: 5px;
@@ -2797,7 +2819,7 @@ form.add-topic {
 	border: 1px solid lightgray;
 	border-radius: 3px;
 	display: inline-block;
-	font-size: 0.75rem;
+	font-size: var(--ww-font-size-xs);
 	line-height: 1;
 	margin: 2px 2px 2px 0;
 	padding: 0.4em 0.5em;
