@@ -2531,7 +2531,10 @@ class WikiEdit extends ProtoEdit {
     w = w.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '(($2 $1))');
 
     // ==================== TABLES ====================
-    w = w.replace(/(\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gs, (block) => this._markdownTableToWacko(block));
+    w = w.replace(
+      /^(?:\|.*\|\n\|[-:\s|]+\|\n(?:\|.*\|\n?)+)/gm,
+      (block) => this._markdownTableToWacko(block)
+    );
 
     // Restore code blocks and inline code
     w = w.replace(/@@CODEBLOCK_(\d+)@@/g, (match, index) => placeholders[index]);
