@@ -374,8 +374,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Revizije za %1',
 	'DefaultDiffMode'			=> 'Zadani način prikaza razlika',
 	'DiffMode'		=> [
-		'0'		=> 'Potpuni diff',
-		'1'		=> 'Jednostavni diff',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> 'Izvor',
 		'3'		=> 'Jedan pored drugog',
 		'4'		=> 'U liniji',
@@ -662,11 +662,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Visina uređivača',
 	'SyntaxHighlighting'		=> 'Omogući isticanje sintakse',
 	'LivePreview'				=> 'Startaj s omogućenim Live Preview',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit Toolbar',
 	'CustomizeToolbar'			=> 'Customize Toolbar',
 	'ClearWeCache'				=> 'Clear Cache',
 	'ClearWeCacheButton'		=> 'Clear localStorage',
-	'WeCacheCleared'			=> 'WikiEdit local data cleared successfully',
 
 	'PageMoved'					=> 'Ova stranica je premještena. Možete je pronaći na',
 	'RedirectedFrom'			=> 'Preusmjereno s %1',

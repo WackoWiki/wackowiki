@@ -256,11 +256,11 @@ $wacko_translation = [
 	'AclAccessDenied'			=> '이 페이지의 소유자가 아닙니다.',
 	'AclSyntaxError'			=> '접근 제어 목록 구문 오류',
 	'AclHelp'					=> '<code>*</code> - 모두 허용<br>' .
-	'<code>$</code> - 등록된 사용자만 허용<br>' .
-	'<code>!</code> - 느낌표는 해당 권한을 부정함<br>' .
-	'<code>[UserName]</code> - 허용된 사용자 이름<br>' .
-	'<code>[GroupName]</code> - 허용된 그룹 이름(별칭)<br>' .
-	'<code>(빈 목록)</code> - 페이지 소유자만 접근 가능',
+									'<code>$</code> - 등록된 사용자만 허용<br>' .
+									'<code>!</code> - 느낌표는 해당 권한을 부정함<br>' .
+									'<code>[UserName]</code> - 허용된 사용자 이름<br>' .
+									'<code>[GroupName]</code> - 허용된 그룹 이름(별칭)<br>' .
+									'<code>(빈 목록)</code> - 페이지 소유자만 접근 가능',
 
 	'AccessMode'				=> '접근 모드',
 	'AccessDenied'				=> '거부됨',
@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> '수정 내역 %1',
 	'DefaultDiffMode'			=> '기본 차이 모드',
 	'DiffMode'		=> [
-		'0'		=> '전체 차이',
-		'1'		=> '간단한 차이',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> '원본',
 		'3'		=> '다중 창',
 		'4'		=> '직렬 방식',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> '편집기 높이',
 	'SyntaxHighlighting'		=> '구문 강조 사용',
 	'LivePreview'				=> '라이브 미리보기로 시작',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit 도구 모음',
 	'CustomizeToolbar'			=> '도구 모음 사용자화',
 	'ClearWeCache'				=> '캐시 지우기',
 	'ClearWeCacheButton'		=> 'localStorage 지우기',
-	'WeCacheCleared'			=> 'WikiEdit 로컬 데이터가 성공적으로 지워졌습니다',
 
 	'PageMoved'					=> '이 페이지가 이동되었습니다. 새 위치에서 찾을 수 있습니다',
 	'RedirectedFrom'			=> '%1에서 왔음',

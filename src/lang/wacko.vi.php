@@ -374,8 +374,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Bản sửa đổi cho %1',
 	'DefaultDiffMode'			=> 'Chế độ so sánh mặc định',
 	'DiffMode'		=> [
-		'0'		=> 'So sánh đầy đủ',
-		'1'		=> 'So sánh đơn giản',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> 'Nguồn',
 		'3'		=> 'Song song',
 		'4'		=> 'Nội tuyến',
@@ -662,11 +662,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Chiều cao trình soạn thảo',
 	'SyntaxHighlighting'		=> 'Bật tô sáng cú pháp',
 	'LivePreview'				=> 'Bắt đầu với xem trước trực tiếp bật',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit Toolbar',
 	'CustomizeToolbar'			=> 'Customize Toolbar',
 	'ClearWeCache'				=> 'Clear Cache',
 	'ClearWeCacheButton'		=> 'Clear localStorage',
-	'WeCacheCleared'			=> 'WikiEdit local data cleared successfully',
 
 	'PageMoved'					=> 'Trang này đã được di chuyển. Bạn có thể tìm tại',
 	'RedirectedFrom'			=> 'Chuyển hướng từ %1',

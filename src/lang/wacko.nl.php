@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Geschiedenis van %1',
 	'DefaultDiffMode'			=> 'Standaard diff modus',
 	'DiffMode'		=> [
-		'0'		=> 'Volledige diff',
-		'1'		=> 'Eenvoudige wijziging',
+		'0'		=> 'Gedetailleerd',
+		'1'		=> 'Eenvoudig',
 		'2'		=> 'Bron',
 		'3'		=> 'Zij aan zij',
 		'4'		=> 'Inline',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Editor hoogte',
 	'SyntaxHighlighting'		=> 'Syntaxismarkering inschakelen',
 	'LivePreview'				=> 'Starten met Live Preview ingeschakeld',
+	'ZenMode'					=> 'Standaard afleidingsvrij schrijven inschakelen',
+	'WidescreenMode'			=> 'Gebruik standaard de dradescreen editor',
+	'EditorInterface'			=> 'Editor interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit werkbalk',
 	'CustomizeToolbar'			=> 'Werkbalk aanpassen',
 	'ClearWeCache'				=> 'Cache legen',
 	'ClearWeCacheButton'		=> 'LocalStorage wissen',
-	'WeCacheCleared'			=> 'Lokale gegevens WikiEdit met succes gewist',
 
 	'PageMoved'					=> 'Deze pagina is verplaatst. U kunt \'m vinden op',
 	'RedirectedFrom'			=> 'Omgeleid van %1',

@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Revize pro %1',
 	'DefaultDiffMode'			=> 'Výchozí režim rozdílů',
 	'DiffMode'		=> [
-		'0'		=> 'Úplné rozlišení',
-		'1'		=> 'Jednoduchý rozdíl',
+		'0'		=> 'Detaily',
+		'1'		=> 'Jednoduchý',
 		'2'		=> 'Zdroj',
 		'3'		=> 'Bok po boku',
 		'4'		=> 'Řádek',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Výška editoru',
 	'SyntaxHighlighting'		=> 'Povolit zvýraznění syntaxe',
 	'LivePreview'				=> 'Začít s živým náhledem povoleno',
+	'ZenMode'					=> 'Povolit ve výchozím nastavení psaní bez rozptýlení',
+	'WidescreenMode'			=> 'Ve výchozím nastavení používat širokoúhlý editor',
+	'EditorInterface'			=> 'Rozhraní editoru',
+
 	'WikiEditToolbar'			=> 'Panel nástrojů WikiEdit',
 	'CustomizeToolbar'			=> 'Přizpůsobit lištu nástrojů',
 	'ClearWeCache'				=> 'Vymazat mezipaměť',
 	'ClearWeCacheButton'		=> 'Vymazat localStorage',
-	'WeCacheCleared'			=> 'WikiEdit místní data úspěšně vymazána',
 
 	'PageMoved'					=> 'Tato stránka byla přesunuta. Najdete ji na',
 	'RedirectedFrom'			=> 'Přesměrováno z %1',

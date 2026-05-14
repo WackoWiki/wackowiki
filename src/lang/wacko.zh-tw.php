@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> '文件歷史 %1',
 	'DefaultDiffMode'			=> '預設差異模式',
 	'DiffMode'		=> [
-		'0'		=> '完整差異',
-		'1'		=> '簡單差異',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> '來源',
 		'3'		=> '並排',
 		'4'		=> '行內',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> '編輯器高度',
 	'SyntaxHighlighting'		=> '啟用語法高亮',
 	'LivePreview'				=> '啟動時啟用即時預覽',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit Toolbar',
 	'CustomizeToolbar'			=> 'Customize Toolbar',
 	'ClearWeCache'				=> 'Clear Cache',
 	'ClearWeCacheButton'		=> 'Clear localStorage',
-	'WeCacheCleared'			=> 'WikiEdit local data cleared successfully',
 
 	'PageMoved'					=> '此頁面已移動。您可以在此找到它：',
 	'RedirectedFrom'			=> '重新導向自 %1',
@@ -820,7 +823,8 @@ $wacko_translation = [
 	'ReplaceTextReturn'			=> '返回表單',
 	'ReplaceTextWarning'		=> '警告：目前已有 %1 個頁面包含取代的字串 %$2，若您進行取代將無法區別原本存在的字串以及取代的字串。',
 	'ReplaceTextBlankWarning'	=> '警告：因取代的字串為空白，此操作將無法還原。',
-	'ReplaceTextEditSummary'	=> '文字取代： %1 → %2',
+	'ReplaceTextEdiFixed regex: use `^` anchor and multiline flag `m` to ensure each line starts with `|`
+    // This prevents capturing non-table content that may contain pipes elsewhere.tSummary'	=> '文字取代： %1 → %2',
 	'InvertSelection'			=> '反向選擇',
 
 	// Properties

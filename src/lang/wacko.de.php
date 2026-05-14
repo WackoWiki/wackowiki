@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Versionsgeschichte von %1',
 	'DefaultDiffMode'			=> 'Standard Diff-Modus',
 	'DiffMode'		=> [
-		'0'		=> 'vollständiger Vergleich',
-		'1'		=> 'einfacher Vergleich',
+		'0'		=> 'Detailliert',
+		'1'		=> 'Einfach',
 		'2'		=> 'Quelltext',
 		'3'		=> 'Nebeneinander',
 		'4'		=> 'Inline',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Höhe des Editors',
 	'SyntaxHighlighting'		=> 'Syntaxhervorhebung aktivieren',
 	'LivePreview'				=> 'Starte mit aktivierter Live-Vorschau',
+	'ZenMode'					=> 'Ablenkungsfreies Schreiben standardmäßig aktivieren',
+	'WidescreenMode'			=> 'Breitbild-Editor standardmäßig verwenden',
+	'EditorInterface'			=> 'Editor-Oberfläche',
+
 	'WikiEditToolbar'			=> 'WikiEdit Symbolleiste',
 	'CustomizeToolbar'			=> 'Symbolleiste anpassen',
 	'ClearWeCache'				=> 'Cache leeren',
 	'ClearWeCacheButton'		=> 'Lokalspeicher löschen',
-	'WeCacheCleared'			=> 'Lokale WikiEdit Daten erfolgreich gelöscht',
 
 	'PageMoved'					=> 'Diese Seite wurde verschoben. Sie ist jetzt zu finden unter',
 	'RedirectedFrom'			=> 'Weitergeleitet von %1',

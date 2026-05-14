@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Revisi %1',
 	'DefaultDiffMode'			=> 'Mode pembanding bawaan',
 	'DiffMode'		=> [
-		'0'		=> 'Pembanding penuh',
-		'1'		=> 'Pembanding sederhana',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> 'Sumber',
 		'3'		=> 'Berdampingan',
 		'4'		=> 'Sebaris',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Editor height',
 	'SyntaxHighlighting'		=> 'Enable syntax highlighting',
 	'LivePreview'				=> 'Start with Live Preview enabled',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit Toolbar',
 	'CustomizeToolbar'			=> 'Customize Toolbar',
 	'ClearWeCache'				=> 'Clear Cache',
 	'ClearWeCacheButton'		=> 'Clear localStorage',
-	'WeCacheCleared'			=> 'WikiEdit local data cleared successfully',
 
 	'PageMoved'					=> 'Halaman ini telah dipindahkan. Anda dapat menemukannya di',
 	'RedirectedFrom'			=> 'Redirected from %1',

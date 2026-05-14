@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Historique de %1',
 	'DefaultDiffMode'			=> 'Mode d’affichage des différence par défaut',
 	'DiffMode'		=> [
-		'0'		=> 'Différence complète',
-		'1'		=> 'Simple différence entre les deux versions',
+		'0'		=> 'Détaillé',
+		'1'		=> 'Simple',
 		'2'		=> 'Source',
 		'3'		=> 'Côte à côte',
 		'4'		=> 'En ligne',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Hauteur de l\'éditeur',
 	'SyntaxHighlighting'		=> 'Activer la coloration syntaxique',
 	'LivePreview'				=> 'Démarrer avec l\'aperçu en direct activé',
+	'ZenMode'					=> 'Activer l\'écriture sans distraction par défaut',
+	'WidescreenMode'			=> 'Utiliser l\'éditeur de l\'écran large par défaut',
+	'EditorInterface'			=> 'Interface de l\'éditeur',
+
 	'WikiEditToolbar'			=> 'Barre d\'outils de modification du wiki',
 	'CustomizeToolbar'			=> 'Personnaliser la barre d\'outils',
 	'ClearWeCache'				=> 'Vider le cache',
 	'ClearWeCacheButton'		=> 'Effacer localStorage',
-	'WeCacheCleared'			=> 'WikiEdit des données locales effacées avec succès',
 
 	'PageMoved'					=> 'Cette page a été déplacée ou a changé de nom. Vous pouvez la trouverez ici : ',
 	'RedirectedFrom'			=> 'Redirigé depuis %1',

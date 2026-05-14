@@ -374,8 +374,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> '%1 için revizyonlar',
 	'DefaultDiffMode'			=> 'Varsayılan fark (diff) modu',
 	'DiffMode'		=> [
-		'0'		=> 'Tam fark',
-		'1'		=> 'Basit fark',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> 'Kaynak',
 		'3'		=> 'Yan yana',
 		'4'		=> 'Satır içi',
@@ -662,11 +662,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Düzenleyici yüksekliği',
 	'SyntaxHighlighting'		=> 'Söz dizimi vurgulamayı etkinleştir',
 	'LivePreview'				=> 'Canlı Önizlemeyi varsayılan aç',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit Toolbar',
 	'CustomizeToolbar'			=> 'Customize Toolbar',
 	'ClearWeCache'				=> 'Clear Cache',
 	'ClearWeCacheButton'		=> 'Clear localStorage',
-	'WeCacheCleared'			=> 'WikiEdit local data cleared successfully',
 
 	'PageMoved'					=> 'Bu sayfa taşındı. Bulabileceğiniz yer',
 	'RedirectedFrom'			=> '%1\'den yönlendirildi',
@@ -996,7 +999,7 @@ $wacko_translation = [
 
 	'BookmarkDeleteSelected'	=> 'Seçilenleri sil',
 	'BookmarkMark'				=> 'İşaretle',
-	'BookmarkNumber'			=> 'No.',
+	'BookmarkNumber'			=> 'Hayır.',
 	'BookmarkNone'				=> 'Hiç yer iminiz yok.',
 	'BookmarkTitle'				=> 'Yer imi başlığı',
 	'BookmarkPage'				=> 'Sayfa',

@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> '履歴 %1',
 	'DefaultDiffMode'			=> 'デフォルトの差分モード',
 	'DiffMode'		=> [
-		'0'		=> '完全なディフ',
-		'1'		=> 'Simple diff',
+		'0'		=> '詳細情報',
+		'1'		=> '単純な',
 		'2'		=> 'ソース',
 		'3'		=> '横に並べる',
 		'4'		=> 'インライン',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'エディターの高さ',
 	'SyntaxHighlighting'		=> '構文強調表示を有効にする',
 	'LivePreview'				=> 'ライブプレビューを有効にして開始',
+	'ZenMode'					=> 'デフォルトで気晴らしフリーの書き込みを有効にする',
+	'WidescreenMode'			=> 'デフォルトでワイドスクリーンエディタを使用',
+	'EditorInterface'			=> 'エディターインターフェース',
+
 	'WikiEditToolbar'			=> 'Wiki編集ツールバー',
 	'CustomizeToolbar'			=> 'ツールバーをカスタマイズ',
 	'ClearWeCache'				=> 'キャッシュをクリア',
 	'ClearWeCacheButton'		=> 'ローカルストレージをクリア',
-	'WeCacheCleared'			=> 'WikiEditローカルデータを消去しました',
 
 	'PageMoved'					=> 'このページは移動しました。次の場所で見つけることができます：',
 	'RedirectedFrom'			=> '%1から転送',

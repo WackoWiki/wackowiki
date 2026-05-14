@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Versionshistorik for %1',
 	'DefaultDiffMode'			=> 'Standard diff-tilstand',
 	'DiffMode'		=> [
-		'0'		=> 'Fuld diff',
-		'1'		=> 'Simple ændringer',
+		'0'		=> 'Detaljeret',
+		'1'		=> 'Simpel',
 		'2'		=> 'Kilde',
 		'3'		=> 'Side om side',
 		'4'		=> 'Indlejret',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Editor højde',
 	'SyntaxHighlighting'		=> 'Aktiver syntaksfremhævning',
 	'LivePreview'				=> 'Start med Live-forhåndsvisning aktiveret',
+	'ZenMode'					=> 'Aktiver distraktionsfri skrivning som standard',
+	'WidescreenMode'			=> 'Brug widescreen editor som standard',
+	'EditorInterface'			=> 'Editor Grænseflade',
+
 	'WikiEditToolbar'			=> 'WikiEdit Værktøjslinje',
 	'CustomizeToolbar'			=> 'Tilpas Værktøjslinje',
 	'ClearWeCache'				=> 'Ryd Cache',
 	'ClearWeCacheButton'		=> 'Ryd localStorage',
-	'WeCacheCleared'			=> 'WikiEdit lokale data ryddet med succes',
 
 	'PageMoved'					=> 'Denne side er flyttet. Du kan finde den på',
 	'RedirectedFrom'			=> 'Omdirigeret fra %1',

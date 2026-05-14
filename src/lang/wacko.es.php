@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Historial de %1',
 	'DefaultDiffMode'			=> 'Modo diferencial predeterminado',
 	'DiffMode'		=> [
-		'0'		=> 'Diferencia completa',
-		'1'		=> 'Diferencia simple (diff)',
+		'0'		=> 'Detallado',
+		'1'		=> 'Simple',
 		'2'		=> 'Fuente',
 		'3'		=> 'Lado a lado',
 		'4'		=> 'En línea',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Altura del editor',
 	'SyntaxHighlighting'		=> 'Habilitar resaltado de sintaxis',
 	'LivePreview'				=> 'Comenzar con Live Preview activado',
+	'ZenMode'					=> 'Habilitar la escritura libre de distracción por defecto',
+	'WidescreenMode'			=> 'Usar editor de pantalla extendida por defecto',
+	'EditorInterface'			=> 'Interfaz del editor',
+
 	'WikiEditToolbar'			=> 'WikiEditar barra de herramientas',
 	'CustomizeToolbar'			=> 'Personalizar barra de herramientas',
 	'ClearWeCache'				=> 'Limpiar caché',
 	'ClearWeCacheButton'		=> 'Limpiar almacenamiento local',
-	'WeCacheCleared'			=> 'Datos locales de WikiEdit borrados con éxito',
 
 	'PageMoved'					=> 'Esta página ha sido movida. Puedes encontrarla en ',
 	'RedirectedFrom'			=> 'Redirigido de %1',

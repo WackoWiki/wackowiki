@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Muudatuste ajalugu %1',
 	'DefaultDiffMode'			=> 'Vaikimisi võrdlusrežiim',
 	'DiffMode'		=> [
-		'0'		=> 'Täistekst erinevus',
-		'1'		=> 'Lihtne erinevus',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> 'Lähtekoodi-põhine',
 		'3'		=> 'Külg-külje-kõrval',
 		'4'		=> 'Jooksvalt',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Editor height',
 	'SyntaxHighlighting'		=> 'Enable syntax highlighting',
 	'LivePreview'				=> 'Start with Live Preview enabled',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit Toolbar',
 	'CustomizeToolbar'			=> 'Customize Toolbar',
 	'ClearWeCache'				=> 'Clear Cache',
 	'ClearWeCacheButton'		=> 'Clear localStorage',
-	'WeCacheCleared'			=> 'WikiEdit local data cleared successfully',
 
 	'PageMoved'					=> 'See leht on ümber paigutatud. Sa leiad selle',
 	'RedirectedFrom'			=> 'Redigeeritud alates %1',

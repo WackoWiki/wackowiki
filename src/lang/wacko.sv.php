@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Revisioner för %1',
 	'DefaultDiffMode'			=> 'Standard diff-läge',
 	'DiffMode'		=> [
-		'0'		=> 'Full skillnad',
-		'1'		=> 'Enkel diff',
+		'0'		=> 'Detaljerad',
+		'1'		=> 'Enkel',
 		'2'		=> 'Källa',
 		'3'		=> 'Sida vid sida',
 		'4'		=> 'Infogad',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Redaktörens höjd',
 	'SyntaxHighlighting'		=> 'Aktivera syntaxmarkering',
 	'LivePreview'				=> 'Börja med Live Preview aktiverad',
+	'ZenMode'					=> 'Aktivera distraktionsfri skrivning som standard',
+	'WidescreenMode'			=> 'Använd widescreen-redigerare som standard',
+	'EditorInterface'			=> 'Gränssnitt för redigerare',
+
 	'WikiEditToolbar'			=> 'WikiEdit verktygsfält',
 	'CustomizeToolbar'			=> 'Anpassa verktygsfältet',
 	'ClearWeCache'				=> 'Rensa cache',
 	'ClearWeCacheButton'		=> 'Rensa localStorage',
-	'WeCacheCleared'			=> 'WikiEdit lokal data har rensats',
 
 	'PageMoved'					=> 'Denna sida flyttad. Du hittar den på',
 	'RedirectedFrom'			=> 'Omdirigerad från %1',

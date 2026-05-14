@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> '历史 %1',
 	'DefaultDiffMode'			=> '默认差异模式',
 	'DiffMode'		=> [
-		'0'		=> '所有差异',
-		'1'		=> '单个差异',
+		'0'		=> '详细信息',
+		'1'		=> '简单的',
 		'2'		=> '源',
 		'3'		=> '并排显示',
 		'4'		=> '行内显示',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> '编辑器高度',
 	'SyntaxHighlighting'		=> '启用语法高亮',
 	'LivePreview'				=> '启用实时预览',
+	'ZenMode'					=> '默认情况下启用无脱机写入',
+	'WidescreenMode'			=> '默认使用宽屏编辑器',
+	'EditorInterface'			=> '编辑器界面',
+
 	'WikiEditToolbar'			=> 'Wiki编辑工具栏',
 	'CustomizeToolbar'			=> '自定义工具栏',
 	'ClearWeCache'				=> '清除缓存',
 	'ClearWeCacheButton'		=> '清除本地存储',
-	'WeCacheCleared'			=> 'WikiEdit 本地数据清除成功',
 
 	'PageMoved'					=> '这一页被移动了。你可以在',
 	'RedirectedFrom'			=> '重定向自%1',

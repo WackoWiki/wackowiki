@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Revizii pentru %1',
 	'DefaultDiffMode'			=> 'Mod diff implicit',
 	'DiffMode'		=> [
-		'0'		=> 'Dif complet',
-		'1'		=> 'Dif simplu',
+		'0'		=> 'Detaliat',
+		'1'		=> 'Simplu',
 		'2'		=> 'Sursa',
 		'3'		=> 'Listă una lângă alta',
 		'4'		=> 'Inline',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Înălțime editor',
 	'SyntaxHighlighting'		=> 'Activează evidențierea sintaxei',
 	'LivePreview'				=> 'Începe cu Previzualizarea Live activată',
+	'ZenMode'					=> 'Activează implicit scrierea fără distracție',
+	'WidescreenMode'			=> 'Folosește implicit editorul widescreen',
+	'EditorInterface'			=> 'Interfață editor',
+
 	'WikiEditToolbar'			=> 'WikiEditați bara de instrumente',
 	'CustomizeToolbar'			=> 'Personalizează bara de instrumente',
 	'ClearWeCache'				=> 'Curăță Cache',
 	'ClearWeCacheButton'		=> 'Curăță stocarea locală',
-	'WeCacheCleared'			=> 'WikiEditarea datelor locale a fost ștearsă',
 
 	'PageMoved'					=> 'Această pagină mutată. O puteți găsi la',
 	'RedirectedFrom'			=> 'Redirectionat de la %1',

@@ -374,8 +374,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'การแก้ไขสำหรับ %1',
 	'DefaultDiffMode'			=> 'โหมดเปรียบเทียบเริ่มต้น',
 	'DiffMode'		=> [
-		'0'		=> 'เปรียบเทียบเต็ม',
-		'1'		=> 'เปรียบเทียบแบบง่าย',
+		'0'		=> 'Detailed',
+		'1'		=> 'Simple',
 		'2'		=> 'ซอร์ส',
 		'3'		=> 'เคียงข้างกัน',
 		'4'		=> 'แทรกในบรรทัด',
@@ -662,11 +662,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'ความสูงของตัวแก้ไข',
 	'SyntaxHighlighting'		=> 'เปิดใช้งานการเน้นไวยากรณ์',
 	'LivePreview'				=> 'เริ่มด้วยตัวอย่างสดเปิดใช้งาน',
+	'ZenMode'					=> 'Enable distraction-free writing by default',
+	'WidescreenMode'			=> 'Use widescreen editor by default',
+	'EditorInterface'			=> 'Editor Interface',
+
 	'WikiEditToolbar'			=> 'WikiEdit Toolbar',
 	'CustomizeToolbar'			=> 'Customize Toolbar',
 	'ClearWeCache'				=> 'Clear Cache',
 	'ClearWeCacheButton'		=> 'Clear localStorage',
-	'WeCacheCleared'			=> 'WikiEdit local data cleared successfully',
 
 	'PageMoved'					=> 'หน้านี้ถูกย้าย คุณสามารถค้นหาได้ที่',
 	'RedirectedFrom'			=> 'เปลี่ยนทางมาจาก %1',

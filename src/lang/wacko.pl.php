@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> 'Historia %1',
 	'DefaultDiffMode'			=> 'Domyślny tryb różnicowy',
 	'DiffMode'		=> [
-		'0'		=> 'Pełna różnica',
-		'1'		=> 'Dodaj porównanie',
+		'0'		=> 'Szczegółowy',
+		'1'		=> 'Prosty',
 		'2'		=> 'Źródło',
 		'3'		=> 'Ramię w ramię',
 		'4'		=> 'Wbudowany',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Wysokość edytora',
 	'SyntaxHighlighting'		=> 'Włącz podświetlanie składni',
 	'LivePreview'				=> 'Rozpocznij z włączonym podglądem na żywo',
+	'ZenMode'					=> 'Domyślnie włącz rozproszenie pisania',
+	'WidescreenMode'			=> 'Używaj domyślnie szerokiego edytora ekranu',
+	'EditorInterface'			=> 'Interfejs edytora',
+
 	'WikiEditToolbar'			=> 'Pasek narzędzi Wiki',
 	'CustomizeToolbar'			=> 'Dostosuj pasek narzędzi',
 	'ClearWeCache'				=> 'Usuń pamięć podręczną',
 	'ClearWeCacheButton'		=> 'Wyczyść pamięć lokalną',
-	'WeCacheCleared'			=> 'Lokalne dane wikiEdit zostały pomyślnie wyczyszczone',
 
 	'PageMoved'					=> 'Ta strona została przeniesiona. Nowy adres strony:',
 	'RedirectedFrom'			=> 'Przekierowano z %1',

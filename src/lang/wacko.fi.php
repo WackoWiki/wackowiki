@@ -372,8 +372,8 @@ $wacko_translation = [
 	'RevisionsFor'				=> '%1 versiot',
 	'DefaultDiffMode'			=> 'Oletus diff- tila',
 	'DiffMode'		=> [
-		'0'		=> 'Täysi diff',
-		'1'		=> 'Yksinkertainen diff',
+		'0'		=> 'Yksityiskohtainen',
+		'1'		=> 'Yksinkertainen',
 		'2'		=> 'Lähde',
 		'3'		=> 'Sivu sivulta',
 		'4'		=> 'Inline',
@@ -660,11 +660,14 @@ $wacko_translation = [
 	'EditorHeight'				=> 'Muokkaimen korkeus',
 	'SyntaxHighlighting'		=> 'Ota syntaksin korostus käyttöön',
 	'LivePreview'				=> 'Aloita Live Preview käytössä',
+	'ZenMode'					=> 'Ota häiriötön kirjoittaminen käyttöön oletuksena',
+	'WidescreenMode'			=> 'Käytä laajakuvaeditoria oletuksena',
+	'EditorInterface'			=> 'Muokkaimen Käyttöliittymä',
+
 	'WikiEditToolbar'			=> 'WikiEdit Työkalurivi',
 	'CustomizeToolbar'			=> 'Muokkaa Työkalupalkkia',
 	'ClearWeCache'				=> 'Tyhjennä Välimuisti',
 	'ClearWeCacheButton'		=> 'Tyhjennä paikallinen tallennustila',
-	'WeCacheCleared'			=> 'WikiEdit paikallinen data tyhjennetty onnistuneesti',
 
 	'PageMoved'					=> 'Tämä sivu siirretty. Löydät sen osoitteesta',
 	'RedirectedFrom'			=> 'Ohjattu uudelleen kohteesta %1',
