@@ -196,12 +196,17 @@ class ProtoEdit {
 
       const li = document.createElement('li');
       li.className = `we-${btn.name}`;
+      li.dataset.action = btn.name;
 
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'btn-';
       button.title = btn.desc;
       button.setAttribute('aria-label', btn.desc);
+
+      if (btn.name) {
+        button.id = 'tb_' + btn.name;           // consistent ID pattern: tb_zenmode
+      }
 
       // Icon (CSS background-image)
       const img = document.createElement('img');

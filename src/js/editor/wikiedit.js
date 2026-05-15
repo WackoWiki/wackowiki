@@ -145,8 +145,6 @@ class WikiEdit extends ProtoEdit {
     this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
     this.canUpload = ta.dataset.canUpload === '1';
 
-    this.initZenMode();
-
     // ====================== CONTEXT DETECTION (EDIT vs COMMENT) ======================
     this.isCommentMode = ta.id === 'addcomment' || ta.name === 'payload';
 
@@ -171,7 +169,7 @@ class WikiEdit extends ProtoEdit {
     this.area.addEventListener('beforeinput', this.handleBeforeInput.bind(this));
 
     // Load and build configurable toolbar instead of hard-coded buttons
-	this.loadAndBuildToolbar();
+    this.loadAndBuildToolbar();
 
     // Initial post-setup
     if (typeof this.attachSpecialButtons === 'function') {
@@ -270,6 +268,14 @@ class WikiEdit extends ProtoEdit {
       this.loadAutosavedDraft();
     }
 
+    // === Feature Initializers ===
+    this.setupToolbarDelegation();
+    this.initZenMode();
+    this.initKeyboardShortcuts();
+
+    // Update all toggle button states after init
+    setTimeout(() => this.updateToolbarButtonStates(), 200);
+
     // ====================== SESSION HEARTBEAT ======================
     this.initSessionHeartbeat();
 
@@ -351,7 +357,6 @@ class WikiEdit extends ProtoEdit {
       'dropdown',
     ];
   }
-  
 
   attachSpecialButtons() {
     if (!this.toolbar) return;
@@ -621,8 +626,8 @@ class WikiEdit extends ProtoEdit {
    * the user is asked whether to restore it (with undo support).
    */
   loadAutosavedDraft() {
-	if (!this.draftKey) return;
-	const saved = this.safeGetDraft(this.draftKey);
+    if (!this.draftKey) return;
+    const saved = this.safeGetDraft(this.draftKey);
 
     if (!saved) return;
 
@@ -714,6 +719,8 @@ class WikiEdit extends ProtoEdit {
     Log.info('[WikiEdit] Manual dark mode toggled');
 
     localStorage.setItem('we_dark_mode_enabled', newIsDark);
+
+    this.updateToolbarButtonStates();
   }
 
   // ====================== ZEN & WIDESCREEN MODE ======================
@@ -721,7 +728,7 @@ class WikiEdit extends ProtoEdit {
   isEditPage() {
     return !!(
       document.body.classList.contains('page-edit') ||
-      document.getElementById('postText') ||           // most reliable on edit page
+      document.getElementById('postText') ||
       window.location.href.includes('/_edit') ||
       document.querySelector('form[name="edit"]')
     );
@@ -768,6 +775,64 @@ class WikiEdit extends ProtoEdit {
       localStorage.setItem(`we_widescreen${prefix}`, '0');
       this.showMessage('Zen mode disabled', 'info', 1600);
     }
+
+    this.updateToolbarButtonStates();
+  }
+
+  /**
+   * Update visual active state for all toggle buttons
+   */
+  updateToolbarButtonStates() {
+    const tb = document.getElementById(`tb_${this.id}`);
+    if (!tb) return;
+
+    const setActive = (classSelector, isActive) => {
+      const li = tb.querySelector(classSelector);
+      if (!li) return;
+
+      const button = li.querySelector('button');
+      const target = button || li;   // prefer button, fallback to li
+
+      target.classList.toggle('active', !!isActive);
+    };
+
+    setActive('li.we-zenmode', document.body.classList.contains('zenmode'));
+    setActive('li.we-livepreview', this.livePreviewEnabled === true);
+    setActive('li.we-syntax', this.syntaxHighlightEnabled === true);
+    setActive('li.we-dark-toggle', document.documentElement.getAttribute('data-theme') === 'dark');
+    setActive('li.we-fullscreen', !!document.fullscreenElement);
+  }
+
+  /**
+   * Event Delegation for Toolbar Buttons (Recommended)
+   */
+  setupToolbarDelegation() {
+          const tb = document.getElementById(`tb_${this.id}`);
+          if (!tb) return;
+
+          tb.addEventListener('click', (e) => {
+              const li = e.target.closest('li');
+              if (!li) return;
+
+              const action = li.dataset.action;
+              if (!action) return;
+			  
+      if (!action) return;
+
+      // Prevent the old button handler from also firing
+      e.stopImmediatePropagation();
+
+      console.log(`Toolbar action triggered via delegation: ${action}`);
+
+      switch (action) {
+		case 'zenmode':      this.toggleZenMode(); break;
+		case 'livepreview':  this.toggleLivePreview(); break;
+		case 'fullscreen':   this.toggleFullscreen(); break;
+		case 'dark-toggle':
+		case 'darkmode':     this.toggleDarkMode(); break;
+		case 'syntax':       this.toggleSyntaxHighlight(); break;
+      }
+    }, { capture: true });   // Important: capture phase
   }
 
   /**
@@ -776,34 +841,46 @@ class WikiEdit extends ProtoEdit {
    * shows its own chrome (address bar, etc.). Much better for wiki editing.
    */
   toggleFullscreen() {
-    if (document.fullscreenElement) {
-      document.exitFullscreen().catch(err => Log.error(err));
-      return;
-    }
+          if (document.fullscreenElement) {
+              // Exiting fullscreen
+              document.exitFullscreen()
+                  .then(() => this.updateToolbarButtonStates())
+                  .catch(err => Log.error(err));
+              return;
+          }
 
-    // Support BOTH edit handler (#page-edit) and comment handler (#commentform)
-    let container = document.getElementById('page-edit') ||
-      document.getElementById('commentform');
+          // Entering fullscreen
+          let container = document.getElementById('page-edit') ||
+                         document.getElementById('commentform');
 
-    // fallback
-    if (!container) {
-      container = this.area.closest('form') ||
-        this.area.closest('.wikiedit-split-container') ||
-        document.querySelector('.commentform');
-    }
+          if (!container) {
+              container = this.area.closest('form') ||
+                         this.area.closest('.wikiedit-split-container') ||
+                         document.querySelector('.commentform');
+          }
 
-    if (container) {
-      container.requestFullscreen({ navigationUI: 'hide' })
-        .catch(err => Log.error('Editor fullscreen request failed:', err));
-    } else {
-      Log.warn('WikiEdit: Could not find editor container for fullscreen (#page-edit or #commentform)');
-    }
-  }
+          if (container) {
+              container.requestFullscreen({ navigationUI: 'hide' })
+                  .then(() => this.updateToolbarButtonStates())
+                  .catch(err => Log.error('Fullscreen failed:', err));
+          }
+      }
 
   // Optional helper – reset to server default (call from a “Reset height” button if you add one later)
   resetEditorHeight() {
     localStorage.removeItem('we_editor_height');
     window.location.reload(); // reload to pick up server default again
+  }
+
+  // Keyboard shortcut: Ctrl + Shift + Z
+  initKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+      // Ctrl + Alt + Z (or Cmd + Alt + Z on Mac)
+      if ((e.ctrlKey || e.metaKey) && e.altKey && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        this.toggleZenMode();
+      }
+    });
   }
 
   // ====================== UNDO / REDO STACK ======================
@@ -932,7 +1009,7 @@ class WikiEdit extends ProtoEdit {
     }
 
     //t.value = next.text;
-	this.replaceContent(next.text, false);
+    this.replaceContent(next.text, false);
     t.setSelectionRange(next.start, next.end);
     t.scrollTop = next.scroll ?? 0;
     t.focus();
@@ -1276,9 +1353,9 @@ class WikiEdit extends ProtoEdit {
       this.showFindReplace();
       res = true;
     } else if (alt && (key === 'u' || key === 'i')) {
-        res = shift || (alt && key === 'u')
-          ? this.unindent()
-          : this.insTag('  ', '', 0, 1);
+      res = shift || (alt && key === 'u')
+        ? this.unindent()
+        : this.insTag('  ', '', 0, 1);
     } else if (ctrl && /^[1-6]$/.test(key)) {
       const level = parseInt(key);
       const tag = '='.repeat(level + 1);
@@ -1550,7 +1627,7 @@ class WikiEdit extends ProtoEdit {
 
     const str = sel1 + '((' + combined + '))' + sel2;
 
-	this.replaceContent(str, true, area);
+    this.replaceContent(str, true, area);
     const start = sel1.length;
     const end = str.length - sel2.length;
     area.setSelectionRange(start, end);
@@ -1797,7 +1874,8 @@ class WikiEdit extends ProtoEdit {
               <tr><td><kbd>${t('Ctrl')}</kbd>/<kbd>Alt</kbd> + <kbd>L</kbd></td><td>${t('Hyperlink') || 'Insert link'}</td></tr>
               <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>${t('Shift')}</kbd> + <kbd>N</kbd>/<kbd>O</kbd></td><td>${t('NumberedList') || 'Numbered list'}</td></tr>
               <tr><td><kbd>Enter</kbd> (inside list)</td><td>${t('AutoList') || 'Continue list automatically'}</td></tr>
-			  <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>${t('Space')}</kbd><td>${t('Autocomplete') || 'Autocomplete'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>${t('Space')}</kbd><td>${t('Autocomplete') || 'Autocomplete'}</td></tr>
+              <tr><td><kbd>${t('Ctrl')}</kbd> + <kbd>${t('Alt')}</kbd> + <kbd>Z</kbd><td>${t('ZenMode') || 'Zen mode'}</td></tr>
             </tbody>
           </table>
       </div>
@@ -2375,6 +2453,8 @@ class WikiEdit extends ProtoEdit {
 
     // [b] Persist toggle state (exactly like toggleSyntaxHighlight())
     localStorage.setItem('we_live_preview_enabled', this.livePreviewEnabled);
+
+    this.updateToolbarButtonStates();
   }
 
   // ==================== Markdown ↔ Wacko Converter (added) ====================
@@ -2585,7 +2665,7 @@ class WikiEdit extends ProtoEdit {
     if (!this.area) return;
     const original = this.area.value;
     const md = this.wackoToMarkdown(original);
-	this.replaceContent(md);
+    this.replaceContent(md);
     this.showMessage('✓ Wacko → Markdown');
   }
 
@@ -2594,7 +2674,7 @@ class WikiEdit extends ProtoEdit {
     if (!this.area) return;
     const original = this.area.value;
     const wacko = this.markdownToWacko(original);
-	this.replaceContent(wacko);
+    this.replaceContent(wacko);
     this.showMessage('✓ Markdown → Wacko');
   }
 
@@ -2659,7 +2739,10 @@ class WikiEdit extends ProtoEdit {
     } else {
       this.enableSyntaxHighlighting();
     }
+
     localStorage.setItem('we_syntax_enabled', this.syntaxHighlightEnabled);
+
+    this.updateToolbarButtonStates();
   }
 
   _updateSyntaxHighlight() {
@@ -2869,11 +2952,11 @@ class WikiEdit extends ProtoEdit {
 
     area.value = newText || '';
 
-	// Core synchronization
+    // Core synchronization
     this._updateSyntaxHighlight();
     this.updateStatus();
 
-	// Live preview refresh
+    // Live preview refresh
     if (this.livePreviewEnabled && typeof this.updatePreview === 'function') {
       setTimeout(() => this.updatePreview(), 20);
     }
@@ -2924,25 +3007,25 @@ class WikiEdit extends ProtoEdit {
    * Internal helper: Uses language templates like "vor %s Stunden" or "%s hours ago"
    */
   _formatRelativeTime(value, unit) {
-      const isSingular = value === 1;
+    const isSingular = value === 1;
 
-      // Try localized template first (e.g. 'vor %s Stunden' or '%s hours ago')
-      const key = isSingular ? unit + 'Ago' : unit + 'sAgo';
-      let template = t(key);
+    // Try localized template first (e.g. 'vor %s Stunden' or '%s hours ago')
+    const key = isSingular ? unit + 'Ago' : unit + 'sAgo';
+    let template = t(key);
 
-      if (template) {
-        return template
-          .replace('%s', value)
-          .replace('%1', value)
-          .replace('%d', value);
-      }
-
-      // Fallback: Use singular/plural from language file
-      if (isSingular) {
-        return `1 ${t(unit) || unit.toLowerCase()} ago`;
-      } else {
-        return `${value} ${t(unit + 's') || unit.toLowerCase() + 's'} ago`;
-      }
+    if (template) {
+      return template
+        .replace('%s', value)
+        .replace('%1', value)
+        .replace('%d', value);
     }
+
+    // Fallback: Use singular/plural from language file
+    if (isSingular) {
+      return `1 ${t(unit) || unit.toLowerCase()} ago`;
+    } else {
+      return `${value} ${t(unit + 's') || unit.toLowerCase() + 's'} ago`;
+    }
+  }
 
 }

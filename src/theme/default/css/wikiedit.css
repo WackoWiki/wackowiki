@@ -56,6 +56,12 @@
 	}
 }
 
+.we-toolbar button.active,
+.we-toolbar button.active:hover {
+	background: var(--ww-bg-primary) !important;
+	/* border-color: #005a99; */
+}
+
 /* Fullscreen mode */
 .we-fullscreen[open] .we-toolbar,
 body:has(.we-fullscreen[open]) .we-toolbar {
