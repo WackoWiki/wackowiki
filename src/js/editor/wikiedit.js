@@ -786,12 +786,12 @@ class WikiEdit extends ProtoEdit {
     const tb = document.getElementById(`tb_${this.id}`);
     if (!tb) return;
 
-    const setActive = (classSelector, isActive) => {
-      const li = tb.querySelector(classSelector);
+    const setActive = (selector, isActive) => {
+      const li = tb.querySelector(selector);
       if (!li) return;
 
       const button = li.querySelector('button');
-      const target = button || li;   // prefer button, fallback to li
+      const target = button || li;
 
       target.classList.toggle('active', !!isActive);
     };
@@ -807,32 +807,51 @@ class WikiEdit extends ProtoEdit {
    * Event Delegation for Toolbar Buttons (Recommended)
    */
   setupToolbarDelegation() {
-          const tb = document.getElementById(`tb_${this.id}`);
-          if (!tb) return;
+    const tb = document.getElementById(`tb_${this.id}`);
+    if (!tb) return;
 
-          tb.addEventListener('click', (e) => {
-              const li = e.target.closest('li');
-              if (!li) return;
+    tb.addEventListener('click', (e) => {
+      const li = e.target.closest('li');
+      if (!li) return;
 
-              const action = li.dataset.action;
-              if (!action) return;
-			  
+      const action = li.dataset.action;
+
       if (!action) return;
 
-      // Prevent the old button handler from also firing
-      e.stopImmediatePropagation();
+      console.log(`Delegation caught action: ${action}`);
 
-      console.log(`Toolbar action triggered via delegation: ${action}`);
-
+      // === Handle our special toggles ===
       switch (action) {
-		case 'zenmode':      this.toggleZenMode(); break;
-		case 'livepreview':  this.toggleLivePreview(); break;
-		case 'fullscreen':   this.toggleFullscreen(); break;
-		case 'dark-toggle':
-		case 'darkmode':     this.toggleDarkMode(); break;
-		case 'syntax':       this.toggleSyntaxHighlight(); break;
+        case 'zenmode':
+          e.stopImmediatePropagation();   // only stop for our custom toggles
+          this.toggleZenMode();
+          return;
+
+        case 'livepreview':
+          e.stopImmediatePropagation();
+          this.toggleLivePreview();
+          return;
+
+        case 'fullscreen':
+          e.stopImmediatePropagation();
+          this.toggleFullscreen();
+          return;
+
+        case 'dark-toggle':
+        case 'darkmode':
+          e.stopImmediatePropagation();
+          this.toggleDarkMode();
+          return;
+
+        case 'syntax':
+          e.stopImmediatePropagation();
+          this.toggleSyntaxHighlight();
+          return;
       }
-    }, { capture: true });   // Important: capture phase
+
+      // For all other buttons → do NOT stop propagation
+      // Let the original WikiEdit handler (from buttonDefs) execute
+    }, { capture: true });
   }
 
   /**
@@ -841,30 +860,30 @@ class WikiEdit extends ProtoEdit {
    * shows its own chrome (address bar, etc.). Much better for wiki editing.
    */
   toggleFullscreen() {
-          if (document.fullscreenElement) {
-              // Exiting fullscreen
-              document.exitFullscreen()
-                  .then(() => this.updateToolbarButtonStates())
-                  .catch(err => Log.error(err));
-              return;
-          }
+    if (document.fullscreenElement) {
+      // Exiting fullscreen
+      document.exitFullscreen()
+        .then(() => this.updateToolbarButtonStates())
+        .catch(err => Log.error(err));
+      return;
+    }
 
-          // Entering fullscreen
-          let container = document.getElementById('page-edit') ||
-                         document.getElementById('commentform');
+    // Entering fullscreen
+    let container = document.getElementById('page-edit') ||
+      document.getElementById('commentform');
 
-          if (!container) {
-              container = this.area.closest('form') ||
-                         this.area.closest('.wikiedit-split-container') ||
-                         document.querySelector('.commentform');
-          }
+    if (!container) {
+      container = this.area.closest('form') ||
+        this.area.closest('.wikiedit-split-container') ||
+        document.querySelector('.commentform');
+    }
 
-          if (container) {
-              container.requestFullscreen({ navigationUI: 'hide' })
-                  .then(() => this.updateToolbarButtonStates())
-                  .catch(err => Log.error('Fullscreen failed:', err));
-          }
-      }
+    if (container) {
+      container.requestFullscreen({ navigationUI: 'hide' })
+        .then(() => this.updateToolbarButtonStates())
+        .catch(err => Log.error('Fullscreen failed:', err));
+    }
+  }
 
   // Optional helper – reset to server default (call from a “Reset height” button if you add one later)
   resetEditorHeight() {
