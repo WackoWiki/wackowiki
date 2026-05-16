@@ -33,7 +33,7 @@
 	=]
 
 [ === icon === ]
-<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: Categories ' ]" title="[ ' _t: Categories ' ]" class="btn-tag btn-sm">
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: Categories ' ]" title="[ ' _t: Categories ' ]" class="ico-tag ico-sm">
 
 [ === link === ]
 [ ' delim ' ]<a href="[ ' href ' ]"  title="[ ' title | e attr ' ]" class="tag" rel="tag">[ ' category | e ' ]</a>

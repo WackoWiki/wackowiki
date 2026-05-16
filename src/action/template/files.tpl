@@ -10,7 +10,7 @@
 					<td>
 						<label for="search_file" class="visuallyhidden">[ ' _t: FileSearch ' ]</label>
 						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase | e attr ' ]" title="[ ' _t: FileSearch ' ]" placeholder="[ ' _t: FileSearch ' ]">
-						<button type="submit" class="btn btn-ok">[ ' _t: SearchButton ' ]</button>
+						<button type="submit" class="btn btn-primary">[ ' _t: SearchButton ' ]</button>
 					</td>
 				</tr>
 				[= options _ =
@@ -130,4 +130,4 @@
 <nav class="pagination">[ ' text ' ]</nav>
 
 [= icon =]
-<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ] btn-sm"></a>
+<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ] ico-sm"></a>

@@ -105,7 +105,7 @@
 
 
 [= buttons =]
-<button type="submit" class="btn btn-ok" form="edit_page" name="save">[ ' _t: SaveButton ' ]</button>&nbsp;
+<button type="submit" class="btn btn-primary" form="edit_page" name="save">[ ' _t: SaveButton ' ]</button>&nbsp;
 <button type="submit" class="btn" form="edit_page" name="preview">[ ' _t: PreviewButton ' ]</button>&nbsp;
 <a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button></a>
 

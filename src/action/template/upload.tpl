@@ -109,7 +109,7 @@
 				<tr>
 					<td></td>
 					<td>
-						<button type="submit" class="btn btn-ok">[ ' _t: UploadButton ' ]</button>
+						<button type="submit" class="btn btn-primary">[ ' _t: UploadButton ' ]</button>
 					</td>
 				</tr>
 			</table>

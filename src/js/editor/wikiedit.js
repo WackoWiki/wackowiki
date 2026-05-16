@@ -494,7 +494,7 @@ class WikiEdit extends ProtoEdit {
     alert(msg);
 
     // Disable main buttons
-    document.querySelectorAll('button[type="submit"], .btn-ok, .btn-save, .btn-publish').forEach(btn => {
+    document.querySelectorAll('button[type="submit"], .btn-primary, .btn-save, .btn-publish').forEach(btn => {
       if (!btn.classList.contains('btn-save-draft')) btn.disabled = true;
     });
 
@@ -660,7 +660,7 @@ class WikiEdit extends ProtoEdit {
               </time><br>
               <span class="visuallyhidden">${t('RecoverDraftQuestion') || 'Do you want to recover the draft?'}</span>
               <br>
-              <button type="button" class="btn btn-ok" id="recover-draft-btn">${t('RecoverDraft') || 'Recover Draft'}</button>
+              <button type="button" class="btn btn-primary" id="recover-draft-btn">${t('RecoverDraft') || 'Recover Draft'}</button>
               <button type="button" class="btn btn-cancel" id="discard-draft-btn">${t('DiscardDraft') || 'Discard Draft'}</button>
           </div>
       `;

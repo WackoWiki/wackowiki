@@ -19,7 +19,7 @@
 				<span class="article-header-meta">
 					[= comments =
 						<a href="[ ' href ' ]" title="[ ' _t: Comments ' ]">
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" class="ico-comment ico-sm">[ ' n ' ]
 						</a>
 					=]
 				</span>
@@ -46,7 +46,7 @@
 			[ ' csrf: edit_revision ' ]
 			<input type="hidden" name="previous" value="[ ' modified ' ]">
 			<input type="hidden" name="id" value="[ ' pageid ' ]">
-			<button type="submit" class="btn btn-ok">[ ' _t: ReEditOldRevision ' ]</button>
+			<button type="submit" class="btn btn-primary">[ ' _t: ReEditOldRevision ' ]</button>
 		</form>
 	=]
 	[= remove _ =

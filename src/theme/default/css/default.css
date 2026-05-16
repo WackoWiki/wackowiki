@@ -41,6 +41,13 @@
 	--ww-line-height-relaxed: 1.7;  /* Large text blocks */
  
 	--ww-measure: 65ch;  /* Optimal for readability (45–75 chars) */
+	
+	--space-xs: 0.25rem;
+	--space-sm: 0.5rem;
+	--space-md: 1rem;
+	--space-lg: 1.5rem;
+	--space-xl: 2rem;
+	--space-2xl: 3rem;
 
 	--ww-font-serif: "Times New Roman", Times, serif;
 	--ww-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -62,7 +69,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --ww-font-size-base: 1.125rem; /* Slightly larger on bigger screens */
+    /* --ww-font-size-base: 1.125rem; */ /* Slightly larger on bigger screens */
     --measure: 70ch;
   }
 }
@@ -172,6 +179,98 @@ td {
 
 label {
 	cursor: pointer;
+}
+
+/*	buttons */
+.btn {
+	padding: 10px 20px;
+	margin: 0 8px 8px 0;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	border-radius: 4px;
+	transition: all 0.2s ease;
+	border: none;
+}
+
+/* Primary: Filled blue (main action) */
+.btn-primary {
+	background-color: #3498db;
+	color: white;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn-primary:hover {
+	background-color: #2980b9;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Secondary: Outlined teal (alternative action) */
+.btn-secondary {
+	background-color: white;
+	color: #2ecc71;
+	border: 2px solid #2ecc71;
+}
+.btn-secondary:hover {
+	background-color: #2ecc71;
+	color: white;
+}
+
+/* Cancel: Dashed gray border (neutral action) */
+.btn-cancel {
+	background-color: white;
+	color: #7f8c8d;
+	border: 2px dashed #bdc3c7;
+}
+.btn-cancel:hover {
+	background-color: #f8f9fa;
+	border-color: #95a5a6;
+}
+
+/* Danger: Filled red with sharp edges (destructive action) */
+.btn-danger {
+	background-color: #e74c3c;
+	color: white;
+	border-radius: 0;
+}
+.btn-danger:hover {
+	background-color: #c0392b;
+	transform: scale(1.02);
+}
+
+/* Default: Neutral style */
+.btn-default {
+  background-color: white;
+  color: #7f8c8d;
+  border: 2px solid #bdc3c7;
+}
+.btn-default:hover {
+  background-color: #f8f9fa;
+  border-color: #95a5a6;
+}
+
+/* Success: Filled green (positive action) */
+.btn-success {
+  background-color: #27ae60;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn-success:hover {
+  background-color: #219653;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Warning: Filled amber (caution action) */
+.btn-warning {
+  background-color: #f39c12;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn-warning:hover {
+  background-color: #e67e22;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 /* Textareas */
@@ -2385,241 +2484,241 @@ li.m-source img {
 	background: url('./../icon/light/review2.svg') no-repeat;
 }
 
-.btn-sm {
+.ico-sm {
 	background-size: 1rem 1rem;
 	height: 1rem;
 	width: 1rem;
 	display: inline-block;
 }
-.btn-md {
+.ico-md {
 	background-size: 1.375rem 1.375rem;
 	height: 1.375rem;
 	width: 1.375rem;
 	display: inline-block;
 }
-.btn-reload {
+.ico-reload {
 	background: url('./../icon/light/reload.svg') no-repeat;
 }
-.btn-menu {
+.ico-menu {
 	background: url('./../icon/light/menu.svg') no-repeat;
 }
 
-.btn-overflow-menu {
+.ico-overflow-menu {
 	background: url('./../icon/light/overflow-menu.svg') no-repeat;
 }
-.btn-addbookmark {
+.ico-addbookmark {
 	background: url('./../icon/light/bookmark.svg') no-repeat;
 }
-.btn-removebookmark {
+.ico-removebookmark {
 	background: url('./../icon/light/bookmark-remove.svg') no-repeat;
 }
-.btn-delete {
+.ico-delete {
 	background: url('./../icon/light/delete.svg') no-repeat;
 }
-.btn-edit {
+.ico-edit {
 	background: url('./../icon/light/edit.svg') no-repeat;
 }
-.btn-copy {
+.ico-copy {
 	background: url('./../icon/light/copy.svg') no-repeat;
 }
-.btn-source {
+.ico-source {
 	background: url('./../icon/light/text.svg') no-repeat;
 }
-.btn-feed {
+.ico-feed {
 	background: url('./../icon/light/feed.svg') no-repeat;
 }
-.btn-info {
+.ico-info {
 	background: url('./../icon/light/dialog-info.svg') no-repeat;
 }
-.btn-tick {
+.ico-tick {
 	background: url('./../icon/light/tick.svg') no-repeat;
 }
-.btn-warning {
+.ico-warning {
 	background: url('./../icon/light/warning.svg') no-repeat;
 }
-.btn-add-page {
+.ico-add-page {
 	background: url('./../icon/light/page-add.svg') no-repeat;
 }
-.btn-page {
+.ico-page {
 	background: url('./../icon/light/show.svg') no-repeat;
 }
-.btn-comment {
+.ico-comment {
 	background: url('./../icon/light/comment.svg') no-repeat;
 }
-.btn-attachment {
+.ico-attachment {
 	background: url('./../icon/light/attachment.svg') no-repeat;
 }
-.btn-upload {
+.ico-upload {
 	background: url('./../icon/light/upload.svg') no-repeat;
 }
-.btn-unlocked {
+.ico-unlocked {
 	background: url('./../icon/light/unlocked.svg') no-repeat;
 }
-.btn-locked {
+.ico-locked {
 	background: url('./../icon/light/locked.svg') no-repeat;
 }
-.btn-search {
+.ico-search {
 	background: url('./../icon/light/search.svg') no-repeat;
 }
-.btn-tag {
+.ico-tag {
 	background: url('./../icon/light/tag.svg') no-repeat;
 }
-.btn-languages {
+.ico-languages {
 	background: url('./../icon/light/languages.svg') no-repeat;
 }
-.btn-revisions {
+.ico-revisions {
 	background: url('./../icon/light/revisions.svg') no-repeat;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
-		.btn-reload {
+		.ico-reload {
 			background: url('./../icon/light/reload.svg') no-repeat;
 		}
-		.btn-menu {
+		.ico-menu {
 			background: url('./../icon/dark/menu.svg') no-repeat;
 		}
 		
-		.btn-overflow-menu {
+		.ico-overflow-menu {
 			background: url('./../icon/dark/overflow-menu.svg') no-repeat;
 		}
-		.btn-addbookmark {
+		.ico-addbookmark {
 			background: url('./../icon/dark/bookmark.svg') no-repeat;
 		}
-		.btn-removebookmark {
+		.ico-removebookmark {
 			background: url('./../icon/dark/bookmark-remove.svg') no-repeat;
 		}
-		.btn-delete {
+		.ico-delete {
 			background: url('./../icon/dark/delete.svg') no-repeat;
 		}
-		.btn-edit {
+		.ico-edit {
 			background: url('./../icon/dark/edit.svg') no-repeat;
 		}
-		.btn-copy {
+		.ico-copy {
 			background: url('./../icon/dark/copy.svg') no-repeat;
 		}
-		.btn-source {
+		.ico-source {
 			background: url('./../icon/dark/text.svg') no-repeat;
 		}
-		.btn-feed {
+		.ico-feed {
 			background: url('./../icon/dark/feed.svg') no-repeat;
 		}
-		.btn-info {
+		.ico-info {
 			background: url('./../icon/dark/dialog-info.svg') no-repeat;
 		}
-		.btn-tick {
+		.ico-tick {
 			background: url('./../icon/dark/tick.svg') no-repeat;
 		}
-		.btn-warning {
+		.ico-warning {
 			background: url('./../icon/dark/warning.svg') no-repeat;
 		}
-		.btn-add-page {
+		.ico-add-page {
 			background: url('./../icon/dark/page-add.svg') no-repeat;
 		}
-		.btn-page {
+		.ico-page {
 			background: url('./../icon/dark/show.svg') no-repeat;
 		}
-		.btn-comment {
+		.ico-comment {
 			background: url('./../icon/dark/comment.svg') no-repeat;
 		}
-		.btn-attachment {
+		.ico-attachment {
 			background: url('./../icon/dark/attachment.svg') no-repeat;
 		}
-		.btn-upload {
+		.ico-upload {
 			background: url('./../icon/dark/upload.svg') no-repeat;
 		}
-		.btn-unlocked {
+		.ico-unlocked {
 			background: url('./../icon/dark/unlocked.svg') no-repeat;
 		}
-		.btn-locked {
+		.ico-locked {
 			background: url('./../icon/dark/locked.svg') no-repeat;
 		}
-		.btn-search {
+		.ico-search {
 			background: url('./../icon/dark/search.svg') no-repeat;
 		}
-		.btn-tag {
+		.ico-tag {
 			background: url('./../icon/dark/tag.svg') no-repeat;
 		}
-		.btn-languages {
+		.ico-languages {
 			background: url('./../icon/dark/languages.svg') no-repeat;
 		}
-		.btn-revisions {
+		.ico-revisions {
 			background: url('./../icon/dark/revisions.svg') no-repeat;
 		}
 }}
 
 :root[data-theme="dark"] {
-	.btn-reload {
+	.ico-reload {
 		background: url('./../icon/light/reload.svg') no-repeat;
 	}
-	.btn-menu {
+	.ico-menu {
 		background: url('./../icon/dark/menu.svg') no-repeat;
 	}
 	
-	.btn-overflow-menu {
+	.ico-overflow-menu {
 		background: url('./../icon/dark/overflow-menu.svg') no-repeat;
 	}
-	.btn-addbookmark {
+	.ico-addbookmark {
 		background: url('./../icon/dark/bookmark.svg') no-repeat;
 	}
-	.btn-removebookmark {
+	.ico-removebookmark {
 		background: url('./../icon/dark/bookmark-remove.svg') no-repeat;
 	}
-	.btn-delete {
+	.ico-delete {
 		background: url('./../icon/dark/delete.svg') no-repeat;
 	}
-	.btn-edit {
+	.ico-edit {
 		background: url('./../icon/dark/edit.svg') no-repeat;
 	}
-	.btn-copy {
+	.ico-copy {
 		background: url('./../icon/dark/copy.svg') no-repeat;
 	}
-	.btn-source {
+	.ico-source {
 		background: url('./../icon/dark/text.svg') no-repeat;
 	}
-	.btn-feed {
+	.ico-feed {
 		background: url('./../icon/dark/feed.svg') no-repeat;
 	}
-	.btn-info {
+	.ico-info {
 		background: url('./../icon/dark/dialog-info.svg') no-repeat;
 	}
-	.btn-tick {
+	.ico-tick {
 		background: url('./../icon/dark/tick.svg') no-repeat;
 	}
-	.btn-warning {
+	.ico-warning {
 		background: url('./../icon/dark/warning.svg') no-repeat;
 	}
-	.btn-add-page {
+	.ico-add-page {
 		background: url('./../icon/dark/page-add.svg') no-repeat;
 	}
-	.btn-page {
+	.ico-page {
 		background: url('./../icon/dark/show.svg') no-repeat;
 	}
-	.btn-comment {
+	.ico-comment {
 		background: url('./../icon/dark/comment.svg') no-repeat;
 	}
-	.btn-attachment {
+	.ico-attachment {
 		background: url('./../icon/dark/attachment.svg') no-repeat;
 	}
-	.btn-upload {
+	.ico-upload {
 		background: url('./../icon/dark/upload.svg') no-repeat;
 	}
-	.btn-unlocked {
+	.ico-unlocked {
 		background: url('./../icon/dark/unlocked.svg') no-repeat;
 	}
-	.btn-locked {
+	.ico-locked {
 		background: url('./../icon/dark/locked.svg') no-repeat;
 	}
-	.btn-search {
+	.ico-search {
 		background: url('./../icon/dark/search.svg') no-repeat;
 	}
-	.btn-tag {
+	.ico-tag {
 		background: url('./../icon/dark/tag.svg') no-repeat;
 	}
-	.btn-languages {
+	.ico-languages {
 		background: url('./../icon/dark/languages.svg') no-repeat;
 	}
-	.btn-revisions {
+	.ico-revisions {
 		background: url('./../icon/dark/revisions.svg') no-repeat;
 	}
 }

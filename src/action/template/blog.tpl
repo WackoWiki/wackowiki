@@ -9,7 +9,7 @@
 			[= xml =
 				<span class="desc-rss-feed">
 					<a href="[ ' href ' ]">
-						<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: NewsXMLTip ' ]" alt="XML" class="btn-feed btn-sm">
+						<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: NewsXMLTip ' ]" alt="XML" class="ico-feed ico-sm">
 					</a>
 				</span>
 				<br>
@@ -33,7 +33,7 @@
 							<td class="label"><label for="post-title">[ ' _t: ForumTopicName ' ]</label></td>
 							<td>
 								<input type="text" id="post-title" name="title" size="50" maxlength="250" value="">
-								<button type="submit" class="btn btn-ok" id="submit">[ ' _t: CreateButton ' ]</button>
+								<button type="submit" class="btn btn-primary" id="submit">[ ' _t: CreateButton ' ]</button>
 							</td>
 						</tr>
 					</table>
@@ -47,7 +47,7 @@
 				<article class="newsarticle">
 					[= b _ =
 						<nav class="page-tools">
-							<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditTip ' ]" alt="[ ' _t: EditText ' ]" class="btn-edit btn-sm"></a>
+							<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditTip ' ]" alt="[ ' _t: EditText ' ]" class="ico-edit ico-sm"></a>
 						</nav>
 					=]
 					<h2 class="news-title">
@@ -71,4 +71,4 @@
 <nav class="pagination">[ ' text ' ]</nav>
 
 [ === icon === ]
-<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: Categories ' ]" title="[ ' _t: Categories ' ]" class="btn-tag btn-sm">
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: Categories ' ]" title="[ ' _t: Categories ' ]" class="ico-tag ico-sm">

@@ -34,7 +34,7 @@
 					<tr class="topic">
 						<td>
 							[= closed =
-								<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ForumLocked ' ]" alt="[ ' _t: ForumLocked ' ]" class="btn-locked btn-sm">
+								<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ForumLocked ' ]" alt="[ ' _t: ForumLocked ' ]" class="ico-locked ico-sm">
 							=]
 							[= updated =
 								<strong><span class="cite" title="[ ' _t: ForumNewPosts ' ]">[[ ' _t: ForumUpdated ' ]]</span></strong> 
@@ -95,7 +95,7 @@
 							</td>
 							<td>
 								<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="">
-								<button type="submit" class="btn btn-ok" id="submit">[ ' _t: ForumTopicSubmit ' ]</button>
+								<button type="submit" class="btn btn-primary" id="submit">[ ' _t: ForumTopicSubmit ' ]</button>
 							</td>
 						</tr>
 					</table>

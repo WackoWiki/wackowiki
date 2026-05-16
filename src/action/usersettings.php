@@ -327,12 +327,12 @@ else if ($user = $this->get_user())
 		if (!$user['email_confirm'])
 		{
 			$tpl->confirm	= $this->_t('EmailConfirmed');
-			$tpl->icon		= 'btn-tick btn-sm';
+			$tpl->icon		= 'ico-tick ico-sm';
 		}
 		else
 		{
 			$tpl->confirm	= $this->_t('EmailConfirm');
-			$tpl->icon		= 'btn-warning btn-sm';
+			$tpl->icon		= 'ico-warning ico-sm';
 		}
 
 		if (!$user['email'] || $code['email_confirm'])

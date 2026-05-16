@@ -13,13 +13,13 @@
 								[= b _ =
 									<nav class="comment-tools">
 										[= remove _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-delete btn-sm"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="ico-delete ico-sm"></a>
 										=]
 										[= edit _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditCommentTip ' ]" alt="[ ' _t: EditComment ' ]" class="btn-edit btn-sm"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditCommentTip ' ]" alt="[ ' _t: EditComment ' ]" class="ico-edit ico-sm"></a>
 										=]
 										[= source _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceTip ' ]" alt="[ ' _t: SourceText ' ]" class="btn-source btn-sm"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceTip ' ]" alt="[ ' _t: SourceText ' ]" class="ico-source ico-sm"></a>
 										=]
 									</nav>
 								=]
@@ -113,7 +113,7 @@
 						=]
 						<br>
 						[ ' captcha ' ]
-						<button type="submit" class="btn btn-ok" name="save" accesskey="s">[ ' _t: AddCommentButton ' ]</button>
+						<button type="submit" class="btn btn-primary" name="save" accesskey="s">[ ' _t: AddCommentButton ' ]</button>
 						<button type="submit" class="btn" name="preview">[ ' _t: PreviewButton ' ]</button>
 					</form>
 				</div>

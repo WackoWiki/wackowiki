@@ -5,7 +5,7 @@
 			[ ' href | hide_page ' ]
 			<label for="searchfor">[ ' _t: SearchFor ' ]</label><br>
 			<input type="search" id="searchfor" name="phrase" size="40" value="[ ' phrase | e attr ' ]" required>
-			<button type="submit" class="btn btn-ok">[ ' _t: SearchButton ' ]</button><br>
+			<button type="submit" class="btn btn-primary">[ ' _t: SearchButton ' ]</button><br>
 			[= options _ =
 				[= l _ =
 					<label for="language">[ ' _t: AccountLanguage ' ]</label><br>
@@ -43,7 +43,7 @@
 						<span class="search-meta">
 							<time datetime="[ ' mtime ' ]">[ ' mtime | time_format ' ]</time> - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
 						[= comments =
-							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
+							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="ico-comment ico-sm">[ ' n ' ]
 						=]
 						</span><br>
 						[ ' preview | nl2br ' ]

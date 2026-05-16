@@ -11,7 +11,7 @@
 			[ ' csrf: diff_versions ' ]
 			[ ' href: diff | hide_page ' ]
 			<p>
-				<button type="submit" class="btn btn-ok">[ ' _t: ShowDifferencesButton ' ]</button>
+				<button type="submit" class="btn">[ ' _t: ShowDifferencesButton ' ]</button>
 				[= d _ =
 					[ '' placeholder '' ]
 					<input type="radio" id="diff_mode_[ ' mode ' ]" name="diffmode" value="[ ' mode ' ]" [ ' checked ' ]>
@@ -19,7 +19,7 @@
 				=]
 				[ '' placeholder '' ]
 				<a href="[ ' href: revisions.xml ' ]">
-					<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: RevisionXMLTip ' ]" alt="XML" class="btn-feed btn-sm">
+					<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: RevisionXMLTip ' ]" alt="XML" class="ico-feed ico-sm">
 				</a>
 				[= m _ =
 					<input name="minor_edit" value="[ ' minor ' ]" type="hidden">

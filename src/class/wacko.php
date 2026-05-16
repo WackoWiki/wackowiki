@@ -9339,7 +9339,7 @@ class Wacko
 				// href('', '.freecap') won't work, because mini_href() would strip the DOT
 				'<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n" .
 				'<a href="#" id="reload-captcha" title="' . $this->_t('CaptchaReload') . '">' .
-					'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" ' . 'alt="' . $this->_t('CaptchaReload') . '" class="btn-reload btn-md">' .
+					'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" ' . 'alt="' . $this->_t('CaptchaReload') . '" class="ico-reload ico-md">' .
 				'</a>'. "<br>\n" .
 				'<input type="text" id="captcha" name="captcha" maxlength="6" required>' .
 				($inline ? '' : "<br>\n");
@@ -9774,7 +9774,7 @@ class Wacko
 			// control buttons
 			if (!($can_edit || !$buttons))
 			{
-				$out .= '<button type="submit" class="btn btn-ok" id="submit" name="save">' . $this->_t('CategoriesStoreButton') . '</button> ' .
+				$out .= '<button type="submit" class="btn btn-primary" id="submit" name="save">' . $this->_t('CategoriesStoreButton') . '</button> ' .
 						'<a href="' . $this->href() . '" class="btn-link">' .
 							'<button type="button" class="btn btn-cancel">' . $this->_t('CancelButton') . '</button>' .
 						'</a>' . "<br>\n" .
@@ -9799,7 +9799,7 @@ class Wacko
 		// edit control buttons
 		if ($can_edit && $buttons)
 		{
-			$out .= '<button type="submit" class="btn btn-ok" id="add-button" name="create">' . $this->_t('AddButton') . '</button> ' .
+			$out .= '<button type="submit" class="btn btn-primary" id="add-button" name="create">' . $this->_t('AddButton') . '</button> ' .
 					'<button type="submit" class="btn" id="rename-button" name="rename">' . $this->_t('RenameButton') . '</button> ' .
 					'<button type="submit" class="btn" id="group-button" name="ungroup">' . $this->_t('CategoriesGroupButton') . '</button> ' .
 					'<button type="submit" class="btn btn-danger" id="remove-button" name="delete">' . $this->_t('RemoveButton') . '</button> ' .

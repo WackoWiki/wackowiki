@@ -24,7 +24,7 @@
 			[ ' tree ' ]
 			<br>
 			<br>
-			<button type="submit" class="btn btn-ok" name="submit">[ ' _t: RenameButton ' ]</button> &nbsp;
+			<button type="submit" class="btn btn-primary" name="submit">[ ' _t: RenameButton ' ]</button> &nbsp;
 			<a href="[ ' href: ' ]" class="btn-link">
 				<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 			</a>

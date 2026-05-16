@@ -14,7 +14,7 @@
 					<input type="file" id="importwhat" name="_import" accept=".xml,text/xml" required>
 				</p>
 				<p>
-					<button type="submit" class="btn btn-ok">[ ' _t: ImportButton ' ]</button>
+					<button type="submit" class="btn btn-primary">[ ' _t: ImportButton ' ]</button>
 				</p>
 			</div>
 		</form>

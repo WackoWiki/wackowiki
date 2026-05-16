@@ -46,7 +46,7 @@
 				</p>
 			=]
 			<p>
-				<button type="submit" class="btn btn-ok" tabindex="4">[ ' _t: LoginButton ' ]</button>
+				<button type="submit" class="btn btn-primary" tabindex="4">[ ' _t: LoginButton ' ]</button>
 			</p>
 			<p><a href="[ ' pwhref ' ]">[ ' _t: ForgotPassword ' ]</a></p>
 			[= welcome _ =

@@ -19,14 +19,14 @@
 					[= s _ =
 						<code id="[ ' token ' ]">[ ' syntax ' ]</code>
 						<button type="button" class="clipb" title="[ ' _t: SourceCopyToClipboard ' ]" data-clipboard-target="#[ ' token ' ]">
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceCopyToClipboard ' ]" class="btn-copy btn-sm">
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceCopyToClipboard ' ]" class="ico-copy ico-sm">
 						</button>
 						[= d _ =
 							<details>
 								<summary>[ ' _t: FileAbsolutePath ' ]</summary>
 								<code id="[ ' token ' ]">[ ' syntax ' ]</code>
 								<button type="button" class="clipb" title="[ ' _t: SourceCopyToClipboard ' ]" data-clipboard-target="#[ ' token ' ]">
-									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceCopyToClipboard ' ]" class="btn-copy btn-sm">
+									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceCopyToClipboard ' ]" alt="[ ' _t: SourceCopyToClipboard ' ]" class="ico-copy ico-sm">
 								</button>
 							</details>
 						=]
@@ -195,7 +195,7 @@
 					</tr>
 				</table>
 				<br>
-				<button type="submit" class="btn btn-ok" name="submit">[ ' _t: SaveButton ' ]</button>
+				<button type="submit" class="btn btn-primary" name="submit">[ ' _t: SaveButton ' ]</button>
 				&nbsp;
 				<a href="[ ' href: ' ]" class="btn-link">
 					<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>

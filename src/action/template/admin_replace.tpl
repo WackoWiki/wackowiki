@@ -51,7 +51,7 @@
 				<br>
 			=]
 			<br>
-			<button type="submit" class="btn btn-ok">[ ' _t: ContinueButton ' ]</button>&nbsp;
+			<button type="submit" class="btn btn-primary">[ ' _t: ContinueButton ' ]</button>&nbsp;
 			[ '' cancel '' ]<br>
 		</form>
 		<br>
@@ -105,8 +105,8 @@
 </a>
 
 [= replace =]
-<button type="submit" class="btn btn-ok" name="replace">[ ' _t: ReplaceTextReplace ' ]</button>&nbsp;
-<button type="submit" class="btn btn-ok" name="back">[ ' _t: ReplaceTextReturn ' ]</button>&nbsp;
+<button type="submit" class="btn btn-primary" name="replace">[ ' _t: ReplaceTextReplace ' ]</button>&nbsp;
+<button type="submit" class="btn btn-primary" name="back">[ ' _t: ReplaceTextReturn ' ]</button>&nbsp;
 
 [= SearchItem =]
 <h3>
@@ -115,7 +115,7 @@
 </h3>
 <span class="search-meta">[ ' mtime | time_format ' ] - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
 [= comments =
-	- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
+	- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="ico-comment ico-sm">[ ' n ' ]
 =]
 </span><br>
 [ ' preview | nl2br ' ]

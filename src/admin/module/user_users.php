@@ -494,7 +494,7 @@ function admin_user_users($engine, $module)
 					<td colspan="2">
 						<br>
 						<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button>
-						<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+						<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
 					</td>
 				</tr>
 			</table><br>';
@@ -605,7 +605,7 @@ function admin_user_users($engine, $module)
 					<small>' . $engine->_t('UsersRenameInfo') . '</small>
 					<br><br>
 					<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button>
-					<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+					<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
 				</td>
 			</tr>
 		</table>
@@ -651,7 +651,7 @@ function admin_user_users($engine, $module)
 				<td colspan="2">
 					<br><br>
 					<button type="submit" id="submit" name="reset_password">' . $engine->_t('ChangePasswordButton') . '</button>
-					<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+					<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
 				</td>
 			</tr>
 		</table>
@@ -772,8 +772,8 @@ function admin_user_users($engine, $module)
 
 		echo '<br><button type="submit" id="button" name="edit">' . $engine->_t('EditButton') . '</button> ';
 		echo '<button type="submit" id="button" name="reset_password">' . $engine->_t('ChangePasswordButton') . '</button> ';
-		echo '<button type="submit" id="button" name="remove" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ';
-		echo '<a href="' . $engine->href() . '" class="cancel" ><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>';
+		echo '<button type="submit" id="button" name="remove" class="btn btn-danger">' . $engine->_t('RemoveButton') . '</button> ';
+		echo '<a href="' . $engine->href() . '" class="cancel" ><button type="button" class="btn btn-cancel">' . $engine->_t('CancelButton') . '</button></a>';
 		echo $engine->form_close();
 	}
 	else
@@ -903,7 +903,7 @@ function admin_user_users($engine, $module)
 			'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
 			'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
 			#'<button type="submit" id="approve-button" name="approve">' . $engine->_t('Approve') . '</button> ' .
-			'<button type="submit" id="remove-button" name="remove" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ' .
+			'<button type="submit" id="remove-button" name="remove" class="btn btn-danger">' . $engine->_t('RemoveButton') . '</button> ' .
 			'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 			'<br>' . "\n" .
 				'<button type="submit" name="set" id="submit">' . $engine->_t('SetButton') . '</button> ' .

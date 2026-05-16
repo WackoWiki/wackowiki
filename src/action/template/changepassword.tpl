@@ -27,7 +27,7 @@
 				</p>
 				<p>[ ' complexity ' ]</p>
 				<p>
-					<button type="submit" class="btn btn-ok">[ ' _t: ChangePasswordButton ' ]</button>
+					<button type="submit" class="btn btn-primary">[ ' _t: ChangePasswordButton ' ]</button>
 				</p>
 			</div>
 		</form>
@@ -47,7 +47,7 @@
 				<input type="email" id="email" name="email" size="30" required>
 			</p>
 			<p>
-				<button type="submit" class="btn btn-ok">[ ' _t: SendButton ' ]</button>
+				<button type="submit" class="btn btn-primary">[ ' _t: SendButton ' ]</button>
 			</p>
 			</div>
 		</form>

@@ -58,7 +58,7 @@ if ($this->is_admin())
 	if (!isset($_POST['set_missing_permissions']))
 	{
 		echo $this->form_open('set_missing_permissions');
-		echo '<button type="submit" class="btn btn-ok" name="set_missing_permissions">' .  $this->_t('UpdateButton') . '</button>';
+		echo '<button type="submit" class="btn btn-primary" name="set_missing_permissions">' .  $this->_t('UpdateButton') . '</button>';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['set_missing_permissions']))
@@ -190,7 +190,7 @@ if ($this->is_admin())
 		if (!isset($_POST['set_mime_type']))
 		{
 			echo $this->form_open('set_mime_type');
-			echo '<button type="submit" class="btn btn-ok" name="set_mime_type">' . $this->_t('UpdateButton') . '</button>' . "\n";
+			echo '<button type="submit" class="btn btn-primary" name="set_mime_type">' . $this->_t('UpdateButton') . '</button>' . "\n";
 			echo $this->form_close();
 		}
 	}
@@ -262,7 +262,7 @@ if ($this->is_admin())
 		if (!isset($_POST['set_file_hash']))
 		{
 			echo $this->form_open('set_file_hash');
-			echo '<button type="submit" class="btn btn-ok" name="set_file_hash">' . $this->_t('UpdateButton') . '</button>' . "\n";
+			echo '<button type="submit" class="btn btn-primary" name="set_file_hash">' . $this->_t('UpdateButton') . '</button>' . "\n";
 			echo $this->form_close();
 		}
 	}
@@ -309,7 +309,7 @@ if ($this->is_admin())
 			if (!isset($_POST['set_page_fts']))
 			{
 				echo $this->form_open('set_page_fts');
-				echo '<button type="submit" class="btn btn-ok" name="set_page_fts">' . $this->_t('CreateButton') . '</button>' . "\n";
+				echo '<button type="submit" class="btn btn-primary" name="set_page_fts">' . $this->_t('CreateButton') . '</button>' . "\n";
 				echo $this->form_close();
 			}
 		}

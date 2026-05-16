@@ -81,7 +81,7 @@
 							<td>&nbsp;</td>
 							<td>
 								<br>
-								<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+								<button type="submit" class="btn btn-primary" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							</td>
 						</tr>
 					</tbody>
@@ -152,27 +152,21 @@
 					</td>
 				</tr>
 				<tr>
-					<td>&nbsp;</td>
+					<th scope="row">[ ' _t: WikiEditToolbar ' ]</th>
 					<td>
-						<fieldset>
 							<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
 							<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"[ ' db: csp_nonce ' ]></script>
-							<legend>[ ' _t: WikiEditToolbar ' ]</legend>
-							<input type="hidden" name="wikiedit_toolbar" id="wikiedit_toolbar_hidden" 
-								value="[ ' toolbar | e ' ]">
-								<a href="#" id="btn-customize-toolbar" 
-									class="btn btn-primary"
-									data-toolbar="[ ' toolbar | e ' ]">
-								[ ' _t: CustomizeToolbar ' ]
+							<input type="hidden" name="wikiedit_toolbar" id="wikiedit_toolbar_hidden" value="[ ' toolbar | e ' ]">
+							<a href="#" id="btn-customize-toolbar" data-toolbar="[ ' toolbar | e ' ]">
+								<button type="button" class="btn">[ ' _t: CustomizeToolbar ' ]</button>
 							</a>
-						</fieldset>
 					</td>
 				</tr>
 				<tr>
 				<tr>
 					<th scope="row">[ ' _t: ClearWeCache ' ]</th>
 					<td>
-						<button type="button" id="clear_we_localstorage" class="btn">
+						<button type="button" id="clear_we_localstorage" class="btn btn-warning">
 							[ ' _t: ClearWeCacheButton ' ]
 						</button>
 						<span id="we_localstorage_status" class="form-note"></span>
@@ -189,7 +183,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<br>
-						<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+						<button type="submit" class="btn btn-primary" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 					</td>
 				</tr>
 			</tbody>
@@ -289,7 +283,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<br>
-						<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+						<button type="submit" class="btn btn-primary" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 					</td>
 				</tr>
 			</tbody>
@@ -328,7 +322,9 @@
 							<a href="[ ' href ' ]">[ ' _t: YouWantChangePassword ' ]</a>
 						</th>
 						<td>
-							<a href="[ ' href ' ]" class="btn-link"><button type="button" class="btn btn-secondary" id="button" name="_password">[ ' _t: ChangePasswordButton ' ]</button></a>
+							<a href="[ ' href ' ]" class="btn-link">
+								<button type="button" class="btn" id="button" name="_password">[ ' _t: ChangePasswordButton ' ]</button>
+							</a>
 						</td>
 					</tr>
 					<tr>
@@ -458,7 +454,7 @@
 						<td>&nbsp;</td>
 						<td>
 							<br>
-							<button type="submit" class="btn btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+							<button type="submit" class="btn btn-primary" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							&nbsp;
 							<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="btn btn-cancel">[ ' _t: LogoutButton ' ]</button></a>
 						</td>
