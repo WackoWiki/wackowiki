@@ -357,11 +357,11 @@ function admin_config_basic($engine, $module)
 				</td>
 				<td>
 				<?php
-				$tb_array	= json_decode($engine->db->wikiedit_toolbar, true);
+				$tb_array	= implode(', ', json_decode($engine->db->wikiedit_toolbar, true));
 				$tb_default	= implode(', ', TB_DEFAULT);
 				?>
 					<textarea id="we_toolbar" name="wikiedit_toolbar" class="cols-50" rows="4" cols="50" maxlength="2048" placeholder="<?php echo $tb_default;?>" ><?php
-					echo implode(', ', $tb_array);
+					echo $tb_array ?: $tb_default;
 					?></textarea>
 				</td>
 			</tr>
