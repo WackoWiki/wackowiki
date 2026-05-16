@@ -27,7 +27,7 @@
 						<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>
 					=]
 					</select>
-					<button type="submit">[ ' _t: View ' ]</button>
+					<button type="submit" class="btn">[ ' _t: View ' ]</button>
 				</form>
 			</li>
 		</ul>
@@ -112,7 +112,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><button type="submit">[ ' _t: Send ' ]</button></td>
+					<td><button type="submit" class="btn btn-primary">[ ' _t: Send ' ]</button></td>
 					<td align="right">
 						<label for="urgent">[ ' _t: Urgent ' ]</label>
 						<input type="checkbox" id="urgent" name="urgent" value="1">
@@ -154,7 +154,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><button type="submit">[ ' _t: Send ' ]</button></td>
+					<td><button type="submit" class="btn btn-primary">[ ' _t: Send ' ]</button></td>
 					<td align="right">[ ' _t: Urgent ' ] <input type="checkbox" name="urgent" value="1"></td>
 				</tr>
 			</table>
@@ -187,7 +187,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><button type="submit">[ ' _t: Send ' ]</button></td>
+					<td><button type="submit" class="btn btn-primary">[ ' _t: Send ' ]</button></td>
 					<td align="right">
 						<label for="urgent">[ ' _t: Urgent ' ]</label>
 						<input type="checkbox" id="urgent" name="urgent" value="1">
@@ -349,7 +349,7 @@
 		<form action="[ ' hrefdelete ' ]" method="post" name="delete_message">
 			[ ' csrf: delete_message ' ]
 			[ ' _t: DeleteItem ' ]
-			<button type="submit">[ ' _t: Delete ' ]</button>
+			<button type="submit" class="btn btn-danger">[ ' _t: Delete ' ]</button>
 		</form>
 		[ ' message ' ]
 	=]
@@ -380,7 +380,7 @@
 							<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
 						</td>
 						<td colspan="2">
-							<button type="submit">[ ' _t: Add ' ]</button>
+							<button type="submit"  class="btn btn-primary">[ ' _t: Add ' ]</button>
 						</td>
 					</tr>
 					[= c _ =
@@ -421,7 +421,7 @@
 							<input type="text" id="field2_value" name="field2_value" size="35" maxlength="65">
 						</td>
 						<td colspan="2">
-							<button type="submit">[ ' _t: Add ' ]</button>
+							<button type="submit" class="btn btn-primary">[ ' _t: Add ' ]</button>
 						</td>
 					</tr>
 					[= f _ =
@@ -496,7 +496,7 @@
 					<td>
 						<form method=post>
 							<select name="move2folder"></select>
-							<button type="submit">Verschieben</button>
+							<button type="submit" class="btn">Verschieben</button>
 						</form>
 					</td>
 					<td><a href=#loeschen>Löschen</a></td>
@@ -509,7 +509,7 @@
 					<td><right>
 						<form method=post>
 							<select name="move2folder"></select>
-							<button type="submit">Verschieben</button>
+							<button type="submit" class="btn>Verschieben</button>
 						</form></right>
 					</td>
 					<td><a href=#loeschen>Löschen</a></td>
@@ -544,10 +544,10 @@
 	<option value="[ ' info ' ][ ' selected ' ]">[ ' info ' ]</option>
 =]
 </select>
-<button type="submit">[ ' _t: Move ' ]</button>
+<button type="submit" class="btn">[ ' _t: Move ' ]</button>
 
 [ == icon == ]
-<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ]"></a>
+<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="ico-[ ' class ' ]"></a>
 
 [ == style == ]
 <style>[ ' n css ' ]</style>

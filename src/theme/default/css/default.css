@@ -1768,7 +1768,7 @@ table.gallery {
 }
 
 #login-box {
-	font-size: var(--ww-font-size-xs);
+	font-size: var(--ww-font-size-sm);
 	margin: 0 auto;
 	overflow: hidden;
 	float: right;

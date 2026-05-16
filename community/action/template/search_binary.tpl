@@ -37,7 +37,7 @@
 				</details><br>
 			=]
 			<br>
-			<button type="submit" class="btn-ok">[ ' _t: SearchButton ' ]</button>&nbsp;
+			<button type="submit" class="btn btn-primary">[ ' _t: SearchButton ' ]</button>&nbsp;
 			[ '' cancel '' ]<br>
 		</form>
 		<br>
@@ -74,7 +74,7 @@
 
 [= cancel =]
 <a href="[ ' href: ' ]" class="btn-link">
-	<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+	<button type="button" class="btn btn-cancel">[ ' _t: CancelButton ' ]</button>
 </a>
 
 
@@ -85,7 +85,7 @@
 <span class="search-meta">
 	<time datetime="[ ' mtime ' ]">[ ' mtime | time_format ' ]</time> - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
 [= comments =
-	- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment btn-sm">[ ' n ' ]
+	- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="ico-comment ico-sm">[ ' n ' ]
 =]
 </span><br>
 [ ' preview | nl2br ' ]

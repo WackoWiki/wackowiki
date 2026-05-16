@@ -125,7 +125,7 @@
 	[ ' csrf: day_schedule ' ]
 	<input type="hidden" name="save" value="true">
 	<textarea cols="[ ' cols ' ]" rows="[ ' rows ' ]" name="schedule">[ ' schedule | pre ' ]</textarea><br>
-	<button type="submit">[ ' _t: SubmitButton ' ]</button>
+	<button type="submit" class="btn btn-primary">[ ' _t: SubmitButton ' ]</button>
 </form>
 
 [ == nav == ]

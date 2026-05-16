@@ -65,10 +65,10 @@
 Select: <a href="[ ' select ' ]">All</a>, <a href="[ ' none ' ]">None</a>, <a href="[ ' href: ' ]">[ ' _t: ResetButton ' ]</a><br>
 
 [ == CreateButton == ]
-<button type="submit" class="btn-ok">Create CSS</button>
+<button type="submit" class="btn btn-primary">Create CSS</button>
 
 [ == ResetButton == ]
-<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: ResetButton ' ]</button></a>
+<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn btn-cancel">[ ' _t: ResetButton ' ]</button></a>
 
 [ == table == ]
 #|
