@@ -86,9 +86,9 @@ class ToolbarCustomizer {
 	                </header>
 	                <div id="we-modal-content"></div>
 	                <footer>
-	                    <button type="button" class="we-modal-save">Save Changes</button>
-	                    <button type="button" class="we-modal-reset">Reset to Default</button>
-	                    <button type="button" class="we-modal-cancel">Cancel</button>
+	                    <button type="button" class="we-modal-save">${t('SaveChanges') || 'Save Changes'}</button>
+	                    <button type="button" class="we-modal-reset">${t('ResetToDefault') || 'Reset to Default'}</button>
+	                    <button type="button" class="we-modal-cancel">${t('Cancel') || 'Cancel'}</button>
 	                </footer>
 	            </div>
 	        </div>`;

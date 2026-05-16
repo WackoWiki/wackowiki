@@ -349,7 +349,6 @@ class WikiEdit extends ProtoEdit {
       'quote', 'source', 'action', 'textred', 'highlight', 'separator',
       'hr', 'signature', 'createlink', 'footnote', 'createtable',
       'upload-media', 'separator',
-      'draft-restore', 'draft-clear', 'separator',
       'wacko2md', 'md2wacko', 'separator',
       'dark-toggle', 'syntax', 'livepreview', 'zenmode', 'fullscreen', 'separator',
       'shrink', 'enlarge', 'separator',
