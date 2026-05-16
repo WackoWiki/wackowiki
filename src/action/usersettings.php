@@ -118,10 +118,15 @@ else if ($user = $this->get_user())
 	}
 	if ($action == 'user_settings_editor')
 	{
+		// the data is passed as a JSON string
+		$toolbar = json_decode($_POST['wikiedit_toolbar']?? [], true);
+		[$toolbar, ] = $this->validate_toolbar($toolbar);
+		$toolbar = json_encode($toolbar);
+
 		$sql =
 		'doubleclick_edit	= ' . (int) isset($_POST['doubleclick_edit']) . ', ' .
 		'autocomplete		= ' . (int) isset($_POST['autocomplete']) . ', ' .
-		'wikiedit_toolbar	= ' . $this->db->q($_POST['wikiedit_toolbar']) . ', ' .
+		'wikiedit_toolbar	= ' . $this->db->q($toolbar) . ', ' .
 		'autosave_draft		= ' . (int) isset($_POST['autosave_draft']) . ', ' .
 		'editor_height		= ' . (int) ($_POST['editor_height'] ?? 400) . ', ' .
 		'syntax_highlighting = ' . (int) isset($_POST['syntax_highlighting']) . ', ' .

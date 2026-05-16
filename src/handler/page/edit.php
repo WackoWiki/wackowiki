@@ -428,13 +428,13 @@ if ($this->has_access('read')
 		$tpl->r_title = $this->page['title'];
 	}
 
-	$default_toolbar = $this->db->wikiedit_toolbar ?? json_encode(TB_DEFAULT);
+	$toolbar = $user['wikiedit_toolbar'] ?: $this->db->wikiedit_toolbar;
 
 	$tpl->sectionid	= $section_id;
 	$tpl->hlevel	= $h_level;
 	$tpl->nonce		= $upload_nonce;
 	$tpl->upload	= (int) $can_upload;
-	$tpl->toolbar	= $user['wikiedit_toolbar'] ?: $default_toolbar;
+	$tpl->toolbar	= $toolbar ?? TB_DEFAULT;
 	$tpl->autosave	= $user['autosave_draft'] ?? 0;;
 	$tpl->height	= $user['editor_height'] ?? 400;
 	$tpl->syntax	= $user['syntax_highlighting'] ?? 1;

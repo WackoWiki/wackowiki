@@ -69,9 +69,18 @@ function admin_config_basic($engine, $module)
 			$config['diff_modes']				= '0,1,2,3,4,5,6,7';
 		}
 
+		if (isset($_POST['wikiedit_toolbar']))
+		{
+			$toolbar = $_POST['wikiedit_toolbar'] ?? '';
+			$toolbar = array_map('trim', explode(',', $toolbar));
+			[$toolbar, ] = $engine->validate_toolbar($toolbar);
+			$toolbar = json_encode($toolbar);
+		}
+
 		$config['footer_comments']				= (int) $_POST['footer_comments'];
 		$config['footer_files']					= (int) $_POST['footer_files'];
 		$config['footer_tags']					= (int) $_POST['footer_tags'];
+		$config['wikiedit_toolbar']				= (string) $toolbar;
 		$config['show_permalink']				= (int) $_POST['show_permalink'];
 		$config['hide_toc']						= (int) $_POST['hide_toc'];
 		$config['hide_index']					= (int) $_POST['hide_index'];
@@ -336,6 +345,24 @@ function admin_config_basic($engine, $module)
 					<input type="radio" id="footer_tags_on" name="footer_tags" value="1"<?php echo ($engine->db->footer_tags == 1 ? ' checked' : '');?>><label for="footer_tags_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="footer_tags_guest" name="footer_tags" value="2"<?php echo ($engine->db->footer_tags == 2 ? ' checked' : '');?>><label for="footer_tags_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="footer_tags_off" name="footer_tags" value="0"<?php echo ($engine->db->footer_tags == 0 ? ' checked' : '');?>><label for="footer_tags_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="we_toolbar"><strong><?php echo $engine->_t('WikiEditToolbar');?></strong><br>
+					<small><?php echo $engine->_t('CustomizeToolbar');?></small></label>
+				</td>
+				<td>
+				<?php
+				$tb_array	= json_decode($engine->db->wikiedit_toolbar, true);
+				$tb_default	= implode(', ', TB_DEFAULT);
+				?>
+					<textarea id="we_toolbar" name="wikiedit_toolbar" class="cols-50" rows="4" cols="50" maxlength="2048" placeholder="<?php echo $tb_default;?>" ><?php
+					echo implode(', ', $tb_array);
+					?></textarea>
 				</td>
 			</tr>
 			<tr>

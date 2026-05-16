@@ -514,6 +514,79 @@ class Wacko
 		return in_array($theme, $this->available_themes()) ? $theme : $this->db->theme;
 	}
 
+	function validate_toolbar(array $custom_toolbar): array
+	{
+		$invalid_found = false;
+
+		// Step 1: Remove values not present in the reference array
+		$filtered = array_filter($custom_toolbar, function ($value) use (&$invalid_found)
+		{
+			if (! in_array($value, array_unique(TB_DEFAULT), true))
+			{
+				$invalid_found = true;
+
+				return false; // discard invalid value
+			}
+
+			return true;
+		});
+
+		// Reset array keys after filtering
+		$filtered = array_values($filtered);
+
+		// Step 2: Remove duplicate non-separator values, keep separators as they are
+		$seen			= [];
+		$no_duplicates	= [];
+
+		foreach ($filtered as $item)
+		{
+			if ($item === 'separator')
+			{
+				$no_duplicates[] = $item;
+			}
+			else
+			{
+				if (! isset($seen[$item]))
+				{
+					$seen[$item]		= true;
+					$no_duplicates[]	= $item;
+				}
+			}
+		}
+
+		// Step 3: Collapse consecutive separators (remove a separator if it follows another)
+		$collapsed = [];
+
+		foreach ($no_duplicates as $item)
+		{
+			if ($item === 'separator' && end($collapsed) === 'separator')
+			{
+				continue; // skip duplicate separator
+			}
+
+			$collapsed[] = $item;
+		}
+
+		// Step 4: Remove leading and trailing separators
+		// Remove from beginning
+		while (! empty($collapsed) && $collapsed[0] === 'separator') {
+			array_shift($collapsed);
+		}
+		// Remove from end
+		while (! empty($collapsed) && end($collapsed) === 'separator') {
+			array_pop($collapsed);
+		}
+
+		// Re-index array for clean output
+		$collapsed = array_values($collapsed);
+
+		// Return the cleaned array and the flag
+		return [
+			$collapsed,
+			$invalid_found
+		];
+	}
+
 	// TIME FUNCTIONS
 	function utc2time($utc): int|false
 	{
