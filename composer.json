@@ -26,7 +26,19 @@
 		"ext-pdo_mysql" : "*",
 		"ext-SPL" : "*",
 		"ext-sqlite3" : "*",
-		"ext-zlib" : "*"
+		"ext-zlib" : "*",
+		"phiki/phiki": "^2.0",
+		"hashids/hashids": "^5.0",
+		"jblond/php-diff": "^2.5",
+		"phpmailer/phpmailer": "^7.0",
+		"phpthumb/phpthumb": "^2.3",
+		"simplepie/simplepie": "^1.9",
+		"enshrined/svg-sanitize": "^0.22"
 	},
-	"prefer-stable" : true
+	"prefer-stable" : true,
+	"config" : {
+		"vendor-dir" : "src/vendor",
+		"optimize-autoloader": true,
+		"sort-packages": true
+	}
 }

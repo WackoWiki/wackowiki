@@ -1,45 +1,76 @@
 <?php
+/**
+ * Phiki Syntax Highlighter Formatter for WackoWiki
+ */
 
-$hl = new Text_Highlighter();
+use Phiki\Phiki;
+use Phiki\Grammar\Grammar;
+use Phiki\Theme\Theme;
 
-if ($options['_default'])
+$lang_input = strtolower(trim($options['_default'] ?? 'text'));
+
+$grammar_map = [
+	'text'       => Grammar::Txt,
+	'txt'        => Grammar::Txt,
+	'php'        => Grammar::Php,
+	'javascript' => Grammar::Javascript,
+	'js'         => Grammar::Javascript,
+	'css'        => Grammar::Css,
+	'html'       => Grammar::Html,
+	'sql'        => Grammar::Sql,
+	'python'     => Grammar::Python,
+	'java'       => Grammar::Java,
+	'cpp'        => Grammar::Cpp,
+	'c'          => Grammar::C,
+	'json'       => Grammar::Json,
+	'xml'        => Grammar::Xml,
+	'bash'       => Grammar::Shellscript,
+	'sh'         => Grammar::Shellscript,
+	'shell'      => Grammar::Shellscript,
+	'markdown'   => Grammar::Markdown,
+	'md'         => Grammar::Markdown,
+];
+
+$grammar = $grammar_map[$lang_input] ?? Grammar::Txt;
+
+$theme = Theme::GithubLight;
+
+if (!empty($options['theme']))
 {
-	$language	= $options['_default'];
-	$numbers	= false;
-	$start		= (int) ($options['start'] ?? 1);
+	$t = strtolower(trim($options['theme']));
 
-	if (!empty($options['numbers']))
+	if (in_array($t, ['light', 'githublight', 'github-light'], true))
 	{
-		// HL_NUMBERS_LI HL_NUMBERS_TABLE FALSE -> 1 2 0
-		$numbers = match ((int) $options['numbers'])
-		{
-			1		=> HL_NUMBERS_LI,
-			2		=> HL_NUMBERS_TABLE,
-			default	=> false,
-		};
-	}
-
-	$table = ($numbers == HL_NUMBERS_TABLE);
-
-	$hl =& Text_Highlighter::factory(strtoupper($language), ['numbers' => $numbers, 'numbers_start' => $start]);
-
-	if (!is_object($hl))
-	{
-		$error = '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>Highlighter/' . $hl . '</code>') . '</em>';
-		$tpl->error = $this->show_message($error, 'error', false);
-	}
-	else
-	{
-		if ($table)
-		{
-			$tpl->num	= true;
-			$tpl->enum	= true;
-		}
-
-		$tpl->text = $hl->highlight($text);
+		$theme = Theme::GithubLight;
 	}
 }
-else
-{
-	$tpl->text = Ut::html($text);
+
+$use_dual_themes	= !empty($options['dual']) || !empty($options['light-dark']);
+$show_line_numbers	= isset($options['numbers']) || isset($options['line-numbers']) || isset($options['gutter']);
+$start_line			= max(1, (int)($options['start'] ?? $options['starting-line'] ?? 1));
+
+try {
+	$phiki = new Phiki();
+
+	$result = $phiki->codeToHtml(
+		code: $text,
+		grammar: $grammar,
+		theme: $use_dual_themes ? [
+			'light' => Theme::GithubLight,
+			'dark'  => Theme::GithubDark,
+		] : $theme
+		);
+
+	if ($show_line_numbers)
+	{
+		$result = $result
+			->withGutter()
+			->startingLine($start_line);
+	}
+
+	$tpl->text = $result->toString();
+
+} catch (\Throwable $e) {
+	$tpl->text = '<pre class="code-error">' . Ut::html($text) . '</pre>';
+	error_log('Phiki Formatter Error: ' . $e->getMessage());
 }

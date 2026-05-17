@@ -18,7 +18,7 @@ if (!defined('IN_WACKO'))
 }
 
 // Import the svgSanitize class into the global namespace
-use svgSanitize\Sanitizer;
+use enshrined\svgSanitize\Sanitizer;
 
 // TODO:
 // - thumbnails

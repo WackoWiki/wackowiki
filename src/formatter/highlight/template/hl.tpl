@@ -1,15 +1,8 @@
 [ === main === ]
 <ignore>
 <!--notypo-->
-	[ ' error ' ]
-	[= num _ =
-		[ ' nonstatic ' ]
-		<div class="hl-numbers-table">
-	=]
+	<div class="phiki-code">
 		[ ' text | pre ' ]
-	[= enum _ =
-		[ ' nonstatic ' ]
-		</div>
-	=]
+	</div>
 <!--/notypo-->
 </ignore>

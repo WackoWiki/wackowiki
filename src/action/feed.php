@@ -53,7 +53,7 @@ $error		= null;
 $p_mode		= [];
 
 // load SimplePie classes
-include_once 'lib/SimplePie/autoloader.php';
+use SimplePie\SimplePie;
 
 if (!$url)
 {
@@ -82,7 +82,7 @@ else
 
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE)
 	// Thus all configs will be same for all RSS-feeds
-	$feed = new \SimplePie\SimplePie();
+	$feed = new SimplePie();
 	$feed->set_feed_url($urlset);
 	// Set where the cache files should be stored.
 	$feed->set_cache_location('./' . CACHE_FEED_DIR);

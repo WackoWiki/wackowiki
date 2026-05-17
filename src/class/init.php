@@ -40,6 +40,12 @@ $_REQUEST = array_merge($_GET, $_POST);
 // install php class autoloader
 spl_autoload_register(function($name)
 {
+	// Composer Autoloader
+	if (file_exists(__DIR__ . '/../vendor/autoload.php'))
+	{
+		require_once __DIR__ . '/../vendor/autoload.php';
+	}
+
 	static $map;
 
 	if (!isset($map))

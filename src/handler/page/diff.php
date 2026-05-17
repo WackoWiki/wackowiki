@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // Import the PHPDiff class into the global namespace
-use PHPDiff\ {
+use jblond\ {
 	Diff,
 	Diff\Renderer\Html\Merged,
 	Diff\Renderer\Html\SideBySide,
