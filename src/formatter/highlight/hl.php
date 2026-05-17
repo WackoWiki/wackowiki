@@ -9,6 +9,7 @@ use Phiki\Theme\Theme;
 
 $lang_input = strtolower(trim($options['_default'] ?? 'text'));
 
+// 1. Static common aliases (fast lookup)
 $grammar_map = [
 	'text'       => Grammar::Txt,
 	'txt'        => Grammar::Txt,
@@ -29,9 +30,22 @@ $grammar_map = [
 	'shell'      => Grammar::Shellscript,
 	'markdown'   => Grammar::Markdown,
 	'md'         => Grammar::Markdown,
+	'http'       => Grammar::Http,
+	'diff'       => Grammar::Diff,
+	'ini'        => Grammar::Ini,
+	'yaml'       => Grammar::Yaml,
+	'yml'        => Grammar::Yaml,
+	'nginx'      => Grammar::Nginx,
+	'docker'     => Grammar::Docker,
+	'powershell' => Grammar::Powershell,
+	'rust'       => Grammar::Rust,
+	'go'         => Grammar::Go,
+	'ruby'       => Grammar::Ruby,
+	'lua'        => Grammar::Lua,
 ];
 
-$grammar = $grammar_map[$lang_input] ?? Grammar::Txt;
+// Try mapped value first, then fall back to trying the name directly as string
+$grammar = $grammar_map[$lang_input] ?? null;
 
 $theme = Theme::GithubLight;
 
@@ -51,6 +65,24 @@ $start_line			= max(1, (int)($options['start'] ?? $options['starting-line'] ?? 1
 
 try {
 	$phiki = new Phiki();
+
+	// 2. Hybrid Logic: Map + Automatic Alias Registration
+	if (isset($grammar_map[$lang_input]))
+	{
+		$grammar = $grammar_map[$lang_input];
+	}
+	else
+	{
+		// Try to register the language name as alias (e.g. 'http', 'apache', 'typescript', etc.)
+		$grammar = null;
+
+		try {
+			$phiki->alias($lang_input, $lang_input);
+			$grammar = $lang_input;
+		} catch (\Throwable $e) {
+			$grammar = Grammar::Txt;
+		}
+	}
 
 	$result = $phiki->codeToHtml(
 		code: $text,
