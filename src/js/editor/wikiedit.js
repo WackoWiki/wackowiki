@@ -2571,20 +2571,33 @@ class WikiEdit extends ProtoEdit {
   }
 
   /**
-   * Markdown → Wacko (approximate)
+   * Markdown → Wacko
    */
   markdownToWacko(text) {
     let w = text;
     const placeholders = [];
 
-    // Extract ```code blocks``` and replace with %%...%%
-    w = w.replace(/```([\s\S]*?)```/g, (match, content) => {
-      placeholders.push('%%' + content + '%%');
+    // === Fenced Code Blocks: ```language ... ``` → %%(hl language) ... %%
+    w = w.replace(/```(\w+)?\s*\n([\s\S]*?)```/g, (match, language, content) => {
+      const lang = (language || '').trim().toLowerCase();
+      const code = content.trim();
+
+      let wackoBlock;
+
+      if (lang === '') {
+        // No language specified → plain %% block
+        wackoBlock = `%%\n${code}\n%%`;
+      } else {
+        // Language specified → use Phiki highlighter
+        wackoBlock = `%%(hl ${lang})\n${code}\n%%`;
+      }
+
+      placeholders.push(wackoBlock);
       return `@@CODEBLOCK_${placeholders.length - 1}@@`;
     });
 
     // Extract `inline code` and replace with ##...##
-    w = w.replace(/`([^`]*)`/g, (match, content) => {
+    w = w.replace(/`([^`\n]+)`/g, (match, content) => {
       placeholders.push('##' + content + '##');
       return `@@INLINECODE_${placeholders.length - 1}@@`;
     });
