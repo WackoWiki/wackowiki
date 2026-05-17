@@ -10,15 +10,15 @@ The version and status of each is summarized below:
 | ----------------- | ----------------- | --------- | --------- |
 | bad_behaviour		| Bad Behaviour		| 2.2.25	| unpatched |
 | captcha			| freeCap			| 1.4.7		| unpatched |
-| hashids			| Hashids			| 5.0.2		| unpatched |
+| hashids			| Hashids			| 5.0.2		| Composer |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
-| php-diff			| php-diff			| 2.5.0		| patched, see subdir |
-| phiki				| phiki				| 2.2.0		| patched, see subdir |
-| phpmailer			| PHPMailer			| 7.0.2		| unpatched |
-| phpthumb			| PhpThumb			| 2.3.3		| unpatched |
+| php-diff			| php-diff			| 2.5.0		| Composer |
+| phiki				| phiki				| 2.2.0		| Composer |
+| phpmailer			| PHPMailer			| 7.0.2		| Composer |
+| phpthumb			| PhpThumb			| 2.3.3		| Composer |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |
-| simplepie			| SimplePie			| 1.9.0		| unpatched |
-| svg-sanitizer		| svg-sanitizer		| 0.22		| patched: various, see repo |
+| simplepie			| SimplePie			| 1.9.0		| Composer |
+| svg-sanitizer		| svg-sanitizer		| 0.22		| Composer |
 
 ## JavaScript libraries
 
