@@ -20,6 +20,7 @@ pre {
 	color: #000000;
 	padding: 4px;
 	text-align: left;
+	display: none;
 }
 
 .Differences tbody th {

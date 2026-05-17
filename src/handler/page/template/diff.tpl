@@ -29,7 +29,7 @@
 	=]
 	[= diff _ =
 		[= m0 _ =
-			<br><br>
+			<br>
 			[ ' diff ' ]
 		=]
 		[= m2 _ =
@@ -56,9 +56,9 @@
 			=]
 		=]
 		[= m3 _ =
-			<br><br>
+			<br>
 			[ ' nodiff ' ]
-			[ ' // stats ' ]<br><br>
+			[ ' // stats ' ]
 			[ ' diff ' ]
 		=]
 	=]
