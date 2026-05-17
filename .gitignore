@@ -33,6 +33,10 @@
 /src/xml/*
 !/src/xml/.htaccess
 
+# Composer
+/src/vendor/
+/composer.phar
+
 # Eclipse IDE
 .buildpath
 .project
