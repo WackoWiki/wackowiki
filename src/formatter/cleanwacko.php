@@ -14,30 +14,6 @@ if ($text == '')
 	return;
 }
 
-$text = preg_replace_callback(
-	'/
-		(==== .*? \/\/ .*? \/\/ .*? ====)  |   # group 1: ====text//text//text====
-		((?:http|https|ftp|nntp):\/\/)      |   # group 2: protocol://
-		(-{5} [A-Z ]+? -{5})                |   # group 3: -----TITLE-----
-	/ux',
-	function ($m) {
-		if ($m[1]) {
-			// Replace inner // with @@@@
-			return str_replace('//', '@@@@', $m[1]);
-		}
-		if ($m[2]) {
-			// Replace :// with :@@@@
-			return str_replace('://', ':@@@@', $m[2]);
-		}
-		if ($m[3]) {
-			// Replace ----- ----- with &&&&& ... &&&&&
-			return str_replace('-----', '&&&&&', $m[3]);
-		}
-		return $m[0];
-	},
-	$text
-	);
-
 $text = str_replace(
 	[
 		'**', '//', '__', '----', '---', '##', '++', '??', '""', '~',
@@ -55,10 +31,6 @@ $text = str_replace(
 	],
 	$text
 	);
-
-// ---- Restore protected parts ----
-$text = str_replace('@@@@', '//', $text);
-$text = str_replace('&&&&&', '-----', $text);
 
 // ---- Complex layout cleanup ----
 $text = preg_replace('/!!(?:\\([\\w]+?\\))*(.+?)!!/u',		'\\1',	$text); // !!(color)text!!
@@ -87,7 +59,7 @@ $text = preg_replace_callback(
 			// Complex link: [[url desc]] or ((url desc))
 			return $m[2] . ' (' . $m[1] . ')';
 		}
-		if ($m[4]) {
+		if (isset($m[4]) && $m[4]) {
 			// Simple link: [[url]] or ((url))
 			return $m[4];
 		}
