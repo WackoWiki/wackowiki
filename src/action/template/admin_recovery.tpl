@@ -22,7 +22,7 @@
 				<input type="password" id="conf_password" name="confpassword" size="24" minlength="[ ' db: pwd_admin_min_chars ' ]" value="[ ' confpassword | e attr ' ]" required>
 			</p>
 			<p>[ ' complexity | ' ]</p>
-			<p><button type="submit" name="preview">[ ' _t: CreateButton ' ]</button></p>
+			<p><button type="submit" class="btn btn-primary" name="preview">[ ' _t: CreateButton ' ]</button></p>
 			</div>
 		</form>
 	=]
