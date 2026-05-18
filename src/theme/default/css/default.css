@@ -40,7 +40,7 @@
 	--ww-line-height-normal: 1.5;   /* Body text (1.5–1.6 is ideal) */
 	--ww-line-height-relaxed: 1.7;  /* Large text blocks */
  
-	--ww-measure: 65ch;  /* Optimal for readability (45–75 chars) */
+	--ww-measure: 70ch;  /* Optimal for readability (45–75 chars) */
 	
 	--space-xs: 0.25rem;
 	--space-sm: 0.5rem;
@@ -182,7 +182,8 @@ label {
 }
 
 /*	buttons */
-.btn {
+.btn,
+input[type="file"]::file-selector-button {
 	padding: 10px 20px;
 	margin: 0 8px 8px 0;
 	font-size: 14px;
@@ -764,7 +765,8 @@ article header {
 
 @media (min-width: 700px) {
 	#mainwrapper {
-		width: 980px;
+		width: 980px; 
+		/* max-width: var(--ww-measure); */
 	}
 }
 
@@ -1308,12 +1310,6 @@ td.file- {
 .tab-btn.active { border-bottom: 3px solid #007acc; font-weight: bold; color: var(--ww-text); }
 
 .upload-tab-content.hidden { display: none; }
-
-.btn-select-files {
-/*   margin: 0.5rem 0;
-	padding: 0.6rem 1.5rem;
-	font-size: 1rem; */
-}
 
 .upload-file-remove {
 	background: #ccc;

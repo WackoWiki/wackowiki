@@ -46,7 +46,7 @@ $grammar_map = [
 
 // Try mapped value first, then fall back to trying the name directly as string
 $grammar			= $grammar_map[$lang_input] ?? null;
-$show_line_numbers	= isset($options['numbers']);
+$line_numbers		= isset($options['numbers']);
 $start_line			= max(1, (int)($options['start'] ?? 1));
 
 try {
@@ -79,7 +79,7 @@ try {
 		]
 	);
 
-	if ($show_line_numbers)
+	if ($line_numbers)
 	{
 		$result = $result
 			->withGutter()

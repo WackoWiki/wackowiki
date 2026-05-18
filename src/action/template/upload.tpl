@@ -22,7 +22,7 @@
 					<div class="dropzone-inner">
 						<p><strong>[ ' _t: DropFilesHere ' ]</strong></p>
 						<p class="msg hint">[ ' _t: UploadMax ' ] [ ' size ' ]</p>
-						<button type="button" class="btn-select-files">[ ' _t: SelectFiles ' ]</button>
+						<button type="button" class="btn">[ ' _t: SelectFiles ' ]</button>
 
 						<div class="upload-location">
 							<label class="radio-line"><input type="radio" name="upload_to" value="local" checked> [ ' _t: UploadLocalText ' ]</label>
