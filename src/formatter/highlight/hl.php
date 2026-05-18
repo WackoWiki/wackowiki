@@ -11,57 +11,43 @@ $lang_input = strtolower(trim($options['_default'] ?? 'text'));
 
 // 1. Static common aliases (fast lookup)
 $grammar_map = [
-	'text'       => Grammar::Txt,
-	'txt'        => Grammar::Txt,
-	'php'        => Grammar::Php,
-	'javascript' => Grammar::Javascript,
-	'js'         => Grammar::Javascript,
-	'css'        => Grammar::Css,
-	'html'       => Grammar::Html,
-	'sql'        => Grammar::Sql,
-	'python'     => Grammar::Python,
-	'java'       => Grammar::Java,
-	'cpp'        => Grammar::Cpp,
-	'c'          => Grammar::C,
-	'json'       => Grammar::Json,
-	'xml'        => Grammar::Xml,
-	'bash'       => Grammar::Shellscript,
-	'sh'         => Grammar::Shellscript,
-	'shell'      => Grammar::Shellscript,
-	'markdown'   => Grammar::Markdown,
-	'md'         => Grammar::Markdown,
-	'http'       => Grammar::Http,
-	'diff'       => Grammar::Diff,
-	'ini'        => Grammar::Ini,
-	'yaml'       => Grammar::Yaml,
-	'yml'        => Grammar::Yaml,
-	'nginx'      => Grammar::Nginx,
-	'docker'     => Grammar::Docker,
-	'powershell' => Grammar::Powershell,
-	'rust'       => Grammar::Rust,
-	'go'         => Grammar::Go,
-	'ruby'       => Grammar::Ruby,
-	'lua'        => Grammar::Lua,
+	'text'			=> Grammar::Txt,
+	'txt'			=> Grammar::Txt,
+	'php'			=> Grammar::Php,
+	'javascript'	=> Grammar::Javascript,
+	'js'			=> Grammar::Javascript,
+	'css'			=> Grammar::Css,
+	'html'			=> Grammar::Html,
+	'sql'			=> Grammar::Sql,
+	'python'		=> Grammar::Python,
+	'java'			=> Grammar::Java,
+	'cpp'			=> Grammar::Cpp,
+	'c'				=> Grammar::C,
+	'json'			=> Grammar::Json,
+	'xml'			=> Grammar::Xml,
+	'bash'			=> Grammar::Shellscript,
+	'sh'			=> Grammar::Shellscript,
+	'shell'			=> Grammar::Shellscript,
+	'markdown'		=> Grammar::Markdown,
+	'md'			=> Grammar::Markdown,
+	'http'			=> Grammar::Http,
+	'diff'			=> Grammar::Diff,
+	'ini'			=> Grammar::Ini,
+	'yaml'			=> Grammar::Yaml,
+	'yml'			=> Grammar::Yaml,
+	'nginx'			=> Grammar::Nginx,
+	'docker'		=> Grammar::Docker,
+	'powershell'	=> Grammar::Powershell,
+	'rust'			=> Grammar::Rust,
+	'go'			=> Grammar::Go,
+	'ruby'			=> Grammar::Ruby,
+	'lua'			=> Grammar::Lua,
 ];
 
 // Try mapped value first, then fall back to trying the name directly as string
-$grammar = $grammar_map[$lang_input] ?? null;
-
-$theme = Theme::GithubLight;
-
-if (!empty($options['theme']))
-{
-	$t = strtolower(trim($options['theme']));
-
-	if (in_array($t, ['light', 'githublight', 'github-light'], true))
-	{
-		$theme = Theme::GithubLight;
-	}
-}
-
-$use_dual_themes	= !empty($options['dual']) || !empty($options['light-dark']);
-$show_line_numbers	= isset($options['numbers']) || isset($options['line-numbers']) || isset($options['gutter']);
-$start_line			= max(1, (int)($options['start'] ?? $options['starting-line'] ?? 1));
+$grammar			= $grammar_map[$lang_input] ?? null;
+$show_line_numbers	= isset($options['numbers']);
+$start_line			= max(1, (int)($options['start'] ?? 1));
 
 try {
 	$phiki = new Phiki();
@@ -87,11 +73,11 @@ try {
 	$result = $phiki->codeToHtml(
 		code: $text,
 		grammar: $grammar,
-		theme: $use_dual_themes ? [
+		theme: [
 			'light' => Theme::GithubLight,
 			'dark'  => Theme::GithubDark,
-		] : $theme
-		);
+		]
+	);
 
 	if ($show_line_numbers)
 	{
