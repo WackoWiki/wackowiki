@@ -44,51 +44,53 @@ $lang = [
 'TitleUpdate'					=> 'WackoWiki अपडेट',
 'Continue'						=> 'जारी रखें',
 'Back'							=> 'वापस',
-'Recommended'					=> 'recommended',
-'InvalidAction'					=> 'Invalid action',
+'Recommended'					=> 'अनुशंसित',
+'InvalidAction'					=> 'अमान्य क्रिया',
 
 /*
    Locking Check
  */
-'LockAuthorization'				=> 'Authorization',
+'LockAuthorization'				=> 'प्राधिकरण',
 'LockAuthorizationInfo'			=> 'कृपया उस पासवर्ड को दर्ज करें जिसे आपने %1 फ़ाइल में सहेजा है।',
 'LockPassword'					=> 'कूटशब्द:',
-'LockLogin'						=> 'प्रवेश',
-'LockPasswordInvalid'			=> 'अवैध पासवर्ड।',
-'LockedTryLater'				=> 'यह साइट वर्तमान में अपग्रेड की जा रही है। कृपया बाद में फिर से प्रयास करें।',
-'EmptyAuthFile'					=> '%1 फ़ाइल अनुपस्थित या खाली है। कृपया फ़ाइल बनाएँ और उस फ़ाइल में एक पासवर्ड सेट करें।',
+'LockLogin'						=> 'लॉगिन',
+'LockPasswordInvalid'			=> 'अमान्य पासवर्ड।',
+'LockedTryLater'				=> 'यह साइट वर्तमान में अपग्रेड की जा रही है। कृपया बाद में पुनः प्रयास करें।',
+'EmptyAuthFile'					=> '%1 फ़ाइल अनुपस्थित या खाली है। कृपया फ़ाइल बनाएँ और उसमें एक पासवर्ड सेट करें।',
 
 
 /*
    Language Selection Page
 */
 'lang'							=> 'भाषा विन्यास',
-'PleaseUpgradeToR6'				=> 'ऐसा प्रतीत होता है कि आप WackoWiki %1 का पुराना संस्करण चला रहे हैं। WackoWiki के इस संस्करण में अपडेट करने के लिए, आपको पहले अपनी इंस्टॉलेशन को %2 में अपडेट करना होगा।',
+'PleaseUpgradeToR6'				=> 'ऐसा प्रतीत होता है कि आप WackoWiki %1 का पुराना संस्करण चला रहे हैं। WackoWiki के इस संस्करण में अपडेट करने के लिए, आपको पहले अपनी इंस्टॉलेशन को %2 में अपग्रेड करना होगा।',
 'UpgradeFromWacko'				=> 'WackoWiki में आपका स्वागत है! ऐसा प्रतीत होता है कि आप WackoWiki %1 से %2 में अपग्रेड कर रहे हैं। अगले कुछ पृष्ठ आपको अपग्रेड प्रक्रिया के माध्यम से मार्गदर्शन करेंगे।',
 'FreshInstall'					=> 'WackoWiki में आपका स्वागत है! आप WackoWiki %1 स्थापित करने वाले हैं। अगले कुछ पृष्ठ आपको स्थापना प्रक्रिया में मार्गदर्शन करेंगे।',
-'PleaseBackup'					=> 'कृपया, अपग्रेड प्रक्रिया शुरू करने से पहले अपने डेटाबेस, कॉन्फ़िगरेशन फ़ाइल और सभी परिवर्तित फ़ाइलों जैसे कि जिन पर स्थानीय हैक और पैच लागू किए गए हैं, का <strong>बैकअप</strong> लें। यह आपको एक बड़ी सिरदर्द से बचा सकता है।',
+'PleaseBackup'					=> 'कृपया, अपग्रेड प्रक्रिया शुरू करने से पहले अपने डेटाबेस, कॉन्फ़िगरेशन फ़ाइल और सभी परिवर्तित फ़ाइलों जैसे कि जिन पर स्थानीय हैक और पैच लागू किए गए हैं, का बैकअप लें। यह आपको एक बड़ी परेशानी से बचा सकता है।',
 'LangDesc'						=> 'कृपया इंस्टॉलेशन प्रक्रिया के लिए एक भाषा चुनें। यह भाषा आपके WackoWiki इंस्टॉलेशन की डिफ़ॉल्ट भाषा के रूप में भी उपयोग की जाएगी।',
 
 /*
    System Requirements Page
 */
 'version-check'					=> 'प्रणाली आवश्यकताएँ',
-'PhpVersion'					=> 'PHP Version',
-'PhpDetected'					=> 'Detected PHP',
-'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
-'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
+'PhpVersion'					=> 'PHP संस्करण',
+'PhpDetected'					=> 'पता लगाया गया PHP',
+'ModRewrite'					=> 'Apache Rewrite एक्सटेंशन (वैकल्पिक)',
+'ModRewriteInstalled'			=> 'Rewrite एक्सटेंशन (mod_rewrite) स्थापित है?',
 'Database'						=> 'डेटाबेस',
-'PhpExtensions'					=> 'PHP विस्तार',
+'PhpExtensions'					=> 'PHP एक्सटेंशन',
 'Permissions'					=> 'अनुमतियाँ',
-'ReadyToInstall'				=> 'Ready to Install?',
+'ReadyToInstall'				=> 'स्थापना के लिए तैयार?',
 'Requirements'					=> 'आपके सर्वर को नीचे सूचीबद्ध आवश्यकताओं को पूरा करना होगा।',
-'OK'							=> 'OK',
-'Problem'						=> 'Problem',
-'Example'						=> 'Example',
+'OK'							=> 'ठीक है',
+'Problem'						=> 'समस्या',
+'Example'						=> 'उदाहरण',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'ऐसा प्रतीत होता है कि आपके PHP इंस्टॉलेशन में संकेतित PHP एक्सटेंशन गायब हैं, जो WackoWiki के लिए आवश्यक हैं।',
-'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
-'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
+'PcreWithoutUtf8'				=> 'PCRE UTF-8 समर्थन के साथ संकलित नहीं है।',
+'NotePermissions'				=> 'यह इंस्टॉलर आपके WackoWiki डायरेक्टरी में स्थित फ़ाइल %1 में कॉन्फ़िगरेशन डेटा लिखने का प्रयास करेगा। इसके लिए काम करने के लिए, आपको यह सुनिश्चित करना होगा कि वेब सर्वर के पास उस फ़ाइल में लिखने की अनुमति है। यदि आप ऐसा नहीं कर सकते, तो आपको फ़ाइल को मैन्युअल रूप से संपादित करना होगा (इंस्टॉलर आपको बताएगा कैसे)।
+
+विवरण के लिए WackoWiki:Doc/English/Installation देखें।',
 'ErrorPermissions'				=> 'ऐसा प्रतीत होता है कि इंस्टॉलर WackoWiki को सही ढंग से काम करने के लिए आवश्यक फ़ाइल अनुमतियाँ स्वचालित रूप से सेट नहीं कर पा रहा है। इंस्टॉलेशन प्रक्रिया में बाद में आपको अपने सर्वर पर आवश्यक फ़ाइल अनुमतियों को मैन्युअल रूप से कॉन्फ़िगर करने के लिए कहा जाएगा।',
 'ErrorMinPhpVersion'			=> 'PHP संस्करण %1 से अधिक होना चाहिए। ऐसा प्रतीत होता है कि आपका सर्वर एक पुराना संस्करण चला रहा है। WackoWiki को सही ढंग से काम करने के लिए आपको एक अधिक नवीन PHP संस्करण में अपग्रेड करना होगा।',
 'Ready'							=> 'बधाई हो, ऐसा प्रतीत होता है कि आपका सर्वर WackoWiki चलाने में सक्षम है। अगले कुछ पृष्ठ आपको कॉन्फ़िगरेशन प्रक्रिया से गुज़रेंगे।',
@@ -96,69 +98,85 @@ $lang = [
 /*
    Site Config Page
 */
-'config-site'					=> 'Site Configuration',
+'config-site'					=> 'साइट कॉन्फ़िगरेशन',
 'SiteName'						=> 'विकि का नाम',
-'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
+'SiteNameDesc'					=> 'कृपया अपने विकि साइट का नाम दर्ज करें।',
 'SiteNameDefault'				=> 'मेरा विकि',
 'HomePage'						=> 'मुख पृष्ठ',
-'HomePageDesc'					=> 'Enter the name you would like your home page to have. This will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'HomePageDesc'					=> 'वह नाम दर्ज करें जिसे आप अपने मुख पृष्ठ का नाम देना चाहते हैं। यह डिफ़ॉल्ट पृष्ठ होगा जो उपयोगकर्ता आपकी साइट पर आने पर देखेंगे और यह एक WikiName होना चाहिए।',
 'HomePageDefault'				=> 'मुखपृष्ठ',
-'MultiLang'						=> 'Multi Language Mode',
-'MultiLangDesc'					=> 'Multilingual mode allows you to have pages with different language settings within a single installation. When this mode is enabled, the installer creates initial menu items for all languages available in the distribution.',
-'AllowedLang'					=> 'Allowed Languages',
+'MultiLang'						=> 'बहुभाषी मोड',
+'MultiLangDesc'					=> 'बहुभाषी मोड आपको एक ही इंस्टॉलेशन में विभिन्न भाषा सेटिंग्स वाले पृष्ठ रखने की अनुमति देता है। जब यह मोड सक्षम होता है, तो इंस्टॉलर वितरण में उपलब्ध सभी भाषाओं के लिए प्रारंभिक मेनू आइटम बनाता है।',
+'AllowedLang'					=> 'अनुमत भाषाएँ',
 'AllowedLangDesc'				=> 'यह अनुशंसा की जाती है कि आप केवल उन्हीं भाषाओं का चयन करें जिन्हें आप उपयोग करना चाहते हैं, अन्यथा सभी भाषाएँ चयनित हो जाएंगी।',
 'AclMode'						=> 'डिफ़ॉल्ट ACL सेटिंग्स',
 'AclModeDesc'					=> '',
 'PublicWiki'					=> 'सार्वजनिक विकि (सभी के लिए पढ़ें, पंजीकृत उपयोगकर्ताओं के लिए लिखें और टिप्पणी करें)',
 'PrivateWiki'					=> 'निजी विकि (केवल पंजीकृत उपयोगकर्ताओं के लिए पढ़ें, लिखें, टिप्पणी करें)',
-'Admin'							=> 'Admin Name',
-'AdminDesc'						=> 'Enter the admin\'s username. This should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
+'Admin'							=> 'एडमिन नाम',
+'AdminDesc'						=> 'एडमिन का उपयोगकर्ता नाम दर्ज करें। यह एक WikiName होना चाहिए (उदाहरण के लिए
+WikiAdmin
+)।',
 'NameAlphanumOnly'				=> 'उपयोगकर्ता नाम %1 और %2 अक्षरों के बीच होना चाहिए और केवल अल्फ़ान्यूमेरिक अक्षरों का उपयोग करना चाहिए। बड़े अक्षर ठीक हैं।',
-'NameCamelCaseOnly'				=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
-'Password'						=> 'Admin Password',
-'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
-'PasswordConfirm'				=> 'Repeat Password:',
-'Mail'							=> 'Admin Email Address',
+'NameCamelCaseOnly'				=> 'उपयोगकर्ता नाम %1 और %2 अक्षरों के बीच होना चाहिए और WikiName प्रारूप में होना चाहिए।',
+'Password'						=> 'एडमिन पासवर्ड',
+'PasswordDesc'					=> 'एडमिन के लिए एक पासवर्ड चुनें जिसमें कम से कम %1 अक्षर हों।',
+'PasswordConfirm'				=> 'पासवर्ड दोहराएँ:',
+'Mail'							=> 'एडमिन ईमेल पता',
 'MailDesc'						=> 'व्यवस्थापक का ईमेल पता दर्ज करें।',
-'Base'							=> 'Base URL',
-'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
-'Rewrite'						=> 'Rewrite Mode',
-'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
-'Enabled'						=> 'Enabled:',
+'Base'							=> 'बेस URL',
+'BaseDesc'						=> 'आपकी WackoWiki साइट का बेस URL। पृष्ठ नाम इसके साथ जुड़ जाते हैं, इसलिए यदि आप mod_rewrite का उपयोग कर रहे हैं तो पता एक फॉरवर्ड स्लैश के साथ समाप्त होना चाहिए, अर्थात्',
+'Rewrite'						=> 'रीराइट मोड',
+'RewriteDesc'					=> 'यदि आप WackoWiki के साथ URL रीराइटिंग का उपयोग कर रहे हैं तो रीराइट मोड सक्षम होना चाहिए।',
+'Enabled'						=> 'सक्षम:',
 'ErrorAdminEmail'				=> 'आपने एक अमान्य ईमेल पता दर्ज किया है!',
-'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
-'ErrorAdminPasswordShort'		=> 'एडमिन पासवर्ड बहुत छोटा है! न्यूनतम लंबाई %1 वर्ण है।',
+'ErrorAdminPasswordMismatch'	=> 'पासवर्ड मेल नहीं खाते!',
+'ErrorAdminPasswordShort'		=> 'एडमिन पासवर्ड बहुत छोटा है! न्यूनतम लंबाई %1 अक्षर है।',
 'ModRewriteStatusUnknown'		=> 'इंस्टॉलर यह सत्यापित नहीं कर सकता कि mod_rewrite सक्षम है। हालाँकि, इसका मतलब यह नहीं है कि यह अक्षम है।',
 
 /*
    Database Config Page
 */
-'config-database'				=> 'डेटाबेस सेटिंग',
-'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use.',
-'DbSqlMode'						=> 'SQL mode',
-'DbSqlModeDesc'					=> 'The SQL mode you want use.',
-'DbVendor'						=> 'Vendor',
-'DbVendorDesc'					=> 'The database vendor you use.',
-'DbCharset'						=> 'Charset',
-'DbCharsetDesc'					=> 'The database charset you want to use.',
-'DbEngine'						=> 'Engine',
-'DbEngineDesc'					=> 'The database engine you want to use.',
+'config-database'				=> 'डेटाबेस सेटिंग्स',
+'DbDriver'						=> 'ड्राइवर',
+'DbDriverDesc'					=> 'आप जिस डेटाबेस ड्राइवर का उपयोग करना चाहते हैं।',
+'DbSqlMode'						=> 'SQL मोड',
+'DbSqlModeDesc'					=> 'आप जिस SQL मोड का उपयोग करना चाहते हैं।',
+'DbVendor'						=> 'वेंडर',
+'DbVendorDesc'					=> 'आप जिस डेटाबेस वेंडर का उपयोग करते हैं।',
+'DbCharset'						=> 'कैरेक्टर सेट',
+'DbCharsetDesc'					=> 'आप जिस डेटाबेस कैरेक्टर सेट का उपयोग करना चाहते हैं।',
+'DbEngine'						=> 'इंजन',
+'DbEngineDesc'					=> 'आप जिस डेटाबेस इंजन का उपयोग करना चाहते हैं।',
 'DbHost'						=> 'डेटाबेस होस्ट',
-'DbHostDesc'					=> 'वह होस्ट जिस पर आपका डेटाबेस सर्वर चल रहा है, आमतौर पर <code>127.0.0.1</code> या <code>localhost</code> (अर्थात, वही मशीन जिस पर आपकी WackoWiki साइट है)।',
-'DbPort'						=> 'डेटाबेस पोर्ट (Optional)',
+'DbHostDesc'					=> 'वह होस्ट जिस पर आपका डेटाबेस सर्वर चल रहा है, आमतौर पर
+127.0.0.1
+ या
+localhost
+ (अर्थात, वही मशीन जिस पर आपकी WackoWiki साइट है)।',
+'DbPort'						=> 'डेटाबेस पोर्ट (वैकल्पिक)',
 'DbPortDesc'					=> 'वह पोर्ट नंबर जिसके माध्यम से आपका डेटाबेस सर्वर सुलभ है। डिफ़ॉल्ट पोर्ट नंबर का उपयोग करने के लिए इसे खाली छोड़ दें।',
 'DbName'						=> 'डेटाबेस का नाम',
-'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already before you continue!',
-'DbNameSqliteDesc'				=> 'WackoWiki के लिए SQLite को डेटा डायरेक्टरी और फ़ाइल नाम का इस्तेमाल करना चाहिए।',
-'DbNameSqliteHelp'				=> 'SQLite सभी डेटा को एक ही फ़ाइल में संग्रहीत करता है।<br><br>आपके द्वारा प्रदान की गई निर्देशिका में इंस्टॉलेशन के दौरान वेब सर्वर द्वारा लिखने की अनुमति होनी चाहिए।<br><br>यह वेब के माध्यम से सुलभ <strong>नहीं</strong> होनी चाहिए। इंस्टॉलर इसके साथ एक <code>.htaccess</code> फ़ाइल लिखेगा, लेकिन अगर वह विफल हो जाता है तो कोई आपके कच्चे डेटाबेस तक पहुंच सकता है। इसमें कच्चा उपयोगकर्ता डेटा (ईमेल पते, हैश किए गए पासवर्ड) के साथ-साथ विकी पर संरक्षित पृष्ठ और अन्य प्रतिबंधित डेटा भी शामिल है। डेटाबेस को पूरी तरह से कहीं और रखने पर विचार करें, उदाहरण के लिए <code>/var/lib/wackowiki/yourwiki</code> में।',
-'DbUser'						=> 'डेटाबेस सदस्यनाम',
-'DbUserDesc'					=> 'Name of the user used to connect to your database.',
-'DbPassword'					=> 'कूटशब्द',
-'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
-'Prefix'						=> 'Table Prefix',
+'DbNameDesc'					=> 'WackoWiki द्वारा उपयोग किया जाने वाला डेटाबेस। आगे बढ़ने से पहले यह डेटाबेस पहले से मौजूद होना चाहिए!',
+'DbNameSqliteDesc'				=> 'WackoWiki के लिए SQLite को डेटा डायरेक्टरी और फ़ाइल नाम का उपयोग करना चाहिए।',
+'DbNameSqliteHelp'				=> 'SQLite सभी डेटा को एक ही फ़ाइल में संग्रहीत करता है।
+
+
+आपके द्वारा प्रदान की गई डायरेक्टरी में इंस्टॉलेशन के दौरान वेब सर्वर द्वारा लिखने की अनुमति होनी चाहिए।
+
+
+यह वेब के माध्यम से सुलभ नहीं होनी चाहिए। इंस्टॉलर इसके साथ एक
+.htaccess
+ फ़ाइल लिखेगा, लेकिन अगर वह विफल हो जाता है तो कोई आपके कच्चे डेटाबेस तक पहुंच सकता है। इसमें कच्चा उपयोगकर्ता डेटा (ईमेल पते, हैश किए गए पासवर्ड) के साथ-साथ विकी पर संरक्षित पृष्ठ और अन्य प्रतिबंधित डेटा भी शामिल है। डेटाबेस को पूरी तरह से कहीं और रखने पर विचार करें, उदाहरण के लिए
+/var/lib/wackowiki/yourwiki
+ में।',
+'DbUser'						=> 'डेटाबेस उपयोगकर्ता नाम',
+'DbUserDesc'					=> 'आपके डेटाबेस से कनेक्ट करने के लिए उपयोग किए जाने वाले उपयोगकर्ता का नाम।',
+'DbPassword'					=> 'पासवर्ड',
+'DbPasswordDesc'				=> 'आपके डेटाबेस से कनेक्ट करने के लिए उपयोग किए जाने वाले उपयोगकर्ता का पासवर्ड।',
+'Prefix'						=> 'टेबल उपसर्ग',
 'PrefixDesc'					=> 'WackoWiki द्वारा उपयोग की जाने वाली सभी तालिकाओं का उपसर्ग। यह आपको एक ही डेटाबेस का उपयोग करते हुए विभिन्न तालिका उपसर्गों (जैसे wacko_) को कॉन्फ़िगर करके कई WackoWiki इंस्टॉलेशन चलाने की अनुमति देता है।',
-'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
+'ErrorNoDbDriverDetected'		=> 'कोई डेटाबेस ड्राइवर नहीं मिला, कृपया अपने php.ini फ़ाइल में mysqli या pdo_mysql एक्सटेंशन को सक्षम करें।',
 'ErrorNoDbDriverSelected'		=> 'कोई डेटाबेस ड्राइवर चयनित नहीं है, कृपया सूची से एक चुनें।',
 'DeleteTables'					=> 'मौजूदा तालिकाएँ हटाएँ?',
 'DeleteTablesDesc'				=> 'ध्यान दें! यदि आप इस विकल्प को चुनकर आगे बढ़ते हैं तो आपके डेटाबेस से सभी मौजूदा विकी डेटा मिटा दिए जाएँगे। जब तक आप बैकअप से डेटा को मैन्युअल रूप से पुनर्स्थापित नहीं करते, तब तक इसे पूर्ववत नहीं किया जा सकता।',
@@ -168,80 +186,147 @@ $lang = [
    Database Installation Page
 */
 'install-database'				=> 'डेटाबेस स्थापना',
-'TestingConfiguration'			=> 'Testing Configuration',
+'TestingConfiguration'			=> 'कॉन्फ़िगरेशन का परीक्षण',
 'TestConnectionString'			=> 'डेटाबेस कनेक्शन सेटिंग्स का परीक्षण',
-'TestDatabaseExists'			=> 'आपके द्वारा निर्दिष्ट डेटाबेस का अस्तित्व है या नहीं, जांचा जा रहा है',
+'TestDatabaseExists'			=> 'आपके द्वारा निर्दिष्ट डेटाबेस का अस्तित्व है या नहीं, जाँच की जा रही है',
 'TestDatabaseVersion'			=> 'डेटाबेस न्यूनतम संस्करण आवश्यकताओं की जाँच',
 'SqliteFileExtensionError'		=> 'कृपया निम्नलिखित फ़ाइल एक्सटेंशनों में से किसी एक का उपयोग करें: db, sdb, sqlite।',
-'SqliteParentUnwritableGroup'	=> 'डेटा डिरेक्ट्री <code>%1</code> को बनाया नहीं जा सकता, क्योंकि जनक डिरोक्ट्री <code>%2</code> में वेब-सर्वर को लिखने की अनुमति नहीं है।<br><br>इंस्टॉलर ने उस सदस्य का पता लगा लिया है जिसके रूप में आपका वेब-सर्वर चल रहा है।<br>आगे बढ़ने के लिए <code>%3</code> डिरेक्ट्री में इसे लिखने की अनुमति दें।<br>Unix/Linux सिस्टम पर यह चलाएँ:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
-'SqliteParentUnwritableNogroup'	=> 'डेटा डिरेक्ट्री <code>%1</code> को बनाया नहीं जा सकता, क्योंकि जनक डिरोक्ट्री <code>%2</code> में वेब-सर्वर को लिखने की अनुमति नहीं है।<br><br>इंस्टॉलर ने उस सदस्य का पता लगा लिया है जिसके रूप में आपका वेब-सर्वर चल रहा है।<br>आगे बढ़ने के लिए <code>%3</code> डिरेक्ट्री में इसे (और दूसरे सर्वरों को भी!) लिखने की अनुमति दें।<br>Unix/Linux सिस्टम पर यह चलाएँ:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
-'SqliteMkdirError'				=> 'डेटा डिरेक्ट्री <code>%1</code> बनाते समय त्रुटि हुई।\nस्थान को जाँचकर पुनः प्रयास करें।',
-'SqliteDirUnwritable'			=> 'डिरेक्ट्री <code>%1</code> में लिखा न जा सका।\nइसकी अनुमतियाँ बदलें ताकि वेब-सर्वर इसमें लिख सके, और पुनः प्रयास करें।',
-'SqliteReadonly'				=> 'फ़ाइल <code>%1</code> में लिखा नहीं जा सकता।',
-'SqliteCantCreateDb'			=> 'डेटाबेस फ़ाइल <code>%1</code> बनाया न जा सका।',
-'InstallTables'					=> 'Installing Tables',
-'ErrorDbConnection'				=> 'There was a problem with the database connection details you specified, please go back and check they are correct.',
-'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',
-'To'							=> 'को',
-'AlterTable'					=> 'Altering %1 table',
-'InsertRecord'					=> 'Inserting Record into %1 table',
-'RenameTable'					=> 'Renaming %1 table',
-'UpdateTable'					=> 'Updating %1 table',
-'InstallDefaultData'			=> 'Adding Default Data',
-'InstallPagesBegin'				=> 'Adding Default Pages',
-'InstallPagesEnd'				=> 'Finished Adding Default Pages',
-'InstallSystemAccount'			=> 'Adding <code>System</code> User',
-'InstallDeletedAccount'			=> 'Adding <code>Deleted</code> User',
-'InstallAdmin'					=> 'Adding Admin User',
-'InstallAdminSetting'			=> 'Adding Admin User Preferences',
-'InstallAdminGroup'				=> 'Adding Admins Group',
-'InstallAdminGroupMember'		=> 'Adding Admins Group Member',
-'InstallEverybodyGroup'			=> 'Adding Everybody Group',
-'InstallModeratorGroup'			=> 'Adding Moderator Group',
-'InstallReviewerGroup'			=> 'Adding Reviewer Group',
-'InstallLogoImage'				=> 'Adding Logo Image',
-'LogoImage'						=> 'Logo image',
-'InstallConfigValues'			=> 'Adding Config Values',
-'ConfigValues'					=> 'Config Values',
-'ErrorInsertPage'				=> 'Error inserting %1 page',
-'ErrorInsertPagePermission'		=> 'Error setting permission for %1 page',
-'ErrorInsertDefaultMenuItem'	=> 'Error setting page %1 as default menu item',
-'ErrorPageAlreadyExists'		=> 'The %1 page already exists',
-'ErrorAlterTable'				=> 'Error altering %1 table',
-'ErrorInsertRecord'				=> 'Error Inserting Record into %1 table',
-'ErrorRenameTable'				=> 'Error renaming %1 table',
-'ErrorUpdatingTable'			=> 'Error updating %1 table',
-'CreatingTable'					=> 'Creating %1 table',
-'CreatingIndex'					=> 'Creating %1 index',
-'CreatingTrigger'				=> 'Creating %1 trigger',
-'ErrorAlreadyExists'			=> 'The %1 already exists',
-'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
-'ErrorCreatingIndex'			=> 'Error creating %1 index, does it already exist?',
-'ErrorCreatingTrigger'			=> 'Error creating %1 trigger, does it already exist?',
-'DeletingTables'				=> 'Deleting Tables',
-'DeletingTablesEnd'				=> 'Finished Deleting Tables',
-'ErrorDeletingTable'			=> 'Error deleting %1 table. The most likely reason is that the table does not exist, in which case you can ignore this warning.',
-'DeletingTable'					=> 'Deleting %1 table',
-'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
+'SqliteParentUnwritableGroup'	=> 'डेटा डायरेक्टरी
+%1
+ नहीं बनाई जा सकती, क्योंकि पैरेंट डायरेक्टरी
+%2
+ में वेब-सर्वर को लिखने की अनुमति नहीं है।
+
+
+इंस्टॉलर ने उस उपयोगकर्ता का पता लगा लिया है जिसके रूप में आपका वेब-सर्वर चल रहा है।
+
+आगे बढ़ने के लिए
+%3
+ डायरेक्टरी में इसे लिखने की अनुमति दें।
+
+Unix/Linux सिस्टम पर यह चलाएँ:
+
+
+cd %2
+
+mkdir %3
+
+chgrp %4 %3
+
+chmod g+w %3
+',
+'SqliteParentUnwritableNogroup'	=> 'डेटा डायरेक्टरी
+%1
+ नहीं बनाई जा सकती, क्योंकि पैरेंट डायरेक्टरी
+%2
+ में वेब-सर्वर को लिखने की अनुमति नहीं है।
+
+
+इंस्टॉलर ने उस उपयोगकर्ता का पता लगा लिया है जिसके रूप में आपका वेब-सर्वर चल रहा है।
+
+आगे बढ़ने के लिए
+%3
+ डायरेक्टरी में इसे (और अन्य सर्वरों को भी!) लिखने की अनुमति दें।
+
+Unix/Linux सिस्टम पर यह चलाएँ:
+
+
+cd %2
+
+mkdir %3
+
+chmod a+w %3
+',
+'SqliteMkdirError'				=> 'डेटा डायरेक्टरी
+%1
+ बनाते समय त्रुटि हुई।\nस्थान की जाँच करके पुनः प्रयास करें।',
+'SqliteDirUnwritable'			=> 'डायरेक्टरी
+%1
+ में लिखा नहीं जा सका।\nइसकी अनुमतियाँ बदलें ताकि वेब-सर्वर इसमें लिख सके, और पुनः प्रयास करें।',
+'SqliteReadonly'				=> 'फ़ाइल
+%1
+ में लिखा नहीं जा सकता।',
+'SqliteCantCreateDb'			=> 'डेटाबेस फ़ाइल
+%1
+ नहीं बनाई जा सकी।',
+'InstallTables'					=> 'तालिकाएँ स्थापित करना',
+'ErrorDbConnection'				=> 'आपके द्वारा निर्दिष्ट डेटाबेस कनेक्शन विवरण में समस्या थी, कृपया वापस जाएँ और जाँचें कि वे सही हैं।',
+'ErrorDatabaseVersion'			=> 'डेटाबेस संस्करण %1 है लेकिन कम से कम %2 की आवश्यकता है।',
+'To'							=> 'से',
+'AlterTable'					=> '%1 तालिका को बदलना',
+'InsertRecord'					=> '%1 तालिका में रिकॉर्ड डालना',
+'RenameTable'					=> '%1 तालिका का नाम बदलना',
+'UpdateTable'					=> '%1 तालिका को अपडेट करना',
+'InstallDefaultData'			=> 'डिफ़ॉल्ट डेटा जोड़ना',
+'InstallPagesBegin'				=> 'डिफ़ॉल्ट पृष्ठ जोड़ना शुरू',
+'InstallPagesEnd'				=> 'डिफ़ॉल्ट पृष्ठ जोड़ना समाप्त',
+'InstallSystemAccount'			=> '
+System
+ उपयोगकर्ता जोड़ना',
+'InstallDeletedAccount'			=> '
+Deleted
+ उपयोगकर्ता जोड़ना',
+'InstallAdmin'					=> 'एडमिन उपयोगकर्ता जोड़ना',
+'InstallAdminSetting'			=> 'एडमिन उपयोगकर्ता प्राथमिकताएँ जोड़ना',
+'InstallAdminGroup'				=> 'एडमिन समूह जोड़ना',
+'InstallAdminGroupMember'		=> 'एडमिन समूह सदस्य जोड़ना',
+'InstallEverybodyGroup'			=> 'Everybody समूह जोड़ना',
+'InstallModeratorGroup'			=> 'मॉडरेटर समूह जोड़ना',
+'InstallReviewerGroup'			=> 'रिव्यूअर समूह जोड़ना',
+'InstallLogoImage'				=> 'लोगो छवि जोड़ना',
+'LogoImage'						=> 'लोगो छवि',
+'InstallConfigValues'			=> 'कॉन्फ़िगरेशन मान जोड़ना',
+'ConfigValues'					=> 'कॉन्फ़िगरेशन मान',
+'ErrorInsertPage'				=> '%1 पृष्ठ डालने में त्रुटि',
+'ErrorInsertPagePermission'		=> '%1 पृष्ठ के लिए अनुमति सेट करने में त्रुटि',
+'ErrorInsertDefaultMenuItem'	=> '%1 पृष्ठ को डिफ़ॉल्ट मेनू आइटम के रूप में सेट करने में त्रुटि',
+'ErrorPageAlreadyExists'		=> '%1 पृष्ठ पहले से मौजूद है',
+'ErrorAlterTable'				=> '%1 तालिका को बदलने में त्रुटि',
+'ErrorInsertRecord'				=> '%1 तालिका में रिकॉर्ड डालने में त्रुटि',
+'ErrorRenameTable'				=> '%1 तालिका का नाम बदलने में त्रुटि',
+'ErrorUpdatingTable'			=> '%1 तालिका को अपडेट करने में त्रुटि',
+'CreatingTable'					=> '%1 तालिका बनाना',
+'CreatingIndex'					=> '%1 इंडेक्स बनाना',
+'CreatingTrigger'				=> '%1 ट्रिगर बनाना',
+'ErrorAlreadyExists'			=> '%1 पहले से मौजूद है',
+'ErrorCreatingTable'			=> '%1 तालिका बनाने में त्रुटि, क्या यह पहले से मौजूद है?',
+'ErrorCreatingIndex'			=> '%1 इंडेक्स बनाने में त्रुटि, क्या यह पहले से मौजूद है?',
+'ErrorCreatingTrigger'			=> '%1 ट्रिगर बनाने में त्रुटि, क्या यह पहले से मौजूद है?',
+'DeletingTables'				=> 'तालिकाएँ हटाना',
+'DeletingTablesEnd'				=> 'तालिकाएँ हटाना समाप्त',
+'ErrorDeletingTable'			=> '%1 तालिका हटाने में त्रुटि। सबसे संभावित कारण यह है कि तालिका मौजूद नहीं है, जिस स्थिति में आप इस चेतावनी को अनदेखा कर सकते हैं।',
+'DeletingTable'					=> '%1 तालिका हटाना',
+'NextStep'						=> 'अगले चरण में, इंस्टॉलर अद्यतन कॉन्फ़िगरेशन फ़ाइल %1 लिखने का प्रयास करेगा। कृपया सुनिश्चित करें कि वेब सर्वर के पास फ़ाइल में लिखने की अनुमति है, अन्यथा आपको इसे मैन्युअल रूप से संपादित करना होगा। विवरण के लिए एक बार फिर WackoWiki:Doc/English/Installation देखें।',
 
 /*
    Write Config Page
 */
-'write-config'					=> 'Write Config File',
-'FinalStep'						=> 'Final Step',
-'Writing'						=> 'Writing Configuration File',
-'RemovingWritePrivilege'		=> 'Removing Write Privilege',
-'InstallationComplete'			=> 'Installation Complete',
-'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
-'SecurityConsiderations'		=> 'Security Considerations',
-'SecurityRisk'					=> 'You are advised to remove write access to %1 now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
-'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2.<br><br> Don\'t forget to remove write access again later, i.e., <br>%3.<br><br>',
-'ErrorPrivilegesInstall'		=> 'If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
-'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
-'WrittenAt'						=> 'written at ',
-'DontChange'					=> 'do not change wacko_version manually!',
-'ConfigDescription'				=> 'detailed description: https://wackowiki.org/doc/Doc/English/Configuration',
-'TryAgain'						=> 'Try Again',
+'write-config'					=> 'कॉन्फ़िगरेशन फ़ाइल लिखें',
+'FinalStep'						=> 'अंतिम चरण',
+'Writing'						=> 'कॉन्फ़िगरेशन फ़ाइल लिखना',
+'RemovingWritePrivilege'		=> 'लिखने की अनुमति हटाना',
+'InstallationComplete'			=> 'स्थापना पूर्ण',
+'ThatsAll'						=> 'बस! अब आप अपनी WackoWiki साइट देख सकते हैं।',
+'SecurityConsiderations'		=> 'सुरक्षा संबंधी विचार',
+'SecurityRisk'					=> 'आपको सलाह दी जाती है कि %1 में लिखने की अनुमति अब हटा दें क्योंकि इसे लिखा जा चुका है। फ़ाइल को लिखने योग्य छोड़ना सुरक्षा जोखिम हो सकता है!
+
+अर्थात %2',
+'RemoveSetupDirectory'			=> 'स्थापना प्रक्रिया पूरी होने के बाद अब आपको %1 डायरेक्टरी हटा देनी चाहिए।',
+'ErrorGivePrivileges'			=> 'कॉन्फ़िगरेशन फ़ाइल %1 नहीं लिखी जा सकी। आपको अपने वेब सर्वर को अस्थायी रूप से WackoWiki डायरेक्टरी या %1 नामक एक खाली फ़ाइल में लिखने की अनुमति देनी होगी
+
+%2.
+
+
+बाद में लिखने की अनुमति फिर से हटा देना न भूलें, अर्थात,
+
+%3.
+
+',
+'ErrorPrivilegesInstall'		=> 'यदि किसी कारण से आप ऐसा नहीं कर सकते, तो आपको नीचे दिए गए टेक्स्ट को एक नई फ़ाइल में कॉपी करना होगा और इसे WackoWiki डायरेक्टरी में %1 के रूप में सहेजना/अपलोड करना होगा। एक बार ऐसा करने के बाद, आपकी WackoWiki साइट काम करनी चाहिए। यदि नहीं, तो कृपया WackoWiki:Doc/English/Installation देखें।',
+'ErrorPrivilegesUpgrade'		=> 'एक बार ऐसा करने के बाद, आपकी WackoWiki साइट काम करनी चाहिए। यदि नहीं, तो कृपया WackoWiki:Doc/English/Upgrade देखें।',
+'WrittenAt'						=> 'यहाँ लिखा गया ',
+'DontChange'					=> 'wacko_version को मैन्युअल रूप से न बदलें!',
+'ConfigDescription'				=> 'विस्तृत विवरण: https://wackowiki.org/doc/Doc/English/Configuration',
+'TryAgain'						=> 'पुनः प्रयास करें',
 
 ];
