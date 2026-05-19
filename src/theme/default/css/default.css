@@ -1392,12 +1392,11 @@ td.file- {
 }
 
 .preview {
-	margin: .8em 2px 20px;
+	margin: .8em 2px 5px;
 	padding: 10px;
 	border: red 2px solid;
 	display: table;
 	width: 98%;
-	float: left;
 }
 
 p.preview {
