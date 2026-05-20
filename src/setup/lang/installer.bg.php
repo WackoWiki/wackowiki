@@ -41,21 +41,21 @@ $lang = [
    Generic Page Text
 */
 'TitleInstallation'				=> 'Инсталация на WackoWiki',
-'TitleUpdate'					=> 'WackoWiki Update',
-'Continue'						=> 'Продължение',
-'Back'							=> 'Обратно',
-'Recommended'					=> 'препоръчва',
-'InvalidAction'					=> 'Invalid action',
+'TitleUpdate'					=> 'Актуализация на WackoWiki',
+'Continue'						=> 'Продължи',
+'Back'							=> 'Назад',
+'Recommended'					=> 'препоръчително',
+'InvalidAction'					=> 'Невалидно действие',
 
 /*
    Locking Check
  */
-'LockAuthorization'				=> 'Authorization',
-'LockAuthorizationInfo'			=> 'Моля, въведете паролата, която сте запазили във файла %1.',
+'LockAuthorization'				=> 'Оторизация',
+'LockAuthorizationInfo'			=> 'Моля, въведете паролата, която сте задали във файла %1.',
 'LockPassword'					=> 'Парола:',
-'LockLogin'						=> 'Влизане',
+'LockLogin'						=> 'Вход',
 'LockPasswordInvalid'			=> 'Невалидна парола.',
-'LockedTryLater'				=> 'Този сайт в момента се обновява. Моля, опитайте отново по-късно.',
+'LockedTryLater'				=> 'Този сайт в момента се актуализира. Моля, опитайте отново по-късно.',
 'EmptyAuthFile'					=> 'Липсващ или празен файл %1. Моля, създайте файла и задайте парола в него.',
 
 
@@ -64,184 +64,255 @@ $lang = [
 */
 'lang'							=> 'Езикови настройки',
 'PleaseUpgradeToR6'				=> 'Използвате стара версия на WackoWiki %1. За да актуализирате до тази нова версия на WackoWiki, първо трябва да актуализирате инсталацията си до %2.',
-'UpgradeFromWacko'				=> 'Добре дошли в WackoWiki, изглежда, че преминавате от WackoWiki %1 към %2.  Следващите няколко страници ще ви преведат през процеса на обновяване.',
-'FreshInstall'					=> 'Добре дошли в WackoWiki, предстои ви да инсталирате WackoWiki %1.  Следващите няколко страници ще ви преведат през процеса на инсталиране.',
-'PleaseBackup'					=> 'Моля, съхранете си копие на базата данни (БД) от, конфигурационния файл и другите, променени от вас файлове (например,  теми),  докато още НЕ Е КЪСНО!',
-'LangDesc'						=> 'Изберете език. Той ще се използува за инсталацията, а също и ще стане език по подразбиране на новия WackoWiki.',
+'UpgradeFromWacko'				=> 'Добре дошли в WackoWiki! Изглежда, че актуализирате от WackoWiki %1 към %2. Следващите няколко страници ще ви преведат през процеса на актуализация.',
+'FreshInstall'					=> 'Добре дошли в WackoWiki! Предстои ви нова инсталация на WackoWiki %1. Следващите няколко страници ще ви преведат през процеса на инсталиране.',
+'PleaseBackup'					=> 'Моля, направете резервно копие на вашата база данни, конфигурационния файл и всички други файлове, които сте променили (например теми), ПРЕДИ да продължите!',
+'LangDesc'						=> 'Изберете език. Той ще се използва по време на инсталацията и ще бъде зададен като език по подразбиране за новия ви WackoWiki.',
 
 /*
    System Requirements Page
 */
 'version-check'					=> 'Системни изисквания',
-'PhpVersion'					=> 'PHP Version',
-'PhpDetected'					=> 'Detected PHP',
-'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
-'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
+'PhpVersion'					=> 'Версия на PHP',
+'PhpDetected'					=> 'Открита PHP версия',
+'ModRewrite'					=> 'Apache Rewrite Extension (по избор)',
+'ModRewriteInstalled'			=> 'Инсталирано ли е Rewrite Extension (mod_rewrite)?',
 'Database'						=> 'База данни',
-'PhpExtensions'					=> 'PHP Extensions',
+'PhpExtensions'					=> 'PHP разширения',
 'Permissions'					=> 'Права',
-'ReadyToInstall'				=> 'Ready to Install?',
+'ReadyToInstall'				=> 'Готови ли сте за инсталация?',
 'Requirements'					=> 'Вашият сървър трябва да отговаря на изброените по-долу изисквания.',
 'OK'							=> 'OK',
 'Problem'						=> 'Проблем',
-'Example'						=> 'Example',
+'Example'						=> 'Пример',
 'NotePhpExtensions'				=> '',
-'ErrorPhpExtensions'			=> 'Изглежда, че във вашата PHP инсталация липсват отбелязаните PHP разширения, които се изискват от WackoWiki. ',
-'PcreWithoutUtf8'				=> 'Модулът PCRE на PHP изглежда е компилиран без поддръжка на PCRE_UTF8.',
-'NotePermissions'				=> 'Програмата за инсталиране ще опита да запише настройките във файл %1, разположен в главната директория, където е WackoWiki. За да стане това, този файл трябва да е достъпен за запис чрез системата сървър/скрипт! За да няма проблеми, трябва сега временно да се променят правата за достъп до (мястото на) този файл.<br><br>Вж. <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
-'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion'			=> 'The PHP version must be greater than %1. Your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
-'Ready'							=> 'Поздравления, изглежда, че вашият сървър може да работи с WackoWiki. Следващите няколко страници ще ви преведат през процеса на конфигуриране.',
+'ErrorPhpExtensions'			=> 'Изглежда, че във вашата PHP инсталация липсват някои от необходимите PHP разширения за WackoWiki.',
+'PcreWithoutUtf8'				=> 'PHP PCRE модулът изглежда е компилиран без поддръжка на PCRE_UTF8.',
+'NotePermissions'				=> 'Инсталационната програма ще се опита да запише конфигурационните настройки във файла %1, разположен в основната директория на WackoWiki. За да стане това, този файл трябва да е достъпен за запис от сървърния скрипт! За да избегнете проблеми, временно променете правата за достъп до този файл.
+
+Вижте WackoWiki:Doc/English/Installation.',
+'ErrorPermissions'				=> 'Изглежда, че инсталаторът не може автоматично да зададе необходимите права за достъп на файловете за правилното функциониране на WackoWiki. По-късно в процеса на инсталация ще бъдете подканени ръчно да конфигурирате необходимите права за достъп на вашия сървър.',
+'ErrorMinPhpVersion'			=> 'PHP версията трябва да е по-висока от %1. Вашият сървър изглежда използва по-стара версия. Трябва да актуализирате до по-нова PHP версия за правилното функциониране на WackoWiki.',
+'Ready'							=> 'Поздравления! Изглежда, че вашият сървър може да работи с WackoWiki. Следващите няколко страници ще ви преведат през процеса на конфигуриране.',
 
 /*
    Site Config Page
 */
 'config-site'					=> 'Настройки на сайта',
-'SiteName'						=> 'Посочете името на УакоУики',
-'SiteNameDesc'					=> 'Име на вашия Wiki.',
-'SiteNameDefault'				=> 'МоетоУики',
-'HomePage'						=> 'Главна страница',
-'HomePageDesc'					=> 'Главна страница на WackoWiki.  Трябва да е  с <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">УикиИме</a>.',
-'HomePageDefault'				=> 'HomePage',
-'MultiLang'						=> '«Многоезичен» режим',
-'MultiLangDesc'					=> 'Многоезичен режим, позволяващ работа на няколко езика. Ако е включен, инсталаторът ще инициализира елементи от менюто на няколко различни езика.',
-'AllowedLang'					=> 'Allowed Languages',
-'AllowedLangDesc'				=> 'Препоръчително е да изберете само набора от езици, които искате да използвате, в противен случай се избират всички езици.',
-'AclMode'						=> 'Настройки на ACL по подразбиране',
+'SiteName'						=> 'Име на сайта',
+'SiteNameDesc'					=> 'Името на вашия Wiki.',
+'SiteNameDefault'				=> 'МоятWiki',
+'HomePage'						=> 'Начална страница',
+'HomePageDesc'					=> 'Началната страница на WackoWiki. Трябва да е във формат УикиИме.',
+'HomePageDefault'				=> 'НачалнаСтраница',
+'MultiLang'						=> 'Многоезичен режим',
+'MultiLangDesc'					=> 'Многоезичният режим позволява работа на няколко езика. Ако е включен, инсталаторът ще инициализира елементите на менюто на няколко различни езика.',
+'AllowedLang'					=> 'Разрешени езици',
+'AllowedLangDesc'				=> 'Препоръчително е да изберете само езиците, които възнамерявате да използвате, в противен случай ще бъдат избрани всички налични езици.',
+'AclMode'						=> 'Режим на ACL по подразбиране',
 'AclModeDesc'					=> '',
-'PublicWiki'					=> 'Public Wiki (четете за всички, пишете и коментирайте за регистрирани потребители)',
-'PrivateWiki'					=> 'Частно Wiki (четене, писане, коментар само за регистрирани потребители)',
-'Admin'							=> 'Име',
-'AdminDesc'						=> 'Изберете име. Нещо от тип <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (без кирилица).',
-'NameAlphanumOnly'				=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго и да използва само alphanumeric.',
-'NameCamelCaseOnly'				=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго and WikiName formatted.',
-'Password'						=> 'Име Парола',
-'PasswordDesc'					=> 'Изберете парола ( 9 и повече символа )',
-'PasswordConfirm'				=> 'Подтвърждение на паролата:',
-'Mail'							=> 'Admin Email Address',
-'MailDesc'						=> 'Адрес на електронната поща (email) на администратора.',
+'PublicWiki'					=> 'Публичен Wiki (четене за всички, писане и коментиране само за регистрирани потребители)',
+'PrivateWiki'					=> 'Частен Wiki (четене, писане и коментиране само за регистрирани потребители)',
+'Admin'							=> 'Администратор',
+'AdminDesc'						=> 'Изберете потребителско име във формат УикиИме (без кирилица).',
+'NameAlphanumOnly'				=> 'Потребителското име трябва да е между %1 и %2 символа и да съдържа само буквено-цифрови символи.',
+'NameCamelCaseOnly'				=> 'Потребителското име трябва да е между %1 и %2 символа и да е във формат УикиИме.',
+'Password'						=> 'Парола',
+'PasswordDesc'					=> 'Изберете парола (поне 9 символа)',
+'PasswordConfirm'				=> 'Потвърдете паролата:',
+'Mail'							=> 'Имейл адрес на администратора',
+'MailDesc'						=> 'Имейл адрес на администратора.',
 'Base'							=> 'Базов URL',
-'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash, i.e.',
-'Rewrite'						=> 'Rewrite-режим',
-'RewriteDesc'					=> 'Rewrite-режим трябва да е включен, ако ползвате mod_rewrite.',
+'BaseDesc'						=> 'Базовият URL адрес на вашия WackoWiki сайт. Към него се добавят имената на страниците, така че ако използвате mod_rewrite, адресът трябва да завършва с наклонена черта, например:',
+'Rewrite'						=> 'Rewrite режим',
+'RewriteDesc'					=> 'Rewrite режимът трябва да е включен, ако използвате mod_rewrite.',
 'Enabled'						=> 'Включен:',
-'ErrorAdminEmail'				=> 'Въведете истински адрес!',
-'ErrorAdminPasswordMismatch'	=> 'Паролата на администратора не съвпадна нещо!',
-'ErrorAdminPasswordShort'		=> 'The admin много е кратка, минималната дължина е %1 символа!',
-'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
+'ErrorAdminEmail'				=> 'Моля, въведете валиден имейл адрес!',
+'ErrorAdminPasswordMismatch'	=> 'Паролите на администратора не съвпадат!',
+'ErrorAdminPasswordShort'		=> 'Паролата на администратора е твърде къса, минималната дължина е %1 символа!',
+'ModRewriteStatusUnknown'		=> 'Инсталаторът не може да провери дали mod_rewrite е включен, но това не означава, че е изключен',
 
 /*
    Database Config Page
 */
-'config-database'				=> 'Настройка на БД',
-'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use.',
-'DbSqlMode'						=> 'SQL mode',
-'DbSqlModeDesc'					=> 'The SQL mode you want use.',
-'DbVendor'						=> 'Vendor',
-'DbVendorDesc'					=> 'The database vendor you use.',
-'DbCharset'						=> 'Charset',
-'DbCharsetDesc'					=> 'The database charset you want to use.',
-'DbEngine'						=> 'Engine',
-'DbEngineDesc'					=> 'The database engine you want to use.',
-'DbHost'						=> 'Име (hostname) на БД',
-'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
-'DbPort'						=> 'Port (Optional)',
-'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
-'DbName'						=> 'БД',
-'DbNameDesc'					=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
+'config-database'				=> 'Настройка на базата данни',
+'DbDriver'						=> 'Драйвър',
+'DbDriverDesc'					=> 'Драйвърът за база данни, който искате да използвате.',
+'DbSqlMode'						=> 'SQL режим',
+'DbSqlModeDesc'					=> 'SQL режимът, който искате да използвате.',
+'DbVendor'						=> 'Доставчик',
+'DbVendorDesc'					=> 'Доставчикът на база данни, който използвате.',
+'DbCharset'						=> 'Кодировка',
+'DbCharsetDesc'					=> 'Кодировката на базата данни, която искате да използвате.',
+'DbEngine'						=> 'Движък',
+'DbEngineDesc'					=> 'Движъкът на базата данни, който искате да използвате.',
+'DbHost'						=> 'Хост на базата данни',
+'DbHostDesc'					=> 'Хостът, на който работи вашият сървър за база данни. Обикновено това е
+127.0.0.1
+ или
+localhost
+ (т.е. същата машина, на която е вашият сайт с WackoWiki).',
+'DbPort'						=> 'Порт (по избор)',
+'DbPortDesc'					=> 'Номерът на порта, през който е достъпен вашият сървър за база данни. Оставете празно, за да използвате порта по подразбиране.',
+'DbName'						=> 'База данни',
+'DbNameDesc'					=> 'Базата данни, която WackoWiki трябва да използва. Тази база данни трябва да съществува, преди да продължите!',
 'DbNameSqliteDesc'				=> 'Директорията с данни и името на файла, които SQLite трябва да използва за WackoWiki.',
-'DbNameSqliteHelp'				=> 'SQLite съхранява всички данни в един файл.<br><br>Директорията, която предоставяте, трябва да може да се записва от уеб сървъра по време на инсталирането.<br><br>Тя <strong>не трябва</strong> да е достъпна чрез уеб. <br><br>Инсталаторът ще запише файл <code>.htaccess</code> заедно с него, но ако това не успее, някой може да получи достъп до вашата необработена база данни.<br>Това включва необработени потребителски данни (имейл адреси, хеширани пароли), както и защитени страници и други ограничени данни в уикито.<br><br>Обмислете да поставите базата данни на друго място, например в <code>/var/lib/wackowiki/yourwiki</code>.',
-'DbUser'						=> 'Име (username)',
-'DbUserDesc'					=> 'Name of the user used to connect to your database.',
-'DbPassword'					=> 'Паролa (password)',
-'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
+'DbNameSqliteHelp'				=> 'SQLite съхранява всички данни в един файл.
+
+Директорията, която посочвате, трябва да може да се записва от уеб сървъра по време на инсталацията.
+
+Тя не трябва да е достъпна чрез уеб.
+
+Инсталаторът ще запише файл
+.htaccess
+ заедно с нея, но ако това не успее, някой може да получи достъп до вашата необработена база данни.
+Това включва необработени потребителски данни (имейл адреси, хеширани пароли), както и защитени страници и други ограничени данни в уикито.
+
+Обмислете да поставите базата данни на друго място, например в
+/var/lib/wackowiki/вашетоуики
+.',
+'DbUser'						=> 'Потребителско име',
+'DbUserDesc'					=> 'Името на потребителя, използвано за свързване с вашата база данни.',
+'DbPassword'					=> 'Парола',
+'DbPasswordDesc'				=> 'Паролата на потребителя, използван за свързване с вашата база данни.',
 'Prefix'						=> 'Префикс на таблиците',
-'PrefixDesc'					=> 'Префикс на таблиците на Wacko. Това дава възможност за няколко WackoWiki на една БД, само чрез различни префикси (e.g. wacko_).',
-'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
-'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
+'PrefixDesc'					=> 'Префикс на таблиците на WackoWiki. Това позволява да имате няколко WackoWiki инсталации в една база данни само чрез използване на различни префикси (напр. wacko_).',
+'ErrorNoDbDriverDetected'		=> 'Не е открит драйвър за база данни. Моля, активирайте или mysqli, или pdo_mysql разширението във вашия php.ini файл.',
+'ErrorNoDbDriverSelected'		=> 'Не е избран драйвър за база данни. Моля, изберете един от списъка.',
 'DeleteTables'					=> 'Изтриване на съществуващи таблици?',
-'DeleteTablesDesc'				=> 'ВНИМАНИЕ! Ако продължите с тази опция, всички текущи данни за уикито ще бъдат изтрити от базата данни. Това не може да бъде отменено, освен ако не възстановите ръчно данните от резервно копие.',
-'ConfirmTableDeletion'			=> 'Сигурни ли сте, че искате да изтриете всички текущи уикитаблици?',
+'DeleteTablesDesc'				=> 'ВНИМАНИЕ! Ако продължите с тази опция, всички текущи данни на уикито ще бъдат изтрити от базата данни. Това не може да бъде отменено освен ако не възстановите ръчно данните от резервно копие.',
+'ConfirmTableDeletion'			=> 'Сигурни ли сте, че искате да изтриете всички текущи таблици на уикито?',
 
 /*
    Database Installation Page
 */
-'install-database'				=> 'Database Installation',
-'TestingConfiguration'			=> 'Тест на настройките',
-'TestConnectionString'			=> 'Проверка на връзката с БД',
-'TestDatabaseExists'			=> 'Checking if the database you specified exists',
-'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
+'install-database'				=> 'Инсталация на базата данни',
+'TestingConfiguration'			=> 'Тестване на настройките',
+'TestConnectionString'			=> 'Проверка на връзката с базата данни',
+'TestDatabaseExists'			=> 'Проверка дали посочената база данни съществува',
+'TestDatabaseVersion'			=> 'Проверка на минималните изисквания за версия на базата данни',
 'SqliteFileExtensionError'		=> 'Моля, използвайте едно от следните разширения на файловете: db, sdb, sqlite.',
-'SqliteParentUnwritableGroup'	=> 'Директорията за данни <code>%1</code> не може да бъде създадена, тъй като уеб сървърът няма права за писане в родителската директория <code>%2</code>.<br><br>Инсталаторът разпознава потребителското име, с което работи уеб сървърът.<br>Уверете се, че той притежава права за писане в директорията <code>%3</code> преди да продължите.<br>В Unix/Линукс системи можете да използвате:<br><br><pre>cd %2<br>mkdir %3<br>chgrp %4 %3<br>chmod g+w %3</pre>',
-'SqliteParentUnwritableNogroup'	=> 'Директорията за данни <code>%1</code> не може да бъде създадена, тъй като уеб сървърът няма права за писане в родителската директория <code>%2</code>.<br><br>Инсталаторът не може да определи потребителското име, с което работи уеб сървърът.<br>Уверете се, че в директория <code>%3</code> може да бъде писано от уеб сървъра (или от други потребители!) преди да продължите.<br>На Unix/Линукс системи можете да използвате:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
-'SqliteMkdirError'				=> 'Грешка при създаване на директорията за данни <code>%1</code>.<br>Проверете местоположението ѝ и опитайте отново.',
-'SqliteDirUnwritable'			=> 'Уеб сървърът няма права за писане в директория <code>%1</code>.<br>Променете правата му така, че да може да пише в нея, и опитайте отново.',
-'SqliteReadonly'				=> 'Файлът <code>%1</code> няма права за писане.',
-'SqliteCantCreateDb'			=> 'Файлът за базата от данни <code>%1</code> не може да бъде създаден.',
-'InstallTables'					=> 'Installing Tables',
-'ErrorDbConnection'				=> 'There was a problem with the database connection details you specified, please go back and check they are correct.',
-'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',
-'To'							=> '->',
-'AlterTable'					=> 'Altering %1 table',
-'InsertRecord'					=> 'Inserting Record into %1 table',
-'RenameTable'					=> 'Renaming %1 table',
-'UpdateTable'					=> 'Updating %1 table',
-'InstallDefaultData'			=> 'Adding Default Data',
-'InstallPagesBegin'				=> 'Adding Default Pages',
-'InstallPagesEnd'				=> 'Finished Adding Default Pages',
-'InstallSystemAccount'			=> 'Adding <code>System</code> User',
-'InstallDeletedAccount'			=> 'Adding <code>Deleted</code> User',
-'InstallAdmin'					=> 'Добавяме административен потребител',
-'InstallAdminSetting'			=> 'Добавяме административен потребител',
-'InstallAdminGroup'				=> 'Adding Admins Group',
-'InstallAdminGroupMember'		=> 'Adding Admins Group Member',
-'InstallEverybodyGroup'			=> 'Adding Everybody Group',
-'InstallModeratorGroup'			=> 'Adding Moderator Group',
-'InstallReviewerGroup'			=> 'Adding Reviewer Group',
-'InstallLogoImage'				=> 'Adding Logo Image',
-'LogoImage'						=> 'Logo image',
-'InstallConfigValues'			=> 'Adding Config Values',
-'ConfigValues'					=> 'Config Values',
-'ErrorInsertPage'				=> 'Error inserting %1 page',
-'ErrorInsertPagePermission'		=> 'Error setting permission for %1 page',
-'ErrorInsertDefaultMenuItem'	=> 'Error setting page %1 as default menu item',
-'ErrorPageAlreadyExists'		=> 'The %1 page already exists',
-'ErrorAlterTable'				=> 'Error altering %1 table',
-'ErrorInsertRecord'				=> 'Error Inserting Record into %1 table',
-'ErrorRenameTable'				=> 'Error renaming %1 table',
-'ErrorUpdatingTable'			=> 'Error updating %1 table',
-'CreatingTable'					=> 'Създаваме таблица %1',
-'CreatingIndex'					=> 'Creating %1 index',
-'CreatingTrigger'				=> 'Creating %1 trigger',
-'ErrorAlreadyExists'			=> 'The %1 already exists',
-'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
-'ErrorCreatingIndex'			=> 'Error creating %1 index, does it already exist?',
-'ErrorCreatingTrigger'			=> 'Error creating %1 trigger, does it already exist?',
-'DeletingTables'				=> 'Deleting Tables',
-'DeletingTablesEnd'				=> 'Finished Deleting Tables',
-'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
-'DeletingTable'					=> 'Deleting %1 table',
-'NextStep'						=> 'На следващата стъпка, инсталаторът ще опита да запише обновения конфигурационния файл, %1. Кофигурационният файл %1 се  разполага в главната директория, където е WackoWiki. За да стане промяната, този файл трябва да е достъпен за запис чрез системата сървър/скрипт! За да няма проблеми, трябва сега временно да се променят правата за достъп до този файл. В противен случай ще трябва да допишете промените на ръка. Отново, погледнете за подробности, малко е на английски, но все пак <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
+'SqliteParentUnwritableGroup'	=> 'Директорията за данни
+%1
+ не може да бъде създадена, защото уеб сървърът няма права за писане в родителската директория
+%2
+.
+
+Инсталаторът разпознава потребителското име, с което работи уеб сървърът.
+Уверете се, че той има права за писане в директорията
+%3
+, преди да продължите.
+В Unix/Linux системи можете да използвате:
+
+cd %2
+mkdir %3
+chgrp %4 %3
+chmod g+w %3
+',
+'SqliteParentUnwritableNogroup'	=> 'Директорията за данни
+%1
+ не може да бъде създадена, защото уеб сървърът няма права за писане в родителската директория
+%2
+.
+
+Инсталаторът не може да определи потребителското име, с което работи уеб сървърът.
+Уверете се, че в директория
+%3
+ може да се пише от уеб сървъра (или от други потребители!) преди да продължите.
+В Unix/Linux системи можете да използвате:
+
+cd %2
+mkdir %3
+chmod a+w %3
+',
+'SqliteMkdirError'				=> 'Грешка при създаване на директорията за данни
+%1
+.
+Проверете местоположението ѝ и опитайте отново.',
+'SqliteDirUnwritable'			=> 'Уеб сървърът няма права за писане в директория
+%1
+.
+Променете правата ѝ така, че да може да пише в нея и опитайте отново.',
+'SqliteReadonly'				=> 'Файлът
+%1
+ няма права за писане.',
+'SqliteCantCreateDb'			=> 'Файлът на базата данни
+%1
+ не може да бъде създаден.',
+'InstallTables'					=> 'Инсталиране на таблиците',
+'ErrorDbConnection'				=> 'Възникна проблем с детайлите за връзка с базата данни, които посочихте. Моля, върнете се назад и проверете дали са правилни.',
+'ErrorDatabaseVersion'			=> 'Версията на базата данни е %1, но се изисква поне %2.',
+'To'							=> 'към',
+'AlterTable'					=> 'Промяна на таблица %1',
+'InsertRecord'					=> 'Добавяне на запис в таблица %1',
+'RenameTable'					=> 'Преименуване на таблица %1',
+'UpdateTable'					=> 'Актуализиране на таблица %1',
+'InstallDefaultData'			=> 'Добавяне на данни по подразбиране',
+'InstallPagesBegin'				=> 'Добавяне на страници по подразбиране',
+'InstallPagesEnd'				=> 'Завършено добавянето на страници по подразбиране',
+'InstallSystemAccount'			=> 'Добавяне на потребител
+System
+',
+'InstallDeletedAccount'			=> 'Добавяне на потребител
+Deleted
+',
+'InstallAdmin'					=> 'Добавяне на администраторски потребител',
+'InstallAdminSetting'			=> 'Добавяне на администраторски потребител',
+'InstallAdminGroup'				=> 'Добавяне на групата Администратори',
+'InstallAdminGroupMember'		=> 'Добавяне на член на групата Администратори',
+'InstallEverybodyGroup'			=> 'Добавяне на групата Всички',
+'InstallModeratorGroup'			=> 'Добавяне на групата Модератори',
+'InstallReviewerGroup'			=> 'Добавяне на групата Рецензенти',
+'InstallLogoImage'				=> 'Добавяне на лого изображение',
+'LogoImage'						=> 'Лого изображение',
+'InstallConfigValues'			=> 'Добавяне на конфигурационни стойности',
+'ConfigValues'					=> 'Конфигурационни стойности',
+'ErrorInsertPage'				=> 'Грешка при добавяне на страница %1',
+'ErrorInsertPagePermission'		=> 'Грешка при задаване на разрешения за страница %1',
+'ErrorInsertDefaultMenuItem'	=> 'Грешка при задаване на страница %1 като елемент от менюто по подразбиране',
+'ErrorPageAlreadyExists'		=> 'Страницата %1 вече съществува',
+'ErrorAlterTable'				=> 'Грешка при промяна на таблица %1',
+'ErrorInsertRecord'				=> 'Грешка при добавяне на запис в таблица %1',
+'ErrorRenameTable'				=> 'Грешка при преименуване на таблица %1',
+'ErrorUpdatingTable'			=> 'Грешка при актуализиране на таблица %1',
+'CreatingTable'					=> 'Създаване на таблица %1',
+'CreatingIndex'					=> 'Създаване на индекс %1',
+'CreatingTrigger'				=> 'Създаване на тригер %1',
+'ErrorAlreadyExists'			=> '%1 вече съществува',
+'ErrorCreatingTable'			=> 'Грешка при създаване на таблица %1, дали вече съществува?',
+'ErrorCreatingIndex'			=> 'Грешка при създаване на индекс %1, дали вече съществува?',
+'ErrorCreatingTrigger'			=> 'Грешка при създаване на тригер %1, дали вече съществува?',
+'DeletingTables'				=> 'Изтриване на таблици',
+'DeletingTablesEnd'				=> 'Завършено изтриването на таблиците',
+'ErrorDeletingTable'			=> 'Грешка при изтриване на таблица %1, най-вероятната причина е, че таблицата не съществува в базата данни, в който случай можете да игнорирате това предупреждение.',
+'DeletingTable'					=> 'Изтриване на таблица %1',
+'NextStep'						=> 'На следващата стъпка инсталаторът ще се опита да запише обновения конфигурационен файл %1. Конфигурационният файл %1 се намира в главната директория на WackoWiki. За да успее това, този файл трябва да е достъпен за запис от системата на сървъра/скрипта! За да избегнете проблеми, временно променете правата за достъп до този файл. В противен случай ще трябва да добавите промените ръчно. За повече подробности вижте WackoWiki:Doc/English/Installation.',
 
 /*
    Write Config Page
 */
-'write-config'					=> 'Write Config File',
-'FinalStep'						=> 'Final Step',
-'Writing'						=> 'Запис на конфигурационния файл',
-'RemovingWritePrivilege'		=> 'Removing Write Privilege',
-'InstallationComplete'			=> 'Installation Complete',
-'ThatsAll'						=> 'Ура! Изглежда успешно. Сега можете <a href="%1">да видите своя сайт WackoWiki</a>.',
-'SecurityConsiderations'		=> 'Security Considerations',
-'SecurityRisk'					=> 'Не забравяйте накрая да промените обратно правата за достъп на %1 на сървъра. Въпрос на "сигурност"!<br>i.e. %2',
-'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
-'ErrorGivePrivileges'			=> 'Конфигурационния файл %1 не може да се запише. Трябва сега временно да се променят правата за достъп до (мястото на) този файл или да се направи празен файл %1<br>%2<br><br>; не забравяйте накрая да забраните обратно правата, т.e. <br>%3.<br><br>',
-'ErrorPrivilegesInstall'		=> 'Ако нещо не става, ще трябва да копирате и запишете следващия текст в нов празен файл на вашия компютър и после да го прехвърлите с име %1 на сървъра в главната директория на Wacko. При проблеми, вижте (англ.) <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> или (руски) <a href="https://wackowiki.org/doc/Doc/Русский/Инсталляция">WackoWiki:Doc/Русский/Инсталляция</a>',
-'ErrorPrivilegesUpgrade'		=> 'Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Upgrade" target="_blank">WackoWiki:Doc/English/Upgrade</a>',
-'WrittenAt'						=> 'записан ',
+'write-config'					=> 'Запис на конфигурационния файл',
+'FinalStep'						=> 'Последна стъпка',
+'Writing'						=> 'Записване на конфигурационния файл',
+'RemovingWritePrivilege'		=> 'Премахване на правото за запис',
+'InstallationComplete'			=> 'Инсталацията е завършена',
+'ThatsAll'						=> 'Успех! Изглежда всичко е готово. Сега можете да разгледате вашия WackoWiki сайт.',
+'SecurityConsiderations'		=> 'Съображения за сигурност',
+'SecurityRisk'					=> 'Не забравяйте накрая да промените обратно правата за достъп на %1 на сървъра. Това е въпрос на сигурност!
+Например: %2',
+'RemoveSetupDirectory'			=> 'Трябва да изтриете директорията %1 сега, след като процесът на инсталация е завършен.',
+'ErrorGivePrivileges'			=> 'Конфигурационният файл %1 не може да бъде записан. Трябва временно да промените правата за достъп до този файл или да създадете празен файл %1
+%2
+
+Не забравяйте накрая да възстановите правата, например:
+%3.
+
+',
+'ErrorPrivilegesInstall'		=> 'Ако нещо не се получава, ще трябва да копирате и запишете следващия текст в нов празен файл на вашия компютър и след това да го качите със име %1 на сървъра в главната директория на Wacko. При проблеми вижте WackoWiki:Doc/English/Installation или WackoWiki:Doc/Русский/Инсталляция.',
+'ErrorPrivilegesUpgrade'		=> 'След като направите това, вашият WackoWiki сайт трябва да работи. Ако не, моля посетете WackoWiki:Doc/English/Upgrade.',
+'WrittenAt'						=> 'записано в ',
 'DontChange'					=> 'не променяйте wacko_version ръчно!',
-'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
-'TryAgain'						=> 'Нов опит',
+'ConfigDescription'				=> 'подробно описание на https://wackowiki.org/doc/Doc/English/Configuration',
+'TryAgain'						=> 'Опитайте отново',
 
 ];
