@@ -1,21 +1,39 @@
 
 # WackoWiki Installation
 
-Unpack/upload the distribution files into a directory that can be accessed via the web.
-Then go to the corresponding URL. A web-based installer will walk you through the rest.
+## Recommended Installation Method
 
-Example:
+1. Go to the [WackoWiki Releases page](https://github.com/WackoWiki/wackowiki/releases)
+2. Download the latest **full distribution archive**:
+   - `wackowiki-x.y.z.zip`  (recommended for most users)
+   - or `wackowiki-x.y.z.tar.gz`
+3. Unpack the archive into a directory accessible via the web (e.g. `wacko/`).
+4. Open that directory in your browser (e.g. `https://www.example.com/wacko/`).
+5. Follow the web-based installer.
 
-If your website, say, `https://www.example.com`, is mapped to the directory `/home/jdoe/www/`,
-and you place the Wacko distribution files into `/home/jdoe/www/wacko/`, you should go to
-`https://www.example.com/wacko/`.
+> **Note**: The release archives include all required dependencies (`vendor/` folder), so you don't need to run Composer.
 
-Note that WackoWiki distributions normally unpack into directories that include the version
-in their name; you'll probably want to rename those to just `wacko` -- or, if you're
-on a unixoid system, set up a symbolic link.
+## Installing from Source (Git)
 
+If you prefer to install from Git:
 
-## Permissions:
+```bash
+git clone https://github.com/WackoWiki/wackowiki.git wacko
+cd wacko/src
+php composer.phar install --no-dev --optimize-autoloader
+```
+
+Or if you have Composer installed globally:
+
+```bash
+cd wacko/src
+composer install --no-dev --optimize-autoloader
+```
+
+## Manual Setup after Unpacking
+After unpacking (or cloning) the files:
+
+### Permissions:
 
 For configuration purposes, you'll probably want to make `config/config.php` writable
 by the web server, at least temporarily.
@@ -42,19 +60,19 @@ Mandatory installer password protection
   It is imperative to set the password for the installer in the `config/lock_setup` file.
 
 
-IMPORTANT: For installing or upgrading WackoWiki, do NOT access any of the files contained
-in the `setup/` subdirectory. They're used by the web-based installer/updater, but you
-should really just access the WackoWiki directory itself, and it will (or at least should)
-work perfectly.
+### Important Notes
+
+- WackoWiki distributions (release archives) normally include the version in the folder name. Rename it to `wacko` or create a symbolic link.
+- The `vendor/` directory is **not** present when downloading the green "Code → Download ZIP" button from GitHub. Always use the **Releases** page for the full package.
+- Composer is only required if you install from Git or want to manage dependencies yourself.
+- Detailed instructions and troubleshooting are available in the [official documentation](https://wackowiki.org/doc/Doc/English/Installation).
 
 
-## Backend:
+## Backend / Admin Setup
 
-Create a Recovery-Password to access the Admin panel.
+After installation:
 
-Call the `{{admin_recovery}}` action as Admin and generate the password hash.
-Add the password hash: `'recovery_password' => 'add hash here'` in the `config/config.php` file.
-Clear the config cache with the `{{admincache}}` action.
-
-
-Detailed instructions are available at https://wackowiki.org/doc/Doc/English/Installation.
+- Log in as Administrator.
+- Create a recovery password using the `{{admin_recovery}}` action.
+- Add the generated hash to `config/config.php` under `'recovery_password'`.
+- Clear the configuration cache using `{{admincache}}`.
