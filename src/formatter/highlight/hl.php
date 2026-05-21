@@ -86,7 +86,20 @@ try {
 			->startingLine($start_line);
 	}
 
-	$tpl->text = $result->toString();
+	$highlighted	= $result->toString();
+	$token			= 'cb-' . Ut::random_token(7);
+
+	$tpl->token	= $token;
+
+	$highlighted = preg_replace(
+		'/<pre([^>]*)>/i',
+		'<pre id="' . $token . '"$1>',
+		$highlighted,
+		1
+	);
+
+	$tpl->language  = !empty($lang_input) && $lang_input !== 'text' ? strtoupper($lang_input) : '';
+	$tpl->text = $highlighted;
 
 } catch (\Throwable $e) {
 	$tpl->text = '<pre class="code-error">' . Ut::html($text) . '</pre>';

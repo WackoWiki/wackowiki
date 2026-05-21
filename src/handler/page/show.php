@@ -227,6 +227,7 @@ if ($this->has_access('read'))
 			);
 		}
 
+		$this->copy_to_clipboard();
 		$user			= $this->get_user();
 		$noid_protect	= $this->get_user_setting('noid_protect');
 

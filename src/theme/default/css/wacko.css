@@ -686,7 +686,7 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	}
 }}
 
-.phiki-code pre {
+.hl-code pre {
 	padding: 1em;
 	overflow-x: auto;
 	/* border-radius: 0.375rem; */
@@ -697,10 +697,73 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	border: 1px solid #ccc;
 }
 
-.phiki-code code {
+.hl-code code {
 	padding: unset;
 	background: unset;
 	color: unset;
+}
+
+.hl-code {
+	position: relative;
+	margin: 1.2em 0;
+	border-radius: 8px;
+	overflow: hidden;
+	border: 1px solid var(--border-color, #e5e7eb);
+	background: #f8f9fa;
+}
+
+.hl-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	/* background: #1f2937; */
+	color: #e5e7eb;
+	padding: 6px 12px;
+	font-size: 0.85rem;
+	font-family: ui-monospace, monospace;
+}
+
+.hl-language {
+	font-weight: 500;
+	color: #9ca3af;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.hl-copy-btn {
+	background: transparent;
+	border: none;
+	color: #9ca3af;
+	cursor: pointer;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: all 0.2s;
+}
+
+.hl-copy-btn:hover {
+	background: rgba(255,255,255,0.1);
+	color: #fff;
+}
+
+.hl-copy-btn.copied {
+	color: #4ade80;
+}
+
+/* Code body */
+.hl-body pre {
+	margin: 0;
+	padding: 1rem;
+	overflow-x: auto;
+	background: inherit;
+	border: none;
+	border-radius: 0;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.hl-code {
+		border-color: #374151;
+	}
 }
 
 /* Line numbers styling (if you implement them) */
