@@ -280,24 +280,22 @@ $wacko_config_defaults = [
 	'enable_system_message'			=> 1,
 
 	'wikiedit_toolbar'				=> [
-											'h2','h3','h4','h5','h6','separator',
-											'bold','italic','underline','strike','small','code','separator',
+											'h2','h3','h4','separator',
+											'bold','strike','code','separator',
 											'ul','ol','separator',
-											'center','right','justify','separator',
 											'outdent','indent','separator',
 											'quote','source','action','textred','highlight','separator',
-											'hr','signature','createlink','footnote','createtable',
+											'hr','createlink','createtable',
 											'upload-media',
 											'separator',
-											'wacko2md','md2wacko',
+											'md2wacko',
 											'separator',
-											'dark-toggle','syntax','livepreview','zenmode','fullscreen',
+											'syntax','livepreview','zenmode','fullscreen',
 											'separator',
 											'shrink','enlarge',
 											'separator',
 											'undo','redo',
-											'separator', 'search', 'about',
-											'dropdown'
+											'separator', 'search', 'about'
 										],
 
 	'enable_captcha'				=> 1,
