@@ -10,60 +10,60 @@ use Phiki\Theme\Theme;
 $lang_input = strtolower(trim($options['_default'] ?? 'text'));
 
 // 1. Static common aliases (fast lookup)
-$grammar_map = [
-	'text'			=> Grammar::Txt,
-	'txt'			=> Grammar::Txt,
-	'php'			=> Grammar::Php,
-	'javascript'	=> Grammar::Javascript,
-	'js'			=> Grammar::Javascript,
-	'css'			=> Grammar::Css,
-	'html'			=> Grammar::Html,
-	'sql'			=> Grammar::Sql,
-	'python'		=> Grammar::Python,
-	'java'			=> Grammar::Java,
-	'cpp'			=> Grammar::Cpp,
-	'c'				=> Grammar::C,
-	'json'			=> Grammar::Json,
-	'xml'			=> Grammar::Xml,
-	'bash'			=> Grammar::Shellscript,
-	'sh'			=> Grammar::Shellscript,
-	'shell'			=> Grammar::Shellscript,
-	'markdown'		=> Grammar::Markdown,
-	'md'			=> Grammar::Markdown,
-	'http'			=> Grammar::Http,
-	'diff'			=> Grammar::Diff,
-	'ini'			=> Grammar::Ini,
-	'yaml'			=> Grammar::Yaml,
-	'yml'			=> Grammar::Yaml,
-	'nginx'			=> Grammar::Nginx,
-	'docker'		=> Grammar::Docker,
-	'powershell'	=> Grammar::Powershell,
-	'rust'			=> Grammar::Rust,
-	'go'			=> Grammar::Go,
-	'ruby'			=> Grammar::Ruby,
-	'lua'			=> Grammar::Lua,
-];
+$grammar = match($lang_input) {
+	'apache', 'htaccess'    => Grammar::Apache,
+	'c++', 'cpp'            => Grammar::Cpp,
+	'csharp', 'cs', 'c#'    => Grammar::Csharp,
+	'cmake'                 => Grammar::CMake,
+	'css'                   => Grammar::Css,
+	'dart'                  => Grammar::Dart,
+	'diff'                  => Grammar::Diff,
+	'docker', 'dockerfile'  => Grammar::Docker,
+	'go', 'golang'          => Grammar::Go,
+	'html'                  => Grammar::Html,
+	'http'                  => Grammar::Http,
+	'ini'                   => Grammar::Ini,
+	'java'                  => Grammar::Java,
+	'javascript', 'js'      => Grammar::Javascript,
+	'json'                  => Grammar::Json,
+	'kotlin', 'kt'          => Grammar::Kotlin,
+	'latex', 'tex'          => Grammar::Latex,
+	'lua'                   => Grammar::Lua,
+	'makefile'              => Grammar::Makefile,
+	'markdown', 'md'        => Grammar::Markdown,
+	'nginx'                 => Grammar::Nginx,
+	'perl'                  => Grammar::Perl,
+	'php'                   => Grammar::Php,
+	'powershell', 'ps'      => Grammar::Powershell,
+	'python'                => Grammar::Python,
+	'r'                     => Grammar::R,
+	'regex', 'regexp'       => Grammar::Regex,
+	'ruby', 'rb'            => Grammar::Ruby,
+	'rust', 'rs'            => Grammar::Rust,
+	'scala'                 => Grammar::Scala,
+	'bash', 'sh', 'shell'   => Grammar::Shellscript,
+	'sql'                   => Grammar::Sql,
+	'swift'                 => Grammar::Swift,
+	'text', 'txt'           => Grammar::Txt,
+	'toml'                  => Grammar::Toml,
+	'typescript', 'ts'      => Grammar::Typescript,
+	'xml'                   => Grammar::Xml,
+	'yaml', 'yml'           => Grammar::Yaml,
+	default                 => null,
+};
 
-// Try mapped value first, then fall back to trying the name directly as string
-$grammar			= $grammar_map[$lang_input] ?? null;
-$line_numbers		= isset($options['numbers']);
-$start_line			= max(1, (int)($options['start'] ?? 1));
+$line_numbers	= isset($options['numbers']);
+$start_line		= max(1, (int)($options['start'] ?? 1));
 
 try {
 	$phiki = new Phiki();
 
-	// 2. Hybrid Logic: Map + Automatic Alias Registration
-	if (isset($grammar_map[$lang_input]))
-	{
-		$grammar = $grammar_map[$lang_input];
-	}
-	else
-	{
-		// Try to register the language name as alias (e.g. 'http', 'apache', 'typescript', etc.)
-		$grammar = null;
-
+	// 2. Try dynamic alias registration if not in static map
+	if ($grammar === null) {
 		try {
-			$phiki->alias($lang_input, $lang_input);
+			// Test if grammar exists by attempting a small highlight (cheap test)
+			$phiki->codeToHtml('// test', $lang_input, Theme::GithubDark);
+			#$phiki->alias($lang_input, $lang_input);
 			$grammar = $lang_input;
 		} catch (\Throwable $e) {
 			$grammar = Grammar::Txt;
@@ -89,7 +89,7 @@ try {
 	$highlighted	= $result->toString();
 	$token			= 'cb-' . Ut::random_token(7);
 
-	$tpl->token	= $token;
+	$tpl->token		= $token;
 
 	$highlighted = preg_replace(
 		'/<pre([^>]*)>/i',
@@ -98,8 +98,8 @@ try {
 		1
 	);
 
-	$tpl->language  = !empty($lang_input) && $lang_input !== 'text' ? strtoupper($lang_input) : '';
-	$tpl->text = $highlighted;
+	$tpl->language	= !empty($lang_input) && $lang_input !== 'text' ? strtoupper($lang_input) : '';
+	$tpl->text		= $highlighted;
 
 } catch (\Throwable $e) {
 	$tpl->text = '<pre class="code-error">' . Ut::html($text) . '</pre>';
