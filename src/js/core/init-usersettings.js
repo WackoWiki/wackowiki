@@ -1,6 +1,6 @@
 (function () {
 
-    console.log('%cUserSettings initializer loaded', 'color:#0066cc');
+    Log.log('%cUserSettings initializer loaded', 'color:#0066cc');
 
     // Toolbar Button
     function attachToolbarButton() {
@@ -16,7 +16,7 @@
         });
 
         btn._listenerAttached = true;
-        console.log('✅ Toolbar customize button initialized');
+        Log.log('Toolbar customize button initialized');
     }
 
     // Clear LocalStorage Button (Case c)
@@ -49,7 +49,7 @@
         });
 
         clearBtn._listenerAttached = true;
-        console.log('✅ Clear cache button initialized');
+        Log.log('Clear cache button initialized');
     }
 
     function init() {

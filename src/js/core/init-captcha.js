@@ -1,6 +1,6 @@
 (function() {
 
-  console.log('%cCaptcha initializer loaded', 'color:#0066cc');
+  Log.log('%cCaptcha initializer loaded', 'color:#0066cc');
 
   function initCaptchaReload() {
     const reloadBtn = document.getElementById('reload-captcha');
@@ -13,7 +13,7 @@
     });
 
     reloadBtn._listenerAttached = true;
-    console.log('✅ Captcha reload button initialized');
+    Log.log('Captcha reload button initialized');
   }
 
   // Run on DOM ready + safety net

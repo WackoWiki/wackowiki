@@ -751,7 +751,7 @@ class WikiEdit extends ProtoEdit {
     if (zenActive) document.body.classList.add('zenmode');
     if (widescreenActive) document.body.classList.add('widescreen');
 
-    console.log(`ZenMode init (${isEdit ? 'EDIT' : 'COMMENT'}): ${zenActive} | Widescreen: ${widescreenActive}`);
+    Log.log(`ZenMode init (${isEdit ? 'EDIT' : 'COMMENT'}): ${zenActive} | Widescreen: ${widescreenActive}`);
   }
 
   toggleZenMode() {
@@ -817,7 +817,7 @@ class WikiEdit extends ProtoEdit {
 
       if (!action) return;
 
-      console.log(`Delegation caught action: ${action}`);
+      Log.log(`Delegation caught action: ${action}`);
 
       // === Handle our special toggles ===
       switch (action) {

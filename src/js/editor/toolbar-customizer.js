@@ -122,7 +122,7 @@ class ToolbarCustomizer {
       if (e.target === this.currentModal) this.close();
     });
 
-    console.log('Modal listeners attached');
+    Log.log('Modal listeners attached');
   }
 
   static renderList(currentOrder) {
