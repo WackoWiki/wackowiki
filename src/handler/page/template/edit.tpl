@@ -57,6 +57,7 @@
 					data-upload-nonce="[ ' nonce ' ]"
 					required>[ ' body | pre ' ]</textarea>
 				<script[ ' db: csp_nonce ' ]>
+				document.addEventListener('DOMContentLoaded', () => {
 					const wE = new WikiEdit();
 					[= autocomplete _ =
 						if (AutoComplete) {
@@ -64,6 +65,7 @@
 						}
 					=]
 					wE.init('postText', '[ ' wikiedit ' ]');
+				});
 				</script>
 				<br>
 

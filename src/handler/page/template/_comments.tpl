@@ -66,10 +66,11 @@
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
 
 						[ '' // load WikiEdit '' ]
+						<scripttype="module" type="module" src="[ ' db: base_path ' ]js/index.js"[ ' db: csp_nonce ' ]></script>
 						<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
-						<script src="[ ' db: base_path ' ]js/editor/protoedit.js"[ ' db: csp_nonce ' ]></script>
+						<script type="module" src="[ ' db: base_path ' ]js/core/protoedit.js"[ ' db: csp_nonce ' ]></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"[ ' db: csp_nonce ' ]></script>
-						<script src="[ ' db: base_path ' ]js/editor/wikiedit.js"[ ' db: csp_nonce ' ]></script>
+						<script type="module" src="[ ' db: base_path ' ]js/core/wikiedit.js"[ ' db: csp_nonce ' ]></script>
 						[= ac _ =
 							<script src="[ ' db: base_path ' ]js/editor/autocomplete.js"[ ' db: csp_nonce ' ]></script>
 						=]
@@ -93,6 +94,7 @@
 							data-upload-nonce="[ ' nonce ' ]"
 							required>[ ' payload | pre ' ]</textarea>
 						<script[ ' db: csp_nonce ' ]>
+						document.addEventListener('DOMContentLoaded', () => {
 							const wE = new WikiEdit();
 							[= autocomplete _ =
 								if (AutoComplete) {
@@ -100,6 +102,7 @@
 								}
 							=]
 							wE.init('addcomment', '[ ' wikiedit ' ]');
+						});
 						</script>
 						[= a _ =
 							<input type="checkbox" name="noid_publication" id="noid_publication" value="[ ' pageid ' ]" [ ' checked ' ]>

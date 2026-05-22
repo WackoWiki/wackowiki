@@ -4,7 +4,7 @@
  * Licensed BSD © WackoWiki Team
  */
 
-class ProtoEdit {
+export class ProtoEdit {
   // Public properties (set by child classes)
   imagesPath = '';
   buttons = [];
