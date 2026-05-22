@@ -1,20 +1,53 @@
-// src/features/KeyboardShortcuts.js
+// src/js/features/KeyboardShortcuts.js
 
 import logger from '../utils/logger.js';
 
 /**
- * Sets up keyboard shortcuts and auto‑list continuation on the editor.
+ * Sets up keyboard shortcuts and auto-list continuation on the editor.
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupKeyboardShortcuts(editor) {
-  // Remove any previous listener (safe for re‑init)
-  editor.area.removeEventListener('keydown', keyDownHandler);
+  // Remove any previous listener (safe for re-init)
+  editor.area.removeEventListener('keydown', editor._keyDownHandler);
 
-  // Attach new handler
-  editor.area.addEventListener('keydown', (e) => keyDownHandler(editor, e));
+  // Store handler for later removal
+  editor._keyDownHandler = (e) => keyDownHandler(editor, e);
+  editor.area.addEventListener('keydown', editor._keyDownHandler);
 
-  // Global keyboard shortcuts (Ctrl+Alt+Z for Zen mode, etc.)
-  document.addEventListener('keydown', (e) => globalKeyHandler(editor, e));
+  // Global shortcuts
+  editor._globalKeyHandler = (e) => globalKeyHandler(editor, e);
+  document.addEventListener('keydown', editor._globalKeyHandler);
+
+  // Register cleanup
+  editor._cleanupKeyboardShortcuts = () => cleanup(editor);
+
+  logger.debug('KeyboardShortcuts: setup complete with cleanup registered');
+}
+
+/**
+ * Cleanup function for Keyboard Shortcuts.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('KeyboardShortcuts: cleaning up');
+
+  const ta = editor.area;
+  if (ta) {
+    if (typeof editor._keyDownHandler === 'function') {
+      ta.removeEventListener('keydown', editor._keyDownHandler);
+    }
+  }
+
+  if (typeof editor._globalKeyHandler === 'function') {
+    document.removeEventListener('keydown', editor._globalKeyHandler);
+  }
+
+  // Clean up references
+  delete editor._keyDownHandler;
+  delete editor._globalKeyHandler;
+  delete editor._cleanupKeyboardShortcuts;
+
+  logger.debug('KeyboardShortcuts: cleanup finished');
 }
 
 /**

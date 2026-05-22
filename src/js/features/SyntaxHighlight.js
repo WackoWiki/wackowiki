@@ -1,4 +1,4 @@
-// src/features/SyntaxHighlight.js
+// src/js/features/SyntaxHighlight.js
 
 import logger from '../utils/logger.js';
 
@@ -72,6 +72,32 @@ export function setupSyntaxHighlighting(editor) {
   editor.resizeObserver = new ResizeObserver(() => syncContentSize(editor));
   editor.resizeObserver.observe(editor.area);
   editor.resizeObserver.observe(editor.syntaxContainer || editor.area.parentNode);
+  
+  // Initial highlight
+  setTimeout(() => editor.refreshSyntaxHighlight(), 50);
+
+  editor._cleanupSyntaxHighlight = () => cleanup(editor);
+
+  logger.debug('SyntaxHighlight: setup complete with cleanup registered');
+}
+
+/**
+ * Cleanup function for Syntax Highlighting.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('SyntaxHighlight: cleaning up');
+
+  // Remove any highlight wrappers or event listeners
+  const ta = editor.area;
+  if (ta && ta.parentNode) {
+    // Example: remove overlay or mirror elements if used
+  }
+
+  delete editor.refreshSyntaxHighlight;
+  delete editor._cleanupSyntaxHighlight;
+
+  logger.debug('SyntaxHighlight: cleanup finished');
 }
 
 /**

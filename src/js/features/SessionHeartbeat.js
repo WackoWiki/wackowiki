@@ -1,4 +1,4 @@
-// src/features/SessionHeartbeat.js
+// src/js/features/SessionHeartbeat.js
 
 import logger from '../utils/logger.js';
 
@@ -12,7 +12,7 @@ export function setupHeartbeat(editor) {
 
   if (!timeoutSec || timeoutSec < 60) return;
 
-  // Store heartbeat info on the instance for later cleanup
+  // Store heartbeat info on the instance
   editor._heartbeatName = name;
   editor._heartbeatTimer = null;
   editor._heartbeatFailCount = 0;
@@ -49,6 +49,31 @@ export function setupHeartbeat(editor) {
   // Start interval
   editor._heartbeatTimer = setInterval(heartbeat, timeoutSec * 1000);
   logger.debug(`Session heartbeat started for "${name}" every ${timeoutSec}s`);
+
+  // Register cleanup
+  editor._cleanupHeartbeat = () => cleanup(editor);
+}
+
+/**
+ * Cleanup function for Session Heartbeat.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('SessionHeartbeat: cleaning up');
+
+  if (editor._heartbeatTimer) {
+    clearInterval(editor._heartbeatTimer);
+    editor._heartbeatTimer = null;
+    logger.debug('SessionHeartbeat: interval cleared');
+  }
+
+  // Clean up references
+  delete editor._heartbeatTimer;
+  delete editor._heartbeatName;
+  delete editor._heartbeatFailCount;
+  delete editor._cleanupHeartbeat;
+
+  logger.debug('SessionHeartbeat: cleanup finished');
 }
 
 /**
@@ -59,6 +84,7 @@ export function stopHeartbeat(editor) {
   if (editor._heartbeatTimer) {
     clearInterval(editor._heartbeatTimer);
     editor._heartbeatTimer = null;
+    logger.info(`Session heartbeat stopped for "${editor._heartbeatName || 'unknown'}"`);
   }
 }
 
@@ -78,18 +104,18 @@ function showSessionExpiredWarning(editor, name) {
   const div = document.createElement('div');
   div.className = 'msg error session-expired-warning';
   div.innerHTML = `
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-      <div>
-        <strong>${msg}</strong><br>
-        <small>Your unsaved changes are still in the editor.</small>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <div>
+          <strong>${msg}</strong><br>
+          <small>Your unsaved changes are still in the editor.</small>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn-save-draft">Save Draft</button>
+          <button type="button" class="btn-reload">Reload Page</button>
+          <button type="button" class="btn-dismiss">Dismiss</button>
+        </div>
       </div>
-      <div style="display:flex; gap:8px;">
-        <button type="button" class="btn-save-draft">Save Draft</button>
-        <button type="button" class="btn-reload">Reload Page</button>
-        <button type="button" class="btn-dismiss">Dismiss</button>
-      </div>
-    </div>
-  `;
+    `;
 
   const target = document.getElementsByName(name)[0] || editor.area;
   if (target?.parentNode) {

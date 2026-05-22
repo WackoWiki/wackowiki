@@ -1,6 +1,7 @@
 // src/core/WikiEdit.js
 
 import { ProtoEdit } from './protoedit.js';           // your base class (now a module)
+import { EditorState } from './EditorState.js';
 import logger from '../utils/logger.js';
 import { loadPreferredNumber } from '../utils/storage.js';
 import { getRelativeTime } from '../utils/time.js';
@@ -33,10 +34,15 @@ import { setupUIFeatures } from '../features/UIFeatures.js';
 
 export class WikiEdit extends ProtoEdit {
 
-  static buttonDefs = buttonDefs;   // keep static access if other code relies on it
+  static buttonDefs = buttonDefs;
+
+  #state;
 
   constructor() {
     super();
+
+    this.#state = new EditorState();
+
     this.enabled = true;
     this.manual = 'https://wackowiki.org/doc/';
     this.mark = '##inspoint##';
@@ -87,6 +93,43 @@ export class WikiEdit extends ProtoEdit {
     // Context detection
     this.isCommentMode = ta.id === 'addcomment' || ta.name === 'payload';
 
+    // === Initialize State with current textarea content ===
+    this.#state.setContent(ta.value, false);
+
+    // === State → UI Sync ===
+    this.#state.subscribe((change) => {
+      if (change.type === 'content') {
+        if (ta.value !== change.content) {
+          ta.value = change.content;
+        }
+
+        this.refreshSyntaxHighlight?.();
+        this.updateStatus?.();
+
+        if (this.livePreviewEnabled && typeof this.updatePreview === 'function') {
+          setTimeout(() => this.updatePreview(), 20);
+        }
+
+        ta.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+
+    // === UI → State Sync ===
+    const inputHandler = () => {
+      this.#state.setContent(ta.value, false);
+    };
+    const selectionHandler = () => {
+      this.#state.setSelection(ta.selectionStart, ta.selectionEnd);
+    };
+
+    ta.addEventListener('input', inputHandler);
+    ta.addEventListener('select', selectionHandler);
+    ta.addEventListener('keydown', selectionHandler);
+
+    // Store handlers for later removal in destroy()
+    this._inputHandler = inputHandler;
+    this._selectionHandler = selectionHandler;
+
     const form = ta.closest('form');
     this.ajaxUrl = form
       ? (form.getAttribute('action') || window.location.href)
@@ -129,12 +172,7 @@ export class WikiEdit extends ProtoEdit {
     super.buildToolbar(configArray);
   }
 
-  destroy() {
-    stopHeartbeat(this);
-    if (this.pushTimer) clearTimeout(this.pushTimer);
-    if (this.resizeObserver) this.resizeObserver.disconnect();
-    // ... any other cleanup
-  }
+  // ==================== Content API (now using state) ====================
 
   savePage() {
     if (!confirm(t('ReallySave') || 'Really save this page?')) return;
@@ -162,21 +200,14 @@ export class WikiEdit extends ProtoEdit {
     }
   }
 
+  /**
+     * Replace editor content. Now routes through EditorState.
+     */
   replaceContent(newText, pushToUndo = true, targetArea = null) {
     const area = targetArea || this.area;
     if (!area) return;
 
-    if (pushToUndo) this.pushState?.();
-    area.value = newText || '';
-
-    this.refreshSyntaxHighlight?.();
-    this.updateStatus?.();
-
-    if (this.livePreviewEnabled && typeof this.updatePreview === 'function') {
-      setTimeout(() => this.updatePreview(), 20);
-    }
-
-    area.dispatchEvent(new Event('input', { bubbles: true }));
+    this.#state.setContent(newText || '', pushToUndo);
   }
 
   setAreaContent(str) {
@@ -188,9 +219,35 @@ export class WikiEdit extends ProtoEdit {
     const l1 = endMatch ? endMatch[1].length : 0;
 
     str = str.replace(this.rbegin, '').replace(this.rend, '');
+
     this.replaceContent(str);
     t.setSelectionRange(l, l + l1);
-    t.scrollTop = this.scroll;
+    t.scrollTop = this.scroll || 0;
+  }
+
+  getContent() {
+    return this.#state.content;
+  }
+
+  get isDirty() {
+    return this.#state.isDirty;
+  }
+
+  get isModified() {
+    return this.#state.isModified;
+  }
+
+  markClean() {
+    this.#state.markClean();
+  }
+
+  markSaved() {
+    this.#state.markSaved();
+  }
+
+  // Optional: direct access to state (use sparingly)
+  get state() {
+    return this.#state;
   }
 
   changeEditorHeight(delta) {
@@ -211,20 +268,82 @@ export class WikiEdit extends ProtoEdit {
 
   convertToMarkdown() {
     if (!this.area) return;
-    const md = wackoToMarkdown(this.area.value);
+    const md = wackoToMarkdown(this.getContent());
     this.replaceContent(md);
     this.showMessage('✓ Wacko → Markdown');
   }
 
   convertToWacko() {
     if (!this.area) return;
-    const wacko = markdownToWacko(this.area.value);
+    const wacko = markdownToWacko(this.getContent());
     this.replaceContent(wacko);
     this.showMessage('✓ Markdown → Wacko');
   }
 
   getRelativeTime(date) {
     return getRelativeTime(date, window.t); // or inject t
+  }
+
+  /**
+     * Clean up all resources, event listeners, subscriptions, and feature modules
+     * when the editor instance is destroyed. Prevents memory leaks.
+     */
+  destroy() {
+    logger.info(`Destroying WikiEdit instance: ${this.id || 'unknown'}`);
+
+    // Call feature cleanups in reverse order of setup (best practice)
+    // Feature cleanups in reverse setup order
+    if (typeof this._cleanupUndoRedo === 'function') this._cleanupUndoRedo();
+    if (typeof this._cleanupAutosave === 'function') this._cleanupAutosave();
+    if (typeof this._cleanupHeartbeat === 'function') this._cleanupHeartbeat();
+    if (typeof this._cleanupLivePreview === 'function') this._cleanupLivePreview();
+    if (typeof this._cleanupKeyboardShortcuts === 'function') this._cleanupKeyboardShortcuts();
+    if (typeof this._cleanupMediaUpload === 'function') this._cleanupMediaUpload();
+    if (typeof this._cleanupDarkZenMode === 'function') this._cleanupDarkZenMode();
+    if (typeof this._cleanupModals === 'function') this._cleanupModals();
+    if (typeof this._cleanupUIFeatures === 'function') this._cleanupUIFeatures();
+    if (typeof this._cleanupSyntaxHighlight === 'function') this._cleanupSyntaxHighlight();
+
+    // Fallback: Clean EditorState subscription if not already handled
+    if (typeof this._undoStateUnsubscribe === 'function') {
+      this._undoStateUnsubscribe();
+      this._undoStateUnsubscribe = null;
+      logger.debug('EditorState subscription cleaned up (fallback)');
+    }
+
+    // Remove textarea event listeners added in init()
+    const ta = this.area;
+    if (ta) {
+      if (typeof this._inputHandler === 'function') {
+        ta.removeEventListener('input', this._inputHandler);
+      }
+      if (typeof this._selectionHandler === 'function') {
+        ta.removeEventListener('select', this._selectionHandler);
+        ta.removeEventListener('keydown', this._selectionHandler);
+      }
+
+      delete ta.wikiEditInstance;
+      logger.debug('Textarea event listeners removed');
+    }
+
+    // Clear core references
+    this.area = null;
+    this.#state = null;
+
+    // Clear major arrays and timers
+    if (this.undoStack) this.undoStack = [];
+    if (this.redoStack) this.redoStack = [];
+    if (this.pushTimer) {
+      clearTimeout(this.pushTimer);
+      this.pushTimer = null;
+    }
+
+    // Call parent destroy if it exists
+    if (typeof super.destroy === 'function') {
+      super.destroy();
+    }
+
+    logger.success(`WikiEdit instance destroyed: ${this.id || 'unknown'}`);
   }
 }
 

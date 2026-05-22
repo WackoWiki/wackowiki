@@ -1,9 +1,9 @@
-// src/features/Modals.js
+// src/js/features/Modals.js
 
 import logger from '../utils/logger.js';
 
 /**
- * Sets up all modal dialogs for the editor.
+ * Sets up modal dialogs used by the editor.
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupModals(editor) {
@@ -11,6 +11,30 @@ export function setupModals(editor) {
   setupTableModal(editor);
   setupFindReplaceModal(editor);
   setupHelpModal(editor);
+
+  editor._cleanupModals = () => cleanup(editor);
+
+  logger.debug('Modals: setup complete with cleanup registered');
+}
+
+/**
+ * Cleanup function for Modals.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('Modals: cleaning up');
+
+  // Close all open modals
+  document.querySelectorAll('.modal, .overlay').forEach(modal => {
+    modal.remove();
+  });
+
+  delete editor.showHelpModal;
+  // delete other modal methods...
+
+  delete editor._cleanupModals;
+
+  logger.debug('Modals: cleanup finished');
 }
 
 // ── Link Modal ─────────────────────────────────────────────────────

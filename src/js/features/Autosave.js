@@ -1,4 +1,4 @@
-// src/features/Autosave.js
+// src/js/features/Autosave.js
 
 import logger from '../utils/logger.js';
 import { safeSetItem, safeGetItem, safeRemoveItem } from '../utils/storage.js';
@@ -6,6 +6,7 @@ import { safeSetItem, safeGetItem, safeRemoveItem } from '../utils/storage.js';
 /**
  * Sets up autosave listeners, prepares the storage key,
  * and loads any existing draft.
+ * Registers cleanup function for proper destruction.
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupAutosave(editor) {
@@ -16,37 +17,100 @@ export function setupAutosave(editor) {
   const uniqueKey = `${editor.id}-${path}${section}`;
   editor.draftKey = editor.DRAFT_KEY_PREFIX + uniqueKey;
 
-  // Input → mark as modified + debounced save
-  editor.area.addEventListener('input', () => {
+  // Store references for cleanup
+  editor._autosaveInputHandler = () => {
     editor.setModified();
     debounceAutosave(editor);
-  });
+  };
 
   // Blur saves immediately
-  editor.area.addEventListener('blur', () => {
+  editor._autosaveBlurHandler = () => {
     clearTimeout(editor.autosaveTimer);
     saveDraft(editor);
-  });
+  };
 
-  // beforeunload save
-  window.addEventListener('beforeunload', () => {
+  editor._autosaveBeforeUnloadHandler = () => {
     if (!editor.isSubmitting) {
       saveDraft(editor);
     }
-  }, { passive: true });
+  };
+
+  // Input → mark as modified + debounced save
+  editor.area.addEventListener('input', editor._autosaveInputHandler);
+
+  // Blur saves immediately
+  editor.area.addEventListener('blur', editor._autosaveBlurHandler);
+
+  // beforeunload save
+  window.addEventListener('beforeunload', editor._autosaveBeforeUnloadHandler, { passive: true });
 
   // Form submit: clear draft and ignore modified warning
   const form = editor.area.form || editor.area.closest('form');
   if (form) {
-    form.addEventListener('submit', () => {
+    editor._autosaveSubmitHandler = () => {
       editor.isSubmitting = true;
       editor.ignoreModified();
       clearDraft(editor);
-    });
+    };
+    form.addEventListener('submit', editor._autosaveSubmitHandler);
   }
 
   // Load any existing draft
   loadAutosavedDraft(editor);
+
+  // Register cleanup function
+  editor._cleanupAutosave = () => cleanup(editor);
+
+  logger.debug('Autosave: setup complete with cleanup registered');
+}
+
+/**
+ * Cleanup function for autosave feature.
+ * Removes all event listeners and clears timers to prevent memory leaks.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('Autosave: cleaning up');
+
+  const ta = editor.area;
+
+  // Remove textarea listeners
+  if (ta) {
+    if (typeof editor._autosaveInputHandler === 'function') {
+      ta.removeEventListener('input', editor._autosaveInputHandler);
+    }
+    if (typeof editor._autosaveBlurHandler === 'function') {
+      ta.removeEventListener('blur', editor._autosaveBlurHandler);
+    }
+  }
+
+  // Remove window listener
+  if (typeof editor._autosaveBeforeUnloadHandler === 'function') {
+    window.removeEventListener('beforeunload', editor._autosaveBeforeUnloadHandler);
+  }
+
+  // Remove form submit listener
+  if (typeof editor._autosaveSubmitHandler === 'function') {
+    const form = ta?.form || ta?.closest('form');
+    if (form) {
+      form.removeEventListener('submit', editor._autosaveSubmitHandler);
+    }
+  }
+
+  // Clear autosave timer
+  if (editor.autosaveTimer) {
+    clearTimeout(editor.autosaveTimer);
+    editor.autosaveTimer = null;
+  }
+
+  // Clean up method references
+  delete editor._autosaveInputHandler;
+  delete editor._autosaveBlurHandler;
+  delete editor._autosaveBeforeUnloadHandler;
+  delete editor._autosaveSubmitHandler;
+  delete editor._cleanupAutosave;
+
+  logger.debug('Autosave: cleanup finished');
 }
 
 /**
@@ -61,7 +125,7 @@ export function saveDraft(editor) {
   }
   if (!editor.draftKey) return;
 
-  const content = editor.area.value.trim();
+  const content = editor.getContent().trim();   // Use state instead of direct textarea
   if (content === '') {
     safeRemoveItem(editor.draftKey);
     return;
@@ -132,7 +196,7 @@ function loadAutosavedDraft(editor) {
 function showDraftInfobox(editor, draft) {
   const date = new Date(draft.timestamp);
   const timeStr = date.toLocaleString();
-  const relativeTime = editor.getRelativeTime(date);   // still in class, but could be extracted later
+  const relativeTime = editor.getRelativeTime(date);
 
   const infoboxHTML = `
     <div id="draft-infobox" class="info-box draft-infobox">

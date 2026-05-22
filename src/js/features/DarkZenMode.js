@@ -1,4 +1,4 @@
-// src/features/DarkZenMode.js
+// src/js/features/DarkZenMode.js
 
 import logger from '../utils/logger.js';
 
@@ -18,6 +18,31 @@ export function setupDarkZenMode(editor) {
   // Initialise states
   initDarkMode(editor);
   initZenMode(editor);
+
+  // Register cleanup
+  editor._cleanupDarkZenMode = () => cleanup(editor);
+
+  logger.debug('DarkZenMode: setup complete with cleanup registered');
+}
+
+/**
+ * Cleanup function for Dark/Zen Mode.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('DarkZenMode: cleaning up');
+
+  // Exit Zen mode if active
+  if (document.documentElement.classList.contains('zen-mode')) {
+    document.documentElement.classList.remove('zen-mode');
+  }
+
+  // Remove any added listeners or classes if necessary
+  delete editor.toggleZenMode;
+  delete editor.toggleDarkMode;
+  delete editor._cleanupDarkZenMode;
+
+  logger.debug('DarkZenMode: cleanup finished');
 }
 
 // ── Dark Mode ──────────────────────────────────────────────────────

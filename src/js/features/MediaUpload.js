@@ -1,9 +1,9 @@
-// src/features/MediaUpload.js
+// src/js/features/MediaUpload.js
 
 import logger from '../utils/logger.js';
 
 /**
- * Sets up media upload capabilities if the user has permission.
+ * Sets up media upload handling (drag & drop, paste, toolbar button).
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupMediaUpload(editor) {
@@ -19,6 +19,34 @@ export function setupMediaUpload(editor) {
 
   // Define insertAtCursor helper (if not already present)
   editor.insertAtCursor = (text) => insertAtCursor(editor, text);
+
+  editor._cleanupMediaUpload = () => cleanup(editor);
+
+  logger.debug('MediaUpload: setup complete with cleanup registered');
+}
+
+/**
+ * Cleanup function for Media Upload.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('MediaUpload: cleaning up');
+
+  const ta = editor.area;
+  if (ta) {
+    if (typeof editor._mediaDropHandler === 'function') {
+      ta.removeEventListener('drop', editor._mediaDropHandler);
+    }
+    if (typeof editor._mediaPasteHandler === 'function') {
+      ta.removeEventListener('paste', editor._mediaPasteHandler);
+    }
+  }
+
+  delete editor._mediaDropHandler;
+  delete editor._mediaPasteHandler;
+  delete editor._cleanupMediaUpload;
+
+  logger.debug('MediaUpload: cleanup finished');
 }
 
 // ── Event handlers ────────────────────────────────────────────────

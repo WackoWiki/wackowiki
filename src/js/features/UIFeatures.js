@@ -1,4 +1,4 @@
-// src/features/UIFeatures.js
+// src/js/features/UIFeatures.js
 
 import logger from '../utils/logger.js';
 
@@ -7,9 +7,34 @@ import logger from '../utils/logger.js';
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupUIFeatures(editor) {
-  setupStatusBar(editor);
-  setupFullscreen(editor);
-  setupCriticalFields(editor);
+	setupStatusBar(editor);
+	setupFullscreen(editor);
+	setupCriticalFields(editor);
+
+  editor._cleanupUIFeatures = () => cleanup(editor);
+
+  logger.debug('UIFeatures: setup complete with cleanup registered');
+}
+
+/**
+ * Cleanup function for UI Features.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('UIFeatures: cleaning up');
+
+  const ta = editor.area;
+  if (ta) {
+    // Remove resize observer if used
+    if (editor._resizeObserver) {
+      editor._resizeObserver.disconnect();
+      delete editor._resizeObserver;
+    }
+  }
+
+  delete editor._cleanupUIFeatures;
+
+  logger.debug('UIFeatures: cleanup finished');
 }
 
 // ── Status Bar ─────────────────────────────────────────────────────

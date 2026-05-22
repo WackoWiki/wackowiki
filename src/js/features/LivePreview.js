@@ -1,4 +1,4 @@
-// src/features/LivePreview.js
+// src/js/features/LivePreview.js
 
 import logger from '../utils/logger.js';
 
@@ -25,6 +25,34 @@ export function setupLivePreview(editor) {
   // Listen for manual toggles via the toolbar delegation
   // (the toolbar calls editor.toggleLivePreview, which we bind below)
   editor.toggleLivePreview = () => toggleLivePreview(editor);
+
+  // Register cleanup
+  /*editor._cleanupLivePreview = () => cleanup(editor);
+
+  logger.debug('LivePreview: setup complete with cleanup registered');*/
+}
+
+/**
+ * Cleanup function for Live Preview.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function cleanup(editor) {
+  logger.info('LivePreview: cleaning up');
+
+  // Hide and remove preview elements if they exist
+  if (editor.previewPane) {
+    editor.previewPane.style.display = 'none';
+  }
+  if (editor.splitter) {
+    editor.splitter.style.display = 'none';
+  }
+
+  // Clean up references
+  delete editor.toggleLivePreview;
+  delete editor.livePreviewEnabled;
+  delete editor._cleanupLivePreview;
+
+  logger.debug('LivePreview: cleanup finished');
 }
 
 /**
