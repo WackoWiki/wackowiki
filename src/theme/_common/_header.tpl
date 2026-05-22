@@ -62,7 +62,6 @@ _common include file for themes
 	<script src="[ ' db: base_path ' ]js/default.js"[ ' db: csp_nonce ' ] defer></script>
 	[= edit _ =
 		<link rel="stylesheet" href="[ ' db: theme_url ' ]css/wikiedit.css">
-		<scripttype="module" type="module" src="[ ' db: base_path ' ]js/index.js"[ ' db: csp_nonce ' ]></script>
 		[ '' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '' ]
 		<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
 		<script type="module" src="[ ' db: base_path ' ]js/core/protoedit.js"[ ' db: csp_nonce ' ]></script>

@@ -66,7 +66,6 @@
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
 
 						[ '' // load WikiEdit '' ]
-						<scripttype="module" type="module" src="[ ' db: base_path ' ]js/index.js"[ ' db: csp_nonce ' ]></script>
 						<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
 						<script type="module" src="[ ' db: base_path ' ]js/core/protoedit.js"[ ' db: csp_nonce ' ]></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"[ ' db: csp_nonce ' ]></script>
