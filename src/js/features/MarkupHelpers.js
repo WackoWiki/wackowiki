@@ -1,4 +1,4 @@
-// src/features/MarkupHelpers.js
+// src/js/features/MarkupHelpers.js
 
 import logger from '../utils/logger.js';
 
@@ -11,7 +11,7 @@ export function setupMarkupHelpers(editor) {
   // Selection helper – must be available to other methods
   editor.getDefines = () => getDefines(editor);
 
-  // Private helpers (exposed for testing if needed)
+  // Private helpers
   editor._LSum = (tag, text, skip) => _LSum(editor, tag, text, skip);
   editor._RSum = (text, tag) => _RSum(editor, text, tag);
   editor._TSum = (text, tag, tag2, skip) => _TSum(editor, text, tag, tag2, skip);
@@ -19,11 +19,16 @@ export function setupMarkupHelpers(editor) {
   // Public markup operations
   editor.MarkUp = (tag, text, tag2, onNewLine, expand, strip) =>
     MarkUp(editor, tag, text, tag2, onNewLine, expand, strip);
+
   editor.insTag = (tag, tag2, onNewLine, expand, strip) =>
     insTag(editor, tag, tag2, onNewLine, expand, strip);
+
   editor.insBlockWrapper = (openTag, closeTag) =>
     insBlockWrapper(editor, openTag, closeTag);
+
   editor.unindent = () => unindent(editor);
+
+  logger.debug('MarkupHelpers: setup complete');
 }
 
 // ── Selection helper ──────────────────────────────────────────────
@@ -119,7 +124,7 @@ function MarkUp(editor, tag, text, tag2, onNewLine = 0, expand = 0, strip = 0) {
     if (r) r += '\n';
 
     if (fIn && strip === 1) {
-      f = editor.rbegin.test(line);
+      const f = editor.rbegin.test(line);
       line = line.replace(editor.rbegin, '');
       line = line.replace(listRe, '$1');
       if (f) line = editor.begin + line;
@@ -169,29 +174,27 @@ function insTag(editor, tag, tag2, onNewLine = 0, expand = 0, strip = 0) {
     const newStart = editor.sel1.length;
     const newEnd = newStart + newSel.length;
 
-    editor.replaceContent(newValue);
+    editor.replaceContent(newValue, true, { scroll: editor.scroll });
     t.setSelectionRange(newStart, newEnd);
-    t.scrollTop = editor.scroll;
     applied = true;
   } else if (!isIndentOrListOp &&
              editor.sel1.length >= tagLen &&
              editor.sel1.endsWith(tag) &&
              editor.sel2.length >= tag2Len &&
              editor.sel2.startsWith(tag2)) {
-    // Tags surround the current selection
+    // Remove surrounding tags
     const newValue = editor.sel1.slice(0, -tagLen) + editor.sel + editor.sel2.slice(tag2Len);
     const newStart = editor.sel1.length - tagLen;
     const newEnd = newStart + editor.sel.length;
 
-    editor.replaceContent(newValue);
+    editor.replaceContent(newValue, true, { scroll: editor.scroll });
     t.setSelectionRange(newStart, newEnd);
-    t.scrollTop = editor.scroll;
     applied = true;
   }
 
   if (applied) return true;
 
-  // Fallback to original behaviour
+  // Normal markup
   const str = MarkUp(editor, tag, editor.str, tag2, onNewLine, expand, strip);
   editor.setAreaContent(str);
   return true;
@@ -216,9 +219,8 @@ function insBlockWrapper(editor, openTag, closeTag = '%%') {
     const newStart = editor.sel1.length;
     const newEnd = newStart + newSel.length;
 
-    editor.replaceContent(newValue);
+    editor.replaceContent(newValue, true, { scroll: editor.scroll });
     t.setSelectionRange(newStart, newEnd);
-    t.scrollTop = editor.scroll;
     applied = true;
   } else if (editor.sel1.endsWith(openWithNl) &&
              editor.sel2.startsWith(closeWithNl)) {
@@ -227,21 +229,21 @@ function insBlockWrapper(editor, openTag, closeTag = '%%') {
     const newStart = editor.sel1.length - openWithNl.length;
     const newEnd = newStart + editor.sel.length;
 
-    editor.replaceContent(newValue);
+    editor.replaceContent(newValue, true, { scroll: editor.scroll });
     t.setSelectionRange(newStart, newEnd);
-    t.scrollTop = editor.scroll;
     applied = true;
   }
 
   if (applied) return true;
 
-  // Not yet wrapped
+  // Wrap new content
   const content = editor.sel || '';
   const wrapped = `${openTag}\n${content}\n${closeTag}`;
   const newValue = editor.sel1 + wrapped + editor.sel2;
-  editor.replaceContent(newValue);
 
-  const cursorPos = editor.sel1.length + openTag.length + 1; // after opening tag + newline
+  editor.replaceContent(newValue, true, { scroll: editor.scroll });
+
+  const cursorPos = editor.sel1.length + openTag.length + 1;
   t.setSelectionRange(cursorPos, cursorPos);
   return true;
 }

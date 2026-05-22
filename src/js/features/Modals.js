@@ -137,7 +137,10 @@ function insertLinkFromForm(editor) {
   }
 
   const str = sel1 + '((' + combined + '))' + sel2;
-  editor.replaceContent(str, true, area);
+
+  // FIXED: Use replaceContent with proper history + scroll
+  editor.replaceContent(str, true, { scroll: editor.scroll || area.scrollTop });
+
   const start = sel1.length;
   const end = str.length - sel2.length;
   area.setSelectionRange(start, end);
@@ -153,7 +156,7 @@ function createLink(editor, isAlt) {
   if (!/\n/.test(editor.sel)) {
     if (isAlt) {
       const str = editor.sel1 + '((' + editor.sel.trim() + '))' + editor.sel2;
-      editor.replaceContent(str);
+      editor.replaceContent(str, true, { scroll: editor.scroll });
       t.setSelectionRange(editor.sel1.length, str.length - editor.sel2.length);
       return true;
     }
@@ -324,7 +327,9 @@ function insertTableFromForm(editor) {
   const insertStr = '\n' + tableStr + '\n';
   const newValue = sel1 + insertStr + sel2;
 
-  editor.replaceContent(newValue);
+  // FIXED: Use replaceContent with pushToUndo = true
+  editor.replaceContent(newValue, true, { scroll: editor.scroll || area.scrollTop });
+
   const cursorPos = sel1.length + insertStr.length;
   area.setSelectionRange(cursorPos, cursorPos);
   area.focus();

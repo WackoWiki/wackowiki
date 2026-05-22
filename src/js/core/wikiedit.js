@@ -97,10 +97,26 @@ export class WikiEdit extends ProtoEdit {
     this.#state.setContent(ta.value, false);
 
     // === State → UI Sync ===
+    ta.addEventListener('input', () => {
+      // Do NOT push undo on every keystroke or during placeholder operations
+      this.#state.setContent(ta.value, false);
+    });
+
     this.#state.subscribe((change) => {
+      const ta = this.area;
+      if (!ta) return;
+
       if (change.type === 'content') {
         if (ta.value !== change.content) {
           ta.value = change.content;
+        }
+
+        // Restore selection and scroll if available
+        if (change.selection) {
+          ta.setSelectionRange(change.selection.start, change.selection.end);
+        }
+        if (typeof change.scroll === 'number') {
+          ta.scrollTop = change.scroll;
         }
 
         this.refreshSyntaxHighlight?.();
@@ -114,7 +130,6 @@ export class WikiEdit extends ProtoEdit {
       }
     });
 
-    // === UI → State Sync ===
     const inputHandler = () => {
       this.#state.setContent(ta.value, false);
     };
@@ -201,17 +216,36 @@ export class WikiEdit extends ProtoEdit {
   }
 
   /**
-     * Replace editor content. Now routes through EditorState.
-     */
-  replaceContent(newText, pushToUndo = true, targetArea = null) {
-    const area = targetArea || this.area;
-    if (!area) return;
+   * Replace editor content through EditorState.
+   * @param {string} newText
+   * @param {boolean} pushToUndo
+   * @param {object} options - {selection?, scroll?}
+   */
+  replaceContent(newText, pushToUndo = true, options = {}) {
+    if (!this.area) return;
 
-    this.#state.setContent(newText || '', pushToUndo);
+    const { selection, scroll } = options;
+
+    let finalSelection = selection || {
+      start: this.area.selectionStart,
+      end: this.area.selectionEnd
+    };
+
+    // Push to undo stack only when explicitly requested
+    if (pushToUndo && typeof this.pushState === 'function') {
+      this.pushState();
+    }
+
+    this.#state.setContent(newText || '', pushToUndo, {
+      selection: finalSelection,
+      scroll: scroll ?? this.area.scrollTop
+    });
   }
 
   setAreaContent(str) {
     const t = this.area;
+    if (!t) return;
+
     const beginMatch = str.match(new RegExp('((.|\n)*)' + this.begin));
     const endMatch = str.match(new RegExp(this.begin + '((.|\n)*)' + this.end));
 
@@ -220,9 +254,10 @@ export class WikiEdit extends ProtoEdit {
 
     str = str.replace(this.rbegin, '').replace(this.rend, '');
 
-    this.replaceContent(str);
-    t.setSelectionRange(l, l + l1);
-    t.scrollTop = this.scroll || 0;
+    this.replaceContent(str, true, {
+      selection: { start: l, end: l + l1 },
+      scroll: this.scroll || 0
+    });
   }
 
   getContent() {

@@ -104,21 +104,21 @@ function pushState(editor) {
     return;
   }
 
-  // Avoid pushing identical consecutive states
+  // Avoid duplicate consecutive states
   const last = editor.undoStack[editor.undoStack.length - 1];
-  if (
-    last &&
-    last.text === currentState.text &&
-    last.start === currentState.start &&
-    last.end === currentState.end &&
-    last.scroll === currentState.scroll
-  ) {
+  if (last &&
+      last.text === currentState.text &&
+      last.start === currentState.start &&
+      last.end === currentState.end &&
+      last.scroll === currentState.scroll) {
     return;
   }
 
   editor.undoStack.push(currentState);
-  if (editor.undoStack.length > editor.maxHistory) editor.undoStack.shift();
-  editor.redoStack = []; // clear redo on new change
+  if (editor.undoStack.length > editor.maxHistory) {
+    editor.undoStack.shift();
+  }
+  editor.redoStack = [];
 }
 
 /**
@@ -151,6 +151,11 @@ function undo(editor) {
     editor.undoStack = editor.undoStack.filter(s => validateState(s));
     return false;
   }
+
+  editor.replaceContent(prev.text, false, {
+    selection: { start: prev.start, end: prev.end },
+    scroll: prev.scroll
+  });
 
   // Use replaceContent without pushing to undo (we already popped)
   editor.replaceContent(prev.text, false);
@@ -191,6 +196,11 @@ function redo(editor) {
     editor.redoStack = editor.redoStack.filter(s => validateState(s));
     return false;
   }
+  
+  editor.replaceContent(next.text, false, {
+    selection: { start: next.start, end: next.end },
+    scroll: next.scroll
+  });
 
   editor.replaceContent(next.text, false);
   t.setSelectionRange(next.start, next.end);

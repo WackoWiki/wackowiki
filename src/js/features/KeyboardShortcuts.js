@@ -185,7 +185,7 @@ function handleEnterKey(editor, t, scroll) {
   }
 
   const newValue = sel1 + '\n' + prefix + sel2;
-  editor.replaceContent(newValue);
+  editor.replaceContent(newValue, true);
 
   const newSel = sel1.length + 1 + prefix.length;
   t.setSelectionRange(newSel, newSel);

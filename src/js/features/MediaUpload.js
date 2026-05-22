@@ -18,7 +18,8 @@ export function setupMediaUpload(editor) {
   editor.triggerFileUpload = () => triggerFileUpload(editor);
 
   // Define insertAtCursor helper (if not already present)
-  editor.insertAtCursor = (text) => insertAtCursor(editor, text);
+  editor.insertAtCursor = (text, pushToUndo = true) => 
+    insertAtCursor(editor, text, pushToUndo);
 
   editor._cleanupMediaUpload = () => cleanup(editor);
 
@@ -101,7 +102,9 @@ async function uploadMediaFiles(editor, files) {
   for (const file of files) {
     const cursorPos = editor.area.selectionStart;
     const placeholder = `[uploading ${file.name}...]`;
-    editor.insertAtCursor(placeholder);
+
+    // Step 1: Insert placeholder WITHOUT pushing to undo
+    editor.insertAtCursor(placeholder, false);
 
     const formData = new FormData();
     formData.append('_nonce', editor.area.dataset.uploadNonce || '');
@@ -118,35 +121,40 @@ async function uploadMediaFiles(editor, files) {
         credentials: 'same-origin'
       });
 
-      let result = {};
-      try { result = await response.json(); } catch (e) { /* ignore */ }
-
-      // Remove placeholder
-      editor.area.value = editor.area.value.replace(placeholder, '');
-      editor.area.selectionStart = editor.area.selectionEnd = cursorPos;
+      const result = response.ok ? await response.json() : {};
 
       if (response.ok && result.filename) {
         const isImage = file.type.startsWith('image/');
-        const syntax = isImage
-          ? `file:${result.filename}`
+        const finalSyntax = isImage 
+          ? `file:${result.filename}` 
           : `((file:${result.filename} ${result.filename}))`;
 
-        editor.insertAtCursor(syntax + '\n');
-        editor.refreshSyntaxHighlight();
+        // Step 2: Replace placeholder with final syntax — ONE undo entry
+        editor.replaceContent(
+          editor.area.value.replace(placeholder, finalSyntax + '\n'), 
+          true   // only this change goes into history
+        );
+
         editor.showMessage(`✓ ${file.name} uploaded`);
 
-        // Update nonce for subsequent uploads
+		// Update nonce for subsequent uploads
         if (result.new_nonce) {
           editor.area.dataset.uploadNonce = result.new_nonce;
         }
       } else {
-        logger.error('Upload failed – server response:', result);
-        editor.showMessage(`✗ ${file.name}: ${result.error || 'Upload failed'}`, true);
+        // Remove placeholder on failure (no history)
+        editor.replaceContent(
+          editor.area.value.replace(placeholder, ''), 
+          false
+        );
+        editor.showMessage(`✗ Upload failed: ${result.error || 'Unknown error'}`, true);
       }
     } catch (err) {
       // Remove placeholder on error
-      editor.area.value = editor.area.value.replace(placeholder, '');
-      editor.area.selectionStart = editor.area.selectionEnd = cursorPos;
+      editor.replaceContent(
+        editor.area.value.replace(placeholder, ''), 
+        false
+      );
       editor.showMessage(`✗ ${file.name} upload error`, true);
       logger.error(err);
     }
@@ -157,13 +165,20 @@ async function uploadMediaFiles(editor, files) {
  * Insert text at the current cursor position.
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  * @param {string} text
+ * @param {boolean} pushToUndo
  */
-function insertAtCursor(editor, text) {
+function insertAtCursor(editor, text, pushToUndo = true) {
   const ta = editor.area;
+  if (!ta) return;
+
   const start = ta.selectionStart;
   const end = ta.selectionEnd;
   const newValue = ta.value.substring(0, start) + text + ta.value.substring(end);
-  editor.replaceContent(newValue);
-  ta.selectionStart = ta.selectionEnd = start + text.length;
+
+  // Pass the flag strictly
+  editor.replaceContent(newValue, pushToUndo);
+
+  const newCursorPos = start + text.length;
+  ta.selectionStart = ta.selectionEnd = newCursorPos;
   ta.focus();
 }

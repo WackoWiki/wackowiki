@@ -1,8 +1,10 @@
 // src/js/core/EditorState.js
+
 export class EditorState {
   #content = '';
   #selectionStart = 0;
   #selectionEnd = 0;
+  #scrollTop = 0;
   #dirty = false;
   #modified = false;
   #listeners = new Set();
@@ -16,11 +18,12 @@ export class EditorState {
   get selection() {
     return { start: this.#selectionStart, end: this.#selectionEnd };
   }
+  get scrollTop() { return this.#scrollTop; }
   get isDirty() { return this.#dirty; }
   get isModified() { return this.#modified; }
 
   // Main setter with reactivity
-  setContent(newContent, pushToUndo = true) {
+  setContent(newContent, pushToUndo = true, metadata = {}) {
     if (newContent === this.#content) return false;
 
     const oldContent = this.#content;
@@ -28,22 +31,29 @@ export class EditorState {
     this.#dirty = true;
     this.#modified = true;
 
+    if (metadata.selection) {
+      this.#selectionStart = metadata.selection.start;
+      this.#selectionEnd = metadata.selection.end;
+    }
+    if (typeof metadata.scroll === 'number') {
+      this.#scrollTop = metadata.scroll;
+    }
+
     this.#notify({
       type: 'content',
       content: newContent,
       oldContent,
-      pushToUndo
+      pushToUndo,                    // simple and direct
+      selection: metadata.selection,
+      scroll: metadata.scroll
     });
 
     return true;
   }
 
   setSelection(start, end = start) {
-    if (this.#selectionStart === start && this.#selectionEnd === end) return;
-    
     this.#selectionStart = start;
     this.#selectionEnd = end;
-
     this.#notify({ type: 'selection' });
   }
 
