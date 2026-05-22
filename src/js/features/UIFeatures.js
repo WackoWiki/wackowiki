@@ -46,7 +46,16 @@ function setupStatusBar(editor) {
 
   // Insert status bar after the textarea (or split container)
   const statusBar = createStatusBar(editor);
-  editor.area.parentNode.insertBefore(statusBar, editor.area.nextSibling);
+
+  // Determine the correct insertion point:
+  // If textarea's parent is a known wrapper (e.g., '.syntax-container'),
+  // insert after that wrapper; otherwise insert after the textarea itself.
+  const wrapper = editor.area.parentNode;
+  const insertAfter = wrapper.classList.contains('syntax-container')
+    ? wrapper
+    : editor.area;
+
+  insertAfter.parentNode.insertBefore(statusBar, insertAfter.nextSibling);
 
   // Attach event listeners for status updates
   const handler = () => editor.updateStatus();
