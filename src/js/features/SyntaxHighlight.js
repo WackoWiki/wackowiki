@@ -8,52 +8,50 @@ import logger from '../utils/logger.js';
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupSyntaxHighlighting(editor) {
-  // Create overlay elements
-  if (!editor.syntaxContainer) {
-    editor.syntaxContainer = document.createElement('div');
-    editor.syntaxContainer.className = 'syntax-container';
+  if (!editor.syntaxHighlighting) return;
 
-    editor.highlighter = document.createElement('pre');
-    editor.highlighter.className = 'syntax-highlighter';
+  // === Original setup from your file ===
+  editor.syntaxContainer = document.createElement('div');
+  editor.syntaxContainer.className = 'syntax-container';
 
-    editor.syntaxContainer.appendChild(editor.highlighter);
-    const parent = editor.area.parentNode;
-    parent.insertBefore(editor.syntaxContainer, editor.area);
-    editor.syntaxContainer.appendChild(editor.area);   // textarea stays on top
-  }
+  editor.highlighter = document.createElement('pre');
+  editor.highlighter.className = 'syntax-highlighter';
+
+  editor.syntaxContainer.appendChild(editor.highlighter);
+
+  const parent = editor.area.parentNode;
+  parent.insertBefore(editor.syntaxContainer, editor.area);
+  editor.syntaxContainer.appendChild(editor.area); // textarea on top
 
   // Copy relevant styles from textarea to highlighter
   const style = getComputedStyle(editor.area);
-  editor.highlighter.style.font = style.font;
-  editor.highlighter.style.lineHeight = style.lineHeight;
-  editor.highlighter.style.tabSize = style.tabSize || '4';
-  editor.highlighter.style.letterSpacing = style.letterSpacing;
-  editor.highlighter.style.wordSpacing = style.wordSpacing;
-  editor.highlighter.style.padding = style.padding;
+  ['font', 'lineHeight', 'tabSize', 'letterSpacing', 'wordSpacing', 'padding'].forEach(prop => {
+    editor.highlighter.style[prop] = style[prop];
+  });
 
   // Load saved syntax state from localStorage (overrides data-attribute)
-  const savedSyntax = localStorage.getItem('we_syntax_enabled');
-  if (savedSyntax !== null) {
-    editor.syntaxHighlighting = savedSyntax === 'true';
-  } else {
-    editor.syntaxHighlighting = editor.area.dataset.syntaxHighlighting !== '0';
+  const saved = localStorage.getItem('we_syntax_enabled');
+  if (saved !== null) {
+    editor.syntaxHighlighting = saved === 'true';
   }
 
   // Apply initial state
   if (editor.syntaxHighlighting) {
-    enableSyntaxHighlighting(editor);
+    editor.syntaxHighlightEnabled = true;
+    editor.highlighter.style.display = 'block';
   } else {
-    disableSyntaxHighlighting(editor);
+    editor.syntaxHighlightEnabled = false;
+    editor.highlighter.style.display = 'none';
   }
 
   // Attach the toggle function to the editor so toolbar delegation can call it
   editor.toggleSyntaxHighlight = () => toggleSyntaxHighlight(editor);
   editor.refreshSyntaxHighlight = () => refreshSyntaxHighlight(editor);
 
-  // Live update on input
+  // Live update on input - triggers idle highlight
   editor.area.addEventListener('input', () => {
     if (editor.syntaxHighlightEnabled) {
-      refreshSyntaxHighlight(editor);
+      editor.refreshSyntaxHighlight();
     }
   });
 
@@ -65,20 +63,21 @@ export function setupSyntaxHighlighting(editor) {
     }
   });
 
-  // Resize observer to keep overlay size in sync
-  if (editor.resizeObserver) {
-    editor.resizeObserver.disconnect();
-  }
+  // Resize observer
+  if (editor.resizeObserver) editor.resizeObserver.disconnect();
   editor.resizeObserver = new ResizeObserver(() => syncContentSize(editor));
   editor.resizeObserver.observe(editor.area);
-  editor.resizeObserver.observe(editor.syntaxContainer || editor.area.parentNode);
-  
+
+  // Idle / RAF tracking
+  editor._syntaxHighlightIdleId = null;
+  editor._syntaxHighlightRafId = null;
+
   // Initial highlight
-  setTimeout(() => editor.refreshSyntaxHighlight(), 50);
+  setTimeout(() => editor.refreshSyntaxHighlight(), 80);
 
   editor._cleanupSyntaxHighlight = () => cleanup(editor);
 
-  logger.debug('SyntaxHighlight: setup complete with cleanup registered');
+  logger.debug('SyntaxHighlight: setup complete with idle scheduling');
 }
 
 /**
@@ -88,16 +87,62 @@ export function setupSyntaxHighlighting(editor) {
 function cleanup(editor) {
   logger.info('SyntaxHighlight: cleaning up');
 
-  // Remove any highlight wrappers or event listeners
-  const ta = editor.area;
-  if (ta && ta.parentNode) {
-    // Example: remove overlay or mirror elements if used
+  if (editor._syntaxHighlightIdleId) {
+    cancelIdleCallback(editor._syntaxHighlightIdleId);
+    editor._syntaxHighlightIdleId = null;
+  }
+  if (editor._syntaxHighlightRafId) {
+    cancelAnimationFrame(editor._syntaxHighlightRafId);
+    editor._syntaxHighlightRafId = null;
+  }
+
+  if (editor.resizeObserver) {
+    editor.resizeObserver.disconnect();
+    editor.resizeObserver = null;
   }
 
   delete editor.refreshSyntaxHighlight;
+  delete editor.toggleSyntaxHighlight;
+  delete editor._syntaxHighlightIdleId;
+  delete editor._syntaxHighlightRafId;
   delete editor._cleanupSyntaxHighlight;
 
   logger.debug('SyntaxHighlight: cleanup finished');
+}
+
+/**
+ * Request syntax highlighting using requestIdleCallback (preferred) 
+ * with requestAnimationFrame fallback.
+ * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ */
+function refreshSyntaxHighlight(editor) {
+  if (!editor.syntaxHighlightEnabled || !editor.highlighter) return;
+
+  // Cancel previous tasks
+  if (editor._syntaxHighlightIdleId) cancelIdleCallback(editor._syntaxHighlightIdleId);
+  if (editor._syntaxHighlightRafId) cancelAnimationFrame(editor._syntaxHighlightRafId);
+
+  const doHighlight = () => {
+    try {
+      const content = editor.getContent() || '';
+      editor.highlighter.innerHTML = highlightWikiSyntax(content) + '\n';
+    } catch (err) {
+      logger.error('Syntax highlighting failed:', err);
+    }
+  };
+
+  // Prefer idle callback
+  if (typeof requestIdleCallback === 'function') {
+    editor._syntaxHighlightIdleId = requestIdleCallback((deadline) => {
+      if (deadline.timeRemaining() > 10) {
+        doHighlight();
+      } else {
+        editor._syntaxHighlightRafId = requestAnimationFrame(doHighlight);
+      }
+    }, { timeout: 200 });
+  } else {
+    editor._syntaxHighlightRafId = requestAnimationFrame(doHighlight);
+  }
 }
 
 /**
@@ -152,15 +197,6 @@ function toggleSyntaxHighlight(editor) {
 
   localStorage.setItem('we_syntax_enabled', editor.syntaxHighlightEnabled);
   editor.updateToolbarButtonStates();
-}
-
-/**
- * Refreshes the highlighted code in the overlay.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
- */
-function refreshSyntaxHighlight(editor) {
-  if (!editor.syntaxHighlightEnabled || !editor.highlighter) return;
-  editor.highlighter.innerHTML = highlightWikiSyntax(editor.area.value) + '\n';
 }
 
 /**

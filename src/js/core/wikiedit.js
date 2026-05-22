@@ -97,11 +97,6 @@ export class WikiEdit extends ProtoEdit {
     this.#state.setContent(ta.value, false);
 
     // === State → UI Sync ===
-    /*ta.addEventListener('input', () => {
-      // Do NOT push undo on every keystroke or during placeholder operations
-      this.#state.setContent(ta.value, false);
-    });*/
-
     this.#state.subscribe((change) => {
       const ta = this.area;
       if (!ta) return;
@@ -111,7 +106,6 @@ export class WikiEdit extends ProtoEdit {
           ta.value = change.content;
         }
 
-        // Restore selection and scroll if available
         if (change.selection) {
           ta.setSelectionRange(change.selection.start, change.selection.end);
         }
@@ -119,12 +113,14 @@ export class WikiEdit extends ProtoEdit {
           ta.scrollTop = change.scroll;
         }
 
-        this.refreshSyntaxHighlight?.();
         this.updateStatus?.();
 
         if (this.livePreviewEnabled && typeof this.updatePreview === 'function') {
           setTimeout(() => this.updatePreview(), 20);
         }
+
+        // Trigger syntax highlight (non-blocking)
+        this.refreshSyntaxHighlight?.();
 
         ta.dispatchEvent(new Event('input', { bubbles: true }));
       }
