@@ -37,11 +37,9 @@ export function setupSyntaxHighlighting(editor) {
 
   // Apply initial state
   if (editor.syntaxHighlighting) {
-    editor.syntaxHighlightEnabled = true;
-    editor.highlighter.style.display = 'block';
+      enableSyntaxHighlighting(editor);
   } else {
-    editor.syntaxHighlightEnabled = false;
-    editor.highlighter.style.display = 'none';
+      disableSyntaxHighlighting(editor);
   }
 
   // Attach the toggle function to the editor so toolbar delegation can call it
