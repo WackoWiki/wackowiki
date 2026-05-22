@@ -97,10 +97,10 @@ export class WikiEdit extends ProtoEdit {
     this.#state.setContent(ta.value, false);
 
     // === State → UI Sync ===
-    ta.addEventListener('input', () => {
+    /*ta.addEventListener('input', () => {
       // Do NOT push undo on every keystroke or during placeholder operations
       this.#state.setContent(ta.value, false);
-    });
+    });*/
 
     this.#state.subscribe((change) => {
       const ta = this.area;

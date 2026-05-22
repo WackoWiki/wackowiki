@@ -9,6 +9,8 @@ import logger from '../utils/logger.js';
 export function setupMediaUpload(editor) {
   if (!editor.canUpload) return;
 
+  editor._mediaUploadAbortController = null;
+
   // Attach drag/drop listeners
   editor.area.addEventListener('dragover', (e) => handleDragOver(e));
   editor.area.addEventListener('drop', (e) => handleDrop(editor, e));
@@ -16,33 +18,33 @@ export function setupMediaUpload(editor) {
 
   // Define triggerFileUpload for the toolbar button
   editor.triggerFileUpload = () => triggerFileUpload(editor);
-
-  // Define insertAtCursor helper (if not already present)
-  editor.insertAtCursor = (text, pushToUndo = true) => 
-    insertAtCursor(editor, text, pushToUndo);
+  editor.insertAtCursor = (text, pushToUndo = true) => insertAtCursor(editor, text, pushToUndo);
 
   editor._cleanupMediaUpload = () => cleanup(editor);
 
-  logger.debug('MediaUpload: setup complete with cleanup registered');
+  logger.debug('MediaUpload: setup complete with AbortController');
 }
 
 /**
- * Cleanup function for Media Upload.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * Cleanup function – aborts any pending upload.
+* @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('MediaUpload: cleaning up');
 
-  const ta = editor.area;
-  if (ta) {
-    if (typeof editor._mediaDropHandler === 'function') {
-      ta.removeEventListener('drop', editor._mediaDropHandler);
-    }
-    if (typeof editor._mediaPasteHandler === 'function') {
-      ta.removeEventListener('paste', editor._mediaPasteHandler);
-    }
+  // Abort any in-flight upload
+  if (editor._mediaUploadAbortController) {
+    editor._mediaUploadAbortController.abort();
+    editor._mediaUploadAbortController = null;
   }
 
+  const ta = editor.area;
+  if (ta) {
+    ta.removeEventListener('drop', editor._mediaDropHandler);
+    ta.removeEventListener('paste', editor._mediaPasteHandler);
+  }
+
+  delete editor._mediaUploadAbortController;
   delete editor._mediaDropHandler;
   delete editor._mediaPasteHandler;
   delete editor._cleanupMediaUpload;
@@ -50,7 +52,7 @@ function cleanup(editor) {
   logger.debug('MediaUpload: cleanup finished');
 }
 
-// ── Event handlers ────────────────────────────────────────────────
+// ── Event Handlers ─────────────────────────────────────────────────
 
 function handleDragOver(e) {
   e.preventDefault();
@@ -62,21 +64,20 @@ function handleDrop(editor, e) {
   e.preventDefault();
   e.stopPropagation();
   editor.area.classList.remove('dragover');
+
   const files = e.dataTransfer?.files;
-  if (files && files.length) uploadMediaFiles(editor, files);
+  if (files?.length) uploadMediaFiles(editor, files);
 }
 
 function handlePaste(editor, e) {
   const items = e.clipboardData?.items || [];
-  const files = [];
-  for (const item of items) {
-    if (item.kind === 'file') {
-      const file = item.getAsFile();
-      if (file) files.push(file);
-    }
-  }
+  const files = Array.from(items)
+    .filter(item => item.kind === 'file')
+    .map(item => item.getAsFile())
+    .filter(Boolean);
+
   if (files.length) {
-    e.preventDefault();   // prevent plain text paste
+    e.preventDefault();
     uploadMediaFiles(editor, files);
   }
 }
@@ -87,12 +88,12 @@ function triggerFileUpload(editor) {
   input.multiple = true;
   input.accept = 'image/*,*/*';
   input.onchange = (e) => {
-    if (e.target.files.length) uploadMediaFiles(editor, e.target.files);
+    if (e.target.files?.length) uploadMediaFiles(editor, e.target.files);
   };
   input.click();
 }
 
-// ── Core upload logic ──────────────────────────────────────────────
+// ── Main Upload Function with AbortController ─────────────────────
 
 async function uploadMediaFiles(editor, files) {
   let uploadUrl = window.location.pathname.replace(/\/_edit$/, '/_upload');
@@ -103,8 +104,11 @@ async function uploadMediaFiles(editor, files) {
     const cursorPos = editor.area.selectionStart;
     const placeholder = `[uploading ${file.name}...]`;
 
-    // Step 1: Insert placeholder WITHOUT pushing to undo
+    // Step 1: Insert placeholder without history
     editor.insertAtCursor(placeholder, false);
+
+    // Create new AbortController for this upload
+    editor._mediaUploadAbortController = new AbortController();
 
     const formData = new FormData();
     formData.append('_nonce', editor.area.dataset.uploadNonce || '');
@@ -118,7 +122,8 @@ async function uploadMediaFiles(editor, files) {
       const response = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,
-        credentials: 'same-origin'
+        credentials: 'same-origin',
+        signal: editor._mediaUploadAbortController.signal
       });
 
       const result = response.ok ? await response.json() : {};
@@ -129,10 +134,10 @@ async function uploadMediaFiles(editor, files) {
           ? `file:${result.filename}` 
           : `((file:${result.filename} ${result.filename}))`;
 
-        // Step 2: Replace placeholder with final syntax — ONE undo entry
+		// Step 2: Replace placeholder with final syntax
         editor.replaceContent(
-          editor.area.value.replace(placeholder, finalSyntax + '\n'), 
-          true   // only this change goes into history
+          editor.area.value.replace(placeholder, finalSyntax + '\n'),
+          true
         );
 
         editor.showMessage(`✓ ${file.name} uploaded`);
@@ -142,27 +147,26 @@ async function uploadMediaFiles(editor, files) {
           editor.area.dataset.uploadNonce = result.new_nonce;
         }
       } else {
-        // Remove placeholder on failure (no history)
-        editor.replaceContent(
-          editor.area.value.replace(placeholder, ''), 
-          false
-        );
-        editor.showMessage(`✗ Upload failed: ${result.error || 'Unknown error'}`, true);
+        // Remove placeholder on failure
+        editor.replaceContent(editor.area.value.replace(placeholder, ''), false);
+        editor.showMessage(`✗ ${file.name}: ${result.error || 'Upload failed'}`, true);
       }
     } catch (err) {
-      // Remove placeholder on error
-      editor.replaceContent(
-        editor.area.value.replace(placeholder, ''), 
-        false
-      );
-      editor.showMessage(`✗ ${file.name} upload error`, true);
-      logger.error(err);
+      if (err.name === 'AbortError') {
+        logger.debug(`Upload of ${file.name} was aborted`);
+      } else {
+        logger.error(`Upload error for ${file.name}:`, err);
+        editor.replaceContent(editor.area.value.replace(placeholder, ''), false);
+        editor.showMessage(`✗ ${file.name} upload error`, true);
+      }
+    } finally {
+      editor._mediaUploadAbortController = null;
     }
   }
 }
 
 /**
- * Insert text at the current cursor position.
+ * Insert text at cursor position.
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  * @param {string} text
  * @param {boolean} pushToUndo
@@ -175,7 +179,6 @@ function insertAtCursor(editor, text, pushToUndo = true) {
   const end = ta.selectionEnd;
   const newValue = ta.value.substring(0, start) + text + ta.value.substring(end);
 
-  // Pass the flag strictly
   editor.replaceContent(newValue, pushToUndo);
 
   const newCursorPos = start + text.length;

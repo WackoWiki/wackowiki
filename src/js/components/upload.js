@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok && result.filename) {
           let successHtml = `${Ut.escapeHtml(result.filename)} (${Ut.formatBytes(result.file_size || file.size)})`;
 
-
           // Add translated "edit metadata" link
           if (result.file_id) {
             const metaLink = `${form.dataset.basePath || ''}/_filemeta?m=show&file_id=${result.file_id}`;
@@ -149,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
       dropzone.parentNode.appendChild(summary);
     };
 
-
     const uploadFiles = async (files) => {
       statusList.innerHTML = '';
       let successCount = 0;
@@ -171,11 +169,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
     });
 
-    dropzone.addEventListener('paste', e => {
-      const files = Array.from(e.clipboardData.items)
-        .filter(item => item.kind === 'file')
-        .map(item => item.getAsFile());
-      if (files.length) uploadFiles(files);
+    document.addEventListener('paste', (e) => {
+      const dropzone = document.querySelector('.upload-dropzone:not(.hidden)');
+      if (!dropzone) return;
+
+      // Optional: ignore if paste happened inside an input/textarea
+      if (e.target.closest('input, textarea, [contenteditable]')) return;
+
+      let files = [];
+      if (e.clipboardData.items) {
+        files = Array.from(e.clipboardData.items)
+          .filter(item => item.kind === 'file')
+          .map(item => item.getAsFile());
+      } else if (e.clipboardData.files) {
+        files = Array.from(e.clipboardData.files);
+      }
+
+      if (files.length) {
+        e.preventDefault(); // prevent default paste (text)
+        uploadFiles(files);
+      }
     });
 
     const selectBtn = dropzone.querySelector('.btn-select-files');

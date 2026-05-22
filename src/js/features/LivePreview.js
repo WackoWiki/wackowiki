@@ -8,6 +8,8 @@ import logger from '../utils/logger.js';
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupLivePreview(editor) {
+  editor._previewAbortController = null;
+
   // Create the split container and panes (hidden by default)
   createSplitPanes(editor);
 
@@ -27,9 +29,9 @@ export function setupLivePreview(editor) {
   editor.toggleLivePreview = () => toggleLivePreview(editor);
 
   // Register cleanup
-  /*editor._cleanupLivePreview = () => cleanup(editor);
+  editor._cleanupLivePreview = () => cleanup(editor);
 
-  logger.debug('LivePreview: setup complete with cleanup registered');*/
+  logger.debug('LivePreview: setup complete with cleanup registered');
 }
 
 /**
@@ -38,6 +40,11 @@ export function setupLivePreview(editor) {
  */
 function cleanup(editor) {
   logger.info('LivePreview: cleaning up');
+
+  if (editor._previewAbortController) {
+      editor._previewAbortController.abort();
+      editor._previewAbortController = null;
+    }
 
   // Hide and remove preview elements if they exist
   if (editor.previewPane) {
@@ -50,6 +57,7 @@ function cleanup(editor) {
   // Clean up references
   delete editor.toggleLivePreview;
   delete editor.livePreviewEnabled;
+  delete editor._previewAbortController;
   delete editor._cleanupLivePreview;
 
   logger.debug('LivePreview: cleanup finished');
@@ -198,6 +206,11 @@ function createSplitPanes(editor) {
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 async function updatePreview(editor) {
+	if (editor._previewAbortController) {
+	    editor._previewAbortController.abort();
+	  }
+	  editor._previewAbortController = new AbortController();
+
   const form = editor.area.closest('form');
   if (!form) return;
 
@@ -209,7 +222,8 @@ async function updatePreview(editor) {
     const res = await fetch(editor.ajaxUrl, {
       method: 'POST',
       body: fd,
-      credentials: 'same-origin'
+      credentials: 'same-origin',
+	  signal: editor._previewAbortController.signal
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
@@ -229,6 +243,6 @@ async function updatePreview(editor) {
       });
     }
   } catch (e) {
-    logger.warn('Live preview failed', e);
+    logger.warn('Preview fetch failed', e);
   }
 }

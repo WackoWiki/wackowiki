@@ -7,26 +7,35 @@ import logger from '../utils/logger.js';
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function setupHeartbeat(editor) {
-  const timeoutSec = parseInt(editor.area.dataset.heartbeatTimeout, 10);
-  const name = editor.area.dataset.heartbeatName || 'edit';
+  const timeoutSec = parseInt(editor.area?.dataset.heartbeatTimeout, 10) || 0;
+  const name = editor.area?.dataset.heartbeatName || 'edit';
 
   if (!timeoutSec || timeoutSec < 60) return;
 
   // Store heartbeat info on the instance
   editor._heartbeatName = name;
   editor._heartbeatTimer = null;
+  editor._heartbeatAbortController = null;
   editor._heartbeatFailCount = 0;
 
   const maxFails = 3;
 
   const heartbeat = async () => {
+	// Abort any previous pending request
+    if (editor._heartbeatAbortController) {
+      editor._heartbeatAbortController.abort();
+    }
+
+	editor._heartbeatAbortController = new AbortController();
+
     try {
       const url = `${window.location.pathname}?_autocomplete=1&rnd=${Date.now()}`;
       const response = await fetch(url, {
         method: 'GET',
         cache: 'no-cache',
         headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        credentials: 'same-origin'
+        credentials: 'same-origin',
+		signal: editor._heartbeatAbortController.signal
       });
 
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -36,6 +45,11 @@ export function setupHeartbeat(editor) {
       logger.debug(`Heartbeat OK for "${name}"`);
 
     } catch (err) {
+	if (err.name === 'AbortError') {
+        logger.debug('Heartbeat request aborted');
+        return;
+      }
+
       editor._heartbeatFailCount++;
       logger.warn(`Heartbeat failed (${editor._heartbeatFailCount}/${maxFails}) for "${name}"`);
 
@@ -61,6 +75,13 @@ export function setupHeartbeat(editor) {
 function cleanup(editor) {
   logger.info('SessionHeartbeat: cleaning up');
 
+  // Abort any pending fetch
+    if (editor._heartbeatAbortController) {
+      editor._heartbeatAbortController.abort();
+      editor._heartbeatAbortController = null;
+    }
+
+  // Clear interval
   if (editor._heartbeatTimer) {
     clearInterval(editor._heartbeatTimer);
     editor._heartbeatTimer = null;
@@ -86,6 +107,11 @@ export function stopHeartbeat(editor) {
     editor._heartbeatTimer = null;
     logger.info(`Session heartbeat stopped for "${editor._heartbeatName || 'unknown'}"`);
   }
+
+  if (editor._heartbeatAbortController) {
+      editor._heartbeatAbortController.abort();
+      editor._heartbeatAbortController = null;
+    }
 }
 
 /**
