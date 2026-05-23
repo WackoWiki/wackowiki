@@ -15,15 +15,12 @@ import { setupLivePreview } from '../features/LivePreview.js';
 import { setupSyntaxHighlighting } from '../features/SyntaxHighlight.js';
 import { wackoToMarkdown, markdownToWacko } from '../features/MarkupConversion.js';
 import { setupMarkupHelpers } from '../features/MarkupHelpers.js';
-import { setupUndoRedo } from '../features/UndoRedo.js';
 import { setupHeartbeat, stopHeartbeat } from '../features/SessionHeartbeat.js';
 import { setupMediaUpload } from '../features/MediaUpload.js';
 import { setupKeyboardShortcuts } from '../features/KeyboardShortcuts.js';
 import { setupDarkZenMode } from '../features/DarkZenMode.js';
 import { setupModals } from '../features/Modals.js';
 import { setupUIFeatures } from '../features/UIFeatures.js';
-
-
 
 /*!
  * WikiEdit v3.26 (ES2023+)
@@ -35,6 +32,14 @@ import { setupUIFeatures } from '../features/UIFeatures.js';
 export class WikiEdit extends ProtoEdit {
 
   static buttonDefs = buttonDefs;
+
+  // Private fields for truly internal state
+  #undoStack = [];
+  #redoStack = [];
+  #maxHistory = 100;
+  #pushTimer = null;
+  #undoStateUnsubscribe = null;
+  #beforeInputHandler = null;
 
   #state;
 
@@ -153,7 +158,7 @@ export class WikiEdit extends ProtoEdit {
     loadAndBuildToolbar(this);
 
     // Core features
-    setupUndoRedo(this);
+    this.#setupUndoRedo();
     setupKeyboardShortcuts(this);
     setupHeartbeat(this);
     setupAutosave(this);
@@ -182,6 +187,202 @@ export class WikiEdit extends ProtoEdit {
   _protoBuildToolbar(configArray) {
     super.buildToolbar(configArray);
   }
+
+  // ===================================================================
+  // PRIVATE: Undo/Redo setup
+  // ===================================================================
+  #setupUndoRedo() {
+    const state = this.#state;
+
+    // Public API methods – they close over the instance (this) so they
+    // can access private fields.
+    this.pushState = this.#pushState.bind(this);
+    this.undo = this.#undo.bind(this);
+    this.redo = this.#redo.bind(this);
+    this.validateState = this.#validateState.bind(this);
+
+    // Debounce helper (exposed as a method for internal use, but still private)
+    this._debouncePushState = this.#debouncePushState.bind(this);
+
+    // Subscribe to EditorState changes
+    const unsubscribe = state.subscribe((change) => {
+      if (change.type === 'content' && change.pushToUndo) {
+        this.#pushState();
+      }
+    });
+    this.#undoStateUnsubscribe = unsubscribe;
+
+    // Capture beforeinput to push current state before native changes
+    const beforeInputHandler = (e) => this.#handleBeforeInput(e);
+    this.area.addEventListener('beforeinput', beforeInputHandler);
+    this.#beforeInputHandler = beforeInputHandler; // store for cleanup
+
+    logger.debug('UndoRedo: setup complete with cleanup registered');
+  }
+
+  // All private methods now use # prefix
+  #pushState() {
+    const state = this.#state;
+    const t = this.area;
+    if (!t) return;
+
+    const currentState = {
+      text: state.content,
+      start: t.selectionStart,
+      end: t.selectionEnd,
+      scroll: t.scrollTop
+    };
+
+    if (!this.#validateState(currentState)) {
+      logger.error('UndoRedo: invalid state – refusing to push to undo stack');
+      return;
+    }
+
+    // Avoid duplicate consecutive states
+    const last = this.#undoStack[this.#undoStack.length - 1];
+    if (last &&
+      last.text === currentState.text &&
+      last.start === currentState.start &&
+      last.end === currentState.end &&
+      last.scroll === currentState.scroll) {
+      return;
+    }
+
+    this.#undoStack.push(currentState);
+    if (this.#undoStack.length > this.#maxHistory) {
+      this.#undoStack.shift();
+    }
+    this.#redoStack = [];
+  }
+
+  #undo() {
+    if (this.#undoStack.length === 0) return false;
+
+    const t = this.area;
+    const state = this.#state;
+
+    const current = {
+      text: state.content,
+      start: t.selectionStart,
+      end: t.selectionEnd,
+      scroll: t.scrollTop
+    };
+
+    if (!this.#validateState(current)) {
+      logger.warn('UndoRedo: current state invalid before undo – still proceeding');
+    }
+
+    this.#redoStack.push(current);
+    const prev = this.#undoStack.pop();
+
+    if (!this.#validateState(prev)) {
+      logger.error('UndoRedo: corrupted undo state popped! Stack sanitized.');
+      this.#undoStack = this.#undoStack.filter(s => this.#validateState(s));
+      return false;
+    }
+
+    this.replaceContent(prev.text, false, {
+      selection: { start: prev.start, end: prev.end },
+      scroll: prev.scroll
+    });
+
+    // replaceContent already sets the content via state; we just need to restore cursor/scroll
+    t.setSelectionRange(prev.start, prev.end);
+    t.scrollTop = prev.scroll ?? 0;
+    t.focus();
+
+    return true;
+  }
+
+  #redo() {
+    if (this.#redoStack.length === 0) return false;
+
+    const t = this.area;
+    const state = this.#state;
+
+    const current = {
+      text: state.content,
+      start: t.selectionStart,
+      end: t.selectionEnd,
+      scroll: t.scrollTop
+    };
+
+    if (!this.#validateState(current)) {
+      logger.warn('UndoRedo: current state invalid before redo – still proceeding');
+    }
+
+    this.#undoStack.push(current);
+    const next = this.#redoStack.pop();
+
+    if (!this.#validateState(next)) {
+      logger.error('UndoRedo: corrupted redo state popped! Stack sanitized.');
+      this.#redoStack = this.#redoStack.filter(s => this.#validateState(s));
+      return false;
+    }
+
+    this.replaceContent(next.text, false, {
+      selection: { start: next.start, end: next.end },
+      scroll: next.scroll
+    });
+
+    t.setSelectionRange(next.start, next.end);
+    t.scrollTop = next.scroll ?? 0;
+    t.focus();
+
+    return true;
+  }
+
+  #validateState(state) {
+    if (!state || typeof state !== 'object') {
+      logger.warn('UndoRedo: state is not an object');
+      return false;
+    }
+    if (typeof state.text !== 'string') {
+      logger.warn('UndoRedo: state.text is not a string');
+      return false;
+    }
+    const len = state.text.length;
+    if (typeof state.start !== 'number' || state.start < 0 || state.start > len) {
+      logger.warn('UndoRedo: invalid selectionStart', state.start, '(text length =', len, ')');
+      return false;
+    }
+    if (typeof state.end !== 'number' || state.end < state.start || state.end > len) {
+      logger.warn('UndoRedo: invalid selectionEnd', state.end, '(start =', state.start, ', length =', len, ')');
+      return false;
+    }
+    if (typeof state.scroll !== 'number' || state.scroll < 0) {
+      logger.warn('UndoRedo: invalid scrollTop', state.scroll);
+      return false;
+    }
+    return true;
+  }
+
+  #handleBeforeInput(e) {
+    // Never interfere with browser's own history undo/redo
+    if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') {
+      return;
+    }
+    this.#debouncePushState();
+  }
+
+  #debouncePushState() {
+    const t = this.area;
+    if (!t) return;
+    const len = t.value.length;
+
+    if (len < 20000) {
+      this.#pushState();
+      return;
+    }
+
+    // Large text: debounce aggressively
+    clearTimeout(this.#pushTimer);
+    this.#pushTimer = setTimeout(() => {
+      this.#pushState();
+      this.#pushTimer = null;
+    }, 650);
+  }
+
 
   // ==================== Content API (now using state) ====================
 
@@ -321,6 +522,34 @@ export class WikiEdit extends ProtoEdit {
      */
   destroy() {
     logger.info(`Destroying WikiEdit instance: ${this.id || 'unknown'}`);
+
+    if (typeof this.#undoStateUnsubscribe === 'function') {
+      this.#undoStateUnsubscribe();
+      this.#undoStateUnsubscribe = null;
+    }
+
+    // Clear timer
+    if (this.#pushTimer) {
+      clearTimeout(this.#pushTimer);
+      this.#pushTimer = null;
+    }
+
+    // Clear stacks
+    this.#undoStack = [];
+    this.#redoStack = [];
+
+    // Remove beforeinput listener
+    if (this.#beforeInputHandler) {
+      this.area?.removeEventListener('beforeinput', this.#beforeInputHandler);
+      this.#beforeInputHandler = null;
+    }
+
+    // Remove public methods that were bound
+    delete this.pushState;
+    delete this.undo;
+    delete this.redo;
+    delete this.validateState;
+    delete this._debouncePushState;
 
     // Call feature cleanups in reverse order of setup (best practice)
     // Feature cleanups in reverse setup order
