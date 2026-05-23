@@ -1,6 +1,23 @@
-// src/js/features/SessionHeartbeat.js
-
 import logger from '../utils/logger.js';
+
+// Private state storage – keys are editor instances, values are heartbeat state objects
+const heartbeatStates = new WeakMap();
+
+function getState(editor) {
+  if (!heartbeatStates.has(editor)) {
+    heartbeatStates.set(editor, {
+      timer: null,
+      abortController: null,
+      failCount: 0,
+      name: ''
+    });
+  }
+  return heartbeatStates.get(editor);
+}
+
+function clearState(editor) {
+  heartbeatStates.delete(editor);
+}
 
 /**
  * Initialises the session heartbeat for the editor.
@@ -12,21 +29,21 @@ export function setupHeartbeat(editor) {
 
   if (!timeoutSec || timeoutSec < 60) return;
 
-  // Store heartbeat info on the instance
-  editor._heartbeatName = name;
-  editor._heartbeatTimer = null;
-  editor._heartbeatAbortController = null;
-  editor._heartbeatFailCount = 0;
+  const state = getState(editor);
+  state.name = name;
+  state.timer = null;
+  state.abortController = null;
+  state.failCount = 0;
 
   const maxFails = 3;
 
   const heartbeat = async () => {
-	// Abort any previous pending request
-    if (editor._heartbeatAbortController) {
-      editor._heartbeatAbortController.abort();
+    // Abort any previous pending request
+    if (state.abortController) {
+      state.abortController.abort();
     }
 
-	editor._heartbeatAbortController = new AbortController();
+    state.abortController = new AbortController();
 
     try {
       const url = `${window.location.pathname}?_autocomplete=1&rnd=${Date.now()}`;
@@ -35,25 +52,25 @@ export function setupHeartbeat(editor) {
         cache: 'no-cache',
         headers: { 'X-Requested-With': 'XMLHttpRequest' },
         credentials: 'same-origin',
-		signal: editor._heartbeatAbortController.signal
+        signal: state.abortController.signal
       });
 
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       // Reset failure count on success
-      editor._heartbeatFailCount = 0;
+      state.failCount = 0;
       logger.debug(`Heartbeat OK for "${name}"`);
 
     } catch (err) {
-	if (err.name === 'AbortError') {
+      if (err.name === 'AbortError') {
         logger.debug('Heartbeat request aborted');
         return;
       }
 
-      editor._heartbeatFailCount++;
-      logger.warn(`Heartbeat failed (${editor._heartbeatFailCount}/${maxFails}) for "${name}"`);
+      state.failCount++;
+      logger.warn(`Heartbeat failed (${state.failCount}/${maxFails}) for "${name}"`);
 
-      if (editor._heartbeatFailCount >= maxFails) {
+      if (state.failCount >= maxFails) {
         showSessionExpiredWarning(editor, name);
         stopHeartbeat(editor);
       }
@@ -61,7 +78,7 @@ export function setupHeartbeat(editor) {
   };
 
   // Start interval
-  editor._heartbeatTimer = setInterval(heartbeat, timeoutSec * 1000);
+  state.timer = setInterval(heartbeat, timeoutSec * 1000);
   logger.debug(`Session heartbeat started for "${name}" every ${timeoutSec}s`);
 
   // Register cleanup
@@ -75,23 +92,29 @@ export function setupHeartbeat(editor) {
 function cleanup(editor) {
   logger.info('SessionHeartbeat: cleaning up');
 
+  const state = heartbeatStates.get(editor);
+  if (!state) {
+    logger.debug('SessionHeartbeat: no state to clean up');
+    return;
+  }
+
   // Abort any pending fetch
-    if (editor._heartbeatAbortController) {
-      editor._heartbeatAbortController.abort();
-      editor._heartbeatAbortController = null;
-    }
+  if (state.abortController) {
+    state.abortController.abort();
+    state.abortController = null;
+  }
 
   // Clear interval
-  if (editor._heartbeatTimer) {
-    clearInterval(editor._heartbeatTimer);
-    editor._heartbeatTimer = null;
+  if (state.timer) {
+    clearInterval(state.timer);
+    state.timer = null;
     logger.debug('SessionHeartbeat: interval cleared');
   }
 
-  // Clean up references
-  delete editor._heartbeatTimer;
-  delete editor._heartbeatName;
-  delete editor._heartbeatFailCount;
+  // Remove state from WeakMap
+  clearState(editor);
+
+  // Clean up references on editor (still needed for destroy chain)
   delete editor._cleanupHeartbeat;
 
   logger.debug('SessionHeartbeat: cleanup finished');
@@ -102,16 +125,19 @@ function cleanup(editor) {
  * @param {import('../core/WikiEdit.js').WikiEdit} editor
  */
 export function stopHeartbeat(editor) {
-  if (editor._heartbeatTimer) {
-    clearInterval(editor._heartbeatTimer);
-    editor._heartbeatTimer = null;
-    logger.info(`Session heartbeat stopped for "${editor._heartbeatName || 'unknown'}"`);
+  const state = heartbeatStates.get(editor);
+  if (!state) return;
+
+  if (state.timer) {
+    clearInterval(state.timer);
+    state.timer = null;
+    logger.info(`Session heartbeat stopped for "${state.name || 'unknown'}"`);
   }
 
-  if (editor._heartbeatAbortController) {
-      editor._heartbeatAbortController.abort();
-      editor._heartbeatAbortController = null;
-    }
+  if (state.abortController) {
+    state.abortController.abort();
+    state.abortController = null;
+  }
 }
 
 /**

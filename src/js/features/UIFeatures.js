@@ -33,6 +33,7 @@ function cleanup(editor) {
   }
 
   delete editor._cleanupUIFeatures;
+  delete editor._statusBar
 
   logger.debug('UIFeatures: cleanup finished');
 }
@@ -46,6 +47,9 @@ function setupStatusBar(editor) {
 
   // Insert status bar after the textarea (or split container)
   const statusBar = createStatusBar(editor);
+
+  // Store reference for later use (avoids DOM query issues with wrappers)
+  editor._statusBar = statusBar;
 
   // Determine the correct insertion point:
   // If textarea's parent is a known wrapper (e.g., '.syntax-container'),
@@ -80,7 +84,7 @@ function createStatusBar(editor) {
 }
 
 function updateStatus(editor) {
-  const bar = editor.area.parentNode.querySelector('.we-statusbar');
+  const bar = editor._statusBar; // use stored reference
   if (!bar) return;
 
   const text = editor.area.value;
@@ -98,7 +102,7 @@ function updateStatus(editor) {
 }
 
 function showMessage(editor, msg, isError = false, duration = 3000) {
-  const bar = editor.area.parentNode.querySelector('.we-statusbar');
+  const bar = editor._statusBar; // use stored reference
   if (!bar) return;
 
   const msgEl = bar.querySelector('.we-message');
