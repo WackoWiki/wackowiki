@@ -33,6 +33,7 @@ function all_init() {
 
 /**
  * Double-click to edit - Supports main page + root-level comments
+ * Allows editing outside forms, but not inside any <form> element.
  */
 (function() {
   let editBaseUrl = null;
@@ -49,14 +50,18 @@ function all_init() {
     const contentArea = document.getElementById('section-content');
     if (!contentArea) return;
 
-    // Skip on edit pages
-    if (contentArea.querySelector('form[name="edit"], form.edit')) return;
-
+    // Do NOT disable just because a form exists – we handle it in the event handler
     document.addEventListener('dblclick', handleDoubleClick, { capture: true });
-    Log.info('Double-click to edit enabled');
+    Log.info('Double-click to edit enabled (suppressed inside forms)');
   }
 
   function handleDoubleClick(e) {
+    // Suppress double-click if the click target is inside any <form>
+    if (e.target.closest('form')) {
+      Log.debug('Double-click ignored (inside form)');
+      return;
+    }
+
     let el = e.target;
 
     while (el && el !== document.body) {
