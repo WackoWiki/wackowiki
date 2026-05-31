@@ -236,7 +236,11 @@ class Diag
 			'BLUE'		=> 1,
 			'GOLD'		=> 2,
 			'ORANGE'	=> 3,
-			'RED'		=> 4
+			'RED'		=> 4,
+			'GREEN'		=> 5,
+			'CYAN'		=> 6,
+			'YELLOW'	=> 7,
+			'PURPLE'	=> 8,
 		];
 
 		if ($args = func_get_args())

@@ -61,7 +61,11 @@
         1: '#6666ff', // Blue
         2: '#ffd700', // Gold
         3: '#ff8c00', // Orange
-        4: '#ff4444'  // Red
+        4: '#ff4444', // Red
+		5: '#008000', // Green
+		6: '#00FFFF', // Cyan
+		7: '#800080', // Purple
+		8: '#FFFF00'  // Yellow
       };
       const color = colors[entry.type] || '#cccccc';
       
