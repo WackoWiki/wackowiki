@@ -1,4 +1,4 @@
-// src/features/MarkupConversion.js
+// src/editor/features/markup-conversion.js
 
 /**
  * Convert WackoWiki markup to Markdown (approximate).

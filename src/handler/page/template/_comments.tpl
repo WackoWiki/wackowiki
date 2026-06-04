@@ -67,11 +67,10 @@
 
 						[ '' // load WikiEdit '' ]
 						<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
-						<script type="module" src="[ ' db: base_path ' ]js/core/protoedit.js"[ ' db: csp_nonce ' ]></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"[ ' db: csp_nonce ' ]></script>
-						<script type="module" src="[ ' db: base_path ' ]js/core/wikiedit.js"[ ' db: csp_nonce ' ]></script>
+						<script type="module" src="[ ' db: base_path ' ]js/main.js"[ ' db: csp_nonce ' ]></script>
 						[= ac _ =
-							<script src="[ ' db: base_path ' ]js/core/autocomplete.js"[ ' db: csp_nonce ' ]></script>
+							<script src="[ ' db: base_path ' ]js/editor/autocomplete.js"[ ' db: csp_nonce ' ]></script>
 						=]
 
 						<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>

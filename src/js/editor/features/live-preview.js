@@ -1,11 +1,11 @@
-// src/js/features/LivePreview.js
+// src/js/editor/features/live-preview.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up the live preview infrastructure.
  * Must be called AFTER the toolbar is built (so the toggle button exists).
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupLivePreview(editor) {
   editor._previewAbortController = null;
@@ -36,7 +36,7 @@ export function setupLivePreview(editor) {
 
 /**
  * Cleanup function for Live Preview.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('LivePreview: cleaning up');
@@ -65,7 +65,7 @@ function cleanup(editor) {
 
 /**
  * Toggles the live preview pane on/off.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function toggleLivePreview(editor) {
   editor.livePreviewEnabled = !editor.livePreviewEnabled;
@@ -96,7 +96,7 @@ export function toggleLivePreview(editor) {
 /**
  * Creates the split panes and attaches them to the DOM.
  * This is done once, regardless of whether live preview is initially on.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function createSplitPanes(editor) {
   const wrapper = editor.area.parentNode;
@@ -203,7 +203,7 @@ function createSplitPanes(editor) {
 
 /**
  * Fetches and displays the live preview.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 async function updatePreview(editor) {
 	if (editor._previewAbortController) {

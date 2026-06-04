@@ -1,10 +1,10 @@
-// src/js/features/UIFeatures.js
+// src/js/editor/features/ui-features.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up status bar, fullscreen, and critical-field warning.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupUIFeatures(editor) {
 	setupStatusBar(editor);
@@ -18,7 +18,7 @@ export function setupUIFeatures(editor) {
 
 /**
  * Cleanup function for UI Features.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('UIFeatures: cleaning up');

@@ -1,10 +1,10 @@
-// src/js/features/MediaUpload.js
+// src/js/editor/features/media-upload.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up media upload handling (drag & drop, paste, toolbar button).
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupMediaUpload(editor) {
   if (!editor.canUpload) return;
@@ -27,7 +27,7 @@ export function setupMediaUpload(editor) {
 
 /**
  * Cleanup function – aborts any pending upload.
-* @param {import('../core/WikiEdit.js').WikiEdit} editor
+* @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('MediaUpload: cleaning up');
@@ -167,7 +167,7 @@ async function uploadMediaFiles(editor, files) {
 
 /**
  * Insert text at cursor position.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  * @param {string} text
  * @param {boolean} pushToUndo
  */

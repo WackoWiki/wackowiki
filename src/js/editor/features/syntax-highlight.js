@@ -1,11 +1,11 @@
-// src/js/features/SyntaxHighlight.js
+// src/js/editor/features/syntax-highlight.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up the syntax highlighting overlay and attaches all related listeners.
  * Call once during init, after the toolbar is built.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupSyntaxHighlighting(editor) {
   if (!editor.syntaxHighlighting) return;
@@ -80,7 +80,7 @@ export function setupSyntaxHighlighting(editor) {
 
 /**
  * Cleanup function for Syntax Highlighting.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('SyntaxHighlight: cleaning up');
@@ -111,7 +111,7 @@ function cleanup(editor) {
 /**
  * Request syntax highlighting using requestIdleCallback (preferred) 
  * with requestAnimationFrame fallback.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function refreshSyntaxHighlight(editor) {
   if (!editor.syntaxHighlightEnabled || !editor.highlighter) return;
@@ -145,7 +145,7 @@ function refreshSyntaxHighlight(editor) {
 
 /**
  * Enables syntax highlighting (shows overlay, makes textarea transparent).
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function enableSyntaxHighlighting(editor) {
   editor.syntaxHighlightEnabled = true;
@@ -167,7 +167,7 @@ export function enableSyntaxHighlighting(editor) {
 
 /**
  * Disables syntax highlighting (hides overlay, restores textarea colors).
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function disableSyntaxHighlighting(editor) {
   editor.syntaxHighlightEnabled = false;
@@ -184,7 +184,7 @@ export function disableSyntaxHighlighting(editor) {
 
 /**
  * Toggles syntax highlighting on/off and persists the choice.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function toggleSyntaxHighlight(editor) {
   if (editor.syntaxHighlightEnabled) {
@@ -199,7 +199,7 @@ function toggleSyntaxHighlight(editor) {
 
 /**
  * Synchronizes the overlay dimensions with the textarea.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function syncContentSize(editor) {
   if (!editor.highlighter || !editor.area) return;

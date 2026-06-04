@@ -1,11 +1,11 @@
-// src/js/features/DarkZenMode.js
+// src/js/editor/features/zen-mode.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up dark mode and zen mode on the editor.
  * Call once during init, after the toolbar is built.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupDarkZenMode(editor) {
   // Attach toggle methods so toolbar delegation can use them
@@ -27,7 +27,7 @@ export function setupDarkZenMode(editor) {
 
 /**
  * Cleanup function for Dark/Zen Mode.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('DarkZenMode: cleaning up');

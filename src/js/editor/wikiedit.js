@@ -1,26 +1,28 @@
-// src/core/WikiEdit.js
+// src/editor/wikiedit.js
 
-import { ProtoEdit } from './protoedit.js';           // your base class (now a module)
-import { EditorState } from './EditorState.js';
+import { ProtoEdit } from './protoedit.js';
+import { EditorState } from './editor-state.js';
+
+import { buttonDefs } from './toolbar/toolbar-config.js';
+import { loadAndBuildToolbar } from './toolbar/toolbar-builder.js';
+
+// Features (import the setup functions you use in init()) / use explicit initialization
+import { setupMarkupHelpers } from './features/markup-helpers.js';
+import { setupHeartbeat } from './features/session-heartbeat.js';
+import { setupMediaUpload } from './features/media-upload.js';
+import { setupToolbarDelegation } from './toolbar/toolbar-delegation.js';
+import { setupLivePreview } from './features/live-preview.js';
+import { setupSyntaxHighlighting } from './features/syntax-highlight.js';
+import { setupAutosave } from './features/autosave.js';
+import { setupKeyboardShortcuts } from './features/keyboard-shortcuts.js';
+import { setupDarkZenMode } from './features/zen-mode.js';
+import { setupModals } from './features/modals.js';
+import { setupUIFeatures } from './features/ui-features.js';
+
+// Core utilities used by the class
 import logger from '../utils/logger.js';
 import { loadPreferredNumber } from '../utils/storage.js';
 import { getRelativeTime } from '../utils/time.js';
-import { buttonDefs, getDefaultToolbarOrder } from '../toolbar/ToolbarConfig.js';
-import { loadAndBuildToolbar } from '../toolbar/ToolbarBuilder.js';
-
-// Feature modules
-import { setupToolbarDelegation } from '../toolbar/ToolbarDelegation.js';
-import { setupAutosave } from '../features/Autosave.js';
-import { setupLivePreview } from '../features/LivePreview.js';
-import { setupSyntaxHighlighting } from '../features/SyntaxHighlight.js';
-import { wackoToMarkdown, markdownToWacko } from '../features/MarkupConversion.js';
-import { setupMarkupHelpers } from '../features/MarkupHelpers.js';
-import { setupHeartbeat, stopHeartbeat } from '../features/SessionHeartbeat.js';
-import { setupMediaUpload } from '../features/MediaUpload.js';
-import { setupKeyboardShortcuts } from '../features/KeyboardShortcuts.js';
-import { setupDarkZenMode } from '../features/DarkZenMode.js';
-import { setupModals } from '../features/Modals.js';
-import { setupUIFeatures } from '../features/UIFeatures.js';
 
 /*!
  * WikiEdit v3.26 (ES2023+)

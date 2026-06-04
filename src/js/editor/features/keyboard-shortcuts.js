@@ -1,10 +1,10 @@
-// src/js/features/KeyboardShortcuts.js
+// src/js/editor/features/keyboard-shortcuts.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up keyboard shortcuts and auto-list continuation on the editor.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupKeyboardShortcuts(editor) {
   // Remove any previous listener (safe for re-init)
@@ -26,7 +26,7 @@ export function setupKeyboardShortcuts(editor) {
 
 /**
  * Cleanup function for Keyboard Shortcuts.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('KeyboardShortcuts: cleaning up');
@@ -52,7 +52,7 @@ function cleanup(editor) {
 
 /**
  * Main keydown handler for the textarea.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  * @param {KeyboardEvent} e
  */
 function keyDownHandler(editor, e) {
@@ -138,7 +138,7 @@ function keyDownHandler(editor, e) {
 
 /**
  * Global keyboard shortcuts (e.g., Ctrl+Alt+Z for Zen mode).
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  * @param {KeyboardEvent} e
  */
 function globalKeyHandler(editor, e) {
@@ -150,7 +150,7 @@ function globalKeyHandler(editor, e) {
 
 /**
  * Handles the Enter key for automatic list continuation.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  * @param {HTMLTextAreaElement} t
  * @param {number} scroll - current scrollTop
  * @returns {{res: boolean, noscroll: boolean, justenter: boolean}|null}

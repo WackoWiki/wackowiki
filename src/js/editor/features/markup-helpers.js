@@ -1,11 +1,11 @@
-// src/js/features/MarkupHelpers.js
+// src/js/editor/features/markup-helpers.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Attach all markup helper methods to the editor instance.
  * Call once during init, before any toolbar or keyboard actions.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupMarkupHelpers(editor) {
   // Selection helper – must be available to other methods

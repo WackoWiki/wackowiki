@@ -1,4 +1,6 @@
-import logger from '../utils/logger.js';
+// src/js/editor/features/session-heartbeat.js
+
+import logger from '../../utils/logger.js';
 
 // Private state storage – keys are editor instances, values are heartbeat state objects
 const heartbeatStates = new WeakMap();
@@ -21,7 +23,7 @@ function clearState(editor) {
 
 /**
  * Initialises the session heartbeat for the editor.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupHeartbeat(editor) {
   const timeoutSec = parseInt(editor.area?.dataset.heartbeatTimeout, 10) || 0;
@@ -87,7 +89,7 @@ export function setupHeartbeat(editor) {
 
 /**
  * Cleanup function for Session Heartbeat.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('SessionHeartbeat: cleaning up');
@@ -122,7 +124,7 @@ function cleanup(editor) {
 
 /**
  * Stops the heartbeat timer and cleans up.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function stopHeartbeat(editor) {
   const state = heartbeatStates.get(editor);
@@ -142,7 +144,7 @@ export function stopHeartbeat(editor) {
 
 /**
  * Shows a session expired warning if the editor content was modified.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  * @param {string} name - heartbeat name (e.g. 'edit')
  */
 function showSessionExpiredWarning(editor, name) {

@@ -1,7 +1,7 @@
-// src/js/features/Autosave.js
+// src/js/editor/features/autosave.js
 
-import logger from '../utils/logger.js';
-import { safeSetItem, safeGetItem, safeRemoveItem } from '../utils/storage.js';
+import logger from '../../utils/logger.js';
+import { safeSetItem, safeGetItem, safeRemoveItem } from '../../utils/storage.js';
 
 class AutosaveController {
   #editor;
@@ -215,7 +215,7 @@ class AutosaveController {
 
 /**
  * Sets up autosave listeners using a private controller class.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupAutosave(editor) {
   if (editor.area.dataset.autosaveDraft === '0') return;

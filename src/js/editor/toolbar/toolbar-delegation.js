@@ -1,6 +1,6 @@
-// src/toolbar/ToolbarDelegation.js
+// src/editor/toolbar/toolbar-delegation.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up event delegation on the toolbar container.

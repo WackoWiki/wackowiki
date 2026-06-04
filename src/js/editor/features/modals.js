@@ -1,10 +1,10 @@
-// src/js/features/Modals.js
+// src/js/editor/features/modals.js
 
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Sets up modal dialogs used by the editor.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupModals(editor) {
   setupLinkModal(editor);
@@ -19,7 +19,7 @@ export function setupModals(editor) {
 
 /**
  * Cleanup function for Modals.
- * @param {import('../core/WikiEdit.js').WikiEdit} editor
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 function cleanup(editor) {
   logger.info('Modals: cleaning up');

@@ -1,4 +1,4 @@
-// src/toolbar/ToolbarConfig.js
+// src/editor/toolbar/toolbar-config.js
 
 export const buttonDefs = {
   'h2': { labelKey: 'Heading2', method: 'insTag', args: ['===', '===', 0, 1] },

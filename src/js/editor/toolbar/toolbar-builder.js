@@ -1,7 +1,7 @@
-// src/toolbar/ToolbarBuilder.js
+// src/editor/toolbar/toolbar-builder.js
 
-import { getDefaultToolbarOrder } from './ToolbarConfig.js';
-import logger from '../utils/logger.js';
+import { getDefaultToolbarOrder } from './toolbar-config.js';
+import logger from '../../utils/logger.js';
 
 /**
  * Load toolbar config (server JSON or default) and build the toolbar.

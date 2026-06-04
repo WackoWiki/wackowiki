@@ -1,3 +1,5 @@
+// src/editor/toolbar/toolbar-customizer.js
+
 /*!
  * WackoWiki Toolbar Customizer - Standalone (for User Settings)
  */
