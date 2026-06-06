@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d61f4ef32f68e4db068e49649efd50e",
+    "content-hash": "3712d7b18887fd7309da1fabc38e45ca",
     "packages": [
         {
             "name": "enshrined/svg-sanitize",
@@ -349,16 +349,16 @@
         },
         {
             "name": "phpthumb/phpthumb",
-            "version": "2.3.3",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPThumb/PHPThumb.git",
-                "reference": "975782e3adf29fa749ea0131092e2a19a3e11727"
+                "reference": "5dcb9822caabe9bcb3f17d23ffd945944c6a943d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/975782e3adf29fa749ea0131092e2a19a3e11727",
-                "reference": "975782e3adf29fa749ea0131092e2a19a3e11727",
+                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/5dcb9822caabe9bcb3f17d23ffd945944c6a943d",
+                "reference": "5dcb9822caabe9bcb3f17d23ffd945944c6a943d",
                 "shasum": ""
             },
             "require": {
@@ -370,9 +370,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "PHPThumb": "src",
-                    "PHPThumb\\Tests": "tests"
+                "psr-4": {
+                    "PHPThumb\\": "src/PHPThumb/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -398,9 +397,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPThumb/PHPThumb/issues",
-                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.3.3"
+                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.3.5"
             },
-            "time": "2025-11-15T09:08:55+00:00"
+            "time": "2026-06-06T21:29:00+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -536,16 +535,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.37.0",
+            "version": "v1.38.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "6a21eb99c6973357967f6ce3708cd55a6bec6315"
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6a21eb99c6973357967f6ce3708cd55a6bec6315",
-                "reference": "6a21eb99c6973357967f6ce3708cd55a6bec6315",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/14c5439eec4ccff081ac14eca2dc57feb2a66d92",
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92",
                 "shasum": ""
             },
             "require": {
@@ -597,7 +596,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.37.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.1"
             },
             "funding": [
                 {
@@ -617,7 +616,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-10T17:25:58+00:00"
+            "time": "2026-05-26T12:51:13+00:00"
         }
     ],
     "packages-dev": [],
@@ -628,6 +627,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": "8.0 - 8.5",
+        "ext-spl": "*",
         "ext-bcmath": "*",
         "ext-ctype": "*",
         "ext-dom": "*",
@@ -642,7 +642,6 @@
         "ext-pcre": "*",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
-        "ext-spl": "*",
         "ext-sqlite3": "*",
         "ext-zlib": "*"
     },
