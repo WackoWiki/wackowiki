@@ -1,5 +1,3 @@
-// src/js/core/EditorState.js
-
 export class EditorState {
   #content = '';
   #selectionStart = 0;
@@ -13,7 +11,6 @@ export class EditorState {
     this.#content = initialContent;
   }
 
-  // Getters
   get content() { return this.#content; }
   get selection() {
     return { start: this.#selectionStart, end: this.#selectionEnd };
@@ -22,8 +19,7 @@ export class EditorState {
   get isDirty() { return this.#dirty; }
   get isModified() { return this.#modified; }
 
-  // Main setter with reactivity
-  setContent(newContent, pushToUndo = true, metadata = {}) {
+  setContent(newContent, metadata = {}) {
     if (newContent === this.#content) return false;
 
     const oldContent = this.#content;
@@ -43,9 +39,9 @@ export class EditorState {
       type: 'content',
       content: newContent,
       oldContent,
-      pushToUndo,                    // simple and direct
       selection: metadata.selection,
-      scroll: metadata.scroll
+      scroll: metadata.scroll,
+      _programmatic: metadata._programmatic ?? true
     });
 
     return true;
@@ -70,7 +66,7 @@ export class EditorState {
 
   subscribe(listener) {
     this.#listeners.add(listener);
-    return () => this.#listeners.delete(listener); // unsubscribe
+    return () => this.#listeners.delete(listener);
   }
 
   #notify(change) {

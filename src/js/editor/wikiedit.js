@@ -13,6 +13,7 @@ import { setupMediaUpload } from './features/media-upload.js';
 import { setupToolbarDelegation } from './toolbar/toolbar-delegation.js';
 import { setupLivePreview } from './features/live-preview.js';
 import { setupSyntaxHighlighting } from './features/syntax-highlight.js';
+import { wackoToMarkdown, markdownToWacko } from './features/markup-conversion.js';
 import { setupAutosave } from './features/autosave.js';
 import { setupKeyboardShortcuts } from './features/keyboard-shortcuts.js';
 import { setupDarkZenMode } from './features/zen-mode.js';
@@ -78,7 +79,7 @@ export class WikiEdit extends ProtoEdit {
   // INITIALISATION
   // ===================================================================
   init(id, imgPath) {
-    this._init(id);               // ProtoEdit setup, creates this.area
+    this._init(id);
     this.imagesPath = imgPath || 'image/';
     this.area.wikiEditInstance = this;
 
@@ -100,8 +101,8 @@ export class WikiEdit extends ProtoEdit {
     // Context detection
     this.isCommentMode = ta.id === 'addcomment' || ta.name === 'payload';
 
-    // === Initialize State with current textarea content ===
-    this.#state.setContent(ta.value, false);
+    // === Initialize State - push initial content to undo stack ===
+    this.#state.setContent(ta.value, { _programmatic: true });
 
     // === State → UI Sync ===
     this.#state.subscribe((change) => {
@@ -109,13 +110,20 @@ export class WikiEdit extends ProtoEdit {
       if (!ta) return;
 
       if (change.type === 'content') {
+        // For toolbar buttons (_programmatic: true): subscription does nothing
+        // For undo/redo (_programmatic: true): subscription does nothing
+        // For keyboard/paste: pushState is called in inputHandler, subscription only updates UI
+
+        // Just update UI
         if (ta.value !== change.content) {
           ta.value = change.content;
         }
 
-        if (change.selection) {
+        // Update selection only when explicitly provided
+        if (change.selection !== undefined) {
           ta.setSelectionRange(change.selection.start, change.selection.end);
         }
+
         if (typeof change.scroll === 'number') {
           ta.scrollTop = change.scroll;
         }
@@ -126,16 +134,31 @@ export class WikiEdit extends ProtoEdit {
           setTimeout(() => this.updatePreview(), 20);
         }
 
-        // Trigger syntax highlight (non-blocking)
         this.refreshSyntaxHighlight?.();
-
-        ta.dispatchEvent(new Event('input', { bubbles: true }));
       }
     });
 
+    // Input handler for keyboard/paste
     const inputHandler = () => {
-      this.#state.setContent(ta.value, false);
+      // CRITICAL: Save cursor position BEFORE the change
+      // This is where cursor SHOULD be after undo
+      const savedSelection = {
+        start: ta.selectionStart,
+        end: ta.selectionEnd
+      };
+
+      // Call pushState BEFORE setContent updates state.content
+      // pushState needs to capture the OLD content with the cursor position BEFORE the change
+      this.pushState();
+
+      // Restore saved cursor position for the OLD state
+      // This ensures the restored state has the correct cursor position
+      this._savedSelection = savedSelection;
+
+      // Then update state (subscription only updates UI, no push)
+      this.#state.setContent(ta.value);
     };
+
     const selectionHandler = () => {
       this.#state.setSelection(ta.selectionStart, ta.selectionEnd);
     };
@@ -144,7 +167,7 @@ export class WikiEdit extends ProtoEdit {
     ta.addEventListener('select', selectionHandler);
     ta.addEventListener('keydown', selectionHandler);
 
-    // Store handlers for later removal in destroy()
+    // Store handlers for cleanup
     this._inputHandler = inputHandler;
     this._selectionHandler = selectionHandler;
 
@@ -153,10 +176,10 @@ export class WikiEdit extends ProtoEdit {
       ? (form.getAttribute('action') || window.location.href)
       : window.location.href;
 
-    // Markup helpers (needed before toolbar / keyboard)
+    // Markup helpers
     setupMarkupHelpers(this);
 
-    // Toolbar (must come before features that depend on toolbar buttons)
+    // Toolbar
     loadAndBuildToolbar(this);
 
     // Core features
@@ -166,7 +189,7 @@ export class WikiEdit extends ProtoEdit {
     setupAutosave(this);
     setupMediaUpload(this);
 
-    // UI features (after toolbar is in DOM)
+    // UI features
     setupDarkZenMode(this);
     setupLivePreview(this);
     setupSyntaxHighlighting(this);
@@ -177,7 +200,6 @@ export class WikiEdit extends ProtoEdit {
     // Post-setup
     this.updateToolbarButtonStates?.();
 
-    // Legacy global
     window.weSave = () => this.savePage();
 
     logger.success(`WikiEdit initialized: ${id}`);
@@ -196,30 +218,16 @@ export class WikiEdit extends ProtoEdit {
   #setupUndoRedo() {
     const state = this.#state;
 
-    // Public API methods – they close over the instance (this) so they
-    // can access private fields.
     this.pushState = this.#pushState.bind(this);
     this.undo = this.#undo.bind(this);
     this.redo = this.#redo.bind(this);
     this.validateState = this.#validateState.bind(this);
-
-    // Debounce helper (exposed as a method for internal use, but still private)
     this._debouncePushState = this.#debouncePushState.bind(this);
 
-    // Subscribe to EditorState changes
-    const unsubscribe = state.subscribe((change) => {
-      if (change.type === 'content' && change.pushToUndo) {
-        this.#pushState();
-      }
-    });
-    this.#undoStateUnsubscribe = unsubscribe;
+    // No subscription needed here - handled in init()
+    // The subscription in init() handles all state changes
 
-    // Capture beforeinput to push current state before native changes
-    const beforeInputHandler = (e) => this.#handleBeforeInput(e);
-    this.area.addEventListener('beforeinput', beforeInputHandler);
-    this.#beforeInputHandler = beforeInputHandler; // store for cleanup
-
-    logger.debug('UndoRedo: setup complete with cleanup registered');
+    logger.debug('UndoRedo: setup complete');
   }
 
   // All private methods now use # prefix
@@ -228,10 +236,19 @@ export class WikiEdit extends ProtoEdit {
     const t = this.area;
     if (!t) return;
 
+    // Use saved cursor position if available (from keyboard input)
+    // Otherwise use current cursor position
+    const savedSel = this._savedSelection;
+    const start = savedSel ? savedSel.start : t.selectionStart;
+    const end = savedSel ? savedSel.end : t.selectionEnd;
+    
+    // Clear the saved selection after using it
+    this._savedSelection = null;
+
     const currentState = {
       text: state.content,
-      start: t.selectionStart,
-      end: t.selectionEnd,
+      start: start,
+      end: end,
       scroll: t.scrollTop
     };
 
@@ -243,10 +260,10 @@ export class WikiEdit extends ProtoEdit {
     // Avoid duplicate consecutive states
     const last = this.#undoStack[this.#undoStack.length - 1];
     if (last &&
-      last.text === currentState.text &&
-      last.start === currentState.start &&
-      last.end === currentState.end &&
-      last.scroll === currentState.scroll) {
+        last.text === currentState.text &&
+        last.start === currentState.start &&
+        last.end === currentState.end &&
+        last.scroll === currentState.scroll) {
       return;
     }
 
@@ -270,28 +287,34 @@ export class WikiEdit extends ProtoEdit {
       scroll: t.scrollTop
     };
 
-    if (!this.#validateState(current)) {
-      logger.warn('UndoRedo: current state invalid before undo – still proceeding');
-    }
-
-    this.#redoStack.push(current);
     const prev = this.#undoStack.pop();
-
-    if (!this.#validateState(prev)) {
-      logger.error('UndoRedo: corrupted undo state popped! Stack sanitized.');
-      this.#undoStack = this.#undoStack.filter(s => this.#validateState(s));
+    if (!prev || !this.#validateState(prev)) {
       return false;
     }
 
-    this.replaceContent(prev.text, false, {
-      selection: { start: prev.start, end: prev.end },
-      scroll: prev.scroll
-    });
+    this.#redoStack.push(current);
 
-    // replaceContent already sets the content via state; we just need to restore cursor/scroll
-    t.setSelectionRange(prev.start, prev.end);
+    // Clamp cursor position
+    const maxPos = prev.text.length;
+    const safeStart = Math.min(prev.start, maxPos);
+    const safeEnd = Math.min(prev.end, maxPos);
+
+    // Set value and scroll first
+    t.value = prev.text;
     t.scrollTop = prev.scroll ?? 0;
     t.focus();
+
+    // Set cursor immediately
+    t.setSelectionRange(safeStart, safeEnd);
+
+    // Update internal state - DON'T pass selection here!
+    // The subscription should NOT override cursor for programmatic changes
+    // undo() already set it above
+    state.setContent(prev.text, {
+      selection: undefined,  // Explicitly undefined so subscription skips it
+      scroll: prev.scroll,
+      _programmatic: true
+    });
 
     return true;
   }
@@ -309,27 +332,32 @@ export class WikiEdit extends ProtoEdit {
       scroll: t.scrollTop
     };
 
-    if (!this.#validateState(current)) {
-      logger.warn('UndoRedo: current state invalid before redo – still proceeding');
-    }
-
-    this.#undoStack.push(current);
     const next = this.#redoStack.pop();
-
-    if (!this.#validateState(next)) {
-      logger.error('UndoRedo: corrupted redo state popped! Stack sanitized.');
-      this.#redoStack = this.#redoStack.filter(s => this.#validateState(s));
+    if (!next || !this.#validateState(next)) {
       return false;
     }
 
-    this.replaceContent(next.text, false, {
-      selection: { start: next.start, end: next.end },
-      scroll: next.scroll
-    });
+    this.#undoStack.push(current);
 
-    t.setSelectionRange(next.start, next.end);
+    // Clamp cursor position
+    const maxPos = next.text.length;
+    const safeStart = Math.min(next.start, maxPos);
+    const safeEnd = Math.min(next.end, maxPos);
+
+    // Set value and scroll first
+    t.value = next.text;
     t.scrollTop = next.scroll ?? 0;
     t.focus();
+
+    // Set cursor immediately
+    t.setSelectionRange(safeStart, safeEnd);
+
+    // Update internal state - DON'T pass selection here!
+    state.setContent(next.text, {
+      selection: undefined,  // Explicitly undefined so subscription skips it
+      scroll: next.scroll,
+      _programmatic: true
+    });
 
     return true;
   }
@@ -360,11 +388,8 @@ export class WikiEdit extends ProtoEdit {
   }
 
   #handleBeforeInput(e) {
-    // Never interfere with browser's own history undo/redo
-    if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') {
-      return;
-    }
-    this.#debouncePushState();
+    // Native beforeinput is now handled in init()
+    // This method kept for compatibility but does nothing
   }
 
   #debouncePushState() {
@@ -430,14 +455,16 @@ export class WikiEdit extends ProtoEdit {
       end: this.area.selectionEnd
     };
 
-    // Push to undo stack only when explicitly requested
+    // Push to undo stack BEFORE making the change (for toolbar buttons, etc.)
     if (pushToUndo && typeof this.pushState === 'function') {
       this.pushState();
     }
 
-    this.#state.setContent(newText || '', pushToUndo, {
+    // Apply change - subscription won't push because _programmatic: true
+    this.#state.setContent(newText || '', {
       selection: finalSelection,
-      scroll: scroll ?? this.area.scrollTop
+      scroll: scroll ?? this.area.scrollTop,
+      _programmatic: true
     });
   }
 
@@ -453,11 +480,13 @@ export class WikiEdit extends ProtoEdit {
 
     str = str.replace(this.rbegin, '').replace(this.rend, '');
 
+    // Use replaceContent instead of manual setContent call
     this.replaceContent(str, true, {
       selection: { start: l, end: l + l1 },
       scroll: this.scroll || 0
     });
   }
+
 
   getContent() {
     return this.#state.content;
