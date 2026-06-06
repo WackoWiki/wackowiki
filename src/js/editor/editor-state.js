@@ -1,3 +1,5 @@
+// src/js/core/EditorState.js
+
 export class EditorState {
   #content = '';
   #selectionStart = 0;
@@ -11,6 +13,7 @@ export class EditorState {
     this.#content = initialContent;
   }
 
+  // Getters
   get content() { return this.#content; }
   get selection() {
     return { start: this.#selectionStart, end: this.#selectionEnd };
@@ -19,6 +22,7 @@ export class EditorState {
   get isDirty() { return this.#dirty; }
   get isModified() { return this.#modified; }
 
+  // Main setter with reactivity
   setContent(newContent, metadata = {}) {
     if (newContent === this.#content) return false;
 
@@ -66,7 +70,7 @@ export class EditorState {
 
   subscribe(listener) {
     this.#listeners.add(listener);
-    return () => this.#listeners.delete(listener);
+    return () => this.#listeners.delete(listener); // unsubscribe
   }
 
   #notify(change) {

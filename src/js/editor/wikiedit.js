@@ -79,7 +79,7 @@ export class WikiEdit extends ProtoEdit {
   // INITIALISATION
   // ===================================================================
   init(id, imgPath) {
-    this._init(id);
+    this._init(id);               // ProtoEdit setup, creates this.area
     this.imagesPath = imgPath || 'image/';
     this.area.wikiEditInstance = this;
 
@@ -134,6 +134,7 @@ export class WikiEdit extends ProtoEdit {
           setTimeout(() => this.updatePreview(), 20);
         }
 
+        // Trigger syntax highlight (non-blocking)
         this.refreshSyntaxHighlight?.();
       }
     });
@@ -167,7 +168,7 @@ export class WikiEdit extends ProtoEdit {
     ta.addEventListener('select', selectionHandler);
     ta.addEventListener('keydown', selectionHandler);
 
-    // Store handlers for cleanup
+    // Store handlers for later removal in destroy()
     this._inputHandler = inputHandler;
     this._selectionHandler = selectionHandler;
 
@@ -176,10 +177,10 @@ export class WikiEdit extends ProtoEdit {
       ? (form.getAttribute('action') || window.location.href)
       : window.location.href;
 
-    // Markup helpers
+    // Markup helpers (needed before toolbar / keyboard)
     setupMarkupHelpers(this);
 
-    // Toolbar
+    // Toolbar (must come before features that depend on toolbar buttons)
     loadAndBuildToolbar(this);
 
     // Core features
@@ -189,7 +190,7 @@ export class WikiEdit extends ProtoEdit {
     setupAutosave(this);
     setupMediaUpload(this);
 
-    // UI features
+    // UI features (after toolbar is in DOM)
     setupDarkZenMode(this);
     setupLivePreview(this);
     setupSyntaxHighlighting(this);
@@ -200,6 +201,7 @@ export class WikiEdit extends ProtoEdit {
     // Post-setup
     this.updateToolbarButtonStates?.();
 
+    // Legacy global
     window.weSave = () => this.savePage();
 
     logger.success(`WikiEdit initialized: ${id}`);
@@ -218,10 +220,14 @@ export class WikiEdit extends ProtoEdit {
   #setupUndoRedo() {
     const state = this.#state;
 
+    // Public API methods – they close over the instance (this) so they
+    // can access private fields.
     this.pushState = this.#pushState.bind(this);
     this.undo = this.#undo.bind(this);
     this.redo = this.#redo.bind(this);
     this.validateState = this.#validateState.bind(this);
+
+    // Debounce helper (exposed as a method for internal use, but still private)
     this._debouncePushState = this.#debouncePushState.bind(this);
 
     // No subscription needed here - handled in init()
@@ -486,7 +492,6 @@ export class WikiEdit extends ProtoEdit {
       scroll: this.scroll || 0
     });
   }
-
 
   getContent() {
     return this.#state.content;
