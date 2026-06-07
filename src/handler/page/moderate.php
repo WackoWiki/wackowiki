@@ -711,22 +711,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->leave();	// delete_
 		}
-		// define tag to convert comment to page
-		else if ($accept_action == 'convert')
-		{
-			$tpl->enter('convert_');
-
-			foreach ($set as $page_id)
-			{
-				$accept_text[] = '<code>' . $this->get_page_title('', $page_id) . '</code>';
-			}
-
-			$tpl->action	= $accept_action;
-			$tpl->text		= implode('<br>', $accept_text);
-			$tpl->cancel	= true;
-
-			$tpl->leave();	// convert_
-		}
 		// select target forum section
 		else if ($accept_action == 'move')
 		{
