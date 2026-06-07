@@ -304,6 +304,62 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 	return true;
 };
 
+$moderate_convert_to_page = function($comment_ids, $new_tag, $title = '', $reassign_following = true) use ($moderate_delete_page, $moderate_page_exists)
+{
+	if (empty($comment_ids) || !$new_tag) {
+		return false;
+	}
+
+	$first_id = array_shift($comment_ids);
+	$page = $this->load_page('', $first_id);
+
+	// sanitize and check new tag
+	if ($error = $this->sanitize_new_page_tag($new_tag)) {
+		$this->set_message($error, 'error');
+		return false;
+	}
+
+	if ($moderate_page_exists($new_tag) === true) {
+		$this->set_message($this->_t('ModeratePageExists'), 'error');
+		return false;
+	}
+
+	$title = $title ?: $this->create_title_from_tag($new_tag);
+
+	// create new page from first comment
+	$this->save_page($new_tag, $page['body'], $title, '', null, null, 0, null, '', true);
+
+	$new_page_id = $this->get_page_id($new_tag);
+
+	if (!$new_page_id) {
+		return false;
+	}
+
+	// move remaining selected comments
+	foreach ($comment_ids as $id) {
+		$this->db->sql_query(
+			'UPDATE ' . $this->prefix . 'page SET comment_on_id = ' . (int)$new_page_id . ' ' .
+			'WHERE page_id = ' . (int)$id
+			);
+	}
+
+	// optionally re-assign all following comments
+	if ($reassign_following) {
+		$this->db->sql_query(
+			'UPDATE ' . $this->prefix . 'page SET comment_on_id = ' . (int)$new_page_id . ' ' .
+			'WHERE comment_on_id = ' . (int)$page['comment_on_id'] . ' ' .
+			'AND created > ' . $this->db->q($page['created'])
+			);
+	}
+
+	// cleanup old comment
+	$moderate_delete_page($page['tag']);
+
+	$this->log(2, Ut::perc_replace($this->_t('LogCommentConvertedToPage'), $page['tag'], $new_tag));
+
+	return true;
+};
+
 $write_comment_feed = function()
 {
 	if ($this->db->enable_feeds)
@@ -654,6 +710,22 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->cancel	= true;
 
 			$tpl->leave();	// delete_
+		}
+		// define tag to convert comment to page
+		else if ($accept_action == 'convert')
+		{
+			$tpl->enter('convert_');
+
+			foreach ($set as $page_id)
+			{
+				$accept_text[] = '<code>' . $this->get_page_title('', $page_id) . '</code>';
+			}
+
+			$tpl->action	= $accept_action;
+			$tpl->text		= implode('<br>', $accept_text);
+			$tpl->cancel	= true;
+
+			$tpl->leave();	// convert_
 		}
 		// select target forum section
 		else if ($accept_action == 'move')
@@ -1126,6 +1198,23 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 			}
 		}
+		// convert comment to page
+		else if (isset($_POST['posts_convert']) && $set)
+		{
+			$accept_action	= 'posts_convert';
+
+			$new_tag = $_POST['new_tag'] ?? '';
+			$reassign = isset($_POST['reassign_following']);
+
+			if (isset($_POST['accept']) && $new_tag)
+			{
+				if ($moderate_convert_to_page($set, $new_tag, $_POST['new_title'] ?? '', $reassign))
+				{
+					$this->set_message($this->_t('ModerateCommentConverted'), 'success');
+					$this->http->redirect($this->href('moderate'));
+				}
+			}
+		}
 
 		// GET POSTS
 
@@ -1270,6 +1359,17 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->after		= (isset($_POST['scheme']) && $_POST['scheme'] != 'selected');
 			$tpl->selected	= (isset($_POST['scheme']) && $_POST['scheme'] == 'selected');
 			$tpl->count		= Ut::perc_replace($this->_t('ModerateSplitSelected'), count($set));
+
+			$tpl->leave();
+		}
+		// confirm comment to page convertion
+		else if ($accept_action == 'posts_convert')
+		{
+			$tpl->enter('convert_');
+
+			$tpl->action	= $accept_action;
+			#$tpl->text		= '<code>' . $this->page['title'] . '</code>';
+			$tpl->cancel	= true;
 
 			$tpl->leave();
 		}

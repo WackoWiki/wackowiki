@@ -247,6 +247,21 @@
 				</tr>
 			</table><br>
 		=]
+		[= convert _ =
+			<input type="hidden" name="[ ' action | e attr ' ]" value="1">
+			<table class="formation">
+				<tr><th>[ ' _t: ModerateConvertConfirm ' ]</th></tr>
+				<tr>
+					<td>
+						<input type="text" name="new_tag" size="50" maxlength="250" placeholder="NewPageTag" required><br>
+						<input type="text" name="new_title" size="50" maxlength="250" placeholder="New Title"><br>
+						<input type="checkbox" name="reassign_following" value="1" checked> [ ' _t: ModerateReassignFollowing ' ]<br>
+						<button type="submit" class="btn btn-primary" name="accept">[ ' _t: ModerateAccept ' ]</button>
+						[ '' cancel '' ]
+					</td>
+				</tr>
+			</table>
+		=]
 
 		<input type="hidden" name="ids" value="[ ' hids ' ]">
 		<input type="hidden" name="p" value="[ ' p ' ]">
@@ -293,6 +308,7 @@
 					<td colspan="4">
 						<button type="submit" class="btn btn-danger" name="posts_delete" id="submit_delete">[ ' _t: ModerateDeletePosts ' ]</button>
 						<button type="submit" class="btn btn-primary" name="posts_split" id="submit_split">[ ' _t: ModerateSplit ' ]</button>
+						<button type="submit" class="btn btn-primary" name="posts_convert" id="submit_convert">[ ' _t: ModerateConvertToPage ' ]</button>
 						<br>
 						<button type="submit" class="btn btn-secondary" name="set" id="submit_set">[ ' _t: SetButton ' ]</button>
 						[= set _ =
