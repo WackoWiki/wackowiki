@@ -256,7 +256,7 @@ else if ($user = $this->get_user())
 	// EDITOR
 	else if ($mode == 'editor' || $action == 'user_settings_editor')
 	{
-		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/toolbar/toolbar-customizer.js"' . $this->db->csp_nonce . ' defer></script>');
+		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/editor/toolbar/toolbar-customizer.js"' . $this->db->csp_nonce . ' defer></script>');
 		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/init-usersettings.js"' . $this->db->csp_nonce . ' defer></script>');
 
 		$tpl->enter('w_');
