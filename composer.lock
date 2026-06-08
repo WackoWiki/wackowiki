@@ -122,16 +122,16 @@
         },
         {
             "name": "jblond/php-diff",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBlond/php-diff.git",
-                "reference": "6e70d715a429a3dec7a6e46988f259e2654e48ec"
+                "reference": "d9fcd6e86d5bd598caa3418ab7dea073a540f7bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBlond/php-diff/zipball/6e70d715a429a3dec7a6e46988f259e2654e48ec",
-                "reference": "6e70d715a429a3dec7a6e46988f259e2654e48ec",
+                "url": "https://api.github.com/repos/JBlond/php-diff/zipball/d9fcd6e86d5bd598caa3418ab7dea073a540f7bd",
+                "reference": "d9fcd6e86d5bd598caa3418ab7dea073a540f7bd",
                 "shasum": ""
             },
             "require": {
@@ -187,9 +187,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JBlond/php-diff/issues",
-                "source": "https://github.com/JBlond/php-diff/tree/2.5.0"
+                "source": "https://github.com/JBlond/php-diff/tree/2.5.1"
             },
-            "time": "2025-10-06T17:54:01+00:00"
+            "time": "2026-06-08T06:58:17+00:00"
         },
         {
             "name": "phiki/phiki",
