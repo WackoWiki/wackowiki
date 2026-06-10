@@ -25,7 +25,7 @@ export function setupSyntaxHighlighting(editor) {
 
   // Copy relevant styles from textarea to highlighter
   const style = getComputedStyle(editor.area);
-  ['font', 'lineHeight', 'tabSize', 'letterSpacing', 'wordSpacing', 'padding'].forEach(prop => {
+  ['tabSize', 'letterSpacing', 'wordSpacing', 'padding'].forEach(prop => {
     editor.highlighter.style[prop] = style[prop];
   });
 
