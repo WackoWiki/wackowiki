@@ -96,7 +96,7 @@ if ($this->has_access('read'))
 			$tpl->delta			= $this->delta_formatted($this->rev_delta[$page['revision_id']]);
 			$tpl->size			= $this->factor_multiples($page['page_size'], 'binary', true, true);
 			$tpl->version		= $page['version_id'];
-			$tpl->href			= $this->href('show', '', ['revision_id' => $page['revision_id']]);
+			$tpl->href			= $this->href('', '', ['revision_id' => $page['revision_id']]);
 			$tpl->modified		= $page['modified'];
 
 			$tpl->user			= $this->user_link($page['user_name'], true, false);
