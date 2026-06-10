@@ -29,8 +29,9 @@ else
     RED='' GREEN='' YELLOW='' BLUE='' CYAN='' BOLD='' NC=''
 fi
 
-# Global log file
+# Global variables
 LOG_FILE=""
+REPO_ROOT=""
 
 # ================== LOGGING FUNCTIONS ==================
 log_info() {
@@ -53,10 +54,9 @@ log_step() {
     echo -e "${CYAN}→${NC} $*"
 }
 
-write_log() {
-    if [ -n "$LOG_FILE" ] && [ -f "$LOG_FILE" ]; then
-        echo "$*" >> "$LOG_FILE"
-    fi
+# Function to strip ANSI escape codes (for clean log file)
+strip_ansi() {
+    sed -r 's/\x1b\[[0-9;]*([A-Za-z]|\(B)//g; s/\x1b[()][AB012]//g'
 }
 
 # ================== SCRIPT LOCATION CHECK ==================
@@ -132,7 +132,6 @@ check_git_status() {
     fi
 
     log_info "Checking sync with $remote_host..."
-    write_log "Checking sync with $remote_host..."
 
     # Fetch latest from remote
     log_step "Fetching latest from remote..."
@@ -150,7 +149,6 @@ check_git_status() {
         log_warn "Your local repository is NOT up-to-date with $remote_host"
         log_warn "Local HEAD:  ${local_head:0:8}"
         log_warn "Remote HEAD: ${remote_head:0:8}"
-        write_log "Local HEAD: ${local_head:0:8}, Remote HEAD: ${remote_head:0:8}"
         echo ""
 
         if [ "$AUTO_ACCEPT" = false ]; then
@@ -172,7 +170,6 @@ check_git_status() {
         fi
     else
         log_success "Repository is up-to-date with $remote_host"
-        write_log "Repository is up-to-date"
     fi
 
     echo ""
@@ -436,25 +433,27 @@ main() {
     resolved_source=$(resolve_source)
     log_info "Building from source: $resolved_source"
 
-    # Determine release name
+    # Determine release name and directories
     local RELEASE_NAME="wackowiki-$VERSION"
     local BUILD_DIR="$REPO_ROOT/build"
     local TEMP_DIR="$BUILD_DIR/tmp"
     local FINAL_DIR="$BUILD_DIR/$RELEASE_NAME"
-    LOG_FILE="$BUILD_DIR/build.log"
 
-    # Create directories and setup logging
+    # Create directories BEFORE setting up logging
     log_step "Preparing build directories..."
     rm -rf "$BUILD_DIR"
     mkdir -p "$TEMP_DIR" "$FINAL_DIR"
-    
-    # Logging setup
+
+    # Setup logging with absolute path (must be after mkdir)
+    LOG_FILE="$BUILD_DIR/build.log"
+
     if [ "$ENABLE_LOG" = true ]; then
-        : > "$LOG_FILE"
-        log_info "Logging to: $LOG_FILE"
+        # Create the log file first, then setup redirection
+        # Strip ANSI codes when writing to log, but keep colors on terminal
+        exec > >(tee >(strip_ansi >> "$LOG_FILE")) 2>&1
     fi
 
-    write_log "=== Building WackoWiki $VERSION from $resolved_source ==="
+    echo "=== Building WackoWiki $VERSION from $resolved_source ==="
 
     echo ""
     echo "=================================================="
@@ -467,20 +466,16 @@ main() {
 
     # 1. Export clean source from Git
     log_step "Exporting source from Git..."
-    write_log "Exporting source from Git ($resolved_source)..."
-    git archive --format=tar "$resolved_source" | tar -x -C "$TEMP_DIR"
+
+    # Use --worktree-attributes to include files that match .gitignore patterns
+    git archive --format=tar --worktree-attributes "$resolved_source" | tar -x -C "$TEMP_DIR"
     log_success "Source exported"
 
     # 2. Prepare distribution structure
     log_step "Preparing distribution structure..."
-    
-    # Handle potential subdirectory structure
-    local src_dir="$TEMP_DIR/src"
-    if [ ! -d "$src_dir" ]; then
-        src_dir="$TEMP_DIR"
-    fi
 
-    cp -a "$src_dir/." "$FINAL_DIR/"
+    # Copy src/ to FINAL_DIR - this ensures proper structure: FINAL_DIR/src/...
+    cp -a "$TEMP_DIR/src/" "$FINAL_DIR/"
     log_success "Files copied to $FINAL_DIR"
 
     if [ "$MINIMAL" = true ]; then
@@ -505,9 +500,9 @@ main() {
 
     # 3. Install Composer dependencies
     log_step "Installing Composer dependencies..."
-    write_log "Installing Composer dependencies..."
     cd "$FINAL_DIR" || exit 1
 
+    # Restore old script's relative path handling for composer files
     if [ ! -f "composer.json" ]; then
         log_warn "composer.json not found in archive, copying from project root..."
         cp -v "$REPO_ROOT/composer.json" . 2>/dev/null || {
@@ -543,7 +538,7 @@ main() {
 
     if [ -n "$COMPOSER_CMD" ] && [ -f "composer.json" ]; then
         echo ""
-        
+
         # Check for required PHP extensions
         local missing_exts=""
         for ext in "mbstring" "json" "phar"; do
@@ -554,13 +549,13 @@ main() {
 
         if [ -n "$missing_exts" ]; then
             log_warn "Missing PHP extensions:$missing_exts"
-            log_info "You may need to install them for composer to work properly"
         fi
 
+        # Run composer install - vendor will be created at src/vendor per composer.json config
         if $COMPOSER_CMD install --no-dev --optimize-autoloader --no-interaction --prefer-dist --verbose 2>&1; then
             log_success "Composer install completed"
-            
-            # Get vendor size
+
+            # Get vendor size (src/vendor as per composer.json)
             local vendor_size
             vendor_size=$(du -sh src/vendor/ 2>/dev/null | cut -f1 || echo 'N/A')
             log_info "Vendor size: $vendor_size"
@@ -598,7 +593,6 @@ main() {
     # 4. Create archives
     echo ""
     log_step "Creating release archives..."
-    write_log "Creating release archives..."
 
     # Create zip
     if command -v zip >/dev/null 2>&1; then
