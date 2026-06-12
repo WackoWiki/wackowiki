@@ -71,10 +71,10 @@ function admin_config_basic($engine, $module)
 
 		if (isset($_POST['wikiedit_toolbar']))
 		{
-			$toolbar = $_POST['wikiedit_toolbar'] ?? '';
-			$toolbar = array_map('trim', explode(',', $toolbar));
-			[$toolbar, ] = $engine->validate_toolbar($toolbar);
-			$toolbar = json_encode($toolbar);
+			$toolbar		= $_POST['wikiedit_toolbar'] ?? '';
+			$toolbar		= array_map('trim', explode(',', $toolbar));
+			[$toolbar, ]	= $engine->validate_toolbar($toolbar);
+			$toolbar		= json_encode($toolbar);
 		}
 
 		$config['footer_comments']				= (int) $_POST['footer_comments'];

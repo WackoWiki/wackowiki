@@ -164,7 +164,7 @@ if ($this->has_access('read'))
 								?? ($title
 									?? '');
 
-			$toolbar = $user['wikiedit_toolbar'] ?? $this->db->wikiedit_toolbar;
+			$toolbar = $user['wikiedit_toolbar'] ?: $this->db->wikiedit_toolbar;
 
 			$tpl->nonce		= $upload_nonce;
 			$tpl->upload	= (int) $can_upload;

@@ -28,7 +28,7 @@ class Settings extends Dbal implements ArrayAccess
 			$found_rewrite_extension = ((function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
 										|| ((getenv('HTTP_MOD_ENV') === 'on') && (getenv('HTTP_MOD_REWRITE') === 'on')));
 
-			require_once CONFIG_DEFAULTS;
+			require CONFIG_DEFAULTS;
 
 			if (filesize(CONFIG_FILE) <= 0)
 			{

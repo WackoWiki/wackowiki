@@ -119,9 +119,9 @@ else if ($user = $this->get_user())
 	if ($action == 'user_settings_editor')
 	{
 		// the data is passed as a JSON string
-		$toolbar = json_decode($_POST['wikiedit_toolbar']?? [], true);
-		[$toolbar, ] = $this->validate_toolbar($toolbar);
-		$toolbar = json_encode($toolbar);
+		$toolbar		= json_decode($_POST['wikiedit_toolbar']?? [], true);
+		[$toolbar, ]	= $this->validate_toolbar($toolbar);
+		$toolbar		= json_encode($toolbar);
 
 		$sql =
 		'doubleclick_edit	= ' . (int) isset($_POST['doubleclick_edit']) . ', ' .

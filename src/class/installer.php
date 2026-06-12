@@ -32,6 +32,18 @@ class Installer
 
 		require_once 'setup/common.php';
 
+		// Merge new defaults during upgrade
+		if (array_key_exists('wacko_version', $config))
+		{
+			$found_rewrite_extension = ((function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
+				|| ((getenv('HTTP_MOD_ENV') === 'on') && (getenv('HTTP_MOD_REWRITE') === 'on')));
+
+			require CONFIG_DEFAULTS;
+
+			// Merge defaults, preserving existing values but adding new ones
+			$config = array_merge($wacko_config_defaults, $config);
+		}
+
 		$logged_in	= false;
 
 		// check for locking
