@@ -34,7 +34,6 @@
 		"phpmailer/phpmailer" : "^7.0",
 		"phpthumb/phpthumb" : "^2.3.5",
 		"simplepie/simplepie" : "^1.9",
-		"wackowiki/htmlsax3" : "^4.1.1",
 		"wackowiki/safehtml" : "^1.4.2"
 	},
 	"prefer-stable" : true,
