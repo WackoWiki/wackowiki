@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -15,13 +17,14 @@ class Tab
 	 * @var object
 	 * @access private
 	 */
-	public $orig_obj;
+	public object $orig_obj;
+
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public $orig_method;
+	public string $orig_method;
 
 	/**
 	 * Constructs Tab
@@ -29,10 +32,10 @@ class Tab
 	 * @param string $orig_method original handler method
 	 * @access protected
 	 */
-	function __construct(&$orig_obj, $orig_method)
+	public function __construct(object &$orig_obj, string $orig_method)
 	{
-		$this->orig_obj		=& $orig_obj;
-		$this->orig_method	= $orig_method;
+		$this->orig_obj    = &$orig_obj;
+		$this->orig_method = $orig_method;
 	}
 
 	/**
@@ -41,11 +44,9 @@ class Tab
 	 * @param string $data element data
 	 * @access protected
 	 */
-	function breakData(&$parser, $data): void
+	public function breakData(HTMLSax3 $parser, string $data): void
 	{
-		$data = explode("\t", $data);
-
-		foreach ($data as $chunk)
+		foreach (explode("\t", $data) as $chunk)
 		{
 			$this->orig_obj->{$this->orig_method}($this, $chunk);
 		}

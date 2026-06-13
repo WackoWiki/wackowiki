@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -11,20 +13,19 @@ class EscapeState
 {
 	/**
 	 * @param StateParser $context subclass
-	 * @return constant STATE_START
+	 * @return int STATE_START
 	 * @access protected
 	 */
-	function parse(&$context)
+	public function parse(StateParser $context): int
 	{
-		$char = $context->ScanCharacter();
+		$char = $context->scanCharacter();
 
-		if ($char == '-')
+		if ($char === '-')
 		{
-			$char = $context->ScanCharacter();
-
+			$char = $context->scanCharacter();
 			$context->unscanCharacter();
 
-			if ($char == '-')
+			if ($char === '-')
 			{
 				$context->unscanCharacter();
 				$text = $context->scanUntilString('-->');
@@ -36,7 +37,7 @@ class EscapeState
 				$text = $context->scanUntilString('>');
 			}
 		}
-		else if ($char == '[')
+		else if ($char === '[')
 		{
 			$context->unscanCharacter();
 			$text = $context->scanUntilString(']>');
@@ -48,9 +49,9 @@ class EscapeState
 			$text = $context->scanUntilString('>');
 		}
 
-		$context->IgnoreCharacter();
+		$context->ignoreCharacter();
 
-		if ($text != '')
+		if ($text !== '')
 		{
 			$context->handler_object_escape->
 			{$context->handler_method_escape}($context->htmlsax, $text);

@@ -2,7 +2,7 @@
 
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 8                                                        |
+// | PHP Version 8.5                                                       |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2002 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -20,6 +20,8 @@
 // +----------------------------------------------------------------------+
 //
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -30,11 +32,7 @@ namespace HTMLSax3;
  * Required classes
  */
 
-
-/**
- * Parsing states.
- * @package HTMLSax3
- */
+use InvalidArgumentException;
 
 /**
  * User interface class. All user calls should only be made to this class
@@ -48,7 +46,7 @@ class HTMLSax3
 	 * @var StateParser
 	 * @access private
 	 */
-	public $state_parser;
+	public StateParser $state_parser;
 
 	/**
 	 * Constructs HTMLSax3 selecting concrete StateParser subclass
@@ -66,9 +64,10 @@ class HTMLSax3
 	 * </pre>
 	 * @access public
 	 */
-	function __construct()
+	public function __construct()
 	{
 		$this->state_parser = new StateParser($this);
+
 		$nullhandler = new NullHandler();
 		$this->set_object($nullhandler);
 		$this->set_element_handler('DoNothing', 'DoNothing');
@@ -79,31 +78,26 @@ class HTMLSax3
 	}
 
 	/**
-	 * Sets the user defined handler object. Returns a PEAR Error
+	 * Sets the user defined handler object. Throws an InvalidArgumentException
 	 * if supplied argument is not an object.
+	 *
+	 * The handler object is stored by reference so that decorators can
+	 * wrap it in place without breaking the callback chain.
+	 *
 	 * @param object $object handler object containing SAX callback methods
 	 * @access public
-	 * @return true|void
+	 * @return true
 	 */
-	function set_object(&$object)
+	public function set_object(object &$object): true
 	{
-		if (is_object($object))
-		{
-			$this->state_parser->handler_default =& $object;
+		$this->state_parser->handler_default = &$object;
 
-			return true;
-		}
-		else
-		{
-			require_once 'PEAR.php';
-			PEAR::raiseError('HTMLSax3::set_object requires ' .
-				'an object instance');
-		}
+		return true;
 	}
 
 	/**
 	 * Sets a parser option. By default, all options are switched off.
-	 * Returns a PEAR Error if option is invalid<br />
+	 * Returns a InvalidArgumentException if option is invalid<br />
 	 * <b>Available options:</b>
 	 * <ul>
 	 * <li>XML_OPTION_TRIM_DATA_NODES: trim whitespace off the beginning
@@ -126,9 +120,9 @@ class HTMLSax3
 	 * @param string $name name of parser option
 	 * @param int $value (optional) 1 to switch on, 0 for off
 	 * @access public
-	 * @return bool
+	 * @return true
 	 */
-	function set_option($name, $value = 1): bool
+	public function set_option(string $name, int $value = 1): true
 	{
 		if (array_key_exists($name, $this->state_parser->parser_options))
 		{
@@ -136,11 +130,10 @@ class HTMLSax3
 
 			return true;
 		}
-		else
-		{
-			require_once 'PEAR.php';
-			PEAR::raiseError('HTMLSax3::set_option(' . $name . ') illegal');
-		}
+
+		throw new InvalidArgumentException(
+			'HTMLSax3::set_option(' . $name . ') illegal',
+			);
 	}
 
 	/**
@@ -157,9 +150,9 @@ class HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_data_handler($data_method): void
+	public function set_data_handler(string $data_method): void
 	{
-		$this->state_parser->handler_object_data =& $this->state_parser->handler_default;
+		$this->state_parser->handler_object_data = &$this->state_parser->handler_default;
 		$this->state_parser->handler_method_data = $data_method;
 	}
 
@@ -181,9 +174,9 @@ class HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_element_handler($opening_method, $closing_method): void
+	public function set_element_handler(string $opening_method, string $closing_method): void
 	{
-		$this->state_parser->handler_object_element =& $this->state_parser->handler_default;
+		$this->state_parser->handler_object_element = &$this->state_parser->handler_default;
 		$this->state_parser->handler_method_opening = $opening_method;
 		$this->state_parser->handler_method_closing = $closing_method;
 	}
@@ -201,9 +194,9 @@ class HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_pi_handler($pi_method): void
+	public function set_pi_handler(string $pi_method): void
 	{
-		$this->state_parser->handler_object_pi =& $this->state_parser->handler_default;
+		$this->state_parser->handler_object_pi = &$this->state_parser->handler_default;
 		$this->state_parser->handler_method_pi = $pi_method;
 	}
 
@@ -220,9 +213,9 @@ class HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_escape_handler($escape_method): void
+	public function set_escape_handler(string $escape_method): void
 	{
-		$this->state_parser->handler_object_escape =& $this->state_parser->handler_default;
+		$this->state_parser->handler_object_escape = &$this->state_parser->handler_default;
 		$this->state_parser->handler_method_escape = $escape_method;
 	}
 
@@ -238,9 +231,9 @@ class HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_jasp_handler($jasp_method): void
+	public function set_jasp_handler(string $jasp_method): void
 	{
-		$this->state_parser->handler_object_jasp =& $this->state_parser->handler_default;
+		$this->state_parser->handler_object_jasp = &$this->state_parser->handler_default;
 		$this->state_parser->handler_method_jasp = $jasp_method;
 	}
 
@@ -258,7 +251,7 @@ class HTMLSax3
 	 * @return int
 	 * @see get_length
 	 */
-	function get_current_position(): int
+	public function get_current_position(): int
 	{
 		return $this->state_parser->position;
 	}
@@ -268,7 +261,7 @@ class HTMLSax3
 	 * @access public
 	 * @return int
 	 */
-	function get_length(): int
+	public function get_length(): int
 	{
 		return $this->state_parser->length;
 	}
@@ -279,7 +272,7 @@ class HTMLSax3
 	 * @access public
 	 * @return void
 	 */
-	function parse($data): void
+	public function parse(string $data): void
 	{
 		$this->state_parser->parse($data);
 	}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -11,20 +13,20 @@ class StartingState
 {
 	/**
 	 * @param StateParser $context subclass
-	 * @return constant STATE_TAG
+	 * @return int STATE_TAG
 	 * @access protected
 	 */
-	function parse(&$context)
+	public function parse(StateParser $context): int
 	{
 		$data = $context->scanUntilString('<');
 
-		if ($data != '')
+		if ($data !== '')
 		{
 			$context->handler_object_data->
 			{$context->handler_method_data}($context->htmlsax, $data);
 		}
 
-		$context->IgnoreCharacter();
+		$context->ignoreCharacter();
 
 		return STATE_TAG;
 	}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -19,35 +21,38 @@ class Trim
 	 * @var object
 	 * @access private
 	 */
-	public $orig_obj;
+	public object $orig_obj;
+
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public $orig_method;
+	public string $orig_method;
+
 	/**
 	 * Constructs Trim
 	 * @param object $orig_obj handler object being decorated
 	 * @param string $orig_method original handler method
 	 * @access protected
 	 */
-	function __construct(&$orig_obj, $orig_method)
+	public function __construct(object &$orig_obj, string $orig_method)
 	{
-		$this->orig_obj		=& $orig_obj;
-		$this->orig_method	= $orig_method;
+		$this->orig_obj    = &$orig_obj;
+		$this->orig_method = $orig_method;
 	}
+
 	/**
 	 * Trims the data
 	 * @param HTMLSax3 $parser
 	 * @param string $data element data
 	 * @access protected
 	 */
-	function trimData(&$parser, $data): void
+	public function trimData(HTMLSax3 $parser, string $data): void
 	{
 		$data = trim($data);
 
-		if ($data != '')
+		if ($data !== '')
 		{
 			$this->orig_obj->{$this->orig_method}($parser, $data);
 		}

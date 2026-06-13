@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -9,48 +11,48 @@ namespace HTMLSax3;
  */
 class OpeningTagState
 {
-	private array $attrs;
+	/** @var array<string,string|null> */
+	private array $attrs = [];
 
 	/**
 	 * Handles attributes
-	 * @param string $context attribute name
-	 * @return void
+	 * @param StateParser $context parser state
+	 * @return array<string,string|null>
 	 * @access protected
-	 * @see AttributeStartState
 	 */
-	function parseAttributes(&$context)
+	public function parseAttributes(StateParser $context): array
 	{
 		$Attributes = [];
 
 		$context->ignoreWhitespace();
 		$attributename = $context->scanUntilCharacters("=/> \n\r\t");
 
-		while ($attributename != '')
+		while ($attributename !== '')
 		{
 			$attributevalue = null;
 			$context->ignoreWhitespace();
 			$char = $context->scanCharacter();
 
-			if ($char == '=')
+			if ($char === '=')
 			{
 				$context->ignoreWhitespace();
-				$char = $context->ScanCharacter();
+				$char = $context->scanCharacter();
 
-				if ($char == '"')
+				if ($char === '"')
 				{
 					$attributevalue = $context->scanUntilString('"');
-					$context->IgnoreCharacter();
+					$context->ignoreCharacter();
 				}
-				else if ($char == "'")
+				else if ($char === "'")
 				{
 					$attributevalue = $context->scanUntilString("'");
-					$context->IgnoreCharacter();
+					$context->ignoreCharacter();
 				}
 				else
 				{
 					$context->unscanCharacter();
 					$attributevalue =
-						$context->scanUntilCharacters("> \n\r\t");
+					$context->scanUntilCharacters("> \n\r\t");
 				}
 			}
 			else if ($char !== null)
@@ -70,40 +72,40 @@ class OpeningTagState
 
 	/**
 	 * @param StateParser $context subclass
-	 * @return constant STATE_START
+	 * @return int STATE_START
 	 * @access protected
 	 */
-	function parse(&$context)
+	public function parse(StateParser $context): int
 	{
 		$tag = $context->scanUntilCharacters("/> \n\r\t");
 
-		if ($tag != '')
+		if ($tag !== '')
 		{
-			$this->attrs = [];
-			$Attributes = $this->parseAttributes($context);
-			$char = $context->scanCharacter();
+			$this->attrs    = [];
+			$Attributes     = $this->parseAttributes($context);
+			$char           = $context->scanCharacter();
 
-			if ($char == '/')
+			if ($char === '/')
 			{
 				$char = $context->scanCharacter();
 
-				if ($char != '>')
+				if ($char !== '>')
 				{
 					$context->unscanCharacter();
 				}
 
 				$context->handler_object_element->
 				{$context->handler_method_opening}($context->htmlsax, $tag,
-					$Attributes, true);
+				$Attributes, true);
 				$context->handler_object_element->
 				{$context->handler_method_closing}($context->htmlsax, $tag,
-					true);
+				true);
 			}
 			else
 			{
 				$context->handler_object_element->
 				{$context->handler_method_opening}($context->htmlsax, $tag,
-					$Attributes, false);
+				$Attributes, false);
 			}
 		}
 

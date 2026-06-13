@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -11,21 +13,21 @@ class JaspState
 {
 	/**
 	 * @param StateParser $context subclass
-	 * @return constant STATE_START
+	 * @return int STATE_START
 	 * @access protected
 	 */
-	function parse(&$context)
+	public function parse(StateParser $context): int
 	{
 		$text = $context->scanUntilString('%>');
 
-		if ($text != '')
+		if ($text !== '')
 		{
 			$context->handler_object_jasp->
 			{$context->handler_method_jasp}($context->htmlsax, $text);
 		}
 
-		$context->IgnoreCharacter();
-		$context->IgnoreCharacter();
+		$context->ignoreCharacter();
+		$context->ignoreCharacter();
 
 		return STATE_START;
 	}

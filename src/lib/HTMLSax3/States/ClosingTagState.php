@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -11,22 +13,22 @@ class ClosingTagState
 {
 	/**
 	 * @param StateParser $context subclass
-	 * @return constant STATE_START
+	 * @return int STATE_START
 	 * @access protected
 	 */
-	function parse(&$context)
+	public function parse(StateParser $context): int
 	{
 		$tag = $context->scanUntilCharacters('/>');
 
-		if ($tag != '')
+		if ($tag !== '')
 		{
 			$char = $context->scanCharacter();
 
-			if ($char == '/')
+			if ($char === '/')
 			{
 				$char = $context->scanCharacter();
 
-				if ($char != '>')
+				if ($char !== '>')
 				{
 					$context->unscanCharacter();
 				}

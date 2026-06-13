@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -11,10 +13,13 @@ class NullHandler
 {
 	/**
 	 * Generic handler method which does nothing
+	 * Accepts any arguments the framework may forward.
+	 *
+	 * @param mixed ...$_args variadic to swallow every SAX callback signature
 	 * @access protected
 	 * @return void
 	 */
-	function DoNothing()
+	public function DoNothing(mixed ...$_args): void
 	{
 	}
 }

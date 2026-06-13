@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -11,27 +13,21 @@ class TagState
 {
 	/**
 	 * @param StateParser $context subclass
-	 * @return constant the next state to move into
+	 * @return int the next state to move into
 	 * @access protected
 	 */
-	function parse(&$context)
+	public function parse(StateParser $context): int
 	{
-		switch ($context->ScanCharacter()) {
-			case '/':
-				return STATE_CLOSING_TAG;
-				break;
-			case '?':
-				return STATE_PI;
-				break;
-			case '%':
-				return STATE_JASP;
-				break;
-			case '!':
-				return STATE_ESCAPE;
-				break;
-			default:
+		return match ($context->scanCharacter())
+		{
+			'/'      => STATE_CLOSING_TAG,
+			'?'      => STATE_PI,
+			'%'      => STATE_JASP,
+			'!'      => STATE_ESCAPE,
+			default  => tap(STATE_OPENING_TAG, static function () use ($context): void
+			{
 				$context->unscanCharacter();
-				return STATE_OPENING_TAG;
-		}
+		}),
+		};
 	}
 }

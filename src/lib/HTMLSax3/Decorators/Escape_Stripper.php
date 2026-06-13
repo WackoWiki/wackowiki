@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HTMLSax3;
 
 /**
@@ -15,13 +17,14 @@ class Escape_Stripper
 	 * @var object
 	 * @access private
 	 */
-	public $orig_obj;
+	public object $orig_obj;
+
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public $orig_method;
+	public string $orig_method;
 
 	/**
 	 * Constructs Escape_Stripper
@@ -29,10 +32,10 @@ class Escape_Stripper
 	 * @param string $orig_method original handler method
 	 * @access protected
 	 */
-	function __construct(&$orig_obj, $orig_method)
+	public function __construct(object &$orig_obj, string $orig_method)
 	{
-		$this->orig_obj		=& $orig_obj;
-		$this->orig_method	= $orig_method;
+		$this->orig_obj    = &$orig_obj;
+		$this->orig_method = $orig_method;
 	}
 
 	/**
@@ -41,14 +44,14 @@ class Escape_Stripper
 	 * @param string $data element data
 	 * @access protected
 	 */
-	function strip(&$parser, $data): void
+	public function strip(HTMLSax3 $parser, string $data): void
 	{
 		// Check for HTML comments first
 		if (str_starts_with($data, '--'))
 		{
 			$patterns = [
-				'/^\-\-/',					// Opening comment: --
-				'/\-\-$/',					// Closing comment: --
+				'/^\-\-/',    // Opening comment: --
+				'/\-\-$/',    // Closing comment: --
 			];
 			$data = preg_replace($patterns, '', $data);
 
@@ -57,8 +60,8 @@ class Escape_Stripper
 		else if (str_starts_with($data, '['))
 		{
 			$patterns = [
-				'/^\[.*CDATA.*\[/s',		// Opening CDATA
-				'/\].*\]$/s',				// Closing CDATA
+				'/^\[.*CDATA.*\[/s',    // Opening CDATA
+				'/\].*\]$/s',           // Closing CDATA
 			];
 			$data = preg_replace($patterns, '', $data);
 		}
