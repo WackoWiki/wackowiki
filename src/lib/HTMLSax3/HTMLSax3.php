@@ -24,6 +24,8 @@ declare(strict_types=1);
 
 namespace HTMLSax3;
 
+use InvalidArgumentException;
+
 /**
  * Main parser components
  * @package HTMLSax3
@@ -31,8 +33,6 @@ namespace HTMLSax3;
 /**
  * Required classes
  */
-
-use InvalidArgumentException;
 
 /**
  * User interface class. All user calls should only be made to this class
@@ -97,7 +97,7 @@ class HTMLSax3
 
 	/**
 	 * Sets a parser option. By default, all options are switched off.
-	 * Returns a InvalidArgumentException if option is invalid<br />
+	 * Throws an InvalidArgumentException if option is invalid.<br />
 	 * <b>Available options:</b>
 	 * <ul>
 	 * <li>XML_OPTION_TRIM_DATA_NODES: trim whitespace off the beginning

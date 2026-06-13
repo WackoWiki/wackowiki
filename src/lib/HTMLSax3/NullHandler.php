@@ -12,8 +12,10 @@ namespace HTMLSax3;
 class NullHandler
 {
 	/**
-	 * Generic handler method which does nothing
-	 * Accepts any arguments the framework may forward.
+	 * Generic handler method which does nothing.
+	 *
+	 * Accepts any arguments the framework may forward (SAX callbacks have
+	 * varying arities: open=3, close=2, data=2, pi=3, jasp=2, escape=2).
 	 *
 	 * @param mixed ...$_args variadic to swallow every SAX callback signature
 	 * @access protected

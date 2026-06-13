@@ -20,11 +20,11 @@ class TagState
 	{
 		return match ($context->scanCharacter())
 		{
-			'/'      => STATE_CLOSING_TAG,
-			'?'      => STATE_PI,
-			'%'      => STATE_JASP,
-			'!'      => STATE_ESCAPE,
-			default  => tap(STATE_OPENING_TAG, static function () use ($context): void
+			'/'     => STATE_CLOSING_TAG,
+			'?'     => STATE_PI,
+			'%'     => STATE_JASP,
+			'!'     => STATE_ESCAPE,
+			default => tap(STATE_OPENING_TAG, static function () use ($context): void
 			{
 				$context->unscanCharacter();
 		}),

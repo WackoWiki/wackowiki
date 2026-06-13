@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace HTMLSax3;
 
+require_once __DIR__ . '/helpers.php';
+
 /**
- * Define parser states
+ * Define parser states.
  *
- * Kept as global constants for BC with code that references
- * STATE_START, STATE_TAG, etc. directly.
+ * Kept as global constants for BC with code that references STATE_START,
+ * STATE_TAG, etc. directly.
  */
 const STATE_STOP        = 0;
 const STATE_START       = 1;
