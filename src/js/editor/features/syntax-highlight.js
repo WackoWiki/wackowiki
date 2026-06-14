@@ -251,7 +251,7 @@ function highlightWikiSyntax(text) {
   html = html.replace(/##(?!\s)(.+?)(?<!\s)##/g, '<span class="wiki-code">##$1##</span>');
   html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
   html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
-  html = html.replace(/(file:((\.\.|!)\/|\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&=]*)?)/ug, '<span class="wiki-link">$1</span>');
+  html = html.replace(/(file:((\.\.|!)\/|\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&;=]*)?)/ug, '<span class="wiki-link">$1</span>');
   html = html.replace(/(^([ ]{2}|\t)+(([*-]|\d+\.|[a-zA-Z]\.))[ \t]+)/gm, '<span class="wiki-list">$1</span>');
   html = html.replace(/&lt;\[.*?\]&gt;/gs, '<span class="wiki-block">$&</span>');
   html = html.replace(/(\{\{)(.+?)(\}\})/gs, '<span class="wiki-block">\$1\$2$3</span>');
