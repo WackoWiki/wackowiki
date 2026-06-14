@@ -691,16 +691,16 @@
         },
         {
             "name": "wackowiki/safehtml",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WackoWiki/safehtml.git",
-                "reference": "5b4356995c8a73520e7fb3d7556f35b831871225"
+                "reference": "eb37b74e7a856a11024b2e285f93cac5a5f6cee4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WackoWiki/safehtml/zipball/5b4356995c8a73520e7fb3d7556f35b831871225",
-                "reference": "5b4356995c8a73520e7fb3d7556f35b831871225",
+                "url": "https://api.github.com/repos/WackoWiki/safehtml/zipball/eb37b74e7a856a11024b2e285f93cac5a5f6cee4",
+                "reference": "eb37b74e7a856a11024b2e285f93cac5a5f6cee4",
                 "shasum": ""
             },
             "require": {
@@ -756,7 +756,7 @@
                 "source": "https://github.com/WackoWiki/safehtml",
                 "wiki": "https://wackowiki.org/doc/Dev/Projects/SafeHTML"
             },
-            "time": "2026-06-13T17:19:11+00:00"
+            "time": "2026-06-13T19:54:38+00:00"
         }
     ],
     "packages-dev": [],
