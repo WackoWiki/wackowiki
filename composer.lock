@@ -349,29 +349,32 @@
         },
         {
             "name": "phpthumb/phpthumb",
-            "version": "2.3.5",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPThumb/PHPThumb.git",
-                "reference": "5dcb9822caabe9bcb3f17d23ffd945944c6a943d"
+                "reference": "f5491bf4b3ff9b183caa68a6aa5f32dd3a433bab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/5dcb9822caabe9bcb3f17d23ffd945944c6a943d",
-                "reference": "5dcb9822caabe9bcb3f17d23ffd945944c6a943d",
+                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/f5491bf4b3ff9b183caa68a6aa5f32dd3a433bab",
+                "reference": "f5491bf4b3ff9b183caa68a6aa5f32dd3a433bab",
                 "shasum": ""
             },
             "require": {
-                "ext-gd": ">=2.3.2",
                 "php": ">=8.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^9.6 || ^10.5 || ^11.0"
+            },
+            "suggest": {
+                "ext-gd": "Required to use the PHPThumb\\GD backend (default for most users).",
+                "ext-imagick": "Required to use the PHPThumb\\Imagick backend. Provides support for additional formats (BMP, HEIC, TIFF) and higher-quality resampling."
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PHPThumb\\": "src/PHPThumb/"
+                    "PHPThumb\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -388,18 +391,28 @@
                     "email": "jarrod.nettles@icloud.com"
                 }
             ],
-            "description": "A library for manipulating images in PHP.",
+            "description": "A fluent image manipulation library for PHP 8.2+ with interchangeable GD and Imagick backends.",
             "homepage": "https://github.com/PHPThumb/PHPThumb",
             "keywords": [
+                "crop",
+                "filter",
+                "gd",
                 "image",
+                "images",
+                "imagick",
                 "resize",
-                "rotate"
+                "rotate",
+                "thumb",
+                "thumbnail",
+                "watermark"
             ],
             "support": {
+                "discussions": "https://github.com/PHPThumb/PHPThumb/discussions",
                 "issues": "https://github.com/PHPThumb/PHPThumb/issues",
-                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.3.5"
+                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.4.0",
+                "wiki": "https://github.com/PHPThumb/PHPThumb/wiki"
             },
-            "time": "2026-06-06T21:29:00+00:00"
+            "time": "2026-06-16T11:45:52+00:00"
         },
         {
             "name": "psr/simple-cache",
