@@ -389,7 +389,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_split($value, $delimiter, $limit = PHP_INT_MAX): array
 	{
-		return Ut::isempty($delimiter)? str_split($value, $limit) : explode($delimiter, $value, $limit);
+		return Ut::is_empty($delimiter)? str_split($value, $limit) : explode($delimiter, $value, $limit);
 	}
 
 	function filter_list()
