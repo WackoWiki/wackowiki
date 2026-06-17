@@ -69,13 +69,13 @@ export function markdownToWacko(text) {
       ? `%%(hl ${lang})\n${code}\n%%`
       : `%%\n${code}\n%%`;
     placeholders.push(block);
-    return `@@CODEBLOCK_${placeholders.length - 1}@@`;
+    return `§§CODEBLOCK${placeholders.length - 1}§§`;
   });
 
   // Inline code: `text` → ##text##
   w = w.replace(/`([^`\n]+)`/g, (match, content) => {
     placeholders.push(`##${content}##`);
-    return `@@INLINECODE_${placeholders.length - 1}@@`;
+    return `§§INLINECODE${placeholders.length - 1}§§`;
   });
 
   // Horizontal rules: ---, ***, ___ → ----
@@ -108,6 +108,12 @@ export function markdownToWacko(text) {
 
   // Bold: already compatible (but convert __text__ → **text**)
   w = w.replace(/__(.*?)__/g, '**\$1**');
+
+  // Italic: *text* → //text//
+  w = w.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '//$1//');
+  // Italic: _text_ → //text//
+  w = w.replace(/_([^_]+)_/g, '//\$1//');
+
   // Strikethrough: ~~text~~ → --text--
   w = w.replace(/~~(.*?)~~/g, '--\$1--');
   // Small text: <small>text</small> → ++text++
@@ -126,8 +132,8 @@ export function markdownToWacko(text) {
   );
 
   // Restore code blocks and inline code placeholders
-  w = w.replace(/@@CODEBLOCK_(\d+)@@/g, (match, idx) => placeholders[idx]);
-  w = w.replace(/@@INLINECODE_(\d+)@@/g, (match, idx) => placeholders[idx]);
+  w = w.replace(/§§CODEBLOCK(\d+)§§/g, (match, idx) => placeholders[idx]);
+  w = w.replace(/§§INLINECODE(\d+)§§/g, (match, idx) => placeholders[idx]);
 
   return w;
 }
