@@ -47,7 +47,7 @@
 <?php
 write_config_hidden_nodes($config_parameters);
 
-echo '   <input type="hidden" name="password" value="' . ($_POST['password'] ?? '') . '">' . "\n";
+echo '   <input type="hidden" name="password" value="' . Ut::html($_POST['password'] ?? '') . '">' . "\n";
 
 // If none of the PHP SQL extensions are loaded then let the user know there is a problem
 if (   !extension_loaded('mysqli')

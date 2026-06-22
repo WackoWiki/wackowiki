@@ -220,7 +220,7 @@ if (!headers_sent())
 	header('Last-Modified: ' . Ut::http_date());
 }
 
-echo $ta_id;
+echo Ut::html($ta_id);
 echo '~~~';
 echo implode('~~~', $out);
 die();

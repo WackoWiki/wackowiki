@@ -45,7 +45,7 @@ class TemplatestEscaper
 
 	function escapeHtml($string): string
 	{
-		return htmlspecialchars((string) $string, ENT_QUOTES | ENT_SUBSTITUTE, $this->sc_encoding);
+		return htmlspecialchars((string) $string, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, $this->sc_encoding);
 	}
 
 	function escapeHtmlAttr($string)

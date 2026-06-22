@@ -353,7 +353,7 @@ class Ut
 			return '';
 		}
 
-		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, $charset, $double_encode);
+		return htmlspecialchars($string, ENT_QUOTES  | ENT_SUBSTITUTE | ENT_HTML5, $charset, $double_encode);
 	}
 
 	static function serialize($data, $options = 0)
