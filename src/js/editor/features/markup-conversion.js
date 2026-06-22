@@ -110,9 +110,24 @@ export function markdownToWacko(text) {
   w = w.replace(/__(.*?)__/g, '**\$1**');
 
   // Italic: *text* → //text//
-  w = w.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '//$1//');
+  w = w.replace(
+    /(^|[^*\w])\*(?!\*)([^*\s][^*]*[^*\s])\*(?![*\w])/g,
+    '\$1//\$2//'
+  );
+  w = w.replace(
+    /(^|[^*\w])\*(?!\*)([^*\s])\*(?![*\w])/g,
+    '\$1//\$2//'
+  );
+
   // Italic: _text_ → //text//
-  w = w.replace(/_([^_]+)_/g, '//\$1//');
+  w = w.replace(
+    /(^|[^_\w])_(?!_)([^_\s][^_]*[^_\s])_(?![_\w])/g,
+    '\$1//\$2//'
+  );
+  w = w.replace(
+    /(^|[^_\w])_(?!_)([^_\s])_(?![_\w])/g,
+    '\$1//\$2//'
+  );
 
   // Strikethrough: ~~text~~ → --text--
   w = w.replace(/~~(.*?)~~/g, '--\$1--');
@@ -190,20 +205,27 @@ function markdownTableToWacko(block) {
   if (lines.length < 3) return block; // not a valid table
 
   let wacko = '#|\n';
-  const headerCells = lines[0]
-    .split('|')
-    .map(c => c.trim())
-    .filter(c => c !== '');
+
+  /**
+   * Split a Markdown table row into cells.
+   * Drops only the empty first/last entries produced by the surrounding
+   * `|` pipes, preserving empty cells inside the row.
+   */
+  const splitRow = (line) => {
+    const parts = line.split('|').map(c => c.trim());
+    if (parts.length && parts[0] === '') parts.shift();
+    if (parts.length && parts[parts.length - 1] === '') parts.pop();
+    return parts;
+  };
+
+  const headerCells = splitRow(lines[0]);
   if (headerCells.length) {
     wacko += '*| ' + headerCells.join(' | ') + ' |*\n';
   }
 
   // Skip separator line (lines[1])
   for (let i = 2; i < lines.length; i++) {
-    const cells = lines[i]
-      .split('|')
-      .map(c => c.trim())
-      .filter(c => c !== '');
+    const cells = splitRow(lines[i]);
     if (cells.length) {
       wacko += '|| ' + cells.join(' | ') + ' ||\n';
     }
