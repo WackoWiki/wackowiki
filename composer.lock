@@ -349,23 +349,23 @@
         },
         {
             "name": "phpthumb/phpthumb",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPThumb/PHPThumb.git",
-                "reference": "f5491bf4b3ff9b183caa68a6aa5f32dd3a433bab"
+                "reference": "3e9104c7807bf9bf4cc0a27db407291f1740a95c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/f5491bf4b3ff9b183caa68a6aa5f32dd3a433bab",
-                "reference": "f5491bf4b3ff9b183caa68a6aa5f32dd3a433bab",
+                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/3e9104c7807bf9bf4cc0a27db407291f1740a95c",
+                "reference": "3e9104c7807bf9bf4cc0a27db407291f1740a95c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.6 || ^10.5 || ^11.0"
+                "phpunit/phpunit": "^11.0"
             },
             "suggest": {
                 "ext-gd": "Required to use the PHPThumb\\GD backend (default for most users).",
@@ -400,6 +400,7 @@
                 "image",
                 "images",
                 "imagick",
+                "oop-library",
                 "resize",
                 "rotate",
                 "thumb",
@@ -409,10 +410,10 @@
             "support": {
                 "discussions": "https://github.com/PHPThumb/PHPThumb/discussions",
                 "issues": "https://github.com/PHPThumb/PHPThumb/issues",
-                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.4.0",
+                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.5.0",
                 "wiki": "https://github.com/PHPThumb/PHPThumb/wiki"
             },
-            "time": "2026-06-16T11:45:52+00:00"
+            "time": "2026-06-21T21:46:44+00:00"
         },
         {
             "name": "psr/simple-cache",
