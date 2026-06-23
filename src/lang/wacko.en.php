@@ -1012,6 +1012,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Rename entire cluster',
 	'MassNewName'				=> 'Enter new name for this cluster',
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'Back to overview',

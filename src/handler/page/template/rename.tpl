@@ -14,6 +14,9 @@
 			<input type="checkbox" id="redirect" name="redirect"[ ' checked ' ]>
 			<label for="redirect">[ ' _t: NeedRedirect ' ]</label><br>
 			[= global _ =
+				<input type="checkbox" id="selectiverename" name="selectiverename">
+				<label for="selectiverename">[ ' _t: RenameSubpagesOnly ' ]</label><br>
+
 				<input type="checkbox" id="massrename" name="massrename">
 				<label for="massrename">[ ' _t: MassRename ' ]</label>
 			=]

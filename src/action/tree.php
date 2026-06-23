@@ -25,6 +25,8 @@ Options:
 		1 - excludes system pages
 	[lang="ru"]
 		show pages only in specified language
+	[select_mode=0]
+		show checkboxes for page selection
 EOD;
 
 // constants
@@ -40,6 +42,7 @@ $page		??= '/' . $this->tag;
 $sort		??= '';
 $system		??= 0;
 $title		??= 1;
+$select_mode	??= 0;   // option for forms
 
 if ($help)
 {
@@ -220,6 +223,14 @@ if ($pages = $this->db->load_all(
 				// begin element
 				echo '<li>';
 
+				// Checkbox support for page selection
+				if ($select_mode)
+				{
+					$checkbox_id = 'sub_' . md5($page['tag']);
+					echo '<input type="checkbox" name="selected_subpages[]" id="' . $checkbox_id . '" value="' . htmlspecialchars($page['tag']) . '"> ';
+					echo '<label for="' . $checkbox_id . '">';
+				}
+
 				// displaying only the last word of tag OR title
 				$link_text = ($title == 0)
 					? mb_substr($page['tag'], mb_strrpos($page['tag'], '/') + 1)
@@ -233,6 +244,11 @@ if ($pages = $this->db->load_all(
 				else
 				{
 					echo $this->link('/' . $page['tag'], '', $link_text, '', false, true, false);
+				}
+
+				if ($select_mode)
+				{
+					echo '</label>';
 				}
 
 				// recheck page level
@@ -280,4 +296,3 @@ else
 		echo '<em>' . $empty_tree . '</em><br>';
 	}
 }
-

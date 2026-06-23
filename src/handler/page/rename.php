@@ -60,37 +60,90 @@ if ($registered
 				$new_tag = implode('/', $parts);
 			}
 
-			if ($error = $this->sanitize_new_page_tag($new_tag, $this->tag))
-			{
-				$this->set_message($error, 'error');
-				$this->reload_me();
-			}
+			$selected_subpages	= $_POST['selected_subpages'] ?? [];
+			$is_selective		= isset($_POST['selectiverename']) && !empty($selected_subpages);
+			$is_mass			= isset($_POST['massrename']);
 
-			// rename single page
-			if (!isset($_POST['massrename']))
+			// Only validate new root tag when we are actually moving the root page
+			if (!$is_selective)
 			{
-				$log->mode		= $this->_t('RenamePage');
-				$log->log_n_h	= $this->tag;
-
-				move($this, $this->page, $new_tag, $log);
+				// full validation when moving the root page itself
+				if ($error = $this->sanitize_new_page_tag($new_tag, $this->tag))
+				{
+					$this->set_message($error, 'error');
+					$this->reload_me();
+				}
 			}
 			else
 			{
-				// massrename
+				// selective mode: allow empty (root) or existing cluster
+				if ($new_tag !== '' && $new_tag !== $old_tag)
+				{
+					// basic format check only
+					if (!preg_match('/^([' . $this::PATTERN['TAG_P'] . '\/]+)$/u', $new_tag))
+					{
+						$this->set_message($this->_t('InvalidWikiName'), 'error');
+						$this->reload_me();
+					}
+				}
+			}
+
+			// rename single page
+			if (empty($selected_subpages) && !$is_mass && !$is_selective)
+			{
+				$log->mode      = $this->_t('RenamePage');
+				$log->log_n_h   = $this->tag;
+
+				move($this, $this->page, $new_tag, $log);
+			}
+			// massrename all sub-pages
+			else if ($is_mass)
+			{
 				$log->mode		= $this->_t('MassRenaming');
 				recursive_move($this, $this->tag, $new_tag, $log);
 			}
+			// selected sub-pages only
+			else if ($is_selective)
+			{
+				$log->mode = $this->_t('SubpagesRenaming');
+
+				foreach ($selected_subpages as $sub_tag)
+				{
+					if ($sub_page = $this->load_page($sub_tag, 0, null, LOAD_CACHE, LOAD_META))
+					{
+						$log->log_n_h = $sub_page['tag'];
+
+ 						if ($new_tag === '' || $new_tag === '/')
+                        			{
+							// move to root: keep only the last segment
+							$new_sub_tag = mb_substr($sub_page['tag'], mb_strrpos($sub_page['tag'], '/') + 1);
+						}
+						else
+						{
+							// normal prefix replacement
+							$new_sub_tag = preg_replace(
+								'/^' . preg_quote($old_tag, '/') . '/',
+								preg_quote($new_tag, '/'),
+								$sub_page['tag'],
+								1
+							);
+							$new_sub_tag = stripslashes($new_sub_tag);
+						}
+
+						move($this, $sub_page, $new_sub_tag, $log);
+					}
+				}
+			}
 
 			$this->db->invalidate_sql_cache();
-
-			// update sitemap
 			$this->update_sitemap();
 
 			$this->set_message($log, 'success');
-			$this->http->redirect($this->href('', $new_tag));
+			$this->http->redirect($this->href('', $new_tag));   // redirect to new parent
 		}
 		else
 		{
+			// form display
 			if ($this->db->multilanguage)
 			{
 				$languages			= $this->_t('LanguageArray');
@@ -118,7 +171,11 @@ if ($registered
 			$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
 
 			// show sub-pages
-			$tpl->tree		= $this->action('tree', ['depth' => 3]);
+			$tpl->tree = $this->action('tree', [
+				'depth'       => 5,
+				'rename_mode' => true,
+				'nomark'      => 0
+			]);
 
 			$tpl->leave();	// f_
 		}
