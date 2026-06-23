@@ -454,8 +454,7 @@ class Http
 	 */
 	private function generate_csp_nonce(): string
 	{
-		return Ut::random_token(11);
-		#return rtrim(strtr(base64_encode(random_bytes(24)), '+/', '-_'), '=');
+		return rtrim(strtr(base64_encode(random_bytes(24)), '+/', '-_'), '=');
 	}
 
 	/**
