@@ -172,9 +172,9 @@ if ($registered
 
 			// show sub-pages
 			$tpl->tree = $this->action('tree', [
-				'depth'       => 5,
-				'rename_mode' => true,
-				'nomark'      => 0
+				'depth'			=> 5,
+				'select_mode'	=> true,
+				'nomark'		=> 0
 			]);
 
 			$tpl->leave();	// f_
