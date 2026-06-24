@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Ganzen Cluster umbenennen',
 	'MassNewName'				=> 'Einen neuen Namen für diesen Cluster eingeben',
 	'MassNeedRedirect'			=> 'Weiterleitung von den alten zu den neuen Seiten einrichten.',
+	'SubpagesRenaming'			=> 'Ausgewählte Unterseiten umbenennen',
+	'RenameSubpagesOnly'		=> 'Nur ausgewählte Unterseiten umbenennen',
 
 	// pagination
 	'ToOverview'				=> 'Zur Übersicht',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Ausgewählte Kommentare wurden erfolgreich einem neuem Thema zugewiesen.',
 	'ModerateCommentsSplitFailed'	=> 'Hinweis: Aus irgendeinem Grund ist das Abtrennen der ausgewählen Kommentare zu einem neuen Thema gescheiterte.<br>Normalerweise sollte dies nicht geschehen, setze daher den Site-Administrator von dem Ereignis in Kenntnis.<br>Als Vorsichtsmaßnahme hat es die Kommentare in ihrer ursprünglichen Form belassen.',
 	'ModerateCommentsMoved'		=> 'Ausgewählte Kommentare erfolgreich zur angegebenen Seite verschoben.',
+	'ModerateConvertToPage'		=> 'In Seite konvertieren',
+	'ModerateConvertConfirm'	=> 'Kommentar in Seite konvertieren',
+	'ModerateReassignFollowing'	=> 'Alle folgenden Kommentare der neuen Seite zuweisen',
+	'ModerateCommentConverted'	=> 'Ausgewählter Kommentar in Seite konvertiert.',
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Link zur neuen Seite auf der alten gesetzt',
 	'LogSplittedPage'			=> 'Kommentare auf der Seite [[/%1]] zu Seite [[/%2]] abgetrennt',
 	'LogMergedPages'			=> 'Seite %1 mit Seite [[/%2]] zusammengeführt',
+	'LogCommentConvertedToPage'	=> 'Kommentar [[/%1]] in Seite [[/%2] ] konvertiert',
 	'LogUserPasswordReminded'	=> 'Nutzer ##%1## hat den Vorgang zur Passwort-Wiederherstellung auf die E-Mail-Adresse ##%2## angefordert',
 	'LogUserPasswordRecovered'	=> 'Nutzer ##%1## hat sein vergessenes Passwort erfolgreich wieder hergestellt',
 	'LogUserPasswordChanged'	=> 'Nutzer ##%1## hat erfolgfreich sein Passwort geändert.',

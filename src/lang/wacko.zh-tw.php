@@ -823,8 +823,7 @@ $wacko_translation = [
 	'ReplaceTextReturn'			=> '返回表單',
 	'ReplaceTextWarning'		=> '警告：目前已有 %1 個頁面包含取代的字串 %$2，若您進行取代將無法區別原本存在的字串以及取代的字串。',
 	'ReplaceTextBlankWarning'	=> '警告：因取代的字串為空白，此操作將無法還原。',
-	'ReplaceTextEdiFixed regex: use `^` anchor and multiline flag `m` to ensure each line starts with `|`
-    // This prevents capturing non-table content that may contain pipes elsewhere.tSummary'	=> '文字取代： %1 → %2',
+	'ReplaceTextEditSummary'	=> '文字取代： %1 → %2',
 	'InvertSelection'			=> '反向選擇',
 
 	// Properties
@@ -1008,6 +1007,8 @@ $wacko_translation = [
 	'MassRenaming'				=> '整個叢集重新命名',
 	'MassNewName'				=> '輸入此叢集的新名稱',
 	'MassNeedRedirect'			=> '在舊頁面建立至新頁面的重新導向',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> '返回總覽',
@@ -1178,6 +1179,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> '所選評論已成功拆分為新主題。',
 	'ModerateCommentsSplitFailed'	=> '注意：將所選評論拆分為新主題時發生錯誤。<br>通常不應該發生，請通知網站管理員。<br>作為預防，問題已保留原樣。',
 	'ModerateCommentsMoved'		=> '所選評論已成功移至指定頁面。',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> '子討論區',
@@ -1334,6 +1339,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '。舊頁面已設定為指向新頁面的連結',
 	'LogSplittedPage'			=> '頁面 [[/%1]] 的評論已拆分到頁面 [[/%2]]',
 	'LogMergedPages'			=> '頁面 %1 已合併到頁面 [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> '使用者 ##%1## 已要求密碼復原，聯絡地址 ##%2##',
 	'LogUserPasswordRecovered'	=> '使用者 ##%1## 成功恢復遺失的密碼',
 	'LogUserPasswordChanged'	=> '使用者 ##%1## 已成功更新（變更）密碼',

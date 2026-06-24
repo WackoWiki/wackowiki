@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Omdøb hele området',
 	'MassNewName'				=> 'Angiv nyt navn for dette område',
 	'MassNeedRedirect'			=> 'Opret henvisning hertil på den gamle side',
+	'SubpagesRenaming'			=> 'Omdøb valgte undersider',
+	'RenameSubpagesOnly'		=> 'Omdøb kun valgte undersider',
 
 	// pagination
 	'ToOverview'				=> 'Tilbage til oversigt',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Valgte kommentarer adskilt i et nyt emne.',
 	'ModerateCommentsSplitFailed'	=> 'Bemærk: Af en eller anden grund mislykkedes det at adskille de valgte kommentarer til et nyt emne.<br>Normalt skulle dette ikke ske, så kontakt venligst webstedets administrator.<br>Som en sikkerhedsforanstaltning er problemet blevet bevaret i sin oprindelige form.',
 	'ModerateCommentsMoved'		=> 'Valgte kommentarer migreret til den givne side.',
+	'ModerateConvertToPage'		=> 'Konvertér til side',
+	'ModerateConvertConfirm'	=> 'Konverter kommentar til side',
+	'ModerateReassignFollowing'	=> 'Gentildel alle følgende kommentarer til den nye side',
+	'ModerateCommentConverted'	=> 'Valgte kommentar konverteret til side.',
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. On the old page, a link to the new',
 	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
 	'LogMergedPages'			=> 'Sider %1 fusioneret til side [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Kommentar [[/%1]] konverteret til side [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Bruger ##%1## bad om adgangskodegendannelsesprocessen til at adressere ##%2##',
 	'LogUserPasswordRecovered'	=> 'Bruger ##%1## gendannede den glemte adgangskode',
 	'LogUserPasswordChanged'	=> 'Bruger ##%1## opdateret (ændret) adgangskoden',

@@ -1040,6 +1040,8 @@ recovery_password
 	'MassRenaming'				=> 'تغییر نام کل خوشه',
 	'MassNewName'				=> 'نام جدید برای این خوشه وارد کنید',
 	'MassNeedRedirect'			=> 'ایجاد تغییر مسیر به صفحات جدید در صفحات قدیمی',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'بازگشت به نمای کلی',
@@ -1212,6 +1214,10 @@ recovery_password
 معمولاً این اتفاق نباید بیفتد، بنابراین مدیر سایت را مطلع کنید.
 به عنوان احتیاط، مسئله به شکل اصلی خود حفظ شده است.',
 	'ModerateCommentsMoved'		=> 'نظرات انتخاب شده با موفقیت به صفحه مشخص شده منتقل شدند.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'زیرانجمن‌ها',
@@ -1368,6 +1374,7 @@ recovery_password
 	'LogRenamedPage2'			=> '. صفحه قدیمی به عنوان لینک به صفحه جدید تنظیم شد',
 	'LogSplittedPage'			=> 'نظرات صفحه [[/%1]] به صفحه [[/%2]] تقسیم شدند',
 	'LogMergedPages'			=> 'صفحات %1 به صفحه [[/%2]] ادغام شدند',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'کاربر ##%1## درخواست فرآیند بازیابی رمز عبور به آدرس ##%2## کرد',
 	'LogUserPasswordRecovered'	=> 'کاربر ##%1## با موفقیت رمز عبور فراموش شده خود را بازیابی کرد',
 	'LogUserPasswordChanged'	=> 'کاربر ##%1## با موفقیت رمز عبور خود را به‌روزرسانی (تغییر) کرد',

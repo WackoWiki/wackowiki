@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Döp om hela klustret',
 	'MassNewName'				=> 'Ange nytt namn för det här klustret',
 	'MassNeedRedirect'			=> 'Skapa omdirigering till de nya sidorna på de gamla sidorna',
+	'SubpagesRenaming'			=> 'Döp om valda undersidor',
+	'RenameSubpagesOnly'		=> 'Byt endast namn på valda undersidor',
 
 	// pagination
 	'ToOverview'				=> 'Tillbaka till översikt',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Valda kommentarer har separerats i ett nytt ämne.',
 	'ModerateCommentsSplitFailed'	=> 'Observera: Av någon anledning misslyckades det att separera de valda kommentarerna till ett nytt ämne.<br>Vanligtvis bör detta inte ske, så meddela webbplatsens administratör.<br>Som en försiktighetsåtgärd har frågan bevarats i sin ursprungliga form.',
 	'ModerateCommentsMoved'		=> 'Valda kommentarer har migrerats till den angivna sidan.',
+	'ModerateConvertToPage'		=> 'Konvertera till sida',
+	'ModerateConvertConfirm'	=> 'Konvertera kommentar till sida',
+	'ModerateReassignFollowing'	=> 'Tilldela alla följande kommentarer till den nya sidan',
+	'ModerateCommentConverted'	=> 'Vald kommentar konverterad till sida.',
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Den gamla sidan anges som länk till den nya',
 	'LogSplittedPage'			=> 'Kommentarer på sidan [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Sidor %1 sammanfogade till sida [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Kommentar [[/%1]] konverterad till sida [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Användare ##%1## bad om att få återställa lösenordet till adressen ##%2##',
 	'LogUserPasswordRecovered'	=> 'Användare ##%1## har återfått det glömda lösenordet',
 	'LogUserPasswordChanged'	=> 'Användare ##%1## har uppdaterats (bytt) lösenordet',

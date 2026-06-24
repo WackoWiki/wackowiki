@@ -1037,6 +1037,8 @@ recovery_password
 	'MassRenaming'				=> 'Рекурсивное переименование',
 	'MassNewName'				=> 'Введите новое имя для этого кластера',
 	'MassNeedRedirect'			=> 'Поставить на старых страницых редирект на новые',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'Обратно към преглед',
@@ -1209,6 +1211,10 @@ recovery_password
 Обикновено това не би трябвало да се случва, затова уведомете администратора на сайта.
 Като предпазна мярка проблемът е запазен в първоначалния си вид.',
 	'ModerateCommentsMoved'		=> 'Избраните коментари са успешно преместени на посочената страница.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'Форум',
@@ -1365,6 +1371,7 @@ recovery_password
 	'LogRenamedPage2'			=> '. На старата страница е създадена препратка към новата',
 	'LogSplittedPage'			=> 'Коментарите на страница [[/%1]] са отделени в страница [[/%2]]',
 	'LogMergedPages'			=> 'Страници %1 обединени в страница [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Потребител ##%1## поиска възстановяване на паролата на адрес ##%2##',
 	'LogUserPasswordRecovered'	=> 'Потребител ##%1## успешно възстанови забравената си парола',
 	'LogUserPasswordChanged'	=> 'Потребител ##%1## успешно актуализира (промени) паролата си',

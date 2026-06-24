@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Rename entire cluster',
 	'MassNewName'				=> 'Enter new name for this cluster',
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'Back to overview',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason separating the selected comments to a new topic failed.<br>Usually this should not happen, so please notify the site administrator.<br>As a precaution, the issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'மன்றம்',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. The old page set as the link to the new one',
 	'LogSplittedPage'			=> 'Comments on the page [[/%1]] split to page [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'User ##%1## asked for the password recovery process to address ##%2##',
 	'LogUserPasswordRecovered'	=> 'User ##%1## successfully recovered the forgotten password',
 	'LogUserPasswordChanged'	=> 'User ##%1## successfully updated (changed) the password',

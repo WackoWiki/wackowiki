@@ -1012,6 +1012,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'เปลี่ยนชื่อทั้งคลัสเตอร์',
 	'MassNewName'				=> 'ป้อนชื่อใหม่สำหรับคลัสเตอร์นี้',
 	'MassNeedRedirect'			=> 'สร้างการเปลี่ยนทางไปยังหน้าชื่อใหม่จากหน้าชื่อเก่า',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'กลับไปยังภาพรวม',
@@ -1182,6 +1184,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'แยกความคิดเห็นที่เลือกไปเป็นหัวข้อใหม่เรียบร้อยแล้ว',
 	'ModerateCommentsSplitFailed'	=> 'หมายเหตุ: ด้วยเหตุผลบางประการ การแยกความคิดเห็นที่เลือกไปเป็นหัวข้อใหม่ล้มเหลว<br>โดยปกติไม่ควรเกิดขึ้น กรุณาแจ้งผู้ดูแลระบบเว็บไซต์<br>เพื่อความระมัดระวัง ปัญหาได้รับการเก็บรักษาในรูปแบบเดิมไว้',
 	'ModerateCommentsMoved'		=> 'ย้ายความคิดเห็นที่เลือกไปยังหน้าที่ระบุเรียบร้อยแล้ว',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'ฟอรัม',
@@ -1338,6 +1344,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. หน้าเก่าได้ถูกตั้งเป็นลิงก์ไปยังหน้าใหม่',
 	'LogSplittedPage'			=> 'แยกความคิดเห็นในหน้า [[/%1]] ไปยังหน้า [[/%2]]',
 	'LogMergedPages'			=> 'รวมหน้า %1 เป็นหน้า [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'ผู้ใช้ ##%1## ขอขั้นตอนกู้คืนรหัสผ่านไปยังที่อยู่ ##%2##',
 	'LogUserPasswordRecovered'	=> 'ผู้ใช้ ##%1## กู้คืนรหัสผ่านที่ลืมได้สำเร็จ',
 	'LogUserPasswordChanged'	=> 'ผู้ใช้ ##%1## เปลี่ยนรหัสผ่านเรียบร้อยแล้ว',

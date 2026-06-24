@@ -1011,6 +1011,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'إعادة تسمية المجموعة بأكملها',
 	'MassNewName'				=> 'أدخل اسم جديد لهذه المجموعة',
 	'MassNeedRedirect'			=> 'إنشاء إعادة توجيه للصفحات الجديدة على الصفحات القديمة',
+	'SubpagesRenaming'			=> 'إعادة تسمية الصفحات الفرعية المحددة',
+	'RenameSubpagesOnly'		=> 'إعادة تسمية الصفحات الفرعية المحددة فقط',
 
 	// pagination
 	'ToOverview'				=> 'العودة إلى النظرة العامة',
@@ -1181,6 +1183,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'تم فصل التعليقات المختارة بنجاح في موضوع جديد.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason separating the selected comments to a new topic failed.<br>Usually this should not happen, so please notify the site administrator.<br>As a precaution, the issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'تم نقل التعليقات المختارة بنجاح إلى الصفحة المحددة.',
+	'ModerateConvertToPage'		=> 'تحويل إلى صفحة',
+	'ModerateConvertConfirm'	=> 'تحويل التعليق إلى صفحة',
+	'ModerateReassignFollowing'	=> 'إعادة تعيين جميع التعليقات التالية إلى الصفحة الجديدة',
+	'ModerateCommentConverted'	=> 'تم تحويل التعليق المحدد إلى صفحة.',
 
 	// forum
 	'ForumSubforums'			=> 'المنتدى',
@@ -1337,6 +1343,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. تم تعيين الصفحة القديمة كرابط إلى الصفحة الجديدة',
 	'LogSplittedPage'			=> 'التعليقات على الصفحة [[/%1]] مقسمة إلى الصفحة [[/%2]]',
 	'LogMergedPages'			=> 'تم دمج الصفحات %1 إلى الصفحة [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'التعليق [[/%1]] تحول إلى الصفحة [[/%2]]',
 	'LogUserPasswordReminded'	=> 'المستخدم ##%1## طلب عملية استعادة كلمة المرور للعنوان ##%2 ## #',
 	'LogUserPasswordRecovered'	=> 'المستخدم ##%1## استعاد بنجاح كلمة المرور المنسية',
 	'LogUserPasswordChanged'	=> 'المستخدم ##%1## تم تحديث (تغيير) كلمة المرور بنجاح',

@@ -1012,6 +1012,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Đổi tên toàn bộ cụm',
 	'MassNewName'				=> 'Nhập tên mới cho cụm này',
 	'MassNeedRedirect'			=> 'Tạo chuyển hướng đến các trang mới từ các trang cũ',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'Quay lại tổng quan',
@@ -1182,6 +1184,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Các bình luận được chọn đã được tách thành một chủ đề mới thành công.',
 	'ModerateCommentsSplitFailed'	=> 'Lưu ý: Vì một lý do nào đó việc tách các bình luận đã chọn sang chủ đề mới thất bại.<br>Thông thường điều này không nên xảy ra, vui lòng thông báo cho quản trị viên trang.<br>Phòng ngừa, vấn đề đã được giữ nguyên trạng ở dạng ban đầu.',
 	'ModerateCommentsMoved'		=> 'Các bình luận được chọn đã được di chuyển thành công tới trang được chỉ định.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'Diễn đàn',
@@ -1338,6 +1344,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Trang cũ được đặt làm liên kết tới trang mới',
 	'LogSplittedPage'			=> 'Các bình luận trên trang [[/%1]] đã tách sang trang [[/%2]]',
 	'LogMergedPages'			=> 'Các trang %1 đã gộp vào trang [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Người dùng ##%1## yêu cầu quá trình khôi phục mật khẩu tới địa chỉ ##%2##',
 	'LogUserPasswordRecovered'	=> 'Người dùng ##%1## đã khôi phục mật khẩu thành công',
 	'LogUserPasswordChanged'	=> 'Người dùng ##%1## đã cập nhật (thay) mật khẩu thành công',

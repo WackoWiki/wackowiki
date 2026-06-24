@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Перейменувати весь кластер',
 	'MassNewName'				=> 'Введіть нове ім\'я цього кластеру',
 	'MassNeedRedirect'			=> 'Створення переспрямування нових сторінок на старих сторінках',
+	'SubpagesRenaming'			=> 'Перейменувати вибрані підсторінки',
+	'RenameSubpagesOnly'		=> 'Перейменувати вибрані підсторінки',
 
 	// pagination
 	'ToOverview'				=> 'Назад до огляду',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Вибрані коментарі успішно розділені в нову тему.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason separating the selected comments to a new topic failed.<br>Usually this should not happen, so please notify the site administrator.<br>As a precaution, the issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
+	'ModerateConvertToPage'		=> 'Перетворити на сторінку',
+	'ModerateConvertConfirm'	=> 'Перетворити коментар на сторінку',
+	'ModerateReassignFollowing'	=> 'Перепризначити всі коментарі на нову сторінку',
+	'ModerateCommentConverted'	=> 'Вибраний коментар перетворено на сторінку.',
 
 	// forum
 	'ForumSubforums'			=> 'Форум',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Стара сторінка встановлена як посилання на нову',
 	'LogSplittedPage'			=> 'Коментарі на сторінці [[/%1]] розділені на сторінку [[/%2]]',
 	'LogMergedPages'			=> 'Pages %1 merged to page [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Коментар [[/%1]] перетворений на сторінку [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Користувач ##%1## попросив процес відновлення пароля до адреси ##%2##',
 	'LogUserPasswordRecovered'	=> 'Користувач ##%1## успішно відновив забутий пароль',
 	'LogUserPasswordChanged'	=> 'Користувач ##%1## успішно оновлений (змінений) пароль',

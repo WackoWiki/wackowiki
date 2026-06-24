@@ -1012,6 +1012,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Preimenuj cijeli klaster',
 	'MassNewName'				=> 'Unesite novi naziv za ovaj klaster',
 	'MassNeedRedirect'			=> 'Stvori preusmjeravanje s starih stranica na nove stranice',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'Natrag na pregled',
@@ -1182,6 +1184,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Odabrani komentari su uspješno odvojeni u novu temu.',
 	'ModerateCommentsSplitFailed'	=> 'Napomena: iz nekog razloga razdvajanje odabranih komentara u novu temu nije uspjelo.<br>Obično se to ne bi smjelo događati, pa obavijestite administratora stranice.<br>Za svaki slučaj, problem je sačuvan u izvornom obliku.',
 	'ModerateCommentsMoved'		=> 'Odabrani komentari su uspješno premješteni na zadanu stranicu.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
@@ -1338,6 +1344,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Stara stranica postavljena kao poveznica na novu',
 	'LogSplittedPage'			=> 'Komentari na stranici [[/%1]] razdvojeni u stranicu [[/%2]]',
 	'LogMergedPages'			=> 'Stranice %1 spojene u stranicu [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Korisnik ##%1## zatražio oporavak lozinke na adresu ##%2##',
 	'LogUserPasswordRecovered'	=> 'Korisnik ##%1## uspješno oporavio zaboravljenu lozinku',
 	'LogUserPasswordChanged'	=> 'Korisnik ##%1## uspješno promijenio lozinku',

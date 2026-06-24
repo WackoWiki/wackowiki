@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Přejmenovat celý cluster',
 	'MassNewName'				=> 'Zadejte nový název pro tento cluster',
 	'MassNeedRedirect'			=> 'Vytvořit přesměrování na nové stránky na starých stránkách',
+	'SubpagesRenaming'			=> 'Přejmenovat vybrané podstránky',
+	'RenameSubpagesOnly'		=> 'Přejmenovat pouze vybrané podstránky',
 
 	// pagination
 	'ToOverview'				=> 'Zpět na přehled',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Vybrané komentáře byly úspěšně odděleny v novém tématu.',
 	'ModerateCommentsSplitFailed'	=> 'Poznámka: Z nějakého důvodu se oddělení vybraných komentářů k novému tématu nezdařilo.<br>Obvykle by se to nemělo stát, proto prosím informujte správce webu.<br>Jako preventivní opatření byl problém zachován v původní podobě.',
 	'ModerateCommentsMoved'		=> 'Vybrané komentáře byly úspěšně převedeny na danou stránku.',
+	'ModerateConvertToPage'		=> 'Převést na stránku',
+	'ModerateConvertConfirm'	=> 'Převést komentář na stránku',
+	'ModerateReassignFollowing'	=> 'Přiřadit všechny následující komentáře na novou stránku',
+	'ModerateCommentConverted'	=> 'Vybraný komentář převeden na stránku.',
 
 	// forum
 	'ForumSubforums'			=> 'Fórum',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Stará stránka nastavena jako odkaz na novou stránku',
 	'LogSplittedPage'			=> 'Komentáře na stránce [[/%1]] rozdělené na stránku [[/%2]]',
 	'LogMergedPages'			=> 'Stránky %1 se sloučily na stránku [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Komentář [[/%1]] převeden na stránku [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Uživatel ##%1## požádal o obnovení hesla na adresu ##%2##',
 	'LogUserPasswordRecovered'	=> 'Uživatel ##%1## úspěšně obnovil zapomenuté heslo',
 	'LogUserPasswordChanged'	=> 'Uživatel ##%1## úspěšně aktualizoval (změnil) heslo',

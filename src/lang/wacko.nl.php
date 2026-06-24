@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Hernoem de cluster',
 	'MassNewName'				=> 'Geef een nieuwe naam voor deze cluster',
 	'MassNeedRedirect'			=> 'Verwijs de oude pagina\'s door naar de nieuwe pagina\'s',
+	'SubpagesRenaming'			=> 'Hernoem geselecteerde subpagina\'s',
+	'RenameSubpagesOnly'		=> 'Alleen geselecteerde subpagina\'s hernoemen',
 
 	// pagination
 	'ToOverview'				=> 'Terug naar overzicht',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Geselecteerde commentaren zijn succesvol gescheiden in een nieuw onderwerp.',
 	'ModerateCommentsSplitFailed'	=> 'Opmerking: Het scheiden van de geselecteerde reacties naar een nieuwe topic is om een of andere reden mislukt.<br>Dit mag meestal niet gebeuren, dus neem dan contact op met de beheerder van de site.<br>Als voorzorgsmaatregel is de kwestie in haar oorspronkelijke vorm in stand gehouden.',
 	'ModerateCommentsMoved'		=> 'Geselecteerde reacties succesvol gemigreerd naar de gegeven pagina.',
+	'ModerateConvertToPage'		=> 'Converteren naar pagina',
+	'ModerateConvertConfirm'	=> 'Converteer reactie naar pagina',
+	'ModerateReassignFollowing'	=> 'Alle volgende reacties opnieuw toewijzen aan de nieuwe pagina',
+	'ModerateCommentConverted'	=> 'Geselecteerde opmerking omgezet naar pagina.',
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. On the old page, a link to the new',
 	'LogSplittedPage'			=> 'Comments on the page [[/%1]] splitted to page [[/%2]]',
 	'LogMergedPages'			=> 'Pagina\'s %1 samengevoegd met pagina [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Commentaar [[/%1]] omgezet naar pagina [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Gebruiker ##%1## heeft gevraagd om het wachtwoord te herstellen om ##%2##',
 	'LogUserPasswordRecovered'	=> 'Gebruiker ##%1## heeft het vergeten wachtwoord succesvol hersteld',
 	'LogUserPasswordChanged'	=> 'Gebruiker ##%1## succesvol bijgewerkt (veranderd) het wachtwoord',

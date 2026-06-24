@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Nimeä koko ryhmä uudelleen',
 	'MassNewName'				=> 'Syötä uusi nimi tälle klusterille',
 	'MassNeedRedirect'			=> 'Luo uudelleen uusille sivuille vanhoilla sivuilla',
+	'SubpagesRenaming'			=> 'Nimeä uudelleen valitut alasivut',
+	'RenameSubpagesOnly'		=> 'Nimeä uudelleen vain valitut alasivut',
 
 	// pagination
 	'ToOverview'				=> 'Takaisin yleiskatsaukseen',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Valitut kommentit erotettiin onnistuneesti uudesta aiheesta.',
 	'ModerateCommentsSplitFailed'	=> 'Huomautus: jostain syystä valittujen kommenttien erottaminen uuteen aiheeseen epäonnistui.<br>Yleensä näin ei pitäisi tapahtua, joten ilmoita sivuston ylläpitäjälle.<br>Varotoimena kysymys on säilynyt alkuperäisessä muodossaan.',
 	'ModerateCommentsMoved'		=> 'Valitut kommentit siirrettiin onnistuneesti annetulle sivulle.',
+	'ModerateConvertToPage'		=> 'Muunna sivuksi',
+	'ModerateConvertConfirm'	=> 'Muunna kommentti sivulle',
+	'ModerateReassignFollowing'	=> 'Määritä kaikki seuraavat kommentit uudelle sivulle',
+	'ModerateCommentConverted'	=> 'Valittu kommentti muunnettu sivulle.',
 
 	// forum
 	'ForumSubforums'			=> 'Foorumi',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Vanha sivu on linkkinä uudelle sivulle',
 	'LogSplittedPage'			=> 'Kommentit sivulla [[/%1]] jaettuna sivulle [[/%2]]',
 	'LogMergedPages'			=> 'Sivut %1 yhdistetty sivulle [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Kommentti [[/%1]] muunnettu sivulle [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Käyttäjä ##%1## pyysi salasanan palautusprosessia osoitteeseen ##%2##',
 	'LogUserPasswordRecovered'	=> 'Käyttäjä ##%1## palautti unohtuneen salasanan onnistuneesti',
 	'LogUserPasswordChanged'	=> 'Käyttäjä ##%1## päivitetty (muutettu) salasana',

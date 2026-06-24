@@ -1038,6 +1038,8 @@ $
 	'MassRenaming'				=> 'पूरे क्लस्टर का नाम बदलें',
 	'MassNewName'				=> 'इस क्लस्टर के लिए नया नाम दर्ज करें',
 	'MassNeedRedirect'			=> 'जिन पृष्ठों का नाम बदला गया है उनके लिए रीडायरेक्ट बनाएँ',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'अवलोकन पर वापस जाएं',
@@ -1212,6 +1214,10 @@ $
 
 सावधानी के तौर पर, मुद्दा अपने मूल रूप में संरक्षित रखा गया है।',
 	'ModerateCommentsMoved'		=> 'चयनित टिप्पणियाँ सफलतापूर्वक निर्दिष्ट पृष्ठ पर स्थानांतरित कर दी गईं।',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'उप-मंच',
@@ -1368,6 +1374,7 @@ $
 	'LogRenamedPage2'			=> '. पुराने पृष्ठ को नए पृष्ठ का लिंक सेट किया गया',
 	'LogSplittedPage'			=> 'पृष्ठ [[/%1]] की टिप्पणियाँ पृष्ठ [[/%2]] पर विभाजित की गईं',
 	'LogMergedPages'			=> '%1 पृष्ठों को पृष्ठ [[/%2]] में विलय किया गया',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'उपयोगकर्ता ##%1## ने पता ##%2## पर पासवर्ड पुनर्प्राप्ति प्रक्रिया का अनुरोध किया',
 	'LogUserPasswordRecovered'	=> 'उपयोगकर्ता ##%1## ने अपना भूला हुआ पासवर्ड सफलतापूर्वक पुनर्प्राप्त किया',
 	'LogUserPasswordChanged'	=> 'उपयोगकर्ता ##%1## ने अपना पासवर्ड सफलतापूर्वक अपडेट (बदला) किया',

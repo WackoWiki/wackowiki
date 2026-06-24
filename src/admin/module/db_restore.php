@@ -431,7 +431,7 @@ function admin_db_restore($engine, $module, $tables, $directories)
 			$engine->show_message($message, 'success');
 ?>
 			<div class="code">
-				<pre><?php echo $results; ?></pre>
+				<pre><?php echo Ut::html($results); ?></pre>
 			</div><br>
 <?php
 			// purge old cache files

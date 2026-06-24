@@ -1018,6 +1018,8 @@ Tidak ada opsi untuk membatalkan tindakan ini!',
 	'MassRenaming'				=> 'Ubah nama seluruh kluster',
 	'MassNewName'				=> 'Masukkan nama baru untuk kluster ini',
 	'MassNeedRedirect'			=> 'Buat pengalihan ke halaman baru di halaman lama',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'Kembali ke ikhtisar',
@@ -1192,6 +1194,10 @@ Biasanya hal ini tidak seharusnya terjadi, jadi mohon beritahu administrator sit
 
 Sebagai tindakan pencegahan, masalah telah dipertahankan dalam bentuk aslinya.',
 	'ModerateCommentsMoved'		=> 'Komentar terpilih berhasil dipindahkan ke halaman yang ditentukan.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'Subforum',
@@ -1348,6 +1354,7 @@ Sebagai tindakan pencegahan, masalah telah dipertahankan dalam bentuk aslinya.',
 	'LogRenamedPage2'			=> '. Halaman lama dijadikan tautan ke halaman baru',
 	'LogSplittedPage'			=> 'Komentar pada halaman [[/%1]] dipisahkan ke halaman [[/%2]]',
 	'LogMergedPages'			=> 'Halaman %1 digabungkan ke halaman [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> 'Pengguna ##%1## meminta proses pemulihan kata sandi ke alamat ##%2##',
 	'LogUserPasswordRecovered'	=> 'Pengguna ##%1## berhasil memulihkan kata sandi yang terlupa',
 	'LogUserPasswordChanged'	=> 'Pengguna ##%1## berhasil memperbarui (mengubah) kata sandi',

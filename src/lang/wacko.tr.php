@@ -1012,6 +1012,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Tüm kümeyi yeniden adlandır',
 	'MassNewName'				=> 'Bu küme için yeni ad girin',
 	'MassNeedRedirect'			=> 'Eski sayfalarda yeni sayfalara yönlendirme oluştur',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> 'Genel görünüşe dön',
@@ -1182,6 +1184,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Seçilen yorumlar başarıyla yeni bir konuya ayrıldı.',
 	'ModerateCommentsSplitFailed'	=> 'Not: Bir sebepten seçilen yorumları yeni bir konuya ayırma başarısız oldu.<br>Genellikle bu olmamalı, lütfen site yöneticisini bilgilendirin.<br>Önlem olarak, sorun orijinal haliyle korunmuştur.',
 	'ModerateCommentsMoved'		=> 'Seçilen yorumlar belirtilen sayfaya başarıyla taşındı.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
@@ -1338,6 +1344,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. Eski sayfa yeni sayfaya bağlantı olarak ayarlandı',
 	'LogSplittedPage'			=> '[[/%1]] sayfasındaki yorumlar [[/%2]] sayfasına ayrıldı',
 	'LogMergedPages'			=> '%1 sayfaları [[/%2]] sayfasında birleştirildi',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> '##%1## kullanıcı şifre kurtarma sürecini şu adrese istedi: ##%2##',
 	'LogUserPasswordRecovered'	=> '##%1## kullanıcı unutulan parolayı başarıyla kurtardı',
 	'LogUserPasswordChanged'	=> '##%1## kullanıcı parolayı başarıyla değiştirdi',

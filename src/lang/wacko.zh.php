@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> '重命名整个集群',
 	'MassNewName'				=> '输入此集群的新名称',
 	'MassNeedRedirect'			=> '在旧页面上创建重定向到新页面',
+	'SubpagesRenaming'			=> '重命名选定的子页面',
+	'RenameSubpagesOnly'		=> '仅重命名选定的子页面',
 
 	// pagination
 	'ToOverview'				=> '返回总览',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> '所选评论已成功分离到新主题中。',
 	'ModerateCommentsSplitFailed'	=> '注意：由于某种原因，将所选评论与新主题分开失败。<br>通常这不应该发生，因此请让事件站点管理员处理。<br>作为预防措施，问题已保留为原始形式。',
 	'ModerateCommentsMoved'		=> '所选评论已成功迁移到给定页面。',
+	'ModerateConvertToPage'		=> '转换为页面',
+	'ModerateConvertConfirm'	=> '将评论转换为页面',
+	'ModerateReassignFollowing'	=> '将所有以下评论重新分配到新页面',
+	'ModerateCommentConverted'	=> '选中的评论转换为页面。',
 
 	// forum
 	'ForumSubforums'			=> '论坛',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '。旧页面设置为与新页面的链接',
 	'LogSplittedPage'			=> '页面[[/%1]] 上的评论已拆分到页面 [[/%2]]',
 	'LogMergedPages'			=> '页面 %1 已合并到页面 [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> '用户 ##%1## 请求密码恢复过程地址 ##%2##',
 	'LogUserPasswordRecovered'	=> '用户 ##%1## 成功恢复他忘记的密码',
 	'LogUserPasswordChanged'	=> '用户 ##%1## 已成功更新（更改） 他的密码',

@@ -1010,6 +1010,8 @@ $wacko_translation = [
 	'MassRenaming'				=> 'Rinomina l\'intero cluster',
 	'MassNewName'				=> 'Inserisci un nuovo nome per questo cluster',
 	'MassNeedRedirect'			=> 'Crea reindirizzamento a nuove pagine su pagine vecchie',
+	'SubpagesRenaming'			=> 'Rinomina le sotto-pagine selezionate',
+	'RenameSubpagesOnly'		=> 'Rinomina solo le sotto-pagine selezionate',
 
 	// pagination
 	'ToOverview'				=> 'Torna alla panoramica',
@@ -1180,6 +1182,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> 'Commenti selezionati separati con successo in un nuovo argomento.',
 	'ModerateCommentsSplitFailed'	=> 'Nota: Per qualche motivo la separazione dei commenti selezionati in un nuovo argomento non è riuscita.<br>Di solito questo non dovrebbe accadere, quindi si prega di avvisare l\'amministratore del sito.<br>Come precauzione, il problema è stato conservato nella sua forma originale.',
 	'ModerateCommentsMoved'		=> 'I commenti selezionati sono migrati con successo alla pagina data.',
+	'ModerateConvertToPage'		=> 'Converti in pagina',
+	'ModerateConvertConfirm'	=> 'Converti commento in pagina',
+	'ModerateReassignFollowing'	=> 'Riassegna tutti i seguenti commenti alla nuova pagina',
+	'ModerateCommentConverted'	=> 'Commento selezionato convertito in pagina.',
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
@@ -1336,6 +1342,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. La vecchia pagina impostata come collegamento a quella nuova',
 	'LogSplittedPage'			=> 'Commenti sulla pagina [[/%1]] suddivisi in pagina [[/%2]]',
 	'LogMergedPages'			=> 'Pagine %1 unite alla pagina [[/%2]]',
+	'LogCommentConvertedToPage'	=> 'Commento [[/%1]] convertito nella pagina [[/%2]]',
 	'LogUserPasswordReminded'	=> 'L\'utente ##%1## ha chiesto il processo di ripristino della password per l\'indirizzo ##%2##',
 	'LogUserPasswordRecovered'	=> 'Utente ##%1## recuperato con successo la password dimenticata',
 	'LogUserPasswordChanged'	=> 'Utente ##%1## aggiornato correttamente (modificato) la password',

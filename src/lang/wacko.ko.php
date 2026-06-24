@@ -1007,6 +1007,8 @@ $wacko_translation = [
 	'MassRenaming'				=> '클러스터 전체 이름 변경',
 	'MassNewName'				=> '이 클러스터의 새 이름을 입력하세요',
 	'MassNeedRedirect'			=> '기존 페이지에서 새 페이지로 리디렉션 생성',
+	'SubpagesRenaming'			=> 'Rename selected sub-pages',
+	'RenameSubpagesOnly'		=> 'Rename selected sub-pages only',
 
 	// pagination
 	'ToOverview'				=> '개요로 돌아가기',
@@ -1177,6 +1179,10 @@ $wacko_translation = [
 	'ModerateCommentsSplit'		=> '선택된 댓글이 새 주제로 성공적으로 분리되었습니다.',
 	'ModerateCommentsSplitFailed'	=> '참고: 선택한 댓글을 새 주제로 분리하는 데 실패했습니다.<br>보통 일어나지 않는 일이므로 사이트 관리자에게 알려주세요.<br>예방 차원에서 문제는 원래 형태로 보존되었습니다.',
 	'ModerateCommentsMoved'		=> '선택된 댓글이 지정된 페이지로 성공적으로 이동되었습니다.',
+	'ModerateConvertToPage'		=> 'Convert to page',
+	'ModerateConvertConfirm'	=> 'Convert comment to page',
+	'ModerateReassignFollowing'	=> 'Reassign all following comments to the new page',
+	'ModerateCommentConverted'	=> 'Selected comment converted to page.',
 
 	// forum
 	'ForumSubforums'			=> '포럼',
@@ -1333,6 +1339,7 @@ $wacko_translation = [
 	'LogRenamedPage2'			=> '. 이전 페이지가 새 페이지로의 링크로 설정됨',
 	'LogSplittedPage'			=> '페이지 [[/%1]]의 댓글이 [[/%2]]로 분리됨',
 	'LogMergedPages'			=> '페이지 %1이 [[/%2]]로 병합됨',
+	'LogCommentConvertedToPage'	=> 'Comment [[/%1]] converted to page [[/%2]]',
 	'LogUserPasswordReminded'	=> '사용자 ##%1##이(가) 암호 복구 절차를 요청함: 주소 ##%2##',
 	'LogUserPasswordRecovered'	=> '사용자 ##%1##이(가) 암호를 성공적으로 복구함',
 	'LogUserPasswordChanged'	=> '사용자 ##%1##이(가) 암호를 성공적으로 변경함',
