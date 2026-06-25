@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $info = <<<EOD
 Description:
-	Shows hidden content based on user group or user name.
+	Creates a permalink to the current version of the page or simply to the page itself.
 
 Usage:
 	{{hashid}}
