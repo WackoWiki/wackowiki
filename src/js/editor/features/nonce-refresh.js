@@ -1,6 +1,6 @@
 // src/js/editor/features/nonce-refresh.js
 
-const NONCE_REFRESH_INTERVAL = 1 * 60 * 1000; // 8 minutes
+const NONCE_REFRESH_INTERVAL = 8 * 60 * 1000; // 8 minutes
 
 export async function refreshMainNonce(editor) {
     const form = editor?.area?.closest('form');
