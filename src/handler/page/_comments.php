@@ -136,9 +136,17 @@ if ($this->has_access('read'))
 
 			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/wikiedit.css">');
 
+			$upload_nonce	= '';
+			$preview_nonce	= '';
+
 			if ($can_upload = $this->can_upload())
 			{
 				$upload_nonce	= $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
+			}
+
+			if ($user)
+			{
+				$preview_nonce	= $this->sess->create_nonce('add_comment_preview', max(30, $this->db->form_token_time));
 			}
 
 			$title			= $this->forum && empty($title)
@@ -166,7 +174,8 @@ if ($this->has_access('read'))
 
 			$toolbar = $user['wikiedit_toolbar'] ?: $this->db->wikiedit_toolbar;
 
-			$tpl->nonce		= $upload_nonce;
+			$tpl->upnonce	= $upload_nonce;
+			$tpl->pvnonce	= $preview_nonce;
 			$tpl->upload	= (int) $can_upload;
 			$tpl->toolbar	= $toolbar ?? TB_DEFAULT;
 			$tpl->autosave	= $user['autosave_draft'] ?? 0;;

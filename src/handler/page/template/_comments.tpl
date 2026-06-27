@@ -89,7 +89,8 @@
 							data-live-preview="[ ' preview ' ]"
 							data-editor-height="[ ' height ' ]px"
 							data-can-upload="[ ' upload ' ]"
-							data-upload-nonce="[ ' nonce ' ]"
+							data-upload-nonce="[ ' upnonce ' ]"
+							data-preview-nonce="[ ' pvnonce ' ]"
 							required>[ ' payload | pre ' ]</textarea>
 						<script[ ' db: csp_nonce ' ]>
 						document.addEventListener('DOMContentLoaded', () => {

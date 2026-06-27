@@ -11,7 +11,7 @@ import { setupMarkupHelpers } from './features/markup-helpers.js';
 import { setupHeartbeat } from './features/session-heartbeat.js';
 import { setupMediaUpload } from './features/media-upload.js';
 import { setupToolbarDelegation } from './toolbar/toolbar-delegation.js';
-import { setupLivePreview } from './features/live-preview.js';
+import { setupLivePreview, awaitPreviewIdle } from './features/live-preview.js';
 import { setupSyntaxHighlighting } from './features/syntax-highlight.js';
 import { wackoToMarkdown, markdownToWacko } from './features/markup-conversion.js';
 import { setupAutosave } from './features/autosave.js';
@@ -130,8 +130,8 @@ export class WikiEdit extends ProtoEdit {
 
         this.updateStatus?.();
 
-        if (this.livePreviewEnabled && typeof this.updatePreview === 'function') {
-          setTimeout(() => this.updatePreview(), 20);
+        if (this.livePreviewEnabled && typeof this.schedulePreview === 'function') {
+          this.schedulePreview();
         }
 
         // Trigger syntax highlight (non-blocking)
@@ -419,20 +419,22 @@ export class WikiEdit extends ProtoEdit {
 
   // ==================== Content API (now using state) ====================
 
-  savePage() {
+  async savePage() {
     if (!confirm(t('ReallySave') || 'Really save this page?')) return;
     this.isSubmitting = true;
     this.ignoreModified();
     // clear draft handled by autosave module's submit listener
 
-    // Find the edit form (works with both name="edit" and id="edit_page")
+    await awaitPreviewIdle(this);
+
     const form = this.area.form ||
       this.area.closest('form') ||
       document.forms.namedItem('edit') ||
-      document.querySelector('form[name="edit"], form#edit_page');
+      document.querySelector('form[name="edit"], form#edit_page, form[name="add_comment"]');
 
     if (!form) {
       logger.warn('savePage: could not find form');
+      this.isSubmitting = false;
       return;
     }
 

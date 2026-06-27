@@ -26,13 +26,13 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$preview = $this->format($preview, 'post_wacko', ['strip_marker' => true]);
 		}
 
-		$new_form_token = $this->sess->create_nonce('add_comment', max(30, $this->db->form_token_time));
+		$new_preview_nonce = $this->sess->create_nonce('add_comment_preview', max(30, $this->db->form_token_time));
 
 		header('Content-Type: application/json; charset=utf-8');
 		echo json_encode([
-			'preview_html'   => $preview,
-			'new_form_token' => $new_form_token,
-			'chars'          => $text_chars
+			'preview_html'      => $preview,
+			'new_preview_nonce' => $new_preview_nonce,
+			'chars'             => $text_chars
 		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 		exit;   // important – do not continue with normal form rendering

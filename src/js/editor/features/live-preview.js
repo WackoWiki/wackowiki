@@ -2,13 +2,89 @@
 
 import logger from '../../utils/logger.js';
 
+const PREVIEW_DEBOUNCE_MS = 420;
+
+/**
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
+ * @returns {string}
+ */
+function getPreviewAction(editor) {
+  const heartbeat = editor.area?.dataset.heartbeatName;
+  return heartbeat === 'add_comment' ? 'add_comment_preview' : 'edit_page_preview';
+}
+
+/**
+ * Pause live preview scheduling (e.g. before save).
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
+ */
+export function pauseLivePreview(editor) {
+  editor._previewPaused = true;
+  clearTimeout(editor.previewTimer);
+  editor.previewTimer = null;
+}
+
+/**
+ * Wait until no preview request is in flight.
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
+ * @returns {Promise<void>}
+ */
+export function awaitPreviewIdle(editor) {
+  pauseLivePreview(editor);
+  if (!editor._previewInFlight) {
+    return Promise.resolve();
+  }
+  return new Promise(resolve => {
+    editor._previewIdleWaiters = editor._previewIdleWaiters || [];
+    editor._previewIdleWaiters.push(resolve);
+  });
+}
+
+/**
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
+ */
+function notifyPreviewIdle(editor) {
+  editor._previewInFlight = false;
+
+  const waiters = editor._previewIdleWaiters;
+  if (waiters?.length) {
+    editor._previewIdleWaiters = [];
+    waiters.forEach(resolve => resolve());
+  }
+
+  if (editor._previewNeedsRefresh && !editor._previewPaused && editor.livePreviewEnabled) {
+    editor._previewNeedsRefresh = false;
+    updatePreview(editor);
+  }
+}
+
+/**
+ * Debounced preview scheduler — one unified entry point for all change detection.
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
+ */
+function schedulePreview(editor) {
+  if (!editor.livePreviewEnabled || editor._previewPaused || editor.isSubmitting) {
+    return;
+  }
+
+  clearTimeout(editor.previewTimer);
+  editor.previewTimer = setTimeout(() => {
+    editor.previewTimer = null;
+    updatePreview(editor);
+  }, PREVIEW_DEBOUNCE_MS);
+}
+
 /**
  * Sets up the live preview infrastructure.
  * Must be called AFTER the toolbar is built (so the toggle button exists).
  * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupLivePreview(editor) {
-  editor._previewAbortController = null;
+  editor._previewInFlight = false;
+  editor._previewNeedsRefresh = false;
+  editor._previewPaused = false;
+  editor._previewIdleWaiters = [];
+  editor._previewSeq = 0;
+  editor.schedulePreview = () => schedulePreview(editor);
 
   // Create the split container and panes (hidden by default)
   createSplitPanes(editor);
@@ -28,6 +104,11 @@ export function setupLivePreview(editor) {
   // (the toolbar calls editor.toggleLivePreview, which we bind below)
   editor.toggleLivePreview = () => toggleLivePreview(editor);
 
+  const form = editor.area.closest('form');
+  if (form) {
+    form.addEventListener('submit', () => pauseLivePreview(editor));
+  }
+
   // Register cleanup
   editor._cleanupLivePreview = () => cleanup(editor);
 
@@ -41,10 +122,9 @@ export function setupLivePreview(editor) {
 function cleanup(editor) {
   logger.info('LivePreview: cleaning up');
 
-  if (editor._previewAbortController) {
-      editor._previewAbortController.abort();
-      editor._previewAbortController = null;
-    }
+  pauseLivePreview(editor);
+  editor._previewNeedsRefresh = false;
+  editor._previewIdleWaiters = [];
 
   // Hide and remove preview elements if they exist
   if (editor.previewPane) {
@@ -57,7 +137,11 @@ function cleanup(editor) {
   // Clean up references
   delete editor.toggleLivePreview;
   delete editor.livePreviewEnabled;
-  delete editor._previewAbortController;
+  delete editor.schedulePreview;
+  delete editor._previewInFlight;
+  delete editor._previewNeedsRefresh;
+  delete editor._previewPaused;
+  delete editor._previewIdleWaiters;
   delete editor._cleanupLivePreview;
 
   logger.debug('LivePreview: cleanup finished');
@@ -75,15 +159,17 @@ export function toggleLivePreview(editor) {
   if (liveLi) liveLi.classList.toggle('active', editor.livePreviewEnabled);
 
   if (editor.livePreviewEnabled) {
+    editor._previewPaused = false;
     editor.previewPane.style.display = 'block';
     editor.splitter.style.display = 'block';
     editor.editPane.style.flex = '1 1 50%';
     editor.previewPane.style.flex = '1 1 50%';
 
     if (editor.area.value.trim()) {
-      setTimeout(() => updatePreview(editor), 10);
+      schedulePreview(editor);
     }
   } else {
+    pauseLivePreview(editor);
     editor.previewPane.style.display = 'none';
     editor.splitter.style.display = 'none';
     editor.editPane.style.flex = '1 1 100%';
@@ -184,56 +270,85 @@ function createSplitPanes(editor) {
     get() { return valueDescriptor.get.call(this); },
     set(newValue) {
       origSetter.call(this, newValue);
-      if (editor.livePreviewEnabled) {
-        clearTimeout(editor.previewTimer);
-        editor.previewTimer = setTimeout(() => updatePreview(editor), 80);
-      }
+      schedulePreview(editor);
     },
     configurable: true
   });
 
-  // Input event as fallback
-  editor.area.addEventListener('input', () => {
-    if (editor.livePreviewEnabled) {
-      clearTimeout(editor.previewTimer);
-      editor.previewTimer = setTimeout(() => updatePreview(editor), 420);
-    }
-  });
+  editor.area.addEventListener('input', () => schedulePreview(editor));
 }
 
 /**
- * Fetches and displays the live preview.
+ * Build preview FormData using the preview-only nonce chain
+ * @param {import('../editor/wikiedit.js').WikiEdit} editor
+ * @param {HTMLFormElement} form
+ * @returns {FormData|null}
+ */
+function buildPreviewFormData(editor, form) {
+  const previewNonce = editor.area.dataset.previewNonce;
+  if (!previewNonce) {
+    logger.warn('Preview nonce missing — live preview unavailable');
+    return null;
+  }
+
+  const fd = new FormData(form);
+  fd.delete('_nonce');
+  fd.delete('_action');
+  fd.set('body', editor.area.value);
+  fd.set('ajax_preview', '1');
+  fd.set('_action', getPreviewAction(editor));
+  fd.set('_nonce', previewNonce);
+
+  return fd;
+}
+
+/**
+ * Fetches and displays the live preview (serialized — one request at a time).
  * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 async function updatePreview(editor) {
-	if (editor._previewAbortController) {
-	    editor._previewAbortController.abort();
-	  }
-	  editor._previewAbortController = new AbortController();
+  if (!editor.livePreviewEnabled || editor._previewPaused || editor.isSubmitting) {
+    return;
+  }
+
+  if (editor._previewInFlight) {
+    editor._previewNeedsRefresh = true;
+    return;
+  }
 
   const form = editor.area.closest('form');
   if (!form) return;
 
-  const fd = new FormData(form);
-  fd.set('body', editor.area.value);
-  fd.set('ajax_preview', '1');
+  const fd = buildPreviewFormData(editor, form);
+  if (!fd) return;
+
+  editor._previewInFlight = true;
+  const seq = ++editor._previewSeq;
 
   try {
     const res = await fetch(editor.ajaxUrl, {
       method: 'POST',
       body: fd,
-      credentials: 'same-origin',
-	  signal: editor._previewAbortController.signal
+      credentials: 'same-origin'
     });
+
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
+    const contentType = res.headers.get('Content-Type') || '';
+    if (!contentType.includes('application/json')) {
+      throw new Error('Expected JSON response from preview endpoint');
+    }
+
     const data = await res.json();
+
+    if (seq !== editor._previewSeq) {
+      return;
+    }
+
     editor.previewPane.innerHTML = data.preview_html || '';
 
-    // Update CSRF token if provided
-    const tokenField = form.querySelector('input[name="_nonce"]');
-    if (tokenField && data.new_form_token) {
-      tokenField.value = data.new_form_token;
+    if (data.new_preview_nonce) {
+      editor.area.dataset.previewNonce = data.new_preview_nonce;
     }
 
     // Re‑sync scroll after paint
@@ -243,6 +358,10 @@ async function updatePreview(editor) {
       });
     }
   } catch (e) {
-    logger.warn('Preview fetch failed', e);
+    if (seq === editor._previewSeq) {
+      logger.warn('Preview fetch failed', e);
+    }
+  } finally {
+    notifyPreviewIdle(editor);
   }
 }

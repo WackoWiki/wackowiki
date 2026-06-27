@@ -33,10 +33,16 @@ if ($this->has_access('read')
 
 	$user			= $this->get_user();
 	$upload_nonce	= '';
+	$preview_nonce	= '';
 
 	if ($can_upload = $this->can_upload())
 	{
 		$upload_nonce	= $this->sess->create_nonce('upload', max(30, $this->db->form_token_time));
+	}
+
+	if ($user)
+	{
+		$preview_nonce	= $this->sess->create_nonce('edit_page_preview', max(30, $this->db->form_token_time));
 	}
 
 	// is comment?
@@ -95,9 +101,9 @@ if ($this->has_access('read')
 		// === AJAX LIVE PREVIEW (for WikiEdit side-by-side pane) ===
 		if (isset($_POST['ajax_preview']) && $_POST['ajax_preview'] === '1')
 		{
-			$_body      = $_POST['body'] ?? '';
-			$title      = $_POST['title'] ?? ($this->page['title'] ?? $this->get_page_title($this->tag));
-			$section_id = (int) ($_POST['section'] ?? 0);
+			$_body		= $_POST['body'] ?? '';
+			$title		= $_POST['title'] ?? ($this->page['title'] ?? $this->get_page_title($this->tag));
+			$section_id	= (int) ($_POST['section'] ?? 0);
 
 			$preview = '';
 			$text_chars = '0';
@@ -111,13 +117,13 @@ if ($this->has_access('read')
 				$preview = $this->format($preview, 'post_wacko', ['strip_marker' => true]);
 			}
 
-			$new_form_token = $this->sess->create_nonce('edit_page', max(30, $this->db->form_token_time));
+			$new_preview_nonce = $this->sess->create_nonce('edit_page_preview', max(30, $this->db->form_token_time));
 
 			header('Content-Type: application/json; charset=utf-8');
 			echo json_encode([
-				'preview_html'   => $preview,
-				'new_form_token' => $new_form_token,
-				'chars'          => $text_chars
+				'preview_html'      => $preview,
+				'new_preview_nonce' => $new_preview_nonce,
+				'chars'             => $text_chars
 			], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 			exit;   // important – do not continue with normal form rendering
@@ -432,7 +438,8 @@ if ($this->has_access('read')
 
 	$tpl->sectionid	= $section_id;
 	$tpl->hlevel	= $h_level;
-	$tpl->nonce		= $upload_nonce;
+	$tpl->upnonce	= $upload_nonce;
+	$tpl->pvnonce	= $preview_nonce;
 	$tpl->upload	= (int) $can_upload;
 	$tpl->toolbar	= $toolbar ?? TB_DEFAULT;
 	$tpl->autosave	= $user['autosave_draft'] ?? 0;;
