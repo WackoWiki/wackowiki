@@ -19,6 +19,7 @@ import { setupKeyboardShortcuts } from './features/keyboard-shortcuts.js';
 import { setupDarkZenMode } from './features/zen-mode.js';
 import { setupModals } from './features/modals.js';
 import { setupUIFeatures } from './features/ui-features.js';
+import { startPeriodicNonceRefresh, stopPeriodicNonceRefresh } from './features/nonce-refresh.js';
 
 // Core utilities used by the class
 import logger from '../utils/logger.js';
@@ -197,6 +198,10 @@ export class WikiEdit extends ProtoEdit {
     setupToolbarDelegation(this);
     setupModals(this);
     setupUIFeatures(this);
+	
+	startPeriodicNonceRefresh(this);
+	this._cleanup = this._cleanup || [];
+	this._cleanup.push(() => stopPeriodicNonceRefresh(this));
 
     // Post-setup
     this.updateToolbarButtonStates?.();
@@ -635,6 +640,13 @@ export class WikiEdit extends ProtoEdit {
       clearTimeout(this.pushTimer);
       this.pushTimer = null;
     }
+
+	// Nonce Refresh Cleanup
+	if (this._cleanup && Array.isArray(this._cleanup)) {
+	    this._cleanup.forEach(fn => {
+	        if (typeof fn === 'function') fn();
+	    });
+	}
 
     // Call parent destroy if it exists
     if (typeof super.destroy === 'function') {
