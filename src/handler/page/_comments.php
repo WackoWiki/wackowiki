@@ -172,7 +172,14 @@ if ($this->has_access('read'))
 								?? ($title
 									?? '');
 
-			$toolbar = $user['wikiedit_toolbar'] ?: $this->db->wikiedit_toolbar;
+			// there is no native operator that combines isset + !empty
+			$toolbar = (!empty($user['wikiedit_toolbar'] ?? null))
+				? $user['wikiedit_toolbar']
+				: (
+					(!empty($this->db->wikiedit_toolbar ?? null))
+						? $this->db->wikiedit_toolbar
+						: TB_DEFAULT
+				);
 
 			$tpl->upnonce	= $upload_nonce;
 			$tpl->pvnonce	= $preview_nonce;
@@ -226,6 +233,7 @@ if ($this->has_access('read'))
 				$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;
 			}
 
+			$tpl->isRegisteredUser = $user ? 1 : 0;
 			$tpl->wikiedit = $this->db->base_path . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 
 			$tpl->leave(); // end comment form

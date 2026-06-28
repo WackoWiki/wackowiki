@@ -34,7 +34,7 @@ export const buttonDefs = {
   'md2wacko': { label: 'MD → Wacko', method: 'convertToWacko', args: [] },
   'dark-toggle': { labelKey: 'ToggleDark', method: 'toggleDarkMode', args: [] },
   'syntax': { labelKey: 'SyntaxHighlighting', method: 'toggleSyntaxHighlight', args: [] },
-  'livepreview': { labelKey: 'LivePreview', method: 'toggleLivePreview', args: [] },
+  'livepreview': { labelKey: 'LivePreview', method: 'toggleLivePreview', condition: 'isRegisteredUser' },
   'zenmode': { labelKey: 'ZenMode', method: 'toggleZenMode', args: [] },
   'fullscreen': { labelKey: 'Fullscreen', method: 'toggleFullscreen', args: [] },
   'shrink': { labelKey: 'HeightShrink', method: 'changeEditorHeight', args: [-100] },

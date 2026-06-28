@@ -59,7 +59,10 @@
 					required>[ ' body | pre ' ]</textarea>
 				<script[ ' db: csp_nonce ' ]>
 				document.addEventListener('DOMContentLoaded', () => {
-					const wE = new WikiEdit();
+					const wE = new WikiEdit({
+						isRegisteredUser: [ ' isRegisteredUser ' ],
+						// other options...
+					});
 					[= autocomplete _ =
 						if (AutoComplete) {
 							new AutoComplete(wE, "[ ' href: edit ' ]");

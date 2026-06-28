@@ -47,10 +47,12 @@ export class WikiEdit extends ProtoEdit {
 
   #state;
 
-  constructor() {
+  constructor(options = {}) {
     super();
 
     this.#state = new EditorState();
+
+    this.isRegisteredUser = !!options.isRegisteredUser;
 
     this.enabled = true;
     this.manual = 'https://wackowiki.org/doc/';
@@ -193,15 +195,21 @@ export class WikiEdit extends ProtoEdit {
 
     // UI features (after toolbar is in DOM)
     setupDarkZenMode(this);
-    setupLivePreview(this);
+
+    if (this.isRegisteredUser) {
+      setupLivePreview(this);
+    } else {
+      Log.debug('[WikiEdit] Live Preview disabled for guest users');
+    }
+
     setupSyntaxHighlighting(this);
     setupToolbarDelegation(this);
     setupModals(this);
     setupUIFeatures(this);
-	
-	startPeriodicNonceRefresh(this);
-	this._cleanup = this._cleanup || [];
-	this._cleanup.push(() => stopPeriodicNonceRefresh(this));
+
+    startPeriodicNonceRefresh(this);
+    this._cleanup = this._cleanup || [];
+    this._cleanup.push(() => stopPeriodicNonceRefresh(this));
 
     // Post-setup
     this.updateToolbarButtonStates?.();
@@ -252,7 +260,7 @@ export class WikiEdit extends ProtoEdit {
     const savedSel = this._savedSelection;
     const start = savedSel ? savedSel.start : t.selectionStart;
     const end = savedSel ? savedSel.end : t.selectionEnd;
-    
+
     // Clear the saved selection after using it
     this._savedSelection = null;
 
@@ -271,10 +279,10 @@ export class WikiEdit extends ProtoEdit {
     // Avoid duplicate consecutive states
     const last = this.#undoStack[this.#undoStack.length - 1];
     if (last &&
-        last.text === currentState.text &&
-        last.start === currentState.start &&
-        last.end === currentState.end &&
-        last.scroll === currentState.scroll) {
+      last.text === currentState.text &&
+      last.start === currentState.start &&
+      last.end === currentState.end &&
+      last.scroll === currentState.scroll) {
       return;
     }
 
@@ -641,12 +649,12 @@ export class WikiEdit extends ProtoEdit {
       this.pushTimer = null;
     }
 
-	// Nonce Refresh Cleanup
-	if (this._cleanup && Array.isArray(this._cleanup)) {
-	    this._cleanup.forEach(fn => {
-	        if (typeof fn === 'function') fn();
-	    });
-	}
+    // Nonce Refresh Cleanup
+    if (this._cleanup && Array.isArray(this._cleanup)) {
+      this._cleanup.forEach(fn => {
+        if (typeof fn === 'function') fn();
+      });
+    }
 
     // Call parent destroy if it exists
     if (typeof super.destroy === 'function') {

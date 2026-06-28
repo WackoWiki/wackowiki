@@ -434,14 +434,22 @@ if ($this->has_access('read')
 		$tpl->r_title = $this->page['title'];
 	}
 
-	$toolbar = $user['wikiedit_toolbar'] ?: $this->db->wikiedit_toolbar;
+	// there is no native operator that combines isset + !empty
+	// there is no native operator that combines isset + !empty
+	$toolbar = (!empty($user['wikiedit_toolbar'] ?? null))
+		? $user['wikiedit_toolbar']
+		: (
+			(!empty($this->db->wikiedit_toolbar ?? null))
+				? $this->db->wikiedit_toolbar
+				: TB_DEFAULT
+		);
 
 	$tpl->sectionid	= $section_id;
 	$tpl->hlevel	= $h_level;
 	$tpl->upnonce	= $upload_nonce;
 	$tpl->pvnonce	= $preview_nonce;
 	$tpl->upload	= (int) $can_upload;
-	$tpl->toolbar	= $toolbar ?? TB_DEFAULT;
+	$tpl->toolbar	= $toolbar;
 	$tpl->autosave	= $user['autosave_draft'] ?? 0;;
 	$tpl->height	= $user['editor_height'] ?? 400;
 	$tpl->syntax	= $user['syntax_highlighting'] ?? 1;
@@ -501,7 +509,7 @@ if ($this->has_access('read')
 	}
 
 	// WikiEdit
-	if ($user = $this->get_user())
+	if ($user)
 	{
 		if ($user['autocomplete'])
 		{
@@ -512,6 +520,7 @@ if ($this->has_access('read')
 		$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;
 	}
 
+	$tpl->isRegisteredUser = $user ? 1 : 0;
 	$tpl->wikiedit = $this->db->base_path . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 
 	$tpl->leave();
