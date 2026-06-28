@@ -184,7 +184,7 @@ if ($this->has_access('read'))
 			$tpl->upnonce	= $upload_nonce;
 			$tpl->pvnonce	= $preview_nonce;
 			$tpl->upload	= (int) $can_upload;
-			$tpl->toolbar	= $toolbar ?? TB_DEFAULT;
+			$tpl->toolbar	= $toolbar;
 			$tpl->autosave	= $user['autosave_draft'] ?? 0;;
 			$tpl->height	= $user['editor_height'] ?? 400;
 			$tpl->syntax	= $user['syntax_highlighting'] ?? 1;
