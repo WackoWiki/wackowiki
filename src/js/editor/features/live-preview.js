@@ -79,6 +79,8 @@ function schedulePreview(editor) {
  * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
 export function setupLivePreview(editor) {
+  if (!editor.isRegisteredUser) return;
+
   editor._previewInFlight = false;
   editor._previewNeedsRefresh = false;
   editor._previewPaused = false;
