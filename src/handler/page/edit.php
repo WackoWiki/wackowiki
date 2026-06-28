@@ -435,7 +435,6 @@ if ($this->has_access('read')
 	}
 
 	// there is no native operator that combines isset + !empty
-	// there is no native operator that combines isset + !empty
 	$toolbar = (!empty($user['wikiedit_toolbar'] ?? null))
 		? $user['wikiedit_toolbar']
 		: (
