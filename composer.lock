@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48f93c38a21f68778bce0e76255a0ae5",
+    "content-hash": "17c152185eb23a776339828fca3d6259",
     "packages": [
         {
             "name": "enshrined/svg-sanitize",
@@ -780,7 +780,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.0 - 8.5",
+        "php": "8.2 - 8.5",
         "ext-spl": "*",
         "ext-bcmath": "*",
         "ext-ctype": "*",
