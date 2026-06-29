@@ -87,13 +87,13 @@ $param_token	= substr(hash('sha1', $global . $page . $caption . $target . $owner
 if ($target == 2)
 {
 	$script = <<<EOD
-import PhotoSwipeLightbox from '{$this->db->base_path}js/photoswipe/photoswipe-lightbox.esm.min.js';
-import PhotoSwipeDynamicCaption from '{$this->db->base_path}js/photoswipe/photoswipe-dynamic-caption-plugin.esm.min.js';
+import PhotoSwipeLightbox from '{$this->db->base_path}js/external/photoswipe/photoswipe-lightbox.esm.min.js';
+import PhotoSwipeDynamicCaption from '{$this->db->base_path}js/external/photoswipe/photoswipe-dynamic-caption-plugin.esm.min.js';
 
 const lightbox = new PhotoSwipeLightbox({
 	gallery: '#gallery--$param_token',
 	children: 'a',
-	pswpModule: () => import('{$this->db->base_path}js/photoswipe/photoswipe.esm.min.js')
+	pswpModule: () => import('{$this->db->base_path}js/external/photoswipe/photoswipe.esm.min.js')
 });
 
 const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
@@ -104,9 +104,9 @@ const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
 lightbox.init();
 EOD;
 
-	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe.css">');
-	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe-dynamic-caption-plugin.css">');
-	$this->add_html('footer', '<script type="module"' . $this->db->csp_nonce . '>' . $script . '</script>');
+	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/external/photoswipe/photoswipe.css">');
+	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/external/photoswipe/photoswipe-dynamic-caption-plugin.css">');
+	$this->add_html('footer', '<script type="module">' . $script . '</script>');
 }
 
 $nav_offset		= (int) ($_GET[$param_token] ?? 1);

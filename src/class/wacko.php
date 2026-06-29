@@ -9328,7 +9328,7 @@ class Wacko
 		{
 			// disable server cache for page
 			$this->http->no_cache(false);
-			$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/init-captcha.js"' . $this->db->csp_nonce . ' defer></script>');
+			$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/init-captcha.js" defer></script>');
 
 			$this->sess->freecap_shown = 1;
 
@@ -9922,7 +9922,7 @@ class Wacko
 
 	function copy_to_clipboard()
 	{
-		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/utils/clipboard.js"' . $this->db->csp_nonce . ' defer></script>');
+		$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/utils/clipboard.js" defer></script>');
 	}
 
 	/**
@@ -10028,17 +10028,43 @@ class Wacko
 
 	// to use by actions to add some inside <head> or above </body>
 	//	e.g. to adding custom CSS or JS
-	function add_html($location, $text): void
+	function add_html(string $section, string $text): void
 	{
-		if (! in_array($text, $this->html_addition[$location] ?? []))
+		if (! in_array($text, $this->html_addition[$section] ?? []))
 		{
-			$this->html_addition[$location][] = $text;
+			$this->html_addition[$section][] = $text;
 		}
 	}
 
-	function get_html_addition($location): string
+	function get_html_addition(string $section): string
 	{
-		return implode("\n", $this->html_addition[$location] ?? []);
+		if (empty($this->html_addition[$section]))
+		{
+			return '';
+		}
+
+		$out = implode("\n", $this->html_addition[$section]);
+
+		// Apply nonce late (after possible no_cache() calls)
+		return $this->apply_csp_nonce($out);
+	}
+
+	// helper to apply nonce retroactively
+	private function apply_csp_nonce(string $html): string
+	{
+		if (empty($this->db->csp_nonce) || !str_contains($html, '<script')) {
+			return $html;
+		}
+
+		// Simple regex to inject nonce into <script> tags that don't have one yet
+		// (handles src= and inline)
+		return preg_replace_callback(
+			'#<script\b(?![^>]*nonce=)([^>]*?)>#i',
+			function ($matches) {
+				return '<script' . $matches[1] . $this->db->csp_nonce . '>';
+			},
+			$html
+			);
 	}
 
 	// HANDLER HELPERS
