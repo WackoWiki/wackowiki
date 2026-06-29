@@ -2569,7 +2569,7 @@ li.m-source img {
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
 		.ico-reload {
-			background: url('./../icon/light/reload.svg') no-repeat;
+			background: url('./../icon/dark/reload.svg') no-repeat;
 		}
 		.ico-menu {
 			background: url('./../icon/dark/menu.svg') no-repeat;
@@ -2645,7 +2645,7 @@ li.m-source img {
 
 :root[data-theme="dark"] {
 	.ico-reload {
-		background: url('./../icon/light/reload.svg') no-repeat;
+		background: url('./../icon/dark/reload.svg') no-repeat;
 	}
 	.ico-menu {
 		background: url('./../icon/dark/menu.svg') no-repeat;
