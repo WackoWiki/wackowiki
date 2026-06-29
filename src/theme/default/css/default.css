@@ -57,6 +57,7 @@
 
 	--ww-border: #ccc;
 	--ww-shadow: 0 1px 3px rgba(0,0,0,.1);
+	--ww-box-shadow-color: rgba(0, 0, 0, 0.3);
 	--ww-focus-ring: #3daee9;
 
 	/* WikiEdit specific variables */
@@ -97,6 +98,7 @@
 	--ww-table-header-bg: #333;
 	--ww-border: #555;
 	--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
+	--ww-box-shadow-color: rgba(255, 255, 255, 0.3);
 	--ww-focus-ring: #5ab0ff;
 
 	/* WikiEdit dark variables */
@@ -131,6 +133,7 @@
 		--ww-table-header-bg: #333;
 		--ww-border: #555;
 		--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
+		--ww-box-shadow-color: rgba(255, 255, 255, 0.3);
 		--ww-focus-ring: #5ab0ff;
 
 		/* WikiEdit dark variables */
@@ -732,7 +735,7 @@ article header {
 	width: 40px;
 	height: 40px;
 	z-index: 1;
-	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 5px 0 var(--ww-box-shadow-color);
 	color: rgba(255, 255, 255, 1.0);
 	background-color: transparent;
 	transition: all 0.4s ease;
@@ -744,7 +747,7 @@ article header {
 a.chevron-up,
 a.chevron-up:hover,
 a.chevron-up:visited {
-	color: rgb(51, 51, 51);
+	color: var(--ww-text-secondary);
 	text-decoration: none;
 	margin-top: 5px;
 	font-style: normal;
