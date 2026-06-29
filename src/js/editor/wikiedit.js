@@ -142,22 +142,30 @@ export class WikiEdit extends ProtoEdit {
       }
     });
 
-    // Input handler for keyboard/paste
-    const inputHandler = () => {
-      // CRITICAL: Save cursor position BEFORE the change
-      // This is where cursor SHOULD be after undo
-      const savedSelection = {
+    // capture selection BEFORE the input modifies the DOM
+    let preInputSelection = null;
+    const beforeInputHandler = () => {
+      preInputSelection = {
         start: ta.selectionStart,
         end: ta.selectionEnd
       };
+    };
+    ta.addEventListener('beforeinput', beforeInputHandler);
+    this.#beforeInputHandler = beforeInputHandler;   // existing destroy() removes it
+
+    // Input handler for keyboard/paste
+    const inputHandler = () => {
+      // Use the selection that was captured before the edit, so the undo
+      // snapshot stores the OLD content together with the correct cursor.
+      this._savedSelection = preInputSelection || {
+        start: ta.selectionStart,
+        end: ta.selectionEnd
+      };
+      preInputSelection = null; // consume it for the next input
 
       // Call pushState BEFORE setContent updates state.content
       // pushState needs to capture the OLD content with the cursor position BEFORE the change
       this.pushState();
-
-      // Restore saved cursor position for the OLD state
-      // This ensures the restored state has the correct cursor position
-      this._savedSelection = savedSelection;
 
       // Then update state (subscription only updates UI, no push)
       this.#state.setContent(ta.value);
@@ -390,18 +398,20 @@ export class WikiEdit extends ProtoEdit {
       logger.warn('UndoRedo: state.text is not a string');
       return false;
     }
+
     const len = state.text.length;
+
+    // Clamp instead of rejecting – preserves undo history even if a caller passes an off-by-one cursor
     if (typeof state.start !== 'number' || state.start < 0 || state.start > len) {
-      logger.warn('UndoRedo: invalid selectionStart', state.start, '(text length =', len, ')');
-      return false;
+      logger.debug('UndoRedo: clamping selectionStart', state.start, 'to', len);
+      state.start = Math.max(0, Math.min(state.start ?? len, len));
     }
     if (typeof state.end !== 'number' || state.end < state.start || state.end > len) {
-      logger.warn('UndoRedo: invalid selectionEnd', state.end, '(start =', state.start, ', length =', len, ')');
-      return false;
+      logger.debug('UndoRedo: clamping selectionEnd', state.end, 'to', len);
+      state.end = Math.max(state.start, Math.min(state.end ?? len, len));
     }
     if (typeof state.scroll !== 'number' || state.scroll < 0) {
-      logger.warn('UndoRedo: invalid scrollTop', state.scroll);
-      return false;
+      state.scroll = 0;
     }
     return true;
   }
@@ -590,9 +600,8 @@ export class WikiEdit extends ProtoEdit {
     this.#redoStack = [];
 
     // Remove beforeinput listener
-    if (this.#beforeInputHandler) {
-      this.area?.removeEventListener('beforeinput', this.#beforeInputHandler);
-      this.#beforeInputHandler = null;
+    if (this._beforeInputHandler) {
+      this.area?.removeEventListener('beforeinput', this._beforeInputHandler);
     }
 
     // Remove public methods that were bound
