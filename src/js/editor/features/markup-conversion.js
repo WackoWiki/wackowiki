@@ -7,20 +7,39 @@
  */
 export function wackoToMarkdown(text) {
   let md = text;
+  const placeholders = [];
 
-  // Headings: === Title === → ## Title (etc.)
-  md = md.replace(/^={2,7}\s+(.*?)\s*={2,}$/gm, (match, title) => {
+  // 1. Fenced code blocks: %%(hl lang)\n...\n%%  →  ```lang\n...\n```
+  //                  or %% … %%                  →  ```\n...\n```
+  md = md.replace(/%%(?:\(hl\s+(\w+)\)\s*)?([\s\S]*?)%%/g, (match, lang, content) => {
+    const language = lang ? lang.trim() : '';
+    const code = content.trim();
+    const fence = language ? '```' + language + '\n' + code + '\n```'
+                            : '```\n' + code + '\n```';
+    placeholders.push(fence);
+    return `§§CODEBLOCK${placeholders.length - 1}§§`;
+  });
+
+  // 2. Headings: === Title === → ## Title (etc.)
+  md = md.replace(/^={2,7}\s*(.*?)\s*={2,}$/gm, (match, title) => {
     const level = match.match(/^=+/)[0].length;
     const marker = '#'.repeat(level - 1);
-    return `${marker} ${title.trim()}`;
+    const out = `${marker}`;
+    placeholders.push(out);
+    return `§§HEADING${placeholders.length - 1}§§ ${title.trim()}`;
+  });
+  
+  // 3. Inline code: ##text## → `text`
+  // Protect BEFORE headings so inline code inside a heading title is preserved.
+  md = md.replace(/##(.*?)##/g, (match, content) => {
+    placeholders.push('`' + content + '`');
+    return `§§INLINECODE${placeholders.length - 1}§§`;
   });
 
   // Italic: //text// → *text*
   md = md.replace(/\/\/(.*?)\/\//g, '*\$1*');
   // Strikethrough: --text-- → ~~text~~
   md = md.replace(/--(.*?)--/g, '~~\$1~~');
-  // Inline code: ##text## → `text`
-  md = md.replace(/##(.*?)##/g, '`$1`');
   // Small text: ++text++ → <small>text</small>
   md = md.replace(/\+\+(.*?)\+\+/g, '<small>$1</small>');
   // Highlight / Marked text: ??text?? and !!text!! → **text**
@@ -42,12 +61,15 @@ export function wackoToMarkdown(text) {
   // Horizontal rule: ---- → ---
   md = md.replace(/^----$/gm, '---');
 
-  // Code blocks: %% … %% → ``` … ```
-  md = md.replace(/%%(.*?)%%/gs, '```\n$1\n```');
-
   // Tables: #| … |# and #|| … ||# → Markdown tables
   md = md.replace(/#\|[\s\S]*?\|#/gs, block => wackoTableToMarkdown(block));
   md = md.replace(/#\|\|[\s\S]*?\|\|#/gs, block => wackoTableToMarkdown(block));
+
+  // Restore code blocks and inline code placeholders
+  md = md.replace(/§§CODEBLOCK(\d+)§§/g, (match, idx) => placeholders[idx]);
+  md = md.replace(/§§INLINECODE(\d+)§§/g, (match, idx) => placeholders[idx]);
+  // Restore headings
+  md = md.replace(/§§HEADING(\d+)§§/g, (match, idx) => placeholders[idx]);
 
   return md;
 }
