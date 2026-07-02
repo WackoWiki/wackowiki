@@ -244,7 +244,7 @@ class Feed
 		// build output
 		$xml = $this->feed_header('CommentsXML', 'CommentsXMLTitle');
 
-		if ($comments = $this->engine->load_comment())
+		if ($comments = $this->engine->load_comment_feed())
 		{
 			$reset_tag = $this->engine->tag;
 

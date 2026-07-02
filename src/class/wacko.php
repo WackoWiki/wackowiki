@@ -1837,7 +1837,7 @@ class Wacko
 	}
 
 	// used for comment feed
-	function load_comment(int $limit = 100, $tag = '', $deleted = false): ?array
+	function load_comment_feed(int $limit = 100, $tag = '', $deleted = false): ?array
 	{
 		$pages	= [];
 		$limit	= $this->get_list_count($limit);
@@ -6525,13 +6525,22 @@ class Wacko
 	}
 
 	// COMMENTS AND COUNTS
-	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = false): ?array
+	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $metadata_only = false, $deleted = false): ?array
 	{
+		if ($metadata_only)
+		{
+			$what_p = 'p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.page_lang, u.user_name, o.user_name as owner_name ';
+		}
+		else
+		{
+			$what_p = 'p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, p.page_lang, u.user_name, o.user_name as owner_name ';
+		}
+
 		// avoid results if $page_id is 0 (page does not exist)
 		if ($page_id)
 		{
 			return $this->db->load_all(
-				'SELECT p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, p.page_lang, u.user_name, o.user_name as owner_name ' .
+				'SELECT ' . $what_p  . ' ' .
 				'FROM ' . $this->prefix . 'page p ' .
 					'LEFT JOIN ' . $this->prefix . 'user u ON (p.user_id = u.user_id) ' .
 					'LEFT JOIN ' . $this->prefix . 'user o ON (p.owner_id = o.user_id) ' .
