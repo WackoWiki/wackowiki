@@ -66,7 +66,6 @@
 	--we-textarea-text: #222;
 	--we-textarea-caret: #000;
 	--we-split-bg: #f8f8f8;
-	--we-toolbar-bg: var(--ww-buttonface);
 }
 
 @media (min-width: 768px) {
@@ -108,7 +107,6 @@
 	--we-textarea-text: #ddd;
 	--we-textarea-caret: #ddd;
 	--we-split-bg: #252526;
-	--we-toolbar-bg: #2d2d2d;
 }
 
 /* Dark theme */
@@ -144,7 +142,6 @@
 		--we-textarea-text: #ddd;
 		--we-textarea-caret: #ddd;
 		--we-split-bg: #252526;
-		--we-toolbar-bg: #2d2d2d;
 	}
 }
 
