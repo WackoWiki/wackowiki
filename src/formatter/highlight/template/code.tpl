@@ -13,7 +13,7 @@
 		</button>
 	</figcaption>
 	<div class="hl-body">
-		<pre id="[ ' token ' ]">
+		<pre id="[ ' token ' ]" class="code">
 			[ ' text | pre ' ]
 		</pre>
 	</div>

@@ -12,7 +12,7 @@
 				alt="Copy">
 		</button>
 	</figcaption>
-	<div class="hl-body" id="[ ' token ' ]">
+	<div class="hl-body code" id="[ ' token ' ]">
 		[ ' text | pre ' ]
 	</div>
 </figure>
