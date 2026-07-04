@@ -686,15 +686,12 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	}
 }}
 
-.hl-code pre {
-	padding: 1em;
+ .hl-code pre {
+	/* background: #fff; */
 	overflow-x: auto;
-	/* border-radius: 0.375rem; */
-	margin: 1em 0;
 	font-family: var(--ww-font-monospace);
 	font-size: var(--ww-font-size-sm);
 	line-height: 1.5;
-	border: 1px solid #ccc;
 }
 
 .hl-code code {
@@ -712,11 +709,11 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	background: #f8f9fa;
 }
 
-.hl-header {
+.hl-code figcaption {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	/* background: #1f2937; */
+	background: var(--ww-table-header-bg);
 	color: #e5e7eb;
 	padding: 6px 12px;
 	font-size: 0.85rem;
@@ -725,7 +722,7 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 
 .hl-language {
 	font-weight: 500;
-	color: #9ca3af;
+	color: var(--ww-text);
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 }
