@@ -271,7 +271,7 @@ if ($this->has_access('read'))
 				$tpl->h_edit = true;
 			}
 
-			if ($this->page['comments'])
+			if (isset($this->page['comments']) && $this->page['comments'])
 			{
 				$tpl->h_comments_n		= $this->page['comments'];
 				$tpl->h_comments_href	= $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']);
