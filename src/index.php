@@ -4,11 +4,16 @@ const IN_WACKO = 'wacko';
 include 'lib/mb_extends/mb_extends.php';
 include 'class/init.php';
 
+use BadBehaviour\Core\BadBehaviour;
+use BadBehaviour\Core\Adapter\WackoWikiAdapter;
+
 $db = new Settings();
 
 if ($db->ext_bad_behaviour)
 {
-	include 'lib/bad_behaviour/bad-behaviour-wackowiki.php'; // uses $db
+	$adapter = new WackoWikiAdapter($db);
+	$bb = new BadBehaviour($adapter);
+	$bb->run();
 }
 
 $http	= new Http($db);

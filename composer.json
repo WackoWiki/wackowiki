@@ -27,6 +27,7 @@
 		"ext-pdo_mysql" : "*",
 		"ext-sqlite3" : "*",
 		"ext-zlib" : "*",
+		"badbehaviour/badbehaviour" : "^2.3.0",
 		"enshrined/svg-sanitize" : "^0.22",
 		"hashids/hashids" : "^5.0",
 		"jblond/php-diff" : "^2.5",

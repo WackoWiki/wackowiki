@@ -4,8 +4,61 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17c152185eb23a776339828fca3d6259",
+    "content-hash": "6d85e6c19bf0be4b4361ed38a094136c",
     "packages": [
+        {
+            "name": "badbehaviour/badbehaviour",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bad-Behaviour/badbehaviour.git",
+                "reference": "33c4170b60d762d77bc27be48ba6aa55b077b3f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bad-Behaviour/badbehaviour/zipball/33c4170b60d762d77bc27be48ba6aa55b077b3f9",
+                "reference": "33c4170b60d762d77bc27be48ba6aa55b077b3f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "8.0 - 8.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BadBehaviour\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Hampton"
+                }
+            ],
+            "description": "Bad Behaviour is a spam protection system that detects and blocks unwanted Web accesses.",
+            "homepage": "https://github.com/Bad-Behaviour/badbehaviour",
+            "keywords": [
+                "antispam",
+                "comment",
+                "referrer",
+                "robot",
+                "spam",
+                "trackback"
+            ],
+            "support": {
+                "discussions": "https://github.com/Bad-Behaviour/badbehaviour/discussions",
+                "issues": "https://github.com/Bad-Behaviour/badbehaviour/issues",
+                "source": "https://github.com/Bad-Behaviour/badbehaviour/tree/2.3.0",
+                "wiki": "https://github.com/Bad-Behaviour/badbehaviour/wiki"
+            },
+            "time": "2026-07-08T12:58:27+00:00"
+        },
         {
             "name": "enshrined/svg-sanitize",
             "version": "0.22.0",

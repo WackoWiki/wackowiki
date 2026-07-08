@@ -80,13 +80,6 @@ if ($this->db->enable_feeds)
 	}
 }
 
-// display Bad Behaviour timer
-if (!empty($this->db->ext_bad_behaviour))
-{
-	$tpl->bb2 = bb2_timer();
-}
-
-
 if ($user = $this->get_user())
 {
 	$tpl->user_zenmode		= $user['zenmode'];
