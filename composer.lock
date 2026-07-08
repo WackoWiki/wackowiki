@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d85e6c19bf0be4b4361ed38a094136c",
+    "content-hash": "e6fdfd612aff67f8f81fdf6f3cb94c14",
     "packages": [
         {
             "name": "badbehaviour/badbehaviour",
@@ -684,6 +684,67 @@
                 }
             ],
             "time": "2026-05-27T06:59:30+00:00"
+        },
+        {
+            "name": "wackowiki/diff",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WackoWiki/Diff.git",
+                "reference": "2ac9037226c3fe32c33f22fee2a995a1e1ac07d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WackoWiki/Diff/zipball/2ac9037226c3fe32c33f22fee2a995a1e1ac07d1",
+                "reference": "2ac9037226c3fe32c33f22fee2a995a1e1ac07d1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Diff\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "François Pinard",
+                    "email": "pinard@iro.umontreal.ca",
+                    "role": "Original author"
+                },
+                {
+                    "name": "Geoffrey T. Dairiki",
+                    "email": "dairiki@dairiki.org",
+                    "role": "Original author"
+                },
+                {
+                    "name": "David DELON",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Patrick PAUL",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Eric FELDSTEIN",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "PHP diff library modernized for PHP 8.5",
+            "support": {
+                "issues": "https://github.com/wackowiki/diff/issues",
+                "source": "https://github.com/wackowiki/diff"
+            },
+            "time": "2026-07-08T22:01:44+00:00"
         },
         {
             "name": "wackowiki/htmlsax3",

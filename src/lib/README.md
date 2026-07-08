@@ -10,6 +10,7 @@ The version and status of each is summarized below:
 | ----------------- | ----------------- | --------- | --------- |
 | bad_behaviour		| Bad Behaviour		| 2.3.2		| Composer |
 | captcha			| freeCap			| 1.4.7		| unpatched |
+| diff				| Diff				| 1.0.0		| Composer |
 | hashids			| Hashids			| 5.0.2		| Composer |
 | htmlsax3			| HTMLSAX3			| 4.1.1		| Composer |
 | php-diff			| php-diff			| 2.5.0		| Composer |
@@ -29,6 +30,7 @@ The version and status of each is summarized below:
 Upstream projects
 -----------------
 - bad_behaviour		- https://github.com/Bad-Behaviour/badbehaviour
+- diff				- https://github.com/WackoWiki/Diff
 - freecap			- https://wackowiki.org/doc/Dev/Components/Lib/Captcha
 - hashids			- https://hashids.org/php/
 - htmlsax3			- https://github.com/WackoWiki/htmlsax3
