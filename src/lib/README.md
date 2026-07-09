@@ -30,7 +30,7 @@ The version and status of each is summarized below:
 Upstream projects
 -----------------
 - bad_behaviour		- https://github.com/Bad-Behaviour/badbehaviour
-- diff				- https://github.com/WackoWiki/Diff
+- diff				- https://github.com/WackoWiki/diff
 - freecap			- https://wackowiki.org/doc/Dev/Components/Lib/Captcha
 - hashids			- https://hashids.org/php/
 - htmlsax3			- https://github.com/WackoWiki/htmlsax3

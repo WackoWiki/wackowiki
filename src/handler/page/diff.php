@@ -237,11 +237,11 @@ if ($page_a && $page_b
 			$this->preload_links([($this->page['page_id'] ?? null)], true);
 
 			// extract text from bodies
-			$text_a		= $page_a['body'];
-			$text_b		= $page_b['body'];
+			$text_a		= $page_a['body'] ?? '';
+			$text_b		= $page_b['body'] ?? '';
 
-			$side_a		= new Side($text_a);
-			$side_b		= new Side($text_b);
+			$side_a		= new \Diff\Side($text_a);
+			$side_b		= new \Diff\Side($text_b);
 
 			$body_a		= '';
 			$side_a->split_file_into_words($body_a);
@@ -250,15 +250,16 @@ if ($page_a && $page_b
 			$side_b->split_file_into_words($body_b);
 
 			// diff on these two file
-			$diff		= new Diff2(explode("\n", $body_a), explode("\n", $body_b));
+			$diff		= new \Diff\Diff(explode("\n", $body_a), explode("\n", $body_b));
 
 			// format output
-			$fmt		= new DiffFormatter();
+			$fmt		= new \Diff\DiffFormatter();
 
-			$side_o		= new Side($fmt->format($diff));
+			$side_o		= new \Diff\Side($fmt->format($diff));
 
 			$resync_left	= 0;
 			$resync_right	= 0;
+			$output			= '';
 
 			$count_total_right = $side_b->getposition();
 
