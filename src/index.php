@@ -6,8 +6,6 @@ include 'class/init.php';
 
 use BadBehaviour\Core\BadBehaviour;
 use BadBehaviour\Core\Adapter\WackoWikiAdapter;
-#use FreeCap\FreeCap;
-#use FreeCap\SessionAdapter;
 
 $db = new Settings();
 

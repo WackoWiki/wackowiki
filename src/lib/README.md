@@ -9,7 +9,7 @@ The version and status of each is summarized below:
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
 | bad_behaviour		| Bad Behaviour		| 2.3.2		| Composer |
-| captcha			| freeCap			| 1.4.7		| unpatched |
+| freecap			| freeCap			| 1.5.1		| Composer |
 | diff				| Diff				| 1.0.0		| Composer |
 | hashids			| Hashids			| 5.0.2		| Composer |
 | htmlsax3			| HTMLSAX3			| 4.1.1		| Composer |
