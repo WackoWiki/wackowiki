@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a87edd589f233e71141a0dd4d01708a6",
+    "content-hash": "2eb6e820b92e48a0b9b4e4c3a3f26c17",
     "packages": [
         {
             "name": "badbehaviour/badbehaviour",
@@ -175,16 +175,16 @@
         },
         {
             "name": "jblond/php-diff",
-            "version": "2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBlond/php-diff.git",
-                "reference": "d9fcd6e86d5bd598caa3418ab7dea073a540f7bd"
+                "reference": "9d7079270388a2bd99d6b398e6bdfb507f86f191"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBlond/php-diff/zipball/d9fcd6e86d5bd598caa3418ab7dea073a540f7bd",
-                "reference": "d9fcd6e86d5bd598caa3418ab7dea073a540f7bd",
+                "url": "https://api.github.com/repos/JBlond/php-diff/zipball/9d7079270388a2bd99d6b398e6bdfb507f86f191",
+                "reference": "9d7079270388a2bd99d6b398e6bdfb507f86f191",
                 "shasum": ""
             },
             "require": {
@@ -207,7 +207,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "jblond\\": "lib/jblond"
+                    "jblond\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -240,9 +240,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JBlond/php-diff/issues",
-                "source": "https://github.com/JBlond/php-diff/tree/2.5.1"
+                "source": "https://github.com/JBlond/php-diff/tree/v2.5.2"
             },
-            "time": "2026-06-08T06:58:17+00:00"
+            "time": "2026-07-09T12:16:47+00:00"
         },
         {
             "name": "phiki/phiki",
@@ -690,12 +690,12 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WackoWiki/Diff.git",
+                "url": "https://github.com/WackoWiki/diff.git",
                 "reference": "2ac9037226c3fe32c33f22fee2a995a1e1ac07d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WackoWiki/Diff/zipball/2ac9037226c3fe32c33f22fee2a995a1e1ac07d1",
+                "url": "https://api.github.com/repos/WackoWiki/diff/zipball/2ac9037226c3fe32c33f22fee2a995a1e1ac07d1",
                 "reference": "2ac9037226c3fe32c33f22fee2a995a1e1ac07d1",
                 "shasum": ""
             },
@@ -745,6 +745,44 @@
                 "source": "https://github.com/wackowiki/diff"
             },
             "time": "2026-07-08T22:01:44+00:00"
+        },
+        {
+            "name": "wackowiki/freecap",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WackoWiki/freecap.git",
+                "reference": "caafcb1830c9eaf3c1669216161a87ad84756d1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WackoWiki/freecap/zipball/caafcb1830c9eaf3c1669216161a87ad84756d1e",
+                "reference": "caafcb1830c9eaf3c1669216161a87ad84756d1e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FreeCap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "freeCap CAPTCHA library",
+            "support": {
+                "issues": "https://github.com/WackoWiki/freecap/issues",
+                "source": "https://github.com/WackoWiki/freecap"
+            },
+            "time": "2026-07-10T12:56:52+00:00"
         },
         {
             "name": "wackowiki/htmlsax3",

@@ -6,6 +6,8 @@ include 'class/init.php';
 
 use BadBehaviour\Core\BadBehaviour;
 use BadBehaviour\Core\Adapter\WackoWikiAdapter;
+#use FreeCap\FreeCap;
+#use FreeCap\SessionAdapter;
 
 $db = new Settings();
 
@@ -57,7 +59,12 @@ switch ($route['route'])
 	case 'freecap':
 		$http->no_cache();
 		$sess = & $http->sess;
-		include 'lib/captcha/freecap.php';
+		$adapter = new \FreeCap\SessionAdapter($sess);
+
+		$custom_config = [];
+		$captcha = new \FreeCap\FreeCap($adapter, $custom_config);
+		$captcha->render();
+
 		$http->terminate();
 
 	case 'admin':

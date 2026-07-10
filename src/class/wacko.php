@@ -5,6 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+use FreeCap\SessionAdapter;
+use FreeCap\FreeCap;
+
 // engine class
 class Wacko
 {
@@ -9339,7 +9342,9 @@ class Wacko
 			$this->http->no_cache(false);
 			$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/core/init-captcha.js" defer></script>');
 
-			$this->sess->freecap_shown = 1;
+			// Initialize the adapter to flag the CAPTCHA as shown in the current session
+			$adapter = new SessionAdapter($this->sess);
+			$adapter->set('freecap_shown', 1);
 
 			$out .=
 				($inline ? '' : "<br>\n") .
@@ -9362,22 +9367,14 @@ class Wacko
 	// HTTP-POST variable 'captcha', submitted through webform.
 	function validate_captcha(): bool
 	{
-		$word_ok = true;
+		$adapter = new SessionAdapter($this->sess);
+		$captcha = new FreeCap($adapter);
 
-		if (isset($this->sess->freecap_shown))
-		{
-			$word_ok = false;
-			unset($this->sess->freecap_shown);
+		// The FreeCap class handles the internal session checks,
+		// hash comparison, and unsetting the shown/attempts flags.
+		$input = $_POST['captcha'] ?? '';
 
-			if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha'])
-				&& hash($this->sess['hash_algo'], strtolower($_POST['captcha'])) === $this->sess->freecap_word_hash)
-			{
-				unset($this->sess->freecap_attempts);
-				$word_ok = true;
-			}
-		}
-
-		return $word_ok;
+		return $captcha->validate($input);
 	}
 
 	// returns error text, or null on OK
