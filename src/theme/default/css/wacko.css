@@ -703,7 +703,7 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 .hl-code {
 	position: relative;
 	margin: 1.2em 0;
-	border-radius: 8px;
+	border-radius: .1rem;
 	overflow: hidden;
 	border: 1px solid var(--border-color, #e5e7eb);
 	background: var(--ww-bg-code);
