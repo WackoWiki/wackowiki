@@ -26,7 +26,9 @@
 								<header class="comment-title">
 									<h2><a href="[ ' href ' ]">[ ' title | e ' ]</a></h2>
 								</header>
+								<section>
 								[ ' comment ' ]
+								</section>
 								<footer>
 									<ul class="comment-meta">
 										<li>[ ' owner ' ]</li>
