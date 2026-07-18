@@ -746,6 +746,17 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	color: #4ade80;
 }
 
+.hl-code .hl-copy-btn {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+.hl-code:hover .hl-copy-btn,
+.hl-code .hl-copy-btn:focus {
+	opacity: 1;
+	visibility: visible;
+}
+
 /* Code body */
 .hl-body pre {
 	margin: 0;
