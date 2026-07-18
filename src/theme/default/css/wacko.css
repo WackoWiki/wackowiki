@@ -720,11 +720,19 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	font-family: ui-monospace, monospace;
 }
 
-.hl-language {
-	font-weight: 500;
-	color: var(--ww-text);
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
+.hl-code figcaption.no-lang {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	display: block;
+	background: transparent;
+	padding: 0;
+}
+
+.hl-code figcaption.no-lang .hl-copy-btn {
+	float: right;
+	margin: 0.35rem 0.35rem 0 0;
 }
 
 .hl-copy-btn {

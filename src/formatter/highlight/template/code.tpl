@@ -2,8 +2,7 @@
 <ignore>
 <!--notypo-->
 <figure class="hl-code">
-	<figcaption>
-		<span class="hl-language">[ ' language ' ]</span>
+	<figcaption class="no-lang">
 		<button type="button" class="clipb hl-copy-btn" 
 			title="[ ' _t: SourceCopyToClipboard ' ]"
 			data-clipboard-target="#[ ' token ' ]">
