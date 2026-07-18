@@ -735,6 +735,13 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	margin: 0.35rem 0.35rem 0 0;
 }
 
+.hl-language {
+	font-weight: 500;
+	color: var(--ww-text);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
 .hl-copy-btn {
 	background: transparent;
 	border: none;
