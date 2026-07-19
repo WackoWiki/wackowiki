@@ -1,6 +1,7 @@
 // src/js/editor/features/live-preview.js
 
 import logger from '../../utils/logger.js';
+import Storage from '../../utils/storage.js';
 
 const PREVIEW_DEBOUNCE_MS = 420;
 
@@ -92,9 +93,9 @@ export function setupLivePreview(editor) {
   createSplitPanes(editor);
 
   // Determine if we should auto‑enable based on saved preference or server default
-  const saved = localStorage.getItem('we_live_preview_enabled');
+  const saved = Storage.get('live_preview_enabled');
   const shouldEnable = saved !== null
-    ? saved === 'true'
+    ? !!saved
     : editor.livePreviewDefault;
 
   if (shouldEnable) {
@@ -177,7 +178,7 @@ export function toggleLivePreview(editor) {
     editor.editPane.style.flex = '1 1 100%';
   }
 
-  localStorage.setItem('we_live_preview_enabled', editor.livePreviewEnabled);
+  Storage.set('live_preview_enabled', editor.livePreviewEnabled);
   editor.updateToolbarButtonStates();
 }
 

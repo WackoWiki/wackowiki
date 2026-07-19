@@ -166,7 +166,7 @@
 				<tr>
 					<th scope="row">[ ' _t: ClearWeCache ' ]</th>
 					<td>
-						<button type="button" id="clear_we_localstorage" class="btn btn-warning">
+						<button type="button" id="clear_we_localstorage" class="btn btn-warning" data-app-root="[ ' db: base_path ' ]">
 							[ ' _t: ClearWeCacheButton ' ]
 						</button>
 						<span id="we_localstorage_status" class="form-note"></span>

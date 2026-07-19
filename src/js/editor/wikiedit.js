@@ -2,6 +2,7 @@
 
 import { ProtoEdit } from './protoedit.js';
 import { EditorState } from './editor-state.js';
+import { initStorage } from '../utils/storage.js';
 
 import { buttonDefs } from './toolbar/toolbar-config.js';
 import { loadAndBuildToolbar } from './toolbar/toolbar-builder.js';
@@ -23,7 +24,7 @@ import { startPeriodicNonceRefresh, stopPeriodicNonceRefresh } from './features/
 
 // Core utilities used by the class
 import logger from '../utils/logger.js';
-import { loadPreferredNumber } from '../utils/storage.js';
+import Storage from '../utils/storage.js';
 import { getRelativeTime } from '../utils/time.js';
 
 /*!
@@ -53,6 +54,8 @@ export class WikiEdit extends ProtoEdit {
     this.#state = new EditorState();
 
     this.isRegisteredUser = !!options.isRegisteredUser;
+	this.appRoot = options.appRoot || '';
+	initStorage(this.appRoot);
 
     this.enabled = true;
     this.manual = 'https://wackowiki.org/doc/';
@@ -70,9 +73,9 @@ export class WikiEdit extends ProtoEdit {
     this.livePreviewDefault = false;
     this.syntaxHighlighting = true;
     this.preferredHeight = 400;
-    this.HEIGHT_KEY = 'we_editor_height';
+    this.HEIGHT_KEY = 'editor_height';
     this.DEFAULT_HEIGHT = 400;
-    this.DRAFT_KEY_PREFIX = 'we_draft_';
+    this.DRAFT_KEY_PREFIX = 'draft_';
     this.autosaveDelay = 8000;
     this.isSubmitting = false;
     this.cf_modified = false;
@@ -89,7 +92,7 @@ export class WikiEdit extends ProtoEdit {
     const ta = this.area;
 
     // Editor height
-    this.preferredHeight = loadPreferredNumber(
+    this.preferredHeight = Storage.loadPreferredNumber(
       ta, this.HEIGHT_KEY, 'editorHeight', 300, 800, this.DEFAULT_HEIGHT
     );
     ta.style.height = `${this.preferredHeight}px`;
@@ -555,7 +558,7 @@ export class WikiEdit extends ProtoEdit {
       this.area.style.height = `${newH}px`;
     }
 
-    localStorage.setItem(this.HEIGHT_KEY, newH);
+    Storage.set(this.HEIGHT_KEY, newH);
     this.updateStatus?.();
   }
 

@@ -1,7 +1,7 @@
 // src/js/editor/features/autosave.js
 
 import logger from '../../utils/logger.js';
-import { safeSetItem, safeGetItem, safeRemoveItem } from '../../utils/storage.js';
+import Storage from '../../utils/storage.js';
 
 class AutosaveController {
   #editor;
@@ -85,7 +85,7 @@ class AutosaveController {
 
     const content = editor.getContent().trim();
     if (content === '') {
-      safeRemoveItem(this.#draftKey);
+      Storage.remove(this.#draftKey);
       return;
     }
 
@@ -95,7 +95,7 @@ class AutosaveController {
       title: document.getElementById('page_title')?.value?.trim() || ''
     };
 
-    if (safeSetItem(this.#draftKey, JSON.stringify(draftData))) {
+    if (Storage.set(this.#draftKey, JSON.stringify(draftData))) {
       editor.showMessage(`✓ ${t('DraftSaved') || 'Draft saved'}`);
     }
   }
@@ -103,26 +103,26 @@ class AutosaveController {
   /** Clears the stored draft */
   clearDraft() {
     if (!this.#draftKey) return;
-    safeRemoveItem(this.#draftKey);
+    Storage.remove(this.#draftKey);
     logger.info('Draft cleared');
     this.#editor.showMessage(`${t('DraftCleared') || 'Draft cleared'}`);
   }
 
   /** Loads an existing draft and shows recovery infobox */
   #loadAutosavedDraft() {
-    const saved = safeGetItem(this.#draftKey);
+    const saved = Storage.get(this.#draftKey);
     if (!saved) return;
 
     let draft;
     try {
       draft = JSON.parse(saved);
     } catch (e) {
-      safeRemoveItem(this.#draftKey);
+      Storage.remove(this.#draftKey);
       return;
     }
 
     if (!draft.content) {
-      safeRemoveItem(this.#draftKey);
+      Storage.remove(this.#draftKey);
       return;
     }
 
@@ -169,14 +169,14 @@ class AutosaveController {
     if (recoverBtn) {
       recoverBtn.addEventListener('click', () => {
         editor.replaceContent(draft.content);
-        safeRemoveItem(this.#draftKey);
+        Storage.remove(this.#draftKey);
         document.getElementById('draft-infobox')?.remove();
       });
     }
 
     if (discardBtn) {
       discardBtn.addEventListener('click', () => {
-        safeRemoveItem(this.#draftKey);
+        Storage.remove(this.#draftKey);
         document.getElementById('draft-infobox')?.remove();
       });
     }

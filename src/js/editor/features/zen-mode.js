@@ -1,6 +1,7 @@
 // src/js/editor/features/zen-mode.js
 
 import logger from '../../utils/logger.js';
+import Storage from '../../utils/storage.js';
 
 /**
  * Sets up dark mode and zen mode on the editor.
@@ -48,9 +49,9 @@ function cleanup(editor) {
 // ── Dark Mode ──────────────────────────────────────────────────────
 
 function initDarkMode(editor) {
-  const saved = localStorage.getItem('we_dark_mode_enabled');
+  const saved = Storage.get('dark_mode_enabled');
   if (saved !== null) {
-    const shouldBeDark = saved === 'true';
+    const shouldBeDark = !!saved;
     applyDarkMode(shouldBeDark);
     // Reflect in toolbar
     const tb = document.getElementById(`tb_${editor.id}`);
@@ -76,7 +77,7 @@ function toggleDarkMode(editor) {
   editor.area.style.transition = 'background 0.2s';
   setTimeout(() => { editor.area.style.transition = ''; }, 300);
 
-  localStorage.setItem('we_dark_mode_enabled', newIsDark);
+  Storage.set('dark_mode_enabled', newIsDark);
   logger.info('Dark mode toggled:', newIsDark ? 'dark' : 'light');
   updateToolbarButtonStates(editor);
 }
@@ -100,8 +101,8 @@ function initZenMode(editor) {
   const isEdit = isEditPage();
   const prefix = isEdit ? '' : '_comment';
 
-  const lsZen = localStorage.getItem(`we_zenmode${prefix}`);
-  const lsWidescreen = localStorage.getItem(`we_widescreen${prefix}`);
+  const lsZen = Storage.get(`zenmode${prefix}`);
+  const lsWidescreen = Storage.get(`widescreen${prefix}`);
 
   const userZen = document.documentElement.dataset.zenmode === '1';
   const userWidescreen = document.documentElement.dataset.widescreen === '1';
@@ -123,13 +124,13 @@ function toggleZenMode(editor) {
 
   if (!isCurrentlyZen) {
     body.classList.add('zenmode', 'widescreen');
-    localStorage.setItem(`we_zenmode${prefix}`, '1');
-    localStorage.setItem(`we_widescreen${prefix}`, '1');
+    Storage.set(`zenmode${prefix}`, '1');
+    Storage.set(`widescreen${prefix}`, '1');
     editor.showMessage('Zen mode enabled', 'success', 1600);
   } else {
     body.classList.remove('zenmode', 'widescreen');
-    localStorage.setItem(`we_zenmode${prefix}`, '0');
-    localStorage.setItem(`we_widescreen${prefix}`, '0');
+    Storage.set(`zenmode${prefix}`, '0');
+    Storage.set(`widescreen${prefix}`, '0');
     editor.showMessage('Zen mode disabled', 'info', 1600);
   }
 

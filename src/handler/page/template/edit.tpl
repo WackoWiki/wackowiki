@@ -61,6 +61,7 @@
 				document.addEventListener('DOMContentLoaded', () => {
 					const wE = new WikiEdit({
 						isRegisteredUser: [ ' isRegisteredUser ' ],
+						appRoot: '[ ' db: base_path ' ]',
 						// other options...
 					});
 					[= autocomplete _ =

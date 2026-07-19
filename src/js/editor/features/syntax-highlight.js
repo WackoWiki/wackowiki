@@ -1,6 +1,7 @@
 // src/js/editor/features/syntax-highlight.js
 
 import logger from '../../utils/logger.js';
+import Storage from '../../utils/storage.js';
 
 /**
  * Sets up the syntax highlighting overlay and attaches all related listeners.
@@ -30,9 +31,9 @@ export function setupSyntaxHighlighting(editor) {
   });
 
   // Load saved syntax state from localStorage (overrides data-attribute)
-  const saved = localStorage.getItem('we_syntax_enabled');
+  const saved = Storage.get('syntax_enabled');
   if (saved !== null) {
-    editor.syntaxHighlighting = saved === 'true';
+    editor.syntaxHighlighting = !!saved;
   }
 
   // Apply initial state
@@ -193,7 +194,7 @@ function toggleSyntaxHighlight(editor) {
     enableSyntaxHighlighting(editor);
   }
 
-  localStorage.setItem('we_syntax_enabled', editor.syntaxHighlightEnabled);
+  Storage.set('syntax_enabled', editor.syntaxHighlightEnabled);
   editor.updateToolbarButtonStates();
 }
 
