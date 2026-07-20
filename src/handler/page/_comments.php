@@ -125,6 +125,13 @@ if ($this->has_access('read'))
 		// display comment form
 		if ($this->has_access('comment'))
 		{
+			// invoke autocomplete for Heartbeat
+			if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
+			{
+				include __DIR__ . '/_autocomplete.php';
+				return;
+			}
+
 			$tpl->enter('f_');
 
 			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/wikiedit.css">');
