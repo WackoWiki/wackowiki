@@ -838,14 +838,14 @@ class WackoFormatter
 			}
 			else if ($new_indent_type == '*')
 			{
-				$opener		= '<ul><li>';
+				$opener		= '<ul class="text-secondary"><li>';
 				$closer		= '</li></ul>' . "\n";
 				$new_type	= '*';
 				$li			= 1;
 			}
 			else
 			{
-				$opener		= '<ol type="' . $new_indent_type . '">' .
+				$opener		= '<ol type="' . $new_indent_type . '" class="text-secondary">' .
 							  '<li' . ($start ? ' value="' . $start . '"' : '') . '>';
 				$closer		= '</li></ol>' . "\n";
 				$new_type	= 1;

@@ -35,6 +35,11 @@ ul, ol {
 	padding-block: 0;
 }
 
+.text-secondary li {
+	margin-top: .5rem;
+	margin-bottom: .5rem;
+}
+
 /** Header related ***********************************************************/
 
 h1, h2, h3, h4, h5, h6 {
@@ -822,8 +827,10 @@ div.wrapper-content { padding: 10px 10px 25px 10px; }
 code {
 	color: #660; 
 	background: #ffc;
-	padding: 1px 5px;
+	padding: 1px .25rem;
 	font-family: var(--ww-font-monospace);
+	font-size: var(--ww-font-size-sm);
+	border-radius: calc(.5rem - 4px);
 }
 
 /* underline text: SYNTAX __text__ */
