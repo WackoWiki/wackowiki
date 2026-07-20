@@ -56,6 +56,7 @@
 					data-can-upload="[ ' upload ' ]"
 					data-upload-nonce="[ ' upnonce ' ]"
 					data-preview-nonce="[ ' pvnonce ' ]"
+					data-autocomplete="[ ' autocomplete ' ]"
 					required>[ ' body | pre ' ]</textarea>
 				<script[ ' db: csp_nonce ' ]>
 				document.addEventListener('DOMContentLoaded', () => {
@@ -64,11 +65,6 @@
 						appRoot: '[ ' db: base_path ' ]',
 						// other options...
 					});
-					[= autocomplete _ =
-						if (AutoComplete) {
-							new AutoComplete(wE, "[ ' href: edit ' ]");
-						}
-					=]
 					wE.init('postText', '[ ' wikiedit ' ]');
 				});
 				</script>

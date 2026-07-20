@@ -510,10 +510,7 @@ if ($this->has_access('read')
 	// WikiEdit
 	if ($user)
 	{
-		if ($user['autocomplete'])
-		{
-			$tpl->autocomplete = true;
-		}
+		$tpl->autocomplete = $user['autocomplete'] ? 1 : 0;
 
 		// session heartbeat timeout = wiki session timeout - 40 second to let the request heartbeat and response go without fuss
 		$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;

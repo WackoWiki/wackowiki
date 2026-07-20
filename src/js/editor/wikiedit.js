@@ -10,6 +10,7 @@ import { loadAndBuildToolbar } from './toolbar/toolbar-builder.js';
 // Features (import the setup functions you use in init()) / use explicit initialization
 import { setupMarkupHelpers } from './features/markup-helpers.js';
 import { setupHeartbeat } from './features/session-heartbeat.js';
+import { createAutoComplete } from './features/autocomplete.js';
 import { setupMediaUpload } from './features/media-upload.js';
 import { setupToolbarDelegation } from './toolbar/toolbar-delegation.js';
 import { setupLivePreview, awaitPreviewIdle } from './features/live-preview.js';
@@ -70,6 +71,7 @@ export class WikiEdit extends ProtoEdit {
     this.id = null;
     this.area = null;
     this.canUpload = false;
+    this.autocompleteEnabled = true;
     this.livePreviewDefault = false;
     this.syntaxHighlighting = true;
     this.preferredHeight = 400;
@@ -109,6 +111,7 @@ export class WikiEdit extends ProtoEdit {
     this.syntaxHighlighting = ta.dataset.syntaxHighlighting !== '0';
     this.livePreviewDefault = ta.dataset.livePreviewDefault === '1';
     this.canUpload = ta.dataset.canUpload === '1';
+    this.autocompleteEnabled = ta.dataset.autocomplete !== '0';
 
     // Context detection
     this.isCommentMode = ta.id === 'addcomment' || ta.name === 'payload';
@@ -199,6 +202,17 @@ export class WikiEdit extends ProtoEdit {
 
     // Markup helpers (needed before toolbar / keyboard)
     setupMarkupHelpers(this);
+	
+	// Autocomplete (registered users + feature flag)
+	if (this.isRegisteredUser && this.autocompleteEnabled && typeof createAutoComplete === 'function') {
+	  this.autocomplete = createAutoComplete(this, this.ajaxUrl);
+	  this.autocomplete.addButton();      // injects toolbar button
+	  // attachDropdown() will be called after toolbar is rendered
+	  this._cleanup.push(() => this.autocomplete?.destroy?.());
+	  logger.debug('[WikiEdit] Autocomplete enabled');
+	} else {
+	  logger.debug('[WikiEdit] Autocomplete disabled');
+	}
 
     // Toolbar (must come before features that depend on toolbar buttons)
     loadAndBuildToolbar(this);
@@ -241,6 +255,11 @@ export class WikiEdit extends ProtoEdit {
   // ===================================================================
   _protoBuildToolbar(configArray) {
     super.buildToolbar(configArray);
+
+    // Attach synchronously – toolbar HTML is now in DOM
+    if (this.autocomplete && typeof this.autocomplete.attachDropdown === 'function') {
+      this.autocomplete.attachDropdown();
+    }
   }
 
   // ===================================================================

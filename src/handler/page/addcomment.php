@@ -7,6 +7,13 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
+	// Autocomplete endpoint
+	if (isset($_GET['_autocomplete']) && $_GET['_autocomplete'])
+	{
+		include __DIR__ . '/_autocomplete.php';
+		return;
+	}
+
 	// === AJAX LIVE PREVIEW (for WikiEdit side-by-side pane) ===
 	if (isset($_POST['ajax_preview']) && $_POST['ajax_preview'] === '1')
 	{

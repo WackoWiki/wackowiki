@@ -108,12 +108,6 @@ $tpl->mode = match (@$user['dark_mode']){
 if ($this->method == 'edit')
 {
 	$tpl->edit_lang	= $this->user_lang;
-
-	// Autocomplete, enabled only for registered users who turn it on.
-	if (@$user['autocomplete'])
-	{
-		$tpl->edit_ac = true;
-	}
 }
 
 $tpl->additions = $this->get_html_addition('header');

@@ -1,226 +1,153 @@
 <?php
+/**
+ * Autocomplete & Session Heartbeat Handler
+ *
+ * Endpoints:
+ *   - ?_autocomplete=1&q=...&ta_id=...  → page autocomplete (JSON)
+ *   - ?_autocomplete=1                  → session heartbeat (JSON)
+ */
 
 if (!defined('IN_WACKO'))
 {
 	exit;
 }
 
-// Parse & decode QUERY_STRING.
-function _parse_query_string()
-{
-	$get = [];
+/** @var \WackoWiki $this */
 
-	foreach ($_GET as $k => $v)
-	{
-		$k = _unescape($k);
-		$v = _unescape($v);
-		$get[$k] = $v;
-	}
-
-	$_GET = $get;
-}
-// Undo JS's escape() function.
-function _unescape($s)
+// Clean output buffers
+while (ob_get_level() > 0)
 {
-	return preg_replace_callback(
-		'/% (?: u([A-F\d]{1,4}) | ([A-F\d]{1,2})) /sxi',
-		'_unescape_callback',
-		$s
-	);
+	ob_end_clean();
 }
 
-// Inplace entity replacement.
-function _unescape_callback($p)
+// Heartbeat: no query params → lightweight keep-alive
+if (!isset($_GET['q']) || !isset($_GET['ta_id']))
 {
-	if ($p[1])
-	{
-		$u = pack('n', $dec=hexdec($p[1]));
-		$c = @iconv('UCS-2BE', 'UTF-8', $u);
+	header('Content-Type: application/json; charset=utf-8');
+	header('Cache-Control: no-store, max-age=0');
+	header('X-Content-Type-Options: nosniff');
+	echo json_encode(
+		[
+			'ok'   => true,
+			'time' => time(),
+		],
+		JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+		);
+	exit;
+}
 
-		if (!strlen($c) && $SCRIPT_DECODE_MODE == 'entities')
-		{
-			$c = '&#' . $dec . ';';
-		}
+// --- Autocomplete -------------------------------------------------------
+
+$q        = (string)($_GET['q'] ?? '');
+$ta_id    = (string)($_GET['ta_id'] ?? '');
+$limit    = max(1, min((int)($_GET['limit'] ?? 10), 50));
+
+// Normalize query (strip leading slash for "unwrapped" variant)
+$q_trimmed = ltrim($q, '/');
+
+$db       = $this->db;
+$prefix   = $this->prefix;
+$hide_locked = (bool)($db->hide_locked ?? false);
+$current_tag = $this->page['tag'] ?? '';
+
+// Single UNION query – fetch candidate tags (access check done in PHP via has_access())
+$sql = '
+	SELECT DISTINCT p.tag, p.page_id
+	FROM (
+		SELECT tag, page_id FROM ' . $prefix . 'page
+		WHERE tag LIKE ' . $db->q($q_trimmed . '%') . '
+		  AND comment_on_id = 0
+
+		UNION
+
+		SELECT tag, page_id FROM ' . $prefix . 'page
+		WHERE tag LIKE ' . $db->q($q . '%') . '
+		  AND comment_on_id = 0
+	) p
+	ORDER BY p.tag COLLATE ' . $db->collate() . ' ASC
+	LIMIT ' . (int)$limit
+	;
+
+	$rows = $db->load_all($sql);
+
+	if (!$rows)
+	{
+		$results = [];
 	}
 	else
 	{
-		if ($p[2] === '26' && $SCRIPT_DECODE_MODE == 'entities')
+		// Context prefixes for relative link rendering
+		$local_tag     = $current_tag !== '' ? $current_tag . '/' : '';
+		$context_parts = $current_tag !== '' ? explode('/', $current_tag) : [];
+		array_pop($context_parts);
+		$local_context = $context_parts ? implode('/', $context_parts) . '/' : '/';
+
+		$results = [];
+		$count   = 0;
+
+		foreach ($rows as $row)
 		{
-			$c = '&amp;';
-		}
-		else
-		{
-			$c = chr(hexdec($p[2]));
-		}
-	}
+			$tag       = $row['tag'];
+			$page_id   = (int)$row['page_id'];
+			$is_local  = str_starts_with($tag, $local_tag);
 
-	return $c;
-}
-
-// Getting a query
-_parse_query_string();
-
-if(isset($_GET['q']) && isset($_GET['ta_id']))
-{
-	// Working for autocomplete
-	$q		= $_GET['q'];
-	$ta_id	= $_GET['ta_id'];
-}
-else
-{
-	// Any answer to restart session counter
-	echo '1';
-	die();
-}
-
-// 1. unwrap
-$q		= utf8_ltrim($q, '/');
-$tag1	= $this->unwrap_link($q);
-$tag2	= $q;
-
-// 2. going to DB two times
-$limit	= 10;
-
-$pages1 = $this->db->load_all(
-	'SELECT page_id, tag ' .
-	'FROM ' . $this->prefix . 'page ' .
-	'WHERE tag LIKE ' . $this->db->q($tag1 . '%') . ' ' .
-		'AND comment_on_id = 0 ' .
-	'ORDER BY tag COLLATE ' . $this->db->collate() . ' ASC ' .
-	'LIMIT ' . (int) $limit);
-
-$pages2 = $this->db->load_all(
-	'SELECT page_id, tag ' .
-	'FROM ' . $this->prefix . 'page ' .
-	'WHERE tag LIKE ' . $this->db->q($tag2 . '%') . ' ' .
-		'AND comment_on_id = 0 ' .
-	'ORDER BY tag COLLATE ' . $this->db->collate() . ' ASC ' .
-	'LIMIT ' . (int) $limit);
-
-// 3. stripping by rights
-$pages	= [];
-$cnt	= 0;
-
-if ($pages1)
-{
-	foreach ($pages1 as $page)
-	{
-		if ($this->db->hide_locked)
-		{
-			$access = $this->has_access('read', $page['page_id']);
-		}
-		else
-		{
-			$access = true;
-		}
-
-		if ($access)
-		{
-			$pages[$page['tag']]			= $page;
-			$pages[$page['tag']]['>local']	= true;
-			$cnt++;
-		}
-
-		if ($cnt >= $limit) break;
-	}
-}
-
-if ($pages2)
-{
-	foreach ($pages2 as $page)
-	{
-		if ($this->db->hide_locked)
-		{
-			$access = $this->has_access('read', $page['page_id']);
-		}
-		else
-		{
-			$access = true;
-		}
-
-		if ($access)
-		{
-			if (!isset($pages[$page['tag']]))
+			// Access check – uses standard WackoWiki has_access() (handles ACL, groups, owner, admin)
+			if ($hide_locked)
 			{
-				$pages[$page['tag']]			= $page;
-				$pages[$page['tag']]['>local']	= false;
-				$cnt++;
-			}
-		}
-
-		if ($cnt >= $limit) break;
-	}
-}
-
-// counting context
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-$local_tag_sliced		= explode('/', $this->page['tag']);
-$local_tag				= $this->page['tag'] . '/';
-$local_context_sliced	= array_slice($local_tag_sliced, 0, count($local_tag_sliced) - 1);
-$local_context			= implode('/', $local_context_sliced) . '/';
-
-// preparing to output
-$out = [];
-
-foreach ($pages as $page)
-{
-	if ($page['>local'])
-	{
-		$tag_sliced = explode('/', $page['tag']);
-
-		if (mb_strpos($page['tag'], $local_tag) === 0)
-		{
-			$out[] = '!/' . implode('/', array_slice($tag_sliced, count($local_tag_sliced)));
-		}
-		else
-		{
-			if (mb_strpos( $page['tag'], $local_context ) === 0)
-			{
-				$out[] = implode('/', array_slice($tag_sliced, count($local_context_sliced)));
+				$access = $this->has_access('read', $page_id);
 			}
 			else
 			{
-				if ($local_context == '/')
-				{
-					$out[] = $page['tag'];
-				}
-				else
-				{
-					$out[] = '/' . $page['tag'];
-				}
+				$access = true;
+			}
+
+			if (!$access)
+			{
+				continue;
+			}
+
+			// Build display tag (relative paths for local pages)
+			if ($is_local && str_starts_with($tag, $local_tag))
+			{
+				$display = '!/' . substr($tag, strlen($local_tag));
+			}
+			else if ($is_local && str_starts_with($tag, $local_context))
+			{
+				$display = substr($tag, strlen($local_context));
+			}
+			else if ($is_local)
+			{
+				$display = $local_context === '/' ? $tag : '/' . $tag;
+			}
+			else
+			{
+				$display = $local_context === '/' ? $tag : '/' . $tag;
+			}
+
+			$results[] = [
+				'tag'   => $display,
+				'local' => $is_local,
+			];
+
+			$count++;
+			if ($count >= $limit)
+			{
+				break;
 			}
 		}
 	}
-	else
-	{
-		if ($local_context == '/')
-		{
-			$out[] = $page['tag'];
-		}
-		else
-		{
-			$out[] = '/' . $page['tag'];
-		}
-	}
-}
 
-$found = false;
+	// JSON response
+	header('Content-Type: application/json; charset=utf-8');
+	header('Cache-Control: no-store, max-age=0');
+	header('X-Content-Type-Options: nosniff');
 
-if (!empty($out))
-{
-	$found = $out[0];
-}
-
-ob_end_clean();
-
-if (!headers_sent())
-{
-	header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1') . ' 200 Ok');
-	# header('Content-type: text/javascript; charset=utf-8');
-	header('Last-Modified: ' . Ut::http_date());
-}
-
-echo Ut::html($ta_id);
-echo '~~~';
-echo implode('~~~', $out);
-die();
+	echo json_encode(
+		[
+			'ta_id'       => $ta_id,
+			'best_match'  => $results[0] ?? null,
+			'suggestions' => $results,
+		],
+		JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
+		);
+	exit;

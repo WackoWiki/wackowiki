@@ -125,13 +125,6 @@ if ($this->has_access('read'))
 		// display comment form
 		if ($this->has_access('comment'))
 		{
-			// invoke autocomplete if needed
-			if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
-			{
-				include __DIR__ . '/_autocomplete.php';
-				return;
-			}
-
 			$tpl->enter('f_');
 
 			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/wikiedit.css">');
@@ -223,11 +216,7 @@ if ($this->has_access('read'))
 			// WikiEdit
 			if ($user)
 			{
-				if ($user['autocomplete'])
-				{
-					$tpl->ac			= true;
-					$tpl->autocomplete	= true;
-				}
+				$tpl->autocomplete = $user['autocomplete'] ? 1 : 0;
 
 				// session heartbeat timeout = wiki session timeout - 40 second
 				$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;

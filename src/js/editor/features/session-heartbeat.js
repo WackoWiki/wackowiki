@@ -48,16 +48,21 @@ export function setupHeartbeat(editor) {
     state.abortController = new AbortController();
 
     try {
+      // Dedicated heartbeat endpoint (no q/ta_id → returns {ok: true})
       const url = `${window.location.pathname}?_autocomplete=1&rnd=${Date.now()}`;
       const response = await fetch(url, {
         method: 'GET',
         cache: 'no-cache',
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' },
         credentials: 'same-origin',
         signal: state.abortController.signal
       });
 
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      // Optionally validate JSON response
+      const data = await response.json();
+      if (data.ok !== true) throw new Error('Invalid heartbeat response');
 
       // Reset failure count on success
       state.failCount = 0;

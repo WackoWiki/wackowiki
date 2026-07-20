@@ -15,6 +15,7 @@ import './editor/features/markup-conversion.js';
 import './editor/features/session-heartbeat.js';
 import './editor/features/modals.js';
 import './editor/features/ui-features.js';
+import './editor/features/autocomplete.js';
 
 // Toolbar modules
 import './editor/toolbar/toolbar-builder.js';

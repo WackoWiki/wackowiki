@@ -66,9 +66,6 @@ _common include file for themes
 		<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
 		<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' lang | e ' ].js"[ ' db: csp_nonce ' ]></script>
 		<script type="module" src="[ ' db: base_path ' ]js/main.js"[ ' db: csp_nonce ' ]></script>
-		[= ac _ =
-			<script src="[ ' db: base_path ' ]js/editor/autocomplete.js"[ ' db: csp_nonce ' ]></script>
-		=]
 	=]
 	[ ' additions ' ]
 </head>

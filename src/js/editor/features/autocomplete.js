@@ -1,11 +1,13 @@
+// src/js/editor/features/autocomplete.js
+
 /*!
- * AutoComplete for WikiEdit (ES6)
- *
- * Licensed BSD © Kuso Mendokusee, WackoWiki Team
+ * AutoComplete for WikiEdit (ESM)
+ * Fixed: race condition on first response, robust dropdown rendering
  */
 
-class AutoComplete {
-  // ─── private fields ──────────────────────────────────────────────
+import logger from '../../utils/logger.js';
+
+export class AutoComplete {
   #debounceTimer = null;
   #abortController = null;
 
@@ -15,21 +17,18 @@ class AutoComplete {
   #dropdownEl  = null;
   #selectedIndex = -1;
 
-  // bound handler references – created once in the constructor so that
-  // the *exact same* function objects can be added **and** removed.
   #boundButtonClick       = null;
   #boundResetClick        = null;
   #boundDropdownClick     = null;
   #boundDropdownMouseover = null;
 
-  // ─── constructor ────────────────────────────────────────────────
-  constructor(wikiedit, handler) {
+  constructor(wikiedit, handlerUrl) {
     this.wikiedit = wikiedit;
-    this.handler  = handler;
+    this.handler  = handlerUrl;
 
     wikiedit.autocomplete = this;
 
-    this.interval = 500;
+    this.interval = 150;
     this.request_pattern = null;
     this.found_pattern   = null;
     this.found_patterns  = [];
@@ -42,38 +41,41 @@ class AutoComplete {
     this.regexp_LinkStrict   = /^([(\[]){2}.{2,}/;
     this.regexp_LinkSubpage  = /^!\/.{2,}/;
 
-    // create the bound versions once
     this.#boundButtonClick       = this.#onButtonClick.bind(this);
     this.#boundResetClick        = this.#onResetClick.bind(this);
     this.#boundDropdownClick     = this.#handleDropdownClick.bind(this);
     this.#boundDropdownMouseover = this.#handleDropdownMouseover.bind(this);
   }
 
-  // ─── public API ──────────────────────────────────────────────────
-  /** Called by WikiEdit after the toolbar has been injected into the DOM */
+  // ─── Public API ────────────────────────────────────────────────
+
+  /** Call once after the toolbar HTML exists in the DOM */
   attachDropdown() {
+    if (this.#dropdownEl) return; // already attached
+
     this.#containerLi = document.getElementById(`${this.id}_li`);
     this.#buttonEl    = document.getElementById(this.id);
     this.#resetLi     = document.getElementById(`${this.id}_reset`);
     this.#dropdownEl  = document.getElementById(`${this.id}_dropdown`);
 
-    // Force initial muted state
-    if (this.#containerLi) this.#containerLi.style.display = 'none';
-
-    if (this.#buttonEl) {
-      this.#buttonEl.addEventListener('click', this.#boundButtonClick);
+    if (!this.#containerLi || !this.#buttonEl || !this.#dropdownEl) {
+      logger.debug('[AutoComplete] Dropdown elements not yet in DOM');
+      return;
     }
 
+    this.#containerLi.style.display = 'none';
+
+    this.#buttonEl.addEventListener('click', this.#boundButtonClick);
     if (this.#resetLi) {
       this.#resetLi.addEventListener('click', this.#boundResetClick);
     }
-    if (this.#dropdownEl) {
-      this.#dropdownEl.addEventListener('click',     this.#boundDropdownClick);
-      this.#dropdownEl.addEventListener('mouseover', this.#boundDropdownMouseover);
-    }
+    this.#dropdownEl.addEventListener('click',     this.#boundDropdownClick);
+    this.#dropdownEl.addEventListener('mouseover', this.#boundDropdownMouseover);
+
+    logger.debug('[AutoComplete] Dropdown attached');
   }
 
-  /** Complete teardown – called from WikiEdit.destroy() */
+  /** Full teardown */
   destroy() {
     clearTimeout(this.#debounceTimer);
     this.#debounceTimer = null;
@@ -92,12 +94,12 @@ class AutoComplete {
       this.#buttonEl.removeEventListener('click', this.#boundButtonClick);
     }
 
-    // drop references to DOM nodes – helps the GC
     this.#containerLi = this.#buttonEl = this.#resetLi = this.#dropdownEl = null;
     this.#selectedIndex = -1;
   }
 
-  // ─── toolbar button markup ───────────────────────────────────────
+  // ─── Toolbar Markup ────────────────────────────────────────────
+
   addButton() {
     const we = this.wikiedit;
     this.id = `autocomplete_${we.id}`;
@@ -121,7 +123,8 @@ class AutoComplete {
     we.addButton('customhtml', html);
   }
 
-  // ─── small helpers ──────────────────────────────────────────────
+  // ─── Helpers ───────────────────────────────────────────────────
+
   reset() {
     this.request_pattern = null;
     this.found_pattern   = null;
@@ -130,12 +133,10 @@ class AutoComplete {
     this.visualState('hidden');
   }
 
-  // Insert the found suggestion into the textarea
   insertFound() {
     if (!this.request_pattern) return;
 
     this.visualState('hidden');
-
     this.wikiedit.area.focus();
     this.wikiedit.getDefines();
 
@@ -162,6 +163,10 @@ class AutoComplete {
   }
 
   #renderDropdown() {
+    // Lazy-attach if needed (first response may arrive before toolbar paint)
+    if (!this.#dropdownEl) {
+      this.attachDropdown();
+    }
     if (!this.#dropdownEl || this.found_patterns.length === 0) {
       this.#hideDropdown();
       return;
@@ -186,7 +191,8 @@ class AutoComplete {
     this.#selectedIndex = -1;
   }
 
-  // ─── bound event handlers (used for add/remove) ──────────────────
+  // ─── Bound Event Handlers ──────────────────────────────────────
+
   #onButtonClick() {
     if (this.request_pattern) this.insertFound();
   }
@@ -215,13 +221,14 @@ class AutoComplete {
     }
   }
 
-  // ─── keyboard handling ───────────────────────────────────────────
+  // ─── Keyboard Handling ─────────────────────────────────────────
+
   keyDown(e) {
     const key = e.key;
     const shift = e.shiftKey;
     const dropdownVisible = this.#dropdownEl?.style.display === 'block';
 
-    // Arrow / Enter / Escape when a suggestion is active
+    // Arrow / Enter / Escape when suggestions active
     if (this.found_pattern !== null) {
       if (dropdownVisible) {
         switch (key) {
@@ -242,7 +249,6 @@ class AutoComplete {
         }
       }
 
-      // Default behavior when no dropdown or no selection
       switch (key) {
         case 'Enter':
           if (shift) { this.reset(); return false; }
@@ -262,7 +268,7 @@ class AutoComplete {
       return true;
     }
 
-    // Normal typing of wiki-link characters (modernised condition)
+    // Wiki-link character typed
     const isLinkKey = !!this.request_pattern ||
                       (key.length === 1 && this.regexp_LinkLetter.test(key));
     if (isLinkKey) {
@@ -275,7 +281,8 @@ class AutoComplete {
     return false;
   }
 
-  // ─── core autocomplete logic ─────────────────────────────────────
+  // ─── Core Autocomplete Logic ───────────────────────────────────
+
   async tryComplete(magic) {
     if (!this.request_pattern) { this.reset(); return; }
     const pat = this.checkPattern(this.getPattern(), magic);
@@ -287,26 +294,36 @@ class AutoComplete {
   }
 
   async requestPattern(pattern) {
-    // Cancel any previous pending request
     this.#abortController?.abort();
     this.#abortController = new AbortController();
-    const sep = this.handler.includes('?') ? '&' : '?';
-    const href = `${this.handler}${sep}q=${encodeURIComponent(pattern)}&ta_id=${encodeURIComponent(this.wikiedit.area.id)}&_autocomplete=1&rnd=${Math.random()}`;
+
+    const url = new URL(this.handler, window.location.origin);
+    url.searchParams.set('q', pattern);
+    url.searchParams.set('ta_id', this.wikiedit.area.id);
+    url.searchParams.set('limit', '10');
+    url.searchParams.set('_autocomplete', '1');
 
     try {
-      const resp = await fetch(href, { signal: this.#abortController.signal });
-      if (!resp.ok) throw new Error('Network error');
-      const txt = await resp.text();
-      const raw = txt.split('~~~').map(s => s.trim()).filter(Boolean);
-      let best = null, suggestions = [];
-      if (raw.length) {
-        if (raw[0] === 'postText') { best = raw[1] || null; suggestions = raw.slice(2); }
-        else { best = raw[0]; suggestions = raw.slice(1); }
-      }
+      const resp = await fetch(url, {
+        signal: this.#abortController.signal,
+        credentials: 'same-origin',
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+      const data = await resp.json();
+
+      // New JSON format: { ta_id, best_match: {tag, local}, suggestions: [{tag, local}, ...] }
+      const best = data.best_match?.tag ?? null;
+      const suggestions = Array.isArray(data.suggestions)
+        ? data.suggestions.map(s => s.tag).filter(Boolean)
+        : [];
+
       this.finishComplete(best, suggestions);
     } catch (err) {
       if (err.name === 'AbortError') return;
-      Log.warn('Autocomplete request failed:', err);
+      logger.warn('Autocomplete request failed:', err);
       this.finishComplete(null, []);
     }
   }
@@ -315,10 +332,13 @@ class AutoComplete {
     this.found_pattern = best || null;
     this.found_patterns = all || [];
     this.visualState(this.found_pattern ? 'found' : '404');
+
     if (this.found_pattern && this.found_patterns.length) {
       this.#selectedIndex = 0;
       this.#renderDropdown();
-    } else this.#hideDropdown();
+    } else {
+      this.#hideDropdown();
+    }
   }
 
   checkPattern(pat, magic) {
@@ -330,7 +350,6 @@ class AutoComplete {
     return false;
   }
 
-  // Extract the current partial wiki link from the caret position
   getPattern() {
     const ta = this.wikiedit.area;
     let start = ta.selectionStart, end = ta.selectionEnd;
@@ -344,23 +363,32 @@ class AutoComplete {
   }
 
   visualState(state) {
-    if (!this.#containerLi || !this.#buttonEl) return;
+    // Lazy-attach if elements missing (first response race)
+    if (!this.#containerLi || !this.#buttonEl) {
+      this.attachDropdown();
+    }
+    if (!this.#containerLi || !this.#buttonEl) return; // still not ready
+
     const li = this.#containerLi, btn = this.#buttonEl, rst = this.#resetLi;
     switch (state) {
       case 'seeking':
-        li.style.display = ''; rst.style.display = '';
-        btn.innerHTML = '…'; btn.className = 'we-autocomplete-btn seeking';
+        li.style.display = ''; if (rst) rst.style.display = '';
+        btn.textContent = '…'; btn.className = 'we-autocomplete-btn seeking';
         this.#hideDropdown(); break;
       case 'found':
-        li.style.display = ''; rst.style.display = '';
-        btn.innerHTML = this.found_pattern; btn.className = 'we-autocomplete-btn found'; break;
+        li.style.display = ''; if (rst) rst.style.display = '';
+        btn.textContent = this.found_pattern; btn.className = 'we-autocomplete-btn found'; break;
       case '404':
-        li.style.display = ''; rst.style.display = '';
-        btn.innerHTML = this.request_pattern; btn.className = 'we-autocomplete-btn notfound';
+        li.style.display = ''; if (rst) rst.style.display = '';
+        btn.textContent = this.request_pattern; btn.className = 'we-autocomplete-btn notfound';
         this.#hideDropdown(); break;
       case 'hidden':
-        li.style.display = 'none'; rst.style.display = 'none';
+        li.style.display = 'none'; if (rst) rst.style.display = 'none';
         this.#hideDropdown(); btn.className = 'we-autocomplete-btn'; break;
     }
   }
+}
+
+export function createAutoComplete(wikiedit, handlerUrl) {
+  return new AutoComplete(wikiedit, handlerUrl);
 }

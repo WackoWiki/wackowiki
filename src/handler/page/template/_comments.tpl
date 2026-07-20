@@ -71,9 +71,6 @@
 						<script src="[ ' db: base_path ' ]js/core/helpers.js"[ ' db: csp_nonce ' ]></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"[ ' db: csp_nonce ' ]></script>
 						<script type="module" src="[ ' db: base_path ' ]js/main.js"[ ' db: csp_nonce ' ]></script>
-						[= ac _ =
-							<script src="[ ' db: base_path ' ]js/editor/autocomplete.js"[ ' db: csp_nonce ' ]></script>
-						=]
 
 						<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
 						<label for="addcomment_title">[ ' _t: AddCommentTitle ' ]</label><br>
@@ -93,6 +90,7 @@
 							data-can-upload="[ ' upload ' ]"
 							data-upload-nonce="[ ' upnonce ' ]"
 							data-preview-nonce="[ ' pvnonce ' ]"
+							data-autocomplete="[ ' autocomplete ' ]"
 							required>[ ' payload | pre ' ]</textarea>
 						<script[ ' db: csp_nonce ' ]>
 						document.addEventListener('DOMContentLoaded', () => {
@@ -101,11 +99,6 @@
 								appRoot: '[ ' db: base_path ' ]',
 								// other options...
 							});
-							[= autocomplete _ =
-								if (AutoComplete) {
-									new AutoComplete(wE, "[ ' href: show ' ]");
-								}
-							=]
 							wE.init('addcomment', '[ ' wikiedit ' ]');
 						});
 						</script>
