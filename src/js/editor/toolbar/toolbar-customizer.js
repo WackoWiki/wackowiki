@@ -80,20 +80,20 @@ class ToolbarCustomizer {
     }
 
     const html = `
-	        <div id="we-toolbar-modal">
-	            <div>
-	                <header>
-	                    <h3>${t('CustomizeToolbar') || 'Customize WikiEdit Toolbar'}</h3>
-	                    <p class="modal-description">${t('DragToReorder') || 'Drag to reorder • Uncheck to hide buttons'}</p>
-	                </header>
-	                <div id="we-modal-content"></div>
-	                <footer>
-	                    <button type="button" class="we-modal-save">${t('SaveChanges') || 'Save Changes'}</button>
-	                    <button type="button" class="we-modal-reset">${t('ResetToDefault') || 'Reset to Default'}</button>
-	                    <button type="button" class="we-modal-cancel">${t('Cancel') || 'Cancel'}</button>
-	                </footer>
-	            </div>
-	        </div>`;
+        <div id="we-toolbar-modal">
+            <div>
+                <header>
+                    <h3>${t('CustomizeToolbar') || 'Customize WikiEdit Toolbar'}</h3>
+                    <p class="modal-description">${t('DragToReorder') || 'Drag to reorder • Uncheck to hide buttons'}</p>
+                </header>
+                <div id="we-modal-content"></div>
+                <footer>
+                    <button type="button" class="we-modal-save">${t('SaveChanges') || 'Save Changes'}</button>
+                    <button type="button" class="we-modal-reset">${t('ResetToDefault') || 'Reset to Default'}</button>
+                    <button type="button" class="we-modal-cancel">${t('Cancel') || 'Cancel'}</button>
+                </footer>
+            </div>
+        </div>`;
 
     const wrapper = document.createElement('div');
     wrapper.innerHTML = html;
@@ -250,6 +250,13 @@ class ToolbarCustomizer {
     }
   }
 }
+
+// -----------------------------------------------------------------
+// GLOBAL CLEAN‑UP – close the modal if the user navigates away
+// -----------------------------------------------------------------
+window.addEventListener('beforeunload', () => {
+  ToolbarCustomizer.close();
+});
 
 // Global access
 window.ToolbarCustomizer = ToolbarCustomizer;

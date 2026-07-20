@@ -54,8 +54,8 @@ export class WikiEdit extends ProtoEdit {
     this.#state = new EditorState();
 
     this.isRegisteredUser = !!options.isRegisteredUser;
-	this.appRoot = options.appRoot || '';
-	initStorage(this.appRoot);
+    this.appRoot = options.appRoot || '';
+    initStorage(this.appRoot);
 
     this.enabled = true;
     this.manual = 'https://wackowiki.org/doc/';
@@ -79,6 +79,12 @@ export class WikiEdit extends ProtoEdit {
     this.autosaveDelay = 8000;
     this.isSubmitting = false;
     this.cf_modified = false;
+
+    // -----------------------------------------------------------------
+    // EARLY INITIALISATION – guarantees the array exists even if a
+    //     later feature throws during its setup.
+    // -----------------------------------------------------------------
+    this._cleanup = [];
   }
 
   // ===================================================================
@@ -219,7 +225,6 @@ export class WikiEdit extends ProtoEdit {
     setupUIFeatures(this);
 
     startPeriodicNonceRefresh(this);
-    this._cleanup = this._cleanup || [];
     this._cleanup.push(() => stopPeriodicNonceRefresh(this));
 
     // Post-setup
@@ -419,11 +424,6 @@ export class WikiEdit extends ProtoEdit {
     return true;
   }
 
-  #handleBeforeInput(e) {
-    // Native beforeinput is now handled in init()
-    // This method kept for compatibility but does nothing
-  }
-
   #debouncePushState() {
     const t = this.area;
     if (!t) return;
@@ -441,7 +441,6 @@ export class WikiEdit extends ProtoEdit {
       this.#pushTimer = null;
     }, 650);
   }
-
 
   // ==================== Content API (now using state) ====================
 
@@ -577,64 +576,36 @@ export class WikiEdit extends ProtoEdit {
   }
 
   getRelativeTime(date) {
-    return getRelativeTime(date, window.t); // or inject t
+    return getRelativeTime(date, window.t);
   }
 
-  /**
-     * Clean up all resources, event listeners, subscriptions, and feature modules
-     * when the editor instance is destroyed. Prevents memory leaks.
-     */
+  // -----------------------------------------------------------------
+  //   FULL DESTROY – runs all registered clean‑ups, tears down
+  //   EditorState, Autocomplete, global refs, etc. 
+  // -----------------------------------------------------------------
   destroy() {
     logger.info(`Destroying WikiEdit instance: ${this.id || 'unknown'}`);
 
+    // 1.  Run every cleanup that features pushed onto this._cleanup
+    this._cleanup?.forEach(fn => {
+      try { fn(); } catch (e) { logger.warn('cleanup error', e); }
+    });
+    this._cleanup = [];
+
+    // 2.  EditorState subscription
     if (typeof this.#undoStateUnsubscribe === 'function') {
       this.#undoStateUnsubscribe();
       this.#undoStateUnsubscribe = null;
     }
 
-    // Clear timer
-    if (this.#pushTimer) {
-      clearTimeout(this.#pushTimer);
-      this.#pushTimer = null;
-    }
+    // 3.  Autocomplete
+    this.autocomplete?.destroy?.();
 
-    // Clear stacks
-    this.#undoStack = [];
-    this.#redoStack = [];
+    // 4.  Global helpers that keep a reference to *this* instance
+    delete window.weSave;
+    if (this.area) delete this.area.wikiEditInstance;
 
-    // Remove beforeinput listener
-    if (this._beforeInputHandler) {
-      this.area?.removeEventListener('beforeinput', this._beforeInputHandler);
-    }
-
-    // Remove public methods that were bound
-    delete this.pushState;
-    delete this.undo;
-    delete this.redo;
-    delete this.validateState;
-    delete this._debouncePushState;
-
-    // Call feature cleanups in reverse order of setup (best practice)
-    // Feature cleanups in reverse setup order
-    if (typeof this._cleanupUndoRedo === 'function') this._cleanupUndoRedo();
-    if (typeof this._cleanupAutosave === 'function') this._cleanupAutosave();
-    if (typeof this._cleanupHeartbeat === 'function') this._cleanupHeartbeat();
-    if (typeof this._cleanupLivePreview === 'function') this._cleanupLivePreview();
-    if (typeof this._cleanupKeyboardShortcuts === 'function') this._cleanupKeyboardShortcuts();
-    if (typeof this._cleanupMediaUpload === 'function') this._cleanupMediaUpload();
-    if (typeof this._cleanupDarkZenMode === 'function') this._cleanupDarkZenMode();
-    if (typeof this._cleanupModals === 'function') this._cleanupModals();
-    if (typeof this._cleanupUIFeatures === 'function') this._cleanupUIFeatures();
-    if (typeof this._cleanupSyntaxHighlight === 'function') this._cleanupSyntaxHighlight();
-
-    // Fallback: Clean EditorState subscription if not already handled
-    if (typeof this._undoStateUnsubscribe === 'function') {
-      this._undoStateUnsubscribe();
-      this._undoStateUnsubscribe = null;
-      logger.debug('EditorState subscription cleaned up (fallback)');
-    }
-
-    // Remove textarea event listeners added in init()
+    // 5.  Remove listeners that were attached directly on the textarea
     const ta = this.area;
     if (ta) {
       if (typeof this._inputHandler === 'function') {
@@ -644,31 +615,25 @@ export class WikiEdit extends ProtoEdit {
         ta.removeEventListener('select', this._selectionHandler);
         ta.removeEventListener('keydown', this._selectionHandler);
       }
-
-      delete ta.wikiEditInstance;
-      logger.debug('Textarea event listeners removed');
+      if (this.#beforeInputHandler) {
+        ta.removeEventListener('beforeinput', this.#beforeInputHandler);
+      }
     }
 
-    // Clear core references
+    // 6.  Clear heavy internal structures
+    this.#undoStack = [];
+    this.#redoStack = [];
+    if (this.#pushTimer) {
+      clearTimeout(this.#pushTimer);
+      this.#pushTimer = null;
+    }
+
+    // 7.  Null out references to help the GC
     this.area = null;
     this.#state = null;
+    this.autocomplete = null;
 
-    // Clear major arrays and timers
-    if (this.undoStack) this.undoStack = [];
-    if (this.redoStack) this.redoStack = [];
-    if (this.pushTimer) {
-      clearTimeout(this.pushTimer);
-      this.pushTimer = null;
-    }
-
-    // Nonce Refresh Cleanup
-    if (this._cleanup && Array.isArray(this._cleanup)) {
-      this._cleanup.forEach(fn => {
-        if (typeof fn === 'function') fn();
-      });
-    }
-
-    // Call parent destroy if it exists
+    // 8.  Parent cleanup (ProtoEdit) if it ever implements destroy()
     if (typeof super.destroy === 'function') {
       super.destroy();
     }

@@ -73,6 +73,19 @@ export class EditorState {
     return () => this.#listeners.delete(listener); // unsubscribe
   }
 
+  // -----------------------------------------------------------------
+  // full clean‑up so the EditorState can be GC‑ed
+  // -----------------------------------------------------------------
+  destroy() {
+    // Call every stored unsubscribe function (the functions returned by subscribe())
+    for (const unsub of this.#listeners) {
+      try { unsub(); } catch (e) { /* ignore */ }
+    }
+    this.#listeners.clear();
+    // Drop internal data – helps the GC
+    this.#content = '';
+  }
+
   #notify(change) {
     for (const listener of this.#listeners) {
       listener(change);

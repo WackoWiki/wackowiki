@@ -4,7 +4,7 @@
 
 /**
  * Initialize debug console window
- * Reads log data from data attribute (CSP-compliant)
+ * Reads log data from data attribute (CSP‑compliant)
  * Reuses existing window if already open
  */
 (function() {
@@ -222,10 +222,12 @@
       // Ensure window gets focus
       debugConsole.focus();
 
-      // Prevent the window from being garbage collected
+      // ----‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑-
+      // Keep a reference only while the popup lives – remove it on close.
+      // -----------------------------------------------------------------
       window._debugConsole = debugConsole;
 
-      // Clean up the data element from the main page
+      // Clean the data element from the main page
       debugDataEl.remove();
 
     } catch (e) {
@@ -239,37 +241,50 @@
     }
   }
 
-  // Check for element immediately
-  const existingEl = document.getElementById('debug-console-data');
-  if (existingEl) {
-    initDiagConsole(existingEl);
-  } else {
-    // Set up MutationObserver for late-loading elements
-    const observer = new MutationObserver(function(mutations) {
-      for (const mutation of mutations) {
-        for (const node of mutation.addedNodes) {
-          if (node.id === 'debug-console-data') {
-            initDiagConsole(node);
+  // -----------------------------------------------------------------
+  // 1.  GLOBAL CLEAN‑UP – runs on hard navigation / page unload
+  // -----------------------------------------------------------------
+  const observer = new MutationObserver(function(mutations) {
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        if (node.id === 'debug-console-data') {
+          initDiagConsole(node);
+          observer.disconnect();          // stop observing once we have it
+          return;
+        }
+        if (node.querySelector) {
+          const found = node.querySelector('#debug-console-data');
+          if (found) {
+            initDiagConsole(found);
             observer.disconnect();
             return;
           }
-          // Also check descendants
-          if (node.querySelector) {
-            const found = node.querySelector('#debug-console-data');
-            if (found) {
-              initDiagConsole(found);
-              observer.disconnect();
-              return;
-            }
-          }
         }
       }
-    });
+    }
+  });
 
-    // Start observing
-    observer.observe(document.documentElement, {
-      childList: true,
-      subtree: true
-    });
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+
+  // -----------------------------------------------------------------
+  // 2.  Ensure the popup reference and observer are released on unload
+  // -----------------------------------------------------------------
+  window.addEventListener('beforeunload', () => {
+    if (window._debugConsole) {
+      window._debugConsole.close();   // forces the popup to close
+      delete window._debugConsole;    // drop the global reference
+    }
+    observer.disconnect();            // stop the MutationObserver for good
+  });
+
+  // -----------------------------------------------------------------
+  // Immediate check – the element may already be in the DOM
+  // -----------------------------------------------------------------
+  const existingEl = document.getElementById('debug-console-data');
+  if (existingEl) {
+    initDiagConsole(existingEl);
   }
 })();
