@@ -1274,8 +1274,8 @@ td.file- {
 .file td.dt- .dt2-,
 .file td .file-tools a,
 .file td.size- .size2- {
-	font: 11px Tahoma;
-	color: #666;
+	font: 80%;
+	color: var(--ww-text-subtle);
 	padding: 5px;
 	white-space: nowrap;
 }
@@ -2054,7 +2054,7 @@ article.newsarticle:hover {
 }
 
 .news-info {
-	color: #666;
+	color: var(--ww-text-subtle);
 	margin: 4px 0 6px;
 }
 
