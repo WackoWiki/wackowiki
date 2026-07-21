@@ -3193,7 +3193,7 @@ table.diff td {
 }
 
 .diffdown-content a {
-	color: black;
+	color: var(--ww-text);
 	padding: 2px 6px;
 	text-decoration: none;
 	display: block;
