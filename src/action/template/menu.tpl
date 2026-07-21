@@ -41,7 +41,7 @@
 							<button type="submit" class="btn" name="update_menu">[ ' _t: BookmarkSaveChanges ' ]</button>
 						</td>
 						<td>
-							<button type="submit" class="btn" name="delete_menu_item">[ ' _t: BookmarkDeleteSelected ' ]</button>
+							<button type="submit" class="btn btn-danger" name="delete_menu_item">[ ' _t: BookmarkDeleteSelected ' ]</button>
 						</td>
 					</tr>
 				</tfoot>
