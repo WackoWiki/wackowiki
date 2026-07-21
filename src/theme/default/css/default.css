@@ -604,7 +604,7 @@ form input.submitinput {
 }
 
 .disabled {
-	background: #ededed;
+	background: var(--ww-bg-tertiary);;
 	border: 1px solid #cdcdcd;
 	font-style: italic;
 }
@@ -1611,7 +1611,7 @@ a:target {
 }
 
 .form-options {
-	background-color: #ededed; 
+	background-color: var(--ww-bg-tertiary);; 
 	border: 1px solid #cdcdcd; 
 	padding: 10px;
 }
@@ -2077,7 +2077,7 @@ article.newsarticle:hover {
 }
 
 table.formation {
-	background-color: #ededed;
+	background-color: var(--ww-bg-tertiary);;
 	border: 1px solid #cdcdcd;
 	border-spacing: 3px;
 	border-collapse: separate;
