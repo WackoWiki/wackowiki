@@ -10,6 +10,7 @@
 	--ww-text: #222;
 	--ww-text-secondary: #333;
 	--ww-text-tertiary: #444;
+	--ww-text-subtle: #555;
 	--ww-text-code: #444;
 	--ww-a-normal: #039;
 	--ww-a-hover: #b90022;
@@ -103,6 +104,7 @@
 	--ww-text: #ddd;
 	--ww-text-secondary: #c0c0c0;
 	--ww-text-tertiary: #c0c0c0;
+	--ww-text-subtle: #aaa;
 	--ww-text-code: #ffcc66;
 	--ww-a-normal: #5ab0ff;
 	--ww-a-hover: #ff6b6b;
@@ -154,6 +156,7 @@
 		--ww-text: #ddd;
 		--ww-text-secondary: #c0c0c0;
 		--ww-text-tertiary: #c0c0c0;
+		--ww-text-subtle: #aaa;
 		--ww-text-code: #ffcc66;
 		--ww-a-normal: #5ab0ff;
 		--ww-a-hover: #ff6b6b;
@@ -1082,7 +1085,7 @@ ol#comments ul ul ul {
 
 /* Change summary */
 .editnote {
-	color: #555;
+	color: var(--ww-text-subtle);
 }
 
 .review {
