@@ -5,10 +5,12 @@
 	--ww-bg-secondary: #fff;
 	--ww-bg-tertiary: #f0f0f0;
 	--ww-bg-accent: #f9f9f9;
-	--ww-bg-code: #f8f9fa;
+	--ww-bg-code: #ffc;
+	--ww-bg-code-block: #660;
 	--ww-text: #222;
 	--ww-text-secondary: #333;
 	--ww-text-tertiary: #444;
+	--ww-text-code: #444;
 	--ww-a-normal: #039;
 	--ww-a-hover: #b90022;
 	--ww-a-active: #ff0000;
@@ -61,6 +63,21 @@
 	--ww-box-shadow-color: rgba(0, 0, 0, 0.3);
 	--ww-focus-ring: #3daee9;
 
+	--btn-primary-bg: #3498db;
+	--btn-primary-hover: #2980b9;
+	--btn-success-bg: #27ae60;
+	--btn-success-hover: #219653;
+	--btn-warning-bg: #f39c12;
+	--btn-warning-hover: #e67e22;
+	--btn-danger-bg: #e74c3c;
+	--btn-danger-hover: #c0392b;
+	--btn-surface: #ffffff;
+	--btn-surface-hover: #f8f9fa;
+	--btn-text-muted: #7f8c8d;
+	--btn-border: #bdc3c7;
+	--btn-text-on-color: #ffffff;
+	--btn-shadow: rgba(0,0,0,0.1);
+
 	/* WikiEdit specific variables */
 	--we-textarea-bg: #fff;
 	--we-textarea-text: #222;
@@ -81,10 +98,12 @@
 	--ww-bg-secondary: #252526;
 	--ww-bg-tertiary: #343434;
 	--ww-bg-accent: #2a2a2a;
-	--ww-bg-code: #1e1e1e;
+	--ww-bg-code: #332;
+	--ww-bg-code-block: #1e1e1e;
 	--ww-text: #ddd;
 	--ww-text-secondary: #c0c0c0;
 	--ww-text-tertiary: #c0c0c0;
+	--ww-text-code: #ffcc66;
 	--ww-a-normal: #5ab0ff;
 	--ww-a-hover: #ff6b6b;
 	--ww-a-active: #ff4444;
@@ -102,6 +121,20 @@
 	--ww-box-shadow-color: rgba(255, 255, 255, 0.3);
 	--ww-focus-ring: #5ab0ff;
 
+	--btn-primary-bg: #60A5FA; 
+	--btn-primary-hover: #90caf9;
+	--btn-success-bg: #4ADE80;
+	--btn-success-hover: #66bb6a;
+	--btn-warning-bg: #FBBF24;
+	--btn-warning-hover: #FDE047;
+	--btn-danger-bg: #f87171;
+	--btn-danger-hover: #ef5350;
+	--btn-surface: #1E1E1E; 
+	--btn-surface-hover: #2d2d2d;
+	--btn-text-muted: #94a3b8;
+	--btn-border: #3f3f46;
+	--btn-shadow: rgba(0,0,0,0.3);
+
 	/* WikiEdit dark variables */
 	--we-textarea-bg: #1e1e1e;
 	--we-textarea-text: #ddd;
@@ -116,10 +149,12 @@
 		--ww-bg-secondary: #252526;
 		--ww-bg-tertiary: #343434;
 		--ww-bg-accent: #2a2a2a;
-		--ww-bg-code: #1e1e1e;
+		--ww-bg-code: #332;
+		--ww-bg-code-block: #1e1e1e;
 		--ww-text: #ddd;
 		--ww-text-secondary: #c0c0c0;
 		--ww-text-tertiary: #c0c0c0;
+		--ww-text-code: #ffcc66;
 		--ww-a-normal: #5ab0ff;
 		--ww-a-hover: #ff6b6b;
 		--ww-a-active: #ff4444;
@@ -136,6 +171,20 @@
 		--ww-shadow: 0 1px 3px rgba(0,0,0,.4);
 		--ww-box-shadow-color: rgba(255, 255, 255, 0.3);
 		--ww-focus-ring: #5ab0ff;
+
+		--btn-primary-bg: #60A5FA; 
+		--btn-primary-hover: #90caf9;
+		--btn-success-bg: #4ADE80;
+		--btn-success-hover: #66bb6a;
+		--btn-warning-bg: #FBBF24;
+		--btn-warning-hover: #FDE047;
+		--btn-danger-bg: #f87171;
+		--btn-danger-hover: #ef5350;
+		--btn-surface: #1E1E1E; 
+		--btn-surface-hover: #2d2d2d;
+		--btn-text-muted: #94a3b8;
+		--btn-border: #3f3f46;
+		--btn-shadow: rgba(0,0,0,0.3);
 
 		/* WikiEdit dark variables */
 		--we-textarea-bg: #1e1e1e;
@@ -199,19 +248,19 @@ input[type="file"]::file-selector-button {
 
 /* Primary: Filled blue (main action) */
 .btn-primary {
-	background-color: #3498db;
-	color: white;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	background-color: var(--btn-primary-bg);
+	color: var(--btn-text-on-color);
+	box-shadow: 0 2px 4px var(--btn-shadow);
 }
 .btn-primary:hover {
-	background-color: #2980b9;
+	background-color: var(--btn-primary-hover);
 	transform: translateY(-1px);
-	box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+	box-shadow: 0 4px 8px var(--btn-shadow);
 }
 
 /* Secondary: Outlined teal (alternative action) */
 .btn-secondary {
-	background-color: white;
+	background-color: var(--btn-surface);
 	color: #2ecc71;
 	border: 2px solid #2ecc71;
 }
@@ -222,59 +271,60 @@ input[type="file"]::file-selector-button {
 
 /* Cancel: Dashed gray border (neutral action) */
 .btn-cancel {
-	background-color: white;
-	color: #7f8c8d;
-	border: 2px dashed #bdc3c7;
+	background-color: var(--btn-surface);
+	color: var(--btn-text-muted);
+	border: 2px dashed var(--btn-border);
 }
 .btn-cancel:hover {
-	background-color: #f8f9fa;
+	background-color: var(--btn-surface-hover);
 	border-color: #95a5a6;
-}
-
-/* Danger: Filled red with sharp edges (destructive action) */
-.btn-danger {
-	background-color: #e74c3c;
-	color: white;
-	border-radius: 0;
-}
-.btn-danger:hover {
-	background-color: #c0392b;
-	transform: scale(1.02);
 }
 
 /* Default: Neutral style */
 .btn-default {
-  background-color: white;
-  color: #7f8c8d;
-  border: 2px solid #bdc3c7;
+  background-color: var(--btn-surface);
+  color: var(--btn-text-muted);
+  border: 2px solid var(--btn-border);
 }
 .btn-default:hover {
-  background-color: #f8f9fa;
+  background-color: var(--btn-surface-hover);
   border-color: #95a5a6;
 }
 
 /* Success: Filled green (positive action) */
 .btn-success {
-  background-color: #27ae60;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: var(--btn-success-bg);
+  color: var(--btn-text-on-color);
+  box-shadow: 0 2px 4px var(--btn-shadow);
 }
 .btn-success:hover {
-  background-color: #219653;
+  background-color: var(--btn-success-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px var(--btn-shadow);
 }
 
 /* Warning: Filled amber (caution action) */
 .btn-warning {
-  background-color: #f39c12;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: var(--btn-warning-bg);
+  /* Warning: Check contrast. If #FBBF24 is too light, change next line to #000000 */
+  color: var(--btn-text-on-color); 
+  box-shadow: 0 2px 4px var(--btn-shadow);
 }
 .btn-warning:hover {
-  background-color: #e67e22;
+  background-color: var(--btn-warning-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px var(--btn-shadow);
+}
+
+/* Danger: Filled red with sharp edges (destructive action) */
+.btn-danger {
+  background-color: var(--btn-danger-bg);
+  color: var(--btn-text-on-color);
+  border-radius: 0;
+}
+.btn-danger:hover {
+  background-color: var(--btn-danger-hover);
+  transform: scale(1.02);
 }
 
 /* Textareas */
@@ -1355,7 +1405,7 @@ td.file- {
 
 .upload-progress-fill {
 	height: 100%;
-	background: #007acc;	         /* blue progress */
+	background: #007acc;			/* blue progress */
 	width: 0%;
 	transition: width 0.4s ease-in-out;
 }

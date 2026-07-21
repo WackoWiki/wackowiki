@@ -711,14 +711,14 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	border-radius: .1rem;
 	overflow: hidden;
 	border: 1px solid var(--border-color, #e5e7eb);
-	background: var(--ww-bg-code);
+	background: var(--ww-bg-code-block);
 }
 
 .hl-code figcaption {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background: var(--ww-bg-code);
+	background: var(--ww-bg-code-block);
 	color: #e5e7eb;
 	padding: 6px 12px;
 	font-size: 0.85rem;
@@ -825,12 +825,12 @@ div.wrapper-content { padding: 10px 10px 25px 10px; }
 
 /* Fixed width text: SYNTAX ##monospace## */
 code {
-	color: #660; 
-	background: #ffc;
+	color: var(--ww-text-code); 
+	background: var(--ww-bg-code);
 	padding: 1px .25rem;
 	font-family: var(--ww-font-monospace);
 	font-size: var(--ww-font-size-sm);
-	border-radius: calc(.5rem - 4px);
+	border-radius: 2px;
 }
 
 /* underline text: SYNTAX __text__ */

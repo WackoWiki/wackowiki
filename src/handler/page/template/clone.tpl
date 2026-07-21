@@ -39,7 +39,7 @@ leave it as is for the memories
 	[' e editNote ']
 	[' doCluster ']
 	<br><br>
-	<button type="submit" name="submit">[' _t: CloneButton ']</button>
+	<button type="submit" class="btn btn-primary" name="submit">[' _t: CloneButton ']</button>
 	&nbsp;
 	<a href="[' show ']" class="btn-link"><button type="button" class="btn btn-cancel">[' _t: CancelButton | replace "\n" " " ']</button></a>
 </form>
