@@ -13,7 +13,11 @@ if ($db->ext_bad_behaviour)
 {
 	$adapter = new WackoWikiAdapter($db);
 	$bb = new BadBehaviour($adapter);
-	$bb->run();
+
+	if ($bb->run())
+	{
+		exit;
+	}
 }
 
 $http	= new Http($db);
