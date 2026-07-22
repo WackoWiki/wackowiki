@@ -786,20 +786,20 @@
         },
         {
             "name": "wackowiki/htmlsax3",
-            "version": "4.1.3",
+            "version": "4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WackoWiki/htmlsax3.git",
-                "reference": "43de3a555880385c48ed1de2c20c542fee0e3fb8"
+                "reference": "0fdbfe890dc8283f5d654f22aa7448b6a291a4c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WackoWiki/htmlsax3/zipball/43de3a555880385c48ed1de2c20c542fee0e3fb8",
-                "reference": "43de3a555880385c48ed1de2c20c542fee0e3fb8",
+                "url": "https://api.github.com/repos/WackoWiki/htmlsax3/zipball/0fdbfe890dc8283f5d654f22aa7448b6a291a4c6",
+                "reference": "0fdbfe890dc8283f5d654f22aa7448b6a291a4c6",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.5"
+                "php": "^8.3"
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.86",
@@ -853,7 +853,7 @@
                 "source": "https://github.com/WackoWiki/htmlsax3",
                 "wiki": "https://wackowiki.org/doc/Dev/Projects/SafeHTML"
             },
-            "time": "2026-06-14T06:19:58+00:00"
+            "time": "2026-07-22T18:53:12+00:00"
         },
         {
             "name": "wackowiki/safehtml",
