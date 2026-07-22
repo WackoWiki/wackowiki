@@ -12,6 +12,18 @@ class DbMysqli implements DbInterface
 
 	function __construct(&$config)
 	{
+		if (!extension_loaded('mysqli'))
+		{
+			if ($config->debug > 2)
+			{
+				die('Fatal Error: The MySQLi extension is not installed or enabled in PHP.');
+			}
+			else
+			{
+				die('Error loading WackoWiki DBAL: MySQLi extension missing.');
+			}
+		}
+
 		$this->config = & $config;
 
 		$options = match (DB_ERROR_MODE)
