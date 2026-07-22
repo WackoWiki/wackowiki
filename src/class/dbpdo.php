@@ -53,10 +53,18 @@ class DbPDO implements DbInterface
 
 			if ($driver == 'sqlite')
 			{
-				// Define the regexp function
-				$this->dblink->sqliteCreateFunction('regexp', function($pattern, $value) {
-					return preg_match("@$pattern@iu", $value) ? 1 : 0;
-				});
+				// Check if the method exists before calling it
+				if (method_exists($this->dblink, 'sqliteCreateFunction'))
+				{
+					$this->dblink->sqliteCreateFunction('regexp', function($pattern, $value) {
+						return preg_match("@$pattern@iu", $value) ? 1 : 0;
+					});
+				}
+				else
+				{
+					// Handle the case where the method is missing (e.g., wrong driver, wrapper class)
+					throw new PDOException("sqliteCreateFunction method not available on this PDO instance.");
+				}
 			}
 
 		}
