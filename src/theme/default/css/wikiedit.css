@@ -538,7 +538,7 @@ body:has(.we-fullscreen[open]) .we-toolbar {
 	align-items: center;
 	justify-content: space-between;
 	font-size: 0.85rem;
-	color: (--ww-text-subtle);
+	color: var(--ww-text-subtle);
 	background: var(--ww-bg-accent);
 	border: 1px solid #ddd;
 	border-top: none;
