@@ -7,6 +7,7 @@
 	--ww-bg-accent: #f9f9f9;
 	--ww-bg-code: #ffc;
 	--ww-bg-code-block: #f8f9fa;
+	--ww-bg-nav: #f1f1f1;
 	--ww-text: #222;
 	--ww-text-secondary: #333;
 	--ww-text-tertiary: #444;
@@ -101,6 +102,7 @@
 	--ww-bg-accent: #2a2a2a;
 	--ww-bg-code: #332;
 	--ww-bg-code-block: #1e1e1e;
+	--ww-bg-nav: #121212;
 	--ww-text: #ddd;
 	--ww-text-secondary: #c0c0c0;
 	--ww-text-tertiary: #c0c0c0;
@@ -153,6 +155,7 @@
 		--ww-bg-accent: #2a2a2a;
 		--ww-bg-code: #332;
 		--ww-bg-code-block: #1e1e1e;
+		--ww-bg-nav: #121212;
 		--ww-text: #ddd;
 		--ww-text-secondary: #c0c0c0;
 		--ww-text-tertiary: #c0c0c0;
@@ -2804,7 +2807,7 @@ li.m-source img {
 
 /* navigation action ------------- */
 .nav-chapter {
-	background-color: rgb(241, 241, 241);
+	background-color: var(--ww-bg-nav);
 	padding: 10px;
 }
 .nav-chapter td:nth-child(1) {
