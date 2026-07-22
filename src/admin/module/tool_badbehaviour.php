@@ -20,10 +20,24 @@ function admin_tool_badbehaviour($engine, $module)
 {
 	if (!empty($engine->db->ext_bad_behaviour))
 	{
-		require_once 'lib/bad_behaviour/src/responses.inc.php';
+		require_once 'vendor/badbehaviour/badbehaviour/src/responses.inc.php';
 	}
 
 	$action = $_POST['_action'] ?? null;
+
+	function bb2_read_settings()
+	{
+		$adapter = \BadBehaviour\Core\Runtime::get_adapter();
+
+		return $adapter->read_settings();
+	}
+
+	function bb2_read_whitelist()
+	{
+		$adapter = \BadBehaviour\Core\Runtime::get_adapter();
+
+		return $adapter->read_whitelist();
+	}
 
 	function bb2_httpbl_lookup($engine, $ip)
 	{
@@ -112,13 +126,23 @@ function admin_tool_badbehaviour($engine, $module)
 		return $d;
 	}
 
+	function bb2_insert_stats($engine)
+	{
+		$result = $engine->db->load_single(
+			"SELECT COUNT(log_id) AS n FROM " . $engine->prefix . 'bad_behaviour ' .
+			" WHERE `status_key` NOT LIKE '00000000'"
+		);
+
+		return $result['n'] ?: '';
+	}
+
 	function bb2_summary($engine)
 	{
 		echo $engine->form_open('bb2_manage', ['form_more' => 'setting=bb2_manage']);
 		?>
 
 		<div class="alignleft">
-		<?php echo Ut::perc_replace($engine->_t('BbStats'), '<strong>' . bb2_insert_stats(true) . '</strong>');?>
+		<?php echo Ut::perc_replace($engine->_t('BbStats'), '<strong>' . bb2_insert_stats($engine) . '</strong>');?>
 		</div>
 		<?php
 		// select arguments
