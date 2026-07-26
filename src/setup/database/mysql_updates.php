@@ -18,7 +18,7 @@ $engine		= 'ENGINE=' . $config['db_engine'];
 
 
 // BAD BEHAVIOUR
-
+$delete_bb_r6_2_0 = "DROP TABLE IF EXISTS {$pref}bad_behaviour";
 
 // CACHE
 

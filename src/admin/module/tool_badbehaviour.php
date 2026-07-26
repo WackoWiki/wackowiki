@@ -29,20 +29,6 @@ function admin_tool_badbehaviour($engine, $module)
 	// Replace bb2_get_response() function with new implementation:
 	function bb2_get_response($key)
 	{
-		// Map legacy hex codes to new ResultCode enum
-		$legacy_map = [
-			'00000000' => ['response' => 200, 'explanation' => '', 'log' => 'Permitted'],
-			'17566707' => ['response' => 403, 'explanation' => 'An invalid request was received from your browser. This may be caused by a malfunctioning proxy server or browser privacy software.', 'log' => 'Required header \'Accept\' missing'],
-			'17f4e8c8' => ['response' => 403, 'explanation' => 'You do not have permission to access this server.', 'log' => 'User-Agent was found on blacklist'],
-			'2b021b1f' => ['response' => 403, 'explanation' => 'You do not have permission to access this server. Before trying again, run anti-virus and anti-spyware software and remove any viruses and spyware from your computer.', 'log' => 'IP address found on http:BL blacklist'],
-			'96c0bd29' => ['response' => 403, 'explanation' => 'You do not have permission to access this server.', 'log' => 'URL pattern found on blacklist'],
-			'a1084bad' => ['response' => 403, 'explanation' => 'You do not have permission to access this server.', 'log' => 'User-Agent claimed to be MSIE, with invalid Windows version'],
-			'cd361abb' => ['response' => 403, 'explanation' => 'You do not have permission to access this server. Data may not be posted from offsite forms.', 'log' => 'Referer did not point to a form on this site'],
-			'dfd9b1ad' => ['response' => 403, 'explanation' => 'You do not have permission to access this server.', 'log' => 'Request contained a malicious JavaScript or SQL injection attack'],
-			'f0dcb3fd' => ['response' => 403, 'explanation' => 'You do not have permission to access this server. Before trying again, run anti-virus and anti-spyware software and remove any viruses and spyware from your computer.', 'log' => 'Web browser attempted to send a trackback'],
-			'f9f2b8b9' => ['response' => 403, 'explanation' => 'You do not have permission to access this server. This may be caused by a malfunctioning proxy server or browser privacy software.', 'log' => 'A User-Agent is required but none was provided.'],
-		];
-
 		// Check new semantic codes first
 		try {
 			$code = ResultCode::from($key);
@@ -53,7 +39,7 @@ function admin_tool_badbehaviour($engine, $module)
 			];
 		} catch (\ValueError $e) {
 			// Fall back to legacy map
-			return $legacy_map[$key] ?? ['response' => 403, 'explanation' => 'Unknown error', 'log' => $key];
+			return ['response' => 403, 'explanation' => 'Unknown error', 'log' => $key];
 		}
 	}
 

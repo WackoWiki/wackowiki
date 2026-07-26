@@ -16,7 +16,7 @@ $pref		= $config['table_prefix'];
 
 
 // BAD BEHAVIOUR
-
+$delete_bb_r6_2_0 = "DROP TABLE IF EXISTS {$pref}bad_behaviour";
 
 // CACHE
 
