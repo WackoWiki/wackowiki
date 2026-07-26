@@ -5,17 +5,17 @@ include 'lib/mb_extends/mb_extends.php';
 include 'class/init.php';
 
 use BadBehaviour\Core\BadBehaviour;
-use BadBehaviour\Core\Adapter\WackoWikiAdapter;
+use BadBehaviour\Adapter\WackoWikiAdapter;
+use BadBehaviour\Configuration;
 
 $db = new Settings();
 
 if ($db->ext_bad_behaviour)
 {
 	$adapter = new WackoWikiAdapter($db);
-	$bb = new BadBehaviour($adapter);
+	$bb = BadBehaviour::withAdapter($adapter);
 
-	if ($bb->run())
-	{
+	if (!$bb->run()->is_allowed()) {
 		exit;
 	}
 }
