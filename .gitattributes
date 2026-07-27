@@ -5,8 +5,8 @@
 *.png binary
 *.webp binary
 
-community export-ignore
-docs export-ignore
+/community export-ignore
+/docs export-ignore
 
 .editorconfig export-ignore
 .gitattributes export-ignore
