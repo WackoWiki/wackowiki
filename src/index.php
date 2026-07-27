@@ -15,8 +15,10 @@ if ($db->ext_bad_behaviour)
 	$adapter = new WackoWikiAdapter($db);
 	$bb = BadBehaviour::withAdapter($adapter);
 
-	if (!$bb->run()->is_allowed()) {
-		exit;
+	$result = $bb->run();
+
+	if (!$result->is_allowed()) {
+		$bb->handle_result($result);
 	}
 }
 
