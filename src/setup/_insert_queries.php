@@ -81,7 +81,7 @@ $insert_records[]		= [_t('InstallReviewerGroup'),		$insert_reviewer_group,			're
 
 
 // bad behaviour
-$upgrade['6.2.0'][]	= ['delete',	'bad_behaviour',	$delete_bb_r6_2_0];
+$upgrade['6.2.1'][]	= ['delete',	'bad_behaviour',	$delete_bb_r6_2_0];
 
 // cache
 
