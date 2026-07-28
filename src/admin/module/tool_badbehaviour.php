@@ -49,8 +49,138 @@ function admin_tool_badbehaviour($engine, $module)
 	{
 		$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
 
-		return $adapter->get_settings();
+		return $adapter->get_admin_settings();
 	}
+
+	function bb2_write_settings($engine, $settings)
+	{
+		// Build nested config array from flat POST data
+		$config = [
+			// ===== CORE =====
+			'logging'        => !empty($settings['logging']),
+			'verbose'        => !empty($settings['verbose']),
+			'strict'         => !empty($settings['strict']),
+			'offsite_forms'  => !empty($settings['offsite_forms']),
+
+			// ===== REVERSE PROXY =====
+			'reverse_proxy'  => [
+				'enabled'   => !empty($settings['reverse_proxy']),
+				'header'    => $settings['reverse_proxy_header'] ?? 'X-Forwarded-For',
+				'addresses' => array_filter(array_map('trim', explode("\n", $settings['reverse_proxy_addresses'] ?? ''))),
+			],
+
+			// ===== HTTP:BL =====
+			'httpbl'         => [
+				'key'     => preg_match('/^[a-z]{12}$/', $settings['httpbl_key'] ?? '') ? $settings['httpbl_key'] : '',
+				'threat'  => (int)($settings['httpbl_threat'] ?? 25),
+				'maxage'  => (int)($settings['httpbl_maxage'] ?? 30),
+			],
+
+			// ===== DNSBL =====
+			'dnsbl'          => [
+				'enabled' => !empty($settings['dnsbl_enabled']),
+				'lists'   => array_filter(array_map('trim', explode("\n", $settings['dnsbl_lists'] ?? ''))),
+			],
+
+			// ===== AI CRAWLERS =====
+			'ai_crawlers'    => [
+				'allowed'          => array_filter(array_map('trim', explode("\n", $settings['allowed_ai_crawlers'] ?? ''))),
+				'block_unverified' => !empty($settings['block_unverified_ai']),
+				'strict'           => !empty($settings['strict_ai']),
+			],
+
+			// ===== BOT CATEGORIES =====
+			'bot_categories' => [
+				'blocked' => ['malicious'], // Not editable in UI yet
+			],
+
+			// ===== RATE LIMITS =====
+			'rate_limits'    => [
+				'enabled'      => !empty($settings['rate_limit_enabled']),
+				'global'       => [
+					'requests' => (int)($settings['rate_global_requests'] ?? 1000),
+					'window'   => (int)($settings['rate_global_window'] ?? 3600),
+				],
+				'per_minute'   => [
+					'requests' => (int)($settings['rate_per_minute_requests'] ?? 60),
+					'window'   => (int)($settings['rate_per_minute_window'] ?? 60),
+				],
+				'post'         => [
+					'requests' => (int)($settings['rate_post_requests'] ?? 30),
+					'window'   => (int)($settings['rate_post_window'] ?? 3600),
+				],
+				'login'        => [
+					'requests' => (int)($settings['rate_login_requests'] ?? 10),
+					'window'   => (int)($settings['rate_login_window'] ?? 900),
+				],
+			],
+
+			// ===== CHALLENGE =====
+			'challenge'      => [
+				'enabled'             => !empty($settings['challenge_enabled']),
+				'provider'            => $settings['challenge_provider'] ?? 'builtin',
+				'site_key'            => $settings['challenge_site_key'] ?? '',
+				'secret_key'          => $settings['challenge_secret_key'] ?? '',
+				'recaptcha_min_score' => (float)($settings['recaptcha_min_score'] ?? 0.5),
+			],
+
+			// ===== PERFORMANCE =====
+			'performance'    => [
+				'skip_extensions' => array_filter(array_map('trim', explode("\n", $settings['skip_static_extensions'] ?? ''))),
+				'skip_paths'      => array_filter(array_map('trim', explode("\n", $settings['skip_static_paths'] ?? ''))),
+			],
+
+			// ===== GEOIP =====
+			'geoip'          => [
+				'enabled'             => !empty($settings['geoip_enabled']),
+				'database_path'       => $settings['geoip_database_path'] ?? '',
+				'blocked_countries'   => array_filter(array_map('trim', explode("\n", $settings['blocked_countries'] ?? ''))),
+				'blocked_asns'        => array_filter(array_map('trim', explode("\n", $settings['blocked_asns'] ?? ''))),
+			],
+
+			// ===== FINGERPRINTS =====
+			'fingerprints'   => [
+				'bad_ja3'            => array_filter(array_map('trim', explode("\n", $settings['bad_ja3_fingerprints'] ?? ''))),
+				'bad_h2'             => array_filter(array_map('trim', explode("\n", $settings['bad_h2_fingerprints'] ?? ''))),
+				'bot_header_orders'  => array_filter(array_map('trim', explode("\n", $settings['bot_header_orders'] ?? ''))),
+				'expected_ja3'       => array_filter(array_map('trim', explode("\n", $settings['expected_ja3'] ?? ''))),
+			],
+
+			// ===== BODY SCAN =====
+			'body_scan_skip_fields' => array_filter(array_map('trim', explode("\n", $settings['body_scan_skip_fields'] ?? ''))),
+
+			// ===== CUSTOM RULES =====
+			'custom_rules'   => [], // Not editable in UI yet
+
+			// ===== 3.0 FEATURES =====
+			'enable_fingerprinting'      => !empty($settings['enable_fingerprinting']),
+			'inspect_json_body'          => !empty($settings['inspect_json_body']),
+			'inspect_multipart_body'     => !empty($settings['inspect_multipart_body']),
+			'enable_behavioral_analysis' => !empty($settings['enable_behavioral_analysis']),
+			'enable_ai_crawler_control'  => !empty($settings['enable_ai_crawler_control']),
+			'enable_client_hints_validation' => !empty($settings['enable_client_hints_validation']),
+			'enable_agentic_detection'   => !empty($settings['enable_agentic_detection']),
+			'enable_dynamic_ip_ranges'   => !empty($settings['enable_dynamic_ip_ranges']),
+		];
+
+		// Ensure config directory exists
+		$config_dir = defined('CONFIG_DIR') ? CONFIG_DIR : 'config';
+		if (!is_dir($config_dir)) {
+			@mkdir($config_dir, 0755, true);
+		}
+
+		$file = $config_dir . '/bad_behaviour.php';
+
+		// Generate PHP file with proper formatting
+		$content = "<?php\n\nreturn " . var_export($config, true) . ";\n";
+
+		// Atomic write
+		$tmp = $file . '.tmp';
+		@file_put_contents($tmp, $content, LOCK_EX);
+		@rename($tmp, $file);
+		@chmod($file, 0644);
+	}
+
 
 	function bb2_read_whitelist($engine)
 	{
@@ -348,7 +478,7 @@ function admin_tool_badbehaviour($engine, $module)
 		<?php
 		$engine->print_pagination($pagination);
 		?>
-		<table class="formation hl-line">
+		<table class="formation hl-line bb-log">
 			<thead>
 				<tr>
 					<th scope="col" class="check-column"></th>
@@ -549,8 +679,13 @@ function admin_tool_badbehaviour($engine, $module)
 		// update settings
 		if (isset($_POST['action']) && $_POST['action'] == 'update')
 		{
+			// Update core on/off in main config table
 			$config['ext_bad_behaviour'] = (int) $_POST['ext_bad_behaviour'];
 			$engine->db->_set($config);
+
+			// Write Bad Behaviour settings to PHP config file
+			bb2_write_settings($engine, $_POST);
+
 			$engine->log(1, '!!' . $engine->_t('BbSettingsUpdated') . '!!');
 			$engine->set_message($engine->_t('BbSettingsUpdated'));
 			$engine->http->redirect($engine->href());
@@ -588,6 +723,10 @@ function admin_tool_badbehaviour($engine, $module)
 			$settings['enable_fingerprinting']      = isset($_POST['enable_fingerprinting']);
 			$settings['inspect_json_body']          = isset($_POST['inspect_json_body']);
 			$settings['inspect_multipart_body']     = isset($_POST['inspect_multipart_body']);
+			$settings['enable_ai_crawler_control']  = isset($_POST['enable_ai_crawler_control']);
+			$settings['enable_client_hints_validation'] = isset($_POST['enable_client_hints_validation']);
+			$settings['enable_agentic_detection']   = isset($_POST['enable_agentic_detection']);
+			$settings['enable_dynamic_ip_ranges']   = isset($_POST['enable_dynamic_ip_ranges']);
 
 			// NEW: Rate limits
 			$settings['rate_limit_enabled'] = isset($_POST['rate_limit_enabled']);
@@ -687,6 +826,25 @@ function admin_tool_badbehaviour($engine, $module)
             <td class="label"><label for="inspect_multipart"><strong><?php echo $engine->_t('BbInspectMultipart');?></strong><br><?php echo $engine->_t('BbInspectMultipartInfo');?></label></td>
             <td><input type="checkbox" id="inspect_multipart" name="inspect_multipart_body" value="1"<?php echo ($settings['inspect_multipart_body'] ? ' checked' : '');?>></td>
         </tr>
+		<tr class="hl-setting">
+		    <td class="label"><label for="enable_ai_crawler_control"><strong><?php echo $engine->_t('BbEnableAiCrawlerControl');?></strong><br><?php echo $engine->_t('BbEnableAiCrawlerControlInfo');?></label></td>
+		    <td><input type="checkbox" id="enable_ai_crawler_control" name="enable_ai_crawler_control" value="1"<?php echo ($settings['enable_ai_crawler_control'] ? ' checked' : '');?>></td>
+		</tr>
+
+		<!-- NEW: 3.0 FEATURES -->
+		<tr><th colspan="2"><br><?php echo $engine->_t('BbModernFeatures');?></th></tr>
+		<tr class="hl-setting">
+		    <td class="label"><label for="enable_client_hints"><strong><?php echo $engine->_t('BbEnableClientHints');?></strong><br><?php echo $engine->_t('BbEnableClientHintsInfo');?></label></td>
+		    <td><input type="checkbox" id="enable_client_hints" name="enable_client_hints_validation" value="1"<?php echo ($settings['enable_client_hints_validation'] ? ' checked' : '');?>></td>
+		</tr>
+		<tr class="hl-setting">
+		    <td class="label"><label for="enable_agentic"><strong><?php echo $engine->_t('BbEnableAgentic');?></strong><br><?php echo $engine->_t('BbEnableAgenticInfo');?></label></td>
+		    <td><input type="checkbox" id="enable_agentic" name="enable_agentic_detection" value="1"<?php echo ($settings['enable_agentic_detection'] ? ' checked' : '');?>></td>
+		</tr>
+		<tr class="hl-setting">
+		    <td class="label"><label for="enable_dynamic_ip"><strong><?php echo $engine->_t('BbEnableDynamicIp');?></strong><br><?php echo $engine->_t('BbEnableDynamicIpInfo');?></label></td>
+		    <td><input type="checkbox" id="enable_dynamic_ip" name="enable_dynamic_ip_ranges" value="1"<?php echo ($settings['enable_dynamic_ip_ranges'] ? ' checked' : '');?>></td>
+		</tr>
 
         <!-- NEW: AI CRAWLERS -->
         <tr><th colspan="2"><br><?php echo $engine->_t('BbAiCrawlers');?></th></tr>

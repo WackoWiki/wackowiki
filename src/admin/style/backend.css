@@ -1098,3 +1098,12 @@ a.cancel:active{
 
 	main { min-height: 40rem; }
 }
+
+
+table.bb-log {
+	width: 100%;
+}
+
+table.bb-log td {
+	word-break: break-all; 
+}

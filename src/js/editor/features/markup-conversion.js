@@ -9,8 +9,28 @@ export function wackoToMarkdown(text) {
   let md = text;
   const placeholders = [];
 
-  // 1. Fenced code blocks: %%(hl lang)\n...\n%%  →  ```lang\n...\n```
-  //                  or %% … %%                  →  ```\n...\n```
+  // 0. Handle escaped/literal text: ""text"" → text (remove escaping quotes)
+  md = md.replace(/""(.*?)""/g, (match, content) => {
+    placeholders.push(content);
+    return `§§ESCAPED${placeholders.length - 1}§§`;
+  });
+
+  // 1. Inline code: ##text## → `text` (process BEFORE code blocks)
+  md = md.replace(/##(.*?)##/g, (match, content) => {
+    let restoredContent = content.replace(/§§ESCAPED(\d+)§§/g, (m, idx) => placeholders[idx]);
+    placeholders.push('`' + restoredContent + '`');
+    return `§§INLINECODE${placeholders.length - 1}§§`;
+  });
+
+  // 2. Tables: #| … |# and #|| … ||# → Markdown tables
+  // Use placeholders to prevent other rules from processing table content
+  md = md.replace(/#\|\|?[\s\S]*?\|\|?#/gs, block => {
+    const mdTable = wackoTableToMarkdown(block);
+    placeholders.push(mdTable);
+    return `§§TABLE${placeholders.length - 1}§§`;
+  });
+
+  // 3. Fenced code blocks: %%(hl lang)\n...\n%%  →  ```lang\n...\n```
   md = md.replace(/%%(?:\(hl\s+(\w+)\)\s*)?([\s\S]*?)%%/g, (match, lang, content) => {
     const language = lang ? lang.trim() : '';
     const code = content.trim();
@@ -20,22 +40,14 @@ export function wackoToMarkdown(text) {
     return `§§CODEBLOCK${placeholders.length - 1}§§`;
   });
 
-  // 2. Headings: === Title === → ## Title (etc.)
+  // 4. Headings: === Title === → ## Title (etc.)
   md = md.replace(/^={2,7}\s*(.*?)\s*={2,}$/gm, (match, title) => {
     const level = match.match(/^=+/)[0].length;
     const marker = '#'.repeat(level - 1);
-    const out = `${marker}`;
-    placeholders.push(out);
+    placeholders.push(marker);
     return `§§HEADING${placeholders.length - 1}§§ ${title.trim()}`;
   });
   
-  // 3. Inline code: ##text## → `text`
-  // Protect BEFORE headings so inline code inside a heading title is preserved.
-  md = md.replace(/##(.*?)##/g, (match, content) => {
-    placeholders.push('`' + content + '`');
-    return `§§INLINECODE${placeholders.length - 1}§§`;
-  });
-
   // Italic: //text// → *text*
   md = md.replace(/\/\/(.*?)\/\//g, '*\$1*');
   // Strikethrough: --text-- → ~~text~~
@@ -45,7 +57,7 @@ export function wackoToMarkdown(text) {
   // Highlight / Marked text: ??text?? and !!text!! → **text**
   md = md.replace(/\?\?(.*?)\?\?/g, '**\$1**');
   md = md.replace(/!!(.*?)!!/g, '**\$1**');
-  md = md.replace(/!!\([^)]+\)(.*?)!!/g, '$1'); // strip color
+  md = md.replace(/!!\([^)]+\)(.*?)!!/g, '$1');
 
   // Quote: <[ text ]> → > text
   md = md.replace(/<\[(.*?)\]>/gs, '> $1');
@@ -61,15 +73,12 @@ export function wackoToMarkdown(text) {
   // Horizontal rule: ---- → ---
   md = md.replace(/^----$/gm, '---');
 
-  // Tables: #| … |# and #|| … ||# → Markdown tables
-  md = md.replace(/#\|[\s\S]*?\|#/gs, block => wackoTableToMarkdown(block));
-  md = md.replace(/#\|\|[\s\S]*?\|\|#/gs, block => wackoTableToMarkdown(block));
-
-  // Restore code blocks and inline code placeholders
-  md = md.replace(/§§CODEBLOCK(\d+)§§/g, (match, idx) => placeholders[idx]);
+  // Restore placeholders in order
+  md = md.replace(/§§TABLE(\d+)§§/g, (match, idx) => placeholders[idx]);
   md = md.replace(/§§INLINECODE(\d+)§§/g, (match, idx) => placeholders[idx]);
-  // Restore headings
+  md = md.replace(/§§CODEBLOCK(\d+)§§/g, (match, idx) => placeholders[idx]);
   md = md.replace(/§§HEADING(\d+)§§/g, (match, idx) => placeholders[idx]);
+  md = md.replace(/§§ESCAPED(\d+)§§/g, (match, idx) => placeholders[idx]);
 
   return md;
 }
@@ -181,40 +190,98 @@ export function markdownToWacko(text) {
  * @returns {string} Markdown table
  */
 function wackoTableToMarkdown(block) {
-  const lines = block.split(/\r?\n/).filter(l => l.trim());
+  // First, convert inline %%(hl lang) ... %% within table cells to inline code
+  let processedBlock = block.replace(/%%\(hl\s+(\w+)\)\s*(.*?)%%/g, (match, lang, code) => {
+    return '`' + code.trim() + '`';
+  });
+  // Also handle simple %% ... %% 
+  processedBlock = processedBlock.replace(/%%(.+?)%%/g, (match, code) => {
+    return '`' + code.trim() + '`';
+  });
+
+  const lines = processedBlock.split(/\r?\n/).filter(l => l.trim());
   const mdRows = [];
-  let isFirstRow = true;
+  let headerRow = null;
+
+  // Helper function to apply inline formatting to cell content
+  const formatCellContent = (content) => {
+    // Handle escaped/literal text
+    content = content.replace(/""(.*?)""/g, '\$1');
+    
+    // Inline code (already handled above, but just in case)
+    content = content.replace(/##(.*?)##/g, '`\$1`');
+    
+    // Italic
+    content = content.replace(/\/\/(.*?)\/\//g, '*$1*');
+    
+    // Bold (Wacko uses ** or !!)
+    content = content.replace(/\*\*(.*?)\*\*/g, '**\$1**');
+    
+    // Strikethrough
+    content = content.replace(/--(.*?)--/g, '~~\$1~~');
+    
+    // Small text
+    content = content.replace(/\+\+(.*?)\+\+/g, '<small>$1</small>');
+    
+    // Highlight/Marked
+    content = content.replace(/\?\?(.*?)\?\?/g, '**\$1**');
+    content = content.replace(/!!(.*?)!!/g, '**\$1**');
+    content = content.replace(/!!\([^)]+\)(.*?)!!/g, '$1');
+    
+    // Links
+    content = content.replace(/\(\(([^)]+?)\s+([^\)]+?)\)\)/g, '[\$2](\$1)');
+    content = content.replace(/\[\[([^\]]+?)\]\]/g, '[\$1](\$1)');
+    
+    return content;
+  };
 
   for (let line of lines) {
     line = line.trim();
-    if (!line || line === '#|' || line === '#||' || line === '|#' || line === '||#') continue;
+    
+    // Skip opening/closing markers
+    if (line === '#|' || line === '#||' || line === '|#' || line === '||#') continue;
 
-    // Remove row prefix (*|, ^|, ||) and trailing ||
-    let rowContent = line
-      .replace(/^\s*(\*|\^|\|)\|?\s*/, '')
-      .replace(/\s*(\|\|?)\s*$/, '');
+    let isHeader = false;
+    if (line.startsWith('*|') || line.endsWith('|*')) {
+      isHeader = true;
+      // Remove header markers
+      line = line.replace(/^\*\|?\s*/, '').replace(/\s*\|?\*$/, '');
+    } else {
+      // Remove row markers
+      line = line.replace(/^\|?\|\s*/, '').replace(/\s*\|\|?\s*$/, '');
+    }
 
     // Strip cell attributes like (colspan=2 align=center)
-    rowContent = rowContent.replace(/\(\s*[^)]+\)\s*/g, '');
+    line = line.replace(/\(\s*[^)]+\)\s*/g, '');
 
     // Handle escaped pipes "" → escaped pipe in Markdown
-    rowContent = rowContent.replace(/""/g, '\\|');
+    line = line.replace(/""/g, '\\|');
 
-    const cells = rowContent.split('|').map(c => c.trim());
-    if (cells.length < 2) continue;
+    // Split into cells and apply formatting to each cell
+    const cells = line.split('|').map(cell => {
+      return formatCellContent(cell.trim());
+    });
+    
+    if (cells.length < 1) continue;
 
-    const mdRow = '| ' + cells.join(' | ') + ' |';
-    mdRows.push(mdRow);
-
-    if (isFirstRow) {
-      // Add separator after header row
-      const separator = '| ' + cells.map(() => '---').join(' | ') + ' |';
-      mdRows.push(separator);
-      isFirstRow = false;
+    if (isHeader) {
+      headerRow = '| ' + cells.join(' | ') + ' |';
+    } else {
+      mdRows.push('| ' + cells.join(' | ') + ' |');
     }
   }
 
-  return mdRows.join('\n');
+  // Build markdown table
+  let mdTable = '';
+  if (headerRow) {
+    mdTable += headerRow + '\n';
+    // Count actual columns in header
+    const cols = headerRow.split('|').filter(c => c.trim()).length;
+    mdTable += '| ' + Array(cols).fill('---').join(' | ') + ' |\n';
+  }
+  mdTable += mdRows.join('\n');
+
+  return mdTable;
 }
 
 /**
