@@ -1370,4 +1370,20 @@ $ap_translation = [
 	'BbBlockedCountries'     => 'Blocked countries (ISO codes, one per line)',
 	'BbBlockedAsns'          => 'Blocked ASNs (one per line)',
 
+	'BbBlockPage'                  => 'Block Page',
+	'BbShowDetailedBlockPage'      => 'Show detailed block page',
+	'BbShowDetailedBlockPageInfo'  => 'Show reason, request URI, and technical support key on the block page. Recommended for production.',
+	'BbShowContactInfo'            => 'Show contact info on block page',
+	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
+	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
+
+	// Custom rules
+	'BbCustomRules'                => 'Custom Rules',
+	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
+	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// Body scan
+	'BbBodyScanSkipFields'         => 'Body scan skip fields',
+	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
 ];

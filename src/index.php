@@ -6,7 +6,6 @@ include 'class/init.php';
 
 use BadBehaviour\Core\BadBehaviour;
 use BadBehaviour\Adapter\WackoWikiAdapter;
-use BadBehaviour\Configuration;
 
 $db = new Settings();
 
