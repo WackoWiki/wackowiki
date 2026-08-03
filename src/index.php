@@ -12,7 +12,7 @@ $db = new Settings();
 if ($db->ext_bad_behaviour)
 {
 	$adapter = new WackoWikiAdapter($db);
-	$bb = BadBehaviour::withAdapter($adapter);
+	$bb = BadBehaviour::with_adapter($adapter);
 
 	$result = $bb->run();
 

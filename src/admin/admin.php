@@ -31,6 +31,9 @@ $engine->user_lang		= $engine->get_user_language();
 $engine->user_lang_dir	= $engine->get_direction($engine->user_lang);
 $engine->set_language($engine->user_lang, true);
 
+const AP_MAX_SESSION	= 1800; // 1800 -> 30 minutes
+const AP_MAX_IDLE		= 900;  // 900  -> 15 minutes
+
 // reconnect securely in tls mode
 $http->ensure_tls($engine->href('', 'admin.php'));
 
@@ -175,9 +178,7 @@ if (!isset($engine->sess->ap_created))
 }
 
 // setting temporary admin user context
-$session_length = 1800; // 1800 -> 30 minutes
-
-if (time() - $engine->sess->ap_last_activity > 900)
+if (time() - $engine->sess->ap_last_activity > AP_MAX_IDLE)
 {
 	// last request was more than 15 minutes ago
 	unset($engine->sess->ap_created);
@@ -189,9 +190,9 @@ if (time() - $engine->sess->ap_last_activity > 900)
 
 $engine->sess->ap_last_activity = time(); // update last activity time stamp
 
-if (time() - $engine->sess->ap_created > $session_length)
+if (time() - $engine->sess->ap_created > AP_MAX_SESSION)
 {
-	$session_expire				= time() + $session_length;
+	$session_expire				= time() + AP_MAX_SESSION;
 	$engine->sess->ap_created	= time(); // update creation time
 }
 
@@ -334,7 +335,7 @@ header('Content-Type: text/html; charset=utf-8');
 			<div id="tools">
 				<span>
 					<?php
-					$time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
+					$time_left = round((AP_MAX_SESSION - (time() - $engine->sess->ap_created)) / 60);
 
 					echo (RECOVERY_MODE ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') . NBSP . NBSP .
 						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) . NBSP . NBSP .
