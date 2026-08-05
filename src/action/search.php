@@ -40,6 +40,9 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 	$prefix			= $this->prefix;
 	extract($filter, EXTR_IF_EXISTS);
 
+	// Escape the phrase for FTS5 MATCH: wrap in double quotes and escape internal quotes
+	$fts_phrase = '"' . str_replace('"', '""', $phrase) . '"';
+
 	$selector =
 		($category_id
 			? 'LEFT JOIN ' . $prefix . 'category_assignment ca ON (a.page_id = ca.object_id) '
@@ -52,7 +55,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 			: 	'LEFT JOIN (
 					SELECT rowid
 					FROM ' . $prefix . 'page_fts
-					WHERE ' . $prefix . 'page_fts MATCH ' . $this->db->q($phrase) . '
+					WHERE ' . $prefix . 'page_fts MATCH ' . $this->db->q($fts_phrase) . '
 				) f ON a.page_id = f.rowid '
 		) .
 		'WHERE (' .
