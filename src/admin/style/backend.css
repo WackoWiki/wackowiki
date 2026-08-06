@@ -474,7 +474,9 @@ table.forum th {
 }
 
 .syslog-filter label {
-	font-weight: bold;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
 }
 
 .syslog-filter .filter-actions {
@@ -1471,6 +1473,210 @@ a.cancel:active {
 	main {
 		min-height: 40rem;
 	}
+}
+
+/* Bad Behaviour 3.0 admin module styles — JS-free, Lynx-friendly */
+
+.bb-time-selector {
+	margin: 0.5rem 0 1rem 0;
+}
+.bb-time-selector a {
+	margin-right: 0.5rem;
+}
+.bb-time-selector a.active {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+/* Filter bar */
+.bb-filter-bar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+.bb-filter-bar input[type="search"],
+.bb-filter-bar input[type="text"],
+.bb-filter-bar input[type="date"],
+.bb-filter-bar select {
+	padding: 0.25rem 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font: inherit;
+}
+.bb-filter-bar label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+.bb-filter-search {
+	min-width: 280px;
+}
+.bb-filter-select {
+	min-width: 140px;
+}
+.bb-filter-input {
+	min-width: 160px;
+}
+
+/* Filter chips */
+.bb-filter-chips {
+	margin: 0 0 1rem 0;
+}
+.bb-chip {
+	display: inline-block;
+	padding: 0.2rem 0.5rem;
+	margin: 0 0.3rem 0.3rem 0;
+	background: #e8f0fe;
+	border-radius: 4px;
+}
+.bb-chip a {
+	text-decoration: none;
+	color: inherit;
+	font-weight: bold;
+	margin-left: 0.25rem;
+}
+
+/* Bot category badge */
+.bb-cat-badge {
+	display: inline-block;
+	padding: 0.1rem 0.4rem;
+	border-radius: 3px;
+	background: #f0f0f0;
+	font-size: 11px;
+	font-family: monospace;
+	text-decoration: none;
+}
+
+/* Summary table */
+.bb-summary td.label,
+.bb-summary th {
+	padding: 0.3rem 0.6rem;
+}
+
+/* Severity badges (used in summary) */
+.bb-sev {
+	display: inline-block;
+	width: 1.2em;
+	text-align: center;
+}
+
+/* Bot breakdown bar */
+.bb-bar {
+	display: inline-block;
+	width: 100px;
+	background: #e0e0e0;
+	height: 8px;
+	vertical-align: middle;
+}
+.bb-bar-fill {
+	display: block;
+	background: #0066cc;
+	height: 8px;
+}
+
+/* Response time bar */
+.bb-ms-bar {
+	display: inline-block;
+	width: 100px;
+	background: #e0e0e0;
+	height: 6px;
+	vertical-align: middle;
+}
+.bb-ms-fill {
+	display: block;
+	height: 6px;
+}
+.bb-ms-ok    { background: #28a745; }
+.bb-ms-warn  { background: #ffc107; }
+.bb-ms-slow  { background: #dc3545; }
+
+/* Manage view columns */
+.bb-log td {
+	vertical-align: top;
+	padding: 0.4rem 0.5rem;
+}
+.bb-log td.bb-meta {
+	white-space: nowrap;
+	min-width: 180px;
+}
+.bb-log th.check-column,
+.bb-log td.check-column {
+	text-align: center;
+	width: 2.5em;
+}
+.bb-log th.check-column a {
+	text-decoration: none;
+	font-size: 1.1em;
+	display: inline-block;
+	min-width: 1.5em;
+}
+
+/* Inline pre blocks for headers / body */
+.bb-pre {
+	margin: 0.5rem 0;
+	padding: 0.5rem;
+	background: #f8f9fa;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	font-size: 12px;
+	max-width: 600px;
+	max-height: 300px;
+	overflow: auto;
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+/* Headers / body view-mode wrapper (when collapsed) */
+.bb-collapsed {
+	margin: 0.5rem 0;
+}
+.bb-collapsed > summary {
+	cursor: pointer;
+	color: #0066cc;
+	padding: 0.2rem 0;
+	font-weight: 500;
+}
+
+/* Bulk action bar */
+.bb-bulk-bar {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem 0;
+	background: #fffbea;
+	border: 1px solid #f0c674;
+	border-radius: 4px;
+	flex-wrap: wrap;
+}
+
+/* Per-row action bar */
+.bb-row-actions {
+	display: flex;
+	gap: 0.4rem;
+	margin-top: 0.5rem;
+	flex-wrap: wrap;
+}
+.bb-row-actions a,
+.bb-row-actions button {
+	font-size: 11px;
+	padding: 0.1rem 0.4rem;
+	border: 1px solid #ccc;
+	background: #fff;
+	border-radius: 3px;
+	cursor: pointer;
+	text-decoration: none;
+	color: #333;
+}
+
+/* Resolved / unresolved row marker */
+.bb-resolved {
+	opacity: 0.55;
+}
+.bb-resolved td {
+	text-decoration: line-through;
 }
 
 table.bb-log {

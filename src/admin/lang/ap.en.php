@@ -968,6 +968,49 @@ $ap_translation = [
 		'7'		=> 'debugging',
 	],
 
+	'LogCollapse'        => 'collapse',
+	'LogExpand'          => 'expand',
+	'LogType'              => 'Type',
+	'LogSearch'            => 'Search',
+	'LogSearchPlaceholder' => 'search messages...',
+	'LogUserId'            => 'User ID',
+	'LogExactMatch'        => 'exact match',
+	'LogFrom'              => 'From',
+	'LogTo'                => 'To',
+	'LogSupportKey'        => 'Support key',
+	'LogContext'           => 'Context',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'User agent',
+	'LogReferer'           => 'Referer',
+	'LogTotal'             => 'Total',
+	'LogFilteredBy'        => 'Filtered by',
+	'LogClearFilter'       => 'Clear filter',
+	'LogActions'           => 'Actions',
+	'LogDelete'            => 'Delete',
+	'LogDeleteConfirm'     => 'Delete this log entry?',
+	'LogDeleteSelected'    => 'Delete selected',
+	'LogBulkAction'        => '— bulk action —',
+	'LogApply'             => 'Apply',
+	'LogExportCSV'         => 'Export CSV',
+	'LogExportJSON'        => 'Export JSON',
+	'LogPurged'            => 'Log table truncated.',
+	'LogPurgedFiltered'     => '%1 log entries deleted by filter.',
+	'LogDeleted'           => 'Log entry deleted.',
+	'LogDeletedBulk'        => '%1 log entries deleted.',
+	'LogPurgeSection'      => 'Destructive operations',
+	'LogPurgeWarning'      => 'There are %1 entries matching the current view. Use with care.',
+	'LogPurgeConfirm'      => 'I understand this will permanently delete log entries',
+	'LogPurgeFiltered'     => 'Purge matching filter',
+	'LogPurgeFilteredConfirm' => 'Delete all entries matching the current filter? This cannot be undone.',
+	'LogPurgeAll'          => 'Purge ENTIRE log',
+	'LogPurgeAllConfirm'   => 'Delete EVERY log entry in the database? This cannot be undone.',
+	'LogFindRelated'       => 'Find related entries',
+	'LogNoMatch'           => 'No log entries match the current filter.',
+
+	'LogMarkAll'                => 'Mark all rows on this page',
+	'LogMarkNone'               => 'Unmark all rows',
+	'LogSelectRow'              => 'Select row',
+
 	// Massemail module
 	'MassemailInfo'				=> 'Here you can email a message to either (1) all of your users or (2) all users of a specific group who have enabled receiving of mass emails. An email will be sent out to the administrative email address supplied, with a blind carbon copy (BCC) sent to all recipients. The default setting is to include a maximum of 20 recipients in such an email. If there are more than 20 recipients, additional emails will be sent. If you are emailing a large group of people, please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time. You will be notified when the script has completed.',
 	'LogMassemail'				=> 'Mass email send %1 to group / user ',
@@ -1275,6 +1318,22 @@ $ap_translation = [
 	'BbHeaders'					=> 'Headers',
 	'BbEntity'					=> 'Entity',
 
+	'BbSearchPlaceholder'        => 'Search UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Any category',
+	'BbFilterAnyMethod'          => 'Any method',
+	'BbFilterAnyStatus'          => 'Any status',
+	'BbFilterBlockedOnly'        => 'Blocked only',
+	'BbFilterPermittedOnly'      => 'Permitted only',
+	'BbFilterApply'              => 'Apply',
+	'BbFilterClear'              => 'Clear filters',
+	'BbChipSearch'               => 'Search',
+	'BbChipCategory'             => 'Category',
+	'BbChipMethod'               => 'Method',
+	'BbChipStatus'               => 'Status',
+	'BbChipRemove'               => 'Remove this filter',
+	'BbFilterByCategory'         => 'Filter by this category',
+	'BbSearchBySupportKey'       => 'Search for this support key',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Options saved.',
 	'BbWhitelistHint'			=> 'Inappropriate whitelisting WILL expose you to spam, or cause Bad Behaviour to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.',
@@ -1377,6 +1436,26 @@ $ap_translation = [
 	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
 	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
 
+	// Time-window selector
+	'BbLastSeen'             => 'Last seen',
+	'BbSeverity'             => 'Severity',
+	'BbStatusBreakdown'      => 'Status breakdown',
+	'BbBotBreakdown'         => 'Bot breakdown',
+	'BbTopAttackers'         => 'Top attacking IPs',
+	'BbGeoSummary'           => 'Geographic summary',
+	'BbCountry'              => 'Country',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Verified %',
+	'BbNoData'               => 'No data for the selected window',
+
+	// Active-filter chips
+	'BbChipSlow'             => 'Slow only',
+	'BbChipDate'             => 'Date range',
+
+	// Manage view additions
+	'BbViewHeaders'          => 'View headers',
+	'BbViewBody'             => 'View body',
+
 	// Custom rules
 	'BbCustomRules'                => 'Custom Rules',
 	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
@@ -1385,5 +1464,103 @@ $ap_translation = [
 	// Body scan
 	'BbBodyScanSkipFields'         => 'Body scan skip fields',
 	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
+	// ----------------------------------------------
+	// Time-window selector
+	'BbLastSeen'             => 'Last seen',
+	'BbSeverity'             => 'Severity',
+	'BbStatusBreakdown'      => 'Status breakdown',
+	'BbBotBreakdown'         => 'Bot breakdown',
+	'BbTopAttackers'         => 'Top attacking IPs',
+	'BbGeoSummary'           => 'Geographic summary',
+	'BbCountry'              => 'Country',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Verified %',
+	'BbNoData'               => 'No data for the selected window',
+	'BbCategory'             => 'Category',
+	'BbIp'                   => 'IP',
+	'BbResponseTime'         => 'Response time',
+	'BbDateCol'              => 'Time / IP / Status',
+	'BbSelectRow'            => 'Select row',
+
+	// Active-filter chips
+	'BbChipSlow'             => 'Slow only',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Resolved',
+
+	// Manage view additions
+	'BbViewHeaders'          => 'View headers',
+	'BbViewBody'             => 'View body',
+	'BbViewHeadersLabel'     => 'Headers',
+	'BbViewBodyLabel'        => 'Body',
+	'BbViewModeFull'         => 'Full (always shown)',
+	'BbViewModeTeaser'       => 'Teaser (click to expand)',
+	'BbViewModeHidden'       => 'Hidden (show on demand)',
+	'BbHide'                 => 'hide',
+	'BbChars'                => 'chars',
+
+	// Custom rules
+	'BbCustomRules'                => 'Custom Rules',
+	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
+	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// Body scan
+	'BbBodyScanSkipFields'         => 'Body scan skip fields',
+	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
+	// Advanced filters
+	'BbAdvancedFilters'     => 'Advanced filters',
+	'BbDateFrom'            => 'From',
+	'BbDateTo'              => 'To',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Slow requests only (>1s)',
+
+	// Resolved workflow
+	'BbResolvedActive'      => 'Active only',
+	'BbResolvedOnly'        => 'Resolved only',
+	'BbResolvedAll'         => 'Active + resolved',
+	'BbResolved'            => 'resolved',
+	'BbActionResolve'       => 'resolve',
+	'BbActionUnresolve'     => 'unresolve',
+	'BbRowResolved'         => 'Log entry marked resolved',
+	'BbRowUnresolved'       => 'Log entry marked unresolved',
+
+	// Bulk actions
+	'BbBulkDeleteSelected'      => 'Delete selected',
+	'BbBulkWhitelistSelected'   => 'Whitelist IPs',
+	'BbBulkResolveSelected'     => 'Mark resolved',
+	'BbBulkUnresolveSelected'   => 'Mark unresolved',
+	'BbBulkHint'                => 'Tick rows first, then click an action.',
+	'BbNoItemsSelected'         => 'No items selected',
+	'BbBulkDeleted'             => 'Deleted %1 log entries',
+	'BbBulkWhitelisted'         => 'Added %1 IPs to whitelist',
+	'BbBulkResolved'            => 'Marked %1 entries as resolved',
+	'BbBulkUnresolved'          => 'Marked %1 entries as unresolved',
+	'BbMarkAll'                 => 'Mark all rows on this page',
+	'BbMarkNone'                => 'Unmark all rows',
+
+	// Verified badge
+	'BbVerified'             => 'verified',
+	'BbUnverified'           => 'unverified',
+
+	// 1:n ResultCode enum mapping (BbStatus_<code>)
+	'BbStatus_allowed'                    => 'Request allowed',
+	'BbStatus_blocked.bot'                => 'Known bot blocked',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler blocked',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler blocked',
+	'BbStatus_blocked.malicious_ua'       => 'Malicious User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Attack payload detected',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL match',
+	'BbStatus_blocked.httpbl'             => 'http:BL match',
+	'BbStatus_blocked.behavioral'         => 'Behavioral anomaly',
+	'BbStatus_blocked.fingerprint'        => 'Bad fingerprint',
+	'BbStatus_blocked.rate_limit'         => 'Rate limit exceeded',
+	'BbStatus_blocked.custom_rule'        => 'Custom rule match',
+	'BbStatus_blocked.geoip'              => 'GeoIP block',
+	'BbStatus_blocked.residential_proxy'  => 'Residential proxy blocked',
+	'BbStatus_challenge.required'         => 'Challenge required',
+	'BbStatus_challenge.failed'           => 'Challenge failed',
+	'BbStatus_error.internal'             => 'Internal error',
+	'BbStatus_error.configuration'        => 'Configuration error',
 
 ];
