@@ -111,6 +111,16 @@ function insert_page($tag, $page, $lang, $config)
 
 	sanitize_page_tag($tag);
 
+	// PATCH: bail out early on empty tag (avoids orphan menu rows downstream).
+	if ($tag === '' || $tag === null)
+	{
+		if ($critical)
+		{
+			output_error(Ut::perc_replace(_t('ErrorInsertPage'), '(empty tag)'));
+		}
+		return;
+	}
+
 	$prefix				= $config_global['table_prefix'];
 	$q_owner_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
 	$q_admin_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = '" . _q($config['admin_name']) . "' LIMIT 1";
@@ -227,6 +237,43 @@ function insert_page($tag, $page, $lang, $config)
 		$insert_data[]	= [$default_menu_item,	_t('ErrorInsertDefaultMenuItem')];
 	}
 
+	// PATCH: helper closure that re-resolves page_id for menu inserts.
+	// Mirrors the existing $add_page / $page_exists check style below
+	// (no try/catch — keeps parity with the legacy installer).
+	$menu_guard	= function($query) use ($prefix, $page_select, $config_global, $dblink_global)
+	{
+		// Only guard INSERTs into the menu table.
+		if (stripos($query, 'INSERT INTO ' . $prefix . 'menu') !== 0)
+		{
+			return true;
+		}
+
+		switch ($config_global['db_driver'])
+		{
+			case 'mysqli':
+				$result = mysqli_query($dblink_global, $page_select);
+				return ($result && mysqli_num_rows($result) > 0);
+
+			case 'sqlite':
+				$result	= $dblink_global->query($page_select);
+				$rows	= [];
+
+				if ($result)
+				{
+					while ($r = $result->fetchArray(SQLITE3_ASSOC))
+					{
+						$rows[] = $r;
+					}
+				}
+
+				return (count($rows) > 0);
+
+			default: // PDO (mysql_pdo, sqlite_pdo)
+				$result = @$dblink_global->query($page_select);
+				return ($result && $result->fetchColumn() > 0);
+		}
+	};
+
 	switch ($config_global['db_driver'])
 	{
 		case 'mysqli':
@@ -241,6 +288,13 @@ function insert_page($tag, $page, $lang, $config)
 			{
 				foreach ($insert_data as $data)
 				{
+					// PATCH: skip menu INSERTs when the page doesn't (yet) exist.
+					// Prevents orphan menu rows with page_id = 0/NULL.
+					if (!$menu_guard($data[0]))
+					{
+						continue;
+					}
+
 					mysqli_query($dblink_global, $data[0]);
 
 					if ($critical)
@@ -277,6 +331,12 @@ function insert_page($tag, $page, $lang, $config)
 			{
 				foreach ($insert_data as $data)
 				{
+					// PATCH: skip menu INSERTs when the page doesn't (yet) exist.
+					if (!$menu_guard($data[0]))
+					{
+						continue;
+					}
+
 					$dblink_global->query($data[0]);
 
 					if ($critical)
@@ -317,6 +377,12 @@ function insert_page($tag, $page, $lang, $config)
 			{
 				foreach ($insert_data as $data)
 				{
+					// PATCH: skip menu INSERTs when the page doesn't (yet) exist.
+					if (!$menu_guard($data[0]))
+					{
+						continue;
+					}
+
 					$dblink_global->query($data[0]);
 
 					if ($critical)
