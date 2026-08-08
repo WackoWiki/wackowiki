@@ -5547,6 +5547,7 @@ class Wacko
 		$tag			= '';
 		$form_more		= '';
 		$href_param		= '';
+		$persist_params	= false;
 		extract($parameter, EXTR_IF_EXISTS);
 
 		if ($form_token === -1)
@@ -5564,6 +5565,14 @@ class Wacko
 				'name="' .		($form_name ?: '') . '" ' .
 				$form_more .
 			">\n";
+
+		if ($form_method === 'get' && $persist_params && is_array($href_param))
+		{
+			foreach ($href_param as $key => $val)
+			{
+				$result .= '<input type="hidden" name="' . Ut::html($key) . '" value="' . Ut::html((string)$val) . '">' . "\n";
+			}
+		}
 
 		if (!($this->db->rewrite_mode))
 		{
