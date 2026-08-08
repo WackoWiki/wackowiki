@@ -7292,13 +7292,28 @@ class Wacko
 		}
 	}
 
-	function show_access_mode($page_id = null, $tag = '',  $privilege = 'read'): string
+	function show_access_mode(?int $page_id = null, string $tag = '', string $privilege = 'read'): string
 	{
-		if (!$page_id)	{$page_id	= $this->page['page_id']	?? null;}
-		if (!$tag)		{$tag		= $this->page['tag']		?? null;}
+		$page_id	??= $this->page['page_id']	?? null;
+		$tag		??= $this->page['tag']		?? null;
 
 		$user		= $this->get_user();
-		$link		= $this->href('permissions', $tag);
+		$can_manage	= $this->is_owner() || $this->is_admin();
+
+		// populate $this->acl['list'] for the requested privilege
+		$this->has_access($privilege, $page_id);
+		$acl = explode("\n", $this->acl['list']);
+
+		$is_personal = count($acl) === 1
+			&& in_array(mb_strtolower($user['user_name']), $acl);
+
+		$mode = match (true) {
+			in_array('', $acl)		=> 'denied',
+			in_array('*', $acl)		=> 'public',
+			in_array('$', $acl)		=> 'registered',
+			$is_personal			=> 'private',
+			default					=> 'custom',
+		};
 
 		$acl_modes = [
 			'denied'		=> 'AccessDenied',
@@ -7308,36 +7323,14 @@ class Wacko
 			'custom'		=> 'AccessCustom',
 		];
 
-		// load $this->acl['list'] for specified privilege
-		$access		= $this->has_access($privilege, $page_id);
-		$acl		= [];
-		$acl		= explode("\n", $this->acl['list']);
+		$label	= $this->_t($acl_modes[$mode]);
+		$title	= $this->_t('AccessMode');
+		$class	= "tag acl-{$mode}";
+		$href	= $this->href('permissions', $tag);
 
-		if (in_array('', $acl))
-		{
-			$mode = 'denied';
-		}
-		else if (in_array('*', $acl))
-		{
-			$mode = 'public';
-		}
-		else if (in_array('$', $acl))
-		{
-			$mode = 'registered';
-		}
-		else if (in_array(mb_strtolower($user['user_name']), $acl) && count($acl) == 1)
-		{
-			$mode = 'private';
-		}
-		else
-		{
-			$mode = 'custom';
-		}
-
-		return
-			'<a href="' . $link . '" title="' . $this->_t('AccessMode') . '" class="tag acl-' . $mode . '">' .
-				$this->_t($acl_modes[$mode]) .
-			'</a>';
+		return $can_manage
+			? '<a href="' . $href . '" title="' . $title . '" class="' . $class . '">' . $label . '</a>'
+			: '<span title="' . $title . '" class="' . $class . '">' . $label . '</span>';
 	}
 
 	// WATCHES
