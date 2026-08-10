@@ -11,6 +11,11 @@ if (!defined('IN_WACKO'))
 // this formatter WISELY replace <br>s with paragraphs.
 
 // we got pure HTML on input.
+if ($text === '' || $text === null)
+{
+	return;
+}
+
 $para	= new Paragrafica($this);
 $result	= $para->correct($text);
 $this->set_toc_array($para->toc);

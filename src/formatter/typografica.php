@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if ($text == '')
+if ($text === '' || $text === null)
 {
 	return;
 }

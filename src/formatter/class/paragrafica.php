@@ -119,6 +119,11 @@ class Paragrafica
 
 	function correct($what)
 	{
+		if ($what === '' || $what === null)
+		{
+			return '';
+		}
+
 		// -2. ignoring a regexp (or ignoring next regexp)
 		$ignored = [];
 		{
