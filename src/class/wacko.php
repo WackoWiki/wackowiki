@@ -4018,8 +4018,6 @@ class Wacko
 		$media_class	= '';
 		$rel			= '';
 		$scale			= '';
-		$text			= str_replace('"', '&quot;', $text);
-		$title			= str_replace('"', '&quot;', $title);
 		$video_link		= false;
 
 		if ($text)
@@ -4043,8 +4041,8 @@ class Wacko
 
 		if (!$safe)
 		{
-			$text	= htmlspecialchars($text,  ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
-			$title	= htmlspecialchars($title, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+			$text	= Ut::html($text);
+			$title	= Ut::html($title);
 		}
 
 		// external media file
@@ -4650,7 +4648,7 @@ class Wacko
 
 				if (!$text)
 				{
-					$text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+					$text	= Ut::html($tag);
 				}
 
 				// disable and visualize self-referencing link
@@ -4676,7 +4674,7 @@ class Wacko
 
 		if (!$text)
 		{
-			$text = htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+			$text = Ut::html($tag);
 		}
 
 		// external link
