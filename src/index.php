@@ -16,7 +16,8 @@ if ($db->ext_bad_behaviour)
 
 	$result = $bb->run();
 
-	if (!$result->is_allowed()) {
+	if ($result->is_actionable())
+	{
 		$bb->handle_result($result);
 	}
 }

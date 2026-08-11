@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "badbehaviour/badbehaviour",
-            "version": "2.9.9",
+            "version": "2.9.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bad-Behaviour/badbehaviour.git",
-                "reference": "16a6cb1b5ff17455abfa95f680e2a62dc7f1ec17"
+                "reference": "6e81bae57a246bf81d9fffb7b6236776316eb9ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bad-Behaviour/badbehaviour/zipball/16a6cb1b5ff17455abfa95f680e2a62dc7f1ec17",
-                "reference": "16a6cb1b5ff17455abfa95f680e2a62dc7f1ec17",
+                "url": "https://api.github.com/repos/Bad-Behaviour/badbehaviour/zipball/6e81bae57a246bf81d9fffb7b6236776316eb9ee",
+                "reference": "6e81bae57a246bf81d9fffb7b6236776316eb9ee",
                 "shasum": ""
             },
             "require": {
@@ -62,10 +62,10 @@
             "support": {
                 "discussions": "https://github.com/Bad-Behaviour/badbehaviour/discussions",
                 "issues": "https://github.com/Bad-Behaviour/badbehaviour/issues",
-                "source": "https://github.com/Bad-Behaviour/badbehaviour/tree/2.9.9",
+                "source": "https://github.com/Bad-Behaviour/badbehaviour/tree/2.9.13",
                 "wiki": "https://github.com/Bad-Behaviour/badbehaviour/wiki"
             },
-            "time": "2026-08-06T17:48:34+00:00"
+            "time": "2026-08-11T15:14:59+00:00"
         },
         {
             "name": "enshrined/svg-sanitize",
