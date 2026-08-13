@@ -232,9 +232,22 @@ $config_db['xml_sitemap_time']				= $config['xml_sitemap_time'];
 $config_db['xml_sitemap_update']			= null;
 $config_db['youarehere_text']				= $config['youarehere_text'];
 
+// mark keys that should NOT be re-escaped by _q()
+$json_encoded_keys = ['wikiedit_toolbar'];
+
 foreach ($config_db as $key => $value)
 {
-	$config_insert .= "('$key', '" . _q($value) . "'), ";
+	if (in_array($key, $json_encoded_keys, true))
+	{
+		// only escape single quotes for SQL — don't touch the JSON's double quotes
+		$safe_value = str_replace("'", "''", $value);
+	}
+	else
+	{
+		$safe_value = _q($value);
+	}
+
+	$config_insert .= "('$key', '" . $safe_value . "'), ";
 }
 
 $config_insert .= "('maint_last_update', " . utc_dt() . ") ";
