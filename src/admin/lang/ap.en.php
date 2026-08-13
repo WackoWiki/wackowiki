@@ -37,7 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minute(s)',
-	'TimeLeftInfinity'			=> 'Time left:  %1 (developer mode, session does not expire)',
+	'TimeLeftInfinity'			=> 'Time left:  %1 (developer mode)',
 	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'Open',
