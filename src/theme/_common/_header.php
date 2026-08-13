@@ -99,7 +99,7 @@ if ($u_doubleclick
 	$tpl->doubleclick_href = $this->href('edit');
 }
 
-$tpl->mode = match ((int) @$user['dark_mode']){
+$tpl->mode = match ((int) @$user['color_scheme']){
 	1		=> 'light',
 	2		=> 'dark',
 	default	=> 'auto',

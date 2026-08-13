@@ -351,7 +351,7 @@ $tbl_user_setting = <<<STR
 		"wikiedit_toolbar" VARCHAR(2048) NOT NULL DEFAULT '',
 		"editor_height" INTEGER NOT NULL DEFAULT '400' ,
 		"autosave_draft" TINYINT NOT NULL DEFAULT '0' ,
-		"dark_mode" TINYINT NOT NULL DEFAULT '0' ,
+		"color_scheme" TINYINT NOT NULL DEFAULT '0' ,
 		"syntax_highlighting" TINYINT NOT NULL DEFAULT '1' ,
 		"live_preview" TINYINT NOT NULL DEFAULT '0' ,
 		"zenmode" TINYINT NOT NULL DEFAULT '0' ,

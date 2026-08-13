@@ -681,7 +681,7 @@ $
 	'ValidateIP'				=> 'اتصال جلسه به آی‌پی',
 	'AnonymousPub'				=> 'ترجیحاً به صورت ناشناس منتشر شود (برای مخفی کردن نام)',
 	'AutosaveDraft'				=> 'فعال کردن ذخیره خودکار پیش‌نویس (localStorage)',
-	'DarkMode'					=> 'حالت تاریک',
+	'ColorScheme'				=> 'حالت تاریک',
 	'EditorHeight'				=> 'ارتفاع ویرایشگر',
 	'SyntaxHighlighting'		=> 'فعال کردن برجسته‌سازی نحوی',
 	'LivePreview'				=> 'شروع با پیش‌نمایش زنده فعال',

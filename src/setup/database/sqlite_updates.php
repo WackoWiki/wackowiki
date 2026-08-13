@@ -63,12 +63,15 @@ $update_config_r6_1_1 = "DELETE FROM {$pref}config WHERE config_name IN ('disabl
 // USER SETTING
 $alter_user_setting_r6_2_1 = "ALTER TABLE {$pref}user_setting ADD COLUMN editor_height INTEGER NOT NULL DEFAULT 400";
 $alter_user_setting_r6_2_2 = "ALTER TABLE {$pref}user_setting ADD COLUMN autosave_draft TINYINT NOT NULL DEFAULT 0";
-$alter_user_setting_r6_2_3 = "ALTER TABLE {$pref}user_setting ADD COLUMN dark_mode TINYINT NOT NULL DEFAULT 0";
+$alter_user_setting_r6_2_3 = "ALTER TABLE {$pref}user_setting ADD COLUMN color_scheme TINYINT NOT NULL DEFAULT 0";
 $alter_user_setting_r6_2_4 = "ALTER TABLE {$pref}user_setting ADD COLUMN syntax_highlighting TINYINT NOT NULL DEFAULT 1";
 $alter_user_setting_r6_2_5 = "ALTER TABLE {$pref}user_setting ADD COLUMN live_preview TINYINT NOT NULL DEFAULT 0";
 $alter_user_setting_r6_2_6 = "ALTER TABLE {$pref}user_setting ADD COLUMN wikiedit_toolbar VARCHAR(2048) NOT NULL DEFAULT ''";
 $alter_user_setting_r6_2_7 = "ALTER TABLE {$pref}user_setting ADD COLUMN zenmode TINYINT NOT NULL DEFAULT 0";
 $alter_user_setting_r6_2_8 = "ALTER TABLE {$pref}user_setting ADD COLUMN widescreen_mode TINYINT NOT NULL DEFAULT 0";
+
+// [6.3.0] dark_mode -> color_scheme
+$alter_user_setting_r6_2_9 = "ALTER TABLE {$pref}user_setting RENAME COLUMN dark_mode TO color_scheme";
 
 
 // USERGROUP

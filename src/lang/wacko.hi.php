@@ -681,7 +681,7 @@ $
 	'ValidateIP'				=> 'सत्र को IP से बांधें',
 	'AnonymousPub'				=> 'अधिमानतः, अनाम रूप से प्रकाशित करें (नाम छिपाने के लिए)',
 	'AutosaveDraft'				=> 'ऑटोसेव ड्राफ्ट सक्षम करें (localStorage)',
-	'DarkMode'					=> 'डार्क मोड',
+	'ColorScheme'				=> 'डार्क मोड',
 	'EditorHeight'				=> 'एडिटर ऊँचाई',
 	'SyntaxHighlighting'		=> 'सिंटैक्स हाइलाइटिंग सक्षम करें',
 	'LivePreview'				=> 'लाइव पूर्वावलोकन के साथ शुरू करें',

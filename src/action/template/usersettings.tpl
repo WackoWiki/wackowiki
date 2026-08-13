@@ -367,10 +367,10 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="dark_mode">[ ' _t: DarkMode ' ]</label>
+							<label for="color_scheme">[ ' _t: ColorScheme ' ]</label>
 						</th>
 						<td>
-							<select id="dark_mode" name="dark_mode">
+							<select id="color_scheme" name="color_scheme">
 								<option value="0"[ ' modeoffset | select 0 ' ]>Auto (system)</option>
 								<option value="1"[ ' modeoffset | select 1 ' ]>Light</option>
 								<option value="2"[ ' modeoffset | select 2 ' ]>Dark</option>

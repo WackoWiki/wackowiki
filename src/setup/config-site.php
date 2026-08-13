@@ -28,14 +28,14 @@ write_config_hidden_nodes($config_parameters);
 ?>
 	<label class="label_top" for="site_name"><?php echo _t('SiteName');?></label>
 	<p class="notop"><?php echo _t('SiteNameDesc');?></p>
-	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['is_update'] ? $config['site_name'] : (_t('SiteNameDefault') ?? $config['site_name']); ?>" class="text_input" required>
+	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['is_update'] ? Ut::html($config['site_name']) : (_t('SiteNameDefault') ?? Ut::html($config['site_name'])); ?>" class="text_input" required>
 <?php
 if (!$config['is_update'])
 {
 	echo $separator; ?>
 	<label class="label_top" for="root_page"><?php echo _t('HomePage');?></label>
 	<p class="notop"><?php echo _t('HomePageDesc');?></p>
-	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo _t('HomePageDefault') ?? $config['root_page']; ?>" class="text_input" required>
+	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo _t('HomePageDefault') ?? Ut::html($config['root_page']); ?>" class="text_input" required>
 	<br>
 <?php
 }
