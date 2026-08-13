@@ -6205,7 +6205,7 @@ class Wacko
 	}
 
 	// extract user data from the session array
-	function get_user()
+	function get_user(): ?array
 	{
 		return $this->sess->user_profile ?? null;
 	}
@@ -7302,8 +7302,10 @@ class Wacko
 		$this->has_access($privilege, $page_id);
 		$acl = explode("\n", $this->acl['list']);
 
-		$is_personal = count($acl) === 1
-			&& in_array(mb_strtolower($user['user_name']), $acl);
+		$user_name		= $user['user_name'] ?? '';
+		$is_personal	= $user_name !== ''
+			&& count($acl) === 1
+			&& in_array(mb_strtolower($user_name), $acl);
 
 		$mode = match (true) {
 			in_array('', $acl)		=> 'denied',
