@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
 	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is a threat to security! Enter your password hash in the configuration file and run the program again.',
 
+	'ApDevNologinBlocked'		=> 'Access blocked: AP_DEV_NOLOGIN is enabled in admin.php but the request did not originate from localhost (127.0.0.1, ::1, or localhost). This is a development-only flag and must be disabled on production. Set <code>AP_DEV_NOLOGIN = 0</code> in admin.php to restore access.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 is enabled but admin.php was accessed from a non-localhost address (%2). Admin panel access has been blocked.',
+
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exist.',
 
 	'ApHomePage'				=> 'Home Page',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minute(s)',
+	'TimeLeftInfinity'			=> 'Time left:  %1 (developer mode, session does not expire)',
 	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'Open',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> 'not higher than',
 		'3'		=> 'equal',
 	],
-	'LogNoMatch'				=> 'No events that meet the criteria',
 	'LogDate'					=> 'Date',
 	'LogEvent'					=> 'Event',
 	'LogUsername'				=> 'Username',
@@ -1436,37 +1439,92 @@ $ap_translation = [
 	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
 	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
 
-	// Time-window selector
-	'BbLastSeen'             => 'Last seen',
-	'BbSeverity'             => 'Severity',
-	'BbStatusBreakdown'      => 'Status breakdown',
-	'BbBotBreakdown'         => 'Bot breakdown',
-	'BbTopAttackers'         => 'Top attacking IPs',
-	'BbGeoSummary'           => 'Geographic summary',
-	'BbCountry'              => 'Country',
-	'BbAsn'                  => 'ASN',
-	'BbVerifiedPct'          => 'Verified %',
-	'BbNoData'               => 'No data for the selected window',
+	// === Basic section ===
+	'BbBasicSection'      => 'Basic settings',
+	'BbAdvancedSection'   => 'Advanced settings',
+	'BbAdvancedHint'      => 'Most operators should not need to change these.',
 
-	// Active-filter chips
-	'BbChipSlow'             => 'Slow only',
-	'BbChipDate'             => 'Date range',
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Which bots to recognize. "minimal" (default) is fastest; "full" is most thorough.',
+	'BbStrictness'        => 'Blocking posture',
+	'BbStrictnessInfo'    => 'monitor-only logs but blocks nothing; normal blocks verified attackers; strict blocks aggressively.',
+	'BbLoggingMode'       => 'Logging',
+	'BbLogModeNormal'     => 'Normal (recommended)',
+	'BbLogModeVerbose'    => 'Verbose (logs every request)',
+	'BbLogModeOff'        => 'Off (not recommended)',
+	'BbBehindProxy'       => 'Site is behind a reverse proxy or CDN',
+	'BbBehindProxyInfo'   => 'Enable if behind Cloudflare, AWS, GCP, Fastly, etc. You must add proxy IP ranges in Advanced — without them, real client IPs cannot be determined.',
 
-	// Manage view additions
-	'BbViewHeaders'          => 'View headers',
-	'BbViewBody'             => 'View body',
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Core',
+	'BbAdvReverseProxy'   => 'Reverse Proxy',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Bot Categories',
+	'BbAdvDnsVerification'=> 'DNS Verification',
+	'BbAdvRateLimits'     => 'Rate Limiting',
+	'BbAdvHeadDetection'  => 'Head Request Detection',
+	'BbAdvAssetScraping'  => 'Asset Scraping Detection',
+	'BbAdvDynamicIp'      => 'Dynamic IP Ranges',
+	'BbAdvOnDemandRefresh'=> 'On-Demand IP Refresh',
+	'BbAdvHttpbl'         => 'Project Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Challenge / CAPTCHA',
+	'BbAdvPerformance'    => 'Performance',
+	'BbAdvGeoip'          => 'GeoIP / ASN Blocking',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Fingerprints',
+	'BbAdvCustomRules'    => 'Custom Rules',
+	'BbAdvBlockPage'      => 'Block Page',
 
-	// Custom rules
-	'BbCustomRules'                => 'Custom Rules',
-	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
-	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Search Engine',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Social Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Archive Crawler',
+	'BbCatMonitoring'     => 'Monitoring',
+	'BbCatFeedReader'     => 'Feed Reader',
+	'BbCatShoppingCrawler'=> 'Shopping Crawler',
+	'BbCatCloudInfra'     => 'Cloud Infrastructure',
+	'BbCatSecurityScanner'=> 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'      => 'Malicious',
+	'BbCatUnknown'        => 'Unknown',
 
-	// Body scan
-	'BbBodyScanSkipFields'         => 'Body scan skip fields',
-	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Fastly',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Limit on-demand refresh to specific providers. Empty = all four.',
 
-	// ----------------------------------------------
-	// Time-window selector
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Enable DNS verification',
+	'BbDnsVerificationInfo'     => 'Verify bot claims (e.g. Googlebot) by reverse-DNS lookup. Catches spoofed bots.',
+	'BbDnsTimeoutMs'            => 'DNS lookup timeout (ms)',
+	'BbDnsPositiveTtl'          => 'Positive cache TTL (seconds)',
+	'BbDnsNegativeTtl'          => 'Negative cache TTL (seconds)',
+	'BbDnsRequireForward'       => 'Require forward-confirm (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Catches PTR spoofing but adds latency and IPv6 FP risk.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD exempt paths (one per line)',
+	'BbHeadRefererExemptInfo'   => 'Paths where HEAD without Referer is legitimate (e.g. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Asset extensions to protect (one per line)',
+	'BbAssetExtensionsInfo'     => 'File types watched for direct scraping without page loads.',
+
+	'BbOnDemandBotIds'          => 'Bot IDs to refresh (empty = all)',
+	'BbOnDemandBotIdsInfo'      => 'Restrict refresh to specific bots. Leave empty to refresh all registered bots.',
+	'BbOnDemandProbability'     => 'Probability denominator (1 in N)',
+	'BbOnDemandMinAge'          => 'Min cache age (seconds)',
+	'BbOnDemandLockTtl'         => 'Lock TTL (seconds)',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (seconds)',
+	'BbOnDemandFeedTimeout'     => 'Feed fetch timeout (seconds)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (seconds)',
+	'BbDynamicIpFeeds'          => 'Feeds to refresh (one per line)',
+
+	// === Time-window selector / dashboards ===
 	'BbLastSeen'             => 'Last seen',
 	'BbSeverity'             => 'Severity',
 	'BbStatusBreakdown'      => 'Status breakdown',
@@ -1478,17 +1536,16 @@ $ap_translation = [
 	'BbVerifiedPct'          => 'Verified %',
 	'BbNoData'               => 'No data for the selected window',
 	'BbCategory'             => 'Category',
-	'BbIp'                   => 'IP',
 	'BbResponseTime'         => 'Response time',
 	'BbDateCol'              => 'Time / IP / Status',
 	'BbSelectRow'            => 'Select row',
 
-	// Active-filter chips
+	// === Active-filter chips ===
 	'BbChipSlow'             => 'Slow only',
 	'BbChipDate'             => 'Date range',
 	'BbChipResolved'         => 'Resolved',
 
-	// Manage view additions
+	// === Manage view additions ===
 	'BbViewHeaders'          => 'View headers',
 	'BbViewBody'             => 'View body',
 	'BbViewHeadersLabel'     => 'Headers',
@@ -1499,23 +1556,23 @@ $ap_translation = [
 	'BbHide'                 => 'hide',
 	'BbChars'                => 'chars',
 
-	// Custom rules
+	// === Custom rules ===
 	'BbCustomRules'                => 'Custom Rules',
 	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
 	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
 
-	// Body scan
+	// === Body scan ===
 	'BbBodyScanSkipFields'         => 'Body scan skip fields',
 	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
 
-	// Advanced filters
+	// === Advanced filters ===
 	'BbAdvancedFilters'     => 'Advanced filters',
 	'BbDateFrom'            => 'From',
 	'BbDateTo'              => 'To',
 	'BbJa3'                 => 'JA3 hash',
 	'BbSlowOnly'            => 'Slow requests only (>1s)',
 
-	// Resolved workflow
+	// === Resolved workflow ===
 	'BbResolvedActive'      => 'Active only',
 	'BbResolvedOnly'        => 'Resolved only',
 	'BbResolvedAll'         => 'Active + resolved',
@@ -1525,7 +1582,7 @@ $ap_translation = [
 	'BbRowResolved'         => 'Log entry marked resolved',
 	'BbRowUnresolved'       => 'Log entry marked unresolved',
 
-	// Bulk actions
+	// === Bulk actions ===
 	'BbBulkDeleteSelected'      => 'Delete selected',
 	'BbBulkWhitelistSelected'   => 'Whitelist IPs',
 	'BbBulkResolveSelected'     => 'Mark resolved',
@@ -1539,11 +1596,11 @@ $ap_translation = [
 	'BbMarkAll'                 => 'Mark all rows on this page',
 	'BbMarkNone'                => 'Unmark all rows',
 
-	// Verified badge
+	// === Verified badge ===
 	'BbVerified'             => 'verified',
 	'BbUnverified'           => 'unverified',
 
-	// 1:n ResultCode enum mapping (BbStatus_<code>)
+	// === ResultCode enum mapping (BbStatus_<code>) ===
 	'BbStatus_allowed'                    => 'Request allowed',
 	'BbStatus_blocked.bot'                => 'Known bot blocked',
 	'BbStatus_blocked.ai_crawler'         => 'AI crawler blocked',

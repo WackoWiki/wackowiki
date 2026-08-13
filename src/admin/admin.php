@@ -31,6 +31,7 @@ $engine->user_lang		= $engine->get_user_language();
 $engine->user_lang_dir	= $engine->get_direction($engine->user_lang);
 $engine->set_language($engine->user_lang, true);
 
+const AP_DEV_NOLOGIN	= 0; // !!! do NOT enable in production !!! // allows to keep the admin session alive indefinitely on localhost
 const AP_MAX_SESSION	= 1800; // 1800 -> 30 minutes
 const AP_MAX_IDLE		= 900;  // 900  -> 15 minutes
 
@@ -42,6 +43,53 @@ $engine->validate_post_token();
 
 // favicon
 $favicon = $engine->db->base_path . 'admin/style/favicon.svg';
+
+########################################################
+##                  Safety guard                      ##
+########################################################
+
+// localhost detection (IPv4 / IPv6 / hostname)
+$is_localhost =
+	in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'], true)
+	|| strtolower($_SERVER['HTTP_HOST'] ?? '') === 'localhost'
+	|| strtolower($_SERVER['SERVER_NAME'] ?? '') === 'localhost';
+
+// HARD SAFETY GUARD: refuse to serve the admin panel if AP_DEV_NOLOGIN
+// is enabled on a non-localhost request. This prevents accidental
+// exposure if the file is copied to a production server with the flag set.
+if (AP_DEV_NOLOGIN && !$is_localhost)
+{
+	$engine->log(1, Ut::perc_replace(
+		$engine->_t('ApDevNologinBlockedLog'),
+		'AP_DEV_NOLOGIN',
+		$_SERVER['REMOTE_ADDR'] ?? 'unknown'
+		));
+
+	$engine->http->status(403);
+	header('Content-Type: text/html; charset=utf-8');
+?>
+	<!DOCTYPE html>
+	<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
+		<head>
+			<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="robots" content="noindex, nofollow, noarchive">
+			<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
+			<link rel="icon" href="<?php echo $favicon; ?>" type="image/svg+xml">
+		</head>
+		<body>
+			<div id="mainwrapper">
+				<div id="loginbox">
+					<strong><?php echo $engine->_t('Authorization'); ?>:</strong><br><br>
+					<?php echo $engine->_t('ApDevNologinBlocked'); ?>
+				</div>
+			</div>
+		</body>
+	</html>
+	<?php
+
+	die();
+}
 
 ########################################################
 ##            End admin session and logout            ##
@@ -59,6 +107,29 @@ if (@$_GET['action'] === 'logout')
 ########################################################
 ##           Authorization & preparations             ##
 ########################################################
+
+// developer no-login: keep session alive on localhost without repeated logins
+if (AP_DEV_NOLOGIN && $is_localhost)
+{
+	if (!isset($engine->sess->ap_created))
+	{
+		// establish a persistent admin session for local development
+		$engine->sess->ap_created			=
+		$engine->sess->ap_last_activity		= time();
+		$engine->sess->ap_failed_login_count	= 0;
+
+		if (($engine->db->ap_failed_login_count ?? 0) > 0)
+		{
+			$engine->db->set('ap_failed_login_count', 0);
+		}
+	}
+	else
+	{
+		// refresh activity and extend session lifetime on every request
+		$engine->sess->ap_created			= time();
+		$engine->sess->ap_last_activity		= time();
+	}
+}
 
 // missing recovery password
 if (!$engine->db->recovery_password)
@@ -335,10 +406,12 @@ header('Content-Type: text/html; charset=utf-8');
 			<div id="tools">
 				<span>
 					<?php
-					$time_left = round((AP_MAX_SESSION - (time() - $engine->sess->ap_created)) / 60);
-
+					// build display token: '%1' is the remaining time (or infinity symbol when dev-no-login is active on localhost)
 					echo (RECOVERY_MODE ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') . NBSP . NBSP .
-						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) . NBSP . NBSP .
+						Ut::perc_replace(
+							$engine->_t(AP_DEV_NOLOGIN && $is_localhost ? 'TimeLeftInfinity' : 'TimeLeft'),
+							AP_DEV_NOLOGIN && $is_localhost ? '∞' : round((AP_MAX_SESSION - (time() - $engine->sess->ap_created)) / 60)
+						) . NBSP . NBSP .
 						$engine->compose_link_to_page('/', '', $engine->db->base_url, '/') . NBSP . NBSP .
 						($db->is_locked() || RECOVERY_MODE ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) . NBSP . NBSP .
 						$engine->_t('ApVersion') . ' ' . $engine->db->wacko_version;
