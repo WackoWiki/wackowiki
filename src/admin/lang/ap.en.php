@@ -1380,14 +1380,13 @@ $ap_translation = [
 	'BbInspectJsonInfo'      => 'WARNING: Breaks AJAX/JSON APIs (wiki markup, code snippets trigger false positives). Keep OFF.',
 	'BbInspectMultipart'     => 'Inspect multipart/form-data bodies for attacks',
 	'BbInspectMultipartInfo' => 'WARNING: Breaks file uploads. Keep OFF.',
-	'BbEnableAiCrawlerControl'      => 'Enable AI Crawler Control',
-	'BbEnableAiCrawlerControlInfo'  => 'Control AI crawler access (GPTBot, ClaudeBot, Google-Extended, etc.) via robots.txt tokens and verification. When disabled, AI crawlers are treated as regular bots.',
 
-	'BbModernFeatures'         => 'Modern Detection Features',
 	'BbEnableClientHints'      => 'Enable Client Hints Validation',
 	'BbEnableClientHintsInfo'  => 'Validate Sec-CH-UA headers against User-Agent to detect spoofed browsers (Chrome 89+).',
 	'BbEnableAgentic'          => 'Enable Agentic Behavior Detection',
 	'BbEnableAgenticInfo'      => 'Detect AI agent patterns: think-then-fetch, non-linear navigation, precision targeting.',
+	'BbStrictSearchEngines'    => 'Strict search engines',
+	'BbStrictSearchEnginesInfo' => 'Apply stricter checks to unverified search engine bots (Googlebot, Bingbot, …) before allowing them through.',
 	'BbEnableDynamicIp'        => 'Enable Dynamic IP Range Fetching',
 	'BbEnableDynamicIpInfo'    => 'Fetch official IP ranges from Google, Bing, OpenAI, Anthropic, Apple, etc. (cached 24h, stale fallback 7 days).',
 
