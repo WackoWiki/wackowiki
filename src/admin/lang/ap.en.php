@@ -1337,6 +1337,24 @@ $ap_translation = [
 	'BbFilterByCategory'         => 'Filter by this category',
 	'BbSearchBySupportKey'       => 'Search for this support key',
 
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Any check status',
+	'BbFilterCheckedOnly'      => 'Checked only',
+	'BbFilterUncheckedOnly'    => 'Unchecked only',
+	'BbChipCheck'              => 'Check status',
+	'BbChecked'                => 'checked',
+	'BbUnchecked'              => 'unchecked',
+	'BbActionCheck'            => 'check',
+	'BbActionUncheck'          => 'uncheck',
+	'BbRowChecked'             => 'Log entry marked as checked',
+	'BbRowUnchecked'           => 'Log entry unchecked',
+	'BbRowCheckedHint'         => 'This record is checked — exempt from automatic cleanup',
+	'BbRowUncheckedHint'       => 'Mark this record to keep it across automatic cleanup',
+	'BbBulkCheckSelected'      => 'Mark checked',
+	'BbBulkUncheckSelected'    => 'Unmark checked',
+	'BbBulkChecked'            => 'Marked %1 entries as checked',
+	'BbBulkUnchecked'          => 'Unmarked %1 entries',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Options saved.',
 	'BbWhitelistHint'			=> 'Inappropriate whitelisting WILL expose you to spam, or cause Bad Behaviour to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.',
@@ -1449,9 +1467,10 @@ $ap_translation = [
 	'BbStrictness'        => 'Blocking posture',
 	'BbStrictnessInfo'    => 'monitor-only logs but blocks nothing; normal blocks verified attackers; strict blocks aggressively.',
 	'BbLoggingMode'       => 'Logging',
-	'BbLogModeNormal'     => 'Normal (recommended)',
-	'BbLogModeVerbose'    => 'Verbose (logs every request)',
-	'BbLogModeOff'        => 'Off (not recommended)',
+	'BbLoggingModeInfo'   => 'Normal (recommended), Verbose (logs every request), Off (not recommended)',
+	'BbLogModeNormal'     => 'Normal',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Off',
 	'BbBehindProxy'       => 'Site is behind a reverse proxy or CDN',
 	'BbBehindProxyInfo'   => 'Enable if behind Cloudflare, AWS, GCP, Fastly, etc. You must add proxy IP ranges in Advanced — without them, real client IPs cannot be determined.',
 
@@ -1496,6 +1515,21 @@ $ap_translation = [
 	'BbCloudProviderFastly'     => 'Fastly',
 	'BbCloudProviderGcp'        => 'Google Cloud',
 	'BbCloudProvidersInfo'      => 'Limit on-demand refresh to specific providers. Empty = all four.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Log Retention',
+	'BbLogRetentionEnabled'          => 'Enable automatic log cleanup',
+	'BbLogRetentionEnabledInfo'      => 'Periodically delete log rows older than the retention window. Recommended for sites without cron access.',
+	'BbLogRetentionMaxAgeDays'       => 'Retention window (days)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rows older than this are deleted. Default: 7. Common values: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maximum row count (0 = no cap)',
+	'BbLogRetentionMaxRowsInfo'      => 'If set, oldest rows are deleted whenever the table exceeds this size, regardless of age. Useful for high-traffic sites.',
+	'BbLogRetentionProbability'       => 'Probability denominator (1 in N)',
+	'BbLogRetentionProbabilityInfo'   => '1 in N requests checks the staleness gate. Higher = less DB load. Default: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minimum interval between cleanups (seconds)',
+	'BbLogRetentionMinIntervalInfo'  => 'Hard floor on cleanup frequency. Default: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Cleanup lock TTL (seconds)',
+	'BbLogRetentionLockTtlInfo'      => 'How long the cleanup mutex is held. Default: 600 (10 min).',
 
 	// === misc new fields ===
 	'BbDnsVerificationEnabled'  => 'Enable DNS verification',

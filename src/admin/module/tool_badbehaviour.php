@@ -58,7 +58,8 @@ function admin_tool_badbehaviour($engine, $module)
 		return $map[$key] ?? $map['__unknown__'];
 	}
 
-	$action = $_POST['_action'] ?? null;
+	#$action = $_POST['_action'] ?? null;
+	$action = $_POST['_action'] ?? $_GET['_action'] ?? null;
 
 	// ============================================================
 	// URL helpers — allowlist + sanitizer
@@ -81,7 +82,7 @@ function admin_tool_badbehaviour($engine, $module)
 			// Filter state (user-selected)
 			'search', 'bot_category', 'request_method', 'blocked', 'status_code',
 			'ip', 'user_agent', 'request_uri', 'ja3', 'asn', 'country',
-			'date_from', 'date_to', 'slow', 'resolved',
+			'date_from', 'date_to', 'slow', 'resolved', 'check',
 			// Sort + pagination state
 			'sort', 'dir', 'p',
 			// View state (mode selectors are persistent; reveal_* is per-row ephemeral)
@@ -236,6 +237,25 @@ function admin_tool_badbehaviour($engine, $module)
 
 		@chmod($file, 0644);
 
+		// === Invalidate opcache for this file ===
+		//
+		// If opcache is enabled (typical in production), it caches the
+		// compiled bytecode of bb_config.php and reuses it on subsequent
+		// require() calls without re-reading the file from disk. After
+		// we write new contents, opcache still serves the OLD compiled
+		// array — which is exactly the symptom you're seeing: the form
+		// shows stale values until a reload (fresh worker = fresh
+		// opcache).
+			//
+			// opcache_invalidate() marks the file as stale; the next require()
+			// re-reads it from disk and recompiles. This is the correct place
+			// to invalidate — right after the atomic rename, before any code
+			// path that might require() this file.
+			if (function_exists('opcache_invalidate'))
+			{
+				@opcache_invalidate($file, true);
+			}
+
 		return ['success' => true, 'file' => $file, 'bytes' => $bytes];
 	}
 
@@ -246,8 +266,8 @@ function admin_tool_badbehaviour($engine, $module)
 		// ext_bad_behaviour is a wackowiki db config, not a BB3 config key.
 		// It controls whether the BB module is loaded at all. Lives outside
 		// bb_config.php because it's a wiki-level setting, not a lib setting.
-		$config['ext_bad_behaviour'] = (int)($_POST['ext_bad_behaviour'] ?? 0);
-		$engine->db->_set($config);
+		#$config['ext_bad_behaviour'] = (int)($_POST['ext_bad_behaviour'] ?? 0);
+		#$engine->db->_set($config);
 
 		// === Step 2: Detect "enable-only" submit ===
 		//
@@ -1284,6 +1304,83 @@ function admin_tool_badbehaviour($engine, $module)
 			$out['on_demand_ip_refresh'] = $od_changes;
 		}
 
+		// ============================================================
+		// ADVANCED — log_retention (automatic cleanup of old log rows)
+		// ============================================================
+
+		$log_retention_changes = [];
+
+		// enabled (bool, nested)
+		if (isset($post['log_retention_enabled']))
+		{
+			$val = (bool)$post['log_retention_enabled'];
+			$def_val = (bool)($defaults['log_retention']['enabled'] ?? true);
+			if ($val !== $def_val)
+			{
+				$log_retention_changes['enabled'] = $val;
+			}
+		}
+
+		// max_age_days (int, min 1)
+		if (isset($post['log_retention_max_age_days']))
+		{
+			$val = max(1, (int)$post['log_retention_max_age_days']);
+			$def_val = (int)($defaults['log_retention']['max_age_days'] ?? 7);
+			if ($val !== $def_val)
+			{
+				$log_retention_changes['max_age_days'] = $val;
+			}
+		}
+
+		// max_rows (int, min 0 — 0 disables)
+		if (isset($post['log_retention_max_rows']))
+		{
+			$val = max(0, (int)$post['log_retention_max_rows']);
+			$def_val = (int)($defaults['log_retention']['max_rows'] ?? 0);
+			if ($val !== $def_val)
+			{
+				$log_retention_changes['max_rows'] = $val;
+			}
+		}
+
+		// probability_denominator (int, min 1)
+		if (isset($post['log_retention_probability_denominator']))
+		{
+			$val = max(1, (int)$post['log_retention_probability_denominator']);
+			$def_val = (int)($defaults['log_retention']['probability_denominator'] ?? 1000);
+			if ($val !== $def_val)
+			{
+				$log_retention_changes['probability_denominator'] = $val;
+			}
+		}
+
+		// min_interval_seconds (int, min 0)
+		if (isset($post['log_retention_min_interval_seconds']))
+		{
+			$val = max(0, (int)$post['log_retention_min_interval_seconds']);
+			$def_val = (int)($defaults['log_retention']['min_interval_seconds'] ?? 21600);
+			if ($val !== $def_val)
+			{
+				$log_retention_changes['min_interval_seconds'] = $val;
+			}
+		}
+
+		// lock_ttl (int, min 0)
+		if (isset($post['log_retention_lock_ttl']))
+		{
+			$val = max(0, (int)$post['log_retention_lock_ttl']);
+			$def_val = (int)($defaults['log_retention']['lock_ttl'] ?? 600);
+			if ($val !== $def_val)
+			{
+				$log_retention_changes['lock_ttl'] = $val;
+			}
+		}
+
+		if (!empty($log_retention_changes))
+		{
+			$out['log_retention'] = $log_retention_changes;
+		}
+
 		return $out;
 	}
 
@@ -1767,6 +1864,7 @@ function admin_tool_badbehaviour($engine, $module)
 		$g_date_to        = trim((string)($_GET['date_to']        ?? ''));
 		$g_slow           = !empty($_GET['slow']);
 		$g_resolved       = $_GET['resolved'] ?? 'active'; // 'active' (default), 'all', 'resolved'
+		$g_check          = $_GET['check'] ?? '';
 		$g_sort           = in_array($_GET['sort'] ?? '', ['log_id','ip','status_code','bot_category','request_time_ms'], true)
 		? $_GET['sort'] : 'log_id';
 		$g_dir            = (($_GET['dir'] ?? 'desc') === 'asc') ? 'ASC' : 'DESC';
@@ -1854,6 +1952,16 @@ function admin_tool_badbehaviour($engine, $module)
 		}
 		// 'all' = no filter
 
+		// Check filter ('' = both, '1' = checked only, '0' = unchecked only)
+		if ($g_check === '1')
+		{
+			$where .= 'AND `check` = 1 ';
+		}
+		elseif ($g_check === '0')
+		{
+			$where .= 'AND `check` = 0 ';
+		}
+
 		// === Pagination ===
 		$limit = 100;
 
@@ -1877,6 +1985,7 @@ function admin_tool_badbehaviour($engine, $module)
 			'date_to'        => $g_date_to,
 			'slow'           => $g_slow ? '1' : '',
 			'resolved'       => $g_resolved !== 'active' ? $g_resolved : '',
+			'check'          => $g_check,
 			'sort'           => $g_sort !== 'log_id' ? $g_sort : '',
 			'dir'            => $g_dir !== 'DESC' ? strtolower($g_dir) : '',
 			'since'          => $window['key'] !== '24h' ? $window['key'] : '',
@@ -1913,7 +2022,8 @@ function admin_tool_badbehaviour($engine, $module)
 		$results = $engine->db->load_all(
 			'SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, '
 			. 'http_headers, user_agent, user_agent_hash, request_entity, status_code, '
-			. 'status_message, bot_category, bot_verified, support_key, ja3, request_time_ms, resolved_at '
+			. 'status_message, bot_category, bot_verified, support_key, ja3, request_time_ms, '
+			. 'resolved_at, `check` '
 			. 'FROM `' . $bb_table . '` '
 			. 'WHERE 1=1 ' . $where
 			. 'ORDER BY `' . $g_sort . '` ' . $g_dir . ', `log_id` DESC '
@@ -2001,6 +2111,12 @@ function admin_tool_badbehaviour($engine, $module)
 				<option value="active" <?php echo ($g_resolved === 'active' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedActive'); ?></option>
 				<option value="resolved" <?php echo ($g_resolved === 'resolved' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedOnly'); ?></option>
 				<option value="all" <?php echo ($g_resolved === 'all' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedAll'); ?></option>
+			</select>
+
+			<select name="check" class="bb-filter-select">
+				<option value="" <?php echo ($g_check === '' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterAnyCheck'); ?></option>
+				<option value="1" <?php echo ($g_check === '1' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterCheckedOnly'); ?></option>
+				<option value="0" <?php echo ($g_check === '0' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterUncheckedOnly'); ?></option>
 			</select>
 
 			<button type="submit" class="button"><?php echo $engine->_t('BbFilterApply');?></button>
@@ -2105,6 +2221,14 @@ function admin_tool_badbehaviour($engine, $module)
 				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
 			];
 		}
+		if ($g_check !== '')
+		{
+			$args = $filter_args; unset($args['check']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipCheck') . ': ' . ($g_check === '1' ? $engine->_t('BbChecked') : $engine->_t('BbUnchecked')),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
 
 		if ($active_chips): ?>
 			<div class="bb-filter-chips">
@@ -2140,6 +2264,8 @@ function admin_tool_badbehaviour($engine, $module)
 			<button type="submit" name="submit_action" value="bb_bulk_whitelist" class="button"><?php echo $engine->_t('BbBulkWhitelistSelected');?></button>
 			<button type="submit" name="submit_action" value="bb_bulk_resolve" class="button"><?php echo $engine->_t('BbBulkResolveSelected');?></button>
 			<button type="submit" name="submit_action" value="bb_bulk_unresolve" class="button"><?php echo $engine->_t('BbBulkUnresolveSelected');?></button>
+			<button type="submit" name="submit_action" value="bb_bulk_check" class="button"><?php echo $engine->_t('BbBulkCheckSelected');?></button>
+			<button type="submit" name="submit_action" value="bb_bulk_uncheck" class="button"><?php echo $engine->_t('BbBulkUncheckSelected');?></button>
 			<small class="bb-bulk-hint"><?php echo $engine->_t('BbBulkHint');?></small>
 		</div>
 
@@ -2206,7 +2332,10 @@ function admin_tool_badbehaviour($engine, $module)
 			foreach ($results as $result):
 				$status_code = $responses[$result['status_code']] ?? $responses['__unknown__'];
 				$is_resolved = !empty($result['resolved_at']);
-				$row_class = 'bb-row' . ($is_resolved ? ' bb-resolved' : '');
+				$is_checked  = !empty($result['check']);
+				$row_class = 'bb-row'
+					. ($is_resolved ? ' bb-resolved' : '')
+					. ($is_checked ? ' bb-checked' : '');
 
 				echo '<tr id="request-' . $result['log_id'] . '" class="' . $row_class . '">';
 				echo '<td class="check-column">';
@@ -2286,22 +2415,39 @@ function admin_tool_badbehaviour($engine, $module)
 				}
 				echo '<div class="bb-row-actions">';
 
-				// Build the resolve/unresolve link from $filter_args (clean)
-				// rather than string-concatenating onto $_SERVER['REQUEST_URI'].
-				// This prevents the duplicate `&_action=...&id=...` bug and
-				// strips reveal_*, _nonce, and other transient state.
+				// Resolve / unresolve
 				$action_args = $filter_args + [
-				'setting' => 'bb_manage',
-				'mode'    => 'tool_badbehaviour',
-				'_action' => $is_resolved ? 'bb_unresolve' : 'bb_resolve',
-				'id'      => (int)$result['log_id'],
+					'setting' => 'bb_manage',
+					'mode'    => 'tool_badbehaviour',
+					'_action' => $is_resolved ? 'bb_unresolve' : 'bb_resolve',
+					'id'      => (int)$result['log_id'],
 				];
 
 				$action_label = $is_resolved
-				? $engine->_t('BbActionUnresolve')
-				: $engine->_t('BbActionResolve');
+					? $engine->_t('BbActionUnresolve')
+					: $engine->_t('BbActionResolve');
 
 				echo '<a href="' . $engine->href('', '', $action_args) . '">[' . $action_label . ']</a>';
+
+				// Check / uncheck — separate from bulk-select checkbox (which is in the
+				// leftmost column). The `check` flag is a per-record annotation that
+				// persists across log rotations and exempts the row from autodelete.
+				$check_action = $is_checked ? 'bb_uncheck' : 'bb_check';
+				$check_label  = $is_checked
+					? $engine->_t('BbActionUncheck')
+					: $engine->_t('BbActionCheck');
+				$check_class  = $is_checked ? ' bb-row-checked' : '';
+
+				echo '<a href="' . $engine->href('', '', $filter_args + [
+					'setting' => 'bb_manage',
+					'mode'    => 'tool_badbehaviour',
+					'_action' => $check_action,
+					'id'      => (int)$result['log_id'],
+				]) . '" class="bb-row-check' . $check_class . '" title="'
+			. htmlspecialchars($is_checked
+				? $engine->_t('BbRowCheckedHint')
+				: $engine->_t('BbRowUncheckedHint'))
+				. '">[' . $check_label . ']</a>';
 
 				echo '</div>';
 				echo '</td>';
@@ -2475,7 +2621,8 @@ function admin_tool_badbehaviour($engine, $module)
 
         <tr class="hl-setting">
             <td class="label">
-                <label for="bb_logging_mode"><strong><?php echo $engine->_t('BbLoggingMode');?></strong></label>
+                <label for="bb_logging_mode"><strong><?php echo $engine->_t('BbLoggingMode');?></strong></label><br>
+                <small><?php echo $engine->_t('BbLoggingModeInfo');?></small>
             </td>
             <td>
                 <input type="radio" id="log_normal" name="logging_mode" value="normal"<?php echo ($logging_mode === 'normal' ? ' checked' : ''); ?>>
@@ -2489,15 +2636,6 @@ function admin_tool_badbehaviour($engine, $module)
             </td>
         </tr>
 
-        <tr class="hl-setting">
-            <td class="label">
-                <label for="bb_behind_proxy"><strong><?php echo $engine->_t('BbBehindProxy');?></strong></label><br>
-                <small><?php echo $engine->_t('BbBehindProxyInfo');?></small>
-            </td>
-            <td>
-                <input type="checkbox" id="bb_behind_proxy" name="behind_proxy" value="1"<?php echo ($behind_proxy ? ' checked' : ''); ?>>
-            </td>
-        </tr>
     </table>
 
     <!-- ============================================================== -->
@@ -2641,6 +2779,82 @@ function admin_tool_badbehaviour($engine, $module)
                </td>
            </tr>
 
+			<!-- ====================================================== -->
+			<!-- LOG RETENTION (automatic cleanup of old log entries)    -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvLogRetention');?></th></tr>
+
+			<tr class="hl-setting">
+			    <td class="label">
+			        <label for="bb_log_retention_enabled"><strong><?php echo $engine->_t('BbLogRetentionEnabled');?></strong></label><br>
+			        <small><?php echo $engine->_t('BbLogRetentionEnabledInfo');?></small>
+			    </td>
+			    <td>
+			        <input type="checkbox" id="bb_log_retention_enabled" name="log_retention_enabled" value="1"
+			            <?php echo (!empty($settings['log_retention']['enabled']) ? ' checked' : '');?>>
+			    </td>
+			</tr>
+
+			<tr class="hl-setting">
+			    <td class="label">
+			        <label for="bb_log_retention_max_age_days"><strong><?php echo $engine->_t('BbLogRetentionMaxAgeDays');?></strong></label><br>
+			        <small><?php echo $engine->_t('BbLogRetentionMaxAgeDaysInfo');?></small>
+			    </td>
+			    <td>
+			        <input type="number" size="5" min="1" max="3650" step="1"
+			               id="bb_log_retention_max_age_days" name="log_retention_max_age_days"
+			               value="<?php echo intval($settings['log_retention']['max_age_days'] ?? 7); ?>">
+			    </td>
+			</tr>
+
+			<tr class="hl-setting">
+			    <td class="label">
+			        <label for="bb_log_retention_max_rows"><strong><?php echo $engine->_t('BbLogRetentionMaxRows');?></strong></label><br>
+			        <small><?php echo $engine->_t('BbLogRetentionMaxRowsInfo');?></small>
+			    </td>
+			    <td>
+			        <input type="number" size="10" min="0" step="1000"
+			               id="bb_log_retention_max_rows" name="log_retention_max_rows"
+			               value="<?php echo intval($settings['log_retention']['max_rows'] ?? 0); ?>">
+			    </td>
+			</tr>
+
+			<tr class="hl-setting">
+			    <td class="label">
+			        <label for="bb_log_retention_probability"><strong><?php echo $engine->_t('BbLogRetentionProbability');?></strong></label><br>
+			        <small><?php echo $engine->_t('BbLogRetentionProbabilityInfo');?></small>
+			    </td>
+			    <td>
+			        <input type="number" size="8" min="0" step="100"
+			               id="bb_log_retention_probability" name="log_retention_probability_denominator"
+			               value="<?php echo intval($settings['log_retention']['probability_denominator'] ?? 1000); ?>">
+			    </td>
+			</tr>
+
+			<tr class="hl-setting">
+			    <td class="label">
+			        <label for="bb_log_retention_min_interval"><strong><?php echo $engine->_t('BbLogRetentionMinInterval');?></strong></label><br>
+			        <small><?php echo $engine->_t('BbLogRetentionMinIntervalInfo');?></small>
+			    </td>
+			    <td>
+			        <input type="number" size="8" min="0" step="60"
+			               id="bb_log_retention_min_interval" name="log_retention_min_interval_seconds"
+			               value="<?php echo intval($settings['log_retention']['min_interval_seconds'] ?? 21600); ?>">
+			    </td>
+			</tr>
+
+			<tr class="hl-setting">
+			    <td class="label">
+			        <label for="bb_log_retention_lock_ttl"><strong><?php echo $engine->_t('BbLogRetentionLockTtl');?></strong></label><br>
+			        <small><?php echo $engine->_t('BbLogRetentionLockTtlInfo');?></small>
+			    </td>
+			    <td>
+			        <input type="number" size="8" min="0" step="60"
+			               id="bb_log_retention_lock_ttl" name="log_retention_lock_ttl"
+			               value="<?php echo intval($settings['log_retention']['lock_ttl'] ?? 600); ?>">
+			    </td>
+			</tr>
+
             <!-- ====================================================== -->
             <!-- REVERSE PROXY                                           -->
             <!-- ====================================================== -->
@@ -2656,6 +2870,16 @@ function admin_tool_badbehaviour($engine, $module)
                     );?></small>
                 </td>
             </tr>
+
+        <tr class="hl-setting">
+            <td class="label">
+                <label for="bb_behind_proxy"><strong><?php echo $engine->_t('BbBehindProxy');?></strong></label><br>
+                <small><?php echo $engine->_t('BbBehindProxyInfo');?></small>
+            </td>
+            <td>
+                <input type="checkbox" id="bb_behind_proxy" name="behind_proxy" value="1"<?php echo ($behind_proxy ? ' checked' : ''); ?>>
+            </td>
+        </tr>
 
             <tr class="hl-setting">
                 <td class="label">
@@ -3598,6 +3822,58 @@ function admin_tool_badbehaviour($engine, $module)
 		$engine->http->redirect($back);
 	}
 
+	// Bulk check
+	if ($action == 'bb_bulk_check')
+	{
+		$ids = $_POST['submit'] ?? [];
+		$back = $_POST['_back'] ?? $engine->href('', '', bb_clean_url_args($_GET) + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
+
+		if (!is_array($ids) || empty($ids))
+		{
+			$engine->set_message($engine->_t('BbNoItemsSelected'));
+			$engine->http->redirect($back);
+		}
+
+		$ids = array_filter(array_map('intval', $ids));
+		if (!empty($ids))
+		{
+			$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+			$ok = 0;
+			foreach ($ids as $id) {
+				if ($adapter->set_log_check($id, true)) $ok++;
+			}
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkChecked'), '<strong>' . $ok . '</strong>'));
+		}
+
+		$engine->http->redirect($back);
+	}
+
+	// Bulk uncheck
+	if ($action == 'bb_bulk_uncheck')
+	{
+		$ids = $_POST['submit'] ?? [];
+		$back = $_POST['_back'] ?? $engine->href('', '', bb_clean_url_args($_GET) + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
+
+		if (!is_array($ids) || empty($ids))
+		{
+			$engine->set_message($engine->_t('BbNoItemsSelected'));
+			$engine->http->redirect($back);
+		}
+
+		$ids = array_filter(array_map('intval', $ids));
+		if (!empty($ids))
+		{
+			$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+			$ok = 0;
+			foreach ($ids as $id) {
+				if ($adapter->set_log_check($id, false)) $ok++;
+			}
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkUnchecked'), '<strong>' . $ok . '</strong>'));
+		}
+
+		$engine->http->redirect($back);
+	}
+
 	// Single-row resolve / unresolve (clicked from per-row action)
 	if ($action == 'bb_resolve' || $action == 'bb_unresolve')
 	{
@@ -3630,6 +3906,25 @@ function admin_tool_badbehaviour($engine, $module)
 		$engine->http->redirect($back);
 	}
 
+	// Single-row check / uncheck
+	if ($action == 'bb_check' || $action == 'bb_uncheck')
+	{
+		$id = (int)($_GET['id'] ?? 0);
+
+		if ($id > 0)
+		{
+			$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+			$new_state = ($action === 'bb_check');
+			$adapter->set_log_check($id, $new_state);
+			$engine->set_message($new_state
+				? $engine->_t('BbRowChecked')
+				: $engine->_t('BbRowUnchecked'));
+		}
+
+		$back = $engine->href('', '', bb_clean_url_args($_GET));
+		$engine->http->redirect($back);
+	}
+
 	#######################################################################################################
 
 
@@ -3652,7 +3947,7 @@ function admin_tool_badbehaviour($engine, $module)
 	if (!array_key_exists($mode, $tabs)) $mode = '';
 
 	echo '<h2>' . $engine->_t($tabs[$mode]) . '</h2>';
-	echo '<p>' . $engine->tab_menu($tabs, $mode, '', [], $mode_selector) . '</p><br>';
+	echo '<nav>' . $engine->tab_menu($tabs, $mode, '', [], $mode_selector) . '</nav><br>';
 
 	if (!empty($engine->db->ext_bad_behaviour))
 	{
@@ -3664,7 +3959,7 @@ function admin_tool_badbehaviour($engine, $module)
 	else
 	{
 		// Disabled state — show only the master enable switch
-		echo $engine->form_open('bb_options', ['form_more' => 'setting=bb_options_enable']);
+		echo $engine->form_open('bb_options_enable', ['form_more' => 'setting=bb_options_enable']);
 		?>
 		<br>
 		<table class="formation">
