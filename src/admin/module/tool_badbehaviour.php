@@ -291,7 +291,7 @@ function admin_tool_badbehaviour($engine, $module)
 			return [
 				'success' => false,
 				'error'   => 'Invalid JSON in custom_rules: ' . implode(' | ', array_map(
-					fn($l) => htmlspecialchars(substr($l, 0, 80)),
+					fn($l) => Ut::html(substr($l, 0, 80)),
 					$error_lines
 					)),
 				'payload' => $_POST,
@@ -1589,7 +1589,7 @@ function admin_tool_badbehaviour($engine, $module)
 			if ($reveal_id === $current_reveal)
 			{
 				return $pre
-					. ' <a href="' . htmlspecialchars(strtok($_SERVER['REQUEST_URI'] ?? '', '?')) . '?'
+					. ' <a href="' . Ut::html(strtok($_SERVER['REQUEST_URI'] ?? '', '?')) . '?'
 					. http_build_query(array_diff_key($_GET, ['reveal_' . $column => true]))
 					. '">[' . $engine->_t('BbHide') . ']</a>';
 			}
@@ -1725,12 +1725,12 @@ function admin_tool_badbehaviour($engine, $module)
 				<tr>
 					<td class="label">
 						<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $row['ip'], 'since' => $window['key']]); ?>">
-							<?php echo htmlspecialchars($row['ip']); ?>
+							<?php echo Ut::html($row['ip']); ?>
 						</a>
 					</td>
 					<td><?php echo (int)$row['hits']; ?></td>
-					<td><?php echo htmlspecialchars($row['last_seen']); ?></td>
-					<td><?php echo htmlspecialchars($row['categories'] ?? ''); ?></td>
+					<td><?php echo Ut::html($row['last_seen']); ?></td>
+					<td><?php echo Ut::html($row['categories'] ?? ''); ?></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
@@ -1782,7 +1782,7 @@ function admin_tool_badbehaviour($engine, $module)
 				<tr>
 					<td class="label">
 						<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'bot_category' => $row['bot_category'], 'since' => $window['key']]); ?>">
-							<?php echo htmlspecialchars($row['bot_category']); ?>
+							<?php echo Ut::html($row['bot_category']); ?>
 						</a>
 					</td>
 					<td>
@@ -1811,7 +1811,7 @@ function admin_tool_badbehaviour($engine, $module)
 				<thead><tr><th><?php echo $engine->_t('BbCountry');?></th><th><?php echo $engine->_t('BbHits');?></th></tr></thead>
 				<tbody>
 				<?php foreach ($geo['countries'] as $row): ?>
-					<tr><td class="label"><?php echo htmlspecialchars($row['country']);?></td><td><?php echo (int)$row['n'];?></td></tr>
+					<tr><td class="label"><?php echo Ut::html($row['country']);?></td><td><?php echo (int)$row['n'];?></td></tr>
 				<?php endforeach; ?>
 				</tbody>
 			</table>
@@ -1821,7 +1821,7 @@ function admin_tool_badbehaviour($engine, $module)
 				<thead><tr><th><?php echo $engine->_t('BbAsn');?></th><th><?php echo $engine->_t('BbHits');?></th></tr></thead>
 				<tbody>
 				<?php foreach ($geo['asns'] as $row): ?>
-					<tr><td class="label"><?php echo htmlspecialchars($row['asn']);?></td><td><?php echo (int)$row['n'];?></td></tr>
+					<tr><td class="label"><?php echo Ut::html($row['asn']);?></td><td><?php echo (int)$row['n'];?></td></tr>
 				<?php endforeach; ?>
 				</tbody>
 			</table>
@@ -2059,8 +2059,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 		<div class="bb-filter-bar">
 			<input type="search" name="search"
-				placeholder="<?php echo htmlspecialchars($engine->_t('BbSearchPlaceholder') ?? ''); ?>"
-				value="<?php echo htmlspecialchars($g_search); ?>"
+				placeholder="<?php echo Ut::html($engine->_t('BbSearchPlaceholder') ?? ''); ?>"
+				value="<?php echo Ut::html($g_search); ?>"
 				autocomplete="off" class="bb-filter-search">
 
 			<select name="bot_category" class="bb-filter-select">
@@ -2082,7 +2082,7 @@ function admin_tool_badbehaviour($engine, $module)
 					'unknown'              => 'Unknown',
 				];
 				foreach ($bot_categories as $value => $label): ?>
-					<option value="<?php echo htmlspecialchars($value); ?>"<?php echo ($g_bot_category === $value ? ' selected' : ''); ?>><?php echo htmlspecialchars($label); ?></option>
+					<option value="<?php echo Ut::html($value); ?>"<?php echo ($g_bot_category === $value ? ' selected' : ''); ?>><?php echo Ut::html($label); ?></option>
 				<?php endforeach; ?>
 			</select>
 
@@ -2121,19 +2121,19 @@ function admin_tool_badbehaviour($engine, $module)
 			<summary><?php echo $engine->_t('BbAdvancedFilters');?></summary>
 			<div class="bb-filter-bar" style="margin-top: 0.5rem;">
 				<label><?php echo $engine->_t('BbDateFrom');?>
-					<input type="date" name="date_from" value="<?php echo htmlspecialchars($g_date_from); ?>" class="bb-filter-input">
+					<input type="date" name="date_from" value="<?php echo Ut::html($g_date_from); ?>" class="bb-filter-input">
 				</label>
 				<label><?php echo $engine->_t('BbDateTo');?>
-					<input type="date" name="date_to" value="<?php echo htmlspecialchars($g_date_to); ?>" class="bb-filter-input">
+					<input type="date" name="date_to" value="<?php echo Ut::html($g_date_to); ?>" class="bb-filter-input">
 				</label>
 				<label><?php echo $engine->_t('BbJa3');?>
-					<input type="text" name="ja3" value="<?php echo htmlspecialchars($g_ja3); ?>" placeholder="32-char hash" class="bb-filter-input">
+					<input type="text" name="ja3" value="<?php echo Ut::html($g_ja3); ?>" placeholder="32-char hash" class="bb-filter-input">
 				</label>
 				<label><?php echo $engine->_t('BbAsn');?>
-					<input type="text" name="asn" value="<?php echo htmlspecialchars($g_asn); ?>" placeholder="AS12345" class="bb-filter-input">
+					<input type="text" name="asn" value="<?php echo Ut::html($g_asn); ?>" placeholder="AS12345" class="bb-filter-input">
 				</label>
 				<label><?php echo $engine->_t('BbCountry');?>
-					<input type="text" name="country" value="<?php echo htmlspecialchars($g_country); ?>" placeholder="US" maxlength="2" class="bb-filter-input">
+					<input type="text" name="country" value="<?php echo Ut::html($g_country); ?>" placeholder="US" maxlength="2" class="bb-filter-input">
 				</label>
 				<label>
 					<input type="checkbox" name="slow" value="1"<?php echo ($g_slow ? ' checked' : ''); ?>>
@@ -2166,7 +2166,7 @@ function admin_tool_badbehaviour($engine, $module)
 		{
 			$args = $filter_args; unset($args['search']);
 			$active_chips[] = [
-				'label' => $engine->_t('BbChipSearch') . ': ' . htmlspecialchars(mb_strimwidth($g_search, 0, 30, '…')),
+				'label' => $engine->_t('BbChipSearch') . ': ' . Ut::html(mb_strimwidth($g_search, 0, 30, '…')),
 				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
 			];
 		}
@@ -2174,7 +2174,7 @@ function admin_tool_badbehaviour($engine, $module)
 		{
 			$args = $filter_args; unset($args['bot_category']);
 			$active_chips[] = [
-				'label' => $engine->_t('BbChipCategory') . ': ' . htmlspecialchars($g_bot_category),
+				'label' => $engine->_t('BbChipCategory') . ': ' . Ut::html($g_bot_category),
 				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
 			];
 		}
@@ -2182,7 +2182,7 @@ function admin_tool_badbehaviour($engine, $module)
 		{
 			$args = $filter_args; unset($args['request_method']);
 			$active_chips[] = [
-				'label' => $engine->_t('BbChipMethod') . ': ' . htmlspecialchars($g_request_method),
+				'label' => $engine->_t('BbChipMethod') . ': ' . Ut::html($g_request_method),
 				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
 			];
 		}
@@ -2203,7 +2203,7 @@ function admin_tool_badbehaviour($engine, $module)
 		{
 			$args = $filter_args; unset($args['date_from'], $args['date_to']);
 			$range = trim($g_date_from . ' → ' . $g_date_to, ' →');
-			$active_chips[] = ['label' => $engine->_t('BbChipDate') . ': ' . htmlspecialchars($range), 'link' => $engine->href('', '', ['setting' => 'bb_manage'] + $args)];
+			$active_chips[] = ['label' => $engine->_t('BbChipDate') . ': ' . Ut::html($range), 'link' => $engine->href('', '', ['setting' => 'bb_manage'] + $args)];
 		}
 		if ($g_resolved !== 'active')
 		{
@@ -2248,7 +2248,7 @@ function admin_tool_badbehaviour($engine, $module)
 		// and replayed on every redirect. This is the single biggest fix for
 		// the polluted-link bug [b].
 		$back_url = $engine->href('', '', $filter_args);
-		echo '<input type="hidden" name="_back" value="' . htmlspecialchars($back_url) . '">';
+		echo '<input type="hidden" name="_back" value="' . Ut::html($back_url) . '">';
 		?>
 
 		<div class="bb-bulk-bar">
@@ -2293,8 +2293,8 @@ function admin_tool_badbehaviour($engine, $module)
 						}
 
 						echo '<a href="' . $engine->href('', '', $toggle_args) . '#bb-bulk-form"'
-							. ' title="' . htmlspecialchars($toggle_title) . '"'
-							. ' aria-label="' . htmlspecialchars($toggle_title) . '">'
+							. ' title="' . Ut::html($toggle_title) . '"'
+							. ' aria-label="' . Ut::html($toggle_title) . '">'
 							. $toggle_label . '</a>';
 					?></th>
 					<th scope="col">
@@ -2358,21 +2358,21 @@ function admin_tool_badbehaviour($engine, $module)
 					: $time_tz;
 
 				echo '<td class="bb-meta">';
-				echo '<a href="' . $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $result['ip'], 'since' => $window['key']]) . '">' . htmlspecialchars($result['ip']) . '</a><br>';
+				echo '<a href="' . $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $result['ip'], 'since' => $window['key']]) . '">' . Ut::html($result['ip']) . '</a><br>';
 				echo $host;
-				echo '<abbr title="' . htmlspecialchars($time_tz) . '">' . htmlspecialchars($rel_time) . '</abbr><br>';
+				echo '<abbr title="' . Ut::html($time_tz) . '">' . Ut::html($rel_time) . '</abbr><br>';
 				echo '<a href="' . $engine->href('', '', ['setting' => 'bb_manage', 'status_code' => $result['status_code']])
-					. '" title="[' . $status_code['response'] . '] ' . htmlspecialchars($status_code['explanation']) . '">'
-					. htmlspecialchars($status_code['log']) . '</a>';
+					. '" title="[' . $status_code['response'] . '] ' . Ut::html($status_code['explanation']) . '">'
+					. Ut::html($status_code['log']) . '</a>';
 
 				if (!empty($result['status_message']))
 				{
-					echo '<br><small>' . htmlspecialchars($result['status_message']) . '</small>';
+					echo '<br><small>' . Ut::html($result['status_message']) . '</small>';
 				}
 
 				if ($httpbl)
 				{
-					echo '<br><a href="https://www.projecthoneypot.org/ip_' . htmlspecialchars($result['ip']) . '">http:BL</a>:<br>' . $httpbl;
+					echo '<br><a href="https://www.projecthoneypot.org/ip_' . Ut::html($result['ip']) . '">http:BL</a>:<br>' . $httpbl;
 				}
 				echo '</td>';
 
@@ -2380,7 +2380,7 @@ function admin_tool_badbehaviour($engine, $module)
 				if (!empty($result['bot_category']))
 				{
 					$cat_link = $engine->href('', '', $filter_args + ['bot_category' => $result['bot_category']]);
-					echo '<a href="' . $cat_link . '" class="bb-cat-badge" title="' . $engine->_t('BbFilterByCategory') . '">' . htmlspecialchars($result['bot_category']) . '</a>';
+					echo '<a href="' . $cat_link . '" class="bb-cat-badge" title="' . $engine->_t('BbFilterByCategory') . '">' . Ut::html($result['bot_category']) . '</a>';
 					if (isset($result['bot_verified']))
 					{
 						$v_label = $result['bot_verified'] ? '✓ ' . $engine->_t('BbVerified') : '✗ ' . $engine->_t('BbUnverified');
@@ -2436,7 +2436,7 @@ function admin_tool_badbehaviour($engine, $module)
 					'_action' => $check_action,
 					'id'      => (int)$result['log_id'],
 				]) . '" class="bb-row-check' . $check_class . '" title="'
-			. htmlspecialchars($is_checked
+			. Ut::html($is_checked
 				? $engine->_t('BbRowCheckedHint')
 				: $engine->_t('BbRowUncheckedHint'))
 				. '">[' . $check_label . ']</a>';
@@ -2485,17 +2485,17 @@ function admin_tool_badbehaviour($engine, $module)
 			<tr><th colspan="2"><br><?php echo $engine->_t('BbWhitelist');?></th></tr>
 			<tr class="hl-setting">
 				<td class="label"><label for="whitelists_ip"><strong><?php echo $engine->_t('BbIpAddress');?>:</strong></label><br><small><?php echo $engine->_t('BbIpAddressInfo');?></small></td>
-				<td><textarea cols="30" rows="6" id="whitelists_ip" name="ip"><?php echo htmlspecialchars(implode("\n", $whitelists['ip'])); ?></textarea></td>
+				<td><textarea cols="30" rows="6" id="whitelists_ip" name="ip"><?php echo Ut::html(implode("\n", $whitelists['ip'])); ?></textarea></td>
 			</tr>
 			<tr class="lined"><td colspan="2"></td></tr>
 			<tr class="hl-setting">
 				<td class="label"><label for="whitelists_url"><strong><?php echo $engine->_t('BbUrl');?>:</strong></label><br><small><?php echo $engine->_t('BbUrlInfo');?></small></td>
-				<td><textarea cols="50" rows="6" id="whitelists_url" name="url"><?php echo htmlspecialchars(implode("\n", $whitelists['url'])); ?></textarea></td>
+				<td><textarea cols="50" rows="6" id="whitelists_url" name="url"><?php echo Ut::html(implode("\n", $whitelists['url'])); ?></textarea></td>
 			</tr>
 			<tr class="lined"><td colspan="2"></td></tr>
 			<tr class="hl-setting">
 				<td class="label"><label for="whitelists_useragent"><strong><?php echo $engine->_t('BbUserAgent');?>:</strong></label><br><small><?php echo $engine->_t('BbUserAgentInfo');?></small></td>
-				<td><textarea cols="50" rows="6" id="whitelists_useragent" name="useragent"><?php echo htmlspecialchars(implode("\n", $whitelists['useragent'])); ?></textarea></td>
+				<td><textarea cols="50" rows="6" id="whitelists_useragent" name="useragent"><?php echo Ut::html(implode("\n", $whitelists['useragent'])); ?></textarea></td>
 			</tr>
 		</table>
 		<br>
@@ -2515,7 +2515,7 @@ function admin_tool_badbehaviour($engine, $module)
 		{
 			echo '<div id="message" class="error fade"><p><strong>'
 	 	. $engine->_t('BbSettingsSaveFailed') . ':</strong> '
-	 	. htmlspecialchars(base64_decode($_GET['bb_save_error'])) . '</p></div>';
+	 	. Ut::html(base64_decode($_GET['bb_save_error'])) . '</p></div>';
 		}
 
 		// === Derived state ===
@@ -2650,16 +2650,16 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_strict"><strong><?php echo $engine->_t('BbStrict');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbStrictInfo');?></small>
+                    <label for="bb_strict"><strong><?php echo $engine->_t('BbStrict');?></strong><br>
+                    <small><?php echo $engine->_t('BbStrictInfo');?></small></label>
                 </td>
                 <td><input type="checkbox" id="bb_strict" name="strict" value="1"<?php echo (!empty($settings['strict']) ? ' checked' : '');?>></td>
             </tr>
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_offsite_forms"><strong><?php echo $engine->_t('BbOffsiteForms');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbOffsiteFormsInfo');?></small>
+                    <label for="bb_offsite_forms"><strong><?php echo $engine->_t('BbOffsiteForms');?></strong><br>
+                    <small><?php echo $engine->_t('BbOffsiteFormsInfo');?></small></label>
                 </td>
                 <td><input type="checkbox" id="bb_offsite_forms" name="offsite_forms" value="1"<?php echo (!empty($settings['offsite_forms']) ? ' checked' : '');?>></td>
             </tr>
@@ -2668,16 +2668,16 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_show_detailed"><strong><?php echo $engine->_t('BbShowDetailedBlockPage');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbShowDetailedBlockPageInfo');?></small>
+                    <label for="bb_show_detailed"><strong><?php echo $engine->_t('BbShowDetailedBlockPage');?></strong><br>
+                    <small><?php echo $engine->_t('BbShowDetailedBlockPageInfo');?></small></label>
                 </td>
                 <td><input type="checkbox" id="bb_show_detailed" name="show_detailed_block_page" value="1"<?php echo (!empty($settings['show_detailed_block_page']) ? ' checked' : '');?>></td>
             </tr>
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_show_contact"><strong><?php echo $engine->_t('BbShowContactInfo');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbShowContactInfoInfo');?></small>
+                    <label for="bb_show_contact"><strong><?php echo $engine->_t('BbShowContactInfo');?></strong><br>
+                    <small><?php echo $engine->_t('BbShowContactInfoInfo');?></small></label>
                 </td>
                 <td><input type="checkbox" id="bb_show_contact" name="show_contact_info" value="1"<?php echo (!empty($settings['show_contact_info']) ? ' checked' : '');?>></td>
             </tr>
@@ -2689,8 +2689,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_enable_behavioral"><strong><?php echo $engine->_t('BbEnableBehavioral');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbEnableBehavioralInfo');?></small>
+                    <label for="bb_enable_behavioral"><strong><?php echo $engine->_t('BbEnableBehavioral');?></strong><br>
+                    <small><?php echo $engine->_t('BbEnableBehavioralInfo');?></small></label>
                </td>
                 <td>
                     <input type="checkbox" id="bb_enable_behavioral"
@@ -2701,8 +2701,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_inspect_json"><strong><?php echo $engine->_t('BbInspectJson');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbInspectJsonInfo');?></small>
+                    <label for="bb_inspect_json"><strong><?php echo $engine->_t('BbInspectJson');?></strong><br>
+                    <small><?php echo $engine->_t('BbInspectJsonInfo');?></small></label>
                </td>
                 <td>
                     <input type="checkbox" id="bb_inspect_json"
@@ -2713,8 +2713,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_inspect_multipart"><strong><?php echo $engine->_t('BbInspectMultipart');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbInspectMultipartInfo');?></small>
+                    <label for="bb_inspect_multipart"><strong><?php echo $engine->_t('BbInspectMultipart');?></strong><br>
+                    <small><?php echo $engine->_t('BbInspectMultipartInfo');?></small></label>
                </td>
                 <td>
                     <input type="checkbox" id="bb_inspect_multipart"
@@ -2725,8 +2725,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_enable_ai_crawler_control"><strong><?php echo $engine->_t('BbEnableAiCrawlerControl');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbEnableAiCrawlerControlInfo');?></small>
+                    <label for="bb_enable_ai_crawler_control"><strong><?php echo $engine->_t('BbEnableAiCrawlerControl');?></strong><br>
+                    <small><?php echo $engine->_t('BbEnableAiCrawlerControlInfo');?></small></label>
                </td>
                 <td>
                     <input type="checkbox" id="bb_enable_ai_crawler_control"
@@ -2737,8 +2737,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_enable_client_hints"><strong><?php echo $engine->_t('BbEnableClientHints');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbEnableClientHintsInfo');?></small>
+                    <label for="bb_enable_client_hints"><strong><?php echo $engine->_t('BbEnableClientHints');?></strong><br>
+                    <small><?php echo $engine->_t('BbEnableClientHintsInfo');?></small></label>
                </td>
                 <td>
                     <input type="checkbox" id="bb_enable_client_hints"
@@ -2749,8 +2749,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_enable_agentic"><strong><?php echo $engine->_t('BbEnableAgentic');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbEnableAgenticInfo');?></small>
+                    <label for="bb_enable_agentic"><strong><?php echo $engine->_t('BbEnableAgentic');?></strong><br>
+                    <small><?php echo $engine->_t('BbEnableAgenticInfo');?></small></label>
                </td>
                 <td>
                     <input type="checkbox" id="bb_enable_agentic"
@@ -2761,8 +2761,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_strict_search_engines"><strong><?php echo $engine->_t('BbStrictSearchEngines');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbStrictSearchEnginesInfo');?></small>
+                    <label for="bb_strict_search_engines"><strong><?php echo $engine->_t('BbStrictSearchEngines');?></strong><br>
+                    <small><?php echo $engine->_t('BbStrictSearchEnginesInfo');?></small></label>
                </td>
                 <td>
                     <input type="checkbox" id="bb_strict_search_engines"
@@ -2778,8 +2778,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 			<tr class="hl-setting">
 			    <td class="label">
-			        <label for="bb_log_retention_enabled"><strong><?php echo $engine->_t('BbLogRetentionEnabled');?></strong></label><br>
-			        <small><?php echo $engine->_t('BbLogRetentionEnabledInfo');?></small>
+			        <label for="bb_log_retention_enabled"><strong><?php echo $engine->_t('BbLogRetentionEnabled');?></strong><br>
+			        <small><?php echo $engine->_t('BbLogRetentionEnabledInfo');?></small></label>
 			    </td>
 			    <td>
 			        <input type="checkbox" id="bb_log_retention_enabled" name="log_retention_enabled" value="1"
@@ -2789,8 +2789,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 			<tr class="hl-setting">
 			    <td class="label">
-			        <label for="bb_log_retention_max_age_days"><strong><?php echo $engine->_t('BbLogRetentionMaxAgeDays');?></strong></label><br>
-			        <small><?php echo $engine->_t('BbLogRetentionMaxAgeDaysInfo');?></small>
+			        <label for="bb_log_retention_max_age_days"><strong><?php echo $engine->_t('BbLogRetentionMaxAgeDays');?></strong><br>
+			        <small><?php echo $engine->_t('BbLogRetentionMaxAgeDaysInfo');?></small></label>
 			    </td>
 			    <td>
 			        <input type="number" size="5" min="1" max="3650" step="1"
@@ -2801,8 +2801,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 			<tr class="hl-setting">
 			    <td class="label">
-			        <label for="bb_log_retention_max_rows"><strong><?php echo $engine->_t('BbLogRetentionMaxRows');?></strong></label><br>
-			        <small><?php echo $engine->_t('BbLogRetentionMaxRowsInfo');?></small>
+			        <label for="bb_log_retention_max_rows"><strong><?php echo $engine->_t('BbLogRetentionMaxRows');?></strong><br>
+			        <small><?php echo $engine->_t('BbLogRetentionMaxRowsInfo');?></small></label>
 			    </td>
 			    <td>
 			        <input type="number" size="10" min="0" step="1000"
@@ -2813,8 +2813,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 			<tr class="hl-setting">
 			    <td class="label">
-			        <label for="bb_log_retention_probability"><strong><?php echo $engine->_t('BbLogRetentionProbability');?></strong></label><br>
-			        <small><?php echo $engine->_t('BbLogRetentionProbabilityInfo');?></small>
+			        <label for="bb_log_retention_probability"><strong><?php echo $engine->_t('BbLogRetentionProbability');?></strong><br>
+			        <small><?php echo $engine->_t('BbLogRetentionProbabilityInfo');?></small></label>
 			    </td>
 			    <td>
 			        <input type="number" size="8" min="0" step="100"
@@ -2825,8 +2825,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 			<tr class="hl-setting">
 			    <td class="label">
-			        <label for="bb_log_retention_min_interval"><strong><?php echo $engine->_t('BbLogRetentionMinInterval');?></strong></label><br>
-			        <small><?php echo $engine->_t('BbLogRetentionMinIntervalInfo');?></small>
+			        <label for="bb_log_retention_min_interval"><strong><?php echo $engine->_t('BbLogRetentionMinInterval');?></strong><br>
+			        <small><?php echo $engine->_t('BbLogRetentionMinIntervalInfo');?></small></label>
 			    </td>
 			    <td>
 			        <input type="number" size="8" min="0" step="60"
@@ -2837,8 +2837,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 			<tr class="hl-setting">
 			    <td class="label">
-			        <label for="bb_log_retention_lock_ttl"><strong><?php echo $engine->_t('BbLogRetentionLockTtl');?></strong></label><br>
-			        <small><?php echo $engine->_t('BbLogRetentionLockTtlInfo');?></small>
+			        <label for="bb_log_retention_lock_ttl"><strong><?php echo $engine->_t('BbLogRetentionLockTtl');?></strong><br>
+			        <small><?php echo $engine->_t('BbLogRetentionLockTtlInfo');?></small></label>
 			    </td>
 			    <td>
 			        <input type="number" size="8" min="0" step="60"
@@ -2865,8 +2865,8 @@ function admin_tool_badbehaviour($engine, $module)
 
         <tr class="hl-setting">
             <td class="label">
-                <label for="bb_behind_proxy"><strong><?php echo $engine->_t('BbBehindProxy');?></strong></label><br>
-                <small><?php echo $engine->_t('BbBehindProxyInfo');?></small>
+                <label for="bb_behind_proxy"><strong><?php echo $engine->_t('BbBehindProxy');?></strong><br>
+                <small><?php echo $engine->_t('BbBehindProxyInfo');?></small></label>
             </td>
             <td>
                 <input type="checkbox" id="bb_behind_proxy" name="behind_proxy" value="1"<?php echo ($behind_proxy ? ' checked' : ''); ?>>
@@ -2879,7 +2879,7 @@ function admin_tool_badbehaviour($engine, $module)
                 </td>
                 <td>
                     <input type="text" size="32" id="bb_reverse_proxy_header" name="reverse_proxy_header"
-                           value="<?php echo htmlspecialchars($settings['reverse_proxy']['header'] ?? 'X-Forwarded-For'); ?>"
+                           value="<?php echo Ut::html($settings['reverse_proxy']['header'] ?? 'X-Forwarded-For'); ?>"
                            <?php echo (!$behind_proxy ? 'disabled' : ''); ?>>
                 </td>
             </tr>
@@ -2891,7 +2891,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td>
                     <textarea cols="30" rows="6" id="bb_reverse_proxy_addresses" name="reverse_proxy_addresses"
                               <?php echo (!$behind_proxy ? 'disabled' : ''); ?>><?php
-                        echo htmlspecialchars(implode("\n", $settings['reverse_proxy']['addresses'] ?? []));
+                        echo Ut::html(implode("\n", $settings['reverse_proxy']['addresses'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
@@ -2930,7 +2930,7 @@ function admin_tool_badbehaviour($engine, $module)
                 ?>
                 <tr class="hl-setting">
                     <td class="label">
-                        <strong><?php echo htmlspecialchars($list_title); ?></strong><br>
+                        <strong><?php echo Ut::html($list_title); ?></strong><br>
                         <small>Categories in this list get the action regardless of category default.</small>
                     </td>
                     <td>
@@ -2938,9 +2938,9 @@ function admin_tool_badbehaviour($engine, $module)
                             <label style="display:block; margin: 2px 0;">
                                 <input type="checkbox"
                                        name="bot_category_<?php echo $list_key; ?>[]"
-                                       value="<?php echo htmlspecialchars($cat_value); ?>"
+                                       value="<?php echo Ut::html($cat_value); ?>"
                                        <?php echo (in_array($cat_value, $current, true) ? 'checked' : ''); ?>>
-                                <?php echo htmlspecialchars($cat_label); ?>
+                                <?php echo Ut::html($cat_label); ?>
                             </label>
                         <?php endforeach; ?>
                     </td>
@@ -2954,8 +2954,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_block_unverified_ai"><strong><?php echo $engine->_t('BbBlockUnverifiedAi');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbBlockUnverifiedAiInfo');?></small>
+                    <label for="bb_block_unverified_ai"><strong><?php echo $engine->_t('BbBlockUnverifiedAi');?></strong><br>
+                    <small><?php echo $engine->_t('BbBlockUnverifiedAiInfo');?></small></label>
                 </td>
                 <td>
                     <input type="checkbox" id="bb_block_unverified_ai" name="block_unverified_ai" value="1"
@@ -2965,8 +2965,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_strict_ai"><strong><?php echo $engine->_t('BbStrictAi');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbStrictAiInfo');?></small>
+                    <label for="bb_strict_ai"><strong><?php echo $engine->_t('BbStrictAi');?></strong><br>
+                    <small><?php echo $engine->_t('BbStrictAiInfo');?></small></label>
                 </td>
                 <td>
                     <input type="checkbox" id="bb_strict_ai" name="strict_ai" value="1"
@@ -2976,12 +2976,12 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_allowed_ai"><strong><?php echo $engine->_t('BbAllowedAiCrawlers');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbAllowedAiCrawlersInfo');?></small>
+                    <label for="bb_allowed_ai"><strong><?php echo $engine->_t('BbAllowedAiCrawlers');?></strong><br>
+                    <small><?php echo $engine->_t('BbAllowedAiCrawlersInfo');?></small></label>
                 </td>
                 <td>
                     <textarea cols="50" rows="4" id="bb_allowed_ai" name="allowed_ai_crawlers"><?php
-                        echo htmlspecialchars(implode("\n", $settings['ai_crawlers']['allowed'] ?? []));
+                        echo Ut::html(implode("\n", $settings['ai_crawlers']['allowed'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
@@ -2993,8 +2993,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_dns_verification_enabled"><strong><?php echo $engine->_t('BbDnsVerificationEnabled');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbDnsVerificationInfo');?></small>
+                    <label for="bb_dns_verification_enabled"><strong><?php echo $engine->_t('BbDnsVerificationEnabled');?></strong><br>
+                    <small><?php echo $engine->_t('BbDnsVerificationInfo');?></small></label>
                 </td>
                 <td>
                     <input type="checkbox" id="bb_dns_verification_enabled" name="dns_verification_enabled" value="1"
@@ -3037,8 +3037,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_dns_verification_require_forward"><?php echo $engine->_t('BbDnsRequireForward');?></label><br>
-                    <small><?php echo $engine->_t('BbDnsRequireForwardInfo');?></small>
+                    <label for="bb_dns_verification_require_forward"><?php echo $engine->_t('BbDnsRequireForward');?><br>
+                    <small><?php echo $engine->_t('BbDnsRequireForwardInfo');?></small></label>
                 </td>
                 <td>
                     <input type="checkbox" id="bb_dns_verification_require_forward"
@@ -3062,7 +3062,6 @@ function admin_tool_badbehaviour($engine, $module)
                 </td>
             </tr>
 <?php
-                        // Explicit keyed arrays — unambiguous, PHP 8.3 friendly.
             // Format: [POST label keys, defaults]
             $rate_buckets = [
                 'global'     => [
@@ -3170,7 +3169,7 @@ function admin_tool_badbehaviour($engine, $module)
                 </td>
                 <td>
                     <textarea cols="50" rows="3" name="head_referer_exempt_paths"><?php
-                        echo htmlspecialchars(implode("\n", $settings['head_referer_exempt_paths'] ?? ['/api/', '/wp-json/', '/health', '/status']));
+                        echo Ut::html(implode("\n", $settings['head_referer_exempt_paths'] ?? ['/api/', '/wp-json/', '/health', '/status']));
                     ?></textarea>
                 </td>
             </tr>
@@ -3190,12 +3189,12 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label><?php echo $engine->_t('BbAssetExtensionsLabel');?></label><br>
-                    <small><?php echo $engine->_t('BbAssetExtensionsInfo');?></small>
+                    <label><?php echo $engine->_t('BbAssetExtensionsLabel');?><br>
+                    <small><?php echo $engine->_t('BbAssetExtensionsInfo');?></small></label>
                 </td>
                 <td>
                     <textarea cols="40" rows="4" name="asset_extensions"><?php
-                        echo htmlspecialchars(implode("\n", $settings['asset_extensions'] ?? [
+                        echo Ut::html(implode("\n", $settings['asset_extensions'] ?? [
                             'png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg',
                             'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
                             'mp3', 'mp4', 'wav', 'ogg', 'webm',
@@ -3235,8 +3234,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_enable_dynamic_ip"><strong>Enable dynamic IP ranges</strong></label><br>
-                    <small><?php echo $engine->_t('BbEnableDynamicIpInfo');?></small>
+                    <label for="bb_enable_dynamic_ip"><strong>Enable dynamic IP ranges</strong><br>
+                    <small><?php echo $engine->_t('BbEnableDynamicIpInfo');?></small></label>
                 </td>
                 <td>
                     <input type="checkbox" id="bb_enable_dynamic_ip" name="enable_dynamic_ip_ranges" value="1"
@@ -3259,7 +3258,7 @@ function admin_tool_badbehaviour($engine, $module)
                 </td>
                 <td>
                     <textarea cols="30" rows="4" id="bb_dynamic_ip_feeds" name="dynamic_ip_ranges_feeds"><?php
-                        echo htmlspecialchars(implode("\n", $settings['dynamic_ip_ranges']['feeds'] ?? ['aws', 'cloudflare', 'fastly', 'gcp']));
+                        echo Ut::html(implode("\n", $settings['dynamic_ip_ranges']['feeds'] ?? ['aws', 'cloudflare', 'fastly', 'gcp']));
                     ?></textarea>
                 </td>
             </tr>
@@ -3271,8 +3270,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_on_demand_enabled"><strong>Enable on-demand refresh</strong></label><br>
-                    <small>Refresh IP range cache during requests. Use when you have no cron access.</small>
+                    <label for="bb_on_demand_enabled"><strong>Enable on-demand refresh</strong><br>
+                    <small>Refresh IP range cache during requests. Use when you have no cron access.</small></label>
                 </td>
                 <td>
                     <input type="checkbox" id="bb_on_demand_enabled" name="on_demand_ip_refresh_enabled" value="1"
@@ -3302,12 +3301,12 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label><?php echo $engine->_t('BbOnDemandBotIds');?></label><br>
-                    <small><?php echo $engine->_t('BbOnDemandBotIdsInfo');?></small>
+                    <label><?php echo $engine->_t('BbOnDemandBotIds');?><br>
+                    <small><?php echo $engine->_t('BbOnDemandBotIdsInfo');?></small></label>
                 </td>
                 <td>
                     <textarea cols="40" rows="3" name="on_demand_ip_refresh_bot_ids" placeholder="googlebot, gptbot, claude…"><?php
-                        echo htmlspecialchars(implode("\n", (array)($settings['on_demand_ip_refresh']['bot_ids'] ?? [])));
+                        echo Ut::html(implode("\n", (array)($settings['on_demand_ip_refresh']['bot_ids'] ?? [])));
                     ?></textarea>
                 </td>
             </tr>
@@ -3353,7 +3352,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td>
                     <input type="number" size="4" min="0.1" step="0.1"
                            id="bb_on_demand_feed_timeout" name="on_demand_ip_refresh_feed_timeout_seconds"
-                           value="<?php echo htmlspecialchars($settings['on_demand_ip_refresh']['feed_timeout_seconds'] ?? 5); ?>">
+                           value="<?php echo Ut::html($settings['on_demand_ip_refresh']['feed_timeout_seconds'] ?? 5); ?>">
                 </td>
             </tr>
 
@@ -3372,7 +3371,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td class="label"><label for="bb_httpbl_key"><?php echo $engine->_t('BbHttpblKey');?></label></td>
                 <td>
                     <input type="text" size="12" maxlength="12" id="bb_httpbl_key" name="httpbl_key"
-                           value="<?php echo htmlspecialchars($settings['httpbl']['key'] ?? ''); ?>">
+                           value="<?php echo Ut::html($settings['httpbl']['key'] ?? ''); ?>">
                 </td>
             </tr>
 
@@ -3409,12 +3408,12 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_dnsbl_lists"><strong><?php echo $engine->_t('BbDnsblLists');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbDnsblListsInfo');?></small>
+                    <label for="bb_dnsbl_lists"><strong><?php echo $engine->_t('BbDnsblLists');?></strong><br>
+                    <small><?php echo $engine->_t('BbDnsblListsInfo');?></small></label>
                 </td>
                 <td>
                     <textarea cols="50" rows="4" id="bb_dnsbl_lists" name="dnsbl_lists"><?php
-                        echo htmlspecialchars(implode("\n", $settings['dnsbl']['lists'] ?? []));
+                        echo Ut::html(implode("\n", $settings['dnsbl']['lists'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
@@ -3449,7 +3448,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td class="label"><label for="bb_challenge_site_key"><?php echo $engine->_t('BbChallengeSiteKey');?></label></td>
                 <td>
                     <input type="text" size="40" id="bb_challenge_site_key" name="challenge_site_key"
-                           value="<?php echo htmlspecialchars($settings['challenge']['site_key'] ?? ''); ?>">
+                           value="<?php echo Ut::html($settings['challenge']['site_key'] ?? ''); ?>">
                 </td>
             </tr>
 
@@ -3457,7 +3456,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td class="label"><label for="bb_challenge_secret_key"><?php echo $engine->_t('BbChallengeSecretKey');?></label></td>
                 <td>
                     <input type="text" size="40" id="bb_challenge_secret_key" name="challenge_secret_key"
-                           value="<?php echo htmlspecialchars($settings['challenge']['secret_key'] ?? ''); ?>">
+                           value="<?php echo Ut::html($settings['challenge']['secret_key'] ?? ''); ?>">
                 </td>
             </tr>
 
@@ -3466,7 +3465,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td>
                     <input type="number" size="4" min="0" max="1" step="0.1"
                            id="bb_recaptcha_min_score" name="recaptcha_min_score"
-                           value="<?php echo htmlspecialchars($settings['challenge']['recaptcha_min_score'] ?? 0.5); ?>">
+                           value="<?php echo Ut::html($settings['challenge']['recaptcha_min_score'] ?? 0.5); ?>">
                 </td>
             </tr>
 
@@ -3481,7 +3480,7 @@ function admin_tool_badbehaviour($engine, $module)
                 </td>
                 <td>
                     <textarea cols="50" rows="3" id="bb_skip_extensions" name="skip_static_extensions"><?php
-                        echo htmlspecialchars(implode("\n", $settings['performance']['skip_extensions'] ?? []));
+                        echo Ut::html(implode("\n", $settings['performance']['skip_extensions'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
@@ -3492,19 +3491,19 @@ function admin_tool_badbehaviour($engine, $module)
                 </td>
                 <td>
                     <textarea cols="50" rows="3" id="bb_skip_paths" name="skip_static_paths"><?php
-                        echo htmlspecialchars(implode("\n", $settings['performance']['skip_paths'] ?? []));
+                        echo Ut::html(implode("\n", $settings['performance']['skip_paths'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_body_scan_skip"><strong><?php echo $engine->_t('BbBodyScanSkipFields');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbBodyScanSkipFieldsInfo');?></small>
+                    <label for="bb_body_scan_skip"><strong><?php echo $engine->_t('BbBodyScanSkipFields');?></strong><br>
+                    <small><?php echo $engine->_t('BbBodyScanSkipFieldsInfo');?></small></label>
                 </td>
                 <td>
                     <textarea cols="60" rows="4" id="bb_body_scan_skip" name="body_scan_skip_fields"><?php
-                        echo htmlspecialchars(implode("\n", $settings['body_scan_skip_fields'] ?? []));
+                        echo Ut::html(implode("\n", $settings['body_scan_skip_fields'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
@@ -3526,7 +3525,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td class="label"><label for="bb_geoip_path"><?php echo $engine->_t('BbGeoipDbPath');?></label></td>
                 <td>
                     <input type="text" size="60" id="bb_geoip_path" name="geoip_database_path"
-                           value="<?php echo htmlspecialchars($settings['geoip']['database_path'] ?? ''); ?>">
+                           value="<?php echo Ut::html($settings['geoip']['database_path'] ?? ''); ?>">
                 </td>
             </tr>
 
@@ -3534,7 +3533,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td class="label"><label for="bb_blocked_countries"><?php echo $engine->_t('BbBlockedCountries');?></label></td>
                 <td>
                     <textarea cols="30" rows="3" id="bb_blocked_countries" name="blocked_countries"><?php
-                        echo htmlspecialchars(implode("\n", $settings['geoip']['blocked_countries'] ?? []));
+                        echo Ut::html(implode("\n", $settings['geoip']['blocked_countries'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
@@ -3543,7 +3542,7 @@ function admin_tool_badbehaviour($engine, $module)
                 <td class="label"><label for="bb_blocked_asns"><?php echo $engine->_t('BbBlockedAsns');?></label></td>
                 <td>
                     <textarea cols="30" rows="3" id="bb_blocked_asns" name="blocked_asns"><?php
-                        echo htmlspecialchars(implode("\n", $settings['geoip']['blocked_asns'] ?? []));
+                        echo Ut::html(implode("\n", $settings['geoip']['blocked_asns'] ?? []));
                     ?></textarea>
                 </td>
             </tr>
@@ -3555,8 +3554,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_enable_fingerprinting"><strong><?php echo $engine->_t('BbEnableFingerprinting');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbEnableFingerprintingInfo');?></small>
+                    <label for="bb_enable_fingerprinting"><strong><?php echo $engine->_t('BbEnableFingerprinting');?></strong><br>
+                    <small><?php echo $engine->_t('BbEnableFingerprintingInfo');?></small></label>
                 </td>
                 <td>
                     <input type="checkbox" id="bb_enable_fingerprinting" name="enable_fingerprinting" value="1"
@@ -3572,11 +3571,11 @@ function admin_tool_badbehaviour($engine, $module)
             ] as $def_key => $post_key): ?>
                 <tr class="hl-setting">
                     <td class="label">
-                        <label><?php echo htmlspecialchars(ucwords(str_replace('_', ' ', $def_key))); ?></label>
+                        <label><?php echo Ut::html(ucwords(str_replace('_', ' ', $def_key))); ?></label>
                     </td>
                     <td>
                         <textarea cols="50" rows="3" name="<?php echo $post_key; ?>"><?php
-                            echo htmlspecialchars(implode("\n", $settings['fingerprints'][$def_key] ?? []));
+                            echo Ut::html(implode("\n", $settings['fingerprints'][$def_key] ?? []));
                         ?></textarea>
                     </td>
                 </tr>
@@ -3589,8 +3588,8 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_custom_rules"><strong><?php echo $engine->_t('BbCustomRulesLabel');?></strong></label><br>
-                    <small><?php echo $engine->_t('BbCustomRulesInfo');?></small>
+                    <label for="bb_custom_rules"><strong><?php echo $engine->_t('BbCustomRulesLabel');?></strong><br>
+                    <small><?php echo $engine->_t('BbCustomRulesInfo');?></small></label>
                 </td>
                 <td>
                     <textarea cols="60" rows="8" id="bb_custom_rules" name="custom_rules"
@@ -3600,7 +3599,7 @@ function admin_tool_badbehaviour($engine, $module)
                         {
                             $rendered[] = json_encode($rule, JSON_UNESCAPED_SLASHES);
                         }
-                        echo htmlspecialchars(implode("\n", $rendered));
+                        echo Ut::html(implode("\n", $rendered));
                     ?></textarea>
                 </td>
             </tr>
