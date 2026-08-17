@@ -2725,18 +2725,6 @@ function admin_tool_badbehaviour($engine, $module)
 
             <tr class="hl-setting">
                 <td class="label">
-                    <label for="bb_enable_ai_crawler_control"><strong><?php echo $engine->_t('BbEnableAiCrawlerControl');?></strong><br>
-                    <small><?php echo $engine->_t('BbEnableAiCrawlerControlInfo');?></small></label>
-               </td>
-                <td>
-                    <input type="checkbox" id="bb_enable_ai_crawler_control"
-                           name="enable_ai_crawler_control" value="1"
-                        <?php echo (!empty($settings['enable_ai_crawler_control']) ? ' checked' : '');?>>
-               </td>
-           </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
                     <label for="bb_enable_client_hints"><strong><?php echo $engine->_t('BbEnableClientHints');?></strong><br>
                     <small><?php echo $engine->_t('BbEnableClientHintsInfo');?></small></label>
                </td>
