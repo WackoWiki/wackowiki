@@ -246,30 +246,22 @@ function admin_tool_badbehaviour($engine, $module)
 		// array — which is exactly the symptom you're seeing: the form
 		// shows stale values until a reload (fresh worker = fresh
 		// opcache).
-			//
-			// opcache_invalidate() marks the file as stale; the next require()
-			// re-reads it from disk and recompiles. This is the correct place
-			// to invalidate — right after the atomic rename, before any code
-			// path that might require() this file.
-			if (function_exists('opcache_invalidate'))
-			{
-				@opcache_invalidate($file, true);
-			}
+		//
+		// opcache_invalidate() marks the file as stale; the next require()
+		// re-reads it from disk and recompiles. This is the correct place
+		// to invalidate — right after the atomic rename, before any code
+		// path that might require() this file.
+		if (function_exists('opcache_invalidate'))
+		{
+			@opcache_invalidate($file, true);
+		}
 
 		return ['success' => true, 'file' => $file, 'bytes' => $bytes];
 	}
 
 	function bb_save_settings($engine): array
 	{
-		// === Step 1: Save the master enable flag (separate from bb_config.php) ===
-		//
-		// ext_bad_behaviour is a wackowiki db config, not a BB3 config key.
-		// It controls whether the BB module is loaded at all. Lives outside
-		// bb_config.php because it's a wiki-level setting, not a lib setting.
-		#$config['ext_bad_behaviour'] = (int)($_POST['ext_bad_behaviour'] ?? 0);
-		#$engine->db->_set($config);
-
-		// === Step 2: Detect "enable-only" submit ===
+		// === Step 1: Detect "enable-only" submit ===
 		//
 		// The options form submits both ext_bad_behaviour AND every other field.
 		// If the user only flipped the On/Off radio, we must NOT rebuild
@@ -282,14 +274,14 @@ function admin_tool_badbehaviour($engine, $module)
 		// we leave bb_config.php untouched.
 		$enable_only = !empty($_POST['_bb_enable_only']);
 
-		// === Step 3: Collect settings from POST into a sparse override array ===
+		// === Step 2: Collect settings from POST into a sparse override array ===
 		//
 		// bb_collect_settings_from_post() reads every Basic + Advanced field,
 		// diffs against Configuration::get_defaults(), and returns ONLY the
 		// keys that differ. Empty array = "user accepts all defaults".
 		$overrides = bb_collect_settings_from_post($_POST);
 
-		// === Step 4: Check for parse errors (currently only custom_rules JSON) ===
+		// === Step 3: Check for parse errors (currently only custom_rules JSON) ===
 		//
 		// bb_collect_settings_from_post() sets a sentinel if any custom_rules
 		// line failed JSON parsing. We can't partially write — bail out.
@@ -306,7 +298,7 @@ function admin_tool_badbehaviour($engine, $module)
 			];
 		}
 
-		// === Step 5: Write bb_config.php ONLY if there are real overrides ===
+		// === Step 4: Write bb_config.php ONLY if there are real overrides ===
 		//
 		// Two conditions short-circuit the write:
 		//   (a) The form flagged itself as "enable-only" via the sentinel.
@@ -329,7 +321,7 @@ function admin_tool_badbehaviour($engine, $module)
 			];
 		}
 
-		// === Step 6: Write bb_config.php ===
+		// === Step 5: Write bb_config.php ===
 		$write = bb_write_settings($engine, $overrides);
 
 		if (!$write['success'])
