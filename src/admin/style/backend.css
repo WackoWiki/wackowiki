@@ -1671,6 +1671,76 @@ a.cancel:active {
 	color: #333;
 }
 
+.bb-breakdown-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	margin: 1rem 0;
+}
+
+@media (max-width: 900px) {
+	.bb-breakdown-row { grid-template-columns: 1fr; }
+}
+
+.bb-breakdown-box {
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	padding: 0.75rem;
+	background: #fff;
+}
+.bb-breakdown-box.sev-bad  { border-left: 4px solid #dc3545; }
+.bb-breakdown-box.sev-warn { border-left: 4px solid #ffc107; }
+.bb-breakdown-box.sev-ok   { border-left: 4px solid #28a745; }
+
+.bb-bb-header {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 0.5rem;
+	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+}
+.bb-bb-total {
+	margin-left: auto;
+	color: #666;
+	font-size: 0.9em;
+}
+
+.bb-bb-codes {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9em;
+}
+.bb-bb-codes td {
+	padding: 2px 4px;
+	border-bottom: 1px dotted #f0f0f0;
+}
+.bb-bb-code {
+	font-family: ui-monospace, "SF Mono", Consolas, monospace;
+}
+.bb-bb-count {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+.bb-bb-empty {
+	color: #999;
+	font-size: 0.9em;
+	margin: 0.5rem 0;
+}
+
+.bb-bb-footer {
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+	border-top: 1px solid #eee;
+	text-align: right;
+	font-size: 0.9em;
+}
+.bb-bb-hint {
+	color: #666;
+	font-size: 0.85em;
+	margin-top: 0.25rem;
+}
+
 /* Resolved / unresolved row marker */
 .bb-resolved {
 	opacity: 0.55;

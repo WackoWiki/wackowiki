@@ -1696,6 +1696,171 @@ function admin_tool_badbehaviour($engine, $module)
 		return $out;
 	}
 
+	/**
+	 * Per-ResultCode counts split by enforcement bucket.
+	 *
+	 * Returns three buckets that map 1:1 to the three summary boxes:
+	 *   - 'enforced'  → actually blocked/challenged (403 served)
+	 *   - 'monitored' → would-have-blocked in monitor-only mode (logged, no 403)
+	 *   - 'allowed'   → no detection matched; logged only when verbose=true
+	 *
+	 * Each bucket is sorted by count DESC for at-a-glance triage.
+	 *
+	 * @return array{enforced: array<string,int>, monitored: array<string,int>, allowed: array<string,int>}
+	 */
+	function bb_result_breakdown($engine, string $window_sql): array
+	{
+		$sql = 'SELECT `status_code`, `enforcement_action`, COUNT(*) AS n '
+			. 'FROM ' . $engine->prefix . 'bad_behaviour '
+			. 'WHERE 1=1 ' . $window_sql
+			. 'GROUP BY `status_code`, `enforcement_action`';
+
+		try {
+			$rows = $engine->db->load_all($sql, true) ?: [];
+		} catch (\Throwable $e) {
+			return ['enforced' => [], 'monitored' => [], 'allowed' => []];
+		}
+
+		$out = [
+			'enforced'  => [],
+			'monitored' => [],
+			'allowed'   => [],
+		];
+
+		foreach ($rows as $row) {
+			$code   = (string)($row['status_code'] ?? '');
+			$action = (string)($row['enforcement_action'] ?? 'enforced');
+			$n      = (int)($row['n'] ?? 0);
+
+			if ($n <= 0 || $code === '') continue;
+
+			// Bucket by enforcement_action. The status_code prefix
+			// (blocked./monitored./allowed) should agree with the action,
+			// but we trust the action column because it's the recorded
+			// ground truth (log_request() writes both).
+			switch ($action) {
+				case 'allowed':
+					$out['allowed'][$code]   = ($out['allowed'][$code]   ?? 0) + $n;
+					break;
+
+				case 'monitored':
+					// Guard: if the code prefix doesn't match (corrupted row),
+					// still record under 'monitored' bucket — better than dropping.
+					$out['monitored'][$code] = ($out['monitored'][$code] ?? 0) + $n;
+					break;
+
+				case 'enforced':
+				default:
+					// Legacy/safe path: code 'allowed' logged with enforcement=enforced
+					// shouldn't happen with current log_request(), but handle it.
+					if ($code === 'allowed') {
+						$out['allowed'][$code] = ($out['allowed'][$code] ?? 0) + $n;
+					} else {
+						$out['enforced'][$code] = ($out['enforced'][$code] ?? 0) + $n;
+					}
+					break;
+			}
+		}
+
+		// Sort each bucket: highest count first.
+		foreach ($out as &$bucket) {
+			arsort($bucket, SORT_NUMERIC);
+		}
+		unset($bucket);
+
+		return $out;
+	}
+
+	/**
+	 * Render a single breakdown box.
+	 *
+	 * @param array<string,int> $codes                Code => count
+	 * @param string            $bucket_filter_value  'true' for blocked+monitored boxes,
+	 *                                               'false' for allowed box
+	 * @param array<string,string> $filter_args       Optional URL state to propagate
+	 */
+	function bb_render_breakdown_box(
+		$engine,
+		?string $title,
+		string $icon,
+		string $css_class,
+		array $codes,
+		string $bucket_filter_value,
+		string $window_key,
+		array $filter_args = []
+		): string {
+		$total = array_sum($codes);
+		$responses = bb_get_responses($engine);
+
+		$html  = '<div class="bb-breakdown-box ' . Ut::html($css_class) . '">';
+		$html .= '<header class="bb-bb-header">';
+		$html .= '<span class="bb-sev">' . $icon . '</span> ';
+		$html .= '<strong>' . Ut::html($title) . '</strong> ';
+		$html .= '<span class="bb-bb-total">' . $engine->number_format($total) . ' '
+			. $engine->_t('BbHits') . '</span>';
+		$html .= '</header>';
+
+		if (empty($codes)) {
+			$html .= '<p class="bb-bb-empty"><em>' . Ut::html($engine->_t('BbNoData')) . '</em></p>';
+		} else {
+			$html .= '<table class="bb-bb-codes">';
+
+			foreach ($codes as $code => $n) {
+				// Per-code drill-down link: status_code=<code> + blocked=<bucket>.
+				// bb_manage()'s WHERE clause checks status_code FIRST when non-empty,
+				// so the per-code filter is precise.
+				$code_args = bb_clean_url_args($filter_args + [
+					'setting'     => 'bb_manage',
+					'mode'        => 'tool_badbehaviour',
+					'status_code' => $code,
+					'blocked'     => $bucket_filter_value,
+					'since'       => $window_key,
+				]);
+				$code_link = $engine->href('', '', $code_args);
+
+				// Short label: strip the bucket prefix so the row reads
+				// "attack_pattern" instead of "blocked.attack_pattern"
+				// (the box header already tells you which bucket you're in).
+				$short = preg_replace('/^(blocked|monitored)\./', '', $code);
+				if ($short === $code && $code !== 'allowed') {
+					// Unknown prefix — keep as-is rather than silently mangling
+					$short = $code;
+				}
+
+				// Human-friendly label from ResultCode enum (falls back to short).
+				$label = $responses[$code]['explanation'] ?? $short;
+
+				$html .= '<tr>';
+				$html .= '<td class="bb-bb-code">'
+					. '<a href="' . $code_link . '" title="'
+						. Ut::html($label) . '">' . Ut::html($short) . '</a></td>';
+						$html .= '<td class="bb-bb-count">'
+							. '<a href="' . $code_link . '">'
+								. $engine->number_format($n) . '</a></td>';
+								$html .= '</tr>';
+			}
+
+			$html .= '</table>';
+
+			// Bucket-level "View all" link — uses blocked= filter to catch
+			// ALL codes in the bucket even if a specific code isn't in the
+			// current window (operator can widen the time window from there).
+			$bucket_args = bb_clean_url_args($filter_args + [
+				'setting' => 'bb_manage',
+				'mode'    => 'tool_badbehaviour',
+				'blocked' => $bucket_filter_value,
+				'since'   => $window_key,
+			]);
+			$html .= '<footer class="bb-bb-footer">';
+			$html .= '<a href="' . $engine->href('', '', $bucket_args) . '">'
+				. Ut::html($engine->_t('BbViewAllInLog')) . ' →</a>';
+				$html .= '</footer>';
+		}
+
+		$html .= '</div>';
+		return $html;
+	}
+
 	function bb_summary($engine)
 	{
 		$window = bb_time_window($engine);
@@ -1739,25 +1904,52 @@ function admin_tool_badbehaviour($engine, $module)
 			<p><em><?php echo $engine->_t('BbNoData');?></em></p>
 		<?php endif; ?>
 
-		<?php $severity = bb_status_severity($engine, $window['sql']); ?>
-		<h3><?php echo $engine->_t('BbStatusBreakdown');?> <small>(<?php echo $window['label']; ?>)</small></h3>
-		<table class="bb-summary formation lined">
-			<thead>
-				<tr>
-					<th scope="col"><?php echo $engine->_t('BbSeverity');?></th>
-					<th scope="col"><?php echo $engine->_t('BbHits');?></th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php foreach ($severity as $g):
-				if ($g['count'] === 0) continue; ?>
-				<tr>
-					<td class="label <?php echo $g['class']; ?>"><span class="bb-sev"><?php echo $g['icon']; ?></span> <?php echo $g['label']; ?></td>
-					<td><?php echo $engine->number_format((int)$g['count']); ?></td>
-				</tr>
-			<?php endforeach; ?>
-			</tbody>
-		</table>
+		<?php
+		$breakdown = bb_result_breakdown($engine, $window['sql']);
+		$settings_for_breakdown = bb_read_settings($engine);
+		?>
+		<h3><?php echo $engine->_t('BbResultBreakdown');?> <small>(<?php echo $window['label']; ?>)</small></h3>
+		<div class="bb-breakdown-row">
+
+		<?php
+			echo bb_render_breakdown_box(
+				$engine,
+				$engine->_t('BbBreakdownBlocked'),
+				'●',
+				'sev-bad',
+				$breakdown['enforced'],
+				'true',
+				$window['key']
+			);
+
+			echo bb_render_breakdown_box(
+				$engine,
+				$engine->_t('BbBreakdownMonitored'),
+				'◌',
+				'sev-warn',
+				$breakdown['monitored'],
+				'true',
+				$window['key']
+			);
+
+			echo bb_render_breakdown_box(
+				$engine,
+				$engine->_t('BbBreakdownAllowed'),
+				'✓',
+				'sev-ok',
+				$breakdown['allowed'],
+				'false',
+				$window['key']
+			);
+			?>
+
+		</div>
+		<?php
+		// If the Allowed box is empty AND verbose logging is off, tell the
+		// operator why — they might think "0 allowed" means "no traffic".
+		if (empty($breakdown['allowed']) && empty($settings_for_breakdown['verbose'])): ?>
+			<p class="bb-bb-hint"><small><em><?php echo Ut::html($engine->_t('BbAllowedHintVerbose')); ?></em></small></p>
+		<?php endif; ?>
 
 		<?php $bots = bb_bot_breakdown($engine, $window['sql']); ?>
 		<h3><?php echo $engine->_t('BbBotBreakdown');?> <small>(<?php echo $window['label']; ?>)</small></h3>
@@ -2190,6 +2382,62 @@ function admin_tool_badbehaviour($engine, $module)
 			$args = $filter_args; unset($args['blocked']);
 			$active_chips[] = [
 				'label' => $engine->_t('BbChipStatus') . ': ' . ($g_blocked === 'true' ? $engine->_t('BbBlocked') : $engine->_t('BbPermitted')),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
+		if ($g_key !== '')
+		{
+			$args = $filter_args; unset($args['status_code']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipStatusCode') . ': ' . Ut::html($g_key),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
+		if ($g_ip !== '')
+		{
+			$args = $filter_args; unset($args['ip']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipIp') . ': ' . Ut::html($g_ip),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
+		if ($g_user_agent !== '')
+		{
+			$args = $filter_args; unset($args['user_agent']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipUa') . ': ' . Ut::html(mb_strimwidth($g_user_agent, 0, 16, '…')),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
+		if ($g_request_uri !== '')
+		{
+			$args = $filter_args; unset($args['request_uri']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipUri') . ': ' . Ut::html(mb_strimwidth($g_request_uri, 0, 30, '…')),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
+		if ($g_ja3 !== '')
+		{
+			$args = $filter_args; unset($args['ja3']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipJa3') . ': ' . Ut::html($g_ja3),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
+		if ($g_asn !== '')
+		{
+			$args = $filter_args; unset($args['asn']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipAsn') . ': ' . Ut::html($g_asn),
+				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+			];
+		}
+		if ($g_country !== '')
+		{
+			$args = $filter_args; unset($args['country']);
+			$active_chips[] = [
+				'label' => $engine->_t('BbChipCountry') . ': ' . Ut::html($g_country),
 				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
 			];
 		}

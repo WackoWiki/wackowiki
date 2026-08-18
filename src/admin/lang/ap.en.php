@@ -1577,6 +1577,13 @@ $ap_translation = [
 	'BbChipSlow'             => 'Slow only',
 	'BbChipDate'             => 'Date range',
 	'BbChipResolved'         => 'Resolved',
+	'BbChipStatusCode' => 'Status code',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Country',
 
 	// === Manage view additions ===
 	'BbViewHeaders'          => 'View headers',
@@ -1739,5 +1746,12 @@ $ap_translation = [
 
 	// === Summary table column (was used but missing from set) ===
 	'BbCategories' => 'Categories',
+
+	'BbResultBreakdown'    => 'Result breakdown',
+	'BbBreakdownBlocked'   => 'Blocked',
+	'BbBreakdownMonitored' => 'Monitored',
+	'BbBreakdownAllowed'   => 'Allowed',
+	'BbViewAllInLog'       => 'View all in log',
+	'BbAllowedHintVerbose' => 'Allowed traffic is only logged when verbose logging is enabled. Toggle logging_mode=verbose in Settings to see what passes through.',
 
 ];
