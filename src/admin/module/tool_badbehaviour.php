@@ -1617,7 +1617,7 @@ function admin_tool_badbehaviour($engine, $module)
 			"SELECT COUNT(log_id) AS n FROM " . $engine->prefix . 'bad_behaviour ' .
 			" WHERE `status_code` NOT LIKE 'allowed'"
 		);
-		return $result['n'] ?: '';
+		return $engine->number_format($result['n'] ?: 0);
 	}
 
 	function bb_top_attackers($engine, string $window_sql, int $limit = 10): array
@@ -1728,7 +1728,7 @@ function admin_tool_badbehaviour($engine, $module)
 							<?php echo Ut::html($row['ip']); ?>
 						</a>
 					</td>
-					<td><?php echo (int)$row['hits']; ?></td>
+					<td><?php echo $engine->number_format((int)$row['hits']); ?></td>
 					<td><?php echo Ut::html($row['last_seen']); ?></td>
 					<td><?php echo Ut::html($row['categories'] ?? ''); ?></td>
 				</tr>
@@ -1753,7 +1753,7 @@ function admin_tool_badbehaviour($engine, $module)
 				if ($g['count'] === 0) continue; ?>
 				<tr>
 					<td class="label <?php echo $g['class']; ?>"><span class="bb-sev"><?php echo $g['icon']; ?></span> <?php echo $g['label']; ?></td>
-					<td><?php echo (int)$g['count']; ?></td>
+					<td><?php echo $engine->number_format((int)$g['count']); ?></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
@@ -1786,7 +1786,7 @@ function admin_tool_badbehaviour($engine, $module)
 						</a>
 					</td>
 					<td>
-						<?php echo $n; ?>
+						<?php echo $engine->number_format($n); ?>
 						<span class="bb-bar"><span class="bb-bar-fill" style="width: <?php echo $bar_width; ?>%;"></span></span>
 					</td>
 					<td><?php echo $pct; ?>%</td>
@@ -1838,7 +1838,6 @@ function admin_tool_badbehaviour($engine, $module)
 	function bb_manage($engine)
 	{
 		$bb_table = $engine->prefix . 'bad_behaviour';
-		$settings = bb_read_settings($engine);
 
 		// === Filter reads ===
 		$g_search         = trim((string)($_GET['search']         ?? ''));
@@ -2050,8 +2049,8 @@ function admin_tool_badbehaviour($engine, $module)
 		<div class="alignleft">
 			<?php echo Ut::perc_replace(
 				$engine->_t('BbRecordsFiltered'),
-				'<strong>' . $count['n'] . '</strong>',
-				'<strong>' . $totalcount['n'] . '</strong>'
+				'<strong>' . $engine->number_format($count['n']) . '</strong>',
+					'<strong>' . $engine->number_format($totalcount['n']) . '</strong>'
 			) . ':'; ?>
 		</div>
 
