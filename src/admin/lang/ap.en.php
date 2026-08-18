@@ -1467,7 +1467,7 @@ $ap_translation = [
 	'BbStrictness'        => 'Blocking posture',
 	'BbStrictnessInfo'    => 'monitor-only logs but blocks nothing; normal blocks verified attackers; strict blocks aggressively.',
 	'BbLoggingMode'       => 'Logging',
-	'BbLoggingModeInfo'   => 'Normal (recommended), Verbose (logs every request), Off (not recommended)',
+	'BbLoggingModeInfo'   => 'Normal (recommended), Verbose (logs every request), Off',
 	'BbLogModeNormal'     => 'Normal',
 	'BbLogModeVerbose'    => 'Verbose',
 	'BbLogModeOff'        => 'Off',
@@ -1652,5 +1652,92 @@ $ap_translation = [
 	'BbStatus_challenge.failed'           => 'Challenge failed',
 	'BbStatus_error.internal'             => 'Internal error',
 	'BbStatus_error.configuration'        => 'Configuration error',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Last 24 hours',
+	'BbWindow7d'  => 'Last 7 days',
+	'BbWindow30d' => 'Last 30 days',
+	'BbWindowAll' => 'All time',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimal (default)',
+	'BbPresetFull'           => 'Full',
+	'BbPresetVerifiedOnly'   => 'Verified-only',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'EU-only',
+	'BbPresetHumanOnly'      => 'Human-only',
+	'BbPresetCustom'         => 'Custom',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Monitor-only',
+	'BbStrictnessNormal'      => 'Normal',
+	'BbStrictnessStrict'      => 'Strict',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Enable head request detection',
+	'BbHeadRequireReferer'       => 'Require Referer on HEAD',
+	'BbHeadFloodThreshold'       => 'Flood threshold (per session)',
+	'BbHeadProbeThreshold'       => 'Probe threshold (per IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Enable asset scraping detection',
+	'BbAssetNoRefererThreshold'    => 'No-referer threshold (per IP / hour)',
+	'BbAssetOnlySessionThreshold'  => 'Asset-only session threshold',
+	'BbAssetPatternThreshold'      => 'Sequential pattern threshold (per IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Enable dynamic IP ranges',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Enable on-demand refresh',
+	'BbOnDemandRefreshInfo'      => 'Refresh IP range cache during requests. Use when you have no cron access.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Bad JA3',
+	'BbFpBadH2'           => 'Bad H2',
+	'BbFpBotHeaderOrders' => 'Bot Header Orders',
+	'BbFpExpectedJa3'     => 'Expected JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Blocked',
+	'BbListChallenge' => 'Challenge (CAPTCHA)',
+	'BbListLogOnly'   => 'Log only (no enforcement)',
+	'BbListAllowed'   => 'Explicitly allowed',
+	'BbListHint'      => 'Categories in this list get the action regardless of category default.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Search Engine',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Social Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Archive Crawler',
+	'BbCatMonitoring'      => 'Monitoring',
+	'BbCatFeedReader'      => 'Feed Reader',
+	'BbCatShoppingCrawler' => 'Shopping Crawler',
+	'BbCatCloudInfra'      => 'Cloud Infrastructure',
+	'BbCatSecurityScanner' => 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'       => 'Malicious',
+	'BbCatUnknown'         => 'Unknown',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Attack patterns',
+	'BbSevChallenges'     => 'Challenges issued',
+	'BbSevPermitted'      => 'Permitted',
+	'BbSevErrors'         => 'Errors',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Categories',
 
 ];
