@@ -1636,6 +1636,9 @@ $ap_translation = [
 	'BbMarkAll'                 => 'Mark all rows on this page',
 	'BbMarkNone'                => 'Unmark all rows',
 
+	'BbBulkFailed'              => 'Could not update the selected rows. Check the database or try again.',
+	'BbBulkWhitelistedNone'     => 'No new IPs were added — all selected IPs were already on the whitelist.',
+
 	// === Verified badge ===
 	'BbVerified'             => 'verified',
 	'BbUnverified'           => 'unverified',

@@ -2487,14 +2487,13 @@ function admin_tool_badbehaviour($engine, $module)
 		]);
 		echo '<input type="hidden" name="setting" value="bb_manage">';
 		echo '<input type="hidden" name="mode" value="tool_badbehaviour">';
-		echo '<input type="hidden" name="_action" value="">';
 
 		// Build _back from cleaned $filter_args, NOT from $_SERVER['REQUEST_URI'].
 		// REQUEST_URI contains reveal_*, _nonce, _action, id, _back — any of
 		// which then get serialized into the bulk form's _back hidden input
 		// and replayed on every redirect. This is the single biggest fix for
 		// the polluted-link bug [b].
-		$back_url = $engine->href('', '', $filter_args);
+		$back_url = $engine->href('', '', $filter_args + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
 		echo '<input type="hidden" name="_back" value="' . Ut::html($back_url) . '">';
 		?>
 
@@ -3861,8 +3860,15 @@ function admin_tool_badbehaviour($engine, $module)
 	// DISPATCHERS — POST handlers (must run BEFORE the page renders)
 	// ============================================================
 
-	// Map bulk-form "submit_action" buttons to dispatcher actions
-	if ($action === null && isset($_POST['submit_action']))
+	// Bulk-action form: its _action field is the FORM NAME (bb_bulk), not the
+	// action to run. The clicked button's name="submit_action" carries the real
+	// action. Check it FIRST so we override the (non-)action stored in _action.
+	//
+	// Without this, the bulk buttons silently no-op because:
+	//   - $action becomes 'bb_bulk' (from form_open()'s _action hidden field)
+	//   - none of the `if ($action == 'bb_bulk_*')` branches match
+	//   - the dispatcher falls through, the redirect-to-back happens, nothing changes
+	if (isset($_POST['submit_action']) && is_string($_POST['submit_action']))
 	{
 		$action = $_POST['submit_action'];
 	}
@@ -3913,8 +3919,6 @@ function admin_tool_badbehaviour($engine, $module)
 	if ($action == 'bb_bulk_delete')
 	{
 		$ids = $_POST['submit'] ?? [];
-		// Prefer the cleaned _back hidden input we built in the bulk form;
-		// fall back to a clean URL from $_GET (stripped via allowlist).
 		$back = $_POST['_back'] ?? $engine->href('', '', bb_clean_url_args($_GET) + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
 
 		if (!is_array($ids) || empty($ids))
@@ -3923,16 +3927,15 @@ function admin_tool_badbehaviour($engine, $module)
 			$engine->http->redirect($back);
 		}
 
-		$ids = array_filter(array_map('intval', $ids));
-		if (!empty($ids))
+		$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+		if ($adapter->delete_log_bulk($ids))
 		{
-			$id_list = implode(',', $ids);
-			$engine->db->sql_query(
-				'DELETE FROM ' . $engine->prefix . 'bad_behaviour WHERE log_id IN (' . $id_list . ')'
-			);
 			$engine->db->invalidate_sql_cache();
-			$count = count($ids);
-			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkDeleted'), '<strong>' . $count . '</strong>'));
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkDeleted'), '<strong>' . count($ids) . '</strong>'));
+		}
+		else
+		{
+			$engine->set_message($engine->_t('BbBulkFailed'));
 		}
 
 		$engine->http->redirect($back);
@@ -3942,8 +3945,6 @@ function admin_tool_badbehaviour($engine, $module)
 	if ($action == 'bb_bulk_whitelist')
 	{
 		$ids = $_POST['submit'] ?? [];
-		// Prefer the cleaned _back hidden input we built in the bulk form;
-		// fall back to a clean URL from $_GET (stripped via allowlist).
 		$back = $_POST['_back'] ?? $engine->href('', '', bb_clean_url_args($_GET) + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
 
 		if (!is_array($ids) || empty($ids))
@@ -3952,46 +3953,18 @@ function admin_tool_badbehaviour($engine, $module)
 			$engine->http->redirect($back);
 		}
 
-		$ids = array_filter(array_map('intval', $ids));
-		$added = 0;
+		$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+		$added = $adapter->whitelist_ips_from_logs_bulk($ids);
 
-		if (!empty($ids))
+		if ($added > 0)
 		{
-			$id_list = implode(',', $ids);
-			$rows = $engine->db->load_all(
-				'SELECT DISTINCT `ip` FROM ' . $engine->prefix . 'bad_behaviour WHERE log_id IN (' . $id_list . ')',
-				true
-			);
-
-			$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
-			$existing = $adapter->get_whitelist();
-			$current_ips = $existing['ip'] ?? [];
-
-			$new_ips = $current_ips;
-			foreach ($rows as $row)
-			{
-				$ip = $row['ip'];
-				if ($ip !== '' && !in_array($ip, $new_ips, true))
-				{
-					$new_ips[] = $ip;
-					$added++;
-				}
-			}
-
-			// Write back to bb_whitelist.conf (INI format)
-			$file = defined('CONFIG_DIR') ? CONFIG_DIR . '/bb_whitelist.conf' : 'config/bb_whitelist.conf';
-
-			$content = '';
-			foreach (($existing['useragent'] ?? []) as $ua) $content .= "[useragent]\n" . 'whitelist = "' . $ua . "\"\n\n";
-			foreach (($existing['url'] ?? []) as $url)     $content .= "[url]\n" . 'whitelist = "' . $url . "\"\n\n";
-			foreach (($existing['asn'] ?? []) as $asn)     $content .= "[asn]\n" . 'whitelist = "' . $asn . "\"\n\n";
-			foreach (($existing['country'] ?? []) as $c)   $content .= "[country]\n" . 'whitelist = "' . $c . "\"\n\n";
-			foreach ($new_ips as $ip)                       $content .= "[ip]\n" . 'whitelist = "' . $ip . "\"\n\n";
-
-			@file_put_contents($file, $content);
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkWhitelisted'), '<strong>' . $added . '</strong>'));
+		}
+		else
+		{
+			$engine->set_message($engine->_t('BbBulkWhitelistedNone'));
 		}
 
-		$engine->set_message(Ut::perc_replace($engine->_t('BbBulkWhitelisted'), '<strong>' . $added . '</strong>'));
 		$engine->http->redirect($back);
 	}
 
@@ -3999,8 +3972,6 @@ function admin_tool_badbehaviour($engine, $module)
 	if ($action == 'bb_bulk_resolve')
 	{
 		$ids = $_POST['submit'] ?? [];
-		// Prefer the cleaned _back hidden input we built in the bulk form;
-		// fall back to a clean URL from $_GET (stripped via allowlist).
 		$back = $_POST['_back'] ?? $engine->href('', '', bb_clean_url_args($_GET) + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
 
 		if (!is_array($ids) || empty($ids))
@@ -4009,16 +3980,14 @@ function admin_tool_badbehaviour($engine, $module)
 			$engine->http->redirect($back);
 		}
 
-		$ids = array_filter(array_map('intval', $ids));
-		if (!empty($ids))
+		$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+		if ($adapter->set_log_resolved_bulk($ids, true))
 		{
-			$id_list = implode(',', $ids);
-			$engine->db->sql_query(
-				'UPDATE ' . $engine->prefix . 'bad_behaviour SET resolved_at = ' . $engine->db->q(gmdate('Y-m-d H:i:s'))
-				. ' WHERE log_id IN (' . $id_list . ') AND resolved_at IS NULL'
-			);
-			$count = $engine->db->affected_rows();
-			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkResolved'), '<strong>' . $count . '</strong>'));
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkResolved'), '<strong>' . count($ids) . '</strong>'));
+		}
+		else
+		{
+			$engine->set_message($engine->_t('BbBulkFailed'));
 		}
 
 		$engine->http->redirect($back);
@@ -4028,8 +3997,6 @@ function admin_tool_badbehaviour($engine, $module)
 	if ($action == 'bb_bulk_unresolve')
 	{
 		$ids = $_POST['submit'] ?? [];
-		// Prefer the cleaned _back hidden input we built in the bulk form;
-		// fall back to a clean URL from $_GET (stripped via allowlist).
 		$back = $_POST['_back'] ?? $engine->href('', '', bb_clean_url_args($_GET) + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
 
 		if (!is_array($ids) || empty($ids))
@@ -4038,16 +4005,14 @@ function admin_tool_badbehaviour($engine, $module)
 			$engine->http->redirect($back);
 		}
 
-		$ids = array_filter(array_map('intval', $ids));
-		if (!empty($ids))
+		$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+		if ($adapter->set_log_resolved_bulk($ids, false))
 		{
-			$id_list = implode(',', $ids);
-			$engine->db->sql_query(
-				'UPDATE ' . $engine->prefix . 'bad_behaviour SET resolved_at = NULL '
-				. ' WHERE log_id IN (' . $id_list . ')'
-			);
-			$count = $engine->db->affected_rows();
-			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkUnresolved'), '<strong>' . $count . '</strong>'));
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkUnresolved'), '<strong>' . count($ids) . '</strong>'));
+		}
+		else
+		{
+			$engine->set_message($engine->_t('BbBulkFailed'));
 		}
 
 		$engine->http->redirect($back);
@@ -4065,15 +4030,14 @@ function admin_tool_badbehaviour($engine, $module)
 			$engine->http->redirect($back);
 		}
 
-		$ids = array_filter(array_map('intval', $ids));
-		if (!empty($ids))
+		$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+		if ($adapter->set_log_check_bulk($ids, true))
 		{
-			$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
-			$ok = 0;
-			foreach ($ids as $id) {
-				if ($adapter->set_log_check($id, true)) $ok++;
-			}
-			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkChecked'), '<strong>' . $ok . '</strong>'));
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkChecked'), '<strong>' . count($ids) . '</strong>'));
+		}
+		else
+		{
+			$engine->set_message($engine->_t('BbBulkFailed'));
 		}
 
 		$engine->http->redirect($back);
@@ -4091,15 +4055,14 @@ function admin_tool_badbehaviour($engine, $module)
 			$engine->http->redirect($back);
 		}
 
-		$ids = array_filter(array_map('intval', $ids));
-		if (!empty($ids))
+		$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
+		if ($adapter->set_log_check_bulk($ids, false))
 		{
-			$adapter = new \BadBehaviour\Adapter\WackoWikiAdapter($engine->db);
-			$ok = 0;
-			foreach ($ids as $id) {
-				if ($adapter->set_log_check($id, false)) $ok++;
-			}
-			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkUnchecked'), '<strong>' . $ok . '</strong>'));
+			$engine->set_message(Ut::perc_replace($engine->_t('BbBulkUnchecked'), '<strong>' . count($ids) . '</strong>'));
+		}
+		else
+		{
+			$engine->set_message($engine->_t('BbBulkFailed'));
 		}
 
 		$engine->http->redirect($back);
