@@ -1741,6 +1741,22 @@ a.cancel:active {
 	margin-top: 0.25rem;
 }
 
+.bb-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .bb-summary-grid { grid-template-columns: 1fr; }
+}
+
+.bb-summary-col h3 {
+    margin-top: 0;  /* grid items have no implicit top spacing */
+}
+
 /* Resolved / unresolved row marker */
 .bb-resolved {
 	opacity: 0.55;

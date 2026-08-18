@@ -1620,7 +1620,7 @@ function admin_tool_badbehaviour($engine, $module)
 		return $engine->number_format($result['n'] ?: 0);
 	}
 
-	function bb_top_attackers($engine, string $window_sql, int $limit = 10): array
+	function bb_top_blocked($engine, string $window_sql, int $limit = 10): array
 	{
 		$sql = 'SELECT `ip`, COUNT(*) AS hits, MIN(`date`) AS first_seen, MAX(`date`) AS last_seen, '
 			. "GROUP_CONCAT(DISTINCT `status_code`) AS codes, "
@@ -1873,36 +1873,81 @@ function admin_tool_badbehaviour($engine, $module)
 
 		<?php echo bb_render_time_selector($engine, $window['key'], ''); ?>
 
-		<?php $attackers = bb_top_attackers($engine, $window['sql'], 10); ?>
-		<h3><?php echo $engine->_t('BbTopAttackers');?> <small>(<?php echo $window['label']; ?>)</small></h3>
-		<?php if ($attackers): ?>
-		<table class="bb-summary formation lined">
-			<thead>
-				<tr>
-					<th scope="col"><?php echo $engine->_t('BbIp');?></th>
-					<th scope="col"><?php echo $engine->_t('BbHits');?></th>
-					<th scope="col"><?php echo $engine->_t('BbLastSeen');?></th>
-					<th scope="col"><?php echo $engine->_t('BbCategories');?></th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php foreach ($attackers as $row): ?>
-				<tr>
-					<td class="label">
-						<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $row['ip'], 'since' => $window['key']]); ?>">
-							<?php echo Ut::html($row['ip']); ?>
-						</a>
-					</td>
-					<td><?php echo $engine->number_format((int)$row['hits']); ?></td>
-					<td><?php echo Ut::html($row['last_seen']); ?></td>
-					<td><?php echo Ut::html($row['categories'] ?? ''); ?></td>
-				</tr>
-			<?php endforeach; ?>
-			</tbody>
-		</table>
-		<?php else: ?>
-			<p><em><?php echo $engine->_t('BbNoData');?></em></p>
-		<?php endif; ?>
+		<div class="bb-summary-grid">
+		    <div class="bb-summary-col">
+		        <?php $blocked = bb_top_blocked($engine, $window['sql'], 10); ?>
+		        <h3><?php echo $engine->_t('BbTopBlocked');?> <small>(<?php echo $window['label']; ?>)</small></h3>
+		        <?php if ($blocked): ?>
+		        <table class="bb-summary formation lined">
+		            <thead>
+		                <tr>
+		                    <th scope="col"><?php echo $engine->_t('BbIp');?></th>
+		                    <th scope="col"><?php echo $engine->_t('BbHits');?></th>
+		                    <th scope="col"><?php echo $engine->_t('BbLastSeen');?></th>
+		                    <th scope="col"><?php echo $engine->_t('BbCategories');?></th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            <?php foreach ($blocked as $row): ?>
+		                <tr>
+		                    <td class="label">
+		                        <a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $row['ip'], 'since' => $window['key']]); ?>">
+		                            <?php echo Ut::html($row['ip']); ?>
+		                        </a>
+		                    </td>
+		                    <td><?php echo $engine->number_format((int)$row['hits']); ?></td>
+		                    <td><?php echo Ut::html($row['last_seen']); ?></td>
+		                    <td><?php echo Ut::html($row['categories'] ?? ''); ?></td>
+		                </tr>
+		            <?php endforeach; ?>
+		            </tbody>
+		        </table>
+		        <?php else: ?>
+		            <p><em><?php echo $engine->_t('BbNoData');?></em></p>
+		        <?php endif; ?>
+		    </div>
+
+		    <div class="bb-summary-col">
+		        <?php $bots = bb_bot_breakdown($engine, $window['sql']); ?>
+		        <h3><?php echo $engine->_t('BbBotBreakdown');?> <small>(<?php echo $window['label']; ?>)</small></h3>
+		        <?php if ($bots): ?>
+		        <table class="bb-summary formation lined">
+		            <thead>
+		                <tr>
+		                    <th scope="col"><?php echo $engine->_t('BbCategory');?></th>
+		                    <th scope="col"><?php echo $engine->_t('BbHits');?></th>
+		                    <th scope="col"><?php echo $engine->_t('BbVerifiedPct');?></th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            <?php
+		            $max = max(array_column($bots, 'n'));
+		            foreach ($bots as $row):
+		                $n = (int)$row['n'];
+		                $v = (int)$row['verified_count'];
+		                $pct = $n > 0 ? round(($v / $n) * 100) : 0;
+		                $bar_width = $max > 0 ? round(($n / $max) * 100) : 0;
+		            ?>
+		                <tr>
+		                    <td class="label">
+		                        <a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'bot_category' => $row['bot_category'], 'since' => $window['key']]); ?>">
+		                            <?php echo Ut::html($row['bot_category']); ?>
+		                        </a>
+		                    </td>
+		                    <td>
+		                        <?php echo $engine->number_format($n); ?>
+		                        <span class="bb-bar"><span class="bb-bar-fill" style="width: <?php echo $bar_width; ?>%;"></span></span>
+		                    </td>
+		                    <td><?php echo $pct; ?>%</td>
+		                </tr>
+		            <?php endforeach; ?>
+		            </tbody>
+		        </table>
+		        <?php else: ?>
+		            <p><em><?php echo $engine->_t('BbNoData');?></em></p>
+		        <?php endif; ?>
+		    </div>
+		</div>
 
 		<?php
 		$breakdown = bb_result_breakdown($engine, $window['sql']);
@@ -1944,51 +1989,6 @@ function admin_tool_badbehaviour($engine, $module)
 			?>
 
 		</div>
-		<?php
-		// If the Allowed box is empty AND verbose logging is off, tell the
-		// operator why — they might think "0 allowed" means "no traffic".
-		if (empty($breakdown['allowed']) && empty($settings_for_breakdown['verbose'])): ?>
-			<p class="bb-bb-hint"><small><em><?php echo Ut::html($engine->_t('BbAllowedHintVerbose')); ?></em></small></p>
-		<?php endif; ?>
-
-		<?php $bots = bb_bot_breakdown($engine, $window['sql']); ?>
-		<h3><?php echo $engine->_t('BbBotBreakdown');?> <small>(<?php echo $window['label']; ?>)</small></h3>
-		<?php if ($bots): ?>
-		<table class="bb-summary formation lined">
-			<thead>
-				<tr>
-					<th scope="col"><?php echo $engine->_t('BbCategory');?></th>
-					<th scope="col"><?php echo $engine->_t('BbHits');?></th>
-					<th scope="col"><?php echo $engine->_t('BbVerifiedPct');?></th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php
-			$max = max(array_column($bots, 'n'));
-			foreach ($bots as $row):
-				$n = (int)$row['n'];
-				$v = (int)$row['verified_count'];
-				$pct = $n > 0 ? round(($v / $n) * 100) : 0;
-				$bar_width = $max > 0 ? round(($n / $max) * 100) : 0;
-			?>
-				<tr>
-					<td class="label">
-						<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'bot_category' => $row['bot_category'], 'since' => $window['key']]); ?>">
-							<?php echo Ut::html($row['bot_category']); ?>
-						</a>
-					</td>
-					<td>
-						<?php echo $engine->number_format($n); ?>
-						<span class="bb-bar"><span class="bb-bar-fill" style="width: <?php echo $bar_width; ?>%;"></span></span>
-					</td>
-					<td><?php echo $pct; ?>%</td>
-				</tr>
-			<?php endforeach; ?>
-			</tbody>
-		</table>
-		<?php else: ?>
-			<p><em><?php echo $engine->_t('BbNoData');?></em></p>
-		<?php endif; ?>
 
 		<?php
 		$settings = bb_read_settings($engine);
