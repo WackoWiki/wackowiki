@@ -41,9 +41,9 @@ function admin_tool_badbehaviour($engine, $module)
 				: $translated;
 
 			$map[$code->value] = [
-				'response'    => $code->http_status(),
+				'response'	=> $code->http_status(),
 				'explanation' => $explanation,
-				'log'         => $code->value,
+				'log'		 => $code->value,
 			];
 		}
 
@@ -81,13 +81,12 @@ function admin_tool_badbehaviour($engine, $module)
 		return [
 			// Filter state (user-selected)
 			'search', 'bot_category', 'request_method', 'blocked', 'status_code',
-			'ip', 'user_agent', 'request_uri', 'ja3', 'asn', 'country',
-			'date_from', 'date_to', 'slow', 'resolved', 'check',
+			'ip', 'user_agent', 'request_uri', 'date_from', 'date_to', 'slow', 'resolved', 'check',
 			// Sort + pagination state
 			'sort', 'dir', 'p',
-			// View state (mode selectors are persistent; reveal_* is per-row ephemeral)
-			'view_headers', 'view_body',
-			// WackoWiki admin routing — must be on every admin URL
+			// View state
+			'view_content',
+			// WackoWiki admin routing
 			'setting', 'mode',
 			// Time window selector
 			'since',
@@ -119,7 +118,7 @@ function admin_tool_badbehaviour($engine, $module)
 			if ($value === []) return '[]';
 
 			$is_list   = array_is_list($value);
-			$pad       = str_repeat("\t", $indent);
+			$pad	   = str_repeat("\t", $indent);
 			$inner_pad = str_repeat("\t", $indent + 1);
 
 			$items = [];
@@ -187,7 +186,7 @@ function admin_tool_badbehaviour($engine, $module)
 				'success' => true,
 				'skipped' => true,
 				'reason'  => 'empty_overrides',
-				'file'    => null,
+				'file'	=> null,
 				'bytes'   => 0,
 			];
 		}
@@ -303,7 +302,7 @@ function admin_tool_badbehaviour($engine, $module)
 		// Two conditions short-circuit the write:
 		//   (a) The form flagged itself as "enable-only" via the sentinel.
 		//   (b) bb_collect_settings_from_post() returned no overrides
-		//       AND the user didn't touch the file in this submit.
+		//	   AND the user didn't touch the file in this submit.
 		//
 		// In both cases we leave bb_config.php exactly as it was. If no file
 		// existed, none is created. If the operator hand-edited it, those edits
@@ -316,7 +315,7 @@ function admin_tool_badbehaviour($engine, $module)
 				'reason'  => $enable_only
 				? 'enable_only_submit'
 				: 'no_library_overrides',
-				'file'    => null,
+				'file'	=> null,
 				'bytes'   => 0,
 			];
 		}
@@ -335,7 +334,7 @@ function admin_tool_badbehaviour($engine, $module)
 
 		return [
 			'success' => true,
-			'file'    => $write['file'],
+			'file'	=> $write['file'],
 			'bytes'   => $write['bytes'],
 		];
 	}
@@ -382,9 +381,9 @@ function admin_tool_badbehaviour($engine, $module)
 	 * result against the lib, the operator can do:
 	 *
 	 *   $final = array_merge_recursive(
-	 *       Configuration::get_defaults(),
-	 *       Configuration::strictness_overrides($sparse['strictness'] ?? 'normal'),
-	 *       $sparse
+	 *	   Configuration::get_defaults(),
+	 *	   Configuration::strictness_overrides($sparse['strictness'] ?? 'normal'),
+	 *	   $sparse
 	 *   );
 	 *
 	 * === BASIC vs ADVANCED ===
@@ -441,7 +440,7 @@ function admin_tool_badbehaviour($engine, $module)
 		// logging: 3-way radio -> (logging bool, verbose bool)
 		//   'normal'  -> logging=true,  verbose=false
 		//   'verbose' -> logging=true,  verbose=true
-		//   'off'     -> logging=false, verbose=*
+		//   'off'	 -> logging=false, verbose=*
 		// We only write keys that differ from defaults.
 		if (isset($post['logging_mode']))
 		{
@@ -484,7 +483,7 @@ function admin_tool_badbehaviour($engine, $module)
 				{
 					$out['reverse_proxy'] = [
 						'enabled'   => true,
-						'header'    => 'X-Forwarded-For',
+						'header'	=> 'X-Forwarded-For',
 						'addresses' => [],
 					];
 				}
@@ -504,28 +503,28 @@ function admin_tool_badbehaviour($engine, $module)
 
 		// Each entry: POST key => [defaults key, expected type]
 		$bool_toggles = [
-			'strict'                              => 'strict',
-			'offsite_forms'                       => 'offsite_forms',
-			'show_detailed_block_page'            => 'show_detailed_block_page',
-			'show_contact_info'                   => 'show_contact_info',
-			'dnsbl_enabled'                       => ['path' => ['dnsbl','enabled']],
-			'block_unverified_ai'                 => ['path' => ['ai_crawlers','block_unverified']],
-			'strict_ai'                           => ['path' => ['ai_crawlers','strict']],
-			'strict_search_engines'               => 'strict_search_engines',
-			'rate_limit_enabled'                  => ['path' => ['rate_limits','enabled']],
-			'geoip_enabled'                       => ['path' => ['geoip','enabled']],
-			'challenge_enabled'                   => ['path' => ['challenge','enabled']],
-			'enable_fingerprinting'               => 'enable_fingerprinting',
-			'inspect_json_body'                   => 'inspect_json_body',
-			'inspect_multipart_body'              => 'inspect_multipart_body',
-			'enable_behavioral_analysis'          => 'enable_behavioral_analysis',
-			'enable_client_hints_validation'      => 'enable_client_hints_validation',
-			'enable_agentic_detection'            => 'enable_agentic_detection',
-			'enable_dynamic_ip_ranges'            => ['path' => ['dynamic_ip_ranges','enabled']],
-			'enable_head_request_detection'       => 'enable_head_request_detection',
-			'head_require_referer'                => 'head_require_referer',
-			'enable_asset_scraping_detection'     => 'enable_asset_scraping_detection',
-			'on_demand_ip_refresh_enabled'        => ['path' => ['on_demand_ip_refresh','enabled']],
+			'strict'							=> 'strict',
+			'offsite_forms'						=> 'offsite_forms',
+			'show_detailed_block_page'			=> 'show_detailed_block_page',
+			'show_contact_info'					=> 'show_contact_info',
+			'dnsbl_enabled'						=> ['path' => ['dnsbl','enabled']],
+			'block_unverified_ai'				=> ['path' => ['ai_crawlers','block_unverified']],
+			'strict_ai'							=> ['path' => ['ai_crawlers','strict']],
+			'strict_search_engines'				=> 'strict_search_engines',
+			'rate_limit_enabled'				=> ['path' => ['rate_limits','enabled']],
+			'geoip_enabled'						=> ['path' => ['geoip','enabled']],
+			'challenge_enabled'					=> ['path' => ['challenge','enabled']],
+			'enable_fingerprinting'				=> 'enable_fingerprinting',
+			'inspect_json_body'					=> 'inspect_json_body',
+			'inspect_multipart_body'			=> 'inspect_multipart_body',
+			'enable_behavioral_analysis'		=> 'enable_behavioral_analysis',
+			'enable_client_hints_validation'	=> 'enable_client_hints_validation',
+			'enable_agentic_detection'			=> 'enable_agentic_detection',
+			'enable_dynamic_ip_ranges'			=> ['path' => ['dynamic_ip_ranges','enabled']],
+			'enable_head_request_detection'		=> 'enable_head_request_detection',
+			'head_require_referer'				=> 'head_require_referer',
+			'enable_asset_scraping_detection'	=> 'enable_asset_scraping_detection',
+			'on_demand_ip_refresh_enabled'		=> ['path' => ['on_demand_ip_refresh','enabled']],
 		];
 
 		foreach ($bool_toggles as $post_key => $spec)
@@ -787,10 +786,10 @@ function admin_tool_badbehaviour($engine, $module)
 		$fp_changes = [];
 
 		$fp_map = [
-			'bad_ja3'           => 'bad_ja3_fingerprints',
-			'bad_h2'            => 'bad_h2_fingerprints',
+			'bad_ja3'			=> 'bad_ja3_fingerprints',
+			'bad_h2'			=> 'bad_h2_fingerprints',
 			'bot_header_orders' => 'bot_header_orders',
-			'expected_ja3'      => 'expected_ja3',
+			'expected_ja3'		=> 'expected_ja3',
 		];
 
 		foreach ($fp_map as $def_key => $post_key)
@@ -822,8 +821,8 @@ function admin_tool_badbehaviour($engine, $module)
 		$perf_changes = [];
 
 		foreach ([
-			'skip_extensions' => 'skip_static_extensions',
-			'skip_paths'      => 'skip_static_paths',
+			'skip_extensions'	=> 'skip_static_extensions',
+			'skip_paths'		=> 'skip_static_paths',
 		] as $def_key => $post_key)
 		{
 			if (isset($post[$post_key]))
@@ -1000,9 +999,9 @@ function admin_tool_badbehaviour($engine, $module)
 		// ============================================================
 
 		foreach ([
-			'asset_no_referer_threshold'   => 1,
-			'asset_only_session_threshold' => 1,
-			'asset_pattern_threshold'      => 1,
+			'asset_no_referer_threshold'	=> 1,
+			'asset_only_session_threshold'	=> 1,
+			'asset_pattern_threshold'		=> 1,
 		] as $key => $min)
 		{
 			if (isset($post[$key]))
@@ -1036,9 +1035,9 @@ function admin_tool_badbehaviour($engine, $module)
 		$dns_changes = [];
 
 		foreach ([
-			'dns_verification_timeout_ms'              => ['int', 50, 2000],
-			'dns_verification_positive_ttl'            => ['int', 3600, PHP_INT_MAX],
-			'dns_verification_negative_ttl'            => ['int', 60, PHP_INT_MAX],
+			'dns_verification_timeout_ms'			=> ['int', 50, 2000],
+			'dns_verification_positive_ttl'			=> ['int', 3600, PHP_INT_MAX],
+			'dns_verification_negative_ttl'			=> ['int', 60, PHP_INT_MAX],
 		] as $key => [$type, $min, $max])
 		{
 			if (isset($post[$key]))
@@ -1110,10 +1109,10 @@ function admin_tool_badbehaviour($engine, $module)
 		$od_changes = [];
 
 		foreach ([
-			'on_demand_ip_refresh_probability_denominator' => ['int', 1, PHP_INT_MAX],
-			'on_demand_ip_refresh_min_age_seconds'         => ['int', 0, PHP_INT_MAX],
-			'on_demand_ip_refresh_lock_ttl'                => ['int', 1, PHP_INT_MAX],
-			'on_demand_ip_refresh_cache_ttl'               => ['int', 3600, PHP_INT_MAX],
+			'on_demand_ip_refresh_probability_denominator'	=> ['int', 1, PHP_INT_MAX],
+			'on_demand_ip_refresh_min_age_seconds'			=> ['int', 0, PHP_INT_MAX],
+			'on_demand_ip_refresh_lock_ttl'					=> ['int', 1, PHP_INT_MAX],
+			'on_demand_ip_refresh_cache_ttl'				=> ['int', 3600, PHP_INT_MAX],
 		] as $key => [$type, $min, $max])
 		{
 			if (isset($post[$key]))
@@ -1383,8 +1382,8 @@ function admin_tool_badbehaviour($engine, $module)
 	 * from a flat path like ['reverse_proxy', 'enabled'].
 	 *
 	 * @param array<string, mixed> &$arr  Array to modify (by reference)
-	 * @param string[]             $path  Path segments, e.g. ['rate_limits', 'global', 'requests']
-	 * @param mixed                $value Value to set
+	 * @param string[]			$path  Path segments, e.g. ['rate_limits', 'global', 'requests']
+	 * @param mixed				$value Value to set
 	 */
 	function bb_set_nested(array &$arr, array $path, mixed $value): void
 	{
@@ -1450,15 +1449,15 @@ function admin_tool_badbehaviour($engine, $module)
 
 		$activity = (int)$parts[1];
 		$threat   = (int)$parts[2];
-		$type     = (int)$parts[3];
+		$type	 = (int)$parts[3];
 
 		$out = [];
-		if ($type === 0)            $out[] = 'Search engine (whitelist candidate)';
-		if ($type & 1)              $out[] = 'Suspicious';
-		if ($type & 2)              $out[] = 'Harvester';
-		if ($type & 4)              $out[] = 'Comment spammer';
-		if ($type & 7)              $out[] = "Threat level {$threat}";
-		if ($activity > 0)          $out[] = "Age {$activity} days";
+		if ($type === 0)		$out[] = 'Search engine (whitelist candidate)';
+		if ($type & 1)			$out[] = 'Suspicious';
+		if ($type & 2)			$out[] = 'Harvester';
+		if ($type & 4)			$out[] = 'Comment spammer';
+		if ($type & 7)			$out[] = "Threat level {$threat}";
+		if ($activity > 0)		$out[] = "Age {$activity} days";
 
 		return implode('<br>', $out);
 	}
@@ -1469,7 +1468,9 @@ function admin_tool_badbehaviour($engine, $module)
 
 	function bb_time_window($engine): array
 	{
-		$since = $_GET['since'] ?? '24h';
+		// Use the allowlist-cleaned GET params, not raw $_GET
+		$clean_args = bb_clean_url_args($_GET);
+		$since = $clean_args['since'] ?? '24h';  // ← Use cleaned args
 
 		$windows = [
 			'24h' => ['seconds' =>   86400, 'label' => 'Last 24 hours'],
@@ -1641,9 +1642,9 @@ function admin_tool_badbehaviour($engine, $module)
 
 		$groups = [
 			'blocked'   => ['label' => $engine->_t('BbSevAttackPatterns'), 'icon' => '●', 'class' => 'sev-bad',  'count' => 0, 'codes' => []],
-			'challenge' => ['label' => $engine->_t('BbSevChallenges'),     'icon' => '○', 'class' => 'sev-warn', 'count' => 0, 'codes' => []],
-			'allowed'   => ['label' => $engine->_t('BbSevPermitted'),      'icon' => '◌', 'class' => 'sev-ok',   'count' => 0, 'codes' => []],
-			'error'     => ['label' => $engine->_t('BbSevErrors'),         'icon' => '✕', 'class' => 'sev-bad',  'count' => 0, 'codes' => []],
+			'challenge' => ['label' => $engine->_t('BbSevChallenges'),	 'icon' => '○', 'class' => 'sev-warn', 'count' => 0, 'codes' => []],
+			'allowed'   => ['label' => $engine->_t('BbSevPermitted'),	  'icon' => '◌', 'class' => 'sev-ok',   'count' => 0, 'codes' => []],
+			'error'     => ['label' => $engine->_t('BbSevErrors'),		 'icon' => '✕', 'class' => 'sev-bad',  'count' => 0, 'codes' => []],
 		];
 
 		foreach ($rows as $row)
@@ -1730,7 +1731,7 @@ function admin_tool_badbehaviour($engine, $module)
 		foreach ($rows as $row) {
 			$code   = (string)($row['status_code'] ?? '');
 			$action = (string)($row['enforcement_action'] ?? 'enforced');
-			$n      = (int)($row['n'] ?? 0);
+			$n	  = (int)($row['n'] ?? 0);
 
 			if ($n <= 0 || $code === '') continue;
 
@@ -1774,10 +1775,10 @@ function admin_tool_badbehaviour($engine, $module)
 	/**
 	 * Render a single breakdown box.
 	 *
-	 * @param array<string,int> $codes                Code => count
-	 * @param string            $bucket_filter_value  'true' for blocked+monitored boxes,
-	 *                                               'false' for allowed box
-	 * @param array<string,string> $filter_args       Optional URL state to propagate
+	 * @param array<string,int> $codes				Code => count
+	 * @param string			$bucket_filter_value  'true' for blocked+monitored boxes,
+	 *											   'false' for allowed box
+	 * @param array<string,string> $filter_args	   Optional URL state to propagate
 	 */
 	function bb_render_breakdown_box(
 		$engine,
@@ -1810,11 +1811,11 @@ function admin_tool_badbehaviour($engine, $module)
 				// bb_manage()'s WHERE clause checks status_code FIRST when non-empty,
 				// so the per-code filter is precise.
 				$code_args = bb_clean_url_args($filter_args + [
-					'setting'     => 'bb_manage',
-					'mode'        => 'tool_badbehaviour',
+					'setting'	 => 'bb_manage',
+					'mode'		=> 'tool_badbehaviour',
 					'status_code' => $code,
-					'blocked'     => $bucket_filter_value,
-					'since'       => $window_key,
+					'blocked'	 => $bucket_filter_value,
+					'since'	   => $window_key,
 				]);
 				$code_link = $engine->href('', '', $code_args);
 
@@ -1847,7 +1848,7 @@ function admin_tool_badbehaviour($engine, $module)
 			// current window (operator can widen the time window from there).
 			$bucket_args = bb_clean_url_args($filter_args + [
 				'setting' => 'bb_manage',
-				'mode'    => 'tool_badbehaviour',
+				'mode'	=> 'tool_badbehaviour',
 				'blocked' => $bucket_filter_value,
 				'since'   => $window_key,
 			]);
@@ -1874,79 +1875,79 @@ function admin_tool_badbehaviour($engine, $module)
 		<?php echo bb_render_time_selector($engine, $window['key'], ''); ?>
 
 		<div class="bb-summary-grid">
-		    <div class="bb-summary-col">
-		        <?php $blocked = bb_top_blocked($engine, $window['sql'], 10); ?>
-		        <h3><?php echo $engine->_t('BbTopBlocked');?> <small>(<?php echo $window['label']; ?>)</small></h3>
-		        <?php if ($blocked): ?>
-		        <table class="bb-summary formation lined">
-		            <thead>
-		                <tr>
-		                    <th scope="col"><?php echo $engine->_t('BbIp');?></th>
-		                    <th scope="col"><?php echo $engine->_t('BbHits');?></th>
-		                    <th scope="col"><?php echo $engine->_t('BbLastSeen');?></th>
-		                    <th scope="col"><?php echo $engine->_t('BbCategories');?></th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		            <?php foreach ($blocked as $row): ?>
-		                <tr>
-		                    <td class="label">
-		                        <a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $row['ip'], 'since' => $window['key']]); ?>">
-		                            <?php echo Ut::html($row['ip']); ?>
-		                        </a>
-		                    </td>
-		                    <td><?php echo $engine->number_format((int)$row['hits']); ?></td>
-		                    <td><?php echo Ut::html($row['last_seen']); ?></td>
-		                    <td><?php echo Ut::html($row['categories'] ?? ''); ?></td>
-		                </tr>
-		            <?php endforeach; ?>
-		            </tbody>
-		        </table>
-		        <?php else: ?>
-		            <p><em><?php echo $engine->_t('BbNoData');?></em></p>
-		        <?php endif; ?>
-		    </div>
+			<div class="bb-summary-col">
+				<?php $blocked = bb_top_blocked($engine, $window['sql'], 10); ?>
+				<h3><?php echo $engine->_t('BbTopBlocked');?> <small>(<?php echo $window['label']; ?>)</small></h3>
+				<?php if ($blocked): ?>
+				<table class="bb-summary formation lined">
+					<thead>
+						<tr>
+							<th scope="col"><?php echo $engine->_t('BbIp');?></th>
+							<th scope="col"><?php echo $engine->_t('BbHits');?></th>
+							<th scope="col"><?php echo $engine->_t('BbLastSeen');?></th>
+							<th scope="col"><?php echo $engine->_t('BbCategories');?></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($blocked as $row): ?>
+						<tr>
+							<td class="label">
+								<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $row['ip'], 'since' => $window['key']]); ?>">
+									<?php echo Ut::html($row['ip']); ?>
+								</a>
+							</td>
+							<td><?php echo $engine->number_format((int)$row['hits']); ?></td>
+							<td><?php echo Ut::html($row['last_seen']); ?></td>
+							<td><?php echo Ut::html($row['categories'] ?? ''); ?></td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+				<?php else: ?>
+					<p><em><?php echo $engine->_t('BbNoData');?></em></p>
+				<?php endif; ?>
+			</div>
 
-		    <div class="bb-summary-col">
-		        <?php $bots = bb_bot_breakdown($engine, $window['sql']); ?>
-		        <h3><?php echo $engine->_t('BbBotBreakdown');?> <small>(<?php echo $window['label']; ?>)</small></h3>
-		        <?php if ($bots): ?>
-		        <table class="bb-summary formation lined">
-		            <thead>
-		                <tr>
-		                    <th scope="col"><?php echo $engine->_t('BbCategory');?></th>
-		                    <th scope="col"><?php echo $engine->_t('BbHits');?></th>
-		                    <th scope="col"><?php echo $engine->_t('BbVerifiedPct');?></th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		            <?php
-		            $max = max(array_column($bots, 'n'));
-		            foreach ($bots as $row):
-		                $n = (int)$row['n'];
-		                $v = (int)$row['verified_count'];
-		                $pct = $n > 0 ? round(($v / $n) * 100) : 0;
-		                $bar_width = $max > 0 ? round(($n / $max) * 100) : 0;
-		            ?>
-		                <tr>
-		                    <td class="label">
-		                        <a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'bot_category' => $row['bot_category'], 'since' => $window['key']]); ?>">
-		                            <?php echo Ut::html($row['bot_category']); ?>
-		                        </a>
-		                    </td>
-		                    <td>
-		                        <?php echo $engine->number_format($n); ?>
-		                        <span class="bb-bar"><span class="bb-bar-fill" style="width: <?php echo $bar_width; ?>%;"></span></span>
-		                    </td>
-		                    <td><?php echo $pct; ?>%</td>
-		                </tr>
-		            <?php endforeach; ?>
-		            </tbody>
-		        </table>
-		        <?php else: ?>
-		            <p><em><?php echo $engine->_t('BbNoData');?></em></p>
-		        <?php endif; ?>
-		    </div>
+			<div class="bb-summary-col">
+				<?php $bots = bb_bot_breakdown($engine, $window['sql']); ?>
+				<h3><?php echo $engine->_t('BbBotBreakdown');?> <small>(<?php echo $window['label']; ?>)</small></h3>
+				<?php if ($bots): ?>
+				<table class="bb-summary formation lined">
+					<thead>
+						<tr>
+							<th scope="col"><?php echo $engine->_t('BbCategory');?></th>
+							<th scope="col"><?php echo $engine->_t('BbHits');?></th>
+							<th scope="col"><?php echo $engine->_t('BbVerifiedPct');?></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+					$max = max(array_column($bots, 'n'));
+					foreach ($bots as $row):
+						$n = (int)$row['n'];
+						$v = (int)$row['verified_count'];
+						$pct = $n > 0 ? round(($v / $n) * 100) : 0;
+						$bar_width = $max > 0 ? round(($n / $max) * 100) : 0;
+					?>
+						<tr>
+							<td class="label">
+								<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage', 'bot_category' => $row['bot_category'], 'since' => $window['key']]); ?>">
+									<?php echo Ut::html($row['bot_category']); ?>
+								</a>
+							</td>
+							<td>
+								<?php echo $engine->number_format($n); ?>
+								<span class="bb-bar"><span class="bb-bar-fill" style="width: <?php echo $bar_width; ?>%;"></span></span>
+							</td>
+							<td><?php echo $pct; ?>%</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+				<?php else: ?>
+					<p><em><?php echo $engine->_t('BbNoData');?></em></p>
+				<?php endif; ?>
+			</div>
 		</div>
 
 		<?php
@@ -2032,30 +2033,26 @@ function admin_tool_badbehaviour($engine, $module)
 		$bb_table = $engine->prefix . 'bad_behaviour';
 
 		// === Filter reads ===
-		$g_search         = trim((string)($_GET['search']         ?? ''));
+		$g_search		 = trim((string)($_GET['search']		 ?? ''));
 		$g_bot_category   = trim((string)($_GET['bot_category']   ?? ''));
 		$g_request_method = trim((string)($_GET['request_method'] ?? ''));
-		$g_blocked        = trim((string)($_GET['blocked']        ?? ''));
-		$g_key            = trim((string)($_GET['status_code']    ?? ''));
-		$g_ip             = trim((string)($_GET['ip']             ?? ''));
-		$g_user_agent     = trim((string)($_GET['user_agent']     ?? ''));
-		$g_request_uri    = trim((string)($_GET['request_uri']    ?? ''));
-		$g_ja3            = trim((string)($_GET['ja3']            ?? ''));
-		$g_asn            = trim((string)($_GET['asn']            ?? ''));
-		$g_country        = trim((string)($_GET['country']        ?? ''));
-		$g_date_from      = trim((string)($_GET['date_from']      ?? ''));
-		$g_date_to        = trim((string)($_GET['date_to']        ?? ''));
-		$g_slow           = !empty($_GET['slow']);
-		$g_resolved       = $_GET['resolved'] ?? 'active'; // 'active' (default), 'all', 'resolved'
-		$g_check          = $_GET['check'] ?? '';
-		$g_sort           = in_array($_GET['sort'] ?? '', ['log_id','ip','status_code','bot_category','request_time_ms'], true)
+		$g_blocked		= trim((string)($_GET['blocked']		?? ''));
+		$g_key			= trim((string)($_GET['status_code']	?? ''));
+		$g_ip			 = trim((string)($_GET['ip']			 ?? ''));
+		$g_user_agent	 = trim((string)($_GET['user_agent']	 ?? ''));
+		$g_request_uri	= trim((string)($_GET['request_uri']	?? ''));
+		$g_date_from	  = trim((string)($_GET['date_from']	  ?? ''));
+		$g_date_to		= trim((string)($_GET['date_to']		?? ''));
+		$g_slow		   = !empty($_GET['slow']);
+		$g_resolved	   = $_GET['resolved'] ?? 'active';
+		$g_check		  = $_GET['check'] ?? '';
+		$g_sort		   = in_array($_GET['sort'] ?? '', ['log_id','ip','status_code','bot_category','request_time_ms'], true)
 		? $_GET['sort'] : 'log_id';
-		$g_dir            = (($_GET['dir'] ?? 'desc') === 'asc') ? 'ASC' : 'DESC';
-		$g_view_headers   = bb_get_view_mode('headers', 'full');
-		$g_view_body      = bb_get_view_mode('body', 'teaser');
-		// 'mark_all=1' is a render hint: every row checkbox is rendered checked.
-		// Clicking the header # toggles between mark_all=1 and mark_all=0/absent.
-		$g_mark_all       = ($_GET['mark_all'] ?? '') === '1';
+		$g_dir			= (($_GET['dir'] ?? 'desc') === 'asc') ? 'ASC' : 'DESC';
+
+		// MERGED: Single view mode for both headers and body
+		$g_view_content   = bb_get_view_mode('content', 'full');
+		$g_mark_all	   = ($_GET['mark_all'] ?? '') === '1';
 
 		$window = bb_time_window($engine);
 
@@ -2073,13 +2070,13 @@ function admin_tool_badbehaviour($engine, $module)
 				$search_escaped = str_replace(['\\','%','_'], ['\\\\','\\%','\\_'], $g_search);
 				$like = $engine->db->q('%' . $search_escaped . '%');
 				$where .= 'AND ('
-					. '`user_agent`  LIKE ' . $like . ' OR '
-					. '`request_uri` LIKE ' . $like . ' OR '
-					. '`host`        LIKE ' . $like . ' OR '
-					. '`ip`          LIKE ' . $like . ' OR '
-					. '`status_code` LIKE ' . $like . ' OR '
-					. '`support_key` LIKE ' . $like
-					. ') ';
+	 	. '`user_agent`  LIKE ' . $like . ' OR '
+	 	. '`request_uri` LIKE ' . $like . ' OR '
+	 	. '`host`		LIKE ' . $like . ' OR '
+	 	. '`ip`		  LIKE ' . $like . ' OR '
+	 	. '`status_code` LIKE ' . $like . ' OR '
+	 	. '`support_key` LIKE ' . $like
+	 	. ') ';
 			}
 		}
 
@@ -2112,17 +2109,14 @@ function admin_tool_badbehaviour($engine, $module)
 			$where .= "AND `status_code`  = 'allowed' ";
 		}
 
-		if (!empty($g_ip))            $where .= 'AND `ip` = ' . $engine->db->q($g_ip) . ' ';
-		if (!empty($g_user_agent))    $where .= 'AND `user_agent_hash` = ' . $engine->db->q($g_user_agent) . ' ';
+		if (!empty($g_ip))			$where .= 'AND `ip` = ' . $engine->db->q($g_ip) . ' ';
+		if (!empty($g_user_agent))	$where .= 'AND `user_agent_hash` = ' . $engine->db->q($g_user_agent) . ' ';
 		if (!empty($g_request_uri))   $where .= 'AND `request_uri_hash` = ' . $engine->db->q($g_request_uri) . ' ';
-		if ($g_ja3 !== '')            $where .= 'AND `ja3` = ' . $engine->db->q($g_ja3) . ' ';
-		if ($g_asn !== '')            $where .= 'AND `asn` = ' . $engine->db->q($g_asn) . ' ';
-		if ($g_country !== '')        $where .= 'AND `country` = ' . $engine->db->q($g_country) . ' ';
 		if ($g_date_from !== '' && preg_match('/^\d{4}-\d{2}-\d{2}/', $g_date_from))
 			$where .= 'AND `date` >= ' . $engine->db->q($g_date_from) . ' ';
-		if ($g_date_to !== '' && preg_match('/^\d{4}-\d{2}-\d{2}/', $g_date_to))
-			$where .= 'AND `date` <= ' . $engine->db->q($g_date_to . ' 23:59:59') . ' ';
-		if ($g_slow)                  $where .= 'AND `request_time_ms` > 1000 ';
+			if ($g_date_to !== '' && preg_match('/^\d{4}-\d{2}-\d{2}/', $g_date_to))
+				$where .= 'AND `date` <= ' . $engine->db->q($g_date_to . ' 23:59:59') . ' ';
+		if ($g_slow)				  $where .= 'AND `request_time_ms` > 1000 ';
 
 		// Resolved filter
 		if ($g_resolved === 'active')
@@ -2133,9 +2127,8 @@ function admin_tool_badbehaviour($engine, $module)
 		{
 			$where .= 'AND `resolved_at` IS NOT NULL ';
 		}
-		// 'all' = no filter
 
-		// Check filter ('' = both, '1' = checked only, '0' = unchecked only)
+		// Check filter
 		if ($g_check === '1')
 		{
 			$where .= 'AND `check` = 1 ';
@@ -2152,51 +2145,41 @@ function admin_tool_badbehaviour($engine, $module)
 			'SELECT COUNT(log_id) AS n FROM ' . $engine->prefix . 'bad_behaviour l WHERE 1=1 ' . $where
 		);
 
+		// Build filter_args WITHOUT the removed fields
 		$filter_args = array_filter([
-			'search'         => $g_search,
-			'bot_category'   => $g_bot_category,
-			'request_method' => $g_request_method,
-			'blocked'        => $g_blocked,
-			'status_code'    => $g_key,
-			'ip'             => $g_ip,
-			'user_agent'     => $g_user_agent,
-			'request_uri'    => $g_request_uri,
-			'ja3'            => $g_ja3,
-			'asn'            => $g_asn,
-			'country'        => $g_country,
-			'date_from'      => $g_date_from,
-			'date_to'        => $g_date_to,
-			'slow'           => $g_slow ? '1' : '',
-			'resolved'       => $g_resolved !== 'active' ? $g_resolved : '',
-			'check'          => $g_check,
-			'sort'           => $g_sort !== 'log_id' ? $g_sort : '',
-			'dir'            => $g_dir !== 'DESC' ? strtolower($g_dir) : '',
-			'since'          => $window['key'] !== '24h' ? $window['key'] : '',
-			'view_headers'   => $g_view_headers !== 'full' ? $g_view_headers : '',
-			'view_body'      => $g_view_body !== 'teaser' ? $g_view_body : '',
+		'search'		 => $g_search,
+		'bot_category'   => $g_bot_category,
+		'request_method' => $g_request_method,
+		'blocked'		=> $g_blocked,
+		'status_code'	=> $g_key,
+		'ip'			 => $g_ip,
+		'user_agent'	 => $g_user_agent,
+		'request_uri'	=> $g_request_uri,
+		'date_from'	  => $g_date_from,
+		'date_to'		=> $g_date_to,
+		'slow'		   => $g_slow ? '1' : '',
+		'resolved'	   => $g_resolved !== 'active' ? $g_resolved : '',
+		'check'		  => $g_check,
+		'sort'		   => $g_sort !== 'log_id' ? $g_sort : '',
+		'dir'			=> $g_dir !== 'DESC' ? strtolower($g_dir) : '',
+		'since'		  => $window['key'] !== '24h' ? $window['key'] : '',
+		// MERGED: single view_content instead of view_headers/view_body
+		'view_content'   => $g_view_content !== 'full' ? $g_view_content : '',
 		], fn($v) => $v !== '');
 
-		// Sanitize: strip anything not on the URL allowlist. This drops
-		// reveal_*, _action, id, _back, _nonce, accidental $_GET bleed, etc.
-		// before any link / pagination / form action is built. This is the
-		// single most important fix for the polluted-link bugs [a] and [b].
+		// Sanitize via allowlist (which no longer includes removed fields)
 		$filter_args = bb_clean_url_args($filter_args);
 
-		// Persist `p` if currently on a non-first page so it survives clicks
-		// on sort headers, chip × links, per-row actions, and bulk redirects.
 		if (isset($_GET['p']) && (int)$_GET['p'] > 1)
 		{
 			$filter_args['p'] = (int)$_GET['p'];
 		}
 
-		// Pagination args include setting/mode so the links stay on this page.
-		// 'setting' and 'mode' win over any same-key entry in $filter_args
-		// (array union operator precedence).
 		$pagination = $engine->pagination(
-		$count['n'], $limit, 'p',
-		$filter_args + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour'],
-		'', 'admin.php'
-				);
+			$count['n'], $limit, 'p',
+			$filter_args + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour'],
+			'', 'admin.php'
+		);
 
 		$totalcount = $engine->db->load_single(
 			'SELECT COUNT(log_id) AS n FROM ' . $engine->prefix . 'bad_behaviour l'
@@ -2211,20 +2194,18 @@ function admin_tool_badbehaviour($engine, $module)
 			. 'WHERE 1=1 ' . $where
 			. 'ORDER BY `' . $g_sort . '` ' . $g_dir . ', `log_id` DESC '
 			. $pagination['limit']
-		);
+			);
 
 		// === Sortable headers ===
-		// Every sort URL MUST carry setting+mode so it stays in the admin module.
-		// $filter_args has already been allowlist-cleaned by bb_clean_url_args().
 		$next_dir_for = function(string $col) use ($g_sort, $g_dir) {
 			return ($col === $g_sort) ? (($g_dir === 'ASC') ? 'desc' : 'asc') : 'desc';
 		};
 		$sort_args_for = function(string $col) use ($filter_args, $next_dir_for) {
 			return $filter_args + [
 				'setting' => 'bb_manage',
-				'mode'    => 'tool_badbehaviour',
-				'sort'    => $col,
-				'dir'     => $next_dir_for($col),
+				'mode'	=> 'tool_badbehaviour',
+				'sort'	=> $col,
+				'dir'	 => $next_dir_for($col),
 			];
 		};
 		$arrow_for = function(string $col) use ($g_sort, $g_dir) {
@@ -2232,475 +2213,424 @@ function admin_tool_badbehaviour($engine, $module)
 			return ($g_dir === 'ASC') ? ' ▲' : ' ▼';
 		};
 
-		// === Filter form (GET) — open ===
-		echo $engine->form_open('bb_manage', ['href_param' => ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour'], 'form_method' => 'get']);
-		echo '<input type="hidden" name="setting" value="bb_manage">';
-		echo '<input type="hidden" name="mode" value="tool_badbehaviour">';
-		?>
-
-		<div class="alignleft">
-			<?php echo Ut::perc_replace(
-				$engine->_t('BbRecordsFiltered'),
-				'<strong>' . $engine->number_format($count['n']) . '</strong>',
-					'<strong>' . $engine->number_format($totalcount['n']) . '</strong>'
-			) . ':'; ?>
-		</div>
-
-		<?php echo bb_render_time_selector($engine, $window['key'], 'bb_manage', $filter_args); ?>
-
-		<div class="bb-filter-bar">
-			<input type="search" name="search"
-				placeholder="<?php echo Ut::html($engine->_t('BbSearchPlaceholder') ?? ''); ?>"
-				value="<?php echo Ut::html($g_search); ?>"
-				autocomplete="off" class="bb-filter-search">
-
-			<select name="bot_category" class="bb-filter-select">
-				<option value=""><?php echo $engine->_t('BbFilterAnyCategory'); ?></option>
-				<?php
-				$bot_categories = [
-					'search_engine'        => $engine->_t('BbCatSearchEngine'),
-					'ai_crawler'           => $engine->_t('BbCatAiCrawler'),
-					'social_crawler'       => $engine->_t('BbCatSocialCrawler'),
-					'seo_crawler'          => $engine->_t('BbCatSeoCrawler'),
-					'archive_crawler'      => $engine->_t('BbCatArchiveCrawler'),
-					'monitoring'           => $engine->_t('BbCatMonitoring'),
-					'feed_reader'          => $engine->_t('BbCatFeedReader'),
-					'shopping_crawler'     => $engine->_t('BbCatShoppingCrawler'),
-					'cloud_infrastructure' => $engine->_t('BbCatCloudInfra'),
-					'security_scanner'     => $engine->_t('BbCatSecurityScanner'),
-					'residential_proxy'    => $engine->_t('BbCatResidentialProxy'),
-					'malicious'            => $engine->_t('BbCatMalicious'),
-					'unknown'              => $engine->_t('BbCatUnknown'),
-				];
-				foreach ($bot_categories as $value => $label): ?>
-					<option value="<?php echo Ut::html($value); ?>"<?php echo ($g_bot_category === $value ? ' selected' : ''); ?>><?php echo Ut::html($label); ?></option>
-				<?php endforeach; ?>
-			</select>
-
-			<select name="request_method" class="bb-filter-select">
-				<option value=""><?php echo $engine->_t('BbFilterAnyMethod'); ?></option>
-				<?php foreach (['GET','POST','HEAD','PUT','PATCH','DELETE','OPTIONS','TRACE'] as $method): ?>
-					<option value="<?php echo $method; ?>"<?php echo ($g_request_method === $method ? ' selected' : ''); ?>><?php echo $method; ?></option>
-				<?php endforeach; ?>
-			</select>
-
-			<select name="blocked" class="bb-filter-select">
-				<option value="" <?php echo ($g_blocked === '' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterAnyStatus'); ?></option>
-				<option value="true" <?php echo ($g_blocked === 'true' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterBlockedOnly'); ?></option>
-				<option value="false" <?php echo ($g_blocked === 'false' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterPermittedOnly'); ?></option>
-			</select>
-
-			<select name="resolved" class="bb-filter-select">
-				<option value="active" <?php echo ($g_resolved === 'active' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedActive'); ?></option>
-				<option value="resolved" <?php echo ($g_resolved === 'resolved' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedOnly'); ?></option>
-				<option value="all" <?php echo ($g_resolved === 'all' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedAll'); ?></option>
-			</select>
-
-			<select name="check" class="bb-filter-select">
-				<option value="" <?php echo ($g_check === '' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterAnyCheck'); ?></option>
-				<option value="1" <?php echo ($g_check === '1' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterCheckedOnly'); ?></option>
-				<option value="0" <?php echo ($g_check === '0' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterUncheckedOnly'); ?></option>
-			</select>
-
-			<button type="submit" class="button"><?php echo $engine->_t('BbFilterApply');?></button>
-			<?php if ($g_search !== '' || $g_bot_category !== '' || $g_request_method !== '' || $g_blocked !== '' || $g_resolved !== 'active'): ?>
-				<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage']); ?>" class="button"><?php echo $engine->_t('BbFilterClear');?></a>
-			<?php endif; ?>
-		</div>
-
-		<details class="bb-advanced-filters">
-			<summary><?php echo $engine->_t('BbAdvancedFilters');?></summary>
-			<div class="bb-filter-bar" style="margin-top: 0.5rem;">
-				<label><?php echo $engine->_t('BbDateFrom');?>
-					<input type="date" name="date_from" value="<?php echo Ut::html($g_date_from); ?>" class="bb-filter-input">
-				</label>
-				<label><?php echo $engine->_t('BbDateTo');?>
-					<input type="date" name="date_to" value="<?php echo Ut::html($g_date_to); ?>" class="bb-filter-input">
-				</label>
-				<label><?php echo $engine->_t('BbJa3');?>
-					<input type="text" name="ja3" value="<?php echo Ut::html($g_ja3); ?>" placeholder="<?php echo Ut::html($engine->_t('BbJa3Placeholder')); ?>" class="bb-filter-input">
-				</label>
-				<label><?php echo $engine->_t('BbAsn');?>
-					<input type="text" name="asn" value="<?php echo Ut::html($g_asn); ?>" placeholder="AS12345" class="bb-filter-input">
-				</label>
-				<label><?php echo $engine->_t('BbCountry');?>
-					<input type="text" name="country" value="<?php echo Ut::html($g_country); ?>" placeholder="US" maxlength="2" class="bb-filter-input">
-				</label>
-				<label>
-					<input type="checkbox" name="slow" value="1"<?php echo ($g_slow ? ' checked' : ''); ?>>
-					<?php echo $engine->_t('BbSlowOnly');?>
-				</label>
-			</div>
-			<div class="bb-filter-bar">
-				<label><?php echo $engine->_t('BbViewHeadersLabel');?>:
-					<select name="view_headers" class="bb-filter-select">
-						<option value="full"<?php echo ($g_view_headers === 'full' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeFull');?></option>
-						<option value="teaser"<?php echo ($g_view_headers === 'teaser' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeTeaser');?></option>
-						<option value="hidden"<?php echo ($g_view_headers === 'hidden' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeHidden');?></option>
-					</select>
-				</label>
-				<label><?php echo $engine->_t('BbViewBodyLabel');?>:
-					<select name="view_body" class="bb-filter-select">
-						<option value="teaser"<?php echo ($g_view_body === 'teaser' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeTeaser');?></option>
-						<option value="full"<?php echo ($g_view_body === 'full' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeFull');?></option>
-						<option value="hidden"<?php echo ($g_view_body === 'hidden' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeHidden');?></option>
-					</select>
-				</label>
-			</div>
-		</details>
-
-		<?php
-		// === Filter chips ===
-		$active_chips = [];
-
-		if ($g_search !== '')
-		{
-			$args = $filter_args; unset($args['search']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipSearch') . ': ' . Ut::html(mb_strimwidth($g_search, 0, 30, '…')),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_bot_category !== '')
-		{
-			$args = $filter_args; unset($args['bot_category']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipCategory') . ': ' . Ut::html($g_bot_category),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_request_method !== '')
-		{
-			$args = $filter_args; unset($args['request_method']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipMethod') . ': ' . Ut::html($g_request_method),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_blocked !== '')
-		{
-			$args = $filter_args; unset($args['blocked']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipStatus') . ': ' . ($g_blocked === 'true' ? $engine->_t('BbBlocked') : $engine->_t('BbPermitted')),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_key !== '')
-		{
-			$args = $filter_args; unset($args['status_code']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipStatusCode') . ': ' . Ut::html($g_key),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_ip !== '')
-		{
-			$args = $filter_args; unset($args['ip']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipIp') . ': ' . Ut::html($g_ip),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_user_agent !== '')
-		{
-			$args = $filter_args; unset($args['user_agent']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipUa') . ': ' . Ut::html(mb_strimwidth($g_user_agent, 0, 16, '…')),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_request_uri !== '')
-		{
-			$args = $filter_args; unset($args['request_uri']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipUri') . ': ' . Ut::html(mb_strimwidth($g_request_uri, 0, 30, '…')),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_ja3 !== '')
-		{
-			$args = $filter_args; unset($args['ja3']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipJa3') . ': ' . Ut::html($g_ja3),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_asn !== '')
-		{
-			$args = $filter_args; unset($args['asn']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipAsn') . ': ' . Ut::html($g_asn),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_country !== '')
-		{
-			$args = $filter_args; unset($args['country']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipCountry') . ': ' . Ut::html($g_country),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_slow)
-		{
-			$args = $filter_args; unset($args['slow']);
-			$active_chips[] = ['label' => $engine->_t('BbChipSlow'), 'link' => $engine->href('', '', ['setting' => 'bb_manage'] + $args)];
-		}
-		if ($g_date_from !== '' || $g_date_to !== '')
-		{
-			$args = $filter_args; unset($args['date_from'], $args['date_to']);
-			$range = trim($g_date_from . ' → ' . $g_date_to, ' →');
-			$active_chips[] = ['label' => $engine->_t('BbChipDate') . ': ' . Ut::html($range), 'link' => $engine->href('', '', ['setting' => 'bb_manage'] + $args)];
-		}
-		if ($g_resolved !== 'active')
-		{
-			$args = $filter_args; unset($args['resolved']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipResolved') . ': ' . $engine->_t('BbResolved' . ucfirst($g_resolved)),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-		if ($g_check !== '')
-		{
-			$args = $filter_args; unset($args['check']);
-			$active_chips[] = [
-				'label' => $engine->_t('BbChipCheck') . ': ' . ($g_check === '1' ? $engine->_t('BbChecked') : $engine->_t('BbUnchecked')),
-				'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
-			];
-		}
-
-		if ($active_chips): ?>
-			<div class="bb-filter-chips">
-			<?php foreach ($active_chips as $chip): ?>
-				<span class="bb-chip"><?php echo $chip['label']; ?> <a href="<?php echo $chip['link']; ?>" title="<?php echo $engine->_t('BbChipRemove'); ?>">×</a></span>
-			<?php endforeach; ?>
-			</div>
-		<?php endif;
-
-		// === Bulk-action form (POST) — wraps the table ===
-		echo $engine->form_close(); // close the GET filter form
-
-		echo $engine->form_open('bb_bulk', [
-		'href_param'  => ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour'],
-		'form_method' => 'post',
-		'form_id'     => 'bb-bulk-form',
+		// === Filter form (GET) ===
+		echo $engine->form_open('bb_manage', [
+			'href_param' => [
+				'setting' => 'bb_manage',
+				'mode'    => 'tool_badbehaviour',
+				'since'   => $window['key']
+			],
+			'form_method' => 'get'
 		]);
 		echo '<input type="hidden" name="setting" value="bb_manage">';
 		echo '<input type="hidden" name="mode" value="tool_badbehaviour">';
-
-		// Build _back from cleaned $filter_args, NOT from $_SERVER['REQUEST_URI'].
-		// REQUEST_URI contains reveal_*, _nonce, _action, id, _back — any of
-		// which then get serialized into the bulk form's _back hidden input
-		// and replayed on every redirect. This is the single biggest fix for
-		// the polluted-link bug [b].
-		$back_url = $engine->href('', '', $filter_args + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
-		echo '<input type="hidden" name="_back" value="' . Ut::html($back_url) . '">';
+		echo '<input type="hidden" name="since" value="' . Ut::html($window['key']) . '">';
 		?>
 
-		<div class="bb-bulk-bar">
-			<button type="submit" name="submit_action" value="bb_bulk_delete" class="button"><?php echo $engine->_t('BbBulkDeleteSelected');?></button>
-			<button type="submit" name="submit_action" value="bb_bulk_whitelist" class="button"><?php echo $engine->_t('BbBulkWhitelistSelected');?></button>
-			<button type="submit" name="submit_action" value="bb_bulk_resolve" class="button"><?php echo $engine->_t('BbBulkResolveSelected');?></button>
-			<button type="submit" name="submit_action" value="bb_bulk_unresolve" class="button"><?php echo $engine->_t('BbBulkUnresolveSelected');?></button>
-			<button type="submit" name="submit_action" value="bb_bulk_check" class="button"><?php echo $engine->_t('BbBulkCheckSelected');?></button>
-			<button type="submit" name="submit_action" value="bb_bulk_uncheck" class="button"><?php echo $engine->_t('BbBulkUncheckSelected');?></button>
-			<small class="bb-bulk-hint"><?php echo $engine->_t('BbBulkHint');?></small>
+	<div class="alignleft">
+		<?php echo Ut::perc_replace($engine->_t('BbRecordsFiltered'),
+			'<strong>' . $engine->number_format($count['n']) . '</strong>',
+			'<strong>' . $engine->number_format($totalcount['n']) . '</strong>'
+		) . ':'; ?>
+	</div>
+
+	<?php echo bb_render_time_selector($engine, $window['key'], 'bb_manage', $filter_args); ?>
+
+	<div class="bb-filter-bar">
+		<input type="search" name="search"
+			placeholder="<?php echo Ut::html($engine->_t('BbSearchPlaceholder') ?? ''); ?>"
+			value="<?php echo Ut::html($g_search); ?>"
+			autocomplete="off" class="bb-filter-search">
+
+		<select name="bot_category" class="bb-filter-select">
+			<option value=""><?php echo $engine->_t('BbFilterAnyCategory'); ?></option>
+			<?php
+			$bot_categories = [
+				'search_engine'		=> $engine->_t('BbCatSearchEngine'),
+				'ai_crawler'		   => $engine->_t('BbCatAiCrawler'),
+				'social_crawler'	   => $engine->_t('BbCatSocialCrawler'),
+				'seo_crawler'		  => $engine->_t('BbCatSeoCrawler'),
+				'archive_crawler'	  => $engine->_t('BbCatArchiveCrawler'),
+				'monitoring'		   => $engine->_t('BbCatMonitoring'),
+				'feed_reader'		  => $engine->_t('BbCatFeedReader'),
+				'shopping_crawler'	 => $engine->_t('BbCatShoppingCrawler'),
+				'cloud_infrastructure' => $engine->_t('BbCatCloudInfra'),
+				'security_scanner'	 => $engine->_t('BbCatSecurityScanner'),
+				'residential_proxy'	=> $engine->_t('BbCatResidentialProxy'),
+				'malicious'			=> $engine->_t('BbCatMalicious'),
+				'unknown'			  => $engine->_t('BbCatUnknown'),
+			];
+			foreach ($bot_categories as $value => $label): ?>
+				<option value="<?php echo Ut::html($value); ?>"<?php echo ($g_bot_category === $value ? ' selected' : ''); ?>><?php echo Ut::html($label); ?></option>
+			<?php endforeach; ?>
+		</select>
+
+		<select name="request_method" class="bb-filter-select">
+			<option value=""><?php echo $engine->_t('BbFilterAnyMethod'); ?></option>
+			<?php foreach (['GET','POST','HEAD','PUT','PATCH','DELETE','OPTIONS','TRACE'] as $method): ?>
+				<option value="<?php echo $method; ?>"<?php echo ($g_request_method === $method ? ' selected' : ''); ?>><?php echo $method; ?></option>
+			<?php endforeach; ?>
+		</select>
+
+		<select name="blocked" class="bb-filter-select">
+			<option value="" <?php echo ($g_blocked === '' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterAnyStatus'); ?></option>
+			<option value="true" <?php echo ($g_blocked === 'true' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterBlockedOnly'); ?></option>
+			<option value="false" <?php echo ($g_blocked === 'false' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterPermittedOnly'); ?></option>
+		</select>
+
+		<select name="resolved" class="bb-filter-select">
+			<option value="active" <?php echo ($g_resolved === 'active' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedActive'); ?></option>
+			<option value="resolved" <?php echo ($g_resolved === 'resolved' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedOnly'); ?></option>
+			<option value="all" <?php echo ($g_resolved === 'all' ? 'selected' : ''); ?>><?php echo $engine->_t('BbResolvedAll'); ?></option>
+		</select>
+
+		<select name="check" class="bb-filter-select">
+			<option value="" <?php echo ($g_check === '' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterAnyCheck'); ?></option>
+			<option value="1" <?php echo ($g_check === '1' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterCheckedOnly'); ?></option>
+			<option value="0" <?php echo ($g_check === '0' ? 'selected' : ''); ?>><?php echo $engine->_t('BbFilterUncheckedOnly'); ?></option>
+		</select>
+
+		<button type="submit" class="button"><?php echo $engine->_t('BbFilterApply');?></button>
+		<?php if ($g_search !== '' || $g_bot_category !== '' || $g_request_method !== '' || $g_blocked !== '' || $g_resolved !== 'active'): ?>
+			<a href="<?php echo $engine->href('', '', ['setting' => 'bb_manage']); ?>" class="button"><?php echo $engine->_t('BbFilterClear');?></a>
+		<?php endif; ?>
+	</div>
+
+	<details class="bb-advanced-filters">
+		<summary><?php echo $engine->_t('BbAdvancedFilters');?></summary>
+		<div class="bb-filter-bar" style="margin-top: 0.5rem;">
+			<label><?php echo $engine->_t('BbDateFrom');?>
+				<input type="date" name="date_from" value="<?php echo Ut::html($g_date_from); ?>" class="bb-filter-input">
+			</label>
+			<label><?php echo $engine->_t('BbDateTo');?>
+				<input type="date" name="date_to" value="<?php echo Ut::html($g_date_to); ?>" class="bb-filter-input">
+			</label>
+			<label>
+				<input type="checkbox" name="slow" value="1"<?php echo ($g_slow ? ' checked' : ''); ?>>
+				<?php echo $engine->_t('BbSlowOnly');?>
+			</label>
 		</div>
+		<div class="bb-filter-bar">
+			<!-- MERGED: Single view mode for Headers + Body -->
+			<label><?php echo $engine->_t('BbViewContentLabel');?>:
+				<select name="view_content" class="bb-filter-select">
+					<option value="teaser"<?php echo ($g_view_content === 'teaser' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeTeaser');?></option>
+					<option value="full"<?php echo ($g_view_content === 'full' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeFull');?></option>
+					<option value="hidden"<?php echo ($g_view_content === 'hidden' ? ' selected' : ''); ?>><?php echo $engine->_t('BbViewModeHidden');?></option>
+				</select>
+			</label>
+		</div>
+	</details>
 
-		<?php $engine->print_pagination($pagination); ?>
+	<?php
+	// === Filter chips (WITHOUT removed fields) ===
+	$active_chips = [];
 
-		<table class="formation hl-line bb-log">
-			<thead>
-				<tr>
-					<th scope="col" class="check-column"><?php
-						// Toggle-all link. Adds or removes mark_all=1 from the
-						// current URL (preserving setting, mode, sort, dir,
-						// since, p, and all user-set filters). When mark_all=1,
-						// every row's checkbox renders as checked; clicking any
-						// other link (sort, chip ×, pagination, time-window,
-						// per-row resolve) drops it again — selection resets
-						// naturally on context change.
-						$toggle_args  = $filter_args + [
-							'setting' => 'bb_manage',
-							'mode'    => 'tool_badbehaviour',
-						];
+	if ($g_search !== '')
+	{
+		$args = $filter_args; unset($args['search']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipSearch') . ': ' . Ut::html(mb_strimwidth($g_search, 0, 30, '…')),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_bot_category !== '')
+	{
+		$args = $filter_args; unset($args['bot_category']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipCategory') . ': ' . Ut::html($g_bot_category),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_request_method !== '')
+	{
+		$args = $filter_args; unset($args['request_method']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipMethod') . ': ' . Ut::html($g_request_method),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_blocked !== '')
+	{
+		$args = $filter_args; unset($args['blocked']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipStatus') . ': ' . ($g_blocked === 'true' ? $engine->_t('BbBlocked') : $engine->_t('BbPermitted')),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_key !== '')
+	{
+		$args = $filter_args; unset($args['status_code']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipStatusCode') . ': ' . Ut::html($g_key),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_ip !== '')
+	{
+		$args = $filter_args; unset($args['ip']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipIp') . ': ' . Ut::html($g_ip),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_user_agent !== '')
+	{
+		$args = $filter_args; unset($args['user_agent']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipUa') . ': ' . Ut::html(mb_strimwidth($g_user_agent, 0, 16, '…')),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_request_uri !== '')
+	{
+		$args = $filter_args; unset($args['request_uri']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipUri') . ': ' . Ut::html(mb_strimwidth($g_request_uri, 0, 30, '…')),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_slow)
+	{
+		$args = $filter_args; unset($args['slow']);
+		$active_chips[] = ['label' => $engine->_t('BbChipSlow'), 'link' => $engine->href('', '', ['setting' => 'bb_manage'] + $args)];
+	}
+	if ($g_date_from !== '' || $g_date_to !== '')
+	{
+		$args = $filter_args; unset($args['date_from'], $args['date_to']);
+		$range = trim($g_date_from . ' → ' . $g_date_to, ' →');
+		$active_chips[] = ['label' => $engine->_t('BbChipDate') . ': ' . Ut::html($range), 'link' => $engine->href('', '', ['setting' => 'bb_manage'] + $args)];
+	}
+	if ($g_resolved !== 'active')
+	{
+		$args = $filter_args; unset($args['resolved']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipResolved') . ': ' . $engine->_t('BbResolved' . ucfirst($g_resolved)),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
+	if ($g_check !== '')
+	{
+		$args = $filter_args; unset($args['check']);
+		$active_chips[] = [
+			'label' => $engine->_t('BbChipCheck') . ': ' . ($g_check === '1' ? $engine->_t('BbChecked') : $engine->_t('BbUnchecked')),
+			'link'  => $engine->href('', '', ['setting' => 'bb_manage'] + $args),
+		];
+	}
 
-						if ($g_mark_all)
-						{
-							$toggle_args['mark_all'] = '0';
-							$toggle_label = '☐';
-							$toggle_title = $engine->_t('BbMarkNone');
-						}
-						else
-						{
-							$toggle_args['mark_all'] = '1';
-							$toggle_label = '☑';
-							$toggle_title = $engine->_t('BbMarkAll');
-						}
+	if ($active_chips): ?>
+		<div class="bb-filter-chips">
+		<?php foreach ($active_chips as $chip): ?>
+			<span class="bb-chip"><?php echo $chip['label']; ?> <a href="<?php echo $chip['link']; ?>" title="<?php echo $engine->_t('BbChipRemove'); ?>">×</a></span>
+		<?php endforeach; ?>
+		</div>
+	<?php endif;
 
-						echo '<a href="' . $engine->href('', '', $toggle_args) . '#bb-bulk-form"'
-							. ' title="' . Ut::html($toggle_title) . '"'
-							. ' aria-label="' . Ut::html($toggle_title) . '">'
-							. $toggle_label . '</a>';
-					?></th>
-					<th scope="col">
-						<a href="<?php echo $engine->href('', '', $sort_args_for('log_id')); ?>">
-							<?php echo $engine->_t('BbIpDateStatus'); echo $arrow_for('log_id'); ?>
-						</a>
-					</th>
-					<th scope="col">
-						<a href="<?php echo $engine->href('', '', $sort_args_for('bot_category')); ?>">
-							<?php echo $engine->_t('BbCategory'); echo $arrow_for('bot_category'); ?>
-						</a>
-					</th>
-					<th scope="col"><?php echo $engine->_t('BbHeaders');?></th>
-					<th scope="col"><?php echo $engine->_t('BbEntity');?></th>
-					<th scope="col">
-						<a href="<?php echo $engine->href('', '', $sort_args_for('request_time_ms')); ?>">
-							<?php echo $engine->_t('BbResponseTime'); echo $arrow_for('request_time_ms'); ?>
-						</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-		<?php
-		$responses = bb_get_responses($engine);
+	// === Bulk-action form ===
+	echo $engine->form_close();
 
-		if ($results):
-			foreach ($results as $result):
-				$status_code = $responses[$result['status_code']] ?? $responses['__unknown__'];
-				$is_resolved = !empty($result['resolved_at']);
-				$is_checked  = !empty($result['check']);
-				$row_class = 'bb-row'
-					. ($is_resolved ? ' bb-resolved' : '')
-					. ($is_checked ? ' bb-checked' : '');
+	echo $engine->form_open('bb_bulk', [
+		'href_param'  => ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour'],
+		'form_method' => 'post',
+		'form_id'	 => 'bb-bulk-form',
+	]);
+	echo '<input type="hidden" name="setting" value="bb_manage">';
+	echo '<input type="hidden" name="mode" value="tool_badbehaviour">';
 
-				echo '<tr id="request-' . $result['log_id'] . '" class="' . $row_class . '">';
-				echo '<td class="check-column">';
-				echo '<input type="checkbox" name="submit[]" value="' . $result['log_id'] . '"'
-				. ' aria-label="' . $engine->_t('BbSelectRow') . ' #' . $result['log_id'] . '"'
-				. ($g_mark_all ? ' checked' : '')
-				. '>';
-					echo '</td>';
+	$back_url = $engine->href('', '', $filter_args + ['setting' => 'bb_manage', 'mode' => 'tool_badbehaviour']);
+	echo '<input type="hidden" name="_back" value="' . Ut::html($back_url) . '">';
+	?>
 
-				$httpbl = bb_httpbl_lookup($engine, $result['ip']);
+	<div class="bb-bulk-bar">
+		<button type="submit" name="submit_action" value="bb_bulk_delete" class="button"><?php echo $engine->_t('BbBulkDeleteSelected');?></button>
+		<button type="submit" name="submit_action" value="bb_bulk_whitelist" class="button"><?php echo $engine->_t('BbBulkWhitelistSelected');?></button>
+		<button type="submit" name="submit_action" value="bb_bulk_resolve" class="button"><?php echo $engine->_t('BbBulkResolveSelected');?></button>
+		<button type="submit" name="submit_action" value="bb_bulk_unresolve" class="button"><?php echo $engine->_t('BbBulkUnresolveSelected');?></button>
+		<button type="submit" name="submit_action" value="bb_bulk_check" class="button"><?php echo $engine->_t('BbBulkCheckSelected');?></button>
+		<button type="submit" name="submit_action" value="bb_bulk_uncheck" class="button"><?php echo $engine->_t('BbBulkUncheckSelected');?></button>
+		<small class="bb-bulk-hint"><?php echo $engine->_t('BbBulkHint');?></small>
+	</div>
 
-				if (empty($result['host']))
-				{
-					$host = @gethostbyaddr($result['ip']);
-					$engine->db->sql_query(
-						'UPDATE ' . $engine->prefix . 'bad_behaviour SET host = ' . $engine->db->q($host) . ' '
-						. 'WHERE log_id = ' . (int)$result['log_id'] . ' ' . $engine->db->limit()
-					);
-				}
+	<?php $engine->print_pagination($pagination); ?>
 
-				$host = $result['host'];
-				if (!strcmp($host, $result['ip'])) $host = '';
-				else $host .= '<br>';
+	<table class="formation hl-line bb-log">
+		<thead>
+			<tr>
+				<th scope="col" class="check-column"><?php
+					$toggle_args  = $filter_args + [
+						'setting' => 'bb_manage',
+						'mode'	=> 'tool_badbehaviour',
+					];
 
-				$time_tz = $engine->sql2precisetime($result['date']);
-				$rel_time = method_exists($engine, 'sql2relativetime')
-					? $engine->sql2relativetime($result['date'])
-					: $time_tz;
-
-				echo '<td class="bb-meta">';
-				echo '<a href="' . $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $result['ip'], 'since' => $window['key']]) . '">' . Ut::html($result['ip']) . '</a><br>';
-				echo $host;
-				echo '<abbr title="' . Ut::html($time_tz) . '">' . Ut::html($rel_time) . '</abbr><br>';
-				echo '<a href="' . $engine->href('', '', ['setting' => 'bb_manage', 'status_code' => $result['status_code']])
-					. '" title="[' . $status_code['response'] . '] ' . Ut::html($status_code['explanation']) . '">'
-					. Ut::html($status_code['log']) . '</a>';
-
-				if (!empty($result['status_message']))
-				{
-					echo '<br><small>' . Ut::html($result['status_message']) . '</small>';
-				}
-
-				if ($httpbl)
-				{
-					echo '<br><a href="https://www.projecthoneypot.org/ip_' . Ut::html($result['ip']) . '">http:BL</a>:<br>' . $httpbl;
-				}
-				echo '</td>';
-
-				echo '<td>';
-				if (!empty($result['bot_category']))
-				{
-					$cat_link = $engine->href('', '', $filter_args + ['bot_category' => $result['bot_category']]);
-					echo '<a href="' . $cat_link . '" class="bb-cat-badge" title="' . $engine->_t('BbFilterByCategory') . '">' . Ut::html($result['bot_category']) . '</a>';
-					if (isset($result['bot_verified']))
+					if ($g_mark_all)
 					{
-						$v_label = $result['bot_verified'] ? '✓ ' . $engine->_t('BbVerified') : '✗ ' . $engine->_t('BbUnverified');
-						echo '<br><small>' . $v_label . '</small>';
+						$toggle_args['mark_all'] = '0';
+						$toggle_label = '☐';
+						$toggle_title = $engine->_t('BbMarkNone');
 					}
-				}
-				echo '</td>';
+					else
+					{
+						$toggle_args['mark_all'] = '1';
+						$toggle_label = '☑';
+						$toggle_title = $engine->_t('BbMarkAll');
+					}
 
-				// Headers — view-mode aware (no JS)
-				echo '<td>' . bb_render_view_mode($engine, $result, 'http_headers', $g_view_headers) . '</td>';
+					echo '<a href="' . $engine->href('', '', $toggle_args) . '#bb-bulk-form"'
+						. ' title="' . Ut::html($toggle_title) . '"'
+						. ' aria-label="' . Ut::html($toggle_title) . '">'
+						. $toggle_label . '</a>';
+				?></th>
+				<th scope="col">
+					<a href="<?php echo $engine->href('', '', $sort_args_for('log_id')); ?>">
+						<?php echo $engine->_t('BbIpDateStatus'); echo $arrow_for('log_id'); ?>
+					</a>
+				</th>
+				<th scope="col">
+					<a href="<?php echo $engine->href('', '', $sort_args_for('bot_category')); ?>">
+						<?php echo $engine->_t('BbCategory'); echo $arrow_for('bot_category'); ?>
+					</a>
+				</th>
+				<th scope="col"><?php echo $engine->_t('BbHeaders');?></th>
+				<th scope="col"><?php echo $engine->_t('BbEntity');?></th>
+				<th scope="col">
+					<a href="<?php echo $engine->href('', '', $sort_args_for('request_time_ms')); ?>">
+						<?php echo $engine->_t('BbResponseTime'); echo $arrow_for('request_time_ms'); ?>
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+	<?php
+	$responses = bb_get_responses($engine);
 
-				// Body — view-mode aware
-				echo '<td>' . bb_render_view_mode($engine, $result, 'request_entity', $g_view_body) . '</td>';
+	if ($results):
+		foreach ($results as $result):
+			$status_code = $responses[$result['status_code']] ?? $responses['__unknown__'];
+			$is_resolved = !empty($result['resolved_at']);
+			$is_checked  = !empty($result['check']);
+			$row_class = 'bb-row'
+				. ($is_resolved ? ' bb-resolved' : '')
+				. ($is_checked ? ' bb-checked' : '');
 
-				// Response time + per-row actions
-				echo '<td class="bb-ms">';
-				if (!empty($result['request_time_ms']))
+			echo '<tr id="request-' . $result['log_id'] . '" class="' . $row_class . '">';
+			echo '<td class="check-column">';
+			echo '<input type="checkbox" name="submit[]" value="' . $result['log_id'] . '"'
+			. ' aria-label="' . $engine->_t('BbSelectRow') . ' #' . $result['log_id'] . '"'
+			. ($g_mark_all ? ' checked' : '')
+			. '>';
+			echo '</td>';
+
+			$httpbl = bb_httpbl_lookup($engine, $result['ip']);
+
+			if (empty($result['host']))
+			{
+				$host = @gethostbyaddr($result['ip']);
+				$engine->db->sql_query(
+					'UPDATE ' . $engine->prefix . 'bad_behaviour SET host = ' . $engine->db->q($host) . ' '
+					. 'WHERE log_id = ' . (int)$result['log_id'] . ' ' . $engine->db->limit()
+				);
+			}
+
+			$host = $result['host'];
+			if (!strcmp($host, $result['ip'])) $host = '';
+			else $host .= '<br>';
+
+			$time_tz = $engine->sql2precisetime($result['date']);
+			$rel_time = method_exists($engine, 'sql2relativetime')
+				? $engine->sql2relativetime($result['date'])
+				: $time_tz;
+
+			echo '<td class="bb-meta">';
+			echo '<a href="' . $engine->href('', '', ['setting' => 'bb_manage', 'ip' => $result['ip'], 'since' => $window['key']]) . '">' . Ut::html($result['ip']) . '</a><br>';
+			echo $host;
+			echo '<abbr title="' . Ut::html($time_tz) . '">' . Ut::html($rel_time) . '</abbr><br>';
+			echo '<a href="' . $engine->href('', '', ['setting' => 'bb_manage', 'status_code' => $result['status_code']])
+				. '" title="[' . $status_code['response'] . '] ' . Ut::html($status_code['explanation']) . '">'
+				. Ut::html($status_code['log']) . '</a>';
+
+			if (!empty($result['status_message']))
+			{
+				echo '<br><small>' . Ut::html($result['status_message']) . '</small>';
+			}
+
+			if ($httpbl)
+			{
+				echo '<br><a href="https://www.projecthoneypot.org/ip_' . Ut::html($result['ip']) . '">http:BL</a>:<br>' . $httpbl;
+			}
+			echo '</td>';
+
+			echo '<td>';
+			if (!empty($result['bot_category']))
+			{
+				$cat_link = $engine->href('', '', $filter_args + ['bot_category' => $result['bot_category']]);
+				echo '<a href="' . $cat_link . '" class="bb-cat-badge" title="' . $engine->_t('BbFilterByCategory') . '">' . Ut::html($result['bot_category']) . '</a>';
+				if (isset($result['bot_verified']))
 				{
-					$ms = (int)$result['request_time_ms'];
-					$bar_pct = min(100, ($ms / 1000) * 100);
-					$bar_class = $ms > 1000 ? 'bb-ms-slow' : ($ms > 500 ? 'bb-ms-warn' : 'bb-ms-ok');
-					echo '<span class="bb-ms-bar"><span class="bb-ms-fill ' . $bar_class . '" style="width: ' . $bar_pct . '%;"></span></span> ';
-					echo '<small>' . $ms . ' ms</small>';
+					$v_label = $result['bot_verified'] ? '✓ ' . $engine->_t('BbVerified') : '✗ ' . $engine->_t('BbUnverified');
+					echo '<br><small>' . $v_label . '</small>';
 				}
-				echo '<div class="bb-row-actions">';
+			}
+			echo '</td>';
 
-				// Resolve / unresolve
-				$action_args = $filter_args + [
-					'setting' => 'bb_manage',
-					'mode'    => 'tool_badbehaviour',
-					'_action' => $is_resolved ? 'bb_unresolve' : 'bb_resolve',
-					'id'      => (int)$result['log_id'],
-				];
+			echo '<td>' . bb_render_view_mode($engine, $result, 'http_headers', $g_view_content) . '</td>';
+			echo '<td>' . bb_render_view_mode($engine, $result, 'request_entity', $g_view_content) . '</td>';
 
-				$action_label = $is_resolved
-					? $engine->_t('BbActionUnresolve')
-					: $engine->_t('BbActionResolve');
+			// Response time + per-row actions
+			echo '<td class="bb-ms">';
+			if (!empty($result['request_time_ms']))
+			{
+				$ms = (int)$result['request_time_ms'];
+				$bar_pct = min(100, ($ms / 1000) * 100);
+				$bar_class = $ms > 1000 ? 'bb-ms-slow' : ($ms > 500 ? 'bb-ms-warn' : 'bb-ms-ok');
+				echo '<span class="bb-ms-bar"><span class="bb-ms-fill ' . $bar_class . '" style="width: ' . $bar_pct . '%;"></span></span> ';
+				echo '<small>' . $ms . ' ms</small>';
+			}
+			echo '<div class="bb-row-actions">';
 
-				echo '<a href="' . $engine->href('', '', $action_args) . '">[' . $action_label . ']</a>';
+			$action_args = $filter_args + [
+				'setting' => 'bb_manage',
+				'mode'	=> 'tool_badbehaviour',
+				'_action' => $is_resolved ? 'bb_unresolve' : 'bb_resolve',
+				'id'	  => (int)$result['log_id'],
+			];
 
-				// Check / uncheck — separate from bulk-select checkbox (which is in the
-				// leftmost column). The `check` flag is a per-record annotation that
-				// persists across log rotations and exempts the row from autodelete.
-				$check_action = $is_checked ? 'bb_uncheck' : 'bb_check';
-				$check_label  = $is_checked
-					? $engine->_t('BbActionUncheck')
-					: $engine->_t('BbActionCheck');
-				$check_class  = $is_checked ? ' bb-row-checked' : '';
+			$action_label = $is_resolved
+				? $engine->_t('BbActionUnresolve')
+				: $engine->_t('BbActionResolve');
 
-				echo '<a href="' . $engine->href('', '', $filter_args + [
-					'setting' => 'bb_manage',
-					'mode'    => 'tool_badbehaviour',
-					'_action' => $check_action,
-					'id'      => (int)$result['log_id'],
-				]) . '" class="bb-row-check' . $check_class . '" title="'
-			. Ut::html($is_checked
-				? $engine->_t('BbRowCheckedHint')
-				: $engine->_t('BbRowUncheckedHint'))
+			echo '<a href="' . $engine->href('', '', $action_args) . '">[' . $action_label . ']</a>';
+
+			$check_action = $is_checked ? 'bb_uncheck' : 'bb_check';
+			$check_label  = $is_checked
+				? $engine->_t('BbActionUncheck')
+				: $engine->_t('BbActionCheck');
+			$check_class  = $is_checked ? ' bb-row-checked' : '';
+
+			echo '<a href="' . $engine->href('', '', $filter_args + [
+				'setting' => 'bb_manage',
+				'mode'	=> 'tool_badbehaviour',
+				'_action' => $check_action,
+				'id'	  => (int)$result['log_id'],
+			]) . '" class="bb-row-check' . $check_class . '" title="'
+				. Ut::html($is_checked
+					? $engine->_t('BbRowCheckedHint')
+					: $engine->_t('BbRowUncheckedHint'))
 				. '">[' . $check_label . ']</a>';
 
-				echo '</div>';
-				echo '</td>';
+			echo '</div>';
+			echo '</td>';
 
-				echo '</tr>';
-			endforeach;
-		endif;
-		?>
-			</tbody>
-		</table>
+			echo '</tr>';
+		endforeach;
+	endif;
+	?>
+		</tbody>
+	</table>
 
-		<?php
-		$engine->print_pagination($pagination);
-		echo $engine->form_close();
-	}
+	<?php
+	$engine->print_pagination($pagination);
+	echo $engine->form_close();
+}
 
 	// ============================================================
 	// Whitelist editor (unchanged)
@@ -2716,8 +2646,8 @@ function admin_tool_badbehaviour($engine, $module)
 
 		if ($_POST)
 		{
-			$whitelists['ip']         = $_POST['ip']         ? array_filter(preg_split('/\s+/m', $_POST['ip']))         : [];
-			$whitelists['url']        = $_POST['url']        ? array_filter(preg_split('/\s+/m', $_POST['url']))        : [];
+			$whitelists['ip']		 = $_POST['ip']		 ? array_filter(preg_split('/\s+/m', $_POST['ip']))		 : [];
+			$whitelists['url']		= $_POST['url']		? array_filter(preg_split('/\s+/m', $_POST['url']))		: [];
 			$whitelists['useragent']  = $_POST['useragent']  ? array_filter(preg_split("/[\r\n]+/m", $_POST['useragent'])) : [];
 			?>
 			<div id="message" class="updated fade"><p><strong><?php echo $engine->_t('BbOptionsSaved');?></strong></p></div>
@@ -2774,1086 +2704,1086 @@ function admin_tool_badbehaviour($engine, $module)
 		$logging_mode = !$logging_on ? 'off' : ($verbose_on ? 'verbose' : 'normal');
 
 		?>
-    <div class="wrap">
-        <!-- ========================================================== -->
-        <!-- MASTER ENABLE — separate form, posts to bb_options_enable  -->
-        <!-- ========================================================== -->
-    <?php echo $engine->form_open('bb_options_enable', ['form_more' => 'setting=bb_options_enable']); ?>
-        <table class="setting formation">
-            <colgroup>
-                <col span="1">
-                <col span="1">
-            </colgroup>
-            <tr class="lined"><td colspan="2"></td></tr>
-            <tr class="hl-setting">
-                <td class="label">
-                    <strong><?php echo $engine->_t('BbEnable');?></strong><br>
-                    <small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_config.php</code>');?></small>
-                </td>
-                <td>
-                    <input type="radio" id="enable_bad-behaviour_on" name="ext_bad_behaviour" value="1"<?php echo ($engine->db->ext_bad_behaviour ? ' checked' : '');?>>
-                    <label for="enable_bad-behaviour_on"><?php echo $engine->_t('On');?></label>
-                    <input type="radio" id="enable_bad-behaviour_off" name="ext_bad_behaviour" value="0"<?php echo (!$engine->db->ext_bad_behaviour ? ' checked' : '');?>>
-                    <label for="enable_bad-behaviour_off"><?php echo $engine->_t('Off');?></label>
-                    <button type="submit" class="button" name="submit"><?php echo $engine->_t('UpdateButton');?></button>
-                </td>
-            </tr>
-        </table>
-        <?php echo $engine->form_close(); ?>
+	<div class="wrap">
+		<!-- ========================================================== -->
+		<!-- MASTER ENABLE — separate form, posts to bb_options_enable  -->
+		<!-- ========================================================== -->
+	<?php echo $engine->form_open('bb_options_enable', ['form_more' => 'setting=bb_options_enable']); ?>
+		<table class="setting formation">
+			<colgroup>
+				<col span="1">
+				<col span="1">
+			</colgroup>
+			<tr class="lined"><td colspan="2"></td></tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<strong><?php echo $engine->_t('BbEnable');?></strong><br>
+					<small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_config.php</code>');?></small>
+				</td>
+				<td>
+					<input type="radio" id="enable_bad-behaviour_on" name="ext_bad_behaviour" value="1"<?php echo ($engine->db->ext_bad_behaviour ? ' checked' : '');?>>
+					<label for="enable_bad-behaviour_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="enable_bad-behaviour_off" name="ext_bad_behaviour" value="0"<?php echo (!$engine->db->ext_bad_behaviour ? ' checked' : '');?>>
+					<label for="enable_bad-behaviour_off"><?php echo $engine->_t('Off');?></label>
+					<button type="submit" class="button" name="submit"><?php echo $engine->_t('UpdateButton');?></button>
+				</td>
+			</tr>
+		</table>
+		<?php echo $engine->form_close(); ?>
 
 		<?php echo $engine->form_open('bb_options', ['form_more' => 'setting=bb_options']); ?>
-        <!-- ========================================================== -->
-        <!-- BASIC SECTION                                               -->
-        <!-- ========================================================== -->
-        <table class="setting formation">
-            <colgroup>
-                <col span="1">
-                <col span="1">
-            </colgroup>
-        <tr><th colspan="2"><br><?php echo $engine->_t('BbBasicSection');?></th></tr>
+		<!-- ========================================================== -->
+		<!-- BASIC SECTION											   -->
+		<!-- ========================================================== -->
+		<table class="setting formation">
+			<colgroup>
+				<col span="1">
+				<col span="1">
+			</colgroup>
+		<tr><th colspan="2"><br><?php echo $engine->_t('BbBasicSection');?></th></tr>
 
-        <tr class="hl-setting">
-            <td class="label">
-                <label for="bb_preset"><strong><?php echo $engine->_t('BbPreset');?></strong></label><br>
-                <small><?php echo $engine->_t('BbPresetInfo');?></small>
-            </td>
-            <td>
-                <select id="bb_preset" name="preset">
-				    <?php foreach ([
-				        'minimal'        => $engine->_t('BbPresetMinimal'),
-				        'full'           => $engine->_t('BbPresetFull'),
-				        'verified-only'  => $engine->_t('BbPresetVerifiedOnly'),
-				        'no-ai'          => $engine->_t('BbPresetNoAi'),
-				        'no-seo'         => $engine->_t('BbPresetNoSeo'),
-				        'eu-only'        => $engine->_t('BbPresetEuOnly'),
-				        'human-only'     => $engine->_t('BbPresetHumanOnly'),
-				        'custom'         => $engine->_t('BbPresetCustom'),
-				    ] as $val => $label): ?>
-				        <option value="<?php echo $val; ?>"<?php echo (($settings['preset'] ?? 'minimal') === $val ? ' selected' : ''); ?>>
-				            <?php echo $label; ?>
-				        </option>
-				    <?php endforeach; ?>
+		<tr class="hl-setting">
+			<td class="label">
+				<label for="bb_preset"><strong><?php echo $engine->_t('BbPreset');?></strong></label><br>
+				<small><?php echo $engine->_t('BbPresetInfo');?></small>
+			</td>
+			<td>
+				<select id="bb_preset" name="preset">
+					<?php foreach ([
+						'minimal'		=> $engine->_t('BbPresetMinimal'),
+						'full'		   => $engine->_t('BbPresetFull'),
+						'verified-only'  => $engine->_t('BbPresetVerifiedOnly'),
+						'no-ai'		  => $engine->_t('BbPresetNoAi'),
+						'no-seo'		 => $engine->_t('BbPresetNoSeo'),
+						'eu-only'		=> $engine->_t('BbPresetEuOnly'),
+						'human-only'	 => $engine->_t('BbPresetHumanOnly'),
+						'custom'		 => $engine->_t('BbPresetCustom'),
+					] as $val => $label): ?>
+						<option value="<?php echo $val; ?>"<?php echo (($settings['preset'] ?? 'minimal') === $val ? ' selected' : ''); ?>>
+							<?php echo $label; ?>
+						</option>
+					<?php endforeach; ?>
 				</select>
-            </td>
-        </tr>
+			</td>
+		</tr>
 
-        <tr class="hl-setting">
-            <td class="label">
-                <label for="bb_strictness"><strong><?php echo $engine->_t('BbStrictness');?></strong></label><br>
-                <small><?php echo $engine->_t('BbStrictnessInfo');?></small>
-            </td>
-            <td>
-                <select id="bb_strictness" name="strictness">
-				    <?php foreach ([
-				        'monitor-only' => $engine->_t('BbStrictnessMonitorOnly'),
-				        'normal'       => $engine->_t('BbStrictnessNormal'),
-				        'strict'       => $engine->_t('BbStrictnessStrict'),
-				    ] as $val => $label): ?>
-				        <option value="<?php echo $val; ?>"<?php echo (($settings['strictness'] ?? 'normal') === $val ? ' selected' : ''); ?>>
-				            <?php echo $label; ?>
-				        </option>
-				    <?php endforeach; ?>
+		<tr class="hl-setting">
+			<td class="label">
+				<label for="bb_strictness"><strong><?php echo $engine->_t('BbStrictness');?></strong></label><br>
+				<small><?php echo $engine->_t('BbStrictnessInfo');?></small>
+			</td>
+			<td>
+				<select id="bb_strictness" name="strictness">
+					<?php foreach ([
+						'monitor-only' => $engine->_t('BbStrictnessMonitorOnly'),
+						'normal'	   => $engine->_t('BbStrictnessNormal'),
+						'strict'	   => $engine->_t('BbStrictnessStrict'),
+					] as $val => $label): ?>
+						<option value="<?php echo $val; ?>"<?php echo (($settings['strictness'] ?? 'normal') === $val ? ' selected' : ''); ?>>
+							<?php echo $label; ?>
+						</option>
+					<?php endforeach; ?>
 				</select>
-            </td>
-        </tr>
+			</td>
+		</tr>
 
-        <tr class="hl-setting">
-            <td class="label">
-                <label for="bb_logging_mode"><strong><?php echo $engine->_t('BbLoggingMode');?></strong></label><br>
-                <small><?php echo $engine->_t('BbLoggingModeInfo');?></small>
-            </td>
-            <td>
-                <input type="radio" id="log_normal" name="logging_mode" value="normal"<?php echo ($logging_mode === 'normal' ? ' checked' : ''); ?>>
-                <label for="log_normal"><?php echo $engine->_t('BbLogModeNormal');?></label>
+		<tr class="hl-setting">
+			<td class="label">
+				<label for="bb_logging_mode"><strong><?php echo $engine->_t('BbLoggingMode');?></strong></label><br>
+				<small><?php echo $engine->_t('BbLoggingModeInfo');?></small>
+			</td>
+			<td>
+				<input type="radio" id="log_normal" name="logging_mode" value="normal"<?php echo ($logging_mode === 'normal' ? ' checked' : ''); ?>>
+				<label for="log_normal"><?php echo $engine->_t('BbLogModeNormal');?></label>
 
-                <input type="radio" id="log_verbose" name="logging_mode" value="verbose"<?php echo ($logging_mode === 'verbose' ? ' checked' : ''); ?>>
-                <label for="log_verbose"><?php echo $engine->_t('BbLogModeVerbose');?></label>
+				<input type="radio" id="log_verbose" name="logging_mode" value="verbose"<?php echo ($logging_mode === 'verbose' ? ' checked' : ''); ?>>
+				<label for="log_verbose"><?php echo $engine->_t('BbLogModeVerbose');?></label>
 
-                <input type="radio" id="log_off" name="logging_mode" value="off"<?php echo ($logging_mode === 'off' ? ' checked' : ''); ?>>
-                <label for="log_off"><?php echo $engine->_t('BbLogModeOff');?></label>
-            </td>
-        </tr>
+				<input type="radio" id="log_off" name="logging_mode" value="off"<?php echo ($logging_mode === 'off' ? ' checked' : ''); ?>>
+				<label for="log_off"><?php echo $engine->_t('BbLogModeOff');?></label>
+			</td>
+		</tr>
 
-    </table>
+	</table>
 
-    <!-- ============================================================== -->
-    <!-- ADVANCED SECTION — collapsed by default                         -->
-    <!-- ============================================================== -->
-    <details class="bb-advanced">
-        <summary><strong><?php echo $engine->_t('BbAdvancedSection');?></strong></summary>
-        <p><small><?php echo $engine->_t('BbAdvancedHint');?></small></p>
+	<!-- ============================================================== -->
+	<!-- ADVANCED SECTION — collapsed by default						 -->
+	<!-- ============================================================== -->
+	<details class="bb-advanced">
+		<summary><strong><?php echo $engine->_t('BbAdvancedSection');?></strong></summary>
+		<p><small><?php echo $engine->_t('BbAdvancedHint');?></small></p>
 
-        <table class="setting formation">
-        	<colgroup>
+		<table class="setting formation">
+			<colgroup>
 				<col span="1">
 				<col span="1">
 			</colgroup>
 
-            <!-- ====================================================== -->
-            <!-- CORE (strict, offsite_forms, block_page)                -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvCore');?></th></tr>
+			<!-- ====================================================== -->
+			<!-- CORE (strict, offsite_forms, block_page)				-->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvCore');?></th></tr>
 
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_strict"><strong><?php echo $engine->_t('BbStrict');?></strong><br>
-                    <small><?php echo $engine->_t('BbStrictInfo');?></small></label>
-                </td>
-                <td><input type="checkbox" id="bb_strict" name="strict" value="1"<?php echo (!empty($settings['strict']) ? ' checked' : '');?>></td>
-            </tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_strict"><strong><?php echo $engine->_t('BbStrict');?></strong><br>
+					<small><?php echo $engine->_t('BbStrictInfo');?></small></label>
+				</td>
+				<td><input type="checkbox" id="bb_strict" name="strict" value="1"<?php echo (!empty($settings['strict']) ? ' checked' : '');?>></td>
+			</tr>
 
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_offsite_forms"><strong><?php echo $engine->_t('BbOffsiteForms');?></strong><br>
-                    <small><?php echo $engine->_t('BbOffsiteFormsInfo');?></small></label>
-                </td>
-                <td><input type="checkbox" id="bb_offsite_forms" name="offsite_forms" value="1"<?php echo (!empty($settings['offsite_forms']) ? ' checked' : '');?>></td>
-            </tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_offsite_forms"><strong><?php echo $engine->_t('BbOffsiteForms');?></strong><br>
+					<small><?php echo $engine->_t('BbOffsiteFormsInfo');?></small></label>
+				</td>
+				<td><input type="checkbox" id="bb_offsite_forms" name="offsite_forms" value="1"<?php echo (!empty($settings['offsite_forms']) ? ' checked' : '');?>></td>
+			</tr>
 
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvBlockPage');?></th></tr>
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvBlockPage');?></th></tr>
 
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_show_detailed"><strong><?php echo $engine->_t('BbShowDetailedBlockPage');?></strong><br>
-                    <small><?php echo $engine->_t('BbShowDetailedBlockPageInfo');?></small></label>
-                </td>
-                <td><input type="checkbox" id="bb_show_detailed" name="show_detailed_block_page" value="1"<?php echo (!empty($settings['show_detailed_block_page']) ? ' checked' : '');?>></td>
-            </tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_show_detailed"><strong><?php echo $engine->_t('BbShowDetailedBlockPage');?></strong><br>
+					<small><?php echo $engine->_t('BbShowDetailedBlockPageInfo');?></small></label>
+				</td>
+				<td><input type="checkbox" id="bb_show_detailed" name="show_detailed_block_page" value="1"<?php echo (!empty($settings['show_detailed_block_page']) ? ' checked' : '');?>></td>
+			</tr>
 
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_show_contact"><strong><?php echo $engine->_t('BbShowContactInfo');?></strong><br>
-                    <small><?php echo $engine->_t('BbShowContactInfoInfo');?></small></label>
-                </td>
-                <td><input type="checkbox" id="bb_show_contact" name="show_contact_info" value="1"<?php echo (!empty($settings['show_contact_info']) ? ' checked' : '');?>></td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- BEHAVIORAL ANALYSIS                                     -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbBehavioral');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_enable_behavioral"><strong><?php echo $engine->_t('BbEnableBehavioral');?></strong><br>
-                    <small><?php echo $engine->_t('BbEnableBehavioralInfo');?></small></label>
-               </td>
-                <td>
-                    <input type="checkbox" id="bb_enable_behavioral"
-                           name="enable_behavioral_analysis" value="1"
-                        <?php echo (!empty($settings['enable_behavioral_analysis']) ? ' checked' : '');?>>
-               </td>
-           </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_inspect_json"><strong><?php echo $engine->_t('BbInspectJson');?></strong><br>
-                    <small><?php echo $engine->_t('BbInspectJsonInfo');?></small></label>
-               </td>
-                <td>
-                    <input type="checkbox" id="bb_inspect_json"
-                           name="inspect_json_body" value="1"
-                        <?php echo (!empty($settings['inspect_json_body']) ? ' checked' : '');?>>
-               </td>
-           </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_inspect_multipart"><strong><?php echo $engine->_t('BbInspectMultipart');?></strong><br>
-                    <small><?php echo $engine->_t('BbInspectMultipartInfo');?></small></label>
-               </td>
-                <td>
-                    <input type="checkbox" id="bb_inspect_multipart"
-                           name="inspect_multipart_body" value="1"
-                        <?php echo (!empty($settings['inspect_multipart_body']) ? ' checked' : '');?>>
-               </td>
-           </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_enable_client_hints"><strong><?php echo $engine->_t('BbEnableClientHints');?></strong><br>
-                    <small><?php echo $engine->_t('BbEnableClientHintsInfo');?></small></label>
-               </td>
-                <td>
-                    <input type="checkbox" id="bb_enable_client_hints"
-                           name="enable_client_hints_validation" value="1"
-                        <?php echo (!empty($settings['enable_client_hints_validation']) ? ' checked' : '');?>>
-               </td>
-           </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_enable_agentic"><strong><?php echo $engine->_t('BbEnableAgentic');?></strong><br>
-                    <small><?php echo $engine->_t('BbEnableAgenticInfo');?></small></label>
-               </td>
-                <td>
-                    <input type="checkbox" id="bb_enable_agentic"
-                           name="enable_agentic_detection" value="1"
-                        <?php echo (!empty($settings['enable_agentic_detection']) ? ' checked' : '');?>>
-               </td>
-           </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_strict_search_engines"><strong><?php echo $engine->_t('BbStrictSearchEngines');?></strong><br>
-                    <small><?php echo $engine->_t('BbStrictSearchEnginesInfo');?></small></label>
-               </td>
-                <td>
-                    <input type="checkbox" id="bb_strict_search_engines"
-                           name="strict_search_engines" value="1"
-                        <?php echo (!empty($settings['strict_search_engines']) ? ' checked' : '');?>>
-               </td>
-           </tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_show_contact"><strong><?php echo $engine->_t('BbShowContactInfo');?></strong><br>
+					<small><?php echo $engine->_t('BbShowContactInfoInfo');?></small></label>
+				</td>
+				<td><input type="checkbox" id="bb_show_contact" name="show_contact_info" value="1"<?php echo (!empty($settings['show_contact_info']) ? ' checked' : '');?>></td>
+			</tr>
 
 			<!-- ====================================================== -->
-			<!-- LOG RETENTION (automatic cleanup of old log entries)    -->
+			<!-- BEHAVIORAL ANALYSIS									 -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbBehavioral');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_enable_behavioral"><strong><?php echo $engine->_t('BbEnableBehavioral');?></strong><br>
+					<small><?php echo $engine->_t('BbEnableBehavioralInfo');?></small></label>
+			   </td>
+				<td>
+					<input type="checkbox" id="bb_enable_behavioral"
+						   name="enable_behavioral_analysis" value="1"
+						<?php echo (!empty($settings['enable_behavioral_analysis']) ? ' checked' : '');?>>
+			   </td>
+		   </tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_inspect_json"><strong><?php echo $engine->_t('BbInspectJson');?></strong><br>
+					<small><?php echo $engine->_t('BbInspectJsonInfo');?></small></label>
+			   </td>
+				<td>
+					<input type="checkbox" id="bb_inspect_json"
+						   name="inspect_json_body" value="1"
+						<?php echo (!empty($settings['inspect_json_body']) ? ' checked' : '');?>>
+			   </td>
+		   </tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_inspect_multipart"><strong><?php echo $engine->_t('BbInspectMultipart');?></strong><br>
+					<small><?php echo $engine->_t('BbInspectMultipartInfo');?></small></label>
+			   </td>
+				<td>
+					<input type="checkbox" id="bb_inspect_multipart"
+						   name="inspect_multipart_body" value="1"
+						<?php echo (!empty($settings['inspect_multipart_body']) ? ' checked' : '');?>>
+			   </td>
+		   </tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_enable_client_hints"><strong><?php echo $engine->_t('BbEnableClientHints');?></strong><br>
+					<small><?php echo $engine->_t('BbEnableClientHintsInfo');?></small></label>
+			   </td>
+				<td>
+					<input type="checkbox" id="bb_enable_client_hints"
+						   name="enable_client_hints_validation" value="1"
+						<?php echo (!empty($settings['enable_client_hints_validation']) ? ' checked' : '');?>>
+			   </td>
+		   </tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_enable_agentic"><strong><?php echo $engine->_t('BbEnableAgentic');?></strong><br>
+					<small><?php echo $engine->_t('BbEnableAgenticInfo');?></small></label>
+			   </td>
+				<td>
+					<input type="checkbox" id="bb_enable_agentic"
+						   name="enable_agentic_detection" value="1"
+						<?php echo (!empty($settings['enable_agentic_detection']) ? ' checked' : '');?>>
+			   </td>
+		   </tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_strict_search_engines"><strong><?php echo $engine->_t('BbStrictSearchEngines');?></strong><br>
+					<small><?php echo $engine->_t('BbStrictSearchEnginesInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_strict_search_engines"
+						   name="strict_search_engines" value="1"
+						<?php echo (!empty($settings['strict_search_engines']) ? ' checked' : '');?>>
+			   </td>
+		   </tr>
+
+			<!-- ====================================================== -->
+			<!-- LOG RETENTION (automatic cleanup of old log entries)	-->
 			<!-- ====================================================== -->
 			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvLogRetention');?></th></tr>
 
 			<tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_log_retention_enabled"><strong><?php echo $engine->_t('BbLogRetentionEnabled');?></strong><br>
-			        <small><?php echo $engine->_t('BbLogRetentionEnabledInfo');?></small></label>
-			    </td>
-			    <td>
-			        <input type="checkbox" id="bb_log_retention_enabled" name="log_retention_enabled" value="1"
-			            <?php echo (!empty($settings['log_retention']['enabled']) ? ' checked' : '');?>>
-			    </td>
+				<td class="label">
+					<label for="bb_log_retention_enabled"><strong><?php echo $engine->_t('BbLogRetentionEnabled');?></strong><br>
+					<small><?php echo $engine->_t('BbLogRetentionEnabledInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_log_retention_enabled" name="log_retention_enabled" value="1"
+						<?php echo (!empty($settings['log_retention']['enabled']) ? ' checked' : '');?>>
+				</td>
 			</tr>
 
 			<tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_log_retention_max_age_days"><strong><?php echo $engine->_t('BbLogRetentionMaxAgeDays');?></strong><br>
-			        <small><?php echo $engine->_t('BbLogRetentionMaxAgeDaysInfo');?></small></label>
-			    </td>
-			    <td>
-			        <input type="number" size="5" min="1" max="3650" step="1"
-			               id="bb_log_retention_max_age_days" name="log_retention_max_age_days"
-			               value="<?php echo intval($settings['log_retention']['max_age_days'] ?? 7); ?>">
-			    </td>
+				<td class="label">
+					<label for="bb_log_retention_max_age_days"><strong><?php echo $engine->_t('BbLogRetentionMaxAgeDays');?></strong><br>
+					<small><?php echo $engine->_t('BbLogRetentionMaxAgeDaysInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" size="5" min="1" max="3650" step="1"
+						   id="bb_log_retention_max_age_days" name="log_retention_max_age_days"
+						   value="<?php echo intval($settings['log_retention']['max_age_days'] ?? 7); ?>">
+				</td>
 			</tr>
 
 			<tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_log_retention_max_rows"><strong><?php echo $engine->_t('BbLogRetentionMaxRows');?></strong><br>
-			        <small><?php echo $engine->_t('BbLogRetentionMaxRowsInfo');?></small></label>
-			    </td>
-			    <td>
-			        <input type="number" size="10" min="0" step="1000"
-			               id="bb_log_retention_max_rows" name="log_retention_max_rows"
-			               value="<?php echo intval($settings['log_retention']['max_rows'] ?? 0); ?>">
-			    </td>
+				<td class="label">
+					<label for="bb_log_retention_max_rows"><strong><?php echo $engine->_t('BbLogRetentionMaxRows');?></strong><br>
+					<small><?php echo $engine->_t('BbLogRetentionMaxRowsInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" size="10" min="0" step="1000"
+						   id="bb_log_retention_max_rows" name="log_retention_max_rows"
+						   value="<?php echo intval($settings['log_retention']['max_rows'] ?? 0); ?>">
+				</td>
 			</tr>
 
 			<tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_log_retention_probability"><strong><?php echo $engine->_t('BbLogRetentionProbability');?></strong><br>
-			        <small><?php echo $engine->_t('BbLogRetentionProbabilityInfo');?></small></label>
-			    </td>
-			    <td>
-			        <input type="number" size="8" min="0" step="100"
-			               id="bb_log_retention_probability" name="log_retention_probability_denominator"
-			               value="<?php echo intval($settings['log_retention']['probability_denominator'] ?? 1000); ?>">
-			    </td>
+				<td class="label">
+					<label for="bb_log_retention_probability"><strong><?php echo $engine->_t('BbLogRetentionProbability');?></strong><br>
+					<small><?php echo $engine->_t('BbLogRetentionProbabilityInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" size="8" min="0" step="100"
+						   id="bb_log_retention_probability" name="log_retention_probability_denominator"
+						   value="<?php echo intval($settings['log_retention']['probability_denominator'] ?? 1000); ?>">
+				</td>
 			</tr>
 
 			<tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_log_retention_min_interval"><strong><?php echo $engine->_t('BbLogRetentionMinInterval');?></strong><br>
-			        <small><?php echo $engine->_t('BbLogRetentionMinIntervalInfo');?></small></label>
-			    </td>
-			    <td>
-			        <input type="number" size="8" min="0" step="60"
-			               id="bb_log_retention_min_interval" name="log_retention_min_interval_seconds"
-			               value="<?php echo intval($settings['log_retention']['min_interval_seconds'] ?? 21600); ?>">
-			    </td>
+				<td class="label">
+					<label for="bb_log_retention_min_interval"><strong><?php echo $engine->_t('BbLogRetentionMinInterval');?></strong><br>
+					<small><?php echo $engine->_t('BbLogRetentionMinIntervalInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" size="8" min="0" step="60"
+						   id="bb_log_retention_min_interval" name="log_retention_min_interval_seconds"
+						   value="<?php echo intval($settings['log_retention']['min_interval_seconds'] ?? 21600); ?>">
+				</td>
 			</tr>
 
 			<tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_log_retention_lock_ttl"><strong><?php echo $engine->_t('BbLogRetentionLockTtl');?></strong><br>
-			        <small><?php echo $engine->_t('BbLogRetentionLockTtlInfo');?></small></label>
-			    </td>
-			    <td>
-			        <input type="number" size="8" min="0" step="60"
-			               id="bb_log_retention_lock_ttl" name="log_retention_lock_ttl"
-			               value="<?php echo intval($settings['log_retention']['lock_ttl'] ?? 600); ?>">
-			    </td>
+				<td class="label">
+					<label for="bb_log_retention_lock_ttl"><strong><?php echo $engine->_t('BbLogRetentionLockTtl');?></strong><br>
+					<small><?php echo $engine->_t('BbLogRetentionLockTtlInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" size="8" min="0" step="60"
+						   id="bb_log_retention_lock_ttl" name="log_retention_lock_ttl"
+						   value="<?php echo intval($settings['log_retention']['lock_ttl'] ?? 600); ?>">
+				</td>
 			</tr>
 
-            <!-- ====================================================== -->
-            <!-- REVERSE PROXY                                           -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvReverseProxy');?></th></tr>
+			<!-- ====================================================== -->
+			<!-- REVERSE PROXY										   -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvReverseProxy');?></th></tr>
 
-            <tr class="hl-setting">
-                <td colspan="2">
-                    <small><?php echo Ut::perc_replace(
-                        $engine->_t('BbReverseProxyInfo'),
-                        '<code><a href="https://en.wikipedia.org/wiki/X-Forwarded-For" rel="noreferrer">X-Forwarded-For</a></code>',
-                        '<code>X-Real-Ip</code> (nginx)',
-                        '<code>Cf-Connecting-Ip</code> (CloudFlare)'
-                    );?></small>
-                </td>
-            </tr>
+			<tr class="hl-setting">
+				<td colspan="2">
+					<small><?php echo Ut::perc_replace(
+						$engine->_t('BbReverseProxyInfo'),
+						'<code><a href="https://en.wikipedia.org/wiki/X-Forwarded-For" rel="noreferrer">X-Forwarded-For</a></code>',
+						'<code>X-Real-Ip</code> (nginx)',
+						'<code>Cf-Connecting-Ip</code> (CloudFlare)'
+					);?></small>
+				</td>
+			</tr>
 
-        <tr class="hl-setting">
-            <td class="label">
-                <label for="bb_behind_proxy"><strong><?php echo $engine->_t('BbBehindProxy');?></strong><br>
-                <small><?php echo $engine->_t('BbBehindProxyInfo');?></small></label>
-            </td>
-            <td>
-                <input type="checkbox" id="bb_behind_proxy" name="behind_proxy" value="1"<?php echo ($behind_proxy ? ' checked' : ''); ?>>
-            </td>
-        </tr>
+		<tr class="hl-setting">
+			<td class="label">
+				<label for="bb_behind_proxy"><strong><?php echo $engine->_t('BbBehindProxy');?></strong><br>
+				<small><?php echo $engine->_t('BbBehindProxyInfo');?></small></label>
+			</td>
+			<td>
+				<input type="checkbox" id="bb_behind_proxy" name="behind_proxy" value="1"<?php echo ($behind_proxy ? ' checked' : ''); ?>>
+			</td>
+		</tr>
 
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_reverse_proxy_header"><?php echo $engine->_t('BbReverseProxyHeader');?></label>
-                </td>
-                <td>
-                    <input type="text" size="32" id="bb_reverse_proxy_header" name="reverse_proxy_header"
-                           value="<?php echo Ut::html($settings['reverse_proxy']['header'] ?? 'X-Forwarded-For'); ?>"
-                           <?php echo (!$behind_proxy ? 'disabled' : ''); ?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_reverse_proxy_addresses"><?php echo $engine->_t('BbReverseProxyAddresses');?></label>
-                </td>
-                <td>
-                    <textarea cols="30" rows="6" id="bb_reverse_proxy_addresses" name="reverse_proxy_addresses"
-                              <?php echo (!$behind_proxy ? 'disabled' : ''); ?>><?php
-                        echo Ut::html(implode("\n", $settings['reverse_proxy']['addresses'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- BOT CATEGORIES (4 multi-checkbox groups)                -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvBotCategories');?></th></tr>
-
-            <?php
-            // Categories in display order. The 4 list keys map to the
-            // bb_config.php nested structure.
-            $category_labels = [
-                'search_engine'        => $engine->_t('BbCatSearchEngine'),
-                'ai_crawler'           => $engine->_t('BbCatAiCrawler'),
-                'social_crawler'       => $engine->_t('BbCatSocialCrawler'),
-                'seo_crawler'          => $engine->_t('BbCatSeoCrawler'),
-                'archive_crawler'      => $engine->_t('BbCatArchiveCrawler'),
-                'monitoring'           => $engine->_t('BbCatMonitoring'),
-                'feed_reader'          => $engine->_t('BbCatFeedReader'),
-                'shopping_crawler'     => $engine->_t('BbCatShoppingCrawler'),
-                'cloud_infrastructure' => $engine->_t('BbCatCloudInfra'),
-                'security_scanner'     => $engine->_t('BbCatSecurityScanner'),
-                'residential_proxy'    => $engine->_t('BbCatResidentialProxy'),
-                'malicious'            => $engine->_t('BbCatMalicious'),
-                'unknown'              => $engine->_t('BbCatUnknown'),
-            ];
-            $list_titles = [
-            	'blocked'   => $engine->_t('BbListBlocked'),
-            	'challenge' => $engine->_t('BbListChallenge'),
-            	'log_only'  => $engine->_t('BbListLogOnly'),
-            	'allowed'   => $engine->_t('BbListAllowed'),
-            ];
-            foreach ($list_titles as $list_key => $list_title):
-	            $current = (array)($settings['bot_categories'][$list_key] ?? []);
-	            ?>
-			    <tr class="hl-setting">
-			        <td class="label">
-			            <strong><?php echo Ut::html($list_title); ?></strong><br>
-			            <small><?php echo $engine->_t('BbListHint');?></small>
-			        </td>
-                    <td>
-                        <?php foreach ($category_labels as $cat_value => $cat_label): ?>
-                            <label style="display:block; margin: 2px 0;">
-                                <input type="checkbox"
-                                       name="bot_category_<?php echo $list_key; ?>[]"
-                                       value="<?php echo Ut::html($cat_value); ?>"
-                                       <?php echo (in_array($cat_value, $current, true) ? 'checked' : ''); ?>>
-                                <?php echo Ut::html($cat_label); ?>
-                            </label>
-                        <?php endforeach; ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-
-            <!-- ====================================================== -->
-            <!-- AI CRAWLERS                                             -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvAiCrawlers');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_block_unverified_ai"><strong><?php echo $engine->_t('BbBlockUnverifiedAi');?></strong><br>
-                    <small><?php echo $engine->_t('BbBlockUnverifiedAiInfo');?></small></label>
-                </td>
-                <td>
-                    <input type="checkbox" id="bb_block_unverified_ai" name="block_unverified_ai" value="1"
-                        <?php echo (!empty($settings['ai_crawlers']['block_unverified']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_strict_ai"><strong><?php echo $engine->_t('BbStrictAi');?></strong><br>
-                    <small><?php echo $engine->_t('BbStrictAiInfo');?></small></label>
-                </td>
-                <td>
-                    <input type="checkbox" id="bb_strict_ai" name="strict_ai" value="1"
-                        <?php echo (!empty($settings['ai_crawlers']['strict']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_allowed_ai"><strong><?php echo $engine->_t('BbAllowedAiCrawlers');?></strong><br>
-                    <small><?php echo $engine->_t('BbAllowedAiCrawlersInfo');?></small></label>
-                </td>
-                <td>
-                    <textarea cols="50" rows="4" id="bb_allowed_ai" name="allowed_ai_crawlers"><?php
-                        echo Ut::html(implode("\n", $settings['ai_crawlers']['allowed'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- DNS VERIFICATION (NEW UI — never existed before)        -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvDnsVerification');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_dns_verification_enabled"><strong><?php echo $engine->_t('BbDnsVerificationEnabled');?></strong><br>
-                    <small><?php echo $engine->_t('BbDnsVerificationInfo');?></small></label>
-                </td>
-                <td>
-                    <input type="checkbox" id="bb_dns_verification_enabled" name="dns_verification_enabled" value="1"
-                        <?php echo (!empty($settings['dns_verification']['enabled']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_dns_verification_timeout"><?php echo $engine->_t('BbDnsTimeoutMs');?></label>
-                </td>
-                <td>
-                    <input type="number" size="5" min="50" max="2000" step="10"
-                           id="bb_dns_verification_timeout" name="dns_verification_timeout_ms"
-                           value="<?php echo intval($settings['dns_verification']['timeout_ms'] ?? 300); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_dns_verification_positive_ttl"><?php echo $engine->_t('BbDnsPositiveTtl');?></label>
-                </td>
-                <td>
-                    <input type="number" size="8" min="3600" step="3600"
-                           id="bb_dns_verification_positive_ttl" name="dns_verification_positive_ttl"
-                           value="<?php echo intval($settings['dns_verification']['positive_ttl'] ?? 604800); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_dns_verification_negative_ttl"><?php echo $engine->_t('BbDnsNegativeTtl');?></label>
-                </td>
-                <td>
-                    <input type="number" size="8" min="60" step="60"
-                           id="bb_dns_verification_negative_ttl" name="dns_verification_negative_ttl"
-                           value="<?php echo intval($settings['dns_verification']['negative_ttl'] ?? 3600); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_dns_verification_require_forward"><?php echo $engine->_t('BbDnsRequireForward');?><br>
-                    <small><?php echo $engine->_t('BbDnsRequireForwardInfo');?></small></label>
-                </td>
-                <td>
-                    <input type="checkbox" id="bb_dns_verification_require_forward"
-                           name="dns_verification_require_forward_confirm" value="1"
-                        <?php echo (!empty($settings['dns_verification']['require_forward_confirm']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- RATE LIMITS                                             -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvRateLimits');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_rate_limit_enabled"><strong><?php echo $engine->_t('BbRateLimitEnabled');?></strong></label>
-                </td>
-                <td>
-                    <input type="checkbox" id="bb_rate_limit_enabled" name="rate_limit_enabled" value="1"
-                        <?php echo (!empty($settings['rate_limits']['enabled']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-<?php
-            // Format: [POST label keys, defaults]
-            $rate_buckets = [
-                'global'     => [
-                    'req_label' => 'BbRateGlobalRequests',
-                    'win_label' => 'BbRateGlobalWindow',
-                    'req_def'   => 1000,
-                    'win_def'   => 3600,
-                ],
-                'per_minute' => [
-                    'req_label' => 'BbRatePerMinuteRequests',
-                    'win_label' => 'BbRatePerMinuteWindow',
-                    'req_def'   => 60,
-                    'win_def'   => 60,
-                ],
-                'post'       => [
-                    'req_label' => 'BbRatePostRequests',
-                    'win_label' => 'BbRatePostWindow',
-                    'req_def'   => 30,
-                    'win_def'   => 3600,
-                ],
-                'login'      => [
-                    'req_label' => 'BbRateLoginRequests',
-                    'win_label' => 'BbRateLoginWindow',
-                    'req_def'   => 10,
-                    'win_def'   => 900,
-                ],
-            ];
-
-            foreach ($rate_buckets as $bucket => $cfg):
-                $req_label = $cfg['req_label'];
-                $win_label = $cfg['win_label'];
-                $req_def   = $cfg['req_def'];
-                $win_def   = $cfg['win_def'];
-
-                // Defensive read: if $settings['rate_limits'][$bucket] is missing
-                // or sparse, fall back to the hard-coded default.
-                $req_val = $settings['rate_limits'][$bucket]['requests'] ?? $req_def;
-                $win_val = $settings['rate_limits'][$bucket]['window']   ?? $win_def;
-            ?>
-                <tr class="hl-setting">
-                    <td class="label">
-                        <label for="bb_rate_<?= $bucket ?>_requests"><?= $engine->_t($req_label) ?></label>
-                    </td>
-                    <td>
-                        <input type="number" size="6" min="1"
-                               id="bb_rate_<?= $bucket ?>_requests"
-                               name="rate_<?= $bucket ?>_requests"
-                               value="<?= (int)$req_val ?>">
-                    </td>
-                </tr>
-                <tr class="hl-setting">
-                    <td class="label">
-                        <label for="bb_rate_<?= $bucket ?>_window"><?= $engine->_t($win_label) ?></label>
-                    </td>
-                    <td>
-                        <input type="number" size="6" min="1"
-                               id="bb_rate_<?= $bucket ?>_window"
-                               name="rate_<?= $bucket ?>_window"
-                               value="<?= (int)$win_val ?>">
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-
-            <!-- ====================================================== -->
-            <!-- HEAD REQUEST DETECTION                                  -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvHeadDetection');?></th></tr>
-
-            <tr class="hl-setting">
-			    <td class="label"><strong><?php echo $engine->_t('BbEnableHeadRequest');?></strong></td>
-			    <td>
-			        <input type="checkbox" name="enable_head_request_detection" value="1"
-			            <?php echo (!empty($settings['enable_head_request_detection']) ? ' checked' : '');?>>
-			    </td>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_reverse_proxy_header"><?php echo $engine->_t('BbReverseProxyHeader');?></label>
+				</td>
+				<td>
+					<input type="text" size="32" id="bb_reverse_proxy_header" name="reverse_proxy_header"
+						   value="<?php echo Ut::html($settings['reverse_proxy']['header'] ?? 'X-Forwarded-For'); ?>"
+						   <?php echo (!$behind_proxy ? 'disabled' : ''); ?>>
+				</td>
 			</tr>
 
 			<tr class="hl-setting">
-			    <td class="label"><strong><?php echo $engine->_t('BbHeadRequireReferer');?></strong></td>
-			    <td>
-			        <input type="checkbox" name="head_require_referer" value="1"
-			            <?php echo (!empty($settings['head_require_referer']) ? ' checked' : '');?>>
-			    </td>
-			</tr>
-
-			<tr class="hl-setting">
-			    <td class="label"><label><?php echo $engine->_t('BbHeadFloodThreshold');?></label></td>
-			    <td>
-			        <input type="number" size="4" min="1" name="head_flood_threshold"
-			               value="<?php echo intval($settings['head_flood_threshold'] ?? 20); ?>">
-			    </td>
-			</tr>
-
-			<tr class="hl-setting">
-			    <td class="label"><label><?php echo $engine->_t('BbHeadProbeThreshold');?></label></td>
-			    <td>
-			        <input type="number" size="4" min="1" name="head_probe_threshold"
-			               value="<?php echo intval($settings['head_probe_threshold'] ?? 50); ?>">
-			    </td>
-			</tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label><?php echo $engine->_t('BbHeadRefererExemptPaths');?></label><br>
-                    <small><?php echo $engine->_t('BbHeadRefererExemptInfo');?></small>
-                </td>
-                <td>
-                    <textarea cols="50" rows="3" name="head_referer_exempt_paths"><?php
-                        echo Ut::html(implode("\n", $settings['head_referer_exempt_paths'] ?? ['/api/', '/wp-json/', '/health', '/status']));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- ASSET SCRAPING                                          -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvAssetScraping');?></th></tr>
-
-            <tr class="hl-setting">
-			    <td class="label"><strong><?php echo $engine->_t('BbEnableAssetScraping');?></strong></td>
-			    <td>
-			        <input type="checkbox" name="enable_asset_scraping_detection" value="1"
-			            <?php echo (!empty($settings['enable_asset_scraping_detection']) ? ' checked' : '');?>>
-			    </td>
-			</tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label><?php echo $engine->_t('BbAssetExtensionsLabel');?><br>
-                    <small><?php echo $engine->_t('BbAssetExtensionsInfo');?></small></label>
-                </td>
-                <td>
-                    <textarea cols="40" rows="4" name="asset_extensions"><?php
-                        echo Ut::html(implode("\n", $settings['asset_extensions'] ?? [
-                            'png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg',
-                            'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
-                            'mp3', 'mp4', 'wav', 'ogg', 'webm',
-                        ]));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-			    <td class="label"><label><?php echo $engine->_t('BbAssetNoRefererThreshold');?></label></td>
-			    <td>
-			        <input type="number" size="4" min="1" name="asset_no_referer_threshold"
-			               value="<?php echo intval($settings['asset_no_referer_threshold'] ?? 10); ?>">
-			    </td>
-			</tr>
-
-			<tr class="hl-setting">
-			    <td class="label"><label><?php echo $engine->_t('BbAssetOnlySessionThreshold');?></label></td>
-			    <td>
-			        <input type="number" size="4" min="1" name="asset_only_session_threshold"
-			               value="<?php echo intval($settings['asset_only_session_threshold'] ?? 20); ?>">
-			    </td>
-			</tr>
-
-			<tr class="hl-setting">
-			    <td class="label"><label><?php echo $engine->_t('BbAssetPatternThreshold');?></label></td>
-			    <td>
-			        <input type="number" size="4" min="1" name="asset_pattern_threshold"
-			               value="<?php echo intval($settings['asset_pattern_threshold'] ?? 100); ?>">
-			    </td>
-			</tr>
-
-            <!-- ====================================================== -->
-            <!-- DYNAMIC IP RANGES                                       -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvDynamicIp');?></th></tr>
-
-            <tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_enable_dynamic_ip"><strong><?php echo $engine->_t('BbEnableDynamicIpRanges');?></strong><br>
-			        <small><?php echo $engine->_t('BbEnableDynamicIpInfo');?></small></label>
-			    </td>
-                <td>
-                    <input type="checkbox" id="bb_enable_dynamic_ip" name="enable_dynamic_ip_ranges" value="1"
-                        <?php echo (!empty($settings['dynamic_ip_ranges']['enabled']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_dynamic_ip_ttl"><?php echo $engine->_t('BbDynamicIpTtl');?></label></td>
-                <td>
-                    <input type="number" size="8" min="3600" step="3600"
-                           id="bb_dynamic_ip_ttl" name="dynamic_ip_ranges_ttl"
-                           value="<?php echo intval($settings['dynamic_ip_ranges']['ttl'] ?? 86400); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_dynamic_ip_feeds"><?php echo $engine->_t('BbDynamicIpFeeds');?></label>
-                </td>
-                <td>
-                    <textarea cols="30" rows="4" id="bb_dynamic_ip_feeds" name="dynamic_ip_ranges_feeds"><?php
-                        echo Ut::html(implode("\n", $settings['dynamic_ip_ranges']['feeds'] ?? ['aws', 'cloudflare', 'fastly', 'gcp']));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- ON-DEMAND IP REFRESH (NEW UI)                           -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvOnDemandRefresh');?></th></tr>
-
-            <tr class="hl-setting">
-			    <td class="label">
-			        <label for="bb_on_demand_enabled"><strong><?php echo $engine->_t('BbEnableOnDemandRefresh');?></strong><br>
-			        <small><?php echo $engine->_t('BbOnDemandRefreshInfo');?></small></label>
-			    </td>
-                <td>
-                    <input type="checkbox" id="bb_on_demand_enabled" name="on_demand_ip_refresh_enabled" value="1"
-                        <?php echo (!empty($settings['on_demand_ip_refresh']['enabled']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label><?php echo $engine->_t('BbCloudProvidersInfo');?></label>
-                </td>
-                <td>
-                    <?php
-                    $checked_providers = (array)($settings['on_demand_ip_refresh']['cloud_providers'] ?? []);
-                    // Default is empty array = "all four" — so we show none checked by default
-                    foreach (['aws' => 'BbCloudProviderAws', 'cloudflare' => 'BbCloudProviderCloudflare',
-                              'fastly' => 'BbCloudProviderFastly', 'gcp' => 'BbCloudProviderGcp'] as $prov => $label_key): ?>
-                        <label style="display:inline-block; margin-right: 12px;">
-                            <input type="checkbox" name="on_demand_ip_refresh_cloud_providers[]"
-                                   value="<?php echo $prov; ?>"
-                                   <?php echo (in_array($prov, $checked_providers, true) ? ' checked' : ''); ?>>
-                            <?php echo $engine->_t($label_key); ?>
-                        </label>
-                    <?php endforeach; ?>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label><?php echo $engine->_t('BbOnDemandBotIds');?><br>
-                    <small><?php echo $engine->_t('BbOnDemandBotIdsInfo');?></small></label>
-                </td>
-                <td>
-                    <textarea cols="40" rows="3" name="on_demand_ip_refresh_bot_ids" placeholder="<?php echo Ut::html($engine->_t('BbOnDemandBotIdsPlaceholder')); ?>"><?php
-					    echo Ut::html(implode("\n", (array)($settings['on_demand_ip_refresh']['bot_ids'] ?? [])));
+				<td class="label">
+					<label for="bb_reverse_proxy_addresses"><?php echo $engine->_t('BbReverseProxyAddresses');?></label>
+				</td>
+				<td>
+					<textarea cols="30" rows="6" id="bb_reverse_proxy_addresses" name="reverse_proxy_addresses"
+							  <?php echo (!$behind_proxy ? 'disabled' : ''); ?>><?php
+						echo Ut::html(implode("\n", $settings['reverse_proxy']['addresses'] ?? []));
 					?></textarea>
-                </td>
-            </tr>
+				</td>
+			</tr>
 
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_on_demand_probability"><?php echo $engine->_t('BbOnDemandProbability');?></label></td>
-                <td>
-                    <input type="number" size="8" min="1"
-                           id="bb_on_demand_probability" name="on_demand_ip_refresh_probability_denominator"
-                           value="<?php echo intval($settings['on_demand_ip_refresh']['probability_denominator'] ?? 1000); ?>">
-                </td>
-            </tr>
+			<!-- ====================================================== -->
+			<!-- BOT CATEGORIES (4 multi-checkbox groups)				-->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvBotCategories');?></th></tr>
 
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_on_demand_min_age"><?php echo $engine->_t('BbOnDemandMinAge');?></label></td>
-                <td>
-                    <input type="number" size="8" min="0" step="60"
-                           id="bb_on_demand_min_age" name="on_demand_ip_refresh_min_age_seconds"
-                           value="<?php echo intval($settings['on_demand_ip_refresh']['min_age_seconds'] ?? 21600); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_on_demand_lock_ttl"><?php echo $engine->_t('BbOnDemandLockTtl');?></label></td>
-                <td>
-                    <input type="number" size="8" min="0" step="60"
-                           id="bb_on_demand_lock_ttl" name="on_demand_ip_refresh_lock_ttl"
-                           value="<?php echo intval($settings['on_demand_ip_refresh']['lock_ttl'] ?? 600); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_on_demand_cache_ttl"><?php echo $engine->_t('BbOnDemandCacheTtl');?></label></td>
-                <td>
-                    <input type="number" size="8" min="3600" step="3600"
-                           id="bb_on_demand_cache_ttl" name="on_demand_ip_refresh_cache_ttl"
-                           value="<?php echo intval($settings['on_demand_ip_refresh']['cache_ttl'] ?? 604800); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_on_demand_feed_timeout"><?php echo $engine->_t('BbOnDemandFeedTimeout');?></label></td>
-                <td>
-                    <input type="number" size="4" min="0.1" step="0.1"
-                           id="bb_on_demand_feed_timeout" name="on_demand_ip_refresh_feed_timeout_seconds"
-                           value="<?php echo Ut::html($settings['on_demand_ip_refresh']['feed_timeout_seconds'] ?? 5); ?>">
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- HTTP:BL                                                 -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvHttpbl');?></th></tr>
-
-            <tr class="hl-setting">
-                <td colspan="2">
-                    <p><?php echo Ut::perc_replace($engine->_t('BbHttpblInfo'), '<a href="https://www.projecthoneypot.org/faq.php" rel="noreferrer">http:BL Access Key</a>');?></p>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_httpbl_key"><?php echo $engine->_t('BbHttpblKey');?></label></td>
-                <td>
-                    <input type="text" size="12" maxlength="12" id="bb_httpbl_key" name="httpbl_key"
-                           value="<?php echo Ut::html($settings['httpbl']['key'] ?? ''); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_httpbl_threat"><?php echo $engine->_t('BbHttpblThreat');?></label></td>
-                <td>
-                    <input type="number" size="3" min="0" max="255"
-                           id="bb_httpbl_threat" name="httpbl_threat"
-                           value="<?php echo intval($settings['httpbl']['threat'] ?? 25); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_httpbl_maxage"><?php echo $engine->_t('BbHttpblMaxage');?></label></td>
-                <td>
-                    <input type="number" size="3" min="0"
-                           id="bb_httpbl_maxage" name="httpbl_maxage"
-                           value="<?php echo intval($settings['httpbl']['maxage'] ?? 30); ?>">
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- DNSBL                                                   -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvDnsbl');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_dnsbl_enabled"><strong><?php echo $engine->_t('BbDnsblEnabled');?></strong></label></td>
-                <td>
-                    <input type="checkbox" id="bb_dnsbl_enabled" name="dnsbl_enabled" value="1"
-                        <?php echo (!empty($settings['dnsbl']['enabled']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_dnsbl_lists"><strong><?php echo $engine->_t('BbDnsblLists');?></strong><br>
-                    <small><?php echo $engine->_t('BbDnsblListsInfo');?></small></label>
-                </td>
-                <td>
-                    <textarea cols="50" rows="4" id="bb_dnsbl_lists" name="dnsbl_lists"><?php
-                        echo Ut::html(implode("\n", $settings['dnsbl']['lists'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- CHALLENGE / CAPTCHA                                     -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvChallenge');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_challenge_enabled"><strong><?php echo $engine->_t('BbChallengeEnabled');?></strong></label></td>
-                <td>
-                    <input type="checkbox" id="bb_challenge_enabled" name="challenge_enabled" value="1"
-                        <?php echo (!empty($settings['challenge']['enabled']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_challenge_provider"><?php echo $engine->_t('BbChallengeProvider');?></label></td>
-                <td>
-                    <select id="bb_challenge_provider" name="challenge_provider">
-					    <?php foreach ([
-					        'builtin'   => $engine->_t('BbChallengeProviderBuiltin'),
-					        'hcaptcha'  => $engine->_t('BbChallengeProviderHcaptcha'),
-					        'recaptcha' => $engine->_t('BbChallengeProviderRecaptcha'),
-					        'turnstile' => $engine->_t('BbChallengeProviderTurnstile'),
-					    ] as $val => $label): ?>
-					        <option value="<?php echo $val; ?>"<?php echo (($settings['challenge']['provider'] ?? 'builtin') === $val ? ' selected' : '');?>>
-					            <?php echo $label; ?>
-					        </option>
-					    <?php endforeach; ?>
-					</select>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_challenge_site_key"><?php echo $engine->_t('BbChallengeSiteKey');?></label></td>
-                <td>
-                    <input type="text" size="40" id="bb_challenge_site_key" name="challenge_site_key"
-                           value="<?php echo Ut::html($settings['challenge']['site_key'] ?? ''); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_challenge_secret_key"><?php echo $engine->_t('BbChallengeSecretKey');?></label></td>
-                <td>
-                    <input type="text" size="40" id="bb_challenge_secret_key" name="challenge_secret_key"
-                           value="<?php echo Ut::html($settings['challenge']['secret_key'] ?? ''); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_recaptcha_min_score"><?php echo $engine->_t('BbRecaptchaMinScore');?></label></td>
-                <td>
-                    <input type="number" size="4" min="0" max="1" step="0.1"
-                           id="bb_recaptcha_min_score" name="recaptcha_min_score"
-                           value="<?php echo Ut::html($settings['challenge']['recaptcha_min_score'] ?? 0.5); ?>">
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- PERFORMANCE                                             -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvPerformance');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_skip_extensions"><strong><?php echo $engine->_t('BbSkipExtensions');?></strong></label>
-                </td>
-                <td>
-                    <textarea cols="50" rows="3" id="bb_skip_extensions" name="skip_static_extensions"><?php
-                        echo Ut::html(implode("\n", $settings['performance']['skip_extensions'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_skip_paths"><strong><?php echo $engine->_t('BbSkipPaths');?></strong></label>
-                </td>
-                <td>
-                    <textarea cols="50" rows="3" id="bb_skip_paths" name="skip_static_paths"><?php
-                        echo Ut::html(implode("\n", $settings['performance']['skip_paths'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_body_scan_skip"><strong><?php echo $engine->_t('BbBodyScanSkipFields');?></strong><br>
-                    <small><?php echo $engine->_t('BbBodyScanSkipFieldsInfo');?></small></label>
-                </td>
-                <td>
-                    <textarea cols="60" rows="4" id="bb_body_scan_skip" name="body_scan_skip_fields"><?php
-                        echo Ut::html(implode("\n", $settings['body_scan_skip_fields'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- GEOIP                                                   -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvGeoip');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_geoip_enabled"><strong><?php echo $engine->_t('BbGeoipEnabled');?></strong></label></td>
-                <td>
-                    <input type="checkbox" id="bb_geoip_enabled" name="geoip_enabled" value="1"
-                        <?php echo (!empty($settings['geoip']['enabled']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_geoip_path"><?php echo $engine->_t('BbGeoipDbPath');?></label></td>
-                <td>
-                    <input type="text" size="60" id="bb_geoip_path" name="geoip_database_path"
-                           value="<?php echo Ut::html($settings['geoip']['database_path'] ?? ''); ?>">
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_blocked_countries"><?php echo $engine->_t('BbBlockedCountries');?></label></td>
-                <td>
-                    <textarea cols="30" rows="3" id="bb_blocked_countries" name="blocked_countries"><?php
-                        echo Ut::html(implode("\n", $settings['geoip']['blocked_countries'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <tr class="hl-setting">
-                <td class="label"><label for="bb_blocked_asns"><?php echo $engine->_t('BbBlockedAsns');?></label></td>
-                <td>
-                    <textarea cols="30" rows="3" id="bb_blocked_asns" name="blocked_asns"><?php
-                        echo Ut::html(implode("\n", $settings['geoip']['blocked_asns'] ?? []));
-                    ?></textarea>
-                </td>
-            </tr>
-
-            <!-- ====================================================== -->
-            <!-- FINGERPRINTS                                            -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvFingerprints');?></th></tr>
-
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_enable_fingerprinting"><strong><?php echo $engine->_t('BbEnableFingerprinting');?></strong><br>
-                    <small><?php echo $engine->_t('BbEnableFingerprintingInfo');?></small></label>
-                </td>
-                <td>
-                    <input type="checkbox" id="bb_enable_fingerprinting" name="enable_fingerprinting" value="1"
-                        <?php echo (!empty($settings['enable_fingerprinting']) ? ' checked' : '');?>>
-                </td>
-            </tr>
-
-            <?php foreach ([
-			    'bad_ja3'           => ['key' => 'BbFpBadJa3',          'post' => 'bad_ja3_fingerprints'],
-			    'bad_h2'            => ['key' => 'BbFpBadH2',           'post' => 'bad_h2_fingerprints'],
-			    'bot_header_orders' => ['key' => 'BbFpBotHeaderOrders', 'post' => 'bot_header_orders'],
-			    'expected_ja3'      => ['key' => 'BbFpExpectedJa3',     'post' => 'expected_ja3'],
-			] as $def_key => $fp): ?>
-			    <tr class="hl-setting">
-			        <td class="label">
-			            <label><?php echo $engine->_t($fp['key']); ?></label>
-			        </td>
-			        <td>
-			            <textarea cols="50" rows="3" name="<?php echo $fp['post']; ?>"><?php
-			                echo Ut::html(implode("\n", $settings['fingerprints'][$def_key] ?? []));
-			            ?></textarea>
-			        </td>
-			    </tr>
+			<?php
+			// Categories in display order. The 4 list keys map to the
+			// bb_config.php nested structure.
+			$category_labels = [
+				'search_engine'		=> $engine->_t('BbCatSearchEngine'),
+				'ai_crawler'		   => $engine->_t('BbCatAiCrawler'),
+				'social_crawler'	   => $engine->_t('BbCatSocialCrawler'),
+				'seo_crawler'		  => $engine->_t('BbCatSeoCrawler'),
+				'archive_crawler'	  => $engine->_t('BbCatArchiveCrawler'),
+				'monitoring'		   => $engine->_t('BbCatMonitoring'),
+				'feed_reader'		  => $engine->_t('BbCatFeedReader'),
+				'shopping_crawler'	 => $engine->_t('BbCatShoppingCrawler'),
+				'cloud_infrastructure' => $engine->_t('BbCatCloudInfra'),
+				'security_scanner'	 => $engine->_t('BbCatSecurityScanner'),
+				'residential_proxy'	=> $engine->_t('BbCatResidentialProxy'),
+				'malicious'			=> $engine->_t('BbCatMalicious'),
+				'unknown'			  => $engine->_t('BbCatUnknown'),
+			];
+			$list_titles = [
+				'blocked'   => $engine->_t('BbListBlocked'),
+				'challenge' => $engine->_t('BbListChallenge'),
+				'log_only'  => $engine->_t('BbListLogOnly'),
+				'allowed'   => $engine->_t('BbListAllowed'),
+			];
+			foreach ($list_titles as $list_key => $list_title):
+				$current = (array)($settings['bot_categories'][$list_key] ?? []);
+				?>
+				<tr class="hl-setting">
+					<td class="label">
+						<strong><?php echo Ut::html($list_title); ?></strong><br>
+						<small><?php echo $engine->_t('BbListHint');?></small>
+					</td>
+					<td>
+						<?php foreach ($category_labels as $cat_value => $cat_label): ?>
+							<label style="display:block; margin: 2px 0;">
+								<input type="checkbox"
+									   name="bot_category_<?php echo $list_key; ?>[]"
+									   value="<?php echo Ut::html($cat_value); ?>"
+									   <?php echo (in_array($cat_value, $current, true) ? 'checked' : ''); ?>>
+								<?php echo Ut::html($cat_label); ?>
+							</label>
+						<?php endforeach; ?>
+					</td>
+				</tr>
 			<?php endforeach; ?>
 
-            <!-- ====================================================== -->
-            <!-- CUSTOM RULES                                            -->
-            <!-- ====================================================== -->
-            <tr><th colspan="2"><br><?php echo $engine->_t('BbAdvCustomRules');?></th></tr>
+			<!-- ====================================================== -->
+			<!-- AI CRAWLERS											 -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvAiCrawlers');?></th></tr>
 
-            <tr class="hl-setting">
-                <td class="label">
-                    <label for="bb_custom_rules"><strong><?php echo $engine->_t('BbCustomRulesLabel');?></strong><br>
-                    <small><?php echo $engine->_t('BbCustomRulesInfo');?></small></label>
-                </td>
-                <td>
-                    <textarea cols="60" rows="8" id="bb_custom_rules" name="custom_rules"
-                              placeholder='{"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}'><?php
-                        $rendered = [];
-                        foreach (($settings['custom_rules'] ?? []) as $rule)
-                        {
-                            $rendered[] = json_encode($rule, JSON_UNESCAPED_SLASHES);
-                        }
-                        echo Ut::html(implode("\n", $rendered));
-                    ?></textarea>
-                </td>
-            </tr>
-        </table>
-    </details>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_block_unverified_ai"><strong><?php echo $engine->_t('BbBlockUnverifiedAi');?></strong><br>
+					<small><?php echo $engine->_t('BbBlockUnverifiedAiInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_block_unverified_ai" name="block_unverified_ai" value="1"
+						<?php echo (!empty($settings['ai_crawlers']['block_unverified']) ? ' checked' : '');?>>
+				</td>
+			</tr>
 
-    <br>
-    <div class="center">
-        <button type="submit" class="button" name="submit"><?php echo $engine->_t('UpdateButton');?></button>
-    </div>
-    <?php
-    echo $engine->form_close();
-    ?>
-    </div>
-    <?php
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_strict_ai"><strong><?php echo $engine->_t('BbStrictAi');?></strong><br>
+					<small><?php echo $engine->_t('BbStrictAiInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_strict_ai" name="strict_ai" value="1"
+						<?php echo (!empty($settings['ai_crawlers']['strict']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_allowed_ai"><strong><?php echo $engine->_t('BbAllowedAiCrawlers');?></strong><br>
+					<small><?php echo $engine->_t('BbAllowedAiCrawlersInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="50" rows="4" id="bb_allowed_ai" name="allowed_ai_crawlers"><?php
+						echo Ut::html(implode("\n", $settings['ai_crawlers']['allowed'] ?? []));
+					?></textarea>
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- DNS VERIFICATION (NEW UI — never existed before)		-->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvDnsVerification');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_dns_verification_enabled"><strong><?php echo $engine->_t('BbDnsVerificationEnabled');?></strong><br>
+					<small><?php echo $engine->_t('BbDnsVerificationInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_dns_verification_enabled" name="dns_verification_enabled" value="1"
+						<?php echo (!empty($settings['dns_verification']['enabled']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_dns_verification_timeout"><?php echo $engine->_t('BbDnsTimeoutMs');?></label>
+				</td>
+				<td>
+					<input type="number" size="5" min="50" max="2000" step="10"
+						   id="bb_dns_verification_timeout" name="dns_verification_timeout_ms"
+						   value="<?php echo intval($settings['dns_verification']['timeout_ms'] ?? 300); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_dns_verification_positive_ttl"><?php echo $engine->_t('BbDnsPositiveTtl');?></label>
+				</td>
+				<td>
+					<input type="number" size="8" min="3600" step="3600"
+						   id="bb_dns_verification_positive_ttl" name="dns_verification_positive_ttl"
+						   value="<?php echo intval($settings['dns_verification']['positive_ttl'] ?? 604800); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_dns_verification_negative_ttl"><?php echo $engine->_t('BbDnsNegativeTtl');?></label>
+				</td>
+				<td>
+					<input type="number" size="8" min="60" step="60"
+						   id="bb_dns_verification_negative_ttl" name="dns_verification_negative_ttl"
+						   value="<?php echo intval($settings['dns_verification']['negative_ttl'] ?? 3600); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_dns_verification_require_forward"><?php echo $engine->_t('BbDnsRequireForward');?><br>
+					<small><?php echo $engine->_t('BbDnsRequireForwardInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_dns_verification_require_forward"
+						   name="dns_verification_require_forward_confirm" value="1"
+						<?php echo (!empty($settings['dns_verification']['require_forward_confirm']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- RATE LIMITS											 -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvRateLimits');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_rate_limit_enabled"><strong><?php echo $engine->_t('BbRateLimitEnabled');?></strong></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_rate_limit_enabled" name="rate_limit_enabled" value="1"
+						<?php echo (!empty($settings['rate_limits']['enabled']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+<?php
+			// Format: [POST label keys, defaults]
+			$rate_buckets = [
+				'global'	 => [
+					'req_label' => 'BbRateGlobalRequests',
+					'win_label' => 'BbRateGlobalWindow',
+					'req_def'   => 1000,
+					'win_def'   => 3600,
+				],
+				'per_minute' => [
+					'req_label' => 'BbRatePerMinuteRequests',
+					'win_label' => 'BbRatePerMinuteWindow',
+					'req_def'   => 60,
+					'win_def'   => 60,
+				],
+				'post'	   => [
+					'req_label' => 'BbRatePostRequests',
+					'win_label' => 'BbRatePostWindow',
+					'req_def'   => 30,
+					'win_def'   => 3600,
+				],
+				'login'	  => [
+					'req_label' => 'BbRateLoginRequests',
+					'win_label' => 'BbRateLoginWindow',
+					'req_def'   => 10,
+					'win_def'   => 900,
+				],
+			];
+
+			foreach ($rate_buckets as $bucket => $cfg):
+				$req_label = $cfg['req_label'];
+				$win_label = $cfg['win_label'];
+				$req_def   = $cfg['req_def'];
+				$win_def   = $cfg['win_def'];
+
+				// Defensive read: if $settings['rate_limits'][$bucket] is missing
+				// or sparse, fall back to the hard-coded default.
+				$req_val = $settings['rate_limits'][$bucket]['requests'] ?? $req_def;
+				$win_val = $settings['rate_limits'][$bucket]['window']   ?? $win_def;
+			?>
+				<tr class="hl-setting">
+					<td class="label">
+						<label for="bb_rate_<?= $bucket ?>_requests"><?= $engine->_t($req_label) ?></label>
+					</td>
+					<td>
+						<input type="number" size="6" min="1"
+							   id="bb_rate_<?= $bucket ?>_requests"
+							   name="rate_<?= $bucket ?>_requests"
+							   value="<?= (int)$req_val ?>">
+					</td>
+				</tr>
+				<tr class="hl-setting">
+					<td class="label">
+						<label for="bb_rate_<?= $bucket ?>_window"><?= $engine->_t($win_label) ?></label>
+					</td>
+					<td>
+						<input type="number" size="6" min="1"
+							   id="bb_rate_<?= $bucket ?>_window"
+							   name="rate_<?= $bucket ?>_window"
+							   value="<?= (int)$win_val ?>">
+					</td>
+				</tr>
+			<?php endforeach; ?>
+
+			<!-- ====================================================== -->
+			<!-- HEAD REQUEST DETECTION								  -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvHeadDetection');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label"><strong><?php echo $engine->_t('BbEnableHeadRequest');?></strong></td>
+				<td>
+					<input type="checkbox" name="enable_head_request_detection" value="1"
+						<?php echo (!empty($settings['enable_head_request_detection']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><strong><?php echo $engine->_t('BbHeadRequireReferer');?></strong></td>
+				<td>
+					<input type="checkbox" name="head_require_referer" value="1"
+						<?php echo (!empty($settings['head_require_referer']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label><?php echo $engine->_t('BbHeadFloodThreshold');?></label></td>
+				<td>
+					<input type="number" size="4" min="1" name="head_flood_threshold"
+						   value="<?php echo intval($settings['head_flood_threshold'] ?? 20); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label><?php echo $engine->_t('BbHeadProbeThreshold');?></label></td>
+				<td>
+					<input type="number" size="4" min="1" name="head_probe_threshold"
+						   value="<?php echo intval($settings['head_probe_threshold'] ?? 50); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label><?php echo $engine->_t('BbHeadRefererExemptPaths');?></label><br>
+					<small><?php echo $engine->_t('BbHeadRefererExemptInfo');?></small>
+				</td>
+				<td>
+					<textarea cols="50" rows="3" name="head_referer_exempt_paths"><?php
+						echo Ut::html(implode("\n", $settings['head_referer_exempt_paths'] ?? ['/api/', '/wp-json/', '/health', '/status']));
+					?></textarea>
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- ASSET SCRAPING										  -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvAssetScraping');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label"><strong><?php echo $engine->_t('BbEnableAssetScraping');?></strong></td>
+				<td>
+					<input type="checkbox" name="enable_asset_scraping_detection" value="1"
+						<?php echo (!empty($settings['enable_asset_scraping_detection']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label><?php echo $engine->_t('BbAssetExtensionsLabel');?><br>
+					<small><?php echo $engine->_t('BbAssetExtensionsInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="40" rows="4" name="asset_extensions"><?php
+						echo Ut::html(implode("\n", $settings['asset_extensions'] ?? [
+							'png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg',
+							'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+							'mp3', 'mp4', 'wav', 'ogg', 'webm',
+						]));
+					?></textarea>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label><?php echo $engine->_t('BbAssetNoRefererThreshold');?></label></td>
+				<td>
+					<input type="number" size="4" min="1" name="asset_no_referer_threshold"
+						   value="<?php echo intval($settings['asset_no_referer_threshold'] ?? 10); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label><?php echo $engine->_t('BbAssetOnlySessionThreshold');?></label></td>
+				<td>
+					<input type="number" size="4" min="1" name="asset_only_session_threshold"
+						   value="<?php echo intval($settings['asset_only_session_threshold'] ?? 20); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label><?php echo $engine->_t('BbAssetPatternThreshold');?></label></td>
+				<td>
+					<input type="number" size="4" min="1" name="asset_pattern_threshold"
+						   value="<?php echo intval($settings['asset_pattern_threshold'] ?? 100); ?>">
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- DYNAMIC IP RANGES									   -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvDynamicIp');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_enable_dynamic_ip"><strong><?php echo $engine->_t('BbEnableDynamicIpRanges');?></strong><br>
+					<small><?php echo $engine->_t('BbEnableDynamicIpInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_enable_dynamic_ip" name="enable_dynamic_ip_ranges" value="1"
+						<?php echo (!empty($settings['dynamic_ip_ranges']['enabled']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_dynamic_ip_ttl"><?php echo $engine->_t('BbDynamicIpTtl');?></label></td>
+				<td>
+					<input type="number" size="8" min="3600" step="3600"
+						   id="bb_dynamic_ip_ttl" name="dynamic_ip_ranges_ttl"
+						   value="<?php echo intval($settings['dynamic_ip_ranges']['ttl'] ?? 86400); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_dynamic_ip_feeds"><?php echo $engine->_t('BbDynamicIpFeeds');?></label>
+				</td>
+				<td>
+					<textarea cols="30" rows="4" id="bb_dynamic_ip_feeds" name="dynamic_ip_ranges_feeds"><?php
+						echo Ut::html(implode("\n", $settings['dynamic_ip_ranges']['feeds'] ?? ['aws', 'cloudflare', 'fastly', 'gcp']));
+					?></textarea>
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- ON-DEMAND IP REFRESH (NEW UI)						   -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvOnDemandRefresh');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_on_demand_enabled"><strong><?php echo $engine->_t('BbEnableOnDemandRefresh');?></strong><br>
+					<small><?php echo $engine->_t('BbOnDemandRefreshInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_on_demand_enabled" name="on_demand_ip_refresh_enabled" value="1"
+						<?php echo (!empty($settings['on_demand_ip_refresh']['enabled']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label><?php echo $engine->_t('BbCloudProvidersInfo');?></label>
+				</td>
+				<td>
+					<?php
+					$checked_providers = (array)($settings['on_demand_ip_refresh']['cloud_providers'] ?? []);
+					// Default is empty array = "all four" — so we show none checked by default
+					foreach (['aws' => 'BbCloudProviderAws', 'cloudflare' => 'BbCloudProviderCloudflare',
+							  'fastly' => 'BbCloudProviderFastly', 'gcp' => 'BbCloudProviderGcp'] as $prov => $label_key): ?>
+						<label style="display:inline-block; margin-right: 12px;">
+							<input type="checkbox" name="on_demand_ip_refresh_cloud_providers[]"
+								   value="<?php echo $prov; ?>"
+								   <?php echo (in_array($prov, $checked_providers, true) ? ' checked' : ''); ?>>
+							<?php echo $engine->_t($label_key); ?>
+						</label>
+					<?php endforeach; ?>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label><?php echo $engine->_t('BbOnDemandBotIds');?><br>
+					<small><?php echo $engine->_t('BbOnDemandBotIdsInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="40" rows="3" name="on_demand_ip_refresh_bot_ids" placeholder="<?php echo Ut::html($engine->_t('BbOnDemandBotIdsPlaceholder')); ?>"><?php
+						echo Ut::html(implode("\n", (array)($settings['on_demand_ip_refresh']['bot_ids'] ?? [])));
+					?></textarea>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_on_demand_probability"><?php echo $engine->_t('BbOnDemandProbability');?></label></td>
+				<td>
+					<input type="number" size="8" min="1"
+						   id="bb_on_demand_probability" name="on_demand_ip_refresh_probability_denominator"
+						   value="<?php echo intval($settings['on_demand_ip_refresh']['probability_denominator'] ?? 1000); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_on_demand_min_age"><?php echo $engine->_t('BbOnDemandMinAge');?></label></td>
+				<td>
+					<input type="number" size="8" min="0" step="60"
+						   id="bb_on_demand_min_age" name="on_demand_ip_refresh_min_age_seconds"
+						   value="<?php echo intval($settings['on_demand_ip_refresh']['min_age_seconds'] ?? 21600); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_on_demand_lock_ttl"><?php echo $engine->_t('BbOnDemandLockTtl');?></label></td>
+				<td>
+					<input type="number" size="8" min="0" step="60"
+						   id="bb_on_demand_lock_ttl" name="on_demand_ip_refresh_lock_ttl"
+						   value="<?php echo intval($settings['on_demand_ip_refresh']['lock_ttl'] ?? 600); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_on_demand_cache_ttl"><?php echo $engine->_t('BbOnDemandCacheTtl');?></label></td>
+				<td>
+					<input type="number" size="8" min="3600" step="3600"
+						   id="bb_on_demand_cache_ttl" name="on_demand_ip_refresh_cache_ttl"
+						   value="<?php echo intval($settings['on_demand_ip_refresh']['cache_ttl'] ?? 604800); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_on_demand_feed_timeout"><?php echo $engine->_t('BbOnDemandFeedTimeout');?></label></td>
+				<td>
+					<input type="number" size="4" min="0.1" step="0.1"
+						   id="bb_on_demand_feed_timeout" name="on_demand_ip_refresh_feed_timeout_seconds"
+						   value="<?php echo Ut::html($settings['on_demand_ip_refresh']['feed_timeout_seconds'] ?? 5); ?>">
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- HTTP:BL												 -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvHttpbl');?></th></tr>
+
+			<tr class="hl-setting">
+				<td colspan="2">
+					<p><?php echo Ut::perc_replace($engine->_t('BbHttpblInfo'), '<a href="https://www.projecthoneypot.org/faq.php" rel="noreferrer">http:BL Access Key</a>');?></p>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_httpbl_key"><?php echo $engine->_t('BbHttpblKey');?></label></td>
+				<td>
+					<input type="text" size="12" maxlength="12" id="bb_httpbl_key" name="httpbl_key"
+						   value="<?php echo Ut::html($settings['httpbl']['key'] ?? ''); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_httpbl_threat"><?php echo $engine->_t('BbHttpblThreat');?></label></td>
+				<td>
+					<input type="number" size="3" min="0" max="255"
+						   id="bb_httpbl_threat" name="httpbl_threat"
+						   value="<?php echo intval($settings['httpbl']['threat'] ?? 25); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_httpbl_maxage"><?php echo $engine->_t('BbHttpblMaxage');?></label></td>
+				<td>
+					<input type="number" size="3" min="0"
+						   id="bb_httpbl_maxage" name="httpbl_maxage"
+						   value="<?php echo intval($settings['httpbl']['maxage'] ?? 30); ?>">
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- DNSBL												   -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvDnsbl');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_dnsbl_enabled"><strong><?php echo $engine->_t('BbDnsblEnabled');?></strong></label></td>
+				<td>
+					<input type="checkbox" id="bb_dnsbl_enabled" name="dnsbl_enabled" value="1"
+						<?php echo (!empty($settings['dnsbl']['enabled']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_dnsbl_lists"><strong><?php echo $engine->_t('BbDnsblLists');?></strong><br>
+					<small><?php echo $engine->_t('BbDnsblListsInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="50" rows="4" id="bb_dnsbl_lists" name="dnsbl_lists"><?php
+						echo Ut::html(implode("\n", $settings['dnsbl']['lists'] ?? []));
+					?></textarea>
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- CHALLENGE / CAPTCHA									 -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvChallenge');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_challenge_enabled"><strong><?php echo $engine->_t('BbChallengeEnabled');?></strong></label></td>
+				<td>
+					<input type="checkbox" id="bb_challenge_enabled" name="challenge_enabled" value="1"
+						<?php echo (!empty($settings['challenge']['enabled']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_challenge_provider"><?php echo $engine->_t('BbChallengeProvider');?></label></td>
+				<td>
+					<select id="bb_challenge_provider" name="challenge_provider">
+						<?php foreach ([
+							'builtin'   => $engine->_t('BbChallengeProviderBuiltin'),
+							'hcaptcha'  => $engine->_t('BbChallengeProviderHcaptcha'),
+							'recaptcha' => $engine->_t('BbChallengeProviderRecaptcha'),
+							'turnstile' => $engine->_t('BbChallengeProviderTurnstile'),
+						] as $val => $label): ?>
+							<option value="<?php echo $val; ?>"<?php echo (($settings['challenge']['provider'] ?? 'builtin') === $val ? ' selected' : '');?>>
+								<?php echo $label; ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_challenge_site_key"><?php echo $engine->_t('BbChallengeSiteKey');?></label></td>
+				<td>
+					<input type="text" size="40" id="bb_challenge_site_key" name="challenge_site_key"
+						   value="<?php echo Ut::html($settings['challenge']['site_key'] ?? ''); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_challenge_secret_key"><?php echo $engine->_t('BbChallengeSecretKey');?></label></td>
+				<td>
+					<input type="text" size="40" id="bb_challenge_secret_key" name="challenge_secret_key"
+						   value="<?php echo Ut::html($settings['challenge']['secret_key'] ?? ''); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_recaptcha_min_score"><?php echo $engine->_t('BbRecaptchaMinScore');?></label></td>
+				<td>
+					<input type="number" size="4" min="0" max="1" step="0.1"
+						   id="bb_recaptcha_min_score" name="recaptcha_min_score"
+						   value="<?php echo Ut::html($settings['challenge']['recaptcha_min_score'] ?? 0.5); ?>">
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- PERFORMANCE											 -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvPerformance');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_skip_extensions"><strong><?php echo $engine->_t('BbSkipExtensions');?></strong></label>
+				</td>
+				<td>
+					<textarea cols="50" rows="3" id="bb_skip_extensions" name="skip_static_extensions"><?php
+						echo Ut::html(implode("\n", $settings['performance']['skip_extensions'] ?? []));
+					?></textarea>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_skip_paths"><strong><?php echo $engine->_t('BbSkipPaths');?></strong></label>
+				</td>
+				<td>
+					<textarea cols="50" rows="3" id="bb_skip_paths" name="skip_static_paths"><?php
+						echo Ut::html(implode("\n", $settings['performance']['skip_paths'] ?? []));
+					?></textarea>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_body_scan_skip"><strong><?php echo $engine->_t('BbBodyScanSkipFields');?></strong><br>
+					<small><?php echo $engine->_t('BbBodyScanSkipFieldsInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="60" rows="4" id="bb_body_scan_skip" name="body_scan_skip_fields"><?php
+						echo Ut::html(implode("\n", $settings['body_scan_skip_fields'] ?? []));
+					?></textarea>
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- GEOIP												   -->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvGeoip');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_geoip_enabled"><strong><?php echo $engine->_t('BbGeoipEnabled');?></strong></label></td>
+				<td>
+					<input type="checkbox" id="bb_geoip_enabled" name="geoip_enabled" value="1"
+						<?php echo (!empty($settings['geoip']['enabled']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_geoip_path"><?php echo $engine->_t('BbGeoipDbPath');?></label></td>
+				<td>
+					<input type="text" size="60" id="bb_geoip_path" name="geoip_database_path"
+						   value="<?php echo Ut::html($settings['geoip']['database_path'] ?? ''); ?>">
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_blocked_countries"><?php echo $engine->_t('BbBlockedCountries');?></label></td>
+				<td>
+					<textarea cols="30" rows="3" id="bb_blocked_countries" name="blocked_countries"><?php
+						echo Ut::html(implode("\n", $settings['geoip']['blocked_countries'] ?? []));
+					?></textarea>
+				</td>
+			</tr>
+
+			<tr class="hl-setting">
+				<td class="label"><label for="bb_blocked_asns"><?php echo $engine->_t('BbBlockedAsns');?></label></td>
+				<td>
+					<textarea cols="30" rows="3" id="bb_blocked_asns" name="blocked_asns"><?php
+						echo Ut::html(implode("\n", $settings['geoip']['blocked_asns'] ?? []));
+					?></textarea>
+				</td>
+			</tr>
+
+			<!-- ====================================================== -->
+			<!-- FINGERPRINTS											-->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvFingerprints');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_enable_fingerprinting"><strong><?php echo $engine->_t('BbEnableFingerprinting');?></strong><br>
+					<small><?php echo $engine->_t('BbEnableFingerprintingInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="bb_enable_fingerprinting" name="enable_fingerprinting" value="1"
+						<?php echo (!empty($settings['enable_fingerprinting']) ? ' checked' : '');?>>
+				</td>
+			</tr>
+
+			<?php foreach ([
+				'bad_ja3'		   => ['key' => 'BbFpBadJa3',		  'post' => 'bad_ja3_fingerprints'],
+				'bad_h2'			=> ['key' => 'BbFpBadH2',		   'post' => 'bad_h2_fingerprints'],
+				'bot_header_orders' => ['key' => 'BbFpBotHeaderOrders', 'post' => 'bot_header_orders'],
+				'expected_ja3'	  => ['key' => 'BbFpExpectedJa3',	 'post' => 'expected_ja3'],
+			] as $def_key => $fp): ?>
+				<tr class="hl-setting">
+					<td class="label">
+						<label><?php echo $engine->_t($fp['key']); ?></label>
+					</td>
+					<td>
+						<textarea cols="50" rows="3" name="<?php echo $fp['post']; ?>"><?php
+							echo Ut::html(implode("\n", $settings['fingerprints'][$def_key] ?? []));
+						?></textarea>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+
+			<!-- ====================================================== -->
+			<!-- CUSTOM RULES											-->
+			<!-- ====================================================== -->
+			<tr><th colspan="2"><br><?php echo $engine->_t('BbAdvCustomRules');?></th></tr>
+
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="bb_custom_rules"><strong><?php echo $engine->_t('BbCustomRulesLabel');?></strong><br>
+					<small><?php echo $engine->_t('BbCustomRulesInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="60" rows="8" id="bb_custom_rules" name="custom_rules"
+							  placeholder='{"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}'><?php
+						$rendered = [];
+						foreach (($settings['custom_rules'] ?? []) as $rule)
+						{
+							$rendered[] = json_encode($rule, JSON_UNESCAPED_SLASHES);
+						}
+						echo Ut::html(implode("\n", $rendered));
+					?></textarea>
+				</td>
+			</tr>
+		</table>
+	</details>
+
+	<br>
+	<div class="center">
+		<button type="submit" class="button" name="submit"><?php echo $engine->_t('UpdateButton');?></button>
+	</div>
+	<?php
+	echo $engine->form_close();
+	?>
+	</div>
+	<?php
 }
 
 	// ============================================================
@@ -3882,15 +3812,15 @@ function admin_tool_badbehaviour($engine, $module)
 			$engine->set_message($engine->_t('BbSettingsUpdated'));
 			$engine->http->redirect($engine->href('', '', [
 				'setting' => 'bb_options',
-				'mode'    => 'tool_badbehaviour',
+				'mode'	=> 'tool_badbehaviour',
 			]));
 		}
 		else
 		{
 			$engine->log(3, '!!' . $engine->_t('BbSettingsSaveFailed') . ': ' . $save['error'] . '!!');
 			$engine->http->redirect($engine->href('', '', [
-				'setting'       => 'bb_options',
-				'mode'          => 'tool_badbehaviour',
+				'setting'	   => 'bb_options',
+				'mode'		  => 'tool_badbehaviour',
 				'bb_save_error' => base64_encode($save['error']),
 			]));
 		}
@@ -3904,7 +3834,7 @@ function admin_tool_badbehaviour($engine, $module)
 		$engine->set_message($engine->_t('BbSettingsUpdated'));
 		$engine->http->redirect($engine->href('', '', [
 			'setting' => 'bb_options',
-			'mode'    => 'tool_badbehaviour',
+			'mode'	=> 'tool_badbehaviour',
 		]));
 	}
 
@@ -4132,8 +4062,8 @@ function admin_tool_badbehaviour($engine, $module)
 	$mode = $_GET[$mode_selector] ?? '';
 
 	$tabs = [
-		''              => 'BbSummary',
-		'bb_manage'    => 'BbLog',
+		''			  => 'BbSummary',
+		'bb_manage'	=> 'BbLog',
 		'bb_options'   => 'BbSettings',
 		'bb_whitelist' => 'BbWhitelist',
 	];
@@ -4145,10 +4075,10 @@ function admin_tool_badbehaviour($engine, $module)
 
 	if (!empty($engine->db->ext_bad_behaviour))
 	{
-		if (isset($_GET['setting']) && $_GET['setting'] == 'bb_options')        bb_options($engine);
+		if (isset($_GET['setting']) && $_GET['setting'] == 'bb_options')		bb_options($engine);
 		elseif (isset($_GET['setting']) && $_GET['setting'] == 'bb_whitelist')  bb_whitelist($engine);
-		elseif (isset($_GET['setting']) && $_GET['setting'] == 'bb_manage')     bb_manage($engine);
-		else                                                                      bb_summary($engine);
+		elseif (isset($_GET['setting']) && $_GET['setting'] == 'bb_manage')	 bb_manage($engine);
+		else																	  bb_summary($engine);
 	}
 	else
 	{

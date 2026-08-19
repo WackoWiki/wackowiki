@@ -1588,8 +1588,7 @@ $ap_translation = [
 	// === Manage view additions ===
 	'BbViewHeaders'          => 'View headers',
 	'BbViewBody'             => 'View body',
-	'BbViewHeadersLabel'     => 'Headers',
-	'BbViewBodyLabel'        => 'Body',
+	'BbViewContentLabel'     => 'Content',
 	'BbViewModeFull'         => 'Full (always shown)',
 	'BbViewModeTeaser'       => 'Teaser (click to expand)',
 	'BbViewModeHidden'       => 'Hidden (show on demand)',
