@@ -2553,6 +2553,14 @@ function admin_tool_badbehaviour($engine, $module)
 				echo '<br><small>' . Ut::html($result['status_message']) . '</small>';
 			}
 
+			if (!empty($result['support_key']))
+			{
+				$sk_link = $engine->href('', '', ['setting' => 'bb_manage', 'search' => $result['support_key']]);
+				echo '<br><br><small><a href="' . $sk_link . '" '
+					. 'title="' . $engine->_t('BbSearchBySupportKey') . '">'
+					. Ut::html($result['support_key']) . '</a></small>';
+			}
+
 			if ($httpbl)
 			{
 				echo '<br><a href="https://www.projecthoneypot.org/ip_' . Ut::html($result['ip']) . '">http:BL</a>:<br>' . $httpbl;

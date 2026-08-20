@@ -1551,7 +1551,8 @@ a.cancel:active {
 
 /* Summary table */
 .bb-summary td.label,
-.bb-summary th {
+.bb-summary th,
+.bb-summary td {
 	padding: 0.3rem 0.6rem;
 }
 
