@@ -139,9 +139,9 @@ class Paragrafica
 		// -1. remove t-prefix;
 		$what = str_replace($this->mark_prefix, '', $what);
 
-		$page_id = $this->wacko->page['page_id']
-		?? ($this->wacko->resync_page_id
-			?? substr((string) hash('crc32', (string) time()), 0, 5));
+		$page_id = $this->wacko->formatter_page_id
+			?? ($this->wacko->page['page_id']
+				?? substr((string) hash('crc32', (string) time()), 0, 5));
 
 		// 1. insert terminators appropriately
 		foreach ($this->t0 as $t)

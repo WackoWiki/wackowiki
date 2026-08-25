@@ -105,9 +105,10 @@ if ($this->has_access('read'))
 				}
 
 				// recompile if necessary
-				if (!$comment['body_r'])
+				if (!$comment['body_r']
+					|| ($this->db->paragrafica && ($comment['body_toc'] ?? '') === ''))
 				{
-					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], false, true);
+					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], true, true);
 				}
 
 				$tpl->comment	= $this->format($comment['body_r'], 'post_wacko', ['strip_marker' => true]);

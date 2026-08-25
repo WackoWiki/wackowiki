@@ -107,6 +107,7 @@ class Wacko
 	public bool $linktracking		= false;
 	public $noautolinks				= null;		// formatter
 	public $numerate_links			= null;
+	public $formatter_page_id		= null;
 	public $tocs					= null;
 	public $post_wacko_action		= null;
 	public $post_wacko_maxp			= null;
@@ -2116,7 +2117,8 @@ class Wacko
 
 		// Pre‑format body
 		$body		= $this->format($body, 'pre_wacko');
-		$body_r		= $this->compile_body($body, $page_id, !$comment_on_id);
+		// Always build body_toc (pages and comments) so sticky ToC / {{toc}} work in comments
+		$body_r		= $this->compile_body($body, $page_id, true);
 		$body_toc	= $this->body_toc ?? null;
 
 		$title		= $this->sanitize_text_field($title, true);
@@ -5700,7 +5702,7 @@ class Wacko
 
 				if (@file_exists($__tpl))
 				{
-					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
+					$tpl = \Templatest\Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
 
 					// pull
 					$tpl->pull('_t',		function ($block, $loc, $str)						{ return $this->_t($str); });
@@ -5720,8 +5722,6 @@ class Wacko
 								'<input type="hidden" name="_nonce" value="' . $nonce . '">' . "\n" .
 								'<input type="hidden" name="_action" value="' . $action . '">' . "\n";
 						});
-
-					$tpl->setEncoding($this->charset);
 
 					// filter
 					$tpl->filter('_t',				function ($str)						{ return $this->_t($str); });
@@ -5884,6 +5884,17 @@ class Wacko
 			return;
 		}
 
+		// When compiling a body for a specific page (comment, bulk resync, etc.),
+		// set the formatter's page_id so header anchors are scoped to that page,
+		// not to the currently active page (which would be the parent page for
+		// comments, or the admin page during resync).
+		$previous_formatter_page_id = $this->formatter_page_id ?? null;
+
+		if ($page_id)
+		{
+			$this->formatter_page_id = $page_id;
+		}
+
 		// build html body
 		$body_r		= $this->format($body, 'wacko');
 		$body_toc	= '';
@@ -5909,8 +5920,16 @@ class Wacko
 					'body_toc	= ' . $this->db->q($body_toc) . ' ' .
 				'WHERE page_id = ' . (int) $page_id . ' ' .
 				$this->db->limit());
+		}
 
-			#$page = $this->load_page(null, $page_id, null, LOAD_NOCACHE);
+		// restore previous formatter context
+		if ($previous_formatter_page_id !== null)
+		{
+			$this->formatter_page_id = $previous_formatter_page_id;
+		}
+		else
+		{
+			unset($this->formatter_page_id);
 		}
 
 		return $body_r;
@@ -6543,7 +6562,7 @@ class Wacko
 		}
 		else
 		{
-			$what_p = 'p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, p.page_lang, u.user_name, o.user_name as owner_name ';
+			$what_p = 'p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, p.body_toc, p.page_lang, u.user_name, o.user_name as owner_name ';
 		}
 
 		// avoid results if $page_id is 0 (page does not exist)

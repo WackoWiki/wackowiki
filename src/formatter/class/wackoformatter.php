@@ -369,13 +369,17 @@ class WackoFormatter
 		$wacko		= & $this->object;
 		$callback	= [&$this, 'wacko_callback'];
 
-		if (isset($wacko->page['page_id']))
+		// Resolve page_id for header anchors with explicit priority:
+		// 1. formatter_page_id: explicit override for compilation context
+		//    (comments being rendered outside the active page context, bulk resync)
+		// 2. page['page_id']: the currently active page (normal rendering)
+		if (isset($wacko->formatter_page_id))
+		{
+			$this->page_id = $wacko->formatter_page_id;
+		}
+		else if (isset($wacko->page['page_id']))
 		{
 			$this->page_id = $wacko->page['page_id'];
-		}
-		else if (isset($wacko->resync_page_id))
-		{
-			$this->page_id = $wacko->resync_page_id;
 		}
 
 		if (!$this->page_id || $wacko->new_comment)

@@ -123,7 +123,7 @@ lang = {
 	Shift:					'Shift',
 	Space:					'Space',
 	Close:					'Close',
-	
+
 	JustNow:				'just now',
 	MinuteAgo:				'1 minute ago',
 	MinutesAgo:				'%s minutes ago',

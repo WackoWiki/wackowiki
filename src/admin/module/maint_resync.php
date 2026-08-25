@@ -315,7 +315,6 @@ function admin_maint_resync($engine, $module)
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-						$engine->resync_page_id		= $page['page_id'];
 						$engine->resync_page_lang	= $page['page_lang'];
 						$paragrafica				= !$page['comment_on_id'];
 						$page['body_r']				= $engine->compile_body($page['body'], $page['page_id'], $paragrafica, true);

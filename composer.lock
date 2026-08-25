@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2eb6e820b92e48a0b9b4e4c3a3f26c17",
+    "content-hash": "c419b7dfa2b4c09b3b48dd173a466490",
     "packages": [
         {
             "name": "badbehaviour/badbehaviour",
@@ -931,6 +931,54 @@
                 "wiki": "https://wackowiki.org/doc/Dev/Projects/SafeHTML"
             },
             "time": "2026-06-13T19:54:38+00:00"
+        },
+        {
+            "name": "wackowiki/templatest",
+            "version": "0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WackoWiki/Templatest.git",
+                "reference": "ec74b520ac8279fa4df7faf077d48a4f58df0547"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WackoWiki/Templatest/zipball/ec74b520ac8279fa4df7faf077d48a4f58df0547",
+                "reference": "ec74b520ac8279fa4df7faf077d48a4f58df0547",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Templatest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "WackoWiki Team",
+                    "homepage": "https://wackowiki.org"
+                }
+            ],
+            "description": "Push-style, lazy, topo-ordered incremental template engine for WackoWiki",
+            "keywords": [
+                "templating",
+                "wackowiki",
+                "wiki"
+            ],
+            "support": {
+                "issues": "https://github.com/WackoWiki/Templatest/issues",
+                "source": "https://github.com/WackoWiki/Templatest/tree/0.9"
+            },
+            "time": "2026-08-25T15:52:14+00:00"
         }
     ],
     "packages-dev": [],
