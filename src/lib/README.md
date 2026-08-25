@@ -20,6 +20,7 @@ The version and status of each is summarized below:
 | safehtml			| SafeHTML			| 1.4.3		| Composer |
 | simplepie			| SimplePie			| 1.9.0		| Composer |
 | svg-sanitizer		| svg-sanitizer		| 0.22		| Composer |
+| templatest		| Templatest		| 0.9		| Composer |
 
 ## JavaScript libraries
 
@@ -41,4 +42,5 @@ Upstream projects
 - safehtml			- https://github.com/WackoWiki/safehtml
 - simplepie			- https://github.com/simplepie/simplepie
 - svg-sanitizer		- https://github.com/darylldoyle/svg-sanitizer
+- templatest		- https://github.com/WackoWiki/Templatest
 - wikiedit			- https://wackowiki.org/doc/Dev/Projects/WikiEdit
