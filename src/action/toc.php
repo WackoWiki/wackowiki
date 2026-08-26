@@ -53,6 +53,28 @@ if ($page)
 	if (!$legend)	$legend = $tag;
 	if ($_page)		$link	= $this->href('', $_page['tag']);
 }
+else if ($this->formatter_page_id)
+{
+	// 'page' parameter not provided and we are being rendered from
+	// within the body of a non-active page (e.g. a comment). In that
+	// case $this->formatter_page_id is set to that page's page_id by
+	// the caller, and we should load its body_toc instead of the
+	// active page's body_toc.
+	$tag		= $this->get_page_tag($this->formatter_page_id) ?? $this->tag;
+	$ppage		= '/' . $tag;
+	$context	= $tag;
+	$_page		= $this->load_page('', $this->formatter_page_id);
+
+	if (!$_page)
+	{
+		$_page = $this->page;
+	}
+
+	if (!$legend)	$legend = $tag;
+
+	// for in-page navigation, just use anchors (no full URL prefix)
+	$link		= '';
+}
 else
 {
 	$tag		= '';

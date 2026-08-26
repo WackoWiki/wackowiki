@@ -60,7 +60,13 @@ if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
 		$tpl->user		= $this->user_link($comment['user_name']);
 		$tpl->created	= $comment['created'];
 		$comment['modified'] == $comment['created'] || $tpl->edit_time = $comment['modified'];
+
+		// When formatting the comment body, ensure that nested actions
+		// (e.g. {{toc}}) operate in the context of the comment's page,
+		// not the parent page (which is the currently active page).
+		$restore_page_id = $this->set_formatter_context($comment['page_id']);
 		$tpl->body		= $this->format($comment['body_r'], 'post_wacko');
+		$this->reset_formatter_context($restore_page_id);
 	}
 
 	$tpl->leave();

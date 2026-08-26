@@ -5884,16 +5884,7 @@ class Wacko
 			return;
 		}
 
-		// When compiling a body for a specific page (comment, bulk resync, etc.),
-		// set the formatter's page_id so header anchors are scoped to that page,
-		// not to the currently active page (which would be the parent page for
-		// comments, or the admin page during resync).
-		$previous_formatter_page_id = $this->formatter_page_id ?? null;
-
-		if ($page_id)
-		{
-			$this->formatter_page_id = $page_id;
-		}
+		$restore_page_id = $this->set_formatter_context($page_id);
 
 		// build html body
 		$body_r		= $this->format($body, 'wacko');
@@ -5922,17 +5913,46 @@ class Wacko
 				$this->db->limit());
 		}
 
-		// restore previous formatter context
-		if ($previous_formatter_page_id !== null)
+		$this->reset_formatter_context($restore_page_id);
+
+		return $body_r;
+	}
+
+	/**
+	 * Set formatter context
+	 *
+	 * When compiling a body for a specific page (e.g. a comment body,
+	 * or during bulk resync), pass the actual page_id explicitly to
+	 * the formatter so header anchors and TOC entries are scoped to
+	 * that page, not to the currently active page (which would be the
+	 * parent page for comments, or the admin page during resync).
+	 *
+	 * @param int|NULL $page_id
+	 * @return int|NULL
+	 */
+	function set_formatter_context(?int $page_id): ?int
+	{
+		$previous_page_id = $this->formatter_page_id ?? null;
+
+		if ($page_id)
 		{
-			$this->formatter_page_id = $previous_formatter_page_id;
+			$this->formatter_page_id = $page_id;
+		}
+
+		return $previous_page_id;
+	}
+
+	// restore previous formatter context
+	function reset_formatter_context(?int $page_id)
+	{
+		if ($page_id !== null)
+		{
+			$this->formatter_page_id = $page_id;
 		}
 		else
 		{
 			unset($this->formatter_page_id);
 		}
-
-		return $body_r;
 	}
 
 	// SECTIONS

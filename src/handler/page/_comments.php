@@ -111,7 +111,10 @@ if ($this->has_access('read'))
 					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], true, true);
 				}
 
+				$restore_page_id = $this->set_formatter_context($comment['page_id']);
 				$tpl->comment	= $this->format($comment['body_r'], 'post_wacko', ['strip_marker' => true]);
+				$this->reset_formatter_context($restore_page_id);
+
 				$tpl->owner		= $this->user_link($comment['owner_name']);
 				$tpl->created	= $comment['created'];
 
