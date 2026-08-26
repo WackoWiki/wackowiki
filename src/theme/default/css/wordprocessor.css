@@ -19,3 +19,8 @@ hr {
 
 div.wrapper				{ margin: 2px; background: #f6f7ed; }
 div.wrapper-content		{ padding: 10px 10px 25px 10px; }
+
+.edit-section,
+.pagination {
+	display:			none !important;
+}
