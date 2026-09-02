@@ -864,7 +864,8 @@ span.icon{
 }
 
 a .icon {
-	padding-left: 17px;
+	padding-left: 20px;
+	padding-bottom: 5px;
 }
 
 a.external-link .icon {
