@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c419b7dfa2b4c09b3b48dd173a466490",
+    "content-hash": "9c7730cedac3484db8b192b26e199d28",
     "packages": [
         {
             "name": "badbehaviour/badbehaviour",
@@ -69,16 +69,16 @@
         },
         {
             "name": "enshrined/svg-sanitize",
-            "version": "0.22.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darylldoyle/svg-sanitizer.git",
-                "reference": "0afa95ea74be155a7bcd6c6fb60c276c39984500"
+                "reference": "f3300fcd1bbf67d205b52217c75d0f7d6a8c47ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/0afa95ea74be155a7bcd6c6fb60c276c39984500",
-                "reference": "0afa95ea74be155a7bcd6c6fb60c276c39984500",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/f3300fcd1bbf67d205b52217c75d0f7d6a8c47ff",
+                "reference": "f3300fcd1bbf67d205b52217c75d0f7d6a8c47ff",
                 "shasum": ""
             },
             "require": {
@@ -108,9 +108,9 @@
             "description": "An SVG sanitizer for PHP",
             "support": {
                 "issues": "https://github.com/darylldoyle/svg-sanitizer/issues",
-                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/0.22.0"
+                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/1.0.0"
             },
-            "time": "2025-08-12T10:13:48+00:00"
+            "time": "2026-09-01T09:35:47+00:00"
         },
         {
             "name": "hashids/hashids",
@@ -937,12 +937,12 @@
             "version": "0.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WackoWiki/Templatest.git",
+                "url": "https://github.com/WackoWiki/templatest.git",
                 "reference": "ec74b520ac8279fa4df7faf077d48a4f58df0547"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WackoWiki/Templatest/zipball/ec74b520ac8279fa4df7faf077d48a4f58df0547",
+                "url": "https://api.github.com/repos/WackoWiki/templatest/zipball/ec74b520ac8279fa4df7faf077d48a4f58df0547",
                 "reference": "ec74b520ac8279fa4df7faf077d48a4f58df0547",
                 "shasum": ""
             },
