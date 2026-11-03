@@ -650,4 +650,55 @@ class Ut
 			$lower",
 			$string);
 	}
+
+	static function get_image_dimensions(string $path): array|false
+	{
+		// 1. Fast path — GD supports most formats
+		$info = @getimagesize($path);
+
+		if ($info !== false)
+		{
+			return ['width' => $info[0], 'height' => $info[1], 'type' => $info[2]];
+		}
+
+		// 2. Detect JXL via magic bytes
+		$fh		= fopen($path, 'rb');
+		$header	= fread($fh, 12);
+		fclose($fh);
+
+		$is_jxl =
+			   str_starts_with($header, "\xFF\x0A")
+			|| str_starts_with($header, "\x00\x00\x00\x0C\x4A\x58\x4C\x20\x0D\x0A\x87\x0A");
+
+		if (!$is_jxl)
+		{
+			return false;
+		}
+
+		// 3. JXL detected — need Imagick
+		if (!extension_loaded('imagick'))
+		{
+			error_log("JXL detected but imagick extension not loaded: $path");
+
+			return false;
+		}
+
+		// 4. Use Imagick (pingImage = header-only, no full decode)
+		try
+		{
+			$im = new Imagick();
+			$im->pingImage($path);
+			$w = $im->getImageWidth();
+			$h = $im->getImageHeight();
+			$im->clear();
+
+			return ['width' => $w, 'height' => $h, 'type' => 'jxl'];
+		}
+		catch (ImagickException $e)
+		{
+			error_log("Imagick JXL failure for $path: " . $e->getMessage());
+
+			return false;
+		}
+	}
 }

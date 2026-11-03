@@ -289,16 +289,16 @@ if (isset($_POST['upload']) & $can_upload)
 					{
 						// check is image, if asked
 						$forbid		= false;
-						$size		= [0, 0];
+						$size		= ['width' => 0, 'height' => 0];
 
 						if ($is_image)
 						{
-							$size	= @getimagesize($tmp_name);
+							$size	= Ut::get_image_dimensions($tmp_name);
 						}
 
 						if ($this->db->upload_images_only
 							&& !$this->is_admin()
-							&& $size[0] == 0)
+							&& $size['width'] == 0)
 						{
 							$forbid	= true;
 							$error	= $this->_t('UploadNotAPicture');
@@ -383,8 +383,8 @@ if (isset($_POST['upload']) & $can_upload)
 											? 'file_description	= ' . $this->db->q($description) . ', '
 											: '') .
 										'file_size			= ' . (int) $file_size . ',' .
-										'picture_w			= ' . (int) $size[0] . ',' .
-										'picture_h			= ' . (int) $size[1] . ',' .
+										'picture_w			= ' . (int) $size['width'] . ',' .
+										'picture_h			= ' . (int) $size['height'] . ',' .
 										'file_ext			= ' . $this->db->q($ext) . ',' .
 										'mime_type			= ' . $this->db->q($mime_type) . ',' .
 										'created			= ' . $this->db->utc_dt() . ', ' .
@@ -424,8 +424,8 @@ if (isset($_POST['upload']) & $can_upload)
 										$this->db->q($this->page['page_lang']) . ', ' .
 										$this->db->q($description) . ', ' .
 										(int) $file_size . ',' .
-										(int) $size[0] . ',' .
-										(int) $size[1] . ',' .
+										(int) $size['width'] . ',' .
+										(int) $size['height'] . ',' .
 										$this->db->q($ext) . ',' .
 										$this->db->q($mime_type) . ',' .
 										$this->db->utc_dt() . ',' .

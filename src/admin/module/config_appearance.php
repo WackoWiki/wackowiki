@@ -115,13 +115,13 @@ function admin_config_appearance($engine, $module)
 					$error = $engine->_t('UploadMaxSizeReached');
 				}
 
-				$size			= [0, 0];
-				$size			= @getimagesize($tmp_name);
+				$size			= ['width' => 0, 'height' => 0];
+				$size			= Ut::get_image_dimensions($tmp_name);
 
 				if ($file == 'logo')
 				{
-					$config['logo_height']			= (int) $size[1];
-					$config['logo_width']			= (int) $size[0];
+					$config['logo_width']			= (int) $size['width'];
+					$config['logo_height']			= (int) $size['height'];
 				}
 				else if ($file == 'favicon'
 					&& ($size[0] > 64 || $size[1] > 64))
@@ -145,10 +145,10 @@ function admin_config_appearance($engine, $module)
 					if ($file == 'logo')
 					{
 						$size			= [0, 0];
-						$size			= @getimagesize($tmp_name);
+						$size			= Ut::get_image_dimensions($tmp_name);
 
-						$config['logo_height']			= (int) $size[1];
-						$config['logo_width']			= (int) $size[0];
+						$config['logo_width']			= (int) $size['width'];
+						$config['logo_height']			= (int) $size['height'];
 					}
 
 					move_uploaded_file($tmp_name, Ut::join_path(IMAGE_DIR, $result_name));
