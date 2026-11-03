@@ -25,7 +25,7 @@ $insert = [
 	'login_page'		=> 'Logi sisse',
 	'account_page'		=> 'Seadistused',
 
-	'whatsnew_page'		=> 'Whats New',
+	'whatsnew_page'		=> 'Mida on uut',
 	'changes_page'		=> 'Viimased Muudatused',
 	'comments_page'		=> 'Viimati Kommenteeritud',
 	'index_page'		=> 'Sisu Kord',

@@ -26,7 +26,7 @@ $lang = [
 	'registration_page'	=> 'Registreerimine',
 	'password_page'		=> 'Parool',
 
-	'whatsnew_page'		=> 'WhatsNew',
+	'whatsnew_page'		=> 'Mida on uut',
 	'changes_page'		=> 'ViimasedMuudatused',
 	'comments_page'		=> 'ViimatiKommenteeritud',
 	'index_page'		=> 'SisuKord',
@@ -41,7 +41,7 @@ $lang = [
    Generic Page Text
 */
 'TitleInstallation'				=> 'WackoWiki installeerimine',
-'TitleUpdate'					=> 'WackoWiki Update',
+'TitleUpdate'					=> 'WackoWiki uuendus',
 'Continue'						=> 'Jätka',
 'Back'							=> 'Tagasi',
 'Recommended'					=> 'soovitatav',
@@ -50,7 +50,7 @@ $lang = [
 /*
    Locking Check
  */
-'LockAuthorization'				=> 'Authorization',
+'LockAuthorization'				=> 'Autoriseerimine',
 'LockAuthorizationInfo'			=> 'Palun sisestage parool, mille salvestasite faili %1.',
 'LockPassword'					=> 'Parool:',
 'LockLogin'						=> 'Sisene',
@@ -74,7 +74,7 @@ $lang = [
 */
 'version-check'					=> 'Nõuded süsteemile',
 'PhpVersion'					=> 'PHP versioon',
-'PhpDetected'					=> 'Detected PHP',
+'PhpDetected'					=> 'Tuvastatud PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
 'Database'						=> 'Andmebaas',
@@ -84,7 +84,7 @@ $lang = [
 'Requirements'					=> 'Teie server peab vastama allpool loetletud nõuetele.',
 'OK'							=> 'OK',
 'Problem'						=> 'Probleem',
-'Example'						=> 'Example',
+'Example'						=> 'Näidis',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Teie PHP installil puuduvad märgitud PHP laiendused, mida WackoWiki nõuab. ',
 'PcreWithoutUtf8'				=> 'PCRE ei ole kompileeritud UTF-8 toega.',
@@ -134,19 +134,19 @@ $lang = [
    Database Config Page
 */
 'config-database'				=> 'Andmebaasi konfigureerimine',
-'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use.',
-'DbSqlMode'						=> 'SQL mode',
-'DbSqlModeDesc'					=> 'The SQL mode you want use.',
-'DbVendor'						=> 'Vendor',
-'DbVendorDesc'					=> 'The database vendor you use.',
-'DbCharset'						=> 'Charset',
-'DbCharsetDesc'					=> 'The database charset you want to use.',
-'DbEngine'						=> 'Engine',
+'DbDriver'						=> 'Draiver',
+'DbDriverDesc'					=> 'Andmebaasi draiver, mida soovid kasutada.',
+'DbSqlMode'						=> 'SQL režiim',
+'DbSqlModeDesc'					=> 'SQL režiim, mida soovid kasutada.',
+'DbVendor'						=> 'Tarnija',
+'DbVendorDesc'					=> 'Andmebaasi tarnija, mida soovid kasutada.',
+'DbCharset'						=> 'Märgistik',
+'DbCharsetDesc'					=> 'Andmebaasi märgistik, mdia soovid kasutada.',
+'DbEngine'						=> 'Mootor',
 'DbEngineDesc'					=> 'The database engine you want to use.',
 'DbHost'						=> 'Host',
 'DbHostDesc'					=> 'Host, millel teie andmebaasiserver töötab, tavaliselt <code>127.0.0.1</code> või <code>localhost</code> (st sama masin, millel on teie WackoWiki sait).',
-'DbPort'						=> 'Port (Optional)',
+'DbPort'						=> 'Port (valikuline)',
 'DbPortDesc'					=> 'Pordi number, mille kaudu teie andmebaasiserver on kättesaadav. Jäta see tühjaks, et kasutada vaikimisi pordinumbrit.',
 'DbName'						=> 'Andmebassi nimi',
 'DbNameDesc'					=> 'Andmebaas, mida WackoWiki peaks kasutama. See andmebaas peab olema juba olemas, enne kui jätkate!',
@@ -200,7 +200,7 @@ $lang = [
 'InstallModeratorGroup'			=> 'Adding Moderator Group',
 'InstallReviewerGroup'			=> 'Adding Reviewer Group',
 'InstallLogoImage'				=> 'Adding Logo Image',
-'LogoImage'						=> 'Logo image',
+'LogoImage'						=> 'Logo pilt',
 'InstallConfigValues'			=> 'Adding Config Values',
 'ConfigValues'					=> 'Config Values',
 'ErrorInsertPage'				=> 'Error inserting %1 page',
