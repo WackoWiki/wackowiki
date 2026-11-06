@@ -555,41 +555,56 @@ class WackoFormatter
 		else if (  preg_match('/^([[:alpha:]]+:\/\/' . $wacko::PATTERN['URI'] . '+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/u', $thing, $matches)
 				|| preg_match('/^(mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches))
 		{
-			$url = mb_strtolower($matches[1]);
+			// trailing punctuation ("http://example.com...", "http://example.com).") belongs
+			// to the text and must not be swallowed by the link
+			[$link, $punctuation]	= $this->split_url_punctuation($matches[1]);
+
+			// the character which the regex has already separated comes last
+			$tail					= $punctuation . ($matches[2] ?? '');
+
+			// an URL with an invalid host (e.g. "http://example..com") is no link at all
+			if (!$this->is_valid_url($link))
+			{
+				return Ut::html($thing);
+			}
+
+			$url = mb_strtolower($link);
 
 			if (preg_match('/^(https?|ftps?):\/\/([^\\s\"<>]+)\.((' . $wacko::PATTERN['AUDIO'] . ')|(' . $wacko::PATTERN['BITMAP'] . '|' . $wacko::PATTERN['DRAWING'] . ')|(' . $wacko::PATTERN['VIDEO'] . '))$/u', $url, $media))
 			{
 				// audio
 				if ($media[4])
 				{
-					return '<audio src="' . $matches[1] . '" controls></audio>' . $matches[2];
+					return '<audio src="' . Ut::html($link) . '" controls></audio>' . $tail;
 				}
 				// image
 				if ($media[5])
 				{
-					return '<img src="' . $matches[1] . '">' . $matches[2];
+					return '<img src="' . Ut::html($link) . '">' . $tail;
 				}
 				// video
 				if ($media[6])
 				{
-					return '<video src="' . $matches[1] . '" controls></video>' . $matches[2];
+					return '<video src="' . Ut::html($link) . '" controls></video>' . $tail;
 				}
 			}
 			// shorten url name if too long
 			else if (mb_strlen($url) > 55)
 			{
-				$url = mb_substr($matches[1], 0, 30) . '[...]' . mb_substr($matches[1], -20);
+				$url = mb_substr($link, 0, 30) . '[...]' . mb_substr($link, -20);
 
-				return $wacko->pre_link($matches[1], $url) . $matches[2];
+				return $wacko->pre_link($link, $url) . $tail;
 			}
 			else
 			{
-				return $wacko->pre_link($matches[1], $matches[1]) . $matches[2];
+				return $wacko->pre_link($link, $link) . $tail;
 			}
 		}
 		else if (preg_match('/^((geo|tel)\:[' . $wacko::PATTERN['URI'] . '+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
-			return $wacko->pre_link($matches[1], $matches[1]) . $matches[3];
+			[$link, $punctuation]	= $this->split_url_punctuation($thing);
+
+			return $wacko->pre_link($link, $link) . $punctuation;
 		}
 		// lan path
 		else if (preg_match('/^\\\\\\\\([' . $wacko::PATTERN['ALPHANUM_P'] . '\\\!\.\-\_]+)$/u', $thing, $matches))
@@ -1363,6 +1378,224 @@ class WackoFormatter
 				($section_edit ?? '') .
 
 			'</h' . $h_level . '>';
+	}
+
+	/**
+	 * Split trailing punctuation off an URL.
+	 *
+	 * Punctuation at the end of an URL belongs to the surrounding text and must
+	 * not become part of the link ("http://example.com...", "http://example.com).'").
+	 *
+	 * The rules follow CommonMark: the characters "?!.,:*" and the quotes are
+	 * never part of the link, a closing bracket is only part of the link when
+	 * the brackets are balanced.
+	 *
+	 * The fragment is never touched - a text fragment directive
+	 * ("#:~:text=from,to") may legitimately end with such characters.
+	 *
+	 * @param string $url
+	 * @return array [string $url, string $trailing]
+	 */
+	private function split_url_punctuation(string $url): array
+	{
+		// the fragment is opaque
+		$pos		= strpos($url, '#');
+		$head		= $pos === false ? $url : substr($url, 0, $pos);
+		$fragment	= $pos === false ? '' : substr($url, $pos);
+
+		$trailing	= '';
+
+		while ($head !== '')
+		{
+			$last = mb_substr($head, -1);
+
+			// brackets are only part of the URL when they are balanced
+			if (str_contains('()[]{}', $last))
+			{
+				$pairs		= ['(' => ')', '[' => ']', '{' => '}'];
+				$reverse	= array_flip($pairs);
+
+				$balance	= isset($pairs[$last])
+					? mb_substr_count($head, $last) - mb_substr_count($head, $pairs[$last])
+					: mb_substr_count($head, $reverse[$last]) - mb_substr_count($head, $last);
+
+				if ($balance == 0)
+				{
+					break;		// balanced -> it belongs to the URL
+				}
+
+				$trailing	= $last . $trailing;
+				$head		= mb_substr($head, 0, -1);
+				continue;
+			}
+
+			// punctuation which is never the ending of an URL
+			if (!str_contains('?!.,:*\'"', $last))
+			{
+				break;
+			}
+
+			$trailing	= $last . $trailing;
+			$head		= mb_substr($head, 0, -1);
+		}
+
+		return [$head . $fragment, $trailing];
+	}
+
+	/**
+	 * Split an URL into its components.
+	 *
+	 * Uses the URI extension (PHP 8.5) when it is available, otherwise parse_url().
+	 *
+	 * @param string $url
+	 * @return array|null
+	 */
+	private function url_parts(string $url): ?array
+	{
+		// PHP 8.5 URI extension
+		if (class_exists('\Uri\WhatWg\Uri'))
+		{
+			try
+			{
+				$uri = \Uri\WhatWg\Uri::parse($url);
+
+				return [
+					'scheme'	=> $uri->getScheme(),
+					'host'		=> $uri->getHost(),
+					'port'		=> $uri->getPort(),
+				];
+			}
+			catch (\Throwable $e)
+			{
+				return null;
+			}
+		}
+
+		// fallback for PHP < 8.5
+		$parts = parse_url($url);
+
+		return $parts === false ? null : $parts;
+	}
+
+	/**
+	 * Check whether an URL may be turned into a link.
+	 *
+	 * The syntax of the URL is checked with parse_url() (or the URI extension),
+	 * the host name with filter_var(FILTER_VALIDATE_DOMAIN), which enforces the
+	 * label rules of RFC 1034: a host like "example..com" contains an empty
+	 * label, can never be resolved and must therefore not be linked.
+	 *
+	 * @param string $url
+	 * @return bool
+	 */
+	private function is_valid_url(string $url): bool
+	{
+		$parts = $this->url_parts($url);
+
+		if ($parts === null || empty($parts['scheme']))
+		{
+			return false;
+		}
+
+		// port
+		if (isset($parts['port']) && ($parts['port'] < 1 || $parts['port'] > 65535))
+		{
+			return false;
+		}
+
+		// schemes with an authority component need a host
+		if (in_array(mb_strtolower($parts['scheme']), ['http', 'https', 'ftp', 'ftps', 'ws', 'wss'], true)
+			&& !isset($parts['host']))
+		{
+			return false;
+		}
+
+		// no authority component (mailto:, tel:, geo:) - nothing to check
+		if (!isset($parts['host']))
+		{
+			return true;
+		}
+
+		return $this->is_valid_host($parts['host']);
+	}
+
+	/**
+	 * Check a host name.
+	 *
+	 * The labels are checked according to RFC 1034: a host with an empty label
+	 * ("example..com") can never be resolved and must not be linked.
+	 *
+	 * @param string $host
+	 * @return bool
+	 */
+	private function is_valid_host(string $host): bool
+	{
+		// IPv6 literal
+		if (str_starts_with($host, '['))
+		{
+			return (bool) preg_match('/^\[[0-9a-f:.]+](?::\d{1,5})?$/i', $host);
+		}
+
+		// a fully qualified domain name may end with the root label
+		$host = rtrim($host, '.');
+
+		if ($host === '')
+		{
+			return false;
+		}
+
+		// internationalized domain names have to be converted to punycode first,
+		// because filter_var(FILTER_VALIDATE_DOMAIN) only accepts ASCII
+		if (preg_match('/[^\x00-\x7f]/', $host))
+		{
+			if (!function_exists('idn_to_ascii'))
+			{
+				// no intl extension available: check the unicode labels ourselves
+				return $this->is_valid_unicode_host($host);
+			}
+
+			$variant	= defined('INTL_IDNA_VARIANT_UTS46') ? INTL_IDNA_VARIANT_UTS46 : 0;
+			$ascii		= idn_to_ascii($host, IDNA_DEFAULT, $variant);
+
+			if ($ascii === false || $ascii === '')
+			{
+				return false;
+			}
+
+			$host = $ascii;
+		}
+
+		// every label of the host must be valid (RFC 1034)
+		// FILTER_FLAG_HOSTNAME additionally allows the underscore ("_dmarc.example.com")
+		return filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) !== false;
+	}
+
+	/**
+	 * Check the labels of an internationalized host name without the intl extension.
+	 *
+	 * @param string $host
+	 * @return bool
+	 */
+	private function is_valid_unicode_host(string $host): bool
+	{
+		if (mb_strlen($host) > 253)
+		{
+			return false;
+		}
+
+		foreach (explode('.', $host) as $label)
+		{
+			// a label must not be empty, must not exceed 63 octets and must not
+			// start or end with a hyphen
+			if ($label === ''
+				|| strlen($label) > 63
+				|| !preg_match('/^[\p{L}\p{Nd}]([\p{L}\p{Nd}\-]*[\p{L}\p{Nd}])?$/u', $label))
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
