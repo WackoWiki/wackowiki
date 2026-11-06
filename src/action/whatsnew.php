@@ -272,13 +272,20 @@ if ($pages = array_merge($pages1, $pages2, $comments, $files))
 			$access = true;
 		}
 
-		$printed[$page['tag']] ??= '';
+		// duplicate suppression key: for files the file id (or the file name) has to be
+		// part of the key, because several files of the same page can be uploaded
+		// within the same second and would be suppressed as duplicates otherwise
+		$key = ($page['ctype'] == 2)
+			? $page['tag'] . '/' . ($page['comment_on_id'] ?: $page['title'])
+			: $page['tag'];
+
+		$printed[$key] ??= '';
 
 		if ($access
-			&& $printed[$page['tag']] != $page['date']
+			&& $printed[$key] != $page['date']
 			&& ($count++ < $max))
 		{
-			$printed[$page['tag']] = $page['date'];	// ignore duplicates
+			$printed[$key] = $page['date'];	// ignore duplicates
 
 			$this->sql2datetime($page['date'], $day, $time);
 
