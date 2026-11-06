@@ -1022,12 +1022,34 @@ class WackoFormatter
 					$string));
 		};
 
+		// auto footnotes (e.g. [[^ footnote]] or ((^ footnote))) contain a caret which
+		// must not be taken for a cell delimiter - mask them while the row is split
+		// into cells and restore them in every cell afterwards
+		$auto_fn_mask	= [];
+		$mask_auto_fn	= function (string $string) use (&$auto_fn_mask): string
+		{
+			return (string) preg_replace_callback(
+				'/\[\[\^.*?\]\]|\(\(\^.*?\)\)/us',
+				function (array $matches) use (&$auto_fn_mask): string
+				{
+					$mask				= "\u{E000}" . count($auto_fn_mask) . "\u{E001}";
+					$auto_fn_mask[$mask]	= $matches[0];
+
+					return $mask;
+				},
+				$string
+			);
+		};
+
 		$this->br			= true;
 		$this->intable		= true;
 		$this->intable_br	= false;
 
 		$tag		= $header === 1 ? 'th' : 'td';
 		$output		= "\t" . '<tr>' . "\n";
+
+		// hide the auto footnotes from the cell splitting
+		$string	= $mask_auto_fn($string);
 
 		// ensures the ^ is not preceded or followed by another ^, matches only isolated ^ characters
 		$pattern	= '/((?<!\^)\^(?!\^)|\|)/';
@@ -1060,6 +1082,9 @@ class WackoFormatter
 		{
 			$this->tdold_indent_level	= 0;
 			$this->tdindent_closers		= [];
+
+			// restore the auto footnotes hidden above
+			$cell[1]	= strtr($cell[1], $auto_fn_mask);
 
 			$attr		= [];
 
