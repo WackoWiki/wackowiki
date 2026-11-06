@@ -15,7 +15,10 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	return $this->db->load_single(
-		'SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.created, f.modified, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title ' .
+		'SELECT
+			f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author,
+			f.source, f.source_url, f.license_id, f.created, f.modified, f.picture_w, f.picture_h, f.file_ext, f.mime_type,
+			u.user_name, p.owner_id AS page_owner_id, p.tag, p.title ' .
 		'FROM ' . $this->prefix . 'file f ' .
 			'INNER JOIN ' . $this->prefix . 'user u ON (f.user_id = u.user_id) ' .
 			'LEFT JOIN ' . $this->prefix . 'page p ON (f.page_id = p.page_id) ' .
@@ -28,7 +31,8 @@ $file_access = function ($file)
 	return
 		$this->is_admin()
 		|| ($file['page_id']
-			&& ($this->page['owner_id'] == $this->get_user_id()))
+			&& $file['page_owner_id'] == $this->get_user_id()
+			&& $file['page_id'] == $this->page['page_id'])
 		|| ($file['user_id'] == $this->get_user_id());
 };
 
@@ -145,20 +149,22 @@ if ($action && !empty($file))
 	else if ($action == 'assign_categories')
 	{
 		// 1.b UPDATE FILE CATEGORIES ASSIGNMENTS
+		if ($file_access($file))
+		{
+			// clear old list
+			$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
 
-		// clear old list
-		$this->remove_category_assignments($file['file_id'], OBJECT_FILE);
+			// save new list
+			$this->save_categories_list($file['file_id'], OBJECT_FILE);
 
-		// save new list
-		$this->save_categories_list($file['file_id'], OBJECT_FILE);
+			$this->log(4, Ut::perc_replace(
+				$this->_t('LogUpdatedFileCategories', SYSTEM_LANG),
+				$this->tag . ' ' . $this->page['title'],
+				$file['file_name']));
+			$this->set_message($this->_t('CategoriesUpdated'), 'success');
 
-		$this->log(4, Ut::perc_replace(
-			$this->_t('LogUpdatedFileCategories', SYSTEM_LANG),
-			$this->tag . ' ' . $this->page['title'],
-			$file['file_name']));
-		$this->set_message($this->_t('CategoriesUpdated'), 'success');
-
-		$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
+			$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
+		}
 	}
 	else if ($action == 'remove_file')
 	{
