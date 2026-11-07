@@ -25,6 +25,7 @@ class WackoFormatter
 	public string $LONG_REGEX;
 	public string $MIDDLE_REGEX;
 	public string $PRE_REGEX;
+	public string $INTERWIKI_PATTERN;
 	private $tdold_indent_type;
 	private $old_indent_type;
 	public array $colors			= [
@@ -62,6 +63,12 @@ class WackoFormatter
 	function __construct( &$object )
 	{
 		$this->object = &$object;
+
+		// interwiki link: "prefix:target"
+		// the target may contain a percent encoded text fragment ("#:~:text=hello%20world"),
+		// therefore the percent sign has to be allowed as well
+		$this->INTERWIKI_PATTERN = '[[:alnum:]]+:[' . $object::PATTERN['ALPHANUM_P'] . '\!\.][' . $object::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#\%]';
+
 
 		$this->LONG_REGEX =
 			'/(' .
@@ -145,7 +152,7 @@ class WackoFormatter
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(" . $object::PATTERN['AUDIO'] . '|' . $object::PATTERN['BITMAP'] . '|' . $object::PATTERN['DRAWING'] . '|' . $object::PATTERN['VIDEO'] . ")(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
-			"\b[[:alnum:]]+:[" . $object::PATTERN['ALPHANUM_P'] . "\!\.][" . $object::PATTERN['ALPHANUM_P'] . "\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]+|" .
+			"\b" . $this->INTERWIKI_PATTERN . "+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// wiki links (beside actions)
@@ -555,17 +562,15 @@ class WackoFormatter
 		else if (  preg_match('/^([[:alpha:]]+:\/\/' . $wacko::PATTERN['URI'] . '+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/u', $thing, $matches)
 				|| preg_match('/^(mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches))
 		{
-			// trailing punctuation ("http://example.com...", "http://example.com).") belongs
-			// to the text and must not be swallowed by the link
-			[$link, $punctuation]	= $this->split_url_punctuation($matches[1]);
-
-			// the character which the regex has already separated comes last
-			$tail					= $punctuation . ($matches[2] ?? '');
+			// trailing punctuation ("http://example.com...", "http://example.com).'") belongs
+			// to the text and must not be swallowed by the link, therefore the complete
+			// token is split and not only the part which the regex has separated
+			[$link, $punctuation] = $this->split_url_punctuation($thing);
 
 			// an URL with an invalid host (e.g. "http://example..com") is no link at all
 			if (!$this->is_valid_url($link))
 			{
-				return Ut::html($thing);
+					return Ut::html($thing);
 			}
 
 			$url = mb_strtolower($link);
@@ -575,36 +580,38 @@ class WackoFormatter
 				// audio
 				if ($media[4])
 				{
-					return '<audio src="' . Ut::html($link) . '" controls></audio>' . $tail;
+					return '<audio src="' . Ut::html($link) . '" controls></audio>' . $punctuation;
 				}
 				// image
 				if ($media[5])
 				{
-					return '<img src="' . Ut::html($link) . '">' . $tail;
+					return '<img src="' . Ut::html($link) . '">' . $punctuation;
 				}
 				// video
 				if ($media[6])
 				{
-					return '<video src="' . Ut::html($link) . '" controls></video>' . $tail;
+					return '<video src="' . Ut::html($link) . '" controls></video>' . $punctuation;
 				}
 			}
 			// shorten url name if too long
 			else if (mb_strlen($url) > 55)
 			{
-				$url = mb_substr($link, 0, 30) . '[...]' . mb_substr($link, -20);
+				$short = mb_substr($link, 0, 30) . '[...]' . mb_substr($link, -20);
 
-				return $wacko->pre_link($link, $url) . $tail;
+				// the label is escaped here, because link() is called with $safe = true
+				// by PostWacko and does not escape it
+				return $wacko->pre_link($link, Ut::html($short)) . $punctuation;
 			}
 			else
 			{
-				return $wacko->pre_link($link, $link) . $tail;
+				return $wacko->pre_link($link, Ut::html($link)) . $punctuation;
 			}
 		}
 		else if (preg_match('/^((geo|tel)\:[' . $wacko::PATTERN['URI'] . '+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
-			[$link, $punctuation]	= $this->split_url_punctuation($thing);
+			[$link, $punctuation] = $this->split_url_punctuation($thing);
 
-			return $wacko->pre_link($link, $link) . $punctuation;
+			return $wacko->pre_link($link, Ut::html($link)) . $punctuation;
 		}
 		// lan path
 		else if (preg_match('/^\\\\\\\\([' . $wacko::PATTERN['ALPHANUM_P'] . '\\\!\.\-\_]+)$/u', $thing, $matches))
@@ -945,14 +952,26 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', true, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+:[' . $wacko::PATTERN['ALPHANUM_P'] . '\!\.][' . $wacko::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
+		else if (preg_match('/^(' . $this->INTERWIKI_PATTERN . '+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
-			return $wacko->pre_link($matches[1]) . $matches[2];
+			// trailing punctuation belongs to the text and must not become part of the link
+			[$link, $punctuation] = $this->split_url_punctuation($thing);
+
+			// the text fragment directive ("#:~:text=from,to") is not part of the label
+			$label = $link;
+
+			if (preg_match('/^(.*?)(#:~:.*)$/us', $link, $fragment_matches))
+			{
+					$label = $fragment_matches[1];
+			}
+
+			// the target is passed unchanged, the link handler builds the URL from it
+			return $wacko->pre_link($link, Ut::html($label)) . $punctuation;
 		}
 		// wacko links!
 		else if ((!$wacko->noautolinks)
-				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko::PATTERN['UPPER'] . $wacko::PATTERN['LOWER'] . '+' . $wacko::PATTERN['UPPERNUM'] . $wacko::PATTERN['ALPHANUM'] . '*)$/us', $thing, $matches)))
+			&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko::PATTERN['UPPER'] . $wacko::PATTERN['LOWER'] . '+' . $wacko::PATTERN['UPPERNUM'] . $wacko::PATTERN['ALPHANUM'] . '*)$/us', $thing, $matches)))
 		{
 			if ($matches[1] == '~')
 			{
@@ -1398,16 +1417,23 @@ class WackoFormatter
 	 */
 	private function split_url_punctuation(string $url): array
 	{
-		// the fragment is opaque
+		// a text fragment directive ("#:~:text=from,to") is opaque, its content may
+		// legitimately end with punctuation which is part of the selection,
+		// every other fragment ("#Section") is ordinary text
 		$pos		= strpos($url, '#');
-		$head		= $pos === false ? $url : substr($url, 0, $pos);
-		$fragment	= $pos === false ? '' : substr($url, $pos);
+		$fragment	= '';
+
+		if ($pos !== false && str_starts_with(substr($url, $pos), '#:~:'))
+		{
+			$fragment	= substr($url, $pos);
+			$url		= substr($url, 0, $pos);
+		}
 
 		$trailing	= '';
 
-		while ($head !== '')
+		while ($url !== '')
 		{
-			$last = mb_substr($head, -1);
+			$last = mb_substr($url, -1);
 
 			// brackets are only part of the URL when they are balanced
 			if (str_contains('()[]{}', $last))
@@ -1416,8 +1442,8 @@ class WackoFormatter
 				$reverse	= array_flip($pairs);
 
 				$balance	= isset($pairs[$last])
-					? mb_substr_count($head, $last) - mb_substr_count($head, $pairs[$last])
-					: mb_substr_count($head, $reverse[$last]) - mb_substr_count($head, $last);
+					? mb_substr_count($url, $last) - mb_substr_count($url, $pairs[$last])
+					: mb_substr_count($url, $reverse[$last]) - mb_substr_count($url, $last);
 
 				if ($balance == 0)
 				{
@@ -1425,7 +1451,7 @@ class WackoFormatter
 				}
 
 				$trailing	= $last . $trailing;
-				$head		= mb_substr($head, 0, -1);
+				$url		= mb_substr($url, 0, -1);
 				continue;
 			}
 
@@ -1436,10 +1462,10 @@ class WackoFormatter
 			}
 
 			$trailing	= $last . $trailing;
-			$head		= mb_substr($head, 0, -1);
+			$url		= mb_substr($url, 0, -1);
 		}
 
-		return [$head . $fragment, $trailing];
+		return [$url . $fragment, $trailing];
 	}
 
 	/**

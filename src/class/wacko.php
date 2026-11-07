@@ -4428,18 +4428,42 @@ class Wacko
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'userlink';
 		}
-		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+):([' . self::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#\%]*)$/u', $tag, $matches))
 		{
 			// interwiki -> wiki:page
-			$_parts	= explode('/', $matches[2]);
-			$__parts = [];
+			// the fragment ("#Section" or "#:~:text=from,to") is separated from the page
+			// name, it must not be encoded - a text fragment directive is literal
+			$fragment	= '';
+			$page		= $matches[2];
+
+			if (($pos = strpos($page, '#')) !== false)
+			{
+					$fragment	= substr($page, $pos);
+					$page		= substr($page, 0, $pos);
+			}
+
+			$_parts		= explode('/', $page);
+			$__parts	= [];
 			foreach ($_parts as $part)
 			{
-				$__parts[] = str_replace('%23', '#', rawurlencode($part));
+				// decode before encoding, otherwise a percent encoded character would be
+				// encoded twice ("%20" -> "%2520")
+				$__parts[] = str_replace('%23', '#', rawurlencode(rawurldecode($part)));
 			}
+
 			$parts	= implode('/', $__parts);
 
 			$href	= $this->get_inter_wiki_url($matches[1], $parts);
+
+			// the fragment is appended as it is
+			if ($href && $fragment !== '')
+			{
+				$href .= $fragment;
+			}
+
+			// escape the ampersand for the href attribute
+			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', (string) $href));
+
 			$class	= 'iw-' . mb_strtolower($matches[1]);
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'outerlink';
@@ -4949,34 +4973,80 @@ class Wacko
 
 	function create_thumbnail($tbn_image, $src_image, $width, $height): void
 	{
-		if (!file_exists($tbn_image))
+		if (file_exists($tbn_image))
 		{
-			@set_time_limit(0);
-			@ignore_user_abort(true);
+			return;
+		}
 
+		if (!file_exists($src_image))
+		{
+			$this->log(3, 'Thumbnail source missing: ' . $src_image);
+			return;
+		}
+
+		@set_time_limit(0);
+		@ignore_user_abort(true);
+
+		$thumb = null;
+
+		// Try the backends in order: GD first, Imagick as fallback
+		$backends = ['PHPThumb\\GD'];
+
+		if (extension_loaded('imagick'))
+		{
+			$backends[] = 'PHPThumb\\Imagick';
+		}
+
+		foreach ($backends as $backend)
+		{
 			try
 			{
-				$thumb = new PHPThumb\GD($src_image);
+				$candidate = new $backend($src_image);
+
+				if (is_object($candidate))
+				{
+					$thumb = $candidate;
+					break;
+				}
 			}
-			catch (Exception $e)
+			catch (Throwable $e)
 			{
-				// handle error here however you'd like
-			}
-
-			if (is_object($thumb))
-			{
-				$start = microtime(true);
-
-				$thumb->setOptions(['jpegQuality' => (int) $this->db->jpeg_quality]);
-				$thumb->resize($width, $height);
-
-				// requires correct write permissions!
-				$thumb->save($tbn_image);
-
-				$time = microtime(true) - $start;
-				$this->log(5, Ut::perc_replace($this->_t('LogThumbnailGeneration'), $this->number_format($time, 3)) . ' -> ' . $src_image . ' (' . $width . '×' . $height . ')');
+				$this->log(4, 'Thumbnail backend ' . $backend . ' failed for ' . $src_image . ': ' . $e->getMessage());
+				$thumb = null;
 			}
 		}
+
+		if (!is_object($thumb))
+		{
+			$this->log(3, 'Could not create thumbnail for ' . $src_image);
+
+			return;
+		}
+
+		$start = microtime(true);
+
+		try
+		{
+			$thumb->setOptions(['jpegQuality' => (int) $this->db->jpeg_quality]);
+			$thumb->resize($width, $height);
+
+			if (!$thumb->save($tbn_image))
+			{
+				$this->log(3, 'Could not save thumbnail: ' . $tbn_image);
+
+				return;
+			}
+		}
+		catch (Throwable $e)
+		{
+			$this->log(3, 'Thumbnail error for ' . $src_image . ': ' . $e->getMessage());
+
+			return;
+		}
+
+		$time = microtime(true) - $start;
+		$this->log(5, Ut::perc_replace($this->_t('LogThumbnailGeneration'), $this->number_format($time, 3))
+			. ' -> ' . $src_image . ' (' . $width . '×' . $height . ')');
 	}
 
 	function image_link($src, $class, $id, $title, $alt = null, $scale = null): string
@@ -5526,7 +5596,7 @@ class Wacko
 			}
 
 			// tagging
-			if (strpos($url, '%s'))
+			if (str_contains($url, '%s'))
 			{
 				return str_replace('%s', $tag, $url);
 			}
