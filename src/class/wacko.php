@@ -4106,7 +4106,8 @@ class Wacko
 		else if (str_starts_with($tag, '#'))
 		{
 			// HTML anchor #...
-			$href	= $tag;
+			// the ampersand of a text fragment directive has to be escaped for the href attribute
+			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'anchor';
 		}
 		else if (preg_match('/^(https?|ftps?|file):\/\/([^\\s\"<>]+)\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')$/ui', $tag))
@@ -4468,13 +4469,16 @@ class Wacko
 			$icon	= $this->_t('Icon.Outer');
 			$tpl	= 'outerlink';
 		}
-		else if (preg_match('/^([\!\.' . self::PATTERN['ALPHANUM_P'] . ']+)(\#[' . self::PATTERN['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
+		// wiki link, optionally with an anchor ("#TOC_1") or a text fragment ("#:~:text=hello")
+		else if (preg_match('/^([\!\.' . self::PATTERN['ALPHANUM_P'] . ']+)(\#(?::~:text=[^\s#]*|[' . self::PATTERN['ALPHANUM_P'] . ']+))?$/u', $tag, $matches))
 		{
 			// wiki link
 			$aname			= '';
 			$match			= '';
 			$tag			= $matches[1];
 			$anchor			= $matches[2] ?? '';
+			// the ampersand of a text fragment directive has to be escaped for the href attribute
+			$anchor			= str_replace('&', '&amp;', str_replace('&amp;', '&', $anchor));
 			$untag			= $unwrap_tag	= $this->unwrap_link($tag);
 
 			// handler detection with virtual prefix support
