@@ -108,7 +108,8 @@ class PostWacko
 			}
 			else if (isset($this->options['diff']))
 			{
-				return '{{' . $matches[1] . '}}';
+				// the action is not allowed in the diff view, show it as text
+				return '{{' . Ut::html($matches[1]) . '}}';
 			}
 			else
 			{

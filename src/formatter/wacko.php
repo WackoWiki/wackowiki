@@ -56,7 +56,14 @@ if (!empty($parser->auto_fn['content']))
 
 	foreach ($parser->auto_fn['content'] as $fn_no => $fn)
 	{
+		// the content is wiki markup and is parsed again, it must therefore not be
+		// escaped here - the escaping is done by the parser (wacko_callback)
 		$footnote	 =	preg_replace_callback($parser->LONG_REGEX, [&$parser, 'wacko_callback'], $fn);
+
+		// the number is used as attribute value and as text (it is restricted to
+		// "[\p{L}\d*†‡§‖¶]", the escaping is only a safety net)
+		$fn_no		=	Ut::html((string) $fn_no);
+
 		$footnotes	.=	'<dt>[<a title="footnote ' . $fn_no . ' ref" href="#footnote-' . $fn_no . '-ref">' . $fn_no . "</a>]</dt>\n" .
 							'<dd id="footnote-' . $fn_no . '">' . $footnote . "</dd>\n";
 	}

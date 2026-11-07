@@ -327,9 +327,14 @@ class WackoFormatter
 		else if (preg_match('/^\{\{(.*?)\}\}$/us', $thing, $matches))
 		{
 			// used in paragrafica, too
+			// the action is placed inside an HTML comment and is delimited by markers,
+			// it must neither terminate the comment ("-->") nor contain the markers
+			// themselves, otherwise the rest of the action would end up as raw HTML
+			$action	= str_replace('-->', '--&gt;', str_replace("\n", ' ', $matches[1]));
+
 			return
 				'<!--escaped--><ignore><!--notypo--><!--action:begin-->' .
-					str_replace("\n", ' ', $matches[1]) .
+					$action .
 				'<!--action:end--><!--/notypo--></ignore><!--escaped-->';
 		}
 
@@ -686,7 +691,8 @@ class WackoFormatter
 
 				$text = preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $text);
 
-				return '<dfn title="' . Ut::html($text) . '">' . $def . '</dfn>';
+				// the defined term is user input and must not be interpreted as HTML
+				return '<dfn title="' . Ut::html($text) . '">' . Ut::html($def) . '</dfn>';
 			}
 
 			return '';
@@ -733,7 +739,8 @@ class WackoFormatter
 
 					return
 						($sup ? '<sup>' : '') .
-							'<a href="#o' . $aname . '" id="' . $aname . '">' . $text . '</a>' .
+							// the link text is user input and must not be interpreted as HTML
+							'<a href="#o' . $aname . '" id="' . $aname . '">' . Ut::html($text) . '</a>' .
 						($sup ? '</sup>' : '');
 				}
 				// footnote [[#*]], [[#**]], [[#1]], [[#2]]
@@ -763,7 +770,8 @@ class WackoFormatter
 
 					return
 						($sup ? '<sup>' : '') .
-							'<a href="#' . $ahref . '" id="o' . $ahref . '">' . $text . '</a>' .
+							// the link text is user input and must not be interpreted as HTML
+							'<a href="#' . $ahref . '" id="o' . $ahref . '">' . Ut::html($text) . '</a>' .
 						($sup ? '</sup>' : '');
 				}
 				// auto-generated footnote [[^ footnote here]]
@@ -800,7 +808,9 @@ class WackoFormatter
 					$text	= preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/u', '', $text);
 
 					#Diag::dbg('GOLD', ' ::forced:: ' . $thing . ' => ' . $url . ' -> ' . $text);
-					return $result . $wacko->pre_link($url, $text);
+					// the link text is user input and must not be interpreted as HTML
+					// (the link handler is called with $safe = true and does not escape it)
+					return $result . $wacko->pre_link($url, Ut::html($text));
 				}
 			}
 
@@ -1200,7 +1210,7 @@ class WackoFormatter
 			// assign attributes
 			if ($tag === 'table')
 			{
-				if (isset($params['type'])
+				if (isset($params['type'], $params['class'])
 					&& preg_match('/^[\w-]+$/', $params['class']))
 				{
 					$class[] = ' ' . $params['class'];
@@ -1351,10 +1361,14 @@ class WackoFormatter
 			$this->auto_fn['content'][$fn_count] = trim($text);
 		}
 
+		// the denominator is restricted to "[\p{L}\d*†‡§‖¶]" (see above), escape it
+		// nevertheless for the HTML output
+		$fn	= Ut::html((string) $fn_count);
+
 		return
 			'<sup class="footnote">' .
-				'<a href="#footnote-' . $fn_count . '" id="footnote-' . $fn_count . '-ref" title="footnote ' . $fn_count . '">' .
-					'[' . $fn_count . ']' .
+				'<a href="#footnote-' . $fn . '" id="footnote-' . $fn . '-ref" title="footnote ' . $fn . '">' .
+					'[' . $fn . ']' .
 				'</a>' .
 			'</sup>';
 	}
