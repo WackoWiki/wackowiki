@@ -4585,7 +4585,7 @@ class Wacko
 
 			if ($this_page)
 			{
-				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ?: '');
+				$page_link	= $this->href($handler ?: $method, $this_page['tag']) . ($anchor ?: '');
 				$page_id	= $this_page['page_id'];
 
 				// set an anchor once for page link at the first appearance
