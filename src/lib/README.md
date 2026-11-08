@@ -14,12 +14,12 @@ The version and status of each is summarized below:
 | hashids			| Hashids			| 5.0.2		| Composer |
 | htmlsax3			| HTMLSAX3			| 4.1.3		| Composer |
 | php-diff			| php-diff			| 2.5.2		| Composer |
-| phiki				| phiki				| 2.2.0		| Composer |
-| phpmailer			| PHPMailer			| 7.1.1		| Composer |
+| phiki				| phiki				| 2.2.1		| Composer |
+| phpmailer			| PHPMailer			| 7.2.0		| Composer |
 | phpthumb			| PhpThumb			| 2.5.0		| Composer |
 | safehtml			| SafeHTML			| 1.4.3		| Composer |
 | simplepie			| SimplePie			| 1.9.0		| Composer |
-| svg-sanitizer		| svg-sanitizer		| 1.0.0		| Composer |
+| svg-sanitizer		| svg-sanitizer		| 1.1.1		| Composer |
 | templatest		| Templatest		| 0.9		| Composer |
 
 ## JavaScript libraries
