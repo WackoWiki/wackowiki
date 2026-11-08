@@ -1,0 +1,244 @@
+/* ==========================================================================
+   Sticky Table of Contents – WackoWiki
+   Lives optionally on the right of <main>. Does not replace {{toc}}.
+   ========================================================================== */
+
+/* Layout: content + sticky sidebar */
+.ww-layout-with-toc {
+	display: flex;
+	gap: 1.5rem;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.ww-layout-with-toc > .ww-content-primary {
+	flex: 1 1 auto;
+	min-width: 0; /* prevent overflow from long code blocks */
+}
+
+/* ---- Sidebar shell ---- */
+.ww-sticky-toc {
+	flex: 0 0 220px;
+	position: sticky;
+	top: 1rem;
+	align-self: flex-start;
+	max-height: calc(100vh - 2rem);
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+	border-left: 1px solid var(--ww-border, #ddd);
+	font-size: 0.8125rem;
+	line-height: 1.35;
+	scrollbar-width: thin;
+}
+
+[dir="rtl"] .ww-sticky-toc {
+	border-left: none;
+	border-right: 1px solid var(--ww-border, #ddd);
+}
+
+.ww-sticky-toc__title {
+	margin: 0 0 0.5rem;
+	padding: 0 0.25rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--ww-text-secondary, #666);
+}
+
+.ww-sticky-toc__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ww-sticky-toc__list ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0 0.75rem;
+}
+
+[dir="rtl"] .ww-sticky-toc__list ul {
+	padding: 0 0.75rem 0 0;
+}
+
+.ww-sticky-toc__item {
+	margin: 0;
+}
+
+/* Nested depth via data-level (h2=2 … h6=6) */
+.ww-sticky-toc__item[data-level="3"] > a { padding-left: 0.5rem; }
+.ww-sticky-toc__item[data-level="4"] > a { padding-left: 1rem; }
+.ww-sticky-toc__item[data-level="5"] > a { padding-left: 1.5rem; }
+.ww-sticky-toc__item[data-level="6"] > a { padding-left: 2rem; }
+
+[dir="rtl"] .ww-sticky-toc__item[data-level="3"] > a { padding-left: 0; padding-right: 0.5rem; }
+[dir="rtl"] .ww-sticky-toc__item[data-level="4"] > a { padding-left: 0; padding-right: 1rem; }
+[dir="rtl"] .ww-sticky-toc__item[data-level="5"] > a { padding-left: 0; padding-right: 1.5rem; }
+[dir="rtl"] .ww-sticky-toc__item[data-level="6"] > a { padding-left: 0; padding-right: 2rem; }
+
+.ww-sticky-toc a {
+	display: block;
+	padding: 0.3rem 0.4rem;
+	color: var(--ww-text-secondary, #555);
+	text-decoration: none;
+	border-left: 3px solid transparent;
+	border-radius: 0 2px 2px 0;
+	transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+[dir="rtl"] .ww-sticky-toc a {
+	border-left: none;
+	border-right: 3px solid transparent;
+	border-radius: 2px 0 0 2px;
+}
+
+.ww-sticky-toc a:hover {
+	color: var(--ww-link, #007bff);
+	background: var(--ww-bg-tertiary, #f5f5f5);
+}
+
+/* Active section */
+.ww-sticky-toc a.is-active {
+	color: var(--ww-link, #007bff);
+	font-weight: 600;
+	border-left-color: var(--ww-link, #007bff);
+	background: var(--ww-bg-tertiary, #f0f6ff);
+}
+
+[dir="rtl"] .ww-sticky-toc a.is-active {
+	border-left-color: transparent;
+	border-right-color: var(--ww-link, #007bff);
+}
+
+/* Comment *title* marker only (not body headings inside a comment) */
+.ww-sticky-toc__item.is-comment > a::before {
+	content: "💬 ";
+	font-size: 0.7em;
+	opacity: 0.7;
+}
+
+.ww-sticky-toc__group-label {
+	margin: 0.75rem 0 0.25rem;
+	padding: 0.2rem 0.4rem;
+	font-size: 0.7rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	color: var(--ww-text-tertiary, #888);
+	border-top: 1px dashed var(--ww-border, #ddd);
+}
+
+/* Limiting visible items: hidden neighbours */
+.ww-sticky-toc__item.is-dimmed {
+	opacity: 0.35;
+}
+
+.ww-sticky-toc__item.is-hidden {
+	display: none;
+}
+
+/* ---- Mobile: floating button + drawer ---- */
+.ww-sticky-toc-toggle {
+	display: none;
+	position: fixed;
+	bottom: 5.5rem;
+	right: 1.25rem;
+	z-index: 90;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: none;
+	border-radius: 50%;
+	background: var(--ww-link, #007bff);
+	color: #fff;
+	font-size: 1.1rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+[dir="rtl"] .ww-sticky-toc-toggle {
+	right: auto;
+	left: 1.25rem;
+}
+
+.ww-sticky-toc-toggle[aria-expanded="true"] {
+	background: var(--ww-text-secondary, #555);
+}
+
+@media (max-width: 900px) {
+	.ww-layout-with-toc {
+		flex-direction: column;
+	}
+
+	.ww-sticky-toc {
+		display: none;
+		position: fixed;
+		top: auto;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		flex: none;
+		width: 100%;
+		max-height: 45vh;
+		border-left: none;
+		border-top: 1px solid var(--ww-border, #ddd);
+		border-radius: 12px 12px 0 0;
+		background: var(--ww-bg-secondary, #fff);
+		box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+		z-index: 95;
+		padding-bottom: env(safe-area-inset-bottom, 0.5rem);
+	}
+
+	.ww-sticky-toc.is-open {
+		display: block;
+	}
+
+	.ww-sticky-toc-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+/* Widescreen: give sidebar a bit more room when mainwrapper is wide */
+@media (min-width: 1200px) {
+	.ww-sticky-toc {
+		flex-basis: 260px;
+	}
+}
+
+/* Dark mode tweaks */
+:root[data-theme="dark"] .ww-sticky-toc a.is-active,
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) .ww-sticky-toc a.is-active {
+		background: rgba(110, 168, 228, 0.12);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.ww-sticky-toc a {
+		transition: none;
+	}
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+/* Offset for sticky site header when jumping to anchors */
+.ww-sticky-toc ~ .ww-content-primary h2[id],
+.ww-sticky-toc ~ .ww-content-primary h3[id],
+.ww-layout-with-toc .heading[id],
+#page-show .heading[id],
+#header-comments .heading[id],
+.comment-body .heading[id] {
+	scroll-margin-top: 1.25rem;
+}
