@@ -2691,7 +2691,7 @@ function admin_tool_badbehaviour($engine, $module)
 	// ============================================================
 	// Options editor
 	// ============================================================
-	function bb_options($engine, array $settings = null)
+	function bb_options($engine, ?array $settings = null)
 	{
 		if ($settings === null) $settings = bb_read_settings($engine);
 

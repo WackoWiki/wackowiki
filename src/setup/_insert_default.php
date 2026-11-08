@@ -12,7 +12,7 @@ $password_hashed		= password_hash(
 								);
 
 $file_path	= Ut::join_path(UPLOAD_GLOBAL_DIR, $config['site_logo']);
-$image_size	= @getimagesize($file_path);
+$image_size	= Ut::get_image_dimensions($file_path);
 $file_size	= filesize($file_path);
 $file_hash	= sha1_file($file_path);
 
@@ -170,8 +170,8 @@ $insert_logo_image =
 		" . utc_dt() . ",
 		" . utc_dt() . ",
 		'" . (int) $file_size . "',
-		'" . (int) $image_size[0] . "',
-		'" . (int) $image_size[1] . "',
+		'" . (int) $image_size['width'] . "',
+		'" . (int) $image_size['height'] . "',
 		'png',
 		'image/png',
 		'" . _q($file_hash) . "'
