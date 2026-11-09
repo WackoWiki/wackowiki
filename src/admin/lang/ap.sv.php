@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Det administrativa lösenordet har inte angetts!',
 	'NoRecoveryPasswordTip'		=> 'Obs: Avsaknaden av ett administrativt lösenord är ett hot mot säkerheten! Ange ditt lösenord hash i konfigurationsfilen och kör programmet igen.',
 
+	'ApDevNologinBlocked'		=> 'Åtkomst blockerad: AP_DEV_NOLOGIN är aktiverad i admin.php men begäran kom inte från localhost (127.0.0.1, ::1 eller localhost). Detta är en utvecklingsflagga och måste inaktiveras vid produktion. Sätt <code>AP_DEV_NOLOGIN = 0</code> i admin.php för att återställa åtkomst.',
+	'ApDevNologinBlockedLog'	=> '!!! SÄKERHET: %1 är aktiverad, men admin.php har åtkomst från en icke-localhost-adress (%2). Admin panel har blockerats.',
+
 	'ErrorLoadingModule'		=> 'Fel vid laddning av adminmodul %1: finns inte.',
 
 	'ApHomePage'				=> 'Startsida',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Avsluta systemadministration och logga ut från webbplatsen',
 
 	'TimeLeft'					=> 'Tid kvar:  %1 minut(er)',
+	'TimeLeftInfinity'			=> 'Tid kvar:  %1 (utvecklarläge)',
 	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'Öppna',
@@ -920,8 +924,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'Skapa en miniatyrbild i alla tänkbara situationer.',
-	'JpegQuality'				=> 'JPEG kvalitet:',
-	'JpegQualityInfo'			=> 'Kvalitet vid skalning av en JPEG-miniatyrbild. Den ska vara mellan 1 och 100, med 100 tecken på 100 % kvalitet.',
+	'ImageQuality'				=> 'Förinställd bildkvalitet:',
+	'ImageQualityInfo'			=> 'Kvalitet vid skalning av en miniatyrbild. Förinställningar som plockar per-codec värden som ger ett jämförbart perceptuellt resultat.',
 	'MaxImageArea'				=> 'Maximalt bildområde:',
 	'MaxImageAreaInfo'			=> 'Det maximala antalet pixlar en källbild kan ha. Detta ger en gräns för minnesanvändning för dekompressionssidan av bildskalan.<br><code>-1</code> betyder att det inte kommer att kontrollera storleken på bilden innan du försöker skala den. <code>0</code> betyder att det kommer att bestämma värdet automatiskt.',
 	'MaxThumbWidth'				=> 'Maximal miniatyrbredd i pixlar:',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> 'inte högre än',
 		'3'		=> 'lika',
 	],
-	'LogNoMatch'				=> 'Inga händelser som uppfyller kriterierna',
 	'LogDate'					=> 'Datum',
 	'LogEvent'					=> 'Händelse',
 	'LogUsername'				=> 'Användarnamn',
@@ -967,6 +970,49 @@ $ap_translation = [
 		'6'		=> 'lägsta',
 		'7'		=> 'felsökning',
 	],
+
+	'LogCollapse'        => 'kollapsa',
+	'LogExpand'          => 'expandera',
+	'LogType'              => 'Typ',
+	'LogSearch'            => 'Sök',
+	'LogSearchPlaceholder' => 'sök meddelanden...',
+	'LogUserId'            => 'Användar-ID',
+	'LogExactMatch'        => 'exakt matchning',
+	'LogFrom'              => 'Från',
+	'LogTo'                => 'Till',
+	'LogSupportKey'        => 'Support nyckel',
+	'LogContext'           => 'Kontext',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Användar agent',
+	'LogReferer'           => 'Referens',
+	'LogTotal'             => 'Totalt',
+	'LogFilteredBy'        => 'Filtrerad av',
+	'LogClearFilter'       => 'Rensa filter',
+	'LogActions'           => 'Åtgärder',
+	'LogDelete'            => 'Radera',
+	'LogDeleteConfirm'     => 'Ta bort denna loggpost?',
+	'LogDeleteSelected'    => 'Ta bort markerade',
+	'LogBulkAction'        => '— massåtgärd —',
+	'LogApply'             => 'Tillämpa',
+	'LogExportCSV'         => 'Exportera CSV',
+	'LogExportJSON'        => 'Exportera JSON',
+	'LogPurged'            => 'Loggbord trunkerat.',
+	'LogPurgedFiltered'     => '%1 loggposter raderade av filter.',
+	'LogDeleted'           => 'Loggpost borttagen.',
+	'LogDeletedBulk'        => '%1 loggposter borttagna.',
+	'LogPurgeSection'      => 'Destruktiva operationer',
+	'LogPurgeWarning'      => 'Det finns %1 poster som matchar den aktuella vyn. Använd med försiktighet.',
+	'LogPurgeConfirm'      => 'Jag förstår att detta kommer att ta bort loggposter permanent',
+	'LogPurgeFiltered'     => 'Rensa matchande filter',
+	'LogPurgeFilteredConfirm' => 'Ta bort alla poster som matchar det aktuella filtret? Detta kan inte ångras.',
+	'LogPurgeAll'          => 'Rensa ENTIRE-loggen',
+	'LogPurgeAllConfirm'   => 'Ta bort VARJE logg i databasen? Detta kan inte ångras.',
+	'LogFindRelated'       => 'Hitta relaterade poster',
+	'LogNoMatch'           => 'Inga loggposter matchar det aktuella filtret.',
+
+	'LogMarkAll'                => 'Markera alla rader på denna sida',
+	'LogMarkNone'               => 'Avmarkera alla rader',
+	'LogSelectRow'              => 'Välj rad',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Här kan du mejla ett meddelande till antingen (1) alla dina användare eller (2) alla användare i en specifik grupp som har aktiverat mottagande av massutskick. Ett e-postmeddelande kommer att skickas ut till den administrativa e-postadressen som levereras, med en blind kopia (BCC) skickas till alla mottagare. Standardinställningen är att inkludera högst 20 mottagare i ett sådant e-postmeddelande. Om det finns fler än 20 mottagare kommer ytterligare e-post att skickas. Om du skickar e-post till en stor grupp människor, vänligen ha tålamod efter att ha skickat in och inte stoppa sidan halvvägs. Det är normalt att en massa e-post tar lång tid. Du kommer att meddelas när skriptet har slutförts.',
@@ -1275,6 +1321,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Sidhuvuden',
 	'BbEntity'					=> 'Enhet',
 
+	'BbSearchPlaceholder'        => 'Sök UA, URI, IP, värd, support_key, status…',
+	'BbFilterAnyCategory'        => 'Valfri kategori',
+	'BbFilterAnyMethod'          => 'Valfri metod',
+	'BbFilterAnyStatus'          => 'Valfri status',
+	'BbFilterBlockedOnly'        => 'Endast blockerad',
+	'BbFilterPermittedOnly'      => 'Endast tillåten',
+	'BbFilterApply'              => 'Tillämpa',
+	'BbFilterClear'              => 'Rensa filter',
+	'BbChipSearch'               => 'Sök',
+	'BbChipCategory'             => 'Kategori',
+	'BbChipMethod'               => 'Metod',
+	'BbChipStatus'               => 'Status',
+	'BbChipRemove'               => 'Ta bort detta filter',
+	'BbFilterByCategory'         => 'Filtrera på denna kategori',
+	'BbSearchBySupportKey'       => 'Sök efter denna supportnyckel',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Valfri kontrollstatus',
+	'BbFilterCheckedOnly'      => 'Endast kontrollerad',
+	'BbFilterUncheckedOnly'    => 'Endast avmarkerad',
+	'BbChipCheck'              => 'Kontrollera status',
+	'BbChecked'                => 'kontrollerad',
+	'BbUnchecked'              => 'avmarkerad',
+	'BbActionCheck'            => 'kontrollera',
+	'BbActionUncheck'          => 'avmarkera',
+	'BbRowChecked'             => 'Loggpost markerad som markerad',
+	'BbRowUnchecked'           => 'Loggpost avmarkerad',
+	'BbRowCheckedHint'         => 'Denna post kontrolleras — undantaget från automatisk rensning',
+	'BbRowUncheckedHint'       => 'Markera denna post för att hålla den över automatisk rensning',
+	'BbBulkCheckSelected'      => 'Markera som markerad',
+	'BbBulkUncheckSelected'    => 'Avmarkera markerad',
+	'BbBulkChecked'            => 'Markerade %1 poster som markerade',
+	'BbBulkUnchecked'          => 'Avmarkerade %1 poster',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Alternativ sparade.',
 	'BbWhitelistHint'			=> 'Olämplig vitlistning kommer att utsätta dig för skräppost, eller orsaka Bad Behaviour att sluta fungera helt! INTE VITELIST såvida du inte är 100% CERTAIN som du borde.',
@@ -1308,5 +1388,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Aktivera omvänd proxy',
 	'BbReverseProxyHeader'		=> 'Header som innehåller Internetklienter IP-adress',
 	'BbReverseProxyAddresses'	=> 'IP-adress eller CIDR-format adressintervall för dina proxyservrar (en per rad)',
+
+	'BbBehavioral'           => 'Beteendeanalys',
+	'BbEnableBehavioral'     => 'Aktivera beteendeanalys (hastighetsavvikelser, roterande UA/IP)',
+	'BbEnableBehavioralInfo' => 'Spårar förfrågningsmönster per session. Säker att hålla aktiverad.',
+	'BbEnableFingerprinting' => 'Aktivera TLS/HTTP/2 fingeravtryck (JA3, H2, header order)',
+	'BbEnableFingerprintingInfo' => 'Blockerar endast kända dåliga fingeravtryck. Kräver enable_fingerprinting=true. Kan orsaka falska positiva på gamla webbläsare/proxyer.',
+	'BbInspectJson'          => 'Inspektera JSON begära kroppar för attacker',
+	'BbInspectJsonInfo'      => 'VARNING: Bryter AJAX/JSON API:er (wiki-markering, kodsnippets utlöser falskt positivt). Behåll AV.',
+	'BbInspectMultipart'     => 'Inspektera multipart/form-data-kroppar för attacker',
+	'BbInspectMultipartInfo' => 'VARNING: Bryter filuppladdningar. Behåll AV.',
+
+	'BbEnableClientHints'      => 'Aktivera validering av kundtips',
+	'BbEnableClientHintsInfo'  => 'Validera Sec-CH-UA headers mot User-Agent för att upptäcka förfalskade webbläsare (Chrome 89+).',
+	'BbEnableAgentic'          => 'Aktivera Agentic Behavior Detection',
+	'BbEnableAgenticInfo'      => 'Detektera AI-agent mönster: think-då-fetch, icke-linjär navigering, precision targeting.',
+	'BbStrictSearchEngines'    => 'Stränga sökmotorer',
+	'BbStrictSearchEnginesInfo' => 'Tillämpa strängare kontroller för overifierade sökmotorrobotar (Googlebot, Bingbot, …) innan de släpps igenom.',
+	'BbEnableDynamicIp'        => 'Enable Dynamic IP Range Fetching',
+	'BbEnableDynamicIpInfo'    => 'Fetch official IP ranges from Google, Bing, OpenAI, Anthropic, Apple, etc. (cached 24h, stale fallback 7 days).',
+
+	'BbAiCrawlers'           => 'AI Crawler kontroll',
+	'BbBlockUnverifiedAi'    => 'Blockera overifierade AI-sökare',
+	'BbBlockUnverifiedAiInfo' => 'Blockerar AI kryptörer som misslyckas DNS/IP-verifiering (förfalskade robotar).',
+	'BbStrictAi'             => 'Strikt AI-läge (block även verifierat otillåtet AI)',
+	'BbStrictAiInfo'         => 'Blockerar ALLA AI-krypskyttar som inte är tillåtna i listan även om de är verifierade.',
+	'BbAllowedAiCrawlers'    => 'Tillåtna AI crawler-tokens (en per rad)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Aktivera DNSBL-kontroller',
+	'BbDnsblLists'           => 'DNSBL listor (en per rad)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Betygsätt Begränsning',
+	'BbRateLimitEnabled'     => 'Aktivera hastighetsbegränsning',
+	'BbRateGlobalRequests'   => 'Globala förfrågningar per fönster',
+	'BbRateGlobalWindow'     => 'Globalt fönster (sekunder)',
+	'BbRatePerMinuteRequests'=> 'Förfrågan per minut',
+	'BbRatePerMinuteWindow'  => 'Per-minuten-fönster (sekunder)',
+	'BbRatePostRequests'     => 'POST förfrågningar per fönster',
+	'BbRatePostWindow'       => 'POST fönster (sekunder)',
+	'BbRateLoginRequests'    => 'Inloggningsförfrågningar per fönster',
+	'BbRateLoginWindow'      => 'Inloggningsfönster (sekunder)',
+
+	'BbChallenge'            => 'Utmaningssystem',
+	'BbChallengeEnabled'     => 'Aktivera utmaningar',
+	'BbChallengeProvider'    => 'Utmaningsleverantör',
+	'BbChallengeSiteKey'     => 'Webbplatsens nyckel',
+	'BbChallengeSecretKey'   => 'Hemlig nyckel',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min poäng',
+
+	'BbPerformance'          => 'Prestation',
+	'BbSkipExtensions'       => 'Hoppa över tillägg (en per rad)',
+	'BbSkipPaths'            => 'Hoppa över sökvägsprefix (en per rad)',
+
+	'BbGeoip'                => 'GeoIP / ASN Blockering',
+	'BbGeoipEnabled'         => 'Aktivera GeoIP-sökningar',
+	'BbGeoipDbPath'          => 'MaxMind DB sökväg',
+	'BbBlockedCountries'     => 'Blockerade länder (ISO-koder, en per rad)',
+	'BbBlockedAsns'          => 'Blockerade ASNs (en per rad)',
+
+	'BbBlockPage'                  => 'Block Page',
+	'BbShowDetailedBlockPage'      => 'Show detailed block page',
+	'BbShowDetailedBlockPageInfo'  => 'Show reason, request URI, and technical support key on the block page. Recommended for production.',
+	'BbShowContactInfo'            => 'Show contact info on block page',
+	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
+	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Grundläggande inställningar',
+	'BbAdvancedSection'   => 'Avancerade inställningar',
+	'BbAdvancedHint'      => 'De flesta operatörer bör inte behöva ändra på dessa.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Vilka robotar att känna igen. "minimal" (standard) är snabbast; "full" är mest grundläggande.',
+	'BbStrictness'        => 'Blockerar hållning',
+	'BbStrictnessInfo'    => 'monitor-only loggar men blockerar ingenting; normala block verifierade attackerare; strikta block aggressivt.',
+	'BbLoggingMode'       => 'Loggar',
+	'BbLoggingModeInfo'   => 'Normal (rekommenderas), Verbose (loggar varje begäran), Av',
+	'BbLogModeNormal'     => 'Normal',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Av',
+	'BbBehindProxy'       => 'Webbplatsen är bakom en omvänd proxy eller CDN',
+	'BbBehindProxyInfo'   => 'Aktivera om bakom Cloudflare, AWS, GCP, Snabbt, etc. Du måste lägga till proxy IP-intervall i Avancerat — utan dem kan verkliga klient-IP-adresser inte fastställas.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Kärna',
+	'BbAdvReverseProxy'   => 'Omvänd proxy',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Bot Kategorier',
+	'BbAdvDnsVerification'=> 'Verifiering av DNS',
+	'BbAdvRateLimits'     => 'Betygsätt Begränsning',
+	'BbAdvHeadDetection'  => 'Identifiering av huvudbegäran',
+	'BbAdvAssetScraping'  => 'Identifiering av tillgångsskrotning',
+	'BbAdvDynamicIp'      => 'Dynamiska IP-intervall',
+	'BbAdvOnDemandRefresh'=> 'On-Demand IP-uppdatering',
+	'BbAdvHttpbl'         => 'Projekt Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Utmaning / CAPTCHA',
+	'BbAdvPerformance'    => 'Prestation',
+	'BbAdvGeoip'          => 'GeoIP / ASN Blockering',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 fingeravtryck',
+	'BbAdvCustomRules'    => 'Anpassade regler',
+	'BbAdvBlockPage'      => 'Blockera sida',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Sökmotor',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Social Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Arkivera Crawler',
+	'BbCatMonitoring'     => 'Övervakning',
+	'BbCatFeedReader'     => 'Feed Läsare',
+	'BbCatShoppingCrawler'=> 'Shopping Crawler',
+	'BbCatCloudInfra'     => 'Molninfrastruktur',
+	'BbCatSecurityScanner'=> 'Säkerhetsskanner',
+	'BbCatResidentialProxy'=> 'Bostadsproxy',
+	'BbCatMalicious'      => 'Skadlig',
+	'BbCatUnknown'        => 'Okänd',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Molnflare',
+	'BbCloudProviderFastly'     => 'Snabbt',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Begränsa uppdatering på begäran till specifika leverantörer. Tom = alla fyra.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Logga kvarhållande',
+	'BbLogRetentionEnabled'          => 'Aktivera automatisk rensning av logg',
+	'BbLogRetentionEnabledInfo'      => 'Ta periodvis bort loggrader äldre än retentionsfönstret. Rekommenderas för webbplatser utan cron-åtkomst.',
+	'BbLogRetentionMaxAgeDays'       => 'Lagring fönster (dagar)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rader äldre än detta tas bort. Standard: 7. Gemensamma värden: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maximalt antal rader (0 = ingen cap)',
+	'BbLogRetentionMaxRowsInfo'      => 'Om satt, äldsta rader tas bort när tabellen överstiger denna storlek, oavsett ålder. Användbart för högtrafikerade webbplatser.',
+	'BbLogRetentionProbability'       => 'Sannolikhetsnämnare (1 i N)',
+	'BbLogRetentionProbabilityInfo'   => '1 in N begär kontrollerar staleness gate. Högre = mindre DB belastning. Standard: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minsta intervall mellan rensningar (sekunder)',
+	'BbLogRetentionMinIntervalInfo'  => 'Hårt golv på städfrekvensen. Standard: 21600 (6t).',
+	'BbLogRetentionLockTtl'          => 'Rensa lås TTL (sekunder)',
+	'BbLogRetentionLockTtlInfo'      => 'Hur länge städningen mutex hålls. Standard: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Aktivera DNS-verifiering',
+	'BbDnsVerificationInfo'     => 'Verifiera bot anspråk (t.ex. Googlebot) genom reverse-DNS lookup. Fånga förfalskade botar.',
+	'BbDnsTimeoutMs'            => 'Tidsgräns för DNS-sökning (ms)',
+	'BbDnsPositiveTtl'          => 'Positiv cache TTL (sekunder)',
+	'BbDnsNegativeTtl'          => 'Negativ cache TTL (sekunder)',
+	'BbDnsRequireForward'       => 'Kräv framåtriktad bekräftelse (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Fånga PTR-förfalskning men lägger till latens och IPv6 FP-risk.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD undantagna sökvägar (en per rad)',
+	'BbHeadRefererExemptInfo'   => 'Sökvägar där HEAD utan referens är legitima (t.ex. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Tillgång tillägg för att skydda (en per rad)',
+	'BbAssetExtensionsInfo'     => 'Filtyper sedda för direkt skrapning utan sidladdningar.',
+
+	'BbOnDemandBotIds'          => 'Bot ID att uppdatera (tomt = alla)',
+	'BbOnDemandBotIdsInfo'      => 'Begränsa uppdatera till specifika robotar. Lämna tomt för att uppdatera alla registrerade robotar.',
+	'BbOnDemandProbability'     => 'Sannolikhetsnämnare (1 i N)',
+	'BbOnDemandMinAge'          => 'Minsta cacheålder (sekunder)',
+	'BbOnDemandLockTtl'         => 'Lås TTL (sekunder)',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (sekunder)',
+	'BbOnDemandFeedTimeout'     => 'Hämtningstid för flöde (sekunder)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (sekunder)',
+	'BbDynamicIpFeeds'          => 'Flöden att uppdatera (en per rad)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Sågs senast',
+	'BbSeverity'             => 'Allvarlighetsgrad',
+	'BbStatusBreakdown'      => 'Statusfördelning',
+	'BbBotBreakdown'         => 'Bot nedbrytning',
+	'BbTopBlocked'           => 'Topp nekade IP-adresser',
+	'BbGeoSummary'           => 'Geografisk sammanfattning',
+	'BbCountry'              => 'Land',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Verifierad %',
+	'BbNoData'               => 'Ingen data för det valda fönstret',
+	'BbCategory'             => 'Kategori',
+	'BbResponseTime'         => 'Svarstid',
+	'BbDateCol'              => 'Tid / IP / Status',
+	'BbSelectRow'            => 'Välj rad',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Endast långsamt',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Löst',
+	'BbChipStatusCode' => 'Statuskod',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Land',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Visa rubriker',
+	'BbViewBody'             => 'Visa kropp',
+	'BbViewContentLabel'     => 'Innehåll',
+	'BbViewModeFull'         => 'Fullt (alltid visat)',
+	'BbViewModeTeaser'       => 'Teaser (klicka för att expandera)',
+	'BbViewModeHidden'       => 'Dold (visa på begäran)',
+	'BbHide'                 => 'dölj',
+	'BbChars'                => 'tecken',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Custom Rules',
+	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
+	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Body scan skip fields',
+	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Avancerade filter',
+	'BbDateFrom'            => 'Från',
+	'BbDateTo'              => 'Till',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Endast långsamma förfrågningar (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Endast aktiv',
+	'BbResolvedOnly'        => 'Endast löst',
+	'BbResolvedAll'         => 'Aktiv + löst',
+	'BbResolved'            => 'löst',
+	'BbActionResolve'       => 'lösa',
+	'BbActionUnresolve'     => 'unresolve',
+	'BbRowResolved'         => 'Loggpost markerad löst',
+	'BbRowUnresolved'       => 'Loggpost markerade olösta',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Ta bort markerade',
+	'BbBulkWhitelistSelected'   => 'Vitlista IP-adresser',
+	'BbBulkResolveSelected'     => 'Markera som löst',
+	'BbBulkUnresolveSelected'   => 'Markera som olöst',
+	'BbBulkHint'                => 'Markera rader först, klicka sedan på en åtgärd.',
+	'BbNoItemsSelected'         => 'Inga objekt valda',
+	'BbBulkDeleted'             => 'Borttagna %1 loggposter',
+	'BbBulkWhitelisted'         => 'Lade till %1 IP i vitlistan',
+	'BbBulkResolved'            => 'Markerade %1 poster som löst',
+	'BbBulkUnresolved'          => 'Markerade %1 poster som olösta',
+	'BbMarkAll'                 => 'Markera alla rader på denna sida',
+	'BbMarkNone'                => 'Avmarkera alla rader',
+
+	'BbBulkFailed'              => 'Kunde inte uppdatera de markerade raderna. Kontrollera databasen eller försök igen.',
+	'BbBulkWhitelistedNone'     => 'Inga nya IP-adresser lades till — alla valda IP-adresser fanns redan på vitlistan.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'verifierad',
+	'BbUnverified'           => 'Overifierad',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Begäran tillåten',
+	'BbStatus_blocked.bot'                => 'Känd bot blockerad',
+	'BbStatus_blocked.ai_crawler'         => 'AI sökare blockerad',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler blockerad',
+	'BbStatus_blocked.malicious_ua'       => 'Skadlig användaragent',
+	'BbStatus_blocked.attack_pattern'     => 'Attack nyttolast upptäckt',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL match',
+	'BbStatus_blocked.httpbl'             => 'http:BL match',
+	'BbStatus_blocked.behavioral'         => 'Beteende anomali',
+	'BbStatus_blocked.fingerprint'        => 'Felaktigt fingeravtryck',
+	'BbStatus_blocked.rate_limit'         => 'Betygsgränsen överskriden',
+	'BbStatus_blocked.custom_rule'        => 'Anpassad regelmatch',
+	'BbStatus_blocked.geoip'              => 'GeoIP block',
+	'BbStatus_blocked.residential_proxy'  => 'Bostadens proxy blockerad',
+	'BbStatus_challenge.required'         => 'Utmaning krävs',
+	'BbStatus_challenge.failed'           => 'Utmaningen misslyckades',
+	'BbStatus_error.internal'             => 'Internt fel',
+	'BbStatus_error.configuration'        => 'Konfigurationsfel',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Senaste 24 timmarna',
+	'BbWindow7d'  => 'Senaste 7 dagarna',
+	'BbWindow30d' => 'Senaste 30 dagarna',
+	'BbWindowAll' => 'Hela tiden',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimal (standard)',
+	'BbPresetFull'           => 'Fullt',
+	'BbPresetVerifiedOnly'   => 'Verifierat endast',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Endast EU',
+	'BbPresetHumanOnly'      => 'Endast människor',
+	'BbPresetCustom'         => 'Anpassad',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Övervaka endast',
+	'BbStrictnessNormal'      => 'Normal',
+	'BbStrictnessStrict'      => 'Strikt',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Aktivera detektion av huvudbegäran',
+	'BbHeadRequireReferer'       => 'Kräv referens på HEAD',
+	'BbHeadFloodThreshold'       => 'Översvämningströskel (per session)',
+	'BbHeadProbeThreshold'       => 'Probe tröskel (per IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Aktivera detektering av tillgångsskrap',
+	'BbAssetNoRefererThreshold'    => 'Ingen referens tröskel (per IP / timme)',
+	'BbAssetOnlySessionThreshold'  => 'Endast tillgång session tröskel',
+	'BbAssetPatternThreshold'      => 'Sekventiellt mönster tröskel (per IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Aktivera dynamiska IP-intervall',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Aktivera on-demand uppdatering',
+	'BbOnDemandRefreshInfo'      => 'Uppdatera cache för IP-intervall under förfrågningar. Använd när du inte har cron-åtkomst.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Dålig JA3',
+	'BbFpBadH2'           => 'Dålig H2',
+	'BbFpBotHeaderOrders' => 'Bot header order',
+	'BbFpExpectedJa3'     => 'Förväntade JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Blockerad',
+	'BbListChallenge' => 'Utmaning (CAPTCHA)',
+	'BbListLogOnly'   => 'Logga endast (ingen verkställighet)',
+	'BbListAllowed'   => 'Uttryckligen tillåtet',
+	'BbListHint'      => 'Kategorier i denna lista får åtgärden oavsett kategoristandard.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Sökmotor',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Social Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Arkivera Crawler',
+	'BbCatMonitoring'      => 'Övervakning',
+	'BbCatFeedReader'      => 'Feed Läsare',
+	'BbCatShoppingCrawler' => 'Shopping Crawler',
+	'BbCatCloudInfra'      => 'Molninfrastruktur',
+	'BbCatSecurityScanner' => 'Säkerhetsskanner',
+	'BbCatResidentialProxy'=> 'Bostadsproxy',
+	'BbCatMalicious'       => 'Skadlig',
+	'BbCatUnknown'         => 'Okänd',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Attackera mönster',
+	'BbSevChallenges'     => 'Utmaningar utfärdade',
+	'BbSevPermitted'      => 'Tillåten',
+	'BbSevErrors'         => 'Fel',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Kategorier',
+
+	'BbResultBreakdown'    => 'Resultat nedbrytning',
+	'BbBreakdownBlocked'   => 'Blockerad',
+	'BbBreakdownMonitored' => 'Övervakad',
+	'BbBreakdownAllowed'   => 'Tillåten',
+	'BbViewAllInLog'       => 'Visa alla i loggen',
+	'BbAllowedHintVerbose' => 'Tillåten trafik loggas bara när verbose loggning är aktiverad. Växla logging_mode=verbose i Inställningar för att se vad som går igenom.',
 
 ];

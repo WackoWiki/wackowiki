@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'لم يتم تحديد كلمة المرور الإدارية!',
 	'NoRecoveryPasswordTip'		=> 'ملاحظة: عدم وجود كلمة مرور إدارية هو تهديد للأمن! أدخل تجزئة كلمة المرور الخاصة بك في ملف التكوين وتشغيل البرنامج مرة أخرى.',
 
+	'ApDevNologinBlocked'		=> 'تم تمكين AP_DEV_NOLOGIN في admin.php ولكن الطلب لم ينشأ من localhost (127.0.0.1، :1، أو localhost). هذا هو علم التطوير فقط ويجب تعطيله عند الإنتاج. تعيين <code>AP_DEV_NOLOGIN = 0</code> في admin.php لاستعادة الوصول.',
+	'ApDevNologinBlockedLog'	=> '!!! الأمانة: تم تمكين %1 ولكن تم الوصول إلى admin.php من عنوان غير مضيف (%2). تم حظر الوصول إلى لوحة المدير.',
+
 	'ErrorLoadingModule'		=> 'خطأ في تحميل وحدة المشرف %1: غير موجود.',
 
 	'ApHomePage'				=> 'الصفحة الرئيسية',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'إنهاء إدارة النظام وتسجيل الخروج من الموقع',
 
 	'TimeLeft'					=> 'الوقت المتبقي:  %1 دقيقة',
+	'TimeLeftInfinity'			=> 'الوقت المتبقي:  %1 (وضع المطور)',
 	'ApVersion'					=> 'الإصدار',
 
 	'SiteOpen'					=> 'فتح',
@@ -920,8 +924,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'إنشاء صورة مصغرة في جميع الحالات الممكنة.',
-	'JpegQuality'				=> 'جودة JPEG:',
-	'JpegQualityInfo'			=> 'الجودة عند قياس الصورة المصغرة لـ JPEG. يجب أن تكون بين 1 و 100، مع 100 تشير إلى جودة 100٪.',
+	'ImageQuality'				=> 'جودة الصورة مسبقاً:',
+	'ImageQualityInfo'			=> 'الجودة عند قياس صورة مصغرة. الإعدادات المسبقة التي تختار قيم الكودك التي تنتج نتيجة تصور قابلة للمقارنة.',
 	'MaxImageArea'				=> 'أقصى مساحة للصورة:',
 	'MaxImageAreaInfo'			=> 'الحد الأقصى لعدد البكسلات التي يمكن أن تكون بها صورة مصدر. وهذا يوفر حداً لاستخدام الذاكرة لجانب فك الضغط في مقياس الصورة.<br><code>-1</code> يعني أنه لن يتحقق من حجم الصورة قبل محاولة تحديدها. <code>0</code> يعني أنه سيحدد القيمة تلقائياً.',
 	'MaxThumbWidth'				=> 'أقصى عرض مصغر بالبكسل:',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> 'ليس أعلى من',
 		'3'		=> 'يساوي',
 	],
-	'LogNoMatch'				=> 'لا توجد أحداث تستوفي المعايير',
 	'LogDate'					=> 'التاريخ',
 	'LogEvent'					=> 'الحدث',
 	'LogUsername'				=> 'اسم المستخدم',
@@ -967,6 +970,49 @@ $ap_translation = [
 		'6'		=> 'أدنى',
 		'7'		=> 'تصحيح الأخطاء',
 	],
+
+	'LogCollapse'        => 'الانهيار',
+	'LogExpand'          => 'توسيع',
+	'LogType'              => 'نوع',
+	'LogSearch'            => 'البحث',
+	'LogSearchPlaceholder' => 'البحث عن الرسائل...',
+	'LogUserId'            => 'معرف المستخدم',
+	'LogExactMatch'        => 'تطابق دقيق',
+	'LogFrom'              => 'من',
+	'LogTo'                => 'إلى',
+	'LogSupportKey'        => 'مفتاح الدعم',
+	'LogContext'           => 'السياق',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'وكيل المستخدم',
+	'LogReferer'           => 'المحكم',
+	'LogTotal'             => 'المجموع',
+	'LogFilteredBy'        => 'تم التصفية بواسطة',
+	'LogClearFilter'       => 'مسح الفلتر',
+	'LogActions'           => 'الإجراءات',
+	'LogDelete'            => 'حذف',
+	'LogDeleteConfirm'     => 'حذف إدخال السجل هذا؟',
+	'LogDeleteSelected'    => 'حذف المحدد',
+	'LogBulkAction'        => '- العمل بالجملة -',
+	'LogApply'             => 'تطبيق',
+	'LogExportCSV'         => 'تصدير CSV',
+	'LogExportJSON'        => 'تصدير JSON',
+	'LogPurged'            => 'جدول السجل مقتطع.',
+	'LogPurgedFiltered'     => 'تم حذف إدخالات السجل %1 بواسطة عامل التصفية.',
+	'LogDeleted'           => 'تم حذف إدخال السجل.',
+	'LogDeletedBulk'        => 'تم حذف إدخالات سجل %1.',
+	'LogPurgeSection'      => 'العمليات المدمرة',
+	'LogPurgeWarning'      => 'هناك إدخالات %1 مطابقة للعرض الحالي. استخدمها مع العناية.',
+	'LogPurgeConfirm'      => 'أفهم أن هذا سيؤدي إلى حذف إدخالات السجل بشكل دائم',
+	'LogPurgeFiltered'     => 'تطهير عامل تصفية المطابقة',
+	'LogPurgeFilteredConfirm' => 'حذف جميع المدخلات المطابقة للفلتر الحالي؟ لا يمكن التراجع عن ذلك.',
+	'LogPurgeAll'          => 'إزالة سجل ENTIRE',
+	'LogPurgeAllConfirm'   => 'حذف إدخال سجل EVERY في قاعدة البيانات؟ لا يمكن التراجع عن ذلك.',
+	'LogFindRelated'       => 'البحث عن المواد ذات الصلة',
+	'LogNoMatch'           => 'لا توجد إدخالات سجل تطابق الفلتر الحالي.',
+
+	'LogMarkAll'                => 'حدد جميع الصفوف في هذه الصفحة',
+	'LogMarkNone'               => 'إلغاء تحديد جميع الصفوف',
+	'LogSelectRow'              => 'حدد الصف',
 
 	// Massemail module
 	'MassemailInfo'				=> 'هنا يمكنك إرسال رسالة إلى إما (1) جميع المستخدمين أو (2) جميع مستخدمي مجموعة معينة الذين قاموا بتمكين تلقي رسائل البريد الإلكتروني الجماعية. وسترسل رسالة بريد إلكتروني إلى عنوان البريد الإلكتروني الإداري المزود بها، مع إرسال نسخة كربونية أعمى إلى جميع المتلقين. الإعداد الافتراضي هو تضمين 20 مستلم كحد أقصى في مثل هذا البريد الإلكتروني. إذا كان هناك أكثر من 20 مستلم، سيتم إرسال رسائل بريد إلكتروني إضافية. إذا كنت ترسل بالبريد الإلكتروني مجموعة كبيرة من الناس، فيرجى التحلي بالصبر بعد التقديم ولا توقف الصفحة في منتصف الطريق. من الطبيعي أن يستغرق البريد الإلكتروني الجماعي وقتاً طويلاً. سيتم إعلامك عند اكتمال البرنامج النصي.',
@@ -1275,6 +1321,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'الترويسات',
 	'BbEntity'					=> 'الكيان',
 
+	'BbSearchPlaceholder'        => 'البحث عن واجهة المستخدم، URI، IP، المضيف، support_key، الحالة…',
+	'BbFilterAnyCategory'        => 'أي فئة',
+	'BbFilterAnyMethod'          => 'أي طريقة',
+	'BbFilterAnyStatus'          => 'أي حالة',
+	'BbFilterBlockedOnly'        => 'محظور فقط',
+	'BbFilterPermittedOnly'      => 'مسموح فقط',
+	'BbFilterApply'              => 'تطبيق',
+	'BbFilterClear'              => 'مسح الفلاتر',
+	'BbChipSearch'               => 'البحث',
+	'BbChipCategory'             => 'الفئة',
+	'BbChipMethod'               => 'الطريقة',
+	'BbChipStatus'               => 'الحالة',
+	'BbChipRemove'               => 'إزالة هذا الفلتر',
+	'BbFilterByCategory'         => 'تصفية حسب هذه الفئة',
+	'BbSearchBySupportKey'       => 'البحث عن مفتاح الدعم هذا',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'أي حالة تحقق',
+	'BbFilterCheckedOnly'      => 'تم التحقق فقط',
+	'BbFilterUncheckedOnly'    => 'غير محدد فقط',
+	'BbChipCheck'              => 'التحقق من الحالة',
+	'BbChecked'                => 'تم التحقق',
+	'BbUnchecked'              => 'غير متحقق',
+	'BbActionCheck'            => 'تحقق',
+	'BbActionUncheck'          => 'إلغاء التحديد',
+	'BbRowChecked'             => 'تم تحديد إدخال السجل كمحقق',
+	'BbRowUnchecked'           => 'تسجيل الدخول غير محدد',
+	'BbRowCheckedHint'         => 'يتم التحقق من هذا السجل - معفى من التنظيف التلقائي',
+	'BbRowUncheckedHint'       => 'ضع علامة على هذا السجل للحفاظ عليه عبر التنظيف التلقائي',
+	'BbBulkCheckSelected'      => 'تم التحقق من العلامة',
+	'BbBulkUncheckSelected'    => 'إلغاء تحديد',
+	'BbBulkChecked'            => 'تم تحديد إدخالات %1 كمحقق',
+	'BbBulkUnchecked'          => 'إدخالات %1 غير موسومة',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'الخيارات المحفوظة.',
 	'BbWhitelistHint'			=> 'القائمة البيضاء غير المناسبة تعرضك للبريد المزعج، أو تسبب في توقف السلوك السيئ عن العمل تمامًا! لا تتحدث إلا إذا كنت 100٪ من القروض.',
@@ -1308,5 +1388,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'تمكين الوكيل العكسي',
 	'BbReverseProxyHeader'		=> 'العنوان الذي يحتوي على عنوان IP لعملاء الإنترنت',
 	'BbReverseProxyAddresses'	=> 'نطاق عنوان IP أو تنسيق عنوان CIDR لخوادم البروكسي الخاص بك (واحد لكل سطر)',
+
+	'BbBehavioral'           => 'تحليل السلوك',
+	'BbEnableBehavioral'     => 'تمكين تحليل السلوك (اختلالات المعدلات، تدوير UA/IP)',
+	'BbEnableBehavioralInfo' => 'المسارات تطلب الأنماط في كل جلسة. آمنة للحفاظ على التمكين.',
+	'BbEnableFingerprinting' => 'تمكين بصمات TLS/HTTP/2 (JA3, H2, أمر الترويس)',
+	'BbEnableFingerprintingInfo' => 'حظر بصمات أصابع سيئة فقط. يتطلب تمكين_fingerprinting=true. قد يسبب إيجابيات خاطئة على المتصفحات القديمة / الوكلاء.',
+	'BbInspectJson'          => 'فحص هيئات طلب JSON للهجمات',
+	'BbInspectJsonInfo'      => 'تحذير: Breaks AJAX/JSON APIs (wiki markup، كتل الكود البرمجي يسبب إيجابيات زائفة). استمر في إيقاف التشغيل.',
+	'BbInspectMultipart'     => 'افحص هيئات البيانات المتعددة الجوانب/الشكل على الهجمات',
+	'BbInspectMultipartInfo' => 'تحذير: يبدد تحميل الملفات. استمر في التوقف',
+
+	'BbEnableClientHints'      => 'تمكين التحقق من تلميحات العميل',
+	'BbEnableClientHintsInfo'  => 'التحقق من صحة رؤوس Sec-CH-UA ضد وكيل المستخدم لاكتشاف المتصفحات المفسدة (Chrome 89+).',
+	'BbEnableAgentic'          => 'تمكين كشف سلوك Agentic',
+	'BbEnableAgenticInfo'      => 'اكتشاف أنماط عوامل الذكاء الاصطناعي: فكر ثم جلب الملاحة غير الخطية، الاستهداف الدقيق.',
+	'BbStrictSearchEngines'    => 'محركات بحث صارمة',
+	'BbStrictSearchEnginesInfo' => 'تطبيق فحوصات أكثر صرامة على روبوتات محرك البحث غير المتحقق منها (Googlebot, Bingbot, …قبل السماح لها بذلك.',
+	'BbEnableDynamicIp'        => 'تمكين إحضار نطاق IP الديناميكي',
+	'BbEnableDynamicIpInfo'    => 'ويتراوح إحضار IP الرسمي بين جوجل، بينغ، OpenAI، أنثروبيك، أبل، إلخ. (التخزين المؤقت 24 ساعة، الظهر 7 أيام).',
+
+	'BbAiCrawlers'           => 'التحكم بالمزارع AI',
+	'BbBlockUnverifiedAi'    => 'حظر زحف الذكاء الاصطناعي غير المؤكد',
+	'BbBlockUnverifiedAiInfo' => 'يمنع الزحف AI الذي فشل في التحقق من DNS/IP (البوتات المجهولة).',
+	'BbStrictAi'             => 'وضع AI صارم (حتى حظر AI غير مسموح به)',
+	'BbStrictAiInfo'         => 'يمنع جميع زحفات AI غير مدرجة في القائمة المسموح بها، حتى إذا تم التحقق منها.',
+	'BbAllowedAiCrawlers'    => 'رموز الذكاء الاصطناعي المسموح بها (واحد لكل سطر)',
+	'BbAllowedAiCrawlersInfo' => 'الرموز المميزة: GPTBot, ClaudeBot, Google-Extened, PerplexityBot, Meta-ExternalAgent, Applebot-Extened, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'تمكين فحص DNSBL',
+	'BbDnsblLists'           => 'قوائم DNSBL (واحد لكل سطر)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'تحديد السعر',
+	'BbRateLimitEnabled'     => 'تمكين تحديد المعدل',
+	'BbRateGlobalRequests'   => 'الطلبات العالمية لكل نافذة',
+	'BbRateGlobalWindow'     => 'النافذة العالمية (بالثواني)',
+	'BbRatePerMinuteRequests'=> 'طلبات في الدقيقة',
+	'BbRatePerMinuteWindow'  => 'نافذة في الدقيقة (ثانية)',
+	'BbRatePostRequests'     => 'طلبات POST لكل نافذة',
+	'BbRatePostWindow'       => 'نافذة POST (بالثواني)',
+	'BbRateLoginRequests'    => 'طلبات تسجيل الدخول لكل نافذة',
+	'BbRateLoginWindow'      => 'نافذة تسجيل الدخول (بالثواني)',
+
+	'BbChallenge'            => 'نظام التحديات',
+	'BbChallengeEnabled'     => 'تمكين التحديات',
+	'BbChallengeProvider'    => 'موفر التحدي',
+	'BbChallengeSiteKey'     => 'مفتاح الموقع',
+	'BbChallengeSecretKey'   => 'مفتاح سري',
+	'BbRecaptchaMinScore'    => 'نتيجة reCAPTCHA v3 دقيقة',
+
+	'BbPerformance'          => 'الأداء',
+	'BbSkipExtensions'       => 'تخطي ملحقات (واحد لكل سطر)',
+	'BbSkipPaths'            => 'تخطي بادئات المسار (واحد لكل سطر)',
+
+	'BbGeoip'                => 'GeoIP / ASN حظر',
+	'BbGeoipEnabled'         => 'تمكين البحث عن GeoIP',
+	'BbGeoipDbPath'          => 'مسار MaxMind DB',
+	'BbBlockedCountries'     => 'البلدان المحظورة (رموز (ISO ، واحد لكل سطر)',
+	'BbBlockedAsns'          => 'حظر AASNs (واحد لكل سطر)',
+
+	'BbBlockPage'                  => 'حظر الصفحة',
+	'BbShowDetailedBlockPage'      => 'إظهار صفحة الكتلة المفصلة',
+	'BbShowDetailedBlockPageInfo'  => 'إظهار السبب، طلب URI، ومفتاح الدعم التقني في صفحة الكتلة. مستحسن للإنتاج.',
+	'BbShowContactInfo'            => 'إظهار معلومات جهة الاتصال في صفحة الحظر',
+	'BbShowContactInfoInfo'        => 'إظهار البريد الإلكتروني للمشرف على صفحة الحظر (فقط يكون نافذ المفعول عند تمكين صفحة الحظر التفصيلية).',
+	'BbSettingsSaveFailed'         => 'فشل في حفظ إعدادات السلوك السيئ',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'الإعدادات الأساسية',
+	'BbAdvancedSection'   => 'الإعدادات المتقدمة',
+	'BbAdvancedHint'      => 'وينبغي ألا يحتاج معظم المشغلين إلى تغيير هذه النظم.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'أي بوت يجب التعرف عليه. "الحد الأدنى" (الافتراضي) هو الأسرع؛ "الكامل" هو الأكثر شمولاً.',
+	'BbStrictness'        => 'حجب الوضع',
+	'BbStrictnessInfo'    => 'سجلات المراقبة فقط ولكن لا تمنع أي شيء؛ الكتل العادية تم التحقق من المهاجمين؛ الكتل الصارمة بشكل عدائي.',
+	'BbLoggingMode'       => 'تسجيل',
+	'BbLoggingModeInfo'   => 'عادي (موصى به)، فيربوز (سجلات كل طلب)، إيقاف',
+	'BbLogModeNormal'     => 'عادي',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'متوقف',
+	'BbBehindProxy'       => 'الموقع خلف وكيل عكسي أو CDN',
+	'BbBehindProxyInfo'   => 'تمكين إذا كان وراء Cloudflare, AWS, GCP بسرعة، إلخ. يجب عليك إضافة نطاقات IP الوكيل في متقدمة - بدونها، لا يمكن تحديد عناوين IP للعميل الحقيقي.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'نواة',
+	'BbAdvReverseProxy'   => 'عكس الوكيل',
+	'BbAdvAiCrawlers'     => 'زحف الذكاء',
+	'BbAdvBotCategories'  => 'فئات البوت',
+	'BbAdvDnsVerification'=> 'التحقق من DNS',
+	'BbAdvRateLimits'     => 'تحديد السعر',
+	'BbAdvHeadDetection'  => 'كشف طلب الرأس',
+	'BbAdvAssetScraping'  => 'الكشف عن تخريدات الأصول',
+	'BbAdvDynamicIp'      => 'نطاقات IP الديناميكية',
+	'BbAdvOnDemandRefresh'=> 'تحديث IP عند الطلب',
+	'BbAdvHttpbl'         => 'مشروع هنيبوت http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'التحدي / كابتشا',
+	'BbAdvPerformance'    => 'الأداء',
+	'BbAdvGeoip'          => 'GeoIP / ASN حظر',
+	'BbAdvFingerprints'   => 'بصمات TLS / HTTP/2',
+	'BbAdvCustomRules'    => 'قواعد مخصصة',
+	'BbAdvBlockPage'      => 'حظر الصفحة',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'محرك البحث',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'زحف اجتماعي',
+	'BbCatSeoCrawler'     => 'مزارع سيو',
+	'BbCatArchiveCrawler' => 'مزارع الأرشيف',
+	'BbCatMonitoring'     => 'الرصد',
+	'BbCatFeedReader'     => 'قارئ التغذية',
+	'BbCatShoppingCrawler'=> 'مزارع التسوق',
+	'BbCatCloudInfra'     => 'البنية التحتية السحابية',
+	'BbCatSecurityScanner'=> 'ماسح أمني',
+	'BbCatResidentialProxy'=> 'الوكيل السكني',
+	'BbCatMalicious'      => 'خبيث',
+	'BbCatUnknown'        => 'غير معروف',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'كلاودفلاري',
+	'BbCloudProviderFastly'     => 'سريع',
+	'BbCloudProviderGcp'        => 'غوغل سحابة',
+	'BbCloudProvidersInfo'      => 'الحد من التحديث عند الطلب لمزودين محددين. فارغ = كلهم الأربعة.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'الاحتفاظ بسجل',
+	'BbLogRetentionEnabled'          => 'تمكين التسجيل التلقائي للتنظيف',
+	'BbLogRetentionEnabledInfo'      => 'احذف دوريا صفوف السجل الأقدم من نافذة الاحتفاظ. موصى بها للمواقع التي لا يمكن الوصول إلى القرون.',
+	'BbLogRetentionMaxAgeDays'       => 'نافذة الإحتفاظ (أيام)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'الصفوف الأقدم من هذا تم حذفها. الافتراضي: 7. القيم المشتركة: 7، 14، 30، 90.',
+	'BbLogRetentionMaxRows'          => 'عدد الصف الأقصى (0 = لا يوجد حد أقصى)',
+	'BbLogRetentionMaxRowsInfo'      => 'في حالة الضبط، يتم حذف الصفوف الأقدم كلما تجاوز الجدول هذا الحجم، بغض النظر عن العمر. مفيد لمواقع الحركة العالية.',
+	'BbLogRetentionProbability'       => 'قاسم الاحتمال (1 في نون)',
+	'BbLogRetentionProbabilityInfo'   => '1 في N طلبات التحقق من بوابة الجمود. أعلى = أقل من DB. الافتراضي: 1000.',
+	'BbLogRetentionMinInterval'      => 'الحد الأدنى للفاصل الزمني بين التنظيف (بالثواني)',
+	'BbLogRetentionMinIntervalInfo'  => 'أرضية صعبة على تردد التنظيف. الافتراضي: 21600 (6ساعة).',
+	'BbLogRetentionLockTtl'          => 'تنظيف قفل TTL (بالثواني)',
+	'BbLogRetentionLockTtlInfo'      => 'كم من الوقت يتم الاحتفاظ بكتم التنظيف. الافتراضي: 600 (10 دقائق).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'تمكين التحقق من DNS',
+	'BbDnsVerificationInfo'     => 'التحقق من مطالبات بوت (مثل Googlebot) عن طريق البحث العكسي DNS.',
+	'BbDnsTimeoutMs'            => 'مهلة البحث في DNS (مللي ثانية)',
+	'BbDnsPositiveTtl'          => 'ذاكرة التخزين المؤقت الموجبة TTL (ثواني)',
+	'BbDnsNegativeTtl'          => 'ذاكرة التخزين المؤقت السلبية TTL (ثواني)',
+	'BbDnsRequireForward'       => 'يتطلب تأكيد للأمام (PTR + مطابقة للسجل)',
+	'BbDnsRequireForwardInfo'   => 'التقط PTR ملصقة ولكنها تضيف مخاطر التأخير و IPv6 FP',
+
+	'BbHeadRefererExemptPaths'  => 'مسارات معفاة من الصحة (واحد لكل سطر)',
+	'BbHeadRefererExemptInfo'   => 'المسارات التي تكون فيها HEAD بدون حكم مشروعة (مثل /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'امتدادات الأصول للحماية (واحد لكل سطر)',
+	'BbAssetExtensionsInfo'     => 'مشاهدة أنواع الملفات للتخريد المباشر بدون تحميل الصفحات.',
+
+	'BbOnDemandBotIds'          => 'معرف بوت للتحديث (فارغ = الكل)',
+	'BbOnDemandBotIdsInfo'      => 'تقييد التحديث إلى بوت معين. اتركه فارغاً لتحديث جميع البوتات المسجلة.',
+	'BbOnDemandProbability'     => 'قاسم الاحتمال (1 في نون)',
+	'BbOnDemandMinAge'          => 'عمر المخبئ الأدنى (ثواني)',
+	'BbOnDemandLockTtl'         => 'قفل TTL (ثواني)',
+	'BbOnDemandCacheTtl'        => 'ذاكرة التخزين المؤقت TTL (بالثواني)',
+	'BbOnDemandFeedTimeout'     => 'مهلة جلب التغذية (بالثواني)',
+
+	'BbDynamicIpTtl'            => 'ذاكرة التخزين المؤقت TTL (بالثواني)',
+	'BbDynamicIpFeeds'          => 'تغذية للتحديث (واحد لكل سطر)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'آخر ظهور',
+	'BbSeverity'             => 'الخطورة',
+	'BbStatusBreakdown'      => 'تفاصيل الحالة',
+	'BbBotBreakdown'         => 'انهيار بوت',
+	'BbTopBlocked'           => 'أعلى عناوين IP محرومة',
+	'BbGeoSummary'           => 'موجز جغرافي',
+	'BbCountry'              => 'البلد',
+	'BbAsn'                  => 'آشن',
+	'BbVerifiedPct'          => 'تم التحقق %',
+	'BbNoData'               => 'لا توجد بيانات للنافذة المحددة',
+	'BbCategory'             => 'الفئة',
+	'BbResponseTime'         => 'وقت الرد',
+	'BbDateCol'              => 'الوقت / IP / الحالة',
+	'BbSelectRow'            => 'حدد الصف',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'بطيء فقط',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'محلولة',
+	'BbChipStatusCode' => 'رمز الحالة',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'آشن',
+	'BbChipCountry'    => 'البلد',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'عرض الترويسات',
+	'BbViewBody'             => 'عرض الجسم',
+	'BbViewContentLabel'     => 'محتوى',
+	'BbViewModeFull'         => 'كامل (يظهر دائما)',
+	'BbViewModeTeaser'       => 'تيس (انقر للتوسع)',
+	'BbViewModeHidden'       => 'مخفي (إظهار عند الطلب)',
+	'BbHide'                 => 'إخفاء',
+	'BbChars'                => 'الأحرف',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'قواعد مخصصة',
+	'BbCustomRulesLabel'           => 'قواعد مخصصة (كائن JSON واحد لكل سطر)',
+	'BbCustomRulesInfo'            => 'كل سطر هو كائن JSON مع مفاتيح: نوع (ip<unk> ua_regex<unk> ua_contains<unk> asn<unk> country<unk> header)، قيمة، عمل (allow<unk> block<unk> Challenge<unk> log)، ومعلق. مثال: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'تخطي حقول مسح الجسم',
+	'BbBodyScanSkipFieldsInfo'     => 'اسم حقل واحد لكل سطر. يتم تخطي الحقول المدرجة خلال تفتيش الجسم SQL/XSS.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'فلاتر متقدمة',
+	'BbDateFrom'            => 'من',
+	'BbDateTo'              => 'إلى',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'الطلبات البطيئة فقط (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'نشط فقط',
+	'BbResolvedOnly'        => 'حل فقط',
+	'BbResolvedAll'         => 'نشط + حل',
+	'BbResolved'            => 'حسم',
+	'BbActionResolve'       => 'حسم',
+	'BbActionUnresolve'     => 'بدون حل',
+	'BbRowResolved'         => 'تم حل علامة إدخال السجل',
+	'BbRowUnresolved'       => 'تم وضع علامة على إدخال السجل',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'حذف المحدد',
+	'BbBulkWhitelistSelected'   => 'عناوين IP القائمة البيضاء',
+	'BbBulkResolveSelected'     => 'تم حل العلامة',
+	'BbBulkUnresolveSelected'   => 'وضع علامة بدون حل',
+	'BbBulkHint'                => 'صف القمامة أولاً، ثم انقر فوق إجراء ما.',
+	'BbNoItemsSelected'         => 'لا توجد عناصر محددة',
+	'BbBulkDeleted'             => 'تم حذف إدخالات سجل %1',
+	'BbBulkWhitelisted'         => 'أضيفت %1 IP إلى القائمة البيضاء',
+	'BbBulkResolved'            => 'تم تحديد إدخالات %1 كأنها محلولة',
+	'BbBulkUnresolved'          => 'تم تحديد إدخالات %1 كغير محلولة',
+	'BbMarkAll'                 => 'حدد جميع الصفوف في هذه الصفحة',
+	'BbMarkNone'                => 'إلغاء تحديد جميع الصفوف',
+
+	'BbBulkFailed'              => 'تعذر تحديث الصفوف المحددة. تحقق من قاعدة البيانات أو حاول مرة أخرى.',
+	'BbBulkWhitelistedNone'     => 'لم تتم إضافة أي عناوين IP جديدة - كانت جميع عناوين IP المختارة مدرجة بالفعل في القائمة البيضاء.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'تم التحقق',
+	'BbUnverified'           => 'غير متحقق',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'الطلب مسموح به',
+	'BbStatus_blocked.bot'                => 'بوت معروف محظور',
+	'BbStatus_blocked.ai_crawler'         => 'تم حظر زحف الذاكرة',
+	'BbStatus_blocked.seo_crawler'        => 'تم حظر مزحف سيو',
+	'BbStatus_blocked.malicious_ua'       => 'وكيل مستخدم خبيث',
+	'BbStatus_blocked.attack_pattern'     => 'تم اكتشاف حمولة هجوم',
+	'BbStatus_blocked.dnsbl'              => 'تطابق DNSBL',
+	'BbStatus_blocked.httpbl'             => 'http:BL تطابق',
+	'BbStatus_blocked.behavioral'         => 'الشذوذ السلوكي',
+	'BbStatus_blocked.fingerprint'        => 'بصمة أصابع سيئة',
+	'BbStatus_blocked.rate_limit'         => 'تم تجاوز حد المعدل',
+	'BbStatus_blocked.custom_rule'        => 'تطابق القواعد المخصصة',
+	'BbStatus_blocked.geoip'              => 'كتلة GeoIP',
+	'BbStatus_blocked.residential_proxy'  => 'تم حظر الوكيل السكني',
+	'BbStatus_challenge.required'         => 'التحدي المطلوب',
+	'BbStatus_challenge.failed'           => 'فشل التحدي',
+	'BbStatus_error.internal'             => 'خطأ داخلي',
+	'BbStatus_error.configuration'        => 'خطأ في التكوين',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'آخر 24 ساعة',
+	'BbWindow7d'  => 'آخر 7 أيام',
+	'BbWindow30d' => 'آخر 30 يوما',
+	'BbWindowAll' => 'كل الوقت',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'الحد الأدنى (الافتراضي)',
+	'BbPresetFull'           => 'كامل',
+	'BbPresetVerifiedOnly'   => 'تم التحقق فقط',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'الاتحاد الأوروبي فقط',
+	'BbPresetHumanOnly'      => 'الإنسان فقط',
+	'BbPresetCustom'         => 'مخصص',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'المراقب فقط',
+	'BbStrictnessNormal'      => 'عادي',
+	'BbStrictnessStrict'      => 'صارم',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'تحويل Cloudflare',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'تمكين الكشف عن طلب الرأس',
+	'BbHeadRequireReferer'       => 'يتطلب الحكم على HEAD',
+	'BbHeadFloodThreshold'       => 'عتبة الفيضان (لكل دورة)',
+	'BbHeadProbeThreshold'       => 'حد المسح (لكل IP / 5 دقائق)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'تمكين الكشف عن تخريد الأصول',
+	'BbAssetNoRefererThreshold'    => 'الحد الأدنى للحكم (لكل IP / ساعة)',
+	'BbAssetOnlySessionThreshold'  => 'عتبة جلسة الموجودات فقط',
+	'BbAssetPatternThreshold'      => 'حد النمط التسلسلي (لكل IP / 5دقيقة)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'تمكين نطاقات IP الديناميكية',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'تمكين التحديث عند الطلب',
+	'BbOnDemandRefreshInfo'      => 'قم بتحديث ذاكرة التخزين المؤقت لنطاق IP أثناء الطلبات. استخدم عندما لا يكون لديك الوصول إلى كرون.',
+	'BbOnDemandBotIdsPlaceholder' => 'جوغليبوت ، gptbot، Claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'JA3 سيء',
+	'BbFpBadH2'           => 'H2 سيء',
+	'BbFpBotHeaderOrders' => 'أوامر رأس البوت',
+	'BbFpExpectedJa3'     => 'JA3 المتوقعة',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'محظور',
+	'BbListChallenge' => 'التحدي (CAPTCHA)',
+	'BbListLogOnly'   => 'تسجيل فقط (بدون إنفاذ)',
+	'BbListAllowed'   => 'مسموح به صراحة',
+	'BbListHint'      => 'الفئات في هذه القائمة تحصل على الإجراء بغض النظر عن الفئة الافتراضية.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'محرك البحث',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'زحف اجتماعي',
+	'BbCatSeoCrawler'      => 'مزارع سيو',
+	'BbCatArchiveCrawler'  => 'مزارع الأرشيف',
+	'BbCatMonitoring'      => 'الرصد',
+	'BbCatFeedReader'      => 'قارئ التغذية',
+	'BbCatShoppingCrawler' => 'مزارع التسوق',
+	'BbCatCloudInfra'      => 'البنية التحتية السحابية',
+	'BbCatSecurityScanner' => 'ماسح أمني',
+	'BbCatResidentialProxy'=> 'الوكيل السكني',
+	'BbCatMalicious'       => 'خبيث',
+	'BbCatUnknown'         => 'غير معروف',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => 'تجزئة 32 غرفة',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'أنماط الهجوم',
+	'BbSevChallenges'     => 'التحديات التي صدرت',
+	'BbSevPermitted'      => 'مسموح',
+	'BbSevErrors'         => 'أخطاء',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'الفئات',
+
+	'BbResultBreakdown'    => 'تعطل النتائج',
+	'BbBreakdownBlocked'   => 'محظور',
+	'BbBreakdownMonitored' => 'مراقبة',
+	'BbBreakdownAllowed'   => 'مسموح',
+	'BbViewAllInLog'       => 'عرض كل السجلات',
+	'BbAllowedHintVerbose' => 'حركة المرور المسموح بها لا يتم تسجيلها إلا عند تمكين التسجيل الحرفي. تبديل logging_mode=verbose في الإعدادات لمعرفة ما يمر بها.',
 
 ];

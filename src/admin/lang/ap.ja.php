@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> '管理パスワードが指定されていない！',
 	'NoRecoveryPasswordTip'		=> '注：管理パスワードがないことは、セキュリティ上の脅威となる！設定ファイルにパスワードハッシュを入力し、再度プログラムを実行してください。',
 
+	'ApDevNologinBlocked'		=> 'アクセスがブロックされました: admin.phpでAP_DEV_NOLOGINが有効になっていますが、リクエストはlocalhost(127.0.0.1、::1、localhost)からのものではありません。 これは開発専用フラグであり、本番環境では無効にする必要があります。アクセスを復元するには、admin.php で <code>AP_DEV_NOLOGIN = 0</code> を設定してください。',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 is enabled but admin.php was accessed from a non-localhost address (%2). Admin panel access has been blocked.',
+
 	'ErrorLoadingModule'		=> '管理モジュール %1の読み込み中にエラーが発生しました: 存在しません。',
 
 	'ApHomePage'				=> 'ホームページ',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeftInfinity'			=> '残り時間:  %1 (開発者モード)',
 	'ApVersion'					=> 'バージョン',
 
 	'SiteOpen'					=> '開く',
@@ -920,8 +924,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'あらゆる状況でサムネイルを作成します。',
-	'JpegQuality'				=> 'JPEGクオリティ：',
-	'JpegQualityInfo'			=> 'JPEGサムネイルを拡大縮小する際の品質。1〜100の間で、100は100％の品質を示します。',
+	'ImageQuality'				=> '画像品質プリセット:',
+	'ImageQualityInfo'			=> 'サムネイルの拡大時の画質。コーデックごとの値を選択し、同様の知覚結果を生成します。',
 	'MaxImageArea'				=> 'Maximum Image Area:',
 	'MaxImageAreaInfo'			=> '元画像の最大画素数。これは、画像スケーラの解凍側のメモリ使用量を制限するものです。<br><code>-1</code> は、スケーリングする前に画像の大きさを確認しないことを意味します。<code>0</code>は、自動的に値を決定することを意味します。',
 	'MaxThumbWidth'				=> 'サムネイルの最大幅（ピクセル単位）',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> '以下より大きい',
 		'3'		=> '等しい',
 	],
-	'LogNoMatch'				=> '基準を満たすイベントはありません',
 	'LogDate'					=> '日付',
 	'LogEvent'					=> 'イベント',
 	'LogUsername'				=> 'ユーザー名',
@@ -967,6 +970,49 @@ $ap_translation = [
 		'6'		=> '最も低い',
 		'7'		=> 'デバッグ',
 	],
+
+	'LogCollapse'        => '折りたたみます',
+	'LogExpand'          => '展開',
+	'LogType'              => 'タイプ',
+	'LogSearch'            => '検索',
+	'LogSearchPlaceholder' => 'メッセージを検索...',
+	'LogUserId'            => 'ユーザー ID',
+	'LogExactMatch'        => '完全一致',
+	'LogFrom'              => '差出人:',
+	'LogTo'                => '終了日',
+	'LogSupportKey'        => 'サポートキー',
+	'LogContext'           => 'コンテキスト',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'ユーザーエージェント',
+	'LogReferer'           => 'リファラ',
+	'LogTotal'             => '合計',
+	'LogFilteredBy'        => 'によってフィルターされた',
+	'LogClearFilter'       => 'フィルターをクリア',
+	'LogActions'           => 'アクション',
+	'LogDelete'            => '削除',
+	'LogDeleteConfirm'     => 'このログエントリを削除しますか？',
+	'LogDeleteSelected'    => '選択したものを削除',
+	'LogBulkAction'        => '— 一括操作 —',
+	'LogApply'             => '適用',
+	'LogExportCSV'         => 'CSVエクスポート',
+	'LogExportJSON'        => 'JSONをエクスポート',
+	'LogPurged'            => 'ログテーブルを切り捨てました。',
+	'LogPurgedFiltered'     => '%1 ログエントリがフィルターで削除されました。',
+	'LogDeleted'           => 'ログエントリが削除されました。',
+	'LogDeletedBulk'        => '%1 ログエントリを削除しました。',
+	'LogPurgeSection'      => '破壊的な操作',
+	'LogPurgeWarning'      => '現在のビューに一致する %1 エントリがあります。注意して使用してください。',
+	'LogPurgeConfirm'      => 'ログエントリが完全に削除されることを理解しています',
+	'LogPurgeFiltered'     => '一致するフィルターを削除',
+	'LogPurgeFilteredConfirm' => '現在のフィルタに一致するすべてのエントリを削除しますか? これは元に戻すことはできません。',
+	'LogPurgeAll'          => 'ログ全体を削除',
+	'LogPurgeAllConfirm'   => 'データベース内のすべてのログエントリを削除しますか？元に戻すことはできません。',
+	'LogFindRelated'       => '関連項目を検索',
+	'LogNoMatch'           => '現在のフィルタに一致するログエントリはありません。',
+
+	'LogMarkAll'                => 'このページのすべての行にマーク',
+	'LogMarkNone'               => 'すべての行の標識を解除',
+	'LogSelectRow'              => '行を選択',
 
 	// Massemail module
 	'MassemailInfo'				=> 'ここでは、(1)すべてのユーザーまたは(2)特定のグループのすべてのユーザーにメッセージを電子メールで送信することができます。 すべての受信者にBCC(盲検炭素コピー)を送信し、送信された管理者のメールアドレスにメールが送信されます。 デフォルトの設定では、このような電子メールには最大20人の受信者を含めることになります。 受信者が20人を超える場合は、追加のメールが送信されます。 大勢の人々にメールを送っている場合は、送信後に我慢してください。途中でページを止めないでください。 大量メールを送信するには時間がかかるのが普通です。スクリプトが完了すると通知されます。',
@@ -1275,6 +1321,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'ヘッダー',
 	'BbEntity'					=> 'エンティティ',
 
+	'BbSearchPlaceholder'        => 'UA、URI、IP、ホスト、support_key、ステータス…',
+	'BbFilterAnyCategory'        => 'すべてのカテゴリ',
+	'BbFilterAnyMethod'          => '任意のメソッド',
+	'BbFilterAnyStatus'          => '任意のステータス',
+	'BbFilterBlockedOnly'        => 'ブロックされている',
+	'BbFilterPermittedOnly'      => '許可のみ',
+	'BbFilterApply'              => '適用',
+	'BbFilterClear'              => 'フィルターをクリア',
+	'BbChipSearch'               => '検索',
+	'BbChipCategory'             => 'カテゴリ',
+	'BbChipMethod'               => '方法',
+	'BbChipStatus'               => 'ステータス',
+	'BbChipRemove'               => 'このフィルターを削除',
+	'BbFilterByCategory'         => 'このカテゴリでフィルター',
+	'BbSearchBySupportKey'       => 'このサポートキーを検索',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'すべてのチェックステータス',
+	'BbFilterCheckedOnly'      => 'チェック済みのみ',
+	'BbFilterUncheckedOnly'    => '未チェックのみ',
+	'BbChipCheck'              => 'ステータスの確認',
+	'BbChecked'                => 'checked',
+	'BbUnchecked'              => '未チェック',
+	'BbActionCheck'            => 'チェック',
+	'BbActionUncheck'          => 'チェックを外す',
+	'BbRowChecked'             => 'ログエントリをチェック済みにする',
+	'BbRowUnchecked'           => 'ログエントリがチェックされていません',
+	'BbRowCheckedHint'         => 'このレコードはチェックされています — 自動クリーンアップは免除されます',
+	'BbRowUncheckedHint'       => 'このレコードを自動クリーンアップで保持するには、このレコードをマークします',
+	'BbBulkCheckSelected'      => 'チェック済みにする',
+	'BbBulkUncheckSelected'    => 'チェックを解除',
+	'BbBulkChecked'            => '%1 項目をチェック済みにする',
+	'BbBulkUnchecked'          => '%1 エントリのマークを外しました',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'オプションを保存しました。',
 	'BbWhitelistHint'			=> '不適切なホワイトリスト作成はあなたをスパムにさらしたり、悪い行動が完全に機能しなくなったりします！ あなたがするべきである100%CERTAINでない限り、しないでください。',
@@ -1308,5 +1388,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'リバースプロキシを有効にする',
 	'BbReverseProxyHeader'		=> 'インターネットクライアントのIPアドレスを含むヘッダー',
 	'BbReverseProxyAddresses'	=> 'あなたのプロキシサーバーのIPアドレスまたはCIDRフォーマットアドレスの範囲（1行に1つ）',
+
+	'BbBehavioral'           => '行動分析',
+	'BbEnableBehavioral'     => '行動分析を有効にします（速度異常、UA/IP回転）',
+	'BbEnableBehavioralInfo' => 'セッションごとのリクエストパターンを追跡します。有効にしても安全です。',
+	'BbEnableFingerprinting' => 'TLS/HTTP/2 フィンガープリンティングを有効にする (JA3, H2, ヘッダ順)',
+	'BbEnableFingerprintingInfo' => '不正なフィンガープリントのみをブロックします。enable_fingering=trueが必要です。古いブラウザ/プロキシで誤検出を引き起こす可能性があります。',
+	'BbInspectJson'          => 'JSONリクエストボディの攻撃を調査する',
+	'BbInspectJsonInfo'      => '警告：AJAX/JSONのAPI（wikiマークアップ、コードスニペットは誤陽性を引き起こします）を中断します。オフにしてください。',
+	'BbInspectMultipart'     => '攻撃のマルチパート/フォームデータボディを調査',
+	'BbInspectMultipartInfo' => '警告: ファイルのアップロードを中断します。オフにしてください。',
+
+	'BbEnableClientHints'      => 'クライアントヒントの検証を有効にする',
+	'BbEnableClientHintsInfo'  => 'なりすましブラウザ(Chrome 89以上)を検出するために、User-Agent に対してSec-CH-UAヘッダーを検証します。',
+	'BbEnableAgentic'          => 'Agentically Behavior Detection を有効にする',
+	'BbEnableAgenticInfo'      => 'AIエージェントパターンの検出:think-cell、ノンリニアナビゲーション、精密ターゲティング。',
+	'BbStrictSearchEngines'    => '厳密な検索',
+	'BbStrictSearchEnginesInfo' => '検証されていない検索エンジンのボット(Googlebot、Bingbot、 …)に厳格なチェックを適用します。',
+	'BbEnableDynamicIp'        => '動的IP範囲取得を有効にする',
+	'BbEnableDynamicIpInfo'    => 'Google、Bing、OpenAI、Anthropic、Appleなどの公式IP範囲を取得してください(24時間、古いフォールバック7日間)。',
+
+	'BbAiCrawlers'           => 'AIクローラーコントロール',
+	'BbBlockUnverifiedAi'    => '未検証AIクローラーをブロック',
+	'BbBlockUnverifiedAiInfo' => 'DNS/IP検証に失敗したAIクローラーをブロック (なりすましボット)。',
+	'BbStrictAi'             => '厳格なAIモード（許可されていないAIもブロック）',
+	'BbStrictAiInfo'         => '許可されたリストにないすべてのAIクローラーをブロックします。',
+	'BbAllowedAiCrawlers'    => '許可されたAIクローラトークン（1行に1つ）',
+	'BbAllowedAiCrawlersInfo' => 'トークン: GPTBot, ClaudeBot, Google拡張, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'DNSBLチェックを有効にする',
+	'BbDnsblLists'           => 'DNSBLリスト (1行に1つ)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'レート制限',
+	'BbRateLimitEnabled'     => 'レート制限を有効にする',
+	'BbRateGlobalRequests'   => 'ウィンドウごとのグローバルリクエスト',
+	'BbRateGlobalWindow'     => 'グローバルウィンドウ (秒)',
+	'BbRatePerMinuteRequests'=> '毎分ごとのリクエスト',
+	'BbRatePerMinuteWindow'  => '分単位ウィンドウ (秒)',
+	'BbRatePostRequests'     => 'ウィンドウごとのPOSTリクエスト',
+	'BbRatePostWindow'       => 'POST ウィンドウ (秒)',
+	'BbRateLoginRequests'    => 'ウィンドウごとのログインリクエスト',
+	'BbRateLoginWindow'      => 'ログインウィンドウ (秒)',
+
+	'BbChallenge'            => 'チャレンジシステム',
+	'BbChallengeEnabled'     => 'チャレンジを有効にする',
+	'BbChallengeProvider'    => 'チャレンジプロバイダー',
+	'BbChallengeSiteKey'     => 'サイトキー',
+	'BbChallengeSecretKey'   => 'シークレットキー',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 分スコア',
+
+	'BbPerformance'          => 'パフォーマンス',
+	'BbSkipExtensions'       => '拡張子をスキップ(1行に1つ)',
+	'BbSkipPaths'            => 'パスプレフィックスをスキップ (1行に1つ)',
+
+	'BbGeoip'                => 'GeoIP / ASNブロック',
+	'BbGeoipEnabled'         => 'GeoIP検索を有効にする',
+	'BbGeoipDbPath'          => 'MaxMind DB path',
+	'BbBlockedCountries'     => 'ブロックされた国 (ISOコード、1行に1つ)',
+	'BbBlockedAsns'          => 'ブロックされたASN (1行に1つ)',
+
+	'BbBlockPage'                  => 'ブロックページ',
+	'BbShowDetailedBlockPage'      => '詳細なブロックページを表示',
+	'BbShowDetailedBlockPageInfo'  => 'ブロックページに理由、リクエスト URI 、テクニカルサポートキーを表示します。本番環境におすすめです。',
+	'BbShowContactInfo'            => 'ブロックページに連絡先情報を表示',
+	'BbShowContactInfoInfo'        => 'ブロックページに管理者のメールを表示します（詳細ブロックページが有効な場合のみ有効）。',
+	'BbSettingsSaveFailed'         => '不正なビヘイビア設定の保存に失敗しました',
+
+	// === Basic section ===
+	'BbBasicSection'      => '基本設定',
+	'BbAdvancedSection'   => '詳細設定',
+	'BbAdvancedHint'      => 'ほとんどの演算子はこれらを変更する必要はありません。',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'どのボットを認識するか。「最小」(デフォルト)が最も速く、「いっぱい」が最も徹底しています。',
+	'BbStrictness'        => 'ブロックの状況',
+	'BbStrictnessInfo'    => 'モニターのみのログですが、何もブロックしません。通常のブロックは攻撃者を検証しました。厳格なブロックは攻撃的です。',
+	'BbLoggingMode'       => 'ログ',
+	'BbLoggingModeInfo'   => '通常（推奨）、冗長（リクエストごとにログ）、オフ',
+	'BbLogModeNormal'     => '標準',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'オフ',
+	'BbBehindProxy'       => 'サイトはリバースプロキシまたは CDN の背後にあります。',
+	'BbBehindProxyInfo'   => 'Cloudflare、AWS、GCP、Fastlyなどの背後にある場合に有効にします。プロキシIP範囲を高度に追加する必要があります。',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'コア',
+	'BbAdvReverseProxy'   => 'リバースプロキシ',
+	'BbAdvAiCrawlers'     => 'AIクローラー',
+	'BbAdvBotCategories'  => 'ボットカテゴリ',
+	'BbAdvDnsVerification'=> 'DNS 認証',
+	'BbAdvRateLimits'     => 'レート制限',
+	'BbAdvHeadDetection'  => 'ヘッドリクエストの検出',
+	'BbAdvAssetScraping'  => 'アセットスクラップ検出',
+	'BbAdvDynamicIp'      => '動的IP範囲',
+	'BbAdvOnDemandRefresh'=> 'オンデマンド IP 更新',
+	'BbAdvHttpbl'         => 'プロジェクト Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'チャレンジ/CAPTCHA',
+	'BbAdvPerformance'    => 'パフォーマンス',
+	'BbAdvGeoip'          => 'GeoIP / ASNブロック',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 フィンガープリント',
+	'BbAdvCustomRules'    => 'カスタムルール',
+	'BbAdvBlockPage'      => 'ブロックページ',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Search Engine',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'ソーシャルクローラー',
+	'BbCatSeoCrawler'     => 'SEOクローラー',
+	'BbCatArchiveCrawler' => 'クローラーをアーカイブ',
+	'BbCatMonitoring'     => 'モニタリング',
+	'BbCatFeedReader'     => 'フィードリーダー',
+	'BbCatShoppingCrawler'=> '買い物用クローラー',
+	'BbCatCloudInfra'     => 'クラウドインフラストラクチャ',
+	'BbCatSecurityScanner'=> 'セキュリティスキャナ',
+	'BbCatResidentialProxy'=> 'レジデンシャルプロキシ',
+	'BbCatMalicious'      => '悪意のある',
+	'BbCatUnknown'        => '不明',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Fastly',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'オンデマンドの更新を特定のプロバイダに制限します。空の場合はすべて4つです。',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'ログの保持',
+	'BbLogRetentionEnabled'          => '自動ログのクリーンアップを有効にする',
+	'BbLogRetentionEnabledInfo'      => '保存ウィンドウよりも古いログ行を定期的に削除します。cronアクセスのないサイトに推奨します。',
+	'BbLogRetentionMaxAgeDays'       => '保持ウィンドウ（日）',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'デフォルト: 7. 一般的な値: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => '最大行数 (0 = 上限なし)',
+	'BbLogRetentionMaxRowsInfo'      => '設定されている場合、年齢に関係なく、テーブルがこのサイズを超えるたびに最も古い行が削除されます。高トラフィックサイトに便利です。',
+	'BbLogRetentionProbability'       => '確率分母（1 in N）',
+	'BbLogRetentionProbabilityInfo'   => '1 in N requests checkes the staleness gate. Higher = less DB load. Default: 1000',
+	'BbLogRetentionMinInterval'      => 'クリーンアップ間隔の最小値 (秒)',
+	'BbLogRetentionMinIntervalInfo'  => 'クリーンアップ周波数のハードフロア. デフォルト: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'ロック TTL をクリーンアップ(秒)',
+	'BbLogRetentionLockTtlInfo'      => 'クリーンアップの mutex が保持されている期間。デフォルト: 600 (10 min)',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'DNS認証を有効にする',
+	'BbDnsVerificationInfo'     => '逆DNSルックアップによりボットの要求（Googlebotなど）を確認します。詐欺ボットをキャッチします。',
+	'BbDnsTimeoutMs'            => 'DNS ルックアップタイムアウト (ミリ秒)',
+	'BbDnsPositiveTtl'          => '正のキャッシュ TTL (秒)',
+	'BbDnsNegativeTtl'          => '負のキャッシュ TTL (秒)',
+	'BbDnsRequireForward'       => '転送確認が必要 (PTR + レコード一致)',
+	'BbDnsRequireForwardInfo'   => 'PTRスプーフィングをキャッチしますが、レイテンシとIPv6 FPリスクが追加されます。',
+
+	'BbHeadRefererExemptPaths'  => '免除されたパス (1行に1つ)',
+	'BbHeadRefererExemptInfo'   => 'Referer なしの HEAD が正当なパス（例: /api/, /wp-json/）。',
+
+	'BbAssetExtensionsLabel'    => '保護するアセットエクステンション（1行に1つ）',
+	'BbAssetExtensionsInfo'     => 'ページ読み込みなしで直接スクレイピングするために見られるファイルタイプ。',
+
+	'BbOnDemandBotIds'          => 'リフレッシュするボットID (空 = すべて)',
+	'BbOnDemandBotIdsInfo'      => '特定のボットに更新を制限します。空白のままにすると、登録されているすべてのボットを更新します。',
+	'BbOnDemandProbability'     => '確率分母（1 in N）',
+	'BbOnDemandMinAge'          => '最小キャッシュ年齢 (秒)',
+	'BbOnDemandLockTtl'         => 'TTLをロック(秒)',
+	'BbOnDemandCacheTtl'        => 'キャッシュ TTL (秒)',
+	'BbOnDemandFeedTimeout'     => 'フィードフェッチのタイムアウト（秒）',
+
+	'BbDynamicIpTtl'            => 'キャッシュ TTL (秒)',
+	'BbDynamicIpFeeds'          => 'リフレッシュするフィード（1行に1つ）',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => '最終閲覧',
+	'BbSeverity'             => '重大度',
+	'BbStatusBreakdown'      => 'ステータスの内訳：',
+	'BbBotBreakdown'         => 'Botの内訳：',
+	'BbTopBlocked'           => 'トップ拒否されたIP',
+	'BbGeoSummary'           => '地理的な概要',
+	'BbCountry'              => '国',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => '確認済み%',
+	'BbNoData'               => '選択したウィンドウにデータがありません',
+	'BbCategory'             => 'カテゴリ',
+	'BbResponseTime'         => '応答時間',
+	'BbDateCol'              => '時間 / IP / ステータス',
+	'BbSelectRow'            => '行を選択',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'スローのみ',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => '解決済み',
+	'BbChipStatusCode' => 'ステータスコード：',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => '国',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'ヘッダーを表示',
+	'BbViewBody'             => '本文を表示',
+	'BbViewContentLabel'     => 'コンテンツ',
+	'BbViewModeFull'         => 'フル (常に表示)',
+	'BbViewModeTeaser'       => 'チューザー (クリックで展開)',
+	'BbViewModeHidden'       => '非表示 (オンデマンドで表示)',
+	'BbHide'                 => 'ヒデ',
+	'BbChars'                => '文字',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'カスタムルール',
+	'BbCustomRulesLabel'           => 'カスタムルール (1 行に 1 つの JSON オブジェクト)',
+	'BbCustomRulesInfo'            => '各行はキーを持つJSONオブジェクトです: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => '本文スキャンのスキップフィールド',
+	'BbBodyScanSkipFieldsInfo'     => '1行に1つのフィールド名があります。リストされたフィールドはSQL/XSSボディ検査中にスキップされます。',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => '高度なフィルタ',
+	'BbDateFrom'            => '差出人:',
+	'BbDateTo'              => '終了日',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'スローリクエストのみ (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'アクティブのみ',
+	'BbResolvedOnly'        => '解決済みのみ',
+	'BbResolvedAll'         => 'アクティブ + 解決済み',
+	'BbResolved'            => '解決済み',
+	'BbActionResolve'       => '解決',
+	'BbActionUnresolve'     => '未解決',
+	'BbRowResolved'         => 'ログエントリが解決済みになっています',
+	'BbRowUnresolved'       => 'ログエントリが未解決になっています',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => '選択したものを削除',
+	'BbBulkWhitelistSelected'   => 'ホワイトリストIP',
+	'BbBulkResolveSelected'     => '解決済みのマーク',
+	'BbBulkUnresolveSelected'   => '未解決にする',
+	'BbBulkHint'                => '最初に行をチェックし、アクションをクリックします。',
+	'BbNoItemsSelected'         => 'アイテムが選択されていません',
+	'BbBulkDeleted'             => '%1 ログエントリを削除しました',
+	'BbBulkWhitelisted'         => '%1 IPをホワイトリストに追加しました',
+	'BbBulkResolved'            => '%1 項目を解決済みにする',
+	'BbBulkUnresolved'          => '%1 項目を未解決としてマークしました',
+	'BbMarkAll'                 => 'このページのすべての行にマーク',
+	'BbMarkNone'                => 'すべての行の標識を解除',
+
+	'BbBulkFailed'              => '選択した行を更新できませんでした。データベースを確認するか、もう一度お試しください。',
+	'BbBulkWhitelistedNone'     => '新しいIPが追加されませんでした。選択したIPはすべてホワイトリストに登録されていました。',
+
+	// === Verified badge ===
+	'BbVerified'             => '確認済み',
+	'BbUnverified'           => '未確認',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => '許可されたリクエスト',
+	'BbStatus_blocked.bot'                => '既知のボットがブロックされています',
+	'BbStatus_blocked.ai_crawler'         => 'AIクローラーがブロック',
+	'BbStatus_blocked.seo_crawler'        => 'SEOクローラーがブロックされました',
+	'BbStatus_blocked.malicious_ua'       => '悪意のあるユーザーエージェント',
+	'BbStatus_blocked.attack_pattern'     => '攻撃ペイロードを検出しました',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL一致',
+	'BbStatus_blocked.httpbl'             => 'http:BL一致',
+	'BbStatus_blocked.behavioral'         => '行動異常',
+	'BbStatus_blocked.fingerprint'        => '不正なフィンガープリントです',
+	'BbStatus_blocked.rate_limit'         => 'レート制限を超えました',
+	'BbStatus_blocked.custom_rule'        => 'カスタムルールの一致',
+	'BbStatus_blocked.geoip'              => 'GeoIPブロック',
+	'BbStatus_blocked.residential_proxy'  => '住宅用プロキシがブロックされました',
+	'BbStatus_challenge.required'         => 'チャレンジが必要です',
+	'BbStatus_challenge.failed'           => 'チャレンジに失敗しました',
+	'BbStatus_error.internal'             => '内部エラー',
+	'BbStatus_error.configuration'        => '設定エラー',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => '過去24時間',
+	'BbWindow7d'  => '過去 7 日間',
+	'BbWindow30d' => '過去 30 日間',
+	'BbWindowAll' => 'すべて',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => '最小 (デフォルト)',
+	'BbPresetFull'           => 'フル',
+	'BbPresetVerifiedOnly'   => '確認済みのみ',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'EUのみ',
+	'BbPresetHumanOnly'      => '人間のみ',
+	'BbPresetCustom'         => 'カスタム',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'モニターのみ',
+	'BbStrictnessNormal'      => '標準',
+	'BbStrictnessStrict'      => 'Strict',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'ヘッド要求の検出を有効にする',
+	'BbHeadRequireReferer'       => '参照者を要求する',
+	'BbHeadFloodThreshold'       => '洪水のしきい値（セッション毎）',
+	'BbHeadProbeThreshold'       => 'プローブ閾値（IP / 5分あたり）',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'アセットスクレイピング検出を有効にする',
+	'BbAssetNoRefererThreshold'    => '非リファラー閾値（IP / 時間あたり）',
+	'BbAssetOnlySessionThreshold'  => 'アセットのみのセッションしきい値',
+	'BbAssetPatternThreshold'      => 'シーケンシャルパターンしきい値 (IP / 5minあたり)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => '動的IP範囲を有効にする',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'オンデマンドの更新を有効にする',
+	'BbOnDemandRefreshInfo'      => 'リクエスト中にIP範囲キャッシュを更新します。cronアクセスがない場合に使用します。',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => '不正なJA3',
+	'BbFpBadH2'           => 'H2が不正です',
+	'BbFpBotHeaderOrders' => 'Botヘッダ注文',
+	'BbFpExpectedJa3'     => '期待されているJA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'ブロック',
+	'BbListChallenge' => 'チャレンジ (CAPTCHA)',
+	'BbListLogOnly'   => 'ログのみ (強制なし)',
+	'BbListAllowed'   => '明示的に許可',
+	'BbListHint'      => 'このリストのカテゴリは、カテゴリのデフォルトに関係なくアクションを取得します。',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Search Engine',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'ソーシャルクローラー',
+	'BbCatSeoCrawler'      => 'SEOクローラー',
+	'BbCatArchiveCrawler'  => 'クローラーをアーカイブ',
+	'BbCatMonitoring'      => 'モニタリング',
+	'BbCatFeedReader'      => 'フィードリーダー',
+	'BbCatShoppingCrawler' => '買い物用クローラー',
+	'BbCatCloudInfra'      => 'クラウドインフラストラクチャ',
+	'BbCatSecurityScanner' => 'セキュリティスキャナ',
+	'BbCatResidentialProxy'=> 'レジデンシャルプロキシ',
+	'BbCatMalicious'       => '悪意のある',
+	'BbCatUnknown'         => '不明',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32文字ハッシュ',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => '攻撃パターン',
+	'BbSevChallenges'     => '発行された課題',
+	'BbSevPermitted'      => '許可',
+	'BbSevErrors'         => 'エラー',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'カテゴリ',
+
+	'BbResultBreakdown'    => '結果の内訳：',
+	'BbBreakdownBlocked'   => 'ブロック',
+	'BbBreakdownMonitored' => '監視中',
+	'BbBreakdownAllowed'   => '許可',
+	'BbViewAllInLog'       => 'すべてのログを表示',
+	'BbAllowedHintVerbose' => '冗長ロギングが有効な場合にのみ許可されるトラフィックが記録されます。設定で logging_mode=verbose を切り替えて、何が通過するかを確認します。',
 
 ];

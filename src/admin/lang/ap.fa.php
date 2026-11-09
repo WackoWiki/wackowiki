@@ -14,17 +14,20 @@ $ap_translation = [
 		'users'			=> 'کاربران',
 		'maintenance'	=> 'نگهداری',
 		'messages'		=> 'پیام‌ها',
-		'extension'		=> 'افزونه‌ها',
-		'database'		=> 'پایگاه داده',
+		'extension'		=> 'اکستنشن',
+		'database'		=> 'دیتابیس',
 	],
 
 	// Admin panel
 	'AdminPanel'				=> 'پنل کنترل مدیریت',
 	'RecoveryMode'				=> 'حالت بازیابی',
-	'Authorization'				=> 'احراز هویت',
+	'Authorization'				=> 'تصدیق هویت',
 	'AuthorizationTip'			=> 'لطفاً رمز عبور مدیریت را وارد کنید (همچنین مطمئن شوید که کوکی‌ها در مرورگر شما مجاز هستند).',
 	'NoRecoveryPassword'		=> 'رمز عبور مدیریت مشخص نشده است!',
 	'NoRecoveryPasswordTip'		=> 'توجه: عدم وجود رمز عبور مدیریت تهدیدی برای امنیت است! هش رمز عبور خود را در فایل پیکربندی وارد کنید و برنامه را دوباره اجرا کنید.',
+
+	'ApDevNologinBlocked'		=> 'Access blocked: AP_DEV_NOLOGIN is enabled in admin.php but the request did not originate from localhost (127.0.0.1, ::1, or localhost). This is a development-only flag and must be disabled on production. Set <code>AP_DEV_NOLOGIN = 0</code> in admin.php to restore access.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 is enabled but admin.php was accessed from a non-localhost address (%2). Admin panel access has been blocked.',
 
 	'ErrorLoadingModule'		=> 'خطا در بارگذاری ماژول مدیریت %1: وجود ندارد.',
 
@@ -34,7 +37,8 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'خروج از مدیریت سیستم',
 
 	'TimeLeft'					=> 'زمان باقیمانده: %1 دقیقه',
-	'ApVersion'					=> 'نسخه',
+	'TimeLeftInfinity'			=> 'Time left:  %1 (developer mode)',
+	'ApVersion'					=> 'مدیریت نسخه',
 
 	'SiteOpen'					=> 'باز کردن',
 	'SiteOpened'				=> 'سایت باز است',
@@ -51,7 +55,7 @@ $ap_translation = [
 	'Edit'						=> 'ویرایش',
 	'Remove'					=> 'حذف',
 	'Enabled'					=> 'فعال',
-	'Disabled'					=> 'غیرفعال',
+	'Disabled'					=> 'غیرفعال شده',
 	'Mandatory'					=> 'الزامی',
 	'Admin'						=> 'مدیر',
 	'Min'						=> 'حداقل',
@@ -86,7 +90,7 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'رایانامه',
+		'name'		=> 'ایمیل',
 		'title'		=> 'تنظیمات رایانامه',
 	],
 
@@ -110,7 +114,7 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'اعلانات',
+		'name'		=> 'اطلاع‌رسانی‌ها',
 		'title'		=> 'تنظیمات اعلان‌ها',
 	],
 
@@ -140,7 +144,7 @@ $ap_translation = [
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'بارگذاری',
+		'name'		=> 'آپلود',
 		'title'		=> 'تنظیمات پیوست‌ها',
 	],
 
@@ -170,7 +174,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'بازگردانی',
+		'name'		=> 'بازیابی',
 		'title'		=> 'بازگردانی داده‌های پشتیبان',
 	],
 
@@ -230,7 +234,7 @@ $ap_translation = [
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'تایید',
+		'name'		=> 'تأیید',
 		'title'		=> 'تایید ثبت‌نام کاربر',
 	],
 
@@ -249,7 +253,7 @@ $ap_translation = [
 	// Main module
 	'MainNote'					=> 'توجه: توصیه می‌شود دسترسی به سایت به طور موقت برای نگهداری اداری مسدود شود.',
 
-	'PurgeSessions'				=> 'پاکسازی جلسات',
+	'PurgeSessions'				=> 'پاک‌سازی',
 	'PurgeSessionsTip'			=> 'پاکسازی همه جلسات',
 	'PurgeSessionsConfirm'		=> 'آیا مطمئن هستید که می‌خواهید همه جلسات را پاکسازی کنید؟ این کار همه کاربران را از سیستم خارج خواهد کرد.',
 	'PurgeSessionsExplain'		=> 'پاکسازی همه جلسات. این کار همه کاربران را با خالی کردن جدول auth_token از سیستم خارج می‌کند.',
@@ -268,14 +272,14 @@ $ap_translation = [
 	'AdminNameInfo'				=> 'نام کاربری که مسئولیت پشتیبانی کلی سایت را بر عهده دارد. این نام برای تعیین حقوق دسترسی استفاده نمی‌شود، اما توصیه می‌شود با نام مدیر اصلی سایت مطابقت داشته باشد.',
 
 	'LanguageSection'			=> 'زبان',
-	'DefaultLanguage'			=> 'زبان پیش‌فرض:',
+	'DefaultLanguage'			=> 'زبان پیش‎فرض:',
 	'DefaultLanguageInfo'		=> 'زبان پیام‌هایی که به مهمانان غیروارد شده نمایش داده می‌شود را مشخص می‌کند، همچنین تنظیمات محلی را تعیین می‌کند.',
 	'MultiLanguage'				=> 'پشتیبانی چندزبانه:',
 	'MultiLanguageInfo'			=> 'امکان انتخاب زبان به صورت صفحه به صفحه را فعال می‌کند.',
 	'AllowedLanguages'			=> 'زبان‌های مجاز:',
-	'AllowedLanguagesInfo'		=> 'توصیه می‌شود فقط مجموعه زبان‌هایی که می‌خواهید استفاده کنید را انتخاب کنید، در غیر این صورت همه زبان‌ها انتخاب می‌شوند.',
+	'AllowedLanguagesInfo'		=> 'توصیه می‌شود فقط مجموعه زبان‌هایی را که می‌خواهید استفاده کنید انتخاب کنید، در غیر این صورت همه زبان‌ها انتخاب می‌شوند.',
 
-	'CommentSection'			=> 'دیدگاه‌ها',
+	'CommentSection'			=> 'نظرات',
 	'AllowComments'				=> 'اجازه دادن به دیدگاه‌ها:',
 	'AllowCommentsInfo'			=> 'فعال کردن دیدگاه‌ها فقط برای مهمانان یا کاربران ثبت‌نام شده یا غیرفعال کردن آنها در کل سایت.',
 	'SortingComments'			=> 'مرتب‌سازی دیدگاه‌ها:',
@@ -314,7 +318,7 @@ $ap_translation = [
 	'ExportHandlerInfo'			=> 'امکان نمایش گرداننده خروجی XML را فراهم می‌کند.',
 
 	'DiffModeSection'			=> 'حالت‌های تفاوت',
-	'DefaultDiffModeSetting'	=> 'حالت تفاوت پیش‌فرض:',
+	'DefaultDiffModeSetting'	=> 'حالت پیش‌فرض تفاوت:',
 	'DefaultDiffModeSettingInfo'=> 'حالت تفاوت از پیش انتخاب شده.',
 	'AllowedDiffMode'			=> 'حالت‌های تفاوت مجاز:',
 	'AllowedDiffModeInfo'		=> 'توصیه می‌شود فقط مجموعه حالت‌های تفاوتی که می‌خواهید استفاده کنید را انتخاب کنید، در غیر این صورت همه حالت‌های تفاوت انتخاب می‌شوند.',
@@ -385,7 +389,7 @@ $ap_translation = [
 	'AppearanceSettingsUpdated'	=> 'تنظیمات ظاهر به‌روزرسانی شدند.',
 
 	'LogoOff'					=> 'خاموش',
-	'LogoOnly'					=> 'فقط لوگو',
+	'LogoOnly'					=> 'لوگو',
 	'LogoAndTitle'				=> 'لوگو و عنوان',
 
 	'LogoSection'				=> 'لوگو',
@@ -404,7 +408,7 @@ $ap_translation = [
 	'ThemeColorInfo'			=> 'مرورگر رنگ نوار آدرس هر صفحه را بر اساس رنگ CSS ارائه شده تنظیم می‌کند.',
 
 	'LayoutSection'				=> 'چیدمان',
-	'Theme'						=> 'تم:',
+	'Theme'						=> 'پوسته:',
 	'ThemeInfo'					=> 'طراحی قالب که سایت به طور پیش‌فرض از آن استفاده می‌کند.',
 	'ResetUserTheme'			=> 'بازنشانی همه تم‌های کاربران:',
 	'ResetUserThemeInfo'		=> 'همه تم‌های کاربران را بازنشانی می‌کند. هشدار: این عمل همه تم‌های انتخاب شده توسط کاربران را به تم پیش‌فرض سراسری بازمی‌گرداند.',
@@ -486,7 +490,7 @@ $ap_translation = [
 	'SessionStorageInfo'			=> 'این گزینه تعیین می‌کند که داده‌های جلسه کجا ذخیره شوند. به‌طور پیش‌فرض ذخیره‌سازی جلسه فایل یا پایگاه داده انتخاب شده است.',
 	'SessionModes'	=> [
 		'1'		=> 'فایل',
-		'2'		=> 'پایگاه داده',
+		'2'		=> 'دیتابیس',
 	],
 	'SessionNotice'					=> 'نمایش علت خاتمه جلسه:',
 	'SessionNoticeInfo'				=> 'دلیل ختم جلسه را نشان می‌دهد.',
@@ -537,7 +541,7 @@ mod_rewrite
 	'SecuritySettingsInfo'		=> 'پارامترهای مسئول امنیت کلی پلتفرم، محدودیت‌های امنیتی و زیرسیستم‌های امنیتی اضافی.',
 	'SecuritySettingsUpdated'	=> 'تنظیمات امنیتی به‌روزرسانی شدند.',
 
-	'AllowRegistration'			=> 'ثبت‌نام آنلاین:',
+	'AllowRegistration'			=> 'آنلاین ثبت‌نام کنید:',
 	'AllowRegistrationInfo'		=> 'ثبت‌نام کاربران را باز کنید. غیرفعال کردن این گزینه از ثبت‌نام آزاد جلوگیری می‌کند، اما مدیر سایت همچنان می‌تواند کاربران دیگر را ثبت‌نام کند.',
 	'ApproveNewUser'			=> 'تأیید کاربران جدید:',
 	'ApproveNewUserInfo'		=> 'به مدیران اجازه می‌دهد کاربران را پس از ثبت‌نام تأیید کنند. فقط کاربران تأیید شده اجازه ورود به سایت را دارند.',
@@ -548,7 +552,7 @@ mod_rewrite
 	'UsernameLength'			=> 'طول نام کاربری:',
 	'UsernameLengthInfo'		=> 'حداقل و حداکثر تعداد کاراکترها در نام‌های کاربری.',
 
-	'EmailSection'				=> 'رایانامه',
+	'EmailSection'				=> 'ایمیل',
 	'AllowEmailReuse'			=> 'اجازه استفاده مجدد از آدرس ایمیل:',
 	'AllowEmailReuseInfo'		=> 'کاربران مختلف می‌توانند با یک آدرس ایمیل ثبت‌نام کنند.',
 	'EmailConfirmation'			=> 'اجرای تأیید ایمیل:',
@@ -591,7 +595,7 @@ CSP ممکن است در برخی شرایط مشکل ایجاد کند (مثل�
 	'Csp'						=> 'Content-Security-Policy (CSP):',
 	'CspInfo'					=> 'پیکربندی Content Security Policy شامل تصمیم‌گیری درباره سیاست‌هایی است که می‌خواهید اعمال کنید، سپس پیکربندی آنها و استفاده از Content-Security-Policy برای ایجاد سیاست شما.',
 	'PolicyModes'	=> [
-		'0'		=> 'غیرفعال',
+		'0'		=> 'غیرفعال شده',
 		'1'		=> 'سختگیرانه',
 		'2'		=> 'سفارشی',
 	],
@@ -632,7 +636,7 @@ CSP ممکن است در برخی شرایط مشکل ایجاد کند (مثل�
 		'2'		=> 'رمز عبور شامل نام کاربری نیست',
 	],
 
-	'LoginSection'				=> 'ورود',
+	'LoginSection'				=> 'ورود به سامانه',
 	'MaxLoginAttempts'			=> 'حداکثر تعداد تلاش‌های ورود به ازای هر نام کاربری:',
 	'MaxLoginAttemptsInfo'		=> 'تعداد تلاش‌های ورود مجاز برای یک حساب کاربری واحد قبل از فعال شدن وظیفه ضد اسپم‌بوت. عدد 0 را وارد کنید تا از فعال شدن وظیفه ضد اسپم‌بوت برای حساب‌های کاربری متمایز جلوگیری شود.',
 	'IpLoginLimitMax'			=> 'حداکثر تعداد تلاش‌های ورود به ازای هر آدرس IP:',
@@ -703,7 +707,7 @@ CamelCaseWords
 	'NameDateMacroInfo'			=> '(نام، زمان)، به عنوان مثال
 نام‌کاربری (17.11.2016 16:48)
 ',
-	'Timezone'					=> 'ناحیه زمانی:',
+	'Timezone'					=> 'منطقه زمانی:',
 	'TimezoneInfo'				=> 'ناحیه زمانی برای نمایش زمان به کاربرانی که وارد نشده‌اند (مهمانان). کاربران وارد شده می‌توانند ناحیه زمانی خود را در تنظیمات کاربری خود تنظیم و تغییر دهند.',
 	'AmericanDate'					=> 'تاریخ آمریکایی:',
 	'AmericanDateInfo'				=> 'از قالب تاریخ آمریکایی به عنوان پیش‌فرض برای انگلیسی استفاده می‌کند.',
@@ -760,7 +764,7 @@ rel="nofollow"
 [خوشه]/[سال]/[ماه]
 ).',
 
-	'LicenseSection'			=> 'مجوز',
+	'LicenseSection'			=> 'لایسنس',
 	'DefaultLicense'			=> 'مجوز پیش‌فرض:',
 	'DefaultLicenseInfo'		=> 'تحت چه مجوزی محتوای شما منتشر شود.',
 	'EnableLicense'				=> 'فعال کردن مجوز:',
@@ -772,7 +776,7 @@ rel="nofollow"
 	'RootPage'					=> 'صفحه اصلی:',
 	'RootPageInfo'				=> 'برچسب صفحه اصلی شما که هنگام بازدید کاربر از سایت شما به طور خودکار باز می‌شود.',
 
-	'PrivacyPage'				=> 'سیاست حفظ حریم خصوصی:',
+	'PrivacyPage'				=> 'سیاست محرمانگی:',
 	'PrivacyPageInfo'			=> 'صفحه‌ای که حاوی سیاست حفظ حریم خصوصی سایت است.',
 
 	'TermsPage'					=> 'قوانین و مقررات:',
@@ -784,7 +788,7 @@ rel="nofollow"
 	'RegistrationPageInfo'		=> 'صفحه ثبت‌نام کاربر جدید (عملیات %1).',
 	'LoginPage'					=> 'ورود کاربر:',
 	'LoginPageInfo'				=> 'صفحه ورود به سایت (عملیات %1).',
-	'SettingsPage'				=> 'تنظیمات کاربر:',
+	'SettingsPage'				=> 'تنظیمات کاربری:',
 	'SettingsPageInfo'			=> 'صفحه سفارشی‌سازی پروفایل کاربر (عملیات %1).',
 	'PasswordPage'				=> 'تغییر رمز عبور:',
 	'PasswordPageInfo'			=> 'صفحه‌ای با فرم تغییر/استعلام رمز عبور کاربر (عملیات %1).',
@@ -810,9 +814,9 @@ rel="nofollow"
 	'SandboxPageInfo'			=> 'صفحه‌ای که کاربران می‌توانند در استفاده از نشانه‌گذاری ویکی آموزش ببینند.',
 	'HelpPage'					=> 'راهنما:',
 	'HelpPageInfo'				=> 'بخش مستندات برای کار با ابزارهای سایت.',
-	'IndexPage'					=> 'فهرست:',
+	'IndexPage'					=> 'شاخص:',
 	'IndexPageInfo'				=> 'صفحه‌ای با لیست همه صفحات (عملیات %1).',
-	'RandomPage'				=> 'صفحه تصادفی:',
+	'RandomPage'				=> 'تصادفی:',
 	'RandomPageInfo'			=> 'بارگذاری یک صفحه تصادفی (عملیات %1).',
 
 
@@ -1004,8 +1008,8 @@ png, ogg, mp4
 	'Thumbnails'				=> 'تصاویر بندانگشتی',
 	'CreateThumbnail'			=> 'ایجاد تصویر بندانگشتی:',
 	'CreateThumbnailInfo'		=> 'در همه شرایط ممکن تصویر بندانگشتی ایجاد کنید.',
-	'JpegQuality'				=> 'کیفیت JPEG:',
-	'JpegQualityInfo'			=> 'کیفیت هنگام مقیاس‌بندی یک تصویر کوچک JPEG. باید بین 1 تا 100 باشد که 100 نشان‌دهنده کیفیت 100٪ است.',
+	'ImageQuality'				=> 'Image Quality Preset:',
+	'ImageQualityInfo'			=> 'Quality when scaling a thumbnail. Presets that pick per-codec values which produce a comparable perceptual result.',
 	'MaxImageArea'				=> 'حداکثر مساحت تصویر:',
 	'MaxImageAreaInfo'			=> 'حداکثر تعداد پیکسل‌هایی که یک تصویر منبع می‌تواند داشته باشد. این یک محدودیت حافظه برای سمت رفع فشرده‌سازی مقیاس‌کننده تصویر ایجاد می‌کند.
 -1
@@ -1042,7 +1046,6 @@ png, ogg, mp4
 		'2'		=> 'بیشتر از',
 		'3'		=> 'برابر',
 	],
-	'LogNoMatch'				=> 'هیچ رویدادی که معیارها را برآورده کند یافت نشد',
 	'LogDate'					=> 'تاریخ',
 	'LogEvent'					=> 'رویداد',
 	'LogUsername'				=> 'نام کاربری',
@@ -1056,6 +1059,49 @@ png, ogg, mp4
 		'7'		=> 'اشکال‌زدایی',
 	],
 
+	'LogCollapse'        => 'collapse',
+	'LogExpand'          => 'expand',
+	'LogType'              => 'نوع',
+	'LogSearch'            => 'جستجو',
+	'LogSearchPlaceholder' => 'search messages...',
+	'LogUserId'            => 'User ID',
+	'LogExactMatch'        => 'exact match',
+	'LogFrom'              => 'From',
+	'LogTo'                => 'To',
+	'LogSupportKey'        => 'Support key',
+	'LogContext'           => 'زمینه',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'User agent',
+	'LogReferer'           => 'Referer',
+	'LogTotal'             => 'مجموع',
+	'LogFilteredBy'        => 'Filtered by',
+	'LogClearFilter'       => 'Clear filter',
+	'LogActions'           => 'عملیات',
+	'LogDelete'            => 'حذف',
+	'LogDeleteConfirm'     => 'Delete this log entry?',
+	'LogDeleteSelected'    => 'حذف موارد انتخاب شده ',
+	'LogBulkAction'        => '— bulk action —',
+	'LogApply'             => 'Apply',
+	'LogExportCSV'         => 'Export CSV',
+	'LogExportJSON'        => 'Export JSON',
+	'LogPurged'            => 'Log table truncated.',
+	'LogPurgedFiltered'     => '%1 log entries deleted by filter.',
+	'LogDeleted'           => 'Log entry deleted.',
+	'LogDeletedBulk'        => '%1 log entries deleted.',
+	'LogPurgeSection'      => 'Destructive operations',
+	'LogPurgeWarning'      => 'There are %1 entries matching the current view. Use with care.',
+	'LogPurgeConfirm'      => 'I understand this will permanently delete log entries',
+	'LogPurgeFiltered'     => 'Purge matching filter',
+	'LogPurgeFilteredConfirm' => 'Delete all entries matching the current filter? This cannot be undone.',
+	'LogPurgeAll'          => 'Purge ENTIRE log',
+	'LogPurgeAllConfirm'   => 'Delete EVERY log entry in the database? This cannot be undone.',
+	'LogFindRelated'       => 'Find related entries',
+	'LogNoMatch'           => 'No log entries match the current filter.',
+
+	'LogMarkAll'                => 'Mark all rows on this page',
+	'LogMarkNone'               => 'Unmark all rows',
+	'LogSelectRow'              => 'Select row',
+
 	// Massemail module
 	'MassemailInfo'				=> 'در اینجا می‌توانید یک پیام ایمیلی به تمام کاربران خود یا تمام کاربران یک گروه خاص که گزینه دریافت ایمیل‌های گروهی را فعال کرده‌اند، ارسال کنید. برای این منظور، یک ایمیل به آدرس ایمیل اداری ارسال می‌شود که یک رونوشت مخفی به تمام گیرندگان فرستاده می‌شود. تنظیم پیش‌فرض فقط شامل ۲۰ گیرنده در هر ایمیل است و برای تعداد بیشتر گیرنده، ایمیل‌های بیشتری ارسال خواهد شد. اگر قصد ارسال ایمیل به گروه بزرگی از افراد را دارید، لطفاً پس از ارسال صبور باشید و صفحه را نیمه‌کاره رها نکنید. ارسال ایمیل گروهی معمولاً زمان‌بر است و پس از اتمام اسکریپت به شما اطلاع داده خواهد شد.',
 	'LogMassemail'				=> 'ایمیل گروهی %1 به گروه/کاربر ارسال شد',
@@ -1066,7 +1112,7 @@ png, ogg, mp4
 	'NoEmailRecipient'			=> 'باید حداقل یک کاربر یا گروه کاربری مشخص کنید.',
 
 	'MassemailSection'			=> 'ایمیل گروهی',
-	'MessageSubject'			=> 'موضوع:',
+	'MessageSubject'			=> 'موضوع',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'پیام شما:',
 	'YourMessageInfo'			=> 'لطفاً توجه داشته باشید که فقط می‌توانید متن ساده وارد کنید. تمام نشانه‌گذاری‌ها قبل از ارسال حذف خواهند شد.',
@@ -1104,7 +1150,7 @@ png, ogg, mp4
 	'LogUserPasswordReset'		=> 'رمز عبور کاربر ##%1## با موفقیت بازنشانی شد',
 
 	'UserApproveInfo'			=> 'کاربران جدید را قبل از اینکه بتوانند وارد سایت شوند تأیید کنید.',
-	'Approve'					=> 'تأیید',
+	'Approve'					=> 'تایید',
 	'Deny'						=> 'رد',
 	'Pending'					=> 'در انتظار',
 	'Approved'					=> 'تأیید شده',
@@ -1189,10 +1235,10 @@ INSERT IGNORE
 	'DecompressAndStore'		=> 'دکمپرس و ذخیره محتوای دایرکتوری‌ها',
 	'HomonymicFiles'			=> 'فایل‌های هم‌نام',
 	'RestoreSkip'				=> 'رد کردن',
-	'RestoreReplace'			=> 'جایگزین کردن',
+	'RestoreReplace'			=> 'جایگزینی',
 	'RestoreFile'				=> 'فایل:',
 	'RestoredFiles'				=> 'بازیابی شده:',
-	'SkippedFiles'				=> 'رد شده:',
+	'SkippedFiles'				=> 'نادیده گرفته شد:',
 	'FileRestoreDone'			=> 'تکمیل شد. کل فایل‌ها:',
 	'FilesAll'					=> 'همه:',
 	'SkipFiles'					=> 'فایل‌ها ذخیره نشده‌اند - نادیده گرفته شوند',
@@ -1200,7 +1246,7 @@ INSERT IGNORE
 
 	'BackupCreationDate'		=> 'تاریخ ایجاد',
 	'BackupPackageContents'		=> 'محتویات بسته',
-	'BackupRestore'				=> 'بازیابی',
+	'BackupRestore'				=> 'بازگردانی',
 	'BackupRemove'				=> 'حذف',
 	'RestoreYes'				=> 'بله',
 	'RestoreNo'					=> 'خیر',
@@ -1225,7 +1271,7 @@ INSERT IGNORE
 
 	'UserIP'					=> 'IP',
 	'UserSignuptime'			=> 'زمان ثبت‌نام',
-	'UserActions'				=> 'عملیات‌ها',
+	'UserActions'				=> 'عملیات',
 	'NoMatchingUser'			=> 'هیچ کاربری که معیارها را برآورده کند یافت نشد',
 
 	'UserAccountNotify'			=> 'اطلاع‌رسانی به کاربر',
@@ -1246,7 +1292,7 @@ INSERT IGNORE
 	'GroupsMembersFor'			=> 'اعضای گروه',
 	'GroupsDescription'			=> 'توضیحات',
 	'GroupsModerator'			=> 'مدیر',
-	'GroupsOpen'				=> 'باز',
+	'GroupsOpen'				=> 'باز کردن',
 	'GroupsActive'				=> 'فعال',
 	'GroupsTip'					=> 'برای ویرایش گروه کلیک کنید',
 	'GroupsUpdated'				=> 'گروه‌ها به‌روزرسانی شدند',
@@ -1299,7 +1345,7 @@ INSERT IGNORE
 	'ServerName'				=> 'نام سرور',
 	'WebServer'					=> 'وب سرور',
 	'HttpProtocol'				=> 'پروتکل HTTP',
-	'DbVersion'					=> 'پایگاه داده',
+	'DbVersion'					=> 'دیتابیس',
 	'SqlModesGlobal'			=> 'حالت‌های SQL سراسری',
 	'SqlModesSession'			=> 'حالت‌های SQL جلسه',
 	'IcuVersion'				=> 'ICU',
@@ -1338,7 +1384,7 @@ INSERT IGNORE
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'ناهماهنگی‌ها را نشان داده و رفع کنید، رکوردهای بدون مرجع را حذف یا به کاربر/مقدار جدید اختصاص دهید.',
 	'Inconsistencies'			=> 'ناهماهنگی‌ها',
-	'CheckDatabase'				=> 'پایگاه داده',
+	'CheckDatabase'				=> 'دیتابیس',
 	'CheckDatabaseInfo'			=> 'بررسی ناهماهنگی‌های رکورد در پایگاه داده.',
 	'CheckFiles'				=> 'فایل‌ها',
 	'CheckFilesInfo'			=> 'بررسی فایل‌های بدون مرجع، فایل‌هایی که در جدول فایل‌ها مرجعی ندارند.',
@@ -1376,6 +1422,40 @@ INSERT IGNORE
 	'BbHeaders'					=> 'هدرها',
 	'BbEntity'					=> 'موجودیت',
 
+	'BbSearchPlaceholder'        => 'Search UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Any category',
+	'BbFilterAnyMethod'          => 'Any method',
+	'BbFilterAnyStatus'          => 'Any status',
+	'BbFilterBlockedOnly'        => 'Blocked only',
+	'BbFilterPermittedOnly'      => 'Permitted only',
+	'BbFilterApply'              => 'Apply',
+	'BbFilterClear'              => 'Clear filters',
+	'BbChipSearch'               => 'جستجو',
+	'BbChipCategory'             => 'دسته‌بندی',
+	'BbChipMethod'               => 'Method',
+	'BbChipStatus'               => 'وضعیت',
+	'BbChipRemove'               => 'Remove this filter',
+	'BbFilterByCategory'         => 'Filter by this category',
+	'BbSearchBySupportKey'       => 'Search for this support key',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Any check status',
+	'BbFilterCheckedOnly'      => 'Checked only',
+	'BbFilterUncheckedOnly'    => 'Unchecked only',
+	'BbChipCheck'              => 'Check status',
+	'BbChecked'                => 'checked',
+	'BbUnchecked'              => 'unchecked',
+	'BbActionCheck'            => 'بررسی',
+	'BbActionUncheck'          => 'uncheck',
+	'BbRowChecked'             => 'Log entry marked as checked',
+	'BbRowUnchecked'           => 'Log entry unchecked',
+	'BbRowCheckedHint'         => 'This record is checked — exempt from automatic cleanup',
+	'BbRowUncheckedHint'       => 'Mark this record to keep it across automatic cleanup',
+	'BbBulkCheckSelected'      => 'Mark checked',
+	'BbBulkUncheckSelected'    => 'Unmark checked',
+	'BbBulkChecked'            => 'Marked %1 entries as checked',
+	'BbBulkUnchecked'          => 'Unmarked %1 entries',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'تنظیمات ذخیره شد.',
 	'BbWhitelistHint'			=> 'لیست سفید نامناسب شما را در معرض هرزنامه قرار می‌دهد یا باعث می‌شود Bad Behaviour به طور کامل از کار بیفتد! از لیست سفید استفاده نکنید مگر اینکه ۱۰۰٪ مطمئن باشید که باید این کار را انجام دهید.',
@@ -1411,5 +1491,372 @@ INSERT IGNORE
 	'BbReverseProxyEnable'		=> 'فعال کردن پروکسی معکوس',
 	'BbReverseProxyHeader'		=> 'هدر حاوی آدرس IP کلاینت‌های اینترنتی',
 	'BbReverseProxyAddresses'	=> 'آدرس IP یا محدوده آدرس‌ها در فرمت CIDR برای سرورهای پروکسی شما (هر خط یک مورد)',
+
+	'BbBehavioral'           => 'Behavioral Analysis',
+	'BbEnableBehavioral'     => 'Enable behavioral analysis (rate anomalies, rotating UA/IP)',
+	'BbEnableBehavioralInfo' => 'Tracks request patterns per session. Safe to keep enabled.',
+	'BbEnableFingerprinting' => 'Enable TLS/HTTP/2 fingerprinting (JA3, H2, header order)',
+	'BbEnableFingerprintingInfo' => 'Blocks known bad fingerprints only. Requires enable_fingerprinting=true. May cause false positives on old browsers/proxies.',
+	'BbInspectJson'          => 'Inspect JSON request bodies for attacks',
+	'BbInspectJsonInfo'      => 'WARNING: Breaks AJAX/JSON APIs (wiki markup, code snippets trigger false positives). Keep OFF.',
+	'BbInspectMultipart'     => 'Inspect multipart/form-data bodies for attacks',
+	'BbInspectMultipartInfo' => 'WARNING: Breaks file uploads. Keep OFF.',
+
+	'BbEnableClientHints'      => 'Enable Client Hints Validation',
+	'BbEnableClientHintsInfo'  => 'Validate Sec-CH-UA headers against User-Agent to detect spoofed browsers (Chrome 89+).',
+	'BbEnableAgentic'          => 'Enable Agentic Behavior Detection',
+	'BbEnableAgenticInfo'      => 'Detect AI agent patterns: think-then-fetch, non-linear navigation, precision targeting.',
+	'BbStrictSearchEngines'    => 'Strict search engines',
+	'BbStrictSearchEnginesInfo' => 'Apply stricter checks to unverified search engine bots (Googlebot, Bingbot, …) before allowing them through.',
+	'BbEnableDynamicIp'        => 'Enable Dynamic IP Range Fetching',
+	'BbEnableDynamicIpInfo'    => 'Fetch official IP ranges from Google, Bing, OpenAI, Anthropic, Apple, etc. (cached 24h, stale fallback 7 days).',
+
+	'BbAiCrawlers'           => 'AI Crawler Control',
+	'BbBlockUnverifiedAi'    => 'Block unverified AI crawlers',
+	'BbBlockUnverifiedAiInfo' => 'Blocks AI crawlers that fail DNS/IP verification (spoofed bots).',
+	'BbStrictAi'             => 'Strict AI mode (block even verified unallowed AI)',
+	'BbStrictAiInfo'         => 'Blocks ALL AI crawlers not in allowed list, even if verified.',
+	'BbAllowedAiCrawlers'    => 'Allowed AI crawler tokens (one per line)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Enable DNSBL checks',
+	'BbDnsblLists'           => 'DNSBL lists (one per line)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Rate Limiting',
+	'BbRateLimitEnabled'     => 'Enable rate limiting',
+	'BbRateGlobalRequests'   => 'Global requests per window',
+	'BbRateGlobalWindow'     => 'Global window (seconds)',
+	'BbRatePerMinuteRequests'=> 'Per-minute requests',
+	'BbRatePerMinuteWindow'  => 'Per-minute window (seconds)',
+	'BbRatePostRequests'     => 'POST requests per window',
+	'BbRatePostWindow'       => 'POST window (seconds)',
+	'BbRateLoginRequests'    => 'Login requests per window',
+	'BbRateLoginWindow'      => 'Login window (seconds)',
+
+	'BbChallenge'            => 'Challenge System',
+	'BbChallengeEnabled'     => 'Enable challenges',
+	'BbChallengeProvider'    => 'Challenge provider',
+	'BbChallengeSiteKey'     => 'Site key',
+	'BbChallengeSecretKey'   => 'Secret key',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min score',
+
+	'BbPerformance'          => 'Performance',
+	'BbSkipExtensions'       => 'Skip extensions (one per line)',
+	'BbSkipPaths'            => 'Skip path prefixes (one per line)',
+
+	'BbGeoip'                => 'GeoIP / ASN Blocking',
+	'BbGeoipEnabled'         => 'Enable GeoIP lookups',
+	'BbGeoipDbPath'          => 'MaxMind DB path',
+	'BbBlockedCountries'     => 'Blocked countries (ISO codes, one per line)',
+	'BbBlockedAsns'          => 'Blocked ASNs (one per line)',
+
+	'BbBlockPage'                  => 'Block Page',
+	'BbShowDetailedBlockPage'      => 'Show detailed block page',
+	'BbShowDetailedBlockPageInfo'  => 'Show reason, request URI, and technical support key on the block page. Recommended for production.',
+	'BbShowContactInfo'            => 'Show contact info on block page',
+	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
+	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'تنظیمات پایه',
+	'BbAdvancedSection'   => 'Advanced settings',
+	'BbAdvancedHint'      => 'Most operators should not need to change these.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Which bots to recognize. "minimal" (default) is fastest; "full" is most thorough.',
+	'BbStrictness'        => 'Blocking posture',
+	'BbStrictnessInfo'    => 'monitor-only logs but blocks nothing; normal blocks verified attackers; strict blocks aggressively.',
+	'BbLoggingMode'       => 'Logging',
+	'BbLoggingModeInfo'   => 'Normal (recommended), Verbose (logs every request), Off',
+	'BbLogModeNormal'     => 'Normal',
+	'BbLogModeVerbose'    => 'مفصل',
+	'BbLogModeOff'        => 'خاموش',
+	'BbBehindProxy'       => 'Site is behind a reverse proxy or CDN',
+	'BbBehindProxyInfo'   => 'Enable if behind Cloudflare, AWS, GCP, Fastly, etc. You must add proxy IP ranges in Advanced — without them, real client IPs cannot be determined.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Core',
+	'BbAdvReverseProxy'   => 'پروکسی معکوس',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Bot Categories',
+	'BbAdvDnsVerification'=> 'DNS Verification',
+	'BbAdvRateLimits'     => 'Rate Limiting',
+	'BbAdvHeadDetection'  => 'Head Request Detection',
+	'BbAdvAssetScraping'  => 'Asset Scraping Detection',
+	'BbAdvDynamicIp'      => 'Dynamic IP Ranges',
+	'BbAdvOnDemandRefresh'=> 'On-Demand IP Refresh',
+	'BbAdvHttpbl'         => 'Project Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Challenge / CAPTCHA',
+	'BbAdvPerformance'    => 'Performance',
+	'BbAdvGeoip'          => 'GeoIP / ASN Blocking',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Fingerprints',
+	'BbAdvCustomRules'    => 'Custom Rules',
+	'BbAdvBlockPage'      => 'Block Page',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'موتور جستجو',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Social Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Archive Crawler',
+	'BbCatMonitoring'     => 'Monitoring',
+	'BbCatFeedReader'     => 'Feed Reader',
+	'BbCatShoppingCrawler'=> 'Shopping Crawler',
+	'BbCatCloudInfra'     => 'Cloud Infrastructure',
+	'BbCatSecurityScanner'=> 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'      => 'Malicious',
+	'BbCatUnknown'        => 'ناشناخته',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Fastly',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Limit on-demand refresh to specific providers. Empty = all four.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Log Retention',
+	'BbLogRetentionEnabled'          => 'Enable automatic log cleanup',
+	'BbLogRetentionEnabledInfo'      => 'Periodically delete log rows older than the retention window. Recommended for sites without cron access.',
+	'BbLogRetentionMaxAgeDays'       => 'Retention window (days)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rows older than this are deleted. Default: 7. Common values: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maximum row count (0 = no cap)',
+	'BbLogRetentionMaxRowsInfo'      => 'If set, oldest rows are deleted whenever the table exceeds this size, regardless of age. Useful for high-traffic sites.',
+	'BbLogRetentionProbability'       => 'Probability denominator (1 in N)',
+	'BbLogRetentionProbabilityInfo'   => '1 in N requests checks the staleness gate. Higher = less DB load. Default: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minimum interval between cleanups (seconds)',
+	'BbLogRetentionMinIntervalInfo'  => 'Hard floor on cleanup frequency. Default: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Cleanup lock TTL (seconds)',
+	'BbLogRetentionLockTtlInfo'      => 'How long the cleanup mutex is held. Default: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Enable DNS verification',
+	'BbDnsVerificationInfo'     => 'Verify bot claims (e.g. Googlebot) by reverse-DNS lookup. Catches spoofed bots.',
+	'BbDnsTimeoutMs'            => 'DNS lookup timeout (ms)',
+	'BbDnsPositiveTtl'          => 'Positive cache TTL (seconds)',
+	'BbDnsNegativeTtl'          => 'Negative cache TTL (seconds)',
+	'BbDnsRequireForward'       => 'Require forward-confirm (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Catches PTR spoofing but adds latency and IPv6 FP risk.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD exempt paths (one per line)',
+	'BbHeadRefererExemptInfo'   => 'Paths where HEAD without Referer is legitimate (e.g. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Asset extensions to protect (one per line)',
+	'BbAssetExtensionsInfo'     => 'File types watched for direct scraping without page loads.',
+
+	'BbOnDemandBotIds'          => 'Bot IDs to refresh (empty = all)',
+	'BbOnDemandBotIdsInfo'      => 'Restrict refresh to specific bots. Leave empty to refresh all registered bots.',
+	'BbOnDemandProbability'     => 'Probability denominator (1 in N)',
+	'BbOnDemandMinAge'          => 'Min cache age (seconds)',
+	'BbOnDemandLockTtl'         => 'Lock TTL (seconds)',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (seconds)',
+	'BbOnDemandFeedTimeout'     => 'Feed fetch timeout (seconds)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (seconds)',
+	'BbDynamicIpFeeds'          => 'Feeds to refresh (one per line)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Last seen',
+	'BbSeverity'             => 'Severity',
+	'BbStatusBreakdown'      => 'Status breakdown',
+	'BbBotBreakdown'         => 'Bot breakdown',
+	'BbTopBlocked'           => 'Top denied IPs',
+	'BbGeoSummary'           => 'Geographic summary',
+	'BbCountry'              => 'کشور',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Verified %',
+	'BbNoData'               => 'No data for the selected window',
+	'BbCategory'             => 'دسته‌بندی',
+	'BbResponseTime'         => 'Response time',
+	'BbDateCol'              => 'Time / IP / Status',
+	'BbSelectRow'            => 'Select row',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Slow only',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Resolved',
+	'BbChipStatusCode' => 'Status code',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'کشور',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'View headers',
+	'BbViewBody'             => 'View body',
+	'BbViewContentLabel'     => 'Content',
+	'BbViewModeFull'         => 'Full (always shown)',
+	'BbViewModeTeaser'       => 'Teaser (click to expand)',
+	'BbViewModeHidden'       => 'Hidden (show on demand)',
+	'BbHide'                 => 'پنهان کردن',
+	'BbChars'                => 'کاراکتر',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Custom Rules',
+	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
+	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Body scan skip fields',
+	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Advanced filters',
+	'BbDateFrom'            => 'From',
+	'BbDateTo'              => 'To',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Slow requests only (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Active only',
+	'BbResolvedOnly'        => 'Resolved only',
+	'BbResolvedAll'         => 'Active + resolved',
+	'BbResolved'            => 'resolved',
+	'BbActionResolve'       => 'resolve',
+	'BbActionUnresolve'     => 'unresolve',
+	'BbRowResolved'         => 'Log entry marked resolved',
+	'BbRowUnresolved'       => 'Log entry marked unresolved',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'حذف موارد انتخاب شده ',
+	'BbBulkWhitelistSelected'   => 'Whitelist IPs',
+	'BbBulkResolveSelected'     => 'Mark resolved',
+	'BbBulkUnresolveSelected'   => 'Mark unresolved',
+	'BbBulkHint'                => 'Tick rows first, then click an action.',
+	'BbNoItemsSelected'         => 'No items selected',
+	'BbBulkDeleted'             => 'Deleted %1 log entries',
+	'BbBulkWhitelisted'         => 'Added %1 IPs to whitelist',
+	'BbBulkResolved'            => 'Marked %1 entries as resolved',
+	'BbBulkUnresolved'          => 'Marked %1 entries as unresolved',
+	'BbMarkAll'                 => 'Mark all rows on this page',
+	'BbMarkNone'                => 'Unmark all rows',
+
+	'BbBulkFailed'              => 'Could not update the selected rows. Check the database or try again.',
+	'BbBulkWhitelistedNone'     => 'No new IPs were added — all selected IPs were already on the whitelist.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'verified',
+	'BbUnverified'           => 'unverified',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Request allowed',
+	'BbStatus_blocked.bot'                => 'Known bot blocked',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler blocked',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler blocked',
+	'BbStatus_blocked.malicious_ua'       => 'Malicious User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Attack payload detected',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL match',
+	'BbStatus_blocked.httpbl'             => 'http:BL match',
+	'BbStatus_blocked.behavioral'         => 'Behavioral anomaly',
+	'BbStatus_blocked.fingerprint'        => 'Bad fingerprint',
+	'BbStatus_blocked.rate_limit'         => 'Rate limit exceeded',
+	'BbStatus_blocked.custom_rule'        => 'Custom rule match',
+	'BbStatus_blocked.geoip'              => 'GeoIP block',
+	'BbStatus_blocked.residential_proxy'  => 'Residential proxy blocked',
+	'BbStatus_challenge.required'         => 'Challenge required',
+	'BbStatus_challenge.failed'           => 'Challenge failed',
+	'BbStatus_error.internal'             => 'Internal error',
+	'BbStatus_error.configuration'        => 'Configuration error',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => '۲۴ ساعت گذشته',
+	'BbWindow7d'  => 'Last 7 days',
+	'BbWindow30d' => 'Last 30 days',
+	'BbWindowAll' => 'All time',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimal (default)',
+	'BbPresetFull'           => 'Full',
+	'BbPresetVerifiedOnly'   => 'Verified-only',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'EU-only',
+	'BbPresetHumanOnly'      => 'Human-only',
+	'BbPresetCustom'         => 'سفارشی',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Monitor-only',
+	'BbStrictnessNormal'      => 'Normal',
+	'BbStrictnessStrict'      => 'Strict',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Enable head request detection',
+	'BbHeadRequireReferer'       => 'Require Referer on HEAD',
+	'BbHeadFloodThreshold'       => 'Flood threshold (per session)',
+	'BbHeadProbeThreshold'       => 'Probe threshold (per IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Enable asset scraping detection',
+	'BbAssetNoRefererThreshold'    => 'No-referer threshold (per IP / hour)',
+	'BbAssetOnlySessionThreshold'  => 'Asset-only session threshold',
+	'BbAssetPatternThreshold'      => 'Sequential pattern threshold (per IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Enable dynamic IP ranges',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Enable on-demand refresh',
+	'BbOnDemandRefreshInfo'      => 'Refresh IP range cache during requests. Use when you have no cron access.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Bad JA3',
+	'BbFpBadH2'           => 'Bad H2',
+	'BbFpBotHeaderOrders' => 'Bot Header Orders',
+	'BbFpExpectedJa3'     => 'Expected JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'مسدود شده',
+	'BbListChallenge' => 'Challenge (CAPTCHA)',
+	'BbListLogOnly'   => 'Log only (no enforcement)',
+	'BbListAllowed'   => 'Explicitly allowed',
+	'BbListHint'      => 'Categories in this list get the action regardless of category default.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'موتور جستجو',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Social Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Archive Crawler',
+	'BbCatMonitoring'      => 'Monitoring',
+	'BbCatFeedReader'      => 'Feed Reader',
+	'BbCatShoppingCrawler' => 'Shopping Crawler',
+	'BbCatCloudInfra'      => 'Cloud Infrastructure',
+	'BbCatSecurityScanner' => 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'       => 'Malicious',
+	'BbCatUnknown'         => 'ناشناخته',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Attack patterns',
+	'BbSevChallenges'     => 'Challenges issued',
+	'BbSevPermitted'      => 'مجاز',
+	'BbSevErrors'         => 'Errors',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'دسته‌ها',
+
+	'BbResultBreakdown'    => 'Result breakdown',
+	'BbBreakdownBlocked'   => 'مسدود شده',
+	'BbBreakdownMonitored' => 'Monitored',
+	'BbBreakdownAllowed'   => 'Allowed',
+	'BbViewAllInLog'       => 'View all in log',
+	'BbAllowedHintVerbose' => 'Allowed traffic is only logged when verbose logging is enabled. Toggle logging_mode=verbose in Settings to see what passes through.',
 
 ];

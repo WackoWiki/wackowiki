@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Parola administrativă nu este specificată!',
 	'NoRecoveryPasswordTip'		=> 'Notă: Absența unei parole administrative este o amenințare la adresa securității! Introduceți parola hash în fișierul de configurare și rulați din nou programul.',
 
+	'ApDevNologinBlocked'		=> 'Acces blocat: AP_DEV_NOLOGIN este activat în admin.php, dar cererea nu a fost originară de la localhost (127.0.0.1, :1, sau localhost). Acesta este un steag exclusiv pentru dezvoltare și trebuie să fie dezactivat în producție. Setați <code>AP_DEV_NOLOGIN = 0</code> în admin.php pentru a restaura accesul.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITATE: %1 este activat, dar admin.php a fost accesat de la o adresă non-localhost (%2). Accesul la panoul de administrare a fost blocat.',
+
 	'ErrorLoadingModule'		=> 'Eroare la încărcarea modulului de administrare %1: nu există.',
 
 	'ApHomePage'				=> 'Pagina de start',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Părăsiți administrarea sistemului și deconectați-vă de pe site',
 
 	'TimeLeft'					=> 'Timp rămas:  %1 minute',
+	'TimeLeftInfinity'			=> 'Timp rămas:  %1 (modul dezvoltator)',
 	'ApVersion'					=> 'versiune',
 
 	'SiteOpen'					=> 'Deschideți',
@@ -920,8 +924,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'Creați o miniatură în toate situațiile posibile.',
-	'JpegQuality'				=> 'Calitatea JPEG:',
-	'JpegQualityInfo'			=> 'Calitate la scalarea unei miniaturi JPEG. Ar trebui să fie între 1 și 100, 100 indicând o calitate 100%.',
+	'ImageQuality'				=> 'Presetare calitate imagine:',
+	'ImageQualityInfo'			=> 'Calitate la scalarea unei miniaturi. Presetează care aleg valori per codec, care produc un rezultat perceptual comparabil.',
 	'MaxImageArea'				=> 'Suprafață maximă imagine:',
 	'MaxImageAreaInfo'			=> 'Numărul maxim de pixeli pe care o poate avea o imagine sursă. Aceasta oferă o limită de utilizare a memoriei pentru partea de decompresie a scalatorului de imagini.<br><code></code> înseamnă că nu va verifica dimensiunea imaginii înainte de a încerca să o scară. <code></code> înseamnă că va determina valoarea în mod automat.',
 	'MaxThumbWidth'				=> 'Lățimea maximă a miniaturii în pixeli:',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> 'nu mai mare de',
 		'3'		=> 'egal',
 	],
-	'LogNoMatch'				=> 'Niciun eveniment care îndeplinește criteriile',
 	'LogDate'					=> 'Data',
 	'LogEvent'					=> 'Eveniment',
 	'LogUsername'				=> 'Nume',
@@ -967,6 +970,49 @@ $ap_translation = [
 		'6'		=> 'cel mai mic',
 		'7'		=> 'depanare',
 	],
+
+	'LogCollapse'        => 'colaps',
+	'LogExpand'          => 'extinde',
+	'LogType'              => 'Tip',
+	'LogSearch'            => 'Caută',
+	'LogSearchPlaceholder' => 'căutare mesaje...',
+	'LogUserId'            => 'ID Utilizator',
+	'LogExactMatch'        => 'meci exact',
+	'LogFrom'              => 'De la',
+	'LogTo'                => 'La',
+	'LogSupportKey'        => 'Cheie suport',
+	'LogContext'           => 'Context',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Agent utilizator',
+	'LogReferer'           => 'Referer',
+	'LogTotal'             => 'Total',
+	'LogFilteredBy'        => 'Filtrat de',
+	'LogClearFilter'       => 'Curăță filtrul',
+	'LogActions'           => 'Acțiuni',
+	'LogDelete'            => 'Ștergere',
+	'LogDeleteConfirm'     => 'Ștergeți această intrare din jurnal?',
+	'LogDeleteSelected'    => 'Ştergeţi selecţia',
+	'LogBulkAction'        => '— acțiune în masă —',
+	'LogApply'             => 'Aplică',
+	'LogExportCSV'         => 'Exportă CSV',
+	'LogExportJSON'        => 'Exportă JSON',
+	'LogPurged'            => 'Jurnal tabel trunchiat.',
+	'LogPurgedFiltered'     => 'Intrările %1 au fost șterse prin filtrare.',
+	'LogDeleted'           => 'Înregistrare jurnal ştearsă.',
+	'LogDeletedBulk'        => '%1 log entries deleted.',
+	'LogPurgeSection'      => 'Operațiuni de distrugere',
+	'LogPurgeWarning'      => 'Există intrări %1 care se potrivesc cu vizualizarea curentă. Utilizați cu grijă.',
+	'LogPurgeConfirm'      => 'Am înțeles că acest lucru va șterge permanent intrările din jurnal',
+	'LogPurgeFiltered'     => 'Șterge filtrul de potrivire',
+	'LogPurgeFilteredConfirm' => 'Ștergeți toate intrările care corespund filtrului curent? Acest lucru nu poate fi anulat.',
+	'LogPurgeAll'          => 'Curăță jurnalul ENTIRE',
+	'LogPurgeAllConfirm'   => 'Ștergeți FIECARE însemnare în baza de date? Acest lucru nu poate fi anulat.',
+	'LogFindRelated'       => 'Găsește intrările asociate',
+	'LogNoMatch'           => 'Nicio înregistrare în jurnal nu corespunde filtrului curent.',
+
+	'LogMarkAll'                => 'Marchează toate rândurile de pe această pagină',
+	'LogMarkNone'               => 'Debifează toate rândurile',
+	'LogSelectRow'              => 'Selectare rând',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Aici puteți trimite un mesaj către (1) toți utilizatorii dvs. sau (2) toți utilizatorii unui anumit grup care au activat primirea de e-mailuri în masă. Un e-mail va fi trimis la adresa de e-mail administrativă furnizată, cu o copie oarbă de carbon (BCC) trimisă tuturor destinatarilor. Setarea implicită este de a include un maxim de 20 de destinatari într-un astfel de e-mail. Dacă sunt mai mult de 20 de destinatari, e-mailurile suplimentare vor fi trimise. Dacă trimiteți un e-mail unui grup mare de persoane, aveți răbdare după ce vă trimiteți și nu opriți pagina la jumătatea drumului. Este normal ca un e-mail în masă să dureze mult timp. Vei fi notificat când script-ul s-a terminat.',
@@ -1275,6 +1321,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Antete',
 	'BbEntity'					=> 'Entitate',
 
+	'BbSearchPlaceholder'        => 'Caută UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Orice categorie',
+	'BbFilterAnyMethod'          => 'Orice metodă',
+	'BbFilterAnyStatus'          => 'Orice stare',
+	'BbFilterBlockedOnly'        => 'Doar blocat',
+	'BbFilterPermittedOnly'      => 'Doar permise',
+	'BbFilterApply'              => 'Aplică',
+	'BbFilterClear'              => 'Ștergeți filtrele',
+	'BbChipSearch'               => 'Caută',
+	'BbChipCategory'             => 'Categorie',
+	'BbChipMethod'               => 'Metodă',
+	'BbChipStatus'               => 'Status',
+	'BbChipRemove'               => 'Elimină acest filtru',
+	'BbFilterByCategory'         => 'Filtrare după această categorie',
+	'BbSearchBySupportKey'       => 'Căutați această cheie de asistență',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Orice stare de verificare',
+	'BbFilterCheckedOnly'      => 'Doar verificat',
+	'BbFilterUncheckedOnly'    => 'Doar neverificate',
+	'BbChipCheck'              => 'Verifică statusul',
+	'BbChecked'                => 'verificat',
+	'BbUnchecked'              => 'neverificat',
+	'BbActionCheck'            => 'Bifează',
+	'BbActionUncheck'          => 'debifează',
+	'BbRowChecked'             => 'Înregistrează înregistrarea marcată ca bifat',
+	'BbRowUnchecked'           => 'Înregistrare însemnare neselectată',
+	'BbRowCheckedHint'         => 'Această înregistrare este verificată — exceptată de la ștergerea automată',
+	'BbRowUncheckedHint'       => 'Marcați această înregistrare pentru a o păstra peste curățare automată',
+	'BbBulkCheckSelected'      => 'Marchează bifat',
+	'BbBulkUncheckSelected'    => 'Debifare bifat',
+	'BbBulkChecked'            => 'Marcat %1 intrări ca verificate',
+	'BbBulkUnchecked'          => 'Intrări %1 nemarcate',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Opțiuni salvate.',
 	'BbWhitelistHint'			=> 'Lista inadecvată de whitelisting WILL vă expune la spam, sau vă provoacă un comportament greșit pentru a opri funcționarea în întregime! NU CONTRIBUŢI LISTA ALTĂ decât dacă sunteţi 100% ANUMITOR PE care ar trebui.',
@@ -1308,5 +1388,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Activează Proxy Inversare',
 	'BbReverseProxyHeader'		=> 'Antet care conține adresa IP a clienților de internet',
 	'BbReverseProxyAddresses'	=> 'Adresă IP sau format CIDR pentru serverele proxy (câte unul pe linie)',
+
+	'BbBehavioral'           => 'Analiza comportamentală',
+	'BbEnableBehavioral'     => 'Activaţi analiza comportamentală (anomalii ale ratelor, rotaţie UA/IP)',
+	'BbEnableBehavioralInfo' => 'Urmărirea solicită modele pentru fiecare sesiune. Sigur pentru a păstra activat.',
+	'BbEnableFingerprinting' => 'Activează amprenta TLS/HTTP/2 (JA3, H2, ordine antet)',
+	'BbEnableFingerprintingInfo' => 'Blochează doar amprentele greșite cunoscute. Necesită activare_amprentare=adevărat. Poate cauza poziții false pe browserele vechi/proxy-uri.',
+	'BbInspectJson'          => 'Inspectează organismele solicitante JSON pentru atacuri',
+	'BbInspectJsonInfo'      => 'AVERTISMENT: întrerupe API-urile AJAX/JSON (marcare wiki, cod snippets declanşează fals pozitive). Ţineţi OFF.',
+	'BbInspectMultipart'     => 'Inspectează corpurile multipartite/form-date pentru atacuri',
+	'BbInspectMultipartInfo' => 'AVERTISMENT: întrerupe încărcarea fişierelor. Ţineţi OFF.',
+
+	'BbEnableClientHints'      => 'Activează Validarea Clientului Hints',
+	'BbEnableClientHintsInfo'  => 'Validați antetele Sec-CH-UA împotriva User-Agent pentru a detecta browserele falsificate (Chrome 89+).',
+	'BbEnableAgentic'          => 'Activează detectarea comportamentului agentic',
+	'BbEnableAgenticInfo'      => 'Detectează tiparele agentului AI: gândire în acel moment, navigare neliniară, fixarea preciziei.',
+	'BbStrictSearchEngines'    => 'Motoare de căutare stricte',
+	'BbStrictSearchEnginesInfo' => 'Aplică verificări mai stricte roboților neverificați din motoarele de căutare (Googlebot, Bingbot, …) înainte de a le permite accesul.',
+	'BbEnableDynamicIp'        => 'Activează încărcarea dinamică a intervalului IP',
+	'BbEnableDynamicIpInfo'    => 'Preia curse IP oficiale de la Google, Bing, OpenAI, Antropic, Apple etc. (ocupat 24 de ore, impas cu 7 zile).',
+
+	'BbAiCrawlers'           => 'Control Crawler AI',
+	'BbBlockUnverifiedAi'    => 'Blochează crawleri AI neverificați',
+	'BbBlockUnverifiedAiInfo' => 'Blochează crawleri AI care eșuează verificarea DNS/IP (roboți bătuți).',
+	'BbStrictAi'             => 'Mod AI strict (blocați chiar și verificat AI nepermis',
+	'BbStrictAiInfo'         => 'Blochează TOATE crawlerii AI care nu sunt în lista permisă, chiar dacă sunt verificați.',
+	'BbAllowedAiCrawlers'    => 'Jetoane AI permise (unul pe linie)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extened, PerplexityBot, Meta-ExternalAgent, Applebot-Extened, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Activează verificările DNSBL',
+	'BbDnsblLists'           => 'Liste DNSBL (câte unul pe rând)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Rata de limitare',
+	'BbRateLimitEnabled'     => 'Activează limitarea ratei',
+	'BbRateGlobalRequests'   => 'Cereri globale per fereastră',
+	'BbRateGlobalWindow'     => 'Fereastră globală (secunde)',
+	'BbRatePerMinuteRequests'=> 'Cereri pe minut',
+	'BbRatePerMinuteWindow'  => 'Fereastră pe minut (secunde)',
+	'BbRatePostRequests'     => 'Solicitări POST per fereastră',
+	'BbRatePostWindow'       => 'Fereastra POST (secunde)',
+	'BbRateLoginRequests'    => 'Cereri de conectare per fereastră',
+	'BbRateLoginWindow'      => 'Fereastra de conectare (secunde)',
+
+	'BbChallenge'            => 'Sistemul provocării',
+	'BbChallengeEnabled'     => 'Permite provocări',
+	'BbChallengeProvider'    => 'Furnizorul de provocări',
+	'BbChallengeSiteKey'     => 'Cheie site',
+	'BbChallengeSecretKey'   => 'Cheie secretă',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min scor',
+
+	'BbPerformance'          => 'Performanță',
+	'BbSkipExtensions'       => 'Sari peste extensii (unul pe linie)',
+	'BbSkipPaths'            => 'Sari peste prefixele traiectoriei (unul pe linie)',
+
+	'BbGeoip'                => 'GeoIP / Blocare ASN',
+	'BbGeoipEnabled'         => 'Activează căutările GeoIP',
+	'BbGeoipDbPath'          => 'Calea MaxMind DB',
+	'BbBlockedCountries'     => 'Țări blocate (coduri ISO, unul pe rând)',
+	'BbBlockedAsns'          => 'ASN-uri blocate (unul pe linie)',
+
+	'BbBlockPage'                  => 'Blocare pagină',
+	'BbShowDetailedBlockPage'      => 'Arată pagina de blocare detaliată',
+	'BbShowDetailedBlockPageInfo'  => 'Arată motivul, cere URI și suport tehnic pe pagina blocului. Recomandat pentru producție.',
+	'BbShowContactInfo'            => 'Arată informații de contact pe pagina blocului',
+	'BbShowContactInfoInfo'        => 'Arată e-mail admin pe pagina blocului (are efect numai când este activată pagina de blocare detaliată).',
+	'BbSettingsSaveFailed'         => 'Nu am reușit să salvăm setările de comportament greșit',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Setări de bază',
+	'BbAdvancedSection'   => 'Setări avansate',
+	'BbAdvancedHint'      => 'Cei mai mulți operatori nu ar trebui să fie nevoiți să le schimbe.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Care roboți de recunoscut. "minimal" (implicit) este cel mai rapid; "full" este cel mai detaliat.',
+	'BbStrictness'        => 'Blocarea posturii',
+	'BbStrictnessInfo'    => 'jurnale doar pentru monitor, dar nu blochează nimic; blocuri normale verificate atacante; blocuri stricte agresiv.',
+	'BbLoggingMode'       => 'Logare',
+	'BbLoggingModeInfo'   => 'Normal (recomandat), Verbose (loghează la fiecare cerere), oprit',
+	'BbLogModeNormal'     => 'Normală',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Dezactivat',
+	'BbBehindProxy'       => 'Site-ul se află în spatele unui proxy invers sau CDN',
+	'BbBehindProxyInfo'   => 'Activează dacă în spatele Cloudflare, AWS, GCP, Rapid etc. Trebuie să adăugați intervale IP proxy în Avansat - fără ele, IP-urile reale ale clienților nu pot fi determinate.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Nucleu',
+	'BbAdvReverseProxy'   => 'Inversează Proxy',
+	'BbAdvAiCrawlers'     => 'Crawlers AI',
+	'BbAdvBotCategories'  => 'Categorii Bot',
+	'BbAdvDnsVerification'=> 'Verificare DNS',
+	'BbAdvRateLimits'     => 'Rata de limitare',
+	'BbAdvHeadDetection'  => 'Detectare solicitare captură',
+	'BbAdvAssetScraping'  => 'Detectare răzuire active',
+	'BbAdvDynamicIp'      => 'Intervalele IP dinamice',
+	'BbAdvOnDemandRefresh'=> 'Reîmprospătare IP la cerere',
+	'BbAdvHttpbl'         => 'Proiectul de Miere http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Provocare / CAPTCHA',
+	'BbAdvPerformance'    => 'Performanță',
+	'BbAdvGeoip'          => 'GeoIP / Blocare ASN',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Amprente',
+	'BbAdvCustomRules'    => 'Reguli personalizate',
+	'BbAdvBlockPage'      => 'Blocare pagină',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Motor de Căutare',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Crawler social',
+	'BbCatSeoCrawler'     => 'Crawler SEO',
+	'BbCatArchiveCrawler' => 'Crawler arhivă',
+	'BbCatMonitoring'     => 'Monitorizare',
+	'BbCatFeedReader'     => 'Cititor Fluxuri',
+	'BbCatShoppingCrawler'=> 'Crawler de cumpărături',
+	'BbCatCloudInfra'     => 'Infrastructura de cloud',
+	'BbCatSecurityScanner'=> 'Scaner de securitate',
+	'BbCatResidentialProxy'=> 'Proxy rezidențial',
+	'BbCatMalicious'      => 'Malicios',
+	'BbCatUnknown'        => 'Necunoscut',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Rapid',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Limitează refresh la anumiți furnizori. Golește = toți patru.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Înregistrează păstrarea',
+	'BbLogRetentionEnabled'          => 'Activează curățarea automată a jurnalului',
+	'BbLogRetentionEnabledInfo'      => 'Şterge periodic rânduri de jurnal mai vechi decât fereastra de reţinere. Recomandat pentru site-uri fără acces cron.',
+	'BbLogRetentionMaxAgeDays'       => 'Fereastra de reţinere (zile)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rândurile mai vechi decât cele șterse. Implicit: 7. Valori comune: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Numărul maxim de rânduri (0 = fără capac)',
+	'BbLogRetentionMaxRowsInfo'      => 'Dacă este setat, cele mai vechi rânduri sunt șterse ori de câte ori tabelul depășește această mărime, indiferent de vârstă. Util pentru site-urile cu trafic ridicat.',
+	'BbLogRetentionProbability'       => 'Numitor de probabilitate (1 în N)',
+	'BbLogRetentionProbabilityInfo'   => '1 în N cereri verifică poarta de maturitate. Mai mare = mai puțin încărcare DB. Implicit: 1000.',
+	'BbLogRetentionMinInterval'      => 'Intervalul minim între curățări (secunde)',
+	'BbLogRetentionMinIntervalInfo'  => 'Etaj aprins pe frecvența de curățare. Implicit: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Curățare blocare TTL (secunde)',
+	'BbLogRetentionLockTtlInfo'      => 'Cât timp este ținut mutexul de curățare. Implicit: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Activează verificarea prin DNS',
+	'BbDnsVerificationInfo'     => 'Verifică revendicările botului (de ex. Googlebot) prin căutarea de DNS inversat. Recuperează roboți deranjați.',
+	'BbDnsTimeoutMs'            => 'Durată căutare DNS (ms)',
+	'BbDnsPositiveTtl'          => 'Geocutie TTL pozitivă (secunde)',
+	'BbDnsNegativeTtl'          => 'Cache TTL negativ (secunde)',
+	'BbDnsRequireForward'       => 'Solicitați confirmare prealabilă (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Capturile spoofing PTR dar cresc riscul de latenţă şi de PC IPv6.',
+
+	'BbHeadRefererExemptPaths'  => 'Căi exceptate de la sistemul HEAD (câte unul pe linie)',
+	'BbHeadRefererExemptInfo'   => 'Căile în care HEAD fără arbitru este legitim (de exemplu, /api//wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Extensii active pentru a proteja (unul pe linie)',
+	'BbAssetExtensionsInfo'     => 'Tipuri de fișiere vizionate pentru răzuire directă fără încărcarea paginii.',
+
+	'BbOnDemandBotIds'          => 'ID-urile botului pentru reîmprospătare (gol = toate)',
+	'BbOnDemandBotIdsInfo'      => 'Restricționare reîmprospătare la boți specifici. Lăsați gol pentru a împrospăta toți roboții înregistrați.',
+	'BbOnDemandProbability'     => 'Numitor de probabilitate (1 în N)',
+	'BbOnDemandMinAge'          => 'Vârsta geocutiei minime (secunde)',
+	'BbOnDemandLockTtl'         => 'Blocare TTL (secunde)',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (secunde)',
+	'BbOnDemandFeedTimeout'     => 'Pauză preluare feed (secunde)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (secunde)',
+	'BbDynamicIpFeeds'          => 'Fluxuri de reîmprospătat (unul pe rând)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Văzut ultima dată',
+	'BbSeverity'             => 'Severitate',
+	'BbStatusBreakdown'      => 'Defalcare stare',
+	'BbBotBreakdown'         => 'Defalcarea bot-ului',
+	'BbTopBlocked'           => 'Top IP-uri negate',
+	'BbGeoSummary'           => 'Rezumat geografic',
+	'BbCountry'              => 'Țară',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Verificat %',
+	'BbNoData'               => 'Nu există date pentru fereastra selectată',
+	'BbCategory'             => 'Categorie',
+	'BbResponseTime'         => 'Timp de răspuns',
+	'BbDateCol'              => 'Timp / IP / Status',
+	'BbSelectRow'            => 'Selectare rând',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Doar lent',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Rezolvat',
+	'BbChipStatusCode' => 'Cod de stare',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Țară',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Vizualizare antet',
+	'BbViewBody'             => 'Vizualizare corp',
+	'BbViewContentLabel'     => 'Conținut',
+	'BbViewModeFull'         => 'Complet (afișat întotdeauna)',
+	'BbViewModeTeaser'       => 'Teaser (click pentru a extinde)',
+	'BbViewModeHidden'       => 'Ascuns (spectacol la cerere)',
+	'BbHide'                 => 'ascunde',
+	'BbChars'                => 'caractere',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Reguli personalizate',
+	'BbCustomRulesLabel'           => 'Reguli personalizate (un obiect JSON pe linie)',
+	'BbCustomRulesInfo'            => 'Fiecare linie este un obiect JSON cu taste: tip (ip<unk> ua_regex<unk> ua_contains<unk> asn<unk> header), valoare, acțiune (Permitet, challengenge<unk> log) și id. Exemplu: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Scanarea corpului peste câmpurile',
+	'BbBodyScanSkipFieldsInfo'     => 'Un nume de câmp pe linie. Câmpurile listate sunt omise în timpul inspecției SQL/XSS a corpului.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Filtre avansate',
+	'BbDateFrom'            => 'De la',
+	'BbDateTo'              => 'La',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Doar cereri lente (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Numai active',
+	'BbResolvedOnly'        => 'Rezolvat numai',
+	'BbResolvedAll'         => 'Activ + rezolvat',
+	'BbResolved'            => 'rezolvat',
+	'BbActionResolve'       => 'rezolvă',
+	'BbActionUnresolve'     => 'nerezolvat',
+	'BbRowResolved'         => 'Înregistrarea în jurnal marcată rezolvată',
+	'BbRowUnresolved'       => 'Înregistrare însemnată nerezolvată',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Ştergeţi selecţia',
+	'BbBulkWhitelistSelected'   => 'IP permise',
+	'BbBulkResolveSelected'     => 'Marcare rezolvată',
+	'BbBulkUnresolveSelected'   => 'Marchează nerezolvat',
+	'BbBulkHint'                => 'Mai întâi, dă click pe o acțiune.',
+	'BbNoItemsSelected'         => 'Niciun element selectat',
+	'BbBulkDeleted'             => 'Înregistrări %1 șterse',
+	'BbBulkWhitelisted'         => '%1 IP-uri adăugate la lista albă',
+	'BbBulkResolved'            => 'A marcat %1 intrări ca rezolvate',
+	'BbBulkUnresolved'          => 'Marcat %1 intrări ca nerezolvate',
+	'BbMarkAll'                 => 'Marchează toate rândurile de pe această pagină',
+	'BbMarkNone'                => 'Debifează toate rândurile',
+
+	'BbBulkFailed'              => 'Nu s-au putut actualiza rândurile selectate. Verifică baza de date sau încearcă din nou.',
+	'BbBulkWhitelistedNone'     => 'Nu au fost adăugate adrese IP noi — toate IP-urile selectate erau deja pe lista albă.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'verificat',
+	'BbUnverified'           => 'neverificat',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Solicitare permisă',
+	'BbStatus_blocked.bot'                => 'Bot cunoscut blocat',
+	'BbStatus_blocked.ai_crawler'         => 'Cuib AI blocat',
+	'BbStatus_blocked.seo_crawler'        => 'Cizme SEO blocate',
+	'BbStatus_blocked.malicious_ua'       => 'Agent-utilizator rău intenționat',
+	'BbStatus_blocked.attack_pattern'     => 'Atac încărcătură detectată',
+	'BbStatus_blocked.dnsbl'              => 'Meci DNSBL',
+	'BbStatus_blocked.httpbl'             => 'http:BL meci',
+	'BbStatus_blocked.behavioral'         => 'Anomalii comportamentale',
+	'BbStatus_blocked.fingerprint'        => 'Amprentă incorectă',
+	'BbStatus_blocked.rate_limit'         => 'Limita de rată depășită',
+	'BbStatus_blocked.custom_rule'        => 'Regula personalizată se potrivește',
+	'BbStatus_blocked.geoip'              => 'Bloc: GeoIP',
+	'BbStatus_blocked.residential_proxy'  => 'Proxy rezidențial blocat',
+	'BbStatus_challenge.required'         => 'Provocarea este necesară',
+	'BbStatus_challenge.failed'           => 'Provocare eșuată',
+	'BbStatus_error.internal'             => 'Eroare internă',
+	'BbStatus_error.configuration'        => 'Eroare de configurare',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Ultimele 24 de ore',
+	'BbWindow7d'  => 'Ultimele 7 zile',
+	'BbWindow30d' => 'Ultimele 30 de zile',
+	'BbWindowAll' => 'Tot timpul',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimal (implicit)',
+	'BbPresetFull'           => 'Complet',
+	'BbPresetVerifiedOnly'   => 'Verificat doar',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Doar UE',
+	'BbPresetHumanOnly'      => 'Doar om',
+	'BbPresetCustom'         => 'Personalizat',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Numai pe ecran',
+	'BbStrictnessNormal'      => 'Normală',
+	'BbStrictnessStrict'      => 'Strict',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Turnstil noros',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Activați detectarea cererii capului',
+	'BbHeadRequireReferer'       => 'Cere arbitru pe HEAD',
+	'BbHeadFloodThreshold'       => 'Pragul de inundații (per sesiune)',
+	'BbHeadProbeThreshold'       => 'Pragul probe (per IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Activați detectarea răzuirii activelor',
+	'BbAssetNoRefererThreshold'    => 'Pragul niciunui referer (per IP / oră)',
+	'BbAssetOnlySessionThreshold'  => 'Prag sesiune numai active',
+	'BbAssetPatternThreshold'      => 'Pragul modelului secvențial (per IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Activează intervale de IP dinamice',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Activare reîmprospătare la cerere',
+	'BbOnDemandRefreshInfo'      => 'Reincarcati cache-ul adreselor IP in timpul cererilor. Foloseste cand nu ai acces la cron.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'JA3 greșit',
+	'BbFpBadH2'           => 'Bad H2',
+	'BbFpBotHeaderOrders' => 'Comenzi Header Bot',
+	'BbFpExpectedJa3'     => 'JA3 preconizat',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Blocat',
+	'BbListChallenge' => 'Provocare (CAPTCHA)',
+	'BbListLogOnly'   => 'Numai jurnal (fără aplicare)',
+	'BbListAllowed'   => 'Permis explicit',
+	'BbListHint'      => 'Categoriile din această listă primesc acțiunea indiferent de categoria implicită.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Motor de Căutare',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Crawler social',
+	'BbCatSeoCrawler'      => 'Crawler SEO',
+	'BbCatArchiveCrawler'  => 'Crawler arhivă',
+	'BbCatMonitoring'      => 'Monitorizare',
+	'BbCatFeedReader'      => 'Cititor Fluxuri',
+	'BbCatShoppingCrawler' => 'Crawler de cumpărături',
+	'BbCatCloudInfra'      => 'Infrastructura de cloud',
+	'BbCatSecurityScanner' => 'Scaner de securitate',
+	'BbCatResidentialProxy'=> 'Proxy rezidențial',
+	'BbCatMalicious'       => 'Malicios',
+	'BbCatUnknown'         => 'Necunoscut',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => 'Hash cu 32 de char',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Atacă modele',
+	'BbSevChallenges'     => 'Provocări emise',
+	'BbSevPermitted'      => 'Permis',
+	'BbSevErrors'         => 'Erori',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Categorii',
+
+	'BbResultBreakdown'    => 'Defalcarea rezultatelor',
+	'BbBreakdownBlocked'   => 'Blocat',
+	'BbBreakdownMonitored' => 'Monitorizat',
+	'BbBreakdownAllowed'   => 'Permis',
+	'BbViewAllInLog'       => 'Vezi toate în jurnal',
+	'BbAllowedHintVerbose' => 'Traficul permis este înregistrat doar atunci când este activată logarea verbose. Comută loging_mode=verbose în setări pentru a vedea ce trece de ea.',
 
 ];

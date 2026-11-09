@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Hallinnollista salasanaa ei ole määritelty!',
 	'NoRecoveryPasswordTip'		=> 'Huomautus: Hallinnollisen salasanan puuttuminen on uhka turvallisuudelle! Syötä salasanasi hash asetustiedostoon ja suorita ohjelma uudelleen.',
 
+	'ApDevNologinBlocked'		=> 'Pääsy estetty: AP_DEV_NOLOGIN on käytössä admin.php:ssä, mutta pyyntö ei ollut peräisin localhost (127.0.1, :1, tai localhost). Tämä on vain kehitystilassa oleva lippu ja se tulee olla pois käytöstä tuotannossa. Aseta <code>AP_DEV_NOLOGIN = 0</code> admin.php:ssä saadaksesi käyttöoikeuden takaisin.',
+	'ApDevNologinBlockedLog'	=> '!!! TURVALLISUUS: %1 on käytössä, mutta admin.php pääsi ei-paikallisesta osoitteesta (%2). Hallintapaneelin pääsy on estetty.',
+
 	'ErrorLoadingModule'		=> 'Virhe ladattaessa hallintamoduulia %1: ei ole olemassa.',
 
 	'ApHomePage'				=> 'Kotisivu',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Lopeta järjestelmän käyttö ja kirjaudu ulos sivustosta',
 
 	'TimeLeft'					=> 'Aikaa jäljellä:  %1 minuutti(a)',
+	'TimeLeftInfinity'			=> 'Aikaa jäljellä:  %1 (kehittäjätila)',
 	'ApVersion'					=> 'versio',
 
 	'SiteOpen'					=> 'Avaa',
@@ -920,8 +924,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'Luo pikkukuva kaikissa mahdollisissa tilanteissa.',
-	'JpegQuality'				=> 'JPEG-laatu:',
-	'JpegQualityInfo'			=> 'Laatu skaalatessa JPEG-pikkukuvaa. Sen pitäisi olla välillä 1 ja 100, 100 osoittaa 100% laatua.',
+	'ImageQuality'				=> 'Kuvan Laatu Esiasetus',
+	'ImageQualityInfo'			=> 'Laatu pienoiskuvan skaalautuessa. Esimerkit, jotka valitsevat koodekkiarvot, jotka tuottavat vastaavan havaintotuloksen.',
 	'MaxImageArea'				=> 'Kuvan enimmäisalue:',
 	'MaxImageAreaInfo'			=> 'Suurin sallittu määrä pikseleitä, joita lähdekuvassa voi olla. Tämä tarjoaa rajan muistin käytölle kuvan skaalauksen purkupuolella.<br><code>-1</code> tarkoittaa, että se ei tarkista kuvan kokoa ennen kuin yritetään skaalata. <code>0</code> tarkoittaa, että se määrittää arvon automaattisesti.',
 	'MaxThumbWidth'				=> 'Pienoiskuvan suurin leveys pikseleinä:',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> 'ei suurempi kuin',
 		'3'		=> 'tasa-arvoinen',
 	],
-	'LogNoMatch'				=> 'Ei mitään kriteerejä täyttäviä tapahtumia',
 	'LogDate'					=> 'Päivämäärä',
 	'LogEvent'					=> 'Tapahtuma',
 	'LogUsername'				=> 'Käyttäjätunnus',
@@ -967,6 +970,49 @@ $ap_translation = [
 		'6'		=> 'alin',
 		'7'		=> 'vianetsintä',
 	],
+
+	'LogCollapse'        => 'pienennä',
+	'LogExpand'          => 'laajenna',
+	'LogType'              => 'Tyyppi',
+	'LogSearch'            => 'Etsi',
+	'LogSearchPlaceholder' => 'etsi viestejä...',
+	'LogUserId'            => 'Käyttäjän Tunnus',
+	'LogExactMatch'        => 'tarkka ottelu',
+	'LogFrom'              => 'Alkaen',
+	'LogTo'                => 'Vastaanottaja',
+	'LogSupportKey'        => 'Tukea avain',
+	'LogContext'           => 'Konteksti',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Käyttäjän agentti',
+	'LogReferer'           => 'Viittaaja',
+	'LogTotal'             => 'Yhteensä',
+	'LogFilteredBy'        => 'Suodatettu käyttäen',
+	'LogClearFilter'       => 'Tyhjennä suodatin',
+	'LogActions'           => 'Toiminnot',
+	'LogDelete'            => 'Poista',
+	'LogDeleteConfirm'     => 'Poistetaanko tämä lokitieto?',
+	'LogDeleteSelected'    => 'Poista valitut',
+	'LogBulkAction'        => '– massatoiminta –',
+	'LogApply'             => 'Käytä',
+	'LogExportCSV'         => 'Vie CSV',
+	'LogExportJSON'        => 'Vie JSON',
+	'LogPurged'            => 'Loki taulukko katkaistu.',
+	'LogPurgedFiltered'     => '%1 loki merkinnät poistettu suodattimella.',
+	'LogDeleted'           => 'Lokimerkintä poistettu.',
+	'LogDeletedBulk'        => '%1 lokitiedot poistettu.',
+	'LogPurgeSection'      => 'Tuhottavat operaatiot',
+	'LogPurgeWarning'      => 'Nykyiseen näkymään sopivia %1 tietueita. Käytä varoen.',
+	'LogPurgeConfirm'      => 'Ymmärrän, että tämä poistaa pysyvästi lokimerkinnät',
+	'LogPurgeFiltered'     => 'Tyhjennä vastaava suodatin',
+	'LogPurgeFilteredConfirm' => 'Poista kaikki nykyistä suodatinta vastaavat merkinnät? Tätä ei voi perua.',
+	'LogPurgeAll'          => 'Tyhjennä LUONNONMUKAINEN loki',
+	'LogPurgeAllConfirm'   => 'Poista kaikki lokitiedot tietokannasta? Tätä ei voi perua.',
+	'LogFindRelated'       => 'Etsi liittyviä merkintöjä',
+	'LogNoMatch'           => 'Nykyistä suodatinta ei vastaa lokitietoja.',
+
+	'LogMarkAll'                => 'Merkitse kaikki rivit tälle sivulle',
+	'LogMarkNone'               => 'Poista kaikki rivit',
+	'LogSelectRow'              => 'Valitse rivi',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Täällä voit lähettää viestin joko (1) kaikille käyttäjille tai (2) kaikille tietyn ryhmän käyttäjille, jotka ovat ottaneet käyttöön joukkoviestien vastaanottamisen. Sähköpostiosoite lähetetään hallinnolliseen sähköpostiosoitteeseen, johon on lähetetty sokean hiilen kopio (BCC) kaikille vastaanottajille. Oletusasetus on sisällyttää enintään 20 vastaanottajaa tällaiseen sähköpostiin. Jos vastaanottajia on enemmän kuin 20, lähetetään lisää sähköposteja. Jos olet lähettämässä sähköpostia suurelle joukolle, ole hyvä ja kärsivällinen lähettämisen jälkeen ja älä lopeta sivun puolivälissä. On normaalia, että massasähköposti kestää kauan. Sinulle ilmoitetaan, kun skripti on valmis.',
@@ -1275,6 +1321,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Otsikot',
 	'BbEntity'					=> 'Entiteetti',
 
+	'BbSearchPlaceholder'        => 'Etsi UA, URI, IP, isäntä, support_key, tila…',
+	'BbFilterAnyCategory'        => 'Mikä tahansa kategoria',
+	'BbFilterAnyMethod'          => 'Mikä tahansa menetelmä',
+	'BbFilterAnyStatus'          => 'Mikä tahansa tila',
+	'BbFilterBlockedOnly'        => 'Vain estetty',
+	'BbFilterPermittedOnly'      => 'Vain sallittu',
+	'BbFilterApply'              => 'Käytä',
+	'BbFilterClear'              => 'Tyhjennä suodattimet',
+	'BbChipSearch'               => 'Etsi',
+	'BbChipCategory'             => 'Kategoria',
+	'BbChipMethod'               => 'Menetelmä',
+	'BbChipStatus'               => 'Tila',
+	'BbChipRemove'               => 'Poista tämä suodatin',
+	'BbFilterByCategory'         => 'Suodata tämän kategorian mukaan',
+	'BbSearchBySupportKey'       => 'Etsi tätä tukiavainta',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Mikä tahansa tarkistustila',
+	'BbFilterCheckedOnly'      => 'Vain tarkistettu',
+	'BbFilterUncheckedOnly'    => 'Valitsematon vain',
+	'BbChipCheck'              => 'Tarkista tila',
+	'BbChecked'                => 'tarkistettu',
+	'BbUnchecked'              => 'valitsematon',
+	'BbActionCheck'            => 'tarkista',
+	'BbActionUncheck'          => 'poista valinta',
+	'BbRowChecked'             => 'Valituksi merkitty lokimerkintä',
+	'BbRowUnchecked'           => 'Valitsematon loki',
+	'BbRowCheckedHint'         => 'Tämä tietue on tarkastettu — vapautettu automaattisesta puhdistamisesta',
+	'BbRowUncheckedHint'       => 'Merkitse tämä tietue pitääksesi sen automaattisen siivouksen läpi',
+	'BbBulkCheckSelected'      => 'Merkitse valittu',
+	'BbBulkUncheckSelected'    => 'Poista valittu merkki',
+	'BbBulkChecked'            => 'Merkitse %1 tietueet tarkistetuiksi',
+	'BbBulkUnchecked'          => 'Merkitsemättömät %1 tietueet',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Asetukset tallennettu.',
 	'BbWhitelistHint'			=> 'Epätarkoituksenmukainen valkoistalisti WILL altistaa sinut roskapostille, tai aiheuttaa Bad Behaviour -toimintoa kokonaan toiminnan lopettamiseksi! ÄLÄ VALKOISTA ellet ole 100% TIETOA että sinun pitäisi.',
@@ -1308,5 +1388,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Ota Käänteinen Välityspalvelin Käyttöön',
 	'BbReverseProxyHeader'		=> 'Otsikko, joka sisältää Internet-asiakkaiden IP-osoitteen',
 	'BbReverseProxyAddresses'	=> 'IP-osoite tai CIDR muoto osoitealueet välityspalvelimet (yksi per rivi)',
+
+	'BbBehavioral'           => 'Käyttäytymisen Analyysi',
+	'BbEnableBehavioral'     => 'Ota käyttöön käyttäytymisen analyysi (nopeuden poikkeavuudet, pyöriminen UA/IP)',
+	'BbEnableBehavioralInfo' => 'Kappaleet pyytävät ohjeita istuntoa kohti. Turvallinen pitää käytössä.',
+	'BbEnableFingerprinting' => 'Ota käyttöön TLS/HTTP/2 sormenjälki (JA3, H2, otsikkotilaus)',
+	'BbEnableFingerprintingInfo' => 'Vain huonoja sormenjälkiä tunnetut lohkot vaativat enable_fingerprinting=true. Saattaa aiheuttaa vääriä positiivisia tuloksia vanhoissa selaimissa/proksilla.',
+	'BbInspectJson'          => 'Tarkastaa JSON pyyntöjen elimet hyökkäyksiä',
+	'BbInspectJsonInfo'      => 'VAROITUS: Breaks AJAX/JSON API (wiki markup, code snippets trigger false positives). Pidä OFF.',
+	'BbInspectMultipart'     => 'Tarkastaa useita tahoja / lomaketietoja elimiä hyökkäyksiä varten',
+	'BbInspectMultipartInfo' => 'VAROITUS: Katkaise tiedostojen lataus. Pidä OFF.',
+
+	'BbEnableClientHints'      => 'Ota Käyttöön Asiakasvihjeiden Validointi',
+	'BbEnableClientHintsInfo'  => 'Vahvista Sec-CH-UA -otsikot User-Agentia vastaan tunnistaaksesi sivut (Chrome 89+).',
+	'BbEnableAgentic'          => 'Ota Käyttöön Agentic Käyttäytymisen Tunnistus',
+	'BbEnableAgenticInfo'      => 'Tunnista tekoälyn agenttikuviot: ajatus-sitten-nouto, epälineaarinen navigointi, tarkkuuskohdentaminen.',
+	'BbStrictSearchEngines'    => 'Tiukat hakukoneet',
+	'BbStrictSearchEnginesInfo' => 'Käytä tiukempia tarkastuksia vahvistamattomiin hakukonebokseihin (Googlebot, Bingbot, …) ennen kuin sallit niiden läpi.',
+	'BbEnableDynamicIp'        => 'Enable Dynamic IP Range Fetching',
+	'BbEnableDynamicIpInfo'    => 'Fetch official IP ranges from Google, Bing, OpenAI, Anthropic, Apple, etc. (cached 24h, stale fallback 7 days).',
+
+	'BbAiCrawlers'           => 'Ai Crawler Ohjaus',
+	'BbBlockUnverifiedAi'    => 'Estä vahvistamattomat tekoälyn indeksit',
+	'BbBlockUnverifiedAiInfo' => 'Lohkot tekoälyn indeksoijat, jotka eivät ole DNS/IP todentaminen (spoofed bots).',
+	'BbStrictAi'             => 'Tiukka AI-tila (lukitse jopa todennettu sallittu AI)',
+	'BbStrictAiInfo'         => 'Estää KAIKKI AI crawlers ei sallittu lista, vaikka vahvistettiin.',
+	'BbAllowedAiCrawlers'    => 'Sallitut tekoälyn kaiverrukset (yksi per rivi)',
+	'BbAllowedAiCrawlersInfo' => 'Tokeneet: GPTBot, ClaudeBot, Google-laajennettu, PerplexityBot, Meta-ExternalAgent, Applebot-Laajennettu, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Ota DNSBL-tarkistukset käyttöön',
+	'BbDnsblLists'           => 'DNSBL luettelot (yksi per rivi)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Arvostele Rajoitus',
+	'BbRateLimitEnabled'     => 'Ota nopeusrajoitus käyttöön',
+	'BbRateGlobalRequests'   => 'Yleiset pyynnöt ikkunaa kohden',
+	'BbRateGlobalWindow'     => 'Yleinen ikkuna (sekuntia)',
+	'BbRatePerMinuteRequests'=> 'Minuutin pyynnöt',
+	'BbRatePerMinuteWindow'  => 'Minuutin ikkuna (sekuntia)',
+	'BbRatePostRequests'     => 'POST pyynnöt ikkunaa kohden',
+	'BbRatePostWindow'       => 'POST ikkuna (sekuntia)',
+	'BbRateLoginRequests'    => 'Kirjautumispyynnöt ikkunaa kohden',
+	'BbRateLoginWindow'      => 'Kirjautumisikkuna (sekuntia)',
+
+	'BbChallenge'            => 'Haastejärjestelmä',
+	'BbChallengeEnabled'     => 'Ota haasteet käyttöön',
+	'BbChallengeProvider'    => 'Haasteen tarjoaja',
+	'BbChallengeSiteKey'     => 'Sivuston avain',
+	'BbChallengeSecretKey'   => 'Salainen avain',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min pisteet',
+
+	'BbPerformance'          => 'Suorituskyky',
+	'BbSkipExtensions'       => 'Ohita laajennukset (yksi per rivi)',
+	'BbSkipPaths'            => 'Ohita polun etuliitteet (yksi per rivi)',
+
+	'BbGeoip'                => 'GeoIP / ASN Esto',
+	'BbGeoipEnabled'         => 'Ota käyttöön GeoIP hakuja',
+	'BbGeoipDbPath'          => 'MaxMind DB polku',
+	'BbBlockedCountries'     => 'Estetyt maat (ISO-koodit, yksi per rivi)',
+	'BbBlockedAsns'          => 'Estetyt ASN:t (yksi per rivi)',
+
+	'BbBlockPage'                  => 'Block Page',
+	'BbShowDetailedBlockPage'      => 'Show detailed block page',
+	'BbShowDetailedBlockPageInfo'  => 'Show reason, request URI, and technical support key on the block page. Recommended for production.',
+	'BbShowContactInfo'            => 'Show contact info on block page',
+	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
+	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Perusasetukset',
+	'BbAdvancedSection'   => 'Edistyneet asetukset',
+	'BbAdvancedHint'      => 'Useimpien toimijoiden ei pitäisi joutua muuttamaan niitä.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Joka botteja tunnistaa. "minimal" (oletus) on nopein; "täynnä" on kaikkein perusteellisin.',
+	'BbStrictness'        => 'Estää asentoa',
+	'BbStrictnessInfo'    => 'vain monitor-lokit mutta estää mitään; normaalit lohkot todennettu hyökkääjiä; tiukat estää aggressiivisesti.',
+	'BbLoggingMode'       => 'Kirjautuminen',
+	'BbLoggingModeInfo'   => 'Normaali (suositeltu), Verbose (lokit jokainen pyyntö), Pois',
+	'BbLogModeNormal'     => 'Normaali',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Pois',
+	'BbBehindProxy'       => 'Sivusto on käänteisen välityspalvelimen tai CDN:n takana',
+	'BbBehindProxyInfo'   => 'Ota käyttöön jos Cloudflare, AWS, GCP, Nopeasti jne. Sinun täytyy lisätä välityspalvelimen IP-alueet Advanced — ilman niitä, oikeita IP-osoitteita ei voi määrittää.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Ydin',
+	'BbAdvReverseProxy'   => 'Käänteinen Välityspalvelin',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Botti Kategoriat',
+	'BbAdvDnsVerification'=> 'DNS Vahvistus',
+	'BbAdvRateLimits'     => 'Arvostele Rajoitus',
+	'BbAdvHeadDetection'  => 'Pyyntöjen Tunnistaminen',
+	'BbAdvAssetScraping'  => 'Assettien Romun Havaitseminen',
+	'BbAdvDynamicIp'      => 'Dynaamiset IP-alueet',
+	'BbAdvOnDemandRefresh'=> 'Käytössä Kysyntä Ip Päivitä',
+	'BbAdvHttpbl'         => 'Projektin Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Haaste / CAPTCHA',
+	'BbAdvPerformance'    => 'Suorituskyky',
+	'BbAdvGeoip'          => 'GeoIP / ASN Esto',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Sormenjäljet',
+	'BbAdvCustomRules'    => 'Mukautetut Säännöt',
+	'BbAdvBlockPage'      => 'Estä Sivu',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Hakukone',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Sosiaalinen Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Arkistoi Crawler',
+	'BbCatMonitoring'     => 'Seuranta',
+	'BbCatFeedReader'     => 'Syötteen Lukija',
+	'BbCatShoppingCrawler'=> 'Ostokset Crawler',
+	'BbCatCloudInfra'     => 'Pilvi Infrastruktuuri',
+	'BbCatSecurityScanner'=> 'Tietoturvaskanneri',
+	'BbCatResidentialProxy'=> 'Asumisen Välityspalvelin',
+	'BbCatMalicious'      => 'Haitallinen',
+	'BbCatUnknown'        => 'Tuntematon',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Pilvikampela',
+	'BbCloudProviderFastly'     => 'Nopeasti',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Rajoita tilauksen päivittämistä tietyille palveluntarjoajille. Tyhjä = kaikki neljä.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Lokin Säilyttäminen',
+	'BbLogRetentionEnabled'          => 'Ota lokin automaattinen puhdistus käyttöön',
+	'BbLogRetentionEnabledInfo'      => 'Poista jaksottaisesti lokirivit, jotka ovat vanhempia kuin säilytysikkuna. Suositellaan sivustoille ilman cron pääsyä.',
+	'BbLogRetentionMaxAgeDays'       => 'Säilytä ikkuna (päivää)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Tämän vanhemmat rivit poistetaan. Oletus: 7. Yleiset arvot: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Rivin enimmäismäärä (0 = ei korkkia)',
+	'BbLogRetentionMaxRowsInfo'      => 'Jos asetettu, vanhimmat rivit poistetaan, kun taulukko ylittää tämän koon, iästä riippumatta. Hyödyllinen suurille liikennepaikoille.',
+	'BbLogRetentionProbability'       => 'Todennäköisyyden nimittäjä (1 N)',
+	'BbLogRetentionProbabilityInfo'   => '1 N pyynnöt tarkastaa stabiilisuuden portin. Korkeampi = pienempi DB kuorma. Oletus: 1000.',
+	'BbLogRetentionMinInterval'      => 'Vähimmäisväli siivousten välillä (sekuntia)',
+	'BbLogRetentionMinIntervalInfo'  => 'Kova kerros siivoustaajuudella. Oletus: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Siivoa lukitus TTL (sekuntia)',
+	'BbLogRetentionLockTtlInfo'      => 'Kuinka kauan siivousta pidetään. Oletus: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Ota DNS vahvistus käyttöön',
+	'BbDnsVerificationInfo'     => 'Vahvista botti väitteet (esim. Googlebot) käänteiskopioimalla DNS haku. Saaliit spoofed botit.',
+	'BbDnsTimeoutMs'            => 'DNS haun aikakatkaisu (ms)',
+	'BbDnsPositiveTtl'          => 'Positiivinen välimuisti TTL (sekuntia)',
+	'BbDnsNegativeTtl'          => 'Negatiivinen välimuisti TTL (sekuntia)',
+	'BbDnsRequireForward'       => 'Vaadi ajo-vahvistus (PTR + A tietue)',
+	'BbDnsRequireForwardInfo'   => 'Saaliit PTR spoofing mutta lisää latenssi ja IPv6 FP riski.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD vapauttaa polut (yksi per rivi)',
+	'BbHeadRefererExemptInfo'   => 'Polut, joissa HEAD ilman Refereria on laillinen (esim. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Omaisuuden laajennukset suojaamaan (yksi per rivi)',
+	'BbAssetExtensionsInfo'     => 'Tiedostotyypit, joita katsottiin suoralle kaatamiselle ilman sivukuormia.',
+
+	'BbOnDemandBotIds'          => 'Botti ID:t päivittääksesi (tyhjä = kaikki)',
+	'BbOnDemandBotIdsInfo'      => 'Rajoita päivitystä tiettyihin botteihin. Jätä tyhjäksi päivittääksesi kaikki rekisteröidyt bottet.',
+	'BbOnDemandProbability'     => 'Todennäköisyyden nimittäjä (1 N)',
+	'BbOnDemandMinAge'          => 'Minimi kätkön ikä (sekuntia)',
+	'BbOnDemandLockTtl'         => 'Lukitse TTL (sekuntia)',
+	'BbOnDemandCacheTtl'        => 'Välimuisti TTL (sekuntia)',
+	'BbOnDemandFeedTimeout'     => 'Syötteen noutoaika (sekuntia)',
+
+	'BbDynamicIpTtl'            => 'Välimuisti TTL (sekuntia)',
+	'BbDynamicIpFeeds'          => 'Päivittävät syötteet (yksi per rivi)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Viimeksi nähty',
+	'BbSeverity'             => 'Vakavuus',
+	'BbStatusBreakdown'      => 'Tilan erittely',
+	'BbBotBreakdown'         => 'Botti jaottelu',
+	'BbTopBlocked'           => 'Estetyt IP-osoitteet',
+	'BbGeoSummary'           => 'Maantieteellinen yhteenveto',
+	'BbCountry'              => 'Maa',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Vahvistettu %',
+	'BbNoData'               => 'Ei tietoja valitulle ikkunalle',
+	'BbCategory'             => 'Kategoria',
+	'BbResponseTime'         => 'Vastausaika',
+	'BbDateCol'              => 'Aika / Ip / Tila',
+	'BbSelectRow'            => 'Valitse rivi',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Vain hidas',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Ratkaistu',
+	'BbChipStatusCode' => 'Tilan koodi',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Maa',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Näytä otsikot',
+	'BbViewBody'             => 'Näytä keho',
+	'BbViewContentLabel'     => 'Sisältö',
+	'BbViewModeFull'         => 'Täysi (aina näkyvissä)',
+	'BbViewModeTeaser'       => 'Teaser (laajenna klikkaamalla)',
+	'BbViewModeHidden'       => 'Piilotettu (näytä kysynnässä)',
+	'BbHide'                 => 'piilota',
+	'BbChars'                => 'merkkiä',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Custom Rules',
+	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
+	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Body scan skip fields',
+	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Edistyneet suodattimet',
+	'BbDateFrom'            => 'Alkaen',
+	'BbDateTo'              => 'Vastaanottaja',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Vain hitaat pyynnöt (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Vain aktiivinen',
+	'BbResolvedOnly'        => 'Ratkaistu vain',
+	'BbResolvedAll'         => 'Aktiivinen + ratkaistu',
+	'BbResolved'            => 'ratkaistu',
+	'BbActionResolve'       => 'ratkaise',
+	'BbActionUnresolve'     => 'lopeta',
+	'BbRowResolved'         => 'Lokimerkintä merkitty ratkaistuksi',
+	'BbRowUnresolved'       => 'Lokimerkintä merkitty ratkaisemattomaksi',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Poista valitut',
+	'BbBulkWhitelistSelected'   => 'Sallitut IP-osoitteet',
+	'BbBulkResolveSelected'     => 'Merkitse selvitetyksi',
+	'BbBulkUnresolveSelected'   => 'Merkitse ratkaisemattomaksi',
+	'BbBulkHint'                => 'Valitse rivit ensin ja napsauta sitten toimintoa.',
+	'BbNoItemsSelected'         => 'Ei valittuja kohteita',
+	'BbBulkDeleted'             => 'Poistettiin %1 lokitiedot',
+	'BbBulkWhitelisted'         => 'Lisätty %1 IP-osoitteet valkoiselle listalle',
+	'BbBulkResolved'            => 'Merkitse %1 tietueet ratkaistuina',
+	'BbBulkUnresolved'          => 'Merkitse %1 tietueet ratkaisemattomiksi',
+	'BbMarkAll'                 => 'Merkitse kaikki rivit tälle sivulle',
+	'BbMarkNone'                => 'Poista kaikki rivit',
+
+	'BbBulkFailed'              => 'Valittuja rivejä ei voitu päivittää. Tarkista tietokanta tai yritä uudelleen.',
+	'BbBulkWhitelistedNone'     => 'Uusia IP-osoitteita ei lisätty – kaikki valitut IP-osoitteet olivat jo valkoisella listalla.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'vahvistettu',
+	'BbUnverified'           => 'vahvistamaton',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Pyyntö sallittu',
+	'BbStatus_blocked.bot'                => 'Tunnettu botti estetty',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler estetty',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler estetty',
+	'BbStatus_blocked.malicious_ua'       => 'Haitallinen Käyttäjäagentti',
+	'BbStatus_blocked.attack_pattern'     => 'Hyökkäys havaittu',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL täsmää',
+	'BbStatus_blocked.httpbl'             => 'http:BL täsmää',
+	'BbStatus_blocked.behavioral'         => 'Käyttäytymisen poikkeavuus',
+	'BbStatus_blocked.fingerprint'        => 'Virheellinen sormenjälki',
+	'BbStatus_blocked.rate_limit'         => 'Nopeusraja ylittynyt',
+	'BbStatus_blocked.custom_rule'        => 'Mukautetun säännön täsmäys',
+	'BbStatus_blocked.geoip'              => 'GeoIP lohko',
+	'BbStatus_blocked.residential_proxy'  => 'Asuinvälityspalvelin estetty',
+	'BbStatus_challenge.required'         => 'Haaste tarvitaan',
+	'BbStatus_challenge.failed'           => 'Haaste epäonnistui',
+	'BbStatus_error.internal'             => 'Sisäinen virhe',
+	'BbStatus_error.configuration'        => 'Konfiguraatiovirhe',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Viimeiset 24 tuntia',
+	'BbWindow7d'  => 'Viimeiset 7 päivää',
+	'BbWindow30d' => 'Viimeiset 30 päivää',
+	'BbWindowAll' => 'Koko ajan',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimaali (oletus)',
+	'BbPresetFull'           => 'Täysi',
+	'BbPresetVerifiedOnly'   => 'Vain Todennetut',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Vain EU',
+	'BbPresetHumanOnly'      => 'Vain Ihminen',
+	'BbPresetCustom'         => 'Mukautettu',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Vain Monitori',
+	'BbStrictnessNormal'      => 'Normaali',
+	'BbStrictnessStrict'      => 'Tiukka',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Ota käyttöön pääpyynnön tunnistus',
+	'BbHeadRequireReferer'       => 'Vaadi viittaaja HEAD:ssä',
+	'BbHeadFloodThreshold'       => 'Tulvien kynnysarvo (istuntoa kohti)',
+	'BbHeadProbeThreshold'       => 'Anturin kynnysarvo (IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Ota käyttöön omaisuuden poiminnan tunnistus',
+	'BbAssetNoRefererThreshold'    => 'Ei referoijan kynnysarvo (per IP / tunti)',
+	'BbAssetOnlySessionThreshold'  => 'Pelkkä omaisuuserien istunnon kynnysarvo',
+	'BbAssetPatternThreshold'      => 'Juoksevan kuvion kynnysarvo (IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Ota käyttöön dynaamiset IP-alueet',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Ota tilauspäivitys käyttöön',
+	'BbOnDemandRefreshInfo'      => 'Päivitä IP-alueen välimuisti pyyntöjen aikana. Käytä kun sinulla ei ole salattua pääsyä.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Huono JA3',
+	'BbFpBadH2'           => 'Huono H2',
+	'BbFpBotHeaderOrders' => 'Botti Otsikon Tilaukset',
+	'BbFpExpectedJa3'     => 'Odotettu J3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Estetty',
+	'BbListChallenge' => 'Haaste (CAPTCHA)',
+	'BbListLogOnly'   => 'Vain loki (ei täytäntöönpanoa)',
+	'BbListAllowed'   => 'Vastaanotto sallittu',
+	'BbListHint'      => 'Tämän listan kategoriat saavat toiminnon riippumatta kategorian oletuksista.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Hakukone',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Sosiaalinen Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Arkistoi Crawler',
+	'BbCatMonitoring'      => 'Seuranta',
+	'BbCatFeedReader'      => 'Syötteen Lukija',
+	'BbCatShoppingCrawler' => 'Ostokset Crawler',
+	'BbCatCloudInfra'      => 'Pilvi Infrastruktuuri',
+	'BbCatSecurityScanner' => 'Tietoturvaskanneri',
+	'BbCatResidentialProxy'=> 'Asumisen Välityspalvelin',
+	'BbCatMalicious'       => 'Haitallinen',
+	'BbCatUnknown'         => 'Tuntematon',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-merkki tiiviste',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Hyökkää malleihin',
+	'BbSevChallenges'     => 'Julkiset haasteet',
+	'BbSevPermitted'      => 'Sallittu',
+	'BbSevErrors'         => 'Virheet',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Kategoriat',
+
+	'BbResultBreakdown'    => 'Tuloksen erittely',
+	'BbBreakdownBlocked'   => 'Estetty',
+	'BbBreakdownMonitored' => 'Valvottu',
+	'BbBreakdownAllowed'   => 'Sallittu',
+	'BbViewAllInLog'       => 'Näytä kaikki lokissa',
+	'BbAllowedHintVerbose' => 'Sallittu liikenne on kirjautunut vain kun suulliset kirjaukset on käytössä. Valitse logging_mode=verbose asetuksissa nähdäksesi mitä kautta menee.',
 
 ];

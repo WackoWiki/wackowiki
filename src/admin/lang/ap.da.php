@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Den administrative adgangskode er ikke angivet!',
 	'NoRecoveryPasswordTip'		=> 'Bemærk: Fraværet af en administrativ adgangskode er en trussel mod sikkerheden! Indtast dit password-hash i konfigurationsfilen, og kør programmet igen.',
 
+	'ApDevNologinBlocked'		=> 'Adgang blokeret: AP_DEV_NOLOGIN er aktiveret i admin.php men anmodningen ikke stammer fra localhost (127.0.0.1, ::1, eller localhost). Dette er et flag kun for udvikling og skal være deaktiveret på produktion. Sæt <code>AP_DEV_NOLOGIN = 0</code> i admin.php for at genoprette adgang.',
+	'ApDevNologinBlockedLog'	=> '!!! SIKKERHED: %1 er aktiveret, men admin.php blev tilgået fra en ikke-localhost adresse (%2). Admin panel adgang er blevet blokeret.',
+
 	'ErrorLoadingModule'		=> 'Fejl ved indlæsning af admin modul %1: eksisterer ikke.',
 
 	'ApHomePage'				=> 'Startside',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Afslut systemadministration og log ud af webstedet',
 
 	'TimeLeft'					=> 'Tid tilbage:  %1 minut(ter)',
+	'TimeLeftInfinity'			=> 'Tid tilbage:  %1 (udviklertilstand)',
 	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'Åbn',
@@ -929,8 +933,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Opret miniature:',
 	'CreateThumbnailInfo'		=> 'Der oprettes altid en miniature.',
-	'JpegQuality'				=> 'JPEG-kvalitet:',
-	'JpegQualityInfo'			=> 'Kvalitet: Kvalitet ved skalering af et JPEG-miniaturebillede. Den skal være mellem 1 og 100, hvor 100 angiver 100 % kvalitet.',
+	'ImageQuality'				=> 'Forudindstilling Af Billedkvalitet:',
+	'ImageQualityInfo'			=> 'Kvalitet ved skalering af et miniaturebillede. Forvalg af værdier pr. codec, som giver et sammenligneligt perceptuelt resultat.',
 	'MaxImageArea'				=> 'Maximum Image Area:',
 	'MaxImageAreaInfo'			=> 'Det maksimale antal pixels, som et kildebillede kan have. Dette giver en grænse for hukommelsesforbruget for billedskaleringens dekomprimeringsside. <br><code>-1</code> betyder, at den ikke kontrollerer billedets størrelse, før den forsøger at skalere det. <code>0</code> betyder, at den vil bestemme værdien automatisk.',
 	'MaxThumbWidth'				=> 'Maksimal bredde på miniature i pixels:',
@@ -963,7 +967,6 @@ $ap_translation = [
 		'2'		=> 'ikke højere end',
 		'3'		=> 'lig med',
 	],
-	'LogNoMatch'				=> 'Ingen hændelser, der opfylder kriterierne',
 	'LogDate'					=> 'Dato',
 	'LogEvent'					=> 'Begivenhed',
 	'LogUsername'				=> 'Dit brugernavn',
@@ -976,6 +979,49 @@ $ap_translation = [
 		'6'		=> 'laveste',
 		'7'		=> 'fejlfinding',
 	],
+
+	'LogCollapse'        => 'kollaps',
+	'LogExpand'          => 'udvid',
+	'LogType'              => 'Type',
+	'LogSearch'            => 'Søg',
+	'LogSearchPlaceholder' => 'søg beskeder...',
+	'LogUserId'            => 'Bruger ID',
+	'LogExactMatch'        => 'nøjagtig match',
+	'LogFrom'              => 'Fra',
+	'LogTo'                => 'Til',
+	'LogSupportKey'        => 'Support nøgle',
+	'LogContext'           => 'Kontekst',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Bruger agent',
+	'LogReferer'           => 'Henviser',
+	'LogTotal'             => 'I Alt',
+	'LogFilteredBy'        => 'Filtreret af',
+	'LogClearFilter'       => 'Ryd filter',
+	'LogActions'           => 'Handlinger',
+	'LogDelete'            => 'Slet',
+	'LogDeleteConfirm'     => 'Slet denne log indgang?',
+	'LogDeleteSelected'    => 'Slet valgte',
+	'LogBulkAction'        => '— bulkhandling —',
+	'LogApply'             => 'Anvend',
+	'LogExportCSV'         => 'Eksporter CSV',
+	'LogExportJSON'        => 'Eksporter JSON',
+	'LogPurged'            => 'Log tabel afkortet.',
+	'LogPurgedFiltered'     => '%1 logposter slettet af filter.',
+	'LogDeleted'           => 'Log post slettet.',
+	'LogDeletedBulk'        => '%1 logposter slettet.',
+	'LogPurgeSection'      => 'Destruktive operationer',
+	'LogPurgeWarning'      => 'Der er %1 poster, der matcher den aktuelle visning. Benyt med forsigtighed.',
+	'LogPurgeConfirm'      => 'Jeg forstår, at dette permanent vil slette logposter',
+	'LogPurgeFiltered'     => 'Tøm matchende filter',
+	'LogPurgeFilteredConfirm' => 'Slet alle indgange der matcher det aktuelle filter? Dette kan ikke fortrydes.',
+	'LogPurgeAll'          => 'Tøm ENTIRE log',
+	'LogPurgeAllConfirm'   => 'Slet EVERY log-indgang i databasen? Dette kan ikke fortrydes.',
+	'LogFindRelated'       => 'Find relaterede poster',
+	'LogNoMatch'           => 'Ingen logposter matcher det aktuelle filter.',
+
+	'LogMarkAll'                => 'Markér alle rækker på denne side',
+	'LogMarkNone'               => 'Fjern markering af alle rækker',
+	'LogSelectRow'              => 'Vælg række',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Her kan du sende en email til enten alle dine brugere, eller til de brugere i en specifik gruppe som <strong>har muligheden for at modtage masse-emails aktiveret</strong>. Når en masse-email afsendes bliver administrator sat som afsender, og afsendes med modtagere som blind kopi, som derfor ikke kan se øvrige modtagere. Som standard afsendes emailen til 20 brugere ad gangen. Vær tålmodig, når du sender email til en stor gruppe af personer og stop ikke siden halvvejs. Afsendelsen af en masse-email kan tage lang tid, men du bliver informeret når scriptet er fuldført.',
@@ -1284,6 +1330,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Overskrifter',
 	'BbEntity'					=> 'Enhed',
 
+	'BbSearchPlaceholder'        => 'Søg UA, URI, IP, vært, support_key, status…',
+	'BbFilterAnyCategory'        => 'Enhver kategori',
+	'BbFilterAnyMethod'          => 'Enhver metode',
+	'BbFilterAnyStatus'          => 'Enhver status',
+	'BbFilterBlockedOnly'        => 'Kun blokeret',
+	'BbFilterPermittedOnly'      => 'Kun tilladt',
+	'BbFilterApply'              => 'Anvend',
+	'BbFilterClear'              => 'Ryd filtre',
+	'BbChipSearch'               => 'Søg',
+	'BbChipCategory'             => 'Kategori',
+	'BbChipMethod'               => 'Metode',
+	'BbChipStatus'               => 'Status',
+	'BbChipRemove'               => 'Fjern dette filter',
+	'BbFilterByCategory'         => 'Filtrer efter denne kategori',
+	'BbSearchBySupportKey'       => 'Søg efter denne supportnøgle',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Enhver check status',
+	'BbFilterCheckedOnly'      => 'Kun tjekket',
+	'BbFilterUncheckedOnly'    => 'Kun umarkerede',
+	'BbChipCheck'              => 'Tjek status',
+	'BbChecked'                => 'tjekket',
+	'BbUnchecked'              => 'afmarkeret',
+	'BbActionCheck'            => 'tjek',
+	'BbActionUncheck'          => 'afmarkér',
+	'BbRowChecked'             => 'Log post markeret som kontrolleret',
+	'BbRowUnchecked'           => 'Log post afmarkeret',
+	'BbRowCheckedHint'         => 'Denne registrering kontrolleres — undtages fra automatisk oprensning',
+	'BbRowUncheckedHint'       => 'Markér denne post for at holde den på tværs af automatisk oprydning',
+	'BbBulkCheckSelected'      => 'Markér markeret',
+	'BbBulkUncheckSelected'    => 'Afmarkér markeret',
+	'BbBulkChecked'            => 'Markerede %1 poster som markerede',
+	'BbBulkUnchecked'          => 'Umarkerede %1 poster',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Indstillinger gemt.',
 	'BbWhitelistHint'			=> 'Upassende hvidlistning WILL udsætte dig for spam, eller forårsage dårlig adfærd til at stoppe med at fungere helt! MÅ IKKE HVIDELIST, medmindre du er 100% VISSE som du burde.',
@@ -1317,5 +1397,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Aktiver Omvendt Proxy',
 	'BbReverseProxyHeader'		=> 'Header indeholder internetklienter IP-adresse',
 	'BbReverseProxyAddresses'	=> 'IP-adresse eller CIDR-format adresseintervaller for dine proxyservere (en pr. linje)',
+
+	'BbBehavioral'           => 'Adfærd Analyse',
+	'BbEnableBehavioral'     => 'Aktivér adfærdsanalyse (hastighedsanomalier, roterende UA/IP)',
+	'BbEnableBehavioralInfo' => 'Spor forespørgselsmønstre pr. session. Sikker for at holde aktiveret.',
+	'BbEnableFingerprinting' => 'Aktiver TLS/HTTP/2 fingeraftryk (JA3, H2, header order)',
+	'BbEnableFingerprintingInfo' => 'Blokke kendte dårlige fingeraftryk kun. Kræver aktiveret_fingeraftryk =true. Kan forårsage falske positiver på gamle browsere/fuldmagter.',
+	'BbInspectJson'          => 'Inspicer JSON anmode organer for angreb',
+	'BbInspectJsonInfo'      => 'ADVARSEL: Pauser AJAX/JSON API\'er (wiki markup, kodestykker udløser falske positive). Hold dig slået fra.',
+	'BbInspectMultipart'     => 'Inspicer multipart/form-data organer for angreb',
+	'BbInspectMultipartInfo' => 'ADVARSEL: Breaks fil uploads. Behold OFF.',
+
+	'BbEnableClientHints'      => 'Aktiver Kunde Tips Validering',
+	'BbEnableClientHintsInfo'  => 'Valider Sec-CH-UA headers mod User-Agent til at opdage forfalskede browsere (Chrome 89 +).',
+	'BbEnableAgentic'          => 'Aktiver Agentisk Adfærd Detection',
+	'BbEnableAgenticInfo'      => 'Detect AI agent mønstre: think-then-fetch, non-linear navigation, precision targeting.',
+	'BbStrictSearchEngines'    => 'Strenge søgemaskiner',
+	'BbStrictSearchEnginesInfo' => 'Anvend strengere kontrol til ubekræftede søgemaskine bots (Googlebot, Bingbot, …) før du tillader dem gennem.',
+	'BbEnableDynamicIp'        => 'Aktiver Dynamisk Ip Område Hentning',
+	'BbEnableDynamicIpInfo'    => 'Hent officielle IP spænder fra Google, Bing, OpenAI, Anthropic, Apple, etc. (cached 24h, stale fallback 7 dage).',
+
+	'BbAiCrawlers'           => 'AI Crawler Kontrol',
+	'BbBlockUnverifiedAi'    => 'Bloker ubekræftede AI crawlers',
+	'BbBlockUnverifiedAiInfo' => 'Blokke AI crawlers der mislykkes DNS/IP verifikation (spoofed bots).',
+	'BbStrictAi'             => 'Streng AI tilstand (blok selv verificeret ikke tilladt AI)',
+	'BbStrictAiInfo'         => 'Blokerer ALLE AI crawlere ikke på tilladt liste, selv hvis verificeret.',
+	'BbAllowedAiCrawlers'    => 'Tilladte AI crawler tokens (en pr. linje)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Aktiver DNSBL tjek',
+	'BbDnsblLists'           => 'DNSBL lister (en pr. linje)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Begrænsning Af Sats',
+	'BbRateLimitEnabled'     => 'Aktiver hastighedsbegrænsning',
+	'BbRateGlobalRequests'   => 'Globale forespørgsler pr. vindue',
+	'BbRateGlobalWindow'     => 'Globalt vindue (sekunder)',
+	'BbRatePerMinuteRequests'=> 'Per-minut anmodninger',
+	'BbRatePerMinuteWindow'  => 'Per-minut vindue (sekunder)',
+	'BbRatePostRequests'     => 'POST anmodninger pr. vindue',
+	'BbRatePostWindow'       => 'POST vindue (sekunder)',
+	'BbRateLoginRequests'    => 'Login anmodninger pr. vindue',
+	'BbRateLoginWindow'      => 'Login- vindue (sekunder)',
+
+	'BbChallenge'            => 'Udfordring System',
+	'BbChallengeEnabled'     => 'Aktiver udfordringer',
+	'BbChallengeProvider'    => 'Udbyder af udfordring',
+	'BbChallengeSiteKey'     => 'Websted nøgle',
+	'BbChallengeSecretKey'   => 'Hemmelig nøgle',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min score',
+
+	'BbPerformance'          => 'Ydeevne',
+	'BbSkipExtensions'       => 'Spring over udvidelser (en pr. linje)',
+	'BbSkipPaths'            => 'Skip stipræfikser (en pr. linje)',
+
+	'BbGeoip'                => 'GeoIP / ASN Blokering',
+	'BbGeoipEnabled'         => 'Aktiver GeoIP opslag',
+	'BbGeoipDbPath'          => 'MaxMind DB sti',
+	'BbBlockedCountries'     => 'Blokerede lande (ISO-koder, én pr. linje)',
+	'BbBlockedAsns'          => 'Blokerede ASN\'er (en pr. linje)',
+
+	'BbBlockPage'                  => 'Side Blok',
+	'BbShowDetailedBlockPage'      => 'Vis detaljeret blokside',
+	'BbShowDetailedBlockPageInfo'  => 'Vis årsag, anmodning URI, og teknisk support nøgle på bloksiden. Anbefales til produktion.',
+	'BbShowContactInfo'            => 'Vis kontaktoplysninger på bloksiden',
+	'BbShowContactInfoInfo'        => 'Vis admin e-mail på blok siden (kun træder i kraft, når detaljeret blok side er aktiveret).',
+	'BbSettingsSaveFailed'         => 'Mislykkedes at gemme indstillinger for dårlig adfærd',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Grundlæggende indstillinger',
+	'BbAdvancedSection'   => 'Avancerede indstillinger',
+	'BbAdvancedHint'      => 'De fleste operatører bør ikke have behov for at ændre disse.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Hvilke bots at genkende. "minimal" (standard) er hurtigst; "full" er mest grundigt.',
+	'BbStrictness'        => 'Blokering kropsholdning',
+	'BbStrictnessInfo'    => 'overvåger kun logfiler, men blokerer intet; normale blokke verificerede angribere; strenge blokerer aggressivt.',
+	'BbLoggingMode'       => 'Logning',
+	'BbLoggingModeInfo'   => 'Normal (anbefales), Verbose (logger hver anmodning), Fra',
+	'BbLogModeNormal'     => 'Normal',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Fra',
+	'BbBehindProxy'       => 'Webstedet står bag en omvendt proxy eller CDN',
+	'BbBehindProxyInfo'   => 'Aktiverer, hvis bag Cloudflare, AWS, GCP, Hurtigt osv. Du skal tilføje proxy IP-intervaller i Advanced - uden dem, rigtige klient IP\'er kan ikke bestemmes.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Kerne',
+	'BbAdvReverseProxy'   => 'Omvendt Proxy',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Bot Kategorier',
+	'BbAdvDnsVerification'=> 'DNS Verifikation',
+	'BbAdvRateLimits'     => 'Begrænsning Af Sats',
+	'BbAdvHeadDetection'  => 'Detektering Af Hovedforespørgsler',
+	'BbAdvAssetScraping'  => 'Detektering Af Aktiv Scraping',
+	'BbAdvDynamicIp'      => 'Dynamiske Ip Intervaller',
+	'BbAdvOnDemandRefresh'=> 'Genopfrisk Ip Efter Efterspørgslen',
+	'BbAdvHttpbl'         => 'Projekt Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Udfordring / CAPTCHA',
+	'BbAdvPerformance'    => 'Ydeevne',
+	'BbAdvGeoip'          => 'GeoIP / ASN Blokering',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Fingeraftryk',
+	'BbAdvCustomRules'    => 'Brugerdefinerede Regler',
+	'BbAdvBlockPage'      => 'Side Blok',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Søgemaskine',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Social Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Arkivér Crawler',
+	'BbCatMonitoring'     => 'Overvågning',
+	'BbCatFeedReader'     => 'Feed Læser',
+	'BbCatShoppingCrawler'=> 'Shopping Crawler',
+	'BbCatCloudInfra'     => 'Cloud Infrastruktur',
+	'BbCatSecurityScanner'=> 'Sikkerhedsscanner',
+	'BbCatResidentialProxy'=> 'Plejeproxy',
+	'BbCatMalicious'      => 'Ondsindede',
+	'BbCatUnknown'        => 'Ukendt',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Hurtigt',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Begræns on-demand opdatering til specifikke udbydere. Tom = alle fire.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Log Tilbageholdelse',
+	'BbLogRetentionEnabled'          => 'Aktivér automatisk oprydning af log',
+	'BbLogRetentionEnabledInfo'      => 'Slet periodisk logrækker ældre end opbevaringsvinduet. Anbefales til websteder uden adgang til cron.',
+	'BbLogRetentionMaxAgeDays'       => 'Tilbageholdelsesvindue (dage)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rækker ældre end dette slettes. Standard: 7. Fælles værdier: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maksimum antal rækker (0 = ingen hætte)',
+	'BbLogRetentionMaxRowsInfo'      => 'Hvis angivet, ældste rækker slettes, når tabellen overstiger denne størrelse, uanset alder. Nyttig for high-traffic sites.',
+	'BbLogRetentionProbability'       => 'Sandsynlighedsnævner (1 i N)',
+	'BbLogRetentionProbabilityInfo'   => '1 i N anmodninger kontrollerer staleness gate. Højere = mindre DB belastning. Standard: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minimum interval mellem oprensninger (sekunder)',
+	'BbLogRetentionMinIntervalInfo'  => 'Hårdt gulv på oprydningsfrekvens. Standard: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Oprydning lås TTL (sekunder)',
+	'BbLogRetentionLockTtlInfo'      => 'Hvor længe oprydning mutex holdes. Standard: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Aktiver DNS-bekræftelse',
+	'BbDnsVerificationInfo'     => 'Bekræft bot påstande (f.eks. Googlebot) ved reverse-DNS opslag. Fange spoofed bots.',
+	'BbDnsTimeoutMs'            => 'DNS opslag timeout (ms)',
+	'BbDnsPositiveTtl'          => 'Positiv cache TTL (sekunder)',
+	'BbDnsNegativeTtl'          => 'Negativ cache TTL (sekunder)',
+	'BbDnsRequireForward'       => 'Kræv fremadrettet bekræftelse (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Fangster PTR spoofing, men tilføjer latens-tid og IPv6 FP risiko.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD fritager stier (en pr. linje)',
+	'BbHeadRefererExemptInfo'   => 'Stier, hvor HEDER uden reference er legitime (f.eks. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Aktiv udvidelser at beskytte (en pr. linje)',
+	'BbAssetExtensionsInfo'     => 'Filtyper set til direkte skrabning uden sideindlæsning.',
+
+	'BbOnDemandBotIds'          => 'Bot ID\'er at opdatere (tom = alle)',
+	'BbOnDemandBotIdsInfo'      => 'Begræns opdatering til specifikke bots. Efterlad blank for at opdatere alle registrerede bots.',
+	'BbOnDemandProbability'     => 'Sandsynlighedsnævner (1 i N)',
+	'BbOnDemandMinAge'          => 'Min cache alder (sekunder)',
+	'BbOnDemandLockTtl'         => 'Lås TTL (sekunder)',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (sekunder)',
+	'BbOnDemandFeedTimeout'     => 'Feed hente timeout (sekunder)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (sekunder)',
+	'BbDynamicIpFeeds'          => 'Feeds der skal opdateres (en pr. linje)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Sidst set',
+	'BbSeverity'             => 'Alvorlighed',
+	'BbStatusBreakdown'      => 'Opdeling efter status',
+	'BbBotBreakdown'         => 'Opdeling efter Bot',
+	'BbTopBlocked'           => 'Top afviste IP\'er',
+	'BbGeoSummary'           => 'Geografisk oversigt',
+	'BbCountry'              => 'Land',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Bekræftet %',
+	'BbNoData'               => 'Ingen data for det valgte vindue',
+	'BbCategory'             => 'Kategori',
+	'BbResponseTime'         => 'Svar tid',
+	'BbDateCol'              => 'Tid / IP / Status',
+	'BbSelectRow'            => 'Vælg række',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Kun langsomt',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Løst',
+	'BbChipStatusCode' => 'Status kode',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Land',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Vis overskrifter',
+	'BbViewBody'             => 'Se krop',
+	'BbViewContentLabel'     => 'Indhold',
+	'BbViewModeFull'         => 'Fuld (altid vist)',
+	'BbViewModeTeaser'       => 'Teaser (klik for at udvide)',
+	'BbViewModeHidden'       => 'Skjult (vis på efterspørgsel)',
+	'BbHide'                 => 'skjul',
+	'BbChars'                => 'tegn',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Brugerdefinerede Regler',
+	'BbCustomRulesLabel'           => 'Brugerdefinerede regler (en JSON objekt pr. linje)',
+	'BbCustomRulesInfo'            => 'Hver linje er et JSON-objekt med nøgler: type (ipřua_regexřua_containsřasnřland header), værdi, handling (allowřblockřchallengeţlog), og id. Eksempel: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Body scan springer felter over',
+	'BbBodyScanSkipFieldsInfo'     => 'Et feltnavn pr. linje. De angivne felter springes over under SQL/XSS kropsinspektion.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Avancerede filtre',
+	'BbDateFrom'            => 'Fra',
+	'BbDateTo'              => 'Til',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Kun langsomme forespørgsler (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Kun aktiv',
+	'BbResolvedOnly'        => 'Kun løst',
+	'BbResolvedAll'         => 'Aktiv + løst',
+	'BbResolved'            => 'løst',
+	'BbActionResolve'       => 'løs',
+	'BbActionUnresolve'     => 'uløste',
+	'BbRowResolved'         => 'Log indgang markeret løst',
+	'BbRowUnresolved'       => 'Log indgang markeret uløst',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Slet valgte',
+	'BbBulkWhitelistSelected'   => 'Hvidliste Ip\'er',
+	'BbBulkResolveSelected'     => 'Markering løst',
+	'BbBulkUnresolveSelected'   => 'Markér uløst',
+	'BbBulkHint'                => 'Markér rækker først, og klik derefter på en handling.',
+	'BbNoItemsSelected'         => 'Ingen elementer valgt',
+	'BbBulkDeleted'             => 'Slettede %1 logposter',
+	'BbBulkWhitelisted'         => 'Tilføjede %1 IP\'er til whiteliste',
+	'BbBulkResolved'            => 'Markerede %1 poster som løst',
+	'BbBulkUnresolved'          => 'Markerede %1 poster som uløste',
+	'BbMarkAll'                 => 'Markér alle rækker på denne side',
+	'BbMarkNone'                => 'Fjern markering af alle rækker',
+
+	'BbBulkFailed'              => 'Kunne ikke opdatere de valgte rækker. Tjek databasen eller prøv igen.',
+	'BbBulkWhitelistedNone'     => 'Ingen nye IP\'er blev tilføjet — alle valgte IP\'er var allerede på whitelisten.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'verificeret',
+	'BbUnverified'           => 'ubekræftet',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Anmodning tilladt',
+	'BbStatus_blocked.bot'                => 'Kendt bot blokeret',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler blokeret',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler blokeret',
+	'BbStatus_blocked.malicious_ua'       => 'Ondsindede Bruger-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Angreb nyttelast fundet',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL match',
+	'BbStatus_blocked.httpbl'             => 'http:BL match',
+	'BbStatus_blocked.behavioral'         => 'Adfærdsmæssig anomali',
+	'BbStatus_blocked.fingerprint'        => 'Dårligt fingeraftryk',
+	'BbStatus_blocked.rate_limit'         => 'Sats grænse overskredet',
+	'BbStatus_blocked.custom_rule'        => 'Tilpasset regel matcher',
+	'BbStatus_blocked.geoip'              => 'GeoIP blok',
+	'BbStatus_blocked.residential_proxy'  => 'Beboelsesproxy blokeret',
+	'BbStatus_challenge.required'         => 'Udfordring påkrævet',
+	'BbStatus_challenge.failed'           => 'Udfordring mislykkedes',
+	'BbStatus_error.internal'             => 'Intern fejl',
+	'BbStatus_error.configuration'        => 'Konfigurationsfejl',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Seneste 24 timer',
+	'BbWindow7d'  => 'Seneste 7 dage',
+	'BbWindow30d' => 'Seneste 30 dage',
+	'BbWindowAll' => 'Al tid',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimal (standard)',
+	'BbPresetFull'           => 'Fuld',
+	'BbPresetVerifiedOnly'   => 'Kun verificeret',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Kun EU',
+	'BbPresetHumanOnly'      => 'Kun Til Mennesker',
+	'BbPresetCustom'         => 'Tilpasset',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Kun Overvågning',
+	'BbStrictnessNormal'      => 'Normal',
+	'BbStrictnessStrict'      => 'Streng',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Aktivér registrering af hovedanmodning',
+	'BbHeadRequireReferer'       => 'Kræver reference på HEAD',
+	'BbHeadFloodThreshold'       => 'Oversvømmelsesgrænse (pr. session)',
+	'BbHeadProbeThreshold'       => 'Probe tærskel (pr. IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Aktivér detektion af skrabning af aktiver',
+	'BbAssetNoRefererThreshold'    => 'Ingen referer tærskel (pr. IP / time)',
+	'BbAssetOnlySessionThreshold'  => 'Aktiver kun sessionstærskel',
+	'BbAssetPatternThreshold'      => 'Sekventiel mønstertærskel (pr. IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Aktivér dynamiske IP-intervaller',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Aktiver on-demand opfrisk',
+	'BbOnDemandRefreshInfo'      => 'Opdater cache for IP-interval under anmodninger. Benyttes, når du ikke har adgang til cron.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Dårlig JA3',
+	'BbFpBadH2'           => 'Dårlig H2',
+	'BbFpBotHeaderOrders' => 'Bot Header Ordrer',
+	'BbFpExpectedJa3'     => 'Forventet JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Blokeret',
+	'BbListChallenge' => 'Udfordring (CAPTCHA)',
+	'BbListLogOnly'   => 'Log kun (ingen håndhævelse)',
+	'BbListAllowed'   => 'Betydeligt tilladt',
+	'BbListHint'      => 'Kategorier på denne liste henter handlingen uanset kategori standard.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Søgemaskine',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Social Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Arkivér Crawler',
+	'BbCatMonitoring'      => 'Overvågning',
+	'BbCatFeedReader'      => 'Feed Læser',
+	'BbCatShoppingCrawler' => 'Shopping Crawler',
+	'BbCatCloudInfra'      => 'Cloud Infrastruktur',
+	'BbCatSecurityScanner' => 'Sikkerhedsscanner',
+	'BbCatResidentialProxy'=> 'Plejeproxy',
+	'BbCatMalicious'       => 'Ondsindede',
+	'BbCatUnknown'         => 'Ukendt',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Angrib mønstre',
+	'BbSevChallenges'     => 'Udstedte udfordringer',
+	'BbSevPermitted'      => 'Tilladt',
+	'BbSevErrors'         => 'Fejl',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Kategorier',
+
+	'BbResultBreakdown'    => 'Opdeling efter resultat',
+	'BbBreakdownBlocked'   => 'Blokeret',
+	'BbBreakdownMonitored' => 'Overvåget',
+	'BbBreakdownAllowed'   => 'Tilladt',
+	'BbViewAllInLog'       => 'Vis alle i log',
+	'BbAllowedHintVerbose' => 'Tilladt trafik er kun logget når verbose logning er aktiveret. Skifte logging_mode=verbose i Indstillinger for at se, hvad der går igennem.',
 
 ];

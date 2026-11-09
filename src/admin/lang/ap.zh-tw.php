@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> '未設定管理員密碼！',
 	'NoRecoveryPasswordTip'		=> '注意：未設定管理員密碼會造成安全風險！請在設定檔中輸入您的密碼雜湊後重新執行程式。',
 
+	'ApDevNologinBlocked'		=> 'Access blocked: AP_DEV_NOLOGIN is enabled in admin.php but the request did not originate from localhost (127.0.0.1, ::1, or localhost). This is a development-only flag and must be disabled on production. Set <code>AP_DEV_NOLOGIN = 0</code> in admin.php to restore access.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 is enabled but admin.php was accessed from a non-localhost address (%2). Admin panel access has been blocked.',
+
 	'ErrorLoadingModule'		=> '載入管理模組 %1 時發生錯誤：不存在。',
 
 	'ApHomePage'				=> '首頁',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> '離開系統管理',
 
 	'TimeLeft'					=> '剩餘時間： %1 分鐘',
+	'TimeLeftInfinity'			=> 'Time left:  %1 (developer mode)',
 	'ApVersion'					=> '版本',
 
 	'SiteOpen'					=> '開啟',
@@ -246,7 +250,7 @@ $ap_translation = [
 		'title'		=> '使用者管理',
 	],
 
-	// 主模組
+	// Main module
 	'MainNote'					=> '注意：建議在進行管理維護時暫時封鎖對網站的存取。',
 
 	'PurgeSessions'				=> '清除',
@@ -255,7 +259,7 @@ $ap_translation = [
 	'PurgeSessionsExplain'		=> '清除所有會話。這將透過截斷 auth_token 資料表來登出所有使用者。',
 	'PurgeSessionsDone'			=> '會話已成功清除。',
 
-	// 基本設定
+	// Basic settings
 	'BasicSettingsInfo'			=> '',
 	'BasicSettingsUpdated'		=> '已更新基本設定',
 	'LogBasicSettingsUpdated'	=> '已更新基本設定',
@@ -348,7 +352,7 @@ $ap_translation = [
 	'EnableCounters'			=> '點閱計數器：',
 	'EnableCountersInfo'		=> '允許每頁點閱計數並啟用簡易統計顯示。頁面擁有者的瀏覽不會被計入。',
 
-	// 聚合（Syndication）設定
+	// Syndication settings
 	'SyndicationSettingsInfo'		=> '控制網站的預設網路聚合（Syndication）設定。',
 	'SyndicationSettingsUpdated'	=> '已更新聚合設定。',
 
@@ -379,7 +383,7 @@ $ap_translation = [
 
 
 
-	// 外觀設定
+	// Appearance settings
 	'AppearanceSettingsInfo'	=> '控制網站的預設顯示設定。',
 	'AppearanceSettingsUpdated'	=> '已更新外觀設定。',
 
@@ -413,7 +417,7 @@ $ap_translation = [
 	'ThemesPerPage'				=> '每頁主題數：',
 	'ThemesPerPageInfo'			=> '允許每頁指定的主題，由頁面擁有者可透過頁面屬性選擇。',
 
-	// 系統設定
+	// System settings
 	'SystemSettingsInfo'		=> '一組用於微調平台的參數。若不確定其作用，請勿更改。',
 	'SystemSettingsUpdated'		=> '已更新系統設定',
 
@@ -474,14 +478,22 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> '反向代理',
 	'ReverseProxy'				=> '使用反向代理：',
-	'ReverseProxyInfo'			=> '啟用此設定以透過檢查 X-Forwarded-For 標頭中的資訊來判斷遠端用戶端的正確 IP 位址。' .
-	'X-Forwarded-For 標頭是識別透過反向代理伺服器（如 Squid 或 Pound）連線的用戶端系統的標準機制。' .
-	'反向代理伺服器常用於提升高流量網站的效能，並可能提供快取、安全或加密等其他好處。' .
-	'若此 WackoWiki 安裝位於反向代理後方，應啟用此設定以便在 WackoWiki 的會話管理、日誌、統計與存取管理系統中擷取正確的 IP 位址資訊；' .
-	'若不確定此設定、未使用反向代理，或 WackoWiki 在共用主機環境下運作，則應保持此設定為停用。',
+	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
+									 client by examining information stored in the X-Forwarded-For headers.
+									 X-Forwarded-For headers are a standard mechanism for identifying client
+									 systems connecting through a reverse proxy server, such as Squid or
+									 Pound. Reverse proxy servers are often used to enhance the performance
+									 of heavily visited sites and may also provide other site caching,
+									 security or encryption benefits. If this WackoWiki installation operates
+									 behind a reverse proxy, this setting should be enabled so that correct
+									 IP address information is captured in WackoWiki\'s session management,
+									 logging, statistics and access management systems; if you are unsure
+									 about this setting, do not have a reverse proxy, or WackoWiki operates in
+									 a shared hosting environment, this setting should remain disabled.',
 	'ReverseProxyHeader'		=> '反向代理標頭：',
-	'ReverseProxyHeaderInfo'	=> '若您的代理伺服器以非 X-Forwarded-For 的標頭傳送用戶端 IP，請設定此值。' .
-	'「X-Forwarded-For」標頭為以逗號加空格分隔的 IP 位址清單，僅會使用最後一個（最左側）。',
+	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
+									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
+									 addresses, only the last one (the left-most) will be used.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy 接受一個 IP 位址陣列：',
 	'ReverseProxyAddressesInfo'	=> '此陣列的每個元素為您任一反向代理的 IP 位址。當填入此陣列後，WackoWiki 僅在遠端 IP 位址為這些位址之一時才信任 X-Forwarded-For 標頭中的資訊，亦即請求是從您某一反向代理到達 Web 伺服器。否則，客戶端可能會直接連接至您的 Web 伺服器並偽造 X-Forwarded-For 標頭。',
 
@@ -498,10 +510,10 @@ $ap_translation = [
 	'LoginNoticeInfo'				=> '顯示登入通知。',
 
 	'RewriteMode'					=> '使用 <code>mod_rewrite</code>：',
-	'RewriteModeInfo'				=> '若您的網頁伺服器支援此功能，啟用以取得較美觀的頁面網址。<br>' .
-	'<span class="cite">此值可能會在執行期間被 Settings 類別覆寫，不論此處是否關閉，只要 HTTP_MOD_REWRITE 為開啟。</span>',
+	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
+										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
 
-	// 權限設定
+	// Permissions settings
 	'PermissionsSettingsInfo'		=> '負責存取控制與權限的參數。',
 	'PermissionsSettingsUpdated'	=> '已更新權限設定',
 
@@ -683,9 +695,9 @@ $ap_translation = [
 	'CanonicalInfo'				=> '所有連結會以絕對 URL 形式建立，格式為 %1。相對於伺服器根目錄的 URL（格式為 %2）通常較為建議。',
 	'LinkTarget'				=> '外部連結開啟位置：',
 	'LinkTargetInfo'			=> '在新視窗開啟每個外部連結。於連結語法中加入 <code>target="_blank"</code>。',
-	'Noreferrer'				=> 'noreferrer：',
+	'Noreferrer'				=> 'noreferrer:',
 	'NoreferrerInfo'			=> '要求瀏覽器在使用者點擊連結時不發送 HTTP referer 標頭。於連結語法中加入 <code>rel="noreferrer"</code>。',
-	'Nofollow'					=> 'nofollow：',
+	'Nofollow'					=> 'nofollow:',
 	'NofollowInfo'				=> '告知搜尋引擎該超連結不應影響目標頁面的搜尋排名。於連結語法中加入 <code>rel="nofollow"</code>。',
 	'UrlsUnderscores'			=> '網址使用底線：',
 	'UrlsUnderscoresInfo'		=> '例如啟用此選項後，%1 會變成 %2。',
@@ -772,252 +784,295 @@ $ap_translation = [
 	'RandomPage'				=> '隨機頁面：',
 	'RandomPageInfo'			=> '載入一個隨機頁面（操作 %1）。',
 
-	// 通知設定
-	'NotificationSettingsInfo' => '平台通知的參數。',
-	'NotificationSettingsUpdated' => '已更新通知設定',
 
-	'EmailNotification' => '電子郵件通知：',
-	'EmailNotificationInfo' => '允許電子郵件通知。設為 ON 啟用電子郵件通知，設為 OFF 則停用。請注意，停用電子郵件通知不會影響在使用者註冊流程中所產生的郵件。',
-	'Autosubscribe' => '自動訂閱：',
-	'AutosubscribeInfo' => '當頁面建立時，自動在擁有者的變更通知中訂閱該頁面。',
+	// Notification settings
+	'NotificationSettingsInfo'	=> '平台通知的參數。',
+	'NotificationSettingsUpdated'	=> '已更新通知設定',
 
-	'NotificationSection' => '使用者預設通知設定',
-	'NotifyPageEdit' => '通知頁面編輯：',
-	'NotifyPageEditInfo' => '待定 — 只會在首次變更時發送電子郵件通知，直到使用者再次訪問該頁面。',
-	'NotifyMinorEdit' => '通知次要編輯：',
-	'NotifyMinorEditInfo' => '也會針對次要編輯發送通知。',
-	'NotifyNewComment' => '通知新留言：',
-	'NotifyNewCommentInfo' => '待定 — 只會在首次留言時發送電子郵件通知，直到使用者再次訪問該頁面。',
+	'EmailNotification'			=> '電子郵件通知：',
+	'EmailNotificationInfo'		=> '允許電子郵件通知。設為 ON 啟用電子郵件通知，設為 OFF 則停用。請注意，停用電子郵件通知不會影響在使用者註冊流程中所產生的郵件。',
+	'Autosubscribe'				=> '自動訂閱：',
+	'AutosubscribeInfo'			=> '當頁面建立時，自動在擁有者的變更通知中訂閱該頁面。',
 
-	'NotifyUserAccount' => '通知新使用者帳號：',
-	'NotifyUserAccountInfo' => '當有人使用註冊表單建立新使用者時，管理員會收到通知。',
-	'NotifyUpload' => '通知檔案上傳：',
-	'NotifyUploadInfo' => '當有人上傳檔案時，版主會收到通知。',
+	'NotificationSection'		=> '使用者預設通知設定',
+	'NotifyPageEdit'			=> '通知頁面編輯：',
+	'NotifyPageEditInfo'		=> '待定 — 只會在首次變更時發送電子郵件通知，直到使用者再次訪問該頁面。',
+	'NotifyMinorEdit'			=> '通知次要編輯：',
+	'NotifyMinorEditInfo'		=> '也會針對次要編輯發送通知。',
+	'NotifyNewComment'			=> '通知新留言：',
+	'NotifyNewCommentInfo'		=> '待定 — 只會在首次留言時發送電子郵件通知，直到使用者再次訪問該頁面。',
 
-	'PersonalMessagesSection' => '個人訊息',
-	'AllowIntercomDefault' => '允許內部訊息：',
-	'AllowIntercomDefaultInfo' => '啟用此選項允許其他使用者向收件人電子郵件地址傳送個人訊息，而不會揭露該地址。',
-	'AllowMassemailDefault' => '允許群發郵件：',
-	'AllowMassemailDefaultInfo' => '僅向那些允許管理員發送電子郵件給他們的使用者發送訊息。',
+	'NotifyUserAccount'			=> '通知新使用者帳號：',
+	'NotifyUserAccountInfo'		=> '當有人使用註冊表單建立新使用者時，管理員會收到通知。',
+	'NotifyUpload'				=> '通知檔案上傳：',
+	'NotifyUploadInfo'			=> '當有人上傳檔案時，版主會收到通知。',
 
-	// 重新同步設定
-	'Synchronize' => '同步',
-	'UserStatsSynched' => '使用者統計已同步。',
-	'PageStatsSynched' => '頁面統計已同步。',
-	'FeedsUpdated' => 'RSS 訂閱已更新。',
-	'SiteMapCreated' => '網站地圖已建立新版本。',
-	'ParseNextBatch' => '解析下一批頁面：',
-	'WikiLinksRestored' => 'Wiki 鏈接已還原。',
+	'PersonalMessagesSection'	=> '個人訊息',
+	'AllowIntercomDefault'		=> '允許內部訊息：',
+	'AllowIntercomDefaultInfo'	=> '啟用此選項允許其他使用者向收件人電子郵件地址傳送個人訊息，而不會揭露該地址。',
+	'AllowMassemailDefault'		=> '允許群發郵件：',
+	'AllowMassemailDefaultInfo'	=> '僅向那些允許管理員發送電子郵件給他們的使用者發送訊息。',
 
-	'LogUserStatsSynched' => '已同步使用者統計',
-	'LogPageStatsSynched' => '已同步頁面統計',
-	'LogFeedsUpdated' => '已同步 RSS 訂閱',
-	'LogPageBodySynched' => '已重新解析頁面內容與鏈接',
+	// Resync settings
+	'Synchronize'				=> '同步',
+	'UserStatsSynched'			=> '使用者統計已同步。',
+	'PageStatsSynched'			=> '頁面統計已同步。',
+	'FeedsUpdated'				=> 'RSS 訂閱已更新。',
+	'SiteMapCreated'			=> '網站地圖已建立新版本。',
+	'ParseNextBatch'			=> '解析下一批頁面：',
+	'WikiLinksRestored'			=> 'Wiki 鏈接已還原。',
 
-	'UserStats' => '使用者統計',
-	'UserStatsInfo' => '使用者統計（留言數、擁有的頁面、修訂次數與檔案數）在某些情況下可能與實際資料不同。<br>此操作可將統計更新為資料庫的當前實際資料。',
-	'PageStats' => '頁面統計',
-	'PageStatsInfo' => '頁面統計（留言數、檔案與修訂次數）在某些情況下可能與實際資料不同。<br>此操作可將統計更新為資料庫的當前實際資料。',
+	'LogUserStatsSynched'		=> '已同步使用者統計',
+	'LogPageStatsSynched'		=> '已同步頁面統計',
+	'LogFeedsUpdated'			=> '已同步 RSS 訂閱',
+	'LogPageBodySynched'		=> '已重新解析頁面內容與鏈接',
 
-	'AttachmentsInfo' => '更新資料庫中所有附件的檔案雜湊值（hash）。',
-	'AttachmentsSynched' => '已對所有檔案附件重新計算雜湊值',
-	'LogAttachmentsSynched' => '已對所有檔案附件重新計算雜湊值',
+	'UserStats'					=> '使用者統計',
+	'UserStatsInfo'				=> '使用者統計（留言數、擁有的頁面、修訂次數與檔案數）在某些情況下可能與實際資料不同。<br>此操作可將統計更新為資料庫的當前實際資料。',
+	'PageStats'					=> '頁面統計',
+	'PageStatsInfo'				=> '頁面統計（留言數、檔案與修訂次數）在某些情況下可能與實際資料不同。<br>此操作可將統計更新為資料庫的當前實際資料。',
 
-	'Feeds' => '訂閱',
-	'FeedsInfo' => '如果直接在資料庫中編輯頁面，RSS 訂閱的內容可能不會反映這些變更。<br>此功能可將 RSS 頻道與資料庫的當前狀態同步。',
-	'XmlSiteMap' => 'XML 網站地圖',
-	'XmlSiteMapInfo' => '此功能可將 XML 網站地圖與資料庫的當前狀態同步。',
-	'XmlSiteMapPeriod' => '週期 %1 天。最後生成於 %2。',
-	'XmlSiteMapView' => '在新視窗中顯示網站地圖。',
+	'AttachmentsInfo'			=> '更新資料庫中所有附件的檔案雜湊值（hash）。',
+	'AttachmentsSynched'		=> '已對所有檔案附件重新計算雜湊值',
+	'LogAttachmentsSynched'		=> '已對所有檔案附件重新計算雜湊值',
 
-	'ReparseBody' => '重新解析所有頁面',
-	'ReparseBodyInfo' => '清空頁面表中 <code>body_r</code> 欄位，以便每個頁面在下一次檢視時重新渲染。如果您修改了格式化器或變更了 Wiki 的網域，這可能會很有用。',
-	'PreparsedBodyPurged' => '已清空頁面表中 <code>body_r</code> 欄位。',
+	'Feeds'						=> '訂閱',
+	'FeedsInfo'					=> '如果直接在資料庫中編輯頁面，RSS 訂閱的內容可能不會反映這些變更。<br>此功能可將 RSS 頻道與資料庫的當前狀態同步。',
+	'XmlSiteMap'				=> 'XML 網站地圖',
+	'XmlSiteMapInfo'			=> '此功能可將 XML 網站地圖與資料庫的當前狀態同步。',
+	'XmlSiteMapPeriod'			=> '週期 %1 天。最後生成於 %2。',
+	'XmlSiteMapView'			=> '在新視窗中顯示網站地圖。',
 
-	'WikiLinksResync' => 'Wiki 鏈接',
-	'WikiLinksResyncInfo' => '對所有站內鏈接執行重新渲染，並在發生損壞或移動時恢復 <code>page_link</code> 與 <code>file_link</code> 表的內容（此操作可能需要相當長的時間）。',
-	'RecompilePage' => '重新編譯所有頁面（耗費極大資源）',
-	'ResyncOptions' => '附加選項',
-	'RecompilePageLimit' => '一次解析的頁面數量限制。',
+	'ReparseBody'				=> '重新解析所有頁面',
+	'ReparseBodyInfo'			=> '清空頁面表中 <code>body_r</code> 欄位，以便每個頁面在下一次檢視時重新渲染。如果您修改了格式化器或變更了 Wiki 的網域，這可能會很有用。',
+	'PreparsedBodyPurged'		=> '已清空頁面表中 <code>body_r</code> 欄位。',
 
-	// 電子郵件設定
-	'EmaiSettingsInfo' => '當引擎向您的使用者發送電子郵件時會使用這些資訊。請確保您指定的電子郵件地址有效，退信或無法送達的郵件通常會寄回該地址。如果您的主機未提供原生（基於 PHP）的郵件服務，您可以改為使用 SMTP 直接發送郵件。這需要提供適當伺服器的位址（如有需要請向您的提供者詢問）。若伺服器需要驗證（僅在需要時），請輸入必要的使用者名稱、密碼與驗證方法。',
+	'WikiLinksResync'			=> 'Wiki 鏈接',
+	'WikiLinksResyncInfo'		=> '對所有站內鏈接執行重新渲染，並在發生損壞或移動時恢復 <code>page_link</code> 與 <code>file_link</code> 表的內容（此操作可能需要相當長的時間）。',
+	'RecompilePage'				=> '重新編譯所有頁面（耗費極大資源）',
+	'ResyncOptions'				=> '附加選項',
+	'RecompilePageLimit'		=> '一次解析的頁面數量限制。',
 
-	'EmailSettingsUpdated' => '已更新電子郵件設定',
+	// Email settings
+	'EmaiSettingsInfo'			=> '當引擎向您的使用者發送電子郵件時會使用這些資訊。請確保您指定的電子郵件地址有效，退信或無法送達的郵件通常會寄回該地址。如果您的主機未提供原生（基於 PHP）的郵件服務，您可以改為使用 SMTP 直接發送郵件。這需要提供適當伺服器的位址（如有需要請向您的提供者詢問）。若伺服器需要驗證（僅在需要時），請輸入必要的使用者名稱、密碼與驗證方法。',
 
-	'EmailFunctionName' => '郵件函式名稱：',
-	'EmailFunctionNameInfo' => '用於透過 PHP 發送郵件的電子郵件函式。',
-	'UseSmtpInfo' => '如果您想或必須透過指定的伺服器（而非本機 mail 函式）發送電子郵件，請選擇 <code>SMTP</code>。',
+	'EmailSettingsUpdated'		=> '已更新電子郵件設定',
 
-	'EnableEmail' => '啟用電子郵件：',
-	'EnableEmailInfo' => '啟用電子郵件功能',
+	'EmailFunctionName'			=> '郵件函式名稱：',
+	'EmailFunctionNameInfo'		=> '用於透過 PHP 發送郵件的電子郵件函式。',
+	'UseSmtpInfo'				=> '如果您想或必須透過指定的伺服器（而非本機 mail 函式）發送電子郵件，請選擇 <code>SMTP</code>。',
 
-	'EmailIdentitySettings' => '網站電子郵件身分',
-	'FromEmailName' => '寄件者名稱：',
-	'FromEmailNameInfo' => '寄件者名稱，會出現在從本站發出的所有郵件通知的 <code>From:</code> 標頭中。',
-	'EmailSubjectPrefix' => '主題前綴：',
-	'EmailSubjectPrefixInfo' => '備用的電子郵件主題前綴，例如 <code>[前綴] 主題</code>。若未定義，預設前綴為網站名稱：%1。',
+	'EnableEmail'				=> '啟用電子郵件：',
+	'EnableEmailInfo'			=> '啟用電子郵件功能',
 
-	'NoReplyEmail' => '免回覆地址：',
-	'NoReplyEmailInfo' => '此地址（例如 <code>noreply@example.com</code>）會出現在所有從網站發出的郵件通知的 <code>From:</code> 欄位中。',
-	'AdminEmail' => '站長電子郵件：',
-	'AdminEmailInfo' => '此地址用於管理用途，例如新使用者通知。',
-	'AbuseEmail' => '濫用通報郵件：',
-	'AbuseEmailInfo' => '處理緊急事項（如註冊使用外來電子郵件等）的申請地址。可與前者相同。',
+	'EmailIdentitySettings'		=> '網站電子郵件身分',
+	'FromEmailName'				=> '寄件者名稱：',
+	'FromEmailNameInfo'			=> '寄件者名稱，會出現在從本站發出的所有郵件通知的 <code>From:</code> 標頭中。',
+	'EmailSubjectPrefix'		=> '主題前綴：',
+	'EmailSubjectPrefixInfo'	=> '備用的電子郵件主題前綴，例如 <code>[前綴] 主題</code>。若未定義，預設前綴為網站名稱：%1。',
 
-	'SendTestEmail' => '傳送測試電子郵件',
-	'SendTestEmailInfo' => '這會向您帳戶中定義的地址發送一封測試郵件。',
-	'TestEmailSubject' => '您的 Wiki 已正確設定為發送電子郵件',
-	'TestEmailBody' => '如果您收到這封郵件，表示您的 Wiki 已正確設定為發送電子郵件。',
-	'TestEmailMessage' => '測試郵件已發送。<br>如果您未收到，請檢查您的電子郵件設定。',
+	'NoReplyEmail'				=> '免回覆地址：',
+	'NoReplyEmailInfo'			=> '此地址（例如 <code>noreply@example.com</code>）會出現在所有從網站發出的郵件通知的 <code>From:</code> 欄位中。',
+	'AdminEmail'				=> '站長電子郵件：',
+	'AdminEmailInfo'			=> '此地址用於管理用途，例如新使用者通知。',
+	'AbuseEmail'				=> '濫用通報郵件：',
+	'AbuseEmailInfo'			=> '處理緊急事項（如註冊使用外來電子郵件等）的申請地址。可與前者相同。',
 
-	'SmtpSettings' => 'SMTP 設定',
-	'SmtpAutoTls' => '機會式 TLS：',
-	'SmtpAutoTlsInfo' => '若伺服器在連線後宣告支援 TLS 加密，則會自動啟用加密（即使您未為 <code>SMTPSecure</code> 設定連線模式）。',
-	'SmtpConnectionMode' => 'SMTP 連線模式：',
-	'SmtpConnectionModeInfo' => '僅在設定了使用者名稱/密碼時使用；若不確定要使用何種方法，請向您的提供者詢問。',
-	'SmtpPassword' => 'SMTP 密碼：',
-	'SmtpPasswordInfo' => '只有在 SMTP 伺服器需要時才輸入密碼。<br><em><strong>警告：</strong>此密碼會以純文字形式儲存在資料庫中，對所有能存取資料庫或查看此設定頁面的人可見。</em>',
-	'SmtpPort' => 'SMTP 伺服器埠號：',
-	'SmtpPortInfo' => '僅在您確定 SMTP 伺服器使用不同埠時才更改此值。<br>（預設：<code>tls</code> 使用埠 587（或可能為 25），<code>ssl</code> 使用埠 465）',
-	'SmtpServer' => 'SMTP 伺服器位址：',
-	'SmtpServerInfo' => '請注意，您必須提供伺服器使用的協定。若使用 SSL，應為 <code>ssl://mail.example.com</code> 之類的格式。',
-	'SmtpUsername' => 'SMTP 使用者名稱：',
-	'SmtpUsernameInfo' => '只有在 SMTP 伺服器需要時才輸入使用者名稱。',
+	'SendTestEmail'				=> '傳送測試電子郵件',
+	'SendTestEmailInfo'			=> '這會向您帳戶中定義的地址發送一封測試郵件。',
+	'TestEmailSubject'			=> '您的 Wiki 已正確設定為發送電子郵件',
+	'TestEmailBody'				=> '如果您收到這封郵件，表示您的 Wiki 已正確設定為發送電子郵件。',
+	'TestEmailMessage'			=> '測試郵件已發送。<br>如果您未收到，請檢查您的電子郵件設定。',
 
-	// 上傳設定
-	'UploadSettingsInfo' => '在此您可設定附件與相關特殊分類的主要設定。',
-	'UploadSettingsUpdated' => '已更新上傳設定',
+	'SmtpSettings'				=> 'SMTP 設定',
+	'SmtpAutoTls'				=> '機會式 TLS：',
+	'SmtpAutoTlsInfo'			=> '若伺服器在連線後宣告支援 TLS 加密，則會自動啟用加密（即使您未為 <code>SMTPSecure</code> 設定連線模式）。',
+	'SmtpConnectionMode'		=> 'SMTP 連線模式：',
+	'SmtpConnectionModeInfo'	=> '僅在設定了使用者名稱/密碼時使用；若不確定要使用何種方法，請向您的提供者詢問。',
+	'SmtpPassword'				=> 'SMTP 密碼：',
+	'SmtpPasswordInfo'			=> '只有在 SMTP 伺服器需要時才輸入密碼。<br><em><strong>警告：</strong>此密碼會以純文字形式儲存在資料庫中，對所有能存取資料庫或查看此設定頁面的人可見。</em>',
+	'SmtpPort'					=> 'SMTP 伺服器埠號：',
+	'SmtpPortInfo'				=> '僅在您確定 SMTP 伺服器使用不同埠時才更改此值。<br>（預設：<code>tls</code> 使用埠 587（或可能為 25），<code>ssl</code> 使用埠 465）',
+	'SmtpServer'				=> 'SMTP 伺服器位址：',
+	'SmtpServerInfo'			=> '請注意，您必須提供伺服器使用的協定。若使用 SSL，應為 <code>ssl://mail.example.com</code> 之類的格式。',
+	'SmtpUsername'				=> 'SMTP 使用者名稱：',
+	'SmtpUsernameInfo'			=> '只有在 SMTP 伺服器需要時才輸入使用者名稱。',
 
-	'FileUploadsSection' => '檔案上傳',
-	'RegisteredUsers' => '註冊用戶',
-	'RightToUpload' => '上傳檔案權限：',
-	'RightToUploadInfo' => '<code>admins</code> 表示只有屬於 admins 群組的使用者可以上傳檔案。<code>1</code> 表示已開放給註冊使用者上傳。<code>0</code> 表示停用上傳功能。',
-	'UploadMaxFilesize' => '單一檔案最大限制：',
-	'UploadMaxFilesizeInfo' => '單一檔案的最大大小。如果此值為 0，則可上傳的檔案大小僅受您的 PHP 配置限制。',
-	'UploadQuota' => '附件總額度：',
-	'UploadQuotaInfo' => '整個 Wiki 可用於附件的最大磁碟空間，<code>0</code> 表示不限制。已使用 %1。',
-	'UploadQuotaUser' => '每位使用者的儲存額度：',
-	'UploadQuotaUserInfo' => '限制單一使用者可上傳佔用的儲存空間，<code>0</code> 表示不限制。',
+	// Upload settings
+	'UploadSettingsInfo'		=> '在此您可設定附件與相關特殊分類的主要設定。',
+	'UploadSettingsUpdated'		=> '已更新上傳設定',
 
-	'FileTypes' => '檔案類型',
-	'UploadOnlyImages' => '僅允許上傳圖片：',
-	'UploadOnlyImagesInfo' => '僅允許在頁面上上傳圖像檔案。',
-	'AllowedUploadExts' => '允許的檔案類型：',
-	'AllowedUploadExtsInfo' => '允許上傳的檔案副檔名，逗號分隔，例如 <code>png, ogg, mp4</code>。除此之外，所有未被禁止的副檔名皆允許。<br>您應將允許的上傳檔案類型限制為網站功能所需的最低範圍。',
-	'CheckMimetype' => '檢查 MIME 類型：',
-	'CheckMimetypeInfo' => '某些瀏覽器可能會被騙而判定錯誤的 MIME 類型。此選項可確保可能導致問題的檔案被拒絕。',
-	'SvgSanitizer' => 'SVG 清理器：',
-	'SvgSanitizerInfo' => '對上傳的 SVG 檔案進行清理，以防止上傳易受攻擊的 SVG/XML 檔案。',
-	'TranslitFileName' => '音譯檔名：',
-	'TranslitFileNameInfo' => '若適用且不需要 Unicode 字元，強烈建議只接受英數字元。',
-	'TranslitCaseFolding' => '將檔名轉為小寫：',
-	'TranslitCaseFoldingInfo' => '此選項僅對啟用音譯時有效。',
+	'FileUploadsSection'		=> '檔案上傳',
+	'RegisteredUsers'			=> '註冊用戶',
+	'RightToUpload'				=> '上傳檔案權限：',
+	'RightToUploadInfo'			=> '<code>admins</code> 表示只有屬於 admins 群組的使用者可以上傳檔案。<code>1</code> 表示已開放給註冊使用者上傳。<code>0</code> 表示停用上傳功能。',
+	'UploadMaxFilesize'			=> '單一檔案最大限制：',
+	'UploadMaxFilesizeInfo'		=> '單一檔案的最大大小。如果此值為 0，則可上傳的檔案大小僅受您的 PHP 配置限制。',
+	'UploadQuota'				=> '附件總額度：',
+	'UploadQuotaInfo'			=> '整個 Wiki 可用於附件的最大磁碟空間，<code>0</code> 表示不限制。已使用 %1。',
+	'UploadQuotaUser'			=> '每位使用者的儲存額度：',
+	'UploadQuotaUserInfo'		=> '限制單一使用者可上傳佔用的儲存空間，<code>0</code> 表示不限制。',
 
-	'Thumbnails' => '縮圖',
-	'CreateThumbnail' => '建立縮圖：',
-	'CreateThumbnailInfo' => '在所有可能情況下建立縮圖。',
-	'JpegQuality' => 'JPEG 品質：',
-	'JpegQualityInfo' => '縮放 JPEG 縮圖時的品質，應介於 1 到 100 之間，100 表示 100% 品質。',
-	'MaxImageArea' => '最大影像像素面積：',
-	'MaxImageAreaInfo' => '原始影像可擁有的最大像素數。這為影像縮放器在解壓縮端提供記憶體使用限制。<br><code>-1</code> 表示在嘗試縮放之前不檢查影像大小。<code>0</code> 表示將自動決定該值。',
-	'MaxThumbWidth' => '縮圖最大寬度（像素）：',
-	'MaxThumbWidthInfo' => '產生的縮圖寬度不會超過此處設定的值。',
-	'MinThumbFilesize' => '生成縮圖的最小檔案大小：',
-	'MinThumbFilesizeInfo' => '不要為小於此值的影像建立縮圖。',
-	'MaxImageWidth' => '頁面上影像寬度限制：',
-	'MaxImageWidthInfo' => '影像在頁面上可具有的最大寬度，超過則生成等比例縮小的縮圖。',
+	'FileTypes'					=> '檔案類型',
+	'UploadOnlyImages'			=> '僅允許上傳圖片：',
+	'UploadOnlyImagesInfo'		=> '僅允許在頁面上上傳圖像檔案。',
+	'AllowedUploadExts'			=> '允許的檔案類型：',
+	'AllowedUploadExtsInfo'		=> '允許上傳的檔案副檔名，逗號分隔，例如 <code>png, ogg, mp4</code>。除此之外，所有未被禁止的副檔名皆允許。<br>您應將允許的上傳檔案類型限制為網站功能所需的最低範圍。',
+	'CheckMimetype'				=> '檢查 MIME 類型：',
+	'CheckMimetypeInfo'			=> '某些瀏覽器可能會被騙而判定錯誤的 MIME 類型。此選項可確保可能導致問題的檔案被拒絕。',
+	'SvgSanitizer'				=> 'SVG 清理器：',
+	'SvgSanitizerInfo'			=> '對上傳的 SVG 檔案進行清理，以防止上傳易受攻擊的 SVG/XML 檔案。',
+	'TranslitFileName'			=> '音譯檔名：',
+	'TranslitFileNameInfo'		=> '若適用且不需要 Unicode 字元，強烈建議只接受英數字元。',
+	'TranslitCaseFolding'		=> '將檔名轉為小寫：',
+	'TranslitCaseFoldingInfo'	=> '此選項僅對啟用音譯時有效。',
 
-	// 已刪除模組
-	'DeletedObjectsInfo' => '列出已移除的頁面、修訂與檔案。最後可在對應列點選 <em>Remove</em> 或 <em>Restore</em> 從資料庫中永久移除或還原頁面、修訂或檔案。（注意：不會要求刪除確認！）',
+	'Thumbnails'				=> '縮圖',
+	'CreateThumbnail'			=> '建立縮圖：',
+	'CreateThumbnailInfo'		=> '在所有可能情況下建立縮圖。',
+	'ImageQuality'				=> 'Image Quality Preset:',
+	'ImageQualityInfo'			=> 'Quality when scaling a thumbnail. Presets that pick per-codec values which produce a comparable perceptual result.',
+	'MaxImageArea'				=> '最大影像像素面積：',
+	'MaxImageAreaInfo'			=> '原始影像可擁有的最大像素數。這為影像縮放器在解壓縮端提供記憶體使用限制。<br><code>-1</code> 表示在嘗試縮放之前不檢查影像大小。<code>0</code> 表示將自動決定該值。',
+	'MaxThumbWidth'				=> '縮圖最大寬度（像素）：',
+	'MaxThumbWidthInfo'			=> '產生的縮圖寬度不會超過此處設定的值。',
+	'MinThumbFilesize'			=> '生成縮圖的最小檔案大小：',
+	'MinThumbFilesizeInfo'		=> '不要為小於此值的影像建立縮圖。',
+	'MaxImageWidth'				=> '頁面上影像寬度限制：',
+	'MaxImageWidthInfo'			=> '影像在頁面上可具有的最大寬度，超過則生成等比例縮小的縮圖。',
 
-	// 過濾模組
-	'FilterSettingsInfo' => '會在您的 Wiki 上自動過濾的辭彙。',
-	'FilterSettingsUpdated' => '已更新垃圾訊息過濾設定',
+	// Deleted module
+	'DeletedObjectsInfo'		=> '列出已移除的頁面、修訂與檔案。最後可在對應列點選 <em>Remove</em> 或 <em>Restore</em> 從資料庫中永久移除或還原頁面、修訂或檔案。（注意：不會要求刪除確認！）',
 
-	'WordCensoringSection' => '詞語過濾',
-	'SPAMFilter' => '垃圾郵件過濾：',
-	'SPAMFilterInfo' => '啟用垃圾郵件過濾',
-	'WordList' => '詞語清單：',
-	'WordListInfo' => '要列入黑名單的詞語或片語片段（每行一條），使用 <code>fragment</code> 表示片段。',
+	// Filter module
+	'FilterSettingsInfo'		=> '會在您的 Wiki 上自動過濾的辭彙。',
+	'FilterSettingsUpdated'		=> '已更新垃圾訊息過濾設定',
 
-	// 日誌模組
-	'LogFilterTip' => '依條件篩選事件：',
-	'LogLevel' => '等級',
-	'LogLevelFilters' => [
-		'1' => '不低於',
-		'2' => '不高於',
-		'3' => '等於',
+	'WordCensoringSection'		=> '詞語過濾',
+	'SPAMFilter'				=> '垃圾郵件過濾：',
+	'SPAMFilterInfo'			=> '啟用垃圾郵件過濾',
+	'WordList'					=> '詞語清單：',
+	'WordListInfo'				=> '要列入黑名單的詞語或片語片段（每行一條），使用 <code>fragment</code> 表示片段。',
+
+	// Log module
+	'LogFilterTip'				=> '依條件篩選事件：',
+	'LogLevel'					=> '等級',
+	'LogLevelFilters'	=> [
+		'1'		=> '不低於',
+		'2'		=> '不高於',
+		'3'		=> '等於',
 	],
-	'LogNoMatch' => '沒有符合條件的事件',
-	'LogDate' => '日期',
-	'LogEvent' => '事件',
-	'LogUsername' => '使用者名稱',
-	'LogLevels' => [
-		'1' => '嚴重',
-		'2' => '最高',
-		'3' => '高',
-		'4' => '中等',
-		'5' => '低',
-		'6' => '最低',
-		'7' => '偵錯',
+	'LogDate'					=> '日期',
+	'LogEvent'					=> '事件',
+	'LogUsername'				=> '使用者名稱',
+	'LogLevels'	=> [
+		'1'		=> '嚴重',
+		'2'		=> '最高',
+		'3'		=> '高',
+		'4'		=> '中等',
+		'5'		=> '低',
+		'6'		=> '最低',
+		'7'		=> '偵錯',
 	],
 
-	// 群發郵件模組
-	'MassemailInfo' => '在此您可以向所有使用者或某特定群組中允許接收群發郵件的使用者發送電子郵件。系統會向管理用電子郵件地址發送一封郵件，並以密件副本（BCC）抄送給所有收件者。預設設定為每封郵件只包含 20 位收件者；若收件者更多會分多封郵件發送。若您要發送大量郵件，提交後請耐心等候，並勿中途停止頁面處理。群發郵件通常會花較長時間，腳本完成後會通知您。',
-	'LogMassemail' => '群發郵件已發送 %1 給 群組 / 使用者 ',
-	'MassemailSend' => '發送群發郵件',
+	'LogCollapse'        => 'collapse',
+	'LogExpand'          => 'expand',
+	'LogType'              => 'Type',
+	'LogSearch'            => 'Search',
+	'LogSearchPlaceholder' => 'search messages...',
+	'LogUserId'            => 'User ID',
+	'LogExactMatch'        => 'exact match',
+	'LogFrom'              => 'From',
+	'LogTo'                => 'To',
+	'LogSupportKey'        => 'Support key',
+	'LogContext'           => 'Context',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'User agent',
+	'LogReferer'           => 'Referer',
+	'LogTotal'             => 'Total',
+	'LogFilteredBy'        => 'Filtered by',
+	'LogClearFilter'       => 'Clear filter',
+	'LogActions'           => 'Actions',
+	'LogDelete'            => 'Delete',
+	'LogDeleteConfirm'     => 'Delete this log entry?',
+	'LogDeleteSelected'    => 'Delete selected',
+	'LogBulkAction'        => '— bulk action —',
+	'LogApply'             => 'Apply',
+	'LogExportCSV'         => 'Export CSV',
+	'LogExportJSON'        => 'Export JSON',
+	'LogPurged'            => 'Log table truncated.',
+	'LogPurgedFiltered'     => '%1 log entries deleted by filter.',
+	'LogDeleted'           => 'Log entry deleted.',
+	'LogDeletedBulk'        => '%1 log entries deleted.',
+	'LogPurgeSection'      => 'Destructive operations',
+	'LogPurgeWarning'      => 'There are %1 entries matching the current view. Use with care.',
+	'LogPurgeConfirm'      => 'I understand this will permanently delete log entries',
+	'LogPurgeFiltered'     => 'Purge matching filter',
+	'LogPurgeFilteredConfirm' => 'Delete all entries matching the current filter? This cannot be undone.',
+	'LogPurgeAll'          => 'Purge ENTIRE log',
+	'LogPurgeAllConfirm'   => 'Delete EVERY log entry in the database? This cannot be undone.',
+	'LogFindRelated'       => 'Find related entries',
+	'LogNoMatch'           => 'No log entries match the current filter.',
 
-	'NoEmailMessage' => '您必須輸入訊息內容。',
-	'NoEmailSubject' => '您必須為訊息指定主旨。',
-	'NoEmailRecipient' => '您必須指定至少一位使用者或使用者群組。',
+	'LogMarkAll'                => 'Mark all rows on this page',
+	'LogMarkNone'               => 'Unmark all rows',
+	'LogSelectRow'              => 'Select row',
 
-	'MassemailSection' => '群發郵件',
-	'MessageSubject' => '標題：',
-	'MessageSubjectInfo' => '',
-	'YourMessage' => '您的訊息：',
-	'YourMessageInfo' => '請注意僅能輸入純文字。所有標記在發送前都會被移除。',
+	// Massemail module
+	'MassemailInfo'				=> '在此您可以向所有使用者或某特定群組中允許接收群發郵件的使用者發送電子郵件。系統會向管理用電子郵件地址發送一封郵件，並以密件副本（BCC）抄送給所有收件者。預設設定為每封郵件只包含 20 位收件者；若收件者更多會分多封郵件發送。若您要發送大量郵件，提交後請耐心等候，並勿中途停止頁面處理。群發郵件通常會花較長時間，腳本完成後會通知您。',
+	'LogMassemail'				=> '群發郵件已發送 %1 給 群組 / 使用者 ',
+	'MassemailSend'				=> '發送群發郵件',
 
-	'NoUser' => '無此使用者',
-	'NoUserGroup' => '無此使用者群組',
+	'NoEmailMessage'			=> '您必須輸入訊息內容。',
+	'NoEmailSubject'			=> '您必須為訊息指定主旨。',
+	'NoEmailRecipient'			=> '您必須指定至少一位使用者或使用者群組。',
 
-	'SendToGroup' => '寄送至群組：',
-	'SendToUser' => '寄送至使用者：',
-	'SendToUserInfo' => '僅向那些允許管理員發送資訊郵件的使用者發送訊息。此選項可在其使用者設定的通知項目中找到。',
+	'MassemailSection'			=> '群發郵件',
+	'MessageSubject'			=> '標題：',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> '您的訊息：',
+	'YourMessageInfo'			=> '請注意僅能輸入純文字。所有標記在發送前都會被移除。',
 
-	// 系統訊息模組
-	'SystemMessageInfo' => '',
-	'SysMsgUpdated' => '已更新系統訊息',
+	'NoUser'					=> '無此使用者',
+	'NoUserGroup'				=> '無此使用者群組',
 
-	'SysMsgSection' => '系統訊息',
-	'SysMsg' => '系統訊息：',
-	'SysMsgInfo' => '在此輸入您的文字',
+	'SendToGroup'				=> '寄送至群組：',
+	'SendToUser'				=> '寄送至使用者：',
+	'SendToUserInfo'			=> '僅向那些允許管理員發送資訊郵件的使用者發送訊息。此選項可在其使用者設定的通知項目中找到。',
 
-	'SysMsgType' => '類型：',
-	'SysMsgTypeInfo' => '訊息類型（CSS）。',
-	'SysMsgAudience' => '受眾：',
-	'SysMsgAudienceInfo' => '系統訊息顯示的目標受眾。',
-	'EnableSysMsg' => '啟用系統訊息：',
-	'EnableSysMsgInfo' => '顯示系統訊息。',
+	// System message module
+	'SystemMessageInfo'			=> '',
+	'SysMsgUpdated'				=> '已更新系統訊息',
 
-	// 使用者審核模組
-	'ApproveNotExists' => '請透過「設定」按鈕至少選擇一位使用者。',
+	'SysMsgSection'				=> '系統訊息',
+	'SysMsg'					=> '系統訊息：',
+	'SysMsgInfo'				=> '在此輸入您的文字',
 
-	'LogUserApproved' => '使用者 ##%1## 已核准',
-	'LogUserBlocked' => '使用者 ##%1## 已封鎖',
-	'LogUserDeleted' => '使用者 ##%1## 已從資料庫移除',
-	'LogUserCreated' => '已建立新使用者 ##%1##',
-	'LogUserUpdated' => '已更新使用者 ##%1##',
-	'LogUserPasswordReset' => '已成功重設使用者 ##%1## 的密碼',
+	'SysMsgType'				=> '類型：',
+	'SysMsgTypeInfo'			=> '訊息類型（CSS）。',
+	'SysMsgAudience'			=> '受眾：',
+	'SysMsgAudienceInfo'		=> '系統訊息顯示的目標受眾。',
+	'EnableSysMsg'				=> '啟用系統訊息：',
+	'EnableSysMsgInfo'			=> '顯示系統訊息。',
 
-	'UserApproveInfo' => '在新使用者能登入網站之前請先核准他們。',
-	'Approve' => '核准',
-	'Deny' => '拒絕',
-	'Pending' => '待定',
-	'Approved' => '已核准',
-	'Denied' => '已拒絕',
+	// User approval module
+	'ApproveNotExists'			=> '請透過「設定」按鈕至少選擇一位使用者。',
 
-	// DB 備份模組
+	'LogUserApproved'			=> '使用者 ##%1## 已核准',
+	'LogUserBlocked'			=> '使用者 ##%1## 已封鎖',
+	'LogUserDeleted'			=> '使用者 ##%1## 已從資料庫移除',
+	'LogUserCreated'			=> '已建立新使用者 ##%1##',
+	'LogUserUpdated'			=> '已更新使用者 ##%1##',
+	'LogUserPasswordReset'		=> '已成功重設使用者 ##%1## 的密碼',
+
+	'UserApproveInfo'			=> '在新使用者能登入網站之前請先核准他們。',
+	'Approve'					=> '核准',
+	'Deny'						=> '拒絕',
+	'Pending'					=> '待定',
+	'Approved'					=> '已核准',
+	'Denied'					=> '已拒絕',
+
+	// DB Backup module
 	'BackupStructure'			=> '結構',
 	'BackupData'				=> '資料',
 	'BackupFolder'				=> '資料夾',
@@ -1026,15 +1081,15 @@ $ap_translation = [
 	'BackupFiles'				=> '檔案',
 	'BackupNote'				=> '注意：',
 	'BackupSettings'			=> '指定所需的備份方案。<br>' .
-	'根叢集不會影響全域檔案備份和快取檔案備份（若被選中，這些檔案將始終完整保存）。<br>' .  '<br>' .
-	'<strong>注意</strong>：為避免在指定根叢集時造成資料庫資訊遺失，本次備份中的這些資料表將不會被重建， ',
+    	'根叢集不會影響全域檔案備份和快取檔案備份（若被選中，這些檔案將始終完整保存）。<br>' .  '<br>' .
+		'<strong>注意</strong>：為避免在指定根叢集時造成資料庫資訊遺失，本次備份中的這些資料表將不會被重建， ',
 	'BackupCompleted'			=> '備份與壓縮完成。<br>' .
-	'備份包檔案儲存在子目錄 %1 中。 <br>要下載它，請使用 FTP（複製時請保持目錄結構和檔案名稱不變）。 <br>要還原備份或刪除軟體包，請前往<a href="%2">還原資料庫</a>。',
+    	'備份包檔案儲存在子目錄 %1 中。 <br>要下載它，請使用 FTP（複製時請保持目錄結構和檔案名稱不變）。 <br>要還原備份或刪除軟體包，請前往<a href="%2">還原資料庫</a>。',
 	'LogSavedBackup'			=> '已儲存資料庫備份 ##%1##',
 	'Backup'					=> '備份',
 	'CantReadFile'				=> '無法讀取檔案 %1。',
 
-	// DB 還原模組
+	// DB Restore module
 	'RestoreInfo'				=> '您可以還原找到的任何備份包，或從伺服器中將其刪除。',
 	'ConfirmDbRestore'			=> '您確定要還原備份 %1 嗎？',
 	'ConfirmDbRestoreInfo'		=> '請稍候，這可能需要數分鐘。',
@@ -1044,15 +1099,16 @@ $ap_translation = [
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> '其他還原選項：',
 	'RestoreOptionsInfo'		=> '* 在還原<strong>叢集備份</strong>之前，目標資料表不會被刪除（以避免未被備份之叢集造成的資料遺失）。' .
-	'因此，還原過程中可能會出現重複記錄。' .
-	'在一般模式下，所有重複項將被備份中的記錄取代（使用 SQL 指令 <code>REPLACE</code>），' .
-	'但若勾選此選項，所有重複項將被跳過（保留當前記錄值），' .
-	'只有新的鍵值記錄會被新增到資料表（SQL 指令 <code>INSERT IGNORE</code>）。<br>' .
-	'<strong>注意</strong>：當還原整站的完整備份時，此選項無效。<br>' .
-	'<br>' .
-	'** 如果備份包含使用者檔案（全域與頁面專屬、快取檔案等），' .
-	'在一般模式下還原時會取代現有相同名稱的檔案並放回相同目錄。' .
-	'此選項允許您保留當前的檔案副本，僅從備份還原伺服器上不存在的新檔案。',
+									'因此，還原過程中可能會出現重複記錄。' .
+									'在一般模式下，所有重複項將被備份中的記錄取代（使用 SQL 指令 <code>REPLACE</code>），' .
+									'但若勾選此選項，所有重複項將被跳過（保留當前記錄值），' .
+									'只有新的鍵值記錄會被新增到資料表（SQL 指令 <code>INSERT IGNORE</code>）。<br>' .
+									'<strong>注意</strong>：當還原整站的完整備份時，此選項無效。<br>' .
+									'<br>' .
+									'<br>' .
+									'在一般模式下還原時會取代現有相同名稱的檔案並放回相同目錄。' .
+									'此選項允許您保留當前的檔案副本，僅從備份還原伺服器上不存在的新檔案。' .
+									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
 	'IgnoreDuplicatedKeysNr'	=> '忽略重複的資料表鍵（不取代）',
 	'IgnoreSameFiles'			=> '忽略相同檔案（不覆蓋）',
 	'NoBackupsAvailable'		=> '沒有可用的備份。',
@@ -1106,7 +1162,7 @@ $ap_translation = [
 	'BackupArchiveExists'		=> '備份存檔 %1 已存在。',
 	'LogBackupArchived'			=> '備份 ##%1## 已存檔。',
 
-	// 使用者模組
+	// User module
 	'UsersInfo'					=> '在此您可以變更使用者資訊及某些特定選項。',
 
 	'UsersAdded'				=> '已新增使用者',
@@ -1129,7 +1185,7 @@ $ap_translation = [
 	'UserVerifyEmail'			=> '設定電子郵件確認憑證並加入電子郵件驗證連結',
 	'UserReVerifyEmail'			=> '重新發送電子郵件確認憑證',
 
-	// 群組模組
+	// Groups module
 	'GroupsInfo'				=> '在此面板您可以管理所有使用者群組。您可以刪除、建立與編輯現有群組。此外，您可以選擇群組管理員、切換開放/隱藏/關閉群組狀態，並設定群組名稱與說明。',
 
 	'LogMembersUpdated'			=> '已更新使用者群組成員',
@@ -1269,6 +1325,40 @@ $ap_translation = [
 	'BbHeaders'					=> '標頭',
 	'BbEntity'					=> '實體',
 
+	'BbSearchPlaceholder'        => 'Search UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Any category',
+	'BbFilterAnyMethod'          => 'Any method',
+	'BbFilterAnyStatus'          => 'Any status',
+	'BbFilterBlockedOnly'        => 'Blocked only',
+	'BbFilterPermittedOnly'      => 'Permitted only',
+	'BbFilterApply'              => 'Apply',
+	'BbFilterClear'              => 'Clear filters',
+	'BbChipSearch'               => 'Search',
+	'BbChipCategory'             => 'Category',
+	'BbChipMethod'               => 'Method',
+	'BbChipStatus'               => 'Status',
+	'BbChipRemove'               => 'Remove this filter',
+	'BbFilterByCategory'         => 'Filter by this category',
+	'BbSearchBySupportKey'       => 'Search for this support key',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Any check status',
+	'BbFilterCheckedOnly'      => 'Checked only',
+	'BbFilterUncheckedOnly'    => 'Unchecked only',
+	'BbChipCheck'              => 'Check status',
+	'BbChecked'                => 'checked',
+	'BbUnchecked'              => 'unchecked',
+	'BbActionCheck'            => 'check',
+	'BbActionUncheck'          => 'uncheck',
+	'BbRowChecked'             => 'Log entry marked as checked',
+	'BbRowUnchecked'           => 'Log entry unchecked',
+	'BbRowCheckedHint'         => 'This record is checked — exempt from automatic cleanup',
+	'BbRowUncheckedHint'       => 'Mark this record to keep it across automatic cleanup',
+	'BbBulkCheckSelected'      => 'Mark checked',
+	'BbBulkUncheckSelected'    => 'Unmark checked',
+	'BbBulkChecked'            => 'Marked %1 entries as checked',
+	'BbBulkUnchecked'          => 'Unmarked %1 entries',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> '選項已儲存。',
 	'BbWhitelistHint'			=> '不當的白名單設定會讓您暴露在垃圾郵件風險中，或導致 Bad Behaviour 完全失效！除非您 100% 確定，否則請勿加入白名單。',
@@ -1297,10 +1387,377 @@ $ap_translation = [
 	'BbHttpblMaxage'			=> '資料最大年齡（建議為 30）',
 	'BbReverseProxy'			=> '反向代理/負載平衡器',
 	'BbReverseProxyInfo'		=> '如果您在反向代理、負載平衡器、HTTP 加速器、內容快取或類似技術後方使用 Bad Behaviour，請啟用反向代理選項。<br>' .
-	'如果伺服器與公開網際網路之間有兩層或更多的反向代理，您必須以 CIDR 格式指定所有代理伺服器、負載平衡器等的 IP 位址範圍。否則 Bad Behaviour 可能無法判斷客戶端的真實 IP 位址。<br>' .
-	'此外，您的反向代理伺服器必須將他們從中接收請求的網際網路用戶端 IP 位址放入 HTTP 標頭。如果您未指定標頭，將使用 %1。大多數代理伺服器已支援 X-Forwarded-For，只要在代理上啟用即可。其他常見的標頭名稱還包含 %2 與 %3。',
+									'如果伺服器與公開網際網路之間有兩層或更多的反向代理，您必須以 CIDR 格式指定所有代理伺服器、負載平衡器等的 IP 位址範圍。否則 Bad Behaviour 可能無法判斷客戶端的真實 IP 位址。<br>' .
+									'此外，您的反向代理伺服器必須將他們從中接收請求的網際網路用戶端 IP 位址放入 HTTP 標頭。如果您未指定標頭，將使用 %1。大多數代理伺服器已支援 X-Forwarded-For，只要在代理上啟用即可。其他常見的標頭名稱還包含 %2 與 %3。',
 	'BbReverseProxyEnable'		=> '啟用反向代理',
 	'BbReverseProxyHeader'		=> '包含網際網路用戶端 IP 的標頭',
 	'BbReverseProxyAddresses'	=> '您代理伺服器的 IP 位址或 CIDR 格式的地址範圍（每行一筆）',
+
+	'BbBehavioral'           => 'Behavioral Analysis',
+	'BbEnableBehavioral'     => 'Enable behavioral analysis (rate anomalies, rotating UA/IP)',
+	'BbEnableBehavioralInfo' => 'Tracks request patterns per session. Safe to keep enabled.',
+	'BbEnableFingerprinting' => 'Enable TLS/HTTP/2 fingerprinting (JA3, H2, header order)',
+	'BbEnableFingerprintingInfo' => 'Blocks known bad fingerprints only. Requires enable_fingerprinting=true. May cause false positives on old browsers/proxies.',
+	'BbInspectJson'          => 'Inspect JSON request bodies for attacks',
+	'BbInspectJsonInfo'      => 'WARNING: Breaks AJAX/JSON APIs (wiki markup, code snippets trigger false positives). Keep OFF.',
+	'BbInspectMultipart'     => 'Inspect multipart/form-data bodies for attacks',
+	'BbInspectMultipartInfo' => 'WARNING: Breaks file uploads. Keep OFF.',
+
+	'BbEnableClientHints'      => 'Enable Client Hints Validation',
+	'BbEnableClientHintsInfo'  => 'Validate Sec-CH-UA headers against User-Agent to detect spoofed browsers (Chrome 89+).',
+	'BbEnableAgentic'          => 'Enable Agentic Behavior Detection',
+	'BbEnableAgenticInfo'      => 'Detect AI agent patterns: think-then-fetch, non-linear navigation, precision targeting.',
+	'BbStrictSearchEngines'    => 'Strict search engines',
+	'BbStrictSearchEnginesInfo' => 'Apply stricter checks to unverified search engine bots (Googlebot, Bingbot, …) before allowing them through.',
+	'BbEnableDynamicIp'        => 'Enable Dynamic IP Range Fetching',
+	'BbEnableDynamicIpInfo'    => 'Fetch official IP ranges from Google, Bing, OpenAI, Anthropic, Apple, etc. (cached 24h, stale fallback 7 days).',
+
+	'BbAiCrawlers'           => 'AI Crawler Control',
+	'BbBlockUnverifiedAi'    => 'Block unverified AI crawlers',
+	'BbBlockUnverifiedAiInfo' => 'Blocks AI crawlers that fail DNS/IP verification (spoofed bots).',
+	'BbStrictAi'             => 'Strict AI mode (block even verified unallowed AI)',
+	'BbStrictAiInfo'         => 'Blocks ALL AI crawlers not in allowed list, even if verified.',
+	'BbAllowedAiCrawlers'    => 'Allowed AI crawler tokens (one per line)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Enable DNSBL checks',
+	'BbDnsblLists'           => 'DNSBL lists (one per line)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Rate Limiting',
+	'BbRateLimitEnabled'     => 'Enable rate limiting',
+	'BbRateGlobalRequests'   => 'Global requests per window',
+	'BbRateGlobalWindow'     => 'Global window (seconds)',
+	'BbRatePerMinuteRequests'=> 'Per-minute requests',
+	'BbRatePerMinuteWindow'  => 'Per-minute window (seconds)',
+	'BbRatePostRequests'     => 'POST requests per window',
+	'BbRatePostWindow'       => 'POST window (seconds)',
+	'BbRateLoginRequests'    => 'Login requests per window',
+	'BbRateLoginWindow'      => 'Login window (seconds)',
+
+	'BbChallenge'            => 'Challenge System',
+	'BbChallengeEnabled'     => 'Enable challenges',
+	'BbChallengeProvider'    => 'Challenge provider',
+	'BbChallengeSiteKey'     => 'Site key',
+	'BbChallengeSecretKey'   => 'Secret key',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min score',
+
+	'BbPerformance'          => 'Performance',
+	'BbSkipExtensions'       => 'Skip extensions (one per line)',
+	'BbSkipPaths'            => 'Skip path prefixes (one per line)',
+
+	'BbGeoip'                => 'GeoIP / ASN Blocking',
+	'BbGeoipEnabled'         => 'Enable GeoIP lookups',
+	'BbGeoipDbPath'          => 'MaxMind DB path',
+	'BbBlockedCountries'     => 'Blocked countries (ISO codes, one per line)',
+	'BbBlockedAsns'          => 'Blocked ASNs (one per line)',
+
+	'BbBlockPage'                  => 'Block Page',
+	'BbShowDetailedBlockPage'      => 'Show detailed block page',
+	'BbShowDetailedBlockPageInfo'  => 'Show reason, request URI, and technical support key on the block page. Recommended for production.',
+	'BbShowContactInfo'            => 'Show contact info on block page',
+	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
+	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Basic settings',
+	'BbAdvancedSection'   => 'Advanced settings',
+	'BbAdvancedHint'      => 'Most operators should not need to change these.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Which bots to recognize. "minimal" (default) is fastest; "full" is most thorough.',
+	'BbStrictness'        => 'Blocking posture',
+	'BbStrictnessInfo'    => 'monitor-only logs but blocks nothing; normal blocks verified attackers; strict blocks aggressively.',
+	'BbLoggingMode'       => 'Logging',
+	'BbLoggingModeInfo'   => 'Normal (recommended), Verbose (logs every request), Off',
+	'BbLogModeNormal'     => 'Normal',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Off',
+	'BbBehindProxy'       => 'Site is behind a reverse proxy or CDN',
+	'BbBehindProxyInfo'   => 'Enable if behind Cloudflare, AWS, GCP, Fastly, etc. You must add proxy IP ranges in Advanced — without them, real client IPs cannot be determined.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Core',
+	'BbAdvReverseProxy'   => 'Reverse Proxy',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Bot Categories',
+	'BbAdvDnsVerification'=> 'DNS Verification',
+	'BbAdvRateLimits'     => 'Rate Limiting',
+	'BbAdvHeadDetection'  => 'Head Request Detection',
+	'BbAdvAssetScraping'  => 'Asset Scraping Detection',
+	'BbAdvDynamicIp'      => 'Dynamic IP Ranges',
+	'BbAdvOnDemandRefresh'=> 'On-Demand IP Refresh',
+	'BbAdvHttpbl'         => 'Project Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Challenge / CAPTCHA',
+	'BbAdvPerformance'    => 'Performance',
+	'BbAdvGeoip'          => 'GeoIP / ASN Blocking',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Fingerprints',
+	'BbAdvCustomRules'    => 'Custom Rules',
+	'BbAdvBlockPage'      => 'Block Page',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Search Engine',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Social Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Archive Crawler',
+	'BbCatMonitoring'     => 'Monitoring',
+	'BbCatFeedReader'     => 'Feed Reader',
+	'BbCatShoppingCrawler'=> 'Shopping Crawler',
+	'BbCatCloudInfra'     => 'Cloud Infrastructure',
+	'BbCatSecurityScanner'=> 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'      => 'Malicious',
+	'BbCatUnknown'        => 'Unknown',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Fastly',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Limit on-demand refresh to specific providers. Empty = all four.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Log Retention',
+	'BbLogRetentionEnabled'          => 'Enable automatic log cleanup',
+	'BbLogRetentionEnabledInfo'      => 'Periodically delete log rows older than the retention window. Recommended for sites without cron access.',
+	'BbLogRetentionMaxAgeDays'       => 'Retention window (days)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rows older than this are deleted. Default: 7. Common values: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maximum row count (0 = no cap)',
+	'BbLogRetentionMaxRowsInfo'      => 'If set, oldest rows are deleted whenever the table exceeds this size, regardless of age. Useful for high-traffic sites.',
+	'BbLogRetentionProbability'       => 'Probability denominator (1 in N)',
+	'BbLogRetentionProbabilityInfo'   => '1 in N requests checks the staleness gate. Higher = less DB load. Default: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minimum interval between cleanups (seconds)',
+	'BbLogRetentionMinIntervalInfo'  => 'Hard floor on cleanup frequency. Default: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Cleanup lock TTL (seconds)',
+	'BbLogRetentionLockTtlInfo'      => 'How long the cleanup mutex is held. Default: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Enable DNS verification',
+	'BbDnsVerificationInfo'     => 'Verify bot claims (e.g. Googlebot) by reverse-DNS lookup. Catches spoofed bots.',
+	'BbDnsTimeoutMs'            => 'DNS lookup timeout (ms)',
+	'BbDnsPositiveTtl'          => 'Positive cache TTL (seconds)',
+	'BbDnsNegativeTtl'          => 'Negative cache TTL (seconds)',
+	'BbDnsRequireForward'       => 'Require forward-confirm (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Catches PTR spoofing but adds latency and IPv6 FP risk.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD exempt paths (one per line)',
+	'BbHeadRefererExemptInfo'   => 'Paths where HEAD without Referer is legitimate (e.g. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Asset extensions to protect (one per line)',
+	'BbAssetExtensionsInfo'     => 'File types watched for direct scraping without page loads.',
+
+	'BbOnDemandBotIds'          => 'Bot IDs to refresh (empty = all)',
+	'BbOnDemandBotIdsInfo'      => 'Restrict refresh to specific bots. Leave empty to refresh all registered bots.',
+	'BbOnDemandProbability'     => 'Probability denominator (1 in N)',
+	'BbOnDemandMinAge'          => 'Min cache age (seconds)',
+	'BbOnDemandLockTtl'         => 'Lock TTL (seconds)',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (seconds)',
+	'BbOnDemandFeedTimeout'     => 'Feed fetch timeout (seconds)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (seconds)',
+	'BbDynamicIpFeeds'          => 'Feeds to refresh (one per line)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Last seen',
+	'BbSeverity'             => 'Severity',
+	'BbStatusBreakdown'      => 'Status breakdown',
+	'BbBotBreakdown'         => 'Bot breakdown',
+	'BbTopBlocked'           => 'Top denied IPs',
+	'BbGeoSummary'           => 'Geographic summary',
+	'BbCountry'              => 'Country',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Verified %',
+	'BbNoData'               => 'No data for the selected window',
+	'BbCategory'             => 'Category',
+	'BbResponseTime'         => 'Response time',
+	'BbDateCol'              => 'Time / IP / Status',
+	'BbSelectRow'            => 'Select row',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Slow only',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Resolved',
+	'BbChipStatusCode' => 'Status code',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Country',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'View headers',
+	'BbViewBody'             => 'View body',
+	'BbViewContentLabel'     => 'Content',
+	'BbViewModeFull'         => 'Full (always shown)',
+	'BbViewModeTeaser'       => 'Teaser (click to expand)',
+	'BbViewModeHidden'       => 'Hidden (show on demand)',
+	'BbHide'                 => 'hide',
+	'BbChars'                => 'chars',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Custom Rules',
+	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
+	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Body scan skip fields',
+	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Advanced filters',
+	'BbDateFrom'            => 'From',
+	'BbDateTo'              => 'To',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Slow requests only (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Active only',
+	'BbResolvedOnly'        => 'Resolved only',
+	'BbResolvedAll'         => 'Active + resolved',
+	'BbResolved'            => 'resolved',
+	'BbActionResolve'       => 'resolve',
+	'BbActionUnresolve'     => 'unresolve',
+	'BbRowResolved'         => 'Log entry marked resolved',
+	'BbRowUnresolved'       => 'Log entry marked unresolved',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Delete selected',
+	'BbBulkWhitelistSelected'   => 'Whitelist IPs',
+	'BbBulkResolveSelected'     => 'Mark resolved',
+	'BbBulkUnresolveSelected'   => 'Mark unresolved',
+	'BbBulkHint'                => 'Tick rows first, then click an action.',
+	'BbNoItemsSelected'         => 'No items selected',
+	'BbBulkDeleted'             => 'Deleted %1 log entries',
+	'BbBulkWhitelisted'         => 'Added %1 IPs to whitelist',
+	'BbBulkResolved'            => 'Marked %1 entries as resolved',
+	'BbBulkUnresolved'          => 'Marked %1 entries as unresolved',
+	'BbMarkAll'                 => 'Mark all rows on this page',
+	'BbMarkNone'                => 'Unmark all rows',
+
+	'BbBulkFailed'              => 'Could not update the selected rows. Check the database or try again.',
+	'BbBulkWhitelistedNone'     => 'No new IPs were added — all selected IPs were already on the whitelist.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'verified',
+	'BbUnverified'           => 'unverified',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Request allowed',
+	'BbStatus_blocked.bot'                => 'Known bot blocked',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler blocked',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler blocked',
+	'BbStatus_blocked.malicious_ua'       => 'Malicious User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Attack payload detected',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL match',
+	'BbStatus_blocked.httpbl'             => 'http:BL match',
+	'BbStatus_blocked.behavioral'         => 'Behavioral anomaly',
+	'BbStatus_blocked.fingerprint'        => 'Bad fingerprint',
+	'BbStatus_blocked.rate_limit'         => 'Rate limit exceeded',
+	'BbStatus_blocked.custom_rule'        => 'Custom rule match',
+	'BbStatus_blocked.geoip'              => 'GeoIP block',
+	'BbStatus_blocked.residential_proxy'  => 'Residential proxy blocked',
+	'BbStatus_challenge.required'         => 'Challenge required',
+	'BbStatus_challenge.failed'           => 'Challenge failed',
+	'BbStatus_error.internal'             => 'Internal error',
+	'BbStatus_error.configuration'        => 'Configuration error',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Last 24 hours',
+	'BbWindow7d'  => 'Last 7 days',
+	'BbWindow30d' => 'Last 30 days',
+	'BbWindowAll' => 'All time',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimal (default)',
+	'BbPresetFull'           => 'Full',
+	'BbPresetVerifiedOnly'   => 'Verified-only',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'EU-only',
+	'BbPresetHumanOnly'      => 'Human-only',
+	'BbPresetCustom'         => 'Custom',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Monitor-only',
+	'BbStrictnessNormal'      => 'Normal',
+	'BbStrictnessStrict'      => 'Strict',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Enable head request detection',
+	'BbHeadRequireReferer'       => 'Require Referer on HEAD',
+	'BbHeadFloodThreshold'       => 'Flood threshold (per session)',
+	'BbHeadProbeThreshold'       => 'Probe threshold (per IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Enable asset scraping detection',
+	'BbAssetNoRefererThreshold'    => 'No-referer threshold (per IP / hour)',
+	'BbAssetOnlySessionThreshold'  => 'Asset-only session threshold',
+	'BbAssetPatternThreshold'      => 'Sequential pattern threshold (per IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Enable dynamic IP ranges',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Enable on-demand refresh',
+	'BbOnDemandRefreshInfo'      => 'Refresh IP range cache during requests. Use when you have no cron access.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Bad JA3',
+	'BbFpBadH2'           => 'Bad H2',
+	'BbFpBotHeaderOrders' => 'Bot Header Orders',
+	'BbFpExpectedJa3'     => 'Expected JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Blocked',
+	'BbListChallenge' => 'Challenge (CAPTCHA)',
+	'BbListLogOnly'   => 'Log only (no enforcement)',
+	'BbListAllowed'   => 'Explicitly allowed',
+	'BbListHint'      => 'Categories in this list get the action regardless of category default.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Search Engine',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Social Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Archive Crawler',
+	'BbCatMonitoring'      => 'Monitoring',
+	'BbCatFeedReader'      => 'Feed Reader',
+	'BbCatShoppingCrawler' => 'Shopping Crawler',
+	'BbCatCloudInfra'      => 'Cloud Infrastructure',
+	'BbCatSecurityScanner' => 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'       => 'Malicious',
+	'BbCatUnknown'         => 'Unknown',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Attack patterns',
+	'BbSevChallenges'     => 'Challenges issued',
+	'BbSevPermitted'      => 'Permitted',
+	'BbSevErrors'         => 'Errors',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Categories',
+
+	'BbResultBreakdown'    => 'Result breakdown',
+	'BbBreakdownBlocked'   => 'Blocked',
+	'BbBreakdownMonitored' => 'Monitored',
+	'BbBreakdownAllowed'   => 'Allowed',
+	'BbViewAllInLog'       => 'View all in log',
+	'BbAllowedHintVerbose' => 'Allowed traffic is only logged when verbose logging is enabled. Toggle logging_mode=verbose in Settings to see what passes through.',
 
 ];

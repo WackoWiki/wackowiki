@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Administrativní heslo není zadáno!',
 	'NoRecoveryPasswordTip'		=> 'Poznámka: Absence administrativního hesla ohrožuje bezpečnost! Zadejte hash hesla do konfiguračního souboru a spusťte program znovu.',
 
+	'ApDevNologinBlocked'		=> 'Přístup je zablokován: AP_DEV_NOLOGIN je povoleno v admin.php, ale požadavek nepochází z localhost (127.0.1, ::1 nebo localhost). Toto je příznak pouze pro vývoj, a musí být vypnutý při produkci. Nastavte <code>AP_DEV_NOLOGIN = 0</code> v admin.php pro obnovení přístupu.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 je povoleno, ale admin.php byl přístupný z jiné než lokalhost adresy (%2). Přístup k administrátorskému panelu byl zablokován.',
+
 	'ErrorLoadingModule'		=> 'Chyba při načítání modulu %1: neexistuje.',
 
 	'ApHomePage'				=> 'Domovská stránka',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Ukončit správu systému a odhlásit se z webu',
 
 	'TimeLeft'					=> 'Zbývající čas:  %1 minut',
+	'TimeLeftInfinity'			=> 'Zbývající čas:  %1 (vývojářský režim)',
 	'ApVersion'					=> 'verze',
 
 	'SiteOpen'					=> 'Otevřít',
@@ -920,8 +924,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'Vytvořte náhled ve všech možných situacích.',
-	'JpegQuality'				=> 'Kvalita JPEG:',
-	'JpegQualityInfo'			=> 'Kvalita při škálování miniatury JPEG. Měla by být v rozmezí 1 až 100, což ukazuje 100 % kvality.',
+	'ImageQuality'				=> 'Předvolba kvality obrazu:',
+	'ImageQualityInfo'			=> 'Kvalita při škálování náhledu. Přednastavení, která vybírají hodnoty pro kodek, které vedou ke srovnatelnému perceptuálnímu výsledku.',
 	'MaxImageArea'				=> 'Maximální plocha obrázku:',
 	'MaxImageAreaInfo'			=> 'Maximální počet pixelů, které může mít zdrojový obrázek. To poskytuje limit využití paměti pro dekompresní stranu snímku.<br><code>-1</code> znamená, že nebude zkontrolovat velikost obrázku, než se ho pokusí zvětšit. <code>0</code> znamená, že bude automaticky určovat hodnotu.',
 	'MaxThumbWidth'				=> 'Maximální šířka náhledu v pixelech:',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> 'není vyšší než',
 		'3'		=> 'rovno',
 	],
-	'LogNoMatch'				=> 'Žádné události, které splňují kritéria',
 	'LogDate'					=> 'Datum:',
 	'LogEvent'					=> 'Událost',
 	'LogUsername'				=> 'Uživatelské jméno',
@@ -967,6 +970,49 @@ $ap_translation = [
 		'6'		=> 'nejnižší',
 		'7'		=> 'ladění',
 	],
+
+	'LogCollapse'        => 'sbalit',
+	'LogExpand'          => 'rozbalit',
+	'LogType'              => 'Typ',
+	'LogSearch'            => 'Hledat',
+	'LogSearchPlaceholder' => 'hledat zprávy...',
+	'LogUserId'            => 'ID uživatele',
+	'LogExactMatch'        => 'přesná shoda',
+	'LogFrom'              => 'Od',
+	'LogTo'                => 'Komu',
+	'LogSupportKey'        => 'Klíč podpory',
+	'LogContext'           => 'Kontext',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Uživatelský agent',
+	'LogReferer'           => 'Odpovídající',
+	'LogTotal'             => 'Celkem',
+	'LogFilteredBy'        => 'Filtrováno podle',
+	'LogClearFilter'       => 'Vymazat filtr',
+	'LogActions'           => 'Akce',
+	'LogDelete'            => 'Vymazat',
+	'LogDeleteConfirm'     => 'Odstranit tento záznam?',
+	'LogDeleteSelected'    => 'Odstranit vybrané',
+	'LogBulkAction'        => '— hromadná akce:',
+	'LogApply'             => 'Použít',
+	'LogExportCSV'         => 'Exportovat CSV',
+	'LogExportJSON'        => 'Exportovat JSON',
+	'LogPurged'            => 'Tabulka logů byla zkrácena.',
+	'LogPurgedFiltered'     => '%1 záznamy smazány filtrem.',
+	'LogDeleted'           => 'Záznam byl smazán.',
+	'LogDeletedBulk'        => '%1 položky protokolu byly smazány.',
+	'LogPurgeSection'      => 'Destruktivní operace',
+	'LogPurgeWarning'      => 'Existují položky %1 odpovídající aktuálnímu zobrazení. Používejte s opatrností.',
+	'LogPurgeConfirm'      => 'Chápu, že to natrvalo odstraní logy',
+	'LogPurgeFiltered'     => 'Vymazat odpovídající filtr',
+	'LogPurgeFilteredConfirm' => 'Odstranit všechny položky odpovídající aktuálnímu filtru? Tuto akci nelze vrátit zpět.',
+	'LogPurgeAll'          => 'Vymazat log',
+	'LogPurgeAllConfirm'   => 'Odstranit záznam o EVERY v databázi? Tuto akci nelze vrátit zpět.',
+	'LogFindRelated'       => 'Najít související záznamy',
+	'LogNoMatch'           => 'Současnému filtru neodpovídají žádné položky protokolu.',
+
+	'LogMarkAll'                => 'Označit všechny řádky na této stránce',
+	'LogMarkNone'               => 'Odznačit všechny řádky',
+	'LogSelectRow'              => 'Vybrat řádek',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Zde můžete poslat zprávu buď 1) všem vašim uživatelům nebo 2) všem uživatelům konkrétní skupiny, kteří povolili příjem hromadných e-mailů. Na zadanou administrativní e-mailovou adresu bude zaslán e-mail s nevidomou kopie (BCC) zaslanou všem příjemcům. Výchozí nastavení obsahuje maximálně 20 příjemců tohoto e-mailu. Pokud je více než 20 příjemců, budou odeslány další e-maily. Pokud odesíláte e-mailem velké skupině lidí, buďte prosím trpěliví po odeslání a nezastavujte stránku v půli cesty. Je normální, aby hromadné odesílání e-mailů trvalo dlouho. Po dokončení skriptu budete upozorněni.',
@@ -1275,6 +1321,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Záhlaví',
 	'BbEntity'					=> 'Subjekt',
 
+	'BbSearchPlaceholder'        => 'Hledat UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Jakákoliv kategorie',
+	'BbFilterAnyMethod'          => 'Jakákoli metoda',
+	'BbFilterAnyStatus'          => 'Jakýkoliv status',
+	'BbFilterBlockedOnly'        => 'Pouze blokováno',
+	'BbFilterPermittedOnly'      => 'Pouze povolené',
+	'BbFilterApply'              => 'Použít',
+	'BbFilterClear'              => 'Vymazat filtry',
+	'BbChipSearch'               => 'Hledat',
+	'BbChipCategory'             => 'Kategorie',
+	'BbChipMethod'               => 'Metoda',
+	'BbChipStatus'               => 'Stav',
+	'BbChipRemove'               => 'Odstranit tento filtr',
+	'BbFilterByCategory'         => 'Filtrovat podle této kategorie',
+	'BbSearchBySupportKey'       => 'Hledat tento klíč podpory',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Případný stav kontroly',
+	'BbFilterCheckedOnly'      => 'Pouze zaškrtnuto',
+	'BbFilterUncheckedOnly'    => 'Pouze nezaškrtnuté',
+	'BbChipCheck'              => 'Zkontrolovat stav',
+	'BbChecked'                => 'zaškrtnuto',
+	'BbUnchecked'              => 'nezaškrtnuto',
+	'BbActionCheck'            => 'zkontrolovat',
+	'BbActionUncheck'          => 'zrušit zaškrtnutí',
+	'BbRowChecked'             => 'Záznam záznamu označen jako kontrolovaný',
+	'BbRowUnchecked'           => 'Záznam nezaškrtnut',
+	'BbRowCheckedHint'         => 'Tento záznam je kontrolován – osvobozen od automatického vyčištění',
+	'BbRowUncheckedHint'       => 'Označte tento záznam pro automatické čištění',
+	'BbBulkCheckSelected'      => 'Označit jako kontrolované',
+	'BbBulkUncheckSelected'    => 'Zrušení označení zkontrolováno',
+	'BbBulkChecked'            => 'Označit položky %1 jako kontrolované',
+	'BbBulkUnchecked'          => 'Neoznačené položky %1',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Možnosti uloženy.',
 	'BbWhitelistHint'			=> 'Nevhodný bílou listinu WILL vás vystaví spamu, nebo způsobí, že Bad Behaviour přestane fungovat úplně! NEPOVÍCE, pokud nejste 100% CERTAIN, který byste měli.',
@@ -1308,5 +1388,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Povolit reverzní proxy',
 	'BbReverseProxyHeader'		=> 'Záhlaví obsahující IP adresu internetových klientů',
 	'BbReverseProxyAddresses'	=> 'IP adresa nebo rozsahy adres ve formátu CIDR pro proxy servery (jeden na řádek)',
+
+	'BbBehavioral'           => 'Analýza chování',
+	'BbEnableBehavioral'     => 'Povolit analýzu chování (rychlost anomálií, otáčení UA/IP)',
+	'BbEnableBehavioralInfo' => 'Vzory požadavků na skladby v každé relaci. Bezpečné pro zachování povoleno.',
+	'BbEnableFingerprinting' => 'Povolit TLS/HTTP/2 otisk (JA3, H2, pořadí hlaviček)',
+	'BbEnableFingerprintingInfo' => 'Blokuje známé chybné otisky prstů. Vyžaduje enable_fingerprinting=true. Může způsobit falešné pozitivy na starých prohlížečích/proxies.',
+	'BbInspectJson'          => 'Prozkoumejte subjekty požadující JSON pro útoky',
+	'BbInspectJsonInfo'      => 'UPOZORNĚNÍ: Přeruší AJAX/JSON API (wiki markup, snippety kódu vyvolávají falešné pozice). Udržujte VYPNUT.',
+	'BbInspectMultipart'     => 'Inspekce vícenásobných datových útvarů pro účely útoků',
+	'BbInspectMultipartInfo' => 'VAROVÁNÍ: Přerušení nahrávání souborů. Udržujte vypnuto.',
+
+	'BbEnableClientHints'      => 'Povolit ověření nápovědy klienta',
+	'BbEnableClientHintsInfo'  => 'Ověřit záhlaví Sec-CH-UA pro detekci spoofovaných prohlížečů (Chrome 89+).',
+	'BbEnableAgentic'          => 'Povolit detekci chování agenta',
+	'BbEnableAgenticInfo'      => 'Detekujte vzorce AI agenta: fetk-then-fetch, nelineární navigace, cílení přesnosti.',
+	'BbStrictSearchEngines'    => 'Striktní vyhledávače',
+	'BbStrictSearchEnginesInfo' => 'Použít přísnější kontroly u neověřených robotů vyhledávačů (Googlebot, Bingbot, …) před tím, než je povolí.',
+	'BbEnableDynamicIp'        => 'Povolit načtení dynamického rozsahu IP',
+	'BbEnableDynamicIpInfo'    => 'Načtěte oficiální IP rozsahy od Google, Bing, OpenAI, Anthropic, Apple, atd. (24 hodin, standardní 7 dní).',
+
+	'BbAiCrawlers'           => 'Kontrola plovoucího AI',
+	'BbBlockUnverifiedAi'    => 'Blokovat neověřené plovoucí AI',
+	'BbBlockUnverifiedAiInfo' => 'Blokuje Rádery AI, které selhají při DNS/IP ověřování (spoofed bots).',
+	'BbStrictAi'             => 'Přísný režim AI (blokovat i ověřenou nepovolenou AI)',
+	'BbStrictAiInfo'         => 'Blokuje VŠECHNY RAI rivaly, které nejsou v povoleném seznamu, i když jsou ověřeny.',
+	'BbAllowedAiCrawlers'    => 'Povolené tokeny AI rwler (jeden na řádek)',
+	'BbAllowedAiCrawlersInfo' => 'Tokeny: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Povolit kontroly DNSBL',
+	'BbDnsblLists'           => 'Seznam DNSBL (jeden na řádek)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Omezení sazeb',
+	'BbRateLimitEnabled'     => 'Povolit omezení rychlosti',
+	'BbRateGlobalRequests'   => 'Globální požadavky na okno',
+	'BbRateGlobalWindow'     => 'Globální okno (sekundy)',
+	'BbRatePerMinuteRequests'=> 'Žádosti na minutu',
+	'BbRatePerMinuteWindow'  => 'Okno na minutu (sekundy)',
+	'BbRatePostRequests'     => 'Požadavky POST na okno',
+	'BbRatePostWindow'       => 'Okno POST (v sekundách)',
+	'BbRateLoginRequests'    => 'Přihlašovací požadavky na okno',
+	'BbRateLoginWindow'      => 'Okno přihlášení (sekundy)',
+
+	'BbChallenge'            => 'Výzvový systém',
+	'BbChallengeEnabled'     => 'Povolit Výzvy',
+	'BbChallengeProvider'    => 'Poskytovatel výzvy',
+	'BbChallengeSiteKey'     => 'Klíč webu',
+	'BbChallengeSecretKey'   => 'Tajný klíč',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min skóre',
+
+	'BbPerformance'          => 'Výkon',
+	'BbSkipExtensions'       => 'Přeskočit rozšíření (jedno na řádek)',
+	'BbSkipPaths'            => 'Přeskočit prefixy cesty (jeden na řádek)',
+
+	'BbGeoip'                => 'GeoIP / ASN blokování',
+	'BbGeoipEnabled'         => 'Povolit vyhledávání GeoIP',
+	'BbGeoipDbPath'          => 'Cesta MaxMind DB',
+	'BbBlockedCountries'     => 'Blokované země (kód ISO, jeden na řádek)',
+	'BbBlockedAsns'          => 'Blokované ASN (jeden na řádek)',
+
+	'BbBlockPage'                  => 'Stránka s blokem',
+	'BbShowDetailedBlockPage'      => 'Zobrazit detailní stránku s bloky',
+	'BbShowDetailedBlockPageInfo'  => 'Zobrazit důvod, požadavek URI a klíč technické podpory na stránce bloku. Doporučeno pro produkci.',
+	'BbShowContactInfo'            => 'Zobrazit informace o kontaktu na stránce bloku',
+	'BbShowContactInfoInfo'        => 'Zobrazit e-mail administrátora na stránce s blokem (platí pouze pokud je povolena stránka s blokem).',
+	'BbSettingsSaveFailed'         => 'Nepodařilo se uložit špatná nastavení chování',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Základní nastavení',
+	'BbAdvancedSection'   => 'Pokročilé nastavení',
+	'BbAdvancedHint'      => 'Většina operátorů by to neměla měnit.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Kterí roboti poznávají. "minimální" (výchozí) je nejrychlejší; "full" je nejdůkladnější.',
+	'BbStrictness'        => 'Blokování pozice',
+	'BbStrictnessInfo'    => 'pouze monitoruje logy, ale nic nebloková; normální bloky ověřily útočníky; přísné bloky agresivně.',
+	'BbLoggingMode'       => 'Logování',
+	'BbLoggingModeInfo'   => 'Normální (doporučeno), Verbose (logs každý požadavek), Vypnuto',
+	'BbLogModeNormal'     => 'Normální',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Vypnuto',
+	'BbBehindProxy'       => 'Stránka je za reverzní proxy nebo CDN',
+	'BbBehindProxyInfo'   => 'Povolit, pokud za Cloudflare, AWS, GCP, rychle, atd. Musíte přidat rozsah IP proxy v Advanced — bez nich nelze určit skutečné IP adresy klienta.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Jádro',
+	'BbAdvReverseProxy'   => 'Reverzní proxy',
+	'BbAdvAiCrawlers'     => 'Rýče AI',
+	'BbAdvBotCategories'  => 'Kategorie bota',
+	'BbAdvDnsVerification'=> 'Ověření DNS',
+	'BbAdvRateLimits'     => 'Omezení sazeb',
+	'BbAdvHeadDetection'  => 'Detekce hlavního požadavku',
+	'BbAdvAssetScraping'  => 'Detekce Scrapingu majetku',
+	'BbAdvDynamicIp'      => 'Dynamické IP rozsahy',
+	'BbAdvOnDemandRefresh'=> 'Obnovení IP na vyžádání',
+	'BbAdvHttpbl'         => 'Projekt Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Výzva / CAPTCHA',
+	'BbAdvPerformance'    => 'Výkon',
+	'BbAdvGeoip'          => 'GeoIP / ASN blokování',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 otisky prstů',
+	'BbAdvCustomRules'    => 'Vlastní pravidla',
+	'BbAdvBlockPage'      => 'Stránka s blokem',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Vyhledávač',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Sociální rváč',
+	'BbCatSeoCrawler'     => 'SEO rváč',
+	'BbCatArchiveCrawler' => 'Archivovat rváč',
+	'BbCatMonitoring'     => 'Monitorování',
+	'BbCatFeedReader'     => 'RSS čtečka',
+	'BbCatShoppingCrawler'=> 'Nákupní rváč',
+	'BbCatCloudInfra'     => 'Cloudová infrastruktura',
+	'BbCatSecurityScanner'=> 'Bezpečnostní skener',
+	'BbCatResidentialProxy'=> 'Rezidenční proxy',
+	'BbCatMalicious'      => 'Škodlivý',
+	'BbCatUnknown'        => 'Neznámý',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Rychle',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Limit na vyžádání obnovení na konkrétní poskytovatele. Prázdné = všechny čtyři.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Zaznamenávání záznamu',
+	'BbLogRetentionEnabled'          => 'Povolit automatické čištění protokolů',
+	'BbLogRetentionEnabledInfo'      => 'Pravidelně odstraňovat řádky protokolů starší než je retenční okno. Doporučeno pro stránky bez cronu.',
+	'BbLogRetentionMaxAgeDays'       => 'Okno uchování (dny)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Řádky starší se odstraňují. Výchozí: 7. Společné hodnoty: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maximální počet řádků (0 = žádná čepice)',
+	'BbLogRetentionMaxRowsInfo'      => 'Je-li nastaveno, nejstarší řádky jsou odstraněny vždy, když tabulka přesahuje tuto velikost, bez ohledu na věk. Užitečné pro stránky s vysokým provozem.',
+	'BbLogRetentionProbability'       => 'Jmenovatel pravděpodobnosti (1 v N)',
+	'BbLogRetentionProbabilityInfo'   => '1 v N požadavky zkontroluje průnikovou bránu. Vyšší = menší zatížení DB. Výchozí: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minimální interval mezi čištěním (sekundy)',
+	'BbLogRetentionMinIntervalInfo'  => 'Těžká podlaha při frekvenci čištění. Výchozí: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Úklid TL zámku (vteřiny)',
+	'BbLogRetentionLockTtlInfo'      => 'Jak dlouho je zachován úklid mutexu. Výchozí: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Povolit ověření DNS',
+	'BbDnsVerificationInfo'     => 'Ověřte nároky na bota (např. Googlebot) pomocí reverzní DNS vyhledávání. Přečtěte boty.',
+	'BbDnsTimeoutMs'            => 'Časový limit vyhledávání DNS (ms)',
+	'BbDnsPositiveTtl'          => 'Pozitivní TTL cache (sekundy)',
+	'BbDnsNegativeTtl'          => 'Negativní TTL cache (sekundy)',
+	'BbDnsRequireForward'       => 'Vyžadovat potvrzení o přesměrování (PTR + Shoda záznamu)',
+	'BbDnsRequireForwardInfo'   => 'Odloví spofování PTR, ale přidává latenci a riziko IPv6 FP.',
+
+	'BbHeadRefererExemptPaths'  => 'Cesty osvobozené od daně z přidané hodnoty (jedna na řádek)',
+	'BbHeadRefererExemptInfo'   => 'Cesty, kde je HEAD bez referentu legitimní (např. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Rozšíření majetku k ochraně (jedno na řádek)',
+	'BbAssetExtensionsInfo'     => 'Typy souborů sledovány pro přímé odstranění bez načtení stránky.',
+
+	'BbOnDemandBotIds'          => 'ID bota k obnovení (prázdné = všechny)',
+	'BbOnDemandBotIdsInfo'      => 'Omezí obnovení na konkrétní boty. Ponechte prázdné pro obnovení všech registrovaných botů.',
+	'BbOnDemandProbability'     => 'Jmenovatel pravděpodobnosti (1 v N)',
+	'BbOnDemandMinAge'          => 'Minimální věk mezipaměti (v sekundách)',
+	'BbOnDemandLockTtl'         => 'Uzamknout TTL (sekundy)',
+	'BbOnDemandCacheTtl'        => 'Cache TL (sekundy)',
+	'BbOnDemandFeedTimeout'     => 'Časový limit načtení kanálu (v sekundách)',
+
+	'BbDynamicIpTtl'            => 'Cache TL (sekundy)',
+	'BbDynamicIpFeeds'          => 'Zdroje k aktualizaci (jeden na řádek)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Naposledy spatřen',
+	'BbSeverity'             => 'Závažnost',
+	'BbStatusBreakdown'      => 'Členění stavu',
+	'BbBotBreakdown'         => 'Rozpis botů',
+	'BbTopBlocked'           => 'Nejvíce odepřené IP adresy',
+	'BbGeoSummary'           => 'Geografické shrnutí',
+	'BbCountry'              => 'L 343, 22.12.2009, s. 1).',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Ověřené %',
+	'BbNoData'               => 'Žádná data pro vybrané okno',
+	'BbCategory'             => 'Kategorie',
+	'BbResponseTime'         => 'Doba odezvy',
+	'BbDateCol'              => 'Čas / IP / stav',
+	'BbSelectRow'            => 'Vybrat řádek',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Pouze pomalé',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Vyřešeno',
+	'BbChipStatusCode' => 'Stavový kód',
+	'BbChipIp'         => 'IP adresa',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'L 343, 22.12.2009, s. 1).',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Zobrazit záhlaví',
+	'BbViewBody'             => 'Zobrazit tělo',
+	'BbViewContentLabel'     => 'Obsah',
+	'BbViewModeFull'         => 'Plné (vždy zobrazeno)',
+	'BbViewModeTeaser'       => 'Učovník (klikněte pro rozšíření)',
+	'BbViewModeHidden'       => 'Skryté (zobrazit na vyžádání)',
+	'BbHide'                 => 'skrýt',
+	'BbChars'                => 'Znaky',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Vlastní pravidla',
+	'BbCustomRulesLabel'           => 'Vlastní pravidla (jeden objekt JSON na řádek)',
+	'BbCustomRulesInfo'            => 'Každý řádek je JSON objekt s klíči: typ (ip|ua_regex|ua_contains|asn|country|hlavička), hodnota, akce (allow|block|challenge|log) a id. Příklad: {"type":"ua_regex","hodnota":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Skenování textových polí',
+	'BbBodyScanSkipFieldsInfo'     => 'Jeden název pole na řádek. Vyjmenovaná pole jsou přeskočena během tělesné kontroly SQL/XSS.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Pokročilé filtry',
+	'BbDateFrom'            => 'Od',
+	'BbDateTo'              => 'Komu',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Pouze pomalé požadavky (>1)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Pouze aktivní',
+	'BbResolvedOnly'        => 'Pouze vyřešeno',
+	'BbResolvedAll'         => 'Aktivní + vyřešené',
+	'BbResolved'            => 'vyřešeno',
+	'BbActionResolve'       => 'vyřešit',
+	'BbActionUnresolve'     => 'nevyřešeno',
+	'BbRowResolved'         => 'Záznam označený jako vyřešený',
+	'BbRowUnresolved'       => 'Záznam byl označen jako nevyřešený',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Odstranit vybrané',
+	'BbBulkWhitelistSelected'   => 'Whitelist IP',
+	'BbBulkResolveSelected'     => 'Označit jako vyřešené',
+	'BbBulkUnresolveSelected'   => 'Označit nevyřešené',
+	'BbBulkHint'                => 'Nejprve zaškrtněte řádky a poté klikněte na akci.',
+	'BbNoItemsSelected'         => 'Nebyly vybrány žádné položky',
+	'BbBulkDeleted'             => 'Smazáno %1 položek protokolu',
+	'BbBulkWhitelisted'         => 'Added %1 IPs to whitelist',
+	'BbBulkResolved'            => 'Označit položky %1 jako vyřešeny',
+	'BbBulkUnresolved'          => 'Označit %1 položky jako nevyřešené',
+	'BbMarkAll'                 => 'Označit všechny řádky na této stránce',
+	'BbMarkNone'                => 'Odznačit všechny řádky',
+
+	'BbBulkFailed'              => 'Vybrané řádky nelze aktualizovat. Zkontrolujte databázi nebo to zkuste znovu.',
+	'BbBulkWhitelistedNone'     => 'Nebyly přidány žádné nové IP adresy - všechny vybrané IP adresy již byly na seznamu povolených.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'ověřeno',
+	'BbUnverified'           => 'neověřeno',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Požadavek povolen',
+	'BbStatus_blocked.bot'                => 'Známý bota zablokován',
+	'BbStatus_blocked.ai_crawler'         => 'AI rváč zablokován',
+	'BbStatus_blocked.seo_crawler'        => 'SEO rváč zablokován',
+	'BbStatus_blocked.malicious_ua'       => 'Škodlivý User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Zjištěno užitečné zatížení útoku',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL shoda',
+	'BbStatus_blocked.httpbl'             => 'http:BL shoda',
+	'BbStatus_blocked.behavioral'         => 'Behaviorální anomálie',
+	'BbStatus_blocked.fingerprint'        => 'Špatný otisk prstu',
+	'BbStatus_blocked.rate_limit'         => 'Byl překročen limit rychlosti',
+	'BbStatus_blocked.custom_rule'        => 'Vlastní pravidlo shoduje',
+	'BbStatus_blocked.geoip'              => 'GeoIP blok',
+	'BbStatus_blocked.residential_proxy'  => 'Rezidenční proxy blokován',
+	'BbStatus_challenge.required'         => 'Je vyžadována výzva',
+	'BbStatus_challenge.failed'           => 'Výzva selhala',
+	'BbStatus_error.internal'             => 'Vnitřní chyba',
+	'BbStatus_error.configuration'        => 'Chyba konfigurace',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Posledních 24 hodin',
+	'BbWindow7d'  => 'Posledních 7 dní',
+	'BbWindow30d' => 'Posledních 30 dní',
+	'BbWindowAll' => 'Celý čas',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimální (výchozí)',
+	'BbPresetFull'           => 'Plné',
+	'BbPresetVerifiedOnly'   => 'Pouze ověřeno',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Pouze EU',
+	'BbPresetHumanOnly'      => 'Pouze pro člověka',
+	'BbPresetCustom'         => 'Vlastní',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Pouze monitorování',
+	'BbStrictnessNormal'      => 'Normální',
+	'BbStrictnessStrict'      => 'Striktní',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Stříbrnice',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Povolit detekci požadavku na hlavu',
+	'BbHeadRequireReferer'       => 'Vyžadovat Referer při HEAD',
+	'BbHeadFloodThreshold'       => 'Prahová hodnota záplavy (na jedno zasedání)',
+	'BbHeadProbeThreshold'       => 'Prahová hodnota sondy (na IP / 5 min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Povolit detekci odstranění majetku',
+	'BbAssetNoRefererThreshold'    => 'Nepřiřazující práh (za IP / hodinu)',
+	'BbAssetOnlySessionThreshold'  => 'Prahová hodnota pouze pro relaci',
+	'BbAssetPatternThreshold'      => 'Prahová hodnota vzorce (na jedno IP / 5 min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Povolit dynamické rozsahy IP',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Povolit obnovení na vyžádání',
+	'BbOnDemandRefreshInfo'      => 'Aktualizovat mezipaměť rozsahu IP během požadavků. Použijte v případě, že nemáte přístup cronu.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Špatné JA3',
+	'BbFpBadH2'           => 'Špatná H2',
+	'BbFpBotHeaderOrders' => 'Objednávky v záhlaví bota',
+	'BbFpExpectedJa3'     => 'Očekávaný JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Blokované',
+	'BbListChallenge' => 'Výzva (CAPTCHA)',
+	'BbListLogOnly'   => 'Pouze log (bez vymahatelnosti)',
+	'BbListAllowed'   => 'Výslovně povoleno',
+	'BbListHint'      => 'Kategorie v tomto seznamu zobrazují akci bez ohledu na výchozí kategorii.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Vyhledávač',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Sociální rváč',
+	'BbCatSeoCrawler'      => 'SEO rváč',
+	'BbCatArchiveCrawler'  => 'Archivovat rváč',
+	'BbCatMonitoring'      => 'Monitorování',
+	'BbCatFeedReader'      => 'RSS čtečka',
+	'BbCatShoppingCrawler' => 'Nákupní rváč',
+	'BbCatCloudInfra'      => 'Cloudová infrastruktura',
+	'BbCatSecurityScanner' => 'Bezpečnostní skener',
+	'BbCatResidentialProxy'=> 'Rezidenční proxy',
+	'BbCatMalicious'       => 'Škodlivý',
+	'BbCatUnknown'         => 'Neznámý',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-čar hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Vzory útoku',
+	'BbSevChallenges'     => 'Výzvy byly vydány',
+	'BbSevPermitted'      => 'Povoleno',
+	'BbSevErrors'         => 'Chyby',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Kategorie',
+
+	'BbResultBreakdown'    => 'Členění výsledků',
+	'BbBreakdownBlocked'   => 'Blokované',
+	'BbBreakdownMonitored' => 'Monitorováno',
+	'BbBreakdownAllowed'   => 'Povoleno',
+	'BbViewAllInLog'       => 'Zobrazit vše v logu',
+	'BbAllowedHintVerbose' => 'Povolené přenosy jsou zaznamenány pouze pokud je zapnuto podrobné zaznamenávání. Zapněte logging_mode=podrobněji v nastavení a zjistěte, co prochází.',
 
 ];

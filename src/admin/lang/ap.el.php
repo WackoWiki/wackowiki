@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Ο κωδικός πρόσβασης διαχειριστή δεν έχει καθοριστεί!',
 	'NoRecoveryPasswordTip'		=> 'Σημείωση: Η απουσία κωδικού πρόσβασης διαχειριστή αποτελεί απειλή για την ασφάλεια! Εισάγετε το hash του κωδικού πρόσβασης στο αρχείο ρυθμίσεων και εκτελέστε ξανά το πρόγραμμα.',
 
+	'ApDevNologinBlocked'		=> 'Η πρόσβαση είναι αποκλεισμένη: AP_DEV_NOLOGIN είναι ενεργοποιημένη στο admin.php αλλά η αίτηση δεν προέρχεται από localhost (127.0.0.1, ::1, ή localhost). Αυτή είναι μια σημαία μόνο ανάπτυξης και πρέπει να απενεργοποιηθεί στην παραγωγή. Ορίστε <code>AP_DEV_NOLOGIN = 0</code> στο admin.php για επαναφορά της πρόσβασης.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: Το %1 είναι ενεργοποιημένο, αλλά το admin.php προσφέρθηκε από μια διεύθυνση μη-localhost (%2). Έχει αποκλειστεί η πρόσβαση στον πίνακα διαχείρισης.',
+
 	'ErrorLoadingModule'		=> 'Σφάλμα κατά τη φόρτωση του admin module %1: δεν υπάρχει.',
 
 	'ApHomePage'				=> 'Αρχική Σελίδα',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'εγκατάλειψη διαχείρισης συστήματος',
 
 	'TimeLeft'					=> 'Χρόνος που απομένει:  %1 λεπτά',
+	'TimeLeftInfinity'			=> 'Χρόνος που απομένει:  %1 (λειτουργία για προγραμματιστές)',
 	'ApVersion'					=> 'έκδοση',
 
 	'SiteOpen'					=> 'Άνοιγμα',
@@ -502,7 +506,7 @@ $ap_translation = [
 	'RewriteMode'					=> 'Χρησιμοποιήστε <code>mod_rewrite</code>:',
 	'RewriteModeInfo'				=> 'Εάν ο διακομιστής ιστού σας υποστηρίζει αυτή τη λειτουργία, ενεργοποιήστε την για να "ομορφύνετε" τις διευθύνσεις URL της σελίδας.<br>
 										<span class="cite">Το
- τιμή ενδέχεται να αντικατασταθεί από την κλάση Settings κατά την εκτέλεση,
+ τιμή ενδέχεται να αντικατασταθεί από την κλάση Settings κατά την εκτέλεση, 
 ανεξάρτητα από το αν είναι απενεργοποιημένη, εάν η HTTP_MOD_REWRITE είναι ενεργοποιημένη.',
 
 	// Permissions settings
@@ -922,8 +926,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Δημιουργία μικρογραφίας:',
 	'CreateThumbnailInfo'		=> 'Δημιουργία μιας μικρογραφίας σε όλες τις δυνατές θέσεις.',
-	'JpegQuality'				=> 'Ποιότητα JPEG:',
-	'JpegQualityInfo'			=> 'Ποιότητα κατά την κλιμάκωση μιας μικρογραφίας JPEG. Θα πρέπει να κυμαίνεται μεταξύ 1 και 100, με το 100 να υποδηλώνει ποιότητα 100%.',
+	'ImageQuality'				=> 'Προεπιλογή Ποιότητας Εικόνας:',
+	'ImageQualityInfo'			=> 'Ποιότητα κατά την κλιμάκωση μιας μικρογραφίας. Προεπιλογές που επιλέγουν τιμές ανά κωδικοποιητή που παράγουν ένα συγκρίσιμο αντιληπτικό αποτέλεσμα.',
 	'MaxImageArea'				=> 'Maximum Image Area:',
 	'MaxImageAreaInfo'			=> 'Ο μέγιστος αριθμός εικονοστοιχείων που μπορεί να έχει μια αρχική εικόνα. Αυτό παρέχει ένα όριο στη χρήση μνήμης για την πλευρά της αποσυμπίεσης του κλιμακωτή εικόνας. <br><code>-1</code> σημαίνει ότι δεν θα ελέγχει το μέγεθος της εικόνας πριν επιχειρήσει να την κλιμακώσει. Το <code>0</code> σημαίνει ότι θα καθορίσει την τιμή αυτόματα.',
 	'MaxThumbWidth'				=> 'Μέγιστο πλάτος μικρογραφίας σε εικονοστοιχεία:',
@@ -956,7 +960,6 @@ $ap_translation = [
 		'2'		=> 'όχι υψηλότερο από',
 		'3'		=> 'ίσο',
 	],
-	'LogNoMatch'				=> 'Δεν υπάρχουν συμβάντα που να πληρούν τα κριτήρια',
 	'LogDate'					=> 'Ημερομηνία',
 	'LogEvent'					=> 'Γεγονός',
 	'LogUsername'				=> 'Όνομα χρήστη',
@@ -969,6 +972,49 @@ $ap_translation = [
 		'6'		=> 'χαμηλότερο',
 		'7'		=> 'αποσφαλμάτωση',
 	],
+
+	'LogCollapse'        => 'σύμπτυξη',
+	'LogExpand'          => 'επέκταση',
+	'LogType'              => 'Τύπος',
+	'LogSearch'            => 'Αναζήτηση',
+	'LogSearchPlaceholder' => 'μηνύματα αναζήτησης...',
+	'LogUserId'            => 'Id Χρήστη',
+	'LogExactMatch'        => 'ακριβές ταίριασμα',
+	'LogFrom'              => 'Από',
+	'LogTo'                => 'Προς',
+	'LogSupportKey'        => 'Πλήκτρο υποστήριξης',
+	'LogContext'           => 'Πλαίσιο',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Παράγοντας χρήστη',
+	'LogReferer'           => 'Διαιτητής',
+	'LogTotal'             => 'Σύνολο',
+	'LogFilteredBy'        => 'Φιλτραρισμένο από',
+	'LogClearFilter'       => 'Καθαρισμός φίλτρου',
+	'LogActions'           => 'Ενέργειες',
+	'LogDelete'            => 'Διαγραφή',
+	'LogDeleteConfirm'     => 'Διαγραφή αυτής της καταχώρησης?',
+	'LogDeleteSelected'    => 'Διαγραφή επιλεγμένων',
+	'LogBulkAction'        => '— μαζική δράση —',
+	'LogApply'             => 'Εφαρμογή',
+	'LogExportCSV'         => 'Εξαγωγή CSV',
+	'LogExportJSON'        => 'Εξαγωγή JSON',
+	'LogPurged'            => 'Ο πίνακας καταγραφής περιορίστηκε.',
+	'LogPurgedFiltered'     => 'Οι καταχωρήσεις %1 διαγράφηκαν από το φίλτρο.',
+	'LogDeleted'           => 'Η καταχώρηση διαγράφηκε.',
+	'LogDeletedBulk'        => 'Οι καταχωρήσεις %1 διαγράφηκαν.',
+	'LogPurgeSection'      => 'Καταστροφικές δραστηριότητες',
+	'LogPurgeWarning'      => 'Υπάρχουν καταχωρήσεις %1 που ταιριάζουν με την τρέχουσα προβολή. Χρησιμοποιήστε το με προσοχή.',
+	'LogPurgeConfirm'      => 'Καταλαβαίνω ότι αυτό θα διαγράψει μόνιμα καταχωρήσεις καταγραφής',
+	'LogPurgeFiltered'     => 'Εκκαθάριση φίλτρου αντιστοίχισης',
+	'LogPurgeFilteredConfirm' => 'Διαγραφή όλων των καταχωρήσεων που ταιριάζουν με το τρέχον φίλτρο? Αυτό δεν μπορεί να αναιρεθεί.',
+	'LogPurgeAll'          => 'Εκκαθάριση αρχείου καταγραφής',
+	'LogPurgeAllConfirm'   => 'Διαγραφή όλων των καταχωρήσεων καταγραφής στη βάση δεδομένων? Αυτό δεν μπορεί να αναιρεθεί.',
+	'LogFindRelated'       => 'Εύρεση σχετικών καταχωρήσεων',
+	'LogNoMatch'           => 'Καμία εγγραφή καταγραφής δεν ταιριάζει με το τρέχον φίλτρο.',
+
+	'LogMarkAll'                => 'Σήμανση όλων των γραμμών σε αυτή τη σελίδα',
+	'LogMarkNone'               => 'Αποεπιλογή όλων των γραμμών',
+	'LogSelectRow'              => 'Επιλογή γραμμής',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Εδώ μπορείτε να στείλετε ένα μήνυμα είτε σε όλα τα μέλη σας είτε σε όλα τα μέλη μιας συγκεκριμένης ομάδας <strong>που έχουν την επιλογή να λαμβάνουν μαζικά μηνύματα ηλεκτρονικού ταχυδρομείου ενεργοποιημένη</strong>. Για να επιτευχθεί αυτό, ένα μήνυμα ηλεκτρονικού ταχυδρομείου θα αποσταλεί στη διεύθυνση ηλεκτρονικού ταχυδρομείου του διαχειριστή που παρέσχατε, με την οποία ένα τυφλό πιστό αντίγραφο θα αποσταλεί σε όλους τους παραλήπτες. Η προεπιλεγμένη ρύθμιση είναι να συμπεριλάβει μόνο 20 παραλήπτες σε ένα τέτοιο ηλεκτρονικό ταχυδρομείο, για περισσότερους παραλήπτες θα σταλούν περισσότερα μηνύματα ηλεκτρονικού ταχυδρομείου. Εάν στέλνετε ηλεκτρονικό ταχυδρομείο σε μια μεγάλη ομάδα ατόμων, παρακαλώ να είστε υπομονετικοί μετά την υποβολή και μη διακόψετε τη σελίδα κατά τη διάρκεια της αποστολής. Είναι φυσιολογικό για μια μαζική αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου να πάρει πολύ χρόνο, θα ενημερωθείτε όταν το σενάριο έχει ολοκληρωθεί.',
@@ -1277,6 +1323,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Κεφαλίδες',
 	'BbEntity'					=> 'Οντότητα',
 
+	'BbSearchPlaceholder'        => 'Αναζήτηση UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Οποιαδήποτε κατηγορία',
+	'BbFilterAnyMethod'          => 'Οποιαδήποτε μέθοδος',
+	'BbFilterAnyStatus'          => 'Οποιαδήποτε κατάσταση',
+	'BbFilterBlockedOnly'        => 'Μπλοκαρισμένα μόνο',
+	'BbFilterPermittedOnly'      => 'Επιτρέπεται μόνο',
+	'BbFilterApply'              => 'Εφαρμογή',
+	'BbFilterClear'              => 'Εκκαθάριση φίλτρων',
+	'BbChipSearch'               => 'Αναζήτηση',
+	'BbChipCategory'             => 'Κατηγορία',
+	'BbChipMethod'               => 'Μέθοδος',
+	'BbChipStatus'               => 'Κατάσταση',
+	'BbChipRemove'               => 'Αφαίρεση αυτού του φίλτρου',
+	'BbFilterByCategory'         => 'Φιλτράρισμα ανά κατηγορία',
+	'BbSearchBySupportKey'       => 'Αναζήτηση για αυτό το κλειδί υποστήριξης',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Οποιαδήποτε κατάσταση ελέγχου',
+	'BbFilterCheckedOnly'      => 'Μόνο επιλεγμένα',
+	'BbFilterUncheckedOnly'    => 'Αποεπιλεγμένο μόνο',
+	'BbChipCheck'              => 'Έλεγχος κατάστασης',
+	'BbChecked'                => 'επιλεγμένο',
+	'BbUnchecked'              => 'αποεπιλεγμένο',
+	'BbActionCheck'            => 'έλεγχος',
+	'BbActionUncheck'          => 'αποεπιλογή',
+	'BbRowChecked'             => 'Καταγραφή καταχώρησης επισημαίνεται ως τσεκαρισμένο',
+	'BbRowUnchecked'           => 'Καταγραφή εισόδου αποεπιλεγμένο',
+	'BbRowCheckedHint'         => 'Η εγγραφή αυτή ελέγχεται — εξαιρείται από την αυτόματη εκκαθάριση',
+	'BbRowUncheckedHint'       => 'Σημειώστε αυτή την εγγραφή για να την κρατήσετε πέρα από τον αυτόματο καθαρισμό',
+	'BbBulkCheckSelected'      => 'Σημείωση επιλεγμένο',
+	'BbBulkUncheckSelected'    => 'Αποεπιλογή επιλεγμένου',
+	'BbBulkChecked'            => 'Σήμανση καταχωρήσεων %1 ως επιλεγμένες',
+	'BbBulkUnchecked'          => 'Μη σημειωμένες καταχωρήσεις %1',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Οι επιλογές αποθηκεύτηκαν.',
 	'BbWhitelistHint'			=> 'Ακατάλληλη λευκή λίστα ΘΑ σας εκθέσει σε spam, ή να προκαλέσει Κακή συμπεριφορά για να σταματήσει εντελώς τη λειτουργία! ΜΗΝ ΛΕΥΚΕΙΤΑΙ εκτός και αν είστε 100% CERTAIN που θα έπρεπε.',
@@ -1310,5 +1390,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Ενεργοποίηση Αντίστροφου Διακομιστή Μεσολάβησης',
 	'BbReverseProxyHeader'		=> 'Κεφαλίδα που περιέχει τη διεύθυνση IP των πελατών Διαδικτύου',
 	'BbReverseProxyAddresses'	=> 'Εύρος διευθύνσεων IP ή μορφής CIDR για τους διακομιστές μεσολάβησης σας (ένα ανά γραμμή)',
+
+	'BbBehavioral'           => 'Συμπεριφορική Ανάλυση',
+	'BbEnableBehavioral'     => 'Ενεργοποίηση ανάλυσης συμπεριφοράς (ανωμαλίες ρυθμού, περιστρεφόμενες UA/IP)',
+	'BbEnableBehavioralInfo' => 'Τα μοτίβα ίχνους ζητούν ανά συνεδρία. Ασφαλή για να διατηρούνται ενεργοποιημένα.',
+	'BbEnableFingerprinting' => 'Ενεργοποίηση TLS/HTTP/2 δακτυλικών αποτυπωμάτων (JA3, H2, σειρά κεφαλίδας)',
+	'BbEnableFingerprintingInfo' => 'Μπλοκάρει γνωστά κακά αποτυπώματα μόνο. Απαιτεί enable_fingerprinting=true. Μπορεί να προκαλέσει ψευδή θετικά σε παλιά προγράμματα περιήγησης/proxies.',
+	'BbInspectJson'          => 'Επιθεώρηση των φορέων αιτήσεων JSON για επιθέσεις',
+	'BbInspectJsonInfo'      => 'ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Διακοπές AJAX / JSON APIs (wiki markup, κώδικα αποσπάσματα ενεργοποιούν ψευδείς θετικότητες).',
+	'BbInspectMultipart'     => 'Επιθεώρηση φορέων δεδομένων πολλαπλών μερών/εντύπων για επιθέσεις',
+	'BbInspectMultipartInfo' => 'ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Διακοπή μεταφόρτωσης αρχείων. Κρατήστε απενεργοποιημένο.',
+
+	'BbEnableClientHints'      => 'Ενεργοποίηση Επικύρωσης Συμβουλών Πελάτη',
+	'BbEnableClientHintsInfo'  => 'Επικύρωση κεφαλίδων Sec-CH-UA κατά παράγοντα χρήστη, για ανίχνευση spoofed browsers (Chrome 89+).',
+	'BbEnableAgentic'          => 'Ενεργοποίηση Ανίχνευσης Συμπεριφοράς Agentic',
+	'BbEnableAgenticInfo'      => 'Ανίχνευση προτύπων πράκτορα τεχνητής νοημοσύνης: think-then-fetch, μη γραμμική πλοήγηση, στόχευση ακρίβειας.',
+	'BbStrictSearchEngines'    => 'Αυστηρές μηχανές αναζήτησης',
+	'BbStrictSearchEnginesInfo' => 'Εφαρμόστε αυστηρότερους ελέγχους σε μη επαληθευμένα bots μηχανών αναζήτησης (Googlebot, Bingbot, …) πριν τα επιτρέψετε.',
+	'BbEnableDynamicIp'        => 'Ενεργοποίηση Ανάκτησης Δυναμικού Εύρους Ip',
+	'BbEnableDynamicIpInfo'    => 'Fetch επίσημη IP κυμαίνεται από Google, Bing, OpenAI, Anthropic, Apple, κλπ. (cached 24h, stale fallback 7 ημέρες).',
+
+	'BbAiCrawlers'           => 'Έλεγχος Ερπυστριοφόρου AI',
+	'BbBlockUnverifiedAi'    => 'Αποκλεισμός μη επαληθευμένων ανιχνευτών AI',
+	'BbBlockUnverifiedAiInfo' => 'Μπλοκάρει AI ερπυστριοφόροι που αποτυγχάνουν DNS/IP επαλήθευση (spoofed bots).',
+	'BbStrictAi'             => 'Αυστηρή λειτουργία τεχνητής νοημοσύνης (μπλοκ ακόμη και επαληθευμένο μη επιτρεπόμενο AI)',
+	'BbStrictAiInfo'         => 'Αποκλεισμός ΟΛΩΝ των ερπυστριών AI δεν στην επιτρεπόμενη λίστα, ακόμη και αν επαληθευτεί.',
+	'BbAllowedAiCrawlers'    => 'Επιτρεπόμενες μάρκες AI crawler (ένα ανά γραμμή)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Ενεργοποίηση ελέγχων DNSBL',
+	'BbDnsblLists'           => 'Λίστες DNSBL (μία ανά γραμμή)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Περιορισμός Αξιολόγησης',
+	'BbRateLimitEnabled'     => 'Ενεργοποίηση περιορισμού τιμής',
+	'BbRateGlobalRequests'   => 'Καθολικές αιτήσεις ανά παράθυρο',
+	'BbRateGlobalWindow'     => 'Καθολικό παράθυρο (δευτερόλεπτα)',
+	'BbRatePerMinuteRequests'=> 'Αιτήματα σε λεπτό',
+	'BbRatePerMinuteWindow'  => 'Παράθυρο Per-minute (δευτερόλεπτα)',
+	'BbRatePostRequests'     => 'Αιτήσεις POST ανά παράθυρο',
+	'BbRatePostWindow'       => 'Παράθυρο POST (δευτερόλεπτα)',
+	'BbRateLoginRequests'    => 'Αιτήσεις σύνδεσης ανά παράθυρο',
+	'BbRateLoginWindow'      => 'Παράθυρο σύνδεσης (δευτερόλεπτα)',
+
+	'BbChallenge'            => 'Σύστημα Πρόκλησης',
+	'BbChallengeEnabled'     => 'Ενεργοποίηση προκλήσεων',
+	'BbChallengeProvider'    => 'Πάροχος πρόκλησης',
+	'BbChallengeSiteKey'     => 'Κλειδί ιστοσελίδας',
+	'BbChallengeSecretKey'   => 'Μυστικό κλειδί',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min score',
+
+	'BbPerformance'          => 'Επιδόσεις',
+	'BbSkipExtensions'       => 'Παράλειψη επεκτάσεων (μία ανά γραμμή)',
+	'BbSkipPaths'            => 'Παράλειψη προθεμάτων διαδρομής (ένα ανά γραμμή)',
+
+	'BbGeoip'                => 'GeoIP / ASN Φραγή',
+	'BbGeoipEnabled'         => 'Ενεργοποίηση GeoIP αναζητήσεις',
+	'BbGeoipDbPath'          => 'Διαδρομή DB MaxMind',
+	'BbBlockedCountries'     => 'Αποκλεισμένες χώρες (κωδικοί ISO, ένας ανά γραμμή)',
+	'BbBlockedAsns'          => 'Αποκλεισμένα ASN (ένα ανά γραμμή)',
+
+	'BbBlockPage'                  => 'Αποκλεισμός Σελίδας',
+	'BbShowDetailedBlockPage'      => 'Εμφάνιση αναλυτικής σελίδας μπλοκ',
+	'BbShowDetailedBlockPageInfo'  => 'Δείξτε το λόγο, ζητήστε URI, και το κλειδί τεχνικής υποστήριξης στη σελίδα μπλοκ. Συνιστάται για παραγωγή.',
+	'BbShowContactInfo'            => 'Εμφάνιση πληροφοριών επαφής στη σελίδα μπλοκ',
+	'BbShowContactInfoInfo'        => 'Εμφάνιση e-mail διαχειριστή στη σελίδα μπλοκ (ενεργοποιείται μόνο όταν είναι ενεργοποιημένη η σελίδα λεπτομερειών μπλοκ).',
+	'BbSettingsSaveFailed'         => 'Αποτυχία αποθήκευσης λανθασμένων ρυθμίσεων συμπεριφοράς',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Βασικές ρυθμίσεις',
+	'BbAdvancedSection'   => 'Ρυθμίσεις για προχωρημένους',
+	'BbAdvancedHint'      => 'Οι περισσότεροι φορείς εκμετάλλευσης δεν πρέπει να τις αλλάξουν.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Ποια bots να αναγνωρίσει. "ελάχιστη" (προεπιλογή) είναι γρηγορότερα; "πλήρη" είναι πιο διεξοδική.',
+	'BbStrictness'        => 'Κλείδωμα της στάσης',
+	'BbStrictnessInfo'    => 'αρχεία καταγραφής μόνο παρακολούθησης, αλλά δεν αποκλείει τίποτα· φυσιολογικοί φραγμοί επαληθευμένοι επιτιθέμενοι; αυστηροί φραγμοί επιθετικά.',
+	'BbLoggingMode'       => 'Καταγραφή',
+	'BbLoggingModeInfo'   => 'Κανονική (συνιστάται), Verbose (καταγράφει κάθε αίτηση), Off',
+	'BbLogModeNormal'     => 'Κανονικό',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Ανενεργό',
+	'BbBehindProxy'       => 'Η ιστοσελίδα βρίσκεται πίσω από έναν αντίστροφο διακομιστή μεσολάβησης ή CDN',
+	'BbBehindProxyInfo'   => 'Ενεργοποιήστε αν πίσω από το Cloudflare, AWS, GCP, Fastly, κλπ. Πρέπει να προσθέσετε εύρος IP διακομιστή μεσολάβησης στα Advanced — χωρίς αυτά, δεν μπορούν να καθοριστούν πραγματικές IPs πελάτη.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Πυρήνας',
+	'BbAdvReverseProxy'   => 'Αντίστροφος Διακομιστής Μεσολάβησης',
+	'BbAdvAiCrawlers'     => 'AI Ερπυστριοφόρα',
+	'BbAdvBotCategories'  => 'Κατηγορίες Bot',
+	'BbAdvDnsVerification'=> 'Επαλήθευση DNS',
+	'BbAdvRateLimits'     => 'Περιορισμός Αξιολόγησης',
+	'BbAdvHeadDetection'  => 'Ανίχνευση Αιτήματος Κεφαλής',
+	'BbAdvAssetScraping'  => 'Ανίχνευση Περιουσιακών Στοιχείων',
+	'BbAdvDynamicIp'      => 'Δυναμικό Εύρος IP',
+	'BbAdvOnDemandRefresh'=> 'Ανανέωση IP Κατόπιν Αιτήματος',
+	'BbAdvHttpbl'         => 'Έργο Honeypot http: BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Πρόκληση / CAPTCHA',
+	'BbAdvPerformance'    => 'Επιδόσεις',
+	'BbAdvGeoip'          => 'GeoIP / ASN Φραγή',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Δακτυλικά αποτυπώματα',
+	'BbAdvCustomRules'    => 'Προσαρμοσμένοι Κανόνες',
+	'BbAdvBlockPage'      => 'Αποκλεισμός Σελίδας',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Μηχανή Αναζήτησης',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Ανιχνευτής Κοινωνικής Δικτύωσης',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Αρχείο Crawler',
+	'BbCatMonitoring'     => 'Παρακολούθηση',
+	'BbCatFeedReader'     => 'Αναγνώστης Ροών',
+	'BbCatShoppingCrawler'=> 'Ψώνια Ερπυστριοφόρο',
+	'BbCatCloudInfra'     => 'Υποδομή Cloud',
+	'BbCatSecurityScanner'=> 'Σαρωτής Ασφαλείας',
+	'BbCatResidentialProxy'=> 'Οικιακός Διακομιστής Μεσολάβησης',
+	'BbCatMalicious'      => 'Κακόβουλο',
+	'BbCatUnknown'        => 'Άγνωστο',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Γρήγορα',
+	'BbCloudProviderGcp'        => 'Σύννεφο Google',
+	'BbCloudProvidersInfo'      => 'Περιορίζει την ανανέωση κατά παραγγελία σε συγκεκριμένους παρόχους. Κενό = και τα τέσσερα.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Καταγραφή Συντήρησης',
+	'BbLogRetentionEnabled'          => 'Ενεργοποίηση αυτόματης εκκαθάρισης καταγραφής',
+	'BbLogRetentionEnabledInfo'      => 'Διαγράψτε περιοδικά γραμμές καταγραφής παλαιότερες από το παράθυρο διατήρησης. Συνιστάται για ιστότοπους χωρίς πρόσβαση cron.',
+	'BbLogRetentionMaxAgeDays'       => 'Παράθυρο διατήρησης (ημέρες)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Οι σειρές παλαιότερες από αυτό διαγράφονται. Προεπιλογή: 7. Κοινές τιμές: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Μέγιστος αριθμός γραμμών (0 = όχι κάλυμμα)',
+	'BbLogRetentionMaxRowsInfo'      => 'Εάν οριστεί, οι παλαιότερες σειρές διαγράφονται κάθε φορά που ο πίνακας υπερβαίνει αυτό το μέγεθος, ανεξάρτητα από την ηλικία. Χρήσιμο για τοποθεσίες υψηλής κυκλοφορίας.',
+	'BbLogRetentionProbability'       => 'Πιθανότητα παρονομαστή (1 σε Ν)',
+	'BbLogRetentionProbabilityInfo'   => '1 στα αιτήματα Ν ελέγχει την πύλη παραμονής. Υψηλότερη = λιγότερη φόρτιση DB. Προεπιλογή: 1000.',
+	'BbLogRetentionMinInterval'      => 'Ελάχιστο διάστημα μεταξύ καθαρισμών (δευτερόλεπτα)',
+	'BbLogRetentionMinIntervalInfo'  => 'Σκληρό πάτωμα στη συχνότητα καθαρισμού. Προεπιλογή: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Κλείδωμα καθαρισμού TTL (δευτερόλεπτα)',
+	'BbLogRetentionLockTtlInfo'      => 'Πόσο καιρό κρατείται η mutex καθαρισμού. Προεπιλογή: 600 (10 λεπτά).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Ενεργοποίηση επαλήθευσης DNS',
+	'BbDnsVerificationInfo'     => 'Επαλήθευση απαιτήσεων bot (π.χ. Googlebot) με αναζήτηση αντίστροφη-DNS. Πιάσει spoofed bots.',
+	'BbDnsTimeoutMs'            => 'Χρονικό όριο αναζήτησης DNS (ms)',
+	'BbDnsPositiveTtl'          => 'Θετική κρύπτη TTL (δευτερόλεπτα)',
+	'BbDnsNegativeTtl'          => 'Αρνητική κρύπτη TTL (δευτερόλεπτα)',
+	'BbDnsRequireForward'       => 'Απαιτείται επιβεβαίωση προς τα εμπρός (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Αλιεύματα PTR spoofing αλλά προσθέτει καθυστέρηση και IPv6 FP ρίσκο.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD εξαιρούμενες διαδρομές (μία ανά γραμμή)',
+	'BbHeadRefererExemptInfo'   => 'Διαδρομές όπου το HEAD χωρίς τον διαιτητή είναι νόμιμο (π.χ. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Επεκτάσεις περιουσιακών στοιχείων για την προστασία (μία ανά γραμμή)',
+	'BbAssetExtensionsInfo'     => 'Τύποι αρχείων που παρακολουθήθηκαν για άμεση απόξεση χωρίς φόρτωση σελίδας.',
+
+	'BbOnDemandBotIds'          => 'Αναγνωριστικά bot για ανανέωση (κενό = όλα)',
+	'BbOnDemandBotIdsInfo'      => 'Περιορισμός ανανέωσης σε συγκεκριμένα bots. Αφήστε κενό για να ανανεώσετε όλα τα εγγεγραμμένα bots.',
+	'BbOnDemandProbability'     => 'Πιθανότητα παρονομαστή (1 σε Ν)',
+	'BbOnDemandMinAge'          => 'Ελάχιστη ηλικία προσωρινής αποθήκευσης (δευτερόλεπτα)',
+	'BbOnDemandLockTtl'         => 'Κλείδωμα TTL (δευτερόλεπτα)',
+	'BbOnDemandCacheTtl'        => 'Προσωρινή Αποθήκευση TTL (δευτερόλεπτα)',
+	'BbOnDemandFeedTimeout'     => 'Χρονικό όριο ανάκτησης ροής (δευτερόλεπτα)',
+
+	'BbDynamicIpTtl'            => 'Προσωρινή Αποθήκευση TTL (δευτερόλεπτα)',
+	'BbDynamicIpFeeds'          => 'Τροφοδοσίες για ανανέωση (μία ανά γραμμή)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Τελευταία προβολή',
+	'BbSeverity'             => 'Σοβαρότητα',
+	'BbStatusBreakdown'      => 'Κατανομή της κατάστασης',
+	'BbBotBreakdown'         => 'Ανάλυση του bot',
+	'BbTopBlocked'           => 'Κορυφαία απορρίφθηκε IPs',
+	'BbGeoSummary'           => 'Γεωγραφική σύνοψη',
+	'BbCountry'              => 'Χώρα',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Επαληθευμένο %',
+	'BbNoData'               => 'Δεν υπάρχουν δεδομένα για το επιλεγμένο παράθυρο',
+	'BbCategory'             => 'Κατηγορία',
+	'BbResponseTime'         => 'Χρόνος απόκρισης',
+	'BbDateCol'              => 'Ώρα / Ip / Κατάσταση',
+	'BbSelectRow'            => 'Επιλογή γραμμής',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Μόνο αργά',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Επιλυμένο',
+	'BbChipStatusCode' => 'Κωδικός κατάστασης',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Χώρα',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Προβολή κεφαλίδων',
+	'BbViewBody'             => 'Προβολή σώματος',
+	'BbViewContentLabel'     => 'Περιεχόμενο',
+	'BbViewModeFull'         => 'Πλήρης (εμφανίζεται πάντα)',
+	'BbViewModeTeaser'       => 'Teaser (κλικ για επέκταση)',
+	'BbViewModeHidden'       => 'Κρυφό (εμφάνιση κατά παραγγελία)',
+	'BbHide'                 => 'απόκρυψη',
+	'BbChars'                => 'χαρακτήρες',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Προσαρμοσμένοι Κανόνες',
+	'BbCustomRulesLabel'           => 'Προσαρμοσμένοι κανόνες (ένα αντικείμενο JSON ανά γραμμή)',
+	'BbCustomRulesInfo'            => 'Κάθε γραμμή είναι αντικείμενο JSON με κλειδιά: τύπος (ip"ua_regex"ua_contains"asn"country"header), τιμή, δράση (allow"block"challenge"log), και id. Παράδειγμα: {"τύπο":"ua_regex","τιμή":"/Googlebot/i","ενέργεια":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Σάρωση σώματος παράκαμψη πεδίων',
+	'BbBodyScanSkipFieldsInfo'     => 'Ένα όνομα πεδίου ανά γραμμή. Τα πεδία που εμφανίζονται παραλείπονται κατά την επιθεώρηση σώματος SQL/XSS.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Προηγμένα φίλτρα',
+	'BbDateFrom'            => 'Από',
+	'BbDateTo'              => 'Προς',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Μόνο αργά αιτήματα (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Ενεργός μόνο',
+	'BbResolvedOnly'        => 'Επιλυμένο μόνο',
+	'BbResolvedAll'         => 'Ενεργό + επιλύθηκε',
+	'BbResolved'            => 'επιλύθηκε',
+	'BbActionResolve'       => 'επίλυση',
+	'BbActionUnresolve'     => 'ανεπίλυτη',
+	'BbRowResolved'         => 'Η καταχώρηση αρχείου επιλύθηκε',
+	'BbRowUnresolved'       => 'Η καταχώρηση αρχείου σημειώθηκε ανεπίλυτη',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Διαγραφή επιλεγμένων',
+	'BbBulkWhitelistSelected'   => 'IPs Λευκής Λίστας',
+	'BbBulkResolveSelected'     => 'Σημείωση επιλύθηκε',
+	'BbBulkUnresolveSelected'   => 'Σημείωση ανεπίλυτων',
+	'BbBulkHint'                => 'Σημειώστε γραμμές πρώτα, και στη συνέχεια κάντε κλικ σε μια ενέργεια.',
+	'BbNoItemsSelected'         => 'Δεν επιλέχθηκαν στοιχεία',
+	'BbBulkDeleted'             => 'Διαγράφηκαν καταχωρήσεις καταγραφής %1',
+	'BbBulkWhitelisted'         => 'Προστέθηκαν %1 IP στη λευκή λίστα',
+	'BbBulkResolved'            => 'Σήμανση καταχωρήσεων %1 ως επιλυμένες',
+	'BbBulkUnresolved'          => 'Σήμανση καταχωρήσεων %1 ως ανεπίλυτες',
+	'BbMarkAll'                 => 'Σήμανση όλων των γραμμών σε αυτή τη σελίδα',
+	'BbMarkNone'                => 'Αποεπιλογή όλων των γραμμών',
+
+	'BbBulkFailed'              => 'Δεν ήταν δυνατή η ενημέρωση των επιλεγμένων γραμμών. Ελέγξτε τη βάση δεδομένων ή προσπαθήστε ξανά.',
+	'BbBulkWhitelistedNone'     => 'Δεν προστέθηκαν νέα IP - όλες οι επιλεγμένες IP ήταν ήδη στη λίστα επιτρεπόμενων.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'επαληθευμένο',
+	'BbUnverified'           => 'μη επαληθευμένο',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Επιτρέπεται η αίτηση',
+	'BbStatus_blocked.bot'                => 'Το γνωστό bot αποκλείστηκε',
+	'BbStatus_blocked.ai_crawler'         => 'Ο ανιχνευτής τεχνητής νοημοσύνης αποκλείστηκε',
+	'BbStatus_blocked.seo_crawler'        => 'SEO ερπυστριοφόρος φραγμένος',
+	'BbStatus_blocked.malicious_ua'       => 'Κακόβουλος Χρήστης-Πράκτορας',
+	'BbStatus_blocked.attack_pattern'     => 'Εντοπίστηκε ωφέλιμο φορτίο επίθεσης',
+	'BbStatus_blocked.dnsbl'              => 'Αντιστοίχιση DNSBL',
+	'BbStatus_blocked.httpbl'             => 'http:BL αντιστοίχιση',
+	'BbStatus_blocked.behavioral'         => 'Συμπεριφορά ανωμαλία',
+	'BbStatus_blocked.fingerprint'        => 'Εσφαλμένο δακτυλικό αποτύπωμα',
+	'BbStatus_blocked.rate_limit'         => 'Υπέρβαση ορίου τιμής',
+	'BbStatus_blocked.custom_rule'        => 'Προσαρμοσμένη αντιστοίχιση κανόνα',
+	'BbStatus_blocked.geoip'              => 'Γεωγραφικό μπλοκ',
+	'BbStatus_blocked.residential_proxy'  => 'Αποκλείστηκε ο εσωτερικός διαμεσολαβητής',
+	'BbStatus_challenge.required'         => 'Απαιτείται πρόκληση',
+	'BbStatus_challenge.failed'           => 'Η πρόκληση απέτυχε',
+	'BbStatus_error.internal'             => 'Εσωτερικό σφάλμα',
+	'BbStatus_error.configuration'        => 'Σφάλμα διαμόρφωσης',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Τελευταίες 24 ώρες',
+	'BbWindow7d'  => 'Τελευταίες 7 ημέρες',
+	'BbWindow30d' => 'Τελευταίες 30 ημέρες',
+	'BbWindowAll' => 'Όλη την ώρα',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Ελάχιστο (προεπιλογή)',
+	'BbPresetFull'           => 'Πλήρης',
+	'BbPresetVerifiedOnly'   => 'Μόνο επαληθευμένα',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Μόνο ΕΕ',
+	'BbPresetHumanOnly'      => 'Μόνον',
+	'BbPresetCustom'         => 'Προσαρμοσμένο',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Μόνο Οθόνη',
+	'BbStrictnessNormal'      => 'Κανονικό',
+	'BbStrictnessStrict'      => 'Αυστηρό',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Turnstile Cloudflare',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Ενεργοποίηση ανίχνευσης αιτήματος κεφαλής',
+	'BbHeadRequireReferer'       => 'Απαιτείται διαιτητής στο HEAD',
+	'BbHeadFloodThreshold'       => 'Όριο πλημμύρας (ανά συνεδρία)',
+	'BbHeadProbeThreshold'       => 'Όριο δοκιμής (ανά IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Ενεργοποίηση ανίχνευσης απόξεσης στοιχείων',
+	'BbAssetNoRefererThreshold'    => 'Όριο No-referer (ανά IP / ώρα)',
+	'BbAssetOnlySessionThreshold'  => 'Όριο συνεδρίας μόνο για στοιχεία ενεργητικού',
+	'BbAssetPatternThreshold'      => 'Sequential μοτίβο όριο (ανά IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Ενεργοποίηση δυναμικών εύρους IP',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Ενεργοποίηση ανανέωσης κατά παραγγελία',
+	'BbOnDemandRefreshInfo'      => 'Ανανέωση προσωρινής μνήμης εύρους IP κατά τη διάρκεια αιτήσεων. Χρησιμοποιήστε το όταν δεν έχετε πρόσβαση cron.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Κακό JA3',
+	'BbFpBadH2'           => 'Κακό H2',
+	'BbFpBotHeaderOrders' => 'Παραγγελίες Κεφαλίδας Bot',
+	'BbFpExpectedJa3'     => 'Αναμενόμενο JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Αποκλεισμένος',
+	'BbListChallenge' => 'Πρόκληση (CAPTCHA)',
+	'BbListLogOnly'   => 'Μόνο καταγραφή (χωρίς εκτέλεση)',
+	'BbListAllowed'   => 'Επιτρέπονται ανεπιφύλακτα',
+	'BbListHint'      => 'Οι κατηγορίες σε αυτή τη λίστα παίρνουν την ενέργεια ανεξάρτητα από την προεπιλεγμένη κατηγορία.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Μηχανή Αναζήτησης',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Ανιχνευτής Κοινωνικής Δικτύωσης',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Αρχείο Crawler',
+	'BbCatMonitoring'      => 'Παρακολούθηση',
+	'BbCatFeedReader'      => 'Αναγνώστης Ροών',
+	'BbCatShoppingCrawler' => 'Ψώνια Ερπυστριοφόρο',
+	'BbCatCloudInfra'      => 'Υποδομή Cloud',
+	'BbCatSecurityScanner' => 'Σαρωτής Ασφαλείας',
+	'BbCatResidentialProxy'=> 'Οικιακός Διακομιστής Μεσολάβησης',
+	'BbCatMalicious'       => 'Κακόβουλο',
+	'BbCatUnknown'         => 'Άγνωστο',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Πρότυπα επίθεσης',
+	'BbSevChallenges'     => 'Εκδοθείσες προκλήσεις',
+	'BbSevPermitted'      => 'Επιτρέπεται',
+	'BbSevErrors'         => 'Σφάλματα',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Κατηγορίες',
+
+	'BbResultBreakdown'    => 'Κατανομή αποτελεσμάτων',
+	'BbBreakdownBlocked'   => 'Αποκλεισμένος',
+	'BbBreakdownMonitored' => 'Ελέγχτηκε',
+	'BbBreakdownAllowed'   => 'Επιτρέπεται',
+	'BbViewAllInLog'       => 'Προβολή όλων στο αρχείο καταγραφής',
+	'BbAllowedHintVerbose' => 'Η επιτρεπόμενη κίνηση καταγράφεται μόνο όταν είναι ενεργοποιημένη η λεπτομερής καταγραφή. Εναλλαγή καταγραφής_mode=λεπτομερής στις Ρυθμίσεις για να δείτε τι περνάει.',
 
 ];

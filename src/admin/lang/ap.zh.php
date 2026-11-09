@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> '未指定管理密码！',
 	'NoRecoveryPasswordTip'		=> '注意：缺少管理密码会对安全造成威胁！在配置文件中输入密码，然后再次运行该程序。',
 
+	'ApDevNologinBlocked'		=> '访问被阻止：admin.php启用了AP_DEV_NOLOGIN，但请求不是来自本地主机 (127.0.0.1::1，或本地主机)。 这是一个仅限开发者的标志，必须在生产时禁用。在admin.php中设置 <code>AP_DEV_NOLOGIN = 0</code> 以恢复访问。',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 已启用, 但admin.php 是从非本地主机地址(%2)访问的。管理面板访问已被阻止。',
+
 	'ErrorLoadingModule'		=> '加载管理模块 %1 时出错：不存在。',
 
 	'ApHomePage'				=> '首页',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> '退出系统管理',
 
 	'TimeLeft'					=> '剩余时间：%1 分钟',
+	'TimeLeftInfinity'			=> '剩余时间:  %1 (开发者模式)',
 	'ApVersion'					=> '版本',
 
 	'SiteOpen'					=> '开放',
@@ -912,8 +916,8 @@ $ap_translation = [
 	'Thumbnails'				=> '缩略图',
 	'CreateThumbnail'			=> '创建缩略图：',
 	'CreateThumbnailInfo'		=> '在所有可能的情况下创建缩略图。',
-	'JpegQuality'				=> 'JPEG质量：',
-	'JpegQualityInfo'			=> '缩放JPEG缩略图时的质量。它应该在1到100之间，100表示100%的质量。',
+	'ImageQuality'				=> '图像质量预设：',
+	'ImageQualityInfo'			=> '缩放缩略图时的质量。预设采集每个编解码器的值，产生可比的感知结果。',
 	'MaxImageArea'				=> 'Maximum Image Area:',
 	'MaxImageAreaInfo'			=> '一个源图像可以有的最大像素数。这为图像缩放器的解压部分提供了一个内存使用限制。<br><code>-1</code>表示在尝试缩放之前，它不会检查图像的大小。<code>0</code>表示它将自动确定该值。',
 	'MaxThumbWidth'				=> '最大缩略图宽度（以像素为单位）：',
@@ -944,7 +948,6 @@ $ap_translation = [
 		'2'		=> '不高于',
 		'3'		=> '等于',
 	],
-	'LogNoMatch'				=> '没有符合条件的事件',
 	'LogDate'					=> '日期',
 	'LogEvent'					=> '事件',
 	'LogUsername'				=> '用户名',
@@ -957,6 +960,49 @@ $ap_translation = [
 		'6'		=> '最低',
 		'7'		=> '调试',
 	],
+
+	'LogCollapse'        => '折叠...',
+	'LogExpand'          => '扩展',
+	'LogType'              => '类型',
+	'LogSearch'            => '搜索',
+	'LogSearchPlaceholder' => '搜索消息...',
+	'LogUserId'            => '用户 ID',
+	'LogExactMatch'        => '完全匹配',
+	'LogFrom'              => '来自',
+	'LogTo'                => '收件人',
+	'LogSupportKey'        => '支持密钥',
+	'LogContext'           => '二. 背景',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => '用户代理',
+	'LogReferer'           => 'Referer',
+	'LogTotal'             => '总计',
+	'LogFilteredBy'        => '筛选者',
+	'LogClearFilter'       => '清除过滤器',
+	'LogActions'           => '行动',
+	'LogDelete'            => '删除',
+	'LogDeleteConfirm'     => '删除此日志条目？',
+	'LogDeleteSelected'    => '删除选中的',
+	'LogBulkAction'        => '——整批行动',
+	'LogApply'             => '应用',
+	'LogExportCSV'         => '导出CSV',
+	'LogExportJSON'        => '导出 JSON',
+	'LogPurged'            => '日志表已截断。',
+	'LogPurgedFiltered'     => '%1 日志条目被过滤器删除。',
+	'LogDeleted'           => '日志条目已删除。',
+	'LogDeletedBulk'        => '%1 日志条目已删除。',
+	'LogPurgeSection'      => '破坏性操作',
+	'LogPurgeWarning'      => '有 %1 条条目匹配当前视图。请小心使用。',
+	'LogPurgeConfirm'      => '我知道这将永久删除日志条目',
+	'LogPurgeFiltered'     => '清除匹配的过滤器',
+	'LogPurgeFilteredConfirm' => '删除匹配当前过滤器的所有条目？此操作无法撤消。',
+	'LogPurgeAll'          => '清理ENTIRE 日志',
+	'LogPurgeAllConfirm'   => '删除数据库中的 EVERY 日志条目？此操作无法撤消。',
+	'LogFindRelated'       => '查找相关条目',
+	'LogNoMatch'           => '没有匹配当前过滤器的日志条目。',
+
+	'LogMarkAll'                => '标记此页面上的所有行',
+	'LogMarkNone'               => '取消标记所有行',
+	'LogSelectRow'              => '选择行',
 
 	// Massemail module
 	'MassemailInfo'				=> '在这里，您可以通过电子邮件将消息发送给您的所有用户或特定组的所有用户，这些用户可以选择接收群发电子邮件。 为此，将向所提供的管理电子邮件地址发送一封电子邮件，并向所有收件人发送一份密件抄送。 默认设置是在此类电子邮件中仅包含 20 个收件人，如果收件人越多，则发送的电子邮件就越多。 如果您要向一大群人发送电子邮件，请在提交后耐心等待，不要中途停止页面。 群发邮件需要很长时间是正常的，脚本完成后会通知您。',
@@ -1265,6 +1311,40 @@ $ap_translation = [
 	'BbHeaders'					=> '标头',
 	'BbEntity'					=> '实体',
 
+	'BbSearchPlaceholder'        => '搜索 UA, URI, IP, 主机, support_key, 状态…',
+	'BbFilterAnyCategory'        => '任何类别',
+	'BbFilterAnyMethod'          => '任何方法',
+	'BbFilterAnyStatus'          => '任意状态',
+	'BbFilterBlockedOnly'        => '仅已阻止',
+	'BbFilterPermittedOnly'      => '仅允许',
+	'BbFilterApply'              => '应用',
+	'BbFilterClear'              => '清除过滤器',
+	'BbChipSearch'               => '搜索',
+	'BbChipCategory'             => '类别',
+	'BbChipMethod'               => '方法',
+	'BbChipStatus'               => '状态',
+	'BbChipRemove'               => '删除此过滤器',
+	'BbFilterByCategory'         => '按此类别筛选',
+	'BbSearchBySupportKey'       => '搜索此支持密钥',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => '任何检查状态',
+	'BbFilterCheckedOnly'      => '仅检查',
+	'BbFilterUncheckedOnly'    => '仅取消勾选',
+	'BbChipCheck'              => '检查状态',
+	'BbChecked'                => '已勾选',
+	'BbUnchecked'              => '未勾选',
+	'BbActionCheck'            => '检查',
+	'BbActionUncheck'          => '取消勾选',
+	'BbRowChecked'             => '日志条目标记为已勾选',
+	'BbRowUnchecked'           => '取消选中日志条目',
+	'BbRowCheckedHint'         => '已检查此记录 — 免于自动清理',
+	'BbRowUncheckedHint'       => '标记此记录以保持在自动清理时',
+	'BbBulkCheckSelected'      => '标记已勾选',
+	'BbBulkUncheckSelected'    => '取消已勾选',
+	'BbBulkChecked'            => '标记 %1 条目为已检查',
+	'BbBulkUnchecked'          => '未标记的 %1 条目',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> '选项已保存。',
 	'BbWhitelistHint'			=> '不适当的白名单将使您暴露在垃圾邮件中，或导致不良行为完全停止运作！ 除非您 100% 确定您应该列入白名单，否则请勿列入白名单。',
@@ -1298,5 +1378,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> '启用反向代理',
 	'BbReverseProxyHeader'		=> '包含 Internet 客户端 IP 地址的标头',
 	'BbReverseProxyAddresses'	=> '代理服务器的 IP 地址或 CIDR 格式地址范围（每行一个）',
+
+	'BbBehavioral'           => '行为分析',
+	'BbEnableBehavioral'     => '启用行为分析(比率异常, 旋转UA/IP)',
+	'BbEnableBehavioralInfo' => '每个会话的曲目请求模式。安全地保持开启。',
+	'BbEnableFingerprinting' => '启用 TLS/HTTP 2 指纹(JA3, H2, 页眉顺序)',
+	'BbEnableFingerprintingInfo' => '屏蔽已知的错误指纹。需要启用指纹=true。可能会在旧浏览器/代理上造成错误的正数。',
+	'BbInspectJson'          => '检查 JSON 请求机构',
+	'BbInspectJsonInfo'      => '警告：断开AJAX/JSON API(wiki markup，代码片段触发错误的位置)。保持关闭。',
+	'BbInspectMultipart'     => '检查多部分/表格数据机构以了解攻击情况',
+	'BbInspectMultipartInfo' => '警告：中断文件上传。保持关闭。',
+
+	'BbEnableClientHints'      => '启用客户端提示验证',
+	'BbEnableClientHintsInfo'  => '针对用户代理验证Sec-H-UA头以检测破损的浏览器(Chrome 89+)。',
+	'BbEnableAgentic'          => '启用 Agentic 行为检测',
+	'BbEnableAgenticInfo'      => '检测 AI 代理模式：思维-当时获取，非线性导航，精准目标。',
+	'BbStrictSearchEngines'    => '严格搜索引擎',
+	'BbStrictSearchEnginesInfo' => '在允许搜索引擎机器人(Googlebot、Bingbot、 …)进行更严格的检查。',
+	'BbEnableDynamicIp'        => '启用动态IP范围获取',
+	'BbEnableDynamicIpInfo'    => '获取官方IP范围从Google、 Bing、 OpenAI、 Anthropic、 Apple 等(缓存24h, 过期回退7天)。',
+
+	'BbAiCrawlers'           => 'AI Crawler 控制',
+	'BbBlockUnverifiedAi'    => '拦截未经验证的 AI crawlers',
+	'BbBlockUnverifiedAiInfo' => '阻止使用 AI crawlers 失败了 DNS/IP 验证 (损坏的机器人)。',
+	'BbStrictAi'             => '严格的 AI 模式 (屏蔽甚至验证不允许的 AI)',
+	'BbStrictAiInfo'         => '屏蔽所有的 AI crawlers 不在允许的列表中，即使已验证。',
+	'BbAllowedAiCrawlers'    => '允许的 AI crawler 令牌 (每行一个)',
+	'BbAllowedAiCrawlersInfo' => '令牌: GPTBot, ClaudeBot, Google-ExplexityBot, Meta-ExternalAgent, Applebot-Externed, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => '启用 DNSBL 检查',
+	'BbDnsblLists'           => 'DNSBL 列表(每行一个)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => '评分限制',
+	'BbRateLimitEnabled'     => '启用率限制',
+	'BbRateGlobalRequests'   => '每个窗口的全局请求',
+	'BbRateGlobalWindow'     => '全局窗口 (秒)',
+	'BbRatePerMinuteRequests'=> '每分钟请求',
+	'BbRatePerMinuteWindow'  => '每分钟窗口 (秒)',
+	'BbRatePostRequests'     => '每个窗口的 POST 请求',
+	'BbRatePostWindow'       => 'POST 窗口 (秒)',
+	'BbRateLoginRequests'    => '每个窗口登录请求',
+	'BbRateLoginWindow'      => '登录窗口 (秒)',
+
+	'BbChallenge'            => '挑战系统',
+	'BbChallengeEnabled'     => '启用挑战',
+	'BbChallengeProvider'    => '挑战提供商',
+	'BbChallengeSiteKey'     => '站点密钥',
+	'BbChallengeSecretKey'   => '秘密密钥',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 最小分数',
+
+	'BbPerformance'          => '业绩',
+	'BbSkipExtensions'       => '跳过扩展(每行一个)',
+	'BbSkipPaths'            => '跳过路径前缀(每行一个)',
+
+	'BbGeoip'                => 'GeoIP / ASN 屏蔽',
+	'BbGeoipEnabled'         => '启用 GeoIP 查询',
+	'BbGeoipDbPath'          => 'MaxMind DB 路径',
+	'BbBlockedCountries'     => '被阻止的国家 (ISO 代码，每行一个 )',
+	'BbBlockedAsns'          => '封禁的 ASN (每行一个)',
+
+	'BbBlockPage'                  => '屏蔽页面',
+	'BbShowDetailedBlockPage'      => '显示详细的块页面',
+	'BbShowDetailedBlockPageInfo'  => '在块页面显示理由、请求 URI 和技术支持密钥。建议生产。',
+	'BbShowContactInfo'            => '在方块页面显示联系人信息',
+	'BbShowContactInfoInfo'        => '在块页面显示管理员电子邮件 (只有当启用详细的块页面时才会生效)。',
+	'BbSettingsSaveFailed'         => '保存错误行为设置失败',
+
+	// === Basic section ===
+	'BbBasicSection'      => '基本设置',
+	'BbAdvancedSection'   => '高级设置',
+	'BbAdvancedHint'      => '大多数操作者不应需要改变这些做法。',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => '哪个机器人可以识别。"最小" (默认) 是最快的；"完整" 是最彻底的。',
+	'BbStrictness'        => '屏蔽状态',
+	'BbStrictnessInfo'    => '只显示日志，但阻止无；正常的方块已验证攻击者；严格的方块。',
+	'BbLoggingMode'       => '日志记录',
+	'BbLoggingModeInfo'   => '普通(推荐)，详细(记录每个请求)，关闭',
+	'BbLogModeNormal'     => '普通的',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => '关闭',
+	'BbBehindProxy'       => '站点后面是反转代理或 CDN',
+	'BbBehindProxyInfo'   => '如果在 Cloudflare, AWS, GCP, 快速等后面启用，您必须在高级中添加代理IP范围 — — 没有它们，无法确定实际客户IP。',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => '核心文件',
+	'BbAdvReverseProxy'   => '反向代理',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => '机器人类别',
+	'BbAdvDnsVerification'=> 'DNS 验证',
+	'BbAdvRateLimits'     => '评分限制',
+	'BbAdvHeadDetection'  => '头请求检测',
+	'BbAdvAssetScraping'  => '资产拆解检测',
+	'BbAdvDynamicIp'      => '动态IP范围',
+	'BbAdvOnDemandRefresh'=> '即时IP刷新',
+	'BbAdvHttpbl'         => 'Honeypot 项目 http:BL',
+	'BbAdvDnsbl'          => '恐龙座',
+	'BbAdvChallenge'      => '挑战 / 验证码',
+	'BbAdvPerformance'    => '业绩',
+	'BbAdvGeoip'          => 'GeoIP / ASN 屏蔽',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 指纹',
+	'BbAdvCustomRules'    => '自定义规则',
+	'BbAdvBlockPage'      => '屏蔽页面',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => '搜索引擎',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Social Crawler',
+	'BbCatSeoCrawler'     => 'SEO 投掷器',
+	'BbCatArchiveCrawler' => '归档 Crawler',
+	'BbCatMonitoring'     => '监测',
+	'BbCatFeedReader'     => '新闻源阅读器',
+	'BbCatShoppingCrawler'=> '购物者',
+	'BbCatCloudInfra'     => '云基础设施',
+	'BbCatSecurityScanner'=> '安全扫描',
+	'BbCatResidentialProxy'=> '住宅代理',
+	'BbCatMalicious'      => '恶意的',
+	'BbCatUnknown'        => '未知的',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => '云灯',
+	'BbCloudProviderFastly'     => '快速的',
+	'BbCloudProviderGcp'        => '谷歌云',
+	'BbCloudProvidersInfo'      => '限制按需刷新到指定的供应商。清空 = 全部四个。',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => '日志保留',
+	'BbLogRetentionEnabled'          => '启用自动清理日志',
+	'BbLogRetentionEnabledInfo'      => '定期删除旧于保留窗口的日志行。建议对没有cron访问权限的站点进行删除。',
+	'BbLogRetentionMaxAgeDays'       => '保留窗口 (天)',
+	'BbLogRetentionMaxAgeDaysInfo'   => '比这段时间长的行已删除。默认值：7. 常见值：7, 14, 30, 90。',
+	'BbLogRetentionMaxRows'          => '最大行数 (0= 无上限)',
+	'BbLogRetentionMaxRowsInfo'      => '如果设置，无论年龄大小，每当表格超过这个尺寸时都会删除最老的行。对于高流量站点非常有用。',
+	'BbLogRetentionProbability'       => '概率分母(1英寸)',
+	'BbLogRetentionProbabilityInfo'   => '1 in N requests checks the stality gate. Higher = less DB load. Default: 1000.',
+	'BbLogRetentionMinInterval'      => '清理之间的最小间隔(秒)',
+	'BbLogRetentionMinIntervalInfo'  => '清理频率上的硬底层。默认：21600 (6h)。',
+	'BbLogRetentionLockTtl'          => '清理锁定 TTTL (秒)',
+	'BbLogRetentionLockTtlInfo'      => '清除mutex的持续时间。默认值：600 (10分钟)。',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => '启用 DNS 验证',
+	'BbDnsVerificationInfo'     => '通过反向DNS查找来验证机器人的索赔(例如谷歌机器人) 。捕获损坏的机器人。',
+	'BbDnsTimeoutMs'            => 'DNS查找超时 (ms)',
+	'BbDnsPositiveTtl'          => '正缓存TTL(秒)',
+	'BbDnsNegativeTtl'          => '负缓存 TTL (秒)',
+	'BbDnsRequireForward'       => '需要向前确认 (PTR + 记录匹配)',
+	'BbDnsRequireForwardInfo'   => '捕获PTR脱落，但增加了延迟和 IPv6 FP风险。',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD 免除路径(每行一个)',
+	'BbHeadRefererExemptInfo'   => '无支撑HEAD 合法路径(如：/api/，/wp-json/)。',
+
+	'BbAssetExtensionsLabel'    => '资产扩展以保护(每行一个)',
+	'BbAssetExtensionsInfo'     => '在没有页面加载的情况下直接拆解文件类型。',
+
+	'BbOnDemandBotIds'          => '要刷新的 Bot IDs (空 = 全部)',
+	'BbOnDemandBotIdsInfo'      => '限制刷新到指定的机器人。留空则刷新所有注册机器人。',
+	'BbOnDemandProbability'     => '概率分母(1英寸)',
+	'BbOnDemandMinAge'          => '最小缓存时间(秒)',
+	'BbOnDemandLockTtl'         => '锁定 TTL (秒)',
+	'BbOnDemandCacheTtl'        => '缓存 TTL (秒)',
+	'BbOnDemandFeedTimeout'     => 'Feed 获取超时 (秒)',
+
+	'BbDynamicIpTtl'            => '缓存 TTL (秒)',
+	'BbDynamicIpFeeds'          => '刷新源(每行一个)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => '最後上線於',
+	'BbSeverity'             => '严重程度',
+	'BbStatusBreakdown'      => '状态明细表',
+	'BbBotBreakdown'         => '机器人分解',
+	'BbTopBlocked'           => '顶部被拒绝的 IP',
+	'BbGeoSummary'           => '地理摘要',
+	'BbCountry'              => '国家',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => '已验证%',
+	'BbNoData'               => '所选窗口没有数据',
+	'BbCategory'             => '类别',
+	'BbResponseTime'         => '响应时间',
+	'BbDateCol'              => '时间/IP /状态',
+	'BbSelectRow'            => '选择行',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => '仅缓慢的',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => '已解决',
+	'BbChipStatusCode' => '状态代码',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => '国家',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => '查看信头',
+	'BbViewBody'             => '查看实体',
+	'BbViewContentLabel'     => '内容',
+	'BbViewModeFull'         => '已满(总是显示)',
+	'BbViewModeTeaser'       => 'Teaser (点击以展开)',
+	'BbViewModeHidden'       => '隐藏(按需显示)',
+	'BbHide'                 => '隐藏',
+	'BbChars'                => '字符数',
+
+	// === Custom rules ===
+	'BbCustomRules'                => '自定义规则',
+	'BbCustomRulesLabel'           => '自定义规则 (每行一个 JSON 对象)',
+	'BbCustomRulesInfo'            => '每行都是一个带有密钥的 JSON 对象：类型 (ip|ua_regex|ua_contains|asn|country|header), 值, 动作 (allow|block|challenge|log), and id. 例如: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => '正文扫描跳过字段',
+	'BbBodyScanSkipFieldsInfo'     => '每行一个字段名。列出的字段在 SQL/XSS 体验过程中被跳过。',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => '高级过滤器',
+	'BbDateFrom'            => '来自',
+	'BbDateTo'              => '收件人',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => '仅限减速请求 (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => '仅活动的',
+	'BbResolvedOnly'        => '仅已解决',
+	'BbResolvedAll'         => '活动 + 已解决',
+	'BbResolved'            => '已解决',
+	'BbActionResolve'       => '解决',
+	'BbActionUnresolve'     => '无法解决',
+	'BbRowResolved'         => '日志条目标记已解决',
+	'BbRowUnresolved'       => '日志记录标记尚未解决',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => '删除选中的',
+	'BbBulkWhitelistSelected'   => '白名单IP',
+	'BbBulkResolveSelected'     => '标记已解决',
+	'BbBulkUnresolveSelected'   => '标记未解决的',
+	'BbBulkHint'                => '先切换行，然后点击动作。',
+	'BbNoItemsSelected'         => '未选择项目',
+	'BbBulkDeleted'             => '已删除 %1 日志条目',
+	'BbBulkWhitelisted'         => '添加 %1 IPs 到白名单',
+	'BbBulkResolved'            => '标记 %1 条目为已解决',
+	'BbBulkUnresolved'          => '标记为未解决的 %1 条目',
+	'BbMarkAll'                 => '标记此页面上的所有行',
+	'BbMarkNone'                => '取消标记所有行',
+
+	'BbBulkFailed'              => '无法更新选中的行。请检查数据库或再试一次。',
+	'BbBulkWhitelistedNone'     => '没有添加新的 IP - 所有选定的 IP 都已经在白名单上。',
+
+	// === Verified badge ===
+	'BbVerified'             => '已验证',
+	'BbUnverified'           => '未验证',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => '允许请求',
+	'BbStatus_blocked.bot'                => '已知机器人被阻止',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler已阻止',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler 已阻止',
+	'BbStatus_blocked.malicious_ua'       => '恶意用户代理',
+	'BbStatus_blocked.attack_pattern'     => '检测到攻击有效负载',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL 匹配',
+	'BbStatus_blocked.httpbl'             => 'http:BL 匹配',
+	'BbStatus_blocked.behavioral'         => '行为异常性',
+	'BbStatus_blocked.fingerprint'        => '指纹错误',
+	'BbStatus_blocked.rate_limit'         => '超出速率限制',
+	'BbStatus_blocked.custom_rule'        => '自定义规则匹配',
+	'BbStatus_blocked.geoip'              => 'GeoIP 块',
+	'BbStatus_blocked.residential_proxy'  => '已封锁住宅代理',
+	'BbStatus_challenge.required'         => '需要挑战',
+	'BbStatus_challenge.failed'           => '挑战失败',
+	'BbStatus_error.internal'             => '内部错误',
+	'BbStatus_error.configuration'        => '配置错误',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => '过去 24 小时',
+	'BbWindow7d'  => '过去 7 天',
+	'BbWindow30d' => '过去 30 天',
+	'BbWindowAll' => '全部时间',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => '最小值 (默认)',
+	'BbPresetFull'           => '完整的',
+	'BbPresetVerifiedOnly'   => '仅验证',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => '仅限EU的',
+	'BbPresetHumanOnly'      => '仅限人',
+	'BbPresetCustom'         => '自定义',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => '仅显示器',
+	'BbStrictnessNormal'      => '普通的',
+	'BbStrictnessStrict'      => '严格的',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => '云度特恩斯蒂尔',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => '启用头请求检测',
+	'BbHeadRequireReferer'       => '高清时需要咨询者',
+	'BbHeadFloodThreshold'       => '洪水阈值(每次会议)',
+	'BbHeadProbeThreshold'       => '探测阈值(每个 IP / 5分钟)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => '启用资产碎片检测',
+	'BbAssetNoRefererThreshold'    => '无法查阅的阈值(每 IP / 小时)',
+	'BbAssetOnlySessionThreshold'  => '仅资产会话阈值',
+	'BbAssetPatternThreshold'      => '序列模式阈值(每 IP / 5分钟)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => '启用动态IP范围',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => '启用按需刷新',
+	'BbOnDemandRefreshInfo'      => '请求时刷新IP范围缓存。当您没有cron访问权限时使用。',
+	'BbOnDemandBotIdsPlaceholder' => 'Google bot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => '错误的 JA3',
+	'BbFpBadH2'           => '错误的H2',
+	'BbFpBotHeaderOrders' => '机器人页眉订单',
+	'BbFpExpectedJa3'     => '预期的 JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => '已阻止',
+	'BbListChallenge' => '挑战 (CAPTCHA)',
+	'BbListLogOnly'   => '只记录 (无强制执行)',
+	'BbListAllowed'   => '明确允许',
+	'BbListHint'      => '此列表中的类别不论类别默认情况下都会被动作。',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => '搜索引擎',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Social Crawler',
+	'BbCatSeoCrawler'      => 'SEO 投掷器',
+	'BbCatArchiveCrawler'  => '归档 Crawler',
+	'BbCatMonitoring'      => '监测',
+	'BbCatFeedReader'      => '新闻源阅读器',
+	'BbCatShoppingCrawler' => '购物者',
+	'BbCatCloudInfra'      => '云基础设施',
+	'BbCatSecurityScanner' => '安全扫描',
+	'BbCatResidentialProxy'=> '住宅代理',
+	'BbCatMalicious'       => '恶意的',
+	'BbCatUnknown'         => '未知的',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32个字符哈希',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => '攻击模式',
+	'BbSevChallenges'     => 'B. 所提出的挑战',
+	'BbSevPermitted'      => '已允许',
+	'BbSevErrors'         => '错误',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => '类别管理',
+
+	'BbResultBreakdown'    => '结果分类',
+	'BbBreakdownBlocked'   => '已阻止',
+	'BbBreakdownMonitored' => '监视过的',
+	'BbBreakdownAllowed'   => '允许的',
+	'BbViewAllInLog'       => '查看所有日志',
+	'BbAllowedHintVerbose' => '允许的流量只在启用详细记录时才会被记录。在设置中切换日志记录模式=verbose以查看通过什么。',
 
 ];

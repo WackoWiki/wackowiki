@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Contraseña administrativa no especificada!',
 	'NoRecoveryPasswordTip'		=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
 
+	'ApDevNologinBlocked'		=> 'Acceso bloqueado: AP_DEV_NOLOGIN está habilitado en admin.php pero la solicitud no se originó desde localhost (127.0.0.1, ::1, o localhost). Esta es una bandera de sólo desarrollo y debe ser deshabilitada en producción. Establecer <code>AP_DEV_NOLOGIN = 0</code> en admin.php para restaurar el acceso.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURIDAD: %1 está habilitado, pero admin.php fue accedido desde una dirección no local (%2). El acceso al panel de administración ha sido bloqueado.',
+
 	'ErrorLoadingModule'		=> 'Error cargar admin module %1: no existe.',
 
 	'ApHomePage'				=> 'Página de inicio',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'salir de la administración del sistema',
 
 	'TimeLeft'					=> 'Tiempo restante:  %1 minutos',
+	'TimeLeftInfinity'			=> 'Tiempo restante:  %1 (modo desarrollador)',
 	'ApVersion'					=> 'versión',
 
 	'SiteOpen'					=> 'abrir',
@@ -602,7 +606,7 @@ $ap_translation = [
 	'ReferrerPolicy'			=> 'Política de referencias:',
 	'ReferrerPolicyInfo'		=> 'El encabezado HTTP Referrer-Policy gobierna qué información de referencia, enviada en el encabezado Referer, debe incluirse con las solicitudes realizadas.',
 	'ReferrerPolicyModes'	=> [
-		'0'		=> '[off]',
+		'0'		=> '[apagado]',
 		'1'		=> 'sin referencia',
 		'2'		=> 'no-referencia-degradación',
 		'3'		=> 'mismo origen',
@@ -928,8 +932,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Miniaturas',
 	'CreateThumbnail'			=> 'Crear vista en miniatura:',
 	'CreateThumbnailInfo'		=> 'Crear vista en miniatura siempre que sea posible.',
-	'JpegQuality'				=> 'Calidad JPEG:',
-	'JpegQualityInfo'			=> 'Calidad al escalar una miniatura JPEG. Debe estar entre 1 y 100, con 100 indicando 100% de calidad.',
+	'ImageQuality'				=> 'Ajustes de calidad de imagen:',
+	'ImageQualityInfo'			=> 'Calidad a la hora de escalar una miniatura, configura los valores por código que producen un resultado perceptivo comparable.',
 	'MaxImageArea'				=> 'Maximum Image Area:',
 	'MaxImageAreaInfo'			=> 'El número máximo de píxeles que puede tener una imagen de origen. Esto proporciona un límite en el uso de memoria para el lado de descompresión del escalador de imágenes. <br><code>-1</code> significa que no comprobará el tamaño de la imagen antes de intentar escalarla. <code>0</code> significa que determinará el valor automáticamente.',
 	'MaxThumbWidth'				=> 'Ancho máximo de la vista en miniatura en píxeles:',
@@ -962,7 +966,6 @@ $ap_translation = [
 		'2'		=> 'no más que',
 		'3'		=> 'igual',
 	],
-	'LogNoMatch'				=> 'No hay coincidencias',
 	'LogDate'					=> 'Fecha',
 	'LogEvent'					=> 'Evento',
 	'LogUsername'				=> 'Nombre de usuario',
@@ -975,6 +978,49 @@ $ap_translation = [
 		'6'		=> 'más bajo',
 		'7'		=> 'depuración',
 	],
+
+	'LogCollapse'        => 'contraer',
+	'LogExpand'          => 'expandir',
+	'LogType'              => 'Tipo',
+	'LogSearch'            => 'Buscar',
+	'LogSearchPlaceholder' => 'buscar mensajes...',
+	'LogUserId'            => 'ID Usuario',
+	'LogExactMatch'        => 'coincidencia exacta',
+	'LogFrom'              => 'De',
+	'LogTo'                => 'A',
+	'LogSupportKey'        => 'Clave de soporte',
+	'LogContext'           => 'Contexto',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Agente de usuario',
+	'LogReferer'           => 'Referidor',
+	'LogTotal'             => 'Total',
+	'LogFilteredBy'        => 'Filtrado por',
+	'LogClearFilter'       => 'Limpiar filtro',
+	'LogActions'           => 'Acciones',
+	'LogDelete'            => 'Eliminar',
+	'LogDeleteConfirm'     => '¿Eliminar esta entrada de registro?',
+	'LogDeleteSelected'    => 'Eliminar seleccionados',
+	'LogBulkAction'        => '— acción en masa —',
+	'LogApply'             => 'Aplicar',
+	'LogExportCSV'         => 'Exportar CSV',
+	'LogExportJSON'        => 'Exportar JSON',
+	'LogPurged'            => 'Tabla de registro truncada.',
+	'LogPurgedFiltered'     => '%1 entradas de registro eliminadas por filtro.',
+	'LogDeleted'           => 'Registro eliminado.',
+	'LogDeletedBulk'        => '%1 entradas de registro eliminadas.',
+	'LogPurgeSection'      => 'Operaciones destructivas',
+	'LogPurgeWarning'      => 'Hay %1 entradas que coinciden con la vista actual. Usar con cuidado.',
+	'LogPurgeConfirm'      => 'Entiendo que esto eliminará permanentemente las entradas de registro',
+	'LogPurgeFiltered'     => 'Purgar filtro coincidente',
+	'LogPurgeFilteredConfirm' => '¿Eliminar todas las entradas que coincidan con el filtro actual? Esto no se puede deshacer.',
+	'LogPurgeAll'          => 'Purgar registro ENTIRE',
+	'LogPurgeAllConfirm'   => '¿Borrar CADA entrada de registro en la base de datos? Esto no se puede deshacer.',
+	'LogFindRelated'       => 'Buscar entradas relacionadas',
+	'LogNoMatch'           => 'Ningún registro coincide con el filtro actual.',
+
+	'LogMarkAll'                => 'Marcar todas las filas en esta página',
+	'LogMarkNone'               => 'Desmarcar todas las filas',
+	'LogSelectRow'              => 'Seleccionar fila',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Desde aquí puedes enviar un email a todos los usuarios, o a los usuarios de un grupo específico. Para esto se enviará un email a la dirección administrativa proporcionada, con copia oculta a todos los receptores. Si el grupo de personas es muy grande, por favor se paciente después de pulsar en "Enviar" y no detengas el proceso por la mitad. Es normal que enviar un email masivo lleve algún tiempo, serás notificado cuando se complete el proceso',
@@ -1283,6 +1329,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Encabezados',
 	'BbEntity'					=> 'Entidad',
 
+	'BbSearchPlaceholder'        => 'Buscar UA, URI, IP, host, support_key, estado…',
+	'BbFilterAnyCategory'        => 'Cualquier categoría',
+	'BbFilterAnyMethod'          => 'Cualquier método',
+	'BbFilterAnyStatus'          => 'Cualquier estado',
+	'BbFilterBlockedOnly'        => 'Solo bloqueado',
+	'BbFilterPermittedOnly'      => 'Sólo permitido',
+	'BbFilterApply'              => 'Aplicar',
+	'BbFilterClear'              => 'Limpiar filtros',
+	'BbChipSearch'               => 'Buscar',
+	'BbChipCategory'             => 'Categoría',
+	'BbChipMethod'               => 'Método',
+	'BbChipStatus'               => 'Estado',
+	'BbChipRemove'               => 'Eliminar este filtro',
+	'BbFilterByCategory'         => 'Filtrar por esta categoría',
+	'BbSearchBySupportKey'       => 'Buscar esta clave de soporte',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Cualquier estado de comprobación',
+	'BbFilterCheckedOnly'      => 'Solo marcado',
+	'BbFilterUncheckedOnly'    => 'Solo sin marcar',
+	'BbChipCheck'              => 'Comprobar estado',
+	'BbChecked'                => 'comprobado',
+	'BbUnchecked'              => 'sin marcar',
+	'BbActionCheck'            => 'comprobar',
+	'BbActionUncheck'          => 'desmarcar',
+	'BbRowChecked'             => 'Registro marcado como comprobado',
+	'BbRowUnchecked'           => 'Entrada de registro sin marcar',
+	'BbRowCheckedHint'         => 'Este registro está marcado — exento de limpieza automática',
+	'BbRowUncheckedHint'       => 'Marque este registro para mantenerlo a través de la limpieza automática',
+	'BbBulkCheckSelected'      => 'Marcar comprobado',
+	'BbBulkUncheckSelected'    => 'Desmarcar marcados',
+	'BbBulkChecked'            => 'Marcado como comprobadas las entradas %1',
+	'BbBulkUnchecked'          => 'Desmarcado %1 entradas',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Opciones guardadas.',
 	'BbWhitelistHint'			=> '¡Las listas blancas inapropiadas lo expondrán a spam o harán que Mal comportamiento deje de funcionar por completo! NO HAGA UNA LISTA BLANCA a menos que esté 100% SEGURO de que debe hacerlo.',
@@ -1316,5 +1396,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Habilitar proxy inverso',
 	'BbReverseProxyHeader'		=> 'Encabezado que contiene la dirección IP de los clientes de Internet',
 	'BbReverseProxyAddresses'	=> 'Dirección IP o rangos de direcciones en formato CIDR para sus servidores proxy (uno por línea)',
+
+	'BbBehavioral'           => 'Análisis de comportamiento',
+	'BbEnableBehavioral'     => 'Habilitar análisis de comportamiento (anomalías de velocidad, UA/IP)',
+	'BbEnableBehavioralInfo' => 'Los rastros solicitan patrones por sesión. Seguro para mantener activado.',
+	'BbEnableFingerprinting' => 'Habilitar la huella dactilar TLS/HTTP/2 (JA3, H2, orden de cabecera)',
+	'BbEnableFingerprintingInfo' => 'Bloques conocidos sólo huellas dactilares erróneas. Requiere enable_fingerprinting=true. Puede causar falsos positivos en navegadores/proxies antiguos.',
+	'BbInspectJson'          => 'Inspeccionar cuerpos de solicitud JSON para ataques',
+	'BbInspectJsonInfo'      => 'ADVERTENCIA: Rompe APIs AJAX/JSON (wiki markup, fragmentos de código activa falsos positivos). Mantenga apagado.',
+	'BbInspectMultipart'     => 'Inspeccionar cuerpos de múltiples partes/formularios de datos para ataques',
+	'BbInspectMultipartInfo' => 'ATENCIÓN: Rompe las subidas de archivos. Mantenga apagado.',
+
+	'BbEnableClientHints'      => 'Habilitar validación de sugerencias de cliente',
+	'BbEnableClientHintsInfo'  => 'Validar cabeceras Sec-CH-UA contra User-Agent para detectar navegadores falsos (Chrome 89+).',
+	'BbEnableAgentic'          => 'Activar detección de comportamientos Agentic',
+	'BbEnableAgenticInfo'      => 'Detectar patrones de agente de IA: búsqueda de pensamiento, navegación no lineal, orientación de precisión.',
+	'BbStrictSearchEngines'    => 'Motores de búsqueda estrictos',
+	'BbStrictSearchEnginesInfo' => 'Aplicar comprobaciones más estrictas a los robots no verificados del motor de búsqueda (Googlebot, Bingbot, …) antes de permitirles atravesar.',
+	'BbEnableDynamicIp'        => 'Habilitar Rango de IP Dinámico',
+	'BbEnableDynamicIpInfo'    => 'Obtener los rangos de IP oficiales de Google, Bing, OpenAI, Antropic, Apple, etc. (cacheado 24h, obsoleto 7 días).',
+
+	'BbAiCrawlers'           => 'Control de rastreador AI',
+	'BbBlockUnverifiedAi'    => 'Bloquear rastreadores de IA no verificados',
+	'BbBlockUnverifiedAiInfo' => 'Bloquea rastreadores de IA que fallan la verificación DNS/IP (robots falsificados).',
+	'BbStrictAi'             => 'Modo de IA estricto (bloque incluso verificado IA no permitida)',
+	'BbStrictAiInfo'         => 'Bloquea TODOS los raspadores de IA no incluidos en la lista permitida, incluso si son verificados.',
+	'BbAllowedAiCrawlers'    => 'Permitidas fichas de raspador de IA (una por línea)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Habilitar comprobaciones DNSBL',
+	'BbDnsblLists'           => 'Listas DNSBL (una por línea)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Limitar tasa',
+	'BbRateLimitEnabled'     => 'Habilitar límite de tasa',
+	'BbRateGlobalRequests'   => 'Solicitudes globales por ventana',
+	'BbRateGlobalWindow'     => 'Ventana global (segundos)',
+	'BbRatePerMinuteRequests'=> 'Solicitudes por minuto',
+	'BbRatePerMinuteWindow'  => 'Ventana por minuto (segundos)',
+	'BbRatePostRequests'     => 'Solicitudes POST por ventana',
+	'BbRatePostWindow'       => 'Ventana POST (segundos)',
+	'BbRateLoginRequests'    => 'Solicitudes de acceso por ventana',
+	'BbRateLoginWindow'      => 'Ventana de acceso (segundos)',
+
+	'BbChallenge'            => 'Sistema de desafíos',
+	'BbChallengeEnabled'     => 'Habilitar desafíos',
+	'BbChallengeProvider'    => 'Proveedor de desafíos',
+	'BbChallengeSiteKey'     => 'Clave del sitio',
+	'BbChallengeSecretKey'   => 'Clave secreta',
+	'BbRecaptchaMinScore'    => 'puntuación mínima de reCAPTCHA v3',
+
+	'BbPerformance'          => 'Rendimiento',
+	'BbSkipExtensions'       => 'Saltar extensiones (una por línea)',
+	'BbSkipPaths'            => 'Saltar prefijos de ruta (uno por línea)',
+
+	'BbGeoip'                => 'GeoIP / ASN Bloqueo',
+	'BbGeoipEnabled'         => 'Habilitar búsquedas GeoIP',
+	'BbGeoipDbPath'          => 'Ruta MaxMind DB',
+	'BbBlockedCountries'     => 'Países bloqueados (códigos ISO, uno por línea)',
+	'BbBlockedAsns'          => 'ASNs bloqueadas (una por línea)',
+
+	'BbBlockPage'                  => 'Bloquear página',
+	'BbShowDetailedBlockPage'      => 'Mostrar página de bloque detallada',
+	'BbShowDetailedBlockPageInfo'  => 'Mostrar la razón, solicitar URI, y la clave de soporte técnico en la página del bloque. Recomendado para producción.',
+	'BbShowContactInfo'            => 'Mostrar información de contacto en la página de bloque',
+	'BbShowContactInfoInfo'        => 'Mostrar correo del administrador en la página del bloque (sólo surte efecto cuando la página de bloque detallada está activada).',
+	'BbSettingsSaveFailed'         => 'Error al guardar la configuración de comportamiento incorrecto',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Ajustes básicos',
+	'BbAdvancedSection'   => 'Ajustes avanzados',
+	'BbAdvancedHint'      => 'La mayoría de los operadores no deberían tener que cambiarlos.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Que bots reconocer. "mínimo" (por defecto) es más rápido; "full" es más completo.',
+	'BbStrictness'        => 'Postura de bloqueo',
+	'BbStrictnessInfo'    => 'sólo los registros de monitoreo pero no bloquea nada; los bloques normales verificaron a los atacantes; estrictos bloquean agresivamente.',
+	'BbLoggingMode'       => 'Loggando',
+	'BbLoggingModeInfo'   => 'Normal (recomendado), detallado (registro cada petición), apagado',
+	'BbLogModeNormal'     => 'Normal',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Apagado',
+	'BbBehindProxy'       => 'El sitio está detrás de un proxy inverso o CDN',
+	'BbBehindProxyInfo'   => 'Activar si está detrás de Cloudflare, AWS, GCP, por último, etc. Debe añadir rangos IP proxies en Advanced — sin ellos, no se puede determinar la dirección real del cliente.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Núcleo',
+	'BbAdvReverseProxy'   => 'Invertir proxy',
+	'BbAdvAiCrawlers'     => 'Cortadores de IA',
+	'BbAdvBotCategories'  => 'Categorías de bot',
+	'BbAdvDnsVerification'=> 'Verificación DNS',
+	'BbAdvRateLimits'     => 'Limitar tasa',
+	'BbAdvHeadDetection'  => 'Detección de solicitud de cabeza',
+	'BbAdvAssetScraping'  => 'Detección de Raspado de Activos',
+	'BbAdvDynamicIp'      => 'Rangos dinámicos de IP',
+	'BbAdvOnDemandRefresh'=> 'Actualización IP a petición',
+	'BbAdvHttpbl'         => 'Proyecto Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Desafío / CAPTCHA',
+	'BbAdvPerformance'    => 'Rendimiento',
+	'BbAdvGeoip'          => 'GeoIP / ASN Bloqueo',
+	'BbAdvFingerprints'   => 'Huellas TLS / HTTP/2',
+	'BbAdvCustomRules'    => 'Reglas personalizadas',
+	'BbAdvBlockPage'      => 'Bloquear página',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Motor de búsqueda',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Cortador social',
+	'BbCatSeoCrawler'     => 'Bailarín SEO',
+	'BbCatArchiveCrawler' => 'Archivar rastreador',
+	'BbCatMonitoring'     => 'Monitoreo',
+	'BbCatFeedReader'     => 'Lector de alimento',
+	'BbCatShoppingCrawler'=> 'Cortador de compras',
+	'BbCatCloudInfra'     => 'Infraestructura en la nube',
+	'BbCatSecurityScanner'=> 'Escáner de seguridad',
+	'BbCatResidentialProxy'=> 'Proxy residencial',
+	'BbCatMalicious'      => 'Malicioso',
+	'BbCatUnknown'        => 'Desconocido',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Bofetón',
+	'BbCloudProviderFastly'     => 'Rápidamente',
+	'BbCloudProviderGcp'        => 'Nube de Google',
+	'BbCloudProvidersInfo'      => 'Limitar la actualización bajo demanda a proveedores específicos. Vacío = los cuatro.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Retención de Log',
+	'BbLogRetentionEnabled'          => 'Habilitar limpieza automática del registro',
+	'BbLogRetentionEnabledInfo'      => 'Borra periódicamente filas de registro anteriores a la ventana de retención. Recomendado para sitios sin acceso cron.',
+	'BbLogRetentionMaxAgeDays'       => 'Ventana de retención (días)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Las filas anteriores a esto se eliminan. Por defecto: 7. Valores comunes: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Número máximo de filas (0 = sin límite)',
+	'BbLogRetentionMaxRowsInfo'      => 'Si se establece, los registros más antiguos se eliminan cada vez que la tabla excede este tamaño, sin importar la edad. Útil para sitios de alto tráfico.',
+	'BbLogRetentionProbability'       => 'denominador de probabilidad (1 en N)',
+	'BbLogRetentionProbabilityInfo'   => '1 en N peticiones comprueba la puerta de estabilidad. Mayor = menor carga de BD. Por defecto: 1000.',
+	'BbLogRetentionMinInterval'      => 'Intervalo mínimo entre limpiezas (segundos)',
+	'BbLogRetentionMinIntervalInfo'  => 'Piso duro en frecuencia de limpieza. Por defecto: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Limpiar TTL (segundos)',
+	'BbLogRetentionLockTtlInfo'      => 'Cuánto tiempo dura la mutex de limpieza. Por defecto: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Habilitar verificación DNS',
+	'BbDnsVerificationInfo'     => 'Verificar reclamos de robots (por ejemplo, Googlebot) por búsqueda de DNS inverso. Captura robots falseados.',
+	'BbDnsTimeoutMs'            => 'Tiempo de espera de búsqueda DNS (ms)',
+	'BbDnsPositiveTtl'          => 'Caché Positivo TTL (segundos)',
+	'BbDnsNegativeTtl'          => 'Caché Negativo TTL (segundos)',
+	'BbDnsRequireForward'       => 'Requerir confirmación de reenvío (PTR + Una coincidencia de registro)',
+	'BbDnsRequireForwardInfo'   => 'Captura la falsificación de PTR pero añade latencia y riesgo IPv6 FP.',
+
+	'BbHeadRefererExemptPaths'  => 'Rutas exentas HEAD (una por línea)',
+	'BbHeadRefererExemptInfo'   => 'Rutas donde HEAD sin Referer es legítimo (por ejemplo, /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Extensiones de activos a proteger (una por línea)',
+	'BbAssetExtensionsInfo'     => 'Tipos de archivos vistos para el desguace directo sin cargas de páginas.',
+
+	'BbOnDemandBotIds'          => 'Bot IDs para actualizar (vacío = todo)',
+	'BbOnDemandBotIdsInfo'      => 'Restringe la actualización a bots específicos. Dejar en blanco para actualizar todos los bots registrados.',
+	'BbOnDemandProbability'     => 'denominador de probabilidad (1 en N)',
+	'BbOnDemandMinAge'          => 'Edad mínima de caché (segundos)',
+	'BbOnDemandLockTtl'         => 'Bloquear TTL (segundos)',
+	'BbOnDemandCacheTtl'        => 'Caché TTL (segundos)',
+	'BbOnDemandFeedTimeout'     => 'Tiempo de espera de obtención de alimento (segundos)',
+
+	'BbDynamicIpTtl'            => 'Caché TTL (segundos)',
+	'BbDynamicIpFeeds'          => 'Alimentos para actualizar (uno por línea)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Última vista',
+	'BbSeverity'             => 'Gravedad',
+	'BbStatusBreakdown'      => 'Desglose de estado',
+	'BbBotBreakdown'         => 'Desglose del bot',
+	'BbTopBlocked'           => 'Iteraciones más denegadas',
+	'BbGeoSummary'           => 'Resumen geográfico',
+	'BbCountry'              => 'País',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => '% verificado',
+	'BbNoData'               => 'No hay datos para la ventana seleccionada',
+	'BbCategory'             => 'Categoría',
+	'BbResponseTime'         => 'Tiempo de respuesta',
+	'BbDateCol'              => 'Tiempo / IP / Estado',
+	'BbSelectRow'            => 'Seleccionar fila',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Solo lento',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Resuelto',
+	'BbChipStatusCode' => 'Código de estado',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'País',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Ver cabeceras',
+	'BbViewBody'             => 'Ver cuerpo',
+	'BbViewContentLabel'     => 'Contenido',
+	'BbViewModeFull'         => 'Completo (siempre mostrado)',
+	'BbViewModeTeaser'       => 'Teaser (haga clic para expandir)',
+	'BbViewModeHidden'       => 'Oculto (mostrar bajo demanda)',
+	'BbHide'                 => 'ocultar',
+	'BbChars'                => 'caracteres',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Reglas personalizadas',
+	'BbCustomRulesLabel'           => 'Reglas personalizadas (un objeto JSON por línea)',
+	'BbCustomRulesInfo'            => 'Cada línea es un objeto JSON con claves: tipo (ip|ua_regex|ua_contains|asn|country|header), valor, acción (allow|block|challenge|log) e id. Ejemplo: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Campos de escaneo del cuerpo',
+	'BbBodyScanSkipFieldsInfo'     => 'Un nombre de campo por línea. Los campos listados se omiten durante la inspección del cuerpo SQL/XSS.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Filtros avanzados',
+	'BbDateFrom'            => 'De',
+	'BbDateTo'              => 'A',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Solo solicitudes lentas (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Solo activo',
+	'BbResolvedOnly'        => 'Resuelto sólo',
+	'BbResolvedAll'         => 'Activo + resuelto',
+	'BbResolved'            => 'resuelto',
+	'BbActionResolve'       => 'resolver',
+	'BbActionUnresolve'     => 'sin resolver',
+	'BbRowResolved'         => 'Registro marcado como resuelto',
+	'BbRowUnresolved'       => 'Registro marcado sin resolver',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Eliminar seleccionados',
+	'BbBulkWhitelistSelected'   => 'Lista blanca de apellidos',
+	'BbBulkResolveSelected'     => 'Marcar como resuelto',
+	'BbBulkUnresolveSelected'   => 'Marcar sin resolver',
+	'BbBulkHint'                => 'Marque las filas primero, luego haga clic en una acción.',
+	'BbNoItemsSelected'         => 'No hay elementos seleccionados',
+	'BbBulkDeleted'             => 'Eliminadas entradas %1 log',
+	'BbBulkWhitelisted'         => 'Añadido %1 a la whitelist',
+	'BbBulkResolved'            => 'Marcado %1 entradas como resueltas',
+	'BbBulkUnresolved'          => 'Marcado %1 entradas como sin resolver',
+	'BbMarkAll'                 => 'Marcar todas las filas en esta página',
+	'BbMarkNone'                => 'Desmarcar todas las filas',
+
+	'BbBulkFailed'              => 'No se pudo actualizar las filas seleccionadas. Compruebe la base de datos o vuelva a intentarlo.',
+	'BbBulkWhitelistedNone'     => 'No se añadieron nuevas Iluminaciones — todas las IPs seleccionadas ya estaban en la lista blanca.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'verificado',
+	'BbUnverified'           => 'sin verificar',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Solicitud permitida',
+	'BbStatus_blocked.bot'                => 'bot conocido bloqueado',
+	'BbStatus_blocked.ai_crawler'         => 'Rastreador IA bloqueado',
+	'BbStatus_blocked.seo_crawler'        => 'Rastreador SEO bloqueado',
+	'BbStatus_blocked.malicious_ua'       => 'Agente de usuario malicioso',
+	'BbStatus_blocked.attack_pattern'     => 'Atacar carga útil detectado',
+	'BbStatus_blocked.dnsbl'              => 'Coincidir DNSBL',
+	'BbStatus_blocked.httpbl'             => 'http:BL coincide',
+	'BbStatus_blocked.behavioral'         => 'Anomalia de comportamiento',
+	'BbStatus_blocked.fingerprint'        => 'Huella dactilar mala',
+	'BbStatus_blocked.rate_limit'         => 'Tasa excedida',
+	'BbStatus_blocked.custom_rule'        => 'Regla personalizada',
+	'BbStatus_blocked.geoip'              => 'Bloque GeoIP',
+	'BbStatus_blocked.residential_proxy'  => 'Proxy residencial bloqueado',
+	'BbStatus_challenge.required'         => 'Desafío requerido',
+	'BbStatus_challenge.failed'           => 'Desafío fallido',
+	'BbStatus_error.internal'             => 'Error interno',
+	'BbStatus_error.configuration'        => 'Error de configuración',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Últimas 24 horas',
+	'BbWindow7d'  => 'Últimos 7 días',
+	'BbWindow30d' => 'Últimos 30 días',
+	'BbWindowAll' => 'Todo el tiempo',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Mínimo (por defecto)',
+	'BbPresetFull'           => 'Lleno',
+	'BbPresetVerifiedOnly'   => 'Sólo verificado',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Únicamente UE',
+	'BbPresetHumanOnly'      => 'Sólo para humanos',
+	'BbPresetCustom'         => 'Personalizado',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Sólo supervisor',
+	'BbStrictnessNormal'      => 'Normal',
+	'BbStrictnessStrict'      => 'Estricto',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Turnstil de cloudflare',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Habilitar detección de head request',
+	'BbHeadRequireReferer'       => 'Requerir Referidor en HEAD',
+	'BbHeadFloodThreshold'       => 'Umbral de inundación (por sesión)',
+	'BbHeadProbeThreshold'       => 'Umbral de sonda (por IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Activar detección de desguace de activos',
+	'BbAssetNoRefererThreshold'    => 'Umbral de no referente (por IP / hora)',
+	'BbAssetOnlySessionThreshold'  => 'Umbral de sesión de sólo activos',
+	'BbAssetPatternThreshold'      => 'Umbral de patrón secuencial (por IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Habilitar rangos de IP dinámicos',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Activar actualización bajo demanda',
+	'BbOnDemandRefreshInfo'      => 'Actualizar el rango de caché de IP durante las solicitudes. Usar cuando no tenga acceso cron.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Malo JA3',
+	'BbFpBadH2'           => 'H2 malo',
+	'BbFpBotHeaderOrders' => 'Ordenes de cabecera de bots',
+	'BbFpExpectedJa3'     => 'JA3 esperado',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Bloqueado',
+	'BbListChallenge' => 'Desafío (CAPTCHA)',
+	'BbListLogOnly'   => 'Solo registro (sin forzar)',
+	'BbListAllowed'   => 'Explícitamente permitido',
+	'BbListHint'      => 'Las categorías de esta lista obtienen la acción independientemente del valor predeterminado de la categoría.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Motor de búsqueda',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Cortador social',
+	'BbCatSeoCrawler'      => 'Bailarín SEO',
+	'BbCatArchiveCrawler'  => 'Archivar rastreador',
+	'BbCatMonitoring'      => 'Monitoreo',
+	'BbCatFeedReader'      => 'Lector de alimento',
+	'BbCatShoppingCrawler' => 'Cortador de compras',
+	'BbCatCloudInfra'      => 'Infraestructura en la nube',
+	'BbCatSecurityScanner' => 'Escáner de seguridad',
+	'BbCatResidentialProxy'=> 'Proxy residencial',
+	'BbCatMalicious'       => 'Malicioso',
+	'BbCatUnknown'         => 'Desconocido',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => 'hash de 32-caracter',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Patrones de ataque',
+	'BbSevChallenges'     => 'Desafíos emitidos',
+	'BbSevPermitted'      => 'Permitido',
+	'BbSevErrors'         => 'Errores',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Categorías',
+
+	'BbResultBreakdown'    => 'Desglose de resultados',
+	'BbBreakdownBlocked'   => 'Bloqueado',
+	'BbBreakdownMonitored' => 'Monitoreado',
+	'BbBreakdownAllowed'   => 'Permitido',
+	'BbViewAllInLog'       => 'Ver todos en el registro',
+	'BbAllowedHintVerbose' => 'El tráfico permitido sólo se registra cuando el registro detallado está habilitado. Activa logging_mode=verbose en Ajustes para ver qué pasa a través.',
 
 ];

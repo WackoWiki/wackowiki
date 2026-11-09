@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Het beheerderswachtwoord is niet opgegeven!',
 	'NoRecoveryPasswordTip'		=> 'Opmerking: Het ontbreken van een administratief wachtwoord is een bedreiging voor de veiligheid! Voer je wachtwoord hash in in het configuratiebestand en voer het programma opnieuw uit.',
 
+	'ApDevNologinBlocked'		=> 'Toegang geblokkeerd: AP_DEV_NOLOGIN is ingeschakeld in admin.php maar het verzoek kwam niet voort uit localhost (127.0.0.1, ::1, of localhost). Dit is een enige ontwikkelingsvlag en moet uitgeschakeld worden op productie. Stel <code>AP_DEV_NOLOGIN = 0</code> in admin.php om de toegang te herstellen.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 is ingeschakeld maar admin.php was toegankelijk vanaf een niet-localhost adres (%2). Het Admin paneel toegang is geblokkeerd.',
+
 	'ErrorLoadingModule'		=> 'Fout bij het laden van beheermodule %1: bestaat niet.',
 
 	'ApHomePage'				=> 'Home pagina',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Systeembeheer afsluiten en uitloggen',
 
 	'TimeLeft'					=> 'Resterende tijd:  %1 minuten',
+	'TimeLeftInfinity'			=> 'Resterende tijd:  %1 (ontwikkelaarmodus)',
 	'ApVersion'					=> 'versie',
 
 	'SiteOpen'					=> 'Open',
@@ -929,8 +933,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Miniatuur aanmaken:',
 	'CreateThumbnailInfo'		=> 'Maakt een miniatuur aan in alle mogelijke situaties.',
-	'JpegQuality'				=> 'JPEG-kwaliteit:',
-	'JpegQualityInfo'			=> 'Kwaliteit bij het schalen van een JPEG-miniatuur. Deze moet liggen tussen 1 en 100, waarbij 100 staat voor 100% kwaliteit.',
+	'ImageQuality'				=> 'Afbeelding kwaliteitsinstelling:',
+	'ImageQualityInfo'			=> 'Kwaliteit bij het schalen van een miniatuur. Druk op om per codec waarden te kiezen die een vergelijkbaar perceptief resultaat opleveren.',
 	'MaxImageArea'				=> 'Maximum Image Area:',
 	'MaxImageAreaInfo'			=> 'Het maximum aantal pixels dat een bronafbeelding kan hebben. Dit geeft een limiet aan het geheugengebruik voor de decompressiekant van de beeldschaler. <br><code>-1</code> betekent dat de grootte van de afbeelding niet wordt gecontroleerd voordat wordt geprobeerd deze te schalen. <code>0</code> betekent dat de waarde automatisch wordt bepaald.',
 	'MaxThumbWidth'				=> 'Maximum miniatuur breedte in pixel:',
@@ -964,7 +968,6 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 		'2'		=> 'niet hoger dan',
 		'3'		=> 'gelijk',
 	],
-	'LogNoMatch'				=> 'Geen gebeurtenissen die aan de criteria voldoen',
 	'LogDate'					=> 'Datum',
 	'LogEvent'					=> 'Gebeurtenis',
 	'LogUsername'				=> 'Gebruikersnaam',
@@ -977,6 +980,49 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 		'6'		=> 'laagste',
 		'7'		=> 'debuggen',
 	],
+
+	'LogCollapse'        => 'samenvouwen',
+	'LogExpand'          => 'uitbreiden',
+	'LogType'              => 'Type',
+	'LogSearch'            => 'Zoeken',
+	'LogSearchPlaceholder' => 'berichten zoeken...',
+	'LogUserId'            => 'Gebruiker ID',
+	'LogExactMatch'        => 'exacte overeenkomst',
+	'LogFrom'              => 'van',
+	'LogTo'                => 'tot',
+	'LogSupportKey'        => 'Support key',
+	'LogContext'           => 'Context',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'User Agent',
+	'LogReferer'           => 'Verwijzer',
+	'LogTotal'             => 'Totaal',
+	'LogFilteredBy'        => 'Gefilterd door',
+	'LogClearFilter'       => 'Filter wissen',
+	'LogActions'           => 'acties',
+	'LogDelete'            => 'Verwijderen',
+	'LogDeleteConfirm'     => 'Deze log wissen?',
+	'LogDeleteSelected'    => 'Verwijder geselecteerde items',
+	'LogBulkAction'        => '— bulk actie —',
+	'LogApply'             => 'Toepassen',
+	'LogExportCSV'         => 'Exporteren als CSV',
+	'LogExportJSON'        => 'JSON exporteren',
+	'LogPurged'            => 'Log tabel afgekapt.',
+	'LogPurgedFiltered'     => '%1 logboekvermeldingen verwijderd door het filter.',
+	'LogDeleted'           => 'Logboek is verwijderd.',
+	'LogDeletedBulk'        => '%1 log items verwijderd.',
+	'LogPurgeSection'      => 'Vernietigende bewerkingen',
+	'LogPurgeWarning'      => 'Er zijn %1 vermeldingen die overeenkomen met de huidige weergave. Gebruik zorgvuldig.',
+	'LogPurgeConfirm'      => 'Ik begrijp dat dit de logboekvermeldingen permanent verwijdert',
+	'LogPurgeFiltered'     => 'Opschonen overeenkomende filter',
+	'LogPurgeFilteredConfirm' => 'Alle items verwijderen die overeenkomen met het huidige filter? Dit kan niet ongedaan worden gemaakt.',
+	'LogPurgeAll'          => 'Verwijder ENTIRE log',
+	'LogPurgeAllConfirm'   => 'Verwijder ALLE logboekvermelding in de database? Dit kan niet ongedaan worden gemaakt.',
+	'LogFindRelated'       => 'Vind gerelateerde items',
+	'LogNoMatch'           => 'Geen logboekvermelding komt overeen met het huidige filter.',
+
+	'LogMarkAll'                => 'Markeer alle rijen op deze pagina',
+	'LogMarkNone'               => 'Deselecteer alle rijen',
+	'LogSelectRow'              => 'Rij selecteren',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Hier kan je een e-mail naar alle gebruikers of de leden van een specifieke groep sturen, <strong>die de ontvangst van massa e-mails toelaten</strong>. Hiervoor wordt een e-mail met alle ontvangers als onzichtbaar (bcc) ingesteld, naar het beheerders-e-mailadres gestuurd. Bij de standaard instellingen wordt de e-mail naar 20 mensen per pakket gestuurd. Indien er meer dan 50 ontvangers zijn, wordt de e-mail via meerdere pakketten verzonden. Indien je een e-mail naar een grote groep stuurt, wees dan geduldig en stop de pagina niet halverwege. Het is normaal dat het versturen van massa e-mails enige tijd in beslag neemt. Je wordt ervan op de hoogte gebracht zodra het script klaar is.',
@@ -1285,6 +1331,40 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 	'BbHeaders'					=> 'Kopteksten',
 	'BbEntity'					=> 'Entiteit',
 
+	'BbSearchPlaceholder'        => 'Zoek UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Elke categorie',
+	'BbFilterAnyMethod'          => 'Elke methode',
+	'BbFilterAnyStatus'          => 'Elke status',
+	'BbFilterBlockedOnly'        => 'Alleen geblokkeerd',
+	'BbFilterPermittedOnly'      => 'Alleen toegestaan',
+	'BbFilterApply'              => 'Toepassen',
+	'BbFilterClear'              => 'Filters wissen',
+	'BbChipSearch'               => 'Zoeken',
+	'BbChipCategory'             => 'categorie',
+	'BbChipMethod'               => 'Methode',
+	'BbChipStatus'               => 'status',
+	'BbChipRemove'               => 'Deze filter verwijderen',
+	'BbFilterByCategory'         => 'Filteren op deze categorie',
+	'BbSearchBySupportKey'       => 'Zoeken naar deze support sleutel',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Elke controlestatus',
+	'BbFilterCheckedOnly'      => 'Alleen aangevinkt',
+	'BbFilterUncheckedOnly'    => 'Alleen niet-aangevinkt',
+	'BbChipCheck'              => 'Status controleren',
+	'BbChecked'                => 'gecontroleerd',
+	'BbUnchecked'              => 'uitgevinkt',
+	'BbActionCheck'            => 'controleren',
+	'BbActionUncheck'          => 'uitvinken',
+	'BbRowChecked'             => 'Log gemarkeerd als aangevinkt',
+	'BbRowUnchecked'           => 'Log niet aangevinkt',
+	'BbRowCheckedHint'         => 'Dit record is gecontroleerd - vrijgesteld van automatische schoonmaak',
+	'BbRowUncheckedHint'       => 'Markeer dit record om het over automatische opschonen te houden',
+	'BbBulkCheckSelected'      => 'Markeer als aangevinkt',
+	'BbBulkUncheckSelected'    => 'Niet markeren aangevinkt',
+	'BbBulkChecked'            => 'Gemarkeerd als %1 invoergegevens als gecontroleerd',
+	'BbBulkUnchecked'          => 'Niet-gemarkeerde %1 invoergegevens',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Instellingen opgeslagen.',
 	'BbWhitelistHint'			=> 'Ongepast whitelisting laat je bloot staan aan spam of veroorzaakt slecht gedrag om volledig te werken! NIET WHITELIST tenzij je 100% CERTAIN bent dat je zou moeten doen.',
@@ -1318,5 +1398,372 @@ of <em>Restore</em> in de overeenkomstige rij. (Let op, er wordt geen verwijderi
 	'BbReverseProxyEnable'		=> 'Omgekeerde Proxy Inschakelen',
 	'BbReverseProxyHeader'		=> 'Koptekst met IP adres van Internet-clients',
 	'BbReverseProxyAddresses'	=> 'IP-adres of CIDR formaat adresbereiken voor uw proxyservers (één per regel)',
+
+	'BbBehavioral'           => 'Gedragkundige analyse',
+	'BbEnableBehavioral'     => 'Inschakelen van gedragsanalyse (afwijkingen van het tarief, draai UA/IP)',
+	'BbEnableBehavioralInfo' => 'Trackt aanvraagpatronen per sessie. Veilig om ingeschakeld te blijven.',
+	'BbEnableFingerprinting' => 'TLS/HTTP/2 vingerafdrukken inschakelen (JA3, H2, header order)',
+	'BbEnableFingerprintingInfo' => 'Blokkeert alleen bekende slechte vingerafdrukken. Vereist enable_fingerprinting=true. kan valse positieve effecten veroorzaken in oude browsers/proxies.',
+	'BbInspectJson'          => 'Controleer JSON aanvraaglichamen voor aanvallen',
+	'BbInspectJsonInfo'      => 'WAARSCHUWING: Breaks AX/JSON API\'s (wiki opmaak, code snippets zorgen voor valse posities). Houd UIT.',
+	'BbInspectMultipart'     => 'Controleer multipart/form-data lichamen voor aanvallen',
+	'BbInspectMultipartInfo' => 'WAARSCHUWING: Breekt bestandsuploads. OFF.',
+
+	'BbEnableClientHints'      => 'Client Hints validatie inschakelen',
+	'BbEnableClientHintsInfo'  => 'Valideren sec-CH-UA headers tegen User-Agent om spoofed browsers te detecteren (Chrome 89+).',
+	'BbEnableAgentic'          => 'Schakel Agentische Gedragsdetectie in',
+	'BbEnableAgenticInfo'      => 'Detecteer AI agent patronen: denkk-then-fetch, niet-lineaire navigatie, precisie doelwit.',
+	'BbStrictSearchEngines'    => 'Strikte zoekmachines',
+	'BbStrictSearchEnginesInfo' => 'Pas strengere controles toe aan niet-geverifieerde zoekmachine bots (Googlebot, Bingbot, …) voordat ze worden uitgevoerd.',
+	'BbEnableDynamicIp'        => 'Dynamisch IP Bereik Ophalen inschakelen',
+	'BbEnableDynamicIpInfo'    => 'Het ophalen van officiële IP-bereiken via Google, Bing, OpenAI, Anthropic, Apple, etc. (gecached 24h, versteende terugval 7 dagen).',
+
+	'BbAiCrawlers'           => 'AI Crawler Besturing',
+	'BbBlockUnverifiedAi'    => 'Blok niet-geverifieerde AI crawlers',
+	'BbBlockUnverifiedAiInfo' => 'Blokkeert AI crawlers die DNS/IP verificatie mislukt (spoofed bots).',
+	'BbStrictAi'             => 'Strikte AI-modus (blok zelfs geverifieerde ongeoorloofde AI)',
+	'BbStrictAiInfo'         => 'Blokkeert ALLE AI crawlers die niet in de toegestane lijst staan, zelfs als geverifieerd.',
+	'BbAllowedAiCrawlers'    => 'Toegestane AI crawler tokens (één per regel)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extened, PerplexityBot, Meta-ExternalAgent, Applebot-Extened, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'DNSBL-controles inschakelen',
+	'BbDnsblLists'           => 'DNSBL lijsten (een per regel)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Tarief Limiet',
+	'BbRateLimitEnabled'     => 'Tarief limitatie inschakelen',
+	'BbRateGlobalRequests'   => 'Globale verzoeken per venster',
+	'BbRateGlobalWindow'     => 'Globaal venster (seconden)',
+	'BbRatePerMinuteRequests'=> 'Aanvragen per minuut',
+	'BbRatePerMinuteWindow'  => 'Per-minuten venster (seconden)',
+	'BbRatePostRequests'     => 'POST-aanvragen per venster',
+	'BbRatePostWindow'       => 'POST venster (seconden)',
+	'BbRateLoginRequests'    => 'Inlogverzoeken per venster',
+	'BbRateLoginWindow'      => 'Login venster (seconden)',
+
+	'BbChallenge'            => 'Uitdaging Systeem',
+	'BbChallengeEnabled'     => 'Uitdagingen inschakelen',
+	'BbChallengeProvider'    => 'Uitdaging aanbieder',
+	'BbChallengeSiteKey'     => 'Site sleutel',
+	'BbChallengeSecretKey'   => 'Geheime sleutel',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min score',
+
+	'BbPerformance'          => 'Prestaties',
+	'BbSkipExtensions'       => 'Extensies overslaan (één per regel)',
+	'BbSkipPaths'            => 'Skip pad voorvoegsels (één per regel)',
+
+	'BbGeoip'                => 'GeoIP / ASN Blokkeren',
+	'BbGeoipEnabled'         => 'GeoIP-zoekopdrachten inschakelen',
+	'BbGeoipDbPath'          => 'MaxMind DB pad',
+	'BbBlockedCountries'     => 'Geblokkeerde landen (ISO-codes, één per regel)',
+	'BbBlockedAsns'          => 'Geblokkeerde ASN\'s (één per regel)',
+
+	'BbBlockPage'                  => 'Pagina blokkeren',
+	'BbShowDetailedBlockPage'      => 'Toon gedetailleerde blok pagina',
+	'BbShowDetailedBlockPageInfo'  => 'Toon reden, verzoek URI en technische ondersteuningssleutel op de blokpagina. Aanbevolen voor productie.',
+	'BbShowContactInfo'            => 'Contactinformatie weergeven op blokpagina',
+	'BbShowContactInfoInfo'        => 'Toon admin e-mail op de blok pagina (wordt alleen van kracht wanneer gedetailleerde blok pagina is ingeschakeld).',
+	'BbSettingsSaveFailed'         => 'Fout bij het opslaan van Bad Behaviour instellingen',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Basis instellingen',
+	'BbAdvancedSection'   => 'Geavanceerde instellingen',
+	'BbAdvancedHint'      => 'De meeste exploitanten zouden die niet hoeven te veranderen.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Welke bots te herkennen. "minimaal" (standaard) is snelste; "vol" is het meest grondig.',
+	'BbStrictness'        => 'Posters blokkeren',
+	'BbStrictnessInfo'    => 'alleen logs monitoren maar niets blokkeren; normale blokken geverifieerde aanvallers; strikte blokkeert agressief.',
+	'BbLoggingMode'       => 'Logboekregistratie',
+	'BbLoggingModeInfo'   => 'Normaal (aanbevolen), Verbose (logt elke aanvraag), Uit',
+	'BbLogModeNormal'     => 'normaal',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'UIT',
+	'BbBehindProxy'       => 'Site bevindt zich achter een reverse proxy of CDN',
+	'BbBehindProxyInfo'   => 'Inschakelen achter Cloudflare, AWS, GCP, snel, etc. U moet proxyIP-bereiken toevoegen in geavanceerd - zonder hen, kunnen echte client IP\'s niet worden bepaald.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Kern',
+	'BbAdvReverseProxy'   => 'Omgekeerde Proxy',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Bot Categorieën',
+	'BbAdvDnsVerification'=> 'DNS-verificatie',
+	'BbAdvRateLimits'     => 'Tarief Limiet',
+	'BbAdvHeadDetection'  => 'Hoofdverzoek detectie',
+	'BbAdvAssetScraping'  => 'Asset Scraping Detectie',
+	'BbAdvDynamicIp'      => 'Dynamische IP-bereiken',
+	'BbAdvOnDemandRefresh'=> 'On-Demand IP vernieuwen',
+	'BbAdvHttpbl'         => 'Project Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Uitdaging / CAPTCHA',
+	'BbAdvPerformance'    => 'Prestaties',
+	'BbAdvGeoip'          => 'GeoIP / ASN Blokkeren',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 vingerafdrukken',
+	'BbAdvCustomRules'    => 'Aangepaste regels',
+	'BbAdvBlockPage'      => 'Pagina blokkeren',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Motor zoeken',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Sociale Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Archiveer Crawler',
+	'BbCatMonitoring'     => 'Controle',
+	'BbCatFeedReader'     => 'RSS lezer (Beta)',
+	'BbCatShoppingCrawler'=> 'Shopping Crawler',
+	'BbCatCloudInfra'     => 'Cloud Infrastructuur',
+	'BbCatSecurityScanner'=> 'Beveiligings Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'      => 'Kwaadaardig',
+	'BbCatUnknown'        => 'onbekend',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Snel',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Limiteer op-demand verversen naar specifieke aanbieders. Leeg = alle vier.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Log bewaring',
+	'BbLogRetentionEnabled'          => 'Schakel automatische log opschonen in',
+	'BbLogRetentionEnabledInfo'      => 'Periodiek logboekrijen ouder dan het bewaarvenster verwijderen. Aanbevolen voor sites zonder cron toegang.',
+	'BbLogRetentionMaxAgeDays'       => 'Retentie venster (dagen)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rijen ouder dan dit worden verwijderd. Standaard: 7. Gebruikelijke waarden: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maximum aantal rijen (0 = geen cap)',
+	'BbLogRetentionMaxRowsInfo'      => 'Indien gezet, oudste rijen worden verwijderd wanneer de tabel deze grootte overschrijdt, ongeacht leeftijd. Handig voor high-traffic sites.',
+	'BbLogRetentionProbability'       => 'Waarschijnlijkheid noemer (1 in N)',
+	'BbLogRetentionProbabilityInfo'   => '1 in N verzoek controleert de staleness poort. Hoger = minder DB belasting. Standaard: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minimale interval tussen schoonmaak (seconden)',
+	'BbLogRetentionMinIntervalInfo'  => 'Hard vloer op schoonmaakfrequentie. Standaard: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Opschonen lock TTL (seconden)',
+	'BbLogRetentionLockTtlInfo'      => 'Hoe lang de schoonmaakmutex wordt gehouden. Standaard: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'DNS-verificatie inschakelen',
+	'BbDnsVerificationInfo'     => 'Controleer boteclaims (bijv. Googlebot) door reverse-DNS-zoekopdracht te doen. Catches spoofed bots.',
+	'BbDnsTimeoutMs'            => 'Time-out DNS-zoekopdracht (ms)',
+	'BbDnsPositiveTtl'          => 'Positieve cache TTL (seconden)',
+	'BbDnsNegativeTtl'          => 'Negatieve cache TTL (seconden)',
+	'BbDnsRequireForward'       => 'Vereis forward-confirmatie (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Vangt PTR vervalsing, maar voegt latentie en IPv6 FP risico toe.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD vrijgestelde paden (één per lijn)',
+	'BbHeadRefererExemptInfo'   => 'Paden waar HEAD zonder Referer legaal is (bv. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Te beschermen assetextensies (één per regel)',
+	'BbAssetExtensionsInfo'     => 'Bestandstypen bekeken voor direct scrapen zonder pagina-lading.',
+
+	'BbOnDemandBotIds'          => 'Bot IDs om te vernieuwen (leeg = alles)',
+	'BbOnDemandBotIdsInfo'      => 'Verversen beperken tot specifieke bots. Laat leeg om alle geregistreerde bots te vernieuwen.',
+	'BbOnDemandProbability'     => 'Waarschijnlijkheid noemer (1 in N)',
+	'BbOnDemandMinAge'          => 'Min. cache leeftijd (seconden)',
+	'BbOnDemandLockTtl'         => 'TTL (seconden) vergrendelen',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (seconden)',
+	'BbOnDemandFeedTimeout'     => 'Feed Haal time-out op (seconden)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (seconden)',
+	'BbDynamicIpFeeds'          => 'Feeds om te vernieuwen (een per regel)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Laatst gezien',
+	'BbSeverity'             => 'Ernstigheid',
+	'BbStatusBreakdown'      => 'Status verdeling',
+	'BbBotBreakdown'         => 'Bot uitsplitsing',
+	'BbTopBlocked'           => 'Top geweigerde IPs',
+	'BbGeoSummary'           => 'Geografische samenvatting',
+	'BbCountry'              => 'Land:',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Geverifieerd %',
+	'BbNoData'               => 'Geen gegevens voor het geselecteerde venster',
+	'BbCategory'             => 'categorie',
+	'BbResponseTime'         => 'Antwoord tijd',
+	'BbDateCol'              => 'Tijd / IP / Status',
+	'BbSelectRow'            => 'Rij selecteren',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Alleen langzaam',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Opgelost',
+	'BbChipStatusCode' => 'Status code',
+	'BbChipIp'         => 'IP-adres',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Land:',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Koppen bekijken',
+	'BbViewBody'             => 'Bekijk het lichaam',
+	'BbViewContentLabel'     => 'Inhoud',
+	'BbViewModeFull'         => 'Volledig (altijd getoond)',
+	'BbViewModeTeaser'       => 'Teaser (klik om uit te breiden)',
+	'BbViewModeHidden'       => 'Verborgen (show op vraag)',
+	'BbHide'                 => 'verberg',
+	'BbChars'                => 'tekens',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Aangepaste regels',
+	'BbCustomRulesLabel'           => 'Aangepaste regels (een JSON-object per regel)',
+	'BbCustomRulesInfo'            => 'Elke regel is een JSON-object met sleutels: type (ipexceeds ua_regexA3ua_contains_containsude landheader), waarde, actie (sta goed), waarde, actie (toelatend block² challenge log), en id. Bijvoorbeeld: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Body scan overgeslagen velden',
+	'BbBodyScanSkipFieldsInfo'     => 'Eén veldnaam per regel. De vermelde velden worden overgeslagen tijdens SQL/XSS body inspectie.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Geavanceerde filters',
+	'BbDateFrom'            => 'van',
+	'BbDateTo'              => 'tot',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Alleen trage verzoeken (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Alleen actief',
+	'BbResolvedOnly'        => 'Alleen opgelost',
+	'BbResolvedAll'         => 'Actief + opgelost',
+	'BbResolved'            => 'opgelost',
+	'BbActionResolve'       => 'oplossen',
+	'BbActionUnresolve'     => 'onopgelost',
+	'BbRowResolved'         => 'Log invoer gemarkeerd als opgelost',
+	'BbRowUnresolved'       => 'Log invoer gemarkeerd als onopgelost',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Verwijder geselecteerde items',
+	'BbBulkWhitelistSelected'   => 'Whitelist IPs',
+	'BbBulkResolveSelected'     => 'Markeer afgehandeld',
+	'BbBulkUnresolveSelected'   => 'Markeren als onopgelost',
+	'BbBulkHint'                => 'Tik rijen eerst, klik dan op een actie.',
+	'BbNoItemsSelected'         => 'Geen items geselecteerd',
+	'BbBulkDeleted'             => '%1 log items verwijderd',
+	'BbBulkWhitelisted'         => '%1 IPs toegevoegd aan de whitelist',
+	'BbBulkResolved'            => '%1 items gemarkeerd als opgelost',
+	'BbBulkUnresolved'          => '%1 items gemarkeerd als onopgelost',
+	'BbMarkAll'                 => 'Markeer alle rijen op deze pagina',
+	'BbMarkNone'                => 'Deselecteer alle rijen',
+
+	'BbBulkFailed'              => 'Kon de geselecteerde rijen niet bijwerken. Controleer de database of probeer het opnieuw.',
+	'BbBulkWhitelistedNone'     => 'Geen nieuwe IP-adressen toegevoegd - alle geselecteerde IP-adressen stonden al op de whitelist.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'geverifieerd',
+	'BbUnverified'           => 'niet-geverifieerd',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Verzoek toegestaan',
+	'BbStatus_blocked.bot'                => 'Bekende bot geblokkeerd',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler geblokkeerd',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler geblokkeerd',
+	'BbStatus_blocked.malicious_ua'       => 'Kwaadaardige User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Aanval payload gedetecteerd',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL wedstrijd',
+	'BbStatus_blocked.httpbl'             => 'http:BL overeenkomst',
+	'BbStatus_blocked.behavioral'         => 'Gedrag anomalie',
+	'BbStatus_blocked.fingerprint'        => 'Slechte vingerafdruk',
+	'BbStatus_blocked.rate_limit'         => 'Tarief limiet overschreden',
+	'BbStatus_blocked.custom_rule'        => 'Aangepaste regel overeenkomst',
+	'BbStatus_blocked.geoip'              => 'GeoIP blok',
+	'BbStatus_blocked.residential_proxy'  => 'Residentiële proxy geblokkeerd',
+	'BbStatus_challenge.required'         => 'Uitdaging vereist',
+	'BbStatus_challenge.failed'           => 'Uitdaging mislukt',
+	'BbStatus_error.internal'             => 'Interne fout',
+	'BbStatus_error.configuration'        => 'Configuratie fout',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Afgelopen 24 uur',
+	'BbWindow7d'  => 'Afgelopen 7 dagen',
+	'BbWindow30d' => 'Laatste 30 dagen',
+	'BbWindowAll' => 'Gehele tijd',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimaal (standaard)',
+	'BbPresetFull'           => 'Volledig',
+	'BbPresetVerifiedOnly'   => 'Alleen geverifieerd',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'alleen EU-',
+	'BbPresetHumanOnly'      => 'Alleen-mens',
+	'BbPresetCustom'         => 'Aangepaste',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Alleen monitoren',
+	'BbStrictnessNormal'      => 'normaal',
+	'BbStrictnessStrict'      => 'Strikt',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Draai',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Schakel detectie hoofdverzoek in',
+	'BbHeadRequireReferer'       => 'Vereis Referentie op HEAD',
+	'BbHeadFloodThreshold'       => 'Overgangsdrempelwaarde (per sessie)',
+	'BbHeadProbeThreshold'       => 'Probe drempelwaarde (per IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Schakel asset scraping detectie in',
+	'BbAssetNoRefererThreshold'    => 'Drempelwaarde zonder referer (per IP / uur)',
+	'BbAssetOnlySessionThreshold'  => 'Drempelwaarde \'Alleen Asset-\' sessie',
+	'BbAssetPatternThreshold'      => 'Sequentiële patroonwaarde (per IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Inschakelen van dynamisch IP-bereik',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'On-demand vernieuwen inschakelen',
+	'BbOnDemandRefreshInfo'      => 'Vernieuw het IP-bereik cache tijdens verzoeken. Gebruik dit wanneer u geen cron toegang heeft.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Slechte JA3',
+	'BbFpBadH2'           => 'Slechte H2',
+	'BbFpBotHeaderOrders' => 'Bot Header Orders',
+	'BbFpExpectedJa3'     => 'Verwachte JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Geblokkeerd',
+	'BbListChallenge' => 'Uitdaging (CAPTCHA)',
+	'BbListLogOnly'   => 'Alleen loggen (geen handhaving)',
+	'BbListAllowed'   => 'Expliciet toegestaan',
+	'BbListHint'      => 'Categorieën in deze lijst krijgen de actie ongeacht de standaard categorie.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Motor zoeken',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Sociale Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Archiveer Crawler',
+	'BbCatMonitoring'      => 'Controle',
+	'BbCatFeedReader'      => 'RSS lezer (Beta)',
+	'BbCatShoppingCrawler' => 'Shopping Crawler',
+	'BbCatCloudInfra'      => 'Cloud Infrastructuur',
+	'BbCatSecurityScanner' => 'Beveiligings Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'       => 'Kwaadaardig',
+	'BbCatUnknown'         => 'onbekend',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Patronen aanvallen',
+	'BbSevChallenges'     => 'Uitdagingen uitgegeven',
+	'BbSevPermitted'      => 'Toegestand',
+	'BbSevErrors'         => 'Foutmeldingen',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Categoriechar@@0n',
+
+	'BbResultBreakdown'    => 'Uitsplitsing resultaat',
+	'BbBreakdownBlocked'   => 'Geblokkeerd',
+	'BbBreakdownMonitored' => 'Gecontroleerd',
+	'BbBreakdownAllowed'   => 'Toegestaan',
+	'BbViewAllInLog'       => 'Bekijk alles in het logboek',
+	'BbAllowedHintVerbose' => 'Toegestane verkeer is alleen aangemeld als uitgebreide logboekregistratie is ingeschakeld. Schakel logging_mode=verbose in Instellingen om te zien welke passes doorlopen.',
 
 ];

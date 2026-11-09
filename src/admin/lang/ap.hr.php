@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Administratorska lozinka nije navedena!',
 	'NoRecoveryPasswordTip'		=> 'Napomena: Nepostojanje administratorske lozinke predstavlja sigurnosni rizik! Unesite hash lozinke u konfiguracijsku datoteku i ponovno pokrenite program.',
 
+	'ApDevNologinBlocked'		=> 'Access blocked: AP_DEV_NOLOGIN is enabled in admin.php but the request did not originate from localhost (127.0.0.1, ::1, or localhost). This is a development-only flag and must be disabled on production. Set <code>AP_DEV_NOLOGIN = 0</code> in admin.php to restore access.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 is enabled but admin.php was accessed from a non-localhost address (%2). Admin panel access has been blocked.',
+
 	'ErrorLoadingModule'		=> 'Pogreška pri učitavanju administratorskog modula %1: ne postoji.',
 
 	'ApHomePage'				=> 'Početna stranica',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Izađi iz sistemske administracije',
 
 	'TimeLeft'					=> 'Preostalo vrijeme:  %1 minuta',
+	'TimeLeftInfinity'			=> 'Time left:  %1 (developer mode)',
 	'ApVersion'					=> 'verzija',
 
 	'SiteOpen'					=> 'Otvori',
@@ -768,7 +772,7 @@ $ap_translation = [
 	'RandomPageInfo'			=> 'Učitaj slučajnu stranicu (akcija %1).',
 
 
-	// Postavke obavijesti
+	// Notification settings
 	'NotificationSettingsInfo'	=> 'Parametri za obavijesti platforme.',
 	'NotificationSettingsUpdated'	=> 'Ažurirane postavke obavijesti',
 
@@ -796,7 +800,7 @@ $ap_translation = [
 	'AllowMassemailDefault'		=> 'Dozvoli masovne e-poruke:',
 	'AllowMassemailDefaultInfo'	=> 'Pošaljite poruke samo onim korisnicima koji su dopuštali administratorima da im šalju obavijesti e-poštom.',
 
-	// Postavke resinkronizacije
+	// Resync settings
 	'Synchronize'				=> 'Sinkroniziraj',
 	'UserStatsSynched'			=> 'Korisnička statistika sinkronizirana.',
 	'PageStatsSynched'			=> 'Statistika stranica sinkronizirana.',
@@ -836,7 +840,7 @@ $ap_translation = [
 	'ResyncOptions'				=> 'Dodatne opcije',
 	'RecompilePageLimit'		=> 'Broj stranica za parsiranje odjednom.',
 
-	// Postavke e-pošte
+	// Email settings
 	'EmaiSettingsInfo'			=> 'Ove informacije se koriste kad engine šalje e-poštu vašim korisnicima. Provjerite da je adresa e-pošte koju navedete valjana, jer će sva odbijena ili nedostavljiva pisma vjerojatno biti vraćena na tu adresu. Ako vaš hosting ne pruža nativnu (PHP-temeljenu) email uslugu, možete slati poruke izravno putem SMTP-a. To zahtijeva adresu odgovarajućeg poslužitelja (pitajte svog hosting providera po potrebi). Ako poslužitelj zahtijeva autentikaciju (i samo ako zahtijeva), unesite korisničko ime, lozinku i metodu autentikacije.',
 
 	'EmailSettingsUpdated'		=> 'Ažurirane postavke e-pošte',
@@ -881,7 +885,7 @@ $ap_translation = [
 	'SmtpUsername'				=> 'SMTP korisničko ime:',
 	'SmtpUsernameInfo'			=> 'Unesite korisničko ime samo ako vaš SMTP poslužitelj to zahtijeva.',
 
-	// Postavke prijenosa
+	// Upload settings
 	'UploadSettingsInfo'		=> 'Ovdje možete konfigurirati glavne postavke za privitke i pripadajuće posebne kategorije.',
 	'UploadSettingsUpdated'		=> 'Ažurirane postavke prijenosa',
 
@@ -913,8 +917,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Sličice',
 	'CreateThumbnail'			=> 'Kreiraj sličicu:',
 	'CreateThumbnailInfo'		=> 'Kreiraj sličicu u svim mogućim situacijama.',
-	'JpegQuality'				=> 'Kvaliteta JPEG-a:',
-	'JpegQualityInfo'			=> 'Kvaliteta pri skaliranju JPEG sličice. Trebala bi biti između 1 i 100, pri čemu 100 označava 100% kvalitete.',
+	'ImageQuality'				=> 'Image Quality Preset:',
+	'ImageQualityInfo'			=> 'Quality when scaling a thumbnail. Presets that pick per-codec values which produce a comparable perceptual result.',
 	'MaxImageArea'				=> 'Maksimalno područje slike:',
 	'MaxImageAreaInfo'			=> 'Maksimalni broj piksela koje izvorna slika može imati. Ovo ograničava memorijsku potrošnju pri dekompresiji slike za skaliranje.<br><code>-1</code> znači da se veličina slike neće provjeravati prije pokušaja skaliranja. <code>0</code> znači da će se vrijednost odrediti automatski.',
 	'MaxThumbWidth'				=> 'Maksimalna širina sličice u pikselima:',
@@ -924,12 +928,12 @@ $ap_translation = [
 	'MaxImageWidth'				=> 'Ograničenje širine slike na stranicama:',
 	'MaxImageWidthInfo'			=> 'Maksimalna širina koju slika može imati na stranicama; inače se generira umanjena sličica.',
 
-	// Modul izbrisanih objekata
+	// Deleted module
 	'DeletedObjectsInfo'		=> 'Popis uklonjenih stranica, revizija i datoteka.
 									Uklonite ili vratite stranice, revizije ili datoteke iz baze podataka klikom na poveznicu <em>Remove</em>
 									ili <em>Restore</em> u odgovarajućem retku. (Pažljivo, neće biti traženo potvrđivanje brisanja!)',
 
-	// Modul filtra
+	// Filter module
 	'FilterSettingsInfo'		=> 'Riječi koje će biti automatski cenzurirane na vašem wikiju.',
 	'FilterSettingsUpdated'		=> 'Ažurirane postavke filtera spama',
 
@@ -939,7 +943,7 @@ $ap_translation = [
 	'WordList'					=> 'Popis riječi:',
 	'WordListInfo'				=> 'Riječ ili fraza (ili <code>fragment</code>) koja će biti na crnoj listi (jedna po retku)',
 
-	// Modul zapisa (log)
+	// Log module
 	'LogFilterTip'				=> 'Filtriraj događaje prema kriterijima:',
 	'LogLevel'					=> 'Razina',
 	'LogLevelFilters'	=> [
@@ -947,7 +951,6 @@ $ap_translation = [
 		'2'		=> 'ne više od',
 		'3'		=> 'jednako',
 	],
-	'LogNoMatch'				=> 'Nema događaja koji zadovoljavaju kriterije',
 	'LogDate'					=> 'Datum',
 	'LogEvent'					=> 'Događaj',
 	'LogUsername'				=> 'Korisničko ime',
@@ -961,7 +964,50 @@ $ap_translation = [
 		'7'		=> 'debug',
 	],
 
-	// Modul masovne e-pošte
+	'LogCollapse'        => 'collapse',
+	'LogExpand'          => 'expand',
+	'LogType'              => 'Type',
+	'LogSearch'            => 'Search',
+	'LogSearchPlaceholder' => 'search messages...',
+	'LogUserId'            => 'User ID',
+	'LogExactMatch'        => 'exact match',
+	'LogFrom'              => 'From',
+	'LogTo'                => 'To',
+	'LogSupportKey'        => 'Support key',
+	'LogContext'           => 'Context',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'User agent',
+	'LogReferer'           => 'Referer',
+	'LogTotal'             => 'Total',
+	'LogFilteredBy'        => 'Filtered by',
+	'LogClearFilter'       => 'Clear filter',
+	'LogActions'           => 'Actions',
+	'LogDelete'            => 'Delete',
+	'LogDeleteConfirm'     => 'Delete this log entry?',
+	'LogDeleteSelected'    => 'Delete selected',
+	'LogBulkAction'        => '— bulk action —',
+	'LogApply'             => 'Apply',
+	'LogExportCSV'         => 'Export CSV',
+	'LogExportJSON'        => 'Export JSON',
+	'LogPurged'            => 'Log table truncated.',
+	'LogPurgedFiltered'     => '%1 log entries deleted by filter.',
+	'LogDeleted'           => 'Log entry deleted.',
+	'LogDeletedBulk'        => '%1 log entries deleted.',
+	'LogPurgeSection'      => 'Destructive operations',
+	'LogPurgeWarning'      => 'There are %1 entries matching the current view. Use with care.',
+	'LogPurgeConfirm'      => 'I understand this will permanently delete log entries',
+	'LogPurgeFiltered'     => 'Purge matching filter',
+	'LogPurgeFilteredConfirm' => 'Delete all entries matching the current filter? This cannot be undone.',
+	'LogPurgeAll'          => 'Purge ENTIRE log',
+	'LogPurgeAllConfirm'   => 'Delete EVERY log entry in the database? This cannot be undone.',
+	'LogFindRelated'       => 'Find related entries',
+	'LogNoMatch'           => 'No log entries match the current filter.',
+
+	'LogMarkAll'                => 'Mark all rows on this page',
+	'LogMarkNone'               => 'Unmark all rows',
+	'LogSelectRow'              => 'Select row',
+
+	// Massemail module
 	'MassemailInfo'				=> 'Ovdje možete poslati poruku ili (1) svim svojim korisnicima ili (2) svim korisnicima određene grupe koji su omogućili primanje masovnih e-poruka. E-poruka će biti poslana na administrativnu adresu e-pošte, a slijepa kopija (BCC) će biti poslana svim primateljima. Zadano je uključiti najviše 20 primatelja u jednoj poruci. Ako ih ima više, poslat će se dodatne poruke. Ako šaljete poruku velikoj grupi, budite strpljivi nakon slanja i nemojte prekidati stranicu. Normalno je da masovno slanje potraje. Bit ćete obaviješteni kada skripta završi.',
 	'LogMassemail'				=> 'Masovno slanje e-pošte %1 grupi / korisniku ',
 	'MassemailSend'				=> 'Slanje masovne e-pošte',
@@ -983,7 +1029,7 @@ $ap_translation = [
 	'SendToUser'				=> 'Pošalji korisniku:',
 	'SendToUserInfo'			=> 'Samo korisnici koji dopuštaju administratorima da im šalju informacije e-poštom primit će masovne poruke. Ova opcija dostupna je u njihovim korisničkim postavkama pod Obavijestima.',
 
-	// Modul sistemske poruke
+	// System message module
 	'SystemMessageInfo'			=> '',
 	'SysMsgUpdated'				=> 'Ažurirana sistemska poruka',
 
@@ -998,7 +1044,7 @@ $ap_translation = [
 	'EnableSysMsg'				=> 'Omogući sistemsku poruku:',
 	'EnableSysMsgInfo'			=> 'Prikaži sistemsku poruku.',
 
-	// Modul odobravanja korisnika
+	// User approval module
 	'ApproveNotExists'			=> 'Odaberite barem jednog korisnika pomoću gumba Set.',
 
 	'LogUserApproved'			=> 'Korisnik ##%1## odobren',
@@ -1015,7 +1061,7 @@ $ap_translation = [
 	'Approved'					=> 'Odobreno',
 	'Denied'					=> 'Odbijeno',
 
-	// Modul sigurnosne kopije baze podataka
+	// DB Backup module
 	'BackupStructure'			=> 'Struktura',
 	'BackupData'				=> 'Podaci',
 	'BackupFolder'				=> 'Mapa',
@@ -1024,15 +1070,15 @@ $ap_translation = [
 	'BackupFiles'				=> 'Datoteke',
 	'BackupNote'				=> 'Napomena:',
 	'BackupSettings'			=> 'Odredite željeni način izrade sigurnosne kopije.<br>' .
-	'Root klaster ne utječe na globalnu sigurnosnu kopiju datoteka i cache datoteka (ako su odabrani, oni se uvijek spremaju u potpunosti).<br>' .  '<br>' .
-	'<strong>Pažnja</strong>: Kako biste izbjegli gubitak podataka u bazi pri određivanju root klastera, tablice iz ove kopije neće biti restrukturirane, isto kao kada radite samo strukturu tablice bez spremanja podataka. Za potpunu konverziju tablica u format sigurnosne kopije morate napraviti <em>potpunu sigurnosnu kopiju baze podataka (struktura i podaci) bez označavanja klastera</em>.',
+    	'Root klaster ne utječe na globalnu sigurnosnu kopiju datoteka i cache datoteka (ako su odabrani, oni se uvijek spremaju u potpunosti).<br>' .  '<br>' .
+		'<strong>Pažnja</strong>: Kako biste izbjegli gubitak podataka u bazi pri određivanju root klastera, tablice iz ove kopije neće biti restrukturirane, isto kao kada radite samo strukturu tablice bez spremanja podataka. Za potpunu konverziju tablica u format sigurnosne kopije morate napraviti <em>potpunu sigurnosnu kopiju baze podataka (struktura i podaci) bez označavanja klastera</em>.',
 	'BackupCompleted'			=> 'Izrada sigurnosne kopije i arhiviranje završeni.<br>' .
-	'Datoteke paketa sigurnosne kopije pohranjene su u podmapu %1.<br>Za preuzimanje koristite FTP (zadržite strukturu mapa i nazive datoteka prilikom kopiranja).<br>Za vraćanje sigurnosne kopije ili uklanjanje paketa, idite na <a href="%2">Obnovi bazu podataka</a>.',
+    	'Datoteke paketa sigurnosne kopije pohranjene su u podmapu %1.<br>Za preuzimanje koristite FTP (zadržite strukturu mapa i nazive datoteka prilikom kopiranja).<br>Za vraćanje sigurnosne kopije ili uklanjanje paketa, idite na <a href="%2">Obnovi bazu podataka</a>.',
 	'LogSavedBackup'			=> 'Spremljena sigurnosna kopija baze podataka ##%1##',
 	'Backup'					=> 'Sigurnosna kopija',
 	'CantReadFile'				=> 'Ne mogu pročitati datoteku %1.',
 
-	// Modul obnove baze podataka
+	// DB Restore module
 	'RestoreInfo'				=> 'Možete vratiti bilo koji od pronađenih paketa sigurnosnih kopija ili ih ukloniti sa servera.',
 	'ConfirmDbRestore'			=> 'Želite li vratiti sigurnosnu kopiju %1?',
 	'ConfirmDbRestoreInfo'		=> 'Molimo pričekajte, ovo može potrajati.',
@@ -1042,15 +1088,16 @@ $ap_translation = [
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Dodatne opcije obnove:',
 	'RestoreOptionsInfo'		=> '* Prije obnavljanja <strong>klasterske sigurnosne kopije</strong>, ciljne tablice se ne brišu (kako bi se spriječio gubitak podataka iz klastera koji nisu bili uključeni u kopiju). ' .
-	'Stoga će tijekom procesa vraćanja nastati duplicirani zapisi. ' .
-	'U normalnom načinu svi će biti zamijenjeni zapisima iz kopije (korištenjem SQL <code>REPLACE</code>), ' .
-	'ali ako je ova opcija označena, svi duplikati se preskaču (trenutne vrijednosti zapisa ostaju), ' .
-	'i samo se zapisi s novim ključevima dodaju u tablicu (SQL <code>INSERT IGNORE</code>).<br>' .
-	'<strong>Napomena</strong>: Kada se vraća potpuna sigurnosna kopija stranice, ova opcija nema smisla.<br>' .
-	'<br>' .
-	'** Ako sigurnosna kopija sadrži korisničke datoteke (globalne i po stranici, cache datoteke itd.), ' .
-	'u normalnom načinu one zamjenjuju postojeće datoteke s istim imenima i vraćaju se u iste direktorije. ' .
-	'Ova opcija omogućuje sačuvati trenutne kopije datoteka i vratiti iz kopije samo nove datoteke (koje nedostaju na serveru).',
+									'Stoga će tijekom procesa vraćanja nastati duplicirani zapisi. ' .
+									'U normalnom načinu svi će biti zamijenjeni zapisima iz kopije (korištenjem SQL <code>REPLACE</code>), ' .
+									'ali ako je ova opcija označena, svi duplikati se preskaču (trenutne vrijednosti zapisa ostaju), ' .
+									'i samo se zapisi s novim ključevima dodaju u tablicu (SQL <code>INSERT IGNORE</code>).<br>' .
+									'<strong>Napomena</strong>: Kada se vraća potpuna sigurnosna kopija stranice, ova opcija nema smisla.<br>' .
+									'<br>' .
+									'<br>' .
+									'u normalnom načinu one zamjenjuju postojeće datoteke s istim imenima i vraćaju se u iste direktorije. ' .
+									'Ova opcija omogućuje sačuvati trenutne kopije datoteka i vratiti iz kopije samo nove datoteke (koje nedostaju na serveru).' .
+									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
 	'IgnoreDuplicatedKeysNr'	=> 'Preskoči duplicirane ključeve tablice (ne zamjenjuj)',
 	'IgnoreSameFiles'			=> 'Preskoči iste datoteke (ne prepiši)',
 	'NoBackupsAvailable'		=> 'Nema dostupnih sigurnosnih kopija.',
@@ -1104,7 +1151,7 @@ $ap_translation = [
 	'BackupArchiveExists'		=> 'Arhiva sigurnosne kopije %1 već postoji.',
 	'LogBackupArchived'			=> 'Arhivirana sigurnosna kopija ##%1##.',
 
-	// Modul korisnika
+	// User module
 	'UsersInfo'					=> 'Ovdje možete mijenjati informacije o korisnicima i neke posebne opcije.',
 
 	'UsersAdded'				=> 'Korisnik dodan',
@@ -1127,7 +1174,7 @@ $ap_translation = [
 	'UserVerifyEmail'			=> 'postavi token za potvrdu e-pošte i dodaj poveznicu za potvrdu',
 	'UserReVerifyEmail'			=> 'Ponovno pošalji token za potvrdu e-pošte',
 
-	// Modul grupa
+	// Groups module
 	'GroupsInfo'				=> 'Iz ovog panela možete upravljati svim korisničkim grupama. Možete brisati, stvarati i uređivati grupe. Također možete odabrati vođe grupa, mijenjati status grupe (otvorena/skrivena/zatvorena) te postaviti naziv i opis grupe.',
 
 	'LogMembersUpdated'			=> 'Ažurirani članovi grupe',
@@ -1168,7 +1215,7 @@ $ap_translation = [
 	'MembersRemove'				=> 'Jeste li sigurni da želite ukloniti člana %1?',
 	'MembersRemoved'			=> 'Član je uklonjen iz grupe.',
 
-	// Modul statistike
+	// Statistics module
 	'DbStatSection'				=> 'Statistika baze podataka',
 	'DbTable'					=> 'Tablica',
 	'DbRecords'					=> 'Zapisi',
@@ -1182,7 +1229,7 @@ $ap_translation = [
 	'FileSize'					=> 'Veličina',
 	'FileTotal'					=> 'Ukupno',
 
-	// Modul sistemskih informacija
+	// Sysinfo module
 	'SysInfo'					=> 'Informacije o verziji:',
 	'SysParameter'				=> 'Parametar',
 	'SysValues'					=> 'Vrijednosti',
@@ -1208,7 +1255,7 @@ $ap_translation = [
 	'PhpExtensions'				=> 'PHP ekstenzije',
 	'ApacheModules'				=> 'Apache moduli',
 
-	// Modul popravka baze podataka
+	// DB repair module
 	'DbRepairSection'			=> 'Popravi bazu podataka',
 	'DbRepair'					=> 'Popravi bazu podataka',
 	'DbRepairInfo'				=> 'Ovaj skript može automatski potražiti uobičajene probleme s bazom podataka i pokušati ih popraviti. Popravak može potrajati, stoga budite strpljivi.',
@@ -1227,7 +1274,7 @@ $ap_translation = [
 	'TableNotRepaired'			=> 'Neki problemi s bazom podataka nisu mogli biti popravljeni.',
 	'RepairsComplete'			=> 'Popravci dovršeni',
 
-	// Modul nekonzistentnosti
+	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Prikaži i ispravi nekonzistentnosti, izbriši ili dodijeli siročad zapise novom korisniku / vrijednosti.',
 	'Inconsistencies'			=> 'Nekonzistentnosti',
 	'CheckDatabase'				=> 'Baza podataka',
@@ -1241,7 +1288,7 @@ $ap_translation = [
 	'Check'						=> 'Provjeri',
 	'Solve'						=> 'Riješi',
 
-	// Modul Bad Behaviour
+	// Bad Behaviour module
 	'BbInfo'					=> 'Otkriva i blokira neželjene web pristupe, sprječava automatizirane spambots pristupe.<br>Za više informacija posjetite %1 početnu stranicu.',
 	'BbEnable'					=> 'Omogući Bad Behaviour:',
 	'BbEnableInfo'				=> 'Sve ostale postavke možete mijenjati u konfiguracijskoj mapi %1.',
@@ -1267,7 +1314,41 @@ $ap_translation = [
 	'BbHeaders'					=> 'Zaglavlja',
 	'BbEntity'					=> 'Entitet',
 
-	// --> Bijela lista
+	'BbSearchPlaceholder'        => 'Search UA, URI, IP, host, support_key, status…',
+	'BbFilterAnyCategory'        => 'Any category',
+	'BbFilterAnyMethod'          => 'Any method',
+	'BbFilterAnyStatus'          => 'Any status',
+	'BbFilterBlockedOnly'        => 'Blocked only',
+	'BbFilterPermittedOnly'      => 'Permitted only',
+	'BbFilterApply'              => 'Apply',
+	'BbFilterClear'              => 'Clear filters',
+	'BbChipSearch'               => 'Search',
+	'BbChipCategory'             => 'Category',
+	'BbChipMethod'               => 'Method',
+	'BbChipStatus'               => 'Status',
+	'BbChipRemove'               => 'Remove this filter',
+	'BbFilterByCategory'         => 'Filter by this category',
+	'BbSearchBySupportKey'       => 'Search for this support key',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Any check status',
+	'BbFilterCheckedOnly'      => 'Checked only',
+	'BbFilterUncheckedOnly'    => 'Unchecked only',
+	'BbChipCheck'              => 'Check status',
+	'BbChecked'                => 'checked',
+	'BbUnchecked'              => 'unchecked',
+	'BbActionCheck'            => 'check',
+	'BbActionUncheck'          => 'uncheck',
+	'BbRowChecked'             => 'Log entry marked as checked',
+	'BbRowUnchecked'           => 'Log entry unchecked',
+	'BbRowCheckedHint'         => 'This record is checked — exempt from automatic cleanup',
+	'BbRowUncheckedHint'       => 'Mark this record to keep it across automatic cleanup',
+	'BbBulkCheckSelected'      => 'Mark checked',
+	'BbBulkUncheckSelected'    => 'Unmark checked',
+	'BbBulkChecked'            => 'Marked %1 entries as checked',
+	'BbBulkUnchecked'          => 'Unmarked %1 entries',
+
+	// --> Whitelist
 	'BbOptionsSaved'			=> 'Opcije spremljene.',
 	'BbWhitelistHint'			=> 'Neprimjereno dodavanje u bijelu listu IZLAŽE vas spamu ili može potpuno zaustaviti rad Bad Behaviour! NE STAVLJAJTE NA BIJELU LISTU osim ako niste 100% sigurni da to treba.',
 	'BbIpAddress'				=> 'IP adresa',
@@ -1277,7 +1358,7 @@ $ap_translation = [
 	'BbUserAgent'				=> 'User Agent',
 	'BbUserAgentInfo'			=> 'Stringovi user agenta koji će biti na bijeloj listi (jedan po retku)',
 
-	// --> Postavke
+	// --> Settings
 	'BbSettingsUpdated'			=> 'Ažurirane Bad Behaviour postavke',
 	'BbLogRequest'				=> 'Logiranje HTTP zahtjeva',
 	'BbLogVerbose'				=> 'Detaljno',
@@ -1295,10 +1376,377 @@ $ap_translation = [
 	'BbHttpblMaxage'			=> 'Maksimalna starost podataka (preporučeno 30)',
 	'BbReverseProxy'			=> 'Reverse proxy / balansiranje opterećenja',
 	'BbReverseProxyInfo'		=> 'Ako koristite Bad Behaviour iza reverznog proxyja, load balancera, HTTP akceleratora, cache sustava ili slične tehnologije, omogućite opciju Reverse Proxy.<br>' .
-	'Ako imate lanac od dva ili više reverznih proxy servera između vašeg poslužitelja i javnog Interneta, morate navesti <em>sve</em> IP rasponе (u CIDR formatu) svih vaših proxy poslužitelja, load balancera itd. Inače Bad Behaviour možda neće moći determinirati stvarnu IP adresu klijenta.<br>' .
-	'Osim toga, vaši reverzni proxy poslužitelji moraju u HTTP zaglavlju postaviti IP adresu Internet klijenta od kojeg su primili zahtjev. Ako ne navedete zaglavlje, koristit će se %1. Većina proxy poslužitelja podržava X-Forwarded-For i tada je potrebno samo da to bude omogućeno na vašim proxy poslužiteljima. Neki drugi često korišteni nazivi zaglavlja su %2 i %3.',
+									'Ako imate lanac od dva ili više reverznih proxy servera između vašeg poslužitelja i javnog Interneta, morate navesti <em>sve</em> IP rasponе (u CIDR formatu) svih vaših proxy poslužitelja, load balancera itd. Inače Bad Behaviour možda neće moći determinirati stvarnu IP adresu klijenta.<br>' .
+									'Osim toga, vaši reverzni proxy poslužitelji moraju u HTTP zaglavlju postaviti IP adresu Internet klijenta od kojeg su primili zahtjev. Ako ne navedete zaglavlje, koristit će se %1. Većina proxy poslužitelja podržava X-Forwarded-For i tada je potrebno samo da to bude omogućeno na vašim proxy poslužiteljima. Neki drugi često korišteni nazivi zaglavlja su %2 i %3.',
 	'BbReverseProxyEnable'		=> 'Omogući Reverse Proxy',
 	'BbReverseProxyHeader'		=> 'Zaglavlje koje sadrži IP adresu Internet klijenta',
 	'BbReverseProxyAddresses'	=> 'IP adresa ili rasponi u CIDR formatu za vaše proxy poslužitelje (jedan po retku)',
+
+	'BbBehavioral'           => 'Behavioral Analysis',
+	'BbEnableBehavioral'     => 'Enable behavioral analysis (rate anomalies, rotating UA/IP)',
+	'BbEnableBehavioralInfo' => 'Tracks request patterns per session. Safe to keep enabled.',
+	'BbEnableFingerprinting' => 'Enable TLS/HTTP/2 fingerprinting (JA3, H2, header order)',
+	'BbEnableFingerprintingInfo' => 'Blocks known bad fingerprints only. Requires enable_fingerprinting=true. May cause false positives on old browsers/proxies.',
+	'BbInspectJson'          => 'Inspect JSON request bodies for attacks',
+	'BbInspectJsonInfo'      => 'WARNING: Breaks AJAX/JSON APIs (wiki markup, code snippets trigger false positives). Keep OFF.',
+	'BbInspectMultipart'     => 'Inspect multipart/form-data bodies for attacks',
+	'BbInspectMultipartInfo' => 'WARNING: Breaks file uploads. Keep OFF.',
+
+	'BbEnableClientHints'      => 'Enable Client Hints Validation',
+	'BbEnableClientHintsInfo'  => 'Validate Sec-CH-UA headers against User-Agent to detect spoofed browsers (Chrome 89+).',
+	'BbEnableAgentic'          => 'Enable Agentic Behavior Detection',
+	'BbEnableAgenticInfo'      => 'Detect AI agent patterns: think-then-fetch, non-linear navigation, precision targeting.',
+	'BbStrictSearchEngines'    => 'Strict search engines',
+	'BbStrictSearchEnginesInfo' => 'Apply stricter checks to unverified search engine bots (Googlebot, Bingbot, …) before allowing them through.',
+	'BbEnableDynamicIp'        => 'Enable Dynamic IP Range Fetching',
+	'BbEnableDynamicIpInfo'    => 'Fetch official IP ranges from Google, Bing, OpenAI, Anthropic, Apple, etc. (cached 24h, stale fallback 7 days).',
+
+	'BbAiCrawlers'           => 'AI Crawler Control',
+	'BbBlockUnverifiedAi'    => 'Block unverified AI crawlers',
+	'BbBlockUnverifiedAiInfo' => 'Blocks AI crawlers that fail DNS/IP verification (spoofed bots).',
+	'BbStrictAi'             => 'Strict AI mode (block even verified unallowed AI)',
+	'BbStrictAiInfo'         => 'Blocks ALL AI crawlers not in allowed list, even if verified.',
+	'BbAllowedAiCrawlers'    => 'Allowed AI crawler tokens (one per line)',
+	'BbAllowedAiCrawlersInfo' => 'Tokens: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Enable DNSBL checks',
+	'BbDnsblLists'           => 'DNSBL lists (one per line)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Rate Limiting',
+	'BbRateLimitEnabled'     => 'Enable rate limiting',
+	'BbRateGlobalRequests'   => 'Global requests per window',
+	'BbRateGlobalWindow'     => 'Global window (seconds)',
+	'BbRatePerMinuteRequests'=> 'Per-minute requests',
+	'BbRatePerMinuteWindow'  => 'Per-minute window (seconds)',
+	'BbRatePostRequests'     => 'POST requests per window',
+	'BbRatePostWindow'       => 'POST window (seconds)',
+	'BbRateLoginRequests'    => 'Login requests per window',
+	'BbRateLoginWindow'      => 'Login window (seconds)',
+
+	'BbChallenge'            => 'Challenge System',
+	'BbChallengeEnabled'     => 'Enable challenges',
+	'BbChallengeProvider'    => 'Challenge provider',
+	'BbChallengeSiteKey'     => 'Site key',
+	'BbChallengeSecretKey'   => 'Secret key',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 min score',
+
+	'BbPerformance'          => 'Performance',
+	'BbSkipExtensions'       => 'Skip extensions (one per line)',
+	'BbSkipPaths'            => 'Skip path prefixes (one per line)',
+
+	'BbGeoip'                => 'GeoIP / ASN Blocking',
+	'BbGeoipEnabled'         => 'Enable GeoIP lookups',
+	'BbGeoipDbPath'          => 'MaxMind DB path',
+	'BbBlockedCountries'     => 'Blocked countries (ISO codes, one per line)',
+	'BbBlockedAsns'          => 'Blocked ASNs (one per line)',
+
+	'BbBlockPage'                  => 'Block Page',
+	'BbShowDetailedBlockPage'      => 'Show detailed block page',
+	'BbShowDetailedBlockPageInfo'  => 'Show reason, request URI, and technical support key on the block page. Recommended for production.',
+	'BbShowContactInfo'            => 'Show contact info on block page',
+	'BbShowContactInfoInfo'        => 'Show admin email on the block page (only takes effect when detailed block page is enabled).',
+	'BbSettingsSaveFailed'         => 'Failed to save Bad Behaviour settings',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Basic settings',
+	'BbAdvancedSection'   => 'Advanced settings',
+	'BbAdvancedHint'      => 'Most operators should not need to change these.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Which bots to recognize. "minimal" (default) is fastest; "full" is most thorough.',
+	'BbStrictness'        => 'Blocking posture',
+	'BbStrictnessInfo'    => 'monitor-only logs but blocks nothing; normal blocks verified attackers; strict blocks aggressively.',
+	'BbLoggingMode'       => 'Logging',
+	'BbLoggingModeInfo'   => 'Normal (recommended), Verbose (logs every request), Off',
+	'BbLogModeNormal'     => 'Normal',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Off',
+	'BbBehindProxy'       => 'Site is behind a reverse proxy or CDN',
+	'BbBehindProxyInfo'   => 'Enable if behind Cloudflare, AWS, GCP, Fastly, etc. You must add proxy IP ranges in Advanced — without them, real client IPs cannot be determined.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Core',
+	'BbAdvReverseProxy'   => 'Reverse Proxy',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Bot Categories',
+	'BbAdvDnsVerification'=> 'DNS Verification',
+	'BbAdvRateLimits'     => 'Rate Limiting',
+	'BbAdvHeadDetection'  => 'Head Request Detection',
+	'BbAdvAssetScraping'  => 'Asset Scraping Detection',
+	'BbAdvDynamicIp'      => 'Dynamic IP Ranges',
+	'BbAdvOnDemandRefresh'=> 'On-Demand IP Refresh',
+	'BbAdvHttpbl'         => 'Project Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Challenge / CAPTCHA',
+	'BbAdvPerformance'    => 'Performance',
+	'BbAdvGeoip'          => 'GeoIP / ASN Blocking',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 Fingerprints',
+	'BbAdvCustomRules'    => 'Custom Rules',
+	'BbAdvBlockPage'      => 'Block Page',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Search Engine',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Social Crawler',
+	'BbCatSeoCrawler'     => 'SEO Crawler',
+	'BbCatArchiveCrawler' => 'Archive Crawler',
+	'BbCatMonitoring'     => 'Monitoring',
+	'BbCatFeedReader'     => 'Feed Reader',
+	'BbCatShoppingCrawler'=> 'Shopping Crawler',
+	'BbCatCloudInfra'     => 'Cloud Infrastructure',
+	'BbCatSecurityScanner'=> 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'      => 'Malicious',
+	'BbCatUnknown'        => 'Unknown',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Cloudflare',
+	'BbCloudProviderFastly'     => 'Fastly',
+	'BbCloudProviderGcp'        => 'Google Cloud',
+	'BbCloudProvidersInfo'      => 'Limit on-demand refresh to specific providers. Empty = all four.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Log Retention',
+	'BbLogRetentionEnabled'          => 'Enable automatic log cleanup',
+	'BbLogRetentionEnabledInfo'      => 'Periodically delete log rows older than the retention window. Recommended for sites without cron access.',
+	'BbLogRetentionMaxAgeDays'       => 'Retention window (days)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Rows older than this are deleted. Default: 7. Common values: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Maximum row count (0 = no cap)',
+	'BbLogRetentionMaxRowsInfo'      => 'If set, oldest rows are deleted whenever the table exceeds this size, regardless of age. Useful for high-traffic sites.',
+	'BbLogRetentionProbability'       => 'Probability denominator (1 in N)',
+	'BbLogRetentionProbabilityInfo'   => '1 in N requests checks the staleness gate. Higher = less DB load. Default: 1000.',
+	'BbLogRetentionMinInterval'      => 'Minimum interval between cleanups (seconds)',
+	'BbLogRetentionMinIntervalInfo'  => 'Hard floor on cleanup frequency. Default: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Cleanup lock TTL (seconds)',
+	'BbLogRetentionLockTtlInfo'      => 'How long the cleanup mutex is held. Default: 600 (10 min).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Enable DNS verification',
+	'BbDnsVerificationInfo'     => 'Verify bot claims (e.g. Googlebot) by reverse-DNS lookup. Catches spoofed bots.',
+	'BbDnsTimeoutMs'            => 'DNS lookup timeout (ms)',
+	'BbDnsPositiveTtl'          => 'Positive cache TTL (seconds)',
+	'BbDnsNegativeTtl'          => 'Negative cache TTL (seconds)',
+	'BbDnsRequireForward'       => 'Require forward-confirm (PTR + A record match)',
+	'BbDnsRequireForwardInfo'   => 'Catches PTR spoofing but adds latency and IPv6 FP risk.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD exempt paths (one per line)',
+	'BbHeadRefererExemptInfo'   => 'Paths where HEAD without Referer is legitimate (e.g. /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Asset extensions to protect (one per line)',
+	'BbAssetExtensionsInfo'     => 'File types watched for direct scraping without page loads.',
+
+	'BbOnDemandBotIds'          => 'Bot IDs to refresh (empty = all)',
+	'BbOnDemandBotIdsInfo'      => 'Restrict refresh to specific bots. Leave empty to refresh all registered bots.',
+	'BbOnDemandProbability'     => 'Probability denominator (1 in N)',
+	'BbOnDemandMinAge'          => 'Min cache age (seconds)',
+	'BbOnDemandLockTtl'         => 'Lock TTL (seconds)',
+	'BbOnDemandCacheTtl'        => 'Cache TTL (seconds)',
+	'BbOnDemandFeedTimeout'     => 'Feed fetch timeout (seconds)',
+
+	'BbDynamicIpTtl'            => 'Cache TTL (seconds)',
+	'BbDynamicIpFeeds'          => 'Feeds to refresh (one per line)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Last seen',
+	'BbSeverity'             => 'Severity',
+	'BbStatusBreakdown'      => 'Status breakdown',
+	'BbBotBreakdown'         => 'Bot breakdown',
+	'BbTopBlocked'           => 'Top denied IPs',
+	'BbGeoSummary'           => 'Geographic summary',
+	'BbCountry'              => 'Country',
+	'BbAsn'                  => 'ASN',
+	'BbVerifiedPct'          => 'Verified %',
+	'BbNoData'               => 'No data for the selected window',
+	'BbCategory'             => 'Category',
+	'BbResponseTime'         => 'Response time',
+	'BbDateCol'              => 'Time / IP / Status',
+	'BbSelectRow'            => 'Select row',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Slow only',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Resolved',
+	'BbChipStatusCode' => 'Status code',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ASN',
+	'BbChipCountry'    => 'Country',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'View headers',
+	'BbViewBody'             => 'View body',
+	'BbViewContentLabel'     => 'Content',
+	'BbViewModeFull'         => 'Full (always shown)',
+	'BbViewModeTeaser'       => 'Teaser (click to expand)',
+	'BbViewModeHidden'       => 'Hidden (show on demand)',
+	'BbHide'                 => 'hide',
+	'BbChars'                => 'chars',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Custom Rules',
+	'BbCustomRulesLabel'           => 'Custom rules (one JSON object per line)',
+	'BbCustomRulesInfo'            => 'Each line is a JSON object with keys: type (ip|ua_regex|ua_contains|asn|country|header), value, action (allow|block|challenge|log), and id. Example: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Body scan skip fields',
+	'BbBodyScanSkipFieldsInfo'     => 'One field name per line. Fields listed are skipped during SQL/XSS body inspection.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Advanced filters',
+	'BbDateFrom'            => 'From',
+	'BbDateTo'              => 'To',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Slow requests only (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Active only',
+	'BbResolvedOnly'        => 'Resolved only',
+	'BbResolvedAll'         => 'Active + resolved',
+	'BbResolved'            => 'resolved',
+	'BbActionResolve'       => 'resolve',
+	'BbActionUnresolve'     => 'unresolve',
+	'BbRowResolved'         => 'Log entry marked resolved',
+	'BbRowUnresolved'       => 'Log entry marked unresolved',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Delete selected',
+	'BbBulkWhitelistSelected'   => 'Whitelist IPs',
+	'BbBulkResolveSelected'     => 'Mark resolved',
+	'BbBulkUnresolveSelected'   => 'Mark unresolved',
+	'BbBulkHint'                => 'Tick rows first, then click an action.',
+	'BbNoItemsSelected'         => 'No items selected',
+	'BbBulkDeleted'             => 'Deleted %1 log entries',
+	'BbBulkWhitelisted'         => 'Added %1 IPs to whitelist',
+	'BbBulkResolved'            => 'Marked %1 entries as resolved',
+	'BbBulkUnresolved'          => 'Marked %1 entries as unresolved',
+	'BbMarkAll'                 => 'Mark all rows on this page',
+	'BbMarkNone'                => 'Unmark all rows',
+
+	'BbBulkFailed'              => 'Could not update the selected rows. Check the database or try again.',
+	'BbBulkWhitelistedNone'     => 'No new IPs were added — all selected IPs were already on the whitelist.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'verified',
+	'BbUnverified'           => 'unverified',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Request allowed',
+	'BbStatus_blocked.bot'                => 'Known bot blocked',
+	'BbStatus_blocked.ai_crawler'         => 'AI crawler blocked',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler blocked',
+	'BbStatus_blocked.malicious_ua'       => 'Malicious User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Attack payload detected',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL match',
+	'BbStatus_blocked.httpbl'             => 'http:BL match',
+	'BbStatus_blocked.behavioral'         => 'Behavioral anomaly',
+	'BbStatus_blocked.fingerprint'        => 'Bad fingerprint',
+	'BbStatus_blocked.rate_limit'         => 'Rate limit exceeded',
+	'BbStatus_blocked.custom_rule'        => 'Custom rule match',
+	'BbStatus_blocked.geoip'              => 'GeoIP block',
+	'BbStatus_blocked.residential_proxy'  => 'Residential proxy blocked',
+	'BbStatus_challenge.required'         => 'Challenge required',
+	'BbStatus_challenge.failed'           => 'Challenge failed',
+	'BbStatus_error.internal'             => 'Internal error',
+	'BbStatus_error.configuration'        => 'Configuration error',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Last 24 hours',
+	'BbWindow7d'  => 'Last 7 days',
+	'BbWindow30d' => 'Last 30 days',
+	'BbWindowAll' => 'All time',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Minimal (default)',
+	'BbPresetFull'           => 'Full',
+	'BbPresetVerifiedOnly'   => 'Verified-only',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'EU-only',
+	'BbPresetHumanOnly'      => 'Human-only',
+	'BbPresetCustom'         => 'Custom',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Monitor-only',
+	'BbStrictnessNormal'      => 'Normal',
+	'BbStrictnessStrict'      => 'Strict',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Cloudflare Turnstile',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Enable head request detection',
+	'BbHeadRequireReferer'       => 'Require Referer on HEAD',
+	'BbHeadFloodThreshold'       => 'Flood threshold (per session)',
+	'BbHeadProbeThreshold'       => 'Probe threshold (per IP / 5min)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Enable asset scraping detection',
+	'BbAssetNoRefererThreshold'    => 'No-referer threshold (per IP / hour)',
+	'BbAssetOnlySessionThreshold'  => 'Asset-only session threshold',
+	'BbAssetPatternThreshold'      => 'Sequential pattern threshold (per IP / 5min)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Enable dynamic IP ranges',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Enable on-demand refresh',
+	'BbOnDemandRefreshInfo'      => 'Refresh IP range cache during requests. Use when you have no cron access.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Bad JA3',
+	'BbFpBadH2'           => 'Bad H2',
+	'BbFpBotHeaderOrders' => 'Bot Header Orders',
+	'BbFpExpectedJa3'     => 'Expected JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Blocked',
+	'BbListChallenge' => 'Challenge (CAPTCHA)',
+	'BbListLogOnly'   => 'Log only (no enforcement)',
+	'BbListAllowed'   => 'Explicitly allowed',
+	'BbListHint'      => 'Categories in this list get the action regardless of category default.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Search Engine',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Social Crawler',
+	'BbCatSeoCrawler'      => 'SEO Crawler',
+	'BbCatArchiveCrawler'  => 'Archive Crawler',
+	'BbCatMonitoring'      => 'Monitoring',
+	'BbCatFeedReader'      => 'Feed Reader',
+	'BbCatShoppingCrawler' => 'Shopping Crawler',
+	'BbCatCloudInfra'      => 'Cloud Infrastructure',
+	'BbCatSecurityScanner' => 'Security Scanner',
+	'BbCatResidentialProxy'=> 'Residential Proxy',
+	'BbCatMalicious'       => 'Malicious',
+	'BbCatUnknown'         => 'Unknown',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => '32-char hash',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Attack patterns',
+	'BbSevChallenges'     => 'Challenges issued',
+	'BbSevPermitted'      => 'Permitted',
+	'BbSevErrors'         => 'Errors',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Categories',
+
+	'BbResultBreakdown'    => 'Result breakdown',
+	'BbBreakdownBlocked'   => 'Blocked',
+	'BbBreakdownMonitored' => 'Monitored',
+	'BbBreakdownAllowed'   => 'Allowed',
+	'BbViewAllInLog'       => 'View all in log',
+	'BbAllowedHintVerbose' => 'Allowed traffic is only logged when verbose logging is enabled. Toggle logging_mode=verbose in Settings to see what passes through.',
 
 ];

@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Административный пароль не задан!',
 	'NoRecoveryPasswordTip'		=> 'Внимание: отсутствие административного пароля представляет угрозу для безопасности! Укажите пароль в файле настроек и запустите программу повторно.',
 
+	'ApDevNologinBlocked'		=> 'Доступ заблокирован: AP_DEV_NOLOGIN включен в admin.php, но запрос не был получен с локального хоста (127.0.0.1, ::1, или localhost). Это флаг только для развития и должен быть отключён при работе. Установите <code>AP_DEV_NOLOGIN = 0</code> в admin.php для восстановления доступа.',
+	'ApDevNologinBlockedLog'	=> '!!! СЕКУРИЯ: %1 включен, но admin.php был получен доступ с нелокального адреса (%2). Доступ к панели администратора был заблокирован.',
+
 	'ErrorLoadingModule'		=> 'Ошибка загрузки административного модуля %1: модуль не существует.',
 
 	'ApHomePage'				=> 'главная страница сайта',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'завершить администрирование системы',
 
 	'TimeLeft'					=> 'Осталось времени:  %1 минут',
+	'TimeLeftInfinity'			=> 'Осталось времени:  %1 (режим разработчика)',
 	'ApVersion'					=> 'версия',
 
 	'SiteOpen'					=> 'открыть',
@@ -913,8 +917,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Миниатюры',
 	'CreateThumbnail'			=> 'Создавать миниатюры:',
 	'CreateThumbnailInfo'		=> 'При включении опции для загружаемых рисунков будут создаваться миниатюры во всех возможных ситуациях.',
-	'JpegQuality'				=> 'JPEG Quality:',
-	'JpegQualityInfo'			=> 'Качество при масштабировании миниатюры JPEG. Значение должно быть от 1 до 100, при этом 100 означает 100% качество.',
+	'ImageQuality'				=> 'Предустановка качества изображения:',
+	'ImageQualityInfo'			=> 'Качество при масштабировании эскиза. Пресеты, определяющие значения кодека, которые дают сопоставимый результат.',
 	'MaxImageArea'				=> 'Maximum Image Area:',
 	'MaxImageAreaInfo'			=> 'Максимальное количество пикселей, которое может иметь исходное изображение. Это обеспечивает ограничение на использование памяти при распаковке изображения. <br><code>-1</code> означает, что программа не будет проверять размер изображения перед попыткой его масштабирования. <code>0</code> означает, что значение будет определено автоматически.',
 	'MaxThumbWidth'				=> 'Максимальная ширина миниатюр:',
@@ -947,7 +951,6 @@ $ap_translation = [
 		'2'		=> 'не выше, чем',
 		'3'		=> 'соответствует',
 	],
-	'LogNoMatch'				=> 'Нет событий, удовлетворяющих критериям',
 	'LogDate'					=> 'Дата',
 	'LogEvent'					=> 'Событие',
 	'LogUsername'				=> 'Пользователь',
@@ -960,6 +963,49 @@ $ap_translation = [
 		'6'		=> 'Минимальный',
 		'7'		=> 'Отладочный',
 	],
+
+	'LogCollapse'        => 'свернуть',
+	'LogExpand'          => 'развернуть',
+	'LogType'              => 'Тип',
+	'LogSearch'            => 'Искать',
+	'LogSearchPlaceholder' => 'поиск сообщений...',
+	'LogUserId'            => 'ID пользователя',
+	'LogExactMatch'        => 'точное совпадение',
+	'LogFrom'              => 'От',
+	'LogTo'                => 'Кому',
+	'LogSupportKey'        => 'Ключ поддержки',
+	'LogContext'           => 'Контекст',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'User agent',
+	'LogReferer'           => 'Реферер',
+	'LogTotal'             => 'Итого',
+	'LogFilteredBy'        => 'Отфильтровано по',
+	'LogClearFilter'       => 'Очистить фильтр',
+	'LogActions'           => 'Действия',
+	'LogDelete'            => 'Удалить',
+	'LogDeleteConfirm'     => 'Удалить эту запись журнала?',
+	'LogDeleteSelected'    => 'Удалить выбранные',
+	'LogBulkAction'        => '— Массовое действие —',
+	'LogApply'             => 'Применить',
+	'LogExportCSV'         => 'Экспорт CSV',
+	'LogExportJSON'        => 'Экспорт JSON',
+	'LogPurged'            => 'Таблица журнала усечена.',
+	'LogPurgedFiltered'     => '%1 записи журнала удалены фильтром.',
+	'LogDeleted'           => 'Запись журнала удалена.',
+	'LogDeletedBulk'        => '%1 записи журнала удалены.',
+	'LogPurgeSection'      => 'Разрушительные операции',
+	'LogPurgeWarning'      => 'Есть записи %1 совпадают с текущим представлением. Используйте с осторожностью.',
+	'LogPurgeConfirm'      => 'Я понимаю, что это удалит записи журнала навсегда',
+	'LogPurgeFiltered'     => 'Очистить фильтр по запросу',
+	'LogPurgeFilteredConfirm' => 'Удалить все записи, соответствующие текущему фильтру? Это действие не может быть отменено.',
+	'LogPurgeAll'          => 'Очистить журнал ENTIRE',
+	'LogPurgeAllConfirm'   => 'Удалить КАЖДЫЙ вход в базу данных? Это действие не может быть отменено.',
+	'LogFindRelated'       => 'Найти связанные записи',
+	'LogNoMatch'           => 'Нет записей в журнале, соответствующих текущему фильтру.',
+
+	'LogMarkAll'                => 'Отметить все строки на этой странице',
+	'LogMarkNone'               => 'Снять отметку со всех строк',
+	'LogSelectRow'              => 'Выберите строку',
 
 	// Massemail module
 	'MassemailInfo'				=> 'С этой страницы вы можете отправить email нескольким пользователям или группе, <strong>имеющим включённую опцию получения электронных сообщений</strong>. Сообщение будет отправлено с email Администратора, адреса получателей будут указаны скрытой копией (BCC) что предотвратит рассылку адресов. По умолчанию такое сообщение включает максимум 20 получателей. Если получателей больше, то будет отправлено несколько сообщений. Если вы отправляете сообщение большой группе людей, то это действие может занять некоторое время. Пожалуйста, будьте терпеливы и не останавливайте загрузку страницы после отправки сообщения. Вы будете уведомлены об успешном завершении отправки.',
@@ -1268,6 +1314,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Заголовки',
 	'BbEntity'					=> 'Объект',
 
+	'BbSearchPlaceholder'        => 'Поиск в UA, URI, IP, хост, support_key, статус…',
+	'BbFilterAnyCategory'        => 'Любая категория',
+	'BbFilterAnyMethod'          => 'Любой метод',
+	'BbFilterAnyStatus'          => 'Любой статус',
+	'BbFilterBlockedOnly'        => 'Заблокирован только',
+	'BbFilterPermittedOnly'      => 'Разрешено только',
+	'BbFilterApply'              => 'Применить',
+	'BbFilterClear'              => 'Очистить фильтры',
+	'BbChipSearch'               => 'Искать',
+	'BbChipCategory'             => 'Категория',
+	'BbChipMethod'               => 'Метод',
+	'BbChipStatus'               => 'Статус',
+	'BbChipRemove'               => 'Удалить этот фильтр',
+	'BbFilterByCategory'         => 'Фильтр по этой категории',
+	'BbSearchBySupportKey'       => 'Поиск ключа поддержки',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Любой статус проверки',
+	'BbFilterCheckedOnly'      => 'Только отмеченные',
+	'BbFilterUncheckedOnly'    => 'Не отмечено',
+	'BbChipCheck'              => 'Проверить статус',
+	'BbChecked'                => 'проверено',
+	'BbUnchecked'              => 'снято',
+	'BbActionCheck'            => 'проверить',
+	'BbActionUncheck'          => 'снять флажок',
+	'BbRowChecked'             => 'Запись журнала помечена как проверенная',
+	'BbRowUnchecked'           => 'Запись журнала снята',
+	'BbRowCheckedHint'         => 'Эта запись проверена — исключить из автоматической очистки',
+	'BbRowUncheckedHint'       => 'Отметьте эту запись, чтобы оставлять ее через автоматическую очистку',
+	'BbBulkCheckSelected'      => 'Отметить отмеченным',
+	'BbBulkUncheckSelected'    => 'Снять отметку с отметки',
+	'BbBulkChecked'            => 'Отмечены записи %1 как проверенные',
+	'BbBulkUnchecked'          => 'Отменено отмечено %1 записей',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Настройки сохранены.',
 	'BbWhitelistHint'			=> 'Непродуманное добавление в разрешенный список подвергнет вас спаму или приведет к тому, что фильтр плохого поведения полностью прекратит свою работу! НЕ ДОБАВЛЯЙТЕ В РАЗРЕШЕННЫЙ СПИСОК, если вы не на 100% уверены, что вы должны.',
@@ -1301,5 +1381,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Разрешить обратный прокси',
 	'BbReverseProxyHeader'		=> 'Заголовок, содержащий IP-адрес клиента из сети Интернет',
 	'BbReverseProxyAddresses'	=> 'IP-адреса или диапазоны IP-адресов в формате CIDR ваших прокси-серверов (каждый в отдельной строке)',
+
+	'BbBehavioral'           => 'Анализ поведения',
+	'BbEnableBehavioral'     => 'Включить анализ поведенческих параметров (аномалий скорости, UA/IP)',
+	'BbEnableBehavioralInfo' => 'Отслеживание запрашивает шаблоны за сессию. Безопасно держать включенным.',
+	'BbEnableFingerprinting' => 'Включить отпечаток TLS/HTTP/2 пальцев (JA3, H2, порядок заголовка)',
+	'BbEnableFingerprintingInfo' => 'Блокирует только плохие отпечатки пальцев. Требует включение_отпечаток пальцев=true. Может вызвать ложное срабатывание на старых браузерах/прокси.',
+	'BbInspectJson'          => 'Изучить JSON запросы на атаки',
+	'BbInspectJsonInfo'      => 'ПРЕДУПРЕЖДЕНИЕ: Прерывает AJAX/JSON API (вики разметки, фрагменты кода срабатывают ложные срабатывания). Держите выключен.',
+	'BbInspectMultipart'     => 'Изучение многочастных/формальных данных для атак',
+	'BbInspectMultipartInfo' => 'ПРЕДУПРЕЖДЕНИЕ: Прерывает загрузку файлов. Не выключен.',
+
+	'BbEnableClientHints'      => 'Включить проверку подсказок клиента',
+	'BbEnableClientHintsInfo'  => 'Проверка заголовков Sec-CH-UA против User-Agent для обнаружения поддельных браузеров (Chrome 89+).',
+	'BbEnableAgentic'          => 'Включить обнаружение поведения агента',
+	'BbEnableAgenticInfo'      => 'Обнаружить модели агента ИИ: размышления и нелинейная навигация, точное таргетинг.',
+	'BbStrictSearchEngines'    => 'Строгие поисковые системы',
+	'BbStrictSearchEnginesInfo' => 'Примените более строгие проверки для непроверенных поисковых роботов (Googlebot, Bingbot, …, прежде чем разрешать их.',
+	'BbEnableDynamicIp'        => 'Включить получение динамического IP диапазона',
+	'BbEnableDynamicIpInfo'    => 'Получить официальные IP диапазоны от Google, Bing, OpenAI, Anthropic, Apple, и т. д. (кэшируется 24h, stale fallback 7 дней).',
+
+	'BbAiCrawlers'           => 'Управление автосканированием ИИ',
+	'BbBlockUnverifiedAi'    => 'Блокировать непроверенные ИИ ползунки',
+	'BbBlockUnverifiedAiInfo' => 'Блоки AI ползунков, которые не прошли проверку DNS/IP (поддельные боты).',
+	'BbStrictAi'             => 'Строгий ИИ режим (блокировать даже проверенный ИИ)',
+	'BbStrictAiInfo'         => 'Блокирует ВСЕ ИИ ползунки не в разрешенном списке, даже если проверено.',
+	'BbAllowedAiCrawlers'    => 'Разрешенные токены для сканирования ИИ (по одному в строке)',
+	'BbAllowedAiCrawlersInfo' => 'Метки: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Включить проверку DNSBL',
+	'BbDnsblLists'           => 'Список DNSBL (по одному в строке)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Ограничение тарифа',
+	'BbRateLimitEnabled'     => 'Включить ограничение скорости',
+	'BbRateGlobalRequests'   => 'Глобальные запросы в окне',
+	'BbRateGlobalWindow'     => 'Глобальное окно (в секундах)',
+	'BbRatePerMinuteRequests'=> 'Поминутные запросы',
+	'BbRatePerMinuteWindow'  => 'Поминутное окно (в секундах)',
+	'BbRatePostRequests'     => 'POST запросов на окно',
+	'BbRatePostWindow'       => 'Окно POST (в секундах)',
+	'BbRateLoginRequests'    => 'Запросы на вход в окно',
+	'BbRateLoginWindow'      => 'Окно входа (в секундах)',
+
+	'BbChallenge'            => 'Система испытаний',
+	'BbChallengeEnabled'     => 'Включить испытания',
+	'BbChallengeProvider'    => 'Провайдер испытаний',
+	'BbChallengeSiteKey'     => 'Ключ сайта',
+	'BbChallengeSecretKey'   => 'Секретный ключ',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 минута',
+
+	'BbPerformance'          => 'Производительность',
+	'BbSkipExtensions'       => 'Пропускать расширения (по одному в строке)',
+	'BbSkipPaths'            => 'Пропускать префиксы пути (по одному в строке)',
+
+	'BbGeoip'                => 'Блокировка GeoIP / ASN',
+	'BbGeoipEnabled'         => 'Включить поиск GeoIP',
+	'BbGeoipDbPath'          => 'Путь к базе данных MaxMind',
+	'BbBlockedCountries'     => 'Заблокированные страны (ISO коды, по одному в строке)',
+	'BbBlockedAsns'          => 'Заблокированные ASN (по одному в строке)',
+
+	'BbBlockPage'                  => 'Страница блока',
+	'BbShowDetailedBlockPage'      => 'Показать детальную страницу блока',
+	'BbShowDetailedBlockPageInfo'  => 'Показать причину, запрос URI и ключ технической поддержки на странице блока. Рекомендуется для производства.',
+	'BbShowContactInfo'            => 'Показывать контактную информацию на странице блокировки',
+	'BbShowContactInfoInfo'        => 'Показывать email администратора на странице блоков (действует только при включенной детальной вкладке).',
+	'BbSettingsSaveFailed'         => 'Не удалось сохранить настройки неверного поведения',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Основные настройки',
+	'BbAdvancedSection'   => 'Расширенные настройки',
+	'BbAdvancedHint'      => 'Большинство операторов не должны менять их.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Какие боты распознать. «минимальный» (по умолчанию) самый быстрый; «полный» является наиболее тщательным.',
+	'BbStrictness'        => 'Блокирующая оза',
+	'BbStrictnessInfo'    => 'монитор-только, но не блокирует ничего; обычные блоки проверяют атаки; жесткие блоки агрессивно.',
+	'BbLoggingMode'       => 'Ведение журнала',
+	'BbLoggingModeInfo'   => 'Нормальный (рекомендуется), Verbose (записывает каждый запрос), Выкл',
+	'BbLogModeNormal'     => 'Обычный',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Выкл',
+	'BbBehindProxy'       => 'Сайт находится за обратным прокси или CDN',
+	'BbBehindProxyInfo'   => 'Включите, если Cloudflare, AWS, GCP, Fastly, и т. д. Вы должны добавить диапазон IP прокси-серверов в Advanced — без них невозможно определить реальные IP-адреса клиентов.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Основа',
+	'BbAdvReverseProxy'   => 'Обратный прокси',
+	'BbAdvAiCrawlers'     => 'AI Crawlers',
+	'BbAdvBotCategories'  => 'Категории ботов',
+	'BbAdvDnsVerification'=> 'Подтверждение DNS',
+	'BbAdvRateLimits'     => 'Ограничение тарифа',
+	'BbAdvHeadDetection'  => 'Обнаружение запроса главы',
+	'BbAdvAssetScraping'  => 'Обнаружение слома актива',
+	'BbAdvDynamicIp'      => 'Динамические IP диапазоны',
+	'BbAdvOnDemandRefresh'=> 'Обновить IP по требованию',
+	'BbAdvHttpbl'         => 'Проект Honeypot http:BL',
+	'BbAdvDnsbl'          => 'DNSBL',
+	'BbAdvChallenge'      => 'Испытание / CAPTCHA',
+	'BbAdvPerformance'    => 'Производительность',
+	'BbAdvGeoip'          => 'Блокировка GeoIP / ASN',
+	'BbAdvFingerprints'   => 'TLS / HTTP/2 отпечатки пальцев',
+	'BbAdvCustomRules'    => 'Пользовательские правила',
+	'BbAdvBlockPage'      => 'Страница блока',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Поисковая система',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Социальные краулеры',
+	'BbCatSeoCrawler'     => 'SEO Кроулер',
+	'BbCatArchiveCrawler' => 'Архивировать Crawler',
+	'BbCatMonitoring'     => 'Мониторинг',
+	'BbCatFeedReader'     => 'Читатель лент новостей',
+	'BbCatShoppingCrawler'=> 'Корпорации покупок',
+	'BbCatCloudInfra'     => 'Облачная инфраструктура',
+	'BbCatSecurityScanner'=> 'Сканер безопасности',
+	'BbCatResidentialProxy'=> 'Жилой прокси-сервер',
+	'BbCatMalicious'      => 'Вредоносный',
+	'BbCatUnknown'        => 'Неизвестен',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Огонь из облака',
+	'BbCloudProviderFastly'     => 'Быстро',
+	'BbCloudProviderGcp'        => 'Облако Google',
+	'BbCloudProvidersInfo'      => 'Ограничить время обновления до определенного провайдера. Пустое значение = все четыре.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Сохранение журнала',
+	'BbLogRetentionEnabled'          => 'Включить автоматическую очистку журнала',
+	'BbLogRetentionEnabledInfo'      => 'Периодически удалять строки журнала старше окна сохранения. Рекомендуется для сайтов без доступа к cron.',
+	'BbLogRetentionMaxAgeDays'       => 'Окно удержания (дней)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Строки старше этого файла удалены. По умолчанию: 7. Общие значения: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Максимальное количество строк (0 = без cap)',
+	'BbLogRetentionMaxRowsInfo'      => 'Если установлено, старые строки удаляются всякий раз, когда таблица превышает этот размер, независимо от возраста. Полезно для сайтов с высокой нагрузкой.',
+	'BbLogRetentionProbability'       => 'Знаменатель вероятности (1 в N)',
+	'BbLogRetentionProbabilityInfo'   => '1 в запросах N проверяет проходные ворота. Выше = меньше загрузки БД. По умолчанию: 1000.',
+	'BbLogRetentionMinInterval'      => 'Минимальный интервал между очистками (в секундах)',
+	'BbLogRetentionMinIntervalInfo'  => 'Удобный пол на частоте очистки. По умолчанию: 21600 (6ч).',
+	'BbLogRetentionLockTtl'          => 'Очистка TTL блокировки (секунд)',
+	'BbLogRetentionLockTtlInfo'      => 'Как долго удерживается мультиплекс. По умолчанию: 600 (10 мин).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Включить проверку DNS',
+	'BbDnsVerificationInfo'     => 'Проверьте утверждения бота (например, Googlebot), обратно-DNS. Локализация подменных ботов.',
+	'BbDnsTimeoutMs'            => 'Таймаут поиска DNS (мс)',
+	'BbDnsPositiveTtl'          => 'TTL позитивного кэша (в секундах)',
+	'BbDnsNegativeTtl'          => 'TTL отрицательного кэша (секунд)',
+	'BbDnsRequireForward'       => 'Требуется подтверждение вперед (PTR + совпадение записей)',
+	'BbDnsRequireForwardInfo'   => 'Ловит подмену PTR, но добавляет риск задержки и IPv6 FP риска.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD освобождает пути (по одному в строке)',
+	'BbHeadRefererExemptInfo'   => 'Пути, где HEAD без Реферера являются законными (например, /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Расширения для защиты (по одному в строке)',
+	'BbAssetExtensionsInfo'     => 'Типы файлов отслеживаются для прямого уничтожения без загрузки страниц.',
+
+	'BbOnDemandBotIds'          => 'ID бота для обновления (пустое = все)',
+	'BbOnDemandBotIdsInfo'      => 'Ограничить обновление для определенных ботов. Оставьте пустым, чтобы обновить всех зарегистрированных ботов.',
+	'BbOnDemandProbability'     => 'Знаменатель вероятности (1 в N)',
+	'BbOnDemandMinAge'          => 'Мин. возраст кэша (в секундах)',
+	'BbOnDemandLockTtl'         => 'Заблокировать TTL (секунды)',
+	'BbOnDemandCacheTtl'        => 'TTL кэша (в секундах)',
+	'BbOnDemandFeedTimeout'     => 'Таймаут ленты загрузки (в секундах)',
+
+	'BbDynamicIpTtl'            => 'TTL кэша (в секундах)',
+	'BbDynamicIpFeeds'          => 'Каналы для обновления (по одному в строке)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Последний раз видели',
+	'BbSeverity'             => 'Серьезность',
+	'BbStatusBreakdown'      => 'Деление статуса',
+	'BbBotBreakdown'         => 'Разбивка ботов',
+	'BbTopBlocked'           => 'Топ запрещенных IP',
+	'BbGeoSummary'           => 'Географическое резюме',
+	'BbCountry'              => 'Страна',
+	'BbAsn'                  => 'ОЗН',
+	'BbVerifiedPct'          => 'Подтверждено %',
+	'BbNoData'               => 'Нет данных для выбранного окна',
+	'BbCategory'             => 'Категория',
+	'BbResponseTime'         => 'Время ответа',
+	'BbDateCol'              => 'Время / IP / Статус',
+	'BbSelectRow'            => 'Выберите строку',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Только медленно',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Решена',
+	'BbChipStatusCode' => 'Код статуса',
+	'BbChipIp'         => 'IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'ОЗН',
+	'BbChipCountry'    => 'Страна',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Просмотр заголовков',
+	'BbViewBody'             => 'Посмотреть тело',
+	'BbViewContentLabel'     => 'Содержание',
+	'BbViewModeFull'         => 'Полное (всегда показано)',
+	'BbViewModeTeaser'       => 'Тизер (нажмите, чтобы развернуть)',
+	'BbViewModeHidden'       => 'Скрытые (показать по требованию)',
+	'BbHide'                 => 'скрыть',
+	'BbChars'                => 'символов',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Пользовательские правила',
+	'BbCustomRulesLabel'           => 'Пользовательские правила (один объект JSON в строке)',
+	'BbCustomRulesInfo'            => 'Каждая строка - это объект JSON с ключами: тип (ip|ua_regex|ua_contains|asn|country|header), значение, действие (allow|block|challenge|log) и id. Пример: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Пропустить поля для сканирования тела',
+	'BbBodyScanSkipFieldsInfo'     => 'Одно имя поля на строку. Указанные поля пропускаются во время проверки тела SQL/XSS.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Расширенные фильтры',
+	'BbDateFrom'            => 'От',
+	'BbDateTo'              => 'Кому',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Медленные запросы (>1s)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Только активные',
+	'BbResolvedOnly'        => 'Решен только',
+	'BbResolvedAll'         => 'Активные + разрешены',
+	'BbResolved'            => 'разрешено',
+	'BbActionResolve'       => 'решимость',
+	'BbActionUnresolve'     => 'разрешать',
+	'BbRowResolved'         => 'Запись журнала помечена как разрешена',
+	'BbRowUnresolved'       => 'Запись журнала отмечена как неразрешенная',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Удалить выбранные',
+	'BbBulkWhitelistSelected'   => 'Белый список IP',
+	'BbBulkResolveSelected'     => 'Отметка решена',
+	'BbBulkUnresolveSelected'   => 'Отметить неразрешенным',
+	'BbBulkHint'                => 'Сначала выберите строки, а затем нажмите действие.',
+	'BbNoItemsSelected'         => 'Элементы не выбраны',
+	'BbBulkDeleted'             => 'Удаленные записи журнала %1',
+	'BbBulkWhitelisted'         => 'Добавлен %1 IP в белый список',
+	'BbBulkResolved'            => 'Помеченные %1 записи как разрешенные',
+	'BbBulkUnresolved'          => 'Помеченные %1 записи как неразрешенные',
+	'BbMarkAll'                 => 'Отметить все строки на этой странице',
+	'BbMarkNone'                => 'Снять отметку со всех строк',
+
+	'BbBulkFailed'              => 'Не удалось обновить выбранные строки. Проверьте базу данных или повторите попытку.',
+	'BbBulkWhitelistedNone'     => 'Не было добавлено ни одного нового IP-адреса — все выбранные IP-адреса уже были в белом списке.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'подтвержден',
+	'BbUnverified'           => 'непроверенный',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Запрос разрешен',
+	'BbStatus_blocked.bot'                => 'Известный бот заблокирован',
+	'BbStatus_blocked.ai_crawler'         => 'Толстовщик ИИ заблокирован',
+	'BbStatus_blocked.seo_crawler'        => 'SEO crawler заблокирован',
+	'BbStatus_blocked.malicious_ua'       => 'Вредоносный User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Обнаружена нагрузка на атаку',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL совпадение',
+	'BbStatus_blocked.httpbl'             => 'http:BL совпадение',
+	'BbStatus_blocked.behavioral'         => 'Поведенческие аномалии',
+	'BbStatus_blocked.fingerprint'        => 'Неверный отпечаток пальца',
+	'BbStatus_blocked.rate_limit'         => 'Превышен лимит',
+	'BbStatus_blocked.custom_rule'        => 'Пользовательские правила совпадают',
+	'BbStatus_blocked.geoip'              => 'Блок GeoIP',
+	'BbStatus_blocked.residential_proxy'  => 'Домашний прокси заблокирован',
+	'BbStatus_challenge.required'         => 'Требуется испытание',
+	'BbStatus_challenge.failed'           => 'Сбой вызова',
+	'BbStatus_error.internal'             => 'Внутренняя ошибка',
+	'BbStatus_error.configuration'        => 'Ошибка конфигурации',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'Последние 24 часа',
+	'BbWindow7d'  => 'Последние 7 дней',
+	'BbWindow30d' => 'Последние 30 дней',
+	'BbWindowAll' => 'За все время',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Минимальный (по умолчанию)',
+	'BbPresetFull'           => 'Полностью',
+	'BbPresetVerifiedOnly'   => 'Только проверенные',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Только ЕС',
+	'BbPresetHumanOnly'      => 'Только для человека',
+	'BbPresetCustom'         => 'Свой',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Только монитор',
+	'BbStrictnessNormal'      => 'Обычный',
+	'BbStrictnessStrict'      => 'Строгий',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Громовый Громовый Череп',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Включить обнаружение запросов головы',
+	'BbHeadRequireReferer'       => 'Требовать реферера при HEAD',
+	'BbHeadFloodThreshold'       => 'Порог наводнения (по сессиям)',
+	'BbHeadProbeThreshold'       => 'Пробный порог (по IP / 5 мин)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Включить обнаружение scraping активов',
+	'BbAssetNoRefererThreshold'    => 'Порог не реферера (по IP / час)',
+	'BbAssetOnlySessionThreshold'  => 'Порог сеанса только для активов',
+	'BbAssetPatternThreshold'      => 'Порог последовательности шаблонов (по IP / 5 мин)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Включить динамические IP диапазоны',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Включить обновление по требованию',
+	'BbOnDemandRefreshInfo'      => 'Обновлять кэш диапазона IP при запросах. Используйте когда у вас нет доступа к cron.',
+	'BbOnDemandBotIdsPlaceholder' => 'googlebot, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Некорректный JA3',
+	'BbFpBadH2'           => 'Плохой H2',
+	'BbFpBotHeaderOrders' => 'Заказы заголовка бота',
+	'BbFpExpectedJa3'     => 'Ожидаемый JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Заблокирован',
+	'BbListChallenge' => 'Desafío (CAPTCHA)',
+	'BbListLogOnly'   => 'Только журнал (без принудительной реализации)',
+	'BbListAllowed'   => 'Разрешено',
+	'BbListHint'      => 'Категории в этом списке получают действие, независимо от категории по умолчанию.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Поисковая система',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Социальные краулеры',
+	'BbCatSeoCrawler'      => 'SEO Кроулер',
+	'BbCatArchiveCrawler'  => 'Архивировать Crawler',
+	'BbCatMonitoring'      => 'Мониторинг',
+	'BbCatFeedReader'      => 'Читатель лент новостей',
+	'BbCatShoppingCrawler' => 'Корпорации покупок',
+	'BbCatCloudInfra'      => 'Облачная инфраструктура',
+	'BbCatSecurityScanner' => 'Сканер безопасности',
+	'BbCatResidentialProxy'=> 'Жилой прокси-сервер',
+	'BbCatMalicious'       => 'Вредоносный',
+	'BbCatUnknown'         => 'Неизвестен',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => 'хэш 32 символа',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Шаблоны атаки',
+	'BbSevChallenges'     => 'Выпущенные вызовы',
+	'BbSevPermitted'      => 'Разрешено',
+	'BbSevErrors'         => 'Ошибки',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Категории',
+
+	'BbResultBreakdown'    => 'Разбиение результатов',
+	'BbBreakdownBlocked'   => 'Заблокирован',
+	'BbBreakdownMonitored' => 'Мониторинг',
+	'BbBreakdownAllowed'   => 'Разрешено',
+	'BbViewAllInLog'       => 'Смотреть все в журнале',
+	'BbAllowedHintVerbose' => 'Разрешенный трафик записывается только при включенном подробном журнале. Переключите logging_mode=verbose в Настройках, чтобы увидеть, через что передается.',
 
 ];

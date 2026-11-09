@@ -26,6 +26,9 @@ $ap_translation = [
 	'NoRecoveryPassword'		=> 'Адміністративний пароль не вказано!',
 	'NoRecoveryPasswordTip'		=> 'Примітка. Відсутність адміністративного пароля - це загроза для безпеки! Введіть хеш пароля в файлі конфігурації і знову запустіть програму.',
 
+	'ApDevNologinBlocked'		=> 'Заблокований доступ: AP_DEV_NOLOGIN увімкнений в admin.php , але запит не з\'явився з localhost (127.0.0.1, :1, або localhost). Це прапорець лише для розробки і має бути вимкненим у виробництві. Встановіть <code>AP_DEV_NOLOGIN = 0</code> в admin.php для відновлення доступу.',
+	'ApDevNologinBlockedLog'	=> '!!! SECURITY: %1 увімкнено, але admin.php отримав доступ до не локальної адреси (%2). Доступ до адміністративних панелей було заблоковано.',
+
 	'ErrorLoadingModule'		=> 'Помилка завантаження модуля адміністратора %1: не існує.',
 
 	'ApHomePage'				=> 'Домашня сторінка',
@@ -34,6 +37,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Вийти з адміністрації системи і вийти з системи',
 
 	'TimeLeft'					=> 'Часу залишилося:  %1 хвилин(ів)',
+	'TimeLeftInfinity'			=> 'Time left:  %1 (developer mode)',
 	'ApVersion'					=> 'версія',
 
 	'SiteOpen'					=> 'Відкриті',
@@ -920,8 +924,8 @@ $ap_translation = [
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail:',
 	'CreateThumbnailInfo'		=> 'Створити мініатюру в усіх можливих ситуаціях.',
-	'JpegQuality'				=> 'Якість JPEG:',
-	'JpegQualityInfo'			=> 'Якість при масштабуванні мініатюри JPEG. Вона повинна бути між 1 і 100, 100 вказує на 100% якість.',
+	'ImageQuality'				=> 'Пресет якості зображення:',
+	'ImageQualityInfo'			=> 'Якість при масштабуванні мініатюри. Пресети, що вибирають значення окремого кодека, які дають порівнянний результат сприйняття.',
 	'MaxImageArea'				=> 'Максимальна площа зображення:',
 	'MaxImageAreaInfo'			=> 'Максимальна кількість пікселів, яку може мати вихідне зображення. Це надає обмеження на використання пам\'яті для сторони менеджера зображень.<br><code>-1</code> означає, що він не буде перевіряти розмір зображення перед спробою його масштабування. <code>0</code> означає, що значення автоматично визначатиметься.',
 	'MaxThumbWidth'				=> 'Максимальна ширина мініатюри в пікселях:',
@@ -954,7 +958,6 @@ $ap_translation = [
 		'2'		=> 'не вище, ніж',
 		'3'		=> 'дорівнює',
 	],
-	'LogNoMatch'				=> 'Немає подій, які відповідають критеріям',
 	'LogDate'					=> 'Дата',
 	'LogEvent'					=> 'Подія',
 	'LogUsername'				=> 'Ім\'я користувача',
@@ -967,6 +970,49 @@ $ap_translation = [
 		'6'		=> 'нижчий',
 		'7'		=> 'відлагодження',
 	],
+
+	'LogCollapse'        => 'згорнути',
+	'LogExpand'          => 'розгорнути',
+	'LogType'              => 'Тип',
+	'LogSearch'            => 'Пошук',
+	'LogSearchPlaceholder' => 'пошук повідомлень...',
+	'LogUserId'            => 'ID користувача',
+	'LogExactMatch'        => 'точний збіг',
+	'LogFrom'              => 'Від',
+	'LogTo'                => 'На',
+	'LogSupportKey'        => 'Ключ підтримки',
+	'LogContext'           => 'Контекст',
+	'LogTarget'            => 'Target',
+	'LogUserAgent'         => 'Клієнтський додаток',
+	'LogReferer'           => 'Реферал',
+	'LogTotal'             => 'Загальна сума замовлення',
+	'LogFilteredBy'        => 'Фільтрувати за',
+	'LogClearFilter'       => 'Очистити фільтр',
+	'LogActions'           => 'Дії',
+	'LogDelete'            => 'Видалити',
+	'LogDeleteConfirm'     => 'Вилучити цей запис журналу?',
+	'LogDeleteSelected'    => 'Видалити вибране',
+	'LogBulkAction'        => '— масова дія -',
+	'LogApply'             => 'Прийняти',
+	'LogExportCSV'         => 'Експортувати в CSV',
+	'LogExportJSON'        => 'Експортувати JSON',
+	'LogPurged'            => 'Таблиця журналу скорочена.',
+	'LogPurgedFiltered'     => 'Записи журналу %1 видалені фільтром.',
+	'LogDeleted'           => 'Запис журналу видалено.',
+	'LogDeletedBulk'        => 'Записи журналу %1 видалені.',
+	'LogPurgeSection'      => 'Руйнівні операції',
+	'LogPurgeWarning'      => 'Виявлено %1 entries що відповідають поточному відображенню. Використовуйте з обережністю.',
+	'LogPurgeConfirm'      => 'Я розумію, що це остаточно видалить записи журналу',
+	'LogPurgeFiltered'     => 'Очистити фільтр',
+	'LogPurgeFilteredConfirm' => 'Видалити всі записи, що відповідають поточному фільтру? Це не можна скасувати.',
+	'LogPurgeAll'          => 'Очистити журнал ENTIRE',
+	'LogPurgeAllConfirm'   => 'Видалити запис журналу в базі даних? Це не можна скасувати.',
+	'LogFindRelated'       => 'Знайти пов’язані записи',
+	'LogNoMatch'           => 'Немає записів журналу, що відповідають поточному фільтру.',
+
+	'LogMarkAll'                => 'Позначити всі рядки на цій сторінці',
+	'LogMarkNone'               => 'Зняти позначку на всіх рядках',
+	'LogSelectRow'              => 'Виберіть рядок',
 
 	// Massemail module
 	'MassemailInfo'				=> 'Ви можете надсилати повідомлення або електронною поштою кожному з ваших користувачів або (2) усім користувачам певної групи які увімкнули отримання масових електронних листів. Лист буде надіслано на адміністративну адресу електронної пошти, з відповідним вуглецевою копією (BCC) усім одержувачам. Налаштування за замовчуванням включаються максимум до 20 одержувачів в такий лист. Якщо більше 20 одержувачів буде надіслано додаткові листи. Якщо ви надсилаєте лист із великою групою людей, будьте терплячими після відправки і не зупиняйте завантаження сторінки на півдорозі. Масову розсилку буде нормально тривалий час. Ви будете повідомлені по завершенню сценарію.',
@@ -1275,6 +1321,40 @@ $ap_translation = [
 	'BbHeaders'					=> 'Заголовки',
 	'BbEntity'					=> 'Сутність',
 
+	'BbSearchPlaceholder'        => 'Пошук в UA, URI, IP, хост, support_key, статус…',
+	'BbFilterAnyCategory'        => 'Будь-яка категорія',
+	'BbFilterAnyMethod'          => 'Будь-який метод',
+	'BbFilterAnyStatus'          => 'Будь-який статус',
+	'BbFilterBlockedOnly'        => 'Лише заблоковані',
+	'BbFilterPermittedOnly'      => 'Дозволені тільки',
+	'BbFilterApply'              => 'Прийняти',
+	'BbFilterClear'              => 'Очистити фільтри',
+	'BbChipSearch'               => 'Пошук',
+	'BbChipCategory'             => 'Категорія',
+	'BbChipMethod'               => 'Метод',
+	'BbChipStatus'               => 'Статус',
+	'BbChipRemove'               => 'Видалити цей фільтр',
+	'BbFilterByCategory'         => 'Фільтр по цій категорії',
+	'BbSearchBySupportKey'       => 'Шукати цей ключ підтримки',
+
+	// === Check flag (operator-marked records, exempt from autodelete) ===
+	'BbFilterAnyCheck'         => 'Будь-яка перевірка статусу',
+	'BbFilterCheckedOnly'      => 'Лише відмічені',
+	'BbFilterUncheckedOnly'    => 'Тільки неперевірені',
+	'BbChipCheck'              => 'Стан перевірки',
+	'BbChecked'                => 'перевірив',
+	'BbUnchecked'              => 'знято позначку',
+	'BbActionCheck'            => 'перевірити',
+	'BbActionUncheck'          => 'зняти позначку',
+	'BbRowChecked'             => 'Запис журналу відмічений як перевірений',
+	'BbRowUnchecked'           => 'Запис журналу не відмічено',
+	'BbRowCheckedHint'         => 'Цей запис перевірений - звільнений від автоматичного очищення',
+	'BbRowUncheckedHint'       => 'Позначте цей запис для автоматичного очищення',
+	'BbBulkCheckSelected'      => 'Відмітити перевірений',
+	'BbBulkUncheckSelected'    => 'Зняти позначку з перевіреного',
+	'BbBulkChecked'            => 'Позначено %1 entries як перевірено',
+	'BbBulkUnchecked'          => 'Непозначені %1 entries',
+
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Опції збережені.',
 	'BbWhitelistHint'			=> 'Недоречний білий список на основі WILL додає спаму, або спричиніть погану поведінку припинити функціонування на всі функції! Не рисуйте, якщо ви не на 100% ЦЕРТАЦІЄ, що вам слід робити.',
@@ -1308,5 +1388,372 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Увімкнути інвертувати проксі',
 	'BbReverseProxyHeader'		=> 'Заголовок з IP-адресою Інтернет-клієнтів',
 	'BbReverseProxyAddresses'	=> 'IP-адреса або діапазон адреси формату CIDR для ваших проксі-серверів (один в рядку)',
+
+	'BbBehavioral'           => 'Поведінковий аналіз',
+	'BbEnableBehavioral'     => 'Увімкнення поведінкового аналізу (аномалії, поворот UA/IP)',
+	'BbEnableBehavioralInfo' => 'По запиту на кожну сесію. Безпека, щоб тримати увімкненим.',
+	'BbEnableFingerprinting' => 'Увімкнути TLS/HTTP/2 відбитки пальців (JA3, H2, порядок заголовку)',
+	'BbEnableFingerprintingInfo' => 'Блокує відомі невірні відбитки пальців. Вимагає enable_fingerprinting=true. Може викликати помилкові твердження у старих браузерів/проксі.',
+	'BbInspectJson'          => 'Оглянути тіла запиту JSON для атак',
+	'BbInspectJsonInfo'      => 'ПОПЕРЕДЖЕННЯ: Переривання AJAX/JSON API (вікі розмітка, фрагменти коду тригер помилкові позитивності). Тримайте OFF.',
+	'BbInspectMultipart'     => 'Дослідити організм множинних/форм-даних для атак',
+	'BbInspectMultipartInfo' => 'ПОПЕРЕДЖЕННЯ: Розіть завантаження. Залишити OFF.',
+
+	'BbEnableClientHints'      => 'Увімкнути перевірку гінтів клієнта',
+	'BbEnableClientHintsInfo'  => 'Перевіряти заголовки Sec-CH-UA проти User-Agent, щоб виявити розкручені браузери (Chrome 89+).',
+	'BbEnableAgentic'          => 'Увімкнути розпізнавання поведінки Agentic',
+	'BbEnableAgenticInfo'      => 'Виявляти шаблони агентів AI: обробка аналітика, нелінійна навігація, точність.',
+	'BbStrictSearchEngines'    => 'Суворі пошукові системи',
+	'BbStrictSearchEnginesInfo' => 'Застосувати більш суворі перевірки для неперевірених пошукових роботів (Googlebot, Bingbot, …) перед їх допомогою.',
+	'BbEnableDynamicIp'        => 'Увімкнути динамічне отримання діапазону IP',
+	'BbEnableDynamicIpInfo'    => 'Отримати офіційний діапазон IP-адрес від Google, Bing, OpenAI, Anthropic, Apple, тощо (кешовані 24 години, застаріле падіння 7 днів).',
+
+	'BbAiCrawlers'           => 'Контроль AI Crawler',
+	'BbBlockUnverifiedAi'    => 'Блокування неперевірених пошукових роботів ШІ',
+	'BbBlockUnverifiedAiInfo' => 'Блокує пошукових сканерів, які не мають DNS/IP верифікації (підроблені ботами).',
+	'BbStrictAi'             => 'Суворий режим AI (блок навіть перевірений недозволений AI)',
+	'BbStrictAiInfo'         => 'Блокує ВСІ пошукові механізми в списку без дозволених, навіть якщо вони перевірені.',
+	'BbAllowedAiCrawlers'    => 'Дозволені токени виконавця AI (один у рядок)',
+	'BbAllowedAiCrawlersInfo' => 'Токени: GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Meta-ExternalAgent, Applebot-Extended, CCBot, ia_archiver',
+
+	'BbDnsbl'                => 'DNSBL / http:BL',
+	'BbDnsblEnabled'         => 'Увімкнути перевірку DNSBL',
+	'BbDnsblLists'           => 'Списки DNSBL (по одному в рядку)',
+	'BbDnsblListsInfo'       => 'Default: zen.spamhaus.org, bl.spamcop.net',
+
+	'BbRateLimits'           => 'Обмеження частоти',
+	'BbRateLimitEnabled'     => 'Увімкнути обмеження ставок',
+	'BbRateGlobalRequests'   => 'Глобальні запити у вікні',
+	'BbRateGlobalWindow'     => 'Вікно (секунди)',
+	'BbRatePerMinuteRequests'=> 'Періодичні запити',
+	'BbRatePerMinuteWindow'  => 'Вікно на хвилину (секунди)',
+	'BbRatePostRequests'     => 'POST запити у вікні',
+	'BbRatePostWindow'       => 'Вікно POST (секунди)',
+	'BbRateLoginRequests'    => 'Запити на вхід у вікно',
+	'BbRateLoginWindow'      => 'Вікно авторизації (секунди)',
+
+	'BbChallenge'            => 'Система завдань',
+	'BbChallengeEnabled'     => 'Увімкнути виклики',
+	'BbChallengeProvider'    => 'Постачальник виклику',
+	'BbChallengeSiteKey'     => 'Додати ключ',
+	'BbChallengeSecretKey'   => 'Секретний ключ',
+	'BbRecaptchaMinScore'    => 'reCAPTCHA v3 хв',
+
+	'BbPerformance'          => 'Продуктивність',
+	'BbSkipExtensions'       => 'Пропустити розширення (по одному в рядку)',
+	'BbSkipPaths'            => 'Пропустити префікси шляху (по одному в рядку)',
+
+	'BbGeoip'                => 'GeoIP / ASN блокування',
+	'BbGeoipEnabled'         => 'Увімкнути GeoIP фільтрування',
+	'BbGeoipDbPath'          => 'Шлях до бази даних MaxMind',
+	'BbBlockedCountries'     => 'Заблоковані країни (ISO коди, по одному в рядку)',
+	'BbBlockedAsns'          => 'Заблоковано ASN (по одному в рядку)',
+
+	'BbBlockPage'                  => 'Блокувати сторінку',
+	'BbShowDetailedBlockPage'      => 'Показувати детальну сторінку блокування',
+	'BbShowDetailedBlockPageInfo'  => 'Показати причину, URI запиту та ключ технічної підтримки на сторінці блокування. Рекомендується для виробництва.',
+	'BbShowContactInfo'            => 'Показати контактну інформацію на сторінці блокування',
+	'BbShowContactInfoInfo'        => 'Показувати Е-пошту адміністратора на сторінці блоку (застосовується лише коли ввімкнено детальну сторінку блокування).',
+	'BbSettingsSaveFailed'         => 'Не вдалося зберегти неправильні налаштування поведінки',
+
+	// === Basic section ===
+	'BbBasicSection'      => 'Основні налаштування',
+	'BbAdvancedSection'   => 'Розширені налаштування',
+	'BbAdvancedHint'      => 'Більшість операторів не повинні змінювати їх.',
+
+	// === Basic knobs ===
+	'BbPreset'            => 'Bot preset',
+	'BbPresetInfo'        => 'Які боти для розпізнавання. "мінімальні" (за замовчуванням) найшвидше; "full" є найбільш ретельними.',
+	'BbStrictness'        => 'Блокує поставу',
+	'BbStrictnessInfo'    => 'журнали моніторингу лише, але нічого не блокує; звичайні блоки верифіковані нападники; суворі блоки агресивно.',
+	'BbLoggingMode'       => 'Заготівля лісу',
+	'BbLoggingModeInfo'   => 'Нормально (рекомендовано), функція Verbose (журнали кожен запит), вимк',
+	'BbLogModeNormal'     => 'Нормальний',
+	'BbLogModeVerbose'    => 'Verbose',
+	'BbLogModeOff'        => 'Вимкнено',
+	'BbBehindProxy'       => 'Сайт знаходиться за зворотним проксі-сервером або CDN',
+	'BbBehindProxyInfo'   => 'Вмикає якщо позаду Cloudfle, AWS, GCP, Faste, і т.д. Ви повинні додати діапазон IP-адрес в розширених налаштуваннях — без них реальні IP-адреси клієнтів не можуть бути визначені.',
+
+	// === Advanced section headers ===
+	'BbAdvCore'           => 'Основа',
+	'BbAdvReverseProxy'   => 'Зворотний проксі',
+	'BbAdvAiCrawlers'     => 'ШІ Кроулери',
+	'BbAdvBotCategories'  => 'Категорії ботів',
+	'BbAdvDnsVerification'=> 'Перевірка DNS',
+	'BbAdvRateLimits'     => 'Обмеження частоти',
+	'BbAdvHeadDetection'  => 'Виявлення головних запитів',
+	'BbAdvAssetScraping'  => 'Виявлення шлапсу Активу',
+	'BbAdvDynamicIp'      => 'Динамічні IP діапазони',
+	'BbAdvOnDemandRefresh'=> 'Оновлення On-Demand IP',
+	'BbAdvHttpbl'         => 'Проект Honeypot http:BL',
+	'BbAdvDnsbl'          => 'ВЕЛИКОБЛІВ',
+	'BbAdvChallenge'      => 'Завдання / CAPTCHA',
+	'BbAdvPerformance'    => 'Продуктивність',
+	'BbAdvGeoip'          => 'GeoIP / ASN блокування',
+	'BbAdvFingerprints'   => 'Відбитки TLS / HTTP/2',
+	'BbAdvCustomRules'    => 'Власні правила',
+	'BbAdvBlockPage'      => 'Блокувати сторінку',
+
+	// === bot category labels (multi-checkbox) ===
+	'BbCatSearchEngine'   => 'Пошукова система',
+	'BbCatAiCrawler'      => 'AI Crawler',
+	'BbCatSocialCrawler'  => 'Соціальний робот',
+	'BbCatSeoCrawler'     => 'SEO Кролер',
+	'BbCatArchiveCrawler' => 'Архівувати робот',
+	'BbCatMonitoring'     => 'Моніторинг',
+	'BbCatFeedReader'     => 'Читач каналів',
+	'BbCatShoppingCrawler'=> 'Раулер покупок',
+	'BbCatCloudInfra'     => 'Хмарна інфраструктура',
+	'BbCatSecurityScanner'=> 'Сканер Безпеки',
+	'BbCatResidentialProxy'=> 'Житловий проксі',
+	'BbCatMalicious'      => 'Зловмисне',
+	'BbCatUnknown'        => 'Не вказано',
+
+	// === on_demand_ip_refresh cloud providers ===
+	'BbCloudProviderAws'        => 'AWS',
+	'BbCloudProviderCloudflare' => 'Хмарний',
+	'BbCloudProviderFastly'     => 'Особливо',
+	'BbCloudProviderGcp'        => 'Хмара Google',
+	'BbCloudProvidersInfo'      => 'Обмеження на попит оновити до конкретних постачальників. Порожнє = всі чотири.',
+
+	// === Log retention ===
+	'BbAdvLogRetention'              => 'Ретенція журналу',
+	'BbLogRetentionEnabled'          => 'Увімкнути автоматичне очищення журналу',
+	'BbLogRetentionEnabledInfo'      => 'Періодично видаляти рядки журналів старше, ніж вікно збереження. Рекомендується для сайтів без доступу до cron.',
+	'BbLogRetentionMaxAgeDays'       => 'Вікно утримання (днів)',
+	'BbLogRetentionMaxAgeDaysInfo'   => 'Рядки старші за це видалені. За замовчуванням: 7. Загальні значення: 7, 14, 30, 90.',
+	'BbLogRetentionMaxRows'          => 'Максимальна кількість рядків (0 = без заголовку)',
+	'BbLogRetentionMaxRowsInfo'      => 'При встановленні найстаріших рядків видаляються, кожного разу, коли таблиця перевищує цей розмір, незалежно від розміру файла.',
+	'BbLogRetentionProbability'       => 'Знаменник ймовірності (1 у N)',
+	'BbLogRetentionProbabilityInfo'   => '1 в N запитах перевіряє рівень тупикової ситуації. Вище = менше завантаження БД. За замовчуванням: 1000.',
+	'BbLogRetentionMinInterval'      => 'Мінімальний інтервал між очисткою (секунд)',
+	'BbLogRetentionMinIntervalInfo'  => 'Жорсткі підлоги при очищенні частоти. За замовчуванням: 21600 (6h).',
+	'BbLogRetentionLockTtl'          => 'Очистити блокування TTL (секунд)',
+	'BbLogRetentionLockTtlInfo'      => 'Як довго тримається прибирання. За замовчуванням: 600 (10 хв).',
+
+	// === misc new fields ===
+	'BbDnsVerificationEnabled'  => 'Увімкнути перевірку DNS',
+	'BbDnsVerificationInfo'     => 'Перевірте, чи бот претензії (напр. Googlebot) зворотним DNS-пошуком. Catches підроблені боти.',
+	'BbDnsTimeoutMs'            => 'Тайм-аут фільтрування DNS (мс)',
+	'BbDnsPositiveTtl'          => 'Додатковий кеш TTL (секунд)',
+	'BbDnsNegativeTtl'          => 'Кеш TTL (секунд)',
+	'BbDnsRequireForward'       => 'Вимагати збіги під час попереднього підтвердження (PTR + запису)',
+	'BbDnsRequireForwardInfo'   => 'Кошки підкидують, але додає затримки та IPv6 FP ризик.',
+
+	'BbHeadRefererExemptPaths'  => 'HEAD звільняє шляхи (по кожному в рядку)',
+	'BbHeadRefererExemptInfo'   => 'Шляхи, де ШАД без Referer є законним (наприклад, /api/, /wp-json/).',
+
+	'BbAssetExtensionsLabel'    => 'Розширення активів для захисту (по одному на рядок)',
+	'BbAssetExtensionsInfo'     => 'Типи файлів переглянутих для безпосереднього обрізання без завантаження сторінки.',
+
+	'BbOnDemandBotIds'          => 'ID ботів для оновлення (порожній = всі)',
+	'BbOnDemandBotIdsInfo'      => 'Обмежити оновлення до певних ботів. Залиште порожнім, щоб оновити всіх зареєстрованих ботів.',
+	'BbOnDemandProbability'     => 'Знаменник ймовірності (1 у N)',
+	'BbOnDemandMinAge'          => 'Мінімальний вік кешу (сек)',
+	'BbOnDemandLockTtl'         => 'Блокування TTL (секунди)',
+	'BbOnDemandCacheTtl'        => 'Кеш TTL (секунди)',
+	'BbOnDemandFeedTimeout'     => 'Час очікування отримання каналів (секунди)',
+
+	'BbDynamicIpTtl'            => 'Кеш TTL (секунди)',
+	'BbDynamicIpFeeds'          => 'Канали оновлення (по одному в рядку)',
+
+	// === Time-window selector / dashboards ===
+	'BbLastSeen'             => 'Останнє відвідування',
+	'BbSeverity'             => 'Серйозність',
+	'BbStatusBreakdown'      => 'Експлікація стану',
+	'BbBotBreakdown'         => 'Розбиття ботів',
+	'BbTopBlocked'           => 'IP адресата Top відмовлено',
+	'BbGeoSummary'           => 'Географічні підсумки',
+	'BbCountry'              => 'Країна',
+	'BbAsn'                  => 'АСН',
+	'BbVerifiedPct'          => 'Перевірено %',
+	'BbNoData'               => 'Немає даних для вибраного вікна',
+	'BbCategory'             => 'Категорія',
+	'BbResponseTime'         => 'Час відповіді',
+	'BbDateCol'              => 'Час / IP / статус',
+	'BbSelectRow'            => 'Виберіть рядок',
+
+	// === Active-filter chips ===
+	'BbChipSlow'             => 'Повільно',
+	'BbChipDate'             => 'Date range',
+	'BbChipResolved'         => 'Вирішено',
+	'BbChipStatusCode' => 'Код статусу',
+	'BbChipIp'         => 'Адреса IP',
+	'BbChipUa'         => 'UA',
+	'BbChipUri'        => 'URI',
+	'BbChipJa3'        => 'JA3',
+	'BbChipAsn'        => 'АСН',
+	'BbChipCountry'    => 'Країна',
+
+	// === Manage view additions ===
+	'BbViewHeaders'          => 'Перегляд заголовків',
+	'BbViewBody'             => 'Переглянути тіло',
+	'BbViewContentLabel'     => 'Зміст',
+	'BbViewModeFull'         => 'Повний (завжди відображається)',
+	'BbViewModeTeaser'       => 'Заказ (натисніть щоб розгорнути)',
+	'BbViewModeHidden'       => 'Прихований (показати по вимогу)',
+	'BbHide'                 => 'сховати',
+	'BbChars'                => 'символів',
+
+	// === Custom rules ===
+	'BbCustomRules'                => 'Власні правила',
+	'BbCustomRulesLabel'           => 'Користувацькі правила (один об\'єкт JSON в рядку)',
+	'BbCustomRulesInfo'            => 'Кожен рядок це об\'єкт JSON з ключами: тип (ip|ua_regex|ua_contains|asn|country|header), значення, дія (дозволено|block|challenge|log) і id. Приклад: {"type":"ua_regex","value":"/Googlebot/i","action":"log","id":"audit_googlebot"}',
+
+	// === Body scan ===
+	'BbBodyScanSkipFields'         => 'Пропускати поля сканування кузова',
+	'BbBodyScanSkipFieldsInfo'     => 'Одне ім\'я поля на рядок. Поля, що перераховані пропущені під час перевірки тіла SQL/XSS.',
+
+	// === Advanced filters ===
+	'BbAdvancedFilters'     => 'Розширені фільтри',
+	'BbDateFrom'            => 'Від',
+	'BbDateTo'              => 'На',
+	'BbJa3'                 => 'JA3 hash',
+	'BbSlowOnly'            => 'Лише повільні запити (>1сек)',
+
+	// === Resolved workflow ===
+	'BbResolvedActive'      => 'Тільки активний',
+	'BbResolvedOnly'        => 'Тільки вирішені',
+	'BbResolvedAll'         => 'Активний + вирішений',
+	'BbResolved'            => 'вирішено',
+	'BbActionResolve'       => 'вирішити, завершити, закрити',
+	'BbActionUnresolve'     => 'повторно відкрити',
+	'BbRowResolved'         => 'Запис журналу відмічено',
+	'BbRowUnresolved'       => 'Запис журналу позначено невирішеним',
+
+	// === Bulk actions ===
+	'BbBulkDeleteSelected'      => 'Видалити вибране',
+	'BbBulkWhitelistSelected'   => 'IP з білого списку',
+	'BbBulkResolveSelected'     => 'Позначити вирішеним',
+	'BbBulkUnresolveSelected'   => 'Позначити невирішеним',
+	'BbBulkHint'                => 'Спочатку забороняйте рядки а потім натисніть дію.',
+	'BbNoItemsSelected'         => 'Жоден елемент не вибрано',
+	'BbBulkDeleted'             => 'Видалено записи журналу %1',
+	'BbBulkWhitelisted'         => 'Додано дані %1 IP до білого списку',
+	'BbBulkResolved'            => 'Позначено %1 entries як вирішено',
+	'BbBulkUnresolved'          => 'Позначено %1 entries як невирішене',
+	'BbMarkAll'                 => 'Позначити всі рядки на цій сторінці',
+	'BbMarkNone'                => 'Зняти позначку на всіх рядках',
+
+	'BbBulkFailed'              => 'Не вдалося оновити вибрані рядки. Перевірте базу даних або спробуйте ще раз.',
+	'BbBulkWhitelistedNone'     => 'Немає нових IP адрес - всі вибрані IP вже були в білому списку.',
+
+	// === Verified badge ===
+	'BbVerified'             => 'перевірено',
+	'BbUnverified'           => 'не перевірено',
+
+	// === ResultCode enum mapping (BbStatus_<code>) ===
+	'BbStatus_allowed'                    => 'Дозволений запит',
+	'BbStatus_blocked.bot'                => 'Відомий бот заблоковано',
+	'BbStatus_blocked.ai_crawler'         => 'Автомат заблокований',
+	'BbStatus_blocked.seo_crawler'        => 'SEO робот заблоковано',
+	'BbStatus_blocked.malicious_ua'       => 'Шкідливий User-Agent',
+	'BbStatus_blocked.attack_pattern'     => 'Виявлено корисне навантаження на атаку',
+	'BbStatus_blocked.dnsbl'              => 'DNSBL збіг',
+	'BbStatus_blocked.httpbl'             => 'http:BL збіг',
+	'BbStatus_blocked.behavioral'         => 'Біологічна аномалія',
+	'BbStatus_blocked.fingerprint'        => 'Помилковий відбиток',
+	'BbStatus_blocked.rate_limit'         => 'Перевищено ліміт частоти запитів',
+	'BbStatus_blocked.custom_rule'        => 'Довільна відповідність правил',
+	'BbStatus_blocked.geoip'              => 'ГеоIP-блок',
+	'BbStatus_blocked.residential_proxy'  => 'Житловий проксі заблоковано',
+	'BbStatus_challenge.required'         => 'Потрібен виклик',
+	'BbStatus_challenge.failed'           => 'Помилка виклику',
+	'BbStatus_error.internal'             => 'Внутрішня помилка',
+	'BbStatus_error.configuration'        => 'Помилка конфігурації',
+
+	// === Time-window tabs ===
+	'BbWindow24h' => 'За минулі 24 години',
+	'BbWindow7d'  => 'Останні 7 днів',
+	'BbWindow30d' => 'Останні 30 днів',
+	'BbWindowAll' => 'За весь час',
+
+	// === Preset dropdown ===
+	'BbPresetMinimal'        => 'Мінімальний (за замовчуванням)',
+	'BbPresetFull'           => 'Повна',
+	'BbPresetVerifiedOnly'   => 'Перевірено тільки',
+	'BbPresetNoAi'           => 'No-AI',
+	'BbPresetNoSeo'          => 'No-SEO',
+	'BbPresetEuOnly'         => 'Тільки для ЄС',
+	'BbPresetHumanOnly'      => 'З людиною',
+	'BbPresetCustom'         => 'Користувацька',
+
+	// === Strictness dropdown ===
+	'BbStrictnessMonitorOnly' => 'Тільки монітор',
+	'BbStrictnessNormal'      => 'Нормальний',
+	'BbStrictnessStrict'      => 'Суворо',
+
+	// === Challenge provider dropdown ===
+	'BbChallengeProviderBuiltin'   => 'Builtin (PoW)',
+	'BbChallengeProviderHcaptcha'  => 'hCaptcha',
+	'BbChallengeProviderRecaptcha' => 'reCAPTCHA v3',
+	'BbChallengeProviderTurnstile' => 'Хмарний катерний',
+
+	// === Head Request Detection (newly translated form labels) ===
+	'BbEnableHeadRequest'        => 'Увімкнути виявлення запиту голови',
+	'BbHeadRequireReferer'       => 'Вимагати посилання на HEAD',
+	'BbHeadFloodThreshold'       => 'Поріг флуду (за сесію)',
+	'BbHeadProbeThreshold'       => 'Поріг зонду (за IP / 5мін)',
+
+	// === Asset Scraping (newly translated form labels) ===
+	'BbEnableAssetScraping'        => 'Увімкнути виявлення вискоблювання активів',
+	'BbAssetNoRefererThreshold'    => 'Немає реферального порогу (за IP / годину)',
+	'BbAssetOnlySessionThreshold'  => 'Поріг сеансу визначено лише активами',
+	'BbAssetPatternThreshold'      => 'Поріг послідовності (за IP / 5мін)',
+
+	// === Dynamic IP Ranges ===
+	'BbEnableDynamicIpRanges' => 'Увімкнути динамічні IP-діапазони',
+
+	// === On-demand IP Refresh ===
+	'BbEnableOnDemandRefresh'    => 'Увімкнути оновлення на вимогу',
+	'BbOnDemandRefreshInfo'      => 'Оновити кеш IP-діапазону під час запитів. Використовуйте, коли у вас немає запиту на доступу.',
+	'BbOnDemandBotIdsPlaceholder' => 'googleбот, gptbot, claude…',
+
+	// === Fingerprint field labels ===
+	'BbFpBadJa3'          => 'Бад-ЯА3',
+	'BbFpBadH2'           => 'Помилковий H2',
+	'BbFpBotHeaderOrders' => 'Замовлення через бот',
+	'BbFpExpectedJa3'     => 'Очікувалось JA3',
+
+	// === Bot category list titles + hint ===
+	'BbListBlocked'   => 'Заблоковано',
+	'BbListChallenge' => 'Виклик (капча)',
+	'BbListLogOnly'   => 'Тільки запис (без правозастосування)',
+	'BbListAllowed'   => 'Дозволено однозначно',
+	'BbListHint'      => 'Категорії в цьому списку отримують дію незалежно від налаштувань категорії.',
+
+	// === Bot category dropdown labels (manage filter) ===
+	'BbCatSearchEngine'    => 'Пошукова система',
+	'BbCatAiCrawler'       => 'AI Crawler',
+	'BbCatSocialCrawler'   => 'Соціальний робот',
+	'BbCatSeoCrawler'      => 'SEO Кролер',
+	'BbCatArchiveCrawler'  => 'Архівувати робот',
+	'BbCatMonitoring'      => 'Моніторинг',
+	'BbCatFeedReader'      => 'Читач каналів',
+	'BbCatShoppingCrawler' => 'Раулер покупок',
+	'BbCatCloudInfra'      => 'Хмарна інфраструктура',
+	'BbCatSecurityScanner' => 'Сканер Безпеки',
+	'BbCatResidentialProxy'=> 'Житловий проксі',
+	'BbCatMalicious'       => 'Зловмисне',
+	'BbCatUnknown'         => 'Не вказано',
+
+	// === Placeholders ===
+	'BbJa3Placeholder' => 'Геш 32-символ',
+
+	// === Summary severity group labels ===
+	'BbSevAttackPatterns' => 'Шаблони атаки',
+	'BbSevChallenges'     => 'Виклики видано',
+	'BbSevPermitted'      => 'Дозволено',
+	'BbSevErrors'         => 'Помилки',
+
+	// === Summary table column (was used but missing from set) ===
+	'BbCategories' => 'Категорії',
+
+	'BbResultBreakdown'    => 'Результуючий розподіл',
+	'BbBreakdownBlocked'   => 'Заблоковано',
+	'BbBreakdownMonitored' => 'Відстежено',
+	'BbBreakdownAllowed'   => 'Дозволено',
+	'BbViewAllInLog'       => 'Переглянути всі в логуванні',
+	'BbAllowedHintVerbose' => 'Дозволений трафік тільки при увімкненому детальному журналі. Увімкніть журнал помилок_mode=verbose в Налаштуваннях, щоб побачити, який шлях проходить.',
 
 ];
