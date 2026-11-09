@@ -202,12 +202,17 @@ class Paragrafica
 		while ($_w != $what);
 
 		// 3. replace each <t->...<-t> with <p class="auto">...</p>
-		$pcount = 0;
+		$pcount			= 0;
+		$quote_depth	= 0;
 		$pieces = explode($this->mark2, $what);
 
 		foreach ($pieces as $k => $v)
 		{
-			if ($k > 0)
+			// Regions originating inside a blockquote belong to that quote.
+			// They must not be turned into independent automatic paragraphs.
+			$in_quote = $quote_depth > 0;
+
+			if ($k > 0 && !$in_quote)
 			{
 				$pos	= strpos($v, $this->mark1);
 				$pos2	= strpos($v, $this->mark3);
@@ -249,6 +254,13 @@ class Paragrafica
 					}
 				}
 			}
+
+			// Update the quote context only after processing this piece: a quote
+			// opened or closed in this piece affects subsequent pieces, not the
+			// region at its beginning.
+			$quote_depth += preg_match_all('!<blockquote\b[^>]*>!i', $v);
+			$quote_depth -= preg_match_all('!</blockquote>!i', $v);
+			$quote_depth = max(0, $quote_depth);
 		}
 
 		$what = implode('', $pieces);
