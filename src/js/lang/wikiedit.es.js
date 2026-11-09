@@ -112,9 +112,9 @@ lang = {
 	Close: 'Cerrar',
 	JustNow: 'justo ahora',
 	MinuteAgo: 'hace 1 minuto',
-	MinutesAgo: '%s minutes ago',
+	MinutesAgo: 'hace %s minutos',
 	HourAgo: 'hace 1 hora',
-	HoursAgo: '%s hours ago',
+	HoursAgo: 'hace %s horas',
 	Yesterday: 'ayer',
 	DaysAgo: 'días atrás',
 	Yesterday: 'ayer'

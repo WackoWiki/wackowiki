@@ -117,5 +117,5 @@ lang = {
 	HoursAgo: '%s ساعت پیش',
 	Yesterday: 'دیروز',
 	DaysAgo: '%s روز پیش',
-	Yesterday: 'yesterday'
+	Yesterday: 'دیروز'
 };
