@@ -143,7 +143,7 @@ class WackoFormatter
 			// separator
 			"-{4,}|" .
 			// line break
-			"---\n?\s*|" .
+			"---[ \t]*(?=(?<eol>\n))|---[ \t]*|" .
 			// strikethrough
 			"--\S--|" .
 			"--(\S.*?[^- \t\n\r])--|" .
@@ -667,8 +667,18 @@ class WackoFormatter
 			return "<hr>\n";
 		}
 		// forced line breaks
-		else if (preg_match('/^---\n?\s*$/u', $thing, $matches))
+		else if (preg_match('/^---[ \t]*$/u', $thing))
 		{
+			if (!empty($things['eol']))
+			{
+				// the marker ends the line: the newline which follows is matched
+				// separately and must not produce a second break
+				$this->br = false;
+
+				return '<br>';
+			}
+
+			// the marker is used inside a line
 			return "<br>\n";
 		}
 		// strike
