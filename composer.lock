@@ -410,16 +410,16 @@
         },
         {
             "name": "phpthumb/phpthumb",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPThumb/PHPThumb.git",
-                "reference": "3e9104c7807bf9bf4cc0a27db407291f1740a95c"
+                "reference": "b76d5bd7b53a69ac0c9572802b06c7071479cf04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/3e9104c7807bf9bf4cc0a27db407291f1740a95c",
-                "reference": "3e9104c7807bf9bf4cc0a27db407291f1740a95c",
+                "url": "https://api.github.com/repos/PHPThumb/PHPThumb/zipball/b76d5bd7b53a69ac0c9572802b06c7071479cf04",
+                "reference": "b76d5bd7b53a69ac0c9572802b06c7071479cf04",
                 "shasum": ""
             },
             "require": {
@@ -471,10 +471,10 @@
             "support": {
                 "discussions": "https://github.com/PHPThumb/PHPThumb/discussions",
                 "issues": "https://github.com/PHPThumb/PHPThumb/issues",
-                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.5.0",
+                "source": "https://github.com/PHPThumb/PHPThumb/tree/2.5.1",
                 "wiki": "https://github.com/PHPThumb/PHPThumb/wiki"
             },
-            "time": "2026-06-21T21:46:44+00:00"
+            "time": "2026-11-09T14:32:42+00:00"
         },
         {
             "name": "psr/simple-cache",
