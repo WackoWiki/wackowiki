@@ -117,7 +117,7 @@ function admin_config_upload($engine, $module)
 		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
 		$config['svg_sanitizer']			= (int) $_POST['svg_sanitizer'];
 		$config['create_thumbnail']			= (int) $_POST['create_thumbnail'];
-		$config['jpeg_quality']				= (int) $_POST['jpeg_quality'];
+		$config['image_quality']			= (int) $_POST['image_quality'];
 		$config['max_image_area']			= (int) $_POST['max_image_area'];
 		$config['max_thumb_width']			= (int) $_POST['max_thumb_width'];
 		$config['max_image_width']			= (int) $_POST['max_image_width'];
@@ -331,11 +331,21 @@ function admin_config_upload($engine, $module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="jpeg_quality"><strong><?php echo $engine->_t('JpegQuality');?></strong><br>
-					<small><?php echo $engine->_t('JpegQualityInfo');?></small></label>
+					<label for="image_quality"><strong><?php echo $engine->_t('ImageQuality');?></strong><br>
+					<small><?php echo $engine->_t('ImageQualityInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="1" max="100" maxlength="3" size="3" id="jpeg_quality" name="jpeg_quality" value="<?php echo (int) $engine->db->jpeg_quality;?>">
+					<select id="image_quality" name="image_quality">
+					<?php
+					$image_quality = ['off', 'max', 'high', 'medium', 'low'];
+
+					foreach ($image_quality as $value =>$quality)
+					{
+						$selected = ($engine->db->image_quality == $value ? ' selected' : '');
+						echo '<option value="' . $value . '"' . $selected . '>' . $quality . '</option>';
+					}
+					?>
+					</select>
 				</td>
 			</tr>
 			<tr class="lined">

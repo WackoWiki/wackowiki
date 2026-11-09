@@ -5027,11 +5027,21 @@ class Wacko
 			return;
 		}
 
+		$quality = match ((int) $this->db->image_quality)
+		{
+			0		=> 'off',
+			1		=> 'max',
+			2		=> 'high',
+			3		=> 'medium',
+			4		=> 'low',
+			default	=> 'high',
+		};
+
 		$start = microtime(true);
 
 		try
 		{
-			$thumb->setOptions(['jpegQuality' => (int) $this->db->jpeg_quality]);
+			$thumb->setOptions(['qualityPreset' => $quality]);
 			$thumb->resize($width, $height);
 
 			if (!$thumb->save($tbn_image))

@@ -90,7 +90,7 @@ $upgrade['6.3.0'][]	= ['delete',	'bad_behaviour',	$delete_bb_r6_2_0];
 
 
 // config
-$upgrade['6.2.0'][]	= ['update',	'config',			$update_config_r6_1_1];
+$upgrade['6.3.0'][]	= ['update',	'config',			$update_config_r6_3_0];
 
 // file
 

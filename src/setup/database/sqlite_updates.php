@@ -27,7 +27,7 @@ $delete_bb_r6_2_0 = "DROP TABLE IF EXISTS {$pref}bad_behaviour";
 // CATEGORY ASSIGNMENT
 
 // CONFIG
-$update_config_r6_1_1 = "DELETE FROM {$pref}config WHERE config_name IN ('disable_npjlinks', 'session_prefix')";
+$update_config_r6_3_0 = "DELETE FROM {$pref}config WHERE config_name IN ('jpeg_quality', 'session_prefix')";
 
 // EXTERNAL LINK
 

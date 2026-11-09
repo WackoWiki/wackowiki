@@ -119,6 +119,18 @@ $wacko_config_defaults = [
 	'hide_index'					=> 0,
 	'tree_level'					=> 1,
 
+	// Master switch for the sticky sidebar ToC (0 = off, 1 = on)
+	'sticky_toc'					=> 0,
+
+	// Visible items above/below the active entry (0 = show all)
+	'sticky_toc_neighbours'			=> 5,
+
+	// Minimum number of headings before the sidebar appears
+	'sticky_toc_min'				=> 2,
+
+	// Include headings from comments in the sticky ToC
+	'sticky_toc_comments'			=> 1,
+
 	'footer_comments'				=> 1,
 	'footer_files'					=> 1,
 	'footer_tags'					=> 1,
@@ -242,7 +254,7 @@ $wacko_config_defaults = [
 	'max_image_area'				=> 0,		// -1, 0, 1.25e7 (off, auto, custom [e.g. 3500x3500: 12.5 million pixels])
 	'max_image_width'				=> 0,		// 320, 640, 800, 1024, 1280, 2560
 	'min_thumbnail_distance'		=> 50,
-	'jpeg_quality'					=> 80,		// 92, 80, ...
+	'image_quality'					=> 2,		// 0 'off', 1 'max', 2 'high', 3 'medium', 4 'low'
 
 	'enable_feeds'					=> 1,
 	'xml_changes_link'				=> 1,
