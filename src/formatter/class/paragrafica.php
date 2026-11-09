@@ -156,7 +156,12 @@ class Paragrafica
 
 		foreach ($this->t2[0] as $t)
 		{
-			$what = preg_replace($t, '$1' . $this->mark2, $what);
+			// A closing block tag must terminate the preceding region as well as
+			// start a new one after it. Otherwise the preceding candidate region
+			// can swallow the closing tag. If that region is auto-paragraphed,
+			// structural markup such as </div> ends up inside <p class="auto">,
+			// producing invalid HTML for indented quotes and code blocks.
+			$what = preg_replace($t, $this->mark1 . '$1' . $this->mark2, $what);
 		}
 
 		foreach ($this->t1[1] as $t)
