@@ -634,15 +634,54 @@ class WackoFormatter
 		// blockquote
 		else if (preg_match('/^<\[(.*)\]>$/us', $thing, $matches))
 		{
-			// trivial substitution (is there a security hole?)
-			$matches[0] = str_replace('<[', '<!--escaped--><blockquote><!--escaped-->', $matches[0]);
-			$matches[0] = str_replace(']>', '<!--escaped--></blockquote><!--escaped-->', $matches[0]);
+			// A blockquote is a nested formatting scope. Newlines and forced
+			// breaks inside it must not close indents opened by the caller.
+			$state = [
+				'closers'		=> $this->indent_closers,
+				'level'			=> $this->old_indent_level,
+				'type'			=> $this->old_indent_type,
+				'td_closers'	=> $this->tdindent_closers,
+				'td_level'		=> $this->tdold_indent_level,
+				'td_type'		=> $this->tdold_indent_type,
+				'br'			=> $this->br,
+			];
 
-			$result = preg_replace_callback($this->LONG_REGEX, $callback, $matches[0]);
-			$result = preg_replace('/^(<br>)+/i', '', $result );
-			$result = preg_replace('/(<br>)+$/i', '', $result );
+			$this->indent_closers		= [];
+			$this->old_indent_level		= 0;
+			$this->old_indent_type		= null;
+			$this->tdindent_closers		= [];
+			$this->tdold_indent_level	= 0;
+			$this->tdold_indent_type	= null;
 
-			return $result;
+			try
+			{
+				// Parse only the body. The outer wrappers are added after the
+				// inner formatting scope has been closed.
+				$result = preg_replace_callback(
+					$this->LONG_REGEX,
+					$callback,
+					$matches[1]
+					);
+
+				// Close containers opened inside the quotation, while its
+				// private indentation state is still active.
+				$result .= $this->indent_close();
+
+				$result = preg_replace('/^(?:<br>\s*)+/i', '', $result);
+				$result = preg_replace('/(?:<br>\s*)+$/i', '', $result);
+			}
+			finally
+			{
+				$this->indent_closers		= $state['closers'];
+				$this->old_indent_level		= $state['level'];
+				$this->old_indent_type		= $state['type'];
+				$this->tdindent_closers		= $state['td_closers'];
+				$this->tdold_indent_level	= $state['td_level'];
+				$this->tdold_indent_type	= $state['td_type'];
+				$this->br					= $state['br'];
+			}
+
+			return '<blockquote>' . $result . '</blockquote>';
 		}
 		// super
 		else if (preg_match('/^\^\^(.*)\^\^$/u', $thing, $matches))
