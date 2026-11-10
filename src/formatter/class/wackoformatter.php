@@ -163,6 +163,10 @@ class WackoFormatter
 
 		$this->PRE_REGEX =
 			"/(" .
+			// inline code ##...##
+			($this->object->db->legacy_inline_code
+				? ''
+				: '\#\#[^\n]*?\#\#|') .
 			// formatter  %%...%% and ``...``
 			($this->object->db->disable_formatters
 				? ''
@@ -530,6 +534,19 @@ class WackoFormatter
 		// code
 		else if (preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches))
 		{
+			// The content of the inline code is literal text:
+			// - no wiki markup, no HTML, no actions, no typography.
+			//
+			// The content is protected with <!--notypo--> so that the
+			// typography (stage 3) cannot insert quotes, dashes or
+			// non-breaking spaces into the code.
+			if (!$this->object->db->legacy_inline_code)
+			{
+				return '<code><!--notypo-->' . Ut::html($matches[1]) . '<!--/notypo--></code>';
+			}
+
+			// DEPRECATED - remove together with the compatibility flag:
+			// the content of the inline code was parsed as wiki markup.
 			return '<code>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</code>';
 		}
 		// small

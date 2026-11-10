@@ -105,6 +105,7 @@ $config_db['intercom_delay']				= $config['intercom_delay'];
 $config_db['ip_login_limit_max']			= $config['ip_login_limit_max'];
 $config_db['keep_deleted_time']				= $config['keep_deleted_time'];
 $config_db['language']						= $config['language'];
+$config_db['legacy_inline_code']			= $config['legacy_inline_code'];
 $config_db['license']						= $config['license'];
 $config_db['link_target']					= $config['link_target'];
 $config_db['list_count']					= $config['list_count'];

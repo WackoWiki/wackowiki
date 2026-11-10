@@ -145,6 +145,7 @@ $wacko_config_defaults = [
 	'disable_bracketslinks'			=> 0,
 	'disable_wikilinks'				=> 1,
 	'disable_formatters'			=> 0,
+	'legacy_inline_code'			=> 0,
 
 	'youarehere_text'				=> '',
 	'hide_locked'					=> 1,

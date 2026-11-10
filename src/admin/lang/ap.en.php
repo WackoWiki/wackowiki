@@ -670,6 +670,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Disables <code>[[link]]</code> and <code>((link))</code> syntax.',
 	'Formatters'				=> 'Disable formatters:',
 	'FormattersInfo'			=> 'Disables <code>%%code%%</code> syntax, used for highlighters.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Date Formats',
 	'DateFormat'				=> 'The format of the date:',

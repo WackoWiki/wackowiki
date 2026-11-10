@@ -42,6 +42,7 @@ function admin_config_formatter($engine, $module)
 		$config['disable_bracketslinks']	= (int) ($_POST['disable_bracketslinks'] ?? 0);
 		$config['disable_wikilinks']		= (int) ($_POST['disable_wikilinks'] ?? 0);
 		$config['disable_formatters']		= (int) ($_POST['disable_formatters'] ?? 0);
+		$config['legacy_inline_code']		= (int) ($_POST['legacy_inline_code'] ?? 0);
 		$config['date_format']				= (string) $_POST['date_format'];
 		$config['time_format']				= (string) $_POST['time_format'];
 		$config['time_format_seconds']		= (string) $_POST['time_format_seconds'];
@@ -172,6 +173,18 @@ function admin_config_formatter($engine, $module)
 			</td>
 				<td>
 					<input type="checkbox" id="disable_formatters" name="disable_formatters" value="1"<?php echo ($engine->db->disable_formatters ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="legacy_inline_code"><strong><?php echo $engine->_t('LegacyInlineCode');?></strong><br>
+					<small><?php echo $engine->_t('LegacyInlineCodeInfo');?></small></label>
+			</td>
+				<td>
+					<input type="checkbox" id="legacy_inline_code" name="legacy_inline_code" value="1"<?php echo ($engine->db->legacy_inline_code ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr>
