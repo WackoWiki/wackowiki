@@ -868,6 +868,18 @@ class WackoFormatter
 		// indented text
 		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]{1,3}|[ivIV]+|\d{1,3})[\.\)](\#\d{1,3})?)?(\n|$)/us', $thing, $matches))
 		{
+			// While a table is being read, indentation belonging to its source
+			// rows is table syntax, not nested list markup. Processing it with
+			// the outer list stack closes the containing <li>/<ul> before the
+			// table rows are emitted.
+			//
+			// Cell contents are parsed separately by table_rows() with
+			// $this->intable = true and retain their normal indentation handling.
+			if ($this->table_scope && !$this->intable)
+			{
+				return "\n";
+			}
+
 			// new line
 			$result .= ($this->br ? "<br>\n" : "\n");
 
