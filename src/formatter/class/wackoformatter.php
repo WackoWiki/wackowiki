@@ -69,7 +69,6 @@ class WackoFormatter
 		// therefore the percent sign has to be allowed as well
 		$this->INTERWIKI_PATTERN = '[[:alnum:]]+:[' . $object::PATTERN['ALPHANUM_P'] . '\!\.][' . $object::PATTERN['ALPHANUM_P'] . '\.\~\!\$\&\'\(\)\*\+\,\;\=\:\@\?\#\%]';
 
-
 		$this->LONG_REGEX =
 			'/(' .
 			// escaped text
@@ -106,7 +105,9 @@ class WackoFormatter
 			// bold text **...**
 			"\*\*[^\n]*?\*\*|" .
 			// code ##...##
-			"\#\#[^\n]*?\#\#|" .
+			($this->object->db->legacy_inline_code
+				? "\#\#[^\n]*?\#\#|"
+				: '') .
 			// note !!...!!
 			"\!\!\S\!\!|" .
 			"\!\!(\S.*?\S)\!\!|" .
@@ -164,9 +165,13 @@ class WackoFormatter
 		$this->PRE_REGEX =
 			"/(" .
 			// inline code ##...##
+			// The delimiter is a *run* of '#', not a fixed pair of characters:
+			// the opening run has a length of N (N >= 2), the closing run must
+			// be a maximal run of exactly N characters. Runs with fewer '#' are
+			// content, therefore a literal '##' is written '### ## ###'.
 			($this->object->db->legacy_inline_code
 				? ''
-				: '\#\#[^\n]*?\#\#|') .
+				: '(?<!#)(?<code_delim>\#{2,})(?!#)[^\n]*?(?<!#)(?P=code_delim)(?!#)|') .
 			// formatter  %%...%% and ``...``
 			($this->object->db->disable_formatters
 				? ''
@@ -254,6 +259,26 @@ class WackoFormatter
 				'<!--escaped--><!--notypo-->' .
 					str_replace("\n", '<br>', Ut::html($matches[1])) .
 				'<!--/notypo--><!--escaped-->';
+		}
+		// inline code ##...##
+		else if (!$this->object->db->legacy_inline_code
+			&& preg_match('/^(?<!#)(?<code_delim>\#{2,})(?!#)(?<code_content>[^\n]*?)(?<!#)(?P=code_delim)(?!#)$/us', $thing, $matches))
+		{
+			$content = $matches['code_content'];
+
+			// strip one leading and trailing space if both are present and the content is not all spaces
+			if (strlen($content) > 1
+				&& $content[0] === ' '
+				&& substr($content, -1) === ' '
+				&& trim($content) !== '')
+			{
+				$content = substr($content, 1, -1);
+			}
+
+			return
+				'<!--escaped-->' .
+				'<code><!--notypo-->' . Ut::html($content) . '<!--/notypo--></code>' .
+				'<!--escaped-->';
 		}
 		// formatter text  %%...%% and ``...``
 		else if (  preg_match('/^``(.*)``$/us',		$thing, $matches1)
@@ -532,19 +557,9 @@ class WackoFormatter
 			return '<span class="underline">' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</span>';
 		}
 		// code
-		else if (preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches))
+		else if ($this->object->db->legacy_inline_code
+			&& preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches))
 		{
-			// The content of the inline code is literal text:
-			// - no wiki markup, no HTML, no actions, no typography.
-			//
-			// The content is protected with <!--notypo--> so that the
-			// typography (stage 3) cannot insert quotes, dashes or
-			// non-breaking spaces into the code.
-			if (!$this->object->db->legacy_inline_code)
-			{
-				return '<code><!--notypo-->' . Ut::html($matches[1]) . '<!--/notypo--></code>';
-			}
-
 			// DEPRECATED - remove together with the compatibility flag:
 			// the content of the inline code was parsed as wiki markup.
 			return '<code>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</code>';

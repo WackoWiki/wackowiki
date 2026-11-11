@@ -19,6 +19,10 @@ class PreFormatter
 		'(?>\%\%.*?\%\%)|' .
 		// escaped  ""...""
 		'(?>\"\".*?\"\")|' .
+		// inline code ##...##
+		($this->object->db->legacy_inline_code
+			? '(?>\#\#[^\n]*?\#\#)|'
+			: '(?<!#)(?<code_delim>\#{2,})(?!#)[^\n]*?(?<!#)(?P=code_delim)(?!#)|') .
 		// macro  ::...::
 		'(?>::(\S)?::)' .
 		')/usm';
@@ -50,6 +54,13 @@ class PreFormatter
 			case '"':
 				// ""...""
 				if (isset($thing[1]) && $thing[1] === '"')
+				{
+					return $thing;
+				}
+				break;
+			case '#':
+				// ##...## (inline code)
+				if (isset($thing[1]) && $thing[1] === '#')
 				{
 					return $thing;
 				}
