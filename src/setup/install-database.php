@@ -81,6 +81,11 @@ if ($config['is_update'])
 			$config['db_driver'] = 'mysqli';
 		}
 	}
+
+	if (version_compare($config['wacko_version'], '6.3.2', '<'))
+	{
+			$config['legacy_inline_code'] = 1;
+	}
 }
 
 /*
