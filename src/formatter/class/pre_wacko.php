@@ -15,8 +15,8 @@ class PreFormatter
 		$this->PRE_REGEX	=
 		'/(' .
 		// formatter  %%...%% and ``...``  (atomic groups to avoid backtracking)
-		'(?>``.*?``)|' .
-		'(?>\%\%.*?\%\%)|' .
+		'(?<!`)(?>(?<bt_fence>`{2,}))(?!`).*?(?<!`)(?P=bt_fence)(?!`)|' .
+		'(?<!%)(?>(?<pct_fence>%{2,}))(?!%).*?(?<!%)(?P=pct_fence)(?!%)|' .
 		// escaped  ""...""
 		'(?>\"\".*?\"\")|' .
 		// inline code ##...##

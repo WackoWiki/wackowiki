@@ -173,10 +173,13 @@ class WackoFormatter
 				? ''
 				: '(?<!#)(?<code_delim>\#{2,})(?!#)[^\n]*?(?<!#)(?P=code_delim)(?!#)|') .
 			// formatter  %%...%% and ``...``
+			// The delimiter is a maximal run of the delimiter character, the
+			// closing run must have the same length. A run of a different
+			// length is content ("%%% ... %% ... %%%" shows the inner "%%").
 			($this->object->db->disable_formatters
 				? ''
-				: "``.*?``|" .
-				  "\%\%.*?\%\%|") .
+				: '(?<!`)(?<bt_fence>`{2,})(?!`).*?(?<!`)(?P=bt_fence)(?!`)|' .
+				'(?<!%)(?<pct_fence>%{2,})(?!%).*?(?<!%)(?P=pct_fence)(?!%)|') .
 			// escaped ~...
 			"~([^ \t\n]+)|" .
 			// escaped  ""...""
@@ -281,11 +284,11 @@ class WackoFormatter
 				'<!--escaped-->';
 		}
 		// formatter text  %%...%% and ``...``
-		else if (  preg_match('/^``(.*)``$/us',		$thing, $matches1)
-				|| preg_match('/^\%\%(.*)\%\%$/us',	$thing, $matches2))
+		else if (  preg_match('/^(`{2,})(.*)(?<!`)\1(?!`)$/us',		$thing, $matches1)
+				|| preg_match('/^(\%{2,})(.*)(?<!\%)\1(?!%)$/us',	$thing, $matches2))
 		{
 			// check if a formatter has been specified
-			$code = $matches1[1] ?? $matches2[1];
+			$code = $matches1[2] ?? $matches2[2];
 
 			if (preg_match('/^\(\s*(.*?)\)(.*)$/us', $code, $matches))
 			{
