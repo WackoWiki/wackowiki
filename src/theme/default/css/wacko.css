@@ -941,6 +941,9 @@ a[href $='.epub'] .icon {
 a[href $='.txt'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/text.svg') no-repeat scroll left center;
 }
+a[href $='.md'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/light/md.svg') no-repeat scroll left center;
+}
 a[href $='.diff'] .icon,
 a[href $='.patch'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/light/patch.svg') no-repeat scroll left center;
@@ -1071,6 +1074,9 @@ a[href $='.webm'] .icon {
 		a[href $='.txt'] .icon {
 			background: rgba(0, 0, 0, 0) url('./../icon/dark/text.svg') no-repeat scroll left center;
 		}
+		a[href $='.md'] .icon {
+			background: rgba(0, 0, 0, 0) url('./../icon/dark/md.svg') no-repeat scroll left center;
+		}
 		a[href $='.diff'] .icon,
 		a[href $='.patch'] .icon {
 			background: rgba(0, 0, 0, 0) url('./../icon/dark/patch.svg') no-repeat scroll left center;
@@ -1200,6 +1206,9 @@ a[href $='.webm'] .icon {
 	}
 	a[href $='.txt'] .icon {
 		background: rgba(0, 0, 0, 0) url('./../icon/dark/text.svg') no-repeat scroll left center;
+	}
+	a[href $='.md'] .icon {
+		background: rgba(0, 0, 0, 0) url('./../icon/dark/md.svg') no-repeat scroll left center;
 	}
 	a[href $='.diff'] .icon,
 	a[href $='.patch'] .icon {
