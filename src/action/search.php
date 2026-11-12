@@ -150,7 +150,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 		($tag
 			? 'LEFT JOIN ' . $prefix . 'page b ON (a.comment_on_id = b.page_id) '
 			: '') .
-		'WHERE ( lower(a.tag) LIKE binary lower('	. $this->db->q('%' . $phrase . '%') . ') ' .
+		'WHERE ( lower(a.tag) LIKE lower('	. $this->db->q('%' . $phrase . '%') . ') ' .
 			'OR lower(a.title) LIKE lower('			. $this->db->q('%' . $phrase . '%') . ')) ' .
 		($tag
 			? 'AND (a.tag LIKE '	. $this->db->q($tag . '/%') . ' ' .
