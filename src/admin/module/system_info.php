@@ -113,6 +113,16 @@ function admin_system_info($engine, $module)
 	$sysinfo['gzip_compression']	= [$engine->_t('GZipCompression'), $gzip_compression];
 	$sysinfo['php_extensions']		= [$engine->_t('PhpExtensions'), implode(', ', $php_extensions)];
 
+	if (extension_loaded('gd'))
+	{
+		$sysinfo['gd_version']			= ['GD', gd_info()['GD Version']];
+	}
+
+	if (extension_loaded('imagick'))
+	{
+		$sysinfo['imagick_version']		= ['Imagick', Imagick::getVersion()['versionString']];
+	}
+
 	if ( function_exists( 'apache_get_modules' ) )
 	{
 		$sysinfo['apache_modules']		= [$engine->_t('ApacheModules'), implode(', ', apache_get_modules())];
