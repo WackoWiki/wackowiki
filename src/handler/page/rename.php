@@ -49,8 +49,8 @@ if ($registered
 				{
 					$part = utf8_trim($part);   // clean each segment
 
-					// uppercase the first character of each word only when there are multiple words separated by spaces
-					if (preg_match('/^\w+( +\w+)*$/u', $part))
+					// Only uppercase when there are at least two words separated by space(s)
+					if (preg_match('/^\w+( +\w+)+$/u', $part))
 					{
 						$part = utf8_ucwords($part);
 					}
