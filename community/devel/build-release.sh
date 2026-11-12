@@ -461,7 +461,7 @@ describe_ref() {
 
 # ================== GIT STATUS CHECK ==================
 check_git_status() {
-    local target_dir="$1"   # FIX: was "\$1" (literal string)
+    local target_dir="$1"
 
     # Validate input
     if [ -z "$target_dir" ]; then
@@ -953,20 +953,16 @@ More examples:
     ./build-release.sh --branch=6.3 --version=6.3.0
 
     # Build full package
-    ./build-release.sh --version=6.2.2 --full
+    ./build-release.sh --version=6.3.1 --full
 
     # Non-interactive/CI mode
-    ./build-release.sh --version=6.2.2 --yes
+    ./build-release.sh --version=6.3.1 --yes
 
 NOTES:
     - Script must be executed from repository root
     - composer.json must be present in root directory
     - Git remote should be configured (GitHub or Codeberg)
     - Script will check if local repo is up-to-date with remote
-    - build/build.log is written completely (flushed and closed on exit)
-    - build.log is plain text - all ANSI escape sequences are removed
-      (the stripper is verified at startup, a pure bash implementation
-       is used as guaranteed fallback)
     - If --version matches an existing tag but no --source is given, the
       script warns that the archive contains master HEAD, not that tag.
 
