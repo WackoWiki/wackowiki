@@ -8,18 +8,8 @@ if (!defined('IN_WACKO'))
 // redirect from comment page to the commented one
 if (isset($this->page['latest']) && $this->page['comment_on_id'] && !$this->page['deleted'])
 {
-	// count previous comments
-	$count = $this->db->load_single(
-		'SELECT COUNT(tag) AS n ' .
-		'FROM ' . $this->prefix . 'page ' .
-		'WHERE comment_on_id = ' . (int) $this->page['comment_on_id'] . ' ' .
-			'AND created <= ' . $this->db->q($this->page['created']) . ' ' .
-			'AND deleted <> 1 ' .
-		'GROUP BY comment_on_id ' .
-		'LIMIT 1', true);
-
 	// determine comments page number where this comment is located
-	$p = ceil($count['n'] / $this->db->comments_count);
+	$p = $this->get_comment_page($this->page['comment_on_id'], $this->page['created']);
 
 	if ($parent_tag = $this->get_page_tag($this->page['comment_on_id']))
 	{

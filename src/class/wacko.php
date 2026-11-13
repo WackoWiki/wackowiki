@@ -288,6 +288,28 @@ class Wacko
 		}
 	}
 
+	/**
+	 * Returns the 1-based comments page number on which the given comment appears.
+	 *
+	 * @param int    $comment_on_id  ID of the parent page
+	 * @param string $created        Creation timestamp of the comment
+	 *
+	 * @return int
+	 */
+	function get_comment_page(int $comment_on_id, string $created): int
+	{
+		$count = $this->db->load_single(
+			'SELECT COUNT(tag) AS n ' .
+			'FROM ' . $this->prefix . 'page ' .
+			'WHERE comment_on_id = ' . (int) $comment_on_id . ' ' .
+			'AND created <= ' . $this->db->q($created) . ' ' .
+			'AND deleted <> 1 ' .
+			'GROUP BY comment_on_id ' .
+			'LIMIT 1', true);
+
+		return (int) ceil(($count['n'] ?? 0) / $this->db->comments_count);
+	}
+
 	function get_wacko_version(): string
 	{
 		return WACKO_VERSION;

@@ -297,6 +297,21 @@ if ($this->has_access('read')
 				$this->page_cache[$this->page['page_id']]	= '';
 
 				// forward to show handler
+				if ($is_comment && $this->db->section_edit && $section_id)
+				{
+					// comment section edit → jump straight to parent page + section anchor
+					$p = $this->get_comment_page($this->page['comment_on_id'], $this->page['created']);
+
+					if ($parent_tag = $this->get_page_tag($this->page['comment_on_id']))
+					{
+						$this->http->redirect($this->href('', $parent_tag, [
+							'show_comments'	=> 1,
+							'p'				=> $p,
+							'#'				=> 'h' . $this->page['page_id'] . '-' . $section_id
+						]));
+					}
+				}
+
 				$this->http->redirect($this->href('', '' , $anchor));
 			}
 		}
