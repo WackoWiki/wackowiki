@@ -24,7 +24,7 @@ $version	??= 1;
 
 if ($help)
 {
-	$tpl->help	= $this->help($info, 'hiddencontent');
+	$tpl->help	= $this->help($info, 'hashid');
 	return;
 }
 
