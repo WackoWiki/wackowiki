@@ -192,8 +192,6 @@ class WackoFormatter
 
 		$this->MIDDLE_REGEX =
 			"/(" .
-			// centered text  >>...<< (deprecated)
-			">>.*?<<|" .
 			// escaped  ~...
 			"~([^ \t\n]+)|" .
 			// escaped text
@@ -392,14 +390,6 @@ class WackoFormatter
 		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/us', $thing, $matches))
 		{
 			return $matches[1];
-		}
-		// centered text (deprecated)
-		else if (preg_match('/^>>(.*)<<$/us', $thing, $matches))
-		{
-			return
-				'<!--escaped--><div class="center">' .
-					preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) .
-				'</div><!--escaped-->';
 		}
 
 		return $thing;
