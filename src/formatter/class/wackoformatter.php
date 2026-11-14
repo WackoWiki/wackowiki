@@ -28,6 +28,11 @@ class WackoFormatter
 	public string $INTERWIKI_PATTERN;
 	private $tdold_indent_type;
 	private $old_indent_type;
+
+	/** Block-level HTML tags used to classify <# #> content. */
+	private const BLOCK_TAGS =
+		'div|table|pre|p|ul|ol|dl|form|section|article|blockquote|h[1-6]|fieldset|figure|details|summary|nav|main|aside|header|footer';
+
 	public array $colors			= [
 		'blue',
 		'green',
@@ -73,10 +78,6 @@ class WackoFormatter
 			'/(' .
 			// escaped text
 			"<!--escaped-->.*?<!--escaped-->|" .
-			// escaped html <#...#>
-			($this->object->db->allow_rawhtml
-				? '\<\#.*?\#\>|'
-				: '') .
 			// html comments
 			#"<!--.*-->|" .
 			// definition  (?...?)
@@ -164,6 +165,11 @@ class WackoFormatter
 
 		$this->PRE_REGEX =
 			"/(" .
+			// raw HTML <#...#> — MUST be before ""..."" so empty
+			// attributes like class="" are not taken as escaped quotes
+			($this->object->db->allow_rawhtml
+				? '\<#.*?\#>|'
+				: '') .
 			// inline code ##...##
 			// The delimiter is a *run* of '#', not a fixed pair of characters:
 			// the opening run has a length of N (N >= 2), the closing run must
@@ -179,7 +185,7 @@ class WackoFormatter
 			($this->object->db->disable_formatters
 				? ''
 				: '(?<!`)(?<bt_fence>`{2,})(?!`).*?(?<!`)(?P=bt_fence)(?!`)|' .
-				'(?<!%)(?<pct_fence>%{2,})(?!%).*?(?<!%)(?P=pct_fence)(?!%)|') .
+				  '(?<!%)(?<pct_fence>%{2,})(?!%).*?(?<!%)(?P=pct_fence)(?!%)|') .
 			// escaped ~...
 			"~([^ \t\n]+)|" .
 			// escaped  ""...""
@@ -197,6 +203,27 @@ class WackoFormatter
 			// escaped text
 			"<!--escaped-->.*?<!--escaped-->" .
 			")/usm";
+	}
+
+	/**
+	 * Classify raw HTML as block or inline for Paragrafica handling.
+	 * Block content is wrapped in <ignore> so it acts as a paragraph boundary.
+	 */
+	private function classify_raw_html(string $html): string
+	{
+		$clean = preg_replace('/<!--.*?-->/s', '', $html);
+
+		if (preg_match('/<(' . self::BLOCK_TAGS . ')(\s|>|\/)/i', $clean))
+		{
+			return 'block';
+		}
+
+		if (preg_match('/\n\s*\n/', $clean))
+		{
+			return 'block';
+		}
+
+		return 'inline';
 	}
 
 	function indent_close(): string
@@ -252,6 +279,32 @@ class WackoFormatter
 		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/us', $thing, $matches))
 		{
 			return $matches[1];
+		}
+		// raw HTML <#...#>
+		// Matched in PRE_REGEX before ""..."" so class="" stays intact.
+		// Returned as <!--escaped--> so LONG_REGEX never sees the payload
+		// (no strikethrough on --notypo--, no wiki parse of inner **).
+		else if ($this->object->db->allow_rawhtml
+			&& preg_match('/^<#(.*?)#>$/us', $thing, $matches))
+		{
+			$html = $matches[1];
+			$type = $this->classify_raw_html($html);
+
+			if (empty($this->object->db->disable_safehtml))
+			{
+				$html = $this->object->format($html, 'safehtml');
+			}
+
+			if ($type === 'block')
+			{
+				$wrapped = '<ignore><!--notypo-->' . $html . '<!--/notypo--></ignore>';
+			}
+			else
+			{
+				$wrapped = '<!--notypo-->' . $html . '<!--/notypo-->';
+			}
+
+			return '<!--escaped-->' . $wrapped . '<!--escaped-->';
 		}
 		// escaped  ""...""
 		else if (preg_match('/^\"\"(.*)\"\"$/us', $thing, $matches))
@@ -436,18 +489,6 @@ class WackoFormatter
 		else if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/us', $thing, $matches))
 		{
 			return $matches[1];
-		}
-		// escaped html
-		else if (preg_match('/^\<\#(.*)\#\>$/us', $thing, $matches))
-		{
-			if ($wacko->db->disable_safehtml)
-			{
-				return '<!--notypo-->' . $matches[1] . '<!--/notypo-->';
-			}
-			else
-			{
-				return '<!--notypo-->' . $wacko->format($matches[1], 'safehtml') . '<!--/notypo-->';
-			}
 		}
 		// table begin
 		else if ($thing == '#||')
