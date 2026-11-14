@@ -9,6 +9,8 @@ if (!defined('IN_WACKO'))
 // Formatter is most suitable for the purification of the text after
 // replace the bbcode on wacko-syntax.
 
+// TODO: add new and extended syntax
+
 if ($text == '')
 {
 	return;
@@ -18,14 +20,14 @@ $text = str_replace(
 	[
 		'**', '//', '__', '----', '---', '##', '++', '??', '""', '~',
 		'%%', '``',
-		'======', '=====', '====', '===',
+		'=======', '======', '=====', '====', '===',
 		'<[', ']>', '#||', '||#', '#|', '|#',
 		'||', '*|', '|*',
 	],
 	[
 		'', '', '', '', '', '', '', '', '', '',
 		'', '',
-		'', '', '', '',
+		'', '', '', '', '',
 		'"', '"', '"', '"', '"', '"',
 		'', '', '',
 	],
