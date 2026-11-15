@@ -4,6 +4,8 @@
 
 // test configuration
 echo '<h2>' . _t('TestingConfiguration') . '</h2>' . "\n";
+install_stream();
+install_guard();
 
 $delete_table		= [];
 $create_trigger		= [];
@@ -118,6 +120,8 @@ $sql_modes = match((int) $config['sql_mode'])
 	default	=> 0, // server SQL mode
 };
 
+try
+{
 switch ($config['db_driver'])
 {
 	/*
@@ -206,9 +210,14 @@ switch ($config['db_driver'])
 
 		echo '</ul>' . "\n";
 		echo '<br>' . "\n";
+		install_flush();
 
 		if (!$fatal_error)
 		{
+			install_step(_t('InstallTables'));
+			install_fail_fast_locks();
+			install_flush();
+
 			// mariadb / mysql only
 			require_once 'setup/_insert_config.php';
 			require_once 'setup/_insert_default.php';
@@ -311,6 +320,8 @@ switch ($config['db_driver'])
 				);
 
 						echo '<li>' . _t('InstallPagesBegin');
+				install_step(strip_tags(_t('InstallPagesBegin')));
+				install_flush();
 				require_once 'setup/insert_pages.php';
 				echo '</li>' . "\n";
 				echo '<li>' . _t('InstallPagesEnd') . '</li>' . "\n";
@@ -425,9 +436,14 @@ switch ($config['db_driver'])
 
 		echo '</ul>' . "\n";
 		echo '<br>' . "\n";
+		install_flush();
 
 		if (!$fatal_error)
 		{
+			install_step(_t('InstallTables'));
+			install_fail_fast_locks();
+			install_flush();
+
 			require_once 'setup/_insert_config.php';
 			require_once 'setup/_insert_default.php';
 			require_once 'setup/database/sqlite.php';
@@ -540,6 +556,8 @@ switch ($config['db_driver'])
 				);
 
 				echo '<li>' . _t('InstallPagesBegin');
+				install_step(strip_tags(_t('InstallPagesBegin')));
+				install_flush();
 				require_once 'setup/insert_pages.php';
 				echo '</li>' . "\n";
 				echo '<li>' . _t('InstallPagesEnd') . '</li>' . "\n";
@@ -683,9 +701,14 @@ switch ($config['db_driver'])
 
 		echo '</ul>' . "\n";
 		echo '<br>' . "\n";
+		install_flush();
 
 		if (!$fatal_error)
 		{
+			install_step(_t('InstallTables'));
+			install_fail_fast_locks();
+			install_flush();
+
 			require_once 'setup/_insert_config.php';
 			require_once 'setup/_insert_default.php';
 
@@ -811,6 +834,8 @@ switch ($config['db_driver'])
 				);
 
 				echo '<li>' . _t('InstallPagesBegin');
+				install_step(strip_tags(_t('InstallPagesBegin')));
+				install_flush();
 				require_once 'setup/insert_pages.php';
 				echo '</li>' . "\n";
 				echo '<li>' . _t('InstallPagesEnd') . '</li>' . "\n";
@@ -819,6 +844,13 @@ switch ($config['db_driver'])
 		}
 
 		break;
+}
+}
+catch (Throwable $e)
+{
+	install_report($e->getMessage()
+		. ($e->getCode() ? ' (' . $e->getCode() . ')' : '')
+		. ' in ' . $e->getFile() . ':' . $e->getLine());
 }
 
 if (!$fatal_error)

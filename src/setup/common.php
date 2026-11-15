@@ -205,65 +205,273 @@ function sanitize_page_tag(&$tag, $normalize = false)
 }
 
 // database install
+
+// Send installer output immediately. The request buffer otherwise holds
+// every line until the script ends, so a hung statement looks like a stall
+// on the previous successful check.
+function install_stream(): void
+{
+	@ini_set('zlib.output_compression', '0');
+	@ini_set('implicit_flush', '1');
+	ob_implicit_flush(true);
+
+	while (ob_get_level() > 0)
+	{
+		@ob_end_flush();
+	}
+
+	// Pad past common proxy / SAPI buffers so the first lines are delivered.
+	echo "\n<!--" . str_repeat(' ', 4096) . "-->\n";
+	@flush();
+}
+
+function install_flush(): void
+{
+	@flush();
+}
+
+function install_step(string $label): void
+{
+	$GLOBALS['install_step'] = $label;
+}
+
+function install_escape(string $text): string
+{
+	return Ut::html($text);
+}
+
+function install_label(string $key, string $fallback): string
+{
+	$text = _t($key);
+
+	return $text !== '' ? $text : $fallback;
+}
+
+function install_sql_excerpt(string $query): string
+{
+	$query = preg_replace('/\s+/', ' ', trim($query)) ?? '';
+
+	if (strlen($query) > 300)
+	{
+		$query = substr($query, 0, 300) . '...';
+	}
+
+	return install_escape($query);
+}
+
+// Text of the last driver error, or '' when the driver has nothing to say.
+function install_driver_detail(): string
+{
+	global $config, $dblink;
+
+	if (!isset($dblink) || !$dblink)
+	{
+		return '';
+	}
+
+	$raw = '';
+
+	switch ($config['db_driver'] ?? '')
+	{
+		case 'mysqli':
+			if (mysqli_errno($dblink))
+			{
+				$raw = mysqli_errno($dblink) . ': ' . mysqli_error($dblink);
+			}
+			break;
+
+		case 'sqlite':
+			if ($dblink->lastErrorCode())
+			{
+				$raw = $dblink->lastErrorCode() . ': ' . $dblink->lastErrorMsg();
+			}
+			break;
+
+		default:
+			if (!method_exists($dblink, 'errorInfo'))
+			{
+				break;
+			}
+
+			$info = $dblink->errorInfo();
+
+			if (is_array($info) && ($info[0] ?? '00000') !== '00000' && ($info[0] ?? '') !== '')
+			{
+				$raw = trim(($info[0] ?? '') . ' ' . ($info[1] ?? '') . ' ' . ($info[2] ?? ''));
+			}
+			break;
+	}
+
+	return $raw === '' ? '' : install_escape($raw);
+}
+
+function install_report(string $message): void
+{
+	$GLOBALS['fatal_error']		= true;
+	$GLOBALS['install_failure_reported'] = true;
+
+	$step	= trim(strip_tags((string) ($GLOBALS['install_step'] ?? '')));
+	$where	= $step !== '' ? '<br>' . install_escape($step) : '';
+
+	output_error(
+		'<strong>' . install_label('InstallAborted', 'Installation stopped because of an unexpected error.') . '</strong><br>'
+		. nl2br(install_escape($message), false)
+		. $where
+	);
+	install_flush();
+}
+
+function install_guard(): void
+{
+	register_shutdown_function(static function () {
+		if (!empty($GLOBALS['install_failure_reported']))
+		{
+			return;
+		}
+
+		$err = error_get_last();
+
+		if (!$err)
+		{
+			return;
+		}
+
+		$fatal = [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR, E_RECOVERABLE_ERROR];
+
+		if (!in_array($err['type'], $fatal, true))
+		{
+			return;
+		}
+
+		install_report($err['message'] . ' in ' . $err['file'] . ':' . $err['line']);
+		echo '<button type="button" class="next" onclick="history.go(-1);">' . _t('Back') . '</button>' . "\n";
+		echo '<button type="button" class="next" onclick="window.location.reload(true);">' . _t('TryAgain') . '</button>' . "\n";
+		install_flush();
+	});
+}
+
+// Metadata locks default to about a year. A stuck DDL then hangs this page
+// with no further output. Fail the statement instead and let the caller print why.
+function install_fail_fast_locks(): void
+{
+	global $config, $dblink;
+
+	if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo'], true))
+	{
+		if ($config['db_driver'] === 'sqlite' && $dblink instanceof SQLite3)
+		{
+			$dblink->busyTimeout(15000);
+		}
+		else if ($dblink instanceof PDO)
+		{
+			$dblink->setAttribute(PDO::ATTR_TIMEOUT, 15);
+		}
+
+		return;
+	}
+
+	foreach ([
+		'SET SESSION lock_wait_timeout = 15',
+		'SET SESSION innodb_lock_wait_timeout = 15',
+	] as $sql)
+	{
+		try
+		{
+			if ($config['db_driver'] === 'mysqli')
+			{
+				mysqli_query($dblink, $sql);
+			}
+			else if ($dblink instanceof PDO)
+			{
+				$dblink->query($sql);
+			}
+		}
+		catch (Throwable $e)
+		{
+			// This server has no such session variable. The statement that
+			// actually fails is still reported to the user.
+		}
+	}
+}
+
 function test($text, $condition, $error_text = ''): bool
 {
+	install_step(trim(strip_tags((string) $text)));
 	echo '<li>' . $text . '   ' . output_image($condition);
 
 	if (!$condition)
 	{
 		if ($error_text)
 		{
-			output_error($error_text);
+			$detail = install_driver_detail();
+			output_error($error_text . ($detail !== '' ? '<br>' . $detail : ''));
 		}
 
 		echo '</li>' . "\n";
+		install_flush();
 		return false;
 	}
 
 	echo '</li>' . "\n";
+	install_flush();
 	return true;
+}
+
+function install_run_statement(string $text, string $query, string $error_text, callable $run): void
+{
+	install_step(trim(strip_tags($text)));
+	echo '<li>' . $text . '   ';
+	install_flush();
+
+	try
+	{
+		// PDO::exec() returns 0 when a statement succeeds without changing rows.
+		// Only an actual false is a failure.
+		$ok = $run() !== false;
+		echo output_image($ok);
+
+		if (!$ok && $error_text)
+		{
+			$detail = install_driver_detail();
+			output_error($error_text
+				. ($detail !== '' ? '<br>' . $detail : '')
+				. '<br><code>' . install_sql_excerpt($query) . '</code>');
+		}
+	}
+	catch (Throwable $e)
+	{
+		echo output_image(false);
+		output_error($error_text
+			. '<br>' . install_escape($e->getMessage() . ($e->getCode() ? ' (' . $e->getCode() . ')' : ''))
+			. '<br><code>' . install_sql_excerpt($query) . '</code>');
+	}
+
+	echo '</li>' . "\n";
+	install_flush();
 }
 
 function test_mysqli($text, $query, $error_text = '')
 {
 	global $dblink;
 
-	try
-	{
-		test($text, @mysqli_query($dblink, $query), $error_text);
-	}
-	catch (mysqli_sql_exception $e)
-	{
-		test($text, false, $error_text . '<br>' . $e->getMessage());
-	}
+	install_run_statement($text, (string) $query, (string) $error_text,
+		static fn () => mysqli_query($dblink, $query));
 }
 
 function test_sqlite($text, $query, $error_text = '')
 {
 	global $dblink;
 
-	try
-	{
-		test($text, $dblink->exec($query), $error_text);
-	}
-	catch (Exception $e)
-	{
-		test($text, false, $error_text . '<br>' . $e->getMessage() . ' ' . $dblink->lastErrorMsg() . ' -> ' . $query);
-	}
+	install_run_statement($text, (string) $query, (string) $error_text,
+		static fn () => $dblink->exec($query));
 }
 
 function test_pdo($text, $query, $error_text = '')
 {
 	global $dblink;
 
-	try
-	{
-		test($text, $dblink->exec($query), $error_text);
-	}
-	catch (PDOException $e)
-	{
-		test($text, false, $error_text . '<br>' . $e->getCode() . ': (' . $e->getMessage() . ': ' . $dblink->errorInfo() . ')');
-	}
+	install_run_statement($text, (string) $query, (string) $error_text,
+		static fn () => $dblink->exec($query));
 }
 
 // default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos

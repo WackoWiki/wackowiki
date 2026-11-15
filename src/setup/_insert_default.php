@@ -13,8 +13,23 @@ $password_hashed		= password_hash(
 
 $file_path	= Ut::join_path(UPLOAD_GLOBAL_DIR, $config['site_logo']);
 $image_size	= Ut::get_image_dimensions($file_path);
-$file_size	= filesize($file_path);
-$file_hash	= sha1_file($file_path);
+$file_size	= @filesize($file_path);
+$file_hash	= @sha1_file($file_path);
+
+if (!is_array($image_size) || $file_size === false || !is_string($file_hash))
+{
+	output_error(Ut::perc_replace(
+		_t('ErrorLogoFile') !== ''
+			? _t('ErrorLogoFile')
+			: 'Could not read the logo file %1. Check that the file exists and is readable by the web server. Database installation will continue without image dimensions.',
+		'<code>' . Ut::html((string) $file_path) . '</code>'
+	));
+	install_flush();
+}
+
+$image_size	= is_array($image_size) ? $image_size : ['width' => 0, 'height' => 0];
+$file_size	= (int) $file_size;
+$file_hash	= is_string($file_hash) ? $file_hash : '';
 
 // sub-select query for user_id
 $q_user_id	= "SELECT user_id FROM {$pref}user WHERE user_name = '" . _q($config['admin_name']) . "' LIMIT 1";

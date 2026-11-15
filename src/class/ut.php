@@ -661,10 +661,24 @@ class Ut
 			return ['width' => $info[0], 'height' => $info[1], 'type' => $info[2]];
 		}
 
-		// 2. Detect JXL via magic bytes
-		$fh		= fopen($path, 'rb');
-		$header	= fread($fh, 12);
+		// 2. Detect JXL via magic bytes. A missing or unreadable file must
+		// return false: fread() on a failed fopen() is a TypeError, and the
+		// installer calls this while building the database and would die
+		// with no message after the version check.
+		$fh = @fopen($path, 'rb');
+
+		if ($fh === false)
+		{
+			return false;
+		}
+
+		$header = fread($fh, 12);
 		fclose($fh);
+
+		if (!is_string($header) || $header === '')
+		{
+			return false;
+		}
 
 		$is_jxl =
 			   str_starts_with($header, "\xFF\x0A")
