@@ -11,26 +11,6 @@ $password_hashed		= password_hash(
 								PASSWORD_DEFAULT
 								);
 
-$file_path	= Ut::join_path(UPLOAD_GLOBAL_DIR, $config['site_logo']);
-$image_size	= Ut::get_image_dimensions($file_path);
-$file_size	= @filesize($file_path);
-$file_hash	= @sha1_file($file_path);
-
-if (!is_array($image_size) || $file_size === false || !is_string($file_hash))
-{
-	output_error(Ut::perc_replace(
-		_t('ErrorLogoFile') !== ''
-			? _t('ErrorLogoFile')
-			: 'Could not read the logo file %1. Check that the file exists and is readable by the web server. Database installation will continue without image dimensions.',
-		'<code>' . Ut::html((string) $file_path) . '</code>'
-	));
-	install_flush();
-}
-
-$image_size	= is_array($image_size) ? $image_size : ['width' => 0, 'height' => 0];
-$file_size	= (int) $file_size;
-$file_hash	= is_string($file_hash) ? $file_hash : '';
-
 // sub-select query for user_id
 $q_user_id	= "SELECT user_id FROM {$pref}user WHERE user_name = '" . _q($config['admin_name']) . "' LIMIT 1";
 
@@ -160,34 +140,61 @@ $insert_reviewer_group =
 		1
 	)";
 
-$insert_logo_image =
-	"INSERT INTO {$pref}file (
-		page_id,
-		user_id,
-		file_name,
-		file_lang,
-		file_description,
-		created,
-		modified,
-		file_size,
-		picture_w,
-		picture_h,
-		file_ext,
-		mime_type,
-		file_hash
-	)
-	VALUES (
-		0,
-		(" . $q_user_id . "),
-		'" . _q($config['site_logo']) . "',
-		'" . _q($config['language']) . "',
-		'WackoWiki',
-		" . utc_dt() . ",
-		" . utc_dt() . ",
-		'" . (int) $file_size . "',
-		'" . (int) $image_size['width'] . "',
-		'" . (int) $image_size['height'] . "',
-		'png',
-		'image/png',
-		'" . _q($file_hash) . "'
-	)";
+// ──────────────────────────────────────────────
+// Logo image — ONLY for new installation (version 0)
+// ──────────────────────────────────────────────
+if ($version == '0')
+{
+	$file_path	= Ut::join_path(UPLOAD_GLOBAL_DIR, $config['site_logo']);
+	$image_size	= Ut::get_image_dimensions($file_path);
+	$file_size	= @filesize($file_path);
+	$file_hash	= @sha1_file($file_path);
+
+	if (!is_array($image_size) || $file_size === false || !is_string($file_hash))
+	{
+		output_error(Ut::perc_replace(
+			_t('ErrorLogoFile') !== ''
+			? _t('ErrorLogoFile')
+			: 'Could not read the logo file %1. Check that the file exists and is readable by the web server. Database installation will continue without image dimensions.',
+			'<code>' . Ut::html((string) $file_path) . '</code>'
+			));
+		install_flush();
+	}
+
+	$image_size	= is_array($image_size) ? $image_size : ['width' => 0, 'height' => 0];
+	$file_size	= (int) $file_size;
+	$file_hash	= is_string($file_hash) ? $file_hash : '';
+
+
+	$insert_logo_image =
+		"INSERT INTO {$pref}file (
+			page_id,
+			user_id,
+			file_name,
+			file_lang,
+			file_description,
+			created,
+			modified,
+			file_size,
+			picture_w,
+			picture_h,
+			file_ext,
+			mime_type,
+			file_hash
+		)
+		VALUES (
+			0,
+			(" . $q_user_id . "),
+			'" . _q($config['site_logo']) . "',
+			'" . _q($config['language']) . "',
+			'WackoWiki',
+			" . utc_dt() . ",
+			" . utc_dt() . ",
+			'" . (int) $file_size . "',
+			'" . (int) $image_size['width'] . "',
+			'" . (int) $image_size['height'] . "',
+			'png',
+			'image/png',
+			'" . _q($file_hash) . "'
+		)";
+}
