@@ -4,6 +4,56 @@ import logger from '../../utils/logger.js';
 import Storage from '../../utils/storage.js';
 
 /**
+ * Minimum number of fence characters required to open a top level code block.
+ *
+ * Block fence rules implemented by the highlighter (for BOTH '%' and '`'):
+ *  - A top level block is opened by a run of at least BASE_LENGTH characters.
+ *  - A run longer than BASE_LENGTH must be alone on its line, otherwise it is
+ *    ordinary content. This keeps ordinary text from opening or closing a block.
+ *  - A block is closed by a run of exactly the same length as its opening run.
+ *  - Runs of any other length are ordinary content ("own escape" rule).
+ *  - Nested blocks keep the k+1 rule: inside a block of length N a nested block
+ *    is opened (and closed) by a run of exactly N+1 characters.
+ */
+const BASE_LENGTH = 2;
+
+/**
+ * Characters that may be used as block level code fences.
+ * '%%' and '``' are equivalent alternatives:
+ *
+ *   %% code block %%
+ *   `` code block ``
+ *
+ * Both support the same own-escape / exact-length / k+1 nesting behaviour.
+ */
+const FENCE_CHARS = ['%', '`'];
+
+/**
+ * Minimum number of '#' characters required to open an inline code span.
+ *
+ * Inline code span rules implemented by the highlighter:
+ *  - The opening delimiter is a maximal run of '#' with a length N >= 2.
+ *  - The closing delimiter must be a maximal run of exactly N characters.
+ *  - Runs with fewer (or more) '#' are ordinary content, so a literal '##'
+ *    inside a span has to be written with a longer delimiter, e.g.
+ *    '### ## code ## ###' renders as <code>## code ##</code>.
+ *  - A delimiter can only be escaped by its own escape (a longer run),
+ *    nothing else.
+ *  - The span is inline: the closing delimiter must be on the same line as
+ *    the opening one, a span never crosses a line break.
+ *  - The content of a span is never parsed as wiki markup: no HTML, no links,
+ *    no actions, no typography. It is shown as typed (HTML escaped).
+ */
+const INLINE_CODE_MIN_LENGTH = 2;
+
+/**
+ * Placeholder markers used to protect regions from further processing.
+ * A NUL character is used so that user content cannot collide with them.
+ */
+const TOKEN_PREFIX = '\u0000WIKI_TOKEN_';
+const TOKEN_SUFFIX = '\u0000';
+
+/**
  * Sets up the syntax highlighting overlay and attaches all related listeners.
  * Call once during init, after the toolbar is built.
  * @param {import('../editor/wikiedit.js').WikiEdit} editor
@@ -187,7 +237,7 @@ export function disableSyntaxHighlighting(editor) {
  * Toggles syntax highlighting on/off and persists the choice.
  * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
-function toggleSyntaxHighlight(editor) {
+function toggleSyntaxHighlighting(editor) {
   if (editor.syntaxHighlightEnabled) {
     disableSyntaxHighlighting(editor);
   } else {
@@ -219,28 +269,21 @@ function syncContentSize(editor) {
 
 /**
  * Applies wiki syntax highlighting to a text string.
+ *
  * @param {string} text
  * @returns {string} HTML with span-wrapped tokens
  */
 function highlightWikiSyntax(text) {
   if (!text) return '';
 
-  let html = text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+  let html = escapeHtml(text);
 
-  // Extract code blocks and literal blocks (""..."" and %%...%%) to protect them
+  // Protected regions: literal blocks (""...""), code blocks (%%...%% and
+  // ``...``) and inline code spans (##...##). Their content is never parsed as
+  // wiki markup and is therefore also protected against any later stage
+  // (e.g. typography).
   const blocks = [];
-  html = html.replace(/(""[\s\S]*?""|%%[\s\S]*?%%|``[\s\S]*?``)/g, (match) => {
-    const id = blocks.length;
-    if (match.startsWith('""')) {
-      blocks.push({ type: 'literal', content: match });
-    } else {
-      blocks.push({ type: 'block', content: `<span class="wiki-block">${match}</span>` });
-    }
-    return `WIKI_TOKEN_${id}`;
-  });
+  html = extractProtectedRegions(html, blocks);
 
   // Apply inline syntax highlighting to the rest
   html = html.replace(/^(={3,7})(.+?)\1/gm, '<span class="wiki-h">\$1\$2$1</span>');
@@ -249,7 +292,6 @@ function highlightWikiSyntax(text) {
   html = html.replace(/\+\+(?!\s)(.+?)(?<!\s)\+\+/g, '<span class="wiki-italic">++$1++</span>');
   html = html.replace(/__(?!\s)(.+?)(?<!\s)__/g, '<span class="wiki-underline">__$1__</span>');
   html = html.replace(/--(?!\s)(.+?)(?<!\s)--/g, '<span class="wiki-strike">--$1--</span>');
-  html = html.replace(/##(?!\s)(.+?)(?<!\s)##/g, '<span class="wiki-code">##$1##</span>');
   html = html.replace(/\[\[(.+?)\]\]/g, '<span class="wiki-link">[[$1]]</span>');
   html = html.replace(/\(\((.+?)\)\)/g, '<span class="wiki-link">(($1))</span>');
   html = html.replace(/(file:((\.\.|!)\/|\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/._-]*\.[\p{L}\p{Nd}]+(\?[a-zA-Z0-9&;=]*)?)/ug, '<span class="wiki-link">$1</span>');
@@ -260,10 +302,298 @@ function highlightWikiSyntax(text) {
   html = html.replace(/(\!\!)(?=\S)(.+?)(?<=\S)(\!\!)/gs, '<span class="wiki-block">\$1\$2$3</span>');
   html = html.replace(/^----$/gm, '<span class="wiki-hr">----</span>');
 
-  // Restore protected blocks
-  html = html.replace(/WIKI_TOKEN_(\d+)/g, (match, id) => {
-    return blocks[parseInt(id, 10)].content;
+  // Restore protected regions
+  html = html.replace(/\u0000WIKI_TOKEN_(\d+)\u0000/g, (match, id) => {
+    const block = blocks[parseInt(id, 10)];
+    return block === undefined ? match : block;
   });
 
   return html;
+}
+
+/**
+ * Escapes the HTML special characters of the raw text.
+ * @param {string} text
+ * @returns {string}
+ */
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+/**
+ * Counts the length of the maximal run of `ch` starting at `index`.
+ * @param {string} text
+ * @param {number} index
+ * @param {string} ch
+ * @returns {number}
+ */
+function countRun(text, index, ch) {
+  let n = 0;
+  while (index + n < text.length && text[index + n] === ch) n++;
+  return n;
+}
+
+/**
+ * Checks whether a character may be used as a block code fence.
+ * @param {string} ch
+ * @returns {boolean}
+ */
+function isFenceChar(ch) {
+  return FENCE_CHARS.indexOf(ch) !== -1;
+}
+
+/**
+ * Checks whether a fence run is allowed to act as a delimiter.
+ *
+ * Runs longer than BASE_LENGTH must be alone on their line, so that ordinary
+ * text can neither open nor close a block. Base length runs may appear inline.
+ * @param {string} text
+ * @param {number} index start of the run
+ * @param {number} runLen length of the run
+ * @returns {boolean}
+ */
+function isValidFence(text, index, runLen) {
+  if (runLen <= BASE_LENGTH) return true;
+  return isAloneOnLine(text, index, runLen);
+}
+
+/**
+ * Checks whether a run is the only thing on its line (whitespace allowed).
+ * @param {string} text
+ * @param {number} index start of the run
+ * @param {number} runLen length of the run
+ * @returns {boolean}
+ */
+function isAloneOnLine(text, index, runLen) {
+  let i = index - 1;
+  while (i >= 0 && text[i] !== '\n') {
+    if (!isHorizontalSpace(text[i])) return false;
+    i--;
+  }
+  let j = index + runLen;
+  while (j < text.length && text[j] !== '\n') {
+    if (!isHorizontalSpace(text[j])) return false;
+    j++;
+  }
+  return true;
+}
+
+/**
+ * @param {string} ch
+ * @returns {boolean} true for spaces/tabs (line breaks excluded)
+ */
+function isHorizontalSpace(ch) {
+  return ch === ' ' || ch === '\t' || ch === '\r' || ch === '\f' || ch === '\v';
+}
+
+/**
+ * Finds the end of a block level code region.
+ *
+ * The block is closed by a run of exactly `openLen` characters of the same
+ * fence character. A run of `openLen + 1` characters opens a nested block
+ * (k+1 rule) and is skipped over. Every other run length is ordinary content.
+ * @param {string} text
+ * @param {number} start index of the opening fence run
+ * @param {number} openLen length of the opening fence run
+ * @param {string} ch fence character ('%' or '`')
+ * @returns {number} index just after the closing fence, or -1 if unclosed
+ */
+function findBlockEnd(text, start, openLen, ch) {
+  let i = start + openLen;
+
+  while (i < text.length) {
+    if (text[i] !== ch) {
+      i++;
+      continue;
+    }
+
+    const runLen = countRun(text, i, ch);
+
+    // Closing fence: exactly the same length as the opening fence
+    if (runLen === openLen && isValidFence(text, i, runLen)) {
+      return i + runLen;
+    }
+
+    // Nested block: k+1 rule
+    if (runLen === openLen + 1 && isValidFence(text, i, runLen)) {
+      const nestedEnd = findBlockEnd(text, i, runLen, ch);
+      if (nestedEnd !== -1) {
+        i = nestedEnd;
+        continue;
+      }
+    }
+
+    // Any other run length is ordinary content
+    i += runLen;
+  }
+
+  return -1;
+}
+
+/**
+ * Wraps nested blocks of a block region in their own span.
+ * @param {string} text
+ * @param {number} from start of the region (inclusive)
+ * @param {number} to end of the region (exclusive)
+ * @param {number} parentLen length of the fence of the enclosing block
+ * @param {string} ch fence character ('%' or '`')
+ * @returns {string} HTML
+ */
+function wrapNestedBlocks(text, from, to, parentLen, ch) {
+  let out = '';
+  let i = from;
+
+  while (i < to) {
+    if (text[i] !== ch) {
+      out += text[i];
+      i++;
+      continue;
+    }
+
+    const runLen = countRun(text, i, ch);
+
+    if (runLen === parentLen + 1 && isValidFence(text, i, runLen)) {
+      const nestedEnd = findBlockEnd(text, i, runLen, ch);
+      if (nestedEnd !== -1 && nestedEnd <= to) {
+        out += '<span class="wiki-block wiki-block-nested">';
+        out += wrapNestedBlocks(text, i, nestedEnd, runLen, ch);
+        out += '</span>';
+        i = nestedEnd;
+        continue;
+      }
+    }
+
+    out += text.slice(i, i + runLen);
+    i += runLen;
+  }
+
+  return out;
+}
+
+/**
+ * Extracts the protected regions from the text and replaces them with
+ * placeholders, so that the inline rules never touch their content.
+ *
+ * Protected regions:
+ *  - Literal blocks: ""...""
+ *  - Code blocks:    %%...%% and ``...`` (fence length is the delimiter length)
+ *  - Inline code:   ##...## (maximal run, exact length closer, single line)
+ *
+ * The content of a region is shown as typed (HTML escaped) and is never parsed
+ * as wiki markup.
+ *
+ * @param {string} text
+ * @param {string[]} blocks collects the HTML of every extracted region
+ * @returns {string} text with placeholders
+ */
+function extractProtectedRegions(text, blocks) {
+  let out = '';
+  let i = 0;
+
+  while (i < text.length) {
+    const ch = text[i];
+
+    // Literal block: ""..."" (content is kept verbatim)
+    if (ch === '"' && text.startsWith('""', i)) {
+      const close = text.indexOf('""', i + 2);
+      if (close !== -1) {
+        const end = close + 2;
+        out += storeRegion(blocks, text.slice(i, end));
+        i = end;
+        continue;
+      }
+    }
+
+    // Code block: %%...%% or ``...`` (fence length is the delimiter length)
+    if (isFenceChar(ch)) {
+      const runLen = countRun(text, i, ch);
+      if (runLen >= BASE_LENGTH && isValidFence(text, i, runLen)) {
+        const end = findBlockEnd(text, i, runLen, ch);
+        if (end !== -1) {
+          const inner = wrapNestedBlocks(text, i, end, runLen, ch);
+          out += storeRegion(blocks, `<span class="wiki-block">${inner}</span>`);
+          i = end;
+          continue;
+        }
+      }
+      // Not a valid (or unclosed) fence: ordinary content
+      out += text.slice(i, i + runLen);
+      i += runLen;
+      continue;
+    }
+
+    // Inline code span: ##...## (maximal run, exact length closer, single line)
+    if (ch === '#') {
+      const runLen = countRun(text, i, ch);
+      if (runLen >= INLINE_CODE_MIN_LENGTH) {
+        const close = findInlineCodeEnd(text, i + runLen, runLen);
+        if (close !== -1) {
+          const end = close + runLen;
+          out += storeRegion(blocks, `<span class="wiki-code">${text.slice(i, end)}</span>`);
+          i = end;
+          continue;
+        }
+      }
+      // No matching closer on this line: ordinary content
+      out += text.slice(i, i + runLen);
+      i += runLen;
+      continue;
+    }
+
+    out += ch;
+    i++;
+  }
+
+  return out;
+}
+
+/**
+ * Stores a region and returns its placeholder.
+ * @param {string[]} blocks
+ * @param {string} html
+ * @returns {string}
+ */
+function storeRegion(blocks, html) {
+  const id = blocks.length;
+  blocks.push(html);
+  return `${TOKEN_PREFIX}${id}${TOKEN_SUFFIX}`;
+}
+
+/**
+ * Finds the closing run of an inline code span.
+ *
+ * The closing delimiter must be a maximal run of exactly `runLen` '#'.
+ * Runs of a different length are ordinary content and are skipped.
+ *
+ * Inline code spans never cross a line break: the search stops at the end of
+ * the current line, so a span without a closer on its own line is not a span.
+ *
+ * @param {string} text
+ * @param {number} from index to start searching at
+ * @param {number} runLen length of the opening delimiter
+ * @returns {number} index of the first maximal run with exactly `runLen` '#', or -1
+ */
+function findInlineCodeEnd(text, from, runLen) {
+  let i = from;
+
+  while (i < text.length) {
+    const ch = text[i];
+
+    // Inline syntax: the span must not cross a line break
+    if (ch === '\n' || ch === '\r') return -1;
+
+    if (ch !== '#') {
+      i++;
+      continue;
+    }
+
+    const len = countRun(text, i, '#');
+    if (len === runLen) return i;
+    i += len;
+  }
+
+  return -1;
 }
