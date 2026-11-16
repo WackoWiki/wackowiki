@@ -670,6 +670,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'يعطل بناء الجملة <code>[[link]و</code> و <code>(الرابط)</code>',
 	'Formatters'				=> 'تعطيل التنسيقات:',
 	'FormattersInfo'			=> 'تعطيل بناء الجملة <code>%%code%%</code> المستخدمة للمبرزين.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'تحليل علامة ويكي داخل <code>##code###</code> (<span class="cite">مهملة، سيتم إزالتها</span>)',
 
 	'DateFormatsSection'		=> 'تنسيقات التاريخ',
 	'DateFormat'				=> '3 - شكل التاريخ:',

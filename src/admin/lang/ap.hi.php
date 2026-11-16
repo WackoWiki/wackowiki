@@ -694,6 +694,8 @@ CamelCaseWords
 	'FormattersInfo'			=> 'हाइलाइटर के लिए उपयोग किए जाने वाले
 %%code%%
  सिंटैक्स को अक्षम करता है।',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'तिथि प्रारूप',
 	'DateFormat'				=> 'तिथि का प्रारूप:',

@@ -672,6 +672,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Απενεργοποιεί τη σύνταξη <code>[[link]]</code> και <code>((σύνδεσμο))</code>.',
 	'Formatters'				=> 'Disable formatters:',
 	'FormattersInfo'			=> 'Απενεργοποιεί τη σύνταξη <code>%%code%%</code> , που χρησιμοποιείται για τα highlighters.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Μορφές Ημερομηνίας',
 	'DateFormat'				=> 'Η μορφή της ημερομηνίας:',

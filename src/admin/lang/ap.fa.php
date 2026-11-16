@@ -693,6 +693,8 @@ CamelCaseWords
 	'FormattersInfo'			=> 'ساختار
 %%کد%%
  را که برای هایلایت کردن استفاده می‌شود، غیرفعال می‌کند.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'قالب‌های تاریخ',
 	'DateFormat'				=> 'قالب تاریخ:',

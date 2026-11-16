@@ -679,6 +679,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Schakelt <code>[[link]]</code> en <code>((link)) syntax.</code>.',
 	'Formatters'				=> 'Formatters uitschakelen:',
 	'FormattersInfo'			=> 'Schakelt <code>%%code%%</code> syntax uit, gebruikt voor highlighters.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Wikiopmaak in <code>##code##</code> (<span class="cite">niet meer ondersteund, wordt verwijderd</span>)',
 
 	'DateFormatsSection'		=> 'Datum Formaten',
 	'DateFormat'				=> 'Het formaat van de datum:',

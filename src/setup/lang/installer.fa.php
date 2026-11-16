@@ -15,16 +15,16 @@ $lang = [
    localized page tags (no spaces)
 */
 'ConfigDefaults'	=> [
-	'category_page'		=> 'دسته',
-	'groups_page'		=> 'گروهها',
+	'category_page'		=> 'دسته‌بندی',
+	'groups_page'		=> 'گروه‌ها',
 	'users_page'		=> 'کاربران',
 	'tools_page'		=> 'ابزارها',
 
 	'search_page'		=> 'جستجو',
-	'login_page'		=> 'ورود',
+	'login_page'		=> 'ورود به سامانه',
 	'account_page'		=> 'تنظیمات',
-	'registration_page'	=> 'نامنویسی',
-	'password_page'		=> 'گذرواژه',
+	'registration_page'	=> 'نام‌نویسی',
+	'password_page'		=> 'رمز عبور',
 
 	'whatsnew_page'		=> 'WhatsNew',
 	'changes_page'		=> 'RecentChanges',
@@ -40,7 +40,7 @@ $lang = [
 /*
    Generic Page Text
 */
-'TitleInstallation'				=> 'نصب WackoWiki',
+'TitleInstallation'				=> 'WackoWiki نصب',
 'TitleUpdate'					=> 'به‌روزرسانی WackoWiki',
 'Continue'						=> 'ادامه',
 'Back'							=> 'بازگشت',
@@ -50,10 +50,10 @@ $lang = [
 /*
    Locking Check
  */
-'LockAuthorization'				=> 'تصدیق هویت',
+'LockAuthorization'				=> 'احراز هویت',
 'LockAuthorizationInfo'			=> 'لطفاً رمز عبوری را که در فایل %1 ذخیره کرده‌اید وارد کنید.',
 'LockPassword'					=> 'رمز عبور:',
-'LockLogin'						=> 'ورود',
+'LockLogin'						=> 'ورود به سامانه',
 'LockPasswordInvalid'			=> 'رمز عبور نامعتبر.',
 'LockedTryLater'				=> 'این سایت در حال ارتقا است. لطفاً بعداً دوباره تلاش کنید.',
 'EmptyAuthFile'					=> 'فایل %1 یافت نشد یا خالی است. لطفاً فایل را ایجاد کرده و یک رمز عبور در آن تنظیم کنید.',
@@ -77,8 +77,8 @@ $lang = [
 'PhpDetected'					=> 'PHP شناسایی شده',
 'ModRewrite'					=> 'افزونه Apache Rewrite (اختیاری)',
 'ModRewriteInstalled'			=> 'افزونه Rewrite (mod_rewrite) نصب شده است؟',
-'Database'						=> 'پایگاه داده',
-'PhpExtensions'					=> 'افزونه‌های PHP',
+'Database'						=> 'دیتابیس',
+'PhpExtensions'					=> 'اکستنشن‌های PHP',
 'Permissions'					=> 'مجوزها',
 'ReadyToInstall'				=> 'آماده نصب هستید؟',
 'Requirements'					=> 'سرور شما باید نیازمندی‌های زیر را برآورده کند.',
@@ -108,7 +108,7 @@ $lang = [
 'MultiLang'						=> 'حالت چند زبانه',
 'MultiLangDesc'					=> 'حالت چند زبانه به شما امکان می‌دهد صفحات با تنظیمات زبان‌های مختلف در یک نصب واحد داشته باشید. هنگامی که این حالت فعال باشد، نصاب موارد منوی اولیه را برای تمام زبان‌های موجود در توزیع ایجاد می‌کند.',
 'AllowedLang'					=> 'زبان‌های مجاز',
-'AllowedLangDesc'				=> 'توصیه می‌شود فقط مجموعه زبان‌هایی را که می‌خواهید استفاده کنید انتخاب کنید، در غیر این صورت همه زبان‌ها انتخاب می‌شوند.',
+'AllowedLangDesc'				=> 'توصیه می‌شود فقط مجموعه زبان‌هایی که می‌خواهید استفاده کنید را انتخاب کنید، در غیر این صورت همه زبان‌ها انتخاب می‌شوند.',
 'AclMode'						=> 'تنظیمات پیش‌فرض ACL',
 'AclModeDesc'					=> '',
 'PublicWiki'					=> 'ویکی عمومی (خواندن برای همه، نوشتن و نظر دادن برای کاربران ثبت‌نام شده)',
@@ -124,7 +124,7 @@ WikiAdmin
 'PasswordConfirm'				=> 'تکرار رمز عبور:',
 'Mail'							=> 'آدرس ایمیل مدیر',
 'MailDesc'						=> 'آدرس ایمیل مدیر را وارد کنید.',
-'Base'							=> 'آدرس پایه',
+'Base'							=> 'آدرس پایه (Base URL)',
 'BaseDesc'						=> 'آدرس پایه سایت WackoWiki شما. نام صفحات به آن اضافه می‌شود، بنابراین اگر از mod_rewrite استفاده می‌کنید، آدرس باید با یک اسلش به پایان برسد، مثلاً.',
 'Rewrite'						=> 'حالت بازنویسی',
 'RewriteDesc'					=> 'اگر از WackoWiki با بازنویسی URL استفاده می‌کنید، حالت بازنویسی باید فعال باشد.',
@@ -148,7 +148,7 @@ WikiAdmin
 'DbCharsetDesc'					=> 'کاراکتر ست پایگاه داده‌ای که می‌خواهید استفاده کنید.',
 'DbEngine'						=> 'موتور ذخیره‌سازی',
 'DbEngineDesc'					=> 'موتور پایگاه داده‌ای که می‌خواهید استفاده کنید.',
-'DbHost'						=> 'میزبان',
+'DbHost'						=> 'هاست',
 'DbHostDesc'					=> 'میزبانی که سرور پایگاه داده شما روی آن اجرا می‌شود. معمولاً
 127.0.0.1
  یا
@@ -170,7 +170,7 @@ localhost
  قرار دهید.',
 'DbUser'						=> 'نام کاربری',
 'DbUserDesc'					=> 'نام کاربری که برای اتصال به پایگاه داده استفاده می‌شود.',
-'DbPassword'					=> 'گذرواژه',
+'DbPassword'					=> 'رمز عبور',
 'DbPasswordDesc'				=> 'گذرواژه کاربری که برای اتصال به پایگاه داده استفاده می‌شود.',
 'Prefix'						=> 'پیشوند جدول',
 'PrefixDesc'					=> 'پیشوند تمام جداول استفاده شده توسط WackoWiki. این به شما امکان می‌دهد چندین نصب WackoWiki را با استفاده از یک پایگاه داده اجرا کنید، به شرطی که از پیشوندهای جدولی مختلف استفاده کنند (مثلاً wacko_).',
@@ -243,6 +243,8 @@ chmod a+w %3
 %1
  را ایجاد کرد.',
 'InstallTables'					=> 'نصب جداول',
+'InstallAborted'				=> 'Installation stopped because of an unexpected error.',
+'ErrorLogoFile'					=> 'Could not read the logo file %1. Check that the file exists and is readable by the web server. Database installation will continue without image dimensions.',
 'ErrorDbConnection'				=> 'مشکلی در جزئیات اتصال پایگاه داده‌ای که مشخص کرده‌اید وجود دارد، لطفاً به عقب برگردید و بررسی کنید که صحیح باشند.',
 'ErrorDatabaseVersion'			=> 'نسخه پایگاه داده %1 است اما حداقل به نسخه %2 نیاز دارد.',
 'To'							=> 'به',

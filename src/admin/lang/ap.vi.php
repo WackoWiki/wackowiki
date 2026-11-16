@@ -663,6 +663,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Vô hiệu hóa cú pháp <code>[[link]]</code> và <code>((link))</code>.',
 	'Formatters'				=> 'Vô hiệu hóa bộ định dạng:',
 	'FormattersInfo'			=> 'Vô hiệu hóa cú pháp <code>%%code%%</code>, dùng cho tô sáng mã.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Định dạng ngày',
 	'DateFormat'				=> 'Định dạng ngày:',

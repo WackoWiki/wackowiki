@@ -663,6 +663,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'ปิดไวยากรณ์ <code>[[link]]</code> และ <code>((link))</code>',
 	'Formatters'				=> 'ปิดตัวจัดรูปแบบ:',
 	'FormattersInfo'			=> 'ปิดไวยากรณ์ <code>%%code%%</code> ที่ใช้สำหรับการเน้นโค้ด',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'รูปแบบวันที่',
 	'DateFormat'				=> 'รูปแบบวันที่:',

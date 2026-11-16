@@ -240,6 +240,8 @@ chmod a+w %3
 %1
  не може да бъде създаден.',
 'InstallTables'					=> 'Инсталиране на таблиците',
+'InstallAborted'				=> 'Installation stopped because of an unexpected error.',
+'ErrorLogoFile'					=> 'Could not read the logo file %1. Check that the file exists and is readable by the web server. Database installation will continue without image dimensions.',
 'ErrorDbConnection'				=> 'Възникна проблем с детайлите за връзка с базата данни, които посочихте. Моля, върнете се назад и проверете дали са правилни.',
 'ErrorDatabaseVersion'			=> 'Версията на базата данни е %1, но се изисква поне %2.',
 'To'							=> 'към',

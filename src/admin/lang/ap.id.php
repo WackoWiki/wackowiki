@@ -694,6 +694,8 @@ KataBentukUnta
 	'FormattersInfo'			=> 'Menonaktifkan sintaks
 %%kode%%
 , digunakan untuk penyorot sintaks.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Format Tanggal',
 	'DateFormat'				=> 'Format tanggal:',

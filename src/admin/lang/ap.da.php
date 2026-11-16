@@ -679,6 +679,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Deaktiverer <code>[[link]]</code> og <code>((link))</code> syntaks.',
 	'Formatters'				=> 'Deaktiver formattere:',
 	'FormattersInfo'			=> 'Deaktiverer syntaks <code>%%code%%</code> , der bruges til fremhævninger.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inde i <code>##code##</code> (<span class="cite">udfaset, vil blive fjernet</span>)',
 
 	'DateFormatsSection'		=> 'Dato Formater',
 	'DateFormat'				=> 'Datoens format:',

@@ -670,6 +670,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Poistaa <code>[[link]]</code> ja <code>((link))</code> syntaksin.',
 	'Formatters'				=> 'Poista formaatit käytöstä:',
 	'FormattersInfo'			=> 'Poistaa käytöstä <code>%%code%%%</code>-syntaksin, jota käytetään korostimissa.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup sisällä <code>##code##</code> (<span class="cite">vanhentunut, poistetaan</span>)',
 
 	'DateFormatsSection'		=> 'Päivämäärän Muodot',
 	'DateFormat'				=> 'Päivämäärän muoto:',

@@ -250,6 +250,8 @@ chmod a+w %3
 %1
  नहीं बनाई जा सकी।',
 'InstallTables'					=> 'तालिकाएँ स्थापित करना',
+'InstallAborted'				=> 'Installation stopped because of an unexpected error.',
+'ErrorLogoFile'					=> 'Could not read the logo file %1. Check that the file exists and is readable by the web server. Database installation will continue without image dimensions.',
 'ErrorDbConnection'				=> 'आपके द्वारा निर्दिष्ट डेटाबेस कनेक्शन विवरण में समस्या थी, कृपया वापस जाएँ और जाँचें कि वे सही हैं।',
 'ErrorDatabaseVersion'			=> 'डेटाबेस संस्करण %1 है लेकिन कम से कम %2 की आवश्यकता है।',
 'To'							=> 'से',

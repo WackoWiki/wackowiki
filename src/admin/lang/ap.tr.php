@@ -663,6 +663,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> '<code>[[link]]</code> ve <code>((link))</code> söz dizimini devre dışı bırakır.',
 	'Formatters'				=> 'Biçimlendiricileri devre dışı bırak:',
 	'FormattersInfo'			=> '<code>%%code%%</code> söz dizimi ile kullanılan vurgulayıcıları devre dışı bırakır.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Tarih Formatları',
 	'DateFormat'				=> 'Tarih biçimi:',

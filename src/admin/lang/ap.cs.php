@@ -670,6 +670,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Zakáže <code>[[link]]</code> a <code>(link))</code> syntax.',
 	'Formatters'				=> 'Zakázat formátování:',
 	'FormattersInfo'			=> 'Zakáže syntaxi <code>%%code%%</code> , která se používá pro zvýrazňovače.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki značka uvnitř <code>##code##</code> (<span class="cite">zastaralá, bude odstraněna</span>)',
 
 	'DateFormatsSection'		=> 'Formáty data',
 	'DateFormat'				=> 'Formát data:',

@@ -670,6 +670,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> '<code>[[link]]</code> と <code>((リンク))</code> 構文を無効にします。',
 	'Formatters'				=> '書式を無効にする:',
 	'FormattersInfo'			=> '強調表示に使用される <code>%%code%%</code> 構文を無効にします。',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> '<code>##code##</code> (<span class="cite">非推奨, 削除される</span>)',
 
 	'DateFormatsSection'		=> '日付の形式',
 	'DateFormat'				=> '日付の書式：',

@@ -693,6 +693,8 @@ CamelCaseSzavak
 	'FormattersInfo'			=> 'Letiltja a
 %%kód%%
  szintaxist, amelyet kiemelőkhöz használnak.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Dátumformátumok',
 	'DateFormat'				=> 'A dátum formátuma:',

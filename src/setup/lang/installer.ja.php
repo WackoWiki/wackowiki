@@ -63,7 +63,8 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> '言語設定',
-'PleaseUpgradeToR6'				=> '現在使用している WackoWiki %1 は古いバージョンのようです。<br>リリース版の WackoWiki にアップデートするには、まずインストールされている WackoWiki を %2 に更新する必要があります。',
+'PleaseUpgradeToR6'				=> '現在使用している WackoWiki %1 は古いバージョンのようです。
+リリース版の WackoWiki にアップデートするには、まずインストールされている WackoWiki を %2 に更新する必要があります。',
 'UpgradeFromWacko'				=> 'WackoWiki へようこそ! WackoWiki %1 から %2にアップグレードしているようです。 次の数ページでは、アップグレードプロセスをご案内します。',
 'FreshInstall'					=> 'WackoWiki へようこそ! WackoWiki %1をインストールしようとしています。次の数ページはインストールプロセスをご案内します。',
 'PleaseBackup'					=> 'アップグレード プロセスを開始する前に、データベース、構成ファイル、ローカル ハックやパッチが適用されたファイルなど、変更されたすべてのファイルを <strong>バックアップ</strong> してください。これにより、大きな問題から解放されます。',
@@ -173,13 +174,17 @@ $lang = [
 'TestDatabaseExists'			=> '指定したデータベースが存在するか確認しています',
 'TestDatabaseVersion'			=> 'データベースの最小バージョン要件を確認しています',
 'SqliteFileExtensionError'		=> '以下のファイル拡張子のいずれかを使用してください。 db, sdb, sqlite',
-'SqliteParentUnwritableGroup'	=> 'データディレクトリ <code>%1</code> を作成できません。親ディレクトリ <code>%2</code> に、Web サーバーから書き込み権限がないためです。<br><br>インストーラーは、Web サーバーがどのユーザーとして動作しているかを判別しました。<br>処理を続行するには、そのユーザーが <code>%3</code> ディレクトリに書き込みできるように設定してください。<br>Unix / Linux システムでは、次の操作を実行します：<br><br><pre> cd %2<br> mkdir %3 <br>chgrp %4 %3<br> chmod g+w %3 </pre>',
+'SqliteParentUnwritableGroup'	=> 'データディレクトリ <code>%1</code> を作成できません。
+親ディレクトリ <code>%2</code> に、Web サーバーから書き込み権限がないためです。<br><br>インストーラーは、Web サーバーがどのユーザーとして動作しているかを判別しました。<br>処理を続行するには、そのユーザーが <code>%3</code> ディレクトリに書き込みできるように設定してください。<br>Unix / Linux システムでは、次の操作を実行します：<br><br>
+<pre> cd %2<br> mkdir %3 <br>chgrp %4 %3<br> chmod g+w %3 </pre>',
 'SqliteParentUnwritableNogroup'	=> 'データ ディレクトリ <code>%1</code> を作成できません。ウェブ サーバーは、親ディレクトリ <code>%2</code> に書き込めませんでした。<br><br>インストーラーは、ウェブ サーバーの実行ユーザーを特定できませんでした。<br>続行するには、ディレクトリ <code>%3</code> に、ウェブ サーバー (と、あらゆる人々!) がグローバルに書き込めるようにしてください。<br>Unix または Linux では、以下を実行してください:<br><br><pre>cd %2<br>mkdir %3<br>chmod a+w %3</pre>',
 'SqliteMkdirError'				=> 'データ ディレクトリ <code>%1</code>を作成中にエラーが発生しました。<br>場所を確認して、もう一度お試しください。',
 'SqliteDirUnwritable'			=> '<code>%1</code>ディレクトリに書き込むことができません。<br>ウェブサーバーが書き込むことができるように権限を変更し、再度実行してください。',
 'SqliteReadonly'				=> 'ファイル <code>%1</code> は書き込み可能ではありません。',
 'SqliteCantCreateDb'			=> 'データベースファイル <code>%1</code> を作成できませんでした。',
 'InstallTables'					=> 'テーブルのインストール',
+'InstallAborted'				=> '予期しないエラーのためインストールが停止しました。',
+'ErrorLogoFile'					=> 'ロゴファイル %1を読み込めませんでした。ファイルが存在し、Webサーバーで読み込めるか確認してください。 データベースのインストールは画像寸法なしで続行されます。',
 'ErrorDbConnection'				=> '指定したデータベース接続の詳細に問題がありました。戻って正しいことを確認してください。',
 'ErrorDatabaseVersion'			=> 'データベースのバージョンは %1 ですが、少なくとも %2が必要です。',
 'To'							=> '宛先',

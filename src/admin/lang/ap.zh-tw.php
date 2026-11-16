@@ -676,6 +676,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> '停用 <code>[[link]]</code> 與 <code>((link))</code> 語法。',
 	'Formatters'				=> '停用格式器：',
 	'FormattersInfo'			=> '停用用於語法標示的 <code>%%code%%</code> 語法。',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> '日期格式',
 	'DateFormat'				=> '日期格式：',

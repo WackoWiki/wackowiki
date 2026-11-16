@@ -693,6 +693,8 @@ CamelCaseWords
 	'FormattersInfo'			=> 'Деактивира синтаксиса
 %%код%%
 , използван за подчертаване на код.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Формати на дата',
 	'DateFormat'				=> 'Формат на датата:',

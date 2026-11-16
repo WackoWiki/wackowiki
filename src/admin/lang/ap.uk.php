@@ -670,6 +670,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Вимикання <code>[[link]]</code> and <code>(link))</code> синтаксис.',
 	'Formatters'				=> 'Вимкнути формати:',
 	'FormattersInfo'			=> 'Вимикає синтаксис <code>%%code%%</code>, який використовується для виділень.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Формат дати',
 	'DateFormat'				=> 'Формат дати:',

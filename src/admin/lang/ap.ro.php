@@ -670,6 +670,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Dezactivează sintaxa <code>[[link]]</code> și <code>(link))</code>.',
 	'Formatters'				=> 'Dezactivare formatare:',
 	'FormattersInfo'			=> 'Dezactivează sintaxa <code>%%code%%</code>, utilizată pentru evidențiere.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Analizați wiki markup în <code>##code##</code> (<span class="cite">învechit, va fi eliminat</span>)',
 
 	'DateFormatsSection'		=> 'Formate de dată',
 	'DateFormat'				=> 'Formatul datei:',

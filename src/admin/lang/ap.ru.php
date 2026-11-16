@@ -663,6 +663,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Текст внутри пар квадратных <code>[[link]]</code> или круглых скобок <code>((link))</code> не будет преобразован в линк.',
 	'Formatters'				=> 'Отключить форматтеры Formatters:',
 	'FormattersInfo'			=> 'Не применять <code>%%code%%</code> используемый форматтерами.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Разбор разметки вики внутри <code>##code##</code> (<span class="cite">устарел, будет удален</span>)',
 
 	'DateFormatsSection'		=> 'Форматы дат',
 	'DateFormat'				=> 'Формат даты:',

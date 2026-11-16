@@ -662,6 +662,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> '禁用 <code>[[link]]</code> 和 <code>((link))</code> 语法。',
 	'Formatters'				=> '禁用格式化程序：',
 	'FormattersInfo'			=> '禁用 <code>%%code%%</code> 语法，用于高亮。',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> '在 <code>中解析wiki 标记##</code> (<span class="cite">已废弃，将被删除</span>)',
 
 	'DateFormatsSection'		=> '日期格式',
 	'DateFormat'				=> '日期的格式：',

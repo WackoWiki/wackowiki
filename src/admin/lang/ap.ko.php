@@ -663,6 +663,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> '<code>[[link]]</code> 및 <code>((link))</code> 구문을 비활성화합니다.',
 	'Formatters'				=> '포매터 비활성화:',
 	'FormattersInfo'			=> '하이라이터에 사용되는 <code>%%code%%</code> 구문을 비활성화합니다.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> '날짜 형식',
 	'DateFormat'				=> '날짜 형식:',

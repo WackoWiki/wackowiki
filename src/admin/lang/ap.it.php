@@ -676,6 +676,8 @@ questi, ovvero se la richiesta raggiunge il server web da uno dei tuoi proxy inv
 	'BracketsLinksInfo'			=> 'Disabilita la sintassi <code>[[link]]</code> e <code>((link))</code>.',
 	'Formatters'				=> 'Disabilita formatori:',
 	'FormattersInfo'			=> 'Disabilita la sintassi <code>%%code%%</code> , usata per gli evidenziatori.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Analizza markup wiki all\'interno di <code>##code##</code> (<span class="cite">deprecato, verrà rimosso</span>)',
 
 	'DateFormatsSection'		=> 'Formati Data',
 	'DateFormat'				=> 'Il formato della data:',

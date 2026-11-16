@@ -681,6 +681,8 @@ niezależnie od tego, czy jest wyłączona, jeśli HTTP_MOD_REWRITE jest włącz
 	'BracketsLinksInfo'			=> 'Wyłącza składnię <code>[[link]]</code> i <code>((link))</code>',
 	'Formatters'				=> 'Wyłącz formatyki:',
 	'FormattersInfo'			=> 'Wyłącza składnię <code>%%code%%</code> , używaną do podświetleń.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parsuj znaczniki wiki wewnątrz <code>##code##</code> (<span class="cite">przestarzałe, zostaną usunięte</span>)',
 
 	'DateFormatsSection'		=> 'Formaty daty',
 	'DateFormat'				=> 'Format daty:',

@@ -663,6 +663,8 @@ $ap_translation = [
 	'BracketsLinksInfo'			=> 'Onemogućuje sintaksu <code>[[link]]</code> i <code>((link))</code>.',
 	'Formatters'				=> 'Onemogući formatere:',
 	'FormattersInfo'			=> 'Onemogućuje sintaksu <code>%%code%%</code> koja se koristi za isticanje koda.',
+	'LegacyInlineCode'			=> 'Parse inline code',
+	'LegacyInlineCodeInfo'		=> 'Parse wiki markup inside <code>##code##</code> (<span class="cite">deprecated, will be removed</span>)',
 
 	'DateFormatsSection'		=> 'Format datuma',
 	'DateFormat'				=> 'Format datuma:',
