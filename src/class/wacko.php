@@ -4056,7 +4056,9 @@ class Wacko
 			// tracking external link
 			if (preg_match('/^(https?|ftps?|file|git|nntp|sftp|ssh|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 			{
-				if (!mb_stristr($tag, $this->db->base_url))
+				// base_url only counts as this wiki when it is the URL prefix
+				// (e.g. an archive.org URL that embeds the wiki URL is still external)
+				if (mb_stripos($tag, $this->db->base_url) !== 0)
 				{
 					$this->track_link($tag, LINK_EXTERNAL);
 				}
@@ -4170,7 +4172,8 @@ class Wacko
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
 
-			if (!mb_stristr($tag, $this->db->base_url))
+			// external icon only when the URL does not start with this wiki's base_url
+			if (mb_stripos($tag, $this->db->base_url) !== 0)
 			{
 				$title	= $this->_t('OuterLink2');
 				$icon	= $this->_t('Icon.Outer');
