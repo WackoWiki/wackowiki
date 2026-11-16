@@ -4093,6 +4093,27 @@ class Wacko
 				$video_link = $link;
 			}
 		}
+		// local file as the link label, e.g. ((/Doc file:/wacko_logo.png))
+		// rendered like a remote image URL: the <img> is the label, the target stays the page
+		else if (!$img_link)
+		{
+			$file_label = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', preg_replace('/<\/?nobr>/u', '', $text));
+			$file_label = htmlspecialchars_decode($file_label, ENT_QUOTES | ENT_HTML5);
+
+			if ($file_label !== $tag
+				&& preg_match('/^file:[^\\s\"<>\(\)]+\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')(\?[[:alnum:]\&]+)?$/ui', $file_label))
+			{
+				// meta_direct = false: media only, no nested <a>
+				$numerated	= $this->numerate_links;
+				$embedded	= $this->link($file_label, '', '', '', false, true, false, false);
+				$this->numerate_links = $numerated;
+
+				if (preg_match('/<(?:img|figure)\b/i', $embedded))
+				{
+					$text = $embedded;
+				}
+			}
+		}
 
 		// unified dispatch: determine link type by most specific patterns first
 		if (preg_match('/^(mailto:)?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
