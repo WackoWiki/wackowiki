@@ -3962,6 +3962,20 @@ class Wacko
 		}
 
 		$text	= str_replace('%20', ' ', $text);
+
+		// ((/Page file:/image.webp?caption)) renders a <figure>. Mark it the same
+		// way as a standalone captioned file so Paragrafica does not wrap it in <p>.
+		if (!$media_url)
+		{
+			$label = htmlspecialchars_decode($text, ENT_QUOTES | ENT_HTML5);
+
+			if ($label !== $tag
+				&& preg_match('/^file:[^\\s\"<>\(\)]+\.(' . self::PATTERN['BITMAP'] . '|' . self::PATTERN['DRAWING'] . ')\?[^\\s]*caption/ui', $label))
+			{
+				$media_url = 2;
+			}
+		}
+
 		$tag	= str_replace(' ', '%20', $tag);
 
 		if ($media_url == 1)
