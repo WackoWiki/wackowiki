@@ -237,7 +237,7 @@ export function disableSyntaxHighlighting(editor) {
  * Toggles syntax highlighting on/off and persists the choice.
  * @param {import('../editor/wikiedit.js').WikiEdit} editor
  */
-function toggleSyntaxHighlighting(editor) {
+function toggleSyntaxHighlight(editor) {
   if (editor.syntaxHighlightEnabled) {
     disableSyntaxHighlighting(editor);
   } else {
