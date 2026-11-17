@@ -21,6 +21,10 @@ export function setupMarkupHelpers(editor) {
   editor.insBlockWrapper = (openTag, closeTag) =>
     insBlockWrapper(editor, openTag, closeTag);
 
+  // ── New code syntax: inline code (##…##) and code blocks (%%…%%) ─
+  editor.insCode = () => insCode(editor);
+  editor.insCodeBlock = () => insCodeBlock(editor);
+
   editor.unindent = () => unindent(editor);
 
   logger.debug('MarkupHelpers: setup complete');
@@ -65,13 +69,341 @@ const LEADING_WHITESPACE_RE = /^([ ]*)(.*)$/;
  */
 const TRAILING_WHITESPACE_RE = /^(.*)([ ]*)$/;
 
+// ═══════════════════════════════════════════════════════════════════
+//  CODE SYNTAX – inline code (##…##) and code blocks (%%…%% / ``…``)
+// ═══════════════════════════════════════════════════════════════════
+
+/**
+ * Minimum length of an inline code delimiter / a block fence.
+ */
+const CODE_BASE_LENGTH = 2;
+
+/**
+ * Characters that may be used as block level code fences.
+ */
+const CODE_FENCE_CHARS = ['%', '`'];
+
+/**
+ * Counts the length of the maximal run of `ch` starting at `index`.
+ * @param {string} text
+ * @param {number} index
+ * @param {string} ch
+ * @returns {number}
+ */
+function countRun(text, index, ch) {
+  let n = 0;
+  while (index + n < text.length && text[index + n] === ch) n++;
+  return n;
+}
+
+/**
+ * Returns the length of the longest run of `ch` inside the text.
+ * @param {string} text
+ * @param {string} ch
+ * @returns {number}
+ */
+function longestRun(text, ch) {
+  let max = 0;
+  let current = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === ch) {
+      current++;
+      if (current > max) max = current;
+    } else {
+      current = 0;
+    }
+  }
+  return max;
+}
+
+/**
+ * @param {string} ch
+ * @returns {boolean} true if the character may be used as a block fence
+ */
+function isFenceChar(ch) {
+  return CODE_FENCE_CHARS.indexOf(ch) !== -1;
+}
+
+/**
+ * @param {string} ch
+ * @returns {boolean} true for spaces/tabs (line breaks excluded)
+ */
+function isHorizontalSpace(ch) {
+  return ch === ' ' || ch === '\t' || ch === '\r' || ch === '\f' || ch === '\v';
+}
+
+/**
+ * Checks whether a run is the only thing on its line (whitespace allowed).
+ * @param {string} text
+ * @param {number} index start of the run
+ * @param {number} runLen length of the run
+ * @returns {boolean}
+ */
+function isAloneOnLine(text, index, runLen) {
+  let i = index - 1;
+  while (i >= 0 && text[i] !== '\n') {
+    if (!isHorizontalSpace(text[i])) return false;
+    i--;
+  }
+  let j = index + runLen;
+  while (j < text.length && text[j] !== '\n') {
+    if (!isHorizontalSpace(text[j])) return false;
+    j++;
+  }
+  return true;
+}
+
+/**
+ * Checks whether a fence run is allowed to act as a delimiter.
+ * Runs longer than BASE_LENGTH must be alone on their line.
+ * @param {string} text
+ * @param {number} index start of the run
+ * @param {number} runLen length of the run
+ * @returns {boolean}
+ */
+function isValidFence(text, index, runLen) {
+  if (runLen <= CODE_BASE_LENGTH) return true;
+  return isAloneOnLine(text, index, runLen);
+}
+
+/**
+ * Finds the matching closing parenthesis.
+ * @param {string} text
+ * @param {number} index index of the opening parenthesis
+ * @returns {number} index of the closing parenthesis or -1
+ */
+function findClosingParen(text, index) {
+  let depth = 0;
+  for (let i = index; i < text.length; i++) {
+    if (text[i] === '(') depth++;
+    else if (text[i] === ')') {
+      depth--;
+      if (depth === 0) return i;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Finds the closing run of an inline code span (##…##).
+ *
+ * The closing delimiter must be a maximal run of exactly `runLen` '#'.
+ * Runs of a different length are ordinary content and are skipped.
+ * An inline span never crosses a line break.
+ *
+ * @param {string} text
+ * @param {number} from index to start searching at
+ * @param {number} runLen length of the opening delimiter
+ * @returns {number} index of the closing run or -1
+ */
+function findInlineCodeEnd(text, from, runLen) {
+  let i = from;
+
+  while (i < text.length) {
+    const ch = text[i];
+
+    if (ch === '\n' || ch === '\r') return -1;
+    if (ch !== '#') { i++; continue; }
+
+    const len = countRun(text, i, '#');
+    if (len === runLen) return i;
+    i += len;
+  }
+
+  return -1;
+}
+
+/**
+ * Finds the closing fence of a code block.
+ *
+ * The block is closed by a maximal run of exactly `openLen` characters of
+ * the same fence character. A run of `openLen + 1` characters opens a nested
+ * block (k+1 rule) and is skipped over. Every other run length is ordinary
+ * content ("own escape" rule).
+ *
+ * @param {string} text
+ * @param {number} from index to start searching at
+ * @param {number} openLen length of the opening fence
+ * @param {string} ch fence character ('%' or '`')
+ * @returns {number} index of the closing run or -1
+ */
+function findBlockClose(text, from, openLen, ch) {
+  let i = from;
+
+  while (i < text.length) {
+    if (text[i] !== ch) { i++; continue; }
+
+    const runLen = countRun(text, i, ch);
+
+    // Closing fence: exactly the same length as the opening fence
+    if (runLen === openLen && isValidFence(text, i, runLen)) return i;
+
+    // Nested block: k+1 rule
+    if (runLen === openLen + 1 && isValidFence(text, i, runLen)) {
+      const nestedClose = findBlockClose(text, i + runLen, runLen, ch);
+      if (nestedClose !== -1) {
+        i = nestedClose + runLen;
+        continue;
+      }
+    }
+
+    // Any other run length is ordinary content
+    i += runLen;
+  }
+
+  return -1;
+}
+
+/**
+ * Scans a code block at the given position.
+ *
+ * @param {string} text
+ * @param {number} start index of the opening fence run
+ * @param {string} ch fence character
+ * @param {number} runLen length of the opening fence run
+ * @returns {null | object} the block region
+ */
+function scanCodeBlock(text, start, ch, runLen) {
+  // Optional options of the opening fence: (hl css wrapper=shade)
+  let headerEnd = start + runLen;
+  let options = '';
+  let cursor = headerEnd;
+
+  while (cursor < text.length && isHorizontalSpace(text[cursor])) cursor++;
+  if (text[cursor] === '(') {
+    const closeParen = findClosingParen(text, cursor);
+    if (closeParen !== -1) {
+      options = text.slice(cursor + 1, closeParen);
+      headerEnd = closeParen + 1;
+    }
+  }
+
+  // The content starts after the line break that terminates the fence line
+  const lineEnd = text.indexOf('\n', headerEnd);
+  const contentStart = lineEnd === -1 ? headerEnd : lineEnd + 1;
+
+  const close = findBlockClose(text, contentStart, runLen, ch);
+  if (close === -1) return null;
+
+  // A 'wacko wrapper=…' block is a *text* wrapper (the content is still
+  // parsed as wiki markup) – it is not a literal code block.
+  const literal = !/\bwacko\s+wrapper\s*=/i.test(options);
+
+  return {
+    type: 'block',
+    start,                 // index of the opening fence run
+    end: close + runLen,   // index after the closing fence run
+    headerEnd,             // index after the opening run (+ options)
+    contentStart,          // index where the content starts
+    contentEnd: close,     // index where the closing fence starts
+    closeStart: close,
+    closeEnd: close + runLen,
+    fenceLen: runLen,
+    fenceChar: ch,
+    literal
+  };
+}
+
+/**
+ * Scans the text for all code regions (inline code and code blocks).
+ *
+ * The rules are the same as in the highlighter and in the syntax converter:
+ *  - inline code: maximal run of '#' (N >= 2), closer is a maximal run of
+ *    exactly N, never crosses a line break;
+ *  - code blocks: the fence length is the delimiter, a run longer than
+ *    BASE_LENGTH must be alone on its line, nested blocks use N+1.
+ *
+ * @param {string} text
+ * @returns {Array<object>} the regions in the order of the source text
+ */
+function scanCodeRegions(text) {
+  const regions = [];
+  let i = 0;
+
+  while (i < text.length) {
+    const ch = text[i];
+
+    // Code block: %%…%% or ``…``
+    if (isFenceChar(ch)) {
+      const runLen = countRun(text, i, ch);
+      if (runLen >= CODE_BASE_LENGTH && isValidFence(text, i, runLen)) {
+        const block = scanCodeBlock(text, i, ch, runLen);
+        if (block) {
+          regions.push(block);
+          i = block.end;
+          continue;
+        }
+      }
+      i += runLen;
+      continue;
+    }
+
+    // Inline code span: ##…##
+    if (ch === '#') {
+      const runLen = countRun(text, i, '#');
+      if (runLen >= CODE_BASE_LENGTH) {
+        const close = findInlineCodeEnd(text, i + runLen, runLen);
+        if (close !== -1) {
+          regions.push({
+            type: 'inline',
+            start: i,
+            end: close + runLen,
+            contentStart: i + runLen,
+            contentEnd: close,
+            fenceLen: runLen
+          });
+          i = close + runLen;
+          continue;
+        }
+      }
+      i += runLen;
+      continue;
+    }
+
+    i++;
+  }
+
+  return regions;
+}
+
+/**
+ * Returns all code regions that contain the given selection.
+ * @param {Array<object>} regions
+ * @param {number} start
+ * @param {number} end
+ * @returns {Array<object>}
+ */
+function findContainingRegions(regions, start, end) {
+  return regions.filter(region => {
+    if (region.start > start || end > region.end) return false;
+    // An empty selection (cursor) must not sit behind the region
+    if (start === end && start >= region.end) return false;
+    return true;
+  });
+}
+
+/**
+ * Checks whether the selection overlaps a code region without being
+ * contained in it (the content of a code region is literal).
+ * @param {Array<object>} regions
+ * @param {number} start
+ * @param {number} end
+ * @returns {boolean}
+ */
+function overlapsRegion(regions, start, end) {
+  if (start === end) {
+    return regions.some(r => r.start < start && start < r.end);
+  }
+  return regions.some(r => r.start < end && start < r.end);
+}
+
 // ── Inline selection helpers ─────────────────────────────────────
 
 /**
  * Inserts tag at the beginning of text, with special handling for:
  * - Bold markers (`**`) - inserts before the `**`
  * - List items - inserts after the list marker
- * 
+ *
  * @param {string} tag - The tag to insert
  * @param {string} text - The text to process
  * @param {number} skip - If 1, apply special list/bold detection
@@ -90,9 +422,7 @@ function wrapInlineSelection(tag, text, skip) {
     // Pattern: leading whitespace + marker + optional space + content
     match = text.match(LIST_ITEM_RE);
     if (match) {
-      // match[1] = leading whitespace
-      // match[2] = list marker (e.g., "*" or "1.")
-      // match[7] = content after marker
+      // match[1] = leading ws, match[2] = list marker, match[7] = content after marker
       return match[1] + match[2] + tag + match[7];
     }
   }
@@ -104,7 +434,7 @@ function wrapInlineSelection(tag, text, skip) {
 
 /**
  * Appends closing tag to end of text, preserving trailing whitespace.
- * 
+ *
  * @param {string} text - The text to process
  * @param {string} tag - The tag to append
  * @returns {string} Modified text with tag at end
@@ -120,7 +450,7 @@ function appendClosingTag(text, tag) {
  * - Bold markers (`**`)
  * - List items
  * - Trailing whitespace handling
- * 
+ *
  * @param {string} text - The text to process
  * @param {string} tag - Opening tag
  * @param {string} tag2 - Closing tag
@@ -152,13 +482,11 @@ function toggleMarkup(text, tag, tag2, skip, editor) {
     match = text.match(beginListRe);
     if (skip && match) {
       // Insert tag after the list marker
-      // match[1] = leading ws, match[2] = ws after begin, match[3] = marker, match[8] = content
       text = match[1] + beginMarker + match[2] + match[3] + tag + match[8];
     } else {
       // Generic begin marker pattern: "  !!text"
       match = text.match(beginGenericRe);
       if (match) {
-        // match[1] = text before begin, match[2] = ws after begin, match[3] = text after begin
         text = match[1] + beginMarker + match[2] + tag + match[3];
       }
     }
@@ -170,7 +498,6 @@ function toggleMarkup(text, tag, tag2, skip, editor) {
   match = text.match(endRe);
 
   if (match) {
-    // match[1] = leading ws, match[2] = text after end marker
     const beforeEndRe = new RegExp(`^(.*)${endMarker}`);
     const beforeMatch = text.match(beforeEndRe);
 
@@ -214,6 +541,89 @@ function isRegionEnd(line, rend) {
   return rend.test(line);
 }
 
+// ── Code protection (literal content) ────────────────────────────
+
+/**
+ * Returns the index of the line that contains the given offset.
+ * @param {number} offset
+ * @param {number[]} lineStarts
+ * @returns {number}
+ */
+function lineIndexAt(offset, lineStarts) {
+  let lo = 0;
+  let hi = lineStarts.length - 1;
+  while (lo < hi) {
+    const mid = Math.ceil((lo + hi) / 2);
+    if (lineStarts[mid] <= offset) lo = mid;
+    else hi = mid - 1;
+  }
+  return lo;
+}
+
+/**
+ * Determines which lines of the given text are inside a code region.
+ *
+ * The content of an inline code span or of a code block is literal: it is
+ * shown as typed and must not be touched by any other markup rule
+ * (no bold, no italic, no list indent, no typography).
+ *
+ * The text may contain the editor's begin/end markers; the markers are
+ * removed before the scan (they look like an inline code span themselves)
+ * and the selection range is mapped back to the original coordinates.
+ *
+ * @param {object} editor
+ * @param {string} text text (possibly with the begin/end markers)
+ * @returns {boolean[]} one flag per line
+ */
+function computeCodeProtectedLines(editor, text) {
+  const lines = text.split('\n');
+  const protectedLines = new Array(lines.length).fill(false);
+
+  const beginMarker = editor.begin || '';
+  const endMarker = editor.end || '';
+
+  const beginPos = beginMarker ? text.indexOf(beginMarker) : -1;
+  const endPos = (beginMarker && endMarker)
+    ? text.indexOf(endMarker, beginPos + beginMarker.length)
+    : -1;
+
+  let original = text;
+  let selStart = 0;
+  let selEnd = text.length;
+
+  if (beginPos !== -1 && endPos > beginPos) {
+    selStart = beginPos;
+    selEnd = endPos - beginMarker.length;
+    original = text.slice(0, beginPos) +
+               text.slice(beginPos + beginMarker.length, endPos) +
+               text.slice(endPos + endMarker.length);
+  }
+
+  const regions = scanCodeRegions(original);
+  if (!regions.length) return protectedLines;
+
+  // Line start offsets of the original text (the markers contain no line
+  // break, so the line numbering of both texts is identical).
+  const lineStarts = [0];
+  for (let i = 0; i < original.length; i++) {
+    if (original[i] === '\n') lineStarts.push(i + 1);
+  }
+
+  for (const region of regions) {
+    const from = Math.max(region.start, selStart);
+    const to = Math.min(region.end, selEnd);
+    if (from >= to) continue;
+
+    const first = lineIndexAt(from, lineStarts);
+    const last = lineIndexAt(to - 1, lineStarts);
+    for (let i = first; i <= last && i < protectedLines.length; i++) {
+      protectedLines[i] = true;
+    }
+  }
+
+  return protectedLines;
+}
+
 // ── Main MarkUp logic (broken into manageable chunks) ────────────
 
 /**
@@ -223,7 +633,10 @@ function isRegionEnd(line, rend) {
  * - Bold markers
  * - Region/block awareness
  * - Strip mode (removes existing markup)
- * 
+ *
+ * Code regions (inline code and code blocks) are skipped: their content is
+ * literal and must be shown as typed.
+ *
  * @param {object} editor - Editor instance
  * @param {string} tag - Opening tag
  * @param {string} text - Text to process
@@ -247,6 +660,9 @@ function MarkUp(editor, tag, text, tag2 = tag, onNewLine = 0, expand = 0, strip 
   text = text.replace(/\r/g, '');
   const lines = text.split('\n');
 
+  // Code regions are literal – their lines must not be modified
+  const codeLines = computeCodeProtectedLines(editor, text);
+
   // Pre-compile regex patterns for efficiency
   const { rbegin, rend, rendb } = editor;
   const listStripRe = /^ {2}( *)(([*-]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))/u;
@@ -261,6 +677,13 @@ function MarkUp(editor, tag, text, tag2 = tag, onNewLine = 0, expand = 0, strip 
 
     // Build result with newline separator
     if (result) result += '\n';
+
+    // ── Code regions are literal: keep the line as typed ───────
+    if (codeLines[i]) {
+      result += line;
+      if (fOut) fIn = false;
+      continue;
+    }
 
     // ── Strip mode: remove existing block markup ──────────────
     if (fIn && strip === 1) {
@@ -289,7 +712,7 @@ function MarkUp(editor, tag, text, tag2 = tag, onNewLine = 0, expand = 0, strip 
 
 /**
  * Updates the fIn (inside-region) flag based on current line.
- * 
+ *
  * @param {string} line - Current line
  * @param {string} nextLine - Next line (may be undefined)
  * @param {boolean} fIn - Current inside-region state
@@ -324,7 +747,7 @@ function updateRegionState(line, nextLine, fIn, rbegin, rend, rendb, lines, i) {
 
 /**
  * Detects if the current line causes a region to end.
- * 
+ *
  * @param {string} line - Current line
  * @param {string} nextLine - Next line
  * @param {RegExp} rend - Region end pattern
@@ -349,7 +772,7 @@ function detectRegionEnd(line, nextLine, rend, rendb, lines, i) {
 
 /**
  * Determines whether markup should be applied based on onNewLine mode.
- * 
+ *
  * @param {number} onNewLine - Application mode
  * @param {number} add - Line counter
  * @param {boolean} fOut - Region ends on this line
@@ -371,7 +794,7 @@ function shouldApplyMarkup(onNewLine, add, fOut) {
 /**
  * Applies expand-mode markup (simple LSum + RSum).
  * Uses skip=1 for list/bold awareness when add=0.
- * 
+ *
  * @param {string} line - Line to process
  * @param {string} tag - Opening tag
  * @param {string} tag2 - Closing tag
@@ -409,7 +832,7 @@ function applyExpandMarkup(line, tag, tag2, add, fOut, onNewLine, skip) {
 /**
  * Applies toggle-mode markup (uses _TSum logic).
  * Handles editor begin/end markers with full awareness.
- * 
+ *
  * @param {string} line - Line to process
  * @param {string} tag - Opening tag
  * @param {string} tag2 - Closing tag
@@ -439,7 +862,7 @@ function applyToggleMarkup(line, tag, tag2, add, fOut, onNewLine, skip, editor) 
 
 /**
  * Strips existing block markup from a line (used in strip mode).
- * 
+ *
  * @param {string} line - Line to process
  * @param {RegExp} rbegin - Region begin pattern
  * @param {RegExp} listRe - List item pattern
@@ -461,7 +884,7 @@ function stripBlockMarkup(line, rbegin, listRe) {
 /**
  * Inserts or toggles a tag around selection.
  * Handles both insertion and removal (toggle) of surrounding tags.
- * 
+ *
  * @param {object} editor - Editor instance
  * @param {string} tag - Opening tag
  * @param {string} tag2 - Closing tag
@@ -520,7 +943,7 @@ function insTag(editor, tag, tag2, onNewLine = 0, expand = 0, strip = 0) {
 /**
  * Inserts a block wrapper with newlines (e.g., for HTML blocks).
  * Handles toggle: wrapping or unwrapping based on selection.
- * 
+ *
  * @param {object} editor - Editor instance
  * @param {string} openTag - Opening tag
  * @param {string} closeTag - Closing tag
@@ -530,6 +953,13 @@ function insBlockWrapper(editor, openTag, closeTag = '%%') {
   const t = editor.area;
   t.focus();
   editor.getDefines();
+
+  // The selection is inside a literal code region → do not touch it
+  const regions = scanCodeRegions(editor.area.value);
+  const inside = regions.some(r => r.literal !== false &&
+    r.start <= editor.ss && editor.se <= r.end &&
+    !(r.start === editor.ss && r.end === editor.se));
+  if (inside) return true;
 
   const openWithNl = openTag + '\n';
   const closeWithNl = '\n' + closeTag;
@@ -592,7 +1022,12 @@ function unindent(editor) {
   let fIn = false;
   const lines = editor.str.split('\n');
 
-  for (let line of lines) {
+  // Code regions are literal – their lines must not be re-indented
+  const codeLines = computeCodeProtectedLines(editor, editor.str);
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+
     // Track region state
     if (editor.rbegin.test(line)) {
       fIn = true;
@@ -603,7 +1038,7 @@ function unindent(editor) {
 
     // Remove one level of indentation
     if (result) result += '\n';
-    result += fIn ? line.replace(/^(( {2})|\t)/, '') : line;
+    result += (fIn && !codeLines[i]) ? line.replace(/^(( {2})|\t)/, '') : line;
 
     if (editor.rend.test(line)) fIn = false;
   }
@@ -612,62 +1047,309 @@ function unindent(editor) {
   return true;
 }
 
-// ── New extensibility helpers ─────────────────────────────────────
+
+// ── New code syntax helpers ───────────────────────────────────────
 
 /**
- * Wraps an inline selection with open/close tags.
- * Simple prefix/suffix insertion for simple markup.
- * 
- * @param {string} open - Opening tag
- * @param {string} close - Closing tag
- * @param {string} text - Text to wrap
- * @returns {string} Wrapped text
+ * Wraps the selection in an inline code span (##…##).
+ *
+ * The delimiter is a maximal run of '#' that is longer than any '#' run
+ * inside the content, so the content stays literal:
+ *
+ *   'code'        → '##code##'
+ *   '## code ##'  → '### ## code ## ###'
+ *
+ * @param {object} editor
+ * @param {number} selStart
+ * @param {number} selEnd
+ * @returns {boolean} Success
  */
-export function wrapInline(open, close, text) {
-  return open + text + close;
-}
+function wrapInlineCode(editor, selStart, selEnd) {
+  const t = editor.area;
+  const text = t.value;
+  const content = text.slice(selStart, selEnd);
+  const lines = content.split('\n');
 
-/**
- * Wraps multiple lines (block) with a tag on each line.
- * 
- * @param {string} tag - Tag to prepend to each line
- * @param {string} text - Multi-line text
- * @param {boolean} onNewLine - If true, tag goes on new line
- * @returns {string} Block-wrapped text
- */
-export function wrapBlock(tag, text, onNewLine = false) {
-  const lines = text.split('\n');
-  return lines
-    .map(line => onNewLine ? `\n${tag}${line}` : `${tag}${line}`)
-    .join('\n');
-}
+  const parts = [];
+  let firstContentOffset = 0;
 
-/**
- * Handles list indentation/deindentation.
- * Processes lines with list markers to adjust their indent level.
- * 
- * @param {string} direction - 'indent' or 'outdent'
- * @param {string} text - Text with potential list items
- * @returns {string} Text with adjusted list indentation
- */
-export function handleListIndent(direction, text) {
-  const lines = text.split('\n');
-  const indentStr = '  '; // Two spaces per indent level
+  lines.forEach((line, index) => {
+    // The delimiter must be longer than every '#' run of the line
+    const fenceLen = Math.max(CODE_BASE_LENGTH, longestRun(line, '#') + 1);
+    const fence = '#'.repeat(fenceLen);
 
-  return lines.map(line => {
-    // Match list item pattern
-    const match = line.match(LIST_ITEM_RE);
-    if (match) {
-      if (direction === 'indent') {
-        // Increase indent
-        return indentStr + line;
-      } else {
-        // Decrease indent (remove leading spaces up to indentStr)
-        return line.startsWith(indentStr)
-          ? line.slice(indentStr.length)
-          : line.replace(/^ /, '');
-      }
+    // A delimiter is a maximal run: it must not merge with a '#' of the
+    // content (the separator blank goes *inside* the span).
+    const open = fence + (line.startsWith('#') ? ' ' : '');
+    const close = (line.endsWith('#') ? ' ' : '') + fence;
+
+    if (index === 0) firstContentOffset = open.length;
+
+    if (line === '') {
+      // An empty line: keep the span valid ('## ##')
+      parts.push(fence + ' ' + fence);
+    } else {
+      parts.push(open + line + close);
     }
-    return line;
-  }).join('\n');
+  });
+
+  let wrapped = parts.join('\n');
+
+  // The fence must not merge with a '#' in front of the selection
+  const prefix = (selStart > 0 && text[selStart - 1] === '#') ? ' ' : '';
+  // … nor with a '#' behind the selection
+  const suffix = (selEnd < text.length && text[selEnd] === '#') ? ' ' : '';
+
+  const newValue = text.slice(0, selStart) + prefix + wrapped + suffix + text.slice(selEnd);
+
+  editor.replaceContent(newValue, true, { scroll: editor.scroll });
+
+  // The content stays selected → a second click removes the markup again
+  const newStart = selStart + prefix.length + firstContentOffset;
+
+  if (content === '') {
+    // Empty selection: place the cursor between the delimiters
+    t.setSelectionRange(newStart + 1, newStart + 1);
+  } else {
+    t.setSelectionRange(newStart, newStart + content.length);
+  }
+
+  return true;
+}
+
+
+/**
+ * Removes the delimiters of an inline code span.
+ *
+ * The *actual* delimiter length is removed (it may have been extended to
+ * '###' or more), so the "unset" works for every delimiter length.
+ *
+ * @param {object} editor
+ * @param {object} region the inline region
+ * @returns {boolean} Success
+ */
+function unwrapInlineCode(editor, region) {
+  const t = editor.area;
+  const text = t.value;
+
+  let content = text.slice(region.contentStart, region.contentEnd);
+
+  // The separator blanks that were added when the content began or ended
+  // with a '#' are removed as well – they are not part of the content.
+  if (content.startsWith(' ') && content.endsWith(' ') && content.trim() !== '') {
+    content = content.slice(1, -1);
+  }
+
+  const newValue = text.slice(0, region.start) + content + text.slice(region.end);
+
+  editor.replaceContent(newValue, true, { scroll: editor.scroll });
+
+  const newStart = region.start;
+  t.setSelectionRange(newStart, newStart + content.length);
+
+  return true;
+}
+
+/**
+ * Inserts or removes inline code (##…##) – the 'code' toolbar button.
+ *
+ * Toggle semantics:
+ *  - the selection is exactly one complete span → it is wrapped again with a
+ *    longer delimiter ('## code ##' → '### ## code ## ###')
+ *  - the selection is inside a span             → the markup is removed
+ *  - otherwise                                  → the selection is wrapped
+ *
+ * @param {object} editor
+ * @returns {boolean} Success
+ */
+function insCode(editor) {
+  const t = editor.area;
+  t.focus();
+  editor.getDefines();
+
+  const text = t.value;
+  const selStart = editor.ss;
+  const selEnd = editor.se;
+
+  const regions = scanCodeRegions(text);
+  const containers = findContainingRegions(regions, selStart, selEnd);
+
+  // Inside a code block the content is literal – do not touch it
+  if (containers.some(r => r.type === 'block' && r.literal)) return true;
+
+  const inline = containers.find(r => r.type === 'inline');
+  if (inline) {
+    // The whole span is selected → wrap it again (longer delimiter)
+    if (inline.start === selStart && inline.end === selEnd) {
+      return wrapInlineCode(editor, selStart, selEnd);
+    }
+    // A cursor inside a span: nothing sensible to do
+    if (selStart === selEnd) return true;
+    // The content is selected → remove the markup again
+    return unwrapInlineCode(editor, inline);
+  }
+
+  // The selection touches a code region → literal content, ignore
+  if (overlapsRegion(regions, selStart, selEnd)) return true;
+
+  return wrapInlineCode(editor, selStart, selEnd);
+}
+
+/**
+ * Wraps the selection in a code block (%%…%%).
+ *
+ * The fence length *is* the delimiter and must be longer than every '%' run
+ * inside the content, so that a '%%' inside the block stays content:
+ *
+ *   'code'        → '%%\ncode\n%%'
+ *   '%% code %%'  → '%%%\n%% code %%\n%%%'
+ *
+ * A run longer than BASE_LENGTH must be alone on its line – the necessary
+ * line breaks are added automatically.
+ *
+ * @param {object} editor
+ * @param {number} selStart
+ * @param {number} selEnd
+ * @returns {boolean} Success
+ */
+function wrapCodeBlock(editor, selStart, selEnd) {
+  const t = editor.area;
+  const text = t.value;
+  const content = text.slice(selStart, selEnd);
+
+  // The fence must be longer than every '%' run inside the content
+  const fenceLen = Math.max(CODE_BASE_LENGTH, longestRun(content, '%') + 1);
+  const fence = '%'.repeat(fenceLen);
+
+  const before = text.slice(0, selStart);
+  const after = text.slice(selEnd);
+
+  let prefix = '';
+  let suffix = '';
+
+  if (fenceLen > CODE_BASE_LENGTH) {
+    // A long fence must be alone on its line
+    if (before.length && !before.endsWith('\n')) prefix += '\n';
+    if (after.length && !after.startsWith('\n')) suffix += '\n';
+  } else {
+    // The fence must not merge with a '%' of the surrounding text
+    if (before.endsWith('%')) prefix += '\n';
+    if (after.startsWith('%')) suffix += '\n';
+  }
+
+  const block = `${fence}\n${content}\n${fence}`;
+  const newValue = before + prefix + block + suffix + after;
+
+  editor.replaceContent(newValue, true, { scroll: editor.scroll });
+
+  // The content stays selected → a second click removes the markup again
+  const contentStart = selStart + prefix.length + fence.length + 1;
+  t.setSelectionRange(contentStart, contentStart + content.length);
+
+  return true;
+}
+
+/**
+ * Removes the fences of a code block.
+ *
+ * The block is located by the scanner, so the *actual* fence length is
+ * removed – this is what the old "unset" feature could not do when the
+ * delimiter had been extended (e.g. '%%%' instead of '%%').
+ *
+ * @param {object} editor
+ * @param {object} region the block region
+ * @returns {boolean} Success
+ */
+function unwrapCodeBlock(editor, region) {
+  const t = editor.area;
+  const text = t.value;
+
+  // ── Opening fence ───────────────────────────────────────────────
+  const openLineStart = text.lastIndexOf('\n', region.start - 1) + 1;
+  const openLineEnd = text.indexOf('\n', region.headerEnd);
+  const beforeOpen = text.slice(openLineStart, region.start);
+  const afterOpen = openLineEnd === -1 ? '' : text.slice(region.headerEnd, openLineEnd);
+
+  // The fence is "alone on its line" if nothing but whitespace surrounds it
+  const openAlone = beforeOpen.trim() === '' && afterOpen.trim() === '';
+
+  let openRemoveStart = region.start;
+  let openRemoveEnd = region.headerEnd;
+
+  if (openAlone && openLineEnd !== -1) {
+    // Remove the whole opening line (including its indentation)
+    openRemoveStart = openLineStart;
+    openRemoveEnd = openLineEnd + 1;
+  }
+
+  // ── Closing fence ───────────────────────────────────────────────
+  const closeLineStart = text.lastIndexOf('\n', region.closeStart - 1) + 1;
+  const beforeClose = text.slice(closeLineStart, region.closeStart);
+  const closeAlone = beforeClose.trim() === '';
+
+  let closeRemoveStart = region.closeStart;
+  let closeRemoveEnd = region.closeEnd;
+
+  if (closeAlone) {
+    // Remove the whole closing line (the preceding line break stays)
+    closeRemoveStart = closeLineStart;
+  }
+
+  // ── Content between the fences ──────────────────────────────────
+  let middle = text.slice(openRemoveEnd, closeRemoveStart);
+
+  if (!openAlone) {
+    // Inline block ('%% code %%'): drop the separating blanks
+    middle = middle.replace(/^[ \t]/, '').replace(/[ \t]$/, '');
+  }
+
+  const newValue = text.slice(0, openRemoveStart) + middle + text.slice(closeRemoveEnd);
+
+  editor.replaceContent(newValue, true, { scroll: editor.scroll });
+
+  // Select the remaining content (without the trailing line break)
+  const plain = middle.replace(/\n$/, '');
+  t.setSelectionRange(openRemoveStart, openRemoveStart + plain.length);
+
+  return true;
+}
+
+/**
+ * Inserts or removes a code block (%%…%%) – the 'source' toolbar button.
+ *
+ * Toggle semantics:
+ *  - the selection is inside a block            → the fences are removed
+ *  - the selection is exactly one complete block → it is wrapped again with a
+ *    longer fence ('%% code %%' → '%%%\n%% code %%\n%%%')
+ *  - otherwise                                  → the selection is wrapped
+ *
+ * @param {object} editor
+ * @returns {boolean} Success
+ */
+function insCodeBlock(editor) {
+  const t = editor.area;
+  t.focus();
+  editor.getDefines();
+
+  const text = t.value;
+  const selStart = editor.ss;
+  const selEnd = editor.se;
+
+  const regions = scanCodeRegions(text);
+  const containers = findContainingRegions(regions, selStart, selEnd);
+
+  const block = containers.find(r => r.type === 'block' && r.literal);
+  if (block) {
+    // The whole block is selected → wrap it again (longer fence)
+    if (block.start === selStart && block.end === selEnd) {
+      return wrapCodeBlock(editor, selStart, selEnd);
+    }
+    // The content is selected → remove the fences again
+    return unwrapCodeBlock(editor, block);
+  }
+
+  // The selection touches a code region → literal content, ignore
+  if (overlapsRegion(regions, selStart, selEnd)) return true;
+
+  return wrapCodeBlock(editor, selStart, selEnd);
 }
