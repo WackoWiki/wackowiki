@@ -1,0 +1,15 @@
+{
+  "name": "wikiedit",
+  "private": true,
+  "version": "3.26.0",
+  "type": "module",
+  "scripts": {
+    "build":        "node build.mjs",
+    "build:dev":    "node build.mjs --dev",
+    "build:watch":  "node build.mjs --dev --watch",
+    "clean":        "node -e \"fs.rmSync('dist',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

@@ -33,6 +33,16 @@
 /src/xml/*
 !/src/xml/.htaccess
 
+# Node / esbuild
+node_modules/
+
+# Build output
+/dist/
+/build/
+
+# Generated source maps
+*.js.map
+
 # Composer
 /src/vendor/
 /composer.phar

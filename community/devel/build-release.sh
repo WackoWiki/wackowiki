@@ -39,6 +39,14 @@ ENABLE_LOG=true
 AUTO_ACCEPT=false
 MAKE_ZIP=true
 
+# ── JS BUILD ────────────────────────────────────────────────
+BUILD_JS=true               # build the JavaScript assets from the exported source
+JS_STRICT=false             # fail the release if the JS build reports problems
+JS_SOURCE_MAPS=false        # emit .map files for the static JS assets
+ESBUILD_VERSION="0.25.0"    # fallback pin, used when package.json has no esbuild entry
+JS_DEST=""                  # filled in by build_js_assets()
+JS_MANIFEST=""              # filled in by build_js_assets()
+
 # Colors (detect BEFORE any output redirection)
 if [ -t 1 ] && [ -z "${NO_COLOR:-}" ] && command -v tput > /dev/null 2>&1; then
     RED="$(tput setaf 1 2>/dev/null || echo '')"
@@ -59,6 +67,7 @@ LOG_WRITER_PID=""
 REPO_ROOT=""
 RESOLVED_REF=""
 RESOLVED_COMMIT=""
+BUILD_DIR=""                # build working directory (global: used by the JS functions)
 
 # Keep the original stdout/stderr so logging can be detached cleanly at the end
 exec 3>&1 4>&2
@@ -203,8 +212,8 @@ log_step() {
 
 # Start logging.
 #   terminal output  -> tee -> FIFO -> (strip ANSI) -> build.log
-# The FIFO reader runs in the background and is waited for in stop_logging(),
-# so build.log is ALWAYS complete (also when the script aborts).
+#   The FIFO reader runs in the background and is waited for in stop_logging(),
+#   so build.log is ALWAYS complete (also when the script aborts).
 start_logging() {
     local dir="$1"
 
@@ -819,6 +828,220 @@ resolve_source() {
     return 0
 }
 
+# ================== JS BUILD ==================
+# The JavaScript is built FROM THE EXPORTED SOURCE TREE, so the bundle
+# always matches the Git commit that is released (never the working copy).
+
+# Locate the JS source folder inside the EXPORTED tree.
+# Works for "src/js", "js" and "src/plugins/<name>/js" layouts.
+find_js_source() {
+    local root="$1"
+    local c
+
+    for c in "$root/src/js" "$root/js" "$root/src/plugins/wikiedit/js"; do
+        if [ -f "$c/main.js" ]; then
+            echo "$c"
+            return 0
+        fi
+    done
+
+    # Fallback: any js/main.js within a reasonable depth
+    local found
+    found="$(find "$root" -maxdepth 6 -type f -name 'main.js' -path '*/js/*' 2>/dev/null | sort | head -n 1 || true)"
+    if [ -n "$found" ]; then
+        dirname "$found"
+        return 0
+    fi
+
+    return 1
+}
+
+# Locate build.mjs: the checkout's copy is preferred (it is release
+# tooling, like this script), the exported copy is the fallback.
+find_build_script() {
+    local root="$1"
+    local f
+
+    if [ -f "$REPO_ROOT/build.mjs" ]; then
+        echo "$REPO_ROOT/build.mjs"
+        return 0
+    fi
+
+    f="$(find "$root" -maxdepth 6 -type f -name 'build.mjs' 2>/dev/null | sort | head -n 1 || true)"
+    if [ -n "$f" ]; then
+        echo "$f"
+        return 0
+    fi
+
+    return 1
+}
+
+# Informational: list the source files that are not shipped any more
+# (they are compiled into a bundle now).
+report_js_diff() {
+    local src_js="$1" out_js="$2"
+    [ -d "$src_js" ] || return 0
+
+    local f rel count=0
+    while IFS= read -r -d '' f; do
+        rel="${f#"$src_js"/}"
+        if [ ! -e "$out_js/$rel" ]; then
+            log_info "not shipped (compiled into a bundle): js/$rel"
+            count=$((count + 1))
+        fi
+    done < <(find "$src_js" -type f -print0 2>/dev/null || true)
+
+    if [ "$count" -gt 0 ]; then
+        log_info "$count source file(s) are not shipped any more"
+    fi
+    return 0
+}
+
+# Build the JavaScript assets from the EXPORTED source tree.
+#   $1 = exported tree root (contains src/)
+#   $2 = destination root of the release tree (contains src/)
+build_js_assets() {
+    local src_root="$1"
+    local dest_root="$2"
+
+    if [ "$BUILD_JS" != true ]; then
+        log_warn "JavaScript build skipped (--no-js) - the release contains the unbuilt sources"
+        return 0
+    fi
+
+    # --- node -----------------------------------------------------------
+    if ! command -v node >/dev/null 2>&1; then
+        log_error "Node.js >= 18 is required to build the JavaScript assets, but 'node' was not found."
+        log_info "Install Node.js (https://nodejs.org) or build with --no-js."
+        exit 1
+    fi
+
+    local node_version node_major
+    node_version="$(node -v 2>/dev/null || echo 'unknown')"
+    node_major="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
+    if [ "${node_major:-0}" -lt 18 ]; then
+        log_error "Node.js >= 18 is required (found $node_version)."
+        exit 1
+    fi
+
+    # --- source folder / build script ------------------------------------
+    local js_src build_mjs
+    if ! js_src="$(find_js_source "$src_root")"; then
+        log_error "No JS source folder (js/main.js) found in the exported source."
+        log_info "Looked in: $src_root/src/js, $src_root/js and below src/plugins/*/js"
+        log_info "Use --no-js to ship the unbuilt sources instead."
+        exit 1
+    fi
+
+    if ! build_mjs="$(find_build_script "$src_root")"; then
+        log_error "build.mjs not found (looked in '$REPO_ROOT' and in the exported tree)."
+        exit 1
+    fi
+
+    # The destination mirrors the source path inside the release tree
+    # ($TEMP_DIR/src/js  ->  $FINAL_DIR/src/js)
+    JS_DEST="${js_src#"$src_root"}"        # e.g. /src/js
+    local dest_js="${dest_root}${JS_DEST}"
+
+    # --- esbuild --------------------------------------------------------
+    # build.mjs imports the esbuild JS API. ESM ignores NODE_PATH, so
+    # esbuild must be resolvable from the directory of the build script.
+    local tools_dir="$BUILD_DIR/.js-tools"
+    local build_script="$build_mjs"
+
+    if [ ! -d "$REPO_ROOT/node_modules/esbuild" ]; then
+        if ! command -v npm >/dev/null 2>&1; then
+            log_error "'npm' is required to install esbuild, but it was not found."
+            log_info "Install Node.js + npm, or build with --no-js."
+            exit 1
+        fi
+
+        rm -rf "$tools_dir"
+        mkdir -p "$tools_dir"
+
+        cat > "$tools_dir/package.json" <<'EOF'
+{
+  "name": "wikiedit-js-tools",
+  "private": true,
+  "version": "1.0.0"
+}
+EOF
+
+        # Prefer the version pinned in the repository
+        local esbuild_version="$ESBUILD_VERSION"
+        local pinned
+        pinned="$(PKG_JSON="$REPO_ROOT/package.json" node -p "try{const p=require(process.env.PKG_JSON);(p.devDependencies&&p.devDependencies.esbuild)||(p.dependencies&&p.dependencies.esbuild)||''}catch(e){''}" 2>/dev/null || true)"
+        if [ -n "$pinned" ]; then
+            esbuild_version="${pinned#\^}"
+        fi
+
+        log_step "Installing esbuild@$esbuild_version (isolated in $tools_dir)..."
+        if ! npm install --prefix "$tools_dir" --no-save --no-audit --no-fund \
+                --loglevel=error "esbuild@$esbuild_version" >/dev/null 2>&1; then
+            log_error "Could not install esbuild@$esbuild_version (no network?)."
+            log_info "Run 'npm install' in the checkout and retry, or build with --no-js."
+            exit 1
+        fi
+
+        # Copy the build script next to the installed esbuild so that the
+        # ESM import of 'esbuild' resolves against $tools_dir/node_modules.
+        cp "$build_mjs" "$tools_dir/build.mjs"
+        build_script="$tools_dir/build.mjs"
+    fi
+
+    # --- run -------------------------------------------------------------
+    local js_stage="$BUILD_DIR/js-dist"
+    local manifest="$BUILD_DIR/js-manifest.json"
+
+    rm -rf "$js_stage"
+    rm -f "$manifest"
+
+    local -a js_args=()
+    [ "$JS_STRICT" = true ] && js_args+=("--strict")
+    [ "$JS_SOURCE_MAPS" = true ] && js_args+=("--with-source-maps")
+
+    log_step "Building JavaScript assets (source: $RESOLVED_REF, commit ${RESOLVED_COMMIT:0:8})..."
+    log_info "  JS source : $js_src"
+    log_info "  Output    : $js_stage"
+
+    if ! node "$build_script" \
+            --js="$js_src" \
+            --out="$js_stage" \
+            --manifest="$manifest" \
+            --commit="$RESOLVED_COMMIT" \
+            ${js_args[@]+"${js_args[@]}"}; then
+        log_error "The JavaScript build failed."
+        exit 1
+    fi
+
+    if [ ! -f "$js_stage/wikiedit.min.js" ]; then
+        log_error "The JavaScript build did not produce js/wikiedit.min.js - aborting."
+        exit 1
+    fi
+
+    # --- install into the release tree -----------------------------------
+    log_step "Installing the built JavaScript into the release tree..."
+    report_js_diff "$js_src" "$js_stage"
+
+    rm -rf "$dest_js"
+    mkdir -p "$(dirname "$dest_js")"
+    cp -a "$js_stage" "$dest_js"
+
+    # Manifest for PHP (integrity attribute + cache busting)
+    if [ -f "$manifest" ]; then
+        JS_MANIFEST="$manifest"
+        cp "$manifest" "$dest_js/manifest.json"
+
+        local sri
+        sri="$(MANIFEST_JSON="$manifest" node -p "try{require(process.env.MANIFEST_JSON).files['wikiedit.min.js'].sri||''}catch(e){''}" 2>/dev/null || true)"
+        if [ -n "$sri" ]; then
+            log_info "SRI (wikiedit.min.js): $sri"
+        fi
+    fi
+
+    log_success "JavaScript assets installed ($(du -sh "$dest_js" 2>/dev/null | cut -f1) total)"
+}
+
 # ================== PARSE ARGUMENTS ==================
 parse_arguments() {
     while [[ $# -gt 0 ]]; do
@@ -858,6 +1081,19 @@ parse_arguments() {
                 MAKE_ZIP=false
                 ;;
 
+            # ── JS BUILD ──
+            --no-js)
+                BUILD_JS=false
+                ;;
+
+            --strict-js)
+                JS_STRICT=true
+                ;;
+
+            --js-source-maps)
+                JS_SOURCE_MAPS=true
+                ;;
+
             -y|--yes|--auto-accept)
                 AUTO_ACCEPT=true
                 ;;
@@ -887,7 +1123,7 @@ Usage: ./build-release.sh [OPTIONS]
 
 VERSION and SOURCE are two different things:
     --version   ONLY names the archive (file name).
-                It does NOT select the Git code that is built.
+                It does NOT select any Git code that is built.
     --source    Selects the Git code that is really built
                 (tag / branch / commit hash).
 
@@ -919,6 +1155,14 @@ OPTIONS:
 
     --no-zip           Skip creation of the .zip archive
                        (only the .tar.gz is created)
+
+    --no-js            Do not build the JavaScript assets
+                       (the release then contains the unbuilt sources)
+
+    --strict-js        Fail the release if the JS build reports problems
+                       (files outside editor/, dangling imports)
+
+    --js-source-maps   Also emit .map files for the static JS assets
 
     -y, --yes          Auto-accept all prompts (for CI/CD)
 
@@ -961,6 +1205,9 @@ More examples:
 NOTES:
     - Script must be executed from repository root
     - composer.json must be present in root directory
+    - Node.js >= 18 is required for the JavaScript build (unless --no-js)
+    - The JavaScript is built from the EXPORTED source, so the bundle
+      always matches the released Git commit
     - Git remote should be configured (GitHub or Codeberg)
     - Script will check if local repo is up-to-date with remote
     - If --version matches an existing tag but no --source is given, the
@@ -1019,7 +1266,7 @@ main() {
     # Prepare build directory and START LOGGING as early as
     # possible, so build.log contains the whole run.
     # ---------------------------------------------------------
-    local BUILD_DIR="$REPO_ROOT/build"
+    BUILD_DIR="$REPO_ROOT/build"
 
     rm -rf "$BUILD_DIR"
     mkdir -p "$BUILD_DIR"
@@ -1043,6 +1290,7 @@ main() {
         echo "Source      : ${YELLOW}<will be asked interactively>${NC}"
     fi
     echo "Mode        : $([ "$MINIMAL" = true ] && echo "Minimal (src/ + vendor/)" || echo "Full (includes docs)")"
+    echo "JS build    : $([ "$BUILD_JS" = true ] && echo "yes" || echo "no (--no-js)")"
     echo "=================================================="
     echo ""
 
@@ -1144,7 +1392,6 @@ main() {
         fi
     done
 
-
     if [ "$MINIMAL" = true ]; then
         log_info "Minimal mode: src/ + vendor/ only"
     else
@@ -1158,7 +1405,12 @@ main() {
         done
     fi
 
-
+    # ── JS BUILD ────────────────────────────────────────────────────────
+    # Built from the EXPORTED tree ($TEMP_DIR), so the bundle matches the
+    # released commit. Runs BEFORE the Composer install to fail fast.
+    log_step "Building JavaScript assets..."
+    build_js_assets "$TEMP_DIR" "$FINAL_DIR"
+    # ── END JS BUILD ────────────────────────────────────────────────────
 
     # 3. Install Composer dependencies
     log_step "Installing Composer dependencies..."
@@ -1172,7 +1424,6 @@ main() {
         log_error "Aborting to prevent installing wrong Composer dependencies."
         exit 1
     fi
-
 
     # Detect composer command (array => safe quoting of "php file.phar")
     local COMPOSER_CMD=()
@@ -1294,7 +1545,9 @@ main() {
     # 5. Final cleanup
     log_step "Cleaning up temporary files..."
     rm -rf "$TEMP_DIR"
-    log_success "Temporary folder removed"
+    rm -rf "$BUILD_DIR/js-dist"
+    rm -rf "$BUILD_DIR/.js-tools"
+    log_success "Temporary folders removed"
 
     # ================== SUMMARY ==================
     echo ""
@@ -1306,6 +1559,13 @@ main() {
     echo "Source      : $RESOLVED_REF    ($source_kind)"
     echo "Commit      : $RESOLVED_COMMIT"
     echo "Mode        : $([ "$MINIMAL" = true ] && echo "Minimal" || echo "Full")"
+    echo ""
+    if [ -n "$JS_DEST" ] && [ -d "$FINAL_DIR$JS_DEST" ]; then
+        echo "JavaScript  : $JS_DEST  ($(du -sh "$FINAL_DIR$JS_DEST" 2>/dev/null | cut -f1))"
+    fi
+    if [ -n "$JS_MANIFEST" ] && [ -f "$JS_MANIFEST" ]; then
+        echo "JS manifest : $JS_MANIFEST"
+    fi
     echo ""
     echo "Composer packages:"
     echo "$COMPOSER_PACKAGES" | while read -r line; do
