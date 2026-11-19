@@ -114,7 +114,7 @@ const SQL_MODE_LAX					= [
 ];
 
 // Do not change these two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.3.1';
+const WACKO_VERSION					= '6.3.2';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 
 const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
@@ -125,5 +125,5 @@ const DB_MIN_VERSION				= ['mariadb' => '10.6', 'mysql' => '8.0', 'sqlite' => '3
 const DB_ERROR_MODE					= 0;					// 0 - silent, 1 - warning, 2 - exception
 
 const PHP_MIN_VERSION				= '8.3';				// minimum required PHP version
-const PHP_MAX_VERSION				= '8.5';				// maximum supported PHP version
+const PHP_MAX_VERSION				= '8.6';				// maximum supported PHP version
 const PHP_ERROR_REPORTING			= 0;					// PHP error reporting: 0 - off, 6 - all

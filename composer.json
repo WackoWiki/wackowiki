@@ -9,7 +9,7 @@
 	"homepage" : "https://wackowiki.org",
 	"license" : "BSD-3-Clause",
 	"require" : {
-		"php" : "8.3 - 8.5",
+		"php" : "8.3 - 8.6",
 		"ext-SPL" : "*",
 		"ext-bcmath" : "*",
 		"ext-ctype" : "*",
@@ -38,7 +38,7 @@
 		"wackowiki/diff" : "^1.0",
 		"wackowiki/freecap" : "^1.5.0",
 		"wackowiki/safehtml" : "^1.4.2",
-		"wackowiki/templatest": "^0.9"
+		"wackowiki/templatest" : "^0.9"
 	},
 	"prefer-stable" : true,
 	"config" : {
