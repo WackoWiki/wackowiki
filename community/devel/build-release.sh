@@ -39,13 +39,15 @@ ENABLE_LOG=true
 AUTO_ACCEPT=false
 MAKE_ZIP=true
 
-# ── JS BUILD ────────────────────────────────────────────────
+# ── ASSET BUILD (JS + THEME) ────────────────────────────────
 BUILD_JS=true               # build the JavaScript assets from the exported source
+BUILD_THEME=true            # minify the theme CSS from the exported source
 JS_STRICT=false             # fail the release if the JS build reports problems
 JS_SOURCE_MAPS=false        # emit .map files for the static JS assets
 ESBUILD_VERSION="0.25.0"    # fallback pin, used when package.json has no esbuild entry
-JS_DEST=""                  # filled in by build_js_assets()
-JS_MANIFEST=""              # filled in by build_js_assets()
+JS_DEST=""                  # filled in by build_assets()
+THEME_DEST=""               # filled in by build_assets()
+JS_MANIFEST=""              # filled in by build_assets()
 
 # Colors (detect BEFORE any output redirection)
 if [ -t 1 ] && [ -z "${NO_COLOR:-}" ] && command -v tput > /dev/null 2>&1; then
@@ -67,7 +69,7 @@ LOG_WRITER_PID=""
 REPO_ROOT=""
 RESOLVED_REF=""
 RESOLVED_COMMIT=""
-BUILD_DIR=""                # build working directory (global: used by the JS functions)
+BUILD_DIR=""                # build working directory (global: used by the asset functions)
 
 # Keep the original stdout/stderr so logging can be detached cleanly at the end
 exec 3>&1 4>&2
@@ -828,9 +830,10 @@ resolve_source() {
     return 0
 }
 
-# ================== JS BUILD ==================
-# The JavaScript is built FROM THE EXPORTED SOURCE TREE, so the bundle
-# always matches the Git commit that is released (never the working copy).
+# ================== ASSET BUILD (JS + THEME) ==================
+# The JavaScript AND the theme are built FROM THE EXPORTED SOURCE TREE,
+# so the shipped assets always match the Git commit that is released
+# (never the working copy).
 
 # Locate the JS source folder inside the EXPORTED tree.
 # Works for "src/js", "js" and "src/plugins/<name>/js" layouts.
@@ -850,6 +853,31 @@ find_js_source() {
     found="$(find "$root" -maxdepth 6 -type f -name 'main.js' -path '*/js/*' 2>/dev/null | sort | head -n 1 || true)"
     if [ -n "$found" ]; then
         dirname "$found"
+        return 0
+    fi
+
+    return 1
+}
+
+# Locate the THEME source folder inside the EXPORTED tree.
+# The theme lives next to the JS sources: "src/theme" (preferred),
+# "theme" or "src/plugins/<name>/theme" are accepted as well.
+find_theme_source() {
+    local root="$1"
+    local c
+
+    for c in "$root/src/theme" "$root/theme" "$root/src/plugins/wikiedit/theme"; do
+        if [ -d "$c" ]; then
+            echo "$c"
+            return 0
+        fi
+    done
+
+    # Fallback: any folder named "theme" within a reasonable depth
+    local found
+    found="$(find "$root" -maxdepth 6 -type d -name 'theme' 2>/dev/null | sort | head -n 1 || true)"
+    if [ -n "$found" ]; then
+        echo "$found"
         return 0
     fi
 
@@ -897,15 +925,69 @@ report_js_diff() {
     return 0
 }
 
-# Build the JavaScript assets from the EXPORTED source tree.
+# Informational: check that every theme CSS file was built (minified).
+report_theme_diff() {
+    local src_theme="$1" out_theme="\$2"
+    [ -d "\$src_theme" ] || return 0
+
+    local css_total=0 css_built=0 f rel
+    while IFS= read -r -d '' f; do
+        css_total=$((css_total + 1))
+        rel="${f#"$src_theme"/}"
+        if [ -f "$out_theme/$rel" ]; then
+            css_built=$((css_built + 1))
+        fi
+    done < <(find "$src_theme" -type f -name '*.css' -print0 2>/dev/null || true)
+
+    if [ "$css_total" -gt 0 ]; then
+        log_info "theme CSS: $css_built/$css_total minified"
+    fi
+
+    if [ "$css_built" -ne "$css_total" ]; then
+        log_warn "Some theme CSS files are missing in the built theme"
+        if [ "$JS_STRICT" = true ]; then
+            log_error "Strict mode: aborting because of the incomplete theme build."
+            exit 1
+        fi
+    fi
+    return 0
+}
+
+# Rewrite the manifest keys so they match the layout of the release tree:
+#   "theme/default/css/default.css" -> "src/theme/default/css/default.css"
+rewrite_manifest_theme_keys() {
+    local manifest="$1" out="$2" prefix="$3"
+
+    node -e '
+const fs = require("fs");
+const [src, out, prefix] = process.argv.slice(1);
+const m = JSON.parse(fs.readFileSync(src, "utf8"));
+const files = {};
+for (const [k, v] of Object.entries(m.files || {})) {
+    const nk = k.startsWith("theme/") ? prefix + k.slice("theme/".length) : k;
+    files[nk] = v;
+}
+m.files = files;
+fs.writeFileSync(out, JSON.stringify(m, null, 2) + "\n");
+' "$manifest" "$out" "$prefix" 2>/dev/null
+}
+
+# Build the JavaScript AND theme assets from the EXPORTED source tree.
 #   $1 = exported tree root (contains src/)
 #   $2 = destination root of the release tree (contains src/)
-build_js_assets() {
+#
+# build.mjs handles both in a single run:
+#   --js=<dir>         source folder with the JS sources
+#   --out=<dir>        output folder for the built JS
+#   --theme=<dir>      source theme folder (CSS is minified here)
+#   --theme-out=<dir>  output folder for the built theme
+build_assets() {
     local src_root="$1"
     local dest_root="$2"
 
     if [ "$BUILD_JS" != true ]; then
         log_warn "JavaScript build skipped (--no-js) - the release contains the unbuilt sources"
+        log_warn "The theme CSS is not minified either (JS and theme are built in one run)"
         return 0
     fi
 
@@ -942,6 +1024,33 @@ build_js_assets() {
     # ($TEMP_DIR/src/js  ->  $FINAL_DIR/src/js)
     JS_DEST="${js_src#"$src_root"}"        # e.g. /src/js
     local dest_js="${dest_root}${JS_DEST}"
+
+    # --- theme source ----------------------------------------------------
+    local theme_src="" dest_theme=""
+    local theme_stage="$BUILD_DIR/theme-dist"
+    local -a theme_args=()
+
+    if [ "$BUILD_THEME" = true ]; then
+        if theme_src="$(find_theme_source "$src_root")"; then
+            THEME_DEST="${theme_src#"$src_root"}"     # e.g. /src/theme
+            dest_theme="${dest_root}${THEME_DEST}"
+            theme_args+=("--theme=$theme_src" "--theme-out=$theme_stage")
+
+            log_info "  Theme source: $theme_src"
+            log_info "  Theme output: $theme_stage"
+        else
+            log_warn "No theme folder found in the exported source - the CSS is shipped unminified."
+            BUILD_THEME=false
+        fi
+    fi
+
+    if [ "$BUILD_THEME" != true ]; then
+        # Explicitly neutralise the theme build inside build.mjs, so it never
+        # falls back to its own defaults (which would point at the checkout's
+        # src/theme instead of the exported source).
+        mkdir -p "$BUILD_DIR/.no-theme-src"
+        theme_args+=("--theme=$BUILD_DIR/.no-theme-src" "--theme-out=$BUILD_DIR/.no-theme-out")
+    fi
 
     # --- esbuild --------------------------------------------------------
     # build.mjs imports the esbuild JS API. ESM ignores NODE_PATH, so
@@ -993,30 +1102,51 @@ EOF
     local js_stage="$BUILD_DIR/js-dist"
     local manifest="$BUILD_DIR/js-manifest.json"
 
-    rm -rf "$js_stage"
+    rm -rf "$js_stage" "$theme_stage"
     rm -f "$manifest"
 
     local -a js_args=()
     [ "$JS_STRICT" = true ] && js_args+=("--strict")
     [ "$JS_SOURCE_MAPS" = true ] && js_args+=("--with-source-maps")
 
-    log_step "Building JavaScript assets (source: $RESOLVED_REF, commit ${RESOLVED_COMMIT:0:8})..."
-    log_info "  JS source : $js_src"
-    log_info "  Output    : $js_stage"
+    log_step "Building JavaScript and theme assets (source: $RESOLVED_REF, commit ${RESOLVED_COMMIT:0:8})..."
+    log_info "  JS source   : $js_src"
+    log_info "  JS output   : $js_stage"
+    if [ "$BUILD_THEME" = true ]; then
+        log_info "  Theme source: $theme_src"
+        log_info "  Theme output: $theme_stage"
+    fi
 
     if ! node "$build_script" \
             --js="$js_src" \
             --out="$js_stage" \
             --manifest="$manifest" \
             --commit="$RESOLVED_COMMIT" \
+            ${theme_args[@]+"${theme_args[@]}"} \
             ${js_args[@]+"${js_args[@]}"}; then
-        log_error "The JavaScript build failed."
+        log_error "The asset build failed."
         exit 1
     fi
 
+    # --- sanity checks ---------------------------------------------------
     if [ ! -f "$js_stage/wikiedit.min.js" ]; then
         log_error "The JavaScript build did not produce js/wikiedit.min.js - aborting."
         exit 1
+    fi
+
+    # The toolbar customizer keeps its original name (NO ".min" suffix).
+    local standalone_rel="editor/toolbar/toolbar-customizer.js"
+    if [ -f "$js_src/$standalone_rel" ]; then
+        if [ -f "$js_stage/$standalone_rel" ]; then
+            log_info "standalone: $standalone_rel (name unchanged)"
+        else
+            log_warn "The build did not produce js/$standalone_rel - the build.mjs in use looks outdated."
+            log_warn "The file name must NOT be changed to toolbar-customizer.min.js."
+            if [ "$JS_STRICT" = true ]; then
+                log_error "Strict mode: aborting."
+                exit 1
+            fi
+        fi
     fi
 
     # --- install into the release tree -----------------------------------
@@ -1027,13 +1157,49 @@ EOF
     mkdir -p "$(dirname "$dest_js")"
     cp -a "$js_stage" "$dest_js"
 
+    # --- install the built theme ------------------------------------------
+    if [ "$BUILD_THEME" = true ]; then
+        log_step "Installing the built theme into the release tree..."
+        report_theme_diff "$theme_src" "$theme_stage"
+
+        rm -rf "$dest_theme"
+        mkdir -p "$(dirname "$dest_theme")"
+
+        if [ -d "$theme_stage" ]; then
+            # copy the CONTENTS of the staging folder (not the folder itself)
+            cp -a "$theme_stage/." "$dest_theme/"
+        else
+            log_warn "The built theme folder '$theme_stage' is missing."
+            if [ "$JS_STRICT" = true ]; then
+                log_error "Strict mode: aborting because the theme build produced no output."
+                exit 1
+            fi
+            log_warn "Shipping the unminified theme instead."
+            cp -a "$theme_src/." "$dest_theme/"
+        fi
+
+        log_success "Theme installed ($(du -sh "$dest_theme" 2>/dev/null | cut -f1) total)"
+    fi
+
+
     # Manifest for PHP (integrity attribute + cache busting)
     if [ -f "$manifest" ]; then
         JS_MANIFEST="$manifest"
-        cp "$manifest" "$dest_js/manifest.json"
+
+        # The manifest keys must match the release tree layout:
+        #   "theme/..." -> "<THEME_DEST without leading slash>/..."
+        local release_manifest="$BUILD_DIR/js-manifest.release.json"
+        local theme_prefix=""
+        [ -n "$THEME_DEST" ] && theme_prefix="${THEME_DEST#/}"
+
+        if [ -n "$theme_prefix" ] && rewrite_manifest_theme_keys "$manifest" "$release_manifest" "$theme_prefix"; then
+            cp "$release_manifest" "$dest_js/manifest.json"
+        else
+            cp "$manifest" "$dest_js/manifest.json"
+        fi
 
         local sri
-        sri="$(MANIFEST_JSON="$manifest" node -p "try{require(process.env.MANIFEST_JSON).files['wikiedit.min.js'].sri||''}catch(e){''}" 2>/dev/null || true)"
+        sri="$(MANIFEST_JSON="$dest_js/manifest.json" node -p "try{require(process.env.MANIFEST_JSON).files['wikiedit.min.js'].sri||''}catch(e){''}" 2>/dev/null || true)"
         if [ -n "$sri" ]; then
             log_info "SRI (wikiedit.min.js): $sri"
         fi
@@ -1081,9 +1247,13 @@ parse_arguments() {
                 MAKE_ZIP=false
                 ;;
 
-            # ── JS BUILD ──
+            # ── ASSET BUILD ──
             --no-js)
                 BUILD_JS=false
+                ;;
+
+            --no-theme)
+                BUILD_THEME=false
                 ;;
 
             --strict-js)
@@ -1157,12 +1327,18 @@ OPTIONS:
                        (only the .tar.gz is created)
 
     --no-js            Do not build the JavaScript assets
-                       (the release then contains the unbuilt sources)
+                       (the release then contains the unbuilt sources;
+                        the theme CSS is not minified either)
+
+    --no-theme         Do not minify the theme CSS
+                       (the JS assets are still built)
 
     --strict-js        Fail the release if the JS build reports problems
-                       (files outside editor/, dangling imports)
+                       (files outside editor/, dangling imports,
+                        missing theme CSS, renamed standalone scripts)
 
     --js-source-maps   Also emit .map files for the static JS assets
+                       (and for the theme CSS)
 
     -y, --yes          Auto-accept all prompts (for CI/CD)
 
@@ -1205,9 +1381,6 @@ More examples:
 NOTES:
     - Script must be executed from repository root
     - composer.json must be present in root directory
-    - Node.js >= 18 is required for the JavaScript build (unless --no-js)
-    - The JavaScript is built from the EXPORTED source, so the bundle
-      always matches the released Git commit
     - Git remote should be configured (GitHub or Codeberg)
     - Script will check if local repo is up-to-date with remote
     - If --version matches an existing tag but no --source is given, the
@@ -1291,6 +1464,7 @@ main() {
     fi
     echo "Mode        : $([ "$MINIMAL" = true ] && echo "Minimal (src/ + vendor/)" || echo "Full (includes docs)")"
     echo "JS build    : $([ "$BUILD_JS" = true ] && echo "yes" || echo "no (--no-js)")"
+    echo "Theme build : $([ "$BUILD_THEME" = true ] && echo "yes (CSS minified)" || echo "no (--no-theme)")"
     echo "=================================================="
     echo ""
 
@@ -1405,12 +1579,13 @@ main() {
         done
     fi
 
-    # ── JS BUILD ────────────────────────────────────────────────────────
-    # Built from the EXPORTED tree ($TEMP_DIR), so the bundle matches the
-    # released commit. Runs BEFORE the Composer install to fail fast.
-    log_step "Building JavaScript assets..."
-    build_js_assets "$TEMP_DIR" "$FINAL_DIR"
-    # ── END JS BUILD ────────────────────────────────────────────────────
+    # ── ASSET BUILD (JS + THEME) ────────────────────────────────────────
+    # Built from the EXPORTED tree ($TEMP_DIR), so the bundle and the
+    # minified CSS match the released commit.
+    # Runs BEFORE the Composer install to fail fast.
+    log_step "Building JavaScript and theme assets..."
+    build_assets "$TEMP_DIR" "$FINAL_DIR"
+    # ── END ASSET BUILD ─────────────────────────────────────────────────
 
     # 3. Install Composer dependencies
     log_step "Installing Composer dependencies..."
@@ -1546,7 +1721,10 @@ main() {
     log_step "Cleaning up temporary files..."
     rm -rf "$TEMP_DIR"
     rm -rf "$BUILD_DIR/js-dist"
+    rm -rf "$BUILD_DIR/theme-dist"
     rm -rf "$BUILD_DIR/.js-tools"
+    rm -rf "$BUILD_DIR/.no-theme-src"
+    rm -rf "$BUILD_DIR/.no-theme-out"
     log_success "Temporary folders removed"
 
     # ================== SUMMARY ==================
@@ -1562,6 +1740,9 @@ main() {
     echo ""
     if [ -n "$JS_DEST" ] && [ -d "$FINAL_DIR$JS_DEST" ]; then
         echo "JavaScript  : $JS_DEST  ($(du -sh "$FINAL_DIR$JS_DEST" 2>/dev/null | cut -f1))"
+    fi
+    if [ -n "$THEME_DEST" ] && [ -d "$FINAL_DIR$THEME_DEST" ]; then
+        echo "Theme       : $THEME_DEST  ($(du -sh "$FINAL_DIR$THEME_DEST" 2>/dev/null | cut -f1))"
     fi
     if [ -n "$JS_MANIFEST" ] && [ -f "$JS_MANIFEST" ]; then
         echo "JS manifest : $JS_MANIFEST"
