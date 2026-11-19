@@ -212,7 +212,9 @@
 }
 
 /* Dark mode tweaks */
-:root[data-theme="dark"] .ww-sticky-toc a.is-active,
+:root[data-theme="dark"] .ww-sticky-toc a.is-active {
+	background: rgba(110, 168, 228, 0.12);
+}
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) .ww-sticky-toc a.is-active {
 		background: rgba(110, 168, 228, 0.12);
