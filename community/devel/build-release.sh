@@ -40,8 +40,8 @@ AUTO_ACCEPT=false
 MAKE_ZIP=true
 
 # ── ASSET BUILD (JS + THEME) ────────────────────────────────
-BUILD_JS=true               # build the JavaScript assets from the exported source
-BUILD_THEME=true            # minify the theme CSS from the exported source
+BUILD_JS=false              # build the JavaScript assets from the exported source
+BUILD_THEME=false           # minify the theme CSS from the exported source
 JS_STRICT=false             # fail the release if the JS build reports problems
 JS_SOURCE_MAPS=false        # emit .map files for the static JS assets
 ESBUILD_VERSION="0.25.0"    # fallback pin, used when package.json has no esbuild entry
@@ -619,6 +619,7 @@ prompt_version() {
             log_info "MASTER snapshot"
             log_info "  Source : HEAD of ${current_branch:-current branch}"
             log_info "  File   : wackowiki-MASTER.tar.gz"
+            prompt_build_assets
             return 0
             ;;
     esac
@@ -637,6 +638,7 @@ prompt_version() {
             log_info "Tagged release"
             log_info "  Source : tag ${SOURCE}"
             log_info "  File   : wackowiki-${VERSION}.tar.gz"
+            prompt_build_assets
             return 0
             ;;
     esac
@@ -669,6 +671,7 @@ prompt_version() {
             log_info "master HEAD - not the ${VERSION} release."
             log_info "Build the tagged release with: ./build-release.sh --version=${VERSION} --source=${VERSION}"
         fi
+        prompt_build_assets
         return 0
     fi
 
@@ -681,6 +684,7 @@ prompt_version() {
 
     # Give the chance to select the Git code explicitly
     prompt_source_ref
+    prompt_build_assets
     return 0
 }
 
@@ -773,6 +777,26 @@ prompt_archive_name() {
         VERSION="$answer"
     else
         VERSION="$default_name"
+    fi
+}
+
+# Ask whether to build/minimize JavaScript and CSS assets
+prompt_build_assets() {
+    echo ""
+    echo -e "${BOLD}Asset optimization${NC}"
+    echo "  Minify and bundle JavaScript (esbuild) and minify theme CSS."
+    echo "  This requires Node.js >= 18 and network access (to fetch esbuild)."
+    echo ""
+    read -r -p "Build and minimize JavaScript assets and CSS? [y/N]: " -n 1 -r || true
+    echo ""
+    if [[ "${REPLY:-}" =~ ^[Yy]$ ]]; then
+        BUILD_JS=true
+        BUILD_THEME=true
+        log_info "JavaScript and CSS optimization: ${GREEN}enabled${NC}"
+    else
+        BUILD_JS=false
+        BUILD_THEME=false
+        log_info "JavaScript and CSS optimization: ${YELLOW}disabled${NC} (unbuilt sources will be shipped)"
     fi
 }
 
@@ -927,8 +951,8 @@ report_js_diff() {
 
 # Informational: check that every theme CSS file was built (minified).
 report_theme_diff() {
-    local src_theme="$1" out_theme="\$2"
-    [ -d "\$src_theme" ] || return 0
+    local src_theme="$1" out_theme="$2"
+    [ -d "$src_theme" ] || return 0
 
     local css_total=0 css_built=0 f rel
     while IFS= read -r -d '' f; do
@@ -986,7 +1010,7 @@ build_assets() {
     local dest_root="$2"
 
     if [ "$BUILD_JS" != true ]; then
-        log_warn "JavaScript build skipped (--no-js) - the release contains the unbuilt sources"
+        log_warn "JavaScript build skipped (--js not specified) - the release contains the unbuilt sources"
         log_warn "The theme CSS is not minified either (JS and theme are built in one run)"
         return 0
     fi
@@ -994,7 +1018,7 @@ build_assets() {
     # --- node -----------------------------------------------------------
     if ! command -v node >/dev/null 2>&1; then
         log_error "Node.js >= 18 is required to build the JavaScript assets, but 'node' was not found."
-        log_info "Install Node.js (https://nodejs.org) or build with --no-js."
+        log_info "Install Node.js (https://nodejs.org) or build with --js."
         exit 1
     fi
 
@@ -1011,7 +1035,7 @@ build_assets() {
     if ! js_src="$(find_js_source "$src_root")"; then
         log_error "No JS source folder (js/main.js) found in the exported source."
         log_info "Looked in: $src_root/src/js, $src_root/js and below src/plugins/*/js"
-        log_info "Use --no-js to ship the unbuilt sources instead."
+        log_info "Use --js to build the assets."
         exit 1
     fi
 
@@ -1061,7 +1085,7 @@ build_assets() {
     if [ ! -d "$REPO_ROOT/node_modules/esbuild" ]; then
         if ! command -v npm >/dev/null 2>&1; then
             log_error "'npm' is required to install esbuild, but it was not found."
-            log_info "Install Node.js + npm, or build with --no-js."
+            log_info "Install Node.js + npm, or build without --js."
             exit 1
         fi
 
@@ -1088,7 +1112,7 @@ EOF
         if ! npm install --prefix "$tools_dir" --no-save --no-audit --no-fund \
                 --loglevel=error "esbuild@$esbuild_version" >/dev/null 2>&1; then
             log_error "Could not install esbuild@$esbuild_version (no network?)."
-            log_info "Run 'npm install' in the checkout and retry, or build with --no-js."
+            log_info "Run 'npm install' in the checkout and retry, or build without --js."
             exit 1
         fi
 
@@ -1248,12 +1272,12 @@ parse_arguments() {
                 ;;
 
             # ── ASSET BUILD ──
-            --no-js)
-                BUILD_JS=false
+            --js)
+                BUILD_JS=true
                 ;;
 
-            --no-theme)
-                BUILD_THEME=false
+            --theme)
+                BUILD_THEME=true
                 ;;
 
             --strict-js)
@@ -1326,12 +1350,13 @@ OPTIONS:
     --no-zip           Skip creation of the .zip archive
                        (only the .tar.gz is created)
 
-    --no-js            Do not build the JavaScript assets
-                       (the release then contains the unbuilt sources;
-                        the theme CSS is not minified either)
+    --js               Build and minimize JavaScript assets (esbuild)
+                       Requires Node.js >= 18 and network access
+                       (default: off - unbuilt sources are shipped)
 
-    --no-theme         Do not minify the theme CSS
-                       (the JS assets are still built)
+    --theme            Minify theme CSS
+                       Requires --js (both are built in one run)
+                       (default: off - unminified CSS is shipped)
 
     --strict-js        Fail the release if the JS build reports problems
                        (files outside editor/, dangling imports,
@@ -1344,6 +1369,7 @@ OPTIONS:
 
     --help, -h         Show this help message
 
+EXAMPLES:
 Basic usage (default):
 
     ./build-release.sh --version=6.3.1 - pulls HEAD of master branch
@@ -1375,8 +1401,11 @@ More examples:
     # Build full package
     ./build-release.sh --version=6.3.1 --full
 
-    # Non-interactive/CI mode
-    ./build-release.sh --version=6.3.1 --yes
+    # Build with optimized assets (minified JS + CSS)
+    ./build-release.sh --version=6.3.1 --js --theme
+
+    # Non-interactive/CI mode with asset optimization
+    ./build-release.sh --version=6.3.1 --source=6.3.1 --js --theme --yes
 
 NOTES:
     - Script must be executed from repository root
@@ -1463,8 +1492,8 @@ main() {
         echo "Source      : ${YELLOW}<will be asked interactively>${NC}"
     fi
     echo "Mode        : $([ "$MINIMAL" = true ] && echo "Minimal (src/ + vendor/)" || echo "Full (includes docs)")"
-    echo "JS build    : $([ "$BUILD_JS" = true ] && echo "yes" || echo "no (--no-js)")"
-    echo "Theme build : $([ "$BUILD_THEME" = true ] && echo "yes (CSS minified)" || echo "no (--no-theme)")"
+    echo "JS build    : $([ "$BUILD_JS" = true ] && echo "yes (--js)" || echo "no")"
+    echo "Theme build : $([ "$BUILD_THEME" = true ] && echo "yes (--theme, CSS minified)" || echo "no")"
     echo "=================================================="
     echo ""
 
