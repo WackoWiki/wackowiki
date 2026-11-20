@@ -33,6 +33,9 @@ class WackoFormatter
 	private const BLOCK_TAGS =
 		'div|table|pre|p|ul|ol|dl|form|section|article|blockquote|h[1-6]|fieldset|figure|details|summary|nav|main|aside|header|footer';
 
+	private const HEADER_REGEX =
+		'\n[ \t]*(?<hdr_delim>={2,7})(?![=])(?<hdr_text>[^\n]*?)(?<![=])(?<hdr_close>={2,7})(?![=])(?=[ \t]*(?:\r?\n|$))';
+
 	public array $colors			= [
 		'blue',
 		'green',
@@ -141,7 +144,7 @@ class WackoFormatter
 			// italic //...//
 			"\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|" .
 			// headers
-			"\n[ \t]*={2,7}.*?={2,7}|" .
+			self::HEADER_REGEX . '|' .
 			// separator
 			"-{4,}|" .
 			// line break
@@ -760,8 +763,12 @@ class WackoFormatter
 			return '<sub>' . preg_replace_callback($this->LONG_REGEX, $callback, $matches[1]) . '</sub>';
 		}
 		// headers (h1 - h6)
-		else if (preg_match('/\n[ \t]*(={2,7})(.*?)={2,7}$/', $thing, $matches))
+		else if (preg_match('/^' . self::HEADER_REGEX . '/', $thing, $matches))
 		{
+			// headers() expects the delimiter in $matches[1] and the text in $matches[2]
+			$matches[1] = $matches['hdr_delim'];
+			$matches[2] = $matches['hdr_text'];
+			
 			return $this->headers($matches, $wacko, $callback);
 		}
 		// separators

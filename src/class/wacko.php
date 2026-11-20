@@ -6127,17 +6127,23 @@ class Wacko
 		 * -----------------
 		 * [1] === (header level)
 		 * [2] title
-		 * [3] body
+		 * [3] === (closing delimiter)
+		 * [4] body
 		 * -----------------
 		 * ...
 		 */
 		// h2 - h6, syntax accepts also only two == closing signs
 		// adds dummy \n before $body for regex to ensure section 0 before the first heading, strips it afterwards;
 		// \n? would break matches with the delimiter inside the text itself
-		$_body = preg_split("/\n[ \t]*(={3,7})(.*?)={2,7}/u", "\n" . $body, 0, PREG_SPLIT_DELIM_CAPTURE);
+		$_body = preg_split(
+			'/\n[ \t]*(?<hdr_delim>={3,7})(?![=])(?<hdr_text>[^\n]*?)(?<![=])(?<hdr_close>={2,7})(?![=])(?=[ \t]*(?:\r?\n|$))/u',
+			"\n" . $body,
+			0,
+			PREG_SPLIT_DELIM_CAPTURE
+		);
 
 		# Ut::debug_print_r($_body);
-		$a = 0;	// value [0|1|2]
+		$a = 0;	// value [0|1|2|3]
 		$s = 0;	// section_id
 		$n = 0;
 
@@ -6153,8 +6159,8 @@ class Wacko
 			}
 			else
 			{
-				// reset after every third loop
-				if ($n % 3 == 0)
+				// reset after every fourth loop
+				if ($n % 4 == 0)
 				{
 					$a = 0;
 					$s++;
@@ -6163,7 +6169,8 @@ class Wacko
 				$name = match($a){
 					0 => 'h',
 					1 => 'title',
-					2 => 'body',
+					2 => 'close',
+					3 => 'body',
 				};
 
 				$p[$s][$name]	= $value;
@@ -6196,7 +6203,9 @@ class Wacko
 				// merge nested sections
 				if (!$new_section)
 				{
-					$__body[]	= "\n" . $value['h'] . $value['title'] . $value['h'];
+					// the original closing delimiter is restored, it need not be
+					// as long as the opening one
+					$__body[]	= "\n" . $value['h'] . $value['title'] . $value['close'];
 					$__body[]	= $value['body'];
 				}
 
@@ -6214,6 +6223,7 @@ class Wacko
 			$p[$section_id] = [
 				'h'		=> $p[$section_id]['h'],
 				'title'	=> $new_section['title'],
+				'close'	=> $p[$section_id]['close'] ?? '',
 				'body'	=> "\n" . $new_section['body'],
 			];
 		}
