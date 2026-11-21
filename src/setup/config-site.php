@@ -4,15 +4,15 @@
 		{
 			const f = document.forms.config_site;
 
-			if (f.elements['password'].value.length < <?php echo $config['pwd_admin_min_chars'];?>)
+			if (f.elements['password'].value.length < <?php echo (int) $config['pwd_admin_min_chars'];?>)
 			{
-				alert('<?php echo Ut::perc_replace(_t('ErrorAdminPasswordShort'), $config['pwd_admin_min_chars']);?>');
+				alert(<?php echo json_encode((string) Ut::perc_replace(_t('ErrorAdminPasswordShort'), (int) $config['pwd_admin_min_chars']), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>);
 				return false;
 			}
 
 			if (f.elements['password'].value !== f.elements["password2"].value)
 			{
-				alert('<?php echo _t('ErrorAdminPasswordMismatch');?>');
+				alert(<?php echo json_encode((string) _t('ErrorAdminPasswordMismatch'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>);
 				return false;
 			}
 
@@ -21,27 +21,27 @@
 	// -->
 </script>
 
-<form action="<?php echo $base_path ?>?installAction=config-database" method="post" name="config_site">
+<form action="<?php echo Ut::html((string) $base_path) ?>?installAction=config-database" method="post" name="config_site">
 <?php
 write_config_hidden_nodes($config_parameters);
 
 ?>
 	<label class="label_top" for="site_name"><?php echo _t('SiteName');?></label>
 	<p class="notop"><?php echo _t('SiteNameDesc');?></p>
-	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['is_update'] ? Ut::html($config['site_name']) : (_t('SiteNameDefault') ?? Ut::html($config['site_name'])); ?>" class="text_input" required>
+	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo Ut::html((string) ($config['is_update'] ? ($config['site_name'] ?? '') : (_t('SiteNameDefault') !== '' ? _t('SiteNameDefault') : ($config['site_name'] ?? '')))); ?>" class="text_input" required>
 <?php
 if (!$config['is_update'])
 {
 	echo $separator; ?>
 	<label class="label_top" for="root_page"><?php echo _t('HomePage');?></label>
 	<p class="notop"><?php echo _t('HomePageDesc');?></p>
-	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo _t('HomePageDefault') ?? Ut::html($config['root_page']); ?>" class="text_input" required>
+	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo Ut::html((string) (_t('HomePageDefault') !== '' ? _t('HomePageDefault') : ($config['root_page'] ?? ''))); ?>" class="text_input" required>
 	<br>
 <?php
 }
 else
 {
-	echo '<input type="hidden" value="' . $config['root_page'] . '" name="config[root_page]">';
+	echo '<input type="hidden" value="' . Ut::html((string) $config['root_page']) . '" name="config[root_page]">';
 }
 
 	echo $separator; ?>
@@ -78,6 +78,7 @@ else
 }
 
 $_languages	= _t('LanguageArray');
+$_languages	= is_array($_languages) ? $_languages : [];
 $n			= 1;
 
 echo '<ul class="checkbox_input column-4">' . "\n";
@@ -85,8 +86,8 @@ echo '<ul class="checkbox_input column-4">' . "\n";
 foreach ($langs as $_lang)
 {
 	echo	"\t<li>\n\t\t" .
-				'<input type="checkbox" name="config[allowed_languages][' . $n . ']" id="lang_' . $_lang . '" value="' . $_lang . '" ' . (in_array($_lang, $lang_list) ? ' checked' : '') . '>' . "\n\t\t\t" .
-				'<label for="lang_' . $_lang . '">' . $_languages[$_lang] . ' (' . $_lang . ')</label>' .
+		'<input type="checkbox" name="config[allowed_languages][' . $n . ']" id="lang_' . Ut::html((string) $_lang) . '" value="' . Ut::html((string) $_lang) . '" ' . (in_array($_lang, $lang_list) ? ' checked' : '') . '>' . "\n\t\t\t" .
+		'<label for="lang_' . Ut::html((string) $_lang) . '">' . Ut::html((string) ($_languages[$_lang] ?? $_lang)) . ' (' . Ut::html((string) $_lang) . ')</label>' .
 			"\n\t</li>\n";
 }
 
@@ -138,26 +139,26 @@ if (!$config['is_update'])
 
 	<label class="label_top" for="admin_nam"><?php echo _t('Admin');?></label>
 	<p class="notop"><?php echo _t('AdminDesc');?></p>
-	<input type="text" minlength="<?php echo $config['username_chars_min'] ?>" maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php echo $config['admin_name'] ?? null; ?>" class="text_input" pattern="[\p{L}\p{Nd}]+" title="<?php echo $name_pattern; ?>" required>
+	<input type="text" minlength="<?php echo (int) $config['username_chars_min'] ?>" maxlength="<?php echo (int) $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php echo Ut::html((string) ($config['admin_name'] ?? '')) ?>" class="text_input" pattern="[\p{L}\p{Nd}]+" title="<?php echo Ut::html((string) $name_pattern); ?>" required>
 	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="password"><?php echo _t('Password');?></label>
 	<p class="notop"><?php echo Ut::perc_replace(_t('PasswordDesc'), $config['pwd_admin_min_chars']);?></p>
-	<input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="password" name="password" value="" class="text_input" required>
+	<input type="password" minlength="<?php echo (int) $config['pwd_admin_min_chars'] ?>" id="password" name="password" value="" class="text_input" required>
 	<label class="label_password2" for="wiki_admin_password2"><?php echo _t('PasswordConfirm');?></label>
-	<input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="wiki_admin_password2" name="password2" value="" class="text_input" required>
+	<input type="password" minlength="<?php echo (int) $config['pwd_admin_min_chars'] ?>" id="wiki_admin_password2" name="password2" value="" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="admin_email"><?php echo _t('Mail');?></label>
 	<p class="notop"><?php echo _t('MailDesc');?></p>
-	<input type="email" maxlength="320" id="admin_email" name="config[admin_email]" value="<?php echo $config['admin_email'] ?? null; ?>" class="text_input" required>
+	<input type="email" maxlength="320" id="admin_email" name="config[admin_email]" value="<?php echo Ut::html((string) ($config['admin_email'] ?? '')) ?>" class="text_input" required>
 	<br>
 <?php
 }
 else
 {
-	echo '<input type="hidden" value="' . $config['admin_name'] . '" name="config[admin_name]">';
-	echo '<input type="hidden" value="' . $config['admin_email'] . '" name="config[admin_email]">';
+	echo '<input type="hidden" value="' . Ut::html((string) $config['admin_name']) . '" name="config[admin_name]">';
+	echo '<input type="hidden" value="' . Ut::html((string) $config['admin_email']) . '" name="config[admin_email]">';
 }
 
 	echo $separator; ?>
@@ -170,7 +171,7 @@ else
 			<li><strong><code>https://example.com/wiki/</code></strong></li>
 		</ul>
 	</p>
-	<input type="url" maxlength="1000" id="base_url" name="config[base_url]" value="<?php echo $config['base_url'] ?>" class="text_input" required>
+	<input type="url" maxlength="1000" id="base_url" name="config[base_url]" value="<?php echo Ut::html((string) $config['base_url']) ?>" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
 	<h2><?php echo _t('Rewrite');?></h2>

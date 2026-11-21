@@ -424,6 +424,7 @@ $tbl_file_drop					= "DROP TABLE IF EXISTS {$pref}file";
 $tbl_file_link_drop				= "DROP TABLE IF EXISTS {$pref}file_link";
 $tbl_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
 $tbl_page_drop					= "DROP TABLE IF EXISTS {$pref}page";
+$tbl_page_fts_drop				= "DROP TABLE IF EXISTS {$pref}page_fts"; // dummy SQLite only
 $tbl_page_link_drop				= "DROP TABLE IF EXISTS {$pref}page_link";
 $tbl_referrer_drop				= "DROP TABLE IF EXISTS {$pref}referrer";
 $tbl_revision_drop				= "DROP TABLE IF EXISTS {$pref}revision";

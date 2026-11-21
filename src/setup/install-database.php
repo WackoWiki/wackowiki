@@ -68,7 +68,16 @@ if (!$config['is_update'])
 {
 	if (in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 	{
-		$config['db_name']			= select_sqlite_db_path()[$config['sqlite_db_path']];
+		$sqlite_paths	= select_sqlite_db_path();
+		$sqlite_index	= (int) ($config['sqlite_db_path'] ?? 0);
+
+		// the index comes from the form - never trust it
+		if (!isset($sqlite_paths[$sqlite_index]))
+		{
+			$sqlite_index = 0;
+		}
+
+		$config['db_name']			= $sqlite_paths[$sqlite_index];
 		$config['table_prefix']		= '';
 	}
 }
@@ -96,7 +105,7 @@ if ($config['is_update'])
  mysqli which is the default clause or pdo
  */
 
-$port			= trim($config['db_port']);
+$port			= trim((string) ($config['db_port'] ?? ''));
 $fatal_error	= false;
 
 // check WackoWiki version
@@ -161,7 +170,7 @@ switch ($config['db_driver'])
 			test(
 				_t('TestConnectionString'),
 				false,
-				_t('ErrorDbConnection') . '<br>' . 'MySQLi Error: ' . $e->getMessage() . ' ' . $e->getCode()
+				_t('ErrorDbConnection') . '<br>' . 'MySQLi Error: ' . Ut::html($e->getMessage()) . ' ' . Ut::html((string) $e->getCode())
 			);
 
 			$fatal_error = true;
@@ -200,8 +209,8 @@ switch ($config['db_driver'])
 				? _t('TestDatabaseVersion') . ' ' . output_image($valid_db_version)
 				: Ut::perc_replace(
 					_t('ErrorDatabaseVersion'),
-					'<code>' . $db_version . '</code>',
-					'<code>' . $min_db_version . '</code>') . ' ' .
+					'<code>' . Ut::html((string) $db_version) . '</code>',
+					'<code>' . Ut::html((string) $min_db_version) . '</code>') . ' ' .
 					output_image($valid_db_version)
 				) . '</li>';
 
@@ -268,7 +277,7 @@ switch ($config['db_driver'])
 						test_mysqli(
 							$value[0],
 							$value[1],
-							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . $value[2] . '</code>')
+							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . Ut::html((string) $value[2]) . '</code>')
 						);
 					}
 
@@ -403,7 +412,7 @@ switch ($config['db_driver'])
 				test(
 					_t('TestConnectionString'),
 					false,
-					_t('ErrorDbConnection') . '<br>' . 'SQLlite Error: ' . $e->getMessage() . ' ' . $e->getCode()
+					_t('ErrorDbConnection') . '<br>' . 'SQLlite Error: ' . Ut::html($e->getMessage()) . ' ' . Ut::html($e->getCode())
 				);
 
 				$fatal_error = true;
@@ -426,8 +435,8 @@ switch ($config['db_driver'])
 				? _t('TestDatabaseVersion') . ' ' . output_image($valid_db_version)
 				: Ut::perc_replace(
 					_t('ErrorDatabaseVersion'),
-					'<code>' . $db_version . '</code>',
-					'<code>' . $min_db_version . '</code>') . ' ' .
+					'<code>' . Ut::html((string) $db_version) . '</code>',
+					'<code>' . Ut::html((string) $min_db_version) . '</code>') . ' ' .
 					output_image($valid_db_version)
 				) . '</li>';
 
@@ -504,7 +513,7 @@ switch ($config['db_driver'])
 						test_sqlite(
 							$value[0],
 							$value[1],
-							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . $value[2] . '</code>')
+							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . Ut::html((string) $value[2]) . '</code>')
 						);
 					}
 
@@ -650,7 +659,7 @@ switch ($config['db_driver'])
 				test(
 					_t('TestConnectionString'),
 					false,
-					_t('ErrorDbConnection') . '<br>' . 'PDO Error: ' . $e->getMessage() . ' ' . $e->getCode()
+					_t('ErrorDbConnection') . '<br>' . 'PDO Error: ' . Ut::html($e->getMessage()) . ' ' . Ut::html($e->getCode())
 				);
 
 				$fatal_error = true;
@@ -691,8 +700,8 @@ switch ($config['db_driver'])
 				? _t('TestDatabaseVersion') . ' ' . output_image($valid_db_version)
 				: Ut::perc_replace(
 					_t('ErrorDatabaseVersion'),
-					'<code>' . $db_version . '</code>',
-					'<code>' . $min_db_version . '</code>') . ' ' .
+					'<code>' . Ut::html((string) $db_version) . '</code>',
+					'<code>' . Ut::html((string) $min_db_version) . '</code>') . ' ' .
 					output_image($valid_db_version)
 				) . '</li>';
 
@@ -782,7 +791,7 @@ switch ($config['db_driver'])
 						test_pdo(
 							$value[0],
 							$value[1],
-							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . $value[2] . '</code>')
+							Ut::perc_replace(_t('ErrorAlreadyExists'), '<code>' . Ut::html((string) $value[2]) . '</code>')
 						);
 					}
 
@@ -857,7 +866,7 @@ if (!$fatal_error)
 {
 ?>
 <p><?php echo Ut::perc_replace(_t('NextStep'), '<code>' . CONFIG_FILE . '</code>');?></p>
-<form action="<?php echo $base_path; ?>?installAction=write-config" method="post" name="install_database">
+<form action="<?php echo Ut::html((string) $base_path); ?>?installAction=write-config" method="post" name="install_database">
 <?php
 	// set detected db_vendor
 	$config_parameters['db_vendor'] = $config['db_vendor'];

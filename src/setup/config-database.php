@@ -27,12 +27,12 @@
 
 			if(!db_driver_selected)
 			{
-				alert('<?php echo _t('ErrorNoDbDriverSelected');?>');
+				alert(<?php echo json_encode((string) _t('ErrorNoDbDriverSelected'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>);
 				db_driver_selected = false;
 			}
 			else if(f.elements["config[DeleteTables]"].checked)
 			{
-				if(!confirm('<?php echo _t('ConfirmTableDeletion');?>'))
+				if(!confirm(<?php echo json_encode((string) _t('ConfirmTableDeletion'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>))
 				{
 					db_driver_selected = false;
 				}
@@ -43,7 +43,7 @@
 	// -->
 </script>
 
-<form action="<?php echo $base_path ?>?installAction=install-database" method="post" name="config_database">
+<form action="<?php echo Ut::html((string) $base_path) ?>?installAction=install-database" method="post" name="config_database">
 <?php
 write_config_hidden_nodes($config_parameters);
 
@@ -255,12 +255,12 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 			<?php echo $separator; ?>
 			<label class="label_top" for="db_host"><?php echo _t('DbHost');?></label>
 			<p class="notop"><?php echo _t('DbHostDesc'); ?></p>
-			<input type="text" maxlength="1000" id="db_host" name="config[db_host]" value="<?php echo $config['db_host'] ?>" placeholder="localhost" class="text_input" required>
+			<input type="text" maxlength="1000" id="db_host" name="config[db_host]" value="<?php echo Ut::html((string) $config['db_host']) ?>" placeholder="localhost" class="text_input" required>
 			<br>
 			<?php echo $separator; ?>
 			<label class="label_top" for="db_port"><?php echo _t('DbPort');?></label>
 			<p class="notop"><?php echo _t('DbPortDesc'); ?></p>
-			<input type="number" maxlength="10" id="db_port" name="config[db_port]" value="<?php echo $config['db_port'] ?>" class="text_input">
+			<input type="number" maxlength="10" id="db_port" name="config[db_port]" value="<?php echo Ut::html((string) $config['db_port']) ?>" class="text_input">
 			<br>
 			<?php echo $separator;
 		}
@@ -278,7 +278,7 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 			{
 				echo '<li>
 							<input type="radio" id="sqlite_db_path_' . $i . '" name="config[sqlite_db_path]" value="' . $i . '" ' . ($i == 0 ? 'checked' : '') . '>
-							<label for="sqlite_db_path_' . $i . '"><code>' . $file . "</code></label>
+							<label for="sqlite_db_path_' . $i . '"><code>' . Ut::html((string) $file) . "</code></label>
 						</li>\n";
 			}
 
@@ -288,7 +288,7 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		{
 			?>
 			<p class="notop"><?php echo _t('DbNameDesc'); ?></p>
-			<input type="text" maxlength="64" id="db_name" name="config[db_name]" value="<?php echo $config['db_name'] ?>" class="text_input" required>
+			<input type="text" maxlength="64" id="db_name" name="config[db_name]" value="<?php echo Ut::html((string) $config['db_name']) ?>" class="text_input" required>
 			<?php
 		}
 		?>
@@ -306,17 +306,17 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 			?>
 			<label class="label_top" for="db_user"><?php echo _t('DbUser');?></label>
 			<p class="notop"><?php echo _t('DbUserDesc'); ?></p>
-			<input type="text" maxlength="50" id="db_user" name="config[db_user]" value="<?php echo $config['db_user'] ?>" class="text_input" required>
+			<input type="text" maxlength="50" id="db_user" name="config[db_user]" value="<?php echo Ut::html((string) $config['db_user']) ?>" class="text_input" required>
 			<br>
 			<?php echo $separator; ?>
 			<label class="label_top" for="db_password"><?php echo _t('DbPassword');?></label>
 			<p class="notop"><?php echo _t('DbPasswordDesc'); ?></p>
-			<input type="password" maxlength="50" id="db_password" name="config[db_password]" autocomplete="off" value="<?php echo $config['db_password'] ?>" class="text_input">
+			<input type="password" maxlength="50" id="db_password" name="config[db_password]" autocomplete="off" value="<?php echo Ut::html((string) $config['db_password']) ?>" class="text_input">
 			<br>
 			<?php echo $separator; ?>
 			<label class="label_top" for="table_prefix"><?php echo _t('Prefix');?></label>
 			<p class="notop"><?php echo _t('PrefixDesc'); ?></p>
-			<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" pattern="[\p{L}\p{Nd}\_]+" class="text_input">
+			<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo Ut::html((string) $config['table_prefix']) ?>" pattern="[\p{L}\p{Nd}\_]+" class="text_input">
 			<br>
 			<?php echo $separator;
 		}

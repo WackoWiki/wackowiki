@@ -301,14 +301,14 @@ function insert_page($tag, $page, $lang, $config)
 					{
 						if (mysqli_errno($dblink_global) != 0)
 						{
-							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . mysqli_error($dblink_global));
+							output_error(Ut::perc_replace($data[1], Ut::html((string) $tag)) . ' - ' . Ut::html(mysqli_error($dblink_global)));
 						}
 					}
 				}
 			}
 			else if ($critical)
 			{
-				output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), $tag));
+				output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), Ut::html((string) $tag)));
 			}
 
 			break;
@@ -343,14 +343,14 @@ function insert_page($tag, $page, $lang, $config)
 					{
 						if ($dblink_global->lastErrorCode() != 0)
 						{
-							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . $dblink_global->lastErrorMsg());
+							output_error(Ut::perc_replace($data[1], Ut::html((string) $tag)) . ' - ' . Ut::html($dblink_global->lastErrorMsg()));
 						}
 					}
 				}
 			}
 			else if ($critical)
 			{
-				output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), $tag));
+				output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), Ut::html((string) $tag)));
 			}
 
 			break;
@@ -366,7 +366,7 @@ function insert_page($tag, $page, $lang, $config)
 
 					if ($critical)
 					{
-						output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), $tag));
+						output_error(Ut::perc_replace(_t('ErrorPageAlreadyExists'), Ut::html((string) $tag)));
 					}
 				}
 
@@ -391,7 +391,7 @@ function insert_page($tag, $page, $lang, $config)
 
 						if ($error[0] != '00000')
 						{
-							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . ($error[2]));
+							output_error(Ut::perc_replace($data[1], Ut::html((string) $tag)) . ' - ' . Ut::html((string) ($error[2] ?? '')));
 						}
 					}
 				}
@@ -407,7 +407,7 @@ if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 {
 	if ($config['allowed_languages'])
 	{
-		$lang_list = explode(',', $config['allowed_languages']);
+		$lang_list = explode(',', (string) $config['allowed_languages']);
 	}
 	else
 	{

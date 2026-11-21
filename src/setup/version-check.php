@@ -1,4 +1,4 @@
-<form action="<?php echo $base_path ?>?installAction=config-site" method="post" name="version_check">
+<form action="<?php echo Ut::html((string) $base_path) ?>?installAction=config-site" method="post" name="version_check">
 <?php
 write_config_hidden_nodes($config_parameters);
 ?>
@@ -190,7 +190,7 @@ write_config_hidden_nodes($config_parameters);
 	$file_permissions_result = true;
 
 	// If the cache directory is writable then we can enable caching as default
-	echo '<input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
+	echo '<input type="hidden" name="config[cache]" value="' . Ut::html((string) (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache'])) . '">' . "\n";
 	?>
 <h2><?php echo _t('Permissions'); ?></h2>
 <ul class="column-3">
@@ -206,7 +206,7 @@ write_config_hidden_nodes($config_parameters);
 			$file_permissions_result = false;
 		}
 
-		echo "\t<li>" . $permission[0] . '   ' . output_image($result) . "</li>\n";
+		echo "\t<li>" . Ut::html((string) $permission[0]) . '   ' . output_image($result) . "</li>\n";
 	}
 	?>
 </ul>

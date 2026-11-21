@@ -10,10 +10,13 @@ global $config, $translation;
 
 // If we have any config data in the _POST then it means they have somehow navigated backwards,
 // so we should preserve their updated values.
-if (isset($_POST['config']))
+// $config_parameters is also the source for the hidden form nodes, so it has to
+// be an array on every request - even on the very first GET.
+$config_parameters = is_array($_POST['config'] ?? null) ? $_POST['config'] : [];
+
+if (!empty($config_parameters))
 {
-	$config_parameters	= $_POST['config'];
-	$config				= array_merge($config, $config_parameters);
+	$config = array_merge($config, $config_parameters);
 }
 
 if (   !isset($config['language'])
@@ -39,8 +42,8 @@ header('Content-Type: text/html; charset=utf-8');
 		<title><?php echo $title . ': ' . WACKO_VERSION . ' - ' . _t($install_action); ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
-		<link rel="stylesheet" href="<?php echo $base_path ?>setup/css/installer.css">
-		<link rel="shortcut icon" href="<?php echo $base_path ?>setup/image/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="<?php echo Ut::html((string) $base_path) ?>setup/css/installer.css">
+		<link rel="shortcut icon" href="<?php echo Ut::html((string) $base_path) ?>setup/image/favicon.ico" type="image/x-icon">
 	</head>
 	<body>
 		<div class="installer">

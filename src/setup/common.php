@@ -14,7 +14,7 @@ function write_config_hidden_nodes($config_parameters, $show = true)
 				$value = implode(',', $value);
 			}
 
-			$nodes .= "\t" . '<input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
+			$nodes .= "\t" . '<input type="hidden" name="config[' . Ut::html((string) $key) . ']" value="' . Ut::html((string) $value) . '">' . "\n";
 		}
 
 		if ($show)
@@ -40,7 +40,7 @@ function output_image($ok): string
 
 	$text = $ok ? _t('OK') : _t('Problem');
 
-	return '<img src="' . $base_path . 'image/spacer.png" width="20" height="20" alt="' . $text . '" title="' . $text . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
+	return '<img src="' . Ut::html((string) $base_path) . 'image/spacer.png" width="20" height="20" alt="' . Ut::html($text) . '" title="' . Ut::html($text) . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
 }
 
 // negotiate language with user's browser
@@ -119,6 +119,13 @@ function available_languages(): array
 function set_language($iso): array
 {
 	require_once 'setup/lang/installer.all.php';
+
+	// The language file name is built from $iso - never allow path separators
+	// or any other unexpected characters here.
+	if (!is_string($iso) || !preg_match('/^[a-z]{2}(-[a-z]{2})?$/', $iso))
+	{
+		$iso = 'en';
+	}
 
 	if ($iso == 'en')
 	{
@@ -499,22 +506,30 @@ function _q($string): string
 }
 
 // write config
-function array_to_str ($arr, $name = ''): string
+function array_to_str(array $arr, string $name = ''): string
 {
 	$entries	= '';
 	$arrays		= '';
 
-	$str = "\$wacko_config" . ($name ? "[\"" . $name . "\"]" : "") . " = [\n";
+	$str = '$wacko_config' .
+			($name !== '' ? '[' . var_export((string) $name, true) . ']' : '') .
+			" = [\n";
 
 	foreach ($arr as $k => $v)
 	{
 		if (is_array($v))
 		{
-			$arrays .= array_to_str($v, $k);
+			$arrays .= array_to_str($v, (string) $k);
 		}
 		else
 		{
-			$entries .= "\t'" . $k . '\' => \'' . str_replace("\n", "\\n", $v) . "',\n";
+			if (is_object($v) || is_resource($v))
+			{
+				throw new InvalidArgumentException('Unsupported config value type: ' . gettype($v));
+			}
+
+			$entries .= "\t" . var_export((string) $k, true) .
+						' => ' . var_export($v, true) . ",\n";
 		}
 	}
 
@@ -542,7 +557,7 @@ function utc_dt(): string
 
 function check_sqlite_name($name): bool
 {
-	if (!preg_match("~^[^\\0]*\\.(db|sdb|sqlite)\$~", $name))
+	if (!is_string($name) || !preg_match('~\A[^\x00]*\.(?:db|sdb|sqlite)\z~', $name))
 	{
 		return false;
 	}
@@ -556,7 +571,7 @@ function check_data_dir($dir): array
 	{
 		if (!is_readable($dir) || !is_writable($dir))
 		{
-			return [false, Ut::perc_replace(_t('SqliteDirUnwritable'), $dir)];
+			return [false, Ut::perc_replace(_t('SqliteDirUnwritable'), Ut::html($dir))];
 		}
 	}
 	else if (!is_writable(dirname($dir)))
@@ -568,17 +583,17 @@ function check_data_dir($dir): array
 		{
 			return [false, Ut::perc_replace(
 				_t('SqliteParentUnwritableGroup'),
-				$dir,
-				dirname($dir),
-				basename($dir),
-				$webserver_group)];
+				Ut::html($dir),
+				Ut::html(dirname($dir)),
+				Ut::html(basename($dir)),
+				Ut::html($webserver_group))];
 		}
 
 		return [false, Ut::perc_replace(
 			_t('SqliteParentUnwritableNogroup'),
-			$dir,
-			dirname($dir),
-			basename($dir))];
+			Ut::html($dir),
+			Ut::html(dirname($dir)),
+			Ut::html(basename($dir)))];
 	}
 
 	return [true, ''];
@@ -590,7 +605,7 @@ function create_db_file(string $file): array
 	{
 		if (!is_writable($file))
 		{
-			return [false, Ut::perc_replace(_t('SqliteReadonly'), $file)];
+			return [false, Ut::perc_replace(_t('SqliteReadonly'), Ut::html($file))];
 		}
 
 		return [true, ''];
@@ -602,7 +617,7 @@ function create_db_file(string $file): array
 	{
 		umask($old_mask);
 
-		return [false, Ut::perc_replace(_t('SqliteCantCreateDb'), $file)];
+		return [false, Ut::perc_replace(_t('SqliteCantCreateDb'), Ut::html($file))];
 	}
 
 	umask($old_mask);
@@ -618,7 +633,7 @@ function create_data_dir($dir): array
 
 		if (!$ok)
 		{
-			return [false, Ut::perc_replace(_t('SqliteMkdirError'), $dir)];
+			return [false, Ut::perc_replace(_t('SqliteMkdirError'), Ut::html($dir))];
 		}
 	}
 
@@ -629,7 +644,6 @@ function create_data_dir($dir): array
 
 	return [true, ''];
 }
-
 
 // On POSIX systems return the primary group of the webserver the program is running under.
 function get_webserver_primary_group(): ?string
@@ -708,9 +722,9 @@ function generate_secure_token($secret): string
 
 function validate_token($value, $secret)
 {
-	$data = base64_decode($value);
+	$data = base64_decode((string) $value, true);
 
-	if (!$data)
+	if ($data === false || $data === '')
 	{
 		return false;
 	}

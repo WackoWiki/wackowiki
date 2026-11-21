@@ -431,6 +431,8 @@ $create_trigger['page_ad'] = <<<STR
 $create_trigger['page_au'] = <<<STR
 	CREATE TRIGGER {$pref}page_au AFTER UPDATE ON {$pref}page
 	BEGIN
+		INSERT INTO {$pref}page_fts ({$pref}page_fts, rowid, title, body)
+		VALUES ('delete', old.page_id, old.title, old.body);
 		INSERT INTO {$pref}page_fts (rowid, title, body)
 		VALUES (new.page_id, new.title, new.body);
 	END;
@@ -451,7 +453,8 @@ $tbl_external_link_drop			= "DROP TABLE IF EXISTS {$pref}external_link";
 $tbl_file_drop					= "DROP TABLE IF EXISTS {$pref}file";
 $tbl_file_link_drop				= "DROP TABLE IF EXISTS {$pref}file_link";
 $tbl_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
-$tbl_page_drop					= "DROP TABLE IF EXISTS {$pref}page; DROP TABLE IF EXISTS {$pref}page_fts";
+$tbl_page_drop					= "DROP TABLE IF EXISTS {$pref}page";
+$tbl_page_fts_drop				= "DROP TABLE IF EXISTS {$pref}page_fts";
 $tbl_page_link_drop				= "DROP TABLE IF EXISTS {$pref}page_link";
 $tbl_referrer_drop				= "DROP TABLE IF EXISTS {$pref}referrer";
 $tbl_revision_drop				= "DROP TABLE IF EXISTS {$pref}revision";

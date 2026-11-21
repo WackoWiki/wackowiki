@@ -1,15 +1,16 @@
 <?php
 
 // config values
-if (in_array($config['db_driver'], ['mysqli', 'mysql_pdo']) && empty($config['db_port']))
+if (in_array($config['db_driver'] ?? '', ['mysqli', 'mysql_pdo']) && empty($config['db_port']))
 {
 	$config['db_port'] = '3306';
 }
 
-if ($config['db_collation'] == '0')
+if ((string) ($config['db_collation'] ?? '') === '0')
 {
 	$config['db_collation'] = 'utf8mb4_unicode_520_ci';
 }
+
 // reset config defaults for SQLite
 if (!$config['is_update'])
 {
@@ -28,12 +29,12 @@ if (!$config['is_update'])
 	}
 }
 
-if (!$config['system_seed'])
+if (empty($config['system_seed']))
 {
 	$config['system_seed'] = Ut::random_token(20, 3);
 }
 
-if (!$config['hashid_seed'])
+if (empty($config['hashid_seed']))
 {
 	$config['hashid_seed'] = Ut::random_token(20, 3);
 }
@@ -165,12 +166,12 @@ if ($write_file)
 {
 	echo
 		'<h2>' . _t('InstallationComplete') . '</h2>' . "\n" .
-		'<p>' . Ut::perc_replace(_t('ThatsAll'), $config['base_url']) . '</p>' . "\n";
+		'<p>' . Ut::perc_replace(_t('ThatsAll'), Ut::html((string) $config['base_url'])) . '</p>' . "\n";
 }
 else
 {
 	echo
-		'<form action="' . $base_path . '?installAction=write-config" method="post">' . "\n" .
+	'<form action="' . Ut::html((string) $base_path) . '?installAction=write-config" method="post">' . "\n" .
 			write_config_hidden_nodes($config_parameters, false) .
 			'<button type="submit" class="next">' . _t('TryAgain') . '</button>' . "\n" .
 		'</form>' . "\n";
