@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c7730cedac3484db8b192b26e199d28",
+    "content-hash": "c471ed1001357a281b88384a13c7f00d",
     "packages": [
         {
             "name": "badbehaviour/badbehaviour",
@@ -988,7 +988,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.3 - 8.5",
+        "php": "8.3 - 8.6",
         "ext-spl": "*",
         "ext-bcmath": "*",
         "ext-ctype": "*",

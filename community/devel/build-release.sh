@@ -578,14 +578,14 @@ prompt_version() {
     echo -e "${BOLD}VERSION and SOURCE are two different things:${NC}"
     echo ""
     echo "  ${BOLD}VERSION${NC}  = the ${BOLD}file name${NC} of the release archive only"
-    echo "               (e.g. 6.3.1 or 6.3.1-dev)"
+    echo "               (e.g. 6.3.2 or 6.3.2-dev)"
     echo "               ${YELLOW}It does NOT select any Git code.${NC}"
     echo "  ${BOLD}SOURCE${NC}   = the ${BOLD}Git code${NC} that is really built"
     echo "               (tag, branch or commit hash - see --source)"
     echo ""
     echo "On the command line the version is only a file name:"
-    echo "  ${CYAN}./build-release.sh --version=6.3.1${NC}              ${YELLOW}-> HEAD of master, file wackowiki-6.3.1.tar.gz${NC}"
-    echo "  ${CYAN}./build-release.sh --version=6.3.1 --source=6.3.1${NC} ${YELLOW}-> tag 6.3.1,   file wackowiki-6.3.1.tar.gz${NC}"
+    echo "  ${CYAN}./build-release.sh --version=6.3.2${NC}              ${YELLOW}-> HEAD of master, file wackowiki-6.3.2.tar.gz${NC}"
+    echo "  ${CYAN}./build-release.sh --version=6.3.2 --source=6.3.2${NC} ${YELLOW}-> tag 6.3.2,   file wackowiki-6.3.2.tar.gz${NC}"
     echo ""
 
     # Get current branch/tag info for suggestions
@@ -1372,15 +1372,15 @@ OPTIONS:
 EXAMPLES:
 Basic usage (default):
 
-    ./build-release.sh --version=6.3.1 - pulls HEAD of master branch
+    ./build-release.sh --version=6.3.2 - pulls HEAD of master branch
 
 Build from tag:
 
-    ./build-release.sh --version=6.3.1 --source=6.3.1 - pulls version with 6.3.1 tag
+    ./build-release.sh --version=6.3.2 --source=6.3.2 - pulls version with 6.3.2 tag
 
 Build from commit hash:
 
-    ./build-release.sh --version=6.3.1-dev --source=e5266a8043f17fcef4a168ecaf6232bc6a38e9b8 - pulls version with the provided hash
+    ./build-release.sh --version=6.3.2-dev --source=e5266a8043f17fcef4a168ecaf6232bc6a38e9b8 - pulls version with the provided hash
 
 More examples:
     # Interactive mode (asks for version AND for the Git source)
@@ -1390,22 +1390,22 @@ More examples:
     ./build-release.sh --version=MASTER
 
     # Build from a tag, but name the file differently
-    ./build-release.sh --version=6.3.1-dev --source=6.3.1
+    ./build-release.sh --version=6.3.2-dev --source=6.3.2
 
     # Build from a tag when it exists, otherwise from HEAD
-    ./build-release.sh --version=6.3.1 --source=auto
+    ./build-release.sh --version=6.3.2 --source=auto
 
     # Build from specific branch
     ./build-release.sh --branch=6.3 --version=6.3.0
 
     # Build full package
-    ./build-release.sh --version=6.3.1 --full
+    ./build-release.sh --version=6.3.2 --full
 
     # Build with optimized assets (minified JS + CSS)
-    ./build-release.sh --version=6.3.1 --js --theme
+    ./build-release.sh --version=6.3.2 --js --theme
 
     # Non-interactive/CI mode with asset optimization
-    ./build-release.sh --version=6.3.1 --source=6.3.1 --js --theme --yes
+    ./build-release.sh --version=6.3.2 --source=6.3.2 --js --theme --yes
 
 NOTES:
     - Script must be executed from repository root
@@ -1504,7 +1504,7 @@ main() {
     if [ -z "$VERSION" ]; then
         if [ "$AUTO_ACCEPT" = true ]; then
             log_error "--version is required in non-interactive mode (--yes)"
-            log_info "Example: ./build-release.sh --version=6.3.1 --source=auto --yes"
+            log_info "Example: ./build-release.sh --version=6.3.2 --source=auto --yes"
             exit 1
         fi
         prompt_version
