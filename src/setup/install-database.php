@@ -880,8 +880,8 @@ if (!$fatal_error)
 else
 {
 ?>
-<button type="submit" class="next" onclick="history.go(-1);"><?php echo _t('Back');?></button>
-<button type="button" class="next" onClick="window.location.reload( true );"><?php echo _t('TryAgain');?></button>
+<button type="button" class="next" data-action="back"><?php echo _t('Back');?></button>
+<button type="button" class="next" data-action="reload"><?php echo _t('TryAgain');?></button>
 <?php
 }
 ?>

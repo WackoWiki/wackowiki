@@ -44,6 +44,7 @@ header('Content-Type: text/html; charset=utf-8');
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<link rel="stylesheet" href="<?php echo Ut::html((string) $base_path) ?>setup/css/installer.css">
 		<link rel="shortcut icon" href="<?php echo Ut::html((string) $base_path) ?>setup/image/favicon.ico" type="image/x-icon">
+		<script src="<?php echo Ut::html((string) $base_path) ?>setup/js/installer.js" defer></script>
 	</head>
 	<body>
 		<div class="installer">

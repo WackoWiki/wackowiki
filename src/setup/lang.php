@@ -75,7 +75,7 @@ foreach ($language_array as $key => $value)
 		echo ' checked ';
 	}
 
-	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
+	echo ' data-submit-action="?installAction=lang"';
 	echo ' class="input_lang"><label for="lang_' . Ut::html((string) $key) . '" class="label_lang">' . Ut::html((string) $value) . ' (' . Ut::html((string) $key) . ")</label>";
 	echo "\n\t</li>\n";
 }

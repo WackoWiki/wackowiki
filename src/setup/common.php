@@ -351,8 +351,8 @@ function install_guard(): void
 		}
 
 		install_report($err['message'] . ' in ' . $err['file'] . ':' . $err['line']);
-		echo '<button type="button" class="next" onclick="history.go(-1);">' . _t('Back') . '</button>' . "\n";
-		echo '<button type="button" class="next" onclick="window.location.reload(true);">' . _t('TryAgain') . '</button>' . "\n";
+		echo '<button type="button" class="next" data-action="back">' . _t('Back') . '</button>' . "\n";
+		echo '<button type="button" class="next" data-action="reload">' . _t('TryAgain') . '</button>' . "\n";
 		install_flush();
 	});
 }

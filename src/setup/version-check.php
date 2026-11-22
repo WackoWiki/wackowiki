@@ -216,7 +216,7 @@ write_config_hidden_nodes($config_parameters);
 	*/
 
 	$permissions_notice	= '<p class="msg warning">' . Ut::perc_replace(_t('NotePermissions'), '<code>' . CONFIG_FILE . '</code>') . '</p>';
-	$btn_try_again		= '<button type="button" class="next" onClick="window.location.reload( true );">' . _t('TryAgain') . '</button>';
+	$btn_try_again		= '<button type="button" class="next" data-action="reload">' . _t('TryAgain') . '</button>';
 	$btn_continue		= '<button type="submit" class="next">' . _t('Continue') . '</button>';
 	?>
 <h2><?php echo _t('ReadyToInstall'); ?></h2>

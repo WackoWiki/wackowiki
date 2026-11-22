@@ -1,49 +1,6 @@
-<script>
-	<!--
-		function check()
-		{
-			const f = document.forms.config_database;
-
-			// Ensure a database driver is selected
-			let db_driver_selected = false;
-
-			// If there is no value property then we have an array of possible database driver radio boxes
-			if(f.elements["config[db_driver]"].value === undefined)
-			{
-				for (let i = 0; i < f.elements["config[db_driver]"].length; i++)
-				{
-					if(f.elements["config[db_driver]"][i].checked)
-					{
-						db_driver_selected = true;
-						break;
-					}
-				}
-			}
-			else
-			{
-				// Else there is only one database driver radio box available, and it will already be selected
-				db_driver_selected = true;
-			}
-
-			if(!db_driver_selected)
-			{
-				alert(<?php echo json_encode((string) _t('ErrorNoDbDriverSelected'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>);
-				db_driver_selected = false;
-			}
-			else if(f.elements["config[DeleteTables]"].checked)
-			{
-				if(!confirm(<?php echo json_encode((string) _t('ConfirmTableDeletion'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>))
-				{
-					db_driver_selected = false;
-				}
-			}
-
-			return db_driver_selected;
-		}
-	// -->
-</script>
-
-<form action="<?php echo Ut::html((string) $base_path) ?>?installAction=install-database" method="post" name="config_database">
+<form action="<?php echo Ut::html((string) $base_path) ?>?installAction=install-database" method="post" name="config_database"
+	data-msg-no-driver="<?php echo Ut::html((string) install_label('ErrorNoDbDriverSelected', 'Please select a database driver.')) ?>"
+	data-msg-confirm-delete="<?php echo Ut::html((string) install_label('ConfirmTableDeletion', 'Do you really want to delete all existing tables?')) ?>">
 <?php
 write_config_hidden_nodes($config_parameters);
 
@@ -116,12 +73,12 @@ else
 		{
 			echo '<li>
 						<input type="radio" id="db_driver_' . $driver[0] . '" name="config[db_driver]" value="' . $driver[1] . '" ' .
-							($config['db_driver']
-								? ($config['db_driver'] == $driver[1]		? 'checked' : '')
-								: ($k == 0									? 'checked' : '')
+						($config['db_driver']
+							? ($config['db_driver'] == $driver[1]		? 'checked' : '')
+							: ($k == 0									? 'checked' : '')
 							) .
-							" onClick=\"this.form.action='?installAction=config-database'; submit(); \"" .
-						'>
+							' data-submit-action="?installAction=config-database"' .
+							'>
 						<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
 					</li>\n";
 		}
@@ -336,7 +293,7 @@ if (!in_array($config['db_driver'], ['sqlite', 'sqlite_pdo']))
 		echo '<input type="hidden" value="off" name="config[DeleteTables]">';
 	}
 ?>
-	<button type="submit" class="next" onclick="return check();"><?php echo _t('Continue');?></button>
+	<button type="submit" class="next"><?php echo _t('Continue');?></button>
 <?php
 }
 ?>

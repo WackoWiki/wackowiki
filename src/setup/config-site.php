@@ -1,27 +1,18 @@
-<script>
-	<!--
-		function check()
-		{
-			const f = document.forms.config_site;
+<?php
+$msg_pwd_short	= _t('ErrorAdminPasswordShort');
+$msg_pwd_short	= (is_string($msg_pwd_short) && $msg_pwd_short !== '')
+					? Ut::perc_replace($msg_pwd_short, (int) $config['pwd_admin_min_chars'])
+					: 'The password must be at least ' . (int) $config['pwd_admin_min_chars'] . ' characters long.';
 
-			if (f.elements['password'].value.length < <?php echo (int) $config['pwd_admin_min_chars'];?>)
-			{
-				alert(<?php echo json_encode((string) Ut::perc_replace(_t('ErrorAdminPasswordShort'), (int) $config['pwd_admin_min_chars']), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>);
-				return false;
-			}
-
-			if (f.elements['password'].value !== f.elements["password2"].value)
-			{
-				alert(<?php echo json_encode((string) _t('ErrorAdminPasswordMismatch'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>);
-				return false;
-			}
-
-			return true;
-		}
-	// -->
-</script>
-
-<form action="<?php echo Ut::html((string) $base_path) ?>?installAction=config-database" method="post" name="config_site">
+$msg_pwd_mismatch	= _t('ErrorAdminPasswordMismatch');
+$msg_pwd_mismatch	= (is_string($msg_pwd_mismatch) && $msg_pwd_mismatch !== '')
+					? $msg_pwd_mismatch
+					: 'The passwords do not match.';
+?>
+<form action="<?php echo Ut::html((string) $base_path) ?>?installAction=config-database" method="post" name="config_site"
+	data-pwd-min-chars="<?php echo (int) $config['pwd_admin_min_chars']; ?>"
+	data-msg-pwd-short="<?php echo Ut::html((string) $msg_pwd_short) ?>"
+	data-msg-pwd-mismatch="<?php echo Ut::html((string) $msg_pwd_mismatch) ?>">
 <?php
 write_config_hidden_nodes($config_parameters);
 
@@ -180,5 +171,5 @@ else
 	<input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]"  value="1" <?php echo isset($config['rewrite_mode']) ? 'checked' : '' ?> class="checkbox_input">
 	<br>
 <?php echo $separator; ?>
-	<button type="submit" class="next" onclick="return check();"><?php echo _t('Continue');?></button>
+	<button type="submit" class="next"><?php echo _t('Continue');?></button>
 </form>
