@@ -384,6 +384,15 @@ class Http
 	//		6. X-Content-Type-Options:
 	public function http_security_headers(bool $update = false): void
 	{
+		// The CSP nonce must always be defined: it is read by the templates and
+		// by no_cache(). It is only meaningful when CSP is enabled and the
+		// policy contains '{nonce}', otherwise it stays empty.
+		// NB: isset() does not trigger __get() and therefore no notice.
+		if (!isset($this->db->csp_nonce))
+		{
+			$this->db->csp_nonce = '';
+		}
+
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
 			// Send the full header set only once per request. The $update mode is
@@ -555,7 +564,13 @@ class Http
 			// CSP nonces
 			$this->no_cache = 1;
 
-			if(!$this->db->csp_nonce)
+			// NB:
+			// - empty() goes through Settings::__isset(), so a missing config
+			//   key does not raise a notice
+			// - the CSP refresh is only needed when the CSP header has already
+			//   been sent; if it has not been sent yet, the full header set
+			//   (sent later) will contain the nonce anyway
+			if (empty($this->db->csp_nonce) && $this->security_headers_sent)
 			{
 				$this->http_security_headers(true);
 			}

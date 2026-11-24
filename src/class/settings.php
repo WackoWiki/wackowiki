@@ -184,8 +184,8 @@ class Settings extends Dbal implements ArrayAccess
 
 	public function __get($i)
 	{
-		//return array_key_exists($i, $this->config)? $this->config[$i] : null;
-		return $this->config[$i];
+		// missing config keys must not raise a notice (see e.g. 'csp_nonce')
+		return $this->config[$i] ?? null;
 	}
 
 	public function __set($i, $value)
