@@ -75,6 +75,17 @@ class Wacko
 	public array $context			= [];		// page context, used for correct processing of inclusions
 	public $current_context			= 0;		// current context level
 
+	/**
+	 * Identity resolution state of the current request.
+	 *
+	 * $auth_user    cached user profile (array|false)
+	 * $auth_done    authenticate() has already been executed
+	 * $logout_done  the user has been logged out explicitly: never re-authenticate
+	 */
+	private $auth_user				= false;
+	private bool $auth_done			= false;
+	private bool $logout_done		= false;
+
 	public $header_count			= 0;
 	public $section_count			= 0;
 	public $section_tag				= null;
@@ -6610,6 +6621,39 @@ class Wacko
 		}
 	}
 
+	/**
+	 * Resolve the identity of the current visitor.
+	 *
+	 * MUST run before the page cache is consulted, otherwise the anonymous
+	 * cached page is served to visitors who are authenticated through the
+	 * "remember me" token, or whose session was lost/expired.
+	 *
+	 * @return array|false  the user profile of the current visitor
+	 */
+	public function authenticate()
+	{
+		if ($this->logout_done)
+		{
+			return $this->auth_user;
+		}
+
+		if (!$this->auth_done)
+		{
+			$this->auth_done = true;
+
+			if (!($this->auth_user = $this->get_user()))
+			{
+				if ($user = $this->check_auth_token())
+				{
+					$this->soft_login($user);
+					$this->auth_user = $this->get_user() ?: $user;
+				}
+			}
+		}
+
+		return $this->auth_user;
+	}
+
 	function session_notice($message): void
 	{
 		$lang			= !empty($this->user_lang) ? $this->user_lang : SYSTEM_LANG;
@@ -6656,6 +6700,8 @@ class Wacko
 
 			$this->sess->delete_cookie(AUTH_TOKEN);
 
+			// do not re-authenticate this visitor in the same request
+			$this->logout_done = true;
 			$this->sess->restart();
 			$this->sess->sticky_login = 0;
 			$this->set_menu(MENU_DEFAULT);
@@ -8028,8 +8074,6 @@ class Wacko
 	// MAIN EXECUTION ROUTINE
 	function run($tag, $method): void
 	{
-		$this->http->cache_promisc();
-
 		// mandatory tls?
 		if ($this->db->tls_implicit && !$this->http->tls_session)
 		{
@@ -8064,18 +8108,23 @@ class Wacko
 					'<code>' . $this->get_user_setting('ip') . '</code>',
 					'<code>' . $this->http->ip . '</code>'
 				) . '</span></strong>');
+			$this->logout_done = true;
 			$this->logout_user();
 			$this->login_page();
 		}
 
-		// start user session
-		if (!($user = $this->get_user()) && ($user = $this->check_auth_token()))
-		{
-			// re-login by auth token
-			$this->soft_login($user);
-		}
+		// start user session (usually already resolved by authenticate() in index.php)
+		$user = $this->authenticate();
 
-		// after get_user() checks -> $this->sess->user_profile
+		// Cache policy after authenticate() / possible logout, so that the
+		// directive matches the final identity (index.php already set it before
+		// the cache lookup).
+		$this->http->cache_policy();
+
+ 		// after get_user() checks -> $this->sess->user_profile
+		// (security headers are also sent early in index.php, so that cache hits
+		//  carry them as well; the guard inside http_security_headers() skips
+		//  the second full send)
 		$this->http->http_security_headers();
 
 		// user settings

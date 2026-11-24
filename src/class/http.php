@@ -7,20 +7,32 @@ if (!defined('IN_WACKO'))
 
 class Http
 {
-	public		$tls_session;
-	public		$request_uri;				// normalized REQUEST_URI - e.g. 'PageOfNoReturn/show?a=1'
-	public		$ip;
-	public		$sess;						// class Session
-	private		$db;
-	private		$tls_mark;					// tls mark cookie name
-	private		$page;
-	public		$method;					// for finalize & diag..
-	private		$hash;
-	private		$query;
-	private		$lang;
-	private		$file;
-	private		$no_cache		= 0;		// for CSP nonces
-	private		$caching		= 0;
+	/**
+	 * Closing tags of the HTML document.
+	 *
+	 * SINGLE SOURCE OF TRUTH: the dynamic response gets them from
+	 * class/final.php, the cached response appends exactly the same string.
+	 * Otherwise the two bodies would differ and the ETag would not identify
+	 * the response body (no 304 would ever be possible).
+	 */
+	public const DOCUMENT_END = "\n</body>\n</html>";
+
+	public			$tls_session;
+	public			$request_uri;				// normalized REQUEST_URI - e.g. 'PageOfNoReturn/show?a=1'
+	public			$ip;
+	public			$sess;						// class Session
+	private			$db;
+	private			$tls_mark;					// tls mark cookie name
+	private			$page;
+	public			$method;					// for finalize & diag..
+	private			$hash;
+	private			$query;
+	private			$lang;
+	private			$file;
+	private			$no_cache		= 0;		// for CSP nonces
+	private			$caching		= 0;
+	private bool	$security_headers_sent	= false;
+	private bool	$cache_hit				= false;
 
 	public function __construct(&$db)
 	{
@@ -199,30 +211,35 @@ class Http
 		if ($cached_page = $this->load_page($mtime))
 		{
 			# Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+			$this->cache_hit = true;
 
 			if (in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD']))
 			{
 				$client_etag			= !empty($_SERVER['HTTP_IF_NONE_MATCH'])		? trim($_SERVER['HTTP_IF_NONE_MATCH'])		: null;
 				$client_last_modified	= !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])	: null;
 				$client_accept_encoding	= $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '';
-				$identifier				= '';
 
 				$server_last_modified	= Ut::http_date($mtime);
-				$server_etag_raw		= hash('sha1', $cached_page . $client_accept_encoding . $identifier);
+				$server_etag_raw		= $this->etag($cached_page);
 				$server_etag			= '"' . $server_etag_raw . '"';
 
 				header('Last-Modified: '	. $server_last_modified);
 				header('ETag: '				. $server_etag);
-				header('Cache-Control: max-age=10800');
-				header('Vary: Accept-Encoding');
+				// cache policy: anonymous -> private + must revalidate (see cache_policy())
+				$this->cache_policy();
+				// diagnostics must not be part of the body: the body has to stay
+				// byte-identical to the cached file, otherwise the ETag would not
+				// identify the response body (and 304 would never happen)
+				header('X-Cache: HIT');
+				header('X-Cache-Time: ' . gmdate('Y-m-d H:i:s', $mtime) . ' GMT');
 
 				$matching_last_modified	= $client_last_modified == $server_last_modified;
-				$matching_etag			= $client_etag && str_contains($client_etag, $server_etag_raw);
-				$strict					= false;
+				$matching_etag			= $this->etag_matches($client_etag, $server_etag_raw);
 
-				if (($client_last_modified && $client_etag) || $strict
-					? $matching_last_modified && $matching_etag
-					: $matching_last_modified || $matching_etag)
+				// If-None-Match takes precedence over If-Modified-Since (RFC 9110 13.1.3)
+				$not_modified			= $client_etag ? $matching_etag : $matching_last_modified;
+
+				if ($not_modified)
 				{
 					# Ut::dbg('not modified');
 					$this->status(304);
@@ -243,13 +260,11 @@ class Http
 
 				ini_set('default_charset', null);
 
+				// Serve the cached file verbatim and append exactly the same closing
+				// tags as the dynamic response (class/final.php), so that both
+				// bodies are identical and the ETag identifies the response body.
 				echo $cached_page;
-
-				if (!str_contains($this->method, '.xml'))
-				{
-					echo "\n<!-- WackoWiki Caching Engine: page cached at " . gmdate('Y-m-d H:i:s', $mtime) . " GMT -->\n";
-					echo "</body>\n</html>";
-				}
+				echo $this->document_end();
 
 				$this->gzip();
 				$this->terminate();
@@ -263,29 +278,47 @@ class Http
 	{
 		$this->method	= $method;
 
-		if ($this->db->cache
-			&& $_SERVER['REQUEST_METHOD'] != 'POST'
+		// cache only for anonymous user
+		$eligible = ($this->db->cache
+			&& ($_SERVER['REQUEST_METHOD'] ?? 'GET') != 'POST'
 			&& $method != 'edit'
-			&& $method != 'watch')
+			&& $method != 'watch'
+			&& !$this->is_authenticated());
+
+		if ($eligible)
 		{
-			// cache only for anonymous user
-			if (!isset($this->sess->user_profile))
-			{
-				$this->page		= $page;
-				$this->caching	= $this->check_http_request();
-			}
+			$this->page		= $page;
+			$this->caching	= $this->check_http_request();
+		}
+
+		if (!headers_sent())
+		{
+			header('X-Cache: ' . ($this->cache_hit ? 'HIT' : ($eligible ? 'MISS' : 'BYPASS')));
 		}
 	}
 
 	public function store_cache(): void
 	{
-		if ($this->caching && !isset($this->sess->user_profile))
+		if ($this->caching && !$this->is_authenticated())
 		{
 			$data = ob_get_contents();
 
 			if (!empty($data))
 			{
+				// NB: the cached file holds the page content WITHOUT the closing
+				// tags and WITHOUT the debug console. The closing tags are appended
+				// on delivery (document_end()), exactly as class/final.php does it
+				// for the dynamic response.
 				$this->save_page($data);
+
+				// The response body is known now: publish a validator, so that the
+				// next request can be answered with "304 Not Modified" instead of
+				// a full body. The ETag is computed over exactly the bytes that
+				// have been sent to the client.
+				if (!headers_sent())
+				{
+					header('ETag: "' . $this->etag($data) . '"');
+				}
 			}
 			else
 			{
@@ -353,6 +386,14 @@ class Http
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
+			// Send the full header set only once per request. The $update mode is
+			// still allowed to refresh the CSP header (e.g. when no_cache() turns
+			// the response into a personalized one with a fresh nonce).
+			if ($this->security_headers_sent && !$update)
+			{
+				return;
+			}
+
 			// 1. Content-Security-Policy: https://www.w3.org/TR/CSP3/
 			if ($this->db->csp)
 			{
@@ -438,6 +479,8 @@ class Http
 
 			// 6. X-Content-Type-Options: prevents the browser from doing MIME-type sniffing
 			header('X-Content-Type-Options: nosniff');
+
+			$this->security_headers_sent = true;
 		}
 	}
 
@@ -500,8 +543,7 @@ class Http
 		// disable browser cache for page
 		if (!headers_sent())
 		{
-			header('Last-Modified: ' . Ut::http_date());					// always modified
-			header('Cache-Control: no-store');
+			header('Cache-Control: no-store, max-age=0, must-revalidate');
 		}
 		// STS: check into session nocache code!
 
@@ -520,10 +562,195 @@ class Http
 		}
 	}
 
-	function cache_promisc(): void
+	/**
+	 * Closing tags for the current response ('' for XML responses).
+	 */
+	public function document_end(): string
 	{
-		// to be replaced then by no_cache or what
-		header('Cache-Control: public');
+		if (isset($this->method) && str_contains($this->method, '.xml'))
+		{
+			return '';
+		}
+
+		return self::DOCUMENT_END;
+	}
+
+	/**
+	 * Is the current request authenticated?
+	 * Wacko::authenticate() must have been called before this is used.
+	 */
+	public function is_authenticated(): bool
+	{
+		return isset($this->sess) && isset($this->sess->user_profile);
+	}
+
+	/**
+	 * Response cache policy.
+	 *
+	 * Logged in  -> private, no-store    (never stored anywhere; no bfcache)
+	 * Anonymous  -> private, no-cache     (may be stored, must revalidate via ETag)
+	 * POST etc. -> no-store
+	 *
+	 * Deliberately no 'Vary: Cookie': WackoWiki rotates the NoReplay cookie on
+	 * every request, so the Cookie header is never stable and 'Vary: Cookie'
+	 * would force a 100 % browser cache miss rate. Correctness is ensured by
+	 * 'private' (shared caches must not store the response), 'no-cache' (the
+	 * browser must revalidate), 'no-store' (personalized responses are never
+	 * stored), the fact that check_cache() never serves a cached page to an
+	 * authenticated user.
+	 */
+	public function cache_policy(): void
+	{
+		if (headers_sent())
+		{
+			return;
+		}
+
+		$this->add_vary('Accept-Encoding');
+
+		// never override an explicit "no-store" (e.g. set by no_cache() for the
+		// login page or for other personalized output)
+		if ($this->has_no_store())
+		{
+			return;
+		}
+
+		$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+		if ($this->is_authenticated() || !in_array($method, ['GET', 'HEAD']))
+		{
+			header('Cache-Control: private, no-store, max-age=0, must-revalidate');
+			return;
+		}
+
+		// honour the global session cache limiter, if it asks for no-store
+		if (isset($this->sess) && $this->sess->cf_cache_limiter === 'nocache')
+		{
+			header('Cache-Control: no-store, max-age=0, must-revalidate');
+			return;
+		}
+
+		header('Cache-Control: private, no-cache, max-age=0, must-revalidate');
+	}
+
+	/**
+	 * Is a "no-store" directive already present?
+	 */
+	public function has_no_store(): bool
+	{
+		foreach (headers_list() as $header)
+		{
+			if (stripos($header, 'Cache-Control:') === 0 && stripos($header, 'no-store') !== false)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Append to the Vary header instead of overwriting it
+	 * (header() replaces, and gzip()/sendfile() set Vary as well).
+	 */
+	public function add_vary(string $token): void
+	{
+		if (headers_sent())
+		{
+			return;
+		}
+
+		$tokens = [];
+
+		foreach (headers_list() as $header)
+		{
+			if (stripos($header, 'Vary:') === 0)
+			{
+				foreach (explode(',', substr($header, 5)) as $t)
+				{
+					$t = trim($t);
+					$t !== '' && $tokens[] = $t;
+				}
+			}
+		}
+
+		if (!in_array($token, $tokens, true))
+		{
+			$tokens[] = $token;
+		}
+
+		header('Vary: ' . implode(', ', $tokens));
+	}
+
+	/**
+	 * Compute the ETag (strong validator) of a response body.
+	 *
+	 * The body is hashed together with the request's Accept-Encoding and a
+	 * representation identifier, so that different variants (page, method,
+	 * query string, language, compression) never share a validator.
+	 */
+	public function etag(string $body): string
+	{
+		$identifier = $this->page . '|' . $this->method . '|' . $this->query . '|' . $this->lang;
+
+		return hash('sha1', $body . ($_SERVER['HTTP_ACCEPT_ENCODING'] ?? '') . $identifier);
+	}
+
+	/**
+	 * Compare an If-None-Match header value with the server side ETag.
+	 * Handles comma separated lists and weak validators (RFC 9110 13.1.2).
+	 */
+	public function etag_matches(?string $client_etag, string $server_etag_raw): bool
+	{
+		if (!$client_etag)
+		{
+			return false;
+		}
+
+		$client_tags = array_map(
+			static function ($t) {
+				$t = trim($t);
+
+				if (str_starts_with($t, 'W/'))
+				{
+					$t = substr($t, 2);		// weak validator
+				}
+
+				return trim($t, '"');
+			},
+			explode(',', $client_etag)
+		);
+
+		return in_array($server_etag_raw, $client_tags, true);
+	}
+
+	/**
+	 * Publish the validator for the completed response body.
+	 *
+	 * MUST be called after the debug console and the closing tags have been
+	 * appended (i.e. at the very end of the request), otherwise the ETag would
+	 * not identify the bytes that are sent to the client.
+	 */
+	public function finalize_response(): void
+	{
+		if (headers_sent() || $this->is_authenticated() || $this->has_no_store())
+		{
+			return;
+		}
+
+		if (!in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', ['GET', 'HEAD']))
+		{
+			return;
+		}
+
+		$body = ob_get_contents();
+
+		if ($body === false || $body === '')
+		{
+			return;
+		}
+
+		header('ETag: "' . $this->etag($body) . '"');
 	}
 
 	// negotiate language with user's browser
@@ -803,7 +1030,7 @@ class Http
 			if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
 			{
 				# Ut::dbg('not modified');
-				header('Vary: Accept-Encoding');
+				$this->add_vary('Accept-Encoding');
 				$this->status(304);
 				return;
 			}
@@ -967,7 +1194,7 @@ class Http
 			return; // do not compress small or too big data
 		}
 
-		header('Vary: Accept-Encoding');
+		$this->add_vary('Accept-Encoding');
 
 		foreach (['x-gzip', 'gzip'] as $x)
 		{

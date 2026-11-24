@@ -481,19 +481,23 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			switch ($this->cf_cache_limiter)
 			{
 				case 'public':
-					header("Cache-Control: public, max-age=$age");
+					// NEVER 'public' for session bearing pages: the response is
+					// personalized and must not be stored by a shared cache
+					header('Cache-Control: private, no-cache, max-age=0, must-revalidate');
 					break;
 
 				case 'private':
-					header('Cache-Control: no-cache');
-					// FALLTHRU
+					header('Cache-Control: private, no-cache, max-age=0, must-revalidate');
+					break;
 
 				case 'private_no_expire':
-					header("Cache-Control: private, max-age=$age");
+					// no multi hour freshness lifetime for HTML: that is what
+					// caused stale pages after login and after an edit
+					header('Cache-Control: private, no-cache, max-age=0, must-revalidate');
 					break;
 
 				case 'nocache':
-					header('Cache-Control: no-store');
+					header('Cache-Control: no-store, max-age=0, must-revalidate');
 					return; // suppress last-modified
 
 				default:

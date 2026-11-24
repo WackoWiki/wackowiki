@@ -72,11 +72,22 @@ switch ($route['route'])
 		$http->terminate();
 
 	case 'admin':
+		// admin pages are personalized: never cache them
+		$http->no_cache(false);
 		$http->http_security_headers();
 		include 'admin/admin.php';
 		break;
 
 	case 'wacko':
+		// Resolve the identity BEFORE the cache lookup, so that "remember me" /
+		// soft-login can never receive an anonymous cached page.
+		$engine->authenticate();
+		// Security headers must also be present on cache hits (which terminate
+		// the request before run() is reached).
+		$http->http_security_headers();
+		// Cache policy: private/no-store for logged in users, revalidate for
+		// anonymous ones.
+		$http->cache_policy();
 		$http->check_cache($route['page'], $route['method']);
 		$engine->run($route['page'], $route['method']);
 		$http->store_cache();
