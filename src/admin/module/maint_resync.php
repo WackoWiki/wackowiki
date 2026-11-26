@@ -13,7 +13,7 @@ $module['maint_resync'] = [
 		'order'	=> 601,
 		'cat'	=> 'maintenance',
 		'status'=> !RECOVERY_MODE,
-	];
+];
 
 ##########################################################
 
@@ -38,55 +38,101 @@ function admin_maint_resync($engine, $module)
 						total_revisions	= 0,
 						total_pages		= 0';
 
-			// set total comments posted
-			$sql[] = 'UPDATE ' . $prefix . 'user u,
-						(SELECT p.owner_id as user_id, COUNT(p.tag) AS n
-						FROM ' . $prefix . "page p,
-							{$prefix}user o
-						WHERE p.owner_id = o.user_id
-							AND p.comment_on_id <> 0
-							AND p.deleted <> 1
-						GROUP BY p.owner_id) AS s
-					SET
-						u.total_comments = s.n
-					WHERE u.user_id = s.user_id";
+			if ($engine->db->is_sqlite)
+			{
+				// SQLite >= 3.33: UPDATE ... SET ... FROM (derived table)
+				// (SQLite has no MySQL-style "UPDATE t1, (SELECT ...) s SET ..." syntax)
 
-			// set total pages in ownership
-			$sql[] = 'UPDATE ' . $prefix . 'user u,
-						(SELECT o.user_id, COUNT(p.tag) AS n
-						FROM ' . $prefix . "page p,
-							{$prefix}user o
-						WHERE p.owner_id = o.user_id
-							AND p.comment_on_id = 0
-							AND p.deleted <> 1
-						GROUP BY p.owner_id, o.user_id) AS s
-					SET
-						u.total_pages = s.n
-					WHERE u.user_id = s.user_id";
+				// set total comments posted
+				$sql[] = 'UPDATE ' . $prefix . 'user AS u SET
+							total_comments = s.n
+						FROM (SELECT p.owner_id AS user_id, COUNT(p.tag) AS n
+							FROM ' . $prefix . 'page AS p
+							WHERE p.comment_on_id <> 0
+								AND p.deleted <> 1
+							GROUP BY p.owner_id) AS s
+						WHERE u.user_id = s.user_id';
 
-			// set total revisions made
-			$sql[] = 'UPDATE ' . $prefix . 'user u,
-						(SELECT r.user_id, COUNT(r.page_id) AS n
-						FROM ' . $prefix . "revision r,
-							{$prefix}user o
-						WHERE r.owner_id = o.user_id
-							AND r.comment_on_id = 0
-						GROUP BY r.user_id) AS s
-					SET
-						u.total_revisions = s.n
-					WHERE u.user_id = s.user_id";
+				// set total pages in ownership
+				$sql[] = 'UPDATE ' . $prefix . 'user AS u SET
+							total_pages = s.n
+						FROM (SELECT p.owner_id AS user_id, COUNT(p.tag) AS n
+							FROM ' . $prefix . 'page AS p
+							WHERE p.comment_on_id = 0
+								AND p.deleted <> 1
+							GROUP BY p.owner_id) AS s
+						WHERE u.user_id = s.user_id';
 
-			// set total files uploaded
-			$sql[] = 'UPDATE ' . $prefix . 'user u,
-						(SELECT o.user_id, COUNT(f.file_id) AS n
-						FROM ' . $prefix . "file f,
-							{$prefix}user o
-						WHERE f.user_id = o.user_id
-							AND f.deleted <> 1
-						GROUP BY o.user_id, f.user_id) AS s
-					SET
-						u.total_uploads = s.n
-					WHERE u.user_id = s.user_id";
+				// set total revisions made
+				$sql[] = 'UPDATE ' . $prefix . 'user AS u SET
+							total_revisions = s.n
+						FROM (SELECT r.owner_id AS user_id, COUNT(r.page_id) AS n
+							FROM ' . $prefix . 'revision AS r
+							WHERE r.comment_on_id = 0
+							GROUP BY r.owner_id) AS s
+						WHERE u.user_id = s.user_id';
+
+				// set total files uploaded
+				$sql[] = 'UPDATE ' . $prefix . 'user AS u SET
+							total_uploads = s.n
+						FROM (SELECT f.user_id AS user_id, COUNT(f.file_id) AS n
+							FROM ' . $prefix . 'file AS f
+							WHERE f.deleted <> 1
+							GROUP BY f.user_id) AS s
+						WHERE u.user_id = s.user_id';
+			}
+			else
+			{
+				// set total comments posted
+				$sql[] = 'UPDATE ' . $prefix . 'user u,
+							(SELECT p.owner_id as user_id, COUNT(p.tag) AS n
+							FROM ' . $prefix . "page p,
+								{$prefix}user o
+							WHERE p.owner_id = o.user_id
+								AND p.comment_on_id <> 0
+								AND p.deleted <> 1
+							GROUP BY p.owner_id) AS s
+						SET
+							u.total_comments = s.n
+						WHERE u.user_id = s.user_id";
+
+				// set total pages in ownership
+				$sql[] = 'UPDATE ' . $prefix . 'user u,
+							(SELECT o.user_id, COUNT(p.tag) AS n
+							FROM ' . $prefix . "page p,
+								{$prefix}user o
+							WHERE p.owner_id = o.user_id
+								AND p.comment_on_id = 0
+								AND p.deleted <> 1
+							GROUP BY p.owner_id, o.user_id) AS s
+						SET
+							u.total_pages = s.n
+						WHERE u.user_id = s.user_id";
+
+				// set total revisions made
+				$sql[] = 'UPDATE ' . $prefix . 'user u,
+							(SELECT r.user_id, COUNT(r.page_id) AS n
+							FROM ' . $prefix . "revision r,
+								{$prefix}user o
+							WHERE r.owner_id = o.user_id
+								AND r.comment_on_id = 0
+							GROUP BY r.user_id) AS s
+						SET
+							u.total_revisions = s.n
+						WHERE u.user_id = s.user_id";
+
+				// set total files uploaded
+				$sql[] = 'UPDATE ' . $prefix . 'user u,
+							(SELECT o.user_id, COUNT(f.file_id) AS n
+							FROM ' . $prefix . "file f,
+								{$prefix}user o
+							WHERE f.user_id = o.user_id
+								AND f.deleted <> 1
+							GROUP BY o.user_id, f.user_id) AS s
+						SET
+							u.total_uploads = s.n
+						WHERE u.user_id = s.user_id";
+			}
 
 			foreach ($sql as $query)
 			{
@@ -103,33 +149,72 @@ function admin_maint_resync($engine, $module)
 						comments	= 0,
 						files		= 0,
 						revisions	= 0';
-			// set comments
-			$sql[] = 'UPDATE ' . $prefix . 'page p,
-						(SELECT e.page_id, COUNT( c.page_id ) AS n
-						FROM ' . $prefix . 'page c
-							RIGHT JOIN ' . $prefix . 'page AS e ON c.comment_on_id = e.page_id
-						WHERE c.deleted <> 1
-						GROUP BY e.page_id) AS s
-					SET
-						p.comments = s.n
-					WHERE p.page_id = s.page_id';
-			// set files
-			$sql[] = 'UPDATE ' . $prefix . 'page p,
-						(SELECT page_id, COUNT(file_id) AS files
-						FROM ' . $prefix . 'file
-						WHERE page_id <> 0
-						GROUP BY page_id) AS f
-					SET
-						p.files = f.files
-					WHERE p.page_id = f.page_id';
-			// set revisions
-			$sql[] = 'UPDATE ' . $prefix . 'page p,
-						(SELECT page_id, COUNT(page_id) AS revisions
-						FROM ' . $prefix . 'revision
-						GROUP BY page_id) AS r
-					SET
-						p.revisions = r.revisions
-					WHERE p.page_id = r.page_id';
+
+			if ($engine->db->is_sqlite)
+			{
+				// SQLite >= 3.33: UPDATE ... SET ... FROM (derived table)
+				// (SQLite has no MySQL-style "UPDATE t1, (SELECT ...) s SET ..." syntax)
+
+				// set comments
+				// pages without comments keep the value 0 written by the reset above
+				$sql[] = 'UPDATE ' . $prefix . 'page AS p SET
+							comments = s.n
+						FROM (SELECT c.comment_on_id AS page_id, COUNT(c.page_id) AS n
+							FROM ' . $prefix . 'page AS c
+							WHERE c.comment_on_id <> 0
+								AND c.deleted <> 1
+							GROUP BY c.comment_on_id) AS s
+						WHERE p.page_id = s.page_id';
+
+				// set files
+				$sql[] = 'UPDATE ' . $prefix . 'page AS p SET
+							files = s.files
+						FROM (SELECT f.page_id AS page_id, COUNT(f.file_id) AS files
+							FROM ' . $prefix . 'file AS f
+							WHERE f.page_id <> 0
+							GROUP BY f.page_id) AS s
+						WHERE p.page_id = s.page_id';
+
+				// set revisions
+				$sql[] = 'UPDATE ' . $prefix . 'page AS p SET
+							revisions = s.revisions
+						FROM (SELECT r.page_id AS page_id, COUNT(r.page_id) AS revisions
+							FROM ' . $prefix . 'revision AS r
+							GROUP BY r.page_id) AS s
+						WHERE p.page_id = s.page_id';
+			}
+			else
+			{
+				// set comments
+				$sql[] = 'UPDATE ' . $prefix . 'page p,
+							(SELECT e.page_id, COUNT( c.page_id ) AS n
+							FROM ' . $prefix . 'page c
+								RIGHT JOIN ' . $prefix . 'page AS e ON c.comment_on_id = e.page_id
+							WHERE c.deleted <> 1
+							GROUP BY e.page_id) AS s
+						SET
+							p.comments = s.n
+						WHERE p.page_id = s.page_id';
+
+				// set files
+				$sql[] = 'UPDATE ' . $prefix . 'page p,
+							(SELECT page_id, COUNT(file_id) AS files
+							FROM ' . $prefix . 'file
+							WHERE page_id <> 0
+							GROUP BY page_id) AS f
+						SET
+							p.files = f.files
+						WHERE p.page_id = f.page_id';
+
+				// set revisions
+				$sql[] = 'UPDATE ' . $prefix . 'page p,
+							(SELECT page_id, COUNT(page_id) AS revisions
+							FROM ' . $prefix . 'revision
+							GROUP BY page_id) AS r
+						SET
+							p.revisions = r.revisions
+						WHERE p.page_id = r.page_id';
+			}
 
 			foreach ($sql as $query)
 			{
@@ -290,7 +375,7 @@ function admin_maint_resync($engine, $module)
 					$engine->sess->resync_links .=  $record . '. ' . $page['tag'] . "\n";
 
 					// find last rendered page
-					# Diag::dbg('GOLD', $record, $page['tag']);
+					#Diag::dbg('GOLD', $record, $page['tag']);
 
 					// override global formatter settings with perpage settings
 					$page_options = [
@@ -383,7 +468,7 @@ function admin_maint_resync($engine, $module)
 ?>
 		<input type="hidden" name="action" value="pagestats">
 		<button type="submit" name="start" id="submit_pagestats"><?php echo $engine->_t('Synchronize');?></button>
-<?php		echo $engine->form_close();?>
+<?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('Attachments');?></h2>
 	<p><?php echo $engine->_t('AttachmentsInfo');?></p>
@@ -392,7 +477,7 @@ function admin_maint_resync($engine, $module)
 ?>
 		<input type="hidden" name="action" value="attachments">
 		<button type="submit" name="start" id="submit_attachments"><?php echo $engine->_t('Synchronize');?></button>
-<?php		echo $engine->form_close();?>
+<?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('Feeds');?></h2>
 	<p><?php echo $engine->_t('FeedsInfo');?></p>
@@ -401,7 +486,7 @@ function admin_maint_resync($engine, $module)
 ?>
 		<input type="hidden" name="action" value="rssfeeds">
 		<button type="submit" name="start" id="submit_rssfeeds"><?php echo $engine->_t('Synchronize');?></button>
-<?php		echo $engine->form_close();?>
+<?php	echo $engine->form_close();?>
 
 <?php
 if ($engine->db->xml_sitemap)
@@ -419,7 +504,7 @@ if ($engine->db->xml_sitemap)
 ?>
 		<input type="hidden" name="action" value="xml_sitemap">
 		<button type="submit" name="start" id="submit_sitemap"><?php echo $engine->_t('Synchronize');?></button>
-<?php		echo $engine->form_close();
+<?php	echo $engine->form_close();
 }?>
 
 	<h2><?php echo $engine->_t('ReparseBody');?></h2>
