@@ -37,12 +37,22 @@ class Diag
 				// get memory usage
 				if (function_exists('memory_get_peak_usage'))
 				{
-					$execmem = memory_get_peak_usage(true);
+					$execmem		= memory_get_peak_usage(true);
+					$execmem_used	= memory_get_peak_usage(false);
+					$execmem_now	= memory_get_usage(false);
+					$execbuf		= ob_get_length();
 				}
 
 				if ($execmem)
 				{
-					echo "\t<li>Memory allocated: " . $engine->factor_multiples($execmem, 'binary', true, true) . "</li>\n";
+					echo "\t<li>Memory allocated: "		. $engine->factor_multiples($execmem, 'binary', true, true) . "</li>\n";
+
+					if ($config['debug'] >= 3)
+					{
+						echo "\t<li>Memory peak: "			. $engine->factor_multiples($execmem_used, 'binary', true, true) . "</li>\n";
+						echo "\t<li>Memory current: "		. $engine->factor_multiples($execmem_now, 'binary', true, true) . "</li>\n";
+						echo "\t<li>Output buffer size: "	. $engine->factor_multiples($execbuf, 'binary', true, true) . "</li>\n";
+					}
 				}
 
 				#echo "<li>UTC: " . gmdate('Y-m-d H:i:s', time()) . "</li>\n";
