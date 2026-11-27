@@ -74,6 +74,17 @@ class DbSqlite implements DbInterface
 		return $this->result;
 	}
 
+	/**
+	 * Execute a query and let the caller handle database errors.
+	 *
+	 * Unlike query(), this method never terminates the request. It is used
+	 * for optional cache metadata after a response has already been built.
+	 */
+	public function query_nonfatal($query)
+	{
+		return $this->dblink->query($query);
+	}
+
 	function quote($string): string
 	{
 		$string ??= '';

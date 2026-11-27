@@ -36,6 +36,24 @@ class Feed
 		@chmod($file_name, CHMOD_FILE);
 	}
 
+	/**
+	 * Write a complete chunk or fail without publishing a partial feed.
+	 */
+	private function write_chunk($file, string $data): void
+	{
+		if ($data === '')
+		{
+			return;
+		}
+
+		$written = fwrite($file, $data);
+
+		if ($written !== strlen($data))
+		{
+			throw new RuntimeException('Unable to write the complete comment feed');
+		}
+	}
+
 	function xml_name($name)
 	{
 		return $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml';
@@ -236,25 +254,69 @@ class Feed
 		$limit	= 20;
 		$name	= $this->xml_name('comments');
 		$count	= 0;
-		$access	= '';
+		$attempts	= 0;
 
 		$this->engine->canonical	= true;
 		$this->engine->static_feed	= true;
 
-		// build output
-		$xml = $this->feed_header('CommentsXML', 'CommentsXMLTitle');
+		$file_name	= Ut::join_path(XML_DIR, $name);
+		$temp_name	= '';
+		$file		= null;
+		$published	= false;
+		$reset_tag	= $this->engine->tag;
+		$reset_context	= $this->engine->current_context;
 
-		if ($comments = $this->engine->load_comment_feed())
-		{
-			$reset_tag = $this->engine->tag;
+		try {
+			// Write in the destination directory so that the final rename is
+			// atomic. A failed generation leaves the previous feed untouched.
+			$temp_name = $file_name . '.tmp.' . getmypid() . '.' . bin2hex(random_bytes(6));
+			$file = @fopen($temp_name, 'xb');
 
-			foreach ($comments as $comment)
+			if ($file === false)
 			{
-				$access = $this->engine->has_access('read', $comment['comment_on_id'], GUEST);
+				throw new RuntimeException('Unable to create a temporary comment feed');
+			}
 
-				if ( $access && ($count < $limit) )
+			$this->write_chunk($file, $this->feed_header('CommentsXML', 'CommentsXMLTitle'));
+
+			if ($comments = $this->engine->load_comment_feed_candidates())
+			{
+				foreach ($comments as $comment)
 				{
+					$access = $this->engine->has_access('read', $comment['comment_on_id'], GUEST);
+
+					if (!$access)
+					{
+						continue;
+					}
+
+					// At most 20 body queries are made, even if a candidate is
+					// deleted concurrently and does not produce an item.
+					if ($attempts >= $limit)
+					{
+						break;
+					}
+
+					$attempts++;
+
+					// Fetch the body only for an accessible comment that may be
+					// emitted. Candidate comments are intentionally metadata-only.
+					$body = $this->engine->load_comment_body($comment['page_id']);
+
+					if ($body === null)
+					{
+						throw new RuntimeException('A comment disappeared while the feed was generated');
+					}
+
+					if (!empty($body['deleted']) || !empty($body['parent_deleted']))
+					{
+						unset($body);
+						continue;
+					}
+
 					$count++;
+					$comment['body']	= $body['body'];
+					$comment['body_r']	= $body['body_r'];
 
 					// recompile if necessary
 					if ($comment['body_r'] == '')
@@ -268,7 +330,7 @@ class Feed
 					$text = $this->engine->format($comment['body_r'], 'post_wacko', ['strip_marker' => true]);
 					$this->engine->current_context--;
 
-					$xml .=
+					$item =
 						'<item>' . "\n" .
 							'<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('From') . ' ' .
 							($comment['user_name'] ?: $this->engine->_t('Guest')) .
@@ -279,18 +341,60 @@ class Feed
 							'<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n" .
 							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n" .
 						'</item>' . "\n";
+
+					$this->write_chunk($file, $item);
+					unset($body, $comment['body'], $comment['body_r'], $text, $item);
 				}
 			}
 
-			$this->engine->tag = $reset_tag;
+			$this->write_chunk($file, '</channel>' . "\n");
+			$this->write_chunk($file, '</rss>');
+
+			if (!fflush($file))
+			{
+				throw new RuntimeException('Unable to flush the temporary comment feed');
+			}
+
+			if (!fclose($file))
+			{
+				$file = null;
+				throw new RuntimeException('Unable to close the temporary comment feed');
+			}
+
+			$file = null;
+			@chmod($temp_name, CHMOD_FILE);
+
+			if (!@rename($temp_name, $file_name))
+			{
+				throw new RuntimeException('Unable to publish the comment feed');
+			}
+
+			$published = true;
 		}
+		catch (Throwable $e) {
+			error_log('[Feed] Unable to publish the comments feed: ' . $e->getMessage());
+		}
+		finally {
+			if (is_resource($file))
+			{
+				fclose($file);
+			}
 
-		$xml .= '</channel>' . "\n";
-		$xml .= '</rss>';
+			if (!$published && $temp_name !== '')
+			{
+				@unlink($temp_name);
+			}
 
-		$this->write_file($name, $xml);
-		$this->engine->canonical	= false;
-		$this->engine->static_feed	= false;
+			for ($i = $reset_context + 1; $i <= $this->engine->current_context; ++$i)
+			{
+				unset($this->engine->context[$i]);
+			}
+
+			$this->engine->current_context	= $reset_context;
+			$this->engine->tag			= $reset_tag;
+			$this->engine->canonical	= false;
+			$this->engine->static_feed	= false;
+		}
 	}
 
 	// Sitemaps XML file: http://www.sitemaps.org

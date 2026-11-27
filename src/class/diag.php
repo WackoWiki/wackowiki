@@ -21,6 +21,7 @@ class Diag
 		chdir($cwd);
 
 		if ($config['debug'] >= 1
+			&& !$http->is_cacheable_response()
 			&& (!(isset($http->method) && str_contains($http->method, '.xml')))
 			&& $http->method != 'print'
 			&& $http->method != 'wordprocessor')
@@ -232,7 +233,7 @@ class Diag
 			}
 		}
 
-		static::dbg_console($engine, $config['debug']);
+		static::dbg_console($engine, $config['debug'], !$http->is_cacheable_response());
 	}
 
 	// NB class http saves/restores log on redirect
@@ -286,14 +287,15 @@ class Diag
 		}
 	}
 
-	private static function dbg_console($engine, $debug): void
+	private static function dbg_console($engine, $debug, bool $include_console = true): void
 	{
 		if (!($log = static::$log))
 		{
 			return;
 		}
 
-		$show_console = ($debug === true || (is_numeric($debug) && (int)$debug > 0));
+		$show_console = $include_console
+			&& ($debug === true || (is_numeric($debug) && (int)$debug > 0));
 
 		// Always write to file
 		$output = '';
@@ -351,6 +353,7 @@ class Diag
 	{
 		$html = self::$debug_console_html ?? '';
 		self::$debug_console_html = null; // Clear after retrieval
+		self::$log = [];
 
 		return $html;
 	}

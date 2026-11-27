@@ -39,8 +39,9 @@ if ($this->has_access('read'))
 		$user			= $this->get_user();
 		$noid_protect	= $this->get_user_setting('noid_protect');
 
-		// load comments for this page
-		$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->db->comments_count, $sort_comment);
+		// Load comment metadata first. Bodies are fetched one at a time below so
+		// that a page of comments does not retain every raw and rendered body.
+		$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->db->comments_count, $sort_comment, true);
 
 		// clear new comments for watched page
 		if ($user && $comments && isset($this->watch['comment_id']) && $this->watch['comment_id'] && !$noid_protect)
@@ -73,6 +74,36 @@ if ($this->has_access('read'))
 			{
 				$this->cache_page($comment, true);
 
+				// Fetch and render one comment body at a time. The metadata-only
+				// comment list remains small even when rendered bodies are large.
+				$body = $this->load_comment_body($comment['page_id']);
+
+				if ($body === null
+					|| !empty($body['deleted'])
+					|| !empty($body['parent_deleted']))
+				{
+					continue;
+				}
+
+				// recompile if necessary
+				if (!$body['body_r']
+					|| ($this->db->paragrafica && ($body['body_toc'] ?? '') === ''))
+				{
+					$body['body_r'] = $this->compile_body($body['body'], $comment['page_id'], true, true);
+				}
+
+				$restore_page_id = $this->set_formatter_context($comment['page_id']);
+
+				try {
+					$formatted_comment = $this->format($body['body_r'], 'post_wacko', ['strip_marker' => true]);
+				}
+				finally {
+					$this->reset_formatter_context($restore_page_id);
+				}
+
+				// Do not populate the repeated template item until the body is
+				// known to exist. A comment removed after the metadata query
+				// must not leave stale fields in the next rendered item.
 				$tpl->href	= $this->href('', $comment['tag']);
 				$tpl->tag	= $comment['tag'];
 				$tpl->title	= $comment['title'];
@@ -104,16 +135,14 @@ if ($this->has_access('read'))
 					$this->comment_id = $comment['page_id'];
 				}
 
-				// recompile if necessary
-				if (!$comment['body_r']
-					|| ($this->db->paragrafica && ($comment['body_toc'] ?? '') === ''))
-				{
-					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], true, true);
-				}
+				$tpl->comment	= $formatted_comment;
 
-				$restore_page_id = $this->set_formatter_context($comment['page_id']);
-				$tpl->comment	= $this->format($comment['body_r'], 'post_wacko', ['strip_marker' => true]);
-				$this->reset_formatter_context($restore_page_id);
+				unset($body['body'], $body['body_r'], $body['body_toc'], $body['deleted'], $body['parent_deleted'], $body, $formatted_comment);
+
+				// The formatter creates temporary parser graphs. Collect them
+				// after each comment so one large comment cannot leave cycles
+				// resident while the remaining comments are rendered.
+				gc_collect_cycles();
 
 				$tpl->owner		= $this->user_link($comment['owner_name']);
 				$tpl->created	= $comment['created'];

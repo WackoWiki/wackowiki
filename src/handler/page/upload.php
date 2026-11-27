@@ -550,7 +550,7 @@ else
 // === AJAX JSON RESPONSE FOR WIKIEDIT DRAG & DROP + PASTE ===
 if (isset($_POST['upload']) && $ajax)
 {
-	header('Content-Type: application/json; charset=utf-8');
+	// Keep only the JSON response; do not end the surrounding handler buffer.
 
 	if (isset($file_name) && $file_name !== '')
 	{
@@ -567,12 +567,12 @@ if (isset($_POST['upload']) && $ajax)
 			// you can also add 'message' => $this->get_message() if you collect them
 		];
 
-		echo json_encode($result, JSON_UNESCAPED_UNICODE);
+		$this->http->json_response($result);
 	}
 	else
 	{
 		// Debug output so we can see exactly what failed
-		echo json_encode([
+		$this->http->json_response([
 			'error'     => $error ?? 'Upload failed (unknown reason)',
 			'fs_name'   => $fs_name ?? 'undefined',
 			'ext'       => $ext ?? 'undefined',

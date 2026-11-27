@@ -14,25 +14,16 @@ if (!defined('IN_WACKO'))
 
 /** @var \WackoWiki $this */
 
-// Clean output buffers
-while (ob_get_level() > 0)
-{
-	ob_end_clean();
-}
+// The JSON publisher discards any partial response before writing the
+// response. The shutdown finalizer will flush it to the client.
 
 // Heartbeat: no query params → lightweight keep-alive
 if (!isset($_GET['q']) || !isset($_GET['ta_id']))
 {
-	header('Content-Type: application/json; charset=utf-8');
-	header('Cache-Control: no-store, max-age=0');
-	header('X-Content-Type-Options: nosniff');
-	echo json_encode(
-		[
-			'ok'   => true,
-			'time' => time(),
-		],
-		JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-		);
+	$this->http->json_response([
+		'ok'   => true,
+		'time' => time(),
+	]);
 	exit;
 }
 
@@ -138,16 +129,13 @@ $sql = '
 	}
 
 	// JSON response
-	header('Content-Type: application/json; charset=utf-8');
-	header('Cache-Control: no-store, max-age=0');
-	header('X-Content-Type-Options: nosniff');
-
-	echo json_encode(
+	$this->http->json_response(
 		[
 			'ta_id'       => $ta_id,
 			'best_match'  => $results[0] ?? null,
 			'suggestions' => $results,
 		],
+		200,
 		JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
-		);
+	);
 	exit;

@@ -33,6 +33,12 @@ class Http
 	private			$caching		= 0;
 	private bool	$security_headers_sent	= false;
 	private bool	$cache_hit				= false;
+	private bool	$cache_checked			= false;
+	private bool	$cache_body_served		= false;
+	private bool	$cache_body_complete		= false;
+	private ?string	$pending_etag			= null;
+	private bool	$finalized				= false;
+	private int		$output_buffer_level;
 
 	public function __construct(&$db)
 	{
@@ -41,6 +47,7 @@ class Http
 		$this->tls_session	= $this->tls_session();
 		$this->ip			= $this->real_ip();
 		$this->tls_mark		= $this->db->cookie_prefix . 'TLS';
+		$this->output_buffer_level = ob_get_level();
 
 		// if we have used tls already - do secure session!
 		if ($db->tls && !$this->tls_session && @$_COOKIE[$this->tls_mark])
@@ -67,7 +74,7 @@ class Http
 
 	public function ensure_tls($url): void
 	{
-		if ($this->db->tls && !$this->tls_session)
+		if (($this->db->tls_implicit || $this->db->tls) && !$this->tls_session)
 		{
 			// relative addressing
 			if (!preg_match('/^(https?):\/\/([^\\s\"<>]+)$/', $url))
@@ -90,27 +97,53 @@ class Http
 
 		clearstatcache();
 
-		if ($timestamp = @filemtime($this->file))
+		$handle = @fopen($this->file, 'rb');
+
+		if ($handle === false)
 		{
-			if (time() - $timestamp <= $this->db->cache_ttl)
-			{
-				if ($contents = file_get_contents($this->file))
-				{
-					return $contents;
-				}
-			}
+			return false;
 		}
 
-		return false;
+		try {
+			$stat = fstat($handle);
+			$timestamp = isset($stat['mtime']) ? (int) $stat['mtime'] : null;
+			$length = isset($stat['size']) ? (int) $stat['size'] : 0;
+
+			if ($timestamp === null
+				|| time() - $timestamp > $this->db->cache_ttl
+				|| $length === 0)
+			{
+				return false;
+			}
+
+			// Preserve the legacy empty-body behavior. In particular, the
+			// literal body "0" was treated as a cache miss.
+			if ($length === 1)
+			{
+				rewind($handle);
+				$first = fread($handle, 1);
+
+				if ($first === '0')
+				{
+					return false;
+				}
+
+				rewind($handle);
+			}
+
+			$contents = stream_get_contents($handle);
+
+			return ($contents === false || $contents === '') ? false : $contents;
+		}
+		finally {
+			fclose($handle);
+		}
 	}
 
 	// Store page content to cache
 	private function save_page($data): void
 	{
-		file_put_contents($this->file, $data);
-		chmod($this->file, CHMOD_SAFE);
-
-		$this->db->sql_query(
+		$query =
 			'INSERT INTO ' . $this->db->table_prefix . 'cache (' .
 				'hash, ' .
 				'method, ' .
@@ -122,8 +155,63 @@ class Http
 				$this->db->q($this->method) . ', ' .
 				$this->db->q($this->query) . ', ' .
 				$this->db->q($this->lang) . ', ' .	// user lang NOT user agent lang NOR page lang!
-				$this->db->utc_dt() . ')'
-		);
+				$this->db->utc_dt() . ')';
+
+		// Record the metadata before publishing the artifact. If the database
+		// is temporarily locked, no cache file is left behind that could later
+		// be served without being invalidated. The metadata row is harmless
+		// when the subsequent file publication fails.
+		if (method_exists($this->db, 'sql_query_nonfatal'))
+		{
+			$result = $this->db->sql_query_nonfatal($query);
+
+			if ($result === false)
+			{
+				throw new RuntimeException('Unable to record the response cache metadata');
+			}
+		}
+		else
+		{
+			$this->db->sql_query($query);
+		}
+
+		$temp = $this->file . '.tmp.' . getmypid() . '.' . bin2hex(random_bytes(6));
+		$handle = @fopen($temp, 'x+b');
+
+		if ($handle === false)
+		{
+			throw new RuntimeException('Unable to create the temporary cache file');
+		}
+
+		try {
+			$length = strlen($data);
+			$written = fwrite($handle, $data);
+
+			if ($written !== $length || !fflush($handle))
+			{
+				throw new RuntimeException('Unable to write the temporary cache file');
+			}
+
+			fclose($handle);
+			$handle = null;
+
+			@chmod($temp, CHMOD_SAFE);
+
+			if (!@rename($temp, $this->file))
+			{
+				throw new RuntimeException('Unable to publish the cache file');
+			}
+		}
+		catch (Throwable $e) {
+			if (is_resource($handle))
+			{
+				fclose($handle);
+			}
+
+			@unlink($temp);
+
+			throw $e;
+		}
 	}
 
 	// Invalidate the page cache
@@ -208,67 +296,75 @@ class Http
 		$this->query = $query;
 
 		// check cache
-		if ($cached_page = $this->load_page($mtime))
+		if (!($cached_page = $this->load_page($mtime)))
 		{
-			# Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+			// The page key is cache-eligible even when this particular
+			// representation has not been stored yet.
+			return true;
+		}
+
+		# Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+		if (in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', ['GET', 'HEAD'], true))
+		{
 			$this->cache_hit = true;
+			$client_etag			= !empty($_SERVER['HTTP_IF_NONE_MATCH'])		? trim($_SERVER['HTTP_IF_NONE_MATCH'])		: null;
+			$client_last_modified	= !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])	: null;
 
-			if (in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD']))
+			$server_last_modified	= Ut::http_date($mtime);
+			$document_end			= $this->document_end();
+			$cache_body_complete	= $document_end === '' || str_ends_with($cached_page, $document_end);
+			$server_etag_raw		= $cache_body_complete
+				? $this->etag($cached_page)
+				: $this->etag_with_suffix($cached_page, $document_end);
+			$this->pending_etag = $server_etag_raw;
+
+			header('Last-Modified: ' . $server_last_modified);
+			// cache policy: anonymous -> private + must revalidate (see cache_policy())
+			$this->cache_policy();
+			// Diagnostics must not be part of the cached body.
+			header('X-Cache: HIT');
+			header('X-Cache-Time: ' . gmdate('Y-m-d H:i:s', $mtime) . ' GMT');
+
+			$matching_last_modified	= $client_last_modified == $server_last_modified;
+			$matching_etag			= $this->etag_matches($client_etag, $server_etag_raw);
+
+			// If-None-Match takes precedence over If-Modified-Since (RFC 9110 13.1.3)
+			$not_modified			= $client_etag ? $matching_etag : $matching_last_modified;
+
+			if ($not_modified)
 			{
-				$client_etag			= !empty($_SERVER['HTTP_IF_NONE_MATCH'])		? trim($_SERVER['HTTP_IF_NONE_MATCH'])		: null;
-				$client_last_modified	= !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])	: null;
-				$client_accept_encoding	= $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '';
+				# Ut::dbg('not modified');
+				$this->discard_response_output();
+				$this->pending_etag = $server_etag_raw;
+				$this->status(304);
 
-				$server_last_modified	= Ut::http_date($mtime);
-				$server_etag_raw		= $this->etag($cached_page);
-				$server_etag			= '"' . $server_etag_raw . '"';
-
-				header('Last-Modified: '	. $server_last_modified);
-				header('ETag: '				. $server_etag);
-				// cache policy: anonymous -> private + must revalidate (see cache_policy())
-				$this->cache_policy();
-				// diagnostics must not be part of the body: the body has to stay
-				// byte-identical to the cached file, otherwise the ETag would not
-				// identify the response body (and 304 would never happen)
-				header('X-Cache: HIT');
-				header('X-Cache-Time: ' . gmdate('Y-m-d H:i:s', $mtime) . ' GMT');
-
-				$matching_last_modified	= $client_last_modified == $server_last_modified;
-				$matching_etag			= $this->etag_matches($client_etag, $server_etag_raw);
-
-				// If-None-Match takes precedence over If-Modified-Since (RFC 9110 13.1.3)
-				$not_modified			= $client_etag ? $matching_etag : $matching_last_modified;
-
-				if ($not_modified)
-				{
-					# Ut::dbg('not modified');
-					$this->status(304);
-					$this->terminate();
-				}
-
-				// HTTP header with right Charset settings
-				// TODO: other than .html?
-				if (($head = strpos($cached_page, '</head>')) !== false)
-				{
-					$head = substr($cached_page, 0, $head);
-
-					if (preg_match('#<html[^/>]*>#', $head))
-					{
-						header('Content-Type: text/html; charset=utf-8');
-					}
-				}
-
-				ini_set('default_charset', null);
-
-				// Serve the cached file verbatim and append exactly the same closing
-				// tags as the dynamic response (class/final.php), so that both
-				// bodies are identical and the ETag identifies the response body.
-				echo $cached_page;
-				echo $this->document_end();
-
-				$this->gzip();
-				$this->terminate();
+				return true;
 			}
+
+			// HTTP header with right Charset settings
+			// TODO: other than .html?
+			if (str_ends_with($this->method, '.xml'))
+			{
+				header('Content-Type: text/xml; charset=utf-8');
+			}
+			else if (($head = strpos($cached_page, '</head>')) !== false)
+			{
+				$head = substr($cached_page, 0, $head);
+
+				if (preg_match('#<html[^/>]*>#', $head))
+				{
+					header('Content-Type: text/html; charset=utf-8');
+				}
+			}
+
+			ini_set('default_charset', null);
+
+			// New cache artifacts contain the complete response. Legacy cache
+			// files without the document suffix remain readable and receive
+			// the suffix from class/final.php.
+			echo $cached_page;
+			$this->cache_body_complete = $cache_body_complete;
+			$this->cache_body_served = true;
 		}
 
 		return true;
@@ -277,6 +373,7 @@ class Http
 	public function check_cache($page, $method): void
 	{
 		$this->method	= $method;
+		$this->cache_checked = true;
 
 		// cache only for anonymous user
 		$eligible = ($this->db->cache
@@ -293,36 +390,78 @@ class Http
 
 		if (!headers_sent())
 		{
-			header('X-Cache: ' . ($this->cache_hit ? 'HIT' : ($eligible ? 'MISS' : 'BYPASS')));
+			$this->ww_set_response_header('X-Cache', $this->cache_hit ? 'HIT' : ($eligible ? 'MISS' : 'BYPASS'));
 		}
+
+	}
+
+	/**
+	 * Return whether the cache lookup selected a cached representation.
+	 *
+	 * A conditional HIT is represented by a bodyless 304 response, so this is
+	 * deliberately separate from cache_body_served.
+	 */
+	public function is_cache_hit(): bool
+	{
+		return $this->cache_hit;
+	}
+
+	/**
+	 * Is the current response eligible for the anonymous page cache?
+	 *
+	 * The flag is set by check_cache() and cleared by no_cache(false).
+	 */
+	public function is_cacheable_response(): bool
+	{
+		return $this->caching && !$this->is_authenticated();
+	}
+
+	/**
+	 * Publish an early JSON response and discard any partial page output.
+	 */
+	public function json_response(mixed $data, int $status = 200, int $flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES): void
+	{
+		$json = json_encode($data, $flags);
+
+		if ($json === false)
+		{
+			throw new RuntimeException('Unable to encode the JSON response');
+		}
+
+		$this->discard_response_output();
+		$this->status($status);
+		$this->no_cache(false);
+
+		if (!headers_sent())
+		{
+			$this->ww_set_response_header('Content-Type', 'application/json; charset=utf-8');
+			$this->ww_set_response_header('X-Content-Type-Options', 'nosniff');
+			$this->ww_set_response_header('Content-Length', (string) strlen($json));
+		}
+
+		echo $json;
 	}
 
 	public function store_cache(): void
 	{
-		if ($this->caching && !$this->is_authenticated())
+		if ($this->is_cacheable_response() && !$this->cache_hit)
 		{
 			$data = ob_get_contents();
 
-			if (!empty($data))
+			// Preserve the legacy empty-body behavior. In particular, the
+			// literal body "0" was not cached.
+			if ($data !== false && $data !== '' && $data !== '0')
 			{
-				// NB: the cached file holds the page content WITHOUT the closing
-				// tags and WITHOUT the debug console. The closing tags are appended
-				// on delivery (document_end()), exactly as class/final.php does it
-				// for the dynamic response.
-				$this->save_page($data);
-
-				// The response body is known now: publish a validator, so that the
-				// next request can be answered with "304 Not Modified" instead of
-				// a full body. The ETag is computed over exactly the bytes that
-				// have been sent to the client.
-				if (!headers_sent())
-				{
-					header('ETag: "' . $this->etag($data) . '"');
+				// Cache the exact completed response, including the common
+				// document suffix. Anonymous cacheable responses do not contain
+				// the HTTP debug console. A cache write failure must not turn a
+				// completed response into a fatal error.
+				try {
+					$this->save_page($data);
 				}
-			}
-			else
-			{
-				// FALSE, then output buffering is not active
+				catch (Throwable $e) {
+					error_log('[Cache] Unable to publish the response cache: ' . $e->getMessage());
+				}
 			}
 		}
 	}
@@ -521,10 +660,13 @@ class Http
 		if (!headers_sent())
 		{
 			// Make sure no &amp;'s are in, this will break the redirect
+			// A redirect response does not need a body.
+			$this->discard_response_output();
 			$url = Ut::amp_decode($url);
 
 			$this->status($permanent? 301 : 302);
-			header('Location: ' . $url);
+			$this->ww_set_response_header('Location', $url);
+			$this->ww_set_response_header('Content-Length', '0');
 
 			$this->terminate();
 		}
@@ -552,7 +694,7 @@ class Http
 		// disable browser cache for page
 		if (!headers_sent())
 		{
-			header('Cache-Control: no-store, max-age=0, must-revalidate');
+			$this->ww_set_response_header('Cache-Control', 'no-store, max-age=0, must-revalidate');
 		}
 		// STS: check into session nocache code!
 
@@ -582,12 +724,59 @@ class Http
 	 */
 	public function document_end(): string
 	{
+		// A current cache artifact already contains the complete response.
+		if ($this->cache_body_complete)
+		{
+			return '';
+		}
+
 		if (isset($this->method) && str_contains($this->method, '.xml'))
 		{
 			return '';
 		}
 
 		return self::DOCUMENT_END;
+	}
+
+	/**
+	 * Discard response bytes without ending buffers below the request buffer.
+	 */
+	private function discard_response_output(): void
+	{
+		while (ob_get_level() > $this->output_buffer_level)
+		{
+			@ob_end_clean();
+		}
+
+		if (ob_get_level() === $this->output_buffer_level && ob_get_level() > 0)
+		{
+			@ob_clean();
+		}
+	}
+
+	/**
+	 * Select the established gzip representation without changing the legacy
+	 * thresholds, token order, or case-sensitive matching.
+	 */
+	private function gzip_encoding(int $length): ?string
+	{
+		if ($length < 860 || $length > (1 << 20))
+		{
+			return null;
+		}
+
+		$this->add_vary('Accept-Encoding');
+
+		foreach (['x-gzip', 'gzip'] as $candidate)
+		{
+			if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])
+				&& str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], $candidate))
+			{
+				return $candidate;
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -706,20 +895,90 @@ class Http
 	 */
 	public function etag(string $body): string
 	{
+		return $this->etag_with_suffix($body);
+	}
+
+	/**
+	 * Compute an ETag for a body followed by an optional legacy suffix.
+	 *
+	 * Kept separate from etag() so the public method retains its historical
+	 * one-argument signature for existing subclasses.
+	 */
+	private function etag_with_suffix(string $body, string $suffix = ''): string
+	{
 		$identifier = $this->page . '|' . $this->method . '|' . $this->query . '|' . $this->lang;
 
-		return hash('sha1', $body . ($_SERVER['HTTP_ACCEPT_ENCODING'] ?? '') . $identifier);
+		// Hash the same byte sequence without materializing a second
+		// response-sized concatenation.
+		$context = hash_init('sha1');
+		hash_update($context, $body);
+
+		if ($suffix !== '')
+		{
+			hash_update($context, $suffix);
+		}
+
+		hash_update($context, $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '');
+		hash_update($context, $identifier);
+
+		return hash_final($context);
+	}
+
+	/**
+	 * Set a response header.
+	 *
+	 * Kept as a small seam so response tests can record headers without
+	 * relying on a web SAPI.
+	 */
+	protected function ww_set_response_header(string $name, string $value): void
+	{
+		if (!headers_sent())
+		{
+			header($name . ': ' . $value, true);
+		}
+	}
+
+	/**
+	 * Return the response headers queued by the SAPI.
+	 */
+	protected function ww_response_headers(): array
+	{
+		return headers_list();
+	}
+
+	/**
+	 * Remove all queued response headers.
+	 */
+	protected function ww_remove_response_headers(): void
+	{
+		header_remove();
+	}
+
+	/**
+	 * Add one complete response header line.
+	 */
+	protected function ww_add_response_header(string $header, bool $replace = true): void
+	{
+		header($header, $replace);
 	}
 
 	/**
 	 * Compare an If-None-Match header value with the server side ETag.
-	 * Handles comma separated lists and weak validators (RFC 9110 13.1.2).
+	 * Handles wildcard, comma separated lists and weak validators
+	 * (RFC 9110 13.1.2).
 	 */
 	public function etag_matches(?string $client_etag, string $server_etag_raw): bool
 	{
 		if (!$client_etag)
 		{
 			return false;
+		}
+
+		$client_etag = trim($client_etag);
+
+		if ($client_etag === '*')
+		{
+			return true;
 		}
 
 		$client_tags = array_map(
@@ -748,24 +1007,128 @@ class Http
 	 */
 	public function finalize_response(): void
 	{
-		if (headers_sent() || $this->is_authenticated() || $this->has_no_store())
+		if ($this->finalized)
 		{
 			return;
 		}
 
-		if (!in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', ['GET', 'HEAD']))
+		$this->finalized = true;
+
+		// Drain nested buffers into the request buffer before inspecting the
+		// completed response.
+		while (ob_get_level() > $this->output_buffer_level)
 		{
+			@ob_end_flush();
+		}
+
+		$status = http_response_code();
+
+		if ($this->pending_etag !== null)
+		{
+			$this->ww_set_response_header('ETag', '"' . $this->pending_etag . '"');
+		}
+
+		if (!$this->response_status_allows_body($status))
+		{
+			$this->discard_response_output();
+
+			if ($this->response_status_allows_content_length($status))
+			{
+				$this->ww_set_response_header('Content-Length', '0');
+			}
+
 			return;
 		}
 
-		$body = ob_get_contents();
+		// The response length is available without copying the buffer. Keep
+		// the body un-materialized unless a validator or a gzip
+		// representation actually needs its bytes.
+		$length = ob_get_length();
+		$length = $length === false ? 0 : $length;
+		$body = null;
 
-		if ($body === false || $body === '')
+		$cache_eligible = $this->cache_checked
+			? $this->is_cacheable_response()
+			: !$this->has_no_store();
+		$publish_etag = !$this->is_authenticated()
+			&& $cache_eligible
+			&& in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', ['GET', 'HEAD'], true)
+			&& $length !== 0;
+
+		if ($publish_etag)
 		{
-			return;
+			if ($this->pending_etag !== null)
+			{
+				$digest = $this->pending_etag;
+			}
+			else
+			{
+				$body = ob_get_contents();
+				$body = $body === false ? '' : $body;
+				$digest = $this->etag($body);
+			}
+
+			$this->ww_set_response_header('ETag', '"' . $digest . '"');
+
+			$client_etag = !empty($_SERVER['HTTP_IF_NONE_MATCH'])
+				? trim($_SERVER['HTTP_IF_NONE_MATCH'])
+				: null;
+
+			if ($this->etag_matches($client_etag, $digest))
+			{
+				$this->status(304);
+				$this->discard_response_output();
+
+				return;
+			}
 		}
 
-		header('ETag: "' . $this->etag($body) . '"');
+		$encoding = $this->gzip_encoding($length);
+
+		if ($encoding !== null)
+		{
+			if ($body === null)
+			{
+				$body = ob_get_contents();
+				$body = $body === false ? '' : $body;
+			}
+
+			$compressed = gzencode($body, 4);
+
+			if ($compressed !== false)
+			{
+				$this->discard_response_output();
+				echo $compressed;
+				$length = strlen($compressed);
+				$this->ww_set_response_header('Content-Encoding', $encoding);
+			}
+		}
+
+		$this->ww_set_response_header('Content-Length', (string) $length);
+
+		if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'HEAD')
+		{
+			$this->discard_response_output();
+		}
+	}
+
+	private function response_status_allows_body(int $status): bool
+	{
+		return !(
+			($status >= 100 && $status < 200)
+			|| ($status >= 300 && $status < 400)
+			|| $status === 204
+			|| $status === 205
+			|| $status === 304
+		);
+	}
+
+	private function response_status_allows_content_length(int $status): bool
+	{
+		return !(($status >= 100 && $status < 200)
+			|| $status === 204
+			|| $status === 205
+			|| $status === 304);
 	}
 
 	// negotiate language with user's browser
@@ -891,11 +1254,40 @@ class Http
 
 	private function tls_session(): bool
 	{
-		return ((@$_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' && $_SERVER['HTTPS'] != '0')
-			|| $_SERVER['SERVER_PORT'] == 443
-			|| @$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
-			|| @$_SERVER['HTTP_X_FORWARDED_SSL'] == 'on'
-			|| @$_SERVER['HTTP_X_FORWARDED_PORT'] == 443);
+		if ((@$_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' && $_SERVER['HTTPS'] != '0')
+			|| ($_SERVER['SERVER_PORT'] ?? null) == 443)
+		{
+			return true;
+		}
+
+		if (!$this->trusted_reverse_proxy())
+		{
+			return false;
+		}
+
+		$forwarded_proto = strtolower(trim(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? ''))[0]));
+		$forwarded_ssl = strtolower(trim(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_SSL'] ?? ''))[0]));
+		$forwarded_port = trim(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_PORT'] ?? ''))[0]);
+
+		return $forwarded_proto === 'https'
+			|| $forwarded_ssl === 'on'
+			|| $forwarded_port === '443';
+	}
+
+	/**
+	 * Return true when the immediate peer is an explicitly trusted proxy.
+	 */
+	private function trusted_reverse_proxy(): bool
+	{
+		$addresses = preg_split(
+			'/[\s,]+/',
+			(string) ($this->db->reverse_proxy_addresses ?? ''),
+			-1,
+			PREG_SPLIT_NO_EMPTY
+		);
+		$remote_address = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
+
+		return $remote_address !== '' && in_array($remote_address, $addresses, true);
 	}
 
 	function status($code): void
@@ -990,7 +1382,25 @@ class Http
 
 	public function sendfile($path, $filename = null, $age = null): void
 	{
-		header_remove();
+		// Static responses replace the regular response headers, but session
+		// cookies must survive header_remove().
+		$cookie_headers = [];
+
+		foreach ($this->ww_response_headers() as $header)
+		{
+			if (stripos($header, 'Set-Cookie:') === 0)
+			{
+				$cookie_headers[] = $header;
+			}
+		}
+
+		$this->ww_remove_response_headers();
+
+		foreach ($cookie_headers as $cookie_header)
+		{
+			$this->ww_add_response_header($cookie_header, false);
+		}
+
 		set_time_limit(0);
 		isset($this->sess)  &&  $this->sess->write_close();
 
@@ -1103,6 +1513,34 @@ class Http
 		if (preg_match('/^text|xml|javascript/i', $type))
 		{
 			header('X-Content-Type-Options: nosniff');
+		}
+
+		if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'HEAD')
+		{
+			// Describe the same negotiated representation as GET without
+			// sending its body. Static gzip is limited to one MiB by the
+			// established threshold, so calculating its encoded length here
+			// does not introduce an unbounded allocation.
+			if ($from == 0 && $to == $size && preg_match('/^text|xml|javascript/i', $type))
+			{
+				$encoding = $this->gzip_encoding($size);
+
+				if ($encoding !== null)
+				{
+					$body = file_get_contents($path);
+					$compressed = $body === false ? false : gzencode($body, 4);
+
+					if ($compressed !== false)
+					{
+						$this->ww_set_response_header('Content-Encoding', $encoding);
+						$this->ww_set_response_header('Content-Length', (string) strlen($compressed));
+					}
+
+					unset($body, $compressed);
+				}
+			}
+
+			return;
 		}
 
 		ob_implicit_flush(true);

@@ -11,6 +11,46 @@ class PostWacko
 	private $options;
 	private static $markerPattern = '/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u';
 
+	/**
+	 * Resolve WackoWiki's post-processing markers.
+	 *
+	 * Resolution and generic marker removal intentionally remain separate
+	 * passes. Sequential str_replace() semantics differ from a single-pass
+	 * regular expression when one marker exposes another or a marker is split
+	 * between original and generated text.
+	 */
+	public function format($text, bool $strip_marker = false): string
+	{
+		$text = preg_replace_callback(
+			'/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--link:end-->|' .
+			  '<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->|' .
+			  '<!--action:begin-->[^\n]+?<!--action:end-->)/usm',
+			[$this, 'postcallback'],
+			($text ?? ''));
+
+		// preg_replace_callback() returns null for invalid UTF-8 or another
+		// regex failure. The legacy echo path emitted an empty string.
+		$text ??= '';
+
+		if ($strip_marker)
+		{
+			// remove formatter marker tags
+			$text = str_replace(
+				[
+					'<!--noinclude-->',
+					'<!--/noinclude-->',
+					'<!--notypo-->',
+					'<!--/notypo-->',
+					'<ignore>',
+					'</ignore>',
+				],
+				'',
+				$text);
+		}
+
+		return $text;
+	}
+
 	function __construct(&$object, &$options)
 	{
 		$this->object	= &$object;

@@ -35,12 +35,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 		$new_preview_nonce = $this->sess->create_nonce('add_comment_preview', max(30, $this->db->form_token_time));
 
-		header('Content-Type: application/json; charset=utf-8');
-		echo json_encode([
+		$this->http->json_response([
 			'preview_html'      => $preview,
 			'new_preview_nonce' => $new_preview_nonce,
 			'chars'             => $text_chars
-		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		]);
 
 		exit;   // important – do not continue with normal form rendering
 	}
@@ -58,15 +57,13 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->page['page_id'] ?? 0     // page_id (0 for new pages)
 			);
 
-		header('Content-Type: application/json; charset=utf-8');
-
 		if ($result && !empty($result['filename']))
 		{
-			echo json_encode(['filename' => $result['filename']]);
+			$this->http->json_response(['filename' => $result['filename']]);
 		}
 		else
 		{
-			echo json_encode(['error' => $result['error'] ?? 'Upload failed']);
+			$this->http->json_response(['error' => $result['error'] ?? 'Upload failed']);
 		}
 
 		exit;

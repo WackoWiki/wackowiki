@@ -11,9 +11,8 @@ if (!defined('IN_WACKO'))
  */
 if (isset($_GET['_csrf']) && $_GET['_csrf'] === '1')
 {
-	while (ob_get_level() > 0) {
-		ob_end_clean();
-	}
+	// The JSON publisher discards any partial response before writing the
+	// response. The shutdown finalizer will flush it.
 
 	$token_name = match($_GET['token_name'])
 	{
@@ -23,22 +22,17 @@ if (isset($_GET['_csrf']) && $_GET['_csrf'] === '1')
 
 	$new_nonce = $this->sess->create_nonce($token_name, max(30, $this->db->form_token_time));
 
-	header('Content-Type: application/json; charset=utf-8');
-	header('Cache-Control: no-cache, no-store, must-revalidate');
-
-	echo json_encode([
+	$this->http->json_response([
 		'new_nonce' => $new_nonce,
 		'status'    => 'ok'
-	], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+	]);
 
 	exit;
 }
 
 // Fallback
-header('Content-Type: application/json; charset=utf-8');
-http_response_code(400);
-echo json_encode([
+$this->http->json_response([
 	'status'  => 'error',
 	'message' => 'Invalid request'
-]);
+], 400);
 exit;

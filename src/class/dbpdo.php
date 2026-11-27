@@ -105,6 +105,14 @@ class DbPDO implements DbInterface
 		return $result;
 	}
 
+	/**
+	 * Execute a query and let the caller handle database errors.
+	 */
+	public function query_nonfatal($query)
+	{
+		return $this->dblink->query($query);
+	}
+
 	function quote($string): string
 	{
 		$string ??= '';

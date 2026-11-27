@@ -163,6 +163,65 @@ abstract class Dbal // need to be extended by Settings to be usable
 		return $result;
 	}
 
+	/**
+	 * Execute a query without terminating the request on a database error.
+	 *
+	 * SQLite normally terminates from DbSqlite::query() when the database is
+	 * locked. Response-cache metadata is written after the response body is
+	 * complete, so a transient lock must be reported to the caller instead
+	 * of replacing that completed response with a database error.
+	 */
+	function sql_query_nonfatal($query, $debug = 0)
+	{
+		try {
+			if ($debug)
+			{
+				echo "(QUERY: $query)";
+			}
+
+			if ($this->debug >= 2)
+			{
+				$start = microtime(true);
+			}
+
+			$result = method_exists($this->db, 'query_nonfatal')
+				? $this->db->query_nonfatal($query)
+				: $this->db->query($query);
+
+			if ($result === false)
+			{
+				throw new RuntimeException('Database query failed.');
+			}
+
+			$this->affected_rows = $this->db->affected_rows($result);
+
+			if ($this->debug >= 2)
+			{
+				$time = microtime(true) - $start;
+				$this->query_time += $time;
+
+				if ($this->debug >= 3)
+				{
+					$this->query_log[] = [
+						$query,
+						$time,
+						$this->affected_rows,
+						Ut::backtrace(),
+					];
+				}
+			}
+
+			return $result;
+		}
+		catch (Throwable $e) {
+			throw new RuntimeException(
+				'Non-fatal database query failed: ' . $e->getMessage(),
+				(int) $e->getCode(),
+				$e
+			);
+		}
+	}
+
 	function load_all($query, $docache = false)
 	{
 		// retrieving from cache

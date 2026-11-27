@@ -78,6 +78,17 @@ if ($this->has_access('read'))
 			}
 		}
 
+		// Dispatch the JSON endpoint immediately after the page existence,
+		// deletion and read checks. This avoids compiling the page body and
+		// rendering its comments for an API request. The access checks mirror
+		// the late dispatch in handler/page/_comments.php, including the
+		// show-comments session state.
+		if ($this->can_dispatch_page_autocomplete())
+		{
+			include __DIR__ . '/_autocomplete.php';
+			return;
+		}
+
 		// revision header
 		if ($this->page['latest'] == 0)
 		{

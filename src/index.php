@@ -82,15 +82,29 @@ switch ($route['route'])
 		// Resolve the identity BEFORE the cache lookup, so that "remember me" /
 		// soft-login can never receive an anonymous cached page.
 		$engine->authenticate();
-		// Security headers must also be present on cache hits (which terminate
-		// the request before run() is reached).
+		// Security headers must also be present on cache hits (which skip
+		// Wacko::run()).
 		$http->http_security_headers();
 		// Cache policy: private/no-store for logged in users, revalidate for
 		// anonymous ones.
 		$http->cache_policy();
+		// Enforce the mandatory transport before the cache lookup. A cache hit
+		// skips Wacko::run(), so the transport check must not live only in the
+		// rendering path.
+		if ($db->tls_implicit && !$http->tls_session)
+		{
+			$http->ensure_tls(
+				$engine->href($route['method'], $route['page'])
+			);
+		}
 		$http->check_cache($route['page'], $route['method']);
-		$engine->run($route['page'], $route['method']);
-		$http->store_cache();
+
+		// A cache HIT (including a bodyless conditional 304) skips rendering.
+		if (!$http->is_cache_hit())
+		{
+			$engine->run($route['page'], $route['method']);
+		}
+
 		break;
 }
 

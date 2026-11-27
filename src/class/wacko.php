@@ -45,6 +45,14 @@ class Wacko
 	const PAGE_NEW		= 1;
 	const PAGE_MODIFIED	= 2;
 
+	/**
+	 * SHA-256 of the canonical post_wacko formatter wrapper.
+	 *
+	 * A locally customized wrapper must retain the legacy include path; the
+	 * direct class fast path is valid only for the packaged implementation.
+	 */
+	private const POST_WACKO_FORMATTER_SHA256 = '3ef8008ae6b2c57b72934d8cc2183f2b2e1242d35d3961db52fc2d65778bfc3a';
+
 	private array $acl				= [];
 	private array $acl_cache		= [];
 	private array $file_cache		= [];
@@ -103,6 +111,17 @@ class Wacko
 	public array $page_id_cache		= [];
 	public array $page_tag_cache	= [];
 	public array $wanted_cache		= [];
+
+	/**
+	 * Output-buffer levels for nested legacy includes.
+	 *
+	 * These are kept as object state rather than function locals because the
+	 * legacy include scope exposes every extracted variable to the companion
+	 * file. A local bookkeeping variable would therefore overwrite a plugin
+	 * value with the same name.
+	 */
+	private array $include_buffer_levels = [];
+	private ?bool $canonical_post_wacko_formatter_cache = null;
 
 	public $lang					= null;
 	public $languages				= null;
@@ -1905,6 +1924,71 @@ class Wacko
 		}
 
 		return $pages;
+	}
+
+	/**
+	 * Load comment-feed candidates without their body columns.
+	 *
+	 * The feed loads one body at a time after the access check. This keeps
+	 * the public load_comment_feed() contract intact while avoiding the
+	 * overfetch of every candidate body.
+	 */
+	function load_comment_feed_candidates(int $limit = 100, string $tag = '', bool $deleted = false): ?array
+	{
+		$pages	= [];
+		$limit	= $this->get_list_count($limit);
+
+		if ($pages = $this->db->load_all(
+		'SELECT c.page_id, c.owner_id, c.tag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest,
+				c.handler, c.comment_on_id, c.page_lang, u.user_name, p.title AS page_title, p.tag AS page_tag ' .
+		'FROM ' . $this->prefix . 'page c ' .
+			'LEFT JOIN ' . $this->prefix . 'user u ON (c.user_id = u.user_id) ' .
+			'LEFT JOIN ' . $this->prefix . 'page p ON (c.comment_on_id = p.page_id) ' .
+		'WHERE c.comment_on_id <> 0 ' .
+			($tag
+				? 'AND p.tag LIKE ' . $this->db->q($tag . '/%') . ' '
+				: '') .
+			($deleted
+				? ''
+				: 'AND p.deleted <> 1 AND c.deleted <> 1 ') .
+		'ORDER BY c.created DESC ' .
+		'LIMIT ' . $limit))
+		{
+			foreach ($pages as $page)
+			{
+				$this->cache_page($page, true);
+				$page_ids[]	= $page['comment_on_id'];
+			}
+
+			$this->preload_acl($page_ids);
+		}
+
+		return $pages;
+	}
+
+	/**
+	 * Load one comment body.
+	 *
+	 * Comment lists are loaded without body columns first. This keeps a page
+	 * of comments metadata-only; each body is fetched just before it is
+	 * rendered and can then be discarded. The deletion flags close the race
+	 * where a comment (or its parent page) is removed after the metadata
+	 * query.
+	 *
+	 * @param int $page_id Comment page id
+	 *
+	 * @return array|null Comment body, rendered body, table of contents and deletion state
+	 */
+	function load_comment_body(int $page_id): ?array
+	{
+		return $this->db->load_single(
+			'SELECT c.page_id, c.body, c.body_r, c.body_toc, c.deleted, p.deleted AS parent_deleted ' .
+			'FROM ' . $this->prefix . 'page c ' .
+				'LEFT JOIN ' . $this->prefix . 'page p ON (c.comment_on_id = p.page_id) ' .
+			'WHERE c.page_id = ' . (int) $page_id . ' ' .
+				'AND c.comment_on_id <> 0 ' .
+			$this->db->limit()
+		);
 	}
 
 	function load_deleted_files($limit = 50, $cache = true): array
@@ -5846,12 +5930,15 @@ class Wacko
 	// variables prefixed by __ to not mess with argument extraction from $vars
 	function include_buffered($__filename, $__notfound = '', $__vars = '', $__path = '')
 	{
-		foreach (($__path? explode(':', $__path) : ['']) as $__dir)
+		foreach (($__path ? explode(':', $__path) : ['']) as $__dir)
 		{
 			$__pathname = Ut::join_path($__dir, $__filename);
 
 			if (@file_exists($__pathname))
 			{
+				// Keep the prospective template path in the legacy include
+				// scope. It intentionally blocks an extracted "__tpl" value,
+				// while "__template" remains available to companion files.
 				$__tpl = pathinfo($__pathname);
 				$__tpl = Ut::join_path($__tpl['dirname'], 'template', $__tpl['filename'] . '.tpl'); // STS magic string
 
@@ -5891,8 +5978,6 @@ class Wacko
 						});
 					$tpl->filter('number_format',	function ($value, $decimal = 0)		{ return $this->number_format($value, $decimal); });
 					$tpl->filter('time_format',		function ($value)					{ return $this->sql_time_format($value); });
-
-					// STS lotta goodies must go there..
 				}
 
 				if (is_array($__vars))
@@ -5902,28 +5987,38 @@ class Wacko
 
 				// include_tail is for extensions to use for closing markup tags, i.e. if return'ing early
 				$include_tail = '';
+				$this->begin_include_buffer();
 				ob_start();
-				include $__pathname;
 
-				if (isset($tpl))
-				{
-					$output = (string) $tpl;
+				try {
+					include $__pathname;
 
-					if ($spare = ob_get_contents())
+					if (isset($tpl))
 					{
-						trigger_error('templated ' . $__pathname . ' also produce echo-output', E_USER_WARNING);
-						$output .= $spare;
+						$output = (string) $tpl;
+
+						// PHP string truthiness is significant here: an empty
+						// buffer and the complete string "0" are both dropped.
+						if ($spare = ob_get_contents())
+						{
+							trigger_error('templated ' . $__pathname . ' also produce echo-output', E_USER_WARNING);
+							$output .= $spare;
+						}
 					}
-				}
-				else
-				{
-					echo $include_tail;
-					$output = ob_get_contents();
-				}
+					else
+					{
+						echo $include_tail;
+						$output = ob_get_contents();
+					}
 
-				ob_end_clean();
-
-				return $output;
+					return $output;
+				}
+				finally {
+					// Never leave a formatter/action buffer behind when an
+					// included file throws. Repeated leaked buffers otherwise
+					// retain every partial response in memory.
+					$this->end_include_buffer();
+				}
 			}
 		}
 
@@ -5935,6 +6030,65 @@ class Wacko
 		{
 			return false;
 		}
+	}
+
+	/**
+	 * Track a legacy include buffer without adding a local to its extraction
+	 * scope.
+	 */
+	private function begin_include_buffer(): void
+	{
+		$this->include_buffer_levels[] = ob_get_level();
+	}
+
+	/**
+	 * Close buffers leaked by an included file and restore the previous level.
+	 */
+	private function end_include_buffer(): void
+	{
+		if (!$this->include_buffer_levels)
+		{
+			return;
+		}
+
+		$buffer_level = array_pop($this->include_buffer_levels);
+
+		while (ob_get_level() > $buffer_level)
+		{
+			@ob_end_clean();
+		}
+	}
+
+
+	/**
+	 * Return true when a subclass replaces one of the legacy public methods.
+	 */
+	private function legacy_method_overridden(string $__method): bool
+	{
+		return (new ReflectionMethod($this, $__method))->getDeclaringClass()->getName() !== self::class;
+	}
+
+	/**
+	 * Return whether the packaged post_wacko wrapper is unchanged.
+	 */
+	private function canonical_post_wacko_formatter(): bool
+	{
+		if ($this->canonical_post_wacko_formatter_cache !== null)
+		{
+			return $this->canonical_post_wacko_formatter_cache;
+		}
+
+		$file = Ut::join_path(FORMATTER_DIR, 'post_wacko.php');
+
+		if (!is_file($file))
+		{
+			return $this->canonical_post_wacko_formatter_cache = false;
+		}
+
+		$hash = hash_file('sha256', $file);
+
+		return $this->canonical_post_wacko_formatter_cache =
+			is_string($hash) && hash_equals(self::POST_WACKO_FORMATTER_SHA256, $hash);
 	}
 
 	function theme_template($section, $mod = ''): string
@@ -5963,9 +6117,9 @@ class Wacko
 	function action(string $action, array $params = [], bool $link_tracking = false): string
 	{
 		// remove invalid characters
-		$action	= preg_replace('/[^' . self::PATTERN['ACTION'] . ']/u', '', $action);
-		$action	= mb_strtolower(trim($action));
-		$error	= '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
+		$action		= preg_replace('/[^' . self::PATTERN['ACTION'] . ']/u', '', $action);
+		$action		= mb_strtolower(trim($action));
+		$error		= '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
 
 		if (!$link_tracking)
 		{
@@ -5997,6 +6151,43 @@ class Wacko
 			: '<div id="' . $handler . '">' . $result . "</div>\n";
 	}
 
+	/**
+	 * Render one complete page response.
+	 *
+	 * The core uses PHP's conventional output buffer. Keep the established
+	 * method -> header -> footer execution order while publishing the normal
+	 * header -> method -> footer wire order.
+	 */
+	private function render_page_response(string $mode): void
+	{
+		$context_level = ++$this->current_context;
+		$had_context = array_key_exists($context_level, $this->context);
+		$previous_context = $had_context ? $this->context[$context_level] : null;
+		$this->context[$context_level] = $this->tag;
+
+		try {
+			$data = $this->method($this->method);
+		}
+		finally {
+			if ($had_context)
+			{
+				$this->context[$context_level] = $previous_context;
+			}
+			else
+			{
+				unset($this->context[$context_level]);
+			}
+
+			$this->current_context--;
+		}
+
+		$header = $this->theme_template('header', $mode);
+		$footer = $this->theme_template('footer', $mode);
+
+		echo $header;
+		echo $data;
+		echo $footer;
+	}
 	// wrapper for the next method
 	function format($text, $formatter = 'wiki', $options = []): string
 	{
@@ -6009,6 +6200,21 @@ class Wacko
 		$formatter	= preg_replace('/[^' . self::PATTERN['FORMATTER'] . ']/u', '', $formatter);
 		$formatter	= mb_strtolower(trim($formatter));
 		$error		= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
+
+		// Post-processing is used for every stored page/comment body. Resolve
+		// it directly so the formatter does not copy the complete result
+		// through an output buffer and ob_get_contents().
+		if ($formatter === 'post_wacko'
+			&& !$this->legacy_method_overridden('include_buffered')
+			&& $this->canonical_post_wacko_formatter())
+		{
+			$parser = new PostWacko($this, $options);
+
+			return $parser->format(
+				$text ?? '',
+				(bool) ($options['strip_marker'] ?? false)
+			);
+		}
 
 		$text		= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $error, compact('text', 'options'));
 
@@ -6771,6 +6977,51 @@ class Wacko
 	function user_allowed_comments(): bool
 	{
 		return $this->db->enable_comments && ($this->db->enable_comments != 2 || $this->get_user());
+	}
+
+	/**
+	 * Check whether a page request may be dispatched to the autocomplete endpoint.
+	 *
+	 * The show-page comment form historically reached the endpoint only after
+	 * the page body and comments had been rendered. Keep the same access and
+	 * UI conditions here so that the endpoint can be dispatched before that
+	 * expensive rendering without broadening access. Comment visibility is
+	 * deliberately not required: the comment form (and therefore the
+	 * heartbeat) is also available while existing comments are hidden.
+	 *
+	 * @return bool
+	 */
+	function can_dispatch_page_autocomplete(): bool
+	{
+		if (!isset($_GET['_autocomplete']) || !$_GET['_autocomplete'])
+		{
+			return false;
+		}
+
+		if ($this->method !== 'show'
+			|| !$this->page
+			|| empty($this->page['latest'])
+			|| !empty($this->page['deleted'])
+			|| !empty($this->page['comment_on_id'])
+			|| isset($this->db->footer_inside)
+			|| !(   $this->db->footer_comments == 1
+				|| ($this->db->footer_comments == 2 && $this->get_user()))
+			|| !$this->user_allowed_comments()
+			|| !$this->has_access('read'))
+		{
+			return false;
+		}
+
+		// Keep the show-comments session state in sync before dispatching.
+		$show_comments = &$this->sess->show_comments[$this->page['page_id']];
+		$show_comments ??= (bool) $this->get_user_setting('show_comments');
+
+		if (isset($_GET['show_comments']))
+		{
+			$show_comments = (bool) $_GET['show_comments'];
+		}
+
+		return $this->has_access('comment');
 	}
 
 	// COMMENTS AND COUNTS
@@ -8222,15 +8473,7 @@ class Wacko
 				$this->preload_links([], true);
 			}
 
-			$this->current_context++;
-			$this->context[$this->current_context] = $this->tag;
-			$data = $this->method($this->method);
-			$this->current_context--;
-
-			echo
-				$this->theme_template('header', $mode) .
-				$data .
-				$this->theme_template('footer', $mode);
+			$this->render_page_response($mode);
 		}
 
 		// goback feature
