@@ -97,7 +97,7 @@ const OBJECT_PAGE					= 1;
 const OBJECT_FILE					= 2;
 const OBJECT_REVISION				= 3;
 
-const NBSP							= ' ';					// \u{00A0} No-Break Space (NBSP)
+const NBSP							= "\u{00A0}";			// No-Break Space (NBSP)
 
 const RECOVERY_MODE					= 0;					// 1 - restore database
 const AUTO_REWRITE					= 1;					// 0 - off, turns off auto rewrite for debugging,

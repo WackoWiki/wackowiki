@@ -631,6 +631,8 @@ class Ut
 			'g', 'G' => $val *= 1024 * 1024 * 1024,
 			'm', 'M' => $val *= 1024 * 1024,
 			'k', 'K' => $val *= 1024,
+			// a plain byte value, e.g. "0" or "-1" as reported by php.ini
+			default => $val,
 		};
 	}
 
