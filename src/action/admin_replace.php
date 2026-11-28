@@ -160,10 +160,11 @@ $replace_text = function ($target, $replacement, $text, $use_regex)
 	else
 	{
 		// replace text failed
-		$this->set_message(Ut::perc_replace(
-			$this->_t('ReplaceTextEditFailed'),
-			'<code>' . Ut::html(Ut::shorten_string($target)) . '</code>',
-			'<code>' . Ut::html(Ut::shorten_string($replacement)) . '</code>'), 'error');
+		$this->set_message($this->_t('ReplaceTextEditFailed') . ': ' .
+			Ut::perc_replace(
+				$this->_t('ReplaceTextEditSummary'),
+				'<code>' . Ut::html(Ut::shorten_string($target)) . '</code>',
+				'<code>' . Ut::html(Ut::shorten_string($replacement)) . '</code>'), 'error');
 	}
 
 	return false;

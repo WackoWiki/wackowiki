@@ -69,5 +69,6 @@ if ($this->is_owner($page_id) || $this->is_admin())
 }
 else
 {
-	$tpl->denied =  Ut::perc_replace($this->_t('NotOwnerToViewWatchers'), $this->link('/' . $tag, '', $tag));
+	// The message names the page itself, it has no placeholder for the link.
+	$tpl->denied = $this->_t('NotOwnerToViewWatchers');
 }
