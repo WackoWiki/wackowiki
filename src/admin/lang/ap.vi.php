@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> 'Xóa',
 	'Enabled'					=> 'Đã bật',
 	'Disabled'					=> 'Đã vô hiệu hóa',
+	'None'						=> 'none',
 	'Mandatory'					=> 'Bắt buộc',
 	'Admin'						=> 'Quản trị',
 	'Min'						=> 'Tối thiểu',

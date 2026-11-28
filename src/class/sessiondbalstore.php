@@ -11,6 +11,7 @@ class SessionDbalStore extends Session
 	private 		$lock		= null;
 	private 		$id;
 
+	#[\Override]
 	public function __construct(&$db)
 	{
 		parent::__construct();

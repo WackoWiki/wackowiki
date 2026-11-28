@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> '제거',
 	'Enabled'					=> '사용',
 	'Disabled'					=> '비활성화됨',
+	'None'						=> 'none',
 	'Mandatory'					=> '필수적인',
 	'Admin'						=> '관리',
 	'Min'						=> 'Min',

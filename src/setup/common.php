@@ -703,7 +703,7 @@ function select_sqlite_db_path(): array
 	return $db_path;
 }
 
-function generate_secure_token($secret): string
+function generate_secure_token(#[\SensitiveParameter] $secret): string
 {
 	$expires_in		= 600;
 	$time			= time();
@@ -720,7 +720,7 @@ function generate_secure_token($secret): string
 	return base64_encode($payload . '|' . $hmac);
 }
 
-function validate_token($value, $secret)
+function validate_token(#[\SensitiveParameter] $value, #[\SensitiveParameter] $secret)
 {
 	$data = base64_decode((string) $value, true);
 

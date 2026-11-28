@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> 'Enlever',
 	'Enabled'					=> 'Activé',
 	'Disabled'					=> 'Désactivé',
+	'None'						=> 'none',
 	'Mandatory'					=> 'Obligatoire',
 	'Admin'						=> 'Administrateur',
 	'Min'						=> 'Min',

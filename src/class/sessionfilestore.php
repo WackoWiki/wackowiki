@@ -13,6 +13,7 @@ class SessionFileStore extends Session
 	private $fd_name;
 	private $cryptokey = null;
 
+	#[\Override]
 	public function __construct()
 	{
 		parent::__construct();

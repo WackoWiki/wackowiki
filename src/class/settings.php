@@ -11,6 +11,7 @@ class Settings extends Dbal implements ArrayAccess
 	private $changed = [];
 	private $cachefile;
 
+	#[\Override]
 	public function __construct()
 	{
 		$this->cachefile = Ut::join_path(CACHE_CONFIG_DIR, 'config.php');
@@ -162,21 +163,25 @@ class Settings extends Dbal implements ArrayAccess
 	// { $config['ttt'] = 1; } === { $config->ttt = 1; }
 	// furthermore: all [] and -> accesses - get/set/isset/unset - are identical
 
+	#[\Override]
 	public function offsetSet($i, $value): void
 	{
 		$this->__set($i, $value);
 	}
 
+	#[\Override]
 	public function offsetExists($i): bool
 	{
 		return $this->__isset($i);
 	}
 
+	#[\Override]
 	public function offsetUnset($i): void
 	{
 		$this->__unset($i);
 	}
 
+	#[\Override]
 	public function offsetGet($i): mixed
 	{
 		return $this->__get($i);

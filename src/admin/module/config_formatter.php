@@ -220,7 +220,7 @@ function admin_config_formatter($engine, $module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="time_format_seconds"><strong><?php echo $engine->_t('TimeFormatSeconds');?></strong><br>
-					<small><?php echo $engine->_t('TimeFormatSecondsinfo');?></small></label>
+					<small><?php echo $engine->_t('TimeFormatSecondsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="50" id="time_format_seconds" name="time_format_seconds" value="<?php echo Ut::html($engine->db->time_format_seconds);?>">

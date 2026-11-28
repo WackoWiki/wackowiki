@@ -15,7 +15,8 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		echo Ut::perc_replace($this->_t('DoesNotExists'), $this->href('edit'));
+		echo $this->_t('DoesNotExists') . ' ' .
+			Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', true));
 	}
 	else
 	{
@@ -34,7 +35,7 @@ if ($this->has_access('read'))
 		if (!$this->page['latest'])
 		{
 			echo '<div class="revision-info">' .
-				Ut::perc_replace($this->_t('RevisionHint'), $this->href(), $this->tag, $this->page['modified']) .
+				Ut::perc_replace($this->_t('RevisionHint'), $this->href(), $this->tag, $this->sql_time_format($this->page['modified']), $this->user_link($this->page['user_name'], true, false)) .
 				'</div>';
 		}
 

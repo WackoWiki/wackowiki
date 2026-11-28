@@ -3376,7 +3376,7 @@ class Wacko
 		return $this->href('', $this->db->account_page, ['confirm' => $token], null, null, null, true, true);
 	}
 
-	function user_email_confirm_check($token): void
+	function user_email_confirm_check(#[\SensitiveParameter] $token): void
 	{
 		$hash = $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash));
 
@@ -9506,12 +9506,12 @@ class Wacko
 	}
 
 	// ADDITIONAL METHODS
-	function password_hash($user, $password): string
+	function password_hash($user, #[\SensitiveParameter] $password): string
 	{
 		return password_hash(base64_encode(hash('sha256', $user['user_name'] . $password, true)), PASSWORD_DEFAULT);
 	}
 
-	function password_verify($user, $password): bool
+	function password_verify($user, #[\SensitiveParameter] $password): bool
 	{
 		return password_verify(base64_encode(hash('sha256', $user['user_name'] . $password, true)), $user['password']);
 	}
@@ -9549,7 +9549,7 @@ class Wacko
 
 	// run checks of password complexity under current
 	// config settings; returned error diag, or '' if good
-	function password_complexity($login, $pwd): string
+	function password_complexity($login, #[\SensitiveParameter] $pwd): string
 	{
 		$unlike_login	= $this->db->pwd_unlike_login;
 		$char_classes	= $this->db->pwd_char_classes;

@@ -100,7 +100,7 @@ class CookiePrefix
 	 * @param string $domain			Cookie domain
 	 * @return mixed					Cookie value or null if not found
 	 */
-	public static function get(string $name, bool $secure, string $path = '/', string $domain = '')
+	public static function get(string $name, bool $secure, string $path = '/', string $domain = ''): mixed
 	{
 		// 1. Try with determined prefix (most specific - exactly what we should find)
 		$effective_prefix = self::determine($secure, $path, $domain);
@@ -144,7 +144,7 @@ class CookiePrefix
 	 * @param string $path				Cookie path
 	 * @param string $domain			Cookie domain
 	 */
-	public static function setLocal(string $name, $value, bool $secure, string $path = '/', string $domain = ''): void
+	public static function setLocal(string $name, mixed $value, bool $secure, string $path = '/', string $domain = ''): void
 	{
 		// Set with effective prefix (what browser will send)
 		$prefixed_name = self::apply($name, $secure, $path, $domain);
@@ -187,7 +187,7 @@ class CookiePrefix
 	 * @param bool $secure				HTTPS connection?
 	 * @param string $path				Cookie path
 	 * @param string $domain			Cookie domain
-	 * @return array					['valid' => bool, 'message' => string]
+	 * @return array{valid: bool, message: string}	The result of the check
 	 */
 	public static function validate(string $name, bool $secure, string $path = '/', string $domain = ''): array
 	{

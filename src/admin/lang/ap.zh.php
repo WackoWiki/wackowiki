@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> '删除',
 	'Enabled'					=> '启用',
 	'Disabled'					=> '无效的',
+	'None'						=> 'none',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> '管理',
 	'Min'						=> '最小',

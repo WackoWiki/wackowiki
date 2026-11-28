@@ -668,7 +668,6 @@ $wacko_translation = [
 	'CustomizeToolbar'			=> 'تخصيص شريط الأدوات',
 	'ClearWeCache'				=> 'مسح ذاكرة التخزين المؤقت',
 	'ClearWeCacheButton'		=> 'مسح التخزين المحلي',
-	'WeCacheCleared'			=> 'تم مسح البيانات المحلية للويكيديش بنجاح',
 
 	'PageMoved'					=> 'تم نقل هذه الصفحة. يمكنك العثور عليها في',
 	'RedirectedFrom'			=> 'إعادة توجيه من %1',

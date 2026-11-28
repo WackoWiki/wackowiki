@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> 'ลบ',
 	'Enabled'					=> 'เปิดใช้งาน',
 	'Disabled'					=> 'ปิดใช้งาน',
+	'None'						=> 'none',
 	'Mandatory'					=> 'จำเป็น',
 	'Admin'						=> 'ผู้ดูแล',
 	'Min'						=> 'ขั้นต่ำ',

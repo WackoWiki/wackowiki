@@ -29,7 +29,8 @@ if ($registered
 {
 	if (!$this->page)
 	{
-		$tpl->message = Ut::perc_replace($this->_t('DoesNotExists'), $this->href('edit'));
+		$tpl->message = $this->_t('DoesNotExists') . ' ' .
+			Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', true));
 	}
 	else
 	{

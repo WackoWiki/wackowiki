@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> 'Kaldır',
 	'Enabled'					=> 'Etkin',
 	'Disabled'					=> 'Devre dışı',
+	'None'						=> 'none',
 	'Mandatory'					=> 'Zorunlu',
 	'Admin'						=> 'Yönetici',
 	'Min'						=> 'Min',

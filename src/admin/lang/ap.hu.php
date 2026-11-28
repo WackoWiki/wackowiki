@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> 'Eltávolítás',
 	'Enabled'					=> 'Engedélyezve',
 	'Disabled'					=> 'Letiltva',
+	'None'						=> 'none',
 	'Mandatory'					=> 'Kötelező',
 	'Admin'						=> 'Adminisztrátor',
 	'Min'						=> 'Min',

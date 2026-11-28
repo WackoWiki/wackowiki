@@ -259,7 +259,7 @@ function admin_config_email($engine, $module)
 				</td>
 				<td>
 					<select id="smtp_connection_mode" name="smtp_connection_mode">
-						<option value="" <?php    echo ((string) $engine->db->smtp_connection_mode === '' ? '    selected' : '');?>><?php echo $engine->_t('None'); ?>none</option>
+						<option value="" <?php    echo ((string) $engine->db->smtp_connection_mode === '' ? '    selected' : '');?>><?php echo $engine->_t('None'); ?></option>
 						<option value="ssl" <?php echo ((string) $engine->db->smtp_connection_mode === 'ssl' ? ' selected' : '');?>>SSL</option>
 						<option value="tls" <?php echo ((string) $engine->db->smtp_connection_mode === 'tls' ? ' selected' : '');?>>TLS</option>
 					</select>

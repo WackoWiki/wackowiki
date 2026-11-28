@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> 'Eemalda',
 	'Enabled'					=> 'Lubatud',
 	'Disabled'					=> 'Keelatud',
+	'None'						=> 'none',
 	'Mandatory'					=> 'Kohustuslik',
 	'Admin'						=> 'Admin',
 	'Min'						=> 'Min.',

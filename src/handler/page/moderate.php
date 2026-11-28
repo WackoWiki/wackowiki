@@ -320,7 +320,7 @@ $moderate_convert_to_page = function($comment_ids, $new_tag, $title = '', $reass
 	}
 
 	if ($moderate_page_exists($new_tag) === true) {
-		$this->set_message($this->_t('ModeratePageExists'), 'error');
+		$this->set_message($this->_t('ModerateRenameExists'), 'error');
 		return false;
 	}
 

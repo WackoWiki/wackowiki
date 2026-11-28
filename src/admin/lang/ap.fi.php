@@ -56,6 +56,7 @@ $ap_translation = [
 	'Remove'					=> 'Poista',
 	'Enabled'					=> 'Käytössä',
 	'Disabled'					=> 'Pois Käytöstä',
+	'None'						=> 'none',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Ylläpitäjä',
 	'Min'						=> 'Minimi',

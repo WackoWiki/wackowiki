@@ -9,8 +9,24 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// taken from https://www.php.net/manual/en/function.wordwrap.php#107570
-function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
+/*
+ * The character list of the native trim(). The multibyte functions of PHP
+ * 8.4 remove every Unicode space by default, the wiki keeps the smaller list
+ * of the native trim() so that a page name is trimmed the same way as
+ * before.
+ */
+const WACKO_TRIM_CHARACTERS = " \t\n\r\0\x0B";
+
+/**
+ * UTF-8 aware replacement for wordwrap().
+ *
+ * The text is broken at the given width. Without the cut a word that is
+ * longer than the width is moved to the next line, with the cut it is
+ * divided. The break is appended to the last line as well.
+ *
+ * @see https://php.net/wordwrap
+ */
+function utf8_wordwrap(string $string, int $width = 75, string $break = "\n", bool $cut = false): string
 {
 	if ($cut)
 	{
@@ -27,65 +43,60 @@ function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
 		$replace	= '$1' . $break;
 	}
 
-	return preg_replace($search, $replace, $string);
-}
-
-// taken from phputf8 https://sourceforge.net/projects/phputf8/
-
-/**
-* UTF-8 aware replacement for ltrim()
-* Note: you only need to use this if you are supplying the charlist
-* optional arg and it contains UTF-8 characters. Otherwise, ltrim will
-* work normally on a UTF-8 string
-* @see https://www.php.net/ltrim
-* @return string
-*/
-function utf8_ltrim($str, $charlist = false)
-{
-	if ($charlist === false)
-	{
-		return ltrim($str);
-	}
-
-	// quote charlist for use in a characterclass
-	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
-
-	return preg_replace('/^[' . $charlist . ']+/u', '', $str);
+	return preg_replace($search, $replace, $string) ?? $string;
 }
 
 /**
-* UTF-8 aware replacement for rtrim()
-* Note: you only need to use this if you are supplying the charlist
-* optional arg and it contains UTF-8 characters. Otherwise, rtrim will
-* work normally on a UTF-8 string
-* @see https://www.php.net/rtrim
-* @return string
-*/
-function utf8_rtrim($str, $charlist = false)
+ * UTF-8 aware replacement for ltrim().
+ *
+ * The character list holds literal characters. The range syntax of the
+ * native ltrim() is not supported, a range is read as the characters it is
+ * written with.
+ *
+ * @see https://php.net/ltrim
+ */
+function utf8_ltrim(?string $str, string|false $charlist = false): string
 {
 	$str ??= '';
 
 	if ($charlist === false)
 	{
-		return rtrim($str);
+		return mb_ltrim($str, WACKO_TRIM_CHARACTERS);
 	}
 
-	// quote charlist for use in a characterclass
-	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
-
-	return preg_replace('/[' . $charlist . ']+$/u', '', $str);
+	return mb_ltrim($str, $charlist);
 }
 
 /**
-* Replacement for str_pad. $pad_str may contain multibyte characters.
-* @param string $input
-* @param int $length
-* @param string $pad_str
-* @param int $type ( same constants as str_pad )
-* @return string
-* @see https://www.php.net/str_pad
-*/
-function utf8_str_pad($input, $length, $pad_str = ' ', $type = STR_PAD_RIGHT)
+ * UTF-8 aware replacement for rtrim().
+ *
+ * The character list holds literal characters. The range syntax of the
+ * native rtrim() is not supported, a range is read as the characters it is
+ * written with.
+ *
+ * @see https://php.net/rtrim
+ */
+function utf8_rtrim(?string $str, string|false $charlist = false): string
+{
+	$str ??= '';
+
+	if ($charlist === false)
+	{
+		return mb_rtrim($str, WACKO_TRIM_CHARACTERS);
+	}
+
+	return mb_rtrim($str, $charlist);
+}
+
+/**
+ * UTF-8 aware replacement for str_pad().
+ *
+ * The padding may contain multibyte characters. The padding of the type
+ * STR_PAD_BOTH is split evenly, the odd character goes to the right side.
+ *
+ * @see https://php.net/str_pad
+ */
+function utf8_str_pad(string $input, int $length, string $pad_str = ' ', int $type = STR_PAD_RIGHT): string
 {
 	$input_len = mb_strlen($input);
 
@@ -94,65 +105,72 @@ function utf8_str_pad($input, $length, $pad_str = ' ', $type = STR_PAD_RIGHT)
 		return $input;
 	}
 
+	if ($pad_str === '')
+	{
+		return $input;
+	}
+
 	$pad_strlen	= mb_strlen($pad_str);
 	$pad_len	= $length - $input_len;
-
-	if ($type == STR_PAD_RIGHT)
-	{
-		$repeat_times = ceil($pad_len / $pad_strlen);
-
-		return mb_substr($input . str_repeat($pad_str, $repeat_times), 0, $length);
-	}
 
 	if ($type == STR_PAD_LEFT)
 	{
 		$repeat_times = ceil($pad_len / $pad_strlen);
 
-		return mb_substr(str_repeat($pad_str, $repeat_times), 0, floor($pad_len)) . $input;
+		return mb_substr(str_repeat($pad_str, $repeat_times), 0, $pad_len) . $input;
 	}
 
 	if ($type == STR_PAD_BOTH)
 	{
-		$pad_len/= 2;
+		$pad_len /= 2;
 		$pad_amount_left	= floor($pad_len);
 		$pad_amount_right	= ceil($pad_len);
 		$repeat_times_left	= ceil($pad_amount_left / $pad_strlen);
 		$repeat_times_right	= ceil($pad_amount_right / $pad_strlen);
 
 		$padding_left		= mb_substr(str_repeat($pad_str, $repeat_times_left), 0, $pad_amount_left);
-		$padding_right		= mb_substr(str_repeat($pad_str, $repeat_times_right), 0, $pad_amount_left);
+		$padding_right	= mb_substr(str_repeat($pad_str, $repeat_times_right), 0, $pad_amount_right);
 
 		return $padding_left . $input . $padding_right;
 	}
 
-	trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
-}
-
-/**
-* UTF-8 aware replacement for trim()
-* Note: you only need to use this if you are supplying the charlist
-* optional arg and it contains UTF-8 characters. Otherwise, trim will
-* work normally on a UTF-8 string
-* @see https://www.php.net/trim
-* @return string
-*/
-function utf8_trim($str, $charlist = false)
-{
-	if ($charlist === false)
+	if ($type != STR_PAD_RIGHT)
 	{
-		return trim($str);
+		throw new ValueError('utf8_str_pad: Unknown padding type (' . $type . ')');
 	}
 
-	return utf8_ltrim(utf8_rtrim($str, $charlist), $charlist);
+	$repeat_times = ceil($pad_len / $pad_strlen);
+
+	return mb_substr($input . str_repeat($pad_str, $repeat_times), 0, $length);
 }
 
 /**
-* UTF-8 aware alternative to ucfirst
-* Make a string's first character uppercase
-* @param string $str
-* @return string with first character as upper case (if applicable)
-*/
-function utf8_ucfirst($str)
+ * UTF-8 aware replacement for trim().
+ *
+ * The character list holds literal characters. The range syntax of the
+ * native trim() is not supported, a range is read as the characters it is
+ * written with.
+ *
+ * @see https://php.net/trim
+ */
+function utf8_trim(?string $str, string|false $charlist = false): string
+{
+	$str ??= '';
+
+	if ($charlist === false)
+	{
+		return mb_trim($str, WACKO_TRIM_CHARACTERS);
+	}
+
+	return mb_trim($str, $charlist);
+}
+
+/**
+ * UTF-8 aware alternative to ucfirst().
+ *
+ * Make a string's first character uppercase.
+ */
+function utf8_ucfirst(string $str): string
 {
 	switch (mb_strlen($str))
 	{
@@ -162,47 +180,38 @@ function utf8_ucfirst($str)
 			return mb_strtoupper($str);
 		default:
 			preg_match('/^(.)(.*)$/us', $str, $matches);
+
 			return mb_strtoupper($matches[1]) . $matches[2];
 	}
 }
 
 /**
-* UTF-8 aware alternative to ucwords
-* Uppercase the first character of each word in a string
-* Note: requires utf8_substr_replace
-* @param string
-* @return string with first char of each word uppercase
-* @see https://www.php.net/ucwords
-*/
-function utf8_ucwords($str)
+ * UTF-8 aware alternative to ucwords().
+ *
+ * Uppercase the first character of each word in a string.
+ *
+ * @see https://php.net/ucwords
+ */
+function utf8_ucwords(string $str): string
 {
 	// Note: [\x0c\x09\x0b\x0a\x0d\x20] matches;
 	// form feeds, horizontal tabs, vertical tabs, linefeeds and carriage returns
 	// This corresponds to the definition of a "word" defined at http://www.php.net/ucwords
 	$pattern = '/(^|([\x0c\x09\x0b\x0a\x0d\x20]+))([^\x0c\x09\x0b\x0a\x0d\x20]{1})[^\x0c\x09\x0b\x0a\x0d\x20]*/u';
 
-	return preg_replace_callback($pattern, 'utf8_ucwords_callback', $str);
+	return preg_replace_callback($pattern, static function (array $matches): string {
+		$leadingws	= $matches[2];
+		$ucfirst	= mb_strtoupper($matches[3]);
+		$ucword		= utf8_substr_replace(ltrim($matches[0]), $ucfirst, 0, 1);
+
+		return $leadingws . $ucword;
+	}, $str) ?? $str;
 }
 
 /**
-* Callback function for preg_replace_callback call in utf8_ucwords
-* You don't need to call this yourself
-* @param array of matches corresponding to a single word
-* @return string with first char of the word in uppercase
-*/
-function utf8_ucwords_callback($matches)
-{
-	$leadingws	= $matches[2];
-	$ucfirst	= mb_strtoupper($matches[3]);
-	$ucword		= utf8_substr_replace(ltrim($matches[0]),$ucfirst,0,1);
-
-	return $leadingws . $ucword;
-}
-
-/**
-* UTF-8 aware substr_replace.
-*/
-function utf8_substr_replace($str, $repl, $start , $length = null )
+ * UTF-8 aware substr_replace().
+ */
+function utf8_substr_replace(string $str, string $repl, int $start, ?int $length = null): string
 {
 	preg_match_all('/./us', $str, $ar);
 	preg_match_all('/./us', $repl, $rar);
@@ -218,23 +227,29 @@ function utf8_substr_replace($str, $repl, $start , $length = null )
 }
 
 /**
-* UTF-8 aware count_chars.
-* @see http://www.php.net/count_chars
-* taken from https://www.php.net/manual/en/function.count-chars.php#118726
-*/
-function utf8_count_chars($string, $mode = 0)
+ * UTF-8 aware count_chars().
+ *
+ * The keys of the result hold the character and not its byte value, so that
+ * the count of a character can be read directly. A multibyte character is
+ * not a byte value and is therefore not counted.
+ *
+ * @see http://php.net/count_chars
+ */
+function utf8_count_chars(string $string, int $mode = 0): array|string
 {
-	$result =  array_fill(0, 256, 0);
+	$result = array_fill(0, 256, 0);
 
 	for ($i = 0, $size = mb_strlen($string); $i < $size; $i++)
 	{
 		$char = mb_substr($string, $i, 1);
+
 		if (strlen($char) > 1)
 		{
 			continue;
 		}
 
 		$code = ord($char);
+
 		if ($code >= 0 && $code <= 255)
 		{
 			$result[$code]++;
@@ -263,6 +278,7 @@ function utf8_count_chars($string, $mode = 0)
 			break;
 		case 3: // a string containing all unique characters is returned.
 			$build_string = '';
+
 			foreach ($result as $key => $value)
 			{
 				if ($value > 0)
@@ -270,9 +286,11 @@ function utf8_count_chars($string, $mode = 0)
 					$build_string .= chr($key);
 				}
 			}
+
 			return $build_string;
 		case 4: // a string containing all not used characters is returned.
 			$build_string = '';
+
 			foreach ($result as $key => $value)
 			{
 				if ($value == 0)
@@ -280,6 +298,7 @@ function utf8_count_chars($string, $mode = 0)
 					$build_string .= chr($key);
 				}
 			}
+
 			return $build_string;
 	}
 
@@ -294,16 +313,22 @@ function utf8_count_chars($string, $mode = 0)
 }
 
 /**
-* UTF-8 aware replacement for str_word_count()
-* Counts number of words in the UTF-8 string
-* @param    string $string The input string
-* @return   int The number of words in the string
-* @see https://www.php.net/str_word_count
-*/
-function utf8_word_count($string)
+ * UTF-8 aware replacement for str_word_count().
+ *
+ * Counts the number of words in the UTF-8 string. A word is a run of
+ * letters, digits, hyphens and underscores.
+ *
+ * @see https://php.net/str_word_count
+ */
+function utf8_word_count(string $string): int
 {
-	$string	= preg_replace( '/[^\\p{L}\\p{Nd}\-_]+/u' , '-' , $string );
-	$string	= trim( $string , '_-' );
+	$string	= preg_replace('/[^\p{L}\p{Nd}\-_]+/u', '-', $string);
+	$string	= trim($string, '_-');
 
-	return count( explode( '-' , $string ) );
+	if ($string === '')
+	{
+		return 0;
+	}
+
+	return count(explode('-', $string));
 }
